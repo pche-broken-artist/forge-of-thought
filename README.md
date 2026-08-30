@@ -5,10 +5,10 @@ generated: 2026-08-30
 recipe: projects/forge/recipes/readme.md v0.25
 inputs:
   - CLAUDE.md
-  - projects/forge/10-intent.md v2.21
+  - projects/forge/10-intent.md v3.0
 ---
 
-# Forge of Thought 2.21
+# Forge of Thought 3.0
 
 *A workshop where thought is tempered and shaped.* · [Release notes](RELEASE-NOTES.md)
 
@@ -531,10 +531,12 @@ tag at every approved major version.
 Each project is a directory under `projects/` and a git repository of
 its own. `/new-project` creates the files; `git init` in that
 directory, a remote if you want one and the commit identity for that
-host are a one-off act of yours. The engine ignores `projects/*`
-(except its own `projects/forge`), and the scripts find your project
-through its `.git`. A project without a repository is reported as
-"not under git" — a fact, not an error.
+host are a one-off act of yours — the identity is set per repository,
+locally, never inherited from the global configuration by default,
+since one machine may serve hosts with different identities. The
+engine ignores `projects/*` (except its own `projects/forge`), and the
+scripts find your project through its `.git`. A project without a
+repository is reported as "not under git" — a fact, not an error.
 
 ### Script prerequisites
 
@@ -564,7 +566,9 @@ git — reading state included, no exceptions. Each serves the engine
 and every project repository: `scripts/forge-save.ps1` commits and
 pushes (bare, every repository with changes, each its own commit,
 pushed where it has a remote; with a slug, that one — `forge` meaning
-the engine; without an origin the commit is kept and reported; remote
+the engine; without an origin the commit is kept and reported; a
+repository whose commit identity is missing is reported with the
+command to set it, and nothing is committed until it is; remote
 changes are reconciled by rebase); `scripts/forge-pull.ps1`
 fast-forwards from the remotes and never touches a repository with
 unsaved changes; `scripts/forge-status.ps1` reports unsaved changes,

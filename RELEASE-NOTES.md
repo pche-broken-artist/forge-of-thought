@@ -4,9 +4,9 @@ render: release-notes
 generated: 2026-08-30
 recipe: projects/forge/recipes/release-notes.md v0.2
 inputs:
-  - projects/forge/10-intent.md v2.21
+  - projects/forge/10-intent.md v3.0
   - projects/forge/decisions.md
-  - RELEASE-NOTES.md (2026-08-29 edition — released sections)
+  - RELEASE-NOTES.md (2026-08-30 edition — released sections)
 ---
 
 # Forge of Thought — Release Notes
@@ -16,16 +16,22 @@ major, then one section per approved major version of the system,
 newest first. The fine-grained change log lives in
 `projects/forge/10-intent.md` (Version History).
 
-## Unreleased — 2.x since 2.0
+## 3.0 — 2026-08-30
 
-Changes made after the 2.0 approval and not yet approved themselves
-(intent versions 2.1–2.21).
+Version 2 made the forge a workshop; version 3 sets it free. The
+engine parted ways with the projects it serves and became a public
+repository under an open licence, carrying no instance facts and no
+content of anyone's projects, while each project lives in a
+repository of its own. On the way the brief was redefined and born in
+the forge for the first time, the whole forge settled on one model
+with renders in isolation, the working methods got names, material
+got an index and projects got a kind.
 
 **The engine and the projects part ways.** The course set early in the
 era — a public engine carrying no company-specific data, each user
-responsible for their own project repositories — has become a
-mechanism. The engine is a clone; the projects are nested git
-repositories in a gitignored `projects/*`, with `projects/forge`
+responsible for their own project repositories — became a mechanism
+and was then executed. The engine is a clone; the projects are nested
+git repositories in a gitignored `projects/*`, with `projects/forge`
 re-included. The engine does not know the projects: the scripts
 recognise one by the presence of its `.git`, commit and push to its
 own origin, and skip a directory without one; `git init` and the
@@ -37,25 +43,77 @@ were rejected on the research of the day — they model a dependency
 this relation is not, or end in manifests, override layers and
 migrations. A plugin remains a possible later distribution layer, its
 cost (a `CLAUDE.md` split, commands rewritten to the repository root)
-not worth paying yet (THR.0190). The one-off migration and the first
-projects after the split stay instance work, in the brief and the
-ledger; the operating layer changes with the migration, and 3.0
-follows its verification by a fresh clone.
+not worth paying yet (THR.0190). On 2026-08-30 the split was run to
+its end along a runbook: the engine is public at a repository of its
+own with a fresh one-commit history, the subject projects and the
+library live in repositories of their own, and the former monorepo is
+archived read-only with a notice naming the new homes and a
+`pre-split` tag as its last complete state. The operating layer —
+`CLAUDE.md`, `.gitignore`, the scripts, templates and commands — was
+rebuilt to this intent the same day.
 
-**No instance facts in the engine.** Who the principal is and what
-language the conversation runs in move to a gitignored
-`CLAUDE.local.md` at the engine root, the session model to
+**No instance facts in the engine; identity per repository.** Who the
+principal is and what language the conversation runs in move to a
+gitignored `CLAUDE.local.md` at the engine root, the session model to
 `.claude/settings.local.json`, the commit author to the user's git
 configuration; the core names these things only as things that exist,
-never by value, and the scripts carry no URL or identity. `local/` is
-dropped: it existed only to keep company material out of the
+never by value, and the scripts carry no URL or identity. The commit
+identity is set per repository, locally, as part of the one-off act
+that creates it — never inherited from the global configuration by
+default, since one machine serves hosts with different identities; a
+repository whose identity is missing is reported by `forge-save` with
+the command to set it, and nothing is committed until it is. `local/`
+is dropped: it existed only to keep company material out of the
 repository, which the gitignored `projects/*` now does, and deck
 templates are named by path instead. The output language was
 recognised on the way as an instance rule: English for every artefact
-is the principal's own rule for the company projects of this instance,
-a project with Czech output is conceivable and the first such project
+is the principal's own rule for the projects of this instance, a
+project with Czech output is conceivable and the first such project
 has been noted, and more than one output language is to be solved when
 a project needs it (THR.0180).
+
+**Publication and the public face.** The engine is the principal's to
+publish, built outside any work assignment and on the company's git
+only because it carried work information not yet separated. The
+audience, in order: rollout in the company, at the same time a public
+project around which a community may form, and a showcase of the
+principal's work; the split also lets access be granted per project.
+The boundary for the public forge project is nothing company-specific
+by name, and before publication the project was gone through and
+rewritten within it, immutable artefacts included — the locked brief
+and both CTO challenges had a name, a host, an address, a template
+file name and two sentences quoting a subject project's substance
+removed, immutability knowingly broken once and recorded in the
+ledger only. The slugs of the subject projects stay: that projects of
+those names exist and travelled the chain is a process fact, not
+content. A forbidden-term list was considered and dropped — a grep
+catches names, not content. The public engine starts with a fresh git
+history rather than one filtered by path (DEC.0080): the company lives
+in the text — commit messages, every version of the forge intent, a
+challenge, the research notes — so a filtered history would need text
+filtering as well, work comparable to a fresh start with a residual
+risk of a leak made public for good; "history lives in git" is not
+voided but starts on the day of publication. The one true point of
+the challenge, that the only complete record lives on the employer's
+server, is accepted as it is, the company copy kept read-only while it
+exists. The public face itself is settled (POS.0990): the repository
+is named `forge-of-thought` — the bare word "forge" is overloaded on
+every code host — under the licence CC BY 4.0, anyone free to use and
+adapt the engine with credit to the author and a link to the
+repository; the README names the author with a contact address as a
+fixed text of its recipe, which is not an instance fact but who the
+work is by, whoever runs an instance; the `LICENSE` file carries the
+verbatim legal code.
+
+**A guard rail for the boundary.** The rewrite before publication
+found the leak surface where the challenge predicted it: the forge
+project's own artefacts quoting the substance of subject projects — a
+sentence of a subject intent in a CTO challenge, a deck's name in a
+position. Wanted is a standing rule that `projects/forge` never
+carries the content of a subject project, only process facts — that a
+project exists, its versions, dates and counts — and a home for it in
+`CLAUDE.md`, the reviewer prompts, `/check-forge` as a sweep, or all
+three. Opened at approval for the next iteration (THR.0210).
 
 **Projects have a kind.** A project is a `thought` — a chain from brief
 to assignment — or a `library`: only `sources/` with its index, a
@@ -68,57 +126,33 @@ is a knowingly unguarded cross-repository dependency. A bare `/ingest`
 sweep now reports changed sources with a question universally: a
 breach in a thought project, the normal case in a library.
 
-**Publication.** The engine is the principal's to publish, built
-outside any work assignment and on the company's git only because it
-carried work information not yet separated. The audience, in order:
-rollout in the company, at the same time a public project around which
-a community may form, and a showcase of the principal's work; the
-split also lets access be granted per project. The boundary for the
-public forge project is nothing company-specific by name, with a
-one-off rewrite of its immutables. The public engine starts with a
-fresh git history rather than one filtered by path (DEC.0080): the
-company lives in the text — commit messages, every version of the
-forge intent, a challenge, the research notes — so a filtered history
-would need text filtering as well, work comparable to a fresh start
-with a residual risk of a leak made public for good; "history lives in
-git" is not voided but starts on the day of publication. The one true
-point of the challenge, that the only complete record lives on the
-employer's server, is accepted as it is, the company copy kept
-read-only while it exists. Still open: an exemplar project for the
-README, the public repository's name and the licence (THR.0200).
-
-**The first brief born in the forge, and the first challenged.**
-`00-brief-public-engine.md` was composed inside the forge on
-2026-08-29 and locked at 1.0 the same day, rewritten in English within
-the boundary it sets, with three research notes on engine
-distribution beside it. Before the lock it received the first CTO
-challenge of a brief: seven challenges, six accepted into it, the
-seventh rejected in its remedy and accepted in its risk (DEC.0080).
-It was then mined at the principal's direction, every verdict his,
-into the positions above — the whole cycle brief → challenge → lock →
-mine run end to end for the first time. It also sharpened the
-definition of the form: free-form means no *required* structure, not
+**Briefs redefined, and the first brief born in the forge.** A brief
+is an intent that is composed and then locked: draft while written,
+approved at the lock, immutable from the lock rather than from the
+file's creation. Three origins are equally legitimate — it arrives
+finished, is begun outside and finished with the forge, or is born in
+the forge from the first word — with `/forge brief` as the door: the
+principal moderates and says what is explored, Claude clarifies where
+he is terse without adding content of its own and keeps asking
+whether what exists already solves it, reaching for `/research` and
+`/ingest` at his timing. Free-form means no *required* structure, not
 no structure — headings, tables and use cases are legitimate, a brief
-holds thoughts to be processed rather than decisions, changeable
-until mined, and a summary ordered into a brief is stored as shown,
-never re-narrated as prose.
-
-**Briefs redefined.** A brief is an intent that is composed and then
-locked: draft while written, approved at the lock, immutable from the
-lock rather than from the file's creation. Three origins are equally
-legitimate — it arrives finished, is begun outside and finished with
-the forge, or is born in the forge from the first word — with
-`/forge brief` as the door: the principal moderates and says what is
-explored, Claude clarifies where he is terse without adding content
-of its own and keeps asking whether what exists already solves it,
-reaching for `/research` and `/ingest` at his timing. A project may
-carry more than one brief (`00-brief-<name>.md`), each the birthplace
-of one whole of thinking that would otherwise enter the intent as a
-batch of unproven positions; the ledger's Briefs table tracks how far
-each has been mined, and a whole that dies leaves its brief locked and
-one rejected direction. Branch documents proper were considered and
-deferred as heavy (THR.0170). The long-open thread on additional
-briefs (THR.0110) closed with this.
+holds thoughts to be processed rather than decisions, changeable until
+mined, and a summary ordered into a brief is stored as shown, never
+re-narrated as prose. A project may carry more than one brief
+(`00-brief-<name>.md`), each the birthplace of one whole of thinking
+that would otherwise enter the intent as a batch of unproven
+positions; the ledger's Briefs table tracks how far each has been
+mined, and a whole that dies leaves its brief locked and one rejected
+direction. Branch documents proper were considered and deferred as
+heavy (THR.0170); the long-open thread on additional briefs closed.
+`00-brief-public-engine.md` was the first brief composed inside the
+forge, with three research notes on engine distribution beside it,
+and the first brief challenged: seven CTO challenges before the lock,
+six accepted into it, the seventh rejected in its remedy and accepted
+in its risk (DEC.0080). Locked at 1.0 and mined at the principal's
+direction, every verdict his — the whole cycle brief → challenge →
+lock → mine run end to end for the first time.
 
 **One model for the whole forge, and renders in isolation.** Every
 command, state and reviewer runs on the session model, both agents
@@ -134,8 +168,7 @@ and its inputs — faster and cheaper on any model, the gain landing in
 `/save`'s re-renders. A per-recipe model choice was tested and
 deferred: a smaller model loosened pinned wording, dropped prescribed
 elements and leaned on the previous render instead of the recipe —
-the drift the delta-reporting position exists to prevent (POS.0930;
-THR.0160 closed).
+the drift the delta-reporting position exists to prevent.
 
 **Working methods named.** The ways a working conversation runs now
 have names, so that commands and the README can refer to them and the
@@ -173,15 +206,17 @@ with provenance and staleness tracked.
 a masthead leading with the forge's identity as an AI cognitive
 extension of the principal, a challenge-headed opening section over
 the failure modes the forge removes, a "What you get" list, sections
-regrouped story → concepts → reference, and a Working methods section
-so that newcomers learn how the work feels. The forge dictates only
-the output language; the conversation language is per-instance
-configuration that never appears in outward-facing renders.
+regrouped story → concepts → reference, a Working methods section so
+that newcomers learn how the work feels, and at the end an
+author-and-licence section. The forge dictates only the output
+language; the conversation language is per-instance configuration
+that never appears in outward-facing renders. Until a public exemplar
+project exists the README carries a one-sentence placeholder.
 
 **The forge runs beyond Windows.** `scripts/` is the only
 platform-bound layer, kept in cross-platform PowerShell 7 with
 nothing Windows-only, usage examples included, verified by a run on
-Linux; the instance facts once hard-coded in the scripts leave them
+Linux; the instance facts once hard-coded in the scripts left them
 under the positions above. Replacing the set with POSIX `sh` under
 Git Bash is still being weighed (THR.0150); a dual set and a Python
 rewrite are excluded.
@@ -191,8 +226,9 @@ rewrite are excluded.
 so the scripts are the only door to git, reading included. The
 enumerated ban on delivery-stage apparatus fell: what keeps an
 assignment an assignment is the kind of content — it assigns, it does
-not solve. This Unreleased head is regenerated by every save that
-touches the core and recast as the new major's section at approval.
+not solve. These release notes gained an Unreleased head, regenerated
+by every save that touches the core and recast as the new major's
+section at approval — as here.
 
 **The forge turned its reviewers on itself.** Two critique rounds of
 the forge project, seven of eight findings fixed and one left open by
@@ -205,6 +241,18 @@ is not independence, with independent challengers on a different
 model family planned; regenerated renders pass under the principal's
 eyes; and artefacts do not expire with the conventions they were
 written to.
+
+**Open by design:** THR.0090 (genuine multi-principal operation beyond
+one instance per person via git), THR.0140 (whether the forge's output
+one day feeds a delivery chain as grown layers or hands over to a
+separate framework), THR.0150 (replacing the PowerShell scripts whole
+with POSIX `sh`), THR.0170 (branch documents as a per-whole working
+space before the merge), THR.0180 (more than one output language,
+opened by the first project with Czech output), THR.0190 (a plugin as
+a later distribution layer, taken up when `forge-pull` proves an
+insufficient upgrade channel), THR.0200 (an exemplar project for the
+README), THR.0210 (a standing guard rail so that `projects/forge`
+never carries the content of a subject project).
 
 ## 2.0 — 2026-08-15
 

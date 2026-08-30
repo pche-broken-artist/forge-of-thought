@@ -1,7 +1,7 @@
 ---
-version: 2.21
-date: 2026-08-29
-status: draft
+version: 3.0
+date: 2026-08-30
+status: approved
 project: forge
 audience: principal + Claude only
 ---
@@ -11,6 +11,7 @@ audience: principal + Claude only
 ## Version History
 | Version | Modification | Author | Date |
 |---|---|---|---|
+| 3.0 | Approved by the principal after the split was executed (2026-08-30, runbook phases 0–D): the engine is public at a repository of its own with a fresh one-commit history, the company projects and the library live in repositories of their own, the company monorepo is archived with a notice. New: POS.0990 the public face — repository `forge-of-thought`, licence CC BY 4.0, the author credited with a contact address in the README as a fixed text of the readme recipe; THR.0210 a guard rail so that `projects/forge` never carries the content of a subject project (the leak surface the rewrite found), opened for the next iteration. Extended: POS.0980 with the execution record — the boundary rewrite of the locked brief and both CTO challenges (immutability knowingly broken once, recorded in the ledger only), slugs kept as process facts, the forbidden-term list dropped, the archive and its `pre-split` tag; POS.0950 with the commit identity set per repository at its creation, never inherited from the global configuration. THR.0200 narrowed to the README exemplar. The operating layer (CLAUDE.md, .gitignore, scripts, templates, commands, readme recipe 0.25 with the author-and-licence section, LICENSE) was rebuilt to this intent in the same day; README and release notes re-rendered. | PCHe | 2026-08-30 |
 | 2.21 | Brief `00-brief-public-engine.md` (1.0) mined at the principal's direction, every verdict his — the brief goes to `mined`. New positions: POS.0940 the mechanism of the engine/projects split (nested repositories in a gitignored `projects/*`, scripts recognising a project by its `.git`, no configured remotes, upgrade by `forge-pull`, a git tag per approved major, no engine version in projects; closes THR.0130); POS.0950 no instance facts in the engine (`CLAUDE.local.md`, `settings.local.json`, git identity from the user's configuration; the scripts part of THR.0090 resolved, the thread otherwise untouched by decision); POS.0960 project kind `thought | library`; POS.0970 the library project and its knowingly unguarded cross-repository citation; POS.0980 publication — ownership, audience, the boundary for the public forge project, fresh history (DEC.0080, the company copy read-only). Rewritten: POS.0500, POS.0550, POS.0740 (template by path), POS.0760 (decided), POS.0830, POS.0930 (model in `settings.local.json`), POS.0180 (a bare `/ingest` sweep reports changed sources with a question, universally — a breach in a thought project, the normal case in a library). Rejected: REJ.0140 `local/` (POS.0750 dropped), REJ.0150 submodules, subtree, template repository, copying the engine, plugin-only. Opened: THR.0190 plugin as a later distribution layer, THR.0200 exemplar, repository name, licence; THR.0180 notes the first Czech project. CHL.0070–0130 resolve to this version. Instance work (the one-off migration, the first projects after the split) stays in the brief and the ledger, not in the intent; the operating layer changes with the migration, and 3.0 follows its verification by a fresh clone. | Claude | 2026-08-29 |
 | 2.20 | Brief `00-brief-public-engine.md` locked at 1.0 (2026-08-29), rewritten in English within the boundary it sets for the public forge project — the first CTO challenge of a brief (2026-08-29-challenge-cto.md, CHL.0070–0130) walked through beforehand: six accepted into the brief (the engine is the principal's, built outside any work assignment; the publication audience; nothing company-specific by name in the public forge project, with a one-off rewrite of immutables; the library taken as a knowing cross-repository dependency; all plugin preparation dropped — git split only; git tags per approved major), CHL.0120 rejected in its remedy (DEC.0080: fresh public history, the company copy read-only). Positions unchanged: the brief is mined by `/forge intent` next. Consistency fixes from the pre-save check: POS.0530 no longer lets reviewers pin a model (POS.0930), POS.0400 says "isolated", not "independent" (POS.0790). | Claude | 2026-08-29 |
 | 2.19 | Brief redefined in form at the principal's direction (POS.0110): free-form means no *required* structure, not no structure — headings, tables and use cases are legitimate, thoughts to be processed rather than decisions, changeable until mined; a summary ordered into a brief is stored as shown, never re-narrated as prose. Prompted by brief public-engine 0.4, where a structured summary had been converted into imitated speech. CLAUDE.md (chain item 1) and `/forge brief` aligned; README re-render pending. | Claude | 2026-08-29 |
@@ -770,6 +771,12 @@ position that already stands elsewhere.
   artefact language stays English (THR.0180). The scripts carry no URL
   and no identity (POS.0830). Resolves the scripts part of THR.0090; the
   thread is otherwise untouched.
+  The commit identity is set per repository, locally, as part of the
+  one-off act that creates it (`git init`, the remote, the identity for
+  that host) — never inherited from the global configuration by default,
+  since one machine serves hosts with different identities; a repository
+  whose identity is missing is reported by `forge-save` with the command
+  to set it, and nothing is committed until it is.
 - **POS.0930** One model for the whole forge. Every command, chain
   state and reviewer runs on the session model; the reviewer agents
   declare `model: inherit` explicitly, so that the strongest model
@@ -874,6 +881,28 @@ position that already stands elsewhere.
   example project. Separating the company projects from the engine
   without publishing would have been a fallback only if publication
   were long and complicated; it is not.
+  Executed 2026-08-30: the forge project was rewritten within the
+  boundary — the company name, host, e-mail address, template file name
+  and one personal project removed from the locked brief and the two CTO
+  challenges, two sentences quoting a company project's substance
+  neutralised — immutability of those three artefacts knowingly broken
+  once, recorded in the ledger and nowhere in the files. The slugs of
+  the company projects stay: that projects of those names exist and
+  travelled the chain is a process fact, not content (THR.0210 draws the
+  line). A forbidden-term list was considered and dropped as pointless —
+  a grep catches names, not content. The fresh history is one commit;
+  the company monorepo is archived read-only with a notice naming the
+  new homes and the tag `pre-split` as its last complete state.
+- **POS.0990** The public face. The engine lives at a public repository
+  of the principal's, named `forge-of-thought` — the bare word "forge"
+  is overloaded on every code host and says nothing in a search — under
+  the licence **CC BY 4.0**: anyone may use and adapt the engine, and
+  must credit the author and link to the repository. The README
+  therefore names one person, the licence holder — the author with a
+  contact address — as a fixed text of the readme recipe, and this is
+  not an instance fact: it is who the work is by, whoever runs an
+  instance. The `LICENSE` file carries the licence's verbatim legal
+  code. Decided and executed 2026-08-30, with the first public commit.
 
 ## Open threads
 
@@ -936,10 +965,22 @@ position that already stands elsewhere.
   when `forge-pull` proves an insufficient upgrade channel. Research:
   `2026-08-29-claude-code-packaging.md`,
   `2026-08-29-framework-distribution-in-the-field.md`.
-- **THR.0200** The public face: an exemplar project for the README (the
-  forge itself, or one created later — the company projects cannot
-  travel), the public repository's name, and the licence. Open; none of
-  it blocks the split.
+- **THR.0200** The public face: an exemplar project for the README — the
+  forge itself, or one created later; the company projects cannot
+  travel. Until one exists the README carries a one-sentence placeholder
+  (readme recipe 0.24). Repository name and licence settled in POS.0990.
+- **THR.0210** A guard rail for the public boundary. The rewrite before
+  publication (POS.0980) found the leak surface where the challenge
+  predicted it: the forge project's own artefacts quoting the substance
+  of subject projects — a sentence of a company intent in a CTO
+  challenge, a deck's name in a position. A grep before a push is a net,
+  not a rule. Wanted: a standing rule that `projects/forge` never
+  carries the *content* of a subject project — only process facts: that
+  a project exists, its versions, dates and counts — and a home for it:
+  CLAUDE.md, the challenger and critic prompts (they read the subject
+  projects as evidence), `/check-forge` as a sweep, or all three. Opened
+  2026-08-30 at the principal's direction; to be settled at the next
+  iteration of this intent.
 
 Note: the ID THR.0120 was inadvertently used twice — first for the
 readme-recipe thread (opened 1.14, closed 1.16), then for the
