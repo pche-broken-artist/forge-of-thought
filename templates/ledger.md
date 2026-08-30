@@ -39,8 +39,9 @@ render's front-matter provenance. -->
 <!-- Registration only. External inputs, immutable once registered.
 Date = best-effort origin date; origin: content | file | ingested. What
 a source is and is for lives in sources/00-INDEX.md, never here.
-Registration does not imply intake. -->
-| File | Date | Date origin | Extract |
+Registration does not imply intake. Form (POS.1040): text | extract
+of <original> | binary — one form per source. -->
+| File | Date | Date origin | Form |
 |---|---|---|---|
 
 ## Dependencies

@@ -160,9 +160,15 @@ ledger.md        single source of truth for state
    dates are recorded best-effort in the ledger, never demanded from
    the principal. They may arrive at any stage, even before the brief.
    `/ingest` stores, registers and catalogues — nothing more (bare, it
-   sweeps `sources/` for unregistered files). Text extracts of binary
-   sources are produced by `scripts/doc2md.ps1` (engine: markitdown,
-   installed separately via
+   sweeps `sources/` for unregistered files). A source has one form
+   (POS.1040): text, or a functional binary. At `/ingest` every binary
+   file gets one question — convert to Markdown? — yes makes the
+   extract `sources/<slug>.md` the source (tracked, registered,
+   indexed, immutable; the original is not copied, or is gitignored
+   where it already lies in `sources/`), no keeps the binary as the
+   source — a template, a graphic — with no extract; both only on the
+   principal's explicit word. Extracts are produced by
+   `scripts/doc2md.ps1` (engine: markitdown, installed separately via
    `pip install "markitdown[docx,pptx,pdf,xlsx,xls]"`), never by
    ad-hoc parsing. Registration does not
    imply intake: a source's role is individual — a standard to verify
@@ -272,8 +278,10 @@ projects/<slug>/           # kind: thought — the chain
   decisions.md  ledger.md             # ledger header carries kind:
   sources/00-INDEX.md                 # material index (rewritten):
                                       # What / Origin / Role / Use for
-  sources/<name>.<ext>                # immutable external inputs
-                                      # (+ .extract.md for binaries)
+  sources/<name>.<ext>                # immutable external inputs, one
+                                      # form each: <slug>.md extract of
+                                      # a binary, or the binary itself
+  sources/.gitignore                  # originals converted in place
   sources/<slug>/                     # bundle of related files = one
                                       # source, one ledger entry;
                                       # catalogued by its 00-INDEX.md

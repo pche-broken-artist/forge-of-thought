@@ -4,7 +4,7 @@ render: release-notes
 generated: 2026-08-30
 recipe: projects/forge/recipes/release-notes.md v0.2
 inputs:
-  - projects/forge/10-intent.md v3.3
+  - projects/forge/10-intent.md v3.4
   - projects/forge/decisions.md
   - RELEASE-NOTES.md (2026-08-30 edition — released sections)
 ---
@@ -19,7 +19,8 @@ newest first. The fine-grained change log lives in
 ## Unreleased — 3.x since 3.0
 
 These changes are not yet approved; they cover intent versions 3.1 to
-3.3.
+3.4, all made on the day of the 3.0 approval while the first fresh
+deployment of the public engine was being prepared.
 
 **Every project gets a README and release notes.** The engine's own
 mechanism is generalised: every project has a README and, if it is a
@@ -28,38 +29,34 @@ recipes (`recipes/readme.md`, `recipes/release-notes.md`, with
 `output:` in the project root), exactly as the engine has them. The
 recipe is what is iterated, the render is never edited by hand, and
 every save that touches the project regenerates both before the
-check. The ledger's Renders table carries them like any render
-(POS.1000).
+check; the ledger's Renders table carries them like any render. A
+library has a README only — a catalogue of what it holds — since
+release notes are distilled from an intent's Version History and
+decisions, which a library does not have. Every project README closes
+with the fixed sentence that reading it needs nothing and maintaining
+it needs Forge of Thought, linked (POS.1000).
 
-**A library has a README only.** Its README is a catalogue of what
-the library holds and how to use it, derived from its ledger and
-indexes. Release notes are distilled from an intent's Version History
-and decisions, which a library does not have; its history is git.
-
-**Genre skeletons scaffolded from the start.** The two recipes are
-genres of `/recipe`, with skeletons `templates/recipe-readme.md` and
-`templates/recipe-release-notes.md`; `/new-project` scaffolds them
-and `/check` expects them.
+**Genre skeletons scaffolded from the start.** `readme` and
+`release-notes` are genres of `/recipe`, with skeletons
+`templates/recipe-readme.md` and `templates/recipe-release-notes.md`;
+`/new-project` scaffolds them and `/check` expects them.
 
 **An optional project icon.** A project may carry `logo.png` in its
 root, supplied by the principal and picked up as the repository
 avatar by hosts that do so. A project without an icon is complete,
-and `/check` does not report its absence (POS.1010).
+and `/check` never reports its absence (POS.1010).
 
 **Cross-repository dependencies registered in the ledger.** A project
 writes down what it relies on outside its own repository: the ledger
 carries a Dependencies table — path, library, used by, note — with one
 row per document of another repository the project cites, typically a
 library document referred to by path or a deck template named in a
-recipe. Registration only, like sources; what the document is for
-lives where it is used. `/check` verifies that every registered path
-exists on disk and reports a library not cloned alongside, and an
-index entry or recipe pointing outside the project without a row is a
-finding; the `/forge` map names which libraries the project needs,
-and the project's README carries the same line. `/ingest` registers
-the row when the principal directs a project to a library document
-instead of copying it. No version is pinned, by design: a library
-document is maintained by its owner and cited as a moving target. The
+recipe. Registration only, like sources; no version is pinned, by
+design, because a library document is maintained by its owner and
+cited as a moving target. `/check` verifies that every registered
+path exists on disk, the `/forge` map names which libraries the
+project needs, and `/ingest` registers the row when the principal
+directs a project to a library document instead of copying it. The
 position was raised when a document moved from a project into a
 library and the project's reliance on it and on its deck template
 became invisible (POS.1020).
@@ -76,10 +73,31 @@ written or engine rules missing, and the missing ones moved in: the
 working method Step by step (one consent-needing action at a time,
 the exact operation and its reason stated, a seen plan is not
 consent), the walkthrough's rule that an accept recommendation carries
-the concrete text of the position, and one research per question in
-`/research`. Instance facts that had lived in memory — the git
-identities per host — moved to `CLAUDE.local.md`. Memory is left with
-what is personal to one principal only (POS.1030).
+the concrete text the artefact would receive, and one research per
+question in `/research`. Instance facts that had lived in memory —
+the git identities per host — moved to `CLAUDE.local.md`. Memory is
+left with what is personal to one principal only (POS.1030).
+
+**A source has one form.** A file in `sources/` is either text or a
+functional binary, never both by default. At `/ingest` every binary
+file — isolated or inside a bundle — gets one question: convert to
+Markdown? Yes: `doc2md` writes `sources/<slug>.md`, and that extract
+is the source — tracked, registered, indexed, immutable — while the
+original is not copied into the project, or is gitignored where it
+already lies in `sources/`. No: the binary is the source as a
+functional thing — a deck template, a graphic, a logo — kept as is
+with no extract. Text files get no question; keeping both is the
+exception, on the principal's explicit word. The ledger's Sources
+table records the form (`text | extract of <original> | binary`)
+instead of an extract flag, and `/check` treats a binary without an
+extract, or an extract without its original, as the normal case. The
+reason: the repository carries what the forge works with — text — and
+a binary nobody reads from git is weight without use. The convention
+applies from now on: earlier extracts keep their `.extract.md` names,
+and a binary already in git beside its extract leaves the index only
+on the principal's word, never automatically. Raised by the day's
+`/check`, where four PDFs sat in git beside the extracts that alone
+are ever cited (POS.1040).
 
 ## 3.0 — 2026-08-30
 

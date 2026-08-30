@@ -46,13 +46,24 @@ else. Never silently re-register.
    (meeting date in a transcript header, offer date), else from file
    metadata, else the ingest date. Note the origin as
    `content | file | ingested`. Do not ask the principal for dates.
-3. **Extract.** For binary formats (PDF, DOCX, PPTX, XLSX, …), create a
-   sibling `<short-slug>.extract.md` by running
-   `scripts/doc2md.ps1 <file> -Suffix '.extract'` — file by file, only
-   on the files that need an extract, in bundles as well. Never parse
-   binaries by hand or with ad-hoc code (e.g. Python PDF libraries):
-   the script is the only conversion path. Native Markdown or plain
-   text needs no extract.
+3. **One form per source (POS.1040).** For every binary file (PDF,
+   DOCX, PPTX, XLSX, …) — isolated or inside a bundle — ask one
+   question, per file: convert to Markdown?
+   - **Yes:** run `scripts/doc2md.ps1 <file> -OutDir sources/` (or the
+     bundle directory); the extract `<short-slug>.md` is the source —
+     registered, indexed (Origin: "extract of `<original>` (markitdown)"),
+     immutable. The original is not copied into the project; if it
+     already lies in `sources/` (sweep mode), add its path to
+     `sources/.gitignore` and leave it there, local only.
+   - **No:** the binary is the source as a functional thing (a deck
+     template, a graphic, a logo): store, register and index it as is,
+     no extract.
+   Text files get no question. Keeping both is the exception, on the
+   principal's explicit word. Never parse binaries by hand or with
+   ad-hoc code (e.g. Python PDF libraries): the script is the only
+   conversion path. Extracts made before this rule keep their
+   `.extract.md` names; a binary already in git beside its extract
+   leaves the index only on the principal's word, never in a sweep.
 4. **Index entry.** Add the source to `sources/00-INDEX.md` (skeleton
    `templates/index.md`; create the index from it if missing):
    **What** (one or two sentences, read enough of the file to say it
@@ -83,7 +94,8 @@ else. Never silently re-register.
    what someone said in a meeting is never silently promoted to the
    principal's own position.
 7. **Bookkeeping and summary.** Update the Sources table in `ledger.md`
-   — registration only: file, date, date origin, extract yes/no/n-a;
+   — registration only: file, date, date origin, form (`text` |
+   `extract of <original>` | `binary`);
    what the source is and is for lives in the index alone. In sweep
    mode, also fill index gaps for files already registered. Finish
    with a short summary in Czech: what was stored or registered, with

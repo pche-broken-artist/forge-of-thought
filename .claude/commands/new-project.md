@@ -19,8 +19,8 @@ principal's words; when unclear, ask.
 
 **Library** (`kind: library`): create only `projects/$1/ledger.md`
 from `templates/ledger.md` with `kind: library` and without the
-Briefs, Documents, Renders, Findings and Challenges tables (Sources,
-Research and Waiting on principal remain), plus `sources/00-INDEX.md`
+Briefs, Documents, Findings and Challenges tables (Renders, Sources,
+Dependencies, Research and Waiting on principal remain), plus `sources/00-INDEX.md`
 and `research/00-INDEX.md` from `templates/index.md`, and
 `recipes/readme.md` from `templates/recipe-readme.md` with library
 inputs (ledger and the two indexes) — its README is the catalogue

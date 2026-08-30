@@ -44,9 +44,11 @@ the two material indexes. -->
   the principal are the primary reader.>
 - Close with a short section "About this README": a render of
   `recipes/readme.md`, regenerated on every save, never edited by
-  hand; fixes go into the recipe or the inputs; the project runs on
-  Forge of Thought (link to the engine repository if the project is
-  public, the bare name otherwise).
+  hand; fixes go into the recipe or the inputs. Then the fixed
+  sentence, verbatim: "Reading this repository needs nothing beyond a
+  Markdown viewer. Maintaining and evolving it needs **Forge of
+  Thought** — the engine this project is run under:
+  https://github.com/pche-broken-artist/forge-of-thought."
 - Keep the visible dated footer `_Last updated: <render date>_`.
 
 ## Template

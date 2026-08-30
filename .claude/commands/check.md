@@ -21,8 +21,9 @@ Checks per project:
    track projects. A `library` needs no chain: checks 1, 2, 4 and 5
    reduce to `ledger.md`, `sources/00-INDEX.md`,
    `research/00-INDEX.md` and `recipes/readme.md` existing, and its
-   ledger carrying only the Sources, Research, Renders and Waiting on
-   principal tables; checks 3, 6, 7 and 8 apply as written, except
+   ledger carrying only the Renders, Sources, Dependencies, Research
+   and Waiting on principal tables; checks 3, 6, 7 and 8 apply as
+   written, except
    that a library's documents may be overwritten by their owner
    (POS.0970) — not an immutability breach. `logo.png` is optional
    everywhere and its absence is never a finding (POS.1010).
@@ -48,7 +49,10 @@ Checks per project:
    disk; findings and challenges vs files in `reviews/` and
    `challenges/`; every file in `sources/` and `research/` registered
    (Sources and Research tables carry registration only, no content
-   columns); "Waiting on principal" matches what is actually open.
+   columns); a binary without an extract and an extract without its
+   original are the normal case (POS.1040), never a finding, and a
+   binary listed in `sources/.gitignore` is not an unregistered file;
+   "Waiting on principal" matches what is actually open.
    **Dependencies** (POS.1020) — every path in the Dependencies table
    exists on disk (a missing library is the finding "library
    `<name>` not cloned alongside — `git clone <its remote>
