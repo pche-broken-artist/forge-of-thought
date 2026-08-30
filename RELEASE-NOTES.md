@@ -4,7 +4,7 @@ render: release-notes
 generated: 2026-08-30
 recipe: projects/forge/recipes/release-notes.md v0.2
 inputs:
-  - projects/forge/10-intent.md v3.1
+  - projects/forge/10-intent.md v3.2
   - projects/forge/decisions.md
   - RELEASE-NOTES.md (2026-08-30 edition — released sections)
 ---
@@ -18,7 +18,8 @@ newest first. The fine-grained change log lives in
 
 ## Unreleased — 3.x since 3.0
 
-These changes are not yet approved; they cover intent version 3.1.
+These changes are not yet approved; they cover intent versions 3.1 to
+3.2.
 
 **Every project gets a README and release notes.** The engine's own
 mechanism is generalised: every project has a README and, if it is a
@@ -44,6 +45,24 @@ and `/check` expects them.
 root, supplied by the principal and picked up as the repository
 avatar by hosts that do so. A project without an icon is complete,
 and `/check` does not report its absence (POS.1010).
+
+**Cross-repository dependencies registered in the ledger.** A project
+writes down what it relies on outside its own repository: the ledger
+carries a Dependencies table — path, library, used by, note — with one
+row per document of another repository the project cites, typically a
+library document referred to by path or a deck template named in a
+recipe. Registration only, like sources; what the document is for
+lives where it is used. `/check` verifies that every registered path
+exists on disk and reports a library not cloned alongside, and an
+index entry or recipe pointing outside the project without a row is a
+finding; the `/forge` map names which libraries the project needs,
+and the project's README carries the same line. `/ingest` registers
+the row when the principal directs a project to a library document
+instead of copying it. No version is pinned, by design: a library
+document is maintained by its owner and cited as a moving target. The
+position was raised when a document moved from a project into a
+library and the project's reliance on it and on its deck template
+became invisible (POS.1020).
 
 ## 3.0 — 2026-08-30
 

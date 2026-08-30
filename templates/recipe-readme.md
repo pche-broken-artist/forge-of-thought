@@ -69,7 +69,9 @@ Documents table; one line on briefs and their mining state>
 <bullets from the ledger; omit the section when empty>
 
 ## Layout
-<short fenced tree of this project's directories, what lives where>
+<short fenced tree of this project's directories, what lives where;
+then one line "Depends on: <libraries from the ledger's Dependencies
+table>" — omitted when the table is empty>
 
 ## About this README
 <the fixed closing per the instruction>

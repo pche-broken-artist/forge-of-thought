@@ -49,6 +49,12 @@ Checks per project:
    `challenges/`; every file in `sources/` and `research/` registered
    (Sources and Research tables carry registration only, no content
    columns); "Waiting on principal" matches what is actually open.
+   **Dependencies** (POS.1020) — every path in the Dependencies table
+   exists on disk (a missing library is the finding "library
+   `<name>` not cloned alongside — `git clone <its remote>
+   projects/<name>`", advisory); every index entry, recipe or chain
+   citation pointing outside the project (`projects/<other>/…`) has a
+   row; no row points inside the project.
    **Material indexes** — `sources/00-INDEX.md` and
    `research/00-INDEX.md` exist and agree with their directories: a
    file (or bundle) without an entry, an entry without a file, a bundle

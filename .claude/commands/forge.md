@@ -29,6 +29,8 @@ Adding a layer means adding a file; this dispatcher never changes.
      which cannot yet (say what is missing);
    - which renders are stale — compare each render's front-matter
      provenance (recipe and input versions) against the current files;
+   - which libraries the project needs (the ledger's Dependencies
+     table, POS.1020) and whether each is cloned alongside;
    - what is waiting on the principal (from the ledger).
 4. Recommend the natural next step — a recommendation, never a gate.
 

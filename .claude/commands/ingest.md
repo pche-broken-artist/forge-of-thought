@@ -65,7 +65,15 @@ else. Never silently re-register.
    conversation invites it. A bundle is one entry pointing to its
    inner `00-INDEX.md`; never repeat the bundle's contents in the top
    index. The index tracks nothing — no processing state.
-5. **Nothing is processed.** `/ingest` never carries content into the
+5. **A library document is cited, not copied.** When the principal
+   points a project at a document that lives in a library
+   (`projects/lib-<name>/…`), nothing is stored in `sources/`: add an
+   index entry that names the path and says what it is for, and a
+   row in the ledger's Dependencies table (path, library, used by,
+   note — POS.1020). Moving a document out of a project into a
+   library is the reverse: ingest it there, replace the project's
+   entry with the citation, register the dependency.
+6. **Nothing is processed.** `/ingest` never carries content into the
    intent or any other document. Registration does not imply intake:
    the principal alone directs how and when a source is used — in
    `/forge intent`, while drafting, in ordinary conversation ("check the
@@ -74,7 +82,7 @@ else. Never silently re-register.
    provenance to the file (`sources/<file>` or `sources/<slug>/<file>`);
    what someone said in a meeting is never silently promoted to the
    principal's own position.
-6. **Bookkeeping and summary.** Update the Sources table in `ledger.md`
+7. **Bookkeeping and summary.** Update the Sources table in `ledger.md`
    — registration only: file, date, date origin, extract yes/no/n-a;
    what the source is and is for lives in the index alone. In sweep
    mode, also fill index gaps for files already registered. Finish

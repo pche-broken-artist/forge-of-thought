@@ -43,6 +43,16 @@ Registration does not imply intake. -->
 | File | Date | Date origin | Extract |
 |---|---|---|---|
 
+## Dependencies
+<!-- Registration only. Documents of other repositories this project
+relies on — typically library documents (POS.1020): cited by path from
+an index entry, a recipe or the chain. No version: library documents
+are maintained by their owner. What the document is for lives where it
+is used (the index entry, the recipe). /check verifies each path exists
+on disk; /forge reports which libraries the project needs. -->
+| Path | Library | Used by | Note |
+|---|---|---|---|
+
 ## Research
 <!-- Registration only. Immutable dated notes written by /research (or
 recorded expert estimates). What a note answers lives in

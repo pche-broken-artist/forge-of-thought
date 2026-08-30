@@ -433,7 +433,10 @@ supersede the original items and replace the group with one link item.
 briefs (file, version, status, mining state, note), documents (file,
 version, status, date), renders, sources and research
 (registration only — what a material is and is for lives in its
-directory's `00-INDEX.md`), findings and challenges. Together with the
+directory's `00-INDEX.md`), dependencies (documents of other
+repositories the project relies on — typically library documents
+cited by path; registration only, no version), findings and
+challenges. Together with the
 material indexes it is the only freely rewritten file. Keep it current
 after every operation.
 

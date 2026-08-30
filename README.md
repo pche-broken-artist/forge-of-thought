@@ -5,10 +5,10 @@ generated: 2026-08-30
 recipe: projects/forge/recipes/readme.md v0.25
 inputs:
   - CLAUDE.md
-  - projects/forge/10-intent.md v3.1
+  - projects/forge/10-intent.md v3.2
 ---
 
-# Forge of Thought 3.1
+# Forge of Thought 3.2
 
 *A workshop where thought is tempered and shaped.* · [Release notes](RELEASE-NOTES.md)
 
@@ -188,7 +188,7 @@ later layers (30-brd.md, 40-solution-design.md, …)
 | `10-intent.md` | The consolidated current state of what you want — rewritten freely, versioned. |
 | `20-assignment.md` | The distilled handover for the recipients — versioned, self-contained. |
 | `decisions.md` | Append-only record of decisions (DEC). |
-| `ledger.md` | Single source of truth for state. |
+| `ledger.md` | Single source of truth for state: briefs, documents, renders, sources, research, dependencies, findings and challenges. |
 
 > A locked brief is immutable — composed, then locked, never touched
 > again.
@@ -233,6 +233,16 @@ directly. Write cadence: artefacts are written once per iteration
 round, on your confirmation — one version bump, one history row.
 Feedback from the recipients has no channel of its own: you process
 it and feed the conclusions back through `/forge intent`.
+
+The **ledger** registers what the project has and what it relies on:
+briefs (with their mining state), documents, renders, sources and
+research (registration only — what a material is and is for lives in
+its directory's `00-INDEX.md`), dependencies — documents of other
+repositories the project relies on, typically library documents cited
+by path, registration only and no version — and the findings and
+challenges of the reviewers. A dependency is registered because a
+cross-repository citation is a dependency taken knowingly, and
+knowingly means written down where state lives.
 
 > A render is never edited by hand — what is iterated is its recipe.
 
