@@ -2,7 +2,7 @@
 project: forge
 purpose: readme
 audience: humans arriving at the repository
-version: 0.25
+version: 0.26
 updated: 2026-08-30
 output: /README.md
 ---
@@ -135,10 +135,11 @@ front-matter, no status, no Version History — history lives in git. -->
   there that the later sections do not also carry — the story
   illustrates, it never legislates.
 - The "How the work feels" section is drawn from the Working methods
-  section of CLAUDE.md only: the seven names are load-bearing and
-  must appear verbatim (Walkthrough, Propose never decide,
-  Elicitation interview, Draft early, Reflect back, Intent-first,
-  Recommend do not push); the one-sentence glosses are re-derived.
+  section of CLAUDE.md only: the eight names are load-bearing and
+  must appear verbatim (Walkthrough, Propose never decide, Step by
+  step, Elicitation interview, Draft early, Reflect back,
+  Intent-first, Recommend do not push); the one-sentence glosses are
+  re-derived.
   It never mentions commands that no longer exist.
 - The worked example: until an exemplar project is chosen and
   published (THR.0200 of the intent), the subsection "What it looks
@@ -364,7 +365,7 @@ here once one is published>
 ## 5. How the work feels
 <one lead sentence: the forge is as much a way of working as a set of
 files, and these are the named methods of that work — the vocabulary
-you and Claude share; then a bold-name list of the seven Working
+you and Claude share; then a bold-name list of the eight Working
 methods from CLAUDE.md, one sentence each, walkthrough first and
 given two sentences because it is the one you will use most;
 close with one sentence: none is a command, you invoke any of them in

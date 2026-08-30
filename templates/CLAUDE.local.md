@@ -8,3 +8,6 @@ Claude Code loads it alongside CLAUDE.md. -->
 - **Principal:** <name and role — whose thinking is being forged>
 - **Conversation language:** <the language the principal talks in;
   artefacts are always English, briefs verbatim>
+- **Git identities:** <one line per host — name and e-mail to set
+  locally in every repository on that host before its first commit,
+  e.g. "github.com: Name <address>; <company host>: Name <address>">

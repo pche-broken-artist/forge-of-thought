@@ -4,7 +4,7 @@ render: release-notes
 generated: 2026-08-30
 recipe: projects/forge/recipes/release-notes.md v0.2
 inputs:
-  - projects/forge/10-intent.md v3.2
+  - projects/forge/10-intent.md v3.3
   - projects/forge/decisions.md
   - RELEASE-NOTES.md (2026-08-30 edition — released sections)
 ---
@@ -19,7 +19,7 @@ newest first. The fine-grained change log lives in
 ## Unreleased — 3.x since 3.0
 
 These changes are not yet approved; they cover intent versions 3.1 to
-3.2.
+3.3.
 
 **Every project gets a README and release notes.** The engine's own
 mechanism is generalised: every project has a README and, if it is a
@@ -63,6 +63,23 @@ document is maintained by its owner and cited as a moving target. The
 position was raised when a document moved from a project into a
 library and the project's reliance on it and on its deck template
 became invisible (POS.1020).
+
+**The forge's behaviour lives in the engine, never in the assistant's
+private memory.** The assistant keeps a per-directory memory outside
+the repository; whatever it learns there about how the forge should
+work — a working method, a rule of a command, a convention — is
+written into `CLAUDE.md`, the commands or the templates and removed
+from memory, so that every instance behaves the same and a new user
+meets the same forge as the principal. The audit before the first
+fresh deployment found most of that memory to be engine rules already
+written or engine rules missing, and the missing ones moved in: the
+working method Step by step (one consent-needing action at a time,
+the exact operation and its reason stated, a seen plan is not
+consent), the walkthrough's rule that an accept recommendation carries
+the concrete text of the position, and one research per question in
+`/research`. Instance facts that had lived in memory — the git
+identities per host — moved to `CLAUDE.local.md`. Memory is left with
+what is personal to one principal only (POS.1030).
 
 ## 3.0 — 2026-08-30
 

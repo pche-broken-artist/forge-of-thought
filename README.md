@@ -2,13 +2,13 @@
 project: forge
 render: readme
 generated: 2026-08-30
-recipe: projects/forge/recipes/readme.md v0.25
+recipe: projects/forge/recipes/readme.md v0.26
 inputs:
   - CLAUDE.md
-  - projects/forge/10-intent.md v3.2
+  - projects/forge/10-intent.md v3.3
 ---
 
-# Forge of Thought 3.2
+# Forge of Thought 3.3
 
 *A workshop where thought is tempered and shaped.* · [Release notes](RELEASE-NOTES.md)
 
@@ -132,10 +132,16 @@ share.
 - **Walkthrough.** Any list needing your decision — findings,
   challenges, open threads, differences between two requirement sets
   — is worked one item at a time, in order of weight, Claude's
-  recommendation and reason first, your verdict in a word. "Leave it
-  open" is legitimate, and nothing is written until the round ends.
+  recommendation and reason first, your verdict in a word; an
+  "accept" recommendation carries the concrete text the artefact
+  would receive, never a description of the edit. "Leave it open" is
+  legitimate, and nothing is written until the round ends.
 - **Propose, never decide.** Claude criticises, challenges, inspires
   and lays out options; you compose.
+- **Step by step.** Anything needing your consent — a write, a
+  commit, a push, anything hard to reverse — arrives as one step with
+  the exact operation and its reason, and runs on your word; a plan
+  you have seen is not consent for its steps.
 - **Elicitation interview.** Claude draws out by questions what you
   have not yet articulated instead of filling gaps by assumption.
 - **Draft early.** An early draft is an elicitation tool, not an
