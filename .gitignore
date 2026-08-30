@@ -1,0 +1,17 @@
+# Local, per-machine Claude Code settings - never shared
+.claude/settings.local.json
+
+# Instance facts (principal, conversation language) - never shared
+/CLAUDE.local.md
+
+# Projects are repositories of their own; the engine tracks only its
+# own project. projects/* (never projects/) so the re-include works.
+projects/*
+!projects/forge
+
+# Windows noise
+Thumbs.db
+desktop.ini
+
+# Office lock files (open documents)
+~$*

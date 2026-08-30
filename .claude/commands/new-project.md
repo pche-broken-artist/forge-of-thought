@@ -1,0 +1,61 @@
+---
+description: Scaffold a new project from templates — a thought project (the chain) or a library (material only); files only, never git
+argument-hint: <slug> [working title]
+---
+
+Create a new project under `projects/$1/`. Files only: the command
+never touches git. A project is a repository of its own that the
+engine does not track (`projects/*` is gitignored); initialising it
+and adding a remote (`git -C projects/$1 init -b main`, `git remote
+add origin …`, the commit identity for that host) are the principal's
+one-off act, and a project that starts "not under git" is a property,
+not a defect — say so once at the end.
+
+**Kind.** Every project has a kind, declared as `kind:` in its
+ledger header (POS.0960): `thought` (default — the chain, everything
+below) or `library` (slug prefix `lib-`, material shared across
+projects, no chain). Infer `library` from the `lib-` prefix or the
+principal's words; when unclear, ask.
+
+**Library** (`kind: library`): create only `projects/$1/ledger.md`
+from `templates/ledger.md` with `kind: library` and without the
+Briefs, Documents, Renders, Findings and Challenges tables (Sources,
+Research and Waiting on principal remain), plus `sources/00-INDEX.md`
+and `research/00-INDEX.md` from `templates/index.md`. No brief, no
+decisions, no reviews or challenges. Finish by proposing `/ingest`
+for the first documents; steps 3–5 below do not apply.
+
+**Thought project** (`kind: thought`):
+
+1. Validate the slug: lowercase, hyphens, no spaces. If `projects/$1/`
+   already exists, stop and report — never overwrite.
+2. Create the folder structure:
+   - `projects/$1/sources/`, `projects/$1/reviews/`,
+     `projects/$1/challenges/` and `projects/$1/research/` — empty
+     except `sources/00-INDEX.md` and `research/00-INDEX.md` from
+     `templates/index.md` (header filled, no entries)
+   - `projects/$1/ledger.md` from `templates/ledger.md`, filled with
+     project slug, `kind: thought` and today's date; brief row as 0.1
+     draft, pending
+   - `projects/$1/decisions.md` with a one-line header only
+   - `projects/$1/00-brief.md` — empty except for the YAML header
+     (project, title, date, author, version 0.1, status draft),
+     pre-filled at scaffold time
+3. **00-brief.md content:** ask the principal to paste or dictate the
+   brief now. Write it **verbatim** — no translation, no editing, no
+   restructuring, whatever language it arrives in. If it arrives
+   finished, lock it at once (version 1.0, status approved; Briefs
+   table row: pending). If it is to be composed or finished here, or
+   later, leave it as draft (version 0.1) — `/forge brief` is the door
+   — and the ledger keeps the row as draft.
+4. Do NOT create 10-intent.md or 20-assignment.md yet — intent is born from the
+   first `/forge intent`, assignment from the first `/forge assignment`.
+5. Update the ledger and finish by proposing the next step: run
+   `/forge intent` to start the elicitation interview — and remind
+   the principal that the project is not under git until he
+   initialises its repository.
+
+File names in the chain are numbered (`00-brief.md`, `10-intent.md`,
+`20-assignment.md`) so later layers can be added without renaming.
+
+Conversation in Czech; all files in English except 00-brief.md (verbatim).

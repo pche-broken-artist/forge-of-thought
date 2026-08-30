@@ -1,0 +1,10 @@
+# CLAUDE.local.md — instance facts
+
+<!-- Copy this file to the engine root as CLAUDE.local.md and fill in
+the values. It is gitignored and never committed: these are facts about
+one instance of the forge, not properties of the system (POS.0950).
+Claude Code loads it alongside CLAUDE.md. -->
+
+- **Principal:** <name and role — whose thinking is being forged>
+- **Conversation language:** <the language the principal talks in;
+  artefacts are always English, briefs verbatim>

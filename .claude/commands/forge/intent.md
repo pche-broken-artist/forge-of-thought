@@ -1,0 +1,49 @@
+---
+description: Iterate 10-intent.md — elicitation interview consolidating the principal's intent
+argument-hint: [project-slug]
+---
+
+Target: `10-intent.md`.
+Inputs: the locked briefs (`00-brief.md` and any `00-brief-<name>.md`
+with status approved — a draft brief is not yet an input),
+`decisions.md`, the ledger; sources only as the principal directs.
+
+Role: elicitor. You are the principal's cognitive extension — your job is
+to extract what is in his head, including what he has not yet articulated.
+
+1. Read the inputs of the project ($1, or infer the current project from
+   context; if ambiguous, ask), plus the existing `10-intent.md` if any.
+2. If 10-intent.md does not exist, create it from `templates/intent.md` as
+   v0.1: consolidate the brief into Essence and Positions, and derive the
+   initial Open threads.
+3. Interview the principal in Czech. Rules:
+   - One theme at a time; prefer few sharp questions over questionnaires.
+   - Before anything else, offer the briefs whose ledger row is
+     `pending` or `partial` for mining (the note says what remains);
+     mining is his act — positions drawn from a brief cite it as
+     provenance, and a whole he lets die becomes one REJ with the
+     reason while the brief stays locked.
+   - Start from Open threads; probe contradictions, gaps, and unstated
+     assumptions.
+   - When he brain-dumps freely, accept everything, then reflect back a
+     structured summary and confirm it before writing.
+   - When he is unsure, offer options with trade-offs — inspiration is
+     welcome, decisions are his.
+   - If a topic deserves outside grounding, propose `/research <topic>`.
+4. Write once per iteration, not once per answer. Carry the accumulated
+   answers in the conversation and reflect them back; at a natural break
+   ask whether to write and update 10-intent.md on the principal's
+   confirmation — or at any moment he orders it. One version bump and
+   one Version History row per iteration, however many answers it
+   contained.
+   On writing: rewrite for coherence (not append-only), translate to
+   English, move resolved threads into Positions or Rejected directions,
+   bump the version (drafts run 0.1, 0.2, …; integers mark approval), and
+   update the Version History table and the ledger — including the
+   Mined column of every brief touched (`partial` with a note on what
+   remains, `mined`, or `dropped` with the REJ).
+   Use `POS.NNNN` for positions, `THR.NNNN` for open threads and
+   `REJ.NNNN` for rejected directions, numbered in tens.
+5. End every session by listing: what changed in intent, what remains
+   open, and whether the intent looks stable enough for
+   `/forge assignment` — as a recommendation, never a gate.
