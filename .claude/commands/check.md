@@ -19,18 +19,25 @@ Checks per project:
    repository — `git -C projects/<slug> init -b main`, then a
    remote"), the one git-related check, since the engine does not
    track projects. A `library` needs no chain: checks 1, 2, 4 and 5
-   reduce to `ledger.md`, `sources/00-INDEX.md` and
-   `research/00-INDEX.md` existing, and its ledger carrying only the
-   Sources, Research and Waiting on principal tables; checks 3, 6 and
-   7 apply as written, except that a library's documents may be
-   overwritten by their owner (POS.0970) — not an immutability breach.
+   reduce to `ledger.md`, `sources/00-INDEX.md`,
+   `research/00-INDEX.md` and `recipes/readme.md` existing, and its
+   ledger carrying only the Sources, Research, Renders and Waiting on
+   principal tables; checks 3, 6, 7 and 8 apply as written, except
+   that a library's documents may be overwritten by their owner
+   (POS.0970) — not an immutability breach. `logo.png` is optional
+   everywhere and its absence is never a finding (POS.1010).
 1. **Structure** — expected files and folders exist: `00-brief.md`,
    `10-intent.md`, `decisions.md`, `ledger.md`; `20-assignment.md` once
    drafted; `sources/`, `reviews/`, `challenges/`, `research/`;
    `recipes/` and `renders/` where renders exist, paired — every render
    traces to a recipe and carries provenance front-matter matching the
    ledger's Renders table (legacy pre-recipe editions, dated filenames,
-   are exempt). Every `00-brief*.md` in the directory has a row in the
+   are exempt). Every project carries `recipes/readme.md` with
+   `output: README.md`, and a thought project `recipes/release-notes.md`
+   with `output: RELEASE-NOTES.md` (POS.1000); a missing recipe is a
+   finding (fix: scaffold from `templates/recipe-<genre>.md`), a missing
+   or stale render is a finding fixed by `/render` — or by the next
+   `/save`, which regenerates both. Every `00-brief*.md` in the directory has a row in the
    ledger's Briefs table and vice versa; a brief marked `mined` is
    cited somewhere in the intent.
 2. **Front-matter** — version, date, status present; status agrees with

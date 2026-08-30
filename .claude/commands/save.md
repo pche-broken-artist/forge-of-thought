@@ -19,15 +19,20 @@ property, not a defect. Arguments are passed through to the script.
    procedure; project files touched → run `/check` for each affected
    project; both → both. A project "not under git" with changes is
    named in the report and otherwise left alone.
-2. If the scope includes the core or `projects/forge/`, first
-   regenerate `README.md` by the `/render readme` procedure and
-   `RELEASE-NOTES.md` by the `/render release-notes` procedure
-   (released sections carried over verbatim, only the Unreleased
-   head recomposed) — unconditionally, no staleness test — and
-   report the steps, including a short summary of what materially
-   changed in the regenerated files (POS.0810): the principal rules
-   on the delta as part of the pre-save report. Other renders are
-   never regenerated here; they surface as ordinary check findings.
+2. For every repository in scope, first regenerate its README and
+   release notes from their recipes — unconditionally, no staleness
+   test — and report the steps, including a short summary of what
+   materially changed in the regenerated files (POS.0810,
+   POS.1000): the principal rules on the delta as part of the
+   pre-save report. The engine (core or `projects/forge/` touched):
+   `README.md` and `RELEASE-NOTES.md` at the repository root from
+   `projects/forge/recipes/`. A project: its `README.md` from
+   `recipes/readme.md` and, for a thought project, `RELEASE-NOTES.md`
+   from `recipes/release-notes.md` (released sections carried over
+   verbatim, only the Unreleased head recomposed). A project whose
+   recipe is missing is reported (a `/check` finding) and saved
+   without the render. Other renders are never regenerated here;
+   they surface as ordinary check findings.
 3. Report the result to the principal — always, even when clean.
 4. Clean check: state that the check passed and run the script.
 5. Findings: go through them with the principal iteratively — each

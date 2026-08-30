@@ -4,7 +4,7 @@ render: release-notes
 generated: 2026-08-30
 recipe: projects/forge/recipes/release-notes.md v0.2
 inputs:
-  - projects/forge/10-intent.md v3.0
+  - projects/forge/10-intent.md v3.1
   - projects/forge/decisions.md
   - RELEASE-NOTES.md (2026-08-30 edition — released sections)
 ---
@@ -15,6 +15,35 @@ An Unreleased section covering the changes since the last approved
 major, then one section per approved major version of the system,
 newest first. The fine-grained change log lives in
 `projects/forge/10-intent.md` (Version History).
+
+## Unreleased — 3.x since 3.0
+
+These changes are not yet approved; they cover intent version 3.1.
+
+**Every project gets a README and release notes.** The engine's own
+mechanism is generalised: every project has a README and, if it is a
+thought project, release notes — both renders of the project's own
+recipes (`recipes/readme.md`, `recipes/release-notes.md`, with
+`output:` in the project root), exactly as the engine has them. The
+recipe is what is iterated, the render is never edited by hand, and
+every save that touches the project regenerates both before the
+check. The ledger's Renders table carries them like any render
+(POS.1000).
+
+**A library has a README only.** Its README is a catalogue of what
+the library holds and how to use it, derived from its ledger and
+indexes. Release notes are distilled from an intent's Version History
+and decisions, which a library does not have; its history is git.
+
+**Genre skeletons scaffolded from the start.** The two recipes are
+genres of `/recipe`, with skeletons `templates/recipe-readme.md` and
+`templates/recipe-release-notes.md`; `/new-project` scaffolds them
+and `/check` expects them.
+
+**An optional project icon.** A project may carry `logo.png` in its
+root, supplied by the principal and picked up as the repository
+avatar by hosts that do so. A project without an icon is complete,
+and `/check` does not report its absence (POS.1010).
 
 ## 3.0 — 2026-08-30
 

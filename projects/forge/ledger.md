@@ -26,7 +26,7 @@ absorbed it; Note says what remains (partial) or the REJ (dropped). -->
 ## Documents
 | File | Version | Status | Date |
 |---|---|---|---|
-| 10-intent.md | 3.0 | approved | 2026-08-30 |
+| 10-intent.md | 3.1 | draft | 2026-08-30 |
 | 20-assignment.md | — | not planned: the handover artefacts of this project are the core itself (CLAUDE.md, templates/, .claude/) and README.md | — |
 | decisions.md | — | 8 records (DEC.0010–0080) | 2026-08-29 |
 
@@ -36,8 +36,8 @@ hand-edited: iterate the recipe, re-run /render. Row mirrors the
 render's front-matter provenance. -->
 | Render | Audience | Recipe | Inputs | Generated |
 |---|---|---|---|---|
-| README.md (repo root) | humans arriving at the repository | recipes/readme.md v0.25 | CLAUDE.md, 10-intent.md v3.0 | 2026-08-30 |
-| RELEASE-NOTES.md (repo root) | humans tracking the system's evolution | recipes/release-notes.md v0.2 | 10-intent.md v3.0, decisions.md, previous edition (2026-08-30) | 2026-08-30 |
+| README.md (repo root) | humans arriving at the repository | recipes/readme.md v0.25 | CLAUDE.md, 10-intent.md v3.1 | 2026-08-30 |
+| RELEASE-NOTES.md (repo root) | humans tracking the system's evolution | recipes/release-notes.md v0.2 | 10-intent.md v3.1, decisions.md, previous edition (2026-08-30) | 2026-08-30 |
 
 ## Sources
 <!-- Registration only; what a source is and is for lives in
