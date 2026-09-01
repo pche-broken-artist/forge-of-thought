@@ -2,8 +2,8 @@
 project: forge
 purpose: readme
 audience: humans arriving at the repository
-version: 0.29
-updated: 2026-09-01
+version: 0.31
+updated: 2026-09-02
 output: /README.md
 ---
 
@@ -120,7 +120,8 @@ front-matter, no status, no Version History — history lives in git. -->
   fenced block: **Starting a new project** — `/new-project my-idea`,
   `/forge intent`, `/save`; **Bringing an existing project** —
   `/import-project <project url>` (comment: clones into `projects/` —
-  your git configuration supplies the identity) and
+  the commit identity is proposed from your `CLAUDE.local.md` roster
+  and confirmed by you) and
   `/forge <project-slug>` (comment: the slug is the repository's
   name; select the project before any work — the forge cannot guess
   it). Closing
@@ -312,28 +313,27 @@ front-matter, no status, no Version History — history lives in git. -->
     the whole forge including the blind reviewers runs on; it tells
     you so in one sentence, and `/model` or editing that file
     changes it at any time (permissions come from the shared
-    `.claude/settings.json`). It closes by offering to write your
-    per-host git identity configuration from the interview's
-    identities — `~/.gitconfig-<host>` files plus `includeIf` blocks
-    appended to `~/.gitconfig` (git ≥ 2.36) — so every repository
-    commits with the right identity for its host; declined, it
-    prints the contents for you to apply by hand. `/setup` never
-    overwrites existing
+    `.claude/settings.json`). It closes by offering one global git
+    guard — `user.useConfigOnly = true` appended to `~/.gitconfig` —
+    so a repository without a local identity fails aloud instead of
+    committing with a default; declined, it prints the line for you
+    to apply by hand. The identities themselves are set per
+    repository, proposed from your roster at every project creation
+    or import. `/setup` never overwrites existing
     files. Upgrading the engine is
     `scripts/forge-pull.ps1` — a fast-forward of `main`; the projects
     are untouched by it.
   - "Your projects" — each project is a directory under `projects/`
     and a git repository of its own: `/new-project` creates the
     files; `git init` in that directory and a remote if wanted are a
-    one-off act of yours, while the commit identity follows the host —
-    resolved by your own git configuration (per-host conditional
-    includes recommended), a per-repository local identity as a
-    legitimate override. An
+    one-off act of yours, while the commit identity belongs to the
+    project: it is set locally in the repository, proposed from the
+    identity roster in `CLAUDE.local.md` by the origin's host and
+    confirmed by you. An
     existing project is brought in with `/import-project <git-url>`,
     which clones it into `projects/<repository name>` through
-    `scripts/forge-clone.ps1` and reports the identity git resolves
-    (the matching `CLAUDE.local.md` identity is offered only as a
-    fallback where none resolves). The
+    `scripts/forge-clone.ps1`, sets the identity you confirm and
+    reports the identity the clone ended up with. The
     engine ignores `projects/*` (except its own `projects/forge`)
     and the scripts find your project through its `.git`. A project
     without a repository is reported as "not under git" — a fact,

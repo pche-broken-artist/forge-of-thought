@@ -316,10 +316,13 @@ branches; every project under `projects/` is a repository of its own
 (gitignored by the engine, `projects/forge` excepted), recognised by
 the scripts through `projects/<slug>/.git`. Initialising a project's
 repository and adding its remote are the
-user's one-off act at creation; the commit identity follows the host,
-resolved by the user's own git configuration (per-host conditional
-includes recommended), with a per-repository local identity as a
-legitimate override. A project "not under git" is a
+user's one-off act at creation; the commit identity is a property of
+the project, set locally in the repository at its creation or import
+(proposed from the identity roster in `CLAUDE.local.md` by the
+origin's host, on the principal's word). The recommended global guard
+is `user.useConfigOnly = true` with no global `user.name`/`user.email`
+(offered by `/setup`), so a repository without a local identity fails
+aloud instead of taking a default. A project "not under git" is a
 property, not a defect. Four scripts are the only door to git —
 reading state included, no exceptions. Three of them serve the engine
 and every project repository: `scripts/forge-save.ps1` commits and
@@ -334,9 +337,9 @@ and the origin of each without changing anything. The fourth,
 `scripts/forge-clone.ps1`, brings an existing project in: it clones a
 repository into `projects/<repository name>`, never overwriting, and
 sets that repository's local commit identity only when given `-Name`
-and `-Email` (`/import-project` is its door; the identity is offered
-from `CLAUDE.local.md` only as a fallback where the per-host
-configuration resolves none). The scripts carry
+and `-Email` (`/import-project` is its door and passes them by
+default, proposed from `CLAUDE.local.md` by the URL's host on the
+principal's word). The scripts carry
 no URL and no identity. The engine receives a git tag at every
 approved major of the forge intent. Immutability of artefacts is a
 process rule, not a git mechanism.
@@ -473,9 +476,9 @@ after every operation.
 ## Commands
 | Command | Purpose |
 |---|---|
-| `/setup` | first run after cloning the engine: create and fill `CLAUDE.local.md` by interview, create `.claude/settings.local.json` with the model set to Fable (a notice, not a question), and offer to write the per-host git identity configuration (`~/.gitconfig` includes) from the interview's identities; never overwrites, runs no git operation |
+| `/setup` | first run after cloning the engine: create and fill `CLAUDE.local.md` by interview, create `.claude/settings.local.json` with the model set to Fable (a notice, not a question), and offer the global git identity guard (`user.useConfigOnly = true` in `~/.gitconfig`); never overwrites, runs no git operation |
 | `/new-project <slug>` | scaffold a project by kind — files only, never git: a thought project with its brief captured verbatim (locked if finished, draft otherwise), or a library (`lib-`) of shared material |
-| `/import-project <git-url>` | bring an existing project into `projects/` through `scripts/forge-clone.ps1` — the directory is the repository's name; your git configuration supplies the commit identity (offered from `CLAUDE.local.md` as a fallback) |
+| `/import-project <git-url>` | bring an existing project into `projects/` through `scripts/forge-clone.ps1` — the directory is the repository's name; the commit identity is set per repository, proposed from `CLAUDE.local.md` by the URL's host |
 | `/forge [slug]` | state map: artefacts, versions, possible next steps, stale renders |
 | `/forge <state> [slug]` | iterate the target artefact (`brief [name]`, `intent`, `assignment`, …); one definition file per state in `.claude/commands/forge/`, each declaring its inputs |
 | `/ingest [file] [slug]` | store and register external input in sources/ and index it; bare = sweep sources/ |

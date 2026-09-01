@@ -1,12 +1,12 @@
 ---
 project: forge
 render: release-notes
-generated: 2026-09-01
+generated: 2026-09-02
 recipe: projects/forge/recipes/release-notes.md v0.2
 inputs:
-  - projects/forge/10-intent.md v3.7
+  - projects/forge/10-intent.md v3.8
   - projects/forge/decisions.md
-  - RELEASE-NOTES.md (2026-08-30 edition — released sections)
+  - RELEASE-NOTES.md (2026-09-01 edition — released sections)
 ---
 
 # Forge of Thought — Release Notes
@@ -19,11 +19,11 @@ newest first. The fine-grained change log lives in
 ## Unreleased — 3.x since 3.0
 
 These changes are not yet approved; they cover intent versions 3.1 to
-3.7 — the first four made on the day of the 3.0 approval while the
+3.8 — the first four made on the day of the 3.0 approval while the
 first fresh deployment of the public engine was being prepared, the
-rest prompted by the first newcomer meeting it, by the day's check
-findings and by the question how the identity model reaches another
-user.
+next prompted by the first newcomer meeting it and by the day's check
+findings, and the last returning the commit identity to the project
+after a two-version excursion into a per-host model.
 
 **Every project gets a README and release notes.** The engine's own
 mechanism is generalised: every project has a README and, if it is a
@@ -79,8 +79,8 @@ the exact operation and its reason stated, a seen plan is not
 consent), the walkthrough's rule that an accept recommendation carries
 the concrete text the artefact would receive, and one research per
 question in `/research`. Instance facts that had lived in memory —
-the git identities per host — moved to `CLAUDE.local.md`. Memory is
-left with what is personal to one principal only (POS.1030).
+the git identities — moved to `CLAUDE.local.md`. Memory is left with
+what is personal to one principal only (POS.1030).
 
 **A source has one form.** A file in `sources/` is either text or a
 functional binary, never both by default. At `/ingest` every binary
@@ -110,22 +110,29 @@ creates `.claude/settings.local.json` with the session model set to
 Fable without asking: the recommendation embodied as the default,
 with one notice sentence naming the change path (`/model` or editing
 the file). Existing files are reported, never overwritten. The
-command is named `/setup`, not `/init`, over the collision with
-Claude Code's built-in command. Prompted by a newcomer observed
-struggling through the manual install steps (POS.1050).
+git-identities interview closes with one offer — the global identity
+guard described below — and `/setup` still runs no git operation:
+the user's git configuration file is the one thing it may edit
+outside the engine, on his word. The command is named `/setup`, not
+`/init`, over the collision with Claude Code's built-in command.
+Prompted by a newcomer observed struggling through the manual
+install steps (POS.1050).
 
 **An existing project arrives through one command too.**
 `/import-project <git-url>` brings an existing project in through the
 scripts-only git door: `scripts/forge-clone.ps1` — the fourth git
 script — clones into `projects/<repository name>`, with no slug
 parameter because the directory falls out of the repository's name,
-refuses to overwrite, and reports the last commit, the origin and
-whether a ledger with `kind:` is present. The clone runs bare by
-default and the script reports the commit identity git resolves for
-the fresh clone — or, truthfully, that `forge-save` will report and
-skip; passing an identity from `CLAUDE.local.md` (`-Name`/`-Email`)
-remains as the fallback for a machine without the per-host include
-(POS.1060).
+refuses to overwrite, and reports facts: the last commit, the origin,
+the commit identity git resolves for the fresh clone, and whether a
+ledger with `kind:` is present. The script carries no identity and
+sets the repository's local commit identity only when given `-Name`
+and `-Email`; the command layer passes them by default, proposing the
+matching identity from the roster in `CLAUDE.local.md` by the URL's
+host and confirming it on the principal's word — the clone runs bare
+only when the principal says his own git configuration resolves the
+identity. A clone left with no identity is caught by `forge-save`,
+which reports and commits nothing (POS.1060).
 
 **The chain drawn as a star, and an authorship boundary.** The
 README's Quickstart was rebuilt as a common head — clone, install
@@ -142,30 +149,31 @@ render is generated — an article the principal writes is a layer, its
 translation a render (POS.0710 extended); the sentence was carried
 into CLAUDE.md's chain section in the round that followed.
 
-**The commit identity follows the host, not the project.** POS.0950
-was rewritten to the per-host identity model in the walkthrough of the
-day's four open check findings, every verdict the principal's: git
-conditional includes (`includeIf "hasconfig:remote.*.url:…"`) in the
-user's own configuration resolve the right identity for every
-repository automatically, and a per-repository local identity stays
-as an override. `forge-save`'s effective-identity check is correct in
-this model and stays — the finding had proposed checking `--local`,
-and the principal's "one identity per host, independent of the
-project" won instead. CLAUDE.md's Persistence section carries the
-per-host wording. And the model travels: `/setup` closes its
-git-identities interview by offering the per-host configuration —
-it generates one `~/.gitconfig-<host>` file per identity and the
-`includeIf` block, and on the user's word writes the files and
-appends the block to the end of `~/.gitconfig`, never overwriting
-existing content and appended last so a matching host overrides a
-global `[user]` default; declined, it prints them for the user to
-apply by hand. `/setup` still runs no git operation — the user's git
-identity configuration is the one thing it may write outside the
-engine, on his word. Raised by the principal's question how the
-per-host model reaches another user when the identity files cannot
-live in the repository: the engine carries the mechanism, `/setup`
-carries it to the user, the values stay the user's (POS.1050
-extended).
+**The commit identity settles on the project.** POS.0950 was
+rewritten twice in the span and ends where it began at 3.0: the
+commit identity is a property of the project, not of the host. Mid
+span the walkthrough of the day's check findings adopted a per-host
+model — git conditional includes (`includeIf`) in the user's own
+configuration resolving the identity by each repository's host, with
+`/setup` generating `~/.gitconfig-<host>` files and appending the
+include block. At 3.8 that model was dropped on the principal's
+decision: the host is only a correlate of the identity and fails
+exactly where one host serves two roles — a personal and a company
+organisation on the same github.com — and writing `~/.gitconfig-<host>`
+files reached beyond the engine's boundary. Instead the identity is
+set locally in every repository at its creation or import, proposed
+by the command layer from the identity roster in `CLAUDE.local.md` —
+matched by the origin's host as an offer, never a rule — and set on
+the principal's word. The one global guard, now `/setup`'s closing
+offer, is `user.useConfigOnly = true` with no global
+`user.name`/`user.email`, so that a commit in a repository without a
+local identity fails aloud instead of silently taking a default;
+where a global identity survives, the guard is defeated and `/setup`
+says so, offering the removal only on the user's word. A user's own
+configuration — per-host includes included — remains his business and
+a legitimate way to resolve an identity; `forge-save`'s
+effective-identity check stays, and the scripts are unchanged
+(POS.0950 rewritten, POS.1050 narrowed, POS.1060 aligned).
 
 ## 3.0 — 2026-08-30
 

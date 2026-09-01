@@ -1,7 +1,7 @@
 ---
 project: forge
 kind: thought
-updated: 2026-09-01
+updated: 2026-09-02
 ---
 
 # Ledger — Forge of Thought
@@ -26,7 +26,7 @@ absorbed it; Note says what remains (partial) or the REJ (dropped). -->
 ## Documents
 | File | Version | Status | Date |
 |---|---|---|---|
-| 10-intent.md | 3.7 | draft | 2026-09-01 |
+| 10-intent.md | 3.8 | draft | 2026-09-02 |
 | 20-assignment.md | — | not planned: the handover artefacts of this project are the core itself (CLAUDE.md, templates/, .claude/) and README.md | — |
 | decisions.md | — | 8 records (DEC.0010–0080) | 2026-08-29 |
 
@@ -36,8 +36,8 @@ hand-edited: iterate the recipe, re-run /render. Row mirrors the
 render's front-matter provenance. -->
 | Render | Audience | Recipe | Inputs | Generated |
 |---|---|---|---|---|
-| README.md (repo root) | humans arriving at the repository | recipes/readme.md v0.29 | CLAUDE.md, 10-intent.md v3.7 | 2026-09-01 |
-| RELEASE-NOTES.md (repo root) | humans tracking the system's evolution | recipes/release-notes.md v0.2 | 10-intent.md v3.7, decisions.md, previous edition (2026-08-30, released sections) | 2026-09-01 |
+| README.md (repo root) | humans arriving at the repository | recipes/readme.md v0.31 | CLAUDE.md, 10-intent.md v3.8 | 2026-09-02 |
+| RELEASE-NOTES.md (repo root) | humans tracking the system's evolution | recipes/release-notes.md v0.2 | 10-intent.md v3.8, decisions.md, previous edition (2026-09-01, released sections) | 2026-09-02 |
 | renders/executive-pitch.md | C-level executives whose experience of AI is chatting with it | recipes/executive-pitch.md v0.1 | 10-intent.md, CLAUDE.md | — (not yet rendered) |
 
 ## Sources

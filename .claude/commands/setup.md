@@ -1,5 +1,5 @@
 ---
-description: First run after cloning the engine — fill CLAUDE.local.md by interview, set the session model (Fable), offer the per-host git identity configuration; never overwrites, runs no git operation
+description: First run after cloning the engine — fill CLAUDE.local.md by interview, set the session model (Fable), offer the global git identity guard; never overwrites, runs no git operation
 ---
 
 Prepare this instance of the forge (POS.1050). Run after cloning the
@@ -20,21 +20,25 @@ speak whatever language the user speaks to you.
        conversation runs in (artefacts are always English, briefs
        verbatim);
      - **Git identities** — name and e-mail per git host the user
-       will push to (e.g. github.com, a company host). May be left
+       will push to (e.g. github.com, a company host). This is the
+       roster from which per-repository identities are proposed at
+       every project creation or import (POS.0950). May be left
        empty and added later; say so.
    - Keep the template's format; the file is gitignored and never
      committed.
    - Close the git-identities part with an offer (POS.1050,
-     POS.0950): generate one `~/.gitconfig-<host>` file per identity
-     (`[user]` name and email) and the matching
-     `includeIf "hasconfig:remote.*.url:…"` block (both the https
-     and the ssh URL form per host), and on the user's word write
-     the files and append the block to the END of `~/.gitconfig` —
-     read it first, never overwrite existing content; appended last,
-     a matching host overrides a global `[user]` default. Declined:
-     print the contents for the user to apply by hand. This is the
-     one write outside the engine; it is a configuration text file,
-     not a git operation. Requires git ≥ 2.36 — say so.
+     POS.0950): the global guard `user.useConfigOnly = true` under
+     `[user]` in `~/.gitconfig`, appended on the user's word — read
+     the file first, never overwrite existing content. With it, a
+     commit in a repository with no local identity fails aloud
+     instead of silently taking a default; the identity itself is
+     set per repository at creation or import, proposed from the
+     roster above. Where `~/.gitconfig` carries a global `user.name`
+     or `user.email`, say the guard only bites once that identity is
+     removed, and offer the removal — again only on the user's word.
+     Declined: print the lines for the user to apply by hand. This
+     is the one edit outside the engine; it is a configuration text
+     file, not a git operation.
 2. **`.claude/settings.local.json`**.
    - If it already exists: report the model it names and do not touch
      it.
