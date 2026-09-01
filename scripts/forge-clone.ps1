@@ -10,9 +10,10 @@
     URL, and an existing directory is never overwritten. With -Name
     and -Email (both or neither) the repository's local commit
     identity is set; the script itself carries no identity and no URL.
-    Afterwards it reports facts: the last commit, the origin, and
-    whether the project carries a ledger with a kind: header - the
-    absence of one is a fact, not a defect.
+    Afterwards it reports facts: the last commit, the origin, the
+    commit identity git resolves for the fresh clone, and whether the
+    project carries a ledger with a kind: header - the absence of one
+    is a fact, not a defect.
 
 .EXAMPLE
     ./scripts/forge-clone.ps1 https://example.com/team/my-idea.git
@@ -66,7 +67,13 @@ Write-Host "  last commit: $last"
 if ($Name) {
     Write-Host "  identity:    $Name <$Email> (set locally)"
 } else {
-    Write-Host '  identity:    not set - forge-save will ask before the first commit'
+    $idName = git -C $target config user.name 2>$null
+    $idEmail = git -C $target config user.email 2>$null
+    if ($idName -and $idEmail) {
+        Write-Host "  identity:    $idName <$idEmail> (from your git configuration)"
+    } else {
+        Write-Host '  identity:    not set - forge-save will report it and skip the commit'
+    }
 }
 
 $ledger = Join-Path $target 'ledger.md'

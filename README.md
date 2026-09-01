@@ -2,13 +2,13 @@
 project: forge
 render: readme
 generated: 2026-09-01
-recipe: recipes/readme.md v0.27
+recipe: recipes/readme.md v0.28
 inputs:
   - CLAUDE.md
-  - projects/forge/10-intent.md v3.5
+  - projects/forge/10-intent.md v3.6
 ---
 
-# Forge of Thought 3.5
+# Forge of Thought 3.6
 
 *A workshop where thought is tempered and shaped.* · [Release notes](RELEASE-NOTES.md)
 
@@ -92,7 +92,7 @@ claude             # always from the engine root
 **Bringing an existing project**
 
 ```
-/import-project <project url>   # clones into projects/, offers your commit identity
+/import-project <project url>   # clones into projects/ — your git configuration supplies the identity
 /forge my-idea                  # select the project before any work — the forge cannot guess it
 ```
 
@@ -372,7 +372,7 @@ job.
 |---|---|
 | `/setup` | First run after cloning the engine: creates and fills `CLAUDE.local.md` by interview and creates `.claude/settings.local.json` with the model set to Fable — a notice, not a question. Never overwrites, never touches git. |
 | `/new-project <slug>` | Scaffold a project by kind — files only, never git: a thought project with its brief, or a library (`lib-`) of shared material. |
-| `/import-project <git-url>` | Bring an existing project into `projects/` through `scripts/forge-clone.ps1` — the directory is the repository's name; your commit identity is offered from `CLAUDE.local.md`. |
+| `/import-project <git-url>` | Bring an existing project into `projects/` through `scripts/forge-clone.ps1` — the directory is the repository's name; your git configuration supplies the commit identity (offered from `CLAUDE.local.md` as a fallback). |
 | `/forge [slug]` | The chain map: artefacts, versions, stale renders and a recommended next step. |
 | `/forge <state> [slug]` | Work on the named artefact — the command is simply the name of what you want to work on (`brief [name]`, `intent`, `assignment`, …). |
 | `/ingest [file] [slug]` | Store and register an external input in `sources/` and index it; bare, it sweeps `sources/` for unregistered files. |
@@ -589,11 +589,15 @@ are untouched by it.
 
 Each project is a directory under `projects/` and a git repository
 of its own: `/new-project` creates the files, and `git init` in
-that directory, a remote if you want one and the commit identity
-for that host are a one-off act of yours. An existing project is
-brought in with `/import-project <git-url>`, which clones it into
-`projects/<repository name>` through `scripts/forge-clone.ps1` and
-offers to set your commit identity from `CLAUDE.local.md`. The
+that directory and a remote if you want one are a one-off act of
+yours. The commit identity follows the host, resolved by your own
+git configuration — per-host conditional includes recommended —
+with a per-repository local identity as a legitimate override. An
+existing project is brought in with `/import-project <git-url>`,
+which clones it into `projects/<repository name>` through
+`scripts/forge-clone.ps1`; the script reports which identity git
+resolves for the fresh clone, and where none resolves, the matching
+identity from `CLAUDE.local.md` is offered as the fallback. The
 engine ignores `projects/*` (except its own `projects/forge`), and
 the scripts find your project through its `.git`. A project without
 a repository is reported as "not under git" — a fact, not an error.
@@ -631,7 +635,7 @@ no URL lives anywhere in the forge — git carries that itself.
 | `forge-save.ps1` | Commits and pushes — bare, every repository with changes, each its own commit; with a slug, that one (`forge` meaning the engine); reconciles remote changes by rebase and prints the commit's file summary. | At every save, normally through `/save`. |
 | `forge-pull.ps1` | Fast-forwards from the remotes, never touching a repository with unsaved changes; on the engine it is the upgrade channel. | When syncing a machine or upgrading the engine. |
 | `forge-status.ps1` | Reports unsaved changes, the last commit and the origin of each repository, changing nothing. | Whenever state is read. |
-| `forge-clone.ps1` | Clones an existing project into `projects/<repository name>`, never overwriting, and sets that repository's commit identity when given one. | Through `/import-project`. |
+| `forge-clone.ps1` | Clones an existing project into `projects/<repository name>`, never overwriting, reporting the commit identity git resolves; sets a local identity only when given one. | Through `/import-project`. |
 | `doc2md.ps1` | Converts a binary document to a Markdown extract (engine: markitdown — install note in Setup). | Through `/ingest`, on binaries the principal chooses to convert. |
 | `md2pptx.ps1` | Turns a Markdown deck render into a `.pptx` through headless Claude Code with the official pptx skill (install note in Setup). | After rendering a deck, when the actual file is wanted. |
 

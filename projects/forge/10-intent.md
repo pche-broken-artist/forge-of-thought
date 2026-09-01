@@ -1,5 +1,5 @@
 ---
-version: 3.5
+version: 3.6
 date: 2026-09-01
 status: draft
 project: forge
@@ -11,6 +11,7 @@ audience: principal + Claude only
 ## Version History
 | Version | Modification | Author | Date |
 |---|---|---|---|
+| 3.6 | The four open findings of the day's pre-save `/check-forge` walked through, every verdict the principal's. POS.0950 rewritten to the per-host identity model — the commit identity follows the host, not the project: git conditional includes (`includeIf "hasconfig:remote.*.url:…"`) in the user's own configuration resolve the right identity for every repository automatically, a per-repository local identity stays as an override; `forge-save`'s effective-identity check is correct in this model and stays (the finding had proposed `--local`; the principal's "one identity per host, independent of the project" won instead). POS.1000: the engine's own README exempted from the fixed closing sentence — it is the sentence's destination. POS.1060: `/import-project` runs the clone bare by default and the script reports the identity git resolves; `-Name`/`-Email` remains as the fallback for a machine without the per-host include. `forge-clone.ps1` reports the identity git actually resolves for the fresh clone, or truthfully that forge-save will report and skip. CLAUDE.md gains the POS.0710 authorship boundary sentence in the chain section and the per-host wording in Persistence. | Claude | 2026-09-01 |
 | 3.5 | First run and project arrival made one command each, prompted by a newcomer observed struggling through the manual install steps. POS.1050 (new): `/setup` — after cloning the engine, one command copies `templates/CLAUDE.local.md` to the root and fills it by interview (principal, conversation language, git identities) and creates `.claude/settings.local.json` with the session model set to Fable without asking — the recommendation embodied as the default, one notice sentence naming the change path (`/model` or editing the file); existing files are reported, never overwritten; named `/setup`, not `/init`, over the collision with Claude Code's built-in. POS.1060 (new): `/import-project <git-url>` — an existing project arrives through the scripts-only git door: `scripts/forge-clone.ps1` (the fourth git script; POS.0550 extended) clones into `projects/<repository name>` — no slug parameter, the directory falls out of the repository's name — refuses to overwrite, and reports the last commit, the origin and whether a ledger with `kind:` is present; the script carries no identity — the command proposes the matching one from `CLAUDE.local.md` and passes `-Name`/`-Email` on the principal's word. POS.0950 aligned (CLAUDE.local.md is created and filled by `/setup`). Readme recipe 0.27: Quickstart rebuilt as a common head (clone, install Claude Code, `claude` from the root, `/setup`) plus two named paths — starting a new project and bringing an existing one, with selecting the project (`/forge <slug>`) visible as the first act of work; Setup sections aligned. In the same round, POS.0710 extended with the authorship boundary — a chain artefact is composed by the principal, a render is generated (an article the principal writes is a layer, its translation a render) — raised when the README's chain diagram was redrawn from a line into the star: solid what is built today, dashed a fixed set of illustrative future layers (business analysis, an RFP, an article with its translation render, strategy, solution design, an implementation deck), visibly marked as not existing yet. | Claude | 2026-09-01 |
 | 3.4 | A source has one form (POS.1040): at `/ingest` every binary file gets one question — convert to Markdown? — and is then either a text extract `<slug>.md` (tracked, registered, indexed, immutable; the original not copied, or gitignored where it already lies in `sources/`) or a functional binary (a template, a graphic) kept as is; both only on the principal's explicit word. POS.0180 aligned: no `.extract.md` sibling by default, the ledger's Extract column becomes Form. Transition at the principal's decision: existing extracts keep their names, existing binaries with an extract leave git on his word. Raised on the reference-pack index finding of the day's `/check`. POS.1000 extended: every project README closes with the fixed sentence that reading needs nothing and maintaining needs Forge of Thought, linked. POS.0810 extended: renders are regenerated only by `/save` or an explicit `/render`, never on Claude's own judgement. | Claude | 2026-08-30 |
 | 3.3 | What was living in Claude Code's private memory of this instance and belongs to the forge moved into the engine (POS.1030): the working method Step by step (one consent-needing action at a time, exact operation and reason stated, a seen plan is not consent), the walkthrough's rule that an accept recommendation carries the concrete text, and one-research-one-question in `/research`; instance facts that were in memory — the git identities per host — moved to `CLAUDE.local.md`. Memory is left with what is personal to the principal only. | Claude | 2026-08-30 |
@@ -790,12 +791,19 @@ position that already stands elsewhere.
   artefact language stays English (THR.0180). The scripts carry no URL
   and no identity (POS.0830). Resolves the scripts part of THR.0090; the
   thread is otherwise untouched.
-  The commit identity is set per repository, locally, as part of the
-  one-off act that creates it (`git init`, the remote, the identity for
-  that host) — never inherited from the global configuration by default,
-  since one machine serves hosts with different identities; a repository
-  whose identity is missing is reported by `forge-save` with the command
-  to set it, and nothing is committed until it is.
+  The commit identity follows the host, not the project: one machine
+  serves hosts with different identities, so the recommended mechanism
+  is git's conditional include in the user's own configuration —
+  `includeIf "hasconfig:remote.*.url:…"` blocks, one per host
+  (git ≥ 2.36) — so that every repository, a fresh `/import-project`
+  clone included, resolves the right identity from its origin
+  automatically and no accidental default exists to leak. A
+  per-repository local identity remains a legitimate override.
+  `forge-save` checks that git resolves an identity for the
+  repository and, where it resolves none, reports it with the command
+  to set one and commits nothing until it is. Rewritten at 3.6 from
+  the per-repository rule adopted at 3.0, on the principal's model:
+  one identity per host, independent of the project.
 - **POS.0930** One model for the whole forge. Every command, chain
   state and reviewer runs on the session model; the reviewer agents
   declare `model: inherit` explicitly, so that the strongest model
@@ -940,7 +948,9 @@ position that already stands elsewhere.
   viewer, maintaining and evolving it needs Forge of Thought — the
   engine, linked (github.com/pche-broken-artist/forge-of-thought) —
   so that whoever finds the project knows what runs it (principal's
-  decision 2026-08-30).
+  decision 2026-08-30). The engine's own README is the one exception:
+  the sentence exists to point a visitor to the engine, and the
+  engine's README is that destination (3.6).
 - **POS.1010** A project may carry an icon: `logo.png` in the project
   root, supplied by the principal, picked up as the repository avatar by
   hosts that do so. Optional — a project without an icon is complete;
@@ -1023,13 +1033,19 @@ position that already stands elsewhere.
   parameter: the directory falls out of the repository's name, and a
   nonconforming name is fixed by renaming the directory afterwards —
   refuses to overwrite an existing directory, and reports facts: the
-  last commit, the origin, and whether the project carries a ledger
+  last commit, the origin, the commit identity git resolves for the
+  fresh clone, and whether the project carries a ledger
   with a `kind:` header (its absence is a fact, not a defect). The
   script carries no identity (POS.0830): it accepts `-Name` and
   `-Email` and sets the repository's local commit identity only when
-  given both. The command layer reads the git identities in
-  `CLAUDE.local.md`, proposes the one matching the URL's host and
-  passes it on the principal's word (POS.0950). Work then starts by
+  given both. The command layer runs the script bare by default —
+  with the per-host configuration of POS.0950 the clone resolves the
+  right identity itself and the script reports which; the
+  `-Name`/`-Email` pass-through remains as the fallback for a machine
+  without the per-host include, proposed from the git identities in
+  `CLAUDE.local.md` on the principal's word, and a clone left with no
+  identity is caught by `forge-save`, which reports and commits
+  nothing (POS.0950). Work then starts by
   selecting the project — `/forge <slug>` — because the engine does
   not track it and cannot guess it.
 ## Open threads

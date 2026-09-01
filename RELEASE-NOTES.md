@@ -4,7 +4,7 @@ render: release-notes
 generated: 2026-09-01
 recipe: projects/forge/recipes/release-notes.md v0.2
 inputs:
-  - projects/forge/10-intent.md v3.5
+  - projects/forge/10-intent.md v3.6
   - projects/forge/decisions.md
   - RELEASE-NOTES.md (2026-08-30 edition — released sections)
 ---
@@ -19,9 +19,10 @@ newest first. The fine-grained change log lives in
 ## Unreleased — 3.x since 3.0
 
 These changes are not yet approved; they cover intent versions 3.1 to
-3.5 — the first four made on the day of the 3.0 approval while the
+3.6 — the first four made on the day of the 3.0 approval while the
 first fresh deployment of the public engine was being prepared, the
-fifth prompted by the first newcomer meeting it.
+last two prompted by the first newcomer meeting it and by the day's
+check findings.
 
 **Every project gets a README and release notes.** The engine's own
 mechanism is generalised: every project has a README and, if it is a
@@ -35,7 +36,8 @@ library has a README only — a catalogue of what it holds — since
 release notes are distilled from an intent's Version History and
 decisions, which a library does not have. Every project README closes
 with the fixed sentence that reading it needs nothing and maintaining
-it needs Forge of Thought, linked (POS.1000).
+it needs Forge of Thought, linked — the engine's own README excepted,
+being that sentence's destination (POS.1000).
 
 **Genre skeletons scaffolded from the start.** `readme` and
 `release-notes` are genres of `/recipe`, with skeletons
@@ -117,9 +119,12 @@ scripts-only git door: `scripts/forge-clone.ps1` — the fourth git
 script — clones into `projects/<repository name>`, with no slug
 parameter because the directory falls out of the repository's name,
 refuses to overwrite, and reports the last commit, the origin and
-whether a ledger with `kind:` is present. The script carries no
-identity; the command proposes the matching one from
-`CLAUDE.local.md` and passes it on the principal's word (POS.1060).
+whether a ledger with `kind:` is present. The clone runs bare by
+default and the script reports the commit identity git resolves for
+the fresh clone — or, truthfully, that `forge-save` will report and
+skip; passing an identity from `CLAUDE.local.md` (`-Name`/`-Email`)
+remains as the fallback for a machine without the per-host include
+(POS.1060).
 
 **The chain drawn as a star, and an authorship boundary.** The
 README's Quickstart was rebuilt as a common head — clone, install
@@ -133,7 +138,20 @@ strategy, solution design, an implementation deck — visibly marked as
 not existing yet. Raised on the way, the render concept gained its
 authorship boundary: a chain artefact is composed by the principal, a
 render is generated — an article the principal writes is a layer, its
-translation a render (POS.0710 extended).
+translation a render (POS.0710 extended); the sentence was carried
+into CLAUDE.md's chain section in the round that followed.
+
+**The commit identity follows the host, not the project.** POS.0950
+was rewritten to the per-host identity model in the walkthrough of the
+day's four open check findings, every verdict the principal's: git
+conditional includes (`includeIf "hasconfig:remote.*.url:…"`) in the
+user's own configuration resolve the right identity for every
+repository automatically, and a per-repository local identity stays
+as an override. `forge-save`'s effective-identity check is correct in
+this model and stays — the finding had proposed checking `--local`,
+and the principal's "one identity per host, independent of the
+project" won instead. CLAUDE.md's Persistence section carries the
+per-host wording.
 
 ## 3.0 — 2026-08-30
 

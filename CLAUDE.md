@@ -216,7 +216,10 @@ ledger.md        single source of truth for state
    date in front-matter, no status and no Version History — their
    change history lives in git. A render assigns
    nothing and is not part of the chain: the artefacts stay the source
-   of truth. Everything is Markdown, content only. The one in-house
+   of truth. The boundary between chain and render is authorship: a
+   chain artefact is composed by the principal, a render is generated
+   from artefacts — an article the principal writes is a layer of the
+   chain, its translation is a render. Everything is Markdown, content only. The one in-house
    conversion is `scripts/md2pptx.ps1`: it turns a Markdown deck
    render into a `.pptx` through headless Claude Code with the
    official pptx skill (plugin `document-skills` from the
@@ -312,8 +315,11 @@ The engine is one git repository with a remote, `main` only — no
 branches; every project under `projects/` is a repository of its own
 (gitignored by the engine, `projects/forge` excepted), recognised by
 the scripts through `projects/<slug>/.git`. Initialising a project's
-repository, adding its remote and setting its commit identity are the
-user's one-off act at creation; a project "not under git" is a
+repository and adding its remote are the
+user's one-off act at creation; the commit identity follows the host,
+resolved by the user's own git configuration (per-host conditional
+includes recommended), with a per-repository local identity as a
+legitimate override. A project "not under git" is a
 property, not a defect. Four scripts are the only door to git —
 reading state included, no exceptions. Three of them serve the engine
 and every project repository: `scripts/forge-save.ps1` commits and
@@ -328,8 +334,9 @@ and the origin of each without changing anything. The fourth,
 `scripts/forge-clone.ps1`, brings an existing project in: it clones a
 repository into `projects/<repository name>`, never overwriting, and
 sets that repository's local commit identity only when given `-Name`
-and `-Email` (`/import-project` is its door, offering the identity
-from `CLAUDE.local.md`). The scripts carry
+and `-Email` (`/import-project` is its door; the identity is offered
+from `CLAUDE.local.md` only as a fallback where the per-host
+configuration resolves none). The scripts carry
 no URL and no identity. The engine receives a git tag at every
 approved major of the forge intent. Immutability of artefacts is a
 process rule, not a git mechanism.
@@ -468,7 +475,7 @@ after every operation.
 |---|---|
 | `/setup` | first run after cloning the engine: create and fill `CLAUDE.local.md` by interview, create `.claude/settings.local.json` with the model set to Fable (a notice, not a question); never overwrites, never touches git |
 | `/new-project <slug>` | scaffold a project by kind — files only, never git: a thought project with its brief captured verbatim (locked if finished, draft otherwise), or a library (`lib-`) of shared material |
-| `/import-project <git-url>` | bring an existing project into `projects/` through `scripts/forge-clone.ps1` — the directory is the repository's name; the commit identity is offered from `CLAUDE.local.md` |
+| `/import-project <git-url>` | bring an existing project into `projects/` through `scripts/forge-clone.ps1` — the directory is the repository's name; your git configuration supplies the commit identity (offered from `CLAUDE.local.md` as a fallback) |
 | `/forge [slug]` | state map: artefacts, versions, possible next steps, stale renders |
 | `/forge <state> [slug]` | iterate the target artefact (`brief [name]`, `intent`, `assignment`, …); one definition file per state in `.claude/commands/forge/`, each declaring its inputs |
 | `/ingest [file] [slug]` | store and register external input in sources/ and index it; bare = sweep sources/ |

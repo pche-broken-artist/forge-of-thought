@@ -2,7 +2,7 @@
 project: forge
 purpose: readme
 audience: humans arriving at the repository
-version: 0.27
+version: 0.28
 updated: 2026-09-01
 output: /README.md
 ---
@@ -119,8 +119,8 @@ front-matter, no status, no Version History — history lives in git. -->
   sets the model, Fable). Then two bold-led paths, each its own
   fenced block: **Starting a new project** — `/new-project my-idea`,
   `/forge intent`, `/save`; **Bringing an existing project** —
-  `/import-project <project url>` (comment: clones into `projects/`,
-  offers your commit identity) and `/forge my-idea` (comment: select
+  `/import-project <project url>` (comment: clones into `projects/` —
+  your git configuration supplies the identity) and `/forge my-idea` (comment: select
   the project before any work — the forge cannot guess it). Closing
   sentence: each project lives inside `projects/<slug>/` as a git
   repository of its own, which the engine does not track — that is
@@ -316,12 +316,16 @@ front-matter, no status, no Version History — history lives in git. -->
     are untouched by it.
   - "Your projects" — each project is a directory under `projects/`
     and a git repository of its own: `/new-project` creates the
-    files; `git init` in that directory, a remote if wanted and the
-    commit identity for that host are a one-off act of yours. An
+    files; `git init` in that directory and a remote if wanted are a
+    one-off act of yours, while the commit identity follows the host —
+    resolved by your own git configuration (per-host conditional
+    includes recommended), a per-repository local identity as a
+    legitimate override. An
     existing project is brought in with `/import-project <git-url>`,
     which clones it into `projects/<repository name>` through
-    `scripts/forge-clone.ps1` and offers to set your commit identity
-    from CLAUDE.local.md. The
+    `scripts/forge-clone.ps1` and reports the identity git resolves
+    (the matching `CLAUDE.local.md` identity is offered only as a
+    fallback where none resolves). The
     engine ignores `projects/*` (except its own `projects/forge`)
     and the scripts find your project through its `.git`. A project
     without a repository is reported as "not under git" — a fact,
