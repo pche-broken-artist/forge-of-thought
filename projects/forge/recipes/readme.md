@@ -2,7 +2,7 @@
 project: forge
 purpose: readme
 audience: humans arriving at the repository
-version: 0.28
+version: 0.29
 updated: 2026-09-01
 output: /README.md
 ---
@@ -120,8 +120,10 @@ front-matter, no status, no Version History — history lives in git. -->
   fenced block: **Starting a new project** — `/new-project my-idea`,
   `/forge intent`, `/save`; **Bringing an existing project** —
   `/import-project <project url>` (comment: clones into `projects/` —
-  your git configuration supplies the identity) and `/forge my-idea` (comment: select
-  the project before any work — the forge cannot guess it). Closing
+  your git configuration supplies the identity) and
+  `/forge <project-slug>` (comment: the slug is the repository's
+  name; select the project before any work — the forge cannot guess
+  it). Closing
   sentence: each project lives inside `projects/<slug>/` as a git
   repository of its own, which the engine does not track — that is
   why you name it first.
@@ -310,7 +312,13 @@ front-matter, no status, no Version History — history lives in git. -->
     the whole forge including the blind reviewers runs on; it tells
     you so in one sentence, and `/model` or editing that file
     changes it at any time (permissions come from the shared
-    `.claude/settings.json`). `/setup` never overwrites existing
+    `.claude/settings.json`). It closes by offering to write your
+    per-host git identity configuration from the interview's
+    identities — `~/.gitconfig-<host>` files plus `includeIf` blocks
+    appended to `~/.gitconfig` (git ≥ 2.36) — so every repository
+    commits with the right identity for its host; declined, it
+    prints the contents for you to apply by hand. `/setup` never
+    overwrites existing
     files. Upgrading the engine is
     `scripts/forge-pull.ps1` — a fast-forward of `main`; the projects
     are untouched by it.
@@ -399,7 +407,7 @@ repository → install Claude Code (see Setup) → claude from the
 engine root → /setup; then two bold-led paths, each a fenced block:
 Starting a new project (/new-project my-idea → /forge intent →
 /save) and Bringing an existing project (/import-project
-<project url> → /forge my-idea, with the select-before-work
+<project url> → /forge <project-slug>, with the select-before-work
 comment); one closing sentence: each project is a repository of its
 own inside projects/, untracked by the engine — that is why you name
 it first>

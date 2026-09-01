@@ -2,13 +2,13 @@
 project: forge
 render: readme
 generated: 2026-09-01
-recipe: recipes/readme.md v0.28
+recipe: recipes/readme.md v0.29
 inputs:
   - CLAUDE.md
-  - projects/forge/10-intent.md v3.6
+  - projects/forge/10-intent.md v3.7
 ---
 
-# Forge of Thought 3.6
+# Forge of Thought 3.7
 
 *A workshop where thought is tempered and shaped.* · [Release notes](RELEASE-NOTES.md)
 
@@ -93,7 +93,7 @@ claude             # always from the engine root
 
 ```
 /import-project <project url>   # clones into projects/ — your git configuration supplies the identity
-/forge my-idea                  # select the project before any work — the forge cannot guess it
+/forge <project-slug>           # the slug is the repository's name; select the project before any work — the forge cannot guess it
 ```
 
 Each project lives inside `projects/<slug>/` as a git repository of
@@ -370,7 +370,7 @@ job.
 
 | Command | Purpose |
 |---|---|
-| `/setup` | First run after cloning the engine: creates and fills `CLAUDE.local.md` by interview and creates `.claude/settings.local.json` with the model set to Fable — a notice, not a question. Never overwrites, never touches git. |
+| `/setup` | First run after cloning the engine: creates and fills `CLAUDE.local.md` by interview, creates `.claude/settings.local.json` with the model set to Fable — a notice, not a question — and offers to write the per-host git identity configuration (`~/.gitconfig` includes) from the interview's identities. Never overwrites, runs no git operation. |
 | `/new-project <slug>` | Scaffold a project by kind — files only, never git: a thought project with its brief, or a library (`lib-`) of shared material. |
 | `/import-project <git-url>` | Bring an existing project into `projects/` through `scripts/forge-clone.ps1` — the directory is the repository's name; your git configuration supplies the commit identity (offered from `CLAUDE.local.md` as a fallback). |
 | `/forge [slug]` | The chain map: artefacts, versions, stale renders and a recommended next step. |
@@ -581,9 +581,14 @@ session model set to Fable, the strongest available model, which
 the whole forge including the blind reviewers runs on. It tells you
 so in one sentence, and `/model` or editing that file changes it at
 any time (permissions come from the shared `.claude/settings.json`).
-`/setup` never overwrites existing files. Upgrading the engine is
-`scripts/forge-pull.ps1` — a fast-forward of `main`; your projects
-are untouched by it.
+It closes by offering to write your per-host git identity
+configuration from the interview's identities —
+`~/.gitconfig-<host>` files plus `includeIf` blocks appended to
+`~/.gitconfig` (git ≥ 2.36) — so every repository commits with the
+right identity for its host; declined, it prints the contents for
+you to apply by hand. `/setup` never overwrites existing files.
+Upgrading the engine is `scripts/forge-pull.ps1` — a fast-forward
+of `main`; your projects are untouched by it.
 
 ### Your projects
 

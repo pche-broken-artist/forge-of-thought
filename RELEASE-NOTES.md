@@ -4,7 +4,7 @@ render: release-notes
 generated: 2026-09-01
 recipe: projects/forge/recipes/release-notes.md v0.2
 inputs:
-  - projects/forge/10-intent.md v3.6
+  - projects/forge/10-intent.md v3.7
   - projects/forge/decisions.md
   - RELEASE-NOTES.md (2026-08-30 edition — released sections)
 ---
@@ -19,10 +19,11 @@ newest first. The fine-grained change log lives in
 ## Unreleased — 3.x since 3.0
 
 These changes are not yet approved; they cover intent versions 3.1 to
-3.6 — the first four made on the day of the 3.0 approval while the
+3.7 — the first four made on the day of the 3.0 approval while the
 first fresh deployment of the public engine was being prepared, the
-last two prompted by the first newcomer meeting it and by the day's
-check findings.
+rest prompted by the first newcomer meeting it, by the day's check
+findings and by the question how the identity model reaches another
+user.
 
 **Every project gets a README and release notes.** The engine's own
 mechanism is generalised: every project has a README and, if it is a
@@ -151,7 +152,20 @@ as an override. `forge-save`'s effective-identity check is correct in
 this model and stays — the finding had proposed checking `--local`,
 and the principal's "one identity per host, independent of the
 project" won instead. CLAUDE.md's Persistence section carries the
-per-host wording.
+per-host wording. And the model travels: `/setup` closes its
+git-identities interview by offering the per-host configuration —
+it generates one `~/.gitconfig-<host>` file per identity and the
+`includeIf` block, and on the user's word writes the files and
+appends the block to the end of `~/.gitconfig`, never overwriting
+existing content and appended last so a matching host overrides a
+global `[user]` default; declined, it prints them for the user to
+apply by hand. `/setup` still runs no git operation — the user's git
+identity configuration is the one thing it may write outside the
+engine, on his word. Raised by the principal's question how the
+per-host model reaches another user when the identity files cannot
+live in the repository: the engine carries the mechanism, `/setup`
+carries it to the user, the values stay the user's (POS.1050
+extended).
 
 ## 3.0 — 2026-08-30
 

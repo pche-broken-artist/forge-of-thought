@@ -473,7 +473,7 @@ after every operation.
 ## Commands
 | Command | Purpose |
 |---|---|
-| `/setup` | first run after cloning the engine: create and fill `CLAUDE.local.md` by interview, create `.claude/settings.local.json` with the model set to Fable (a notice, not a question); never overwrites, never touches git |
+| `/setup` | first run after cloning the engine: create and fill `CLAUDE.local.md` by interview, create `.claude/settings.local.json` with the model set to Fable (a notice, not a question), and offer to write the per-host git identity configuration (`~/.gitconfig` includes) from the interview's identities; never overwrites, runs no git operation |
 | `/new-project <slug>` | scaffold a project by kind — files only, never git: a thought project with its brief captured verbatim (locked if finished, draft otherwise), or a library (`lib-`) of shared material |
 | `/import-project <git-url>` | bring an existing project into `projects/` through `scripts/forge-clone.ps1` — the directory is the repository's name; your git configuration supplies the commit identity (offered from `CLAUDE.local.md` as a fallback) |
 | `/forge [slug]` | state map: artefacts, versions, possible next steps, stale renders |

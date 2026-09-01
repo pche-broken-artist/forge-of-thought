@@ -1,5 +1,5 @@
 ---
-version: 3.6
+version: 3.7
 date: 2026-09-01
 status: draft
 project: forge
@@ -11,6 +11,7 @@ audience: principal + Claude only
 ## Version History
 | Version | Modification | Author | Date |
 |---|---|---|---|
+| 3.7 | POS.1050 extended: `/setup` closes the git-identities interview by offering the per-host configuration of POS.0950 — it generates one `~/.gitconfig-<host>` file per identity and the `includeIf` block, and on the user's word writes the files and appends the block to the end of `~/.gitconfig` (never overwriting existing content; appended last, so a matching host overrides a global `[user]` default); declined, it prints them for the user to apply by hand. `/setup` still runs no git operation — the user's git identity configuration is the one thing it may write outside the engine, on his word. Raised by the principal's question how the per-host model reaches another user when the identity files cannot live in the repository: the engine carries the mechanism, `/setup` carries it to the user, the values stay the user's. | Claude | 2026-09-01 |
 | 3.6 | The four open findings of the day's pre-save `/check-forge` walked through, every verdict the principal's. POS.0950 rewritten to the per-host identity model — the commit identity follows the host, not the project: git conditional includes (`includeIf "hasconfig:remote.*.url:…"`) in the user's own configuration resolve the right identity for every repository automatically, a per-repository local identity stays as an override; `forge-save`'s effective-identity check is correct in this model and stays (the finding had proposed `--local`; the principal's "one identity per host, independent of the project" won instead). POS.1000: the engine's own README exempted from the fixed closing sentence — it is the sentence's destination. POS.1060: `/import-project` runs the clone bare by default and the script reports the identity git resolves; `-Name`/`-Email` remains as the fallback for a machine without the per-host include. `forge-clone.ps1` reports the identity git actually resolves for the fresh clone, or truthfully that forge-save will report and skip. CLAUDE.md gains the POS.0710 authorship boundary sentence in the chain section and the per-host wording in Persistence. | Claude | 2026-09-01 |
 | 3.5 | First run and project arrival made one command each, prompted by a newcomer observed struggling through the manual install steps. POS.1050 (new): `/setup` — after cloning the engine, one command copies `templates/CLAUDE.local.md` to the root and fills it by interview (principal, conversation language, git identities) and creates `.claude/settings.local.json` with the session model set to Fable without asking — the recommendation embodied as the default, one notice sentence naming the change path (`/model` or editing the file); existing files are reported, never overwritten; named `/setup`, not `/init`, over the collision with Claude Code's built-in. POS.1060 (new): `/import-project <git-url>` — an existing project arrives through the scripts-only git door: `scripts/forge-clone.ps1` (the fourth git script; POS.0550 extended) clones into `projects/<repository name>` — no slug parameter, the directory falls out of the repository's name — refuses to overwrite, and reports the last commit, the origin and whether a ledger with `kind:` is present; the script carries no identity — the command proposes the matching one from `CLAUDE.local.md` and passes `-Name`/`-Email` on the principal's word. POS.0950 aligned (CLAUDE.local.md is created and filled by `/setup`). Readme recipe 0.27: Quickstart rebuilt as a common head (clone, install Claude Code, `claude` from the root, `/setup`) plus two named paths — starting a new project and bringing an existing one, with selecting the project (`/forge <slug>`) visible as the first act of work; Setup sections aligned. In the same round, POS.0710 extended with the authorship boundary — a chain artefact is composed by the principal, a render is generated (an article the principal writes is a layer, its translation a render) — raised when the README's chain diagram was redrawn from a line into the star: solid what is built today, dashed a fixed set of illustrative future layers (business analysis, an RFP, an article with its translation render, strategy, solution design, an implementation deck), visibly marked as not existing yet. | Claude | 2026-09-01 |
 | 3.4 | A source has one form (POS.1040): at `/ingest` every binary file gets one question — convert to Markdown? — and is then either a text extract `<slug>.md` (tracked, registered, indexed, immutable; the original not copied, or gitignored where it already lies in `sources/`) or a functional binary (a template, a graphic) kept as is; both only on the principal's explicit word. POS.0180 aligned: no `.extract.md` sibling by default, the ledger's Extract column becomes Form. Transition at the principal's decision: existing extracts keep their names, existing binaries with an extract leave git on his word. Raised on the reference-pack index finding of the day's `/check`. POS.1000 extended: every project README closes with the fixed sentence that reading needs nothing and maintaining needs Forge of Thought, linked. POS.0810 extended: renders are regenerated only by `/save` or an explicit `/render`, never on Claude's own judgement. | Claude | 2026-08-30 |
@@ -1020,8 +1021,18 @@ position that already stands elsewhere.
   is no place for a model decision. The command says in one sentence
   that Fable was set and that `/model` or editing the file changes it
   at any time. `/setup` never overwrites: an existing `CLAUDE.local.md`
-  or `settings.local.json` is reported as it stands, not replaced. It
-  never touches git. Named `/setup`, not `/init`: Claude Code's
+  or `settings.local.json` is reported as it stands, not replaced.
+  The git-identities interview closes with an offer: `/setup`
+  generates the per-host configuration of POS.0950 — one
+  `~/.gitconfig-<host>` file per identity and the
+  `includeIf "hasconfig:remote.*.url:…"` block — and on the user's
+  word writes the files and appends the block to the end of
+  `~/.gitconfig`, never overwriting existing content (appended last,
+  so a matching host overrides a global `[user]` default); declined,
+  it prints them for the user to apply by hand. `/setup`
+  runs no git operation — the user's git identity configuration is
+  the one thing it may write outside the engine, on his word (3.7).
+  Named `/setup`, not `/init`: Claude Code's
   built-in `/init` generates a CLAUDE.md, and the collision would send
   a newcomer to exactly the wrong action at the most sensitive moment.
   Origin: a newcomer observed struggling through the manual first-run
