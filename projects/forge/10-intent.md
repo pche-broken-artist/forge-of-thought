@@ -1,6 +1,6 @@
 ---
-version: 3.4
-date: 2026-08-30
+version: 3.5
+date: 2026-09-01
 status: draft
 project: forge
 audience: principal + Claude only
@@ -11,6 +11,7 @@ audience: principal + Claude only
 ## Version History
 | Version | Modification | Author | Date |
 |---|---|---|---|
+| 3.5 | First run and project arrival made one command each, prompted by a newcomer observed struggling through the manual install steps. POS.1050 (new): `/setup` — after cloning the engine, one command copies `templates/CLAUDE.local.md` to the root and fills it by interview (principal, conversation language, git identities) and creates `.claude/settings.local.json` with the session model set to Fable without asking — the recommendation embodied as the default, one notice sentence naming the change path (`/model` or editing the file); existing files are reported, never overwritten; named `/setup`, not `/init`, over the collision with Claude Code's built-in. POS.1060 (new): `/import-project <git-url>` — an existing project arrives through the scripts-only git door: `scripts/forge-clone.ps1` (the fourth git script; POS.0550 extended) clones into `projects/<repository name>` — no slug parameter, the directory falls out of the repository's name — refuses to overwrite, and reports the last commit, the origin and whether a ledger with `kind:` is present; the script carries no identity — the command proposes the matching one from `CLAUDE.local.md` and passes `-Name`/`-Email` on the principal's word. POS.0950 aligned (CLAUDE.local.md is created and filled by `/setup`). Readme recipe 0.27: Quickstart rebuilt as a common head (clone, install Claude Code, `claude` from the root, `/setup`) plus two named paths — starting a new project and bringing an existing one, with selecting the project (`/forge <slug>`) visible as the first act of work; Setup sections aligned. In the same round, POS.0710 extended with the authorship boundary — a chain artefact is composed by the principal, a render is generated (an article the principal writes is a layer, its translation a render) — raised when the README's chain diagram was redrawn from a line into the star: solid what is built today, dashed a fixed set of illustrative future layers (business analysis, an RFP, an article with its translation render, strategy, solution design, an implementation deck), visibly marked as not existing yet. | Claude | 2026-09-01 |
 | 3.4 | A source has one form (POS.1040): at `/ingest` every binary file gets one question — convert to Markdown? — and is then either a text extract `<slug>.md` (tracked, registered, indexed, immutable; the original not copied, or gitignored where it already lies in `sources/`) or a functional binary (a template, a graphic) kept as is; both only on the principal's explicit word. POS.0180 aligned: no `.extract.md` sibling by default, the ledger's Extract column becomes Form. Transition at the principal's decision: existing extracts keep their names, existing binaries with an extract leave git on his word. Raised on the reference-pack index finding of the day's `/check`. POS.1000 extended: every project README closes with the fixed sentence that reading needs nothing and maintaining needs Forge of Thought, linked. POS.0810 extended: renders are regenerated only by `/save` or an explicit `/render`, never on Claude's own judgement. | Claude | 2026-08-30 |
 | 3.3 | What was living in Claude Code's private memory of this instance and belongs to the forge moved into the engine (POS.1030): the working method Step by step (one consent-needing action at a time, exact operation and reason stated, a seen plan is not consent), the walkthrough's rule that an accept recommendation carries the concrete text, and one-research-one-question in `/research`; instance facts that were in memory — the git identities per host — moved to `CLAUDE.local.md`. Memory is left with what is personal to the principal only. | Claude | 2026-08-30 |
 | 3.2 | Cross-repository dependencies registered in the ledger (POS.1020): a Dependencies table — path, library, used by, note — for every document of another repository a project relies on, typically a library document cited by path; `/check` verifies the paths exist and `/forge` reports which libraries a project needs; no version pin, by POS.0970. Raised by the principal when the regulatory report moved from a project into the company library and the project's reliance on it and on the deck template became invisible. | Claude | 2026-08-30 |
@@ -386,7 +387,11 @@ position that already stands elsewhere.
   opens with YAML front-matter provenance citing the recipe and every
   input with their versions; the ledger's Renders table mirrors it. A
   render assigns nothing and is not part of the chain: the artefacts
-  remain the sole source of truth. Visible YAML provenance was chosen
+  remain the sole source of truth. The boundary between the two is
+  authorship, not audience: a chain artefact is composed by the
+  principal (Claude proposes, the principal composes), a render is
+  generated from artefacts — an article the principal writes is a
+  layer of the chain, its translation is a render. Visible YAML provenance was chosen
   over an invisible comment deliberately: provenance is control
   information, the audience rarely meets raw Markdown, and GitLab does
   not display front-matter. Dated hand-made editions of the earlier
@@ -640,8 +645,8 @@ position that already stands elsewhere.
 - **POS.0550** The engine is persisted in git with a remote of its own,
   linear history on `main`, no branches; every user project is likewise
   a repository with whatever remote and visibility its owner gives it.
-  Three PowerShell scripts are the only door to git — reading state
-  included, no exceptions — and each serves the engine and every project
+  Four PowerShell scripts are the only door to git — reading state
+  included, no exceptions. Three of them serve the engine and every project
   that is a repository (`projects/<slug>/.git`): `forge-save.ps1`
   (stage–commit–push; bare, the engine and every project with changes,
   each its own commit; with a slug, that repository — `forge` meaning
@@ -651,7 +656,11 @@ position that already stands elsewhere.
   refuses over unsaved work; bare, the engine — which is the upgrade —
   and every project with a remote; with a slug, one), and
   `forge-status.ps1` (engine and every project: unsaved changes, last
-  commit, origin or "not under git"; changes nothing). No remote is
+  commit, origin or "not under git"; changes nothing). The fourth,
+  `forge-clone.ps1`, brings an existing project in (POS.1060): it
+  clones a repository into `projects/<repository name>`, never
+  overwriting, and sets that repository's local commit identity only
+  when given `-Name` and `-Email`. No remote is
   configured anywhere in the forge: git carries that information itself.
   Immutability of artefacts remains a process rule enforced by
   convention, not by git.
@@ -771,8 +780,9 @@ position that already stands elsewhere.
   REJ.0150. Closes THR.0130 (opened 2.8, 2026-08-17).
 - **POS.0950** The engine carries no instance facts. Who the principal
   is and what language the conversation runs in live in
-  `CLAUDE.local.md` at the engine root — two lines, gitignored, copied
-  from `templates/CLAUDE.local.md` on a new machine; the root is where
+  `CLAUDE.local.md` at the engine root — gitignored, created from
+  `templates/CLAUDE.local.md` and filled by `/setup` on a new machine
+  (POS.1050); the root is where
   Claude Code looks for it. The session model lives in
   `.claude/settings.local.json` (POS.0930). The commit author comes from
   the user's git configuration. `CLAUDE.md` names the principal and the
@@ -989,6 +999,39 @@ position that already stands elsewhere.
   leaves the index on his word, never automatically. Origin: the
   reference-pack index finding of the day's `/check`, where four PDFs
   sat in git beside the extracts that alone are ever cited.
+- **POS.1050** First run is one command. After cloning the engine,
+  `/setup` prepares the instance: it copies `templates/CLAUDE.local.md`
+  to the engine root and fills it in an elicitation interview — who the
+  principal is, the conversation language, the git identities per
+  host — and it creates `.claude/settings.local.json` with the session
+  model set to **Fable**, without asking: the strongest available model
+  is the forge's default (POS.0530), the whole forge including the
+  blind reviewers runs on it (POS.0930), and a newcomer's first minute
+  is no place for a model decision. The command says in one sentence
+  that Fable was set and that `/model` or editing the file changes it
+  at any time. `/setup` never overwrites: an existing `CLAUDE.local.md`
+  or `settings.local.json` is reported as it stands, not replaced. It
+  never touches git. Named `/setup`, not `/init`: Claude Code's
+  built-in `/init` generates a CLAUDE.md, and the collision would send
+  a newcomer to exactly the wrong action at the most sensitive moment.
+  Origin: a newcomer observed struggling through the manual first-run
+  steps, 2026-09-01.
+- **POS.1060** A project arrives through the scripts-only door.
+  `/import-project <git-url>` brings an existing project into the
+  forge: it calls `scripts/forge-clone.ps1` (POS.0550), which clones
+  the repository into `projects/<repository name>` — no slug
+  parameter: the directory falls out of the repository's name, and a
+  nonconforming name is fixed by renaming the directory afterwards —
+  refuses to overwrite an existing directory, and reports facts: the
+  last commit, the origin, and whether the project carries a ledger
+  with a `kind:` header (its absence is a fact, not a defect). The
+  script carries no identity (POS.0830): it accepts `-Name` and
+  `-Email` and sets the repository's local commit identity only when
+  given both. The command layer reads the git identities in
+  `CLAUDE.local.md`, proposes the one matching the URL's host and
+  passes it on the principal's word (POS.0950). Work then starts by
+  selecting the project — `/forge <slug>` — because the engine does
+  not track it and cannot guess it.
 ## Open threads
 
 - **THR.0090** Multi-principal use. Current working assumption: a second

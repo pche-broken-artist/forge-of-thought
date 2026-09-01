@@ -1,10 +1,10 @@
 ---
 project: forge
 render: release-notes
-generated: 2026-08-30
+generated: 2026-09-01
 recipe: projects/forge/recipes/release-notes.md v0.2
 inputs:
-  - projects/forge/10-intent.md v3.4
+  - projects/forge/10-intent.md v3.5
   - projects/forge/decisions.md
   - RELEASE-NOTES.md (2026-08-30 edition — released sections)
 ---
@@ -19,8 +19,9 @@ newest first. The fine-grained change log lives in
 ## Unreleased — 3.x since 3.0
 
 These changes are not yet approved; they cover intent versions 3.1 to
-3.4, all made on the day of the 3.0 approval while the first fresh
-deployment of the public engine was being prepared.
+3.5 — the first four made on the day of the 3.0 approval while the
+first fresh deployment of the public engine was being prepared, the
+fifth prompted by the first newcomer meeting it.
 
 **Every project gets a README and release notes.** The engine's own
 mechanism is generalised: every project has a README and, if it is a
@@ -98,6 +99,41 @@ and a binary already in git beside its extract leaves the index only
 on the principal's word, never automatically. Raised by the day's
 `/check`, where four PDFs sat in git beside the extracts that alone
 are ever cited (POS.1040).
+
+**First run is one command.** After cloning the engine, `/setup`
+copies `templates/CLAUDE.local.md` to the root and fills it by
+interview — principal, conversation language, git identities — and
+creates `.claude/settings.local.json` with the session model set to
+Fable without asking: the recommendation embodied as the default,
+with one notice sentence naming the change path (`/model` or editing
+the file). Existing files are reported, never overwritten. The
+command is named `/setup`, not `/init`, over the collision with
+Claude Code's built-in command. Prompted by a newcomer observed
+struggling through the manual install steps (POS.1050).
+
+**An existing project arrives through one command too.**
+`/import-project <git-url>` brings an existing project in through the
+scripts-only git door: `scripts/forge-clone.ps1` — the fourth git
+script — clones into `projects/<repository name>`, with no slug
+parameter because the directory falls out of the repository's name,
+refuses to overwrite, and reports the last commit, the origin and
+whether a ledger with `kind:` is present. The script carries no
+identity; the command proposes the matching one from
+`CLAUDE.local.md` and passes it on the principal's word (POS.1060).
+
+**The chain drawn as a star, and an authorship boundary.** The
+README's Quickstart was rebuilt as a common head — clone, install
+Claude Code, `claude` from the root, `/setup` — plus two named paths,
+starting a new project and bringing an existing one, with selecting
+the project (`/forge <slug>`) visible as the first act of work. The
+chain diagram was redrawn from a line into the star: solid what is
+built today, dashed a fixed set of illustrative future layers —
+business analysis, an RFP, an article with its translation render,
+strategy, solution design, an implementation deck — visibly marked as
+not existing yet. Raised on the way, the render concept gained its
+authorship boundary: a chain artefact is composed by the principal, a
+render is generated — an article the principal writes is a layer, its
+translation a render (POS.0710 extended).
 
 ## 3.0 — 2026-08-30
 

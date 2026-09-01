@@ -1,7 +1,7 @@
 ---
 project: forge
 kind: thought
-updated: 2026-08-30
+updated: 2026-09-01
 ---
 
 # Ledger — Forge of Thought
@@ -26,7 +26,7 @@ absorbed it; Note says what remains (partial) or the REJ (dropped). -->
 ## Documents
 | File | Version | Status | Date |
 |---|---|---|---|
-| 10-intent.md | 3.4 | draft | 2026-08-30 |
+| 10-intent.md | 3.5 | draft | 2026-09-01 |
 | 20-assignment.md | — | not planned: the handover artefacts of this project are the core itself (CLAUDE.md, templates/, .claude/) and README.md | — |
 | decisions.md | — | 8 records (DEC.0010–0080) | 2026-08-29 |
 
@@ -36,13 +36,14 @@ hand-edited: iterate the recipe, re-run /render. Row mirrors the
 render's front-matter provenance. -->
 | Render | Audience | Recipe | Inputs | Generated |
 |---|---|---|---|---|
-| README.md (repo root) | humans arriving at the repository | recipes/readme.md v0.26 | CLAUDE.md, 10-intent.md v3.4 | 2026-08-30 |
-| RELEASE-NOTES.md (repo root) | humans tracking the system's evolution | recipes/release-notes.md v0.2 | 10-intent.md v3.4, decisions.md, previous edition (2026-08-30) | 2026-08-30 |
+| README.md (repo root) | humans arriving at the repository | recipes/readme.md v0.27 | CLAUDE.md, 10-intent.md v3.5 | 2026-09-01 |
+| RELEASE-NOTES.md (repo root) | humans tracking the system's evolution | recipes/release-notes.md v0.2 | 10-intent.md v3.5, decisions.md, previous edition (2026-09-01) | 2026-09-01 |
+| renders/executive-pitch.md | C-level executives whose experience of AI is chatting with it | recipes/executive-pitch.md v0.1 | 10-intent.md, CLAUDE.md | — (not yet rendered) |
 
 ## Sources
 <!-- Registration only; what a source is and is for lives in
 sources/00-INDEX.md. -->
-| File | Date | Date origin | Extract |
+| File | Date | Date origin | Form |
 |---|---|---|---|
 
 ## Dependencies
@@ -100,6 +101,26 @@ intent version for accepted, DEC.NNNN for rejected. -->
 | CHL.0130 | accepted | "Upgrade" is a fast-forward of an untagged branch, so the compatibility tool has nothing to compare against; a new project starts unbacked by default (minor) | 2026-08-29-challenge-cto.md | intent 2.21 (via brief 0.5 — git tag per approved major; "nothing to compare against" obsolete (condition 3 narrowed to /check against current conventions, no engine version in projects)) |
 
 ## Waiting on principal
+- Executive pitch (2026-08-30, in progress): five-slide C-level deck
+  of the forge. Story agreed (S01 the unexamined question, S02 forge
+  not whisperer — output can be anything, S03 two isolated opponents
+  with one worked example, S04 one idea/every audience regenerated,
+  S05 what it means + closing line). Recipe drafted as
+  `recipes/executive-pitch.md` v0.1 (English, notes without IDs, no
+  template yet) with a ledger Renders row — both uncommitted. Decided
+  direction: the deck is for Allwyn management, so recipe and render
+  move to `lib-allwyn` (variant a), example named, template
+  `sources/allwyn.potx`; needs a future intent iteration (3.6+ —
+  3.5 was consumed by the /setup and /import-project round) — one
+  sentence in POS.0970
+  (a library may carry recipes and renders for company audiences
+  whose inputs are other repositories' artefacts, inputs outside the
+  repository are Dependencies rows), one sentence each in `/check`
+  (relative paths out of the repository count as cross-repo
+  citations) and `/forge` (a library's renders reported with
+  staleness), CLAUDE.md lib layout lines. A future `.potx` is to be
+  ingested by the principal first. Not yet approved as a round —
+  continue tomorrow.
 - THR.0090 multi-principal use — deliberately not worked on
   (principal's direction 2026-08-29: principals not to be solved now); the scripts part resolved by POS.0950
 - THR.0140 the delivery side — deliberately deferred until a subject

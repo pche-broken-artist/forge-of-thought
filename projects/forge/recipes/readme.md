@@ -2,8 +2,8 @@
 project: forge
 purpose: readme
 audience: humans arriving at the repository
-version: 0.26
-updated: 2026-08-30
+version: 0.27
+updated: 2026-09-01
 output: /README.md
 ---
 
@@ -110,13 +110,21 @@ front-matter, no status, no Version History — history lives in git. -->
   own template; external sources registered immutably and used only
   as the principal directs; everything in files and git — nothing
   depends on a chat's memory.
-- Section 3 is a Quickstart: a short fenced block of the happy path —
-  clone this repository (no URL; the reader is already looking at
-  it), copy `templates/CLAUDE.local.md` to the root and fill it in,
-  install Claude Code (pointer to Setup), start `claude` from the
-  root, `/new-project`, `/forge intent`, `/save` — followed by one
-  sentence that each project lives inside `projects/<slug>/` as a
-  git repository of its own, which the engine does not track.
+- Section 3 is a Quickstart with a common head and two named paths.
+  The head, "First, once per machine", is a short fenced block: clone
+  this repository (no URL; the reader is already looking at it, with
+  a comment "you are looking at it"), install Claude Code first
+  (pointer to Setup), start `claude` — always from the engine root —
+  and `/setup` (comment: first run only — fills CLAUDE.local.md,
+  sets the model, Fable). Then two bold-led paths, each its own
+  fenced block: **Starting a new project** — `/new-project my-idea`,
+  `/forge intent`, `/save`; **Bringing an existing project** —
+  `/import-project <project url>` (comment: clones into `projects/`,
+  offers your commit identity) and `/forge my-idea` (comment: select
+  the project before any work — the forge cannot guess it). Closing
+  sentence: each project lives inside `projects/<slug>/` as a git
+  repository of its own, which the engine does not track — that is
+  why you name it first.
 - The language rule appears once, in Conventions, and says only this:
   the forge dictates the output language — all artefacts are written
   in English; the briefs are the exception, stored verbatim in
@@ -241,35 +249,79 @@ front-matter, no status, no Version History — history lives in git. -->
   full, including `CLAUDE.local.md`, the gitignored `projects/*`
   with its per-project `.git/`, the library layout and the generated
   `.pptx` sibling of a deck render.
-- The chain diagram stays linear for the chain itself (00 → 10 → 20 →
-  later layers) until a real branch exists — the brief labelled
-  "(draft → locked)"; renders are shown
-  branching off the intent and the assignment as generated outputs.
+- The chain diagram shows the star, never a line: it must make
+  visible at first glance that the chain branches richly. It is this
+  mermaid block, pinned verbatim (solid arrows = built today, dashed
+  = illustrative growth):
+
+  ```mermaid
+  flowchart LR
+      B["00-brief<br>(draft → locked)"] --> I["10-intent"]
+      I --> A["20-assignment"]
+      I --> RI(["renders: pitch, deck, summary …"])
+      A --> RA(["renders: mail …"])
+      A -.-> BRD["30-brd<br>business analysis"]
+      A -.-> RFP["an RFP"]
+      I -.-> ART["an article"]
+      ART -.-> RT(["render: a translation"])
+      I -.-> ST["strategy"]
+      BRD -.-> SD["40-solution-design"]
+      SD -.-> IMP["implementation deck"]
+
+      classDef built fill:#1f6feb,stroke:#1158c7,color:#ffffff
+      classDef future fill:#c6dbfa,stroke:#1f6feb,color:#24292f
+      classDef render fill:#2da44e,stroke:#1a7f37,color:#ffffff
+      class B,I,A built
+      class BRD,RFP,ART,ST,SD,IMP future
+      class RI,RA,RT render
+  ```
+
+  Directly under it one bold legend line: blue = chain artefacts
+  (light = not built yet), green = renders; dashed arrows = growth
+  that does not exist yet. The dashed layers are a fixed illustrative set of this recipe
+  (business analysis, an RFP, an article with its translation
+  render, strategy, solution design, an implementation deck),
+  never presented as planned or existing. Below the legend two
+  sentences: adding a layer is one definition file declaring its
+  inputs — nothing is renumbered and nothing existing is reworked,
+  which is why files are numbered in tens; and the authorship
+  boundary per POS.0710 — a chain artefact is composed by the
+  principal, a render is generated from artefacts (the article and
+  its translation in the diagram illustrate it).
 - Setup is written for a reader who has never used Claude Code and
   has four parts:
   - "Prerequisites" — one consolidated list: git; PowerShell 7
     (pwsh) — the scripts are PowerShell, needed on macOS/Linux too;
     Python 3 (for markitdown); a paid Claude subscription.
   - "Getting the forge and Claude Code" — clone this repository (the
-    engine); copy `templates/CLAUDE.local.md` to the root as
-    `CLAUDE.local.md` and fill in the two lines (who the principal
-    is, the conversation language) — gitignored, never committed;
-    create `.claude/settings.local.json` with the model to run on
-    (`{"model": "..."}`, gitignored; permissions come from the
-    shared `.claude/settings.json`); install Claude Code (commands
+    engine); install Claude Code (commands
     fixed by this recipe, update them here when they change):
     Windows `irm https://claude.ai/install.ps1 | iex`; macOS/Linux
     `curl -fsSL https://claude.ai/install.sh | bash`; or
     `npm install -g @anthropic-ai/claude-code`. Sign in on first
     run — usage draws from the same pool as Claude chat. Always
     start `claude` from the engine root so CLAUDE.md and
-    CLAUDE.local.md load. Upgrading the engine is
+    CLAUDE.local.md load. Then run `/setup` once: it creates
+    `CLAUDE.local.md` from its template and fills it with you in a
+    short interview (who the principal is, the conversation
+    language, your git identities per host) — gitignored, never
+    committed — and creates `.claude/settings.local.json` with the
+    session model set to Fable, the strongest available model, which
+    the whole forge including the blind reviewers runs on; it tells
+    you so in one sentence, and `/model` or editing that file
+    changes it at any time (permissions come from the shared
+    `.claude/settings.json`). `/setup` never overwrites existing
+    files. Upgrading the engine is
     `scripts/forge-pull.ps1` — a fast-forward of `main`; the projects
     are untouched by it.
   - "Your projects" — each project is a directory under `projects/`
     and a git repository of its own: `/new-project` creates the
     files; `git init` in that directory, a remote if wanted and the
-    commit identity for that host are a one-off act of yours; the
+    commit identity for that host are a one-off act of yours. An
+    existing project is brought in with `/import-project <git-url>`,
+    which clones it into `projects/<repository name>` through
+    `scripts/forge-clone.ps1` and offers to set your commit identity
+    from CLAUDE.local.md. The
     engine ignores `projects/*` (except its own `projects/forge`)
     and the scripts find your project through its `.git`. A project
     without a repository is reported as "not under git" — a fact,
@@ -338,11 +390,15 @@ per the instruction; no closing line>
 <the six concrete capability bullets per the instruction>
 
 ## 3. Quickstart
-<fenced happy path: clone this repository → copy
-templates/CLAUDE.local.md to the root → install Claude Code (see
-Setup) → claude from the root → /new-project → /forge intent →
-/save; one sentence: each project is a repository of its own inside
-projects/>
+<common head "First, once per machine" as a fenced block: clone this
+repository → install Claude Code (see Setup) → claude from the
+engine root → /setup; then two bold-led paths, each a fenced block:
+Starting a new project (/new-project my-idea → /forge intent →
+/save) and Bringing an existing project (/import-project
+<project url> → /forge my-idea, with the select-before-work
+comment); one closing sentence: each project is a repository of its
+own inside projects/, untracked by the engine — that is why you name
+it first>
 
 ## 4. How it is used
 ### The flow
@@ -376,7 +432,8 @@ a word>
 paragraph; collaboration-model sentence>
 
 ## 7. The document chain
-<chain diagram; per-document table; the brief-immutability callout
+<the pinned star chain diagram (mermaid) with its legend line and
+the two sentences below it; per-document table; the brief-immutability callout
 and the brief-rule paragraph (composed then locked, origins, later
 briefs, mining); why 10-intent.md exists; iteration rule and write cadence one line
 each; feedback rule; the render-never-hand-edited callout followed by
@@ -407,11 +464,13 @@ project kinds; naming with forge and the lib- prefix only>
 ### Prerequisites
 <consolidated list>
 ### Getting the forge and Claude Code
-<clone; CLAUDE.local.md; settings.local.json; install commands;
-sign-in; run from root; forge-pull as the upgrade>
+<clone; install commands; sign-in; run from root; /setup
+(CLAUDE.local.md interview, settings.local.json with Fable);
+forge-pull as the upgrade>
 ### Your projects
 <a repository of its own per project; /new-project creates files,
-git init is yours; "not under git" is a fact>
+git init is yours; /import-project brings an existing one through
+forge-clone; "not under git" is a fact>
 ### Script prerequisites
 <one bullet per script>
 ### Saving and syncing

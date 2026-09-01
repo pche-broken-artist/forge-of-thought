@@ -17,8 +17,9 @@ anything that exists. Nothing is implemented here; the engine specifies.
 
 Who the principal is and what language the conversation runs in are
 instance facts, not properties of the system: they live in
-`CLAUDE.local.md` at the engine root (gitignored, copied from
-`templates/CLAUDE.local.md` on a new machine), never here.
+`CLAUDE.local.md` at the engine root (gitignored, created from
+`templates/CLAUDE.local.md` and filled by `/setup` on a new machine),
+never here.
 
 ## Roles
 - **Principal:** whoever's thinking is being forged. Supplies ideas,
@@ -247,8 +248,8 @@ ledger.md        single source of truth for state
 ```
 CLAUDE.md                  # this file — universal core
 CLAUDE.local.md            # instance facts (principal, conversation
-                           # language) — gitignored, from
-                           # templates/CLAUDE.local.md
+                           # language) — gitignored, created by
+                           # /setup from templates/CLAUDE.local.md
 README.md                  # for humans — a render (/render readme)
 RELEASE-NOTES.md           # release notes — a render (/render
                            # release-notes): Unreleased head +
@@ -257,8 +258,9 @@ logo.png                   # project avatar
 LICENSE                    # CC BY 4.0 — the engine is published
                            # under attribution
 scripts/                   # forge-save / forge-pull / forge-status
-                           # (git), doc2md (document → Markdown),
-                           # md2pptx (deck render → PowerPoint)
+                           # / forge-clone (git), doc2md (document →
+                           # Markdown), md2pptx (deck render →
+                           # PowerPoint)
 .claude/                   # commands, agents, settings
                            # (settings.local.json: the session
                            # model — gitignored)
@@ -312,8 +314,8 @@ branches; every project under `projects/` is a repository of its own
 the scripts through `projects/<slug>/.git`. Initialising a project's
 repository, adding its remote and setting its commit identity are the
 user's one-off act at creation; a project "not under git" is a
-property, not a defect. Three scripts are the only door to git —
-reading state included, no exceptions — and each serves the engine
+property, not a defect. Four scripts are the only door to git —
+reading state included, no exceptions. Three of them serve the engine
 and every project repository: `scripts/forge-save.ps1` commits and
 pushes (bare: every repository with changes, each its own commit;
 with a slug: that one, `forge` meaning the engine; without an origin
@@ -322,7 +324,12 @@ rebase; prints the commit's file summary), `scripts/forge-pull.ps1`
 fast-forwards from the remotes and never touches a repository with
 unsaved changes — on the engine it is the upgrade channel — and
 `scripts/forge-status.ps1` reports unsaved changes, the last commit
-and the origin of each without changing anything. The scripts carry
+and the origin of each without changing anything. The fourth,
+`scripts/forge-clone.ps1`, brings an existing project in: it clones a
+repository into `projects/<repository name>`, never overwriting, and
+sets that repository's local commit identity only when given `-Name`
+and `-Email` (`/import-project` is its door, offering the identity
+from `CLAUDE.local.md`). The scripts carry
 no URL and no identity. The engine receives a git tag at every
 approved major of the forge intent. Immutability of artefacts is a
 process rule, not a git mechanism.
@@ -459,7 +466,9 @@ after every operation.
 ## Commands
 | Command | Purpose |
 |---|---|
+| `/setup` | first run after cloning the engine: create and fill `CLAUDE.local.md` by interview, create `.claude/settings.local.json` with the model set to Fable (a notice, not a question); never overwrites, never touches git |
 | `/new-project <slug>` | scaffold a project by kind — files only, never git: a thought project with its brief captured verbatim (locked if finished, draft otherwise), or a library (`lib-`) of shared material |
+| `/import-project <git-url>` | bring an existing project into `projects/` through `scripts/forge-clone.ps1` — the directory is the repository's name; the commit identity is offered from `CLAUDE.local.md` |
 | `/forge [slug]` | state map: artefacts, versions, possible next steps, stale renders |
 | `/forge <state> [slug]` | iterate the target artefact (`brief [name]`, `intent`, `assignment`, …); one definition file per state in `.claude/commands/forge/`, each declaring its inputs |
 | `/ingest [file] [slug]` | store and register external input in sources/ and index it; bare = sweep sources/ |
