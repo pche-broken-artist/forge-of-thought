@@ -26,7 +26,7 @@ absorbed it; Note says what remains (partial) or the REJ (dropped). -->
 ## Documents
 | File | Version | Status | Date |
 |---|---|---|---|
-| 10-intent.md | 3.8 | draft | 2026-09-02 |
+| 10-intent.md | 3.10 | draft | 2026-09-02 |
 | 20-assignment.md | — | not planned: the handover artefacts of this project are the core itself (CLAUDE.md, templates/, .claude/) and README.md | — |
 | decisions.md | — | 8 records (DEC.0010–0080) | 2026-08-29 |
 
@@ -36,8 +36,8 @@ hand-edited: iterate the recipe, re-run /render. Row mirrors the
 render's front-matter provenance. -->
 | Render | Audience | Recipe | Inputs | Generated |
 |---|---|---|---|---|
-| README.md (repo root) | humans arriving at the repository | recipes/readme.md v0.31 | CLAUDE.md, 10-intent.md v3.8 | 2026-09-02 |
-| RELEASE-NOTES.md (repo root) | humans tracking the system's evolution | recipes/release-notes.md v0.2 | 10-intent.md v3.8, decisions.md, previous edition (2026-09-01, released sections) | 2026-09-02 |
+| README.md (repo root) | humans arriving at the repository | recipes/readme.md v0.31 | CLAUDE.md, 10-intent.md v3.10 | 2026-09-02 |
+| RELEASE-NOTES.md (repo root) | humans tracking the system's evolution | recipes/release-notes.md v0.2 | 10-intent.md v3.10, decisions.md, previous edition (2026-09-02, released sections) | 2026-09-02 |
 | renders/executive-pitch.md | C-level executives whose experience of AI is chatting with it | recipes/executive-pitch.md v0.1 | 10-intent.md, CLAUDE.md | — (not yet rendered) |
 
 ## Sources
@@ -101,6 +101,16 @@ intent version for accepted, DEC.NNNN for rejected. -->
 | CHL.0130 | accepted | "Upgrade" is a fast-forward of an untagged branch, so the compatibility tool has nothing to compare against; a new project starts unbacked by default (minor) | 2026-08-29-challenge-cto.md | intent 2.21 (via brief 0.5 — git tag per approved major; "nothing to compare against" obsolete (condition 3 narrowed to /check against current conventions, no engine version in projects)) |
 
 ## Waiting on principal
+- Save duration (watch): the first /save with parallel renders and
+  the isolated /check-forge (2026-09-02) took twelve minutes — renders
+  6:54 in parallel (README 6:54, release notes 2:45), the check 5:00
+  with a full /check of the forge project folded in. THR.0220 (the
+  cost of rendering at every save) is the lever; compare at the next
+  save.
+- THR.0220 the cost of rendering README and release notes at every
+  save — opened 2026-09-02; options (stale-only, on the principal's
+  word, at a major, a cheaper mechanism for release notes) to be
+  weighed against POS.0810
 - Executive pitch (2026-08-30, in progress): five-slide C-level deck
   of the forge. Story agreed (S01 the unexamined question, S02 forge
   not whisperer — output can be anything, S03 two isolated opponents
@@ -110,8 +120,8 @@ intent version for accepted, DEC.NNNN for rejected. -->
   template yet) with a ledger Renders row — both uncommitted. Decided
   direction: the deck is for Allwyn management, so recipe and render
   move to `lib-allwyn` (variant a), example named, template
-  `sources/allwyn.potx`; needs a future intent iteration (3.6+ —
-  3.5 was consumed by the /setup and /import-project round) — one
+  `sources/allwyn.potx`; needs a future intent iteration (the next
+  one — 3.5 was consumed by the /setup and /import-project round) — one
   sentence in POS.0970
   (a library may carry recipes and renders for company audiences
   whose inputs are other repositories' artefacts, inputs outside the
@@ -128,7 +138,7 @@ intent version for accepted, DEC.NNNN for rejected. -->
 - THR.0150 replacing the PowerShell scripts with POSIX sh — principal
   undecided whether at all; no priority while PowerShell 7 suffices
 - One-off migration to the split engine (runbook: research/2026-08-29-split-migration-runbook.md, phases 0 + A–D with rollback; brief steps 1–6: company library, project repositories, CLAUDE.local.md, rewrite of projects/forge within the boundary, public repository with fresh history, verification by a fresh clone) — the operating layer (CLAUDE.md, .gitignore, scripts, templates, commands, readme recipe) changes with it — including removing the TEMPORARY relocation notice from recipes/readme.md (0.23), which is for the last edition on the company host only; then intent 3.0 + git tag. Progress (2026-08-30): phase 0 done (tag pre-split = d600dda, the last edition with the relocation notice, pushed); phase A done (library and both company projects in repositories of their own on the company host, dropped from the engine's index at b4ea967); phase B done on the old history (gitignore, CLAUDE.local.md + template, settings split, local/ removed, four scripts rewritten and tested, templates and commands by kind, CLAUDE.md, readme recipe 0.24) and saved with this commit. C1 done 2026-08-30: projects/forge rewritten within the boundary (POS.0980) — company name, host, e-mail, template file name and one personal project removed from the 2026-08-29 CTO challenge and the public-engine brief, two sentences of company-project content neutralised in the 2026-08-17 CTO challenge and POS.0710; immutability of the two challenges and the locked brief knowingly broken once, here recorded and nowhere in the files; the company project slugs stay by decision. C2 grep (name, host, identity, the removed project, the neutralised phrases) over the tracked tree and file names: clean. C3-prep done 2026-08-30: LICENSE (CC BY 4.0, verbatim legal code), readme recipe 0.25 (Author and licence section — the principal's decision: credit as Petr Chlumsky (PCHe) with the contact address; the one person the README names), LICENSE in the CLAUDE.md layout, README re-rendered. Decisions of the day for THR.0200, to be written into the intent at 3.0: public repository github.com/pche-broken-artist/forge-of-thought (created empty, public), licence CC BY 4.0, exemplar still open; the forbidden-term list dropped as pointless for now (C2 was run with an ad-hoc list; the durable answer is the content guard rail below). C3 done 2026-08-30: private identity set locally, orphan commit 3507545 (62 files), renamed main. C4.1 done: origin = github.com/pche-broken-artist/forge-of-thought (pushed), the company host kept as remote `company`. C4.3 done: the company project archived (read-only, description pointing to the new homes). D1–D4 done 2026-08-30: fresh clone from GitHub (1 commit, 62 files, boundary grep clean, only projects/forge tracked); CLAUDE.local.md and settings.local.json ignored; forge-status engine-only, then a hand-scaffolded projects/test reported "not under git", after git init "no origin"; forge-pull fast-forwarded the engine and skipped test; forge-save test committed with the "not pushed — no origin" note; bare save reported nothing to save in both; clone deleted. D5 done: /forge agentic-platform from its own repository — the map, renders and threads read as before (brief condition 4). D6: intent 3.0 approved 2026-08-30; saved and tagged v3.0 on the public engine. Migration complete; the runbook stays as the record of how it was done. The company host's main is left at the phase-B commit (a717e52) and archived as is — the principal's decision 2026-08-30 after weighing a force push, a default-branch switch and a revert; the last complete monorepo state is the tag pre-split (d600dda, README with the relocation notice). Migration complete; nothing outstanding.
-- THR.0210 the guard rail for the public boundary — a standing rule that `projects/forge` never carries the content of a subject project, and where it lives (CLAUDE.md, the reviewer prompts, `/check-forge`); opened 2026-08-30, to be settled at the next iteration
+- THR.0210 the guard rail for the public boundary — a standing rule that `projects/forge` never carries the content of a subject project, and where it lives (CLAUDE.md, the reviewer prompts, `/check-forge`); opened 2026-08-30 (3.0), deferred since
 - THR.0180 the output language — left as is; more than one output language solved when a project needs it
 - THR.0190 a plugin as a later distribution layer — no preparation
   now; taken up when forge-pull proves an insufficient upgrade channel

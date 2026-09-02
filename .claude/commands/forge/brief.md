@@ -39,7 +39,8 @@ Two things Claude does throughout, whichever way the text arrives:
    status draft) and add its row to the ledger's Briefs table
    (Mined: pending). If it exists and is `approved`, stop: a locked
    brief is not edited — a new whole is a new brief.
-2. Work in Czech, however the text arrives:
+2. Work in the conversation language (`CLAUDE.local.md`), however the
+   text arrives:
    - **Pasted whole:** store it verbatim and ask whether it is
      finished — if so, lock it at once (step 4).
    - **Begun outside, to be finished here:** store what came, then

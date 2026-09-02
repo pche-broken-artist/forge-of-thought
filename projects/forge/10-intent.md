@@ -1,5 +1,5 @@
 ---
-version: 3.8
+version: 3.10
 date: 2026-09-02
 status: draft
 project: forge
@@ -11,6 +11,8 @@ audience: principal + Claude only
 ## Version History
 | Version | Modification | Author | Date |
 |---|---|---|---|
+| 3.10 | The day's sweep for restated procedures walked through, fourteen findings and three observations, every verdict the principal's, all accepted. POS.1070 extended: the shared behaviour of the challenger personas gets one owner, `templates/challenger.md`, carried verbatim by every persona file with only its Lens section its own (the principal's choice over a runtime include — a persona file stands alone like every skeleton, and the copy is mechanically checkable); `/check-forge` gains the standing rule — a restated procedure, a persona diverging from its template, a direct operation where a mechanism exists — scoped to the operating-layer files changed in the save, the full sweep only on a bare `/check-forge`; two further shapes that had no owner get a skeleton (`templates/index-bundle.md` for the bundle catalogue, the library reduction of the ledger in `templates/ledger.md`'s header). POS.0930 extended at the principal's prompt (a save takes five minutes): `/check` and `/check-forge` execute their own definition in an isolated subagent, and `/save` launches a repository's two renders in parallel. CLAUDE.md gains prime directive 10 (one mechanism lives in one place) and the template sentence in the reviewers section. Twelve commands, two agents, four templates aligned: `/check-forge` runs `/check` on the forge project instead of copying it, `/challenge`, `/critique` and `/save` cite the walkthrough instead of restating it, `/forge assignment` and `/check` cite Requirement style, `/new-project` and `/spinoff` hand the brief to `/forge brief` and the intent to `/forge intent`, `/render` owns the definition of a stale render, `/save` leaves its script's behaviour to the script's help. Opened THR.0220 at the principal's direction: whether README and release notes must be regenerated at every save — expensive and slow — or only when stale, on his word, or at a major. The first isolated `/check-forge` of the same evening (twelve minutes for the whole save, renders in parallel and the check with a full `/check` of the forge project) found nine findings, all accepted: the conversation language had been hard-coded as Czech in thirteen commands and a template against POS.0950 — POS.0060 rewritten to point at `CLAUDE.local.md`, the commands now say "in the conversation language"; the isolation paragraph of `/check-forge` reduced to a reference to `/check`; CLAUDE.md cites `templates/index-bundle.md`; the readme recipe (0.32) pins the finding-state vocabulary the render had invented; `doc2md.ps1` examples no longer suggest `.extract`. | Claude | 2026-09-02 |
+| 3.9 | POS.1070 (new): one mechanism lives in one place and is used from there — a command, skill, script or agent is invoked through its own definition whenever its situation arises, never re-described ad hoc; a restated procedure is a `/check-forge` finding. Raised by the principal after the README of 2026-09-02 was rendered at `/save` through an ad-hoc subagent prompt that missed the 72-column rule of `/render`; `/save` step 2 now routes the regeneration through `/render` explicitly. Sweep of every command and skill for the same escape pending. | Claude | 2026-09-02 |
 | 3.8 | The commit identity returns to the project (POS.0950 rewritten): it is set locally in every repository at its creation or import, proposed by the command layer from the identity roster in `CLAUDE.local.md` — matched by the origin's host as an offer, never a rule — on the principal's word. The per-host `includeIf` model of 3.6–3.7 is dropped on the principal's decision: the host is only a correlate of the identity and fails exactly where one host serves two roles, and writing `~/.gitconfig-<host>` files reached beyond the engine's boundary. The one global guard, now `/setup`'s closing offer (POS.1050), is `user.useConfigOnly = true` with no global `user.name`/`user.email`, so a commit in a repository without a local identity fails aloud instead of silently taking a default. `/import-project` passes `-Name`/`-Email` by default (POS.1060); the scripts are unchanged. | Claude | 2026-09-02 |
 | 3.7 | POS.1050 extended: `/setup` closes the git-identities interview by offering the per-host configuration of POS.0950 — it generates one `~/.gitconfig-<host>` file per identity and the `includeIf` block, and on the user's word writes the files and appends the block to the end of `~/.gitconfig` (never overwriting existing content; appended last, so a matching host overrides a global `[user]` default); declined, it prints them for the user to apply by hand. `/setup` still runs no git operation — the user's git identity configuration is the one thing it may write outside the engine, on his word. Raised by the principal's question how the per-host model reaches another user when the identity files cannot live in the repository: the engine carries the mechanism, `/setup` carries it to the user, the values stay the user's. | Claude | 2026-09-01 |
 | 3.6 | The four open findings of the day's pre-save `/check-forge` walked through, every verdict the principal's. POS.0950 rewritten to the per-host identity model — the commit identity follows the host, not the project: git conditional includes (`includeIf "hasconfig:remote.*.url:…"`) in the user's own configuration resolve the right identity for every repository automatically, a per-repository local identity stays as an override; `forge-save`'s effective-identity check is correct in this model and stays (the finding had proposed `--local`; the principal's "one identity per host, independent of the project" won instead). POS.1000: the engine's own README exempted from the fixed closing sentence — it is the sentence's destination. POS.1060: `/import-project` runs the clone bare by default and the script reports the identity git resolves; `-Name`/`-Email` remains as the fallback for a machine without the per-host include. `forge-clone.ps1` reports the identity git actually resolves for the fresh clone, or truthfully that forge-save will report and skip. CLAUDE.md gains the POS.0710 authorship boundary sentence in the chain section and the per-host wording in Persistence. | Claude | 2026-09-01 |
@@ -133,11 +135,12 @@ solution is the kind of content, never the amount.
 - **POS.0060** The forge as a system dictates only the output
   language: all artefacts are written in English; the single
   exception is the briefs (`00-brief*.md`), stored verbatim in
-  whatever language they were written. The working-conversation language is per-instance
-  configuration, not a system rule: it lives in the operating
-  layer — CLAUDE.md and the command definitions, currently Czech for
-  this instance — and is never presented outward. The README and
-  other outward-facing renders state only the output-language rule.
+  whatever language they were written. The working-conversation
+  language is per-instance configuration, not a system rule: it is
+  set in `CLAUDE.local.md` (POS.0950) and read from there by every
+  command — never written into the operating layer, and never
+  presented outward. The README and other outward-facing renders
+  state only the output-language rule.
 - **POS.0070** Claude's contribution to content is to criticise,
   challenge, inspire and lay out options; the composition is the
   principal's. He assembles what the forge offers into his own
@@ -572,11 +575,16 @@ position that already stands elsewhere.
   emerging practice | my judgement); no fabrication — a precise
   "I don't know" beats an invented figure, and anything reconstructed
   from memory is flagged.
-  The first persona is `cto` (peer-CTO register); further personas —
-  a strategist, a business analyst — are created by the principal's
-  decision when first needed, and only where their blind spots
-  genuinely differ: personas that would say the same things in
-  different words are noise. Bare `/challenge` lists the roster and
+  The shared skeleton has one owner, `templates/challenger.md`: every
+  persona file carries its fixed sections (Subject, How to work,
+  Output) verbatim and writes only its own Lens — who it is to the
+  principal and which blind spots it exists to find — and
+  `/check-forge` verifies each persona against the template
+  (POS.1070). The first persona is `cto` (peer-CTO register); further
+  personas — a strategist, a business analyst — are created from the
+  template by the principal's decision when first needed, and only
+  where their blind spots genuinely differ: personas that would say
+  the same things in different words are noise. Bare `/challenge` lists the roster and
   recommends a fit for the project's subject. Challenge files carry
   the persona in their name (`YYYY-MM-DD-challenge-<persona>.md`);
   the CHL sequence stays global per project.
@@ -841,7 +849,40 @@ position that already stands elsewhere.
   The one exception is `scripts/md2pptx.ps1`: a headless run has no
   session model, so the script needs a default of its own
   (`-Model`, POS.0740) — an explicit parameter, not an aged pin.
+  The same lever carries the conformance checks: `/check` and
+  `/check-forge` execute their own definition in an isolated subagent
+  that sees only the files, returning the report for the walkthrough
+  in the session, and `/save` launches a repository's README and
+  release-notes renders in parallel; the working conversation is
+  spent on verdicts, not on reading (2026-09-02, at the principal's
+  prompt — a save had grown to five minutes).
   Closes THR.0160 (opened 2.10, 2026-08-25).
+- **POS.1070** One mechanism lives in one place and is used from
+  there. Whatever the forge already has a procedure for — a command,
+  a skill, a script, an agent — is invoked through that procedure
+  whenever its situation arises, never re-described ad hoc: `/save`
+  regenerates renders through `/render`, git is touched through the
+  four scripts (POS.0550), reviews run through the reviewer agents.
+  A command that needs another's mechanism references it by path
+  and adds nothing of its own to how it runs; the rules of a
+  mechanism — isolation, wrapping, provenance, what may be read —
+  are written once, in its own definition. Restating a procedure in
+  a second place is a defect: the two copies drift, and the copy
+  without a rule silently loses it (on 2026-09-02 the README,
+  rendered at `/save` by an ad-hoc subagent prompt instead of
+  `/render`, arrived unwrapped and with a foreign provenance shape).
+  `/check-forge` carries the standing rule — a restated procedure, a
+  persona file diverging from `templates/challenger.md`, a direct
+  operation where a script, command or agent exists — over the
+  operating-layer files changed in the save's scope, the full sweep
+  only on an explicit bare `/check-forge`, so that the rule costs a
+  save seconds, not minutes. Where a shape had no owner at all, it
+  gets a skeleton rather than a second description: the bundle
+  catalogue (`templates/index-bundle.md`), the library reduction of
+  the ledger (`templates/ledger.md`'s header). Raised by the principal
+  on 2026-09-02; the first sweep of the operating layer the same day
+  found fourteen restatements, every one with a rule missing on one
+  side.
 
 ### Naming
 - **POS.0600** The system is named **Forge of Thought**: thoughts are
@@ -1148,6 +1189,21 @@ position that already stands elsewhere.
   projects as evidence), `/check-forge` as a sweep, or all three. Opened
   2026-08-30 at the principal's direction; to be settled at the next
   iteration of this intent.
+- **THR.0220** The cost of rendering README and release notes at every
+  save. POS.1000 and POS.0730 regenerate both at every `/save` that
+  touches a project or the engine, unconditionally; with the engine's
+  README at 5,700 words and a recipe that pins wording, one render
+  costs minutes and well over a hundred thousand tokens, and a save
+  that changed one line of a command pays it twice. The parallel
+  launch of POS.0930 halves the wait, not the cost. To think through:
+  whether the unconditional regeneration is the right rule at all —
+  regenerate only when an input's version moved (the stale test of
+  `/render`), only on the principal's word at save time, only at an
+  approved major, or by a cheaper mechanism for the release notes
+  (the Unreleased head is a summary of Version History rows, close to
+  mechanical) — and what each option does to POS.0810's guarantee
+  that every regenerated render passes under the principal's eyes.
+  Opened 2026-09-02 at the principal's direction.
 
 Note: the ID THR.0120 was inadvertently used twice — first for the
 readme-recipe thread (opened 1.14, closed 1.16), then for the

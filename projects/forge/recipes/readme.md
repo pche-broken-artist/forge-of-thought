@@ -2,7 +2,7 @@
 project: forge
 purpose: readme
 audience: humans arriving at the repository
-version: 0.31
+version: 0.32
 updated: 2026-09-02
 output: /README.md
 ---
@@ -242,7 +242,10 @@ front-matter, no status, no Version History — history lives in git. -->
   substance of the thinking), then the critic (auditor of the
   documents and of the project's consistency across artefacts) —
   before any procedural detail. Critique finding states are given as
-  a list, not as inline arrow-and-pipe notation.
+  a list, not as inline arrow-and-pipe notation, with exactly the
+  ledger's vocabulary — open, resolved (an iteration of the artefact
+  concerned), overruled (a DEC with its reason), obsolete (the
+  passage no longer exists) — never a state of the render's own.
 - Open threads (THR) are not enumerated; growth is summarised from
   POS.0700 — the layer growth path — and the multi-principal outlook
   (more principals, more instances). The engine/projects split is

@@ -11,12 +11,10 @@ on its own judgement — it reports a stale render and offers. Iterating the rec
 other; generating the render is mechanical.
 
 1. Infer the current project from context ($2, or ask if ambiguous) and
-   read `recipes/$1.md`. If it does not exist, offer to create it with
-   the principal from `templates/recipe.md` — or, where a genre
-   definition fits, through `/recipe <genre>` and its skeleton
-   (`templates/recipe-<genre>.md`). The recipe (inputs, audience,
-   instructions, template) is composed conversationally and versioned
-   like any working document.
+   read `recipes/$1.md`. If it does not exist, offer to compose it
+   through `/recipe` (a genre where one fits, else bare from
+   `templates/recipe.md`) and stop; what a recipe is and how it is
+   versioned is stated there (POS.1070).
 2. Read the recipe's declared inputs at their current versions.
 3. Generate in isolation: spawn one subagent (Agent tool, type
    `general-purpose`, session model — never a model override) whose
@@ -50,7 +48,11 @@ other; generating the render is mechanical.
    ---
    ```
    Inputs without a version of their own (e.g. CLAUDE.md) are cited by
-   path alone.
+   path alone. A render is **stale** when any version cited in this
+   front-matter differs from the current version of that file, or a
+   cited file no longer exists. This is the one definition; `/forge`
+   and `/check` cite it (POS.1070).
 6. Back in the session: verify the file exists and its provenance is
    correct, update the ledger's Renders table to mirror it, and report
-   in Czech what was rendered from what.
+   in the conversation language (`CLAUDE.local.md`) what was rendered
+   from what.

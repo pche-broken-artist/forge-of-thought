@@ -4,9 +4,9 @@ render: release-notes
 generated: 2026-09-02
 recipe: projects/forge/recipes/release-notes.md v0.2
 inputs:
-  - projects/forge/10-intent.md v3.8
+  - projects/forge/10-intent.md v3.10
   - projects/forge/decisions.md
-  - RELEASE-NOTES.md (2026-09-01 edition — released sections)
+  - RELEASE-NOTES.md (2026-09-02 edition — released sections)
 ---
 
 # Forge of Thought — Release Notes
@@ -19,11 +19,12 @@ newest first. The fine-grained change log lives in
 ## Unreleased — 3.x since 3.0
 
 These changes are not yet approved; they cover intent versions 3.1 to
-3.8 — the first four made on the day of the 3.0 approval while the
+3.10 — the first four made on the day of the 3.0 approval while the
 first fresh deployment of the public engine was being prepared, the
 next prompted by the first newcomer meeting it and by the day's check
-findings, and the last returning the commit identity to the project
-after a two-version excursion into a per-host model.
+findings, then the commit identity returning to the project after a
+two-version excursion into a per-host model, and finally a sweep of
+the operating layer for procedures restated in more than one place.
 
 **Every project gets a README and release notes.** The engine's own
 mechanism is generalised: every project has a README and, if it is a
@@ -174,6 +175,71 @@ configuration — per-host includes included — remains his business and
 a legitimate way to resolve an identity; `forge-save`'s
 effective-identity check stays, and the scripts are unchanged
 (POS.0950 rewritten, POS.1050 narrowed, POS.1060 aligned).
+
+**One mechanism lives in one place.** A new position and a tenth
+prime directive: whatever the forge already has a procedure for — a
+command, a skill, a script, an agent — is invoked through that
+procedure whenever its situation arises, never re-described ad hoc.
+`/save` regenerates renders through `/render`, git is touched through
+the four scripts, reviews run through the reviewer agents; a command
+that needs another's mechanism references it by path and adds nothing
+of its own to how it runs, and the rules of a mechanism — isolation,
+wrapping, provenance, what may be read — are written once, in its own
+definition. Restating a procedure in a second place is a defect: the
+two copies drift, and the copy without a rule silently loses it. The
+position was raised by the principal after the README of the day was
+rendered at `/save` by an ad-hoc subagent prompt instead of `/render`
+and arrived unwrapped, missing the 72-column rule, with a foreign
+provenance shape; `/save` step 2 now routes the regeneration through
+`/render` explicitly (POS.1070).
+
+**The operating layer swept for restatements.** The first sweep the
+same day found fourteen restatements, every one with a rule missing
+on one side, plus three observations — walked through, every verdict
+the principal's, all accepted. Twelve commands, two agents and four
+templates were aligned: `/check-forge` runs `/check` on the forge
+project instead of copying it; `/challenge`, `/critique` and `/save`
+cite the walkthrough instead of restating it; `/forge assignment` and
+`/check` cite Requirement style; `/new-project` and `/spinoff` hand
+the brief to `/forge brief` and the intent to `/forge intent`;
+`/render` owns the definition of a stale render; `/save` leaves its
+script's behaviour to the script's help. The shared behaviour of the
+challenger personas got one owner, `templates/challenger.md`, carried
+verbatim by every persona file with only its Lens section its own —
+the principal's choice over a runtime include, because a persona file
+stands alone like every skeleton and the copy is mechanically
+checkable; the template sentence entered CLAUDE.md's reviewers
+section. Two shapes that had no owner at all got a skeleton rather
+than a second description: the bundle catalogue
+(`templates/index-bundle.md`) and the library reduction of the ledger
+(`templates/ledger.md`'s header). `/check-forge` carries the standing
+rule from now on — a restated procedure, a persona file diverging
+from its template, a direct operation where a script, command or
+agent exists — scoped to the operating-layer files changed in the
+save, the full sweep only on an explicit bare `/check-forge`, so that
+the rule costs a save seconds, not minutes.
+
+**Checks in isolation, renders in parallel.** Prompted by a save that
+had grown to five minutes, the context lever of one model for the
+whole forge is extended to the conformance checks: `/check` and
+`/check-forge` execute their own definition in an isolated subagent
+that sees only the files, returning the report for the walkthrough in
+the session, and `/save` launches a repository's README and
+release-notes renders in parallel — the working conversation is
+spent on verdicts, not on reading (POS.0930 extended).
+
+**The cost of rendering at every save, opened.** With the engine's
+README at 5,700 words and a recipe that pins wording, one render
+costs minutes and well over a hundred thousand tokens, and a save
+that changed one line of a command pays it twice; the parallel launch
+halves the wait, not the cost. Opened at the principal's direction
+(THR.0220): whether the unconditional regeneration is the right rule
+at all — only when an input's version moved (the stale test of
+`/render`), only on the principal's word at save time, only at an
+approved major, or a cheaper mechanism for the release notes, whose
+Unreleased head is close to mechanical — and what each option does to
+the guarantee that every regenerated render passes under the
+principal's eyes (POS.0810).
 
 ## 3.0 — 2026-08-30
 

@@ -69,6 +69,12 @@ never here.
    principal's confirmation — one version bump, one Version History row
    for the whole round. The principal may at any moment order a write of
    whatever is agreed so far.
+10. **One mechanism lives in one place.** Whatever the forge has a
+    procedure for — a command, a skill, a script, an agent — is used
+    through its own definition whenever its situation arises, never
+    re-described or improvised; a command that needs another's
+    mechanism cites it by path. A procedure stated in two places is a
+    defect.
 
 ## Working methods
 The named ways a working conversation runs — the forge's vocabulary
@@ -179,9 +185,9 @@ ledger.md        single source of truth for state
    (e.g. a downloaded site with its index) lives as a subdirectory
    `sources/<slug>/` and counts as one source with one ledger entry;
    intent provenance cites individual files by path. Every bundle
-   carries its own `00-INDEX.md` catalogue (header, one paragraph on
-   the whole, File / What it is / Origin / Date table), created by
-   `/ingest` at registration if missing. When source content does
+   carries its own `00-INDEX.md` catalogue (skeleton
+   `templates/index-bundle.md`), created by `/ingest` at registration
+   if missing. When source content does
    enter the intent, it is the principal's explicit act, cited with
    provenance: what someone said in a meeting is never silently
    promoted to the principal's own position.
@@ -440,7 +446,10 @@ reviewer). Strictly separate jobs; neither does the other's.
   is first derived from it. A panel of personas, one isolated agent
   per persona
   (`challenger-<persona>`), each a distinct lens; the first is `cto`
-  (peer-CTO register: direct, few and sharp, no flattery). Further
+  (peer-CTO register: direct, few and sharp, no flattery). The
+  behaviour shared by every persona lives in `templates/challenger.md`,
+  carried verbatim by each persona file; only its Lens section is its
+  own. Further
   personas are created only by the principal's decision, and only where
   their blind spots genuinely differ. Bare `/challenge` lists the
   roster and recommends a fit. Challenges carry a severity

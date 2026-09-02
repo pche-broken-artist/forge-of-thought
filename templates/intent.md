@@ -12,7 +12,7 @@ audience: principal + Claude only
 intent. Not an append-only log — rewrite freely for coherence, record
 every substantive change in the Version History. Sources: the locked briefs (00-brief*.md),
 /forge intent interviews, brain-dumps. English only; translate the
-principal's Czech input on write. -->
+principal's input on write. -->
 
 ## Version History
 | Version | Modification | Author | Date |

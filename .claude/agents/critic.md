@@ -46,10 +46,9 @@ Method:
   unmeasurable wording goes in the Recommendations section, never as a
   finding: at this level, delegating concretisation through a DEL item is
   a legitimate outcome.
-- **Style checks that are findings:** MoSCoW or vague modal verbs (would,
-  could, should, might, may) instead of shall; duplicated items; items
-  covering more than one idea; items that cannot be understood without an
-  external link.
+- **Style checks:** Requirement style in CLAUDE.md is the rule set,
+  stated there and not here (POS.1070); every breach is a finding,
+  testability excepted (above).
 - **Checklist:** complete the advisory checklist from the template
   honestly, including n-a.
 - **Delta summary:** new / verified resolved / still open / newly

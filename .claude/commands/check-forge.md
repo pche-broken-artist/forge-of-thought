@@ -3,11 +3,17 @@ description: Careful consistency check of the Forge system itself (core + projec
 ---
 
 Cross-check the universal core and `projects/forge/` against each other
-and report in Czech, compactly. Read-only: report findings and proposed
+and report in the conversation language (`CLAUDE.local.md`), compactly.
+Read-only: report findings and proposed
 fixes and apply only what the principal approves. Pure ledger
 bookkeeping (stale versions, dates, counts) may be offered as an
 immediate fix.
 
+0. **Run in isolation** exactly as `/check` does
+   (`.claude/commands/check.md`, opening paragraph); the prompt names
+   the engine root and the files changed per
+   `scripts/forge-status.ps1`. Back in the session: walk the findings
+   through with the principal.
 1. **Core internal consistency**
    - CLAUDE.md commands table ↔ actual files in `.claude/commands/`;
      described agents ↔ `.claude/agents/`.
@@ -31,32 +37,26 @@ immediate fix.
      anywhere in the core.
    - Decisions referenced from the intent exist in `decisions.md` and
      every DEC record is reflected in the intent where it applies.
-3. **Forge project internal**
-   - Front-matter version/date/status agreement (integer version =
-     `approved`); top Version History row matches the front-matter.
-   - Ledger agrees with reality: document versions and dates, DEC
-     count, open threads ↔ "Waiting on principal".
-   - ID hygiene: unique IDs, items in tens, groups starting at the next
-     hundred, prefixes in their proper documents, groups as plain
-     headings, depth ≤ 2.
-   - Stale references: renamed commands, closed threads, removed items,
-     dangling file references.
-4. **Recipes and renders** (shape and freshness, never content)
-   - Recipes in `projects/forge/recipes/` conform to
-     `templates/recipe.md`: front-matter complete (project, purpose,
-     audience, version, updated; `output:` optional), sections
-     Inputs / Instructions / Template present; every declared input
-     exists on disk; the `output:` path is valid. Genre skeletons
-     (`templates/recipe-<genre>.md`) extend that shape with genre
-     sections, never replace it.
-   - Render staleness: each render's front-matter provenance (recipe
-     version, input versions) against the files as they are now — a
-     render generated from versions that have since moved is a
-     finding, fixed by `/render`.
-   - The ledger's Renders table mirrors the renders' front-matter.
-   - Content stays out of scope: whether a recipe's instructions or a
-     render's message still match the principal's thinking is
-     substance, not conformance.
+3. **One mechanism in one place** (POS.1070) — over the
+   operating-layer files (`.claude/`, `templates/`, `scripts/`,
+   CLAUDE.md) changed in the scope; the full sweep of every command,
+   agent and template only on an explicit bare `/check-forge`.
+   - Every command, agent and template describes only its own job; a
+     procedure, rule set or file shape that another file owns is
+     cited by path, never restated. A restatement — the same steps or
+     rules in two places, whatever the wording — is a finding; the
+     fix is a reference to the owner.
+   - Every challenger persona (`.claude/agents/challenger-*.md`)
+     carries the fixed sections of `templates/challenger.md`
+     verbatim; only its Lens section is its own.
+   - No command performs directly what a script, command or agent
+     exists for (git outside the four scripts, a conversion outside
+     `doc2md.ps1`, a render outside `/render`, a review outside the
+     agents).
+4. **Forge project** — run the `/check` procedure
+   (`.claude/commands/check.md`) on `projects/forge` exactly as on any
+   thought project; its findings join this report. Nothing of that
+   procedure is restated here (POS.1070).
 5. **Rename/removal sweep** — grep for the old names recorded in DEC
    records (e.g. a renamed command) and for terms the principal has
    explicitly dropped; only historical records (changelogs, DEC, REJ)

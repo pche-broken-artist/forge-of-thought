@@ -1,51 +1,81 @@
 ---
-render_of: projects/forge/recipes/readme.md (v0.31)
+project: forge
+render: readme
+generated: 2026-09-02
+recipe: projects/forge/recipes/readme.md v0.31
 inputs:
   - CLAUDE.md
-  - projects/forge/10-intent.md (v3.8)
-generated: 2026-09-02
+  - projects/forge/10-intent.md v3.10
 ---
 
-# Forge of Thought 3.8
+# Forge of Thought 3.10
 
 *A workshop where thought is tempered and shaped.* · [Release notes](RELEASE-NOTES.md)
 
-Forge of Thought is an **AI cognitive extension** of a thinking human — the **principal**, whoever's thinking is being forged. It takes a raw, half-formed idea — a process redesign, a platform initiative, an organisational change, a D&D campaign — and tempers it into a precise, self-contained handover for whoever delivers it: a team, a colleague, your future self. It rests on one principle — **the machine carries every part of the work that is not deciding** — in three forms.
+Forge of Thought is an **AI cognitive extension** of a thinking human,
+the **principal** — whoever's thinking is being forged. It takes a raw,
+half-formed idea — a process redesign, a platform initiative, an
+organisational change, a D&D campaign — and tempers it into a precise,
+self-contained handover for whoever delivers it: a team, a colleague,
+your future self. It rests on one principle — **the machine carries
+every part of the work that is not deciding** — in three forms.
 
-- **It thinks with you.** It interviews and probes, criticises, challenges, inspires; it extracts what the principal has not yet articulated and lays out options with their trade-offs. It proposes — you decide.
-- **It keeps the work consistent.** Nothing wanders off in forgotten chats: the thinking lives in versioned, templated artefacts, with decisions, state and history keeping themselves in order and consistency guarded across every output.
-- **It carries the tedious work.** Audience-facing outputs — a pitch, a deck, even this README — are **renders**: generated from the artefacts through recipes, regenerated whenever the thinking moves, never written by hand twice.
+- **It thinks with you.** It interviews and probes, criticises,
+  challenges and inspires; it extracts what you have not yet
+  articulated and lays out options with their trade-offs. It proposes
+  — you decide.
+- **It keeps the work consistent.** Nothing wanders off in forgotten
+  chats: the thinking lives in versioned, templated artefacts, with
+  decisions, state and history keeping themselves in order and
+  consistency guarded across every output.
+- **It carries the tedious work.** Audience-facing outputs — a pitch,
+  a deck, even this README — are **renders**: generated from the
+  artefacts through recipes, regenerated whenever the thinking moves,
+  never written by hand twice.
 
-Technically, the forge is a git repository: slash commands and agent personas for Claude Code, templates, and the conventions binding them. The document chain currently ends at the assignment — the frozen, self-contained direction handed to the recipients — and is built to grow downward, layer by layer, without reworking anything that exists.
+Technically, Forge of Thought is a git repository: slash commands and
+agent personas for Claude Code, templates, and the conventions binding
+them. Today the chain runs from a brief through an intent to an
+assignment; that is where it currently ends.
 
 ## 1. Better with AI, or replaced by it?
 
-Forge of Thought is for those who chose to be better. The failure modes it exists to remove:
+Forge of Thought is for those who chose to be better. The failure
+modes it exists to remove:
 
-- Thinking scattered across chat sessions that die, taking their context with them.
-- Handovers whose completeness depends on the mood of the day they were written.
-- The same thinking retold to every audience — a pitch, a deck, a mail — each version rewritten by hand and drifting from the others.
-- Feedback and decisions with no place to land, so the same ground is fought over twice.
+- Thinking scattered across chat sessions that die, taking their
+  context with them.
+- Handovers whose completeness depends on the mood of the day they
+  were written.
+- The same thinking retold to every audience — a pitch, a deck, a
+  mail — each version rewritten by hand and drifting from the others.
+- Feedback and decisions with no place to land, so the same ground is
+  fought over twice.
 - Assumptions nobody attacked before reality did.
 
 ## 2. What you get
 
-- A versioned document chain growing from a **brief** — your own text, locked verbatim once it is done — to a self-contained **assignment**.
-- An elicitation interview that forges the **intent**: what you want, why, what is open, what was rejected.
-- Two kinds of blind adversarial reviewers — one attacking the substance of your thinking, one auditing the documents — with every verdict recorded.
-- Audience-specific renders generated from recipes, including an actual PowerPoint file through your own template.
-- External sources — transcripts, offers, standards — registered immutably and used only as the principal directs.
+- A versioned document chain growing from a brief — your own text,
+  locked verbatim once it is done — to a self-contained assignment.
+- An elicitation interview that forges the intent: questions that draw
+  out what you have not yet put into words.
+- Two kinds of blind adversarial reviewers — one on the documents, one
+  on the thinking — with every verdict recorded.
+- Audience-specific renders generated from recipes, including an
+  actual PowerPoint file through your own template.
+- External sources registered immutably and used only as you direct.
 - Everything in files and git — nothing depends on a chat's memory.
 
 ## 3. Quickstart
 
-First, once per machine:
+**First, once per machine**
 
 ```
-git clone <this repository>   # you are looking at it
-# install Claude Code — see Setup
-claude                        # always from the engine root
-/setup                        # first run only — fills CLAUDE.local.md, sets the model (Fable)
+git clone …            # this repository — you are looking at it
+                       # install Claude Code first — see Setup
+claude                 # always from the engine root
+/setup                 # first run only — fills CLAUDE.local.md,
+                       # sets the model (Fable)
 ```
 
 **Starting a new project**
@@ -59,55 +89,127 @@ claude                        # always from the engine root
 **Bringing an existing project**
 
 ```
-/import-project <project url> # clones into projects/ — the commit identity is proposed from your CLAUDE.local.md roster and confirmed by you
-/forge <project-slug>         # the slug is the repository's name; select the project before any work — the forge cannot guess it
+/import-project <project url>   # clones into projects/ — the commit
+                                # identity is proposed from your
+                                # CLAUDE.local.md roster and
+                                # confirmed by you
+/forge <project-slug>           # the slug is the repository's name;
+                                # select the project before any work
+                                # — the forge cannot guess it
 ```
 
-Each project lives inside `projects/<slug>/` as a git repository of its own, which the engine does not track — that is why you name it first.
+Each project lives inside `projects/<slug>/` as a git repository of
+its own, which the engine does not track — that is why you name it
+first.
 
 ## 4. How it is used
 
 ### The flow
 
-A thought arrives — a platform initiative, a reorganisation, a campaign taking shape for your D&D table. You dump it exactly as it is in your head into a brief: alone, or in conversation with the forge (`/forge brief`), which clarifies where you are terse but never adds content of its own. When the thought is whole, you lock it, and from that moment it is the untouchable record of where this all began.
+A thought arrives — a process you want redesigned, a platform you
+want built, a campaign taking shape for your D&D table. You dump it
+as it is: a page of prose, a few headings, a table if that is how it
+came out. That is your brief. You may write it alone and hand it over
+finished, or think it through with the forge (`/forge brief`) until
+it says what you mean; then you lock it, and from that moment it is
+never touched again.
 
-Then the real work: the forge interviews you (`/forge intent`) and the intent takes shape — your positions, your open threads, the directions you rejected and why. It is rewritten for coherence round after round, over days and sessions if that is what it takes, and because everything lives in files, you can close the laptop mid-thought and pick up weeks later exactly where you stood.
+From the brief the forge interviews you (`/forge intent`). It asks
+what you have not said, reflects back what it understood, drafts
+early so you have something concrete to react to, and writes the
+intent once per round on your word. The intent is rewritten for
+coherence every time; nothing lives only in the conversation, so you
+can stop tonight and pick up in three weeks by reading one file. When
+you need to know where things stand, `/forge` draws the map and
+`/ledger` reads the state.
 
-Material arrives when it arrives. You download a security standard and drop it in (`/ingest`); it sits registered and untouched until the day you say "verify the intent against it". Where a topic deserves grounding, `/research` fetches current best practice and files the findings.
+Material arrives whenever it arrives. A downloaded security standard,
+a meeting transcript, an offer from a vendor: `/ingest` stores and
+registers it, and it sits there until you say what it is for — later,
+perhaps, you ask for the intent to be verified against that standard,
+and only then is it read. Where a topic needs grounding, `/research`
+looks up current practice and files what it found.
 
-At the moments you choose, you send in the reviewers. A challenger persona attacks the substance — the assumptions you did not state, the problem behind your stated objective; the critic audits the documents for ambiguity, gaps and drift. Nothing they say blocks you: you walk their findings one by one and rule on each.
+Before the next layer is derived, you send in the reviewers. A
+challenger persona (`/challenge cto`) attacks the thinking; the critic
+(`/critique`) audits the documents. Neither has seen your
+conversation, so neither knows what you meant to say — only what you
+wrote. Their findings come back one at a time for your verdict, and
+nothing they say blocks you: you accept, you overrule with a reason,
+or you leave it open.
 
-When the direction is settled, the assignment is distilled — the one document the recipients receive. And whenever an audience needs its own view, you compose a recipe (a genre interview can guide you — `/recipe presentation`) and render it: a pitch for the group, slides including the actual PowerPoint file, a summary, this very README. When the thinking moves, the renders are regenerated — never rewritten by hand.
-
-Along the way, `/save` keeps everything in git: checked for conformance first, committed and pushed after.
+When the intent is ready, `/forge assignment` distils it into the one
+document the recipients receive, self-contained and complete. And
+whenever someone else needs the thinking in their shape — a pitch for
+the group, a deck for the board, a mail, this very README — you write
+a recipe, guided by a genre interview if you like (`/recipe
+presentation`), and `/render` generates the output. When the intent
+moves, the render is regenerated; you never rewrite the pitch by
+hand. `/save` keeps all of it in git as you go.
 
 ### What it looks like in practice
 
-A worked example from a real project will appear here once one is published.
+A worked example from a real project will appear here once one is
+published.
 
 ## 5. How the work feels
 
-The forge is as much a way of working as a set of files, and these are the named methods of that work — the vocabulary you and Claude share.
+The forge is as much a way of working as a set of files, and these
+are the named methods of that work — the vocabulary you and Claude
+share.
 
-- **Walkthrough.** Any list needing your decision — findings, challenges, open threads, differences between two requirement sets — is worked one item at a time, in order of weight: Claude's recommendation with a one-sentence reason first, your verdict in a word or a counter-proposal, "leave it open" always legitimate. Never a table asking for every verdict at once; everything is written once at the round's end.
-- **Propose, never decide.** Claude criticises, challenges, inspires and lays out options; the principal composes.
-- **Step by step.** Anything hard to reverse — a write, a commit, a rename — arrives as one step with the exact operation and reason stated, and runs on your word; a plan you have seen is not consent for its steps.
-- **Elicitation interview.** Questions draw out what you have not yet articulated; gaps are never filled by assumption.
-- **Draft early.** An early draft is an elicitation tool, not an output: concrete text sharpens your reaction.
-- **Reflect back.** Before writing, Claude restates what it understood, so the write confirms rather than surprises.
-- **Intent-first.** Substance changes go into the intent and propagate from there; only wording is fixed downstream directly.
-- **Recommend, do not push.** Every option comes with a recommendation and reason, stated once; a declined recommendation is not re-argued without new facts.
+- **Walkthrough.** Any list that needs your decision — critique
+  findings, challenges, the differences between two requirement sets,
+  open threads — is worked one item at a time, in order of weight:
+  Claude's recommendation with a one-sentence reason first, your
+  verdict in a word or a counter-proposal, and "leave it open" is a
+  legitimate answer. You are never handed a table asking for every
+  verdict at once; verdicts are written once at the round's end, and
+  whatever produces a list ends by offering a walkthrough.
+- **Propose, never decide.** Claude criticises, challenges, inspires
+  and lays out options; you compose.
+- **Step by step.** Anything that needs your consent — a write, a
+  commit, a push, a rename, anything hard to reverse — arrives as one
+  step with the exact operation, its target and the reason, and runs
+  on your word; a plan you have seen is not consent for its steps.
+- **Elicitation interview.** Claude draws out by questions what you
+  have not yet articulated, never filling a gap by assumption.
+- **Draft early.** An early draft is an elicitation tool, not an
+  output: concrete text sharpens your reaction.
+- **Reflect back.** Before anything is written, Claude restates what
+  it understood, so the write confirms rather than surprises.
+- **Intent-first.** A change of substance goes into the intent and
+  propagates from there; only wording is fixed downstream directly.
+- **Recommend, do not push.** Every option comes with a
+  recommendation and its reason, stated once; a declined
+  recommendation is not re-argued without new facts.
 
-None of these is a command — you invoke any of them in a word.
+None of these is a command: you invoke any of them in a word.
 
 ## 6. Roles
 
 | Role | What they own |
 |---|---|
-| **Principal** | Whoever's thinking is being forged. Supplies ideas, answers and decisions; final authority on all content. |
-| **Claude** | Cognitive extension of the principal. Owns structure, order, process discipline and document hygiene; criticises, challenges, inspires and lays out options; proposes, never decides. |
+| **Principal** | Whoever's thinking is being forged: supplies ideas, answers and decisions, and is the final authority on all content. |
+| **Claude** | The principal's cognitive extension: owns structure, order, process discipline and document hygiene; criticises, challenges, inspires and lays out options; proposes, never decides. |
 
-The standing rules: when unsure, ask — never fill gaps by assumption; never introduce a new convention unilaterally; many iterations are the normal mode; research before inventing; everything is advisory, never blocking — only the principal publishes; artefacts are written once per iteration round, on confirmation. One instance serves one principal, and recipients collaborate through the artefacts; more principals means more instances (see Planned extensions).
+The standing rules of the collaboration: when unsure, Claude asks and
+never fills a gap by assumption; it never introduces a new convention,
+prefix or section unilaterally — it proposes, waits for a decision,
+then writes it down; many iterations are the normal mode; for key
+topics it researches current practice before inventing and stores
+durable findings in `research/`; critiques and checklists are
+advisory, never blocking — a missing section may be a deliberate
+delegation, not a defect; structure with stable IDs beats prose, with
+narrative confined to purpose and objective; assignments are complete
+and precise; artefacts are written once per iteration round, on the
+principal's confirmation; and one mechanism lives in one place —
+whatever the forge has a procedure for is used through its own
+definition, never re-described or improvised, and a procedure stated
+in two places is a defect. One instance serves one principal; the
+recipients collaborate through the artefacts, not inside the
+instance — more principals means more instances (see Planned
+extensions).
 
 ## 7. The document chain
 
@@ -133,96 +235,255 @@ flowchart LR
     class RI,RA,RT render
 ```
 
-**Blue = chain artefacts (light = not built yet), green = renders; dashed arrows = growth that does not exist yet.**
+**Blue = chain artefacts (light = not built yet), green = renders;
+dashed arrows = growth that does not exist yet.**
 
-Adding a layer is one definition file declaring its inputs — nothing is renumbered and nothing existing is reworked, which is why files are numbered in tens. The boundary between chain and render is authorship: a chain artefact is composed by the principal, a render is generated from artefacts — the article and its translation in the diagram illustrate it.
+Adding a layer is one definition file declaring its inputs — nothing
+is renumbered and nothing existing is reworked, which is why the files
+are numbered in tens. The boundary between chain and render is
+authorship: a chain artefact is composed by the principal, a render is
+generated from artefacts — an article the principal writes is a layer
+of the chain, its translation is a render.
 
 | File | What it is |
 |---|---|
-| `00-brief.md` | The idea as the principal wrote it — draft until locked, then verbatim; later wholes as `00-brief-<name>.md`. |
+| `00-brief.md` | The idea as the principal wrote it — draft until locked, then verbatim and never edited; later wholes as `00-brief-<name>.md`. |
 | `10-intent.md` | The working understanding — rewritten freely for coherence, versioned. |
-| `20-assignment.md` | Frozen high-level direction for the recipients — versioned, the only document handed over. |
+| `20-assignment.md` | The frozen high-level direction for the recipients — versioned, the only document handed over. |
 | `decisions.md` | Append-only DEC records. |
-| `ledger.md` | Single source of truth for state. |
+| `ledger.md` | The single source of truth for state. |
 
-> A locked brief is immutable — composed, then locked, never touched again.
+> A locked brief is immutable — composed, then locked, never touched
+> again.
 
-A **brief** is an intent that is composed and then locked. It is free-form — any structure the principal finds useful: prose, headings, tables, use cases — with no required content and no IDs, because it holds thoughts to be processed, not decisions: they may be changed, reworked or dropped when mined. It is `draft` while being composed and `approved` (1.0) once locked, and three origins are equally legitimate and indistinguishable to the forge: it arrives finished and is locked on arrival, it is begun outside and finished with Claude, or it is born in the forge — `/forge brief [name]` is the door for the latter two. A project may have more than one: every later whole of thinking that would otherwise land in the intent as a batch of unproven positions is born as `00-brief-<name>.md` under the same rules. A locked brief is mined into the single intent — positions cite it as provenance, a whole that dies on the way leaves the brief locked and one REJ with the reason — and the ledger tracks each brief's mining state (`pending | partial | mined | dropped`). Each locked brief is the provenance anchor and drift measure of its whole.
+The **brief** is an intent that is composed and then locked. It is
+free-form: any structure the principal finds useful — prose,
+headings, tables, use cases — with no required content and no IDs,
+only a minimal YAML header. It holds thoughts to be processed, not
+decisions: they may be changed, reworked or dropped when mined. It is
+`draft` while being composed and `approved` (1.0) once the principal
+locks it. Three origins are equally legitimate and indistinguishable
+to the forge: it arrives finished and is locked on arrival; it is
+begun outside and finished with Claude; it is born in the forge —
+`/forge brief [name]` is the door for the latter two. A project may
+have more than one: every later whole of thinking that would
+otherwise land in the intent as a batch of unproven positions is born
+as `00-brief-<name>.md` under the same rules. A locked brief is mined
+into the single intent — positions cite it as provenance, a whole that
+dies on the way leaves the brief locked and one rejected direction
+with the reason — and the ledger tracks how far each brief is mined
+(`pending | partial | mined | dropped`). Each locked brief is the
+provenance anchor and drift measure of its whole.
 
-The **intent** (`10-intent.md`) is the consolidated *current* state of the principal's thinking — positions held (POS), open threads (THR) and rejected directions with the reason they were dropped (REJ), each with a stable ID. It exists because chat context dies and anything of value must live in a file: it is the document to read when returning after weeks, instead of excavating old conversations. Its audience is the principal and Claude only, and it is rewritten for coherence every round rather than appended, with the changes recorded in its changelog.
+The **intent** (`10-intent.md`) is the working document, for the
+principal and Claude only: the consolidated *current* state of what he
+wants, why, what is open and what was rejected — positions (POS), open
+threads (THR) and rejected directions with their reason (REJ), each
+with a stable ID. It is rewritten for coherence every round rather
+than appended to, with its changes recorded in a changelog. It exists
+because chat context dies and anything of value must live in a file:
+it is the document to read when returning to a project after weeks,
+instead of excavating old conversations.
 
-The **assignment** (`20-assignment.md`) is distilled from the intent for the recipients — teams, colleagues, or the principal's future self — and is the one document they receive: requirements, out-of-scope items, constraints, assumptions, deliverables, open questions with an owner, optional success criteria (REQ, OOS, CON, ASM, DEL, TBC, SCR). It carries the full in-scope substance of the intent, written as precisely as fidelity requires — complete and precise, assigning rather than solving, and self-contained: nothing in it depends on an external link to be understood.
+The **assignment** (`20-assignment.md`) is distilled from the intent
+for the recipients — teams, colleagues, or the principal's future
+self — and is the one document they receive: requirements,
+out-of-scope items, constraints, assumptions, deliverables, open
+questions with an owner and optional success criteria (REQ, OOS, CON,
+ASM, DEL, TBC, SCR). It carries the full in-scope substance of the
+intent, complete and precise; it assigns rather than solves; and it
+is self-contained.
 
-Iteration goes intent-first: substance changes land in the intent and propagate to the assignment, while wording-only fixes may edit the assignment directly. Writes happen once per iteration round, on the principal's confirmation — one version bump and one Version History row for the whole round. Feedback from recipients has no channel of its own: the principal processes it and feeds conclusions back through `/forge intent`.
+Substance changes go intent-first and propagate to the assignment;
+only wording is fixed in the assignment directly. Artefacts are
+written once per iteration round, on the principal's confirmation —
+one version bump, one Version History row for the whole round.
+Feedback from the recipients has no channel of its own: the principal
+processes it and feeds conclusions back through `/forge intent`.
 
 > A render is never edited by hand — what is iterated is its recipe.
 
-**Renders and recipes.** A render is an audience-specific output generated from the chain — a pitch, an architecture picture, an executive summary, this README. The iterated thing is its **recipe** (`recipes/<recipe>.md`): inputs, audience, instructions and the output template in one versioned file. `/render <recipe>` regenerates the output into `renders/<recipe>.md` — or the recipe's own `output:` path — overwriting freely, history in git; generation runs in an isolated subagent that sees only the recipe and its inputs. Every render opens with YAML front-matter provenance citing the recipe and each input with their versions, and a render may serve as an input of another render when the citing recipe declares it. A render assigns nothing and is not part of the chain: the artefacts stay the source of truth. Every project has a README as a render of its own recipe and, if it is a thought project, release notes likewise; every save that touches the project regenerates them.
+**Renders and recipes.** A render is an audience-specific output
+generated from the chain — a pitch for the group, an architecture
+picture, an executive summary, the repository README. Its **recipe**
+(`recipes/<recipe>.md`) carries inputs, audience, instructions and the
+output template in one versioned file, and more than one input is
+legitimate; `/render <recipe>` regenerates the output into
+`renders/<recipe>.md` — or the recipe's `output:` path — overwriting
+freely, with history in git. Generation runs in an isolated subagent
+that sees only the recipe and its inputs. Every render opens with YAML
+front-matter provenance citing the recipe and each input with their
+versions, and the ledger's Renders table mirrors it. A render assigns
+nothing and is not part of the chain; it may itself serve as an input
+of another render — a slide citing an architecture picture — when the
+citing recipe declares it among its inputs. Every project has a README
+as a render of its own `recipes/readme.md` and, if it is a thought
+project, release notes from `recipes/release-notes.md`; every `/save`
+that touches the project regenerates them.
 
-**From Markdown to slides.** Everything the forge produces is Markdown, renders included — a presentation is a `.md` saying what is on each slide. Composing a recipe may be guided by genre (`/recipe presentation`). The one in-house conversion is `scripts/md2pptx.ps1`: it turns a Markdown deck render into an actual PowerPoint file, applying a `.potx` template when one is named by path — typically a document of a library project — and designing the visuals itself when none is. The generated `.pptx` lands beside its source render; the Markdown stays the source of truth. All other format conversion happens outside the forge.
+**From Markdown to slides.** Everything the forge produces is
+Markdown, content only. Composing a recipe may be guided by genre
+(`/recipe presentation` for a slide-by-slide deck definition). The one
+in-house conversion is `scripts/md2pptx.ps1`: it turns a deck render
+into an actual PowerPoint file through headless Claude Code with the
+official pptx skill — an LLM conversion by design, because deck
+definitions are free-form and may carry instructions for the model. A
+`.potx` template is applied when named by path (`-Template <path>`,
+typically a document of a library project); without it, Claude
+designs the visuals itself. The generated `.pptx` lands beside its
+source render and is tracked like any render output; the Markdown
+render stays the source of truth. All other format conversion happens
+outside the forge.
 
 ## 8. Two isolated reviewers
 
-Both reviewers run as isolated subagents with clean contexts: they see the artefacts only, never the working conversation. They cannot be told what we really meant — if the documents do not say it, it is not there. That blindness is the source of their value.
+Both reviewers run as isolated subagents with a clean context: they
+see the artefacts only, never the working conversation — they cannot
+be told what we really meant, and that blindness is the source of
+their value. They run on the same session model as the author: speed
+is bought with context, never with a weaker reviewer.
 
-The **challengers** are a growing roster of persona lenses attacking the substance of the thinking: unstated assumptions, whether the objective is the real problem, second-order effects, organisational reality, failure modes, the counter-case.
+The **challengers** are a growing roster of persona lenses attacking
+the substance of the thinking: unstated assumptions, whether the
+objective is the real problem, second-order effects, organisational
+reality, failure modes, the counter-case.
 
-The **critic** is the auditor of the documents and of the project's consistency across artefacts: ambiguity, gaps, contradictions, duplication, divergence between intent and assignment, regression on past findings.
+The **critic** is the auditor of the documents and of the project's
+consistency across artefacts: ambiguity, gaps, contradictions,
+duplication, divergence between intent and assignment, regression on
+past findings.
 
-Isolation is not independence: the two reviewers share the author's model family, so what that family systematically cannot see, none of them will find — their agreement is never validation, only consistency under one set of priors. The calibration point lies outside the forge: review by humans or by a different model family, invited at the principal's discretion.
+Isolation is not independence. The author, the critic and the
+challengers share one model family; what that family systematically
+cannot see, none of them will find, so agreement between the
+reviewers is never treated as validation — it only means the artefact
+is consistent under one set of priors. The calibration point lies
+outside the forge: review by humans or by a different model family,
+invited at the principal's discretion.
 
-### /challenge
+### `/challenge <persona> [artefact]`
 
-`/challenge <persona> [artefact]` runs one isolated agent per persona, each a distinct lens; the first is `cto` (peer-CTO register: direct, few and sharp, no flattery), and further personas are created only by the principal's decision, only where their blind spots genuinely differ. The target may be any chain artefact (default the intent); a layer is best challenged before the next one is first derived from it. Bare `/challenge` lists the roster and recommends a fit. Challenges carry a severity (dealbreaker | major | minor) and an epistemic status, and fabrication is banned — uncertainty is stated, not papered over. Results land as CHL items in `challenges/` with states `open`, `accepted`, `rejected` (with a DEC recording the reason), `parked`, `obsolete`. An accepted challenge must change the intent.
+One isolated agent per persona (`challenger-<persona>`), each a
+distinct lens defined by the blind spots it exists to find. The
+behaviour shared by every persona lives in `templates/challenger.md`
+and is carried verbatim by each persona file; only its Lens section is
+its own. The first persona is `cto` — peer-CTO register: direct, few
+and sharp, no flattery. Further personas are created only by the
+principal's decision, and only where their blind spots genuinely
+differ. Bare `/challenge` lists the roster and recommends a fit. The
+target may be any chain artefact (default the intent); a layer is best
+challenged before the next one is first derived from it. A run yields
+three to seven sharp challenges, each with a severity (dealbreaker,
+major, minor), a falsifiable "what would change my mind" and an
+epistemic status; fabrication is banned — uncertainty is stated, not
+papered over. Output: `CHL` items in
+`challenges/YYYY-MM-DD-challenge-<persona>.md`, immutable once
+written. Challenge states: `open | accepted | rejected (→ DEC) | parked
+| obsolete`; an accepted challenge must change the intent, a rejected
+one is recorded as a decision with its reason. The run ends by
+offering a walkthrough.
 
-### /critique
+### `/critique`
 
-`/critique` produces FND findings in an immutable review file in `reviews/`, each run a delta report against the last. Finding states:
+The critic reviews the chain artefacts for document quality and
+produces `FND` items in `reviews/YYYY-MM-DD-critique.md`, immutable
+once written, as a delta against the previous run: new, verified
+resolved, still open, newly obsolete. Style violations — modal verbs
+instead of shall, multi-idea items, dependence on an external link —
+are findings; untestable wording is a recommendation, never a defect.
+Finding states:
 
-- new
-- verified resolved
-- still open
-- newly obsolete
+- open — reported, not yet ruled on;
+- fixed — an iteration of the artefact concerned;
+- overruled — recorded as a decision (DEC) with its reason;
+- deferred — waiting on the principal, recorded in the ledger;
+- obsolete — the passage it concerned no longer exists.
 
-Every finding is either fixed or explicitly overruled with a recorded reason (a DEC); silently ignoring is not an outcome. A missing section may be a deliberate delegation, not a defect — the critic informs, the principal decides. Both reviewers end by offering a walkthrough of their findings.
+The run ends by offering a walkthrough.
 
 ## 9. Commands
 
-Commands are entry points, not the only door — the same rules apply in ordinary conversation.
+Commands are the doors into the forge's phases; each is defined in
+`.claude/commands/`.
 
 | Command | Purpose |
 |---|---|
-| `/setup` | First run after cloning the engine: fills `CLAUDE.local.md` by interview, sets the session model to Fable, and offers one global git guard. Never overwrites, runs no git operation. |
-| `/new-project <slug>` | Scaffold a project by kind — files only, never git: a thought project with its brief, or a library of shared material. |
-| `/import-project <git-url>` | Bring an existing project into `projects/` by cloning it through `scripts/forge-clone.ps1`; the directory is the repository's name. |
-| `/forge [slug]` | The chain map: artefacts, versions, stale renders, and a recommended next step. |
-| `/forge <state> [slug]` | Iterate the target artefact (`brief [name]`, `intent`, `assignment`, …). |
-| `/ingest [file] [slug]` | Store and register external input in `sources/` and index it; bare, it sweeps `sources/` for unregistered files. |
-| `/render <recipe> [slug]` | Regenerate a render from its recipe in `recipes/`. |
-| `/recipe [genre] [slug]` | Bare, the genre roster; with a genre (`presentation`, `readme`, `release-notes`), guided composition or iteration of a render recipe. |
-| `/critique [slug]` | Run the isolated critic on the project's documents. |
-| `/challenge [persona] [artefact] [slug]` | Bare, the challenger roster; with a persona, run that challenger against the substance of any chain artefact (default the intent). |
-| `/research <topic> [slug]` | Best-practices research; durable notes stored in `research/` and indexed. |
+| `/setup` | First run after cloning the engine: creates and fills `CLAUDE.local.md` by interview, creates `.claude/settings.local.json` with the model set to Fable (a notice, not a question), and offers the global git identity guard. Never overwrites, runs no git operation. |
+| `/new-project <slug>` | Scaffolds a project by kind — files only, never git: a thought project with its brief captured verbatim (locked if finished, draft otherwise), or a library (`lib-`) of shared material. |
+| `/import-project <git-url>` | Brings an existing project into `projects/` through `scripts/forge-clone.ps1`; the directory is the repository's name, and the commit identity is set per repository, proposed from `CLAUDE.local.md` by the URL's host. |
+| `/forge [slug]` | The chain map: which artefacts exist at what versions, which renders are stale, which states can be worked next — with a recommended next step. |
+| `/forge <state> [slug]` | Works on the named artefact (`brief [name]`, `intent`, `assignment`, …): the command is simply the name of the artefact you want to work on. |
+| `/ingest [file] [slug]` | Stores and registers external input in `sources/` and indexes it; bare, sweeps `sources/` for unregistered files. |
+| `/render <recipe> [slug]` | Regenerates a render from its recipe in `recipes/`. |
+| `/recipe [genre] [slug]` | Bare, the genre roster; with a genre (`presentation`, `readme`, `release-notes`), guided composition — or iteration — of a render recipe. |
+| `/critique [slug]` | Runs the isolated critic; review file plus ledger. |
+| `/challenge [persona] [artefact] [slug]` | Bare, the persona roster; with a persona (e.g. `cto`), runs that challenger against any chain artefact (default the intent). |
+| `/research <topic> [slug]` | Best-practice research into `research/`, indexed. |
 | `/ledger [slug]` | The quick state readout from the ledger. |
-| `/check [slug]` | Conformance of project(s) against the current conventions; all but forge when bare. |
-| `/check-forge` | Consistency check of the engine core and `projects/forge` against each other. |
+| `/check [slug]` | Conformance of a project against the current conventions; all but forge when bare. |
+| `/check-forge` | Consistency check of the core and `projects/forge`. |
 | `/save [slug] [-m "message"]` | Pre-save check, findings settled with the principal, then commit and push. |
-| `/spinoff <project> <group> <slug>` | Split a requirement group into its own project — only by the principal's explicit decision. |
+| `/spinoff <project> <group> <slug>` | Splits a requirement group into its own project — on the principal's explicit decision only. |
 
-The star mechanics of `/forge <state>` are plain: the command is simply the name of the artefact you want to work on, one definition file per state declaring its inputs — so a new layer is a new file, nothing more. `/ingest` stores, registers and catalogues — nothing else: registration does not imply intake, each source's role is individual, and content enters the intent only by the principal's explicit act, with provenance; at ingest, every binary file gets one question — convert to Markdown? — making either the extract or the functional binary the source. `/save` first re-renders the README and release-notes head when the save touches the engine core or `projects/forge/`, then runs the relevant conformance check, settles findings with the principal, proposes a commit message and only then runs the script.
+`/forge <state>` is a star, not a line: a thin dispatcher plus one
+definition file per state in `.claude/commands/forge/`, each declaring
+its own inputs, so a new layer branches from any artefact by adding
+one file. `/ingest` stores, registers and catalogues — nothing more.
+Sources may arrive at any stage, even before the brief; a source has
+one form, so every binary file gets one question — convert to
+Markdown? — and becomes either a text extract `sources/<slug>.md`
+produced by `scripts/doc2md.ps1` (the original not copied, or
+gitignored where it already lies) or a functional binary kept as is —
+a template, a graphic. A set of related files lives as a bundle
+`sources/<slug>/` with its own catalogue and counts as one source.
+What a source is for is noted as a free-text role in the directory's
+`00-INDEX.md`, and the principal alone directs how and when it is
+used — nothing from a source enters the intent without his explicit
+act and a citation. `/save` is the recommended door for saving: when
+the save touches the engine's core or `projects/forge/`, it first
+regenerates `README.md` and the Unreleased head of `RELEASE-NOTES.md`
+from their recipes (the two renders run in parallel) and reports what
+materially changed; then it runs the conformance check in scope —
+`/check-forge` for core changes, `/check <slug>` for a project's —
+settles the findings with the principal, proposes a commit message,
+and only then runs the script. Plain conversation works too: the
+commands are entry points into phases, not the only permitted door,
+and the core rules apply in ordinary conversation.
 
 ### A typical journey
 
-- You write down the idea exactly as it is in your head and lock it as the brief of your project (`/new-project`, `/forge brief`).
-- Over the following days the forge interviews you and your intent takes shape — positions, open threads, rejected directions — rewritten each round (`/forge intent`).
-- You send in a challenger to attack the thinking and the critic to audit the documents, then walk their findings one by one, ruling on each (`/challenge cto`, `/critique`).
-- The group wants to hear about it, so you compose a presentation recipe and render it — including the actual PowerPoint through your own template (`/recipe presentation`, `/render`).
-- When the direction is settled, the assignment is distilled: complete, precise, self-contained — the one document your recipients receive (`/forge assignment`).
-- All along you save as you go; every save checks conformance first and re-renders what the change made stale (`/save`).
+- You have an idea and write it down as it comes; the forge captures
+  it verbatim as the brief of your project and locks it
+  (`/new-project`), or you compose it with the forge first
+  (`/forge brief`).
+- You are interviewed until the intent says what you actually want,
+  over several sessions and days; each round is written once, on your
+  word (`/forge intent`).
+- A vendor's offer and a standard you downloaded are stored beside the
+  project and used only when you say so (`/ingest`); a topic you are
+  unsure about gets researched (`/research`).
+- You send in a peer to attack the thinking and an auditor to attack
+  the documents; you rule on every challenge and finding, one at a
+  time, and each verdict is recorded (`/challenge cto`, `/critique`).
+- You want to pitch it to the group: you compose a presentation recipe
+  through the genre interview, render the deck and generate the
+  PowerPoint through your own template (`/recipe presentation`,
+  `/render`, `scripts/md2pptx.ps1`).
+- When the intent is right, you distil the assignment the recipients
+  will get — complete, precise, self-contained (`/forge assignment`).
+- You save as you go; every save re-renders your project's README and
+  release notes, checks the project against the conventions and lets
+  you settle what it finds before it commits (`/save`).
 
 ## 10. Conventions
 
-**IDs.** Format `PREFIX.NNNN`, all prefixes three letters. IDs are global and stable — never renumbered; items may move between groups without ID change. Items are numbered in tens, each new group starting at the next hundred; groups are plain headings with no IDs and no lifecycle, depth capped at two levels.
+**IDs.** Every item carries an ID of the form `PREFIX.NNNN`, all
+prefixes three letters. IDs are global and stable — never renumbered;
+items may move between groups without changing their ID. Items are
+numbered in tens (`REQ.0010, REQ.0020`), each new group starting at
+the next hundred (`REQ.0100, REQ.0110`); overflow takes the next free
+number anywhere. Groups are plain headings — no IDs, no metadata, no
+lifecycle — at most two levels deep.
 
 | Prefix | Meaning | Lives in |
 |---|---|---|
@@ -230,7 +491,7 @@ The star mechanics of `/forge <state>` are plain: the command is simply the name
 | OOS | out of scope / do-not | assignment |
 | CON | constraint — deliberate boundary, not to be challenged | assignment |
 | ASM | assumption | assignment |
-| DEL | deliverable — may delegate work | assignment |
+| DEL | deliverable — may delegate work ("produce NFRs and return") | assignment |
 | TBC | open question / to be confirmed, with owner | assignment |
 | SCR | success criterion — optional or delegated | assignment |
 | POS | position the principal currently holds | intent |
@@ -240,24 +501,73 @@ The star mechanics of `/forge <state>` are plain: the command is simply the name
 | CHL | peer-review challenge (substance) | ledger, challenges |
 | DEC | decision, incl. overruled findings and rejected challenges | decisions.md |
 
-**Terms.** Every assignment carries a Terms section listing the prefixes and domain terms it uses, so it can be forwarded without oral tradition; defined terms are capitalised in item text.
+**Terms.** Every assignment carries a Terms section listing the
+prefixes and the domain terms it actually uses, so it can be forwarded
+without oral tradition; defined terms are capitalised in item text to
+signal that they appear there.
 
-**Language.** The forge dictates the output language: all artefacts are written in English — the briefs are the exception, stored verbatim in whatever language they were written. The conversation language is per-instance configuration; it lives in `CLAUDE.local.md`.
+**Language.** The forge dictates the output language: all artefacts
+are written in English. The briefs are the exception, stored verbatim
+in whatever language they were written. The language of the working
+conversation is per-instance configuration and lives in
+`CLAUDE.local.md`.
 
-**Requirement style.** Requirements use **shall** / **shall not** — no would, could, should, might, may, no MoSCoW wording. No priority column and no priority tags: everything in an assignment is essential by default, an exception is marked *optional* on the item. Each item covers one idea, is written once, in full, correct UK English sentences, and must not depend on an external link to be understood, agreed or later tested. Testability is recommended, not required — delegating concretisation through a DEL item is legitimate, and the critic reports untestable wording as a recommendation, never a blocking defect. An illustrative item:
+**Requirement style.** Items use *shall* / *shall not* — never would,
+could, should, might, may, or MoSCoW wording. There is no priority
+column and no priority tags: everything in an assignment is essential
+by default, and an exception carries a note reading *optional* on that
+item. Each item covers one idea, is written once, and is written in a
+full, correct UK English sentence. Testability is recommended, not
+required: assignments are deliberately high-level, and delegating
+concretisation through a `DEL` item is a legitimate outcome — the
+critic reports untestable wording as a recommendation, never as a
+blocking defect. An item must not depend on an external link to be
+understood, agreed or later tested. For illustration only:
 
-> REQ.0010 The Platform shall record every request and every response passing through the Gateway, with the identity of the requesting User and the time.
+> REQ.0010 The Platform shall record every request and every response
+> passing through the Gateway, with the identity of the requesting
+> User and the time.
 
-**Completeness over brevity.** An assignment carries the full in-scope substance of the intent, written as well and as precisely as possible; length is whatever fidelity requires, and leaving a matter out is legitimate only as an explicit delegation (a DEL or TBC item). The boundary is one of kind: an assignment assigns, it does not solve — the machinery of executing delivery belongs to the recipients.
+**Completeness over brevity.** An assignment carries the full
+in-scope substance of the intent, written as well and as precisely as
+possible; nothing is omitted for brevity's sake, and length is
+whatever fidelity requires. Leaving a matter out is legitimate only as
+an explicit delegation — a DEL or TBC item. The boundary is the kind
+of content, never its amount: an assignment assigns, it does not
+solve; the machinery of executing delivery belongs to the recipients,
+while any apparatus the principal judges part of setting direction
+may appear.
 
-**Versioning.** Integers denote signed-off versions: drafts run `0.1, 0.2, …`; `1.0` is approved; `1.1, 1.2, …` are changes after approval, not yet approved themselves; `2.0` is the next approved version. Front-matter carries `version`, `date` and `status` (`draft | in_review | approved | superseded`), and status must agree with the number. Every versioned document opens with a Version History table stating what changed and why. Reviews, challenges and research notes are immutable from creation; corrections happen downstream.
+**Versioning.** Integers denote signed-off versions, aligned with the
+group BRD standard:
 
-**Project kinds and naming.** A project is of kind `thought` — the chain — or `library` (`lib-` prefix): shared material with no chain, only a ledger, sources and research, its README a catalogue of what it holds. Slugs are lowercase and hyphenated on disk (the engine's own project is `forge`); display names may differ.
+- `0.1, 0.2, …` drafts before first approval
+- `1.0` approved
+- `1.1, 1.2, …` changes made after approval, not yet approved
+  themselves
+- `2.0` the next approved version, incorporating all changes since 1.0
+
+Front-matter carries `version`, `date` and `status`
+(`draft | in_review | approved | superseded`), and status must agree
+with the number: an integer version is `approved`, anything else is
+not. Every versioned document opens with a Version History table
+(Version | Modification | Author | Date) stating what changed and why.
+Immutable artefacts — a locked brief, reviews, challenges, research —
+are never edited: a brief from its lock, the others from creation;
+corrections happen downstream.
+
+**Project kinds and naming.** A project has a kind, declared in the
+header of its ledger: `thought` — the chain — or `library`, a
+collection of material shared across projects with no chain, only a
+ledger, sources, research and a README that catalogues what it holds.
+Slugs are lowercase and hyphenated on disk; display names may differ.
+The engine's own project is `forge`; libraries carry the `lib-`
+prefix (`lib-<name>`).
 
 ## 11. Repository layout
 
 ```
-CLAUDE.md                  # universal core — the rules
+CLAUDE.md                  # the universal core — rules for the agent
 CLAUDE.local.md            # instance facts (principal, conversation
                            # language) — gitignored, created by
                            # /setup from templates/CLAUDE.local.md
@@ -322,64 +632,151 @@ projects/lib-<name>/       # kind: library — material shared across
 
 ### Prerequisites
 
-- git
-- PowerShell 7 (`pwsh`) — the scripts are PowerShell, needed on macOS/Linux too
-- Python 3 (for markitdown)
-- A paid Claude subscription
+- git.
+- PowerShell 7 (`pwsh`) — the scripts are PowerShell and run
+  unchanged on Windows, macOS and Linux; on macOS and Linux it is one
+  install.
+- Python 3 — for markitdown, the document-to-Markdown engine behind
+  `scripts/doc2md.ps1`.
+- A paid Claude subscription — Claude Code draws on the same pool as
+  Claude chat.
 
 ### Getting the forge and Claude Code
 
-Clone this repository — it is the engine. Then install Claude Code:
+Clone this repository: it is the engine. Then install Claude Code —
+on Windows `irm https://claude.ai/install.ps1 | iex`, on macOS or
+Linux `curl -fsSL https://claude.ai/install.sh | bash`, or on any
+platform `npm install -g @anthropic-ai/claude-code` — and sign in on
+first run. Always start `claude` from the engine root, so that
+`CLAUDE.md` and `CLAUDE.local.md` load.
 
-- Windows: `irm https://claude.ai/install.ps1 | iex`
-- macOS/Linux: `curl -fsSL https://claude.ai/install.sh | bash`
-- or `npm install -g @anthropic-ai/claude-code`
+Then run `/setup` once. It creates `CLAUDE.local.md` from its
+template and fills it with you in a short interview — who the
+principal is, the conversation language, your git identities per
+host; the file is gitignored and never committed. It creates
+`.claude/settings.local.json` with the session model set to Fable,
+the strongest available model, which the whole forge including the
+blind reviewers runs on; it tells you so in one sentence, and
+`/model` or editing that file changes it at any time (permissions
+come from the shared `.claude/settings.json`). It closes by offering
+one global git guard — `user.useConfigOnly = true` appended to
+`~/.gitconfig` — so that a repository without a local identity fails
+aloud instead of committing with a default; declined, it prints the
+line for you to apply by hand, and where your `~/.gitconfig` still
+carries a global `user.name` or `user.email` it tells you the guard
+only bites once that identity is removed. The identities themselves
+are set per repository, proposed from your roster at every project
+creation or import. `/setup` never overwrites existing files.
 
-Sign in on first run — usage draws from the same pool as Claude chat. Always start `claude` from the engine root, so that `CLAUDE.md` and `CLAUDE.local.md` load.
-
-Then run `/setup` once. It creates `CLAUDE.local.md` from its template and fills it with you in a short interview — who the principal is, the conversation language, your git identities per host — gitignored, never committed. It creates `.claude/settings.local.json` with the session model set to Fable, the strongest available model, which the whole forge including the blind reviewers runs on; it tells you so in one sentence, and `/model` or editing that file changes it at any time (permissions come from the shared `.claude/settings.json`). It closes by offering one global git guard — `user.useConfigOnly = true` appended to `~/.gitconfig` — so a repository without a local identity fails aloud instead of committing with a default; declined, it prints the line for you to apply by hand. The identities themselves are set per repository, proposed from your roster at every project creation or import. `/setup` never overwrites existing files.
-
-Upgrading the engine is `scripts/forge-pull.ps1` — a fast-forward of `main`; your projects are untouched by it.
+Upgrading the engine is `scripts/forge-pull.ps1` — a fast-forward of
+`main`; the projects are untouched by it.
 
 ### Your projects
 
-Each project is a directory under `projects/` and a git repository of its own. `/new-project` creates the files; `git init` in that directory and a remote if wanted are a one-off act of yours. The commit identity belongs to the project: it is set locally in the repository, proposed from the identity roster in `CLAUDE.local.md` by the origin's host and confirmed by you. An existing project is brought in with `/import-project <git-url>`, which clones it into `projects/<repository name>` through `scripts/forge-clone.ps1`, sets the identity you confirm and reports the identity the clone ended up with. The engine ignores `projects/*` (except its own `projects/forge`) and the scripts find your project through its `.git`. A project without a repository is reported as "not under git" — a fact, not an error.
+Each project is a directory under `projects/` and a git repository of
+its own. `/new-project` creates the files; `git init` in that
+directory, and a remote if you want one, are a one-off act of yours.
+The commit identity belongs to the project: it is set locally in the
+repository, proposed from the identity roster in `CLAUDE.local.md` by
+the origin's host and confirmed by you, and `forge-save` commits
+nothing in a repository where git resolves no identity — it reports
+the command to set one instead. An existing project is brought in with
+`/import-project <git-url>`, which clones it into
+`projects/<repository name>` through `scripts/forge-clone.ps1`, sets
+the identity you confirm and reports the identity the clone ended up
+with. The engine ignores `projects/*` (except its own
+`projects/forge`) and the scripts find your project through its
+`.git`. A project without a repository is reported as "not under
+git" — a fact, not an error.
 
 ### Script prerequisites
 
-- `doc2md.ps1` needs markitdown: `pip install "markitdown[docx,pptx,pdf,xlsx,xls]"`.
-- `md2pptx.ps1` needs the `document-skills` plugin, installed once from an interactive Claude Code session: `/plugin marketplace add anthropics/skills`, then `/plugin install document-skills@anthropic-agent-skills`. A deck template is named by path (`-Template <file.potx>`) — typically a document of a library project — or none, in which case Claude designs the visuals.
+- `doc2md.ps1` needs markitdown:
+  `pip install "markitdown[docx,pptx,pdf,xlsx,xls]"`.
+- `md2pptx.ps1` needs the `document-skills` plugin, installed once
+  from an interactive Claude Code session:
+  `/plugin marketplace add anthropics/skills`, then
+  `/plugin install document-skills@anthropic-agent-skills`. A deck
+  template is named by path (`-Template <file.potx>`) — typically a
+  document of a library project — or omitted, in which case Claude
+  designs the visuals.
 - The git scripts need nothing beyond git.
 
 ### Saving and syncing
 
-The recommended door for saving is `/save`: when the save touches the engine core or `projects/forge/`, it first re-renders `README.md` and the Unreleased head of `RELEASE-NOTES.md` from their recipes, then runs the conformance check routed by scope, settles the findings with the principal, and only then commits. Underneath, the four scripts are the mechanism — and the only intended door to git, reading state included: `forge-save.ps1`, `forge-pull.ps1`, `forge-status.ps1` and `forge-clone.ps1`, each serving the engine and every project repository. A bare save commits each repository with changes on its own and pushes where it has a remote; history is linear on `main`, one remote per repository, and no URL lives anywhere in the forge — git carries that itself.
+`/save` is the recommended door. Before it commits, it regenerates
+`README.md` and the Unreleased head of `RELEASE-NOTES.md` from their
+recipes whenever the save touches the engine's core or
+`projects/forge/` — unconditionally, the two renders launched in
+parallel, reporting what materially changed — then runs the
+conformance check routed by scope (`/check-forge` for the core,
+`/check <slug>` per touched project) in an isolated subagent, settles
+the findings with the principal, proposes a commit message, and only
+then runs the script.
+
+The scripts are the underlying mechanism and the only intended door
+to git — reading state included, no exceptions. Three of them serve
+the engine and every project repository: `forge-save.ps1` commits and
+pushes — bare, every repository with changes, each its own commit;
+with a slug, that one, `forge` meaning the engine; without an origin
+the commit is kept and reported; remote changes are reconciled by
+rebase — `forge-pull.ps1` fast-forwards from the remotes and never
+touches a repository with unsaved changes, and `forge-status.ps1`
+reports without changing anything. The fourth, `forge-clone.ps1`,
+brings an existing project in. History is linear on `main`, one
+remote per repository, and no URL is written anywhere in the forge —
+git carries that itself. The engine receives a git tag at every
+approved major of the forge intent. Saves made directly from the
+shell are unaffected by the `/save` procedure.
 
 ## 13. Scripts
 
-| Script | Purpose | When it runs | Install note |
+| Script | Purpose | When it runs | Install |
 |---|---|---|---|
-| `forge-save.ps1` | Commits and pushes — bare, every repository with changes, each its own commit; with a slug, that one (`forge` meaning the engine); reconciles remote changes by rebase and prints the commit's file summary. | Every save, usually through `/save`. | Nothing beyond git. |
-| `forge-pull.ps1` | Fast-forwards from the remotes, never touching a repository with unsaved changes; on the engine it is the upgrade channel. | When syncing or upgrading. | Nothing beyond git. |
-| `forge-status.ps1` | Reports unsaved changes, the last commit and the origin of each repository without changing anything. | Whenever state is read. | Nothing beyond git. |
-| `forge-clone.ps1` | Clones an existing project into `projects/<repository name>`, never overwriting, setting the repository's local commit identity when given `-Name` and `-Email`. | When bringing a project in, through `/import-project`. | Nothing beyond git. |
-| `doc2md.ps1` | Converts a binary document to a Markdown extract — the only conversion path for source extracts. | At `/ingest`, for each binary the principal chooses to convert. | markitdown — see Setup. |
-| `md2pptx.ps1` | Turns a Markdown deck render into a `.pptx` through headless Claude Code, with a `.potx` template named by path or Claude-designed visuals. | After rendering a presentation, when the actual file is wanted. | `document-skills` plugin — see Setup. |
+| `scripts/forge-save.ps1` | Commits and pushes: bare, every repository with changes, each its own commit; with a slug, that one (`forge` meaning the engine); reconciles remote changes by rebase; without an origin keeps the commit and reports; prints the commit's file summary. | At every save — through `/save` or directly from the shell. | git only. |
+| `scripts/forge-pull.ps1` | Fast-forwards from the remotes and never touches a repository with unsaved changes; on the engine it is the upgrade channel. | To upgrade the engine or bring a project up to date. | git only. |
+| `scripts/forge-status.ps1` | Reports unsaved changes, the last commit and the origin of each repository without changing anything. | Whenever state is read — `/save` determines its scope through it. | git only. |
+| `scripts/forge-clone.ps1` | Clones an existing project into `projects/<repository name>`, never overwriting, and sets that repository's local commit identity only when given `-Name` and `-Email`. | Through `/import-project`. | git only. |
+| `scripts/doc2md.ps1` | Converts a binary document into the Markdown extract that becomes the source. | By `/ingest`, on every binary the principal chooses to convert. | markitdown — see Setup. |
+| `scripts/md2pptx.ps1` | Turns a Markdown deck render into a `.pptx` through headless Claude Code with the official pptx skill; a `.potx` template applies when named by path. | After a presentation is rendered, on request. | `document-skills` plugin — see Setup. |
 
 ## 14. Planned extensions
 
-The chain is built to grow downward: a BRD layer is certain to come, solution architecture and integration are intended, a strategy layer is possible. Which layers are added, and in what order, is open — the mechanics of a layer are designed when it is actually taken up, not in advance.
+The chain is meant to keep growing downward: thoughts are forged as
+far as the principal needs them taken. A BRD layer is certain to come;
+solution architecture and integration are intended; a strategy layer
+is possible if it proves to make sense. Which layers are added, and in
+what order, is open, and nothing is approved for construction: the
+mechanics of a layer — commands, agents, reviewer calibration — are
+designed when that layer is actually taken up, not in advance.
+Independent challengers on a different model family than the author's
+are planned, so that a lens with genuinely different priors can be
+sent in.
 
-Multi-principal use stays simple by design: one instance serves one principal, and a second principal receives the forge via git and runs their own instance; genuine multi-user operation is deliberately not being worked on now.
+More principals means more instances: a second principal receives the
+forge via git and runs an instance of their own. Genuine multi-user
+operation is an open point for the future, deliberately not being
+worked on now.
 
-The system is its own subject: `projects/forge/` runs Forge of Thought through its own process — its brief, intent, decisions and ledger — and a process change is complete only once that intent is updated and this README re-rendered.
+`projects/forge/` is Forge of Thought itself run through its own
+process: its brief, its intent (design positions, open threads,
+rejected directions), its decisions and its ledger. This README and
+the release notes are renders of that project.
 
 ## 15. Author and licence
 
-Forge of Thought © Petr Chlumsky (PCHe) — petr.chlumsky@gmail.com. Licensed under [CC BY 4.0](LICENSE): use and adapt it freely; credit the author and link to this repository.
+Forge of Thought © Petr Chlumsky (PCHe) — petr.chlumsky@gmail.com.
+Licensed under [CC BY 4.0](LICENSE): use and adapt it freely; credit
+the author and link to this repository.
 
 ## 16. About this README
 
-This file is a render of `projects/forge`: never edited by hand, regenerated by `/render readme` whenever the process changes (and by every `/save` touching the engine core). Fixes go into the recipe (`projects/forge/recipes/readme.md`) or its inputs; system changes are recorded in `projects/forge/`. The YAML front-matter provenance at the top is kept by design.
+This file is a render of the forge's own project: it is never edited
+by hand, and `/render readme` regenerates it from its recipe
+(`projects/forge/recipes/readme.md`) whenever the process changes —
+every `/save` that touches the core does so. Fixes go into the recipe
+or its inputs, `CLAUDE.md` and the forge intent. The YAML provenance
+at the top is kept by design. Changes to the system are recorded in
+`projects/forge/`.
 
 _Last updated: 2026-09-02_

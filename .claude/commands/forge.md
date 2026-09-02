@@ -14,7 +14,7 @@ Adding a layer means adding a file; this dispatcher never changes.
    ambiguous, ask).
 2. Read the project's ledger and list `.claude/commands/forge/` for the
    available target states.
-3. Report in Czech, compactly:
+3. Report in the conversation language (`CLAUDE.local.md`), compactly:
    - the project's kind (ledger header, POS.0960) and whether it is
      under git — `projects/<slug>/.git` present or "not under git",
      stated as a fact, never as a defect;
@@ -27,12 +27,14 @@ Adding a layer means adding a file; this dispatcher never changes.
      `partial` one named as work waiting;
    - which target states can be worked on from here (inputs exist) and
      which cannot yet (say what is missing);
-   - which renders are stale — compare each render's front-matter
-     provenance (recipe and input versions) against the current files;
+   - which renders are stale (as `/render` step 5 defines it);
    - which libraries the project needs (the ledger's Dependencies
      table, POS.1020) and whether each is cloned alongside;
    - what is waiting on the principal (from the ledger).
-4. Recommend the natural next step — a recommendation, never a gate.
+4. Recommend the natural next step — a recommendation, never a
+   gate — and, where the map lists more than one matter waiting on
+   the principal, offer a walkthrough of them (CLAUDE.md, Working
+   methods).
 
 **`/forge <state>` — work on that artefact.**
 1. Resolve `.claude/commands/forge/$1.md`. If it does not exist, list

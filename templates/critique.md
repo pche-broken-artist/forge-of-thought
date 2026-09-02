@@ -18,9 +18,8 @@ principal decides. Update ledger.md in the same run. -->
 - **Newly obsolete:** FND.00xx, …
 
 ## Findings
-<!-- Severity: high | medium | low (advisory). Category: ambiguity | gap |
-contradiction | duplication | scope-creep | inconsistency | divergence.
-Divergence = intent ↔ assignment mismatch. -->
+<!-- Severity and category as the critic agent defines them
+(.claude/agents/critic.md) — not restated here (POS.1070). -->
 
 ### FND.00xx [severity] [category]
 - **Location:** <section / item ID>

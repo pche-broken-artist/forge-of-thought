@@ -32,7 +32,7 @@ param(
     [Alias('o')]
     [string]$OutDir,
 
-    # Suffix inserted before the .md extension (e.g. '.extract' -> report.extract.md).
+    # Suffix inserted before the .md extension (e.g. '.text' -> report.text.md).
     [string]$Suffix,
 
     # Explicit path to the markitdown executable (otherwise resolved from PATH).
@@ -99,7 +99,7 @@ INPUT (mix and repeat freely, also accepted from the pipeline)
 OPTIONS
   -OutDir <dir>   where to write .md files (default: next to the source file)
   -Suffix <text>  inserted before the .md extension
-                  (e.g. -Suffix '.extract' -> report.extract.md)
+                  (e.g. -Suffix '.text' -> report.text.md)
   -Recurse        descend into directories and into globs without '**'
   -Force          overwrite existing .md files (default: skip them)
   -AsList         treat every input as a list file, whatever its extension
@@ -120,7 +120,7 @@ ENGINE
 
 EXAMPLES
   ./doc2md.ps1 presentation.pptx
-  ./doc2md.ps1 report.pdf -Suffix '.extract'
+  ./doc2md.ps1 report.pdf -Suffix '.text'
   ./doc2md.ps1 *.pdf, *.docx -OutDir md
   ./doc2md.ps1 files.txt -OutDir md -Force
   Get-ChildItem docs -Filter *.docx -Recurse | ./doc2md.ps1 -OutDir md

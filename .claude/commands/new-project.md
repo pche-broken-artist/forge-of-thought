@@ -7,9 +7,12 @@ Create a new project under `projects/$1/`. Files only: the command
 never touches git. A project is a repository of its own that the
 engine does not track (`projects/*` is gitignored); initialising it
 and adding a remote (`git -C projects/$1 init -b main`, `git remote
-add origin …`, the commit identity for that host) are the principal's
-one-off act, and a project that starts "not under git" is a property,
-not a defect — say so once at the end.
+add origin …`) are the principal's one-off act, and a project that
+starts "not under git" is a property, not a defect — say so once at
+the end. Once he names the remote, propose the matching commit
+identity from the roster in `CLAUDE.local.md` by the remote's host
+and print the `git config` lines for him to run (POS.0950) — the
+command runs no git.
 
 **Kind.** Every project has a kind, declared as `kind:` in its
 ledger header (POS.0960): `thought` (default — the chain, everything
@@ -18,9 +21,8 @@ projects, no chain). Infer `library` from the `lib-` prefix or the
 principal's words; when unclear, ask.
 
 **Library** (`kind: library`): create only `projects/$1/ledger.md`
-from `templates/ledger.md` with `kind: library` and without the
-Briefs, Documents, Findings and Challenges tables (Renders, Sources,
-Dependencies, Research and Waiting on principal remain), plus `sources/00-INDEX.md`
+from `templates/ledger.md` with `kind: library`, reduced as the
+template's header says (POS.1070), plus `sources/00-INDEX.md`
 and `research/00-INDEX.md` from `templates/index.md`, and
 `recipes/readme.md` from `templates/recipe-readme.md` with library
 inputs (ledger and the two indexes) — its README is the catalogue
@@ -52,13 +54,11 @@ steps 3–5 below do not apply.
    - `projects/$1/00-brief.md` — empty except for the YAML header
      (project, title, date, author, version 0.1, status draft),
      pre-filled at scaffold time
-3. **00-brief.md content:** ask the principal to paste or dictate the
-   brief now. Write it **verbatim** — no translation, no editing, no
-   restructuring, whatever language it arrives in. If it arrives
-   finished, lock it at once (version 1.0, status approved; Briefs
-   table row: pending). If it is to be composed or finished here, or
-   later, leave it as draft (version 0.1) — `/forge brief` is the door
-   — and the ledger keeps the row as draft.
+3. **00-brief.md content:** ask the principal to paste or dictate
+   the brief now and hand it to the `/forge brief` procedure
+   (`.claude/commands/forge/brief.md`, from its step 2): it stores,
+   asks whether the text is finished, locks or leaves the draft.
+   Nothing of that procedure is restated here (POS.1070).
 4. Do NOT create 10-intent.md or 20-assignment.md yet — intent is born from the
    first `/forge intent`, assignment from the first `/forge assignment`.
 5. Update the ledger and finish by proposing the next step: run
@@ -69,4 +69,5 @@ steps 3–5 below do not apply.
 File names in the chain are numbered (`00-brief.md`, `10-intent.md`,
 `20-assignment.md`) so later layers can be added without renaming.
 
-Conversation in Czech; all files in English except 00-brief.md (verbatim).
+Conversation in the conversation language (`CLAUDE.local.md`); all files
+in English except 00-brief.md (verbatim).

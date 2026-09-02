@@ -16,7 +16,8 @@ to extract what is in his head, including what he has not yet articulated.
 2. If 10-intent.md does not exist, create it from `templates/intent.md` as
    v0.1: consolidate the brief into Essence and Positions, and derive the
    initial Open threads.
-3. Interview the principal in Czech. Rules:
+3. Interview the principal in the conversation language (`CLAUDE.local.md`).
+   Rules:
    - One theme at a time; prefer few sharp questions over questionnaires.
    - Before anything else, offer the briefs whose ledger row is
      `pending` or `partial` for mining (the note says what remains);
@@ -30,20 +31,14 @@ to extract what is in his head, including what he has not yet articulated.
    - When he is unsure, offer options with trade-offs — inspiration is
      welcome, decisions are his.
    - If a topic deserves outside grounding, propose `/research <topic>`.
-4. Write once per iteration, not once per answer. Carry the accumulated
-   answers in the conversation and reflect them back; at a natural break
-   ask whether to write and update 10-intent.md on the principal's
-   confirmation — or at any moment he orders it. One version bump and
-   one Version History row per iteration, however many answers it
-   contained.
-   On writing: rewrite for coherence (not append-only), translate to
-   English, move resolved threads into Positions or Rejected directions,
-   bump the version (drafts run 0.1, 0.2, …; integers mark approval), and
-   update the Version History table and the ledger — including the
-   Mined column of every brief touched (`partial` with a note on what
-   remains, `mined`, or `dropped` with the REJ).
-   Use `POS.NNNN` for positions, `THR.NNNN` for open threads and
-   `REJ.NNNN` for rejected directions, numbered in tens.
+4. Write once per round (CLAUDE.md, prime directive 9 — stated
+   there, not here; POS.1070). On writing: rewrite for coherence
+   (not append-only), translate to English, move resolved threads
+   into Positions or Rejected directions, bump the version and update
+   the Version History table and the ledger — including the Mined
+   column of every brief touched (`partial` with a note on what
+   remains, `mined`, or `dropped` with the REJ). POS, THR and REJ
+   follow the ID scheme of CLAUDE.md.
 5. End every session by listing: what changed in intent, what remains
    open, and whether the intent looks stable enough for
    `/forge assignment` — as a recommendation, never a gate.

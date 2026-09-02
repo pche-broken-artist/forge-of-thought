@@ -11,7 +11,12 @@ sources/00-INDEX.md and research/00-INDEX.md); every other artefact
 is versioned or immutable. Keep current after every operation; /ledger
 reads from here.
 Version scheme: 0.x draft, 1.0 approved, 1.x change after approval, 2.0
-next approved version. -->
+next approved version.
+Kind: `thought` keeps every table below. `library` (POS.0960) keeps
+only Renders, Sources, Dependencies, Research and Waiting on
+principal; the Briefs, Documents, Findings and Challenges tables are
+deleted at scaffold time. This comment is the one owner of that
+reduction (POS.1070). -->
 
 ## Briefs
 <!-- One row per brief (00-brief.md and 00-brief-<name>.md). Status:

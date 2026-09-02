@@ -32,15 +32,12 @@ else. Never silently re-register.
    intent still cites individual files by path
    (`sources/<slug>/<file>`). A file may later be split out to its own
    ledger row if it needs separate tracking.
-   **Bundle index:** every bundle carries `00-INDEX.md`. If the bundle
-   arrives without one, create it at registration; if one is supplied,
-   validate it against the actual contents and report gaps. Structure:
-   YAML header (`bundle`, `project`, `date`, `origin`), one short
-   paragraph on what the whole bundle is and why it entered sources,
-   then a table `File | What it is | Origin | Date` — per-file origin
-   (URL for downloaded pages, author for own notes) and best-effort
-   dates, never asked for. The index is purely descriptive and, unlike
-   the bundle's files, a rewritten catalogue.
+   **Bundle index:** every bundle carries `00-INDEX.md`, shaped by
+   `templates/index-bundle.md` (the one owner of that shape,
+   POS.1070). If the bundle arrives without one, create it from the
+   skeleton at registration; if one is supplied, validate it against
+   the actual contents and report gaps. Per-file origin and dates are
+   best effort, never asked for.
 2. **Date, best effort, never a question.** Record the document's origin
    date in the ledger if it can be determined for free: from the content
    (meeting date in a transcript header, offer date), else from file
@@ -72,7 +69,7 @@ else. Never silently re-register.
    against, inspiration, a counter-example, a meeting record, material
    to absorb — taken from the principal in a sentence when he offers
    one; otherwise write what the file itself declares, or `—`. Do not
-   ask a mandatory question; a light "k čemu to je?" is fine when the
+   ask a mandatory question; a light "what is it for?" is fine when the
    conversation invites it. A bundle is one entry pointing to its
    inner `00-INDEX.md`; never repeat the bundle's contents in the top
    index. The index tracks nothing — no processing state.
@@ -98,6 +95,7 @@ else. Never silently re-register.
    `extract of <original>` | `binary`);
    what the source is and is for lives in the index alone. In sweep
    mode, also fill index gaps for files already registered. Finish
-   with a short summary in Czech: what was stored or registered, with
+   with a short summary in the conversation language (`CLAUDE.local.md`):
+   what was stored or registered, with
    what role — and no next step implied; the sources wait for the
    principal.

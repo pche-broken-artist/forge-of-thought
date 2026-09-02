@@ -23,7 +23,8 @@ several notes, each answering one — never one combined document.
    when**. Add a registration row to the Research table in `ledger.md`
    (file, date, derived from). The index tracks nothing and is no
    automatic input of any command.
-4. Summarise for the principal in Czech, leading with the recommendation
+4. Summarise for the principal in the conversation language (`CLAUDE.local.md`),
+   leading with the recommendation
    and the trade-offs, not a literature review.
 5. If findings suggest changes to intent or assignment, propose them
    explicitly — via `/forge intent` or `/forge assignment`, never silently.
