@@ -26,7 +26,7 @@ absorbed it; Note says what remains (partial) or the REJ (dropped). -->
 ## Documents
 | File | Version | Status | Date |
 |---|---|---|---|
-| 10-intent.md | 3.10 | draft | 2026-09-02 |
+| 10-intent.md | 3.11 | draft | 2026-09-02 |
 | 20-assignment.md | — | not planned: the handover artefacts of this project are the core itself (CLAUDE.md, templates/, .claude/) and README.md | — |
 | decisions.md | — | 8 records (DEC.0010–0080) | 2026-08-29 |
 
@@ -108,9 +108,10 @@ intent version for accepted, DEC.NNNN for rejected. -->
   cost of rendering at every save) is the lever; compare at the next
   save.
 - THR.0220 the cost of rendering README and release notes at every
-  save — opened 2026-09-02; options (stale-only, on the principal's
-  word, at a major, a cheaper mechanism for release notes) to be
-  weighed against POS.0810
+  save — opened 2026-09-02; three candidate solutions formulated in
+  the intent (A stale-only plus the principal's word; B save/release
+  split with branches left to git; C B plus a branch switch), to be
+  weighed with a fresh head
 - Executive pitch (2026-08-30, in progress): five-slide C-level deck
   of the forge. Story agreed (S01 the unexamined question, S02 forge
   not whisperer — output can be anything, S03 two isolated opponents

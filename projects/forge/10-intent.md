@@ -1,5 +1,5 @@
 ---
-version: 3.10
+version: 3.11
 date: 2026-09-02
 status: draft
 project: forge
@@ -11,6 +11,7 @@ audience: principal + Claude only
 ## Version History
 | Version | Modification | Author | Date |
 |---|---|---|---|
+| 3.11 | THR.0220 extended with three candidate solutions, formulated at the principal's direction to be weighed with a fresh head: (A) stale-only regeneration plus the principal's word at save time; (B) `/save` and `/release` split — save commits and pushes on whatever branch is checked out with a light check and no renders, release on main only runs the full check, the renders, the release commit and the tag, branches being git's own affair; (C) B plus one forge command switching between a fixed working branch and main. Facts recorded with them: the scripts already operate on the current branch, and a colleague has worked in his own forge instance on a branch of a subject project and merged by merge request without any forge ceremony — the forge stays a single-user tool per instance, coordination is git's (bearing on THR.0090); the principal's constraint that the forge must not grow into a wrapper of git. | Claude | 2026-09-02 |
 | 3.10 | The day's sweep for restated procedures walked through, fourteen findings and three observations, every verdict the principal's, all accepted. POS.1070 extended: the shared behaviour of the challenger personas gets one owner, `templates/challenger.md`, carried verbatim by every persona file with only its Lens section its own (the principal's choice over a runtime include — a persona file stands alone like every skeleton, and the copy is mechanically checkable); `/check-forge` gains the standing rule — a restated procedure, a persona diverging from its template, a direct operation where a mechanism exists — scoped to the operating-layer files changed in the save, the full sweep only on a bare `/check-forge`; two further shapes that had no owner get a skeleton (`templates/index-bundle.md` for the bundle catalogue, the library reduction of the ledger in `templates/ledger.md`'s header). POS.0930 extended at the principal's prompt (a save takes five minutes): `/check` and `/check-forge` execute their own definition in an isolated subagent, and `/save` launches a repository's two renders in parallel. CLAUDE.md gains prime directive 10 (one mechanism lives in one place) and the template sentence in the reviewers section. Twelve commands, two agents, four templates aligned: `/check-forge` runs `/check` on the forge project instead of copying it, `/challenge`, `/critique` and `/save` cite the walkthrough instead of restating it, `/forge assignment` and `/check` cite Requirement style, `/new-project` and `/spinoff` hand the brief to `/forge brief` and the intent to `/forge intent`, `/render` owns the definition of a stale render, `/save` leaves its script's behaviour to the script's help. Opened THR.0220 at the principal's direction: whether README and release notes must be regenerated at every save — expensive and slow — or only when stale, on his word, or at a major. The first isolated `/check-forge` of the same evening (twelve minutes for the whole save, renders in parallel and the check with a full `/check` of the forge project) found nine findings, all accepted: the conversation language had been hard-coded as Czech in thirteen commands and a template against POS.0950 — POS.0060 rewritten to point at `CLAUDE.local.md`, the commands now say "in the conversation language"; the isolation paragraph of `/check-forge` reduced to a reference to `/check`; CLAUDE.md cites `templates/index-bundle.md`; the readme recipe (0.32) pins the finding-state vocabulary the render had invented; `doc2md.ps1` examples no longer suggest `.extract`. | Claude | 2026-09-02 |
 | 3.9 | POS.1070 (new): one mechanism lives in one place and is used from there — a command, skill, script or agent is invoked through its own definition whenever its situation arises, never re-described ad hoc; a restated procedure is a `/check-forge` finding. Raised by the principal after the README of 2026-09-02 was rendered at `/save` through an ad-hoc subagent prompt that missed the 72-column rule of `/render`; `/save` step 2 now routes the regeneration through `/render` explicitly. Sweep of every command and skill for the same escape pending. | Claude | 2026-09-02 |
 | 3.8 | The commit identity returns to the project (POS.0950 rewritten): it is set locally in every repository at its creation or import, proposed by the command layer from the identity roster in `CLAUDE.local.md` — matched by the origin's host as an offer, never a rule — on the principal's word. The per-host `includeIf` model of 3.6–3.7 is dropped on the principal's decision: the host is only a correlate of the identity and fails exactly where one host serves two roles, and writing `~/.gitconfig-<host>` files reached beyond the engine's boundary. The one global guard, now `/setup`'s closing offer (POS.1050), is `user.useConfigOnly = true` with no global `user.name`/`user.email`, so a commit in a repository without a local identity fails aloud instead of silently taking a default. `/import-project` passes `-Name`/`-Email` by default (POS.1060); the scripts are unchanged. | Claude | 2026-09-02 |
@@ -1204,6 +1205,55 @@ position that already stands elsewhere.
   mechanical) — and what each option does to POS.0810's guarantee
   that every regenerated render passes under the principal's eyes.
   Opened 2026-09-02 at the principal's direction.
+  Three candidate solutions, formulated the same evening and left for
+  a fresh head; facts first. The scripts already work on whatever
+  branch is checked out (`forge-save` commits, rebases and pushes the
+  current branch with its upstream, `forge-pull` fast-forwards it);
+  only POS.0550's "main only" says otherwise. A colleague has already
+  worked in his own forge instance on a branch of a subject project —
+  sources, a walkthrough, intent, assignment and ledger — and merged
+  by merge request, accepted by the principal without any forge
+  ceremony because nobody else had touched the project; the forge
+  stays a single-user tool per instance, more people means more
+  instances and coordination by git (bearing on THR.0090), and a
+  walkthrough of every merge request would not scale. The principal's
+  constraint: the forge is developed by adding artefacts and
+  challengers, not by wrapping git; the daily operation must stay
+  understandable to a person who is not a developer.
+  **(A) Stale-only plus the principal's word.** One command as today.
+  `/save` regenerates only a render whose recipe or input changed in
+  that save (an unversioned input such as CLAUDE.md counts as changed
+  when the save touches it); a fresh render is skipped without a
+  question; the principal may order a save "without renders", and a
+  skipped stale render leaves the trace `stale (skipped YYYY-MM-DD)`
+  in the ledger's Renders table so that `/forge`, `/check` and the
+  next save see it; at an approved major every render is regenerated.
+  Saves perhaps a third of the engine's saves and little on projects,
+  whose README inputs (the ledger) move at every operation.
+  **(B) Save and release, branches left to git.** `/save` = commit
+  and push on whatever branch is checked out, a light check (ledger
+  bookkeeping, front-matter and version agreement — a "check-light"
+  still to be defined), no renders; `/release` = on main only,
+  refusing elsewhere: the full `/check` or `/check-forge` with its
+  walkthrough, README and release notes, the release commit
+  "release <intent version>" through `forge-save`, and at an approved
+  major the tag through a new `forge-save -Tag` (the tag is today a
+  manual git act outside the scripts). Two words a non-developer
+  understands; the release number is the intent version, release
+  notes stay as they are (Unreleased head plus one section per
+  major). Whoever wants branches creates and switches them in git by
+  hand (`git switch -c work`, one command) or through GitLab merge
+  requests; `forge-status` reports the current branch. Main then
+  carries only released state, so the README on main is never stale
+  and the thread closes entirely. Known hole, left until it happens:
+  two parallel branches taking the same next free ID — reported by
+  `/check` at the release after the merge.
+  **(C) B plus a switch.** As B, with a fixed working branch (`work`)
+  per repository and one forge command (a fifth script) that creates
+  it and switches between it and main, so that the principal never
+  types git; `/release` merges `work` into main. More comfortable,
+  and the first step towards the wrapper of git the principal does
+  not want.
 
 Note: the ID THR.0120 was inadvertently used twice — first for the
 readme-recipe thread (opened 1.14, closed 1.16), then for the
