@@ -25,10 +25,12 @@ Checks per project:
 0. **Kind and repository** — the ledger header declares `kind:
    thought | library` (missing = `thought`, report it as a finding
    with the one-line fix). `projects/<slug>/.git` exists; a project
-   that is not a repository is a finding ("project is not a
-   repository — `git -C projects/<slug> init -b main`, then a
-   remote"), the one git-related check, since the engine does not
-   track projects. A `library` needs no chain: checks 1, 2, 4 and 5
+   that is not a repository is reported as a fact, never a finding,
+   with the one-line way in ("project is not a repository —
+   `git -C projects/<slug> init -b main`, then a remote if wanted"),
+   the one git-related check, since the engine does not track
+   projects and a local-only project is a legitimate shape
+   (POS.0940). A `library` needs no chain: checks 1, 2, 4 and 5
    reduce to `ledger.md`, `sources/00-INDEX.md`,
    `research/00-INDEX.md` and `recipes/readme.md` existing, the
    ledger shaped as `templates/ledger.md` says for `kind: library`;

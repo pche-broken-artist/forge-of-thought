@@ -81,21 +81,29 @@ The named ways a working conversation runs — the forge's vocabulary
 of collaboration. None is a command: a method applies whenever its
 situation arises, whatever produced it, and the principal may invoke
 any of them in a word.
-- **Walkthrough.** Any list of items needing the principal's decision
-  — critique findings, challenges, differences between two requirement
-  sets, open threads, TBC items — is worked one item at a time, in
-  order of weight: Claude's recommendation with a one-sentence reason
-  first — an "accept" recommendation carrying the concrete text the
-  artefact would receive, never a description of the edit — the
-  principal's verdict in a word or a counter-proposal; "leave it
-  open" is legitimate. Never a table asking for every
-  verdict at once. Verdicts are carried in the conversation and
-  written once at the round's end: states in the ledger; an overruled
-  finding or rejected challenge becomes a DEC with its reason; a fix
-  becomes an iteration of the artefact concerned; an accepted challenge
-  must change the intent. Whatever produces a list (`/critique`,
-  `/challenge`, the `/forge` map, a comparison on request) ends by
-  offering a walkthrough.
+- **Walkthrough.** Any list of items needing the principal's decision —
+  critique findings, challenges, differences between two requirement
+  sets, open threads, TBC items — is worked one item at a time, in order
+  of weight: Claude's recommendation with a one-sentence reason first —
+  an "accept" recommendation carrying the concrete text the artefact
+  would receive, never a description of the edit — the principal's
+  verdict in a word or a counter-proposal; "leave it open" is
+  legitimate. Never a table asking for every verdict at once. One item
+  per message. Claude puts one item in front of the principal, with its
+  recommendation and the reason, and stops. The principal gives his
+  verdict. The next message opens with one line acknowledging that
+  verdict and then carries the next item, nothing else. A check whether
+  Claude has understood an item fully is an item of its own. An
+  elicitation interview runs the same way: one question per message, the
+  answer acknowledged before the next question is asked. A questionnaire
+  of several questions at once is the table of verdicts in another coat
+  and is never put in front of the principal. Verdicts are carried in
+  the conversation and written once at the round's end: states in the
+  ledger; an overruled finding or rejected challenge becomes a DEC with
+  its reason; a fix becomes an iteration of the artefact concerned; an
+  accepted challenge must change the intent. Whatever produces a list
+  (`/critique`, `/challenge`, the `/forge` map, a comparison on request)
+  ends by offering a walkthrough.
 - **Propose, never decide.** Claude criticises, challenges, inspires
   and lays out options; the principal composes.
 - **Step by step.** Any action needing the principal's consent — a
@@ -304,7 +312,7 @@ projects/<slug>/           # kind: thought — the chain
                                       # /render, provenance front-matter
   renders/<recipe>.pptx               # optional deck generated from the
                                       # md render by scripts/md2pptx.ps1
-  reviews/YYYY-MM-DD-critique.md      # immutable critique runs
+  reviews/YYYY-MM-DD-critique-<lens>.md  # immutable critique runs
   challenges/YYYY-MM-DD-challenge-<persona>.md  # immutable peer reviews
   research/YYYY-MM-DD-<topic>.md      # immutable research notes
   CLAUDE.md                # optional project-specific polish
@@ -434,28 +442,45 @@ lifecycle. Depth max two levels.
 Both run as isolated subagents seeing artefacts only, never the working
 conversation, on the session model (`model: inherit` — the whole forge
 runs on one model; speed is bought with context, never with a weaker
-reviewer). Strictly separate jobs; neither does the other's.
-- **`critic`** (`/critique`) — document quality: ambiguity, gaps,
-  contradictions, contradictory items, duplication, intent ↔ assignment
-  divergence, regression on past findings. Produces `FND` in `reviews/`.
+reviewer). One shape, two outputs, strictly separate jobs: the critic
+produces `FND` in `reviews/`, the challenger `CHL` in `challenges/`;
+both are invoked by hand, both reports are immutable and dated, both
+are settled by walkthrough; which of them run at a save or a release
+is open (THR.0220). The challenger has personas, the critic has
+lenses: one agent file each (`challenger-<persona>`, `critic-<lens>`),
+the shared behaviour carried verbatim from one skeleton
+(`templates/challenger.md`, `templates/critic.md`), only the Lens
+section its own; new personas and lenses only by the principal's
+decision, and only where their blind spots genuinely differ. Bare
+`/challenge` and bare `/critique` list the roster and recommend a fit.
+Both take an optional target, an artefact named as `/forge` names it
+(`brief`, `brief-<name>`, `intent`, `assignment`, later layers); without
+one, the whole chain.
+- **critic** (`/critique <lens> [artefact]`) — document quality.
+  `clarity` reads each artefact on its own (a target: that artefact): ambiguity, internal contradiction,
+  duplication, scope hygiene, Requirement style, the advisory
+  checklist. `essence` reads the chain (a target: that artefact
+  against its parent): for every adjacent pair (brief → intent,
+  intent → assignment, every later layer) it distils
+  the downstream artefact's essence blind, then the upstream's, and
+  compares — substance lost without a trace (REJ, DEC, DEL, TBC, the
+  ledger's mining state), added without provenance, or shifted in
+  meaning; a finding is a difference of essences, not of texts, and
+  the report carries both distillations. Regression against resolved
+  findings is every lens's first step. Produces `FND` in `reviews/`
+  (`YYYY-MM-DD-critique-<lens>.md`). Finding states: `open | resolved
+  | overruled (→ DEC) | obsolete`.
 - **challengers** (`/challenge <persona> [artefact]`) — substance of
   the thinking: unstated assumptions, whether the objective is the
   real problem, second-order effects, organisational reality, failure
-  modes, the counter-case. The target may be any chain artefact
-  (default the intent); a layer is best challenged before the next one
-  is first derived from it. A panel of personas, one isolated agent
-  per persona
-  (`challenger-<persona>`), each a distinct lens; the first is `cto`
-  (peer-CTO register: direct, few and sharp, no flattery). The
-  behaviour shared by every persona lives in `templates/challenger.md`,
-  carried verbatim by each persona file; only its Lens section is its
-  own. Further
-  personas are created only by the principal's decision, and only where
-  their blind spots genuinely differ. Bare `/challenge` lists the
-  roster and recommends a fit. Challenges carry a severity
-  (dealbreaker | major | minor) and an epistemic status; fabrication
-  is banned — uncertainty is stated, not papered over. Produces `CHL`
-  in `challenges/`
+  modes, the counter-case. A target narrows it to that artefact,
+  else the whole chain, each challenge naming the artefact it
+  concerns; a layer is best challenged before the next one is first
+  derived from it. The first persona is `cto` (peer-CTO
+  register: direct, few and sharp, no flattery). Challenges carry a
+  severity (dealbreaker | major | minor) and an epistemic status;
+  fabrication is banned — uncertainty is stated, not papered over.
+  Produces `CHL` in `challenges/`
   (`YYYY-MM-DD-challenge-<persona>.md`). Challenge states: `open |
   accepted | rejected (→ DEC) | parked | obsolete`. An accepted
   challenge must change the intent.
@@ -493,8 +518,8 @@ after every operation.
 | `/ingest [file] [slug]` | store and register external input in sources/ and index it; bare = sweep sources/ |
 | `/render <recipe> [slug]` | regenerate a render from its recipe in recipes/ |
 | `/recipe [genre] [slug]` | bare = genre roster; with a genre (`presentation`, `readme`, `release-notes`), guided composition — or iteration — of a render recipe from the genre's elicitation checklist and skeleton |
-| `/critique [slug]` | run isolated critic subagent → review + ledger |
-| `/challenge [persona] [artefact] [slug]` | bare = challenger persona roster; with a persona (e.g. `cto`), run that challenger against the substance of any chain artefact (default the intent) |
+| `/critique [lens] [artefact] [slug]` | bare = critic lens roster; with a lens (`clarity`, `essence`), run that critic on the quality of the project's documents — one artefact (`clarity`) or one artefact against its parent (`essence`) when named, else all → review + ledger |
+| `/challenge [persona] [artefact] [slug]` | bare = challenger persona roster; with a persona (e.g. `cto`), run that challenger against the substance of the named artefact, else the whole chain |
 | `/research <topic> [slug]` | best-practices research → research/, indexed |
 | `/ledger [slug]` | state report from ledger |
 | `/check [slug]` | conformance of project(s) against current conventions; all but forge when bare |

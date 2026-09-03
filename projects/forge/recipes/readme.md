@@ -2,8 +2,8 @@
 project: forge
 purpose: readme
 audience: humans arriving at the repository
-version: 0.32
-updated: 2026-09-02
+version: 0.34
+updated: 2026-09-03
 output: /README.md
 ---
 
@@ -76,8 +76,9 @@ front-matter, no status, no Version History — history lives in git. -->
   **renders** (bold here: this is the term's first definition): generated from the artefacts through recipes, regenerated
   whenever the thinking moves, never written by hand twice. The
   closing paragraph carries the ontological sentence saying what the
-  forge technically is — a git repository: slash commands and agent
-  personas for Claude Code, templates, and the conventions binding
+  forge technically is — a git repository: slash commands and
+  isolated agents — challenger personas and critic lenses — for
+  Claude Code, templates, and the conventions binding
   them — and states where the chain currently ends as a fact, never
   as the goal. The README never names who the current principal is:
   the identity of an instance is not a property of the system. The
@@ -239,9 +240,11 @@ front-matter, no status, no Version History — history lives in git. -->
 - Section for reviewers opens with a punchy three-paragraph summary —
   clean context first ("they cannot be told what we really meant"),
   then challengers (a growing roster of persona lenses attacking the
-  substance of the thinking), then the critic (auditor of the
-  documents and of the project's consistency across artefacts) —
-  before any procedural detail. Critique finding states are given as
+  substance of the thinking), then the critic (a roster of lenses on
+  the documents: `clarity` reads each artefact on its own, `essence`
+  reads the chain for drift by distilling each layer's essence blind
+  and comparing it with the layer above) — before any procedural
+  detail; the two are one shape, personas and lenses, CHL and FND. Critique finding states are given as
   a list, not as inline arrow-and-pipe notation, with exactly the
   ledger's vocabulary — open, resolved (an iteration of the artefact
   concerned), overruled (a DEC with its reason), obsolete (the
@@ -393,7 +396,8 @@ extension of a thinking human, the principal; what it does; the
 principle as bridge — then the three bold-led bullets (It thinks
 with you / It keeps the work consistent / It carries the tedious
 work); closing paragraph with the ontological sentence (a git
-repository: slash commands, agent personas, templates, conventions),
+repository: slash commands, isolated agents — challenger personas
+and critic lenses — templates, conventions),
 where the chain ends today as fact — no mention of who the current
 principal is>
 

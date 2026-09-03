@@ -1,7 +1,7 @@
 ---
 project: forge
 kind: thought
-updated: 2026-09-02
+updated: 2026-09-03
 ---
 
 # Ledger — Forge of Thought
@@ -26,9 +26,9 @@ absorbed it; Note says what remains (partial) or the REJ (dropped). -->
 ## Documents
 | File | Version | Status | Date |
 |---|---|---|---|
-| 10-intent.md | 3.11 | draft | 2026-09-02 |
+| 10-intent.md | 3.19 | draft | 2026-09-03 |
 | 20-assignment.md | — | not planned: the handover artefacts of this project are the core itself (CLAUDE.md, templates/, .claude/) and README.md | — |
-| decisions.md | — | 8 records (DEC.0010–0080) | 2026-08-29 |
+| decisions.md | — | 9 records (DEC.0010–0090) | 2026-09-03 |
 
 ## Renders
 <!-- Generated outputs, one row per recipe in recipes/. Never
@@ -36,8 +36,8 @@ hand-edited: iterate the recipe, re-run /render. Row mirrors the
 render's front-matter provenance. -->
 | Render | Audience | Recipe | Inputs | Generated |
 |---|---|---|---|---|
-| README.md (repo root) | humans arriving at the repository | recipes/readme.md v0.31 | CLAUDE.md, 10-intent.md v3.10 | 2026-09-02 |
-| RELEASE-NOTES.md (repo root) | humans tracking the system's evolution | recipes/release-notes.md v0.2 | 10-intent.md v3.10, decisions.md, previous edition (2026-09-02, released sections) | 2026-09-02 |
+| README.md (repo root) | humans arriving at the repository | recipes/readme.md v0.33 | CLAUDE.md, 10-intent.md v3.19 | 2026-09-03 |
+| RELEASE-NOTES.md (repo root) | humans tracking the system's evolution | recipes/release-notes.md v0.2 | 10-intent.md v3.19, decisions.md, previous edition (2026-09-02, released sections) | 2026-09-03 |
 | renders/executive-pitch.md | C-level executives whose experience of AI is chatting with it | recipes/executive-pitch.md v0.1 | 10-intent.md, CLAUDE.md | — (not yet rendered) |
 
 ## Sources
@@ -66,6 +66,7 @@ research/00-INDEX.md. -->
 | 2026-08-29-claude-code-packaging.md | 2026-08-29 | 10-intent.md v2.17 (POS.0760, THR.0090, THR.0130) |
 | 2026-08-29-git-engine-projects-separation.md | 2026-08-29 | 10-intent.md v2.17 (POS.0760, THR.0130) |
 | 2026-08-29-split-migration-runbook.md | 2026-08-29 | 00-brief-public-engine.md v1.0; 10-intent.md v2.21 (POS.0940–0980); git research |
+| 2026-09-03-version-history-placement.md | 2026-09-03 | 10-intent.md v3.13 (principal's question of 2026-09-03 on the cost of the Version History table); CLAUDE.md Versioning & status |
 
 ## Findings
 <!-- State: open | resolved | overruled | obsolete. Resolution: assignment
@@ -76,10 +77,20 @@ version for resolved, DEC.NNNN for overruled. -->
 | FND.0020 | medium | inconsistency | resolved | 2026-08-17-critique.md | intent 2.7 (note under Open threads) (verified 2026-08-27) |
 | FND.0030 | low | inconsistency | resolved | 2026-08-17-critique.md | decisions.md header comment updated (verified 2026-08-27) |
 | FND.0040 | low | gap | resolved | 2026-08-17-critique.md | DEC.0050 (verified 2026-08-27) |
-| FND.0050 | medium | gap | resolved | 2026-08-27-critique.md | intent 2.13 — CLAUDE.md Persistence (portability), script examples neutralised; forge-save instance facts deferred to THR.0090 by decision |
-| FND.0060 | low | contradiction | resolved | 2026-08-27-critique.md | intent 2.13 (Essence), CLAUDE.md heading "Two isolated reviewers" |
-| FND.0070 | low | divergence | resolved | 2026-08-27-critique.md | README re-rendered at intent 2.13 (2026-08-27, recipe 0.18) |
-| FND.0080 | low | inconsistency | resolved | 2026-08-27-critique.md | ledger comments + templates/ledger.md (intent 2.13) |
+| FND.0050 | medium | gap | resolved | 2026-08-27-critique.md | intent 2.13 — CLAUDE.md Persistence (portability), script examples neutralised; instance facts left the scripts at 3.0 (verified 2026-09-03, clarity) |
+| FND.0060 | low | contradiction | resolved | 2026-08-27-critique.md | intent 2.13 (Essence), CLAUDE.md heading "Two isolated reviewers" (verified 2026-09-03, clarity) |
+| FND.0070 | low | divergence | resolved | 2026-08-27-critique.md | README re-rendered at intent 2.13 (2026-08-27, recipe 0.18) — regression belongs to the essence lens |
+| FND.0080 | low | inconsistency | resolved | 2026-08-27-critique.md | ledger comments + templates/ledger.md (intent 2.13) (verified 2026-09-03, clarity) |
+| FND.0090 | medium | contradiction | overruled | 2026-09-03-critique-clarity.md | DEC.0090 |
+| FND.0100 | medium | contradiction | resolved | 2026-09-03-critique-clarity.md | intent 3.17 |
+| FND.0110 | medium | gap | resolved | 2026-09-03-critique-clarity.md | intent 3.17 |
+| FND.0120 | low | contradiction | resolved | 2026-09-03-critique-clarity.md | intent 3.17 |
+| FND.0130 | low | contradiction | resolved | 2026-09-03-critique-clarity.md | intent 3.17 |
+| FND.0140 | low | ambiguity | resolved | 2026-09-03-critique-clarity.md | intent 3.17 |
+| FND.0150 | low | ambiguity | resolved | 2026-09-03-critique-clarity.md | intent 3.17 |
+| FND.0160 | low | duplication | resolved | 2026-09-03-critique-clarity.md | intent 3.17 |
+| FND.0170 | low | contradiction | resolved | 2026-09-03-critique-clarity.md | ledger rewritten (intent 3.17) |
+| FND.0180 | low | contradiction | resolved | 2026-09-03-critique-clarity.md | intent 3.17 |
 
 ## Challenges
 <!-- State: open | accepted | rejected | parked | obsolete. Resolution:
@@ -105,41 +116,57 @@ intent version for accepted, DEC.NNNN for rejected. -->
   the isolated /check-forge (2026-09-02) took twelve minutes — renders
   6:54 in parallel (README 6:54, release notes 2:45), the check 5:00
   with a full /check of the forge project folded in. THR.0220 (the
-  cost of rendering at every save) is the lever; compare at the next
-  save.
+  cost of rendering at every save) is the lever. Second measurement
+  (2026-09-03, save of 3.19): renders 8:18 in parallel (README 8:18,
+  release notes 2:24), the check 4:19.
+- README render deferred (2026-09-03): the readme recipe went to 0.34
+  (the ontological sentence names challenger personas and critic
+  lenses) after the README had been rendered from 0.33; the principal
+  chose to save with the render stale rather than render again — the
+  next /save or /render readme brings it current.
+- THR.0260 the Version History out of the document into an append-only
+  companion `<document>.history.md`, one rule for every chain document —
+  opened 2026-09-03, research done; to be executed on the principal's
+  decision, together with THR.0220
+- THR.0250 two suggested functions — the expander (a name only) and the
+  essence manager, whose detail became the `essence` lens (POS.0410);
+  open whether an end-to-end distillation brief → last layer is the
+  same lens or a further thing; opened 2026-09-03, parked
+- THR.0230 a common engine beneath several frameworks (forge, product,
+  project management) — opened 2026-09-03, to be worked out before any
+  decision; the second framework in outline comes first; may become the
+  first thread turned into a project of its own; the principal undecided
+  whether at all
+- THR.0240 the size of CLAUDE.md (523 lines) — opened 2026-09-03; to be
+  dealt with whatever becomes of THR.0230
 - THR.0220 the cost of rendering README and release notes at every
   save — opened 2026-09-02; three candidate solutions formulated in
   the intent (A stale-only plus the principal's word; B save/release
   split with branches left to git; C B plus a branch switch), to be
   weighed with a fresh head
-- Executive pitch (2026-08-30, in progress): five-slide C-level deck
-  of the forge. Story agreed (S01 the unexamined question, S02 forge
-  not whisperer — output can be anything, S03 two isolated opponents
-  with one worked example, S04 one idea/every audience regenerated,
-  S05 what it means + closing line). Recipe drafted as
-  `recipes/executive-pitch.md` v0.1 (English, notes without IDs, no
-  template yet) with a ledger Renders row — both uncommitted. Decided
-  direction: the deck is for Allwyn management, so recipe and render
-  move to `lib-allwyn` (variant a), example named, template
-  `sources/allwyn.potx`; needs a future intent iteration (the next
-  one — 3.5 was consumed by the /setup and /import-project round) — one
-  sentence in POS.0970
-  (a library may carry recipes and renders for company audiences
-  whose inputs are other repositories' artefacts, inputs outside the
-  repository are Dependencies rows), one sentence each in `/check`
-  (relative paths out of the repository count as cross-repo
-  citations) and `/forge` (a library's renders reported with
-  staleness), CLAUDE.md lib layout lines. A future `.potx` is to be
-  ingested by the principal first. Not yet approved as a round —
-  continue tomorrow.
+- Executive pitch (since 2026-08-30): five-slide C-level deck of the
+  forge, story agreed (S01–S05), recipe `recipes/executive-pitch.md`
+  v0.1 with a Renders row. Decided direction, not yet written into the
+  intent: the deck is for company management, so recipe and render move
+  to `lib-allwyn`, template `sources/allwyn.potx` (to be ingested
+  first); one sentence in POS.0970 (a library may carry recipes and
+  renders for company audiences whose inputs are other repositories'
+  artefacts, registered as Dependencies), one each in `/check` (paths
+  out of the repository are cross-repo citations) and `/forge` (a
+  library's renders reported with staleness), CLAUDE.md lib layout
+  lines. Waits for a round of `/forge intent`.
 - THR.0090 multi-principal use — deliberately not worked on
   (principal's direction 2026-08-29: principals not to be solved now); the scripts part resolved by POS.0950
 - THR.0140 the delivery side — deliberately deferred until a subject
   project needs the linkage
 - THR.0150 replacing the PowerShell scripts with POSIX sh — principal
   undecided whether at all; no priority while PowerShell 7 suffices
-- One-off migration to the split engine (runbook: research/2026-08-29-split-migration-runbook.md, phases 0 + A–D with rollback; brief steps 1–6: company library, project repositories, CLAUDE.local.md, rewrite of projects/forge within the boundary, public repository with fresh history, verification by a fresh clone) — the operating layer (CLAUDE.md, .gitignore, scripts, templates, commands, readme recipe) changes with it — including removing the TEMPORARY relocation notice from recipes/readme.md (0.23), which is for the last edition on the company host only; then intent 3.0 + git tag. Progress (2026-08-30): phase 0 done (tag pre-split = d600dda, the last edition with the relocation notice, pushed); phase A done (library and both company projects in repositories of their own on the company host, dropped from the engine's index at b4ea967); phase B done on the old history (gitignore, CLAUDE.local.md + template, settings split, local/ removed, four scripts rewritten and tested, templates and commands by kind, CLAUDE.md, readme recipe 0.24) and saved with this commit. C1 done 2026-08-30: projects/forge rewritten within the boundary (POS.0980) — company name, host, e-mail, template file name and one personal project removed from the 2026-08-29 CTO challenge and the public-engine brief, two sentences of company-project content neutralised in the 2026-08-17 CTO challenge and POS.0710; immutability of the two challenges and the locked brief knowingly broken once, here recorded and nowhere in the files; the company project slugs stay by decision. C2 grep (name, host, identity, the removed project, the neutralised phrases) over the tracked tree and file names: clean. C3-prep done 2026-08-30: LICENSE (CC BY 4.0, verbatim legal code), readme recipe 0.25 (Author and licence section — the principal's decision: credit as Petr Chlumsky (PCHe) with the contact address; the one person the README names), LICENSE in the CLAUDE.md layout, README re-rendered. Decisions of the day for THR.0200, to be written into the intent at 3.0: public repository github.com/pche-broken-artist/forge-of-thought (created empty, public), licence CC BY 4.0, exemplar still open; the forbidden-term list dropped as pointless for now (C2 was run with an ad-hoc list; the durable answer is the content guard rail below). C3 done 2026-08-30: private identity set locally, orphan commit 3507545 (62 files), renamed main. C4.1 done: origin = github.com/pche-broken-artist/forge-of-thought (pushed), the company host kept as remote `company`. C4.3 done: the company project archived (read-only, description pointing to the new homes). D1–D4 done 2026-08-30: fresh clone from GitHub (1 commit, 62 files, boundary grep clean, only projects/forge tracked); CLAUDE.local.md and settings.local.json ignored; forge-status engine-only, then a hand-scaffolded projects/test reported "not under git", after git init "no origin"; forge-pull fast-forwarded the engine and skipped test; forge-save test committed with the "not pushed — no origin" note; bare save reported nothing to save in both; clone deleted. D5 done: /forge agentic-platform from its own repository — the map, renders and threads read as before (brief condition 4). D6: intent 3.0 approved 2026-08-30; saved and tagged v3.0 on the public engine. Migration complete; the runbook stays as the record of how it was done. The company host's main is left at the phase-B commit (a717e52) and archived as is — the principal's decision 2026-08-30 after weighing a force push, a default-branch switch and a revert; the last complete monorepo state is the tag pre-split (d600dda, README with the relocation notice). Migration complete; nothing outstanding.
-- THR.0210 the guard rail for the public boundary — a standing rule that `projects/forge` never carries the content of a subject project, and where it lives (CLAUDE.md, the reviewer prompts, `/check-forge`); opened 2026-08-30 (3.0), deferred since
+- Split migration: complete 2026-08-30 (intent 3.0, tag v3.0). The
+  record of how it was done is
+  research/2026-08-29-split-migration-runbook.md; the company host's
+  main stays at the phase-B commit a717e52, archived read-only; the last
+  monorepo state is tag pre-split (d600dda).
+- THR.0210 the guard rail for the public boundary — `projects/forge` never carries the content of a subject project; parked 2026-09-03 by the principal, proposed solution recorded in the thread (a check item in `/check-forge` plus one sentence in both reviewer skeletons); taken up when the boundary is next at stake
 - THR.0180 the output language — left as is; more than one output language solved when a project needs it
 - THR.0190 a plugin as a later distribution layer — no preparation
   now; taken up when forge-pull proves an insufficient upgrade channel

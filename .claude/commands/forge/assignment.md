@@ -20,7 +20,6 @@ Role: drafter. Distil the current `10-intent.md` into `20-assignment.md`
      used, as the template says.
    - Success criteria may be present, delegated, or deliberately
      absent. Ask the principal which, do not decide alone.
-   - Delete the template's guidance comments.
    - Delete empty sections and all template comments.
 3. Where intent is ambiguous or silent on something the assignment needs,
    do not invent: raise it as a `TBC` item or ask the principal directly.
@@ -33,4 +32,4 @@ Role: drafter. Distil the current `10-intent.md` into `20-assignment.md`
    edit the assignment directly.
 6. Finish with a short delta summary in the conversation language (`CLAUDE.local.md`)
    and a recommendation whether
-   a `/critique` run would be useful now.
+   a `/critique <lens>` run would be useful now.

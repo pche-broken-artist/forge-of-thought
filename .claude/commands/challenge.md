@@ -23,9 +23,10 @@ bookkeeping.
 `.claude/agents/challenger-*.md`) and recommend which fits the
 project's subject. A recommendation, never a gate.
 
-**`/challenge <persona> [artefact] [slug]` — run it.** The target may
-be any artefact of the chain — `intent` (the default), `assignment`,
-one day `brd` or deeper layers. Invoke the `challenger-<persona>`
+**`/challenge <persona> [artefact] [slug]` — run it.** The target is
+an artefact named as `/forge` names it — `brief`, `brief-<name>`,
+`intent`, `assignment`, one day `brd` or deeper layers; without one,
+the whole chain. Invoke the `challenger-<persona>`
 subagent on the project (infer it from context; if ambiguous, ask),
 naming the target artefact. Pass only the project path and the target —
 no summary of the conversation, no defence of the principal's

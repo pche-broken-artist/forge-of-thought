@@ -48,7 +48,9 @@ immediate fix.
      fix is a reference to the owner.
    - Every challenger persona (`.claude/agents/challenger-*.md`)
      carries the fixed sections of `templates/challenger.md`
-     verbatim; only its Lens section is its own.
+     verbatim; only its Lens section is its own. Every critic lens
+     (`.claude/agents/critic-*.md`) likewise carries the fixed sections
+     of `templates/critic.md`.
    - No command performs directly what a script, command or agent
      exists for (git outside the four scripts, a conversion outside
      `doc2md.ps1`, a render outside `/render`, a review outside the

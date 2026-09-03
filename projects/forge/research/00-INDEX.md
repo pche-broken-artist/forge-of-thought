@@ -1,7 +1,7 @@
 ---
 project: forge
 directory: research
-updated: 2026-08-29
+updated: 2026-09-03
 ---
 
 # Index — research of Forge of Thought
@@ -37,3 +37,8 @@ ledger. Written by /research; verified by /check. -->
 - **Question:** how exactly is the engine/projects split (POS.0940) executed on this instance — order, commands, checks, rollback — so that the public engine starts clean and the company projects and the full history stay where they are?
 - **Answer in short:** a rollback tag `pre-split` on the company host, then four phases: (A) move the projects out — company library first, then the two company projects, each `git init` + push to the company host, then `git rm -r --cached` in the engine; (B) rebuild the operating layer to intent 2.21 on the old history (`.gitignore` `projects/*` + `!projects/forge`, `CLAUDE.local.md`, model to `settings.local.json`, `local/` deleted, scripts looping over `projects/*/.git`, templates, commands, CLAUDE.md, readme recipe); (C) rewrite the forge project within the boundary, grep for traces with a list kept outside the repo, orphan branch as the fresh history with the private author set locally, public remote, company project archived read-only as the full record; (D) verify by a fresh clone, approve 3.0, tag. One ordering rule matters: operating layer before fresh history. A Rollback section returns to `pre-split` from every phase; remote repositories are deleted only by the principal's explicit act.
 - **Consult when:** executing the migration (it is the checklist), when a step fails and the question is what to roll back, or when another instance asks how the split was done.
+
+### `2026-09-03-version-history-placement.md`
+- **Question:** where should the version history of a versioned working document live — in its head as corporate document control prescribes, at its end, in a companion file, or in git only — so that the document stays readable for humans and cheap for an LLM that loads it whole every time? Measured trigger: the Version History is 40 % of the forge intent (72 rows).
+- **Answer in short:** standards prescribe only a revision notice at the head and explicitly allow separate volumes; records management names the separate file as the normal option; every wiki and every LLM-era spec framework keeps history out of the body (BMAD dropped its change-log table in v6, PEP 1 puts its new Change History at the end, git remains the record). Recommendation: one rule by kind — a continuously rewritten document (the intent) keeps its rows in an append-only companion `<document>.history.md` and carries version, date, status and a machine-written `last_change` in front-matter; a handed-over or locked document (assignment, brief) keeps the table in its head. The row stays the single primary; commit message and release notes remain derivations. Table-at-end saves nothing; git-only would invert the primary and collide with the four-scripts rule.
+- **Consult when:** deciding the history rule for the chain (CLAUDE.md Versioning & status), changing `/forge intent`'s write step, `forge-save`'s commit message or the release-notes recipe's input, or asking what the standards actually require of a revision history.

@@ -112,3 +112,17 @@ them here was THR.0070, resolved by DEC.0040 (no back-fill). -->
   GitLab copy stays read-only while it exists. Brief public-engine
   0.5.
 - **Date:** 2026-08-29
+
+## DEC.0090 — FND.0090 overruled: a position states the convention; the scripts' capability is no contradiction
+- **Decision:** FND.0090 (POS.0550's "main only, no branches" and
+  "only door to git, no exceptions" contradicted by THR.0220's facts
+  that the scripts work on any branch and that the tag at an
+  approved major is a manual git act) is overruled.
+- **Reason:** POS.0550 states the forge's convention; that the
+  scripts are capable of more than the convention uses is not a
+  contradiction but the normal relation of a rule to its tool. The
+  manual tag is a known gap and is settled in THR.0220 together with
+  the rest of the git ceremony (option B introduces `forge-save
+  -Tag`), not ahead of it; fixing it now would fix it twice. The
+  finding returns only if THR.0220 changes POS.0550.
+- **Date:** 2026-09-03

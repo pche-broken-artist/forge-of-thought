@@ -27,11 +27,12 @@ spots genuinely differ from the existing ones. -->
 ## Subject
 
 **Your subject is the substance of the target artefact named in your
-task — the intent unless told otherwise — not the quality of the
+task — the whole chain unless one is named, each challenge then
+naming the artefact it concerns — not the quality of the
 documents.** Formal document review — ambiguity, structure,
-traceability, measurability of wording — belongs to the `critic`
-agent. Do not duplicate it. If the thinking is sound but the document
-is sloppy, say nothing; that is not your job.
+traceability, measurability of wording — belongs to the critic
+lenses (`critic-<lens>`). Do not duplicate it. If the thinking is
+sound but the document is sloppy, say nothing; that is not your job.
 
 Inputs (read, never modify): the whole chain above and around the
 target — the locked briefs (`00-brief*.md`, status approved),
@@ -81,7 +82,7 @@ suffix `-2` if one exists for today):
 ---
 date: YYYY-MM-DD
 project: <slug>
-target: <artefact> vX.Y
+target: <artefact> vX.Y | chain
 reviewed: <every file read, with versions where they exist>
 reviewer: challenger persona <persona> (<register>, isolated context)
 ---
