@@ -1,8 +1,8 @@
 ---
-version: 3.24
+version: 3.27
 date: 2026-09-04
 status: draft
-last_change: 3.24 (2026-09-04): POS.0180 describes the bundle index as per-file entries; POS.0840 names templates/index-bundle.md the full skeleton, the entry carried verbatim from templates/index.md (check-forge findings of the 3.23 save).
+last_change: 3.27 (2026-09-04): THR.0280 withdrawn into THR.0310 — the principal's remark was about the release notes, not the Version History rows.
 project: forge
 audience: principal + Claude only
 ---
@@ -1432,12 +1432,45 @@ position that already stands elsewhere.
   side fact that every subagent also receives the whole CLAUDE.md — a
   cost that belongs to THR.0240. Opened 2026-09-03 at the principal's
   direction.
-- **THR.0280** What a Version History row must say. The principal's
-  observation of 2026-09-04, at the first save with the history
-  companion: the rows are so high-level that a reader learns nothing
-  from them. Open: who reads a row and for what, what a row must carry
-  and what it must not, whether the row's grain is the round or the
-  change. Opened 2026-09-04, to be elicited in a round of its own.
+- **THR.0290** Checks as lenses. `/check` today is one long command
+  with eight numbered checks; the principal's idea of 2026-09-04,
+  after the migration checks of three projects: put `/check` — and
+  `/research` alike — on the reviewer mechanism of POS.0400: one
+  skeleton (`templates/check.md`), one agent per kind of check
+  (`check-<name>`), bare `/check` listing the roster and recommending
+  a fit, a named check run by hand exactly as `/critique clarity` is.
+  Then a new check is one file, written when the need appears, and
+  which checks run at a save or a release is the same question as
+  for the reviewers (THR.0220). Open: what the kinds are (conformance
+  of a project, consistency of the engine, staleness, the public
+  boundary of THR.0210 …), what `/research` gains from kinds, and
+  whether `/check-forge` survives as a kind or as a target. Opened
+  2026-09-04.
+- **THR.0300** A user's private layer. Whoever runs the forge may
+  want reviewers, checks or other agents of their own, for themselves
+  only, with no ambition of contributing them to the engine — the
+  principal's idea of 2026-09-04, offered as possibly interesting, no
+  priority. It would need a place the engine does not know and
+  `forge-pull` never overwrites, on the pattern of `CLAUDE.local.md`
+  and `settings.local.json` (gitignored), and the rosters of
+  `/critique`, `/challenge` and `/check` would list what lies there
+  beside the engine's own. Open: how a local agent takes the shared
+  skeleton, what happens when the engine renames or reshapes it, and
+  whether Claude Code's own user-level agents already serve. Opened
+  2026-09-04.
+- **THR.0310** The release notes must get better. The principal's
+  verdict of 2026-09-04: as rendered today they are a story, and a
+  reader wants to see plainly what was added, what changed and what
+  disappeared. No position yet on the shape — the principal does not
+  want a changelog format decided by fiat; a research round on how
+  release notes are done well comes first, then the position, then
+  the recipe (POS.0730, the forge's release-notes recipe, the genre
+  skeleton and its `/recipe` file). THR.0280, opened earlier the same
+  day as "what a Version History row must say", was a
+  misunderstanding of the same remark — the principal was speaking of
+  the release notes throughout — and is withdrawn into this thread;
+  whether the row a release note is generated from must change too is
+  for the research to show. Opened 2026-09-04.
 
 Note: the ID THR.0120 was inadvertently used twice — first for the
 readme-recipe thread (opened 1.14, closed 1.16), then for the

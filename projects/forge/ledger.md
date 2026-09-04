@@ -26,7 +26,7 @@ absorbed it; Note says what remains (partial) or the REJ (dropped). -->
 ## Documents
 | File | Version | Status | Date |
 |---|---|---|---|
-| 10-intent.md | 3.24 | draft | 2026-09-04 |
+| 10-intent.md | 3.27 | draft | 2026-09-04 |
 | 20-assignment.md | — | not planned: the handover artefacts of this project are the core itself (CLAUDE.md, templates/, .claude/) and README.md | — |
 | decisions.md | — | 9 records (DEC.0010–0090) | 2026-09-03 |
 
@@ -112,6 +112,19 @@ intent version for accepted, DEC.NNNN for rejected. -->
 | CHL.0130 | accepted | "Upgrade" is a fast-forward of an untagged branch, so the compatibility tool has nothing to compare against; a new project starts unbacked by default (minor) | 2026-08-29-challenge-cto.md | intent 2.21 (via brief 0.5 — git tag per approved major; "nothing to compare against" obsolete (condition 3 narrowed to /check against current conventions, no engine version in projects)) |
 
 ## Waiting on principal
+- **Priorities of the open threads (principal's order, 2026-09-04
+  evening), the next rounds in this sequence:**
+  1. THR.0220 the cost of rendering at every save — decide among
+     A/B/C, with the save/release question for the reviewers.
+  2. THR.0310 the release notes must get better — `/research` on
+     good release notes first, then the position, then the recipe.
+  3. THR.0270 + THR.0290 + THR.0240 together, ASAP after the two
+     above: the reviewer skeleton as a skill, checks (and research) as
+     lenses, and the size of CLAUDE.md — one decision on the shape of
+     the operating layer.
+  Then THR.0230 (after an outline of the second framework). Dormant
+  by decision, trigger recorded in each: THR.0250, 0300, 0190, 0200,
+  0210, 0170, 0180, 0150, 0140, 0090.
 - Save duration (watch): the first /save with parallel renders and
   the isolated /check-forge (2026-09-02) took twelve minutes — renders
   6:54 in parallel (README 6:54, release notes 2:45), the check 5:00
@@ -132,11 +145,17 @@ intent version for accepted, DEC.NNNN for rejected. -->
 - README and release notes one step stale (2026-09-04, evening):
   both rendered at intent 3.23; the intent went to 3.24 at the
   check-forge walkthrough of the same save (POS.0180 and POS.0840
-  wording) and the principal chose to save without rendering again —
-  the next /save brings both current.
-- THR.0280 what a Version History row must say — opened 2026-09-04 at
-  the principal's observation that the rows are too high-level to
-  learn anything from; to be elicited in a round of its own
+  wording) and to 3.27 (three threads, one withdrawn) after it, the principal choosing
+  to save without rendering again — the next /save brings both
+  current.
+- THR.0310 the release notes must get better — opened 2026-09-04;
+  research first (`/research` on good release notes), then the
+  position, then the recipe; THR.0280 withdrawn into it (3.27)
+- THR.0290 checks (and research) as lenses on the reviewer mechanism —
+  opened 2026-09-04; kinds, the fate of /check-forge and the save/release
+  question (THR.0220) open
+- THR.0300 a user's private layer of local agents — opened 2026-09-04,
+  no priority
 - THR.0270 the shared reviewer skeleton as a preloaded skill
   (`skills:` in the agent front-matter) instead of the verbatim copy —
   opened 2026-09-03; proposed solution and three open points (prompt
