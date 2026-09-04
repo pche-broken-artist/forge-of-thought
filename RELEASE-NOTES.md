@@ -2,12 +2,12 @@
 project: forge
 render: release-notes
 generated: 2026-09-04
-recipe: projects/forge/recipes/release-notes.md v0.3
+recipe: projects/forge/recipes/release-notes.md v0.4
 inputs:
   - projects/forge/10-intent.history.md
-  - projects/forge/10-intent.md v3.21
+  - projects/forge/10-intent.md v3.23
   - projects/forge/decisions.md
-  - RELEASE-NOTES.md (2026-09-03 edition — released sections)
+  - RELEASE-NOTES.md (2026-09-04 morning edition — released sections)
 ---
 
 # Forge of Thought — Release Notes
@@ -20,7 +20,7 @@ Version History companion, `projects/forge/10-intent.history.md`.
 ## Unreleased — 3.x since 3.0
 
 These changes are not yet approved; they cover intent versions 3.1 to
-3.21, made between 2026-08-30 and 2026-09-04.
+3.23, made between 2026-08-30 and 2026-09-04.
 
 **Every project gets a README and release notes.** The engine's own
 mechanism is generalised: every project has a README and, if it is a
@@ -349,15 +349,51 @@ companion. A Version History table in the body of a document is a
 `/check` finding, fixed by moving it into the companion — that is how
 a project migrates, on the principal's word, project by project, each
 saved by its own `/save`; a colleague's project meets the rule at its
-next `/check` after `forge-pull`. Row 3.21 is the last written into
-the intent itself; the operating layer — CLAUDE.md, the templates,
+next `/check` after `forge-pull`. Row 3.21 was the last written into
+the intent itself: the operating layer — CLAUDE.md, the templates,
 the `/forge` write steps, `/recipe`, `/save`, `/check`,
-`/check-forge`, this recipe — and the migration of the forge project
-and the three local projects follow step by step, and these notes
-already read the log from the companion. Two words tidied in the same
+`/check-forge`, this recipe — followed, the forge project moved its
+history into the companion, and on 2026-09-04 the three local
+projects were migrated and saved, each by its own `/save`; these
+notes read the log from the companion. Two words tidied in the same
 round: POS.0550 states the scripts-only door to git without a count,
 the number having gone stale twice, and the research's "11 % of a
 brief" was struck as unverifiable, a brief carrying no table.
+
+**The first save with the companion, and its findings.** The
+`/check-forge` of the 3.21 save returned findings walked through at
+3.22, every verdict the principal's: POS.0110 lists `last_change`
+among the brief's header fields, CLAUDE.md aligned; POS.1070 names
+the scripts without a count, as POS.0550 already does; THR.0210 no
+longer reserves POS.1080, now taken by the taxonomy; this recipe
+(0.4) and its template name the companion as the fine-grained log;
+and `/check` and `/check-forge` report findings only — the checker's
+informal "observation" is forbidden. One line was written into the
+locked brief's front-matter on the principal's word — `last_change`,
+immutability knowingly broken once for one metadata line, recorded
+in the ledger. The same save brought the principal's observation that
+the Version History rows are so high-level that a reader learns
+nothing from them: THR.0280 opens the question what a row must say —
+who reads it and for what, what it must carry and what it must not,
+whether its grain is the round or the change — to be elicited in a
+round of its own.
+
+**Stale renders are the principal's business; one shape for every
+index.** Two decisions taken during the migration of the three local
+projects to the companion, when the checks listed every stale deck
+and picture as findings — noise, since a render is regenerated only
+on the principal's word. Only the README and the release notes have a
+freshness rule, the next `/save` regenerating them; the staleness of
+every other render is shown by the `/forge` map and never reported by
+`/check` (POS.0570, POS.0810; `/check` aligned). And the two bundle
+indexes in the field turned out to be a table and a prose catalogue
+of a third shape, so the bundle index now has the same shape as the
+directory index — one entry per file with What / Origin / Role / Use
+for, `templates/index-bundle.md` owning only the bundle's header and
+opening paragraph, the two bundle indexes rewritten: Role and Use for
+are what an index is for, and a table does not carry them. The
+position is renamed "Resources have an index" after the taxonomy
+(POS.0840).
 
 **The cost of rendering at every save, opened and given three
 candidates.** With the engine's README at 5,700 words and a recipe

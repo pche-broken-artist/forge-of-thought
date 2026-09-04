@@ -26,7 +26,7 @@ absorbed it; Note says what remains (partial) or the REJ (dropped). -->
 ## Documents
 | File | Version | Status | Date |
 |---|---|---|---|
-| 10-intent.md | 3.22 | draft | 2026-09-04 |
+| 10-intent.md | 3.24 | draft | 2026-09-04 |
 | 20-assignment.md | — | not planned: the handover artefacts of this project are the core itself (CLAUDE.md, templates/, .claude/) and README.md | — |
 | decisions.md | — | 9 records (DEC.0010–0090) | 2026-09-03 |
 
@@ -36,8 +36,8 @@ hand-edited: iterate the recipe, re-run /render. Row mirrors the
 render's front-matter provenance. -->
 | Render | Audience | Recipe | Inputs | Generated |
 |---|---|---|---|---|
-| README.md (repo root) | humans arriving at the repository | recipes/readme.md v0.35 | CLAUDE.md, 10-intent.md v3.21 | 2026-09-04 |
-| RELEASE-NOTES.md (repo root) | humans tracking the system's evolution | recipes/release-notes.md v0.3 | 10-intent.history.md, 10-intent.md v3.21, decisions.md, previous edition (2026-09-03, released sections) | 2026-09-04 |
+| README.md (repo root) | humans arriving at the repository | recipes/readme.md v0.35 | CLAUDE.md, 10-intent.md v3.23 | 2026-09-04 |
+| RELEASE-NOTES.md (repo root) | humans tracking the system's evolution | recipes/release-notes.md v0.4 | 10-intent.history.md, 10-intent.md v3.23, decisions.md, previous edition (2026-09-04 morning, released sections) | 2026-09-04 |
 | renders/executive-pitch.md | C-level executives whose experience of AI is chatting with it | recipes/executive-pitch.md v0.1 | 10-intent.md, CLAUDE.md | — (not yet rendered) |
 
 ## Sources
@@ -119,12 +119,21 @@ intent version for accepted, DEC.NNNN for rejected. -->
   cost of rendering at every save) is the lever. Second measurement
   (2026-09-03, save of 3.19): renders 8:18 in parallel (README 8:18,
   release notes 2:24), the check 4:19.
-- README and release notes one step stale (2026-09-04): both rendered
-  at intent 3.21 (readme recipe 0.35, release-notes recipe 0.3); the
-  intent went to 3.22 and the release-notes recipe to 0.4 at the
-  check-forge walkthrough of the same save, and the principal chose
-  to save without rendering again — the next /save brings both
-  current.
+- Force-push of 2026-09-04, recorded: the save of intent 3.21–3.22
+  (b717a67) carried the principal's private `tmp/` at the engine root
+  into the public repository — the directory had never been added to
+  `.gitignore` though the principal had asked for it the day before.
+  On his word the commit was amended without `tmp/` and `main`
+  rewritten (`git push --force-with-lease`, 1f7cc06), `/tmp/` added to
+  `.gitignore`; direct git outside the scripts and a rewrite of `main`,
+  knowingly, once. GitHub may still hold the objects of b717a67 in its
+  cache; only GitHub support can purge them, if the principal wants
+  certainty.
+- README and release notes one step stale (2026-09-04, evening):
+  both rendered at intent 3.23; the intent went to 3.24 at the
+  check-forge walkthrough of the same save (POS.0180 and POS.0840
+  wording) and the principal chose to save without rendering again —
+  the next /save brings both current.
 - THR.0280 what a Version History row must say — opened 2026-09-04 at
   the principal's observation that the rows are too high-level to
   learn anything from; to be elicited in a round of its own
@@ -141,11 +150,11 @@ intent version for accepted, DEC.NNNN for rejected. -->
   locked brief's front-matter on the principal's word at the
   check-forge walkthrough of 2026-09-04 — immutability knowingly
   broken once for one metadata line, the text untouched.
-  Still to migrate, each through `/check` and its own `/save` on the
-  principal's word: agentic-platform (intent 17 rows, assignment 9,
-  three recipes), flow-ba (intent 9, assignment 3, two recipes),
-  lib-allwyn (one recipe); their ledger and index comments still say
-  "material index" and "artefact".
+  The three local projects migrated and saved the same day, each
+  through `/check` and its own `/save`: agentic-platform (acddf3d),
+  flow-ba (2e262b8), lib-allwyn (c49c874). Left for their next save:
+  the ledger and index comments of agentic-platform and flow-ba still
+  say "material index" and "artefact" (comments only, not a finding).
 - THR.0250 two suggested functions — the expander (a name only) and the
   essence manager, whose detail became the `essence` lens (POS.0410);
   open whether an end-to-end distillation brief → last layer is the

@@ -34,8 +34,9 @@ relay the script's note in the report.
    from `recipes/readme.md` and, for a thought project,
    `RELEASE-NOTES.md` from `recipes/release-notes.md`. A project
    whose recipe is missing is reported (a `/check` finding) and saved
-   without the render. Other renders are never regenerated here; they
-   surface as ordinary check findings.
+   without the render. Other renders are never regenerated here; their
+   staleness is the principal's business, shown by the `/forge` map,
+   never a check finding (POS.0570).
 3. Report the result to the principal — always, even when clean.
 4. Clean check: state that the check passed and run the script.
 5. Findings: settle them by walkthrough (CLAUDE.md, Working

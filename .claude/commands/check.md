@@ -49,7 +49,7 @@ Checks per project:
    `output: README.md`, and a thought project `recipes/release-notes.md`
    with `output: RELEASE-NOTES.md` (POS.1000); a missing recipe is a
    finding (fix: scaffold from `templates/recipe-<genre>.md`), a missing
-   or stale render is a finding fixed by `/render` — or by the next
+   or stale README or release notes a finding fixed by the next
    `/save`, which regenerates both. Every `00-brief*.md` in the directory has a row in the
    ledger's Briefs table and vice versa; a brief marked `mined` is
    cited somewhere in the intent.
@@ -103,8 +103,10 @@ Checks per project:
    input exists on disk, the `output:` path, where declared, points
    inside the repository (genre skeletons `templates/recipe-<genre>.md`
    extend that shape with genre sections, never replace it). Render
-   staleness as `/render` step 5 defines it — a stale render is a
-   finding, fixed by `/render`. The ledger's Renders table mirrors
+   staleness (as `/render` step 5 defines it) is checked only for the
+   README and the release notes, per step 1; the staleness of any
+   other render is never a finding (POS.0570) — the `/forge` map shows
+   it. The ledger's Renders table mirrors
    every render's front-matter provenance. Whether a recipe's content
    still matches the principal's thinking is substance, not
    conformance.

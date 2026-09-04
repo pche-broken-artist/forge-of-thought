@@ -1,8 +1,8 @@
 ---
-version: 3.22
+version: 3.24
 date: 2026-09-04
 status: draft
-last_change: 3.22 (2026-09-04): check-forge findings of the 3.21 save fixed (brief header lists last_change in POS.0110, POS.1070 and THR.0210 without the script count and the taken POS number); THR.0280 opened — what a Version History row must say.
+last_change: 3.24 (2026-09-04): POS.0180 describes the bundle index as per-file entries; POS.0840 names templates/index-bundle.md the full skeleton, the entry carried verbatim from templates/index.md (check-forge findings of the 3.23 save).
 project: forge
 audience: principal + Claude only
 ---
@@ -266,9 +266,9 @@ position that already stands elsewhere.
   ledger is freely rewritten. Isolated files stay directly in
   `sources/` as before. Every bundle carries a `00-INDEX.md`
   catalogue: a YAML header (bundle, project, date, origin), one
-  paragraph saying what the whole is and why it entered sources, and a
-  table of File / What it is / Origin / Date — origin dates best
-  effort, never asked for. `/ingest` creates the index at registration
+  paragraph saying what the whole is and why it entered sources, and
+  one entry per file in the shape of the directory index (POS.0840) —
+  origin dates best effort, never asked for. `/ingest` creates the index at registration
   when the bundle lacks one and validates a supplied one against the
   contents. The index is purely descriptive; unlike the files it
   catalogues it is a rewritten catalogue, not an immutable document
@@ -279,10 +279,10 @@ position that already stands elsewhere.
   binary the principal chooses to convert (POS.1040), in bundles as
   well as for isolated files; the output is `sources/<slug>.md`, the
   source itself.
-- **POS.0840** Material has an index. Every `sources/` and
-  `research/` directory carries a `00-INDEX.md`: a light catalogue so
-  that Claude — and the principal — know what material exists and what
-  it is for without re-reading the files. It is a working aid, not a
+- **POS.0840** Resources have an index. Every `sources/` and
+  `research/` directory carries a `00-INDEX.md` (the resource index):
+  a light catalogue so that Claude — and the principal — know what
+  resources exist and what they are for without re-reading the files. It is a working aid, not a
   record of thinking: it tracks nothing (no processing state, no
   positions) and is an automatic input of no command. `/forge`,
   `/critique` and the challengers do not confront the chain with the
@@ -300,7 +300,17 @@ position that already stands elsewhere.
   columns — so that nothing is described in two places. A bundle keeps
   its own `00-INDEX.md` inside and appears in the top index as one
   entry pointing into it: two levels, never deeper, and the top index
-  never repeats the bundle's contents. The index is freely rewritten
+  never repeats the bundle's contents. The bundle index is the same
+  catalogue one level down and has the same shape — one entry per
+  file with What / Origin / Role / Use for; `templates/index-bundle.md`
+  is the full skeleton `/ingest` creates the file from — the bundle's
+  header and opening paragraph its own, the entry carried verbatim
+  from `templates/index.md`, as a reviewer agent carries its
+  skeleton's fixed sections. One shape for
+  every index, decided 2026-09-04 when the two bundle indexes in the
+  field turned out to be a table and a prose catalogue of a third
+  shape: Role and Use for are what an index is for, and a table does
+  not carry them. The index is freely rewritten
   like the ledger while the files under it stay immutable. `/ingest`
   and `/research` write the entry when they place the file (the bare
   `/ingest` sweep fills gaps), `/new-project` scaffolds both indexes
@@ -389,7 +399,10 @@ position that already stands elsewhere.
   regenerated only by `/save` or by the principal's explicit
   `/render`; Claude never regenerates on its own judgement — it
   reports staleness and offers (principal's direction 2026-08-30,
-  after Claude re-ran renders unasked).
+  after Claude re-ran renders unasked). Only the README and the
+  release notes have a freshness rule — the next `/save` regenerates
+  them; every other render is as stale as the principal lets it be,
+  and `/check` says nothing about it (POS.0570).
 - **POS.0960** A project has a kind, `kind: thought | library`, declared
   in the YAML header of its ledger, default `thought` — today's projects
   unchanged. The rules of a kind live in the engine; the project carries
@@ -725,8 +738,11 @@ position that already stands elsewhere.
   `README.md` and the Unreleased head of `RELEASE-NOTES.md` from
   their recipes before the conformance check — unconditionally, with
   no staleness test — and reports the steps.
-  Other renders remain ordinary check findings for the principal to
-  settle or defer.
+  The staleness of any other render is the principal's business
+  alone: the `/forge` map shows it, `/check` never reports it
+  (decided 2026-09-04, when the checks of three projects listed every
+  stale deck and picture as findings — noise, since a render is
+  regenerated only on his word, POS.0810).
 - **POS.0580** Work on the chain is invoked by target state, never by
   verb: `/forge <state>` (`/forge intent`, `/forge assignment`) —
   knowing the name of the target artefact is knowing the command, with

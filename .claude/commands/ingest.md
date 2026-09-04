@@ -33,8 +33,9 @@ else. Never silently re-register.
    (`sources/<slug>/<file>`). A file may later be split out to its own
    ledger row if it needs separate tracking.
    **Bundle index:** every bundle carries `00-INDEX.md`, shaped by
-   `templates/index-bundle.md` (the one owner of that shape,
-   POS.1070). If the bundle arrives without one, create it from the
+   `templates/index-bundle.md` (the one owner of the bundle index —
+   header and opening paragraph its own, the entry carried verbatim
+   from `templates/index.md`; POS.1070). If the bundle arrives without one, create it from the
    skeleton at registration; if one is supplied, validate it against
    the actual contents and report gaps. Per-file origin and dates are
    best effort, never asked for.
