@@ -43,7 +43,7 @@ never here.
    principal publishes. A missing section (e.g. success criteria) may be a
    deliberate delegation to the recipients, not a defect.
 6. **Language:** conversation in the principal's language (set in
-   `CLAUDE.local.md`); all artefacts in English — the forge dictates
+   `CLAUDE.local.md`); all documents in English — the forge dictates
    only the output language, and the conversation language is
    per-instance configuration that never appears in outward-facing
    renders (the README among them). Translate on write. The one
@@ -124,6 +124,36 @@ any of them in a word.
   and reason, stated once; a declined recommendation is not re-argued
   without new facts.
 
+## Document kinds
+"Document" is the word for every file of a project; "artefact" is
+reserved for the documents of the chain — the ones the principal
+composes, the reviewers read and the renders are generated from. Every
+document has one kind, and the kind says what it is, who writes it,
+whether it is versioned and how it behaves:
+
+| Group | Kind | Meaning | Written by | Versioned | Behaviour |
+|---|---|---|---|---|---|
+| artefacts | brief | the idea as the principal wrote it | principal | yes | locked at 1.0, then immutable |
+| artefacts | intent | current understanding for principal and Claude: positions, threads, rejections | Claude, principal composes | yes | rewritten freely |
+| artefacts | assignment | the direction handed to the recipients, self-contained | Claude, principal composes | yes | rewritten freely |
+| artefacts | later artefacts (BRD, RFP, article…) | further layers, each derived from the one above | Claude, principal composes | yes | rewritten freely |
+| records | history | what changed in a versioned document, and why | forge | — | append-only |
+| records | decisions | the principal's decisions with reasons | forge | — | append-only |
+| records | review, challenge | one dated reviewer run | reviewer agent | — | immutable |
+| state | ledger | single source of truth for state | forge | — | freely rewritten |
+| state | index | catalogue of a resource directory | forge | — | freely rewritten |
+| rendering | recipe | how a render is made | Claude, principal iterates | yes | iterated, never approved |
+| rendering | render | audience-specific output, never a source of truth | generated | — | overwritten by /render |
+| resources | source | external input as it arrived | external, /ingest | — | immutable |
+| resources | research | durable answer to one question | Claude, /research | — | immutable |
+
+Every versioned kind keeps its Version History in an append-only
+companion `<file>.history.md` beside it (Versioning & status); an
+integer version is approved, and a recipe never is. A functional
+binary — a `.potx` template, a graphic — is a source, so a library's
+assets are resources without a kind of their own; a library carries
+no artefacts and no records.
+
 ## Document chain
 Files are numbered so the chain can grow without renaming anything.
 Gaps of ten leave room for later layers (e.g. `30-brd.md`,
@@ -134,7 +164,9 @@ Gaps of ten leave room for later layers (e.g. `30-brd.md`,
                  then verbatim and never edited; later wholes as
                  00-brief-<name>.md
 10-intent.md     our working understanding — rewritten freely, versioned
-20-assignment.md frozen high-level direction for recipients — versioned
+20-assignment.md the direction handed to the recipients — versioned
+<file>.history.md  Version History of each versioned document —
+                 append-only companion beside it
 decisions.md     append-only DEC records
 ledger.md        single source of truth for state
 ```
@@ -145,7 +177,7 @@ ledger.md        single source of truth for state
    required content and no IDs; thoughts to be processed, not
    decisions, so they may be changed, reworked or dropped when mined.
    Only a minimal YAML header (project, title, date, author, version,
-   status). `draft` while being composed, `approved`
+   status, last_change). `draft` while being composed, `approved`
    (1.0) once the principal locks it — immutable from the lock, not
    from creation. Three origins are equally legitimate and
    indistinguishable to the forge: it arrives finished and is locked on
@@ -163,7 +195,8 @@ ledger.md        single source of truth for state
 2. **`10-intent.md`** — the working document, audience: principal +
    Claude. Consolidated *current* state of intent: what he wants, why,
    what is open, what was rejected and why. Continuously rewritten for
-   coherence (not append-only); changes recorded in its changelog.
+   coherence (not append-only); changes recorded in its history
+   companion.
 3. **`20-assignment.md`** — distilled from intent, audience: the
    recipients of the assignment (teams, colleagues, or the principal's
    future self). The only document handed over. Self-contained.
@@ -188,7 +221,7 @@ ledger.md        single source of truth for state
    ad-hoc parsing. Registration does not
    imply intake: a source's role is individual — a standard to verify
    against, inspiration, a counter-example, a meeting record — noted as
-   free-text Role in the material index, and the principal alone
+   free-text Role in the resource index, and the principal alone
    directs how and when each source is used. A set of related files
    (e.g. a downloaded site with its index) lives as a subdirectory
    `sources/<slug>/` and counts as one source with one ledger entry;
@@ -199,16 +232,16 @@ ledger.md        single source of truth for state
    enter the intent, it is the principal's explicit act, cited with
    provenance: what someone said in a meeting is never silently
    promoted to the principal's own position.
-   **Material indexes:** every `sources/` and `research/` directory
+   **Resource indexes:** every `sources/` and `research/` directory
    carries a `00-INDEX.md` (skeleton `templates/index.md`) — a light
-   catalogue so that Claude and the principal know what material
-   exists and what it is for without re-reading it. Entries have fixed
+   catalogue so that Claude and the principal know what resources
+   exist and what they are for without re-reading them. Entries have fixed
    free-text fields: sources *What / Origin / Role / Use for*, research
    *Question / Answer in short / Consult when*. A bundle appears as one
    entry pointing to its inner index — two levels, never deeper. The
    index tracks nothing (no processing state, no positions) and is an
    automatic input of no command: a contradiction between the intent
-   and a material is not a finding; Claude reaches for a file by its
+   and a resource is not a finding; Claude reaches for a file by its
    own judgement or on request. Unlike the files it catalogues, the
    index is freely rewritten, like the ledger. `/ingest` and
    `/research` write the entries; `/check` verifies index against
@@ -226,9 +259,10 @@ ledger.md        single source of truth for state
    git. Generation runs in an isolated subagent that sees only the
    recipe and its inputs, never the working conversation. Every render opens with YAML front-matter provenance citing
    the recipe and each input with their versions. Recipes are tools,
-   not records of thinking: they carry a bare version and an updated
-   date in front-matter, no status and no Version History — their
-   change history lives in git. A render assigns
+   not records of thinking: they carry a version and an updated date
+   in front-matter and no status, since a recipe is never approved;
+   being versioned, a recipe keeps its Version History in its
+   companion like every versioned document. A render assigns
    nothing and is not part of the chain: the artefacts stay the source
    of truth. The boundary between chain and render is authorship: a
    chain artefact is composed by the principal, a render is generated
@@ -294,8 +328,12 @@ projects/<slug>/           # kind: thought — the chain
   logo.png                            # optional project avatar
   00-brief.md  10-intent.md  20-assignment.md
   00-brief-<name>.md                  # later briefs, one per whole
+  <file>.history.md                   # Version History of each
+                                      # versioned document (brief,
+                                      # intent, assignment, recipe):
+                                      # append-only companion
   decisions.md  ledger.md             # ledger header carries kind:
-  sources/00-INDEX.md                 # material index (rewritten):
+  sources/00-INDEX.md                 # resource index (rewritten):
                                       # What / Origin / Role / Use for
   sources/<name>.<ext>                # immutable external inputs, one
                                       # form each: <slug>.md extract of
@@ -304,10 +342,11 @@ projects/<slug>/           # kind: thought — the chain
   sources/<slug>/                     # bundle of related files = one
                                       # source, one ledger entry;
                                       # catalogued by its 00-INDEX.md
-  research/00-INDEX.md                # material index (rewritten):
+  research/00-INDEX.md                # resource index (rewritten):
                                       # Question / Answer / Consult when
   recipes/<recipe>.md                 # render recipes: inputs, audience,
                                       # instructions, template — iterated
+  recipes/<recipe>.history.md         # the recipe's Version History
   renders/<recipe>.md                 # generated outputs, overwritten by
                                       # /render, provenance front-matter
   renders/<recipe>.pptx               # optional deck generated from the
@@ -337,9 +376,10 @@ origin's host, on the principal's word). The recommended global guard
 is `user.useConfigOnly = true` with no global `user.name`/`user.email`
 (offered by `/setup`), so a repository without a local identity fails
 aloud instead of taking a default. A project "not under git" is a
-property, not a defect. Four scripts are the only door to git —
-reading state included, no exceptions. Three of them serve the engine
-and every project repository: `scripts/forge-save.ps1` commits and
+property, not a defect. The scripts in `scripts/` are the only door
+to git — reading state included, no exceptions; how many there are is
+not a rule. Three of them serve the engine and every project
+repository: `scripts/forge-save.ps1` commits and
 pushes (bare: every repository with changes, each its own commit;
 with a slug: that one, `forge` meaning the engine; without an origin
 the commit is kept and reported; reconciles remote changes by
@@ -347,15 +387,15 @@ rebase; prints the commit's file summary), `scripts/forge-pull.ps1`
 fast-forwards from the remotes and never touches a repository with
 unsaved changes — on the engine it is the upgrade channel — and
 `scripts/forge-status.ps1` reports unsaved changes, the last commit
-and the origin of each without changing anything. The fourth,
-`scripts/forge-clone.ps1`, brings an existing project in: it clones a
+and the origin of each without changing anything.
+`scripts/forge-clone.ps1` brings an existing project in: it clones a
 repository into `projects/<repository name>`, never overwriting, and
 sets that repository's local commit identity only when given `-Name`
 and `-Email` (`/import-project` is its door and passes them by
 default, proposed from `CLAUDE.local.md` by the URL's host on the
 principal's word). The scripts carry
 no URL and no identity. The engine receives a git tag at every
-approved major of the forge intent. Immutability of artefacts is a
+approved major of the forge intent. Immutability of documents is a
 process rule, not a git mechanism.
 
 **Portability.** The forge runs beyond Windows; `scripts/` is the
@@ -385,15 +425,27 @@ signed-off versions.**
 - `2.0` the next approved version, incorporating all changes since 1.0
 
 Front-matter carries `version`, `date`, `status`
-(`draft | in_review | approved | superseded`). Status must agree with the
-number: an integer version is `approved`, anything else is not.
-Every versioned document opens with a **Version History** table
-(Version | Modification | Author | Date) — human-readable, stating what
-changed and why.
+(`draft | in_review | approved | superseded`) and `last_change`. Status
+must agree with the number: an integer version is `approved`, anything
+else is not; a recipe carries no status and stays 0.x.
+Every versioned document — brief, intent, assignment, later artefacts
+and recipes alike, no exception — keeps its **Version History**
+(Version | Modification | Author | Date — human-readable, stating what
+changed and why) in an append-only companion `<file>.history.md`
+beside it, never in its body: the body is the current state, the
+companion the record. `last_change` is a one-line summary of the
+newest row, written by the same write step that appends the row,
+never by hand. The row in the companion is the single primary; the
+commit message `/save` drafts and the release notes are derivations.
+The companion is part of its document: it has no ledger row and is
+handed over with the document by the link into git. A Version History
+table in the body of a document is a `/check` finding, fixed by
+moving it into the companion — that is how a project migrates to this
+convention, on the principal's word.
 
-Immutable artefacts (a locked brief, reviews, challenges, research)
-are never edited — a brief from its lock, the others from creation;
-corrections happen downstream.
+Immutable documents (a locked brief, reviews, challenges, sources,
+research) are never edited — a brief from its lock, a source from its
+registration, the others from creation; corrections happen downstream.
 
 ## ID scheme
 Format **`PREFIX.NNNN`**, all prefixes three letters. IDs are **global and
@@ -499,12 +551,12 @@ supersede the original items and replace the group with one link item.
 `ledger.md` is the **single source of truth for state**: tables of
 briefs (file, version, status, mining state, note), documents (file,
 version, status, date), renders, sources and research
-(registration only — what a material is and is for lives in its
+(registration only — what a resource is and is for lives in its
 directory's `00-INDEX.md`), dependencies (documents of other
 repositories the project relies on — typically library documents
 cited by path; registration only, no version), findings and
 challenges. Together with the
-material indexes it is the only freely rewritten file. Keep it current
+resource indexes it is the only freely rewritten file. Keep it current
 after every operation.
 
 ## Commands

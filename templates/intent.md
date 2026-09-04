@@ -2,6 +2,7 @@
 version: 0.1
 date: YYYY-MM-DD
 status: draft            # draft | in_review | approved | superseded
+last_change: <one line summarising the newest row of 10-intent.history.md — written by the write step, never by hand>
 project: <slug>
 audience: principal + Claude only
 ---
@@ -10,14 +11,10 @@ audience: principal + Claude only
 
 <!-- Working document: the consolidated CURRENT state of the principal's
 intent. Not an append-only log — rewrite freely for coherence, record
-every substantive change in the Version History. Sources: the locked briefs (00-brief*.md),
-/forge intent interviews, brain-dumps. English only; translate the
-principal's input on write. -->
-
-## Version History
-| Version | Modification | Author | Date |
-|---|---|---|---|
-| 0.1 | Initial consolidation from 00-brief.md (locked). | Claude | YYYY-MM-DD |
+every substantive change as a row of the companion
+10-intent.history.md (templates/history.md), never here. Sources: the
+locked briefs (00-brief*.md), /forge intent interviews, brain-dumps.
+English only; translate the principal's input on write. -->
 
 ## Essence
 <!-- Three to ten sentences: what the principal wants and why, as of

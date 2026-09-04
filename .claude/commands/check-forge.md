@@ -27,10 +27,11 @@ immediate fix.
      command names, file layout, conventions, planned extensions.
      Anything superseded by a later decision is a finding; the fix is
      re-rendering via its recipe, never editing the file.
-   - `templates/` agree with the conventions (front-matter fields,
-     Version History, prefixes, numbering, statuses;
-     `templates/recipe.md` carries the recipe exemption — bare
-     version, no status, no Version History).
+   - `templates/` agree with the conventions (front-matter fields
+     including `last_change`, the history companion
+     `templates/history.md`, prefixes, numbering, statuses; no
+     template carries a Version History table in its body; the recipe
+     templates carry no status).
 2. **Core ↔ forge intent** (`projects/forge/10-intent.md`)
    - Every POS is honoured by the core documents; nothing withdrawn or
      rejected (REJ items, closed THR items) is still advertised
@@ -52,7 +53,7 @@ immediate fix.
      (`.claude/agents/critic-*.md`) likewise carries the fixed sections
      of `templates/critic.md`.
    - No command performs directly what a script, command or agent
-     exists for (git outside the four scripts, a conversion outside
+     exists for (git outside the scripts in `scripts/`, a conversion outside
      `doc2md.ps1`, a render outside `/render`, a review outside the
      agents).
 4. **Forge project** — run the `/check` procedure
@@ -65,6 +66,7 @@ immediate fix.
    may still contain them.
 6. **Report** — findings ranked by severity, each with `file:line` and
    a proposed fix. If everything is consistent, say so in one line.
+   Findings only, as `/check` says: what conforms is not reported.
 
 Do not judge substance or document quality — that is `/critique` and
 `/challenge` territory. This command checks consistency only.

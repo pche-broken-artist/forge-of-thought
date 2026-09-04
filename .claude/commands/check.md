@@ -53,9 +53,16 @@ Checks per project:
    `/save`, which regenerates both. Every `00-brief*.md` in the directory has a row in the
    ledger's Briefs table and vice versa; a brief marked `mined` is
    cited somewhere in the intent.
-2. **Front-matter** — against Versioning & status in CLAUDE.md, every
-   rule there (POS.1070); Briefs carry no Version History: draft (0.x)
-   or approved (1.0) in the header only.
+2. **Front-matter and history** — against Versioning & status in
+   CLAUDE.md, every rule there (POS.1070). Every versioned document
+   (briefs, intent, assignment, later artefacts, recipes) has its
+   companion `<file>.history.md` beside it, shaped as
+   `templates/history.md`, the version of its newest row equal to the
+   document's `version` and the document's `last_change` summarising
+   that row. A Version History table in the body of any document is a
+   finding, fix: move the rows into the companion and write
+   `last_change` — that is how a project migrates to this convention,
+   applied on the principal's word (POS.0820).
 3. **Ledger accuracy** — documents table vs front-matter and files on
    disk; findings and challenges vs files in `reviews/` and
    `challenges/`; every file in `sources/` and `research/` registered
@@ -70,7 +77,7 @@ Checks per project:
    advisory); every index entry, recipe or chain
    citation pointing outside the project (`projects/<other>/…`) has a
    row; no row points inside the project.
-   **Material indexes** — `sources/00-INDEX.md` and
+   **Resource indexes** — `sources/00-INDEX.md` and
    `research/00-INDEX.md` exist and agree with their directories: a
    file (or bundle) without an entry, an entry without a file, a bundle
    entry whose inner `00-INDEX.md` is missing. Never judge what the
@@ -81,16 +88,17 @@ Checks per project:
    Requirement style in CLAUDE.md, every rule there (POS.1070); the
    Terms section lists only the prefixes and terms actually used, as
    `templates/assignment.md` says.
-6. **Language** — all artefacts in English; only the briefs
+6. **Language** — all documents in English; only the briefs
    (`00-brief*.md`) may be in another language.
 7. **Immutables** — locked briefs (status approved; a draft brief is
    still editable), sources, reviews, challenges and research
    are never edited after creation; flag any signs of after-the-fact
-   editing that the ledger or Version Histories reveal. The
+   editing that the ledger or the history companions reveal. The
    `00-INDEX.md` catalogues are exempt: they are rewritten freely.
 8. **Recipes and renders** (shape and freshness, never content) —
    recipes conform to `templates/recipe.md`: front-matter complete
-   (project, purpose, audience, version, updated; `output:` optional),
+   (project, purpose, audience, version, updated, last_change;
+   `output:` optional),
    sections Inputs / Instructions / Template present, every declared
    input exists on disk, the `output:` path, where declared, points
    inside the repository (genre skeletons `templates/recipe-<genre>.md`
@@ -105,4 +113,6 @@ Do not judge substance or document quality — that is `/critique` and
 `/challenge` territory. This command checks conformance only.
 
 Report per project: findings with `file:line` and a proposed fix, or a
-single line saying the project conforms.
+single line saying the project conforms. Findings only: what conforms
+is not reported, under no label ("observation", "note") — a rule
+worth tightening is a matter for the intent, not for the check.

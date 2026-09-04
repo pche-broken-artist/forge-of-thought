@@ -4,6 +4,7 @@ purpose: readme
 audience: humans arriving at the project's repository
 version: 0.1
 updated: YYYY-MM-DD
+last_change: <one line summarising the newest row of readme.history.md — written by the write step, never by hand>
 output: README.md
 ---
 
@@ -13,8 +14,10 @@ output: README.md
 /recipe readme. A recipe is the iterated thing; its render is
 generated output. Never polish README.md by hand: change this recipe,
 run /render readme — and every /save that touches the project
-regenerates it. Recipes are tools: bare version + updated date in
-front-matter, no status, no Version History — history lives in git.
+regenerates it. Recipes are tools: version + updated date in
+front-matter and no status (a recipe is never approved); its Version
+History lives in the companion <recipe>.history.md, last_change
+summarising the newest row.
 The output path is the project root, so the host shows it as the
 repository's front page. -->
 
@@ -22,7 +25,7 @@ repository's front page. -->
 <!-- What the README is generated from. A thought project: the ledger
 (state), the brief (what was asked), the intent (essence and
 positions), the assignment once it exists. A library: the ledger and
-the two material indexes. -->
+the two resource indexes. -->
 - ledger.md
 - 00-brief.md
 - 10-intent.md

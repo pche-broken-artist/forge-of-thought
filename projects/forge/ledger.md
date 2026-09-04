@@ -1,13 +1,13 @@
 ---
 project: forge
 kind: thought
-updated: 2026-09-03
+updated: 2026-09-04
 ---
 
 # Ledger — Forge of Thought
 
-<!-- Single source of truth for state. Freely rewritten (as are the material indexes,
-sources/00-INDEX.md and research/00-INDEX.md); every other artefact
+<!-- Single source of truth for state. Freely rewritten (as are the resource indexes,
+sources/00-INDEX.md and research/00-INDEX.md); every other document
 is versioned or immutable. Keep current after every operation; /ledger
 reads from here.
 Version scheme: 0.x draft, 1.0 approved, 1.x change after approval, 2.0
@@ -26,7 +26,7 @@ absorbed it; Note says what remains (partial) or the REJ (dropped). -->
 ## Documents
 | File | Version | Status | Date |
 |---|---|---|---|
-| 10-intent.md | 3.19 | draft | 2026-09-03 |
+| 10-intent.md | 3.22 | draft | 2026-09-04 |
 | 20-assignment.md | — | not planned: the handover artefacts of this project are the core itself (CLAUDE.md, templates/, .claude/) and README.md | — |
 | decisions.md | — | 9 records (DEC.0010–0090) | 2026-09-03 |
 
@@ -36,8 +36,8 @@ hand-edited: iterate the recipe, re-run /render. Row mirrors the
 render's front-matter provenance. -->
 | Render | Audience | Recipe | Inputs | Generated |
 |---|---|---|---|---|
-| README.md (repo root) | humans arriving at the repository | recipes/readme.md v0.33 | CLAUDE.md, 10-intent.md v3.19 | 2026-09-03 |
-| RELEASE-NOTES.md (repo root) | humans tracking the system's evolution | recipes/release-notes.md v0.2 | 10-intent.md v3.19, decisions.md, previous edition (2026-09-02, released sections) | 2026-09-03 |
+| README.md (repo root) | humans arriving at the repository | recipes/readme.md v0.35 | CLAUDE.md, 10-intent.md v3.21 | 2026-09-04 |
+| RELEASE-NOTES.md (repo root) | humans tracking the system's evolution | recipes/release-notes.md v0.3 | 10-intent.history.md, 10-intent.md v3.21, decisions.md, previous edition (2026-09-03, released sections) | 2026-09-04 |
 | renders/executive-pitch.md | C-level executives whose experience of AI is chatting with it | recipes/executive-pitch.md v0.1 | 10-intent.md, CLAUDE.md | — (not yet rendered) |
 
 ## Sources
@@ -119,15 +119,33 @@ intent version for accepted, DEC.NNNN for rejected. -->
   cost of rendering at every save) is the lever. Second measurement
   (2026-09-03, save of 3.19): renders 8:18 in parallel (README 8:18,
   release notes 2:24), the check 4:19.
-- README render deferred (2026-09-03): the readme recipe went to 0.34
-  (the ontological sentence names challenger personas and critic
-  lenses) after the README had been rendered from 0.33; the principal
-  chose to save with the render stale rather than render again — the
-  next /save or /render readme brings it current.
-- THR.0260 the Version History out of the document into an append-only
-  companion `<document>.history.md`, one rule for every chain document —
-  opened 2026-09-03, research done; to be executed on the principal's
-  decision, together with THR.0220
+- README and release notes one step stale (2026-09-04): both rendered
+  at intent 3.21 (readme recipe 0.35, release-notes recipe 0.3); the
+  intent went to 3.22 and the release-notes recipe to 0.4 at the
+  check-forge walkthrough of the same save, and the principal chose
+  to save without rendering again — the next /save brings both
+  current.
+- THR.0280 what a Version History row must say — opened 2026-09-04 at
+  the principal's observation that the rows are too high-level to
+  learn anything from; to be elicited in a round of its own
+- THR.0270 the shared reviewer skeleton as a preloaded skill
+  (`skills:` in the agent front-matter) instead of the verbatim copy —
+  opened 2026-09-03; proposed solution and three open points (prompt
+  order, skill roster, CLAUDE.md load) in the thread; one trial run
+  before a decision
+- Migration to the history companion (POS.0310): the engine and the
+  forge project done 2026-09-04 — CLAUDE.md, templates, commands, the
+  80 rows of the intent moved to `10-intent.history.md`, one-row
+  companions for the locked brief and the three recipes, "material
+  index" renamed "resource index"; `last_change` written into the
+  locked brief's front-matter on the principal's word at the
+  check-forge walkthrough of 2026-09-04 — immutability knowingly
+  broken once for one metadata line, the text untouched.
+  Still to migrate, each through `/check` and its own `/save` on the
+  principal's word: agentic-platform (intent 17 rows, assignment 9,
+  three recipes), flow-ba (intent 9, assignment 3, two recipes),
+  lib-allwyn (one recipe); their ledger and index comments still say
+  "material index" and "artefact".
 - THR.0250 two suggested functions — the expander (a name only) and the
   essence manager, whose detail became the `essence` lens (POS.0410);
   open whether an end-to-end distillation brief → last layer is the

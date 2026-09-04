@@ -4,6 +4,7 @@ purpose: Slide-by-slide source material for a five-slide executive pitch of Forg
 audience: C-level executives whose experience of AI is chatting with it
 version: 0.1
 updated: 2026-08-30
+last_change: 0.1 (2026-08-30): composed by interview, story S01–S05 agreed; not yet rendered.
 ---
 
 # Recipe — Executive pitch

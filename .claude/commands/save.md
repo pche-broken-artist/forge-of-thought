@@ -44,7 +44,10 @@ relay the script's note in the report.
    save proceeds. Never fix silently; never proceed with an unsettled
    finding.
 6. Unless `-m` was supplied, draft a one-line English commit message
-   summarising the round and propose it to the principal; commit
+   summarising the round — from the newest rows of the touched
+   documents' `.history.md` companions, the primary record of every
+   round (CLAUDE.md, Versioning & status) — and propose it to the
+   principal; commit
    with the confirmed or adjusted wording. When more than one
    repository has changes, one message per repository is drafted, or
    the save is run per slug. The script's auto-generated file list is

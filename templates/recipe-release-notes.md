@@ -4,6 +4,7 @@ purpose: release-notes
 audience: humans tracking the project's evolution
 version: 0.1
 updated: YYYY-MM-DD
+last_change: <one line summarising the newest row of release-notes.history.md — written by the write step, never by hand>
 output: RELEASE-NOTES.md
 ---
 
@@ -14,12 +15,15 @@ thought project and iterated via /recipe release-notes. A recipe is
 the iterated thing; its render is generated output. Never polish
 RELEASE-NOTES.md by hand: change this recipe, run
 /render release-notes — and every /save that touches the project
-regenerates the Unreleased head. Recipes are tools: bare version +
-updated date in front-matter, no status, no Version History — history
-lives in git. -->
+regenerates the Unreleased head. Recipes are tools: version + updated date in
+front-matter and no status (a recipe is never approved); its Version
+History lives in the companion <recipe>.history.md, last_change
+summarising the newest row. -->
 
 ## Inputs
-- 10-intent.md          # Version History — the fine-grained log
+- 10-intent.history.md  # the intent's Version History — the
+                        # fine-grained log
+- 10-intent.md          # current state: version, status, open threads
 - decisions.md          # DEC records of the era
 - RELEASE-NOTES.md      # previous edition — released sections carried
                         # over verbatim (absent on the first render)
@@ -56,7 +60,7 @@ lives in git. -->
 
 <one sentence: an Unreleased section covering the changes since the
 last approved major, then one section per approved major version of
-the intent, newest first; the fine-grained log lives in 10-intent.md>
+the intent, newest first; the fine-grained log lives in 10-intent.history.md>
 
 ## Unreleased — <major>.x since <last major>
 

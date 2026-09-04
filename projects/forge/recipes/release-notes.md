@@ -2,8 +2,9 @@
 project: forge
 purpose: release-notes
 audience: humans tracking the system's evolution
-version: 0.2
-updated: 2026-08-17
+version: 0.4
+updated: 2026-09-04
+last_change: 0.4 (2026-09-04): the fine-grained log named in the companion `10-intent.history.md` in Instructions and Template too (check-forge finding of the 3.21 save).
 output: /RELEASE-NOTES.md
 ---
 
@@ -11,12 +12,16 @@ output: /RELEASE-NOTES.md
 
 <!-- A recipe is the iterated thing; its render is generated output.
 Never polish a render by hand: change the recipe, run
-/render release-notes. Recipes are tools: bare version + updated date
-in front-matter, no status, no Version History — history lives in
-git. -->
+/render release-notes. Recipes are tools: version + updated date in
+front-matter and no status (a recipe is never approved); its Version
+History lives in the companion <recipe>.history.md, last_change
+summarising the newest row. -->
 
 ## Inputs
-- projects/forge/10-intent.md          # Version History — the fine-grained log
+- projects/forge/10-intent.history.md  # the intent's Version History —
+                                       # the fine-grained log
+- projects/forge/10-intent.md          # current state: version, status,
+                                       # open threads
 - projects/forge/decisions.md          # DEC records of the era
 - RELEASE-NOTES.md                     # previous edition — released sections
                                        # carried over verbatim (absent on the
@@ -31,7 +36,7 @@ git. -->
 - The file opens with an **Unreleased** section — heading
   `Unreleased — <major>.x since <last major>` — summarising the
   changes made since the last approved major (its minor versions in
-  the intent's Version History), distilled from those rows and the
+  the intent's history companion), distilled from those rows and the
   DEC records of the span: themes, not a row-by-row replay. It opens
   with one plain sentence that these changes are not yet approved,
   needs no narrative opening and no "Open by design" close, and is
@@ -48,7 +53,7 @@ git. -->
   opening (two to four sentences), then thematic groups of changes
   distilled from the Version History rows and DEC records of that
   span — themes, not a row-by-row replay; the fine-grained log stays
-  in the intent. Close each major section with what remains open by
+  in the intent's history companion. Close each major section with what remains open by
   design (THR items) at the moment of approval.
 - Every claim must be derivable from the inputs; invent nothing.
   UK English, plain and direct, no marketing.
@@ -60,7 +65,7 @@ git. -->
 <one sentence: what this file is — an Unreleased section covering the
 changes since the last approved major, then one section per approved
 major version of the system, newest first; the fine-grained log lives
-in projects/forge/10-intent.md>
+in projects/forge/10-intent.history.md>
 
 ## Unreleased — <major>.x since <last major>
 

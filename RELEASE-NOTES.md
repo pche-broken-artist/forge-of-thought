@@ -1,33 +1,26 @@
 ---
 project: forge
 render: release-notes
-generated: 2026-09-03
-recipe: projects/forge/recipes/release-notes.md v0.2
+generated: 2026-09-04
+recipe: projects/forge/recipes/release-notes.md v0.3
 inputs:
-  - projects/forge/10-intent.md v3.19
+  - projects/forge/10-intent.history.md
+  - projects/forge/10-intent.md v3.21
   - projects/forge/decisions.md
-  - RELEASE-NOTES.md (2026-09-02 edition — released sections)
+  - RELEASE-NOTES.md (2026-09-03 edition — released sections)
 ---
 
 # Forge of Thought — Release Notes
 
 An Unreleased section covering the changes since the last approved
 major, then one section per approved major version of the system,
-newest first. The fine-grained change log lives in
-`projects/forge/10-intent.md` (Version History).
+newest first. The fine-grained change log lives in the intent's
+Version History companion, `projects/forge/10-intent.history.md`.
 
 ## Unreleased — 3.x since 3.0
 
 These changes are not yet approved; they cover intent versions 3.1 to
-3.19 — the first four made on the day of the 3.0 approval while the
-first fresh deployment of the public engine was being prepared, the
-next prompted by the first newcomer meeting it and by the day's check
-findings, then the commit identity returning to the project after a
-two-version excursion into a per-host model, a sweep of the operating
-layer for procedures restated in more than one place, and on
-2026-09-03 the critic split into two lenses and run for the first
-time, both reviewers given a target, and five threads opened for the
-forge's next shape.
+3.21, made between 2026-08-30 and 2026-09-04.
 
 **Every project gets a README and release notes.** The engine's own
 mechanism is generalised: every project has a README and, if it is a
@@ -124,19 +117,19 @@ install steps (POS.1050).
 
 **An existing project arrives through one command too.**
 `/import-project <git-url>` brings an existing project in through the
-scripts-only git door: `scripts/forge-clone.ps1` — the fourth git
-script — clones into `projects/<repository name>`, with no slug
-parameter because the directory falls out of the repository's name,
-refuses to overwrite, and reports facts: the last commit, the origin,
-the commit identity git resolves for the fresh clone, and whether a
-ledger with `kind:` is present. The script carries no identity and
-sets the repository's local commit identity only when given `-Name`
-and `-Email`; the command layer passes them by default, proposing the
-matching identity from the roster in `CLAUDE.local.md` by the URL's
-host and confirming it on the principal's word — the clone runs bare
-only when the principal says his own git configuration resolves the
-identity. A clone left with no identity is caught by `forge-save`,
-which reports and commits nothing (POS.1060).
+scripts-only git door: `scripts/forge-clone.ps1` clones into
+`projects/<repository name>`, with no slug parameter because the
+directory falls out of the repository's name, refuses to overwrite,
+and reports facts: the last commit, the origin, the commit identity
+git resolves for the fresh clone, and whether a ledger with `kind:`
+is present. The script carries no identity and sets the repository's
+local commit identity only when given `-Name` and `-Email`; the
+command layer passes them by default, proposing the matching identity
+from the roster in `CLAUDE.local.md` by the URL's host and confirming
+it on the principal's word — the clone runs bare only when the
+principal says his own git configuration resolves the identity. A
+clone left with no identity is caught by `forge-save`, which reports
+and commits nothing (POS.1060).
 
 **The chain drawn as a star, and an authorship boundary.** The
 README's Quickstart was rebuilt as a common head — clone, install
@@ -189,9 +182,9 @@ prime directive: whatever the forge already has a procedure for — a
 command, a skill, a script, an agent — is invoked through that
 procedure whenever its situation arises, never re-described ad hoc.
 `/save` regenerates renders through `/render`, git is touched through
-the four scripts, reviews run through the reviewer agents; a command
-that needs another's mechanism references it by path and adds nothing
-of its own to how it runs, and the rules of a mechanism — isolation,
+the scripts, reviews run through the reviewer agents; a command that
+needs another's mechanism references it by path and adds nothing of
+its own to how it runs, and the rules of a mechanism — isolation,
 wrapping, provenance, what may be read — are written once, in its own
 definition. Restating a procedure in a second place is a defect: the
 two copies drift, and the copy without a rule silently loses it. The
@@ -307,6 +300,65 @@ understanding is an item of its own; an elicitation interview runs
 the same way, one question at a time, a questionnaire being the table
 of verdicts in another coat.
 
+**A project's documents have a kind.** A new position (POS.1080)
+sets out the taxonomy of a project's documents in one table, to be
+read the same in the intent, in CLAUDE.md and in the README: five
+groups — artefacts, records, state, rendering, resources — and
+thirteen kinds, each with its meaning, who writes it, whether it is
+versioned and how it behaves. "Document" is now the word for every
+file of a project; "artefact" is reserved for the documents of the
+chain — brief, intent, assignment and the later layers — which the
+principal composes, the reviewers read and the renders are generated
+from; the positions that had called an immutable review or source an
+artefact now say document (POS.0060, POS.0160, POS.0320, POS.0550,
+POS.0980, THR.0210). Records (history, decisions, reviews and
+challenges), state (ledger, index), rendering (render) and resources
+(source, research) carry no version; the recipe is versioned but
+never approved. A functional binary is a source, so a library's
+assets need no kind of their own, and a library carries no artefacts
+and no records. The assignment is no longer described as "frozen": it
+is rewritten freely between approvals like the intent, and what the
+recipients hold is a version reached by a link into git — the word
+described the handover, not the document. Decided 2026-09-04, when
+the question where the Version History lives turned out to hang on
+which kinds carry a version at all.
+
+**The Version History leaves the document.** Opened at 3.14 as
+THR.0260 — the table measured at 40 % of the intent (8,477 of 21,265
+words, 72 rows) and held three times over: the row, the commit
+message, the release notes — with a research note on placement whose
+split by kind (the table kept in the head of the assignment and the
+briefs) the principal rejected as two rules for one thing, the thread
+is closed by POS.0310 rewritten: every versioned document keeps its
+Version History in an append-only companion `<file>.history.md`
+beside it, never in its body — the body is the current state, the
+companion the record. One rule without exception: brief, intent,
+assignment, every later artefact and the recipe alike. A brief that
+arrives finished has one row; a brief born in the forge gains the
+history it never had; the recipe, exempted at 1.15, gains one too
+because the companion removes the reason for the exemption, a status
+it still has none. The document's front-matter carries a
+machine-written `last_change:` line summarising the newest row,
+written by the same step that appends the row, so the two cannot
+drift. The companion's row is the single primary; the commit message
+`/save` drafts and the Unreleased head of these notes are derivations
+by mechanism — a record rendered twice is not a procedure stated
+twice. Every command and isolated agent that loads a document is
+spared its history; a reviewer that needs the trajectory reads the
+companion. A Version History table in the body of a document is a
+`/check` finding, fixed by moving it into the companion — that is how
+a project migrates, on the principal's word, project by project, each
+saved by its own `/save`; a colleague's project meets the rule at its
+next `/check` after `forge-pull`. Row 3.21 is the last written into
+the intent itself; the operating layer — CLAUDE.md, the templates,
+the `/forge` write steps, `/recipe`, `/save`, `/check`,
+`/check-forge`, this recipe — and the migration of the forge project
+and the three local projects follow step by step, and these notes
+already read the log from the companion. Two words tidied in the same
+round: POS.0550 states the scripts-only door to git without a count,
+the number having gone stale twice, and the research's "11 % of a
+brief" was struck as unverifiable, a brief carrying no table.
+
 **The cost of rendering at every save, opened and given three
 candidates.** With the engine's README at 5,700 words and a recipe
 that pins wording, one render costs minutes and well over a hundred
@@ -334,7 +386,7 @@ branch and main — the first step towards the wrapper of git the
 principal does not want. Which reviewers run where belongs to the
 same thread.
 
-**Threads opened for the forge's next shape.** Four further threads
+**Threads opened for the forge's next shape.** Three further threads
 were opened at the principal's direction, no decision taken. THR.0230:
 a common engine beneath several frameworks — whatever every framework
 needs alike (git through the scripts, the ledger, versioning, the ID
@@ -351,15 +403,32 @@ and growing, to be dealt with whatever becomes of THR.0230, the effect
 measured by behaviour and never by line count. THR.0250: two functions
 suggested to the principal, an expander and an essence manager — the
 latter's detail gave the `essence` lens its method, the former has a
-name only; parked. THR.0260: the Version History out of the document
-— measured at 40 % of the intent and held three times over (row,
-commit message, release notes); research on placement run, and one
-rule without exceptions proposed: every versioned chain document
-keeps its history in an append-only companion `<document>.history.md`
-with version, date, status and a machine-written `last_change` in its
-front-matter; the research's split by kind rejected by the principal
-as two rules for one thing; best done together with THR.0220, which
-reaches into the same script and recipe.
+name only; parked.
+
+**The shared reviewer skeleton as a preloaded skill, opened.**
+THR.0270, at the principal's direction. POS.1070 chose at 3.10 the
+verbatim copy over a runtime include, because a persona file stands
+alone and the copy is mechanically checkable; on 2026-09-03 a fact
+changed the weighing — Claude Code agents carry a `skills:` list in
+their front-matter, and the whole body of each named
+`.claude/skills/<name>/SKILL.md` is injected into the subagent's
+system prompt at launch, verified in the documentation the same day:
+an include with the behaviour of the copy and one source, seen in use
+in a colleague's system that grew out of the forge, where one shared
+contract skill carries the conduct, output classes and evidence rules
+of every reviewer. Measured: about 100 of 171 lines of a critic lens
+file and 90 of 131 of the challenger's are the shared part, the
+critic skeleton existing three times and the challenger's twice, with
+`/check-forge` comparing the copies at every save. Proposed: the two
+skeletons move to `.claude/skills/`, every lens and persona file keeps
+its front-matter and Lens section only, and `/check-forge` replaces
+the copy comparison with a check that every skill named in an agent's
+front-matter exists — a missing skill is skipped silently, with a
+warning in the debug log only. Open before a decision: the order in
+which skill and agent body land in the prompt, whether a skeleton
+skill must be kept out of the main session's skill roster, and the
+side fact that every subagent also receives the whole CLAUDE.md — a
+cost that belongs to THR.0240.
 
 **The guard rail parked.** THR.0210 — a standing rule that
 `projects/forge` never carries the content of a subject project — is

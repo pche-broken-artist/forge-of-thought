@@ -15,3 +15,6 @@ desktop.ini
 
 # Office lock files (open documents)
 ~$*
+
+# Principal's private scratch at the engine root - never shared
+/tmp/

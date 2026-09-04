@@ -36,8 +36,9 @@ Two things Claude does throughout, whichever way the text arrives:
 1. Resolve the project ($2, or infer from context; if ambiguous, ask)
    and the file. If the named brief does not exist, create it with
    the minimal YAML header (project, title, date, author, version 0.1,
-   status draft) and add its row to the ledger's Briefs table
-   (Mined: pending). If it exists and is `approved`, stop: a locked
+   status draft, `last_change`), its companion `<file>.history.md`
+   from `templates/history.md`, and add its row to the ledger's Briefs
+   table (Mined: pending). If it exists and is `approved`, stop: a locked
    brief is not edited — a new whole is a new brief.
 2. Work in the conversation language (`CLAUDE.local.md`), however the
    text arrives:
@@ -54,10 +55,13 @@ Two things Claude does throughout, whichever way the text arrives:
    IDs or conventions. When he asks to record a summary or a
    structured proposal Claude has just shown him, store it as shown —
    headings, tables and lists included — never re-narrated as prose.
-3. Write once per round on his confirmation (bump 0.x, no Version
-   History — a brief carries none; the ledger row is its state).
+3. Write once per round on his confirmation: bump 0.x, append the
+   round's row to the companion and rewrite `last_change` from it
+   (CLAUDE.md, Versioning & status); the ledger row is its state.
 4. **Lock** only on his explicit word: set version 1.0, status
-   approved, date; ledger row updated. From then on the file is
+   approved, date, the lock's row in the companion and `last_change`;
+   ledger row updated. A brief that arrived finished has that one
+   row. From then on the file is
    immutable and its whole is mined by `/forge intent`, which keeps
    the Mined column current.
 5. End by naming the state — draft or locked — and, if locked,

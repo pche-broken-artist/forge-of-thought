@@ -23,6 +23,7 @@ run in one step.
    and keeps the Mined column.
 5. In the source assignment: mark moved items superseded (do not delete),
    replace the group with one link item — "REQ.NNNN: Delivered by project
-   *$3*, see its assignment." Bump the version, update Version History, and
-   record a DEC in decisions.md.
+   *$3*, see its assignment." Bump the version, append the row to
+   the assignment's history companion and rewrite `last_change`
+   (CLAUDE.md, Versioning & status), and record a DEC in decisions.md.
 6. Update both ledgers and report the result.

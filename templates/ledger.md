@@ -6,8 +6,8 @@ updated: YYYY-MM-DD
 
 # Ledger — <Project>
 
-<!-- Single source of truth for state. Freely rewritten (as are the material indexes,
-sources/00-INDEX.md and research/00-INDEX.md); every other artefact
+<!-- Single source of truth for state. Freely rewritten (as are the resource indexes,
+sources/00-INDEX.md and research/00-INDEX.md); every other document
 is versioned or immutable. Keep current after every operation; /ledger
 reads from here.
 Version scheme: 0.x draft, 1.0 approved, 1.x change after approval, 2.0

@@ -5,6 +5,7 @@ date: 2026-08-29
 author: PCHe
 version: 1.0
 status: approved
+last_change: 1.0 (2026-08-29): locked by the principal after the CTO challenge of the same day; drafts 0.1–0.5 born in the forge.
 ---
 
 ## What I want

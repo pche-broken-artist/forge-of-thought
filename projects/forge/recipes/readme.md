@@ -2,8 +2,9 @@
 project: forge
 purpose: readme
 audience: humans arriving at the repository
-version: 0.34
-updated: 2026-09-03
+version: 0.35
+updated: 2026-09-04
+last_change: 0.35 (2026-09-04): Conventions gains the document-kinds table of CLAUDE.md (POS.1080) and the language rule says documents, not artefacts; companion history introduced (POS.0310).
 output: /README.md
 ---
 
@@ -11,8 +12,10 @@ output: /README.md
 
 <!-- A recipe is the iterated thing; its render is generated output.
 Never polish a render by hand: change the recipe, run
-/render readme. Recipes are tools: bare version + updated date in
-front-matter, no status, no Version History — history lives in git. -->
+/render readme. Recipes are tools: version + updated date in
+front-matter and no status (a recipe is never approved); its Version
+History lives in the companion <recipe>.history.md, last_change
+summarising the newest row. -->
 
 ## Inputs
 - CLAUDE.md
@@ -130,7 +133,7 @@ front-matter, no status, no Version History — history lives in git. -->
   repository of its own, which the engine does not track — that is
   why you name it first.
 - The language rule appears once, in Conventions, and says only this:
-  the forge dictates the output language — all artefacts are written
+  the forge dictates the output language — all documents are written
   in English; the briefs are the exception, stored verbatim in
   whatever language they were written. The conversation language is
   per-instance configuration (it lives in `CLAUDE.local.md`) and its
@@ -228,7 +231,14 @@ front-matter, no status, no Version History — history lives in git. -->
   brevity; the boundary in one sentence — an assignment assigns, it
   does not solve; the machinery of executing delivery belongs to the
   recipients (no enumerated list of banned apparatus); the
-  versioning scheme; project kinds — `thought` (the chain) and
+  versioning scheme, followed by the **document kinds** table of
+  CLAUDE.md (section "Document kinds") reproduced in full — the six
+  columns Group / Kind / Meaning / Written by / Versioned / Behaviour
+  and every row, verbatim — introduced by one sentence that "document"
+  is every file of a project and "artefact" the documents of the
+  chain, and followed by the two sentences on the history companion
+  (`<file>.history.md`, append-only, `last_change` in the front-matter)
+  and on integer versions being approved and a recipe never; project kinds — `thought` (the chain) and
   `library` (`lib-` prefix, shared material, no chain) — and naming
   (slugs), illustrated only with `forge` and the `lib-` prefix, never
   with invented or instance projects. Naming has no numbered section
@@ -474,6 +484,7 @@ note that plain conversation works too>
 <IDs and numbering; prefix table; Terms rule; language rule;
 requirement style with the fixed illustrative item; completeness over
 brevity; the assigns-not-solves boundary sentence; versioning scheme;
+document kinds table with the history-companion sentences;
 project kinds; naming with forge and the lib- prefix only>
 
 ## 11. Repository layout

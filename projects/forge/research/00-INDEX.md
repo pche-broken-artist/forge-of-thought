@@ -6,7 +6,7 @@ updated: 2026-09-03
 
 # Index — research of Forge of Thought
 
-<!-- Material index: a light catalogue so that Claude and the principal
+<!-- Resource index: a light catalogue so that Claude and the principal
 know what exists here and what it is for without re-reading the files.
 Freely rewritten (like the ledger) while the files it catalogues stay
 immutable. Tracks nothing — no processing state, no positions — and is

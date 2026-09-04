@@ -4,6 +4,7 @@ purpose: Slide-by-slide source material for <the presentation>
 audience: <audience>
 version: 0.1
 updated: YYYY-MM-DD
+last_change: <one line summarising the newest row of <recipe>.history.md — written by the write step, never by hand>
 # output: <path>   # optional — overrides the default renders/<recipe>.md
 ---
 
@@ -13,9 +14,10 @@ updated: YYYY-MM-DD
 A recipe is the iterated thing; its render is generated output. Never
 polish a render by hand: change the recipe, run /render <recipe>. The
 render is a slide-by-slide deck definition; scripts/md2pptx.ps1 turns
-it into an actual PowerPoint file. Recipes are tools: bare version +
-updated date in front-matter, no status, no Version History — history
-lives in git. -->
+it into an actual PowerPoint file. Recipes are tools: version + updated date in
+front-matter and no status (a recipe is never approved); its Version
+History lives in the companion <recipe>.history.md, last_change
+summarising the newest row. -->
 
 ## Inputs
 <!-- Chain artefacts the deck is generated from. A picture may come

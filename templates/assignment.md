@@ -2,16 +2,15 @@
 version: 0.1
 date: YYYY-MM-DD
 status: draft            # draft | in_review | approved | superseded
+last_change: <one line summarising the newest row of 20-assignment.history.md — written by the write step, never by hand>
 project: <slug>
 audience: recipients
 ---
 
 # <Title>
 
-## Version History
-| Version | Modification | Author | Date |
-|---|---|---|---|
-| 0.1 | Initial draft. | <author> | YYYY-MM-DD |
+<!-- The Version History lives in the companion 20-assignment.history.md
+(templates/history.md), never here. -->
 
 ## Purpose & Context
 <!-- Two to four paragraphs. Why this exists, what problem or opportunity

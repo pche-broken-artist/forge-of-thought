@@ -30,8 +30,10 @@ changes.
 2. Read the genre file and follow it: it declares the elicitation
    checklist and the skeleton. The recipe is composed with the
    principal — options and trade-offs offered, decisions his — and
-   written once per round on confirmation. Recipe conventions apply:
-   bare version + updated date in front-matter, no status, no Version
-   History; register it in the ledger's Renders table when its first
-   render exists.
+   written once per round on confirmation. Recipe conventions apply
+   (CLAUDE.md, Versioning & status): version + updated date in
+   front-matter, no status; every write appends the round's row to
+   `recipes/<recipe>.history.md` — created from `templates/history.md`
+   with the recipe — and rewrites `last_change` from it. Register the
+   recipe in the ledger's Renders table when its first render exists.
 3. After writing, offer `/render <recipe>` as the natural next step.
