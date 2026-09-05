@@ -69,10 +69,9 @@ never a sweep.
    integer (an approved major), the tag `v<major>`, proposed and
    taken on the principal's word (a rule of the procedure, not a gate
    in the script). Any other tag is his request, as `/save` has it.
-   An approved major of the forge intent also recasts the Unreleased
-   head of `RELEASE-NOTES.md` as the new major's section (POS.0730) —
-   that is the release-notes recipe's work in step 4, not a step of
-   its own.
+   An approved major's section is headed "approved" and opens with a
+   short highlights paragraph (POS.0730) — the release-notes recipe's
+   work in step 4, not a step of its own.
 
 The check is advisory (POS.0430): the principal may order the release
 at any moment regardless of findings.

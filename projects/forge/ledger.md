@@ -1,7 +1,7 @@
 ---
 project: forge
 kind: thought
-updated: 2026-09-05
+updated: 2026-09-06
 ---
 
 # Ledger — Forge of Thought
@@ -26,7 +26,7 @@ absorbed it; Note says what remains (partial) or the REJ (dropped). -->
 ## Documents
 | File | Version | Status | Date |
 |---|---|---|---|
-| 10-intent.md | 3.34 | draft | 2026-09-05 |
+| 10-intent.md | 3.39 | draft | 2026-09-06 |
 | 20-assignment.md | — | not planned: the handover artefacts of this project are the core itself (CLAUDE.md, templates/, .claude/) and README.md | — |
 | decisions.md | — | 9 records (DEC.0010–0090) | 2026-09-03 |
 
@@ -36,8 +36,8 @@ hand-edited: iterate the recipe, re-run /render. Row mirrors the
 render's front-matter provenance. -->
 | Render | Audience | Recipe | Inputs | Generated |
 |---|---|---|---|---|
-| README.md (repo root) | humans arriving at the repository | recipes/readme.md v0.37 | CLAUDE.md, 10-intent.md v3.34 | 2026-09-05 |
-| RELEASE-NOTES.md (repo root) | humans tracking the system's evolution | recipes/release-notes.md v0.6 | 10-intent.history.md, 10-intent.md v3.34, decisions.md, previous edition (2026-09-05 morning, released sections) | 2026-09-05 |
+| README.md (repo root) | humans arriving at the repository | recipes/readme.md v0.37 | CLAUDE.md, 10-intent.md v3.39 | 2026-09-06 |
+| RELEASE-NOTES.md (repo root) | the user of the engine who takes upgrades through forge-pull | recipes/release-notes.md v0.10 | 10-intent.history.md, 10-intent.md v3.39, decisions.md, previous edition (released sections) | 2026-09-06 |
 | renders/executive-pitch.md | C-level executives whose experience of AI is chatting with it | recipes/executive-pitch.md v0.1 | 10-intent.md, CLAUDE.md | — (not yet rendered) |
 
 ## Sources
@@ -67,6 +67,7 @@ research/00-INDEX.md. -->
 | 2026-08-29-git-engine-projects-separation.md | 2026-08-29 | 10-intent.md v2.17 (POS.0760, THR.0130) |
 | 2026-08-29-split-migration-runbook.md | 2026-08-29 | 00-brief-public-engine.md v1.0; 10-intent.md v2.21 (POS.0940–0980); git research |
 | 2026-09-03-version-history-placement.md | 2026-09-03 | 10-intent.md v3.13 (principal's question of 2026-09-03 on the cost of the Version History table); CLAUDE.md Versioning & status |
+| 2026-09-05-good-release-notes.md | 2026-09-05 | 10-intent.md v3.34 (THR.0310; POS.0730, release-notes recipe 0.6); RELEASE-NOTES.md as rendered 2026-09-05 |
 
 ## Findings
 <!-- State: open | resolved | overruled | obsolete. Resolution: assignment
@@ -146,13 +147,41 @@ intent version for accepted, DEC.NNNN for rejected. -->
   declined, README and release notes rendered from the settled
   sources. Until the light check exists (THR.0290), `/save` runs no
   check — accepted knowingly.
+- **Release notes reshaped and the history migrated (2026-09-05,
+  intent 3.35):** THR.0310 closed by walkthrough after the research
+  `2026-09-05-good-release-notes.md` — one section per release in six
+  fixed groups, compiled from a Notes block that closes every history
+  row of the intent, the assignment and later layers (POS.0730,
+  POS.0310). On the principal's word the Notes block was appended to
+  all 93 rows of `10-intent.history.md` from 0.1 to 3.34, prose
+  untouched, compiled from the prose by Claude — rows never rewritten,
+  broken once, knowingly; marker row at the foot of the companion.
+  `RELEASE-NOTES.md` re-rendered whole the same evening
+  (`/render release-notes`, recipe 0.7, 94 sections) — the released
+  sections of 3.0, 2.0 and 1.0 rewritten once in the new shape,
+  knowingly. The principal's review of that render (a significant
+  improvement; the lines described the system, not the change for
+  its user; the majors claimed tags v1 and v2 that never existed):
+  POS.0310 extended with the reader's-side rule (intent 3.36), every
+  Notes line rewritten in a second pass the same evening (second
+  marker row), recipe 0.8, and the notes re-rendered. His review of
+  that second render: both views are needed in one line — the fact
+  and what it means for the user (intent 3.37, POS.0310); every Notes
+  line rewritten a second time (third marker row), recipe 0.9, the
+  notes re-rendered again. Then his suggestion, decided at 3.38:
+  at a major the minors fold into its section and their sections
+  disappear (POS.0730, recipe 0.10); first applies at 4.0, no render. The README render is stale
+  (CLAUDE.md changed), regenerated at the next `/release`. The
+  release-notes recipes of agentic-platform and flow-ba keep the old
+  shape until their next `/recipe release-notes`.
 - **Priorities of the open threads (principal's order, 2026-09-04
   evening; item 1 closed 2026-09-05), the next rounds in this
   sequence:**
   1. ~~THR.0220~~ closed at 3.33 (POS.1100, POS.1110), operating
      layer built the same day (item above).
-  2. THR.0310 the release notes must get better — `/research` on
-     good release notes first, then the position, then the recipe.
+  2. ~~THR.0310~~ closed at 3.35–3.38 (POS.0730, POS.0310), research
+     `2026-09-05-good-release-notes.md`, operating layer and history
+     migrated the same evening (item below).
   3. THR.0270 + THR.0290 + THR.0240 together, ASAP after the two
      above: the reviewer skeleton as a skill, checks (and research) as
      lenses, and the size of CLAUDE.md — one decision on the shape of
@@ -183,9 +212,6 @@ intent version for accepted, DEC.NNNN for rejected. -->
   knowingly, once. GitHub may still hold the objects of b717a67 in its
   cache; only GitHub support can purge them, if the principal wants
   certainty.
-- THR.0310 the release notes must get better — opened 2026-09-04;
-  research first (`/research` on good release notes), then the
-  position, then the recipe; THR.0280 withdrawn into it (3.27)
 - THR.0290 checks (and research) as lenses on the reviewer mechanism —
   opened 2026-09-04; kinds and the fate of /check-forge open; the
   save/release question answered at 3.33 (full check at `/release`,

@@ -1,7 +1,7 @@
 ---
 project: <slug>
 purpose: release-notes
-audience: humans tracking the project's evolution
+audience: the recipients and the principal tracking the project's releases
 version: 0.1
 updated: YYYY-MM-DD
 last_change: <one line summarising the newest row of release-notes.history.md — written by the write step, never by hand>
@@ -14,66 +14,102 @@ output: RELEASE-NOTES.md
 thought project and iterated via /recipe release-notes. A recipe is
 the iterated thing; its render is generated output. Never polish
 RELEASE-NOTES.md by hand: change this recipe, run
-/render release-notes — and every /release of the project
-regenerates the Unreleased head. Recipes are tools: version + updated date in
+/render release-notes — and every /release of the project adds the
+new release's section. Recipes are tools: version + updated date in
 front-matter and no status (a recipe is never approved); its Version
 History lives in the companion <recipe>.history.md, last_change
 summarising the newest row. -->
 
 ## Inputs
-- 10-intent.history.md  # the intent's Version History — the
-                        # fine-grained log
-- 10-intent.md          # current state: version, status, open threads
-- decisions.md          # DEC records of the era
-- RELEASE-NOTES.md      # previous edition — released sections carried
-                        # over verbatim (absent on the first render)
+- 10-intent.history.md      # the intent's Version History — the Notes
+                            # block of each row is the source; the
+                            # prose is the log
+- 20-assignment.history.md  # the assignment's, likewise; one line per
+                            # later layer as the chain grows
+- 10-intent.md              # current state: version, date, status
+- decisions.md              # DEC records, for the pointers of Rejected
+                            # lines
+- RELEASE-NOTES.md          # previous edition — sections of earlier
+                            # releases carried over verbatim (absent
+                            # on the first render)
 
 ## Instructions
-- Rendered by every `/release` of the project, and as part of
-  approving a major version of the intent. On an ordinary release only
-  the Unreleased head is recomposed; the released sections below it
-  are **carried over verbatim**.
-- The file opens with an **Unreleased** section — heading
-  `Unreleased — <major>.x since <last major>` (before the first
-  approval: `Unreleased — towards 1.0`) — summarising the changes
-  since the last approved major, distilled from the Version History
-  rows and the DEC records of the span: themes, not a row-by-row
-  replay. One plain opening sentence that these changes are not yet
-  approved; recomposed freely on every render; omitted entirely when
-  nothing has changed since the last major.
-- Below it, one section per approved major version, **newest first**.
-  At a major approval the Unreleased head is recast as the new
-  major's section; released sections are carried over verbatim from
-  the previous edition — published notes never change retroactively.
-  Only factual corrections ordered by the principal may touch a
-  released section, through this recipe.
-- A major section: a short narrative opening (two to four sentences
-  on what the era meant), thematic groups of changes distilled from
-  the Version History rows and DEC records of the span, and a close
-  on what remains open by design (THR items) at approval.
-- Every claim derivable from the inputs; invent nothing. UK English,
-  plain and direct.
+- Rendered by every `/release` of the project. One section per
+  release — the release number is the intent's version at the
+  release, every version — newest first, headed
+  `## <version> — <date>`. On a release only the new release's
+  section is composed; the sections of releases already in the
+  previous edition are **carried over verbatim**.
+- A section is **compiled, never distilled**: its bullets are the
+  Notes lines of the rows written since the previous release in every
+  input companion — the intent's row for this version and the rows of
+  the assignment and later layers since the last release — each
+  placed under its group: `### Action required`, `### Added`,
+  `### Changed`, `### Removed`, `### Fixed`, `### Rejected`, in this
+  order, one bullet per line, the wording carried from the row —
+  what changed with the pointer in parentheses, then "For you:" and
+  what it means for the reader, both sides kept; where more than one
+  document contributes, the bullet opens with the document's name.
+  Empty groups are omitted. Inside a group, what the reader must do
+  or know first, then by weight. Rows whose Notes say nothing for the
+  reader give a section with the one line "Nothing for the
+  recipients." A row without a Notes block is compiled from its prose
+  into the same groups — the only case in which the render
+  classifies.
+- An approved major (an integer version) is headed
+  `## <version> — <date> — approved` and opens, before its groups,
+  with two to four sentences of highlights drawn from the rows since
+  the previous major; the major's git tag is named in the highlights
+  only where a row or a decision records it. No other section carries
+  narrative.
+- At a major the minors since the previous major **fold into it**:
+  the major's section carries every Notes line of the span in the
+  six groups, a line superseded by a later minor dropped so that only
+  the final state remains, and the sections of those minors are not
+  carried over — they leave the file, the detail per version staying
+  in the history companions. Between majors every release keeps its
+  section.
+- No Unreleased section: at the moment of a render, which only
+  `/release` runs, nothing is unreleased.
+- Released sections never change retroactively. Only factual
+  corrections ordered by the principal may touch one, through this
+  recipe.
+- Wording: UK English, plain and direct, one sentence per bullet;
+  invent nothing — every line is derivable from the inputs.
 - Open with YAML front-matter provenance like any render.
 
 ## Template
 # <Project title> — Release Notes
 
-<one sentence: an Unreleased section covering the changes since the
-last approved major, then one section per approved major version of
-the intent, newest first; the fine-grained log lives in 10-intent.history.md>
-
-## Unreleased — <major>.x since <last major>
-
-<one sentence: not yet approved, covering intent versions <range>>
-
-<thematic groups, each a bold lead-in phrase plus a few sentences;
-the whole section omitted when nothing has changed since the last
-major>
+<one sentence: one section per release of the project, newest first;
+Action required first in every section; the fine-grained log with the
+reasons lives in the history companions of the chain>
 
 ## <version> — <date>
 
-<short narrative: what this era meant>
+### Action required
+- <what changed (pointer). For you: what to do after this release>
 
-<thematic groups of changes>
+### Added
+- <what changed (pointer). For you: what it means>
 
-**Open by design:** <THR items open at approval>
+### Changed
+- <what changed (pointer). For you: what it means>
+
+### Removed
+- <what is gone (pointer). For you: what it means>
+
+### Fixed
+- <what was fixed (pointer). For you: what it means>
+
+### Rejected
+- <a direction dropped (REJ or DEC). For you: what it means>
+
+## <major version> — <date> — approved
+
+<two to four sentences of highlights>
+
+<groups as above, holding every Notes line since the previous major,
+superseded lines dropped; the minors' own sections do not follow>
+
+## <earlier releases — carried over verbatim>

@@ -1,7 +1,7 @@
 ---
 project: forge
 directory: research
-updated: 2026-09-03
+updated: 2026-09-05
 ---
 
 # Index — research of Forge of Thought
@@ -42,3 +42,8 @@ ledger. Written by /research; verified by /check. -->
 - **Question:** where should the version history of a versioned working document live — in its head as corporate document control prescribes, at its end, in a companion file, or in git only — so that the document stays readable for humans and cheap for an LLM that loads it whole every time? Measured trigger: the Version History is 40 % of the forge intent (72 rows).
 - **Answer in short:** standards prescribe only a revision notice at the head and explicitly allow separate volumes; records management names the separate file as the normal option; every wiki and every LLM-era spec framework keeps history out of the body (BMAD dropped its change-log table in v6, PEP 1 puts its new Change History at the end, git remains the record). Recommendation: one rule by kind — a continuously rewritten document (the intent) keeps its rows in an append-only companion `<document>.history.md` and carries version, date, status and a machine-written `last_change` in front-matter; a handed-over or locked document (assignment, brief) keeps the table in its head. The row stays the single primary; commit message and release notes remain derivations. Table-at-end saves nothing; git-only would invert the primary and collide with the four-scripts rule.
 - **Consult when:** deciding the history rule for the chain (CLAUDE.md Versioning & status), changing `/forge intent`'s write step, `forge-save`'s commit message or the release-notes recipe's input, or asking what the standards actually require of a revision history.
+
+### `2026-09-05-good-release-notes.md`
+- **Question:** how are release notes done well — by the two written standards (Keep a Changelog, Common Changelog) and nine established projects read at source (Kubernetes, Rust, Django, Git, Python, Node.js, VS Code, Stripe, GitHub's generated notes) — so that the forge's RELEASE-NOTES.md stops being a story and says plainly what was added, changed and removed (THR.0310); and must the Version History row the notes are made from change too?
+- **Answer in short:** consensus on the shape — a dated section per shipped release, newest first; changes in typed groups; whatever forces the reader to act pulled out and first ("Urgent Upgrade Notes", "Compatibility Notes", "action required"); one sentence per change from the reader's side with a pointer; the exhaustive log elsewhere; length by pruning, never by summarising; highlights only as a head over the list. The forge's render inverts all of it. Contested only where the note waits (Unreleased vs bird's-eye at release); the large projects settle it with typed fragments written with the change and compiled at release. Recommendation: one section per `/release` with groups Action required / Added / Changed / Removed / Fixed (option A), and a typed `Notes:` tail in the Version History row written by the write step (row variant 2) — both positions for `/forge intent`.
+- **Consult when:** deciding the position on the release notes (THR.0310, POS.0730), rewriting the release-notes recipe, genre skeleton or `/recipe` file, deciding whether the Version History row carries typed notes, or when a project's README/release-notes recipe is composed.
