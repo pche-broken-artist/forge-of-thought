@@ -3,11 +3,13 @@ description: Research current best practices on a topic; store durable notes
 argument-hint: <topic> [project-slug]
 ---
 
-Research "$1" with current web sources. Purpose: inspiration and
-grounding for the principal's intent or assignment — he does not want to
-reinvent what the world has already solved. One research, one
-question: a topic that turns out to be several questions becomes
-several notes, each answering one — never one combined document.
+Research $ARGUMENTS with current web sources — the last token is the
+project slug if it names a directory under `projects/`, the rest is
+the topic. Purpose: inspiration and grounding for the principal's
+intent or assignment — he does not want to reinvent what the world
+has already solved. One research, one question: a topic that turns
+out to be several questions becomes several notes, each answering
+one — never one combined document.
 
 1. Search for current best practices, established frameworks, and notable
    recent developments. Prefer primary and high-quality sources; note

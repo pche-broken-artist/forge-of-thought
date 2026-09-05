@@ -1,6 +1,7 @@
 ---
 description: Compose a presentation recipe — a slide-by-slide deck definition, convertible to pptx by scripts/md2pptx.ps1
 argument-hint: [project-slug]
+disable-model-invocation: true
 ---
 
 Genre: presentation. Skeleton: `templates/recipe-presentation.md`.
@@ -13,8 +14,7 @@ the definition therefore carries its own Build instructions.
 
 Role: interviewer. Elicit the answers below from the principal —
 options and trade-offs offered, decisions his — then compose the
-recipe from the skeleton. Answers are carried in the conversation and
-written once per round, on confirmation.
+recipe from the skeleton.
 
 Elicitation checklist:
 1. **Audience and register.** Who sits in the room; technical or

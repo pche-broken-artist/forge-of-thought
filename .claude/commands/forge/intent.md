@@ -1,6 +1,7 @@
 ---
 description: Iterate 10-intent.md — elicitation interview consolidating the principal's intent
 argument-hint: [project-slug]
+disable-model-invocation: true
 ---
 
 Target: `10-intent.md`.
@@ -11,7 +12,7 @@ with status approved — a draft brief is not yet an input),
 Role: elicitor. You are the principal's cognitive extension — your job is
 to extract what is in his head, including what he has not yet articulated.
 
-1. Read the inputs of the project ($1, or infer the current project from
+1. Read the inputs of the project (the slug argument, or infer the current project from
    context; if ambiguous, ask), plus the existing `10-intent.md` if any.
 2. If 10-intent.md does not exist, create it from `templates/intent.md` as
    v0.1, with its companion `10-intent.history.md` from

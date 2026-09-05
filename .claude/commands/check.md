@@ -13,12 +13,13 @@ offered as an immediate fix.
 
 Run in isolation: spawn one subagent (Agent tool, type
 `general-purpose`, session model) whose prompt names the project path
-(or paths) and instructs it to read this file and execute its checks
-as written, returning the report and nothing else. The subagent sees
-only the files, never the working conversation (POS.0930); the checks
-live here, not in the prompt (POS.1070). Back in the session: walk
-the findings through with the principal (CLAUDE.md, Working methods);
-every fix is applied here, on his word.
+(or paths) and instructs it to read `.claude/commands/check.md` and
+execute the checks under *Checks per project* as written, returning
+the report and nothing else. The subagent sees only the files, never
+the working conversation (POS.0930); the checks live here, not in the
+prompt (POS.1070). Back in the session: walk the findings through
+with the principal (CLAUDE.md, Working methods); every fix is applied
+here, on his word.
 
 Checks per project:
 

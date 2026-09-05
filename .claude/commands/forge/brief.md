@@ -1,9 +1,10 @@
 ---
 description: Compose or finish a brief — the principal's own text of one whole of thinking, locked when done
 argument-hint: [name] [project-slug]
+disable-model-invocation: true
 ---
 
-Target: `00-brief.md` (bare) or `00-brief-$1.md` (with a name — a
+Target: `00-brief.md` (bare) or `00-brief-<name>.md` (with a name — a
 later whole of thinking born during the project's life).
 Inputs: none but the principal. The existing intent and ledger are
 read only to know what already stands, never to shape the text.
@@ -33,10 +34,10 @@ Two things Claude does throughout, whichever way the text arrives:
   enters the brief only by his word: the brief stays his text, not a
   literature review.
 
-1. Resolve the project ($2, or infer from context; if ambiguous, ask)
-   and the file. If the named brief does not exist, create it with
-   the minimal YAML header (project, title, date, author, version 0.1,
-   status draft, `last_change`), its companion `<file>.history.md`
+1. Resolve the project (the slug argument, or infer from context; if ambiguous, ask)
+   and the file. If the named brief does not exist, create it from
+   `templates/brief.md` (the minimal YAML header, nothing else), its
+   companion `<file>.history.md`
    from `templates/history.md`, and add its row to the ledger's Briefs
    table (Mined: pending). If it exists and is `approved`, stop: a locked
    brief is not edited — a new whole is a new brief.

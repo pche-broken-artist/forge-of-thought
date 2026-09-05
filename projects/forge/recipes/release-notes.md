@@ -2,9 +2,9 @@
 project: forge
 purpose: release-notes
 audience: humans tracking the system's evolution
-version: 0.4
-updated: 2026-09-04
-last_change: 0.4 (2026-09-04): the fine-grained log named in the companion `10-intent.history.md` in Instructions and Template too (check-forge finding of the 3.21 save).
+version: 0.5
+updated: 2026-09-05
+last_change: 0.5 (2026-09-05): Instructions require the intent's current vocabulary even where an older history row uses a renamed word (check-forge finding of the 3.30 save — "material index" resurfaced in the Unreleased head).
 output: /RELEASE-NOTES.md
 ---
 

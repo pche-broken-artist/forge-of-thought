@@ -1,6 +1,7 @@
 ---
 description: Save the forge to git with the pre-save conformance check and render refresh
 argument-hint: [project-slug] [-m "message"]
+disable-model-invocation: true
 ---
 
 Save the forge to git with the pre-save conformance check
@@ -15,36 +16,41 @@ relay the script's note in the report.
 1. Determine scope from `./scripts/forge-status.ps1` — never from
    direct git commands; the scripts are the only door to git, for
    reading state too. It reports the engine and each project
-   separately. Engine files touched → run the `/check-forge`
-   procedure; project files touched → run `/check` for each affected
-   project; both → both. A project "not under git" with changes is
-   named in the report and otherwise left alone.
-2. For every repository in scope, first regenerate its README and
-   release notes from their recipes — unconditionally, no staleness
-   test, always through the `/render` procedure
-   (`.claude/commands/render.md`), never through an ad-hoc subagent
-   prompt (POS.1070). The README and release-notes renders of one
-   repository are launched at once, each through the `/render`
-   procedure, and awaited together. Report the steps, including a
-   short summary of what materially changed in the regenerated files
-   (POS.0810, POS.1000): the principal rules on the delta as part of
-   the pre-save report. The engine (core or `projects/forge/`
-   touched): `README.md` and `RELEASE-NOTES.md` at the repository
-   root from `projects/forge/recipes/`. A project: its `README.md`
-   from `recipes/readme.md` and, for a thought project,
-   `RELEASE-NOTES.md` from `recipes/release-notes.md`. A project
-   whose recipe is missing is reported (a `/check` finding) and saved
-   without the render. Other renders are never regenerated here; their
-   staleness is the principal's business, shown by the `/forge` map,
-   never a check finding (POS.0570).
-3. Report the result to the principal — always, even when clean.
-4. Clean check: state that the check passed and run the script.
-5. Findings: settle them by walkthrough (CLAUDE.md, Working
+   separately. A project "not under git" with changes is named in
+   the report and otherwise left alone. Engine files touched → the
+   `/check-forge` procedure; project files touched → `/check` for
+   each affected project; both → both.
+2. Run the check over the sources and report the result to the
+   principal — always, even when clean. Clean: state that the check
+   passed. Findings: settle them by walkthrough (CLAUDE.md, Working
    methods); a finding may be accepted as a deferral, recorded in the
    affected project's ledger under "Waiting on principal", and the
    save proceeds. Never fix silently; never proceed with an unsettled
-   finding.
-6. Unless `-m` was supplied, draft a one-line English commit message
+   finding. The check runs before the renders so that a fix of the
+   walkthrough — an intent bump, a changed convention — is already in
+   the inputs the renders derive from (POS.0570).
+3. Only once the findings are settled, regenerate for every
+   repository in scope its README and release notes from their
+   recipes — unconditionally, no staleness test, always through the
+   `/render` procedure (`.claude/commands/render.md`), never through
+   an ad-hoc subagent prompt (POS.1070). The README and release-notes
+   renders of one repository are launched at once, each through the
+   `/render` procedure, and awaited together. Report the steps,
+   including a short summary of what materially changed in the
+   regenerated files (POS.0810, POS.1000): the principal rules on the
+   delta before the commit. A render made from the settled sources
+   is current by construction; its verification is `/render` step 6
+   (the file, its provenance, the ledger), not a check. The engine
+   (core or `projects/forge/` touched): `README.md` and
+   `RELEASE-NOTES.md` at the repository root from
+   `projects/forge/recipes/`. A project: its `README.md` from
+   `recipes/readme.md` and, for a thought project, `RELEASE-NOTES.md`
+   from `recipes/release-notes.md`. A project whose recipe is missing
+   is reported (a `/check` finding) and saved without the render.
+   Other renders are never regenerated here; their staleness is the
+   principal's business, shown by the `/forge` map, never a check
+   finding (POS.0570).
+4. Unless `-m` was supplied, draft a one-line English commit message
    summarising the round — from the newest rows of the touched
    documents' `.history.md` companions, the primary record of every
    round (CLAUDE.md, Versioning & status) — and propose it to the
@@ -53,7 +59,7 @@ relay the script's note in the report.
    repository has changes, one message per repository is drafted, or
    the save is run per slug. The script's auto-generated file list is
    used only if the principal says so.
-7. Only then run `./scripts/forge-save.ps1 [slug] [-m "message"]`
+5. Only then run `./scripts/forge-save.ps1 $ARGUMENTS`
    and report the outcome — the script itself prints the commit's
    file summary; no direct git verification afterwards.
 

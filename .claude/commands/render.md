@@ -1,6 +1,7 @@
 ---
 description: Regenerate a render from its recipe in recipes/
 argument-hint: <recipe> [project-slug]
+disable-model-invocation: true
 ---
 
 Role: renderer. A render is generated output, never edited by hand:
@@ -21,17 +22,19 @@ other; generating the render is mechanical.
    prompt names the project, the recipe path, the output path and the
    render date, and instructs it to read the recipe and its declared
    inputs, follow the Instructions and Template exactly, and write the
-   file — nothing else. The subagent sees only the recipe and its
+   file — nothing else. The prompt carries the front-matter block of
+   step 5 verbatim, so the subagent never derives the provenance shape
+   from a previous render. The subagent sees only the recipe and its
    inputs, never this conversation: a render is derived from the
    artefacts, not from what was said about them. It must not read the
-   previous render except to learn the front-matter format, and must
-   not touch the ledger. Prose is hard-wrapped at about 72 columns,
-   like every artefact of the forge, so that git diffs stay legible;
-   tables, code blocks and front-matter are never wrapped. Content
-   only, always Markdown — a deck render
-   may later be turned into an actual PowerPoint file by
-   `scripts/md2pptx.ps1`; all other format conversion happens outside
-   the forge.
+   previous render unless the recipe declares it among its inputs
+   (the release-notes genre does, for the released sections), and
+   must not touch the ledger. Prose is hard-wrapped at about 72
+   columns, like every artefact of the forge, so that git diffs stay
+   legible; tables, code blocks and front-matter are never wrapped.
+   Content only, always Markdown — a deck render may later be turned
+   into an actual PowerPoint file by `scripts/md2pptx.ps1`; all other
+   format conversion happens outside the forge.
 4. The subagent writes to `renders/$1.md`, or to the recipe's
    `output:` path if it declares one (e.g. the repository README).
    Overwrite freely; history lives in git.

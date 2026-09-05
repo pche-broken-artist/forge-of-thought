@@ -28,7 +28,8 @@ changes.
    otherwise conversationally). If neither exists, list the genres
    that do and stop.
 2. Read the genre file and follow it: it declares the elicitation
-   checklist and the skeleton. The recipe is composed with the
+   checklist and the skeleton. A genre file's arguments are those
+   following the genre name. The recipe is composed with the
    principal — options and trade-offs offered, decisions his — and
    written once per round on confirmation. Recipe conventions apply
    (CLAUDE.md, Versioning & status): version + updated date in

@@ -177,12 +177,13 @@ ledger.md        single source of truth for state
    required content and no IDs; thoughts to be processed, not
    decisions, so they may be changed, reworked or dropped when mined.
    Only a minimal YAML header (project, title, date, author, version,
-   status, last_change). `draft` while being composed, `approved`
-   (1.0) once the principal locks it — immutable from the lock, not
-   from creation. Three origins are equally legitimate and
-   indistinguishable to the forge: it arrives finished and is locked on
-   arrival; it is begun outside and finished with Claude; it is born
-   in the forge (`/forge brief [name]` for the latter two). A project
+   status, last_change; skeleton `templates/brief.md`). `draft` while
+   being composed, `approved` (1.0) once the principal locks it —
+   immutable from the lock, not from creation. Three origins are
+   equally legitimate and indistinguishable to the forge: it arrives
+   finished and is locked on arrival; it is begun outside and finished
+   with Claude; it is born in the forge (`/forge brief [name]` for the
+   latter two). A project
    may have more than one: every later whole of thinking that would
    otherwise land in the intent as a batch of unproven positions is
    born as `00-brief-<name>.md` under the same rules. A locked brief
@@ -407,13 +408,14 @@ platform genuinely differs, external tools (`git`, `markitdown`,
 `claude`) resolved from PATH, usage examples in the scripts' help
 free of Windows-specific paths and invocations.
 
-The recommended door for saving is `/save`: when the save touches the
-core or `projects/forge/` it first re-renders `README.md` and the
-Unreleased head of `RELEASE-NOTES.md` from their recipes
-(unconditionally, reporting the steps and what materially changed in
-the regenerated files), then runs the relevant conformance check, settles findings with the principal, proposes a
-commit message, and only then runs the script. Saves made directly
-from the shell are unaffected.
+The recommended door for saving is `/save`: it runs the relevant
+conformance check and settles findings with the principal; then,
+when the save touches the core or `projects/forge/`, re-renders
+`README.md` and the Unreleased head of `RELEASE-NOTES.md` from their
+recipes out of the settled sources (unconditionally, reporting the
+steps and what materially changed in the regenerated files);
+proposes a commit message, and only then runs the script. Saves made
+directly from the shell are unaffected.
 
 ## Versioning & status
 House scheme, aligned with the group BRD standard: **integers denote

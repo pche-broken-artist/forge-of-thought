@@ -1,7 +1,7 @@
 ---
 project: forge
 kind: thought
-updated: 2026-09-04
+updated: 2026-09-05
 ---
 
 # Ledger — Forge of Thought
@@ -26,7 +26,7 @@ absorbed it; Note says what remains (partial) or the REJ (dropped). -->
 ## Documents
 | File | Version | Status | Date |
 |---|---|---|---|
-| 10-intent.md | 3.27 | draft | 2026-09-04 |
+| 10-intent.md | 3.32 | draft | 2026-09-05 |
 | 20-assignment.md | — | not planned: the handover artefacts of this project are the core itself (CLAUDE.md, templates/, .claude/) and README.md | — |
 | decisions.md | — | 9 records (DEC.0010–0090) | 2026-09-03 |
 
@@ -36,8 +36,8 @@ hand-edited: iterate the recipe, re-run /render. Row mirrors the
 render's front-matter provenance. -->
 | Render | Audience | Recipe | Inputs | Generated |
 |---|---|---|---|---|
-| README.md (repo root) | humans arriving at the repository | recipes/readme.md v0.35 | CLAUDE.md, 10-intent.md v3.23 | 2026-09-04 |
-| RELEASE-NOTES.md (repo root) | humans tracking the system's evolution | recipes/release-notes.md v0.4 | 10-intent.history.md, 10-intent.md v3.23, decisions.md, previous edition (2026-09-04 morning, released sections) | 2026-09-04 |
+| README.md (repo root) | humans arriving at the repository | recipes/readme.md v0.35 | CLAUDE.md, 10-intent.md v3.32 | 2026-09-05 |
+| RELEASE-NOTES.md (repo root) | humans tracking the system's evolution | recipes/release-notes.md v0.5 | 10-intent.history.md, 10-intent.md v3.32, decisions.md, previous edition (2026-09-05 morning, released sections) | 2026-09-05 |
 | renders/executive-pitch.md | C-level executives whose experience of AI is chatting with it | recipes/executive-pitch.md v0.1 | 10-intent.md, CLAUDE.md | — (not yet rendered) |
 
 ## Sources
@@ -91,6 +91,16 @@ version for resolved, DEC.NNNN for overruled. -->
 | FND.0160 | low | duplication | resolved | 2026-09-03-critique-clarity.md | intent 3.17 |
 | FND.0170 | low | contradiction | resolved | 2026-09-03-critique-clarity.md | ledger rewritten (intent 3.17) |
 | FND.0180 | low | contradiction | resolved | 2026-09-03-critique-clarity.md | intent 3.17 |
+| FND.0190 | high | inconsistency | resolved | 2026-09-05-critique-harness.md | operating layer 2026-09-05 (intent 3.30) |
+| FND.0200 | high | gap | resolved | 2026-09-05-critique-harness.md | operating layer 2026-09-05 (intent 3.30) |
+| FND.0210 | high | gap | resolved | 2026-09-05-critique-harness.md | operating layer 2026-09-05 (intent 3.30) |
+| FND.0220 | medium | gap | resolved | 2026-09-05-critique-harness.md | operating layer 2026-09-05 (intent 3.30) |
+| FND.0230 | medium | ambiguity | resolved | 2026-09-05-critique-harness.md | operating layer 2026-09-05 (intent 3.30) |
+| FND.0240 | medium | ambiguity | resolved | 2026-09-05-critique-harness.md | operating layer 2026-09-05 (intent 3.30) |
+| FND.0250 | medium | contradiction | open | 2026-09-05-critique-harness.md | — |
+| FND.0260 | medium | divergence | open | 2026-09-05-critique-harness.md | — |
+| FND.0270 | medium | duplication | open | 2026-09-05-critique-harness.md | — |
+| FND.0280 | low | duplication | open | 2026-09-05-critique-harness.md | — |
 
 ## Challenges
 <!-- State: open | accepted | rejected | parked | obsolete. Resolution:
@@ -112,6 +122,21 @@ intent version for accepted, DEC.NNNN for rejected. -->
 | CHL.0130 | accepted | "Upgrade" is a fast-forward of an untagged branch, so the compatibility tool has nothing to compare against; a new project starts unbacked by default (minor) | 2026-08-29-challenge-cto.md | intent 2.21 (via brief 0.5 — git tag per approved major; "nothing to compare against" obsolete (condition 3 narrowed to /check against current conventions, no engine version in projects)) |
 
 ## Waiting on principal
+- **Harness critique, four findings left (2026-09-05):** FND.0250–0280
+  from `reviews/2026-09-05-critique-harness.md` stay open for the
+  round of THR.0270 + THR.0240, where the layout of the operating
+  layer is decided once (FND.0260 the skills layout, FND.0270 the
+  shared reviewer text, FND.0250 the instance fact in the cto
+  persona, FND.0280 the language clause in fourteen commands). The
+  other six were fixed 2026-09-05 (intent 3.30, POS.1090).
+- THR.0320 a `harness` lens — CLAUDE.md and the operating layer
+  reviewed through the official plugins (plugin-dev,
+  claude-md-management), output the classic critic's; opened
+  2026-09-05 at the principal's direction, decided in substance;
+  open: the mechanism (mapping in `critique.md` or an own agent with
+  preloaded plugin skills), the plugin as an engine dependency, the
+  fit of claude-md-improver's rubric, the regression step. No
+  priority given yet; shares its mechanism with THR.0270.
 - **Priorities of the open threads (principal's order, 2026-09-04
   evening), the next rounds in this sequence:**
   1. THR.0220 the cost of rendering at every save — decide among
@@ -142,12 +167,6 @@ intent version for accepted, DEC.NNNN for rejected. -->
   knowingly, once. GitHub may still hold the objects of b717a67 in its
   cache; only GitHub support can purge them, if the principal wants
   certainty.
-- README and release notes one step stale (2026-09-04, evening):
-  both rendered at intent 3.23; the intent went to 3.24 at the
-  check-forge walkthrough of the same save (POS.0180 and POS.0840
-  wording) and to 3.27 (three threads, one withdrawn) after it, the principal choosing
-  to save without rendering again — the next /save brings both
-  current.
 - THR.0310 the release notes must get better — opened 2026-09-04;
   research first (`/research` on good release notes), then the
   position, then the recipe; THR.0280 withdrawn into it (3.27)

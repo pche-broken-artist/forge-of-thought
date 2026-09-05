@@ -41,4 +41,6 @@ Adding a layer means adding a file; this dispatcher never changes.
    the states that do and stop.
 2. Read the file and follow it. It declares the target artefact, its
    inputs and its working rules; everything else (write-once-per-round,
-   versioning, ledger upkeep) follows the core conventions.
+   versioning, ledger upkeep) follows the core conventions. A state
+   file's arguments are those following the state name: for `brief`
+   the name, then the slug; for the other states the slug.

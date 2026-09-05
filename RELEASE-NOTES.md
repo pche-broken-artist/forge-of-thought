@@ -1,13 +1,13 @@
 ---
 project: forge
 render: release-notes
-generated: 2026-09-04
-recipe: projects/forge/recipes/release-notes.md v0.4
+generated: 2026-09-05
+recipe: recipes/release-notes.md v0.5
 inputs:
   - projects/forge/10-intent.history.md
-  - projects/forge/10-intent.md v3.23
+  - projects/forge/10-intent.md v3.32
   - projects/forge/decisions.md
-  - RELEASE-NOTES.md (2026-09-04 morning edition — released sections)
+  - RELEASE-NOTES.md (previous edition, released sections)
 ---
 
 # Forge of Thought — Release Notes
@@ -20,7 +20,7 @@ Version History companion, `projects/forge/10-intent.history.md`.
 ## Unreleased — 3.x since 3.0
 
 These changes are not yet approved; they cover intent versions 3.1 to
-3.23, made between 2026-08-30 and 2026-09-04.
+3.32, made between 2026-08-30 and 2026-09-05.
 
 **Every project gets a README and release notes.** The engine's own
 mechanism is generalised: every project has a README and, if it is a
@@ -28,14 +28,14 @@ thought project, release notes — both renders of the project's own
 recipes (`recipes/readme.md`, `recipes/release-notes.md`, with
 `output:` in the project root), exactly as the engine has them. The
 recipe is what is iterated, the render is never edited by hand, and
-every save that touches the project regenerates both before the
-check; the ledger's Renders table carries them like any render. A
-library has a README only — a catalogue of what it holds — since
-release notes are distilled from an intent's Version History and
-decisions, which a library does not have. Every project README closes
-with the fixed sentence that reading it needs nothing and maintaining
-it needs Forge of Thought, linked — the engine's own README excepted,
-being that sentence's destination (POS.1000).
+every save that touches the project regenerates both; the ledger's
+Renders table carries them like any render. A library has a README
+only — a catalogue of what it holds — since release notes are
+distilled from an intent's Version History and decisions, which a
+library does not have. Every project README closes with the fixed
+sentence that reading it needs nothing and maintaining it needs Forge
+of Thought, linked — the engine's own README excepted, being that
+sentence's destination (POS.1000).
 
 **Genre skeletons scaffolded from the start.** `readme` and
 `release-notes` are genres of `/recipe`, with skeletons
@@ -191,7 +191,7 @@ two copies drift, and the copy without a rule silently loses it. The
 position was raised by the principal after the README of the day was
 rendered at `/save` by an ad-hoc subagent prompt instead of `/render`
 and arrived unwrapped, missing the 72-column rule, with a foreign
-provenance shape; `/save` step 2 now routes the regeneration through
+provenance shape; `/save` now routes the regeneration through
 `/render` explicitly (POS.1070).
 
 **The operating layer swept for restatements.** The first sweep the
@@ -371,12 +371,10 @@ and `/check` and `/check-forge` report findings only — the checker's
 informal "observation" is forbidden. One line was written into the
 locked brief's front-matter on the principal's word — `last_change`,
 immutability knowingly broken once for one metadata line, recorded
-in the ledger. The same save brought the principal's observation that
-the Version History rows are so high-level that a reader learns
-nothing from them: THR.0280 opens the question what a row must say —
-who reads it and for what, what it must carry and what it must not,
-whether its grain is the round or the change — to be elicited in a
-round of its own.
+in the ledger. The same save brought the principal's remark that a
+reader learns nothing from what is rendered — taken at first for a
+remark about the Version History rows and opened as THR.0280, and
+corrected two versions later into the thread on these notes below.
 
 **Stale renders are the principal's business; one shape for every
 index.** Two decisions taken during the migration of the three local
@@ -385,15 +383,22 @@ and picture as findings — noise, since a render is regenerated only
 on the principal's word. Only the README and the release notes have a
 freshness rule, the next `/save` regenerating them; the staleness of
 every other render is shown by the `/forge` map and never reported by
-`/check` (POS.0570, POS.0810; `/check` aligned). And the two bundle
-indexes in the field turned out to be a table and a prose catalogue
-of a third shape, so the bundle index now has the same shape as the
-directory index — one entry per file with What / Origin / Role / Use
-for, `templates/index-bundle.md` owning only the bundle's header and
-opening paragraph, the two bundle indexes rewritten: Role and Use for
-are what an index is for, and a table does not carry them. The
-position is renamed "Resources have an index" after the taxonomy
-(POS.0840).
+`/check` (POS.0570, POS.0810). And the two bundle indexes in the
+field turned out to be a table and a prose catalogue of a third
+shape, so the bundle index now has the same shape as the directory
+index — one entry per file with What / Origin / Role / Use for, the
+two bundle indexes rewritten: Role and Use for are what an index is
+for, and a table does not carry them. The position is renamed
+"Resources have an index" after the taxonomy (POS.0840). The
+`/check-forge` walkthrough of the 3.23 save finished the alignment:
+POS.0180 now says the same as POS.0840 — one entry per file in the
+shape of the directory index, no table — and
+`templates/index-bundle.md` is the full skeleton `/ingest` creates
+the file from, header and opening paragraph its own, the entry
+carried verbatim from `templates/index.md` as a reviewer agent
+carries its skeleton, the principal's choice over a pointer-only
+skeleton; and `/check` step 8 and `/save` step 2 were brought to
+POS.0570 in fact, the 3.23 row having claimed step 8 done already.
 
 **The cost of rendering at every save, opened and given three
 candidates.** With the engine's README at 5,700 words and a recipe
@@ -401,32 +406,33 @@ that pins wording, one render costs minutes and well over a hundred
 thousand tokens, and a save that changed one line of a command pays
 it twice; the parallel launch halves the wait, not the cost. Opened
 at the principal's direction (THR.0220), with the facts that the
-scripts already work on whatever branch is checked out, that a
-colleague has worked in his own forge instance on a branch of a
-subject project and merged by merge request without any forge
-ceremony — the forge stays a single-user tool per instance,
-coordination being git's — that the principal has for weeks saved
-cosmetic changes directly through `forge-save.ps1` and reserved
-`/save` for changes that touch the README, and the principal's
-constraint that the forge is developed by adding artefacts and
-challengers, not by wrapping git. Three candidate solutions are
-recorded to be weighed with a fresh head: (A) stale-only
-regeneration plus the principal's word at save time, a skipped stale
-render leaving its trace in the ledger; (B) `/save` and `/release`
-split — save commits and pushes on whatever branch is checked out
-with a light check and no renders, release on main only runs the
-full check, the renders, the release commit and, at an approved
-major, the tag through a new `forge-save -Tag`, branches left to
-git; (C) B plus one forge command switching between a fixed working
-branch and main — the first step towards the wrapper of git the
-principal does not want. Which reviewers run where belongs to the
+scripts already work on whatever branch is checked out — no
+contradiction with POS.0550's "main only", the thread now stating
+DEC.0090 beside the fact it ruled on — that a colleague has worked in
+his own forge instance on a branch of a subject project and merged by
+merge request without any forge ceremony — the forge stays a
+single-user tool per instance, coordination being git's — that the
+principal has for weeks saved cosmetic changes directly through
+`forge-save.ps1` and reserved `/save` for changes that touch the
+README, and the principal's constraint that the forge is developed by
+adding artefacts and challengers, not by wrapping git. Three
+candidate solutions are recorded to be weighed with a fresh head: (A)
+stale-only regeneration plus the principal's word at save time, a
+skipped stale render leaving its trace in the ledger; (B) `/save` and
+`/release` split — save commits and pushes on whatever branch is
+checked out with a light check and no renders, release on main only
+runs the full check, the renders, the release commit and, at an
+approved major, the tag through a new `forge-save -Tag`, branches
+left to git; (C) B plus one forge command switching between a fixed
+working branch and main — the first step towards the wrapper of git
+the principal does not want. Which reviewers run where belongs to the
 same thread.
 
 **Threads opened for the forge's next shape.** Three further threads
 were opened at the principal's direction, no decision taken. THR.0230:
 a common engine beneath several frameworks — whatever every framework
 needs alike (git through the scripts, the ledger, versioning, the ID
-scheme, isolated agents, recipes and renders, material indexes,
+scheme, isolated agents, recipes and renders, resource indexes,
 `/save`, `/check`, `/setup`) lifted out of the forge so that a new
 framework is written as content only, the forge becoming the first
 framework on it; a product framework and a project-management
@@ -475,6 +481,135 @@ up: a check item in `/check-forge` owning the rule, verified by
 reading and never by a term list, plus one citing sentence under
 Inputs in both reviewer skeletons; not a critic lens, and no sentence
 in CLAUDE.md.
+
+**Checks and research as lenses, and a user's private layer,
+opened.** Two more threads at the principal's direction at the end of
+the migration day, no decision taken. THR.0290: `/check` is today one
+long command with eight numbered checks; the idea is to put it — and
+`/research` alike — on the reviewer mechanism: one skeleton
+(`templates/check.md`), one agent per kind of check (`check-<name>`),
+bare `/check` listing the roster and recommending a fit, a named
+check run by hand exactly as `/critique clarity` is. A new check is
+then one file, written when the need appears, and which checks run at
+a save or a release is the same question as for the reviewers, joined
+to THR.0220. Open: what the kinds are — conformance of a project,
+consistency of the engine, staleness, the public boundary of
+THR.0210 — what `/research` gains from kinds, and whether
+`/check-forge` survives as a kind or as a target. THR.0300: whoever
+runs the forge may want reviewers, checks or other agents of their
+own, for themselves only, with no ambition of contributing them to
+the engine. They would need a place the engine does not know and
+`forge-pull` never overwrites, on the pattern of `CLAUDE.local.md`
+and `settings.local.json`, and the rosters of `/critique`,
+`/challenge` and `/check` would list what lies there beside the
+engine's own. Open: how a local agent takes the shared skeleton, what
+happens when the engine renames or reshapes it, and whether Claude
+Code's own user-level agents already serve. Offered as possibly
+interesting, no priority.
+
+**These notes must get better.** The principal's verdict of
+2026-09-04: as rendered today the release notes are a story, and a
+reader wants to see plainly what was added, what changed and what
+disappeared. THR.0310 opens the question with no position on the
+shape — a changelog format is not to be decided by fiat; a research
+round on how release notes are done well comes first, then the
+position, then the recipe (POS.0730, this recipe, the genre skeleton
+and its `/recipe` file). THR.0280, opened earlier the same day as
+"what a Version History row must say", was a misreading of the same
+remark — the principal was speaking of the release notes throughout
+— and is withdrawn into THR.0310; the ID stays used, its text gone.
+Whether the row a release note is generated from must change too is
+for the research to show.
+
+**A foreign agent worn as a critic lens.** On 2026-09-05 the
+principal, browsing the official plugin marketplace, installed
+`plugin-dev` and had its `skill-reviewer` run isolated over the
+operating layer `.claude/` as an exercise. The report was worth
+keeping, so on his word it was recast into the critic's shape —
+`reviews/2026-09-05-critique-harness.md`, FND.0190–0280, the lens
+name `harness` his choice — rather than lost as conversation; the
+run shows the critic's shape fits a foreign agent and is filed as the
+first trial under THR.0290. Minutes later THR.0320 was opened at his
+direction: the critic roster gets a lens `harness` that reviews the
+operating layer — CLAUDE.md and the skills, commands and agents of
+`.claude/` — against current Claude Code conventions, its knowledge
+from the official plugins (`plugin-dev`, whose `skill-reviewer` and
+`skill-development` carry the conventions for skills, commands and
+agents; `claude-md-management`, whose `claude-md-improver` reads
+CLAUDE.md), its output the classic critic's: a dated immutable report
+in `reviews/`, FND in the ledger, settled by walkthrough. Open: how
+`/critique harness` reaches the plugin — a mapping in `critique.md`
+from the lens to the plugin agent with the skeleton's Output section
+carried in the prompt, or an own `critic-harness` agent from the
+skeleton with the plugin's skills preloaded, the `skills:` field
+THR.0270 waits to verify; the plugin as an engine dependency, named
+by `/setup` and CLAUDE.md, and what the lens does when the plugin is
+absent; whether `claude-md-improver`'s rubric, written for codebases,
+serves a constitution like the forge's CLAUDE.md beyond its
+conciseness criterion; and the regression step every lens owes,
+which the trial skipped. The first concrete kind of THR.0290; the
+shape of the operating layer it reviews is the question of THR.0270
+and THR.0240.
+
+**The harness enforces the principal's word.** The harness critique
+was walked through the same day, one item per message, every verdict
+the principal's; six findings were fixed in the operating layer,
+CLAUDE.md unchanged. Both reviewer skeletons and all three agents
+carry `Edit` among their tools (FND.0200). Every command that writes,
+scaffolds, commits or regenerates — `/save`, `/spinoff`, `/setup`,
+`/new-project`, `/import-project`, `/ingest`, `/render` and the six
+state and genre files behind `/forge` and `/recipe` — carries
+`disable-model-invocation: true` in its front-matter, so that Claude
+cannot start it on his own judgement: the principal invokes it by
+slash, or asks in words and Claude follows the command's definition
+read by path, as the dispatchers do (FND.0210, FND.0190); the state
+files name their arguments in words, and each dispatcher says in one
+sentence where a state file's arguments begin — the cheap variant,
+chosen over relocating the files or the skills layout, both of which
+belong to the round of THR.0270 and THR.0240. `/check` names its own
+path to its subagent (FND.0240), `/render` carries the provenance
+front-matter block in its subagent prompt and lets the subagent read
+a previous render only when the recipe declares it among its inputs
+(FND.0220; the absolute ban of the first fix was corrected the next
+version, since the release-notes genre carries its released sections
+over from the previous edition), and `$ARGUMENTS` reaches `/research`
+and `/save` (FND.0230). Maps, reports and rosters — `/forge`,
+`/ledger`, `/check`, `/check-forge`, `/critique`, `/challenge`,
+`/research`, `/recipe` — stay model-invocable, since Claude is meant
+to propose them. The guarantee of Step by step thereby rests on the
+harness as well as on CLAUDE.md, and the descriptions of the guarded
+commands leave the always-on context (POS.1090). FND.0250–0280 are
+left open for the round of THR.0270 and THR.0240, where the layout of
+the operating layer is decided once.
+
+**The brief header gets an owner; the check of the harness save
+settled.** The `/check-forge` of the 3.30 save returned findings
+walked through at 3.31, every verdict the principal's.
+`templates/brief.md` was created as the one owner of the brief's
+header, cited by `/forge brief`, `/new-project` and CLAUDE.md in
+place of three restatements — the rule of POS.1070 applied to a shape
+that had lived in three copies. THR.0220 states DEC.0090 beside the
+fact it ruled on, so that the branch-aware scripts and POS.0550's
+"main only" no longer read as a contradiction left standing. This
+recipe (0.5) requires the intent's current vocabulary even where an
+older history row uses a word since renamed, after "material index"
+had resurfaced in the previous edition of this head. The write-once
+sentence was dropped from the presentation and readme genre files,
+and a stale ledger item on the renders was removed.
+
+**The check comes before the render.** `/save` was reordered at the
+principal's direction: the conformance check and its walkthrough run
+first, the README and release-notes renders after, from the settled
+sources (POS.0570, POS.1000). The order of 1.22 — render before
+check, so that `/check-forge` could verify the render — had become a
+trap once the walkthrough entered the save: a finding bumps the
+intent, and the freshly made render is stale again; the saves of
+2026-09-04 and 2026-09-05 both fell into it. A render made from
+settled sources is current by construction, and a false claim in it
+is a recipe defect, so `/check-forge` no longer checks the README's
+currency; `/render` verifies its own output in its last step.
+`save.md`, `check-forge.md` and CLAUDE.md's Persistence section were
+aligned.
 
 ## 3.0 — 2026-08-30
 

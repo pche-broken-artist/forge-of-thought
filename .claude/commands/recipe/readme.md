@@ -1,6 +1,7 @@
 ---
 description: Compose or iterate a project's readme recipe — the render is the project's README.md, regenerated on every save
 argument-hint: [project-slug]
+disable-model-invocation: true
 ---
 
 Genre: readme. Skeleton: `templates/recipe-readme.md`. Output:
@@ -13,11 +14,10 @@ changed — the render is never edited by hand.
 
 Role: interviewer. Elicit the answers below from the principal —
 options and trade-offs offered, decisions his — then compose or
-iterate the recipe from the skeleton. Answers are carried in the
-conversation and written once per round, on confirmation. When the
-principal asks for a first version without an interview, draft it
-from the inputs (the ledger, the brief, the intent's essence) and
-present it as a draft to iterate.
+iterate the recipe from the skeleton. When the principal asks for a
+first version without an interview, draft it from the inputs (the
+ledger, the brief, the intent's essence) and present it as a draft
+to iterate.
 
 Elicitation checklist:
 1. **Primary reader.** The recipients of the assignment, colleagues

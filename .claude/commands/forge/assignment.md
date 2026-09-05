@@ -1,6 +1,7 @@
 ---
 description: Iterate 20-assignment.md — distil the intent for the recipients
 argument-hint: [project-slug]
+disable-model-invocation: true
 ---
 
 Target: `20-assignment.md`.
@@ -9,7 +10,7 @@ Inputs: `10-intent.md`, `decisions.md`, the ledger.
 Role: drafter. Distil the current `10-intent.md` into `20-assignment.md`
 (audience: the recipients), using `templates/assignment.md`.
 
-1. Read the inputs of the project ($1, or infer the current project
+1. Read the inputs of the project (the slug argument, or infer the current project
    from context; if ambiguous, ask), plus the existing 20-assignment.md
    if any.
 2. Drafting rules: the ID scheme, Requirement style and prime

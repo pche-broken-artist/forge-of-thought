@@ -1,6 +1,7 @@
 ---
 description: Compose or iterate a thought project's release-notes recipe — an Unreleased head plus one section per approved major of the intent
 argument-hint: [project-slug]
+disable-model-invocation: true
 ---
 
 Genre: release-notes. Skeleton: `templates/recipe-release-notes.md`.

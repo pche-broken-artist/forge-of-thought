@@ -1,8 +1,8 @@
 ---
-version: 3.27
-date: 2026-09-04
+version: 3.32
+date: 2026-09-05
 status: draft
-last_change: 3.27 (2026-09-04): THR.0280 withdrawn into THR.0310 — the principal's remark was about the release notes, not the Version History rows.
+last_change: 3.32 (2026-09-05): /save reordered — check and walkthrough first, renders from the settled sources after (POS.0570, POS.1000); check-forge no longer checks the README's currency.
 project: forge
 audience: principal + Claude only
 ---
@@ -736,8 +736,14 @@ position that already stands elsewhere.
   recorded in the ledger under "Waiting on principal". When a save
   touches the core or `projects/forge/`, `/save` re-renders
   `README.md` and the Unreleased head of `RELEASE-NOTES.md` from
-  their recipes before the conformance check — unconditionally, with
-  no staleness test — and reports the steps.
+  their recipes — unconditionally, with no staleness test — and
+  reports the steps. The renders come after the check and its
+  walkthrough, not before: a render made from the settled sources is
+  current by construction, whereas one made before it went stale
+  whenever a finding bumped the intent (the order of 1.22, render
+  before check, had let `/check-forge` verify the render; reversed
+  2026-09-05 at the principal's direction, after the saves of
+  2026-09-04 and 2026-09-05 had both fallen into that trap).
   The staleness of any other render is the principal's business
   alone: the `/forge` map shows it, `/check` never reports it
   (decided 2026-09-04, when the checks of three projects listed every
@@ -930,6 +936,21 @@ position that already stands elsewhere.
   on 2026-09-02; the first sweep of the operating layer the same day
   found fourteen restatements, every one with a rule missing on one
   side.
+- **POS.1090** The harness enforces the principal's word where it
+  can. A command that writes, scaffolds, commits or regenerates —
+  `/save`, `/spinoff`, `/setup`, `/new-project`, `/import-project`,
+  `/ingest`, `/render` and the state and genre files behind `/forge`
+  and `/recipe` — carries `disable-model-invocation: true` in its
+  front-matter, so that Claude cannot start it on his own judgement:
+  the principal invokes it by slash, or asks in words and Claude
+  follows the command's definition read by path, as the dispatchers
+  do. Maps, reports and rosters (`/forge`, `/ledger`, `/check`,
+  `/check-forge`, `/critique`, `/challenge`, `/research`, `/recipe`)
+  stay model-invocable, since Claude is meant to propose them. The
+  guarantee of Step by step (CLAUDE.md, Working methods) thereby
+  rests on the harness as well as on CLAUDE.md, and the descriptions of the guarded
+  commands leave the always-on context. Decided 2026-09-05 at the
+  walkthrough of the harness critique (FND.0210, FND.0190).
 
 ### Naming
 - **POS.0600** The system is named **Forge of Thought**: thoughts are
@@ -1037,7 +1058,7 @@ position that already stands elsewhere.
   project root), exactly as the engine has them (POS.0720, POS.0730;
   POS.0810 for the review of the regenerated output): the recipe is what
   is iterated, the render is never edited by hand, and every save that
-  touches the project regenerates both before the check. A library has a
+  touches the project regenerates both after its check. A library has a
   README only — a catalogue of what it holds and how to use it, from its
   ledger and indexes — since release notes are distilled from an
   intent's Version History and decisions, which a library does not have;
@@ -1289,7 +1310,9 @@ position that already stands elsewhere.
   The scripts already work on whatever branch is checked out
   (`forge-save` commits, rebases and pushes the current branch with its
   upstream, `forge-pull` fast-forwards it); only POS.0550's "main only"
-  says otherwise. A colleague has already worked in his own forge
+  says otherwise — no contradiction (DEC.0090: the normal relation of
+  a rule to its tool; the manual tag at an approved major is settled
+  here, not ahead of it). A colleague has already worked in his own forge
   instance on a branch of a subject project — sources, a walkthrough,
   intent, assignment and ledger — and merged by merge request, accepted
   by the principal without any forge ceremony because nobody else had
@@ -1445,7 +1468,19 @@ position that already stands elsewhere.
   of a project, consistency of the engine, staleness, the public
   boundary of THR.0210 …), what `/research` gains from kinds, and
   whether `/check-forge` survives as a kind or as a target. Opened
-  2026-09-04.
+  2026-09-04. First trial 2026-09-05: an external agent as a lens —
+  plugin-dev's `skill-reviewer` (marketplace `claude-plugins-official`)
+  run isolated over the operating layer `.claude/`, its report recast
+  into the critic's shape as `reviews/2026-09-05-critique-harness.md`
+  (FND.0190–0280) on the principal's word, lens name `harness` his
+  choice; the run proves the shape fits a foreign agent. The lens
+  itself is decided and carried by THR.0320. Walked through
+  2026-09-05: six findings fixed in the operating layer (FND.0200
+  Edit for the reviewers, FND.0210 and FND.0190 the harness guard of
+  POS.1090 with words instead of positional arguments in the state
+  files, FND.0220, FND.0230, FND.0240 the prompt and argument gaps);
+  FND.0250–0280 left for the round of THR.0270 + THR.0240, where the
+  layout of the operating layer is decided once.
 - **THR.0300** A user's private layer. Whoever runs the forge may
   want reviewers, checks or other agents of their own, for themselves
   only, with no ambition of contributing them to the engine — the
@@ -1471,6 +1506,32 @@ position that already stands elsewhere.
   the release notes throughout — and is withdrawn into this thread;
   whether the row a release note is generated from must change too is
   for the research to show. Opened 2026-09-04.
+- **THR.0320** A harness lens. The principal's direction of
+  2026-09-05: the critic roster gets a lens `harness` that reviews
+  the operating layer — CLAUDE.md and the skills, commands and agents
+  of `.claude/` — against current Claude Code conventions, and the
+  knowledge comes from the official plugins (`plugin-dev`, whose
+  `skill-reviewer` and `skill-development` carry the conventions for
+  skills, commands and agents; `claude-md-management`, whose
+  `claude-md-improver` reads CLAUDE.md), while the output is the
+  classic critic's: a dated immutable report in `reviews/`, FND in
+  the ledger, settled by walkthrough like every lens (POS.0400,
+  POS.0410). The trial of the same day is the evidence that the
+  shape fits a foreign agent (`reviews/2026-09-05-critique-harness.md`,
+  FND.0190–0280, filed under THR.0290). Open: the mechanism by which
+  `/critique harness` reaches the plugin — a mapping in `critique.md`
+  from the lens to the plugin agent with the skeleton's Output section
+  carried in the prompt, or an own `critic-harness` agent from the
+  skeleton with the plugin's skills preloaded (`skills:` in the agent
+  front-matter, the field THR.0270 waits to verify); the plugin as an
+  engine dependency — named by `/setup` and CLAUDE.md, and what the
+  lens does when the plugin is absent; whether
+  `claude-md-improver`'s rubric, written for codebases (build
+  commands, architecture map), serves a constitution like the forge's
+  CLAUDE.md beyond its conciseness criterion; the regression step of
+  every lens, which the trial skipped. Relation: the first concrete
+  kind of THR.0290, and the shape of the operating layer it reviews
+  is THR.0270 + THR.0240's question. Opened 2026-09-05.
 
 Note: the ID THR.0120 was inadvertently used twice — first for the
 readme-recipe thread (opened 1.14, closed 1.16), then for the

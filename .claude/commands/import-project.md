@@ -1,6 +1,7 @@
 ---
 description: Bring an existing project into projects/ — clone through scripts/forge-clone.ps1, offering the commit identity from CLAUDE.local.md
 argument-hint: <git-url>
+disable-model-invocation: true
 ---
 
 Bring the project at `$1` into the forge (POS.1060). Git is done by

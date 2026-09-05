@@ -1,5 +1,6 @@
 ---
 description: First run after cloning the engine — fill CLAUDE.local.md by interview, set the session model (Fable), offer the global git identity guard; never overwrites, runs no git operation
+disable-model-invocation: true
 ---
 
 Prepare this instance of the forge (POS.1050). Run after cloning the

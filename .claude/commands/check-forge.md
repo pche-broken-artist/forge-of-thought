@@ -22,11 +22,11 @@ immediate fix.
      and nothing described there is missing on disk.
    - README ↔ CLAUDE.md: same chain, same conventions, same command
      set, no contradictions.
-   - README is current: it promises to describe the actual present
-     state of the system, so every claim in it must hold today —
-     command names, file layout, conventions, planned extensions.
-     Anything superseded by a later decision is a finding; the fix is
-     re-rendering via its recipe, never editing the file.
+   - README and release notes are renders: `/save` regenerates them
+     from the settled sources after this check, so their currency is
+     not checked here — a claim in the README that CLAUDE.md or the
+     intent no longer supports is a recipe defect, fixed in the
+     recipe and re-rendered, never by editing the file.
    - `templates/` agree with the conventions (front-matter fields
      including `last_change`, the history companion
      `templates/history.md`, prefixes, numbering, statuses; no
