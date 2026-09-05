@@ -1,5 +1,5 @@
 ---
-description: Compose or iterate a project's readme recipe — the render is the project's README.md, regenerated on every save
+description: Compose or iterate a project's readme recipe — the render is the project's README.md, regenerated at every release
 argument-hint: [project-slug]
 disable-model-invocation: true
 ---
@@ -8,8 +8,8 @@ Genre: readme. Skeleton: `templates/recipe-readme.md`. Output:
 `README.md` in the project root (POS.1000 of the forge intent).
 
 Every project carries this recipe: `/new-project` scaffolds it from
-the skeleton, and every `/save` that touches the project regenerates
-the render before the check. Iterating it is how the README is
+the skeleton, and every `/release` of the project regenerates the
+render after the check. Iterating it is how the README is
 changed — the render is never edited by hand.
 
 Role: interviewer. Elicit the answers below from the principal —

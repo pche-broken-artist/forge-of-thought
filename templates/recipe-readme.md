@@ -13,7 +13,7 @@ output: README.md
 <!-- Readme-genre recipe, scaffolded by /new-project and iterated via
 /recipe readme. A recipe is the iterated thing; its render is
 generated output. Never polish README.md by hand: change this recipe,
-run /render readme — and every /save that touches the project
+run /render readme — and every /release of the project
 regenerates it. Recipes are tools: version + updated date in
 front-matter and no status (a recipe is never approved); its Version
 History lives in the companion <recipe>.history.md, last_change
@@ -46,7 +46,7 @@ the two resource indexes. -->
   appear; how much of the essence to carry; whether recipients or
   the principal are the primary reader.>
 - Close with a short section "About this README": a render of
-  `recipes/readme.md`, regenerated on every save, never edited by
+  `recipes/readme.md`, regenerated at every release, never edited by
   hand; fixes go into the recipe or the inputs. Then the fixed
   sentence, verbatim: "Reading this repository needs nothing beyond a
   Markdown viewer. Maintaining and evolving it needs **Forge of

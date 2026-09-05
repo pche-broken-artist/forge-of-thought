@@ -22,9 +22,9 @@ chooses the lens, passes the project and verifies the bookkeeping.
 **Bare `/critique` — the roster.** List the available lenses (scan
 `.claude/agents/critic-*.md`) and recommend which fits the project's
 state — `essence` as soon as a second layer exists, `clarity` before a
-handover. A recommendation, never a gate. Which lenses run at a save
-or a release is not decided here (THR.0220); until it is, every run is
-the principal's word.
+handover. A recommendation, never a gate. No lens runs at a save;
+`/release` offers `essence` once (POS.1100); every run is the
+principal's word.
 
 **`/critique <lens> [artefact] [slug]` — run it.** The target is an
 artefact named as `/forge` names it — `brief`, `brief-<name>`,

@@ -51,7 +51,7 @@ Checks per project:
    with `output: RELEASE-NOTES.md` (POS.1000); a missing recipe is a
    finding (fix: scaffold from `templates/recipe-<genre>.md`), a missing
    or stale README or release notes a finding fixed by the next
-   `/save`, which regenerates both. Every `00-brief*.md` in the directory has a row in the
+   `/release`, which regenerates both. Every `00-brief*.md` in the directory has a row in the
    ledger's Briefs table and vice versa; a brief marked `mined` is
    cited somewhere in the intent.
 2. **Front-matter and history** — against Versioning & status in

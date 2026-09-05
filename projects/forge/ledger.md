@@ -26,7 +26,7 @@ absorbed it; Note says what remains (partial) or the REJ (dropped). -->
 ## Documents
 | File | Version | Status | Date |
 |---|---|---|---|
-| 10-intent.md | 3.32 | draft | 2026-09-05 |
+| 10-intent.md | 3.34 | draft | 2026-09-05 |
 | 20-assignment.md | — | not planned: the handover artefacts of this project are the core itself (CLAUDE.md, templates/, .claude/) and README.md | — |
 | decisions.md | — | 9 records (DEC.0010–0090) | 2026-09-03 |
 
@@ -36,8 +36,8 @@ hand-edited: iterate the recipe, re-run /render. Row mirrors the
 render's front-matter provenance. -->
 | Render | Audience | Recipe | Inputs | Generated |
 |---|---|---|---|---|
-| README.md (repo root) | humans arriving at the repository | recipes/readme.md v0.35 | CLAUDE.md, 10-intent.md v3.32 | 2026-09-05 |
-| RELEASE-NOTES.md (repo root) | humans tracking the system's evolution | recipes/release-notes.md v0.5 | 10-intent.history.md, 10-intent.md v3.32, decisions.md, previous edition (2026-09-05 morning, released sections) | 2026-09-05 |
+| README.md (repo root) | humans arriving at the repository | recipes/readme.md v0.37 | CLAUDE.md, 10-intent.md v3.34 | 2026-09-05 |
+| RELEASE-NOTES.md (repo root) | humans tracking the system's evolution | recipes/release-notes.md v0.6 | 10-intent.history.md, 10-intent.md v3.34, decisions.md, previous edition (2026-09-05 morning, released sections) | 2026-09-05 |
 | renders/executive-pitch.md | C-level executives whose experience of AI is chatting with it | recipes/executive-pitch.md v0.1 | 10-intent.md, CLAUDE.md | — (not yet rendered) |
 
 ## Sources
@@ -81,7 +81,7 @@ version for resolved, DEC.NNNN for overruled. -->
 | FND.0060 | low | contradiction | resolved | 2026-08-27-critique.md | intent 2.13 (Essence), CLAUDE.md heading "Two isolated reviewers" (verified 2026-09-03, clarity) |
 | FND.0070 | low | divergence | resolved | 2026-08-27-critique.md | README re-rendered at intent 2.13 (2026-08-27, recipe 0.18) — regression belongs to the essence lens |
 | FND.0080 | low | inconsistency | resolved | 2026-08-27-critique.md | ledger comments + templates/ledger.md (intent 2.13) (verified 2026-09-03, clarity) |
-| FND.0090 | medium | contradiction | overruled | 2026-09-03-critique-clarity.md | DEC.0090 |
+| FND.0090 | medium | contradiction | overruled | 2026-09-03-critique-clarity.md | DEC.0090; its condition (THR.0220 changing POS.0550) fell at 3.33 with POS.1110 — the contradiction dissolved with it, nothing returns |
 | FND.0100 | medium | contradiction | resolved | 2026-09-03-critique-clarity.md | intent 3.17 |
 | FND.0110 | medium | gap | resolved | 2026-09-03-critique-clarity.md | intent 3.17 |
 | FND.0120 | low | contradiction | resolved | 2026-09-03-critique-clarity.md | intent 3.17 |
@@ -137,26 +137,42 @@ intent version for accepted, DEC.NNNN for rejected. -->
   preloaded plugin skills), the plugin as an engine dependency, the
   fit of claude-md-improver's rubric, the regression step. No
   priority given yet; shares its mechanism with THR.0270.
+- **Operating layer of POS.1100 and POS.1110 built 2026-09-05 with
+  intent 3.33:** `release.md` new, `save.md` narrowed, `forge-save
+  -Tag` and `forge-branch.ps1` (both tested on throwaway
+  repositories), CLAUDE.md, templates, genre files and both recipes
+  aligned. First real `/release forge` run the same evening: ten
+  check-forge findings settled (intent 3.34), `critique essence`
+  declined, README and release notes rendered from the settled
+  sources. Until the light check exists (THR.0290), `/save` runs no
+  check — accepted knowingly.
 - **Priorities of the open threads (principal's order, 2026-09-04
-  evening), the next rounds in this sequence:**
-  1. THR.0220 the cost of rendering at every save — decide among
-     A/B/C, with the save/release question for the reviewers.
+  evening; item 1 closed 2026-09-05), the next rounds in this
+  sequence:**
+  1. ~~THR.0220~~ closed at 3.33 (POS.1100, POS.1110), operating
+     layer built the same day (item above).
   2. THR.0310 the release notes must get better — `/research` on
      good release notes first, then the position, then the recipe.
   3. THR.0270 + THR.0290 + THR.0240 together, ASAP after the two
      above: the reviewer skeleton as a skill, checks (and research) as
      lenses, and the size of CLAUDE.md — one decision on the shape of
-     the operating layer.
+     the operating layer. Order inside fixed 2026-09-05: the THR.0270
+     trial run first, then the kinds of check (full with sub-checks,
+     light for `/save`), so no kind is built on a skeleton about to
+     change.
   Then THR.0230 (after an outline of the second framework). Dormant
   by decision, trigger recorded in each: THR.0250, 0300, 0190, 0200,
   0210, 0170, 0180, 0150, 0140, 0090.
 - Save duration (watch): the first /save with parallel renders and
   the isolated /check-forge (2026-09-02) took twelve minutes — renders
   6:54 in parallel (README 6:54, release notes 2:45), the check 5:00
-  with a full /check of the forge project folded in. THR.0220 (the
-  cost of rendering at every save) is the lever. Second measurement
-  (2026-09-03, save of 3.19): renders 8:18 in parallel (README 8:18,
-  release notes 2:24), the check 4:19.
+  with a full /check of the forge project folded in. Second
+  measurement (2026-09-03, save of 3.19): renders 8:18 in parallel
+  (README 8:18, release notes 2:24), the check 4:19. Lever pulled
+  2026-09-05: renders and check move to `/release` (POS.1100); the
+  watch continues on the first releases. First `/release` (2026-09-05,
+  release 3.34): the check 4:56, renders in parallel 7:07 (README
+  3:44, release notes 7:07).
 - Force-push of 2026-09-04, recorded: the save of intent 3.21–3.22
   (b717a67) carried the principal's private `tmp/` at the engine root
   into the public repository — the directory had never been added to
@@ -171,8 +187,9 @@ intent version for accepted, DEC.NNNN for rejected. -->
   research first (`/research` on good release notes), then the
   position, then the recipe; THR.0280 withdrawn into it (3.27)
 - THR.0290 checks (and research) as lenses on the reviewer mechanism —
-  opened 2026-09-04; kinds, the fate of /check-forge and the save/release
-  question (THR.0220) open
+  opened 2026-09-04; kinds and the fate of /check-forge open; the
+  save/release question answered at 3.33 (full check at `/release`,
+  light check at `/save` once it exists)
 - THR.0300 a user's private layer of local agents — opened 2026-09-04,
   no priority
 - THR.0270 the shared reviewer skeleton as a preloaded skill
@@ -204,11 +221,6 @@ intent version for accepted, DEC.NNNN for rejected. -->
   whether at all
 - THR.0240 the size of CLAUDE.md (523 lines) — opened 2026-09-03; to be
   dealt with whatever becomes of THR.0230
-- THR.0220 the cost of rendering README and release notes at every
-  save — opened 2026-09-02; three candidate solutions formulated in
-  the intent (A stale-only plus the principal's word; B save/release
-  split with branches left to git; C B plus a branch switch), to be
-  weighed with a fresh head
 - Executive pitch (since 2026-08-30): five-slide C-level deck of the
   forge, story agreed (S01–S05), recipe `recipes/executive-pitch.md`
   v0.1 with a Renders row. Decided direction, not yet written into the
@@ -231,6 +243,14 @@ intent version for accepted, DEC.NNNN for rejected. -->
   research/2026-08-29-split-migration-runbook.md; the company host's
   main stays at the phase-B commit a717e52, archived read-only; the last
   monorepo state is tag pre-split (d600dda).
+- Tag v3.32 (2026-09-05, commit 30730c4): the state before the
+  save/release round (THR.0220) — harness guard in place, `/save`
+  reordered. Set by the principal from the shell, outside the
+  forge's mechanism, since the scripts then carried no tag operation.
+  Settled the same day (POS.1100): `forge-save -Tag <name>` for any
+  tag on request, `v<major>` mandatory at every release of an
+  approved major; the next such tag goes through `/save -Tag` or
+  `/release -Tag`.
 - THR.0210 the guard rail for the public boundary — `projects/forge` never carries the content of a subject project; parked 2026-09-03 by the principal, proposed solution recorded in the thread (a check item in `/check-forge` plus one sentence in both reviewer skeletons); taken up when the boundary is next at stake
 - THR.0180 the output language — left as is; more than one output language solved when a project needs it
 - THR.0190 a plugin as a later distribution layer — no preparation

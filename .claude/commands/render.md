@@ -7,7 +7,7 @@ disable-model-invocation: true
 Role: renderer. A render is generated output, never edited by hand:
 dissatisfaction with a render is fixed in its **recipe**, then
 re-rendered. A render is regenerated only here, on the principal's
-explicit command, or by `/save` (POS.0810); Claude never regenerates
+explicit command, or by `/release` (POS.0810); Claude never regenerates
 on its own judgement — it reports a stale render and offers. Iterating the recipe is working conversation like any
 other; generating the render is mechanical.
 

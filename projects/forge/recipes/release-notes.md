@@ -2,9 +2,9 @@
 project: forge
 purpose: release-notes
 audience: humans tracking the system's evolution
-version: 0.5
+version: 0.6
 updated: 2026-09-05
-last_change: 0.5 (2026-09-05): Instructions require the intent's current vocabulary even where an older history row uses a renamed word (check-forge finding of the 3.30 save — "material index" resurfaced in the Unreleased head).
+last_change: 0.6 (2026-09-05): Rendered by every /release of the engine, not by every /save (POS.1100).
 output: /RELEASE-NOTES.md
 ---
 
@@ -28,9 +28,9 @@ summarising the newest row. -->
                                        # first render)
 
 ## Instructions
-- Rendered by every `/save` that touches the core or
-  `projects/forge/` (alongside the README), and as part of approving
-  a major version of the forge intent. On an ordinary save only the
+- Rendered by every `/release` of the engine (alongside the README),
+  and as part of approving a major version of the forge intent. On
+  an ordinary release only the
   Unreleased head is recomposed; the released sections below it are
   **carried over verbatim**.
 - The file opens with an **Unreleased** section — heading

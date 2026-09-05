@@ -1,0 +1,78 @@
+---
+description: Release one repository from main — full check with walkthrough, README and release notes, then /save with the release message and the tag at an approved major
+argument-hint: [project-slug] [-m "message"] [-Tag name]
+disable-model-invocation: true
+---
+
+Release one repository from `main` (POS.1100): the full conformance
+check settled by walkthrough (POS.0570), the README and the release
+notes regenerated from the settled sources under the principal's eyes
+(POS.0810, POS.1000), and then `/save` (`.claude/commands/save.md`)
+with the release message and, at an approved major, the tag. The
+repository is named by its slug, `forge` meaning the engine; without
+a slug, ask which repository — a release is always one repository,
+never a sweep.
+
+1. Determine the state from `./scripts/forge-status.ps1` (the scripts
+   are the only door to git — CLAUDE.md, Persistence). A release runs
+   on `main` only: on any other
+   branch, stop and report the branch the repository is on and how to
+   get back (`./scripts/forge-branch.ps1 <slug> main`, after saving).
+   Merging a branch into `main` is git's business, by hand or by
+   merge request, never this command's (POS.1110).
+2. Run the full check over the sources and report the result to the
+   principal — always, even when clean. The engine (core or
+   `projects/forge/` touched): the `/check-forge` procedure
+   (`.claude/commands/check-forge.md`). A project: `/check <slug>`
+   (`.claude/commands/check.md`). Clean: state that the check passed.
+   Findings: settle them by walkthrough (CLAUDE.md, Working methods);
+   a finding may be accepted as a deferral, recorded in the affected
+   project's ledger under "Waiting on principal", and the release
+   proceeds. Never fix silently; never proceed with an unsettled
+   finding. The check runs before the renders so that a fix of the
+   walkthrough — an intent bump, a changed convention — is already in
+   the inputs the renders derive from (POS.0570).
+3. Offer `/critique essence` once, in one sentence: the lens that
+   guards what a release publishes, the drift of the chain
+   (POS.0400). On the principal's word run it through its own
+   definition (`.claude/commands/critique.md`) and settle its
+   findings by walkthrough before going on; on his no, or silence,
+   run nothing — no reviewer ever runs at a release on Claude's own
+   judgement.
+4. Only once the findings are settled, regenerate the repository's
+   README and release notes from their recipes — unconditionally, no
+   staleness test, always through the `/render` procedure
+   (`.claude/commands/render.md`), never through an ad-hoc subagent
+   prompt (POS.1070). The two renders are launched at once, each
+   through the `/render` procedure, and awaited together. Report the
+   steps, including a short summary of what materially changed in the
+   regenerated files (POS.0810, POS.1000): the principal rules on the
+   delta before the commit. A render made from the settled sources is
+   current by construction; its verification is `/render` step 6 (the
+   file, its provenance, the ledger), not a check. The engine:
+   `README.md` and `RELEASE-NOTES.md` at the repository root from
+   `projects/forge/recipes/`. A project: its `README.md` from
+   `recipes/readme.md` and, for a thought project, `RELEASE-NOTES.md`
+   from `recipes/release-notes.md`; a library has a README only. A
+   project whose recipe is missing is reported (a `/check` finding)
+   and released without the render. Other renders are never
+   regenerated here; their staleness is the principal's business,
+   shown by the `/forge` map (POS.0570).
+5. Then run `/save` for this repository through its own definition
+   (`.claude/commands/save.md`), with two things decided here: the
+   commit message is `release <intent version>: <one line>` — the
+   line summarising the rounds since the last release, from the rows
+   of the intent's `.history.md` companion, the primary record
+   (CLAUDE.md, Versioning & status), unless `-m` was supplied; for a
+   library, whose history is git, the version is omitted and the line
+   describes what changed — and, when the intent's version is an
+   integer (an approved major), the tag `v<major>`, proposed and
+   taken on the principal's word (a rule of the procedure, not a gate
+   in the script). Any other tag is his request, as `/save` has it.
+   An approved major of the forge intent also recasts the Unreleased
+   head of `RELEASE-NOTES.md` as the new major's section (POS.0730) —
+   that is the release-notes recipe's work in step 4, not a step of
+   its own.
+
+The check is advisory (POS.0430): the principal may order the release
+at any moment regardless of findings.

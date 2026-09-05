@@ -14,7 +14,7 @@ output: RELEASE-NOTES.md
 thought project and iterated via /recipe release-notes. A recipe is
 the iterated thing; its render is generated output. Never polish
 RELEASE-NOTES.md by hand: change this recipe, run
-/render release-notes — and every /save that touches the project
+/render release-notes — and every /release of the project
 regenerates the Unreleased head. Recipes are tools: version + updated date in
 front-matter and no status (a recipe is never approved); its Version
 History lives in the companion <recipe>.history.md, last_change
@@ -29,8 +29,8 @@ summarising the newest row. -->
                         # over verbatim (absent on the first render)
 
 ## Instructions
-- Rendered by every `/save` that touches the project, and as part of
-  approving a major version of the intent. On an ordinary save only
+- Rendered by every `/release` of the project, and as part of
+  approving a major version of the intent. On an ordinary release only
   the Unreleased head is recomposed; the released sections below it
   are **carried over verbatim**.
 - The file opens with an **Unreleased** section — heading

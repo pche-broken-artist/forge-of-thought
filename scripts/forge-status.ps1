@@ -5,8 +5,8 @@
 
 .DESCRIPTION
     Read-only, changes nothing. For the engine and each projects/<slug>:
-    unsaved changes (or "clean"), the last commit, and the origin - or
-    "no origin" / "not under git". Exists so that even reading git state
+    unsaved changes (or "clean"), the branch it is on, the last commit,
+    and the origin - or "no origin" / "not under git". Exists so that even reading git state
     goes through the scripts - the scripts are the only door to git,
     with no exceptions.
 
@@ -43,6 +43,8 @@ function Show-Repo([string]$Name, [string]$Path) {
         } else {
             Write-Host '   clean - nothing to save' -ForegroundColor Green
         }
+        $branch = git rev-parse --abbrev-ref HEAD 2>$null
+        Write-Host ("   branch:      " + $(if ($branch) { $branch } else { 'none yet' }))
         $last = git log -1 --format='%h %s' 2>$null
         Write-Host ("   last commit: " + $(if ($last) { $last } else { 'none yet' }))
         $origin = git remote get-url origin 2>$null

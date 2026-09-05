@@ -22,7 +22,7 @@ immediate fix.
      and nothing described there is missing on disk.
    - README ↔ CLAUDE.md: same chain, same conventions, same command
      set, no contradictions.
-   - README and release notes are renders: `/save` regenerates them
+   - README and release notes are renders: `/release` regenerates them
      from the settled sources after this check, so their currency is
      not checked here — a claim in the README that CLAUDE.md or the
      intent no longer supports is a recipe defect, fixed in the

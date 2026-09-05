@@ -10,7 +10,7 @@ intent). Thought projects only — a library has no intent and
 therefore no release notes; its history is git.
 
 Every thought project carries this recipe: `/new-project` scaffolds
-it from the skeleton; every `/save` that touches the project
+it from the skeleton; every `/release` of the project
 regenerates the Unreleased head, released sections carried over
 verbatim; at a major approval the head is recast as the new major's
 section. The recipe is iterated; the render is never edited by hand.
