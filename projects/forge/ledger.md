@@ -26,7 +26,7 @@ absorbed it; Note says what remains (partial) or the REJ (dropped). -->
 ## Documents
 | File | Version | Status | Date |
 |---|---|---|---|
-| 10-intent.md | 3.39 | draft | 2026-09-06 |
+| 10-intent.md | 3.40 | draft | 2026-09-06 |
 | 20-assignment.md | — | not planned: the handover artefacts of this project are the core itself (CLAUDE.md, templates/, .claude/) and README.md | — |
 | decisions.md | — | 9 records (DEC.0010–0090) | 2026-09-03 |
 
@@ -123,10 +123,26 @@ intent version for accepted, DEC.NNNN for rejected. -->
 | CHL.0130 | accepted | "Upgrade" is a fast-forward of an untagged branch, so the compatibility tool has nothing to compare against; a new project starts unbacked by default (minor) | 2026-08-29-challenge-cto.md | intent 2.21 (via brief 0.5 — git tag per approved major; "nothing to compare against" obsolete (condition 3 narrowed to /check against current conventions, no engine version in projects)) |
 
 ## Waiting on principal
+- **THR.0270 closed, operating layer to build (2026-09-06, intent
+  3.40):** POS.1120 decided after the trial run — contract skills
+  `.claude/skills/critic/SKILL.md` and `.claude/skills/challenger/SKILL.md`
+  to write (`user-invocable: false`, contract shape: what it owns, what
+  the lens owns, the overlap rule, no placeholder), the three agent
+  files reduced to front-matter with `skills:` and their Lens section,
+  `templates/critic.md` and `templates/challenger.md` shrunk to the
+  lens-file skeleton, `/check-forge` step 2 replaced (named skill
+  exists, no copy comparison), CLAUDE.md "Two isolated reviewers" and
+  the repository layout aligned, `/critique` and `/challenge` read for
+  references to the templates. On the first real run after the build
+  the agent is asked to describe its prompt in one sentence, to confirm
+  the skill's arrival on the live agent. If the running session does
+  not pick up the edited agents, a fresh session does. FND.0250–0280
+  settle in the same round. Trial outputs of 2026-09-06 kept only in
+  the session's scratchpad, nothing filed.
 - **Harness critique, four findings left (2026-09-05):** FND.0250–0280
   from `reviews/2026-09-05-critique-harness.md` stay open for the
-  round of THR.0270 + THR.0240, where the layout of the operating
-  layer is decided once (FND.0260 the skills layout, FND.0270 the
+  round that builds the operating layer of POS.1120 and THR.0240
+  (FND.0260 the skills layout, FND.0270 the
   shared reviewer text, FND.0250 the instance fact in the cto
   persona, FND.0280 the language clause in fourteen commands). The
   other six were fixed 2026-09-05 (intent 3.30, POS.1090).
@@ -137,7 +153,7 @@ intent version for accepted, DEC.NNNN for rejected. -->
   open: the mechanism (mapping in `critique.md` or an own agent with
   preloaded plugin skills), the plugin as an engine dependency, the
   fit of claude-md-improver's rubric, the regression step. No
-  priority given yet; shares its mechanism with THR.0270.
+  priority given yet; shares its mechanism with POS.1120.
 - **Operating layer of POS.1100 and POS.1110 built 2026-09-05 with
   intent 3.33:** `release.md` new, `save.md` narrowed, `forge-save
   -Tag` and `forge-branch.ps1` (both tested on throwaway
@@ -182,13 +198,12 @@ intent version for accepted, DEC.NNNN for rejected. -->
   2. ~~THR.0310~~ closed at 3.35–3.38 (POS.0730, POS.0310), research
      `2026-09-05-good-release-notes.md`, operating layer and history
      migrated the same evening (item below).
-  3. THR.0270 + THR.0290 + THR.0240 together, ASAP after the two
-     above: the reviewer skeleton as a skill, checks (and research) as
-     lenses, and the size of CLAUDE.md — one decision on the shape of
-     the operating layer. Order inside fixed 2026-09-05: the THR.0270
-     trial run first, then the kinds of check (full with sub-checks,
-     light for `/save`), so no kind is built on a skeleton about to
-     change.
+  3. ~~THR.0270~~ closed at 3.40 (POS.1120) after its trial run
+     2026-09-06; the operating layer to build (item above). Then
+     THR.0290 + THR.0240: check as a third kind of reviewer with its
+     kinds (full with sub-checks, light for `/save`), built on the
+     contract skill from the start, and the size of CLAUDE.md — the
+     reviewer's context measured 2026-09-06 (THR.0240).
   Then THR.0230 (after an outline of the second framework). Dormant
   by decision, trigger recorded in each: THR.0250, 0300, 0190, 0200,
   0210, 0170, 0180, 0150, 0140, 0090.
@@ -212,17 +227,12 @@ intent version for accepted, DEC.NNNN for rejected. -->
   knowingly, once. GitHub may still hold the objects of b717a67 in its
   cache; only GitHub support can purge them, if the principal wants
   certainty.
-- THR.0290 checks (and research) as lenses on the reviewer mechanism —
-  opened 2026-09-04; kinds and the fate of /check-forge open; the
-  save/release question answered at 3.33 (full check at `/release`,
-  light check at `/save` once it exists)
+- THR.0290 check as a third kind of reviewer (fixed 2026-09-06), and
+  research alike — opened 2026-09-04; kinds and the fate of
+  /check-forge open; the save/release question answered at 3.33 (full
+  check at `/release`, light check at `/save` once it exists)
 - THR.0300 a user's private layer of local agents — opened 2026-09-04,
   no priority
-- THR.0270 the shared reviewer skeleton as a preloaded skill
-  (`skills:` in the agent front-matter) instead of the verbatim copy —
-  opened 2026-09-03; proposed solution and three open points (prompt
-  order, skill roster, CLAUDE.md load) in the thread; one trial run
-  before a decision
 - Migration to the history companion (POS.0310): the engine and the
   forge project done 2026-09-04 — CLAUDE.md, templates, commands, the
   80 rows of the intent moved to `10-intent.history.md`, one-row

@@ -1,8 +1,8 @@
 ---
-version: 3.39
+version: 3.40
 date: 2026-09-06
 status: draft
-last_change: 3.39 (2026-09-06): check-forge findings of the 3.38 release settled — POS.1000 says compiled, not distilled; CLAUDE.md reduced to citing the owners of the release-notes shape and the Notes block; release.md, the genre skeleton, the genre file and the sources index aligned.
+last_change: 3.40 (2026-09-06): THR.0270 closed after its trial run — the shared behaviour of a kind of reviewer is a contract skill preloaded into its lens and persona files (POS.1120); check fixed as a third kind of reviewer (THR.0290); the reviewer's context measured for THR.0240; operating layer to follow.
 project: forge
 audience: principal + Claude only
 ---
@@ -634,10 +634,10 @@ position that already stands elsewhere.
   principal, `/critique <lens>` and `/challenge <persona>`; both produce
   an immutable dated report and ledger rows; both are settled by
   walkthrough (POS.0850). The challenger has personas, the critic has
-  lenses: one agent file each, the shared behaviour carried verbatim
-  from one skeleton (`templates/challenger.md`, `templates/critic.md`),
-  only the Lens section its own; `/check-forge` verifies every file
-  against its skeleton. Both take an optional target, an artefact named
+  lenses: one agent file each, the shared behaviour of the kind
+  preloaded from one contract skill (POS.1120), only the Lens section
+  its own; `/check-forge` verifies that the skill every file names
+  exists. Both take an optional target, an artefact named
   as `/forge` names it (`brief`, `brief-<name>`, `intent`, `assignment`,
   later layers as they come); without one, the whole chain — the
   principal's request of 2026-09-03, so that one file or one transition
@@ -685,18 +685,71 @@ position that already stands elsewhere.
   active debate | emerging practice | my judgement); no fabrication — a
   precise "I don't know" beats an invented figure, and anything
   reconstructed from memory is flagged. The shared skeleton has one
-  owner, `templates/challenger.md`: every persona file carries its fixed
-  sections (Subject, How to work, Output) verbatim and writes only its
-  own Lens — who it is to the principal and which blind spots it exists
-  to find — and `/check-forge` verifies each persona against the
-  template (POS.1070). The first persona is `cto` (peer-CTO register);
+  owner, the contract skill `challenger` (POS.1120): every persona file
+  names it in its front-matter and writes only its own Lens — who it is
+  to the principal and which blind spots it exists to find — and
+  `/check-forge` verifies that the skill it names exists (POS.1070).
+  The first persona is `cto` (peer-CTO register);
   further personas — a strategist, a business analyst — are created from
-  the template by the principal's decision when first needed, and only
+  the lens-file skeleton by the principal's decision when first needed, and only
   where their blind spots genuinely differ: personas that would say the
   same things in different words are noise. Bare `/challenge` lists the
   roster and recommends a fit for the project's subject. Challenge files
   carry the persona in their name (`YYYY-MM-DD-challenge-<persona>.md`);
   the CHL sequence stays global per project.
+- **POS.1120** The shared behaviour of a kind of reviewer is a contract
+  skill, preloaded — never a copy. Each kind of reviewer — the critic,
+  the challenger, and check as the third kind at the same level
+  (THR.0290), every further kind as it comes — owns one skill
+  `.claude/skills/<kind>/SKILL.md` (`critic`, `challenger`, `check`),
+  and every lens or persona file of that kind names it in its
+  front-matter (`skills:`), so that Claude Code injects the whole skill
+  into the agent at launch; the file itself carries its front-matter
+  and its Lens section, nothing else. One skill per kind, because the
+  shared texts of the kinds differ almost whole (subject, way of
+  working, output); the few sentences common to every kind —
+  isolation, no fabrication, sharp and few, the ledger — may become one
+  further skill later, an agent naming more than one, decided when a
+  third kind exists. The skill is written as a contract addressed to
+  every lens of its kind, not as a template with placeholders: it opens
+  by saying what the contract owns (conduct, subject, way of working,
+  the report shape, the ledger step) and what the lens file owns (what
+  it reads, what it goes after, its categories, its own report
+  sections), and carries the overlap rule — a lens is a specialisation
+  of its contract, never a replacement; it may make a shared rule or
+  field stricter, never rename, drop or duplicate one; the protocol
+  changes in the contract — since the contract arrives after the
+  lens's own text and the agent must know which yields. The lens's name
+  is the lens file's to state; the contract never names one. The skill
+  carries `user-invocable: false`, so it stays out of the `/` menu of
+  the main session (its description still enters that session's
+  context; `disable-model-invocation` would hide it entirely but also
+  forbid the preload, so it is not used) and a description that says
+  it is preloaded into the reviewers of its kind. `templates/critic.md`
+  and `templates/challenger.md` shrink to the skeleton of a lens file —
+  the front-matter with the skills list, the four parts of a Lens
+  section — and `/check-forge` replaces the copy comparison with one
+  check: every skill an agent names exists, since Claude Code skips a
+  missing skill silently with a warning in the debug log only. Decided
+  2026-09-06 after the trial run THR.0270 asked for, on a temporary
+  `critic-clarity` carrying the Lens section only and the shared part as
+  a skill: the skill arrived whole every time — not in the system
+  prompt, but at the end of the first user message, after the task
+  text, wrapped as a command message — and the agent worked by it (the
+  report shape, the calibration, a usable review); a headless session
+  run *as* the agent (`claude -p --agent`) preloads nothing, so the
+  reviewers are launched as subagents only; a new agent file was not
+  picked up by the running session, against the documentation's
+  promise of seconds, while a fresh session saw it. The position of
+  the skill in the prompt is recorded as a fact, not a defect, and is
+  checked once more on the first real run after the operating layer is
+  built (the agent asked to describe its prompt in one sentence of the
+  task). The contract shape is confirmed by a colleague's system grown
+  from the forge, where one contract skill carries the conduct, output
+  classes and evidence rules of every reviewer. What the same trial
+  measured about the rest of a reviewer's context belongs to THR.0240.
+  The four open findings of the harness critique (FND.0250–0280) are
+  settled in the round that builds this layer.
 - **POS.0430** Nothing blocks. There are no hard quality gates;
   checklists and findings are advisory and the principal alone decides
   what is published.
@@ -1061,7 +1114,7 @@ position that already stands elsewhere.
   rendered at `/save` by an ad-hoc subagent prompt instead of
   `/render`, arrived unwrapped and with a foreign provenance shape).
   `/check-forge` carries the standing rule — a restated procedure, a
-  persona file diverging from `templates/challenger.md`, a direct
+  reviewer file restating what its contract skill owns (POS.1120), a direct
   operation where a script, command or agent exists — over the
   operating-layer files changed in the release's scope, the full
   sweep only on an explicit bare `/check-forge`, so that the rule
@@ -1485,7 +1538,16 @@ position that already stands elsewhere.
   which would help. Opened 2026-09-03 at the principal's direction. To
   think through: what must be always-on, what can live in commands,
   skills and templates and be read when its situation arises, and how
-  the effect is measured — by behaviour, never by line count.
+  the effect is measured — by behaviour, never by line count. Measured
+  2026-09-06 at the THR.0270 trial (POS.1120): every reviewer subagent
+  receives, in its first user message before the task, the whole
+  CLAUDE.md together with `CLAUDE.local.md`, the assistant's memory
+  file and the git status — about 600 lines, the largest block of its
+  context, several times its own agent body and contract together; the
+  instance facts of `CLAUDE.local.md` (principal, language, git
+  identities) thereby reach an isolated reviewer that needs none of
+  them. The cost of CLAUDE.md is paid once per reviewer run, not once
+  per session.
 - **THR.0250** Two suggested functions: an expander and an essence
   manager. A tip the principal received on 2026-09-03 — where from not
   recorded. The essence manager got its detail the same day: at the end
@@ -1496,40 +1558,17 @@ position that already stands elsewhere.
   of the chain; whether an end-to-end distillation is a further thing or
   the same lens run brief-to-last-layer is open. The expander has a name
   only. Parked until more detail arrives.
-- **THR.0270** The shared reviewer skeleton as a preloaded skill instead
-  of a verbatim copy. POS.1070 (3.10) chose the copy over a runtime
-  include: a persona file stands alone, and the copy is mechanically
-  checkable. On 2026-09-03 a fact changed the weighing: Claude Code
-  agents carry a `skills:` list in their front-matter, and the whole
-  body of each named `.claude/skills/<name>/SKILL.md` is injected into
-  the subagent's system prompt at launch — an include with the
-  behaviour of the copy and one source
-  (code.claude.com/docs/en/sub-agents). Seen in use in a colleague's
-  system that grew out of the forge, where one shared contract skill
-  carries the conduct, output classes and evidence rules of every
-  reviewer. Measured the same day: the shared part is about 100 of 171
-  lines of a critic lens file and 90 of 131 of the challenger's; the
-  critic skeleton exists three times, the challenger's twice, and
-  `/check-forge` compares the copies at every release. Proposed solution:
-  `templates/critic.md` and `templates/challenger.md` move to
-  `.claude/skills/` (a new place in the layout), every lens and persona
-  file keeps its front-matter and Lens section only, and `/check-forge`
-  replaces the copy comparison with a check that every skill named in
-  an agent's front-matter exists — a missing skill is skipped silently,
-  with a warning in the debug log only. Open before a decision: the
-  order in which skill and agent body land in the prompt (unstated in
-  the documentation; one trial run settles it), whether a skeleton
-  skill must be kept out of the main session's skill roster, and the
-  side fact that every subagent also receives the whole CLAUDE.md — a
-  cost that belongs to THR.0240. Opened 2026-09-03 at the principal's
-  direction.
-- **THR.0290** Checks as lenses. `/check` today is one long command
+- **THR.0290** Check as a third kind of reviewer. `/check` today is
+  one long command
   with eight numbered checks; the principal's idea of 2026-09-04,
   after the migration checks of three projects: put `/check` — and
-  `/research` alike — on the reviewer mechanism of POS.0400: one
-  skeleton (`templates/check.md`), one agent per kind of check
-  (`check-<name>`), bare `/check` listing the roster and recommending
-  a fit, a named check run by hand exactly as `/critique clarity` is.
+  `/research` alike — on the reviewer mechanism of POS.0400. Fixed
+  2026-09-06 by the principal's word: check is a kind of reviewer at
+  the level of the critic and the challenger, not a lens of the
+  critic — its own contract skill `check` (POS.1120), one agent per
+  kind of check (`check-<name>`), bare `/check` listing the roster and
+  recommending a fit, a named check run by hand exactly as
+  `/critique clarity` is.
   Then a new check is one file, written when the need appears, and
   which checks run at a save or a release is the same question as
   for the reviewers (THR.0220). Open: what the kinds are (conformance
@@ -1547,8 +1586,8 @@ position that already stands elsewhere.
   Edit for the reviewers, FND.0210 and FND.0190 the harness guard of
   POS.1090 with words instead of positional arguments in the state
   files, FND.0220, FND.0230, FND.0240 the prompt and argument gaps);
-  FND.0250–0280 left for the round of THR.0270 + THR.0240, where the
-  layout of the operating layer is decided once. Since 3.33 the
+  FND.0250–0280 left for the round that builds the operating layer of
+  POS.1120 and THR.0240, where its layout is decided once. Since 3.33 the
   thread owes two kinds to POS.1100: a full check with sub-checks,
   which `/release` runs, and a light check for `/save` (ledger
   bookkeeping, version and status agreement, the companion row),
@@ -1556,7 +1595,8 @@ position that already stands elsewhere.
   checks run at a save or a release" is thereby answered for the
   reviewers and the first two kinds. Order fixed the same day: the
   THR.0270 trial first, then the kinds, so that no kind is built on a
-  skeleton about to change.
+  skeleton about to change — the trial done 2026-09-06 (POS.1120), so
+  the kinds are next, built on the contract skill from the start.
 - **THR.0300** A user's private layer. Whoever runs the forge may
   want reviewers, checks or other agents of their own, for themselves
   only, with no ambition of contributing them to the engine — the
@@ -1566,7 +1606,8 @@ position that already stands elsewhere.
   and `settings.local.json` (gitignored), and the rosters of
   `/critique`, `/challenge` and `/check` would list what lies there
   beside the engine's own. Open: how a local agent takes the shared
-  skeleton, what happens when the engine renames or reshapes it, and
+  contract skill (POS.1120), what happens when the engine renames or
+  reshapes it, and
   whether Claude Code's own user-level agents already serve. Opened
   2026-09-04.
 - **THR.0320** A harness lens. The principal's direction of
@@ -1584,9 +1625,9 @@ position that already stands elsewhere.
   FND.0190–0280, filed under THR.0290). Open: the mechanism by which
   `/critique harness` reaches the plugin — a mapping in `critique.md`
   from the lens to the plugin agent with the skeleton's Output section
-  carried in the prompt, or an own `critic-harness` agent from the
-  skeleton with the plugin's skills preloaded (`skills:` in the agent
-  front-matter, the field THR.0270 waits to verify); the plugin as an
+  carried in the prompt, or an own `critic-harness` agent naming the
+  critic contract and the plugin's skills alike in its front-matter
+  (`skills:`, the field verified 2026-09-06, POS.1120); the plugin as an
   engine dependency — named by `/setup` and CLAUDE.md, and what the
   lens does when the plugin is absent; whether
   `claude-md-improver`'s rubric, written for codebases (build
@@ -1594,7 +1635,7 @@ position that already stands elsewhere.
   CLAUDE.md beyond its conciseness criterion; the regression step of
   every lens, which the trial skipped. Relation: the first concrete
   kind of THR.0290, and the shape of the operating layer it reviews
-  is THR.0270 + THR.0240's question. Opened 2026-09-05.
+  is POS.1120's and THR.0240's question. Opened 2026-09-05.
 
 Note: the ID THR.0120 was inadvertently used twice — first for the
 readme-recipe thread (opened 1.14, closed 1.16), then for the
