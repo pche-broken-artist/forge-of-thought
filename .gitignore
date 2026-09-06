@@ -1,8 +1,10 @@
 # Local, per-machine Claude Code settings - never shared
 .claude/settings.local.json
 
-# Instance facts (principal, conversation language) - never shared
+# Instance facts (principal, conversation language) and the git
+# identities - never shared
 /CLAUDE.local.md
+/identities.local.md
 
 # Projects are repositories of their own; the engine tracks only its
 # own project. projects/* (never projects/) so the re-include works.

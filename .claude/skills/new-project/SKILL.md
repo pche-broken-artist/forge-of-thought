@@ -11,7 +11,7 @@ and adding a remote (`git -C projects/$1 init -b main`, `git remote
 add origin …`) are the principal's one-off act, and a project that
 starts "not under git" is a property, not a defect — say so once at
 the end. Once he names the remote, propose the matching commit
-identity from the roster in `CLAUDE.local.md` by the remote's host
+identity from the roster in `identities.local.md` (read by path; POS.0950) by the remote's host
 and print the `git config` lines for him to run (POS.0950) — the
 command runs no git.
 

@@ -21,11 +21,14 @@ speak whatever language the user speaks to you.
        conversation runs in (artefacts are always English, briefs
        verbatim);
      - **Git identities** — name and e-mail per git host the user
-       will push to (e.g. github.com, a company host). This is the
-       roster from which per-repository identities are proposed at
-       every project creation or import (POS.0950). May be left
+       will push to (e.g. github.com, a company host), written to
+       `identities.local.md` beside it from
+       `templates/identities.local.md`, never into `CLAUDE.local.md`:
+       that file reaches every subagent, this one nobody (POS.0950).
+       This is the roster from which per-repository identities are
+       proposed at every project creation or import. May be left
        empty and added later; say so.
-   - Keep the template's format; the file is gitignored and never
+   - Keep the templates' format; both files are gitignored and never
      committed.
    - Close the git-identities part with an offer (POS.1050,
      POS.0950): the global guard `user.useConfigOnly = true` under

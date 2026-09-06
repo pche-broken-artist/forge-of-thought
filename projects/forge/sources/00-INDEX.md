@@ -1,7 +1,7 @@
 ---
 project: forge
 directory: sources
-updated: 2026-08-27
+updated: 2026-09-06
 ---
 
 # Index — sources of Forge of Thought

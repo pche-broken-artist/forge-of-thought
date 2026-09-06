@@ -1,8 +1,8 @@
 ---
-version: 3.45
+version: 3.46
 date: 2026-09-06
 status: draft
-last_change: 3.45 (2026-09-06): second clarity critique of the day walked through, all five findings fixed — POS.1100 says what /save and /release run today, "full check" gone (FND.0350); the three contracts named <kind>-contract and no common skill decided (FND.0360); /check rules owned by the check of their concern (FND.0370); POS.1130 and POS.0400/0420 cite POS.1120 (FND.0380, FND.0390).
+last_change: 3.46 (2026-09-06): CTO challenge of 3.45 walked through — the chain is the principal's own layer in his own project (POS.0700, CHL.0140); git identities out of CLAUDE.local.md into identities.local.md and the instance-fact sentence in every contract (POS.0950, CHL.0170); what a position carries (POS.0120, CHL.0180); what a major means and must pass (POS.0300, CHL.0190); CHL.0150 parked, CHL.0160 rejected (DEC.0100, the migration path in POS.0940).
 project: forge
 audience: principal + Claude only
 ---
@@ -201,6 +201,11 @@ position that already stands elsewhere.
   Version History. It exists because chat context dies and anything of
   value must live in a file: it is the document to read when returning to
   a project after weeks, instead of excavating old conversations.
+  A position is a stance with its reason and its citations, dated
+  once. How it was reached — trials, measurements, counts, findings
+  settled, what others do — is the history row's, the ledger's or a
+  research note's, never the position's (CHL.0180, 2026-09-06; the
+  intent measured against this rule once, before 4.0, THR.0240).
 - **POS.0130** `20-assignment.md` is the distilled handover document for
   the recipients: complete, precise, structured, self-contained,
   versioned. It carries the whole in-scope substance of the intent —
@@ -554,7 +559,14 @@ position that already stands elsewhere.
   1.1, 1.2 … are changes made after approval, not yet approved
   themselves; 2.0 is the next approved version. Status in front-matter
   (`draft | in_review | approved | superseded`) must agree with the
-  number.
+  number. A major of the forge intent closes a set of features the
+  principal names — 4.0 closes the engine's operating layer: the git
+  doors, the release notes, the contracts, the skills layout, the
+  checks — and passes more than a minor before its tag: every check,
+  `single-source-of-truth` included, both critic lenses and one
+  challenge, their findings settled or deferred by his word. The word
+  closes the major; the test says what the word attests (CHL.0190,
+  2026-09-06).
 - **POS.0310** Every versioned document keeps its Version History
   (Version | Modification | Author | Date — human-readable, what changed
   and why) in an append-only companion `<file>.history.md` beside it,
@@ -1031,16 +1043,32 @@ position that already stands elsewhere.
   every release of an approved major of this intent, and any tag on
   request (POS.1100). A project records no engine version:
   `/check` measures it against the current conventions, and
-  inconsistencies are fixed by the user with AI, as now. Verified by
+  inconsistencies are fixed by the user with AI, as now. That is
+  the whole migration path of any instance, the principal's and a
+  third party's alike: after `forge-pull`, `/check project` on each
+  project says what the conventions changed, the release notes'
+  Action required lines say what to do, and Claude migrates on the
+  user's word; no migration tool exists, knowingly (DEC.0100,
+  2026-09-06). Verified by
   test on 2026-08-29 (research
   `2026-08-29-git-engine-projects-separation.md`); meets all six
   conditions of the brief with no mechanism at all. Shapes rejected:
   REJ.0150. Closes THR.0130 (opened 2.8, 2026-08-17).
 - **POS.0950** The engine carries no instance facts. Who the principal
-  is and what language the conversation runs in live in
+  is (by role) and what language the conversation runs in live in
   `CLAUDE.local.md` at the engine root — gitignored, created from
   `templates/CLAUDE.local.md` and filled by `/setup` on a new machine
-  (POS.1050); the root is where Claude Code looks for it. The session
+  (POS.1050); the root is where Claude Code looks for it, and
+  everything there reaches every subagent, the isolated reviewers
+  included (THR.0240). Therefore only what must be always-on and is
+  harmless in a public report lives there; the git identities —
+  names, e-mail addresses, hosts — live beside it in
+  `identities.local.md`, gitignored, loaded by nobody, read by path
+  by the three commands that set an identity (`/setup`,
+  `/new-project`, `/import-project`), and every reviewer contract
+  forbids instance facts in a report (CHL.0170, 2026-09-06; the
+  split of an existing instance file is the user's act on the
+  release notes' word). The session
   model lives in `.claude/settings.local.json` (POS.0930). The commit
   identity is set locally per repository; the engine carries none
   (below). `CLAUDE.md` names the principal and the conversation language
@@ -1051,7 +1079,7 @@ position that already stands elsewhere.
   not of the host: it is set locally in every repository (`git config
   user.name` / `user.email`) at the repository's creation or import,
   proposed by the command layer from the identity roster in
-  `CLAUDE.local.md` — matched by the origin's host, which is an offer,
+  `identities.local.md` — matched by the origin's host, which is an offer,
   never a rule — and set on the principal's word. The per-host
   `includeIf` configuration adopted at 3.6 is dropped: the host is only
   a correlate of the identity and fails exactly where one host serves
@@ -1255,6 +1283,14 @@ position that already stands elsewhere.
   mechanics of a layer (commands, agents, reviewer calibration) are
   designed when that layer is actually taken up, not in advance. An
   earlier `/elaborate` mechanics proposal was withdrawn as premature.
+  The layers below the assignment grow in the same project, by the
+  same principal's hand, when he chooses to take his own thought
+  further — a BRD as his next layer, not as someone else's
+  deliverable. What a recipient does with an assignment in his own
+  instance is his own forge run: the assignment becomes his brief, by
+  his hand today (an assignment is self-contained for exactly that),
+  by a command of its own only when that day comes (THR.0090). The
+  chain never spans two principals (CHL.0140, 2026-09-06).
 - **POS.0760** The forge is split into a public engine and user projects
   in repositories of their own. The engine — the core together with
   `projects/forge` — is public and contains nothing sensitive and no
@@ -1460,7 +1496,10 @@ position that already stands elsewhere.
   principal receives Forge — including the `forge` project itself — via
   git and runs their own instance. How genuine multi-user operation
   would work is an open point for the future; deliberately not being
-  worked on now.
+  worked on now. One case named 2026-09-06 (CHL.0140, POS.0700): an
+  assignment handed to a colleague's instance as his brief — how it
+  is seeded, how the IDs continue, where the essence lens finds a
+  parent; this thread's, when it is taken up.
 - **THR.0140** The delivery side. Whether the forge's output one day
   feeds a delivery chain as grown layers of the forge or hands over
   to a separate delivery framework is open and deliberately not
@@ -1611,7 +1650,10 @@ position that already stands elsewhere.
   thread turned into a project of its own; the principal undecided.
   THR.0220 was settled on today's forge at 3.33 (POS.1100) as an engine
   matter that carries over; THR.0210 stays open on the same
-  recommendation.
+  recommendation. CHL.0150 (2026-09-06, parked until after 4.0): since
+  3.0 every new position has been the engine's and the boundary is
+  being drawn by accretion; taken up after 4.0 if the split proves
+  useful.
 - **THR.0240** The size of CLAUDE.md. 523 lines on 2026-09-03 and
   growing with every iteration; THR.0190 already records that a split
   moves rules from always-on to on-demand and is a behaviour change, not

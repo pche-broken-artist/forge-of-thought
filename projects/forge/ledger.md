@@ -26,9 +26,9 @@ absorbed it; Note says what remains (partial) or the REJ (dropped). -->
 ## Documents
 | File | Version | Status | Date |
 |---|---|---|---|
-| 10-intent.md | 3.45 | draft | 2026-09-06 |
+| 10-intent.md | 3.46 | draft | 2026-09-06 |
 | 20-assignment.md | — | not planned: the handover artefacts of this project are the core itself (CLAUDE.md, templates/, .claude/) and README.md | — |
-| decisions.md | — | 9 records (DEC.0010–0090) | 2026-09-03 |
+| decisions.md | — | 10 records (DEC.0010–0100) | 2026-09-06 |
 
 ## Renders
 <!-- Generated outputs, one row per recipe in recipes/. Never
@@ -132,6 +132,12 @@ intent version for accepted, DEC.NNNN for rejected. -->
 | CHL.0110 | accepted | The "three free steps" are not free: the CLAUDE.md split moves half the engine's rules from always-on to on-demand, on an overstated 200-line claim (major) | 2026-08-29-challenge-cto.md | intent 2.21 (via brief 0.5 — all plugin preparation dropped for now; git split only. Skills migration part not contested on substance, dropped with the rest) |
 | CHL.0120 | rejected | Fresh history discards the git record the design relies on and leaves the only full copy on the employer's server; path-filtering not considered (major) | 2026-08-29-challenge-cto.md | DEC.0080 — fresh history kept; the company copy stays read-only |
 | CHL.0130 | accepted | "Upgrade" is a fast-forward of an untagged branch, so the compatibility tool has nothing to compare against; a new project starts unbacked by default (minor) | 2026-08-29-challenge-cto.md | intent 2.21 (via brief 0.5 — git tag per approved major; "nothing to compare against" obsolete (condition 3 narrowed to /check against current conventions, no engine version in projects)) |
+| CHL.0140 | accepted | The chain grows downward across principals and repositories, and every mechanism assumes it does not — POS.0700 and THR.0090 are one question (major) | 2026-09-06-challenge-cto.md | intent 3.46 (POS.0700: the chain is the principal's own layer in his own project; the handover case noted in THR.0090) |
+| CHL.0150 | parked | THR.0230 is being decided by accretion: every position since 3.0 is the engine's, none the chain's, and the deferral makes the later split a rewrite (major) | 2026-09-06-challenge-cto.md | until after 4.0; noted in THR.0230 (intent 3.46) |
+| CHL.0160 | rejected | The upgrade channel has one user, who never upgrades: convention migrations between 3.0 and 3.45 are paid by hand by every other instance (major) | 2026-09-06-challenge-cto.md | DEC.0100 (the migration path stated in POS.0940) |
+| CHL.0170 | accepted | Every isolated reviewer receives the instance facts (CLAUDE.local.md, memory) and writes an immutable public file; THR.0210's parking premise is false today (major) | 2026-09-06-challenge-cto.md | intent 3.46 (POS.0950: identities out of the auto-loaded file into identities.local.md; the instance-fact sentence in all three contracts; THR.0210 noted) |
+| CHL.0180 | accepted | The intent has become the chronicle it was designed not to be (positions as decision narratives, 1,779 lines) and CLAUDE.md grows with it, 435 → 636 lines in eight days (major) | 2026-09-06-challenge-cto.md | intent 3.46 (POS.0120: what a position carries; the sweep of the intent before 4.0, THR.0240) |
+| CHL.0190 | accepted | Release 4.0 is queued and nothing says what an approved major of this intent means — a sign-off with no counterparty and no test (minor) | 2026-09-06-challenge-cto.md | intent 3.46 (POS.0300: what a major of the forge intent means and must pass) |
 
 ## Waiting on principal
 - **Operating layer of POS.1120 built (2026-09-06, intent 3.41);
@@ -140,9 +146,9 @@ intent version for accepted, DEC.NNNN for rejected. -->
   the live agent (its sections in the first user message after the
   task; report, regression and ledger by the contract; the running
   session picked up the edited agent without a restart); its six
-  findings fixed at 3.42. Next, on the principal's word:
-  `/challenge cto` on the new contract, the same one-sentence prompt
-  check in the task. Trial outputs of 2026-09-06 kept only in the
+  findings fixed at 3.42; `/challenge cto` on the new contract
+  2026-09-06 (intent 3.45), its six challenges settled at 3.46 — every
+  reviewer and check has now run through its contract. Trial outputs of 2026-09-06 kept only in the
   session's scratchpad, nothing filed. The first run of a check on
   its contract (`check-light` on projects/forge, 2026-09-06, headless
   through the Agent tool) confirmed the contract the same way; its
@@ -212,11 +218,15 @@ intent version for accepted, DEC.NNNN for rejected. -->
   3. ~~THR.0270~~ closed at 3.40 (POS.1120) after its trial run
      2026-09-06; the operating layer built at 3.41; the critic's real
      run done at 3.42; THR.0330 (all commands to skills) done at
-     3.43; the checks built at 3.44 (POS.1140). Next, in the
-     principal's order of 2026-09-06: `/challenge cto` on the new
-     contract, then the settlement of that challenge and release 4.0.
-     THR.0240 (the size of CLAUDE.md, the reviewer's context measured
-     2026-09-06) after that.
+     3.43; the checks built at 3.44 (POS.1140); the challenge run and
+     settled at 3.46. The road to 4.0, in the principal's order of
+     2026-09-06: the sweep of the intent by the position rule
+     (POS.0120, CHL.0180) as its own round, then `/critique clarity`
+     for regression, then the test of a major (POS.0300:
+     `single-source-of-truth`, `essence`, the checks of the release),
+     then `/release forge` at 4.0 with the tag `v4`. After 4.0:
+     THR.0230's split if useful (CHL.0150), THR.0240 (the size of
+     CLAUDE.md).
   Then THR.0230 (after an outline of the second framework). Dormant
   by decision, trigger recorded in each: THR.0250, 0300, 0190, 0200,
   0210, 0170, 0180, 0150, 0140, 0090.

@@ -44,7 +44,10 @@ Your target is what your task names: a project by its path, or the
 engine by its root; how a target narrows your work is your Lens
 section's to say. You see only the files, never the working
 conversation (POS.0930); nothing about what was meant or discussed is
-told to you.
+told to you. Instance facts — whatever `CLAUDE.local.md` and the
+assistant's memory carry: names, roles, addresses, hosts — never enter
+your report, not even where they would explain a finding: the report
+reaches the session and may be quoted into a public file.
 
 The rules you verify have owners — CLAUDE.md, a template, a position
 of the forge intent — and you read them there: your Lens section

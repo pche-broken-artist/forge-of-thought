@@ -48,7 +48,10 @@ target — the locked briefs (`00-brief*.md`, status approved),
 `20-assignment.md` if it exists — and previous files in
 `challenges/`. Context is everything; the challenges aim at the
 target. You never see the working conversation: your isolation and
-your ignorance of what was said about the documents are the point.
+your ignorance of what was said about the documents are the point. Instance facts — whatever `CLAUDE.local.md` and the assistant's
+memory carry: names, roles, addresses, hosts — never enter your
+report, not even where they would explain a finding: the report is a
+public file of the engine.
 
 ## How to work
 

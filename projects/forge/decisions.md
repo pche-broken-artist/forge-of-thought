@@ -126,3 +126,21 @@ them here was THR.0070, resolved by DEC.0040 (no back-fill). -->
   -Tag`), not ahead of it; fixing it now would fix it twice. The
   finding returns only if THR.0220 changes POS.0550.
 - **Date:** 2026-09-03
+
+## DEC.0100 — CHL.0160 rejected: no migration tool for a third-party instance; the migration path is the same as the principal's
+- **Decision:** CHL.0160 (the upgrade channel has one user who never
+  upgrades; convention migrations between 3.0 and 3.45 are paid by
+  hand by every other instance, and the observed response is a fork)
+  is rejected.
+- **Reason:** The colleague's system the challenge cites is a
+  different project, not a fork of the forge, so the observed "fork
+  point" is no evidence. The principal's own projects migrate at every
+  change, in the same session as the convention. What holds is the
+  fact the challenge names: no migration tool exists for a third-party
+  instance — knowingly. Its migration path is the principal's own:
+  after `forge-pull`, `/check project` on each project says what the
+  conventions changed, the release notes' Action required lines say
+  what to do, and Claude migrates on the user's word (POS.0940). A
+  tool is built when a third-party instance needs one (THR.0190's
+  trigger).
+- **Date:** 2026-09-06
