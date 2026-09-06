@@ -17,5 +17,5 @@ compactly:
    /forge assignment" or "3 findings await verdicts").
 
 Read-only. Reconciling the ledger with reality (versions, files on
-disk, indexes) is `/check` step 3, not restated here (POS.1070); if a
+disk, indexes) is the `light` check's (`/check light`), not restated here (POS.1070); if a
 discrepancy is obvious while reporting, name it and point there.

@@ -26,7 +26,7 @@ absorbed it; Note says what remains (partial) or the REJ (dropped). -->
 ## Documents
 | File | Version | Status | Date |
 |---|---|---|---|
-| 10-intent.md | 3.43 | draft | 2026-09-06 |
+| 10-intent.md | 3.44 | draft | 2026-09-06 |
 | 20-assignment.md | — | not planned: the handover artefacts of this project are the core itself (CLAUDE.md, templates/, .claude/) and README.md | — |
 | decisions.md | — | 9 records (DEC.0010–0090) | 2026-09-03 |
 
@@ -138,18 +138,18 @@ intent version for accepted, DEC.NNNN for rejected. -->
   findings fixed at 3.42. Next, on the principal's word:
   `/challenge cto` on the new contract, the same one-sentence prompt
   check in the task. Trial outputs of 2026-09-06 kept only in the
-  session's scratchpad, nothing filed. The README render is stale
-  (CLAUDE.md and readme recipe 0.38 changed), regenerated at the next
-  `/release`.
+  session's scratchpad, nothing filed. The first run of a check on
+  its contract (`check-light` on projects/forge, 2026-09-06, headless
+  through the Agent tool) confirmed the contract the same way; its
+  four bookkeeping findings fixed or accepted at once (the placeholder
+  `00-brief.md` accepted under DEC.0010).
 - **Commands migrated to skills (2026-09-06, intent 3.43, POS.1130):**
   THR.0330 closed, FND.0260 resolved; run before the check round on
   the principal's word so that `/check` is written once on its final
   place. One trial of `context: fork` on `/check` belongs to the check
   round. The bare `/check-forge` after the move: nine findings, all
   settled the same day (argument-hints quoted after the CRLF parse
-  defect, eight small alignments, readme recipe 0.39). The README
-  render is stale (CLAUDE.md changed again), regenerated at the next
-  `/release`.
+  defect, eight small alignments, readme recipe 0.39).
 - **Harness critique settled (2026-09-06):** FND.0270 by POS.1120,
   FND.0250 and FND.0280 fixed, FND.0260 by POS.1130. The other six
   were fixed 2026-09-05 (intent 3.30, POS.1090).
@@ -168,8 +168,8 @@ intent version for accepted, DEC.NNNN for rejected. -->
   aligned. First real `/release forge` run the same evening: ten
   check-forge findings settled (intent 3.34), `critique essence`
   declined, README and release notes rendered from the settled
-  sources. Until the light check exists (THR.0290), `/save` runs no
-  check — accepted knowingly.
+  sources. Until the light check arrived at 3.44 (POS.1140), `/save`
+  ran no check — accepted knowingly.
 - **Release notes reshaped and the history migrated (2026-09-05,
   intent 3.35):** THR.0310 closed by walkthrough after the research
   `2026-09-05-good-release-notes.md` — one section per release in six
@@ -193,8 +193,7 @@ intent version for accepted, DEC.NNNN for rejected. -->
   line rewritten a second time (third marker row), recipe 0.9, the
   notes re-rendered again. Then his suggestion, decided at 3.38:
   at a major the minors fold into its section and their sections
-  disappear (POS.0730, recipe 0.10); first applies at 4.0, no render. The README render is stale
-  (CLAUDE.md changed), regenerated at the next `/release`. The
+  disappear (POS.0730, recipe 0.10); first applies at 4.0, no render. The
   release-notes recipes of agentic-platform and flow-ba keep the old
   shape until their next `/recipe release-notes`.
 - **Priorities of the open threads (principal's order, 2026-09-04
@@ -208,9 +207,8 @@ intent version for accepted, DEC.NNNN for rejected. -->
   3. ~~THR.0270~~ closed at 3.40 (POS.1120) after its trial run
      2026-09-06; the operating layer built at 3.41; the critic's real
      run done at 3.42; THR.0330 (all commands to skills) done at
-     3.43. Next, in the principal's order of 2026-09-06: THR.0290 —
-     check on the reviewer mechanism with its kinds (`project`,
-     `engine`, `light` proposed), then `/challenge cto` on the new
+     3.43; the checks built at 3.44 (POS.1140). Next, in the
+     principal's order of 2026-09-06: `/challenge cto` on the new
      contract, then the settlement of that challenge and release 4.0.
      THR.0240 (the size of CLAUDE.md, the reviewer's context measured
      2026-09-06) after that.
@@ -237,10 +235,15 @@ intent version for accepted, DEC.NNNN for rejected. -->
   knowingly, once. GitHub may still hold the objects of b717a67 in its
   cache; only GitHub support can purge them, if the principal wants
   certainty.
-- THR.0290 check as a third kind of reviewer (fixed 2026-09-06), and
-  research alike — opened 2026-09-04; kinds and the fate of
-  /check-forge open; the save/release question answered at 3.33 (full
-  check at `/release`, light check at `/save` once it exists)
+- THR.0290 what `/research` gains from kinds — the residue of the
+  thread after the checks became POS.1140 (3.44); deferred
+  2026-09-06 until a second way of researching appears
+- **Checks built (2026-09-06, intent 3.44, POS.1140):** contract
+  `checker`, agents `check-project`, `check-light`, `check-engine`,
+  `check-single-source-of-truth`, `/check` a dispatcher, `/check-forge`
+  gone, `/save` and `/release` composing their checks. First real run
+  of a check on its contract: see the item on the reviewers' first
+  runs. Staleness of the README: the Renders table.
 - THR.0300 a user's private layer of local agents — opened 2026-09-04,
   no priority
 - Migration to the history companion (POS.0310): the engine and the
@@ -297,7 +300,7 @@ intent version for accepted, DEC.NNNN for rejected. -->
   tag on request, `v<major>` mandatory at every release of an
   approved major; the next such tag goes through `/save -Tag` or
   `/release -Tag`.
-- THR.0210 the guard rail for the public boundary — `projects/forge` never carries the content of a subject project; parked 2026-09-03 by the principal, proposed solution recorded in the thread (a check item in `/check-forge` plus one sentence in both reviewer skeletons); taken up when the boundary is next at stake
+- THR.0210 the guard rail for the public boundary — `projects/forge` never carries the content of a subject project; parked 2026-09-03 by the principal, proposed solution recorded in the thread (a check of its own, POS.1140, plus one sentence in both reviewer contracts); taken up when the boundary is next at stake
 - THR.0180 the output language — left as is; more than one output language solved when a project needs it
 - THR.0190 a plugin as a later distribution layer — no preparation
   now; taken up when forge-pull proves an insufficient upgrade channel

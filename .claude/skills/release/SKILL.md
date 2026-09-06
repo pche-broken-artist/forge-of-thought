@@ -20,11 +20,14 @@ never a sweep.
    get back (`./scripts/forge-branch.ps1 <slug> main`, after saving).
    Merging a branch into `main` is git's business, by hand or by
    merge request, never this command's (POS.1110).
-2. Run the full check over the sources and report the result to the
-   principal — always, even when clean. The engine (core or
-   `projects/forge/` touched): the `/check-forge` procedure
-   (`.claude/skills/check-forge/SKILL.md`). A project: `/check <slug>`
-   (`.claude/skills/check/SKILL.md`). Clean: state that the check passed.
+2. Run the checks over the sources through the `/check` procedure
+   (`.claude/skills/check/SKILL.md`) and report the result to the
+   principal — always, even when clean. A project: `light` and
+   `project`. The engine: `light`, `engine` and `project`, the two
+   project checks on `projects/forge`. Launched at once, awaited
+   together; `single-source-of-truth` never runs here on its own —
+   it is the principal's call, before a major or after a round on
+   the operating layer. Clean: state that the checks passed.
    Findings: settle them by walkthrough (CLAUDE.md, Working methods);
    a finding may be accepted as a deferral, recorded in the affected
    project's ledger under "Waiting on principal", and the release

@@ -12,7 +12,7 @@ A lens file carries its front-matter and its Lens section, nothing
 else: the behaviour shared by every lens — subject, way of working,
 report shape, ledger step — is the contract skill
 .claude/skills/critic/SKILL.md, preloaded through the skills field
-above and never restated here (POS.0410, POS.1120). /check-forge
+above and never restated here (POS.0410, POS.1120). /check engine
 verifies that the named skill exists. A new lens is created only by
 the principal's decision, and only where what it reads genuinely
 differs from the existing lenses. Delete this comment in the lens

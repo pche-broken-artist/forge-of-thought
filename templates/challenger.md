@@ -14,7 +14,7 @@ by every persona — subject, way of working, shape and severity of a
 challenge, report, ledger step — is the contract skill
 .claude/skills/challenger/SKILL.md, preloaded through the skills
 field above and never restated here (POS.0420, POS.1120).
-/check-forge verifies that the named skill exists. A new persona is
+/check engine verifies that the named skill exists. A new persona is
 created only by the principal's decision, and only where its blind
 spots genuinely differ from the existing ones. Delete this comment in
 the persona file. -->

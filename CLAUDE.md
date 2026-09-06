@@ -419,11 +419,11 @@ platform genuinely differs, external tools (`git`, `markitdown`,
 `claude`) resolved from PATH, usage examples in the scripts' help
 free of Windows-specific paths and invocations.
 
-Two doors, two speeds. `/save` commits and pushes on whatever branch
-is checked out, no check and no render (a light check fit for a save
-is added once the kinds of check exist, THR.0290). `/release`, from
-`main` only, checks, re-renders the README and release notes and
-then saves with the release message and tag; the procedure is
+Two doors, two speeds. `/save` runs the `light` check and then
+commits and pushes on whatever branch is checked out, no render.
+`/release`, from `main` only, runs the `light` and `project` checks
+(the engine: `engine` too), re-renders the README and release notes
+and then saves with the release message and tag; the procedure is
 `.claude/skills/release/SKILL.md`. Saves made directly from the shell
 are unaffected.
 
@@ -512,23 +512,27 @@ All run as isolated subagents seeing the project's documents only, never the wor
 conversation, on the session model (`model: inherit` — the whole forge
 runs on one model; speed is bought with context, never with a weaker
 reviewer). One shape, strictly separate jobs, each with its own
-output: the critic
-produces `FND` in `reviews/`, the challenger `CHL` in `challenges/`;
-both are invoked by hand, both reports are immutable and dated, both
-are settled by walkthrough; neither runs at a save, and `/release`
-offers `critique essence` once and runs no reviewer on its own. The
-challenger has personas, the critic has
-lenses: one agent file each (`challenger-<persona>`, `critic-<lens>`),
-the shared behaviour of each kind preloaded from one contract skill
-(`.claude/skills/challenger/SKILL.md`, `.claude/skills/critic/SKILL.md`,
+output: the critic produces `FND` in `reviews/`, the challenger `CHL`
+in `challenges/`, the check a report to the session and no file. All
+are invoked by hand and settled by walkthrough; the critic's and the
+challenger's reports are immutable and dated. No reviewer runs on
+Claude's own judgement: `/save` runs the `light` check, `/release`
+the checks it composes and offers `critique essence` once. The
+challenger has personas, the critic has lenses, the check has checks:
+one agent file each (`challenger-<persona>`, `critic-<lens>`,
+`check-<name>`), the shared behaviour of each kind preloaded from one
+contract skill (`.claude/skills/challenger/SKILL.md`,
+`.claude/skills/critic/SKILL.md`, `.claude/skills/checker/SKILL.md`,
 named in the agent's front-matter; the skeleton of a lens file is
-`templates/challenger.md`, `templates/critic.md`), only the Lens
-section its own; new personas and lenses only by the principal's
-decision, and only where their blind spots genuinely differ. Bare
-`/challenge` and bare `/critique` list the roster and recommend a fit.
-Both take an optional target, an artefact named as `/forge` names it
-(`brief`, `brief-<name>`, `intent`, `assignment`, later layers); without
-one, the whole chain.
+`templates/challenger.md`, `templates/critic.md`,
+`templates/check.md`), only the Lens section its own; new personas,
+lenses and checks only by the principal's decision, and only where
+what they find genuinely differs. Bare `/challenge`, `/critique` and
+`/check` list the roster and recommend a fit. The critic and the
+challenger take an optional target, an artefact named as `/forge`
+names it (`brief`, `brief-<name>`, `intent`, `assignment`, later
+layers); without one, the whole chain. A check takes a project by its
+slug, or the engine.
 - **critic** (`/critique <lens> [artefact]`) — document quality.
   `clarity` reads each artefact on its own (a target: that artefact): ambiguity, internal contradiction,
   duplication, scope hygiene, Requirement style, the advisory
@@ -557,6 +561,20 @@ one, the whole chain.
   (`YYYY-MM-DD-challenge-<persona>.md`). Challenge states: `open |
   accepted | rejected (→ DEC) | parked | obsolete`. An accepted
   challenge must change the intent.
+- **checks** (`/check <check> [slug]`) — mechanical conformance with
+  the conventions, never substance or quality. Each check owns one
+  concern and none another's: `project` (structure, IDs, style,
+  language, immutables, recipes and renders), `light` (bookkeeping:
+  front-matter against the companion, ledger against the files,
+  dependencies, resource indexes — fit for a save), `engine` (the
+  core against itself and the forge intent), `single-source-of-truth`
+  (the whole operating layer for restatements — the honest, expensive
+  sweep, on the principal's word only). Read-only, findings only,
+  each with `file:line`, the rule's owner and one fix, ranked;
+  nothing filed, no IDs: the report returns to the session and is
+  settled there — fix, defer (ledger, "Waiting on principal") or
+  accept. Composition is the caller's: `/save` runs `light`,
+  `/release` runs `light` and `project`, for the engine `engine` too.
 
 ## Spin-off rule
 A requirement group becomes its own project **only by explicit decision of
@@ -595,8 +613,7 @@ after every operation.
 | `/challenge [persona] [artefact] [slug]` | bare = challenger persona roster; with a persona (e.g. `cto`), run that challenger against the substance of the named artefact, else the whole chain |
 | `/research <topic> [slug]` | best-practices research → research/, indexed |
 | `/ledger [slug]` | state report from ledger |
-| `/check [slug]` | conformance of project(s) against current conventions; all but forge when bare |
-| `/check-forge` | consistency check of the core + projects/forge |
+| `/check [check] [slug]` | bare = check roster; with a check (`light`, `project`, `engine`, `single-source-of-truth`), run it on the named project or on the engine — report to the session, settled by walkthrough, nothing filed |
 | `/save [slug] [-m "message"] [-Tag name]` | commit & push on the current branch — no check, no renders; a tag on request |
 | `/release [slug] [-m "message"] [-Tag name]` | from `main` only: check, README and release notes re-rendered, then `/save` with the release message and the tag `v<major>` at an approved major; asks for the repository when no slug is given |
 | `/spinoff <project> <group> <slug>` | split a group into its own project |
