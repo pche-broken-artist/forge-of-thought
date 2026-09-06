@@ -2,9 +2,9 @@
 project: forge
 purpose: readme
 audience: humans arriving at the repository
-version: 0.37
-updated: 2026-09-05
-last_change: 0.37 (2026-09-05): Saving and syncing recast to the two doors — /save commits and pushes, /release checks, renders and saves from main (POS.1100, POS.1110); /release joins the prose paragraph under the Commands table.
+version: 0.38
+updated: 2026-09-06
+last_change: 0.38 (2026-09-06): the reviewers no longer counted — "isolated reviewers", "blind adversarial reviewers" — so the render does not age with a further kind (POS.0540, FND.0290).
 output: /README.md
 ---
 
@@ -108,8 +108,8 @@ summarising the newest row. -->
   six bullets, no philosophy (that is the masthead's job): a
   versioned document chain growing from a brief — your own text,
   locked verbatim once it is done — to a self-contained assignment; an elicitation interview that
-  forges the intent; two kinds of blind adversarial reviewers, every
-  verdict recorded; audience-specific renders generated from
+  forges the intent; blind adversarial reviewers, every verdict
+  recorded; audience-specific renders generated from
   recipes, including an actual PowerPoint file through the user's
   own template; external sources registered immutably and used only
   as the principal directs; everything in files and git — nothing
@@ -438,7 +438,7 @@ it first>
 conversation with the forge; the intent is forged from it through
 interviews, iterated over days and sessions, everything living in
 files; sources are registered as they arrive and used only when the
-principal directs, /research grounds key topics; two blind reviewers
+principal directs, /research grounds key topics; blind reviewers
 press on the thinking and the documents, nothing blocks; the
 assignment is distilled for the recipients; renders as a first-class
 idea: recipes iterated (optionally through a genre interview),
@@ -472,7 +472,7 @@ each; feedback rule; the render-never-hand-edited callout followed by
 the two renders paragraphs: "Renders and recipes", "From Markdown to
 slides">
 
-## 8. Two isolated reviewers
+## 8. Isolated reviewers
 <punchy three-paragraph opening per the instruction; then /challenge
 subsection; /critique subsection with finding states as a list>
 

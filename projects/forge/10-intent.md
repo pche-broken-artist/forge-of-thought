@@ -1,8 +1,8 @@
 ---
-version: 3.41
+version: 3.42
 date: 2026-09-06
 status: draft
-last_change: 3.41 (2026-09-06): operating layer of POS.1120 built — two contract skills, three reviewer files reduced to Lens, templates to the lens-file skeleton, check-forge, CLAUDE.md and both dispatchers aligned; harness findings walked through — FND.0270 resolved by the build, FND.0250 (the cto persona a CTO in its own right) and FND.0280 (the language clause out of thirteen commands) fixed, FND.0260 decided as THR.0330 (all commands migrate to skills, own round after the reviewers are tried).
+last_change: 3.42 (2026-09-06): clarity critique of 3.41 walked through, all six findings fixed — the reviewers no longer counted and check placed on their mechanism without deciding whether it is a review (POS.0540, POS.1120, THR.0290, the Essence, CLAUDE.md heading, readme recipe 0.38); POS.1100 the one owner of the save/release split; "skeleton" kept for the template, "contract" for the shared behaviour; POS.0840 the one owner of the resource index.
 project: forge
 audience: principal + Claude only
 ---
@@ -29,9 +29,9 @@ not assignment.
 
 The engine runs in Claude Code. Claude acts as the principal's cognitive
 extension: it owns structure, order and process discipline, while every
-decision about content remains the principal's. Two isolated AI
+decision about content remains the principal's. Isolated AI
 reviewers, deliberately blind to the working conversation, provide
-adversarial pressure from two different angles.
+adversarial pressure from different angles.
 
 The design constraint that shapes almost everything: an assignment must
 carry the complete in-scope substance of the intent, written as well and
@@ -223,8 +223,7 @@ position that already stands elsewhere.
 - **POS.0160** Supporting documents (the kinds: POS.1080): `decisions.md` (append-only, DEC),
   `ledger.md` (single source of truth for state, freely rewritten),
   `reviews/`, `challenges/`, `research/` (all immutable, dated); the
-  `00-INDEX.md` catalogues of `sources/` and `research/` are freely
-  rewritten like the ledger (POS.0840).
+  resource indexes are POS.0840's.
 - **POS.0170** Feedback from recipients has no channel of its own. The
   principal processes it and feeds conclusions back through
   `/forge intent`.
@@ -265,14 +264,10 @@ position that already stands elsewhere.
   separate fates, a file may be split out to its own ledger row — the
   ledger is freely rewritten. Isolated files stay directly in
   `sources/` as before. Every bundle carries a `00-INDEX.md`
-  catalogue: a YAML header (bundle, project, date, origin), one
-  paragraph saying what the whole is and why it entered sources, and
-  one entry per file in the shape of the directory index (POS.0840) —
-  origin dates best effort, never asked for. `/ingest` creates the index at registration
-  when the bundle lacks one and validates a supplied one against the
-  contents. The index is purely descriptive; unlike the files it
-  catalogues it is a rewritten catalogue, not an immutable document
-  (POS.0840). Text extracts are produced by
+  catalogue in the shape POS.0840 owns; `/ingest` creates it at
+  registration when the bundle lacks one and validates a supplied one
+  against the contents, origin dates best effort, never asked for.
+  Text extracts are produced by
   `scripts/doc2md.ps1` (engine: markitdown, installed separately),
   never by ad-hoc parsing — no Python PDF reading, no manual
   transcription. `/ingest` runs the script file by file on every
@@ -301,12 +296,12 @@ position that already stands elsewhere.
   its own `00-INDEX.md` inside and appears in the top index as one
   entry pointing into it: two levels, never deeper, and the top index
   never repeats the bundle's contents. The bundle index is the same
-  catalogue one level down and has the same shape — one entry per
-  file with What / Origin / Role / Use for; `templates/index-bundle.md`
-  is the full skeleton `/ingest` creates the file from — the bundle's
-  header and opening paragraph its own, the entry carried verbatim
-  from `templates/index.md`, as a reviewer agent carries its
-  skeleton's fixed sections. One shape for
+  catalogue one level down: a YAML header (bundle, project, date,
+  origin), one paragraph saying what the whole is and why it entered
+  sources, and one entry per file in the same fields;
+  `templates/index-bundle.md` is the full skeleton `/ingest` creates
+  the file from, its entry carried verbatim from
+  `templates/index.md`. One shape for
   every index, decided 2026-09-04 when the two bundle indexes in the
   field turned out to be a table and a prose catalogue of a third
   shape: Role and Use for are what an index is for, and a table does
@@ -435,8 +430,8 @@ position that already stands elsewhere.
   `/release` that regenerated renders reports in its summary
   what materially changed in them, so the principal rules on the
   delta before the release commit without reading a full diff. A render is
-  regenerated only by `/release` or by the principal's explicit
-  `/render`; Claude never regenerates on its own judgement — it
+  regenerated only by `/release` (POS.1100) or by the principal's
+  explicit `/render`; Claude never regenerates on its own judgement — it
   reports staleness and offers (principal's direction 2026-08-30,
   after Claude re-ran renders unasked). Only the README and the
   release notes have a freshness rule — the next `/release` regenerates
@@ -453,7 +448,7 @@ position that already stands elsewhere.
   repository — with the one-line way to initialise it — as a fact, never
   as a defect (POS.0940). "Chain" was considered as a kind name and
   dropped: nothing could be pictured under it.
-- **POS.0970** A library is a project of kind `library`: no chain: a
+- **POS.0970** A library is a project of kind `library` — no chain: a
   ledger, `sources/` and `research/` with their indexes,
   `recipes/readme.md` and the README it renders (POS.1000) — a
   collection of documents used across projects, prefix `lib-`, its own
@@ -471,6 +466,7 @@ position that already stands elsewhere.
   unguarded pin, and a check is added when it hurts. The library is not
   a condition of publication: the intention is decided, the
   implementation comes with the first library.
+
 ### Structure and style of an assignment
 - **POS.0200** Structured items with stable IDs beat prose, even at very
   high abstraction. Narrative is confined to Purpose & Context and
@@ -626,7 +622,7 @@ position that already stands elsewhere.
   principal, made per project and never assumed.
 
 ### Review
-- **POS.0400** Two isolated kinds of review of one shape: the critic
+- **POS.0400** Isolated kinds of review of one shape: the critic
   (document quality, findings FND) and the challenger (substance of the
   thinking, challenges CHL). Both run as isolated subagents on the
   session model that never see the working conversation — that blindness
@@ -674,7 +670,7 @@ position that already stands elsewhere.
   find. The target may be any artefact of the chain, the whole chain
   when none is named — each challenge then names the artefact it
   concerns: the challenger reads the whole chain for context and
-  challenges the substance of the target. The shared skeleton is
+  challenges the substance of the target. The contract is
   invariant whatever the persona: no stake in the principal being right;
   unstated assumptions, whether the stated objective is the real
   problem, second-order effects, organisational reality, failure modes,
@@ -684,8 +680,8 @@ position that already stands elsewhere.
   "what would change my mind" and an epistemic status (consensus |
   active debate | emerging practice | my judgement); no fabrication — a
   precise "I don't know" beats an invented figure, and anything
-  reconstructed from memory is flagged. The shared skeleton has one
-  owner, the contract skill `challenger` (POS.1120): every persona file
+  reconstructed from memory is flagged. The contract has one
+  owner, the skill `challenger` (POS.1120): every persona file
   names it in its front-matter and writes only its own Lens — who it is
   to the principal and which blind spots it exists to find — and
   `/check-forge` verifies that the skill it names exists (POS.1070).
@@ -699,8 +695,8 @@ position that already stands elsewhere.
   the CHL sequence stays global per project.
 - **POS.1120** The shared behaviour of a kind of reviewer is a contract
   skill, preloaded — never a copy. Each kind of reviewer — the critic,
-  the challenger, and check as the third kind at the same level
-  (THR.0290), every further kind as it comes — owns one skill
+  the challenger, check on the same mechanism (POS.0540), and
+  whatever kind of reviewer comes after — owns one skill
   `.claude/skills/<kind>/SKILL.md` (`critic`, `challenger`, `check`),
   and every lens or persona file of that kind names it in its
   front-matter (`skills:`), so that Claude Code injects the whole skill
@@ -709,8 +705,8 @@ position that already stands elsewhere.
   shared texts of the kinds differ almost whole (subject, way of
   working, output); the few sentences common to every kind —
   isolation, no fabrication, sharp and few, the ledger — may become one
-  further skill later, an agent naming more than one, decided when a
-  third kind exists. The skill is written as a contract addressed to
+  further skill later, an agent naming more than one, decided when
+  the `check` contract is built. The skill is written as a contract addressed to
   every lens of its kind, not as a template with placeholders: it opens
   by saying what the contract owns (conduct, subject, way of working,
   the report shape, the ledger step) and what the lens file owns (what
@@ -813,14 +809,19 @@ position that already stands elsewhere.
 - **POS.0530** This work is reasoning-heavy and token-light, so the
   strongest available model tier is the default — the session model,
   chosen once, with no per-agent pins (POS.0930).
-- **POS.0540** Mechanical conformance has its own guard, distinct from
-  the two reviewers: `/check-forge` cross-checks the core and
+- **POS.0540** Mechanical conformance runs on the same mechanism as
+  the critic and the challenger (POS.1120): its own contract skill,
+  one agent per kind of check, a roster, a run by hand. Whether it is
+  called a review is not decided and does not matter to the
+  mechanism, which takes further kinds as they come. Until the kinds
+  of check exist (THR.0290), `/check-forge` cross-checks the core and
   `projects/forge/` for consistency with each other, and `/check`
   verifies a project against the current conventions — every project
-  except forge when run without an argument. Both are read-only and
-  advisory: they report and propose, the principal decides what is
-  fixed. They check conformance, never substance or document quality —
-  that remains the reviewers' territory.
+  except forge when run without an argument — as one long command
+  each. Read-only and advisory in either shape: they report and
+  propose, the principal decides what is fixed. They check
+  conformance, never substance or document quality — that remains the
+  critic's and the challenger's territory.
 - **POS.0550** The engine is persisted in git with a remote of its own,
   `main` the released line, branches allowed and left to git
   (POS.1110); every user project is likewise
@@ -858,20 +859,19 @@ position that already stands elsewhere.
   release commit: fixed, or explicitly accepted; deferred findings are
   recorded in the ledger under "Waiting on principal". The recommended
   procedure, never a gate: nothing blocks (POS.0430). `/release` then
-  re-renders `README.md` and `RELEASE-NOTES.md`
-  from their recipes — unconditionally, with no staleness test — and
-  reports the steps. The renders come after the check and its
+  renders what POS.1100 names, unconditionally, with no staleness
+  test. The renders come after the check and its
   walkthrough, not before: a render made from the settled sources is
   current by construction, whereas one made before it went stale
   whenever a finding bumped the intent (the order of 1.22, render
   before check, had let `/check-forge` verify the render; reversed
   2026-09-05 at the principal's direction, after the saves of
   2026-09-04 and 2026-09-05 had both fallen into that trap).
-  `/save` runs no check at all: the full check cost four to five
+  `/save` runs no check (POS.1100): the full check cost four to five
   minutes and a walkthrough at every save, and a light check fit for
-  a save — ledger bookkeeping, version and status agreement, the
-  companion row — is a kind of check, born with the kinds of THR.0290
-  and added to `/save` then, not built twice on today's mechanism.
+  a save is a kind of check, born with the kinds of THR.0290 — its
+  content named there — and added to `/save` then, not built twice on
+  today's mechanism.
   Until then broken bookkeeping may lie in git between releases and
   is caught at the release, knowingly (principal's decision
   2026-09-05).
@@ -1096,10 +1096,8 @@ position that already stands elsewhere.
   The same lever carries the conformance checks: `/check` and
   `/check-forge` execute their own definition in an isolated subagent
   that sees only the files, returning the report for the walkthrough
-  in the session, and `/release` launches a repository's README and
-  release-notes renders in parallel — the only renders any command
-  runs; every other render is the principal's explicit `/render`, and
-  `/save` runs none; the working conversation is
+  in the session, and `/release` launches its renders in parallel
+  (which command renders what is POS.1100's); the working conversation is
   spent on verdicts, not on reading (2026-09-02, at the principal's
   prompt — a save had grown to five minutes).
   Closes THR.0160 (opened 2.10, 2026-08-25).
@@ -1379,6 +1377,7 @@ position that already stands elsewhere.
   which reports and commits nothing (POS.0950). Work then starts by
   selecting the project — `/forge <slug>` — because the engine does
   not track it and cannot guess it.
+
 ## Open threads
 
 - **THR.0090** Multi-principal use. Current working assumption: a second
@@ -1564,22 +1563,21 @@ position that already stands elsewhere.
   of the chain; whether an end-to-end distillation is a further thing or
   the same lens run brief-to-last-layer is open. The expander has a name
   only. Parked until more detail arrives.
-- **THR.0290** Check as a third kind of reviewer. `/check` today is
+- **THR.0290** Check on the reviewer mechanism. `/check` today is
   one long command
   with eight numbered checks; the principal's idea of 2026-09-04,
   after the migration checks of three projects: put `/check` — and
-  `/research` alike — on the reviewer mechanism of POS.0400. Fixed
-  2026-09-06 by the principal's word: check is a kind of reviewer at
-  the level of the critic and the challenger, not a lens of the
-  critic — its own contract skill `check` (POS.1120), one agent per
-  kind of check (`check-<name>`), bare `/check` listing the roster and
+  `/research` alike — on the reviewer mechanism of POS.0400. That it
+  goes there, with a contract skill `check` and one agent per kind of
+  check (`check-<name>`), bare `/check` listing the roster and
   recommending a fit, a named check run by hand exactly as
-  `/critique clarity` is.
-  Then a new check is one file, written when the need appears, and
-  which checks run at a save or a release is the same question as
-  for the reviewers (THR.0220). Open: what the kinds are (conformance
+  `/critique clarity` is, is decided (POS.0540, POS.1120).
+  Then a new check is one file, written when the need appears. Open:
+  what the kinds are (conformance
   of a project, consistency of the engine, staleness, the public
-  boundary of THR.0210 …), what `/research` gains from kinds, and
+  boundary of THR.0210 …), the word for a check's variants — lens,
+  persona, or a word of its own — decided with the kinds, what
+  `/research` gains from kinds, and
   whether `/check-forge` survives as a kind or as a target. Opened
   2026-09-04. First trial 2026-09-05: an external agent as a lens —
   plugin-dev's `skill-reviewer` (marketplace `claude-plugins-official`)
@@ -1593,13 +1591,12 @@ position that already stands elsewhere.
   POS.1090 with words instead of positional arguments in the state
   files, FND.0220, FND.0230, FND.0240 the prompt and argument gaps);
   FND.0250–0280 left for the round that builds the operating layer of
-  POS.1120 and THR.0240, where its layout is decided once. Since 3.33 the
-  thread owes two kinds to POS.1100: a full check with sub-checks,
-  which `/release` runs, and a light check for `/save` (ledger
-  bookkeeping, version and status agreement, the companion row),
-  which `/save` runs without until it exists; the question "which
-  checks run at a save or a release" is thereby answered for the
-  reviewers and the first two kinds. Order fixed the same day: the
+  POS.1120 and THR.0240, where its layout is decided once. Which
+  checks run at a save or a release is answered since 3.33
+  (POS.1100), and the thread owes it two kinds: a full check with
+  sub-checks, which `/release` runs, and a light check for `/save`
+  (ledger bookkeeping, version and status agreement, the companion
+  row), which `/save` runs without until it exists. Order fixed the same day: the
   THR.0270 trial first, then the kinds, so that no kind is built on a
   skeleton about to change — the trial done 2026-09-06 (POS.1120), so
   the kinds are next, built on the contract skill from the start.
@@ -1644,7 +1641,7 @@ position that already stands elsewhere.
   is POS.1120's and THR.0240's question. Opened 2026-09-05.
 - **THR.0330** Migration of the whole command set to the skills
   layout. Decided 2026-09-06 at the walkthrough of FND.0260: every
-  file of `.claude/commands/` — the fifteen commands, the state files
+  file of `.claude/commands/` — every command, the state files
   of `/forge`, the genre files of `/recipe` — moves to
   `.claude/skills/<name>/SKILL.md`, all in one round and none before
   it; the round runs after the critic and the challenger have been

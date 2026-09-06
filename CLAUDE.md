@@ -507,11 +507,12 @@ lifecycle. Depth max two levels.
 - An item must not depend on an external link to be understood, agreed or
   later tested.
 
-## Two isolated reviewers
-Both run as isolated subagents seeing artefacts only, never the working
+## Isolated reviewers
+All run as isolated subagents seeing artefacts only, never the working
 conversation, on the session model (`model: inherit` — the whole forge
 runs on one model; speed is bought with context, never with a weaker
-reviewer). One shape, two outputs, strictly separate jobs: the critic
+reviewer). One shape, strictly separate jobs, each with its own
+output: the critic
 produces `FND` in `reviews/`, the challenger `CHL` in `challenges/`;
 both are invoked by hand, both reports are immutable and dated, both
 are settled by walkthrough; neither runs at a save, and `/release`

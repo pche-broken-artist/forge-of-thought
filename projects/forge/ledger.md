@@ -26,7 +26,7 @@ absorbed it; Note says what remains (partial) or the REJ (dropped). -->
 ## Documents
 | File | Version | Status | Date |
 |---|---|---|---|
-| 10-intent.md | 3.41 | draft | 2026-09-06 |
+| 10-intent.md | 3.42 | draft | 2026-09-06 |
 | 20-assignment.md | — | not planned: the handover artefacts of this project are the core itself (CLAUDE.md, templates/, .claude/) and README.md | — |
 | decisions.md | — | 9 records (DEC.0010–0090) | 2026-09-03 |
 
@@ -36,7 +36,7 @@ hand-edited: iterate the recipe, re-run /render. Row mirrors the
 render's front-matter provenance. -->
 | Render | Audience | Recipe | Inputs | Generated |
 |---|---|---|---|---|
-| README.md (repo root) | humans arriving at the repository | recipes/readme.md v0.37 | CLAUDE.md, 10-intent.md v3.39 | 2026-09-06 |
+| README.md (repo root) | humans arriving at the repository | recipes/readme.md v0.37 (recipe now 0.38, render stale) | CLAUDE.md, 10-intent.md v3.39 | 2026-09-06 |
 | RELEASE-NOTES.md (repo root) | the user of the engine who takes upgrades through forge-pull | recipes/release-notes.md v0.10 | 10-intent.history.md, 10-intent.md v3.39, decisions.md, previous edition (released sections) | 2026-09-06 |
 | renders/executive-pitch.md | C-level executives whose experience of AI is chatting with it | recipes/executive-pitch.md v0.1 | 10-intent.md, CLAUDE.md | — (not yet rendered) |
 
@@ -83,15 +83,15 @@ version for resolved, DEC.NNNN for overruled. -->
 | FND.0070 | low | divergence | resolved | 2026-08-27-critique.md | README re-rendered at intent 2.13 (2026-08-27, recipe 0.18) — regression belongs to the essence lens |
 | FND.0080 | low | inconsistency | resolved | 2026-08-27-critique.md | ledger comments + templates/ledger.md (intent 2.13) (verified 2026-09-03, clarity) |
 | FND.0090 | medium | contradiction | overruled | 2026-09-03-critique-clarity.md | DEC.0090; its condition (THR.0220 changing POS.0550) fell at 3.33 with POS.1110 — the contradiction dissolved with it, nothing returns |
-| FND.0100 | medium | contradiction | resolved | 2026-09-03-critique-clarity.md | intent 3.17 |
-| FND.0110 | medium | gap | resolved | 2026-09-03-critique-clarity.md | intent 3.17 |
-| FND.0120 | low | contradiction | resolved | 2026-09-03-critique-clarity.md | intent 3.17 |
-| FND.0130 | low | contradiction | resolved | 2026-09-03-critique-clarity.md | intent 3.17 |
-| FND.0140 | low | ambiguity | resolved | 2026-09-03-critique-clarity.md | intent 3.17 |
-| FND.0150 | low | ambiguity | resolved | 2026-09-03-critique-clarity.md | intent 3.17 |
-| FND.0160 | low | duplication | resolved | 2026-09-03-critique-clarity.md | intent 3.17 |
-| FND.0170 | low | contradiction | resolved | 2026-09-03-critique-clarity.md | ledger rewritten (intent 3.17) |
-| FND.0180 | low | contradiction | resolved | 2026-09-03-critique-clarity.md | intent 3.17 |
+| FND.0100 | medium | contradiction | resolved | 2026-09-03-critique-clarity.md | intent 3.17 (verified 2026-09-06, clarity) |
+| FND.0110 | medium | gap | resolved | 2026-09-03-critique-clarity.md | intent 3.17 (verified 2026-09-06, clarity) |
+| FND.0120 | low | contradiction | resolved | 2026-09-03-critique-clarity.md | intent 3.17 (verified 2026-09-06, clarity) |
+| FND.0130 | low | contradiction | resolved | 2026-09-03-critique-clarity.md | intent 3.17 (verified 2026-09-06, clarity) |
+| FND.0140 | low | ambiguity | resolved | 2026-09-03-critique-clarity.md | intent 3.17 (verified 2026-09-06, clarity) |
+| FND.0150 | low | ambiguity | resolved | 2026-09-03-critique-clarity.md | intent 3.17 (verified 2026-09-06, clarity) |
+| FND.0160 | low | duplication | resolved | 2026-09-03-critique-clarity.md | intent 3.17 (verified 2026-09-06, clarity) |
+| FND.0170 | low | contradiction | resolved | 2026-09-03-critique-clarity.md | ledger rewritten (intent 3.17) (verified 2026-09-06, clarity) |
+| FND.0180 | low | contradiction | resolved | 2026-09-03-critique-clarity.md | intent 3.17 (verified 2026-09-06, clarity) |
 | FND.0190 | high | inconsistency | resolved | 2026-09-05-critique-harness.md | operating layer 2026-09-05 (intent 3.30) |
 | FND.0200 | high | gap | resolved | 2026-09-05-critique-harness.md | operating layer 2026-09-05 (intent 3.30) |
 | FND.0210 | high | gap | resolved | 2026-09-05-critique-harness.md | operating layer 2026-09-05 (intent 3.30) |
@@ -102,6 +102,12 @@ version for resolved, DEC.NNNN for overruled. -->
 | FND.0260 | medium | divergence | open | 2026-09-05-critique-harness.md | decided as THR.0330 (intent 3.41): all commands migrate to skills in one round; resolved when that round is done |
 | FND.0270 | medium | duplication | resolved | 2026-09-05-critique-harness.md | POS.1120, operating layer 2026-09-06 (intent 3.41) |
 | FND.0280 | low | duplication | resolved | 2026-09-05-critique-harness.md | operating layer 2026-09-06 (intent 3.41) — clause deleted from thirteen commands, setup.md keeps its exception |
+| FND.0290 | medium | contradiction | resolved | 2026-09-06-critique-clarity.md | intent 3.42 (POS.0540 rewritten, no counts; CLAUDE.md heading; readme recipe 0.38) |
+| FND.0300 | medium | duplication | resolved | 2026-09-06-critique-clarity.md | intent 3.42 (POS.1100 owns the split) |
+| FND.0310 | low | ambiguity | resolved | 2026-09-06-critique-clarity.md | intent 3.42 (the variants' word left to THR.0290) |
+| FND.0320 | low | contradiction | resolved | 2026-09-06-critique-clarity.md | intent 3.42 |
+| FND.0330 | low | contradiction | resolved | 2026-09-06-critique-clarity.md | intent 3.42 |
+| FND.0340 | low | duplication | resolved | 2026-09-06-critique-clarity.md | intent 3.42 (POS.0840 owns the index) |
 
 ## Challenges
 <!-- State: open | accepted | rejected | parked | obsolete. Resolution:
@@ -123,16 +129,18 @@ intent version for accepted, DEC.NNNN for rejected. -->
 | CHL.0130 | accepted | "Upgrade" is a fast-forward of an untagged branch, so the compatibility tool has nothing to compare against; a new project starts unbacked by default (minor) | 2026-08-29-challenge-cto.md | intent 2.21 (via brief 0.5 — git tag per approved major; "nothing to compare against" obsolete (condition 3 narrowed to /check against current conventions, no engine version in projects)) |
 
 ## Waiting on principal
-- **Operating layer of POS.1120 built (2026-09-06, intent 3.41),
-  first real runs pending:** contract skills, reviewer files, templates,
-  `/check-forge`, CLAUDE.md and both dispatchers done. Next, on the
-  principal's word: one `/critique clarity` and one `/challenge cto`
-  on the new contracts, the agent asked in the task to describe its
-  prompt in one sentence, to confirm the contract's arrival on the
-  live agent. If the running session does not pick up the edited
-  agents, a fresh session does. Trial outputs of 2026-09-06 kept only
-  in the session's scratchpad, nothing filed. The README render is
-  stale (CLAUDE.md changed), regenerated at the next `/release`.
+- **Operating layer of POS.1120 built (2026-09-06, intent 3.41);
+  the critic's first real run done, the challenger's pending:**
+  `/critique clarity intent` on 2026-09-06 confirmed the contract on
+  the live agent (its sections in the first user message after the
+  task; report, regression and ledger by the contract; the running
+  session picked up the edited agent without a restart); its six
+  findings fixed at 3.42. Next, on the principal's word:
+  `/challenge cto` on the new contract, the same one-sentence prompt
+  check in the task. Trial outputs of 2026-09-06 kept only in the
+  session's scratchpad, nothing filed. The README render is stale
+  (CLAUDE.md and readme recipe 0.38 changed), regenerated at the next
+  `/release`.
 - **THR.0330 decided, migration to do:** every command to the skills
   layout in one round, after the two runs above and before the kinds
   of check (THR.0290); FND.0260 stays open until then. One trial of
