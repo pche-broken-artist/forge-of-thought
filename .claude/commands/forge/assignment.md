@@ -33,6 +33,6 @@ Role: drafter. Distil the current `10-intent.md` into `20-assignment.md`
    asks for a substantive change directly in the assignment, propose the
    corresponding intent update in the same step. Wording-only fixes may
    edit the assignment directly.
-6. Finish with a short delta summary in the conversation language (`CLAUDE.local.md`)
+6. Finish with a short delta summary
    and a recommendation whether
    a `/critique <lens>` run would be useful now.

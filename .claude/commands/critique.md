@@ -12,9 +12,10 @@ read genuinely differs.
 
 The rules shared by every lens — isolation, the documents-only remit,
 regression first, calibration, the shape of a finding, the report file
-and the FND ledger entries — live in `templates/critic.md` and are
-carried verbatim by every lens file, whose own part is its Lens
-section; nothing of them is restated here (POS.1070). The critic is
+and the FND ledger entries — live in the contract skill
+`.claude/skills/critic/SKILL.md`, preloaded into every lens file
+through its front-matter, whose own part is its Lens section; nothing
+of them is restated here (POS.1070, POS.1120). The critic is
 the mirror of the challenger (`/challenge`): personas there, lenses
 here, CHL there, FND here, a walkthrough for both. This command only
 chooses the lens, passes the project and verifies the bookkeeping.

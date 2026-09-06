@@ -316,7 +316,8 @@ scripts/                   # forge-save / forge-pull / forge-status
                            # doc2md (document →
                            # Markdown), md2pptx (deck render →
                            # PowerPoint)
-.claude/                   # commands, agents, settings
+.claude/                   # commands, agents, skills (the
+                           # reviewers' contracts), settings
                            # (settings.local.json: the session
                            # model — gitignored)
 templates/                 # canonical skeletons
@@ -517,8 +518,10 @@ are settled by walkthrough; neither runs at a save, and `/release`
 offers `critique essence` once and runs no reviewer on its own. The
 challenger has personas, the critic has
 lenses: one agent file each (`challenger-<persona>`, `critic-<lens>`),
-the shared behaviour carried verbatim from one skeleton
-(`templates/challenger.md`, `templates/critic.md`), only the Lens
+the shared behaviour of each kind preloaded from one contract skill
+(`.claude/skills/challenger/SKILL.md`, `.claude/skills/critic/SKILL.md`,
+named in the agent's front-matter; the skeleton of a lens file is
+`templates/challenger.md`, `templates/critic.md`), only the Lens
 section its own; new personas and lenses only by the principal's
 decision, and only where their blind spots genuinely differ. Bare
 `/challenge` and bare `/critique` list the roster and recommend a fit.
@@ -545,7 +548,7 @@ one, the whole chain.
   modes, the counter-case. A target narrows it to that artefact,
   else the whole chain, each challenge naming the artefact it
   concerns; a layer is best challenged before the next one is first
-  derived from it. The first persona is `cto` (peer-CTO
+  derived from it. The first persona is `cto` (CTO
   register: direct, few and sharp, no flattery). Challenges carry a
   severity (dealbreaker | major | minor) and an epistemic status;
   fabrication is banned — uncertainty is stated, not papered over.

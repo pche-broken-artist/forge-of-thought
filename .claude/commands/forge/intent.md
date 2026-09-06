@@ -18,7 +18,7 @@ to extract what is in his head, including what he has not yet articulated.
    v0.1, with its companion `10-intent.history.md` from
    `templates/history.md`: consolidate the brief into Essence and
    Positions, and derive the initial Open threads.
-3. Interview the principal in the conversation language (`CLAUDE.local.md`).
+3. Interview the principal.
    Rules:
    - One theme at a time; prefer few sharp questions over questionnaires.
    - Before anything else, offer the briefs whose ledger row is

@@ -4,7 +4,7 @@ argument-hint: [project-slug]
 ---
 
 Read the ledger of project $1 (or all projects if none given) and report
-in the conversation language (`CLAUDE.local.md`), compactly:
+compactly:
 
 1. Documents: file, version, status, date.
 2. Sources and research: registered files; unregistered files in

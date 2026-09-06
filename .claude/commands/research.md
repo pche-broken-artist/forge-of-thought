@@ -25,7 +25,7 @@ one — never one combined document.
    when**. Add a registration row to the Research table in `ledger.md`
    (file, date, derived from). The index tracks nothing and is no
    automatic input of any command.
-4. Summarise for the principal in the conversation language (`CLAUDE.local.md`),
+4. Summarise for the principal,
    leading with the recommendation
    and the trade-offs, not a literature review.
 5. If findings suggest changes to intent or assignment, propose them

@@ -13,9 +13,10 @@ noise.
 
 The rules shared by every persona — isolation, the substance-only
 remit, the shape and severity of the challenges, the output file and
-the CHL ledger entries — live in `templates/challenger.md` and are
-carried verbatim by every persona file, whose own part is its Lens
-section; nothing of them is restated here (POS.1070). This command
+the CHL ledger entries — live in the contract skill
+`.claude/skills/challenger/SKILL.md`, preloaded into every persona
+file through its front-matter, whose own part is its Lens section;
+nothing of them is restated here (POS.1070, POS.1120). This command
 only chooses the persona, passes the target and verifies the
 bookkeeping.
 
@@ -42,7 +43,7 @@ not useless.
 When it returns:
 1. Verify the challenge file exists and the ledger Challenges table is
    updated; fix bookkeeping only, never the challenges themselves.
-2. Present it to the principal in the conversation language (`CLAUDE.local.md`): the overall
+2. Present it to the principal: the overall
    read first, then each
    challenge compressed to two or three sentences. Do not editorialise and
    do not defend earlier drafting choices — if you disagree with a

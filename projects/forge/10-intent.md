@@ -1,8 +1,8 @@
 ---
-version: 3.40
+version: 3.41
 date: 2026-09-06
 status: draft
-last_change: 3.40 (2026-09-06): THR.0270 closed after its trial run — the shared behaviour of a kind of reviewer is a contract skill preloaded into its lens and persona files (POS.1120); check fixed as a third kind of reviewer (THR.0290); the reviewer's context measured for THR.0240; operating layer to follow.
+last_change: 3.41 (2026-09-06): operating layer of POS.1120 built — two contract skills, three reviewer files reduced to Lens, templates to the lens-file skeleton, check-forge, CLAUDE.md and both dispatchers aligned; harness findings walked through — FND.0270 resolved by the build, FND.0250 (the cto persona a CTO in its own right) and FND.0280 (the language clause out of thirteen commands) fixed, FND.0260 decided as THR.0330 (all commands migrate to skills, own round after the reviewers are tried).
 project: forge
 audience: principal + Claude only
 ---
@@ -689,7 +689,7 @@ position that already stands elsewhere.
   names it in its front-matter and writes only its own Lens — who it is
   to the principal and which blind spots it exists to find — and
   `/check-forge` verifies that the skill it names exists (POS.1070).
-  The first persona is `cto` (peer-CTO register);
+  The first persona is `cto` (CTO register);
   further personas — a strategist, a business analyst — are created from
   the lens-file skeleton by the principal's decision when first needed, and only
   where their blind spots genuinely differ: personas that would say the
@@ -748,8 +748,14 @@ position that already stands elsewhere.
   from the forge, where one contract skill carries the conduct, output
   classes and evidence rules of every reviewer. What the same trial
   measured about the rest of a reviewer's context belongs to THR.0240.
-  The four open findings of the harness critique (FND.0250–0280) are
-  settled in the round that builds this layer.
+  Built 2026-09-06, the same day: the two contracts, the three agent
+  files reduced to front-matter and Lens (172, 174 and 131 lines to
+  67, 69 and 39), the two templates reduced to the lens-file
+  skeleton, `/check-forge`, CLAUDE.md, `/critique` and `/challenge`
+  aligned; both contracts appeared in the main session's roster at
+  once, as expected. Of the four open findings of the harness critique
+  settled in the same round, FND.0270 is this position, FND.0250 and
+  FND.0280 were fixed with it, FND.0260 became THR.0330.
 - **POS.0430** Nothing blocks. There are no hard quality gates;
   checklists and findings are advisory and the principal alone decides
   what is published.
@@ -1472,8 +1478,8 @@ position that already stands elsewhere.
   content is not: a position, a requirement, a quoted or paraphrased
   sentence, a deliverable's name, a person, an organisation, a host;
   verified by reading, never by a term list, POS.0980), and one
-  sentence under Inputs in `templates/challenger.md` and
-  `templates/critic.md` citing that item, carried into every agent.
+  sentence under Inputs in both contract skills (POS.1120) citing
+  that item, reaching every agent.
   CLAUDE.md deliberately left out: the rule concerns one project, not
   every session, and THR.0240 argues against another sentence in the
   core. A position under the next free POS number records the
@@ -1636,6 +1642,35 @@ position that already stands elsewhere.
   every lens, which the trial skipped. Relation: the first concrete
   kind of THR.0290, and the shape of the operating layer it reviews
   is POS.1120's and THR.0240's question. Opened 2026-09-05.
+- **THR.0330** Migration of the whole command set to the skills
+  layout. Decided 2026-09-06 at the walkthrough of FND.0260: every
+  file of `.claude/commands/` — the fifteen commands, the state files
+  of `/forge`, the genre files of `/recipe` — moves to
+  `.claude/skills/<name>/SKILL.md`, all in one round and none before
+  it; the round runs after the critic and the challenger have been
+  tried on their contracts (POS.1120) and before the kinds of check
+  (THR.0290), so that every further piece of the layer is born where
+  it will live. Grounds: the documentation says custom commands have
+  been merged into skills — a command file and a skill directory of
+  the same name create the same `/name` and work the same way,
+  existing command files keep working, skills are the recommended
+  form — and a skill adds what this layer wants: supporting files
+  without registration (the state and genre files, today registered
+  as `/forge:brief` and guarded by a front-matter field only),
+  `context: fork` with an agent type as a declared isolation for
+  `/check` and `/check-forge` in place of the hand-rolled subagent
+  prompt, named `arguments`. No context gain: a command's body and a
+  skill's alike load only when invoked, so THR.0240 is untouched by
+  it. Risks and their handling: a skill of the same name shadows a
+  command, so a partial migration is excluded; `context: fork` makes
+  the skill body the subagent's task, a different shape from today's
+  isolation — one trial run on `/check` before relying on it, the
+  hand-rolled isolation kept until then; `$ARGUMENTS` and `$1`
+  verified in the same trial. The round rewrites in one step every
+  reference to `.claude/commands/...` — CLAUDE.md (Commands table,
+  layout, the `/forge <state>` row), `forge.md` and `recipe.md` step
+  1, `check-forge.md`, the positions here, the readme recipe where it
+  names the path — under POS.1070; FND.0260 is resolved by it.
 
 Note: the ID THR.0120 was inadvertently used twice — first for the
 readme-recipe thread (opened 1.14, closed 1.16), then for the

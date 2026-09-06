@@ -73,5 +73,4 @@ steps 3–5 below do not apply.
 File names in the chain are numbered (`00-brief.md`, `10-intent.md`,
 `20-assignment.md`) so later layers can be added without renaming.
 
-Conversation in the conversation language (`CLAUDE.local.md`); all files
-in English except 00-brief.md (verbatim).
+All files in English except 00-brief.md (verbatim).

@@ -97,7 +97,7 @@ else. Never silently re-register.
    `extract of <original>` | `binary`);
    what the source is and is for lives in the index alone. In sweep
    mode, also fill index gaps for files already registered. Finish
-   with a short summary in the conversation language (`CLAUDE.local.md`):
+   with a short summary:
    what was stored or registered, with
    what role — and no next step implied; the sources wait for the
    principal.

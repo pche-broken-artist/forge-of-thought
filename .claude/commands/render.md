@@ -57,5 +57,5 @@ other; generating the render is mechanical.
    and `/check` cite it (POS.1070).
 6. Back in the session: verify the file exists and its provenance is
    correct, update the ledger's Renders table to mirror it, and report
-   in the conversation language (`CLAUDE.local.md`) what was rendered
+   what was rendered
    from what.

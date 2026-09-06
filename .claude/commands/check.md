@@ -6,8 +6,7 @@ argument-hint: [project-slug]
 Check project $1 against the current conventions of the core
 (CLAUDE.md, `templates/`). Without an argument, check every project
 under `projects/` **except `forge`**, which has its own `/check-forge`.
-Read-only: report in the conversation language (`CLAUDE.local.md`),
-compactly, per project; propose fixes and
+Read-only: report compactly, per project; propose fixes and
 apply only what the principal approves. Pure ledger bookkeeping may be
 offered as an immediate fix.
 

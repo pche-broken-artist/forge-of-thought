@@ -26,7 +26,7 @@ absorbed it; Note says what remains (partial) or the REJ (dropped). -->
 ## Documents
 | File | Version | Status | Date |
 |---|---|---|---|
-| 10-intent.md | 3.40 | draft | 2026-09-06 |
+| 10-intent.md | 3.41 | draft | 2026-09-06 |
 | 20-assignment.md | — | not planned: the handover artefacts of this project are the core itself (CLAUDE.md, templates/, .claude/) and README.md | — |
 | decisions.md | — | 9 records (DEC.0010–0090) | 2026-09-03 |
 
@@ -98,10 +98,10 @@ version for resolved, DEC.NNNN for overruled. -->
 | FND.0220 | medium | gap | resolved | 2026-09-05-critique-harness.md | operating layer 2026-09-05 (intent 3.30) |
 | FND.0230 | medium | ambiguity | resolved | 2026-09-05-critique-harness.md | operating layer 2026-09-05 (intent 3.30) |
 | FND.0240 | medium | ambiguity | resolved | 2026-09-05-critique-harness.md | operating layer 2026-09-05 (intent 3.30) |
-| FND.0250 | medium | contradiction | open | 2026-09-05-critique-harness.md | — |
-| FND.0260 | medium | divergence | open | 2026-09-05-critique-harness.md | — |
-| FND.0270 | medium | duplication | open | 2026-09-05-critique-harness.md | — |
-| FND.0280 | low | duplication | open | 2026-09-05-critique-harness.md | — |
+| FND.0250 | medium | contradiction | resolved | 2026-09-05-critique-harness.md | operating layer 2026-09-06 (intent 3.41) — the cto persona a CTO in its own right, by the principal's counter-proposal |
+| FND.0260 | medium | divergence | open | 2026-09-05-critique-harness.md | decided as THR.0330 (intent 3.41): all commands migrate to skills in one round; resolved when that round is done |
+| FND.0270 | medium | duplication | resolved | 2026-09-05-critique-harness.md | POS.1120, operating layer 2026-09-06 (intent 3.41) |
+| FND.0280 | low | duplication | resolved | 2026-09-05-critique-harness.md | operating layer 2026-09-06 (intent 3.41) — clause deleted from thirteen commands, setup.md keeps its exception |
 
 ## Challenges
 <!-- State: open | accepted | rejected | parked | obsolete. Resolution:
@@ -123,29 +123,23 @@ intent version for accepted, DEC.NNNN for rejected. -->
 | CHL.0130 | accepted | "Upgrade" is a fast-forward of an untagged branch, so the compatibility tool has nothing to compare against; a new project starts unbacked by default (minor) | 2026-08-29-challenge-cto.md | intent 2.21 (via brief 0.5 — git tag per approved major; "nothing to compare against" obsolete (condition 3 narrowed to /check against current conventions, no engine version in projects)) |
 
 ## Waiting on principal
-- **THR.0270 closed, operating layer to build (2026-09-06, intent
-  3.40):** POS.1120 decided after the trial run — contract skills
-  `.claude/skills/critic/SKILL.md` and `.claude/skills/challenger/SKILL.md`
-  to write (`user-invocable: false`, contract shape: what it owns, what
-  the lens owns, the overlap rule, no placeholder), the three agent
-  files reduced to front-matter with `skills:` and their Lens section,
-  `templates/critic.md` and `templates/challenger.md` shrunk to the
-  lens-file skeleton, `/check-forge` step 2 replaced (named skill
-  exists, no copy comparison), CLAUDE.md "Two isolated reviewers" and
-  the repository layout aligned, `/critique` and `/challenge` read for
-  references to the templates. On the first real run after the build
-  the agent is asked to describe its prompt in one sentence, to confirm
-  the skill's arrival on the live agent. If the running session does
-  not pick up the edited agents, a fresh session does. FND.0250–0280
-  settle in the same round. Trial outputs of 2026-09-06 kept only in
-  the session's scratchpad, nothing filed.
-- **Harness critique, four findings left (2026-09-05):** FND.0250–0280
-  from `reviews/2026-09-05-critique-harness.md` stay open for the
-  round that builds the operating layer of POS.1120 and THR.0240
-  (FND.0260 the skills layout, FND.0270 the
-  shared reviewer text, FND.0250 the instance fact in the cto
-  persona, FND.0280 the language clause in fourteen commands). The
-  other six were fixed 2026-09-05 (intent 3.30, POS.1090).
+- **Operating layer of POS.1120 built (2026-09-06, intent 3.41),
+  first real runs pending:** contract skills, reviewer files, templates,
+  `/check-forge`, CLAUDE.md and both dispatchers done. Next, on the
+  principal's word: one `/critique clarity` and one `/challenge cto`
+  on the new contracts, the agent asked in the task to describe its
+  prompt in one sentence, to confirm the contract's arrival on the
+  live agent. If the running session does not pick up the edited
+  agents, a fresh session does. Trial outputs of 2026-09-06 kept only
+  in the session's scratchpad, nothing filed. The README render is
+  stale (CLAUDE.md changed), regenerated at the next `/release`.
+- **THR.0330 decided, migration to do:** every command to the skills
+  layout in one round, after the two runs above and before the kinds
+  of check (THR.0290); FND.0260 stays open until then. One trial of
+  `context: fork` on `/check` inside that round.
+- **Harness critique settled (2026-09-06):** FND.0270 by POS.1120,
+  FND.0250 and FND.0280 fixed, FND.0260 → THR.0330. The other six
+  were fixed 2026-09-05 (intent 3.30, POS.1090).
 - THR.0320 a `harness` lens — CLAUDE.md and the operating layer
   reviewed through the official plugins (plugin-dev,
   claude-md-management), output the classic critic's; opened
@@ -199,11 +193,13 @@ intent version for accepted, DEC.NNNN for rejected. -->
      `2026-09-05-good-release-notes.md`, operating layer and history
      migrated the same evening (item below).
   3. ~~THR.0270~~ closed at 3.40 (POS.1120) after its trial run
-     2026-09-06; the operating layer to build (item above). Then
-     THR.0290 + THR.0240: check as a third kind of reviewer with its
-     kinds (full with sub-checks, light for `/save`), built on the
-     contract skill from the start, and the size of CLAUDE.md — the
-     reviewer's context measured 2026-09-06 (THR.0240).
+     2026-09-06; the operating layer built at 3.41. Next: the two
+     real runs on the contracts, then THR.0330 (all commands to
+     skills, one round), then THR.0290 + THR.0240: check as a third
+     kind of reviewer with its kinds (full with sub-checks, light for
+     `/save`), built on the contract skill from the start, and the
+     size of CLAUDE.md — the reviewer's context measured 2026-09-06
+     (THR.0240).
   Then THR.0230 (after an outline of the second framework). Dormant
   by decision, trigger recorded in each: THR.0250, 0300, 0190, 0200,
   0210, 0170, 0180, 0150, 0140, 0090.

@@ -14,7 +14,7 @@ Adding a layer means adding a file; this dispatcher never changes.
    ambiguous, ask).
 2. Read the project's ledger and list `.claude/commands/forge/` for the
    available target states.
-3. Report in the conversation language (`CLAUDE.local.md`), compactly:
+3. Report compactly:
    - the project's kind (ledger header, POS.0960) and whether it is
      under git — `projects/<slug>/.git` present or "not under git",
      stated as a fact, never as a defect;

@@ -3,7 +3,7 @@ description: Careful consistency check of the Forge system itself (core + projec
 ---
 
 Cross-check the universal core and `projects/forge/` against each other
-and report in the conversation language (`CLAUDE.local.md`), compactly.
+and report compactly.
 Read-only: report findings and proposed
 fixes and apply only what the principal approves. Pure ledger
 bookkeeping (stale versions, dates, counts) may be offered as an
@@ -47,11 +47,12 @@ immediate fix.
      cited by path, never restated. A restatement — the same steps or
      rules in two places, whatever the wording — is a finding; the
      fix is a reference to the owner.
-   - Every challenger persona (`.claude/agents/challenger-*.md`)
-     carries the fixed sections of `templates/challenger.md`
-     verbatim; only its Lens section is its own. Every critic lens
-     (`.claude/agents/critic-*.md`) likewise carries the fixed sections
-     of `templates/critic.md`.
+   - Every skill an agent names in its front-matter (`skills:`)
+     exists as `.claude/skills/<name>/SKILL.md` — Claude Code skips a
+     missing one silently. Every reviewer file (`.claude/agents/
+     critic-*.md`, `challenger-*.md`) names its kind's contract skill
+     and carries only its front-matter and its Lens section; nothing
+     the contract owns is restated in it (POS.1120).
    - No command performs directly what a script, command or agent
      exists for (git outside the scripts in `scripts/`, a conversion outside
      `doc2md.ps1`, a render outside `/render`, a review outside the

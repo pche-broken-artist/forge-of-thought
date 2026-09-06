@@ -28,5 +28,4 @@ to read state (POS.0550).
    the engine does not track the project and cannot guess it, so the
    project is selected by naming it.
 
-Conversation in the principal's language; nothing is written into the
-imported project by this command.
+Nothing is written into the imported project by this command.
