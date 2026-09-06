@@ -26,7 +26,7 @@ absorbed it; Note says what remains (partial) or the REJ (dropped). -->
 ## Documents
 | File | Version | Status | Date |
 |---|---|---|---|
-| 10-intent.md | 3.46 | draft | 2026-09-06 |
+| 10-intent.md | 3.47 | draft | 2026-09-06 |
 | 20-assignment.md | — | not planned: the handover artefacts of this project are the core itself (CLAUDE.md, templates/, .claude/) and README.md | — |
 | decisions.md | — | 10 records (DEC.0010–0100) | 2026-09-06 |
 
@@ -141,7 +141,7 @@ intent version for accepted, DEC.NNNN for rejected. -->
 
 ## Waiting on principal
 - **Operating layer of POS.1120 built (2026-09-06, intent 3.41);
-  the critic's first real run done, the challenger's pending:**
+  the reviewers' first real runs done:**
   `/critique clarity intent` on 2026-09-06 confirmed the contract on
   the live agent (its sections in the first user message after the
   task; report, regression and ledger by the contract; the running
@@ -220,9 +220,9 @@ intent version for accepted, DEC.NNNN for rejected. -->
      run done at 3.42; THR.0330 (all commands to skills) done at
      3.43; the checks built at 3.44 (POS.1140); the challenge run and
      settled at 3.46. The road to 4.0, in the principal's order of
-     2026-09-06: the sweep of the intent by the position rule
-     (POS.0120, CHL.0180) as its own round, then `/critique clarity`
-     for regression, then the test of a major (POS.0300:
+     2026-09-06: the sweep of the intent by the position rule done at
+     3.47 (nineteen positions), then `/critique clarity` for
+     regression, then the test of a major (POS.0300:
      `single-source-of-truth`, `essence`, the checks of the release),
      then `/release forge` at 4.0 with the tag `v4`. After 4.0:
      THR.0230's split if useful (CHL.0150), THR.0240 (the size of
