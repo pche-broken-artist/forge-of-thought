@@ -1,8 +1,8 @@
 ---
-version: 3.47
+version: 3.48
 date: 2026-09-06
 status: draft
-last_change: 3.47 (2026-09-06): the intent swept by the position rule of POS.0120 (CHL.0180) — every position read, nineteen cut to stance, reason and citations and nine more trimmed, the story of each left to the history rows that already carry it; nothing decided, nothing changed in substance.
+last_change: 3.48 (2026-09-06): the regression critique of the sweep walked through, four findings fixed — POS.0120 says what "dated once" and "no measurement" mean and seven positions follow it (FND.0400), the done-before-4.0 clause gone (FND.0410), POS.0570 cites POS.1140 for the composition (FND.0420), THR.0240 dated (FND.0430).
 project: forge
 audience: principal + Claude only
 ---
@@ -200,8 +200,11 @@ position that already stands elsewhere.
   A position is a stance with its reason and its citations, dated
   once. How it was reached — trials, measurements, counts, findings
   settled, what others do — is the history row's, the ledger's or a
-  research note's, never the position's (CHL.0180, 2026-09-06; the
-  intent measured against this rule once, before 4.0, THR.0240).
+  research note's, never the position's. Dated once means one date, the
+  day the position took its present shape; earlier steps are named by
+  their history row, not by date. A number stays only where it is the
+  rule or a threshold, never as a measurement — a measurement enters a
+  reason in words (CHL.0180, 2026-09-06).
 - **POS.0130** `20-assignment.md` is the distilled handover document for
   the recipients: complete, precise, structured, self-contained,
   versioned. It carries the whole in-scope substance of the intent —
@@ -579,17 +582,16 @@ position that already stands elsewhere.
   over with it by the link into git, read by a reviewer that needs the
   document's trajectory and by nobody who needs its current state —
   every command and isolated agent that loads the document is spared
-  a history that had grown to 40 % of this intent. A Version History
+  a history that had outgrown the substance. A Version History
   table in the body of a document is a `/check` finding, fixed by
   moving it into the companion — that is how a project migrates to
   this convention (POS.0820), on the principal's word, project by
   project, each saved by its own `/save`; a colleague's project meets
-  the rule at its next `/check` after `forge-pull`. Decided
-  2026-09-04, closing THR.0260 (history 3.21; research
+  the rule at its next `/check` after `forge-pull`. Present shape
+  2026-09-05 (history 3.21, 3.35–3.37; research
   `2026-09-03-version-history-placement.md`, whose split by kind the
-  principal rejected as two rules for one thing); the Notes block and
-  its two sides 2026-09-05 with THR.0310 (history 3.35–3.37; research
-  `2026-09-05-good-release-notes.md`).
+  principal rejected as two rules for one thing, and
+  `2026-09-05-good-release-notes.md`); closes THR.0260 and THR.0310.
 - **POS.0320** Immutable documents (a locked brief, reviews, challenges,
   sources, research) are never edited — a brief from its lock, a source
   from its registration, the others from creation; corrections happen
@@ -803,8 +805,8 @@ position that already stands elsewhere.
   enforced by convention, not by git.
 - **POS.0570** The project's full conformance — the `project` check,
   for the engine `engine` too — and the renders belong to the release,
-  the `light` check to the save. `/release` (POS.1100) runs the checks
-  POS.1140 composes for it and settles their findings with the
+  the bookkeeping check to the save; which checks run where is
+  POS.1140's. `/release` (POS.1100) runs the checks it composes and settles their findings with the
   principal before the release commit: fixed, or explicitly accepted;
   deferred findings are recorded in the ledger under "Waiting on
   principal". The recommended procedure, never a gate: nothing blocks
@@ -812,15 +814,13 @@ position that already stands elsewhere.
   unconditionally, with no staleness test. The renders come after the
   check and its walkthrough, not before: a render made from the
   settled sources is current by construction, whereas one made before
-  it goes stale whenever a finding bumps the intent. `/save` runs the
-  `light` check only (POS.1100, POS.1140): the full check cost minutes
-  and a walkthrough at every save. The staleness of any other render
+  it goes stale whenever a finding bumps the intent. The full check
+  left the save because it cost minutes and a walkthrough every time.
+  The staleness of any other render
   is the principal's business alone: the `/forge` map shows it,
   `/check` never reports it, since a render is regenerated only on his
-  word (POS.0810). The check at the release rather than the save
-  decided 2026-09-05 (history 3.33), the order check-then-render the
-  same day (history 3.30), the light check 2026-09-06 (history 3.44),
-  the staleness rule 2026-09-04 (history 3.23).
+  word (POS.0810). Present shape 2026-09-06 (history 3.23, 3.30, 3.33,
+  3.44).
 - **POS.1100** Save and release are two commands. `/save` runs the
   `light` check (POS.1140) and then commits and pushes on whatever
   branch is checked out, through `forge-save`, no render: a message
@@ -842,8 +842,8 @@ position that already stands elsewhere.
   with the commit and keeps it without an origin. Only the major's tag
   has a fixed name, so `/check` and the release notes can rely on it:
   an integer is a released major, anything else a snapshot. Why two:
-  the renders cost minutes and over a hundred thousand tokens at every
-  save, and the two-speed save had existed in practice for weeks; with
+  the renders cost minutes and tokens beyond reason at every save, and
+  the two-speed save had existed in practice for weeks; with
   the renders at the release only, the README on `main` is current at
   every release and stale in between visibly (the `/forge` map), never
   silently. Decided 2026-09-05 (history 3.33); closes THR.0220;
@@ -1000,10 +1000,8 @@ position that already stands elsewhere.
   remains his business and a legitimate way to resolve an identity.
   `forge-save` checks that git resolves an identity for the
   repository and, where it resolves none, reports it with the command
-  to set one and commits nothing until it is. Decided 2026-08-30
-  (history 3.0), the identity model 2026-09-01 (history 3.6–3.8), the
-  identities file 2026-09-06 (history 3.46). Resolves the scripts
-  part of THR.0090.
+  to set one and commits nothing until it is. Present shape 2026-09-06
+  (history 3.0, 3.6–3.8, 3.46). Resolves the scripts part of THR.0090.
 - **POS.0930** One model for the whole forge. Every command, chain
   state and reviewer runs on the session model; the reviewer agents
   declare `model: inherit` explicitly, so that the strongest model the
@@ -1017,10 +1015,8 @@ position that already stands elsewhere.
   now: the routine commands are a small share of the work and slow for
   the size of the context they carry, not for the model, and every pin
   is a convention to keep. A per-recipe `model:` is deferred until a
-  recipe is genuinely mechanical: in a test a smaller model loosened
-  pinned wording, dropped prescribed elements and leaned on the
-  previous render instead of the recipe — the drift POS.0810 guards
-  against (history 2.13). The session model is chosen in one
+  recipe is genuinely mechanical, since a smaller model drifts from a
+  recipe that leaves it room (the drift POS.0810 guards against). The session model is chosen in one
   deliberate place, `.claude/settings.local.json` — an instance
   preference, gitignored (POS.0950). The one exception is
   `scripts/md2pptx.ps1`: a headless run has no session model, so the
@@ -1030,9 +1026,8 @@ position that already stands elsewhere.
   subagent that sees only the files, returning the report for the
   walkthrough in the session, and `/release` launches its renders in
   parallel (which command renders what is POS.1100's); the working
-  conversation is spent on verdicts, not on reading. Decided
-  2026-08-27 (history 2.13), the isolation of checks and renders
-  2026-09-02 (history 3.10); closes THR.0160.
+  conversation is spent on verdicts, not on reading. Present shape
+  2026-09-02 (history 2.13, 3.10); closes THR.0160.
 - **POS.1070** One mechanism lives in one place and is used from
   there. Whatever the forge already has a procedure for — a command,
   a skill, a script, an agent — is invoked through that procedure
@@ -1215,20 +1210,18 @@ position that already stands elsewhere.
   that projects of those names exist and travelled the chain is a
   process fact, not content (THR.0210 draws the line); a
   forbidden-term list is no guard, since a grep catches names, not
-  content. Before publication the forge project was rewritten within
-  that boundary **including its immutable documents** — immutability
-  knowingly broken, once, recorded in the ledger and nowhere in the
-  files; the brief was rewritten into English before its lock for the
-  same reason, a one-time yield of POS.0060. The public repository
-  starts with a fresh history of one commit (DEC.0080); the full
-  record stays on the company host, archived read-only, with a notice
-  naming the new homes and the tag `pre-split` as its last complete
-  state. Until a public exemplar exists (THR.0200) the README carries
+  content. The public forge project holds nothing outside that
+  boundary, its immutable documents included — rewritten once before
+  publication, immutability knowingly broken, recorded in the ledger
+  and nowhere in the files; the brief is English for the same reason,
+  a one-time yield of POS.0060. The public repository has a fresh
+  history (DEC.0080); the full record is on the company host, archived
+  read-only, its last complete state tagged `pre-split`. Until a public exemplar exists (THR.0200) the README carries
   no example project. Separating the company projects from the engine
   without publishing would have been a fallback only if publication
-  were long and complicated; it was not. Decided 2026-08-29 from
-  `00-brief-public-engine.md`, executed 2026-08-30 (history 2.21,
-  3.0; research `2026-08-29-split-migration-runbook.md`).
+  were long and complicated; it was not. Present shape 2026-08-30
+  (history 2.21, 3.0; from `00-brief-public-engine.md`; research
+  `2026-08-29-split-migration-runbook.md`).
 - **POS.0990** The public face. The engine lives at a public repository
   of the principal's, named `forge-of-thought` — the bare word "forge"
   is overloaded on every code host and says nothing in a search — under
@@ -1321,8 +1314,8 @@ position that already stands elsewhere.
   `/setup` prepares the instance: it fills `CLAUDE.local.md` from
   `templates/CLAUDE.local.md` in an elicitation interview — who the
   principal is by role, the conversation language — and
-  `identities.local.md` from its template with the git identities per
-  host (POS.0950), and it creates `.claude/settings.local.json` with
+  `identities.local.md` from `templates/identities.local.md` with the
+  git identities per host (POS.0950), and it creates `.claude/settings.local.json` with
   the session model set to **Fable**, without asking: the strongest
   available model is the forge's default (POS.0530), the whole forge
   including the blind reviewers runs on it (POS.0930), and a
@@ -1540,7 +1533,8 @@ position that already stands elsewhere.
   the effect is measured — by behaviour, never by line count. Measured
   2026-09-06 at the THR.0270 trial (POS.1120): every reviewer subagent
   receives, in its first user message before the task, the whole
-  CLAUDE.md together with `CLAUDE.local.md`, the assistant's memory
+  CLAUDE.md together with `CLAUDE.local.md` (then still carrying the
+  git identities, since moved out, POS.0950), the assistant's memory
   file and the git status — about 600 lines, the largest block of its
   context, several times its own agent body and contract together; the
   instance facts of `CLAUDE.local.md` (principal, language, git
