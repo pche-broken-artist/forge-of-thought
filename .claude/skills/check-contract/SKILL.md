@@ -1,5 +1,5 @@
 ---
-name: checker
+name: check-contract
 description: Contract of the check — the behaviour shared by every check (subject, way of working, report shape), preloaded into each `check-<name>` agent through the `skills` field of its front-matter. Not a command; nothing to invoke.
 user-invocable: false
 ---
@@ -9,8 +9,8 @@ user-invocable: false
 This skill is the one owner of what every check shares (POS.0540,
 POS.1120, POS.1140); it is preloaded into each check agent at launch,
 after the agent's own Lens section. The check runs on the same
-mechanism as the critic (contract `critic`) and the challenger
-(contract `challenger`): one agent per check, a roster, a run by hand
+mechanism as the critic (contract `critic-contract`) and the challenger
+(contract `challenger-contract`): one agent per check, a roster, a run by hand
 or by the command that composes checks (`/save`, `/release`).
 
 **What this contract owns:** conduct and isolation, the subject and

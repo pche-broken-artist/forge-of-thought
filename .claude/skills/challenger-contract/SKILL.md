@@ -1,5 +1,5 @@
 ---
-name: challenger
+name: challenger-contract
 description: Contract of the challenger — the behaviour shared by every challenger persona (subject, way of working, report shape, ledger step), preloaded into each `challenger-<persona>` agent through the `skills` field of its front-matter. Not a command; nothing to invoke.
 user-invocable: false
 ---
@@ -9,7 +9,7 @@ user-invocable: false
 This skill is the one owner of what every challenger persona shares
 (POS.0400, POS.0420, POS.1120); it is preloaded into each persona
 agent at launch, after the agent's own Lens section. The challenger
-is the mirror of the critic (contract `critic`): lenses there,
+is the mirror of the critic (contract `critic-contract`): lenses there,
 personas here, FND there, CHL here, a walkthrough for both.
 
 **What this contract owns:** conduct and isolation, the subject and

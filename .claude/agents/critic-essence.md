@@ -4,7 +4,7 @@ description: Critic lens "essence" — reads the chain for drift: distils each l
 tools: Read, Edit, Write, Glob, Grep
 model: inherit
 skills:
-  - critic
+  - critic-contract
 ---
 
 ## Lens

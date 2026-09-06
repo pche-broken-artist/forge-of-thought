@@ -4,7 +4,7 @@ description: Challenger persona "<persona>" — <who this is, in one line>. Chal
 tools: Read, Edit, Glob, Grep, WebSearch, WebFetch, Write
 model: inherit
 skills:
-  - challenger
+  - challenger-contract
 ---
 
 <!-- Skeleton of a challenger persona file
@@ -12,7 +12,7 @@ skills:
 front-matter and its Lens section, nothing else: the behaviour shared
 by every persona — subject, way of working, shape and severity of a
 challenge, report, ledger step — is the contract skill
-.claude/skills/challenger/SKILL.md, preloaded through the skills
+.claude/skills/challenger-contract/SKILL.md, preloaded through the skills
 field above and never restated here (POS.0420, POS.1120).
 /check engine verifies that the named skill exists. A new persona is
 created only by the principal's decision, and only where its blind

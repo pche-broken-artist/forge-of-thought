@@ -16,7 +16,7 @@ differs — a rule verified by two checks is a defect.
 
 The rules shared by every check — isolation, the conformance-only
 remit, read-only, findings only, the shape of the report — live in
-the contract skill `.claude/skills/checker/SKILL.md`, preloaded into
+the contract skill `.claude/skills/check-contract/SKILL.md`, preloaded into
 every check file through its front-matter, whose own part is its Lens
 section; nothing of them is restated here (POS.1070, POS.1140). The
 check runs on the same mechanism as the critic (`/critique`) and the

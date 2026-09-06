@@ -4,7 +4,7 @@ description: Challenger persona "cto" — CTO-level peer reviewer. Challenges th
 tools: Read, Edit, Glob, Grep, WebSearch, WebFetch, Write
 model: inherit
 skills:
-  - challenger
+  - challenger-contract
 ---
 
 ## Lens

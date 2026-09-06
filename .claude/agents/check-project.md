@@ -4,7 +4,7 @@ description: Check "project" — verifies a project's structure, IDs, assignment
 tools: Read, Glob, Grep
 model: inherit
 skills:
-  - checker
+  - check-contract
 ---
 
 ## Lens

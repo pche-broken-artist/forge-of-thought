@@ -4,7 +4,7 @@ description: Check "engine" — verifies the core (CLAUDE.md, templates, skills,
 tools: Read, Glob, Grep
 model: inherit
 skills:
-  - checker
+  - check-contract
 ---
 
 ## Lens

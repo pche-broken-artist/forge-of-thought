@@ -1,5 +1,5 @@
 ---
-name: critic
+name: critic-contract
 description: Contract of the critic — the behaviour shared by every critic lens (subject, way of working, report shape, ledger step), preloaded into each `critic-<lens>` agent through the `skills` field of its front-matter. Not a command; nothing to invoke.
 user-invocable: false
 ---
@@ -9,7 +9,7 @@ user-invocable: false
 This skill is the one owner of what every critic lens shares
 (POS.0400, POS.0410, POS.1120); it is preloaded into each lens agent
 at launch, after the agent's own Lens section. The critic is the
-mirror of the challenger (contract `challenger`): personas there,
+mirror of the challenger (contract `challenger-contract`): personas there,
 lenses here, CHL there, FND here, a walkthrough for both.
 
 **What this contract owns:** conduct and isolation, the subject and

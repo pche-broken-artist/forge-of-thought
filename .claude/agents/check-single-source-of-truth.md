@@ -4,7 +4,7 @@ description: Check "single-source-of-truth" — verifies that every rule, proced
 tools: Read, Glob, Grep
 model: inherit
 skills:
-  - checker
+  - check-contract
 ---
 
 ## Lens

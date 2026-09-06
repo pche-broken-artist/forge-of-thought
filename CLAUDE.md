@@ -521,8 +521,8 @@ the checks it composes and offers `critique essence` once. The
 challenger has personas, the critic has lenses, the check has checks:
 one agent file each (`challenger-<persona>`, `critic-<lens>`,
 `check-<name>`), the shared behaviour of each kind preloaded from one
-contract skill (`.claude/skills/challenger/SKILL.md`,
-`.claude/skills/critic/SKILL.md`, `.claude/skills/checker/SKILL.md`,
+contract skill (`.claude/skills/challenger-contract/SKILL.md`,
+`.claude/skills/critic-contract/SKILL.md`, `.claude/skills/check-contract/SKILL.md`,
 named in the agent's front-matter; the skeleton of a lens file is
 `templates/challenger.md`, `templates/critic.md`,
 `templates/check.md`), only the Lens section its own; new personas,

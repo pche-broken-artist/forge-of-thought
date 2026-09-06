@@ -1,8 +1,8 @@
 ---
-version: 3.44
+version: 3.45
 date: 2026-09-06
 status: draft
-last_change: 3.44 (2026-09-06): check on the reviewer mechanism built (POS.1140) — contract skill checker, four checks (project, light, engine, single-source-of-truth), /check a dispatcher with a roster, /check-forge gone, /save runs light, /release light + project (+ engine); THR.0290 left with the /research point only; POS.0540, POS.0570, POS.0930, POS.1070, POS.1090, POS.1130 aligned.
+last_change: 3.45 (2026-09-06): second clarity critique of the day walked through, all five findings fixed — POS.1100 says what /save and /release run today, "full check" gone (FND.0350); the three contracts named <kind>-contract and no common skill decided (FND.0360); /check rules owned by the check of their concern (FND.0370); POS.1130 and POS.0400/0420 cite POS.1120 (FND.0380, FND.0390).
 project: forge
 audience: principal + Claude only
 ---
@@ -632,8 +632,8 @@ position that already stands elsewhere.
   walkthrough (POS.0850). The challenger has personas, the critic has
   lenses: one agent file each, the shared behaviour of the kind
   preloaded from one contract skill (POS.1120), only the Lens section
-  its own; `/check engine` verifies that the skill every file names
-  exists. Both take an optional target, an artefact named
+  its own (the engine check guards the preload, POS.1120). Both take
+  an optional target, an artefact named
   as `/forge` names it (`brief`, `brief-<name>`, `intent`, `assignment`,
   later layers as they come); without one, the whole chain — the
   principal's request of 2026-09-03, so that one file or one transition
@@ -681,10 +681,10 @@ position that already stands elsewhere.
   active debate | emerging practice | my judgement); no fabrication — a
   precise "I don't know" beats an invented figure, and anything
   reconstructed from memory is flagged. The contract has one
-  owner, the skill `challenger` (POS.1120): every persona file
+  owner, the skill `challenger-contract` (POS.1120): every persona file
   names it in its front-matter and writes only its own Lens — who it is
-  to the principal and which blind spots it exists to find — and
-  `/check engine` verifies that the skill it names exists (POS.1070).
+  to the principal and which blind spots it exists to find
+  (POS.1120 for the guard of the preload).
   The first persona is `cto` (CTO register);
   further personas — a strategist, a business analyst — are created from
   the lens-file skeleton by the principal's decision when first needed, and only
@@ -697,16 +697,20 @@ position that already stands elsewhere.
   skill, preloaded — never a copy. Each kind of reviewer — the critic,
   the challenger, check on the same mechanism (POS.0540), and
   whatever kind of reviewer comes after — owns one skill
-  `.claude/skills/<kind>/SKILL.md` (`critic`, `challenger`, `check`),
+  `.claude/skills/<kind>-contract/SKILL.md` (`critic-contract`,
+  `challenger-contract`, `check-contract` — named after the agent kind
+  with the suffix, since `check/` is the command, POS.1130),
   and every lens or persona file of that kind names it in its
   front-matter (`skills:`), so that Claude Code injects the whole skill
   into the agent at launch; the file itself carries its front-matter
   and its Lens section, nothing else. One skill per kind, because the
   shared texts of the kinds differ almost whole (subject, way of
   working, output); the few sentences common to every kind —
-  isolation, no fabrication, sharp and few, the ledger — may become one
-  further skill later, an agent naming more than one, decided when
-  the `check` contract is built. The skill is written as a contract addressed to
+  isolation, no fabrication, sharp and few, the ledger — stay in
+  each contract in its own words — three contracts and no common
+  skill, decided 2026-09-06 when the check contract was built: a fourth
+  place to read four sentences; reopened only if a fourth kind repeats
+  them once more. The skill is written as a contract addressed to
   every lens of its kind, not as a template with placeholders: it opens
   by saying what the contract owns (conduct, subject, way of working,
   the report shape, the ledger step) and what the lens file owns (what
@@ -847,9 +851,10 @@ position that already stands elsewhere.
   configured anywhere in the forge: git carries that information itself.
   Immutability of documents remains a process rule enforced by
   convention, not by git.
-- **POS.0570** The conformance check belongs to the release, not to
-  the save (3.33; from 1.22 to 3.32 it preceded every save through
-  Claude). `/release` (POS.1100) runs the checks POS.1140 composes for it
+- **POS.0570** The project's full conformance — the `project` check,
+  for the engine `engine` too — and the renders belong to the release,
+  the `light` check to the save (3.33 and 3.44; from 1.22 to 3.32 the
+  whole check preceded every save through Claude). `/release` (POS.1100) runs the checks POS.1140 composes for it
   and settles their findings with the principal before the
   release commit: fixed, or explicitly accepted; deferred findings are
   recorded in the ledger under "Waiting on principal". The recommended
@@ -872,12 +877,13 @@ position that already stands elsewhere.
   (decided 2026-09-04, when the checks of three projects listed every
   stale deck and picture as findings — noise, since a render is
   regenerated only on his word, POS.0810).
-- **POS.1100** Save and release are two commands. `/save` is commit
-  and push on whatever branch is checked out, through `forge-save`, with
-  no check and no render: a commit message proposed and confirmed, the
-  script run, seconds. `/release` runs on `main` only and refuses
-  elsewhere, naming the branch it found: the full check with its
-  walkthrough (POS.0570), the README and release notes from the settled
+- **POS.1100** Save and release are two commands. `/save` is the `light`
+  check and then commit and push on whatever branch is checked out,
+  through `forge-save`, with no render: a commit message proposed and
+  confirmed, the script run, seconds (the check's content is
+  POS.1140's). `/release` runs on `main` only and refuses
+  elsewhere, naming the branch it found: the checks POS.1140 composes
+  for it, with their walkthrough (POS.0570), the README and release notes from the settled
   sources (POS.0730, POS.1000, under the principal's eyes as POS.0810
   requires), the release commit "release <intent version>" through
   `forge-save`, and at an approved major the tag — the commit and the
@@ -921,7 +927,7 @@ position that already stands elsewhere.
   forces a branch: whoever does not use them works on `main`, saves and
   now and then releases, and sees none of this. The forge's only
   knowledge of a merge is that `/release` runs on `main` after it and
-  its full check finds what two branches broke — the known hole, left
+  its checks find what two branches broke — the known hole, left
   until it happens: two parallel branches taking the same next free ID.
   The boundary against the wrapper of git the principal does not want:
   the script does creation and switching, which only change where the
@@ -1151,7 +1157,7 @@ position that already stands elsewhere.
   `.claude/skills/recipe/genres/<genre>.md`): read by path, registered
   as nothing, carrying a description and no registration field. The
   reviewers' contracts (POS.1120) are skills of the same directory,
-  invocable by nobody. "Command" stays the word for what the user
+  not user-invocable (POS.1120). "Command" stays the word for what the user
   invokes by slash; "skill" names the file shape, commands and
   contracts alike. Grounds: in Claude Code custom commands have been
   merged into skills — a command file and a skill of one name create
@@ -1178,7 +1184,7 @@ position that already stands elsewhere.
 - **POS.1140** Check runs on the reviewer mechanism — POS.0540
   decided it, this is the shape, built 2026-09-06. One command
   `/check <check> [slug]`, bare the roster; one contract skill
-  `checker` — conformance only, read-only, findings only with
+  `check-contract` — conformance only, read-only, findings only with
   `file:line`, the rule's owner and one fix, ranked by severity; a
   report returned to the session, nothing filed and no ID sequence,
   since a check's findings are settled at the walkthrough and
@@ -1211,7 +1217,10 @@ position that already stands elsewhere.
   target path and nothing else (POS.0930). Decided 2026-09-06 by
   walkthrough of THR.0290's open points — the checks, their word, the
   fate of `/check-forge`; the `/research` point stays in THR.0290 for
-  its day.
+  its day. A rule an older position attributes to `/check` as one
+  procedure belongs to the check that owns its concern by the list
+  above — bookkeeping, ledger, dependencies and indexes to `light`,
+  structure, recipes and renders to `project` — never to two.
 
 ### Naming
 - **POS.0600** The system is named **Forge of Thought**: thoughts are

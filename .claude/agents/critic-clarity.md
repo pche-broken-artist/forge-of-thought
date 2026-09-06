@@ -4,7 +4,7 @@ description: Critic lens "clarity" — reads each artefact on its own for ambigu
 tools: Read, Edit, Write, Glob, Grep
 model: inherit
 skills:
-  - critic
+  - critic-contract
 ---
 
 ## Lens

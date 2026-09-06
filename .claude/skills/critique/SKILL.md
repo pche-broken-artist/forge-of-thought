@@ -13,7 +13,7 @@ read genuinely differs.
 The rules shared by every lens — isolation, the documents-only remit,
 regression first, calibration, the shape of a finding, the report file
 and the FND ledger entries — live in the contract skill
-`.claude/skills/critic/SKILL.md`, preloaded into every lens file
+`.claude/skills/critic-contract/SKILL.md`, preloaded into every lens file
 through its front-matter, whose own part is its Lens section; nothing
 of them is restated here (POS.1070, POS.1120). The critic is
 the mirror of the challenger (`/challenge`): personas there, lenses

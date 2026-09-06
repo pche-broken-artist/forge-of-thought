@@ -4,13 +4,13 @@ description: Check "<name>" — <what this check verifies, in one line>. Verifie
 tools: Read, Glob, Grep
 model: inherit
 skills:
-  - checker
+  - check-contract
 ---
 
 <!-- Skeleton of a check file (.claude/agents/check-<name>.md). A
 check file carries its front-matter and its Lens section, nothing
 else: the behaviour shared by every check — subject, way of working,
-report shape — is the contract skill .claude/skills/checker/SKILL.md,
+report shape — is the contract skill .claude/skills/check-contract/SKILL.md,
 preloaded through the skills field above and never restated here
 (POS.0540, POS.1140). /check engine verifies that the named skill
 exists. A new check is created only by the principal's decision, and

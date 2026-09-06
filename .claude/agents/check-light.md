@@ -4,7 +4,7 @@ description: Check "light" — verifies a project's bookkeeping: front-matter ag
 tools: Read, Glob, Grep
 model: inherit
 skills:
-  - checker
+  - check-contract
 ---
 
 ## Lens

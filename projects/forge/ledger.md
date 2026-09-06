@@ -26,7 +26,7 @@ absorbed it; Note says what remains (partial) or the REJ (dropped). -->
 ## Documents
 | File | Version | Status | Date |
 |---|---|---|---|
-| 10-intent.md | 3.44 | draft | 2026-09-06 |
+| 10-intent.md | 3.45 | draft | 2026-09-06 |
 | 20-assignment.md | — | not planned: the handover artefacts of this project are the core itself (CLAUDE.md, templates/, .claude/) and README.md | — |
 | decisions.md | — | 9 records (DEC.0010–0090) | 2026-09-03 |
 
@@ -102,12 +102,17 @@ version for resolved, DEC.NNNN for overruled. -->
 | FND.0260 | medium | divergence | resolved | 2026-09-05-critique-harness.md | operating layer 2026-09-06 (intent 3.43, POS.1130) — all commands migrated to skills in one round |
 | FND.0270 | medium | duplication | resolved | 2026-09-05-critique-harness.md | POS.1120, operating layer 2026-09-06 (intent 3.41) |
 | FND.0280 | low | duplication | resolved | 2026-09-05-critique-harness.md | operating layer 2026-09-06 (intent 3.41) — clause deleted from thirteen commands, setup.md keeps its exception |
-| FND.0290 | medium | contradiction | resolved | 2026-09-06-critique-clarity.md | intent 3.42 (POS.0540 rewritten, no counts; CLAUDE.md heading; readme recipe 0.38) |
-| FND.0300 | medium | duplication | resolved | 2026-09-06-critique-clarity.md | intent 3.42 (POS.1100 owns the split) |
-| FND.0310 | low | ambiguity | resolved | 2026-09-06-critique-clarity.md | intent 3.42 (the variants' word left to THR.0290) |
-| FND.0320 | low | contradiction | resolved | 2026-09-06-critique-clarity.md | intent 3.42 |
-| FND.0330 | low | contradiction | resolved | 2026-09-06-critique-clarity.md | intent 3.42 |
-| FND.0340 | low | duplication | resolved | 2026-09-06-critique-clarity.md | intent 3.42 (POS.0840 owns the index) |
+| FND.0290 | medium | contradiction | resolved | 2026-09-06-critique-clarity.md | intent 3.42 (POS.0540 rewritten, no counts; CLAUDE.md heading; readme recipe 0.38) (verified 2026-09-06, clarity-2) |
+| FND.0300 | medium | duplication | resolved | 2026-09-06-critique-clarity.md | intent 3.42 (POS.1100 owns the split) (verified 2026-09-06, clarity-2 — the owner went stale at 3.44, see FND.0350) |
+| FND.0310 | low | ambiguity | resolved | 2026-09-06-critique-clarity.md | intent 3.42 (the variants' word left to THR.0290) (verified 2026-09-06, clarity-2) |
+| FND.0320 | low | contradiction | resolved | 2026-09-06-critique-clarity.md | intent 3.42 (verified 2026-09-06, clarity-2) |
+| FND.0330 | low | contradiction | resolved | 2026-09-06-critique-clarity.md | intent 3.42 (verified 2026-09-06, clarity-2) |
+| FND.0340 | low | duplication | resolved | 2026-09-06-critique-clarity.md | intent 3.42 (POS.0840 owns the index) (verified 2026-09-06, clarity-2) |
+| FND.0350 | high | contradiction | resolved | 2026-09-06-critique-clarity-2.md | intent 3.45 (POS.1100 owns the current shape; POS.0570, POS.1110) |
+| FND.0360 | medium | contradiction | resolved | 2026-09-06-critique-clarity-2.md | intent 3.45 (contracts renamed <kind>-contract; three contracts, no common skill) |
+| FND.0370 | low | ambiguity | resolved | 2026-09-06-critique-clarity-2.md | intent 3.45 (one sentence in POS.1140) |
+| FND.0380 | low | contradiction | resolved | 2026-09-06-critique-clarity-2.md | intent 3.45 (POS.1130) |
+| FND.0390 | low | duplication | resolved | 2026-09-06-critique-clarity-2.md | intent 3.45 (POS.1120 owns, POS.0400 and POS.0420 cite) |
 
 ## Challenges
 <!-- State: open | accepted | rejected | parked | obsolete. Resolution:
@@ -239,7 +244,7 @@ intent version for accepted, DEC.NNNN for rejected. -->
   thread after the checks became POS.1140 (3.44); deferred
   2026-09-06 until a second way of researching appears
 - **Checks built (2026-09-06, intent 3.44, POS.1140):** contract
-  `checker`, agents `check-project`, `check-light`, `check-engine`,
+  `check-contract`, agents `check-project`, `check-light`, `check-engine`,
   `check-single-source-of-truth`, `/check` a dispatcher, `/check-forge`
   gone, `/save` and `/release` composing their checks. First real run
   of a check on its contract: see the item on the reviewers' first

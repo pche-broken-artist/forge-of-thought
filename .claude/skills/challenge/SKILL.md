@@ -14,7 +14,7 @@ noise.
 The rules shared by every persona — isolation, the substance-only
 remit, the shape and severity of the challenges, the output file and
 the CHL ledger entries — live in the contract skill
-`.claude/skills/challenger/SKILL.md`, preloaded into every persona
+`.claude/skills/challenger-contract/SKILL.md`, preloaded into every persona
 file through its front-matter, whose own part is its Lens section;
 nothing of them is restated here (POS.1070, POS.1120). This command
 only chooses the persona, passes the target and verifies the
