@@ -1,6 +1,6 @@
 ---
 description: Research current best practices on a topic; store durable notes
-argument-hint: <topic> [project-slug]
+argument-hint: "<topic> [project-slug]"
 ---
 
 Research $ARGUMENTS with current web sources — the last token is the

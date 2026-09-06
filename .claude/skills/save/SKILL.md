@@ -5,8 +5,8 @@ disable-model-invocation: true
 ---
 
 Save the forge to git: the light check, then commit and push on
-whatever branch is checked out, nothing more (POS.1100). The full
-checks and the renders belong to `/release`
+whatever branch is checked out, nothing more (POS.1100). The
+`project` and `engine` checks and the renders belong to `/release`
 (`.claude/skills/release/SKILL.md`, POS.0570). The engine and every project are repositories of their
 own (POS.0940); what the save does per repository is stated in the
 help header of `scripts/forge-save.ps1`, and CLAUDE.md (Persistence)

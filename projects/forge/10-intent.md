@@ -1,8 +1,8 @@
 ---
-version: 3.49
+version: 4.0
 date: 2026-09-06
-status: draft
-last_change: 3.49 (2026-09-06): the first honest single-source-of-truth sweep settled — nineteen findings, eighteen fixed and one accepted: CLAUDE.md cut to rules and citations (636 to 584 lines), the dispatchers, templates, check and critic files freed of restated rules; Requirement style the critic's alone, bookkeeping the light check's alone; no position changed.
+status: approved
+last_change: 4.0 (2026-09-06): approved by the principal — version 4 closes the engine's operating layer (POS.0300); the test of a major run before the tag, the essence lens declined by his word.
 project: forge
 audience: principal + Claude only
 ---

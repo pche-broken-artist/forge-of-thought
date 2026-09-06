@@ -47,8 +47,9 @@ When it returns:
    (CLAUDE.md, Working methods, Step by step); apply on his word.
 3. End by offering a **walkthrough** of the remaining findings
    (CLAUDE.md, Working methods); its rules are stated there and
-   nowhere else (POS.1070). Verdict vocabulary here: **fix** (applied
-   here, on his word), **defer** (recorded in the project's ledger
+   nowhere else (POS.1070). Verdict vocabulary here: **fix** (agreed
+   here, written once at the round's end — CLAUDE.md, Working
+   methods, Walkthrough), **defer** (recorded in the project's ledger
    under "Waiting on principal"), **accept** (the state stays as it
    is; a rule worth changing goes to the intent). Nothing blocks
    (POS.0430): a release may proceed with a finding deferred.

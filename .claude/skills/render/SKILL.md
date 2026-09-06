@@ -1,6 +1,6 @@
 ---
 description: Regenerate a render from its recipe in recipes/
-argument-hint: <recipe> [project-slug]
+argument-hint: "<recipe> [project-slug]"
 disable-model-invocation: true
 ---
 

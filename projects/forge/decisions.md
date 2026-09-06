@@ -144,3 +144,17 @@ them here was THR.0070, resolved by DEC.0040 (no back-fill). -->
   tool is built when a third-party instance needs one (THR.0190's
   trigger).
 - **Date:** 2026-09-06
+
+## DEC.0110 — Two IDs outside the tens and two recorded one-off edits of immutables accepted, never raised again
+- **Decision:** The project check of release 4.0 raised two findings
+  against the forge project's own record: `POS.0005` and `REJ.0125`
+  sit outside the numbering in tens, and the ledger records two
+  knowing edits of immutable documents — `last_change` written into
+  the locked `00-brief-public-engine.md` on 2026-09-04, and the
+  pre-publication rewrite of the challenges and research notes on
+  2026-08-30. Both findings are overruled; the state stays as it is.
+- **Reason:** IDs are never renumbered (CLAUDE.md, ID scheme), so the
+  two IDs stay; the two edits were the principal's recorded one-off
+  acts, each with its reason in the ledger, and immutability is a
+  process rule, not a mechanism. No later check raises either again.
+- **Date:** 2026-09-06

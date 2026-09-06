@@ -20,15 +20,15 @@ Mined: pending | partial | mined | dropped — how far the intent has
 absorbed it; Note says what remains (partial) or the REJ (dropped). -->
 | File | Version | Status | Mined | Note |
 |---|---|---|---|---|
-| 00-brief.md | — | placeholder: brief stage was skipped, intent is the earliest record | — | — |
+| 00-brief.md | — | placeholder: brief stage was skipped, intent is the earliest record | — | accepted under DEC.0010, not a check finding |
 | 00-brief-public-engine.md | 1.0 | approved | mined | born in the forge 2026-08-29 (THR.0130, THR.0090), locked 2026-08-29 in English after the CTO challenge; mined into intent 2.21 (POS.0940–0980, REJ.0140–0150, THR.0190–0200). Instance work it records — the one-off migration steps 1–6, the first projects after the split — stays here and under Waiting on principal, not in the intent |
 
 ## Documents
 | File | Version | Status | Date |
 |---|---|---|---|
-| 10-intent.md | 3.49 | draft | 2026-09-06 |
+| 10-intent.md | 4.0 | approved | 2026-09-06 |
 | 20-assignment.md | — | not planned: the handover artefacts of this project are the core itself (CLAUDE.md, templates/, .claude/) and README.md | — |
-| decisions.md | — | 10 records (DEC.0010–0100) | 2026-09-06 |
+| decisions.md | — | 11 records (DEC.0010–0110) | 2026-09-06 |
 
 ## Renders
 <!-- Generated outputs, one row per recipe in recipes/. Never
@@ -36,9 +36,9 @@ hand-edited: iterate the recipe, re-run /render. Row mirrors the
 render's front-matter provenance. -->
 | Render | Audience | Recipe | Inputs | Generated |
 |---|---|---|---|---|
-| README.md (repo root) | humans arriving at the repository | recipes/readme.md v0.37 (recipe now 0.39, render stale) | CLAUDE.md, 10-intent.md v3.39 | 2026-09-06 |
-| RELEASE-NOTES.md (repo root) | the user of the engine who takes upgrades through forge-pull | recipes/release-notes.md v0.10 | 10-intent.history.md, 10-intent.md v3.39, decisions.md, previous edition (released sections) | 2026-09-06 |
-| renders/executive-pitch.md | C-level executives whose experience of AI is chatting with it | recipes/executive-pitch.md v0.1 | 10-intent.md, CLAUDE.md | — (not yet rendered) |
+| README.md (repo root) | humans arriving at the repository | recipes/readme.md v0.41 | CLAUDE.md, 10-intent.md v4.0 | 2026-09-06 |
+| RELEASE-NOTES.md (repo root) | the user of the engine who takes upgrades through forge-pull | recipes/release-notes.md v0.10 | 10-intent.history.md, 10-intent.md v4.0, decisions.md, previous edition (released sections) | 2026-09-06 |
+| renders/executive-pitch.md | C-level executives whose experience of AI is chatting with it | recipes/executive-pitch.md v0.2 | projects/forge/10-intent.md, CLAUDE.md | — (not yet rendered) |
 
 ## Sources
 <!-- Registration only; what a source is and is for lives in
@@ -229,7 +229,12 @@ intent version for accepted, DEC.NNNN for rejected. -->
      major (POS.0300) run at 3.49: `single-source-of-truth` over the
      whole layer (nineteen findings settled), `clarity` three times,
      one challenge (3.45); `essence` declined by the principal's word
-     on 2026-09-06 — the one part of the test not run;
+     on 2026-09-06 — the one part of the test not run; the intent
+     approved as 4.0 the same day; the release checks (`light` clean,
+     `engine` four findings, `project` three) settled the same evening —
+     readme recipe 0.41, executive-pitch recipe 0.2, five argument
+     hints quoted, DEC.0110; deferred to 4.1: POS.0450 to cite DEC.0050
+     beside DEC.0020;
      then `/release forge` at 4.0 with the tag `v4`. After 4.0:
      THR.0230's split if useful (CHL.0150), THR.0240 (the size of
      CLAUDE.md).
@@ -293,7 +298,7 @@ intent version for accepted, DEC.NNNN for rejected. -->
   dealt with whatever becomes of THR.0230
 - Executive pitch (since 2026-08-30): five-slide C-level deck of the
   forge, story agreed (S01–S05), recipe `recipes/executive-pitch.md`
-  v0.1 with a Renders row. Decided direction, not yet written into the
+  v0.2 with a Renders row. Decided direction, not yet written into the
   intent: the deck is for company management, so recipe and render move
   to `lib-allwyn`, template `sources/allwyn.potx` (to be ingested
   first); one sentence in POS.0970 (a library may carry recipes and

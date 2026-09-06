@@ -1,6 +1,6 @@
 ---
 description: Scaffold a new project from templates — a thought project (the chain) or a library (material only); files only, never git
-argument-hint: <slug> [working title]
+argument-hint: "<slug> [working title]"
 disable-model-invocation: true
 ---
 

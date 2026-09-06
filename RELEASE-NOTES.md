@@ -5,7 +5,7 @@ generated: 2026-09-06
 recipe: recipes/release-notes.md v0.10
 inputs:
   - projects/forge/10-intent.history.md
-  - projects/forge/10-intent.md v3.39
+  - projects/forge/10-intent.md v4.0
   - projects/forge/decisions.md
   - RELEASE-NOTES.md (previous edition, released sections)
 ---
@@ -17,52 +17,30 @@ takes upgrades through `forge-pull`; Action required comes first in
 every section; the fine-grained log with the reasons lives in
 `projects/forge/10-intent.history.md`.
 
-## 3.39 — 2026-09-06
+## 4.0 — 2026-09-06 — approved
 
-### Changed
-- CLAUDE.md cites the release-notes recipe and `templates/history.md` as
-  the owners of the release-notes shape and the Notes block instead of
-  restating them (POS.1070). For you: one place to read each rule, the
-  skeleton or the recipe.
-- The genre skeleton names a major's tag in the highlights where a row
-  records it (POS.0730). For you: your project's release notes will show
-  the tag `/release` set at an approved major.
-
-### Fixed
-- `release.md` and POS.1000 said what POS.0730 no longer says (a tag on
-  the heading; notes distilled). For you: nothing to do.
-
-## 3.38 — 2026-09-05
-
-### Changed
-- At an approved major the minors since the previous major fold into its
-  section, superseded lines dropped, and their sections leave the
-  release notes (POS.0730, release-notes recipe 0.10). For you: after a
-  major you read one merged section for the whole span, and go to
-  `10-intent.history.md` for the detail per version.
-
-## 3.37 — 2026-09-05
-
-### Changed
-- A Notes line carries both sides — what changed, then what it means for
-  the reader (POS.0310, `templates/history.md`). For you: every release
-  note tells you the change and its consequence in one breath, never one
-  without the other.
-
-## 3.36 — 2026-09-05
-
-### Changed
-- A Notes line is written from the reader's side, the position only as
-  the pointer (POS.0310). For you: release notes stopped describing the
-  system and started describing what you can do; superseded at 3.37 by
-  the two-sided line.
-- A major's heading in the release notes says "approved" only; a tag is
-  named in the highlights where one exists (release-notes recipe 0.8).
-  For you: no release note claims a tag that is not in the repository.
-
-## 3.35 — 2026-09-05
+This major closes the engine's operating layer and is the point to
+pull to, tagged `v4`. Between 3.0 and 4.0 the forge gained the two git
+doors — `/save` with the `light` check, `/release` from `main` with its
+checks, the README and the release notes — the history companions with
+a Notes block per row and release notes compiled from them, the
+critic's lenses and the checks as rosters of isolated reviewers sharing
+one contract skill per kind, the commands as skills, `/setup` and
+`/import-project`, and the instance facts split between
+`CLAUDE.local.md` and `identities.local.md`. The test of a major ran
+before the tag: every check, the `clarity` lens three times and one
+CTO challenge, the `essence` lens declined by the principal's word. The
+Action required lines below say what to move after pulling: the
+Version History tables into companions, a Notes block into every row,
+the git identities into `identities.local.md`. The sections of
+3.1–3.49 are folded here; the detail per version stays in
+`projects/forge/10-intent.history.md`.
 
 ### Action required
+- Every versioned document keeps its Version History in an append-only
+  companion `<file>.history.md`, never in its body; `/check` reports a
+  table in the body (POS.0310). For you: move the tables of your
+  projects into companions, one project at a time; `/check` guides you.
 - Version History rows of the intent, the assignment and later layers
   close with a Notes block (POS.0310, `templates/history.md`). For you:
   when you write a version, add the block; rows without one are compiled
@@ -71,50 +49,17 @@ every section; the fine-grained log with the reasons lives in
   new shape (`templates/recipe-release-notes.md`). For you: run `/recipe
   release-notes` on each thought project; until then its release notes
   keep the old shape.
+- The git identities move out of `CLAUDE.local.md` into
+  `identities.local.md` beside it (POS.0950). For you: create
+  `identities.local.md` from `templates/identities.local.md` with your
+  hosts' name and e-mail, delete the Git identities line from
+  `CLAUDE.local.md` — or ask Claude to do it; until then `/new-project`
+  and `/import-project` find no roster.
 
 ### Added
-- Research `2026-09-05-good-release-notes.md`, how the two standards and
-  nine established projects write release notes. For you: you can read
-  why this file looks the way it does.
-
-### Changed
-- `RELEASE-NOTES.md` is one section per release in six fixed groups,
-  compiled from the Notes lines; no Unreleased section; an approved
-  major opens with highlights (POS.0730, release-notes recipe 0.7). For
-  you: you see per release what you must do, what you gained, what
-  changed, what is gone, what was fixed and what was rejected, instead
-  of a story.
-
-## 3.34 — 2026-09-05
-
-### Changed
-- `/release` without a slug asks which repository (POS.1100). For you: a
-  bare `/release` never sweeps all your repositories.
-- `forge-status` reports the current branch (POS.0550). For you: you see
-  at a glance which branch each repository is on.
-- The README's "Saving and syncing" describes the two doors (readme
-  recipe 0.37). For you: the README tells you when to `/save` and when
-  to `/release`.
-
-### Fixed
-- Five positions and two threads said "save" where the procedure is
-  `/release`; CLAUDE.md reduced to the two-doors sentence, `release.md`
-  owning the procedure (POS.0310, POS.0930, POS.1070, THR.0210,
-  THR.0270). For you: what you read about saving and releasing is
-  consistent everywhere.
-
-## 3.33 — 2026-09-05
-
-### Action required
-- `/save` no longer runs the conformance check or the renders
-  (POS.1100). For you: run `/release` from `main` when you want the
-  check, the README and the release notes; between releases broken
-  bookkeeping may sit in git.
-
-### Added
-- `/release`: from `main` only, the full check with walkthrough, README
-  and release notes, the release commit and the tag (POS.1100,
-  `.claude/commands/release.md`). For you: one command publishes a
+- `/release`: from `main` only, its checks with walkthrough, README and
+  release notes, the release commit and the tag (POS.1100,
+  `.claude/skills/release/SKILL.md`). For you: one command publishes a
   checked, rendered state.
 - `forge-save -Tag <name>`; `v<major>` at every release of an approved
   major (POS.1100). For you: you can tag any commit with `/save -Tag` or
@@ -125,197 +70,13 @@ every section; the fine-grained log with the reasons lives in
 - `/release` offers `critique essence` once; no reviewer runs on its own
   (POS.0400). For you: you get one offer of the drift check before
   publishing and are never surprised by a reviewer.
-
-### Changed
-- `/save` is commit and push on the current branch, nothing else
-  (POS.1100, `.claude/commands/save.md`). For you: a save takes seconds
-  instead of minutes.
-- The release notes are rendered by every `/release`, not by every save
-  (release-notes recipe 0.6). For you: your release notes move only when
-  you release.
-- A light check for `/save` is deferred until the kinds of check exist
-  (THR.0290, POS.0570). For you: nothing catches a bookkeeping slip at a
-  save yet; the release does.
-
-### Rejected
-- Stale-only regeneration at every save (REJ.0160); a fixed working
-  branch with a forge-side merge (REJ.0170). For you: the forge will not
-  grow into a wrapper of git.
-
-## 3.32 — 2026-09-05
-
-### Changed
-- `/save` runs the check and its walkthrough first, the renders after,
-  from the settled sources (POS.0570, POS.1000). For you: a finding at a
-  save no longer leaves you with a stale render.
-- `/check-forge` no longer checks the README's currency; `/render`
-  verifies its own output. For you: one fewer false finding at a save.
-
-## 3.31 — 2026-09-05
-
-### Added
-- `templates/brief.md` owns the brief's header; `/forge brief`,
-  `/new-project` and CLAUDE.md cite it. For you: one place to look up
-  what a brief's header must carry.
-
-### Changed
-- `/render` lets the subagent read the previous render when the recipe
-  declares it among its inputs. For you: a render such as the release
-  notes can carry its earlier sections forward.
-- The release-notes recipe requires the intent's current vocabulary
-  (recipe 0.5). For you: release notes no longer pick up words since
-  renamed from old rows.
-
-### Fixed
-- THR.0220 states DEC.0090 beside the fact it ruled on; the write-once
-  sentence dropped from two genre files; a stale ledger item removed.
-  For you: nothing for you beyond consistency.
-
-## 3.30 — 2026-09-05
-
-### Changed
-- The reviewer agents and both skeletons list `Edit` among their tools
-  (FND.0200). For you: a reviewer can amend its report file instead of
-  failing on a write.
-- `disable-model-invocation: true` on the seven writing commands and the
-  six state and genre files; the state files name their arguments in
-  words (POS.1090, FND.0190, FND.0210). For you: Claude can no longer
-  run a writing command on its own; only you can, by typing it.
-
-### Fixed
-- `/check` names its own path to the subagent; `/render` carries the
-  front-matter block in the subagent prompt; `$ARGUMENTS` in `/research`
-  and `/save` (FND.0220–0240). For you: the commands pass your arguments
-  correctly.
-
-## 3.29 — 2026-09-05
-
-Nothing for the user of the engine.
-
-## 3.28 — 2026-09-05
-
-Nothing for the user of the engine.
-
-## 3.27 — 2026-09-04
-
-Nothing for the user of the engine.
-
-## 3.26 — 2026-09-04
-
-Nothing for the user of the engine.
-
-## 3.25 — 2026-09-04
-
-Nothing for the user of the engine.
-
-## 3.24 — 2026-09-04
-
-### Changed
-- `templates/index-bundle.md` is the full skeleton `/ingest` creates a
-  bundle index from, one entry per file, no table (POS.0840). For you: a
-  bundle index you ingest looks like the directory index.
-
-### Fixed
-- `/check` step 8 and `/save` step 2 aligned with POS.0570. For you: a
-  stale render other than the README and the release notes is no longer
-  reported to you as a finding.
-
-## 3.23 — 2026-09-04
-
-### Changed
-- The staleness of any render other than the README and the release
-  notes is never a `/check` finding; the `/forge` map shows it
-  (POS.0570, POS.0810). For you: you decide when to re-render a pitch or
-  a deck; the check stays quiet.
-- One shape for every resource index: a bundle index carries the same
-  per-file entries as the directory index (POS.0840,
-  `templates/index-bundle.md`). For you: every index you open reads the
-  same way.
-
-## 3.22 — 2026-09-04
-
-### Changed
-- `/check` and `/check-forge` report findings only; informal
-  observations are forbidden. For you: a check gives you a list of
-  verdicts to give, nothing else.
-- The release-notes recipe and its skeleton name the history companion
-  as the fine-grained log (recipe 0.4). For you: the release notes point
-  you to the right file for the reasons.
-
-### Fixed
-- The brief's header lists `last_change` (POS.0110, CLAUDE.md); POS.1070
-  names the scripts without a count. For you: the brief header you
-  scaffold is complete.
-
-## 3.21 — 2026-09-04
-
-### Action required
-- Every versioned document keeps its Version History in an append-only
-  companion `<file>.history.md`, never in its body; `/check` reports a
-  table in the body (POS.0310). For you: move the tables of your
-  projects into companions, one project at a time; `/check` guides you.
-
-### Added
-- A project's documents have a kind: five groups, thirteen kinds, one
-  table in CLAUDE.md (POS.1080). For you: you can look up what any file
-  is, who writes it and whether it is versioned.
-- `templates/history.md`; `last_change` in the front-matter of every
-  versioned document, written by the write step (POS.0310). For you: you
-  create a companion from the skeleton and never write `last_change` by
-  hand.
-
-### Changed
-- Recipes keep a Version History again, in their companion (POS.0710).
-  For you: you can trace how a recipe changed.
-- "Material index" is now "resource index"; "artefact" means a document
-  of the chain only, "document" any file (POS.1080). For you: one word
-  for one thing when you read CLAUDE.md.
-
-### Removed
-- "Frozen" from the assignment's description; the scripts' count from
-  POS.0550. For you: nothing to do.
-
-## 3.20 — 2026-09-03
-
-Nothing for the user of the engine.
-
-## 3.19 — 2026-09-03
-
-Nothing for the user of the engine.
-
-## 3.18 — 2026-09-03
-
-### Added
-- `/critique <lens> [artefact]` and `/challenge <persona> [artefact]`
-  take an optional target (POS.0400, POS.0410, POS.0420). For you: you
-  can aim a reviewer at one artefact or leave the target off for the
-  whole chain.
-
-### Changed
-- The challenger's default target is the whole chain (POS.0420). For
-  you: a bare `/challenge cto` reads everything, not the intent alone.
-
-## 3.17 — 2026-09-03
-
-### Changed
-- `/check` reports a project without a repository as a fact; a
-  local-only project is a legitimate shape (POS.0940, POS.0960). For
-  you: you may keep sensitive work local without a finding.
-- The repository is `forge-of-thought`, `forge` the project slug
-  (POS.0500, POS.0600). For you: you clone `forge-of-thought` and
-  address the engine's own project as `forge`.
-
-### Fixed
-- Nine clarity findings of the intent and the ledger (FND.0100–0180).
-  For you: the intent you read is more consistent.
-
-### Rejected
-- FND.0090 overruled: the scripts' branch capability does not contradict
-  the position (DEC.0090). For you: nothing changes in the scripts.
-
-## 3.16 — 2026-09-03
-
-### Added
+- `/setup`: creates `CLAUDE.local.md` by interview and
+  `.claude/settings.local.json` with the model set to Fable, never
+  overwriting (POS.1050). For you: after cloning you run one command
+  instead of the manual install steps.
+- `/import-project <git-url>` through `scripts/forge-clone.ps1`, into
+  `projects/<repository name>` (POS.1060, POS.0550). For you: you bring
+  an existing project in with one command.
 - The critic has lenses: `clarity` reads each artefact on its own,
   `essence` reads the chain for drift; bare `/critique` lists the roster
   (POS.0400, POS.0410). For you: you can run `/critique essence` to see
@@ -324,174 +85,269 @@ Nothing for the user of the engine.
 - `templates/critic.md`; agents `critic-clarity` and `critic-essence`.
   For you: you add a lens the way you add a persona: copy the skeleton,
   write its Lens section.
-
-### Changed
-- `/check-forge` verifies lenses like personas; readme recipe 0.33. For
-  you: the README describes the two lenses.
-
-### Removed
-- The single `critic` agent and `templates/critique.md`. For you:
-  `/critique` without a lens no longer runs anything; it shows you the
-  roster.
-
-## 3.15 — 2026-09-03
-
-### Changed
-- The walkthrough runs one item per message, the verdict acknowledged
-  before the next; an interview one question at a time (POS.0850,
-  CLAUDE.md Working methods). For you: you never face a questionnaire.
-
-## 3.14 — 2026-09-03
-
-### Added
-- Research `2026-09-03-version-history-placement.md`. For you: you can
-  read why the Version History leaves the document.
-
-## 3.13 — 2026-09-03
-
-Nothing for the user of the engine.
-
-## 3.12 — 2026-09-03
-
-Nothing for the user of the engine.
-
-## 3.11 — 2026-09-02
-
-Nothing for the user of the engine.
-
-## 3.10 — 2026-09-02
-
-### Added
-- Prime directive 10: one mechanism lives in one place; a restated
-  procedure is a `/check-forge` finding (POS.1070). For you: what you
-  read in one place is what runs everywhere.
-- `templates/challenger.md` owns the shared behaviour of the personas,
-  carried verbatim by every persona file (POS.1070). For you: you add a
-  persona by copying the skeleton and writing its Lens section.
-- `templates/index-bundle.md`; the library reduction of the ledger in
-  `templates/ledger.md`. For you: a skeleton exists for a bundle index
-  and a library ledger.
-
-### Changed
-- `/check` and `/check-forge` run in an isolated subagent; `/save`
-  renders README and release notes in parallel (POS.0930). For you: a
-  save takes you less time.
-- Twelve commands cite the mechanism they use instead of restating it
-  (POS.1070). For you: no command drifts from the mechanism it names.
-
-### Fixed
-- Thirteen commands and a template had the conversation language
-  hard-coded as Czech (POS.0060, POS.0950). For you: the commands speak
-  the language you set in `CLAUDE.local.md`.
-
-## 3.9 — 2026-09-02
-
-### Added
-- POS.1070: one mechanism lives in one place; `/save` routes the README
-  regeneration through `/render`. For you: the README you get at a save
-  follows `/render`'s rules, never an ad-hoc prompt.
-
-## 3.8 — 2026-09-02
-
-### Changed
-- The commit identity is set locally per repository at creation or
-  import, proposed from `CLAUDE.local.md` by the origin's host
-  (POS.0950). For you: you confirm the identity once per repository and
-  never inherit a wrong one.
-- `/setup` offers `user.useConfigOnly = true` as the one global guard
-  (POS.1050); `/import-project` passes `-Name` and `-Email` by default
-  (POS.1060). For you: a repository without an identity fails aloud
-  instead of committing as someone else.
-
-### Removed
-- The per-host `includeIf` identity model and the `~/.gitconfig-<host>`
-  files of 3.6 and 3.7 (POS.0950). For you: nothing is written into your
-  `~/.gitconfig` beyond the guard.
-
-## 3.7 — 2026-09-01
-
-### Added
-- `/setup` offers the per-host git identity configuration:
-  `~/.gitconfig-<host>` files and an `includeIf` block (POS.1050;
-  replaced at 3.8). For you: you could have `/setup` write your identity
-  files on your word.
-
-## 3.6 — 2026-09-01
-
-### Changed
-- The commit identity follows the host through git conditional includes;
-  a per-repository identity overrides (POS.0950; replaced at 3.8). For
-  you: the right identity resolves by remote host.
-- `/import-project` clones bare by default; `forge-clone.ps1` reports
-  the identity git resolves (POS.1060). For you: you see which identity
-  a fresh clone will commit as.
-- The engine's own README is exempt from the fixed closing sentence
-  (POS.1000). For you: nothing to do.
-
-## 3.5 — 2026-09-01
-
-### Added
-- `/setup`: creates `CLAUDE.local.md` by interview and
-  `.claude/settings.local.json` with the model set to Fable, never
-  overwriting (POS.1050). For you: after cloning you run one command
-  instead of the manual install steps.
-- `/import-project <git-url>` through `scripts/forge-clone.ps1`, into
-  `projects/<repository name>` (POS.1060, POS.0550). For you: you bring
-  an existing project in with one command.
-
-### Changed
-- The README's Quickstart: a common head, then a new project and an
-  existing one; the chain diagram a star with future layers dashed
-  (readme recipe 0.27). For you: a newcomer sees the first act of work
-  and what does not exist yet.
-- Authorship is the boundary between chain and render (POS.0710). For
-  you: what you compose is a chain artefact; what is generated from it
-  is a render.
-
-## 3.4 — 2026-08-30
-
-### Changed
-- A source has one form: at `/ingest` every binary gets one question,
-  convert to Markdown or keep as a functional binary; no `.extract.md`
-  sibling; the ledger's Extract column becomes Form (POS.1040,
-  POS.0180). For you: you answer one question per binary and get either
-  a Markdown source or the binary, never both.
-- Every project README closes with the fixed sentence that maintaining
-  needs Forge of Thought (POS.1000). For you: readers of your project
-  README learn where the tooling is.
-- Renders are regenerated only by `/save` or an explicit `/render`
-  (POS.0810). For you: Claude never re-renders behind your back.
-
-## 3.3 — 2026-08-30
-
-### Added
-- Step by step as a named working method; an accept recommendation
-  carries the concrete text; one research, one question (POS.1030,
-  CLAUDE.md). For you: you can invoke Step by step in a word, and an
-  accept shows you the text before it is written.
-
-### Changed
-- The git identities live in `CLAUDE.local.md`, not in Claude's private
-  memory (POS.0950). For you: your identities survive a memory reset and
-  travel with your instance.
-
-## 3.2 — 2026-08-30
-
-### Added
-- A Dependencies table in the ledger for documents of other
-  repositories; `/check` verifies the paths, `/forge` reports the
-  libraries (POS.1020, `templates/ledger.md`). For you: a project's
-  reliance on a library document is visible and checked.
-
-## 3.1 — 2026-08-30
-
-### Added
+- `/critique <lens> [artefact]` and `/challenge <persona> [artefact]`
+  take an optional target (POS.0400, POS.0410, POS.0420). For you: you
+  can aim a reviewer at one artefact or leave the target off for the
+  whole chain.
 - Every project gets a README and, a thought project, release notes as
   renders of its own recipes; genre skeletons `readme` and
   `release-notes`, scaffolded by `/new-project` (POS.1000). For you:
   your projects get a README and release notes without writing them.
 - An optional `logo.png` in the project root (POS.1010). For you: your
   repository can carry an avatar.
+- A project's documents have a kind: five groups, thirteen kinds, one
+  table in CLAUDE.md (POS.1080). For you: you can look up what any file
+  is, who writes it and whether it is versioned.
+- `templates/history.md`; `last_change` in the front-matter of every
+  versioned document, written by the write step (POS.0310). For you: you
+  create a companion from the skeleton and never write `last_change` by
+  hand.
+- Prime directive 10: one mechanism lives in one place; a restated
+  procedure is a `/check single-source-of-truth` finding (POS.1070). For
+  you: what you read in one place is what runs everywhere.
+- Step by step as a named working method; an accept recommendation
+  carries the concrete text; one research, one question (POS.1030,
+  CLAUDE.md). For you: you can invoke Step by step in a word, and an
+  accept shows you the text before it is written.
+- A Dependencies table in the ledger for documents of other
+  repositories; `/check` verifies the paths, `/forge` reports the
+  libraries (POS.1020, `templates/ledger.md`). For you: a project's
+  reliance on a library document is visible and checked.
+- `templates/brief.md` owns the brief's header; `/forge brief`,
+  `/new-project` and CLAUDE.md cite it. For you: one place to look up
+  what a brief's header must carry.
+- `templates/index-bundle.md`; the library reduction of the ledger in
+  `templates/ledger.md`. For you: a skeleton exists for a bundle index
+  and a library ledger.
+- Research `2026-09-05-good-release-notes.md`, how the two standards and
+  nine established projects write release notes. For you: you can read
+  why this file looks the way it does.
+- Research `2026-09-03-version-history-placement.md`. For you: you can
+  read why the Version History leaves the document.
+
+### Changed
+- Version 4 approved: the engine's operating layer closed as a set
+  (POS.0300). For you: `v4` is the point to pull to; the Action required
+  lines of this section say what to do after.
+- Checks run like the reviewers: `/check <check> [slug]` from a roster
+  of one agent per check, four to start — `project`, `light`, `engine`,
+  `single-source-of-truth` (POS.1140). For you: `/check` bare shows the
+  roster; a new check is one file from `templates/check.md`.
+- `/save` runs the `light` check first; `/release` runs `light` and
+  `project`, for the engine `engine` too (POS.1140, POS.1100). For you:
+  a save catches broken bookkeeping in seconds; the expensive
+  restatement sweep runs only when you call `/check
+  single-source-of-truth`.
+- The release notes are rendered by every `/release`, not by every save
+  (release-notes recipe 0.6). For you: your release notes move only when
+  you release.
+- `/release` without a slug asks which repository (POS.1100). For you: a
+  bare `/release` never sweeps all your repositories.
+- Renders are regenerated only by `/release` or an explicit `/render`
+  (POS.0810). For you: Claude never re-renders behind your back.
+- The commands are skills: every command lives as
+  `.claude/skills/<name>/SKILL.md`, the state and genre files as
+  supporting files beside their dispatcher, `.claude/commands/` gone
+  (POS.1130). For you: the slash commands work as before; a local copy
+  of the engine takes the move through `forge-pull`; the state and genre
+  files no longer appear in the `/` menu.
+- The shared behaviour of the critic and the challenger lives in two
+  contract skills preloaded into the reviewer files, which carry their
+  Lens section only (POS.1120). For you: a new lens or persona is one
+  short file from `templates/critic.md` or `templates/challenger.md`; a
+  change to the shared behaviour is one edit of the contract.
+- The reviewers' contract skills are named `<kind>-contract`:
+  `critic-contract`, `challenger-contract`, `check-contract` (POS.1120).
+  For you: a new lens, persona or check names its kind's contract by
+  that name; the roster shows what they are.
+- Every reviewer contract forbids instance facts in a report (POS.0950).
+  For you: no name, address or host of yours appears in a review,
+  challenge or check.
+- The `cto` persona is a CTO in its own right, no longer defined as the
+  principal's peer (FND.0250). For you: the persona reads the same
+  whoever the principal is.
+- The challenger's default target is the whole chain (POS.0420). For
+  you: a bare `/challenge cto` reads everything, not the intent alone.
+- `/check` reports findings only; informal observations are forbidden.
+  For you: a check gives you a list of verdicts to give, nothing else.
+- `/check` reports a project without a repository as a fact; a
+  local-only project is a legitimate shape (POS.0940, POS.0960). For
+  you: you may keep sensitive work local without a finding.
+- The staleness of any render other than the README and the release
+  notes is never a `/check` finding; the `/forge` map shows it
+  (POS.0570, POS.0810). For you: you decide when to re-render a pitch or
+  a deck; the check stays quiet.
+- Requirement style is the critic's to judge, bookkeeping the `light`
+  check's (POS.1140). For you: a style breach comes from `/critique
+  clarity`, a broken companion from `/check light`, never both.
+- The commit identity is set locally per repository at creation or
+  import, proposed from `identities.local.md` by the origin's host
+  (POS.0950). For you: you confirm the identity once per repository and
+  never inherit a wrong one.
+- `/setup` offers `user.useConfigOnly = true` as the one global guard
+  (POS.1050); `/import-project` passes `-Name` and `-Email` by default
+  (POS.1060). For you: a repository without an identity fails aloud
+  instead of committing as someone else.
+- `forge-status` reports the current branch (POS.0550). For you: you see
+  at a glance which branch each repository is on.
+- The repository is `forge-of-thought`, `forge` the project slug
+  (POS.0500, POS.0600). For you: you clone `forge-of-thought` and
+  address the engine's own project as `forge`.
+- `RELEASE-NOTES.md` is one section per release in six fixed groups,
+  compiled from the Notes lines; no Unreleased section; an approved
+  major opens with highlights (POS.0730, release-notes recipe 0.7). For
+  you: you see per release what you must do, what you gained, what
+  changed, what is gone, what was fixed and what was rejected, instead
+  of a story.
+- At an approved major the minors since the previous major fold into its
+  section, superseded lines dropped, and their sections leave the
+  release notes (POS.0730, release-notes recipe 0.10). For you: after a
+  major you read one merged section for the whole span, and go to
+  `10-intent.history.md` for the detail per version.
+- A Notes line carries both sides — what changed, then what it means for
+  the reader (POS.0310, `templates/history.md`). For you: every release
+  note tells you the change and its consequence in one breath, never one
+  without the other.
+- A major's heading in the release notes says "approved" only; a tag is
+  named in the highlights where one exists (release-notes recipe 0.8).
+  For you: no release note claims a tag that is not in the repository.
+- The release-notes recipe and its skeleton name the history companion
+  as the fine-grained log (recipe 0.4). For you: the release notes point
+  you to the right file for the reasons.
+- The release-notes recipe requires the intent's current vocabulary
+  (recipe 0.5). For you: release notes no longer pick up words since
+  renamed from old rows.
+- The genre skeleton names a major's tag in the highlights where a row
+  records it (POS.0730). For you: your project's release notes will show
+  the tag `/release` set at an approved major.
+- `/render` lets the subagent read the previous render when the recipe
+  declares it among its inputs. For you: a render such as the release
+  notes can carry its earlier sections forward.
+- Recipes keep a Version History again, in their companion (POS.0710).
+  For you: you can trace how a recipe changed.
+- A source has one form: at `/ingest` every binary gets one question,
+  convert to Markdown or keep as a functional binary; no `.extract.md`
+  sibling; the ledger's Extract column becomes Form (POS.1040,
+  POS.0180). For you: you answer one question per binary and get either
+  a Markdown source or the binary, never both.
+- One shape for every resource index: a bundle index carries the same
+  per-file entries as the directory index (POS.0840,
+  `templates/index-bundle.md`). For you: every index you open reads the
+  same way.
+- `templates/index-bundle.md` is the full skeleton `/ingest` creates a
+  bundle index from, one entry per file, no table (POS.0840). For you: a
+  bundle index you ingest looks like the directory index.
+- "Material index" is now "resource index"; "artefact" means a document
+  of the chain only, "document" any file (POS.1080). For you: one word
+  for one thing when you read CLAUDE.md.
+- Authorship is the boundary between chain and render (POS.0710). For
+  you: what you compose is a chain artefact; what is generated from it
+  is a render.
+- Every project README closes with the fixed sentence that maintaining
+  needs Forge of Thought (POS.1000). For you: readers of your project
+  README learn where the tooling is.
+- The engine's own README is exempt from the fixed closing sentence
+  (POS.1000). For you: nothing to do.
+- The README's Quickstart: a common head, then a new project and an
+  existing one; the chain diagram a star with future layers dashed
+  (readme recipe 0.27). For you: a newcomer sees the first act of work
+  and what does not exist yet.
+- The README's "Saving and syncing" describes the two doors (readme
+  recipe 0.37). For you: the README tells you when to `/save` and when
+  to `/release`.
+- The walkthrough runs one item per message, the verdict acknowledged
+  before the next; an interview one question at a time (POS.0850,
+  CLAUDE.md Working methods). For you: you never face a questionnaire.
+- `disable-model-invocation: true` on the seven writing commands and the
+  six state and genre files; the state files name their arguments in
+  words (POS.1090, FND.0190, FND.0210). For you: Claude can no longer
+  run a writing command on its own; only you can, by typing it.
+- The reviewer agents and both skeletons list `Edit` among their tools
+  (FND.0200). For you: a reviewer can amend its report file instead of
+  failing on a write.
+- Twelve commands cite the mechanism they use instead of restating it
+  (POS.1070). For you: no command drifts from the mechanism it names.
+- The conversation-language clause left thirteen commands; CLAUDE.md's
+  prime directive 6 is its one owner (FND.0280). For you: nothing to do.
+- CLAUDE.md states rules and cites their owners: the skills, agents,
+  contracts, templates and script headers own what they do (POS.1070).
+  For you: read a mechanism where it runs; CLAUDE.md tells you which
+  file that is.
+- CLAUDE.md cites the release-notes recipe and `templates/history.md` as
+  the owners of the release-notes shape and the Notes block instead of
+  restating them (POS.1070). For you: one place to read each rule, the
+  skeleton or the recipe.
+- POS.1100 alone says what `/save` and `/release` do; POS.0840 alone
+  says what a resource index is (FND.0300, FND.0340). For you: one place
+  to read each rule.
+- What a position carries (POS.0120), what a major of the forge intent
+  means (POS.0300), where the chain grows (POS.0700), how any instance
+  migrates (POS.0940). For you: after `forge-pull`, `/check project` and
+  the Action required lines tell you what to do, and Claude migrates on
+  your word.
+- What a position carries, made precise: one date, no measurements
+  (POS.0120). For you: a position tells you the rule and the day it took
+  shape; the numbers and the story are in this companion.
+- Nineteen positions of the intent cut to stance, reason and citations
+  by the rule of POS.0120, their story left to this companion. For you:
+  the intent reads as the current state; the story of a decision is in
+  the history row the position names.
+
+### Removed
+- `/check-forge`. For you: check the engine with `/check engine`, the
+  forge project with `/check project forge`.
+- The single `critic` agent and `templates/critique.md`. For you:
+  `/critique` without a lens no longer runs anything; it shows you the
+  roster.
+- The per-host `includeIf` identity model and the `~/.gitconfig-<host>`
+  files of 3.6 and 3.7 (POS.0950). For you: nothing is written into your
+  `~/.gitconfig` beyond the guard.
+- "Frozen" from the assignment's description; the scripts' count from
+  POS.0550. For you: nothing to do.
+
+### Fixed
+- Thirteen commands and a template had the conversation language
+  hard-coded as Czech (POS.0060, POS.0950). For you: the commands speak
+  the language you set in `CLAUDE.local.md`.
+- `/check` names its own path to the subagent; `/render` carries the
+  front-matter block in the subagent prompt; `$ARGUMENTS` in `/research`
+  and `/save` (FND.0220–0240). For you: the commands pass your arguments
+  correctly.
+- The `/save` row of the commands table said "no check" (FND of the
+  single-source-of-truth check). For you: nothing to do.
+- Five positions and two threads said "save" where the procedure is
+  `/release`; CLAUDE.md reduced to the two-doors sentence, `release.md`
+  owning the procedure (POS.0310, POS.0930, POS.1070, THR.0210,
+  THR.0270). For you: what you read about saving and releasing is
+  consistent everywhere.
+- `release.md` and POS.1000 said what POS.0730 no longer says (a tag on
+  the heading; notes distilled). For you: nothing to do.
+- POS.1100 says what `/save` and `/release` run since 3.44; four smaller
+  alignments of the intent (FND.0350–0390). For you: nothing to do.
+- Four alignments of the intent after the sweep (FND.0400–0430). For
+  you: nothing to do.
+- Counts, the retired "skeleton" meaning and two typographic slips in
+  the intent (FND.0310–0330). For you: nothing to do.
+- Nine clarity findings of the intent and the ledger (FND.0100–0180).
+  For you: the intent you read is more consistent.
+- The brief's header lists `last_change` (POS.0110, CLAUDE.md); POS.1070
+  names the scripts without a count. For you: the brief header you
+  scaffold is complete.
+- `/check` step 8 and `/save` step 2 aligned with POS.0570. For you: a
+  stale render other than the README and the release notes is no longer
+  reported to you as a finding.
+- THR.0220 states DEC.0090 beside the fact it ruled on; the write-once
+  sentence dropped from two genre files; a stale ledger item removed.
+  For you: nothing for you beyond consistency.
+
+### Rejected
+- A migration tool for third-party instances (DEC.0100). For you: the
+  check and the release notes are the tool.
+- Stale-only regeneration at every save (REJ.0160); a fixed working
+  branch with a forge-side merge (REJ.0170). For you: the forge will not
+  grow into a wrapper of git.
+- FND.0090 overruled: the scripts' branch capability does not contradict
+  the position (DEC.0090). For you: nothing changes in the scripts.
 
 ## 3.0 — 2026-08-30 — approved
 

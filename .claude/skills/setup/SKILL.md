@@ -1,5 +1,5 @@
 ---
-description: First run after cloning the engine — fill CLAUDE.local.md by interview, set the session model (Fable), offer the global git identity guard; never overwrites, runs no git operation
+description: First run after cloning the engine — create and fill CLAUDE.local.md and identities.local.md by interview, set the session model (Fable), offer the global git identity guard; never overwrites, runs no git operation
 disable-model-invocation: true
 ---
 
@@ -16,7 +16,8 @@ speak whatever language the user speaks to you.
      touch it.
    - Otherwise copy `templates/CLAUDE.local.md` to the root and fill
      it by elicitation interview, one question at a time:
-     - **Principal** — name and role (whose thinking is being forged);
+     - **Principal** — the role, whose thinking is being forged (the
+       template's placeholder);
      - **Conversation language** — the language the working
        conversation runs in (artefacts are always English, briefs
        verbatim);

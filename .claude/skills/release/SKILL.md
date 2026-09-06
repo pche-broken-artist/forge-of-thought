@@ -1,11 +1,11 @@
 ---
-description: Release one repository from main — full check with walkthrough, README and release notes, then /save with the release message and the tag at an approved major
+description: Release one repository from main — its checks with walkthrough, README and release notes, then /save with the release message and the tag at an approved major
 argument-hint: '[project-slug] [-m "message"] [-Tag name]'
 disable-model-invocation: true
 ---
 
-Release one repository from `main` (POS.1100): the full conformance
-check settled by walkthrough (POS.0570), the README and the release
+Release one repository from `main` (POS.1100): the checks POS.1140
+composes, settled by walkthrough (POS.0570), the README and the release
 notes regenerated from the settled sources under the principal's eyes
 (POS.0810, POS.1000), and then `/save` (`.claude/skills/save/SKILL.md`)
 with the release message and, at an approved major, the tag. The

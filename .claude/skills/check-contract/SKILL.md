@@ -72,6 +72,9 @@ names the owner of each rule and never restates it (POS.1070).
 - **Advisory.** Nothing blocks (POS.0430): the principal decides what
   is fixed, deferred or accepted; a deferral is recorded in the
   ledger under "Waiting on principal" by the session, not by you.
+- **Decided once.** A finding the project's `decisions.md` records
+  as overruled or accepted by a DEC is not raised again; at most it
+  is named once as a fact, with the DEC cited.
 - **Cheap where the Lens says so.** A check that names a scope reads
   that scope and nothing more; a check that names the whole reads
   the whole, honestly, however long it takes.

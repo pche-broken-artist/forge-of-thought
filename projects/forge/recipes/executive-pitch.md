@@ -2,16 +2,16 @@
 project: forge
 purpose: Slide-by-slide source material for a five-slide executive pitch of Forge of Thought
 audience: C-level executives whose experience of AI is chatting with it
-version: 0.1
-updated: 2026-08-30
-last_change: 0.1 (2026-08-30): composed by interview, story S01–S05 agreed; not yet rendered.
+version: 0.2
+updated: 2026-09-06
+last_change: 0.2 (2026-09-06): inputs declared from the engine root, the base every other recipe and the ledger use (project check of release 4.0); still not rendered.
 ---
 
 # Recipe — Executive pitch
 
 ## Inputs
-- 10-intent.md
-- ../../CLAUDE.md
+- projects/forge/10-intent.md
+- CLAUDE.md
 
 ## Instructions
 - The render is **source material for building a presentation**, not

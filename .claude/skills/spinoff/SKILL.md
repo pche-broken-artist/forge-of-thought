@@ -1,6 +1,6 @@
 ---
 description: Spin a requirement group off into its own project (principal's explicit decision only)
-argument-hint: <source-project> <group-name> <new-slug>
+argument-hint: "<source-project> <group-name> <new-slug>"
 disable-model-invocation: true
 ---
 

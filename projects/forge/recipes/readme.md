@@ -2,9 +2,9 @@
 project: forge
 purpose: readme
 audience: humans arriving at the repository
-version: 0.39
+version: 0.41
 updated: 2026-09-06
-last_change: 0.39 (2026-09-06): the last two counts of the reviewers dropped from the section instructions; the Template placeholder of the Commands section names /release beside /ingest and /save (check-forge finding of 2026-09-06).
+last_change: 0.41 (2026-09-06): the git-identity roster named as identities.local.md in the three Setup instructions and the Template, per POS.0950 (engine check of release 4.0).
 output: /README.md
 ---
 
@@ -124,8 +124,8 @@ summarising the newest row. -->
   fenced block: **Starting a new project** — `/new-project my-idea`,
   `/forge intent`, `/save`; **Bringing an existing project** —
   `/import-project <project url>` (comment: clones into `projects/` —
-  the commit identity is proposed from your `CLAUDE.local.md` roster
-  and confirmed by you) and
+  the commit identity is proposed from your `identities.local.md`
+  roster and confirmed by you) and
   `/forge <project-slug>` (comment: the slug is the repository's
   name; select the project before any work — the forge cannot guess
   it). Closing
@@ -243,22 +243,24 @@ summarising the newest row. -->
   (slugs), illustrated only with `forge` and the `lib-` prefix, never
   with invented or instance projects. Naming has no numbered section
   of its own.
-- Section for reviewers carries, after the summary, one paragraph on
-  "isolation is not independence" per the intent (POS.0790): the
-  reviewers share the author's model family, their agreement is never
-  validation, and the calibration point lies outside the forge.
-- Section for reviewers opens with a punchy three-paragraph summary —
-  clean context first ("they cannot be told what we really meant"),
-  then challengers (a growing roster of persona lenses attacking the
-  substance of the thinking), then the critic (a roster of lenses on
-  the documents: `clarity` reads each artefact on its own, `essence`
-  reads the chain for drift by distilling each layer's essence blind
-  and comparing it with the layer above) — before any procedural
-  detail; all of one shape, personas and lenses, CHL and FND. Critique finding states are given as
-  a list, not as inline arrow-and-pipe notation, with exactly the
-  ledger's vocabulary — open, resolved (an iteration of the artefact
-  concerned), overruled (a DEC with its reason), obsolete (the
-  passage no longer exists) — never a state of the render's own.
+- Section for reviewers opens with a short summary — clean context
+  first ("they cannot be told what we really meant"), then that every
+  kind of reviewer is of one shape — and, after the summary, one
+  paragraph on "isolation is not independence" per the intent
+  (POS.0790): the reviewers share the author's model family, their
+  agreement is never validation, and the calibration point lies
+  outside the forge. Then one subsection per kind of reviewer, in the
+  order critic, challenger, check, and every kind that comes after,
+  each with: what it judges, in one sentence; its command; its roster
+  as a bullet list — one bullet per lens, persona or check, the name
+  in code, a dash, and what it reads, hunts or verifies in one
+  sentence, taken from the agent file's `description` — never woven
+  into a paragraph, so that a new lens, persona or check is a new
+  bullet; then its output and the states of its findings as a list in
+  exactly the ledger's vocabulary, never a state of the render's own
+  (critic: open, resolved, overruled, obsolete; challenger: open,
+  accepted, rejected, parked, obsolete; check: nothing filed — fix,
+  defer or accept in the session).
 - Open threads (THR) are not enumerated; growth is summarised from
   POS.0700 — the layer growth path — and the multi-principal outlook
   (more principals, more instances). The engine/projects split is
@@ -308,7 +310,7 @@ summarising the newest row. -->
   principal, a render is generated from artefacts (the article and
   its translation in the diagram illustrate it).
 - Setup is written for a reader who has never used Claude Code and
-  has four parts:
+  has five parts:
   - "Prerequisites" — one consolidated list: git; PowerShell 7
     (pwsh) — the scripts are PowerShell, needed on macOS/Linux too;
     Python 3 (for markitdown); a paid Claude subscription.
@@ -320,11 +322,11 @@ summarising the newest row. -->
     `npm install -g @anthropic-ai/claude-code`. Sign in on first
     run — usage draws from the same pool as Claude chat. Always
     start `claude` from the engine root so CLAUDE.md and
-    CLAUDE.local.md load. Then run `/setup` once: it creates
-    `CLAUDE.local.md` from its template and fills it with you in a
-    short interview (who the principal is, the conversation
-    language, your git identities per host) — gitignored, never
-    committed — and creates `.claude/settings.local.json` with the
+    CLAUDE.local.md load. Then run `/setup` once: it fills
+    `CLAUDE.local.md` (who the principal is, the conversation
+    language) and `identities.local.md` (your git identities per
+    host) from their templates with you in a short interview — both
+    gitignored, never committed — and creates `.claude/settings.local.json` with the
     session model set to Fable, the strongest available model, which
     the whole forge including the blind reviewers runs on; it tells
     you so in one sentence, and `/model` or editing that file
@@ -335,16 +337,13 @@ summarising the newest row. -->
     committing with a default; declined, it prints the line for you
     to apply by hand. The identities themselves are set per
     repository, proposed from your roster at every project creation
-    or import. `/setup` never overwrites existing
-    files. Upgrading the engine is
-    `scripts/forge-pull.ps1` — a fast-forward of `main`; the projects
-    are untouched by it.
+    or import. `/setup` never overwrites existing files.
   - "Your projects" — each project is a directory under `projects/`
     and a git repository of its own: `/new-project` creates the
     files; `git init` in that directory and a remote if wanted are a
     one-off act of yours, while the commit identity belongs to the
     project: it is set locally in the repository, proposed from the
-    identity roster in `CLAUDE.local.md` by the origin's host and
+    identity roster in `identities.local.md` by the origin's host and
     confirmed by you. An
     existing project is brought in with `/import-project <git-url>`,
     which clones it into `projects/<repository name>` through
@@ -365,9 +364,10 @@ summarising the newest row. -->
     typically a document of a library project — or none, in which
     case Claude designs the visuals; the git scripts need nothing
     beyond git.
-  - "Saving and syncing" — two doors: `/save` commits and pushes on
-    the current branch, no check, no render; `/release`, from `main`
-    only, runs the conformance check settled with the principal,
+  - "Saving and syncing" — two doors: `/save` runs the light check,
+    then commits and pushes on the current branch, no render;
+    `/release`, from `main` only, runs its checks, settled with the
+    principal,
     offers `critique essence` once, re-renders the README and release
     notes and then saves with the release message and, at an approved
     major, the tag `v<major>`; the scripts follow as the underlying
@@ -378,6 +378,20 @@ summarising the newest row. -->
     line, branches are voluntary (`forge-branch` creates or switches,
     merging stays with git), one remote per repository, no URL
     anywhere.
+  - "Upgrading" — written for the user who pulls a new version of the
+    engine. Upgrading the engine is `scripts/forge-pull.ps1`, a
+    fast-forward of `main`; your projects are untouched by it and
+    record no engine version. Read `RELEASE-NOTES.md`, the *Action
+    required* lines first: they say what a new version expects of
+    your projects and your instance files. Then, project by project,
+    run `/check project <slug>`: it measures the project against the
+    current conventions and reports what no longer conforms, nothing
+    else. Go through the findings with Claude one at a time and agree
+    what to migrate and how; Claude makes the changes on your word,
+    in the session, with no migration tool in between — the check and
+    the release notes are the tool. A project you leave as it is
+    stays valid under the conventions it was written to; migrating it
+    is your decision, per project, never assumed.
 - The Scripts section lists every script the repository uses — one
   table row per file in `scripts/`: script, one-sentence purpose,
   when it is run, and an install note where one is needed pointing
@@ -473,8 +487,11 @@ the two renders paragraphs: "Renders and recipes", "From Markdown to
 slides">
 
 ## 8. Isolated reviewers
-<punchy three-paragraph opening per the instruction; then /challenge
-subsection; /critique subsection with finding states as a list>
+<summary and the isolation paragraph per the instruction; then one
+subsection per kind — ### Critic (`/critique`), ### Challenger
+(`/challenge`), ### Checks (`/check`), and any kind that comes after —
+each: what it judges, the command, the roster as a bullet list (name —
+one sentence), the output and its states as a list>
 
 ## 9. Commands
 <intro sentence; commands table mirroring CLAUDE.md with short cells;
@@ -498,8 +515,8 @@ project kinds; naming with forge and the lib- prefix only>
 <consolidated list>
 ### Getting the forge and Claude Code
 <clone; install commands; sign-in; run from root; /setup
-(CLAUDE.local.md interview, settings.local.json with Fable);
-forge-pull as the upgrade>
+(CLAUDE.local.md and identities.local.md interview,
+settings.local.json with Fable)>
 ### Your projects
 <a repository of its own per project; /new-project creates files,
 git init is yours; /import-project brings an existing one through
@@ -507,12 +524,18 @@ forge-clone; "not under git" is a fact>
 ### Script prerequisites
 <one bullet per script>
 ### Saving and syncing
-<the two doors — /save: commit and push, no check, no render;
-/release from main: check, README and release notes, then save with
+<the two doors — /save: the light check, then commit and push, no
+render; /release from main: its checks, README and release notes,
+then save with
 the release message and the major's tag; the scripts as mechanism
 and the only intended door to git, serving the engine and every
 project repository; main the released line, branches voluntary via
 forge-branch, one remote per repository, no URL>
+### Upgrading
+<forge-pull as the upgrade, projects untouched; RELEASE-NOTES.md and
+its Action required lines; per project /check project, the findings
+agreed with Claude one at a time and migrated on your word; no
+migration tool; a project left as it is stays valid>
 
 ## 13. Scripts
 <table of every script in scripts/: script, one-sentence purpose,
