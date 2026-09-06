@@ -14,10 +14,7 @@ last_change: <one line summarising the newest row of <recipe>.history.md — wri
 A recipe is the iterated thing; its render is generated output. Never
 polish a render by hand: change the recipe, run /render <recipe>. The
 render is a slide-by-slide deck definition; scripts/md2pptx.ps1 turns
-it into an actual PowerPoint file. Recipes are tools: version + updated date in
-front-matter and no status (a recipe is never approved); its Version
-History lives in the companion <recipe>.history.md, last_change
-summarising the newest row. -->
+it into an actual PowerPoint file. How a recipe is versioned is templates/recipe.md's. -->
 
 ## Inputs
 <!-- Chain artefacts the deck is generated from. A picture may come

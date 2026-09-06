@@ -15,10 +15,7 @@ thought project and iterated via /recipe release-notes. A recipe is
 the iterated thing; its render is generated output. Never polish
 RELEASE-NOTES.md by hand: change this recipe, run
 /render release-notes — and every /release of the project adds the
-new release's section. Recipes are tools: version + updated date in
-front-matter and no status (a recipe is never approved); its Version
-History lives in the companion <recipe>.history.md, last_change
-summarising the newest row. -->
+new release's section. How a recipe is versioned is templates/recipe.md's. -->
 
 ## Inputs
 - 10-intent.history.md      # the intent's Version History — the Notes

@@ -1,7 +1,5 @@
 ---
 description: Iterate 10-intent.md — elicitation interview consolidating the principal's intent
-argument-hint: [project-slug]
-disable-model-invocation: true
 ---
 
 Target: `10-intent.md`.

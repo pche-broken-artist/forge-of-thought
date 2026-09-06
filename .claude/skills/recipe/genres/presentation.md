@@ -1,7 +1,5 @@
 ---
 description: Compose a presentation recipe — a slide-by-slide deck definition, convertible to pptx by scripts/md2pptx.ps1
-argument-hint: [project-slug]
-disable-model-invocation: true
 ---
 
 Genre: presentation. Skeleton: `templates/recipe-presentation.md`.

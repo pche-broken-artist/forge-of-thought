@@ -1,7 +1,5 @@
 ---
 description: Compose or iterate a thought project's release-notes recipe — one section per release in six fixed groups, compiled from the Notes lines of the chain's history rows
-argument-hint: [project-slug]
-disable-model-invocation: true
 ---
 
 Genre: release-notes. Skeleton: `templates/recipe-release-notes.md`.

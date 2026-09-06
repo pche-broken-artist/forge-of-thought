@@ -60,7 +60,7 @@ steps 3–5 below do not apply.
      `00-brief.history.md` from `templates/history.md`
 3. **00-brief.md content:** ask the principal to paste or dictate
    the brief now and hand it to the `/forge brief` procedure
-   (`.claude/commands/forge/brief.md`, from its step 2): it stores,
+   (`.claude/skills/forge/states/brief.md`, from its step 2): it stores,
    asks whether the text is finished, locks or leaves the draft.
    Nothing of that procedure is restated here (POS.1070).
 4. Do NOT create 10-intent.md or 20-assignment.md yet — intent is born from the

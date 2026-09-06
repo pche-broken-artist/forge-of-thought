@@ -1,18 +1,18 @@
 ---
 description: Work the document chain — bare = state map, with a target = iterate that artefact
-argument-hint: [target-state] [project-slug]
+argument-hint: "[target-state] [project-slug]"
 ---
 
 Role: dispatcher for work on the document chain. The chain is a star,
 not a fixed line: each target state declares its own inputs in its
-definition file. Definitions live in `.claude/commands/forge/<state>.md`
+definition file. Definitions live in `.claude/skills/forge/states/<state>.md`
 — one file per target state, named after the artefact it produces.
 Adding a layer means adding a file; this dispatcher never changes.
 
 **Bare `/forge` — report the map.**
 1. Infer the current project from context ($1 may be a slug; if
    ambiguous, ask).
-2. Read the project's ledger and list `.claude/commands/forge/` for the
+2. Read the project's ledger and list `.claude/skills/forge/states/` for the
    available target states.
 3. Report compactly:
    - the project's kind (ledger header, POS.0960) and whether it is
@@ -37,7 +37,7 @@ Adding a layer means adding a file; this dispatcher never changes.
    methods).
 
 **`/forge <state>` — work on that artefact.**
-1. Resolve `.claude/commands/forge/$1.md`. If it does not exist, list
+1. Resolve `.claude/skills/forge/states/$1.md`. If it does not exist, list
    the states that do and stop.
 2. Read the file and follow it. It declares the target artefact, its
    inputs and its working rules; everything else (write-once-per-round,

@@ -316,8 +316,8 @@ scripts/                   # forge-save / forge-pull / forge-status
                            # doc2md (document →
                            # Markdown), md2pptx (deck render →
                            # PowerPoint)
-.claude/                   # commands, agents, skills (the
-                           # reviewers' contracts), settings
+.claude/                   # skills (the commands and the reviewers'
+                           # contracts), agents, settings
                            # (settings.local.json: the session
                            # model — gitignored)
 templates/                 # canonical skeletons
@@ -403,8 +403,8 @@ and `-Email` (`/import-project` is its door and passes them by
 default, proposed from `CLAUDE.local.md` by the URL's host on the
 principal's word). `scripts/forge-branch.ps1` switches one
 repository to a branch, creating it when it does not exist (`main`
-switches back), refuses over unsaved changes and does nothing else —
-merging is git's, by hand or by merge request. The scripts carry
+switches back), refuses over unsaved changes, bare reports the branch and lists the
+branches, and does nothing else — merging is git's, by hand or by merge request. The scripts carry
 no URL and no identity. The engine receives the git tag `v<major>` at
 every release of an approved major of the forge intent; any other
 tag is the principal's request, with a free name. Immutability of
@@ -424,7 +424,7 @@ is checked out, no check and no render (a light check fit for a save
 is added once the kinds of check exist, THR.0290). `/release`, from
 `main` only, checks, re-renders the README and release notes and
 then saves with the release message and tag; the procedure is
-`.claude/commands/release.md`. Saves made directly from the shell
+`.claude/skills/release/SKILL.md`. Saves made directly from the shell
 are unaffected.
 
 ## Versioning & status
@@ -508,7 +508,7 @@ lifecycle. Depth max two levels.
   later tested.
 
 ## Isolated reviewers
-All run as isolated subagents seeing artefacts only, never the working
+All run as isolated subagents seeing the project's documents only, never the working
 conversation, on the session model (`model: inherit` — the whole forge
 runs on one model; speed is bought with context, never with a weaker
 reviewer). One shape, strictly separate jobs, each with its own
@@ -587,7 +587,7 @@ after every operation.
 | `/new-project <slug>` | scaffold a project by kind — files only, never git: a thought project with its brief captured verbatim (locked if finished, draft otherwise), or a library (`lib-`) of shared material |
 | `/import-project <git-url>` | bring an existing project into `projects/` through `scripts/forge-clone.ps1` — the directory is the repository's name; the commit identity is set per repository, proposed from `CLAUDE.local.md` by the URL's host |
 | `/forge [slug]` | state map: artefacts, versions, possible next steps, stale renders |
-| `/forge <state> [slug]` | iterate the target artefact (`brief [name]`, `intent`, `assignment`, …); one definition file per state in `.claude/commands/forge/`, each declaring its inputs |
+| `/forge <state> [slug]` | iterate the target artefact (`brief [name]`, `intent`, `assignment`, …); one definition file per state in `.claude/skills/forge/states/`, each declaring its inputs |
 | `/ingest [file] [slug]` | store and register external input in sources/ and index it; bare = sweep sources/ |
 | `/render <recipe> [slug]` | regenerate a render from its recipe in recipes/ |
 | `/recipe [genre] [slug]` | bare = genre roster; with a genre (`presentation`, `readme`, `release-notes`), guided composition — or iteration — of a render recipe from the genre's elicitation checklist and skeleton |

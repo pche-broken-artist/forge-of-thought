@@ -2,9 +2,9 @@
 project: forge
 purpose: readme
 audience: humans arriving at the repository
-version: 0.38
+version: 0.39
 updated: 2026-09-06
-last_change: 0.38 (2026-09-06): the reviewers no longer counted — "isolated reviewers", "blind adversarial reviewers" — so the render does not age with a further kind (POS.0540, FND.0290).
+last_change: 0.39 (2026-09-06): the last two counts of the reviewers dropped from the section instructions; the Template placeholder of the Commands section names /release beside /ingest and /save (check-forge finding of 2026-09-06).
 output: /README.md
 ---
 
@@ -244,7 +244,7 @@ summarising the newest row. -->
   with invented or instance projects. Naming has no numbered section
   of its own.
 - Section for reviewers carries, after the summary, one paragraph on
-  "isolation is not independence" per the intent (POS.0790): the two
+  "isolation is not independence" per the intent (POS.0790): the
   reviewers share the author's model family, their agreement is never
   validation, and the calibration point lies outside the forge.
 - Section for reviewers opens with a punchy three-paragraph summary —
@@ -254,7 +254,7 @@ summarising the newest row. -->
   the documents: `clarity` reads each artefact on its own, `essence`
   reads the chain for drift by distilling each layer's essence blind
   and comparing it with the layer above) — before any procedural
-  detail; the two are one shape, personas and lenses, CHL and FND. Critique finding states are given as
+  detail; all of one shape, personas and lenses, CHL and FND. Critique finding states are given as
   a list, not as inline arrow-and-pipe notation, with exactly the
   ledger's vocabulary — open, resolved (an iteration of the artefact
   concerned), overruled (a DEC with its reason), obsolete (the
@@ -478,7 +478,7 @@ subsection; /critique subsection with finding states as a list>
 
 ## 9. Commands
 <intro sentence; commands table mirroring CLAUDE.md with short cells;
-prose paragraph below the table with /ingest and /save mechanics;
+prose paragraph below the table with /ingest, /save and /release mechanics;
 note that plain conversation works too>
 ### A typical journey
 <plain-language bullet story per the instruction>

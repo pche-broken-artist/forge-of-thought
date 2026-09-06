@@ -1,6 +1,6 @@
 ---
 description: Register external documents (transcripts, offers, specs, standards) in sources/ — store, catalogue, nothing more
-argument-hint: [file-or-path] [project-slug]
+argument-hint: "[file-or-path] [project-slug]"
 disable-model-invocation: true
 ---
 

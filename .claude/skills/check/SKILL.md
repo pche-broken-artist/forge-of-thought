@@ -1,6 +1,6 @@
 ---
 description: Check a project's conformance with the current Forge conventions
-argument-hint: [project-slug]
+argument-hint: "[project-slug]"
 ---
 
 Check project $1 against the current conventions of the core
@@ -12,7 +12,7 @@ offered as an immediate fix.
 
 Run in isolation: spawn one subagent (Agent tool, type
 `general-purpose`, session model) whose prompt names the project path
-(or paths) and instructs it to read `.claude/commands/check.md` and
+(or paths) and instructs it to read `.claude/skills/check/SKILL.md` and
 execute the checks under *Checks per project* as written, returning
 the report and nothing else. The subagent sees only the files, never
 the working conversation (POS.0930); the checks live here, not in the

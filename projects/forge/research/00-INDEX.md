@@ -26,7 +26,7 @@ ledger. Written by /research; verified by /check. -->
 ### `2026-08-29-claude-code-packaging.md`
 - **Question:** what does the current Claude Code documentation offer and forbid for distributing a CLAUDE.md-centric framework — plugins, skills, memory discovery, instance configuration — and what does Anthropic recommend?
 - **Answer in short:** a plugin carries commands, agents, templates and scripts with versioned updates and `userConfig` for instance facts, but "a CLAUDE.md at the plugin root is not loaded" and there is no rules component; always-on conventions arrive only by a SessionStart hook, a main-thread agent replacing the system prompt, or one `@import` line per project. Discovery is asymmetric — CLAUDE.md up to the filesystem root, commands and agents only to the nearest repository root, settings not at all — so an engine clone with nested project repos works exactly when Claude Code is launched from the engine root, a documented sharing route. Commands are already skills; `CLAUDE.local.md` is the native home for instance facts.
-- **Consult when:** moving instance facts out of the engine (THR.0090), packaging the forge as a plugin, migrating `.claude/commands` to `.claude/skills`, or explaining where Claude Code must be started.
+- **Consult when:** moving instance facts out of the engine (THR.0090), packaging the forge as a plugin, explaining the skills layout of the operating layer (POS.1130), or explaining where Claude Code must be started.
 
 ### `2026-08-29-git-engine-projects-separation.md`
 - **Question:** does git or its tooling have a feature for a public engine repo whose clone is the working directory with independent private project repos inside, upgradable without touching them?

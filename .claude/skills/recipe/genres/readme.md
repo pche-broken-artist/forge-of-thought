@@ -1,7 +1,5 @@
 ---
 description: Compose or iterate a project's readme recipe — the render is the project's README.md, regenerated at every release
-argument-hint: [project-slug]
-disable-model-invocation: true
 ---
 
 Genre: readme. Skeleton: `templates/recipe-readme.md`. Output:

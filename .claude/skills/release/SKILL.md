@@ -1,13 +1,13 @@
 ---
 description: Release one repository from main — full check with walkthrough, README and release notes, then /save with the release message and the tag at an approved major
-argument-hint: [project-slug] [-m "message"] [-Tag name]
+argument-hint: '[project-slug] [-m "message"] [-Tag name]'
 disable-model-invocation: true
 ---
 
 Release one repository from `main` (POS.1100): the full conformance
 check settled by walkthrough (POS.0570), the README and the release
 notes regenerated from the settled sources under the principal's eyes
-(POS.0810, POS.1000), and then `/save` (`.claude/commands/save.md`)
+(POS.0810, POS.1000), and then `/save` (`.claude/skills/save/SKILL.md`)
 with the release message and, at an approved major, the tag. The
 repository is named by its slug, `forge` meaning the engine; without
 a slug, ask which repository — a release is always one repository,
@@ -23,8 +23,8 @@ never a sweep.
 2. Run the full check over the sources and report the result to the
    principal — always, even when clean. The engine (core or
    `projects/forge/` touched): the `/check-forge` procedure
-   (`.claude/commands/check-forge.md`). A project: `/check <slug>`
-   (`.claude/commands/check.md`). Clean: state that the check passed.
+   (`.claude/skills/check-forge/SKILL.md`). A project: `/check <slug>`
+   (`.claude/skills/check/SKILL.md`). Clean: state that the check passed.
    Findings: settle them by walkthrough (CLAUDE.md, Working methods);
    a finding may be accepted as a deferral, recorded in the affected
    project's ledger under "Waiting on principal", and the release
@@ -35,14 +35,14 @@ never a sweep.
 3. Offer `/critique essence` once, in one sentence: the lens that
    guards what a release publishes, the drift of the chain
    (POS.0400). On the principal's word run it through its own
-   definition (`.claude/commands/critique.md`) and settle its
+   definition (`.claude/skills/critique/SKILL.md`) and settle its
    findings by walkthrough before going on; on his no, or silence,
    run nothing — no reviewer ever runs at a release on Claude's own
    judgement.
 4. Only once the findings are settled, regenerate the repository's
    README and release notes from their recipes — unconditionally, no
    staleness test, always through the `/render` procedure
-   (`.claude/commands/render.md`), never through an ad-hoc subagent
+   (`.claude/skills/render/SKILL.md`), never through an ad-hoc subagent
    prompt (POS.1070). The two renders are launched at once, each
    through the `/render` procedure, and awaited together. Report the
    steps, including a short summary of what materially changed in the
@@ -59,7 +59,7 @@ never a sweep.
    regenerated here; their staleness is the principal's business,
    shown by the `/forge` map (POS.0570).
 5. Then run `/save` for this repository through its own definition
-   (`.claude/commands/save.md`), with two things decided here: the
+   (`.claude/skills/save/SKILL.md`), with two things decided here: the
    commit message is `release <intent version>: <one line>` — the
    line summarising the rounds since the last release, from the rows
    of the intent's `.history.md` companion, the primary record

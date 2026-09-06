@@ -1,7 +1,5 @@
 ---
 description: Iterate 20-assignment.md — distil the intent for the recipients
-argument-hint: [project-slug]
-disable-model-invocation: true
 ---
 
 Target: `20-assignment.md`.

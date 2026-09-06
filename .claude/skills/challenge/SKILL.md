@@ -1,6 +1,6 @@
 ---
 description: Run a challenger persona against the substance of any chain artefact — bare = persona roster
-argument-hint: [persona] [artefact] [project-slug]
+argument-hint: "[persona] [artefact] [project-slug]"
 ---
 
 Challenger personas live as `.claude/agents/challenger-<persona>.md` —

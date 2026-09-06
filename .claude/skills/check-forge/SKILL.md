@@ -10,12 +10,12 @@ bookkeeping (stale versions, dates, counts) may be offered as an
 immediate fix.
 
 0. **Run in isolation** exactly as `/check` does
-   (`.claude/commands/check.md`, opening paragraph); the prompt names
+   (`.claude/skills/check/SKILL.md`, opening paragraph); the prompt names
    the engine root and the files changed per
    `scripts/forge-status.ps1`. Back in the session: walk the findings
    through with the principal.
 1. **Core internal consistency**
-   - CLAUDE.md commands table ↔ actual files in `.claude/commands/`;
+   - CLAUDE.md commands table ↔ actual skills in `.claude/skills/*/SKILL.md` (the reviewers' contracts excepted);
      described agents ↔ `.claude/agents/`.
    - Scripts on disk ↔ CLAUDE.md: every file in `scripts/` is
      described in CLAUDE.md (layout comment and its governing rule)
@@ -58,9 +58,11 @@ immediate fix.
      `doc2md.ps1`, a render outside `/render`, a review outside the
      agents).
 4. **Forge project** — run the `/check` procedure
-   (`.claude/commands/check.md`) on `projects/forge` exactly as on any
-   thought project; its findings join this report. Nothing of that
-   procedure is restated here (POS.1070).
+   (`.claude/skills/check/SKILL.md`) on `projects/forge` exactly as on any
+   thought project, its README and release-notes staleness test
+   excepted, since `/release` renders after this check; its findings
+   join this report. Nothing of that procedure is restated here
+   (POS.1070).
 5. **Rename/removal sweep** — grep for the old names recorded in DEC
    records (e.g. a renamed command) and for terms the principal has
    explicitly dropped; only historical records (changelogs, DEC, REJ)

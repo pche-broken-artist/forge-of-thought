@@ -1,7 +1,5 @@
 ---
 description: Compose or finish a brief — the principal's own text of one whole of thinking, locked when done
-argument-hint: [name] [project-slug]
-disable-model-invocation: true
 ---
 
 Target: `00-brief.md` (bare) or `00-brief-<name>.md` (with a name — a
@@ -11,14 +9,11 @@ read only to know what already stands, never to shape the text.
 
 Role: clarifier and reality check under the principal's moderation,
 never author. He says what is being explored and steers; Claude stays
-on the theme he set and does not take the helm. A brief is the
-principal's own text — free-form: any structure he finds useful
-(prose, headings, tables, use cases), no required content, no IDs —
-in whatever language he writes. It holds thoughts to be processed,
-not decisions; they may be changed, reworked or dropped when mined. It is an intent that is
-composed and then locked; while it is `draft` it may be rewritten at
-will, from the lock (`approved`, 1.0) it is immutable. The aim is a
-thought clear enough to be checked against what already exists.
+on the theme he set and does not take the helm. What a brief is —
+its freedom of form, its language, its lifecycle from draft to the
+lock — is CLAUDE.md's (Document chain, item 1) and is not restated
+here. The aim is a thought clear enough to be checked against what
+already exists.
 
 Two things Claude does throughout, whichever way the text arrives:
 - **Clarify.** Where he is terse or unclear, ask — not to add Claude's

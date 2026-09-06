@@ -1,8 +1,8 @@
 ---
-version: 3.42
+version: 3.43
 date: 2026-09-06
 status: draft
-last_change: 3.42 (2026-09-06): clarity critique of 3.41 walked through, all six findings fixed — the reviewers no longer counted and check placed on their mechanism without deciding whether it is a review (POS.0540, POS.1120, THR.0290, the Essence, CLAUDE.md heading, readme recipe 0.38); POS.1100 the one owner of the save/release split; "skeleton" kept for the template, "contract" for the shared behaviour; POS.0840 the one owner of the resource index.
+last_change: 3.43 (2026-09-06): THR.0330 closed — the commands are skills (POS.1130): every command moved to .claude/skills/<name>/SKILL.md, the state and genre files supporting files of their dispatcher, .claude/commands/ gone, every path rewritten; FND.0260 resolved; the bare check-forge after the move settled — argument-hints quoted, eight small alignments (readme recipe 0.39).
 project: forge
 audience: principal + Claude only
 ---
@@ -846,8 +846,8 @@ position that already stands elsewhere.
   clones a repository into `projects/<repository name>`, never
   overwriting, and sets that repository's local commit identity only
   when given `-Name` and `-Email`. `forge-branch.ps1` creates a
-  branch or switches to one, `main` included, and nothing else
-  (POS.1110). No remote is
+  branch or switches to one, `main` included, bare reports the branch
+  and lists the branches, and nothing else (POS.1110). No remote is
   configured anywhere in the forge: git carries that information itself.
   Immutability of documents remains a process rule enforced by
   convention, not by git.
@@ -946,9 +946,10 @@ position that already stands elsewhere.
   nothing to memorise as layers are added. Bare `/forge` reports the
   map: which artefacts exist at what versions, which states can be
   worked from here, which renders are stale, and a recommended next
-  step. Mechanics: a thin dispatcher (`.claude/commands/forge.md`)
+  step. Mechanics: a thin dispatcher (`.claude/skills/forge/SKILL.md`)
   plus one definition file per state
-  (`.claude/commands/forge/<state>.md`), each declaring its own
+  (`.claude/skills/forge/states/<state>.md`, a supporting file of the
+  dispatcher, POS.1130), each declaring its own
   inputs — so the chain is a star, not a fixed line: a future layer
   branches from any artefact by adding one file, the dispatcher
   untouched. `/clarify` and `/draft` were retired without aliases on
@@ -983,8 +984,9 @@ position that already stands elsewhere.
   may recommend one in its Build instructions.
 - **POS.0770** Recipe composition may be guided by genre:
   `/recipe <genre>` mirrors the `/forge` star (POS.0580) — a thin
-  dispatcher (`.claude/commands/recipe.md`) plus one definition file
-  per genre (`.claude/commands/recipe/<genre>.md`) carrying the
+  dispatcher (`.claude/skills/recipe/SKILL.md`) plus one definition file
+  per genre (`.claude/skills/recipe/genres/<genre>.md`, a supporting
+  file of the dispatcher, POS.1130) carrying the
   elicitation checklist, with the genre's canonical skeleton in
   `templates/recipe-<genre>.md` extending the base recipe shape,
   never replacing it. Bare `/recipe` lists the roster; a recipe
@@ -1133,18 +1135,55 @@ position that already stands elsewhere.
 - **POS.1090** The harness enforces the principal's word where it
   can. A command that writes, scaffolds, commits or regenerates —
   `/save`, `/release`, `/spinoff`, `/setup`, `/new-project`,
-  `/import-project`, `/ingest`, `/render` and the state and genre files behind `/forge`
-  and `/recipe` — carries `disable-model-invocation: true` in its
+  `/import-project`, `/ingest`, `/render` — carries
+  `disable-model-invocation: true` in its
   front-matter, so that Claude cannot start it on his own judgement:
   the principal invokes it by slash, or asks in words and Claude
   follows the command's definition read by path, as the dispatchers
-  do. Maps, reports and rosters (`/forge`, `/ledger`, `/check`,
+  do. The state and genre files behind `/forge` and `/recipe` carried
+  the same field while they were registered as commands; since
+  POS.1130 they are supporting files registered as nothing and need
+  no guard. Maps, reports and rosters (`/forge`, `/ledger`, `/check`,
   `/check-forge`, `/critique`, `/challenge`, `/research`, `/recipe`)
   stay model-invocable, since Claude is meant to propose them. The
   guarantee of Step by step (CLAUDE.md, Working methods) thereby
   rests on the harness as well as on CLAUDE.md, and the descriptions of the guarded
   commands leave the always-on context. Decided 2026-09-05 at the
   walkthrough of the harness critique (FND.0210, FND.0190).
+- **POS.1130** The commands are skills. Every command lives as
+  `.claude/skills/<name>/SKILL.md`; `.claude/commands/` no longer
+  exists. The state files of `/forge` and the genre files of `/recipe`
+  are supporting files of their dispatcher
+  (`.claude/skills/forge/states/<state>.md`,
+  `.claude/skills/recipe/genres/<genre>.md`): read by path, registered
+  as nothing, carrying a description and no registration field. The
+  reviewers' contracts (POS.1120) are skills of the same directory,
+  invocable by nobody. "Command" stays the word for what the user
+  invokes by slash; "skill" names the file shape, commands and
+  contracts alike. Grounds: in Claude Code custom commands have been
+  merged into skills — a command file and a skill of one name create
+  the same `/name` and work the same way, existing command files keep
+  working, skills are the recommended form — and a skill adds what
+  this layer wants: supporting files without registration (the state
+  and genre files, until now registered as `/forge:brief` and guarded
+  by a front-matter field only), `context: fork` with an agent type as
+  a declared isolation, named `arguments`. No context gain: a
+  command's body and a skill's alike load only when invoked, so
+  THR.0240 is untouched. A skill shadows a command of the same name,
+  so the migration was whole, in one round, on 2026-09-06: twenty-two
+  files moved, every path rewritten (CLAUDE.md, the dispatchers,
+  `/check-forge`, `/release`, `/save`, `/new-project`, POS.0580,
+  POS.0770, POS.1090), verified by a bare `/check-forge` over the whole layer
+  and by `/ledger` run through the new layout. One defect surfaced by
+  the move, older than it: a front-matter with CRLF line endings and
+  an unquoted `argument-hint` of two bracketed items fails to parse,
+  and the harness then shows the body's first line as the
+  description (`/forge`, `/recipe`, before them `/forge:brief`);
+  every `argument-hint` is quoted since, the roster verified in a
+  fresh session. `context: fork` is
+  not used yet; its one trial belongs to the round that puts check on
+  the reviewer mechanism (THR.0290). Closes THR.0330 (opened 3.41 at
+  the walkthrough of FND.0260, which it resolves).
 
 ### Naming
 - **POS.0600** The system is named **Forge of Thought**: thoughts are
@@ -1626,7 +1665,7 @@ position that already stands elsewhere.
   POS.0410). The trial of the same day is the evidence that the
   shape fits a foreign agent (`reviews/2026-09-05-critique-harness.md`,
   FND.0190–0280, filed under THR.0290). Open: the mechanism by which
-  `/critique harness` reaches the plugin — a mapping in `critique.md`
+  `/critique harness` reaches the plugin — a mapping in `.claude/skills/critique/SKILL.md`
   from the lens to the plugin agent with the skeleton's Output section
   carried in the prompt, or an own `critic-harness` agent naming the
   critic contract and the plugin's skills alike in its front-matter
@@ -1639,35 +1678,6 @@ position that already stands elsewhere.
   every lens, which the trial skipped. Relation: the first concrete
   kind of THR.0290, and the shape of the operating layer it reviews
   is POS.1120's and THR.0240's question. Opened 2026-09-05.
-- **THR.0330** Migration of the whole command set to the skills
-  layout. Decided 2026-09-06 at the walkthrough of FND.0260: every
-  file of `.claude/commands/` — every command, the state files
-  of `/forge`, the genre files of `/recipe` — moves to
-  `.claude/skills/<name>/SKILL.md`, all in one round and none before
-  it; the round runs after the critic and the challenger have been
-  tried on their contracts (POS.1120) and before the kinds of check
-  (THR.0290), so that every further piece of the layer is born where
-  it will live. Grounds: the documentation says custom commands have
-  been merged into skills — a command file and a skill directory of
-  the same name create the same `/name` and work the same way,
-  existing command files keep working, skills are the recommended
-  form — and a skill adds what this layer wants: supporting files
-  without registration (the state and genre files, today registered
-  as `/forge:brief` and guarded by a front-matter field only),
-  `context: fork` with an agent type as a declared isolation for
-  `/check` and `/check-forge` in place of the hand-rolled subagent
-  prompt, named `arguments`. No context gain: a command's body and a
-  skill's alike load only when invoked, so THR.0240 is untouched by
-  it. Risks and their handling: a skill of the same name shadows a
-  command, so a partial migration is excluded; `context: fork` makes
-  the skill body the subagent's task, a different shape from today's
-  isolation — one trial run on `/check` before relying on it, the
-  hand-rolled isolation kept until then; `$ARGUMENTS` and `$1`
-  verified in the same trial. The round rewrites in one step every
-  reference to `.claude/commands/...` — CLAUDE.md (Commands table,
-  layout, the `/forge <state>` row), `forge.md` and `recipe.md` step
-  1, `check-forge.md`, the positions here, the readme recipe where it
-  names the path — under POS.1070; FND.0260 is resolved by it.
 
 Note: the ID THR.0120 was inadvertently used twice — first for the
 readme-recipe thread (opened 1.14, closed 1.16), then for the

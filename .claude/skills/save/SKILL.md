@@ -1,12 +1,12 @@
 ---
 description: Save the forge to git — commit and push, no check, no renders
-argument-hint: [project-slug] [-m "message"] [-Tag name]
+argument-hint: '[project-slug] [-m "message"] [-Tag name]'
 disable-model-invocation: true
 ---
 
 Save the forge to git: commit and push on whatever branch is checked
 out, nothing more (POS.1100). No conformance check and no render run
-here — both belong to `/release` (`.claude/commands/release.md`,
+here — both belong to `/release` (`.claude/skills/release/SKILL.md`,
 POS.0570). The engine and every project are repositories of their
 own (POS.0940); what the save does per repository is stated in the
 help header of `scripts/forge-save.ps1`, and CLAUDE.md (Persistence)

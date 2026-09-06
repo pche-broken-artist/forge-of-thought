@@ -26,7 +26,7 @@ absorbed it; Note says what remains (partial) or the REJ (dropped). -->
 ## Documents
 | File | Version | Status | Date |
 |---|---|---|---|
-| 10-intent.md | 3.42 | draft | 2026-09-06 |
+| 10-intent.md | 3.43 | draft | 2026-09-06 |
 | 20-assignment.md | — | not planned: the handover artefacts of this project are the core itself (CLAUDE.md, templates/, .claude/) and README.md | — |
 | decisions.md | — | 9 records (DEC.0010–0090) | 2026-09-03 |
 
@@ -36,7 +36,7 @@ hand-edited: iterate the recipe, re-run /render. Row mirrors the
 render's front-matter provenance. -->
 | Render | Audience | Recipe | Inputs | Generated |
 |---|---|---|---|---|
-| README.md (repo root) | humans arriving at the repository | recipes/readme.md v0.37 (recipe now 0.38, render stale) | CLAUDE.md, 10-intent.md v3.39 | 2026-09-06 |
+| README.md (repo root) | humans arriving at the repository | recipes/readme.md v0.37 (recipe now 0.39, render stale) | CLAUDE.md, 10-intent.md v3.39 | 2026-09-06 |
 | RELEASE-NOTES.md (repo root) | the user of the engine who takes upgrades through forge-pull | recipes/release-notes.md v0.10 | 10-intent.history.md, 10-intent.md v3.39, decisions.md, previous edition (released sections) | 2026-09-06 |
 | renders/executive-pitch.md | C-level executives whose experience of AI is chatting with it | recipes/executive-pitch.md v0.1 | 10-intent.md, CLAUDE.md | — (not yet rendered) |
 
@@ -99,7 +99,7 @@ version for resolved, DEC.NNNN for overruled. -->
 | FND.0230 | medium | ambiguity | resolved | 2026-09-05-critique-harness.md | operating layer 2026-09-05 (intent 3.30) |
 | FND.0240 | medium | ambiguity | resolved | 2026-09-05-critique-harness.md | operating layer 2026-09-05 (intent 3.30) |
 | FND.0250 | medium | contradiction | resolved | 2026-09-05-critique-harness.md | operating layer 2026-09-06 (intent 3.41) — the cto persona a CTO in its own right, by the principal's counter-proposal |
-| FND.0260 | medium | divergence | open | 2026-09-05-critique-harness.md | decided as THR.0330 (intent 3.41): all commands migrate to skills in one round; resolved when that round is done |
+| FND.0260 | medium | divergence | resolved | 2026-09-05-critique-harness.md | operating layer 2026-09-06 (intent 3.43, POS.1130) — all commands migrated to skills in one round |
 | FND.0270 | medium | duplication | resolved | 2026-09-05-critique-harness.md | POS.1120, operating layer 2026-09-06 (intent 3.41) |
 | FND.0280 | low | duplication | resolved | 2026-09-05-critique-harness.md | operating layer 2026-09-06 (intent 3.41) — clause deleted from thirteen commands, setup.md keeps its exception |
 | FND.0290 | medium | contradiction | resolved | 2026-09-06-critique-clarity.md | intent 3.42 (POS.0540 rewritten, no counts; CLAUDE.md heading; readme recipe 0.38) |
@@ -141,18 +141,23 @@ intent version for accepted, DEC.NNNN for rejected. -->
   session's scratchpad, nothing filed. The README render is stale
   (CLAUDE.md and readme recipe 0.38 changed), regenerated at the next
   `/release`.
-- **THR.0330 decided, migration to do:** every command to the skills
-  layout in one round, after the two runs above and before the kinds
-  of check (THR.0290); FND.0260 stays open until then. One trial of
-  `context: fork` on `/check` inside that round.
+- **Commands migrated to skills (2026-09-06, intent 3.43, POS.1130):**
+  THR.0330 closed, FND.0260 resolved; run before the check round on
+  the principal's word so that `/check` is written once on its final
+  place. One trial of `context: fork` on `/check` belongs to the check
+  round. The bare `/check-forge` after the move: nine findings, all
+  settled the same day (argument-hints quoted after the CRLF parse
+  defect, eight small alignments, readme recipe 0.39). The README
+  render is stale (CLAUDE.md changed again), regenerated at the next
+  `/release`.
 - **Harness critique settled (2026-09-06):** FND.0270 by POS.1120,
-  FND.0250 and FND.0280 fixed, FND.0260 → THR.0330. The other six
+  FND.0250 and FND.0280 fixed, FND.0260 by POS.1130. The other six
   were fixed 2026-09-05 (intent 3.30, POS.1090).
 - THR.0320 a `harness` lens — CLAUDE.md and the operating layer
   reviewed through the official plugins (plugin-dev,
   claude-md-management), output the classic critic's; opened
   2026-09-05 at the principal's direction, decided in substance;
-  open: the mechanism (mapping in `critique.md` or an own agent with
+  open: the mechanism (mapping in `.claude/skills/critique/SKILL.md` or an own agent with
   preloaded plugin skills), the plugin as an engine dependency, the
   fit of claude-md-improver's rubric, the regression step. No
   priority given yet; shares its mechanism with POS.1120.
@@ -201,13 +206,14 @@ intent version for accepted, DEC.NNNN for rejected. -->
      `2026-09-05-good-release-notes.md`, operating layer and history
      migrated the same evening (item below).
   3. ~~THR.0270~~ closed at 3.40 (POS.1120) after its trial run
-     2026-09-06; the operating layer built at 3.41. Next: the two
-     real runs on the contracts, then THR.0330 (all commands to
-     skills, one round), then THR.0290 + THR.0240: check as a third
-     kind of reviewer with its kinds (full with sub-checks, light for
-     `/save`), built on the contract skill from the start, and the
-     size of CLAUDE.md — the reviewer's context measured 2026-09-06
-     (THR.0240).
+     2026-09-06; the operating layer built at 3.41; the critic's real
+     run done at 3.42; THR.0330 (all commands to skills) done at
+     3.43. Next, in the principal's order of 2026-09-06: THR.0290 —
+     check on the reviewer mechanism with its kinds (`project`,
+     `engine`, `light` proposed), then `/challenge cto` on the new
+     contract, then the settlement of that challenge and release 4.0.
+     THR.0240 (the size of CLAUDE.md, the reviewer's context measured
+     2026-09-06) after that.
   Then THR.0230 (after an outline of the second framework). Dormant
   by decision, trigger recorded in each: THR.0250, 0300, 0190, 0200,
   0210, 0170, 0180, 0150, 0140, 0090.

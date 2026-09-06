@@ -1,6 +1,6 @@
 ---
 description: Report project state from the ledger
-argument-hint: [project-slug]
+argument-hint: "[project-slug]"
 ---
 
 Read the ledger of project $1 (or all projects if none given) and report

@@ -14,10 +14,7 @@ output: README.md
 /recipe readme. A recipe is the iterated thing; its render is
 generated output. Never polish README.md by hand: change this recipe,
 run /render readme — and every /release of the project
-regenerates it. Recipes are tools: version + updated date in
-front-matter and no status (a recipe is never approved); its Version
-History lives in the companion <recipe>.history.md, last_change
-summarising the newest row.
+regenerates it. How a recipe is versioned is templates/recipe.md's.
 The output path is the project root, so the host shows it as the
 repository's front page. -->
 

@@ -1,6 +1,6 @@
 ---
 description: Run a critic lens on the quality of a project's documents — bare = lens roster
-argument-hint: [lens] [artefact] [project-slug]
+argument-hint: "[lens] [artefact] [project-slug]"
 ---
 
 Critic lenses live as `.claude/agents/critic-<lens>.md` — one isolated
