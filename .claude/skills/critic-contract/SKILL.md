@@ -81,10 +81,9 @@ file in `reviews/`.
   priorities (there are none by design — everything is essential
   unless noted *optional*). Missing success criteria are a finding
   only if neither present nor delegated.
-- **Testability is a recommendation, not a rule.** Untestable or
-  unmeasurable wording goes in the Recommendations section, never as a
-  finding: delegating concretisation through a DEL item is a
-  legitimate outcome.
+- **Testability is a recommendation, not a rule** (CLAUDE.md,
+  Requirement style): untestable wording goes in the Recommendations
+  section, never as a finding.
 - **Sharp and few beats thorough and long.** Five sharp findings beat
   twenty trivial ones. Never invent findings to appear thorough; never
   soften a finding because the fix is inconvenient.

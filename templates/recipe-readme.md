@@ -4,19 +4,17 @@ purpose: readme
 audience: humans arriving at the project's repository
 version: 0.1
 updated: YYYY-MM-DD
-last_change: <one line summarising the newest row of readme.history.md — written by the write step, never by hand>
+last_change: <one line from the newest row of $1>
 output: README.md
 ---
 
 # Recipe — readme
 
 <!-- Readme-genre recipe, scaffolded by /new-project and iterated via
-/recipe readme. A recipe is the iterated thing; its render is
-generated output. Never polish README.md by hand: change this recipe,
-run /render readme — and every /release of the project
-regenerates it. How a recipe is versioned is templates/recipe.md's.
-The output path is the project root, so the host shows it as the
-repository's front page. -->
+/recipe readme; every /release of the project regenerates the render;
+the output path is the project root, so the host shows it as the
+front page. What a recipe is and how it is versioned is
+templates/recipe.md's. -->
 
 ## Inputs
 <!-- What the README is generated from. A thought project: the ledger

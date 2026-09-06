@@ -2,7 +2,7 @@
 version: 0.1
 date: YYYY-MM-DD
 status: draft            # draft | in_review | approved | superseded
-last_change: <one line summarising the newest row of 20-assignment.history.md — written by the write step, never by hand>
+last_change: <one line from the newest row of $1>
 project: <slug>
 audience: recipients
 ---

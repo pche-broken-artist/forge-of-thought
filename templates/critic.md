@@ -13,9 +13,8 @@ else: the behaviour shared by every lens — subject, way of working,
 report shape, ledger step — is the contract skill
 .claude/skills/critic-contract/SKILL.md, preloaded through the skills field
 above and never restated here (POS.0410, POS.1120). /check engine
-verifies that the named skill exists. A new lens is created only by
-the principal's decision, and only where what it reads genuinely
-differs from the existing lenses. Delete this comment in the lens
+verifies that the named skill exists (who creates a lens, and when:
+CLAUDE.md, Isolated reviewers). Delete this comment in the lens
 file. -->
 
 ## Lens

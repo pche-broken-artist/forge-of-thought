@@ -23,8 +23,7 @@ one — never one combined document.
    (skeleton `templates/index.md`; create the index if missing):
    **Question**, **Answer in short** (two or three lines), **Consult
    when**. Add a registration row to the Research table in `ledger.md`
-   (file, date, derived from). The index tracks nothing and is no
-   automatic input of any command.
+   (file, date, derived from).
 4. Summarise for the principal,
    leading with the recommendation
    and the trade-offs, not a literature review.

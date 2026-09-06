@@ -31,10 +31,9 @@ changes.
    checklist and the skeleton. A genre file's arguments are those
    following the genre name. The recipe is composed with the
    principal — options and trade-offs offered, decisions his — and
-   written once per round on confirmation. Recipe conventions apply
-   (CLAUDE.md, Versioning & status): version + updated date in
-   front-matter, no status; every write appends the round's row to
+   written once per round on confirmation, per CLAUDE.md, Versioning
+   & status (a recipe: version and updated date, no status), into
    `recipes/<recipe>.history.md` — created from `templates/history.md`
-   with the recipe — and rewrites `last_change` from it. Register the
+   with the recipe. Register the
    recipe in the ledger's Renders table when its first render exists.
 3. After writing, offer `/render <recipe>` as the natural next step.

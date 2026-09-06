@@ -50,12 +50,10 @@ Two things Claude does throughout, whichever way the text arrives:
    IDs or conventions. When he asks to record a summary or a
    structured proposal Claude has just shown him, store it as shown —
    headings, tables and lists included — never re-narrated as prose.
-3. Write once per round on his confirmation: bump 0.x, append the
-   round's row to the companion and rewrite `last_change` from it
-   (CLAUDE.md, Versioning & status); the ledger row is its state.
-4. **Lock** only on his explicit word: set version 1.0, status
-   approved, date, the lock's row in the companion and `last_change`;
-   ledger row updated. A brief that arrived finished has that one
+3. Write once per round on his confirmation, per CLAUDE.md,
+   Versioning & status (a 0.x bump); the ledger row is its state.
+4. **Lock** only on his explicit word: version 1.0, status approved,
+   the lock's row per the same rule; ledger row updated. A brief that arrived finished has that one
    row. From then on the file is
    immutable and its whole is mined by `/forge intent`, which keeps
    the Mined column current.

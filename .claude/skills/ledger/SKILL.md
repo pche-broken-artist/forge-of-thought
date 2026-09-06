@@ -7,9 +7,8 @@ Read the ledger of project $1 (or all projects if none given) and report
 compactly:
 
 1. Documents: file, version, status, date.
-2. Sources and research: registered files; unregistered files in
-   `sources/` or `research/` named as "waiting for /ingest" (or
-   /research bookkeeping) — a report, not a check.
+2. Sources and research: the registered files; what is unregistered
+   is the `light` check's to find.
 3. Findings: open by severity; awaiting the principal's verdict.
 4. Open questions owned by the principal (from 20-assignment.md and intent
    Open threads).

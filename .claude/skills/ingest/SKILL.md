@@ -34,12 +34,9 @@ else. Never silently re-register.
    (`sources/<slug>/<file>`). A file may later be split out to its own
    ledger row if it needs separate tracking.
    **Bundle index:** every bundle carries `00-INDEX.md`, shaped by
-   `templates/index-bundle.md` (the one owner of the bundle index —
-   header and opening paragraph its own, the entry carried verbatim
-   from `templates/index.md`; POS.1070). If the bundle arrives without one, create it from the
-   skeleton at registration; if one is supplied, validate it against
-   the actual contents and report gaps. Per-file origin and dates are
-   best effort, never asked for.
+   `templates/index-bundle.md`. If the bundle arrives without one,
+   create it from the skeleton at registration; if one is supplied,
+   validate it against the actual contents and report gaps.
 2. **Date, best effort, never a question.** Record the document's origin
    date in the ledger if it can be determined for free: from the content
    (meeting date in a transcript header, offer date), else from file
@@ -72,9 +69,7 @@ else. Never silently re-register.
    to absorb — taken from the principal in a sentence when he offers
    one; otherwise write what the file itself declares, or `—`. Do not
    ask a mandatory question; a light "what is it for?" is fine when the
-   conversation invites it. A bundle is one entry pointing to its
-   inner `00-INDEX.md`; never repeat the bundle's contents in the top
-   index. The index tracks nothing — no processing state.
+   conversation invites it.
 5. **A library document is cited, not copied.** When the principal
    points a project at a document that lives in a library
    (`projects/lib-<name>/…`), nothing is stored in `sources/`: add an

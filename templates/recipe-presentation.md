@@ -4,17 +4,16 @@ purpose: Slide-by-slide source material for <the presentation>
 audience: <audience>
 version: 0.1
 updated: YYYY-MM-DD
-last_change: <one line summarising the newest row of <recipe>.history.md — written by the write step, never by hand>
+last_change: <one line from the newest row of $1>
 # output: <path>   # optional — overrides the default renders/<recipe>.md
 ---
 
 # Recipe — <presentation name>
 
-<!-- Presentation-genre recipe, composed via /recipe presentation.
-A recipe is the iterated thing; its render is generated output. Never
-polish a render by hand: change the recipe, run /render <recipe>. The
-render is a slide-by-slide deck definition; scripts/md2pptx.ps1 turns
-it into an actual PowerPoint file. How a recipe is versioned is templates/recipe.md's. -->
+<!-- Presentation-genre recipe, composed via /recipe presentation; the
+render is a slide-by-slide deck definition that scripts/md2pptx.ps1
+turns into a PowerPoint file. What a recipe is and how it is versioned
+is templates/recipe.md's. -->
 
 ## Inputs
 <!-- Chain artefacts the deck is generated from. A picture may come

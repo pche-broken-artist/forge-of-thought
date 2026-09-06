@@ -18,16 +18,10 @@ consistent with itself. Everything else about a project is the
 What you verify:
 
 1. **Front-matter and history** — against Versioning & status in
-   CLAUDE.md, every rule there (POS.1070). Every versioned document
-   (briefs, intent, assignment, later artefacts, recipes) has its
-   companion `<file>.history.md` beside it, shaped as
-   `templates/history.md`, the version of its newest row equal to the
-   document's `version`, the document's `last_change` summarising
-   that row, its `status` agreeing with its number. A Version History
-   table in the body of any document is a finding, fix: move the rows
-   into the companion and write `last_change` — that is how a project
-   migrates to this convention, applied on the principal's word
-   (POS.0820).
+   CLAUDE.md, every rule there (POS.1070), for every versioned
+   document and its companion; a Version History table in the body of
+   any document is a finding, the fix a migration on the principal's
+   word (POS.0820).
 2. **Ledger accuracy** — the ledger shaped as `templates/ledger.md`
    says for its kind; documents table vs front-matter and files on
    disk; findings and challenges vs files in `reviews/` and

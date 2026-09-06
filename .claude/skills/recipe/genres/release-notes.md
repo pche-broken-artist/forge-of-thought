@@ -7,10 +7,9 @@ Output: `RELEASE-NOTES.md` in the project root (POS.1000 of the forge
 intent). Thought projects only — a library has no intent and
 therefore no release notes; its history is git.
 
-Every thought project carries this recipe: `/new-project` scaffolds
-it from the skeleton, which owns the shape (POS.0730 of the forge
-intent); every `/release` of the project regenerates the render. The
-recipe is iterated; the render is never edited by hand.
+Why every thought project carries this recipe and when its render is
+made is CLAUDE.md, Document chain 7's; the skeleton owns the shape
+(POS.0730 of the forge intent).
 
 Role: interviewer, lightly — this genre has few degrees of freedom.
 Elicit:

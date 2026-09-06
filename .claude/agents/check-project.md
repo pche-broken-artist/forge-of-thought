@@ -23,7 +23,7 @@ What you verify:
    one-line fix). `projects/<slug>/.git` exists; a project that is
    not a repository is a fact, never a finding, reported with the
    one-line way in ("project is not a repository —
-   `git -C projects/<slug> init -b main`, then a remote if wanted"),
+   the way in CLAUDE.md, Persistence, names"),
    the one git-related check, since the engine does not track
    projects and a local-only project is a legitimate shape
    (POS.0940). A `library` needs no chain: Structure reduces to
@@ -40,40 +40,31 @@ What you verify:
    `recipes/` and `renders/` where renders exist, paired — every
    render traces to a recipe and carries provenance front-matter
    matching the ledger's Renders table (legacy pre-recipe editions,
-   dated filenames, are exempt). Every project carries
-   `recipes/readme.md` with `output: README.md`, and a thought project
-   `recipes/release-notes.md` with `output: RELEASE-NOTES.md`
-   (POS.1000); a missing recipe is a finding (fix: scaffold from
-   `templates/recipe-<genre>.md`), a missing or stale README or
-   release notes a finding fixed by the next `/release`, which
-   regenerates both — at a release itself this staleness is not
-   reported, since the release renders after the check. Every
+   dated filenames, are exempt). Every project carries the README
+   and release-notes recipes CLAUDE.md, Document chain 7, requires; a
+   missing recipe is a finding (fix: scaffold from
+   `templates/recipe-<genre>.md`), a stale README or release notes a
+   finding fixed by the next `/release` — not reported at a release
+   itself, since the release renders after the check. Every
    `00-brief*.md` in the directory has a row in the ledger's Briefs
    table and vice versa; a brief marked `mined` is cited somewhere in
    the intent.
 2. **ID hygiene** — against the ID scheme in CLAUDE.md, every rule
    there (POS.1070), in every document that carries IDs.
-3. **Assignment style** (where `20-assignment.md` exists) — against
-   Requirement style in CLAUDE.md, every rule there (POS.1070); the
-   Terms section lists only the prefixes and terms actually used, as
-   `templates/assignment.md` says.
-4. **Language** — all documents in English; only the briefs
+3. **Language** — all documents in English; only the briefs
    (`00-brief*.md`) may be in another language (CLAUDE.md, prime
    directive 6).
-5. **Immutables** — locked briefs (status approved; a draft brief is
+4. **Immutables** — locked briefs (status approved; a draft brief is
    still editable), sources, reviews, challenges and research are
    never edited after creation (CLAUDE.md, Versioning & status); flag
    any signs of after-the-fact editing that the ledger or the history
    companions reveal. The `00-INDEX.md` catalogues are exempt: they
    are rewritten freely.
-6. **Recipes and renders** (shape and freshness, never content) —
-   recipes conform to `templates/recipe.md`: front-matter complete
-   (project, purpose, audience, version, updated, last_change;
-   `output:` optional), sections Inputs / Instructions / Template
-   present, every declared input exists on disk, the `output:` path,
-   where declared, points inside the repository (genre skeletons
-   `templates/recipe-<genre>.md` extend that shape with genre
-   sections, never replace it). Render staleness (as `/render` step 5
+5. **Recipes and renders** (shape and freshness, never content) —
+   recipes conform to `templates/recipe.md` in front-matter and
+   sections (genre skeletons `templates/recipe-<genre>.md` extend that
+   shape, never replace it); every declared input exists on disk; the
+   `output:` path, where declared, points inside the repository. Render staleness (as `/render` step 5
    defines it) is checked only for the README and the release notes,
    per Structure; the staleness of any other render is never a
    finding (POS.0570) — the `/forge` map shows it. Whether a recipe's

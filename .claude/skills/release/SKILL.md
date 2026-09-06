@@ -25,13 +25,10 @@ never a sweep.
    principal — always, even when clean. A project: `light` and
    `project`. The engine: `light`, `engine` and `project`, the two
    project checks on `projects/forge`. Launched at once, awaited
-   together; `single-source-of-truth` never runs here on its own —
-   it is the principal's call, before a major or after a round on
-   the operating layer. Clean: state that the checks passed.
+   together. Clean: state that the checks passed.
    Findings: settle them by walkthrough (CLAUDE.md, Working methods);
-   a finding may be accepted as a deferral, recorded in the affected
-   project's ledger under "Waiting on principal", and the release
-   proceeds. Never fix silently; never proceed with an unsettled
+   a finding may be deferred, as the `/check` procedure says, and the
+   release proceeds. Never fix silently; never proceed with an unsettled
    finding. The check runs before the renders so that a fix of the
    walkthrough — an intent bump, a changed convention — is already in
    the inputs the renders derive from (POS.0570).
@@ -52,12 +49,9 @@ never a sweep.
    regenerated files (POS.0810, POS.1000): the principal rules on the
    delta before the commit. A render made from the settled sources is
    current by construction; its verification is `/render` step 6 (the
-   file, its provenance, the ledger), not a check. The engine:
-   `README.md` and `RELEASE-NOTES.md` at the repository root from
-   `projects/forge/recipes/`. A project: its `README.md` from
-   `recipes/readme.md` and, for a thought project, `RELEASE-NOTES.md`
-   from `recipes/release-notes.md`; a library has a README only. A
-   project whose recipe is missing is reported (a `/check` finding)
+   file, its provenance, the ledger), not a check. Which renders a
+   repository has is CLAUDE.md, Document chain 7's. A project whose
+   recipe is missing is reported (a `/check` finding)
    and released without the render. Other renders are never
    regenerated here; their staleness is the principal's business,
    shown by the `/forge` map (POS.0570).
@@ -72,9 +66,6 @@ never a sweep.
    integer (an approved major), the tag `v<major>`, proposed and
    taken on the principal's word (a rule of the procedure, not a gate
    in the script). Any other tag is his request, as `/save` has it.
-   An approved major's section is headed "approved" and opens with a
-   short highlights paragraph (POS.0730) — the release-notes recipe's
-   work in step 4, not a step of its own.
 
 The check is advisory (POS.0430): the principal may order the release
 at any moment regardless of findings.

@@ -8,11 +8,9 @@ document: <file>          # the versioned document this companion belongs to
 <!-- Append-only companion of a versioned document (CLAUDE.md, Document
 kinds and Versioning & status): brief, intent, assignment, later
 artefacts and recipes alike. One row per version bump, newest first,
-human-readable — what changed and why. Appended by the write step that
-bumps the document's version, which also rewrites last_change: in the
-document's front-matter from the newest row; never edited by hand, rows
-never rewritten. Not a ledger row: the companion is part of its
-document.
+human-readable — what changed and why. Appended by the write step
+(CLAUDE.md, Versioning & status); rows never rewritten. Not a ledger
+row: the companion is part of its document.
 For the intent, the assignment and every later layer (not the brief,
 not a recipe) the row closes with a Notes block after the prose:
 `<br>**Notes:**` and then one line per change that reaches the reader

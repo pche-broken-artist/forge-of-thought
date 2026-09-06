@@ -1,8 +1,8 @@
 ---
-version: 3.48
+version: 3.49
 date: 2026-09-06
 status: draft
-last_change: 3.48 (2026-09-06): the regression critique of the sweep walked through, four findings fixed — POS.0120 says what "dated once" and "no measurement" mean and seven positions follow it (FND.0400), the done-before-4.0 clause gone (FND.0410), POS.0570 cites POS.1140 for the composition (FND.0420), THR.0240 dated (FND.0430).
+last_change: 3.49 (2026-09-06): the first honest single-source-of-truth sweep settled — nineteen findings, eighteen fixed and one accepted: CLAUDE.md cut to rules and citations (636 to 584 lines), the dispatchers, templates, check and critic files freed of restated rules; Requirement style the critic's alone, bookkeeping the light check's alone; no position changed.
 project: forge
 audience: principal + Claude only
 ---
@@ -1540,7 +1540,9 @@ position that already stands elsewhere.
   instance facts of `CLAUDE.local.md` (principal, language, git
   identities) thereby reach an isolated reviewer that needs none of
   them. The cost of CLAUDE.md is paid once per reviewer run, not once
-  per session.
+  per session. The single-source-of-truth check of 2026-09-06 (history
+  3.49) took CLAUDE.md from 636 to 584 lines by citation alone; what
+  must be always-on is still this thread's question.
 - **THR.0250** Two suggested functions: an expander and an essence
   manager. A tip the principal received on 2026-09-03 — where from not
   recorded. The essence manager got its detail the same day: at the end

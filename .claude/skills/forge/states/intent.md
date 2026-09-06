@@ -34,9 +34,8 @@ to extract what is in his head, including what he has not yet articulated.
 4. Write once per round (CLAUDE.md, prime directive 9 — stated
    there, not here; POS.1070). On writing: rewrite for coherence
    (not append-only), translate to English, move resolved threads
-   into Positions or Rejected directions, bump the version, append
-   the round's row to `10-intent.history.md` and rewrite
-   `last_change` from it (CLAUDE.md, Versioning & status), and update
+   into Positions or Rejected directions, write per CLAUDE.md,
+   Versioning & status into `10-intent.history.md`, and update
    the ledger — including the Mined column of every brief touched (`partial` with a note on what
    remains, `mined`, or `dropped` with the REJ). POS, THR and REJ
    follow the ID scheme of CLAUDE.md.

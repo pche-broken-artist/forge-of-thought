@@ -9,9 +9,7 @@ updated: YYYY-MM-DD
 <!-- Single source of truth for state. Freely rewritten (as are the resource indexes,
 sources/00-INDEX.md and research/00-INDEX.md); every other document
 is versioned or immutable. Keep current after every operation; /ledger
-reads from here.
-Version scheme: 0.x draft, 1.0 approved, 1.x change after approval, 2.0
-next approved version.
+reads from here. Versions per CLAUDE.md, Versioning & status.
 Kind: `thought` keeps every table below. `library` (POS.0960) keeps
 only Renders, Sources, Dependencies, Research and Waiting on
 principal; the Briefs, Documents, Findings and Challenges tables are
@@ -34,9 +32,8 @@ absorbed it; Note says what remains (partial) or the REJ (dropped). -->
 | 20-assignment.md | — | not started | — |
 
 ## Renders
-<!-- Generated outputs, one row per recipe in recipes/. Never
-hand-edited: iterate the recipe, re-run /render. Row mirrors the
-render's front-matter provenance. -->
+<!-- Generated outputs, one row per recipe in recipes/ (CLAUDE.md,
+Document chain 7). Row mirrors the render's front-matter provenance. -->
 | Render | Audience | Recipe | Inputs | Generated |
 |---|---|---|---|---|
 
@@ -54,8 +51,7 @@ of <original> | binary — one form per source. -->
 relies on — typically library documents (POS.1020): cited by path from
 an index entry, a recipe or the chain. No version: library documents
 are maintained by their owner. What the document is for lives where it
-is used (the index entry, the recipe). /check verifies each path exists
-on disk; /forge reports which libraries the project needs. -->
+is used (the index entry, the recipe). -->
 | Path | Library | Used by | Note |
 |---|---|---|---|
 

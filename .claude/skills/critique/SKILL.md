@@ -4,11 +4,11 @@ argument-hint: "[lens] [artefact] [project-slug]"
 ---
 
 Critic lenses live as `.claude/agents/critic-<lens>.md` — one isolated
-agent per lens, each defined by what it reads: `clarity` reads each
-artefact on its own, `essence` reads the chain for drift. Adding a lens
-means adding an agent file; this command does not change. New lenses
-are created only by the principal's decision, and only where what they
-read genuinely differs.
+agent per lens, each defined by what it reads, said in its
+`description`; the roster is the scan of those files. Adding a lens
+means adding an agent file from `templates/critic.md`; this command
+does not change (who creates a lens, and when: CLAUDE.md, Isolated
+reviewers).
 
 The rules shared by every lens — isolation, the documents-only remit,
 regression first, calibration, the shape of a finding, the report file

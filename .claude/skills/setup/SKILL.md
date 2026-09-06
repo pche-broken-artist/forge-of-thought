@@ -23,8 +23,7 @@ speak whatever language the user speaks to you.
      - **Git identities** — name and e-mail per git host the user
        will push to (e.g. github.com, a company host), written to
        `identities.local.md` beside it from
-       `templates/identities.local.md`, never into `CLAUDE.local.md`:
-       that file reaches every subagent, this one nobody (POS.0950).
+       `templates/identities.local.md` (POS.0950).
        This is the roster from which per-repository identities are
        proposed at every project creation or import. May be left
        empty and added later; say so.

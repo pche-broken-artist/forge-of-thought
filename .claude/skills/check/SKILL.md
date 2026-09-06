@@ -4,15 +4,11 @@ argument-hint: "[check] [project-slug]"
 ---
 
 Checks live as `.claude/agents/check-<name>.md` — one isolated agent
-per check, each defined by what it verifies: `project` a project's
-structure, IDs, style, immutables, recipes and renders; `light` a
-project's bookkeeping, fit for a save; `engine` the core against
-itself and the forge intent; `single-source-of-truth` the whole
-operating layer for restatements, the honest and expensive sweep.
-Adding a check means adding an agent file from `templates/check.md`;
-this command does not change. New checks are created only by the
-principal's decision, and only where what they verify genuinely
-differs — a rule verified by two checks is a defect.
+per check, each defined by what it verifies, said in its
+`description`; the roster is the scan of those files. Adding a check
+means adding an agent file from `templates/check.md`; this command
+does not change (who creates a check, and when: CLAUDE.md, Isolated
+reviewers; a rule verified by two checks is a defect).
 
 The rules shared by every check — isolation, the conformance-only
 remit, read-only, findings only, the shape of the report — live in
@@ -26,13 +22,11 @@ to the session and its findings are settled there. This command only
 chooses the check, passes the target and presents the report.
 
 **Bare `/check` — the roster.** List the available checks (scan
-`.claude/agents/check-*.md`) and recommend which fits the moment:
-`light` before a save, `light` and `project` before a release of a
-project, `light`, `engine` and `project` before a release of the
-engine, `single-source-of-truth` before a major or after a round on
-the operating layer. A recommendation, never a gate. Which checks a
-command composes is that command's to say (`/save`, `/release`); no
-check runs on Claude's own judgement.
+`.claude/agents/check-*.md`, their `description` fields) and recommend
+which fits the moment — `single-source-of-truth` before a major or
+after a round on the operating layer; what a save or a release runs
+is `/save`'s and `/release`'s to say. A recommendation, never a
+gate; no check runs on Claude's own judgement.
 
 **`/check <name> [slug]` — run it.** The target: for `project` and
 `light` a project by its slug (the engine's own project is `forge`;

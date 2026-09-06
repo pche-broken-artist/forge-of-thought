@@ -4,7 +4,7 @@ purpose: <purpose>
 audience: <audience>
 version: 0.1
 updated: YYYY-MM-DD
-last_change: <one line summarising the newest row of <recipe>.history.md — written by the write step, never by hand>
+last_change: <one line from the newest row of $1>
 # output: <path>   # optional — overrides the default renders/<recipe>.md
 ---
 

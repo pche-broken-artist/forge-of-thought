@@ -6,15 +6,10 @@ updated: YYYY-MM-DD
 
 # Index — <sources | research> of <Project>
 
-<!-- Resource index: a light catalogue so that Claude and the principal
-know what exists here and what it is for without re-reading the files.
-Freely rewritten (like the ledger) while the files it catalogues stay
-immutable. Tracks nothing — no processing state, no positions — and is
-an automatic input of no command; a contradiction between the intent
-and a resource is not a finding. Registration state lives in the ledger.
-Written by /ingest (sources) and /research (research); verified by
-/check. A bundle (sources/<slug>/) is ONE entry pointing to its own
-00-INDEX.md — two levels, never deeper. -->
+<!-- Resource index: what exists here and what it is for; the rules
+are CLAUDE.md's (Document chain 5). Written by /ingest (sources) and
+/research (research). A bundle (sources/<slug>/) is ONE entry pointing
+to its own 00-INDEX.md. -->
 
 <!-- sources entry -->
 ### `<file-or-bundle>`

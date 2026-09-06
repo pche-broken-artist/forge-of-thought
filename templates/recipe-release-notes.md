@@ -4,18 +4,16 @@ purpose: release-notes
 audience: the recipients and the principal tracking the project's releases
 version: 0.1
 updated: YYYY-MM-DD
-last_change: <one line summarising the newest row of release-notes.history.md — written by the write step, never by hand>
+last_change: <one line from the newest row of $1>
 output: RELEASE-NOTES.md
 ---
 
 # Recipe — release-notes
 
 <!-- Release-notes-genre recipe, scaffolded by /new-project for a
-thought project and iterated via /recipe release-notes. A recipe is
-the iterated thing; its render is generated output. Never polish
-RELEASE-NOTES.md by hand: change this recipe, run
-/render release-notes — and every /release of the project adds the
-new release's section. How a recipe is versioned is templates/recipe.md's. -->
+thought project and iterated via /recipe release-notes; every /release
+of the project adds the new release's section. What a recipe is and
+how it is versioned is templates/recipe.md's. -->
 
 ## Inputs
 - 10-intent.history.md      # the intent's Version History — the Notes

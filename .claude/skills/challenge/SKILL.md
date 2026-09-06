@@ -5,11 +5,10 @@ argument-hint: "[persona] [artefact] [project-slug]"
 
 Challenger personas live as `.claude/agents/challenger-<persona>.md` —
 one isolated agent per persona, each defined by the blind spots it
-exists to find. Currently: `cto`. Adding a persona means adding an
-agent file; this command does not change. New personas are created only
-by the principal's decision, and only where their blind spots genuinely
-differ — personas that would say the same things in different words are
-noise.
+exists to find, said in its `description`; the roster is the scan of
+those files. Adding a persona means adding an agent file from
+`templates/challenger.md`; this command does not change (who creates
+a persona, and when: CLAUDE.md, Isolated reviewers).
 
 The rules shared by every persona — isolation, the substance-only
 remit, the shape and severity of the challenges, the output file and

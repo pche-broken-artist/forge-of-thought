@@ -24,9 +24,7 @@ What to go after:
   differently; an undefined or inconsistently used term; a defined
   term not capitalised or a capitalised term not in the Terms section.
 - **Internal contradiction.** Two items or passages of the same
-  artefact that cannot both hold; a status that disagrees with the
-  version number; a history companion or `last_change` that does not
-  match the document.
+  artefact that cannot both hold.
 - **Duplication.** The same idea written twice, in one item or across
   items; two items that differ only in wording.
 - **Scope hygiene.** Solving where the document should be assigning:

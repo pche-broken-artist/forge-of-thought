@@ -26,7 +26,7 @@ absorbed it; Note says what remains (partial) or the REJ (dropped). -->
 ## Documents
 | File | Version | Status | Date |
 |---|---|---|---|
-| 10-intent.md | 3.48 | draft | 2026-09-06 |
+| 10-intent.md | 3.49 | draft | 2026-09-06 |
 | 20-assignment.md | — | not planned: the handover artefacts of this project are the core itself (CLAUDE.md, templates/, .claude/) and README.md | — |
 | decisions.md | — | 10 records (DEC.0010–0100) | 2026-09-06 |
 
@@ -225,10 +225,11 @@ intent version for accepted, DEC.NNNN for rejected. -->
      3.43; the checks built at 3.44 (POS.1140); the challenge run and
      settled at 3.46. The road to 4.0, in the principal's order of
      2026-09-06: the sweep of the intent by the position rule done at
-     3.47 and its regression critique settled at 3.48, then the test
-     of a major (POS.0300: every check, `single-source-of-truth`
-     included, both critic lenses — `essence` still to run — and one
-     challenge, run at 3.45),
+     3.47 and its regression critique settled at 3.48; the test of a
+     major (POS.0300) run at 3.49: `single-source-of-truth` over the
+     whole layer (nineteen findings settled), `clarity` three times,
+     one challenge (3.45); `essence` declined by the principal's word
+     on 2026-09-06 — the one part of the test not run;
      then `/release forge` at 4.0 with the tag `v4`. After 4.0:
      THR.0230's split if useful (CHL.0150), THR.0240 (the size of
      CLAUDE.md).
