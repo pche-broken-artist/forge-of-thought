@@ -1,6 +1,8 @@
 ---
 project: <slug>
 kind: thought
+language: en             # language of the project's documents (ISO 639-1);
+                         # English when absent; notation stays English
 updated: YYYY-MM-DD
 ---
 

@@ -20,6 +20,11 @@ below) or `library` (slug prefix `lib-`, material shared across
 projects, no chain). Infer `library` from the `lib-` prefix or the
 principal's words; when unclear, ask.
 
+**Language.** Every project declares the language of its documents
+as `language:` in its ledger header (CLAUDE.md, prime directive 6;
+POS.0060 of the forge intent): English unless the principal names
+another; ask when his words leave it open.
+
 **Library** (`kind: library`): create only `projects/$1/ledger.md`
 from `templates/ledger.md` with `kind: library`, reduced as the
 template's header says (POS.1070), plus `sources/00-INDEX.md`
@@ -41,8 +46,8 @@ steps 3–5 below do not apply.
      except `sources/00-INDEX.md` and `research/00-INDEX.md` from
      `templates/index.md` (header filled, no entries)
    - `projects/$1/ledger.md` from `templates/ledger.md`, filled with
-     project slug, `kind: thought` and today's date; brief row as 0.1
-     draft, pending
+     project slug, `kind: thought`, the language and today's date;
+     brief row as 0.1 draft, pending
    - `projects/$1/decisions.md` with a one-line header only
    - `projects/$1/recipes/readme.md` from `templates/recipe-readme.md`
      and `projects/$1/recipes/release-notes.md` from

@@ -1,8 +1,8 @@
 ---
-version: 4.0
-date: 2026-09-06
-status: approved
-last_change: 4.0 (2026-09-06): approved by the principal — version 4 closes the engine's operating layer (POS.0300); the test of a major run before the tag, the essence lens declined by his word.
+version: 4.3
+date: 2026-09-10
+status: draft
+last_change: 4.3 (2026-09-10): FCT — facts beside positions in the intent (POS.0230); the project's output language in its ledger header, THR.0180 closed (POS.0060).
 project: forge
 audience: principal + Claude only
 ---
@@ -61,10 +61,19 @@ solution is the kind of content, never the amount.
 - **POS.0050** For key topics Claude researches current best practice
   rather than inventing. Outside inspiration is a legitimate input;
   durable findings are stored in `research/`, not left in chat.
-- **POS.0060** The forge as a system dictates only the output
-  language: all documents are written in English; the single
-  exception is the briefs (`00-brief*.md`), stored verbatim in
-  whatever language they were written. The working-conversation
+- **POS.0060** The forge as a system dictates only that a project has
+  one output language: every document of a project is written in the
+  language its ledger header declares (`language`, ISO 639-1, English
+  when absent), with English as notation throughout — ID prefixes,
+  `shall`, status words, front-matter keys — so that the reviewers,
+  the checks and `/render` read every project the same way. The
+  single exception is the briefs (`00-brief*.md`), stored verbatim in
+  whatever language they were written; a render may be in any
+  language its recipe declares, a translation being a render. English
+  for every project was the principal's own rule for the company
+  projects of this instance, not the forge's (his statement of
+  2026-08-29; THR.0180, closed 2026-09-10 by the first project with
+  Czech output, as the thread foresaw). The working-conversation
   language is per-instance configuration, not a system rule: it is
   set in `CLAUDE.local.md` (POS.0950) and read from there by every
   command — never written into the operating layer, and never
@@ -474,9 +483,15 @@ position that already stands elsewhere.
   metadata and no lifecycle; depth is capped at two levels.
 - **POS.0230** Prefix vocabulary, aligned with the group BRD standard
   where an equivalent exists: REQ, OOS, CON, ASM, DEL, TBC, SCR in the
-  assignment; POS, THR, REJ in the intent; FND, CHL, DEC internally. No
-  universal standard for prefixes exists; this is a house convention
-  derived from the group's own.
+  assignment; POS, THR, REJ, FCT in the intent; FND, CHL, DEC
+  internally. No universal standard for prefixes exists; this is a
+  house convention derived from the group's own. A fact (FCT) is what
+  is the case — stated by the principal on his word, or by a source
+  cited to its file; verification is never demanded. A position (POS)
+  is what the principal holds or wants. Making a source's fact his own
+  stance is a new POS. Added 2026-09-10 for the first project whose
+  intent had to carry what is so beside what is wanted: without a
+  prefix of its own, a fact would have passed for a position.
 - **POS.0240** Every assignment carries a Terms section listing the
   prefixes and any domain terms it actually uses, so it can be forwarded
   without oral tradition. Defined Terms are capitalised in item text.
@@ -981,8 +996,8 @@ position that already stands elsewhere.
   existing instance file is the user's act on the release notes'
   word). The session model lives in `.claude/settings.local.json`
   (POS.0930). `CLAUDE.md` names the principal and the conversation
-  language only as things that exist, never by value; the artefact
-  language stays English (THR.0180). The scripts carry no URL and no
+  language only as things that exist, never by value; the document
+  language is the project's own (POS.0060). The scripts carry no URL and no
   identity (POS.0830). The commit identity is a property of the
   project, not of the host: set locally in every repository (`git
   config user.name` / `user.email`) at its creation or import,
@@ -1395,18 +1410,6 @@ position that already stands elsewhere.
   structured, position-level work before it can be locked and mined;
   until then a draft brief is the branch.
 
-- **THR.0180** The output language. POS.0060 makes English the
-  language of every artefact as a rule of the forge; the principal
-  stated on 2026-08-29 that it is not — it is his own rule, enforced
-  by him, for the company projects of this instance, and a project
-  with Czech output is conceivable. The rule therefore belongs to the
-  instance or the project, not to the engine that is to become public
-  (00-brief-public-engine.md). Deliberately left as is: more than one
-  output language is to be solved when a project needs it — where the
-  choice lives (instance default, per-project override), what stays
-  English as notation (ID prefixes, `shall`, status words), how the
-  reviewers and `/render` read it. The first project with Czech output
-  opens it — planned as the first project after the split.
 - **THR.0190** A plugin as a later distribution layer. Claude Code
   plugins would give the only real upgrade channel and project =
   repository, but a plugin carries no `CLAUDE.md`, and commands are
@@ -1515,8 +1518,12 @@ position that already stands elsewhere.
   and stays a thread of its own.
   *Order of work.* The second framework must exist in outline before the
   boundary can be drawn; the engine is not built ahead of it. Where the
-  engine is thought: here as a thread for now — it may become the first
-  thread turned into a project of its own; the principal undecided.
+  engine is thought: decided 2026-09-07 — as a brief born in the forge
+  (`00-brief-<name>.md`, the way `00-brief-public-engine.md` was),
+  carrying the boundary list, the outline of the second framework and
+  the target shape; mined into the intent once locked. A project of its
+  own only afterwards, by spinoff of the decided part, if the decision
+  calls for one.
   THR.0220 was settled on today's forge at 3.33 (POS.1100) as an engine
   matter that carries over; THR.0210 stays open on the same
   recommendation. CHL.0150 (2026-09-06, parked until after 4.0): since
@@ -1598,6 +1605,28 @@ position that already stands elsewhere.
   every lens, which the trial skipped. Relation: the first concrete
   kind of THR.0290, and the shape of the operating layer it reviews
   is POS.1120's and THR.0240's question. Opened 2026-09-05.
+
+- **THR.0340** The README split from the documentation. The README is
+  today the engine's whole documentation — 829 lines on 2026-09-08,
+  longer than CLAUDE.md, sixteen chapters that are three things at
+  once: an invitation (why, what you get, quickstart), a user's guide
+  (the flow, roles, the chain, the reviewers, the commands) and a
+  reference (conventions, setup, scripts). Decided in substance
+  2026-09-08 at the principal's direction: the split must come — a
+  short README that invites and points, the guide and the reference as
+  renders of their own recipes into `docs/` (the mechanism exists: a
+  recipe's `output:` path, POS.1070; the ledger's Renders table;
+  `/release` re-rendering them). Decided order: after THR.0230, not
+  before — the engine/framework boundary divides today's README
+  between two repositories (setup, scripts, conventions, the reviewer
+  mechanism and the mechanical commands to the engine; the chain, the
+  lenses and personas, the requirement style and `/forge` to the
+  forge), so a `docs/` cut made now would be cut again along that
+  line. Open: whether the conventions chapter is rendered at all or
+  the documentation points to CLAUDE.md, which is readable as it
+  stands; the cost of more renders per `/release` (the README alone
+  takes five to eight minutes today). Trigger: the boundary drawn by
+  the brief of THR.0230. Opened 2026-09-08.
 
 Note: the ID THR.0120 was inadvertently used twice — first for the
 readme-recipe thread (opened 1.14, closed 1.16), then for the

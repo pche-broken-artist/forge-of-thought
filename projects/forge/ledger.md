@@ -1,7 +1,8 @@
 ---
 project: forge
 kind: thought
-updated: 2026-09-06
+language: en
+updated: 2026-09-10
 ---
 
 # Ledger — Forge of Thought
@@ -26,7 +27,7 @@ absorbed it; Note says what remains (partial) or the REJ (dropped). -->
 ## Documents
 | File | Version | Status | Date |
 |---|---|---|---|
-| 10-intent.md | 4.0 | approved | 2026-09-06 |
+| 10-intent.md | 4.3 | draft | 2026-09-10 |
 | 20-assignment.md | — | not planned: the handover artefacts of this project are the core itself (CLAUDE.md, templates/, .claude/) and README.md | — |
 | decisions.md | — | 11 records (DEC.0010–0110) | 2026-09-06 |
 
@@ -68,6 +69,7 @@ research/00-INDEX.md. -->
 | 2026-08-29-split-migration-runbook.md | 2026-08-29 | 00-brief-public-engine.md v1.0; 10-intent.md v2.21 (POS.0940–0980); git research |
 | 2026-09-03-version-history-placement.md | 2026-09-03 | 10-intent.md v3.13 (principal's question of 2026-09-03 on the cost of the Version History table); CLAUDE.md Versioning & status |
 | 2026-09-05-good-release-notes.md | 2026-09-05 | 10-intent.md v3.34 (THR.0310; POS.0730, release-notes recipe 0.6); RELEASE-NOTES.md as rendered 2026-09-05 |
+| 2026-09-07-brd-layer-fork-analysis.md | 2026-09-07 | 10-intent.md v4.0 (POS.0700 growth path; POS.0210, POS.0760, POS.0780, POS.1140); a colleague's fork of the engine at intent 2.8, read from a local clone |
 
 ## Findings
 <!-- State: open | resolved | overruled | obsolete. Resolution: assignment
@@ -144,6 +146,34 @@ intent version for accepted, DEC.NNNN for rejected. -->
 | CHL.0190 | accepted | Release 4.0 is queued and nothing says what an approved major of this intent means — a sign-off with no counterparty and no test (minor) | 2026-09-06-challenge-cto.md | intent 3.46 (POS.0300: what a major of the forge intent means and must pass) |
 
 ## Waiting on principal
+- **Intent 4.3 (2026-09-10) written for the first project with facts
+  and Czech output** — a private project of the principal's, run in
+  a separate, isolated instance of the forge that takes 4.3 through
+  `forge-pull`; its content never enters here (THR.0210): FCT
+  beside POS (POS.0230), the output language per project in the
+  ledger header (POS.0060, THR.0180 closed). Operating layer aligned
+  the same hour: CLAUDE.md (prime directive 6, ID scheme),
+  `templates/ledger.md`, `templates/intent.md`,
+  `templates/CLAUDE.local.md`, `/forge intent` step 4. The README
+  still states "all documents in English" until the next `/release`.
+  Not yet done: the existing projects' ledgers carry no `language`
+  line (absent means English — not a finding).
+- **Next step (2026-09-07, principal's direction): the BRD layer is
+  born as a brief.** Nothing goes into the intent directly. A new
+  brief `00-brief-brd.md` is composed iteratively in the forge
+  (`/forge brief brd`) from the working conversation over a
+  colleague's fork of the engine (intent 2.8 plus a BRD layer; a
+  local clone in the engine's gitignored `tmp/`, private) and the
+  research note `2026-09-07-brd-layer-fork-analysis.md`; the fork's
+  files are not transferred — the runtimes have diverged, much is
+  already solved differently here, and the files were written by a
+  weaker model — its mechanisms are analysed, the best taken and
+  fitted to the forge's standard, walked through point by point
+  (the note lists eight to borrow and nine to refuse). Once locked,
+  the brief is mined into the intent (POS.0700 closes into positions
+  of its own; the revisit of CHL.0030 under DEC.0060 belongs to that
+  round). Deferred for lack of time on 2026-09-07, to be taken up
+  soon.
 - **Operating layer of POS.1120 built (2026-09-06, intent 3.41);
   the reviewers' first real runs done:**
   `/critique clarity intent` on 2026-09-06 confirmed the contract on
@@ -235,7 +265,14 @@ intent version for accepted, DEC.NNNN for rejected. -->
      readme recipe 0.41, executive-pitch recipe 0.2, five argument
      hints quoted, DEC.0110; deferred to 4.1: POS.0450 to cite DEC.0050
      beside DEC.0020;
-     then `/release forge` at 4.0 with the tag `v4`. After 4.0:
+     `/release forge` at 4.0 run 2026-09-06 evening: its three checks
+     (`light` three findings, `project` one, `engine` four) settled by
+     walkthrough — ledger rows, the "Decided once" rule in the check
+     contract (DEC.0110's owner), full-check wording gone from `/save`
+     and `/release`, `/setup` asks the role only, `/check`'s verdict
+     vocabulary cites the walkthrough; `essence` declined; README and
+     release notes rendered at 4.0, minors 3.1–3.49 folded into the
+     4.0 section; commit 4c01a2f, tag `v4`. After 4.0:
      THR.0230's split if useful (CHL.0150), THR.0240 (the size of
      CLAUDE.md).
   Then THR.0230 (after an outline of the second framework). Dormant
@@ -250,7 +287,10 @@ intent version for accepted, DEC.NNNN for rejected. -->
   2026-09-05: renders and check move to `/release` (POS.1100); the
   watch continues on the first releases. First `/release` (2026-09-05,
   release 3.34): the check 4:56, renders in parallel 7:07 (README
-  3:44, release notes 7:07).
+  3:44, release notes 7:07). Release 4.0 (2026-09-06): three checks in
+  parallel 4:37 (light 2:13, project 3:03, engine 4:37), renders in
+  parallel 5:48 (README 5:48, release notes 5:11), the pre-save light
+  check 1:33.
 - Force-push of 2026-09-04, recorded: the save of intent 3.21–3.22
   (b717a67) carried the principal's private `tmp/` at the engine root
   into the public repository — the directory had never been added to
@@ -291,22 +331,25 @@ intent version for accepted, DEC.NNNN for rejected. -->
   same lens or a further thing; opened 2026-09-03, parked
 - THR.0230 a common engine beneath several frameworks (forge, product,
   project management) — opened 2026-09-03, to be worked out before any
-  decision; the second framework in outline comes first; may become the
-  first thread turned into a project of its own; the principal undecided
-  whether at all
+  decision; the second framework in outline comes first. Decided
+  2026-09-07 (intent 4.1): worked as a brief born in the forge
+  (`/forge brief <name>`), a project of its own only by spinoff
+  afterwards; whether a common engine at all stays open
 - THR.0240 the size of CLAUDE.md (523 lines) — opened 2026-09-03; to be
   dealt with whatever becomes of THR.0230
+- THR.0340 the README split from the documentation (a short README,
+  the guide and the reference as `docs/` renders) — decided in
+  substance 2026-09-08, to be done after THR.0230 draws the
+  engine/framework boundary; open: the conventions chapter, the
+  render cost per `/release`
 - Executive pitch (since 2026-08-30): five-slide C-level deck of the
   forge, story agreed (S01–S05), recipe `recipes/executive-pitch.md`
-  v0.2 with a Renders row. Decided direction, not yet written into the
-  intent: the deck is for company management, so recipe and render move
-  to `lib-allwyn`, template `sources/allwyn.potx` (to be ingested
-  first); one sentence in POS.0970 (a library may carry recipes and
-  renders for company audiences whose inputs are other repositories'
-  artefacts, registered as Dependencies), one each in `/check` (paths
-  out of the repository are cross-repo citations) and `/forge` (a
-  library's renders reported with staleness), CLAUDE.md lib layout
-  lines. Waits for a round of `/forge intent`.
+  v0.2 with a Renders row. Decided 2026-09-10: the deck stays here in
+  `projects/forge`, recipe and render as they are, the `.pptx` through
+  `scripts/md2pptx.ps1` with its default template — no move to
+  `lib-allwyn`, no `allwyn.potx`, no library-render mechanism (the
+  direction of 2026-08-30 withdrawn before it reached the intent).
+  Waits for the principal's word to render.
 - THR.0090 multi-principal use — deliberately not worked on
   (principal's direction 2026-08-29: principals not to be solved now); the scripts part resolved by POS.0950
 - THR.0140 the delivery side — deliberately deferred until a subject
@@ -327,7 +370,6 @@ intent version for accepted, DEC.NNNN for rejected. -->
   approved major; the next such tag goes through `/save -Tag` or
   `/release -Tag`.
 - THR.0210 the guard rail for the public boundary — `projects/forge` never carries the content of a subject project; parked 2026-09-03 by the principal, proposed solution recorded in the thread (a check of its own, POS.1140, plus one sentence in both reviewer contracts); taken up when the boundary is next at stake
-- THR.0180 the output language — left as is; more than one output language solved when a project needs it
 - THR.0190 a plugin as a later distribution layer — no preparation
   now; taken up when forge-pull proves an insufficient upgrade channel
 - THR.0200 the public face, narrowed at 3.0 to the README exemplar (repository `forge-of-thought` and licence CC BY 4.0 settled in POS.0990)

@@ -19,8 +19,8 @@ speak whatever language the user speaks to you.
      - **Principal** — the role, whose thinking is being forged (the
        template's placeholder);
      - **Conversation language** — the language the working
-       conversation runs in (artefacts are always English, briefs
-       verbatim);
+       conversation runs in (documents follow their project's
+       language, briefs verbatim);
      - **Git identities** — name and e-mail per git host the user
        will push to (e.g. github.com, a company host), written to
        `identities.local.md` beside it from

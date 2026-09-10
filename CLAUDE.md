@@ -43,12 +43,16 @@ never here.
    principal publishes. A missing section (e.g. success criteria) may be a
    deliberate delegation to the recipients, not a defect.
 6. **Language:** conversation in the principal's language (set in
-   `CLAUDE.local.md`); all documents in English — the forge dictates
-   only the output language, and the conversation language is
+   `CLAUDE.local.md`); all documents in the project's language — the
+   `language` of its ledger header, English when absent — with
+   English as notation throughout (ID prefixes, `shall`, status
+   words, front-matter keys). The forge dictates only that one
+   output language per project, and the conversation language is
    per-instance configuration that never appears in outward-facing
    renders (the README among them). Translate on write. The one
    exception is the briefs (`00-brief*.md`), stored verbatim in
-   whatever language they were written.
+   whatever language they were written. A render may be in any
+   language its recipe declares.
 7. **Structure over prose.** Items with stable IDs, even at very high
    abstraction. Narrative only in Purpose & Context and Objective.
 8. **Assignments are complete and precise.** An assignment carries the
@@ -462,6 +466,7 @@ lifecycle. Depth max two levels.
 | POS | position the principal currently holds | intent |
 | THR | open thread — unresolved matter to elicit next | intent |
 | REJ | rejected direction, with the reason it was dropped | intent |
+| FCT | fact — what is the case, as the principal states it or as a source states it; not a stance; provenance to the file where a source exists, never demanded | intent |
 | FND | critique finding (document quality) | ledger, reviews |
 | CHL | peer-review challenge (substance) | ledger, challenges |
 | DEC | decision, incl. overruled findings and rejected challenges | decisions.md |
