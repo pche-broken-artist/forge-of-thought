@@ -20,8 +20,8 @@ below) or `library` (slug prefix `lib-`, material shared across
 projects, no chain). Infer `library` from the `lib-` prefix or the
 principal's words; when unclear, ask.
 
-**Language.** Every project declares the language of its documents
-as `language:` in its ledger header (CLAUDE.md, prime directive 6;
+**Language.** Every project declares the language of its chain
+artefacts as `language:` in its ledger header (CLAUDE.md, prime directive 6;
 POS.0060 of the forge intent): English unless the principal names
 another; ask when his words leave it open.
 
@@ -75,5 +75,3 @@ steps 3–5 below do not apply.
 
 File names in the chain are numbered (`00-brief.md`, `10-intent.md`,
 `20-assignment.md`) so later layers can be added without renaming.
-
-All files in English except 00-brief.md (verbatim).

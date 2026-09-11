@@ -43,16 +43,19 @@ never here.
    principal publishes. A missing section (e.g. success criteria) may be a
    deliberate delegation to the recipients, not a defect.
 6. **Language:** conversation in the principal's language (set in
-   `CLAUDE.local.md`); all documents in the project's language — the
-   `language` of its ledger header, English when absent — with
-   English as notation throughout (ID prefixes, `shall`, status
-   words, front-matter keys). The forge dictates only that one
-   output language per project, and the conversation language is
-   per-instance configuration that never appears in outward-facing
-   renders (the README among them). Translate on write. The one
-   exception is the briefs (`00-brief*.md`), stored verbatim in
-   whatever language they were written. A render may be in any
-   language its recipe declares.
+   `CLAUDE.local.md`); the artefacts of the chain — intent,
+   assignment, later layers — in the project's language: the
+   `language` of its ledger header, English when absent. Records,
+   state, research and recipes are always English: they are read by
+   Claude, the reviewers and the checks, never handed to the
+   recipients. English is the notation throughout (ID prefixes,
+   `shall`, status words, front-matter keys). The forge dictates
+   only that one output language per project, and the conversation
+   language is per-instance configuration that never appears in
+   outward-facing renders (the README among them). Translate on
+   write. The one exception among the artefacts is the briefs
+   (`00-brief*.md`), stored verbatim in whatever language they were
+   written. A render may be in any language its recipe declares.
 7. **Structure over prose.** Items with stable IDs, even at very high
    abstraction. Narrative only in Purpose & Context and Objective.
 8. **Assignments are complete and precise.** An assignment carries the
@@ -138,7 +141,7 @@ whether it is versioned and how it behaves:
 | Group | Kind | Meaning | Written by | Versioned | Behaviour |
 |---|---|---|---|---|---|
 | artefacts | brief | the idea as the principal wrote it | principal | yes | locked at 1.0, then immutable |
-| artefacts | intent | current understanding for principal and Claude: positions, threads, rejections | Claude, principal composes | yes | rewritten freely |
+| artefacts | intent | current understanding for principal and Claude: positions, facts, threads, rejections | Claude, principal composes | yes | rewritten freely |
 | artefacts | assignment | the direction handed to the recipients, self-contained | Claude, principal composes | yes | rewritten freely |
 | artefacts | later artefacts (BRD, RFP, article…) | further layers, each derived from the one above | Claude, principal composes | yes | rewritten freely |
 | records | history | what changed in a versioned document, and why | forge | — | append-only |
@@ -198,9 +201,9 @@ ledger.md        single source of truth for state
    drift measure of its whole.
 2. **`10-intent.md`** — the working document, audience: principal +
    Claude. Consolidated *current* state of intent: what he wants, why,
-   what is open, what was rejected and why. Continuously rewritten for
-   coherence (not append-only); changes recorded in its history
-   companion.
+   what is the case, what is open, what was rejected and why.
+   Continuously rewritten for coherence (not append-only); changes
+   recorded in its history companion.
 3. **`20-assignment.md`** — distilled from intent, audience: the
    recipients of the assignment (teams, colleagues, or the principal's
    future self). The only document handed over. Self-contained.

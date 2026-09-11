@@ -1,8 +1,8 @@
 ---
-version: 4.3
-date: 2026-09-10
+version: 4.5
+date: 2026-09-11
 status: draft
-last_change: 4.3 (2026-09-10): FCT — facts beside positions in the intent (POS.0230); the project's output language in its ledger header, THR.0180 closed (POS.0060).
+last_change: 4.5 (2026-09-11): the intent's kind row names facts beside positions, threads and rejections (POS.1080), after the engine check of the release.
 project: forge
 audience: principal + Claude only
 ---
@@ -62,18 +62,24 @@ solution is the kind of content, never the amount.
   rather than inventing. Outside inspiration is a legitimate input;
   durable findings are stored in `research/`, not left in chat.
 - **POS.0060** The forge as a system dictates only that a project has
-  one output language: every document of a project is written in the
-  language its ledger header declares (`language`, ISO 639-1, English
-  when absent), with English as notation throughout — ID prefixes,
-  `shall`, status words, front-matter keys — so that the reviewers,
-  the checks and `/render` read every project the same way. The
-  single exception is the briefs (`00-brief*.md`), stored verbatim in
-  whatever language they were written; a render may be in any
-  language its recipe declares, a translation being a render. English
-  for every project was the principal's own rule for the company
-  projects of this instance, not the forge's (his statement of
-  2026-08-29; THR.0180, closed 2026-09-10 by the first project with
-  Czech output, as the thread foresaw). The working-conversation
+  one output language: the artefacts of the chain — intent,
+  assignment and every later layer — are written in the language its
+  ledger header declares (`language`, ISO 639-1, English when
+  absent). Everything else a project holds — records, state, research
+  and recipes — is always English, whatever the project's language:
+  it is read by Claude, the reviewers and the checks and never handed
+  to the recipients, and one operating language is what lets them
+  read every project the same way. English is the notation
+  throughout — ID prefixes, `shall`, status words, front-matter keys.
+  The single exception among the artefacts is the briefs
+  (`00-brief*.md`), stored verbatim in whatever language they were
+  written; a render may be in any language its recipe declares, a
+  translation being a render. English for every project was the
+  principal's own rule for the company projects of this instance, not
+  the forge's (his statement of 2026-08-29; THR.0180, closed
+  2026-09-10 by the first project with Czech output, as the thread
+  foresaw; the boundary narrowed to the artefacts the same day, at
+  his correction). The working-conversation
   language is per-instance configuration, not a system rule: it is
   set in `CLAUDE.local.md` (POS.0950) and read from there by every
   command — never written into the operating layer, and never
@@ -526,7 +532,7 @@ position that already stands elsewhere.
   | Group | Kind | Meaning | Written by | Versioned | Behaviour |
   |---|---|---|---|---|---|
   | artefacts | brief | the idea as the principal wrote it | principal | yes | locked at 1.0, then immutable |
-  | artefacts | intent | current understanding for principal and Claude: positions, threads, rejections | Claude, principal composes | yes | rewritten freely |
+  | artefacts | intent | current understanding for principal and Claude: positions, facts, threads, rejections | Claude, principal composes | yes | rewritten freely |
   | artefacts | assignment | the direction handed to the recipients, self-contained | Claude, principal composes | yes | rewritten freely |
   | artefacts | later artefacts (BRD, RFP, article…) | further layers, each derived from the one above | Claude, principal composes | yes | rewritten freely |
   | records | history | what changed in a versioned document, and why | forge | — | append-only |

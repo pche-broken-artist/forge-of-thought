@@ -2,9 +2,9 @@
 project: forge
 purpose: readme
 audience: humans arriving at the repository
-version: 0.41
-updated: 2026-09-06
-last_change: 0.41 (2026-09-06): the git-identity roster named as identities.local.md in the three Setup instructions and the Template, per POS.0950 (engine check of release 4.0).
+version: 0.43
+updated: 2026-09-11
+last_change: 0.43 (2026-09-11): the intent paragraph names facts (FCT) beside positions, threads and rejections (POS.1080 at intent 4.5).
 output: /README.md
 ---
 
@@ -133,11 +133,17 @@ summarising the newest row. -->
   repository of its own, which the engine does not track — that is
   why you name it first.
 - The language rule appears once, in Conventions, and says only this:
-  the forge dictates the output language — all documents are written
-  in English; the briefs are the exception, stored verbatim in
-  whatever language they were written. The conversation language is
-  per-instance configuration (it lives in `CLAUDE.local.md`) and its
-  value is never mentioned in the README.
+  the forge dictates one output language per project — the artefacts
+  of the chain (intent, assignment, later layers) are written in the
+  language the project's ledger header declares (`language`, English
+  when absent); the briefs are the exception, stored verbatim in
+  whatever language they were written; everything else a project
+  holds — ledger, decisions, history, reviews, challenges, indexes,
+  research, recipes — is always English, as is the notation (ID
+  prefixes, `shall`, status words, front-matter keys); a render may
+  be in any language its recipe declares. The conversation language
+  is per-instance configuration (it lives in `CLAUDE.local.md`) and
+  its value is never mentioned in the README.
 - The "How it is used" story is loose narrative, not documentation:
   second person, four to six short paragraphs, commands appearing in
   passing inside sentences, concrete micro-examples (a downloaded
@@ -194,8 +200,9 @@ summarising the newest row. -->
   Brief: per CLAUDE.md — free-form, any structure the principal finds
   useful, thoughts to be processed rather than decisions, draft →
   locked, three origins, later wholes, mined with ledger state.
-  Intent: the consolidated *current* state — positions (POS), open
-  threads (THR), rejected directions with their reason (REJ), each
+  Intent: the consolidated *current* state — positions (POS), facts
+  (FCT), open threads (THR), rejected directions with their reason
+  (REJ), each
   with a stable ID — rewritten for coherence every round rather than
   appended, with a changelog; audience principal + Claude only.
   Assignment: distilled from the intent for the recipients and the

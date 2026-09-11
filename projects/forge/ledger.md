@@ -2,7 +2,7 @@
 project: forge
 kind: thought
 language: en
-updated: 2026-09-10
+updated: 2026-09-11
 ---
 
 # Ledger — Forge of Thought
@@ -27,7 +27,7 @@ absorbed it; Note says what remains (partial) or the REJ (dropped). -->
 ## Documents
 | File | Version | Status | Date |
 |---|---|---|---|
-| 10-intent.md | 4.3 | draft | 2026-09-10 |
+| 10-intent.md | 4.5 | draft | 2026-09-11 |
 | 20-assignment.md | — | not planned: the handover artefacts of this project are the core itself (CLAUDE.md, templates/, .claude/) and README.md | — |
 | decisions.md | — | 11 records (DEC.0010–0110) | 2026-09-06 |
 
@@ -37,9 +37,9 @@ hand-edited: iterate the recipe, re-run /render. Row mirrors the
 render's front-matter provenance. -->
 | Render | Audience | Recipe | Inputs | Generated |
 |---|---|---|---|---|
-| README.md (repo root) | humans arriving at the repository | recipes/readme.md v0.41 | CLAUDE.md, 10-intent.md v4.0 | 2026-09-06 |
-| RELEASE-NOTES.md (repo root) | the user of the engine who takes upgrades through forge-pull | recipes/release-notes.md v0.10 | 10-intent.history.md, 10-intent.md v4.0, decisions.md, previous edition (released sections) | 2026-09-06 |
-| renders/executive-pitch.md | C-level executives whose experience of AI is chatting with it | recipes/executive-pitch.md v0.2 | projects/forge/10-intent.md, CLAUDE.md | — (not yet rendered) |
+| README.md (repo root) | humans arriving at the repository | recipes/readme.md v0.43 | CLAUDE.md, 10-intent.md v4.5 | 2026-09-11 |
+| RELEASE-NOTES.md (repo root) | the user of the engine who takes upgrades through forge-pull | recipes/release-notes.md v0.10 | 10-intent.history.md, 10-intent.md v4.5, decisions.md, previous edition (released sections) | 2026-09-11 |
+| renders/executive-pitch.md | C-level executives whose experience of AI is chatting with it | recipes/executive-pitch.md v0.4 | projects/forge/10-intent.md v4.4, CLAUDE.md | 2026-09-11 |
 
 ## Sources
 <!-- Registration only; what a source is and is for lives in
@@ -120,6 +120,11 @@ version for resolved, DEC.NNNN for overruled. -->
 | FND.0420 | low | ambiguity | resolved | 2026-09-06-critique-clarity-3.md | intent 3.48 (POS.0570 cites POS.1140) |
 | FND.0430 | low | contradiction | resolved | 2026-09-06-critique-clarity-3.md | intent 3.48 (THR.0240 dated) |
 
+The two reviews `2026-08-17-critique.md` and `2026-08-27-critique.md`
+carry no lens in their name: reports of the retired single critic,
+written before lenses existed (POS.0410). Accepted as they are on
+2026-09-11 at the release checks — legacy, not a finding.
+
 ## Challenges
 <!-- State: open | accepted | rejected | parked | obsolete. Resolution:
 intent version for accepted, DEC.NNNN for rejected. -->
@@ -146,6 +151,23 @@ intent version for accepted, DEC.NNNN for rejected. -->
 | CHL.0190 | accepted | Release 4.0 is queued and nothing says what an approved major of this intent means — a sign-off with no counterparty and no test (minor) | 2026-09-06-challenge-cto.md | intent 3.46 (POS.0300: what a major of the forge intent means and must pass) |
 
 ## Waiting on principal
+- **Markdown to Word (`md2docx`), noted 2026-09-11, to be settled
+  when a render needs it.** Two routes, both available on the
+  principal's machine: deterministic — `pandoc` with a reference
+  `.docx` for styles (Mermaid blocks would need `mermaid-cli` to
+  become pictures, else they land as code); LLM — a sibling of
+  `scripts/md2pptx.ps1` on the `document-skills:docx` skill, headless,
+  diagrams redrawn natively. Which, or both, is open; a new
+  conversion is a position of the intent (CLAUDE.md today names
+  `md2pptx` as the one in-house conversion).
+- **Intent 4.4 (2026-09-10): the project's language narrowed to the
+  artefacts** — at the principal's correction of 4.3: records, state,
+  research and recipes are always English (POS.0060); CLAUDE.md
+  prime directive 6, `templates/ledger.md`,
+  `templates/CLAUDE.local.md`, `/new-project`, `/setup` and
+  `check-project` aligned in the same write. Readme recipe 0.42
+  (2026-09-11) carries the rule; README rendered at the release of
+  2026-09-11.
 - **Intent 4.3 (2026-09-10) written for the first project with facts
   and Czech output** — a private project of the principal's, run in
   a separate, isolated instance of the forge that takes 4.3 through
@@ -155,7 +177,7 @@ intent version for accepted, DEC.NNNN for rejected. -->
   the same hour: CLAUDE.md (prime directive 6, ID scheme),
   `templates/ledger.md`, `templates/intent.md`,
   `templates/CLAUDE.local.md`, `/forge intent` step 4. The README
-  still states "all documents in English" until the next `/release`.
+  states the rule since the release of 2026-09-11.
   Not yet done: the existing projects' ledgers carry no `language`
   line (absent means English — not a finding).
 - **Next step (2026-09-07, principal's direction): the BRD layer is
@@ -344,12 +366,12 @@ intent version for accepted, DEC.NNNN for rejected. -->
   render cost per `/release`
 - Executive pitch (since 2026-08-30): five-slide C-level deck of the
   forge, story agreed (S01–S05), recipe `recipes/executive-pitch.md`
-  v0.2 with a Renders row. Decided 2026-09-10: the deck stays here in
+  v0.4 (2026-09-11) with a Renders row. Decided 2026-09-10: the deck stays here in
   `projects/forge`, recipe and render as they are, the `.pptx` through
   `scripts/md2pptx.ps1` with its default template — no move to
   `lib-allwyn`, no `allwyn.potx`, no library-render mechanism (the
   direction of 2026-08-30 withdrawn before it reached the intent).
-  Waits for the principal's word to render.
+  Rendered 2026-09-11 (`renders/executive-pitch.md`, recipe 0.3, re-rendered the same day from recipe 0.4 after the principal's review — opponents uncounted, five lines per slide); the `.pptx` built the same evening on the principal's word through `scripts/md2pptx.ps1` without a template (`renders/executive-pitch.pptx`, 46 kB, five slides with notes, no text moved to the notes); the headless run had no `document-skills:pptx` skill available and built the deck with python-pptx instead — to watch at the next build. Open from the render run: the S03 counts (34/31/3) rest on the recipe's Template alone, no input carries them.
 - THR.0090 multi-principal use — deliberately not worked on
   (principal's direction 2026-08-29: principals not to be solved now); the scripts part resolved by POS.0950
 - THR.0140 the delivery side — deliberately deferred until a subject

@@ -32,8 +32,9 @@ Elicitation checklist:
 7. **Diagram policy.** Which slides carry a diagram; inline Mermaid
    (valid standalone, simple enough to survive conversion into native
    slide shapes) or a reference to an existing render.
-8. **Language.** Artefacts default to English; the principal may
-   decide otherwise for a specific audience — ask, never assume.
+8. **Language.** The render's language is what this recipe declares
+   (CLAUDE.md, prime directive 6); propose the project's language
+   from its ledger header and ask, never assume.
 9. **Vocabulary discipline.** Terms that must not blur (defined
    Terms, house distinctions); the recipe states them explicitly.
 10. **What must not appear.** Confidentiality toward this audience:

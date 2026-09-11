@@ -1,11 +1,11 @@
 ---
 project: forge
 render: release-notes
-generated: 2026-09-06
+generated: 2026-09-11
 recipe: recipes/release-notes.md v0.10
 inputs:
   - projects/forge/10-intent.history.md
-  - projects/forge/10-intent.md v4.0
+  - projects/forge/10-intent.md v4.5
   - projects/forge/decisions.md
   - RELEASE-NOTES.md (previous edition, released sections)
 ---
@@ -16,6 +16,56 @@ One section per release of the engine, newest first, for the user who
 takes upgrades through `forge-pull`; Action required comes first in
 every section; the fine-grained log with the reasons lives in
 `projects/forge/10-intent.history.md`.
+
+## 4.5 — 2026-09-11
+
+### Fixed
+- The intent's kind names facts beside positions, threads and
+  rejections (POS.1080). For you: the kinds table in CLAUDE.md and the
+  README now list all four prefixes of the intent.
+
+## 4.4 — 2026-09-10
+
+### Changed
+- The project's language covers the artefacts of the chain only;
+  ledger, decisions, history, reviews, challenges, indexes, research
+  and recipes stay English in every project (POS.0060). For you: write
+  a project in your language and keep its bookkeeping in English;
+  `check project` now flags a ledger or a decision written in the
+  project's language.
+
+## 4.3 — 2026-09-10
+
+### Added
+- The intent may carry facts as `FCT` items beside positions, on the
+  principal's word or with provenance to a source (POS.0230). For you:
+  write down what is so without dressing it as a position, and without
+  being asked for proof.
+- A project declares the language of its documents in its ledger
+  header, `language: en` in the template, English when the line is
+  absent (POS.0060). For you: a project may now be written in Czech or
+  any other language; add the line to a new project's ledger, existing
+  ledgers need nothing.
+
+### Changed
+- The language rule of CLAUDE.md now says "the project's language"
+  where it said "English" (POS.0060). For you: nothing changes for a
+  project that stays English.
+
+## 4.2 — 2026-09-08
+
+### Added
+- THR.0340: the README split from the documentation, to come after
+  THR.0230. For you: nothing to do yet; the README stays whole until
+  the engine boundary is drawn.
+
+## 4.1 — 2026-09-07
+
+### Changed
+- The engine question is worked as a brief in the forge project, not as
+  a project of its own (THR.0230). For you: nothing changes in the
+  engine yet; the boundary between engine and forge is being worked out
+  on the record, and a later split would arrive as an ordinary release.
 
 ## 4.0 — 2026-09-06 — approved
 

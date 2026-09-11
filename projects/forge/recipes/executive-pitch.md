@@ -2,9 +2,9 @@
 project: forge
 purpose: Slide-by-slide source material for a five-slide executive pitch of Forge of Thought
 audience: C-level executives whose experience of AI is chatting with it
-version: 0.2
-updated: 2026-09-06
-last_change: 0.2 (2026-09-06): inputs declared from the engine root, the base every other recipe and the ledger use (project check of release 4.0); still not rendered.
+version: 0.4
+updated: 2026-09-11
+last_change: 0.4 (2026-09-11): the opponents no longer counted — the roster grows; on-slide density raised to five lines (principal's review of the first render).
 ---
 
 # Recipe — Executive pitch
@@ -36,15 +36,16 @@ last_change: 0.2 (2026-09-06): inputs declared from the engine root, the base ev
 - Speaker notes: what the presenter says, three to six sentences per
   slide, conversational; no IDs, no citations — the audience and the
   presenter need neither.
-- On-slide density: at most 4 lines per slide, at most 12 words per
+- On-slide density: at most 5 lines per slide, at most 12 words per
   line; a title of at most 8 words. Everything beyond that belongs to
   the notes. Each slide may carry one closing line in bold.
 - Vocabulary discipline: "chat" always means the question-and-answer
   use of AI the audience knows; "the forge" is the system; "the idea"
   is what enters and "the output" is what leaves — never "brief",
   "intent", "assignment", "ledger", "recipe", "render", "critic",
-  "challenger", never any ID or prefix. The two reviewers are "two
-  opponents that never saw you". The regenerated outputs are
+  "challenger", never any ID or prefix. The reviewers are "opponents
+  that never saw you" — never a count: the roster grows. The
+  regenerated outputs are
   "outputs" or named by their audience ("a pitch for the group", "a
   deck for the delivery team"), never "renders".
 - Must not appear: any project name, company name, person, vendor or
@@ -65,9 +66,10 @@ last_change: 0.2 (2026-09-06): inputs declared from the engine root, the base ev
   ```
 
 ## Build instructions
-- Template: none for now — design freely, dark background, one
-  accent colour, generous whitespace; a `.potx` will be named by path
-  once the principal has ingested it.
+- Template: none — `scripts/md2pptx.ps1` runs without `-Template`
+  and designs the visual style itself: dark background, one accent
+  colour, generous whitespace (principal's decision of 2026-09-10; no
+  `.potx`).
 - Model: opus.
 - Never let text overflow: if a slide's lines do not fit at the
   template's body size, shorten nothing — move the last line to the
@@ -85,6 +87,6 @@ instructions, then one section per slide:
 |---|---|---|---|
 | S01 | The chat answers. Nobody checks the question. | Today: idea → chat → good answer → e-mail → assignment. The answer takes a minute; what was in the head was never examined. The error is not in the answer, it is in the question — and nobody reads the question. Closing line: **The mistake is upstream of the answer.** | Flow: idea → chat → assignment, with a question mark over the first arrow |
 | S02 | A forge, not a whisperer. | The idea enters as written and never changes. From it a working shape is hammered until it holds: what I want, why, what is open, what I dropped and why. Only then is an output cast — and the output can be anything: an assignment for a team, a strategy paper, a board proposal, an argument for the supervisory board, input to someone else's document. Form comes last; substance is forged once. The AI does not compose — it asks, argues back, keeps order. The human decides. Closing line: **Substance forged once, form cast at the end.** | Three stations: idea (locked) → working shape (rewritten) → outputs (many) |
-| S03 | Two opponents that never saw you. | One reads only the document and hunts for what is unclear or self-contradictory. The other reads only the document and attacks the substance: is this even the right problem? what happens in a year? Both work in isolation — they do not know the conversation and cannot nod along. Every objection ends in a recorded verdict: accepted, rejected with a reason, left open. Example: one enterprise platform project — thirty-four objections, thirty-one accepted, three rejected with a written reason, before a single team member saw it. Closing line: **An AI that argues back, and a verdict that is written down.** | — |
+| S03 | Opponents that never saw you. | Each opponent has one job. One reads only the document and hunts for what is unclear or self-contradictory. Another reads only the document and attacks the substance: is this even the right problem? what happens in a year? More are added as the need shows: an opponent for each angle the idea must survive. All work in isolation — they do not know the conversation and cannot nod along. Every objection ends in a recorded verdict: accepted, rejected with a reason, left open. Example: one enterprise platform project — thirty-four objections, thirty-one accepted, three rejected with a written reason, before a single team member saw it. Closing line: **An AI that argues back, and a verdict that is written down.** | — |
 | S04 | One idea, every audience in its own language. | From the same forged substance the outputs are generated for each audience: a five-minute pitch for group leadership, a technical deck for a supplier, a one-page mail for a colleague, an executive summary, an architecture picture for someone outside IT. Each output has its own recipe — for whom, what, how long — and that is what gets tuned, never the text. The idea changes → everything regenerates at once, every output at the current version. No "which version of the deck is the right one", no rewriting five documents after one change. Closing line: **Change the idea once; every output follows.** | Hub: the forged substance in the centre, six outputs around it, each labelled with its audience |
 | S05 | What it means for you. | Three lines, not a feature list: an assignment that survives the team's first question; every decision carries a date and a reason — a year later too; an idea from anyone, the same discipline for everyone, from the CEO to the analyst. Closing line: **A chat gives you an answer. The forge gives you a decision you can stand behind.** | — |

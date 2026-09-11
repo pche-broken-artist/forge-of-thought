@@ -51,10 +51,12 @@ What you verify:
    the intent.
 2. **ID hygiene** — against the ID scheme in CLAUDE.md, every rule
    there (POS.1070), in every document that carries IDs.
-3. **Language** — all documents in the project's language (the
-   ledger header's `language`, English when absent), notation English;
-   only the briefs (`00-brief*.md`) and renders may be in another
-   language (CLAUDE.md, prime directive 6).
+3. **Language** — the chain's artefacts (intent, assignment, later
+   layers) in the project's language (the ledger header's `language`,
+   English when absent); records, state, research and recipes in
+   English whatever the project's language; notation English; only
+   the briefs (`00-brief*.md`) and renders may be in another language
+   (CLAUDE.md, prime directive 6).
 4. **Immutables** — locked briefs (status approved; a draft brief is
    still editable), sources, reviews, challenges and research are
    never edited after creation (CLAUDE.md, Versioning & status); flag

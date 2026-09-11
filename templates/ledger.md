@@ -1,8 +1,9 @@
 ---
 project: <slug>
 kind: thought
-language: en             # language of the project's documents (ISO 639-1);
-                         # English when absent; notation stays English
+language: en             # language of the chain's artefacts (ISO 639-1);
+                         # English when absent; records, state, research,
+                         # recipes and notation stay English
 updated: YYYY-MM-DD
 ---
 
