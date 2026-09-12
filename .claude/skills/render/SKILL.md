@@ -33,8 +33,9 @@ other; generating the render is mechanical.
    columns, like every artefact of the forge, so that git diffs stay
    legible; tables, code blocks and front-matter are never wrapped.
    Content only, always Markdown — a deck render may later be turned
-   into an actual PowerPoint file by `scripts/md2pptx.ps1`; all other
-   format conversion happens outside the forge.
+   into an actual PowerPoint file by `scripts/md2pptx.ps1`, any render
+   into a Word file by `scripts/md2docx.ps1`; all other format
+   conversion happens outside the forge.
 4. The subagent writes to `renders/$1.md`, or to the recipe's
    `output:` path if it declares one (e.g. the repository README).
    Overwrite freely; history lives in git.

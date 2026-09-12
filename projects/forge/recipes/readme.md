@@ -2,9 +2,9 @@
 project: forge
 purpose: readme
 audience: humans arriving at the repository
-version: 0.43
-updated: 2026-09-11
-last_change: 0.43 (2026-09-11): the intent paragraph names facts (FCT) beside positions, threads and rejections (POS.1080 at intent 4.5).
+version: 0.44
+updated: 2026-09-12
+last_change: 0.44 (2026-09-12): "From Markdown to slides" and "Script prerequisites" gain scripts/md2docx.ps1 — a render to Word through pandoc (POS.1150 at intent 4.6).
 output: /README.md
 ---
 
@@ -225,9 +225,11 @@ summarising the newest row. -->
   Markdown; recipe composition may be guided by genre
   (`/recipe presentation`); `scripts/md2pptx.ps1` turns a deck render
   into an actual PowerPoint file, with a `.potx` template named by
-  path — typically a document of a library project; the Markdown
-  stays the source of truth; all other format conversion happens
-  outside the forge.
+  path — typically a document of a library project;
+  `scripts/md2docx.ps1` turns any render into a Word file through
+  pandoc, styles from a reference `.docx` named by path, Mermaid
+  diagrams as blocks of code; the Markdown stays the source of
+  truth; all other format conversion happens outside the forge.
 - Conventions includes: the ID scheme and prefix table; the Terms
   rule; the language rule (as above); the requirement style —
   illustrated by this one fixed example, quoted verbatim and marked
@@ -369,7 +371,10 @@ summarising the newest row. -->
     `/plugin install document-skills@anthropic-agent-skills`), with
     a deck template named by path (`-Template <file.potx>`) —
     typically a document of a library project — or none, in which
-    case Claude designs the visuals; the git scripts need nothing
+    case Claude designs the visuals; `md2docx.ps1` needs pandoc
+    (https://pandoc.org/installing.html), with a reference document
+    named by path (`-Reference <file.docx>`) or none, in which case
+    pandoc's built-in styles apply; the git scripts need nothing
     beyond git.
   - "Saving and syncing" — two doors: `/save` runs the light check,
     then commits and pushes on the current branch, no render;

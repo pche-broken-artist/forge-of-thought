@@ -15,6 +15,7 @@ document. -->
 
 | Version | Modification | Author | Date |
 |---|---|---|---|
+| 0.44 | "From Markdown to slides" and "Script prerequisites" gain `scripts/md2docx.ps1`: a render to Word through pandoc, styles from a reference `.docx` named by path, Mermaid diagrams as code (POS.1150 at intent 4.6). | Claude | 2026-09-12 |
 | 0.43 | The intent paragraph of the chain section names facts (FCT) beside positions, threads and rejections — POS.1080 at intent 4.5, after the engine check of the release of 2026-09-11 found the README pinning three prefixes where the intent has four. | Claude | 2026-09-11 |
 | 0.42 | The language instruction rewritten to the rule of POS.0060 at intent 4.4: one output language per project, declared in the ledger header, for the artefacts of the chain; briefs verbatim; records, state, research and recipes always English, as is the notation; a render in the language of its recipe. Until now the instruction hard-coded "all documents are written in English", the rule of the instance before 4.3, so the next `/release` would have rendered it unchanged. | Claude | 2026-09-11 |
 | 0.41 | The git-identity roster named as `identities.local.md` in the three Setup instructions and in the Template placeholder, per POS.0950 of 3.46 — the engine check of release 4.0 found the recipe still naming `CLAUDE.local.md`; `/setup` said to fill both instance files. | Claude | 2026-09-06 |

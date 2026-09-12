@@ -2,7 +2,7 @@
 project: forge
 kind: thought
 language: en
-updated: 2026-09-11
+updated: 2026-09-12
 ---
 
 # Ledger — Forge of Thought
@@ -27,7 +27,7 @@ absorbed it; Note says what remains (partial) or the REJ (dropped). -->
 ## Documents
 | File | Version | Status | Date |
 |---|---|---|---|
-| 10-intent.md | 4.5 | draft | 2026-09-11 |
+| 10-intent.md | 4.6 | draft | 2026-09-12 |
 | 20-assignment.md | — | not planned: the handover artefacts of this project are the core itself (CLAUDE.md, templates/, .claude/) and README.md | — |
 | decisions.md | — | 11 records (DEC.0010–0110) | 2026-09-06 |
 
@@ -151,15 +151,19 @@ intent version for accepted, DEC.NNNN for rejected. -->
 | CHL.0190 | accepted | Release 4.0 is queued and nothing says what an approved major of this intent means — a sign-off with no counterparty and no test (minor) | 2026-09-06-challenge-cto.md | intent 3.46 (POS.0300: what a major of the forge intent means and must pass) |
 
 ## Waiting on principal
-- **Markdown to Word (`md2docx`), noted 2026-09-11, to be settled
-  when a render needs it.** Two routes, both available on the
-  principal's machine: deterministic — `pandoc` with a reference
-  `.docx` for styles (Mermaid blocks would need `mermaid-cli` to
-  become pictures, else they land as code); LLM — a sibling of
-  `scripts/md2pptx.ps1` on the `document-skills:docx` skill, headless,
-  diagrams redrawn natively. Which, or both, is open; a new
-  conversion is a position of the intent (CLAUDE.md today names
-  `md2pptx` as the one in-house conversion).
+- **Mermaid diagrams in Word, deferred 2026-09-12 — "needs more
+  thought".** `scripts/md2docx.ps1` (POS.1150, intent 4.6) converts a
+  render to Word through pandoc and leaves Mermaid blocks as code.
+  Agreed in the walkthrough but not built: the route would be
+  `mermaid-cli` rendering each block to PNG through headless Chrome
+  before pandoc runs (a pandoc Lua filter), installed by the user
+  one-off like markitdown and pandoc — never by the script, never
+  `npx` fetching at run time, no online service. Open: whether to
+  take the dependency at all, and global versus repository-local
+  installation. The LLM route (a sibling of `md2pptx.ps1` on the
+  `document-skills:docx` skill) was set aside on 2026-09-12: it
+  would end at a picture too, with less determinism. Word to PDF is
+  the recipient's, never the forge's (POS.1150).
 - **Intent 4.4 (2026-09-10): the project's language narrowed to the
   artefacts** — at the principal's correction of 4.3: records, state,
   research and recipes are always English (POS.0060); CLAUDE.md

@@ -1,8 +1,8 @@
 ---
-version: 4.5
-date: 2026-09-11
+version: 4.6
+date: 2026-09-12
 status: draft
-last_change: 4.5 (2026-09-11): the intent's kind row names facts beside positions, threads and rejections (POS.1080), after the engine check of the release.
+last_change: 4.6 (2026-09-12): Markdown to Word adopted — scripts/md2docx.ps1 through pandoc, deterministic, Mermaid as code until mermaid-cli is decided (POS.1150); POS.0590 in the plural.
 project: forge
 audience: principal + Claude only
 ---
@@ -903,10 +903,11 @@ position that already stands elsewhere.
 - **POS.0590** Everything the forge produces is Markdown, renders
   included: a presentation is a `.md` saying what is on each slide
   (mermaid for pictures). The forge still ends at content, but it
-  carries one delivery-format tool at its edge: `scripts/md2pptx.ps1`
-  (POS.0740) turns a Markdown deck render into a `.pptx`. The
-  Markdown render remains the sole source of truth; the `.pptx` is a
-  generated output of second order — regenerated at will, never
+  carries its delivery-format tools at its edge: `scripts/md2pptx.ps1`
+  (POS.0740) turns a Markdown deck render into a `.pptx`,
+  `scripts/md2docx.ps1` (POS.1150) a Markdown render into a `.docx`.
+  The Markdown render remains the sole source of truth; the generated
+  file is an output of second order — regenerated at will, never
   edited by hand. All other format conversion stays outside the
   forge, as git is for persistence.
 - **POS.0740** `scripts/md2pptx.ps1` generates a PowerPoint file from
@@ -928,6 +929,24 @@ position that already stands elsewhere.
   git like any render output; `-Out` overrides. The headless run's
   model is chosen by `-Model`, default opus; a presentation recipe
   may recommend one in its Build instructions.
+- **POS.1150** `scripts/md2docx.ps1` converts a Markdown render into
+  a Word file through `pandoc` — a deterministic conversion, unlike
+  `md2pptx` (POS.0740), because a document render is plain Markdown
+  carrying no instructions for a model. Styles come from a reference
+  document named by path (`-Reference <file.docx>`, typically a
+  document of a library project, POS.0970); without it pandoc's
+  built-in styles apply — no default reference and no bare-name
+  lookup. The render's provenance front-matter is metadata to pandoc
+  and does not appear in the document. Mermaid diagrams land in the
+  document as blocks of code: rendering them to pictures needs
+  `mermaid-cli`, a further dependency the principal has not decided
+  on (Waiting on principal in the ledger). Word is the target and
+  PDF is not: pandoc writes Word without a further engine, and a PDF
+  is the recipient's one click from Word. The output defaults to the
+  input's directory and basename with a `.docx` extension, tracked
+  in git like any render output; `-Out` overrides. pandoc is
+  installed by the user, as markitdown is for `doc2md`; the script
+  installs nothing. Decided 2026-09-12.
 - **POS.0770** Recipe composition may be guided by genre:
   `/recipe <genre>` mirrors the `/forge` star (POS.0580) — a thin
   dispatcher (`.claude/skills/recipe/SKILL.md`) plus one definition file

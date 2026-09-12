@@ -269,15 +269,19 @@ ledger.md        single source of truth for state
    of truth. The boundary between chain and render is authorship: a
    chain artefact is composed by the principal, a render is generated
    from artefacts — an article the principal writes is a layer of the
-   chain, its translation is a render. Everything is Markdown, content only. The one in-house
-   conversion is `scripts/md2pptx.ps1`: it turns a Markdown deck
-   render into a `.pptx` through headless Claude Code — an LLM
-   conversion by design, because deck definitions are free-form and
-   may carry instructions for the model; what it needs installed, how
-   a `.potx` template is named and where the output lands is its
-   header's. The generated `.pptx` is tracked in git like any render
-   output and never edited by hand: the Markdown render stays the
-   source of truth.
+   chain, its translation is a render. Everything is Markdown, content only. The in-house
+   conversions are two scripts: `scripts/md2pptx.ps1` turns a
+   Markdown deck render into a `.pptx` through headless Claude Code —
+   an LLM conversion by design, because deck definitions are
+   free-form and may carry instructions for the model;
+   `scripts/md2docx.ps1` turns a Markdown render into a `.docx`
+   through pandoc — deterministic, because a document render carries
+   no instructions; Mermaid diagrams stay blocks of code. What each
+   needs installed, how a `.potx` template or a reference `.docx` is
+   named and where the output lands is its header's. A generated
+   `.pptx` or `.docx` is tracked in git like any render output and
+   never edited by hand: the Markdown render stays the source of
+   truth.
    A recipe may be composed through a genre interview
    (`/recipe <genre>`, skeleton `templates/recipe-<genre>.md`; first
    genre `presentation`); a render may cite another render as a
@@ -315,7 +319,7 @@ scripts/                   # forge-save / forge-pull / forge-status
                            # / forge-clone / forge-branch (git),
                            # doc2md (document →
                            # Markdown), md2pptx (deck render →
-                           # PowerPoint)
+                           # PowerPoint), md2docx (render → Word)
 .claude/                   # skills (the commands and the reviewers'
                            # contracts), agents, settings
                            # (settings.local.json: the session
@@ -352,6 +356,8 @@ projects/<slug>/           # kind: thought — the chain
                                       # /render, provenance front-matter
   renders/<recipe>.pptx               # optional deck generated from the
                                       # md render by scripts/md2pptx.ps1
+  renders/<recipe>.docx               # optional Word file generated from
+                                      # the md render by scripts/md2docx.ps1
   reviews/YYYY-MM-DD-critique-<lens>.md  # immutable critique runs
   challenges/YYYY-MM-DD-challenge-<persona>.md  # immutable peer reviews
   research/YYYY-MM-DD-<topic>.md      # immutable research notes
