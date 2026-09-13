@@ -2,7 +2,7 @@
 project: forge
 kind: thought
 language: en
-updated: 2026-09-12
+updated: 2026-09-13
 ---
 
 # Ledger — Forge of Thought
@@ -27,7 +27,7 @@ absorbed it; Note says what remains (partial) or the REJ (dropped). -->
 ## Documents
 | File | Version | Status | Date |
 |---|---|---|---|
-| 10-intent.md | 4.6 | draft | 2026-09-12 |
+| 10-intent.md | 4.7 | draft | 2026-09-13 |
 | 20-assignment.md | — | not planned: the handover artefacts of this project are the core itself (CLAUDE.md, templates/, .claude/) and README.md | — |
 | decisions.md | — | 11 records (DEC.0010–0110) | 2026-09-06 |
 
@@ -46,6 +46,7 @@ render's front-matter provenance. -->
 sources/00-INDEX.md. -->
 | File | Date | Date origin | Form |
 |---|---|---|---|
+| forge-run-record-health.md | 2026-09-13 | content | text |
 
 ## Dependencies
 <!-- Registration only. Documents of other repositories this project
@@ -151,6 +152,12 @@ intent version for accepted, DEC.NNNN for rejected. -->
 | CHL.0190 | accepted | Release 4.0 is queued and nothing says what an approved major of this intent means — a sign-off with no counterparty and no test (minor) | 2026-09-06-challenge-cto.md | intent 3.46 (POS.0300: what a major of the forge intent means and must pass) |
 
 ## Waiting on principal
+- **THR.0350 — the run record of project `health`
+  (`sources/forge-run-record-health.md`, ingested 2026-09-13): to be
+  analysed properly, a walkthrough of P.01–P.16 when the principal
+  has time.** Deferred 2026-09-13 at his word; his stance and the one
+  open question (marking whose word is whose in a co-elicited brief)
+  stand in the thread. Nothing of it entered the operating layer.
 - **Mermaid diagrams in Word, deferred 2026-09-12 — "needs more
   thought".** `scripts/md2docx.ps1` (POS.1150, intent 4.6) converts a
   render to Word through pandoc and leaves Mermaid blocks as code.

@@ -1,8 +1,8 @@
 ---
-version: 4.6
-date: 2026-09-12
+version: 4.7
+date: 2026-09-13
 status: draft
-last_change: 4.6 (2026-09-12): Markdown to Word adopted — scripts/md2docx.ps1 through pandoc, deterministic, Mermaid as code until mermaid-cli is decided (POS.1150); POS.0590 in the plural.
+last_change: 4.7 (2026-09-13): THR.0350 opened — the run record of project `health` (sources/forge-run-record-health.md) to be analysed properly; the principal's stance on the co-elicited brief, the walkthrough and the report recorded, nothing decided.
 project: forge
 audience: principal + Claude only
 ---
@@ -1652,6 +1652,43 @@ position that already stands elsewhere.
   stands; the cost of more renders per `/release` (the README alone
   takes five to eight minutes today). Trigger: the boundary drawn by
   the brief of THR.0230. Opened 2026-09-08.
+
+- **THR.0350** Lessons of the first run in the field. The record of
+  the forge applied to a private project of the principal's,
+  10–13 September 2026, is registered as
+  `sources/forge-run-record-health.md`: a timeline, eight failures,
+  thirteen things that worked, thirteen engine gaps and sixteen
+  proposals (P.01–P.16), item-numbered for citation. To be analysed
+  properly and learned from — a walkthrough of the proposals, one at
+  a time — when the principal has the time; deferred 2026-09-13 at
+  his word, nothing decided. What he stated the same day, in his own
+  words, to be worked from — his stance, not yet positions:
+  - A brief that is born by joint elicitation carries Claude's part
+    too: he speaks, sources are ingested as they arrive, and the two
+    of them work the sources into the brief; the brief is then worked
+    into the intent. That is the wanted model. The record's "brief =
+    the principal's words only" (G.01) is not the model but a
+    misreading of it; what broke the run was Claude saying "written"
+    while nothing was written (F.01). Open: whether the brief marks
+    what he said and what Claude said (Claude's recommendation of
+    2026-09-13: yes, lightly, block by block, since the intent later
+    asks whose word a position rests on; not decided). P.07 of the
+    record (an intent draft beside a draft brief) is thereby set
+    aside as the wrong fix.
+  - The walkthrough is the failure he minds most: one item, worked
+    until it is agreed, and only then the next; never a proposed
+    resolution and the offer of the next item in one message. To be
+    made to hold, not promised again.
+  - The report of that project need not have been a new artefact:
+    in the wanted model the brief is led by elicitation over the
+    research and the ingested sources, worked into the intent, and
+    the report is a render of it. How the later artefacts are handled
+    is to be worked out as part of this thread.
+  - To consider: a mechanism that puts a fresh sentence into the
+    context at every prompt (the harness's hook that runs on each user
+    message, `UserPromptSubmit`, adding context), so that the rules
+    that matter — the one-item walkthrough above all — do not drift in
+    a long conversation. Opened 2026-09-13.
 
 Note: the ID THR.0120 was inadvertently used twice — first for the
 readme-recipe thread (opened 1.14, closed 1.16), then for the
