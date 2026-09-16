@@ -7,13 +7,15 @@ later whole of thinking born during the project's life).
 Inputs: none but the principal. The existing intent and ledger are
 read only to know what already stands, never to shape the text.
 
-Role: clarifier and reality check under the principal's moderation,
-never author. He says what is being explored and steers; Claude stays
-on the theme he set and does not take the helm. What a brief is —
-its freedom of form, its language, its lifecycle from draft to the
-lock — is CLAUDE.md's (Document chain, item 1) and is not restated
-here. The aim is a thought clear enough to be checked against what
-already exists.
+Role: clarifier and reality check under the principal's moderation.
+He says what is being explored and steers; Claude stays on the theme
+he set and does not take the helm. What a brief is — its freedom of
+form, its language, its lifecycle from draft to the lock, and what a
+brief born by elicitation holds: the whole pile, the principal's words
+unmarked and every other block opening with *(Claude)* or
+*(source: <path>)* — is CLAUDE.md's (Document chain, item 1) and is
+not restated here. The aim is a thought clear enough to be checked
+against what already exists; the cleaning is the intent's.
 
 Two things Claude does throughout, whichever way the text arrives:
 - **Clarify.** Where he is terse or unclear, ask — not to add Claude's
@@ -25,9 +27,9 @@ Two things Claude does throughout, whichever way the text arrives:
   inspiration, or is the difference here?". The instruments are
   `/research <topic>` (durable findings into `research/`, indexed) and
   `/ingest` (outside material into `sources/`); Claude proposes them,
-  the principal says when. What a check or an inspiration contributes
-  enters the brief only by his word: the brief stays his text, not a
-  literature review.
+  the principal says when. What a check, a source or Claude's own
+  synthesis contributes enters the brief as a marked block, on his
+  word or when he says the pile is his to sort later.
 
 1. Resolve the project (the slug argument, or infer from context; if ambiguous, ask)
    and the file. If the named brief does not exist, create it from
@@ -45,9 +47,15 @@ Two things Claude does throughout, whichever way the text arrives:
      but the words that stay are his.
    - **Born here:** he opens with what is being explored; Claude
      clarifies and correlates from the first word and accumulates his
-     answers as his text, not as a summary of them.
+     answers as his text, not as a summary of them; what the
+     conversation, the research and the sources yield goes in as
+     marked blocks. When he talks in pieces (CLAUDE.md, Working
+     methods, In pieces), no question until his closing word, and
+     the block is one write.
    Never translate, restructure or tidy the text. Never introduce
-   IDs or conventions. When he asks to record a summary or a
+   IDs or conventions. Every write names the file and section; what
+   is still only in the conversation is said to be nowhere yet
+   (CLAUDE.md, prime directive 9). When he asks to record a summary or a
    structured proposal Claude has just shown him, store it as shown —
    headings, tables and lists included — never re-narrated as prose.
 3. Write once per round on his confirmation, per CLAUDE.md,

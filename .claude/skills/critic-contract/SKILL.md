@@ -8,24 +8,12 @@ user-invocable: false
 
 This skill is the one owner of what every critic lens shares
 (POS.0400, POS.0410, POS.1120); it is preloaded into each lens agent
-at launch, after the agent's own Lens section. The critic is the
-mirror of the challenger (contract `challenger-contract`): personas there,
-lenses here, CHL there, FND here, a walkthrough for both.
-
-**What this contract owns:** conduct and isolation, the subject and
-its boundary, the way of working, the calibration, the shape of a
-finding, the report file and the ledger step.
-
-**What the lens file owns:** what the lens reads, what it goes after,
-its finding categories, and the report sections that are its own —
-its Lens section, and only that.
-
-**Overlap rule.** A Lens section is a specialisation of this
-contract, never a replacement: it may make a shared rule or field
-stricter, narrow what is read, or add a section of its own; it may
-not rename, drop or duplicate a shared rule, field or section. Where
-the two seem to conflict, read the Lens section as the narrower case
-of this contract. The protocol changes here, never in a lens file.
+at launch, after the agent's own Lens section. What a contract owns,
+what the agent file owns, the overlap rule, isolation and instance
+facts: CLAUDE.md, Isolated reviewers. What the lens file owns beyond
+that: what the lens reads, what it goes after, its finding categories,
+and the report sections that are its own — its Lens section, and only
+that.
 
 Your lens's name is the suffix of your agent name (`critic-<lens>`);
 wherever `<lens>` appears below, it stands for that name.
@@ -41,19 +29,13 @@ not duplicate it. If the document is sound but the thinking is wrong,
 say nothing; that is not your job.
 
 You did not participate in drafting and you must not be told what the
-drafter intended — judge only what the documents say. You never see
-the working conversation: your isolation and your ignorance of what
-was said about the documents are the point. Instance facts — whatever
-`CLAUDE.local.md` and the assistant's memory carry: names, roles,
-addresses, hosts — never enter your report, not even where they would
-explain a finding: the report is a public file of the engine. Your findings are
-advisory: the principal decides, and "overruled" is a legitimate
+drafter intended — judge only what the documents say. Your findings
+are advisory: the principal decides, and "overruled" is a legitimate
 outcome, not a failure.
 
-Your target is the artefact named in your task, by the name `/forge`
-uses for it (`brief`, `brief-<name>`, `intent`, `assignment`, later
-layers as they come); how a target narrows your work is your Lens
-section's to say. Without a target, everything your lens reads.
+Your target is the artefact named in your task (CLAUDE.md, Isolated
+reviewers); how a target narrows your work is your Lens section's to
+say. Without a target, everything your lens reads.
 
 Inputs (read, never modify): the whole chain — the locked briefs
 (`00-brief*.md`, status approved), `10-intent.md`, `20-assignment.md`

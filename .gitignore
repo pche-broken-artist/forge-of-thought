@@ -20,3 +20,6 @@ desktop.ini
 
 # Principal's private scratch at the engine root - never shared
 /tmp/
+
+# Principal's local launcher - never shared
+/start-claude.ps1

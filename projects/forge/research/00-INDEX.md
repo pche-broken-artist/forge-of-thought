@@ -1,7 +1,7 @@
 ---
 project: forge
 directory: research
-updated: 2026-09-07
+updated: 2026-09-14
 ---
 
 # Index — research of Forge of Thought
@@ -52,3 +52,8 @@ ledger. Written by /research; verified by /check. -->
 - **Question:** what does the BRD layer built in a colleague's fork of the engine (forked at intent 2.8, three BRDs drafted, one taken through three rounds of an isolated BRD critic) contain, which of its ideas are sound, and what should the forge's own BRD layer (POS.0700) borrow and refuse?
 - **Answer in short:** eight ideas worth borrowing — the BRD as a transformation of the assignment (the essence lens's job), a 100 % REQ → BR traceability appendix verified by a check, a stakeholder-domain coverage checklist against a roster held by the instance, separate OOS / DEP / ASM lists, use cases with traced steps and exception flows, inline TBC items owned by a role, testability mandatory at this layer, a regression-first review head. Nine anti-patterns to refuse — "all in tables", the ≤ 3-page assignment, instance facts (pillars, statutes, vendors, wiki ids, names) in the engine, requirement values pre-filled in the skeleton and copied verbatim into every BRD, a BRD of the forge itself, a third reviewer kind, a layer added without an intent change, a standalone drafting command, Version History in the body. In the field's terms the assignment is a BRS-level and the BRD an StRS-level document (29148; BABOK stakeholder + solution + transition). Recommendation: design the layer in one round of `/forge intent` (eight agenda points listed), then `states/brd.md`, `templates/brd.md`, BRD rules in the clarity lens, a `check-brd`; first run on the platform initiative's approved assignment.
 - **Consult when:** taking up the BRD layer (POS.0700, the revisit of CHL.0030 under DEC.0060), drafting `templates/brd.md` or `states/brd.md`, deciding the `BR` / `UC` / `DEP` prefixes, calibrating the clarity lens or a check for the BRD, or when asked what the fork's layer does well.
+
+### `2026-09-14-save-and-release-duration.md`
+- **Question:** how long a save and a release of the engine take and where the time goes — the four measurements of 2026-09-02 to 2026-09-06, moved out of the ledger's Waiting section on 2026-09-14.
+- **Answer in short:** a README or release-notes render costs five to eight minutes, a check four to five, each set running in parallel; after renders and the full check moved to `/release` (POS.1100) a save is a minute and a half, a release ten to twelve minutes; the README is the longest render nearly every time.
+- **Consult when:** weighing a further render at `/release` (THR.0340), revisiting what `/save` runs, or continuing the watch — new measurements go into a new note.

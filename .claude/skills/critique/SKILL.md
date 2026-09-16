@@ -10,14 +10,8 @@ means adding an agent file from `templates/critic.md`; this command
 does not change (who creates a lens, and when: CLAUDE.md, Isolated
 reviewers).
 
-The rules shared by every lens — isolation, the documents-only remit,
-regression first, calibration, the shape of a finding, the report file
-and the FND ledger entries — live in the contract skill
-`.claude/skills/critic-contract/SKILL.md`, preloaded into every lens file
-through its front-matter, whose own part is its Lens section; nothing
-of them is restated here (POS.1070, POS.1120). The critic is
-the mirror of the challenger (`/challenge`): personas there, lenses
-here, CHL there, FND here, a walkthrough for both. This command only
+Shared behaviour: the contract skill named in each lens file's
+front-matter (CLAUDE.md, Isolated reviewers). This command only
 chooses the lens, passes the project and verifies the bookkeeping.
 
 **Bare `/critique` — the roster.** List the available lenses (scan
@@ -28,10 +22,8 @@ handover. A recommendation, never a gate. No lens runs at a save;
 principal's word.
 
 **`/critique <lens> [artefact] [slug]` — run it.** The target is an
-artefact named as `/forge` names it — `brief`, `brief-<name>`,
-`intent`, `assignment`, one day `brd` or deeper layers: for `clarity`
-that artefact alone, for `essence` that artefact against its parent;
-without one, everything the lens reads. Invoke the `critic-<lens>`
+artefact named as `/forge` names it (CLAUDE.md, Isolated reviewers);
+how it narrows the run is the lens file's. Invoke the `critic-<lens>`
 subagent on the project (infer it from context; if ambiguous, ask),
 naming the target if given. Pass only the project path and the
 target — no summary of the drafting conversation, no explanation of
@@ -47,9 +39,9 @@ When it returns:
    resolved, still open, newly obsolete, and what awaits his verdict.
    For `essence`, the distillations first — they are what the findings
    rest on.
-3. End by offering a **walkthrough** of the open findings (CLAUDE.md,
-   Working methods); its rules are stated there and nowhere else
-   (POS.1070). Verdict vocabulary here: **fix** (an iteration of the
+3. End by offering a **walkthrough** of the open findings
+   (`.claude/skills/walkthrough/SKILL.md`, the one owner of its
+   shape). Verdict vocabulary here: **fix** (an iteration of the
    artefact concerned, through `/forge`), **overrule** (a DEC with the
    principal's reason), **leave open**. Finding states in the ledger
    change only, never delete. If he declines the walkthrough, the

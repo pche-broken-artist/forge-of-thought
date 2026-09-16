@@ -7,8 +7,7 @@
     Read-only, changes nothing. For the engine and each projects/<slug>:
     unsaved changes (or "clean"), the branch it is on, the last commit,
     and the origin - or "no origin" / "not under git". Exists so that even reading git state
-    goes through the scripts - the scripts are the only door to git,
-    with no exceptions.
+    goes through the scripts (CLAUDE.md, Persistence).
 
 .EXAMPLE
     ./scripts/forge-status.ps1

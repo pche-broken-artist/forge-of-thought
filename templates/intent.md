@@ -9,13 +9,9 @@ audience: principal + Claude only
 
 # <Project> — Intent
 
-<!-- Working document: the consolidated CURRENT state of the principal's
-intent. Not an append-only log — rewrite freely for coherence, record
-every substantive change as a row of the companion
-10-intent.history.md (templates/history.md), never here. Sources: the
-locked briefs (00-brief*.md), /forge intent interviews, brain-dumps.
-Written in the project's language (the ledger header's `language`,
-English when absent); translate the principal's input on write. -->
+<!-- The working document; the rules: CLAUDE.md, Document chain 2
+(what it is), prime directive 6 (its language), Versioning & status
+(its history companion, templates/history.md). -->
 
 ## Essence
 <!-- Three to ten sentences: what the principal wants and why, as of
@@ -37,7 +33,9 @@ stance; verification is never demanded. -->
 ## Open threads
 <!-- THR.NNNN: unresolved matters and what to elicit next. Drives the
 next /forge intent. Move resolved threads into Positions or Rejected
-directions. -->
+directions. Each thread carries its origin — the principal's word
+(the default, unmarked), a source by path, or Claude's synthesis
+(marked "origin: Claude"). -->
 - **THR.0010** …
 
 ## Rejected directions

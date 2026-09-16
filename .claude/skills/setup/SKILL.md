@@ -15,34 +15,29 @@ speak whatever language the user speaks to you.
    - If it already exists: report briefly what it holds and do not
      touch it.
    - Otherwise copy `templates/CLAUDE.local.md` to the root and fill
-     it by elicitation interview, one question at a time:
+     it by elicitation interview, one question at a time, the
+     language first so that every later question arrives in it:
+     - **Conversation language** — the language the working
+       conversation runs in (the template says what follows it);
      - **Principal** — the role, whose thinking is being forged (the
        template's placeholder);
-     - **Conversation language** — the language the working
-       conversation runs in (chain artefacts follow their project's
-       language, briefs verbatim, everything else English);
      - **Git identities** — name and e-mail per git host the user
        will push to (e.g. github.com, a company host), written to
        `identities.local.md` beside it from
-       `templates/identities.local.md` (POS.0950).
-       This is the roster from which per-repository identities are
-       proposed at every project creation or import. May be left
-       empty and added later; say so.
+       `templates/identities.local.md` — the roster of CLAUDE.md,
+       Persistence. May be left empty and added later; say so.
    - Keep the templates' format; both files are gitignored and never
      committed.
-   - Close the git-identities part with an offer (POS.1050,
-     POS.0950): the global guard `user.useConfigOnly = true` under
-     `[user]` in `~/.gitconfig`, appended on the user's word — read
-     the file first, never overwrite existing content. With it, a
-     commit in a repository with no local identity fails aloud
-     instead of silently taking a default; the identity itself is
-     set per repository at creation or import, proposed from the
-     roster above. Where `~/.gitconfig` carries a global `user.name`
-     or `user.email`, say the guard only bites once that identity is
-     removed, and offer the removal — again only on the user's word.
-     Declined: print the lines for the user to apply by hand. This
-     is the one edit outside the engine; it is a configuration text
-     file, not a git operation.
+   - Close the git-identities part with the offer of the global
+     guard (CLAUDE.md, Persistence): `user.useConfigOnly = true`
+     under `[user]` in `~/.gitconfig`, appended on the user's word —
+     read the file first, never overwrite existing content. Where
+     `~/.gitconfig` carries a global `user.name` or `user.email`, say
+     the guard only bites once that identity is removed, and offer
+     the removal — again only on the user's word. Declined: print the
+     lines for the user to apply by hand. This is the one edit
+     outside the engine; it is a configuration text file, not a git
+     operation.
 2. **`.claude/settings.local.json`**.
    - If it already exists: report the model it names and do not touch
      it.

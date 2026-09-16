@@ -26,43 +26,38 @@ What you verify:
    the way in CLAUDE.md, Persistence, names"),
    the one git-related check, since the engine does not track
    projects and a local-only project is a legitimate shape
-   (POS.0940). A `library` needs no chain: Structure reduces to
-   `ledger.md`, `sources/00-INDEX.md`, `research/00-INDEX.md` and
-   `recipes/readme.md` existing; ID hygiene and Assignment style do
-   not apply; Language, Immutables and Recipes and renders apply as
-   written, except that a library's documents may be overwritten by
-   their owner (POS.0970) — not an immutability breach. `logo.png`
-   is optional everywhere and its absence is never a finding
-   (POS.1010).
-1. **Structure** — expected files and folders exist: `00-brief.md`,
-   `10-intent.md`, `decisions.md`, `ledger.md`; `20-assignment.md`
-   once drafted; `sources/`, `reviews/`, `challenges/`, `research/`;
-   `recipes/` and `renders/` where renders exist, paired — every
-   render traces to a recipe and carries provenance front-matter
-   matching the ledger's Renders table (legacy pre-recipe editions,
-   dated filenames, are exempt). Every project carries the README
-   and release-notes recipes CLAUDE.md, Document chain 7, requires; a
-   missing recipe is a finding (fix: scaffold from
-   `templates/recipe-<genre>.md`), a stale README or release notes a
-   finding fixed by the next `/release` — not reported at a release
-   itself, since the release renders after the check. Every
-   `00-brief*.md` in the directory has a row in the ledger's Briefs
-   table and vice versa; a brief marked `mined` is cited somewhere in
-   the intent.
+   (POS.0940). A `library` needs no chain: Structure reduces to the
+   library's file set (CLAUDE.md, Repository layout); ID hygiene and
+   Assignment style do not apply; Language, Immutables and Recipes
+   and renders apply as written, except that a library's documents
+   may be overwritten by their owner (POS.0970) — not an immutability
+   breach. `logo.png` is optional everywhere and its absence is never
+   a finding (POS.1010).
+1. **Structure** — the files and folders of CLAUDE.md, Repository
+   layout, exist; `20-assignment.md` once drafted, unless the ledger
+   header's `terminal:` ends the chain elsewhere (CLAUDE.md, Ledger);
+   `recipes/` and `renders/` paired — every render traces to a recipe
+   and carries provenance front-matter matching the ledger's Renders
+   table (legacy pre-recipe editions, dated filenames, are exempt).
+   The README and release-notes recipes of CLAUDE.md, Document chain
+   7, exist (fix: scaffold from `templates/recipe-<genre>.md`); a
+   stale README or release notes is a finding fixed by the next
+   `/release` — not reported at a release itself, since the release
+   renders after the check. Every `00-brief*.md` in the directory has
+   a row in the ledger's Briefs table and vice versa; a brief marked
+   `mined` is cited somewhere in the intent. Under the ledger's
+   Waiting on principal, a line that copies a thread, a decision or a
+   history row instead of citing it by ID is a finding (CLAUDE.md,
+   Ledger).
 2. **ID hygiene** — against the ID scheme in CLAUDE.md, every rule
    there (POS.1070), in every document that carries IDs.
-3. **Language** — the chain's artefacts (intent, assignment, later
-   layers) in the project's language (the ledger header's `language`,
-   English when absent); records, state, research and recipes in
-   English whatever the project's language; notation English; only
-   the briefs (`00-brief*.md`) and renders may be in another language
-   (CLAUDE.md, prime directive 6).
-4. **Immutables** — locked briefs (status approved; a draft brief is
-   still editable), sources, reviews, challenges and research are
-   never edited after creation (CLAUDE.md, Versioning & status); flag
-   any signs of after-the-fact editing that the ledger or the history
-   companions reveal. The `00-INDEX.md` catalogues are exempt: they
-   are rewritten freely.
+3. **Language** — CLAUDE.md, prime directive 6, for every artefact
+   and record; the briefs and renders are exempt as stated there.
+4. **Immutables** — the immutable documents of CLAUDE.md, Versioning
+   & status, never edited after creation; flag any signs of
+   after-the-fact editing that the ledger or the history companions
+   reveal. The `00-INDEX.md` catalogues are exempt: they are
+   rewritten freely.
 5. **Recipes and renders** (shape and freshness, never content) —
    recipes conform to `templates/recipe.md` in front-matter and
    sections (genre skeletons `templates/recipe-<genre>.md` extend that

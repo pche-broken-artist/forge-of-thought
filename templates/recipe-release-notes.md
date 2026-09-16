@@ -10,10 +10,8 @@ output: RELEASE-NOTES.md
 
 # Recipe — release-notes
 
-<!-- Release-notes-genre recipe, scaffolded by /new-project for a
-thought project and iterated via /recipe release-notes; every /release
-of the project adds the new release's section. What a recipe is and
-how it is versioned is templates/recipe.md's. -->
+<!-- Release-notes-genre recipe, iterated via /recipe release-notes.
+The rules: CLAUDE.md, Document chain 7. -->
 
 ## Inputs
 - 10-intent.history.md      # the intent's Version History — the Notes

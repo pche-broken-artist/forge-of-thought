@@ -10,23 +10,18 @@ those files. Adding a persona means adding an agent file from
 `templates/challenger.md`; this command does not change (who creates
 a persona, and when: CLAUDE.md, Isolated reviewers).
 
-The rules shared by every persona — isolation, the substance-only
-remit, the shape and severity of the challenges, the output file and
-the CHL ledger entries — live in the contract skill
-`.claude/skills/challenger-contract/SKILL.md`, preloaded into every persona
-file through its front-matter, whose own part is its Lens section;
-nothing of them is restated here (POS.1070, POS.1120). This command
-only chooses the persona, passes the target and verifies the
-bookkeeping.
+Shared behaviour: the contract skill named in each persona file's
+front-matter (CLAUDE.md, Isolated reviewers). This command only
+chooses the persona, passes the target and verifies the bookkeeping.
 
 **Bare `/challenge` — the roster.** List the available personas (scan
 `.claude/agents/challenger-*.md`) and recommend which fits the
 project's subject. A recommendation, never a gate.
 
 **`/challenge <persona> [artefact] [slug]` — run it.** The target is
-an artefact named as `/forge` names it — `brief`, `brief-<name>`,
-`intent`, `assignment`, one day `brd` or deeper layers; without one,
-the whole chain. Invoke the `challenger-<persona>`
+an artefact named as `/forge` names it (CLAUDE.md, Isolated
+reviewers); how it narrows the run is the contract's and the persona
+file's. Invoke the `challenger-<persona>`
 subagent on the project (infer it from context; if ambiguous, ask),
 naming the target artefact. Pass only the project path and the target —
 no summary of the conversation, no defence of the principal's
@@ -50,9 +45,9 @@ When it returns:
 3. Answer the challenger's open questions where the answers exist in our
    conversation but not in the documents, and flag those to the principal:
    they usually mean something true is missing from the intent.
-4. End by offering a **walkthrough** of the challenges (CLAUDE.md,
-   Working methods); its rules are stated there and nowhere else
-   (POS.1070). Verdict vocabulary here: **accept** (feeds into
+4. End by offering a **walkthrough** of the challenges
+   (`.claude/skills/walkthrough/SKILL.md`, the one owner of its
+   shape). Verdict vocabulary here: **accept** (feeds into
    `/forge intent`; an accepted challenge must change the intent),
    **reject** (a DEC with his one-line reason; the challenger respects
    it in future runs), **park** (stays open), **obsolete** (note what

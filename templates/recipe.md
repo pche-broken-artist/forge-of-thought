@@ -10,12 +10,9 @@ last_change: <one line from the newest row of $1>
 
 # Recipe — <purpose>
 
-<!-- A recipe is the iterated thing; its render is generated output.
-Never polish a render by hand: change the recipe, run
-/render <recipe>. Recipes are tools: version + updated date in
-front-matter and no status (a recipe is never approved); its Version
-History lives in the companion <recipe>.history.md, last_change
-summarising the newest row. -->
+<!-- A recipe: CLAUDE.md, Document chain 7 (what it is) and
+Versioning & status (how it is versioned). This skeleton owns the
+shape only. -->
 
 ## Inputs
 <!-- Artefacts this render is generated from, by path, one per line.

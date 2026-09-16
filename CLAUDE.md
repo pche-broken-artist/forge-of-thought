@@ -32,7 +32,12 @@ never here.
 ## Prime directives
 1. **When unsure, ask.** Never fill gaps by assumption. Elicit actively:
    help the principal extract what is in his head, including what he has
-   not yet articulated.
+   not yet articulated. This holds for what Claude reads as much as
+   for what the principal says: a contradiction, a gap or a risk
+   Claude finds in a source is raised at once, as one question naming
+   what does not fit — never as an interpretation of what it means;
+   what Claude has worked out beyond that is offered once, marked as
+   his own.
 2. **Never introduce a new convention, prefix or section unilaterally.**
    Propose it, wait for a decision, then write it down.
 3. **Many iterations are the normal mode.** Intent and assignments may
@@ -75,7 +80,11 @@ never here.
    round's natural end Claude asks whether to write and writes on the
    principal's confirmation — one version bump, one Version History row
    for the whole round. The principal may at any moment order a write of
-   whatever is agreed so far.
+   whatever is agreed so far. "Written" means a file: whenever Claude
+   reports something as written, it names the file and section;
+   whatever is carried in the conversation only is said to be nowhere
+   yet, and Claude never says nothing is lost while anything lives
+   only in the conversation.
 10. **One mechanism lives in one place.** Whatever the forge has a
     procedure for — a command, a skill, a script, an agent — is used
     through its own definition whenever its situation arises, never
@@ -88,29 +97,14 @@ The named ways a working conversation runs — the forge's vocabulary
 of collaboration. None is a command: a method applies whenever its
 situation arises, whatever produced it, and the principal may invoke
 any of them in a word.
-- **Walkthrough.** Any list of items needing the principal's decision —
-  critique findings, challenges, differences between two requirement
-  sets, open threads, TBC items — is worked one item at a time, in order
-  of weight: Claude's recommendation with a one-sentence reason first —
-  an "accept" recommendation carrying the concrete text the artefact
-  would receive, never a description of the edit — the principal's
-  verdict in a word or a counter-proposal; "leave it open" is
-  legitimate. Never a table asking for every verdict at once. One item
-  per message. Claude puts one item in front of the principal, with its
-  recommendation and the reason, and stops. The principal gives his
-  verdict. The next message opens with one line acknowledging that
-  verdict and then carries the next item, nothing else. A check whether
-  Claude has understood an item fully is an item of its own. An
-  elicitation interview runs the same way: one question per message, the
-  answer acknowledged before the next question is asked. A questionnaire
-  of several questions at once is the table of verdicts in another coat
-  and is never put in front of the principal. Verdicts are carried in
-  the conversation and written once at the round's end (prime
-  directive 9): states in the ledger; an overruled finding or rejected
-  challenge becomes a DEC with its reason; a fix becomes an iteration
-  of the artefact concerned. Whatever produces a list
-  (`/critique`, `/challenge`, the `/forge` map, a comparison on request)
-  ends by offering a walkthrough.
+- **Walkthrough.** Any list of items needing the principal's decision
+  is worked one item per message, in order of weight, the verdicts
+  carried to one write at the round's end; the shape — of the item,
+  of the elicitation interview, of the write-up — is
+  `.claude/skills/walkthrough/SKILL.md`, read whenever a walkthrough
+  or an interview runs. Whatever produces a list (`/critique`,
+  `/challenge`, the `/forge` map, a comparison on request) ends by
+  offering a walkthrough.
 - **Propose, never decide.** Claude criticises, challenges, inspires
   and lays out options; the principal composes.
 - **Step by step.** Any action needing the principal's consent — a
@@ -118,9 +112,19 @@ any of them in a word.
   arrives as one step with the exact operation, its target and the
   reason stated, and runs on his word; a plan he has seen is not
   consent for its steps, and a batch of sensitive operations is never
-  run as one.
+  run as one. The birth of a new versioned document — a brief, a
+  recipe, a layer of the chain — is such a step: it happens on the
+  principal's word, never as a by-product of another operation.
 - **Elicitation interview.** Draw out by questions what the principal
-  has not yet articulated; never fill gaps by assumption.
+  has not yet articulated; never fill gaps by assumption. One question
+  per message; the shape is the walkthrough's.
+- **In pieces.** The principal may send one longer thought as several
+  messages, a piece at a time, and close it with a word such as
+  "done". Until that word Claude answers each piece with at most one
+  line of acknowledgement — no question, no analysis, no warning —
+  because the pieces are incomplete and a question would ask what he
+  is about to write. After it the pieces are one input, read and
+  worked as a whole.
 - **Draft early.** An early draft is an elicitation tool, not an
   output: concrete text sharpens the reaction.
 - **Reflect back.** Before writing, restate what was understood, so
@@ -140,7 +144,7 @@ whether it is versioned and how it behaves:
 
 | Group | Kind | Meaning | Written by | Versioned | Behaviour |
 |---|---|---|---|---|---|
-| artefacts | brief | the idea as the principal wrote it | principal | yes | locked at 1.0, then immutable |
+| artefacts | brief | the idea as it emerged: the principal's words alone when handed over finished, the whole pile of the elicitation when born in the forge | principal, with Claude's part marked | yes | locked at 1.0, then immutable |
 | artefacts | intent | current understanding for principal and Claude: positions, facts, threads, rejections | Claude, principal composes | yes | rewritten freely |
 | artefacts | assignment | the direction handed to the recipients, self-contained | Claude, principal composes | yes | rewritten freely |
 | artefacts | later artefacts (BRD, RFP, article…) | further layers, each derived from the one above | Claude, principal composes | yes | rewritten freely |
@@ -159,7 +163,9 @@ companion `<file>.history.md` beside it (Versioning & status); an
 integer version is approved, and a recipe never is. A functional
 binary — a `.potx` template, a graphic — is a source, so a library's
 assets are resources without a kind of their own; a library carries
-no artefacts and no records.
+no artefacts and no records. Prose in every document is hard-wrapped
+at about 72 columns so that git diffs stay legible; tables, code
+blocks and front-matter are never wrapped.
 
 ## Document chain
 Files are numbered so the chain can grow without renaming anything.
@@ -189,7 +195,12 @@ ledger.md        single source of truth for state
    equally legitimate and indistinguishable to the forge: it arrives
    finished and is locked on arrival; it is begun outside and finished
    with Claude; it is born in the forge (`/forge brief [name]` for the
-   latter two). A project
+   latter two). Born by elicitation, the brief carries everything
+   the conversation, the research and the sources yielded — the
+   principal's words unmarked, every other block opening with its
+   origin in italics, *(Claude)* or *(source: <path>)*. More in the
+   brief and cleaning in the intent, never a clean brief: the intent
+   is where the pile is sorted. A project
    may have more than one: every later whole of thinking that would
    otherwise land in the intent as a batch of unproven positions is
    born as `00-brief-<name>.md` under the same rules. A locked brief
@@ -203,7 +214,10 @@ ledger.md        single source of truth for state
    Claude. Consolidated *current* state of intent: what he wants, why,
    what is the case, what is open, what was rejected and why.
    Continuously rewritten for coherence (not append-only); changes
-   recorded in its history companion.
+   recorded in its history companion. An intent consolidated by
+   Claude from the conversation, rather than composed item by item
+   with the principal, is `in_review` until every position has been
+   walked through; no lower layer is derived before that walkthrough.
 3. **`20-assignment.md`** — distilled from intent, audience: the
    recipients of the assignment (teams, colleagues, or the principal's
    future self). The only document handed over. Self-contained.
@@ -319,7 +333,9 @@ scripts/                   # forge-save / forge-pull / forge-status
                            # / forge-clone / forge-branch (git),
                            # doc2md (document →
                            # Markdown), md2pptx (deck render →
-                           # PowerPoint), md2docx (render → Word)
+                           # PowerPoint), md2docx (render → Word),
+                           # hook-walkthrough (the per-prompt hook
+                           # of .claude/settings.json)
 .claude/                   # skills (the commands and the reviewers'
                            # contracts), agents, settings
                            # (settings.local.json: the session
@@ -361,7 +377,10 @@ projects/<slug>/           # kind: thought — the chain
   reviews/YYYY-MM-DD-critique-<lens>.md  # immutable critique runs
   challenges/YYYY-MM-DD-challenge-<persona>.md  # immutable peer reviews
   research/YYYY-MM-DD-<topic>.md      # immutable research notes
-  CLAUDE.md                # optional project-specific polish
+  CLAUDE.md                # optional project-specific polish; note
+                           # that Claude Code's /export writes into
+                           # the working directory — export outside
+                           # the project or gitignore it
 projects/lib-<name>/       # kind: library — material shared across
   .git/  ledger.md         # projects, no chain: only the ledger,
   README.md  logo.png      # sources and research; documents
@@ -473,7 +492,7 @@ lifecycle. Depth max two levels.
 | TBC | open question / to be confirmed, with owner | assignment |
 | SCR | success criterion — optional or delegated | assignment |
 | POS | position the principal currently holds | intent |
-| THR | open thread — unresolved matter to elicit next | intent |
+| THR | open thread — unresolved matter to elicit next; carries its origin: the principal's word (the default, unmarked), a source by path, or Claude's synthesis | intent |
 | REJ | rejected direction, with the reason it was dropped | intent |
 | FCT | fact — what is the case, as the principal states it or as a source states it; not a stance; provenance to the file where a source exists, never demanded | intent |
 | FND | critique finding (document quality) | ledger, reviews |
@@ -518,7 +537,16 @@ shared behaviour of each kind preloaded from one contract skill
 front-matter; the skeleton of a lens file is `templates/challenger.md`,
 `templates/critic.md`, `templates/check.md`), only the Lens section
 its own; new personas, lenses and checks only by the principal's
-decision, and only where what they find genuinely differs. Bare
+decision, and only where what they find genuinely differs. A
+contract owns conduct and isolation, the subject and its boundary,
+the way of working and the shape of the output; a Lens section is a
+specialisation of its contract, never a replacement — it may narrow
+what is read or make a shared rule stricter, never rename, drop or
+duplicate a shared rule or field, and the protocol changes in the
+contract alone. Instance facts — whatever `CLAUDE.local.md` and the
+assistant's memory carry: names, roles, addresses, hosts — never
+enter a reviewer's report, not even where they would explain a
+finding: a report is a public file, or may be quoted into one. Bare
 `/challenge`, `/critique` and `/check` list the roster — the
 `description` of each agent file — and recommend a fit. The critic
 and the challenger take an optional target, an artefact named as
@@ -564,7 +592,14 @@ are registration only (what a resource is and is for lives in its
 directory's `00-INDEX.md`; a library document, cited by path, carries
 no version). Together with the
 resource indexes it is the only freely rewritten file. Keep it current
-after every operation.
+after every operation. The ledger cites and never copies: under
+Waiting on principal a matter that has an ID gets one line — the ID,
+a few words, its state — and its substance stays in the thread or the
+record; free text only for a matter with no ID yet, which gets one at
+the next write; an unfinished conversation is saved into its thread
+of the intent, never here. The header may declare `terminal:`, the
+artefact the chain ends at (assignment when absent); `/forge` and the
+checks then say nothing of a missing assignment.
 
 ## Commands
 | Command | Purpose |
@@ -574,7 +609,7 @@ after every operation.
 | `/import-project <git-url>` | bring an existing project into `projects/` through `scripts/forge-clone.ps1` — the directory is the repository's name; the commit identity is set per repository, proposed from `identities.local.md` by the URL's host |
 | `/forge [slug]` | state map: artefacts, versions, possible next steps, stale renders |
 | `/forge <state> [slug]` | iterate the target artefact (`brief [name]`, `intent`, `assignment`, …); one definition file per state in `.claude/skills/forge/states/`, each declaring its inputs |
-| `/ingest [file] [slug]` | store and register external input in sources/ and index it; bare = sweep sources/ |
+| `/ingest [file] [slug]` | store and register external input — a file, or text pasted into the conversation — in sources/ and index it, asking what it is for and stopping before personal matter; bare = sweep sources/ |
 | `/render <recipe> [slug]` | regenerate a render from its recipe in recipes/ |
 | `/recipe [genre] [slug]` | bare = genre roster; with a genre (`presentation`, `readme`, `release-notes`), guided composition — or iteration — of a render recipe from the genre's elicitation checklist and skeleton |
 | `/critique [lens] [artefact] [slug]` | bare = critic lens roster; with a lens (`clarity`, `essence`), run that critic on the quality of the project's documents — one artefact (`clarity`) or one artefact against its parent (`essence`) when named, else all → review + ledger |

@@ -4,9 +4,8 @@ argument-hint: "<recipe> [project-slug]"
 disable-model-invocation: true
 ---
 
-Role: renderer. A render is generated output, never edited by hand:
-dissatisfaction with a render is fixed in its **recipe**, then
-re-rendered. A render is regenerated only here, on the principal's
+Role: renderer (what a render and a recipe are: CLAUDE.md, Document
+chain 7). A render is regenerated only here, on the principal's
 explicit command, or by `/release` (POS.0810); Claude never regenerates
 on its own judgement — it reports a stale render and offers. Iterating the recipe is working conversation like any
 other; generating the render is mechanical.
@@ -14,8 +13,7 @@ other; generating the render is mechanical.
 1. Infer the current project from context ($2, or ask if ambiguous) and
    read `recipes/$1.md`. If it does not exist, offer to compose it
    through `/recipe` (a genre where one fits, else bare from
-   `templates/recipe.md`) and stop; what a recipe is and how it is
-   versioned is stated there (POS.1070).
+   `templates/recipe.md`) and stop.
 2. Read the recipe's declared inputs at their current versions.
 3. Generate in isolation: spawn one subagent (Agent tool, type
    `general-purpose`, session model — never a model override) whose
@@ -29,9 +27,8 @@ other; generating the render is mechanical.
    artefacts, not from what was said about them. It must not read the
    previous render unless the recipe declares it among its inputs
    (the release-notes genre does, for the released sections), and
-   must not touch the ledger. Prose is hard-wrapped at about 72
-   columns, like every artefact of the forge, so that git diffs stay
-   legible; tables, code blocks and front-matter are never wrapped.
+   must not touch the ledger. Prose is hard-wrapped as CLAUDE.md,
+   Document kinds, says for every document.
    Content only, always Markdown — a deck render may later be turned
    into an actual PowerPoint file by `scripts/md2pptx.ps1`, any render
    into a Word file by `scripts/md2docx.ps1`; all other format

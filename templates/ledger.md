@@ -4,6 +4,7 @@ kind: thought
 language: en             # language of the chain's artefacts (ISO 639-1);
                          # English when absent; records, state, research,
                          # recipes and notation stay English
+terminal: assignment     # where the chain ends — CLAUDE.md, Ledger
 updated: YYYY-MM-DD
 ---
 
@@ -43,8 +44,8 @@ Document chain 7). Row mirrors the render's front-matter provenance. -->
 ## Sources
 <!-- Registration only. External inputs, immutable once registered.
 Date = best-effort origin date; origin: content | file | ingested. What
-a source is and is for lives in sources/00-INDEX.md, never here.
-Registration does not imply intake. Form (POS.1040): text | extract
+a source is and is for lives in sources/00-INDEX.md, never here
+(CLAUDE.md, Document chain 5). Form (POS.1040): text | extract
 of <original> | binary — one form per source. -->
 | File | Date | Date origin | Form |
 |---|---|---|---|
@@ -78,6 +79,6 @@ intent version for accepted, DEC.NNNN for rejected. -->
 |---|---|---|---|---|
 
 ## Waiting on principal
-<!-- Open questions owned by the principal, findings and challenges
-awaiting verdict, proposed spin-offs. What blocks the next iteration. -->
+<!-- What waits on the principal, one line per matter: cite, never
+copy — CLAUDE.md, Ledger. -->
 - …

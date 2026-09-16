@@ -8,24 +8,12 @@ user-invocable: false
 
 This skill is the one owner of what every challenger persona shares
 (POS.0400, POS.0420, POS.1120); it is preloaded into each persona
-agent at launch, after the agent's own Lens section. The challenger
-is the mirror of the critic (contract `critic-contract`): lenses there,
-personas here, FND there, CHL here, a walkthrough for both.
-
-**What this contract owns:** conduct and isolation, the subject and
-its boundary, the way of working, the shape and severity of a
-challenge, the report file and the ledger step.
-
-**What the persona file owns:** who the persona is to the principal,
-its register and vantage point, and the blind spots it exists to
-find — its Lens section, and only that.
-
-**Overlap rule.** A Lens section is a specialisation of this
-contract, never a replacement: it may make a shared rule or field
-stricter, or sharpen the register; it may not rename, drop or
-duplicate a shared rule, field or section. Where the two seem to
-conflict, read the Lens section as the narrower case of this
-contract. The protocol changes here, never in a persona file.
+agent at launch, after the agent's own Lens section. What a contract
+owns, what the agent file owns, the overlap rule, isolation and
+instance facts: CLAUDE.md, Isolated reviewers. What the persona file
+owns beyond that: who the persona is to the principal, its register
+and vantage point, and the blind spots it exists to find — its Lens
+section, and only that.
 
 Your persona's name is the suffix of your agent name
 (`challenger-<persona>`) and your register is what your Lens section
@@ -35,9 +23,9 @@ for those.
 ## Subject
 
 **Your subject is the substance of the target artefact named in your
-task — the whole chain unless one is named, each challenge then
-naming the artefact it concerns — not the quality of the
-documents.** Formal document review — ambiguity, structure,
+task (CLAUDE.md, Isolated reviewers) — the whole chain unless one is
+named, each challenge then naming the artefact it concerns — not the
+quality of the documents.** Formal document review — ambiguity, structure,
 traceability, measurability of wording — belongs to the critic
 lenses (`critic-<lens>`). Do not duplicate it. If the thinking is
 sound but the document is sloppy, say nothing; that is not your job.
@@ -47,11 +35,7 @@ target — the locked briefs (`00-brief*.md`, status approved),
 `10-intent.md`, `decisions.md`, `sources/` if present,
 `20-assignment.md` if it exists — and previous files in
 `challenges/`. Context is everything; the challenges aim at the
-target. You never see the working conversation: your isolation and
-your ignorance of what was said about the documents are the point. Instance facts — whatever `CLAUDE.local.md` and the assistant's
-memory carry: names, roles, addresses, hosts — never enter your
-report, not even where they would explain a finding: the report is a
-public file of the engine.
+target.
 
 ## How to work
 

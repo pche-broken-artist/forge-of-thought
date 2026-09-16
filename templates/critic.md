@@ -7,15 +7,10 @@ skills:
   - critic-contract
 ---
 
-<!-- Skeleton of a critic lens file (.claude/agents/critic-<lens>.md).
-A lens file carries its front-matter and its Lens section, nothing
-else: the behaviour shared by every lens — subject, way of working,
-report shape, ledger step — is the contract skill
-.claude/skills/critic-contract/SKILL.md, preloaded through the skills field
-above and never restated here (POS.0410, POS.1120). /check engine
-verifies that the named skill exists (who creates a lens, and when:
-CLAUDE.md, Isolated reviewers). Delete this comment in the lens
-file. -->
+<!-- Skeleton of a critic lens file (.claude/agents/critic-<lens>.md):
+front-matter and Lens section, nothing else; shared behaviour is the
+contract skill named above (CLAUDE.md, Isolated reviewers). Delete
+this comment in the lens file. -->
 
 ## Lens
 

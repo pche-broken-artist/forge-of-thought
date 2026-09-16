@@ -19,10 +19,6 @@ Elicit:
    the intent alone).
 2. **The reader.** The recipients tracking the project by default; a
    different reader changes what Action required means.
-3. **Language.** The render's language is what this recipe declares
-   (CLAUDE.md, prime directive 6); propose the project's language
-   from its ledger header and ask, never assume.
 
-Compose the recipe from the skeleton, delete unused placeholders and
-all template comments, and offer `/render release-notes` as the next
-step.
+The language question and the composition from the skeleton close
+every genre (`/recipe`, step 2).

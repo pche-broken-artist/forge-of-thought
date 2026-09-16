@@ -19,9 +19,8 @@ What you verify:
 
 1. **Front-matter and history** — against Versioning & status in
    CLAUDE.md, every rule there (POS.1070), for every versioned
-   document and its companion; a Version History table in the body of
-   any document is a finding, the fix a migration on the principal's
-   word (POS.0820).
+   document and its companion, the placement of the Version History
+   included.
 2. **Ledger accuracy** — the ledger shaped as `templates/ledger.md`
    says for its kind; documents table vs front-matter and files on
    disk; findings and challenges vs files in `reviews/` and

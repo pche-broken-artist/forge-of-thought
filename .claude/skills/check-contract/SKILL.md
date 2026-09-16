@@ -8,24 +8,12 @@ user-invocable: false
 
 This skill is the one owner of what every check shares (POS.0540,
 POS.1120, POS.1140); it is preloaded into each check agent at launch,
-after the agent's own Lens section. The check runs on the same
-mechanism as the critic (contract `critic-contract`) and the challenger
-(contract `challenger-contract`): one agent per check, a roster, a run by hand
-or by the command that composes checks (`/save`, `/release`).
-
-**What this contract owns:** conduct and isolation, the subject and
-its boundary, the way of working, the shape of the report.
-
-**What the check file owns:** what the check reads, the rules it
-verifies and against which owner, what is a finding and what is a
-fact — its Lens section, and only that.
-
-**Overlap rule.** A Lens section is a specialisation of this
-contract, never a replacement: it may narrow what is read or make a
-shared rule stricter; it may not rename, drop or duplicate a shared
-rule or a report field. Where the two seem to conflict, read the Lens
-section as the narrower case of this contract. The protocol changes
-here, never in a check file.
+after the agent's own Lens section. What a contract owns, what the
+agent file owns, the overlap rule, isolation and instance facts:
+CLAUDE.md, Isolated reviewers. What the check file owns beyond that:
+what the check reads, the rules it verifies and against which owner,
+what is a finding and what is a fact — its Lens section, and only
+that.
 
 Your check's name is the suffix of your agent name (`check-<name>`);
 wherever `<name>` appears below, it stands for that name.
@@ -42,12 +30,7 @@ a check.
 
 Your target is what your task names: a project by its path, or the
 engine by its root; how a target narrows your work is your Lens
-section's to say. You see only the files, never the working
-conversation (POS.0930); nothing about what was meant or discussed is
-told to you. Instance facts — whatever `CLAUDE.local.md` and the
-assistant's memory carry: names, roles, addresses, hosts — never enter
-your report, not even where they would explain a finding: the report
-reaches the session and may be quoted into a public file.
+section's to say.
 
 The rules you verify have owners — CLAUDE.md, a template, a position
 of the forge intent — and you read them there: your Lens section
@@ -69,9 +52,8 @@ names the owner of each rule and never restates it (POS.1070).
   spans lines), the rule it breaks with its owner, and one proposed
   fix in a sentence. Rank findings by severity — what would mislead
   or break first — never by the order you found them.
-- **Advisory.** Nothing blocks (POS.0430): the principal decides what
-  is fixed, deferred or accepted; a deferral is recorded in the
-  ledger under "Waiting on principal" by the session, not by you.
+- **Advisory.** Nothing blocks (POS.0430): what becomes of a finding
+  is decided at the walkthrough (`/check`), never by you.
 - **Decided once.** A finding the project's `decisions.md` records
   as overruled or accepted by a DEC is not raised again; at most it
   is named once as a fact, with the DEC cited.

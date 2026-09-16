@@ -9,10 +9,10 @@ never touches git. A project is a repository of its own that the
 engine does not track; initialising it and adding a remote are the
 principal's one-off act, the way in named in CLAUDE.md, Persistence,
 and a project that starts "not under git" is a property, not a
-defect — say so once at the end. Once he names the remote, propose the matching commit
-identity from the roster in `identities.local.md` (read by path; POS.0950) by the remote's host
-and print the `git config` lines for him to run (POS.0950) — the
-command runs no git.
+defect — say so once at the end. Once he names the remote, propose
+the commit identity as CLAUDE.md, Persistence, says (from
+`identities.local.md`, read by path, by the remote's host) and print
+the `git config` lines for him to run — the command runs no git.
 
 **Kind.** Every project has a kind, declared as `kind:` in its
 ledger header (POS.0960): `thought` (default — the chain, everything

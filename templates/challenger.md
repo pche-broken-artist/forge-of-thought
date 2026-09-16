@@ -8,15 +8,10 @@ skills:
 ---
 
 <!-- Skeleton of a challenger persona file
-(.claude/agents/challenger-<persona>.md). A persona file carries its
-front-matter and its Lens section, nothing else: the behaviour shared
-by every persona — subject, way of working, shape and severity of a
-challenge, report, ledger step — is the contract skill
-.claude/skills/challenger-contract/SKILL.md, preloaded through the skills
-field above and never restated here (POS.0420, POS.1120).
-/check engine verifies that the named skill exists (who creates a
-persona, and when: CLAUDE.md, Isolated reviewers). Delete this comment
-in the persona file. -->
+(.claude/agents/challenger-<persona>.md): front-matter and Lens
+section, nothing else; shared behaviour is the contract skill named
+above (CLAUDE.md, Isolated reviewers). Delete this comment in the
+persona file. -->
 
 ## Lens
 

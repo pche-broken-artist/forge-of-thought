@@ -4,5 +4,17 @@
       "Read(~/.ssh/**)",
       "Read(~/.aws/**)"
     ]
+  },
+  "hooks": {
+    "UserPromptSubmit": [
+      {
+        "hooks": [
+          {
+            "type": "command",
+            "command": "pwsh -NoProfile -File scripts/hook-walkthrough.ps1"
+          }
+        ]
+      }
+    ]
   }
 }

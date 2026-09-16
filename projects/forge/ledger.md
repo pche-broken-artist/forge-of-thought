@@ -2,7 +2,7 @@
 project: forge
 kind: thought
 language: en
-updated: 2026-09-13
+updated: 2026-09-15
 ---
 
 # Ledger — Forge of Thought
@@ -27,9 +27,9 @@ absorbed it; Note says what remains (partial) or the REJ (dropped). -->
 ## Documents
 | File | Version | Status | Date |
 |---|---|---|---|
-| 10-intent.md | 4.7 | draft | 2026-09-13 |
+| 10-intent.md | 4.11 | draft | 2026-09-15 |
 | 20-assignment.md | — | not planned: the handover artefacts of this project are the core itself (CLAUDE.md, templates/, .claude/) and README.md | — |
-| decisions.md | — | 11 records (DEC.0010–0110) | 2026-09-06 |
+| decisions.md | — | 12 records (DEC.0010–0120) | 2026-09-14 |
 
 ## Renders
 <!-- Generated outputs, one row per recipe in recipes/. Never
@@ -71,6 +71,7 @@ research/00-INDEX.md. -->
 | 2026-09-03-version-history-placement.md | 2026-09-03 | 10-intent.md v3.13 (principal's question of 2026-09-03 on the cost of the Version History table); CLAUDE.md Versioning & status |
 | 2026-09-05-good-release-notes.md | 2026-09-05 | 10-intent.md v3.34 (THR.0310; POS.0730, release-notes recipe 0.6); RELEASE-NOTES.md as rendered 2026-09-05 |
 | 2026-09-07-brd-layer-fork-analysis.md | 2026-09-07 | 10-intent.md v4.0 (POS.0700 growth path; POS.0210, POS.0760, POS.0780, POS.1140); a colleague's fork of the engine at intent 2.8, read from a local clone |
+| 2026-09-14-save-and-release-duration.md | 2026-09-14 | the ledger's Waiting section as of 2026-09-14; 10-intent.md v4.9 (POS.1100, POS.0810) |
 
 ## Findings
 <!-- State: open | resolved | overruled | obsolete. Resolution: assignment
@@ -152,259 +153,60 @@ intent version for accepted, DEC.NNNN for rejected. -->
 | CHL.0190 | accepted | Release 4.0 is queued and nothing says what an approved major of this intent means — a sign-off with no counterparty and no test (minor) | 2026-09-06-challenge-cto.md | intent 3.46 (POS.0300: what a major of the forge intent means and must pass) |
 
 ## Waiting on principal
-- **THR.0350 — the run record of project `health`
-  (`sources/forge-run-record-health.md`, ingested 2026-09-13): to be
-  analysed properly, a walkthrough of P.01–P.16 when the principal
-  has time.** Deferred 2026-09-13 at his word; his stance and the one
-  open question (marking whose word is whose in a co-elicited brief)
-  stand in the thread. Nothing of it entered the operating layer.
-- **Mermaid diagrams in Word, deferred 2026-09-12 — "needs more
-  thought".** `scripts/md2docx.ps1` (POS.1150, intent 4.6) converts a
-  render to Word through pandoc and leaves Mermaid blocks as code.
-  Agreed in the walkthrough but not built: the route would be
-  `mermaid-cli` rendering each block to PNG through headless Chrome
-  before pandoc runs (a pandoc Lua filter), installed by the user
-  one-off like markitdown and pandoc — never by the script, never
-  `npx` fetching at run time, no online service. Open: whether to
-  take the dependency at all, and global versus repository-local
-  installation. The LLM route (a sibling of `md2pptx.ps1` on the
-  `document-skills:docx` skill) was set aside on 2026-09-12: it
-  would end at a picture too, with less determinism. Word to PDF is
-  the recipient's, never the forge's (POS.1150).
-- **Intent 4.4 (2026-09-10): the project's language narrowed to the
-  artefacts** — at the principal's correction of 4.3: records, state,
-  research and recipes are always English (POS.0060); CLAUDE.md
-  prime directive 6, `templates/ledger.md`,
-  `templates/CLAUDE.local.md`, `/new-project`, `/setup` and
-  `check-project` aligned in the same write. Readme recipe 0.42
-  (2026-09-11) carries the rule; README rendered at the release of
-  2026-09-11.
-- **Intent 4.3 (2026-09-10) written for the first project with facts
-  and Czech output** — a private project of the principal's, run in
-  a separate, isolated instance of the forge that takes 4.3 through
-  `forge-pull`; its content never enters here (THR.0210): FCT
-  beside POS (POS.0230), the output language per project in the
-  ledger header (POS.0060, THR.0180 closed). Operating layer aligned
-  the same hour: CLAUDE.md (prime directive 6, ID scheme),
-  `templates/ledger.md`, `templates/intent.md`,
-  `templates/CLAUDE.local.md`, `/forge intent` step 4. The README
-  states the rule since the release of 2026-09-11.
-  Not yet done: the existing projects' ledgers carry no `language`
-  line (absent means English — not a finding).
-- **Next step (2026-09-07, principal's direction): the BRD layer is
-  born as a brief.** Nothing goes into the intent directly. A new
-  brief `00-brief-brd.md` is composed iteratively in the forge
-  (`/forge brief brd`) from the working conversation over a
-  colleague's fork of the engine (intent 2.8 plus a BRD layer; a
-  local clone in the engine's gitignored `tmp/`, private) and the
-  research note `2026-09-07-brd-layer-fork-analysis.md`; the fork's
-  files are not transferred — the runtimes have diverged, much is
-  already solved differently here, and the files were written by a
-  weaker model — its mechanisms are analysed, the best taken and
-  fitted to the forge's standard, walked through point by point
-  (the note lists eight to borrow and nine to refuse). Once locked,
-  the brief is mined into the intent (POS.0700 closes into positions
-  of its own; the revisit of CHL.0030 under DEC.0060 belongs to that
-  round). Deferred for lack of time on 2026-09-07, to be taken up
-  soon.
-- **Operating layer of POS.1120 built (2026-09-06, intent 3.41);
-  the reviewers' first real runs done:**
-  `/critique clarity intent` on 2026-09-06 confirmed the contract on
-  the live agent (its sections in the first user message after the
-  task; report, regression and ledger by the contract; the running
-  session picked up the edited agent without a restart); its six
-  findings fixed at 3.42; `/challenge cto` on the new contract
-  2026-09-06 (intent 3.45), its six challenges settled at 3.46 — every
-  reviewer and check has now run through its contract. Trial outputs of 2026-09-06 kept only in the
-  session's scratchpad, nothing filed. The first run of a check on
-  its contract (`check-light` on projects/forge, 2026-09-06, headless
-  through the Agent tool) confirmed the contract the same way; its
-  four bookkeeping findings fixed or accepted at once (the placeholder
-  `00-brief.md` accepted under DEC.0010).
-- **Commands migrated to skills (2026-09-06, intent 3.43, POS.1130):**
-  THR.0330 closed, FND.0260 resolved; run before the check round on
-  the principal's word so that `/check` is written once on its final
-  place. One trial of `context: fork` on `/check` belongs to the check
-  round. The bare `/check-forge` after the move: nine findings, all
-  settled the same day (argument-hints quoted after the CRLF parse
-  defect, eight small alignments, readme recipe 0.39).
-- **Harness critique settled (2026-09-06):** FND.0270 by POS.1120,
-  FND.0250 and FND.0280 fixed, FND.0260 by POS.1130. The other six
-  were fixed 2026-09-05 (intent 3.30, POS.1090).
-- THR.0320 a `harness` lens — CLAUDE.md and the operating layer
-  reviewed through the official plugins (plugin-dev,
-  claude-md-management), output the classic critic's; opened
-  2026-09-05 at the principal's direction, decided in substance;
-  open: the mechanism (mapping in `.claude/skills/critique/SKILL.md` or an own agent with
-  preloaded plugin skills), the plugin as an engine dependency, the
-  fit of claude-md-improver's rubric, the regression step. No
-  priority given yet; shares its mechanism with POS.1120.
-- **Operating layer of POS.1100 and POS.1110 built 2026-09-05 with
-  intent 3.33:** `release.md` new, `save.md` narrowed, `forge-save
-  -Tag` and `forge-branch.ps1` (both tested on throwaway
-  repositories), CLAUDE.md, templates, genre files and both recipes
-  aligned. First real `/release forge` run the same evening: ten
-  check-forge findings settled (intent 3.34), `critique essence`
-  declined, README and release notes rendered from the settled
-  sources. Until the light check arrived at 3.44 (POS.1140), `/save`
-  ran no check — accepted knowingly.
-- **Release notes reshaped and the history migrated (2026-09-05,
-  intent 3.35):** THR.0310 closed by walkthrough after the research
-  `2026-09-05-good-release-notes.md` — one section per release in six
-  fixed groups, compiled from a Notes block that closes every history
-  row of the intent, the assignment and later layers (POS.0730,
-  POS.0310). On the principal's word the Notes block was appended to
-  all 93 rows of `10-intent.history.md` from 0.1 to 3.34, prose
-  untouched, compiled from the prose by Claude — rows never rewritten,
-  broken once, knowingly; marker row at the foot of the companion.
-  `RELEASE-NOTES.md` re-rendered whole the same evening
-  (`/render release-notes`, recipe 0.7, 94 sections) — the released
-  sections of 3.0, 2.0 and 1.0 rewritten once in the new shape,
-  knowingly. The principal's review of that render (a significant
-  improvement; the lines described the system, not the change for
-  its user; the majors claimed tags v1 and v2 that never existed):
-  POS.0310 extended with the reader's-side rule (intent 3.36), every
-  Notes line rewritten in a second pass the same evening (second
-  marker row), recipe 0.8, and the notes re-rendered. His review of
-  that second render: both views are needed in one line — the fact
-  and what it means for the user (intent 3.37, POS.0310); every Notes
-  line rewritten a second time (third marker row), recipe 0.9, the
-  notes re-rendered again. Then his suggestion, decided at 3.38:
-  at a major the minors fold into its section and their sections
-  disappear (POS.0730, recipe 0.10); first applies at 4.0, no render. The
-  release-notes recipes of agentic-platform and flow-ba keep the old
-  shape until their next `/recipe release-notes`.
-- **Priorities of the open threads (principal's order, 2026-09-04
-  evening; item 1 closed 2026-09-05), the next rounds in this
-  sequence:**
-  1. ~~THR.0220~~ closed at 3.33 (POS.1100, POS.1110), operating
-     layer built the same day (item above).
-  2. ~~THR.0310~~ closed at 3.35–3.38 (POS.0730, POS.0310), research
-     `2026-09-05-good-release-notes.md`, operating layer and history
-     migrated the same evening (item below).
-  3. ~~THR.0270~~ closed at 3.40 (POS.1120) after its trial run
-     2026-09-06; the operating layer built at 3.41; the critic's real
-     run done at 3.42; THR.0330 (all commands to skills) done at
-     3.43; the checks built at 3.44 (POS.1140); the challenge run and
-     settled at 3.46. The road to 4.0, in the principal's order of
-     2026-09-06: the sweep of the intent by the position rule done at
-     3.47 and its regression critique settled at 3.48; the test of a
-     major (POS.0300) run at 3.49: `single-source-of-truth` over the
-     whole layer (nineteen findings settled), `clarity` three times,
-     one challenge (3.45); `essence` declined by the principal's word
-     on 2026-09-06 — the one part of the test not run; the intent
-     approved as 4.0 the same day; the release checks (`light` clean,
-     `engine` four findings, `project` three) settled the same evening —
-     readme recipe 0.41, executive-pitch recipe 0.2, five argument
-     hints quoted, DEC.0110; deferred to 4.1: POS.0450 to cite DEC.0050
-     beside DEC.0020;
-     `/release forge` at 4.0 run 2026-09-06 evening: its three checks
-     (`light` three findings, `project` one, `engine` four) settled by
-     walkthrough — ledger rows, the "Decided once" rule in the check
-     contract (DEC.0110's owner), full-check wording gone from `/save`
-     and `/release`, `/setup` asks the role only, `/check`'s verdict
-     vocabulary cites the walkthrough; `essence` declined; README and
-     release notes rendered at 4.0, minors 3.1–3.49 folded into the
-     4.0 section; commit 4c01a2f, tag `v4`. After 4.0:
-     THR.0230's split if useful (CHL.0150), THR.0240 (the size of
-     CLAUDE.md).
-  Then THR.0230 (after an outline of the second framework). Dormant
-  by decision, trigger recorded in each: THR.0250, 0300, 0190, 0200,
-  0210, 0170, 0180, 0150, 0140, 0090.
-- Save duration (watch): the first /save with parallel renders and
-  the isolated /check-forge (2026-09-02) took twelve minutes — renders
-  6:54 in parallel (README 6:54, release notes 2:45), the check 5:00
-  with a full /check of the forge project folded in. Second
-  measurement (2026-09-03, save of 3.19): renders 8:18 in parallel
-  (README 8:18, release notes 2:24), the check 4:19. Lever pulled
-  2026-09-05: renders and check move to `/release` (POS.1100); the
-  watch continues on the first releases. First `/release` (2026-09-05,
-  release 3.34): the check 4:56, renders in parallel 7:07 (README
-  3:44, release notes 7:07). Release 4.0 (2026-09-06): three checks in
-  parallel 4:37 (light 2:13, project 3:03, engine 4:37), renders in
-  parallel 5:48 (README 5:48, release notes 5:11), the pre-save light
-  check 1:33.
-- Force-push of 2026-09-04, recorded: the save of intent 3.21–3.22
-  (b717a67) carried the principal's private `tmp/` at the engine root
-  into the public repository — the directory had never been added to
-  `.gitignore` though the principal had asked for it the day before.
-  On his word the commit was amended without `tmp/` and `main`
-  rewritten (`git push --force-with-lease`, 1f7cc06), `/tmp/` added to
-  `.gitignore`; direct git outside the scripts and a rewrite of `main`,
-  knowingly, once. GitHub may still hold the objects of b717a67 in its
-  cache; only GitHub support can purge them, if the principal wants
-  certainty.
-- THR.0290 what `/research` gains from kinds — the residue of the
-  thread after the checks became POS.1140 (3.44); deferred
-  2026-09-06 until a second way of researching appears
-- **Checks built (2026-09-06, intent 3.44, POS.1140):** contract
-  `check-contract`, agents `check-project`, `check-light`, `check-engine`,
-  `check-single-source-of-truth`, `/check` a dispatcher, `/check-forge`
-  gone, `/save` and `/release` composing their checks. First real run
-  of a check on its contract: see the item on the reviewers' first
-  runs. Staleness of the README: the Renders table.
-- THR.0300 a user's private layer of local agents — opened 2026-09-04,
-  no priority
-- Migration to the history companion (POS.0310): the engine and the
-  forge project done 2026-09-04 — CLAUDE.md, templates, commands, the
-  80 rows of the intent moved to `10-intent.history.md`, one-row
-  companions for the locked brief and the three recipes, "material
-  index" renamed "resource index"; `last_change` written into the
-  locked brief's front-matter on the principal's word at the
-  check-forge walkthrough of 2026-09-04 — immutability knowingly
-  broken once for one metadata line, the text untouched.
-  The three local projects migrated and saved the same day, each
-  through `/check` and its own `/save`: agentic-platform (acddf3d),
-  flow-ba (2e262b8), lib-allwyn (c49c874). Left for their next save:
-  the ledger and index comments of agentic-platform and flow-ba still
-  say "material index" and "artefact" (comments only, not a finding).
-- THR.0250 two suggested functions — the expander (a name only) and the
-  essence manager, whose detail became the `essence` lens (POS.0410);
-  open whether an end-to-end distillation brief → last layer is the
-  same lens or a further thing; opened 2026-09-03, parked
-- THR.0230 a common engine beneath several frameworks (forge, product,
-  project management) — opened 2026-09-03, to be worked out before any
-  decision; the second framework in outline comes first. Decided
-  2026-09-07 (intent 4.1): worked as a brief born in the forge
-  (`/forge brief <name>`), a project of its own only by spinoff
-  afterwards; whether a common engine at all stays open
-- THR.0240 the size of CLAUDE.md (523 lines) — opened 2026-09-03; to be
-  dealt with whatever becomes of THR.0230
-- THR.0340 the README split from the documentation (a short README,
-  the guide and the reference as `docs/` renders) — decided in
-  substance 2026-09-08, to be done after THR.0230 draws the
-  engine/framework boundary; open: the conventions chapter, the
-  render cost per `/release`
-- Executive pitch (since 2026-08-30): five-slide C-level deck of the
-  forge, story agreed (S01–S05), recipe `recipes/executive-pitch.md`
-  v0.4 (2026-09-11) with a Renders row. Decided 2026-09-10: the deck stays here in
-  `projects/forge`, recipe and render as they are, the `.pptx` through
-  `scripts/md2pptx.ps1` with its default template — no move to
-  `lib-allwyn`, no `allwyn.potx`, no library-render mechanism (the
-  direction of 2026-08-30 withdrawn before it reached the intent).
-  Rendered 2026-09-11 (`renders/executive-pitch.md`, recipe 0.3, re-rendered the same day from recipe 0.4 after the principal's review — opponents uncounted, five lines per slide); the `.pptx` built the same evening on the principal's word through `scripts/md2pptx.ps1` without a template (`renders/executive-pitch.pptx`, 46 kB, five slides with notes, no text moved to the notes); the headless run had no `document-skills:pptx` skill available and built the deck with python-pptx instead — to watch at the next build. Open from the render run: the S03 counts (34/31/3) rest on the recipe's Template alone, no input carries them.
-- THR.0090 multi-principal use — deliberately not worked on
-  (principal's direction 2026-08-29: principals not to be solved now); the scripts part resolved by POS.0950
-- THR.0140 the delivery side — deliberately deferred until a subject
-  project needs the linkage
-- THR.0150 replacing the PowerShell scripts with POSIX sh — principal
-  undecided whether at all; no priority while PowerShell 7 suffices
-- Split migration: complete 2026-08-30 (intent 3.0, tag v3.0). The
-  record of how it was done is
-  research/2026-08-29-split-migration-runbook.md; the company host's
-  main stays at the phase-B commit a717e52, archived read-only; the last
-  monorepo state is tag pre-split (d600dda).
-- Tag v3.32 (2026-09-05, commit 30730c4): the state before the
-  save/release round (THR.0220) — harness guard in place, `/save`
-  reordered. Set by the principal from the shell, outside the
-  forge's mechanism, since the scripts then carried no tag operation.
-  Settled the same day (POS.1100): `forge-save -Tag <name>` for any
-  tag on request, `v<major>` mandatory at every release of an
-  approved major; the next such tag goes through `/save -Tag` or
-  `/release -Tag`.
-- THR.0210 the guard rail for the public boundary — `projects/forge` never carries the content of a subject project; parked 2026-09-03 by the principal, proposed solution recorded in the thread (a check of its own, POS.1140, plus one sentence in both reviewer contracts); taken up when the boundary is next at stake
-- THR.0190 a plugin as a later distribution layer — no preparation
-  now; taken up when forge-pull proves an insufficient upgrade channel
-- THR.0200 the public face, narrowed at 3.0 to the README exemplar (repository `forge-of-thought` and licence CC BY 4.0 settled in POS.0990)
-- THR.0170 branch documents — deferred; taken up only if a draft brief needs position-level work before locking
-- README footer (`_Last updated_`): kept for now; principal will give further input
+- Order (2026-09-14, intent 4.8): 1. THR.0350's leftovers; 2. the
+  briefs `brd` and `layers` side by side.
+- THR.0350 — walked through (intent 4.9); left: the hook watched in
+  the next walkthroughs (POS.1170). The ledger sweep done at 4.10.
+- Check agents `light`, `engine`, `single-source-of-truth` not
+  registered in the session of 2026-09-14 though their files are
+  sound; verify after a restart, else a finding for `/save`.
+- Git identity per host, decided 2026-09-16 (reverses the includeIf
+  rejection in POS.0950; intent round pending: `/setup` writes the
+  stanzas, `forge-clone` loses `-Name`/`-Email`). Half done on the
+  principal's machine from remote control: two `includeIf` stanzas
+  in the global gitconfig point at `~/.gitconfig-<host>` files, but
+  git's home and the shell's home are different drives there, so the
+  files lie where git does not look; the engine got a local identity
+  as the minimum for this save. To finish at the computer: point the
+  stanzas at the files by absolute path, or move the files; the
+  `useConfigOnly` guard is not set in that gitconfig either.
+- THR.0360 — a layer with an external audience, opened 2026-09-14;
+  worked in the brief `brd`.
+- THR.0370 — Mermaid diagrams in Word; deferred 2026-09-12, open.
+- brief `brd` — to be born (`/forge brief brd`) from the conversation
+  over the colleague's fork (files not transferred, mechanisms walked
+  through point by point) and
+  `research/2026-09-07-brd-layer-fork-analysis.md`; POS.0700 closes
+  into positions of its own, CHL.0030 under DEC.0060 revisited in
+  that round. Direction of 2026-09-07.
+- THR.0320 — a `harness` lens; decided in substance 2026-09-05,
+  mechanism open, no priority.
+- THR.0240 — the size of CLAUDE.md; first instance of the answer at
+  4.9 (POS.1170), the rest open.
+- Save and release duration — the watch continues at the next
+  releases; measurements so far in
+  `research/2026-09-14-save-and-release-duration.md`.
+- DEC.0120 — the force-push of 2026-09-04, recorded; a GitHub cache
+  purge only on the principal's request.
+- THR.0290 — what `/research` gains from kinds; deferred until a
+  second way of researching appears.
+- THR.0300 — a user's private layer; merges into the brief `layers`
+  (THR.0230).
+- THR.0250 — expander and essence manager; parked 2026-09-03.
+- THR.0230 — a common engine beneath frameworks; worked as the brief
+  `layers` (with THR.0190, THR.0300), after `brd`, research first;
+  CHL.0150 parked with it.
+- THR.0340 — the README split from the documentation; after
+  THR.0230.
+- THR.0380 — executive pitch loose ends (S03 counts, the deck build
+  without the `pptx` skill); opened 2026-09-14.
+- THR.0090 — multi-principal use; deliberately not worked on.
+- THR.0140 — the delivery side; deferred until a subject project
+  needs the linkage.
+- THR.0150 — PowerShell scripts to POSIX sh; undecided, no priority.
+- THR.0210 — the guard rail for the public boundary; parked, taken up
+  when the boundary is next at stake.
+- THR.0190 — a plugin as a distribution layer; merges into the brief
+  `layers` (THR.0230).
+- THR.0200 — the public face, narrowed to the README exemplar.
+- THR.0170 — branch documents; deferred.

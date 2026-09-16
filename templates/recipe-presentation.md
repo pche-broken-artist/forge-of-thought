@@ -12,8 +12,8 @@ last_change: <one line from the newest row of $1>
 
 <!-- Presentation-genre recipe, composed via /recipe presentation; the
 render is a slide-by-slide deck definition that scripts/md2pptx.ps1
-turns into a PowerPoint file. What a recipe is and how it is versioned
-is templates/recipe.md's. -->
+turns into a PowerPoint file. A recipe: CLAUDE.md, Document chain 7.
+-->
 
 ## Inputs
 <!-- Chain artefacts the deck is generated from. A picture may come

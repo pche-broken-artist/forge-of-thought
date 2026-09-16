@@ -31,9 +31,6 @@ Elicitation checklist:
    principal.
 5. **What must not appear.** Confidentiality toward whoever can reach
    the repository; internal figures; nothing from other projects.
-6. **Language.** The render's language is what this recipe declares
-   (CLAUDE.md, prime directive 6); propose the project's language
-   from its ledger header and ask, never assume.
 
-Compose the recipe from the skeleton, delete unused placeholders and
-all template comments, and offer `/render readme` as the next step.
+The language question and the composition from the skeleton close
+every genre (`/recipe`, step 2).

@@ -32,14 +32,11 @@ Elicitation checklist:
 7. **Diagram policy.** Which slides carry a diagram; inline Mermaid
    (valid standalone, simple enough to survive conversion into native
    slide shapes) or a reference to an existing render.
-8. **Language.** The render's language is what this recipe declares
-   (CLAUDE.md, prime directive 6); propose the project's language
-   from its ledger header and ask, never assume.
-9. **Vocabulary discipline.** Terms that must not blur (defined
+8. **Vocabulary discipline.** Terms that must not blur (defined
    Terms, house distinctions); the recipe states them explicitly.
-10. **What must not appear.** Confidentiality toward this audience:
-    internal figures, vendor names, anything the room must not see.
-11. **Build instructions.** For the deck-builder LLM: recommended
+9. **What must not appear.** Confidentiality toward this audience:
+   internal figures, vendor names, anything the room must not see.
+10. **Build instructions.** For the deck-builder LLM: recommended
     `.potx` template (named by path, typically a document of a
     library project: `projects/lib-<name>/sources/<file>.potx`),
     recommended model for
@@ -47,5 +44,5 @@ Elicitation checklist:
     redraw expectations. Copied verbatim into the render so the
     builder sees them.
 
-Compose the recipe from the skeleton, delete unused placeholders and
-all template comments, and offer `/render <recipe>` as the next step.
+The language question and the composition from the skeleton close
+every genre (`/recipe`, step 2).

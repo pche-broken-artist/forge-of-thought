@@ -1,8 +1,8 @@
 ---
-version: 4.7
-date: 2026-09-13
+version: 4.11
+date: 2026-09-15
 status: draft
-last_change: 4.7 (2026-09-13): THR.0350 opened — the run record of project `health` (sources/forge-run-record-health.md) to be analysed properly; the principal's stance on the co-elicited brief, the walkthrough and the report recorded, nothing decided.
+last_change: 4.11 (2026-09-15): the single-source-of-truth check after the round of 4.9 settled — fourteen findings fixed as proposed: citations instead of restatements across commands, contracts, templates and agents; CLAUDE.md the owner of the reviewers' overlap and instance-facts rules and of the 72-column wrap; /ledger a door to the /forge map (POS.1070).
 project: forge
 audience: principal + Claude only
 ---
@@ -54,6 +54,16 @@ solution is the kind of content, never the amount.
 - **POS.0020** Claude's default under uncertainty is to ask, never to
   assume. Beyond answering, Claude actively elicits: helping the
   principal extract what he has not yet articulated is part of the job.
+  This holds for what Claude reads as much as for what the principal
+  says: a contradiction, a gap or a risk Claude finds in a source is
+  raised at once, as one question naming what does not fit — never as
+  an interpretation of what it means; what Claude has worked out
+  beyond that is offered once, marked as his own. Added 2026-09-14
+  from the run record of `health` (P.03, F.04: Claude's constructions
+  presented as facts, the dominant conduct defect of that run); the
+  record's "no warnings unless asked" rejected by the principal — he
+  wants to be told of problems, holes and contradictions, as a
+  question.
 - **POS.0030** Claude never introduces a new convention, prefix or
   section unilaterally: propose, wait for a decision, then write it down.
 - **POS.0040** Many iterations are the normal mode. Intent and
@@ -105,13 +115,21 @@ position that already stands elsewhere.
 - **POS.0850 Walkthrough.** Any list of items that need the principal's
   decision — critique findings, challenges, the differences between two
   requirement sets, open threads, TBC items before a handover — is
-  worked one item at a time, in order of weight. For each item Claude
-  first gives its recommendation with a one-sentence reason; the
+  worked one item at a time, in order of weight. An item is put
+  forward with what the principal needs to decide it, in this order:
+  what the item says and the situation or evidence behind it, in a
+  few sentences; what would change and for whom; then the
+  recommendation with its reason and, for "accept", the concrete
+  text. A heading with a one-sentence reason is a label, not an
+  item — the principal must not have to ask for an explanation to
+  decide (his correction of 2026-09-14). The
   principal decides in a word or with a counter-proposal; "leave it
   open" is a legitimate verdict, not a failure. A table asking for every
   verdict at once is never put in front of the principal. The next
   message opens with one line acknowledging the verdict and then
-  carries the next item, nothing else. A check whether
+  carries the next item, nothing else — never a verdict of Claude's
+  own on the open item and the next item in one message (the
+  failure the run record of `health` minds most, F.02). A check whether
   Claude has understood an item fully is an item of its own. An
   elicitation interview runs the same way: one question per message, the
   answer acknowledged before the next question is asked. A questionnaire
@@ -125,7 +143,11 @@ position that already stands elsewhere.
   offering a walkthrough — `/critique`, `/challenge`, the `/forge` map,
   a comparison made on request — and the principal may call for one at
   any moment. `/resolve`, a per-verdict door, is retired without
-  alias; its write-up rules live here.
+  alias; its write-up rules live here. The shape of the method lives
+  in `.claude/skills/walkthrough/SKILL.md`, read whenever a
+  walkthrough or an interview runs; CLAUDE.md carries one sentence
+  and the pointer, and a hook repeats the one-item rule at every
+  prompt (POS.1170, 2026-09-14).
 - **POS.0860 Propose, never decide.** Claude criticises, challenges,
   inspires and lays out options; the principal composes (POS.0010,
   POS.0070). Nothing enters content because Claude proposed it.
@@ -145,6 +167,35 @@ position that already stands elsewhere.
 - **POS.0910 Recommend, do not push.** Every option Claude lays out
   comes with its recommendation and reason, stated once; a declined
   recommendation is not re-argued unless new facts appear.
+- **POS.1160 In pieces.** The principal may send one longer thought
+  as several messages, a piece at a time, and close it with a word
+  such as "done". Until that word Claude answers each piece with at
+  most one line of acknowledgement — no question, no analysis, no
+  warning — because the pieces are incomplete and a question would
+  ask what he is about to write. After it the pieces are one input,
+  read and worked as a whole; and one input is one write (POS.0190),
+  so a brief dictated this way moves one version per block, not per
+  sentence. Not a mode and no magic: one input split for the sender's
+  comfort. Decided 2026-09-14 from the run record of `health`
+  (`sources/forge-run-record-health.md`, P.02, P.14, F.02, G.08), in
+  the principal's own words.
+- **POS.1170 A rule that must hold in a long conversation is
+  repeated at every prompt by a hook, not trusted to CLAUDE.md
+  alone.** The run record of `health` showed the one-item walkthrough
+  breaking about thirteen times with the rule fully in context and a
+  memory note beside it (F.02): text loaded once dissolves as the
+  conversation grows. The harness's `UserPromptSubmit` hook adds
+  context at every prompt; the engine's `.claude/settings.json`
+  carries one such hook with two lines — the one-item rule itself,
+  and a pointer to `.claude/skills/walkthrough/SKILL.md` for the full
+  shape when a walkthrough or an interview runs. That is also the
+  first instance of the pattern THR.0240 asks for: always-on is one
+  sentence and a pointer, the detail is a file read when its
+  situation arises; the CLAUDE.md paragraph on the walkthrough shrank
+  to that sentence. A hook is context, not enforcement — the nearest
+  thing to a wall the harness offers. A trial, judged by behaviour:
+  decided 2026-09-14 (P.04; the pointer the principal's idea, the
+  repeated sentence Claude's addition).
 
 ### Document chain
 - **POS.0100** Files in the chain are numbered in tens (`00-brief.md`,
@@ -171,16 +222,31 @@ position that already stands elsewhere.
   finished with Claude in the forge; or it is born in the forge from
   the first word. `/forge brief [name]` is the door for the latter
   two, and it runs under the principal's moderation: he says what is
-  being explored and steers; Claude's role is to clarify where he is
-  terse or unclear — never to add content of its own — and to
-  correlate the thought with reality throughout, offering best
-  practice, projects and standards that solve the same thing ("are we
-  reinventing the wheel?") through `/research` and `/ingest`, which
-  Claude proposes and the principal times. The aim of a brief is a
-  thought clear enough to be checked against what exists or to draw
-  inspiration from it; what such a check contributes enters the brief
-  only by the principal's word — the brief stays his text, not a
-  literature review. `/new-project` creates `00-brief.md` at scaffold
+  being explored and steers; Claude clarifies where he is terse or
+  unclear and correlates the thought with reality throughout,
+  offering best practice, projects and standards that solve the same
+  thing ("are we reinventing the wheel?") through `/research` and
+  `/ingest`, which Claude proposes and the principal times. The aim
+  of a brief is a thought clear enough to be checked against what
+  exists or to draw inspiration from it. What a brief born by
+  elicitation holds is the whole pile as it emerged, not the
+  principal's words alone: what he says, what the conversation
+  yields, what the research finds, what the sources say — he needs
+  the sources most at the brief, since over them he learns what he
+  wants. More in the brief and cleaning in the intent, never a clean
+  brief: the intent is where the pile is sorted, and mining already
+  lets thoughts be changed or dropped. The principal's words stay
+  unmarked; every block that is not his own opens with its origin in
+  italics, *(Claude)* or *(source: <path>)*, lightly, so that the
+  intent can later say whose word a position rests on (POS.1180) and
+  the essence lens still measures drift against his words. A brief
+  handed over finished is the same thing, a pile that happens to be
+  all his. Decided 2026-09-14 in the principal's words, from the run
+  record of `health` (`sources/forge-run-record-health.md`): "brief =
+  the principal's words only" (G.01) was a misreading of the model,
+  and what broke that run was Claude saying "written" while Claude's
+  part of the pile lived nowhere (F.01, POS.0190); the record's
+  alternative homes for it are REJ.0180. `/new-project` creates `00-brief.md` at scaffold
   time with the pre-filled header; the principal's verbatim text
   completes it. A locked brief is the provenance anchor of its whole:
   the record against which later drift is measured. The draft state
@@ -241,7 +307,24 @@ position that already stands elsewhere.
 - **POS.0160** Supporting documents (the kinds: POS.1080): `decisions.md` (append-only, DEC),
   `ledger.md` (single source of truth for state, freely rewritten),
   `reviews/`, `challenges/`, `research/` (all immutable, dated); the
-  resource indexes are POS.0840's.
+  resource indexes are POS.0840's. The ledger cites and never copies:
+  under Waiting on principal a matter that has an ID gets one line —
+  the ID, a few words, its state — and its substance stays in the
+  thread or the record; free text only for a matter with no ID yet,
+  which gets one at the next write; an unfinished conversation is
+  saved into its thread of the intent, a write of whatever is agreed
+  so far, never into the ledger. The `project` check reports a line
+  that carries a thread's, a decision's or a history row's text
+  instead of citing it. The ledger header may declare `terminal:`,
+  the artefact the project's chain ends at, assignment when absent;
+  `/forge` and the checks then say nothing of a missing assignment.
+  Added 2026-09-14 (P.15, P.09, G.10): the `health` ledger's Waiting
+  section carried a rule, a proposal and ten talking points, and this
+  project's own carried the story of every round — two hundred and
+  fifty lines of prose duplicating threads, decisions and history,
+  which no check read, since the single-source rule was written for
+  mechanisms and the check for the operating layer. The sweep of this
+  ledger is a step of its own on the principal's word.
 - **POS.0170** Feedback from recipients has no channel of its own. The
   principal processes it and feeds conclusions back through
   `/forge intent`.
@@ -337,7 +420,14 @@ position that already stands elsewhere.
   many answers the round contained. The principal may at any moment
   order a write of whatever is agreed so far. Writing after every
   exchange buries the substantive change under changelog churn and
-  makes the Version History unreadable.
+  makes the Version History unreadable. "Written" means a file:
+  whenever Claude reports something as written, it names the file and
+  section; whatever is carried in the conversation only is said to be
+  nowhere yet, and Claude never says nothing is lost while anything
+  lives only in the conversation. Added 2026-09-14 from the run record
+  of `health` (P.01, F.01 — the costliest failure of that run: ten
+  hours of "nothing will be lost" while Claude's part of the pile was
+  in no file).
 - **POS.0710** A project may spawn renders: audience-specific outputs
   generated from the chain — a pitch for the group, an architecture
   picture, an executive summary, the repository README. A render is
@@ -497,7 +587,27 @@ position that already stands elsewhere.
   is what the principal holds or wants. Making a source's fact his own
   stance is a new POS. Added 2026-09-10 for the first project whose
   intent had to carry what is so beside what is wanted: without a
-  prefix of its own, a fact would have passed for a position.
+  prefix of its own, a fact would have passed for a position. A
+  thread (THR) carries its origin — the principal's word, a source by
+  path, or Claude's synthesis — so that a hypothesis of Claude's
+  stays visibly his until the principal takes it up; what Claude has
+  worked out is never a FCT, since a fact is the principal's word or
+  a source's. Origin is marked from 2026-09-14 on, the principal's
+  word being the default that needs no mark; no retrofit (P.08, F.04:
+  nothing in the `health` intent said whether a thread came from the
+  principal, a source or Claude).
+- **POS.1180** An intent consolidated by Claude from the conversation,
+  rather than composed item by item with the principal, is
+  `in_review` until every position has been walked through, and no
+  lower layer is derived before that walkthrough. In `health` the
+  intent 0.1 was written in six minutes from three days of talk — 31
+  positions and threads Claude had distilled — the scheduled
+  walkthrough never ran, and 26 positions were confirmed en bloc
+  because the report built from them had been read: the authorship
+  rule of the intent inverted, the principal auditing a document
+  instead of recognising his own (F.03, DEC.0030 of that project).
+  Ordinary work, where positions are composed in the conversation, is
+  untouched. Decided 2026-09-14 (P.08).
 - **POS.0240** Every assignment carries a Terms section listing the
   prefixes and any domain terms it actually uses, so it can be forwarded
   without oral tradition. Defined Terms are capitalised in item text.
@@ -1109,7 +1219,12 @@ position that already stands elsewhere.
   guarantee of Step by step (CLAUDE.md, Working methods) thereby
   rests on the harness as well as on CLAUDE.md, and the descriptions of the guarded
   commands leave the always-on context. Decided 2026-09-05 at the
-  walkthrough of the harness critique (FND.0210, FND.0190).
+  walkthrough of the harness critique (FND.0210, FND.0190). Step by
+  step names one more such step since 2026-09-14: the birth of a new
+  versioned document — a brief, a recipe, a layer of the chain —
+  happens on the principal's word, never as a by-product of another
+  operation (P.05, F.06: a second recipe and its render created
+  without a word, a brief written under `/forge intent`).
 - **POS.1130** The commands are skills. Every command lives as
   `.claude/skills/<name>/SKILL.md`; `.claude/commands/` no longer
   exists. The state files of `/forge` and the genre files of `/recipe`
@@ -1349,11 +1464,30 @@ position that already stands elsewhere.
   Transition: the convention applies from its date on; extracts made
   before keep their `.extract.md` names, and a binary already in git
   beside its extract leaves the index on the principal's word, never
-  automatically. Decided 2026-08-30 (history 3.1).
+  automatically. Decided 2026-08-30 (history 3.1). Three additions of
+  2026-09-14 from the run record of `health`: `/ingest` takes text
+  pasted into the conversation as well as a file, storing it as
+  `sources/<slug>.md` with a two-line header and registering it like
+  any file (P.10, G.04: 32 sources arrived by paste and were stored by
+  hand and by temporary scripts); before storing, personal matter — a
+  named private person, an identifying detail, health, anything of
+  the kind — stops the command and asks, store as it is, redact before
+  registration or drop, never stored first and asked afterwards, and
+  unconditionally, no rule in the project needed (P.11, G.09,
+  simplified by the principal); and the role of a source is his word,
+  never inferred — after registration Claude always asks "what is it
+  for?", and he answers with the role or tells Claude to infer it,
+  which is then written marked *(inferred)* — with the reply after
+  registration three lines at most: the file and its index entry,
+  what the source adds to the intent in one line or "nothing new",
+  and that question (P.06, F.05: every source once triggered a page
+  of analysis).
 - **POS.1050** First run is one command. After cloning the engine,
   `/setup` prepares the instance: it fills `CLAUDE.local.md` from
-  `templates/CLAUDE.local.md` in an elicitation interview — who the
-  principal is by role, the conversation language — and
+  `templates/CLAUDE.local.md` in an elicitation interview — the
+  conversation language first, then who the principal is by role,
+  since the first correction of a newcomer's run was the language of
+  the first question (P.15, G.13, 2026-09-14) — and
   `identities.local.md` from `templates/identities.local.md` with the
   git identities per host (POS.0950), and it creates `.claude/settings.local.json` with
   the session model set to **Fable**, without asking: the strongest
@@ -1451,6 +1585,12 @@ position that already stands elsewhere.
   when `forge-pull` proves an insufficient upgrade channel. Research:
   `2026-08-29-claude-code-packaging.md`,
   `2026-08-29-framework-distribution-in-the-field.md`.
+  2026-09-14: to be merged into the brief `layers` (THR.0230), after
+  THR.0350. The research above answered a different question — how
+  the forge reaches users with projects of their own, where the clone
+  with nested repositories won (POS.0940), rightly — and is not
+  reused for the three-layer question; that question gets research of
+  its own.
 - **THR.0200** The public face: an exemplar project for the README — the
   forge itself, or one created later; the company projects cannot
   travel. Until one exists the README carries a one-sentence placeholder
@@ -1555,6 +1695,28 @@ position that already stands elsewhere.
   3.0 every new position has been the engine's and the boundary is
   being drawn by accretion; taken up after 4.0 if the split proves
   useful.
+  2026-09-14, the principal's picture, to be worked as one brief
+  `layers` born in the forge (`/forge brief layers`; the name is
+  provisional) together with THR.0190 and THR.0300, which close into
+  it at its birth: three layers — an engine that owns the mechanics,
+  ideally a thing of its own, the technical shape unknown and a
+  further git-inside-git nesting unwanted; the forge as the
+  framework, through which the principal releases substantial new
+  functionality on git; and a user layer, where every user keeps
+  agents, challengers and reviewers of their own in a private
+  repository, never pushed into the forge, and upgrades the forge
+  without friction because the layers are separate. His reasons for
+  taking it up soon: every further change makes the split harder;
+  against it, the BRD layer and the field feedback (THR.0350) are
+  wanted quickly. Order agreed 2026-09-14: THR.0350 first, since the
+  brief `layers` is to be born by co-elicitation, the technique the
+  run record faulted; then the brief `brd` and the brief `layers`,
+  elicited in small doses beside each other. The brief's first item
+  is research of its own into what Claude Code offers today for three
+  such layers — the packaging research of 2026-08-29 served the
+  engine/projects split and is not reused. Whether every new position
+  should name its layer waits for the brief to say what the layers
+  are. CHL.0150 stays parked with the brief.
 - **THR.0240** The size of CLAUDE.md. 523 lines on 2026-09-03 and
   growing with every iteration; THR.0190 already records that a split
   moves rules from always-on to on-demand and is a behaviour change, not
@@ -1574,7 +1736,11 @@ position that already stands elsewhere.
   them. The cost of CLAUDE.md is paid once per reviewer run, not once
   per session. The single-source-of-truth check of 2026-09-06 (history
   3.49) took CLAUDE.md from 636 to 584 lines by citation alone; what
-  must be always-on is still this thread's question.
+  must be always-on is still this thread's question. First instance
+  of the answer, 2026-09-14: the walkthrough paragraph became one
+  sentence and a pointer to a skill, with a hook repeating the hard
+  sentence at every prompt (POS.1170) — always-on is one sentence and
+  a pointer, the detail a file read when its situation arises.
 - **THR.0250** Two suggested functions: an expander and an essence
   manager. A tip the principal received on 2026-09-03 — where from not
   recorded. The essence manager got its detail the same day: at the end
@@ -1603,7 +1769,9 @@ position that already stands elsewhere.
   contract skill (POS.1120), what happens when the engine renames or
   reshapes it, and
   whether Claude Code's own user-level agents already serve. Opened
-  2026-09-04.
+  2026-09-04. 2026-09-14: the third layer of the principal's
+  three-layer picture; to be merged into the brief `layers`
+  (THR.0230), after THR.0350.
 - **THR.0320** A harness lens. The principal's direction of
   2026-09-05: the critic roster gets a lens `harness` that reviews
   the operating layer — CLAUDE.md and the skills, commands and agents
@@ -1650,8 +1818,12 @@ position that already stands elsewhere.
   line. Open: whether the conventions chapter is rendered at all or
   the documentation points to CLAUDE.md, which is readable as it
   stands; the cost of more renders per `/release` (the README alone
-  takes five to eight minutes today). Trigger: the boundary drawn by
-  the brief of THR.0230. Opened 2026-09-08.
+  takes five to eight minutes today; the measurements are
+  `research/2026-09-14-save-and-release-duration.md`). Trigger: the boundary drawn by
+  the brief of THR.0230. Opened 2026-09-08. Also here, since it is
+  the README's: the footer (`_Last updated_`) is kept for now and the
+  principal will give further input (noted 2026-09-14 from the
+  ledger).
 
 - **THR.0350** Lessons of the first run in the field. The record of
   the forge applied to a private project of the principal's,
@@ -1689,6 +1861,79 @@ position that already stands elsewhere.
     message, `UserPromptSubmit`, adding context), so that the rules
     that matter — the one-item walkthrough above all — do not drift in
     a long conversation. Opened 2026-09-13.
+  Priority given 2026-09-14: the first thread to be worked, before the
+  briefs `brd` and `layers` (THR.0230) — the brief `layers` is to be
+  born by the co-elicitation the record faulted (F.01, G.01, P.07, the
+  marking of whose word is whose), so that technique must hold first.
+  Walked through the same day, one proposal per message, directly
+  into the intent (the record is the anchor; a brief of it would have
+  been a copy):
+  - P.01 accepted → POS.0190. P.02 accepted in the principal's own
+    words as In pieces → POS.1160. P.03 accepted without the
+    "no warnings" part → POS.0020. P.04 accepted as a trial, the
+    hook and the `walkthrough` skill → POS.1170, POS.0850. P.05
+    accepted → POS.1090 (Step by step). P.06 accepted with the
+    principal's addition, the role always asked → POS.1040.
+  - P.07 rejected → REJ.0180. P.08 accepted, origin on THR only →
+    POS.0230, POS.1180; the marking of whose word is whose in a
+    co-elicited brief decided yes, lightly → POS.0110. P.09 split:
+    `terminal:` accepted → POS.0160; the layer opened as THR.0360.
+    P.10 the pasted-text half accepted → POS.1040, the editing
+    mechanism rejected → REJ.0200. P.11 accepted, unconditional →
+    POS.1040. P.12 rejected for now → REJ.0190. P.13 deferred into
+    THR.0360 with Claude's view of what a render is. P.14 covered by
+    POS.1160 and POS.0190. P.15 accepted, the ledger cites → POS.0160;
+    `/setup` asks the language first → POS.1050. P.16 not worked —
+    too specific for now.
+  - Of the principal's stance of 2026-09-13: the co-elicited brief
+    is POS.0110; the walkthrough shape POS.0850 with a new depth rule
+    from his correction; the report of `health` as a render is
+    THR.0360's; the per-prompt hook is POS.1170.
+  Still to do from this thread: the sweep of this project's ledger
+  (POS.0160), and the observation of the hook in the next
+  walkthroughs.
+
+- **THR.0360** A layer with an external audience. The first real run
+  below the intent (project `health`,
+  `sources/forge-run-record-health.md`, D.05, G.05) needed a report
+  for a third party, not an assignment: a layer built ad hoc without
+  a state file, a template or a recipe genre, every write a bundle
+  across five documents. Whether it is a layer of its own (`report`),
+  a generic `layer`, or a case of the BRD layer's mechanics, is worked
+  in the brief `brd`, where the mechanics of layers below the intent
+  are designed (POS.0700). Belongs here too (P.13, G.07) — Claude's
+  view of 2026-09-14, not decided: the render is the Markdown; a
+  `.docx` or `.pptx` is a conversion of a render or of an artefact,
+  cheap and deterministic where it can be, with a row of its own,
+  never blurred into "render"; a document the principal polishes in
+  an editor is an artefact he composes, never a render, and the forge
+  needs the way back — `doc2md`, a comparison, carry-over
+  intent-first — because editing in an editor and having Claude
+  absorb it is a way of working he finds comfortable. The `timeline`
+  recipe genre waits for a second need (W.12). Opened 2026-09-14 from
+  THR.0350; origin: the principal's word and the record.
+- **THR.0370** Mermaid diagrams in Word. `scripts/md2docx.ps1`
+  (POS.1150) converts a render to Word through pandoc and leaves
+  Mermaid blocks as code. Agreed in the walkthrough of 2026-09-12 but
+  not built: the route would be `mermaid-cli` rendering each block to
+  PNG through headless Chrome before pandoc runs (a pandoc Lua
+  filter), installed by the user one-off like markitdown and pandoc —
+  never by the script, never `npx` fetching at run time, no online
+  service. Open: whether to take the dependency at all, and global
+  versus repository-local installation. The LLM route (a sibling of
+  `md2pptx.ps1` on the `document-skills:docx` skill) was set aside on
+  2026-09-12: it would end at a picture too, with less determinism.
+  Word to PDF is the recipient's, never the forge's (POS.1150).
+  Deferred 2026-09-12 by the principal — "needs more thought"; opened
+  as a thread 2026-09-14 from the ledger.
+- **THR.0380** Executive pitch, loose ends. The five-slide deck
+  (`recipes/executive-pitch.md` 0.4, `renders/executive-pitch.md` and
+  `.pptx` of 2026-09-11) stays in `projects/forge` with the default
+  deck template (decided 2026-09-10). Open from the render run: the
+  S03 counts rest on the recipe's Template alone, no input carries
+  them; and the headless build had no `document-skills:pptx` skill
+  available and built the deck with python-pptx instead — to watch at
+  the next build. Opened 2026-09-14 from the ledger.
 
 Note: the ID THR.0120 was inadvertently used twice — first for the
 readme-recipe thread (opened 1.14, closed 1.16), then for the
@@ -1774,6 +2019,24 @@ as-is; IDs are never renumbered.
   branch on those who do not need one. The switching half survives as
   the voluntary `forge-branch` of POS.1110; the merging half stays
   git's.
+- **REJ.0180** A home for Claude's synthesis before the intent exists:
+  an intent 0.1 as a draft beside a draft brief, or a "notes" record
+  kind (P.07 of `sources/forge-run-record-health.md`). Rejected
+  2026-09-14: the brief is the home — a brief born by elicitation
+  carries Claude's part too (POS.0110), so nothing needs a second
+  file or a new kind; the principal set P.07 aside as the wrong fix
+  on 2026-09-13.
+- **REJ.0190** A "parked" document kind without a mining state, for
+  matter set aside from a layer (P.12, G.06). Rejected for now,
+  2026-09-14: parked matter lives as a THR of the intent or under a
+  Parked heading of the artefact it came from; moving it into a brief
+  was the error, not a missing kind.
+- **REJ.0200** An edit mechanism for large artefacts so that
+  temporary scripts disappear (the second half of P.10, G.04).
+  Rejected 2026-09-14: the temporary scripts were Claude's choice, not
+  a gap of the engine — the harness's exact-replacement edit tool
+  exists and is the rule (no shell for reading or editing project
+  files, the principal's word of 2026-09-14).
 
 ## Candidate structure for assignment
 

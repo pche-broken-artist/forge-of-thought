@@ -158,3 +158,21 @@ them here was THR.0070, resolved by DEC.0040 (no back-fill). -->
   acts, each with its reason in the ledger, and immutability is a
   process rule, not a mechanism. No later check raises either again.
 - **Date:** 2026-09-06
+
+## DEC.0120 — `main` of the engine rewritten once to remove a private directory
+- **Decision:** The save of intent 3.21–3.22 (commit b717a67) carried
+  the principal's private `tmp/` at the engine root into the public
+  repository — the directory had never been added to `.gitignore`
+  though he had asked for it the day before. On his word the commit
+  was amended without `tmp/` and `main` rewritten
+  (`git push --force-with-lease`, 1f7cc06), and `/tmp/` added to
+  `.gitignore`. Direct git outside the scripts and a rewrite of
+  `main`, knowingly, once. GitHub may still hold the objects of
+  b717a67 in its cache; only GitHub support can purge them, on the
+  principal's request if he wants certainty.
+- **Reason:** private content in a public repository outweighs the
+  rule that the scripts are the only door to git and that `main` is
+  never rewritten; the rewrite happened minutes after the push, before
+  any other clone could have taken it. Recorded here on 2026-09-14,
+  moved out of the ledger's Waiting section (POS.0160).
+- **Date:** 2026-09-04

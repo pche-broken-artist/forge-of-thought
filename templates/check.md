@@ -7,15 +7,11 @@ skills:
   - check-contract
 ---
 
-<!-- Skeleton of a check file (.claude/agents/check-<name>.md). A
-check file carries its front-matter and its Lens section, nothing
-else: the behaviour shared by every check — subject, way of working,
-report shape — is the contract skill .claude/skills/check-contract/SKILL.md,
-preloaded through the skills field above and never restated here
-(POS.0540, POS.1140). /check engine verifies that the named skill
-exists (who creates a check, and when: CLAUDE.md, Isolated reviewers;
-a rule verified by two checks is a defect). Delete this comment in the
-check file. -->
+<!-- Skeleton of a check file (.claude/agents/check-<name>.md):
+front-matter and Lens section, nothing else; shared behaviour is the
+contract skill named above (CLAUDE.md, Isolated reviewers). The
+description says what the check verifies and when it fits. Delete
+this comment in the check file. -->
 
 ## Lens
 

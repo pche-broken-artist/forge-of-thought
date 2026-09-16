@@ -5,15 +5,13 @@ disable-model-invocation: true
 ---
 
 Bring the project at `$1` into the forge (POS.1060). Git is done by
-`scripts/forge-clone.ps1` only — never run raw git commands, not even
-to read state (POS.0550).
+`scripts/forge-clone.ps1` only (CLAUDE.md, Persistence).
 
 1. Require the URL. The target directory is
    `projects/<repository name>` — the name falls out of the URL (no
    slug parameter); if the directory already exists, stop and report.
-2. The commit identity is a property of the project (POS.0950).
-   Propose the identity from the git identities in `identities.local.md` (read by path; POS.0950)
-   matching the URL's host — an offer, never a rule — and on the
+2. Propose the commit identity as CLAUDE.md, Persistence, says (from
+   `identities.local.md`, read by path, by the URL's host) and on the
    principal's word run
    `scripts/forge-clone.ps1 <url> -Name <name> -Email <email>`. Run
    the script bare only when the principal says his own git

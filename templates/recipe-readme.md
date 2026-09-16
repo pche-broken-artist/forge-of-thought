@@ -10,11 +10,9 @@ output: README.md
 
 # Recipe — readme
 
-<!-- Readme-genre recipe, scaffolded by /new-project and iterated via
-/recipe readme; every /release of the project regenerates the render;
-the output path is the project root, so the host shows it as the
-front page. What a recipe is and how it is versioned is
-templates/recipe.md's. -->
+<!-- Readme-genre recipe, iterated via /recipe readme; the output
+path is the project root, so the host shows it as the front page. The
+rules: CLAUDE.md, Document chain 7. -->
 
 ## Inputs
 <!-- What the README is generated from. A thought project: the ledger
