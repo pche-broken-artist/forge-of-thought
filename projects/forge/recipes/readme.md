@@ -2,9 +2,9 @@
 project: forge
 purpose: readme
 audience: humans arriving at the repository
-version: 0.44
-updated: 2026-09-12
-last_change: 0.44 (2026-09-12): "From Markdown to slides" and "Script prerequisites" gain scripts/md2docx.ps1 — a render to Word through pandoc (POS.1150 at intent 4.6).
+version: 0.45
+updated: 2026-09-18
+last_change: 0.45 (2026-09-18): the commit identity is git's, per host — identities.local.md gone from Quickstart, Setup and the outline, /setup offers the includeIf stanzas (POS.0950, POS.1050 at intent 4.12); /man and /manual in the Commands chapter (POS.1190).
 output: /README.md
 ---
 
@@ -124,8 +124,8 @@ summarising the newest row. -->
   fenced block: **Starting a new project** — `/new-project my-idea`,
   `/forge intent`, `/save`; **Bringing an existing project** —
   `/import-project <project url>` (comment: clones into `projects/` —
-  the commit identity is proposed from your `identities.local.md`
-  roster and confirmed by you) and
+  the commit identity is git's, resolved from your own
+  configuration) and
   `/forge <project-slug>` (comment: the slug is the repository's
   name; select the project before any work — the forge cannot guess
   it). Closing
@@ -332,32 +332,32 @@ summarising the newest row. -->
     run — usage draws from the same pool as Claude chat. Always
     start `claude` from the engine root so CLAUDE.md and
     CLAUDE.local.md load. Then run `/setup` once: it fills
-    `CLAUDE.local.md` (who the principal is, the conversation
-    language) and `identities.local.md` (your git identities per
-    host) from their templates with you in a short interview — both
-    gitignored, never committed — and creates `.claude/settings.local.json` with the
+    `CLAUDE.local.md` (the conversation language, who the principal
+    is) from its template with you in a short interview — gitignored,
+    never committed — and creates `.claude/settings.local.json` with the
     session model set to Fable, the strongest available model, which
     the whole forge including the blind reviewers runs on; it tells
     you so in one sentence, and `/model` or editing that file
     changes it at any time (permissions come from the shared
-    `.claude/settings.json`). It closes by offering one global git
-    guard — `user.useConfigOnly = true` appended to `~/.gitconfig` —
-    so a repository without a local identity fails aloud instead of
-    committing with a default; declined, it prints the line for you
-    to apply by hand. The identities themselves are set per
-    repository, proposed from your roster at every project creation
-    or import. `/setup` never overwrites existing files.
+    `.claude/settings.json`). It closes with your git identity, which
+    is git's own: it asks for the hosts you push to with a name and
+    an e-mail for each and offers to write the `includeIf` stanzas
+    into your `~/.gitconfig` — one identity per host, resolved by git
+    from the remote's URL — together with one global guard,
+    `user.useConfigOnly = true`, so a repository on a host with no
+    stanza fails aloud instead of committing with a default;
+    declined, it prints the lines for you to apply by hand. The forge
+    itself sets no identity anywhere. `/setup` never overwrites
+    existing files.
   - "Your projects" — each project is a directory under `projects/`
     and a git repository of its own: `/new-project` creates the
     files; `git init` in that directory and a remote if wanted are a
-    one-off act of yours, while the commit identity belongs to the
-    project: it is set locally in the repository, proposed from the
-    identity roster in `identities.local.md` by the origin's host and
-    confirmed by you. An
+    one-off act of yours, and the commit identity is git's, resolved
+    per host from your own configuration. An
     existing project is brought in with `/import-project <git-url>`,
     which clones it into `projects/<repository name>` through
-    `scripts/forge-clone.ps1`, sets the identity you confirm and
-    reports the identity the clone ended up with. The
+    `scripts/forge-clone.ps1` and reports the identity git resolves
+    for it. The
     engine ignores `projects/*` (except its own `projects/forge`)
     and the scripts find your project through its `.git`. A project
     without a repository is reported as "not under git" — a fact,
@@ -527,8 +527,8 @@ project kinds; naming with forge and the lib- prefix only>
 <consolidated list>
 ### Getting the forge and Claude Code
 <clone; install commands; sign-in; run from root; /setup
-(CLAUDE.local.md and identities.local.md interview,
-settings.local.json with Fable)>
+(CLAUDE.local.md interview, settings.local.json with Fable, the git
+identity per host offered)>
 ### Your projects
 <a repository of its own per project; /new-project creates files,
 git init is yours; /import-project brings an existing one through

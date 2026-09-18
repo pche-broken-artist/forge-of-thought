@@ -317,9 +317,6 @@ CLAUDE.md                  # this file — universal core
 CLAUDE.local.md            # instance facts (principal, conversation
                            # language) — gitignored, created by
                            # /setup from templates/CLAUDE.local.md
-identities.local.md        # git identities — gitignored, loaded by
-                           # nobody, read by path by /setup,
-                           # /new-project and /import-project
 README.md                  # for humans — a render (/render readme)
 RELEASE-NOTES.md           # release notes — a render (/render
                            # release-notes): one section per
@@ -396,13 +393,13 @@ project under `projects/` is a repository of its own
 (gitignored by the engine, `projects/forge` excepted), recognised by
 the scripts through `projects/<slug>/.git`. Initialising a project's
 repository and adding its remote are the
-user's one-off act at creation; the commit identity is a property of
-the project, set locally in the repository at its creation or import
-(proposed from the identity roster in `identities.local.md` by the
-origin's host, on the principal's word). The recommended global guard
-is `user.useConfigOnly = true` with no global `user.name`/`user.email`
-(offered by `/setup`), so a repository without a local identity fails
-aloud instead of taking a default. A project "not under git" is a
+user's one-off act at creation; the commit identity is git's,
+resolved per host by the user's own configuration (`includeIf`
+stanzas in `~/.gitconfig`, offered by `/setup`), and the forge sets
+none. The recommended global guard is `user.useConfigOnly = true`
+with no global `user.name`/`user.email` (offered by `/setup`), so a
+repository on a host with no stanza fails aloud instead of taking a
+default. A project "not under git" is a
 property, not a defect. The scripts in `scripts/` are the only door
 to git — reading state included, no exceptions; how many there are is
 not a rule. The scripts that serve the engine and every project repository, each
@@ -604,9 +601,9 @@ checks then say nothing of a missing assignment.
 ## Commands
 | Command | Purpose |
 |---|---|
-| `/setup` | first run after cloning the engine: create and fill `CLAUDE.local.md` and `identities.local.md` by interview, create `.claude/settings.local.json` with the model set to Fable (a notice, not a question), and offer the global git identity guard (`user.useConfigOnly = true` in `~/.gitconfig`); never overwrites, runs no git operation |
+| `/setup` | first run after cloning the engine: create and fill `CLAUDE.local.md` by interview, create `.claude/settings.local.json` with the model set to Fable (a notice, not a question), and offer the git identity per host (`includeIf` stanzas) with the global guard (`user.useConfigOnly = true`) in `~/.gitconfig`; never overwrites, runs no git operation |
 | `/new-project <slug>` | scaffold a project by kind — files only, never git: a thought project with its brief captured verbatim (locked if finished, draft otherwise), or a library (`lib-`) of shared material |
-| `/import-project <git-url>` | bring an existing project into `projects/` through `scripts/forge-clone.ps1` — the directory is the repository's name; the commit identity is set per repository, proposed from `identities.local.md` by the URL's host |
+| `/import-project <git-url>` | bring an existing project into `projects/` through `scripts/forge-clone.ps1` — the directory is the repository's name; the commit identity is git's, the script reports the one it resolves |
 | `/forge [slug]` | state map: artefacts, versions, possible next steps, stale renders |
 | `/forge <state> [slug]` | iterate the target artefact (`brief [name]`, `intent`, `assignment`, …); one definition file per state in `.claude/skills/forge/states/`, each declaring its inputs |
 | `/ingest [file] [slug]` | store and register external input — a file, or text pasted into the conversation — in sources/ and index it, asking what it is for and stopping before personal matter; bare = sweep sources/ |
@@ -620,6 +617,8 @@ checks then say nothing of a missing assignment.
 | `/save [slug] [-m "message"] [-Tag name]` | save one repository, or every one with changes: the `light` check, then commit and push on the current branch, no render; a tag on request; the procedure is `.claude/skills/save/SKILL.md` |
 | `/release [slug] [-m "message"] [-Tag name]` | release one repository from `main`: its checks, the README and release notes re-rendered, then `/save` with the release message and the tag `v<major>` at an approved major; the procedure is `.claude/skills/release/SKILL.md` |
 | `/spinoff <project> <group> <slug>` | split a group into its own project |
+| `/man [command \| method]` | the forge's manual, read from its own definitions: bare = the commands and the working methods, one line each; with a command, its purpose, arguments and roster (checks, lenses, personas, genres, states) with what each looks for; with a method, its paragraph and the skill that holds its shape |
+| `/manual …` | alias of `/man` |
 
 ## The system's own project
 `projects/forge/` is Forge of Thought itself run through its own process:

@@ -1,8 +1,8 @@
 ---
-version: 4.11
-date: 2026-09-15
+version: 4.12
+date: 2026-09-18
 status: draft
-last_change: 4.11 (2026-09-15): the single-source-of-truth check after the round of 4.9 settled — fourteen findings fixed as proposed: citations instead of restatements across commands, contracts, templates and agents; CLAUDE.md the owner of the reviewers' overlap and instance-facts rules and of the 72-column wrap; /ledger a door to the /forge map (POS.1070).
+last_change: 4.12 (2026-09-18): the commit identity handed back to git — per host by the user's own includeIf, the forge sets none, the roster file gone (POS.0950, POS.0550, POS.1050, POS.1060); /man with the alias /manual, the forge's manual read from its own definitions (POS.1190); THR.0390 opened — the forge in front of the group, the weekend plan.
 project: forge
 audience: principal + Claude only
 ---
@@ -927,8 +927,8 @@ position that already stands elsewhere.
   branch it is on, last commit, origin or "not under git"; changes
   nothing), `forge-clone.ps1` (brings an existing project in,
   POS.1060: clones a repository into `projects/<repository name>`,
-  never overwriting, and sets that repository's local commit identity
-  only when given `-Name` and `-Email`) and `forge-branch.ps1`
+  never overwriting, and reports the commit identity git resolves
+  for it) and `forge-branch.ps1`
   (creates a branch or switches to one, `main` included, bare reports
   the branch and lists the branches, and nothing else, POS.1110). No
   remote is configured anywhere in the forge: git carries that
@@ -1123,35 +1123,42 @@ position that already stands elsewhere.
   everything there reaches every subagent, the isolated reviewers
   included (THR.0240). Therefore only what must be always-on and is
   harmless in a public report lives there; the git identities —
-  names, e-mail addresses, hosts — live beside it in
-  `identities.local.md`, gitignored, loaded by nobody, read by path
-  by the three commands that set an identity (`/setup`,
-  `/new-project`, `/import-project`), and every reviewer contract
-  forbids instance facts in a report (CHL.0170; the split of an
+  names, e-mail addresses, hosts — live in the user's own git
+  configuration outside the engine (below), and every reviewer
+  contract forbids instance facts in a report (CHL.0170; the split of an
   existing instance file is the user's act on the release notes'
   word). The session model lives in `.claude/settings.local.json`
   (POS.0930). `CLAUDE.md` names the principal and the conversation
   language only as things that exist, never by value; the document
   language is the project's own (POS.0060). The scripts carry no URL and no
-  identity (POS.0830). The commit identity is a property of the
-  project, not of the host: set locally in every repository (`git
-  config user.name` / `user.email`) at its creation or import,
-  proposed by the command layer from the roster in
-  `identities.local.md` — matched by the origin's host, an offer,
-  never a rule — and set on the principal's word; no per-host
-  `includeIf`, since the host is only a correlate of the identity
-  and fails where one host serves two roles, and a file outside the
-  engine is beyond its boundary. The one global guard, offered by
-  `/setup` (POS.1050), is `user.useConfigOnly = true` with no global
-  `user.name`/`user.email`: a commit in a repository with no local
-  identity then fails aloud instead of silently taking a default (a
-  surviving global identity defeats the guard, and `/setup` says
-  so). A user's own configuration — per-host includes included —
-  remains his business and a legitimate way to resolve an identity.
-  `forge-save` checks that git resolves an identity for the
-  repository and, where it resolves none, reports it with the command
-  to set one and commits nothing until it is. Present shape 2026-09-06
-  (history 3.0, 3.6–3.8, 3.46). Resolves the scripts part of THR.0090.
+  identity (POS.0830). The commit identity is git's business, not
+  the forge's: it is resolved per git host by the user's own
+  configuration — one `includeIf "hasconfig:remote.*.url:<host
+  pattern>"` stanza per host in `~/.gitconfig`, pointing at a file
+  `~/.gitconfig-<host>` that carries that host's `user.name` and
+  `user.email` — and the forge sets no identity anywhere: no roster
+  file, no local `git config user.*` at a project's creation or
+  import. Reversed 2026-09-16, written 2026-09-18 (intent 4.12): from
+  3.46 to 4.11 the identity was a property of the project, set
+  locally in every repository and proposed by the command layer from
+  a roster in `identities.local.md`, and the per-host include was
+  rejected because a host is only a correlate of the identity and
+  fails where one host serves two roles. In the field the roster
+  duplicated what the user's includes already resolved, every
+  repository carried the same identity twice, and the forge had
+  gained a file, a template and three identity steps for a case that
+  had not occurred. The two-roles case is accepted as a risk the
+  user resolves by hand with a local `git config user.*` of his own,
+  which git lets win over the include. What the forge keeps:
+  `/setup` (POS.1050) offers to write the stanzas and the one global
+  guard — `user.useConfigOnly = true` with no global
+  `user.name`/`user.email`, so that a commit in a repository on a
+  host with no stanza fails aloud instead of silently taking a
+  default (a surviving global identity defeats the guard, and
+  `/setup` says so) — and `forge-save` checks that git resolves an
+  identity for the repository and, where it resolves none, reports
+  it with the command to set one and commits nothing until it is.
+  Resolves the scripts part of THR.0090.
 - **POS.0930** One model for the whole forge. Every command, chain
   state and reviewer runs on the session model; the reviewer agents
   declare `model: inherit` explicitly, so that the strongest model the
@@ -1285,6 +1292,22 @@ position that already stands elsewhere.
   target path and nothing else (POS.0930). Decided 2026-09-06 by
   walkthrough of THR.0290 and built the same day (history 3.44); the
   `/research` point stays in THR.0290.
+- **POS.1190 The forge explains itself from its own definitions.**
+  `/man [command|method]`, alias `/manual`, is the forge's manual —
+  a reader, never a text of its own (POS.1070). Bare, it lists the
+  commands from the Commands table of CLAUDE.md and the working
+  methods from its Working methods section, one line each. With a
+  command, it prints that command's purpose and arguments from the
+  `description` of its skill and the roster the command dispatches
+  over — checks, lenses, personas, genres or states — each with the
+  `description` of its own file and, where the file carries one, its
+  Lens or Checklist section, so that the user knows what a check
+  looks for before running it. With a method, the paragraph of
+  CLAUDE.md and the skill that holds the method's shape. Named after
+  the Unix manual, `/help` being a built-in of Claude Code; the alias
+  is a second skill whose whole body invokes the first, since a skill
+  has no alias field. Decided 2026-09-18 for the newcomer's first
+  hour and for the reader who opens the repository (THR.0390).
 
 ### Naming
 - **POS.0600** The system is named **Forge of Thought**: thoughts are
@@ -1487,9 +1510,8 @@ position that already stands elsewhere.
   `templates/CLAUDE.local.md` in an elicitation interview — the
   conversation language first, then who the principal is by role,
   since the first correction of a newcomer's run was the language of
-  the first question (P.15, G.13, 2026-09-14) — and
-  `identities.local.md` from `templates/identities.local.md` with the
-  git identities per host (POS.0950), and it creates `.claude/settings.local.json` with
+  the first question (P.15, G.13, 2026-09-14) — and it creates
+  `.claude/settings.local.json` with
   the session model set to **Fable**, without asking: the strongest
   available model is the forge's default (POS.0530), the whole forge
   including the blind reviewers runs on it (POS.0930), and a
@@ -1497,15 +1519,22 @@ position that already stands elsewhere.
   command says in one sentence that Fable was set and that `/model` or
   editing the file changes it at any time. `/setup` never overwrites:
   an existing instance file or `settings.local.json` is reported as it
-  stands, not replaced. The git-identities interview closes with an
-  offer: the global guard of POS.0950 — `user.useConfigOnly = true`
-  appended to `~/.gitconfig`, read first, never overwriting existing
-  content — written on the user's word; declined, printed for him to
-  apply by hand. Where `~/.gitconfig` carries a global `user.name` or
-  `user.email`, `/setup` says the guard only bites once that identity
-  is removed and offers the removal, again only on his word. `/setup`
-  runs no git operation — the user's git configuration file is the
-  one thing it may edit outside the engine, on his word. Named
+  stands, not replaced. The interview closes with the git identity,
+  which is git's (POS.0950): `/setup` asks for the hosts the user
+  pushes to, a name and an e-mail for each, and offers to write the
+  `includeIf` stanzas into the global git configuration file git
+  actually reads (found through `--show-origin`, the stanza paths
+  absolute — `~` in git's hands and in the shell's may differ, as on
+  the principal's machine on 2026-09-16), each `~/.gitconfig-<host>`
+  created with its `[user]` when missing, together with the global
+  guard `user.useConfigOnly = true` — the file read first, never
+  overwriting existing content, an existing stanza or guard reported
+  and left — all written on the user's word; declined, printed for
+  him to apply by hand. Where the file carries a global `user.name`
+  or `user.email`, `/setup` says the guard only bites once that
+  identity is removed and offers the removal, again only on his word.
+  `/setup` runs no git operation — the user's git configuration files
+  are the one thing it may edit outside the engine, on his word. Named
   `/setup`, not `/init`: Claude Code's built-in `/init` generates a
   CLAUDE.md, and the collision would send a newcomer to exactly the
   wrong action at the most sensitive moment. Decided 2026-09-01 after
@@ -1520,16 +1549,11 @@ position that already stands elsewhere.
   last commit, the origin, the commit identity git resolves for the
   fresh clone, and whether the project carries a ledger with a `kind:`
   header (its absence is a fact, not a defect). The script carries no
-  identity (POS.0830): it accepts `-Name` and `-Email` and sets the
-  repository's local commit identity only when given both. The
-  command layer passes `-Name`/`-Email` by default: the identity is a
-  property of the project (POS.0950), proposed from the roster in
-  `identities.local.md` by the URL's host and confirmed or overridden
-  on the principal's word. It runs the script bare only when the
-  principal says his own git configuration resolves the identity, and
-  the script reports which one the clone resolved; a clone left with
-  no identity is caught by `forge-save`, which reports and commits
-  nothing (POS.0950). Work then starts by selecting the project —
+  identity and sets none (POS.0830, POS.0950): it reports the
+  identity git resolves for the clone from the user's own
+  configuration, and a clone for which git resolves none is caught
+  by `forge-save`, which reports and commits nothing (POS.0950). Work
+  then starts by selecting the project —
   `/forge <slug>` — because the engine does not track it and cannot
   guess it.
 
@@ -1934,6 +1958,35 @@ position that already stands elsewhere.
   them; and the headless build had no `document-skills:pptx` skill
   available and built the deck with python-pptx instead — to watch at
   the next build. Opened 2026-09-14 from the ledger.
+- **THR.0390** The forge in front of the group. The principal hands
+  the forge to people in the group whose judgement matters to him,
+  over the weekend of 2026-09-19: a pitch document, the link to the
+  public repository, `agentic-platform` as the worked example (its
+  repository on the company host, read access to be given), a live
+  demonstration if the occasion allows. What is to land: the concept
+  holds, the principal carries it, the teams could try it — and that
+  he works with AI hands-on. Plan of 2026-09-18, in this order: (1)
+  `agentic-platform` polished and released as the exemplar after a
+  `/check project` — its `.pptx` is of an older recipe edition, three
+  legacy renders with dates in their names would confuse a reader;
+  (2) the pitch as a document: a recipe of this project from
+  `templates/recipe.md` (no genre for a document yet), rendered and
+  built into `.docx` through `scripts/md2docx.ps1` — two to three
+  pages, the example named with its numbers taken from its own
+  ledger, the two links, a paragraph on how to try it; the existing
+  executive pitch (THR.0380) is for a C-level audience that knows AI
+  as a chat and names no project, so it is not this document; (3) a
+  fresh-clone test of the engine — `/setup`, `/new-project`, ten
+  minutes of `/forge intent` as a newcomer — then `/release`, so the
+  link shows a README at the current version; (4) a demonstration
+  script only if a demonstration is to happen: the `/forge` map of
+  `agentic-platform`, one `/challenge`, a walkthrough of two items.
+  Not in the weekend: new lenses, personas or commands beyond `/man`
+  (POS.1190); the README split (THR.0340) stays after THR.0230. The
+  identity change (POS.0950) precedes (3), since a newcomer then has
+  one thing less to fill in. Open: the register of the pitch
+  document — technical leadership or business leadership — asked
+  2026-09-18, not yet answered. Opened 2026-09-18.
 
 Note: the ID THR.0120 was inadvertently used twice — first for the
 readme-recipe thread (opened 1.14, closed 1.16), then for the

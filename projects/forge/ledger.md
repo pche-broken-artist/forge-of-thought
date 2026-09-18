@@ -2,7 +2,8 @@
 project: forge
 kind: thought
 language: en
-updated: 2026-09-15
+terminal: intent
+updated: 2026-09-19
 ---
 
 # Ledger — Forge of Thought
@@ -27,7 +28,7 @@ absorbed it; Note says what remains (partial) or the REJ (dropped). -->
 ## Documents
 | File | Version | Status | Date |
 |---|---|---|---|
-| 10-intent.md | 4.11 | draft | 2026-09-15 |
+| 10-intent.md | 4.12 | draft | 2026-09-18 |
 | 20-assignment.md | — | not planned: the handover artefacts of this project are the core itself (CLAUDE.md, templates/, .claude/) and README.md | — |
 | decisions.md | — | 12 records (DEC.0010–0120) | 2026-09-14 |
 
@@ -153,23 +154,24 @@ intent version for accepted, DEC.NNNN for rejected. -->
 | CHL.0190 | accepted | Release 4.0 is queued and nothing says what an approved major of this intent means — a sign-off with no counterparty and no test (minor) | 2026-09-06-challenge-cto.md | intent 3.46 (POS.0300: what a major of the forge intent means and must pass) |
 
 ## Waiting on principal
-- Order (2026-09-14, intent 4.8): 1. THR.0350's leftovers; 2. the
-  briefs `brd` and `layers` side by side.
+- Order (2026-09-18, intent 4.12): 1. THR.0390 — the weekend of
+  2026-09-19, its four steps in the thread's order; 2. THR.0350's
+  leftovers; 3. the briefs `brd` and `layers` side by side.
+- THR.0390 — the forge in front of the group; the register of the
+  pitch document unanswered (technical or business leadership).
+- Git identity per host — written at 4.12 (POS.0950). Verified
+  2026-09-18 on the principal's machine that the two `includeIf`
+  stanzas resolve (a company-host repository gets the company
+  identity from `~/.gitconfig-<host>`). Left, step by step on his
+  word: delete `identities.local.md` at the engine root; unset the
+  local `user.name`/`user.email` in the four repositories so the
+  includes govern; remove the global `user.name`/`user.email` and set
+  `user.useConfigOnly = true`.
 - THR.0350 — walked through (intent 4.9); left: the hook watched in
   the next walkthroughs (POS.1170). The ledger sweep done at 4.10.
 - Check agents `light`, `engine`, `single-source-of-truth` not
   registered in the session of 2026-09-14 though their files are
   sound; verify after a restart, else a finding for `/save`.
-- Git identity per host, decided 2026-09-16 (reverses the includeIf
-  rejection in POS.0950; intent round pending: `/setup` writes the
-  stanzas, `forge-clone` loses `-Name`/`-Email`). Half done on the
-  principal's machine from remote control: two `includeIf` stanzas
-  in the global gitconfig point at `~/.gitconfig-<host>` files, but
-  git's home and the shell's home are different drives there, so the
-  files lie where git does not look; the engine got a local identity
-  as the minimum for this save. To finish at the computer: point the
-  stanzas at the files by absolute path, or move the files; the
-  `useConfigOnly` guard is not set in that gitconfig either.
 - THR.0360 — a layer with an external audience, opened 2026-09-14;
   worked in the brief `brd`.
 - THR.0370 — Mermaid diagrams in Word; deferred 2026-09-12, open.
