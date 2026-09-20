@@ -1,6 +1,6 @@
 ---
 name: check-light
-description: Check "light" — verifies a project's bookkeeping: front-matter against the history companion, ledger tables against the files, dependencies and resource indexes against the directories. Fit for a save. Verifies conformance with the conventions. Not a critic of the documents, not a challenger of the thinking.
+description: 'Check "light" — verifies a project''s bookkeeping: front-matter against the history companion, ledger tables against the files, dependencies and resource indexes against the directories. Fit for a save. Verifies conformance with the conventions. Not a critic of the documents, not a challenger of the thinking.'
 tools: Read, Glob, Grep
 model: inherit
 skills:

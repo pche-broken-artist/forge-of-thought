@@ -2,7 +2,7 @@
 version: 0.1
 date: YYYY-MM-DD
 status: draft            # draft | in_review | approved | superseded
-last_change: <one line from the newest row of $1>
+last_change: <one line from the newest row of 20-assignment.history.md>
 project: <slug>
 audience: recipients
 ---
@@ -26,10 +26,9 @@ it addresses, what the reader needs in order to act. No solutioning. -->
 - **OOS.0010** …
 
 ## Requirements
-<!-- REQ.NNNN, items in tens, each new group starting at the next hundred.
-Group with plain ### headings when clusters emerge. Use shall / shall not.
-No priority tags: everything is essential unless an item carries a note
-reading "optional". Defined Terms are capitalised. -->
+<!-- REQ.NNNN. Numbering: CLAUDE.md, ID scheme; wording: CLAUDE.md,
+Requirement style. Group with plain ### headings when clusters
+emerge. -->
 
 ### <Group>
 - **REQ.0010** …

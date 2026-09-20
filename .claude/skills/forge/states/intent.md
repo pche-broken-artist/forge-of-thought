@@ -15,7 +15,9 @@ to extract what is in his head, including what he has not yet articulated.
 2. If 10-intent.md does not exist, create it from `templates/intent.md` as
    v0.1, with its companion `10-intent.history.md` from
    `templates/history.md`: consolidate the brief into Essence and
-   Positions, and derive the initial Open threads.
+   Positions, and derive the initial Open threads. The status of an
+   intent consolidated this way, and the walkthrough it awaits:
+   CLAUDE.md, Document chain 2.
 3. Interview the principal.
    Rules:
    - One theme at a time; prefer few sharp questions over questionnaires.

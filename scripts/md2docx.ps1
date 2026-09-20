@@ -23,10 +23,18 @@
     package manager). pandoc is resolved from PATH.
 
     Styles come from a reference document: -Reference <path to a
-    .docx>, typically a file in a library project (projects/lib-<company>/
-    sources/). pandoc takes the styles of the reference document and
-    ignores its content. Without -Reference, pandoc's built-in styles
-    apply.
+    .docx, or a Word template .dotx/.dotm>, typically a file in a
+    library project (projects/lib-<company>/sources/). pandoc takes
+    the styles of the reference document and ignores its content.
+    Without -Reference, pandoc's built-in styles apply.
+
+    The page is A4 by default. pandoc's built-in reference document
+    names no page size, and Word then falls back to US Letter; so
+    without -Reference the script hands pandoc its own built-in
+    reference with the page size written in (-PageSize A4 | Letter,
+    A4 when absent). With -Reference the page setup is the reference
+    document's own and -PageSize is not applied: a template decides
+    its own paper.
 
     Use -Help for a short usage summary.
 #>
@@ -35,9 +43,14 @@ param(
     [Parameter(Position = 0)]
     [string]$Md,
 
-    # Path to a .docx whose styles the output takes (pandoc
+    # Path to a .docx, .dotx or .dotm whose styles the output takes (pandoc
     # --reference-doc). Default: none - pandoc's built-in styles.
     [string]$Reference,
+
+    # Page size of the output when no -Reference is given. Default: A4.
+    # With -Reference the reference document's own page setup applies.
+    [ValidateSet('A4', 'Letter')]
+    [string]$PageSize = 'A4',
 
     # Output .docx path. Default: next to the input, same basename.
     [Alias('o')]
@@ -56,14 +69,17 @@ function Show-Usage {
 md2docx.ps1 - convert a Markdown render into a Word document with pandoc
 
 USAGE
-  ./md2docx.ps1 <render.md> [-Reference <styles.docx>] [-Out <file.docx>]
+  ./md2docx.ps1 <render.md> [-Reference <styles.docx>] [-PageSize A4|Letter] [-Out <file.docx>]
 
   <render.md>         the Markdown render; its YAML front-matter is
                       metadata and does not appear in the document
-  -Reference <path>   a .docx whose styles the output takes (its
-                      content is ignored), e.g. a file in a library
+  -Reference <path>   a .docx, .dotx or .dotm whose styles the output
+                      takes (its content is ignored), e.g. a file in a library
                       project's sources/; without it pandoc's built-in
                       styles apply
+  -PageSize <size>    A4 (default) or Letter - the page of the output
+                      when no -Reference is given; with -Reference the
+                      reference document's own page setup applies
   -Out <file.docx>    output path (default: next to the input, same name)
   -Help               this text
 
@@ -95,10 +111,10 @@ $MdFull = (Resolve-Path -LiteralPath $Md).Path
 $ReferenceFull = $null
 if ($Reference) {
     if (-not (Test-Path -LiteralPath $Reference)) {
-        throw "Reference '$Reference' not found - name a .docx file by path."
+        throw "Reference '$Reference' not found - name a .docx, .dotx or .dotm file by path."
     }
-    if ([System.IO.Path]::GetExtension($Reference) -ne '.docx') {
-        throw "Reference '$Reference' is not a .docx file."
+    if ([System.IO.Path]::GetExtension($Reference) -notin @('.docx', '.dotx', '.dotm')) {
+        throw "Reference '$Reference' is not a .docx, .dotx or .dotm file."
     }
     $ReferenceFull = (Resolve-Path -LiteralPath $Reference).Path
 }
@@ -125,13 +141,63 @@ $args = @(
     '--resource-path', (Split-Path $MdFull -Parent),
     '--output', $OutFull
 )
-if ($ReferenceFull) { $args += @('--reference-doc', $ReferenceFull) }
+
+# --- the page size of the built-in styles ---------------------------------
+# pandoc's built-in reference document names no page size, and Word then
+# falls back to US Letter. Without -Reference the script writes pandoc's
+# own built-in reference to a temporary file, writes the page size into
+# its section properties and hands that to pandoc; the styles stay
+# pandoc's built-in ones. Sizes in twentieths of a point.
+$TempReference = $null
+if (-not $ReferenceFull) {
+    $sizes = @{ A4 = @(11906, 16838); Letter = @(12240, 15840) }
+    $TempReference = Join-Path ([System.IO.Path]::GetTempPath()) `
+        ('md2docx-' + [guid]::NewGuid().ToString('N') + '.docx')
+    & $pandoc.Source '--output' $TempReference '--print-default-data-file' 'reference.docx'
+    if ($LASTEXITCODE -ne 0 -or -not (Test-Path -LiteralPath $TempReference)) {
+        throw "pandoc could not write its built-in reference document (exit code $LASTEXITCODE)."
+    }
+    Add-Type -AssemblyName System.IO.Compression.FileSystem
+    $zip = [System.IO.Compression.ZipFile]::Open($TempReference, 'Update')
+    try {
+        $entry = $zip.GetEntry('word/document.xml')
+        if (-not $entry) { throw "pandoc's built-in reference carries no word/document.xml." }
+        $reader = [System.IO.StreamReader]::new($entry.Open())
+        try { $xml = $reader.ReadToEnd() } finally { $reader.Dispose() }
+
+        $pgSz = '<w:pgSz w:w="{0}" w:h="{1}" />' -f $sizes[$PageSize][0], $sizes[$PageSize][1]
+        if ($xml -match '<w:pgSz\b[^>]*/>') {
+            $xml = [regex]::Replace($xml, '<w:pgSz\b[^>]*/>', $pgSz)
+        } else {
+            $at = $xml.LastIndexOf('</w:sectPr>')
+            if ($at -lt 0) { throw "pandoc's built-in reference carries no section properties to set the page size in." }
+            $xml = $xml.Insert($at, $pgSz)
+        }
+
+        $entry.Delete()
+        $writer = [System.IO.StreamWriter]::new(
+            $zip.CreateEntry('word/document.xml').Open(),
+            [System.Text.UTF8Encoding]::new($false))
+        try { $writer.Write($xml) } finally { $writer.Dispose() }
+    } finally {
+        $zip.Dispose()
+    }
+}
+
+$referenceDoc = if ($ReferenceFull) { $ReferenceFull } else { $TempReference }
+$args += @('--reference-doc', $referenceDoc)
 
 Write-Host ("md2docx    {0} -> {1}" -f (Split-Path $MdFull -Leaf), $OutFull)
-Write-Host ("reference  {0}" -f $(if ($ReferenceFull) { $ReferenceFull } else { "none - pandoc's built-in styles" }))
+Write-Host ("reference  {0}" -f $(if ($ReferenceFull) { $ReferenceFull } else { "none - pandoc's built-in styles, page $PageSize" }))
 
-& $pandoc.Source @args
-if ($LASTEXITCODE -ne 0) { throw "pandoc exited with code $LASTEXITCODE." }
+try {
+    & $pandoc.Source @args
+    if ($LASTEXITCODE -ne 0) { throw "pandoc exited with code $LASTEXITCODE." }
+} finally {
+    if ($TempReference -and (Test-Path -LiteralPath $TempReference)) {
+        Remove-Item -LiteralPath $TempReference -Force -Confirm:$false
+    }
+}
 if (-not (Test-Path -LiteralPath $OutFull)) { throw 'pandoc finished but produced no output file.' }
 
 $size = [math]::Round((Get-Item -LiteralPath $OutFull).Length / 1KB, 0)

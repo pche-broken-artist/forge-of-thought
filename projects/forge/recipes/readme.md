@@ -2,9 +2,9 @@
 project: forge
 purpose: readme
 audience: humans arriving at the repository
-version: 0.45
-updated: 2026-09-18
-last_change: 0.45 (2026-09-18): the commit identity is git's, per host — identities.local.md gone from Quickstart, Setup and the outline, /setup offers the includeIf stanzas (POS.0950, POS.1050 at intent 4.12); /man and /manual in the Commands chapter (POS.1190).
+version: 0.49
+updated: 2026-09-20
+last_change: 0.49 (2026-09-20): the scripts are the only door to git for Claude and every command of the forge - "intended" is gone, and the README no longer tells its human reader a ban that is not his.
 output: /README.md
 ---
 
@@ -89,6 +89,16 @@ summarising the newest row. -->
   (POS.0620). No conventions in the masthead, and never anchor the
   text to a chain version number — the intent version in the title
   is the only version that appears.
+- Directly below the masthead and before Section 1 stands one short
+  paragraph for the reader with little time, with no heading of its
+  own and fixed in wording (a further exception to "derivable from
+  the inputs": the two files are renders of this project, and the
+  recipe carries their paths): "Short on time? Two one-page notes
+  say it briefly:
+  [for a CTO](projects/forge/renders/cto-pitch.md) and
+  [for a CEO](projects/forge/renders/ceo-pitch.md). Each has a Word
+  version beside it." Two sentences and the two links, nothing
+  added; the links are relative, exactly as given.
 - Section 1 is the challenge, its heading the question — fixed
   wording "Better with AI, or replaced by it?" — and its body the
   pain the forge answers, scannable. The body opens with the fixed
@@ -156,11 +166,9 @@ summarising the newest row. -->
   there that the later sections do not also carry — the story
   illustrates, it never legislates.
 - The "How the work feels" section is drawn from the Working methods
-  section of CLAUDE.md only: the eight names are load-bearing and
-  must appear verbatim (Walkthrough, Propose never decide, Step by
-  step, Elicitation interview, Draft early, Reflect back,
-  Intent-first, Recommend do not push); the one-sentence glosses are
-  re-derived.
+  section of CLAUDE.md only: every method named there appears, in
+  CLAUDE.md's order and under its name verbatim; the one-sentence
+  glosses are re-derived.
   It never mentions commands that no longer exist.
 - The worked example: until an exemplar project is chosen and
   published (THR.0200 of the intent), the subsection "What it looks
@@ -227,9 +235,10 @@ summarising the newest row. -->
   into an actual PowerPoint file, with a `.potx` template named by
   path — typically a document of a library project;
   `scripts/md2docx.ps1` turns any render into a Word file through
-  pandoc, styles from a reference `.docx` named by path, Mermaid
-  diagrams as blocks of code; the Markdown stays the source of
-  truth; all other format conversion happens outside the forge.
+  pandoc, styles from a reference `.docx` or Word template named by
+  path, the page A4 by default, Mermaid diagrams as blocks of code;
+  the Markdown stays the source of truth; all other format conversion
+  happens outside the forge.
 - Conventions includes: the ID scheme and prefix table; the Terms
   rule; the language rule (as above); the requirement style —
   illustrated by this one fixed example, quoted verbatim and marked
@@ -319,7 +328,7 @@ summarising the newest row. -->
   principal, a render is generated from artefacts (the article and
   its translation in the diagram illustrate it).
 - Setup is written for a reader who has never used Claude Code and
-  has five parts:
+  has these parts:
   - "Prerequisites" — one consolidated list: git; PowerShell 7
     (pwsh) — the scripts are PowerShell, needed on macOS/Linux too;
     Python 3 (for markitdown); a paid Claude subscription.
@@ -373,9 +382,10 @@ summarising the newest row. -->
     typically a document of a library project — or none, in which
     case Claude designs the visuals; `md2docx.ps1` needs pandoc
     (https://pandoc.org/installing.html), with a reference document
-    named by path (`-Reference <file.docx>`) or none, in which case
-    pandoc's built-in styles apply; the git scripts need nothing
-    beyond git.
+    named by path (`-Reference`, a `.docx`, `.dotx` or `.dotm`) or
+    none, in which case pandoc's built-in styles apply on an A4
+    page (`-PageSize Letter` for US Letter); the git scripts need
+    nothing beyond git.
   - "Saving and syncing" — two doors: `/save` runs the light check,
     then commits and pushes on the current branch, no render;
     `/release`, from `main` only, runs its checks, settled with the
@@ -383,8 +393,8 @@ summarising the newest row. -->
     offers `critique essence` once, re-renders the README and release
     notes and then saves with the release message and, at an approved
     major, the tag `v<major>`; the scripts follow as the underlying
-    mechanism and the only intended door to git (stated here and
-    nowhere else), each serving the engine and every project
+    mechanism and, for Claude and every command of the forge, the
+    only door to git (stated here and nowhere else), each serving the engine and every project
     repository — a bare save commits each repository with changes on
     its own and pushes where it has a remote; `main` is the released
     line, branches are voluntary (`forge-branch` creates or switches,
@@ -409,7 +419,9 @@ summarising the newest row. -->
   when it is run, and an install note where one is needed pointing
   to Setup. Purposes come from CLAUDE.md — the Persistence section
   for the git scripts, the external-inputs rule for `doc2md.ps1`,
-  the renders rule for `md2pptx.ps1`; invent nothing beyond them.
+  the renders rule for `md2pptx.ps1` and `md2docx.ps1`, the
+  Walkthrough paragraph of Working methods for
+  `hook-walkthrough.ps1`; invent nothing beyond them.
 - The section "Author and licence" precedes "About this README" and
   carries this fixed text verbatim, nothing more: "Forge of Thought ©
   Petr Chlumsky (PCHe) — petr.chlumsky@gmail.com. Licensed under
@@ -439,6 +451,9 @@ repository: slash commands, isolated agents — challenger personas
 and critic lenses — templates, conventions),
 where the chain ends today as fact — no mention of who the current
 principal is>
+
+<the fixed "Short on time?" paragraph with the two links to the CTO
+and the CEO note, exactly as the instruction gives it>
 
 ## 1. Better with AI, or replaced by it?
 <the fixed answer sentence and lead-in, then the five pain bullets
@@ -479,9 +494,10 @@ here once one is published>
 ## 5. How the work feels
 <one lead sentence: the forge is as much a way of working as a set of
 files, and these are the named methods of that work — the vocabulary
-you and Claude share; then a bold-name list of the eight Working
-methods from CLAUDE.md, one sentence each, walkthrough first and
-given two sentences because it is the one you will use most;
+you and Claude share; then a bold-name list of the Working methods
+of CLAUDE.md, every one of them, one sentence each, walkthrough
+first and given two sentences because it is the one you will use
+most;
 close with one sentence: none is a command, you invoke any of them in
 a word>
 
@@ -540,7 +556,8 @@ forge-clone; "not under git" is a fact>
 render; /release from main: its checks, README and release notes,
 then save with
 the release message and the major's tag; the scripts as mechanism
-and the only intended door to git, serving the engine and every
+and, for Claude and every command, the only door to git, serving
+the engine and every
 project repository; main the released line, branches voluntary via
 forge-branch, one remote per repository, no URL>
 ### Upgrading

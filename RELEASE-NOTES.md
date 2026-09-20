@@ -1,11 +1,11 @@
 ---
 project: forge
 render: release-notes
-generated: 2026-09-11
+generated: 2026-09-20
 recipe: recipes/release-notes.md v0.10
 inputs:
   - projects/forge/10-intent.history.md
-  - projects/forge/10-intent.md v4.5
+  - projects/forge/10-intent.md v4.17
   - projects/forge/decisions.md
   - RELEASE-NOTES.md (previous edition, released sections)
 ---
@@ -16,6 +16,192 @@ One section per release of the engine, newest first, for the user who
 takes upgrades through `forge-pull`; Action required comes first in
 every section; the fine-grained log with the reasons lives in
 `projects/forge/10-intent.history.md`.
+
+## 4.17 — 2026-09-20
+
+### Changed
+- The README says the scripts are the only door to git for Claude and
+  for every command of the forge (readme recipe 0.49; CLAUDE.md,
+  Persistence). For you: nothing forbids you your own git from the
+  shell; the rule binds the forge, not you.
+
+### Fixed
+- The agents `check-engine` and `critic-essence` have their
+  descriptions quoted, and every reviewer skeleton says when to quote
+  (`.claude/agents/`, `templates/`). For you: saving an agent file on
+  Windows no longer risks the agent silently leaving the roster.
+- `/new-project` takes a slug and nothing else, as it always did; the
+  hint of a working title is gone
+  (`.claude/skills/new-project/SKILL.md`). For you: the command's help
+  matches what it does.
+
+## 4.16 — 2026-09-20
+
+### Added
+- `templates/decisions.md`, the skeleton of `decisions.md` and of a DEC
+  record (POS.1070). For you: a new project gets its decisions file in
+  the forge's shape; an existing one keeps what it has.
+- `scripts/forge-status.ps1` opens with the global git configuration
+  file git reads. For you: one look tells you where your identity
+  stanzas live.
+
+### Changed
+- The tag `v<major>` is proposed at the release of any repository whose
+  intent stands at an integer version, not of the engine alone
+  (`.claude/skills/release/SKILL.md`). For you: your own project is
+  offered its tag at 1.0, on your word.
+- `/setup` learns the path of your global git configuration from
+  `scripts/forge-status.ps1` and asks git nothing directly
+  (`.claude/skills/setup/SKILL.md`). For you: nothing to do; `/setup`
+  works as before.
+- The README lists every working method of CLAUDE.md, "In pieces" among
+  them (readme recipe 0.48). For you: the method you could already use
+  is now in the manual.
+
+### Fixed
+- The checks `light` and `single-source-of-truth` run again: their
+  agents had not registered since 2026-09-14 (`.claude/agents/`,
+  `templates/check.md`). For you: `/save` can run its check; when you
+  write an agent file, quote a description that carries a colon and a
+  space.
+- `/walkthrough` no longer appears among the commands: the walkthrough
+  is a method, not a command (`.claude/skills/walkthrough/SKILL.md`).
+  For you: one entry less in the slash menu, nothing to change in how
+  you work.
+
+## 4.15 — 2026-09-20
+
+Nothing for the user of the engine.
+
+## 4.14 — 2026-09-20
+
+### Added
+- The per-prompt hook now repeats three rules of conduct to Claude: use
+  the forge's scripts, explain and ask before running a command of its
+  own, change nothing that was not agreed and approved (THR.0400,
+  `scripts/hook-walkthrough.ps1`). For you: after `forge-pull` Claude is
+  reminded of these at every prompt; nothing is enforced yet, so an
+  automatic permission mode still lets commands through.
+
+## 4.13 — 2026-09-20
+
+### Changed
+- A Word file built without a reference document is A4, no longer US
+  Letter; `-PageSize Letter` brings Letter back (POS.1150,
+  `scripts/md2docx.ps1`). For you: your `.docx` outputs print on A4
+  without a template; if you rely on Letter, pass `-PageSize Letter`.
+- `-Reference` takes a Word template `.dotx` or `.dotm` besides a
+  `.docx` (POS.1150). For you: you can point the conversion at a company
+  template as it is, without saving it as a document first.
+
+## 4.12 — 2026-09-18
+
+### Action required
+- The commit identity is git's, per host through `includeIf` in your
+  `~/.gitconfig` (POS.0950). For you: after `forge-pull`, delete your
+  `identities.local.md`; where your repositories carry a local
+  `user.name`/`user.email` set by the forge, unset them so your includes
+  govern, or keep them — git lets the local one win; `/setup` writes the
+  stanzas and the guard on a new machine.
+
+### Added
+- `/man [command or method]`, alias `/manual`: the forge's manual, read
+  from CLAUDE.md, the skills and the agents (POS.1190). For you: `/man`
+  lists the commands and the working methods, `/man check` shows every
+  check and what it looks for.
+- THR.0390: the forge in front of the group, the plan for the weekend of
+  2026-09-19. For you: nothing changes yet.
+
+### Changed
+- `/setup` no longer interviews for git identities; it offers the
+  `includeIf` stanzas and the guard (POS.1050). For you: one interview
+  less on a new machine; the identity comes from the file git reads.
+- `scripts/forge-clone.ps1` lost `-Name` and `-Email`; `/import-project`
+  and `/new-project` set and propose no identity (POS.0550, POS.1060).
+  For you: a clone reports the identity git resolves; none resolved is
+  caught by `forge-save`.
+
+## 4.11 — 2026-09-15
+
+### Changed
+- Every rule of the operating layer is now written once and cited
+  elsewhere (POS.1070); CLAUDE.md owns the reviewers' overlap and
+  instance-facts rules and the prose wrap. For you: nothing to do; a
+  rule is found at its owner and the commands read shorter.
+- `/ledger` reports as the bare `/forge` map does. For you: the same
+  report from either door.
+
+## 4.10 — 2026-09-14
+
+### Changed
+- This project's ledger now cites its threads and records instead of
+  retelling them (POS.0160). For you: read the ledger for state and
+  follow the ID for substance; your own ledgers may be swept the same
+  way at their next save.
+
+## 4.9 — 2026-09-14
+
+### Action required
+- The engine's `.claude/settings.json` now carries a `UserPromptSubmit`
+  hook (POS.1170). For you: after `forge-pull`, restart the session once
+  so the hook loads; it adds two lines of context at every prompt.
+
+### Added
+- `/ingest` takes pasted text, always asks what a source is for, and
+  stops before storing personal matter (POS.1040). For you: paste a
+  source into the conversation and `/ingest` stores it; expect one
+  question per source.
+- In pieces (POS.1160). For you: send a long thought in several messages
+  and close with "done"; Claude reacts to the whole, not to the parts.
+- `terminal:` in the ledger header names the artefact a project's chain
+  ends at (POS.0160). For you: a project that ends at a report declares
+  it and `/forge` stops reporting a missing assignment.
+- A `walkthrough` skill holds the shape of the walkthrough and the
+  elicitation interview (POS.0850). For you: CLAUDE.md is shorter and
+  the method is read when one runs; nothing to do.
+
+### Changed
+- A brief born by elicitation carries everything the conversation,
+  research and sources yielded, foreign blocks marked *(Claude)* or
+  *(source: path)* (POS.0110). For you: let Claude's part into the brief
+  and sort it in the intent; a brief you hand over finished is
+  unchanged.
+- A thread carries its origin and an intent Claude consolidated is
+  `in_review` until walked through (POS.0230, POS.1180). For you: no
+  lower layer is built from an intent you have not walked through.
+- Waiting on principal cites threads and records, never copies them
+  (POS.0160). For you: the ledger shrinks to pointers at its next sweep;
+  an unfinished conversation is saved into its thread.
+- `/setup` asks the conversation language before the role (POS.1050).
+  For you: a newcomer's first question arrives in the right language on
+  the second run.
+
+### Rejected
+- A "notes" kind or an intent beside a draft brief (REJ.0180), a
+  "parked" kind (REJ.0190), an edit mechanism for large artefacts
+  (REJ.0200). For you: nothing changes.
+
+## 4.8 — 2026-09-14
+
+### Changed
+- THR.0230, THR.0190 and THR.0300 to be worked as one brief `layers`
+  after THR.0350; THR.0350 given first priority (THR.0230, THR.0350).
+  For you: nothing changes yet.
+
+## 4.7 — 2026-09-13
+
+### Added
+- THR.0350: the lessons of the first run in the field, from
+  `sources/forge-run-record-health.md`, to be walked through. For you:
+  nothing changes yet.
+
+## 4.6 — 2026-09-12
+
+### Added
+- `scripts/md2docx.ps1`: a Markdown render to Word through pandoc,
+  styles from a reference `.docx` named by path (POS.1150). For you: you
+  install pandoc once and hand recipients a Word file; Mermaid diagrams
+  arrive as code for now.
 
 ## 4.5 — 2026-09-11
 

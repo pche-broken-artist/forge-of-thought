@@ -1,6 +1,6 @@
 ---
 description: Scaffold a new project from templates — a thought project (the chain) or a library (material only); files only, never git
-argument-hint: "<slug> [working title]"
+argument-hint: "<slug>"
 disable-model-invocation: true
 ---
 
@@ -47,7 +47,8 @@ steps 3–5 below do not apply.
    - `projects/$1/ledger.md` from `templates/ledger.md`, filled with
      project slug, `kind: thought`, the language and today's date;
      brief row as 0.1 draft, pending
-   - `projects/$1/decisions.md` with a one-line header only
+   - `projects/$1/decisions.md` from `templates/decisions.md` — the
+     slug filled, the sample record removed
    - `projects/$1/recipes/readme.md` from `templates/recipe-readme.md`
      and `projects/$1/recipes/release-notes.md` from
      `templates/recipe-release-notes.md` — slug and date filled, the
@@ -71,6 +72,3 @@ steps 3–5 below do not apply.
    `/forge intent` to start the elicitation interview — and remind
    the principal that the project is not under git until he
    initialises its repository.
-
-File names in the chain are numbered (`00-brief.md`, `10-intent.md`,
-`20-assignment.md`) so later layers can be added without renaming.

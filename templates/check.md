@@ -10,8 +10,10 @@ skills:
 <!-- Skeleton of a check file (.claude/agents/check-<name>.md):
 front-matter and Lens section, nothing else; shared behaviour is the
 contract skill named above (CLAUDE.md, Isolated reviewers). The
-description says what the check verifies and when it fits. Delete
-this comment in the check file. -->
+description says what the check verifies and when it fits; when it
+carries a colon followed by a space, put the whole description in
+single quotes (an apostrophe inside doubled), or the agent does not
+register. Delete this comment in the check file. -->
 
 ## Lens
 

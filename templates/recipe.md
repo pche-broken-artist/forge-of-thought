@@ -4,7 +4,7 @@ purpose: <purpose>
 audience: <audience>
 version: 0.1
 updated: YYYY-MM-DD
-last_change: <one line from the newest row of $1>
+last_change: <one line from the newest row of recipes/<recipe>.history.md>
 # output: <path>   # optional — overrides the default renders/<recipe>.md
 ---
 
@@ -25,4 +25,4 @@ register. Everything the renderer must know beyond the template. -->
 
 ## Template
 <!-- The literal skeleton of the render, with placeholders. Always
-Markdown — format conversion happens outside the forge. -->
+Markdown — conversion: CLAUDE.md, Document chain 7. -->

@@ -10,11 +10,12 @@ Role: drafter. Distil the current `10-intent.md` into `20-assignment.md`
 
 1. Read the inputs of the project (the slug argument, or infer the current project
    from context; if ambiguous, ask), plus the existing 20-assignment.md
-   if any.
+   if any. Whether the intent is ready to be derived from: CLAUDE.md,
+   Document chain 2 — say so before drafting, never as a gate.
 2. Drafting rules: the ID scheme, Requirement style and prime
-   directive 8 (completeness, assigning not solving) of CLAUDE.md
-   apply as written there (POS.1070). This command's own rules:
-   - Narrative only in Purpose & Context and Objective.
+   directives 7 and 8 (structure over prose; completeness, assigning
+   not solving) of CLAUDE.md apply as written there (POS.1070). This
+   command's own rules:
    - The Terms section lists only the prefixes and terms actually
      used, as the template says.
    - Success criteria may be present, delegated, or deliberately
@@ -25,10 +26,10 @@ Role: drafter. Distil the current `10-intent.md` into `20-assignment.md`
 4. Write per CLAUDE.md, Versioning & status, into
    `20-assignment.history.md` — created from `templates/history.md`
    with the first draft — and update the ledger.
-5. Substance changes must trace back to 10-intent.md. If the principal
-   asks for a substantive change directly in the assignment, propose the
-   corresponding intent update in the same step. Wording-only fixes may
-   edit the assignment directly.
+5. Substance and wording changes follow intent-first (CLAUDE.md,
+   Working methods). If the principal asks for a substantive change
+   directly in the assignment, propose the corresponding intent
+   update in the same step.
 6. Finish with a short delta summary
    and a recommendation whether
    a `/critique <lens>` run would be useful now.

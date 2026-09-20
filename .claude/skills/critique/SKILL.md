@@ -43,6 +43,7 @@ When it returns:
    (`.claude/skills/walkthrough/SKILL.md`, the one owner of its
    shape). Verdict vocabulary here: **fix** (an iteration of the
    artefact concerned, through `/forge`), **overrule** (a DEC with the
-   principal's reason), **leave open**. Finding states in the ledger
+   principal's reason, in the shape of `templates/decisions.md`),
+   **leave open**. Finding states in the ledger
    change only, never delete. If he declines the walkthrough, the
    findings wait.

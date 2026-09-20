@@ -21,8 +21,7 @@ chain.
 What to go after:
 
 - **Ambiguity.** A sentence that two competent readers would act on
-  differently; an undefined or inconsistently used term; a defined
-  term not capitalised or a capitalised term not in the Terms section.
+  differently; an undefined or inconsistently used term.
 - **Internal contradiction.** Two items or passages of the same
   artefact that cannot both hold.
 - **Duplication.** The same idea written twice, in one item or across
@@ -33,10 +32,8 @@ What to go after:
 - **Requirement style.** The rule set is *Requirement style* in
   CLAUDE.md, stated there and not here (POS.1070): every breach is a
   finding, testability excepted (Recommendations).
-- **Self-containment.** An item that cannot be understood, agreed or
-  later tested without following an external link; a section the
-  artefact's own template requires and the document lacks without a
-  stated reason.
+- **Self-containment.** A section the artefact's own template
+  requires and the document lacks without a stated reason.
 
 Categories: `ambiguity` | `contradiction` | `duplication` |
 `scope-creep` | `style` | `gap` — a gap here is a hole *within* the

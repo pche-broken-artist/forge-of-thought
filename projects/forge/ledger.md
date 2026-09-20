@@ -3,7 +3,7 @@ project: forge
 kind: thought
 language: en
 terminal: intent
-updated: 2026-09-19
+updated: 2026-09-20
 ---
 
 # Ledger — Forge of Thought
@@ -28,9 +28,9 @@ absorbed it; Note says what remains (partial) or the REJ (dropped). -->
 ## Documents
 | File | Version | Status | Date |
 |---|---|---|---|
-| 10-intent.md | 4.12 | draft | 2026-09-18 |
+| 10-intent.md | 4.17 | draft | 2026-09-20 |
 | 20-assignment.md | — | not planned: the handover artefacts of this project are the core itself (CLAUDE.md, templates/, .claude/) and README.md | — |
-| decisions.md | — | 12 records (DEC.0010–0120) | 2026-09-14 |
+| decisions.md | — | 13 records (DEC.0010–0130) | 2026-09-20 |
 
 ## Renders
 <!-- Generated outputs, one row per recipe in recipes/. Never
@@ -38,9 +38,11 @@ hand-edited: iterate the recipe, re-run /render. Row mirrors the
 render's front-matter provenance. -->
 | Render | Audience | Recipe | Inputs | Generated |
 |---|---|---|---|---|
-| README.md (repo root) | humans arriving at the repository | recipes/readme.md v0.43 | CLAUDE.md, 10-intent.md v4.5 | 2026-09-11 |
-| RELEASE-NOTES.md (repo root) | the user of the engine who takes upgrades through forge-pull | recipes/release-notes.md v0.10 | 10-intent.history.md, 10-intent.md v4.5, decisions.md, previous edition (released sections) | 2026-09-11 |
+| README.md (repo root) | humans arriving at the repository | recipes/readme.md v0.49 | CLAUDE.md, 10-intent.md v4.17 | 2026-09-20 |
+| RELEASE-NOTES.md (repo root) | the user of the engine who takes upgrades through forge-pull | recipes/release-notes.md v0.10 | 10-intent.history.md, 10-intent.md v4.17, decisions.md, previous edition (released sections) | 2026-09-20 |
 | renders/executive-pitch.md | C-level executives whose experience of AI is chatting with it | recipes/executive-pitch.md v0.4 | projects/forge/10-intent.md v4.4, CLAUDE.md | 2026-09-11 |
+| renders/cto-pitch.md | technical leadership arriving at the repository - a CTO, a head of engineering or architecture | recipes/cto-pitch.md v0.3 | projects/forge/10-intent.md v4.15, CLAUDE.md | 2026-09-20 |
+| renders/ceo-pitch.md | a CEO or another C-level executive whose experience of AI is chatting with it | recipes/ceo-pitch.md v0.3 | projects/forge/10-intent.md v4.15, CLAUDE.md | 2026-09-20 |
 
 ## Sources
 <!-- Registration only; what a source is and is for lives in
@@ -126,7 +128,11 @@ version for resolved, DEC.NNNN for overruled. -->
 The two reviews `2026-08-17-critique.md` and `2026-08-27-critique.md`
 carry no lens in their name: reports of the retired single critic,
 written before lenses existed (POS.0410). Accepted as they are on
-2026-09-11 at the release checks — legacy, not a finding.
+2026-09-11 at the release checks — legacy, not a finding. The two
+reviews `2026-09-06-critique-clarity-2.md` and
+`2026-09-06-critique-clarity-3.md` carry a run suffix the naming
+convention does not have: three runs of one lens on one day. Accepted
+as they are on 2026-09-20 — immutable and cited by the Findings rows.
 
 ## Challenges
 <!-- State: open | accepted | rejected | parked | obsolete. Resolution:
@@ -154,40 +160,26 @@ intent version for accepted, DEC.NNNN for rejected. -->
 | CHL.0190 | accepted | Release 4.0 is queued and nothing says what an approved major of this intent means — a sign-off with no counterparty and no test (minor) | 2026-09-06-challenge-cto.md | intent 3.46 (POS.0300: what a major of the forge intent means and must pass) |
 
 ## Waiting on principal
-- Order (2026-09-18, intent 4.12): 1. THR.0390 — the weekend of
+- Order (2026-09-18, intent 4.12; unchanged since): 1. THR.0390 — the weekend of
   2026-09-19, its four steps in the thread's order; 2. THR.0350's
   leftovers; 3. the briefs `brd` and `layers` side by side.
-- THR.0390 — the forge in front of the group; the register of the
-  pitch document unanswered (technical or business leadership).
-- Git identity per host — written at 4.12 (POS.0950). Verified
-  2026-09-18 on the principal's machine that the two `includeIf`
-  stanzas resolve (a company-host repository gets the company
-  identity from `~/.gitconfig-<host>`). Left, step by step on his
-  word: delete `identities.local.md` at the engine root; unset the
-  local `user.name`/`user.email` in the four repositories so the
-  includes govern; remove the global `user.name`/`user.email` and set
-  `user.useConfigOnly = true`.
+- THR.0390 — the forge in front of the group; two public pitches
+  made 2026-09-20, awaiting the principal's reading.
+- THR.0400 — a gate in front of the tools; the reminder half done
+  2026-09-20 (intent 4.14), the enforcing hook deferred until after
+  THR.0390.
 - THR.0350 — walked through (intent 4.9); left: the hook watched in
   the next walkthroughs (POS.1170). The ledger sweep done at 4.10.
-- Check agents `light`, `engine`, `single-source-of-truth` not
-  registered in the session of 2026-09-14 though their files are
-  sound; verify after a restart, else a finding for `/save`.
 - THR.0360 — a layer with an external audience, opened 2026-09-14;
-  worked in the brief `brd`.
+  worked in the brief `brd`, to be born (`/forge brief brd`).
 - THR.0370 — Mermaid diagrams in Word; deferred 2026-09-12, open.
-- brief `brd` — to be born (`/forge brief brd`) from the conversation
-  over the colleague's fork (files not transferred, mechanisms walked
-  through point by point) and
-  `research/2026-09-07-brd-layer-fork-analysis.md`; POS.0700 closes
-  into positions of its own, CHL.0030 under DEC.0060 revisited in
-  that round. Direction of 2026-09-07.
 - THR.0320 — a `harness` lens; decided in substance 2026-09-05,
   mechanism open, no priority.
 - THR.0240 — the size of CLAUDE.md; first instance of the answer at
-  4.9 (POS.1170), the rest open.
-- Save and release duration — the watch continues at the next
-  releases; measurements so far in
-  `research/2026-09-14-save-and-release-duration.md`.
+  4.9 (POS.1170), eight low restatements deferred 2026-09-20 until
+  after THR.0390, the rest open.
+- THR.0410 — the duration of `/save` and `/release`; the watch
+  continues at the next releases.
 - DEC.0120 — the force-push of 2026-09-04, recorded; a GitHub cache
   purge only on the principal's request.
 - THR.0290 — what `/research` gains from kinds; deferred until a
@@ -206,8 +198,8 @@ intent version for accepted, DEC.NNNN for rejected. -->
 - THR.0140 — the delivery side; deferred until a subject project
   needs the linkage.
 - THR.0150 — PowerShell scripts to POSIX sh; undecided, no priority.
-- THR.0210 — the guard rail for the public boundary; parked, taken up
-  when the boundary is next at stake.
+- THR.0210 — the guard rail for the public boundary; at stake again
+  2026-09-20, to be taken up.
 - THR.0190 — a plugin as a distribution layer; merges into the brief
   `layers` (THR.0230).
 - THR.0200 — the public face, narrowed to the README exemplar.

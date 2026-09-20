@@ -1,5 +1,6 @@
 ---
 description: The shape of a walkthrough and of an elicitation interview — one item per message, what an item carries, how verdicts reach the write. Not a command; read by the hook's pointer whenever a walkthrough or an interview runs.
+user-invocable: false
 ---
 
 The working method named in CLAUDE.md (Working methods, Walkthrough;

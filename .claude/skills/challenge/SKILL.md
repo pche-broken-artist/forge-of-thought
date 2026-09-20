@@ -49,8 +49,9 @@ When it returns:
    (`.claude/skills/walkthrough/SKILL.md`, the one owner of its
    shape). Verdict vocabulary here: **accept** (feeds into
    `/forge intent`; an accepted challenge must change the intent),
-   **reject** (a DEC with his one-line reason; the challenger respects
-   it in future runs), **park** (stays open), **obsolete** (note what
+   **reject** (a DEC with his one-line reason, in the shape of
+   `templates/decisions.md`; the challenger respects it in future
+   runs), **park** (stays open), **obsolete** (note what
    made it moot). Challenge states in the ledger change only, never
    delete. If he declines the walkthrough, the challenges wait.
 

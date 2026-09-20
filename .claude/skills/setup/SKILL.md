@@ -29,9 +29,9 @@ speak whatever language the user speaks to you.
      push to (e.g. github.com, a company host) with a name and an
      e-mail for each — may be left for later; say so. Then offer to
      write, on the user's word, into the global git configuration
-     file git actually reads (`git config --global --list
-     --show-origin` names it; read it first, never overwrite existing
-     content, report an existing stanza or guard and leave it):
+     file git actually reads (`scripts/forge-status.ps1` names it;
+     read it first, never overwrite existing content, report an
+     existing stanza or guard and leave it):
      - per host, one stanza
        `[includeIf "hasconfig:remote.*.url:https://<host>/**"]` and
        one `[includeIf "hasconfig:remote.*.url:git@<host>:*/**"]`,

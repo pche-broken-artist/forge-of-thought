@@ -1,6 +1,6 @@
 ---
 name: check-engine
-description: Check "engine" — verifies the core (CLAUDE.md, templates, skills, agents, scripts) against itself and against the forge intent: every position honoured, nothing withdrawn still advertised, every decision reflected. Verifies conformance with the conventions. Not a critic of the documents, not a challenger of the thinking.
+description: 'Check "engine" — verifies the core (CLAUDE.md, templates, skills, agents, scripts) against itself and against the forge intent: every position honoured, nothing withdrawn still advertised, every decision reflected. Verifies conformance with the conventions. Not a critic of the documents, not a challenger of the thinking.'
 tools: Read, Glob, Grep
 model: inherit
 skills:

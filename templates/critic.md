@@ -9,8 +9,10 @@ skills:
 
 <!-- Skeleton of a critic lens file (.claude/agents/critic-<lens>.md):
 front-matter and Lens section, nothing else; shared behaviour is the
-contract skill named above (CLAUDE.md, Isolated reviewers). Delete
-this comment in the lens file. -->
+contract skill named above (CLAUDE.md, Isolated reviewers). When the
+description carries a colon followed by a space, put the whole
+description in single quotes (an apostrophe inside doubled), or the
+agent does not register. Delete this comment in the lens file. -->
 
 ## Lens
 

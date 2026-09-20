@@ -14,8 +14,9 @@ run in one step.
    `thought`) — files only, no git: the new project's repository and
    remote are the principal's one-off act afterwards.
 3. Derive `projects/$3/00-brief.md` from the relevant parts of the
-   source 10-intent.md: a short English brief capturing why this
-   became its own project and what it inherits. **Exception to the
+   source 10-intent.md: a short brief, in the language settled at
+   step 2, capturing why this became its own project and what it
+   inherits. **Exception to the
    verbatim rule:** this brief is derived, so present it to the
    principal as a draft; on his approval lock it through the
    `/forge brief` procedure (its step 4).
@@ -25,5 +26,6 @@ run in one step.
 5. In the source assignment: mark moved items superseded (do not delete),
    replace the group with one link item — "REQ.NNNN: Delivered by project
    *$3*, see its assignment." Write per CLAUDE.md, Versioning & status,
-   into the assignment's companion, and record a DEC in decisions.md.
+   into the assignment's companion, and record a DEC in decisions.md
+   (the shape of a record: `templates/decisions.md`).
 6. Update both ledgers and report the result.

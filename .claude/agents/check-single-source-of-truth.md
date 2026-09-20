@@ -1,6 +1,6 @@
 ---
 name: check-single-source-of-truth
-description: Check "single-source-of-truth" — verifies that every rule, procedure and file shape is written in one place and cited everywhere else: no restatement across CLAUDE.md, skills, agents, templates and scripts, no direct operation where a mechanism exists. The honest sweep; expensive by design — fit before a major or after a round on the operating layer, not at every release. Verifies conformance with the conventions. Not a critic of the documents, not a challenger of the thinking.
+description: 'Check "single-source-of-truth" — verifies that every rule, procedure and file shape is written in one place and cited everywhere else: no restatement across CLAUDE.md, skills, agents, templates and scripts, no direct operation where a mechanism exists. The honest sweep; expensive by design — fit before a major or after a round on the operating layer, not at every release. Verifies conformance with the conventions. Not a critic of the documents, not a challenger of the thinking.'
 tools: Read, Glob, Grep
 model: inherit
 skills:

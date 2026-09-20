@@ -2,7 +2,7 @@
 version: 0.1
 date: YYYY-MM-DD
 status: draft            # draft | in_review | approved | superseded
-last_change: <one line from the newest row of $1>
+last_change: <one line from the newest row of 10-intent.history.md>
 project: <slug>
 audience: principal + Claude only
 ---
@@ -18,24 +18,22 @@ audience: principal + Claude only
 today. -->
 
 ## Positions
-<!-- POS.NNNN: statements the principal currently holds. Items in tens,
-each new group starting at the next hundred. IDs may be omitted while the
-intent is still fluid; assign them once positions solidify enough to be
-referenced from the assignment. -->
+<!-- POS.NNNN: statements the principal currently holds. Numbering:
+CLAUDE.md, ID scheme. IDs may be omitted while the intent is still
+fluid; assign them once positions solidify enough to be referenced
+from the assignment. -->
 - **POS.0010** …
 
 ## Facts
-<!-- FCT.NNNN: what is the case — on the principal's word, or as a
-source states it with provenance to the file where one exists. Never a
-stance; verification is never demanded. -->
+<!-- FCT.NNNN: what is the case, as CLAUDE.md, ID scheme, defines a
+fact. -->
 - **FCT.0010** …
 
 ## Open threads
 <!-- THR.NNNN: unresolved matters and what to elicit next. Drives the
 next /forge intent. Move resolved threads into Positions or Rejected
-directions. Each thread carries its origin — the principal's word
-(the default, unmarked), a source by path, or Claude's synthesis
-(marked "origin: Claude"). -->
+directions. Each thread carries its origin (CLAUDE.md, ID scheme);
+Claude's synthesis is marked "origin: Claude". -->
 - **THR.0010** …
 
 ## Rejected directions

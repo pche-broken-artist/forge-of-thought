@@ -28,9 +28,9 @@ Claude Code's own command, hence the Unix name.
    row's purpose in full.
 3. Print the roster the command dispatches over, where it has one,
    each entry with the `description` of its own file and, where the
-   file carries one, its `## Lens` (or `## Advisory checklist`)
-   section in full — so that the user knows what a check, a lens or
-   a persona looks for before running it:
+   file carries one, its `## Lens` section — for a genre its
+   Elicitation checklist — in full, so that the user knows what a
+   check, a lens, a persona or a genre looks for before running it:
    - `/check`: `.claude/agents/check-*.md`;
    - `/critique`: `.claude/agents/critic-*.md`;
    - `/challenge`: `.claude/agents/challenger-*.md`;

@@ -176,3 +176,18 @@ them here was THR.0070, resolved by DEC.0040 (no back-fill). -->
   any other clone could have taken it. Recorded here on 2026-09-14,
   moved out of the ledger's Waiting section (POS.0160).
 - **Date:** 2026-09-04
+
+## DEC.0130 — The group "Working methods" of the intent starts at POS.0850, accepted, never raised again
+- **Decision:** The project check at the release of 2026-09-20 found
+  that the group "Working methods" of `10-intent.md` does not start at
+  a hundred: its first item is POS.0850 and it runs POS.0850–0910,
+  while every other group starts at a hundred. The finding is
+  overruled; the numbering stays as it is.
+- **Reason:** IDs are never renumbered (CLAUDE.md, ID scheme), so the
+  numbers stay whatever their origin; a group is a plain heading with
+  no ID of its own, and nothing that cites these positions is
+  affected. The principal's word of 2026-09-20 to fix the low
+  findings of the release by Claude's recommendation, which for this
+  one is acceptance. On the pattern of DEC.0110; no later check
+  raises it again.
+- **Date:** 2026-09-20

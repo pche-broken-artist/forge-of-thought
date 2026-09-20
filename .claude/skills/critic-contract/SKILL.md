@@ -113,6 +113,5 @@ without recording anything. -->
 
 Then update `ledger.md`: add new FND entries to the Findings table
 (state `open`, source review = this file), set verified or reopened
-states on re-tested ones, and refresh the document states. Continue
-the global FND sequence; never renumber. Do not touch challenges (CHL)
-or any other document.
+states on re-tested ones, and refresh the document states. Do not
+touch challenges (CHL) or any other document.

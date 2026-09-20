@@ -104,7 +104,11 @@ any of them in a word.
   `.claude/skills/walkthrough/SKILL.md`, read whenever a walkthrough
   or an interview runs. Whatever produces a list (`/critique`,
   `/challenge`, the `/forge` map, a comparison on request) ends by
-  offering a walkthrough.
+  offering a walkthrough. A per-prompt hook,
+  `scripts/hook-walkthrough.ps1` configured in
+  `.claude/settings.json`, repeats the one-item rule and three lines
+  of conduct at every prompt: a rule that must hold in a long
+  conversation is not trusted to this file alone.
 - **Propose, never decide.** Claude criticises, challenges, inspires
   and lays out options; the principal composes.
 - **Step by step.** Any action needing the principal's consent — a
@@ -163,7 +167,8 @@ companion `<file>.history.md` beside it (Versioning & status); an
 integer version is approved, and a recipe never is. A functional
 binary — a `.potx` template, a graphic — is a source, so a library's
 assets are resources without a kind of their own; a library carries
-no artefacts and no records. Prose in every document is hard-wrapped
+no artefacts and no records but its recipe's history companion.
+Prose in every document is hard-wrapped
 at about 72 columns so that git diffs stay legible; tables, code
 blocks and front-matter are never wrapped.
 
@@ -221,9 +226,8 @@ ledger.md        single source of truth for state
 3. **`20-assignment.md`** — distilled from intent, audience: the
    recipients of the assignment (teams, colleagues, or the principal's
    future self). The only document handed over. Self-contained.
-4. **Iteration default:** substance changes go intent-first, then
-   propagate to the assignment. Wording-only fixes may edit the assignment
-   directly. Drafting early is a legitimate elicitation tool.
+4. **Iteration default:** intent-first, with drafting early as a
+   legitimate tool — both as Working methods state them.
 5. **External inputs** (transcripts, offers, documents, standards) live
    in `sources/`, immutable once registered, plain slug filenames —
    dates are recorded best-effort in the ledger, never demanded from
@@ -333,8 +337,9 @@ scripts/                   # forge-save / forge-pull / forge-status
                            # PowerPoint), md2docx (render → Word),
                            # hook-walkthrough (the per-prompt hook
                            # of .claude/settings.json)
-.claude/                   # skills (the commands and the reviewers'
-                           # contracts), agents, settings
+.claude/                   # skills (the commands, the reviewers'
+                           # contracts and the walkthrough method),
+                           # agents, settings
                            # (settings.local.json: the session
                            # model — gitignored)
 templates/                 # canonical skeletons
@@ -382,7 +387,8 @@ projects/lib-<name>/       # kind: library — material shared across
   .git/  ledger.md         # projects, no chain: only the ledger,
   README.md  logo.png      # sources and research; documents
   recipes/readme.md        # maintained by their owner; README =
-  sources/00-INDEX.md      # the catalogue, a render of its recipe
+  recipes/readme.history.md  # the catalogue, a render of its recipe
+  sources/00-INDEX.md
   research/00-INDEX.md
 ```
 
@@ -410,9 +416,10 @@ changing anything, `forge-clone.ps1` brings an existing project in
 (`/import-project` is its door), `forge-branch.ps1` switches or
 creates a branch — merging is git's, by hand or by merge request. The
 way into git for a project is `git -C projects/<slug> init -b main`,
-then a remote if wanted. The scripts carry no URL and no identity. The engine receives the git tag `v<major>` at
-every release of an approved major of the forge intent; any other
-tag is the principal's request, with a free name. Immutability of
+then a remote if wanted. The scripts carry no URL and no identity.
+Which release receives the tag `v<major>` is `/release`'s to say
+(`.claude/skills/release/SKILL.md`); any other tag is the
+principal's request, with a free name. Immutability of
 documents is a process rule, not a git mechanism.
 
 **Portability.** The forge runs beyond Windows; `scripts/` is the
@@ -421,7 +428,8 @@ and macOS: cross-platform PowerShell 7 with nothing Windows-only —
 paths composed with `Join-Path` or forward slashes, no `cmd`,
 registry or Windows-only cmdlets, `$IsWindows` only where the
 platform genuinely differs, external tools (`git`, `markitdown`,
-`claude`) resolved from PATH, usage examples in the scripts' help
+`pandoc`, `claude`) resolved from PATH, usage examples in the
+scripts' help
 free of Windows-specific paths and invocations.
 
 Two doors, two speeds. `/save` runs its check and then commits and
@@ -575,11 +583,8 @@ by its slug, or the engine.
 A requirement group becomes its own project **only by explicit decision of
 the principal** (`/spinoff <project> <group> <slug>`), never
 automatically. Claude may
-propose readiness. Mechanics: create `projects/<new-slug>/` (files
-only — its repository is the principal's one-off act), derive its
-`00-brief.md` from the relevant part of intent as a draft (the
-principal approves and locks it),
-supersede the original items and replace the group with one link item.
+propose readiness. The mechanics are the command's
+(`.claude/skills/spinoff/SKILL.md`).
 
 ## Ledger
 `ledger.md` is the **single source of truth for state**: its tables —

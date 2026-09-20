@@ -4,7 +4,7 @@ purpose: release-notes
 audience: the recipients and the principal tracking the project's releases
 version: 0.1
 updated: YYYY-MM-DD
-last_change: <one line from the newest row of $1>
+last_change: <one line from the newest row of recipes/release-notes.history.md>
 output: RELEASE-NOTES.md
 ---
 
@@ -37,12 +37,11 @@ The rules: CLAUDE.md, Document chain 7. -->
   Notes lines of the rows written since the previous release in every
   input companion — the intent's row for this version and the rows of
   the assignment and later layers since the last release — each
-  placed under its group: `### Action required`, `### Added`,
-  `### Changed`, `### Removed`, `### Fixed`, `### Rejected`, in this
-  order, one bullet per line, the wording carried from the row —
-  what changed with the pointer in parentheses, then "For you:" and
-  what it means for the reader, both sides kept; where more than one
-  document contributes, the bullet opens with the document's name.
+  placed under its group, the groups and their order as the Template
+  below lists them, one bullet per line, the wording carried from the
+  row with both of its sides kept (the shape of a line is
+  `templates/history.md`'s); where more than one document
+  contributes, the bullet opens with the document's name.
   Empty groups are omitted. Inside a group, what the reader must do
   or know first, then by weight. Rows whose Notes say nothing for the
   reader give a section with the one line "Nothing for the

@@ -4,10 +4,12 @@
     Report the git state of the Forge: the engine and every project.
 
 .DESCRIPTION
-    Read-only, changes nothing. For the engine and each projects/<slug>:
-    unsaved changes (or "clean"), the branch it is on, the last commit,
-    and the origin - or "no origin" / "not under git". Exists so that even reading git state
-    goes through the scripts (CLAUDE.md, Persistence).
+    Read-only, changes nothing. First the global configuration file
+    git actually reads, which /setup needs to know. Then, for the
+    engine and each projects/<slug>: unsaved changes (or "clean"), the
+    branch it is on, the last commit, and the origin - or "no origin" /
+    "not under git". Exists so that even reading git state goes through
+    the scripts (CLAUDE.md, Persistence).
 
 .EXAMPLE
     ./scripts/forge-status.ps1
@@ -53,6 +55,16 @@ function Show-Repo([string]$Name, [string]$Path) {
     }
     Write-Host ''
 }
+
+# The global configuration file git actually reads, named here so that
+# /setup never has to ask git directly (CLAUDE.md, Persistence). With
+# includes in play git names every file it read; the first is the
+# global file itself.
+$globalFiles = @(git config --global --list --show-origin 2>$null |
+    ForEach-Object { if ($_ -match '^file:(.+?)\t') { $Matches[1] } } |
+    Select-Object -Unique)
+Write-Host ('global git config: ' + $(if ($globalFiles.Count -gt 0) { $globalFiles -join ', ' } else { 'none yet - git creates ~/.gitconfig at its first write' }))
+Write-Host ''
 
 Show-Repo 'forge (engine)' $RepoRoot
 Get-ChildItem -Path (Join-Path $RepoRoot 'projects') -Directory | Where-Object { $_.Name -ne 'forge' } | ForEach-Object {

@@ -1,8 +1,8 @@
 ---
-version: 4.12
-date: 2026-09-18
+version: 4.17
+date: 2026-09-20
 status: draft
-last_change: 4.12 (2026-09-18): the commit identity handed back to git — per host by the user's own includeIf, the forge sets none, the roster file gone (POS.0950, POS.0550, POS.1050, POS.1060); /man with the alias /manual, the forge's manual read from its own definitions (POS.1190); THR.0390 opened — the forge in front of the group, the weekend plan.
+last_change: 4.17 (2026-09-20): the checks of the release settled - every agent description with a colon quoted and all three skeletons saying so, a library's one record named (POS.1080), POS.1120 and POS.0950 say the contracts cite, THR.0410 opened for the duration watch, the deferred restatements in THR.0240, DEC.0130 for the numbering of Working methods; readme recipe 0.49, `/man` and `/new-project` aligned.
 project: forge
 audience: principal + Claude only
 ---
@@ -186,9 +186,15 @@ position that already stands elsewhere.
   memory note beside it (F.02): text loaded once dissolves as the
   conversation grows. The harness's `UserPromptSubmit` hook adds
   context at every prompt; the engine's `.claude/settings.json`
-  carries one such hook with two lines — the one-item rule itself,
-  and a pointer to `.claude/skills/walkthrough/SKILL.md` for the full
-  shape when a walkthrough or an interview runs. That is also the
+  carries one such hook. It prints two lines on the walkthrough —
+  the one-item rule itself, and a pointer to
+  `.claude/skills/walkthrough/SKILL.md` for the full shape when a
+  walkthrough or an interview runs — and, since 2026-09-20, three
+  lines of conduct: where the forge has a script the script is used,
+  git included; a command of Claude's own, beyond plain reading, is
+  explained and approved first; nothing is written, run or changed
+  that was not agreed and approved (the principal's rules; THR.0400
+  holds the gate that would enforce them). That is also the
   first instance of the pattern THR.0240 asks for: always-on is one
   sentence and a pointer, the detail is a file read when its
   situation arises; the CLAUDE.md paragraph on the walkthrough shrank
@@ -641,7 +647,7 @@ position that already stands elsewhere.
 
   | Group | Kind | Meaning | Written by | Versioned | Behaviour |
   |---|---|---|---|---|---|
-  | artefacts | brief | the idea as the principal wrote it | principal | yes | locked at 1.0, then immutable |
+  | artefacts | brief | the idea as it emerged: the principal's words alone when handed over finished, the whole pile of the elicitation when born in the forge | principal, with Claude's part marked | yes | locked at 1.0, then immutable |
   | artefacts | intent | current understanding for principal and Claude: positions, facts, threads, rejections | Claude, principal composes | yes | rewritten freely |
   | artefacts | assignment | the direction handed to the recipients, self-contained | Claude, principal composes | yes | rewritten freely |
   | artefacts | later artefacts (BRD, RFP, article…) | further layers, each derived from the one above | Claude, principal composes | yes | rewritten freely |
@@ -660,7 +666,8 @@ position that already stands elsewhere.
   approved, and a recipe never is. A functional binary — a `.potx`
   template, a graphic — is a source (POS.1040), so a library's assets
   fall under resources without a kind of their own; a library carries
-  no artefacts and no records, the other groups unchanged. The
+  no artefacts and no records but its recipe's history companion, the
+  other groups unchanged. The
   assignment is not "frozen" in any sense the file would show: it is
   rewritten freely between approvals like the intent, and what the
   recipients hold is a version reached by a link into git — the word
@@ -821,14 +828,15 @@ position that already stands elsewhere.
   stay in each contract in its own words — three contracts and no
   common skill, reopened only if a fourth kind repeats them. A
   contract is addressed to every lens of its kind, never a template
-  with placeholders: it opens with what the contract owns (conduct,
-  subject, way of working, report shape, ledger step) and what the
-  lens file owns (what it reads, what it goes after, its categories,
-  its own report sections), and carries the overlap rule — a lens is
-  a specialisation, never a replacement: it may make a rule stricter,
-  never rename, drop or duplicate one; the protocol changes in the
-  contract — because the contract lands after the lens's own text and
-  the agent must know which yields. The contract never names a lens;
+  with placeholders: it opens by citing CLAUDE.md, Isolated
+  reviewers, the one owner since POS.1070, for what the contract
+  owns (conduct, subject, way of working, report shape, ledger step),
+  what the lens file owns (what it reads, what it goes after, its
+  categories, its own report sections) and the overlap rule — a lens
+  is a specialisation, never a replacement: it may make a rule
+  stricter, never rename, drop or duplicate one; the protocol changes
+  in the contract — because the contract lands after the lens's own
+  text and the agent must know which yields. The contract never names a lens;
   the lens file does. The skill is `user-invocable: false` (out of the
   `/` menu; its description stays in the session's context —
   `disable-model-invocation` would also forbid the preload) with a
@@ -1043,10 +1051,16 @@ position that already stands elsewhere.
   a Word file through `pandoc` — a deterministic conversion, unlike
   `md2pptx` (POS.0740), because a document render is plain Markdown
   carrying no instructions for a model. Styles come from a reference
-  document named by path (`-Reference <file.docx>`, typically a
-  document of a library project, POS.0970); without it pandoc's
-  built-in styles apply — no default reference and no bare-name
-  lookup. The render's provenance front-matter is metadata to pandoc
+  document named by path (`-Reference`, a `.docx` or a Word template
+  `.dotx`/`.dotm`, typically a document of a library project,
+  POS.0970); without it pandoc's built-in styles apply — no default
+  reference and no bare-name lookup. The page is A4 by default:
+  pandoc's built-in reference names no page size and Word then falls
+  back to US Letter, so without `-Reference` the script writes the
+  page size into pandoc's own built-in reference (`-PageSize A4 |
+  Letter`, A4 when absent); with `-Reference` the page setup is the
+  reference document's own, since a template decides its own paper.
+  The render's provenance front-matter is metadata to pandoc
   and does not appear in the document. Mermaid diagrams land in the
   document as blocks of code: rendering them to pictures needs
   `mermaid-cli`, a further dependency the principal has not decided
@@ -1056,7 +1070,8 @@ position that already stands elsewhere.
   input's directory and basename with a `.docx` extension, tracked
   in git like any render output; `-Out` overrides. pandoc is
   installed by the user, as markitdown is for `doc2md`; the script
-  installs nothing. Decided 2026-09-12.
+  installs nothing. Decided 2026-09-12; the template extensions
+  2026-09-19, the A4 default 2026-09-20.
 - **POS.0770** Recipe composition may be guided by genre:
   `/recipe <genre>` mirrors the `/forge` star (POS.0580) — a thin
   dispatcher (`.claude/skills/recipe/SKILL.md`) plus one definition file
@@ -1084,7 +1099,8 @@ position that already stands elsewhere.
   they use nothing Windows-only — paths composed with `Join-Path` or
   forward slashes, no `cmd`, registry or Windows-only cmdlets,
   `$IsWindows` only where the platform genuinely differs, external
-  tools (`git`, `markitdown`, `claude`) resolved from PATH, and usage
+  tools (`git`, `markitdown`, `pandoc`, `claude`) resolved from PATH,
+  and usage
   examples in the scripts' help free of Windows-specific paths and
   invocations. Instance facts are out of the scripts: no remote URL,
   no author identity, no first-run initialisation — git configuration
@@ -1124,8 +1140,9 @@ position that already stands elsewhere.
   included (THR.0240). Therefore only what must be always-on and is
   harmless in a public report lives there; the git identities —
   names, e-mail addresses, hosts — live in the user's own git
-  configuration outside the engine (below), and every reviewer
-  contract forbids instance facts in a report (CHL.0170; the split of an
+  configuration outside the engine (below), and CLAUDE.md, Isolated
+  reviewers, which every reviewer contract cites, forbids instance
+  facts in a report (CHL.0170; the split of an
   existing instance file is the user's act on the release notes'
   word). The session model lives in `.claude/settings.local.json`
   (POS.0930). `CLAUDE.md` names the principal and the conversation
@@ -1463,9 +1480,9 @@ position that already stands elsewhere.
   memory, so that every instance of the forge behaves the same and a new
   user meets the same forge as the principal. Memory is left with what
   is personal to one principal — his idiom, his private choices — and
-  instance facts go to `CLAUDE.local.md` and `identities.local.md`
-  (POS.0950). Decided 2026-08-30 at the audit before the first fresh
-  deployment (history 3.0).
+  instance facts go to `CLAUDE.local.md` (the commit identity is
+  git's, POS.0950). Decided 2026-08-30 at the audit before the first
+  fresh deployment (history 3.0).
 - **POS.1040** A source has one form. A file in `sources/` is either
   text or a functional binary, never both by default. At `/ingest`
   every binary file — isolated or inside a bundle — gets one question:
@@ -1659,6 +1676,19 @@ position that already stands elsewhere.
   every session, and THR.0240 argues against another sentence in the
   core. A position under the next free POS number records the
   decision when it falls.
+  At stake again 2026-09-20: a company name stood in an unsaved line
+  of the ledger and was caught by hand before any save. Found the
+  same day and left as they are, the principal to say: three mentions
+  of a library's name, which carries the company's, in history rows
+  already published — the intent's row 3.23 and rows 0.2 and 0.3 of
+  the executive pitch recipe; append-only records. The principal's
+  proposal of that day: a check, perhaps `light`, that nothing
+  specific to his work for a company reaches the engine's git.
+  Claude's sketch, offered once: a sweep for names over the engine
+  only, since private projects are meant to carry company matter, the
+  names held in `CLAUDE.local.md` so that the list itself never
+  reaches git; the rule on content stays a rule. A neighbour of the
+  gate of THR.0400. To be taken up; nothing decided.
 - **THR.0230** A common engine beneath several frameworks. Opened
   2026-09-03 at the principal's direction; a large rebuild if taken up,
   to be worked out first and decided later — the principal is not sure
@@ -1765,6 +1795,18 @@ position that already stands elsewhere.
   sentence and a pointer to a skill, with a hook repeating the hard
   sentence at every prompt (POS.1170) — always-on is one sentence and
   a pointer, the detail a file read when its situation arises.
+  The single-source-of-truth check of 2026-09-20 found seventeen
+  restatements; nine were settled the same day (history 4.16) and
+  eight low ones deferred until after THR.0390, because they reach
+  into the wording of CLAUDE.md and into the Commands table the
+  README and `/man` derive from: state vocabularies enumerated in
+  three places, the critic contract restating prime directive 8, the
+  brief's rules restated in two state files, genre checklists beside
+  their skeletons, index fields and ledger columns restated by
+  `/ingest` and `/research`, the bundle index entry as a declared
+  copy, sentences echoed inside CLAUDE.md and in skills, rosters
+  written out by name. The report is not filed; a re-run of the check
+  gives them again.
 - **THR.0250** Two suggested functions: an expander and an essence
   manager. A tip the principal received on 2026-09-03 — where from not
   recorded. The essence manager got its detail the same day: at the end
@@ -1934,8 +1976,15 @@ position that already stands elsewhere.
   needs the way back — `doc2md`, a comparison, carry-over
   intent-first — because editing in an editor and having Claude
   absorb it is a way of working he finds comfortable. The `timeline`
-  recipe genre waits for a second need (W.12). Opened 2026-09-14 from
-  THR.0350; origin: the principal's word and the record.
+  recipe genre waits for a second need (W.12). The brief `brd` is to
+  be born (`/forge brief brd`) from the conversation over a
+  colleague's fork of the engine — its files not transferred, its
+  mechanisms walked through point by point — and from
+  `research/2026-09-07-brd-layer-fork-analysis.md`; POS.0700 closes
+  into positions of its own and CHL.0030 under DEC.0060 is revisited
+  in that round (the principal's direction of 2026-09-07). Opened
+  2026-09-14 from THR.0350; origin: the principal's word and the
+  record.
 - **THR.0370** Mermaid diagrams in Word. `scripts/md2docx.ps1`
   (POS.1150) converts a render to Word through pandoc and leaves
   Mermaid blocks as code. Agreed in the walkthrough of 2026-09-12 but
@@ -1984,9 +2033,59 @@ position that already stands elsewhere.
   Not in the weekend: new lenses, personas or commands beyond `/man`
   (POS.1190); the README split (THR.0340) stays after THR.0230. The
   identity change (POS.0950) precedes (3), since a newcomer then has
-  one thing less to fill in. Open: the register of the pitch
-  document — technical leadership or business leadership — asked
-  2026-09-18, not yet answered. Opened 2026-09-18.
+  one thing less to fill in. Decided 2026-09-19: two pitches, one on
+  the forge (this project), one on the agentic platform (its own
+  project); the register technical, the CTOs of the group. The pitch
+  for the group is a thought of its own and lives in the private
+  project `forge-rollout`, since the engine repository is public.
+  Made 2026-09-20 on the principal's order, awaiting his reading: two
+  public one-page notes of this project — a CTO pitch anonymised from
+  the group's one (`recipes/cto-pitch.md`) and a CEO pitch as a
+  document on what the forge can mean for a company
+  (`recipes/ceo-pitch.md`; the executive deck of THR.0380 stays as it
+  is) — each closing with an "About me" block under the principal's
+  full identity, no employer named, each built into a `.docx`; the
+  README links both. Still wanted: an executive pitch for the group,
+  in the private project. Open: where the reference document that
+  gives the two Word files their look is to live — today it sits
+  outside the repository. Opened 2026-09-18.
+- **THR.0400** A gate in front of the tools. On 2026-09-20 Claude
+  read git state directly, past the scripts, twice, and on a bare yes
+  to one change wrote its consequences as well — with the rules fully
+  in context and the session in an automatic permission mode, so that
+  nothing stopped it. The principal's three rules of that day: where
+  the forge has a script, the script is used; a command of Claude's
+  own, beyond plain reading, is explained and approved first;
+  nothing is written, run or changed that was not agreed and
+  approved. Done the same day, as the soft half: the per-prompt hook
+  prints the three rules beside its two walkthrough lines
+  (POS.1170). Open, the hard half: a `PreToolUse` hook,
+  `scripts/hook-gate.ps1` in Claude's proposal, that reads each
+  command and each write before it runs and answers deny (raw `git`,
+  raw `pandoc` or `markitdown`, with the script to use instead),
+  allow (plain reading; writes to the session's scratch and to
+  memory) or ask (a state-changing forge script, any other command
+  of Claude's own, a write into the repository). Known before it is
+  built: telling reading from acting, and `git` as a command from
+  the word in a string, is a heuristic, so what is unsure asks; the
+  price is a dialog per write, an isolated render included; whether
+  "ask" holds in an automatic permission mode, and whether the hook
+  leaves the principal's own `!` commands alone, is to be tried, not
+  assumed. Whether writes are gated file by file or left to the
+  reminder is undecided. Deferred by the principal until the forge
+  has been shown to the group (THR.0390): the script needs tuning
+  and there is no time for it now. The sweep of THR.0210 — names
+  from `CLAUDE.local.md` searched in what is about to be saved — is
+  a neighbour of this gate and stays that thread's. Opened
+  2026-09-20 (Claude's proposal, the principal's rules).
+- **THR.0410** The duration of `/save` and `/release`. Watched since
+  2026-09-14, the measurements so far in
+  `research/2026-09-14-save-and-release-duration.md` (POS.1100,
+  POS.0810); the watch continues at the next releases, and what
+  follows from the measurements is not decided. One observation of
+  2026-09-20: a render of the README reads the whole intent and ran
+  close to eight minutes. Opened 2026-09-20 from a line of the ledger
+  that had stood without an ID since 4.10.
 
 Note: the ID THR.0120 was inadvertently used twice — first for the
 readme-recipe thread (opened 1.14, closed 1.16), then for the

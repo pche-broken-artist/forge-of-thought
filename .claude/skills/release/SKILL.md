@@ -65,7 +65,10 @@ never a sweep.
    describes what changed — and, when the intent's version is an
    integer (an approved major), the tag `v<major>`, proposed and
    taken on the principal's word (a rule of the procedure, not a gate
-   in the script). Any other tag is his request, as `/save` has it.
+   in the script). Before proposing the tag of a major of the forge
+   intent, name what POS.0300 of that intent asks a major to pass —
+   a reminder on the principal's word, never a gate. Any other tag is
+   his request, as `/save` has it.
 
 The check is advisory (POS.0430): the principal may order the release
 at any moment regardless of findings.

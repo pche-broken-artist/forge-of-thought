@@ -22,17 +22,15 @@ when it fits) and recommend which fits the moment; what a save or a
 release runs is `/save`'s and `/release`'s to say. A recommendation,
 never a gate; no check runs on Claude's own judgement.
 
-**`/check <name> [slug]` — run it.** The target: for `project` and
-`light` a project by its slug (the engine's own project is `forge`;
-`project` without a slug runs over every project under `projects/`
-except `forge`, each reported on its own); for `engine` and
-`single-source-of-truth` the engine root, no slug needed — a slug
-given to `single-source-of-truth` names a project to read against the
-engine's owners. Invoke the `check-<name>` subagent (Agent tool,
-session model) with the target path and nothing else — no summary of
-the working conversation, no explanation of what was meant; its
-isolation is the point (POS.0930). More than one check on one target
-may be launched at once and awaited together.
+**`/check <name> [slug]` — run it.** The target is a project by its
+slug (the engine's own project is `forge`) or the engine root; which
+of the two a check takes, and what a missing or an added slug means
+to it, is its Lens section's to say — read it there. Invoke the
+`check-<name>` subagent (Agent tool, session model) with the target
+path and nothing else — no summary of the working conversation, no
+explanation of what was meant; its isolation is the point
+(POS.0930). More than one check on one target may be launched at
+once and awaited together.
 
 When it returns:
 1. Present the report to the principal as it came: the one-line
