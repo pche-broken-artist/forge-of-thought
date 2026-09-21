@@ -3,7 +3,7 @@ project: forge
 kind: thought
 language: en
 terminal: intent
-updated: 2026-09-20
+updated: 2026-09-21
 ---
 
 # Ledger — Forge of Thought
@@ -28,7 +28,7 @@ absorbed it; Note says what remains (partial) or the REJ (dropped). -->
 ## Documents
 | File | Version | Status | Date |
 |---|---|---|---|
-| 10-intent.md | 4.17 | draft | 2026-09-20 |
+| 10-intent.md | 4.20 | draft | 2026-09-21 |
 | 20-assignment.md | — | not planned: the handover artefacts of this project are the core itself (CLAUDE.md, templates/, .claude/) and README.md | — |
 | decisions.md | — | 13 records (DEC.0010–0130) | 2026-09-20 |
 
@@ -50,6 +50,7 @@ sources/00-INDEX.md. -->
 | File | Date | Date origin | Form |
 |---|---|---|---|
 | forge-run-record-health.md | 2026-09-13 | content | text |
+| word-default-a4.docx | 2026-09-20 | file | binary |
 
 ## Dependencies
 <!-- Registration only. Documents of other repositories this project
@@ -160,11 +161,14 @@ intent version for accepted, DEC.NNNN for rejected. -->
 | CHL.0190 | accepted | Release 4.0 is queued and nothing says what an approved major of this intent means — a sign-off with no counterparty and no test (minor) | 2026-09-06-challenge-cto.md | intent 3.46 (POS.0300: what a major of the forge intent means and must pass) |
 
 ## Waiting on principal
-- Order (2026-09-18, intent 4.12; unchanged since): 1. THR.0390 — the weekend of
-  2026-09-19, its four steps in the thread's order; 2. THR.0350's
-  leftovers; 3. the briefs `brd` and `layers` side by side.
-- THR.0390 — the forge in front of the group; two public pitches
-  made 2026-09-20, awaiting the principal's reading.
+- Order (2026-09-18, intent 4.12; item 1 done 2026-09-21, intent 4.19,
+  the order unchanged): 1. THR.0390 (the weekend's plan done);
+  2. THR.0350's leftovers; 3. the briefs `brd` and `layers` side by
+  side.
+- THR.0390 — the forge in front of the group; the weekend's plan
+  done, the two group pitches sent, the two public ones read and in
+  order, the reference `.docx` at home in `sources/` (2026-09-21);
+  left: an executive pitch for the group.
 - THR.0400 — a gate in front of the tools; the reminder half done
   2026-09-20 (intent 4.14), the enforcing hook deferred until after
   THR.0390.

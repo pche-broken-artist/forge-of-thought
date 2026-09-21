@@ -1,8 +1,8 @@
 ---
-version: 4.17
-date: 2026-09-20
+version: 4.20
+date: 2026-09-21
 status: draft
-last_change: 4.17 (2026-09-20): the checks of the release settled - every agent description with a colon quoted and all three skeletons saying so, a library's one record named (POS.1080), POS.1120 and POS.0950 say the contracts cite, THR.0410 opened for the duration watch, the deferred restatements in THR.0240, DEC.0130 for the numbering of Working methods; readme recipe 0.49, `/man` and `/new-project` aligned.
+last_change: 4.20 (2026-09-21): THR.0390 - the home of the reference Word document is settled: it lives in this project as `sources/word-default-a4.docx`; the thread keeps one leftover, an executive pitch for the group.
 project: forge
 audience: principal + Claude only
 ---
@@ -2038,17 +2038,22 @@ position that already stands elsewhere.
   project); the register technical, the CTOs of the group. The pitch
   for the group is a thought of its own and lives in the private
   project `forge-rollout`, since the engine repository is public.
-  Made 2026-09-20 on the principal's order, awaiting his reading: two
-  public one-page notes of this project — a CTO pitch anonymised from
-  the group's one (`recipes/cto-pitch.md`) and a CEO pitch as a
-  document on what the forge can mean for a company
-  (`recipes/ceo-pitch.md`; the executive deck of THR.0380 stays as it
-  is) — each closing with an "About me" block under the principal's
-  full identity, no employer named, each built into a `.docx`; the
-  README links both. Still wanted: an executive pitch for the group,
-  in the private project. Open: where the reference document that
-  gives the two Word files their look is to live — today it sits
-  outside the repository. Opened 2026-09-18.
+  Made 2026-09-20 on the principal's order: two public one-page notes
+  of this project — a CTO pitch anonymised from the group's one
+  (`recipes/cto-pitch.md`) and a CEO pitch as a document on what the
+  forge can mean for a company (`recipes/ceo-pitch.md`; the executive
+  deck of THR.0380 stays as it is) — each closing with an "About me"
+  block under the principal's full identity, no employer named, each
+  built into a `.docx`; the README links both. Read by the principal
+  and found in order, by his word of 2026-09-21. Sent to the group,
+  by his word of the same day: the two group pitches, the CTO pitch
+  on the forge from `forge-rollout` and the one on the agentic
+  platform from its own project. The plan of 2026-09-18 is done in
+  all its steps, by his word of 2026-09-21. Still wanted: an
+  executive pitch for the group, in the private project. The
+  reference document that gives the two Word files their look lives
+  in this project, `sources/word-default-a4.docx`, by the principal's
+  word of 2026-09-20, confirmed 2026-09-21. Opened 2026-09-18.
 - **THR.0400** A gate in front of the tools. On 2026-09-20 Claude
   read git state directly, past the scripts, twice, and on a bare yes
   to one change wrote its consequences as well — with the rules fully
