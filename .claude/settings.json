@@ -1,8 +1,14 @@
 {
+  "attribution": {
+    "commit": "",
+    "sessionUrl": false
+  },
   "permissions": {
     "deny": [
       "Read(~/.ssh/**)",
-      "Read(~/.aws/**)"
+      "Read(~/.aws/**)",
+      "Bash(git *)",
+      "PowerShell(git *)"
     ]
   },
   "hooks": {
