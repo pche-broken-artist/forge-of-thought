@@ -1,8 +1,8 @@
 ---
-version: 4.20
-date: 2026-09-21
+version: 4.26
+date: 2026-09-26
 status: draft
-last_change: 4.20 (2026-09-21): THR.0390 - the home of the reference Word document is settled: it lives in this project as `sources/word-default-a4.docx`; the thread keeps one leftover, an executive pitch for the group.
+last_change: 4.26 (2026-09-26): One write per round becomes a named working method (POS.1210), POS.0190 and prime directive 9 carry the day's lesson, and POS.1170 records the hook anchored at the project root.
 project: forge
 audience: principal + Claude only
 ---
@@ -201,7 +201,25 @@ position that already stands elsewhere.
   to that sentence. A hook is context, not enforcement — the nearest
   thing to a wall the harness offers. A trial, judged by behaviour:
   decided 2026-09-14 (P.04; the pointer the principal's idea, the
-  repeated sentence Claude's addition).
+  repeated sentence Claude's addition). The hook's command is anchored
+  at the project root: `.claude/settings.json` invokes it in exec form,
+  `pwsh` with `${CLAUDE_PROJECT_DIR}/scripts/hook-walkthrough.ps1`
+  among its `args`. A relative path is resolved against the session's
+  working directory, not the engine root, and stopped resolving on
+  2026-09-26 when Claude moved that directory with a `cd` of its own,
+  so the hook fell silent mid-conversation; the placeholder always
+  names the root the session started in, and the exec form hands the
+  path to the program without a shell. Corrected and verified the same
+  day by the hook firing again.
+- **POS.1210 One write per round.** A working conversation is one
+  round, and what is agreed in it is carried and written once at its
+  end, on the principal's word (POS.0190, which owns the rule, its
+  reason and its clarification). The method exists for its name: the
+  principal invokes it in a word, and it stands beside the walkthrough,
+  whose verdicts reach the write this way (POS.0850). Named 2026-09-26
+  at his direction, so that the lesson of that day lives in the forge
+  and not only in the assistant's memory; the rule itself is unchanged
+  since 4.9.
 
 ### Document chain
 - **POS.0100** Files in the chain are numbered in tens (`00-brief.md`,
@@ -426,7 +444,15 @@ position that already stands elsewhere.
   many answers the round contained. The principal may at any moment
   order a write of whatever is agreed so far. Writing after every
   exchange buries the substantive change under changelog churn and
-  makes the Version History unreadable. "Written" means a file:
+  makes the Version History unreadable. Clarified 2026-09-26, after
+  this intent went from 4.21 to 4.25 in one conversation because
+  Claude took every order to write as closing the round and gave each
+  of the principal's following corrections a version and an
+  append-only history row of its own: a correction that lands on text
+  written moments ago belongs to the round that wrote it and is
+  carried like any other answer; an ordered write of what is agreed so
+  far does not close the round unless he says so. The name the method
+  carries is POS.1210's. "Written" means a file:
   whenever Claude reports something as written, it names the file and
   section; whatever is carried in the conversation only is said to be
   nowhere yet, and Claude never says nothing is lost while anything
@@ -899,8 +925,9 @@ position that already stands elsewhere.
 - **POS.0520** Protection relies on Claude Code's permission system,
   not an OS-level sandbox: commands and file operations run under
   permission prompts and allowlists, shared deny rules in
-  `.claude/settings.json` block sensitive paths (`~/.ssh`, `~/.aws`),
-  and web access is approved per domain on first use. OS-level
+  `.claude/settings.json` block sensitive paths (`~/.ssh`, `~/.aws`)
+  and raw `git` (POS.1200), and web access is approved per domain on
+  first use. OS-level
   sandboxing was tried on 2026-08-04 and deliberately dropped: it is
   unavailable on Windows, where enforcing it meant no shell at all.
 - **POS.0530** This work is reasoning-heavy and token-light, so the
@@ -920,8 +947,8 @@ position that already stands elsewhere.
   (POS.1110); every user project is likewise a repository with
   whatever remote and visibility its owner gives it. The scripts in
   `scripts/` are the only door to git — reading state included, no
-  exceptions; how many there are is whatever the door needs, never a
-  rule. The scripts that serve the engine and every project that is a
+  exceptions, enforced for Claude by POS.1200; how many there are is
+  whatever the door needs, never a rule. The scripts that serve the engine and every project that is a
   repository (`projects/<slug>/.git`): `forge-save.ps1`
   (stage–commit–push; bare, the engine and every project with changes,
   each its own commit; with a slug, that repository — `forge` meaning
@@ -942,6 +969,22 @@ position that already stands elsewhere.
   remote is configured anywhere in the forge: git carries that
   information itself. Immutability of documents remains a process rule
   enforced by convention, not by git.
+- **POS.1200 The scripts-only door to git is a wall of the harness,
+  not conduct alone; a commit carries no attribution.** Since
+  2026-09-21 the engine's `.claude/settings.json` denies Claude the
+  `git` command in both shells (`Bash(git *)`, `PowerShell(git *)`
+  under `permissions.deny`): the rule of POS.0550 — the scripts in
+  `scripts/` are the only door to git, reading state included — that
+  had stood as conduct in CLAUDE.md and in the per-prompt hook
+  (POS.1170) is now enforced by the permission system of POS.0520,
+  tried and holding in both shells. The rule binds the forge, not
+  the principal: his own git from the shell is his. In the same file
+  `attribution.commit` is empty and `attribution.sessionUrl` is
+  false, so Claude Code no longer adds or proposes a `Co-Authored-By`
+  or `Claude-Session` trailer: the commit message is the one the
+  principal confirmed, word for word — the commit 1fe1dae of
+  2026-09-16 had carried both trailers unseen by him. Decided
+  2026-09-21 by the principal.
 - **POS.0570** The project's full conformance — the `project` check,
   for the engine `engine` too — and the renders belong to the release,
   the bookkeeping check to the save; which checks run where is
@@ -1626,8 +1669,9 @@ position that already stands elsewhere.
   when `forge-pull` proves an insufficient upgrade channel. Research:
   `2026-08-29-claude-code-packaging.md`,
   `2026-08-29-framework-distribution-in-the-field.md`.
-  2026-09-14: to be merged into the brief `layers` (THR.0230), after
-  THR.0350. The research above answered a different question — how
+  2026-09-14: to be merged into the brief `engine-split` (THR.0230),
+  after THR.0350. The research
+  above answered a different question — how
   the forge reaches users with projects of their own, where the clone
   with nested repositories won (POS.0940), rightly — and is not
   reused for the three-layer question; that question gets research of
@@ -1689,7 +1733,11 @@ position that already stands elsewhere.
   names held in `CLAUDE.local.md` so that the list itself never
   reaches git; the rule on content stays a rule. A neighbour of the
   gate of THR.0400. To be taken up; nothing decided.
-- **THR.0230** A common engine beneath several frameworks. Opened
+- **THR.0230** Can the forge be split into an engine and the rest?
+  One of three separate tasks the principal named on 2026-09-26, and
+  the only one this thread carries; the other two are THR.0420, the
+  derivations of the forge for other jobs, and THR.0300, everything
+  a user makes for himself. Opened
   2026-09-03 at the principal's direction; a large rebuild if taken up,
   to be worked out first and decided later — the principal is not sure
   it is a good idea. The idea: whatever every framework needs alike is
@@ -1702,15 +1750,13 @@ position that already stands elsewhere.
   on that engine, not the engine itself; the picture is several small
   cooperating frameworks on one engine, not one large one that absorbs
   everything (much could be pushed into the forge, but CLAUDE.md is
-  already large — THR.0240 — and the separation helps there). Two
-  further frameworks named as the concrete cases: a product framework (a
-  screen described functionally per module, one artefact per module,
-  HTML prototypes rendered from them) and a project-management framework
-  (inputs from the forge's assignments; later meeting inputs over which
-  an agent runs unattended, sorting tasks and new requirements into
-  artefacts — Markdown or otherwise — or handing them on through MCP;
-  verification of an implementation against its assignment; a high-level
-  idea). What they show about the boundary: the chain is the framework's
+  already large — THR.0240 — and the separation helps there). The
+  frameworks that would sit on such an engine are THR.0420's, and
+  the boundary is drawn against its cases, outlined there in varying
+  depth: the product framework and the project-management one in
+  enough detail to draw it against, the test analysts' version so far
+  by its artefacts alone.
+  What they show about the boundary: the chain is the framework's
   (its artefacts, their number, order and templates); "everything is
   Markdown" is a forge rule — the engine carries recipe and render, the
   framework names the output form; a dependency between frameworks is
@@ -1749,25 +1795,36 @@ position that already stands elsewhere.
   3.0 every new position has been the engine's and the boundary is
   being drawn by accretion; taken up after 4.0 if the split proves
   useful.
-  2026-09-14, the principal's picture, to be worked as one brief
-  `layers` born in the forge (`/forge brief layers`; the name is
-  provisional) together with THR.0190 and THR.0300, which close into
-  it at its birth: three layers — an engine that owns the mechanics,
+  2026-09-14 the principal drew a picture of three layers, and on
+  2026-09-26 corrected it into the three separate tasks named above.
+  What is left to this thread: an engine that owns the mechanics,
   ideally a thing of its own, the technical shape unknown and a
-  further git-inside-git nesting unwanted; the forge as the
-  framework, through which the principal releases substantial new
-  functionality on git; and a user layer, where every user keeps
-  agents, challengers and reviewers of their own in a private
-  repository, never pushed into the forge, and upgrades the forge
-  without friction because the layers are separate. His reasons for
+  further git-inside-git nesting unwanted, with the forge as one
+  framework on it, through which he releases substantial new
+  functionality on git. Whether that split is within our powers at
+  all is what the thread asks. It is worked as one brief
+  `engine-split` born in the forge (`/forge brief engine-split`)
+  together with THR.0190, which closes into it at its birth; the
+  name is his of 2026-09-26, after `layers` said nothing he could
+  read back and `frameworks` was overtaken the same day when the
+  three tasks parted. The two connections are one-way and
+  conditional: if the forge is split, the derivations of THR.0420
+  can live on the engine instead of each carrying a copy of the
+  mechanics, and nothing in THR.0300 waits for the split at all.
+  A matter for the brief, Claude's observation of 2026-09-26: the
+  word *engine* today means the forge's own repository against the
+  projects (POS.0500), so the deeper engine this brief proposes
+  overloads it, and the brief settles that vocabulary before it
+  settles anything else. His reasons for
   taking it up soon: every further change makes the split harder;
   against it, the BRD layer and the field feedback (THR.0350) are
   wanted quickly. Order agreed 2026-09-14: THR.0350 first, since the
-  brief `layers` is to be born by co-elicitation, the technique the
-  run record faulted; then the brief `brd` and the brief `layers`,
-  elicited in small doses beside each other. The brief's first item
-  is research of its own into what Claude Code offers today for three
-  such layers — the packaging research of 2026-08-29 served the
+  brief is to be born by co-elicitation, the technique the
+  run record faulted; then the brief `brd` and the brief
+  `engine-split`, elicited in small doses beside each other. The
+  brief's first item is research of its own into what Claude Code
+  offers today for an engine carrying several frameworks — the
+  packaging research of 2026-08-29 served the
   engine/projects split and is not reused. Whether every new position
   should name its layer waits for the brief to say what the layers
   are. CHL.0150 stays parked with the brief.
@@ -1797,7 +1854,9 @@ position that already stands elsewhere.
   a pointer, the detail a file read when its situation arises.
   The single-source-of-truth check of 2026-09-20 found seventeen
   restatements; nine were settled the same day (history 4.16) and
-  eight low ones deferred until after THR.0390, because they reach
+  eight low ones deferred until after THR.0390, whose condition fell
+  when that thread closed on 2026-09-26 — they are on the table
+  again, with no date set. They reach
   into the wording of CLAUDE.md and into the Commands table the
   README and `/man` derive from: state vocabularies enumerated in
   three places, the critic contract restating prime directive 8, the
@@ -1823,11 +1882,16 @@ position that already stands elsewhere.
   one command with one output today; taken up when a second way of
   researching appears. Opened 2026-09-04; the check half closed at
   3.44.
-- **THR.0300** A user's private layer. Whoever runs the forge may
-  want reviewers, checks or other agents of their own, for themselves
-  only, with no ambition of contributing them to the engine — the
-  principal's idea of 2026-09-04, offered as possibly interesting, no
-  priority. It would need a place the engine does not know and
+- **THR.0300** Everything a user makes for himself, kept at his own
+  place and not in the forge's git. Not agents alone: agents, checks,
+  critics, challengers, research, whatever a user writes for his own
+  use, with no ambition of contributing it to the engine — the
+  principal's word of 2026-09-26, widening his idea of 2026-09-04,
+  which named reviewers, checks and other agents. One of the three
+  separate tasks of that day (THR.0230, THR.0420), and the one that
+  is a matter of today's forge and waits for nothing. Offered as
+  possibly interesting, no priority. It would need a place the engine
+  does not know and
   `forge-pull` never overwrites, on the pattern of `CLAUDE.local.md`
   and `settings.local.json` (gitignored), and the rosters of
   `/critique`, `/challenge` and `/check` would list what lies there
@@ -1835,9 +1899,10 @@ position that already stands elsewhere.
   contract skill (POS.1120), what happens when the engine renames or
   reshapes it, and
   whether Claude Code's own user-level agents already serve. Opened
-  2026-09-04. 2026-09-14: the third layer of the principal's
-  three-layer picture; to be merged into the brief `layers`
-  (THR.0230), after THR.0350.
+  2026-09-04. Merged on 2026-09-14 into the brief of THR.0230 as a
+  third layer and taken back out on 2026-09-26 by the principal's
+  correction, which also widened it from agents to everything a user
+  writes for himself.
 - **THR.0320** A harness lens. The principal's direction of
   2026-09-05: the critic roster gets a lens `harness` that reviews
   the operating layer — CLAUDE.md and the skills, commands and agents
@@ -1928,7 +1993,7 @@ position that already stands elsewhere.
     that matter — the one-item walkthrough above all — do not drift in
     a long conversation. Opened 2026-09-13.
   Priority given 2026-09-14: the first thread to be worked, before the
-  briefs `brd` and `layers` (THR.0230) — the brief `layers` is to be
+  briefs `brd` and `engine-split` (THR.0230) — that brief is to be
   born by the co-elicitation the record faulted (F.01, G.01, P.07, the
   marking of whose word is whose), so that technique must hold first.
   Walked through the same day, one proposal per message, directly
@@ -2007,53 +2072,6 @@ position that already stands elsewhere.
   them; and the headless build had no `document-skills:pptx` skill
   available and built the deck with python-pptx instead — to watch at
   the next build. Opened 2026-09-14 from the ledger.
-- **THR.0390** The forge in front of the group. The principal hands
-  the forge to people in the group whose judgement matters to him,
-  over the weekend of 2026-09-19: a pitch document, the link to the
-  public repository, `agentic-platform` as the worked example (its
-  repository on the company host, read access to be given), a live
-  demonstration if the occasion allows. What is to land: the concept
-  holds, the principal carries it, the teams could try it — and that
-  he works with AI hands-on. Plan of 2026-09-18, in this order: (1)
-  `agentic-platform` polished and released as the exemplar after a
-  `/check project` — its `.pptx` is of an older recipe edition, three
-  legacy renders with dates in their names would confuse a reader;
-  (2) the pitch as a document: a recipe of this project from
-  `templates/recipe.md` (no genre for a document yet), rendered and
-  built into `.docx` through `scripts/md2docx.ps1` — two to three
-  pages, the example named with its numbers taken from its own
-  ledger, the two links, a paragraph on how to try it; the existing
-  executive pitch (THR.0380) is for a C-level audience that knows AI
-  as a chat and names no project, so it is not this document; (3) a
-  fresh-clone test of the engine — `/setup`, `/new-project`, ten
-  minutes of `/forge intent` as a newcomer — then `/release`, so the
-  link shows a README at the current version; (4) a demonstration
-  script only if a demonstration is to happen: the `/forge` map of
-  `agentic-platform`, one `/challenge`, a walkthrough of two items.
-  Not in the weekend: new lenses, personas or commands beyond `/man`
-  (POS.1190); the README split (THR.0340) stays after THR.0230. The
-  identity change (POS.0950) precedes (3), since a newcomer then has
-  one thing less to fill in. Decided 2026-09-19: two pitches, one on
-  the forge (this project), one on the agentic platform (its own
-  project); the register technical, the CTOs of the group. The pitch
-  for the group is a thought of its own and lives in the private
-  project `forge-rollout`, since the engine repository is public.
-  Made 2026-09-20 on the principal's order: two public one-page notes
-  of this project — a CTO pitch anonymised from the group's one
-  (`recipes/cto-pitch.md`) and a CEO pitch as a document on what the
-  forge can mean for a company (`recipes/ceo-pitch.md`; the executive
-  deck of THR.0380 stays as it is) — each closing with an "About me"
-  block under the principal's full identity, no employer named, each
-  built into a `.docx`; the README links both. Read by the principal
-  and found in order, by his word of 2026-09-21. Sent to the group,
-  by his word of the same day: the two group pitches, the CTO pitch
-  on the forge from `forge-rollout` and the one on the agentic
-  platform from its own project. The plan of 2026-09-18 is done in
-  all its steps, by his word of 2026-09-21. Still wanted: an
-  executive pitch for the group, in the private project. The
-  reference document that gives the two Word files their look lives
-  in this project, `sources/word-default-a4.docx`, by the principal's
-  word of 2026-09-20, confirmed 2026-09-21. Opened 2026-09-18.
 - **THR.0400** A gate in front of the tools. On 2026-09-20 Claude
   read git state directly, past the scripts, twice, and on a bare yes
   to one change wrote its consequences as well — with the rules fully
@@ -2079,7 +2097,13 @@ position that already stands elsewhere.
   assumed. Whether writes are gated file by file or left to the
   reminder is undecided. Deferred by the principal until the forge
   has been shown to the group (THR.0390): the script needs tuning
-  and there is no time for it now. The sweep of THR.0210 — names
+  and there is no time for it now; that condition fell when THR.0390
+  closed on 2026-09-26, and nothing is scheduled in its place.
+  Claude's reading of 2026-09-26,
+  offered once: the "deny raw `git`" part of the hard half is done
+  by the deny list of POS.1200, so what the gate still owes is
+  `pandoc`, `markitdown` and the ask on writes. The sweep of
+  THR.0210 — names
   from `CLAUDE.local.md` searched in what is about to be saved — is
   a neighbour of this gate and stays that thread's. Opened
   2026-09-20 (Claude's proposal, the principal's rules).
@@ -2091,6 +2115,35 @@ position that already stands elsewhere.
   2026-09-20: a render of the README reads the whole intent and ran
   close to eight minutes. Opened 2026-09-20 from a line of the ledger
   that had stood without an ID since 4.10.
+- **THR.0420** Derivations of the forge for other jobs. The forge as
+  it stands serves the forging of a thought into an assignment; the
+  principal wants versions of it that serve other work, and said on
+  2026-09-26 that this is a task of its own, separate from the engine
+  question (THR.0230) and from a user's own additions (THR.0300). One
+  tool that does everything is explicitly not wanted: a derivation is
+  reached by extending, rebuilding or forking the forge, and each
+  stands as a framework in its own right. Three cases are named so
+  far. The version for online product managers is the product
+  framework: a screen described functionally per module, one artefact
+  per module, HTML prototypes rendered from them — one and the same
+  thing, by the principal's word of 2026-09-26. A version for test
+  analysts, his word of the same day: their primary work is producing
+  test cases and test strategies, and that is the work such a version
+  would serve — the outline as far as it goes today. A
+  project-management framework, his of 2026-09-03: inputs from the
+  forge's assignments; later meeting inputs over which an agent runs
+  unattended, sorting tasks and new requirements into artefacts —
+  Markdown or otherwise — or handing them on through MCP;
+  verification of an implementation against its assignment; a
+  high-level idea. The two outlined ones were held in THR.0230 until
+  the tasks parted; that thread's boundary analysis rests on their
+  outlines, which is why they are described here in full. A derivation needs no engine — a fork
+  carries the whole forge and is cut down — so the connection to
+  THR.0230 is one-way and conditional: if the forge is split, the
+  derivations can live on the engine instead of each carrying a copy
+  of the mechanics. Whether each derivation gets a brief of its own,
+  and which is taken first, is undecided; nothing is scheduled.
+  Opened 2026-09-26 from THR.0230 at the principal's direction.
 
 Note: the ID THR.0120 was inadvertently used twice — first for the
 readme-recipe thread (opened 1.14, closed 1.16), then for the

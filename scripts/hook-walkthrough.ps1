@@ -14,7 +14,10 @@ one's own, and change nothing that was not agreed and approved
 (THR.0400 of the forge intent; a gate that enforces them is the
 thread's open matter).
 It reads nothing, writes nothing, takes no arguments. Cross-platform
-PowerShell 7; the working directory is the engine root when it runs.
+PowerShell 7, and independent of the working directory: a hook runs in
+the session's current working directory, not the engine root, so
+.claude/settings.json invokes this script in exec form and hands it its
+own path through the ${CLAUDE_PROJECT_DIR} placeholder.
 #>
 
 Write-Output "Walkthrough rule: one item per reply - acknowledge the last verdict, put one item forward, stop. A question from the principal keeps the item open."

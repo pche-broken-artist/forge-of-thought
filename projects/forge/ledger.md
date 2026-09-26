@@ -3,7 +3,7 @@ project: forge
 kind: thought
 language: en
 terminal: intent
-updated: 2026-09-21
+updated: 2026-09-26
 ---
 
 # Ledger — Forge of Thought
@@ -28,7 +28,7 @@ absorbed it; Note says what remains (partial) or the REJ (dropped). -->
 ## Documents
 | File | Version | Status | Date |
 |---|---|---|---|
-| 10-intent.md | 4.20 | draft | 2026-09-21 |
+| 10-intent.md | 4.26 | draft | 2026-09-26 |
 | 20-assignment.md | — | not planned: the handover artefacts of this project are the core itself (CLAUDE.md, templates/, .claude/) and README.md | — |
 | decisions.md | — | 13 records (DEC.0010–0130) | 2026-09-20 |
 
@@ -161,17 +161,13 @@ intent version for accepted, DEC.NNNN for rejected. -->
 | CHL.0190 | accepted | Release 4.0 is queued and nothing says what an approved major of this intent means — a sign-off with no counterparty and no test (minor) | 2026-09-06-challenge-cto.md | intent 3.46 (POS.0300: what a major of the forge intent means and must pass) |
 
 ## Waiting on principal
-- Order (2026-09-18, intent 4.12; item 1 done 2026-09-21, intent 4.19,
-  the order unchanged): 1. THR.0390 (the weekend's plan done);
-  2. THR.0350's leftovers; 3. the briefs `brd` and `layers` side by
-  side.
-- THR.0390 — the forge in front of the group; the weekend's plan
-  done, the two group pitches sent, the two public ones read and in
-  order, the reference `.docx` at home in `sources/` (2026-09-21);
-  left: an executive pitch for the group.
+- Order (2026-09-18, intent 4.12; revised 2026-09-26, intent 4.22,
+  when THR.0390 closed): 1. THR.0350's leftovers; 2. the briefs `brd`
+  and `engine-split` side by side.
 - THR.0400 — a gate in front of the tools; the reminder half done
-  2026-09-20 (intent 4.14), the enforcing hook deferred until after
-  THR.0390.
+  2026-09-20 (intent 4.14), raw git denied 2026-09-21 (POS.1200),
+  the rest of the enforcing hook on the table again since THR.0390
+  closed (2026-09-26), nothing scheduled.
 - THR.0350 — walked through (intent 4.9); left: the hook watched in
   the next walkthroughs (POS.1170). The ledger sweep done at 4.10.
 - THR.0360 — a layer with an external audience, opened 2026-09-14;
@@ -180,20 +176,25 @@ intent version for accepted, DEC.NNNN for rejected. -->
 - THR.0320 — a `harness` lens; decided in substance 2026-09-05,
   mechanism open, no priority.
 - THR.0240 — the size of CLAUDE.md; first instance of the answer at
-  4.9 (POS.1170), eight low restatements deferred 2026-09-20 until
-  after THR.0390, the rest open.
+  4.9 (POS.1170), eight low restatements on the table again since
+  THR.0390 closed (2026-09-26), the rest open.
 - THR.0410 — the duration of `/save` and `/release`; the watch
   continues at the next releases.
 - DEC.0120 — the force-push of 2026-09-04, recorded; a GitHub cache
   purge only on the principal's request.
 - THR.0290 — what `/research` gains from kinds; deferred until a
   second way of researching appears.
-- THR.0300 — a user's private layer; merges into the brief `layers`
-  (THR.0230).
+- THR.0300 — everything a user makes for himself, kept at his own
+  place; widened and set on its own 2026-09-26, a matter of today's
+  forge.
 - THR.0250 — expander and essence manager; parked 2026-09-03.
-- THR.0230 — a common engine beneath frameworks; worked as the brief
-  `layers` (with THR.0190, THR.0300), after `brd`, research first;
-  CHL.0150 parked with it.
+- THR.0230 — can the forge be split into an engine and the rest;
+  worked as the brief `engine-split` (with THR.0190), after `brd`,
+  research first; CHL.0150 parked with it.
+- THR.0420 — derivations of the forge for other jobs (online product
+  managers = the product framework, test analysts with their test
+  cases and strategies, project management); opened 2026-09-26,
+  nothing scheduled.
 - THR.0340 — the README split from the documentation; after
   THR.0230.
 - THR.0380 — executive pitch loose ends (S03 counts, the deck build
@@ -205,6 +206,6 @@ intent version for accepted, DEC.NNNN for rejected. -->
 - THR.0210 — the guard rail for the public boundary; at stake again
   2026-09-20, to be taken up.
 - THR.0190 — a plugin as a distribution layer; merges into the brief
-  `layers` (THR.0230).
+  `engine-split` (THR.0230).
 - THR.0200 — the public face, narrowed to the README exemplar.
 - THR.0170 — branch documents; deferred.

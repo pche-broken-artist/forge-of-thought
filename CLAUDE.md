@@ -79,8 +79,12 @@ never here.
    conversation and reflected back, not written one by one. At the
    round's natural end Claude asks whether to write and writes on the
    principal's confirmation — one version bump, one Version History row
-   for the whole round. The principal may at any moment order a write of
-   whatever is agreed so far. "Written" means a file: whenever Claude
+   for the whole round. A correction that lands on text written moments
+   ago belongs to the round that wrote it: it is carried like any other
+   answer, never written as a version of its own. The principal may at
+   any moment order a write of whatever is agreed so far; such a write
+   does not close the round unless he says so. "Written" means a file:
+   whenever Claude
    reports something as written, it names the file and section;
    whatever is carried in the conversation only is said to be nowhere
    yet, and Claude never says nothing is lost while anything lives
@@ -133,6 +137,9 @@ any of them in a word.
   output: concrete text sharpens the reaction.
 - **Reflect back.** Before writing, restate what was understood, so
   the write confirms rather than surprises.
+- **One write per round.** A working conversation is one round: what is
+  agreed is carried in the conversation and written once at its end, on
+  the principal's word (prime directive 9).
 - **Intent-first.** Substance changes go into the intent and propagate
   from there; only wording is fixed downstream directly.
 - **Recommend, do not push.** Every option comes with a recommendation
@@ -407,7 +414,8 @@ with no global `user.name`/`user.email` (offered by `/setup`), so a
 repository on a host with no stanza fails aloud instead of taking a
 default. A project "not under git" is a
 property, not a defect. The scripts in `scripts/` are the only door
-to git — reading state included, no exceptions; how many there are is
+to git — reading state included, no exceptions, for Claude enforced
+by the deny rules of `.claude/settings.json`; how many there are is
 not a rule. The scripts that serve the engine and every project repository, each
 described in full by its own help header: `forge-save.ps1` commits and
 pushes, `forge-pull.ps1` fast-forwards from the remotes (on the engine
