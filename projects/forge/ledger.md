@@ -28,7 +28,7 @@ absorbed it; Note says what remains (partial) or the REJ (dropped). -->
 ## Documents
 | File | Version | Status | Date |
 |---|---|---|---|
-| 10-intent.md | 4.26 | draft | 2026-09-26 |
+| 10-intent.md | 4.27 | draft | 2026-09-26 |
 | 20-assignment.md | — | not planned: the handover artefacts of this project are the core itself (CLAUDE.md, templates/, .claude/) and README.md | — |
 | decisions.md | — | 13 records (DEC.0010–0130) | 2026-09-20 |
 
@@ -167,7 +167,8 @@ intent version for accepted, DEC.NNNN for rejected. -->
 - THR.0400 — a gate in front of the tools; the reminder half done
   2026-09-20 (intent 4.14), raw git denied 2026-09-21 (POS.1200),
   the rest of the enforcing hook on the table again since THR.0390
-  closed (2026-09-26), nothing scheduled.
+  closed (2026-09-26), nothing scheduled; a save refused silently by
+  the automatic mode on 2026-09-26, left as it is and watched.
 - THR.0350 — walked through (intent 4.9); left: the hook watched in
   the next walkthroughs (POS.1170). The ledger sweep done at 4.10.
 - THR.0360 — a layer with an external audience, opened 2026-09-14;
