@@ -18,7 +18,7 @@ Bring the project at `$1` into the forge (POS.1060). Git is done by
    identity git resolves (a clone for which git resolves none is
    caught by `forge-save`, which reports and commits nothing), and whether
    the project carries a ledger with a `kind:` header — its absence
-   is a fact, not a defect.
+   is a fact, not a defect (CLAUDE.md, Persistence).
 4. Finish by recommending `/forge <slug>` as the first act of work:
    the engine does not track the project and cannot guess it, so the
    project is selected by naming it.

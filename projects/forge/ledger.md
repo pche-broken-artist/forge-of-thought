@@ -3,7 +3,7 @@ project: forge
 kind: thought
 language: en
 terminal: intent
-updated: 2026-09-26
+updated: 2026-09-27
 ---
 
 # Ledger — Forge of Thought
@@ -28,9 +28,9 @@ absorbed it; Note says what remains (partial) or the REJ (dropped). -->
 ## Documents
 | File | Version | Status | Date |
 |---|---|---|---|
-| 10-intent.md | 4.27 | draft | 2026-09-26 |
+| 10-intent.md | 4.31 | draft | 2026-09-27 |
 | 20-assignment.md | — | not planned: the handover artefacts of this project are the core itself (CLAUDE.md, templates/, .claude/) and README.md | — |
-| decisions.md | — | 13 records (DEC.0010–0130) | 2026-09-20 |
+| decisions.md | — | 14 records (DEC.0010–0140) | 2026-09-27 |
 
 ## Renders
 <!-- Generated outputs, one row per recipe in recipes/. Never
@@ -38,11 +38,20 @@ hand-edited: iterate the recipe, re-run /render. Row mirrors the
 render's front-matter provenance. -->
 | Render | Audience | Recipe | Inputs | Generated |
 |---|---|---|---|---|
-| README.md (repo root) | humans arriving at the repository | recipes/readme.md v0.49 | CLAUDE.md, 10-intent.md v4.17 | 2026-09-20 |
-| RELEASE-NOTES.md (repo root) | the user of the engine who takes upgrades through forge-pull | recipes/release-notes.md v0.10 | 10-intent.history.md, 10-intent.md v4.17, decisions.md, previous edition (released sections) | 2026-09-20 |
-| renders/executive-pitch.md | C-level executives whose experience of AI is chatting with it | recipes/executive-pitch.md v0.4 | projects/forge/10-intent.md v4.4, CLAUDE.md | 2026-09-11 |
-| renders/cto-pitch.md | technical leadership arriving at the repository - a CTO, a head of engineering or architecture | recipes/cto-pitch.md v0.3 | projects/forge/10-intent.md v4.15, CLAUDE.md | 2026-09-20 |
-| renders/ceo-pitch.md | a CEO or another C-level executive whose experience of AI is chatting with it | recipes/ceo-pitch.md v0.3 | projects/forge/10-intent.md v4.15, CLAUDE.md | 2026-09-20 |
+| README.md (repo root) | humans arriving at the repository | recipes/readme.md v0.50 | CLAUDE.md, 10-intent.md v4.31 | 2026-09-27 |
+| RELEASE-NOTES.md (repo root) | the user of the engine who takes upgrades through forge-pull | recipes/release-notes.md v0.10 | 10-intent.history.md, 10-intent.md v4.31, decisions.md, previous edition (released sections) | 2026-09-27 |
+| renders/executive-pitch.md | C-level executives whose experience of AI is chatting with it | recipes/executive-pitch.md v0.6 | projects/forge/10-intent.md v4.30, CLAUDE.md | 2026-09-27 |
+| renders/cto-pitch.md | technical leadership arriving at the repository - a CTO, a head of engineering or architecture | recipes/cto-pitch.md v0.5 | projects/forge/10-intent.md v4.28, CLAUDE.md | 2026-09-27 |
+| renders/ceo-pitch.md | a CEO or another C-level executive whose experience of AI is chatting with it | recipes/ceo-pitch.md v0.5 | projects/forge/10-intent.md v4.28, CLAUDE.md | 2026-09-27 |
+
+## Published
+<!-- Designed files made by /publish, one row per file (CLAUDE.md,
+Document chain 7). State: current | stale — set to current by
+/publish, to stale by every /render of that recipe. -->
+| File | Recipe | From render | Model | Published | State |
+|---|---|---|---|---|---|
+| published/executive-pitch.pptx | recipes/executive-pitch.md v0.4 | generated 2026-09-11, projects/forge/10-intent.md v4.4, CLAUDE.md | opus | 2026-09-11 | stale |
+| published/cto-pitch.docx | recipes/cto-pitch.md v0.5 | generated 2026-09-20, projects/forge/10-intent.md v4.15, CLAUDE.md | opus | 2026-09-27 | stale |
 
 ## Sources
 <!-- Registration only; what a source is and is for lives in
@@ -78,8 +87,8 @@ research/00-INDEX.md. -->
 | 2026-09-14-save-and-release-duration.md | 2026-09-14 | the ledger's Waiting section as of 2026-09-14; 10-intent.md v4.9 (POS.1100, POS.0810) |
 
 ## Findings
-<!-- State: open | resolved | overruled | obsolete. Resolution: assignment
-version for resolved, DEC.NNNN for overruled. -->
+<!-- State: open | resolved | rejected | parked | obsolete. Resolution:
+assignment version for resolved, DEC.NNNN for rejected. -->
 | ID | Severity | Category | State | Source review | Resolution |
 |---|---|---|---|---|---|
 | FND.0010 | medium | inconsistency | resolved | 2026-08-17-critique.md | README re-rendered, title at intent 2.7 (verified 2026-08-27) |
@@ -90,7 +99,7 @@ version for resolved, DEC.NNNN for overruled. -->
 | FND.0060 | low | contradiction | resolved | 2026-08-27-critique.md | intent 2.13 (Essence), CLAUDE.md heading "Two isolated reviewers" (verified 2026-09-03, clarity) |
 | FND.0070 | low | divergence | resolved | 2026-08-27-critique.md | README re-rendered at intent 2.13 (2026-08-27, recipe 0.18) — regression belongs to the essence lens |
 | FND.0080 | low | inconsistency | resolved | 2026-08-27-critique.md | ledger comments + templates/ledger.md (intent 2.13) (verified 2026-09-03, clarity) |
-| FND.0090 | medium | contradiction | overruled | 2026-09-03-critique-clarity.md | DEC.0090; its condition (THR.0220 changing POS.0550) fell at 3.33 with POS.1110 — the contradiction dissolved with it, nothing returns |
+| FND.0090 | medium | contradiction | rejected | 2026-09-03-critique-clarity.md | DEC.0090; its condition (THR.0220 changing POS.0550) fell at 3.33 with POS.1110 — the contradiction dissolved with it, nothing returns |
 | FND.0100 | medium | contradiction | resolved | 2026-09-03-critique-clarity.md | intent 3.17 (verified 2026-09-06, clarity) |
 | FND.0110 | medium | gap | resolved | 2026-09-03-critique-clarity.md | intent 3.17 (verified 2026-09-06, clarity) |
 | FND.0120 | low | contradiction | resolved | 2026-09-03-critique-clarity.md | intent 3.17 (verified 2026-09-06, clarity) |
@@ -126,14 +135,8 @@ version for resolved, DEC.NNNN for overruled. -->
 | FND.0420 | low | ambiguity | resolved | 2026-09-06-critique-clarity-3.md | intent 3.48 (POS.0570 cites POS.1140) |
 | FND.0430 | low | contradiction | resolved | 2026-09-06-critique-clarity-3.md | intent 3.48 (THR.0240 dated) |
 
-The two reviews `2026-08-17-critique.md` and `2026-08-27-critique.md`
-carry no lens in their name: reports of the retired single critic,
-written before lenses existed (POS.0410). Accepted as they are on
-2026-09-11 at the release checks — legacy, not a finding. The two
-reviews `2026-09-06-critique-clarity-2.md` and
-`2026-09-06-critique-clarity-3.md` carry a run suffix the naming
-convention does not have: three runs of one lens on one day. Accepted
-as they are on 2026-09-20 — immutable and cited by the Findings rows.
+Four review files are named outside the convention — accepted as they
+are by DEC.0140.
 
 ## Challenges
 <!-- State: open | accepted | rejected | parked | obsolete. Resolution:
@@ -161,9 +164,9 @@ intent version for accepted, DEC.NNNN for rejected. -->
 | CHL.0190 | accepted | Release 4.0 is queued and nothing says what an approved major of this intent means — a sign-off with no counterparty and no test (minor) | 2026-09-06-challenge-cto.md | intent 3.46 (POS.0300: what a major of the forge intent means and must pass) |
 
 ## Waiting on principal
-- Order (2026-09-18, intent 4.12; revised 2026-09-26, intent 4.22,
-  when THR.0390 closed): 1. THR.0350's leftovers; 2. the briefs `brd`
-  and `engine-split` side by side.
+- Order (2026-09-18, intent 4.12; revised 2026-09-27, intent 4.28):
+  1. THR.0350's leftovers; 2. the briefs `brd` and `engine-split`,
+  their order undecided (THR.0230).
 - THR.0400 — a gate in front of the tools; the reminder half done
   2026-09-20 (intent 4.14), raw git denied 2026-09-21 (POS.1200),
   the rest of the enforcing hook on the table again since THR.0390
@@ -190,12 +193,16 @@ intent version for accepted, DEC.NNNN for rejected. -->
   forge.
 - THR.0250 — expander and essence manager; parked 2026-09-03.
 - THR.0230 — can the forge be split into an engine and the rest;
-  worked as the brief `engine-split` (with THR.0190), after `brd`,
-  research first; CHL.0150 parked with it.
+  worked as the brief `engine-split` (with THR.0190), research
+  first; its order against `brd` undecided; CHL.0150 parked with it.
 - THR.0420 — derivations of the forge for other jobs (online product
   managers = the product framework, test analysts with their test
   cases and strategies, project management); opened 2026-09-26,
   nothing scheduled.
+- THR.0430 — a command that ends a session: nothing left only in
+  the conversation, time and tokens recorded from the harness's
+  transcripts by a script; opened 2026-09-27, research of the
+  transcript format first, nothing scheduled.
 - THR.0340 — the README split from the documentation; after
   THR.0230.
 - THR.0380 — executive pitch loose ends (S03 counts, the deck build

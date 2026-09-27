@@ -9,7 +9,7 @@ never touches git. A project is a repository of its own that the
 engine does not track; initialising it and adding a remote are the
 principal's one-off act, the way in named in CLAUDE.md, Persistence,
 and a project that starts "not under git" is a property, not a
-defect — say so once at the end. The commit identity is git's,
+defect (CLAUDE.md, Persistence) — say so once at the end. The commit identity is git's,
 resolved per host from his own configuration (CLAUDE.md,
 Persistence) — nothing to propose; the command runs no git.
 
@@ -58,14 +58,12 @@ steps 3–5 below do not apply.
      are `/release`'s (CLAUDE.md, Document chain 7), not this command's
    - `projects/$1/logo.png` is the principal's to supply, optional
      (POS.1010) — mention it once, never ask for it
-   - `projects/$1/00-brief.md` — from `templates/brief.md`, its header
-     pre-filled at scaffold time and nothing else, with its companion
-     `00-brief.history.md` from `templates/history.md`
-3. **00-brief.md content:** ask the principal to paste or dictate
-   the brief now and hand it to the `/forge brief` procedure
-   (`.claude/skills/forge/states/brief.md`, from its step 2): it stores,
-   asks whether the text is finished, locks or leaves the draft.
-   Nothing of that procedure is restated here (POS.1070).
+3. **00-brief.md:** ask the principal to paste or dictate the brief
+   now and hand it to the `/forge brief` procedure
+   (`.claude/skills/forge/states/brief.md`, from its step 1): it
+   creates the file, its companion and its Briefs row, stores, asks
+   whether the text is finished, locks or leaves the draft. Nothing
+   of that procedure is restated here (POS.1070).
 4. Do NOT create 10-intent.md or 20-assignment.md yet — intent is born from the
    first `/forge intent`, assignment from the first `/forge assignment`.
 5. Update the ledger and finish by proposing the next step: run

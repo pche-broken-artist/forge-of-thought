@@ -1,8 +1,8 @@
 ---
-version: 4.27
-date: 2026-09-26
+version: 4.31
+date: 2026-09-27
 status: draft
-last_change: 4.27 (2026-09-26): THR.0400 carries a silent refusal of a save and the six probes that traced it to the automatic mode's classifier, not to the deny list; two remedies weighed, neither taken, left as it is and watched.
+last_change: 4.31 (2026-09-27): THR.0430 opened - a command that ends a session, verifying that nothing lives only in the conversation and recording in the ledger the time spent and the tokens burnt, read from the harness's transcripts by a script, never estimated by Claude.
 project: forge
 audience: principal + Claude only
 ---
@@ -122,9 +122,24 @@ position that already stands elsewhere.
   recommendation with its reason and, for "accept", the concrete
   text. A heading with a one-sentence reason is a label, not an
   item — the principal must not have to ask for an explanation to
-  decide (his correction of 2026-09-14). The
-  principal decides in a word or with a counter-proposal; "leave it
-  open" is a legitimate verdict, not a failure. A table asking for every
+  decide (his correction of 2026-09-14). Every item ends in one
+  proposition, worded so that `accept` has exactly one meaning — yes
+  to what is in front of the principal, also where the proposition
+  goes against the reviewer's suggestion — and the message closes
+  with the verdict line `(a)ccept / (m)odify / (r)eject / (p)ark`.
+  An open question is not a proposition and closes with the question
+  alone. The verdict words are one set for every walkthrough,
+  whatever produced the list: `accept`, `modify` (a discussion opens
+  and the solution found is put forward to be accepted), `reject`,
+  `park` and `obsolete`; the producing command says only what each
+  verdict writes. The principal may answer the line with a single
+  letter when that letter is his whole message; no other word of the
+  forge has a letter, so that nothing which writes or saves can be
+  set off by a slip. `park` is a legitimate verdict, not a failure.
+  Decided 2026-09-27 at the principal's direction: the three
+  producing commands had words of their own, and `accept` meant
+  agreement in `/challenge` and its opposite in `/check`. A table
+  asking for every
   verdict at once is never put in front of the principal. The next
   message opens with one line acknowledging the verdict and then
   carries the next item, nothing else — never a verdict of Claude's
@@ -136,10 +151,10 @@ position that already stands elsewhere.
   of several questions at once is the table of verdicts in another coat
   and is never put in front of the principal. Verdicts are carried in
   the conversation and written once at the round's end (POS.0190):
-  findings and challenges change state in the ledger, an overruled
-  finding or rejected challenge becomes a DEC record with its reason, a
-  fix becomes an iteration of the artefact it concerns, an accepted
-  challenge must change the intent. Whatever produces a list ends by
+  findings and challenges change state in the ledger, a rejected
+  finding or challenge becomes a DEC record with its reason, an
+  accepted finding becomes an iteration of the artefact it concerns,
+  an accepted challenge must change the intent. Whatever produces a list ends by
   offering a walkthrough — `/critique`, `/challenge`, the `/forge` map,
   a comparison made on request — and the principal may call for one at
   any moment. `/resolve`, a per-verdict door, is retired without
@@ -151,6 +166,15 @@ position that already stands elsewhere.
 - **POS.0860 Propose, never decide.** Claude criticises, challenges,
   inspires and lays out options; the principal composes (POS.0010,
   POS.0070). Nothing enters content because Claude proposed it.
+  The sign `??`, alone at the end of the principal's message or as
+  his whole message, asks for Claude's honest opinion of what he has
+  just written: three points at most, marked as Claude's own,
+  nothing written or filed. It is not the isolated challenger, who
+  does not know the conversation, and it adds to Claude's duty to
+  say at once what does not fit (POS.0020), never replaces it.
+  Decided 2026-09-27 at the principal's direction; one sentence
+  under this method and no method of its own, for the size of
+  CLAUDE.md (THR.0240).
 - **POS.0870 Elicitation interview.** Claude draws out by questions
   what the principal has not yet articulated, rather than filling gaps
   by assumption (POS.0020); the heart of `/forge intent`.
@@ -187,7 +211,8 @@ position that already stands elsewhere.
   conversation grows. The harness's `UserPromptSubmit` hook adds
   context at every prompt; the engine's `.claude/settings.json`
   carries one such hook. It prints two lines on the walkthrough —
-  the one-item rule itself, and a pointer to
+  the one-item rule itself, since 2026-09-27 with the verdict line
+  that closes a proposition (POS.0850), and a pointer to
   `.claude/skills/walkthrough/SKILL.md` for the full shape when a
   walkthrough or an interview runs — and, since 2026-09-20, three
   lines of conduct: where the forge has a script the script is used,
@@ -216,7 +241,12 @@ position that already stands elsewhere.
   end, on the principal's word (POS.0190, which owns the rule, its
   reason and its clarification). The method exists for its name: the
   principal invokes it in a word, and it stands beside the walkthrough,
-  whose verdicts reach the write this way (POS.0850). Named 2026-09-26
+  whose verdicts reach the write this way (POS.0850). The word that
+  orders the write is `write`, typed in full: Claude reflects the
+  whole round back and writes on the principal's yes, and offers the
+  word beside the verdict line when the round looks finished, so
+  that the principal always sees both ways on (his of 2026-09-27).
+  Named 2026-09-26
   at his direction, so that the lesson of that day lives in the forge
   and not only in the assistant's memory; the rule itself is unchanged
   since 4.9.
@@ -469,7 +499,8 @@ position that already stands elsewhere.
   by the house scheme and composed conversationally with the
   principal. `/render <recipe>` regenerates the output mechanically
   into `renders/<recipe>.md` — or the recipe's optional `output:`
-  path — undated, overwritten freely, history in git. Every render
+  path — undated, overwritten freely, history in git; the files made
+  from a render are POS.0590's. Every render
   opens with YAML front-matter provenance citing the recipe and every
   input with their versions; the ledger's Renders table mirrors it. A
   render assigns nothing and is not part of the chain: the artefacts
@@ -558,10 +589,11 @@ position that already stands elsewhere.
   delta before the release commit without reading a full diff. A render is
   regenerated only by `/release` (POS.1100) or by the principal's
   explicit `/render`; Claude never regenerates on its own judgement — it
-  reports staleness and offers (decided 2026-08-30). Only the README and the
-  release notes have a freshness rule — the next `/release` regenerates
-  them; every other render is as stale as the principal lets it be,
-  and `/check` says nothing about it (POS.0570).
+  reports staleness and offers (decided 2026-08-30). The README and the
+  release notes are regenerated by every `/release`; every other
+  render is as stale as the principal lets it be. No check reports
+  the staleness of any render, those two included (POS.0570): the
+  `/forge` map shows it.
 - **POS.0960** A project has a kind, `kind: thought | library`, declared
   in the YAML header of its ledger, default `thought` — today's projects
   unchanged. The rules of a kind live in the engine; the project carries
@@ -879,9 +911,18 @@ position that already stands elsewhere.
   checklists and findings are advisory and the principal alone decides
   what is published.
 - **POS.0440** Every finding and challenge is either fixed or explicitly
-  overruled with a recorded reason (DEC). Overruling and parking are
+  rejected with a recorded reason (DEC). Rejecting and parking are
   legitimate outcomes; silently ignoring is not. An accepted challenge
-  must change the intent, otherwise it was not accepted.
+  must change the intent, otherwise it was not accepted. The states
+  in the ledger carry the words of the verdicts (POS.0850): findings
+  `open | resolved | rejected | parked | obsolete`, challenges `open
+  | accepted | rejected | parked | obsolete`; `open` is a state only,
+  not yet judged, and `resolved` stays the critic's, a fix that is
+  in the document. The finding state `overruled` is retired
+  (2026-09-27): it reads as `rejected` wherever it survives, the
+  immutable reviews and the decision records keep the word they were
+  written with, and a project's ledger is converted through a
+  finding of the `light` check, on the principal's word or never.
 - **POS.0450** An artefact is best challenged before the next layer is
   first derived from it — the intent before the first assignment, one
   day a BRD before the solution design — while accepted challenges are
@@ -998,11 +1039,13 @@ position that already stands elsewhere.
   settled sources is current by construction, whereas one made before
   it goes stale whenever a finding bumps the intent. The full check
   left the save because it cost minutes and a walkthrough every time.
-  The staleness of any other render
-  is the principal's business alone: the `/forge` map shows it,
-  `/check` never reports it, since a render is regenerated only on his
-  word (POS.0810). Present shape 2026-09-06 (history 3.23, 3.30, 3.33,
-  3.44).
+  The staleness of a render is never a check finding, the README and
+  the release notes included: the release regenerates those two
+  anyway, so the finding was void at every release and noise
+  everywhere else (decided 2026-09-27); the `/forge` map shows
+  staleness, and a render is regenerated only on the principal's word
+  (POS.0810). Present shape 2026-09-06 (history 3.23, 3.30, 3.33,
+  3.44), the check rule 2026-09-27.
 - **POS.1100** Save and release are two commands. `/save` runs the
   `light` check (POS.1140) and then commits and pushes on whatever
   branch is checked out, through `forge-save`, no render: a message
@@ -1070,7 +1113,37 @@ position that already stands elsewhere.
   The Markdown render remains the sole source of truth; the generated
   file is an output of second order — regenerated at will, never
   edited by hand. All other format conversion stays outside the
-  forge, as git is for persistence.
+  forge, as git is for persistence. An output is made in two steps,
+  each with its own command, divided by cost so that the expensive
+  conversion runs as seldom as possible (the principal's, decided
+  2026-09-27). `/render` generates the Markdown and, where the
+  recipe names a format, the plain file beside it through pandoc:
+  deterministic, cheap, repeated freely. `/publish` makes the
+  designed file through a model and its document skills into
+  `published/`: only on the principal's command, never by
+  `/render`, by `/release` or on Claude's own judgement; it makes a
+  file and sends nothing anywhere. `/publish` takes the render as
+  it lies on disk and never renders — a render is made by a model
+  and is never the same twice, so a second one would publish a text
+  the principal has not read; a stale render is named before the
+  conversion and the word is his. The two files never share a
+  place, or the next render would overwrite the designed file with
+  the plain one. A recipe that names no format ends at the
+  Markdown. The format and what each step needs stand in the
+  recipe's `## Format` section, which replaces the Build
+  instructions of the presentation genre and is never copied into
+  the render: the render carries content only, or the plain file
+  would carry the instructions as text. The ledger's Published
+  table says what each published file was made from and its state:
+  `current` set by `/publish`, `stale` by every `/render` of that
+  recipe — a date could not tell, since a render may run twice a
+  day. The word is `publish` by the principal's choice, over
+  `build`, Claude's recommendation; it agrees with "only the
+  principal publishes" (POS.0430). CLAUDE.md carries the principle
+  of the two steps — which command makes which file, who may start
+  each — and the conduct of each step is its skill's alone
+  (`/render`, `/publish`), the sweep of 2026-09-27 having found the
+  steps restated there.
 - **POS.0740** `scripts/md2pptx.ps1` generates a PowerPoint file from
   a Markdown deck definition through headless Claude Code
   (`claude -p`) with Anthropic's official pptx skill (plugin
@@ -1089,7 +1162,14 @@ position that already stands elsewhere.
   `renders/<recipe>.md` lands as `renders/<recipe>.pptx`, tracked in
   git like any render output; `-Out` overrides. The headless run's
   model is chosen by `-Model`, default opus; a presentation recipe
-  may recommend one in its Build instructions.
+  may recommend one in its Format section. Since 2026-09-27 the
+  script has two engines (POS.0590): `-Engine claude`, the default
+  and all of the above, is the engine of `/publish`, which names
+  the recipe by path (`-Recipe`) so that the model reads the Format
+  section there; `-Engine pandoc` makes a plain deck for reading,
+  one slide per second-level heading, and is the engine of
+  `/render`. The pandoc engine was run once, on 2026-09-27: the
+  executive pitch gave a deck of six slides.
 - **POS.1150** `scripts/md2docx.ps1` converts a Markdown render into
   a Word file through `pandoc` — a deterministic conversion, unlike
   `md2pptx` (POS.0740), because a document render is plain Markdown
@@ -1114,7 +1194,27 @@ position that already stands elsewhere.
   in git like any render output; `-Out` overrides. pandoc is
   installed by the user, as markitdown is for `doc2md`; the script
   installs nothing. Decided 2026-09-12; the template extensions
-  2026-09-19, the A4 default 2026-09-20.
+  2026-09-19, the A4 default 2026-09-20. Since 2026-09-27 the
+  script has two engines (POS.0590): `-Engine pandoc`, the default
+  and all of the above, is the engine of `/render`; `-Engine
+  claude` makes the designed document through headless Claude Code
+  and the official docx skill, the reference document as the
+  template it starts from, the recipe named by path (`-Recipe`),
+  and is the engine of `/publish`. The route through a model had
+  been set aside on 2026-09-12 as a way to Mermaid pictures
+  (THR.0370); the principal takes it now for the design of the
+  document. The claude engine was run three times on 2026-09-27,
+  on the CTO pitch without a reference document. Two runs made the
+  file in minutes; one ran over ten minutes without a result and
+  was stopped, the cause not known. The machine carries neither
+  the library the docx skill expects nor the tools that show the
+  model its pages (LibreOffice, Poppler), and the model is told to
+  install nothing: it writes the document's XML directly and
+  designs without seeing the result - enough for a page of text,
+  untried for tables, pictures or a template. The engine runs
+  under whatever configuration directory and login the calling
+  shell has: a run from a plain terminal failed at once on an
+  expired login.
 - **POS.0770** Recipe composition may be guided by genre:
   `/recipe <genre>` mirrors the `/forge` star (POS.0580) — a thin
   dispatcher (`.claude/skills/recipe/SKILL.md`) plus one definition file
@@ -1132,8 +1232,7 @@ position that already stands elsewhere.
   message, inputs (including renders as picture sources), dramaturgy,
   speaker notes and traceability citations, on-slide density, diagram
   policy, language, vocabulary discipline, confidentiality, and the
-  Build instructions copied verbatim into the render for the
-  deck-builder LLM. The genre is named "presentation" rather than
+  Format section, which stays in the recipe (POS.0590). The genre is named "presentation" rather than
   "deck" for company-wide legibility at rollout.
 - **POS.0830** The forge runs beyond Windows. `scripts/` is the only
   platform-bound layer, and its scripts are written to run unchanged
@@ -1266,13 +1365,22 @@ position that already stands elsewhere.
   is honest when it runs. Where a shape had no owner at all, it gets
   a skeleton rather than a second description: the bundle catalogue
   (`templates/index-bundle.md`), the library reduction of the ledger
-  (`templates/ledger.md`'s header). Raised by the principal
+  (`templates/ledger.md`'s header), the state vocabularies of
+  findings and challenges and the reading of an older state word
+  (`templates/ledger.md`'s Findings and Challenges comments), the
+  reading of an older recipe's `## Build instructions` as Format
+  (`templates/recipe.md`'s Format comment). A restatement is steps,
+  rules or a shape repeated; a one-line reminder at the point of
+  action that names its owner — "not under git is a fact, not a
+  defect (CLAUDE.md, Persistence)" — is not one, since it is what
+  Claude reads when he acts and the citation keeps it honest
+  (decided 2026-09-27 at the sweep). Raised by the principal
   2026-09-02 after a render made outside `/render` arrived unwrapped
   (history 3.10).
 - **POS.1090** The harness enforces the principal's word where it
   can. A command that writes, scaffolds, commits or regenerates —
   `/save`, `/release`, `/spinoff`, `/setup`, `/new-project`,
-  `/import-project`, `/ingest`, `/render` — carries
+  `/import-project`, `/ingest`, `/render`, `/publish` — carries
   `disable-model-invocation: true` in its
   front-matter, so that Claude cannot start it on his own judgement:
   the principal invokes it by slash, or asks in words and Claude
@@ -1820,8 +1928,12 @@ position that already stands elsewhere.
   against it, the BRD layer and the field feedback (THR.0350) are
   wanted quickly. Order agreed 2026-09-14: THR.0350 first, since the
   brief is to be born by co-elicitation, the technique the
-  run record faulted; then the brief `brd` and the brief
-  `engine-split`, elicited in small doses beside each other. The
+  run record faulted. The order of the briefs `brd` and
+  `engine-split` is undecided (the principal, 2026-09-27): the split
+  is not a prerequisite of `brd`, but taking it first would benefit
+  `brd`, if there is the energy for it; `brd` may carry the higher
+  priority. This replaces the earlier agreement to elicit the two
+  beside each other. The
   brief's first item is research of its own into what Claude Code
   offers today for an engine carrying several frameworks — the
   packaging research of 2026-08-29 served the
@@ -2040,7 +2152,10 @@ position that already stands elsewhere.
   an editor is an artefact he composes, never a render, and the forge
   needs the way back — `doc2md`, a comparison, carry-over
   intent-first — because editing in an editor and having Claude
-  absorb it is a way of working he finds comfortable. The `timeline`
+  absorb it is a way of working he finds comfortable. Of that view
+  the conversions are decided since 2026-09-27 (POS.0590): a plain
+  file made with the render, a designed file made by `/publish`
+  with a ledger table of its own; the rest stays undecided. The `timeline`
   recipe genre waits for a second need (W.12). The brief `brd` is to
   be born (`/forge brief brd`) from the conversation over a
   colleague's fork of the engine — its files not transferred, its
@@ -2061,6 +2176,10 @@ position that already stands elsewhere.
   versus repository-local installation. The LLM route (a sibling of
   `md2pptx.ps1` on the `document-skills:docx` skill) was set aside on
   2026-09-12: it would end at a picture too, with less determinism.
+  On 2026-09-27 the principal took that route for another purpose,
+  the design of the document: it is the `claude` engine of
+  `md2docx.ps1` behind `/publish` (POS.0590, POS.1150). Mermaid in
+  the plain file stands as it was.
   Word to PDF is the recipient's, never the forge's (POS.1150).
   Deferred 2026-09-12 by the principal — "needs more thought"; opened
   as a thread 2026-09-14 from the ledger.
@@ -2174,12 +2293,30 @@ position that already stands elsewhere.
   of the mechanics. Whether each derivation gets a brief of its own,
   and which is taken first, is undecided; nothing is scheduled.
   Opened 2026-09-26 from THR.0230 at the principal's direction.
+- **THR.0430** A command that ends a session. It verifies that
+  nothing lives only in the conversation — an unwritten round, a
+  repository with changes (`forge-status`), a stale render — and
+  says what a shutdown would lose; then it records in the ledger the
+  time spent and the tokens burnt in the session. Claude cannot
+  measure either from inside the conversation; the harness can:
+  `/cost` reports the session, and the transcripts under
+  `~/.claude/projects/` carry usage and timestamps per message, so a
+  script can sum them per project by working directory, for past
+  sessions too — a lower bound where a project was worked on more
+  than one machine. Open: the name of the command, the ledger's
+  shape for the figures (a table, or a line in the header), whether
+  the sum is per session or cumulative, and the research of the
+  transcript format before any script. Opened 2026-09-27 at the
+  principal's direction.
 
 Note: the ID THR.0120 was inadvertently used twice — first for the
 readme-recipe thread (opened 1.14, closed 1.16), then for the
 assignment-apparatus boundary (opened 1.24, closed 2.4). Citations of
 THR.0120 from POS.0210 and version 2.4 refer to the latter. Recorded
-as-is; IDs are never renumbered.
+as-is; IDs are never renumbered. Likewise POS.0005 and REJ.0125,
+outside the numbering in tens, and the group Working methods starting
+at POS.0850 rather than at a hundred, stand as they are by DEC.0110
+and DEC.0130.
 
 ## Rejected directions
 

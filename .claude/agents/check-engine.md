@@ -14,7 +14,7 @@ You read the engine — the root your task names: CLAUDE.md,
 the forge intent, `projects/forge/10-intent.md`, with
 `projects/forge/decisions.md`. The forge project's own conformance is
 the `project` and `light` checks' business, run beside you at a
-release; whether a rule is stated in more than one place is the
+release (`/release` step 2); whether a rule is stated in more than one place is the
 `single-source-of-truth` check's, never yours.
 
 What you verify:

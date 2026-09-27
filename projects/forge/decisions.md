@@ -191,3 +191,19 @@ them here was THR.0070, resolved by DEC.0040 (no back-fill). -->
   one is acceptance. On the pattern of DEC.0110; no later check
   raises it again.
 - **Date:** 2026-09-20
+## DEC.0140 — Four review files named outside the convention accepted, never raised again
+- **Decision:** The project check at the release of 2026-09-27 raised,
+  for the third time, four files under `reviews/` whose names fall
+  outside `YYYY-MM-DD-critique-<lens>.md`: `2026-08-17-critique.md`
+  and `2026-08-27-critique.md` carry no lens,
+  `2026-09-06-critique-clarity-2.md` and
+  `2026-09-06-critique-clarity-3.md` carry a run suffix. The finding
+  is rejected; the names stay as they are.
+- **Reason:** The first two are reports of the retired single critic,
+  written before lenses existed (POS.0410); the other two are three
+  runs of one lens on one day, which the convention does not foresee.
+  All four are immutable and cited by the Findings rows of the
+  ledger, so a rename would break the record for a cosmetic gain.
+  Accepted in the ledger on 2026-09-11 and 2026-09-20; on the pattern
+  of DEC.0110, no later check raises them again.
+- **Date:** 2026-09-27

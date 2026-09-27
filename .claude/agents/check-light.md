@@ -30,7 +30,14 @@ What you verify:
    original are the normal case (POS.1040), never a finding, and a
    binary listed in `sources/.gitignore` is not an unregistered file;
    the Renders table mirrors every render's front-matter provenance;
-   "Waiting on principal" matches what is actually open.
+   the Published table and `published/` agree — a row without its
+   file, a file without its row (whether a row is `current` or
+   `stale` is `/publish`'s and `/render`'s to set, never a finding);
+   "Waiting on principal" matches what is actually open. A state
+   word the template no longer carries (the mapping:
+   `templates/ledger.md`, Findings) is an immediate fix, in the
+   ledger only — never in a review or a decision record, which keep
+   the word they were written with.
    **Dependencies** (POS.1020) — every path in the Dependencies table
    exists on disk (a missing library is the finding "library `<name>`
    not cloned alongside — `/import-project <its remote>`", advisory);

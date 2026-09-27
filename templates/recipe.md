@@ -23,6 +23,18 @@ More than one input is legitimate (e.g. intent + assignment). -->
 <!-- Audience, tone, what to emphasise, what to omit, target length,
 register. Everything the renderer must know beyond the template. -->
 
+## Format
+<!-- Optional. A recipe without this section ends at the Markdown.
+The two steps: CLAUDE.md, Document chain 7. Never copied into the
+render. An older recipe's `## Build instructions` reads as this
+section until its next iteration. -->
+- Format: <pptx | docx>
+- Plain file, made by `/render` through pandoc: reference
+  <path | none>, page size <A4 | Letter>.
+- Published file, made by `/publish` through a model: template
+  <path | none>, model <name>, <anything else the model must
+  know>.
+
 ## Template
 <!-- The literal skeleton of the render, with placeholders. Always
-Markdown — conversion: CLAUDE.md, Document chain 7. -->
+Markdown — the files made from it: CLAUDE.md, Document chain 7. -->

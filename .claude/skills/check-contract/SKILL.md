@@ -55,8 +55,9 @@ names the owner of each rule and never restates it (POS.1070).
 - **Advisory.** Nothing blocks (POS.0430): what becomes of a finding
   is decided at the walkthrough (`/check`), never by you.
 - **Decided once.** A finding the project's `decisions.md` records
-  as overruled or accepted by a DEC is not raised again; at most it
-  is named once as a fact, with the DEC cited.
+  as rejected by a DEC — in an older record, as overruled or as a
+  state accepted as it is — is not raised again; at most it is named
+  once as a fact, with the DEC cited.
 - **Cheap where the Lens says so.** A check that names a scope reads
   that scope and nothing more; a check that names the whole reads
   the whole, honestly, however long it takes.

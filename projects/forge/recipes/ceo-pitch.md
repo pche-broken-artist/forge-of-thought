@@ -2,9 +2,9 @@
 project: forge
 purpose: A short public pitch of Forge of Thought to a CEO - what it can mean for a company, not how it works
 audience: a CEO or another C-level executive whose experience of AI is chatting with it, arriving at the repository or handed the document by their technology lead
-version: 0.4
-updated: 2026-09-20
-last_change: 0.4 (2026-09-20): the shape of the base recipe skeleton restored - the build line folded into Instructions, the heading in the skeleton's form; the render's content is unchanged.
+version: 0.5
+updated: 2026-09-27
+last_change: 0.5 (2026-09-27): the build line of Instructions becomes the Format section the base skeleton now has - docx, the plain file on A4 without a reference, the published file not set; the render's content is unchanged.
 ---
 
 # Recipe — CEO pitch (public)
@@ -129,10 +129,13 @@ last_change: 0.4 (2026-09-20): the shape of the base recipe skeleton restored - 
   en-dash. Where a thought wants a dash, it is a plain hyphen with a
   space on each side.
 - Hard-wrap prose at about 72 columns.
-- The Markdown render is the output. A Word file is optional:
-  `scripts/md2docx.ps1 projects/forge/renders/ceo-pitch.md`, A4 by
-  default, with `-Reference` for a house style. This line is for
-  whoever builds the file and is not rendered.
+
+## Format
+- Format: docx
+- Plain file, made by `/render` through pandoc: reference none,
+  page size A4.
+- Published file, made by `/publish` through a model: not set;
+  `/publish` asks before its first run.
 
 ## Template
     ---

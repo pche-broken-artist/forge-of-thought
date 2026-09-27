@@ -2,9 +2,9 @@
 project: forge
 purpose: readme
 audience: humans arriving at the repository
-version: 0.49
-updated: 2026-09-20
-last_change: 0.49 (2026-09-20): the scripts are the only door to git for Claude and every command of the forge - "intended" is gone, and the README no longer tells its human reader a ban that is not his.
+version: 0.50
+updated: 2026-09-27
+last_change: 0.50 (2026-09-27): finding states as of intent 4.28 (rejected for overruled, parked added); the verdict words said once, under the walkthrough; the words the reader types - the verdict line, ??, write - given in code and in a fixed table; an output in two steps, /render and /publish, and the two engines of the conversion scripts.
 output: /README.md
 ---
 
@@ -168,7 +168,11 @@ summarising the newest row. -->
 - The "How the work feels" section is drawn from the Working methods
   section of CLAUDE.md only: every method named there appears, in
   CLAUDE.md's order and under its name verbatim; the one-sentence
-  glosses are re-derived.
+  glosses are re-derived. The words the reader types are given in
+  code, as CLAUDE.md gives them: the verdict line
+  `(a)ccept / (m)odify / (r)eject / (p)ark` and the single letter
+  under the walkthrough, `??` under Propose, never decide, `write`
+  under One write per round.
   It never mentions commands that no longer exist.
 - The worked example: until an exemplar project is chosen and
   published (THR.0200 of the intent), the subsection "What it looks
@@ -231,14 +235,19 @@ summarising the newest row. -->
   iterated, render generated, provenance front-matter, a render may
   serve as an input of another render; (2) "From Markdown to slides" — everything is
   Markdown; recipe composition may be guided by genre
-  (`/recipe presentation`); `scripts/md2pptx.ps1` turns a deck render
-  into an actual PowerPoint file, with a `.potx` template named by
-  path — typically a document of a library project;
-  `scripts/md2docx.ps1` turns any render into a Word file through
-  pandoc, styles from a reference `.docx` or Word template named by
-  path, the page A4 by default, Mermaid diagrams as blocks of code;
-  the Markdown stays the source of truth; all other format conversion
-  happens outside the forge.
+  (`/recipe presentation`); an output is made in two steps, each
+  with its own command, as CLAUDE.md, Document chain 7, says:
+  `/render` makes the Markdown and, where the recipe names a format
+  in its `Format` section, the plain `.docx` or `.pptx` beside it
+  through pandoc — cheap, the same every time, Mermaid diagrams as
+  blocks of code; `/publish` makes the designed file through a
+  model into `published/` — expensive, started by the principal
+  only, from the Markdown as it lies on disk, never rendering and
+  sending nothing anywhere; a recipe without a format ends at the
+  Markdown; a template or a reference document is named by path —
+  typically a document of a library project — and the page is A4
+  by default; the Markdown stays the source of truth; all other
+  format conversion happens outside the forge.
 - Conventions includes: the ID scheme and prefix table; the Terms
   rule; the language rule (as above); the requirement style —
   illustrated by this one fixed example, quoted verbatim and marked
@@ -276,9 +285,11 @@ summarising the newest row. -->
   into a paragraph, so that a new lens, persona or check is a new
   bullet; then its output and the states of its findings as a list in
   exactly the ledger's vocabulary, never a state of the render's own
-  (critic: open, resolved, overruled, obsolete; challenger: open,
-  accepted, rejected, parked, obsolete; check: nothing filed — fix,
-  defer or accept in the session).
+  (critic: open, resolved, rejected, parked, obsolete; challenger:
+  open, accepted, rejected, parked, obsolete; check: nothing filed —
+  settled in the session). The verdict words are said once, in "How
+  the work feels" under the walkthrough, never per reviewer: they
+  are one set for every walkthrough.
 - Open threads (THR) are not enumerated; growth is summarised from
   POS.0700 — the layer growth path — and the multi-principal outlook
   (more principals, more instances). The engine/projects split is
@@ -374,17 +385,20 @@ summarising the newest row. -->
   - "Script prerequisites" — one bullet per script: `doc2md.ps1`
     needs markitdown
     (`pip install "markitdown[docx,pptx,pdf,xlsx,xls]"`);
-    `md2pptx.ps1` needs the `document-skills` plugin, installed once
-    from an interactive Claude Code session
+    `md2pptx.ps1` and `md2docx.ps1` each have two engines
+    (`-Engine pandoc | claude`), and each engine its own need: the
+    `pandoc` engine, behind `/render`, needs pandoc
+    (https://pandoc.org/installing.html); the `claude` engine,
+    behind `/publish`, needs the `document-skills` plugin, installed
+    once from an interactive Claude Code session
     (`/plugin marketplace add anthropics/skills`, then
-    `/plugin install document-skills@anthropic-agent-skills`), with
-    a deck template named by path (`-Template <file.potx>`) —
-    typically a document of a library project — or none, in which
-    case Claude designs the visuals; `md2docx.ps1` needs pandoc
-    (https://pandoc.org/installing.html), with a reference document
-    named by path (`-Reference`, a `.docx`, `.dotx` or `.dotm`) or
-    none, in which case pandoc's built-in styles apply on an A4
-    page (`-PageSize Letter` for US Letter); the git scripts need
+    `/plugin install document-skills@anthropic-agent-skills`); a
+    deck template is named by path (`-Template <file.potx>`), a
+    reference document for Word likewise (`-Reference`, a `.docx`,
+    `.dotx` or `.dotm`) — typically a document of a library
+    project — or none, in which case the model designs the visuals
+    and pandoc's built-in styles apply on an A4 page
+    (`-PageSize Letter` for US Letter); the git scripts need
     nothing beyond git.
   - "Saving and syncing" — two doors: `/save` runs the light check,
     then commits and pushes on the current branch, no render;
@@ -499,7 +513,13 @@ of CLAUDE.md, every one of them, one sentence each, walkthrough
 first and given two sentences because it is the one you will use
 most;
 close with one sentence: none is a command, you invoke any of them in
-a word>
+a word; then this table, fixed, verbatim:>
+
+| You type | What it does |
+|---|---|
+| `a`, `m`, `r` or `p` | Answers the verdict line `(a)ccept / (m)odify / (r)eject / (p)ark`, as your whole message. |
+| `write` | Orders the write of everything agreed in the round. Claude shows you the round first and writes on your yes. |
+| `??` | Asks for Claude's honest opinion of what you have just written. Three points at most, nothing written. |
 
 ## 6. Roles
 <two-column table with header Role / What they own; standing-rules

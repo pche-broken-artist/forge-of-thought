@@ -27,7 +27,7 @@ never a sweep.
    project checks on `projects/forge`. Launched at once, awaited
    together. Clean: state that the checks passed.
    Findings: settle them by walkthrough (CLAUDE.md, Working methods);
-   a finding may be deferred, as the `/check` procedure says, and the
+   a finding may be parked, as the `/check` procedure says, and the
    release proceeds. Never fix silently; never proceed with an unsettled
    finding. The check runs before the renders so that a fix of the
    walkthrough — an intent bump, a changed convention — is already in

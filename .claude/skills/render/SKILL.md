@@ -29,10 +29,9 @@ other; generating the render is mechanical.
    (the release-notes genre does, for the released sections), and
    must not touch the ledger. Prose is hard-wrapped as CLAUDE.md,
    Document kinds, says for every document.
-   Content only, always Markdown — a deck render may later be turned
-   into an actual PowerPoint file by `scripts/md2pptx.ps1`, any render
-   into a Word file by `scripts/md2docx.ps1`; all other format
-   conversion happens outside the forge.
+   Content only, always Markdown: the render carries no instructions
+   for a conversion — the recipe's `## Format` section is never
+   copied into it.
 4. The subagent writes to `renders/$1.md`, or to the recipe's
    `output:` path if it declares one (e.g. the repository README).
    Overwrite freely; history lives in git.
@@ -57,3 +56,14 @@ other; generating the render is mechanical.
    correct, update the ledger's Renders table to mirror it, and report
    what was rendered
    from what.
+7. The plain file (CLAUDE.md, Document chain 7). Where the recipe
+   carries a `## Format` section, run the script of its format —
+   `scripts/md2docx.ps1` or `scripts/md2pptx.ps1` — on the render
+   with `-Engine pandoc` and the reference document and page size
+   the section names; the file lands beside the render. Where pandoc
+   is missing, the render stands, the plain file is not made, and
+   that is said aloud. A recipe without the section ends at the
+   Markdown. The designed file is `/publish`'s, never made here.
+8. Where the ledger's Published table carries a row of this recipe,
+   set its state to `stale` and say so: the published file is now
+   older than its render. Remake nothing.

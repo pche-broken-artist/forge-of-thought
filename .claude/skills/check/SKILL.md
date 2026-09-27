@@ -27,10 +27,8 @@ slug (the engine's own project is `forge`) or the engine root; which
 of the two a check takes, and what a missing or an added slug means
 to it, is its Lens section's to say — read it there. Invoke the
 `check-<name>` subagent (Agent tool, session model) with the target
-path and nothing else — no summary of the working conversation, no
-explanation of what was meant; its isolation is the point
-(POS.0930). More than one check on one target may be launched at
-once and awaited together.
+path and nothing else (CLAUDE.md, Isolated reviewers). More than one
+check on one target may be launched at once and awaited together.
 
 When it returns:
 1. Present the report to the principal as it came: the one-line
@@ -39,11 +37,12 @@ When it returns:
    (CLAUDE.md, Working methods, Step by step); apply on his word.
 3. End by offering a **walkthrough** of the remaining findings
    (`.claude/skills/walkthrough/SKILL.md`, the one owner of its
-   shape). Verdict vocabulary here: **fix** (agreed here, written
-   once at the round's end), **defer** (recorded in the project's ledger
-   under "Waiting on principal"), **accept** (the state stays as it
-   is; a rule worth changing goes to the intent). Nothing blocks
-   (POS.0430): a release may proceed with a finding deferred.
+   shape and of the verdict words). What each verdict writes here:
+   **accept** — the fix, agreed here and written once at the round's
+   end; **reject** — the state stays as it is; a rule worth changing
+   goes to the intent; **park** — a line in the project's ledger
+   under "Waiting on principal". Nothing blocks (POS.0430): a
+   release may proceed with a finding parked.
 
 Do not judge substance or document quality — that is `/critique` and
 `/challenge` territory. A check verifies conformance only.

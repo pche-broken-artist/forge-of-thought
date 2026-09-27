@@ -11,8 +11,9 @@ last_change: <one line from the newest row of recipes/<recipe>.history.md>
 # Recipe — <presentation name>
 
 <!-- Presentation-genre recipe, composed via /recipe presentation; the
-render is a slide-by-slide deck definition that scripts/md2pptx.ps1
-turns into a PowerPoint file. A recipe: CLAUDE.md, Document chain 7.
+render is a slide-by-slide deck definition, from which /render makes
+a plain PowerPoint file and /publish the designed one. A recipe and
+the two steps: CLAUDE.md, Document chain 7.
 -->
 
 ## Inputs
@@ -41,8 +42,6 @@ provenance and staleness track it. -->
   enough to survive conversion into native slide shapes — or a
   reference `render: <file>` to a render of this project declared in
   Inputs.
-- Copy the Build instructions section verbatim into the render,
-  immediately after the front-matter.
 - Per-slide format:
   ```
   ## SNN — <slide title>
@@ -52,17 +51,21 @@ provenance and staleness track it. -->
   **Speaker notes:** <what the presenter says>
   ```
 
-## Build instructions
-<!-- For the LLM that converts the render into a .pptx via
-scripts/md2pptx.ps1. Copied verbatim into the render. -->
-- Template: <path to a .potx, e.g. projects/lib-<name>/sources/<file>.potx | none — design freely>.
-- Model: <recommended md2pptx -Model value; default opus>.
-- <Overflow handling, diagram redraw expectations, visual accents —
-  anything else the builder must know.>
+## Format
+<!-- The shape: templates/recipe.md. How a template is named, where
+the file lands and the default model: the header of
+scripts/md2pptx.ps1. Never copied into the render. -->
+- Format: pptx
+- Plain file, made by `/render` through pandoc: reference
+  <path | none>.
+- Published file, made by `/publish` through a model: template
+  <path | none — design freely>, model <name>, <overflow handling,
+  diagram redraw expectations, visual accents — anything else the
+  model must know>.
 
 ## Template
-Front-matter provenance per the render convention, then the Build
-instructions, then one section per slide:
+Front-matter provenance per the render convention, then one section
+per slide:
 
 | # | Slide | Content | Diagram |
 |---|---|---|---|

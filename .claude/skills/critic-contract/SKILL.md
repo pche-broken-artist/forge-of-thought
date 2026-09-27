@@ -30,7 +30,7 @@ say nothing; that is not your job.
 
 You did not participate in drafting and you must not be told what the
 drafter intended — judge only what the documents say. Your findings
-are advisory: the principal decides, and "overruled" is a legitimate
+are advisory: the principal decides, and "rejected" is a legitimate
 outcome, not a failure.
 
 Your target is the artefact named in your task (CLAUDE.md, Isolated
@@ -48,9 +48,10 @@ file in `reviews/`.
   resolved since your last run; report each as verified or reopened.
   A report without a lens suffix (`YYYY-MM-DD-critique.md`) belongs to
   the retired single critic: its findings are yours if they fall under
-  your categories. Respect overruled findings — do not re-raise them
+  your categories. Respect rejected findings — do not re-raise them
   unless the document changed in a way that materially alters the
-  situation (then reference the DEC).
+  situation (then reference the DEC). An older state word reads as
+  `templates/ledger.md` (Findings) maps it.
 - **New findings** continue the global FND sequence, format `FND.NNNN`
   in tens; never renumber. Severity high | medium | low; category from
   your Lens section.
@@ -59,10 +60,9 @@ file in `reviews/`.
   test, not brevity: length is never a defect; excess of the wrong kind
   (solving instead of assigning) is. The principal sets direction, so
   never report as defects: missing stakeholder lists, RACI, impact
-  analysis, MECE decomposition, table of contents, or absent
-  priorities (there are none by design — everything is essential
-  unless noted *optional*). Missing success criteria are a finding
-  only if neither present nor delegated.
+  analysis, MECE decomposition, table of contents, absent priorities
+  (CLAUDE.md, Requirement style) or a missing section that may be a
+  delegation (CLAUDE.md, prime directive 5).
 - **Testability is a recommendation, not a rule** (CLAUDE.md,
   Requirement style): untestable wording goes in the Recommendations
   section, never as a finding.

@@ -13,8 +13,8 @@ You read one project — the path your task names — or, when the task
 names none, every project under `projects/` except `forge`, each
 reported on its own. The bookkeeping of a project — front-matter,
 history companions, ledger tables, dependencies, resource indexes —
-is the `light` check's, never yours; run beside it at a release, you
-verify everything else.
+is the `light` check's, never yours; run beside it at a release
+(`/release` step 2), you verify everything else.
 
 What you verify:
 
@@ -37,13 +37,18 @@ What you verify:
    layout, exist; `20-assignment.md` once drafted, unless the ledger
    header's `terminal:` ends the chain elsewhere (CLAUDE.md, Ledger);
    `recipes/` and `renders/` paired — every render traces to a recipe
-   and carries provenance front-matter matching the ledger's Renders
-   table (legacy pre-recipe editions, dated filenames, are exempt).
+   and carries provenance front-matter (legacy pre-recipe editions,
+   dated filenames, are exempt); whether that provenance matches the
+   ledger's Renders table is the `light` check's;
+   every file in `published/` traces to a recipe that carries a
+   `## Format` section, and a `.pptx` or `.docx` in `renders/` to a
+   render beside it (CLAUDE.md, Document chain 7). An older recipe
+   still carrying `## Build instructions` (the alias:
+   `templates/recipe.md`, Format) is a finding fixed at its next
+   iteration.
    The README and release-notes recipes of CLAUDE.md, Document chain
-   7, exist (fix: scaffold from `templates/recipe-<genre>.md`); a
-   stale README or release notes is a finding fixed by the next
-   `/release` — not reported at a release itself, since the release
-   renders after the check. Every `00-brief*.md` in the directory has
+   7, exist (fix: scaffold from `templates/recipe-<genre>.md`).
+   Every `00-brief*.md` in the directory has
    a row in the ledger's Briefs table and vice versa; a brief marked
    `mined` is cited somewhere in the intent. Under the ledger's
    Waiting on principal, a line that copies a thread, a decision or a
@@ -62,10 +67,11 @@ What you verify:
    recipes conform to `templates/recipe.md` in front-matter and
    sections (genre skeletons `templates/recipe-<genre>.md` extend that
    shape, never replace it); every declared input exists on disk; the
-   `output:` path, where declared, points inside the repository. Render staleness (as `/render` step 5
-   defines it) is checked only for the README and the release notes,
-   per Structure; the staleness of any other render is never a
-   finding (POS.0570) — the `/forge` map shows it. Whether a recipe's
+   `output:` path, where declared, points inside the repository. The
+   staleness of a render (as `/render` step 5 defines it) is never a
+   finding, the README and the release notes included (POS.0570): the
+   `/forge` map shows it, and `/release` regenerates those two
+   unconditionally. Whether a recipe's
    content still matches the principal's thinking is substance, not
    conformance.
 

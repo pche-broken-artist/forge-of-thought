@@ -26,9 +26,7 @@ artefact named as `/forge` names it (CLAUDE.md, Isolated reviewers);
 how it narrows the run is the lens file's. Invoke the `critic-<lens>`
 subagent on the project (infer it from context; if ambiguous, ask),
 naming the target if given. Pass only the project path and the
-target — no summary of the drafting conversation, no explanation of
-intent beyond the documents themselves. Its isolation from the
-conversation is the point.
+target, nothing else (CLAUDE.md, Isolated reviewers).
 
 When it returns:
 1. Verify it created the review file and updated the ledger; fix ledger
@@ -41,9 +39,11 @@ When it returns:
    rest on.
 3. End by offering a **walkthrough** of the open findings
    (`.claude/skills/walkthrough/SKILL.md`, the one owner of its
-   shape). Verdict vocabulary here: **fix** (an iteration of the
-   artefact concerned, through `/forge`), **overrule** (a DEC with the
-   principal's reason, in the shape of `templates/decisions.md`),
-   **leave open**. Finding states in the ledger
+   shape and of the verdict words). What each verdict writes here:
+   **accept** — an iteration of the artefact concerned, through
+   `/forge`, state `resolved`; **reject** — a DEC with the
+   principal's reason, in the shape of `templates/decisions.md`,
+   state `rejected`; **park** — state `parked`; **obsolete** — state
+   `obsolete`, with what made it moot. Finding states in the ledger
    change only, never delete. If he declines the walkthrough, the
    findings wait.

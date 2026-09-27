@@ -23,10 +23,8 @@ an artefact named as `/forge` names it (CLAUDE.md, Isolated
 reviewers); how it narrows the run is the contract's and the persona
 file's. Invoke the `challenger-<persona>`
 subagent on the project (infer it from context; if ambiguous, ask),
-naming the target artefact. Pass only the project path and the target —
-no summary of the conversation, no defence of the principal's
-reasoning. Its isolation and its ignorance of our discussion are
-the point.
+naming the target artefact. Pass only the project path and the target,
+nothing else (CLAUDE.md, Isolated reviewers).
 
 Best used **before the next layer is first derived from the target** —
 for the intent, before the first `/forge assignment` — while an
@@ -47,13 +45,15 @@ When it returns:
    they usually mean something true is missing from the intent.
 4. End by offering a **walkthrough** of the challenges
    (`.claude/skills/walkthrough/SKILL.md`, the one owner of its
-   shape). Verdict vocabulary here: **accept** (feeds into
-   `/forge intent`; an accepted challenge must change the intent),
-   **reject** (a DEC with his one-line reason, in the shape of
-   `templates/decisions.md`; the challenger respects it in future
-   runs), **park** (stays open), **obsolete** (note what
-   made it moot). Challenge states in the ledger change only, never
-   delete. If he declines the walkthrough, the challenges wait.
+   shape and of the verdict words). What each verdict writes here:
+   **accept** — feeds into `/forge intent`, state `accepted`; an
+   accepted challenge must change the intent; **reject** — a DEC
+   with his one-line reason, in the shape of
+   `templates/decisions.md`, state `rejected`; the challenger
+   respects it in future runs; **park** — state `parked`;
+   **obsolete** — state `obsolete`, with what made it moot.
+   Challenge states in the ledger change only, never delete. If he
+   declines the walkthrough, the challenges wait.
 
 A rejected challenge is a normal, healthy outcome. So is a challenge that
 survives three rounds unresolved — park it and move on.

@@ -17,7 +17,7 @@ Adding a layer means adding a file; this dispatcher never changes.
 3. Report compactly:
    - the project's kind (ledger header, POS.0960) and whether it is
      under git — `projects/<slug>/.git` present or "not under git",
-     stated as a fact, never as a defect;
+     stated as a fact, never as a defect (CLAUDE.md, Persistence);
    - a `library` is material, not a project waiting for a brief:
      report its sources and research (from the ledger and the
      indexes) and stop after the git line — no chain, no target
@@ -28,7 +28,9 @@ Adding a layer means adding a file; this dispatcher never changes.
      `terminal:` applies (CLAUDE.md, Ledger);
    - which target states can be worked on from here (inputs exist) and
      which cannot yet (say what is missing);
-   - which renders are stale (as `/render` step 5 defines it);
+   - which renders are stale (as `/render` step 5 defines it) and
+     which published files are (state `stale` in the ledger's
+     Published table);
    - which libraries the project needs (the ledger's Dependencies
      table, POS.1020) and whether each is cloned alongside;
    - what is waiting on the principal (from the ledger).

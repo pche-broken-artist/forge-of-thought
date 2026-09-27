@@ -9,8 +9,8 @@ Why every project carries this recipe and when its render is made is
 CLAUDE.md, Document chain 7's.
 
 Role: interviewer. Elicit the answers below from the principal —
-options and trade-offs offered, decisions his — then compose or
-iterate the recipe from the skeleton. When the principal asks for a
+options and trade-offs offered, decisions his (`/recipe`, step 2) —
+then compose or iterate the recipe from the skeleton. When the principal asks for a
 first version without an interview, draft it from the inputs (the
 ledger, the brief, the intent's essence) and present it as a draft
 to iterate.

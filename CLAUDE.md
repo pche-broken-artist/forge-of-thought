@@ -102,9 +102,11 @@ of collaboration. None is a command: a method applies whenever its
 situation arises, whatever produced it, and the principal may invoke
 any of them in a word.
 - **Walkthrough.** Any list of items needing the principal's decision
-  is worked one item per message, in order of weight, the verdicts
+  is worked one item per message, in order of weight, every
+  proposition closed with the verdict line
+  `(a)ccept / (m)odify / (r)eject / (p)ark`, the verdicts
   carried to one write at the round's end; the shape — of the item,
-  of the elicitation interview, of the write-up — is
+  of the verdict, of the elicitation interview, of the write-up — is
   `.claude/skills/walkthrough/SKILL.md`, read whenever a walkthrough
   or an interview runs. Whatever produces a list (`/critique`,
   `/challenge`, the `/forge` map, a comparison on request) ends by
@@ -114,7 +116,10 @@ any of them in a word.
   of conduct at every prompt: a rule that must hold in a long
   conversation is not trusted to this file alone.
 - **Propose, never decide.** Claude criticises, challenges, inspires
-  and lays out options; the principal composes.
+  and lays out options; the principal composes. `??` alone at the
+  end of the principal's message, or as his whole message, asks for
+  Claude's honest opinion of what he has just written: three points
+  at most, marked as Claude's own, nothing written or filed.
 - **Step by step.** Any action needing the principal's consent — a
   write, a commit, a push, a rename, anything hard to reverse —
   arrives as one step with the exact operation, its target and the
@@ -139,7 +144,7 @@ any of them in a word.
   the write confirms rather than surprises.
 - **One write per round.** A working conversation is one round: what is
   agreed is carried in the conversation and written once at its end, on
-  the principal's word (prime directive 9).
+  the principal's word (prime directive 9) — the word is `write`.
 - **Intent-first.** Substance changes go into the intent and propagate
   from there; only wording is fixed downstream directly.
 - **Recommend, do not push.** Every option comes with a recommendation
@@ -294,24 +299,36 @@ ledger.md        single source of truth for state
    of truth. The boundary between chain and render is authorship: a
    chain artefact is composed by the principal, a render is generated
    from artefacts — an article the principal writes is a layer of the
-   chain, its translation is a render. Everything is Markdown, content only. The in-house
-   conversions are two scripts: `scripts/md2pptx.ps1` turns a
-   Markdown deck render into a `.pptx` through headless Claude Code —
-   an LLM conversion by design, because deck definitions are
-   free-form and may carry instructions for the model;
-   `scripts/md2docx.ps1` turns a Markdown render into a `.docx`
-   through pandoc — deterministic, because a document render carries
-   no instructions; Mermaid diagrams stay blocks of code. What each
-   needs installed, how a `.potx` template or a reference `.docx` is
-   named and where the output lands is its header's. A generated
-   `.pptx` or `.docx` is tracked in git like any render output and
-   never edited by hand: the Markdown render stays the source of
-   truth.
+   chain, its translation is a render. Everything is Markdown, content only.
+   An output is made in two steps, each with its own command.
+   `/render` generates the Markdown and, where the recipe names a
+   format, the plain file beside it through pandoc
+   (`renders/<recipe>.docx` or `.pptx`): deterministic, cheap,
+   repeated freely. `/publish` makes the designed file through a
+   model and its document skills, into `published/<recipe>.<ext>`:
+   expensive, only on the principal's command, never by `/render`,
+   by `/release` or on Claude's own judgement. It makes a file and
+   sends nothing anywhere. How each step runs — what it reads, what
+   it says before it converts, what it does to the other step's
+   file — is its own definition's (`.claude/skills/render/SKILL.md`,
+   `.claude/skills/publish/SKILL.md`). The format and what each
+   step needs stand in the recipe's `## Format` section
+   (`templates/recipe.md`): the render carries content only, and
+   the instructions for the model stay in the recipe. The
+   conversions are two scripts, `scripts/md2pptx.ps1` and
+   `scripts/md2docx.ps1`, each with two engines (`-Engine pandoc |
+   claude`); what each needs installed, how a template or a
+   reference document is named, where the output lands and what
+   becomes of a diagram is its header's. A plain or a published
+   file is tracked in git like any render output and never edited
+   by hand: the Markdown render stays the source of truth.
    A recipe may be composed through a genre interview
    (`/recipe <genre>`, skeleton `templates/recipe-<genre>.md`; first
    genre `presentation`); a render may cite another render as a
    picture source when the recipe declares it among its inputs. The
-   ledger's Renders table mirrors the provenance. Every project has
+   ledger's Renders table mirrors the provenance; its Published
+   table says what each published file was made from and whether it
+   is `current` or `stale`. Every project has
    a README as a render of its own `recipes/readme.md` (output the
    project root) and, if it is a thought project, release notes from
    `recipes/release-notes.md` — the same mechanism as the engine's
@@ -330,10 +347,8 @@ CLAUDE.local.md            # instance facts (principal, conversation
                            # /setup from templates/CLAUDE.local.md
 README.md                  # for humans — a render (/render readme)
 RELEASE-NOTES.md           # release notes — a render (/render
-                           # release-notes): one section per
-                           # release, compiled from the Notes of
-                           # the intent's history rows; minors
-                           # fold into a major
+                           # release-notes); the shape:
+                           # templates/recipe-release-notes.md
 logo.png                   # project avatar
 LICENSE                    # CC BY 4.0 — the engine is published
                            # under attribution
@@ -342,6 +357,7 @@ scripts/                   # forge-save / forge-pull / forge-status
                            # doc2md (document →
                            # Markdown), md2pptx (deck render →
                            # PowerPoint), md2docx (render → Word),
+                           # each by pandoc or by a model,
                            # hook-walkthrough (the per-prompt hook
                            # of .claude/settings.json)
 .claude/                   # skills (the commands, the reviewers'
@@ -379,10 +395,11 @@ projects/<slug>/           # kind: thought — the chain
   recipes/<recipe>.history.md         # the recipe's Version History
   renders/<recipe>.md                 # generated outputs, overwritten by
                                       # /render, provenance front-matter
-  renders/<recipe>.pptx               # optional deck generated from the
-                                      # md render by scripts/md2pptx.ps1
-  renders/<recipe>.docx               # optional Word file generated from
-                                      # the md render by scripts/md2docx.ps1
+  renders/<recipe>.pptx               # the plain file of a render, made
+  renders/<recipe>.docx               # by /render through pandoc where
+                                      # the recipe names a format
+  published/<recipe>.pptx             # the designed file, made by
+  published/<recipe>.docx             # /publish through a model
   reviews/YYYY-MM-DD-critique-<lens>.md  # immutable critique runs
   challenges/YYYY-MM-DD-challenge-<persona>.md  # immutable peer reviews
   research/YYYY-MM-DD-<topic>.md      # immutable research notes
@@ -510,7 +527,7 @@ lifecycle. Depth max two levels.
 | FCT | fact — what is the case, as the principal states it or as a source states it; not a stance; provenance to the file where a source exists, never demanded | intent |
 | FND | critique finding (document quality) | ledger, reviews |
 | CHL | peer-review challenge (substance) | ledger, challenges |
-| DEC | decision, incl. overruled findings and rejected challenges | decisions.md |
+| DEC | decision, incl. rejected findings and challenges | decisions.md |
 
 ## Requirement style
 - Use **shall** / **shall not**. Do not use would, could, should, might,
@@ -571,15 +588,15 @@ by its slug, or the engine.
   (each layer against its parent); what each reads and goes after is
   its agent file's, the shared conduct and the report shape the
   contract's. Produces `FND` in `reviews/`
-  (`YYYY-MM-DD-critique-<lens>.md`). Finding states: `open | resolved
-  | overruled (→ DEC) | obsolete`.
+  (`YYYY-MM-DD-critique-<lens>.md`). Finding states: as
+  `templates/ledger.md` has them.
 - **challengers** (`/challenge <persona> [artefact]`) — substance of
   the thinking, never document quality. Personas, the first `cto`;
   the blind spots each hunts are its agent file's, severity,
   epistemic status and the ban on fabrication the contract's.
   Produces `CHL` in `challenges/` (`YYYY-MM-DD-challenge-<persona>.md`).
-  Challenge states: `open | accepted | rejected (→ DEC) | parked |
-  obsolete`. An accepted challenge must change the intent.
+  Challenge states: as `templates/ledger.md` has them. An accepted
+  challenge must change the intent.
 - **checks** (`/check <check> [slug]`) — mechanical conformance with
   the conventions, never substance or quality. Each check owns one
   concern and none another's; what each verifies is its agent file's,
@@ -596,8 +613,8 @@ propose readiness. The mechanics are the command's
 
 ## Ledger
 `ledger.md` is the **single source of truth for state**: its tables —
-briefs, documents, renders, sources, research, dependencies, findings,
-challenges — are `templates/ledger.md`'s; resources and dependencies
+briefs, documents, renders, published files, sources, research,
+dependencies, findings, challenges — are `templates/ledger.md`'s; resources and dependencies
 are registration only (what a resource is and is for lives in its
 directory's `00-INDEX.md`; a library document, cited by path, carries
 no version). Together with the
@@ -617,10 +634,11 @@ checks then say nothing of a missing assignment.
 | `/setup` | first run after cloning the engine: create and fill `CLAUDE.local.md` by interview, create `.claude/settings.local.json` with the model set to Fable (a notice, not a question), and offer the git identity per host (`includeIf` stanzas) with the global guard (`user.useConfigOnly = true`) in `~/.gitconfig`; never overwrites, runs no git operation |
 | `/new-project <slug>` | scaffold a project by kind — files only, never git: a thought project with its brief captured verbatim (locked if finished, draft otherwise), or a library (`lib-`) of shared material |
 | `/import-project <git-url>` | bring an existing project into `projects/` through `scripts/forge-clone.ps1` — the directory is the repository's name; the commit identity is git's, the script reports the one it resolves |
-| `/forge [slug]` | state map: artefacts, versions, possible next steps, stale renders |
+| `/forge [slug]` | state map: artefacts, versions, possible next steps, stale renders and published files |
 | `/forge <state> [slug]` | iterate the target artefact (`brief [name]`, `intent`, `assignment`, …); one definition file per state in `.claude/skills/forge/states/`, each declaring its inputs |
 | `/ingest [file] [slug]` | store and register external input — a file, or text pasted into the conversation — in sources/ and index it, asking what it is for and stopping before personal matter; bare = sweep sources/ |
-| `/render <recipe> [slug]` | regenerate a render from its recipe in recipes/ |
+| `/render <recipe> [slug]` | regenerate a render from its recipe in recipes/ and, where the recipe names a format, its plain file through pandoc |
+| `/publish <recipe> [slug]` | make the designed `.pptx` or `.docx` from the render of that recipe, through a model; started by the principal only |
 | `/recipe [genre] [slug]` | bare = genre roster; with a genre (`presentation`, `readme`, `release-notes`), guided composition — or iteration — of a render recipe from the genre's elicitation checklist and skeleton |
 | `/critique [lens] [artefact] [slug]` | bare = critic lens roster; with a lens (`clarity`, `essence`), run that critic on the quality of the project's documents — one artefact (`clarity`) or one artefact against its parent (`essence`) when named, else all → review + ledger |
 | `/challenge [persona] [artefact] [slug]` | bare = challenger persona roster; with a persona (e.g. `cto`), run that challenger against the substance of the named artefact, else the whole chain |

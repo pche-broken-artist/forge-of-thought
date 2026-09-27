@@ -1,13 +1,13 @@
 ---
 project: forge
 render: release-notes
-generated: 2026-09-20
+generated: 2026-09-27
 recipe: recipes/release-notes.md v0.10
 inputs:
   - projects/forge/10-intent.history.md
-  - projects/forge/10-intent.md v4.17
+  - projects/forge/10-intent.md v4.31
   - projects/forge/decisions.md
-  - RELEASE-NOTES.md (previous edition, released sections)
+  - RELEASE-NOTES.md (previous edition)
 ---
 
 # Forge of Thought — Release Notes
@@ -16,6 +16,142 @@ One section per release of the engine, newest first, for the user who
 takes upgrades through `forge-pull`; Action required comes first in
 every section; the fine-grained log with the reasons lives in
 `projects/forge/10-intent.history.md`.
+
+## 4.31 — 2026-09-27
+
+Nothing for the user of the engine.
+
+## 4.30 — 2026-09-27
+
+### Changed
+- The `project` check no longer verifies a render's provenance against
+  the ledger's Renders table; the `light` check does
+  (`.claude/agents/check-project.md`, `.claude/agents/check-light.md`).
+  For you: a mismatch is reported once, at `/save` as well as at
+  `/release`.
+- A one-line reminder that names its owner is not a restatement
+  (POS.1070). For you: the `single-source-of-truth` check no longer
+  raises such lines; it still raises repeated steps, rules and shapes.
+
+## 4.29 — 2026-09-27
+
+### Changed
+- The `project` check no longer reports a stale README or release notes
+  (POS.0570, `.claude/agents/check-project.md`). For you: one empty
+  finding less at every release; `/forge` still shows staleness, and
+  `/release` regenerates both regardless.
+
+## 4.28 — 2026-09-27
+
+### Action required
+- The verdict words of a walkthrough are one set: `accept`, `modify`,
+  `reject`, `park`, `obsolete` (POS.0850,
+  `.claude/skills/walkthrough/SKILL.md`). For you: in `/check`, `accept`
+  now means "do the fix" and `reject` means "leave it as it is", the
+  reverse of before; `fix`, `overrule`, `defer` and `leave open` are
+  gone.
+- A recipe says its format in a `## Format` section; the section
+  `## Build instructions` is retired and no longer copied into the
+  render (POS.0590, `templates/recipe.md`). For you: at the next
+  iteration of a recipe that is to become a file, rename the section and
+  give it the three lines of the skeleton; until then `/publish` reads
+  the old section and asks for the format.
+
+### Added
+- Every proposition closes with the line
+  `(a)ccept / (m)odify / (r)eject / (p)ark`, and a single letter answers
+  it (POS.0850). For you: type `a`, `m`, `r` or `p` as your whole
+  message; every other word of the forge is typed in full.
+- `write` orders the bulk write of everything carried in the round
+  (POS.1210). For you: say `write` when you want the round written;
+  Claude shows you the whole round first and writes on your yes.
+- The sign `??` asks for Claude's honest opinion (POS.0860, CLAUDE.md,
+  Working methods). For you: end a message with `??` standing alone and
+  you get three points at most, marked as Claude's own, with nothing
+  written.
+- `/publish <recipe>` makes the designed `.pptx` or `.docx` from the
+  render through a model, into `published/` (POS.0590,
+  `.claude/skills/publish/SKILL.md`). For you: you alone start it; it
+  converts the Markdown you have read and renders nothing.
+- The ledger's Published table says what each published file was made
+  from and whether it is `current` or `stale` (`templates/ledger.md`).
+  For you: `/forge` shows a published file that is older than its
+  render.
+
+### Changed
+- Finding states in the ledger: `overruled` is now `rejected`, and
+  `parked` is new (POS.0440, `templates/ledger.md`). For you: nothing to
+  do; the `light` check offers the conversion of your ledger as an
+  immediate fix, and an unconverted ledger is read correctly.
+- `/render` makes the plain file beside the Markdown through pandoc,
+  where the recipe names a format (POS.0590). For you: a Word file or a
+  deck for reading is fresh after every render; without pandoc the
+  Markdown is made and the file is not.
+- `scripts/md2pptx.ps1` and `scripts/md2docx.ps1` each have two engines,
+  `-Engine pandoc | claude` (POS.0740, POS.1150). For you: a call
+  without the switch does what it did before.
+
+## 4.27 — 2026-09-26
+
+Nothing for the user of the engine.
+
+## 4.26 — 2026-09-26
+
+### Added
+- One write per round among the working methods (POS.1210, CLAUDE.md).
+  For you: say it in a word when you want everything agreed so far
+  carried to one write at the round's end.
+
+### Changed
+- Prime directive 9: a correction on text just written belongs to the
+  round that wrote it, and a write you order does not close the round
+  unless you say so (POS.0190). For you: correcting a fresh write no
+  longer costs a version of its own.
+
+### Fixed
+- The per-prompt hook no longer depends on the working directory
+  (`.claude/settings.json`, `scripts/hook-walkthrough.ps1`, POS.1170).
+  For you: after `forge-pull`, restart the session once; the hook then
+  holds even when the working directory moves.
+
+## 4.25 — 2026-09-26
+
+Nothing for the user of the engine.
+
+## 4.24 — 2026-09-26
+
+Nothing for the user of the engine.
+
+## 4.23 — 2026-09-26
+
+Nothing for the user of the engine.
+
+## 4.22 — 2026-09-26
+
+Nothing for the user of the engine.
+
+## 4.21 — 2026-09-26
+
+### Changed
+- Claude cannot run `git` directly in the engine: `.claude/settings.json`
+  denies it in both shells, the scripts stay the only door (POS.1200).
+  For you: after `forge-pull` the deny rules apply from the next
+  session; your own git from the shell is untouched.
+- Commits made through the forge carry no `Co-Authored-By` or
+  `Claude-Session` trailer (POS.1200, `.claude/settings.json`). For you:
+  the commit message is the one you confirmed and nothing more.
+
+## 4.20 — 2026-09-21
+
+Nothing for the user of the engine.
+
+## 4.19 — 2026-09-21
+
+Nothing for the user of the engine.
+
+## 4.18 — 2026-09-21
+
+Nothing for the user of the engine.
 
 ## 4.17 — 2026-09-20
 
