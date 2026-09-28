@@ -24,7 +24,7 @@ absorbed it; Note says what remains (partial) or the REJ (dropped). -->
 |---|---|---|---|---|
 | 00-brief.md | — | placeholder: brief stage was skipped, intent is the earliest record | — | accepted under DEC.0010, not a check finding |
 | 00-brief-public-engine.md | 1.0 | approved | mined | born in the forge 2026-08-29 (THR.0130, THR.0090), locked 2026-08-29 in English after the CTO challenge; mined into intent 2.21 (POS.0940–0980, REJ.0140–0150, THR.0190–0200). Instance work it records — the one-off migration steps 1–6, the first projects after the split — stays here and under Waiting on principal, not in the intent |
-| 00-brief-elicitation.md | 0.2 | draft | pending | born in the forge 2026-09-28: elicitation as a process of finding per artefact — the seven-block shape of a definition, the agreed wording for brief, intent and assignment, the horizon, the marks in a brief, mechanism versus instance (THR.0300), the split and the order elicitation, `brd`, `engine-split`; not yet locked |
+| 00-brief-elicitation.md | 0.4 | draft | pending | born in the forge 2026-09-28: elicitation as a process of finding per artefact — the seven-block shape of a definition, the agreed wording for brief, intent and assignment, the horizon, the marks in a brief, mechanism versus instance (THR.0300), the split and the order elicitation, `brd`, `engine-split`; 0.3 walked against a review of it (sources/forge-elicitation-brief-review.md); 0.4 the brief as the principal's choice from the finding, not a pile (turns POS.0110, to be decided at mining), all three definitions with their blocks; not a model of a brief, see its opening note; not yet locked |
 
 ## Documents
 | File | Version | Status | Date |
@@ -61,6 +61,7 @@ sources/00-INDEX.md. -->
 |---|---|---|---|
 | forge-run-record-health.md | 2026-09-13 | content | text |
 | word-default-a4.docx | 2026-09-20 | file | binary |
+| forge-elicitation-brief-review.md | 2026-09-28 | ingested | text |
 
 ## Dependencies
 <!-- Registration only. Documents of other repositories this project
@@ -169,7 +170,7 @@ intent version for accepted, DEC.NNNN for rejected. -->
   `elicitation` 0.2): 1. THR.0350's leftovers; 2. the brief
   `elicitation` (below), then `brd` and `engine-split` in the order
   it proposes, undecided until mined (THR.0230).
-- `00-brief-elicitation.md` — draft 0.2, born 2026-09-28, waiting on
+- `00-brief-elicitation.md` — draft 0.4, born 2026-09-28, waiting on
   the lock; proposes the order elicitation → `brd` → `engine-split`,
   undecided until mined (THR.0230).
 - THR.0400 — a gate in front of the tools; the reminder half done

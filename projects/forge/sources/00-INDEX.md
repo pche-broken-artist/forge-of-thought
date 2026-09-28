@@ -1,7 +1,7 @@
 ---
 project: forge
 directory: sources
-updated: 2026-09-21
+updated: 2026-09-28
 ---
 
 # Index — sources of Forge of Thought
@@ -26,3 +26,9 @@ to its own 00-INDEX.md — two levels, never deeper. -->
 - **Origin:** Made on 20 September 2026 by Word itself, through automation, from the principal's `Normal.dotm` — a new document with each heading style applied once and the paper set to A4 — because `Normal.dotm` alone keeps the heading styles latent and a Word file built from it shows headings as body text. Stored here the same day on the principal's word; confirmed as its home on 21 September 2026. Not converted to Markdown: it is a functional thing.
 - **Role:** —
 - **Use for:** —
+
+### `forge-elicitation-brief-review.md`
+- **What:** A review of `00-brief-elicitation.md` 0.2 against `10-intent.md` 4.31, in twelve sections: what the extension gets right, seventeen material problems each with a recommended wording, thirteen decisions the brief should make explicitly, a proposed normative contract for the seven-block definition, complete candidate definitions of brief, intent and assignment, the boundaries between the three, seven risks with controls, a ten-step implementation sequence and a disposition of the brief (keep, modify, move to separate work). Its conclusion: the definition contract and the three definitions are mature enough to work, the engine split belongs to a separate brief.
+- **Origin:** Author and date not stated in the file; its front-matter names the two reviewed documents and the text declares itself material for the forge to ingest and work through, not a replacement brief. Found in `sources/` and registered on the principal's command on 28 September 2026.
+- **Role:** —
+- **Use for:** A critique of `00-brief-elicitation.md`: to be analysed and used to improve `00-brief-elicitation.md`.
