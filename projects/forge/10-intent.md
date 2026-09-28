@@ -1,8 +1,8 @@
 ---
-version: 4.31
-date: 2026-09-27
+version: 4.32
+date: 2026-09-28
 status: draft
-last_change: 4.31 (2026-09-27): THR.0430 opened - a command that ends a session, verifying that nothing lives only in the conversation and recording in the ledger the time spent and the tokens burnt, read from the harness's transcripts by a script, never estimated by Claude.
+last_change: 4.32 (2026-09-28): the brief elicitation mined - elicitation as a process of finding with a definition of seven blocks per artefact and the three definitions in full (POS.1300 to POS.1380), a brief as the principal's choice from the finding and no longer the whole pile (POS.0110), the order elicitation, brd, engine-split; three threads opened for what stays undecided.
 project: forge
 audience: principal + Claude only
 ---
@@ -176,8 +176,11 @@ position that already stands elsewhere.
   under this method and no method of its own, for the size of
   CLAUDE.md (THR.0240).
 - **POS.0870 Elicitation interview.** Claude draws out by questions
-  what the principal has not yet articulated, rather than filling gaps
-  by assumption (POS.0020); the heart of `/forge intent`.
+  what the principal has not yet articulated, rather than filling
+  gaps by assumption (POS.0020); the heart of `/forge intent`. The
+  interview is the form a conversation takes; elicitation itself is
+  the process of finding an artefact, which uses research and
+  sources beside the interview (POS.1300).
 - **POS.0880 Draft early.** An early draft is an elicitation tool,
   not an output: concrete text sharpens the principal's reaction
   (POS.0150).
@@ -251,60 +254,495 @@ position that already stands elsewhere.
   and not only in the assistant's memory; the rule itself is unchanged
   since 4.9.
 
+### Elicitation
+- **POS.1300 What elicitation is.** Elicitation is the process by
+  which the principal and Claude find an artefact together and form
+  the knowledge it holds. It is not any conversation of theirs, and
+  in its meaning it is not a conversation at all: the conversation
+  is the medium, the interview (POS.0870) is one instrument,
+  research and sources are others. Three things are kept apart: the
+  map (what must be found for the artefact to be complete), the
+  process (how the map is walked) and the template (where the result
+  lands); the map stands before the template. Elicitation differs by
+  artefact: the talk over a brief, over an intent and over a BRD are
+  three different talks, and every artefact type has a definition of
+  its own (POS.1310). Not elicitation: composing a recipe, which is
+  configuration from known options and not the finding of knowledge;
+  `/setup`; the walkthrough of a reviewer's findings, which has its
+  shape already and nothing per artefact in it. That elicitation is
+  a process with several instruments is the consensus of the
+  disciplines and no novelty of the forge (research
+  `2026-09-28-human-ai-elicitation-over-artefacts.md`). Decided
+  2026-09-28 from `00-brief-elicitation.md`.
+- **POS.1310 The shape of a definition.** The elicitation of one
+  artefact type is defined in seven blocks, in reading order:
+  **Target** (the artefact's file and its template), **Inputs**
+  (what the finding starts from), **Aim** (what the elicitation
+  achieves and when the artefact is complete: the one place where
+  completion is stated), **Partner** (Claude's stance: what he does,
+  what he does not do, who steers the finding and who the
+  decisions), **Map** (what must be found, POS.1320),
+  **Instruments** (only the mechanisms of the forge this artefact
+  uses in a way of its own, cited and never described) and
+  **Course** (the ways in, the order, and what is offered when the
+  Aim's completion is reached; it states no completion of its own).
+  Every definition carries all seven, so that the shape can be
+  checked; a block empty on purpose says so with the reason and is
+  never silently left out. Aim and Partner do not repeat each other:
+  Aim says what is true of the artefact at the end, Partner what
+  Claude does beyond that, citing the Aim. Outside the definition,
+  as shared mechanism cited and never repeated (POS.1070): the form
+  of the conversation (POS.0850), one write per round (POS.0190),
+  versioning with history and ledger (POS.0310), creation from the
+  template, the language question (POS.0060), ending by naming the
+  state. The definition lives in the state file of `/forge`
+  (POS.0580) and stands beside the artefact's template as a pair:
+  how we get there, and what is to come out. The genre files of
+  `/recipe` (POS.0770) map onto the shape without loss, Genre and
+  Skeleton to Target, Role to Partner, the elicitation checklist to
+  Map; the seven blocks themselves are for the artefacts of the
+  chain. The rules of particular artefacts that CLAUDE.md carries
+  (Document chain 1 to 3, Requirement style, prime directive 8) are
+  what moves into the definitions, in the order POS.1380 sets. The
+  definitions of the three artefacts of today's chain are POS.1330,
+  POS.1340 and POS.1350, in full; the state files are derived from
+  them, as every part of the operating layer is derived from the
+  intent. Decided 2026-09-28 from `00-brief-elicitation.md`.
+- **POS.1320 A Map is a map of what must be found, not a
+  questionnaire.** It names, in the artefact's own vocabulary, what
+  the finding looks at; it prescribes neither the headings of the
+  document nor the order of the conversation, and it is neither a
+  list of questions nor a list of criteria. It is walked at the
+  moments its definition names, as the question whether each area
+  has been consciously considered; an area may stay empty when it
+  was considered and found not to apply. How an area is found is the
+  situation's: a question, a research step, a source. The precedent
+  inside the forge is the elicitation checklist of a genre file;
+  outside it, a coverage map held by the one who elicits and never
+  read out as questions (research
+  `2026-09-28-human-ai-elicitation-over-artefacts.md`). Decided
+  2026-09-28 from `00-brief-elicitation.md`.
+- **POS.1330 The definition of the brief's elicitation.** The seven
+  blocks of POS.1310, in the wording agreed in
+  `00-brief-elicitation.md`, word for word.
+
+  **Target.** `00-brief.md` (bare) or `00-brief-<name>.md` (with a
+  name — a later whole of thinking born during the project's life).
+  Shape of the result: `templates/brief.md` — a YAML header, then
+  free form: any headings, tables or lists the principal finds
+  useful, no IDs, no conventions of the chain. What a brief is, its
+  language and its lifecycle from draft to the lock: CLAUDE.md,
+  Document chain 1.
+
+  **Inputs.** The principal's thought, however it arrives. Around
+  it, gathered during the elicitation: research notes (`research/`),
+  sources (`sources/`) and Claude's own proposals. The existing
+  intent and ledger are read only to know what already stands, never
+  to shape the text.
+
+  **Aim.** The brief puts the idea together: what the principal
+  wants and why, with what he chose to take from the finding around
+  it, in whatever structure serves the thought. The finding is wide
+  (research, sources, his ideas and Claude's) and the brief is not
+  its record: what goes in and what stays out is the principal's
+  decision, made on what was found. What stays out lives in
+  `research/` and `sources/` where it is a finding or a source, and
+  otherwise nowhere. The brief is rough on purpose, neither perfect
+  nor detailed: the chiselling is the intent's, and a brief polished
+  until the intent has nothing left to do has gone too far. Nothing
+  in it is yet a position. The brief is complete when the principal
+  says so and locks it; the Map is walked before the lock is
+  offered.
+
+  **Partner.** The brief is the principal's text, and Claude's part
+  changes on the way. At the opening Claude is the active one: he
+  inspires, brings how the same thing is done elsewhere and how
+  original the idea is, verifies what can be verified, and proposes
+  research and ingest (Instruments); a proposal of his, however
+  large, serves the finding and is not the brief. Then the brief is
+  written, and it is mainly the principal's text. Claude moves him
+  to describe what he wants, why and what he does not want, and
+  writes it down whole by whole as they have talked it over. Claude
+  may work on the text: translate it, mend its grammar, and put an
+  idea of his own into it in his own wording where the principal has
+  accepted it; what he has formulated he reflects back before it is
+  written. What he does not do is take the text over: he does not
+  decide what goes in, and he does not chisel it into an intent.
+
+  Claude holds the form. A brief says what the idea is and why; it
+  may carry a mechanism where the mechanism is part of the idea.
+  Once the talk turns to taking it apart and agreeing it piece by
+  piece (definitions, blocks, wording), Claude says in one sentence
+  that this is the intent's work and does not develop it. The
+  principal decides whether it stays in the brief as one open line
+  or is let go. No walkthrough runs over the text of a brief and no
+  IDs enter it.
+
+  What Claude thinks of it he says when asked (`??`, CLAUDE.md,
+  Working methods). What does not fit he says at once and unasked,
+  in one sentence: a wrong assumption, a contradiction, a risk
+  (CLAUDE.md, prime directive 1). What goes into the brief and what
+  stays out is the principal's to say.
+
+  **Map.** The Map is of the finding, not of the brief: it names
+  what the finding looks at, and what of it enters the brief is the
+  principal's choice. The brief has no required content, and the Map
+  prescribes neither headings nor the order of the conversation. It
+  is walked once, at the closing, before the lock is offered: has
+  each area been consciously considered? An area may leave nothing
+  in the brief. The walk asks and does not mend: a tension, an
+  alternative left undecided or a boundary left vague may stay in
+  the brief as it is, since resolving them is the intent's work.
+  - the thought in the principal's words: what he wants, why, and
+    what prompted it;
+  - the world around it: what exists that does the same or the
+    opposite, and what of it is inspiration, counter-example or
+    proof that the wheel exists;
+  - the material: the sources and research the thought rests on,
+    gathered and registered, so that the intent can cite them;
+  - what is still open: what was not decided or verified during the
+    finding.
+
+  **Instruments.** `/research <topic>`: durable findings into
+  `research/`, indexed. `/ingest [file]`: outside material into
+  `sources/`, registered and indexed. Both are steps of the
+  elicitation, proposed by Claude and run on the principal's word.
+  Claude proposes a research step against a named need: an
+  uncertainty, a comparison, an inspiration. After it he says what
+  it changed in the thought, what stays uncertain and whether more
+  research is likely to change anything; whether to go on is the
+  principal's to say. What the research did not find, or found not
+  to hold, is a finding like any other and stands in the research
+  note; it enters the brief where the principal takes it.
+
+  **Course.** Resolve the project and the file; create the brief
+  with its companion and ledger row if it does not exist; stop if it
+  is approved — a new whole is a new brief. However the text
+  arrives: pasted whole — store it verbatim and ask whether it is
+  finished, if so lock at once; begun outside — store what came,
+  then work from where it stops; born here — the principal opens
+  with a rough idea and Claude works from the first word as the
+  Partner says, verifies, confronts, proposes, draws out, and
+  accumulates the principal's answers as his text, not as a summary
+  of them; a summary or a structured proposal he asks to record is
+  stored as shown, never re-narrated. Write once per round on his
+  confirmation; lock only on his explicit word; end by naming the
+  state and, if locked, proposing `/forge intent`.
+
+  Before the lock the principal may have Claude give the brief a
+  structure: the text gathered under headings in a logical order,
+  what repeats pointed out, the grammar mended. Claude adds nothing,
+  drops nothing and rewords no thought; he shows the structure
+  before it is written, and the headings are the principal's to
+  rename. The step is the principal's to ask for, never a condition
+  of the lock.
+
+  Decided 2026-09-28 from `00-brief-elicitation.md`. With the
+  translation, the mending of grammar and the structure before the
+  lock, the definition replaces the earlier rule never to translate,
+  restructure or tidy the text of a brief. Two sentences of the
+  brief's text are not carried here, since they speak of the mining
+  and not of the definition: the one that leaves that rule to the
+  mining, settled by this position, and the one naming three matters
+  left open for the intent, which are THR.0440 (a) to (c).
+- **POS.1340 The definition of the intent's elicitation.** The seven
+  blocks of POS.1310. Aim, Partner, Map, Instruments and Course are
+  in the wording agreed in `00-brief-elicitation.md`, word for word;
+  Target and Inputs are those of the state file as it stood on
+  2026-09-28, to which the brief refers.
+
+  **Target.** `10-intent.md`. Shape of the result:
+  `templates/intent.md`.
+
+  **Inputs.** The locked briefs (`00-brief.md` and any
+  `00-brief-<name>.md` with status approved; a draft brief is not
+  yet an input), `decisions.md`, the ledger; sources only as the
+  principal directs.
+
+  **Aim.** The intent chisels the briefs into what the principal
+  holds: from the briefs, the sources and the conversation it keeps
+  what matters as positions, what is the case as facts, what is
+  undecided as threads and what was dropped as rejections with the
+  reason. Every idea is weighed twice — good or bad, feasible or
+  not — and placed on a horizon where the principal sees one: a
+  proof of concept, the first version, a later one, or good but far
+  away. Everything coherent, nothing twice, every position with its
+  provenance, and the whole passed through a final reality check
+  before a lower layer is derived. It is complete for now when no
+  thread blocks the next layer; it is never finished.
+
+  **Partner.** Claude helps the principal reach the Aim: mines the
+  briefs with him whole by whole, probes contradictions, gaps and
+  unstated assumptions, reflects a brain-dump back as structure
+  before it is written, offers options with trade-offs, proposes
+  research where a thread needs outside grounding, and runs the
+  final reality check with him. He composes the wording, the
+  principal the substance; a thread closes only on his word.
+
+  **Map.** What the intent finds, whatever the order; where it lands
+  is the template's. Walked at the round's end, before a lower layer
+  is proposed or the intent is approved; an area may stay empty when
+  it was considered and found not to apply.
+  - the essence: what the principal wants and why, as of today;
+  - the weight of every idea: what he holds and why, what he dropped
+    and why, what he deferred, which is not dropped;
+  - the ground: what is the case, and on whose word or which source;
+  - the horizon: where he sees one, what is a proof of concept, the
+    first version, later, or good but far away;
+  - what is open: what is undecided, what it would take to decide
+    it, and which of it blocks the layer below;
+  - the briefs as wholes: whether the substance of each is in the
+    intent, was dropped, or was knowingly left behind;
+  - what the layer below will need: the recipients, the objective
+    and the success criteria, as soon as he sees them;
+  - reality: what of it is feasible, and where the wheel already
+    exists.
+
+  **Instruments.** `/research <topic>`: proposed where a thread
+  needs outside grounding, run on the principal's word. A source
+  enters only as the principal directs (CLAUDE.md, Document chain
+  5). `/challenge <persona> intent`: the independent reality check,
+  offered once the joint one is done, never run on Claude's own
+  judgement. The walkthrough of every position, where the intent was
+  consolidated by Claude (CLAUDE.md, Document chain 2).
+
+  **Course.** Resolve the project and read the inputs and the intent
+  as it stands. The ways in: no intent yet, and the locked briefs
+  are consolidated into the first one, which waits for its
+  walkthrough (CLAUDE.md, Document chain 2); a brief pending or
+  partial, and it is mined whole by whole, one brief at a time; an
+  open thread, a new word of the principal's or what the recipients
+  sent back, and the round starts there. Briefs are offered before
+  threads. Within a round one theme at a time; the reality check
+  comes last, before a lower layer is proposed. On the write,
+  resolved threads move into positions or rejections and the Mined
+  column of every brief touched is kept (write once per round,
+  versioning and ledger: CLAUDE.md). End by naming what changed and
+  what stays open; when the Aim's completion is reached, propose the
+  next state, or the approval where the chain ends at the intent: a
+  recommendation, never a gate.
+
+  Where the recipients, the objective and the success criteria live:
+  today only in the assignment (Objective, Purpose & Context,
+  Success Criteria with SCR — optional, delegated or absent). The
+  intent has no place for them but one that is easily forgotten: the
+  section "Candidate structure for assignment", an optional staging
+  area before distillation. They are substance, so intent-first says
+  they are found above: that section is where the intent carries the
+  recipients, the objective and the success criteria as soon as the
+  principal sees them — positions with IDs like everything in the
+  intent, no new section, no new prefix; the intent's Map names it
+  and its Aim includes it. The assignment then distils them too,
+  instead of finding them first.
+
+  Decided 2026-09-28 from `00-brief-elicitation.md`. What the
+  brief's second review holds against "weighed twice" is THR.0440
+  (e); no fate is recorded part by part at mining (REJ.0210).
+- **POS.1350 The definition of the assignment's elicitation.** The
+  seven blocks of POS.1310. Aim, Partner, Map, Instruments and
+  Course, with the joint pass, are in the wording agreed in
+  `00-brief-elicitation.md`, word for word; Target and Inputs are
+  those of the state file as it stood on 2026-09-28, to which the
+  brief refers.
+
+  **Target.** `20-assignment.md`. Shape of the result:
+  `templates/assignment.md`.
+
+  **Inputs.** `10-intent.md`, `decisions.md`, the ledger.
+
+  **Aim.** The assignment carries the in-scope substance of the
+  intent to the recipients, complete and precise, so that they can
+  act on it without the principal in the room: who they are, what
+  must be true at the end, what is theirs to decide and bring back,
+  what they shall not do, and what the principal has left open on
+  purpose. It is complete when nothing the recipients would need is
+  left to assumption — delegated or open on purpose is complete,
+  silent is not.
+
+  **Partner.** Claude first reads the intent against what the
+  assignment needs — recipients, objective, delegation, success
+  criteria, horizon — and asks up front only what the intent lacks:
+  who the recipients are, what is delegated and what specified,
+  whether success criteria are present, delegated or deliberately
+  absent, what is later. Then he drafts the whole from the intent
+  with a provenance map (group → items → positions; positions that
+  landed nowhere, items that came from nowhere), guards completeness
+  and drift by it, and raises what the intent is silent on as a TBC
+  rather than filling it. The two then walk the draft through group
+  by group, the map in view, a question on one item opening it and
+  closing it in place; a substance change is proposed to the intent
+  first. The wording is Claude's, in the Requirement style; the
+  substance the principal's.
+
+  **Map.** What the assignment finds, most of it in the intent and
+  the rest by asking; where it lands is the template's. Walked
+  twice: before the recast, to see what the intent leaves
+  unanswered, and at the end of the joint pass; an area may stay
+  empty when it was considered and found not to apply.
+  - the recipients: who they are, what they already know and what
+    they will do with the assignment;
+  - the objective: what must be true at the end;
+  - the cut: what of the intent is theirs now, what is expressly
+    later and what is out of scope;
+  - the line between assigning and solving: what is specified, what
+    is theirs to decide and bring back, what is left open on purpose
+    and whose it is;
+  - the boundaries: what they shall not do, what is not to be
+    challenged, and what the whole rests on;
+  - success: criteria present, delegated or deliberately absent;
+  - the words: what must be defined so that the assignment is read
+    without the principal in the room.
+
+  **Instruments.** The provenance map (phase 2 below): a tool of the
+  pass, no part of the assignment. The walkthrough by group (phase 3
+  below): one item of the walkthrough is one group of the
+  assignment. `/critique essence`: the independent test of drift,
+  offered after the joint pass, never run on Claude's own judgement.
+
+  **Course.** Resolve the project and read the intent and the
+  assignment as it stands; say whether the intent is ready to be
+  derived from (CLAUDE.md, Document chain 2), never as a gate. The
+  ways in: no assignment yet, and the joint pass runs whole, in its
+  three phases below; an assignment that stands and an intent that
+  moved, and the pass runs on what changed, the provenance map
+  showing what the change touched; a wording fix, made in the
+  assignment directly. A substance change asked for in the
+  assignment goes to the intent first (CLAUDE.md, Working methods).
+  End by naming what changed; when the Aim's completion is reached,
+  offer `/critique essence`, then the approval: a recommendation,
+  never a gate.
+
+  The joint pass, in three phases and no new kind of interview:
+
+  1. Questions up front — one per message, only what is the
+     principal's and the intent does not answer. None where the
+     intent answers everything; rarely more than six, and where more
+     are needed the intent is not ready and the work returns to it.
+  2. The recast — Claude writes the whole draft from the intent, and
+     with it the provenance map: group → items → the positions they
+     came from, plus the in-scope positions that landed nowhere (to
+     be none) and the items with no position (drift, to be none).
+     The map is a tool of the pass, not part of the assignment.
+  3. The walkthrough by group — one item of the walkthrough is one
+     group (`### <Group>`): what it covers, from which positions,
+     what in it is DEL or TBC, what is optional or later. A verdict
+     per group; a question on a single item opens a sub-item and
+     closes it before moving on. Dozens of items pass in a handful
+     of messages and nothing is skipped, the provenance visible at
+     each. After the pass, `/critique essence` offered as the
+     independent test of drift; its findings, an ordinary
+     walkthrough.
+
+  Why not item by item: most items are craft derived from the intent
+  and a verdict on each is ceremony. Why not "read the whole":
+  without the map one sees what is there, not what is missing.
+
+  Decided 2026-09-28 from `00-brief-elicitation.md`. What the
+  brief's second review holds against "the words" as an area of a
+  Map and against the number six is THR.0440 (f) and (g).
+- **POS.1360 The horizon lives in all three layers, each carrying
+  its own kind, nothing twice.** The intent carries the judgement:
+  why this is a proof of concept, this the first version, this
+  later, and what was deferred, which is not what was rejected; it
+  is found and carried in free form, a word in a position being
+  enough. The assignment carries the boundary: what is assigned now
+  and what is expressly later, so that the recipients neither build
+  it nor design it away; no reasons, those stay in the intent; an
+  optional note, only where the recipients would otherwise build
+  something that is later. The BRD carries the phasing: what each
+  version delivers, in what order, with what dependencies; there the
+  horizon is mandatory, even if only as the statement that
+  everything is in the first version. "Later" in an assignment is
+  not out of scope: out of scope is never done, later is done, only
+  not now. The shape for the intent and the assignment is not solved
+  here, and the whole is the principal's stance for now, confirmed
+  when the BRD gets its definition in the brief `brd` (THR.0360). No
+  outside model of a horizon divided among layers was found, so the
+  division is the forge's own and is tried, not assumed (research
+  `2026-09-28-artefact-layers-from-idea-to-handover.md`). Decided
+  2026-09-28 from `00-brief-elicitation.md`.
+- **POS.1370 How sure a claim is, is said in words.** Whatever
+  Claude brings as knowledge says in plain words whether it is
+  verified and on what, unverified, or a hypothesis; a claim never
+  gains certainty by being written into an artefact. Words, not
+  marks: no mark of certainty is introduced, as no mark of
+  authorship or of acceptance is kept (POS.0110). The rule is
+  Claude's conduct and therefore holds in every layer of the chain
+  and in the conversation, not in the brief alone; it is the
+  companion of POS.0020, which keeps Claude's constructions from
+  passing for facts. Decided 2026-09-28 from
+  `00-brief-elicitation.md`.
+- **POS.1380 The order of the work, and what proves it.** The
+  elicitation comes first; then the brief `brd`, the first instance
+  of the shape of POS.1310; then the brief `engine-split`
+  (THR.0230). The elicitation can be solved in today's engine
+  without deciding the split, and self-contained definitions are the
+  prerequisite of a later split, never the other way round: once the
+  definitions stand on their own, the split is a decision about
+  roots and installation, a move of files. The proof is conduct, not
+  the number of lines CLAUDE.md loses: the three definitions are
+  written whole first, swept for restatement by the
+  `single-source-of-truth` check (POS.1140), and tried on real work,
+  one run from a brief through the intent to an assignment, before
+  any rule leaves CLAUDE.md; a rule leaves only once its definition
+  has been seen to hold. The situations to try: a finished brief
+  locked without an interview, a raw idea, a brief that needs no
+  research, a brief locked with a tension left unresolved, an
+  assignment drafted with no question asked, a drift the provenance
+  map catches (`sources/forge-elicitation-brief-review.md`). Locked
+  artefacts are untouched by the change. Decided 2026-09-28 from
+  `00-brief-elicitation.md`.
+
 ### Document chain
 - **POS.0100** Files in the chain are numbered in tens (`00-brief.md`,
   `10-intent.md`, `20-assignment.md`) so later layers — a BRD
   (`30-brd.md`), a solution design — can be added without renaming
   anything that exists.
-- **POS.0110** A brief is an intent that is composed and then locked.
-  It is the principal's own text — the birthplace of one whole of
-  thinking — free-form: any structure the principal finds useful
-  (prose, headings, tables, use cases), no required content and no
-  IDs; only a minimal YAML header (project, title, date, author,
-  version, status, last_change). It holds thoughts to be processed, not
-  decisions: they may be changed, reworked or dropped when mined, and
-  only the intent turns them into positions. No structure is
-  *required* because a required one would force premature tidiness and
-  destroy the diagnostic value of how the idea was actually dumped —
-  but none is forbidden either, and a summary the principal orders
-  into a brief is stored as shown, never re-narrated. A brief has two
-  states: *draft* while it is being composed, and *approved* (version
-  1.0) once the principal locks it; immutability runs from the lock,
-  not from the file's creation. Three origins are equally legitimate
-  and the forge does not distinguish them: the brief arrives finished
-  from outside and is locked on arrival; it is begun outside and
-  finished with Claude in the forge; or it is born in the forge from
-  the first word. `/forge brief [name]` is the door for the latter
-  two, and it runs under the principal's moderation: he says what is
-  being explored and steers; Claude clarifies where he is terse or
-  unclear and correlates the thought with reality throughout,
-  offering best practice, projects and standards that solve the same
-  thing ("are we reinventing the wheel?") through `/research` and
-  `/ingest`, which Claude proposes and the principal times. The aim
-  of a brief is a thought clear enough to be checked against what
-  exists or to draw inspiration from it. What a brief born by
-  elicitation holds is the whole pile as it emerged, not the
-  principal's words alone: what he says, what the conversation
-  yields, what the research finds, what the sources say — he needs
-  the sources most at the brief, since over them he learns what he
-  wants. More in the brief and cleaning in the intent, never a clean
-  brief: the intent is where the pile is sorted, and mining already
-  lets thoughts be changed or dropped. The principal's words stay
-  unmarked; every block that is not his own opens with its origin in
-  italics, *(Claude)* or *(source: <path>)*, lightly, so that the
-  intent can later say whose word a position rests on (POS.1180) and
-  the essence lens still measures drift against his words. A brief
-  handed over finished is the same thing, a pile that happens to be
-  all his. Decided 2026-09-14 in the principal's words, from the run
-  record of `health` (`sources/forge-run-record-health.md`): "brief =
-  the principal's words only" (G.01) was a misreading of the model,
-  and what broke that run was Claude saying "written" while Claude's
-  part of the pile lived nowhere (F.01, POS.0190); the record's
-  alternative homes for it are REJ.0180. `/new-project` creates `00-brief.md` at scaffold
-  time with the pre-filled header; the principal's verbatim text
-  completes it. A locked brief is the provenance anchor of its whole:
-  the record against which later drift is measured. The draft state
-  and the forge-born brief decided 2026-08-27 (history 2.12–2.13).
+- **POS.0110** A brief is the principal's own text of one whole of
+  thinking, composed and then locked: what he wants and why, with
+  what he chose to take from the finding around it. It is
+  free-form: any structure the principal finds useful (prose,
+  headings, tables, use cases), no required content and no IDs; only
+  a minimal YAML header (project, title, date, author, version,
+  status, last_change). It holds thoughts to be processed, not
+  decisions: they may be changed, reworked or dropped when mined,
+  and only the intent turns them into positions. No structure is
+  *required*, because a required one would force premature
+  tidiness, and none is forbidden; a summary the principal orders
+  into a brief is stored as shown, never re-narrated. A brief is
+  rough on purpose, neither perfect nor detailed: the chiselling is
+  the intent's, and a brief polished until the intent has nothing
+  left to do has gone too far. It is not the record of the finding.
+  The finding is wide (research, sources, the principal's ideas and
+  Claude's) and gathers as many ideas as it can; what goes into the
+  brief and what stays out is the principal's decision, made on what
+  was found. What stays out lives in `research/` and `sources/`
+  where it is a finding or a source, and otherwise nowhere
+  (REJ.0180). Nothing in a brief marks authorship: what is in it the
+  principal approved, whoever first said it (REJ.0220). Two marks
+  stay, because they carry something other than authorship:
+  `(source: <path>)` says where a claim is from and becomes a fact
+  with provenance at mining; a short `(remark: …)` stands where a
+  reservation, an uncertainty or a suggestion was raised that the
+  principal did not adopt, named by what it is and not by who made
+  it, so that it reads the same whatever model the forge runs on.
+  A brief has two states: *draft* while it is being composed, and
+  *approved* (version 1.0) once the principal locks it; immutability
+  runs from the lock, not from the file's creation. Three origins
+  are equally legitimate and the forge does not distinguish them:
+  the brief arrives finished from outside and is locked on arrival;
+  it is begun outside and finished with Claude in the forge; or it
+  is born in the forge from the first word. `/forge brief [name]` is
+  the door for the latter two, and how a brief is found there is
+  POS.1330. `/new-project` creates `00-brief.md` at scaffold time
+  with the pre-filled header. A locked brief is the provenance
+  anchor of its whole: the record against which later drift is
+  measured. Present shape 2026-09-28, from
+  `00-brief-elicitation.md`; the shape of 2026-09-14, in which a
+  brief born by elicitation held the whole pile with Claude's part
+  marked, is history 4.9. What stands of that day is its cause:
+  Claude never reports as written what lives only in the
+  conversation (POS.0190).
 - **POS.0920** A project may have more than one brief, and the ledger
   tracks how far each is mined. The founding brief is `00-brief.md`;
   every later whole of thinking that would otherwise land in the
@@ -705,7 +1143,7 @@ position that already stands elsewhere.
 
   | Group | Kind | Meaning | Written by | Versioned | Behaviour |
   |---|---|---|---|---|---|
-  | artefacts | brief | the idea as it emerged: the principal's words alone when handed over finished, the whole pile of the elicitation when born in the forge | principal, with Claude's part marked | yes | locked at 1.0, then immutable |
+  | artefacts | brief | the idea put together: what the principal wants and why, with what he chose from the finding | principal; Claude may work on the text | yes | locked at 1.0, then immutable |
   | artefacts | intent | current understanding for principal and Claude: positions, facts, threads, rejections | Claude, principal composes | yes | rewritten freely |
   | artefacts | assignment | the direction handed to the recipients, self-contained | Claude, principal composes | yes | rewritten freely |
   | artefacts | later artefacts (BRD, RFP, article…) | further layers, each derived from the one above | Claude, principal composes | yes | rewritten freely |
@@ -1102,8 +1540,10 @@ position that already stands elsewhere.
   dispatcher, POS.1130), each declaring its own
   inputs — so the chain is a star, not a fixed line: a future layer
   branches from any artefact by adding one file, the dispatcher
-  untouched. `/clarify` and `/draft` were retired without aliases on
-  2026-08-15.
+  untouched. A state file is the definition of the elicitation of
+  its artefact, in the seven blocks of POS.1310, and stands beside
+  the artefact's template as a pair. `/clarify` and `/draft` were
+  retired without aliases on 2026-08-15.
 - **POS.0590** Everything the forge produces is Markdown, renders
   included: a presentation is a `.md` saying what is on each slide
   (mermaid for pictures). The forge still ends at content, but it
@@ -1784,6 +2224,10 @@ position that already stands elsewhere.
   with nested repositories won (POS.0940), rightly — and is not
   reused for the three-layer question; that question gets research of
   its own.
+  2026-09-28, from `00-brief-elicitation.md`: the objections
+  recorded here largely fall once CLAUDE.md stays in the engine and
+  a framework is a package of instances; for the brief
+  `engine-split`.
 - **THR.0200** The public face: an exemplar project for the README — the
   forge itself, or one created later; the company projects cannot
   travel. Until one exists the README carries a one-sentence placeholder
@@ -1928,18 +2372,28 @@ position that already stands elsewhere.
   against it, the BRD layer and the field feedback (THR.0350) are
   wanted quickly. Order agreed 2026-09-14: THR.0350 first, since the
   brief is to be born by co-elicitation, the technique the
-  run record faulted. The order of the briefs `brd` and
-  `engine-split` is undecided (the principal, 2026-09-27): the split
-  is not a prerequisite of `brd`, but taking it first would benefit
-  `brd`, if there is the energy for it; `brd` may carry the higher
-  priority. This replaces the earlier agreement to elicit the two
-  beside each other. The
+  run record faulted. The order of the briefs is POS.1380's since
+  2026-09-28: `brd` first, then `engine-split`. The
   brief's first item is research of its own into what Claude Code
   offers today for an engine carrying several frameworks — the
   packaging research of 2026-08-29 served the
   engine/projects split and is not reused. Whether every new position
   should name its layer waits for the brief to say what the layers
   are. CHL.0150 stays parked with the brief.
+  2026-09-28, from `00-brief-elicitation.md`, material for the brief
+  `engine-split` and nothing decided. The two ideas of the split, a
+  thin engine of its own and a large forge into which frameworks are
+  installed like plugins, are one thing seen from two ends, and the
+  question they open is what the unit of installation is. A Claude
+  Code plugin cannot carry CLAUDE.md as always-on context and
+  carries everything else (research
+  `2026-08-29-claude-code-packaging.md`), which divides by itself:
+  the engine is the repository with CLAUDE.md and the mechanisms, a
+  framework is a package of instances (definition pairs, lenses,
+  personas, checks, genres). The cost is the one CHL.0110 named: the
+  rules of particular artefacts must first move from CLAUDE.md into
+  the definitions, which is what the elicitation per artefact does
+  (POS.1310). The installation mechanism is a research question.
 - **THR.0240** The size of CLAUDE.md. 523 lines on 2026-09-03 and
   growing with every iteration; THR.0190 already records that a split
   moves rules from always-on to on-demand and is a behaviour change, not
@@ -1978,6 +2432,11 @@ position that already stands elsewhere.
   copy, sentences echoed inside CLAUDE.md and in skills, rosters
   written out by name. The report is not filed; a re-run of the check
   gives them again.
+  2026-09-28: the elicitation per artefact (POS.1310) is the move of
+  the rules of particular artefacts out of CLAUDE.md into their
+  definitions. The brief's estimate is 43 to 53 lines fewer of 663
+  in the always-on part, the state files growing by about as much;
+  the line count is an effect, the proof is conduct (POS.1380).
 - **THR.0250** Two suggested functions: an expander and an essence
   manager. A tip the principal received on 2026-09-03 — where from not
   recorded. The essence manager got its detail the same day: at the end
@@ -2015,6 +2474,22 @@ position that already stands elsewhere.
   third layer and taken back out on 2026-09-26 by the principal's
   correction, which also widened it from agents to everything a user
   writes for himself.
+  2026-09-28, from `00-brief-elicitation.md`, material and nothing
+  decided. The elicitation is to be user-definable like a check, and
+  the boundary that says where to stop is mechanism versus instance.
+  The engine owns the mechanism: the `/forge` dispatcher, the shape
+  of a state file, the contract of a template, the shape of the
+  conversation, the numbering of layers. An instance is one pair of
+  files, state file plus template; a user-defined check is an
+  instance of the check contract, a user-defined artefact an
+  instance of the same kind. The engine never defines an instance,
+  the user never changes the mechanism. The test: does CLAUDE.md
+  have to change for it? If not, it is this thread's; if yes, it is
+  a derivation (THR.0420). Order: the shape first (POS.1310), then
+  the extension point. Open: where a user's definition lives so that
+  `forge-pull` never overwrites it; a remark in the brief, for
+  `engine-split`: if the mechanism is one, the dispatcher reads both
+  roots, the engine's and the local one.
 - **THR.0320** A harness lens. The principal's direction of
   2026-09-05: the critic roster gets a lens `harness` that reviews
   the operating layer — CLAUDE.md and the skills, commands and agents
@@ -2135,6 +2610,10 @@ position that already stands elsewhere.
   Still to do from this thread: the sweep of this project's ledger
   (POS.0160), and the observation of the hook in the next
   walkthroughs.
+  2026-09-28: the model of the co-elicited brief stated here on
+  2026-09-13 was turned. A brief holds the principal's choice from
+  the finding, not the pile, and carries no mark of authorship
+  (POS.0110, POS.1330).
 
 - **THR.0360** A layer with an external audience. The first real run
   below the intent (project `health`,
@@ -2165,6 +2644,10 @@ position that already stands elsewhere.
   in that round (the principal's direction of 2026-09-07). Opened
   2026-09-14 from THR.0350; origin: the principal's word and the
   record.
+  2026-09-28: the brief `brd` is the first instance of the
+  definition shape (POS.1310, POS.1380), and the horizon returns in
+  it: mandatory in the BRD, its shape in the intent and the
+  assignment still to be solved (POS.1360).
 - **THR.0370** Mermaid diagrams in Word. `scripts/md2docx.ps1`
   (POS.1150) converts a render to Word through pandoc and leaves
   Mermaid blocks as code. Agreed in the walkthrough of 2026-09-12 but
@@ -2293,6 +2776,10 @@ position that already stands elsewhere.
   of the mechanics. Whether each derivation gets a brief of its own,
   and which is taken first, is undecided; nothing is scheduled.
   Opened 2026-09-26 from THR.0230 at the principal's direction.
+  2026-09-28: the line against THR.0300 is drawn there (mechanism
+  versus instance, the test on CLAUDE.md). Without it a user's local
+  additions grow into a derivation, and the one tool that does
+  everything comes in through the door for user artefacts.
 - **THR.0430** A command that ends a session. It verifies that
   nothing lives only in the conversation — an unwritten round, a
   repository with changes (`forge-status`), a stale render — and
@@ -2308,6 +2795,77 @@ position that already stands elsewhere.
   the sum is per session or cumulative, and the research of the
   transcript format before any script. Opened 2026-09-27 at the
   principal's direction.
+- **THR.0440** What the brief `elicitation` and its second review
+  left open. Origin: the brief and
+  `sources/forge-elicitation-brief-review-v0.4.md`; the
+  recommendations are Claude's, offered once. (a) Whether the
+  brief's Map names the boundaries, what is not wanted and what is
+  out of scope; Claude: yes, as a fifth area, since the Partner
+  already asks what he does not want. (b) Whether the Course of a
+  brief offers the lock as soon as the talk turns to the intent's
+  work; Claude: yes, once, as a recommendation and never a gate.
+  (c) Whether a brief born in the forge carries marks and citations
+  at all; Claude: a source is cited where its identity supports,
+  limits or contradicts the thought, and mere inspiration stays
+  discoverable through the research note. (d) `(remark: …)` covers
+  three states that behave differently; Claude: keep it for a
+  reservation or an uncertainty that must stay visible, an
+  unadopted suggestion being normally gone. (e) "Every idea is
+  weighed twice" in the intent's Aim; Claude: each material idea
+  judged for its value and for feasibility wherever either
+  distinction matters. (f) A Map is defined as what must be found,
+  while "the words" of the assignment's Map is something verified;
+  Claude: "found or consciously verified", the area renamed
+  self-containment. (g) The number of questions up front as the
+  sign that the intent is not ready; Claude: the boundary is
+  unresolved substance against handover detail, a large number is
+  evidence of it and not its definition. (h) Whether an alternative
+  the principal did not take may stay visible in a brief; Claude:
+  no rule needed, what goes in is his to say, a note included.
+  A matter closed here changes the wording of its definition
+  (POS.1330 to POS.1350). Opened 2026-09-28.
+- **THR.0450** What the researches of 2026-09-28 propose beyond the
+  brief. Origin: Claude's synthesis from
+  `research/2026-09-28-artefact-layers-from-idea-to-handover.md`
+  and
+  `research/2026-09-28-human-ai-elicitation-over-artefacts.md`;
+  nothing decided. (a) The order of initiative. Four controlled
+  studies agree that the further an AI goes into the drafting, the
+  better the text and the weaker the human's ownership of it, and
+  that a model used from the start narrows the ideas; their limit is
+  short tasks with lay participants, none a domain expert on a
+  document of his own. Against them stand two things the principal
+  wants: the active opening of POS.1330 and an early draft in its
+  extreme form, a whole proposal as the first answer (POS.0880).
+  The question is whether both stand as written. Claude: they
+  stand, with the principal's own statement of the thought first
+  wherever it does not arrive written, and Claude's proposal
+  offered rough and named as a proposal. (b) A state said per area
+  when a Map is walked, so that "considered and left open" differs
+  from "not looked at"; Claude: said aloud at the walk, nothing
+  written, since a recorded state is a new convention and hardens
+  into a gate. (c) The assignment's completion stated as doctrine
+  states it, the recipients acting rightly when the plan no longer
+  fits, and one sentence admitting that a live briefing beside the
+  document is normal. (d) One sentence in the outward-facing
+  renders on what a brief is here: elsewhere the word names a short
+  direction written for someone else. (e) For the brief `brd`: a
+  future possibility is never used to justify the present proposal.
+  (f) Three choices of the forge have no outside model and are
+  hypotheses to be tried: a locked brief in the owner's words as
+  provenance, the horizon divided among the layers (POS.1360), and
+  "polished too far" as a defect of a brief (POS.0110). Opened
+  2026-09-28.
+- **THR.0460** `/recipe` and `/forge`: one dispatcher or two.
+  Today the states of `/forge` and the genres of `/recipe` are one
+  mechanism written twice in different shapes. A recipe is composed
+  and not found (POS.1300), so the seven blocks are not its shape;
+  whether `/recipe` becomes `/forge recipe <genre> [name]` is a
+  question of mechanism, left open as a small matter. A remark in
+  the brief: one mechanism would unify the language question and
+  "composed from the skeleton"; against it stands that `/forge` is
+  the door of the chain. Opened 2026-09-28 from
+  `00-brief-elicitation.md`.
 
 Note: the ID THR.0120 was inadvertently used twice — first for the
 readme-recipe thread (opened 1.14, closed 1.16), then for the
@@ -2396,13 +2954,16 @@ and DEC.0130.
   branch on those who do not need one. The switching half survives as
   the voluntary `forge-branch` of POS.1110; the merging half stays
   git's.
-- **REJ.0180** A home for Claude's synthesis before the intent exists:
-  an intent 0.1 as a draft beside a draft brief, or a "notes" record
-  kind (P.07 of `sources/forge-run-record-health.md`). Rejected
-  2026-09-14: the brief is the home — a brief born by elicitation
-  carries Claude's part too (POS.0110), so nothing needs a second
-  file or a new kind; the principal set P.07 aside as the wrong fix
-  on 2026-09-13.
+- **REJ.0180** A second home for what the finding of a brief yields
+  and the brief does not take: an intent 0.1 as a draft beside a
+  draft brief, a "notes" record kind (P.07 of
+  `sources/forge-run-record-health.md`), or a new artefact before
+  the brief. Rejected 2026-09-14 and again 2026-09-28, with the
+  reason changed. Then the brief itself was the home, since it held
+  the whole pile; now the brief holds the principal's choice
+  (POS.0110), and what he does not take needs no home: a finding or
+  a source has `research/` and `sources/`, and what merely fell by
+  in the conversation is gone with it.
 - **REJ.0190** A "parked" document kind without a mining state, for
   matter set aside from a layer (P.12, G.06). Rejected for now,
   2026-09-14: parked matter lives as a THR of the intent or under a
@@ -2414,6 +2975,18 @@ and DEC.0130.
   a gap of the engine — the harness's exact-replacement edit tool
   exists and is the rule (no shell for reading or editing project
   files, the principal's word of 2026-09-14).
+- **REJ.0210** A recorded fate for every part of a brief at mining.
+  Written into the draft of `00-brief-elicitation.md` and dropped
+  before its lock, 2026-09-28, as complexity without need: mining
+  would turn into bookkeeping. The intent's Map looks at each brief
+  as a whole instead (POS.1340).
+- **REJ.0220** Marks of authorship in a brief: *(Claude)* in italics
+  before every block that is not the principal's own, the rule of
+  2026-09-14. Dropped 2026-09-28: what is in the brief the principal
+  approved, whoever first said it, and a mark that names a model
+  reads differently on every model the forge runs on. What carried
+  something other than authorship stays as `(source: <path>)` and
+  `(remark: …)` (POS.0110).
 
 ## Candidate structure for assignment
 

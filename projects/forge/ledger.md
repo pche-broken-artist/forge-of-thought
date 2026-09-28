@@ -24,12 +24,12 @@ absorbed it; Note says what remains (partial) or the REJ (dropped). -->
 |---|---|---|---|---|
 | 00-brief.md | — | placeholder: brief stage was skipped, intent is the earliest record | — | accepted under DEC.0010, not a check finding |
 | 00-brief-public-engine.md | 1.0 | approved | mined | born in the forge 2026-08-29 (THR.0130, THR.0090), locked 2026-08-29 in English after the CTO challenge; mined into intent 2.21 (POS.0940–0980, REJ.0140–0150, THR.0190–0200). Instance work it records — the one-off migration steps 1–6, the first projects after the split — stays here and under Waiting on principal, not in the intent |
-| 00-brief-elicitation.md | 0.5 | draft | pending | born in the forge 2026-09-28: elicitation as a process of finding per artefact — the seven-block shape of a definition, the agreed wording for brief, intent and assignment, the horizon, the marks in a brief, mechanism versus instance (THR.0300), the split and the order elicitation, `brd`, `engine-split`; 0.3 walked against a review of it (sources/forge-elicitation-brief-review.md); 0.4 the brief as the principal's choice from the finding, not a pile (turns POS.0110, to be decided at mining), all three definitions with their blocks; 0.5 after a second review of it (sources/forge-elicitation-brief-review-v0.4.md); not a model of a brief, see its opening note; not yet locked |
+| 00-brief-elicitation.md | 1.0 | approved | mined | born in the forge and locked 2026-09-28; mined into intent 4.32 (POS.1300 to POS.1380, POS.0110, REJ.0180, REJ.0210, REJ.0220, THR.0440 to THR.0460). The material for the briefs `brd` and `engine-split` is carried in THR.0230, THR.0300 and THR.0360. Not a model of a brief, see its opening note |
 
 ## Documents
 | File | Version | Status | Date |
 |---|---|---|---|
-| 10-intent.md | 4.31 | draft | 2026-09-27 |
+| 10-intent.md | 4.32 | draft | 2026-09-28 |
 | 20-assignment.md | — | not planned: the handover artefacts of this project are the core itself (CLAUDE.md, templates/, .claude/) and README.md | — |
 | decisions.md | — | 14 records (DEC.0010–0140) | 2026-09-27 |
 
@@ -88,6 +88,8 @@ research/00-INDEX.md. -->
 | 2026-09-05-good-release-notes.md | 2026-09-05 | 10-intent.md v3.34 (THR.0310; POS.0730, release-notes recipe 0.6); RELEASE-NOTES.md as rendered 2026-09-05 |
 | 2026-09-07-brd-layer-fork-analysis.md | 2026-09-07 | 10-intent.md v4.0 (POS.0700 growth path; POS.0210, POS.0760, POS.0780, POS.1140); a colleague's fork of the engine at intent 2.8, read from a local clone |
 | 2026-09-14-save-and-release-duration.md | 2026-09-14 | the ledger's Waiting section as of 2026-09-14; 10-intent.md v4.9 (POS.1100, POS.0810) |
+| 2026-09-28-artefact-layers-from-idea-to-handover.md | 2026-09-28 | 00-brief-elicitation.md v0.5 |
+| 2026-09-28-human-ai-elicitation-over-artefacts.md | 2026-09-28 | 00-brief-elicitation.md v0.5 |
 
 ## Findings
 <!-- State: open | resolved | rejected | parked | obsolete. Resolution:
@@ -167,13 +169,15 @@ intent version for accepted, DEC.NNNN for rejected. -->
 | CHL.0190 | accepted | Release 4.0 is queued and nothing says what an approved major of this intent means — a sign-off with no counterparty and no test (minor) | 2026-09-06-challenge-cto.md | intent 3.46 (POS.0300: what a major of the forge intent means and must pass) |
 
 ## Waiting on principal
-- Order (2026-09-18, intent 4.12; revised 2026-09-28, brief
-  `elicitation` 0.2): 1. THR.0350's leftovers; 2. the brief
-  `elicitation` (below), then `brd` and `engine-split` in the order
-  it proposes, undecided until mined (THR.0230).
-- `00-brief-elicitation.md` — draft 0.5, born 2026-09-28, waiting on
-  the lock; proposes the order elicitation → `brd` → `engine-split`,
-  undecided until mined (THR.0230).
+- Order (2026-09-28, intent 4.32, POS.1380): 1. THR.0350's
+  leftovers; 2. the operating layer of the elicitation; 3. the brief
+  `brd`; 4. the brief `engine-split`.
+- THR.0440 — what the brief `elicitation` and its second review
+  left open; eight matters, Claude's recommendation on each, open.
+- THR.0450 — what the researches of 2026-09-28 propose beyond the
+  brief; the order of initiative first, open.
+- THR.0460 — `/recipe` and `/forge`, one dispatcher or two; small,
+  open.
 - THR.0400 — a gate in front of the tools; the reminder half done
   2026-09-20 (intent 4.14), raw git denied 2026-09-21 (POS.1200),
   the rest of the enforcing hook on the table again since THR.0390
@@ -201,7 +205,7 @@ intent version for accepted, DEC.NNNN for rejected. -->
 - THR.0250 — expander and essence manager; parked 2026-09-03.
 - THR.0230 — can the forge be split into an engine and the rest;
   worked as the brief `engine-split` (with THR.0190), research
-  first; its order against `brd` undecided; CHL.0150 parked with it.
+  first; after `brd` (POS.1380); CHL.0150 parked with it.
 - THR.0420 — derivations of the forge for other jobs (online product
   managers = the product framework, test analysts with their test
   cases and strategies, project management); opened 2026-09-26,

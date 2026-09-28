@@ -3,9 +3,9 @@ project: forge
 title: Elicitation — one mechanism and shape for composing every artefact, user-definable
 date: 2026-09-28
 author: PCHe
-version: 0.5
-status: draft
-last_change: 0.5 (2026-09-28): the brief is mainly the principal's text and Claude may work on it; a mechanism may stand in a brief where it is part of the idea; a structure before the lock on the principal's word; the walk of the Map asks and does not mend; the intent's Map looks at the briefs as wholes.
+version: 1.0
+status: approved
+last_change: 1.0 (2026-09-28): locked by the principal as it stood at 0.6, after two reviews and two researches of the same day; drafts 0.1-0.6 born in the forge.
 ---
 
 <!-- Born in the forge on 2026-09-28. Everything below is the
@@ -16,9 +16,9 @@ not adopt stands as (remark: …). -->
 ## A note on this brief itself
 
 This is not a good brief, and no brief should look like it. It
-grew to some 580 lines, with three definitions worded block by
-block and two rounds of walkthrough over exact wording: we went
-straight to the intent's work and did it in a brief. Decided
+grew far too long, with three definitions worded block by block
+and several rounds over exact wording: we went straight to the
+intent's work and did it in a brief. Decided
 2026-09-28: it is finished as it stands and not cut down by force,
 so that the work is not thrown away. It is the exception and must
 not serve as an example. What it taught goes into the definition
@@ -340,9 +340,9 @@ Yesterday, instead of working straight in the forge, I began the
 preparation of a new project in Claude Desktop, because a brief does
 not work that way here yet, meaning to hand the result over as the
 base of a brief. I would want to do even that in the brief. The
-export lies in `tmp/rohlik-conversation-export.md` (not ingested: it
-will be a project of its own). What that conversation did that
-today's brief state does not:
+conversation was taken from the preparation of another project and
+is not kept here. What that conversation did that today's brief
+state does not:
 
 1. Research as step zero, not an offer: on the first paragraph
    Claude verified reality (the API's documentation, the actual
@@ -714,3 +714,14 @@ that needs no research, a brief locked with a tension left
 unresolved, an assignment drafted with no question asked, a drift
 the provenance map catches. Locked artefacts are untouched by the
 change: they are immutable already.
+
+## The world around it
+
+Two researches were done before the lock: on what stands between
+an idea and a handover elsewhere
+(source: research/2026-09-28-artefact-layers-from-idea-to-handover.md)
+and on how elicitation between a human and an AI is defined
+(source: research/2026-09-28-human-ai-elicitation-over-artefacts.md).
+Nothing in this brief was changed on them; what they confirm and
+what they put in question, the active opening and the early draft
+above all, is left to the mining.
