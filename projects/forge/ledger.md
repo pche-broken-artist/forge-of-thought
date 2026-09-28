@@ -3,7 +3,7 @@ project: forge
 kind: thought
 language: en
 terminal: intent
-updated: 2026-09-27
+updated: 2026-09-28
 ---
 
 # Ledger — Forge of Thought
@@ -24,6 +24,7 @@ absorbed it; Note says what remains (partial) or the REJ (dropped). -->
 |---|---|---|---|---|
 | 00-brief.md | — | placeholder: brief stage was skipped, intent is the earliest record | — | accepted under DEC.0010, not a check finding |
 | 00-brief-public-engine.md | 1.0 | approved | mined | born in the forge 2026-08-29 (THR.0130, THR.0090), locked 2026-08-29 in English after the CTO challenge; mined into intent 2.21 (POS.0940–0980, REJ.0140–0150, THR.0190–0200). Instance work it records — the one-off migration steps 1–6, the first projects after the split — stays here and under Waiting on principal, not in the intent |
+| 00-brief-elicitation.md | 0.2 | draft | pending | born in the forge 2026-09-28: elicitation as a process of finding per artefact — the seven-block shape of a definition, the agreed wording for brief, intent and assignment, the horizon, the marks in a brief, mechanism versus instance (THR.0300), the split and the order elicitation, `brd`, `engine-split`; not yet locked |
 
 ## Documents
 | File | Version | Status | Date |
@@ -164,9 +165,13 @@ intent version for accepted, DEC.NNNN for rejected. -->
 | CHL.0190 | accepted | Release 4.0 is queued and nothing says what an approved major of this intent means — a sign-off with no counterparty and no test (minor) | 2026-09-06-challenge-cto.md | intent 3.46 (POS.0300: what a major of the forge intent means and must pass) |
 
 ## Waiting on principal
-- Order (2026-09-18, intent 4.12; revised 2026-09-27, intent 4.28):
-  1. THR.0350's leftovers; 2. the briefs `brd` and `engine-split`,
-  their order undecided (THR.0230).
+- Order (2026-09-18, intent 4.12; revised 2026-09-28, brief
+  `elicitation` 0.2): 1. THR.0350's leftovers; 2. the brief
+  `elicitation` (below), then `brd` and `engine-split` in the order
+  it proposes, undecided until mined (THR.0230).
+- `00-brief-elicitation.md` — draft 0.2, born 2026-09-28, waiting on
+  the lock; proposes the order elicitation → `brd` → `engine-split`,
+  undecided until mined (THR.0230).
 - THR.0400 — a gate in front of the tools; the reminder half done
   2026-09-20 (intent 4.14), raw git denied 2026-09-21 (POS.1200),
   the rest of the enforcing hook on the table again since THR.0390
