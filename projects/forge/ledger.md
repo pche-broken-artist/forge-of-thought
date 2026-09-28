@@ -29,7 +29,7 @@ absorbed it; Note says what remains (partial) or the REJ (dropped). -->
 ## Documents
 | File | Version | Status | Date |
 |---|---|---|---|
-| 10-intent.md | 4.32 | draft | 2026-09-28 |
+| 10-intent.md | 4.33 | draft | 2026-09-28 |
 | 20-assignment.md | — | not planned: the handover artefacts of this project are the core itself (CLAUDE.md, templates/, .claude/) and README.md | — |
 | decisions.md | — | 14 records (DEC.0010–0140) | 2026-09-27 |
 
@@ -178,6 +178,9 @@ intent version for accepted, DEC.NNNN for rejected. -->
   brief; the order of initiative first, open.
 - THR.0460 — `/recipe` and `/forge`, one dispatcher or two; small,
   open.
+- THR.0470 — the intent too long to be read: stories and
+  measurements into the history, threads, precise wording and detail
+  out of the body; opened 2026-09-28, nothing decided.
 - THR.0400 — a gate in front of the tools; the reminder half done
   2026-09-20 (intent 4.14), raw git denied 2026-09-21 (POS.1200),
   the rest of the enforcing hook on the table again since THR.0390

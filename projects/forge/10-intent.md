@@ -1,8 +1,8 @@
 ---
-version: 4.32
+version: 4.33
 date: 2026-09-28
 status: draft
-last_change: 4.32 (2026-09-28): the brief elicitation mined - elicitation as a process of finding with a definition of seven blocks per artefact and the three definitions in full (POS.1300 to POS.1380), a brief as the principal's choice from the finding and no longer the whole pile (POS.0110), the order elicitation, brd, engine-split; three threads opened for what stays undecided.
+last_change: 4.33 (2026-09-28): THR.0470 opened - the intent is too long to be read; the stories and the measurements belong in the history, and whether threads, precise wording and detail live in the intent at all is to be worked out.
 project: forge
 audience: principal + Claude only
 ---
@@ -2866,6 +2866,40 @@ position that already stands elsewhere.
   "composed from the skeleton"; against it stands that `/forge` is
   the door of the chain. Opened 2026-09-28 from
   `00-brief-elicitation.md`.
+- **THR.0470** The intent is too long to be read. At 4.32 the forge
+  intent has 2 997 lines, and the principal finds it so talkative
+  that a human cannot read it: an intent is to be structured
+  decisions and the understanding of the aim. His word of
+  2026-09-28, to be worked from and nothing decided: the stories,
+  the reasons told with them and the measurements belong in the
+  history, exactly there, and the history is to be worked with
+  more; whether threads belong in the intent at all; whether it was
+  a mistake to make no assignment for the forge; whether the intent
+  may refer to a file that holds the detail, the wording of the
+  elicitation definitions for one, meant generally; whether large
+  files are split into smaller ones with a master index saying what
+  is where, for artefacts in general. Agreed in principle, his word
+  of the same day: detail lives in the intent until the file that
+  performs it exists and has been seen to hold, and then the intent
+  keeps the stance, the reason and a pointer. Open beside it:
+  whether a position keeps its reason in one sentence (POS.0120)
+  once the story has gone to the history. Claude's count and
+  estimate of the same day, the estimate unverified: the threads
+  are 711 lines; the stories, the measurements and the closed
+  matters inside threads about 510; operating detail about 320; the
+  three definitions in full 318 (POS.1330 to POS.1350); two groups,
+  Open threads and Operating environment, carry more than half of
+  the surplus. Claude's recommendations, offered once: the stories
+  are struck first, each checked against its history row before it
+  goes; threads move into a companion of the intent on the pattern
+  of the history companion, one version with the intent, the ledger
+  keeping its line per thread; no assignment for the forge, since
+  it would be a third copy beside the intent and the operating
+  layer, the hole being that precise wording has no home before it
+  is built; a position refers to a file of a kind that exists (a
+  script's header, a skill, a template, a research note, a locked
+  brief) and no new kind of document is added; splitting comes last
+  and for the intent alone. Opened 2026-09-28.
 
 Note: the ID THR.0120 was inadvertently used twice — first for the
 readme-recipe thread (opened 1.14, closed 1.16), then for the
