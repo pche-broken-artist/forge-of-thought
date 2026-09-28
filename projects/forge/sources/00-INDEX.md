@@ -32,3 +32,9 @@ to its own 00-INDEX.md — two levels, never deeper. -->
 - **Origin:** Author and date not stated in the file; its front-matter names the two reviewed documents and the text declares itself material for the forge to ingest and work through, not a replacement brief. Found in `sources/` and registered on the principal's command on 28 September 2026.
 - **Role:** —
 - **Use for:** A critique of `00-brief-elicitation.md`: to be analysed and used to improve `00-brief-elicitation.md`.
+
+### `forge-elicitation-brief-review-v0.4.md`
+- **What:** A second, incremental review of `00-brief-elicitation.md`, of its version 0.4, following `forge-elicitation-brief-review.md`: six points that 0.4 resolved, twelve remaining issues each with a recommended wording, one central decision it holds still open (whether Claude may formulate the text of a brief once the principal has accepted the substance), ten candidate amendments, and a disposition in three groups (ready to mine, decide during mining, keep out of this decision). Its conclusion: version 0.4 is ready to be used as input to the intent.
+- **Origin:** Author and date not stated in the file; its front-matter names the reviewed document and the previous review. Found in `sources/` and registered on the principal's command on 28 September 2026.
+- **Role:** A review, like the one before it: read and weighed, the principal deciding by his own judgement what of it is taken.
+- **Use for:** To be looked at against `00-brief-elicitation.md` 0.4 and used as the principal sees fit.

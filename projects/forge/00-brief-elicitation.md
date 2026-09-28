@@ -3,9 +3,9 @@ project: forge
 title: Elicitation — one mechanism and shape for composing every artefact, user-definable
 date: 2026-09-28
 author: PCHe
-version: 0.4
+version: 0.5
 status: draft
-last_change: 0.4 (2026-09-28): the brief is no pile but the principal's choice from the finding; its Partner written anew from his feedback; the fate of a brief's parts at mining dropped; the intent and the assignment given their Map, Instruments and Course; a note at the top that this brief grew into intent work and is no model of a brief.
+last_change: 0.5 (2026-09-28): the brief is mainly the principal's text and Claude may work on it; a mechanism may stand in a brief where it is part of the idea; a structure before the lock on the principal's word; the walk of the Map asks and does not mend; the intent's Map looks at the briefs as wholes.
 ---
 
 <!-- Born in the forge on 2026-09-28. Everything below is the
@@ -248,18 +248,22 @@ changes on the way. At the opening Claude is the active one: he
 inspires, brings how the same thing is done elsewhere and how
 original the idea is, verifies what can be verified, and proposes
 research and ingest (Instruments); a proposal of his, however
-large, serves the finding and is not the brief. Then the principal
-writes. Claude moves him to describe what he wants, why and what he
-does not want, and writes it down whole by whole as they have
-talked it over: his words, not a summary of them and not Claude's
-prose. Where the principal says the brief is written in another
-language than he speaks, Claude translates and mends the grammar,
-and nothing more: he does not restyle, tidy or add.
+large, serves the finding and is not the brief. Then the brief is
+written, and it is mainly the principal's text. Claude moves him to
+describe what he wants, why and what he does not want, and writes
+it down whole by whole as they have talked it over. Claude may
+work on the text: translate it, mend its grammar, and put an idea
+of his own into it in his own wording where the principal has
+accepted it; what he has formulated he reflects back before it is
+written. What he does not do is take the text over: he does not
+decide what goes in, and he does not chisel it into an intent.
 
-Claude holds the form. A brief says what and why; once the talk
-turns to how exactly (definitions, blocks, wording to be agreed),
-Claude says in one sentence that this is the intent's work and
-does not develop it. The principal decides whether it stays in the
+Claude holds the form. A brief says what the idea is and why; it
+may carry a mechanism where the mechanism is part of the idea.
+Once the talk turns to taking it apart and agreeing it piece by
+piece (definitions, blocks, wording), Claude says in one sentence
+that this is the intent's work and does not develop it. The
+principal decides whether it stays in the
 brief as one open line or is let go. No walkthrough runs over the
 text of a brief and no IDs enter it.
 
@@ -275,7 +279,9 @@ principal's choice. The brief has no required content, and the Map
 prescribes neither headings nor the order of the conversation. It
 is walked once, at the closing, before the lock is offered: has
 each area been consciously considered? An area may leave nothing
-in the brief.
+in the brief. The walk asks and does not mend: a tension, an
+alternative left undecided or a boundary left vague may stay in
+the brief as it is, since resolving them is the intent's work.
 - the thought in the principal's words: what he wants, why, and
   what prompted it;
 - the world around it: what exists that does the same or the
@@ -311,6 +317,16 @@ structured proposal he asks to record is stored as shown, never
 re-narrated. Write once per round on his confirmation; lock only on
 his explicit word; end by naming the state and, if locked, proposing
 `/forge intent`.
+
+Before the lock the principal may have Claude give the brief a
+structure: the text gathered under headings in a logical order,
+what repeats pointed out, the grammar mended. Claude adds nothing,
+drops nothing and rewords no thought; he shows the structure
+before it is written, and the headings are the principal's to
+rename. The step is the principal's to ask for, never a condition
+of the lock. With translation and grammar it turns the rule of
+today's state file never to translate, restructure or tidy the
+text; to be decided at mining.
 
 Left open for the intent: whether the brief's Map names the
 boundaries (what is not wanted, what is out of scope), whether the
@@ -394,6 +410,8 @@ it was considered and found not to apply.
   first version, later, or good but far away;
 - what is open: what is undecided, what it would take to decide it,
   and which of it blocks the layer below;
+- the briefs as wholes: whether the substance of each is in the
+  intent, was dropped, or was knowingly left behind;
 - what the layer below will need: the recipients, the objective and
   the success criteria, as soon as he sees them;
 - reality: what of it is feasible, and where the wheel already
@@ -692,6 +710,7 @@ definition has been seen to hold. The situations to try are listed
 in a review of this brief
 (source: sources/forge-elicitation-brief-review.md, section 2.17):
 a finished brief locked without an interview, a raw idea, a brief
-that needs no research, an assignment drafted with no question
-asked, a drift the provenance map catches. Locked artefacts are
-untouched by the change: they are immutable already.
+that needs no research, a brief locked with a tension left
+unresolved, an assignment drafted with no question asked, a drift
+the provenance map catches. Locked artefacts are untouched by the
+change: they are immutable already.
