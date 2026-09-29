@@ -3,7 +3,7 @@ project: forge
 kind: thought
 language: en
 terminal: intent
-updated: 2026-09-28
+updated: 2026-09-29
 ---
 
 # Ledger — Forge of Thought
@@ -29,7 +29,7 @@ absorbed it; Note says what remains (partial) or the REJ (dropped). -->
 ## Documents
 | File | Version | Status | Date |
 |---|---|---|---|
-| 10-intent.md | 4.33 | draft | 2026-09-28 |
+| 10-intent.md | 4.34 | draft | 2026-09-29 |
 | 20-assignment.md | — | not planned: the handover artefacts of this project are the core itself (CLAUDE.md, templates/, .claude/) and README.md | — |
 | decisions.md | — | 14 records (DEC.0010–0140) | 2026-09-27 |
 
@@ -90,6 +90,8 @@ research/00-INDEX.md. -->
 | 2026-09-14-save-and-release-duration.md | 2026-09-14 | the ledger's Waiting section as of 2026-09-14; 10-intent.md v4.9 (POS.1100, POS.0810) |
 | 2026-09-28-artefact-layers-from-idea-to-handover.md | 2026-09-28 | 00-brief-elicitation.md v0.5 |
 | 2026-09-28-human-ai-elicitation-over-artefacts.md | 2026-09-28 | 00-brief-elicitation.md v0.5 |
+| 2026-09-29-change-history-of-document-items.md | 2026-09-29 | 10-intent.md v4.33 (THR.0470); the principal's questions of 2026-09-29 |
+| 2026-09-29-change-record-file-format.md | 2026-09-29 | 10-intent.md v4.33 (THR.0470); the principal's questions of 2026-09-29 |
 
 ## Findings
 <!-- State: open | resolved | rejected | parked | obsolete. Resolution:
@@ -169,18 +171,16 @@ intent version for accepted, DEC.NNNN for rejected. -->
 | CHL.0190 | accepted | Release 4.0 is queued and nothing says what an approved major of this intent means — a sign-off with no counterparty and no test (minor) | 2026-09-06-challenge-cto.md | intent 3.46 (POS.0300: what a major of the forge intent means and must pass) |
 
 ## Waiting on principal
-- Order (2026-09-28, intent 4.32, POS.1380): 1. THR.0350's
-  leftovers; 2. the operating layer of the elicitation; 3. the brief
-  `brd`; 4. the brief `engine-split`.
 - THR.0440 — what the brief `elicitation` and its second review
   left open; eight matters, Claude's recommendation on each, open.
 - THR.0450 — what the researches of 2026-09-28 propose beyond the
   brief; the order of initiative first, open.
 - THR.0460 — `/recipe` and `/forge`, one dispatcher or two; small,
   open.
-- THR.0470 — the intent too long to be read: stories and
-  measurements into the history, threads, precise wording and detail
-  out of the body; opened 2026-09-28, nothing decided.
+- THR.0470 — the intent too long to be read; worked 2026-09-29
+  (intent 4.34), the order of the work agreed and kept in the
+  thread, ahead of POS.1380's; next the cutting out of the threads;
+  whether large files are split stays open.
 - THR.0400 — a gate in front of the tools; the reminder half done
   2026-09-20 (intent 4.14), raw git denied 2026-09-21 (POS.1200),
   the rest of the enforcing hook on the table again since THR.0390

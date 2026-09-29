@@ -1,8 +1,8 @@
 ---
-version: 4.33
-date: 2026-09-28
+version: 4.34
+date: 2026-09-29
 status: draft
-last_change: 4.33 (2026-09-28): THR.0470 opened - the intent is too long to be read; the stories and the measurements belong in the history, and whether threads, precise wording and detail live in the intent at all is to be worked out.
+last_change: 4.34 (2026-09-29): THR.0470 worked by walkthrough - what a position carries, the history as a log with the old table in an archive, release notes derived from the log, the threads in a file of their own, the check `history`; the order of the work is in THR.0470; nothing outside the intent changed yet.
 project: forge
 audience: principal + Claude only
 ---
@@ -767,17 +767,51 @@ position that already stands elsewhere.
 - **POS.0120** `10-intent.md` is the working document: the consolidated
   *current* state of the principal's intent. Not an append-only log; it
   is rewritten for coherence each round, with changes recorded in its
-  Version History. It exists because chat context dies and anything of
+  history. It exists because chat context dies and anything of
   value must live in a file: it is the document to read when returning to
   a project after weeks, instead of excavating old conversations.
-  A position is a stance with its reason and its citations, dated
-  once. How it was reached — trials, measurements, counts, findings
-  settled, what others do — is the history row's, the ledger's or a
-  research note's, never the position's. Dated once means one date, the
-  day the position took its present shape; earlier steps are named by
-  their history row, not by date. A number stays only where it is the
-  rule or a threshold, never as a measurement — a measurement enters a
-  reason in words (CHL.0180, 2026-09-06).
+  A position says what the principal holds and why it holds, in as
+  many words as it takes to be understood without loss of meaning,
+  and names what it comes from, a brief or a source; it is dated
+  once. What does not belong in it is the way to it: why it was
+  changed, what was said on the way, trials, measurements, counts,
+  findings settled, what others do, which research turned it. All of
+  that is written into the history in the same step that writes the
+  position, while the whole context is at hand; a record of the
+  history may carry what was said and how the change was reached.
+  Dated once means one date, the day the position took its present
+  shape; earlier steps are found by searching the history for the
+  position's ID, and a position cites no record of the history. A
+  number stays only where it is the rule or a threshold, never as a
+  measurement. Text leaves a position only into the history, word
+  for word (POS.0310).
+  Detail lives in the intent only until the file that performs it
+  exists; from then on the position keeps what holds and why and
+  names the file, and the detail is the file's. Where the file
+  already exists, the detail leaves in the cleaning of the intent:
+  it goes into the history word for word and the position names the
+  file. Where the file is still to be built, the detail stays whole
+  and leaves as the last step of the work that builds and proves it:
+  the definitions of the elicitation leave when the state files have
+  been rewritten and tried (POS.1380). The file is of a kind the
+  forge already has: a skill, the header of a script, a template, a
+  research note, a locked brief. No new kind of document is added to
+  hold detail. Where the position and the file it names say
+  different things, that is a finding, never mended in silence.
+  The threads live in a file of their own beside the intent,
+  `10-intent.threads.md`: the intent says what holds, the threads
+  what is being worked. A thread says what is open and where it came
+  from, and carries the working debate for as long as it is
+  unsettled: what was said, what was tried, the plan of a change
+  under way, the proposals that await a decision. It is where an
+  unfinished conversation is saved. A settled thread leaves the file
+  and is kept whole: what holds goes into the intent, and the record
+  of its closing in the intent's history carries the thread's last
+  wording word for word in `Was`. The file is part of the intent as
+  the history is, freely rewritten, with no version and no history
+  of its own and no row in the ledger; the intent's history records
+  the birth and the closing of a thread, not every saving of its
+  debate. Present shape 2026-09-29 (CHL.0180, 2026-09-06; THR.0470).
 - **POS.0130** `20-assignment.md` is the distilled handover document for
   the recipients: complete, precise, structured, self-contained,
   versioned. It carries the whole in-scope substance of the intent —
@@ -991,21 +1025,25 @@ position that already stands elsewhere.
   exists; no other narrative, and no Unreleased section — nothing is
   unreleased at the moment of a render, which only `/release` runs.
   At a major the minors since the previous major are folded into it:
-  the major's section carries every Notes line of the span in the six
+  the major's section carries every line of the span in the six
   groups, a line superseded by a later minor dropped so that only the
   final state remains, and the sections of those minors disappear
   from the file — the house scheme's own reading of a major ("the
   next approved version, incorporating all changes since") and the
   field's folding of pre-releases into the final release; the detail
   per version stays in the history companion. Between majors every
-  release keeps its section. The sections are compiled, not
-  distilled: every line comes from the Notes block of the intent's
-  Version History rows (POS.0310), pruned and ordered by the render,
-  never classified by it. Released sections are carried over verbatim
+  release keeps its section. The sections are derived at the release
+  from the records of the history log since the previous release
+  (POS.0310): the render sorts them into the groups by their kind
+  and writes each line from the reader's side. One thing is never
+  derived: what the reader must do is written with the change, in
+  the `Action` field of its record, and the render carries it into
+  *Action required* word for word. Released sections are carried
+  over verbatim
   from the previous edition and never change retroactively; only
   factual corrections ordered by the principal touch one, through the
   recipe. A thought project's release notes work the same way from
-  the Notes of all its chain artefacts but the brief — intent,
+  the histories of all its chain artefacts but the brief — intent,
   assignment, later layers — for the recipients tracking it (genre
   skeleton `templates/recipe-release-notes.md`, `/recipe
   release-notes`). Reason: a reader wants to see plainly what was
@@ -1182,50 +1220,79 @@ position that already stands elsewhere.
   challenge, their findings settled or deferred by his word. The word
   closes the major; the test says what the word attests (CHL.0190,
   2026-09-06).
-- **POS.0310** Every versioned document keeps its Version History
-  (Version | Modification | Author | Date — human-readable, what changed
-  and why) in an append-only companion `<file>.history.md` beside it,
-  never in its body: the body is the current state, the companion the
-  record. One rule without exception — brief, intent, assignment, every
-  later artefact and the recipe alike; a brief that arrives finished
-  has one row, a brief born in the forge one per round. The document's
-  front-matter carries version, date, status and a machine-written
-  `last_change:` line summarising the newest row, written by the same
-  write step that appends the row, never by hand, so the two cannot
-  drift. The row of a chain artefact other than the brief — the
-  intent, the assignment, every later layer — closes with a **Notes**
-  block: after the prose, one line per change that reaches the reader
-  of the release notes, each opening with its group (Action required,
-  Added, Changed, Removed, Fixed, Rejected) and carrying a pointer, or
-  the one line "nothing for the reader"; written with the row, by
-  whoever made the change, so that the release notes (POS.0730) are
-  compiled from fresh lines and never classified afterwards. A Notes
-  line has two sides, in this order: what changed — the fact, with its
-  pointer — and then, after "For you:", what it means for the reader:
-  what they can now do, must do or can no longer do. Neither side
-  alone is a line: a fact without its consequence describes the
-  system, a consequence without its fact loses what changed, and no
-  recipe can supply a missing side, since the render compiles and does
-  not rewrite. The brief has no Notes (its history is a draft and a
-  lock, mined into the intent's rows), nor has a recipe (a tool, not
-  the project's content). The row in the companion is the single
-  primary: the commit messages `/save` and `/release` draft and the
-  release notes are derivations by mechanism, which POS.1070 permits —
-  a record rendered twice is not a procedure stated twice. The
+- **POS.0310** Every versioned document keeps its history in an
+  append-only companion `<file>.history.md` beside it, never in its
+  body: the body is the current state, the companion the record. One
+  rule without exception: brief, intent, assignment, every later
+  artefact and the recipe alike.
+  The history is a log in a Markdown file, with the front-matter it
+  has today (`project`, `document`). One record is one change and
+  one line, written as a list item; records are appended at the end
+  of the file and never rewritten, so the order of the file is the
+  order of the changes. A version may hold several records, of the
+  same item too. The fields stand in a fixed order, divided by
+  ` | `: date, version, author, subject, kind, reason, then
+  `Action:` and `Was:` where the record has them, `Was` always last.
+  A line names several IDs only where the whole line holds for each
+  of them, every ID in full and never a range; a line with `Was`
+  names one. `Was` is word for word the part of the wording that
+  ceased to hold; the line breaks of the wrapping become spaces and
+  paragraphs are divided by `<br>`. A record of creation needs no
+  reason: the wording is in the document. The lines of the log are
+  not wrapped.
+  The history of every versioned document is the same log. Where a
+  change touches an item, the record names its ID; where it touches
+  what has no ID, the record names the place: the heading of the
+  section, or the file name where the change is of the document as a
+  whole. `Was` is written for items with an ID; a record of a place
+  carries none.
+  The kinds of a record are `created`, `changed`, `closed` (a thread
+  or an open question settled), `removed` (an item leaves the
+  document and its ID is never used again) and `approved` (of the
+  document as a whole: the lock of a brief, the approval of a
+  major). Every record names its author, the third field: the one
+  who decided the change, by the handle the instance gives its
+  principal, never the one who typed it. The field is there from the
+  first record because a log is never rewritten and a field it lacks
+  cannot be added to what was written. A record may carry `Action:`,
+  what the user must do after the change, written with the change by
+  whoever made it; the release notes are derived from the records
+  (POS.0730).
+  The record is written in the same step as the change it records,
+  and the reflection before a write shows both: the new wording of
+  every item touched and the record the history will receive, `Was`
+  included. The `light` check verifies the form of the log and no
+  more; whether the division between a document and its history
+  holds is the check `history`'s (POS.1140). Before Claude proposes
+  a change to an item, he searches the history and its archive for
+  the item's ID. What he finds is said in the proposal only where it
+  bears on the change, a direction once tried and dropped above all.
+  The history is searched, never loaded whole.
+  The document's front-matter carries version, date, status and a
+  machine-written `last_change:` line, derived from the records of
+  the newest version by the same write step that appends them, never
+  by hand, so the two cannot drift. The log is the single primary:
+  the commit messages `/save` and `/release` draft and the release
+  notes are derivations by mechanism, which POS.1070 permits. The
   companion is part of its document: not a row of the ledger, handed
-  over with it by the link into git, read by a reviewer that needs the
-  document's trajectory and by nobody who needs its current state —
-  every command and isolated agent that loads the document is spared
-  a history that had outgrown the substance. A Version History
-  table in the body of a document is a `/check` finding, fixed by
-  moving it into the companion — that is how a project migrates to
-  this convention (POS.0820), on the principal's word, project by
-  project, each saved by its own `/save`; a colleague's project meets
-  the rule at its next `/check` after `forge-pull`. Present shape
-  2026-09-05 (history 3.21, 3.35–3.37; research
-  `2026-09-03-version-history-placement.md`, whose split by kind the
-  principal rejected as two rules for one thing, and
-  `2026-09-05-good-release-notes.md`); closes THR.0260 and THR.0310.
+  over with it by the link into git.
+  A companion written before the log keeps its table untouched: the
+  file moves as it stands to `<file>.history.archive.md`, immutable
+  from that moment, and the log begins in a new `<file>.history.md`
+  with the next version of the document. Nothing is converted: the
+  rows are a record and stay in the words they were written in. The
+  history of an item is a search of both files. The companion of a
+  locked brief never receives another record and stays as it is. A
+  Version History table, in the body of a document or in its
+  companion, is a `/check` finding settled by that move; that is how
+  a project migrates (POS.0820), on the principal's word, project by
+  project. Present shape 2026-09-29 (history 3.21, 3.35–3.37, 4.34;
+  research `2026-09-03-version-history-placement.md`, whose split by
+  kind the principal rejected as two rules for one thing,
+  `2026-09-05-good-release-notes.md`,
+  `2026-09-29-change-history-of-document-items.md` and
+  `2026-09-29-change-record-file-format.md`); closes THR.0260 and
+  THR.0310.
 - **POS.0320** Immutable documents (a locked brief, reviews, challenges,
   sources, research) are never edited — a brief from its lock, a source
   from its registration, the others from creation; corrections happen
@@ -1876,13 +1943,24 @@ position that already stands elsewhere.
   one file. The first checks, each owning one concern and none
   another's: `project` — structure, IDs, assignment style, language,
   immutables, recipes and renders; `light` — front-matter against the
-  companion, the ledger against the files, dependencies, resource
+  companion and the form of its log, the ledger against the files,
+  dependencies, resource
   indexes, fit for a save; `engine` — the core against itself and the
   forge intent, the rename sweep; `single-source-of-truth` — the
   whole operating layer for restatements and direct operations
   (POS.1070), the honest sweep, expensive by design, run on the
   principal's word before a major or after a round on the operating
-  layer, never by `/release` on its own, a project on request. A rule
+  layer, never by `/release` on its own, a project on request. The
+  check `history` reads a document with its history and reports
+  where the division between them does not hold, by what POS.0120
+  says belongs where: in the document, the way to an item (why it
+  was changed, what was said, trials, measurements, which research
+  turned it); and the other way, an item that can no longer be
+  understood because what makes it hold sits only in the history.
+  Each finding proposes the move in full, the text that leaves and
+  the record it becomes. The check moves nothing; its findings are
+  settled by walkthrough and written by the write step. Run on the
+  principal's word. A rule
   an older position attributes to `/check` as one procedure belongs
   to the check that owns its concern by this list — bookkeeping,
   ledger, dependencies and indexes to `light`, structure, recipes and
@@ -2026,8 +2104,8 @@ position that already stands elsewhere.
   is iterated, the render is never edited by hand, and every `/release`
   of the project regenerates both after its check (POS.1100). A library has a
   README only — a catalogue of what it holds and how to use it, from its
-  ledger and indexes — since release notes are compiled from the
-  Notes lines of an intent's history rows, which a library does not
+  ledger and indexes — since release notes are derived from the
+  history of an intent, which a library does not
   have; its history is git. The two recipes are genres of `/recipe` (skeletons
   `templates/recipe-readme.md`, `templates/recipe-release-notes.md`),
   scaffolded by `/new-project` and expected by `/check`; the ledger's
@@ -2869,37 +2947,49 @@ position that already stands elsewhere.
 - **THR.0470** The intent is too long to be read. At 4.32 the forge
   intent has 2 997 lines, and the principal finds it so talkative
   that a human cannot read it: an intent is to be structured
-  decisions and the understanding of the aim. His word of
-  2026-09-28, to be worked from and nothing decided: the stories,
-  the reasons told with them and the measurements belong in the
-  history, exactly there, and the history is to be worked with
-  more; whether threads belong in the intent at all; whether it was
-  a mistake to make no assignment for the forge; whether the intent
-  may refer to a file that holds the detail, the wording of the
-  elicitation definitions for one, meant generally; whether large
-  files are split into smaller ones with a master index saying what
-  is where, for artefacts in general. Agreed in principle, his word
-  of the same day: detail lives in the intent until the file that
-  performs it exists and has been seen to hold, and then the intent
-  keeps the stance, the reason and a pointer. Open beside it:
-  whether a position keeps its reason in one sentence (POS.0120)
-  once the story has gone to the history. Claude's count and
-  estimate of the same day, the estimate unverified: the threads
-  are 711 lines; the stories, the measurements and the closed
-  matters inside threads about 510; operating detail about 320; the
-  three definitions in full 318 (POS.1330 to POS.1350); two groups,
-  Open threads and Operating environment, carry more than half of
-  the surplus. Claude's recommendations, offered once: the stories
-  are struck first, each checked against its history row before it
-  goes; threads move into a companion of the intent on the pattern
-  of the history companion, one version with the intent, the ledger
-  keeping its line per thread; no assignment for the forge, since
-  it would be a third copy beside the intent and the operating
-  layer, the hole being that precise wording has no home before it
-  is built; a position refers to a file of a kind that exists (a
-  script's header, a skill, a template, a research note, a locked
-  brief) and no new kind of document is added; splitting comes last
-  and for the intent alone. Opened 2026-09-28.
+  decisions and the understanding of the aim. Worked 2026-09-29 by
+  walkthrough, thirteen matters, every verdict the principal's. What
+  was decided stands in POS.0120 (what a position carries, detail
+  and the file that performs it, the threads in a file of their
+  own), POS.0310 (the history as a log, the old table in an
+  archive), POS.0730 (release notes derived from the log) and
+  POS.1140 (the check `history`). Answered: no assignment is made
+  for the forge; it would be a third copy beside the intent and the
+  operating layer, and precise wording has its home in the intent
+  until the file that performs it exists.
+  Order agreed 2026-09-29, ahead of the order of POS.1380. The round
+  is written as 4.34 by the rules of the day. The threads are cut
+  out first: `10-intent.threads.md` is born, the threads move into
+  it word for word, and everything that names them is mended so that
+  they work on their own. The operating layer of the log follows,
+  the check `history` with it. The intent, now without its threads,
+  is then cleaned whole and at once, not finding by finding: Claude
+  prepares the cleaned intent and the records of the history as
+  files outside the project, moving text and changing no stance; the
+  way to a position goes into the history, and detail goes there
+  where the file that performs it exists. The prepared files are
+  verified against the intent as it stands by an isolated agent and
+  by a model of another family, both on the same instructions; where
+  a position names a file, the agent verifies that the file carries
+  the detail. The reports are walked with the principal and the
+  files mended. Only then is the project written: the table moves to
+  the archive, the log begins, the intent is replaced; the check
+  `history` runs on the result. By the principal's word this
+  verification stands in place of the walkthrough of every position.
+  Until a step is done, what it changes stands as it stood on
+  2026-09-28: the threads in the intent, the companions as tables
+  with their Notes, the release notes compiled from them.
+  Open: whether large files are split into smaller ones under a
+  master index. The intent has been divided by kind of content, not
+  by size: what holds, what is being worked, how it was reached. The
+  question is taken up again after the cleaning, on the measured
+  length of what is left.
+  Claude's count of 2026-09-28, the estimates unverified: the
+  threads are 711 lines; the stories, the measurements and the
+  closed matters inside threads about 510; operating detail about
+  320; the three definitions in full 318 (POS.1330 to POS.1350). Two
+  samples of the log made on 2026-09-29 lie in the engine's `tmp/`,
+  outside git; the shape they show is POS.0310's. Opened 2026-09-28.
 
 Note: the ID THR.0120 was inadvertently used twice — first for the
 readme-recipe thread (opened 1.14, closed 1.16), then for the
