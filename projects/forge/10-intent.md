@@ -1,8 +1,8 @@
 ---
-version: 4.34
-date: 2026-09-29
+version: 4.35
+date: 2026-09-30
 status: draft
-last_change: 4.34 (2026-09-29): THR.0470 worked by walkthrough - what a position carries, the history as a log with the old table in an archive, release notes derived from the log, the threads in a file of their own, the check `history`; the order of the work is in THR.0470; nothing outside the intent changed yet.
+last_change: 4.35 (2026-09-30): THR.0480 opened - how a new type is added to the engine, the principal's words saved unfinished (led centrally as one table of rules, easy for a future user to add artefacts, chains and elicitors; the elicitors of POS.1300-1380 on the list), to be settled before the engine split; the two researches of the day on the engine itself registered; nothing decided.
 project: forge
 audience: principal + Claude only
 ---
@@ -2472,6 +2472,8 @@ position that already stands elsewhere.
   rules of particular artefacts must first move from CLAUDE.md into
   the definitions, which is what the elicitation per artefact does
   (POS.1310). The installation mechanism is a research question.
+  How new types are added to the engine is THR.0480 (2026-09-30),
+  to be settled before this split.
 - **THR.0240** The size of CLAUDE.md. 523 lines on 2026-09-03 and
   growing with every iteration; THR.0190 already records that a split
   moves rules from always-on to on-demand and is a behaviour change, not
@@ -2990,6 +2992,38 @@ position that already stands elsewhere.
   320; the three definitions in full 318 (POS.1330 to POS.1350). Two
   samples of the log made on 2026-09-29 lie in the engine's `tmp/`,
   outside git; the shape they show is POS.0310's. Opened 2026-09-28.
+- **THR.0480** How a new type is added to the engine — a new
+  artefact of the chain, a whole new chain, a new elicitor, a new
+  reviewer, genre, command or script. Opened 2026-09-30 at the
+  principal's direction; can be worked at any time, and is to be
+  settled before the engine split (THR.0230), which inherits its
+  answer. The principal's words of 2026-09-30, saved unfinished and
+  nothing decided: (1) the creation of new types — or whatever we
+  come to call it — is a matter we should work on, at the least
+  somewhere around the engine-split work; (2) it should be led
+  centrally, as one table of rules for how each type is created, not
+  a sentence in every dispatcher as today; (3) the aim is to make it
+  very easy for a future user to add new artefacts, a whole new chain
+  and new elicitors of his own; (4) the elicitors belong on that list
+  — they are in the intent (POS.1300 to POS.1380) and not yet
+  implemented. Occasion: two researches of the day on the engine
+  itself, `research/2026-09-30-how-everything-in-the-forge-is-born.md`
+  (how the members of every type are made in a project) and
+  `research/2026-09-30-adding-a-new-type-to-the-engine.md` (what
+  adding a member to each type costs, every existing member searched
+  by name). What the second found and this thread starts from: a
+  persona costs one file and no edits, a layer two files and about
+  eleven places, because the operating layer writes "assignment"
+  where it means "the last layer"; the friction is the rosters
+  written into CLAUDE.md's sentences while the dispatchers scan the
+  same names from disk; the numbering of Document chain is cited 31
+  times and the first fourth layer meets it. Claude's addition,
+  marked as his: by POS.1310 the state file of `/forge` is the
+  elicitor, so a new artefact always means a new definition in the
+  seven blocks and a template as a pair; the second research first
+  described a layer by today's state file and was corrected to the
+  seven blocks, with a section on the elicitor, before its first
+  save, on the principal's word of 2026-09-30.
 
 Note: the ID THR.0120 was inadvertently used twice — first for the
 readme-recipe thread (opened 1.14, closed 1.16), then for the

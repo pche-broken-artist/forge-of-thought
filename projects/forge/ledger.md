@@ -3,7 +3,7 @@ project: forge
 kind: thought
 language: en
 terminal: intent
-updated: 2026-09-29
+updated: 2026-09-30
 ---
 
 # Ledger — Forge of Thought
@@ -29,7 +29,7 @@ absorbed it; Note says what remains (partial) or the REJ (dropped). -->
 ## Documents
 | File | Version | Status | Date |
 |---|---|---|---|
-| 10-intent.md | 4.34 | draft | 2026-09-29 |
+| 10-intent.md | 4.35 | draft | 2026-09-30 |
 | 20-assignment.md | — | not planned: the handover artefacts of this project are the core itself (CLAUDE.md, templates/, .claude/) and README.md | — |
 | decisions.md | — | 14 records (DEC.0010–0140) | 2026-09-27 |
 
@@ -92,6 +92,8 @@ research/00-INDEX.md. -->
 | 2026-09-28-human-ai-elicitation-over-artefacts.md | 2026-09-28 | 00-brief-elicitation.md v0.5 |
 | 2026-09-29-change-history-of-document-items.md | 2026-09-29 | 10-intent.md v4.33 (THR.0470); the principal's questions of 2026-09-29 |
 | 2026-09-29-change-record-file-format.md | 2026-09-29 | 10-intent.md v4.33 (THR.0470); the principal's questions of 2026-09-29 |
+| 2026-09-30-how-everything-in-the-forge-is-born.md | 2026-09-30 | the engine's definitions at commit c95cffe; 10-intent.md v4.34 (POS.0120, POS.0700, POS.1130); the principal's question of 2026-09-30 |
+| 2026-09-30-adding-a-new-type-to-the-engine.md | 2026-09-30 | the engine's definitions at commit c95cffe, every member of each type searched by name; 10-intent.md v4.34 (POS.0400-0420, POS.0700, POS.0960, POS.1000, POS.1070, POS.1120-1140); research/2026-09-07-brd-layer-fork-analysis.md; the principal's question of 2026-09-30 |
 
 ## Findings
 <!-- State: open | resolved | rejected | parked | obsolete. Resolution:
@@ -208,7 +210,11 @@ intent version for accepted, DEC.NNNN for rejected. -->
 - THR.0250 — expander and essence manager; parked 2026-09-03.
 - THR.0230 — can the forge be split into an engine and the rest;
   worked as the brief `engine-split` (with THR.0190), research
-  first; after `brd` (POS.1380); CHL.0150 parked with it.
+  first; after `brd` (POS.1380); CHL.0150 parked with it; THR.0480
+  to be settled before it.
+- THR.0480 — how a new type is added to the engine; opened
+  2026-09-30 (intent 4.35), the principal's stance saved, nothing
+  decided; any time, before THR.0230.
 - THR.0420 — derivations of the forge for other jobs (online product
   managers = the product framework, test analysts with their test
   cases and strategies, project management); opened 2026-09-26,
