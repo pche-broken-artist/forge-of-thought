@@ -1,8 +1,8 @@
 ---
-version: 4.35
+version: 4.36
 date: 2026-09-30
 status: draft
-last_change: 4.35 (2026-09-30): THR.0480 opened - how a new type is added to the engine, the principal's words saved unfinished (led centrally as one table of rules, easy for a future user to add artefacts, chains and elicitors; the elicitors of POS.1300-1380 on the list), to be settled before the engine split; the two researches of the day on the engine itself registered; nothing decided.
+last_change: 4.36 (2026-09-30): THR.0470 given the step table of its migration as agreed on 2026-09-29, nine steps, with what step 2 must mend, how the independent verification runs and the mechanical check offered; recovered from the transcript of that day; nothing decided anew.
 project: forge
 audience: principal + Claude only
 ---
@@ -2959,25 +2959,49 @@ position that already stands elsewhere.
   for the forge; it would be a third copy beside the intent and the
   operating layer, and precise wording has its home in the intent
   until the file that performs it exists.
-  Order agreed 2026-09-29, ahead of the order of POS.1380. The round
-  is written as 4.34 by the rules of the day. The threads are cut
-  out first: `10-intent.threads.md` is born, the threads move into
-  it word for word, and everything that names them is mended so that
-  they work on their own. The operating layer of the log follows,
-  the check `history` with it. The intent, now without its threads,
-  is then cleaned whole and at once, not finding by finding: Claude
-  prepares the cleaned intent and the records of the history as
-  files outside the project, moving text and changing no stance; the
-  way to a position goes into the history, and detail goes there
-  where the file that performs it exists. The prepared files are
-  verified against the intent as it stands by an isolated agent and
-  by a model of another family, both on the same instructions; where
-  a position names a file, the agent verifies that the file carries
-  the detail. The reports are walked with the principal and the
-  files mended. Only then is the project written: the table moves to
-  the archive, the log begins, the intent is replaced; the check
-  `history` runs on the result. By the principal's word this
-  verification stands in place of the walkthrough of every position.
+  Order agreed 2026-09-29, ahead of the order of POS.1380: nine
+  steps, taken in this order.
+
+  | Step | What | State |
+  |---|---|---|
+  | 1 | Write the round of 2026-09-29 as 4.34, by the rules of the day | done 2026-09-29 |
+  | 2 | Cut out the threads: `10-intent.threads.md` is born, the threads move into it word for word, and everything that names them is mended so that they work on their own | next |
+  | 3 | Build the operating layer of the log, the check `history` with it | |
+  | 4 | Prepare in the engine's `tmp/` the cleaned intent and the records of the history, the whole intent at once | |
+  | 5 | Write the instructions for the independent verification, one set for both verifiers | |
+  | 6 | An isolated agent here and ChatGPT at the principal's, over the same three files | |
+  | 7 | Walk both reports with the principal and mend the prepared files | |
+  | 8 | Write the project: the table moves to the archive, the log begins, the intent is replaced | |
+  | 9 | The check `history` over the project, and a look at the result | |
+
+  Step 2 mends what names the threads today: `CLAUDE.md` (where a
+  THR lives, the document kinds, the repository layout, the
+  sentence on saving an unfinished conversation); the template of
+  the intent and a new template of the threads file; the definition
+  of `/forge intent`, which starts from the threads inside the
+  intent; the checks that read IDs from the intent; the ledger,
+  whose lines under Waiting point at threads. Step 1 stays first
+  because the decisions of 2026-09-29 lived only in the
+  conversation; the plan and the open questions went into this
+  thread, which moves with the others in step 2.
+  Step 4 cleans the intent without its threads, whole and at once,
+  not finding by finding: Claude moves text and changes no stance,
+  and rephrases only where a sentence would break once the story is
+  taken out. The way to a position goes into the history; detail
+  goes there where the file that performs it exists, and the
+  position names the file. The real intent stays untouched until
+  step 8, so no backup is needed.
+  Steps 5 and 6: the verifiers compare the live intent, the prepared
+  intent and the prepared history. Where a position names a file,
+  the verifier checks that the file carries the detail and says
+  nothing else. The isolated agent reads the engine's files itself;
+  ChatGPT gets them from the principal, and the instructions work
+  with them and without them, saying what stays unverified without
+  them. By the principal's word this verification stands in place
+  of the walkthrough of every position.
+  Offered by Claude and to run only on the principal's word: a
+  mechanical check that every sentence of the old intent stands
+  either in the new intent or in a `Was` of the history.
   Until a step is done, what it changes stands as it stood on
   2026-09-28: the threads in the intent, the companions as tables
   with their Notes, the release notes compiled from them.
