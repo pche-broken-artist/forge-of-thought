@@ -3,7 +3,7 @@ description: Iterate 20-assignment.md — distil the intent for the recipients
 ---
 
 Target: `20-assignment.md`.
-Inputs: `10-intent.md`, `decisions.md`, the ledger.
+Inputs: `10-intent.md`, `10-intent.threads.md`, `decisions.md`, the ledger.
 
 Role: drafter. Distil the current `10-intent.md` into `20-assignment.md`
 (audience: the recipients), using `templates/assignment.md`.

@@ -38,7 +38,8 @@ reviewers); how a target narrows your work is your Lens section's to
 say. Without a target, everything your lens reads.
 
 Inputs (read, never modify): the whole chain — the locked briefs
-(`00-brief*.md`, status approved), `10-intent.md`, `20-assignment.md`
+(`00-brief*.md`, status approved), `10-intent.md`,
+`10-intent.threads.md`, `20-assignment.md`
 if it exists, any later layer, `decisions.md`, `ledger.md` — and every
 file in `reviews/`.
 

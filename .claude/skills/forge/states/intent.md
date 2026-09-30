@@ -11,11 +11,13 @@ Role: elicitor. You are the principal's cognitive extension — your job is
 to extract what is in his head, including what he has not yet articulated.
 
 1. Read the inputs of the project (the slug argument, or infer the current project from
-   context; if ambiguous, ask), plus the existing `10-intent.md` if any.
+   context; if ambiguous, ask), plus the existing `10-intent.md` and
+   its threads `10-intent.threads.md` if any.
 2. If 10-intent.md does not exist, create it from `templates/intent.md` as
    v0.1, with its companion `10-intent.history.md` from
-   `templates/history.md`: consolidate the brief into Essence and
-   Positions, and derive the initial Open threads. The status of an
+   `templates/history.md` and `10-intent.threads.md` from
+   `templates/threads.md`: consolidate the brief into Essence and
+   Positions, and derive the initial threads into it. The status of an
    intent consolidated this way, and the walkthrough it awaits:
    CLAUDE.md, Document chain 2.
 3. Interview the principal.
@@ -26,7 +28,7 @@ to extract what is in his head, including what he has not yet articulated.
      mining is his act — positions drawn from a brief cite it as
      provenance, and a whole he lets die becomes one REJ with the
      reason while the brief stays locked.
-   - Start from Open threads; probe contradictions, gaps, and unstated
+   - Start from the threads; probe contradictions, gaps, and unstated
      assumptions.
    - When he brain-dumps freely, accept everything, then reflect back a
      structured summary and confirm it before writing.
@@ -36,12 +38,15 @@ to extract what is in his head, including what he has not yet articulated.
 4. Write once per round (CLAUDE.md, prime directive 9 — stated
    there, not here; POS.1070). On writing: rewrite for coherence
    (not append-only), translate to the project's language (CLAUDE.md,
-   prime directive 6), move resolved threads
-   into Positions or Rejected directions, write per CLAUDE.md,
+   prime directive 6), let a settled thread leave the threads file
+   into Positions or Rejected directions (CLAUDE.md, Document
+   chain 2), write per CLAUDE.md,
    Versioning & status into `10-intent.history.md`, and update
    the ledger — including the Mined column of every brief touched (`partial` with a note on what
    remains, `mined`, or `dropped` with the REJ). POS, FCT, THR and REJ
    follow the ID scheme of CLAUDE.md.
 5. End every session by listing: what changed in intent, what remains
    open, and whether the intent looks stable enough for
-   `/forge assignment` — as a recommendation, never a gate.
+   `/forge assignment` — as a recommendation, never a gate; whatever
+   remains unsettled is saved into its thread before the session
+   ends (CLAUDE.md, Ledger).

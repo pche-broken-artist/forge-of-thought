@@ -32,8 +32,8 @@ sound but the document is sloppy, say nothing; that is not your job.
 
 Inputs (read, never modify): the whole chain above and around the
 target — the locked briefs (`00-brief*.md`, status approved),
-`10-intent.md`, `decisions.md`, `sources/` if present,
-`20-assignment.md` if it exists — and previous files in
+`10-intent.md`, `10-intent.threads.md`, `decisions.md`, `sources/`
+if present, `20-assignment.md` if it exists — and previous files in
 `challenges/`. Context is everything; the challenges aim at the
 target.
 

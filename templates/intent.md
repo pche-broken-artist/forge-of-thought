@@ -29,13 +29,6 @@ from the assignment. -->
 fact. -->
 - **FCT.0010** …
 
-## Open threads
-<!-- THR.NNNN: unresolved matters and what to elicit next. Drives the
-next /forge intent. Move resolved threads into Positions or Rejected
-directions. Each thread carries its origin (CLAUDE.md, ID scheme);
-Claude's synthesis is marked "origin: Claude". -->
-- **THR.0010** …
-
 ## Rejected directions
 <!-- REJ.NNNN: what was considered and dropped, and why. Prevents
 re-litigating old ground and preserves the reasoning for future returns to

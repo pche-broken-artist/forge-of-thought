@@ -235,6 +235,11 @@ ledger.md        single source of truth for state
    Claude from the conversation, rather than composed item by item
    with the principal, is `in_review` until every position has been
    walked through; no lower layer is derived before that walkthrough.
+   Its open threads live beside it in `10-intent.threads.md`, part
+   of the intent as its history is: the intent says what holds, the
+   threads what is being worked, the working debate included until a
+   thread is settled; freely rewritten, no version, no history and no
+   ledger row of their own (POS.0120).
 3. **`20-assignment.md`** — distilled from intent, audience: the
    recipients of the assignment (teams, colleagues, or the principal's
    future self). The only document handed over. Self-contained.
@@ -375,6 +380,8 @@ projects/<slug>/           # kind: thought — the chain
   README.md  RELEASE-NOTES.md         # renders (Document chain 7)
   logo.png                            # optional project avatar
   00-brief.md  10-intent.md  20-assignment.md
+  10-intent.threads.md                # the intent's open threads
+                                      # (Document chain 2)
   00-brief-<name>.md                  # later briefs, one per whole
   <file>.history.md                   # Version History of each
                                       # versioned document (brief,
@@ -522,7 +529,7 @@ lifecycle. Depth max two levels.
 | TBC | open question / to be confirmed, with owner | assignment |
 | SCR | success criterion — optional or delegated | assignment |
 | POS | position the principal currently holds | intent |
-| THR | open thread — unresolved matter to elicit next; carries its origin: the principal's word (the default, unmarked), a source by path, or Claude's synthesis | intent |
+| THR | open thread — unresolved matter to elicit next; carries its origin: the principal's word (the default, unmarked), a source by path, or Claude's synthesis | intent (its threads file) |
 | REJ | rejected direction, with the reason it was dropped | intent |
 | FCT | fact — what is the case, as the principal states it or as a source states it; not a stance; provenance to the file where a source exists, never demanded | intent |
 | FND | critique finding (document quality) | ledger, reviews |
@@ -617,8 +624,7 @@ briefs, documents, renders, published files, sources, research,
 dependencies, findings, challenges — are `templates/ledger.md`'s; resources and dependencies
 are registration only (what a resource is and is for lives in its
 directory's `00-INDEX.md`; a library document, cited by path, carries
-no version). Together with the
-resource indexes it is the only freely rewritten file. Keep it current
+no version). It is freely rewritten. Keep it current
 after every operation. The ledger cites and never copies: under
 Waiting on principal a matter that has an ID gets one line — the ID,
 a few words, its state — and its substance stays in the thread or the

@@ -8,12 +8,13 @@ updated: 2026-09-30
 
 # Ledger — Forge of Thought
 
-<!-- Single source of truth for state. Freely rewritten (as are the resource indexes,
-sources/00-INDEX.md and research/00-INDEX.md); every other document
-is versioned or immutable. Keep current after every operation; /ledger
-reads from here.
-Version scheme: 0.x draft, 1.0 approved, 1.x change after approval, 2.0
-next approved version. -->
+<!-- Single source of truth for state: CLAUDE.md, Ledger. Versions
+per CLAUDE.md, Versioning & status. /ledger reads from here.
+Kind: `thought` keeps every table below. `library` (POS.0960) keeps
+only Renders, Sources, Dependencies, Research and Waiting on
+principal; the Briefs, Documents, Published, Findings and Challenges
+tables are deleted at scaffold time. This comment is the one owner of that
+reduction (POS.1070). -->
 
 ## Briefs
 <!-- One row per brief (00-brief.md and 00-brief-<name>.md). Status:
@@ -29,14 +30,13 @@ absorbed it; Note says what remains (partial) or the REJ (dropped). -->
 ## Documents
 | File | Version | Status | Date |
 |---|---|---|---|
-| 10-intent.md | 4.36 | draft | 2026-09-30 |
+| 10-intent.md | 4.37 | draft | 2026-09-30 |
 | 20-assignment.md | — | not planned: the handover artefacts of this project are the core itself (CLAUDE.md, templates/, .claude/) and README.md | — |
 | decisions.md | — | 14 records (DEC.0010–0140) | 2026-09-27 |
 
 ## Renders
-<!-- Generated outputs, one row per recipe in recipes/. Never
-hand-edited: iterate the recipe, re-run /render. Row mirrors the
-render's front-matter provenance. -->
+<!-- Generated outputs, one row per recipe in recipes/ (CLAUDE.md,
+Document chain 7). Row mirrors the render's front-matter provenance. -->
 | Render | Audience | Recipe | Inputs | Generated |
 |---|---|---|---|---|
 | README.md (repo root) | humans arriving at the repository | recipes/readme.md v0.50 | CLAUDE.md, 10-intent.md v4.31 | 2026-09-27 |
@@ -55,8 +55,11 @@ Document chain 7). State: current | stale — set to current by
 | published/cto-pitch.docx | recipes/cto-pitch.md v0.5 | generated 2026-09-20, projects/forge/10-intent.md v4.15, CLAUDE.md | opus | 2026-09-27 | stale |
 
 ## Sources
-<!-- Registration only; what a source is and is for lives in
-sources/00-INDEX.md. -->
+<!-- Registration only. External inputs, immutable once registered.
+Date = best-effort origin date; origin: content | file | ingested. What
+a source is and is for lives in sources/00-INDEX.md, never here
+(CLAUDE.md, Document chain 5). Form (POS.1040): text | extract
+of <original> | binary — one form per source. -->
 | File | Date | Date origin | Form |
 |---|---|---|---|
 | forge-run-record-health.md | 2026-09-13 | content | text |
@@ -69,14 +72,14 @@ sources/00-INDEX.md. -->
 relies on — typically library documents (POS.1020): cited by path from
 an index entry, a recipe or the chain. No version: library documents
 are maintained by their owner. What the document is for lives where it
-is used (the index entry, the recipe). /check verifies each path exists
-on disk; /forge reports which libraries the project needs. -->
+is used (the index entry, the recipe). -->
 | Path | Library | Used by | Note |
 |---|---|---|---|
 
 ## Research
-<!-- Registration only; what a note answers lives in
-research/00-INDEX.md. -->
+<!-- Registration only. Immutable dated notes written by /research (or
+recorded expert estimates). What a note answers lives in
+research/00-INDEX.md, never here. -->
 | File | Date | Derived from |
 |---|---|---|
 | 2026-08-25-comparable-projects-landscape.md | 2026-08-25 | 10-intent.md v2.10 |
@@ -97,7 +100,8 @@ research/00-INDEX.md. -->
 
 ## Findings
 <!-- State: open | resolved | rejected | parked | obsolete. Resolution:
-assignment version for resolved, DEC.NNNN for rejected. -->
+assignment version for resolved, DEC.NNNN for rejected. `overruled`
+in an older record reads as `rejected`. -->
 | ID | Severity | Category | State | Source review | Resolution |
 |---|---|---|---|---|---|
 | FND.0010 | medium | inconsistency | resolved | 2026-08-17-critique.md | README re-rendered, title at intent 2.7 (verified 2026-08-27) |
@@ -173,15 +177,17 @@ intent version for accepted, DEC.NNNN for rejected. -->
 | CHL.0190 | accepted | Release 4.0 is queued and nothing says what an approved major of this intent means — a sign-off with no counterparty and no test (minor) | 2026-09-06-challenge-cto.md | intent 3.46 (POS.0300: what a major of the forge intent means and must pass) |
 
 ## Waiting on principal
+<!-- What waits on the principal, one line per matter: cite, never
+copy — CLAUDE.md, Ledger. -->
 - THR.0440 — what the brief `elicitation` and its second review
   left open; eight matters, Claude's recommendation on each, open.
 - THR.0450 — what the researches of 2026-09-28 propose beyond the
   brief; the order of initiative first, open.
 - THR.0460 — `/recipe` and `/forge`, one dispatcher or two; small,
   open.
-- THR.0470 — the intent too long to be read; worked 2026-09-29
-  (intent 4.34), the order of the work agreed and kept in the
-  thread, ahead of POS.1380's; next the cutting out of the threads;
+- THR.0470 — the intent too long to be read; the migration in nine
+  steps kept in the thread, step 2 (threads cut out) done 2026-09-30
+  (intent 4.37), next the operating layer of the log (step 3);
   whether large files are split stays open.
 - THR.0400 — a gate in front of the tools; the reminder half done
   2026-09-20 (intent 4.14), raw git denied 2026-09-21 (POS.1200),
