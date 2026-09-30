@@ -58,8 +58,10 @@ never a sweep.
 5. Then run `/save` for this repository through its own definition
    (`.claude/skills/save/SKILL.md`), with two things decided here: the
    commit message is `release <intent version>: <one line>` — the
-   line summarising the rounds since the last release, from the rows
-   of the intent's `.history.md` companion, the primary record
+   line summarising the rounds since the last release, from the
+   records of the intent's history since the last release, and the
+   rows of its archive where the span reaches before the log, the
+   primary record
    (CLAUDE.md, Versioning & status), unless `-m` was supplied; for a
    library, whose history is git, the version is omitted and the line
    describes what changed — and, when the intent's version is an

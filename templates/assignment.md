@@ -2,14 +2,14 @@
 version: 0.1
 date: YYYY-MM-DD
 status: draft            # draft | in_review | approved | superseded
-last_change: <one line from the newest row of 20-assignment.history.md>
+last_change: <derived from the records of the newest version in 20-assignment.history.md>
 project: <slug>
 audience: recipients
 ---
 
 # <Title>
 
-<!-- The Version History lives in the companion 20-assignment.history.md
+<!-- The history lives in the companion 20-assignment.history.md
 (templates/history.md), never here. -->
 
 ## Purpose & Context

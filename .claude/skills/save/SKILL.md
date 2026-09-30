@@ -26,8 +26,8 @@ not a defect — relay the script's note in the report.
    `forge`); a save never waits on a finding the principal has not
    asked to fix (POS.0430).
 2. Unless `-m` was supplied, draft a one-line English commit message
-   summarising the round — from the newest rows of the touched
-   documents' `.history.md` companions, the primary record of every
+   summarising the round — from the records the round appended to
+   the touched documents' histories, the primary record of every
    round (CLAUDE.md, Versioning & status) — and propose it to the
    principal; commit with the confirmed or adjusted wording. When
    more than one repository has changes, one message per repository

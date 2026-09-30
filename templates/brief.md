@@ -9,5 +9,5 @@ last_change: 0.1 (YYYY-MM-DD): draft begun.
 ---
 
 <!-- Only this header is fixed; the text below it is free-form. The
-rules: CLAUDE.md, Document chain 1; the Version History companion:
+rules: CLAUDE.md, Document chain 1; the history companion:
 templates/history.md. -->

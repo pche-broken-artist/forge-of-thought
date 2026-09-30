@@ -30,7 +30,7 @@ absorbed it; Note says what remains (partial) or the REJ (dropped). -->
 ## Documents
 | File | Version | Status | Date |
 |---|---|---|---|
-| 10-intent.md | 4.37 | draft | 2026-09-30 |
+| 10-intent.md | 4.40 | draft | 2026-09-30 |
 | 20-assignment.md | — | not planned: the handover artefacts of this project are the core itself (CLAUDE.md, templates/, .claude/) and README.md | — |
 | decisions.md | — | 14 records (DEC.0010–0140) | 2026-09-27 |
 
@@ -186,8 +186,8 @@ copy — CLAUDE.md, Ledger. -->
 - THR.0460 — `/recipe` and `/forge`, one dispatcher or two; small,
   open.
 - THR.0470 — the intent too long to be read; the migration in nine
-  steps kept in the thread, step 2 (threads cut out) done 2026-09-30
-  (intent 4.37), next the operating layer of the log (step 3);
+  steps kept in the thread, steps 2 and 3 done 2026-09-30 (intent
+  4.37, 4.39), step 4 in its third pass (A2), rules in the thread;
   whether large files are split stays open.
 - THR.0400 — a gate in front of the tools; the reminder half done
   2026-09-20 (intent 4.14), raw git denied 2026-09-21 (POS.1200),

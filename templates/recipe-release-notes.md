@@ -4,7 +4,7 @@ purpose: release-notes
 audience: the recipients and the principal tracking the project's releases
 version: 0.1
 updated: YYYY-MM-DD
-last_change: <one line from the newest row of recipes/release-notes.history.md>
+last_change: <derived from the records of the newest version in recipes/release-notes.history.md>
 output: RELEASE-NOTES.md
 ---
 
@@ -14,11 +14,14 @@ output: RELEASE-NOTES.md
 The rules: CLAUDE.md, Document chain 7. -->
 
 ## Inputs
-- 10-intent.history.md      # the intent's Version History — the Notes
-                            # block of each row is the source; the
-                            # prose is the log
-- 20-assignment.history.md  # the assignment's, likewise; one line per
-                            # later layer as the chain grows
+- 10-intent.history.md      # the intent's history — its records are
+                            # the source of each section
+- 10-intent.history.archive.md  # the table before the log, where the
+                            # project has one — the Notes block of each
+                            # row is the source of its version
+- 20-assignment.history.md  # the assignment's, likewise, with its
+                            # archive; one line per later layer as the
+                            # chain grows
 - 10-intent.md              # current state: version, date, status
 - decisions.md              # DEC records, for the pointers of Rejected
                             # lines
@@ -33,29 +36,32 @@ The rules: CLAUDE.md, Document chain 7. -->
   `## <version> — <date>`. On a release only the new release's
   section is composed; the sections of releases already in the
   previous edition are **carried over verbatim**.
-- A section is **compiled, never distilled**: its bullets are the
-  Notes lines of the rows written since the previous release in every
-  input companion — the intent's row for this version and the rows of
-  the assignment and later layers since the last release — each
-  placed under its group, the groups and their order as the Template
-  below lists them, one bullet per line, the wording carried from the
-  row with both of its sides kept (the shape of a line is
-  `templates/history.md`'s); where more than one document
-  contributes, the bullet opens with the document's name.
-  Empty groups are omitted. Inside a group, what the reader must do
-  or know first, then by weight. Rows whose Notes say nothing for the
-  reader give a section with the one line "Nothing for the
-  recipients." A row without a Notes block is compiled from its prose
-  into the same groups — the only case in which the render
-  classifies.
+- A section is derived from the records of its version in the log
+  of every input history — the intent's and those of the assignment
+  and later layers since the last release: each record that reaches
+  the reader becomes one bullet under the group its kind gives —
+  `created` under Added, `changed` and `closed` under Changed,
+  `removed` under Removed, a created REJ under Rejected, a change
+  whose reason names a correction under Fixed — written from the
+  reader's side: what changed with its ID in parentheses, then "For
+  you:" and what it means; the groups and their order as the Template
+  below lists them. The `Action` of a record is carried word for word
+  into Action required. One change recorded across several IDs gives
+  one bullet; where more than one document contributes, the bullet
+  opens with the document's name. Empty groups are omitted. Inside a
+  group, what the reader must do or know first, then by weight. A
+  record that touches nothing the reader uses gives none; a version
+  with none gives the line "Nothing for the recipients." A version
+  before the log is compiled from the Notes block of its row in the
+  archive, as before.
 - An approved major (an integer version) is headed
   `## <version> — <date> — approved` and opens, before its groups,
-  with two to four sentences of highlights drawn from the rows since
-  the previous major; the major's git tag is named in the highlights
-  only where a row or a decision records it. No other section carries
+  with two to four sentences of highlights drawn from the history
+  since the previous major; the major's git tag is named in the
+  highlights only where a record or a decision names it. No other section carries
   narrative.
 - At a major the minors since the previous major **fold into it**:
-  the major's section carries every Notes line of the span in the
+  the major's section carries every line of the span in the
   six groups, a line superseded by a later minor dropped so that only
   the final state remains, and the sections of those minors are not
   carried over — they leave the file, the detail per version staying
@@ -101,7 +107,7 @@ reasons lives in the history companions of the chain>
 
 <two to four sentences of highlights>
 
-<groups as above, holding every Notes line since the previous major,
+<groups as above, holding every line since the previous major,
 superseded lines dropped; the minors' own sections do not follow>
 
 ## <earlier releases — carried over verbatim>

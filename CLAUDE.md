@@ -78,8 +78,8 @@ never here.
    challenges) runs as a whole iteration: answers are carried in the
    conversation and reflected back, not written one by one. At the
    round's natural end Claude asks whether to write and writes on the
-   principal's confirmation — one version bump, one Version History row
-   for the whole round. A correction that lands on text written moments
+   principal's confirmation — one version bump for the whole round,
+   its changes recorded in the history. A correction that lands on text written moments
    ago belongs to the round that wrote it: it is carried like any other
    answer, never written as a version of its own. The principal may at
    any moment order a write of whatever is agreed so far; such a write
@@ -174,7 +174,7 @@ whether it is versioned and how it behaves:
 | resources | source | external input as it arrived | external, /ingest | — | immutable |
 | resources | research | durable answer to one question | Claude, /research | — | immutable |
 
-Every versioned kind keeps its Version History in an append-only
+Every versioned kind keeps its history in an append-only
 companion `<file>.history.md` beside it (Versioning & status); an
 integer version is approved, and a recipe never is. A functional
 binary — a `.potx` template, a graphic — is a source, so a library's
@@ -195,7 +195,7 @@ Gaps of ten leave room for later layers (e.g. `30-brd.md`,
                  00-brief-<name>.md
 10-intent.md     our working understanding — rewritten freely, versioned
 20-assignment.md the direction handed to the recipients — versioned
-<file>.history.md  Version History of each versioned document —
+<file>.history.md  history of each versioned document —
                  append-only companion beside it
 decisions.md     append-only DEC records
 ledger.md        single source of truth for state
@@ -239,7 +239,15 @@ ledger.md        single source of truth for state
    of the intent as its history is: the intent says what holds, the
    threads what is being worked, the working debate included until a
    thread is settled; freely rewritten, no version, no history and no
-   ledger row of their own (POS.0120).
+   ledger row of their own (POS.0120). Where an item's output is a
+   file of its own — a skill, an agent, a template, a script, a
+   research note, a locked brief — the item keeps its assignment,
+   what is to be achieved and why, and names the file, and the
+   realisation is the file's. Where the output is only part of a
+   file, a section of CLAUDE.md among them, the item keeps the full
+   information, since another change may rewrite that part and the
+   detail would be lost. Until the file exists, the item keeps the
+   full information too.
 3. **`20-assignment.md`** — distilled from intent, audience: the
    recipients of the assignment (teams, colleagues, or the principal's
    future self). The only document handed over. Self-contained.
@@ -298,7 +306,7 @@ ledger.md        single source of truth for state
    the recipe and each input with their versions. Recipes are tools,
    not records of thinking: they carry a version and an updated date
    in front-matter and no status, since a recipe is never approved;
-   being versioned, a recipe keeps its Version History in its
+   being versioned, a recipe keeps its history in its
    companion like every versioned document. A render assigns
    nothing and is not part of the chain: the artefacts stay the source
    of truth. The boundary between chain and render is authorship: a
@@ -383,10 +391,12 @@ projects/<slug>/           # kind: thought — the chain
   10-intent.threads.md                # the intent's open threads
                                       # (Document chain 2)
   00-brief-<name>.md                  # later briefs, one per whole
-  <file>.history.md                   # Version History of each
+  <file>.history.md                   # history of each
                                       # versioned document (brief,
                                       # intent, assignment, recipe):
-                                      # append-only companion
+                                      # append-only companion, a log
+  <file>.history.archive.md           # a history table before the
+                                      # log, immutable
   decisions.md  ledger.md             # ledger header carries kind:
   sources/00-INDEX.md                 # resource index (rewritten)
   sources/<name>.<ext>                # immutable external inputs, one
@@ -399,7 +409,7 @@ projects/<slug>/           # kind: thought — the chain
   research/00-INDEX.md                # resource index (rewritten)
   recipes/<recipe>.md                 # render recipes: inputs, audience,
                                       # instructions, template — iterated
-  recipes/<recipe>.history.md         # the recipe's Version History
+  recipes/<recipe>.history.md         # the recipe's history
   renders/<recipe>.md                 # generated outputs, overwritten by
                                       # /render, provenance front-matter
   renders/<recipe>.pptx               # the plain file of a render, made
@@ -486,24 +496,34 @@ Front-matter carries `version`, `date`, `status`
 must agree with the number: an integer version is `approved`, anything
 else is not; a recipe carries no status and stays 0.x.
 Every versioned document — brief, intent, assignment, later artefacts
-and recipes alike, no exception — keeps its **Version History**
-(Version | Modification | Author | Date — human-readable, stating what
-changed and why) in an append-only companion `<file>.history.md`
-beside it, never in its body: the body is the current state, the
-companion the record. `last_change` is a one-line summary of the
-newest row, written by the same write step that appends the row,
-never by hand. The row of a chain artefact other than the brief —
-intent, assignment, later layers — closes with a **Notes** block:
-one line per change for the reader of the release notes, in the
-shape `templates/history.md` owns. The row in the companion is the
-single primary; the commit messages `/save` and `/release` draft
-and the release notes, compiled from the Notes lines, are
-derivations.
+and recipes alike, no exception — keeps its **history** in an
+append-only companion `<file>.history.md` beside it, never in its
+body: the body is the current state, the companion the record. The
+history is a log, one record per change, in the shape
+`templates/history.md` owns; a round is one version and as many
+records as it made changes. The author of a record is the one who
+decided the change, by the handle the instance gives its principal.
+The way to an item — why it changed, what was said, trials,
+measurements, which research turned it — goes into its record, never
+into the item; the record is written in the same step as the change,
+and the reflection before a write shows the new wording and the
+records, `Was` included. What the user must do after a change is
+written with it, in `Action`. Before proposing a change to an item,
+Claude searches the history and its archive for the item's ID; the
+history is searched, never loaded whole. `last_change` is derived
+from the records of the newest version by the write step that
+appends them, never by hand. The log is the single primary: the
+commit messages `/save` and `/release` draft and the release notes
+are derivations.
 The companion is part of its document: it has no ledger row and is
-handed over with the document by the link into git. A Version History
-table in the body of a document is a `/check` finding, fixed by
-moving it into the companion — that is how a project migrates to this
-convention, on the principal's word.
+handed over with the document by the link into git. A companion
+written before the log keeps its table untouched: it moves as it
+stands to `<file>.history.archive.md`, immutable from then on, and
+the log begins with the next version; the history of an item is a
+search of both. The companion of a locked brief stays as it is. A
+Version History table, in the body of a document or in its
+companion, is a `/check` finding settled by that move, on the
+principal's word, project by project.
 
 Immutable documents (a locked brief, reviews, challenges, sources,
 research) are never edited — a brief from its lock, a source from its
@@ -650,7 +670,7 @@ checks then say nothing of a missing assignment.
 | `/challenge [persona] [artefact] [slug]` | bare = challenger persona roster; with a persona (e.g. `cto`), run that challenger against the substance of the named artefact, else the whole chain |
 | `/research <topic> [slug]` | best-practices research → research/, indexed |
 | `/ledger [slug]` | state report from ledger |
-| `/check [check] [slug]` | bare = check roster; with a check (`light`, `project`, `engine`, `single-source-of-truth`), run it on the named project or on the engine — report to the session, settled by walkthrough, nothing filed |
+| `/check [check] [slug]` | bare = check roster; with a check (`light`, `project`, `engine`, `single-source-of-truth`, `history`), run it on the named project or on the engine — report to the session, settled by walkthrough, nothing filed |
 | `/save [slug] [-m "message"] [-Tag name]` | save one repository, or every one with changes: the `light` check, then commit and push on the current branch, no render; a tag on request; the procedure is `.claude/skills/save/SKILL.md` |
 | `/release [slug] [-m "message"] [-Tag name]` | release one repository from `main`: its checks, the README and release notes re-rendered, then `/save` with the release message and the tag `v<major>` at an approved major; the procedure is `.claude/skills/release/SKILL.md` |
 | `/spinoff <project> <group> <slug>` | split a group into its own project |

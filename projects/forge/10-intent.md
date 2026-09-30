@@ -1,8 +1,8 @@
 ---
-version: 4.37
+version: 4.40
 date: 2026-09-30
 status: draft
-last_change: 4.37 (2026-09-30): step 2 of THR.0470 - the threads cut out of the intent into 10-intent.threads.md word for word; the engine mended so that they work on their own, the rule stated once in CLAUDE.md, Document chain 2; other projects move on the principal's word.
+last_change: 4.40 (2026-09-30): the rules of the cleaning of step 4 saved into THR.0470; POS.0120 - an item whose output is a file of its own keeps its assignment, one whose output is part of a file keeps the full information; POS.0310 - Was wherever wording leaves, a place included.
 project: forge
 audience: principal + Claude only
 ---
@@ -785,19 +785,19 @@ position that already stands elsewhere.
   number stays only where it is the rule or a threshold, never as a
   measurement. Text leaves a position only into the history, word
   for word (POS.0310).
-  Detail lives in the intent only until the file that performs it
-  exists; from then on the position keeps what holds and why and
-  names the file, and the detail is the file's. Where the file
-  already exists, the detail leaves in the cleaning of the intent:
-  it goes into the history word for word and the position names the
-  file. Where the file is still to be built, the detail stays whole
-  and leaves as the last step of the work that builds and proves it:
-  the definitions of the elicitation leave when the state files have
-  been rewritten and tried (POS.1380). The file is of a kind the
-  forge already has: a skill, the header of a script, a template, a
-  research note, a locked brief. No new kind of document is added to
-  hold detail. Where the position and the file it names say
-  different things, that is a finding, never mended in silence.
+  Where an item's output is a file of its own — a skill, an agent, a
+  template, a script, a research note, a locked brief — the item
+  keeps its assignment, what is to be achieved and why, and names the
+  file, and the realisation is the file's. Where the output is only
+  part of a file, a section of CLAUDE.md among them, the item keeps
+  the full information, since another change may rewrite that part
+  and the detail would be lost. Until the file exists, the item keeps
+  the full information too: the definitions of the elicitation stay
+  whole until their state files have been rewritten and tried
+  (POS.1380), and then the intent keeps their assignment and aim. No
+  new kind of document is added to hold detail. Where the item and
+  its file say different things, that is a finding, never mended in
+  silence.
   The threads live in a file of their own beside the intent,
   `10-intent.threads.md`: the intent says what holds, the threads
   what is being worked. A thread says what is open and where it came
@@ -1244,8 +1244,8 @@ position that already stands elsewhere.
   change touches an item, the record names its ID; where it touches
   what has no ID, the record names the place: the heading of the
   section, or the file name where the change is of the document as a
-  whole. `Was` is written for items with an ID; a record of a place
-  carries none.
+  whole. `Was` is written wherever wording leaves an item or a place;
+  a record of a change to the document as a whole carries none.
   The kinds of a record are `created`, `changed`, `closed` (a thread
   or an open question settled), `removed` (an item leaves the
   document and its ID is never used again) and `approved` (of the

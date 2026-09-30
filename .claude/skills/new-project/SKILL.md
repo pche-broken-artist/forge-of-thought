@@ -54,7 +54,7 @@ steps 3–5 below do not apply.
      `templates/recipe-release-notes.md` — slug and date filled, the
      template comments kept for the first `/recipe` iteration, each
      with its companion `recipes/<recipe>.history.md` from
-     `templates/history.md` (one row, 0.1 scaffolded); their renders
+     `templates/history.md` (its first records, 0.1 scaffolded); their renders
      are `/release`'s (CLAUDE.md, Document chain 7), not this command's
    - `projects/$1/logo.png` is the principal's to supply, optional
      (POS.1010) — mention it once, never ask for it

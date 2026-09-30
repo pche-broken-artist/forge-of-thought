@@ -2,9 +2,9 @@
 project: forge
 purpose: release-notes
 audience: the user of the engine who has cloned it and takes upgrades through forge-pull
-version: 0.10
-updated: 2026-09-05
-last_change: 0.10 (2026-09-05): At an approved major the minors since the previous major fold into its section, superseded lines dropped, and their sections leave the file (POS.0730, intent 3.38).
+version: 0.11
+updated: 2026-09-30
+last_change: 0.11 (2026-09-30): sections derived from the records of the history log, the Action carried word for word; a version before the log compiled from its archived Notes; the archive among the inputs.
 output: /RELEASE-NOTES.md
 ---
 
@@ -13,15 +13,18 @@ output: /RELEASE-NOTES.md
 <!-- A recipe is the iterated thing; its render is generated output.
 Never polish a render by hand: change the recipe, run
 /render release-notes. Recipes are tools: version + updated date in
-front-matter and no status (a recipe is never approved); its Version
-History lives in the companion <recipe>.history.md, last_change
-summarising the newest row. -->
+front-matter and no status (a recipe is never approved); its history
+lives in the companion <recipe>.history.md, last_change derived from
+the records of the newest version. -->
 
 ## Inputs
-- projects/forge/10-intent.history.md  # the intent's Version History —
-                                       # the Notes block of each row is
-                                       # the source of that release's
-                                       # section; the prose is the log
+- projects/forge/10-intent.history.md  # the intent's history — its
+                                       # records are the source of
+                                       # each section
+- projects/forge/10-intent.history.archive.md
+                                       # the table before the log —
+                                       # the Notes block of each row
+                                       # is the source of its version
 - projects/forge/10-intent.md          # current state: version, date,
                                        # status
 - projects/forge/decisions.md          # DEC records, for the pointers
@@ -41,18 +44,22 @@ summarising the newest row. -->
   earlier narrative shape (an Unreleased head, one section per
   major) is not carried over: it is replaced whole, every release
   compiled from its row (the migration of 2026-09-05, POS.0730).
-- A section is **compiled, never distilled**: its bullets are the
-  Notes lines of the row for that version, each placed under its
-  group — `### Action required`, `### Added`, `### Changed`,
-  `### Removed`, `### Fixed`, `### Rejected`, in this order — one
-  bullet per line, the wording carried from the row: what changed
-  with the pointer in parentheses, then "For you:" and what it means
-  for the reader, both sides kept. Empty groups are omitted. Inside a group, what the
-  reader must do or know first, then by weight. A row whose Notes say
-  nothing for the reader gives a section with the one line "Nothing
-  for the user of the engine." A row without a Notes block is
-  compiled from its prose into the same groups — the only case in
-  which the render classifies.
+- A section is derived from the records of its version in the log:
+  each record that reaches the reader becomes one bullet under the
+  group its kind gives — `created` under Added, `changed` and
+  `closed` under Changed, `removed` under Removed, a created REJ
+  under Rejected, a change whose reason names a correction under
+  Fixed — written from the reader's side: what changed with its ID
+  in parentheses, then "For you:" and what it means. The groups
+  stand as `### Action required`, `### Added`, `### Changed`,
+  `### Removed`, `### Fixed`, `### Rejected`, in this order. The
+  `Action` of a record is carried word for word into Action
+  required. One change recorded across several IDs gives one bullet.
+  Empty groups are omitted. Inside a group, what the reader must do
+  or know first, then by weight. A record that touches nothing the
+  reader uses gives none; a version with none gives the line
+  "Nothing for the user of the engine." A version before the log is
+  compiled from the Notes block of its row in the archive, as before.
 - An approved major (an integer version) is headed
   `## <version> — <date> — approved` and opens, before its groups,
   with two to four sentences of highlights drawn from the rows since
@@ -61,7 +68,7 @@ summarising the newest row. -->
   repository's history starts at 3.0, so no earlier tag exists. No
   other section carries narrative.
 - At a major the minors since the previous major **fold into it**:
-  the major's section carries every Notes line of the span — the
+  the major's section carries every line of the span — the
   major's own row and every minor's — in the six groups; a line that
   a later minor superseded (a mechanism replaced, a rule reversed
   within the span) is dropped so that only the final state remains;
@@ -113,7 +120,7 @@ in projects/forge/10-intent.history.md>
 
 <two to four sentences of highlights>
 
-<groups as above, holding every Notes line since the previous major,
+<groups as above, holding every line since the previous major,
 superseded lines dropped; the minors' own sections do not follow>
 
 ## <earlier releases — carried over verbatim>

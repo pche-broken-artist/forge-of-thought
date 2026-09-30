@@ -1,5 +1,5 @@
 ---
-description: Compose or iterate a thought project's release-notes recipe — one section per release in six fixed groups, compiled from the Notes lines of the chain's history rows
+description: Compose or iterate a thought project's release-notes recipe — one section per release in six fixed groups, derived from the records of the chain's history logs
 ---
 
 Genre: release-notes. Skeleton: `templates/recipe-release-notes.md`.

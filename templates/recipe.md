@@ -4,7 +4,7 @@ purpose: <purpose>
 audience: <audience>
 version: 0.1
 updated: YYYY-MM-DD
-last_change: <one line from the newest row of recipes/<recipe>.history.md>
+last_change: <derived from the records of the newest version in recipes/<recipe>.history.md>
 # output: <path>   # optional — overrides the default renders/<recipe>.md
 ---
 

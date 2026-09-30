@@ -52,7 +52,7 @@ What you verify:
    a row in the ledger's Briefs table and vice versa; a brief marked
    `mined` is cited somewhere in the intent. Under the ledger's
    Waiting on principal, a line that copies a thread, a decision or a
-   history row instead of citing it by ID is a finding (CLAUDE.md,
+   history record instead of citing it by ID is a finding (CLAUDE.md,
    Ledger).
 2. **ID hygiene** — against the ID scheme in CLAUDE.md, every rule
    there (POS.1070), in every document that carries IDs.

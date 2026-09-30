@@ -728,8 +728,8 @@ document: 10-intent.md
   |---|---|---|
   | 1 | Write the round of 2026-09-29 as 4.34, by the rules of the day | done 2026-09-29 |
   | 2 | Cut out the threads: `10-intent.threads.md` is born, the threads move into it word for word, and everything that names them is mended so that they work on their own | done 2026-09-30 |
-  | 3 | Build the operating layer of the log, the check `history` with it | next |
-  | 4 | Prepare in the engine's `tmp/` the cleaned intent and the records of the history, the whole intent at once | |
+  | 3 | Build the operating layer of the log, the check `history` with it | done 2026-09-30 |
+  | 4 | Prepare in the engine's `tmp/` the cleaned intent and the records of the history, the whole intent at once | next |
   | 5 | Write the instructions for the independent verification, one set for both verifiers | |
   | 6 | An isolated agent here and ChatGPT at the principal's, over the same three files | |
   | 7 | Walk both reports with the principal and mend the prepared files | |
@@ -753,6 +753,26 @@ document: 10-intent.md
   goes there where the file that performs it exists, and the
   position names the file. The real intent stays untouched until
   step 8, so no backup is needed.
+  The cleaning of step 4 ran in two rounds on 2026-09-30, twelve
+  isolated agents, one per group, the instructions in the engine's
+  `tmp/cleaning/instructions.md`. The first round kept whatever it
+  doubted and took about a tenth off the intent; its doubts were
+  grouped into six kinds and the principal settled each with a rule,
+  and the second round ran again from the original text: (A) a rule
+  that a file of the engine carries word for word or in the same
+  sense leaves the item, which keeps what holds and why and names
+  the file; (B) a sentence that is both story and reason keeps the
+  reason in the words it has, a REJ's measurement that is its reason
+  stays; (C) an item keeps the latest date its text names, no date
+  added or inferred, a date older than the present shape listed for
+  the principal; (D) a reference to a brief or a source stays by
+  path, one to a thread, challenge, finding or decision that changed
+  the item leaves, one needed to understand the item stays; (E) what
+  no longer exists leaves unless the present rule depends on it; (F)
+  understanding wins over length, every changed item read once more
+  on its own. The definitions of the elicitation stay whole. (A2)
+  Rule A holds only where a file as a whole carries the detail; what
+  only a section of CLAUDE.md carries stays in the item (POS.0120).
   Steps 5 and 6: the verifiers compare the live intent, the prepared
   intent and the prepared history. Where a position names a file,
   the verifier checks that the file carries the detail and says
@@ -761,6 +781,14 @@ document: 10-intent.md
   with them and without them, saying what stays unverified without
   them. By the principal's word this verification stands in place
   of the walkthrough of every position.
+  The migration reaches the other instances through the release
+  notes (POS.0940): each convention change of the migration carries
+  an Action required line in the Notes of its history row, with the
+  full procedure for a project, so that Claude on another instance
+  can carry it out on its user's word. The Notes line of 4.37 was
+  grouped as Changed; the Action required line of step 2 stands in
+  the row of 4.38. The engine is released once, after step 8, so
+  that the other instances take the migration whole.
   Offered by Claude and to run only on the principal's word: a
   mechanical check that every sentence of the old intent stands
   either in the new intent or in a `Was` of the history.
