@@ -3,7 +3,7 @@ project: forge
 kind: thought
 language: en
 terminal: intent
-updated: 2026-09-30
+updated: 2026-10-01
 ---
 
 # Ledger — Forge of Thought
@@ -30,7 +30,7 @@ absorbed it; Note says what remains (partial) or the REJ (dropped). -->
 ## Documents
 | File | Version | Status | Date |
 |---|---|---|---|
-| 10-intent.md | 4.40 | draft | 2026-09-30 |
+| 10-intent.md | 4.41 | draft | 2026-10-01 |
 | 20-assignment.md | — | not planned: the handover artefacts of this project are the core itself (CLAUDE.md, templates/, .claude/) and README.md | — |
 | decisions.md | — | 14 records (DEC.0010–0140) | 2026-09-27 |
 
@@ -97,6 +97,7 @@ research/00-INDEX.md, never here. -->
 | 2026-09-29-change-record-file-format.md | 2026-09-29 | 10-intent.md v4.33 (THR.0470); the principal's questions of 2026-09-29 |
 | 2026-09-30-how-everything-in-the-forge-is-born.md | 2026-09-30 | the engine's definitions at commit c95cffe; 10-intent.md v4.34 (POS.0120, POS.0700, POS.1130); the principal's question of 2026-09-30 |
 | 2026-09-30-adding-a-new-type-to-the-engine.md | 2026-09-30 | the engine's definitions at commit c95cffe, every member of each type searched by name; 10-intent.md v4.34 (POS.0400-0420, POS.0700, POS.0960, POS.1000, POS.1070, POS.1120-1140); research/2026-09-07-brd-layer-fork-analysis.md; the principal's question of 2026-09-30 |
+| 2026-10-01-what-of-the-intent-belongs-to-an-assignment.md | 2026-10-01 | 10-intent.md v4.41 read whole; 10-intent.threads.md (THR.0470, THR.0480); CLAUDE.md (prime directive 8, Document chain 2 and 3, Requirement style); research/2026-09-28-artefact-layers-from-idea-to-handover.md; the principal's question of 2026-10-01 |
 
 ## Findings
 <!-- State: open | resolved | rejected | parked | obsolete. Resolution:
@@ -221,6 +222,9 @@ copy — CLAUDE.md, Ledger. -->
 - THR.0480 — how a new type is added to the engine; opened
   2026-09-30 (intent 4.35), the principal's stance saved, nothing
   decided; any time, before THR.0230.
+- THR.0490 — a stale clone goes unnoticed; `/forge` and
+  `forge-status` to say the state against the remote and offer the
+  pull; opened 2026-10-01 (intent 4.41), where it lives open.
 - THR.0420 — derivations of the forge for other jobs (online product
   managers = the product framework, test analysts with their test
   cases and strategies, project management); opened 2026-09-26,

@@ -838,6 +838,24 @@ document: 10-intent.md
   described a layer by today's state file and was corrected to the
   seven blocks, with a section on the elicitor, before its first
   save, on the principal's word of 2026-09-30.
+- **THR.0490** A stale clone goes unnoticed. The principal works on
+  more than one machine, so a local engine behind its origin is the
+  normal case, not the exception. On 2026-10-01 the `/forge` map was
+  reported from a clone one commit behind (6856009 against f371de0)
+  and nothing in the forge could have said so: the map reports
+  whether a project is under git and nothing of its state against
+  the remote, and `scripts/forge-status.ps1` neither fetches nor
+  reports ahead/behind — it prints "clean" and the origin's URL. The
+  principal's word of 2026-10-01: the pull is to be offered
+  unprompted at `/forge`, as it was on 2026-09-30, and the rule is to
+  live in the forge, not in the assistant's memory. Open: where it
+  lives — `forge-status` fetching and reporting ahead/behind for the
+  engine and every project with an origin, and the `/forge` map
+  showing that line and offering `forge-pull` before anything else;
+  or a session-start step beside THR.0430's session end. Claude's
+  recommendation, marked as his: both, since a map drawn from a stale
+  clone is a map of the wrong state. Nothing decided. Opened
+  2026-10-01.
 
 Note: the ID THR.0120 was inadvertently used twice — first for the
 readme-recipe thread (opened 1.14, closed 1.16), then for the

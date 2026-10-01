@@ -1,8 +1,8 @@
 ---
-version: 4.40
-date: 2026-09-30
+version: 4.41
+date: 2026-10-01
 status: draft
-last_change: 4.40 (2026-09-30): the rules of the cleaning of step 4 saved into THR.0470; POS.0120 - an item whose output is a file of its own keeps its assignment, one whose output is part of a file keeps the full information; POS.0310 - Was wherever wording leaves, a place included.
+last_change: 4.41 (2026-10-01): THR.0490 opened - a stale clone goes unnoticed; the map of /forge and forge-status say nothing of the state against the remote; the principal's word that the pull is offered unprompted at /forge and the rule lives in the forge, not in the assistant's memory; nothing decided.
 project: forge
 audience: principal + Claude only
 ---
