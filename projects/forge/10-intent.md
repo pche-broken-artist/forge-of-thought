@@ -1,8 +1,8 @@
 ---
-version: 4.45
+version: 4.46
 date: 2026-10-02
 status: draft
-last_change: 4.45 (2026-10-02): the fifteen disagreements between items and files left by the cleaning settled by walkthrough - POS.0110, POS.0180, POS.0190, POS.0420, POS.0550, POS.0740, POS.0850 and POS.1050 brought in line with the files, three files with the intent; step 9 of THR.0470 done; THR.0510 opened - live reference material by nightly export.
+last_change: 4.46 (2026-10-02): THR.0440 and THR.0450 closed by walkthrough, fourteen matters - in the brief's definition Claude forms the record and the brief is the principal's by his approval, whoever first said a thought (POS.1330); the two questions of worth and feasibility are Claude's way of challenging, not a property of the intent (POS.1340); the assignment is complete when its recipients can act rightly where the plan no longer fits, the number of questions no measure (POS.1350); a Map's areas said aloud at the walk (POS.1320); the marks of a brief narrowed (POS.0110); the reason of POS.1180 by the principal's account.
 project: forge
 audience: principal + Claude only
 ---
@@ -266,17 +266,22 @@ position that already stands elsewhere.
   intent. Decided 2026-09-28 from `00-brief-elicitation.md`.
 - **POS.1320 A Map is a map of what must be found, not a
   questionnaire.** It names, in the artefact's own vocabulary, what
-  the finding looks at; it prescribes neither the headings of the
+  the finding looks at or consciously verifies; it prescribes neither
+  the headings of the
   document nor the order of the conversation, and it is neither a
   list of questions nor a list of criteria. It is walked at the
   moments its definition names, as the question whether each area
   has been consciously considered; an area may stay empty when it
-  was considered and found not to apply. How an area is found is the
-  situation's: a question, a research step, a source. Decided
-  2026-09-28 from `00-brief-elicitation.md`.
+  was considered and found not to apply. At the walk Claude says of
+  each area how it stands: found, considered and left open,
+  considered and found not to apply, or not looked at. It is said
+  aloud and nothing is recorded. How an area is found is the
+  situation's: a question, a research step, a source. Present shape
+  2026-10-02, from `00-brief-elicitation.md`.
 - **POS.1330 The definition of the brief's elicitation.** The seven
   blocks of POS.1310, in the wording agreed in
-  `00-brief-elicitation.md`, word for word.
+  `00-brief-elicitation.md`, changed at 4.46 where the matters its
+  review and the researches had left open were settled.
 
   **Target.** `00-brief.md` (bare) or `00-brief-<name>.md` (with a
   name — a later whole of thinking born during the project's life).
@@ -306,26 +311,29 @@ position that already stands elsewhere.
   says so and locks it; the Map is walked before the lock is
   offered.
 
-  **Partner.** The brief is the principal's text, and Claude's part
-  changes on the way. At the opening Claude is the active one: he
+  **Partner.** The brief is the principal's: what is in it he
+  approved, whoever first said it. Claude's part changes on the way.
+  At the opening Claude is the active one: he
   inspires, brings how the same thing is done elsewhere and how
   original the idea is, verifies what can be verified, and proposes
   research and ingest (Instruments); a proposal of his, however
   large, serves the finding and is not the brief. Then the brief is
-  written, and it is mainly the principal's text. Claude moves him
-  to describe what he wants, why and what he does not want, and
-  writes it down whole by whole as they have talked it over. Claude
-  may work on the text: translate it, mend its grammar, and put an
-  idea of his own into it in his own wording where the principal has
-  accepted it; what he has formulated he reflects back before it is
-  written. What he does not do is take the text over: he does not
-  decide what goes in, and he does not chisel it into an intent.
+  written. Claude moves the principal to say what he wants, why and
+  what he does not want, and he forms the record: on the principal's
+  word to write, he takes what the talk arrived at and writes it
+  down so that it is understood. He may translate, mend the grammar
+  and word an idea of his own that the principal has accepted; what
+  he has formulated he reflects back before it is written. What he
+  does not do is take the brief over: he does not decide what goes
+  in, and he does not chisel it into an intent.
 
   Claude holds the form. A brief says what the idea is and why; it
   may carry a mechanism where the mechanism is part of the idea.
   Once the talk turns to taking it apart and agreeing it piece by
   piece (definitions, blocks, wording), Claude says in one sentence
-  that this is the intent's work and does not develop it. The
+  that this is the intent's work, does not develop it, and offers
+  once to lock the brief and go on in the intent: a recommendation,
+  never a gate. The
   principal decides whether it stays in the brief as one open line
   or is let go. No walkthrough runs over the text of a brief and no
   IDs enter it.
@@ -345,8 +353,10 @@ position that already stands elsewhere.
   in the brief. The walk asks and does not mend: a tension, an
   alternative left undecided or a boundary left vague may stay in
   the brief as it is, since resolving them is the intent's work.
-  - the thought in the principal's words: what he wants, why, and
-    what prompted it;
+  - the thought: what the principal wants, why, and what prompted
+    it;
+  - the boundaries: what the principal does not want, and what is
+    out of scope;
   - the world around it: what exists that does the same or the
     opposite, and what of it is inspiration, counter-example or
     proof that the wheel exists;
@@ -374,10 +384,11 @@ position that already stands elsewhere.
   finished, if so lock at once; begun outside — store what came,
   then work from where it stops; born here — the principal opens
   with a rough idea and Claude works from the first word as the
-  Partner says, verifies, confronts, proposes, draws out, and
-  accumulates the principal's answers as his text, not as a summary
-  of them; a summary or a structured proposal he asks to record is
-  stored as shown, never re-narrated. Write once per round on his
+  Partner says, verifies, confronts, proposes, draws out, and writes
+  down what the two of them arrived at, condensed where the talk was
+  long and in whatever wording says it best, reflected back before
+  it is written; a summary or a structured proposal he asks to
+  record is stored as shown, never re-narrated. Write once per round on his
   confirmation; lock only on his explicit word; end by naming the
   state and, if locked, proposing `/forge intent`.
 
@@ -389,10 +400,12 @@ position that already stands elsewhere.
   rename. The step is the principal's to ask for, never a condition
   of the lock.
 
-  Decided 2026-09-28 from `00-brief-elicitation.md`.
+  Present shape 2026-10-02, from `00-brief-elicitation.md`.
 - **POS.1340 The definition of the intent's elicitation.** The seven
   blocks of POS.1310. Aim, Partner, Map, Instruments and Course are
-  in the wording agreed in `00-brief-elicitation.md`, word for word;
+  in the wording agreed in `00-brief-elicitation.md`, changed at
+  4.46 where the matters its review and the researches had left open
+  were settled;
   Target and Inputs are those of the state file as it stood on
   2026-09-28, to which the brief refers.
 
@@ -408,17 +421,19 @@ position that already stands elsewhere.
   holds: from the briefs, the sources and the conversation it keeps
   what matters as positions, what is the case as facts, what is
   undecided as threads and what was dropped as rejections with the
-  reason. Every idea is weighed twice — good or bad, feasible or
-  not — and placed on a horizon where the principal sees one: a
-  proof of concept, the first version, a later one, or good but far
-  away. Everything coherent, nothing twice, every position with its
+  reason. Ideas are placed on a horizon where the principal sees
+  one: a proof of concept, the first version, a later one, or good
+  but far away. Everything coherent, nothing twice, every position with its
   provenance, and the whole passed through a final reality check
   before a lower layer is derived. It is complete for now when no
   thread blocks the next layer; it is never finished.
 
   **Partner.** Claude helps the principal reach the Aim: mines the
   briefs with him whole by whole, probes contradictions, gaps and
-  unstated assumptions, reflects a brain-dump back as structure
+  unstated assumptions, and challenges an idea on two questions kept
+  apart, whether it is good and whether it is feasible: a way of
+  asking, nothing recorded per idea; reflects a brain-dump back as
+  structure
   before it is written, offers options with trade-offs, proposes
   research where a thread needs outside grounding, and runs the
   final reality check with him. He composes the wording, the
@@ -480,13 +495,14 @@ position that already stands elsewhere.
   and its Aim includes it. The assignment then distils them too,
   instead of finding them first.
 
-  Decided 2026-09-28 from `00-brief-elicitation.md`. What the
-  brief's second review holds against "weighed twice" is THR.0440
-  (e); no fate is recorded part by part at mining (REJ.0210).
+  Present shape 2026-10-02, from `00-brief-elicitation.md`; no fate
+  is recorded part by part at mining (REJ.0210).
 - **POS.1350 The definition of the assignment's elicitation.** The
   seven blocks of POS.1310. Aim, Partner, Map, Instruments and
   Course, with the joint pass, are in the wording agreed in
-  `00-brief-elicitation.md`, word for word; Target and Inputs are
+  `00-brief-elicitation.md`, changed at 4.46 where the matters its
+  review and the researches had left open were settled; Target and
+  Inputs are
   those of the state file as it stood on 2026-09-28, to which the
   brief refers.
 
@@ -502,7 +518,8 @@ position that already stands elsewhere.
   what they shall not do, and what the principal has left open on
   purpose. It is complete when nothing the recipients would need is
   left to assumption — delegated or open on purpose is complete,
-  silent is not.
+  silent is not — and when they know what must be true at the end,
+  and why, well enough to act rightly where the plan no longer fits.
 
   **Partner.** Claude first reads the intent against what the
   assignment needs — recipients, objective, delegation, success
@@ -535,8 +552,8 @@ position that already stands elsewhere.
   - the boundaries: what they shall not do, what is not to be
     challenged, and what the whole rests on;
   - success: criteria present, delegated or deliberately absent;
-  - the words: what must be defined so that the assignment is read
-    without the principal in the room.
+  - self-containment: what must be defined so that the assignment is
+    read without the principal in the room.
 
   **Instruments.** The provenance map (phase 2 below): a tool of the
   pass, no part of the assignment. The walkthrough by group (phase 3
@@ -561,8 +578,10 @@ position that already stands elsewhere.
 
   1. Questions up front — one per message, only what is the
      principal's and the intent does not answer. None where the
-     intent answers everything; rarely more than six, and where more
-     are needed the intent is not ready and the work returns to it.
+     intent answers everything. A question on the detail of the
+     handover is asked here; a question on substance the intent has
+     not settled means the intent is not ready, and the work returns
+     to it. Many questions are evidence of that, never its measure.
   2. The recast — Claude writes the whole draft from the intent, and
      with it the provenance map: group → items → the positions they
      came from, plus the in-scope positions that landed nowhere (to
@@ -582,9 +601,7 @@ position that already stands elsewhere.
   and a verdict on each is ceremony. Why not "read the whole":
   without the map one sees what is there, not what is missing.
 
-  Decided 2026-09-28 from `00-brief-elicitation.md`. What the
-  brief's second review holds against "the words" as an area of a
-  Map and against the number six is THR.0440 (f) and (g).
+  Present shape 2026-10-02, from `00-brief-elicitation.md`.
 - **POS.1360 The horizon lives in all three layers, each carrying
   its own kind, nothing twice.** The intent carries the judgement:
   why this is a proof of concept, this the first version, this
@@ -662,11 +679,15 @@ position that already stands elsewhere.
   nowhere (REJ.0180). Nothing in a brief marks authorship: what is in it
   the principal approved, whoever first said it (REJ.0220). Two marks
   stay, because they carry something other than authorship: `(source:
-  <path>)` says where a claim is from and becomes a fact with provenance
-  at mining; a short `(remark: …)` stands where a reservation, an
-  uncertainty or a suggestion was raised that the principal did not
-  adopt, named by what it is and not by who made it, so that it reads
-  the same whatever model the forge runs on. A brief has two states:
+  <path>)` stands where the identity of a source supports, limits or
+  contradicts the thought, and becomes a fact with provenance at
+  mining; what merely inspired the thought carries no mark and stays
+  discoverable through the research note; a short `(remark: …)`
+  stands where a reservation or an uncertainty must stay visible,
+  named by what it is and not by who made it, so that it reads the
+  same whatever model the forge runs on; a suggestion or an
+  alternative the principal did not take is gone, unless he says it
+  stays. A brief has two states:
   *draft* while it is being composed, and *approved* (version 1.0) once
   the principal locks it; immutability runs from the lock, not from the
   file's creation. Three origins are equally legitimate and the forge
@@ -678,7 +699,7 @@ position that already stands elsewhere.
   hands it to the same procedure, which creates `00-brief.md`
   (`.claude/skills/new-project/SKILL.md`). A locked brief is the provenance
   anchor of its whole: the record against which later drift is measured.
-  Present shape 2026-09-28, from `00-brief-elicitation.md`.
+  Present shape 2026-10-02, from `00-brief-elicitation.md`.
 - **POS.0920** A project may have more than one brief, and the ledger
   tracks how far each is mined. The founding brief is `00-brief.md`;
   every later whole of thinking that would otherwise land in the intent
@@ -1019,13 +1040,12 @@ position that already stands elsewhere.
 - **POS.1180** An intent consolidated by Claude from the conversation,
   rather than composed item by item with the principal, is
   `in_review` until every position has been walked through, and no
-  lower layer is derived before that walkthrough. In `health` the
-  intent 0.1 was written in six minutes from three days of talk — 31
-  positions and threads Claude had distilled — the scheduled
-  walkthrough never ran, and 26 positions were confirmed en bloc
-  because the report built from them had been read: the authorship
-  rule of the intent inverted, the principal auditing a document
-  instead of recognising his own (F.03). Ordinary work, where
+  lower layer is derived before that walkthrough. In `health` three
+  days of talk had been written nowhere; when that came out, the
+  intent 0.1 was saved at once and its positions confirmed en bloc
+  so that nothing was lost, which said nothing of whether each of
+  them held (`sources/forge-run-record-health.md`, F.03; the
+  principal's account of 2026-10-02). Ordinary work, where
   positions are composed in the conversation, is untouched. Decided
   2026-09-14 (P.08).
 - **POS.0240** Every assignment carries a Terms section, so it can be

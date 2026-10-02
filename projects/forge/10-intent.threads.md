@@ -490,6 +490,10 @@ document: 10-intent.md
   definition shape (POS.1310, POS.1380), and the horizon returns in
   it: mandatory in the BRD, its shape in the intent and the
   assignment still to be solved (POS.1360).
+  A thought to carry into the brief `brd`: what is proposed for now
+  must be worth it on its own; a later possibility is never what
+  justifies it
+  (`research/2026-09-28-artefact-layers-from-idea-to-handover.md`).
 - **THR.0370** Mermaid diagrams in Word. `scripts/md2docx.ps1`
   (POS.1150) converts a render to Word through pandoc and leaves
   Mermaid blocks as code. Agreed in the walkthrough of 2026-09-12 but
@@ -637,67 +641,6 @@ document: 10-intent.md
   the sum is per session or cumulative, and the research of the
   transcript format before any script. Opened 2026-09-27 at the
   principal's direction.
-- **THR.0440** What the brief `elicitation` and its second review
-  left open. Origin: the brief and
-  `sources/forge-elicitation-brief-review-v0.4.md`; the
-  recommendations are Claude's, offered once. (a) Whether the
-  brief's Map names the boundaries, what is not wanted and what is
-  out of scope; Claude: yes, as a fifth area, since the Partner
-  already asks what he does not want. (b) Whether the Course of a
-  brief offers the lock as soon as the talk turns to the intent's
-  work; Claude: yes, once, as a recommendation and never a gate.
-  (c) Whether a brief born in the forge carries marks and citations
-  at all; Claude: a source is cited where its identity supports,
-  limits or contradicts the thought, and mere inspiration stays
-  discoverable through the research note. (d) `(remark: …)` covers
-  three states that behave differently; Claude: keep it for a
-  reservation or an uncertainty that must stay visible, an
-  unadopted suggestion being normally gone. (e) "Every idea is
-  weighed twice" in the intent's Aim; Claude: each material idea
-  judged for its value and for feasibility wherever either
-  distinction matters. (f) A Map is defined as what must be found,
-  while "the words" of the assignment's Map is something verified;
-  Claude: "found or consciously verified", the area renamed
-  self-containment. (g) The number of questions up front as the
-  sign that the intent is not ready; Claude: the boundary is
-  unresolved substance against handover detail, a large number is
-  evidence of it and not its definition. (h) Whether an alternative
-  the principal did not take may stay visible in a brief; Claude:
-  no rule needed, what goes in is his to say, a note included.
-  A matter closed here changes the wording of its definition
-  (POS.1330 to POS.1350). Opened 2026-09-28.
-- **THR.0450** What the researches of 2026-09-28 propose beyond the
-  brief. Origin: Claude's synthesis from
-  `research/2026-09-28-artefact-layers-from-idea-to-handover.md`
-  and
-  `research/2026-09-28-human-ai-elicitation-over-artefacts.md`;
-  nothing decided. (a) The order of initiative. Four controlled
-  studies agree that the further an AI goes into the drafting, the
-  better the text and the weaker the human's ownership of it, and
-  that a model used from the start narrows the ideas; their limit is
-  short tasks with lay participants, none a domain expert on a
-  document of his own. Against them stand two things the principal
-  wants: the active opening of POS.1330 and an early draft in its
-  extreme form, a whole proposal as the first answer (POS.0880).
-  The question is whether both stand as written. Claude: they
-  stand, with the principal's own statement of the thought first
-  wherever it does not arrive written, and Claude's proposal
-  offered rough and named as a proposal. (b) A state said per area
-  when a Map is walked, so that "considered and left open" differs
-  from "not looked at"; Claude: said aloud at the walk, nothing
-  written, since a recorded state is a new convention and hardens
-  into a gate. (c) The assignment's completion stated as doctrine
-  states it, the recipients acting rightly when the plan no longer
-  fits, and one sentence admitting that a live briefing beside the
-  document is normal. (d) One sentence in the outward-facing
-  renders on what a brief is here: elsewhere the word names a short
-  direction written for someone else. (e) For the brief `brd`: a
-  future possibility is never used to justify the present proposal.
-  (f) Three choices of the forge have no outside model and are
-  hypotheses to be tried: a locked brief in the owner's words as
-  provenance, the horizon divided among the layers (POS.1360), and
-  "polished too far" as a defect of a brief (POS.0110). Opened
-  2026-09-28.
 - **THR.0460** `/recipe` and `/forge`: one dispatcher or two.
   Today the states of `/forge` and the genres of `/recipe` are one
   mechanism written twice in different shapes. A recipe is composed

@@ -26,12 +26,12 @@ absorbed it; Note says what remains (partial) or the REJ (dropped). -->
 |---|---|---|---|---|
 | 00-brief.md | — | placeholder: brief stage was skipped, intent is the earliest record | — | accepted under DEC.0010, not a check finding |
 | 00-brief-public-engine.md | 1.0 | approved | mined | born in the forge 2026-08-29 (THR.0130, THR.0090), locked 2026-08-29 in English after the CTO challenge; mined into intent 2.21 (POS.0940–0980, REJ.0140–0150, THR.0190–0200). Instance work it records — the one-off migration steps 1–6, the first projects after the split — stays here and under Waiting on principal, not in the intent |
-| 00-brief-elicitation.md | 1.0 | approved | mined | born in the forge and locked 2026-09-28; mined into intent 4.32 (POS.1300 to POS.1380, POS.0110, REJ.0180, REJ.0210, REJ.0220, THR.0440 to THR.0460). The material for the briefs `brd` and `engine-split` is carried in THR.0230, THR.0300 and THR.0360. Not a model of a brief, see its opening note |
+| 00-brief-elicitation.md | 1.0 | approved | mined | born in the forge and locked 2026-09-28; mined into intent 4.32 (POS.1300 to POS.1380, POS.0110, REJ.0180, REJ.0210, REJ.0220, THR.0440 to THR.0460; THR.0440 and THR.0450 closed at 4.46). The material for the briefs `brd` and `engine-split` is carried in THR.0230, THR.0300 and THR.0360. Not a model of a brief, see its opening note |
 
 ## Documents
 | File | Version | Status | Date |
 |---|---|---|---|
-| 10-intent.md | 4.45 | draft | 2026-10-02 |
+| 10-intent.md | 4.46 | draft | 2026-10-02 |
 | 20-assignment.md | — | not planned: the handover artefacts of this project are the core itself (CLAUDE.md, templates/, .claude/) and README.md | — |
 | decisions.md | — | 16 records (DEC.0010–0160) | 2026-10-02 |
 
@@ -194,10 +194,6 @@ intent version for accepted, DEC.NNNN for rejected. -->
 ## Waiting on principal
 <!-- What waits on the principal, one line per matter: cite, never
 copy — CLAUDE.md, Ledger. -->
-- THR.0440 — what the brief `elicitation` and its second review
-  left open; eight matters, Claude's recommendation on each, open.
-- THR.0450 — what the researches of 2026-09-28 propose beyond the
-  brief; the order of initiative first, open.
 - THR.0460 — `/recipe` and `/forge`, one dispatcher or two; small,
   open.
 - THR.0470 — the intent too long to be read; the nine steps of the
