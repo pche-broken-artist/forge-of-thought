@@ -16,3 +16,5 @@ place without an ID: a section or the file. Reason is left out on
 always last, paragraphs in it divided by `<br>`. At the birth of a
 document, one record of the file and one naming every item born
 with it. Lines are not wrapped. -->
+
+- 2026-10-02 | 0.51 | PCHe | Instructions | changed | A check's findings are filed as FND with the critic's states (POS.1140, intent 4.43). | Was: check: nothing filed — settled in the session

@@ -2,9 +2,9 @@
 project: forge
 purpose: readme
 audience: humans arriving at the repository
-version: 0.50
-updated: 2026-09-27
-last_change: 0.50 (2026-09-27): finding states as of intent 4.28 (rejected for overruled, parked added); the verdict words said once, under the walkthrough; the words the reader types - the verdict line, ??, write - given in code and in a fixed table; an output in two steps, /render and /publish, and the two engines of the conversion scripts.
+version: 0.51
+updated: 2026-10-02
+last_change: 0.51 (2026-10-02): a check's findings are filed as FND with the critic's states.
 output: /README.md
 ---
 
@@ -286,8 +286,8 @@ summarising the newest row. -->
   bullet; then its output and the states of its findings as a list in
   exactly the ledger's vocabulary, never a state of the render's own
   (critic: open, resolved, rejected, parked, obsolete; challenger:
-  open, accepted, rejected, parked, obsolete; check: nothing filed —
-  settled in the session). The verdict words are said once, in "How
+  open, accepted, rejected, parked, obsolete; check: the critic's
+  states, filed only when it finds something). The verdict words are said once, in "How
   the work feels" under the walkthrough, never per reviewer: they
   are one set for every walkthrough.
 - Open threads (THR) are not enumerated; growth is summarised from

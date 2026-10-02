@@ -12,9 +12,9 @@ reviewers).
 
 Shared behaviour: the contract skill named in each check file's
 front-matter (CLAUDE.md, Isolated reviewers). Unlike the critic and
-the challenger, a check files nothing: the report returns to the
-session and its findings are settled there. This command only
-chooses the check, passes the target and presents the report.
+the challenger, a check agent writes nothing: it returns its report
+and this command files it. This command chooses the check, passes
+the target, files the report and presents it.
 
 **Bare `/check` — the roster.** List the available checks (scan
 `.claude/agents/check-*.md`, their `description` fields — each says
@@ -31,18 +31,38 @@ path and nothing else (CLAUDE.md, Isolated reviewers). More than one
 check on one target may be launched at once and awaited together.
 
 When it returns:
-1. Present the report to the principal as it came: the one-line
-   verdict, then the findings in their ranking, compactly.
-2. Offer at once every finding marked "immediate fix" as one step
-   (CLAUDE.md, Working methods, Step by step); apply on his word.
-3. End by offering a **walkthrough** of the remaining findings
+1. File the report, when it has findings. Write it into the target
+   project (for the engine `projects/forge`) as
+   `reviews/YYYY-MM-DD-check-<name>.md`, suffix `-2` if one exists
+   for today: a front-matter of `date`, `project`, `check`, `target`
+   and `reviewer: check <name> (isolated context)`, then the agent's
+   text word for word — nothing added, dropped or reworded but the
+   ID, the next free `FND.NNNN` of the project's sequence, in tens,
+   set at the head of each new finding. Add a row per new finding to
+   the ledger's Findings table (category `conformance`, state `open`,
+   source review = this file); a finding the report names as reopened
+   goes back to `open`. A library has no Findings table and no
+   `reviews/` until its first finding: add both then, the table as
+   `templates/ledger.md` has it. Reports of several checks on one
+   target are filed one after another, never at once, so that no ID
+   is given twice. A report that says "conforms" is filed nowhere.
+2. Present the report to the principal as it came: the one-line
+   verdict, then the findings in their ranking with their IDs,
+   compactly.
+3. Offer at once every finding marked "immediate fix" as one step
+   (CLAUDE.md, Working methods, Step by step); apply on his word,
+   state `resolved`.
+4. End by offering a **walkthrough** of the remaining findings
    (`.claude/skills/walkthrough/SKILL.md`, the one owner of its
    shape and of the verdict words). What each verdict writes here:
    **accept** — the fix, agreed here and written once at the round's
-   end; **reject** — the state stays as it is; a rule worth changing
-   goes to the intent; **park** — a line in the project's ledger
-   under "Waiting on principal". Nothing blocks (POS.0430): a
-   release may proceed with a finding parked.
+   end, state `resolved`; **reject** — a DEC with the principal's
+   reason, in the shape of `templates/decisions.md`, state
+   `rejected`; a rule worth changing goes to the intent; **park** —
+   state `parked`; **obsolete** — state `obsolete`, with what made it
+   moot. Finding states in the ledger change only, never delete.
+   Nothing blocks (POS.0430): a release may proceed with a finding
+   parked.
 
 Do not judge substance or document quality — that is `/critique` and
 `/challenge` territory. A check verifies conformance only.

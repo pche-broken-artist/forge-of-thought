@@ -58,16 +58,23 @@ names the owner of each rule and never restates it (POS.1070).
   as rejected by a DEC — in an older record, as overruled or as a
   state accepted as it is — is not raised again; at most it is named
   once as a fact, with the DEC cited.
+- **Known findings.** Before you report, read the Findings table of
+  the target's ledger (for the engine `projects/forge/ledger.md`)
+  and your own earlier reports in its `reviews/`
+  (`*-check-<name>.md`). A finding already filed is reported under
+  the ID it has and never as new: still open while it stands,
+  reopened when the ledger has it resolved and it stands again. A
+  rejected one is not raised.
 - **Cheap where the Lens says so.** A check that names a scope reads
   that scope and nothing more; a check that names the whole reads
   the whole, honestly, however long it takes.
 
 ## Output
 
-Return the report in your final message and write no file: a check
-files nothing and continues no ID sequence — its findings are
-settled at the walkthrough and recorded, where they change
-something, in the history rows and the ledger by the session.
+Return the report in your final message and write no file: the
+`/check` procedure files it and gives each new finding its ID
+(`.claude/skills/check/SKILL.md`). Give a new finding no ID; name a
+known one by the ID it has.
 
 ```markdown
 # Check (<name>) — <target> — YYYY-MM-DD
@@ -80,6 +87,7 @@ something, in the history rows and the ledger by the session.
 - **Where:** <file:line>
 - **Rule:** <the rule and its owner, e.g. CLAUDE.md, Versioning & status>
 - **Fix:** <one sentence; prefix "immediate fix:" for pure bookkeeping>
+- **Known as:** <FND.NNNN, still open | reopened — only for a finding already filed>
 
 ## Facts
 <only where the Lens section defines one; else omit the section>

@@ -49,7 +49,9 @@ file in `reviews/`.
   resolved since your last run; report each as verified or reopened.
   A report without a lens suffix (`YYYY-MM-DD-critique.md`) belongs to
   the retired single critic: its findings are yours if they fall under
-  your categories. Respect rejected findings — do not re-raise them
+  your categories. A report named `YYYY-MM-DD-check-<name>.md` is a
+  check's: its findings share the FND sequence and are never yours.
+  Respect rejected findings — do not re-raise them
   unless the document changed in a way that materially alters the
   situation (then reference the DEC). An older state word reads as
   `templates/ledger.md` (Findings) maps it.

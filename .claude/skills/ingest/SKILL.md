@@ -18,7 +18,8 @@ changed since registration (modification time later than the
 ledger's registration date) with a question — what to do with each.
 The meaning depends on the project's kind (POS.0180, POS.0960): in a
 `thought` project a changed source is a breach of immutability to
-resolve (re-register beside as a new source, or restore); in a
+resolve (re-register beside as a new source, restore, or accept the
+change knowingly on the principal's word); in a
 `library` a changed document is the owner's ordinary maintenance
 (POS.0970) — update the index entry and the ledger date, nothing
 else. Never silently re-register.

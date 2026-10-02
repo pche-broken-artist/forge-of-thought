@@ -3,7 +3,7 @@ project: forge
 kind: thought
 language: en
 terminal: intent
-updated: 2026-10-01
+updated: 2026-10-02
 ---
 
 # Ledger — Forge of Thought
@@ -13,8 +13,9 @@ per CLAUDE.md, Versioning & status. /ledger reads from here.
 Kind: `thought` keeps every table below. `library` (POS.0960) keeps
 only Renders, Sources, Dependencies, Research and Waiting on
 principal; the Briefs, Documents, Published, Findings and Challenges
-tables are deleted at scaffold time. This comment is the one owner of that
-reduction (POS.1070). -->
+tables are deleted at scaffold time; the Findings table returns with
+a check's first finding (`.claude/skills/check/SKILL.md`). This
+comment is the one owner of that reduction (POS.1070). -->
 
 ## Briefs
 <!-- One row per brief (00-brief.md and 00-brief-<name>.md). Status:
@@ -30,9 +31,9 @@ absorbed it; Note says what remains (partial) or the REJ (dropped). -->
 ## Documents
 | File | Version | Status | Date |
 |---|---|---|---|
-| 10-intent.md | 4.41 | draft | 2026-10-01 |
+| 10-intent.md | 4.45 | draft | 2026-10-02 |
 | 20-assignment.md | — | not planned: the handover artefacts of this project are the core itself (CLAUDE.md, templates/, .claude/) and README.md | — |
-| decisions.md | — | 14 records (DEC.0010–0140) | 2026-09-27 |
+| decisions.md | — | 16 records (DEC.0010–0160) | 2026-10-02 |
 
 ## Renders
 <!-- Generated outputs, one row per recipe in recipes/ (CLAUDE.md,
@@ -98,11 +99,14 @@ research/00-INDEX.md, never here. -->
 | 2026-09-30-how-everything-in-the-forge-is-born.md | 2026-09-30 | the engine's definitions at commit c95cffe; 10-intent.md v4.34 (POS.0120, POS.0700, POS.1130); the principal's question of 2026-09-30 |
 | 2026-09-30-adding-a-new-type-to-the-engine.md | 2026-09-30 | the engine's definitions at commit c95cffe, every member of each type searched by name; 10-intent.md v4.34 (POS.0400-0420, POS.0700, POS.0960, POS.1000, POS.1070, POS.1120-1140); research/2026-09-07-brd-layer-fork-analysis.md; the principal's question of 2026-09-30 |
 | 2026-10-01-what-of-the-intent-belongs-to-an-assignment.md | 2026-10-01 | 10-intent.md v4.41 read whole; 10-intent.threads.md (THR.0470, THR.0480); CLAUDE.md (prime directive 8, Document chain 2 and 3, Requirement style); research/2026-09-28-artefact-layers-from-idea-to-handover.md; the principal's question of 2026-10-01 |
+| 2026-10-02-running-reviewers-without-the-conversation.md | 2026-10-02 | 10-intent.md v4.42 (POS.0400, POS.0540, POS.1120, POS.1140); the principal's question of 2026-10-02 |
 
 ## Findings
-<!-- State: open | resolved | rejected | parked | obsolete. Resolution:
-assignment version for resolved, DEC.NNNN for rejected. `overruled`
-in an older record reads as `rejected`. -->
+<!-- Findings of the critic and of the checks, one sequence. State:
+open | resolved | rejected | parked | obsolete. Resolution:
+assignment version, or for a check's finding what fixed it, for
+resolved; DEC.NNNN for rejected. `overruled` in an older record reads
+as `rejected`. -->
 | ID | Severity | Category | State | Source review | Resolution |
 |---|---|---|---|---|---|
 | FND.0010 | medium | inconsistency | resolved | 2026-08-17-critique.md | README re-rendered, title at intent 2.7 (verified 2026-08-27) |
@@ -148,6 +152,16 @@ in an older record reads as `rejected`. -->
 | FND.0410 | medium | contradiction | resolved | 2026-09-06-critique-clarity-3.md | intent 3.48 |
 | FND.0420 | low | ambiguity | resolved | 2026-09-06-critique-clarity-3.md | intent 3.48 (POS.0570 cites POS.1140) |
 | FND.0430 | low | contradiction | resolved | 2026-09-06-critique-clarity-3.md | intent 3.48 (THR.0240 dated) |
+| FND.0440 | medium | conformance | resolved | 2026-10-02-check-history.md | intent 4.44 |
+| FND.0450 | medium | conformance | rejected | 2026-10-02-check-history.md | DEC.0150 |
+| FND.0460 | medium | conformance | resolved | 2026-10-02-check-history.md | intent 4.44 |
+| FND.0470 | low | conformance | resolved | 2026-10-02-check-history.md | intent 4.44 |
+| FND.0480 | low | conformance | rejected | 2026-10-02-check-history.md | DEC.0160 |
+| FND.0490 | low | conformance | resolved | 2026-10-02-check-history.md | intent 4.44 (the sentence on `-Model` kept in POS.0740, POS.0930 cites it) |
+| FND.0500 | low | conformance | resolved | 2026-10-02-check-history.md | intent 4.44 (the threads' closing note) |
+| FND.0510 | low | conformance | resolved | 2026-10-02-check-history.md | intent 4.44 |
+| FND.0520 | low | conformance | resolved | 2026-10-02-check-history.md | recipe release-notes 0.12 |
+| FND.0530 | low | conformance | resolved | 2026-10-02-check-history.md | recipe executive-pitch 0.7 |
 
 Four review files are named outside the convention — accepted as they
 are by DEC.0140.
@@ -186,10 +200,10 @@ copy — CLAUDE.md, Ledger. -->
   brief; the order of initiative first, open.
 - THR.0460 — `/recipe` and `/forge`, one dispatcher or two; small,
   open.
-- THR.0470 — the intent too long to be read; the migration in nine
-  steps kept in the thread, steps 2 and 3 done 2026-09-30 (intent
-  4.37, 4.39), step 4 in its third pass (A2), rules in the thread;
-  whether large files are split stays open.
+- THR.0470 — the intent too long to be read; the nine steps of the
+  migration done and the fifteen disagreements settled (intent 4.45,
+  2026-10-02); left: the release of the engine; whether large files
+  are split stays open.
 - THR.0400 — a gate in front of the tools; the reminder half done
   2026-09-20 (intent 4.14), raw git denied 2026-09-21 (POS.1200),
   the rest of the enforcing hook on the table again since THR.0390
@@ -225,6 +239,10 @@ copy — CLAUDE.md, Ledger. -->
 - THR.0490 — a stale clone goes unnoticed; `/forge` and
   `forge-status` to say the state against the remote and offer the
   pull; opened 2026-10-01 (intent 4.41), where it lives open.
+- THR.0500 — the reviewers' mechanism out of the session; filing by
+  a script kept for later, research of 2026-10-02; opened 2026-10-02.
+- THR.0510 — live reference material by nightly export; the
+  principal's thought, nothing decided; opened 2026-10-02.
 - THR.0420 — derivations of the forge for other jobs (online product
   managers = the product framework, test analysts with their test
   cases and strategies, project management); opened 2026-09-26,
@@ -240,7 +258,8 @@ copy — CLAUDE.md, Ledger. -->
 - THR.0090 — multi-principal use; deliberately not worked on.
 - THR.0140 — the delivery side; deferred until a subject project
   needs the linkage.
-- THR.0150 — PowerShell scripts to POSIX sh; undecided, no priority.
+- THR.0150 — the scripts in Python; decided 2026-10-02, the rewrite
+  of the PowerShell scripts open.
 - THR.0210 — the guard rail for the public boundary; at stake again
   2026-09-20, to be taken up.
 - THR.0190 — a plugin as a distribution layer; merges into the brief

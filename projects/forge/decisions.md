@@ -207,3 +207,33 @@ them here was THR.0070, resolved by DEC.0040 (no back-fill). -->
   Accepted in the ledger on 2026-09-11 and 2026-09-20; on the pattern
   of DEC.0110, no later check raises them again.
 - **Date:** 2026-09-27
+
+## DEC.0150 — The account of what stood before the reversal stays in POS.0950; FND.0450 rejected
+- **Decision:** The check `history` of 2026-10-02 found that POS.0950
+  tells how its rule on the commit identity was reversed and what
+  stood before, and proposed to move both sentences into the history
+  (FND.0450). The finding is rejected; the sentences stay.
+- **Reason:** The reason of the position is what the field showed
+  against the earlier state, and the sentence on the two-roles case
+  rests on it; without the account the item said in one breath that
+  the identity is resolved per host and that the per-host include was
+  rejected. The principal restored the sentence by his verdict of
+  2026-10-01, at step 7 of THR.0470. Settled by Claude on the
+  principal's word of 2026-10-02 to resolve the findings of this
+  report, his rule being that the intent must stay understandable.
+- **Date:** 2026-10-02
+
+## DEC.0160 — The clause on what the principal wants to be told stays in POS.0020; FND.0480 rejected
+- **Decision:** The check `history` of 2026-10-02 found that POS.0020
+  keeps what was rejected on the way to it, the clause "the record's
+  "no warnings unless asked" rejected by the principal — he wants to
+  be told of problems, holes and contradictions, as a question", and
+  proposed to move it into the history (FND.0480). The finding is
+  rejected; the clause stays.
+- **Reason:** The clause says why the position holds, that the
+  principal wants to be told, and without it "he" in the sentence
+  reads as Claude. It was returned to the item at step 7 of THR.0470
+  on a verifier's finding. Settled by Claude on the principal's word
+  of 2026-10-02 to resolve the findings of this report, his rule
+  being that the intent must stay understandable.
+- **Date:** 2026-10-02

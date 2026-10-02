@@ -20,18 +20,18 @@ document: 10-intent.md
   to a separate delivery framework is open and deliberately not
   worked on now; it is taken up when a subject project first needs
   the linkage — flow-ba is a natural candidate.
-- **THR.0150** Replacing the PowerShell scripts with POSIX `sh`.
-  Considered: a single `scripts/*.sh` set (POSIX, no bashisms — macOS
-  ships bash 3.2), run on Windows in Git Bash, which comes with Git
-  for Windows and is required by Claude Code anyway — so no platform
-  gains a dependency, unlike the `pwsh` install POS.0830 asks of
-  non-Windows users; from PowerShell the call is
-  `sh ./scripts/<name>.sh …`, Claude calls them directly. The
-  principal is undecided whether to do it at all; no priority while
-  PowerShell 7 suffices. If taken up: the set is replaced whole, never
-  run side by side. Already excluded: a dual `.ps1` + `.sh` set (two
-  truths drift apart) and a rewrite in Python (a dependency without
-  benefit; Python stays only for markitdown).
+- **THR.0150** The scripts in Python. Decided by the principal
+  2026-10-02, on the feedback of the forge's users: scripts are
+  written in Python, not PowerShell; a new script is written in
+  Python at once and the existing PowerShell scripts are rewritten
+  later (POS.0830). This reverses what stood here: POSIX `sh` had
+  been considered and left undecided, and a rewrite in Python
+  excluded as a dependency without benefit, Python staying only for
+  markitdown. Open, Claude's list, marked as his: the order and the
+  time of the rewrite; how Python is found on each platform; the
+  per-prompt hook, which `.claude/settings.json` starts through
+  `pwsh`; what the git door asks of a machine once it is Python,
+  since today Python is needed only where documents are converted.
 - **THR.0170** Branch documents. Considered on 2026-08-27 alongside
   POS.0920 and deferred as too heavy for now: a working document per
   large whole (`branches/<name>.md` — a verbatim seed followed by
@@ -729,12 +729,12 @@ document: 10-intent.md
   | 1 | Write the round of 2026-09-29 as 4.34, by the rules of the day | done 2026-09-29 |
   | 2 | Cut out the threads: `10-intent.threads.md` is born, the threads move into it word for word, and everything that names them is mended so that they work on their own | done 2026-09-30 |
   | 3 | Build the operating layer of the log, the check `history` with it | done 2026-09-30 |
-  | 4 | Prepare in the engine's `tmp/` the cleaned intent and the records of the history, the whole intent at once | next |
-  | 5 | Write the instructions for the independent verification, one set for both verifiers | |
-  | 6 | An isolated agent here and ChatGPT at the principal's, over the same three files | |
-  | 7 | Walk both reports with the principal and mend the prepared files | |
-  | 8 | Write the project: the table moves to the archive, the log begins, the intent is replaced | |
-  | 9 | The check `history` over the project, and a look at the result | |
+  | 4 | Prepare in the engine's `tmp/` the cleaned intent and the records of the history, the whole intent at once | done 2026-09-30, three passes |
+  | 5 | Write the instructions for the independent verification, one set for both verifiers | done 2026-10-01 |
+  | 6 | An isolated agent here and ChatGPT at the principal's, over the same three files | done 2026-10-01, M365 Copilot in the place of ChatGPT |
+  | 7 | Walk both reports with the principal and mend the prepared files | done 2026-10-01 |
+  | 8 | Write the project: the table moves to the archive, the log begins, the intent is replaced | done 2026-10-02, intent 4.42 |
+  | 9 | The check `history` over the project, and a look at the result | done 2026-10-02, the report filed as FND.0440 to FND.0530 and settled at 4.44 |
 
   Step 2 mends what names the threads today: `CLAUDE.md` (where a
   THR lives, the document kinds, the repository layout, the
@@ -792,6 +792,39 @@ document: 10-intent.md
   Offered by Claude and to run only on the principal's word: a
   mechanical check that every sentence of the old intent stands
   either in the new intent or in a `Was` of the history.
+  How steps 5 to 8 ran, 2026-10-01, the write on 2026-10-02. The
+  instructions of the verification and the three reports lie in the
+  engine's `tmp/verification/`, outside git. The first run of the
+  isolated agent gave 25 findings, none high and no text lost: detail
+  had left five items for a section of CLAUDE.md against rule A2, an
+  exception had left POS.1040, two items could no longer be
+  understood on their own. M365 Copilot, without the engine's
+  files, gave two findings on one item. The principal walked two
+  findings and left the rest to Claude's judgement; Claude mended
+  the prepared files and named where he decided against a verifier.
+  A second run of the isolated agent over the mended files gave 15
+  findings, none high, mostly at other places than the first: seven
+  mended, the date of POS.0060 by the principal's verdict, the rest
+  left as text the cleaning had kept in doubt. The mechanical check
+  ran on the principal's word: 148 units, every word of the old
+  intent in the new item or in its `Was`, nothing changed without a
+  record. Claude's reading, marked as his: two readers found
+  different places from run to run, so a further run would find more
+  of the same kind, matters of judgement and not of loss.
+  The fifteen places where an item and the file it names said
+  different things, left by the cleaning, were walked with the
+  principal on 2026-10-02 and settled at 4.45, each in the record of
+  its item: the intent mended in eight items; the skill `ingest`,
+  the FCT row of CLAUDE.md and the help of `scripts/forge-save.ps1`
+  mended to the intent; one place found to hold as it stood
+  (POS.0440). For the brief the intent holds (POS.0110, REJ.0180,
+  REJ.0220), and the operating layer, CLAUDE.md and
+  `.claude/skills/forge/states/brief.md`, comes current with the
+  operating layer of the elicitation (POS.1380); until then a brief
+  born through `/forge brief` is born by the older rule.
+  What is left of the migration: the release of the engine, by which
+  the other instances and the other projects take it, and the open
+  question below.
   Until a step is done, what it changes stands as it stood on
   2026-09-28: the threads in the intent, the companions as tables
   with their Notes, the release notes compiled from them.
@@ -799,7 +832,8 @@ document: 10-intent.md
   master index. The intent has been divided by kind of content, not
   by size: what holds, what is being worked, how it was reached. The
   question is taken up again after the cleaning, on the measured
-  length of what is left.
+  length of what is left. Measured 2026-10-01: the intent has 2 068
+  lines after the cleaning against 2 363 before it.
   Claude's count of 2026-09-28, the estimates unverified: the
   threads are 711 lines; the stories, the measurements and the
   closed matters inside threads about 510; operating detail about
@@ -856,11 +890,53 @@ document: 10-intent.md
   recommendation, marked as his: both, since a map drawn from a stale
   clone is a map of the wrong state. Nothing decided. Opened
   2026-10-01.
+- **THR.0500** The reviewers' mechanism out of the session. The
+  principal's words of 2026-10-02: one mechanism for critic,
+  challenger and check; and rather than Claude doing the bookkeeping,
+  a skill or a command told which agents to run, which handles the
+  rest without the conversation's context. Decided the same day for
+  now: the simple and reliable way first, the `/check` procedure
+  files a check's report in the session (POS.1140), so that the
+  history and the elicitation are finished first; whether the filing
+  is rewritten into a script is kept here. What the research of that
+  day found
+  (`research/2026-10-02-running-reviewers-without-the-conversation.md`):
+  launching and filing separate; filing (the next ID, the file, the
+  ledger row) is bookkeeping for a script, in Python by THR.0150; a
+  `SubagentStop` hook can hand a reviewer's final message to the
+  script, its input only partly documented and to be tried first; a
+  subagent may launch subagents, so one command for every reviewer is
+  possible as a skill run in isolation; a saved workflow can run the
+  named agents but cannot write. Open beside it: nothing keeps two
+  critics or two challengers from running at once, each taking the
+  next ID and editing the ledger itself; and on 2026-10-01 the
+  harness refused a general subagent's write of its report, untested
+  for a reviewer. A script that numbers and files for all three would
+  close both. Claude's additions, marked as his: a script must know
+  the shape of the report and of the ledger table, which the template
+  and the contract own today, so the shape would stand in two places;
+  and a new kind of reviewer gives FND unless accepting its finding
+  changes a stance, which keeps the prefixes at two (CHL stays, the
+  principal's verdict of 2026-10-02). Bears on THR.0460 and THR.0480.
+  Opened 2026-10-02.
+- **THR.0510** Live reference material by nightly export. The
+  principal's thought of 2026-10-02, not worked through and nothing
+  decided: the important content of the company's architecture
+  repository is exported every evening into Markdown and kept in git;
+  people pull it, or reach it another way, and work over the files
+  (all services of a product from the service catalogue), and a live
+  connector (MCP) is asked only for what the files do not hold:
+  cheaper and faster. A process of its own, outside the forge. Open
+  whether its form is a library at all or a plain git directory; the
+  library of today is rather a proof of concept of the approach.
+  Bears on POS.0970 and POS.1020, and on what `/ingest` does with a
+  changed document in a library. Opened 2026-10-02.
 
 Note: the ID THR.0120 was inadvertently used twice — first for the
 readme-recipe thread (opened 1.14, closed 1.16), then for the
 assignment-apparatus boundary (opened 1.24, closed 2.4). Citations of
-THR.0120 from POS.0210 and version 2.4 refer to the latter. Recorded
+THR.0120 in the record of POS.0210 (history, 4.42) and in the
+archive's row of 2.4 refer to the latter. Recorded
 as-is; IDs are never renumbered. Likewise POS.0005 and REJ.0125,
 outside the numbering in tens, and the group Working methods starting
 at POS.0850 rather than at a hundred, stand as they are by DEC.0110

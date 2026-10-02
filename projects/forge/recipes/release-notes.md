@@ -2,9 +2,9 @@
 project: forge
 purpose: release-notes
 audience: the user of the engine who has cloned it and takes upgrades through forge-pull
-version: 0.11
-updated: 2026-09-30
-last_change: 0.11 (2026-09-30): sections derived from the records of the history log, the Action carried word for word; a version before the log compiled from its archived Notes; the archive among the inputs.
+version: 0.12
+updated: 2026-10-02
+last_change: 0.12 (2026-10-02): the way to two instructions moved to the history - the migration one came from, and how the minors stood before 4.0.
 output: /RELEASE-NOTES.md
 ---
 
@@ -43,7 +43,7 @@ the records of the newest version. -->
   edition are **carried over verbatim**. A previous edition in the
   earlier narrative shape (an Unreleased head, one section per
   major) is not carried over: it is replaced whole, every release
-  compiled from its row (the migration of 2026-09-05, POS.0730).
+  compiled from its row.
 - A section is derived from the records of its version in the log:
   each record that reaches the reader becomes one bullet under the
   group its kind gives — `created` under Added, `changed` and
@@ -74,9 +74,7 @@ the records of the newest version. -->
   within the span) is dropped so that only the final state remains;
   and the sections of those minors are not carried over — they leave
   the file, the detail per version staying in the history companion.
-  Between majors every release keeps its section. The sections of
-  3.1–3.x in the current edition are therefore carried over verbatim
-  until 4.0 and folded then.
+  Between majors every release keeps its section.
 - No Unreleased section: at the moment of a render, which only
   `/release` runs, nothing is unreleased.
 - Released sections never change retroactively. Only factual

@@ -2,9 +2,9 @@
 project: forge
 purpose: Slide-by-slide source material for a five-slide executive pitch of Forge of Thought
 audience: C-level executives whose experience of AI is chatting with it
-version: 0.6
-updated: 2026-09-27
-last_change: 0.6 (2026-09-27): the vocabulary rule and the Template agree — "assignment" allowed in its plain sense, "recipe" out of S04, the sixth output of the S04 hub named.
+version: 0.7
+updated: 2026-10-02
+last_change: 0.7 (2026-10-02): the date and origin of the style decision moved to the history.
 ---
 
 # Recipe — Executive pitch
@@ -70,8 +70,7 @@ last_change: 0.6 (2026-09-27): the vocabulary rule and the Template agree — "a
 - Plain file, made by `/render` through pandoc: reference none.
 - Published file, made by `/publish` through a model: template
   none — the model designs the visual style itself: dark background,
-  one accent colour, generous whitespace (principal's decision of
-  2026-09-10; no `.potx`); model opus. Never let text overflow: if a
+  one accent colour, generous whitespace; model opus. Never let text overflow: if a
   slide's lines do not fit at the template's body size, shorten
   nothing — move the last line to the notes and say so in the build
   log. Redraw Mermaid diagrams as native shapes with the same node

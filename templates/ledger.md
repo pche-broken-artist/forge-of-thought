@@ -14,8 +14,9 @@ per CLAUDE.md, Versioning & status. /ledger reads from here.
 Kind: `thought` keeps every table below. `library` (POS.0960) keeps
 only Renders, Sources, Dependencies, Research and Waiting on
 principal; the Briefs, Documents, Published, Findings and Challenges
-tables are deleted at scaffold time. This comment is the one owner of that
-reduction (POS.1070). -->
+tables are deleted at scaffold time; the Findings table returns with
+a check's first finding (`.claude/skills/check/SKILL.md`). This
+comment is the one owner of that reduction (POS.1070). -->
 
 ## Briefs
 <!-- One row per brief (00-brief.md and 00-brief-<name>.md). Status:
@@ -71,9 +72,11 @@ research/00-INDEX.md, never here. -->
 |---|---|---|
 
 ## Findings
-<!-- State: open | resolved | rejected | parked | obsolete. Resolution:
-assignment version for resolved, DEC.NNNN for rejected. `overruled`
-in an older record reads as `rejected`. -->
+<!-- Findings of the critic and of the checks, one sequence. State:
+open | resolved | rejected | parked | obsolete. Resolution:
+assignment version, or for a check's finding what fixed it, for
+resolved; DEC.NNNN for rejected. `overruled` in an older record reads
+as `rejected`. -->
 | ID | Severity | Category | State | Source review | Resolution |
 |---|---|---|---|---|---|
 

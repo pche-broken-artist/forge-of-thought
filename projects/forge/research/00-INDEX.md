@@ -1,7 +1,7 @@
 ---
 project: forge
 directory: research
-updated: 2026-10-01
+updated: 2026-10-02
 ---
 
 # Index — research of Forge of Thought
@@ -92,3 +92,8 @@ ledger. Written by /research; verified by /check. -->
 - **Question:** imagine the forge project had an assignment - is there anything in the intent that would rather belong to it, and would the intent save any text? Every item of 10-intent.md v4.41 classified by kind of content (stance and reason, directive to the realiser, operating detail, story, delegation); the saving an assignment alone would bring isolated from what the cleaning of THR.0470 step 4 takes out anyway; four options costed. Read from the project's own files, no web source.
 - **Answer in short:** about 880 of 2 321 content lines (38 %) are directives to the realiser - assignment content, already in Requirement style but for the word `shall`, concentrated in Structure and style of an assignment, Document chain, Versioning and state, Review, Operating environment and the Aim/Partner/Map blocks of the three definitions. About 950 lines leave under step 4 regardless; only about 300 (13 %) would leave because an assignment existed - directive wording whose only home outside the intent is a CLAUDE.md section, kept in the item today by POS.0120's A2 rule. A complete assignment would run to 600-900 lines, about 330 of them a third copy; the project grows by 300-600 lines and a third document to align, for a recipient (a realiser of the forge on other machinery) who does not exist today. Recommendation: keep `terminal: intent`; the operating layer plays the assignment's part and `check engine` reviews that transition.
 - **Consult when:** the question of an assignment for the forge returns (THR.0470's Answered line); a realiser of the forge on other machinery appears (THR.0230, THR.0420, a fork), when POS.1350 distils the assignment from the intent; or when weighing how much of the intent is directive against stance.
+
+### `2026-10-02-running-reviewers-without-the-conversation.md`
+- **Question:** can the forge's reviewers (critic, challenger, check) be launched and their reports filed, numbered and entered in the ledger without the working conversation taking part, and what does Claude Code offer for it? Docs fetched 2026-10-02 (sub-agents, skills, workflows, hooks, CLI, Agent SDK) and the bundled reference of the workflow runtime.
+- **Answer in short:** yes, four ways: a skill run as an isolated agent (`context: fork`; subagents may now launch subagents, three layers deep), a saved workflow, a `SubagentStop` hook matched by agent name that receives the reviewer's final message, and a script outside the harness. Launching and filing separate: filing is bookkeeping and belongs to a script whichever launcher is chosen. Recommendation: build the filing script first, have every reviewer return its whole report and write nothing, let the hook call the script after one trial of what the hook receives; one command for every reviewer is a second step.
+- **Consult when:** building the filing of check findings as FND (POS.1140), changing how a reviewer hands over its report, weighing one dispatcher for all reviewers (THR.0460, THR.0480), or when two reviewers are to run at once.

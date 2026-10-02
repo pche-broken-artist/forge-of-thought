@@ -22,8 +22,10 @@
     when there is nothing to commit, the current HEAD is tagged, so a
     tag can mark a state before a large change. An existing tag is
     refused. The script never sets an identity, a
-    remote or initialises a repository: those are one-off acts at a
-    project's creation, and instance facts never live in the scripts.
+    remote or initialises a repository: the identity is git's,
+    resolved per host from the user's own configuration; a remote and
+    the repository are the user's one-off acts at a project's
+    creation; and instance facts never live in the scripts.
     It never uses git add -f and never git clean.
 
 .EXAMPLE
@@ -90,7 +92,7 @@ function Save-Repo([string]$Name, [string]$Path) {
     Push-Location $Path
     try {
         if (-not (git config user.email)) {
-            Write-Host ("{0,-20} no commit identity - set it once: git -C '{1}' config user.name/user.email" -f $Name, $Path) -ForegroundColor Yellow
+            Write-Host ("{0,-20} no commit identity - git resolves none for this host: run /setup for the per-host identity, or set a local one: git -C '{1}' config user.name/user.email" -f $Name, $Path) -ForegroundColor Yellow
             return
         }
 

@@ -418,6 +418,9 @@ projects/<slug>/           # kind: thought — the chain
   published/<recipe>.pptx             # the designed file, made by
   published/<recipe>.docx             # /publish through a model
   reviews/YYYY-MM-DD-critique-<lens>.md  # immutable critique runs
+  reviews/YYYY-MM-DD-check-<name>.md     # immutable check reports,
+                                      # filed when a check finds
+                                      # something
   challenges/YYYY-MM-DD-challenge-<persona>.md  # immutable peer reviews
   research/YYYY-MM-DD-<topic>.md      # immutable research notes
   CLAUDE.md                # optional project-specific polish; note
@@ -472,7 +475,9 @@ registry or Windows-only cmdlets, `$IsWindows` only where the
 platform genuinely differs, external tools (`git`, `markitdown`,
 `pandoc`, `claude`) resolved from PATH, usage examples in the
 scripts' help
-free of Windows-specific paths and invocations.
+free of Windows-specific paths and invocations. New scripts are
+written in Python; the PowerShell scripts are rewritten to it in
+time (POS.0830).
 
 Two doors, two speeds. `/save` runs its check and then commits and
 pushes on whatever branch is checked out, no render. `/release`, from
@@ -551,8 +556,8 @@ lifecycle. Depth max two levels.
 | POS | position the principal currently holds | intent |
 | THR | open thread — unresolved matter to elicit next; carries its origin: the principal's word (the default, unmarked), a source by path, or Claude's synthesis | intent (its threads file) |
 | REJ | rejected direction, with the reason it was dropped | intent |
-| FCT | fact — what is the case, as the principal states it or as a source states it; not a stance; provenance to the file where a source exists, never demanded | intent |
-| FND | critique finding (document quality) | ledger, reviews |
+| FCT | fact — what is the case, as the principal states it or as a source states it; not a stance; a source's fact cites its file, the principal's needs none; verification is never demanded | intent |
+| FND | finding of a critic (document quality) or of a check (conformance) | ledger, reviews |
 | CHL | peer-review challenge (substance) | ledger, challenges |
 | DEC | decision, incl. rejected findings and challenges | decisions.md |
 
@@ -579,10 +584,10 @@ never the working conversation, on the session model (`model:
 inherit` — the whole forge runs on one model; speed is bought with
 context, never with a weaker reviewer). One shape, strictly separate
 jobs, each with its own output: the critic produces `FND` in
-`reviews/`, the challenger `CHL` in `challenges/`, the check a report
-to the session and no file. All are invoked by hand and settled by
-walkthrough; the critic's and the challenger's reports are immutable
-and dated. No reviewer runs on Claude's own judgement: `/save` and
+`reviews/`, the challenger `CHL` in `challenges/`, the check `FND` in
+`reviews/` when it finds something and nothing when it does not. All
+are invoked by hand and settled by walkthrough; the reports are
+immutable and dated. No reviewer runs on Claude's own judgement: `/save` and
 `/release` run the checks their own definitions compose, and
 `/release` offers `critique essence` once. The challenger has
 personas, the critic has lenses, the check has checks: one agent file
@@ -627,8 +632,10 @@ by its slug, or the engine.
 - **checks** (`/check <check> [slug]`) — mechanical conformance with
   the conventions, never substance or quality. Each check owns one
   concern and none another's; what each verifies is its agent file's,
-  the conduct and the report shape the contract's. Nothing filed: the
-  report returns to the session and is settled there. Composition is
+  the conduct and the report shape the contract's. The agent returns
+  its report and the command files it: `FND` in `reviews/`
+  (`YYYY-MM-DD-check-<name>.md`), states as `templates/ledger.md` has
+  them; a run that finds nothing files nothing. Composition is
   the caller's (`/save`, `/release`); checks never call each other.
 
 ## Spin-off rule
@@ -670,7 +677,7 @@ checks then say nothing of a missing assignment.
 | `/challenge [persona] [artefact] [slug]` | bare = challenger persona roster; with a persona (e.g. `cto`), run that challenger against the substance of the named artefact, else the whole chain |
 | `/research <topic> [slug]` | best-practices research → research/, indexed |
 | `/ledger [slug]` | state report from ledger |
-| `/check [check] [slug]` | bare = check roster; with a check (`light`, `project`, `engine`, `single-source-of-truth`, `history`), run it on the named project or on the engine — report to the session, settled by walkthrough, nothing filed |
+| `/check [check] [slug]` | bare = check roster; with a check (`light`, `project`, `engine`, `single-source-of-truth`, `history`), run it on the named project or on the engine — its findings filed as FND in reviews/, settled by walkthrough |
 | `/save [slug] [-m "message"] [-Tag name]` | save one repository, or every one with changes: the `light` check, then commit and push on the current branch, no render; a tag on request; the procedure is `.claude/skills/save/SKILL.md` |
 | `/release [slug] [-m "message"] [-Tag name]` | release one repository from `main`: its checks, the README and release notes re-rendered, then `/save` with the release message and the tag `v<major>` at an approved major; the procedure is `.claude/skills/release/SKILL.md` |
 | `/spinoff <project> <group> <slug>` | split a group into its own project |
