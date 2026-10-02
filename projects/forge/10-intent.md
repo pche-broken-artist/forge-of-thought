@@ -1,8 +1,8 @@
 ---
-version: 4.48
+version: 4.49
 date: 2026-10-02
 status: draft
-last_change: 4.48 (2026-10-02): the first filed report of the check single-source-of-truth settled, FND.0540 to FND.0720 - what a brief carries is owned by its definition and CLAUDE.md keeps one sentence and the lifecycle, the briefs kept in whatever language they are written in (POS.0060); twelve findings resolved in the operating layer, one rejected by DEC.0170, six parked for the move of the rules of particular artefacts out of CLAUDE.md; a change of the operating layer that touches no item of the intent has a subject of its own in the log (POS.0310, FND.0730).
+last_change: 4.49 (2026-10-02): the rules of particular artefacts left CLAUDE.md for the definitions, settled by walkthrough (POS.1310, POS.1380) - prime directive 8 and the Requirement style in the assignment's definition, what the threads hold and what an item keeps against its file in the intent's, a paragraph in CLAUDE.md on what a definition is; the status `in_review` and the rule of POS.1180 dropped (REJ.0230, POS.0300); the demand for British English dropped (POS.0250); five parked findings of the check single-source-of-truth settled, FND.0610, FND.0620, FND.0630, FND.0700 and FND.0720, the quoting caveat kept in the skeletons by DEC.0180, FND.0650 left parked; the engine is released once the move is done; the checks of the release settled, FND.0740 to FND.0820, the pointer of POS.0850 mended, FND.0750 parked.
 project: forge
 audience: principal + Claude only
 ---
@@ -119,14 +119,15 @@ position that already stands elsewhere.
   The verdict words are one set for every walkthrough,
   whatever produced the list: `accept`, `modify` (a discussion opens
   and the solution found is put forward to be accepted), `reject`,
-  `park` and `obsolete`; the producing command says only what each
-  verdict writes. The principal may answer the line with a single
+  `park` and `obsolete`; the producing command says only what
+  `accept` writes. The principal may answer the line with a single
   letter when that letter is his whole message; no other word of the
   forge has a letter, so that nothing which writes or saves can be
   set off by a slip. Decided 2026-09-27. Verdicts are carried in the conversation and written
-  once at the round's end (POS.0190; what each verdict writes:
-  `.claude/skills/critique/SKILL.md`,
-  `.claude/skills/challenge/SKILL.md`). Whatever produces a list ends
+  once at the round's end (POS.0190; what `reject`, `park` and
+  `obsolete` write: `.claude/skills/walkthrough/SKILL.md`; what
+  `accept` writes: the skill of the command that produced the list,
+  `critique`, `challenge` or `check`). Whatever produces a list ends
   by offering a walkthrough — `/critique`, `/challenge`, the `/forge`
   map, a comparison made on request — and the principal may call for
   one at any moment. The shape of the method lives in
@@ -257,9 +258,11 @@ position that already stands elsewhere.
   `/recipe` (POS.0770) map onto the shape without loss, Genre and
   Skeleton to Target, Role to Partner, the elicitation checklist to
   Map; the seven blocks themselves are for the artefacts of the
-  chain. The rules of particular artefacts that CLAUDE.md carries
-  (Document chain 1 to 3, Requirement style, prime directive 8) are
-  what moves into the definitions, in the order POS.1380 sets. The
+  chain. The rules of particular artefacts live in the definitions:
+  what a brief carries in the brief's, what the intent and its
+  threads hold in the intent's, completeness and the Requirement
+  style in the assignment's. CLAUDE.md keeps of each artefact what it
+  is, how it joins the chain, and a pointer. The
   definitions of the three artefacts of today's chain are the state
   files `brief.md`, `intent.md` and `assignment.md`; POS.1330,
   POS.1340 and POS.1350 say what each is to achieve and why. Present
@@ -363,10 +366,10 @@ position that already stands elsewhere.
   `/forge`, are used on real work at once and mended there as the
   work shows; a change of what a definition is to achieve goes
   through the intent first. What in CLAUDE.md contradicted the
-  definitions was brought current with them; the other rules of
-  particular artefacts leave CLAUDE.md for the definitions in a
-  later step, after the `single-source-of-truth` check (POS.1140).
-  The engine is released after the elicitation is built. Locked
+  definitions was brought current with them, and the other rules of
+  particular artefacts left CLAUDE.md for the definitions after the
+  `single-source-of-truth` check (POS.1140). The engine is released
+  once that move is done. Locked
   artefacts are untouched by the change. Present shape 2026-10-02,
   from `00-brief-elicitation.md` and the principal's word of that
   day.
@@ -755,23 +758,12 @@ position that already stands elsewhere.
   the principal's word or a source's. Origin is marked from 2026-09-14
   on, the principal's word being the default that needs no mark; no
   retrofit (`sources/forge-run-record-health.md`, P.08, F.04).
-- **POS.1180** An intent consolidated by Claude from the conversation,
-  rather than composed item by item with the principal, is
-  `in_review` until every position has been walked through, and no
-  lower layer is derived before that walkthrough. In `health` three
-  days of talk had been written nowhere; when that came out, the
-  intent 0.1 was saved at once and its positions confirmed en bloc
-  so that nothing was lost, which said nothing of whether each of
-  them held (`sources/forge-run-record-health.md`, F.03; the
-  principal's account of 2026-10-02). Ordinary work, where
-  positions are composed in the conversation, is untouched. Decided
-  2026-09-14 (P.08).
 - **POS.0240** Every assignment carries a Terms section, so it can be
   forwarded without oral tradition (the section:
   `templates/assignment.md`, Terms). Defined Terms are capitalised in
   item text.
 - **POS.0250** Requirements are written as shall / shall not, in full
-  correct UK English sentences, one idea per item, each written once.
+  correct sentences, one idea per item, each written once.
   Would, could, should, might, may and MoSCoW wording are not used.
 - **POS.0260** No priorities and no priority column. Everything in an
   assignment is essential; an exception carries a note reading
@@ -829,7 +821,7 @@ position that already stands elsewhere.
   denote signed-off versions. Drafts run 0.1, 0.2 …; 1.0 is approved;
   1.1, 1.2 … are changes made after approval, not yet approved
   themselves; 2.0 is the next approved version. Status in front-matter
-  (`draft | in_review | approved | superseded`) must agree with the
+  (`draft | approved | superseded`) must agree with the
   number. A major of the forge intent closes a set of features the
   principal names and passes more than a minor before its tag: every
   check, `single-source-of-truth` included, both critic lenses and one
@@ -1821,6 +1813,15 @@ position that already stands elsewhere.
   reads differently on every model the forge runs on. What carried
   something other than authorship stays as `(source: <path>)` and
   `(remark: …)` (POS.0110).
+- **REJ.0230** The status `in_review`, and the standing rule that an
+  intent consolidated by Claude from the conversation carries it
+  until every position has been walked through, with no lower layer
+  derived before (POS.1180, decided 2026-09-14). Dropped 2026-10-02:
+  the rule was made in haste for one case, and that case had a
+  wholly different cause, a save in haste of three days of talk
+  written nowhere. A walkthrough of an intent runs when the principal
+  asks for one; the statuses are `draft`, `approved` and `superseded`
+  (POS.0300).
 
 ## Candidate structure for assignment
 

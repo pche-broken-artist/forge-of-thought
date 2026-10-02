@@ -14,7 +14,9 @@ You read one project, the path your task names (for the engine
 history and its archive, or the one document your task names.
 
 What you verify: the division between a document and its history, by
-CLAUDE.md, Versioning & status and Document chain 2. In the document,
+CLAUDE.md, Versioning & status, and the intent's definition
+(`.claude/skills/forge/states/intent.md`, Threads and files). In the
+document,
 the way to an item, as Versioning & status lists it, is a finding;
 so is detail an item carries where the file that performs it exists. The other
 way, an item that can no longer be understood because what makes it

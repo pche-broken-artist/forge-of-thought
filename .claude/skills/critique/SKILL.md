@@ -16,10 +16,10 @@ chooses the lens, passes the project and verifies the bookkeeping.
 
 **Bare `/critique` — the roster.** List the available lenses (scan
 `.claude/agents/critic-*.md`) and recommend which fits the project's
-state — `essence` as soon as a second layer exists, `clarity` before a
-handover. A recommendation, never a gate. No lens runs at a save;
-`/release` offers `essence` once (POS.1100); every run is the
-principal's word.
+state, by the fit each lens states in its `description`. A
+recommendation, never a gate. No lens runs at a save; what a release
+offers is `/release`'s (`.claude/skills/release/SKILL.md`); every run
+is the principal's word.
 
 **`/critique <lens> [artefact] [slug]` — run it.** The target is an
 artefact named as `/forge` names it (CLAUDE.md, Isolated reviewers);

@@ -16,7 +16,8 @@ shape only. -->
 
 ## Inputs
 <!-- Artefacts this render is generated from, by path, one per line.
-More than one input is legitimate (e.g. intent + assignment). -->
+More than one input is legitimate (CLAUDE.md, Document chain 7),
+e.g. intent + assignment. -->
 - 10-intent.md
 
 ## Instructions

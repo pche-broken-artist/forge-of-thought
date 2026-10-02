@@ -20,7 +20,8 @@
     lost. Merging, deleting and pushing branches stay with git: a new
     branch reaches the remote by the first forge-save made on it, a
     merge into main is done by hand or by merge request, and a
-    release is made from main only.
+    release is made from main only (/release:
+    .claude/skills/release/SKILL.md).
 
 .EXAMPLE
     ./scripts/forge-branch.ps1 forge              # which branch is the engine on

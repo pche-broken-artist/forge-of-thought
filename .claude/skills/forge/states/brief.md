@@ -34,7 +34,9 @@ decision, made on what was found. What stays out lives in
 otherwise nowhere. The brief is rough on purpose, neither perfect
 nor detailed: the chiselling is the intent's, and a brief polished
 until the intent has nothing left to do has gone too far. Nothing
-in it is yet a position. The brief is complete when the principal
+in it is yet a position: its thoughts are to be processed, not
+decisions, and may be changed, reworked or dropped when mined. The
+brief is complete when the principal
 says so and locks it; the Map is walked before the lock is
 offered.
 

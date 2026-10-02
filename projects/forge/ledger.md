@@ -31,17 +31,17 @@ absorbed it; Note says what remains (partial) or the REJ (dropped). -->
 ## Documents
 | File | Version | Status | Date |
 |---|---|---|---|
-| 10-intent.md | 4.48 | draft | 2026-10-02 |
+| 10-intent.md | 4.49 | draft | 2026-10-02 |
 | 20-assignment.md | — | not planned: the handover artefacts of this project are the core itself (CLAUDE.md, templates/, .claude/) and README.md | — |
-| decisions.md | — | 17 records (DEC.0010–0170) | 2026-10-02 |
+| decisions.md | — | 18 records (DEC.0010–0180) | 2026-10-02 |
 
 ## Renders
 <!-- Generated outputs, one row per recipe in recipes/ (CLAUDE.md,
 Document chain 7). Row mirrors the render's front-matter provenance. -->
 | Render | Audience | Recipe | Inputs | Generated |
 |---|---|---|---|---|
-| README.md (repo root) | humans arriving at the repository | recipes/readme.md v0.50 | CLAUDE.md, 10-intent.md v4.31 | 2026-09-27 |
-| RELEASE-NOTES.md (repo root) | the user of the engine who takes upgrades through forge-pull | recipes/release-notes.md v0.10 | 10-intent.history.md, 10-intent.md v4.31, decisions.md, previous edition (released sections) | 2026-09-27 |
+| README.md (repo root) | humans arriving at the repository | recipes/readme.md v0.54 | CLAUDE.md, 10-intent.md v4.49, .claude/agents/, .claude/skills/forge/states/, .claude/skills/, scripts/, templates/ledger.md | 2026-10-02 |
+| RELEASE-NOTES.md (repo root) | the user of the engine who has cloned it and takes upgrades through forge-pull | recipes/release-notes.md v0.12 | 10-intent.history.md, 10-intent.history.archive.md, 10-intent.md v4.49, decisions.md, previous edition (released sections) | 2026-10-02 |
 | renders/executive-pitch.md | C-level executives whose experience of AI is chatting with it | recipes/executive-pitch.md v0.6 | projects/forge/10-intent.md v4.30, CLAUDE.md | 2026-09-27 |
 | renders/cto-pitch.md | technical leadership arriving at the repository - a CTO, a head of engineering or architecture | recipes/cto-pitch.md v0.5 | projects/forge/10-intent.md v4.28, CLAUDE.md | 2026-09-27 |
 | renders/ceo-pitch.md | a CEO or another C-level executive whose experience of AI is chatting with it | recipes/ceo-pitch.md v0.5 | projects/forge/10-intent.md v4.28, CLAUDE.md | 2026-09-27 |
@@ -169,19 +169,28 @@ as `rejected`. -->
 | FND.0580 | medium | conformance | resolved | 2026-10-02-check-single-source-of-truth.md | intent 4.48 (`states/assignment.md`) |
 | FND.0590 | low | conformance | resolved | 2026-10-02-check-single-source-of-truth.md | intent 4.48 (`templates/intent.md`) |
 | FND.0600 | low | conformance | resolved | 2026-10-02-check-single-source-of-truth.md | intent 4.48 (the skill `ingest`) |
-| FND.0610 | low | conformance | parked | 2026-10-02-check-single-source-of-truth.md | until the rules of particular artefacts leave CLAUDE.md (POS.1380, THR.0240) |
-| FND.0620 | low | conformance | parked | 2026-10-02-check-single-source-of-truth.md | with FND.0610 |
-| FND.0630 | low | conformance | parked | 2026-10-02-check-single-source-of-truth.md | with FND.0610 |
+| FND.0610 | low | conformance | resolved | 2026-10-02-check-single-source-of-truth.md | intent 4.49 (the Commands table of CLAUDE.md cut to the purpose of each command) |
+| FND.0620 | low | conformance | resolved | 2026-10-02-check-single-source-of-truth.md | intent 4.49 (rules echoed inside CLAUDE.md cut to their owner) |
+| FND.0630 | low | conformance | resolved | 2026-10-02-check-single-source-of-truth.md | intent 4.49 (CLAUDE.md, the skills `critique` and `man`, the descriptions of the two critic lenses) |
 | FND.0640 | low | conformance | resolved | 2026-10-02-check-single-source-of-truth.md | intent 4.48 (the skills `ingest` and `research`) |
 | FND.0650 | low | conformance | parked | 2026-10-02-check-single-source-of-truth.md | needs a pass over the recipe genres and their skeletons |
 | FND.0660 | low | conformance | resolved | 2026-10-02-check-single-source-of-truth.md | intent 4.48 (`templates/index-bundle.md`) |
 | FND.0670 | low | conformance | resolved | 2026-10-02-check-single-source-of-truth.md | intent 4.48 (CLAUDE.md, `states/intent.md`) |
 | FND.0680 | low | conformance | resolved | 2026-10-02-check-single-source-of-truth.md | intent 4.48 (the critic contract; CLAUDE.md, Requirement style) |
 | FND.0690 | low | conformance | resolved | 2026-10-02-check-single-source-of-truth.md | intent 4.48 (three agent files) |
-| FND.0700 | low | conformance | parked | 2026-10-02-check-single-source-of-truth.md | with FND.0610 |
+| FND.0700 | low | conformance | resolved | 2026-10-02-check-single-source-of-truth.md | intent 4.49 (six reminders name their owner or left) |
 | FND.0710 | low | conformance | rejected | 2026-10-02-check-single-source-of-truth.md | DEC.0170 |
-| FND.0720 | low | conformance | parked | 2026-10-02-check-single-source-of-truth.md | with FND.0610 |
+| FND.0720 | low | conformance | resolved | 2026-10-02-check-single-source-of-truth.md | intent 4.49 (the three contracts cite the skeletons); the quoting caveat kept in the skeletons, DEC.0180 |
 | FND.0730 | low | conformance | resolved | 2026-10-02-check-light.md | intent 4.48 (POS.0310, `templates/history.md`) |
+| FND.0740 | low | conformance | resolved | 2026-10-02-check-project.md | intent 4.49 (four lines of Waiting on principal cut to a citation) |
+| FND.0750 | low | conformance | parked | 2026-10-02-check-project.md | until the next iteration of the recipes `cto-pitch` and `ceo-pitch` |
+| FND.0760 | medium | conformance | resolved | 2026-10-02-check-engine.md | intent 4.49 (CLAUDE.md, What this workspace is) |
+| FND.0770 | medium | conformance | resolved | 2026-10-02-check-engine.md | recipe readme 0.52 |
+| FND.0780 | medium | conformance | resolved | 2026-10-02-check-engine.md | intent 4.49 (CLAUDE.md, prime directive 1) |
+| FND.0790 | low | conformance | resolved | 2026-10-02-check-engine.md | intent 4.49 (CLAUDE.md, Document chain) |
+| FND.0800 | low | conformance | resolved | 2026-10-02-check-engine.md | intent 4.49 (CLAUDE.md, Versioning & status) |
+| FND.0810 | low | conformance | resolved | 2026-10-02-check-engine.md | intent 4.49 (POS.0850) |
+| FND.0820 | low | conformance | resolved | 2026-10-02-check-engine.md | intent 4.49 (`templates/recipe-readme.md`, `templates/recipe-release-notes.md`) |
 
 Four review files are named outside the convention — accepted as they
 are by DEC.0140.
@@ -216,15 +225,11 @@ intent version for accepted, DEC.NNNN for rejected. -->
 copy — CLAUDE.md, Ledger. -->
 - THR.0460 — `/recipe` and `/forge`, one dispatcher or two; small,
   open.
-- THR.0470 — the intent too long to be read; the nine steps of the
-  migration done and the fifteen disagreements settled (intent 4.45,
-  2026-10-02); left: the release of the engine; whether large files
-  are split stays open.
-- THR.0400 — a gate in front of the tools; the reminder half done
-  2026-09-20 (intent 4.14), raw git denied 2026-09-21 (POS.1200),
-  the rest of the enforcing hook on the table again since THR.0390
-  closed (2026-09-26), nothing scheduled; a save refused silently by
-  the automatic mode on 2026-09-26, left as it is and watched.
+- THR.0470 — the intent too long to be read; the migration done,
+  left: the release of the engine; whether large files are split
+  open.
+- THR.0400 — a gate in front of the tools; the soft half done, the
+  hard half open, nothing scheduled.
 - THR.0350 — walked through (intent 4.9); left: the hook watched in
   the next walkthroughs (POS.1170). The ledger sweep done at 4.10.
 - THR.0360 — a layer with an external audience, opened 2026-09-14;
@@ -233,8 +238,8 @@ copy — CLAUDE.md, Ledger. -->
 - THR.0320 — a `harness` lens; decided in substance 2026-09-05,
   mechanism open, no priority.
 - THR.0240 — the size of CLAUDE.md; first instance of the answer at
-  4.9 (POS.1170), eight low restatements on the table again since
-  THR.0390 closed (2026-09-26), the rest open.
+  4.9 (POS.1170), the rules of particular artefacts moved out at
+  4.49, the rest open.
 - THR.0410 — the duration of `/save` and `/release`; the watch
   continues at the next releases.
 - DEC.0120 — the force-push of 2026-09-04, recorded; a GitHub cache
@@ -259,17 +264,13 @@ copy — CLAUDE.md, Ledger. -->
   a script kept for later, research of 2026-10-02; opened 2026-10-02.
 - THR.0510 — live reference material by nightly export; the
   principal's thought, nothing decided; opened 2026-10-02.
-- FND.0610, FND.0620, FND.0630, FND.0650, FND.0700, FND.0720 —
-  parked findings of the `single-source-of-truth` check; taken with
-  the move of the rules of particular artefacts out of CLAUDE.md
-  (POS.1380, THR.0240).
-- THR.0420 — derivations of the forge for other jobs (online product
-  managers = the product framework, test analysts with their test
-  cases and strategies, project management); opened 2026-09-26,
-  nothing scheduled.
-- THR.0430 — a command that ends a session: nothing left only in
-  the conversation, time and tokens recorded from the harness's
-  transcripts by a script; opened 2026-09-27, research of the
+- FND.0650 — parked finding of the `single-source-of-truth` check;
+  needs a pass over the recipe genres and their skeletons.
+- FND.0750 — parked finding of the `project` check; the Published
+  line of the two pitch recipes, at their next iteration.
+- THR.0420 — derivations of the forge for other jobs; nothing
+  scheduled.
+- THR.0430 — a command that ends a session; research of the
   transcript format first, nothing scheduled.
 - THR.0340 — the README split from the documentation; after
   THR.0230.

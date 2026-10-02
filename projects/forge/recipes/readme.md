@@ -2,9 +2,9 @@
 project: forge
 purpose: readme
 audience: humans arriving at the repository
-version: 0.51
+version: 0.54
 updated: 2026-10-02
-last_change: 0.51 (2026-10-02): a check's findings are filed as FND with the critic's states.
+last_change: 0.54 (2026-10-02): what a render could not take from its inputs has an owner among them - the skills for what a command does, the scripts' help headers for the Scripts table, templates/ledger.md for the states; the roles are those of CLAUDE.md, a pointer in the layout block is replaced by its fact, one paragraph on portability is allowed.
 output: /README.md
 ---
 
@@ -20,6 +20,20 @@ summarising the newest row. -->
 ## Inputs
 - CLAUDE.md
 - projects/forge/10-intent.md
+- .claude/agents/                # the reviewers' agent files: the
+                                 # `description` of each is its line
+                                 # in the rosters of section 8
+- .claude/skills/forge/states/   # the definitions of the artefacts:
+                                 # the rules CLAUDE.md delegates to
+                                 # them
+- .claude/skills/                # the commands: of each skill its
+                                 # front-matter only; `setup`,
+                                 # `ingest`, `save` and `release`
+                                 # whole, for the mechanics
+- scripts/                       # the scripts: of each file its help
+                                 # header only, never the code
+- templates/ledger.md            # the states of findings and
+                                 # challenges
 
 ## Instructions
 - The README presents the current, actual state of the system to a
@@ -35,11 +49,18 @@ summarising the newest row. -->
   must stay valid for any instance of the forge. Projects other than
   `projects/forge` are never named: they live in repositories of
   their own that the engine does not know.
-- Where both inputs state the same rule, CLAUDE.md wording wins (it is
-  the operational core); the intent supplies the why — use it for the
-  short rationale sentences (e.g. why 10-intent.md exists, why blind
-  reviewers). State each rule once: no sentence appears in two
-  sections (the only-door-to-git rule lives in Saving and syncing
+- Where two inputs state the same rule, the wording of the operating
+  layer wins (CLAUDE.md, a definition, an agent file); the intent
+  supplies the why — use it for the short rationale sentences (e.g.
+  why 10-intent.md exists, why blind reviewers). What CLAUDE.md
+  delegates to a definition (what a brief carries, what the intent
+  and its threads hold, completeness and the Requirement style of
+  the assignment) is taken from the state file it names; the rosters
+  of section 8 from the `description` of each file in
+  `.claude/agents/`; what a command does from its skill; what a
+  script is for from its help header. State each rule once: no
+  sentence appears in
+  two sections (the only-door-to-git rule lives in Saving and syncing
   only).
 - Tone: plain, direct, no marketing. UK English. Tables for
   enumerable facts (roles, chain, commands, prefixes), prose only
@@ -116,8 +137,9 @@ summarising the newest row. -->
   principle — the masthead already carries the answer.
 - Section 2 is "What you get": a strictly concrete capability list —
   six bullets, no philosophy (that is the masthead's job): a
-  versioned document chain growing from a brief — your own text,
-  locked verbatim once it is done — to a self-contained assignment; an elicitation interview that
+  versioned document chain growing from a brief — your idea put
+  together, yours by your approval and locked once it is done — to a
+  self-contained assignment; an elicitation interview that
   forges the intent; blind adversarial reviewers, every verdict
   recorded; audience-specific renders generated from
   recipes, including an actual PowerPoint file through the user's
@@ -146,8 +168,8 @@ summarising the newest row. -->
   the forge dictates one output language per project — the artefacts
   of the chain (intent, assignment, later layers) are written in the
   language the project's ledger header declares (`language`, English
-  when absent); the briefs are the exception, stored verbatim in
-  whatever language they were written; everything else a project
+  when absent); the briefs are the exception, kept in whatever
+  language they are written in; everything else a project
   holds — ledger, decisions, history, reviews, challenges, indexes,
   research, recipes — is always English, as is the notation (ID
   prefixes, `shall`, status words, front-matter keys); a render may
@@ -169,10 +191,10 @@ summarising the newest row. -->
   section of CLAUDE.md only: every method named there appears, in
   CLAUDE.md's order and under its name verbatim; the one-sentence
   glosses are re-derived. The words the reader types are given in
-  code, as CLAUDE.md gives them: the verdict line
-  `(a)ccept / (m)odify / (r)eject / (p)ark` and the single letter
-  under the walkthrough, `??` under Propose, never decide, `write`
-  under One write per round.
+  code: the verdict line `(a)ccept / (m)odify / (r)eject / (p)ark`
+  as CLAUDE.md gives it and the single letter that answers it
+  (POS.0850 of the intent) under the walkthrough, `??` under
+  Propose, never decide, `write` under One write per round.
   It never mentions commands that no longer exist.
 - The worked example: until an exemplar project is chosen and
   published (THR.0200 of the intent), the subsection "What it looks
@@ -181,14 +203,16 @@ summarising the newest row. -->
   nothing else. Never construct an example from memory or from
   projects the inputs do not contain.
 - Roles: a proper two-column table with a real header row (Role /
-  What they own), followed by the standing-rules paragraph and one
+  What they own), one row per role CLAUDE.md's Roles section names
+  and no other, followed by the standing-rules paragraph and one
   sentence on the collaboration model: one instance serves one
   principal, recipients collaborate through the artefacts; more
   principals means more instances (see Planned extensions).
 - The Commands table mirrors CLAUDE.md's Commands table one to one in
   commands and signatures; descriptions are at most one or two
   sentences per cell. The `/ingest`, `/save` and `/release` mechanics
-  move to a short prose paragraph below the table. `/forge` and `/ledger` are
+  move to a short prose paragraph below the table, taken from those
+  three skills. `/forge` and `/ledger` are
   described so the difference is obvious: `/forge` is the chain map
   with a recommended next step; `/ledger` is the quick state readout
   from the ledger. The star mechanics of `/forge <state>` are
@@ -203,7 +227,7 @@ summarising the newest row. -->
 - The chain section keeps the iteration rule and the write cadence to
   one line each — they matter to the user but are agent discipline,
   not README substance. The brief's row and the paragraph after its
-  callout carry the brief rule per CLAUDE.md: an intent composed and
+  callout carry the brief rule per CLAUDE.md: a brief composed and
   then locked (draft → approved), three equally legitimate origins,
   `/forge brief` as the door, later wholes as `00-brief-<name>.md`,
   mined into the single intent with the ledger tracking how far.
@@ -263,9 +287,10 @@ summarising the newest row. -->
   columns Group / Kind / Meaning / Written by / Versioned / Behaviour
   and every row, verbatim — introduced by one sentence that "document"
   is every file of a project and "artefact" the documents of the
-  chain, and followed by the two sentences on the history companion
-  (`<file>.history.md`, append-only, `last_change` in the front-matter)
-  and on integer versions being approved and a recipe never; project kinds — `thought` (the chain) and
+  chain, and followed by two sentences from Versioning & status of
+  CLAUDE.md, on the history companion (`<file>.history.md`,
+  append-only, `last_change` in the front-matter) and on integer
+  versions being approved and a recipe never; project kinds — `thought` (the chain) and
   `library` (`lib-` prefix, shared material, no chain) — and naming
   (slugs), illustrated only with `forge` and the `lib-` prefix, never
   with invented or instance projects. Naming has no numbered section
@@ -284,10 +309,9 @@ summarising the newest row. -->
   sentence, taken from the agent file's `description` — never woven
   into a paragraph, so that a new lens, persona or check is a new
   bullet; then its output and the states of its findings as a list in
-  exactly the ledger's vocabulary, never a state of the render's own
-  (critic: open, resolved, rejected, parked, obsolete; challenger:
-  open, accepted, rejected, parked, obsolete; check: the critic's
-  states, filed only when it finds something). The verdict words are said once, in "How
+  exactly the vocabulary of `templates/ledger.md` (Findings,
+  Challenges), never a state of the render's own; a check's report is
+  filed only when it finds something. The verdict words are said once, in "How
   the work feels" under the walkthrough, never per reviewer: they
   are one set for every walkthrough.
 - Open threads (THR) are not enumerated; growth is summarised from
@@ -298,7 +322,9 @@ summarising the newest row. -->
 - The repository layout block mirrors CLAUDE.md's layout block in
   full, including `CLAUDE.local.md`, the gitignored `projects/*`
   with its per-project `.git/`, the library layout and the generated
-  `.pptx` sibling of a deck render.
+  `.pptx` sibling of a deck render. A comment there that only points
+  to a section of CLAUDE.md is replaced by the fact it points to: the
+  README stands alone.
 - The chain diagram shows the star, never a line: it must make
   visible at first glance that the chain branches richly. It is this
   mermaid block, pinned verbatim (solid arrows = built today, dashed
@@ -351,7 +377,9 @@ summarising the newest row. -->
     `npm install -g @anthropic-ai/claude-code`. Sign in on first
     run — usage draws from the same pool as Claude chat. Always
     start `claude` from the engine root so CLAUDE.md and
-    CLAUDE.local.md load. Then run `/setup` once: it fills
+    CLAUDE.local.md load. Then run `/setup` once (owner: the skill
+    `setup`; where this text and the skill differ, the skill wins):
+    it fills
     `CLAUDE.local.md` (the conversation language, who the principal
     is) from its template with you in a short interview — gitignored,
     never committed — and creates `.claude/settings.local.json` with the
@@ -400,7 +428,9 @@ summarising the newest row. -->
     and pandoc's built-in styles apply on an A4 page
     (`-PageSize Letter` for US Letter); the git scripts need
     nothing beyond git.
-  - "Saving and syncing" — two doors: `/save` runs the light check,
+  - "Saving and syncing" — two doors (owners: the skills `save` and
+    `release`; where this text and they differ, they win): `/save`
+    runs the light check,
     then commits and pushes on the current branch, no render;
     `/release`, from `main` only, runs its checks, settled with the
     principal,
@@ -431,11 +461,10 @@ summarising the newest row. -->
 - The Scripts section lists every script the repository uses — one
   table row per file in `scripts/`: script, one-sentence purpose,
   when it is run, and an install note where one is needed pointing
-  to Setup. Purposes come from CLAUDE.md — the Persistence section
-  for the git scripts, the external-inputs rule for `doc2md.ps1`,
-  the renders rule for `md2pptx.ps1` and `md2docx.ps1`, the
-  Walkthrough paragraph of Working methods for
-  `hook-walkthrough.ps1`; invent nothing beyond them.
+  to Setup. Purposes come from each script's help header, and from
+  CLAUDE.md where it says when the script is run; invent nothing
+  beyond them. Below the table one short paragraph on portability,
+  from CLAUDE.md, Persistence (Portability).
 - The section "Author and licence" precedes "About this README" and
   carries this fixed text verbatim, nothing more: "Forge of Thought ©
   Petr Chlumsky (PCHe) — petr.chlumsky@gmail.com. Licensed under
@@ -489,7 +518,7 @@ it first>
 
 ## 4. How it is used
 ### The flow
-<the general arc: an idea is dumped verbatim as a brief — alone or in
+<the general arc: an idea is put together as a brief — alone or in
 conversation with the forge; the intent is forged from it through
 interviews, iterated over days and sessions, everything living in
 files; sources are registered as they arrive and used only when the

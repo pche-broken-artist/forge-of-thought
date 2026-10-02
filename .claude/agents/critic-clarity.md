@@ -1,6 +1,6 @@
 ---
 name: critic-clarity
-description: Critic lens "clarity" — reads each artefact on its own for ambiguity, contradiction, duplication, scope hygiene and Requirement style. Reviews the quality of the documents. Not a challenger of the thinking.
+description: Critic lens "clarity" — reads each artefact on its own for ambiguity, contradiction, duplication, scope hygiene and Requirement style. Fit before a handover. Reviews the quality of the documents. Not a challenger of the thinking.
 tools: Read, Edit, Write, Glob, Grep
 model: inherit
 skills:
@@ -29,9 +29,11 @@ What to go after:
 - **Scope hygiene.** Solving where the document should be assigning:
   solutioning leaked into requirements, constraints that are really
   requirements, machinery of delivery dressed as direction.
-- **Requirement style.** The rule set is *Requirement style* in
-  CLAUDE.md, stated there and not here (POS.1070): every breach is a
-  finding, testability excepted (Recommendations).
+- **Requirement style.** The rule set is *Requirement style* in the
+  assignment's definition
+  (`.claude/skills/forge/states/assignment.md`), stated there and not
+  here (POS.1070): every breach is a finding, testability excepted
+  (Recommendations).
 - **Self-containment.** A section the artefact's own template
   requires and the document lacks without a stated reason.
 
@@ -49,7 +51,7 @@ Own report section, after Recommendations:
 - Objective outcome-phrased and unambiguous?
 - Scope boundaries stated, with out-of-scope items where the topic
   invites creep?
-- Requirement style of CLAUDE.md kept throughout?
+- Requirement style of the assignment's definition kept throughout?
 - Constraints separated from requirements (no leaked solutioning)?
 - Deliverables actionable, with owners and timing where relevant?
 - Open questions each have an owner?

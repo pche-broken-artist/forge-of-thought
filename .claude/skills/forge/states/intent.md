@@ -66,13 +66,11 @@ needs outside grounding, run on the principal's word. A source
 enters only as the principal directs (CLAUDE.md, Document chain
 5). `/challenge <persona> intent`: the independent reality check,
 offered once the joint one is done, never run on Claude's own
-judgement. The walkthrough of every position, where the intent was
-consolidated by Claude (CLAUDE.md, Document chain 2).
+judgement.
 
 **Course.** Resolve the project and read the inputs and the intent
 as it stands. The ways in: no intent yet, and the locked briefs
-are consolidated into the first one, which waits for its
-walkthrough (CLAUDE.md, Document chain 2); a brief pending or
+are consolidated into the first one; a brief pending or
 partial, and it is mined whole by whole, one brief at a time; an
 open thread, a new word of the principal's or what the recipients
 sent back, and the round starts there. Briefs are offered before
@@ -84,6 +82,19 @@ versioning and ledger: CLAUDE.md). End by naming what changed and
 what stays open; when the Aim's completion is reached, propose the
 next state, or the approval where the chain ends at the intent: a
 recommendation, never a gate.
+
+**Threads and files.** The threads in `10-intent.threads.md` are
+part of the intent as its history is: the intent says what holds,
+the threads what is being worked, the working debate included until
+a thread is settled; freely rewritten, no version, no history and no
+ledger row of their own (POS.0120). Where an item's output is a file
+of its own (a skill, an agent, a template, a script, a research
+note, a locked brief), the item keeps its assignment, what is to be
+achieved and why, and names the file, and the realisation is the
+file's. Where the output is only part of a file, a section of
+CLAUDE.md among them, the item keeps the full information, since
+another change may rewrite that part and the detail would be lost.
+Until the file exists, the item keeps the full information too.
 
 How the files are made: the first intent is created from
 `templates/intent.md` as v0.1, with its companion

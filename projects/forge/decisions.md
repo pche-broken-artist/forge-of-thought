@@ -254,3 +254,19 @@ them here was THR.0070, resolved by DEC.0040 (no back-fill). -->
   of 2026-10-02 to decide the low findings of this report by his
   recommendation.
 - **Date:** 2026-10-02
+
+## DEC.0180 — The YAML quoting caveat stays in the three skeletons; that part of FND.0720 rejected
+- **Decision:** The check `single-source-of-truth` of 2026-10-02
+  found that the caveat on quoting a description that carries a colon
+  followed by a space stands in `templates/check.md`,
+  `templates/critic.md` and `templates/challenger.md` with no owner,
+  and proposed to state it once in CLAUDE.md, Isolated reviewers
+  (FND.0720). That part of the finding is rejected; the caveat stays
+  in the three skeletons. The other part, the parts of a Lens section
+  listed twice, is accepted.
+- **Reason:** The caveat is a property of the harness's parser, not a
+  rule of the forge, and it stands where it is acted on, in the
+  skeleton a new agent file starts from. In CLAUDE.md it would be
+  read at every session and by every reviewer for nothing (THR.0240).
+  Where the rules for creating new types live is THR.0480.
+- **Date:** 2026-10-02

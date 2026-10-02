@@ -26,18 +26,13 @@ Claude Code's own command, hence the Unix name.
 2. Print the command's purpose (its `description`), its arguments
    (its `argument-hint`, else the CLAUDE.md row) and the CLAUDE.md
    row's purpose in full.
-3. Print the roster the command dispatches over, where it has one,
-   each entry with the `description` of its own file and, where the
-   file carries one, its `## Lens` section — for a genre its
-   Elicitation checklist — in full, so that the user knows what a
-   check, a lens, a persona or a genre looks for before running it:
-   - `/check`: `.claude/agents/check-*.md`;
-   - `/critique`: `.claude/agents/critic-*.md`;
-   - `/challenge`: `.claude/agents/challenger-*.md`;
-   - `/recipe`: `.claude/skills/recipe/genres/*.md`;
-   - `/forge`: `.claude/skills/forge/states/*.md`.
-   The rosters are the same scans the bare commands make; `/man`
-   adds what each entry looks for and runs nothing.
+3. Print the roster the command dispatches over, where its skill
+   names one: the same scan the bare command makes, read from that
+   skill, each entry with the `description` of its own file and,
+   where the file carries one, its `## Lens` section — for a genre
+   its Elicitation checklist — in full, so that the user knows what
+   a check, a lens, a persona or a genre looks for before running
+   it. `/man` adds what each entry looks for and runs nothing.
 4. Close with one line naming the skill file, for the reader who
    wants the whole procedure.
 

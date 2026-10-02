@@ -72,7 +72,7 @@ The rules: CLAUDE.md, Document chain 7. -->
 - Released sections never change retroactively. Only factual
   corrections ordered by the principal may touch one, through this
   recipe.
-- Wording: UK English, plain and direct, one sentence per bullet;
+- Language: <English>. Wording: plain and direct, one sentence per bullet;
   invent nothing — every line is derivable from the inputs.
 - Open with YAML front-matter provenance like any render.
 

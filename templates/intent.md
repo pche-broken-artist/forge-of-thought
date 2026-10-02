@@ -1,7 +1,7 @@
 ---
 version: 0.1
 date: YYYY-MM-DD
-status: draft            # draft | in_review | approved | superseded
+status: draft            # draft | approved | superseded
 last_change: <derived from the records of the newest version in 10-intent.history.md>
 project: <slug>
 audience: principal + Claude only
@@ -10,8 +10,9 @@ audience: principal + Claude only
 # <Project> — Intent
 
 <!-- The working document; the rules: CLAUDE.md, Document chain 2
-(what it is), prime directive 6 (its language), Versioning & status
-(its history companion, templates/history.md). -->
+(what it is), its definition `.claude/skills/forge/states/intent.md`
+(what it holds), prime directive 6 (its language), Versioning &
+status (its history companion, templates/history.md). -->
 
 ## Essence
 <!-- Three to ten sentences: what the principal wants and why, as of

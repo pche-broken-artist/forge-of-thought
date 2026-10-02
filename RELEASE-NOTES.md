@@ -1,11 +1,12 @@
 ---
 project: forge
 render: release-notes
-generated: 2026-09-27
-recipe: recipes/release-notes.md v0.10
+generated: 2026-10-02
+recipe: recipes/release-notes.md v0.12
 inputs:
   - projects/forge/10-intent.history.md
-  - projects/forge/10-intent.md v4.31
+  - projects/forge/10-intent.history.archive.md
+  - projects/forge/10-intent.md v4.49
   - projects/forge/decisions.md
   - RELEASE-NOTES.md (previous edition)
 ---
@@ -16,6 +17,273 @@ One section per release of the engine, newest first, for the user who
 takes upgrades through `forge-pull`; Action required comes first in
 every section; the fine-grained log with the reasons lives in
 `projects/forge/10-intent.history.md`.
+
+## 4.49 — 2026-10-02
+
+### Action required
+- The status `in_review` is cancelled; the statuses are `draft`,
+  `approved` and `superseded` (POS.0300, REJ.0230). For you: a document
+  whose front-matter says `status: in_review` is set to `draft`.
+
+### Changed
+- The rules of particular artefacts left CLAUDE.md for the definitions
+  in the state files of `/forge`: the wording of prime directive 8 and
+  the Requirement style stand in the assignment's definition, what the
+  threads hold and what an item keeps against its file in the intent's,
+  and a paragraph in Document chain says what a definition is (POS.1310,
+  POS.1380). For you: read what holds for a brief, an intent or an
+  assignment in its state file under `.claude/skills/forge/states/`;
+  CLAUDE.md keeps the rule in short.
+- The Commands table of CLAUDE.md is cut to the purpose of each command,
+  rules echoed inside CLAUDE.md are cut to their owner, no member of a
+  roster is named outside its file, and the critic lenses say their fit
+  in their descriptions (FND.0610, FND.0620, FND.0630, FND.0700,
+  FND.0720). For you: nothing to do; CLAUDE.md is shorter, and a
+  command, a lens or a check is described in its own file.
+- The demand for British English left the Requirement style: the
+  language of an assignment is the project's (POS.0250, POS.0060). For
+  you: an assignment of a project in another language is written in
+  full, correct sentences of that language.
+
+### Removed
+- The rule that an intent consolidated by Claude from the conversation
+  is `in_review` until every position has been walked through, with no
+  lower layer derived before (POS.1180, REJ.0230). For you: a
+  walkthrough of an intent runs when you ask for one, and no lower layer
+  waits for it.
+
+### Fixed
+- CLAUDE.md opens with the chain starting at the idea put together,
+  cites POS.1320 for the walk of a Map and says a recipe carries
+  `updated` in place of `date`; the skeletons of the readme and
+  release-notes recipes name a language in place of UK English (FND.0740
+  to FND.0820). For you: the README and the release notes of your
+  project are no longer told to be UK English.
+
+### Rejected
+- Stating the caveat on quoting an agent's description once in
+  CLAUDE.md; it stays in the three reviewer skeletons (DEC.0180,
+  FND.0720). For you: the skeleton a new lens, persona or check starts
+  from still tells you when to quote the description.
+
+## 4.48 — 2026-10-02
+
+### Changed
+- What a brief carries and how it is found is owned by its definition,
+  `.claude/skills/forge/states/brief.md`; how `/render` and `/publish`
+  run is owned by their skills; the verdicts other than accept stand
+  once, in the walkthrough skill; CLAUDE.md keeps a sentence and cites
+  the owner (FND.0540 to FND.0690). For you: nothing to do; a mechanism
+  is read in its own file, and CLAUDE.md tells you which.
+- The briefs are kept in whatever language they are written in; "stored
+  verbatim" left the language rule and prime directive 6 of CLAUDE.md
+  (POS.0060, FND.0540). For you: the rule no longer reads as a ban on
+  Claude working on the text of your brief.
+
+### Fixed
+- A change of the operating layer that touches no item of the intent has
+  a subject of its own in the log of the forge's project, now written in
+  the position and in `templates/history.md` (POS.0310, FND.0730). For
+  you: nothing to do; the subject serves the forge's own project.
+
+### Rejected
+- Leaving the detection of changed sources to the `project` check alone
+  (DEC.0170, FND.0710). For you: a bare `/ingest` goes on reporting
+  sources changed since registration and asks what to do with each.
+
+## 4.47 — 2026-10-02
+
+### Changed
+- The definitions of the brief, the intent and the assignment live in
+  the state files of `/forge`, seven blocks each, used at once and
+  mended there with no trial before (POS.1310, POS.1380, POS.1330,
+  POS.1340, POS.1350). For you: after `forge-pull`, `/forge brief`,
+  `/forge intent` and `/forge assignment` run by the new definitions;
+  your locked artefacts are untouched.
+- CLAUDE.md, in the brief's row of Document kinds and in Document chain
+  1, and the brief's state file are brought current with the intent
+  (THR.0470). For you: a brief born through `/forge brief` is no longer
+  born by the older rule; it holds what you chose from the finding and
+  carries no mark of authorship.
+
+## 4.46 — 2026-10-02
+
+### Changed
+- In the brief's definition Claude forms the record: on the principal's
+  word to write he takes what the talk arrived at and writes it down so
+  that it is understood, and the brief is the principal's by his
+  approval, whoever first said a thought (POS.1330, THR.0450). For you:
+  a brief found together need not be word for word what you said.
+- Once the talk over a brief turns to the intent's work, Claude offers
+  the lock once, as a recommendation (POS.1330, THR.0440). For you: you
+  are told when a brief begins to grow into an intent, and the decision
+  stays yours.
+- The Map of a brief names the thought and not whose words it is in, and
+  the boundaries are its fifth area (POS.1330, THR.0440). For you:
+  before the lock Claude also asks what you do not want and what is out
+  of scope.
+- The marks of a brief are narrowed: a source is cited where its
+  identity matters to the thought, a remark stands for a reservation or
+  an uncertainty only, and what the principal did not take is gone
+  unless he says it stays (POS.0110, THR.0440). For you: a brief carries
+  a citation or a remark only where it matters to the thought.
+- An assignment is complete also when its recipients know the end and
+  the reason well enough to act rightly where the plan no longer fits
+  (POS.1350, THR.0450). For you: completeness no longer pulls an
+  assignment towards specifying too much.
+- The questions up front of an assignment are bounded by their kind, the
+  detail of the handover against substance the intent has not settled,
+  and not by their number (POS.1350, THR.0440). For you: a question on
+  substance sends the work back to the intent, however few the questions
+  are.
+- A Map names also what is consciously verified, the last area of the
+  assignment's Map is named self-containment, and at the walk Claude
+  says of each area how it stands, aloud and unrecorded (POS.1320,
+  POS.1350, THR.0440, THR.0450). For you: you hear how each area stands
+  when a Map is walked, and nothing of it is written.
+- The questions of worth and feasibility are Claude's way of challenging
+  an idea in the intent, nothing recorded per idea (POS.1340, THR.0440).
+  For you: no matrix of good and feasible is kept for every idea.
+
+## 4.45 — 2026-10-02
+
+### Fixed
+- `/ingest` settles a changed source in a thought project in the three
+  ways the intent has, a new source beside it, the original restored or
+  the change knowingly accepted; in a library the sweep moves the ledger
+  date and corrects the index entry, and regenerating an extract is the
+  owner's act (POS.0180, `.claude/skills/ingest/SKILL.md`). For you: a
+  bare `/ingest` offers you all three ways for a changed source.
+- The FCT row of CLAUDE.md says apart that a source's fact cites its
+  file and that verification is never demanded (POS.0230). For you: a
+  fact taken from a source names its file, and no fact has to be proved.
+- The help and the identity message of `scripts/forge-save.ps1` no
+  longer set the commit identity at a project's creation (POS.0950). For
+  you: the script says what the forge does; the identity is git's and
+  the forge sets none.
+
+## 4.44 — 2026-10-02
+
+Nothing for the user of the engine.
+
+## 4.43 — 2026-10-02
+
+### Action required
+- A check that finds something now leaves a report in `reviews/` and
+  rows in the ledger's Findings table (POS.1140). For you: nothing to do
+  in a thought project beyond refreshing the ledger's comments from
+  `templates/ledger.md` when the `light` check reports them; a library
+  receives its Findings table and `reviews/` from `/check` at its first
+  finding.
+
+### Changed
+- Scripts are written in Python from now on: a new script at once, the
+  PowerShell scripts rewritten in time and standing as they are until
+  then (POS.0830, THR.0150). For you: nothing to do yet; the scripts you
+  run stay PowerShell until each is rewritten.
+
+## 4.42 — 2026-10-02
+
+### Changed
+- The forge's intent is cleaned whole: the way to 69 items and the
+  detail a file of its own carries moved into the history log, one
+  record per item and no stance changed, and the table written before
+  the log stands untouched in
+  `projects/forge/10-intent.history.archive.md` (THR.0470). For you: the
+  intent reads as the current state; the way to an item is in its
+  records of the log, and the versions before 4.42 are in the archive.
+
+## 4.41 — 2026-10-01
+
+Nothing for the user of the engine.
+
+## 4.40 — 2026-09-30
+
+### Changed
+- Detail leaves an item only for a file of its own; a part of a file,
+  CLAUDE.md among them, never carries it alone (POS.0120). For you:
+  nothing to do.
+
+## 4.39 — 2026-09-30
+
+### Action required
+- The history of a versioned document is a log of changes, one line per
+  change (CLAUDE.md, Versioning & status; `templates/history.md`). For
+  you: in each project, for every versioned document except a locked
+  brief, have Claude move `<file>.history.md` as it stands to
+  `<file>.history.archive.md`, untouched, and begin a new
+  `<file>.history.md` from `templates/history.md` with its header and
+  comment only; the log begins with the document's next version. One
+  project at a time, on your word.
+
+### Added
+- The check `history` reads a document with its history and proposes
+  what moves between them (POS.1140). For you: run it when a document is
+  to be cleaned; it moves nothing itself.
+
+### Changed
+- Release notes are derived from the records of the history log, what
+  you must do carried word for word from the record's `Action`
+  (POS.0730). For you: nothing to do; a version before the log still
+  comes from its archived Notes.
+
+## 4.38 — 2026-09-30
+
+### Action required
+- The open threads of an intent live in `10-intent.threads.md` beside it
+  (CLAUDE.md, Document chain 2; forge intent 4.37). For you: in each
+  thought project, have Claude create `10-intent.threads.md` from
+  `templates/threads.md`, move the section Open threads of
+  `10-intent.md` into it word for word and in its order, remove the
+  section from the intent, verify that the two files together give the
+  old text exactly, then bump the intent's version with a history row
+  and set the new version in the ledger; one project at a time, on your
+  word.
+
+## 4.37 — 2026-09-30
+
+### Changed
+- The open threads of an intent live in a file of their own,
+  `10-intent.threads.md` (POS.0120). For you: move the Open threads
+  section of each project's intent into it, word for word, on your word,
+  project by project.
+
+## 4.36 — 2026-09-30
+
+Nothing for the user of the engine.
+
+## 4.35 — 2026-09-30
+
+Nothing for the user of the engine.
+
+## 4.34 — 2026-09-29
+
+### Changed
+- The history of a document becomes a log of changes, one line per
+  change, and the release notes are derived from it (POS.0310,
+  POS.0730). For you: nothing to do yet; your history files keep their
+  tables until the operating layer follows in a later release.
+- The open threads of an intent move to a file of their own beside it
+  (POS.0120). For you: nothing to do yet; the move comes with a later
+  release.
+
+## 4.33 — 2026-09-28
+
+Nothing for the user of the engine.
+
+## 4.32 — 2026-09-28
+
+### Added
+- The elicitation of an artefact has a definition of seven blocks:
+  Target, Inputs, Aim, Partner, Map, Instruments, Course (POS.1310,
+  POS.1330 to POS.1350). For you: nothing to do yet; the state files of
+  `/forge` are rewritten to the shape in a later release.
+
+### Changed
+- A brief holds what the principal chose from the finding, not
+  everything the finding yielded, and carries no mark of authorship
+  (POS.0110, REJ.0220). For you: `/forge brief` runs by today's state
+  file until it is rewritten; a brief you have locked is untouched.
 
 ## 4.31 — 2026-09-27
 

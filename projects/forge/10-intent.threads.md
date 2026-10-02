@@ -279,6 +279,11 @@ document: 10-intent.md
   definitions. The brief's estimate is 43 to 53 lines fewer of 663
   in the always-on part, the state files growing by about as much;
   the line count is an effect, the proof is conduct (POS.1380).
+  2026-10-02: the move is done, by walkthrough (intent 4.49). The
+  eight low restatements, filed that day as findings of the check,
+  are settled with it; one stays parked, FND.0650, the genre
+  checklists beside their skeletons. What must be always-on beyond
+  that is still this thread's question.
 - **THR.0250** Two suggested functions: an expander and an essence
   manager. A tip the principal received on 2026-09-03 — where from not
   recorded. The essence manager got its detail the same day: at the end
@@ -435,7 +440,8 @@ document: 10-intent.md
     accepted → POS.1090 (Step by step). P.06 accepted with the
     principal's addition, the role always asked → POS.1040.
   - P.07 rejected → REJ.0180. P.08 accepted, origin on THR only →
-    POS.0230, POS.1180; the marking of whose word is whose in a
+    POS.0230, POS.1180 (dropped 2026-10-02, REJ.0230); the marking
+    of whose word is whose in a
     co-elicited brief decided yes, lightly → POS.0110. P.09 split:
     `terminal:` accepted → POS.0160; the layer opened as THR.0360.
     P.10 the pasted-text half accepted → POS.1040, the editing

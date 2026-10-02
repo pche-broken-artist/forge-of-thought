@@ -30,7 +30,7 @@ the two resource indexes. -->
 - Every claim is derivable from the inputs; invent nothing, omit
   rather than embellish. Anything superseded in the inputs must not
   survive.
-- Tone: plain, direct, UK English. Tables for enumerable facts (chain
+- Tone: plain, direct. Language: <English>. Tables for enumerable facts (chain
   state, renders, what is waiting), prose only where the subject is
   being explained.
 - Title: `# <Project title> <intent version>` — the title from the

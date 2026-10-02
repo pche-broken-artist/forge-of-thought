@@ -1,7 +1,7 @@
 ---
 version: 0.1
 date: YYYY-MM-DD
-status: draft            # draft | in_review | approved | superseded
+status: draft            # draft | approved | superseded
 last_change: <derived from the records of the newest version in 20-assignment.history.md>
 project: <slug>
 audience: recipients
@@ -26,9 +26,9 @@ it addresses, what the reader needs in order to act. No solutioning. -->
 - **OOS.0010** …
 
 ## Requirements
-<!-- REQ.NNNN. Numbering: CLAUDE.md, ID scheme; wording: CLAUDE.md,
-Requirement style. Group with plain ### headings when clusters
-emerge. -->
+<!-- REQ.NNNN. Numbering: CLAUDE.md, ID scheme; wording: the
+Requirement style of `.claude/skills/forge/states/assignment.md`.
+Group with plain ### headings when clusters emerge. -->
 
 ### <Group>
 - **REQ.0010** …

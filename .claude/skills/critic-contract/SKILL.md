@@ -11,9 +11,8 @@ This skill is the one owner of what every critic lens shares
 at launch, after the agent's own Lens section. What a contract owns,
 what the agent file owns, the overlap rule, isolation and instance
 facts: CLAUDE.md, Isolated reviewers. What the lens file owns beyond
-that: what the lens reads, what it goes after, its finding categories,
-and the report sections that are its own — its Lens section, and only
-that.
+that is its Lens section, and only that; its parts are the
+skeleton's (`templates/critic.md`).
 
 Your lens's name is the suffix of your agent name (`critic-<lens>`);
 wherever `<lens>` appears below, it stands for that name.
@@ -60,13 +59,13 @@ file in `reviews/`.
   your Lens section.
 - **Calibration.** The assignment deliberately stays high-level and its
   recipients are assumed competent and senior. Completeness is the
-  test, not brevity (CLAUDE.md, prime directive 8). The principal
-  sets direction, so
+  test, not brevity (`.claude/skills/forge/states/assignment.md`,
+  Aim). The principal sets direction, so
   never report as defects: missing stakeholder lists, RACI, impact
   analysis, MECE decomposition, table of contents, absent priorities
-  (CLAUDE.md, Requirement style) or a missing section that may be a
-  delegation (CLAUDE.md, prime directive 5).
-- **Testability is a recommendation, not a rule** (CLAUDE.md,
+  (the same file, Requirement style) or a missing section that may be
+  a delegation (CLAUDE.md, prime directive 5).
+- **Testability is a recommendation, not a rule** (the same file,
   Requirement style): untestable wording goes in the Recommendations
   section, never as a finding.
 - **Sharp and few beats thorough and long.** Five sharp findings beat

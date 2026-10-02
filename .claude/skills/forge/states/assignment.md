@@ -25,6 +25,13 @@ purpose. It is complete when nothing the recipients would need is
 left to assumption — delegated or open on purpose is complete,
 silent is not — and when they know what must be true at the end,
 and why, well enough to act rightly where the plan no longer fits.
+Nothing is omitted for brevity's sake, and length is whatever
+fidelity requires; leaving a matter out is legitimate only as an
+explicit delegation (a DEL or TBC item). The boundary is the kind
+of content, assigning and not solving, never its amount: machinery
+of executing delivery belongs to the recipients, but any apparatus
+(a stakeholder matrix, an impact analysis) may appear where the
+principal judges it part of setting direction.
 
 **Partner.** Claude reads the intent against what the assignment
 needs — recipients, objective, delegation, success criteria,
@@ -60,7 +67,8 @@ own judgement.
 
 **Course.** Resolve the project and read the intent and the
 assignment as it stands; say whether the intent is ready to be
-derived from (CLAUDE.md, Document chain 2), never as a gate. The
+derived from (its Aim, `.claude/skills/forge/states/intent.md`),
+never as a gate. The
 ways in: no assignment yet, and the joint pass runs whole, in its
 three phases below; an assignment that stands and an intent that
 moved, and the pass runs on what changed, the provenance map
@@ -102,7 +110,23 @@ without the map one sees what is there, not what is missing.
 How the files are made: the first draft is created from
 `templates/assignment.md`, with its companion
 `20-assignment.history.md` from `templates/history.md`. The draft
-follows the ID scheme, the Requirement style and prime directives 7
-and 8 of CLAUDE.md as written there; the Terms section lists only
+follows the ID scheme and prime directive 7 of CLAUDE.md as written
+there, and the Requirement style below; the Terms section lists only
 the prefixes and terms actually used; empty sections and all
 template comments are deleted.
+
+**Requirement style.**
+- Use **shall** / **shall not**. Do not use would, could, should,
+  might, may, or MoSCoW wording.
+- **No priority column and no priority tags.** Everything in an
+  assignment is essential by default; an exception is marked by a
+  note reading *optional* on that item.
+- Each item covers one idea, is written once, and is written in
+  full, correct sentences.
+- Testability is **recommended, not required**: assignments are
+  deliberately high-level, and delegating concretisation via a `DEL`
+  item is a legitimate outcome.
+- Defined terms are capitalised in item text to signal they appear
+  in the Terms section.
+- An item must not depend on an external link to be understood,
+  agreed or later tested.

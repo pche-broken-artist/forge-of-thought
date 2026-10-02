@@ -10,10 +10,9 @@ This skill is the one owner of what every check shares (POS.0540,
 POS.1120, POS.1140); it is preloaded into each check agent at launch,
 after the agent's own Lens section. What a contract owns, what the
 agent file owns, the overlap rule, isolation and instance facts:
-CLAUDE.md, Isolated reviewers. What the check file owns beyond that:
-what the check reads, the rules it verifies and against which owner,
-what is a finding and what is a fact — its Lens section, and only
-that.
+CLAUDE.md, Isolated reviewers. What the check file owns beyond that
+is its Lens section, and only that; its parts are the skeleton's
+(`templates/check.md`).
 
 Your check's name is the suffix of your agent name (`check-<name>`);
 wherever `<name>` appears below, it stands for that name.

@@ -36,7 +36,7 @@ an explanation:
 A heading with a one-sentence reason is a label, not an item. Items
 are worked in order of weight. `park` is a legitimate verdict, not a
 failure; a declined recommendation is not re-argued without new
-facts.
+facts (CLAUDE.md, Working methods).
 
 ## The verdict
 
