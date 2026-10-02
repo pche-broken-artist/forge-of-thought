@@ -1,52 +1,97 @@
 ---
-description: Iterate 10-intent.md — elicitation interview consolidating the principal's intent
+description: Iterate 10-intent.md — the briefs chiselled into what the principal holds
 ---
 
-Target: `10-intent.md`.
-Inputs: the locked briefs (`00-brief.md` and any `00-brief-<name>.md`
-with status approved — a draft brief is not yet an input),
-`decisions.md`, the ledger; sources only as the principal directs.
+The definition of the intent's elicitation, in the seven blocks of
+POS.1310 of the forge intent; what it is to achieve and why is
+POS.1340. Shared mechanism is cited and never repeated here: the form
+of the conversation and one write per round (CLAUDE.md, Working
+methods and prime directive 9), versioning with history and ledger
+(CLAUDE.md, Versioning & status), the language (CLAUDE.md, prime
+directive 6).
 
-Role: elicitor. You are the principal's cognitive extension — your job is
-to extract what is in his head, including what he has not yet articulated.
+**Target.** `10-intent.md`. Shape of the result:
+`templates/intent.md`.
 
-1. Read the inputs of the project (the slug argument, or infer the current project from
-   context; if ambiguous, ask), plus the existing `10-intent.md` and
-   its threads `10-intent.threads.md` if any.
-2. If 10-intent.md does not exist, create it from `templates/intent.md` as
-   v0.1, with its companion `10-intent.history.md` from
-   `templates/history.md` and `10-intent.threads.md` from
-   `templates/threads.md`: consolidate the brief into Essence and
-   Positions, and derive the initial threads into it. The status of an
-   intent consolidated this way, and the walkthrough it awaits:
-   CLAUDE.md, Document chain 2.
-3. Interview the principal.
-   Rules:
-   - One theme at a time; prefer few sharp questions over questionnaires.
-   - Before anything else, offer the briefs whose ledger row is
-     `pending` or `partial` for mining (the note says what remains);
-     mining is his act — positions drawn from a brief cite it as
-     provenance, and a whole he lets die becomes one REJ with the
-     reason while the brief stays locked.
-   - Start from the threads; probe contradictions, gaps, and unstated
-     assumptions.
-   - When he brain-dumps freely, accept everything, then reflect back a
-     structured summary and confirm it before writing.
-   - When he is unsure, offer options with trade-offs — inspiration is
-     welcome, decisions are his.
-   - If a topic deserves outside grounding, propose `/research <topic>`.
-4. Write once per round (CLAUDE.md, prime directive 9 — stated
-   there, not here; POS.1070). On writing: rewrite for coherence
-   (not append-only), translate to the project's language (CLAUDE.md,
-   prime directive 6), let a settled thread leave the threads file
-   into Positions or Rejected directions (CLAUDE.md, Document
-   chain 2), write per CLAUDE.md,
-   Versioning & status into `10-intent.history.md`, and update
-   the ledger — including the Mined column of every brief touched (`partial` with a note on what
-   remains, `mined`, or `dropped` with the REJ). POS, FCT, THR and REJ
-   follow the ID scheme of CLAUDE.md.
-5. End every session by listing: what changed in intent, what remains
-   open, and whether the intent looks stable enough for
-   `/forge assignment` — as a recommendation, never a gate; whatever
-   remains unsettled is saved into its thread before the session
-   ends (CLAUDE.md, Ledger).
+**Inputs.** The locked briefs (`00-brief.md` and any
+`00-brief-<name>.md` with status approved; a draft brief is not
+yet an input), `decisions.md`, the ledger; sources only as the
+principal directs. The intent as it stands is read with its threads,
+`10-intent.threads.md`.
+
+**Aim.** The intent chisels the briefs into what the principal
+holds: from the briefs, the sources and the conversation it keeps
+what matters as positions, what is the case as facts, what is
+undecided as threads and what was dropped as rejections with the
+reason. Ideas are placed on a horizon where the principal sees
+one: a proof of concept, the first version, a later one, or good
+but far away. Everything coherent, nothing twice, every position with its
+provenance, and the whole passed through a final reality check
+before a lower layer is derived. It is complete for now when no
+thread blocks the next layer; it is never finished.
+
+**Partner.** Claude helps the principal reach the Aim: mines the
+briefs with him whole by whole, probes contradictions, gaps and
+unstated assumptions, and challenges an idea on two questions kept
+apart, whether it is good and whether it is feasible: a way of
+asking, nothing recorded per idea; reflects a brain-dump back as
+structure
+before it is written, offers options with trade-offs, proposes
+research where a thread needs outside grounding, and runs the
+final reality check with him. He composes the wording, the
+principal the substance; a thread closes only on his word.
+
+**Map.** What the intent finds, whatever the order; where it lands
+is the template's. Walked at the round's end, before a lower layer
+is proposed or the intent is approved; an area may stay empty when
+it was considered and found not to apply.
+- the essence: what the principal wants and why, as of today;
+- the weight of every idea: what he holds and why, what he dropped
+  and why, what he deferred, which is not dropped;
+- the ground: what is the case, and on whose word or which source;
+- the horizon: where he sees one, what is a proof of concept, the
+  first version, later, or good but far away;
+- what is open: what is undecided, what it would take to decide
+  it, and which of it blocks the layer below;
+- the briefs as wholes: whether the substance of each is in the
+  intent, was dropped, or was knowingly left behind;
+- what the layer below will need: the recipients, the objective
+  and the success criteria, as soon as he sees them (where they
+  land: `templates/intent.md`, Candidate structure for assignment);
+- reality: what of it is feasible, and where the wheel already
+  exists.
+
+**Instruments.** `/research <topic>`: proposed where a thread
+needs outside grounding, run on the principal's word. A source
+enters only as the principal directs (CLAUDE.md, Document chain
+5). `/challenge <persona> intent`: the independent reality check,
+offered once the joint one is done, never run on Claude's own
+judgement. The walkthrough of every position, where the intent was
+consolidated by Claude (CLAUDE.md, Document chain 2).
+
+**Course.** Resolve the project and read the inputs and the intent
+as it stands. The ways in: no intent yet, and the locked briefs
+are consolidated into the first one, which waits for its
+walkthrough (CLAUDE.md, Document chain 2); a brief pending or
+partial, and it is mined whole by whole, one brief at a time; an
+open thread, a new word of the principal's or what the recipients
+sent back, and the round starts there. Briefs are offered before
+threads. Within a round one theme at a time; the reality check
+comes last, before a lower layer is proposed. On the write,
+resolved threads move into positions or rejections and the Mined
+column of every brief touched is kept (write once per round,
+versioning and ledger: CLAUDE.md). End by naming what changed and
+what stays open; when the Aim's completion is reached, propose the
+next state, or the approval where the chain ends at the intent: a
+recommendation, never a gate.
+
+How the files are made: the first intent is created from
+`templates/intent.md` as v0.1, with its companion
+`10-intent.history.md` from `templates/history.md` and its threads
+`10-intent.threads.md` from `templates/threads.md`. A write rewrites
+for coherence, never appends; the text is in the project's language
+(CLAUDE.md, prime directive 6); POS, FCT, THR and REJ follow the ID
+scheme of CLAUDE.md; the Mined column of every brief touched is
+kept in the words `templates/ledger.md` gives it.
+Whatever remains unsettled is saved into its thread before the
+session ends (CLAUDE.md, Ledger).

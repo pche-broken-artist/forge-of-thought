@@ -49,8 +49,7 @@ Own report section, after Recommendations:
 - Objective outcome-phrased and unambiguous?
 - Scope boundaries stated, with out-of-scope items where the topic
   invites creep?
-- Requirements written as shall / shall not, one idea each, no
-  duplicates?
+- Requirement style of CLAUDE.md kept throughout?
 - Constraints separated from requirements (no leaked solutioning)?
 - Deliverables actionable, with owners and timing where relevant?
 - Open questions each have an owner?
@@ -58,5 +57,4 @@ Own report section, after Recommendations:
   absent?
 - Detail of the assigning kind, not the solving kind?
 - Terms section present and matching what the document actually uses?
-- Any item that cannot be understood without an external link?
 ```

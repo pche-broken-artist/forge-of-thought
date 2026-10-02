@@ -237,3 +237,20 @@ them here was THR.0070, resolved by DEC.0040 (no back-fill). -->
   of 2026-10-02 to resolve the findings of this report, his rule
   being that the intent must stay understandable.
 - **Date:** 2026-10-02
+
+## DEC.0170 — The sweep of /ingest goes on reporting changed sources; FND.0710 rejected
+- **Decision:** The check `single-source-of-truth` of 2026-10-02
+  found that the sweep of `/ingest` reports sources changed since
+  registration while the `project` check verifies the immutability
+  of registered sources, one concern with two detectors, and
+  proposed to leave the detection to the check (FND.0710). The
+  finding is rejected; the sweep stays as it is.
+- **Reason:** The sweep reports a changed file at the moment it asks
+  what to do with it, which is the command's own work and what
+  POS.0180 gives it; the principal confirmed its three ways for a
+  thought project the same day. The check finds a breach by other
+  signs and at another moment. Two moments of one concern are not
+  one rule written twice. Settled by Claude on the principal's word
+  of 2026-10-02 to decide the low findings of this report by his
+  recommendation.
+- **Date:** 2026-10-02

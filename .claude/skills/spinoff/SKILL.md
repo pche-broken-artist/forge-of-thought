@@ -16,13 +16,14 @@ run in one step.
 3. Derive `projects/$3/00-brief.md` from the relevant parts of the
    source 10-intent.md: a short brief, in the language settled at
    step 2, capturing why this became its own project and what it
-   inherits. **Exception to the
-   verbatim rule:** this brief is derived, so present it to the
-   principal as a draft; on his approval lock it through the
-   `/forge brief` procedure (its step 4).
+   inherits. This brief is derived by Claude: present it to the
+   principal as a draft and, on his approval, lock it through the
+   `/forge brief` procedure
+   (`.claude/skills/forge/states/brief.md`, its Course).
 4. Mine the locked brief into the new project's intent through the
-   `/forge intent` procedure (its step 2), which creates 10-intent.md
-   and keeps the Mined column.
+   `/forge intent` procedure
+   (`.claude/skills/forge/states/intent.md`, its Course), which
+   creates 10-intent.md and keeps the Mined column.
 5. In the source assignment: mark moved items superseded (do not delete),
    replace the group with one link item — "REQ.NNNN: Delivered by project
    *$3*, see its assignment." Write per CLAUDE.md, Versioning & status,

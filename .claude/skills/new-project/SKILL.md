@@ -60,7 +60,7 @@ steps 3–5 below do not apply.
      (POS.1010) — mention it once, never ask for it
 3. **00-brief.md:** ask the principal to paste or dictate the brief
    now and hand it to the `/forge brief` procedure
-   (`.claude/skills/forge/states/brief.md`, from its step 1): it
+   (`.claude/skills/forge/states/brief.md`, its Course): it
    creates the file, its companion and its Briefs row, stores, asks
    whether the text is finished, locks or leaves the draft. Nothing
    of that procedure is restated here (POS.1070).

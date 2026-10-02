@@ -45,15 +45,11 @@ When it returns:
    they usually mean something true is missing from the intent.
 4. End by offering a **walkthrough** of the challenges
    (`.claude/skills/walkthrough/SKILL.md`, the one owner of its
-   shape and of the verdict words). What each verdict writes here:
-   **accept** — feeds into `/forge intent`, state `accepted`; an
-   accepted challenge must change the intent; **reject** — a DEC
-   with his one-line reason, in the shape of
-   `templates/decisions.md`, state `rejected`; the challenger
-   respects it in future runs; **park** — state `parked`;
-   **obsolete** — state `obsolete`, with what made it moot.
-   Challenge states in the ledger change only, never delete. If he
-   declines the walkthrough, the challenges wait.
+   shape and of the verdict words). What `accept` writes here: it
+   feeds into `/forge intent`, state `accepted`; an accepted
+   challenge must change the intent (CLAUDE.md, Isolated reviewers).
+   The other verdicts are the walkthrough's. If he declines the
+   walkthrough, the challenges wait.
 
 A rejected challenge is a normal, healthy outcome. So is a challenge that
 survives three rounds unresolved — park it and move on.

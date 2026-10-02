@@ -762,9 +762,9 @@ document: 10-intent.md
   mended to the intent; one place found to hold as it stood
   (POS.0440). For the brief the intent holds (POS.0110, REJ.0180,
   REJ.0220), and the operating layer, CLAUDE.md and
-  `.claude/skills/forge/states/brief.md`, comes current with the
-  operating layer of the elicitation (POS.1380); until then a brief
-  born through `/forge brief` is born by the older rule.
+  `.claude/skills/forge/states/brief.md`, was brought current with
+  it at 4.47, when the definitions moved into their state files
+  (POS.1380).
   What is left of the migration: the release of the engine, by which
   the other instances and the other projects take it, and the open
   question below.

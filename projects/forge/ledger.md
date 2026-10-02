@@ -31,9 +31,9 @@ absorbed it; Note says what remains (partial) or the REJ (dropped). -->
 ## Documents
 | File | Version | Status | Date |
 |---|---|---|---|
-| 10-intent.md | 4.46 | draft | 2026-10-02 |
+| 10-intent.md | 4.48 | draft | 2026-10-02 |
 | 20-assignment.md | — | not planned: the handover artefacts of this project are the core itself (CLAUDE.md, templates/, .claude/) and README.md | — |
-| decisions.md | — | 16 records (DEC.0010–0160) | 2026-10-02 |
+| decisions.md | — | 17 records (DEC.0010–0170) | 2026-10-02 |
 
 ## Renders
 <!-- Generated outputs, one row per recipe in recipes/ (CLAUDE.md,
@@ -162,6 +162,26 @@ as `rejected`. -->
 | FND.0510 | low | conformance | resolved | 2026-10-02-check-history.md | intent 4.44 |
 | FND.0520 | low | conformance | resolved | 2026-10-02-check-history.md | recipe release-notes 0.12 |
 | FND.0530 | low | conformance | resolved | 2026-10-02-check-history.md | recipe executive-pitch 0.7 |
+| FND.0540 | high | conformance | resolved | 2026-10-02-check-single-source-of-truth.md | intent 4.48 (the definition owns what a brief carries; CLAUDE.md, `/spinoff`, POS.0060) |
+| FND.0550 | medium | conformance | resolved | 2026-10-02-check-single-source-of-truth.md | intent 4.48 (`/spinoff` cites the Course of the state files) |
+| FND.0560 | medium | conformance | resolved | 2026-10-02-check-single-source-of-truth.md | intent 4.48 (the walkthrough skill owns the shared verdicts) |
+| FND.0570 | medium | conformance | resolved | 2026-10-02-check-single-source-of-truth.md | intent 4.48 (CLAUDE.md, Document chain 7; who may start `/publish` kept) |
+| FND.0580 | medium | conformance | resolved | 2026-10-02-check-single-source-of-truth.md | intent 4.48 (`states/assignment.md`) |
+| FND.0590 | low | conformance | resolved | 2026-10-02-check-single-source-of-truth.md | intent 4.48 (`templates/intent.md`) |
+| FND.0600 | low | conformance | resolved | 2026-10-02-check-single-source-of-truth.md | intent 4.48 (the skill `ingest`) |
+| FND.0610 | low | conformance | parked | 2026-10-02-check-single-source-of-truth.md | until the rules of particular artefacts leave CLAUDE.md (POS.1380, THR.0240) |
+| FND.0620 | low | conformance | parked | 2026-10-02-check-single-source-of-truth.md | with FND.0610 |
+| FND.0630 | low | conformance | parked | 2026-10-02-check-single-source-of-truth.md | with FND.0610 |
+| FND.0640 | low | conformance | resolved | 2026-10-02-check-single-source-of-truth.md | intent 4.48 (the skills `ingest` and `research`) |
+| FND.0650 | low | conformance | parked | 2026-10-02-check-single-source-of-truth.md | needs a pass over the recipe genres and their skeletons |
+| FND.0660 | low | conformance | resolved | 2026-10-02-check-single-source-of-truth.md | intent 4.48 (`templates/index-bundle.md`) |
+| FND.0670 | low | conformance | resolved | 2026-10-02-check-single-source-of-truth.md | intent 4.48 (CLAUDE.md, `states/intent.md`) |
+| FND.0680 | low | conformance | resolved | 2026-10-02-check-single-source-of-truth.md | intent 4.48 (the critic contract; CLAUDE.md, Requirement style) |
+| FND.0690 | low | conformance | resolved | 2026-10-02-check-single-source-of-truth.md | intent 4.48 (three agent files) |
+| FND.0700 | low | conformance | parked | 2026-10-02-check-single-source-of-truth.md | with FND.0610 |
+| FND.0710 | low | conformance | rejected | 2026-10-02-check-single-source-of-truth.md | DEC.0170 |
+| FND.0720 | low | conformance | parked | 2026-10-02-check-single-source-of-truth.md | with FND.0610 |
+| FND.0730 | low | conformance | resolved | 2026-10-02-check-light.md | intent 4.48 (POS.0310, `templates/history.md`) |
 
 Four review files are named outside the convention — accepted as they
 are by DEC.0140.
@@ -239,6 +259,10 @@ copy — CLAUDE.md, Ledger. -->
   a script kept for later, research of 2026-10-02; opened 2026-10-02.
 - THR.0510 — live reference material by nightly export; the
   principal's thought, nothing decided; opened 2026-10-02.
+- FND.0610, FND.0620, FND.0630, FND.0650, FND.0700, FND.0720 —
+  parked findings of the `single-source-of-truth` check; taken with
+  the move of the rules of particular artefacts out of CLAUDE.md
+  (POS.1380, THR.0240).
 - THR.0420 — derivations of the forge for other jobs (online product
   managers = the product framework, test analysts with their test
   cases and strategies, project management); opened 2026-09-26,

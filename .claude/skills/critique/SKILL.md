@@ -39,11 +39,7 @@ When it returns:
    rest on.
 3. End by offering a **walkthrough** of the open findings
    (`.claude/skills/walkthrough/SKILL.md`, the one owner of its
-   shape and of the verdict words). What each verdict writes here:
-   **accept** — an iteration of the artefact concerned, through
-   `/forge`, state `resolved`; **reject** — a DEC with the
-   principal's reason, in the shape of `templates/decisions.md`,
-   state `rejected`; **park** — state `parked`; **obsolete** — state
-   `obsolete`, with what made it moot. Finding states in the ledger
-   change only, never delete. If he declines the walkthrough, the
-   findings wait.
+   shape and of the verdict words). What `accept` writes here: an
+   iteration of the artefact concerned, through `/forge`, state
+   `resolved`. The other verdicts are the walkthrough's. If he
+   declines the walkthrough, the findings wait.

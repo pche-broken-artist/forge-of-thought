@@ -35,11 +35,9 @@ What you verify:
      release notes are renders regenerated at the release after this
      check; a claim in the README that CLAUDE.md or the intent no
      longer supports is a recipe defect, fixed in the recipe.
-   - `templates/` agree with the conventions (front-matter fields
-     including `last_change`, the history companion
-     `templates/history.md`, prefixes, numbering, statuses; no
-     template carries a Version History table in its body; the recipe
-     templates carry no status).
+   - `templates/` agree with the conventions as CLAUDE.md,
+     Versioning & status and ID scheme, state them: front-matter
+     fields, the history companion, prefixes, numbering, statuses.
 2. **Core ↔ forge intent**
    - Every POS is honoured by the core documents; nothing withdrawn or
      rejected (REJ items, closed THR items) is still advertised

@@ -47,8 +47,9 @@ else. Never silently re-register.
 2. **Date, best effort, never a question.** Record the document's origin
    date in the ledger if it can be determined for free: from the content
    (meeting date in a transcript header, offer date), else from file
-   metadata, else the ingest date. Note the origin as
-   `content | file | ingested`. Do not ask the principal for dates.
+   metadata, else the ingest date. Note the origin in the words
+   `templates/ledger.md` gives the Sources table. Do not ask the
+   principal for dates.
 3. **One form per source (POS.1040).** For every binary file (PDF,
    DOCX, PPTX, XLSX, …) — isolated or inside a bundle — ask one
    question, per file: convert to Markdown?
@@ -65,13 +66,12 @@ else. Never silently re-register.
    principal's explicit word. The script is the only conversion path
    (CLAUDE.md, Document chain 5). Extracts made before this rule keep their
    `.extract.md` names; a binary already in git beside its extract
-   leaves the index only on the principal's word, never in a sweep.
-4. **Index entry.** Add the source to `sources/00-INDEX.md` (skeleton
-   `templates/index.md`; create the index from it if missing):
-   **What** (one or two sentences, read enough of the file to say it
-   truthfully), **Origin** (author, URL, meeting — best effort),
-   **Role** and **Use for**. Role is free text (the examples are the
-   skeleton's) and it is the principal's word: after registration
+   is taken out of git only by the principal's own act there, by
+   hand: no script of the forge does it, and never a sweep.
+4. **Index entry.** Add the source to `sources/00-INDEX.md` as an
+   entry in the shape of `templates/index.md` (create the index from
+   it if missing), having read enough of the file to say truthfully
+   what it is. Role is the principal's word: after registration
    Claude always asks "what is it for?"; the principal answers with
    the role, or tells Claude to infer it — then Claude writes what the
    file itself declares, marked *(inferred)*. Never inferred unasked;
@@ -80,17 +80,16 @@ else. Never silently re-register.
    points a project at a document that lives in a library
    (`projects/lib-<name>/…`), nothing is stored in `sources/`: add an
    index entry that names the path and says what it is for, and a
-   row in the ledger's Dependencies table (path, library, used by,
-   note — POS.1020). Moving a document out of a project into a
+   row in the ledger's Dependencies table as `templates/ledger.md`
+   has it (POS.1020). Moving a document out of a project into a
    library is the reverse: ingest it there, replace the project's
    entry with the citation, register the dependency.
 6. **Nothing is processed.** `/ingest` never carries content into the
    intent or any other document; the rule — registration is not
    intake, the principal directs every use, provenance cites the
    file — is CLAUDE.md, Document chain 5.
-7. **Bookkeeping and summary.** Update the Sources table in `ledger.md`
-   — registration only: file, date, date origin, form (`text` |
-   `extract of <original>` | `binary`);
+7. **Bookkeeping and summary.** Update the Sources table in
+   `ledger.md`, a row as `templates/ledger.md` has the table;
    what the source is and is for lives in the index alone. In sweep
    mode, also fill index gaps for files already registered. The
    reply after registration is three lines at most: the file stored

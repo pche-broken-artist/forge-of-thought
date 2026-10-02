@@ -80,8 +80,14 @@ Verdicts are carried in the conversation and written once at the
 round's end (CLAUDE.md, prime directive 9). On `write` Claude
 reflects the whole round back and, on the principal's yes, writes
 everything carried as one round. `write` is added to the verdict
-line when the round looks finished. What each verdict writes is the
+line when the round looks finished. What `accept` writes is the
 producing command's (`/critique`, `/challenge`, `/check`; for a
-source's proposals: a position with provenance for `accept`, a REJ
-for `reject`). Until the write, everything agreed is nowhere yet and
+source's proposals a position with provenance). The other verdicts
+write the same wherever the list came from: `reject` a DEC with the
+principal's reason, in the shape of `templates/decisions.md`, state
+`rejected`, and the reviewer does not raise it again; `park` the
+state `parked`; `obsolete` the state `obsolete`, with what made it
+moot. States in the ledger change only, never delete. A source's
+proposal that is rejected becomes a REJ in the intent. Until the
+write, everything agreed is nowhere yet and
 is said so (CLAUDE.md, prime directive 9).

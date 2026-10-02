@@ -60,8 +60,8 @@ file in `reviews/`.
   your Lens section.
 - **Calibration.** The assignment deliberately stays high-level and its
   recipients are assumed competent and senior. Completeness is the
-  test, not brevity: length is never a defect; excess of the wrong kind
-  (solving instead of assigning) is. The principal sets direction, so
+  test, not brevity (CLAUDE.md, prime directive 8). The principal
+  sets direction, so
   never report as defects: missing stakeholder lists, RACI, impact
   analysis, MECE decomposition, table of contents, absent priorities
   (CLAUDE.md, Requirement style) or a missing section that may be a

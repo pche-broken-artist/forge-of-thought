@@ -36,5 +36,8 @@ the project. -->
 - **REJ.0010** …
 
 ## Candidate structure for assignment
-<!-- Optional staging area before distillation. Delete once the assignment
-exists and leads. -->
+<!-- Optional staging area before distillation: here the intent
+carries the recipients, the objective and the success criteria as soon
+as the principal sees them, as positions with IDs like everything
+else, so that the assignment distils them instead of finding them
+first. Delete once the assignment exists and leads. -->

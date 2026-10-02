@@ -15,9 +15,8 @@ history and its archive, or the one document your task names.
 
 What you verify: the division between a document and its history, by
 CLAUDE.md, Versioning & status and Document chain 2. In the document,
-the way to an item (why it changed, what was said, trials,
-measurements, which research turned it) is a finding; so is detail
-an item carries where the file that performs it exists. The other
+the way to an item, as Versioning & status lists it, is a finding;
+so is detail an item carries where the file that performs it exists. The other
 way, an item that can no longer be understood because what makes it
 hold stands only in the history is a finding. Each finding proposes
 the move in full: the text that leaves, word for word, and the record

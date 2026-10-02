@@ -59,8 +59,8 @@ never here.
    language is per-instance configuration that never appears in
    outward-facing renders (the README among them). Translate on
    write. The one exception among the artefacts is the briefs
-   (`00-brief*.md`), stored verbatim in whatever language they were
-   written. A render may be in any language its recipe declares.
+   (`00-brief*.md`), kept in whatever language they are written in.
+   A render may be in any language its recipe declares.
 7. **Structure over prose.** Items with stable IDs, even at very high
    abstraction. Narrative only in Purpose & Context and Objective.
 8. **Assignments are complete and precise.** An assignment carries the
@@ -160,7 +160,7 @@ whether it is versioned and how it behaves:
 
 | Group | Kind | Meaning | Written by | Versioned | Behaviour |
 |---|---|---|---|---|---|
-| artefacts | brief | the idea as it emerged: the principal's words alone when handed over finished, the whole pile of the elicitation when born in the forge | principal, with Claude's part marked | yes | locked at 1.0, then immutable |
+| artefacts | brief | the idea put together: what the principal wants and why, with what he chose from the finding | principal; Claude may work on the text | yes | locked at 1.0, then immutable |
 | artefacts | intent | current understanding for principal and Claude: positions, facts, threads, rejections | Claude, principal composes | yes | rewritten freely |
 | artefacts | assignment | the direction handed to the recipients, self-contained | Claude, principal composes | yes | rewritten freely |
 | artefacts | later artefacts (BRD, RFP, article…) | further layers, each derived from the one above | Claude, principal composes | yes | rewritten freely |
@@ -190,9 +190,8 @@ Gaps of ten leave room for later layers (e.g. `30-brd.md`,
 `40-solution-design.md`) without renumbering.
 
 ```
-00-brief.md      idea as the principal wrote it — draft until locked,
-                 then verbatim and never edited; later wholes as
-                 00-brief-<name>.md
+00-brief.md      the idea put together — draft until locked, then
+                 never edited; later wholes as 00-brief-<name>.md
 10-intent.md     our working understanding — rewritten freely, versioned
 20-assignment.md the direction handed to the recipients — versioned
 <file>.history.md  history of each versioned document —
@@ -201,30 +200,24 @@ decisions.md     append-only DEC records
 ledger.md        single source of truth for state
 ```
 
-1. **`00-brief.md`** — written by the principal: an intent that is
-   composed and then locked. Free-form: any structure the principal
-   finds useful — prose, headings, tables, use cases — with no
-   required content and no IDs; thoughts to be processed, not
-   decisions, so they may be changed, reworked or dropped when mined.
-   Only a minimal YAML header (skeleton `templates/brief.md`). `draft` while
+1. **`00-brief.md`** — the idea put together: what the principal
+   wants and why, his by his approval. Free-form, with no required
+   content and no IDs; thoughts to be processed, not decisions, so
+   they may be changed, reworked or dropped when mined. Only a
+   minimal YAML header (skeleton `templates/brief.md`). `draft` while
    being composed, `approved` (1.0) once the principal locks it —
-   immutable from the lock, not from creation. Three origins are
-   equally legitimate and indistinguishable to the forge: it arrives
-   finished and is locked on arrival; it is begun outside and finished
-   with Claude; it is born in the forge (`/forge brief [name]` for the
-   latter two). Born by elicitation, the brief carries everything
-   the conversation, the research and the sources yielded — the
-   principal's words unmarked, every other block opening with its
-   origin in italics, *(Claude)* or *(source: <path>)*. More in the
-   brief and cleaning in the intent, never a clean brief: the intent
-   is where the pile is sorted. A project
+   immutable from the lock, not from creation. It may arrive
+   finished, be begun outside or be born in the forge; what it
+   carries and how it is found is its definition's
+   (`.claude/skills/forge/states/brief.md`, through
+   `/forge brief [name]`). A project
    may have more than one: every later whole of thinking that would
    otherwise land in the intent as a batch of unproven positions is
    born as `00-brief-<name>.md` under the same rules. A locked brief
    is mined into the single intent — positions cite it as provenance;
    a whole that dies on the way leaves the brief locked and one REJ
    with the reason. The ledger's Briefs table tracks each brief's
-   mining state (`pending | partial | mined | dropped`) with a
+   mining state, as `templates/ledger.md` has it, with a
    free-text note. Each locked brief is the provenance anchor and
    drift measure of its whole.
 2. **`10-intent.md`** — the working document, audience: principal +
@@ -299,11 +292,10 @@ ledger.md        single source of truth for state
    what is iterated is its **recipe** (`recipes/<recipe>.md` — inputs,
    audience, instructions and the output template in one versioned
    file; more than one input is legitimate), and `/render <recipe>`
-   regenerates the output into `renders/<recipe>.md` — or the
-   recipe's optional `output:` path — overwriting freely, history in
-   git. Generation runs in an isolated subagent that sees only the
-   recipe and its inputs, never the working conversation. Every render opens with YAML front-matter provenance citing
-   the recipe and each input with their versions. Recipes are tools,
+   regenerates the output from it; where the output lands, the
+   isolation of the generation and the provenance every render opens
+   with are the command's (`.claude/skills/render/SKILL.md`). Recipes
+   are tools,
    not records of thinking: they carry a version and an updated date
    in front-matter and no status, since a recipe is never approved;
    being versioned, a recipe keeps its history in its
@@ -318,10 +310,10 @@ ledger.md        single source of truth for state
    format, the plain file beside it through pandoc
    (`renders/<recipe>.docx` or `.pptx`): deterministic, cheap,
    repeated freely. `/publish` makes the designed file through a
-   model and its document skills, into `published/<recipe>.<ext>`:
+   model and its document skills:
    expensive, only on the principal's command, never by `/render`,
-   by `/release` or on Claude's own judgement. It makes a file and
-   sends nothing anywhere. How each step runs — what it reads, what
+   by `/release` or on Claude's own judgement. How each step runs —
+   where its file lands, what it reads, what
    it says before it converts, what it does to the other step's
    file — is its own definition's (`.claude/skills/render/SKILL.md`,
    `.claude/skills/publish/SKILL.md`). The format and what each
@@ -571,8 +563,7 @@ lifecycle. Depth max two levels.
   correct UK English sentences.
 - Testability is **recommended, not required**: assignments are
   deliberately high-level, and delegating concretisation via a `DEL` item
-  is a legitimate outcome. The critic reports untestable wording as a
-  recommendation, never as a blocking defect.
+  is a legitimate outcome.
 - Defined terms are capitalised in item text to signal they appear in
   the Terms section.
 - An item must not depend on an external link to be understood, agreed or
@@ -665,7 +656,7 @@ checks then say nothing of a missing assignment.
 | Command | Purpose |
 |---|---|
 | `/setup` | first run after cloning the engine: create and fill `CLAUDE.local.md` by interview, create `.claude/settings.local.json` with the model set to Fable (a notice, not a question), and offer the git identity per host (`includeIf` stanzas) with the global guard (`user.useConfigOnly = true`) in `~/.gitconfig`; never overwrites, runs no git operation |
-| `/new-project <slug>` | scaffold a project by kind — files only, never git: a thought project with its brief captured verbatim (locked if finished, draft otherwise), or a library (`lib-`) of shared material |
+| `/new-project <slug>` | scaffold a project by kind — files only, never git: a thought project, its founding brief handed to `/forge brief`, or a library (`lib-`) of shared material |
 | `/import-project <git-url>` | bring an existing project into `projects/` through `scripts/forge-clone.ps1` — the directory is the repository's name; the commit identity is git's, the script reports the one it resolves |
 | `/forge [slug]` | state map: artefacts, versions, possible next steps, stale renders and published files |
 | `/forge <state> [slug]` | iterate the target artefact (`brief [name]`, `intent`, `assignment`, …); one definition file per state in `.claude/skills/forge/states/`, each declaring its inputs |

@@ -19,11 +19,10 @@ one — never one combined document.
    immutable): question, key findings with sources, options with
    trade-offs, and a short "relevance to this project" section with a
    concrete recommendation.
-3. Index and register. Add an entry to `research/00-INDEX.md`
-   (skeleton `templates/index.md`; create the index if missing):
-   **Question**, **Answer in short** (two or three lines), **Consult
-   when**. Add a registration row to the Research table in `ledger.md`
-   (file, date, derived from).
+3. Index and register. Add an entry to `research/00-INDEX.md` in the
+   shape of `templates/index.md` (create the index if missing), and
+   a registration row to the Research table in `ledger.md` as
+   `templates/ledger.md` has it.
 4. Summarise for the principal,
    leading with the recommendation
    and the trade-offs, not a literature review.

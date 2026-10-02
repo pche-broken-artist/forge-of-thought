@@ -54,15 +54,11 @@ When it returns:
    state `resolved`.
 4. End by offering a **walkthrough** of the remaining findings
    (`.claude/skills/walkthrough/SKILL.md`, the one owner of its
-   shape and of the verdict words). What each verdict writes here:
-   **accept** — the fix, agreed here and written once at the round's
-   end, state `resolved`; **reject** — a DEC with the principal's
-   reason, in the shape of `templates/decisions.md`, state
-   `rejected`; a rule worth changing goes to the intent; **park** —
-   state `parked`; **obsolete** — state `obsolete`, with what made it
-   moot. Finding states in the ledger change only, never delete.
-   Nothing blocks (POS.0430): a release may proceed with a finding
-   parked.
+   shape and of the verdict words). What `accept` writes here: the
+   fix, agreed here and written once at the round's end, state
+   `resolved`; a rule worth changing goes to the intent. The other
+   verdicts are the walkthrough's. Nothing blocks (POS.0430): a
+   release may proceed with a finding parked.
 
 Do not judge substance or document quality — that is `/critique` and
 `/challenge` territory. A check verifies conformance only.
