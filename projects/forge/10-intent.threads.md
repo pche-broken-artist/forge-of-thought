@@ -599,6 +599,14 @@ document: 10-intent.md
   2026-09-20: a render of the README reads the whole intent and ran
   close to eight minutes. Opened 2026-09-20 from a line of the ledger
   that had stood without an ID since 4.10.
+  Release of 2026-10-02 (intent 4.49), as the harness reported each
+  isolated run: `light` four times, 131 to 160 seconds; `project` 315
+  seconds; `engine` 405 seconds; the release notes 241 seconds; the
+  README three times, 342 and 326 seconds on the session model with
+  two and four inputs, 191 seconds on Opus 5.5 with seven inputs, run
+  on that model once on the principal's word against the rule of
+  `/render`. The recipe changed between the runs, so the comparison
+  is not clean.
 - **THR.0420** Derivations of the forge for other jobs. The forge as
   it stands serves the forging of a thought into an assignment; the
   principal wants versions of it that serve other work, and said on
@@ -771,9 +779,9 @@ document: 10-intent.md
   `.claude/skills/forge/states/brief.md`, was brought current with
   it at 4.47, when the definitions moved into their state files
   (POS.1380).
-  What is left of the migration: the release of the engine, by which
-  the other instances and the other projects take it, and the open
-  question below.
+  The engine was released on 2026-10-02 at 4.49, by which the other
+  instances and the other projects take the migration; what is left
+  is the open question below.
   Until a step is done, what it changes stands as it stood on
   2026-09-28: the threads in the intent, the companions as tables
   with their Notes, the release notes compiled from them.

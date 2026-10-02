@@ -148,10 +148,10 @@ as `rejected`. -->
 | FND.0370 | low | ambiguity | resolved | 2026-09-06-critique-clarity-2.md | intent 3.45 (one sentence in POS.1140) (verified 2026-09-06, clarity-3) |
 | FND.0380 | low | contradiction | resolved | 2026-09-06-critique-clarity-2.md | intent 3.45 (POS.1130) (verified 2026-09-06, clarity-3) |
 | FND.0390 | low | duplication | resolved | 2026-09-06-critique-clarity-2.md | intent 3.45 (POS.1120 owns, POS.0400 and POS.0420 cite) (verified 2026-09-06, clarity-3) |
-| FND.0400 | medium | ambiguity | resolved | 2026-09-06-critique-clarity-3.md | intent 3.48 (POS.0120 clause on one date and no measurements; seven positions aligned) |
-| FND.0410 | medium | contradiction | resolved | 2026-09-06-critique-clarity-3.md | intent 3.48 |
-| FND.0420 | low | ambiguity | resolved | 2026-09-06-critique-clarity-3.md | intent 3.48 (POS.0570 cites POS.1140) |
-| FND.0430 | low | contradiction | resolved | 2026-09-06-critique-clarity-3.md | intent 3.48 (THR.0240 dated) |
+| FND.0400 | medium | ambiguity | resolved | 2026-09-06-critique-clarity-3.md | intent 3.48 (POS.0120 clause on one date and no measurements; seven positions aligned) (verified 2026-10-02, clarity) |
+| FND.0410 | medium | contradiction | resolved | 2026-09-06-critique-clarity-3.md | intent 3.48 (verified 2026-10-02, clarity) |
+| FND.0420 | low | ambiguity | resolved | 2026-09-06-critique-clarity-3.md | intent 3.48 (POS.0570 cites POS.1140) (verified 2026-10-02, clarity; the restating half-sentence stays as a residue) |
+| FND.0430 | low | contradiction | resolved | 2026-09-06-critique-clarity-3.md | intent 3.48 (THR.0240 dated) (verified 2026-10-02, clarity) |
 | FND.0440 | medium | conformance | resolved | 2026-10-02-check-history.md | intent 4.44 |
 | FND.0450 | medium | conformance | rejected | 2026-10-02-check-history.md | DEC.0150 |
 | FND.0460 | medium | conformance | resolved | 2026-10-02-check-history.md | intent 4.44 |
@@ -191,6 +191,12 @@ as `rejected`. -->
 | FND.0800 | low | conformance | resolved | 2026-10-02-check-engine.md | intent 4.49 (CLAUDE.md, Versioning & status) |
 | FND.0810 | low | conformance | resolved | 2026-10-02-check-engine.md | intent 4.49 (POS.0850) |
 | FND.0820 | low | conformance | resolved | 2026-10-02-check-engine.md | intent 4.49 (`templates/recipe-readme.md`, `templates/recipe-release-notes.md`) |
+| FND.0830 | medium | contradiction | open | 2026-10-02-critique-clarity.md | — |
+| FND.0840 | medium | contradiction | open | 2026-10-02-critique-clarity.md | — |
+| FND.0850 | medium | contradiction | open | 2026-10-02-critique-clarity.md | — |
+| FND.0860 | low | ambiguity | open | 2026-10-02-critique-clarity.md | — |
+| FND.0870 | low | duplication | open | 2026-10-02-critique-clarity.md | — |
+| FND.0880 | low | gap | open | 2026-10-02-critique-clarity.md | — |
 
 Four review files are named outside the convention — accepted as they
 are by DEC.0140.
@@ -225,9 +231,8 @@ intent version for accepted, DEC.NNNN for rejected. -->
 copy — CLAUDE.md, Ledger. -->
 - THR.0460 — `/recipe` and `/forge`, one dispatcher or two; small,
   open.
-- THR.0470 — the intent too long to be read; the migration done,
-  left: the release of the engine; whether large files are split
-  open.
+- THR.0470 — the intent too long to be read; the migration done and
+  released at 4.49; whether large files are split open.
 - THR.0400 — a gate in front of the tools; the soft half done, the
   hard half open, nothing scheduled.
 - THR.0350 — walked through (intent 4.9); left: the hook watched in
@@ -240,8 +245,8 @@ copy — CLAUDE.md, Ledger. -->
 - THR.0240 — the size of CLAUDE.md; first instance of the answer at
   4.9 (POS.1170), the rules of particular artefacts moved out at
   4.49, the rest open.
-- THR.0410 — the duration of `/save` and `/release`; the watch
-  continues at the next releases.
+- THR.0410 — the duration of `/save` and `/release`; the figures of
+  the release of 2026-10-02 saved in the thread, the watch continues.
 - DEC.0120 — the force-push of 2026-09-04, recorded; a GitHub cache
   purge only on the principal's request.
 - THR.0290 — what `/research` gains from kinds; deferred until a
@@ -287,3 +292,14 @@ copy — CLAUDE.md, Ledger. -->
   `engine-split` (THR.0230).
 - THR.0200 — the public face, narrowed to the README exemplar.
 - THR.0170 — branch documents; deferred.
+- How `shall` and the banned English words stand in an assignment
+  written in another language; raised 2026-10-02, nothing decided.
+- `check-project` names "assignment style" in its description and
+  verifies no such part; noticed 2026-10-02.
+- FND.0830 — POS.0120 against POS.1380 on the definitions being
+  tried; open.
+- `essence` is not run on this project, the principal's word of
+  2026-10-02; the release skill still offers it at every release.
+- Three weakly founded places in the README of 2026-10-02 (the next
+  step of `/forge`, when two scripts are run, the fifth verdict); the
+  readme recipe, at its next iteration.
