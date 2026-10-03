@@ -28,7 +28,9 @@ one: a proof of concept, the first version, a later one, or good
 but far away. Everything coherent, nothing twice, every position with its
 provenance, and the whole passed through a final reality check
 before a lower layer is derived. It is complete for now when no
-thread blocks the next layer; it is never finished.
+thread blocks the next layer; it is never finished. It does not
+solve: what it says would hold however the thing were realised, and
+how it is realised is the solution design's (POS.1390).
 
 **Partner.** Claude helps the principal reach the Aim: mines the
 briefs with him whole by whole, probes contradictions, gaps and

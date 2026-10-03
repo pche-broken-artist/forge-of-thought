@@ -1,8 +1,8 @@
 ---
-version: 4.51
+version: 4.52
 date: 2026-10-03
 status: draft
-last_change: 4.51 (2026-10-03): THR.0520 opened, priority - the intent carries the solution and a layer for the solution is missing; the principal's stance on the chain saved, nothing decided; the positional arguments of nine skills counted from zero, as Claude Code counts them (operating layer).
+last_change: 4.52 (2026-10-03): THR.0520 walked through, ten matters - an intent says what is wanted and why and does not solve (POS.1390); the solution design an artefact of the chain, derived from the intent, the assignment or the BRD, the ledger's `terminal:` withdrawn (POS.1400, POS.0160); how an artefact is composed is the principal's choice, found together or handed over (POS.1410); what a solution design is made of, the prefix SOL (POS.1420); a change runs the whole chain and may come from below (POS.0900); the lighter brief (POS.0110); the definitions of the intent and the brief brought to it; the plan of six steps in the thread.
 project: forge
 audience: principal + Claude only
 ---
@@ -161,8 +161,12 @@ position that already stands elsewhere.
   write is a confirmation and not a surprise; the companion of
   write-once-per-round (POS.0190).
 - **POS.0900 Intent-first.** A change of substance goes into the
-  intent and propagates from there; only wording is fixed downstream
-  directly (POS.0140).
+  intent and propagates from there down the whole chain the project
+  has: the assignment, the BRD, the solution design are each brought
+  to it. Only wording is fixed downstream directly. The change may
+  come from below: when solving shows that what is wanted cannot be
+  had, or must be wanted differently, the intent changes first and
+  the layers follow (POS.0140).
 - **POS.0910 Recommend, do not push.** Every option Claude lays out
   comes with its recommendation and reason, stated once; a declined
   recommendation is not re-argued unless new facts appear.
@@ -370,6 +374,29 @@ position that already stands elsewhere.
   (POS.1140). Locked artefacts are untouched by the change. Present
   shape 2026-10-03, from `00-brief-elicitation.md` and the
   principal's word.
+- **POS.1410** How an artefact is composed is the principal's
+  choice, made artefact by artefact: he finds it with Claude by
+  elicitation, or he hands it over with a few sentences of what he
+  wants, and Claude composes the whole and returns it for his
+  judgement. Authorship is his either way: the author is the one who
+  sends a thing into the world and answers for it, and Claude is a
+  tool. Found together, the rule holds as it stands: where Claude is
+  unsure he asks and fills no gap by assumption. Handed over, Claude
+  works the definition alone: its Map says what must be found, he
+  finds it from what he was given, from research and from the
+  sources, and he says what he assumed and what he chose, with what
+  it was chosen against, so that the principal judges decisions and
+  not prose: in what he returns as a short list of what the principal
+  might have decided otherwise, and in the artefact in plain words at
+  the place each stands (POS.1370), until the principal has judged
+  it. Work handed over keeps the bounds he sets and comes back as a
+  proposal: nothing is derived from it and nothing is done on it
+  before he has judged it. What a test can tell of work handed over
+  is told by a test and not by his reading; his judgement is for what
+  no test can tell. Every definition is written so that it can be
+  worked either way. Reason: his attention is the scarce thing, and
+  whether a matter deserves it is his to say, not the forge's.
+  Decided 2026-10-03.
 
 ### Document chain
 - **POS.0100** Files in the chain are numbered in tens (`00-brief.md`,
@@ -388,7 +415,13 @@ position that already stands elsewhere.
   forbidden; a summary the principal orders into a brief is stored as
   shown, never re-narrated. A brief is rough on purpose, neither perfect
   nor detailed: the chiselling is the intent's, and a brief polished
-  until the intent has nothing left to do has gone too far. It is not
+  until the intent has nothing left to do has gone too far. Its usual
+  shape is light: the topics of the whole, each with a few sentences
+  of what the principal wants of it, the research that verifies or
+  limits it cited beside it, and what is still open. It is composed
+  in a round or two and then mined. It is where thoughts are thrown
+  in before they are sifted: not all of them survive, and the sifting
+  is the intent's. It is not
   the record of the finding. The finding is wide (research, sources, the
   principal's ideas and Claude's) and gathers as many ideas as it can;
   what goes into the brief and what stays out is the principal's
@@ -510,9 +543,7 @@ position that already stands elsewhere.
   unfinished conversation is saved into its thread of the intent, a
   write of whatever is agreed so far, never into the ledger. The
   `project` check verifies this (`.claude/agents/check-project.md`).
-  The ledger header may declare `terminal:`, the artefact the
-  project's chain ends at, assignment when absent; `/forge` and the
-  checks then say nothing of a missing assignment. Added 2026-09-14
+  Added 2026-09-14
   (`sources/forge-run-record-health.md`, P.15, P.09, G.10).
 - **POS.0170** Feedback from recipients has no channel of its own. The
   principal processes it and feeds conclusions back through
@@ -718,6 +749,56 @@ position that already stands elsewhere.
   unguarded pin, and a check is added when it hurts. The library is not
   a condition of publication: the intention is decided, the
   implementation comes with the first library.
+- **POS.1390** An intent says what the principal wants and why, and
+  it does not solve. What he wants, what he does not want, what is
+  the case, what is open and what he dropped belong to it; how the
+  things he wants are realised belongs to the solution design. The
+  test of a sentence: would it still hold if the thing were realised
+  in a wholly different way? If it would, it is intent; if not, it is
+  solution. A principle the principal sets for the solution, what the
+  realisation must respect whatever its shape, is intent; the
+  mechanism that honours it is solution. What the principal wants the
+  user to be able to do, and what must be true when it is done, is
+  intent, a command he asks for by name among it. How the command
+  does it, what it is built of, its steps and their order and the
+  checks it runs, is solution. The division is by kind of content,
+  never by who said it: an idea of the principal's about how to build
+  something is solution too. Reason: an intent that carries the
+  solution cannot be read as what is wanted, and nobody can be asked
+  for a proposal of the whole solution over it. Decided 2026-10-03.
+- **POS.1400** The solution design is an artefact of the chain,
+  `40-solution-design.md`: how the things wanted are realised. It is
+  derived from the lowest layer the project has above it, the intent
+  alone, the assignment or the BRD, and whatever stands above it is
+  its input. No layer below the intent is a condition of another: a
+  project takes the layers it needs, and many end at the intent,
+  where what is wanted needs no solution written down. It is worth
+  writing where the way is not obvious, where a choice has a price,
+  or where two hands would solve the same matter differently if it
+  were not written down; whether it is, the principal says. A layer a
+  project does not have is not missing: `/forge` and the checks say
+  nothing of it, and the ledger declares no end of the chain. Each
+  artefact names its inputs in its definition; the number in a file
+  name orders the files and prescribes no sequence. What others do
+  with an assignment handed to them is their own run of the forge
+  (POS.0700). Decided 2026-10-03.
+- **POS.1420** The solution design describes the solution as it
+  stands and is kept current, as the intent is: its body is the
+  present state and its history stands beside it. It is made of
+  items, under a short prose head on how the parts work together. One
+  prefix is its own: SOL, a part of the solution or a matter that
+  holds across parts: what it is and what it answers for, which
+  positions it realises, cited by their IDs and never restated, and
+  where it is realised. Where a part rests on a real choice, the item
+  says the choice, what it was chosen against and what it costs;
+  where there was no real alternative, it says so and invents none.
+  What is open is a TBC with its owner and with what would close it.
+  Where a part is realised in a file of its own, the item names the
+  file and the detail is the file's; where it is only part of a file,
+  or no file exists yet, the item carries the detail. The document
+  holds what cannot be read off the thing itself: why, against what,
+  at what price, and how the parts fit. A check keeps it true against
+  what realises it. Decided 2026-10-03.
 
 ### Structure and style of an assignment
 - **POS.0200** Structured items with stable IDs beat prose, even at very

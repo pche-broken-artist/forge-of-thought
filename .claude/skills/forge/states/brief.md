@@ -33,7 +33,13 @@ decision, made on what was found. What stays out lives in
 `research/` and `sources/` where it is a finding or a source, and
 otherwise nowhere. The brief is rough on purpose, neither perfect
 nor detailed: the chiselling is the intent's, and a brief polished
-until the intent has nothing left to do has gone too far. Nothing
+until the intent has nothing left to do has gone too far. Its usual
+shape is light: the topics of the whole, each with a few sentences
+of what the principal wants of it, the research that verifies or
+limits it cited beside it, and what is still open. It is composed in
+a round or two and then mined. It is where thoughts are thrown in
+before they are sifted: not all of them survive, and the sifting is
+the intent's. Nothing
 in it is yet a position: its thoughts are to be processed, not
 decisions, and may be changed, reworked or dropped when mined. The
 brief is complete when the principal

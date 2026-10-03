@@ -32,7 +32,7 @@ absorbed it; Note says what remains (partial) or the REJ (dropped). -->
 ## Documents
 | File | Version | Status | Date |
 |---|---|---|---|
-| 10-intent.md | 4.51 | draft | 2026-10-03 |
+| 10-intent.md | 4.52 | draft | 2026-10-03 |
 | 20-assignment.md | — | not planned: the handover artefacts of this project are the core itself (CLAUDE.md, templates/, .claude/) and README.md | — |
 | decisions.md | — | 18 records (DEC.0010–0180) | 2026-10-02 |
 
@@ -109,6 +109,7 @@ research/00-INDEX.md, never here. -->
 | 2026-10-03-several-authors-on-one-body-of-requirements.md | 2026-10-03 | 00-brief-next-gen.md v0.1 (Several people on one project) |
 | 2026-10-03-anthropic-guidance-for-claude-code-and-where-the-forge-departs.md | 2026-10-03 | 00-brief-next-gen.md v0.1 (A technical clean-up); research/2026-10-03-operating-layer-architecture-and-debt.md; the engine's operating layer; the researches of 2026-08-29 and 2026-10-02 on Claude Code |
 | 2026-10-03-concurrent-work-on-structured-text-in-git.md | 2026-10-03 | 00-brief-next-gen.md v0.1 (Several people on one project); research/2026-10-03-what-a-write-touches-and-where-two-authors-collide.md |
+| 2026-10-03-how-a-solution-design-is-built.md | 2026-10-03 | 10-intent.threads.md (THR.0520) and the working conversation over it; the three definitions of `.claude/skills/forge/states/`; research/2026-09-28-artefact-layers-from-idea-to-handover.md |
 | 2026-10-03-how-project-documentation-is-built.md | 2026-10-03 | 00-brief-next-gen.md v0.1 (Documentation and news); 10-intent.threads.md (THR.0340); README.md and recipes/readme.md v0.54 |
 | 2026-10-03-one-tool-a-core-with-modules-or-several-tools.md | 2026-10-03 | 00-brief-next-gen.md v0.1 (The shape of the whole); 10-intent.threads.md (THR.0230, THR.0420, THR.0300, THR.0140); the researches of 2026-08-25 and 2026-08-29 on the field |
 | 2026-10-03-operating-claude-code-for-many-users-in-a-company.md | 2026-10-03 | 00-brief-next-gen.md v0.1 (Operation in a company); 10-intent.threads.md (THR.0210, THR.0400) |
@@ -216,6 +217,7 @@ as `rejected`. -->
 | FND.0860 | low | ambiguity | resolved | 2026-10-02-critique-clarity.md | intent 4.50 (POS.1080, POS.0710) |
 | FND.0870 | low | duplication | resolved | 2026-10-02-critique-clarity.md | intent 4.50 (POS.1330, POS.1340, POS.1350, REJ.0220; the older positions own) |
 | FND.0880 | low | gap | resolved | 2026-10-02-critique-clarity.md | intent 4.50 (a Facts section saying why it is empty) |
+| FND.0890 | low | conformance | open | 2026-10-03-check-light.md | — |
 
 Four review files are named outside the convention — accepted as they
 are by DEC.0140.
@@ -249,8 +251,9 @@ intent version for accepted, DEC.NNNN for rejected. -->
 <!-- What waits on the principal, one line per matter: cite, never
 copy — CLAUDE.md, Ledger. -->
 - THR.0520 — the intent carries the solution, a layer for the
-  solution is missing; priority, opened 2026-10-03 (intent 4.51),
-  the principal's stance saved, nothing decided.
+  solution is missing; priority; walked through 2026-10-03 (intent
+  4.52), POS.1390 to POS.1420; the plan of six steps in the thread,
+  step 2 next.
 - THR.0460 — `/recipe` and `/forge`, one dispatcher or two; small,
   open.
 - THR.0470 — the intent too long to be read; the migration done and
@@ -291,6 +294,8 @@ copy — CLAUDE.md, Ledger. -->
   a script kept for later, research of 2026-10-02; opened 2026-10-02.
 - THR.0510 — live reference material by nightly export; the
   principal's thought, nothing decided; opened 2026-10-02.
+- FND.0890 — the change of THR.0520 at 4.52 has no record in the
+  intent's history; open.
 - FND.0650 — parked finding of the `single-source-of-truth` check;
   needs a pass over the recipe genres and their skeletons.
 - FND.0750 — parked finding of the `project` check; the Published

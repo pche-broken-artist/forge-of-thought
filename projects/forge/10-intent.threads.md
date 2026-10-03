@@ -916,24 +916,52 @@ document: 10-intent.md
   assignment and the BRD, the recipients' work; a principal who is
   his own realiser, where the solution follows the intent directly,
   is not foreseen.
-  Claude's observations from one worked example, a conversation of
-  another project divided by kind of content, marked as his: the
-  division is by kind of content and not by who said it; the solution
-  has another regime of authorship, Claude proposes the whole and the
-  principal judges it, which is where the handing over of a whole
-  task fits (the brief `next-gen`, Automation); the solution needs
-  kinds of items of its own, a design decision with its rejected
-  alternative, a hypothesis to verify, a fact about an outside
-  system, none proposed here; the risk of a third copy moves and does
-  not vanish, since the skills, templates and scripts already are the
-  solution.
-  Open: the definition and the template of the solution layer and
-  where it stands in the chain (THR.0480, THR.0360); its items; who
-  writes it and how it is approved; what the lighter brief is;
-  whether a plan is a document of its own; and, separately and later,
-  the division of the forge's own intent. The sections "A technical
-  clean-up" and "The shape of the whole" of the brief `next-gen` rest
-  on this thread. Opened 2026-10-03.
+  Walked through 2026-10-03, ten matters, every verdict the
+  principal's; what was decided stands in POS.1390 (the boundary),
+  POS.1400 (where the solution design stands, the ledger's
+  `terminal:` withdrawn with it, POS.0160), POS.1410 (how an artefact
+  is composed), POS.1420 (what the solution design is made of),
+  POS.0900 (a change runs the whole chain and may come from below)
+  and POS.0110 (the lighter brief). Research of the same day:
+  `research/2026-10-03-how-a-solution-design-is-built.md`.
+  The plan, agreed 2026-10-03. A command of its own for an
+  elicitation falls away, the elicitation being part of an artefact's
+  definition.
+
+  | Step | What | State |
+  |---|---|---|
+  | 1 | Decide what the solution design is | done 2026-10-03, intent 4.52 |
+  | 2 | Prepare the forge: the names of the artefacts leave the engine so that artefacts are read from disk; CLAUDE.md brought to the positions of step 1 | next |
+  | 3 | Add the solution design by hand, its definition and its template, as the trial of step 2 | |
+  | 4 | Write the solution design of the forge project and move the solution out of its intent | |
+  | 5 | Draw from that the command that adds a new kind of artefact | |
+  | 6 | Make the BRD by that command, its first trial | |
+
+  Until step 2 is done the intent says what the operating layer does
+  not yet do: the check `engine` will report it, and that is
+  expected. Step 2 owes, beside the names: the Document kinds, the
+  Document chain, the ID scheme (SOL; TBC also in the solution
+  design) and the Ledger section of CLAUDE.md, the sentence that
+  version 1 ends at the assignment, a working method for work handed
+  over, the skill `forge`, the check `project` and
+  `templates/ledger.md` for the withdrawn `terminal:`. Step 3 starts
+  from a working template agreed in the walkthrough: a short prose
+  head, the parts as SOL items (what it is, what it realises, the
+  choice, where it is realised), what is open as TBC. Step 4 is a
+  one-off: the solution is moved as it stands in the intent, and
+  where a reason can no longer be told from the intent or its
+  history, it is said to be unknown and none is invented; after it
+  the forge works as every project does, the solution after the
+  intent.
+  Open: whether a plan is a document of its own, taken up after the
+  first solution design exists; how it is told that a layer has
+  fallen behind its intent, since an artefact names no version of the
+  intent it was brought to; which check keeps a solution design true
+  against what realises it; whether work handed over is reflected
+  back before it is written, the rule of 2026-09-27 standing until
+  decided. The sections "A technical clean-up" and "The shape of the
+  whole" of the brief `next-gen` rest on this thread. Opened
+  2026-10-03.
 
 Note: the ID THR.0120 was inadvertently used twice — first for the
 readme-recipe thread (opened 1.14, closed 1.16), then for the
