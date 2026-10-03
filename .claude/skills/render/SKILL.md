@@ -10,8 +10,8 @@ explicit command, or by `/release` (POS.0810); Claude never regenerates
 on its own judgement — it reports a stale render and offers. Iterating the recipe is working conversation like any
 other; generating the render is mechanical.
 
-1. Infer the current project from context ($2, or ask if ambiguous) and
-   read `recipes/$1.md`. If it does not exist, offer to compose it
+1. Infer the current project from context ($1, or ask if ambiguous) and
+   read `recipes/$0.md`. If it does not exist, offer to compose it
    through `/recipe` (a genre where one fits, else bare from
    `templates/recipe.md`) and stop.
 2. Read the recipe's declared inputs at their current versions.
@@ -32,7 +32,7 @@ other; generating the render is mechanical.
    Content only, always Markdown: the render carries no instructions
    for a conversion — the recipe's `## Format` section is never
    copied into it.
-4. The subagent writes to `renders/$1.md`, or to the recipe's
+4. The subagent writes to `renders/$0.md`, or to the recipe's
    `output:` path if it declares one (e.g. the repository README).
    Overwrite freely; history lives in git.
 5. The render opens with YAML front-matter provenance, written by the

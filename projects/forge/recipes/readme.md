@@ -2,9 +2,9 @@
 project: forge
 purpose: readme
 audience: humans arriving at the repository
-version: 0.54
-updated: 2026-10-02
-last_change: 0.54 (2026-10-02): what a render could not take from its inputs has an owner among them - the skills for what a command does, the scripts' help headers for the Scripts table, templates/ledger.md for the states; the roles are those of CLAUDE.md, a pointer in the layout block is replaced by its fact, one paragraph on portability is allowed.
+version: 0.55
+updated: 2026-10-03
+last_change: 0.55 (2026-10-03): the Upgrading paragraph names both checks a project is measured by after an upgrade, `/check light` and `/check project`, as POS.0940 has it since intent 4.50.
 output: /README.md
 ---
 
@@ -450,12 +450,13 @@ summarising the newest row. -->
     record no engine version. Read `RELEASE-NOTES.md`, the *Action
     required* lines first: they say what a new version expects of
     your projects and your instance files. Then, project by project,
-    run `/check project <slug>`: it measures the project against the
-    current conventions and reports what no longer conforms, nothing
-    else. Go through the findings with Claude one at a time and agree
-    what to migrate and how; Claude makes the changes on your word,
-    in the session, with no migration tool in between — the check and
-    the release notes are the tool. A project you leave as it is
+    run `/check light <slug>` and `/check project <slug>`: together
+    they measure the project against the current conventions and
+    report what no longer conforms, nothing else. Go through the
+    findings with Claude one at a time and agree what to migrate and
+    how; Claude makes the changes on your word, in the session, with
+    no migration tool in between — the checks and the release notes
+    are the tool. A project you leave as it is
     stays valid under the conventions it was written to; migrating it
     is your decision, per project, never assumed.
 - The Scripts section lists every script the repository uses — one

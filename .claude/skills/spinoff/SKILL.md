@@ -9,11 +9,11 @@ run in one step.
 
 1. Confirm scope with the principal: list the items
    (REQ/OOS/CON/ASM/DEL/TBC/SCR)
-   of group "$2" in project $1 that will move. He may adjust the list.
-2. Create `projects/$3/` by the `/new-project` procedure (kind
+   of group "$1" in project $0 that will move. He may adjust the list.
+2. Create `projects/$2/` by the `/new-project` procedure (kind
    `thought`) — files only, no git: the new project's repository and
    remote are the principal's one-off act afterwards.
-3. Derive `projects/$3/00-brief.md` from the relevant parts of the
+3. Derive `projects/$2/00-brief.md` from the relevant parts of the
    source 10-intent.md: a short brief, in the language settled at
    step 2, capturing why this became its own project and what it
    inherits. This brief is derived by Claude: present it to the
@@ -26,7 +26,7 @@ run in one step.
    creates 10-intent.md and keeps the Mined column.
 5. In the source assignment: mark moved items superseded (do not delete),
    replace the group with one link item — "REQ.NNNN: Delivered by project
-   *$3*, see its assignment." Write per CLAUDE.md, Versioning & status,
+   *$2*, see its assignment." Write per CLAUDE.md, Versioning & status,
    into the assignment's companion, and record a DEC in decisions.md
    (the shape of a record: `templates/decisions.md`).
 6. Update both ledgers and report the result.

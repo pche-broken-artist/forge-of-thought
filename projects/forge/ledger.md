@@ -3,7 +3,7 @@ project: forge
 kind: thought
 language: en
 terminal: intent
-updated: 2026-10-02
+updated: 2026-10-03
 ---
 
 # Ledger — Forge of Thought
@@ -27,11 +27,12 @@ absorbed it; Note says what remains (partial) or the REJ (dropped). -->
 | 00-brief.md | — | placeholder: brief stage was skipped, intent is the earliest record | — | accepted under DEC.0010, not a check finding |
 | 00-brief-public-engine.md | 1.0 | approved | mined | born in the forge 2026-08-29 (THR.0130, THR.0090), locked 2026-08-29 in English after the CTO challenge; mined into intent 2.21 (POS.0940–0980, REJ.0140–0150, THR.0190–0200). Instance work it records — the one-off migration steps 1–6, the first projects after the split — stays here and under Waiting on principal, not in the intent |
 | 00-brief-elicitation.md | 1.0 | approved | mined | born in the forge and locked 2026-09-28; mined into intent 4.32 (POS.1300 to POS.1380, POS.0110, REJ.0180, REJ.0210, REJ.0220, THR.0440 to THR.0460; THR.0440 and THR.0450 closed at 4.46). The material for the briefs `brd` and `engine-split` is carried in THR.0230, THR.0300 and THR.0360. Not a model of a brief, see its opening note |
+| 00-brief-next-gen.md | 0.2 | draft | pending | born in the forge 2026-10-03, written in English on the principal's word; the needs of the next generation gathered in one round, to be sifted; the eighteen researches of 2026-10-03 cited under its sections (0.2); THR.0520 opened from it |
 
 ## Documents
 | File | Version | Status | Date |
 |---|---|---|---|
-| 10-intent.md | 4.49 | draft | 2026-10-02 |
+| 10-intent.md | 4.51 | draft | 2026-10-03 |
 | 20-assignment.md | — | not planned: the handover artefacts of this project are the core itself (CLAUDE.md, templates/, .claude/) and README.md | — |
 | decisions.md | — | 18 records (DEC.0010–0180) | 2026-10-02 |
 
@@ -100,6 +101,24 @@ research/00-INDEX.md, never here. -->
 | 2026-09-30-adding-a-new-type-to-the-engine.md | 2026-09-30 | the engine's definitions at commit c95cffe, every member of each type searched by name; 10-intent.md v4.34 (POS.0400-0420, POS.0700, POS.0960, POS.1000, POS.1070, POS.1120-1140); research/2026-09-07-brd-layer-fork-analysis.md; the principal's question of 2026-09-30 |
 | 2026-10-01-what-of-the-intent-belongs-to-an-assignment.md | 2026-10-01 | 10-intent.md v4.41 read whole; 10-intent.threads.md (THR.0470, THR.0480); CLAUDE.md (prime directive 8, Document chain 2 and 3, Requirement style); research/2026-09-28-artefact-layers-from-idea-to-handover.md; the principal's question of 2026-10-01 |
 | 2026-10-02-running-reviewers-without-the-conversation.md | 2026-10-02 | 10-intent.md v4.42 (POS.0400, POS.0540, POS.1120, POS.1140); the principal's question of 2026-10-02 |
+| 2026-10-03-what-a-write-touches-and-where-two-authors-collide.md | 2026-10-03 | 00-brief-next-gen.md v0.1 (Several people on one project); the engine's definitions and the project `forge` as a sample; 10-intent.md v4.50 |
+| 2026-10-03-where-requirements-meet-outside-git.md | 2026-10-03 | 00-brief-next-gen.md v0.1 (Several people on one project; Connection to the systems around) |
+| 2026-10-03-showing-the-main-news-of-a-version-to-a-reader.md | 2026-10-03 | 00-brief-next-gen.md v0.1 (Documentation and news); research/2026-09-05-good-release-notes.md; RELEASE-NOTES.md as rendered 2026-10-02 |
+| 2026-10-03-testing-the-behaviour-of-a-prompt-framework.md | 2026-10-03 | 00-brief-next-gen.md v0.1 (Testing how the engine behaves); CLAUDE.md and the listing of `.claude/` |
+| 2026-10-03-agent-instruction-architecture-beyond-anthropic.md | 2026-10-03 | 00-brief-next-gen.md v0.1 (A technical clean-up); CLAUDE.md and the listing of `.claude/` |
+| 2026-10-03-several-authors-on-one-body-of-requirements.md | 2026-10-03 | 00-brief-next-gen.md v0.1 (Several people on one project) |
+| 2026-10-03-anthropic-guidance-for-claude-code-and-where-the-forge-departs.md | 2026-10-03 | 00-brief-next-gen.md v0.1 (A technical clean-up); research/2026-10-03-operating-layer-architecture-and-debt.md; the engine's operating layer; the researches of 2026-08-29 and 2026-10-02 on Claude Code |
+| 2026-10-03-concurrent-work-on-structured-text-in-git.md | 2026-10-03 | 00-brief-next-gen.md v0.1 (Several people on one project); research/2026-10-03-what-a-write-touches-and-where-two-authors-collide.md |
+| 2026-10-03-how-project-documentation-is-built.md | 2026-10-03 | 00-brief-next-gen.md v0.1 (Documentation and news); 10-intent.threads.md (THR.0340); README.md and recipes/readme.md v0.54 |
+| 2026-10-03-one-tool-a-core-with-modules-or-several-tools.md | 2026-10-03 | 00-brief-next-gen.md v0.1 (The shape of the whole); 10-intent.threads.md (THR.0230, THR.0420, THR.0300, THR.0140); the researches of 2026-08-25 and 2026-08-29 on the field |
+| 2026-10-03-operating-claude-code-for-many-users-in-a-company.md | 2026-10-03 | 00-brief-next-gen.md v0.1 (Operation in a company); 10-intent.threads.md (THR.0210, THR.0400) |
+| 2026-10-03-operating-layer-architecture-and-debt.md | 2026-10-03 | 00-brief-next-gen.md v0.1 (A technical clean-up); the engine's operating layer as it stood on 2026-10-03; searches of the intent's history and its archive |
+| 2026-10-03-the-threshold-of-entry-for-a-non-developer.md | 2026-10-03 | 00-brief-next-gen.md v0.1 (The threshold of entry); the skills `setup` and `new-project`; CLAUDE.md, Persistence |
+| 2026-10-03-user-extensions-kept-apart-from-the-core.md | 2026-10-03 | 00-brief-next-gen.md v0.1 (User modifications); 10-intent.threads.md (THR.0300, THR.0480, THR.0190, THR.0230); the researches of 2026-08-29 and 2026-09-30 |
+| 2026-10-03-versions-channels-and-migration-of-user-content.md | 2026-10-03 | 00-brief-next-gen.md v0.1 (Upgrade and compatibility); 10-intent.md v4.50 (POS.0940, POS.0820, POS.0300, POS.0730) |
+| 2026-10-03-work-without-a-known-artefact-and-its-working-files.md | 2026-10-03 | 00-brief-next-gen.md v0.1 (Work without a known artefact; Further outputs and working files) |
+| 2026-10-03-when-an-agent-may-decide-and-when-it-waits.md | 2026-10-03 | 00-brief-next-gen.md v0.1 (Automation); research/2026-10-03-where-the-forge-asks-for-the-principals-word.md; 10-intent.threads.md (THR.0400) |
+| 2026-10-03-where-the-forge-asks-for-the-principals-word.md | 2026-10-03 | 00-brief-next-gen.md v0.1 (Automation); the engine's definitions; 10-intent.md v4.50 with its threads, decisions.md, searches of the history, its archive and `sources/forge-run-record-health.md` |
 
 ## Findings
 <!-- Findings of the critic and of the checks, one sequence. State:
@@ -191,12 +210,12 @@ as `rejected`. -->
 | FND.0800 | low | conformance | resolved | 2026-10-02-check-engine.md | intent 4.49 (CLAUDE.md, Versioning & status) |
 | FND.0810 | low | conformance | resolved | 2026-10-02-check-engine.md | intent 4.49 (POS.0850) |
 | FND.0820 | low | conformance | resolved | 2026-10-02-check-engine.md | intent 4.49 (`templates/recipe-readme.md`, `templates/recipe-release-notes.md`) |
-| FND.0830 | medium | contradiction | open | 2026-10-02-critique-clarity.md | — |
-| FND.0840 | medium | contradiction | open | 2026-10-02-critique-clarity.md | — |
-| FND.0850 | medium | contradiction | open | 2026-10-02-critique-clarity.md | — |
-| FND.0860 | low | ambiguity | open | 2026-10-02-critique-clarity.md | — |
-| FND.0870 | low | duplication | open | 2026-10-02-critique-clarity.md | — |
-| FND.0880 | low | gap | open | 2026-10-02-critique-clarity.md | — |
+| FND.0830 | medium | contradiction | resolved | 2026-10-02-critique-clarity.md | intent 4.50 (POS.0120, POS.1380) |
+| FND.0840 | medium | contradiction | resolved | 2026-10-02-critique-clarity.md | intent 4.50 (POS.0740, POS.1150, POS.0930) |
+| FND.0850 | medium | contradiction | resolved | 2026-10-02-critique-clarity.md | intent 4.50 (POS.0940) |
+| FND.0860 | low | ambiguity | resolved | 2026-10-02-critique-clarity.md | intent 4.50 (POS.1080, POS.0710) |
+| FND.0870 | low | duplication | resolved | 2026-10-02-critique-clarity.md | intent 4.50 (POS.1330, POS.1340, POS.1350, REJ.0220; the older positions own) |
+| FND.0880 | low | gap | resolved | 2026-10-02-critique-clarity.md | intent 4.50 (a Facts section saying why it is empty) |
 
 Four review files are named outside the convention — accepted as they
 are by DEC.0140.
@@ -229,6 +248,9 @@ intent version for accepted, DEC.NNNN for rejected. -->
 ## Waiting on principal
 <!-- What waits on the principal, one line per matter: cite, never
 copy — CLAUDE.md, Ledger. -->
+- THR.0520 — the intent carries the solution, a layer for the
+  solution is missing; priority, opened 2026-10-03 (intent 4.51),
+  the principal's stance saved, nothing decided.
 - THR.0460 — `/recipe` and `/forge`, one dispatcher or two; small,
   open.
 - THR.0470 — the intent too long to be read; the migration done and
@@ -296,8 +318,6 @@ copy — CLAUDE.md, Ledger. -->
   written in another language; raised 2026-10-02, nothing decided.
 - `check-project` names "assignment style" in its description and
   verifies no such part; noticed 2026-10-02.
-- FND.0830 — POS.0120 against POS.1380 on the definitions being
-  tried; open.
 - `essence` is not run on this project, the principal's word of
   2026-10-02; the release skill still offers it at every release.
 - Three weakly founded places in the README of 2026-10-02 (the next

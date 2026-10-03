@@ -21,7 +21,7 @@ Claude Code's own command, hence the Unix name.
    `/man <method>` for a method's.
 
 **`/man <command>` — the page of one command.**
-1. Resolve `$1` to `.claude/skills/<command>/SKILL.md`; if none
+1. Resolve `$0` to `.claude/skills/<command>/SKILL.md`; if none
    exists, say so and list the commands (step 1 of the overview).
 2. Print the command's purpose (its `description`), its arguments
    (its `argument-hint`, else the CLAUDE.md row) and the CLAUDE.md
@@ -36,7 +36,7 @@ Claude Code's own command, hence the Unix name.
 4. Close with one line naming the skill file, for the reader who
    wants the whole procedure.
 
-**`/man <method>` — the page of one working method.** Resolve `$1`
+**`/man <method>` — the page of one working method.** Resolve `$0`
 against the bold names of the Working methods section of CLAUDE.md
 (case-insensitive, hyphens and spaces alike); print the paragraph in
 full and, where it names a skill that holds the method's shape,

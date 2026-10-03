@@ -14,7 +14,7 @@ changes.
 **Bare `/recipe` — report the roster.**
 1. List `.claude/skills/recipe/genres/` for the available genres, each with
    its one-line description.
-2. Infer the current project from context ($1 may be a slug; if
+2. Infer the current project from context ($0 may be a slug; if
    ambiguous, ask) and list its existing recipes from `recipes/` with
    versions.
 3. Recommend a fit where the conversation suggests one. A recipe
@@ -22,8 +22,8 @@ changes.
    from `templates/recipe.md`.
 
 **`/recipe <genre>` — compose or iterate through that genre.**
-1. Resolve `.claude/skills/recipe/genres/$1.md`. If it does not exist,
-   check whether `recipes/$1.md` exists in the project — if so,
+1. Resolve `.claude/skills/recipe/genres/$0.md`. If it does not exist,
+   check whether `recipes/$0.md` exists in the project — if so,
    iterate that recipe (through its genre definition when one fits,
    otherwise conversationally). If neither exists, list the genres
    that do and stop.

@@ -888,6 +888,52 @@ document: 10-intent.md
   library of today is rather a proof of concept of the approach.
   Bears on POS.0970 and POS.1020, and on what `/ingest` does with a
   changed document in a library. Opened 2026-10-02.
+- **THR.0520** The intent carries the solution, and a layer for the
+  solution is missing. Priority, to be worked at once. The
+  principal's word of 2026-10-03, a fault of the design from the
+  start that neither he nor Claude saw: the debate whether the forge
+  project lacks an assignment asked the wrong question. The intent is
+  the statement of what is wanted and why, and nothing else; how the
+  things of the intent are realised belongs in a document of its own,
+  the solution design. His picture of the chain: a brief, lighter
+  than the briefs written so far, a list of topics with links to
+  research and the verification of ideas, and then at once the
+  intent; after the intent an assignment or a BRD where the matter is
+  large and handed over, or straight a solution design, where the
+  solution lives. What he expects of it: the work stops going task by
+  task, since over an intent that is only the statement of what is
+  wanted he can ask Claude for a proposal of the whole solution and
+  work over that. Nothing is decided beyond this stance.
+  Evidence.
+  `research/2026-10-01-what-of-the-intent-belongs-to-an-assignment.md`
+  classified every item of the intent at 4.41: about a quarter stance
+  and reason, more than a half how the engine shall behave or be
+  built, the rest the way to it, since moved to the history. The note
+  called the larger part "directive to the realiser", asked whether
+  an assignment should carry it, and answered no. No rule forbids an
+  intent to solve, while POS.0210 forbids it to an assignment.
+  CLAUDE.md names `40-solution-design.md` as a later layer below the
+  assignment and the BRD, the recipients' work; a principal who is
+  his own realiser, where the solution follows the intent directly,
+  is not foreseen.
+  Claude's observations from one worked example, a conversation of
+  another project divided by kind of content, marked as his: the
+  division is by kind of content and not by who said it; the solution
+  has another regime of authorship, Claude proposes the whole and the
+  principal judges it, which is where the handing over of a whole
+  task fits (the brief `next-gen`, Automation); the solution needs
+  kinds of items of its own, a design decision with its rejected
+  alternative, a hypothesis to verify, a fact about an outside
+  system, none proposed here; the risk of a third copy moves and does
+  not vanish, since the skills, templates and scripts already are the
+  solution.
+  Open: the definition and the template of the solution layer and
+  where it stands in the chain (THR.0480, THR.0360); its items; who
+  writes it and how it is approved; what the lighter brief is;
+  whether a plan is a document of its own; and, separately and later,
+  the division of the forge's own intent. The sections "A technical
+  clean-up" and "The shape of the whole" of the brief `next-gen` rest
+  on this thread. Opened 2026-10-03.
 
 Note: the ID THR.0120 was inadvertently used twice — first for the
 readme-recipe thread (opened 1.14, closed 1.16), then for the

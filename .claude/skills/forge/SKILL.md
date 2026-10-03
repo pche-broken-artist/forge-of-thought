@@ -10,7 +10,7 @@ definition file. Definitions live in `.claude/skills/forge/states/<state>.md`
 Adding a layer means adding a file; this dispatcher never changes.
 
 **Bare `/forge` — report the map.**
-1. Infer the current project from context ($1 may be a slug; if
+1. Infer the current project from context ($0 may be a slug; if
    ambiguous, ask).
 2. Read the project's ledger and list `.claude/skills/forge/states/` for the
    available target states.
@@ -40,7 +40,7 @@ Adding a layer means adding a file; this dispatcher never changes.
    methods).
 
 **`/forge <state>` — work on that artefact.**
-1. Resolve `.claude/skills/forge/states/$1.md`. If it does not exist, list
+1. Resolve `.claude/skills/forge/states/$0.md`. If it does not exist, list
    the states that do and stop.
 2. Read the file and follow it. It declares the target artefact, its
    inputs and its working rules; everything else (write-once-per-round,

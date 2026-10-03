@@ -1,8 +1,8 @@
 ---
-version: 4.49
-date: 2026-10-02
+version: 4.51
+date: 2026-10-03
 status: draft
-last_change: 4.49 (2026-10-02): the rules of particular artefacts left CLAUDE.md for the definitions, settled by walkthrough (POS.1310, POS.1380) - prime directive 8 and the Requirement style in the assignment's definition, what the threads hold and what an item keeps against its file in the intent's, a paragraph in CLAUDE.md on what a definition is; the status `in_review` and the rule of POS.1180 dropped (REJ.0230, POS.0300); the demand for British English dropped (POS.0250); five parked findings of the check single-source-of-truth settled, FND.0610, FND.0620, FND.0630, FND.0700 and FND.0720, the quoting caveat kept in the skeletons by DEC.0180, FND.0650 left parked; the engine is released once the move is done; the checks of the release settled, FND.0740 to FND.0820, the pointer of POS.0850 mended, FND.0750 parked.
+last_change: 4.51 (2026-10-03): THR.0520 opened, priority - the intent carries the solution and a layer for the solution is missing; the principal's stance on the chain saved, nothing decided; the positional arguments of nine skills counted from zero, as Claude Code counts them (operating layer).
 project: forge
 audience: principal + Claude only
 ---
@@ -282,21 +282,19 @@ position that already stands elsewhere.
   situation's: a question, a research step, a source. Present shape
   2026-10-02, from `00-brief-elicitation.md`.
 - **POS.1330 The definition of the brief's elicitation.** What it is
-  to achieve: a brief that puts an idea together, what the principal
-  wants and why, with what he chose from a finding that ran wide;
-  rough on purpose, the chiselling being the intent's. It is his by
-  his approval, whoever first said a thought: Claude is active at the
+  to achieve: a brief as POS.0110 has it. Claude is active at the
   opening and forms the record when the principal says to write, and
   never decides what goes in. The seven blocks are
   `.claude/skills/forge/states/brief.md`, mended there as the work
-  shows (POS.1380). Present shape 2026-10-02, from
+  shows (POS.1380). Present shape 2026-10-03, from
   `00-brief-elicitation.md`.
 - **POS.1340 The definition of the intent's elicitation.** What it
   is to achieve: an intent that chisels the briefs into what the
   principal holds, positions, facts, threads and rejections with
   their reasons, placed on a horizon where he sees one; coherent,
-  nothing twice, every position with its provenance, passed through
-  a reality check before a lower layer is derived; complete for now
+  nothing twice, every position with its provenance (POS.0120),
+  passed through a reality check before a lower layer is derived;
+  complete for now
   when no thread blocks the next layer, never finished. Claude
   composes the wording and challenges, the principal the substance;
   a thread closes only on his word. The recipients, the objective
@@ -308,22 +306,20 @@ position that already stands elsewhere.
   shows (POS.1380). Present shape 2026-10-02, from
   `00-brief-elicitation.md`.
 - **POS.1350 The definition of the assignment's elicitation.** What
-  it is to achieve: an assignment that carries the in-scope
-  substance of the intent to the recipients, complete and precise,
-  so that they can act without the principal in the room and know
-  the end and the reason well enough to act rightly where the plan
-  no longer fits; delegated or open on purpose is complete, silent
-  is not. It is found in a joint pass of three phases and no new
+  it is to achieve: an assignment as POS.0130 has it, such that the
+  recipients can act without the principal in the room and know the
+  end and the reason well enough to act rightly where the plan no
+  longer fits. It is found in a joint pass of three phases and no new
   kind of interview: questions up front only for what the intent
   does not answer, a recast of the whole with a provenance map, a
   walkthrough by group. Why not item by item: most items are craft
   derived from the intent and a verdict on each is ceremony. Why not
   "read the whole": without the map one sees what is there, not what
   is missing. The wording is Claude's, the substance the
-  principal's, and a substance change goes to the intent first. The
+  principal's (POS.0140). The
   seven blocks are `.claude/skills/forge/states/assignment.md`,
   mended there as the work shows (POS.1380). Present shape
-  2026-10-02, from `00-brief-elicitation.md`.
+  2026-10-03, from `00-brief-elicitation.md`.
 - **POS.1360 The horizon lives in all three layers, each carrying
   its own kind, nothing twice.** The intent carries the judgement:
   why this is a proof of concept, this the first version, this
@@ -364,15 +360,16 @@ position that already stands elsewhere.
   roots and installation, a move of files. The definitions are not
   tried before they are used: they live in the state files of
   `/forge`, are used on real work at once and mended there as the
-  work shows; a change of what a definition is to achieve goes
-  through the intent first. What in CLAUDE.md contradicted the
-  definitions was brought current with them, and the other rules of
-  particular artefacts left CLAUDE.md for the definitions after the
-  `single-source-of-truth` check (POS.1140). The engine is released
-  once that move is done. Locked
-  artefacts are untouched by the change. Present shape 2026-10-02,
-  from `00-brief-elicitation.md` and the principal's word of that
-  day.
+  work shows. Reason: whatever goes wrong is restored from git, and
+  a trial would mean changing every definition twice, in the intent
+  and in its file, and moving it over afterwards. A change of what a
+  definition is to achieve goes through the intent first. What in
+  CLAUDE.md contradicted the definitions was brought current with
+  them, and the other rules of particular artefacts left CLAUDE.md
+  for the definitions after the `single-source-of-truth` check
+  (POS.1140). Locked artefacts are untouched by the change. Present
+  shape 2026-10-03, from `00-brief-elicitation.md` and the
+  principal's word.
 
 ### Document chain
 - **POS.0100** Files in the chain are numbered in tens (`00-brief.md`,
@@ -468,12 +465,9 @@ position that already stands elsewhere.
   part of a file, a section of CLAUDE.md among them, the item keeps
   the full information, since another change may rewrite that part
   and the detail would be lost. Until the file exists, the item keeps
-  the full information too: the definitions of the elicitation stay
-  whole until their state files have been rewritten and tried
-  (POS.1380), and then the intent keeps their assignment and aim. No
-  new kind of document is added to hold detail. Where the item and
-  its file say different things, that is a finding, never mended in
-  silence.
+  the full information too. No new kind of document is added to hold
+  detail. Where the item and its file say different things, that is
+  a finding, never mended in silence.
   The threads live in a file of their own beside the intent,
   `10-intent.threads.md`: the intent says what holds, the threads
   what is being worked. A thread says what is open and where it came
@@ -640,7 +634,7 @@ position that already stands elsewhere.
   tools, not records of thinking: they carry a version and an updated
   date in front-matter — enough for a render to cite — and no status
   field, because a recipe is never approved and stays 0.x for life.
-  Being versioned, a recipe keeps its Version History in the companion
+  Being versioned, a recipe keeps its history in the companion
   like every versioned kind (POS.0310); the companion records what
   changed in the recipe at its own grain, the substantive turns live
   in the intent. Recipes are deliberately loose: the template fixes the
@@ -806,7 +800,7 @@ position that already stands elsewhere.
   | resources | source | external input as it arrived | external, /ingest | — | immutable |
   | resources | research | durable answer to one question | Claude, /research | — | immutable |
 
-  Every versioned kind keeps its Version History in an append-only
+  Every versioned kind keeps its history in an append-only
   companion `<file>.history.md` (POS.0310); an integer version is
   approved, and a recipe never is. A functional binary — a `.potx`
   template, a graphic — is a source (POS.1040), so a library's assets
@@ -1207,57 +1201,54 @@ position that already stands elsewhere.
   the principle of the two steps — which command makes which file,
   who may start each — and the conduct of each step is its skill's
   alone (`/render`, `/publish`).
-- **POS.0740** `scripts/md2pptx.ps1` generates a PowerPoint file from
-  a Markdown deck definition through headless Claude Code
-  (`claude -p`) with Anthropic's official pptx skill. The
-  conversion is done by a model, never by a deterministic converter,
-  because deck definitions are deliberately free-form and may
-  themselves contain instructions for the LLM — slide content,
+- **POS.0740** `scripts/md2pptx.ps1` makes a PowerPoint file from a
+  Markdown deck render, by one of two engines (POS.0590). `-Engine
+  claude`, the default and the engine of `/publish`, makes the
+  designed deck through headless Claude Code (`claude -p`) with
+  Anthropic's official pptx skill: a model and not a deterministic
+  converter, because deck definitions are deliberately free-form and
+  may themselves contain instructions for the LLM — slide content,
   speaker notes, diagrams to redraw as native shapes, visual
-  directions. Template handling: `-Template <path>` names a `.potx`
-  or `.pptx` file by path — typically a document of a library project
-  (POS.0970), e.g. `projects/lib-<name>/sources/<name>.potx`; without
-  the parameter Claude designs the visual style itself. There is no
-  default template and no bare-name lookup. The generated file is
-  tracked in git like any render output (where it lands: the help of
-  `scripts/md2pptx.ps1`). The headless run's model is chosen by `-Model`,
-  default opus; a presentation recipe may recommend one in its Format
-  section. Since 2026-09-27 the
-  script has two engines (POS.0590): `-Engine claude`, the default
-  and all of the above, is the engine of `/publish`, which names
-  the recipe by path (`-Recipe`) so that the model reads the Format
-  section there; `-Engine pandoc` makes a plain deck for reading,
-  one slide per second-level heading, and is the engine of
-  `/render`.
-- **POS.1150** `scripts/md2docx.ps1` converts a Markdown render into
-  a Word file through `pandoc` — a deterministic conversion, unlike
-  `md2pptx` (POS.0740), because a document render is plain Markdown
-  carrying no instructions for a model. Styles come from a reference
-  document named by path (`-Reference`, a `.docx` or a Word template
-  `.dotx`/`.dotm`, typically a document of a library project,
-  POS.0970); without it pandoc's built-in styles apply — no default
-  reference and no bare-name lookup. The page is A4 by default.
-  Mermaid diagrams land in the
-  document as blocks of code: rendering them to pictures needs
-  `mermaid-cli`, a further dependency the principal has not decided
-  on (Waiting on principal in the ledger). Word is the target and
-  PDF is not: pandoc writes Word without a further engine, and a PDF
-  is the recipient's one click from Word. The generated file is
-  tracked in git like any render output (where it lands: the help of
-  `scripts/md2docx.ps1`). Since 2026-09-27 the
-  script has two engines (POS.0590): `-Engine pandoc`, the default
-  and all of the above, is the engine of `/render`; `-Engine
-  claude` makes the designed document through headless Claude Code
-  and the official docx skill, the reference document as the
-  template it starts from, the recipe named by path (`-Recipe`),
-  and is the engine of `/publish`. The machine carries neither
-  the library the docx skill expects nor the tools that show the
-  model its pages (LibreOffice, Poppler), and the model is told to
-  install nothing: it writes the document's XML directly and
+  directions. `/publish` names the recipe by path (`-Recipe`) so
+  that the model reads the Format section there. Template handling:
+  `-Template <path>` names a `.potx` or `.pptx` file by path —
+  typically a document of a library project (POS.0970), e.g.
+  `projects/lib-<name>/sources/<name>.potx`; without the parameter
+  Claude designs the visual style itself. There is no default
+  template and no bare-name lookup. The headless run's model is
+  chosen by `-Model`, default opus; a presentation recipe may
+  recommend one in its Format section. `-Engine pandoc`, the engine
+  of `/render`, makes a plain deck for reading, one slide per
+  second-level heading. The generated file is tracked in git like
+  any render output (where it lands: the help of
+  `scripts/md2pptx.ps1`). Present shape 2026-09-27.
+- **POS.1150** `scripts/md2docx.ps1` makes a Word file from a
+  Markdown render, by one of two engines (POS.0590). `-Engine
+  pandoc`, the default and the engine of `/render`, is a
+  deterministic conversion: the plain file needs no model. Styles
+  come from a reference document named by path (`-Reference`, a
+  `.docx` or a Word template `.dotx`/`.dotm`, typically a document
+  of a library project, POS.0970); without it pandoc's built-in
+  styles apply — no default reference and no bare-name lookup. The
+  page is A4 by default. Mermaid diagrams land in the document as
+  blocks of code: rendering them to pictures needs `mermaid-cli`, a
+  further dependency the principal has not decided on (Waiting on
+  principal in the ledger). Word is the target and PDF is not:
+  pandoc writes Word without a further engine, and a PDF is the
+  recipient's one click from Word. `-Engine claude`, the engine of
+  `/publish`, makes the designed document through headless Claude
+  Code and the official docx skill, the reference document as the
+  template it starts from, the recipe named by path (`-Recipe`), the
+  model chosen by `-Model`, default opus. The machine carries
+  neither the library the docx skill expects nor the tools that show
+  the model its pages (LibreOffice, Poppler), and the model is told
+  to install nothing: it writes the document's XML directly and
   designs without seeing the result - enough for a page of text,
-  untried for tables, pictures or a template. The engine runs
-  under whatever configuration directory and login the calling
-  shell has.
+  untried for tables, pictures or a template. The engine runs under
+  whatever configuration directory and login the calling shell has.
+  The generated file is tracked in git like any render output (where
+  it lands: the help of `scripts/md2docx.ps1`). Present shape
+  2026-09-27.
 - **POS.0770** Recipe composition may be guided by genre:
   `/recipe <genre>` mirrors the `/forge` star (POS.0580) — a thin
   dispatcher (`.claude/skills/recipe/SKILL.md`) plus one definition file
@@ -1304,8 +1295,9 @@ position that already stands elsewhere.
   fast-forward of `main`. A project records no engine version: `/check`
   measures it against the current conventions. That is the whole
   migration path of any instance, the principal's and a third party's
-  alike: after `forge-pull`, `/check project` on each project says what
-  the conventions changed, the release notes' Action required lines say
+  alike: after `forge-pull`, `/check light` and `/check project` on
+  each project say what the conventions changed (which check owns
+  what: POS.1140), the release notes' Action required lines say
   what to do, and Claude migrates on the user's word; no migration tool
   exists, knowingly. Shapes rejected: REJ.0150. Decided 2026-08-29.
 - **POS.0950** The engine carries no instance facts. Who the principal
@@ -1359,13 +1351,18 @@ position that already stands elsewhere.
   ever need it. Per-command pinning to a faster model is rejected for
   now: the routine commands are a small share of the work and slow for
   the size of the context they carry, not for the model, and every pin
-  is a convention to keep. A per-recipe `model:` is deferred until a
-  recipe is genuinely mechanical, since a smaller model drifts from a
-  recipe that leaves it room (the drift POS.0810 guards against). The session model is chosen in one
+  is a convention to keep. A per-recipe `model:` for the render is
+  deferred until a recipe is genuinely mechanical, since a smaller
+  model drifts from a recipe that leaves it room (the drift POS.0810
+  guards against); the model a recipe may recommend in its Format
+  section is the headless conversion's, another step (POS.0740). The
+  session model is chosen in one
   deliberate place, `.claude/settings.local.json` — an instance
-  preference, gitignored (POS.0950). The one exception is
-  `scripts/md2pptx.ps1`: a headless run has no session model, so the
-  script needs a default of its own (`-Model`, POS.0740) — an
+  preference, gitignored (POS.0950). The one exception is the
+  headless conversions behind `/publish`, `scripts/md2pptx.ps1` and
+  `scripts/md2docx.ps1` with `-Engine claude`: a headless run has no
+  session model, so each script needs a default of its own (`-Model`,
+  POS.0740, POS.1150) — an
   explicit parameter, not an aged pin. The same lever carries the
   checks: every check executes its own definition in an isolated
   subagent that sees only the files, returning the report for the
@@ -1707,6 +1704,12 @@ position that already stands elsewhere.
   Work then starts by selecting the project — `/forge <slug>` —
   because the engine does not track it and cannot guess it.
 
+## Facts
+
+None: what this project rests on as fact is how Claude Code behaves,
+worked out by Claude and kept in the positions it grounds (POS.1120,
+POS.1130); what Claude has worked out is never a FCT (POS.0230).
+
 ## Rejected directions
 
 - **REJ.0010** `clarifications.md` as an append-only Q&A log. Rejected
@@ -1808,9 +1811,10 @@ position that already stands elsewhere.
   would turn into bookkeeping. The intent's Map looks at each brief
   as a whole instead (POS.1340).
 - **REJ.0220** Marks of authorship in a brief: *(Claude)* in italics
-  before every block that is not the principal's own. Dropped 2026-09-28: what is in the brief the principal
-  approved, whoever first said it, and a mark that names a model
-  reads differently on every model the forge runs on. What carried
+  before every block that is not the principal's own. Dropped
+  2026-09-28: nothing in a brief marks authorship (POS.0110), and a
+  mark that names a model reads differently on every model the forge
+  runs on. What carried
   something other than authorship stays as `(source: <path>)` and
   `(remark: …)` (POS.0110).
 - **REJ.0230** The status `in_review`, and the standing rule that an

@@ -4,7 +4,7 @@ argument-hint: "<slug>"
 disable-model-invocation: true
 ---
 
-Create a new project under `projects/$1/`. Files only: the command
+Create a new project under `projects/$0/`. Files only: the command
 never touches git. A project is a repository of its own that the
 engine does not track; initialising it and adding a remote are the
 principal's one-off act, the way in named in CLAUDE.md, Persistence,
@@ -24,7 +24,7 @@ artefacts as `language:` in its ledger header (CLAUDE.md, prime directive 6;
 POS.0060 of the forge intent): English unless the principal names
 another; ask when his words leave it open.
 
-**Library** (`kind: library`): create only `projects/$1/ledger.md`
+**Library** (`kind: library`): create only `projects/$0/ledger.md`
 from `templates/ledger.md` with `kind: library`, reduced as the
 template's header says (POS.1070), plus `sources/00-INDEX.md`
 and `research/00-INDEX.md` from `templates/index.md`, and
@@ -37,26 +37,26 @@ steps 3–5 below do not apply.
 
 **Thought project** (`kind: thought`):
 
-1. Validate the slug: lowercase, hyphens, no spaces. If `projects/$1/`
+1. Validate the slug: lowercase, hyphens, no spaces. If `projects/$0/`
    already exists, stop and report — never overwrite.
 2. Create the folder structure:
-   - `projects/$1/sources/`, `projects/$1/reviews/`,
-     `projects/$1/challenges/` and `projects/$1/research/` — empty
+   - `projects/$0/sources/`, `projects/$0/reviews/`,
+     `projects/$0/challenges/` and `projects/$0/research/` — empty
      except `sources/00-INDEX.md` and `research/00-INDEX.md` from
      `templates/index.md` (header filled, no entries)
-   - `projects/$1/ledger.md` from `templates/ledger.md`, filled with
+   - `projects/$0/ledger.md` from `templates/ledger.md`, filled with
      project slug, `kind: thought`, the language and today's date;
      brief row as 0.1 draft, pending
-   - `projects/$1/decisions.md` from `templates/decisions.md` — the
+   - `projects/$0/decisions.md` from `templates/decisions.md` — the
      slug filled, the sample record removed
-   - `projects/$1/recipes/readme.md` from `templates/recipe-readme.md`
-     and `projects/$1/recipes/release-notes.md` from
+   - `projects/$0/recipes/readme.md` from `templates/recipe-readme.md`
+     and `projects/$0/recipes/release-notes.md` from
      `templates/recipe-release-notes.md` — slug and date filled, the
      template comments kept for the first `/recipe` iteration, each
      with its companion `recipes/<recipe>.history.md` from
      `templates/history.md` (its first records, 0.1 scaffolded); their renders
      are `/release`'s (CLAUDE.md, Document chain 7), not this command's
-   - `projects/$1/logo.png` is the principal's to supply, optional
+   - `projects/$0/logo.png` is the principal's to supply, optional
      (POS.1010) — mention it once, never ask for it
 3. **00-brief.md:** ask the principal to paste or dictate the brief
    now and hand it to the `/forge brief` procedure

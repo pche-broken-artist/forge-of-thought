@@ -11,15 +11,15 @@ judgement and no other command does — a stale published file is
 reported, never remade. The command makes a file and sends nothing
 anywhere.
 
-1. Infer the current project from context ($2, or ask if ambiguous)
-   and read `recipes/$1.md`. If it does not exist, say so and stop.
+1. Infer the current project from context ($1, or ask if ambiguous)
+   and read `recipes/$0.md`. If it does not exist, say so and stop.
 2. Read the recipe's `## Format` section (skeleton
    `templates/recipe.md`). A recipe without it ends at the Markdown:
    say so and stop. An older recipe carrying `## Build instructions`
    is read as Format (the alias: `templates/recipe.md`, Format);
    where it names no format, ask once, and offer to bring the recipe
    in line through `/recipe`.
-3. Find the render — `renders/$1.md`, or the recipe's `output:` path.
+3. Find the render — `renders/$0.md`, or the recipe's `output:` path.
    If it does not exist, say so and stop. Never render: what is
    published is the Markdown as it lies on disk, the text the
    principal has read.
@@ -32,7 +32,7 @@ anywhere.
    `scripts/md2docx.ps1` — with `-Engine claude`, `-Recipe` naming
    the recipe, the template or reference document and the model the
    Format section names, and
-   `-Out projects/<slug>/published/$1.<ext>`. What each script needs
+   `-Out projects/<slug>/published/$0.<ext>`. What each script needs
    installed is its header's.
 6. Back in the session: verify the file exists, write its row in the
    ledger's Published table — the file, the recipe with its version,

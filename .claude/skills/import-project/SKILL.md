@@ -4,7 +4,7 @@ argument-hint: "<git-url>"
 disable-model-invocation: true
 ---
 
-Bring the project at `$1` into the forge (POS.1060). Git is done by
+Bring the project at `$0` into the forge (POS.1060). Git is done by
 `scripts/forge-clone.ps1` only (CLAUDE.md, Persistence).
 
 1. Require the URL. The target directory is
