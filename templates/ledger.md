@@ -3,7 +3,6 @@ project: <slug>
 kind: thought
 language: en             # language of the chain's artefacts (ISO 639-1);
                          # CLAUDE.md, prime directive 6
-terminal: assignment     # where the chain ends — CLAUDE.md, Ledger
 updated: YYYY-MM-DD
 ---
 
@@ -20,7 +19,8 @@ comment is the one owner of that reduction (POS.1070). -->
 
 ## Briefs
 <!-- One row per brief (00-brief.md and 00-brief-<name>.md). Status:
-draft (being composed, editable) | approved (locked at 1.0, immutable).
+draft (being composed) | approved (1.0 and on, changed after that as
+any artefact is).
 Mined: pending | partial | mined | dropped — how far the intent has
 absorbed it; Note says what remains (partial) or the REJ (dropped). -->
 | File | Version | Status | Mined | Note |
@@ -31,17 +31,19 @@ absorbed it; Note says what remains (partial) or the REJ (dropped). -->
 | File | Version | Status | Date |
 |---|---|---|---|
 | 10-intent.md | 0.1 | draft | YYYY-MM-DD |
-| 20-assignment.md | — | not started | — |
+<!-- One row per layer below the intent, added when the layer is
+born; a layer the project does not have gets no row (CLAUDE.md,
+Ledger). -->
 
 ## Renders
 <!-- Generated outputs, one row per recipe in recipes/ (CLAUDE.md,
-Document chain 7). Row mirrors the render's front-matter provenance. -->
+Document chain, Renders). Row mirrors the render's front-matter provenance. -->
 | Render | Audience | Recipe | Inputs | Generated |
 |---|---|---|---|---|
 
 ## Published
 <!-- Designed files made by /publish, one row per file (CLAUDE.md,
-Document chain 7). State: current | stale — set to current by
+Document chain, Renders). State: current | stale — set to current by
 /publish, to stale by every /render of that recipe. -->
 | File | Recipe | From render | Model | Published | State |
 |---|---|---|---|---|---|
@@ -50,7 +52,7 @@ Document chain 7). State: current | stale — set to current by
 <!-- Registration only. External inputs, immutable once registered.
 Date = best-effort origin date; origin: content | file | ingested. What
 a source is and is for lives in sources/00-INDEX.md, never here
-(CLAUDE.md, Document chain 5). Form (POS.1040): text | extract
+(CLAUDE.md, Document chain, External inputs). Form (POS.1040): text | extract
 of <original> | binary — one form per source. -->
 | File | Date | Date origin | Form |
 |---|---|---|---|

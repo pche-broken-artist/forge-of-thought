@@ -56,7 +56,7 @@ other; generating the render is mechanical.
    correct, update the ledger's Renders table to mirror it, and report
    what was rendered
    from what.
-7. The plain file (CLAUDE.md, Document chain 7). Where the recipe
+7. The plain file (CLAUDE.md, Document chain, Renders). Where the recipe
    carries a `## Format` section, run the script of its format —
    `scripts/md2docx.ps1` or `scripts/md2pptx.ps1` — on the render
    with `-Engine pandoc` and the reference document and page size

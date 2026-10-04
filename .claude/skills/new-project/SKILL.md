@@ -55,17 +55,17 @@ steps 3–5 below do not apply.
      template comments kept for the first `/recipe` iteration, each
      with its companion `recipes/<recipe>.history.md` from
      `templates/history.md` (its first records, 0.1 scaffolded); their renders
-     are `/release`'s (CLAUDE.md, Document chain 7), not this command's
+     are `/release`'s (CLAUDE.md, Document chain, Renders), not this command's
    - `projects/$0/logo.png` is the principal's to supply, optional
      (POS.1010) — mention it once, never ask for it
 3. **00-brief.md:** ask the principal to paste or dictate the brief
    now and hand it to the `/forge brief` procedure
    (`.claude/skills/forge/states/brief.md`, its Course): it
    creates the file, its companion and its Briefs row, stores, asks
-   whether the text is finished, locks or leaves the draft. Nothing
+   whether the text is finished, approves or leaves the draft. Nothing
    of that procedure is restated here (POS.1070).
-4. Do NOT create 10-intent.md or 20-assignment.md yet — intent is born from the
-   first `/forge intent`, assignment from the first `/forge assignment`.
+4. Do NOT create 10-intent.md or any layer below it yet — each is
+   born from its own first `/forge <state>`.
 5. Update the ledger and finish by proposing the next step: run
    `/forge intent` to start the elicitation interview — and remind
    the principal that the project is not under git until he

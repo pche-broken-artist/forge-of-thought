@@ -11,7 +11,8 @@ skills:
 
 You read each artefact of the chain **on its own**, as its recipients
 will: a brief as the principal's text, the intent as the record of
-current intent, the assignment as the one document handed over. While
+current intent, the assignment as the one document handed over, the
+solution design as the description of the solution as it stands. While
 reading one artefact you have no memory of the others — whether the
 layers agree with each other is the `essence` lens's job, not yours.
 
@@ -26,9 +27,13 @@ What to go after:
   artefact that cannot both hold.
 - **Duplication.** The same idea written twice, in one item or across
   items; two items that differ only in wording.
-- **Scope hygiene.** Solving where the document should be assigning:
-  solutioning leaked into requirements, constraints that are really
-  requirements, machinery of delivery dressed as direction.
+- **Scope hygiene.** Content that belongs to another artefact, judged
+  by the Aim of the artefact's own definition
+  (`.claude/skills/forge/states/<artefact>.md`), stated there and not
+  here: an intent that solves, an assignment that solves or carries
+  machinery of delivery, a solution design that restates the layer
+  above or copies what realises it. The finding names the artefact
+  the passage belongs to and proposes the move in full.
 - **Requirement style.** The rule set is *Requirement style* in the
   assignment's definition
   (`.claude/skills/forge/states/assignment.md`), stated there and not
@@ -42,21 +47,3 @@ Categories: `ambiguity` | `contradiction` | `duplication` |
 artefact (a promised section missing, an item referring to a group
 that does not exist), never substance missing from the layer above,
 which is `essence`'s.
-
-Own report section, after Recommendations:
-
-```markdown
-## Advisory checklist
-<!-- Answer yes / no / delegated / n-a with one line each. -->
-- Objective outcome-phrased and unambiguous?
-- Scope boundaries stated, with out-of-scope items where the topic
-  invites creep?
-- Requirement style of the assignment's definition kept throughout?
-- Constraints separated from requirements (no leaked solutioning)?
-- Deliverables actionable, with owners and timing where relevant?
-- Open questions each have an owner?
-- Success criteria present, or explicitly delegated, or deliberately
-  absent?
-- Detail of the assigning kind, not the solving kind?
-- Terms section present and matching what the document actually uses?
-```

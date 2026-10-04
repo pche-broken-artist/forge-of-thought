@@ -6,7 +6,7 @@ argument-hint: "<topic> [project-slug]"
 Research $ARGUMENTS with current web sources — the last token is the
 project slug if it names a directory under `projects/`, the rest is
 the topic. Purpose: inspiration and grounding for the principal's
-intent or assignment — he does not want to reinvent what the world
+artefacts — he does not want to reinvent what the world
 has already solved. One research, one question: a topic that turns
 out to be several questions becomes several notes, each answering
 one — never one combined document.
@@ -26,5 +26,5 @@ one — never one combined document.
 4. Summarise for the principal,
    leading with the recommendation
    and the trade-offs, not a literature review.
-5. If findings suggest changes to intent or assignment, propose them
-   explicitly — via `/forge intent` or `/forge assignment`, never silently.
+5. If findings suggest changes to an artefact of the chain, propose
+   them explicitly — via `/forge <state>`, never silently.

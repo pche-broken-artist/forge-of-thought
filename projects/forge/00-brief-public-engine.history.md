@@ -3,16 +3,16 @@ project: forge
 document: 00-brief-public-engine.md
 ---
 
-# Version History — 00-brief-public-engine.md
+# History — 00-brief-public-engine.md
 
-<!-- Append-only companion of a versioned document (CLAUDE.md, Document
-kinds and Versioning & status). One row per version bump, newest first,
-human-readable — what changed and why. Appended by the write step that
-bumps the document's version, which also rewrites last_change: in the
-document's front-matter from the newest row; never edited by hand, rows
-never rewritten. Not a ledger row: the companion is part of its
-document. -->
-
-| Version | Modification | Author | Date |
-|---|---|---|---|
-| 1.0 | Locked by the principal on 2026-08-29 after the CTO challenge of the same day, written in English (POS.0060); composed in the forge from 2026-08-29 through drafts 0.1–0.5 (born in the forge, THR.0130 and THR.0090). The draft rounds predate the companion convention (POS.0310, 2026-09-04) and are recorded in the ledger's Briefs row and in git. | PCHe | 2026-08-29 |
+<!-- The history of a versioned document: CLAUDE.md, Versioning &
+status. One record per change, one line each, appended at the end,
+never rewritten:
+- <date> | <version> | <author> | <subject> | <kind> | <reason> | Action: <what the user must do> | Was: <wording that ceased to hold>
+Kinds: created | changed | closed | removed | approved. The subject
+is an ID, several IDs where the whole line holds for each, or a
+place without an ID: a section or the file. Reason is left out on
+`created`; `Action` and `Was` only where the record has them, `Was`
+always last, paragraphs in it divided by `<br>`. At the birth of a
+document, one record of the file and one naming every item born
+with it. Lines are not wrapped. -->

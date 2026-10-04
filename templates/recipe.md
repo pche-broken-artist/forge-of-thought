@@ -10,13 +10,13 @@ last_change: <derived from the records of the newest version in recipes/<recipe>
 
 # Recipe — <purpose>
 
-<!-- A recipe: CLAUDE.md, Document chain 7 (what it is) and
+<!-- A recipe: CLAUDE.md, Document chain, Renders (what it is) and
 Versioning & status (how it is versioned). This skeleton owns the
 shape only. -->
 
 ## Inputs
 <!-- Artefacts this render is generated from, by path, one per line.
-More than one input is legitimate (CLAUDE.md, Document chain 7),
+More than one input is legitimate (CLAUDE.md, Document chain, Renders),
 e.g. intent + assignment. -->
 - 10-intent.md
 
@@ -26,7 +26,7 @@ register. Everything the renderer must know beyond the template. -->
 
 ## Format
 <!-- Optional. A recipe without this section ends at the Markdown.
-The two steps: CLAUDE.md, Document chain 7. Never copied into the
+The two steps: CLAUDE.md, Document chain, Renders. Never copied into the
 render. An older recipe's `## Build instructions` reads as this
 section until its next iteration. -->
 - Format: <pptx | docx>
@@ -38,4 +38,4 @@ section until its next iteration. -->
 
 ## Template
 <!-- The literal skeleton of the render, with placeholders. Always
-Markdown — the files made from it: CLAUDE.md, Document chain 7. -->
+Markdown — the files made from it: CLAUDE.md, Document chain, Renders. -->

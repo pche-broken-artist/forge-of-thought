@@ -6,7 +6,7 @@ Genre: readme. Skeleton: `templates/recipe-readme.md`. Output:
 `README.md` in the project root (POS.1000 of the forge intent).
 
 Why every project carries this recipe and when its render is made is
-CLAUDE.md, Document chain 7's.
+CLAUDE.md, Document chain, Renders's.
 
 Role: interviewer. Elicit the answers below from the principal —
 options and trade-offs offered, decisions his (`/recipe`, step 2) —
@@ -20,7 +20,7 @@ Elicitation checklist:
    browsing the repository, or the principal returning — the README
    is written for the first of them.
 2. **Inputs.** A thought project: ledger, brief, intent, and the
-   assignment once it exists. A library: ledger and the two
+   layers below it once they exist. A library: ledger and the two
    `00-INDEX.md` catalogues — its README is a catalogue of what the
    library holds, with Role / Use for per document, and how to use
    it (e.g. the path a deck template is named by).

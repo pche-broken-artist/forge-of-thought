@@ -14,7 +14,7 @@ directive 6).
 `templates/assignment.md`.
 
 **Inputs.** `10-intent.md`, `decisions.md`, the ledger. The intent is
-read with its threads, `10-intent.threads.md`.
+read with the project's threads, `threads.md`.
 
 **Aim.** The assignment carries the in-scope substance of the
 intent to the recipients, complete and precise, so that they can

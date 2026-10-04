@@ -6,7 +6,7 @@
     Code.
 
 .DESCRIPTION
-    Two engines, chosen by -Engine (CLAUDE.md, Document chain 7):
+    Two engines, chosen by -Engine (CLAUDE.md, Document chain, Renders):
 
     pandoc (the default) - the conversion is deterministic: pandoc
     reads the Markdown and writes a .docx, nothing is interpreted by a

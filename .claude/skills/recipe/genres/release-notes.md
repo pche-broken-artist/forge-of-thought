@@ -8,7 +8,7 @@ intent). Thought projects only — a library has no intent and
 therefore no release notes; its history is git.
 
 Why every thought project carries this recipe and when its render is
-made is CLAUDE.md, Document chain 7's; the skeleton owns the shape
+made is CLAUDE.md, Document chain, Renders's; the skeleton owns the shape
 (POS.0730 of the forge intent).
 
 Role: interviewer, lightly — this genre has few degrees of freedom.

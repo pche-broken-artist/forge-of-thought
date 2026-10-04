@@ -1,13 +1,13 @@
 ---
 project: forge
-document: 10-intent.md
 ---
 
-# Open threads — 10-intent.md
+# Open threads
 
-<!-- The open threads of the intent: CLAUDE.md, Document chain 2. -->
+<!-- The open threads of the project:
+`.claude/skills/forge/states/intent.md`, Threads and files. -->
 
-- **THR.0090** Multi-principal use. Current working assumption: a second
+- **THR.0090** [intent] Multi-principal use. Current working assumption: a second
   principal receives Forge — including the `forge` project itself — via
   git and runs their own instance. How genuine multi-user operation
   would work is an open point for the future; deliberately not being
@@ -15,12 +15,12 @@ document: 10-intent.md
   assignment handed to a colleague's instance as his brief — how it
   is seeded, how the IDs continue, where the essence lens finds a
   parent; this thread's, when it is taken up.
-- **THR.0140** The delivery side. Whether the forge's output one day
+- **THR.0140** [intent] The delivery side. Whether the forge's output one day
   feeds a delivery chain as grown layers of the forge or hands over
   to a separate delivery framework is open and deliberately not
   worked on now; it is taken up when a subject project first needs
   the linkage — flow-ba is a natural candidate.
-- **THR.0150** The scripts in Python. Decided by the principal
+- **THR.0150** [intent] The scripts in Python. Decided by the principal
   2026-10-02, on the feedback of the forge's users: scripts are
   written in Python, not PowerShell; a new script is written in
   Python at once and the existing PowerShell scripts are rewritten
@@ -32,7 +32,7 @@ document: 10-intent.md
   per-prompt hook, which `.claude/settings.json` starts through
   `pwsh`; what the git door asks of a machine once it is Python,
   since today Python is needed only where documents are converted.
-- **THR.0170** Branch documents. Considered on 2026-08-27 alongside
+- **THR.0170** [intent] Branch documents. Considered on 2026-08-27 alongside
   POS.0920 and deferred as too heavy for now: a working document per
   large whole (`branches/<name>.md` — a verbatim seed followed by
   positions and threads worked like the intent, states `open | merged
@@ -41,7 +41,7 @@ document: 10-intent.md
   structured, position-level work before it can be locked and mined;
   until then a draft brief is the branch.
 
-- **THR.0190** A plugin as a later distribution layer. Claude Code
+- **THR.0190** [intent] A plugin as a later distribution layer. Claude Code
   plugins would give the only real upgrade channel and project =
   repository, but a plugin carries no `CLAUDE.md`, and commands are
   discovered only up to the repository root — so it forces changes
@@ -68,11 +68,11 @@ document: 10-intent.md
   recorded here largely fall once CLAUDE.md stays in the engine and
   a framework is a package of instances; for the brief
   `engine-split`.
-- **THR.0200** The public face: an exemplar project for the README — the
+- **THR.0200** [intent] The public face: an exemplar project for the README — the
   forge itself, or one created later; the company projects cannot
   travel. Until one exists the README carries a one-sentence placeholder
   (readme recipe 0.24). Repository name and licence settled in POS.0990.
-- **THR.0210** A guard rail for the public boundary. The rewrite before
+- **THR.0210** [intent] A guard rail for the public boundary. The rewrite before
   publication (POS.0980) found the leak surface where the challenge
   predicted it: the forge project's own artefacts quoting the substance
   of subject projects — a sentence of a company intent in a CTO
@@ -125,7 +125,7 @@ document: 10-intent.md
   names held in `CLAUDE.local.md` so that the list itself never
   reaches git; the rule on content stays a rule. A neighbour of the
   gate of THR.0400. To be taken up; nothing decided.
-- **THR.0230** Can the forge be split into an engine and the rest?
+- **THR.0230** [intent] Can the forge be split into an engine and the rest?
   One of three separate tasks the principal named on 2026-09-26, and
   the only one this thread carries; the other two are THR.0420, the
   derivations of the forge for other jobs, and THR.0300, everything
@@ -236,7 +236,7 @@ document: 10-intent.md
   (POS.1310). The installation mechanism is a research question.
   How new types are added to the engine is THR.0480 (2026-09-30),
   to be settled before this split.
-- **THR.0240** The size of CLAUDE.md. 523 lines on 2026-09-03 and
+- **THR.0240** [intent] The size of CLAUDE.md. 523 lines on 2026-09-03 and
   growing with every iteration; THR.0190 already records that a split
   moves rules from always-on to on-demand and is a behaviour change, not
   a cut. To be dealt with sooner or later whatever becomes of THR.0230,
@@ -284,7 +284,7 @@ document: 10-intent.md
   are settled with it; one stays parked, FND.0650, the genre
   checklists beside their skeletons. What must be always-on beyond
   that is still this thread's question.
-- **THR.0250** Two suggested functions: an expander and an essence
+- **THR.0250** [intent] Two suggested functions: an expander and an essence
   manager. A tip the principal received on 2026-09-03 — where from not
   recorded. The essence manager got its detail the same day: at the end
   of the chain a blind agent, without context, distils the essence of
@@ -294,13 +294,13 @@ document: 10-intent.md
   of the chain; whether an end-to-end distillation is a further thing or
   the same lens run brief-to-last-layer is open. The expander has a name
   only. Parked until more detail arrives.
-- **THR.0290** Research on the reviewer mechanism. What `/research`
+- **THR.0290** [intent] Research on the reviewer mechanism. What `/research`
   gains from kinds — the principal's idea of 2026-09-04 alongside the
   checks, which became POS.1140 — deferred on 2026-09-06 by his word:
   one command with one output today; taken up when a second way of
   researching appears. Opened 2026-09-04; the check half closed at
   3.44.
-- **THR.0300** Everything a user makes for himself, kept at his own
+- **THR.0300** [intent] Everything a user makes for himself, kept at his own
   place and not in the forge's git. Not agents alone: agents, checks,
   critics, challengers, research, whatever a user writes for his own
   use, with no ambition of contributing it to the engine — the
@@ -337,7 +337,7 @@ document: 10-intent.md
   `forge-pull` never overwrites it; a remark in the brief, for
   `engine-split`: if the mechanism is one, the dispatcher reads both
   roots, the engine's and the local one.
-- **THR.0320** A harness lens. The principal's direction of
+- **THR.0320** [intent] A harness lens. The principal's direction of
   2026-09-05: the critic roster gets a lens `harness` that reviews
   the operating layer — CLAUDE.md and the skills, commands and agents
   of `.claude/` — against current Claude Code conventions, and the
@@ -364,7 +364,7 @@ document: 10-intent.md
   kind of THR.0290, and the shape of the operating layer it reviews
   is POS.1120's and THR.0240's question. Opened 2026-09-05.
 
-- **THR.0340** The README split from the documentation. The README is
+- **THR.0340** [intent] The README split from the documentation. The README is
   today the engine's whole documentation — 829 lines on 2026-09-08,
   longer than CLAUDE.md, sixteen chapters that are three things at
   once: an invitation (why, what you get, quickstart), a user's guide
@@ -390,7 +390,7 @@ document: 10-intent.md
   principal will give further input (noted 2026-09-14 from the
   ledger).
 
-- **THR.0350** Lessons of the first run in the field. The record of
+- **THR.0350** [intent] Lessons of the first run in the field. The record of
   the forge applied to a private project of the principal's,
   10–13 September 2026, is registered as
   `sources/forge-run-record-health.md`: a timeline, eight failures,
@@ -463,7 +463,7 @@ document: 10-intent.md
   the finding, not the pile, and carries no mark of authorship
   (POS.0110, POS.1330).
 
-- **THR.0360** A layer with an external audience. The first real run
+- **THR.0360** [intent] A layer with an external audience. The first real run
   below the intent (project `health`,
   `sources/forge-run-record-health.md`, D.05, G.05) needed a report
   for a third party, not an assignment: a layer built ad hoc without
@@ -500,7 +500,7 @@ document: 10-intent.md
   must be worth it on its own; a later possibility is never what
   justifies it
   (`research/2026-09-28-artefact-layers-from-idea-to-handover.md`).
-- **THR.0370** Mermaid diagrams in Word. `scripts/md2docx.ps1`
+- **THR.0370** [intent] Mermaid diagrams in Word. `scripts/md2docx.ps1`
   (POS.1150) converts a render to Word through pandoc and leaves
   Mermaid blocks as code. Agreed in the walkthrough of 2026-09-12 but
   not built: the route would be `mermaid-cli` rendering each block to
@@ -518,7 +518,7 @@ document: 10-intent.md
   Word to PDF is the recipient's, never the forge's (POS.1150).
   Deferred 2026-09-12 by the principal — "needs more thought"; opened
   as a thread 2026-09-14 from the ledger.
-- **THR.0380** Executive pitch, loose ends. The five-slide deck
+- **THR.0380** [intent] Executive pitch, loose ends. The five-slide deck
   (`recipes/executive-pitch.md` 0.4, `renders/executive-pitch.md` and
   `.pptx` of 2026-09-11) stays in `projects/forge` with the default
   deck template (decided 2026-09-10). Open from the render run: the
@@ -526,7 +526,7 @@ document: 10-intent.md
   them; and the headless build had no `document-skills:pptx` skill
   available and built the deck with python-pptx instead — to watch at
   the next build. Opened 2026-09-14 from the ledger.
-- **THR.0400** A gate in front of the tools. On 2026-09-20 Claude
+- **THR.0400** [intent] A gate in front of the tools. On 2026-09-20 Claude
   read git state directly, past the scripts, twice, and on a bare yes
   to one change wrote its consequences as well — with the rules fully
   in context and the session in an automatic permission mode, so that
@@ -591,7 +591,7 @@ document: 10-intent.md
   from `CLAUDE.local.md` searched in what is about to be saved — is
   a neighbour of this gate and stays that thread's. Opened
   2026-09-20 (Claude's proposal, the principal's rules).
-- **THR.0410** The duration of `/save` and `/release`. Watched since
+- **THR.0410** [intent] The duration of `/save` and `/release`. Watched since
   2026-09-14, the measurements so far in
   `research/2026-09-14-save-and-release-duration.md` (POS.1100,
   POS.0810); the watch continues at the next releases, and what
@@ -607,7 +607,7 @@ document: 10-intent.md
   on that model once on the principal's word against the rule of
   `/render`. The recipe changed between the runs, so the comparison
   is not clean.
-- **THR.0420** Derivations of the forge for other jobs. The forge as
+- **THR.0420** [intent] Derivations of the forge for other jobs. The forge as
   it stands serves the forging of a thought into an assignment; the
   principal wants versions of it that serve other work, and said on
   2026-09-26 that this is a task of its own, separate from the engine
@@ -640,7 +640,7 @@ document: 10-intent.md
   versus instance, the test on CLAUDE.md). Without it a user's local
   additions grow into a derivation, and the one tool that does
   everything comes in through the door for user artefacts.
-- **THR.0430** A command that ends a session. It verifies that
+- **THR.0430** [intent] A command that ends a session. It verifies that
   nothing lives only in the conversation — an unwritten round, a
   repository with changes (`forge-status`), a stale render — and
   says what a shutdown would lose; then it records in the ledger the
@@ -655,7 +655,7 @@ document: 10-intent.md
   the sum is per session or cumulative, and the research of the
   transcript format before any script. Opened 2026-09-27 at the
   principal's direction.
-- **THR.0460** `/recipe` and `/forge`: one dispatcher or two.
+- **THR.0460** [intent] `/recipe` and `/forge`: one dispatcher or two.
   Today the states of `/forge` and the genres of `/recipe` are one
   mechanism written twice in different shapes. A recipe is composed
   and not found (POS.1300), so the seven blocks are not its shape;
@@ -665,7 +665,7 @@ document: 10-intent.md
   "composed from the skeleton"; against it stands that `/forge` is
   the door of the chain. Opened 2026-09-28 from
   `00-brief-elicitation.md`.
-- **THR.0470** The intent is too long to be read. At 4.32 the forge
+- **THR.0470** [intent] The intent is too long to be read. At 4.32 the forge
   intent has 2 997 lines, and the principal finds it so talkative
   that a human cannot read it: an intent is to be structured
   decisions and the understanding of the aim. Worked 2026-09-29 by
@@ -797,7 +797,7 @@ document: 10-intent.md
   320; the three definitions in full 318 (POS.1330 to POS.1350). Two
   samples of the log made on 2026-09-29 lie in the engine's `tmp/`,
   outside git; the shape they show is POS.0310's. Opened 2026-09-28.
-- **THR.0480** How a new type is added to the engine — a new
+- **THR.0480** [intent] How a new type is added to the engine — a new
   artefact of the chain, a whole new chain, a new elicitor, a new
   reviewer, genre, command or script. Opened 2026-09-30 at the
   principal's direction; can be worked at any time, and is to be
@@ -829,7 +829,7 @@ document: 10-intent.md
   described a layer by today's state file and was corrected to the
   seven blocks, with a section on the elicitor, before its first
   save, on the principal's word of 2026-09-30.
-- **THR.0490** A stale clone goes unnoticed. The principal works on
+- **THR.0490** [intent] A stale clone goes unnoticed. The principal works on
   more than one machine, so a local engine behind its origin is the
   normal case, not the exception. On 2026-10-01 the `/forge` map was
   reported from a clone one commit behind (6856009 against f371de0)
@@ -847,7 +847,7 @@ document: 10-intent.md
   recommendation, marked as his: both, since a map drawn from a stale
   clone is a map of the wrong state. Nothing decided. Opened
   2026-10-01.
-- **THR.0500** The reviewers' mechanism out of the session. The
+- **THR.0500** [intent] The reviewers' mechanism out of the session. The
   principal's words of 2026-10-02: one mechanism for critic,
   challenger and check; and rather than Claude doing the bookkeeping,
   a skill or a command told which agents to run, which handles the
@@ -876,7 +876,7 @@ document: 10-intent.md
   changes a stance, which keeps the prefixes at two (CHL stays, the
   principal's verdict of 2026-10-02). Bears on THR.0460 and THR.0480.
   Opened 2026-10-02.
-- **THR.0510** Live reference material by nightly export. The
+- **THR.0510** [intent] Live reference material by nightly export. The
   principal's thought of 2026-10-02, not worked through and nothing
   decided: the important content of the company's architecture
   repository is exported every evening into Markdown and kept in git;
@@ -888,7 +888,7 @@ document: 10-intent.md
   library of today is rather a proof of concept of the approach.
   Bears on POS.0970 and POS.1020, and on what `/ingest` does with a
   changed document in a library. Opened 2026-10-02.
-- **THR.0520** The intent carries the solution, and a layer for the
+- **THR.0520** [intent, solution-design] The intent carries the solution, and a layer for the
   solution is missing. Priority, to be worked at once. The
   principal's word of 2026-10-03, a fault of the design from the
   start that neither he nor Claude saw: the debate whether the forge
@@ -931,23 +931,27 @@ document: 10-intent.md
   | Step | What | State |
   |---|---|---|
   | 1 | Decide what the solution design is | done 2026-10-03, intent 4.52 |
-  | 2 | Prepare the forge: the names of the artefacts leave the engine so that artefacts are read from disk; CLAUDE.md brought to the positions of step 1 | next |
-  | 3 | Add the solution design by hand, its definition and its template, as the trial of step 2 | |
-  | 4 | Write the solution design of the forge project and move the solution out of its intent | |
+  | 2 | Prepare the forge: the names of the artefacts leave the engine so that artefacts are read from disk; CLAUDE.md brought to the positions of step 1 | done 2026-10-03, intent 4.53, handed over to Claude and judged by the principal |
+  | 3 | Add the solution design by hand, its definition and its template, as the trial of step 2 | done 2026-10-04, intent 4.54, handed over to Claude and judged by the principal |
+  | 4 | Write the solution design of the forge project and move the solution out of its intent | next |
   | 5 | Draw from that the command that adds a new kind of artefact | |
-  | 6 | Make the BRD by that command, its first trial | |
+  | 6 | Make the BRD by that command, its first trial; with it the challenger persona of a business analyst | |
 
-  Until step 2 is done the intent says what the operating layer does
-  not yet do: the check `engine` will report it, and that is
-  expected. Step 2 owes, beside the names: the Document kinds, the
-  Document chain, the ID scheme (SOL; TBC also in the solution
-  design) and the Ledger section of CLAUDE.md, the sentence that
-  version 1 ends at the assignment, a working method for work handed
-  over, the skill `forge`, the check `project` and
-  `templates/ledger.md` for the withdrawn `terminal:`. Step 3 starts
-  from a working template agreed in the walkthrough: a short prose
-  head, the parts as SOL items (what it is, what it realises, the
-  choice, where it is realised), what is open as TBC. Step 4 is a
+  What steps 2 and 3 did is in the records of the operating layer at
+  4.53 and 4.54. Left on purpose: the `terminal:` line in the ledgers
+  of the other projects, harmless and deleted at their next write;
+  the threads file of the other projects, renamed to `threads.md`
+  and its threads marked at their next write; the README, which is
+  re-rendered at the next release. Decided with step 2, the
+  principal's word of 2026-10-03: the one list of the forge's
+  artefacts is the listing of `.claude/skills/forge/states/`,
+  CLAUDE.md describes none of them, and the table of artefacts in the
+  README is rendered from the definitions; settled in step 3, the
+  head of a definition carries nothing new for that, the table being
+  rendered from `description`, Target and Inputs, and the readme
+  recipe is iterated for it before the next release. The
+  locking of a brief is withdrawn (POS.0110, POS.0920, POS.0320).
+  Step 4 is a
   one-off: the solution is moved as it stands in the intent, and
   where a reason can no longer be told from the intent or its
   history, it is said to be unknown and none is invented; after it
@@ -962,6 +966,46 @@ document: 10-intent.md
   decided. The sections "A technical clean-up" and "The shape of the
   whole" of the brief `next-gen` rest on this thread. Opened
   2026-10-03.
+- **THR.0530** [intent] What can be done deterministically is done
+  by a script, not by the model. The principal's word of 2026-10-04:
+  this should be a prime directive of the forge, and the forge is to
+  be gone through for what is to be rewritten into scripts. Nothing
+  is decided beyond this stance.
+  Evidence.
+  `research/2026-10-04-deterministic-work-by-script-or-by-model.md`
+  read the whole operating layer with the intent. By the note: the
+  rule is kept at the edge of the forge (git, the conversions, the
+  hook) and not at its core, and it stands nowhere in the intent as a
+  position. The model does work the files fully determine in the
+  check `light` at every save, in most points of the checks `project`
+  and `engine`, in the filing and numbering of findings (THR.0500),
+  in the write of a round (version, record, `last_change`, ledger
+  row), in the provenance and staleness of renders, and in smaller
+  pieces. POS.0540 and POS.1140 decide the opposite for the checks,
+  and POS.0310 and POS.0710 call machine-written a step the model
+  does. The note's recommendation, Claude's and not judged: the
+  position first, then a script for conformance starting with the
+  check `light`, then the filing of findings and the write of a
+  round. Its price, by the note: a script is kept with every change
+  of a convention, a shape may stand in two places, Markdown tables
+  are a weak store for a program, and a save would need Python on
+  every machine. Not verified: nothing was run, the durations are
+  those of THR.0410.
+  Open: the wording of the directive and where it stands; what is
+  rewritten and in what order; how it sits with THR.0150, THR.0410
+  and THR.0500. Opened 2026-10-04.
+- **THR.0540** [assignment] How `shall` and the banned English words
+  stand in an assignment written in another language; raised
+  2026-10-02, nothing decided. Carried in the ledger without an ID
+  until 2026-10-04 (FND.0930).
+- **THR.0550** [intent] `essence` is not run on this project, the
+  principal's word of 2026-10-02; the release skill still offers it
+  at every release. Carried in the ledger without an ID until
+  2026-10-04 (FND.0930).
+- **THR.0560** [intent] Three weakly founded places in the README of
+  2026-10-02 (the next step of `/forge`, when two scripts are run,
+  the fifth verdict); the readme recipe, at its next iteration.
+  Carried in the ledger without an ID until 2026-10-04 (FND.0930).
 
 Note: the ID THR.0120 was inadvertently used twice — first for the
 readme-recipe thread (opened 1.14, closed 1.16), then for the

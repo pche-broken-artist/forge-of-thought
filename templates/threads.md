@@ -1,11 +1,10 @@
 ---
 project: <slug>
-document: 10-intent.md
 ---
 
-# Open threads — 10-intent.md
+# Open threads
 
-<!-- The open threads of the intent:
+<!-- The open threads of the project:
 `.claude/skills/forge/states/intent.md`, Threads and files. -->
 
-- **THR.0010** …
+- **THR.0010** [intent] …

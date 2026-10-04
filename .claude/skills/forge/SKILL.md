@@ -24,8 +24,8 @@ Adding a layer means adding a file; this dispatcher never changes.
      states, no next step beyond `/ingest`;
    - which chain artefacts exist, at what version and status —
      briefs with their mining state, a draft brief or a `pending` /
-     `partial` one named as work waiting; the ledger header's
-     `terminal:` applies (CLAUDE.md, Ledger);
+     `partial` one named as work waiting; a layer the project does
+     not have is not reported as missing (CLAUDE.md, Ledger);
    - which target states can be worked on from here (inputs exist) and
      which cannot yet (say what is missing);
    - which renders are stale (as `/render` step 5 defines it) and

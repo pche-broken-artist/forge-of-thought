@@ -7,7 +7,7 @@ Genre: presentation. Skeleton: `templates/recipe-presentation.md`.
 The product is a recipe whose render is a slide-by-slide Markdown deck
 definition — source material for a presentation, never the
 presentation itself. The PowerPoint files are made from it in the
-two steps of CLAUDE.md, Document chain 7; what each step needs is
+two steps of CLAUDE.md, Document chain, Renders; what each step needs is
 the recipe's Format section, and the render carries content only.
 
 Role: interviewer. Elicit the answers below from the principal —

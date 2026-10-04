@@ -13,7 +13,7 @@ last_change: <derived from the records of the newest version in recipes/<recipe>
 <!-- Presentation-genre recipe, composed via /recipe presentation; the
 render is a slide-by-slide deck definition, from which /render makes
 a plain PowerPoint file and /publish the designed one. A recipe and
-the two steps: CLAUDE.md, Document chain 7.
+the two steps: CLAUDE.md, Document chain, Renders.
 -->
 
 ## Inputs

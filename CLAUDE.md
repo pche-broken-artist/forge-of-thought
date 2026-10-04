@@ -3,17 +3,18 @@
 ## What this workspace is
 **Forge of Thought** is a place for forging thoughts — a workshop
 where thought is tempered and shaped. Any idea — process redesign,
-platform initiatives, organisational topics, anything — travels a fixed
+platform initiatives, organisational topics, anything — travels a
 chain of versioned documents from the idea put together onward, under
 isolated adversarial review. It is not tied to one person or one
 management relationship: anyone can be the principal, and the recipients
 of an assignment may be teams, colleagues, or the principal's future
 self.
 
-**Version 1 ends at the assignment.** The chain is designed to grow
-downward toward realisation — a BRD layer, solution architecture, up to
-a full deck ready to implement including integration — without reworking
-anything that exists. Nothing is implemented here; the engine specifies.
+**The chain ends where the project needs it to.** Below the intent a
+project takes the layers it needs, and many end at the intent. The
+chain grows by adding a
+layer's definition, without reworking anything that exists. Nothing is
+implemented here; the engine specifies.
 
 Who the principal is and what language the conversation runs in are
 instance facts, not properties of the system: they live in
@@ -141,7 +142,22 @@ any of them in a word.
   agreed is carried in the conversation and written once at its end, on
   the principal's word (prime directive 9) — the word is `write`.
 - **Intent-first.** Substance changes go into the intent and propagate
-  from there; only wording is fixed downstream directly.
+  from there down the whole chain the project has; a change may come
+  from below, when solving shows that what is wanted must change, and
+  then the intent changes first. Only wording is fixed downstream
+  directly.
+- **Handing over.** How an artefact is composed is the principal's
+  choice, artefact by artefact: found together by elicitation, or
+  handed over with a few sentences of what he wants. Handed over,
+  Claude works the artefact's definition alone, from what he was
+  given, from research and from the sources, within the bounds the
+  principal sets, and returns a proposal: with it a short list of
+  what he assumed and what he chose, each choice with what it was
+  chosen against, and the same said in plain words in the artefact
+  where it stands, until the principal has judged it. Nothing is
+  derived from the proposal and nothing is done on it before his
+  judgement. Prime directive 1 holds unchanged for work found
+  together.
 - **Recommend, do not push.** Every option comes with a recommendation
   and reason, stated once; a declined recommendation is not re-argued
   without new facts.
@@ -155,10 +171,7 @@ whether it is versioned and how it behaves:
 
 | Group | Kind | Meaning | Written by | Versioned | Behaviour |
 |---|---|---|---|---|---|
-| artefacts | brief | the idea put together: what the principal wants and why, with what he chose from the finding | principal; Claude may work on the text | yes | locked at 1.0, then immutable |
-| artefacts | intent | current understanding for principal and Claude: positions, facts, threads, rejections | Claude, principal composes | yes | rewritten freely |
-| artefacts | assignment | the direction handed to the recipients, self-contained | Claude, principal composes | yes | rewritten freely |
-| artefacts | later artefacts (BRD, RFP, article…) | further layers, each derived from the one above | Claude, principal composes | yes | rewritten freely |
+| artefacts | artefact | a document of the chain; what each is, its definition says | the principal with Claude | yes | rewritten freely |
 | records | history | what changed in a versioned document, and why | forge | — | append-only |
 | records | decisions | the principal's decisions with reasons | forge | — | append-only |
 | records | review, challenge | one dated reviewer run | reviewer agent | — | immutable |
@@ -169,6 +182,7 @@ whether it is versioned and how it behaves:
 | resources | source | external input as it arrived | external, /ingest | — | immutable |
 | resources | research | durable answer to one question | Claude, /research | — | immutable |
 
+Which artefacts the forge has is said in Document chain.
 Every versioned kind keeps its history in a companion beside it
 (Versioning & status). A functional
 binary — a `.potx` template, a graphic — is a source, so a library's
@@ -180,56 +194,33 @@ blocks and front-matter are never wrapped.
 
 ## Document chain
 Files are numbered so the chain can grow without renaming anything.
-Gaps of ten leave room for later layers (e.g. `30-brd.md`,
-`40-solution-design.md`) without renumbering.
+Gaps of ten leave room for a layer to be added without renumbering.
 
 ```
-00-brief.md      the idea put together — draft until locked, then
-                 never edited; later wholes as 00-brief-<name>.md
-10-intent.md     our working understanding — rewritten freely, versioned
-20-assignment.md the direction handed to the recipients — versioned
+NN-<artefact>.md   an artefact of the chain — versioned
 <file>.history.md  history of each versioned document —
-                 append-only companion beside it
-decisions.md     append-only DEC records
-ledger.md        single source of truth for state
+                   append-only companion beside it
+decisions.md       append-only DEC records
+ledger.md          single source of truth for state
 ```
 
 Every artefact of the chain has a **definition**: its state file
 `.claude/skills/forge/states/<state>.md`, worked through
 `/forge <state>` and paired with the artefact's template. The
-definition says how the artefact is found, by questions, research
-and sources, and owns the rules of that artefact; the template says
-what comes out. The shape every definition keeps is POS.1310 of the
-forge intent, and how its Map is walked POS.1320. The points below
-say only what each artefact is and how it joins the chain.
+definition says what the artefact is, how it is found, by questions,
+research and sources, and owns its rules; the template says what
+comes out. Which artefacts the forge has is the listing of that
+directory, one definition each: they are listed nowhere else, and the
+table of artefacts in the README is rendered from the definitions. A
+chain starts at a brief and its trunk is the intent; below the intent
+a project takes the layers it needs, none a condition of another, and
+a layer it does not have is not missing. The shape every definition
+keeps is POS.1310 of the forge intent, and how its Map is walked
+POS.1320.
 
-1. **`00-brief.md`** — the idea put together: what the principal
-   wants and why, his by his approval; what it carries and how it is
-   found is its definition's
-   (`.claude/skills/forge/states/brief.md`, through
-   `/forge brief [name]`). `draft` while being composed, `approved`
-   (1.0) once the principal locks it — immutable from the lock, not
-   from creation. A project may have more than one: every later whole
-   of thinking that would otherwise land in the intent as a batch of
-   unproven positions is born as `00-brief-<name>.md` under the same
-   rules. A locked brief is mined into the single intent — positions
-   cite it as provenance; a whole that dies on the way leaves the
-   brief locked and one REJ with the reason. The ledger's Briefs
-   table tracks each brief's mining state, as `templates/ledger.md`
-   has it, with a free-text note. Each locked brief is the provenance
-   anchor and drift measure of its whole.
-2. **`10-intent.md`** — the working document, audience: principal +
-   Claude. Consolidated *current* state of intent: what he wants, why,
-   what is the case, what is open, what was rejected and why. Its open
-   threads live beside it in `10-intent.threads.md`, part of the
-   intent as its history is. What the intent and its threads hold is
-   its definition's (`.claude/skills/forge/states/intent.md`).
-3. **`20-assignment.md`** — distilled from intent, audience: the
-   recipients of the assignment (teams, colleagues, or the principal's
-   future self). The only document handed over. Self-contained.
-4. **Iteration default:** intent-first, with drafting early as a
+1. **Iteration default:** intent-first, with drafting early as a
    legitimate tool — both as Working methods state them.
-5. **External inputs** (transcripts, offers, documents, standards) live
+2. **External inputs** (transcripts, offers, documents, standards) live
    in `sources/`, immutable once registered, plain slug filenames —
    dates are recorded best-effort in the ledger, never demanded from
    the principal. They may arrive at any stage, even before the brief.
@@ -266,9 +257,9 @@ say only what each artefact is and how it joins the chain.
    index is freely rewritten, like the ledger. `/ingest` and
    `/research` write the entries; `/check` verifies index against
    directory.
-6. **Feedback from recipients** has no channel of its own. The principal
+3. **Feedback from recipients** has no channel of its own. The principal
    processes it and feeds conclusions back via `/forge intent`.
-7. **Renders** are audience-specific outputs generated from the chain —
+4. **Renders** are audience-specific outputs generated from the chain —
    a pitch for the group, an architecture picture, an executive
    summary, the repository README. A render is never edited by hand:
    what is iterated is its **recipe** (`recipes/<recipe>.md` — inputs,
@@ -354,11 +345,13 @@ projects/                  # gitignored (projects/*) except
                            # engine does not know
 projects/<slug>/           # kind: thought — the chain
   .git/                               # the project's own repository
-  README.md  RELEASE-NOTES.md         # renders (Document chain 7)
+  README.md  RELEASE-NOTES.md         # renders (Document chain, Renders)
   logo.png                            # optional project avatar
-  00-brief.md  10-intent.md  20-assignment.md
-  10-intent.threads.md                # the intent's open threads
-                                      # (Document chain 2)
+  00-brief.md  10-intent.md           # the trunk of every project
+  NN-<layer>.md                       # layers below the intent, as
+                                      # the project needs them
+  threads.md                          # the project's open threads
+                                      # (the intent's definition)
   00-brief-<name>.md                  # later briefs, one per whole
   <file>.history.md                   # history companion
                                       # (Versioning & status)
@@ -468,8 +461,8 @@ Front-matter carries `version`, `date`, `status`
 must agree with the number: an integer version is `approved`, anything
 else is not; a recipe carries `updated` in place of `date`, no
 status, and stays 0.x.
-Every versioned document — brief, intent, assignment, later artefacts
-and recipes alike, no exception — keeps its **history** in an
+Every versioned document — every artefact and every recipe alike, no
+exception — keeps its **history** in an
 append-only companion `<file>.history.md` beside it, never in its
 body: the body is the current state, the companion the record. The
 history is a log, one record per change, in the shape
@@ -493,14 +486,14 @@ handed over with the document by the link into git. A companion
 written before the log keeps its table untouched: it moves as it
 stands to `<file>.history.archive.md`, immutable from then on, and
 the log begins with the next version; the history of an item is a
-search of both. The companion of a locked brief stays as it is. A
+search of both. A
 Version History table, in the body of a document or in its
 companion, is a `/check` finding settled by that move, on the
 principal's word, project by project.
 
-Immutable documents (a locked brief, reviews, challenges, sources,
-research) are never edited — a brief from its lock, a source from its
-registration, the others from creation; corrections happen downstream.
+Immutable documents (reviews, challenges, sources, research) are never
+edited — a source from its registration, the others from creation;
+corrections happen downstream.
 
 ## ID scheme
 Format **`PREFIX.NNNN`**, all prefixes three letters. IDs are **global and
@@ -519,10 +512,11 @@ lifecycle. Depth max two levels.
 | CON | constraint — deliberate boundary, not to be challenged | assignment |
 | ASM | assumption | assignment |
 | DEL | deliverable — may delegate work ("produce NFRs and return") | assignment |
-| TBC | open question / to be confirmed, with owner | assignment |
+| TBC | open question / to be confirmed, with owner | assignment, solution design |
+| SOL | part of the solution — what is built or done, what it realises, the choice it rests on | solution design |
 | SCR | success criterion — optional or delegated | assignment |
 | POS | position the principal currently holds | intent |
-| THR | open thread — unresolved matter to elicit next; carries its origin: the principal's word (the default, unmarked), a source by path, or Claude's synthesis | intent (its threads file) |
+| THR | open thread — unresolved matter to elicit next; names the artefact it concerns and carries its origin: the principal's word (the default, unmarked), a document by path, or Claude's synthesis | the project's `threads.md` |
 | REJ | rejected direction, with the reason it was dropped | intent |
 | FCT | fact — what is the case, as the principal states it or as a source states it; not a stance; a source's fact cites its file, the principal's needs none; verification is never demanded | intent |
 | FND | finding of a critic (document quality) or of a check (conformance) | ledger, reviews |
@@ -579,7 +573,7 @@ by its slug, or the engine.
   epistemic status and the ban on fabrication the contract's.
   Produces `CHL` in `challenges/` (`YYYY-MM-DD-challenge-<persona>.md`).
   Challenge states: as `templates/ledger.md` has them. An accepted
-  challenge must change the intent.
+  challenge is mended where it needs to be (POS.0440).
 - **checks** (`/check <check> [slug]`) — mechanical conformance with
   the conventions, never substance or quality. Each check owns one
   concern and none another's; what each verifies is its agent file's,
@@ -608,9 +602,9 @@ Waiting on principal a matter that has an ID gets one line — the ID,
 a few words, its state — and its substance stays in the thread or the
 record; free text only for a matter with no ID yet, which gets one at
 the next write; an unfinished conversation is saved into its thread
-of the intent, never here. The header may declare `terminal:`, the
-artefact the chain ends at (assignment when absent); `/forge` and the
-checks then say nothing of a missing assignment.
+of the intent, never here. A layer below the intent
+that a project does not have is not missing: `/forge` and the checks
+say nothing of it.
 
 ## Commands
 What a command does in full is its skill's
@@ -642,7 +636,7 @@ What a command does in full is its skill's
 `projects/forge/` is Forge of Thought itself run through its own process:
 its brief, intent (design positions POS, open threads THR, rejected
 directions REJ), decisions and ledger; its README and release notes
-are the engine's, renders per Document chain 7 from
+are the engine's, renders per Document chain, Renders from
 `projects/forge/recipes/`. A process change is complete only once
 that intent is updated and the README re-rendered.
 

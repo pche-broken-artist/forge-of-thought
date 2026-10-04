@@ -1,8 +1,8 @@
 ---
-version: 4.52
-date: 2026-10-03
+version: 4.54
+date: 2026-10-04
 status: draft
-last_change: 4.52 (2026-10-03): THR.0520 walked through, ten matters - an intent says what is wanted and why and does not solve (POS.1390); the solution design an artefact of the chain, derived from the intent, the assignment or the BRD, the ledger's `terminal:` withdrawn (POS.1400, POS.0160); how an artefact is composed is the principal's choice, found together or handed over (POS.1410); what a solution design is made of, the prefix SOL (POS.1420); a change runs the whole chain and may come from below (POS.0900); the lighter brief (POS.0110); the definitions of the intent and the brief brought to it; the plan of six steps in the thread.
+last_change: 4.54 (2026-10-04): step 3 of THR.0520, the solution design added by hand (operating layer) - its definition and template, the challenger persona `architect`, the lens `clarity` judging every artefact by its own definition and its advisory checklist gone; an accepted challenge is mended where it needs to be and goes above its layer only as a thread (POS.0440); a thread may come from any document (POS.0230); one threads file for the project, `threads.md`, every thread naming the artefact it concerns (POS.0120); the reader of a solution design, a TBC saying whether it blocks realisation, completion in the definition (POS.1420); four definitions (POS.1310); the persona `architect` named (POS.0420); THR.0530 opened, what can be done deterministically is done by a script; THR.0540 to THR.0560 opened from three matters the ledger carried without an ID (FND.0930).
 project: forge
 audience: principal + Claude only
 ---
@@ -267,9 +267,11 @@ position that already stands elsewhere.
   threads hold in the intent's, completeness and the Requirement
   style in the assignment's. CLAUDE.md keeps of each artefact what it
   is, how it joins the chain, and a pointer. The
-  definitions of the three artefacts of today's chain are the state
-  files `brief.md`, `intent.md` and `assignment.md`; POS.1330,
-  POS.1340 and POS.1350 say what each is to achieve and why. Present
+  definitions of the four artefacts of today's chain are the state
+  files `brief.md`, `intent.md`, `assignment.md` and
+  `solution-design.md`; POS.1330, POS.1340 and POS.1350, and for the
+  solution design POS.1400 with POS.1420, say what each is to achieve
+  and why. Present
   shape 2026-10-02, from `00-brief-elicitation.md`.
 - **POS.1320 A Map is a map of what must be found, not a
   questionnaire.** It names, in the artefact's own vocabulary, what
@@ -403,9 +405,9 @@ position that already stands elsewhere.
   `10-intent.md`, `20-assignment.md`) so later layers — a BRD
   (`30-brd.md`), a solution design — can be added without renaming
   anything that exists.
-- **POS.0110** A brief is the principal's own text of one whole of
-  thinking, composed and then locked: what he wants and why, with what
-  he chose to take from the finding around it. It is free-form: any
+- **POS.0110** A brief is the principal's text of one whole of
+  thinking: what he wants and why, with what he chose to take from
+  the finding around it. It is free-form: any
   structure the principal finds useful (prose, headings, tables, use
   cases), no required content and no IDs; only a minimal YAML header
   (`templates/brief.md`). It holds thoughts to be processed, not
@@ -438,27 +440,29 @@ position that already stands elsewhere.
   named by what it is and not by who made it, so that it reads the
   same whatever model the forge runs on; a suggestion or an
   alternative the principal did not take is gone, unless he says it
-  stays. A brief has two states:
-  *draft* while it is being composed, and *approved* (version 1.0) once
-  the principal locks it; immutability runs from the lock, not from the
-  file's creation. Three origins are equally legitimate and the forge
+  stays. A brief is versioned like every artefact (POS.0300): a draft
+  until the principal approves it, 1.0, and changed after that as any
+  artefact is. It is not locked and not immutable: what it said at
+  any version stands in its history and in git. Three origins are equally legitimate and the forge
   does not distinguish them: the brief arrives finished from outside and
-  is locked on arrival; it is begun outside and finished with Claude in
+  is stored as it came; it is begun outside and finished with Claude in
   the forge; or it is born in the forge from the first word. `/forge
   brief [name]` is the door for the latter two, and how a brief is found
   there is POS.1330. `/new-project` asks for the founding brief and
   hands it to the same procedure, which creates `00-brief.md`
-  (`.claude/skills/new-project/SKILL.md`). A locked brief is the provenance
-  anchor of its whole: the record against which later drift is measured.
-  Present shape 2026-10-02, from `00-brief-elicitation.md`.
+  (`.claude/skills/new-project/SKILL.md`). A brief is the provenance of its whole: a position mined from it
+  cites it with its version, and drift is measured against that
+  version. Present shape 2026-10-03, from `00-brief-elicitation.md`
+  and the principal's word.
 - **POS.0920** A project may have more than one brief, and the ledger
   tracks how far each is mined. The founding brief is `00-brief.md`;
   every later whole of thinking that would otherwise land in the intent
   as a batch of unproven positions is born as `00-brief-<name>.md` —
-  same header, same states, same rules. A locked brief is mined into the
-  single intent: positions cite the brief as provenance; a whole that
-  dies on the way leaves the brief locked and one REJ in the intent with
-  the reason, so the trace survives either way. The ledger's Briefs
+  same header, same states, same rules. A brief is mined into the
+  single intent when the principal says so, approved or not:
+  positions cite the brief and its version as provenance; a whole
+  that dies on the way leaves the brief as it stands and one REJ in
+  the intent with the reason, so the trace survives either way. The ledger's Briefs
   table carries one row per brief (`templates/ledger.md`); "how much" is
   a judgement recorded in its note and in the provenance of the
   positions, never a metric. `/forge`, `/forge intent` and `/check` use
@@ -492,7 +496,7 @@ position that already stands elsewhere.
   measurement. Text leaves a position only into the history, word
   for word (POS.0310).
   Where an item's output is a file of its own — a skill, an agent, a
-  template, a script, a research note, a locked brief — the item
+  template, a script, a research note, a brief — the item
   keeps its assignment, what is to be achieved and why, and names the
   file, and the realisation is the file's. Where the output is only
   part of a file, a section of CLAUDE.md among them, the item keeps
@@ -502,8 +506,11 @@ position that already stands elsewhere.
   detail. Where the item and its file say different things, that is
   a finding, never mended in silence.
   The threads live in a file of their own beside the intent,
-  `10-intent.threads.md`: the intent says what holds, the threads
-  what is being worked. A thread says what is open and where it came
+  `threads.md`, one for the project: the intent says what holds, the
+  threads what is being worked. Every thread names, right after its
+  ID and in square brackets, the artefact it concerns, as `/forge`
+  names it; several where it concerns several. A thread says what is
+  open and where it came
   from, and carries the working debate for as long as it is
   unsettled: what was said, what was tried, the plan of a change
   under way, the proposals that await a decision. It is where an
@@ -784,7 +791,9 @@ position that already stands elsewhere.
   (POS.0700). Decided 2026-10-03.
 - **POS.1420** The solution design describes the solution as it
   stands and is kept current, as the intent is: its body is the
-  present state and its history stands beside it. It is made of
+  present state and its history stands beside it. It is read by
+  whoever realises the solution, a person or an agent, without the
+  principal in the room. It is made of
   items, under a short prose head on how the parts work together. One
   prefix is its own: SOL, a part of the solution or a matter that
   holds across parts: what it is and what it answers for, which
@@ -792,13 +801,16 @@ position that already stands elsewhere.
   where it is realised. Where a part rests on a real choice, the item
   says the choice, what it was chosen against and what it costs;
   where there was no real alternative, it says so and invents none.
-  What is open is a TBC with its owner and with what would close it.
+  What is open is a TBC with its owner, with what would close it and
+  with whether it blocks realisation.
   Where a part is realised in a file of its own, the item names the
   file and the detail is the file's; where it is only part of a file,
   or no file exists yet, the item carries the detail. The document
   holds what cannot be read off the thing itself: why, against what,
   at what price, and how the parts fit. A check keeps it true against
-  what realises it. Decided 2026-10-03.
+  what realises it. When it is complete is its definition's
+  (`.claude/skills/forge/states/solution-design.md`, Aim). Decided
+  2026-10-03.
 
 ### Structure and style of an assignment
 - **POS.0200** Structured items with stable IDs beat prose, even at very
@@ -827,7 +839,7 @@ position that already stands elsewhere.
   is what the principal holds or wants. Making a source's fact his own
   stance is a new POS. Without a prefix of its own, a fact would have
   passed for a position. A thread (THR) carries its origin — the
-  principal's word, a source by path, or Claude's synthesis — so that
+  principal's word, a document by path, or Claude's synthesis — so that
   a hypothesis of Claude's stays visibly his until the principal takes
   it up; what Claude has worked out is never a FCT, since a fact is
   the principal's word or a source's. Origin is marked from 2026-09-14
@@ -867,10 +879,7 @@ position that already stands elsewhere.
 
   | Group | Kind | Meaning | Written by | Versioned | Behaviour |
   |---|---|---|---|---|---|
-  | artefacts | brief | the idea put together: what the principal wants and why, with what he chose from the finding | principal; Claude may work on the text | yes | locked at 1.0, then immutable |
-  | artefacts | intent | current understanding for principal and Claude: positions, facts, threads, rejections | Claude, principal composes | yes | rewritten freely |
-  | artefacts | assignment | the direction handed to the recipients, self-contained | Claude, principal composes | yes | rewritten freely |
-  | artefacts | later artefacts (BRD, RFP, article…) | further layers, each derived from the one above | Claude, principal composes | yes | rewritten freely |
+  | artefacts | artefact | a document of the chain; what each is, its definition says | the principal with Claude | yes | rewritten freely |
   | records | history | what changed in a versioned document, and why | forge | — | append-only |
   | records | decisions | the principal's decisions with reasons | forge | — | append-only |
   | records | review, challenge | one dated reviewer run | reviewer agent | — | immutable |
@@ -881,8 +890,10 @@ position that already stands elsewhere.
   | resources | source | external input as it arrived | external, /ingest | — | immutable |
   | resources | research | durable answer to one question | Claude, /research | — | immutable |
 
-  Every versioned kind keeps its history in an append-only
-  companion `<file>.history.md` (POS.0310); an integer version is
+  Which artefacts the forge has is the listing of
+  `.claude/skills/forge/states/`, one definition each; they are
+  listed nowhere else. Every versioned kind keeps its history in an
+  append-only companion `<file>.history.md` (POS.0310); an integer version is
   approved, and a recipe never is. A functional binary — a `.potx`
   template, a graphic — is a source (POS.1040), so a library's assets
   fall under resources without a kind of their own; a library carries
@@ -931,8 +942,7 @@ position that already stands elsewhere.
   The kinds of a record are `created`, `changed`, `closed` (a thread
   or an open question settled), `removed` (an item leaves the
   document and its ID is never used again) and `approved` (of the
-  document as a whole: the lock of a brief, the approval of a
-  major). Every record names its author, the third field: the one
+  document as a whole: the approval of a brief or of a major). Every record names its author, the third field: the one
   who decided the change, by the handle the instance gives its
   principal, never the one who typed it. The field is there from the
   first record because a log is never rewritten and a field it lacks
@@ -961,16 +971,14 @@ position that already stands elsewhere.
   from that moment, and the log begins in a new `<file>.history.md`
   with the next version of the document. Nothing is converted: the
   rows are a record and stay in the words they were written in. The
-  history of an item is a search of both files. The companion of a
-  locked brief never receives another record and stays as it is. A
+  history of an item is a search of both files. A
   Version History table, in the body of a document or in its
   companion, is a `/check` finding settled by that move; that is how
   a project migrates (POS.0820), on the principal's word, project by
   project. Present shape 2026-09-29.
-- **POS.0320** Immutable documents (a locked brief, reviews, challenges,
-  sources, research) are never edited — a brief from its lock, a source
-  from its registration, the others from creation; corrections happen
-  downstream.
+- **POS.0320** Immutable documents (reviews, challenges, sources,
+  research) are never edited — a source from its registration, the
+  others from creation; corrections happen downstream.
 - **POS.0330** State lives in files, never only in conversation. A
   session can be ended at any point without loss; `/ledger` re-orients
   from the ledger. One project per session is the hygienic default.
@@ -1035,7 +1043,11 @@ position that already stands elsewhere.
   the real problem, second-order effects, organisational reality,
   failure modes, missing dimensions, the serious counter-case
   (`.claude/agents/challenger-cto.md`);
-  further personas — a strategist, a business analyst — are created from
+  the second is `architect`, for the solution design: he takes what
+  is wanted as given and asks whether this is the way to get it
+  (`.claude/agents/challenger-architect.md`);
+  further personas — a strategist, a business analyst with the BRD —
+  are created from
   the lens-file skeleton by the principal's decision when first needed, and only
   where their blind spots genuinely differ: personas that would say the
   same things in different words are noise. Bare `/challenge` lists the
@@ -1078,7 +1090,12 @@ position that already stands elsewhere.
 - **POS.0440** Every finding and challenge is either fixed or explicitly
   rejected with a recorded reason (DEC). Rejecting and parking are
   legitimate outcomes; silently ignoring is not. An accepted challenge
-  must change the intent, otherwise it was not accepted. The states
+  is mended wherever it needs to be, and one that mends nothing was
+  not accepted. A challenge of a layer below the intent is mended in
+  that layer and changes nothing above it, unless it shows that what
+  is wanted cannot be realised or only at a price not worth paying:
+  then a thread is opened in the intent, citing the challenge, and
+  what is wanted is decided there. The states
   in the ledger carry the words of the verdicts (POS.0850; the states:
   `templates/ledger.md`); `open` is a state only, not yet judged, and
   `resolved` stays the critic's, a fix that is in the document. The
@@ -1529,7 +1546,7 @@ position that already stands elsewhere.
   `check-<name>`, front-matter and Lens only, from `templates/check.md`;
   the roster open, a new check one file. The first checks, each owning
   one concern and none another's: `project` — structure, IDs,
-  assignment style, language, immutables, recipes and renders; `light`
+  language, immutables, recipes and renders; `light`
   — front-matter against the companion and the form of its log, the
   ledger against the files, dependencies, resource
   indexes, fit for a save; `engine` — the core against itself and the

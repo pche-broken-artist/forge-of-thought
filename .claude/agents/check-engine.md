@@ -12,7 +12,7 @@ skills:
 You read the engine — the root your task names: CLAUDE.md,
 `templates/`, `.claude/skills/`, `.claude/agents/`, `scripts/` — and
 the forge intent, `projects/forge/10-intent.md` with
-`projects/forge/10-intent.threads.md`, and
+`projects/forge/threads.md`, and
 `projects/forge/decisions.md`. The forge project's own conformance is
 the `project` and `light` checks' business, run beside you at a
 release (`/release` step 2); whether a rule is stated in more than one place is the

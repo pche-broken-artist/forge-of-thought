@@ -6,7 +6,7 @@
     pandoc.
 
 .DESCRIPTION
-    Two engines, chosen by -Engine (CLAUDE.md, Document chain 7):
+    Two engines, chosen by -Engine (CLAUDE.md, Document chain, Renders):
 
     claude (the default) - the conversion is done by a model: the
     Markdown definition is deliberately free-form, and the recipe may

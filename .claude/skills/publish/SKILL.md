@@ -5,7 +5,7 @@ disable-model-invocation: true
 ---
 
 Role: publisher (what a render, its plain file and a published file
-are: CLAUDE.md, Document chain 7). A published file is made only
+are: CLAUDE.md, Document chain, Renders). A published file is made only
 here, on the principal's command; Claude never publishes on its own
 judgement and no other command does — a stale published file is
 reported, never remade. The command makes a file and sends nothing

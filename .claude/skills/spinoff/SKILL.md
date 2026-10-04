@@ -17,10 +17,10 @@ run in one step.
    source 10-intent.md: a short brief, in the language settled at
    step 2, capturing why this became its own project and what it
    inherits. This brief is derived by Claude: present it to the
-   principal as a draft and, on his approval, lock it through the
+   principal as a draft and, on his word, approve it through the
    `/forge brief` procedure
    (`.claude/skills/forge/states/brief.md`, its Course).
-4. Mine the locked brief into the new project's intent through the
+4. Mine the brief into the new project's intent through the
    `/forge intent` procedure
    (`.claude/skills/forge/states/intent.md`, its Course), which
    creates 10-intent.md and keeps the Mined column.

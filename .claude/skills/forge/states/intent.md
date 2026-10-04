@@ -13,11 +13,10 @@ directive 6).
 **Target.** `10-intent.md`. Shape of the result:
 `templates/intent.md`.
 
-**Inputs.** The locked briefs (`00-brief.md` and any
-`00-brief-<name>.md` with status approved; a draft brief is not
-yet an input), `decisions.md`, the ledger; sources only as the
-principal directs. The intent as it stands is read with its threads,
-`10-intent.threads.md`.
+**Inputs.** The briefs the principal says to mine (`00-brief.md`
+and any `00-brief-<name>.md`, approved or not), `decisions.md`, the ledger; sources only as the
+principal directs. The intent as it stands is read with the
+project's threads, `threads.md`.
 
 **Aim.** The intent chisels the briefs into what the principal
 holds: from the briefs, the sources and the conversation it keeps
@@ -65,13 +64,13 @@ it was considered and found not to apply.
 
 **Instruments.** `/research <topic>`: proposed where a thread
 needs outside grounding, run on the principal's word. A source
-enters only as the principal directs (CLAUDE.md, Document chain
-5). `/challenge <persona> intent`: the independent reality check,
+enters only as the principal directs (CLAUDE.md, Document chain,
+External inputs). `/challenge <persona> intent`: the independent reality check,
 offered once the joint one is done, never run on Claude's own
 judgement.
 
 **Course.** Resolve the project and read the inputs and the intent
-as it stands. The ways in: no intent yet, and the locked briefs
+as it stands. The ways in: no intent yet, and the briefs
 are consolidated into the first one; a brief pending or
 partial, and it is mined whole by whole, one brief at a time; an
 open thread, a new word of the principal's or what the recipients
@@ -81,17 +80,20 @@ comes last, before a lower layer is proposed. On the write,
 resolved threads move into positions or rejections and the Mined
 column of every brief touched is kept (write once per round,
 versioning and ledger: CLAUDE.md). End by naming what changed and
-what stays open; when the Aim's completion is reached, propose the
-next state, or the approval where the chain ends at the intent: a
-recommendation, never a gate.
+what stays open; when the Aim's completion is reached, name the
+layers that can follow from it, or offer the approval where the
+principal takes none: a recommendation, never a gate.
 
-**Threads and files.** The threads in `10-intent.threads.md` are
+**Threads and files.** The threads in `threads.md`, one file for
+the project, are
 part of the intent as its history is: the intent says what holds,
 the threads what is being worked, the working debate included until
 a thread is settled; freely rewritten, no version, no history and no
-ledger row of their own (POS.0120). Where an item's output is a file
+ledger row of their own (POS.0120). Every thread names, right after
+its ID and in square brackets, the artefact it concerns, as `/forge`
+names it; several where it concerns several. Where an item's output is a file
 of its own (a skill, an agent, a template, a script, a research
-note, a locked brief), the item keeps its assignment, what is to be
+note, a brief), the item keeps its assignment, what is to be
 achieved and why, and names the file, and the realisation is the
 file's. Where the output is only part of a file, a section of
 CLAUDE.md among them, the item keeps the full information, since
@@ -100,8 +102,8 @@ Until the file exists, the item keeps the full information too.
 
 How the files are made: the first intent is created from
 `templates/intent.md` as v0.1, with its companion
-`10-intent.history.md` from `templates/history.md` and its threads
-`10-intent.threads.md` from `templates/threads.md`. A write rewrites
+`10-intent.history.md` from `templates/history.md` and the threads
+`threads.md` from `templates/threads.md`. A write rewrites
 for coherence, never appends; the text is in the project's language
 (CLAUDE.md, prime directive 6); POS, FCT, THR and REJ follow the ID
 scheme of CLAUDE.md; the Mined column of every brief touched is

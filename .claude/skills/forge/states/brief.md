@@ -1,5 +1,5 @@
 ---
-description: Compose or finish a brief — the principal's idea put together, found with Claude and locked when done
+description: Compose or finish a brief — the principal's idea put together, found with Claude or handed over, approved when done
 ---
 
 The definition of the brief's elicitation, in the seven blocks of
@@ -14,8 +14,8 @@ directive 6).
 name — a later whole of thinking born during the project's life).
 Shape of the result: `templates/brief.md` — a YAML header, then
 free form: any headings, tables or lists the principal finds
-useful, no IDs, no conventions of the chain. Its lifecycle from
-draft to the lock and its language: CLAUDE.md, Document chain 1 and
+useful, no IDs, no conventions of the chain. It is versioned as
+every artefact is (CLAUDE.md, Versioning & status); its language:
 prime directive 6.
 
 **Inputs.** The principal's thought, however it arrives. Around
@@ -41,10 +41,15 @@ a round or two and then mined. It is where thoughts are thrown in
 before they are sifted: not all of them survive, and the sifting is
 the intent's. Nothing
 in it is yet a position: its thoughts are to be processed, not
-decisions, and may be changed, reworked or dropped when mined. The
-brief is complete when the principal
-says so and locks it; the Map is walked before the lock is
-offered.
+decisions, and may be changed, reworked or dropped when mined. A
+project may have more than one brief: every later whole of thinking
+that would otherwise land in the intent as a batch of unproven
+positions is born as `00-brief-<name>.md` under the same rules. A
+brief is mined into the single intent when the principal says so,
+approved or not; positions cite it with its version. The ledger's
+Briefs table tracks how far each brief is mined. The brief is
+complete when the principal says so and approves it; the Map is
+walked before the approval is offered.
 
 **Partner.** The brief is the principal's: what is in it he
 approved, whoever first said it. Claude's part changes on the way.
@@ -67,8 +72,7 @@ may carry a mechanism where the mechanism is part of the idea.
 Once the talk turns to taking it apart and agreeing it piece by
 piece (definitions, blocks, wording), Claude says in one sentence
 that this is the intent's work, does not develop it, and offers
-once to lock the brief and go on in the intent: a recommendation,
-never a gate. The
+once to go on in the intent: a recommendation, never a gate. The
 principal decides whether it stays in the brief as one open line
 or is let go. No walkthrough runs over the text of a brief and no
 IDs enter it.
@@ -92,7 +96,7 @@ take is gone, unless he says it stays.
 what the finding looks at, and what of it enters the brief is the
 principal's choice. The brief has no required content, and the Map
 prescribes neither headings nor the order of the conversation. It
-is walked once, at the closing, before the lock is offered: has
+is walked once, at the closing, before the approval is offered: has
 each area been consciously considered? An area may leave nothing
 in the brief. The walk asks and does not mend: a tension, an
 alternative left undecided or a boundary left vague may stay in
@@ -122,10 +126,10 @@ to hold, is a finding like any other and stands in the research
 note; it enters the brief where the principal takes it.
 
 **Course.** Resolve the project and the file; create the brief
-with its companion and ledger row if it does not exist; stop if it
-is approved — a new whole is a new brief. However the text
-arrives: pasted whole — store it verbatim and ask whether it is
-finished, if so lock at once; begun outside — store what came,
+with its companion and ledger row if it does not exist; an approved
+brief is changed like any artefact, and a new whole is a new brief.
+However the text arrives: pasted whole — store it verbatim and ask
+whether it is finished, if so approve at once; begun outside — store what came,
 then work from where it stops; born here — the principal opens
 with a rough idea and Claude works from the first word as the
 Partner says, verifies, confronts, proposes, draws out, and writes
@@ -133,20 +137,20 @@ down what the two of them arrived at, condensed where the talk was
 long and in whatever wording says it best, reflected back before
 it is written; a summary or a structured proposal he asks to
 record is stored as shown, never re-narrated. Write once per round on his
-confirmation; lock only on his explicit word; end by naming the
-state and, if locked, proposing `/forge intent`.
+confirmation; approve only on his explicit word; end by naming the
+state and proposing `/forge intent` when he wants it mined.
 
-Before the lock the principal may have Claude give the brief a
+At any time the principal may have Claude give the brief a
 structure: the text gathered under headings in a logical order,
 what repeats pointed out, the grammar mended. Claude adds nothing,
 drops nothing and rewords no thought; he shows the structure
 before it is written, and the headings are the principal's to
 rename. The step is the principal's to ask for, never a condition
-of the lock.
+of the approval.
 
 How the files are made: a new brief is created from
 `templates/brief.md` (the minimal YAML header, nothing else) with
 its companion `<file>.history.md` from `templates/history.md` and
-its row in the ledger's Briefs table (Mined: pending). The lock is
-CLAUDE.md's (Document chain 1); the ledger row is updated with it,
-and the whole is then mined by `/forge intent`.
+its row in the ledger's Briefs table (Mined: pending). The ledger
+row is updated with every version, and the whole is mined by
+`/forge intent`.

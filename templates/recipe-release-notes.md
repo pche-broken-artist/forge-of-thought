@@ -11,7 +11,7 @@ output: RELEASE-NOTES.md
 # Recipe — release-notes
 
 <!-- Release-notes-genre recipe, iterated via /recipe release-notes.
-The rules: CLAUDE.md, Document chain 7. -->
+The rules: CLAUDE.md, Document chain, Renders. -->
 
 ## Inputs
 - 10-intent.history.md      # the intent's history — its records are
@@ -19,9 +19,8 @@ The rules: CLAUDE.md, Document chain 7. -->
 - 10-intent.history.archive.md  # the table before the log, where the
                             # project has one — the Notes block of each
                             # row is the source of its version
-- 20-assignment.history.md  # the assignment's, likewise, with its
-                            # archive; one line per later layer as the
-                            # chain grows
+- <NN-layer>.history.md     # one line per layer below the intent the
+                            # project has, likewise, with its archive
 - 10-intent.md              # current state: version, date, status
 - decisions.md              # DEC records, for the pointers of Rejected
                             # lines
@@ -37,8 +36,8 @@ The rules: CLAUDE.md, Document chain 7. -->
   section is composed; the sections of releases already in the
   previous edition are **carried over verbatim**.
 - A section is derived from the records of its version in the log
-  of every input history — the intent's and those of the assignment
-  and later layers since the last release: each record that reaches
+  of every input history — the intent's and those of the layers
+  below it since the last release: each record that reaches
   the reader becomes one bullet under the group its kind gives —
   `created` under Added, `changed` and `closed` under Changed,
   `removed` under Removed, a created REJ under Rejected, a change

@@ -27,7 +27,7 @@ naming the target artefact. Pass only the project path and the target,
 nothing else (CLAUDE.md, Isolated reviewers).
 
 Best used **before the next layer is first derived from the target** —
-for the intent, before the first `/forge assignment` — while an
+for the intent, before the first layer below it — while an
 accepted challenge is still cheap to absorb, and again after any major
 shift of direction. Running it on a near-final artefact is late but
 not useless.
@@ -45,9 +45,10 @@ When it returns:
    they usually mean something true is missing from the intent.
 4. End by offering a **walkthrough** of the challenges
    (`.claude/skills/walkthrough/SKILL.md`, the one owner of its
-   shape and of the verdict words). What `accept` writes here: it
-   feeds into `/forge intent`, state `accepted`; an accepted
-   challenge must change the intent (CLAUDE.md, Isolated reviewers).
+   shape and of the verdict words). What `accept` writes here: the
+   challenge is mended through `/forge <artefact>` in the artefact
+   it concerns, state `accepted`; where it is mended and when it
+   goes above its layer: CLAUDE.md, Isolated reviewers.
    The other verdicts are the walkthrough's. If he declines the
    walkthrough, the challenges wait.
 

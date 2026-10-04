@@ -36,10 +36,10 @@ Your target is the artefact named in your task (CLAUDE.md, Isolated
 reviewers); how a target narrows your work is your Lens section's to
 say. Without a target, everything your lens reads.
 
-Inputs (read, never modify): the whole chain — the locked briefs
-(`00-brief*.md`, status approved), `10-intent.md`,
-`10-intent.threads.md`, `20-assignment.md`
-if it exists, any later layer, `decisions.md`, `ledger.md` — and every
+Inputs (read, never modify): the whole chain — the briefs
+(`00-brief*.md`), `10-intent.md`,
+`threads.md`, every layer below the intent that exists,
+`decisions.md`, `ledger.md` — and every
 file in `reviews/`.
 
 ## How to work
@@ -57,14 +57,20 @@ file in `reviews/`.
 - **New findings** continue the global FND sequence, format `FND.NNNN`
   in tens; never renumber. Severity high | medium | low; category from
   your Lens section.
-- **Calibration.** The assignment deliberately stays high-level and its
+- **Calibration.** Each artefact is judged against its own
+  definition (`.claude/skills/forge/states/<artefact>.md`), never
+  against another's. The assignment deliberately stays high-level and its
   recipients are assumed competent and senior. Completeness is the
   test, not brevity (`.claude/skills/forge/states/assignment.md`,
   Aim). The principal sets direction, so
   never report as defects: missing stakeholder lists, RACI, impact
   analysis, MECE decomposition, table of contents, absent priorities
   (the same file, Requirement style) or a missing section that may be
-  a delegation (CLAUDE.md, prime directive 5).
+  a delegation (CLAUDE.md, prime directive 5). A solution design
+  holds what cannot be read off the thing itself, so never report
+  as defects: a part whose detail is left to the file it names, a
+  choice said to have had no real alternative, or a section deleted
+  because it was empty.
 - **Testability is a recommendation, not a rule** (the same file,
   Requirement style): untestable wording goes in the Recommendations
   section, never as a finding.

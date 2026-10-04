@@ -1,6 +1,6 @@
 ---
 name: check-project
-description: Check "project" — verifies a project's structure, IDs, assignment style, language, immutables, recipes and renders against the conventions. Verifies conformance with the conventions. Not a critic of the documents, not a challenger of the thinking.
+description: Check "project" — verifies a project's structure, IDs, language, immutables, recipes and renders against the conventions. Verifies conformance with the conventions. Not a critic of the documents, not a challenger of the thinking.
 tools: Read, Glob, Grep
 model: inherit
 skills:
@@ -27,27 +27,27 @@ What you verify:
    the one git-related check, since the engine does not track
    projects and a local-only project is a legitimate shape
    (POS.0940). A `library` needs no chain: Structure reduces to the
-   library's file set (CLAUDE.md, Repository layout); ID hygiene and
-   Assignment style do not apply; Language, Immutables and Recipes
+   library's file set (CLAUDE.md, Repository layout); ID hygiene does
+   not apply; Language, Immutables and Recipes
    and renders apply as written, except that a library's documents
    may be overwritten by their owner (POS.0970) — not an immutability
    breach. `logo.png` is optional everywhere and its absence is never
    a finding (POS.1010).
 1. **Structure** — the files and folders of CLAUDE.md, Repository
-   layout, exist; `20-assignment.md` once drafted, unless the ledger
-   header's `terminal:` ends the chain elsewhere (CLAUDE.md, Ledger);
+   layout, exist; a layer below the intent that the project does not
+   have is not missing and is never a finding (CLAUDE.md, Ledger);
    `recipes/` and `renders/` paired — every render traces to a recipe
    and carries provenance front-matter (legacy pre-recipe editions,
    dated filenames, are exempt); whether that provenance matches the
    ledger's Renders table is the `light` check's;
    every file in `published/` traces to a recipe that carries a
    `## Format` section, and a `.pptx` or `.docx` in `renders/` to a
-   render beside it (CLAUDE.md, Document chain 7). An older recipe
+   render beside it (CLAUDE.md, Document chain, Renders). An older recipe
    still carrying `## Build instructions` (the alias:
    `templates/recipe.md`, Format) is a finding fixed at its next
    iteration.
-   The README and release-notes recipes of CLAUDE.md, Document chain
-   7, exist (fix: scaffold from `templates/recipe-<genre>.md`).
+   The README and release-notes recipes of CLAUDE.md, Document chain,
+   Renders, exist (fix: scaffold from `templates/recipe-<genre>.md`).
    Every `00-brief*.md` in the directory has
    a row in the ledger's Briefs table and vice versa; a brief marked
    `mined` is cited somewhere in the intent. Under the ledger's

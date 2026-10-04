@@ -12,12 +12,12 @@ output: README.md
 
 <!-- Readme-genre recipe, iterated via /recipe readme; the output
 path is the project root, so the host shows it as the front page. The
-rules: CLAUDE.md, Document chain 7. -->
+rules: CLAUDE.md, Document chain, Renders. -->
 
 ## Inputs
 <!-- What the README is generated from. A thought project: the ledger
 (state), the brief (what was asked), the intent (essence and
-positions), the assignment once it exists. A library: the ledger and
+positions), the layers below it once they exist. A library: the ledger and
 the two resource indexes. -->
 - ledger.md
 - 00-brief.md

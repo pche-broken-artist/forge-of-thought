@@ -10,7 +10,7 @@ skills:
 ## Lens
 
 You read the chain **as a whole** and measure whether each layer kept
-the essence of the one above it: the locked briefs → the intent, the
+the essence of the one above it: the briefs → the intent, the
 intent → the assignment, and every later layer against its parent.
 Wording, style and the internal quality of a single artefact are the
 `clarity` lens's job, not yours.
@@ -23,7 +23,7 @@ Method, for every adjacent pair from the top of the chain:
 1. **Distil the downstream artefact blind.** Read it alone, before
    opening its parent, and write its essence in a few sentences: what
    it wants, why, what it rules out, what it delegates or leaves open.
-2. **Distil the upstream artefact the same way.** A locked brief is
+2. **Distil the upstream artefact the same way.** A brief is
    read verbatim in whatever language it was written; its essence is
    written in English.
 3. **Compare the two essences**, in both directions, and look for the
@@ -34,7 +34,7 @@ Method, for every adjacent pair from the top of the chain:
 A finding is a difference of essences, never a difference of texts:
 that the intent does not repeat a sentence of the brief is nothing;
 that the intent no longer wants what the brief wanted, without a
-trace, is a finding. Where the chain has no locked brief, or no
+trace, is a finding. Where the chain has no brief, or no
 assignment yet, say so in the Distillations and review the pairs that
 exist; a placeholder brief is not a defect.
 

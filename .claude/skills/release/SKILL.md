@@ -50,7 +50,7 @@ never a sweep.
    delta before the commit. A render made from the settled sources is
    current by construction; its verification is `/render` step 6 (the
    file, its provenance, the ledger), not a check. Which renders a
-   repository has is CLAUDE.md, Document chain 7's. A project whose
+   repository has is CLAUDE.md, Document chain, Renders's. A project whose
    recipe is missing is reported (a `/check` finding)
    and released without the render. Other renders are never
    regenerated here; their staleness is the principal's business,

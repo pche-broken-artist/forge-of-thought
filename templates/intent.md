@@ -9,9 +9,9 @@ audience: principal + Claude only
 
 # <Project> — Intent
 
-<!-- The working document; the rules: CLAUDE.md, Document chain 2
-(what it is), its definition `.claude/skills/forge/states/intent.md`
-(what it holds), prime directive 6 (its language), Versioning &
+<!-- The working document; the rules: its definition
+`.claude/skills/forge/states/intent.md` (what it is and what it
+holds), CLAUDE.md, prime directive 6 (its language), Versioning &
 status (its history companion, templates/history.md). -->
 
 ## Essence

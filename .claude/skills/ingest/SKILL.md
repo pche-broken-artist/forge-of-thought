@@ -37,7 +37,7 @@ else. Never silently re-register.
    filenames. On a name collision, suffix `-2`. Never rename or modify a
    file already recorded in the ledger: sources are immutable from the
    moment of registration.
-   **Bundles** (CLAUDE.md, Document chain 5): store a set of related
+   **Bundles** (CLAUDE.md, Document chain, External inputs): store a set of related
    files as `sources/<slug>/`, one ledger row; in sweep mode, register
    a subdirectory as one bundle, never file by file. Create its
    `00-INDEX.md` from `templates/index-bundle.md` if the bundle
@@ -65,7 +65,7 @@ else. Never silently re-register.
      no extract.
    Text files get no question. Keeping both is the exception, on the
    principal's explicit word. The script is the only conversion path
-   (CLAUDE.md, Document chain 5). Extracts made before this rule keep their
+   (CLAUDE.md, Document chain, External inputs). Extracts made before this rule keep their
    `.extract.md` names; a binary already in git beside its extract
    is taken out of git only by the principal's own act there, by
    hand: no script of the forge does it, and never a sweep.
@@ -88,7 +88,7 @@ else. Never silently re-register.
 6. **Nothing is processed.** `/ingest` never carries content into the
    intent or any other document; the rule — registration is not
    intake, the principal directs every use, provenance cites the
-   file — is CLAUDE.md, Document chain 5.
+   file — is CLAUDE.md, Document chain, External inputs.
 7. **Bookkeeping and summary.** Update the Sources table in
    `ledger.md`, a row as `templates/ledger.md` has the table;
    what the source is and is for lives in the index alone. In sweep

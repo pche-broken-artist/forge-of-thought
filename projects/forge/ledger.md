@@ -2,8 +2,7 @@
 project: forge
 kind: thought
 language: en
-terminal: intent
-updated: 2026-10-03
+updated: 2026-10-04
 ---
 
 # Ledger — Forge of Thought
@@ -19,7 +18,8 @@ comment is the one owner of that reduction (POS.1070). -->
 
 ## Briefs
 <!-- One row per brief (00-brief.md and 00-brief-<name>.md). Status:
-draft (being composed, editable) | approved (locked at 1.0, immutable).
+draft (being composed) | approved (1.0 and on, changed after that as
+any artefact is).
 Mined: pending | partial | mined | dropped — how far the intent has
 absorbed it; Note says what remains (partial) or the REJ (dropped). -->
 | File | Version | Status | Mined | Note |
@@ -32,13 +32,14 @@ absorbed it; Note says what remains (partial) or the REJ (dropped). -->
 ## Documents
 | File | Version | Status | Date |
 |---|---|---|---|
-| 10-intent.md | 4.52 | draft | 2026-10-03 |
-| 20-assignment.md | — | not planned: the handover artefacts of this project are the core itself (CLAUDE.md, templates/, .claude/) and README.md | — |
-| decisions.md | — | 18 records (DEC.0010–0180) | 2026-10-02 |
+| 10-intent.md | 4.54 | draft | 2026-10-04 |
+<!-- One row per layer below the intent, added when the layer is
+born; a layer the project does not have gets no row (CLAUDE.md,
+Ledger). -->
 
 ## Renders
 <!-- Generated outputs, one row per recipe in recipes/ (CLAUDE.md,
-Document chain 7). Row mirrors the render's front-matter provenance. -->
+Document chain, Renders). Row mirrors the render's front-matter provenance. -->
 | Render | Audience | Recipe | Inputs | Generated |
 |---|---|---|---|---|
 | README.md (repo root) | humans arriving at the repository | recipes/readme.md v0.54 | CLAUDE.md, 10-intent.md v4.49, .claude/agents/, .claude/skills/forge/states/, .claude/skills/, scripts/, templates/ledger.md | 2026-10-02 |
@@ -49,7 +50,7 @@ Document chain 7). Row mirrors the render's front-matter provenance. -->
 
 ## Published
 <!-- Designed files made by /publish, one row per file (CLAUDE.md,
-Document chain 7). State: current | stale — set to current by
+Document chain, Renders). State: current | stale — set to current by
 /publish, to stale by every /render of that recipe. -->
 | File | Recipe | From render | Model | Published | State |
 |---|---|---|---|---|---|
@@ -60,7 +61,7 @@ Document chain 7). State: current | stale — set to current by
 <!-- Registration only. External inputs, immutable once registered.
 Date = best-effort origin date; origin: content | file | ingested. What
 a source is and is for lives in sources/00-INDEX.md, never here
-(CLAUDE.md, Document chain 5). Form (POS.1040): text | extract
+(CLAUDE.md, Document chain, External inputs). Form (POS.1040): text | extract
 of <original> | binary — one form per source. -->
 | File | Date | Date origin | Form |
 |---|---|---|---|
@@ -120,6 +121,7 @@ research/00-INDEX.md, never here. -->
 | 2026-10-03-work-without-a-known-artefact-and-its-working-files.md | 2026-10-03 | 00-brief-next-gen.md v0.1 (Work without a known artefact; Further outputs and working files) |
 | 2026-10-03-when-an-agent-may-decide-and-when-it-waits.md | 2026-10-03 | 00-brief-next-gen.md v0.1 (Automation); research/2026-10-03-where-the-forge-asks-for-the-principals-word.md; 10-intent.threads.md (THR.0400) |
 | 2026-10-03-where-the-forge-asks-for-the-principals-word.md | 2026-10-03 | 00-brief-next-gen.md v0.1 (Automation); the engine's definitions; 10-intent.md v4.50 with its threads, decisions.md, searches of the history, its archive and `sources/forge-run-record-health.md` |
+| 2026-10-04-deterministic-work-by-script-or-by-model.md | 2026-10-04 | the principal's question of 2026-10-04; the engine's operating layer read whole; 10-intent.md v4.53 read whole, its threads searched (THR.0150, THR.0400, THR.0410, THR.0500); the researches of 2026-10-02 and 2026-10-03 on the operating layer and on Claude Code |
 
 ## Findings
 <!-- Findings of the critic and of the checks, one sequence. State:
@@ -217,7 +219,11 @@ as `rejected`. -->
 | FND.0860 | low | ambiguity | resolved | 2026-10-02-critique-clarity.md | intent 4.50 (POS.1080, POS.0710) |
 | FND.0870 | low | duplication | resolved | 2026-10-02-critique-clarity.md | intent 4.50 (POS.1330, POS.1340, POS.1350, REJ.0220; the older positions own) |
 | FND.0880 | low | gap | resolved | 2026-10-02-critique-clarity.md | intent 4.50 (a Facts section saying why it is empty) |
-| FND.0890 | low | conformance | open | 2026-10-03-check-light.md | — |
+| FND.0890 | low | conformance | resolved | 2026-10-03-check-light.md | the record of THR.0520 at 4.52 appended to the intent's history (2026-10-03) |
+| FND.0900 | medium | conformance | resolved | 2026-10-04-check-light.md | the two companions moved untouched to their archives, the logs begin with the next version (2026-10-04) |
+| FND.0910 | low | conformance | resolved | 2026-10-04-check-light.md | the rows of `20-assignment.md` and `decisions.md` deleted and the template's comment added (2026-10-04) |
+| FND.0920 | low | conformance | resolved | 2026-10-04-check-light.md | the four comments replaced with the template's wording (2026-10-04) |
+| FND.0930 | low | conformance | resolved | 2026-10-04-check-light.md | THR.0540, THR.0550 and THR.0560 opened, the ledger lines cut to a citation (intent 4.54) |
 
 Four review files are named outside the convention — accepted as they
 are by DEC.0140.
@@ -253,7 +259,11 @@ copy — CLAUDE.md, Ledger. -->
 - THR.0520 — the intent carries the solution, a layer for the
   solution is missing; priority; walked through 2026-10-03 (intent
   4.52), POS.1390 to POS.1420; the plan of six steps in the thread,
-  step 2 next.
+  step 3 done (intent 4.54), the solution design has its definition,
+  its template and the challenger `architect`; step 4 next.
+- THR.0530 — what can be done deterministically is done by a script;
+  the principal's stance of 2026-10-04, to be a prime directive;
+  research of 2026-10-04; open.
 - THR.0460 — `/recipe` and `/forge`, one dispatcher or two; small,
   open.
 - THR.0470 — the intent too long to be read; the migration done and
@@ -294,8 +304,6 @@ copy — CLAUDE.md, Ledger. -->
   a script kept for later, research of 2026-10-02; opened 2026-10-02.
 - THR.0510 — live reference material by nightly export; the
   principal's thought, nothing decided; opened 2026-10-02.
-- FND.0890 — the change of THR.0520 at 4.52 has no record in the
-  intent's history; open.
 - FND.0650 — parked finding of the `single-source-of-truth` check;
   needs a pass over the recipe genres and their skeletons.
 - FND.0750 — parked finding of the `project` check; the Published
@@ -319,12 +327,9 @@ copy — CLAUDE.md, Ledger. -->
   `engine-split` (THR.0230).
 - THR.0200 — the public face, narrowed to the README exemplar.
 - THR.0170 — branch documents; deferred.
-- How `shall` and the banned English words stand in an assignment
-  written in another language; raised 2026-10-02, nothing decided.
-- `check-project` names "assignment style" in its description and
-  verifies no such part; noticed 2026-10-02.
-- `essence` is not run on this project, the principal's word of
-  2026-10-02; the release skill still offers it at every release.
-- Three weakly founded places in the README of 2026-10-02 (the next
-  step of `/forge`, when two scripts are run, the fifth verdict); the
-  readme recipe, at its next iteration.
+- THR.0540 — `shall` in an assignment written in another language;
+  raised 2026-10-02, nothing decided.
+- THR.0550 — `essence` not run on this project while the release
+  skill still offers it; open.
+- THR.0560 — three weakly founded places in the README; the readme
+  recipe, at its next iteration.
