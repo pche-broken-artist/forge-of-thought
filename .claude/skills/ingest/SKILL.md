@@ -45,7 +45,7 @@ else. Never silently re-register.
    contents and report gaps. A file may later be split out to its own
    ledger row if it needs separate tracking.
 2. **Date, best effort, never a question** (CLAUDE.md, Document
-   chain 5). Record the document's origin
+   chain, External inputs). Record the document's origin
    date in the ledger if it can be determined for free: from the content
    (meeting date in a transcript header, offer date), else from file
    metadata, else the ingest date. Note the origin in the words

@@ -2,9 +2,9 @@
 project: forge
 purpose: readme
 audience: humans arriving at the repository
-version: 0.55
-updated: 2026-10-03
-last_change: 0.55 (2026-10-03): the Upgrading paragraph names both checks a project is measured by after an upgrade, `/check light` and `/check project`, as POS.0940 has it since intent 4.50.
+version: 0.56
+updated: 2026-10-04
+last_change: 0.56 (2026-10-04): the brief is no longer locked and its callout is gone (FND.0950); the artefacts and their table are drawn from the definitions on disk, and the pinned diagram has the solution design as built and reachable from the intent (FND.0960); Document chain cited by the item's name (FND.0970); the README names CONTRIBUTING.md (POS.1440).
 output: /README.md
 ---
 
@@ -67,7 +67,8 @@ summarising the newest row. -->
   where reasoning is being explained. Table cells carry one short
   sentence each; longer mechanics move to prose below the table or to
   Setup. Every core term (principal, brief, intent, assignment,
-  render, recipe, ledger, challenger, critic) is set in bold at its
+  solution design, render, recipe, ledger, challenger, critic) is
+  set in bold at its
   first definition, and "principal" is defined at its first use.
 - The title is `# Forge of Thought <version>` — the current version
   of the forge intent (its front-matter version), no status
@@ -138,8 +139,9 @@ summarising the newest row. -->
 - Section 2 is "What you get": a strictly concrete capability list —
   six bullets, no philosophy (that is the masthead's job): a
   versioned document chain growing from a brief — your idea put
-  together, yours by your approval and locked once it is done — to a
-  self-contained assignment; an elicitation interview that
+  together, yours by your approval — through the intent to the
+  layers your project needs, an assignment to hand over and a
+  solution design among them; an elicitation interview that
   forges the intent; blind adversarial reviewers, every verdict
   recorded; audience-specific renders generated from
   recipes, including an actual PowerPoint file through the user's
@@ -221,46 +223,44 @@ summarising the newest row. -->
 - "A typical journey" is a plain-language bullet story — what a
   person does and wants, in order: brief, iterated intent, reviewer
   pressure and verdicts, a presentation recipe rendered including the
-  PowerPoint, the distilled assignment, saving as you go. Commands
+  PowerPoint, the distilled assignment, a solution design where one
+  is worth writing, saving as you go. Commands
   appear only in parentheses as secondary information. No project
   slugs at all — the journey speaks of "your project".
 - The chain section keeps the iteration rule and the write cadence to
   one line each — they matter to the user but are agent discipline,
-  not README substance. The brief's row and the paragraph after its
-  callout carry the brief rule per CLAUDE.md: a brief composed and
-  then locked (draft → approved), three equally legitimate origins,
-  `/forge brief` as the door, later wholes as `00-brief-<name>.md`,
-  mined into the single intent with the ledger tracking how far.
-- The three chain artefacts get paragraphs of equal weight, each
-  answering what it is, what it holds and why it is shaped so.
-  Brief: per CLAUDE.md — free-form, any structure the principal finds
-  useful, thoughts to be processed rather than decisions, draft →
-  locked, three origins, later wholes, mined with ledger state.
-  Intent: the consolidated *current* state — positions (POS), facts
-  (FCT), open threads (THR), rejected directions with their reason
-  (REJ), each
-  with a stable ID — rewritten for coherence every round rather than
-  appended, with a changelog; audience principal + Claude only.
-  Assignment: distilled from the intent for the recipients and the
-  one document they receive — requirements, out-of-scope,
-  constraints, assumptions, deliverables, open questions with owner,
-  optional success criteria (REQ, OOS, CON, ASM, DEL, TBC, SCR) —
-  complete and precise, assigning rather than solving,
-  self-contained.
-- Exactly two principles in the README are set as `>` callout blocks,
-  both in the chain section, one line each: a locked brief is
-  immutable — composed, then locked, never touched again (below the
-  per-document table); a render is never edited by hand — what is iterated is its
-  recipe (opening the "Renders and recipes" material). The callout is
-  where the rule is stated: the surrounding prose does not repeat it.
-  No other callouts anywhere (the quoted illustrative requirement excepted).
+  not README substance. The brief's row and one paragraph below the
+  table carry the brief rule per the brief's definition
+  (`.claude/skills/forge/states/brief.md`): a draft until the
+  principal approves it, changed after that as any artefact is,
+  never locked; three equally legitimate origins, `/forge brief` as
+  the door, later wholes as `00-brief-<name>.md`, mined into the
+  single intent with the ledger tracking how far.
+- Every artefact the forge has gets a paragraph of equal weight, one
+  per definition in `.claude/skills/forge/states/`, in the order of
+  their file numbers, each answering what it is, what it holds and
+  why it is shaped so; and the per-document table has one row per
+  definition, drawn from its `description`, Target and Inputs. No
+  artefact is described that has no definition, and none that has one
+  is left out: the listing of that directory is the one list of the
+  forge's artefacts (CLAUDE.md, Document chain). What each holds
+  comes from its definition, the prefixes of its items from
+  CLAUDE.md, ID scheme. Said with them, once: below the intent a
+  project takes the layers it needs, none is a condition of another,
+  and a layer a project does not have is not missing.
+- Exactly one principle in the README is set as a `>` callout block,
+  in the chain section, one line: a render is never edited by hand —
+  what is iterated is its recipe (opening the "Renders and recipes"
+  material). The callout is where the rule is stated: the surrounding
+  prose does not repeat it. No other callout anywhere (the quoted
+  illustrative requirement excepted).
 - The renders-and-recipes material in the chain section is two
   paragraphs under their callout: (1) "Renders and recipes" — recipe
   iterated, render generated, provenance front-matter, a render may
   serve as an input of another render; (2) "From Markdown to slides" — everything is
   Markdown; recipe composition may be guided by genre
   (`/recipe presentation`); an output is made in two steps, each
-  with its own command, as CLAUDE.md, Document chain 7, says:
+  with its own command, as CLAUDE.md, Document chain, Renders, says:
   `/render` makes the Markdown and, where the recipe names a format
   in its `Format` section, the plain `.docx` or `.pptx` beside it
   through pandoc — cheap, the same every time, Mermaid diagrams as
@@ -332,23 +332,25 @@ summarising the newest row. -->
 
   ```mermaid
   flowchart LR
-      B["00-brief<br>(draft → locked)"] --> I["10-intent"]
+      B["00-brief"] --> I["10-intent"]
       I --> A["20-assignment"]
+      I --> SD["40-solution-design"]
+      A --> SD
       I --> RI(["renders: pitch, deck, summary …"])
       A --> RA(["renders: mail …"])
       A -.-> BRD["30-brd<br>business analysis"]
+      BRD -.-> SD
       A -.-> RFP["an RFP"]
       I -.-> ART["an article"]
       ART -.-> RT(["render: a translation"])
       I -.-> ST["strategy"]
-      BRD -.-> SD["40-solution-design"]
       SD -.-> IMP["implementation deck"]
 
       classDef built fill:#1f6feb,stroke:#1158c7,color:#ffffff
       classDef future fill:#c6dbfa,stroke:#1f6feb,color:#24292f
       classDef render fill:#2da44e,stroke:#1a7f37,color:#ffffff
-      class B,I,A built
-      class BRD,RFP,ART,ST,SD,IMP future
+      class B,I,A,SD built
+      class BRD,RFP,ART,ST,IMP future
       class RI,RA,RT render
   ```
 
@@ -356,7 +358,7 @@ summarising the newest row. -->
   (light = not built yet), green = renders; dashed arrows = growth
   that does not exist yet. The dashed layers are a fixed illustrative set of this recipe
   (business analysis, an RFP, an article with its translation
-  render, strategy, solution design, an implementation deck),
+  render, strategy, an implementation deck),
   never presented as planned or existing. Below the legend two
   sentences: adding a layer is one definition file declaring its
   inputs — nothing is renumbered and nothing existing is reworked,
@@ -470,7 +472,10 @@ summarising the newest row. -->
   carries this fixed text verbatim, nothing more: "Forge of Thought ©
   Petr Chlumsky (PCHe) — petr.chlumsky@gmail.com. Licensed under
   [CC BY 4.0](LICENSE): use and adapt it freely; credit the author
-  and link to this repository." The author line is the one place the
+  and link to this repository." and, as a paragraph of its own,
+  "Feedback, ideas and changes are welcome: see
+  [CONTRIBUTING.md](CONTRIBUTING.md)." (POS.1440 of the intent; the
+  link is relative, exactly as given). The author line is the one place the
   README names a person: it is the licence holder, not the current
   principal.
 - The closing section is titled "About this README" and states that
@@ -525,7 +530,9 @@ interviews, iterated over days and sessions, everything living in
 files; sources are registered as they arrive and used only when the
 principal directs, /research grounds key topics; blind reviewers
 press on the thinking and the documents, nothing blocks; the
-assignment is distilled for the recipients; renders as a first-class
+assignment is distilled for the recipients and, where the way is not
+obvious, a solution design says how the things wanted are realised;
+renders as a first-class
 idea: recipes iterated (optionally through a genre interview),
 outputs — a pitch, slides incl. the actual PowerPoint, a mail, this
 very README — regenerated at every release; /save and /release keep
@@ -557,9 +564,10 @@ paragraph; collaboration-model sentence>
 
 ## 7. The document chain
 <the pinned star chain diagram (mermaid) with its legend line and
-the two sentences below it; per-document table; the brief-immutability callout
-and the brief-rule paragraph (composed then locked, origins, later
-briefs, mining); why 10-intent.md exists; iteration rule and write cadence one line
+the two sentences below it; per-document table, one row per
+definition; the brief-rule paragraph (a draft until approved, never
+locked, origins, later briefs, mining); one paragraph per artefact;
+why 10-intent.md exists; iteration rule and write cadence one line
 each; feedback rule; the render-never-hand-edited callout followed by
 the two renders paragraphs: "Renders and recipes", "From Markdown to
 slides">

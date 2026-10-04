@@ -322,6 +322,9 @@ README.md                  # for humans — a render (/render readme)
 RELEASE-NOTES.md           # release notes — a render (/render
                            # release-notes); the shape:
                            # templates/recipe-release-notes.md
+CONTRIBUTING.md            # for a visitor who wants to say, ask or
+                           # change something — a render (/render
+                           # contributing)
 logo.png                   # project avatar
 LICENSE                    # CC BY 4.0 — the engine is published
                            # under attribution

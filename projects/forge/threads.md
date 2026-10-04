@@ -72,6 +72,23 @@ project: forge
   forge itself, or one created later; the company projects cannot
   travel. Until one exists the README carries a one-sentence placeholder
   (readme recipe 0.24). Repository name and licence settled in POS.0990.
+  The About of the repository, set by the principal by hand on
+  2026-10-04 and held nowhere in the repository until then, which is
+  how the earlier one went stale unseen. Description: "A chat gives
+  you an answer. Forge of Thought is an AI cognitive extension: a
+  workshop where your idea is forged into a decision you can stand
+  behind. You and the AI elicit the idea together until it is whole,
+  reviewers that never saw the conversation attack it, and who
+  decided what and why is recorded. Runs in Claude Code." Topics,
+  fourteen: adversarial-review, ai-agents, ai-workflows, claude,
+  claude-code, claude-skills, decision-making, elicitation,
+  human-ai-collaboration, requirements-engineering, sdlc,
+  spec-driven-development, structured-thinking, thinking-tools.
+  Open: where the two are held for good, a fixed text of the readme
+  recipe among the candidates. The other community files GitHub
+  lists, a code of conduct, a security policy, the templates of an
+  issue and of a pull request, are not written; `CONTRIBUTING.md` is
+  (POS.1440).
 - **THR.0210** [intent] A guard rail for the public boundary. The rewrite before
   publication (POS.0980) found the leak surface where the challenge
   predicted it: the forge project's own artefacts quoting the substance
@@ -949,7 +966,7 @@ project: forge
   | 3 | Add the solution design by hand, its definition and its template, as the trial of step 2 | done 2026-10-04, intent 4.54, handed over to Claude and judged by the principal |
   | 4 | Write the solution design of the forge project and move the solution out of its intent | done 2026-10-04, intent 4.56 and solution design 0.1, handed over to Claude, verified three times by an isolated agent and once mechanically, the findings settled with the principal |
   | 5 | Draw from that the command that adds a new kind of artefact | done 2026-10-04, intent 4.57 and solution design 0.2: `/new-artefact` (POS.1430, SOL.0170), handed over to Claude and judged by the principal; not yet run |
-  | 6 | Make the BRD by that command, its first trial; with it the challenger persona of a business analyst | next |
+  | 6 | Make the BRD by that command, its first trial; with it the challenger persona of a business analyst | paused 2026-10-04 by the principal, to be done later |
 
   What steps 2 and 3 did is in the records of the operating layer at
   4.53 and 4.54. Left on purpose: the `terminal:` line in the ledgers
@@ -986,8 +1003,12 @@ project: forge
   wording (POS.0060, POS.0120, POS.0410, POS.0420, POS.0440,
   POS.0540, POS.0710, POS.0730, POS.0840, POS.0920, POS.0930,
   POS.0940, POS.0960, POS.1000, POS.1020, POS.1040, POS.1070,
-  POS.1100, POS.1110, POS.1310, POS.1340, POS.1380; the Essence was
-  not touched either). How step 4 ran: the working files, the three
+  POS.1100, POS.1110, POS.1310, POS.1340, POS.1380). With them three
+  places the renders of 2026-10-04 showed to be behind the
+  positions: POS.0600 and POS.0620, which still speak of the
+  assignment as where version 1 ends, and the last sentence of
+  POS.0970, by which the implementation of a library is still to
+  come; the same sentence of the Essence was mended at 4.58. How step 4 ran: the working files, the three
   reports and the mechanical check lie in the engine's
   `tmp/solution-design/`, outside git; the design is a proposal the
   principal has not read whole. The sections "A technical clean-up"
@@ -1033,6 +1054,46 @@ project: forge
   2026-10-02 (the next step of `/forge`, when two scripts are run,
   the fifth verdict); the readme recipe, at its next iteration.
   Carried in the ledger without an ID until 2026-10-04 (FND.0930).
+- **THR.0570** [intent] The presentation of the forge in the company,
+  possibly at the group as well, the week after next by the
+  principal's word of 2026-10-04, and what is to be ready for it. His
+  words, unfinished: to move the documentation forward before it;
+  and his question whether the changes since `v4` are enough for a
+  new major. Claude's answer, his own and not judged: by content
+  yes, and a `v5` would give the audience a fixed point to pull to;
+  what POS.0300 asks of a major is every check, both lenses of the
+  critic and one challenge, the lens `essence` to be deferred by his
+  word (THR.0550), and a major is his signature under the whole,
+  the solution design he has not read whole among it. Done on
+  2026-10-04: the About of the repository (THR.0200),
+  `CONTRIBUTING.md` (POS.1440), the CTO and the CEO pitch rendered
+  anew from their recipes 0.6, and the release of 4.58. Open: what
+  the audience is to hold after the presentation, Claude's question
+  he has not answered; his verdict on the two pitch renders; whether
+  a major is made before the presentation and what it closes; the
+  executive pitch and its deck, not rendered anew (THR.0380); the
+  link of the repository, which the two pitch recipes ask for and do
+  not carry as a fixed text; on GitHub, Discussions to be switched
+  on, since `CONTRIBUTING.md` points at them, and the topics brought
+  to the fourteen of THR.0200. Opened 2026-10-04.
+- **THR.0580** [solution-design] A render made in a session that has
+  changed CLAUDE.md is made from the old CLAUDE.md. Origin: Claude's
+  observation at the release of 4.58, 2026-10-04. The isolated
+  subagent of `/render` is given CLAUDE.md in its context as it stood
+  when the session began, and takes it from there instead of reading
+  the file; the skill tells it to read the recipe's inputs and says
+  nothing of this one. At the release the README came out without
+  the row of `/new-artefact` and without `CONTRIBUTING.md` in the
+  layout, both written into CLAUDE.md the same day; the agent named
+  the gap itself and mended the two places from the file on disk.
+  The renders of `contributing`, `cto-pitch` and `ceo-pitch` of the
+  same day used the same copy; none of them stands on the four
+  places that differed, by Claude's reading and not by a check. The
+  check `engine` read the file from disk. Open: whether
+  `.claude/skills/render/SKILL.md` says that CLAUDE.md is read from
+  disk like every other input, and whether the same holds for the
+  reviewers and the checks, whose contracts cite CLAUDE.md. Opened
+  2026-10-04.
 
 Note: the ID THR.0120 was inadvertently used twice — first for the
 readme-recipe thread (opened 1.14, closed 1.16), then for the

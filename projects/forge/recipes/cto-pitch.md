@@ -2,9 +2,9 @@
 project: forge
 purpose: A short public pitch of Forge of Thought to a CTO or head of engineering
 audience: technical leadership arriving at the repository - a CTO, a head of engineering or architecture, a peer of the author who does not know him
-version: 0.5
-updated: 2026-09-27
-last_change: 0.5 (2026-09-27): the build line of Instructions becomes the Format section the base skeleton now has - docx, the plain file on A4 without a reference, the published file not set; the render's content is unchanged.
+version: 0.6
+updated: 2026-10-04
+last_change: 0.6 (2026-10-04): the status of block 4 brought to today - the chain runs to an assignment and a solution design, a BRD layer is next and not built yet.
 ---
 
 # Recipe — CTO pitch (public)
@@ -62,10 +62,10 @@ last_change: 0.5 (2026-09-27): the build line of Instructions becomes the Format
   who will use it daily as their main tool - stated as what is to
   come, never as a state. No other numbers.
 - Nothing hidden. Block 4 states the status in three steps, as
-  facts of the author: today the chain ends at the intent and the
-  assignment; a BRD layer is in development and testing; a modified
-  variant of the forge for test analysts and UX/UI is at the plan
-  stage. No dates and no "within days": a public document ages. Then
+  facts of the author: today the chain runs from the brief and the
+  intent to an assignment and a solution design; a BRD layer is next
+  and not built yet; a modified variant of the forge for test
+  analysts and UX/UI is at the plan stage. No dates and no "within days": a public document ages. Then
   one short bullet: user extensions - one's own reviewer, say a
   challenger, kept and developed in one's personal repository (the
   intent's THR.0300) - are what has to be finished before a wider
@@ -114,8 +114,8 @@ last_change: 0.5 (2026-09-27): the build line of Instructions becomes the Format
 - Format: docx
 - Plain file, made by `/render` through pandoc: reference none,
   page size A4.
-- Published file, made by `/publish` through a model: not set;
-  `/publish` asks before its first run.
+- Published file, made by `/publish` through a model: template not
+  recorded for the file of 2026-09-27, model opus.
 
 ## Template
     ---
@@ -151,7 +151,7 @@ last_change: 0.5 (2026-09-27): the build line of Instructions becomes the Format
 
     ## Where it honestly stands
     - <done today>
-    - <in development and testing>
+    - <next, not built yet>
     - <planned>
     - <user extensions: to finish before a wider rollout>
     - <the limitation>

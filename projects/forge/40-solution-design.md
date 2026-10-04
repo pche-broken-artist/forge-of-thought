@@ -1,8 +1,8 @@
 ---
-version: 0.2
+version: 0.3
 date: 2026-10-04
 status: draft
-last_change: 0.2 (2026-10-04): the command that adds a new kind of artefact (SOL.0170); the skeletons of the reviewers under their new names (SOL.0300, SOL.0330).
+last_change: 0.3 (2026-10-04): the repository's CONTRIBUTING, a render with three channels for a visitor (SOL.0450).
 project: forge
 audience: whoever realises the solution, a person or an agent
 ---
@@ -502,6 +502,24 @@ direction, a boundary kept by hand or an order of work.
   and PDF is not: pandoc writes Word without a further engine, and a
   PDF is the recipient's one click from Word. Present shape
   2026-09-27. Where: `scripts/md2docx.ps1`.
+- **SOL.0450 The repository's CONTRIBUTING.** `CONTRIBUTING.md` in
+  the repository root is a render of
+  `projects/forge/recipes/contributing.md`, made on the principal's
+  `/render contributing` and not by a release. GitHub links a file of
+  that name from the Contributing tab, the sidebar and the pages
+  where an issue or a pull request is created. Three channels are
+  named in it: Discussions for feedback and ideas, Issues for a
+  defect, the author's contacts on his GitHub profile for what is
+  not public. Discussions are switched on in the repository's
+  settings by the principal.
+  Realises: POS.1440, POS.0710. Choice: a render against a file
+  written by hand, so that the rule it tells cannot drift from the
+  intent; the cost is that it is current only after a render. The
+  root against `.github/`, where GitHub would look first: a visitor
+  of the file listing sees it. Three channels against Issues alone:
+  a discussion is a smaller step for one who only wants to say
+  something; the cost is two places to watch. Where:
+  `projects/forge/recipes/contributing.md`, `CONTRIBUTING.md`.
 
 ### Persistence
 - **SOL.0500 The repositories.** The engine is one git repository,

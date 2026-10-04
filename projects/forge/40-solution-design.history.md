@@ -10,3 +10,4 @@ document: 40-solution-design.md
 - 2026-10-04 | 0.2 | PCHe | SOL.0170 | created
 - 2026-10-04 | 0.2 | PCHe | SOL.0300 | changed | The skeletons of the reviewers renamed to the pattern `<type>-definition.md`, the principal's word of 2026-10-04 (THR.0520, step 5). | Was: `templates/critic.md`, `templates/challenger.md` and `templates/check.md` are the skeletons of a lens file.
 - 2026-10-04 | 0.2 | PCHe | SOL.0330 | changed | The skeleton of a check renamed to `templates/check-definition.md` (THR.0520, step 5). | Was: One contract skill `check-contract`; one agent per check, `check-<name>`, front-matter and Lens only, from `templates/check.md`; a new check is one file.
+- 2026-10-04 | 0.3 | PCHe | SOL.0450 | created

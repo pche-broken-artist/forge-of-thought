@@ -16,3 +16,6 @@ place without an ID: a section or the file. Reason is left out on
 always last, paragraphs in it divided by `<br>`. At the birth of a
 document, one record of the file and one naming every item born
 with it. Lines are not wrapped. -->
+
+- 2026-10-04 | 0.6 | PCHe | Instructions | changed | The status of block 4 was a fact of 2026-09-27 and no longer held: the solution design is a layer of the chain since intent 4.54 and the forge has its own, and the BRD layer is not built, its step paused by the principal on 2026-10-04. The Template's placeholder follows. | Was: today it carries an idea as far as the assignment handed to a team, and the layers beyond that, toward requirements and solution design, are in development;
+- 2026-10-04 | 0.6 | PCHe | Format | changed | The Published line dropped until the pitch is first published: no published file exists and the line said nothing (FND.0750). | Was: Published file, made by `/publish` through a model: not set; `/publish` asks before its first run.

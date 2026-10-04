@@ -32,8 +32,8 @@ absorbed it; Note says what remains (partial) or the REJ (dropped). -->
 ## Documents
 | File | Version | Status | Date |
 |---|---|---|---|
-| 10-intent.md | 4.57 | draft | 2026-10-04 |
-| 40-solution-design.md | 0.2 | draft | 2026-10-04 |
+| 10-intent.md | 4.58 | draft | 2026-10-04 |
+| 40-solution-design.md | 0.3 | draft | 2026-10-04 |
 <!-- One row per layer below the intent, added when the layer is
 born; a layer the project does not have gets no row (CLAUDE.md,
 Ledger). -->
@@ -43,11 +43,12 @@ Ledger). -->
 Document chain, Renders). Row mirrors the render's front-matter provenance. -->
 | Render | Audience | Recipe | Inputs | Generated |
 |---|---|---|---|---|
-| README.md (repo root) | humans arriving at the repository | recipes/readme.md v0.54 | CLAUDE.md, 10-intent.md v4.49, .claude/agents/, .claude/skills/forge/states/, .claude/skills/, scripts/, templates/ledger.md | 2026-10-02 |
-| RELEASE-NOTES.md (repo root) | the user of the engine who has cloned it and takes upgrades through forge-pull | recipes/release-notes.md v0.12 | 10-intent.history.md, 10-intent.history.archive.md, 10-intent.md v4.49, decisions.md, previous edition (released sections) | 2026-10-02 |
+| README.md (repo root) | humans arriving at the repository | recipes/readme.md v0.56 | CLAUDE.md, 10-intent.md v4.58, .claude/agents/, .claude/skills/forge/states/, .claude/skills/, scripts/, templates/ledger.md | 2026-10-04 |
+| RELEASE-NOTES.md (repo root) | the user of the engine who has cloned it and takes upgrades through forge-pull | recipes/release-notes.md v0.12 | 10-intent.history.md, 10-intent.history.archive.md, 10-intent.md v4.58, decisions.md, previous edition (released sections) | 2026-10-04 |
+| CONTRIBUTING.md (repo root) | a visitor of the repository on GitHub who wants to say, ask or change something | recipes/contributing.md v0.1 | projects/forge/10-intent.md v4.58, CLAUDE.md | 2026-10-04 |
 | renders/executive-pitch.md | C-level executives whose experience of AI is chatting with it | recipes/executive-pitch.md v0.6 | projects/forge/10-intent.md v4.30, CLAUDE.md | 2026-09-27 |
-| renders/cto-pitch.md | technical leadership arriving at the repository - a CTO, a head of engineering or architecture | recipes/cto-pitch.md v0.5 | projects/forge/10-intent.md v4.28, CLAUDE.md | 2026-09-27 |
-| renders/ceo-pitch.md | a CEO or another C-level executive whose experience of AI is chatting with it | recipes/ceo-pitch.md v0.5 | projects/forge/10-intent.md v4.28, CLAUDE.md | 2026-09-27 |
+| renders/cto-pitch.md | technical leadership arriving at the repository - a CTO, a head of engineering or architecture | recipes/cto-pitch.md v0.6 | projects/forge/10-intent.md v4.58, CLAUDE.md | 2026-10-04 |
+| renders/ceo-pitch.md | a CEO or another C-level executive whose experience of AI is chatting with it | recipes/ceo-pitch.md v0.6 | projects/forge/10-intent.md v4.58, CLAUDE.md | 2026-10-04 |
 
 ## Published
 <!-- Designed files made by /publish, one row per file (CLAUDE.md,
@@ -123,6 +124,7 @@ research/00-INDEX.md, never here. -->
 | 2026-10-03-when-an-agent-may-decide-and-when-it-waits.md | 2026-10-03 | 00-brief-next-gen.md v0.1 (Automation); research/2026-10-03-where-the-forge-asks-for-the-principals-word.md; 10-intent.threads.md (THR.0400) |
 | 2026-10-03-where-the-forge-asks-for-the-principals-word.md | 2026-10-03 | 00-brief-next-gen.md v0.1 (Automation); the engine's definitions; 10-intent.md v4.50 with its threads, decisions.md, searches of the history, its archive and `sources/forge-run-record-health.md` |
 | 2026-10-04-deterministic-work-by-script-or-by-model.md | 2026-10-04 | the principal's question of 2026-10-04; the engine's operating layer read whole; 10-intent.md v4.53 read whole, its threads searched (THR.0150, THR.0400, THR.0410, THR.0500); the researches of 2026-10-02 and 2026-10-03 on the operating layer and on Claude Code |
+| 2026-10-04-how-a-contributing-file-is-written-on-github.md | 2026-10-04 | the principal's word of 2026-10-04 on a CONTRIBUTING for the forge; the Community Standards page of the forge's repository; 10-intent.md v4.57 (POS.0170, POS.0720, POS.0980, POS.0990) |
 
 ## Findings
 <!-- Findings of the critic and of the checks, one sequence. State:
@@ -206,7 +208,7 @@ as `rejected`. -->
 | FND.0720 | low | conformance | resolved | 2026-10-02-check-single-source-of-truth.md | intent 4.49 (the three contracts cite the skeletons); the quoting caveat kept in the skeletons, DEC.0180 |
 | FND.0730 | low | conformance | resolved | 2026-10-02-check-light.md | intent 4.48 (POS.0310, `templates/history.md`) |
 | FND.0740 | low | conformance | resolved | 2026-10-02-check-project.md | intent 4.49 (four lines of Waiting on principal cut to a citation) |
-| FND.0750 | low | conformance | parked | 2026-10-02-check-project.md | until the next iteration of the recipes `cto-pitch` and `ceo-pitch` |
+| FND.0750 | low | conformance | resolved | 2026-10-02-check-project.md | recipes `cto-pitch` and `ceo-pitch` 0.6: the line written from the ledger's row in the one, dropped until a first publish in the other (reopened and settled 2026-10-04, `2026-10-04-check-project.md`) |
 | FND.0760 | medium | conformance | resolved | 2026-10-02-check-engine.md | intent 4.49 (CLAUDE.md, What this workspace is) |
 | FND.0770 | medium | conformance | resolved | 2026-10-02-check-engine.md | recipe readme 0.52 |
 | FND.0780 | medium | conformance | resolved | 2026-10-02-check-engine.md | intent 4.49 (CLAUDE.md, prime directive 1) |
@@ -225,6 +227,10 @@ as `rejected`. -->
 | FND.0910 | low | conformance | resolved | 2026-10-04-check-light.md | the rows of `20-assignment.md` and `decisions.md` deleted and the template's comment added (2026-10-04) |
 | FND.0920 | low | conformance | resolved | 2026-10-04-check-light.md | the four comments replaced with the template's wording (2026-10-04) |
 | FND.0930 | low | conformance | resolved | 2026-10-04-check-light.md | THR.0540, THR.0550 and THR.0560 opened, the ledger lines cut to a citation (intent 4.54) |
+| FND.0940 | low | conformance | resolved | 2026-10-04-check-project.md | the line of THR.0520 under Waiting on principal cut to a citation (2026-10-04) |
+| FND.0950 | medium | conformance | resolved | 2026-10-04-check-engine.md | recipe readme 0.56 (the brief no longer locked, its callout gone) |
+| FND.0960 | medium | conformance | resolved | 2026-10-04-check-engine.md | recipe readme 0.56 (the artefacts from the definitions on disk, the diagram with the solution design as built) |
+| FND.0970 | low | conformance | resolved | 2026-10-04-check-engine.md | the skills `ingest` and `render` and recipe readme 0.56 cite Document chain by the item's name (intent 4.58) |
 
 Four review files are named outside the convention — accepted as they
 are by DEC.0140.
@@ -257,12 +263,13 @@ intent version for accepted, DEC.NNNN for rejected. -->
 ## Waiting on principal
 <!-- What waits on the principal, one line per matter: cite, never
 copy — CLAUDE.md, Ledger. -->
-- THR.0520 — the intent carries the solution, a layer for the
-  solution is missing; priority; walked through 2026-10-03 (intent
-  4.52), POS.1390 to POS.1420; the plan of six steps in the thread,
-  step 5 done (intent 4.57, solution design 0.2), the command
-  `/new-artefact` not yet run, the design a proposal not yet read
-  whole by the principal; step 6 next, the BRD.
+- THR.0520 — a layer for the solution; priority; steps 1 to 5 done,
+  step 6 (the BRD) paused 2026-10-04.
+- THR.0570 — the presentation of the forge and what is to be ready
+  for it; opened 2026-10-04, his verdict on the two pitch renders
+  and on a major open.
+- THR.0580 — a render made after CLAUDE.md changed in the session
+  uses the old CLAUDE.md; found at the release of 4.58, open.
 - THR.0530 — what can be done deterministically is done by a script;
   the principal's stance of 2026-10-04, to be a prime directive;
   research of 2026-10-04; open.
@@ -308,8 +315,6 @@ copy — CLAUDE.md, Ledger. -->
   principal's thought, nothing decided; opened 2026-10-02.
 - FND.0650 — parked finding of the `single-source-of-truth` check;
   needs a pass over the recipe genres and their skeletons.
-- FND.0750 — parked finding of the `project` check; the Published
-  line of the two pitch recipes, at their next iteration.
 - THR.0420 — derivations of the forge for other jobs; nothing
   scheduled.
 - THR.0430 — a command that ends a session; research of the

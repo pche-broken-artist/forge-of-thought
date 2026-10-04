@@ -2,9 +2,9 @@
 project: forge
 purpose: A short public pitch of Forge of Thought to a CEO - what it can mean for a company, not how it works
 audience: a CEO or another C-level executive whose experience of AI is chatting with it, arriving at the repository or handed the document by their technology lead
-version: 0.5
-updated: 2026-09-27
-last_change: 0.5 (2026-09-27): the build line of Instructions becomes the Format section the base skeleton now has - docx, the plain file on A4 without a reference, the published file not set; the render's content is unchanged.
+version: 0.6
+updated: 2026-10-04
+last_change: 0.6 (2026-10-04): the status of block 4 brought to today - the forge carries an idea as far as the design of the solution, a requirements layer is still to come.
 ---
 
 # Recipe — CEO pitch (public)
@@ -81,9 +81,10 @@ last_change: 0.5 (2026-09-27): the build line of Instructions becomes the Format
 - Nothing hidden. Block 4, in a CEO's terms: it is not a product and
   there is nothing to buy - it is a published way of working that
   runs on an AI coding assistant a company already licenses or can
-  license; today it carries an idea as far as the assignment handed
-  to a team, and the layers beyond that, toward requirements and
-  solution design, are in development; one person works one document
+  license; today it carries an idea from what is wanted, through the
+  assignment handed to a team, to the design of the solution, and a
+  requirements layer between them is still to come; one person works
+  one document
   at a time; it is young, the work of one author, and there is long
   work ahead. Four or five short bullets, said plainly.
 - Block 5, the suggestion: if this speaks to you, hand it to your
@@ -134,8 +135,6 @@ last_change: 0.5 (2026-09-27): the build line of Instructions becomes the Format
 - Format: docx
 - Plain file, made by `/render` through pandoc: reference none,
   page size A4.
-- Published file, made by `/publish` through a model: not set;
-  `/publish` asks before its first run.
 
 ## Template
     ---
@@ -172,7 +171,7 @@ last_change: 0.5 (2026-09-27): the build line of Instructions becomes the Format
 
     ## Where it honestly stands
     - <not a product, nothing to buy>
-    - <how far it carries an idea today, and what is in development>
+    - <how far it carries an idea today, and what is still to come>
     - <one person, one document>
     - <young, one author, long work ahead>
 

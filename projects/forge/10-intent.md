@@ -1,8 +1,8 @@
 ---
-version: 4.57
+version: 4.58
 date: 2026-10-04
 status: draft
-last_change: 4.57 (2026-10-04): step 5 of THR.0520, a new kind of artefact is added by one command, `/new-artefact` (POS.1430), which joins the guarded commands (POS.1090); the command and the skeleton `templates/artefact-definition.md` born, the skeletons of the reviewers renamed to `<type>-definition.md` and the word definition widened to any member of a type the forge can be extended by (operating layer).
+last_change: 4.58 (2026-10-04): the forge is open to those who use it, feedback and ideas wanted most, a finished change on the forge's own rule (POS.1440); `CONTRIBUTING.md` in the repository root, a render of the new recipe `contributing` (operating layer); the Essence says the chain ends where the project needs it to; the skills `ingest` and `render` cite Document chain by the item's name (operating layer, FND.0970).
 project: forge
 audience: principal + Claude only
 ---
@@ -22,10 +22,11 @@ colleagues, or the principal's future self.
 The primary ambition is the full chain: from a raw idea all the way to a
 deck ready for realisation, growing layer by layer — assignment, then a
 BRD, then solution architecture, up to implementation-ready specification
-including integration. **Version 1 deliberately ends at the assignment.**
-Every design decision below is made with that growth in mind, which is
-why files and IDs are numbered with gaps and why the name says thought,
-not assignment.
+including integration. **The chain ends where the project needs it
+to:** below the intent a project takes the layers it needs, and many
+end at the intent. Every design decision below is made with that
+growth in mind, which is why files and IDs are numbered with gaps and
+why the name says thought, not assignment.
 
 The engine runs in Claude Code. Claude acts as the principal's cognitive
 extension: it owns structure, order and process discipline, while every
@@ -1385,6 +1386,14 @@ position that already stands elsewhere.
   not an instance fact: it is who the work is by, whoever runs an
   instance. The `LICENSE` file carries the licence's verbatim legal
   code. Decided 2026-08-30.
+- **POS.1440** The forge is open to those who use it. What it wants of
+  them most is feedback and ideas; a finished change is welcome too,
+  on the forge's own rule: a change of how the forge behaves goes
+  through the chain before it is built, a document that is a render
+  through its recipe, and nobody sends a change he has not tried
+  himself. A visitor is told how, where the readers of GitHub look
+  for it. What enters the forge stays the principal's decision
+  (POS.0070). Decided 2026-10-04.
 - **POS.1000** Every project has a README and, if it is a thought
   project, release notes — both renders of the project's own recipes
   (`recipes/readme.md`, `recipes/release-notes.md`, `output:` in the

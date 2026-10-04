@@ -1,12 +1,12 @@
 ---
 project: forge
 render: release-notes
-generated: 2026-10-02
+generated: 2026-10-04
 recipe: recipes/release-notes.md v0.12
 inputs:
   - projects/forge/10-intent.history.md
   - projects/forge/10-intent.history.archive.md
-  - projects/forge/10-intent.md v4.49
+  - projects/forge/10-intent.md v4.58
   - projects/forge/decisions.md
   - RELEASE-NOTES.md (previous edition)
 ---
@@ -17,6 +17,204 @@ One section per release of the engine, newest first, for the user who
 takes upgrades through `forge-pull`; Action required comes first in
 every section; the fine-grained log with the reasons lives in
 `projects/forge/10-intent.history.md`.
+
+## 4.58 — 2026-10-04
+
+### Added
+- The forge is open to those who use it, feedback and ideas wanted
+  most and a finished change welcome on the forge's own rule, and
+  `CONTRIBUTING.md` in the repository root, a render of the new recipe
+  `projects/forge/recipes/contributing.md`, says how (POS.1440,
+  SOL.0450). For you: you can give feedback, bring an idea or send a
+  change you have tried yourself, as `CONTRIBUTING.md` says.
+
+### Fixed
+- The skills `ingest` and `render` cite CLAUDE.md, Document chain, by
+  the item's name and no longer by a number that ceased to exist at
+  4.53 (FND.0970). For you: nothing to do.
+- The Essence of the forge intent says the chain ends where the project
+  needs it to, in place of the sentence that version 1 ends at the
+  assignment (POS.1400). For you: nothing to do; the intent no longer
+  contradicts its own positions.
+
+## 4.57 — 2026-10-04
+
+### Action required
+- The skeletons of the reviewers are renamed to one pattern,
+  `<type>-definition.md`: `templates/critic-definition.md`,
+  `templates/challenger-definition.md` and
+  `templates/check-definition.md`. For you: a persona, a lens or a check
+  of your own is unaffected; a document of yours that cites
+  `templates/critic.md`, `templates/challenger.md` or
+  `templates/check.md` cites the new name at its next write.
+
+### Added
+- `/new-artefact <name>` adds a new kind of artefact to the forge and
+  leads to everything a kind needs: its position in the forge intent,
+  its definition and template from the new skeleton
+  `templates/artefact-definition.md`, its prefixes, its reviewers and
+  its place in the solution design (POS.1430, POS.1090,
+  `.claude/skills/new-artefact/SKILL.md`). For you: you alone start it,
+  it decides nothing, and for now it adds to the engine, for every user
+  of it.
+
+## 4.56 — 2026-10-04
+
+### Changed
+- How the things wanted are realised moved out of the forge intent into
+  the solution design of the forge's project: the positions keep what
+  is wanted and why, and the files, scripts and settings that realise
+  them are named in its SOL items (THR.0520). For you: nothing to do; to
+  find the file that realises a position of the forge, read
+  `projects/forge/40-solution-design.md`.
+- What realises an item is named in the solution design where the
+  project has one, and no longer in the item; the rule as it stood
+  holds for a project without one (POS.0120,
+  `.claude/skills/forge/states/intent.md`). For you: in a project with a
+  solution design, an item of the intent no longer names the file that
+  realises it.
+
+### Removed
+- Five positions of the forge intent that were wholly solution, moved
+  to the solution design: the layout of the repository to SOL.0500, the
+  protection to SOL.0520, the two conversion scripts to SOL.0430 and
+  SOL.0440, the file shape of a command to SOL.0100 (POS.0500, POS.0520,
+  POS.0740, POS.1150, POS.1130). For you: nothing to do; what is wanted
+  of each stands in the positions that remain.
+
+## 4.55 — 2026-10-04
+
+### Changed
+- From the artefacts of the chain the thing must be buildable without
+  the finished product; the solution design stays the architecture, and
+  a technical specification is a layer a project takes where the one
+  who builds needs the detail (POS.1400). For you: nothing to do; the
+  technical specification is not introduced as a layer now.
+
+## 4.54 — 2026-10-04
+
+### Action required
+- One threads file for the project, `threads.md`, and every thread
+  names the artefact it concerns, the intent included (POS.0120). For
+  you: a project renames `10-intent.threads.md` to `threads.md` and
+  marks its threads at its next write.
+- The solution design has its definition,
+  `.claude/skills/forge/states/solution-design.md`, its template,
+  `templates/solution-design.md`, and a challenger persona of its own,
+  `architect` (POS.1310, POS.0420). For you: run `/challenge architect
+  solution-design` once a solution design stands; the readme recipe is
+  iterated for the table of artefacts before the next release.
+
+### Changed
+- An accepted challenge is mended wherever it needs to be, and goes
+  above its layer only as a thread, where what is wanted cannot be
+  realised or only at a price not worth paying (POS.0440). For you:
+  accepting a challenge no longer obliges you to change the intent.
+- A thread may arise from any document, a challenge, a finding or an
+  item of a layer among them, not from a source alone (POS.0230). For
+  you: a thread that comes from a document names that document by path.
+- The lens `clarity` judges the scope of every artefact by the Aim of
+  its own definition and proposes the move, and its advisory checklist
+  is gone (`.claude/skills/critic-contract/SKILL.md`). For you: a report
+  of `/critique clarity` no longer closes with a checklist.
+- An open question of a solution design says whether it blocks
+  realisation, and the design is read by whoever realises it, a person
+  or an agent (POS.1420). For you: you can tell from its TBC items
+  whether a solution design is complete enough to build from.
+
+## 4.53 — 2026-10-03
+
+### Action required
+- The points of Document chain in CLAUDE.md are cited by name and no
+  longer by number, and the ledger's `terminal:` left CLAUDE.md, the
+  skill `forge`, the check `project` and `templates/ledger.md`
+  (POS.0160). For you: a recipe or a document of a project that cites
+  `Document chain 5` or `Document chain 7` cites `Document chain,
+  External inputs` or `Document chain, Renders` at its next write; the
+  `terminal:` line of a project's ledger header may be deleted.
+- The locking of a brief is withdrawn: a brief is versioned like every
+  artefact, approved at 1.0 and changed after that, mined when the
+  principal says so, and no longer among the immutable documents
+  (POS.0110, POS.0920, POS.0320). For you: an approved brief stays as it
+  is and may be changed from now on; a position mined from a brief
+  cites the brief's version at its next write.
+
+### Changed
+- The names of the artefacts left the engine: which artefacts the forge
+  has is the listing of `.claude/skills/forge/states/`, CLAUDE.md
+  carries the artefact as one kind and speaks of the layers below the
+  intent (POS.1080). For you: to see which artefacts the forge has, look
+  at the definitions; a layer your project does not have is not
+  reported.
+- CLAUDE.md is brought to the positions of 4.52: the chain ends where
+  the project needs it to, the intent does not solve, the prefix SOL,
+  Intent-first for the whole chain and from below, and Handing over as
+  a working method (POS.1400, POS.1390, POS.1420, POS.0900, POS.1410).
+  For you: you can hand an artefact over to Claude in a word and judge
+  the proposal he returns.
+
+## 4.52 — 2026-10-03
+
+### Action required
+- The ledger's `terminal:` is withdrawn: no layer below the intent is
+  missing, so the ledger declares no end of the chain (POS.0160,
+  POS.1400). For you: leave the `terminal:` line in a project's ledger
+  header until the engine stops reading it, then delete it.
+
+### Added
+- An intent says what the principal wants and why, and it does not
+  solve; the test of a sentence is whether it would still hold if the
+  thing were realised in a wholly different way (POS.1390). For you:
+  nothing to do yet; how a thing is built belongs to the solution
+  design, whoever said it.
+- The solution design is an artefact of the chain,
+  `40-solution-design.md`, derived from the lowest layer the project
+  has above it and made of SOL items with what is open as TBC
+  (POS.1400, POS.1420). For you: a project takes the layers it needs,
+  and many end at the intent; the definition of the solution design
+  comes with a later release.
+- How an artefact is composed is the principal's choice, artefact by
+  artefact: found together by elicitation, or handed over to Claude,
+  who returns a proposal with what he assumed and what he chose
+  (POS.1410). For you: nothing is derived from work handed over before
+  you have judged it.
+
+### Changed
+- A change of substance runs the whole chain and in both directions:
+  every layer below the intent is brought to it, and a change may come
+  from below, when no solution is found (POS.0900). For you: the intent
+  still changes first, also where the change was found while solving.
+- The usual shape of a brief is light: topics with the research beside
+  them, composed in a round or two, and the definition of the brief
+  carries it (POS.0110). For you: `/forge brief` leads you to a short
+  brief and leaves the chiselling to the intent.
+
+## 4.51 — 2026-10-03
+
+### Added
+- THR.0520: the layer for the solution, its definition, its template
+  and where it stands in the chain. For you: nothing changes yet.
+
+### Fixed
+- The positional arguments of nine skills are counted from zero, as
+  Claude Code counts them: `forge`, `recipe`, `render`, `publish`,
+  `ledger`, `new-project`, `import-project`, `spinoff` and `man`. For
+  you: a command receives its arguments in the right places; `/forge
+  brief <name>` no longer takes the name for the state.
+
+## 4.50 — 2026-10-03
+
+### Action required
+- The migration path names both checks a release runs on a project
+  (POS.0940, FND.0850). For you: after `forge-pull`, run `/check light`
+  as well as `/check project` on each project.
+
+### Fixed
+- The positions on the two conversion scripts are rewritten in their
+  present shape, two engines each, and the exception from the session
+  model is both headless conversions behind `/publish` (POS.0740,
+  POS.1150, POS.0930, FND.0840). For you: nothing to do; the scripts did
+  not change.
 
 ## 4.49 — 2026-10-02
 
