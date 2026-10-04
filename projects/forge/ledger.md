@@ -32,7 +32,8 @@ absorbed it; Note says what remains (partial) or the REJ (dropped). -->
 ## Documents
 | File | Version | Status | Date |
 |---|---|---|---|
-| 10-intent.md | 4.54 | draft | 2026-10-04 |
+| 10-intent.md | 4.56 | draft | 2026-10-04 |
+| 40-solution-design.md | 0.1 | draft | 2026-10-04 |
 <!-- One row per layer below the intent, added when the layer is
 born; a layer the project does not have gets no row (CLAUDE.md,
 Ledger). -->
@@ -259,8 +260,8 @@ copy — CLAUDE.md, Ledger. -->
 - THR.0520 — the intent carries the solution, a layer for the
   solution is missing; priority; walked through 2026-10-03 (intent
   4.52), POS.1390 to POS.1420; the plan of six steps in the thread,
-  step 3 done (intent 4.54), the solution design has its definition,
-  its template and the challenger `architect`; step 4 next.
+  step 4 done (intent 4.56, solution design 0.1), the design a
+  proposal not yet read whole by the principal; step 5 next.
 - THR.0530 — what can be done deterministically is done by a script;
   the principal's stance of 2026-10-04, to be a prime directive;
   research of 2026-10-04; open.

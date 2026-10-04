@@ -1,8 +1,8 @@
 ---
-version: 4.54
+version: 4.56
 date: 2026-10-04
 status: draft
-last_change: 4.54 (2026-10-04): step 3 of THR.0520, the solution design added by hand (operating layer) - its definition and template, the challenger persona `architect`, the lens `clarity` judging every artefact by its own definition and its advisory checklist gone; an accepted challenge is mended where it needs to be and goes above its layer only as a thread (POS.0440); a thread may come from any document (POS.0230); one threads file for the project, `threads.md`, every thread naming the artefact it concerns (POS.0120); the reader of a solution design, a TBC saying whether it blocks realisation, completion in the definition (POS.1420); four definitions (POS.1310); the persona `architect` named (POS.0420); THR.0530 opened, what can be done deterministically is done by a script; THR.0540 to THR.0560 opened from three matters the ledger carried without an ID (FND.0930).
+last_change: 4.56 (2026-10-04): step 4 of THR.0520, the solution moved out of the intent into `40-solution-design.md` 0.1: 48 positions, REJ.0140 and the Facts section changed, five positions removed as wholly solution (POS.0500, POS.0520, POS.0740, POS.1150, POS.1130); what realises an item is named in the solution design where the project has one (POS.0120); what POS.0520 held as wanted stands in POS.1090; the definition of the intent brought to POS.0120 (operating layer); three isolated verifications and a mechanical check, their findings settled.
 project: forge
 audience: principal + Claude only
 ---
@@ -109,32 +109,24 @@ position that already stands elsewhere.
 
 - **POS.0850 Walkthrough.** Any list of items that need the principal's
   decision — critique findings, challenges, the differences between two
-  requirement sets, open threads, TBC items before a handover,
-  proposals of a source — is
-  worked one item at a time, in order of weight. Every item ends in one
-  proposition, worded so that `accept` has exactly one meaning — yes
-  to what is in front of the principal, also where the proposition
-  goes against the reviewer's suggestion — and the message closes
-  with the verdict line `(a)ccept / (m)odify / (r)eject / (p)ark`.
-  The verdict words are one set for every walkthrough,
-  whatever produced the list: `accept`, `modify` (a discussion opens
-  and the solution found is put forward to be accepted), `reject`,
-  `park` and `obsolete`; the producing command says only what
-  `accept` writes. The principal may answer the line with a single
-  letter when that letter is his whole message; no other word of the
-  forge has a letter, so that nothing which writes or saves can be
-  set off by a slip. Decided 2026-09-27. Verdicts are carried in the conversation and written
-  once at the round's end (POS.0190; what `reject`, `park` and
-  `obsolete` write: `.claude/skills/walkthrough/SKILL.md`; what
-  `accept` writes: the skill of the command that produced the list,
-  `critique`, `challenge` or `check`). Whatever produces a list ends
-  by offering a walkthrough — `/critique`, `/challenge`, the `/forge`
-  map, a comparison made on request — and the principal may call for
-  one at any moment. The shape of the method lives in
-  `.claude/skills/walkthrough/SKILL.md`, read whenever a walkthrough
-  or an interview runs; CLAUDE.md carries the rule in short and the
-  pointer, and a hook repeats the one-item rule at every prompt
-  (POS.1170).
+  requirement sets, open threads, TBC items before a handover, proposals
+  of a source — is worked one item at a time, in order of weight. Every
+  item ends in one proposition, worded so that `accept` has exactly one
+  meaning — yes to what is in front of the principal, also where the
+  proposition goes against the reviewer's suggestion — and the message
+  closes with the verdict line `(a)ccept / (m)odify / (r)eject /
+  (p)ark`. The verdict words are one set for every walkthrough, whatever
+  produced the list: `accept`, `modify` (a discussion opens and the
+  solution found is put forward to be accepted), `reject`, `park` and
+  `obsolete`; the producing command says only what `accept` writes. The
+  principal may answer the line with a single letter when that letter is
+  his whole message; no other word of the forge has a letter, so that
+  nothing which writes or saves can be set off by a slip. Decided
+  2026-09-27. Verdicts are carried in the conversation and written once
+  at the round's end (POS.0190). Whatever produces a list ends by
+  offering a walkthrough — `/critique`, `/challenge`, the `/forge` map,
+  a comparison made on request — and the principal may call for one at
+  any moment.
 - **POS.0860 Propose, never decide.** Claude criticises, challenges,
   inspires and lays out options; the principal composes (POS.0010,
   POS.0070). Nothing enters content because Claude proposed it.
@@ -182,31 +174,18 @@ position that already stands elsewhere.
   comfort. Decided 2026-09-14 from the run record of `health`
   (`sources/forge-run-record-health.md`, P.02, P.14, F.02, G.08), in
   the principal's own words.
-- **POS.1170 A rule that must hold in a long conversation is
-  repeated at every prompt by a hook, not trusted to CLAUDE.md
-  alone.** The run record of `health` showed the one-item walkthrough
-  breaking about thirteen times with the rule fully in context and a
-  memory note beside it (F.02): text loaded once dissolves as the
-  conversation grows. The harness's `UserPromptSubmit` hook adds
-  context at every prompt; the engine's `.claude/settings.json`
-  carries one such hook. It prints two lines on the walkthrough —
-  the one-item rule itself, since 2026-09-27 with the verdict line
-  that closes a proposition (POS.0850), and a pointer to
-  `.claude/skills/walkthrough/SKILL.md` for the full shape when a
-  walkthrough or an interview runs — and three lines of conduct (the
-  principal's rules, worded in `scripts/hook-walkthrough.ps1`;
-  THR.0400 holds the gate that would enforce them). That is also the
-  first instance of the pattern THR.0240 asks for: always-on is one
-  sentence and a pointer, the detail is a file read when its
-  situation arises. A hook is context, not enforcement — the nearest
-  thing to a wall the harness offers. A trial, judged by behaviour
-  (P.04). The hook's command is anchored at the project root:
-  `.claude/settings.json` invokes it in exec form, `pwsh` with
-  `${CLAUDE_PROJECT_DIR}/scripts/hook-walkthrough.ps1` among its
-  `args`. A relative path is resolved against the session's working
-  directory, not the engine root; the placeholder always names the
-  root the session started in, and the exec form hands the path to
-  the program without a shell.
+- **POS.1170 A rule that must hold in a long conversation is repeated at
+  every prompt by a hook, not trusted to CLAUDE.md alone.** The run
+  record of `health` showed the one-item walkthrough breaking about
+  thirteen times with the rule fully in context and a memory note beside
+  it (F.02): text loaded once dissolves as the conversation grows. What
+  is repeated is the one-item rule itself, with the verdict line that
+  closes a proposition (POS.0850) and a pointer to the full shape, and
+  three lines of conduct, the principal's rules. That is also the first
+  instance of the pattern THR.0240 asks for: always-on is one sentence
+  and a pointer, the detail is a file read when its situation arises. A
+  hook is context, not enforcement — the nearest thing to a wall the
+  harness offers. A trial, judged by behaviour (P.04).
 - **POS.1210 One write per round.** A working conversation is one
   round, and what is agreed in it is carried and written once at its
   end, on the principal's word (POS.0190, which owns the rule, its
@@ -236,43 +215,39 @@ position that already stands elsewhere.
   shape already and nothing per artefact in it. Decided
   2026-09-28 from `00-brief-elicitation.md`.
 - **POS.1310 The shape of a definition.** The elicitation of one
-  artefact type is defined in seven blocks, in reading order:
-  **Target** (the artefact's file and its template), **Inputs**
-  (what the finding starts from), **Aim** (what the elicitation
-  achieves and when the artefact is complete: the one place where
-  completion is stated), **Partner** (Claude's stance: what he does,
-  what he does not do, who steers the finding and who the
-  decisions), **Map** (what must be found, POS.1320),
-  **Instruments** (only the mechanisms of the forge this artefact
-  uses in a way of its own, cited and never described) and
-  **Course** (the ways in, the order, and what is offered when the
-  Aim's completion is reached; it states no completion of its own).
-  Every definition carries all seven, so that the shape can be
-  checked; a block empty on purpose says so with the reason and is
-  never silently left out. Aim and Partner do not repeat each other:
-  Aim says what is true of the artefact at the end, Partner what
-  Claude does beyond that, citing the Aim. Outside the definition,
-  as shared mechanism cited and never repeated (POS.1070): the form
-  of the conversation (POS.0850), one write per round (POS.0190),
-  versioning with history and ledger (POS.0310), creation from the
-  template, the language question (POS.0060), ending by naming the
-  state. The definition lives in the state file of `/forge`
-  (POS.0580) and stands beside the artefact's template as a pair:
-  how we get there, and what is to come out. The genre files of
-  `/recipe` (POS.0770) map onto the shape without loss, Genre and
-  Skeleton to Target, Role to Partner, the elicitation checklist to
-  Map; the seven blocks themselves are for the artefacts of the
-  chain. The rules of particular artefacts live in the definitions:
-  what a brief carries in the brief's, what the intent and its
-  threads hold in the intent's, completeness and the Requirement
-  style in the assignment's. CLAUDE.md keeps of each artefact what it
-  is, how it joins the chain, and a pointer. The
-  definitions of the four artefacts of today's chain are the state
-  files `brief.md`, `intent.md`, `assignment.md` and
+  artefact type is defined in seven blocks, in reading order: **Target**
+  (the artefact's file and its template), **Inputs** (what the finding
+  starts from), **Aim** (what the elicitation achieves and when the
+  artefact is complete: the one place where completion is stated),
+  **Partner** (Claude's stance: what he does, what he does not do, who
+  steers the finding and who the decisions), **Map** (what must be
+  found, POS.1320), **Instruments** (only the mechanisms of the forge
+  this artefact uses in a way of its own, cited and never described) and
+  **Course** (the ways in, the order, and what is offered when the Aim's
+  completion is reached; it states no completion of its own). Every
+  definition carries all seven, so that the shape can be checked; a
+  block empty on purpose says so with the reason and is never silently
+  left out. Aim and Partner do not repeat each other: Aim says what is
+  true of the artefact at the end, Partner what Claude does beyond that,
+  citing the Aim. Outside the definition, as shared mechanism cited and
+  never repeated (POS.1070): the form of the conversation (POS.0850),
+  one write per round (POS.0190), versioning with history and ledger
+  (POS.0310), creation from the template, the language question
+  (POS.0060), ending by naming the state. The definition is the one
+  `/forge` works by (POS.0580) and stands beside the artefact's template
+  as a pair: how we get there, and what is to come out. The genre files
+  of `/recipe` (POS.0770) map onto the shape without loss, Genre and
+  Skeleton to Target, Role to Partner, the elicitation checklist to Map;
+  the seven blocks themselves are for the artefacts of the chain. The
+  rules of particular artefacts live in the definitions: what a brief
+  carries in the brief's, what the intent and its threads hold in the
+  intent's, completeness and the Requirement style in the assignment's.
+  CLAUDE.md keeps of each artefact what it is, how it joins the chain,
+  and a pointer. The definitions of the four artefacts of today's chain
+  are the state files `brief.md`, `intent.md`, `assignment.md` and
   `solution-design.md`; POS.1330, POS.1340 and POS.1350, and for the
   solution design POS.1400 with POS.1420, say what each is to achieve
-  and why. Present
-  shape 2026-10-02, from `00-brief-elicitation.md`.
+  and why. Present shape 2026-10-02, from `00-brief-elicitation.md`.
 - **POS.1320 A Map is a map of what must be found, not a
   questionnaire.** It names, in the artefact's own vocabulary, what
   the finding looks at or consciously verifies; it prescribes neither
@@ -287,45 +262,36 @@ position that already stands elsewhere.
   aloud and nothing is recorded. How an area is found is the
   situation's: a question, a research step, a source. Present shape
   2026-10-02, from `00-brief-elicitation.md`.
-- **POS.1330 The definition of the brief's elicitation.** What it is
-  to achieve: a brief as POS.0110 has it. Claude is active at the
-  opening and forms the record when the principal says to write, and
-  never decides what goes in. The seven blocks are
-  `.claude/skills/forge/states/brief.md`, mended there as the work
-  shows (POS.1380). Present shape 2026-10-03, from
+- **POS.1330 The definition of the brief's elicitation.** What it is to
+  achieve: a brief as POS.0110 has it. Claude is active at the opening
+  and forms the record when the principal says to write, and never
+  decides what goes in. Present shape 2026-10-03, from
   `00-brief-elicitation.md`.
-- **POS.1340 The definition of the intent's elicitation.** What it
-  is to achieve: an intent that chisels the briefs into what the
-  principal holds, positions, facts, threads and rejections with
-  their reasons, placed on a horizon where he sees one; coherent,
-  nothing twice, every position with its provenance (POS.0120),
-  passed through a reality check before a lower layer is derived;
-  complete for now
-  when no thread blocks the next layer, never finished. Claude
-  composes the wording and challenges, the principal the substance;
-  a thread closes only on his word. The recipients, the objective
-  and the success criteria are found here as soon as he sees them,
-  in the section "Candidate structure for assignment", so that the
-  assignment distils them instead of finding them first. No fate is
-  recorded part by part at mining (REJ.0210). The seven blocks are
-  `.claude/skills/forge/states/intent.md`, mended there as the work
-  shows (POS.1380). Present shape 2026-10-02, from
-  `00-brief-elicitation.md`.
-- **POS.1350 The definition of the assignment's elicitation.** What
-  it is to achieve: an assignment as POS.0130 has it, such that the
-  recipients can act without the principal in the room and know the
-  end and the reason well enough to act rightly where the plan no
-  longer fits. It is found in a joint pass of three phases and no new
-  kind of interview: questions up front only for what the intent
-  does not answer, a recast of the whole with a provenance map, a
-  walkthrough by group. Why not item by item: most items are craft
-  derived from the intent and a verdict on each is ceremony. Why not
-  "read the whole": without the map one sees what is there, not what
-  is missing. The wording is Claude's, the substance the
-  principal's (POS.0140). The
-  seven blocks are `.claude/skills/forge/states/assignment.md`,
-  mended there as the work shows (POS.1380). Present shape
-  2026-10-03, from `00-brief-elicitation.md`.
+- **POS.1340 The definition of the intent's elicitation.** What it is to
+  achieve: an intent that chisels the briefs into what the principal
+  holds, positions, facts, threads and rejections with their reasons,
+  placed on a horizon where he sees one; coherent, nothing twice, every
+  position with its provenance (POS.0120), passed through a reality
+  check before a lower layer is derived; complete for now when no thread
+  blocks the next layer, never finished. Claude composes the wording and
+  challenges, the principal the substance; a thread closes only on his
+  word. The recipients, the objective and the success criteria are found
+  here as soon as he sees them, in the section "Candidate structure for
+  assignment", so that the assignment distils them instead of finding
+  them first. No fate is recorded part by part at mining (REJ.0210).
+  Present shape 2026-10-02, from `00-brief-elicitation.md`.
+- **POS.1350 The definition of the assignment's elicitation.** What it
+  is to achieve: an assignment as POS.0130 has it, such that the
+  recipients can act without the principal in the room and know the end
+  and the reason well enough to act rightly where the plan no longer
+  fits. It is found in a joint pass of three phases and no new kind of
+  interview: questions up front only for what the intent does not
+  answer, a recast of the whole with a provenance map, a walkthrough by
+  group. Why not item by item: most items are craft derived from the
+  intent and a verdict on each is ceremony. Why not "read the whole":
+  without the map one sees what is there, not what is missing. The
+  wording is Claude's, the substance the principal's (POS.0140). Present
+  shape 2026-10-03, from `00-brief-elicitation.md`.
 - **POS.1360 The horizon lives in all three layers, each carrying
   its own kind, nothing twice.** The intent carries the judgement:
   why this is a proof of concept, this the first version, this
@@ -405,12 +371,11 @@ position that already stands elsewhere.
   `10-intent.md`, `20-assignment.md`) so later layers — a BRD
   (`30-brd.md`), a solution design — can be added without renaming
   anything that exists.
-- **POS.0110** A brief is the principal's text of one whole of
-  thinking: what he wants and why, with what he chose to take from
-  the finding around it. It is free-form: any
-  structure the principal finds useful (prose, headings, tables, use
-  cases), no required content and no IDs; only a minimal YAML header
-  (`templates/brief.md`). It holds thoughts to be processed, not
+- **POS.0110** A brief is the principal's text of one whole of thinking:
+  what he wants and why, with what he chose to take from the finding
+  around it. It is free-form: any structure the principal finds useful
+  (prose, headings, tables, use cases), no required content and no IDs;
+  only a minimal YAML header. It holds thoughts to be processed, not
   decisions: they may be changed, reworked or dropped when mined, and
   only the intent turns them into positions. No structure is *required*,
   because a required one would force premature tidiness, and none is
@@ -418,110 +383,98 @@ position that already stands elsewhere.
   shown, never re-narrated. A brief is rough on purpose, neither perfect
   nor detailed: the chiselling is the intent's, and a brief polished
   until the intent has nothing left to do has gone too far. Its usual
-  shape is light: the topics of the whole, each with a few sentences
-  of what the principal wants of it, the research that verifies or
-  limits it cited beside it, and what is still open. It is composed
-  in a round or two and then mined. It is where thoughts are thrown
-  in before they are sifted: not all of them survive, and the sifting
-  is the intent's. It is not
-  the record of the finding. The finding is wide (research, sources, the
-  principal's ideas and Claude's) and gathers as many ideas as it can;
-  what goes into the brief and what stays out is the principal's
-  decision, made on what was found. What stays out lives in `research/`
-  and `sources/` where it is a finding or a source, and otherwise
-  nowhere (REJ.0180). Nothing in a brief marks authorship: what is in it
-  the principal approved, whoever first said it (REJ.0220). Two marks
-  stay, because they carry something other than authorship: `(source:
-  <path>)` stands where the identity of a source supports, limits or
-  contradicts the thought, and becomes a fact with provenance at
-  mining; what merely inspired the thought carries no mark and stays
-  discoverable through the research note; a short `(remark: …)`
-  stands where a reservation or an uncertainty must stay visible,
-  named by what it is and not by who made it, so that it reads the
-  same whatever model the forge runs on; a suggestion or an
-  alternative the principal did not take is gone, unless he says it
-  stays. A brief is versioned like every artefact (POS.0300): a draft
-  until the principal approves it, 1.0, and changed after that as any
-  artefact is. It is not locked and not immutable: what it said at
-  any version stands in its history and in git. Three origins are equally legitimate and the forge
+  shape is light: the topics of the whole, each with a few sentences of
+  what the principal wants of it, the research that verifies or limits
+  it cited beside it, and what is still open. It is composed in a round
+  or two and then mined. It is where thoughts are thrown in before they
+  are sifted: not all of them survive, and the sifting is the intent's.
+  It is not the record of the finding. The finding is wide (research,
+  sources, the principal's ideas and Claude's) and gathers as many ideas
+  as it can; what goes into the brief and what stays out is the
+  principal's decision, made on what was found. What stays out lives in
+  `research/` and `sources/` where it is a finding or a source, and
+  otherwise nowhere (REJ.0180). Nothing in a brief marks authorship:
+  what is in it the principal approved, whoever first said it
+  (REJ.0220). Two marks stay, because they carry something other than
+  authorship: `(source: <path>)` stands where the identity of a source
+  supports, limits or contradicts the thought, and becomes a fact with
+  provenance at mining; what merely inspired the thought carries no mark
+  and stays discoverable through the research note; a short `(remark:
+  …)` stands where a reservation or an uncertainty must stay visible,
+  named by what it is and not by who made it, so that it reads the same
+  whatever model the forge runs on; a suggestion or an alternative the
+  principal did not take is gone, unless he says it stays. A brief is
+  versioned like every artefact (POS.0300): a draft until the principal
+  approves it, 1.0, and changed after that as any artefact is. It is not
+  locked and not immutable: what it said at any version stands in its
+  history and in git. Three origins are equally legitimate and the forge
   does not distinguish them: the brief arrives finished from outside and
   is stored as it came; it is begun outside and finished with Claude in
   the forge; or it is born in the forge from the first word. `/forge
   brief [name]` is the door for the latter two, and how a brief is found
-  there is POS.1330. `/new-project` asks for the founding brief and
-  hands it to the same procedure, which creates `00-brief.md`
-  (`.claude/skills/new-project/SKILL.md`). A brief is the provenance of its whole: a position mined from it
-  cites it with its version, and drift is measured against that
-  version. Present shape 2026-10-03, from `00-brief-elicitation.md`
+  there is POS.1330. A brief is the provenance of its whole: a position
+  mined from it cites it with its version, and drift is measured against
+  that version. Present shape 2026-10-03, from `00-brief-elicitation.md`
   and the principal's word.
 - **POS.0920** A project may have more than one brief, and the ledger
   tracks how far each is mined. The founding brief is `00-brief.md`;
   every later whole of thinking that would otherwise land in the intent
   as a batch of unproven positions is born as `00-brief-<name>.md` —
-  same header, same states, same rules. A brief is mined into the
-  single intent when the principal says so, approved or not:
-  positions cite the brief and its version as provenance; a whole
-  that dies on the way leaves the brief as it stands and one REJ in
-  the intent with the reason, so the trace survives either way. The ledger's Briefs
-  table carries one row per brief (`templates/ledger.md`); "how much" is
-  a judgement recorded in its note and in the provenance of the
-  positions, never a metric. `/forge`, `/forge intent` and `/check` use
-  the table as their definitions say (`.claude/skills/forge/SKILL.md`,
-  `.claude/skills/forge/states/intent.md`,
-  `.claude/agents/check-project.md`). Rationale: a big new whole needs a
-  place where the thought can be tempered before it enters the trunk —
-  like a git branch — without a new document kind; THR was wrong for it
-  (a thread is a question, not a body of work), and a working space with
-  positions before the merge (a branch document) was judged heavy for
-  now (THR.0170).
+  same header, same states, same rules. A brief is mined into the single
+  intent when the principal says so, approved or not: positions cite the
+  brief and its version as provenance; a whole that dies on the way
+  leaves the brief as it stands and one REJ in the intent with the
+  reason, so the trace survives either way. The ledger's Briefs table
+  carries one row per brief; "how much" is a judgement recorded in its
+  note and in the provenance of the positions, never a metric.
+  Rationale: a big new whole needs a place where the thought can be
+  tempered before it enters the trunk — like a git branch — without a
+  new document kind; THR was wrong for it (a thread is a question, not a
+  body of work), and a working space with positions before the merge (a
+  branch document) was judged heavy for now (THR.0170).
 - **POS.0120** `10-intent.md` is the working document: the consolidated
   *current* state of the principal's intent. Not an append-only log; it
   is rewritten for coherence each round, with changes recorded in its
-  history. It exists because chat context dies and anything of
-  value must live in a file: it is the document to read when returning to
-  a project after weeks, instead of excavating old conversations.
-  A position says what the principal holds and why it holds, in as
-  many words as it takes to be understood without loss of meaning,
-  and names what it comes from, a brief or a source; it is dated
-  once. What does not belong in it is the way to it: why it was
-  changed, what was said on the way, trials, measurements, counts,
-  findings settled, what others do, which research turned it. All of
-  that is written into the history in the same step that writes the
-  position, while the whole context is at hand; a record of the
-  history may carry what was said and how the change was reached.
-  Dated once means one date, the day the position took its present
-  shape; earlier steps are found by searching the history for the
-  position's ID, and a position cites no record of the history. A
-  number stays only where it is the rule or a threshold, never as a
-  measurement. Text leaves a position only into the history, word
-  for word (POS.0310).
-  Where an item's output is a file of its own — a skill, an agent, a
-  template, a script, a research note, a brief — the item
-  keeps its assignment, what is to be achieved and why, and names the
-  file, and the realisation is the file's. Where the output is only
-  part of a file, a section of CLAUDE.md among them, the item keeps
-  the full information, since another change may rewrite that part
-  and the detail would be lost. Until the file exists, the item keeps
-  the full information too. No new kind of document is added to hold
-  detail. Where the item and its file say different things, that is
-  a finding, never mended in silence.
-  The threads live in a file of their own beside the intent,
-  `threads.md`, one for the project: the intent says what holds, the
-  threads what is being worked. Every thread names, right after its
-  ID and in square brackets, the artefact it concerns, as `/forge`
-  names it; several where it concerns several. A thread says what is
-  open and where it came
-  from, and carries the working debate for as long as it is
-  unsettled: what was said, what was tried, the plan of a change
-  under way, the proposals that await a decision. It is where an
-  unfinished conversation is saved. A settled thread leaves the file
-  and is kept whole: what holds goes into the intent, and the record
-  of its closing in the intent's history carries the thread's last
-  wording word for word in `Was`. The file is part of the intent as
-  the history is, freely rewritten, with no version and no history
-  of its own and no row in the ledger; the intent's history records
-  the birth and the closing of a thread, not every saving of its
-  debate. Present shape 2026-09-29.
+  history. It exists because chat context dies and anything of value
+  must live in a file: it is the document to read when returning to a
+  project after weeks, instead of excavating old conversations. A
+  position says what the principal holds and why it holds, in as many
+  words as it takes to be understood without loss of meaning, and names
+  what it comes from, a brief or a source; it is dated once. What does
+  not belong in it is the way to it: why it was changed, what was said
+  on the way, trials, measurements, counts, findings settled, what
+  others do, which research turned it. All of that is written into the
+  history in the same step that writes the position, while the whole
+  context is at hand; a record of the history may carry what was said
+  and how the change was reached. Dated once means one date, the day the
+  position took its present shape; earlier steps are found by searching
+  the history for the position's ID, and a position cites no record of
+  the history. A number stays only where it is the rule or a threshold,
+  never as a measurement. Text leaves a position only into the history,
+  word for word (POS.0310). An item says what is to be achieved and why.
+  What realises it, a file among it, is named in the solution design
+  where the project has one (POS.1420), and the realisation is the
+  file's. Where a project has no solution design, the item names the
+  file, and where the output is only part of a file, a section of
+  CLAUDE.md among them, or the file does not exist yet, it keeps the
+  full information, since another change may rewrite that part and the
+  detail would be lost. Where the item and what realises it say
+  different things, that is a finding, never mended in silence. The
+  threads live in a file of their own beside the intent, `threads.md`,
+  one for the project: the intent says what holds, the threads what is
+  being worked. Every thread names, right after its ID and in square
+  brackets, the artefact it concerns, as `/forge` names it; several
+  where it concerns several. A thread says what is open and where it
+  came from, and carries the working debate for as long as it is
+  unsettled: what was said, what was tried, the plan of a change under
+  way, the proposals that await a decision. It is where an unfinished
+  conversation is saved. A settled thread leaves the file and is kept
+  whole: what holds goes into the intent, and the record of its closing
+  in the intent's history carries the thread's last wording word for
+  word in `Was`. The file is part of the intent as the history is,
+  freely rewritten, with no version and no history of its own and no row
+  in the ledger; the intent's history records the birth and the closing
+  of a thread, not every saving of its debate. Present shape 2026-09-29.
 - **POS.0130** `20-assignment.md` is the distilled handover document for
   the recipients: complete, precise, structured, self-contained,
   versioned. It carries the whole in-scope substance of the intent —
@@ -545,12 +498,10 @@ position that already stands elsewhere.
   (all immutable, dated); the resource indexes are POS.0840's. The
   ledger cites and never copies: under Waiting on principal a matter
   that has an ID gets one line — the ID, a few words, its state — and
-  its substance stays in the thread or the record; free text only for
-  a matter with no ID yet, which gets one at the next write; an
-  unfinished conversation is saved into its thread of the intent, a
-  write of whatever is agreed so far, never into the ledger. The
-  `project` check verifies this (`.claude/agents/check-project.md`).
-  Added 2026-09-14
+  its substance stays in the thread or the record; free text only for a
+  matter with no ID yet, which gets one at the next write; an unfinished
+  conversation is saved into its thread of the intent, a write of
+  whatever is agreed so far, never into the ledger. Added 2026-09-14
   (`sources/forge-run-record-health.md`, P.15, P.09, G.10).
 - **POS.0170** Feedback from recipients has no channel of its own. The
   principal processes it and feeds conclusions back through
@@ -558,47 +509,42 @@ position that already stands elsewhere.
 - **POS.0180** External inputs (transcripts, offers, documents,
   standards) live in `sources/` per project: immutable once registered,
   plain slug filenames, each in one form — text, or a functional binary
-  (POS.1040). They may arrive at any stage of a project's life —
-  before the brief as material for writing it, during intent work, or
-  after. Origin dates are metadata, not ceremony: recorded best-effort
-  in the ledger (`templates/ledger.md`) and never demanded from the
-  principal. The principal may drop files into `sources/` manually at
-  any time; `/ingest` without arguments sweeps the directory: it
-  registers new files and reports files changed since registration
-  (modification time against the ledger date) with a question — what
-  to do with each. The meaning depends on the project's kind
-  (POS.0960): in a `thought` project a changed source is a breach of
-  immutability to be settled (a new source beside it, the original
-  restored, or the change knowingly accepted); in a `library` project
-  it is the normal case, the owner's maintenance (POS.0970) — the
-  ledger date moved, the index entry corrected. `/ingest` stores, registers and catalogues — nothing
+  (POS.1040). They may arrive at any stage of a project's life — before
+  the brief as material for writing it, during intent work, or after.
+  Origin dates are metadata, not ceremony: recorded best-effort in the
+  ledger and never demanded from the principal. The principal may drop
+  files into `sources/` manually at any time; `/ingest` without
+  arguments sweeps the directory: it registers new files and reports
+  files changed since registration with a question — what to do with
+  each. The meaning depends on the project's kind (POS.0960): in a
+  `thought` project a changed source is a breach of immutability to be
+  settled (a new source beside it, the original restored, or the change
+  knowingly accepted); in a `library` project it is the normal case, the
+  owner's maintenance (POS.0970) — the ledger date moved, the index
+  entry corrected. `/ingest` stores, registers and catalogues — nothing
   more. Registration does not imply intake: what a source is for is
   individual — a standard to verify against, inspiration, a meeting
-  record, material to absorb — and is recorded as free-text Role in
-  the directory's `00-INDEX.md` (POS.0840): the principal's word,
-  asked for once after registration and left empty until he gives it,
-  never inferred unasked (POS.1040); the ledger row is
-  registration only. The principal alone directs how and when a source
-  is used, in whatever work he chooses. When source content does enter
-  the intent, it is his explicit act, cited with provenance to the
-  file; what someone said in a meeting is never silently promoted to
-  the principal's own position. A set of related files — a downloaded
-  site with its index, a document with attachments — may live as a
-  subdirectory `sources/<slug>/`: one source, one ledger entry,
-  immutable as a whole from registration. File-level detail is not
-  lost: provenance in the intent cites individual files by path, and
-  the bundle's index or extract lists its contents. If a bundle's
-  files ever need separate fates, a file may be split out to its own
-  ledger row — the ledger is freely rewritten. Isolated files stay
-  directly in `sources/`. Every bundle carries a `00-INDEX.md`
-  catalogue in the shape POS.0840 owns; `/ingest` creates it at
-  registration when the bundle lacks one and validates a supplied one
-  against the contents, origin dates best effort, never asked for.
-  Text extracts are produced by `scripts/doc2md.ps1`, never by ad-hoc
-  parsing — no Python PDF reading, no manual transcription. `/ingest`
-  runs the script file by file on every binary the principal chooses
-  to convert (POS.1040), in bundles as well as for isolated files; the
-  output is `sources/<slug>.md`, the source itself.
+  record, material to absorb — and is recorded as free-text Role in the
+  directory's `00-INDEX.md` (POS.0840): the principal's word, asked for
+  once after registration and left empty until he gives it, never
+  inferred unasked (POS.1040); the ledger row is registration only. The
+  principal alone directs how and when a source is used, in whatever
+  work he chooses. When source content does enter the intent, it is his
+  explicit act, cited with provenance to the file; what someone said in
+  a meeting is never silently promoted to the principal's own position.
+  A set of related files — a downloaded site with its index, a document
+  with attachments — may live as a subdirectory `sources/<slug>/`: one
+  source, one ledger entry, immutable as a whole from registration.
+  File-level detail is not lost: provenance in the intent cites
+  individual files by path, and the bundle's index or extract lists its
+  contents. If a bundle's files ever need separate fates, a file may be
+  split out to its own ledger row — the ledger is freely rewritten.
+  Isolated files stay directly in `sources/`. Every bundle carries a
+  `00-INDEX.md` catalogue in the shape POS.0840 owns; `/ingest` creates
+  it at registration when the bundle lacks one and validates a supplied
+  one against the contents, origin dates best effort, never asked for.
+  Text extracts are produced by one script of the forge, never by ad-hoc
+  parsing — no Python PDF reading, no manual transcription.
 - **POS.0840** Resources have an index. Every `sources/` and `research/`
   directory carries a `00-INDEX.md` (the resource index): a light
   catalogue so that Claude — and the principal — know what resources
@@ -611,22 +557,16 @@ position that already stands elsewhere.
   counter-example, a mere inspiration or a record of what someone else
   said. Claude reaches for a file by its own judgement or when the
   principal asks ("check the assessment against the requirements in file
-  X"). Each entry has fixed fields in free text (`templates/index.md`).
-  The ledger holds registration only — a Sources table and a Research
-  table, no content columns — so that nothing is described in two
-  places. A bundle keeps its own `00-INDEX.md` inside and appears in the
-  top index as one entry pointing into it: two levels, never deeper, and
-  the top index never repeats the bundle's contents. The bundle index is
-  the same catalogue one level down (`templates/index-bundle.md`). One
-  shape for every index, because Role and Use for are what an index is
-  for and a table does not carry them (decided 2026-09-04). The index is
-  freely rewritten like the ledger while the files under it stay
-  immutable. `/ingest` and `/research` write the entry, `/new-project`
-  scaffolds the indexes and the `light` check verifies index against
-  directory (`.claude/skills/ingest/SKILL.md`,
-  `.claude/skills/research/SKILL.md`,
-  `.claude/skills/new-project/SKILL.md`,
-  `.claude/agents/check-light.md`).
+  X"). Each entry has fixed fields in free text. The ledger holds
+  registration only — a Sources table and a Research table, no content
+  columns — so that nothing is described in two places. A bundle keeps
+  its own `00-INDEX.md` inside and appears in the top index as one entry
+  pointing into it: two levels, never deeper, and the top index never
+  repeats the bundle's contents. The bundle index is the same catalogue
+  one level down. One shape for every index, because Role and Use for
+  are what an index is for and a table does not carry them (decided
+  2026-09-04). The index is freely rewritten like the ledger while the
+  files under it stay immutable.
 - **POS.0190** Artefacts are written once per iteration round, not once
   per answer — and this holds for any working conversation over the
   intent or open items (a `/forge intent` interview, a thread sweep,
@@ -651,55 +591,46 @@ position that already stands elsewhere.
   picture, an executive summary, the repository README. A render is
   never edited by hand; the iterated thing is its **recipe**
   (`recipes/<recipe>.md`): inputs (one artefact or several), audience,
-  instructions and the literal output template in one file, versioned
-  by the house scheme and composed conversationally with the
-  principal. `/render <recipe>` regenerates the output mechanically
-  into `renders/<recipe>.md` — or the recipe's optional `output:`
-  path — undated, overwritten freely, history in git; the files made
-  from a render are POS.0590's. Every render
-  opens with YAML front-matter provenance citing the recipe and every
-  input with their versions; the ledger's Renders table mirrors it. A
-  render assigns nothing and is not part of the chain: the artefacts
-  remain the sole source of truth. The boundary between the two is
-  authorship, not audience: a chain artefact is composed by the
-  principal (Claude proposes, the principal composes), a render is
-  generated from artefacts — an article the principal writes is a
-  layer of the chain, its translation is a render. Visible YAML provenance was chosen
-  over an invisible comment deliberately: provenance is control
-  information, the audience rarely meets raw Markdown, and GitLab does
-  not display front-matter. Dated hand-made editions of the earlier
-  derivative convention remain in place as legacy history. Recipes are
-  tools, not records of thinking: they carry a version and an updated
-  date in front-matter — enough for a render to cite — and no status
-  field, because a recipe is never approved and stays 0.x for life.
-  Being versioned, a recipe keeps its history in the companion
-  like every versioned kind (POS.0310); the companion records what
-  changed in the recipe at its own grain, the substantive turns live
-  in the intent. Recipes are deliberately loose: the template fixes the
-  structure and what information appears where, never the wording — a
-  presentation recipe says what belongs on a slide, not its phrasing
+  instructions and the literal output template in one file, versioned by
+  the house scheme and composed conversationally with the principal.
+  `/render <recipe>` regenerates the output mechanically, undated,
+  overwritten freely; the files made from a render are POS.0590's. Every
+  render opens with its provenance, citing the recipe and every input
+  with their versions. A render assigns nothing and is not part of the
+  chain: the artefacts remain the sole source of truth. The boundary
+  between the two is authorship, not audience: a chain artefact is
+  composed by the principal (Claude proposes, the principal composes), a
+  render is generated from artefacts — an article the principal writes
+  is a layer of the chain, its translation is a render. Dated hand-made
+  editions of the earlier derivative convention remain in place as
+  legacy history. Recipes are tools, not records of thinking: they carry
+  a version and an updated date in front-matter — enough for a render to
+  cite — and no status field, because a recipe is never approved and
+  stays 0.x for life. Being versioned, a recipe keeps its history in the
+  companion like every versioned kind (POS.0310); the companion records
+  what changed in the recipe at its own grain, the substantive turns
+  live in the intent. Recipes are deliberately loose: the template fixes
+  the structure and what information appears where, never the wording —
+  a presentation recipe says what belongs on a slide, not its phrasing
   or its placement on a picture. Each rendering re-derives the words
   from the current inputs; fixing the text in the template would turn
-  the recipe into the render and make the inputs meaningless. A
-  render may also serve as an input of another render — a deck slide
-  citing an architecture picture as `render: <file>` — provided the
-  citing recipe declares it among its Inputs, so provenance and
-  staleness track the dependency.
-- **POS.0720** README.md is a render of the forge project. Its recipe lives
-  at `projects/forge/recipes/readme.md` with `output:` pointing at the
-  repository root; the natural inputs are this intent and CLAUDE.md.
-  README.md is never edited by hand: content fixes go into the recipe
-  or the inputs, and the file is regenerated: a process change is
-  complete only once the intent is updated and the README re-rendered.
+  the recipe into the render and make the inputs meaningless. A render
+  may also serve as an input of another render — a deck slide citing an
+  architecture picture as `render: <file>` — provided the citing recipe
+  declares it among its Inputs, so provenance and staleness track the
+  dependency.
+- **POS.0720** README.md is a render of the forge project. README.md is
+  never edited by hand: content fixes go into the recipe or the inputs,
+  and the file is regenerated: a process change is complete only once
+  the intent is updated and the README re-rendered.
 - **POS.0730** Release notes are a log of releases, not a story.
   `RELEASE-NOTES.md` in the repository root is a render (`/render
-  release-notes`, recipe `recipes/release-notes.md`) for one reader: the
-  user of the engine who has cloned it and takes upgrades through
-  `forge-pull`. One section per release of the engine — every `/release`
-  (POS.1100), the version being the intent's, 3.12 as much as 3.0 —
-  newest first; inside it fixed groups in a fixed order — one sentence
-  per change from the user's side with a pointer (a position, a
-  decision, a command, a script). At a major the
+  release-notes`) for one reader: the user of the engine who has cloned
+  it and takes upgrades through `forge-pull`. One section per release of
+  the engine — every `/release` (POS.1100), the version being the
+  intent's, 3.12 as much as 3.0 — newest first; inside it fixed groups
+  in a fixed order — one sentence per change from the user's side with a
+  pointer (a position, a decision, a command, a script). At a major the
   minors since the previous major are folded into it — the house
   scheme's own reading of a major ("the next approved version,
   incorporating all changes since"). The sections are derived at the
@@ -709,10 +640,8 @@ position that already stands elsewhere.
   render carries it into *Action required* word for word. A thought
   project's release notes work the same way from the histories of all
   its chain artefacts but the brief — intent, assignment, later layers —
-  for the recipients tracking it (genre skeleton
-  `templates/recipe-release-notes.md`, `/recipe release-notes`). Reason:
-  a reader wants to see plainly what was added, changed and removed.
-  Decided 2026-09-05.
+  for the recipients tracking it. Reason: a reader wants to see plainly
+  what was added, changed and removed. Decided 2026-09-05.
 - **POS.0810** Regenerated renders pass under the principal's eyes.
   Regeneration is stochastic: the same inputs never guarantee the
   same words, so an unreviewed regeneration is an unreviewed edit of
@@ -735,9 +664,6 @@ position that already stands elsewhere.
   unchanged. The rules of a kind live in the engine; the project carries
   only the data marker, and its optional `CLAUDE.md` stays polish, never
   kind rules (that would copy the engine into the project).
-  `/new-project`, the `/forge` map and `/check` treat each kind as their
-  definitions say (`.claude/skills/new-project/SKILL.md`,
-  `.claude/skills/forge/SKILL.md`, `.claude/agents/check-project.md`).
 - **POS.0970** A library is a project of kind `library` — no chain: a
   ledger, `sources/` and `research/` with their indexes,
   `recipes/readme.md` and the README it renders (POS.1000) — a
@@ -788,29 +714,31 @@ position that already stands elsewhere.
   artefact names its inputs in its definition; the number in a file
   name orders the files and prescribes no sequence. What others do
   with an assignment handed to them is their own run of the forge
-  (POS.0700). Decided 2026-10-03.
-- **POS.1420** The solution design describes the solution as it
-  stands and is kept current, as the intent is: its body is the
-  present state and its history stands beside it. It is read by
-  whoever realises the solution, a person or an agent, without the
-  principal in the room. It is made of
-  items, under a short prose head on how the parts work together. One
-  prefix is its own: SOL, a part of the solution or a matter that
-  holds across parts: what it is and what it answers for, which
-  positions it realises, cited by their IDs and never restated, and
-  where it is realised. Where a part rests on a real choice, the item
-  says the choice, what it was chosen against and what it costs;
-  where there was no real alternative, it says so and invents none.
-  What is open is a TBC with its owner, with what would close it and
-  with whether it blocks realisation.
-  Where a part is realised in a file of its own, the item names the
-  file and the detail is the file's; where it is only part of a file,
-  or no file exists yet, the item carries the detail. The document
-  holds what cannot be read off the thing itself: why, against what,
-  at what price, and how the parts fit. A check keeps it true against
-  what realises it. When it is complete is its definition's
-  (`.claude/skills/forge/states/solution-design.md`, Aim). Decided
-  2026-10-03.
+  (POS.0700). From the artefacts of the chain the thing must be
+  buildable without a look at the finished product: the product is
+  what is built, never a source of its own design. How deep the chain
+  must go for that is the project's: the solution design gives the
+  architecture, a technical specification the detail where the one
+  who builds needs it. Present shape 2026-10-04.
+- **POS.1420** The solution design describes the solution as it stands
+  and is kept current, as the intent is: its body is the present state
+  and its history stands beside it. It is read by whoever realises the
+  solution, a person or an agent, without the principal in the room. It
+  is made of items, under a short prose head on how the parts work
+  together. One prefix is its own: SOL, a part of the solution or a
+  matter that holds across parts: what it is and what it answers for,
+  which positions it realises, cited by their IDs and never restated,
+  and where it is realised. Where a part rests on a real choice, the
+  item says the choice, what it was chosen against and what it costs;
+  where there was no real alternative, it says so and invents none. What
+  is open is a TBC with its owner, with what would close it and with
+  whether it blocks realisation. Where a part is realised in a file of
+  its own, the item names the file and the detail is the file's; where
+  it is only part of a file, or no file exists yet, the item carries the
+  detail. The document holds what cannot be read off the thing itself:
+  why, against what, at what price, and how the parts fit. A check keeps
+  it true against what realises it. When it is complete is its
+  definition's. Decided 2026-10-03.
 
 ### Structure and style of an assignment
 - **POS.0200** Structured items with stable IDs beat prose, even at very
@@ -846,8 +774,7 @@ position that already stands elsewhere.
   on, the principal's word being the default that needs no mark; no
   retrofit (`sources/forge-run-record-health.md`, P.08, F.04).
 - **POS.0240** Every assignment carries a Terms section, so it can be
-  forwarded without oral tradition (the section:
-  `templates/assignment.md`, Terms). Defined Terms are capitalised in
+  forwarded without oral tradition. Defined Terms are capitalised in
   item text.
 - **POS.0250** Requirements are written as shall / shall not, in full
   correct sentences, one idea per item, each written once.
@@ -857,8 +784,7 @@ position that already stands elsewhere.
   *optional*.
 - **POS.0270** Testability is recommended, never required. Assignments
   are deliberately high-level; delegating concretisation through a DEL
-  item is a legitimate outcome (the critic's part:
-  `.claude/skills/critic-contract/SKILL.md`).
+  item is a legitimate outcome.
 - **POS.0280** Success criteria are wanted but not compulsory. Delegating
   them to the recipients as a deliverable ("define success criteria and
   return") is a legitimate outcome, not a defect.
@@ -917,65 +843,46 @@ position that already stands elsewhere.
   append-only companion `<file>.history.md` beside it, never in its
   body: the body is the current state, the companion the record. One
   rule without exception: brief, intent, assignment, every later
-  artefact and the recipe alike (the shape of a record:
-  `templates/history.md`; its checks: `.claude/agents/check-light.md`
-  and `.claude/agents/check-history.md`).
-  The history is a log. One record is one change and one line,
-  written as a list item; records are appended at the end of the file
-  and never rewritten, so the order of the file is the order of the
-  changes. A version may hold several records, of the same item too.
-  A line names several IDs only where the whole line holds for each
-  of them, every ID in full and never a range; a line with `Was`
-  names one. `Was` is word for word the part of the wording that
-  ceased to hold; the line breaks of the wrapping become spaces and
-  paragraphs are divided by `<br>`. A record of creation needs no
-  reason: the wording is in the document.
-  The history of every versioned document is the same log. Where a
-  change touches an item, the record names its ID; where it touches
-  what has no ID, the record names the place: the heading of the
-  section, or the file name where the change is of the document as a
-  whole. In the forge's own project a change of the operating layer
-  that touches no item of the intent is recorded under the subject
-  `operating layer`, one record a round, so that the release notes
-  can derive from it. `Was` is written wherever wording leaves an item or a place;
-  a record of a change to the document as a whole carries none.
-  The kinds of a record are `created`, `changed`, `closed` (a thread
-  or an open question settled), `removed` (an item leaves the
-  document and its ID is never used again) and `approved` (of the
-  document as a whole: the approval of a brief or of a major). Every record names its author, the third field: the one
-  who decided the change, by the handle the instance gives its
-  principal, never the one who typed it. The field is there from the
-  first record because a log is never rewritten and a field it lacks
-  cannot be added to what was written. A record may carry `Action:`,
-  what the user must do after the change, written with the change by
-  whoever made it; the release notes are derived from the records
-  (POS.0730).
-  The record is written in the same step as the change it records,
-  and the reflection before a write shows both: the new wording of
-  every item touched and the record the history will receive, `Was`
-  included. Before Claude proposes a change to an item, he searches
-  the history and its archive for the item's ID. What he finds is
-  said in the proposal only where it bears on the change, a direction
-  once tried and dropped above all.
-  The history is searched, never loaded whole.
-  The document's front-matter carries version, date, status and a
-  machine-written `last_change:` line, derived from the records of
-  the newest version by the same write step that appends them, never
-  by hand, so the two cannot drift. The log is the single primary:
-  the commit messages `/save` and `/release` draft and the release
-  notes are derivations by mechanism, which POS.1070 permits. The
-  companion is part of its document: not a row of the ledger, handed
-  over with it by the link into git.
-  A companion written before the log keeps its table untouched: the
-  file moves as it stands to `<file>.history.archive.md`, immutable
-  from that moment, and the log begins in a new `<file>.history.md`
-  with the next version of the document. Nothing is converted: the
-  rows are a record and stay in the words they were written in. The
-  history of an item is a search of both files. A
-  Version History table, in the body of a document or in its
-  companion, is a `/check` finding settled by that move; that is how
-  a project migrates (POS.0820), on the principal's word, project by
-  project. Present shape 2026-09-29.
+  artefact and the recipe alike. The history is a log. One record is one
+  change and one line; records are appended at the end of the file and
+  never rewritten, so the order of the file is the order of the changes.
+  A version may hold several records, of the same item too. `Was` is
+  word for word the part of the wording that ceased to hold. A record of
+  creation needs no reason: the wording is in the document. The history
+  of every versioned document is the same log. Where a change touches an
+  item, the record names its ID; where it touches what has no ID, the
+  record names the place: the heading of the section, or the file name
+  where the change is of the document as a whole. In the forge's own
+  project a change of the operating layer that touches no item of the
+  intent is recorded under the subject `operating layer`, one record a
+  round, so that the release notes can derive from it. `Was` is written
+  wherever wording leaves an item or a place; a record of a change to
+  the document as a whole carries none. The kinds of a record are
+  `created`, `changed`, `closed` (a thread or an open question settled),
+  `removed` (an item leaves the document and its ID is never used again)
+  and `approved` (of the document as a whole: the approval of a brief or
+  of a major). Every record names its author: the one who decided the
+  change, by the handle the instance gives its principal, never the one
+  who typed it. The field is there from the first record because a log
+  is never rewritten and a field it lacks cannot be added to what was
+  written. A record may carry `Action:`, what the user must do after the
+  change, written with the change by whoever made it; the release notes
+  are derived from the records (POS.0730). The record is written in the
+  same step as the change it records, and the reflection before a write
+  shows both: the new wording of every item touched and the record the
+  history will receive, `Was` included. Before Claude proposes a change
+  to an item, he searches the history and its archive for the item's ID.
+  What he finds is said in the proposal only where it bears on the
+  change, a direction once tried and dropped above all. The history is
+  searched, never loaded whole. The log is the single primary: the
+  commit messages `/save` and `/release` draft and the release notes are
+  derivations by mechanism, which POS.1070 permits. The companion is
+  part of its document: not a row of the ledger, handed over with it by
+  the link into git. A history written before the log is kept as it
+  stands, immutable, as the archive beside the log; nothing is
+  converted, its rows are a record and stay in the words they were
+  written in, and the history of an item is a search of both. Present
+  shape 2026-09-29.
 - **POS.0320** Immutable documents (reviews, challenges, sources,
   research) are never edited — a source from its registration, the
   others from creation; corrections happen downstream.
@@ -996,93 +903,66 @@ position that already stands elsewhere.
   thinking, challenges CHL). Both run as isolated subagents on the
   session model that never see the working conversation — that blindness
   is the source of their value; both are invoked by hand by the
-  principal, `/critique <lens>` and `/challenge <persona>`; both
-  produce an immutable dated report and ledger rows; both are settled
-  by walkthrough (POS.0850). The challenger has personas, the critic
-  has lenses: one agent file each, the shared behaviour of the kind
-  preloaded from one contract skill (POS.1120), only the Lens section
-  its own (the engine check guards the preload, POS.1120).
+  principal, `/critique <lens>` and `/challenge <persona>`; both produce
+  an immutable dated report and ledger rows; both are settled by
+  walkthrough (POS.0850). The challenger has personas, the critic has
+  lenses, the shared behaviour of each kind written once (POS.1120).
   Both take an optional target, an artefact named as `/forge` names it
-  (`brief`, `brief-<name>`, `intent`, `assignment`, later layers as
-  they come); without one, the whole chain, so that one file or one
+  (`brief`, `brief-<name>`, `intent`, `assignment`, later layers as they
+  come); without one, the whole chain, so that one file or one
   transition can be reviewed alone. Neither runs at a save; `/release`
   offers `critique essence` once and runs no reviewer on its own — the
-  one lens that guards what a release publishes, the drift of the
-  chain (decided 2026-09-05, POS.1100). (The offer at a release:
-  `.claude/skills/release/SKILL.md`.)
+  one lens that guards what a release publishes, the drift of the chain
+  (decided 2026-09-05, POS.1100).
 - **POS.0410** The critic has two lenses, because one critic hunted
-  formalities and never guarded the chain. `clarity` reads each
-  artefact on its own (`.claude/agents/critic-clarity.md`). `essence`
-  reads the chain: for every adjacent pair (brief → intent, intent →
-  assignment, every later layer) it first distils, blind, the essence
-  of the downstream artefact in a few sentences, then the upstream's
-  the same way, and compares; a finding is a difference of essences,
-  not of texts (the method: `.claude/agents/critic-essence.md`).
-  A target narrows `clarity` to that artefact and `essence` to that
-  artefact against its parent — a transition is addressed by its
-  downstream artefact, since every layer has exactly one parent, so
-  no arrow is ever typed. Regression, the FND sequence, the delta
-  report and what is a finding of no lens:
-  `.claude/skills/critic-contract/SKILL.md`. Decided 2026-09-03.
+  formalities and never guarded the chain. `clarity` reads each artefact
+  on its own. `essence` reads the chain: for every adjacent pair (brief
+  → intent, intent → assignment, every later layer) it first distils,
+  blind, the essence of the downstream artefact in a few sentences, then
+  the upstream's the same way, and compares; a finding is a difference
+  of essences, not of texts. A target narrows `clarity` to that artefact
+  and `essence` to that artefact against its parent — a transition is
+  addressed by its downstream artefact, since every layer has exactly
+  one parent, so no arrow is ever typed. Decided 2026-09-03.
 - **POS.0420** `/challenge <persona> [artefact]` reviews the thinking
   through a chosen persona — one isolated agent per persona
   (`challenger-<persona>`), each defined by the blind spots it exists to
   find. The target may be any artefact of the chain, the whole chain
-  when none is named. The contract is
-  invariant whatever the persona: three to seven sharp
-  challenges, each with a severity (dealbreaker | major | minor, ordered
-  by it — a fatal flaw is never buried among cosmetics), a falsifiable
-  "what would change my mind" and an epistemic status (consensus |
-  active debate | emerging practice | my judgement); no fabrication — a
-  precise "I don't know" beats an invented figure, and anything
-  reconstructed from memory is flagged. The contract has one
-  owner, the skill `challenger-contract` (POS.1120). What a persona
-  goes after is its own Lens.
-  The first persona is `cto` (CTO register): no stake in the principal
-  being right; unstated assumptions, whether the stated objective is
-  the real problem, second-order effects, organisational reality,
-  failure modes, missing dimensions, the serious counter-case
-  (`.claude/agents/challenger-cto.md`);
-  the second is `architect`, for the solution design: he takes what
-  is wanted as given and asks whether this is the way to get it
-  (`.claude/agents/challenger-architect.md`);
-  further personas — a strategist, a business analyst with the BRD —
-  are created from
-  the lens-file skeleton by the principal's decision when first needed, and only
-  where their blind spots genuinely differ: personas that would say the
-  same things in different words are noise. Bare `/challenge` lists the
-  roster and recommends a fit for the project's subject.
-- **POS.1120** The shared behaviour of a kind of reviewer is a contract
-  skill, preloaded — never a copy. Each kind — the critic, the
-  challenger, check (POS.0540), whatever comes after — owns one skill
-  `.claude/skills/<kind>-contract/SKILL.md` (`critic-contract`,
-  `challenger-contract`, `check-contract`; the suffix because `check/`
-  is the command, POS.1130), named in the front-matter (`skills:`) of
-  every lens, persona or check file of that kind, which then carries
-  its front-matter and its Lens section and nothing else; Claude Code
-  injects the whole skill at launch. One skill per kind, because the shared texts differ almost
-  whole; the few sentences common to all stay in each contract in its
-  own words — three contracts and no common skill, reopened only if a
-  fourth kind repeats them. A contract is addressed to every lens of
-  its kind, never a template with placeholders: it opens by citing
-  CLAUDE.md, Isolated reviewers, the one owner since POS.1070, for
-  what the contract owns (conduct, subject, way of working, report
-  shape, ledger step), what the lens file owns (what it reads, what it
-  goes after, its categories, its own report sections) and the overlap
-  rule — a lens is a specialisation, never a replacement: it may make a rule
-  stricter, never rename, drop or duplicate one; the protocol changes
-  in the contract — because the contract lands after the lens's own
-  text and the agent must know which yields. The contract never names a lens;
-  the lens file does. The skill is `user-invocable: false` (out of the
-  `/` menu; its description stays in the session's context —
-  `disable-model-invocation` would also forbid the preload) with a
-  description saying it is preloaded. `templates/critic.md`,
-  `templates/challenger.md` and `templates/check.md` are the skeletons
-  of a lens file; the engine check verifies that every skill an agent
-  names exists, since a missing one is skipped silently. Facts of the
-  mechanism: the skill arrives at the end of the first user message,
-  after the task, not in the system prompt; a headless `--agent` run
-  preloads nothing, so reviewers run as subagents only. Decided
+  when none is named. The contract is invariant whatever the persona:
+  three to seven sharp challenges, each with a severity (dealbreaker |
+  major | minor, ordered by it — a fatal flaw is never buried among
+  cosmetics), a falsifiable "what would change my mind" and an epistemic
+  status (consensus | active debate | emerging practice | my judgement);
+  no fabrication — a precise "I don't know" beats an invented figure,
+  and anything reconstructed from memory is flagged. The contract has
+  one owner, the skill `challenger-contract` (POS.1120). What a persona
+  goes after is its own Lens. The first persona is `cto` (CTO register):
+  no stake in the principal being right; unstated assumptions, whether
+  the stated objective is the real problem, second-order effects,
+  organisational reality, failure modes, missing dimensions, the serious
+  counter-case; the second is `architect`, for the solution design: he
+  takes what is wanted as given and asks whether this is the way to get
+  it; further personas — a strategist, a business analyst with the BRD —
+  are created from the lens-file skeleton by the principal's decision
+  when first needed, and only where their blind spots genuinely differ:
+  personas that would say the same things in different words are noise.
+  Bare `/challenge` lists the roster and recommends a fit for the
+  project's subject.
+- **POS.1120** The shared behaviour of a kind of reviewer is a contract,
+  written once — never a copy. Each kind — the critic, the challenger,
+  check (POS.0540), whatever comes after — owns one contract, and every
+  lens, persona or check file of that kind carries its Lens section and
+  nothing else of the shared behaviour. One contract per kind, because
+  the shared texts differ almost whole; the few sentences common to all
+  stay in each contract in its own words — three contracts and no common
+  one, reopened only if a fourth kind repeats them. A contract is
+  addressed to every lens of its kind, never a template with
+  placeholders. The contract owns conduct, subject, way of working,
+  report shape and ledger step; the lens file owns what it reads, what
+  it goes after, its categories and its own report sections; a lens is a
+  specialisation, never a replacement: it may make a rule stricter,
+  never rename, drop or duplicate one; the protocol changes in the
+  contract. The contract never names a lens; the lens file does. Decided
   2026-09-06.
 - **POS.0430** Nothing blocks. There are no hard quality gates;
   checklists and findings are advisory and the principal alone decides
@@ -1090,20 +970,19 @@ position that already stands elsewhere.
 - **POS.0440** Every finding and challenge is either fixed or explicitly
   rejected with a recorded reason (DEC). Rejecting and parking are
   legitimate outcomes; silently ignoring is not. An accepted challenge
-  is mended wherever it needs to be, and one that mends nothing was
-  not accepted. A challenge of a layer below the intent is mended in
-  that layer and changes nothing above it, unless it shows that what
-  is wanted cannot be realised or only at a price not worth paying:
-  then a thread is opened in the intent, citing the challenge, and
-  what is wanted is decided there. The states
-  in the ledger carry the words of the verdicts (POS.0850; the states:
-  `templates/ledger.md`); `open` is a state only, not yet judged, and
+  is mended wherever it needs to be, and one that mends nothing was not
+  accepted. A challenge of a layer below the intent is mended in that
+  layer and changes nothing above it, unless it shows that what is
+  wanted cannot be realised or only at a price not worth paying: then a
+  thread is opened in the intent, citing the challenge, and what is
+  wanted is decided there. The states in the ledger carry the words of
+  the verdicts (POS.0850); `open` is a state only, not yet judged, and
   `resolved` stays the critic's, a fix that is in the document. The
-  finding state `overruled` is retired
-  (2026-09-27): it reads as `rejected` wherever it survives, the
-  immutable reviews and the decision records keep the word they were
-  written with, and a project's ledger is converted through a
-  finding of the `light` check, on the principal's word or never.
+  finding state `overruled` is retired (2026-09-27): it reads as
+  `rejected` wherever it survives, the immutable reviews and the
+  decision records keep the word they were written with, and a project's
+  ledger is converted through a finding of the `light` check, on the
+  principal's word or never.
 - **POS.0450** An artefact is best challenged before the next layer is
   first derived from it — the intent before the first assignment, one
   day a BRD before the solution design — while accepted challenges are
@@ -1133,106 +1012,64 @@ position that already stands elsewhere.
   mechanics are designed when taken up.
 
 ### Operating environment
-- **POS.0500** The engine is one git repository, `forge-of-thought`
-  (POS.0990), full name **Forge of Thought** in documents: the universal
-  core in the root (`CLAUDE.md` for the agent, `README.md` for humans,
-  `templates/`, `scripts/`, `.claude/`) together with `projects/forge`,
-  the system's own project. User projects live under `projects/<slug>/`
-  as git repositories of their own, ignored by the engine (POS.0940); a
-  per-project `CLAUDE.md` is polish only where genuinely needed.
 - **POS.0510** Commands are entry points into phases, not the only
   permitted door; the core rules apply in ordinary conversation too.
-- **POS.0520** Protection relies on Claude Code's permission system,
-  not an OS-level sandbox: commands and file operations run under
-  permission prompts and allowlists, shared deny rules in
-  `.claude/settings.json` block sensitive paths (`~/.ssh`, `~/.aws`)
-  and raw `git` (POS.1200), and web access is approved per domain on
-  first use. OS-level
-  sandboxing was tried on 2026-08-04 and deliberately dropped: it is
-  unavailable on Windows, where enforcing it meant no shell at all.
 - **POS.0530** This work is reasoning-heavy and token-light, so the
   strongest available model tier is the default — the session model,
   chosen once, with no per-agent pins (POS.0930).
-- **POS.0540** Mechanical conformance runs on the same mechanism as
-  the critic and the challenger (POS.1120): its own contract skill,
-  one agent per kind of check, a roster, a run by hand. Whether it is
-  called a review is not decided and does not matter to the
-  mechanism, which takes further kinds as they come. The checks and
-  their composition are POS.1140's. Read-only and advisory: they report and
-  propose, the principal decides what is fixed. They check
-  conformance, never substance or document quality — that remains the
-  critic's and the challenger's territory.
+- **POS.0540** Mechanical conformance runs on the same mechanism as the
+  critic and the challenger (POS.1120): its own contract skill, one
+  agent per kind of check, a roster, a run by hand. Whether it is called
+  a review is not decided and does not matter to the mechanism, which
+  takes further kinds as they come. The checks are POS.1140's. Read-only
+  and advisory: they report and propose, the principal decides what is
+  fixed. They check conformance, never substance or document quality —
+  that remains the critic's and the challenger's territory.
 - **POS.0550** The engine is persisted in git with a remote of its own,
-  `main` the released line, branches allowed and left to git
-  (POS.1110); every user project is likewise a repository with
-  whatever remote and visibility its owner gives it. The scripts in
-  `scripts/` are the only door to git — reading state included, no
-  exceptions, enforced for Claude by POS.1200; how many there are is
-  whatever the door needs, never a rule. The scripts that serve the
-  engine and every project that is a repository
-  (`projects/<slug>/.git`), each described by its own help header:
-  `forge-save.ps1`, `forge-pull.ps1`, `forge-status.ps1`,
-  `forge-clone.ps1` (brings an existing project in, POS.1060) and
-  `forge-branch.ps1` (creates a branch or switches to one, `main`
-  included, with the slug alone reports the branch and lists the
-  branches, and nothing else, POS.1110). No
-  remote is configured anywhere in the forge: git carries that
-  information itself. Immutability of documents remains a process rule
-  enforced by convention, not by git.
-- **POS.1200 The scripts-only door to git is a wall of the harness,
-  not conduct alone; a commit carries no attribution.** The engine's
-  `.claude/settings.json` denies Claude the `git` command in both
-  shells (`Bash(git *)`, `PowerShell(git *)` under
-  `permissions.deny`): the rule of POS.0550 — the scripts in
-  `scripts/` are the only door to git, reading state included — is
-  enforced by the permission system of POS.0520. The rule binds the
-  forge, not the principal: his own git from the shell is his. In the
-  same file `attribution.commit` is empty and `attribution.sessionUrl`
-  is false, so Claude Code no longer adds or proposes a
-  `Co-Authored-By` or `Claude-Session` trailer: the commit message is
-  the one the principal confirmed, word for word. Decided 2026-09-21
-  by the principal.
-- **POS.0570** The project's full conformance — the `project` check,
-  for the engine `engine` too — and the renders belong to the release,
-  the bookkeeping check to the save; which checks run where is
-  POS.1140's. `/release` (POS.1100) runs the checks it composes and
-  settles their findings with the principal before the release commit
-  (the procedure: `.claude/skills/release/SKILL.md` and
-  `.claude/skills/check/SKILL.md`). The recommended procedure, never a
-  gate: nothing blocks (POS.0430). `/release` then renders what
-  POS.1100 names, unconditionally, with no staleness test. The renders
-  come after the check and its walkthrough, not before: a render made
-  from the settled sources is current by construction, whereas one
-  made before it goes stale whenever a finding bumps the intent. The
-  full check left the save because it cost minutes and a walkthrough
-  every time. The staleness of a render is never a check finding, the
-  README and the release notes included: the release regenerates
-  those two anyway, so the finding was void at every release and noise
-  everywhere else (decided 2026-09-27); the `/forge` map shows
-  staleness, and a render is regenerated only on the principal's word
-  (POS.0810).
+  `main` the released line, branches allowed and left to git (POS.1110);
+  every user project is likewise a repository with whatever remote and
+  visibility its owner gives it. The scripts in `scripts/` are the only
+  door to git — reading state included, no exceptions, enforced for
+  Claude by POS.1200; how many there are is whatever the door needs,
+  never a rule. No remote is configured anywhere in the forge: git
+  carries that information itself. Immutability of documents remains a
+  process rule enforced by convention, not by git.
+- **POS.1200 The scripts-only door to git is a wall of the harness, not
+  conduct alone; a commit carries no attribution.** The rule of POS.0550
+  — the scripts in `scripts/` are the only door to git, reading state
+  included — is enforced by the harness. The rule binds the forge, not
+  the principal: his own git from the shell is his. Claude Code no
+  longer adds or proposes a `Co-Authored-By` or `Claude-Session`
+  trailer: the commit message is the one the principal confirmed, word
+  for word. Decided 2026-09-21 by the principal.
+- **POS.0570** The project's full conformance and the renders belong to
+  the release, the bookkeeping check to the save. `/release` (POS.1100)
+  settles the findings of its checks with the principal before the
+  release commit. The recommended procedure, never a gate: nothing
+  blocks (POS.0430). The full check left the save because it cost
+  minutes and a walkthrough every time. The staleness of a render is
+  never a check finding, the README and the release notes included: the
+  release regenerates those two anyway, so the finding was void at every
+  release and noise everywhere else (decided 2026-09-27); the `/forge`
+  map shows staleness, and a render is regenerated only on the
+  principal's word (POS.0810).
 - **POS.1100** Save and release are two commands. `/save` runs the
   `light` check (POS.1140) and then commits and pushes on whatever
-  branch is checked out, through `forge-save`, no render, seconds (the
-  procedure: `.claude/skills/save/SKILL.md`). `/release` runs on
-  `main` only and refuses elsewhere, naming the branch: the checks
-  POS.1140 composes, with their walkthrough (POS.0570); the README and
-  release notes from the settled sources (POS.0730, POS.1000,
-  POS.0810); the release commit "release <intent version>" and, at an
-  approved major, the tag `v<major>` — both `/save` run by `/release`
-  with the release message, not a second procedure (POS.1070; the
-  procedure: `.claude/skills/release/SKILL.md`). The release number
-  is the intent's version (POS.0730). Any other tag on request,
-  `/save -Tag` or `/release -Tag`, on a branch as well; the script
-  pushes the tag with the commit and keeps it without an origin. Only
-  the major's tag has a fixed name, so `/check` and the release notes
-  can rely on it: an integer is a released major, anything else a
-  snapshot. Why two: the renders cost minutes and tokens beyond reason
-  at every save, and the two-speed save had existed in practice for
-  weeks; with the renders at the release only, the README on `main` is
-  current at every release and stale in between visibly (the `/forge`
-  map), never silently. Decided 2026-09-05; alternatives REJ.0160,
-  REJ.0170.
+  branch is checked out, through `forge-save`, no render, seconds.
+  `/release` runs on `main` only and refuses elsewhere, naming the
+  branch: its checks, with their walkthrough (POS.0570); the README and
+  release notes from the settled sources (POS.0730, POS.1000, POS.0810);
+  the release commit "release <intent version>" and, at an approved
+  major, the tag `v<major>`. The release number is the intent's version
+  (POS.0730). Any other tag on request, `/save -Tag` or `/release -Tag`,
+  on a branch as well. Only the major's tag has a fixed name, so
+  `/check` and the release notes can rely on it: an integer is a
+  released major, anything else a snapshot. Why two: the renders cost
+  minutes and tokens beyond reason at every save, and the two-speed save
+  had existed in practice for weeks; with the renders at the release
+  only, the README on `main` is current at every release and stale in
+  between visibly (the `/forge` map), never silently. Decided
+  2026-09-05; alternatives REJ.0160, REJ.0170.
 - **POS.1110** Branches are voluntary and belong to git. Whoever wants
   one gets it through one forge command — `forge-branch <name>` creates
   the branch or switches to it, `forge-branch main` switches back — and
@@ -1252,350 +1089,186 @@ position that already stands elsewhere.
 - **POS.0580** Work on the chain is invoked by target state, never by
   verb: `/forge <state>` (`/forge intent`, `/forge assignment`) —
   knowing the name of the target artefact is knowing the command, with
-  nothing to memorise as layers are added. Mechanics: a thin
-  dispatcher (`.claude/skills/forge/SKILL.md`)
-  plus one definition file per state
-  (`.claude/skills/forge/states/<state>.md`, a supporting file of the
-  dispatcher, POS.1130), each declaring its own
-  inputs — so the chain is a star, not a fixed line: a future layer
-  branches from any artefact by adding one file, the dispatcher
-  untouched. A state file is the definition of the elicitation of
-  its artefact, in the seven blocks of POS.1310, and stands beside
-  the artefact's template as a pair.
+  nothing to memorise as layers are added. Each artefact's definition
+  declares its own inputs — so the chain is a star, not a fixed line: a
+  future layer branches from any artefact by adding one definition. A
+  definition is that of the elicitation of its artefact, in the seven
+  blocks of POS.1310, and stands beside the artefact's template as a
+  pair.
 - **POS.0590** Everything the forge produces is Markdown, renders
   included: a presentation is a `.md` saying what is on each slide
   (mermaid for pictures). The forge still ends at content, but it
-  carries its delivery-format tools at its edge: `scripts/md2pptx.ps1`
-  (POS.0740) turns a Markdown deck render into a `.pptx`,
-  `scripts/md2docx.ps1` (POS.1150) a Markdown render into a `.docx`.
+  carries its delivery-format tools at its edge: one turns a Markdown
+  deck render into a `.pptx`, another a Markdown render into a `.docx`.
   The Markdown render remains the sole source of truth; the generated
-  file is an output of second order — regenerated at will, never
-  edited by hand. All other format conversion stays outside the
-  forge, as git is for persistence. An output is made in two steps,
-  each with its own command, divided by cost so that the expensive
-  conversion runs as seldom as possible (the principal's, decided
-  2026-09-27). `/render` generates the Markdown and, where the
-  recipe names a format, the plain file beside it through pandoc:
-  deterministic, cheap, repeated freely. `/publish` makes the
-  designed file through a model and its document skills into
-  `published/`: only on the principal's command, never by
-  `/render`, by `/release` or on Claude's own judgement; it makes a
-  file and sends nothing anywhere. `/publish` takes the render as
-  it lies on disk and never renders — a render is made by a model
-  and is never the same twice, so a second one would publish a text
-  the principal has not read; a stale render is named before the
-  conversion and the word is his. The two files never share a
-  place, or the next render would overwrite the designed file with
-  the plain one. A recipe that names no format ends at the
-  Markdown. The format and what each step needs stand in the
-  recipe's `## Format` section, which is never copied into
-  the render: the render carries content only, or the plain file
-  would carry the instructions as text. The ledger's Published
-  table says what each published file was made from and its state:
-  `current` set by `/publish`, `stale` by every `/render` of that
-  recipe — a date could not tell, since a render may run twice a
-  day. The word is `publish` by the principal's choice; it agrees
-  with "only the principal publishes" (POS.0430). CLAUDE.md carries
-  the principle of the two steps — which command makes which file,
-  who may start each — and the conduct of each step is its skill's
-  alone (`/render`, `/publish`).
-- **POS.0740** `scripts/md2pptx.ps1` makes a PowerPoint file from a
-  Markdown deck render, by one of two engines (POS.0590). `-Engine
-  claude`, the default and the engine of `/publish`, makes the
-  designed deck through headless Claude Code (`claude -p`) with
-  Anthropic's official pptx skill: a model and not a deterministic
-  converter, because deck definitions are deliberately free-form and
-  may themselves contain instructions for the LLM — slide content,
-  speaker notes, diagrams to redraw as native shapes, visual
-  directions. `/publish` names the recipe by path (`-Recipe`) so
-  that the model reads the Format section there. Template handling:
-  `-Template <path>` names a `.potx` or `.pptx` file by path —
-  typically a document of a library project (POS.0970), e.g.
-  `projects/lib-<name>/sources/<name>.potx`; without the parameter
-  Claude designs the visual style itself. There is no default
-  template and no bare-name lookup. The headless run's model is
-  chosen by `-Model`, default opus; a presentation recipe may
-  recommend one in its Format section. `-Engine pandoc`, the engine
-  of `/render`, makes a plain deck for reading, one slide per
-  second-level heading. The generated file is tracked in git like
-  any render output (where it lands: the help of
-  `scripts/md2pptx.ps1`). Present shape 2026-09-27.
-- **POS.1150** `scripts/md2docx.ps1` makes a Word file from a
-  Markdown render, by one of two engines (POS.0590). `-Engine
-  pandoc`, the default and the engine of `/render`, is a
-  deterministic conversion: the plain file needs no model. Styles
-  come from a reference document named by path (`-Reference`, a
-  `.docx` or a Word template `.dotx`/`.dotm`, typically a document
-  of a library project, POS.0970); without it pandoc's built-in
-  styles apply — no default reference and no bare-name lookup. The
-  page is A4 by default. Mermaid diagrams land in the document as
-  blocks of code: rendering them to pictures needs `mermaid-cli`, a
-  further dependency the principal has not decided on (Waiting on
-  principal in the ledger). Word is the target and PDF is not:
-  pandoc writes Word without a further engine, and a PDF is the
-  recipient's one click from Word. `-Engine claude`, the engine of
-  `/publish`, makes the designed document through headless Claude
-  Code and the official docx skill, the reference document as the
-  template it starts from, the recipe named by path (`-Recipe`), the
-  model chosen by `-Model`, default opus. The machine carries
-  neither the library the docx skill expects nor the tools that show
-  the model its pages (LibreOffice, Poppler), and the model is told
-  to install nothing: it writes the document's XML directly and
-  designs without seeing the result - enough for a page of text,
-  untried for tables, pictures or a template. The engine runs under
-  whatever configuration directory and login the calling shell has.
-  The generated file is tracked in git like any render output (where
-  it lands: the help of `scripts/md2docx.ps1`). Present shape
-  2026-09-27.
-- **POS.0770** Recipe composition may be guided by genre:
-  `/recipe <genre>` mirrors the `/forge` star (POS.0580) — a thin
-  dispatcher (`.claude/skills/recipe/SKILL.md`) plus one definition file
-  per genre (`.claude/skills/recipe/genres/<genre>.md`, a supporting
-  file of the dispatcher, POS.1130) carrying the
-  elicitation checklist, with the genre's canonical skeleton in
-  `templates/recipe-<genre>.md` extending the base recipe shape,
-  never replacing it. The first genre is `presentation` — a
-  slide-by-slide deck definition whose render `md2pptx.ps1` turns
-  into a PowerPoint file — with its interview in
-  `.claude/skills/recipe/genres/presentation.md`. The genre is named
+  file is an output of second order — regenerated at will, never edited
+  by hand. All other format conversion stays outside the forge, as git
+  is for persistence. An output is made in two steps, each with its own
+  command, divided by cost so that the expensive conversion runs as
+  seldom as possible (the principal's, decided 2026-09-27). `/render`
+  generates the Markdown and, where the recipe names a format, the plain
+  file beside it: deterministic, cheap, repeated freely. `/publish`
+  makes the designed file through a model and its document skills into
+  `published/`: only on the principal's command, never by `/render`, by
+  `/release` or on Claude's own judgement; it makes a file and sends
+  nothing anywhere. `/publish` takes the render as it lies on disk and
+  never renders — a render is made by a model and is never the same
+  twice, so a second one would publish a text the principal has not
+  read; a stale render is named before the conversion and the word is
+  his. A recipe that names no format ends at the Markdown. The word is
+  `publish` by the principal's choice; it agrees with "only the
+  principal publishes" (POS.0430).
+- **POS.0770** Recipe composition may be guided by genre: `/recipe
+  <genre>` mirrors the `/forge` star (POS.0580) — one definition per
+  genre carrying the elicitation checklist, with the genre's canonical
+  skeleton extending the base recipe shape, never replacing it. The
+  first genre is `presentation` — a slide-by-slide deck definition whose
+  render is turned into a PowerPoint file. The genre is named
   "presentation" rather than "deck" for company-wide legibility at
   rollout.
 - **POS.0830** The forge runs beyond Windows. `scripts/` is the only
-  platform-bound layer, and its scripts are written to run unchanged
-  on Linux and macOS: they are PowerShell 7, which is itself
-  cross-platform (`pwsh`, one install on a non-Windows machine), and
-  they use nothing Windows-only — paths composed with `Join-Path` or
-  forward slashes, no `cmd`, registry or Windows-only cmdlets,
-  `$IsWindows` only where the platform genuinely differs, external
-  tools (`git`, `markitdown`, `pandoc`, `claude`) resolved from PATH,
-  and usage
-  examples in the scripts' help free of Windows-specific paths and
-  invocations. Instance facts are out of the scripts: no remote URL,
-  no author identity, no first-run initialisation — git configuration
-  is the user's (POS.0950). Portability is verified by running the set on Linux
-  (WSL suffices); until then it is a writing rule, not a claim. From
-  2026-10-02 scripts are written in Python, on the feedback of the
-  forge's users: a new script at once, the PowerShell scripts
-  rewritten in time and standing as they are until then (THR.0150).
-- **POS.0940** Mechanism of the engine/projects split. The engine is a
-  clone; the projects are nested git repositories in a gitignored
-  `projects/*` with `projects/forge` re-included (`!projects/forge`; the
-  pattern must be `projects/*`, not `projects/`, or the re-include fails
-  silently). The engine does not know the projects (how the scripts
-  recognise a project: the help headers of `scripts/forge-status.ps1`,
-  `forge-save.ps1` and `forge-pull.ps1`). `git init` and the remote are the user's one-off
-  act: `/new-project` and `/spinoff` create files only and never touch
-  git, and a project starting "not under git" is a property, not a
-  defect. A project without a repository, or with a
-  repository and no origin, is a legitimate shape — a sensitive project
-  kept local; the second keeps the history the renders and recipes rely
-  on, the first does not. Upgrade is `forge-pull` on the engine — a
-  fast-forward of `main`. A project records no engine version: `/check`
-  measures it against the current conventions. That is the whole
-  migration path of any instance, the principal's and a third party's
-  alike: after `forge-pull`, `/check light` and `/check project` on
-  each project say what the conventions changed (which check owns
-  what: POS.1140), the release notes' Action required lines say
-  what to do, and Claude migrates on the user's word; no migration tool
-  exists, knowingly. Shapes rejected: REJ.0150. Decided 2026-08-29.
+  platform-bound layer, and its scripts are written to run unchanged on
+  Linux and macOS. Instance facts are out of the scripts: no remote URL,
+  no author identity, no first-run initialisation — git configuration is
+  the user's (POS.0950). Portability is verified by running the set on
+  Linux (WSL suffices); until then it is a writing rule, not a claim.
+  From 2026-10-02 scripts are written in Python, on the feedback of the
+  forge's users: a new script at once, the PowerShell scripts rewritten
+  in time and standing as they are until then (THR.0150).
+- **POS.0940** The engine does not know the projects. `git init` and the
+  remote are the user's one-off act: `/new-project` and `/spinoff`
+  create files only and never touch git, and a project starting "not
+  under git" is a property, not a defect. A project without a
+  repository, or with a repository and no origin, is a legitimate shape
+  — a sensitive project kept local; the second keeps the history the
+  renders and recipes rely on, the first does not. Upgrade is
+  `forge-pull` on the engine — a fast-forward of `main`. A project
+  records no engine version: `/check` measures it against the current
+  conventions. That is the whole migration path of any instance, the
+  principal's and a third party's alike: after `forge-pull`, `/check
+  light` and `/check project` on each project say what the conventions
+  changed (which check owns what: POS.1140), the release notes' Action
+  required lines say what to do, and Claude migrates on the user's word;
+  no migration tool exists, knowingly. Shapes rejected: REJ.0150.
+  Decided 2026-08-29.
 - **POS.0950** The engine carries no instance facts. Who the principal
   is (by role) and what language the conversation runs in live in
-  `CLAUDE.local.md` at the engine root — gitignored, created from
-  `templates/CLAUDE.local.md` and filled by `/setup` on a new machine
-  (POS.1050); the root is where Claude Code looks for it, and
-  everything there reaches every subagent, the isolated reviewers
+  `CLAUDE.local.md`, a file of the instance kept out of the repository,
+  and everything there reaches every subagent, the isolated reviewers
   included (THR.0240). Therefore only what must be always-on and is
-  harmless in a public report lives there; the git identities —
-  names, e-mail addresses, hosts — live in the user's own git
-  configuration outside the engine (below), and CLAUDE.md, Isolated
-  reviewers, which every reviewer contract cites, forbids instance
-  facts in a report. The session model lives in
-  `.claude/settings.local.json` (POS.0930). `CLAUDE.md` names the
-  principal and the conversation language only as things that exist,
-  never by value; the document language is the project's own
-  (POS.0060). The scripts carry no URL and no identity (POS.0830). The
-  commit identity is git's business, not the forge's: it is resolved
-  per git host by the user's own configuration, and the forge sets no
-  identity anywhere: no roster file, no local `git config user.*` at a
-  project's creation or import (the stanzas:
-  `.claude/skills/setup/SKILL.md`). Reversed 2026-09-16, written
-  2026-09-18: the identity was a property of the project, set locally
-  in every repository and proposed by the command layer from a roster in
-  `identities.local.md`, and the per-host include was rejected because
-  a host is only a correlate of the identity and fails where one host
-  serves two roles. In the field the roster duplicated what the user's
-  includes already resolved, every repository carried the same
-  identity twice, and the forge had gained a file, a template and
-  three identity steps for a case that had not occurred. The
-  two-roles case is accepted as a risk the user resolves by hand with
-  a local `git config user.*` of his own, which git lets win over the
-  include. What the forge keeps: `/setup` (POS.1050) offers to write
-  the stanzas and the one global guard — `user.useConfigOnly = true`
-  with no global `user.name`/`user.email`, so that a commit in a
-  repository on a host with no stanza fails aloud instead of silently
-  taking a default (a surviving global identity defeats the guard, and
-  `/setup` says so) — and `forge-save` checks that git resolves an identity for the repository
-  and, where it resolves none, reports it with the command to set one
-  and commits nothing until it is.
-- **POS.0930** One model for the whole forge. Every command, chain
-  state and reviewer runs on the session model; the reviewer agents
-  declare `model: inherit` explicitly, so that the strongest model the
-  forge runs on is a decision and never an accident of a pin that has
-  aged. Speed is bought with context, not with weaker models:
-  `/render` generates in an isolated subagent that sees only the
-  recipe and its inputs, never the working conversation — the same
-  principle as the reviewers', applied to a mechanical job — and a
-  command's `effort:` remains the lever for routine turns should one
-  ever need it. Per-command pinning to a faster model is rejected for
-  now: the routine commands are a small share of the work and slow for
-  the size of the context they carry, not for the model, and every pin
-  is a convention to keep. A per-recipe `model:` for the render is
-  deferred until a recipe is genuinely mechanical, since a smaller
-  model drifts from a recipe that leaves it room (the drift POS.0810
-  guards against); the model a recipe may recommend in its Format
-  section is the headless conversion's, another step (POS.0740). The
-  session model is chosen in one
-  deliberate place, `.claude/settings.local.json` — an instance
-  preference, gitignored (POS.0950). The one exception is the
-  headless conversions behind `/publish`, `scripts/md2pptx.ps1` and
-  `scripts/md2docx.ps1` with `-Engine claude`: a headless run has no
-  session model, so each script needs a default of its own (`-Model`,
-  POS.0740, POS.1150) — an
-  explicit parameter, not an aged pin. The same lever carries the
-  checks: every check executes its own definition in an isolated
-  subagent that sees only the files, returning the report for the
-  walkthrough in the session, and `/release` launches its renders in
-  parallel (which command renders what is POS.1100's); the working
-  conversation is spent on verdicts, not on reading. Present shape
-  2026-09-02.
-- **POS.1070** One mechanism lives in one place and is used from
-  there. Whatever the forge already has a procedure for — a command,
-  a skill, a script, an agent — is invoked through that procedure
-  whenever its situation arises, never re-described ad hoc:
-  `/release` regenerates the README and release notes through
-  `/render` and ends by running `/save`, git is touched through the
-  scripts in `scripts/` (POS.0550), reviews run through the reviewer
-  agents. A command that needs another's mechanism references it by
-  path and adds nothing of its own to how it runs; the rules of a
-  mechanism — isolation, wrapping, provenance, what may be read — are
-  written once, in its own definition. Restating a procedure in a
-  second place is a defect: the two copies drift, and the copy without
-  a rule silently loses it. The `single-source-of-truth` check carries
-  the standing rule over the whole operating layer, run on the
-  principal's word and never at a release on its own (POS.1140), so
-  that the rule costs a release nothing and the sweep is honest when
-  it runs. Where a shape had no owner at all, it gets
-  a skeleton rather than a second description: the bundle catalogue
-  (`templates/index-bundle.md`), the library reduction of the ledger
-  (`templates/ledger.md`'s header), the state vocabularies of
-  findings and challenges and the reading of an older state word
-  (`templates/ledger.md`'s Findings and Challenges comments), the
-  reading of an older recipe's `## Build instructions` as Format
-  (`templates/recipe.md`'s Format comment). A restatement is steps,
-  rules or a shape repeated; a one-line reminder at the point of
-  action that names its owner — "not under git is a fact, not a
-  defect (CLAUDE.md, Persistence)" — is not one, since it is what
-  Claude reads when he acts and the citation keeps it honest
+  harmless in a public report lives there; the git identities — names,
+  e-mail addresses, hosts — live in the user's own git configuration
+  outside the engine, and instance facts are forbidden in a reviewer's
+  report. `CLAUDE.md` names the principal and the conversation language
+  only as things that exist, never by value; the document language is
+  the project's own (POS.0060). The scripts carry no URL and no identity
+  (POS.0830). The commit identity is git's business, not the forge's: it
+  is resolved per git host by the user's own configuration, and the
+  forge sets no identity anywhere. Reversed 2026-09-16, written
+  2026-09-18: an identity kept by the forge duplicated what the user's
+  own configuration already resolved, every repository carried the same
+  identity twice, and the forge had gained a file, a template and three
+  identity steps for a case that had not occurred. The two-roles case,
+  one host serving two identities, is accepted as a risk the user
+  resolves by hand. What the forge keeps: `/setup` (POS.1050) offers to
+  write that configuration and the one global guard, so that a commit in
+  a repository on a host with no identity fails aloud instead of
+  silently taking a default, and a save commits nothing until git
+  resolves an identity for the repository.
+- **POS.0930** One model for the whole forge. Every command, chain state
+  and reviewer runs on the session model, so that the strongest model
+  the forge runs on is a decision and never an accident of a pin that
+  has aged. Speed is bought with context, not with weaker models:
+  `/render` generates in an isolated subagent that sees only the recipe
+  and its inputs, never the working conversation — the same principle as
+  the reviewers', applied to a mechanical job. Per-command pinning to a
+  faster model is rejected for now: the routine commands are a small
+  share of the work and slow for the size of the context they carry, not
+  for the model, and every pin is a convention to keep. A per-recipe
+  model for the render is deferred until a recipe is genuinely
+  mechanical, since a smaller model drifts from a recipe that leaves it
+  room (the drift POS.0810 guards against). The session model is chosen
+  in one deliberate place — an instance preference. The one exception is
+  the headless conversions behind `/publish`: a headless run has no
+  session model, so each needs a default of its own — an explicit
+  parameter, not an aged pin. The same lever carries the checks: every
+  check executes its own definition in an isolated subagent that sees
+  only the files, returning the report for the walkthrough in the
+  session, and `/release` launches its renders in parallel (which
+  command renders what is POS.1100's); the working conversation is spent
+  on verdicts, not on reading. Present shape 2026-09-02.
+- **POS.1070** One mechanism lives in one place and is used from there.
+  Whatever the forge already has a procedure for — a command, a skill, a
+  script, an agent — is invoked through that procedure whenever its
+  situation arises, never re-described ad hoc: `/release` regenerates
+  the README and release notes through `/render` and ends by running
+  `/save`, git is touched through the scripts in `scripts/` (POS.0550),
+  reviews run through the reviewer agents. A command that needs
+  another's mechanism references it by path and adds nothing of its own
+  to how it runs; the rules of a mechanism — isolation, wrapping,
+  provenance, what may be read — are written once, in its own
+  definition. Restating a procedure in a second place is a defect: the
+  two copies drift, and the copy without a rule silently loses it. The
+  `single-source-of-truth` check carries the standing rule over the
+  whole operating layer, run on the principal's word and never at a
+  release on its own (POS.1140), so that the rule costs a release
+  nothing and the sweep is honest when it runs. Where a shape had no
+  owner at all, it gets a skeleton rather than a second description. A
+  restatement is steps, rules or a shape repeated; a one-line reminder
+  at the point of action that names its owner — "not under git is a
+  fact, not a defect (CLAUDE.md, Persistence)" — is not one, since it is
+  what Claude reads when he acts and the citation keeps it honest
   (decided 2026-09-27).
-- **POS.1090** The harness enforces the principal's word where it
-  can. A command that writes, scaffolds, commits or regenerates —
-  `/save`, `/release`, `/spinoff`, `/setup`, `/new-project`,
-  `/import-project`, `/ingest`, `/render`, `/publish` — carries
-  `disable-model-invocation: true` in its
-  front-matter, so that Claude cannot start it on his own judgement:
-  the principal invokes it by slash, or asks in words and Claude
-  follows the command's definition read by path, as the dispatchers
-  do. The state and genre files behind `/forge` and `/recipe` are,
-  since POS.1130, supporting files registered as nothing and need no
-  guard. Maps, reports and rosters (`/forge`, `/ledger`, `/check`,
-  `/critique`, `/challenge`, `/research`, `/recipe`)
-  stay model-invocable, since Claude is meant to propose them. The
-  guarantee of Step by step (CLAUDE.md, Working methods) thereby
-  rests on the harness as well as on CLAUDE.md, and the descriptions of the guarded
-  commands leave the always-on context. Decided 2026-09-05. Step by
-  step names one more such step since 2026-09-14: the birth of a new
-  versioned document — a brief, a recipe, a layer of the chain —
-  happens on the principal's word, never as a by-product of another
-  operation (`sources/forge-run-record-health.md`, P.05, F.06).
-- **POS.1130** The commands are skills. Every command lives as
-  `.claude/skills/<name>/SKILL.md`. The state files of `/forge` and
-  the genre files of `/recipe` are supporting files of their dispatcher
-  (`.claude/skills/forge/states/<state>.md`,
-  `.claude/skills/recipe/genres/<genre>.md`): read by path, registered
-  as nothing, carrying a description and no registration field. The
-  reviewers' contracts (POS.1120) are skills of the same directory,
-  not user-invocable. "Command" stays the word for what the user
-  invokes by slash; "skill" names the file shape, commands and
-  contracts alike. Grounds: in Claude Code custom commands have been
-  merged into skills — a command file and a skill of one name create
-  the same `/name` and work the same way, existing command files keep
-  working, skills are the recommended form — and a skill adds what
-  this layer wants: supporting files without registration, `context:
-  fork` with an agent type (set aside, POS.1140), named `arguments`.
-  No context gain: a command's body and a skill's alike load only
-  when invoked, so THR.0240 is untouched. A skill shadows a command of
-  the same name, so a migration is whole, never partial. Every
-  `argument-hint` is quoted: a front-matter with CRLF line endings and
-  an unquoted hint of two bracketed items fails to parse, and the
-  harness then shows the body's first line as the description.
-  Decided 2026-09-06.
+- **POS.1090** The harness enforces the principal's word where it can.
+  Claude is kept from the user's sensitive paths, and web access is
+  approved by the user per domain. A command that writes, scaffolds,
+  commits or regenerates — `/save`, `/release`, `/spinoff`, `/setup`,
+  `/new-project`, `/import-project`, `/ingest`, `/render`, `/publish` —
+  is guarded by the harness, so that Claude cannot start it on his own
+  judgement: the principal invokes it by slash, or asks in words and
+  Claude follows the command's definition read by path. Maps, reports
+  and rosters (`/forge`, `/ledger`, `/check`, `/critique`, `/challenge`,
+  `/research`, `/recipe`) stay Claude's to start, since he is meant to
+  propose them. The guarantee of Step by step (CLAUDE.md, Working
+  methods) thereby rests on the harness as well as on CLAUDE.md. Decided
+  2026-09-05. Step by step names one more such step since 2026-09-14:
+  the birth of a new versioned document — a brief, a recipe, a layer of
+  the chain — happens on the principal's word, never as a by-product of
+  another operation (`sources/forge-run-record-health.md`, P.05, F.06).
 - **POS.1140** Check runs on the reviewer mechanism — POS.0540 decided
   it, this is the shape. One command `/check <check> [slug]`, bare the
-  roster; one contract skill `check-contract`
-  (`.claude/skills/check-contract/SKILL.md`); one agent per check,
-  `check-<name>`, front-matter and Lens only, from `templates/check.md`;
-  the roster open, a new check one file. The first checks, each owning
-  one concern and none another's: `project` — structure, IDs,
-  language, immutables, recipes and renders; `light`
-  — front-matter against the companion and the form of its log, the
-  ledger against the files, dependencies, resource
-  indexes, fit for a save; `engine` — the core against itself and the
-  forge intent, the rename sweep; `single-source-of-truth` — the
+  roster; the roster open. The first checks, each owning one concern and
+  none another's: `project` — structure, IDs, language, immutables,
+  recipes and renders; `light` — front-matter against the companion and
+  the form of its log, the ledger against the files, dependencies,
+  resource indexes, fit for a save; `engine` — the core against itself
+  and the forge intent, the rename sweep; `single-source-of-truth` — the
   whole operating layer for restatements and direct operations
   (POS.1070), the honest sweep, expensive by design, run on the
   principal's word before a major or after a round on the operating
-  layer, never by `/release` on its own, a project on request. The
-  check `history` reads a document with its history and reports
-  where the division between them does not hold, by what POS.0120
-  says belongs where (`.claude/agents/check-history.md`). Run on the
-  principal's word. A rule
-  an older position attributes to `/check` as one procedure belongs
-  to the check that owns its concern by this list — bookkeeping,
-  ledger, dependencies and indexes to `light`, structure, recipes and
-  renders to `project` — never to two. Composition is the caller's
-  and checks never call each other: `/save` runs `light`; `/release`
-  runs `light` and `project`, for the engine `engine` too, launched
-  at once; anything else is the principal's word. The engine is
-  checked as `/check engine`, the forge project as `/check project
-  forge`. The word for a check's variants is
-  "check" — the light check, the project check — the mechanism's name
-  serving for its members. `context: fork` is set aside: the field
-  fixes the agent type in a skill's front-matter, so it cannot serve
-  a dispatcher that chooses an agent by argument; the isolation stays
-  what `/critique` and `/challenge` do — the Agent tool with the
-  target path and nothing else (POS.0930). A check's findings are
-  filed like a critic's: FND of the project's one sequence, a dated
-  report in `reviews/`, a row in the ledger, settled by walkthrough,
-  a rejected one by a DEC and then not raised again; a run that finds
-  nothing files nothing. The agent stays read-only and returns its
-  report; the `/check` procedure files it word for word and gives the
-  IDs (`.claude/skills/check/SKILL.md`,
-  `.claude/skills/check-contract/SKILL.md`). Reason: one mechanism
-  for every reviewer. A finding without an ID has no place for its
-  verdict, so a rejected one returns at the next run, and a user
-  cannot tell why one reviewer's findings are kept and another's are
-  not. The session files, and not the agent, so that the IDs are
-  given at one place and a check that every save runs has no right to
-  write; whether a script takes the filing over is THR.0500. Present
-  shape 2026-10-02; the `/research` point stays in THR.0290.
-- **POS.1190 The forge explains itself from its own definitions.**
-  `/man [command|method]`, alias `/manual`, is the forge's manual —
-  a reader, never a text of its own (POS.1070). The procedure:
-  `.claude/skills/man/SKILL.md`. Named after the Unix manual, `/help`
-  being a built-in of Claude Code; the alias is a second skill whose
-  whole body invokes the first, since a skill has no alias field.
-  Decided 2026-09-18 for the newcomer's first hour and for the reader
-  who opens the repository.
+  layer, never by `/release` on its own, a project on request. The check
+  `history` reads a document with its history and reports where the
+  division between them does not hold, by what POS.0120 says belongs
+  where. Run on the principal's word. A rule an older position
+  attributes to `/check` as one procedure belongs to the check that owns
+  its concern by this list — bookkeeping, ledger, dependencies and
+  indexes to `light`, structure, recipes and renders to `project` —
+  never to two. Composition is the caller's and checks never call each
+  other. The word for a check's variants is "check" — the light check,
+  the project check — the mechanism's name serving for its members. A
+  check's findings are filed like a critic's: FND of the project's one
+  sequence, a dated report in `reviews/`, a row in the ledger, settled
+  by walkthrough, a rejected one by a DEC and then not raised again; a
+  run that finds nothing files nothing. Reason: one mechanism for every
+  reviewer. A finding without an ID has no place for its verdict, so a
+  rejected one returns at the next run, and a user cannot tell why one
+  reviewer's findings are kept and another's are not. Present shape
+  2026-10-02; the `/research` point stays in THR.0290.
+- **POS.1190 The forge explains itself from its own definitions.** `/man
+  [command|method]`, alias `/manual`, is the forge's manual — a reader,
+  never a text of its own (POS.1070). Named after the Unix manual,
+  `/help` being a built-in of Claude Code. Decided 2026-09-18 for the
+  newcomer's first hour and for the reader who opens the repository.
 
 ### Naming
 - **POS.0600** The system is named **Forge of Thought**: thoughts are
@@ -1641,7 +1314,7 @@ position that already stands elsewhere.
   wherever they choose and are themselves responsible for what those
   contain and where they live, generated decks carrying corporate
   branding included. Decided on 2026-08-29 from
-  `00-brief-public-engine.md`; the mechanism is POS.0940.
+  `00-brief-public-engine.md`.
 - **POS.0780** The forge is a general tool for forging thoughts, and
   a forge run ends where its owner is satisfied: the outcome is an
   artefact the principal stands behind — nothing further. An intent
@@ -1696,38 +1369,32 @@ position that already stands elsewhere.
   project root), exactly as the engine has them (POS.0720, POS.0730;
   POS.0810 for the review of the regenerated output): the recipe is what
   is iterated, the render is never edited by hand, and every `/release`
-  of the project regenerates both after its check (POS.1100). A library has a
-  README only — a catalogue of what it holds and how to use it, from its
-  ledger and indexes — since release notes are derived from the
-  history of an intent, which a library does not
-  have; its history is git. The two recipes are genres of `/recipe` (skeletons
-  `templates/recipe-readme.md`, `templates/recipe-release-notes.md`),
-  scaffolded by `/new-project` and expected by `/check`; the ledger's
-  Renders table carries them like any render. Every README closes with one fixed
-  sentence, part of the readme genre (`templates/recipe-readme.md`),
-  so that whoever finds the project knows what runs it (principal's
-  decision 2026-08-30). The engine's own README is the one exception:
-  the sentence exists to point a visitor to the engine, and the
-  engine's README is that destination.
+  of the project regenerates both after its check (POS.1100). A library
+  has a README only — a catalogue of what it holds and how to use it,
+  from its ledger and indexes — since release notes are derived from the
+  history of an intent, which a library does not have; its history is
+  git. The two recipes are genres of `/recipe`, scaffolded by
+  `/new-project` and expected by `/check`; the ledger's Renders table
+  carries them like any render. Every README closes with one fixed
+  sentence, part of the readme genre, so that whoever finds the project
+  knows what runs it (principal's decision 2026-08-30). The engine's own
+  README is the one exception: the sentence exists to point a visitor to
+  the engine, and the engine's README is that destination.
 - **POS.1010** A project may carry an icon: `logo.png` in the project
   root, supplied by the principal, picked up as the repository avatar by
-  hosts that do so. Optional — a project without an icon is complete
-  (the check: `.claude/agents/check-project.md`). No `assets/`
-  directory exists; one is introduced only when images beyond the logo appear.
+  hosts that do so. Optional — a project without an icon is complete. No
+  `assets/` directory exists; one is introduced only when images beyond
+  the logo appear.
 - **POS.1020** A project registers what it relies on outside its own
   repository. The ledger carries a Dependencies table with one row per
-  document of another repository the project cites: a deck template named in a recipe, a library document
-  an index entry or a position refers to. Registration only, like
-  sources: what the document is for lives where it is used. No version
-  is recorded — a library document is maintained by its owner and cited
-  as a moving target by design (POS.0970). (The table:
-  `templates/ledger.md`; the check: `.claude/agents/check-light.md`;
-  the map: `.claude/skills/forge/SKILL.md`; the README line:
-  `templates/recipe-readme.md`; the registration:
-  `.claude/skills/ingest/SKILL.md`.) Rationale: a
-  cross-repository citation is a dependency taken knowingly (POS.0970) —
-  knowingly means written down where state lives, not discovered when a
-  render loses its template.
+  document of another repository the project cites: a deck template
+  named in a recipe, a library document an index entry or a position
+  refers to. Registration only, like sources: what the document is for
+  lives where it is used. No version is recorded — a library document is
+  maintained by its owner and cited as a moving target by design
+  (POS.0970). Rationale: a cross-repository citation is a dependency
+  taken knowingly (POS.0970) — knowingly means written down where state
+  lives, not discovered when a render loses its template.
 
 - **POS.1030** The forge's behaviour lives in the engine, never in the
   assistant's private memory. Claude Code keeps a per-directory memory
@@ -1740,73 +1407,58 @@ position that already stands elsewhere.
   instance facts go to `CLAUDE.local.md` (the commit identity is
   git's, POS.0950). Decided 2026-08-30.
 - **POS.1040** A source has one form. A file in `sources/` is either
-  text or a functional binary, never both by default (the procedure:
-  `.claude/skills/ingest/SKILL.md`; the check:
-  `.claude/agents/check-light.md`). At `/ingest` every binary file —
-  isolated or inside a bundle — gets one question: convert to
-  Markdown? Yes: `doc2md` writes `sources/<slug>.md`, and that extract
-  is the source; the original is not copied into the project. No: the
-  binary is the source as a functional thing — a deck template, a
-  graphic, a logo. Keeping both is the exception, on the principal's
-  explicit word. Reason: the repository carries
-  what the forge works with — text — and a binary nobody reads from
-  git is weight without use; a binary that is used as a thing is kept
-  because it is used. Three additions of 2026-09-14 from the run
-  record of `health`: `/ingest` takes text pasted into the
-  conversation as well as a file (P.10, G.04); before storing,
-  personal matter — a named private person, an identifying detail,
-  health, anything of the kind — stops the command and asks (P.11,
-  G.09); and the role of a source is the principal's word, never
-  inferred — after registration Claude always asks "what is it for?",
-  and he answers with the role or tells Claude to infer it, which is
-  then written marked *(inferred)* (P.06, F.05).
+  text or a functional binary, never both by default. At `/ingest` every
+  binary file — isolated or inside a bundle — gets one question: convert
+  to Markdown? Yes: `doc2md` writes `sources/<slug>.md`, and that
+  extract is the source; the original is not copied into the project.
+  No: the binary is the source as a functional thing — a deck template,
+  a graphic, a logo. Keeping both is the exception, on the principal's
+  explicit word. Reason: the repository carries what the forge works
+  with — text — and a binary nobody reads from git is weight without
+  use; a binary that is used as a thing is kept because it is used.
+  Three additions of 2026-09-14 from the run record of `health`:
+  `/ingest` takes text pasted into the conversation as well as a file
+  (P.10, G.04); before storing, personal matter — a named private
+  person, an identifying detail, health, anything of the kind — stops
+  the command and asks (P.11, G.09); and the role of a source is the
+  principal's word, never inferred — after registration Claude always
+  asks "what is it for?", and he answers with the role or tells Claude
+  to infer it, which is then written marked *(inferred)* (P.06, F.05).
 - **POS.1050** First run is one command. After cloning the engine,
-  `/setup` prepares the instance: it fills `CLAUDE.local.md` from
-  `templates/CLAUDE.local.md` in an elicitation interview — the
-  conversation language first, then who the principal is by role,
-  since the first correction of a newcomer's run was the language of
-  the first question (`sources/forge-run-record-health.md`, P.15,
-  G.13, 2026-09-14) — and it creates
-  `.claude/settings.local.json` with
-  the session model set to **Fable**, without asking: the strongest
+  `/setup` prepares the instance: it fills the facts of the instance in
+  an elicitation interview — the conversation language first, then who
+  the principal is by role, since the first correction of a newcomer's
+  run was the language of the first question
+  (`sources/forge-run-record-health.md`, P.15, G.13, 2026-09-14) — and
+  it sets the session model to **Fable**, without asking: the strongest
   available model is the forge's default (POS.0530), the whole forge
-  including the blind reviewers runs on it (POS.0930), and a
-  newcomer's first minute is no place for a model decision (the
-  procedure: `.claude/skills/setup/SKILL.md`). `/setup` never
-  overwrites. The interview closes with the git identity,
-  which is git's (POS.0950): `/setup` asks for the hosts the user
-  pushes to, a name and an e-mail for each, and offers to write the
-  `includeIf` stanzas into the global git configuration file git
-  actually reads (named by `scripts/forge-status.ps1`, the stanza paths
-  absolute — `~` in git's hands and in the shell's may differ), each
-  `.gitconfig-<host>` beside that file created with its `[user]` when
-  missing, together with the global
-  guard `user.useConfigOnly = true` — the file read first, never
-  overwriting existing content, an existing stanza or guard reported
-  and left — all written on the user's word; declined, printed for
-  him to apply by hand. Where the file carries a global `user.name`
-  or `user.email`, `/setup` says the guard only bites once that
-  identity is removed and offers the removal, again only on his word.
-  `/setup` runs no git operation — the user's git configuration files
-  are the one thing it may edit outside the engine, on his word. Named
-  `/setup`, not `/init`: Claude Code's built-in `/init` generates a
-  CLAUDE.md, and the collision would send a newcomer to exactly the
-  wrong action at the most sensitive moment. Decided 2026-09-01.
+  including the blind reviewers runs on it (POS.0930), and a newcomer's
+  first minute is no place for a model decision. `/setup` never
+  overwrites. The interview closes with the git identity, which is git's
+  (POS.0950): `/setup` asks for the hosts the user pushes to, a name and
+  an e-mail for each, and offers to write his git configuration for
+  them, together with a global guard, never overwriting existing
+  content, all written on the user's word; declined, printed for him to
+  apply by hand. `/setup` runs no git operation — the user's git
+  configuration files are the one thing it may edit outside the engine,
+  on his word. Named `/setup`, not `/init`: Claude Code's built-in
+  `/init` generates a CLAUDE.md, and the collision would send a newcomer
+  to exactly the wrong action at the most sensitive moment. Decided
+  2026-09-01.
 - **POS.1060** A project arrives through the scripts-only door.
-  `/import-project <git-url>` brings an existing project into the
-  forge: it calls `scripts/forge-clone.ps1` (POS.0550), which clones
-  the repository into `projects/<repository name>`; a nonconforming
-  name is fixed by renaming the directory afterwards (the procedure:
-  the script's help header and `.claude/skills/import-project/SKILL.md`).
-  The script carries no identity and sets none (POS.0830, POS.0950).
-  Work then starts by selecting the project — `/forge <slug>` —
-  because the engine does not track it and cannot guess it.
+  `/import-project <git-url>` brings an existing project into the forge:
+  it clones the repository, through the forge's clone script (POS.0550),
+  into `projects/<repository name>`; a nonconforming name is fixed by
+  renaming the directory afterwards. The script carries no identity and
+  sets none (POS.0830, POS.0950). Work then starts by selecting the
+  project — `/forge <slug>` — because the engine does not track it and
+  cannot guess it.
 
 ## Facts
 
 None: what this project rests on as fact is how Claude Code behaves,
-worked out by Claude and kept in the positions it grounds (POS.1120,
-POS.1130); what Claude has worked out is never a FCT (POS.0230).
+worked out by Claude; what Claude has worked out is never a FCT
+(POS.0230).
 
 ## Rejected directions
 
@@ -1858,8 +1510,7 @@ POS.1130); what Claude has worked out is never a FCT (POS.0230).
 - **REJ.0140** `local/` as the home of user-local files. Dropped on
   2026-08-29: it existed only to keep company material out of the
   repository, which the gitignored `projects/*` now does; deck templates
-  live in a library project (POS.0970) and are named by path
-  (POS.0740).
+  live in a library project (POS.0970) and are named by path.
 - **REJ.0150** Shapes of the engine/projects relation rejected on
   2026-08-29: git submodules, subtree and worktrees — they model a
   dependency, which this relation is not; the engine as a template

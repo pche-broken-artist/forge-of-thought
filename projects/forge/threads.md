@@ -205,7 +205,7 @@ project: forge
   mechanics, and nothing in THR.0300 waits for the split at all.
   A matter for the brief, Claude's observation of 2026-09-26: the
   word *engine* today means the forge's own repository against the
-  projects (POS.0500), so the deeper engine this brief proposes
+  projects (SOL.0500), so the deeper engine this brief proposes
   overloads it, and the brief settles that vocabulary before it
   settles anything else. His reasons for
   taking it up soon: every further change makes the split harder;
@@ -501,7 +501,7 @@ project: forge
   justifies it
   (`research/2026-09-28-artefact-layers-from-idea-to-handover.md`).
 - **THR.0370** [intent] Mermaid diagrams in Word. `scripts/md2docx.ps1`
-  (POS.1150) converts a render to Word through pandoc and leaves
+  (SOL.0440) converts a render to Word through pandoc and leaves
   Mermaid blocks as code. Agreed in the walkthrough of 2026-09-12 but
   not built: the route would be `mermaid-cli` rendering each block to
   PNG through headless Chrome before pandoc runs (a pandoc Lua
@@ -513,9 +513,9 @@ project: forge
   2026-09-12: it would end at a picture too, with less determinism.
   On 2026-09-27 the principal took that route for another purpose,
   the design of the document: it is the `claude` engine of
-  `md2docx.ps1` behind `/publish` (POS.0590, POS.1150). Mermaid in
+  `md2docx.ps1` behind `/publish` (POS.0590, SOL.0440). Mermaid in
   the plain file stands as it was.
-  Word to PDF is the recipient's, never the forge's (POS.1150).
+  Word to PDF is the recipient's, never the forge's (SOL.0440).
   Deferred 2026-09-12 by the principal — "needs more thought"; opened
   as a thread 2026-09-14 from the ledger.
 - **THR.0380** [intent] Executive pitch, loose ends. The five-slide deck
@@ -933,8 +933,8 @@ project: forge
   | 1 | Decide what the solution design is | done 2026-10-03, intent 4.52 |
   | 2 | Prepare the forge: the names of the artefacts leave the engine so that artefacts are read from disk; CLAUDE.md brought to the positions of step 1 | done 2026-10-03, intent 4.53, handed over to Claude and judged by the principal |
   | 3 | Add the solution design by hand, its definition and its template, as the trial of step 2 | done 2026-10-04, intent 4.54, handed over to Claude and judged by the principal |
-  | 4 | Write the solution design of the forge project and move the solution out of its intent | next |
-  | 5 | Draw from that the command that adds a new kind of artefact | |
+  | 4 | Write the solution design of the forge project and move the solution out of its intent | done 2026-10-04, intent 4.56 and solution design 0.1, handed over to Claude, verified three times by an isolated agent and once mechanically, the findings settled with the principal |
+  | 5 | Draw from that the command that adds a new kind of artefact | next |
   | 6 | Make the BRD by that command, its first trial; with it the challenger persona of a business analyst | |
 
   What steps 2 and 3 did is in the records of the operating layer at
@@ -963,9 +963,22 @@ project: forge
   intent it was brought to; which check keeps a solution design true
   against what realises it; whether work handed over is reflected
   back before it is written, the rule of 2026-09-27 standing until
-  decided. The sections "A technical clean-up" and "The shape of the
-  whole" of the brief `next-gen` rest on this thread. Opened
-  2026-10-03.
+  decided; a technical specification as a layer below the solution
+  design, which POS.1400 names since 4.55 and which is added by the
+  command of step 5 when a project first needs it, the forge itself
+  not being buildable from its artefacts until then; a second pass
+  of the intent, position by position with the principal, for the
+  solution that step 4 left in it because cutting it needs new
+  wording (POS.0060, POS.0120, POS.0410, POS.0420, POS.0440,
+  POS.0540, POS.0710, POS.0730, POS.0840, POS.0920, POS.0930,
+  POS.0940, POS.0960, POS.1000, POS.1020, POS.1040, POS.1070,
+  POS.1100, POS.1110, POS.1310, POS.1340, POS.1380; the Essence was
+  not touched either). How step 4 ran: the working files, the three
+  reports and the mechanical check lie in the engine's
+  `tmp/solution-design/`, outside git; the design is a proposal the
+  principal has not read whole. The sections "A technical clean-up"
+  and "The shape of the whole" of the brief `next-gen` rest on this
+  thread. Opened 2026-10-03.
 - **THR.0530** [intent] What can be done deterministically is done
   by a script, not by the model. The principal's word of 2026-10-04:
   this should be a prime directive of the forge, and the forge is to

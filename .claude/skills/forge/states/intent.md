@@ -91,14 +91,10 @@ the threads what is being worked, the working debate included until
 a thread is settled; freely rewritten, no version, no history and no
 ledger row of their own (POS.0120). Every thread names, right after
 its ID and in square brackets, the artefact it concerns, as `/forge`
-names it; several where it concerns several. Where an item's output is a file
-of its own (a skill, an agent, a template, a script, a research
-note, a brief), the item keeps its assignment, what is to be
-achieved and why, and names the file, and the realisation is the
-file's. Where the output is only part of a file, a section of
-CLAUDE.md among them, the item keeps the full information, since
-another change may rewrite that part and the detail would be lost.
-Until the file exists, the item keeps the full information too.
+names it; several where it concerns several. An item says what is to be
+achieved and why; what realises it is named in the solution design
+where the project has one, and in the item where it has none
+(POS.0120).
 
 How the files are made: the first intent is created from
 `templates/intent.md` as v0.1, with its companion
