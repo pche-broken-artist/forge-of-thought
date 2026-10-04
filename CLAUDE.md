@@ -543,8 +543,10 @@ shared behaviour of each kind preloaded from one contract skill
 (`.claude/skills/challenger-contract/SKILL.md`,
 `.claude/skills/critic-contract/SKILL.md`,
 `.claude/skills/check-contract/SKILL.md`, named in the agent's
-front-matter; the skeleton of a lens file is `templates/challenger.md`,
-`templates/critic.md`, `templates/check.md`), only the Lens section
+front-matter; the skeleton of a lens file is
+`templates/challenger-definition.md`,
+`templates/critic-definition.md`,
+`templates/check-definition.md`), only the Lens section
 its own; new personas, lenses and checks only by the principal's
 decision, and only where what they find genuinely differs. A
 contract owns conduct and isolation, the subject and its boundary,
@@ -614,6 +616,7 @@ What a command does in full is its skill's
 |---|---|
 | `/setup` | first run after cloning the engine: prepare the instance |
 | `/new-project <slug>` | scaffold a project by kind: a thought project or a library |
+| `/new-artefact <name>` | add a new kind of artefact to the forge |
 | `/import-project <git-url>` | bring an existing project into `projects/` |
 | `/forge [slug]` | the state map of a project |
 | `/forge <state> [slug]` | iterate the target artefact through its definition |
@@ -641,4 +644,7 @@ are the engine's, renders per Document chain, Renders from
 that intent is updated and the README re-rendered.
 
 ## Templates
-Use `templates/*` as canonical skeletons for every new project.
+Use `templates/*` as canonical skeletons for every new project. A
+skeleton named `<type>-definition.md` is that of the definition of
+one member of a type the forge can be extended by: an artefact, a
+critic lens, a challenger persona, a check.

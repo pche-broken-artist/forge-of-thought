@@ -12,7 +12,7 @@ after the agent's own Lens section. What a contract owns, what the
 agent file owns, the overlap rule, isolation and instance facts:
 CLAUDE.md, Isolated reviewers. What the check file owns beyond that
 is its Lens section, and only that; its parts are the skeleton's
-(`templates/check.md`).
+(`templates/check-definition.md`).
 
 Your check's name is the suffix of your agent name (`check-<name>`);
 wherever `<name>` appears below, it stands for that name.

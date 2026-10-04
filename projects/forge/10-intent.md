@@ -1,8 +1,8 @@
 ---
-version: 4.56
+version: 4.57
 date: 2026-10-04
 status: draft
-last_change: 4.56 (2026-10-04): step 4 of THR.0520, the solution moved out of the intent into `40-solution-design.md` 0.1: 48 positions, REJ.0140 and the Facts section changed, five positions removed as wholly solution (POS.0500, POS.0520, POS.0740, POS.1150, POS.1130); what realises an item is named in the solution design where the project has one (POS.0120); what POS.0520 held as wanted stands in POS.1090; the definition of the intent brought to POS.0120 (operating layer); three isolated verifications and a mechanical check, their findings settled.
+last_change: 4.57 (2026-10-04): step 5 of THR.0520, a new kind of artefact is added by one command, `/new-artefact` (POS.1430), which joins the guarded commands (POS.1090); the command and the skeleton `templates/artefact-definition.md` born, the skeletons of the reviewers renamed to `<type>-definition.md` and the word definition widened to any member of a type the forge can be extended by (operating layer).
 project: forge
 audience: principal + Claude only
 ---
@@ -1223,8 +1223,8 @@ position that already stands elsewhere.
   Claude is kept from the user's sensitive paths, and web access is
   approved by the user per domain. A command that writes, scaffolds,
   commits or regenerates — `/save`, `/release`, `/spinoff`, `/setup`,
-  `/new-project`, `/import-project`, `/ingest`, `/render`, `/publish` —
-  is guarded by the harness, so that Claude cannot start it on his own
+  `/new-project`, `/new-artefact`, `/import-project`, `/ingest`,
+  `/render`, `/publish` — is guarded by the harness, so that Claude cannot start it on his own
   judgement: the principal invokes it by slash, or asks in words and
   Claude follows the command's definition read by path. Maps, reports
   and rosters (`/forge`, `/ledger`, `/check`, `/critique`, `/challenge`,
@@ -1307,6 +1307,28 @@ position that already stands elsewhere.
   his hand today (an assignment is self-contained for exactly that),
   by a command of its own only when that day comes (THR.0090). The
   chain never spans two principals (2026-09-06).
+- **POS.1430** A new kind of artefact is added to the forge by one
+  command, `/new-artefact <name>`, so that the chain grows without
+  anyone having to know by heart what a kind of artefact is made of.
+  The command leads to everything a kind needs and forgets none of
+  it: what the artefact is, for whom, from what it is derived and
+  why, held as a position of the forge intent before anything is
+  built; its definition and its template as a pair (POS.1310); the
+  prefixes of its items where it needs its own; whether it needs a
+  challenger of its own and what the critic must know of it; and
+  where it is realised, in the solution design. The command decides
+  nothing: how the kind is composed is the principal's choice as for
+  any artefact (POS.1410), and each of these is born on his word. The
+  first artefact of the new kind is not the command's: it is made
+  through `/forge <name>` on real work, and that is the trial of the
+  definition (POS.1380). For now the command adds to the engine, for
+  every user of it. A user is to be able to add an artefact of his
+  own as easily, kept at his own place; where that place is waits for
+  THR.0300 and THR.0230. Types other than an artefact, a whole chain,
+  a reviewer, a genre, are not this command's (THR.0480). Reason: a
+  kind added by hand took a search for everything it touches, and two
+  of the things it needs, a prefix and a challenger, are easily
+  forgotten. Decided 2026-10-04.
 - **POS.0760** The forge is split into a public engine and user projects
   in repositories of their own. The engine — the core together with
   `projects/forge` — is public and contains nothing sensitive and no

@@ -12,7 +12,7 @@ at launch, after the agent's own Lens section. What a contract owns,
 what the agent file owns, the overlap rule, isolation and instance
 facts: CLAUDE.md, Isolated reviewers. What the lens file owns beyond
 that is its Lens section, and only that; its parts are the
-skeleton's (`templates/critic.md`).
+skeleton's (`templates/critic-definition.md`).
 
 Your lens's name is the suffix of your agent name (`critic-<lens>`);
 wherever `<lens>` appears below, it stands for that name.

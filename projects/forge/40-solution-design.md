@@ -1,8 +1,8 @@
 ---
-version: 0.1
+version: 0.2
 date: 2026-10-04
 status: draft
-last_change: 0.1 (2026-10-04): the solution moved out of the intent as it stood at 4.55 (THR.0520, step 4).
+last_change: 0.2 (2026-10-04): the command that adds a new kind of artefact (SOL.0170); the skeletons of the reviewers under their new names (SOL.0300, SOL.0330).
 project: forge
 audience: whoever realises the solution, a person or an agent
 ---
@@ -254,6 +254,26 @@ direction, a boundary kept by hand or an order of work.
   `.claude/skills/import-project/SKILL.md`,
   `.claude/skills/spinoff/SKILL.md`, `scripts/forge-clone.ps1`,
   `templates/`.
+- **SOL.0170 A new kind of artefact.** `/new-artefact <name>` is a
+  skill written in the seven blocks of a definition and guarded like
+  every command that writes (SOL.0110). It makes no file by a
+  script. The pair starts from the skeleton
+  `templates/artefact-definition.md` for the definition; a template
+  has no skeleton, each differing whole. Beside the pair it touches
+  the forge intent and this design through their own definitions,
+  the row of a new prefix in `CLAUDE.md`, ID scheme, the calibration
+  of the critic's contract and, where one is decided, a persona file
+  from `templates/challenger-definition.md`. The rosters need
+  nothing: `/forge`, `/man` and the README read the definitions from
+  disk.
+  Realises: POS.1430, POS.0700. Choice: a command of its own against
+  a state of `/forge`, which works an artefact of one project while
+  this changes the engine; the cost is one more command and one more
+  row of the Commands table. A skeleton of the definition against
+  the definitions on disk as the only models: a skeleton carries no
+  content to copy; the cost is one more file to change with
+  POS.1310. Where: `.claude/skills/new-artefact/SKILL.md`,
+  `templates/artefact-definition.md`.
 
 ### The documents of a project
 - **SOL.0200 The history log.** A record is written as a list item,
@@ -339,9 +359,9 @@ direction, a boundary kept by hand or an order of work.
   must know which yields. The skill is `user-invocable: false`, out
   of the `/` menu, its description staying in the session's context
   (`disable-model-invocation` would also forbid the preload), with a
-  description saying it is preloaded. `templates/critic.md`,
-  `templates/challenger.md` and `templates/check.md` are the
-  skeletons of a lens file. The check `engine` verifies that every
+  description saying it is preloaded. `templates/critic-definition.md`,
+  `templates/challenger-definition.md` and
+  `templates/check-definition.md` are the skeletons of a lens file. The check `engine` verifies that every
   skill an agent names exists, since a missing one is skipped
   silently. Every agent declares `model: inherit` (SOL.0600). What a
   release offers of the reviewers is `.claude/skills/release/SKILL.md`.
@@ -363,11 +383,13 @@ direction, a boundary kept by hand or an order of work.
   `.claude/agents/challenger-architect.md`,
   `.claude/skills/critique/SKILL.md`,
   `.claude/skills/challenge/SKILL.md`,
-  `.claude/skills/release/SKILL.md`, `templates/critic.md`,
-  `templates/challenger.md`, `templates/check.md`.
+  `.claude/skills/release/SKILL.md`,
+  `templates/critic-definition.md`,
+  `templates/challenger-definition.md`,
+  `templates/check-definition.md`.
 - **SOL.0330 The checks.** One contract skill `check-contract`; one
   agent per check, `check-<name>`, front-matter and Lens only, from
-  `templates/check.md`; a new check is one file. Composition:
+  `templates/check-definition.md`; a new check is one file. Composition:
   `/save` runs `light`; `/release` runs `light` and `project`, for
   the engine `engine` too, launched at once; anything else is the
   principal's word. The engine is checked as `/check engine`, the
@@ -389,7 +411,7 @@ direction, a boundary kept by hand or an order of work.
   `/critique` and `/challenge` do, the Agent tool with the target
   path and nothing else. Where: `.claude/skills/check/SKILL.md`,
   `.claude/skills/check-contract/SKILL.md`,
-  `.claude/agents/check-*.md`, `templates/check.md`.
+  `.claude/agents/check-*.md`, `templates/check-definition.md`.
 
 ### Rendering and publishing
 - **SOL.0400 Recipe and render.** A recipe is one file,

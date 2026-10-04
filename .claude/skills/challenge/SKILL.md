@@ -7,7 +7,7 @@ Challenger personas live as `.claude/agents/challenger-<persona>.md` —
 one isolated agent per persona, each defined by the blind spots it
 exists to find, said in its `description`; the roster is the scan of
 those files. Adding a persona means adding an agent file from
-`templates/challenger.md`; this command does not change (who creates
+`templates/challenger-definition.md`; this command does not change (who creates
 a persona, and when: CLAUDE.md, Isolated reviewers).
 
 Shared behaviour: the contract skill named in each persona file's

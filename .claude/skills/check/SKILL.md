@@ -6,7 +6,7 @@ argument-hint: "[check] [project-slug]"
 Checks live as `.claude/agents/check-<name>.md` — one isolated agent
 per check, each defined by what it verifies, said in its
 `description`; the roster is the scan of those files. Adding a check
-means adding an agent file from `templates/check.md`; this command
+means adding an agent file from `templates/check-definition.md`; this command
 does not change (who creates a check, and when: CLAUDE.md, Isolated
 reviewers).
 

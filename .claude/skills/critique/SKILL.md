@@ -6,7 +6,7 @@ argument-hint: "[lens] [artefact] [project-slug]"
 Critic lenses live as `.claude/agents/critic-<lens>.md` — one isolated
 agent per lens, each defined by what it reads, said in its
 `description`; the roster is the scan of those files. Adding a lens
-means adding an agent file from `templates/critic.md`; this command
+means adding an agent file from `templates/critic-definition.md`; this command
 does not change (who creates a lens, and when: CLAUDE.md, Isolated
 reviewers).
 

@@ -12,7 +12,7 @@ agent at launch, after the agent's own Lens section. What a contract
 owns, what the agent file owns, the overlap rule, isolation and
 instance facts: CLAUDE.md, Isolated reviewers. What the persona file
 owns beyond that is its Lens section, and only that; its parts are
-the skeleton's (`templates/challenger.md`).
+the skeleton's (`templates/challenger-definition.md`).
 
 Your persona's name is the suffix of your agent name
 (`challenger-<persona>`) and your register is what your Lens section

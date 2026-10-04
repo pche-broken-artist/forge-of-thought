@@ -236,6 +236,14 @@ project: forge
   (POS.1310). The installation mechanism is a research question.
   How new types are added to the engine is THR.0480 (2026-09-30),
   to be settled before this split.
+  The principal's word of 2026-10-04, unfinished and nothing decided,
+  said while the command `/new-artefact` was being found: today the
+  forge is a project made in the forge; what is the forge and what
+  is the distribution that goes to its users is open, and with it
+  how an artefact a user adds for himself is kept from colliding
+  with an upgrade of the engine. Version 1 adds to the engine
+  (POS.1430); where a user's own artefact lives waits for this
+  thread and for THR.0300.
 - **THR.0240** [intent] The size of CLAUDE.md. 523 lines on 2026-09-03 and
   growing with every iteration; THR.0190 already records that a split
   moves rules from always-on to on-demand and is a behaviour change, not
@@ -829,6 +837,12 @@ project: forge
   described a layer by today's state file and was corrected to the
   seven blocks, with a section on the elicitor, before its first
   save, on the principal's word of 2026-09-30.
+  First of the types done 2026-10-04: an artefact of the chain is
+  added by `/new-artefact` (POS.1430, THR.0520 step 5); the other
+  types stay here. Decided with it, the principal's word: whatever
+  can be added by a command has a definition, and the skeleton of
+  each is named `templates/<type>-definition.md`, as the four of
+  today are; every further type follows that name.
 - **THR.0490** [intent] A stale clone goes unnoticed. The principal works on
   more than one machine, so a local engine behind its origin is the
   normal case, not the exception. On 2026-10-01 the `/forge` map was
@@ -934,8 +948,8 @@ project: forge
   | 2 | Prepare the forge: the names of the artefacts leave the engine so that artefacts are read from disk; CLAUDE.md brought to the positions of step 1 | done 2026-10-03, intent 4.53, handed over to Claude and judged by the principal |
   | 3 | Add the solution design by hand, its definition and its template, as the trial of step 2 | done 2026-10-04, intent 4.54, handed over to Claude and judged by the principal |
   | 4 | Write the solution design of the forge project and move the solution out of its intent | done 2026-10-04, intent 4.56 and solution design 0.1, handed over to Claude, verified three times by an isolated agent and once mechanically, the findings settled with the principal |
-  | 5 | Draw from that the command that adds a new kind of artefact | next |
-  | 6 | Make the BRD by that command, its first trial; with it the challenger persona of a business analyst | |
+  | 5 | Draw from that the command that adds a new kind of artefact | done 2026-10-04, intent 4.57 and solution design 0.2: `/new-artefact` (POS.1430, SOL.0170), handed over to Claude and judged by the principal; not yet run |
+  | 6 | Make the BRD by that command, its first trial; with it the challenger persona of a business analyst | next |
 
   What steps 2 and 3 did is in the records of the operating layer at
   4.53 and 4.54. Left on purpose: the `terminal:` line in the ledgers
