@@ -1,7 +1,7 @@
 ---
 project: forge
 directory: research
-updated: 2026-10-04
+updated: 2026-10-05
 ---
 
 # Index — research of Forge of Thought
@@ -202,3 +202,8 @@ ledger. Written by /research; verified by /check. -->
 - **Question:** what does a CONTRIBUTING file hold and how is it shaped on GitHub, by GitHub's own guidance, the common templates and three neighbours of the forge (Spec Kit, OpenSpec, BMAD), and do the community health files raise a repository's visibility? Pages read through a summarising fetch on 2026-10-04; lengths are estimates.
 - **Answer in short:** the file stands in `.github/`, the root or `docs/` and GitHub links it from a Contributing tab, the sidebar and the pages where an issue or a pull request is created. Common skeleton: a welcome, the ways to contribute, how to report and suggest, what comes before a pull request, what a pull request carries, where to ask. The neighbours run from about 280 lines (OpenSpec, five headings built as a path) to about 1 050 (Spec Kit). All three demand that a substantial change be discussed or written down before it is built, OpenSpec by its own change proposal, and all three carry a rule on contributions made with AI. Nothing found ties the files to search ranking: GitHub's own page speaks of contributors deciding, not of visibility. Recommendation, Claude's: a short file built as a path, in the root, with the forge's rule at its centre, the line drawn by kind of change as Rust's RFCs draw it; the rule itself is a stance not yet in the intent.
 - **Consult when:** writing the forge's CONTRIBUTING, deciding how contributions and feedback reach the forge (POS.0170, POS.0980), adding the other community health files, or asked what GitHub's Community Standards checklist is worth.
+
+### `2026-10-05-how-a-security-policy-is-written-on-github.md`
+- **Question:** how is a security policy (`SECURITY.md`) written on GitHub: what GitHub provides and recommends (the file's places, the Security tab, the default template, private vulnerability reporting, the report form), what the guidance and the evidence say a good one holds, and what frameworks comparable to the forge publish (Spec Kit, Claude Code, BMAD, OpenSpec; Superpowers and Agent OS not found). Pages read through a summarising fetch on 2026-10-05.
+- **Answer in short:** GitHub prescribes only two sections, supported versions and how to report, and shows the file in the Security tab and above the private report form, which is a repository setting independent of the file. The guidance condenses to five questions (which versions, how to report privately, what to include, what to expect, which channels are wrong) and to promises a maintainer can keep; the studies find the file in early adoption and the asks plain, add it or fix a dead address. The corporate neighbours delegate to a programme; the two small frameworks nearest the forge write their own and spend it on a threat model: what the tool is, what it does on the machine, what is in and out of scope, what the user vets himself. Recommendation, Claude's: that shape, about sixty lines, in the root, as a render of a recipe `security` on the CONTRIBUTING precedent; private vulnerability reporting switched on first; one position in the intent for the stance; no form, no bounty, no safe harbour.
+- **Consult when:** writing the forge's `SECURITY.md` and its recipe, deciding what the forge promises a reporter, naming the engine's threat model from the solution design (SOL.0510, SOL.0520, SOL.0030), or adding the other community health files.

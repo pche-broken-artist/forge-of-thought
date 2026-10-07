@@ -2,7 +2,7 @@
 project: forge
 kind: thought
 language: en
-updated: 2026-10-04
+updated: 2026-10-05
 ---
 
 # Ledger — Forge of Thought
@@ -125,6 +125,7 @@ research/00-INDEX.md, never here. -->
 | 2026-10-03-where-the-forge-asks-for-the-principals-word.md | 2026-10-03 | 00-brief-next-gen.md v0.1 (Automation); the engine's definitions; 10-intent.md v4.50 with its threads, decisions.md, searches of the history, its archive and `sources/forge-run-record-health.md` |
 | 2026-10-04-deterministic-work-by-script-or-by-model.md | 2026-10-04 | the principal's question of 2026-10-04; the engine's operating layer read whole; 10-intent.md v4.53 read whole, its threads searched (THR.0150, THR.0400, THR.0410, THR.0500); the researches of 2026-10-02 and 2026-10-03 on the operating layer and on Claude Code |
 | 2026-10-04-how-a-contributing-file-is-written-on-github.md | 2026-10-04 | the principal's word of 2026-10-04 on a CONTRIBUTING for the forge; the Community Standards page of the forge's repository; 10-intent.md v4.57 (POS.0170, POS.0720, POS.0980, POS.0990) |
+| 2026-10-05-how-a-security-policy-is-written-on-github.md | 2026-10-05 | the principal's word of 2026-10-05 on a SECURITY.md for the forge; research/2026-10-04-how-a-contributing-file-is-written-on-github.md (finding 7); 10-intent.md v4.58 (POS.0760, POS.0950, POS.1440); 40-solution-design.md v0.3 (SOL.0030, SOL.0510, SOL.0520, SOL.0600) |
 
 ## Findings
 <!-- Findings of the critic and of the checks, one sequence. State:
@@ -195,8 +196,8 @@ as `rejected`. -->
 | FND.0590 | low | conformance | resolved | 2026-10-02-check-single-source-of-truth.md | intent 4.48 (`templates/intent.md`) |
 | FND.0600 | low | conformance | resolved | 2026-10-02-check-single-source-of-truth.md | intent 4.48 (the skill `ingest`) |
 | FND.0610 | low | conformance | resolved | 2026-10-02-check-single-source-of-truth.md | intent 4.49 (the Commands table of CLAUDE.md cut to the purpose of each command) |
-| FND.0620 | low | conformance | resolved | 2026-10-02-check-single-source-of-truth.md | intent 4.49 (rules echoed inside CLAUDE.md cut to their owner) |
-| FND.0630 | low | conformance | resolved | 2026-10-02-check-single-source-of-truth.md | intent 4.49 (CLAUDE.md, the skills `critique` and `man`, the descriptions of the two critic lenses) |
+| FND.0620 | low | conformance | open | 2026-10-02-check-single-source-of-truth.md | intent 4.49 (rules echoed inside CLAUDE.md cut to their owner); reopened 2026-10-05 (`2026-10-05-check-single-source-of-truth.md`) |
+| FND.0630 | low | conformance | open | 2026-10-02-check-single-source-of-truth.md | intent 4.49 (CLAUDE.md, the skills `critique` and `man`, the descriptions of the two critic lenses); reopened 2026-10-05 (`2026-10-05-check-single-source-of-truth.md`) |
 | FND.0640 | low | conformance | resolved | 2026-10-02-check-single-source-of-truth.md | intent 4.48 (the skills `ingest` and `research`) |
 | FND.0650 | low | conformance | parked | 2026-10-02-check-single-source-of-truth.md | needs a pass over the recipe genres and their skeletons |
 | FND.0660 | low | conformance | resolved | 2026-10-02-check-single-source-of-truth.md | intent 4.48 (`templates/index-bundle.md`) |
@@ -231,6 +232,11 @@ as `rejected`. -->
 | FND.0950 | medium | conformance | resolved | 2026-10-04-check-engine.md | recipe readme 0.56 (the brief no longer locked, its callout gone) |
 | FND.0960 | medium | conformance | resolved | 2026-10-04-check-engine.md | recipe readme 0.56 (the artefacts from the definitions on disk, the diagram with the solution design as built) |
 | FND.0970 | low | conformance | resolved | 2026-10-04-check-engine.md | the skills `ingest` and `render` and recipe readme 0.56 cite Document chain by the item's name (intent 4.58) |
+| FND.0980 | medium | conformance | open | 2026-10-05-check-single-source-of-truth.md | |
+| FND.0990 | medium | conformance | open | 2026-10-05-check-single-source-of-truth.md | |
+| FND.1000 | low | conformance | open | 2026-10-05-check-single-source-of-truth.md | |
+| FND.1010 | low | conformance | open | 2026-10-05-check-single-source-of-truth.md | |
+| FND.1020 | low | conformance | open | 2026-10-07-check-light.md | |
 
 Four review files are named outside the convention — accepted as they
 are by DEC.0140.
@@ -314,7 +320,11 @@ copy — CLAUDE.md, Ledger. -->
 - THR.0510 — live reference material by nightly export; the
   principal's thought, nothing decided; opened 2026-10-02.
 - FND.0650 — parked finding of the `single-source-of-truth` check;
-  needs a pass over the recipe genres and their skeletons.
+  needs a pass over the recipe genres and their skeletons; named
+  again 2026-10-05.
+- FND.0980, FND.0990, FND.1000, FND.1010 — the
+  `single-source-of-truth` check of 2026-10-05, four new findings
+  open; FND.0620 and FND.0630 reopened by it.
 - THR.0420 — derivations of the forge for other jobs; nothing
   scheduled.
 - THR.0430 — a command that ends a session; research of the
