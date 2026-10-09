@@ -28,11 +28,11 @@ anywhere.
    principal's word: publish as it is, or stop so that he can
    `/render` first.
 5. Say in one line what runs and that it takes minutes, then run the
-   script of the format — `scripts/md2pptx.ps1` or
-   `scripts/md2docx.ps1` — with `-Engine claude`, `-Recipe` naming
+   script of the format — `python scripts/md2pptx.py` or
+   `python scripts/md2docx.py` — with `--engine claude`, `--recipe` naming
    the recipe, the template or reference document and the model the
    Format section names, and
-   `-Out projects/<slug>/published/$0.<ext>`. What each script needs
+   `-o projects/<slug>/published/$0.<ext>`. What each script needs
    installed is its header's.
 6. Back in the session: verify the file exists, write its row in the
    ledger's Published table — the file, the recipe with its version,

@@ -21,3 +21,6 @@ desktop.ini
 
 # Principal's local launcher - never shared
 /start-claude.ps1
+
+# Python byte-code caches (scripts/docs_map.py is imported by the docs scripts)
+__pycache__/

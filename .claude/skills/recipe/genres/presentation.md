@@ -8,7 +8,7 @@ The product is a recipe whose render is a slide-by-slide Markdown deck
 definition — source material for a presentation, never the
 presentation itself. The PowerPoint files are made from it in the
 two steps of CLAUDE.md, Document chain, Renders; what each step needs is
-the recipe's Format section, and the render carries content only.
+the recipe's Format section.
 
 Role: interviewer. Elicit the answers below from the principal —
 options and trade-offs offered, decisions his (`/recipe`, step 2) —
@@ -41,8 +41,7 @@ Elicitation checklist:
     deck: the template, the model, overflow handling, diagram redraw
     expectations — the placeholders of the skeleton's Format
     section; how a template is named and what the model defaults to
-    is the header of `scripts/md2pptx.ps1`. They stay in the recipe
-    and are never copied into the render.
+    is the header of `scripts/md2pptx.py`.
 
 The language question and the composition from the skeleton close
 every genre (`/recipe`, step 2).

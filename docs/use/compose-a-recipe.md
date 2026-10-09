@@ -1,6 +1,7 @@
 ---
 generated: 2026-10-09
 made: mirrored
+inputs-hash: 12286338a7125d86
 inputs:
   - .claude/skills/recipe/SKILL.md
   - .claude/skills/recipe/genres/presentation.md
@@ -12,76 +13,65 @@ inputs:
 
 # Compose a recipe
 
-This page is for a user who wants to make or change a recipe, the
-file a render is generated from. It says what `/recipe` does, how a
-composition runs and what you see at the end.
+This page is for a user who wants a new render, or wants to change how
+an existing one is made. A recipe is the file that says how a render is
+made, and `/recipe` is the command that composes it with you.
 
 ## Run the command
 
-The command is `/recipe [genre] [slug]`. The slug names the project;
-leave it out and the command infers the project from the
-conversation, asking if that is ambiguous. What happens depends on the
-first word.
+The command is `/recipe [genre] [slug]`. The slug names the project; if
+it is not clear from the conversation, you are asked.
 
-### Bare: see what exists
+- **Bare `/recipe`.** You get the roster: the available genres, each
+  with a one-line description, and the recipes the project already has
+  with their versions. Where the conversation suggests a fit, a
+  recommendation comes with it.
+- **`/recipe <genre>`.** A guided composition through that genre. You
+  are asked the genre's questions one after another, with options and
+  trade-offs offered. The decisions are yours.
+- **`/recipe <name of an existing recipe>`.** If the name is not a genre
+  but the project has a recipe of that name, that recipe is iterated:
+  through its genre where one fits, otherwise in conversation.
+- **A name that is neither.** You are shown the genres that exist and
+  nothing is composed.
 
-`/recipe` alone prints the roster. It lists the available genres with
-a one-line description each, and the project's existing recipes with
-their versions. Where the conversation suggests a fit, it recommends
-one.
+A recipe that fits no genre is still legitimate. It is composed in
+conversation from the base skeleton, `templates/recipe.md`, which has
+the sections Inputs, Instructions, an optional Format and Template.
 
-### With a genre: a guided composition
+## What happens in a guided composition
 
-`/recipe <genre>` starts an interview for that genre. You do this:
-
-1. Answer the genre's checklist of questions. Options and trade-offs
-   are offered, and the decisions are yours.
-2. Answer the last question, which is always the language. The render's
-   language is whatever the recipe declares. The command proposes the
-   project's language, taken from its ledger header, and asks. It does
-   not assume.
-3. Read the recipe composed from the genre's skeleton, with unused
+1. The genre's questions are put to you. Every genre closes with the
+   language question: the render's language is whatever the recipe
+   declares. The project's language is proposed from its ledger header
+   and you are asked; it is never assumed.
+2. The recipe is then composed from the genre's skeleton, with unused
    placeholders and template comments removed.
-4. Confirm. The recipe is written once per round, on your
-   confirmation, together with its history record.
+3. The recipe is written once per round, when you confirm. It carries a
+   version and an updated date but no status, and it stays at 0.x for
+   life, because recipes are tools that are iterated and never
+   approved. Its history goes into a companion file,
+   `recipes/<recipe>.history.md`, created with the recipe.
+4. `/render <recipe>` is offered as the next step. The recipe is
+   entered in the ledger's Renders table when its first render exists.
 
-### With the name of an existing recipe: iterate it
+A recipe may name a Format section for a plain or a designed file. That
+section exists so the files can be made later; the render itself
+carries content only.
 
-If the word is not a genre but names a recipe in the project's
-`recipes/` directory, the command iterates that recipe. It goes
-through the genre's interview when a genre fits, and conversationally
-otherwise. If the word matches neither a genre nor a recipe, the
-command lists the genres and stops.
-
-### A recipe outside any genre
-
-A recipe that fits no genre stays legitimate. It is composed
-conversationally from the base skeleton, `templates/recipe.md`.
-
-## What gets written
-
-A recipe is versioned, and it stays at 0.x for life. It carries a
-version and an `updated` date, and has no status. Its history lives in
-a companion file, `recipes/<recipe>.history.md`, created with the
-recipe. One round of work is one version bump, with one history
-record per change.
-
-The recipe is entered in the ledger's Renders table once its first
-render exists.
-
-## The next step
-
-After writing, the command offers `/render <recipe>` as the natural
-next step. A recipe has a section for the output format, which is
-optional. A recipe without it ends at the Markdown.
-
-## The three genres
+## The three genres today
 
 | Genre | What it produces |
 |---|---|
-| `presentation` | A recipe whose render is a slide-by-slide Markdown deck definition, the source material for a presentation. PowerPoint files are made from it in a later step. |
-| `readme` | A project's readme recipe. Its render is the project's `README.md`, regenerated at every release. |
-| `release-notes` | A thought project's release-notes recipe. Its render is `RELEASE-NOTES.md`, one section per release. |
+| `presentation` | A recipe whose render is a slide-by-slide Markdown deck definition, the source for a PowerPoint file and never the presentation itself. |
+| `readme` | A recipe whose render is the project's `README.md` in the project root, regenerated at every release. |
+| `release-notes` | A recipe whose render is `RELEASE-NOTES.md` in the project root, for thought projects only. |
+
+The presentation genre has the longest interview. The readme genre asks
+a shorter one, and if you ask for a first version without an interview
+it is drafted from the project's documents and handed to you as a draft
+to iterate. The release-notes genre has few degrees of freedom, so it
+asks little: which documents feed the notes and who reads them.
 
 ## See also
 

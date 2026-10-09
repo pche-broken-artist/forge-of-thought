@@ -19,6 +19,10 @@ Your persona's name is the suffix of your agent name
 states; wherever `<persona>` and `<register>` appear below, they stand
 for those.
 
+Every file you cite, CLAUDE.md included, is read from disk in this
+run: the copy of CLAUDE.md in your context is the session's and may
+be older than the file (POS.0950).
+
 ## Subject
 
 **Your subject is the substance of the target artefact named in your

@@ -17,8 +17,9 @@ rules: CLAUDE.md, Document chain, Renders. -->
 ## Inputs
 <!-- What the README is generated from. A thought project: the ledger
 (state), the brief (what was asked), the intent (essence and
-positions), the layers below it once they exist. A library: the ledger and
-the two resource indexes. -->
+positions), the layers below it once they exist, and the
+documentation index docs/README.md where the project has one. A
+library: the ledger and the two resource indexes. -->
 - ledger.md
 - 00-brief.md
 - 10-intent.md
@@ -27,12 +28,15 @@ the two resource indexes. -->
 - The README presents the project to a human meeting its repository
   for the first time — a recipient, a colleague, the principal after
   weeks away. It stands alone: no claim requires opening the chain.
+  This skeleton is the one owner of what a README carries: what the
+  thing is, what one gets, how to start, where it stands and where
+  the documentation is; the rest is the ledger's and the
+  documentation's (the engine's own README has a recipe of its own).
 - Every claim is derivable from the inputs; invent nothing, omit
   rather than embellish. Anything superseded in the inputs must not
   survive.
-- Tone: plain, direct. Language: <English>. Tables for enumerable facts (chain
-  state, renders, what is waiting), prose only where the subject is
-  being explained.
+- Tone: plain, direct. Language: <English>. A table for the chain's
+  state, prose only where the subject is being explained.
 - Title: `# <Project title> <intent version>` — the title from the
   brief or intent, the current intent version (no status annotation).
 - <Which subject matters most for this audience; what must not
@@ -56,20 +60,22 @@ the two resource indexes. -->
 <two to four paragraphs from the brief and the intent's essence: the
 problem, the direction, who receives the assignment>
 
+## What you get
+<the artefacts the project hands over and to whom, from the intent and
+the layers below it; one short paragraph or a few bullets>
+
+## How to start
+<where a reader begins: the brief for the ask, the intent for what
+holds, the assignment or a lower layer for what is handed over; one
+line each>
+
 ## Where it stands
 <table: artefact | version | status | date — from the ledger's
 Documents table; one line on briefs and their mining state>
 
-## Renders
-<table from the ledger's Renders table: render | audience | generated>
-
-## Waiting on the principal
-<bullets from the ledger; omit the section when empty>
-
-## Layout
-<short fenced tree of this project's directories, what lives where;
-then one line "Depends on: <libraries from the ledger's Dependencies
-table>" — omitted when the table is empty>
+## Documentation
+<one line pointing to docs/README.md with the version it was made for;
+omit the section when the project has no docs/>
 
 ## About this README
 <the fixed closing per the instruction>

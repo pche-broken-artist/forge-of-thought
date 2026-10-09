@@ -28,13 +28,13 @@ absorbed it; Note says what remains (partial) or the REJ (dropped). -->
 | 00-brief-public-engine.md | 1.0 | approved | mined | born in the forge 2026-08-29 (THR.0130, THR.0090), locked 2026-08-29 in English after the CTO challenge; mined into intent 2.21 (POS.0940–0980, REJ.0140–0150, THR.0190–0200). Instance work it records — the one-off migration steps 1–6, the first projects after the split — stays here and under Waiting on principal, not in the intent |
 | 00-brief-elicitation.md | 1.0 | approved | mined | born in the forge and locked 2026-09-28; mined into intent 4.32 (POS.1300 to POS.1380, POS.0110, REJ.0180, REJ.0210, REJ.0220, THR.0440 to THR.0460; THR.0440 and THR.0450 closed at 4.46). The material for the briefs `brd` and `engine-split` is carried in THR.0230, THR.0300 and THR.0360. Not a model of a brief, see its opening note |
 | 00-brief-next-gen.md | 0.3 | draft | pending | born in the forge 2026-10-03, written in English on the principal's word; the needs of the next generation gathered in one round, to be sifted; the eighteen researches of 2026-10-03 cited under its sections (0.2); THR.0520 opened from it; the documentation moved out into the brief `documentation` (0.3) |
-| 00-brief-documentation.md | 0.1 | draft | pending | born 2026-10-09 from THR.0340 (the rounds of 2026-10-05 and 2026-10-07) and the principal's word of 2026-10-09; the documentation part of `next-gen` moved into it |
+| 00-brief-documentation.md | 0.1 | draft | mined | born 2026-10-09 from THR.0340 (the rounds of 2026-10-05 and 2026-10-07) and the principal's word of 2026-10-09; the documentation part of `next-gen` moved into it; mined into intent 4.60 (POS.1450, POS.1080, POS.0930, POS.0950, REJ.0240 to REJ.0260, THR.0590) and solution design 0.4 (SOL.0460) the same day |
 
 ## Documents
 | File | Version | Status | Date |
 |---|---|---|---|
-| 10-intent.md | 4.59 | draft | 2026-10-09 |
-| 40-solution-design.md | 0.3 | draft | 2026-10-04 |
+| 10-intent.md | 4.64 | draft | 2026-10-09 |
+| 40-solution-design.md | 0.7 | draft | 2026-10-09 |
 <!-- One row per layer below the intent, added when the layer is
 born; a layer the project does not have gets no row (CLAUDE.md,
 Ledger). -->
@@ -44,7 +44,8 @@ Ledger). -->
 Document chain, Renders). Row mirrors the render's front-matter provenance. -->
 | Render | Audience | Recipe | Inputs | Generated |
 |---|---|---|---|---|
-| README.md (repo root) | humans arriving at the repository | recipes/readme.md v0.57 | CLAUDE.md, 10-intent.md v4.59, .claude/skills/forge/states/, docs/README.md v4.59 | 2026-10-09 |
+| README.md (repo root) | humans arriving at the repository | recipes/readme.md v0.58 | CLAUDE.md, 10-intent.md v4.59, .claude/skills/forge/states/, docs/README.md v4.59 | 2026-10-09 |
+| docs/README.md (the documentation index, kind page) | the three readers of the documentation | none: derived by scripts/docs-index.py (SOL.0460) | docs-map.md (generated 2026-10-09), 10-intent.md v4.62 | 2026-10-09 |
 | RELEASE-NOTES.md (repo root) | the user of the engine who has cloned it and takes upgrades through forge-pull | recipes/release-notes.md v0.12 | 10-intent.history.md, 10-intent.history.archive.md, 10-intent.md v4.58, decisions.md, previous edition (released sections) | 2026-10-04 |
 | CONTRIBUTING.md (repo root) | a visitor of the repository on GitHub who wants to say, ask or change something | recipes/contributing.md v0.1 | projects/forge/10-intent.md v4.58, CLAUDE.md | 2026-10-04 |
 | renders/executive-pitch.md | C-level executives whose experience of AI is chatting with it | recipes/executive-pitch.md v0.6 | projects/forge/10-intent.md v4.30, CLAUDE.md | 2026-09-27 |
@@ -197,10 +198,10 @@ as `rejected`. -->
 | FND.0590 | low | conformance | resolved | 2026-10-02-check-single-source-of-truth.md | intent 4.48 (`templates/intent.md`) |
 | FND.0600 | low | conformance | resolved | 2026-10-02-check-single-source-of-truth.md | intent 4.48 (the skill `ingest`) |
 | FND.0610 | low | conformance | resolved | 2026-10-02-check-single-source-of-truth.md | intent 4.49 (the Commands table of CLAUDE.md cut to the purpose of each command) |
-| FND.0620 | low | conformance | open | 2026-10-02-check-single-source-of-truth.md | intent 4.49 (rules echoed inside CLAUDE.md cut to their owner); reopened 2026-10-05 (`2026-10-05-check-single-source-of-truth.md`) |
-| FND.0630 | low | conformance | open | 2026-10-02-check-single-source-of-truth.md | intent 4.49 (CLAUDE.md, the skills `critique` and `man`, the descriptions of the two critic lenses); reopened 2026-10-05 (`2026-10-05-check-single-source-of-truth.md`) |
+| FND.0620 | low | conformance | resolved | 2026-10-02-check-single-source-of-truth.md | intent 4.49 (rules echoed inside CLAUDE.md cut to their owner); reopened 2026-10-05 (`2026-10-05-check-single-source-of-truth.md`); named again (`2026-10-09-check-single-source-of-truth.md`); resolved: the layer rule in Ledger, the authorship boundary in Document chain 4, cited from the other places (operating layer 2026-10-09) |
+| FND.0630 | low | conformance | resolved | 2026-10-02-check-single-source-of-truth.md | intent 4.49 (CLAUDE.md, the skills `critique` and `man`, the descriptions of the two critic lenses); reopened 2026-10-05 (`2026-10-05-check-single-source-of-truth.md`); named again (`2026-10-09-check-single-source-of-truth.md`); resolved: the parenthesis cut to "by its state file" (operating layer 2026-10-09) |
 | FND.0640 | low | conformance | resolved | 2026-10-02-check-single-source-of-truth.md | intent 4.48 (the skills `ingest` and `research`) |
-| FND.0650 | low | conformance | parked | 2026-10-02-check-single-source-of-truth.md | needs a pass over the recipe genres and their skeletons |
+| FND.0650 | low | conformance | parked | 2026-10-02-check-single-source-of-truth.md | needs a pass over the recipe genres and their skeletons; named again (`2026-10-09-check-single-source-of-truth.md`) |
 | FND.0660 | low | conformance | resolved | 2026-10-02-check-single-source-of-truth.md | intent 4.48 (`templates/index-bundle.md`) |
 | FND.0670 | low | conformance | resolved | 2026-10-02-check-single-source-of-truth.md | intent 4.48 (CLAUDE.md, `states/intent.md`) |
 | FND.0680 | low | conformance | resolved | 2026-10-02-check-single-source-of-truth.md | intent 4.48 (the critic contract; CLAUDE.md, Requirement style) |
@@ -233,12 +234,28 @@ as `rejected`. -->
 | FND.0950 | medium | conformance | resolved | 2026-10-04-check-engine.md | recipe readme 0.56 (the brief no longer locked, its callout gone) |
 | FND.0960 | medium | conformance | resolved | 2026-10-04-check-engine.md | recipe readme 0.56 (the artefacts from the definitions on disk, the diagram with the solution design as built) |
 | FND.0970 | low | conformance | resolved | 2026-10-04-check-engine.md | the skills `ingest` and `render` and recipe readme 0.56 cite Document chain by the item's name (intent 4.58) |
-| FND.0980 | medium | conformance | open | 2026-10-05-check-single-source-of-truth.md | |
-| FND.0990 | medium | conformance | open | 2026-10-05-check-single-source-of-truth.md | |
-| FND.1000 | low | conformance | open | 2026-10-05-check-single-source-of-truth.md | |
-| FND.1010 | low | conformance | open | 2026-10-05-check-single-source-of-truth.md | |
+| FND.0980 | medium | conformance | resolved | 2026-10-05-check-single-source-of-truth.md | named again (`2026-10-09-check-single-source-of-truth.md`); resolved: `templates/ledger.md` header owns the `kind:` rule (operating layer 2026-10-09) |
+| FND.0990 | medium | conformance | resolved | 2026-10-05-check-single-source-of-truth.md | named again (`2026-10-09-check-single-source-of-truth.md`); resolved: `/spinoff` intent-first through the procedures (operating layer 2026-10-09) |
+| FND.1000 | low | conformance | resolved | 2026-10-05-check-single-source-of-truth.md | named again (`2026-10-09-check-single-source-of-truth.md`); resolved: the Renders comment of `templates/ledger.md` owns the moment (operating layer 2026-10-09) |
+| FND.1010 | low | conformance | resolved | 2026-10-05-check-single-source-of-truth.md | named again (`2026-10-09-check-single-source-of-truth.md`); resolved: both headers cite CLAUDE.md, Persistence (operating layer 2026-10-09) |
 | FND.1020 | low | conformance | resolved | 2026-10-07-check-light.md | `proposal-documentation.md` deleted 2026-10-09 on the principal's word, its substance in the brief `documentation` and THR.0340 (named again in `2026-10-09-check-light.md`) |
-| FND.1030 | low | conformance | open | 2026-10-09-check-light.md | |
+| FND.1030 | low | conformance | resolved | 2026-10-09-check-light.md | named again (`2026-10-09-check-light-2.md`); the kind `map` in POS.1080 and CLAUDE.md, the map named in the Renders row of the index (intent 4.60, 2026-10-09) |
+| FND.1050 | low | conformance | resolved | 2026-10-09-check-light-2.md | the stale line left with the closing of THR.0340 (intent 4.60, 2026-10-09) |
+| FND.1060 | medium | conformance | resolved | 2026-10-09-check-single-source-of-truth.md | the contract skill `docs-contract` (operating layer 2026-10-09, solution design 0.7) |
+| FND.1070 | medium | conformance | resolved | 2026-10-09-check-single-source-of-truth.md | the document skill cites its scripts' headers (operating layer 2026-10-09) |
+| FND.1080 | medium | conformance | resolved | 2026-10-09-check-single-source-of-truth.md | the release skill owns what a release does with the documentation; CLAUDE.md and the document skill cite it (operating layer 2026-10-09) |
+| FND.1090 | low | conformance | resolved | 2026-10-09-check-single-source-of-truth.md | `templates/docs-map.md` (operating layer 2026-10-09, solution design 0.7) |
+| FND.1100 | low | conformance | resolved | 2026-10-09-check-single-source-of-truth.md | `templates/ledger.md`, Renders comment owns the index's row (operating layer 2026-10-09) |
+| FND.1110 | low | conformance | resolved | 2026-10-09-check-single-source-of-truth.md | `/render` step 3 the owner, the others cite or dropped the sentence (operating layer 2026-10-09) |
+| FND.1120 | low | conformance | resolved | 2026-10-09-check-single-source-of-truth.md | `forge_tools.py` owns what the conversions need (operating layer 2026-10-09) |
+| FND.1130 | low | conformance | resolved | 2026-10-09-check-single-source-of-truth.md | the readme skeleton the one owner, CLAUDE.md and POS.1450 cite it (intent 4.64, 2026-10-09) |
+| FND.1140 | low | conformance | resolved | 2026-10-09-check-single-source-of-truth.md | the dispatcher cites Document chain (operating layer 2026-10-09) |
+| FND.1150 | low | conformance | resolved | 2026-10-09-check-single-source-of-truth.md | three restating clauses dropped, one owner added (operating layer 2026-10-09) |
+| FND.1160 | low | conformance | resolved | 2026-10-09-check-single-source-of-truth.md | owners named, the second sentence of `/new-project` dropped (operating layer 2026-10-09) |
+| FND.1170 | low | conformance | resolved | 2026-10-09-check-single-source-of-truth.md | each rule once in its state file (operating layer 2026-10-09) |
+| FND.1180 | low | conformance | resolved | 2026-10-09-check-light-3.md | the Waiting line says what is left (2026-10-09) |
+| FND.1190 | low | conformance | resolved | 2026-10-09-check-light-3.md | the Inputs cell cut to the map and the version (2026-10-09) |
+| FND.1200 | low | conformance | resolved | 2026-10-09-check-light-3.md | the template's comment in all nine companions (2026-10-09) |
 | FND.1040 | low | conformance | resolved | 2026-10-09-check-light.md | `date: 2026-10-09` set in `00-brief-next-gen.md` (immediate fix, 2026-10-09) |
 
 Four review files are named outside the convention — accepted as they
@@ -277,8 +294,6 @@ copy — CLAUDE.md, Ledger. -->
 - THR.0570 — the presentation of the forge and what is to be ready
   for it; opened 2026-10-04, his verdict on the two pitch renders
   and on a major open.
-- THR.0580 — a render made after CLAUDE.md changed in the session
-  uses the old CLAUDE.md; found at the release of 4.58, open.
 - THR.0530 — what can be done deterministically is done by a script;
   the principal's stance of 2026-10-04, to be a prime directive;
   research of 2026-10-04; open.
@@ -325,27 +340,22 @@ copy — CLAUDE.md, Ledger. -->
 - FND.0650 — parked finding of the `single-source-of-truth` check;
   needs a pass over the recipe genres and their skeletons; named
   again 2026-10-05.
-- FND.0980, FND.0990, FND.1000, FND.1010 — the
-  `single-source-of-truth` check of 2026-10-05, four new findings
-  open; FND.0620 and FND.0630 reopened by it.
 - THR.0420 — derivations of the forge for other jobs; nothing
   scheduled.
 - THR.0430 — a command that ends a session; research of the
   transcript format first, nothing scheduled.
-- THR.0340 — the documentation of the engine; worked as the brief
-  `documentation` (0.1, born 2026-10-09); the first version
-  generated 2026-10-09 into `docs/`, 79 pages and the index, from
-  `docs-map.md`, by the trial agents `docs-planner` and
-  `docs-writer`; the README not yet cut; to be mined by
-  `/forge intent`; `proposal-documentation.md` deleted 2026-10-09
-  (FND.1020 resolved); the map without a kind, FND.1030 open.
+- THR.0590 — what the documentation of a project other than the
+  engine reads; opened 2026-10-09 (intent 4.60), after the first
+  `/document <slug>` on a project.
+- POS.1450 — the documentation command built and run twice
+  2026-10-09; left: the README re-rendered from recipe 0.59 and the
+  documentation regenerated from 5.0 at the major (the pages stale
+  against 4.64).
 - THR.0380 — executive pitch loose ends (S03 counts, the deck build
   without the `pptx` skill); opened 2026-09-14.
 - THR.0090 — multi-principal use; deliberately not worked on.
 - THR.0140 — the delivery side; deferred until a subject project
   needs the linkage.
-- THR.0150 — the scripts in Python; decided 2026-10-02, the rewrite
-  of the PowerShell scripts open.
 - THR.0210 — the guard rail for the public boundary; at stake again
   2026-09-20, to be taken up.
 - THR.0190 — a plugin as a distribution layer; merges into the brief

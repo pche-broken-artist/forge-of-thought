@@ -27,7 +27,7 @@ register. Everything the renderer must know beyond the template. -->
 ## Format
 <!-- Optional. A recipe without this section ends at the Markdown.
 The two steps: CLAUDE.md, Document chain, Renders. Never copied into the
-render. An older recipe's `## Build instructions` reads as this
+render (/render step 3). An older recipe's `## Build instructions` reads as this
 section until its next iteration. -->
 - Format: <pptx | docx>
 - Plain file, made by `/render` through pandoc: reference

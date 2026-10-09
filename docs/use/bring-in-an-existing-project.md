@@ -1,70 +1,47 @@
 ---
 generated: 2026-10-09
 made: mirrored
+inputs-hash: febccb88ea2c8e2c
 inputs:
   - .claude/skills/import-project/SKILL.md
-  - scripts/forge-clone.ps1
+  - scripts/forge-clone.py
   - CLAUDE.md
 ---
 
 # Bring in an existing project
 
-This page is for someone who already has a project in a git
-repository and wants to work on it in the forge. It shows how to
-bring the repository in and what to do first.
+This page is for a user who already has a project in a git repository and wants to work on it in the forge. It shows how to bring it in with `/import-project`, what the command reports back and what to do next.
 
-## Bring it in
+## Run the command
 
-Run the command with the address of the repository:
+Give the command the address of the repository:
 
 ```
 /import-project <git-url>
 ```
 
-The command clones the repository through `scripts/forge-clone.ps1`
-into `projects/<repository name>`. The name of the directory comes
-from the address, so there is no slug to give. The clone runs on your
-word.
+The command asks for your word before it runs. It then clones the repository through `scripts/forge-clone.py` into `projects/<repository name>`. The name of the directory falls out of the address: the last part, without a trailing `.git`. There is no slug to give.
 
-An existing directory of that name is never overwritten. If
-`projects/<repository name>` is already there, the command stops and
-says so; rename or remove the directory first, then run it again.
+The script never overwrites. If `projects/<repository name>` already exists, the command stops and says so. Rename or remove the existing directory first, then run it again.
 
-## What you are told
+The script sets no commit identity and carries no address of its own. Git resolves the identity from your own configuration, per host.
 
-When the clone is done, the command relays the facts the script
-reports:
+## What it reports
 
-- the last commit of the project;
-- the origin, the address the clone came from;
-- the commit identity git resolves for the clone. The forge sets no
-  identity: it is git's, resolved from your own configuration, per
-  host. If git resolves none, the line says so, and `forge-save`
-  will report it and commit nothing in that project until one is
-  resolved;
-- whether the project has a ledger with a `kind:` header. A project
-  without one is not defective; its absence is only a fact you are
-  told.
+When the clone is done, the command relays the facts the script prints:
 
-## What it leaves alone
+- **Last commit:** the short hash, the date and the message of the newest commit.
+- **Origin:** the address the clone came from.
+- **Identity:** the commit identity git resolves for this clone. If git resolves none, the script says so, and the save script will report it and commit nothing until an identity is configured.
+- **Ledger:** whether the project has a `ledger.md` with a `kind:` header, and which kind. A project without one was not scaffolded by the forge. That is a fact, not a defect.
 
-The command writes nothing into the project. The clone is exactly
-what the repository held.
+Nothing is written into the imported project. The command only clones and reports.
 
-## Start work
+## Start working
 
-Select the project by naming it:
-
-```
-/forge <slug>
-```
-
-The engine does not keep track of projects and cannot guess which one
-you mean, so selecting it by its name is the first act of work.
+The command ends by recommending `/forge <slug>`, where the slug is the directory name under `projects/`. The engine does not track projects and cannot guess which one you mean, so you select the project by naming it. Run it as your first act of work on the imported project.
 
 ## See also
 
-- [See where a project stands](see-where-a-project-stands.md): the
-  `/forge` map that follows.
-- [Upgrade the engine](upgrade-the-engine.md): what to check when a
-  project was written to older conventions.
+- [See where a project stands](see-where-a-project-stands.md): the `/forge` map that follows.
+- [Upgrade the engine](upgrade-the-engine.md): what to check when a project was written to older conventions.

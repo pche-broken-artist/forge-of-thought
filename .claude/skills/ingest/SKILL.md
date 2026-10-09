@@ -36,7 +36,7 @@ else. Never silently re-register.
    (e.g. `steerco-transcript.pdf`, `vendor-offer.docx`). No dates in
    filenames. On a name collision, suffix `-2`. Never rename or modify a
    file already recorded in the ledger: sources are immutable from the
-   moment of registration.
+   moment of registration (CLAUDE.md, Versioning & status).
    **Bundles** (CLAUDE.md, Document chain, External inputs): store a set of related
    files as `sources/<slug>/`, one ledger row; in sweep mode, register
    a subdirectory as one bundle, never file by file. Create its
@@ -54,7 +54,7 @@ else. Never silently re-register.
 3. **One form per source (POS.1040).** For every binary file (PDF,
    DOCX, PPTX, XLSX, …) — isolated or inside a bundle — ask one
    question, per file: convert to Markdown?
-   - **Yes:** run `scripts/doc2md.ps1 <file> -OutDir sources/` (or the
+   - **Yes:** run `python scripts/doc2md.py <file> -o sources/` (or the
      bundle directory); the extract `<short-slug>.md` is the source —
      registered, indexed (Origin: "extract of `<original>` (markitdown)"),
      immutable. The original is not copied into the project; if it

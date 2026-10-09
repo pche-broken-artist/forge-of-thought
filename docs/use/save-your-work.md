@@ -1,77 +1,54 @@
 ---
 generated: 2026-10-09
 made: mirrored
+inputs-hash: 35a909fbea89b846
 inputs:
   - .claude/skills/save/SKILL.md
-  - scripts/forge-save.ps1
-  - scripts/forge-status.ps1
+  - scripts/forge-save.py
+  - scripts/forge-status.py
   - CLAUDE.md
 ---
 
 # Save your work
 
-This page is for the person who works in the forge and wants to put
-the state of the engine and of his projects safely into git. It says
-what `/save` does, in the order it does it, and what you are asked.
+This page is for a person who has worked on the engine or on a project and wants the work committed and pushed. `/save` is the quick door: a light check, a commit message you confirm, then the commit and the push, on whatever branch is checked out.
 
-The command is:
+## The command
 
 ```
-/save [slug] [-m "message"] [-Tag name]
+/save [slug] [-m "message"] [--tag name]
 ```
 
-The engine and every project are repositories of their own. `/save`
-works on whatever branch is checked out in each, runs the light check,
-commits and pushes. It makes no render. The other door, with the
-renders, is `/release`.
+- `slug`: save one repository only. `forge` means the engine. Without a slug every repository with changes is saved.
+- `-m "message"`: your own commit message. Without it, one is drafted for you.
+- `--tag name`: tag the commit. A tag needs one repository, so a slug is required with it.
 
 ## What happens
 
-1. **The scope is read.** The status script reports the engine and
-   each project separately, with the branch each is on, whether it has
-   unsaved changes, its last commit and its origin. Without a slug,
-   every repository with changes is in scope; with a slug, that one
-   only (`forge` means the engine). A project that is not under git is
-   named in the report and left alone; that is a property of the
-   project, not a defect.
-2. **The light check runs** on every repository in scope, and its
-   report is settled through `/check`. A save never waits on a finding
-   you have not asked to fix.
-3. **A commit message is proposed.** Unless you gave `-m`, a one-line
-   English message is drafted from the records the round appended to
-   the histories of the documents it touched. You confirm it or adjust
-   the wording, and the commit uses what you confirmed. When several
-   repositories have changes, there is one message for each, or you run
-   the save once per slug. The script's own generated file list is used
-   only if you say so.
-4. **A tag is set only on your word**, either `-Tag name` or asked for
-   in words. A tag needs one repository, so a slug must be given. If
-   you ask for a tag without naming it, one is proposed from the
-   version of that repository's intent, and you take it or give any
-   name git accepts.
-5. **The save runs.** Per repository the script stages everything,
-   commits, and, where an origin is configured, integrates remote
-   changes by rebase and pushes. Without an origin the commit is kept
-   locally and reported. A tag is pushed with the commit; with nothing
-   to commit, the tag marks the current state. A tag name that already
-   exists is refused. The script prints the commit's file summary and
-   the tag, and that is the outcome you are shown.
+1. **Scope.** The status script reports the engine and each project separately, with the branch each is on. A project that is not under git is named in the report and otherwise left alone. That is a property of the project, not a defect.
+2. **The light check.** The `light` check runs on every repository in scope, and its findings are settled through `/check`. A save never waits on a finding you have not asked to fix.
+3. **The commit message.** Unless you gave `-m`, a one-line English message is drafted from the records the round appended to the histories of the documents it touched, and proposed to you. The commit uses the wording you confirm or adjust. When more than one repository has changes you get one message per repository, or you run the save once per slug. The script's own message, a list of the changed files, is used only if you say so.
+4. **A tag, only on your word.** A tag is set only if you give `--tag name` or ask for one in words. If you ask without naming it, a name is proposed from the version of that repository's intent, and you may take it or give any name you like. A tag that already exists is refused and nothing is changed.
+5. **The save script.** It stages everything in the repository, commits, and pushes. If the remote has changes of its own, they are integrated first. No render is made.
 
 ## What you see
 
-The report names each repository and its branch, the outcome of the
-light check, the message committed and the file summary the script
-prints. Projects not under git appear with a note.
+For each repository the script prints the commit and its file summary, and the tag if one was set. The outcome is one of these:
 
-## Identity
+- saved and pushed to the remote;
+- nothing to save, when the repository is clean;
+- not pushed, when no remote is configured: the commit (and tag) stays local;
+- a project named as not a repository, when you asked for it by slug: it is refused until the repository exists.
 
-The forge sets no commit identity. It is git's, resolved on each host
-from your own configuration. On a host where none resolves, nothing is
-committed and the save fails aloud instead of taking a default.
+If the remote's changes conflict with yours, the script stops and says nothing was lost. Ask Claude for help before doing anything else. If the push fails, check the network and the access to the remote, then save again.
+
+## When nothing is committed
+
+The script commits nothing in a repository where git resolves no commit identity for this host. It says so and moves on. Run `/setup` for the per-host identity, or set a local one for that repository, then save again.
+
+When there is nothing to commit but you gave a tag, the current state is tagged, so a tag can mark a state before a large change.
 
 ## See also
 
-- [Release a version](release-a-version.md): the other door, from
-  `main`, with the renders.
-- [About persistence in git](../about/persistence-in-git.md): why
-  there are two doors and two speeds.
+- [Release a version](release-a-version.md): the other door, from `main`, with the renders.
+- [About persistence in git](../about/persistence-in-git.md): why there are two doors and two speeds.

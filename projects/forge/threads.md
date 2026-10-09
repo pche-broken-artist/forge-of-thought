@@ -20,18 +20,6 @@ project: forge
   to a separate delivery framework is open and deliberately not
   worked on now; it is taken up when a subject project first needs
   the linkage — flow-ba is a natural candidate.
-- **THR.0150** [intent] The scripts in Python. Decided by the principal
-  2026-10-02, on the feedback of the forge's users: scripts are
-  written in Python, not PowerShell; a new script is written in
-  Python at once and the existing PowerShell scripts are rewritten
-  later (POS.0830). This reverses what stood here: POSIX `sh` had
-  been considered and left undecided, and a rewrite in Python
-  excluded as a dependency without benefit, Python staying only for
-  markitdown. Open, Claude's list, marked as his: the order and the
-  time of the rewrite; how Python is found on each platform; the
-  per-prompt hook, which `.claude/settings.json` starts through
-  `pwsh`; what the git door asks of a machine once it is Python,
-  since today Python is needed only where documents are converted.
 - **THR.0170** [intent] Branch documents. Considered on 2026-08-27 alongside
   POS.0920 and deferred as too heavy for now: a working document per
   large whole (`branches/<name>.md` — a verbatim seed followed by
@@ -389,115 +377,6 @@ project: forge
   kind of THR.0290, and the shape of the operating layer it reviews
   is POS.1120's and THR.0240's question. Opened 2026-09-05.
 
-- **THR.0340** [intent] The README split from the documentation. The README is
-  today the engine's whole documentation — 829 lines on 2026-09-08,
-  longer than CLAUDE.md, sixteen chapters that are three things at
-  once: an invitation (why, what you get, quickstart), a user's guide
-  (the flow, roles, the chain, the reviewers, the commands) and a
-  reference (conventions, setup, scripts). Decided in substance
-  2026-09-08 at the principal's direction: the split must come — a
-  short README that invites and points, the guide and the reference as
-  renders of their own recipes into `docs/` (the mechanism exists: a
-  recipe's `output:` path, POS.1070; the ledger's Renders table;
-  `/release` re-rendering them). Decided order: after THR.0230, not
-  before — the engine/framework boundary divides today's README
-  between two repositories (setup, scripts, conventions, the reviewer
-  mechanism and the mechanical commands to the engine; the chain, the
-  lenses and personas, the requirement style and `/forge` to the
-  forge), so a `docs/` cut made now would be cut again along that
-  line. Open: whether the conventions chapter is rendered at all or
-  the documentation points to CLAUDE.md, which is readable as it
-  stands; the cost of more renders per `/release` (the README alone
-  takes five to eight minutes today; the measurements are
-  `research/2026-09-14-save-and-release-duration.md`). Trigger: the boundary drawn by
-  the brief of THR.0230. Opened 2026-09-08. Also here, since it is
-  the README's: the footer (`_Last updated_`) is kept for now and the
-  principal will give further input (noted 2026-09-14 from the
-  ledger).
-  Round of 2026-10-07, unfinished, saved here. The handed-over
-  proposal `proposal-documentation.md` (2026-10-05) was walked only
-  in its frame and is superseded in substance by the principal's
-  word of this round, not yet judged page by page; its map of pages
-  and its section 11 stay as material. The principal's direction:
-  the documentation is generated, as automatic as possible, never an
-  artefact he maintains by walkthrough, and its definition belongs
-  neither in the intent nor in the solution design. The shape agreed
-  so far, carried in the conversation only: a command of its own
-  (working name `/document`), two phases without a question; a
-  mapper, an isolated agent on the session model carrying the whole
-  assignment (three readers, five fixed sections, one topic per
-  page, every artefact with its elicitation in full, how a new
-  artefact is born, stable page names, what must not appear), which
-  reads the engine on disk and writes the map as the index
-  `docs/README.md`, one row per page with its inputs and its state
-  new / regenerate / keep / remove; then one dumb page maker per
-  page on a faster model, from its row, its inputs and a fixed page
-  template; the state of a page computed by a script from the
-  content hashes of its inputs, never by judgement, so that a run
-  regenerates only what changed. No recipe, no artefact; the intent
-  receives one position, the solution design one part; `/render`
-  stays untouched. Trial of 2026-10-07 in the engine's `tmp/`
-  (gitignored, not a record): the mapper on the session model made
-  a map of 65 pages in 13 minutes, three pages on Sonnet 5.5 took
-  23 to 58 seconds each and read well. Five lessons, to be walked
-  before the write: (1) a subagent sees the session's memory and
-  its copy of CLAUDE.md, so instance facts can reach a public page;
-  a rule in the definitions and a mechanical scan of the pages by
-  the state script were proposed, no verdict yet, THR.0580 to widen
-  from CLAUDE.md to the whole session context; (2) the pages mirror
-  stale owners faithfully (`templates/intent.md` still lets IDs be
-  omitted and keeps Candidate structure for assignment), fixes go
-  into the owners; (3) provenance inputs must be exact paths, no
-  globs or sections, for the hash to be computable; (4) a page
-  maker cannot see the other pages, so the map must hand it one
-  sentence per linked page; (5) the forge project's recipes own
-  pinned text today (the readme recipe fixes the install commands
-  and the prerequisites) and the mapper did not read them: either
-  the mapper reads them as owners or the pinned facts move to one
-  place both the README and the documentation read, the second
-  recommended, the place undecided. The order "after THR.0230" is
-  withdrawn by the principal's word of 2026-10-05.
-  2026-10-09: the material of this thread and the principal's word
-  of the day are born as the brief `documentation`
-  (`00-brief-documentation.md` 0.1); worked there.
-  Trial of 2026-10-09 in the engine's `tmp/docs-trial-2/` (not a
-  record), with two trial agents in the engine, `docs-planner` and
-  `docs-writer`: the planner on the session model read the engine
-  from disk and wrote a map of 79 pages in 13 minutes (start 4, use
-  23, about 24, extend 9, reference 19; 45 mirrored, 34 derived with
-  their evidence; six unowned facts), each entry a page's brief with
-  exact inputs, links with a sentence, must-not and evidence; four
-  pages (install, about the intent, forge the intent, commands) were
-  then written twice, on Sonnet 5.5 in 18 to 29 seconds each and on
-  Opus in 52 to 81 seconds each, both sets free of instance facts.
-  Opus was more complete and said what the inputs did not support
-  where Sonnet derived a reason of its own; for mirrored pages Sonnet
-  sufficed. Five findings on the mechanism: (1) three of eight
-  writers took CLAUDE.md from their context instead of the disk
-  although told to read it, so CLAUDE.md should rarely be an input
-  and the planner should name the owning file; (2) two writers cited
-  a preference from the session's memory, so the memory reaches a
-  subagent (THR.0580); (3) the long dash in the link shape of both
-  agents is Claude's error, to be a spaced hyphen; (4) link titles
-  were guessed by every writer, so the map must carry a title per
-  page; (5) pages mirrored stale owners, mended at 4.59
-  (`templates/intent.md`, POS.1340). Claude's recommendation: the
-  writer's model chosen mechanically by the entry's `made`, mirrored
-  on the faster model, derived on the session model.
-  2026-10-09, later: the first version of the documentation
-  generated into `docs/` at the engine root on the principal's word,
-  79 pages and the index, from the map `docs-map.md` in this project
-  (the planner's map with a title per page), the index derived by
-  `scripts/docs-index.py` with the engine's version; the 35 derived
-  pages written on Opus, the 44 mirrored on Sonnet; checked
-  mechanically: every page present, no broken link, no long dash, no
-  instance fact. Learnt on the way: Claude Code loads an agent's
-  definition once per session, so a change to `docs-writer.md` did
-  not reach the running writers and a batch ran on the old
-  definition; the model and the changed rules had to be passed in
-  the call. The README is not yet cut; the mechanism has no
-  command, no position and no part yet.
-
 - **THR.0350** [intent] Lessons of the first run in the field. The record of
   the forge applied to a private project of the principal's,
   10–13 September 2026, is registered as
@@ -608,7 +487,7 @@ project: forge
   must be worth it on its own; a later possibility is never what
   justifies it
   (`research/2026-09-28-artefact-layers-from-idea-to-handover.md`).
-- **THR.0370** [intent] Mermaid diagrams in Word. `scripts/md2docx.ps1`
+- **THR.0370** [intent] Mermaid diagrams in Word. `scripts/md2docx.py`
   (SOL.0440) converts a render to Word through pandoc and leaves
   Mermaid blocks as code. Agreed in the walkthrough of 2026-09-12 but
   not built: the route would be `mermaid-cli` rendering each block to
@@ -621,7 +500,7 @@ project: forge
   2026-09-12: it would end at a picture too, with less determinism.
   On 2026-09-27 the principal took that route for another purpose,
   the design of the document: it is the `claude` engine of
-  `md2docx.ps1` behind `/publish` (POS.0590, SOL.0440). Mermaid in
+  `md2docx.py` behind `/publish` (POS.0590, SOL.0440). Mermaid in
   the plain file stands as it was.
   Word to PDF is the recipient's, never the forge's (SOL.0440).
   Deferred 2026-09-12 by the principal — "needs more thought"; opened
@@ -949,7 +828,7 @@ project: forge
   reported from a clone one commit behind (6856009 against f371de0)
   and nothing in the forge could have said so: the map reports
   whether a project is under git and nothing of its state against
-  the remote, and `scripts/forge-status.ps1` neither fetches nor
+  the remote, and `scripts/forge-status.py` neither fetches nor
   reports ahead/behind — it prints "clean" and the origin's URL. The
   principal's word of 2026-10-01: the pull is to be offered
   unprompted at `/forge`, as it was on 2026-09-30, and the rule is to
@@ -1132,7 +1011,10 @@ project: forge
 - **THR.0550** [intent] `essence` is not run on this project, the
   principal's word of 2026-10-02; the release skill still offers it
   at every release. Carried in the ledger without an ID until
-  2026-10-04 (FND.0930).
+  2026-10-04 (FND.0930). 2026-10-09: the principal keeps the offer in
+  the release skill and declines it on forge: the lens makes no sense
+  while the engine has few artefacts, and will once it has more.
+  Open until then.
 - **THR.0560** [intent] Three weakly founded places in the README of
   2026-10-02 (the next step of `/forge`, when two scripts are run,
   the fifth verdict); the readme recipe, at its next iteration.
@@ -1159,24 +1041,14 @@ project: forge
   not carry as a fixed text; on GitHub, Discussions to be switched
   on, since `CONTRIBUTING.md` points at them, and the topics brought
   to the fourteen of THR.0200. Opened 2026-10-04.
-- **THR.0580** [solution-design] A render made in a session that has
-  changed CLAUDE.md is made from the old CLAUDE.md. Origin: Claude's
-  observation at the release of 4.58, 2026-10-04. The isolated
-  subagent of `/render` is given CLAUDE.md in its context as it stood
-  when the session began, and takes it from there instead of reading
-  the file; the skill tells it to read the recipe's inputs and says
-  nothing of this one. At the release the README came out without
-  the row of `/new-artefact` and without `CONTRIBUTING.md` in the
-  layout, both written into CLAUDE.md the same day; the agent named
-  the gap itself and mended the two places from the file on disk.
-  The renders of `contributing`, `cto-pitch` and `ceo-pitch` of the
-  same day used the same copy; none of them stands on the four
-  places that differed, by Claude's reading and not by a check. The
-  check `engine` read the file from disk. Open: whether
-  `.claude/skills/render/SKILL.md` says that CLAUDE.md is read from
-  disk like every other input, and whether the same holds for the
-  reviewers and the checks, whose contracts cite CLAUDE.md. Opened
-  2026-10-04.
+- **THR.0590** [intent] What the documentation of a project other than
+  the engine reads. A project may be self-contained like the forge, a
+  strategy that generates a heap of files, a budgeting exercise, or
+  carry a link to an implementation in another repository; the outline
+  is the same (POS.1450), what fills it differs, and where a project
+  says what it wants documented is open. Trigger: the first `/document
+  <slug>` on a project. Opened 2026-10-09 from the brief
+  `documentation`.
 
 Note: the ID THR.0120 was inadvertently used twice — first for the
 readme-recipe thread (opened 1.14, closed 1.16), then for the

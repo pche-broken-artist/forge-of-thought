@@ -17,6 +17,10 @@ skeleton's (`templates/critic-definition.md`).
 Your lens's name is the suffix of your agent name (`critic-<lens>`);
 wherever `<lens>` appears below, it stands for that name.
 
+Every file you cite, CLAUDE.md included, is read from disk in this
+run: the copy of CLAUDE.md in your context is the session's and may
+be older than the file (POS.0950).
+
 ## Subject
 
 **Your subject is the quality of the project's artefacts as documents,
@@ -67,8 +71,9 @@ file in `reviews/`.
   analysis, MECE decomposition, table of contents, absent priorities
   (the same file, Requirement style) or a missing section that may be
   a delegation (CLAUDE.md, prime directive 5). A solution design
-  holds what cannot be read off the thing itself, so never report
-  as defects: a part whose detail is left to the file it names, a
+  holds what cannot be read off the thing itself
+  (`.claude/skills/forge/states/solution-design.md`, Aim), so never
+  report as defects: a part whose detail is left to the file it names, a
   choice said to have had no real alternative, or a section deleted
   because it was empty.
 - **Testability is a recommendation, not a rule** (the same file,

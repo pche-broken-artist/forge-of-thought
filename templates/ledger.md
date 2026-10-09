@@ -10,6 +10,9 @@ updated: YYYY-MM-DD
 
 <!-- Single source of truth for state: CLAUDE.md, Ledger. Versions
 per CLAUDE.md, Versioning & status. /ledger reads from here.
+kind: thought | library; a ledger without it reads as `thought`: at
+an import that is a fact the command reports, at a check a finding
+with the one-line fix (the one owner of this rule).
 Kind: `thought` keeps every table below. `library` (POS.0960) keeps
 only Renders, Sources, Dependencies, Research and Waiting on
 principal; the Briefs, Documents, Published, Findings and Challenges
@@ -36,8 +39,12 @@ born; a layer the project does not have gets no row (CLAUDE.md,
 Ledger). -->
 
 ## Renders
-<!-- Generated outputs, one row per recipe in recipes/ (CLAUDE.md,
-Document chain, Renders). Row mirrors the render's front-matter provenance. -->
+<!-- Generated outputs (CLAUDE.md, Document chain, Renders): one row
+per rendered recipe, written by /render step 6 at the first render
+and kept by every later one, the row mirroring the render's
+front-matter provenance. The documentation index has a row too,
+written by /document: Recipe "none, derived by scripts/docs-index.py",
+Inputs the map with its generated date and the intent's version. -->
 | Render | Audience | Recipe | Inputs | Generated |
 |---|---|---|---|---|
 

@@ -1,6 +1,7 @@
 ---
 generated: 2026-10-09
 made: derived
+inputs-hash: 5a7a5021d3a04864
 inputs:
   - .claude/skills/new-project/SKILL.md
   - .claude/skills/forge/states/brief.md
@@ -13,78 +14,150 @@ inputs:
 
 # Get a first result
 
-This page takes you, in one sitting, from nothing to a saved intent
-for a new idea: three commands, run from the engine root. It is for
-someone who has the forge set up and wants to see it work once
-before reading further. It was put together from the readme recipe's
-Quickstart, the skills of `/new-project`, `/save` and
-`/import-project`, the definitions of the brief and the intent, and
-the Persistence section of `CLAUDE.md`.
+This page is for you if the forge is installed and set up and you
+want to see, in one sitting, how an idea becomes a saved intent. It
+walks the three commands of the Quickstart in order and says what
+each does for you and what you see. It was put together from the
+command definitions of `/new-project`, `/save` and `/import-project`,
+the definitions of the brief and the intent, the Persistence section
+of `CLAUDE.md` and the Quickstart of the README's recipe.
 
-## Start the project
+## Before you start
 
-1. Run `/new-project my-idea`.
+Start `claude` from the engine root, always: that is where the
+forge's instructions load. `/setup` has run once on this machine.
+The three commands below are the "Starting a new project" path of
+the README's Quickstart; the sitting takes you from nothing to a
+saved intent.
 
-   The forge creates `projects/my-idea/` with its files: the ledger,
-   the decisions record, the empty `sources/` and `research/` with
-   their indexes, and the recipes for the project's README and
-   release notes. It writes files only and runs no git.
+```
+/new-project my-idea
+/forge intent
+/save
+```
 
-2. When asked, paste or dictate your brief: your idea put together,
-   what you want and why.
+## Step 1: scaffold the project and give it your brief
 
-   The forge stores it as `00-brief.md`. If you pasted it whole, it
-   asks whether the text is finished; say yes and it is approved at
-   once. If it is not finished, it stays a draft and you can go on
-   working it with `/forge brief`. Approval happens only on your
-   explicit word.
+Type `/new-project my-idea`. The slug is lowercase with hyphens
+and no spaces; if `projects/my-idea/` already exists the command
+stops and says so, it never overwrites.
 
-   At the end the forge proposes the next step, `/forge intent`, and
-   reminds you that the project is not under git yet.
+What it does for you:
 
-## Forge the first intent
+- It creates `projects/my-idea/` with its files: the ledger (the
+  one place that holds the project's state), `decisions.md`, the
+  empty `sources/`, `research/`, `reviews/` and `challenges/`
+  folders with their index files, and the two recipes every
+  thought project carries, for its README and its release notes.
+  Files only: the command never touches git.
+- It needs to know two things about the project and asks when your
+  words leave them open: its kind (a thought project, the default,
+  or a library) and the language its artefacts are written in
+  (English unless you name another).
+- It then asks you to paste or dictate the brief: your idea put
+  together, what you want and why, in any shape you like. Pasted
+  whole, the text is stored word for word and you are asked whether
+  it is finished. Say yes and it is approved at once; say no and it
+  stays a draft you go on working, by writing with Claude from where
+  the text stops.
+- It ends by proposing the next step, `/forge intent`, and by
+  reminding you once that the project is not under git until you
+  initialise its repository (Step 4 below).
 
-3. Run `/forge intent`.
+What you see at the end: `projects/my-idea/00-brief.md` with its
+history companion beside it, and the ledger's Briefs table with one
+row, not yet mined. No intent exists yet: each layer of the chain is
+born from its own first `/forge` call.
 
-   With no intent yet, your brief is consolidated into the first one:
-   what you hold, kept as positions. This runs as an interview, one
-   question per message. Your answers are carried in the
-   conversation; nothing is written one answer at a time.
+## Step 2: forge the first intent
 
-4. At the end of the round, say `write`.
+Type `/forge intent`. Because there is no intent yet, Claude takes
+the brief and consolidates it into the first one: the brief
+chiselled into what you hold.
 
-   Before writing, the forge reflects back what it understood, so the
-   write confirms rather than surprises. On your confirmation it
-   creates `10-intent.md` as version 0.1, with its history beside it
-   and the open threads in `threads.md`, and names what changed and
-   what stays open.
+What you see:
 
-## Save it
+- An interview, one question per message. Claude mines the brief
+  with you, probes what contradicts, what is missing and what is
+  assumed, and asks whether an idea is good and whether it is
+  feasible as two separate questions. He composes the wording; the
+  substance is yours.
+- Nothing is written while the conversation runs. What you agree is
+  carried in the conversation and reflected back to you so the write
+  confirms rather than surprises. At the round's natural end Claude
+  asks whether to write; the word is `write`, and you may say it at
+  any moment to write what is agreed so far.
+- On that word the first intent is created as version 0.1:
+  `projects/my-idea/10-intent.md`, its history companion
+  `10-intent.history.md`, and `threads.md`, where everything still
+  open is kept. The ledger's Briefs table is updated with how far
+  the brief is mined.
+- Claude ends by naming what changed and what stays open. When no
+  open thread blocks the next layer he names the layers that can
+  follow, or offers the approval: a recommendation, never a gate.
+  You decide whether to go on now or stop here.
 
-5. Run `/save`.
+## Step 3: save
 
-   The forge runs the `light` check, then proposes a one-line commit
-   message for you to confirm or adjust, and commits and pushes. A
-   finding of the check does not hold the save up unless you ask for
-   it to be fixed.
+Type `/save`. What it does for you, in order:
 
-A project is a git repository of its own: initialising it
-(`git -C projects/my-idea init -b main`, then a remote if you want
-one) is your one-off act, and until then "not under git" is a fact,
-not an error; `/save` names such a project and leaves it alone.
+1. It reads the state of the engine and of every project through
+   the forge's own scripts, the only door to git, and reports each
+   separately with the branch it is on.
+2. It runs the `light` check on every repository with changes and
+   settles its report with you. A save never waits on a finding you
+   have not asked to fix.
+3. It drafts a one-line English commit message from the history
+   records the round appended and proposes it to you; you confirm or
+   adjust the wording. If you gave `-m "message"` it uses yours.
+4. Only then it commits and pushes on whatever branch is checked
+   out, and reports the outcome. No render is made: that is
+   `/release`'s job.
 
-## If the project already exists
+If the project is not under git, the save names it in its report as
+such, with its changes, and otherwise leaves it alone.
 
-To bring in a project that already lives in a git repository, run
-`/import-project <git-url>`. It clones the project into `projects/`,
-under the repository's name, and reports the last commit, the
-origin and the commit identity git resolves. Then run
-`/forge <slug>`, the slug being the repository's name: the engine
-does not track the project, so you select it by naming it before
-any work.
+## Step 4: put the project under git, once
+
+Each project is a git repository of its own inside `projects/`,
+which the engine does not track; initialising it and adding a remote
+are your one-off act, and until you do, "not under git" is a fact
+about the project, not an error. The way in is one command from the
+engine root, then a remote if you want one:
+
+```
+git -C projects/my-idea init -b main
+```
+
+The forge sets no commit identity: git resolves it from your own
+configuration, which `/setup` offered to prepare. After that,
+`/save` commits and pushes the project like any other repository.
+
+## The other door: an existing project
+
+If the project already lives in a git repository somewhere, the
+Quickstart's second path brings it in instead of Step 1:
+
+```
+/import-project <project url>
+/forge <project-slug>
+```
+
+`/import-project` requires the URL and, on your word, clones the
+repository into `projects/<repository name>`; the slug is the
+repository's name, and nothing is written into the project. It
+reports the last commit, the origin, the commit identity git
+resolves, and whether the project carries a ledger. Then select the
+project by naming it, `/forge <project-slug>`, before any work: the
+engine does not track projects and cannot guess which one you mean.
+`/forge <slug>` shows the project's state map and the next step
+from there.
 
 ## See also
 
-- [Start a project](../use/start-a-project.md): the full job of starting a project, thought or library.
-- [Forge the intent](../use/forge-the-intent.md): the full job of iterating the intent.
-- [Save your work](../use/save-your-work.md): what a save does and asks.
+- [Start a project](../use/start-a-project.md): the full job of
+  starting a project, thought or library.
+- [Forge the intent](../use/forge-the-intent.md): the full job of
+  iterating the intent.
+- [Save your work](../use/save-your-work.md): what a save does and
+  asks.

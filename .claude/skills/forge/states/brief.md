@@ -46,8 +46,7 @@ project may have more than one brief: every later whole of thinking
 that would otherwise land in the intent as a batch of unproven
 positions is born as `00-brief-<name>.md` under the same rules. A
 brief is mined into the single intent when the principal says so,
-approved or not; positions cite it with its version. The ledger's
-Briefs table tracks how far each brief is mined. The brief is
+approved or not; positions cite it with its version. The brief is
 complete when the principal says so and approves it; the Map is
 walked before the approval is offered.
 
@@ -74,8 +73,7 @@ piece (definitions, blocks, wording), Claude says in one sentence
 that this is the intent's work, does not develop it, and offers
 once to go on in the intent: a recommendation, never a gate. The
 principal decides whether it stays in the brief as one open line
-or is let go. No walkthrough runs over the text of a brief and no
-IDs enter it.
+or is let go. No walkthrough runs over the text of a brief.
 
 What Claude thinks of it he says when asked (`??`, CLAUDE.md,
 Working methods). What does not fit he says at once and unasked,

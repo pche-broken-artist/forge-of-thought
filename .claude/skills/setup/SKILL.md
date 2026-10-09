@@ -1,5 +1,5 @@
 ---
-description: First run after cloning the engine — create and fill CLAUDE.local.md by interview, set the session model (Fable), offer the git identity per host and the global guard in ~/.gitconfig; never overwrites, runs no git operation
+description: First run after cloning the engine — create and fill CLAUDE.local.md by interview, set the session model to the forge's default, offer the git identity per host and the global guard in ~/.gitconfig; never overwrites, runs no git operation
 disable-model-invocation: true
 ---
 
@@ -29,7 +29,7 @@ speak whatever language the user speaks to you.
      push to (e.g. github.com, a company host) with a name and an
      e-mail for each — may be left for later; say so. Then offer to
      write, on the user's word, into the global git configuration
-     file git actually reads (`scripts/forge-status.ps1` names it;
+     file git actually reads (`scripts/forge-status.py` names it;
      read it first, never overwrite existing content, report an
      existing stanza or guard and leave it):
      - per host, one stanza

@@ -7,8 +7,7 @@ SYNOPSIS
 
 WHAT IT DOES
     Reads the documentation map a `docs-planner` run wrote (one entry
-    per page: `### docs/<section>/<page>.md` followed by `- title:`,
-    `- kind:`, `- reader:`, `- says:` and more) and writes
+    per page; the reader of the map is `docs_map.py`) and writes
     `<docs-dir>/README.md`: one line per page, grouped by section in
     the order of the outline (start, use, about, extend, reference),
     each line the page's title linked to its relative path and the
@@ -19,7 +18,7 @@ WHAT IT DOES
     change the map (through the planner) and run this script again.
 
 WHAT IT NEEDS
-    Python 3.8 or newer. Nothing else.
+    Python 3.8 or newer. `docs_map.py` beside it. Nothing else.
 
 NOTES
     The front-matter of the index names the map as its one input and
@@ -27,8 +26,8 @@ NOTES
     beside the map), which for the engine is its version; the opening
     says the same in words.
     The opening paragraph and the three reading paths are fixed text
-    of this script, the one place that owns them (brief
-    `documentation`, THR.0340).
+    of this script, the one place that owns them (POS.1450,
+    SOL.0460). Run by `/document` (`.claude/skills/document/SKILL.md`).
 
 EXAMPLES
     python scripts/docs-index.py projects/forge/docs-map.md docs
@@ -37,11 +36,13 @@ EXAMPLES
 
 import argparse
 import datetime
-import re
 import sys
 from pathlib import Path
 
-ORDER = ["start", "use", "about", "extend", "reference"]
+sys.path.insert(0, str(Path(__file__).resolve().parent))
+import docs_map  # noqa: E402
+
+ORDER = docs_map.ORDER
 HEADINGS = {
     "start": "Start",
     "use": "Use",
@@ -54,48 +55,6 @@ PATHS = [
     ("the extender", "extend/", "then reference/ for the shapes"),
     ("the evaluator", "about/", "the concept pages, nothing made for him alone"),
 ]
-
-ENTRY_RE = re.compile(r"^### (docs/([a-z]+)/(.+?)\.md)\s*$")
-FIELD_RE = re.compile(r"^- (\w[\w-]*):\s*(.*)$")
-
-
-def parse_map(text):
-    """Return (front, entries). entries: list of dicts with path, section, fields."""
-    entries = []
-    current = None
-    field = None
-    front = {}
-    lines = text.splitlines()
-    i = 0
-    if lines and lines[0].strip() == "---":
-        i = 1
-        while i < len(lines) and lines[i].strip() != "---":
-            k, _, v = lines[i].partition(":")
-            front[k.strip()] = v.strip()
-            i += 1
-        i += 1
-    for line in lines[i:]:
-        m = ENTRY_RE.match(line)
-        if m:
-            current = {"path": m.group(1), "section": m.group(2),
-                       "name": m.group(3), "fields": {}}
-            entries.append(current)
-            field = None
-            continue
-        if line.startswith("## "):
-            current = None
-            field = None
-            continue
-        if current is None:
-            continue
-        fm = FIELD_RE.match(line)
-        if fm:
-            field = fm.group(1)
-            current["fields"][field] = fm.group(2).strip()
-            continue
-        if field and line.startswith("  "):
-            current["fields"][field] = (current["fields"][field] + " " + line.strip()).strip()
-    return front, entries
 
 
 def first_sentence(text):
@@ -185,7 +144,7 @@ def main(argv):
     a = ap.parse_args(argv)
     map_path = Path(a.map)
     text = map_path.read_text(encoding="utf-8")
-    front, entries = parse_map(text)
+    front, entries = docs_map.parse(text)
     if not entries:
         print("no entries found in the map", file=sys.stderr)
         return 1

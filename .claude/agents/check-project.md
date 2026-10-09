@@ -19,8 +19,7 @@ is the `light` check's, never yours; run beside it at a release
 What you verify:
 
 0. **Kind and repository** — the ledger header declares `kind:
-   thought | library` (missing = `thought`, a finding with the
-   one-line fix). `projects/<slug>/.git` exists; a project that is
+   thought | library` (missing: `templates/ledger.md`, header). `projects/<slug>/.git` exists; a project that is
    not a repository is a fact, never a finding, reported with the
    one-line way in ("project is not a repository —
    the way in CLAUDE.md, Persistence, names"),

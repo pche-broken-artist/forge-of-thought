@@ -11,7 +11,7 @@ principal's one-off act, the way in named in CLAUDE.md, Persistence,
 and a project that starts "not under git" is a property, not a
 defect (CLAUDE.md, Persistence) — say so once at the end. The commit identity is git's,
 resolved per host from his own configuration (CLAUDE.md,
-Persistence) — nothing to propose; the command runs no git.
+Persistence) — nothing to propose.
 
 **Kind.** Every project has a kind, declared as `kind:` in its
 ledger header (POS.0960): `thought` (default — the chain, everything

@@ -1,6 +1,7 @@
 ---
 generated: 2026-10-09
 made: derived
+inputs-hash: 7399065258225d10
 inputs:
   - CLAUDE.md
   - templates/ledger.md
@@ -10,121 +11,156 @@ inputs:
 
 # About documents and records
 
-This page explains how Forge of Thought sorts the files of a project,
-why each sort behaves as it does, and why the state of a project lives
-in a file and not in the conversation. It is for anyone who uses the
-forge, extends it, or weighs whether to adopt it. It was put together
-from `CLAUDE.md` (its sections Document kinds, Ledger and Versioning &
-status), the skeletons `templates/ledger.md` and
-`templates/decisions.md`, and the design positions of the forge's own
-intent, `projects/forge/10-intent.md`, which give the reasons.
+This page explains what the files of a project are, how they are
+sorted into kinds, and why each kind behaves as it does: which files
+are rewritten, which only grow, which are never touched, and where the
+state of a project is kept. It is for anyone who works in a project,
+anyone who extends the forge, and anyone judging whether the
+arrangement holds together. It was put together from `CLAUDE.md`,
+the ledger and decisions templates and the forge's own intent.
 
-## Documents and artefacts
+## Document and artefact
 
 "Document" is the word for every file of a project. "Artefact" is
-kept for a narrower set: the documents of the chain, the ones the
+reserved for the documents of the chain: the brief, the intent and
+whatever layers the project takes below it. These are the files the
 principal composes, the reviewers read and the renders are generated
-from. A brief or an intent is an artefact; a ledger or a review is a
-document but not an artefact.
+from. The distinction matters because the artefacts are the only
+files whose content the principal owns outright; everything else
+either records what happened to them, keeps track of where things
+stand, is generated from them, or feeds them.
 
-Every document has exactly one kind, and the kind says what the
-document is, who writes it, whether it is versioned and how it
-behaves. The kinds fall into five groups. The full table lives on the
-reference page; what follows is what each group is for.
+Every document has exactly one kind, and the kind says four things:
+what the document is, who writes it, whether it carries a version,
+and how it behaves over time. The kinds fall into five groups.
 
 ## The five groups
 
-**Artefacts.** The documents of the chain. They are written by the
-principal with Claude, they are versioned, and between versions they
-are rewritten freely. Even an assignment is not "frozen" in any way
-the file would show: it is rewritten freely between approvals, and
-what its recipients hold is a version reached by a link into git.
+**Artefacts.** One kind, the artefact. Written by the principal with
+Claude, versioned, and rewritten freely: an intent or an assignment
+is not frozen in any sense the file would show. It changes between
+approvals like any draft, and what a recipient holds is a particular
+version reached by a link into git, not a locked file. What each
+artefact is, its own definition says.
 
-**Records.** What has happened, kept as it happened. The history of a
-versioned document and the decisions of the principal are
-append-only: new records are added, old ones stay. A review or a
-challenge is one dated run of a reviewer and is immutable from the
-moment it is created. The decisions file shows the shape of a record:
-one entry per decision, numbered in the global sequence, with the
-decision, the reason (including what was weighed against it) and the
-date. A record is never edited; a later decision supersedes an earlier
-one by a new record that names it.
+**Records.** What happened, kept so it can be read back. Two kinds
+only grow: the history companion of every versioned document, one
+record per change with the reason, and the decisions file, one
+record per decision of the principal with its reason and date. Both
+are written by the forge, never edited, and a later decision does not
+correct an earlier one in place: it supersedes it with a new record
+that names it. The third kind of record is a reviewer's run, a
+critique, a challenge or a check report, dated and immutable from the
+moment it is filed.
 
-**State.** Where things stand now. The ledger and the resource
-indexes (the `00-INDEX.md` in every `sources/` and `research/`
-directory) are written by the forge and freely rewritten. An index is
-a light catalogue of what resources exist and what they are for, so
-that nobody has to re-read them to know; it tracks nothing else.
+**State.** Where things stand right now. The ledger is the single
+source of truth for state; the resource indexes catalogue what lies
+in `sources/` and `research/`; the documentation map holds one entry
+per page of the documentation and everything that page is made from.
+All three are freely rewritten, because state is a snapshot, not a
+record: the ledger and the indexes by the forge after every
+operation, the map by the documentation run. The map is state of the
+project that owns the documentation and is never shown to the
+documentation's reader.
 
-**Rendering.** How outputs for an audience are made. A recipe says
-how a render is made; it is versioned and iterated, but never
-approved. A render is generated from its recipe, overwritten by every
-new run, and never a source of truth: the artefacts stay that.
+**Rendering.** Outputs made for an audience, and the instructions
+they are made from. A recipe says how a render is made; it is
+versioned, iterated by Claude with the principal, and never
+approved, so it stays at 0.x for its whole life. A render is
+generated from the recipe and overwritten by every `/render`; a page
+of the documentation, or its index, is generated from the map and
+overwritten by the documentation run. Neither a render nor a page is
+ever a source of truth, and neither is edited by hand: what one
+wants changed is changed in the recipe, or in the artefacts the
+render draws on.
 
-**Resources.** What comes from outside or is found out once. A source
-is external input as it arrived; research is a durable answer to one
-question. Both are immutable: a source from its registration,
-research from its creation. A functional binary, such as a
-presentation template or a graphic, counts as a source, so a
+**Resources.** What came in from outside and what was looked up. A
+source is external input as it arrived; research is a durable answer
+to one question. Both are immutable: a source from its registration,
+a research note from its creation. A functional binary, a
+presentation template or a graphic, is a source like any other, so a
 library's assets are resources without a kind of their own.
 
-Every versioned kind, artefact and recipe alike, keeps its history in
-a companion file beside it rather than in its own body.
+A library, the kind of project that shares material across others,
+carries no artefacts and no records but the history companion of its
+README recipe; its state and its resources behave as above.
+
+Records, state, research and recipes are always written in English,
+whatever language the project's artefacts are in, because they are
+read by Claude, the reviewers and the checks and never handed to a
+recipient.
 
 ## Why state lives in files
 
-The forge holds that state lives in files and never only in the
-conversation. The reason is that a session can be ended at any point
-without loss: the next session re-orients from the ledger through
-`/ledger`. For the same reason, an unfinished conversation is saved
-into its thread of the intent, as a write of whatever has been agreed
-so far, rather than left to live in the chat. One project per session
-is the hygienic default.
+State is never kept only in the conversation. A session can end at
+any point, by choice or by accident, and nothing that lived only in
+the conversation survives it. So the ledger is kept current after
+every operation, and `/ledger` re-orients from it when work resumes.
+The same rule shapes what "written" means: when Claude reports
+something as written, he names the file and the section; whatever is
+carried in the conversation only is said to be nowhere yet, and he
+never says nothing is lost while anything lives only there. One
+project per session is the hygienic default.
 
 ## The ledger
 
-`ledger.md` is the single source of truth for the state of a project.
-Its tables cover the briefs, the documents, the renders, the
-published files, the sources, the research, the dependencies, the
-findings and the challenges, with a closing list of what waits on the
-principal. It is freely rewritten and kept current after every
-operation.
+The ledger is the single source of truth for state. Its tables cover
+the briefs, the documents of the chain, the renders, the published
+files, the sources, the research, the dependencies on other
+repositories, the findings of critics and checks, and the challenges;
+the shapes and the states they use are the reference page's. A
+library's ledger keeps only the tables a library needs. The ledger's
+header also carries the project's kind and the language of its
+artefacts.
 
-The ledger cites and never copies. Resources and dependencies are
-registration only: what a resource is and is for lives in its
-directory's index, not in the ledger. Under Waiting on principal, a
-matter that already has an ID gets one line (the ID, a few words, its
-state) while its substance stays in the thread or the record. Free
-text appears only for a matter that has no ID yet, and it gets one at
-the next write.
+Two rules govern what goes in. First, resources and dependencies are
+registration only: the ledger says that a source or a research note
+exists and when it arrived, and what it is and is for lives in the
+index of its directory, never in the ledger. Second, the ledger cites
+and never copies. Under its "Waiting on principal" section, a matter
+that already has an ID gets one line: the ID, a few words and its
+state, with the substance left in the thread or the record it came
+from. Free text is allowed only for a matter with no ID yet, and it
+gets one at the next write. An unfinished conversation is saved into
+its thread of the intent, never into the ledger.
 
-A layer below the intent that a project does not have is not missing:
-the ledger gets no row for it, and `/forge` and the checks say nothing
-of it.
+A layer below the intent that a project does not have is simply
+absent: the ledger has no row for it, and nothing reports it as
+missing.
 
-## Immutability and corrections downstream
+## Why immutability is a rule, not a mechanism
 
-Reviews, challenges, sources and research are never edited: a source
-from its registration, the others from their creation. This
-immutability is a rule of the process, not a mechanism of git: it
-holds because the forge works that way, not because the repository
-enforces it.
+Reviews, challenges, sources and research are never edited. This is a
+process rule kept by convention, not something git enforces, and the
+reason is practical. Git protects nothing from a commit that rewrites
+a file, so git itself cannot be the guard. The rule, on the other
+hand, costs nothing to keep. A mechanism to enforce it would be one
+more layer to maintain, and it still would not stop someone editing
+the file by hand. So the forge states the rule and relies on it.
 
-Because these documents stay as they were, a correction does not go
-back into them; corrections happen downstream. The decisions file
-shows the pattern: a record is never edited, and a later decision
-supersedes an earlier one by a new record that names it. A dated
-reviewer run, or a source as it arrived, therefore stays what it was
-on its day.
+Corrections therefore happen downstream. A reviewer's report stays
+as the reviewer wrote it; a finding it raised is settled in the
+artefact, and a rejected finding or challenge is recorded as a
+decision with its reason. A decision that no longer holds is not
+rewritten; a later decision names it and supersedes it. A source
+that turns out to be wrong is not edited; what the intent took from
+it is corrected in the intent. The record of what was found, decided
+or received stays readable as it was, and what changed in response
+is readable beside it.
 
-## Prose wrapped at about 72 columns
+## How the files are written
 
 Prose in every document is hard-wrapped at about 72 columns so that
-git diffs stay legible. Tables, code blocks and front-matter are
-never wrapped.
+git diffs stay legible: a change to one sentence shows as a change to
+one or two lines, not to a whole paragraph. Tables, code blocks and
+front-matter are never wrapped, because wrapping would break them.
 
 ## See also
 
-- [Document kinds](../reference/document-kinds.md): the table of kinds, verbatim.
+- [Document kinds](../reference/document-kinds.md): the table of
+  kinds, verbatim.
 - [Ledger](../reference/ledger.md): the ledger's tables and states.
-- [About versioning and history](versioning-and-history.md): the history companion of every versioned kind.
+- [About versioning and history](versioning-and-history.md): the
+  history companion of every versioned kind.
+- [About the documentation](the-documentation.md): the map and the
+  pages, the two generated kinds.

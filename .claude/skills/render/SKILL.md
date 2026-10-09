@@ -15,6 +15,9 @@ other; generating the render is mechanical.
    through `/recipe` (a genre where one fits, else bare from
    `templates/recipe.md`) and stop.
 2. Read the recipe's declared inputs at their current versions.
+   Every input, CLAUDE.md included, is read from disk in the run:
+   the copy of CLAUDE.md a subagent carries in its context is the
+   session's and may be older than the file (POS.0950).
 3. Generate in isolation: spawn one subagent (Agent tool, type
    `general-purpose`, session model — never a model override) whose
    prompt names the project, the recipe path, the output path and the
@@ -53,13 +56,14 @@ other; generating the render is mechanical.
    cited file no longer exists. This is the one definition; `/forge`
    and `/check` cite it (POS.1070).
 6. Back in the session: verify the file exists and its provenance is
-   correct, update the ledger's Renders table to mirror it, and report
+   correct, write or update the render's row in the ledger's Renders
+   table (its shape: `templates/ledger.md`, Renders), and report
    what was rendered
    from what.
 7. The plain file (CLAUDE.md, Document chain, Renders). Where the recipe
    carries a `## Format` section, run the script of its format —
-   `scripts/md2docx.ps1` or `scripts/md2pptx.ps1` — on the render
-   with `-Engine pandoc` and the reference document and page size
+   `python scripts/md2docx.py` or `python scripts/md2pptx.py` — on the
+   render with `--engine pandoc` and the reference document and page size
    the section names; the file lands beside the render. Where pandoc
    is missing, the render stands, the plain file is not made, and
    that is said aloud. A recipe without the section ends at the

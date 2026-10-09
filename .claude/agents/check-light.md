@@ -20,8 +20,7 @@ What you verify:
 1. **Front-matter and history** — against Versioning & status in
    CLAUDE.md, every rule there (POS.1070), for every versioned
    document and its companion: the placement of the history, and the
-   form of its log as `templates/history.md` gives it (the fields in
-   their order, the kinds, one line per record, `Was` last). Whether
+   form of its log as `templates/history.md` gives it. Whether
    a text belongs in the document or its history is the `history`
    check's, never yours.
 2. **Ledger accuracy** — the ledger shaped as `templates/ledger.md`

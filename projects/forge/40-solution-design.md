@@ -1,8 +1,8 @@
 ---
-version: 0.3
-date: 2026-10-04
+version: 0.7
+date: 2026-10-09
 status: draft
-last_change: 0.3 (2026-10-04): the repository's CONTRIBUTING, a render with three channels for a visitor (SOL.0450).
+last_change: 0.7 (2026-10-09): the documentation agents share a contract and the map has a skeleton (SOL.0460).
 project: forge
 audience: whoever realises the solution, a person or an agent
 ---
@@ -111,11 +111,11 @@ direction, a boundary kept by hand or an order of work.
   with the verdict line that closes a proposition, and a pointer to
   `.claude/skills/walkthrough/SKILL.md` for the full shape when a
   walkthrough or an interview runs, and three lines of conduct, the
-  principal's rules, worded in `scripts/hook-walkthrough.ps1`. The
+  principal's rules, worded in `scripts/hook-walkthrough.py`. The
   hook's command is anchored at the project root:
-  `.claude/settings.json` invokes it in exec form, `pwsh` with
-  `${CLAUDE_PROJECT_DIR}/scripts/hook-walkthrough.ps1` among its
-  `args`. A relative path is resolved against the session's working
+  `.claude/settings.json` invokes it in exec form, `python` with
+  `${CLAUDE_PROJECT_DIR}/scripts/hook-walkthrough.py` as its one
+  argument. A relative path is resolved against the session's working
   directory, not the engine root; the placeholder always names the
   root the session started in, and the exec form hands the path to
   the program without a shell.
@@ -123,7 +123,7 @@ direction, a boundary kept by hand or an order of work.
   against trusting text loaded once; the cost is that a hook is
   context and not enforcement. The gate that would enforce the three
   lines of conduct is open, THR.0400. Where:
-  `.claude/settings.json`, `scripts/hook-walkthrough.ps1`.
+  `.claude/settings.json`, `scripts/hook-walkthrough.py`.
 - **SOL.0040 The walkthrough skill.** The shape of the walkthrough
   and of the elicitation interview lives in
   `.claude/skills/walkthrough/SKILL.md`, read whenever a walkthrough
@@ -227,7 +227,7 @@ direction, a boundary kept by hand or an order of work.
   its template and creates `.claude/settings.local.json` with the
   session model. It closes with the git identity: it offers to write
   the `includeIf` stanzas into the global git configuration file git
-  actually reads (named by `scripts/forge-status.ps1`, the stanza
+  actually reads (named by `scripts/forge-status.py`, the stanza
   paths absolute, since `~` in git's hands and in the shell's may
   differ), each `.gitconfig-<host>` beside that file created with
   its `[user]` when missing, together with the global guard
@@ -240,19 +240,19 @@ direction, a boundary kept by hand or an order of work.
   Realises: POS.1050, POS.0950. Choice: no real alternative
   recorded. Where: `.claude/skills/setup/SKILL.md`,
   `templates/CLAUDE.local.md`, `.claude/settings.local.json`,
-  `scripts/forge-status.ps1`.
+  `scripts/forge-status.py`.
 - **SOL.0160 A project is born or brought in.** `/new-project`
   scaffolds a project by its kind from `templates/`, asks for the
   founding brief and hands it to the procedure of `/forge brief`,
   which creates `00-brief.md`. `/import-project` calls
-  `scripts/forge-clone.ps1`. `/spinoff` creates files only. None of
+  `scripts/forge-clone.py`. `/spinoff` creates files only. None of
   them touches git beyond the clone. `/new-project` validates the
   slug.
   Realises: POS.0110, POS.0610, POS.0940, POS.0960, POS.1060.
   Choice: no real alternative recorded. Where:
   `.claude/skills/new-project/SKILL.md`,
   `.claude/skills/import-project/SKILL.md`,
-  `.claude/skills/spinoff/SKILL.md`, `scripts/forge-clone.ps1`,
+  `.claude/skills/spinoff/SKILL.md`, `scripts/forge-clone.py`,
   `templates/`.
 - **SOL.0170 A new kind of artefact.** `/new-artefact <name>` is a
   skill written in the seven blocks of a definition and guarded like
@@ -327,12 +327,12 @@ direction, a boundary kept by hand or an order of work.
 - **SOL.0220 Sources and their conversion.** Bare, `/ingest` sweeps
   `sources/` and tells a changed file by its modification time
   against the ledger date.
-  It runs `scripts/doc2md.ps1` file by file on every binary the
+  It runs `scripts/doc2md.py` file by file on every binary the
   principal chooses to convert, in bundles as well as for isolated
   files; the output is `sources/<slug>.md`, the source itself.
   Realises: POS.0180, POS.1040. Choice: one script for every
   conversion against ad-hoc parsing by the model. Where:
-  `.claude/skills/ingest/SKILL.md`, `scripts/doc2md.ps1`,
+  `.claude/skills/ingest/SKILL.md`, `scripts/doc2md.py`,
   `templates/ledger.md`.
 - **SOL.0230 The resource indexes.** `/ingest` and `/research` write
   the entries of `00-INDEX.md`, `/new-project` scaffolds the indexes
@@ -452,19 +452,19 @@ direction, a boundary kept by hand or an order of work.
   Realises: POS.0590. Choice: two commands divided by cost; what
   they were chosen against is not recorded. Where:
   `.claude/skills/render/SKILL.md`, `.claude/skills/publish/SKILL.md`.
-- **SOL.0430 The PowerPoint conversion.** `scripts/md2pptx.ps1`
+- **SOL.0430 The PowerPoint conversion.** `scripts/md2pptx.py`
   makes a PowerPoint file from a Markdown deck render, by one of two
-  engines. `-Engine claude`, the default and the engine of
+  engines. `--engine claude`, the default and the engine of
   `/publish`, makes the designed deck through headless Claude Code
   (`claude -p`) with Anthropic's official pptx skill. `/publish`
-  names the recipe by path (`-Recipe`) so that the model reads the
-  Format section there. `-Template <path>` names a `.potx` or
+  names the recipe by path (`--recipe`) so that the model reads the
+  Format section there. `--template <path>` names a `.potx` or
   `.pptx` file by path, typically a document of a library project,
   e.g. `projects/lib-<name>/sources/<name>.potx`; without the
   parameter Claude designs the visual style itself. There is no
   default template and no bare-name lookup. The headless run's model
-  is chosen by `-Model`, default opus; a presentation recipe may
-  recommend one in its Format section. `-Engine pandoc`, the engine
+  is chosen by `--model`, default opus; a presentation recipe may
+  recommend one in its Format section. `--engine pandoc`, the engine
   of `/render`, makes a plain deck for reading, one slide per
   second-level heading. The generated file is tracked in git like
   any render output; where it lands is the script's help.
@@ -475,20 +475,20 @@ direction, a boundary kept by hand or an order of work.
   to redraw as native shapes, visual directions; the cost is an
   expensive conversion, which is why it runs only at `/publish`
   (POS.0590). Present shape 2026-09-27. Where:
-  `scripts/md2pptx.ps1`.
-- **SOL.0440 The Word conversion.** `scripts/md2docx.ps1` makes a
-  Word file from a Markdown render, by one of two engines. `-Engine
+  `scripts/md2pptx.py`.
+- **SOL.0440 The Word conversion.** `scripts/md2docx.py` makes a
+  Word file from a Markdown render, by one of two engines. `--engine
   pandoc`, the default and the engine of `/render`, is a
   deterministic conversion: the plain file needs no model. Styles
-  come from a reference document named by path (`-Reference`, a
+  come from a reference document named by path (`--reference`, a
   `.docx` or a Word template `.dotx`/`.dotm`, typically a document
   of a library project); without it pandoc's built-in styles apply,
   no default reference and no bare-name lookup. The page is A4 by
   default. Mermaid diagrams land in the document as blocks of code
-  (TBC.0010). `-Engine claude`, the engine of `/publish`, makes the
+  (TBC.0010). `--engine claude`, the engine of `/publish`, makes the
   designed document through headless Claude Code and the official
   docx skill, the reference document as the template it starts from,
-  the recipe named by path (`-Recipe`), the model chosen by `-Model`,
+  the recipe named by path (`--recipe`), the model chosen by `--model`,
   default opus. The machine carries neither the library the docx
   skill expects nor the tools that show the model its pages
   (LibreOffice, Poppler), and the model is told to install nothing:
@@ -501,7 +501,7 @@ direction, a boundary kept by hand or an order of work.
   Realises: POS.0590, POS.0710, POS.0970. Choice: Word is the target
   and PDF is not: pandoc writes Word without a further engine, and a
   PDF is the recipient's one click from Word. Present shape
-  2026-09-27. Where: `scripts/md2docx.ps1`.
+  2026-09-27. Where: `scripts/md2docx.py`.
 - **SOL.0450 The repository's CONTRIBUTING.** `CONTRIBUTING.md` in
   the repository root is a render of
   `projects/forge/recipes/contributing.md`, made on the principal's
@@ -520,10 +520,55 @@ direction, a boundary kept by hand or an order of work.
   a discussion is a smaller step for one who only wants to say
   something; the cost is two places to watch. Where:
   `projects/forge/recipes/contributing.md`, `CONTRIBUTING.md`.
+- **SOL.0460 The documentation.** `/document [slug]`
+  (`.claude/skills/document/SKILL.md`) runs two agents and three scripts,
+  asks nothing. The planner `docs-planner` (session model) reads the
+  target on disk and writes the map `docs-map.md` beside the ledger of
+  the owning project, kind `map`: one entry per page under its path,
+  with title, kind, reader, what the page says, its exact inputs as
+  whole files, the pages it links to with a title and a sentence each,
+  what it must not say, `made: mirrored | derived` with the evidence for
+  a derived page, and the state new / regenerate / keep / remove. The
+  writer `docs-writer` makes one page from its entry alone, handed to
+  it as a task file in the engine's `tmp/` that it reads first, in the fixed
+  page shape of its definition, on a faster model for a mirrored page
+  and the session model for a derived one, chosen by the entry's `made`.
+  The script `scripts/docs-index.py` derives the index `docs/README.md`
+  from the map with the version of the owning project's intent; a run's
+  state is computed from the content hashes of each entry's inputs and
+  the pages are scanned for broken links, long dashes and instance facts
+  before they are kept. Pages, kind `page`, live in `docs/` of the
+  engine root or of the project, the map never there. The ledger's
+  Renders table carries the index with the map as its input. The pinned
+  facts the planner reads as an owner are the section "Pinned facts (not
+  rendered)" of the project's readme recipe.
+  Realises: POS.1450, POS.1080, POS.0930. Choice: a command of its own
+  against `/render`: a page has no recipe to iterate, the map is
+  generated. The index named `README.md` against `index.md`: GitHub
+  shows a directory's README as its front page. The map beside the
+  ledger against `docs/`: a visitor of the documentation would not
+  understand it. The pinned facts in the recipe against a file of their
+  own: a file would need a kind of its own, and the recipe is read by
+  both the README and the planner today; the cost is that a render's
+  tool carries facts of the project. Built 2026-10-09 whole: the
+  skill, the three scripts and the two agents; the first run of
+  `/document` the same day regenerated 83 pages and the index, three
+  pages once more after the check named a failure in each. The two
+  agents share their conduct through the contract skill
+  `docs-contract`, as the reviewers do; the map's shape is the
+  skeleton `templates/docs-map.md`. Where:
+  `.claude/skills/document/SKILL.md`,
+  `.claude/skills/docs-contract/SKILL.md`, `templates/docs-map.md`,
+  `.claude/agents/docs-planner.md`,
+  `.claude/agents/docs-writer.md`, `scripts/docs-state.py`,
+  `scripts/docs-index.py`, `scripts/docs-check.py`,
+  `scripts/docs_map.py`, `projects/forge/docs-map.md`, `docs/`.
 
 ### Persistence
 - **SOL.0500 The repositories.** The engine is one git repository,
-  `forge-of-thought`, full name Forge of Thought in documents: the
+  `forge-of-thought`, full name Forge of Thought in documents; its
+  public home is `https://github.com/pche-broken-artist/forge-of-thought`,
+  the address a clone and a project's README point to. The
   universal core in the root (`CLAUDE.md` for the agent, `README.md`
   for humans, `templates/`, `scripts/`, `.claude/`) together with
   `projects/forge`, the system's own project. The engine is a clone;
@@ -532,25 +577,23 @@ direction, a boundary kept by hand or an order of work.
   the pattern must be `projects/*`, not `projects/`, or the
   re-include fails silently). A per-project `CLAUDE.md` is polish
   only where genuinely needed. How the scripts recognise a project
-  is in the help headers of `scripts/forge-status.ps1`,
-  `forge-save.ps1` and `forge-pull.ps1`.
+  is in `scripts/forge_repos.py`, which the git scripts share.
   Realises: POS.0760, POS.0940, POS.0990. Choice: nested
   repositories under a gitignored directory against submodules,
   subtree, worktrees, a template repository and a plugin as the only
   shape (REJ.0150). Decided 2026-08-29. Where: `.gitignore`,
-  `projects/`, `LICENSE`, `scripts/forge-status.ps1`,
-  `scripts/forge-save.ps1`, `scripts/forge-pull.ps1`.
+  `projects/`, `LICENSE`, `scripts/forge_repos.py`.
 - **SOL.0510 The git scripts.** The scripts that serve the engine
   and every project that is a repository (`projects/<slug>/.git`),
-  each described by its own help header: `forge-save.ps1`,
-  `forge-pull.ps1`, `forge-status.ps1`, `forge-clone.ps1`, which
-  brings an existing project in, and `forge-branch.ps1`, which
+  each described by its own help header: `forge-save.py`,
+  `forge-pull.py`, `forge-status.py`, `forge-clone.py`, which
+  brings an existing project in, and `forge-branch.py`, which
   creates a branch or switches to one, `main` included, with the
   slug alone reports the branch and lists the branches, and nothing
   else.
   Realises: POS.0550, POS.1060, POS.1110, POS.0940. Choice: scripts
   as the only door against git typed by the model. Where:
-  `scripts/forge-*.ps1`.
+  `scripts/forge-*.py`, `scripts/forge_repos.py`.
 - **SOL.0520 The wall.** Protection relies on Claude Code's
   permission system, not an OS-level sandbox: commands and file
   operations run under permission prompts and allowlists, shared
@@ -582,7 +625,7 @@ direction, a boundary kept by hand or an order of work.
   Choice: two commands against one, alternatives REJ.0160 and
   REJ.0170; the cost is a README stale between releases, visibly.
   Where: `.claude/skills/save/SKILL.md`,
-  `.claude/skills/release/SKILL.md`, `scripts/forge-save.ps1`.
+  `.claude/skills/release/SKILL.md`, `scripts/forge-save.py`.
 - **SOL.0550 The commit identity.** No roster file and no local
   `git config user.*` at a project's creation or import. The
   identity is resolved per git host by the user's own `includeIf`
@@ -601,7 +644,7 @@ direction, a boundary kept by hand or an order of work.
   because a host is only a correlate of the identity and fails where
   one host serves two roles. Where: `.claude/skills/setup/SKILL.md`;
   outside the engine, the user's global git configuration file,
-  named by `scripts/forge-status.ps1`.
+  named by `scripts/forge-status.py`.
 
 ## Across the parts
 - **SOL.0600 One model.** The reviewer agents declare `model:
@@ -609,8 +652,8 @@ direction, a boundary kept by hand or an order of work.
   `.claude/settings.local.json`, gitignored, which `/setup` creates.
   A command's `effort:` remains the lever for routine turns should
   one ever need it. The headless conversions behind `/publish`,
-  `scripts/md2pptx.ps1` and `scripts/md2docx.ps1` with `-Engine
-  claude`, carry the default of their own in `-Model`. The model a
+  `scripts/md2pptx.py` and `scripts/md2docx.py` with `--engine
+  claude`, carry the default of their own in `--model`. The model a
   recipe may recommend in its Format section is the headless
   conversion's.
   Realises: POS.0930, POS.0530, POS.1050. Choice: an explicit
@@ -627,17 +670,34 @@ direction, a boundary kept by hand or an order of work.
   Realises: POS.1070. Choice: a skeleton against a second
   description. Where: `templates/`,
   `.claude/agents/check-single-source-of-truth.md`.
-- **SOL.0620 The scripts and their platform.** The scripts are
-  PowerShell 7, which is itself cross-platform (`pwsh`, one install
-  on a non-Windows machine), and they use nothing Windows-only:
-  paths composed with `Join-Path` or forward slashes, no `cmd`,
-  registry or Windows-only cmdlets, `$IsWindows` only where the
-  platform genuinely differs, external tools (`git`, `markitdown`,
-  `pandoc`, `claude`) resolved from PATH, and usage examples in the
-  scripts' help free of Windows-specific paths and invocations. The
-  rewrite of the PowerShell scripts in Python is open, THR.0150.
-  Realises: POS.0830. Choice: PowerShell 7 at the start, the reason
-  not recorded in the intent. Portability is not verified: the set
+- **SOL.0620 The scripts and their platform.** The scripts are Python
+  3.8 or newer, run as `python scripts/<name>.py`, and use nothing
+  Windows-only: paths through `pathlib`, processes through `subprocess`
+  with argument lists and never a shell, external tools (`git`,
+  `markitdown`, `pandoc`, `claude`) resolved from PATH, colour only on a
+  terminal, usage examples in the help free of Windows-specific paths.
+  Each script carries its help in its module docstring (synopsis, what
+  it does, what it needs, examples). What several scripts share lives in
+  one module beside them, imported by path: `forge_repos.py` (the engine
+  root, the git check, the list of repositories a bare or a slug form
+  visits, running git) for the five git scripts, `forge_tools.py` (a
+  tool on PATH, resolving paths, the headless Claude Code run) for the
+  three conversions, `docs_map.py` (the reader of the documentation map)
+  for the three documentation scripts. The per-prompt hook is a Python
+  script too, started by `python` from `.claude/settings.json`.
+  Rewritten from PowerShell 7 on 2026-10-09, all nine at once, and
+  tested that day against a fixture: a local bare remote, an engine
+  cloned from it, a project with a remote and one without, 56 cases over
+  every script and its refusals; the `claude` engine of the conversions
+  was not run.
+  Realises: POS.0830. Choice: Python against PowerShell 7, the
+  principal's decision of 2026-10-02 on the feedback of the forge's
+  users; `python` as the one command name against `python3`, since
+  Windows has only the first and a Unix system gives it by an alias or a
+  package, and the hook can name one. Options in the Python spelling
+  (`--tag`, `--engine`, `--recipe`, `--reference`, `--template`,
+  `--page-size`, `-o`) against the PowerShell ones, since argparse is
+  the convention of the language. Portability is not verified: the set
   has not been run on Linux. Where: `scripts/`.
 
 ## Open

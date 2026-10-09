@@ -17,8 +17,8 @@
         "hooks": [
           {
             "type": "command",
-            "command": "pwsh",
-            "args": ["-NoProfile", "-File", "${CLAUDE_PROJECT_DIR}/scripts/hook-walkthrough.ps1"]
+            "command": "python",
+            "args": ["${CLAUDE_PROJECT_DIR}/scripts/hook-walkthrough.py"]
           }
         ]
       }

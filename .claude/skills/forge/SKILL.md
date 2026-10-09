@@ -5,9 +5,8 @@ argument-hint: "[target-state] [project-slug]"
 
 Role: dispatcher for work on the document chain. The chain is a star,
 not a fixed line: each target state declares its own inputs in its
-definition file. Definitions live in `.claude/skills/forge/states/<state>.md`
-— one file per target state, named after the artefact it produces.
-Adding a layer means adding a file; this dispatcher never changes.
+definition file; where the definitions live and how the chain grows
+is CLAUDE.md, Document chain's. This dispatcher never changes.
 
 **Bare `/forge` — report the map.**
 1. Infer the current project from context ($0 may be a slug; if
@@ -33,8 +32,10 @@ Adding a layer means adding a file; this dispatcher never changes.
      Published table);
    - which libraries the project needs (the ledger's Dependencies
      table, POS.1020) and whether each is cloned alongside;
-   - what is waiting on the principal (from the ledger).
-4. Recommend the natural next step — a recommendation, never a
+   - what is waiting on the principal (from the ledger): the few live
+     matters named in words, the ID in brackets as an address, the
+     rest as a count (CLAUDE.md, Working methods, Plain speech).
+4. Recommend the natural next step in words — a recommendation, never a
    gate — and, where the map lists more than one matter waiting on
    the principal, offer a walkthrough of them (CLAUDE.md, Working
    methods).

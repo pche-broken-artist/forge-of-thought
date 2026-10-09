@@ -1,6 +1,6 @@
 ---
 description: Release one repository from main — its checks with walkthrough, README and release notes, then /save with the release message and the tag at an approved major
-argument-hint: '[project-slug] [-m "message"] [-Tag name]'
+argument-hint: '[project-slug] [-m "message"] [--tag name]'
 disable-model-invocation: true
 ---
 
@@ -13,11 +13,11 @@ repository is named by its slug, `forge` meaning the engine; without
 a slug, ask which repository — a release is always one repository,
 never a sweep.
 
-1. Determine the state from `./scripts/forge-status.ps1` (the scripts
+1. Determine the state from `python scripts/forge-status.py` (the scripts
    are the only door to git — CLAUDE.md, Persistence). A release runs
    on `main` only: on any other
    branch, stop and report the branch the repository is on and how to
-   get back (`./scripts/forge-branch.ps1 <slug> main`, after saving).
+   get back (`python scripts/forge-branch.py <slug> main`, after saving).
    Merging a branch into `main` is git's business, by hand or by
    merge request, never this command's (POS.1110).
 2. Run the checks over the sources through the `/check` procedure
@@ -55,7 +55,16 @@ never a sweep.
    and released without the render. Other renders are never
    regenerated here; their staleness is the principal's business,
    shown by the `/forge` map (POS.0570).
-5. Then run `/save` for this repository through its own definition
+5. Report the age of the documentation: the `version` in the
+   front-matter of the repository's `docs/README.md` against the
+   intent's version (a repository without `docs/` has none, and that
+   is no finding), and offer `/document` in one sentence. On the
+   principal's word run it through its own definition
+   (`.claude/skills/document/SKILL.md`) before the save, so that the
+   release carries current pages; on his no, or silence, run nothing.
+   A release never regenerates the documentation on its own
+   (POS.1450).
+6. Then run `/save` for this repository through its own definition
    (`.claude/skills/save/SKILL.md`), with two things decided here: the
    commit message is `release <intent version>: <one line>` — the
    line summarising the rounds since the last release, from the

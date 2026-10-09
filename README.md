@@ -2,7 +2,7 @@
 project: forge
 render: readme
 generated: 2026-10-09
-recipe: recipes/readme.md v0.57
+recipe: recipes/readme.md v0.58
 inputs:
   - CLAUDE.md
   - projects/forge/10-intent.md v4.59
@@ -12,36 +12,37 @@ inputs:
 
 # Forge of Thought 4.59
 
-*A workshop where thought is tempered and shaped.* · [Release notes](RELEASE-NOTES.md)
+*A workshop where thought is tempered and shaped.* · [Documentation](docs/README.md) · [Release notes](RELEASE-NOTES.md)
 
-Forge of Thought is an **AI cognitive extension** of a thinking human,
-the **principal**: the one whose thinking is being forged, who
-supplies the ideas, the answers and the decisions, and who has the
-final word on all content. It takes a raw, half-formed idea (a
-process redesign, a platform initiative, an organisational change, a
-D&D campaign) and tempers it into a precise, self-contained handover
-for whoever delivers it: a team, a colleague, your future self. It
-rests on one principle, **the machine carries every part of the work
-that is not deciding**, in three forms.
+Forge of Thought is an **AI cognitive extension** of a thinking
+human, the **principal**: the person whose thinking is being forged,
+who supplies the ideas, the answers and the decisions, and who has
+the final word on every piece of content. It takes a raw, half-formed
+idea, a process redesign, a platform initiative, an organisational
+change, a D&D campaign, and tempers it into a precise, self-contained
+handover for whoever delivers it: a team, a colleague, your future
+self. It rests on one principle, **the machine carries every part of
+the work that is not deciding**, in three forms.
 
 - **It thinks with you.** It interviews and probes, criticises,
-  challenges and inspires; it extracts what you have not yet
+  challenges and inspires; it extracts what the principal has not yet
   articulated and lays out options with their trade-offs. It
   proposes; you decide.
 - **It keeps the work consistent.** Nothing wanders off in forgotten
   chats: the thinking lives in versioned, templated artefacts, with
   decisions, state and history keeping themselves in order and
   consistency guarded across every output.
-- **It carries the tedious work.** Audience-facing outputs, a pitch, a
-  deck, this README, the whole documentation, are **renders**:
+- **It carries the tedious work.** Audience-facing outputs, a pitch,
+  a deck, this README, the whole documentation, are **renders**:
   generated from the artefacts, regenerated whenever the thinking
   moves, never written by hand twice.
 
-Technically, Forge of Thought is a git repository: slash commands and
-isolated agents (challenger personas and critic lenses) for Claude
-Code, templates, and the conventions binding them. Today the chain
+Technically the forge is a git repository: slash commands and
+isolated agents, challenger personas and critic lenses, for Claude
+Code, templates, and the conventions binding them. The chain today
 runs from a brief through the intent to an assignment and a solution
-design; many projects end at the intent.
+design; it ends where the project needs it to, and many projects end
+at the intent.
 
 Short on time? Two one-page notes say it briefly:
 [for a CTO](projects/forge/renders/cto-pitch.md) and
@@ -70,27 +71,29 @@ modes it exists to remove:
   layers your project needs, an assignment to hand over and a
   solution design among them
   ([the document chain](docs/about/the-document-chain.md)).
-- An elicitation interview that forges the intent
+- An elicitation interview that forges the intent: one question per
+  message, drawing out what you have not yet articulated
   ([elicitation](docs/about/elicitation.md)).
-- Blind adversarial reviewers: critics of the documents, challengers
-  of the thinking, checks of the conventions, every verdict recorded
-  ([isolated reviewers](docs/about/isolated-reviewers.md)).
+- Blind adversarial reviewers, critics of the documents, challengers
+  of the thinking, checks of the conventions, each seeing the
+  project's documents only and never the conversation; every verdict
+  recorded ([isolated reviewers](docs/about/isolated-reviewers.md)).
 - Audience-specific renders generated from **recipes**, including an
   actual PowerPoint file through your own template
   ([renders and recipes](docs/about/renders-and-recipes.md)).
 - External sources registered immutably and used only as the
   principal directs
   ([sources and research](docs/about/sources-and-research.md)).
-- Everything in files and git; nothing depends on a chat's memory
+- Everything in files and git: nothing depends on a chat's memory
   ([persistence in git](docs/about/persistence-in-git.md)).
 
 ## 3. Quickstart
 
-**First, once per machine**
+First, once per machine:
 
 ```text
 git clone <this repository>   # you are looking at it
-<install Claude Code>         # what to install and how: docs/start/install.md
+# install Claude Code first   # what to install and how: docs/start/install.md
 claude                        # always from the engine root
 /setup                        # first run only; what it asks: docs/start/setup.md
 ```
@@ -108,12 +111,11 @@ claude                        # always from the engine root
 ```text
 /import-project <project url>   # clones into projects/
 /forge <project-slug>           # the slug is the repository's name; select the
-                                # project before any work - the forge cannot
-                                # guess it
+                                # project before any work - the forge cannot guess it
 ```
 
 Each project lives inside `projects/<slug>/` as a git repository of
-its own, which the engine does not track; that is why you name it
+its own, which the engine does not track: that is why you name it
 first. The first sitting from nothing to a saved intent is
 [docs/start/first-result.md](docs/start/first-result.md).
 
@@ -145,16 +147,16 @@ flowchart LR
 
 **Blue = chain artefacts (light = not built yet), green = renders; dashed arrows = growth that does not exist yet.**
 
-- **Brief** (`00-brief.md`): the principal's idea put together, found
-  with Claude or handed over, approved when done
+- **Brief**: the principal's idea put together, found with Claude or
+  handed over, approved when done
   ([about the brief](docs/about/the-brief.md)).
-- **Intent** (`10-intent.md`): the briefs chiselled into what the
-  principal holds ([about the intent](docs/about/the-intent.md)).
-- **Assignment** (`20-assignment.md`): the intent's in-scope
-  substance carried to the recipients in a joint pass
+- **Intent**: the briefs chiselled into what the principal holds
+  ([about the intent](docs/about/the-intent.md)).
+- **Assignment**: the intent's in-scope substance carried to the
+  recipients in a joint pass
   ([about the assignment](docs/about/the-assignment.md)).
-- **Solution design** (`40-solution-design.md`): how the things
-  wanted are realised, part by part, with the choices they rest on
+- **Solution design**: how the things wanted are realised, part by
+  part, with the choices they rest on
   ([about the solution design](docs/about/the-solution-design.md)).
 
 Below the intent a project takes the layers it needs, none a
@@ -167,11 +169,11 @@ condition of another, and many end at the intent.
 The documentation of the forge is in [`docs/`](docs/README.md), pages
 of one topic each, generated from the engine like this README.
 
-- **The user** begins in [`docs/start/`](docs/start/), then
+- **The user**: begin in [`docs/start/`](docs/start/), then
   `docs/use/` for every job.
-- **The extender** begins in [`docs/extend/`](docs/extend/), then
+- **The extender**: begin in [`docs/extend/`](docs/extend/), then
   `docs/reference/` for the shapes.
-- **The evaluator** begins in [`docs/about/`](docs/about/), the
+- **The evaluator**: begin in [`docs/about/`](docs/about/), the
   concept pages; nothing is made for him alone.
 
 The documentation was generated on 2026-10-09 for Forge of Thought at
@@ -188,13 +190,14 @@ Feedback, ideas and changes are welcome: see
 
 ## 7. About this README
 
-This file is a render of the project `projects/forge/`, where the
-changes of the system are recorded. It is never edited by hand:
-`/render readme` regenerates it whenever the process changes, and so
-does every `/release` of the engine. Fixes go into the recipe or the
-inputs, never here. The documentation in `docs/` is generated the
-same way, from the engine, and its index says when and for which
-version. The YAML front-matter provenance at the top of this file is
-kept by design.
+This file is a render of `projects/forge`: never edited by hand,
+regenerated by `/render readme` whenever the process changes and by
+every `/release` of the engine. Fixes go into the recipe
+(`projects/forge/recipes/readme.md`) or into its inputs, never into
+this file. The documentation in `docs/` is generated the same way,
+from the engine, and its index says when and for which version. The
+YAML front-matter at the top is the render's provenance and is kept
+by design. Changes to the system itself are recorded in
+`projects/forge/`.
 
 _Last updated: 2026-10-09_

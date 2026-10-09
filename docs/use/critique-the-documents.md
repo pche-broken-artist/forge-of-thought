@@ -1,6 +1,7 @@
 ---
 generated: 2026-10-09
 made: mirrored
+inputs-hash: 376c3dfb0b76bf0d
 inputs:
   - .claude/skills/critique/SKILL.md
   - .claude/skills/critic-contract/SKILL.md
@@ -9,95 +10,95 @@ inputs:
 
 # Critique the documents
 
-This page is for the person who wants a project's documents read for
-quality by an independent reviewer. It says how to run `/critique`,
-what happens during the run and what you see when it ends.
+This page is for the person who wants an independent reader to judge
+how well a project's documents are written. It shows how to run
+`/critique`, what happens during the run and what you are given at
+the end.
 
-## The command
+## What a critique is
+
+A critique judges the quality of your documents as documents, read
+through one lens. It never judges the substance of your thinking:
+whether the objective is the real problem or the plan rests on sound
+assumptions is the work of the challenger, not the critic.
+
+The critic runs as one isolated agent. It sees the project's
+documents only and never the conversation, so it cannot be told what
+you meant: it judges what the documents say. Its findings are
+advice. You decide, and rejecting a finding is a legitimate outcome.
+
+## See the lenses
+
+Run the command bare:
 
 ```
-/critique [lens] [artefact] [slug]
+/critique
 ```
 
-All three arguments are optional. The command only chooses the lens,
-passes the project to the reviewer and checks the bookkeeping
-afterwards. What each lens looks for is not set by the command.
-
-## See the lenses first
-
-Run `/critique` with no arguments. It lists the available lenses and
-recommends the one that fits the project's state, going by the fit
-each lens states about itself. The recommendation is advice, not a
-gate: you choose.
+You get the roster of lenses, one per critic agent, each with the
+fit it states for itself, and a recommendation of which lens suits
+the project's state. The recommendation is never a gate. The lenses
+of today and what each goes after are on the page
+[Critic lenses](../reference/critic-lenses.md).
 
 ## Run a lens
 
-Run `/critique <lens>`. The project is taken from context; if that is
-ambiguous, you are asked which one.
+```
+/critique <lens> [artefact] [slug]
+```
 
-One isolated reviewer reads the project's documents and nothing else.
-It never sees your working conversation, and it is not told what the
-author meant. It judges only what the documents say. It judges their
-quality as documents, read through the lens you chose. It never judges
-the substance of your thinking: whether the objective is the right one
-or the plan is wise is a different review, the challenge. If a
-document is sound but the thinking behind it is wrong, the critic says
-nothing.
+- `<lens>` is the lens you chose from the roster.
+- `[artefact]` is optional. It narrows the run to one artefact,
+  named as `/forge` names it: `brief`, `brief-<name>`, `intent`,
+  `assignment` or a later layer. How a lens narrows its work is the
+  lens's own. Without a target the lens reads the whole chain.
+- `[slug]` is the project. If it is not given, it is taken from
+  context, and if that is ambiguous you are asked.
 
-The reviewer writes a dated report in the project's `reviews/`
-directory. The report is immutable once written. It holds the
-findings, each numbered `FND.NNNN`, and the project's ledger gets a
-row for each new finding. Findings have a severity and a category;
-the reference and the explanation page below say what they are.
+Every run is your word. No lens runs at a save. What a release
+offers is the release's own matter.
 
-### Narrow the run to one artefact
+## What the critic does
 
-Add a target to run the lens on one artefact only, named as `/forge`
-names it: `brief`, `brief-<name>`, `intent`, `assignment`, or a later
-layer the project has. Without a target the lens reads the whole
-chain. How a target narrows a lens is stated by the lens itself.
+Before it looks for anything new, the critic re-tests every earlier
+finding of its own lens that was marked resolved, and reports each
+as verified or reopened. It respects findings you rejected and does
+not raise them again unless the document changed in a way that
+materially alters the situation. It prefers a few sharp findings to
+many trivial ones.
 
-### Pick the project
-
-Add the project's slug as the last argument, for example
-`/critique <lens> intent <slug>`.
+It then writes a dated report in the project's `reviews/` directory.
+The report is immutable: it is never edited afterwards, and
+corrections happen downstream. The findings, numbered FND, are also
+entered in the project's ledger. The report's shape and the
+vocabulary of its findings are described in the pages on the
+critic.
 
 ## What you see afterwards
 
-When the reviewer returns, the command first checks that the review
-file exists and that the ledger is updated, and mends the ledger
-bookkeeping if needed. It never alters the findings. Then it tells you,
-in your conversation language, the delta against the previous runs of
-that lens:
+When the critic returns, the command checks that the review file
+exists and that the ledger is up to date, and mends only the ledger
+bookkeeping, never the findings. Then it tells you, in the
+conversation:
 
-- new findings, with their severity;
-- findings that were marked resolved and have now been verified as
-  resolved;
-- findings still open;
-- findings that have become obsolete;
+- the new findings, with their severity;
+- the findings verified resolved;
+- the findings still open;
+- the findings that became obsolete;
 - what awaits your verdict.
 
-For the `essence` lens, the distillations come first, because the
-findings rest on them.
+Some lenses first show the distillations their findings rest on.
 
-It ends with an offer to settle the open findings in a walkthrough,
-one finding at a time. If you accept the offer, the walkthrough runs
-as described on the walkthrough page. If you decline it, the findings
-wait. When you give the verdict `accept` on a finding, the artefact
-concerned is iterated through `/forge` and the finding is marked
-`resolved`. The other verdicts are the walkthrough's.
-
-## When a lens runs
-
-A critic is never run on Claude's own judgement; every run is your
-word. A save runs no lens. What a release offers is the release
-command's to say.
+The command ends by offering a walkthrough of the open findings. In
+a walkthrough you settle them one at a time; see
+[Walk through a list](walk-through-a-list.md). Choosing `accept` on
+a finding means an iteration of the artefact concerned through
+`/forge`, after which the finding is marked resolved. The other
+verdicts are the walkthrough's. If you decline the walkthrough, the
+findings simply wait.
 
 ## See also
 
-- [Critic lenses](../reference/critic-lenses.md): the lenses of
-  today and what each goes after.
-- [Walk through a list](walk-through-a-list.md): settling the
-  findings one by one.
-- [About the critic](../about/the-critic.md): what the critic judges
-  and why it is blind.
+- [Critic lenses](../reference/critic-lenses.md): the lenses of today and what each goes after.
+- [Walk through a list](walk-through-a-list.md): settling the findings one by one.
+- [About the critic](../about/the-critic.md): what the critic judges and why it is blind.

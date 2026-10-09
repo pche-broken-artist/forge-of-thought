@@ -1,6 +1,7 @@
 ---
 generated: 2026-10-09
 made: mirrored
+inputs-hash: 132800c3993cec04
 inputs:
   - CLAUDE.md
   - .claude/skills/setup/SKILL.md
@@ -11,6 +12,7 @@ inputs:
   - .claude/skills/ingest/SKILL.md
   - .claude/skills/render/SKILL.md
   - .claude/skills/publish/SKILL.md
+  - .claude/skills/document/SKILL.md
   - .claude/skills/recipe/SKILL.md
   - .claude/skills/critique/SKILL.md
   - .claude/skills/challenge/SKILL.md
@@ -26,67 +28,192 @@ inputs:
 
 # Commands
 
-This page lists every command of the forge, in the order of the
-Commands table of `CLAUDE.md`: its signature and purpose, then what its
-skill says of itself. It is for the user, the extender and the
-evaluator who want the whole set at a glance.
+This page lists every command of the forge, in the order the Commands
+table of `CLAUDE.md` gives them, for the person who uses the forge, the
+one who extends it and the one who judges it. Each command has its
+signature and purpose from that table, then the `description` and
+`argument-hint` of its skill, and whether it is guarded against being
+started on Claude's own judgement.
 
-"Guarded" is the skill's `disable-model-invocation`: yes means the
-command is started only by the principal and never on Claude's own
-judgement; no means the skill does not set it.
+In the signatures, `<x>` is an argument that is required and `[x]` one
+that is optional. What a command does in full is its skill's, in
+`.claude/skills/<command>/SKILL.md`.
+
+## Guarded commands
+
+A command marked "guarded" carries `disable-model-invocation` in its
+skill: it runs only when the person types it. A command marked "open"
+does not carry it.
 
 ## The commands
 
-| Command | Purpose |
-|---|---|
-| `/setup` | first run after cloning the engine: prepare the instance |
-| `/new-project <slug>` | scaffold a project by kind: a thought project or a library |
-| `/new-artefact <name>` | add a new kind of artefact to the forge |
-| `/import-project <git-url>` | bring an existing project into `projects/` |
-| `/forge [slug]` | the state map of a project |
-| `/forge <state> [slug]` | iterate the target artefact through its definition |
-| `/ingest [file] [slug]` | store, register and index external input in sources/; bare = sweep sources/ |
-| `/render <recipe> [slug]` | regenerate a render from its recipe |
-| `/publish <recipe> [slug]` | make the designed file from a render, through a model |
-| `/recipe [genre] [slug]` | compose or iterate a render recipe by genre; bare = the genre roster |
-| `/critique [lens] [artefact] [slug]` | run a critic lens on the quality of the documents; bare = the lens roster |
-| `/challenge [persona] [artefact] [slug]` | run a challenger persona against the substance; bare = the persona roster |
-| `/research <topic> [slug]` | best-practices research into research/, indexed |
-| `/ledger [slug]` | state report from the ledger |
-| `/check [check] [slug]` | run a check on a project or on the engine; bare = the check roster |
-| `/save [slug] [-m "message"] [-Tag name]` | save one repository, or every one with changes |
-| `/release [slug] [-m "message"] [-Tag name]` | release one repository from `main` |
-| `/spinoff <project> <group> <slug>` | split a group into its own project |
-| `/man [command \| method]` | the forge's manual, read from its own definitions |
-| `/manual …` | alias of `/man` |
+### /setup
 
-## What each skill says of itself
+- Signature: `/setup`
+- Purpose: first run after cloning the engine: prepare the instance
+- Description: First run after cloning the engine - create and fill CLAUDE.local.md by interview, set the session model to the forge's default, offer the git identity per host and the global guard in ~/.gitconfig; never overwrites, runs no git operation
+- Argument hint: none
+- Guarded: yes
 
-Each entry gives the skill's `description`, its `argument-hint` and
-whether the command is guarded. `/forge` appears once, as one skill
-behind two rows of the table.
+### /new-project
 
-| Command | Description | Argument hint | Guarded |
-|---|---|---|---|
-| `/setup` | First run after cloning the engine - create and fill CLAUDE.local.md by interview, set the session model (Fable), offer the git identity per host and the global guard in ~/.gitconfig; never overwrites, runs no git operation | none | yes |
-| `/new-project` | Scaffold a new project from templates - a thought project (the chain) or a library (material only); files only, never git | `<slug>` | yes |
-| `/new-artefact` | Add a new kind of artefact to the forge - its position in the forge intent, its definition and template, its prefixes, its reviewers | `<name>` | yes |
-| `/import-project` | Bring an existing project into projects/ - clone through scripts/forge-clone.ps1, which reports the commit identity git resolves | `<git-url>` | yes |
-| `/forge` | Work the document chain - bare = state map, with a target = iterate that artefact | `[target-state] [project-slug]` | no |
-| `/ingest` | Register external input (a file, or text pasted into the conversation) in sources/ - store, catalogue, ask what it is for, nothing more | `[file-or-path] [project-slug]` | yes |
-| `/render` | Regenerate a render from its recipe in recipes/ | `<recipe> [project-slug]` | yes |
-| `/publish` | Make the designed .pptx or .docx from the render of a recipe, through a model - started by the principal only | `<recipe> [project-slug]` | yes |
-| `/recipe` | Compose a render recipe by genre - bare = genre roster, with a genre = guided composition | `[genre-or-recipe] [project-slug]` | no |
-| `/critique` | Run a critic lens on the quality of a project's documents - bare = lens roster | `[lens] [artefact] [project-slug]` | no |
-| `/challenge` | Run a challenger persona against the substance of any chain artefact - bare = persona roster | `[persona] [artefact] [project-slug]` | no |
-| `/research` | Research current best practices on a topic; store durable notes | `<topic> [project-slug]` | no |
-| `/ledger` | Report project state from the ledger | `[project-slug]` | no |
-| `/check` | Run a check on the conformance of a project or the engine with the conventions - bare = check roster | `[check] [project-slug]` | no |
-| `/save` | Save the forge to git - the light check, then commit and push; no renders | `[project-slug] [-m "message"] [-Tag name]` | yes |
-| `/release` | Release one repository from main - its checks with walkthrough, README and release notes, then /save with the release message and the tag at an approved major | `[project-slug] [-m "message"] [-Tag name]` | yes |
-| `/spinoff` | Spin a requirement group off into its own project (principal's explicit decision only) | `<source-project> <group-name> <new-slug>` | yes |
-| `/man` | The forge's manual, read from its own definitions - bare = the commands and the working methods, with a command = its purpose, arguments and roster, with a method = its paragraph and skill | `[command \| method]` | no |
-| `/manual` | Alias of /man - the forge's manual, read from its own definitions | `[command \| method]` | no |
+- Signature: `/new-project <slug>`
+- Purpose: scaffold a project by kind: a thought project or a library
+- Description: Scaffold a new project from templates - a thought project (the chain) or a library (material only); files only, never git
+- Argument hint: `"<slug>"`
+- Guarded: yes
+
+### /new-artefact
+
+- Signature: `/new-artefact <name>`
+- Purpose: add a new kind of artefact to the forge
+- Description: Add a new kind of artefact to the forge - its position in the forge intent, its definition and template, its prefixes, its reviewers
+- Argument hint: `"<name>"`
+- Guarded: yes
+
+### /import-project
+
+- Signature: `/import-project <git-url>`
+- Purpose: bring an existing project into `projects/`
+- Description: Bring an existing project into projects/ - clone through scripts/forge-clone.py, which reports the commit identity git resolves
+- Argument hint: `"<git-url>"`
+- Guarded: yes
+
+### /forge (state map)
+
+- Signature: `/forge [slug]`
+- Purpose: the state map of a project
+- Description: Work the document chain - bare = state map, with a target = iterate that artefact
+- Argument hint: `"[target-state] [project-slug]"`
+- Guarded: open
+
+### /forge (iterate)
+
+- Signature: `/forge <state> [slug]`
+- Purpose: iterate the target artefact through its definition
+- Description: the same skill as above
+- Argument hint: the same as above
+- Guarded: open
+
+### /ingest
+
+- Signature: `/ingest [file] [slug]`
+- Purpose: store, register and index external input in sources/; bare = sweep sources/
+- Description: Register external input (a file, or text pasted into the conversation) in sources/ - store, catalogue, ask what it is for, nothing more
+- Argument hint: `"[file-or-path] [project-slug]"`
+- Guarded: yes
+
+### /render
+
+- Signature: `/render <recipe> [slug]`
+- Purpose: regenerate a render from its recipe
+- Description: Regenerate a render from its recipe in recipes/
+- Argument hint: `"<recipe> [project-slug]"`
+- Guarded: yes
+
+### /publish
+
+- Signature: `/publish <recipe> [slug]`
+- Purpose: make the designed file from a render, through a model
+- Description: Make the designed .pptx or .docx from the render of a recipe, through a model - started by the principal only
+- Argument hint: `"<recipe> [project-slug]"`
+- Guarded: yes
+
+### /document
+
+- Signature: `/document [slug]`
+- Purpose: generate the documentation of the engine or of a project into docs/
+- Description: Generate the documentation of the engine or of a project into docs/ - pages of one topic each and their index, from a map
+- Argument hint: `"[project-slug]"`
+- Guarded: yes
+
+### /recipe
+
+- Signature: `/recipe [genre] [slug]`
+- Purpose: compose or iterate a render recipe by genre; bare = the genre roster
+- Description: Compose a render recipe by genre - bare = genre roster, with a genre = guided composition
+- Argument hint: `"[genre-or-recipe] [project-slug]"`
+- Guarded: open
+
+### /critique
+
+- Signature: `/critique [lens] [artefact] [slug]`
+- Purpose: run a critic lens on the quality of the documents; bare = the lens roster
+- Description: Run a critic lens on the quality of a project's documents - bare = lens roster
+- Argument hint: `"[lens] [artefact] [project-slug]"`
+- Guarded: open
+
+### /challenge
+
+- Signature: `/challenge [persona] [artefact] [slug]`
+- Purpose: run a challenger persona against the substance; bare = the persona roster
+- Description: Run a challenger persona against the substance of any chain artefact - bare = persona roster
+- Argument hint: `"[persona] [artefact] [project-slug]"`
+- Guarded: open
+
+### /research
+
+- Signature: `/research <topic> [slug]`
+- Purpose: best-practices research into research/, indexed
+- Description: Research current best practices on a topic; store durable notes
+- Argument hint: `"<topic> [project-slug]"`
+- Guarded: open
+
+### /ledger
+
+- Signature: `/ledger [slug]`
+- Purpose: state report from the ledger
+- Description: Report project state from the ledger
+- Argument hint: `"[project-slug]"`
+- Guarded: open
+
+### /check
+
+- Signature: `/check [check] [slug]`
+- Purpose: run a check on a project or on the engine; bare = the check roster
+- Description: Run a check on the conformance of a project or the engine with the conventions - bare = check roster
+- Argument hint: `"[check] [project-slug]"`
+- Guarded: open
+
+### /save
+
+- Signature: `/save [slug] [-m "message"] [--tag name]`
+- Purpose: save one repository, or every one with changes
+- Description: Save the forge to git - the light check, then commit and push; no renders
+- Argument hint: `'[project-slug] [-m "message"] [--tag name]'`
+- Guarded: yes
+
+### /release
+
+- Signature: `/release [slug] [-m "message"] [--tag name]`
+- Purpose: release one repository from `main`
+- Description: Release one repository from main - its checks with walkthrough, README and release notes, then /save with the release message and the tag at an approved major
+- Argument hint: `'[project-slug] [-m "message"] [--tag name]'`
+- Guarded: yes
+
+### /spinoff
+
+- Signature: `/spinoff <project> <group> <slug>`
+- Purpose: split a group into its own project
+- Description: Spin a requirement group off into its own project (principal's explicit decision only)
+- Argument hint: `"<source-project> <group-name> <new-slug>"`
+- Guarded: yes
+
+### /man
+
+- Signature: `/man [command | method]`
+- Purpose: the forge's manual, read from its own definitions
+- Description: The forge's manual, read from its own definitions - bare = the commands and the working methods, with a command = its purpose, arguments and roster, with a method = its paragraph and skill
+- Argument hint: `"[command | method]"`
+- Guarded: open
+
+### /manual
+
+- Signature: `/manual …`
+- Purpose: alias of `/man`
+- Description: Alias of /man - the forge's manual, read from its own definitions
+- Argument hint: `"[command | method]"`
+- Guarded: open
 
 ## See also
 

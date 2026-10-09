@@ -36,7 +36,7 @@ What you verify (POS.1070 — one mechanism lives in one place):
 - **No direct operation where a mechanism exists.** No skill or agent
   performs directly what a script, command or agent exists for: git
   outside the scripts in `scripts/`, a conversion outside
-  `doc2md.ps1`, a render outside `/render`, a review outside the
+  `doc2md.py`, a render outside `/render`, a review outside the
   reviewer agents, a check outside the check agents.
 
 Cost: the whole layer, read and compared pairwise where the subjects

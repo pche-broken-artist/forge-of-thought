@@ -1,71 +1,56 @@
 ---
 generated: 2026-10-09
 made: mirrored
+inputs-hash: 031f777672c1d23e
 inputs:
-  - scripts/forge-branch.ps1
+  - scripts/forge-branch.py
   - CLAUDE.md
 ---
 
 # Work on a branch
 
-This page is for a user who wants to work on a branch of a project or
-of the engine instead of on `main`: how to switch, how to come back,
-and what is left to git. Branches are voluntary. Whoever does not want
-them works on `main` and never meets this page.
+This page is for anyone who wants to work on a branch instead of on `main`. Branches are voluntary: whoever does not want them works on `main` and never meets this page.
 
 ## Switch to a branch
 
-Run the script with the repository's slug and the branch name:
+Run the script with the repository's slug and the branch you want:
 
 ```
-./scripts/forge-branch.ps1 my-project my-draft
+python scripts/forge-branch.py <slug> <branch>
 ```
 
-The repository switches to the branch. When the branch does not exist
-yet, it is created from the current state. The slug names the
-repository; `forge` means the engine itself. There is no form without
-a slug, because switching every repository at once is never what
-anyone wants.
+`forge` as the slug means the engine itself. There is no form without a slug, because switching every repository at once is never what anyone wants.
 
-## Switch back to main
+- If the branch exists, the repository switches to it and the script says so.
+- If it does not exist, the script creates it from the current state and switches to it. It tells you the branch reaches the remote with the first save made on it.
+- If you are already on that branch, the script says so and changes nothing.
+- To go back, give `main` as the branch: `python scripts/forge-branch.py <slug> main`.
 
-Give `main` as the branch:
+## See where you are
 
-```
-./scripts/forge-branch.ps1 my-project main
-```
-
-## See which branch you are on
-
-Run the script with the slug alone:
+Give the slug alone:
 
 ```
-./scripts/forge-branch.ps1 my-project
+python scripts/forge-branch.py <slug>
 ```
 
-It reports the current branch and lists the branches the repository
-has.
+The script reports the branch the repository is on and, when there is more than one, lists the branches the repository has.
 
-## Save before you switch
+## Unsaved changes stop a switch
 
-Unsaved changes stop a switch. Save first, then switch, so that
-nothing is carried across and nothing is lost.
+If the repository has unsaved changes, the script refuses to switch and tells you how many files are affected. Save first, then switch. Nothing is then carried across or lost.
 
 ## What stays with git
 
-The script switches and creates, and reports. It does nothing else.
+The script switches and creates, and does nothing else. The rest is git's, done by hand or by merge request:
 
-- Merging a branch into `main` is done with git by hand, or by merge
-  request.
-- Deleting a branch is done with git.
-- Pushing a branch is not a step of its own: a new branch reaches the
-  remote by the first save made on it.
-- A release is made from `main` only. Switch back to `main` before you
-  release.
+- Merging a branch into `main`.
+- Deleting a branch.
+- Pushing a branch: a new branch reaches the remote by the first save made on it.
+
+A release is made from `main` only, so switch back to `main` before releasing.
 
 ## See also
 
-- [Save your work](save-your-work.md): the save that carries a branch
-  to the remote.
-- [About persistence in git](../about/persistence-in-git.md): why
-  merging is left to git.
+- [Save your work](save-your-work.md): the save that carries a branch to the remote.
+- [About persistence in git](../about/persistence-in-git.md): why merging is left to git.

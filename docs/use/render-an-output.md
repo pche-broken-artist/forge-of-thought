@@ -1,6 +1,7 @@
 ---
 generated: 2026-10-09
 made: mirrored
+inputs-hash: 3dc732faeff5dda8
 inputs:
   - .claude/skills/render/SKILL.md
   - CLAUDE.md
@@ -8,84 +9,68 @@ inputs:
 
 # Render an output
 
-This page is for a user who has a render recipe and wants its output
-made or made again: a README, a pitch, a summary. It says what
-`/render` does and what you see when it has run.
+This page is for a user who has a recipe and wants its output made
+again from the current documents of the project. It says what
+`/render` does, what you see afterwards and when a render is
+regenerated at all.
 
-## What a render is
+## Run the command
 
-A render is an output for one audience, generated from the documents
-of a project. It is never edited by hand and is not a source of truth.
-What you iterate is its recipe; to change the output, change the
-recipe and render again.
+Type `/render <recipe> [slug]`. The recipe is the name of a file in
+the project's `recipes/` directory. The project slug is optional when
+the project is clear from context; otherwise you are asked.
 
-## Run it
+If the recipe does not exist, nothing is rendered. You are offered to
+compose it through `/recipe`, from a genre where one fits, otherwise
+from the plain recipe skeleton.
 
-```
-/render <recipe> [slug]
-```
+## What happens
 
-`<recipe>` is the name of a file in the project's `recipes/`. The slug
-names the project; leave it out and the project is taken from context,
-and if that is ambiguous you are asked.
-
-1. The recipe is read. If it does not exist, you are offered to
-   compose it through `/recipe` (by a genre where one fits, otherwise
-   from the bare recipe skeleton), and the command stops there.
-2. The inputs the recipe declares are read at their current versions.
-3. The Markdown is generated in an isolated subagent. It sees only
-   the recipe and its inputs, never your conversation, so the render
-   is derived from the documents and not from what was said about
-   them. It does not read the previous render unless the recipe
-   declares it among its inputs.
-4. The file is written to `renders/<recipe>.md`, or to the recipe's
-   `output:` path if it declares one (the repository README is
-   such a case). An existing file is overwritten; history lives in
-   git.
-5. Back in the session, the file and its provenance are checked, the
-   ledger's Renders table is updated to mirror it, and you are told
+1. The recipe is read, and then every input it declares, at its
+   current version, from disk. `CLAUDE.md` is read from disk too, so
+   a render never works from an older copy held in the session.
+2. The Markdown is generated in an isolated subagent. It sees only the
+   recipe and its inputs, never the conversation: a render is derived
+   from the documents, not from what was said about them. It does not
+   read the previous render unless the recipe lists it as an input
+   (the release notes do, for the sections already released), and it
+   does not touch the ledger.
+3. The file is written to `renders/<recipe>.md`, or to the path the
+   recipe gives in its `output:` field (the repository README is
+   one). An existing file is overwritten; the history is in git.
+4. The render opens with provenance front-matter: the project, the
+   recipe, the date, and the recipe and inputs with the versions they
+   were read at. Its exact shape, and the one definition of when a
+   render is stale, are on [Render provenance](../reference/render-provenance.md).
+5. Back in the session the file and its provenance are checked, the
+   ledger's Renders table is updated to mirror them, and you are told
    what was rendered from what.
 
-## What you see
+The render is content only, always Markdown. Instructions for a
+conversion stay in the recipe and are never copied into the render.
 
-The render opens with front-matter that records the project, the
-recipe and its version, the date and the inputs with their versions.
-That block is what lets a render be called stale or current; its
-shape and the one definition of stale are in
-[Render provenance](../reference/render-provenance.md).
-
-The render is content only, always Markdown. It carries no
-instructions for a conversion; the recipe's `## Format` section is
-never copied into it.
-
-## The plain file
+## The plain Word or PowerPoint file
 
 Where the recipe has a `## Format` section, the plain `.docx` or
-`.pptx` is made beside the render through pandoc, using the reference
-document and page size the section names. A recipe without that
-section ends at the Markdown.
+`.pptx` is made beside the render through pandoc, with the reference
+document and page size the section names. If pandoc is missing, the
+render stands, the plain file is not made, and this is said aloud. A
+recipe without the section ends at the Markdown.
 
-If pandoc is missing, the render stands, the plain file is not made,
-and you are told so.
-
-The designed file is not made here. That is a separate, deliberate
-command: [Publish a designed file](publish-a-designed-file.md).
-
-If the ledger's Published table has a row for the same recipe, it is
-set to `stale` and you are told: the published file is now older than
-its render. Nothing is remade.
+The designed file is not made here. That is a separate and costlier
+step, described on [Publish a designed file](publish-a-designed-file.md).
+If the ledger's Published table has a row for this recipe, its state
+is set to `stale` and you are told: the published file is now older
+than its render. Nothing is remade.
 
 ## When a render is regenerated
 
-Only when you give this command, or when `/release` runs. Claude never
-regenerates a render on its own judgement. When a render is stale it
-reports that and offers to render; the decision is yours.
+Only on `/render`, or by `/release`. Claude never regenerates a render
+on its own judgement. When a render is stale, Claude reports it and
+offers to regenerate; you decide.
 
 ## See also
 
-- [Render provenance](../reference/render-provenance.md): the
-  front-matter block and the one definition of stale.
-- [Publish a designed file](publish-a-designed-file.md): the designed
-  file, made through a model.
-- [About renders and recipes](../about/renders-and-recipes.md): why a
-  render is generated and never a source of truth.
+- [Render provenance](../reference/render-provenance.md): the front-matter block and the one definition of stale.
+- [Publish a designed file](publish-a-designed-file.md): the designed file, made through a model.
+- [About renders and recipes](../about/renders-and-recipes.md): why a render is generated and never a source of truth.

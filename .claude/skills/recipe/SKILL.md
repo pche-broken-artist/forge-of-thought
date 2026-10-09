@@ -40,6 +40,5 @@ changes.
    written once per round on confirmation, per CLAUDE.md, Versioning
    & status (a recipe: version and updated date, no status), into
    `recipes/<recipe>.history.md` — created from `templates/history.md`
-   with the recipe. Register the
-   recipe in the ledger's Renders table when its first render exists.
+   with the recipe.
 3. After writing, offer `/render <recipe>` as the natural next step.

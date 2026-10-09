@@ -2,9 +2,9 @@
 project: forge
 purpose: readme
 audience: humans arriving at the repository
-version: 0.57
+version: 0.59
 updated: 2026-10-09
-last_change: 0.57 (2026-10-09): the README cut to what orients and points, the documentation in `docs/` taking the rest (brief `documentation`, THR.0340): the chapters How it is used, How the work feels, Roles, Isolated reviewers, Commands, Conventions, Repository layout, Setup, Scripts and Planned extensions left, the chain kept as its picture, a new chapter Documentation added; the inputs cut to CLAUDE.md, the intent, the definitions and the documentation index; the pinned facts kept in a section of their own that the README does not print.
+last_change: 0.59 (2026-10-09): the pinned facts name Python as the one prerequisite of the scripts and the Python scripts by name; PowerShell 7 leaves.
 output: /README.md
 ---
 
@@ -56,7 +56,9 @@ summarising the newest row. -->
 - The title is `# Forge of Thought <version>` — the current version
   of the forge intent (its front-matter version), no status
   annotations. Below it one line: the subtitle fixed by POS.0620,
-  followed by ` · [Release notes](RELEASE-NOTES.md)`. The name
+  followed by ` · [Documentation](docs/README.md) ·
+  [Release notes](RELEASE-NOTES.md)`, the two links a reader looks
+  for first, on the first line. The name
   appears large exactly once; there is no separate version line, and
   the intent version in the title is the only version that appears
   in the README's own words.
@@ -236,20 +238,21 @@ the place of the pinned facts). The README does not print them; the
 documentation's planner reads them here as an owner, and
 `docs/start/install.md` and `docs/start/setup.md` are where they
 reach the reader. Update them here when they change.
-- Prerequisites: git; PowerShell 7 (pwsh) — the scripts are
-  PowerShell, needed on macOS/Linux too; Python 3 (for markitdown);
-  a paid Claude subscription.
+- Prerequisites: git; Python 3.8 or newer, on PATH as `python` -
+  the scripts and the per-prompt hook are Python (on Linux or macOS,
+  where only `python3` exists, give it that name by an alias or the
+  `python-is-python3` package); a paid Claude subscription.
 - Installing Claude Code: Windows `irm https://claude.ai/install.ps1
   | iex`; macOS/Linux `curl -fsSL https://claude.ai/install.sh |
   bash`; or `npm install -g @anthropic-ai/claude-code`. Sign in on
   first run — usage draws from the same pool as Claude chat. Always
   start `claude` from the engine root so CLAUDE.md and
   CLAUDE.local.md load.
-- The forge is cloned, not copied: `forge-save.ps1` refuses an
+- The forge is cloned, not copied: `forge-save.py` refuses an
   engine that is not a git repository.
-- Script prerequisites: `doc2md.ps1` needs markitdown
+- Script prerequisites: `doc2md.py` needs markitdown
   (`pip install "markitdown[docx,pptx,pdf,xlsx,xls]"`); the `pandoc`
-  engine of `md2pptx.ps1` and `md2docx.ps1`, behind `/render`, needs
+  engine of `md2pptx.py` and `md2docx.py`, behind `/render`, needs
   pandoc (https://pandoc.org/installing.html); their `claude`
   engine, behind `/publish`, needs the `document-skills` plugin,
   installed once from an interactive Claude Code session
@@ -261,7 +264,7 @@ reach the reader. Update them here when they change.
 ## Template
 # Forge of Thought <version>
 
-*<subtitle per POS.0620>* · [Release notes](RELEASE-NOTES.md)
+*<subtitle per POS.0620>* · [Documentation](docs/README.md) · [Release notes](RELEASE-NOTES.md)
 
 <masthead per the instruction: identity paragraph — AI cognitive
 extension of a thinking human, the principal; what it does; the

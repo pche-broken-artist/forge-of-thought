@@ -103,7 +103,7 @@ How the files are made: the first intent is created from
 `threads.md` from `templates/threads.md`. A write rewrites
 for coherence, never appends; the text is in the project's language
 (CLAUDE.md, prime directive 6); POS, FCT, THR and REJ follow the ID
-scheme of CLAUDE.md; the Mined column of every brief touched is
-kept in the words `templates/ledger.md` gives it.
+scheme of CLAUDE.md; the words of the Mined column are
+`templates/ledger.md`'s.
 Whatever remains unsettled is saved into its thread before the
 session ends (CLAUDE.md, Ledger).

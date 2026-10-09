@@ -1,6 +1,7 @@
 ---
 generated: 2026-10-09
 made: mirrored
+inputs-hash: 21d5c3a46bb57db9
 inputs:
   - .claude/skills/forge/states/brief.md
   - templates/brief.md
@@ -9,97 +10,102 @@ inputs:
 
 # Write a brief
 
-This page is for the person who has an idea and wants to put it into
-a brief with the forge: to compose one from nothing, to finish one
-begun elsewhere, or to store one already written.
+This page is for a user who has an idea and wants to put it into a
+brief: the first document of a project, written in the user's own
+words. It says which command to run, how the text can arrive and what
+happens with each way.
 
-## Start the command
+## The command
 
 ```
 /forge brief [name] [slug]
 ```
 
-Without a name the command works on `00-brief.md`. With a name it
-works on `00-brief-<name>.md`, a later brief for a new whole of
-thinking that arises during the project's life. The slug names the
-project. If the brief does not exist yet, the command creates it
-from the template, with its history companion and a row in the
-ledger's Briefs table (Mined: pending).
+Bare, the command works on `00-brief.md`, the project's first brief.
+With a name it works on `00-brief-<name>.md`, a later brief for a
+whole of thinking that is born during the project's life. The slug
+names the project; leave it out when the command can tell which one
+you mean. If the brief does not exist yet, the command creates it
+with its history file and a row in the ledger's Briefs table. If it
+exists, even approved, it is changed like any other artefact. A new
+whole of thinking is a new brief, not an edit of the old one.
+
+## What a brief looks like
+
+A new brief starts from a skeleton: a short header (project, title,
+date, author, version, status, last change) and nothing else. Under
+it the text is free form. Use any headings, tables or lists that
+help. There are no IDs and no conventions of the chain. The brief
+is kept in the language it is written in. It is rough on purpose: it
+says what you want, why, and what you do not want. Polishing it is
+the work of the next step.
 
 ## The three ways the text arrives
 
-- **Pasted whole.** You paste the finished text. It is stored
-  verbatim, and you are asked whether it is finished. If you say so,
-  the brief is approved at once.
-- **Begun outside.** You bring what you have. It is stored as it
-  came, and the work continues from where the text stops.
-- **Born in the forge.** You open with a rough idea. Claude is
-  active at the opening: he inspires, brings how the same thing is
-  done elsewhere, says how original the idea is, and verifies what
-  can be verified. He may propose research and the ingest of
-  outside material. Both run only on your word: see
-  [Research a topic](research-a-topic.md) and
-  [Register a source](register-a-source.md). A proposal of his,
-  however large, serves the finding and is not the brief. When the
-  brief is being written, Claude moves you to say what you want, why
-  and what you do not want, and on your word to write he sets down
-  what the talk arrived at. A summary or structured proposal you ask
-  him to record is stored as shown.
+- **Pasted whole.** You paste a finished text. It is stored exactly
+  as it came. You are asked whether it is finished. If you say it
+  is, it is approved at once.
+- **Begun outside.** You started the text elsewhere. What you bring
+  is stored as it is, and the work goes on from where it stops.
+- **Born in the forge.** You open with a rough idea. At the opening
+  Claude is active: he inspires, tells you how the same thing is done
+  elsewhere, checks what can be checked, and proposes research and
+  ingest. Both run only on your word. Research stores a durable
+  note (see [Research a topic](research-a-topic.md)). Ingest
+  registers outside material as a source (see
+  [Register a source](register-a-source.md)). After a research
+  step Claude says what it changed in the thought, what stays
+  uncertain and whether more research is likely to change anything.
+  Whether to go on is yours to say. Once the finding is wide enough,
+  the brief is written. Claude condenses a long talk into the text,
+  and he reflects it back to you before it is written. A summary or
+  structured proposal you ask him to record is stored as you showed
+  it, not re-told.
 
-What goes into the brief and what stays out is your decision. What
-stays out lives in `research/` and `sources/` where it is a finding
-or a source, and otherwise nowhere.
+The brief is written once per round of conversation, on your
+confirmation, and each write is one new version with its history
+record.
 
 ## What you can ask for
 
-- **A structure.** At any time you can have the text gathered under
-  headings in a logical order, with repetitions pointed out and the
-  grammar mended. Nothing is added, nothing dropped, no thought
-  reworded. The structure is shown before it is written, and you
-  rename the headings. It is never a condition of approval.
-- **An opinion.** `??` alone at the end of your message, or as the
-  whole message, asks for Claude's honest opinion of what you have
-  just written: three points at most, marked as his own, nothing
-  written.
+- **A structure.** At any time you can ask Claude to give the brief
+  a structure: the text gathered under headings in a logical order,
+  repetitions pointed out, grammar mended. He adds nothing, drops
+  nothing and rewords no thought. He shows you the structure before
+  it is written, and the headings are yours to rename. It is never a
+  condition of approval.
+- **His opinion.** Put `??` alone at the end of your message, or as
+  the whole message, and Claude gives his honest opinion of what
+  you wrote: three points at most, marked as his own. Nothing is
+  written or filed.
 
-If the talk turns to taking the idea apart piece by piece
-(definitions, wording), Claude says in one sentence that this is the
-intent's work and offers once to go on there. You decide whether it
-stays in the brief as one open line or is let go. What does not fit
-(a wrong assumption, a contradiction, a risk) he says at once, in
-one sentence.
+Claude also speaks up unasked, in one sentence, when something does
+not fit: a wrong assumption, a contradiction, a risk. If the talk
+turns to taking the idea apart piece by piece, he says that this is
+the intent's work and offers once to go on there. You decide whether
+it stays in the brief as one open line or is let go.
 
-## What the brief looks like
+## Marks in the text
 
-The file has a short fixed header (project, title, date, author,
-version, status, last change); the text under it is free form. Use
-any headings, tables or lists you find useful. There are no IDs. The
-brief is kept in whatever language it is written in.
+Nothing in a brief says who wrote it. Two marks may appear.
+`(source: <path>)` stands where the identity of a source supports,
+limits or contradicts the thought. A short `(remark: ...)` stands
+where a reservation or an uncertainty must stay visible. A
+suggestion you did not take is gone, unless you say it stays.
 
-Where the identity of a source supports, limits or contradicts the
-thought, the text carries `(source: <path>)`. A short `(remark: …)`
-keeps a reservation or uncertainty visible. Nothing marks who said
-what.
+## Approval and what follows
 
-## Writing, approving, mining
-
-- Each round is written once, on your confirmation, and the brief's
-  version and history are updated.
-- Before approval is offered, the closing walk asks whether each
-  area of the finding was consciously considered. It asks and does
-  not mend; an area may leave nothing in the brief.
-- The brief is approved only on your explicit word. An approved
-  brief is changed like any artefact, and a new whole of thinking is
-  a new brief.
-- At the end Claude names the state of the brief and, if you want it
-  mined, proposes `/forge intent`. The brief is mined into the
-  intent when you say so, approved or not.
+The brief is finished when you say so and approve it. Approval is
+only on your explicit word. Before it is offered, Claude walks the
+areas the finding looks at, once, and asks whether each was
+considered. An area may leave nothing in the brief, and the walk
+asks without mending. At the end Claude names the state of the brief
+and proposes `/forge intent` if you want it mined. The brief is
+mined into the intent only when you say so, approved or not. The
+ledger's Briefs table tracks how far each brief has been mined.
 
 ## See also
 
-- [About the brief](../about/the-brief.md): what a brief is and why
-  it is rough on purpose.
-- [Research a topic](research-a-topic.md): the research step the
-  brief's finding uses.
-- [Register a source](register-a-source.md): the ingest step the
-  brief's finding uses.
+- [About the brief](../about/the-brief.md): what a brief is and why it is rough on purpose.
+- [Research a topic](research-a-topic.md): the research step the brief's finding uses.
+- [Register a source](register-a-source.md): the ingest step the brief's finding uses.

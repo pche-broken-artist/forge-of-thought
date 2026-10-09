@@ -1,6 +1,7 @@
 ---
 generated: 2026-10-09
 made: mirrored
+inputs-hash: 1a6f7bb083dbfd89
 inputs:
   - .claude/skills/research/SKILL.md
   - templates/index.md
@@ -9,9 +10,10 @@ inputs:
 
 # Research a topic
 
-This page is for a user who wants to ground a decision in what the
-world already knows about it. It says what `/research` does, what
-comes out and what happens to the findings afterwards.
+This page is for a user who wants the forge to look up what the world
+already knows about a question before he decides something in his own
+work. It says how to run `/research`, what comes back and what happens
+to the findings.
 
 ## Run it
 
@@ -19,59 +21,55 @@ comes out and what happens to the findings afterwards.
 /research <topic> [slug]
 ```
 
-The topic is a question you want answered, for example how some kind
-of document is usually written. If the last word names a project
-under `projects/`, it is taken as the project's slug and the rest is
-the topic. The purpose is inspiration and grounding for your
-artefacts, so that you do not reinvent what has already been solved.
+The topic is the question you want grounded. The slug names the
+project; if the last word you give is the name of a directory under
+`projects/`, it is read as the slug and everything before it as the
+topic.
 
-## What it does
+## What the command does
 
-1. It looks up current best practice with web sources: established
+1. It searches the web for current best practice, established
    frameworks and notable recent developments. It prefers primary and
    high-quality sources and notes their publication dates.
-2. It marks the epistemic status of what it finds: **consensus**,
-   **emerging** or **contested**.
-3. It writes a dated note into the project's `research/` directory,
-   named `YYYY-MM-DD-<topic-slug>.md`, in English. The note holds:
+2. It marks the epistemic status of what it finds: consensus,
+   emerging or contested.
+3. It writes a note into the project's `research/` directory, named
+   `YYYY-MM-DD-<topic-slug>.md`, in English. The note holds:
    - the question;
-   - the key findings, each with its sources;
-   - the options, with their trade-offs;
+   - the key findings, with their sources;
+   - options with their trade-offs;
    - a short section on relevance to this project, with a concrete
      recommendation.
-4. It indexes the note in `research/00-INDEX.md` (creating the index
-   if it is missing) and registers it in the Research table of the
+4. It adds an entry for the note to `research/00-INDEX.md` (creating
+   the index if it is missing) and a row to the Research table of the
    project's `ledger.md`.
-5. It summarises for you in the conversation. The summary leads with
-   the recommendation and the trade-offs, not with a literature
-   review.
+5. It summarises for you, leading with the recommendation and the
+   trade-offs, not a literature review.
 
-## One question, one note
+## One question per note
 
-A research answers one question. If your topic turns out to be several
-questions, you get several notes, each answering one. You never get
-one combined document.
+A research answers one question. If your topic turns out to be
+several questions, you get several notes, each answering one. You
+never get one combined document.
 
-## What you see in the index
+## The index entry
 
-The entry for a note in `research/00-INDEX.md` has three fields:
-**Question**, **Answer in short** and **Consult when**. They let you
-and Claude know what research exists, and when it is worth opening,
-without re-reading the notes.
+Each note's entry in `research/00-INDEX.md` has three fields: the
+question, the answer in short, and when to consult the note. The index
+is a light catalogue, so that you and Claude know what research exists
+and what it is for without opening every note.
 
 ## The note is immutable
 
-Once written, the note is never edited. If the world moves on or you
-want a different angle, a new note is made; corrections happen
-downstream, not in the old note. The index, unlike the notes it lists,
-is rewritten freely.
+Once written, a research note is not edited. If the world or your
+view changes, a correction comes downstream, in a new note or in the
+artefact itself, not in the old note.
 
-## When the findings point at a change
+## What follows from the findings
 
-If the findings suggest changing an artefact of the chain, Claude
-proposes the change explicitly, through `/forge <state>`. It never
-makes the change silently, and the research itself changes nothing in
-the chain.
+If the findings suggest a change to an artefact of the chain, Claude
+proposes it explicitly, through `/forge <state>`. Nothing in the chain
+is changed silently, and the decision stays yours.
 
 ## See also
 

@@ -1,6 +1,7 @@
 ---
 generated: 2026-10-09
 made: derived
+inputs-hash: 881b0517aab6280b
 inputs:
   - CLAUDE.md
   - .claude/skills/forge/SKILL.md
@@ -9,92 +10,120 @@ inputs:
 
 # About the document chain
 
-This page explains what the document chain of a Forge of Thought
-project is, how it grows and where a change goes. It is for anyone who
-uses the forge, extends it with a new kind of artefact, or wants to
-judge how it is built. It was put together from `CLAUDE.md` (What this
-workspace is, Document chain, Working methods), the `/forge` command's
-definition `.claude/skills/forge/SKILL.md` and the positions of the
-forge's own intent that give the reasons.
+This page explains what the document chain is: the row of versioned
+documents an idea travels through in a project, where it starts,
+what its trunk is, how it grows and where a change goes. It is for
+anyone who uses the forge, anyone who wants to extend it with a new
+layer, and anyone judging whether its shape holds together. It was
+put together from `CLAUDE.md`, the definition of the `/forge`
+command and the positions of the forge's own intent.
 
 ## What the chain is
 
-An idea travels through a chain of versioned documents, the
-artefacts, from the idea first put together onward. The chain starts
-at a brief: the principal's own text of what he wants and why. Its
-trunk is the intent, where those thoughts become the positions he
-holds.
+An idea of any kind, a process redesign, a platform initiative, an
+organisational topic, travels a chain of versioned documents, from
+the idea as it was put together onward, under isolated adversarial
+review. The documents of the chain are called artefacts: the ones
+the principal composes, the reviewers read and the renders are
+generated from. Every other file of a project (a history, a
+decision record, a review, a source) is a document but not an
+artefact.
 
-Below the intent a project takes the layers it needs, and no layer
-below the intent is a condition of another. Many projects end at the
-intent, where what is wanted needs no further layer written down. A
-layer a project does not have is not missing: `/forge` and the checks
-say nothing of it, and the ledger declares no end of the chain. The
+Nothing is implemented in the forge: the engine specifies, and the
 chain ends where the project needs it to.
 
-The reason is that thoughts are forged as far as the principal needs
-them taken. A further layer is worth writing where it earns its
-place, and whether it does is his to say, not the forge's.
+## Where it starts and what its trunk is
+
+A chain starts at a brief and its trunk is the intent.
+
+- The brief is the principal's own text of one whole of thinking:
+  what he wants and why, with what he chose to take from the finding
+  around it. It is free-form, holds thoughts to be processed rather
+  than decisions, and only the intent turns them into positions.
+- The intent is where those thoughts become positions the principal
+  holds, with stable IDs. It is the trunk: every layer below it is
+  derived from it, directly or through the layer above.
+
+Below the intent a project takes the layers it needs. No layer
+below the intent is a condition of another, and many projects end
+at the intent, where what is wanted needs no further document
+written down. A layer a project does not have is not missing: the
+state map and the checks say nothing of it, and the ledger declares
+no end of the chain.
 
 ## A star, not a line
 
 Every artefact of the chain has a definition: a state file in
-`.claude/skills/forge/states/<state>.md`, named after the artefact it
-produces and paired with the artefact's template. The definition says
-what the artefact is, how it is found and what its rules are; the
-template says what comes out.
+`.claude/skills/forge/states/<state>.md`, named after the artefact
+it produces and paired with the artefact's template. The definition
+says what the artefact is, how it is found (by questions, research
+and sources) and owns its rules; the template says what comes out.
 
-Each definition declares its own inputs. So the chain is a star, not
-a fixed line: a new layer can branch from any artefact by adding one
-definition. The number in a file name orders the files and
-prescribes no sequence.
+Each definition declares its own inputs. That is why the chain is a
+star and not a fixed line: a layer branches from any artefact above
+it, and the number in a file name orders the files without
+prescribing a sequence. Adding a layer means adding one definition;
+nothing that exists is reworked.
 
-Work on an artefact is invoked by its name: `/forge <state>`, for
-instance `/forge intent`. Knowing the name of the artefact is knowing
-the command, so there is nothing to memorise as layers are added.
-The dispatcher behind `/forge` never changes: adding a layer means
-adding a file. Run bare, `/forge` reads the definitions directory
-and reports which artefacts can be worked on from where the project
-stands.
+Work on the chain is invoked by target state, never by verb:
+`/forge intent`, `/forge assignment`, and so on. Knowing the name of
+the target artefact is knowing the command, with nothing to memorise
+as layers are added. `/forge <state>` is a dispatcher: it resolves
+the state file for the name it is given and follows it, and the
+dispatcher itself never changes when a layer is added. Bare `/forge`
+reports the map of a project: which artefacts exist, at what version
+and status, and which target states can be worked on from here.
+
+## Numbering
+
+Files in the chain are numbered in tens: `00-brief.md`,
+`10-intent.md`, `20-assignment.md`, and so on. The gaps of ten leave
+room for a layer to be added between existing ones without renaming
+anything that exists.
+
+```
+NN-<artefact>.md   an artefact of the chain, versioned
+<file>.history.md  history of each versioned document,
+                   an append-only companion beside it
+decisions.md       append-only decision records
+ledger.md          single source of truth for state
+```
 
 ## Which artefacts exist
 
 Which artefacts the forge has is the listing of the definitions
-directory, one definition each. They are listed nowhere else, and the
-table of artefacts in the README is rendered from the definitions.
-The chain grows by adding a layer's definition, without reworking
-anything that exists.
-
-## Numbering
-
-Files of the chain are named `NN-<artefact>.md` and numbered in tens:
-`00-brief.md`, `10-intent.md` and so on. The gaps of ten leave room
-for a layer to be added later without renaming or renumbering
-anything that exists. Beside each versioned document stands its
-history companion, `<file>.history.md`; a project also keeps
-`decisions.md` and `ledger.md`.
+directory, `.claude/skills/forge/states/`, one definition each. They
+are listed nowhere else; the table of artefacts in the README is
+rendered from the definitions. A new kind of artefact enters the
+forge by its definition and template being added as a pair, on the
+principal's decision, never on Claude's own.
 
 ## Where a change goes
 
-Substance goes into the intent first and propagates from there down
-the whole chain the project has; each layer below is brought to it.
-Only wording is fixed downstream directly.
+Changes are intent-first. A change of substance goes into the
+intent and propagates from there down the whole chain the project
+has: each lower layer is brought to the intent. Only wording is
+fixed downstream directly.
 
-A change may also come from below: when solving shows that what is
+A change may also come from below. When solving shows that what is
 wanted cannot be had, or must be wanted differently, the intent
-changes first and the layers follow. This keeps the intent the one
-place where what is wanted is said, so no layer below drifts away
-from it.
+changes first and the layers follow.
+
+Behind this stands one principle: from the artefacts of the chain
+the thing must be buildable without a look at the finished product.
+The product is what is built, never a source of its own design. How
+deep the chain must go for that is the project's to decide.
 
 ## One principal per chain
 
 The chain never spans two principals. The layers below the intent
 grow in the same project, by the same principal's hand, when he
-chooses to take his own thought further. An assignment handed to
-someone else is not continued in the sender's chain: what the
-recipient does with it is his own run of the forge, where the
-assignment becomes his brief. An assignment is self-contained for
-exactly that reason.
+chooses to take his own thought further. An assignment is written
+to be self-contained for exactly this reason: what a recipient does
+with it in his own instance is his own run of the forge, and the
+assignment becomes his brief. Feedback from recipients has no
+channel of its own; the principal processes it and feeds his
+conclusions back through `/forge intent`.
 
 ## See also
 

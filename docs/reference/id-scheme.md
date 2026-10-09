@@ -1,29 +1,26 @@
 ---
 generated: 2026-10-09
 made: mirrored
+inputs-hash: f359b1e6e096a935
 inputs:
   - CLAUDE.md
 ---
 
 # ID scheme
 
-This page is the reference for the IDs that items carry in the forge's
-documents: their format, the rules for numbering them and the table of
-prefixes. It is for anyone who reads, extends or evaluates the forge.
+This page states the format of the IDs the forge gives to the items of its documents, the rules for numbering them, and the prefixes with their meaning and the document each lives in. It is for anyone who reads, extends or evaluates the forge and needs the scheme in one place.
 
 ## Format
 
-An ID is written `PREFIX.NNNN`. Every prefix has three letters. IDs
-are global and stable and are never renumbered. Items may move between
-groups without a change of ID.
+An ID has the form `PREFIX.NNNN`. Every prefix is three letters. IDs are global and stable: they are never renumbered. An item may move between groups without its ID changing.
 
 ## Numbering
 
 - Items are numbered in tens (`REQ.0010`, `REQ.0020`).
 - Each new group starts at the next hundred (`REQ.0100`, `REQ.0110`).
 - Overflow takes the next free number anywhere.
-- Groups are plain headings: no IDs, no metadata, no lifecycle.
-- Depth is two levels at most.
+- Groups are plain headings: they have no IDs, no metadata and no lifecycle.
+- Depth is at most two levels.
 
 ## Prefixes
 
@@ -38,7 +35,7 @@ groups without a change of ID.
 | SOL | part of the solution: what is built or done, what it realises, the choice it rests on | solution design |
 | SCR | success criterion, optional or delegated | assignment |
 | POS | position the principal currently holds | intent |
-| THR | open thread, an unresolved matter to elicit next; names the artefact it concerns and carries its origin: the principal's word (the default, unmarked), a document by path, or Claude's synthesis | the project's `threads.md` |
+| THR | open thread: unresolved matter to elicit next; names the artefact it concerns and carries its origin: the principal's word (the default, unmarked), a document by path, or Claude's synthesis | the project's `threads.md` |
 | REJ | rejected direction, with the reason it was dropped | intent |
 | FCT | fact: what is the case, as the principal states it or as a source states it; not a stance; a source's fact cites its file, the principal's needs none; verification is never demanded | intent |
 | FND | finding of a critic (document quality) or of a check (conformance) | ledger, reviews |

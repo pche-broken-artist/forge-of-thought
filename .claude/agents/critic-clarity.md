@@ -30,9 +30,7 @@ What to go after:
 - **Scope hygiene.** Content that belongs to another artefact, judged
   by the Aim of the artefact's own definition
   (`.claude/skills/forge/states/<artefact>.md`), stated there and not
-  here: an intent that solves, an assignment that solves or carries
-  machinery of delivery, a solution design that restates the layer
-  above or copies what realises it. The finding names the artefact
+  here. The finding names the artefact
   the passage belongs to and proposes the move in full.
 - **Requirement style.** The rule set is *Requirement style* in the
   assignment's definition

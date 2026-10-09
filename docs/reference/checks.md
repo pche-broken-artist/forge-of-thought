@@ -1,6 +1,7 @@
 ---
 generated: 2026-10-09
 made: mirrored
+inputs-hash: c702248d75754540
 inputs:
   - .claude/agents/check-light.md
   - .claude/agents/check-project.md
@@ -12,158 +13,99 @@ inputs:
 
 # Checks
 
-The forge has five checks, each owning one concern of conformance with
-the conventions. This page lists them for a user choosing one and for
-an extender who wants to see what each already covers. A check is
-never a critic of the documents and never a challenger of the
-thinking.
+This page lists the five checks of the forge, one entry each: what the check is for, when it fits, what it reads, what it verifies and what it costs. It is for the user choosing a check and for the extender who wants to see what each one owns. Every check verifies conformance with the conventions. None is a critic of the documents or a challenger of the thinking.
 
-A `/save` runs its check and then commits and pushes. A `/release`
-runs its checks, re-renders the README and release notes, and then
-saves. Which checks each runs is stated in the definitions of those
-two commands (`.claude/skills/save/SKILL.md`,
-`.claude/skills/release/SKILL.md`).
+Each check owns one concern and none another's. A check is run with `/check <check> [slug]`: it takes a project by its slug, or the engine. A run that finds nothing files nothing.
+
+## Which checks a save and a release run
+
+Which checks each runs is the definition of the command, in `.claude/skills/save/SKILL.md` and `.claude/skills/release/SKILL.md`. Checks never call each other: the composition is the caller's. Of the five, `light` is the one that fits a save, and `history` is never composed into a save or a release.
 
 ## light
 
-**Description.** Verifies a project's bookkeeping: front-matter
-against the history companion, ledger tables against the files,
-dependencies and resource indexes against the directories. Fit for a
-save.
+**Description.** Verifies a project's bookkeeping: front-matter against the history companion, ledger tables against the files, dependencies and resource indexes against the directories. Fit for a save.
 
-**Reads.** One project; for the engine that is `projects/forge`.
+**Reads.** One project, the path the task names; for the engine that is `projects/forge`.
 
 **Verifies.**
 
-| What | Owner of the rule |
+| Concern | What is checked |
 |---|---|
-| Front-matter and history of every versioned document and its companion: placement of the history, form of the log (fields in order, kinds, one line per record, `Was` last) | CLAUDE.md, Versioning & status; `templates/history.md` |
-| Ledger shaped as its kind says; documents table against front-matter and files; findings and challenges against `reviews/` and `challenges/`; every file in `sources/` and `research/` registered; Renders table against each render's provenance; Published table against `published/`; "Waiting on principal" against what is open | `templates/ledger.md` |
-| Dependencies: every path in the table exists; every citation pointing outside the project has a row; no row points inside the project | the dependencies rule of the forge |
-| Resource indexes: `sources/00-INDEX.md` and `research/00-INDEX.md` agree with their directories (file without entry, entry without file, bundle without inner index) | CLAUDE.md, Document chain |
+| Front-matter and history | Every rule of Versioning & status in `CLAUDE.md`, for every versioned document and its companion: the placement of the history and the form of its log as `templates/history.md` gives it (fields in order, the kinds, one line per record, `Was` last). Whether a text belongs in the document or in its history is the `history` check's. |
+| Ledger accuracy | The ledger is shaped as `templates/ledger.md` says for its kind. The documents table agrees with front-matter and files on disk. Findings and challenges agree with the files in `reviews/` and `challenges/`. Every file in `sources/` and `research/` is registered, with registration only and no content columns. The Renders table mirrors every render's front-matter provenance. The Published table and `published/` agree. "Waiting on principal" matches what is actually open. |
+| Dependencies | Every path in the Dependencies table exists on disk (a missing library is an advisory finding). Every index entry, recipe or chain citation pointing outside the project has a row. No row points inside the project. |
+| Resource indexes | `sources/00-INDEX.md` and `research/00-INDEX.md` exist and agree with their directories: no file or bundle without an entry, no entry without a file, no bundle entry whose inner `00-INDEX.md` is missing. What the entries say is not judged. |
 
-Not findings: a binary without an extract, an extract without its
-original, a binary listed in `sources/.gitignore`, whether a
-published row is `current` or `stale`. Whether a text belongs in the
-document or in its history is the `history` check's.
+Not findings: a binary without an extract and an extract without its original, a binary listed in `sources/.gitignore`, and whether a Published row is `current` or `stale`.
 
-**Cost.** The ledger, the front-matter of every document, the newest
-records of the companions and the directory listings: seconds. Most
-findings are bookkeeping, marked as an immediate fix.
+**Cost.** The ledger, the front-matter of every document, the newest records of the companions and the directory listings: seconds, not minutes.
 
 ## project
 
-**Description.** Verifies a project's structure, IDs, language,
-immutables, recipes and renders against the conventions.
+**Description.** Verifies a project's structure, IDs, language, immutables, recipes and renders against the conventions.
 
-**Reads.** One project, or, when none is named, every project under
-`projects/` except `forge`, each reported on its own. The
-bookkeeping the `light` check owns is not repeated here; the two run
-side by side at a release.
+**Reads.** One project, the path the task names, or, when the task names none, every project under `projects/` except `forge`, each reported on its own. The bookkeeping of a project is the `light` check's; run beside it at a release, this check verifies everything else.
 
 **Verifies.**
 
-| What | Owner of the rule |
+| Concern | What is checked |
 |---|---|
-| Kind and repository: ledger header declares `kind: thought \| library`; `projects/<slug>/.git` exists (a project that is not a repository is a fact, reported with the one-line way in, not a finding) | CLAUDE.md, Repository layout and Persistence |
-| Structure: the files and folders of the layout exist; each render traces to a recipe and carries provenance; each file in `published/` traces to a recipe with a `## Format` section; the README and release-notes recipes exist; each `00-brief*.md` has a row in the Briefs table and the reverse; a brief marked `mined` is cited in the intent | CLAUDE.md, Repository layout, Document chain, Ledger; `templates/recipe.md` |
-| ID hygiene in every document that carries IDs | CLAUDE.md, ID scheme |
-| Language of every artefact and record (briefs and renders exempt) | CLAUDE.md, prime directive 6 |
-| Immutables: reviews, challenges, sources and research not edited after creation (the `00-INDEX.md` catalogues exempt) | CLAUDE.md, Versioning & status |
-| Recipes and renders, shape only: recipes conform to `templates/recipe.md`; declared inputs exist; `output:` points inside the repository | `templates/recipe.md` |
+| Kind and repository | The ledger header declares `kind: thought` or `kind: library` (missing is read as `thought`, a finding with a one-line fix). `projects/<slug>/.git` exists; a project that is not a repository is reported as a fact with the way in, never as a finding. A library needs no chain, and its documents may be overwritten by their owner. `logo.png` is optional and its absence is never a finding. |
+| Structure | The files and folders of Repository layout in `CLAUDE.md` exist; a layer the project does not have is never missing. `recipes/` and `renders/` are paired: every render traces to a recipe and carries provenance front-matter. Every file in `published/` traces to a recipe with a `## Format` section; a `.pptx` or `.docx` in `renders/` traces to a render beside it. The README and release-notes recipes exist. Every `00-brief*.md` has a row in the ledger's Briefs table and the reverse. Under Waiting on principal, a line that copies a thread, a decision or a history record instead of citing it by ID is a finding. |
+| ID hygiene | Every rule of the ID scheme in `CLAUDE.md`, in every document that carries IDs. |
+| Language | Prime directive 6 in `CLAUDE.md`, for every artefact and record; the briefs and renders are exempt. |
+| Immutables | The immutable documents of Versioning & status are never edited after creation; signs of after-the-fact editing that the ledger or the history companions reveal are flagged. The `00-INDEX.md` catalogues are exempt. |
+| Recipes and renders | Shape and freshness, never content. Recipes conform to `templates/recipe.md` in front-matter and sections. Every declared input exists on disk. The `output:` path, where declared, points inside the repository. The staleness of a render is never a finding. |
 
-Not findings: a layer below the intent the project does not have, a
-missing `logo.png`, the staleness of a render (README and release
-notes included), whether a recipe still matches the principal's
-thinking. A library needs no chain; its structure reduces to the
-library's file set.
-
-**Cost.** The project's files read once, the conventions read from
-their owners.
+**Cost.** The project's files read once, with the conventions read from their owners.
 
 ## engine
 
-**Description.** Verifies the core (CLAUDE.md, templates, skills,
-agents, scripts) against itself and against the forge intent: every
-position honoured, nothing withdrawn still advertised, every decision
-reflected.
+**Description.** Verifies the core (`CLAUDE.md`, templates, skills, agents, scripts) against itself and against the forge intent: every position honoured, nothing withdrawn still advertised, every decision reflected.
 
-**Reads.** The engine root: CLAUDE.md, `templates/`,
-`.claude/skills/`, `.claude/agents/`, `scripts/`, and
-`projects/forge/10-intent.md` with `projects/forge/threads.md` and
-`projects/forge/decisions.md`.
+**Reads.** The engine root the task names: `CLAUDE.md`, `templates/`, `.claude/skills/`, `.claude/agents/`, `scripts/`, and the forge intent `projects/forge/10-intent.md` with `projects/forge/threads.md` and `projects/forge/decisions.md`. The forge project's own conformance is the `project` and `light` checks'. Whether a rule is stated in more than one place is the `single-source-of-truth` check's.
 
 **Verifies.**
 
-| What | Owner of the rule |
+| Concern | What is checked |
 |---|---|
-| Commands table of CLAUDE.md against the skills on disk; described agents against `.claude/agents/`; every skill an agent names exists | CLAUDE.md, Commands |
-| Every file in `scripts/` described in CLAUDE.md, and nothing described there missing | CLAUDE.md, Repository layout and Persistence |
-| README against CLAUDE.md: same chain, conventions and command set, no contradiction (never currency) | CLAUDE.md |
-| `templates/` against the conventions: front-matter fields, history companion, prefixes, numbering, statuses | CLAUDE.md, Versioning & status and ID scheme |
-| Every position of the forge intent honoured by the core; nothing withdrawn or rejected still advertised | the forge intent |
-| Decisions referenced from the intent exist in `decisions.md`, and every decision is reflected in the intent where it applies | `decisions.md` |
-| Rename and removal sweep: old names recorded in decisions and dropped terms appear only in historical records | `decisions.md` |
+| Core internal consistency | The commands table in `CLAUDE.md` agrees with the skills in `.claude/skills/*/SKILL.md` (the reviewers' contracts excepted). Described agents agree with `.claude/agents/`. Every skill an agent names in its front-matter exists. Every file in `scripts/` is described in `CLAUDE.md` and nothing described there is missing on disk. The README agrees with `CLAUDE.md` on chain, conventions and command set (never on currency: the README and release notes are renders). `templates/` agree with the conventions in Versioning & status and the ID scheme. |
+| Core and forge intent | Every position is honoured by the core documents. Nothing withdrawn or rejected is still advertised in the core. Decisions referenced from the intent exist in `decisions.md`, and every decision record is reflected in the intent where it applies. |
+| Rename and removal sweep | The old names recorded in decision records, and terms the principal has explicitly dropped, are searched for. Only historical records (history companions, decisions, rejected directions, reviews, challenges, research) may still contain them. |
 
-The forge project's own conformance is the `project` and `light`
-checks'; whether a rule is stated in more than one place is the
-`single-source-of-truth` check's.
-
-**Cost.** The core files once and the intent's positions once:
-minutes at most, so that a release can afford it every time.
+**Cost.** The core files once and the intent's positions once: minutes at most, so that a release can afford it every time.
 
 ## history
 
-**Description.** Reads a document with its history and reports where
-the division between them does not hold, proposing each move in full.
-Fit when a document is cleaned, never at a save or a release.
+**Description.** Reads a document with its history and reports where the division between them does not hold, proposing each move in full. Fit when a document is cleaned, never at a save or a release.
 
-**Reads.** One project (for the engine, `projects/forge`), and in it
-every versioned document with its history and archive, or the one
-document the task names.
+**Reads.** One project, the path the task names (for the engine `projects/forge`), and in it every versioned document with its history and its archive, or the one document the task names.
 
-**Verifies.**
+**Verifies.** The division between a document and its history, by Versioning & status in `CLAUDE.md` and the intent's definition (`.claude/skills/forge/states/intent.md`, Threads and files).
 
-| What | Owner of the rule |
-|---|---|
-| In the document: the way to an item (why it changed, what was said, trials, measurements) is a finding; so is detail an item carries where the file that performs it exists | CLAUDE.md, Versioning & status; `.claude/skills/forge/states/intent.md`, Threads and files |
-| In the history: an item that can no longer be understood because what makes it hold stands only in the history is a finding | the same |
+- In the document, the way to an item (as Versioning & status lists it) is a finding. So is detail an item carries where the file that performs it exists.
+- The other way, an item that can no longer be understood because what makes it hold stands only in the history is a finding.
+- Each finding proposes the move in full: the text that leaves, word for word, and the record it becomes.
 
-Each finding proposes the move in full: the text that leaves, word
-for word, and the record it becomes. The form of the log is the
-`light` check's.
+The form of the log is the `light` check's.
 
-**Cost.** Whole documents with their histories: minutes rather than
-seconds. Never composed into `/save` or `/release`.
+**Cost.** Whole documents with their histories: minutes rather than seconds.
 
 ## single-source-of-truth
 
-**Description.** Verifies that every rule, procedure and file shape
-is written in one place and cited everywhere else: no restatement
-across CLAUDE.md, skills, agents, templates and scripts, no direct
-operation where a mechanism exists. The honest sweep, expensive by
-design; fit before a major or after a round on the operating layer,
-not at every release.
+**Description.** Verifies that every rule, procedure and file shape is written in one place and cited everywhere else: no restatement across `CLAUDE.md`, skills, agents, templates and scripts, and no direct operation where a mechanism exists. The honest sweep, expensive by design: fit before a major release or after a round on the operating layer, not at every release.
 
-**Reads.** The whole operating layer: CLAUDE.md, every skill under
-`.claude/skills/` (supporting files included), every agent under
-`.claude/agents/`, every template under `templates/`, the help
-headers of `scripts/`. Always the whole, never a changed subset.
-Named a project instead, it reads that project's recipes, resource
-indexes, ledger comments and its own CLAUDE.md, if any, against the
-owners in the engine.
+**Reads.** The whole operating layer of the engine, never a changed subset: `CLAUDE.md`, every skill under `.claude/skills/` (supporting files included), every agent under `.claude/agents/`, every template under `templates/`, the help headers of `scripts/`. Named a project instead, it reads that project's recipes, resource indexes, ledger comments and its own `CLAUDE.md`, if any, against the owners in the engine.
 
 **Verifies.**
 
-| What | Owner of the rule |
+| Concern | What is checked |
 |---|---|
-| One owner per rule: a procedure, rule set or file shape that another file owns is cited by path, never restated; where a shape has no owner, the finding proposes one | the forge's rule that one mechanism lives in one place |
-| Reviewer files carry only their own: each `critic-*.md`, `challenger-*.md` and `check-*.md` names its kind's contract skill and holds only front-matter and its Lens section | the contract skill of the kind |
-| No direct operation where a mechanism exists: git outside `scripts/`, a conversion outside `doc2md.ps1`, a render outside `/render`, a review outside the reviewer agents, a check outside the check agents | the script, command or agent concerned |
+| One owner per rule | Every command, agent, contract and template describes only its own job. A procedure, rule set or file shape that another file owns is cited by path, never restated; a restatement, in whatever wording, is a finding, fixed by a reference to the owner and deletion of the copy. Where a shape has no owner, the finding proposes one. |
+| Reviewer files carry only their own | Every `critic-*.md`, `challenger-*.md` and `check-*.md` names its kind's contract skill and carries only its front-matter and its Lens section. |
+| No direct operation where a mechanism exists | No skill or agent performs directly what a script, command or agent exists for: git outside the scripts in `scripts/`, a conversion outside `doc2md.py`, a render outside `/render`, a review outside the reviewer agents, a check outside the check agents. |
 
-**Cost.** The whole layer, read and compared pairwise where the
-subjects overlap. Long by design; the report's first line says how
-many files were read.
+**Cost.** The whole layer, read and compared pairwise where the subjects overlap. Long by design; the report's first line says how many files were read.
 
 ## See also
 

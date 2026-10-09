@@ -54,7 +54,7 @@ provenance and staleness track it. -->
 ## Format
 <!-- The shape: templates/recipe.md. How a template is named, where
 the file lands and the default model: the header of
-scripts/md2pptx.ps1. Never copied into the render. -->
+scripts/md2pptx.py. -->
 - Format: pptx
 - Plain file, made by `/render` through pandoc: reference
   <path | none>.

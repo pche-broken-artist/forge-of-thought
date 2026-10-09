@@ -1,8 +1,8 @@
 ---
-version: 4.59
+version: 4.64
 date: 2026-10-09
 status: draft
-last_change: 4.59 (2026-10-09): the staging area of the intent is for the layer below, not for an assignment (POS.1340, `templates/intent.md`, the Map of the intent's definition); a position without an ID does not exist (`templates/intent.md`); both found by the documentation trial of 2026-10-09 (THR.0340).
+last_change: 4.64 (2026-10-09): what a README carries has one owner, the readme skeleton (POS.1450; FND.1130).
 project: forge
 audience: principal + Claude only
 ---
@@ -163,6 +163,50 @@ position that already stands elsewhere.
 - **POS.0910 Recommend, do not push.** Every option Claude lays out
   comes with its recommendation and reason, stated once; a declined
   recommendation is not re-argued unless new facts appear.
+- **POS.1470 Plain speech.** Every message to the principal opens with
+  the outcome in plain sentences, what was done, what was not, what is
+  proposed; detail follows only where needed, and the message ends with
+  one simple question, never a compound one. A thread, a position or a
+  decision is named to him by what it is, in words; its ID follows in
+  brackets as an address, never alone. A map names the few live matters
+  in words and gives the rest as a count. No metaphor and no invented
+  word stands for a mechanism of the forge: the thing is said in a plain
+  clause. Reason: the principal reads the first lines and expects the
+  point there; he carries no IDs in his head, and a word Claude made up
+  explains nothing (2026-09-05, 2026-09-29). Decided 2026-10-09, brought
+  from the assistant's memory into the forge.
+- **POS.1480 A rule says the kind, never the count.** A rule Claude
+  proposes says what kind of content belongs and what does not; it never
+  sets a count, a length or an always/never harder than the principal's
+  own words. When a rule has failed to hold, the answer is not a
+  stricter number but the question what kind of content slipped through.
+  Reason: a numeric limit is easy to check and so Claude reaches for it,
+  but it cuts meaning where the matter needs more words and answers a
+  problem of kind with a rule of amount; the principal named "reason in
+  one sentence" as Claude's typical extreme (2026-09-29), and the same
+  swing before it (the brief `elicitation` 0.4). The division by kind,
+  never amount, already governs what an intent, a brief and an
+  assignment hold. Decided 2026-10-09, brought from the assistant's
+  memory into the forge.
+- **POS.1460 Step by step.** Any action needing the principal's consent,
+  a write, a commit, a push, a rename, anything hard to reverse, arrives
+  as one step with the exact operation, its target and the reason
+  stated, and runs on his word; a plan he has seen is not consent for
+  its steps, and a batch of sensitive operations is never run as one.
+  The birth of a new versioned document is such a step (POS.1090).
+  Reason: consent is given to a concrete operation, never to its
+  description, because a step hard to reverse must be seen by the
+  principal at the moment it happens, not in a plan read earlier. A yes
+  is a yes and nothing else is: a remark, a question or a counter-thought
+  in answer to "shall I change it?" is input for a revised proposal
+  shown again, never a licence to edit, in handed-over work as in joint
+  work; on 2026-10-03 a remark that opened a larger question was taken
+  as a go-ahead and the core file was edited six times before the
+  principal stopped it, and handing over covers making the proposal,
+  never changing it while he judges it. The
+  method stood in CLAUDE.md, Working methods, since 2026-09-05 without a
+  position of its own; given one 2026-10-09 when the documentation
+  writers found no reason to give for it.
 - **POS.1160 In pieces.** The principal may send one longer thought
   as several messages, a piece at a time, and close it with a word
   such as "done". Until that word Claude answers each piece with at
@@ -207,7 +251,10 @@ position that already stands elsewhere.
   research and sources are others. Three things are kept apart: the
   map (what must be found for the artefact to be complete), the
   process (how the map is walked) and the template (where the result
-  lands); the map stands before the template. Elicitation differs by
+  lands); the map stands before the template, because a template can
+  be filled and still miss what the artefact is for: the map says what
+  has to be found, the template only where it lands (reason given
+  2026-10-09). Elicitation differs by
   artefact: the talk over a brief, over an intent and over a BRD are
   three different talks, and every artefact type has a definition of
   its own (POS.1310). Not elicitation: composing a recipe, which is
@@ -744,7 +791,9 @@ position that already stands elsewhere.
 ### Structure and style of an assignment
 - **POS.0200** Structured items with stable IDs beat prose, even at very
   high abstraction. Narrative is confined to Purpose & Context and
-  Objective.
+  Objective. Reason: an item with a stable ID can be cited, reviewed,
+  traced into the layer below and changed one at a time; prose cannot
+  be pointed at (given 2026-10-09).
 - **POS.0210** An assignment assigns; it does not solve. What keeps a
   document an assignment is the kind of content, never its amount.
   The formerly enumerated ban — stakeholder matrices, RACI, impact
@@ -780,6 +829,9 @@ position that already stands elsewhere.
 - **POS.0250** Requirements are written as shall / shall not, in full
   correct sentences, one idea per item, each written once.
   Would, could, should, might, may and MoSCoW wording are not used.
+  Reason: shall is testable and binds; the softer verbs leave the
+  recipient to guess what is required, and MoSCoW puts a priority
+  where completeness belongs (given 2026-10-09).
 - **POS.0260** No priorities and no priority column. Everything in an
   assignment is essential; an exception carries a note reading
   *optional*.
@@ -795,8 +847,8 @@ position that already stands elsewhere.
   item text where they help; they are never part of the ID.
 
 ### Versioning and state
-- **POS.1080** A project's documents fall into five groups and
-  thirteen kinds, and the kind determines what a document is, who
+- **POS.1080** A project's documents fall into five groups, and
+  the kinds the table lists; the kind determines what a document is, who
   writes it, whether it is versioned and how it behaves. "Document" is
   the word for every file of a project; "artefact" is reserved for the
   documents of the chain — the ones the principal composes, the
@@ -812,14 +864,18 @@ position that already stands elsewhere.
   | records | review, challenge | one dated reviewer run | reviewer agent | — | immutable |
   | state | ledger | single source of truth for state | forge | — | freely rewritten |
   | state | index | catalogue of a resource directory | forge | — | freely rewritten |
+  | state | map | the documentation map: one entry per page, everything a page is made from | generated | — | freely rewritten by the documentation run |
   | rendering | recipe | how a render is made | Claude, principal iterates | yes | iterated, never approved |
   | rendering | render | audience-specific output, never a source of truth | generated | — | overwritten by /render |
+  | rendering | page | a page of the documentation, or its index; never a source of truth | generated | — | overwritten by the documentation run |
   | resources | source | external input as it arrived | external, /ingest | — | immutable |
   | resources | research | durable answer to one question | Claude, /research | — | immutable |
 
   Which artefacts the forge has is the listing of
   `.claude/skills/forge/states/`, one definition each; they are
-  listed nowhere else. Every versioned kind keeps its history in an
+  listed nowhere else. The map is state of the project that owns the
+  documentation and is never shown to the documentation's reader; the
+  pages and the index are what he reads (POS.1450). Every versioned kind keeps its history in an
   append-only companion `<file>.history.md` (POS.0310); an integer version is
   approved, and a recipe never is. A functional binary — a `.potx`
   template, a graphic — is a source (POS.1040), so a library's assets
@@ -1034,7 +1090,10 @@ position that already stands elsewhere.
   Claude by POS.1200; how many there are is whatever the door needs,
   never a rule. No remote is configured anywhere in the forge: git
   carries that information itself. Immutability of documents remains a
-  process rule enforced by convention, not by git.
+  process rule enforced by convention, not by git: git protects nothing
+  from a commit that rewrites a file, the rule costs nothing, and a
+  mechanism would be one more layer to maintain that still would not
+  stop a hand edit (reason given 2026-10-09).
 - **POS.1200 The scripts-only door to git is a wall of the harness, not
   conduct alone; a commit carries no attribution.** The rule of POS.0550
   — the scripts in `scripts/` are the only door to git, reading state
@@ -1062,7 +1121,7 @@ position that already stands elsewhere.
   release notes from the settled sources (POS.0730, POS.1000, POS.0810);
   the release commit "release <intent version>" and, at an approved
   major, the tag `v<major>`. The release number is the intent's version
-  (POS.0730). Any other tag on request, `/save -Tag` or `/release -Tag`,
+  (POS.0730). Any other tag on request, `/save --tag` or `/release --tag`,
   on a branch as well. Only the major's tag has a fixed name, so
   `/check` and the release notes can rely on it: an integer is a
   released major, anything else a snapshot. Why two: the renders cost
@@ -1133,9 +1192,12 @@ position that already stands elsewhere.
   no author identity, no first-run initialisation — git configuration is
   the user's (POS.0950). Portability is verified by running the set on
   Linux (WSL suffices); until then it is a writing rule, not a claim.
-  From 2026-10-02 scripts are written in Python, on the feedback of the
-  forge's users: a new script at once, the PowerShell scripts rewritten
-  in time and standing as they are until then (THR.0150).
+  The scripts are Python, decided 2026-10-02 on the feedback of the
+  forge's users and done 2026-10-09, the per-prompt hook included:
+  `python` on PATH is their one prerequisite, the same Python the
+  document conversion needed already, and a system that has only
+  `python3` gives it that name (THR.0150 closed). How they are
+  written and what they share is the solution design's (SOL.0620).
 - **POS.0940** The engine does not know the projects. `git init` and the
   remote are the user's one-off act: `/new-project` and `/spinoff`
   create files only and never touch git, and a project starting "not
@@ -1175,7 +1237,14 @@ position that already stands elsewhere.
   write that configuration and the one global guard, so that a commit in
   a repository on a host with no identity fails aloud instead of
   silently taking a default, and a save commits nothing until git
-  resolves an identity for the repository.
+  resolves an identity for the repository. A subagent sees the
+  session's whole context, CLAUDE.md as the session read it and the
+  assistant's memory included, and may take it for the file on disk;
+  so every agent that writes an outward-facing file says in its
+  definition that instance facts are not material and that an input
+  is read from disk, and the generated files are scanned mechanically
+  before they are kept (found 2026-10-04 at the release of 4.58 and
+  2026-10-09 in the documentation trial; THR.0580 closed 2026-10-09).
 - **POS.0930** One model for the whole forge. Every command, chain state
   and reviewer runs on the session model, so that the strongest model
   the forge runs on is a decision and never an accident of a pin that
@@ -1197,7 +1266,14 @@ position that already stands elsewhere.
   only the files, returning the report for the walkthrough in the
   session, and `/release` launches its renders in parallel (which
   command renders what is POS.1100's); the working conversation is spent
-  on verdicts, not on reading. Present shape 2026-09-02.
+  on verdicts, not on reading. The documentation writer is the case
+  the deferral waited for: a mirrored page leaves the model no room,
+  so a mirrored page is written on a faster model and a derived page,
+  like the planner, on the session model, the choice made
+  mechanically by the page's entry, never per run; the trial of
+  2026-10-09 showed Opus more complete on derived pages and Sonnet
+  sufficient on mirrored ones (THR.0340). Present shape 2026-09-02,
+  the writer decided 2026-10-09.
 - **POS.1070** One mechanism lives in one place and is used from there.
   Whatever the forge already has a procedure for — a command, a skill, a
   script, an agent — is invoked through that procedure whenever its
@@ -1263,7 +1339,11 @@ position that already stands elsewhere.
   run that finds nothing files nothing. Reason: one mechanism for every
   reviewer. A finding without an ID has no place for its verdict, so a
   rejected one returns at the next run, and a user cannot tell why one
-  reviewer's findings are kept and another's are not. Present shape
+  reviewer's findings are kept and another's are not. The session
+  gives the IDs and files the report, never the agent: the IDs of a
+  project's findings are given in one place, and a check that every
+  save runs would otherwise write into the project at every save
+  (reason given 2026-10-09). Present shape
   2026-10-02; the `/research` point stays in THR.0290.
 - **POS.1190 The forge explains itself from its own definitions.** `/man
   [command|method]`, alias `/manual`, is the forge's manual — a reader,
@@ -1411,6 +1491,54 @@ position that already stands elsewhere.
   knows what runs it (principal's decision 2026-08-30). The engine's own
   README is the one exception: the sentence exists to point a visitor to
   the engine, and the engine's README is that destination.
+- **POS.1450** The documentation of a project is a set of pages, one
+  topic each, kept with the project and readable where it is published
+  and in a clone, with an index that lists every page and names each
+  reader's path through them. Three readers, in this order: the user who
+  clones the thing and works with it; the extender who adds to it; the
+  evaluator who never runs it and wants to understand what it is and how
+  it works, and gets the concept pages and nothing made for him alone.
+  Five sections by the reader's journey, the same for every project:
+  Start (how-to: what the thing is, what must be on the machine, the
+  first setup, the first result), Use (one page per job the thing has a
+  command or a procedure for), About (one page per concept and per kind
+  of artefact or part, the reasons included), Extend (what it is made
+  of, how a change is made, proved and recorded, one page per kind of
+  addition), Reference (the commands, the rosters, the conventions, the
+  layout, the scripts, the templates, a glossary; mirrors its owners,
+  never explains). Each page is of one kind, how-to, explanation or
+  reference, opens with what it is for and for whom, and stands on its
+  own. A section or a page with no material is left out, never left
+  empty: a project that is not installed has no install page, and that
+  is no gap. The documentation is generated from the project's documents
+  and never composed or maintained by hand: a page either mirrors the
+  files that own its topic or is derived from named evidence, and says
+  which; a page cannot drift from what it mirrors. The README is cut
+  to what orients and points, its chapters the readme skeleton's
+  (`templates/recipe-readme.md`, the one owner); English only, a
+  translation a render. It is made by
+  a command of its own, `/document [slug]`, in one run that asks
+  nothing: a plan of the pages first, the map, then every page made
+  alone from its entry in the map and from the files the entry names,
+  read from disk, nothing else; what the inputs do not support is left
+  out and reported, never guessed. A run regenerates only the pages
+  whose inputs changed, decided mechanically from the inputs, never by
+  judgement, so that a run is cheap and the page names stay stable. A
+  page is not a render: no recipe stands behind it and `/render` is
+  untouched (REJ.0240). No instance fact reaches a page (POS.0950).
+  Facts no file owns, the install commands, the prerequisites, the
+  public address of the repository, have one place in the project that
+  both the README and the documentation read. A release never
+  regenerates the documentation: it reports the age of the index against
+  the intent's version and offers `/document`; the pages pass under the
+  principal's eyes as every regenerated render does (POS.0810). Reason:
+  the README was the whole documentation of the engine and poor as one,
+  three things at once; a page of one topic can say a thing well, and
+  people inside the company and outside it should understand the forge
+  and use it in full. The first version of the engine's documentation
+  was generated 2026-10-09 (79 pages); what the documentation of a
+  project other than the engine reads is THR.0590. Decided 2026-10-09
+  from the brief `documentation`.
 - **POS.1010** A project may carry an icon: `logo.png` in the project
   root, supplied by the principal, picked up as the repository avatar by
   hosts that do so. Optional — a project without an icon is complete. No
@@ -1451,7 +1579,10 @@ position that already stands elsewhere.
   `/ingest` takes text pasted into the conversation as well as a file
   (P.10, G.04); before storing, personal matter — a named private
   person, an identifying detail, health, anything of the kind — stops
-  the command and asks (P.11, G.09); and the role of a source is the
+  the command and asks (P.11, G.09), because a source is immutable
+  from its registration and travels into git, so what has entered
+  cannot be taken back and the question must come before the store
+  (reason given 2026-10-09); and the role of a source is the
   principal's word, never inferred — after registration Claude always
   asks "what is it for?", and he answers with the role or tells Claude
   to infer it, which is then written marked *(inferred)* (P.06, F.05).
@@ -1606,6 +1737,22 @@ worked out by Claude; what Claude has worked out is never a FCT
   written nowhere. A walkthrough of an intent runs when the principal
   asks for one; the statuses are `draft`, `approved` and `superseded`
   (POS.0300).
+- **REJ.0240** A recipe per page, the documentation as renders of
+  `/render`. Considered 2026-09-08 (THR.0340, the guide and the
+  reference as renders into `docs/`). Dropped 2026-10-07: eighty pages
+  would mean eighty recipes to iterate by hand, and a recipe is a tool
+  the principal shapes, while a page is to come from the project's
+  documents with no hand in between; the map replaces the recipes, one
+  generated entry per page.
+- **REJ.0250** A site or a wiki for the documentation now. Dropped
+  2026-10-09: GitHub shows Markdown pages and the README of a directory
+  as it stands, so pages in the repository are readable without a build,
+  a host or a second place to keep current; a site stays possible later
+  over the same pages.
+- **REJ.0260** A hand-kept file of the philosophy in the project root.
+  Dropped 2026-10-09: the why lives in the brief and the intent already,
+  and a hand-kept copy would drift from them; the About pages are
+  derived from those two, the pitch stays a render.
 
 ## Candidate structure for the layer below
 
