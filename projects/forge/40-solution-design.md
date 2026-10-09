@@ -1,24 +1,26 @@
 ---
-version: 0.7
-date: 2026-10-09
+version: 0.8
+date: 2026-10-10
 status: draft
-last_change: 0.7 (2026-10-09): the documentation agents share a contract and the map has a skeleton (SOL.0460).
+last_change: 0.8 (2026-10-10): the essence critique of 2026-10-09 settled (FND.1310 to FND.1340) and the how of three positions taken over (FND.1230).
 project: forge
 audience: whoever realises the solution, a person or an agent
 ---
 
 # Forge of Thought — Solution design
 
-A proposal, handed over to Claude and not yet judged by the
-principal. It is a one-off move (THR.0520, step 4): the solution
-stands here as it stood in the intent at 4.55, and no choice in it is
-new. Every choice below is one the intent recorded, save where an
-item says the judgement is Claude's. Where the intent
+A proposal, handed over to Claude. The items of 0.1 are a one-off
+move (THR.0520, step 4): they stand here as the solution stood in the
+intent at 4.55, no choice in them is new, and what they say of a
+file, a research note or an open thread beyond the intent was read
+from that file by Claude on 2026-10-04. The items added since
+(SOL.0170, SOL.0450, SOL.0460, SOL.0620 as rewritten) name their own
+dates and choices. Every choice below is one the intent recorded,
+save where an item says the judgement is Claude's. Where the intent
 and its history give no reason for a choice, the item says the reason
-is not recorded, and none is invented. What an item says of a file,
-a research note or an open thread beyond the intent was read from
-that file by Claude on 2026-10-04. Where a `Choice` names no cost,
-the intent records none.
+is not recorded, and none is invented; where a `Choice` names no
+cost, the intent records none. The principal has not judged the
+design whole; SOL.0170 he judged on 2026-10-04 (THR.0520, step 5).
 
 This design is the architecture of the forge. The forge cannot yet
 be built from its artefacts alone, as POS.1400 asks: the detail of
@@ -87,7 +89,8 @@ direction, a boundary kept by hand or an order of work.
   POS.0200, POS.0220,
   POS.0230, POS.0300, POS.0320, POS.0330, POS.0430, POS.0510,
   POS.0860, POS.0880, POS.0890, POS.0900, POS.0910, POS.1080,
-  POS.1030, POS.1160, POS.1210, POS.1370, POS.1410. Choice: no real
+  POS.1030, POS.1160, POS.1210, POS.1370, POS.1410, POS.1460,
+  POS.1470, POS.1480. Choice: no real
   alternative, Claude's judgement, the intent records none: it is
   the file Claude Code loads into every session;
   what it costs is its size, open as THR.0240. Where: `CLAUDE.md`.
@@ -225,18 +228,21 @@ direction, a boundary kept by hand or an order of work.
   `.claude/skills/man/SKILL.md`, `.claude/skills/manual/SKILL.md`.
 - **SOL.0150 The first run.** `/setup` fills `CLAUDE.local.md` from
   its template and creates `.claude/settings.local.json` with the
-  session model. It closes with the git identity: it offers to write
-  the `includeIf` stanzas into the global git configuration file git
-  actually reads (named by `scripts/forge-status.py`, the stanza
-  paths absolute, since `~` in git's hands and in the shell's may
-  differ), each `.gitconfig-<host>` beside that file created with
-  its `[user]` when missing, together with the global guard
-  `user.useConfigOnly = true`: the file read first, never
-  overwriting existing content, an existing stanza or guard reported
-  and left. Where the file carries a global `user.name` or
-  `user.email`, `/setup` says the guard only bites once that
-  identity is removed and offers the removal, again only on the
-  user's word.
+  session model. It closes with the git identity: it asks for the
+  hosts the user pushes to and a name and an e-mail for each, and
+  offers to write the `includeIf` stanzas into the global git
+  configuration file git actually reads (named by
+  `scripts/forge-status.py`, the stanza paths absolute, since `~` in
+  git's hands and in the shell's may differ), each `.gitconfig-<host>`
+  beside that file created with its `[user]` when missing, together with
+  the global guard `user.useConfigOnly = true`: the file read first,
+  never overwriting existing content, an existing stanza or guard
+  reported and left. Where the file carries a global `user.name` or
+  `user.email`, `/setup` says the guard only bites once that identity is
+  removed and offers the removal, again only on the user's word.
+  Declined, the configuration is printed for the user to apply by hand.
+  `/setup` runs no git operation; the user's git configuration files are
+  the one thing it may edit outside the engine.
   Realises: POS.1050, POS.0950. Choice: no real alternative
   recorded. Where: `.claude/skills/setup/SKILL.md`,
   `templates/CLAUDE.local.md`, `.claude/settings.local.json`,
@@ -245,8 +251,10 @@ direction, a boundary kept by hand or an order of work.
   scaffolds a project by its kind from `templates/`, asks for the
   founding brief and hands it to the procedure of `/forge brief`,
   which creates `00-brief.md`. `/import-project` calls
-  `scripts/forge-clone.py`. `/spinoff` creates files only. None of
-  them touches git beyond the clone. `/new-project` validates the
+  `scripts/forge-clone.py`, which clones into
+  `projects/<repository name>`; a nonconforming name is fixed by
+  renaming the directory afterwards. `/spinoff` creates files only. None
+  of them touches git beyond the clone. `/new-project` validates the
   slug.
   Realises: POS.0110, POS.0610, POS.0940, POS.0960, POS.1060.
   Choice: no real alternative recorded. Where:
@@ -336,7 +344,12 @@ direction, a boundary kept by hand or an order of work.
   `templates/ledger.md`.
 - **SOL.0230 The resource indexes.** `/ingest` and `/research` write
   the entries of `00-INDEX.md`, `/new-project` scaffolds the indexes
-  and the check `light` verifies index against directory.
+  and the check `light` verifies index against directory. A bundle's
+  `00-INDEX.md` is created by `/ingest` at registration when the
+  bundle lacks one, and a supplied one is validated against the
+  contents, origin dates best effort, never asked for; if a bundle's
+  files ever need separate fates, a file is split out to a ledger row
+  of its own, the ledger being freely rewritten.
   Realises: POS.0840. Choice: no real alternative recorded. Where:
   `templates/index.md`, `templates/index-bundle.md`,
   `.claude/skills/ingest/SKILL.md`,
@@ -567,8 +580,8 @@ direction, a boundary kept by hand or an order of work.
 ### Persistence
 - **SOL.0500 The repositories.** The engine is one git repository,
   `forge-of-thought`, full name Forge of Thought in documents; its
-  public home is `https://github.com/pche-broken-artist/forge-of-thought`,
-  the address a clone and a project's README point to. The
+  public home is a pinned fact of the readme recipe, the one place the
+  README and the documentation read it from (SOL.0460). The
   universal core in the root (`CLAUDE.md` for the agent, `README.md`
   for humans, `templates/`, `scripts/`, `.claude/`) together with
   `projects/forge`, the system's own project. The engine is a clone;
@@ -613,14 +626,16 @@ direction, a boundary kept by hand or an order of work.
   (SOL.0330), settles their findings, renders the README and
   the release notes unconditionally, with no staleness test, and
   ends by running `/save` with the release message and tag: not a
-  second procedure. The renders come after the check and its
-  walkthrough, not before: a render made from the settled sources is
-  current by construction, whereas one made before it goes stale
-  whenever a finding bumps the intent. The script pushes a tag with the commit and
-  keeps it without an origin. `forge-save` checks that git resolves
-  an identity for the repository and, where it resolves none,
-  reports it with the command to set one and commits nothing until
-  it is.
+  second procedure. It never regenerates the documentation: it
+  reports the age of the index against the intent's version and
+  offers `/document` (POS.1450), the detail the release skill's. The
+  renders come after the check and its walkthrough, not before: a render
+  made from the settled sources is current by construction, whereas one
+  made before it goes stale whenever a finding bumps the intent. The
+  script pushes a tag with the commit and keeps it without an origin.
+  `forge-save` checks that git resolves an identity for the repository
+  and, where it resolves none, reports it with the command to set one
+  and commits nothing until it is.
   Realises: POS.1100, POS.0570, POS.0730, POS.0810, POS.1070.
   Choice: two commands against one, alternatives REJ.0160 and
   REJ.0170; the cost is a README stale between releases, visibly.

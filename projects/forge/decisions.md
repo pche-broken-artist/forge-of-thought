@@ -270,3 +270,43 @@ them here was THR.0070, resolved by DEC.0040 (no back-fill). -->
   read at every session and by every reviewer for nothing (THR.0240).
   Where the rules for creating new types live is THR.0480.
 - **Date:** 2026-10-02
+
+## DEC.0190 — The major 5.0 claims no readiness for a company rollout; CHL.0210 rejected
+- **Decision:** The challenge of 2026-10-09 read POS.0980's order of
+  the audiences, the company first, as a claim that 5.0 is ready to
+  be run in a company, and stacked on it the managed settings of a
+  company's Claude Code, the eleven steps to a first question, one
+  user per instance and the untouched cost lever (CHL.0210). The
+  challenge is rejected; the intent does not change.
+- **Reason:** A major closes a package of features and sends it out;
+  it claims nothing about readiness for a deployment (POS.0300, the
+  sentence of 4.65). POS.0980 names whom the engine is published for
+  and in which order, not a date of a rollout. The company rollout
+  has its own project, `forge-rollout`, and its questions, the
+  managed settings first, belong to it and to the brief `next-gen`,
+  where they stay; a fact about a company deployment is found there,
+  with the deployment in front of it. The principal's words of
+  2026-10-09: nobody said version 5 is ready for a company rollout.
+- **Date:** 2026-10-09
+
+## DEC.0200 — The rules stay as written, the principal's word above them recorded; CHL.0230 rejected
+- **Decision:** The challenge of 2026-10-09 read five recorded
+  exceptions as one pattern, that the rules are written as walls and
+  held as preferences, and asked for a marking of positions into walls
+  and defaults with a degraded form (CHL.0230). The challenge is
+  rejected; no such marking is introduced.
+- **Reason:** The five cases are three different things. POS.0930 was
+  not bent: the position changed, the mirrored page on a faster model
+  is the rule and THR.0410 its predecessor. DEC.0110, DEC.0120 and
+  THR.0410 are the principal's word, recorded where every reader
+  finds it: the rules of the forge bind Claude, not the principal,
+  who is the final authority (CLAUDE.md, Roles; prime directive 5),
+  and his recorded exception is the designed form, not a bend. The
+  six edits of 2026-10-03 were a failure of conduct, and the answer
+  was to tighten the rule into POS.1460, not to soften it. The lens
+  `essence` ran on 2026-10-09. What is true for the user, that the
+  principal's word stands above every rule and his exceptions are in
+  `decisions.md`, CLAUDE.md says already and the documentation reads
+  from it. A marking of positions would add a mechanism for five
+  cases in sixty versions.
+- **Date:** 2026-10-09

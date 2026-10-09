@@ -2,13 +2,16 @@
 project: forge
 kind: thought
 language: en
-updated: 2026-10-09
+updated: 2026-10-10
 ---
 
 # Ledger — Forge of Thought
 
 <!-- Single source of truth for state: CLAUDE.md, Ledger. Versions
 per CLAUDE.md, Versioning & status. /ledger reads from here.
+kind: thought | library; a ledger without it reads as `thought`: at
+an import that is a fact the command reports, at a check a finding
+with the one-line fix (the one owner of this rule).
 Kind: `thought` keeps every table below. `library` (POS.0960) keeps
 only Renders, Sources, Dependencies, Research and Waiting on
 principal; the Briefs, Documents, Published, Findings and Challenges
@@ -33,15 +36,19 @@ absorbed it; Note says what remains (partial) or the REJ (dropped). -->
 ## Documents
 | File | Version | Status | Date |
 |---|---|---|---|
-| 10-intent.md | 4.64 | draft | 2026-10-09 |
-| 40-solution-design.md | 0.7 | draft | 2026-10-09 |
+| 10-intent.md | 4.65 | draft | 2026-10-10 |
+| 40-solution-design.md | 0.8 | draft | 2026-10-10 |
 <!-- One row per layer below the intent, added when the layer is
 born; a layer the project does not have gets no row (CLAUDE.md,
 Ledger). -->
 
 ## Renders
-<!-- Generated outputs, one row per recipe in recipes/ (CLAUDE.md,
-Document chain, Renders). Row mirrors the render's front-matter provenance. -->
+<!-- Generated outputs (CLAUDE.md, Document chain, Renders): one row
+per rendered recipe, written by /render step 6 at the first render
+and kept by every later one, the row mirroring the render's
+front-matter provenance. The documentation index has a row too,
+written by /document: Recipe "none, derived by scripts/docs-index.py",
+Inputs the map with its generated date and the intent's version. -->
 | Render | Audience | Recipe | Inputs | Generated |
 |---|---|---|---|---|
 | README.md (repo root) | humans arriving at the repository | recipes/readme.md v0.58 | CLAUDE.md, 10-intent.md v4.59, .claude/skills/forge/states/, docs/README.md v4.59 | 2026-10-09 |
@@ -143,7 +150,7 @@ as `rejected`. -->
 | FND.0040 | low | gap | resolved | 2026-08-17-critique.md | DEC.0050 (verified 2026-08-27) |
 | FND.0050 | medium | gap | resolved | 2026-08-27-critique.md | intent 2.13 — CLAUDE.md Persistence (portability), script examples neutralised; instance facts left the scripts at 3.0 (verified 2026-09-03, clarity) |
 | FND.0060 | low | contradiction | resolved | 2026-08-27-critique.md | intent 2.13 (Essence), CLAUDE.md heading "Two isolated reviewers" (verified 2026-09-03, clarity) |
-| FND.0070 | low | divergence | resolved | 2026-08-27-critique.md | README re-rendered at intent 2.13 (2026-08-27, recipe 0.18) — regression belongs to the essence lens |
+| FND.0070 | low | divergence | resolved | 2026-08-27-critique.md | README re-rendered at intent 2.13 (2026-08-27, recipe 0.18) — regression belongs to the essence lens (verified 2026-10-09, essence) |
 | FND.0080 | low | inconsistency | resolved | 2026-08-27-critique.md | ledger comments + templates/ledger.md (intent 2.13) (verified 2026-09-03, clarity) |
 | FND.0090 | medium | contradiction | rejected | 2026-09-03-critique-clarity.md | DEC.0090; its condition (THR.0220 changing POS.0550) fell at 3.33 with POS.1110 — the contradiction dissolved with it, nothing returns |
 | FND.0100 | medium | contradiction | resolved | 2026-09-03-critique-clarity.md | intent 3.17 (verified 2026-09-06, clarity) |
@@ -219,12 +226,12 @@ as `rejected`. -->
 | FND.0800 | low | conformance | resolved | 2026-10-02-check-engine.md | intent 4.49 (CLAUDE.md, Versioning & status) |
 | FND.0810 | low | conformance | resolved | 2026-10-02-check-engine.md | intent 4.49 (POS.0850) |
 | FND.0820 | low | conformance | resolved | 2026-10-02-check-engine.md | intent 4.49 (`templates/recipe-readme.md`, `templates/recipe-release-notes.md`) |
-| FND.0830 | medium | contradiction | resolved | 2026-10-02-critique-clarity.md | intent 4.50 (POS.0120, POS.1380) |
-| FND.0840 | medium | contradiction | resolved | 2026-10-02-critique-clarity.md | intent 4.50 (POS.0740, POS.1150, POS.0930) |
-| FND.0850 | medium | contradiction | resolved | 2026-10-02-critique-clarity.md | intent 4.50 (POS.0940) |
-| FND.0860 | low | ambiguity | resolved | 2026-10-02-critique-clarity.md | intent 4.50 (POS.1080, POS.0710) |
-| FND.0870 | low | duplication | resolved | 2026-10-02-critique-clarity.md | intent 4.50 (POS.1330, POS.1340, POS.1350, REJ.0220; the older positions own) |
-| FND.0880 | low | gap | resolved | 2026-10-02-critique-clarity.md | intent 4.50 (a Facts section saying why it is empty) |
+| FND.0830 | medium | contradiction | resolved | 2026-10-02-critique-clarity.md | intent 4.50 (POS.0120, POS.1380) (verified 2026-10-09, clarity) |
+| FND.0840 | medium | contradiction | resolved | 2026-10-02-critique-clarity.md | intent 4.50 (POS.0740, POS.1150, POS.0930) (verified 2026-10-09, clarity; a second exception has since grown in POS.0930, see FND.1240) |
+| FND.0850 | medium | contradiction | resolved | 2026-10-02-critique-clarity.md | intent 4.50 (POS.0940) (verified 2026-10-09, clarity) |
+| FND.0860 | low | ambiguity | resolved | 2026-10-02-critique-clarity.md | intent 4.50 (POS.1080, POS.0710) (verified 2026-10-09, clarity) |
+| FND.0870 | low | duplication | resolved | 2026-10-02-critique-clarity.md | intent 4.50 (POS.1330, POS.1340, POS.1350, REJ.0220; the older positions own) (verified 2026-10-09, clarity) |
+| FND.0880 | low | gap | resolved | 2026-10-02-critique-clarity.md | intent 4.50 (a Facts section saying why it is empty) (verified 2026-10-09, clarity) |
 | FND.0890 | low | conformance | resolved | 2026-10-03-check-light.md | the record of THR.0520 at 4.52 appended to the intent's history (2026-10-03) |
 | FND.0900 | medium | conformance | resolved | 2026-10-04-check-light.md | the two companions moved untouched to their archives, the logs begin with the next version (2026-10-04) |
 | FND.0910 | low | conformance | resolved | 2026-10-04-check-light.md | the rows of `20-assignment.md` and `decisions.md` deleted and the template's comment added (2026-10-04) |
@@ -257,6 +264,24 @@ as `rejected`. -->
 | FND.1190 | low | conformance | resolved | 2026-10-09-check-light-3.md | the Inputs cell cut to the map and the version (2026-10-09) |
 | FND.1200 | low | conformance | resolved | 2026-10-09-check-light-3.md | the template's comment in all nine companions (2026-10-09) |
 | FND.1040 | low | conformance | resolved | 2026-10-09-check-light.md | `date: 2026-10-09` set in `00-brief-next-gen.md` (immediate fix, 2026-10-09) |
+| FND.1210 | medium | contradiction | resolved | 2026-10-09-critique-clarity.md | intent 4.65: THR.0550 closed, `essence` ran on 2026-10-09 once the solution design stood; POS.0300 holds as written |
+| FND.1220 | medium | contradiction | resolved | 2026-10-09-critique-clarity.md | intent 4.65 (POS.1380, THR.0170, THR.0230) |
+| FND.1230 | medium | scope-creep | resolved | 2026-10-09-critique-clarity.md | intent 4.65 (POS.1050, POS.1060, POS.0180), solution design 0.8 (SOL.0150, SOL.0160, SOL.0230) |
+| FND.1240 | low | contradiction | resolved | 2026-10-09-critique-clarity.md | intent 4.65 (POS.0930, POS.0530) |
+| FND.1250 | low | contradiction | resolved | 2026-10-09-critique-clarity.md | intent 4.65 (POS.0100, POS.0600, POS.0620, POS.0700, POS.0970) |
+| FND.1260 | low | contradiction | resolved | 2026-10-09-critique-clarity.md | intent 4.65 (POS.0550) |
+| FND.1270 | low | ambiguity | resolved | 2026-10-09-critique-clarity.md | intent 4.65 (POS.1450 says the README; the pages' language open in THR.0590) |
+| FND.1280 | low | gap | resolved | 2026-10-09-critique-clarity.md | intent 4.65 (POS.1090, POS.1450) |
+| FND.1290 | low | gap | resolved | 2026-10-09-critique-clarity.md | intent 4.65 (POS.0930, REJ.0240, the closing section) |
+| FND.1300 | low | duplication | resolved | 2026-10-09-critique-clarity.md | intent 4.65 (POS.0140 owns intent-first, POS.0900 names it; POS.1460 owns the birth step, POS.1090 cites; POS.0860) |
+| FND.1310 | medium | lost | resolved | 2026-10-09-critique-essence.md | solution design 0.8 (SOL.0010) |
+| FND.1320 | medium | shifted | resolved | 2026-10-09-critique-essence.md | solution design 0.8 (SOL.0500 cites the readme recipe's pinned facts, recipe 0.60 carries the address) |
+| FND.1330 | low | lost | resolved | 2026-10-09-critique-essence.md | solution design 0.8 (SOL.0530) |
+| FND.1340 | low | provenance | resolved | 2026-10-09-critique-essence.md | solution design 0.8 (head) |
+| FND.1350 | low | lost | resolved | 2026-10-09-critique-essence.md | intent 4.65 (THR.0200) |
+| FND.1360 | low | conformance | resolved | 2026-10-10-check-light.md | the header date set to 2026-10-10 |
+| FND.1370 | low | conformance | resolved | 2026-10-10-check-light.md | the line says recipe 0.60 |
+| FND.1380 | low | conformance | resolved | 2026-10-10-check-light.md | both comments replaced by the template's wording |
 
 Four review files are named outside the convention — accepted as they
 are by DEC.0140.
@@ -285,6 +310,11 @@ intent version for accepted, DEC.NNNN for rejected. -->
 | CHL.0170 | accepted | Every isolated reviewer receives the instance facts (CLAUDE.local.md, memory) and writes an immutable public file; THR.0210's parking premise is false today (major) | 2026-09-06-challenge-cto.md | intent 3.46 (POS.0950: identities out of the auto-loaded file into identities.local.md; the instance-fact sentence in all three contracts; THR.0210 noted) |
 | CHL.0180 | accepted | The intent has become the chronicle it was designed not to be (positions as decision narratives, 1,779 lines) and CLAUDE.md grows with it, 435 → 636 lines in eight days (major) | 2026-09-06-challenge-cto.md | intent 3.46 (POS.0120: what a position carries; the sweep of the intent before 4.0, THR.0240) |
 | CHL.0190 | accepted | Release 4.0 is queued and nothing says what an approved major of this intent means — a sign-off with no counterparty and no test (minor) | 2026-09-06-challenge-cto.md | intent 3.46 (POS.0300: what a major of the forge intent means and must pass) |
+| CHL.0200 | accepted | The major is for a date, and nothing named closes: the twenty-two-position pass of THR.0520 open, the solution design unjudged, the brief next-gen pending (major) | 2026-10-09-challenge-cto.md | intent 4.65 (POS.0300; the name of 5.0 in THR.0570), as modified: the major closes a package and the open stays open; that an approval signs the open matters over, declined |
+| CHL.0210 | rejected | The first audience cannot, by the project's own research, run the shape 5.0 fixes: three managed locks switch the forge off silently and only a plugin passes, single-user by position, eleven steps to the first question, no cost lever (major; dealbreaker if the company locks customisation to plugins) | 2026-10-09-challenge-cto.md | DEC.0190 |
+| CHL.0220 | accepted | The test of a major tests the paper against the paper: nothing runs the engine, no check keeps the design true to the files, essence declined at both majors (major) | 2026-10-09-challenge-cto.md | intent 4.65 (POS.0300, THR.0600), as modified: the test attests the documents, the behavioural test is a thread, not before 5.0 |
+| CHL.0230 | rejected | The rules are written as walls and held as preferences, five exceptions on record, and a second user reading the documentation cannot tell which is which (major) | 2026-10-09-challenge-cto.md | DEC.0200 |
+| CHL.0240 | accepted | The intent's own Map is not walked for the forge: no recipient, objective or success criterion, the layer-below section stale, the chain positions unused since 2026-09-04 (minor) | 2026-10-09-challenge-cto.md | intent 4.65 (the closing section; the Map walked at the write of 5.0), as modified: no success criteria before 5.0, open in the brief `next-gen` |
 
 ## Waiting on principal
 <!-- What waits on the principal, one line per matter: cite, never
@@ -293,7 +323,7 @@ copy — CLAUDE.md, Ledger. -->
   step 6 (the BRD) paused 2026-10-04.
 - THR.0570 — the presentation of the forge and what is to be ready
   for it; opened 2026-10-04, his verdict on the two pitch renders
-  and on a major open.
+  open; the major 5.0 named 2026-10-09, its approval the next step.
 - THR.0530 — what can be done deterministically is done by a script;
   the principal's stance of 2026-10-04, to be a prime directive;
   research of 2026-10-04; open.
@@ -348,7 +378,7 @@ copy — CLAUDE.md, Ledger. -->
   engine reads; opened 2026-10-09 (intent 4.60), after the first
   `/document <slug>` on a project.
 - POS.1450 — the documentation command built and run twice
-  2026-10-09; left: the README re-rendered from recipe 0.59 and the
+  2026-10-09; left: the README re-rendered from recipe 0.60 and the
   documentation regenerated from 5.0 at the major (the pages stale
   against 4.64).
 - THR.0380 — executive pitch loose ends (S03 counts, the deck build
@@ -364,7 +394,7 @@ copy — CLAUDE.md, Ledger. -->
 - THR.0170 — branch documents; deferred.
 - THR.0540 — `shall` in an assignment written in another language;
   raised 2026-10-02, nothing decided.
-- THR.0550 — `essence` not run on this project while the release
-  skill still offers it; open.
+- THR.0600 — a test of the forge's behaviour; opened 2026-10-10 from
+  CHL.0220, not before 5.0.
 - THR.0560 — three weakly founded places in the README; the readme
   recipe, at its next iteration.

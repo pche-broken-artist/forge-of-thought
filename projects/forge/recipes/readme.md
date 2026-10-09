@@ -2,9 +2,9 @@
 project: forge
 purpose: readme
 audience: humans arriving at the repository
-version: 0.59
-updated: 2026-10-09
-last_change: 0.59 (2026-10-09): the pinned facts name Python as the one prerequisite of the scripts and the Python scripts by name; PowerShell 7 leaves.
+version: 0.60
+updated: 2026-10-10
+last_change: 0.60 (2026-10-10): the pinned facts carry the public address of the engine (FND.1320).
 output: /README.md
 ---
 
@@ -248,6 +248,9 @@ reach the reader. Update them here when they change.
   first run — usage draws from the same pool as Claude chat. Always
   start `claude` from the engine root so CLAUDE.md and
   CLAUDE.local.md load.
+- Public home of the engine:
+  https://github.com/pche-broken-artist/forge-of-thought, the address
+  a clone and a project's README point to.
 - The forge is cloned, not copied: `forge-save.py` refuses an
   engine that is not a git repository.
 - Script prerequisites: `doc2md.py` needs markitdown

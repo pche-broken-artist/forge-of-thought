@@ -26,8 +26,8 @@ project: forge
   positions and threads worked like the intent, states `open | merged
   | dropped`, merged into the intent with provenance or dropped to a
   REJ). To be taken up only if a brief in draft turns out to need
-  structured, position-level work before it can be locked and mined;
-  until then a draft brief is the branch.
+  structured, position-level work before the principal says to mine
+  it (POS.0920); until then a draft brief is the branch.
 
 - **THR.0190** [intent] A plugin as a later distribution layer. Claude Code
   plugins would give the only real upgrade channel and project =
@@ -76,7 +76,10 @@ project: forge
   recipe among the candidates. The other community files GitHub
   lists, a code of conduct, a security policy, the templates of an
   issue and of a pull request, are not written; `CONTRIBUTING.md` is
-  (POS.1440).
+  (POS.1440). The brief `documentation` deferred two pages and dropped
+  neither: a tutorial with a worked example, once this exemplar exists,
+  and a troubleshooting page, once there is material for it
+  (2026-10-10, FND.1350).
 - **THR.0210** [intent] A guard rail for the public boundary. The rewrite before
   publication (POS.0980) found the leak surface where the challenge
   predicted it: the forge project's own artefacts quoting the substance
@@ -183,7 +186,8 @@ project: forge
   engine is thought: decided 2026-09-07 — as a brief born in the forge
   (`00-brief-<name>.md`, the way `00-brief-public-engine.md` was),
   carrying the boundary list, the outline of the second framework and
-  the target shape; mined into the intent once locked. A project of its
+  the target shape; mined into the intent when the principal says so
+  (POS.0920). A project of its
   own only afterwards, by spinoff of the decided part, if the decision
   calls for one.
   THR.0220 was settled on today's forge at 3.33 (POS.1100) as an engine
@@ -1008,13 +1012,6 @@ project: forge
   stand in an assignment written in another language; raised
   2026-10-02, nothing decided. Carried in the ledger without an ID
   until 2026-10-04 (FND.0930).
-- **THR.0550** [intent] `essence` is not run on this project, the
-  principal's word of 2026-10-02; the release skill still offers it
-  at every release. Carried in the ledger without an ID until
-  2026-10-04 (FND.0930). 2026-10-09: the principal keeps the offer in
-  the release skill and declines it on forge: the lens makes no sense
-  while the engine has few artefacts, and will once it has more.
-  Open until then.
 - **THR.0560** [intent] Three weakly founded places in the README of
   2026-10-02 (the next step of `/forge`, when two scripts are run,
   the fifth verdict); the readme recipe, at its next iteration.
@@ -1041,14 +1038,43 @@ project: forge
   not carry as a fixed text; on GitHub, Discussions to be switched
   on, since `CONTRIBUTING.md` points at them, and the topics brought
   to the fourteen of THR.0200. Opened 2026-10-04.
+  Agreed 2026-10-09 for the major 5.0, from the walkthrough of
+  CHL.0200: what it closes, to stand in its approval record and in the
+  release notes. "Version 5 of Forge of Thought closes how a thought
+  is found and how the forge is read: every artefact has a definition
+  of its elicitation and the working methods stand named with their
+  reasons; the chain has grown below the intent to the solution
+  design, with the cut between what is wanted and what realises it;
+  and the forge explains itself to others from its own definitions,
+  documented by a command, portable in Python, open to feedback. The
+  major approves the intent; the solution design stays a draft, and
+  the open threads stay open." Short form: "5.0: the forge found and
+  read". The test of the major ran 2026-10-09: the check
+  `single-source-of-truth`, both lenses, one challenge, all settled
+  at 4.65.
 - **THR.0590** [intent] What the documentation of a project other than
   the engine reads. A project may be self-contained like the forge, a
   strategy that generates a heap of files, a budgeting exercise, or
   carry a link to an implementation in another repository; the outline
   is the same (POS.1450), what fills it differs, and where a project
-  says what it wants documented is open. Trigger: the first `/document
+  says what it wants documented is open, and so is the language of
+  the pages and the map of a project in another language, English
+  like the records or the project's like the artefacts: POS.0060
+  places neither kind (FND.1270). Trigger: the first `/document
   <slug>` on a project. Opened 2026-10-09 from the brief
   `documentation`.
+- **THR.0600** [intent] A test of the forge's behaviour. The test of a
+  major reads documents and runs nothing (POS.0300); the research
+  `research/2026-10-03-testing-the-behaviour-of-a-prompt-framework.md`
+  names the cheap form: a handful of scripted scenarios drawn from
+  recorded failures of conduct (the walkthrough breaks behind
+  POS.1170, the edits behind POS.1460, the raw git reads behind
+  THR.0400), with assertions on the files at the end, several trials
+  each, run before a release and its result in the approval record.
+  Open: whether to build it, in what form, and which failures it
+  starts from; not before 5.0. Origin: the challenge of 2026-10-09
+  (CHL.0220, accepted as modified) and that research. Opened
+  2026-10-10.
 
 Note: the ID THR.0120 was inadvertently used twice — first for the
 readme-recipe thread (opened 1.14, closed 1.16), then for the
