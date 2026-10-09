@@ -1,11 +1,11 @@
 ---
 project: forge
 title: Next generation, the requirements for a forge that can be rolled out into real operation
-date: 2026-10-03
+date: 2026-10-09
 author: PCHe
-version: 0.2
+version: 0.3
 status: draft
-last_change: 0.2 (2026-10-03): the eighteen researches of 2026-10-03 cited under the sections they serve, each with what it found; THR.0520 linked; what is still open rewritten on them.
+last_change: 0.3 (2026-10-09): the documentation and the cut of the README moved out of "Documentation and news" into the brief `documentation`; the section is "News".
 ---
 
 <!-- Only this header is fixed; the text below it is free-form. The
@@ -226,28 +226,21 @@ long session. This section rests on THR.0520.
 
 ## How people get to it
 
-### Documentation and news
+### News
 
-The README is today the documentation, and that is not good: it is
-very long and poor as documentation. The README is to be short: what
-the forge is and what it is for, perhaps the current news. The
-documentation is a normal series of documents on single topics,
-separate linked pages on which a topic can be described well. It is
-for people inside the company and outside it, so that they
-understand the forge and use its potential in full. We also show
-badly what is new in a version: the README does not say, and the
-release notes are technical. There should be something like the
-biggest news, which strikes the reader: the new elicitation and what
-it is, to take the last releases.
+We show badly what is new in a version: the README does not say,
+and the release notes are technical. There should be something
+like the biggest news, which strikes the reader: the new
+elicitation and what it is, to take the last releases. The
+documentation itself, and the cut of the README, are the brief
+`documentation` (`00-brief-documentation.md`, born 2026-10-09 from
+the part of this section that spoke of them).
 
 Research:
-`research/2026-10-03-how-project-documentation-is-built.md` and
 `research/2026-10-03-showing-the-main-news-of-a-version-to-a-reader.md`.
-The README orients and points; one page, one topic; plain pages in
-`docs/`, the reference derived from the definitions; no need to wait
-for the split. The news is a second document beside the changelog,
-written per period and not per release; an item is a capability, and
-a person makes the cut.
+The news is a second document beside the changelog, written per
+period and not per release; an item is a capability, and a person
+makes the cut.
 
 ### The threshold of entry
 

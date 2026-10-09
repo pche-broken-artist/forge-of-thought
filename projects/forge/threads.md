@@ -414,6 +414,89 @@ project: forge
   the README's: the footer (`_Last updated_`) is kept for now and the
   principal will give further input (noted 2026-09-14 from the
   ledger).
+  Round of 2026-10-07, unfinished, saved here. The handed-over
+  proposal `proposal-documentation.md` (2026-10-05) was walked only
+  in its frame and is superseded in substance by the principal's
+  word of this round, not yet judged page by page; its map of pages
+  and its section 11 stay as material. The principal's direction:
+  the documentation is generated, as automatic as possible, never an
+  artefact he maintains by walkthrough, and its definition belongs
+  neither in the intent nor in the solution design. The shape agreed
+  so far, carried in the conversation only: a command of its own
+  (working name `/document`), two phases without a question; a
+  mapper, an isolated agent on the session model carrying the whole
+  assignment (three readers, five fixed sections, one topic per
+  page, every artefact with its elicitation in full, how a new
+  artefact is born, stable page names, what must not appear), which
+  reads the engine on disk and writes the map as the index
+  `docs/README.md`, one row per page with its inputs and its state
+  new / regenerate / keep / remove; then one dumb page maker per
+  page on a faster model, from its row, its inputs and a fixed page
+  template; the state of a page computed by a script from the
+  content hashes of its inputs, never by judgement, so that a run
+  regenerates only what changed. No recipe, no artefact; the intent
+  receives one position, the solution design one part; `/render`
+  stays untouched. Trial of 2026-10-07 in the engine's `tmp/`
+  (gitignored, not a record): the mapper on the session model made
+  a map of 65 pages in 13 minutes, three pages on Sonnet 5.5 took
+  23 to 58 seconds each and read well. Five lessons, to be walked
+  before the write: (1) a subagent sees the session's memory and
+  its copy of CLAUDE.md, so instance facts can reach a public page;
+  a rule in the definitions and a mechanical scan of the pages by
+  the state script were proposed, no verdict yet, THR.0580 to widen
+  from CLAUDE.md to the whole session context; (2) the pages mirror
+  stale owners faithfully (`templates/intent.md` still lets IDs be
+  omitted and keeps Candidate structure for assignment), fixes go
+  into the owners; (3) provenance inputs must be exact paths, no
+  globs or sections, for the hash to be computable; (4) a page
+  maker cannot see the other pages, so the map must hand it one
+  sentence per linked page; (5) the forge project's recipes own
+  pinned text today (the readme recipe fixes the install commands
+  and the prerequisites) and the mapper did not read them: either
+  the mapper reads them as owners or the pinned facts move to one
+  place both the README and the documentation read, the second
+  recommended, the place undecided. The order "after THR.0230" is
+  withdrawn by the principal's word of 2026-10-05.
+  2026-10-09: the material of this thread and the principal's word
+  of the day are born as the brief `documentation`
+  (`00-brief-documentation.md` 0.1); worked there.
+  Trial of 2026-10-09 in the engine's `tmp/docs-trial-2/` (not a
+  record), with two trial agents in the engine, `docs-planner` and
+  `docs-writer`: the planner on the session model read the engine
+  from disk and wrote a map of 79 pages in 13 minutes (start 4, use
+  23, about 24, extend 9, reference 19; 45 mirrored, 34 derived with
+  their evidence; six unowned facts), each entry a page's brief with
+  exact inputs, links with a sentence, must-not and evidence; four
+  pages (install, about the intent, forge the intent, commands) were
+  then written twice, on Sonnet 5.5 in 18 to 29 seconds each and on
+  Opus in 52 to 81 seconds each, both sets free of instance facts.
+  Opus was more complete and said what the inputs did not support
+  where Sonnet derived a reason of its own; for mirrored pages Sonnet
+  sufficed. Five findings on the mechanism: (1) three of eight
+  writers took CLAUDE.md from their context instead of the disk
+  although told to read it, so CLAUDE.md should rarely be an input
+  and the planner should name the owning file; (2) two writers cited
+  a preference from the session's memory, so the memory reaches a
+  subagent (THR.0580); (3) the long dash in the link shape of both
+  agents is Claude's error, to be a spaced hyphen; (4) link titles
+  were guessed by every writer, so the map must carry a title per
+  page; (5) pages mirrored stale owners, mended at 4.59
+  (`templates/intent.md`, POS.1340). Claude's recommendation: the
+  writer's model chosen mechanically by the entry's `made`, mirrored
+  on the faster model, derived on the session model.
+  2026-10-09, later: the first version of the documentation
+  generated into `docs/` at the engine root on the principal's word,
+  79 pages and the index, from the map `docs-map.md` in this project
+  (the planner's map with a title per page), the index derived by
+  `scripts/docs-index.py` with the engine's version; the 35 derived
+  pages written on Opus, the 44 mirrored on Sonnet; checked
+  mechanically: every page present, no broken link, no long dash, no
+  instance fact. Learnt on the way: Claude Code loads an agent's
+  definition once per session, so a change to `docs-writer.md` did
+  not reach the running writers and a batch ran on the old
+  definition; the model and the changed rules had to be passed in
+  the call. The README is not yet cut; the mechanism has no
+  command, no position and no part yet.
 
 - **THR.0350** [intent] Lessons of the first run in the field. The record of
   the forge applied to a private project of the principal's,

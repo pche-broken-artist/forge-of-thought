@@ -2,9 +2,9 @@
 project: forge
 purpose: readme
 audience: humans arriving at the repository
-version: 0.56
-updated: 2026-10-04
-last_change: 0.56 (2026-10-04): the brief is no longer locked and its callout is gone (FND.0950); the artefacts and their table are drawn from the definitions on disk, and the pinned diagram has the solution design as built and reachable from the intent (FND.0960); Document chain cited by the item's name (FND.0970); the README names CONTRIBUTING.md (POS.1440).
+version: 0.57
+updated: 2026-10-09
+last_change: 0.57 (2026-10-09): the README cut to what orients and points, the documentation in `docs/` taking the rest (brief `documentation`, THR.0340): the chapters How it is used, How the work feels, Roles, Isolated reviewers, Commands, Conventions, Repository layout, Setup, Scripts and Planned extensions left, the chain kept as its picture, a new chapter Documentation added; the inputs cut to CLAUDE.md, the intent, the definitions and the documentation index; the pinned facts kept in a section of their own that the README does not print.
 output: /README.md
 ---
 
@@ -20,61 +20,46 @@ summarising the newest row. -->
 ## Inputs
 - CLAUDE.md
 - projects/forge/10-intent.md
-- .claude/agents/                # the reviewers' agent files: the
-                                 # `description` of each is its line
-                                 # in the rosters of section 8
 - .claude/skills/forge/states/   # the definitions of the artefacts:
-                                 # the rules CLAUDE.md delegates to
-                                 # them
-- .claude/skills/                # the commands: of each skill its
-                                 # front-matter only; `setup`,
-                                 # `ingest`, `save` and `release`
-                                 # whole, for the mechanics
-- scripts/                       # the scripts: of each file its help
-                                 # header only, never the code
-- templates/ledger.md            # the states of findings and
-                                 # challenges
+                                 # one line each in the chain picture
+- docs/README.md                 # the documentation index: its
+                                 # version line and the three paths
 
 ## Instructions
-- The README presents the current, actual state of the system to a
-  human meeting the repository for the first time — a colleague, a
-  future principal, the principal returning after weeks. It must stand
-  alone: no claim may require opening CLAUDE.md or the intent.
+- The README orients and points. It presents what Forge of Thought
+  is, why, what one gets, how to start and where the documentation
+  is, to a human meeting the repository for the first time. It
+  documents nothing itself: every mechanism, convention, command,
+  role and setup step lives in `docs/` and the README sends the
+  reader there. It must stand alone for what it says: no claim may
+  require opening CLAUDE.md or the intent.
 - Every claim must be derivable from the inputs (the only exceptions:
-  the fixed Setup commands, the one fixed requirement example and the
-  author-and-licence text this recipe itself carries). Invent nothing; omit rather than embellish.
-  Anything superseded in the inputs must not survive in the README.
+  the fixed Quickstart commands, the fixed "Short on time?" paragraph
+  and the author-and-licence text this recipe itself carries). Invent
+  nothing; omit rather than embellish. Anything superseded in the
+  inputs must not survive in the README.
 - Never name a git remote, a company, a company system, a person or
   any instance-specific value — the README describes the engine and
   must stay valid for any instance of the forge. Projects other than
   `projects/forge` are never named: they live in repositories of
-  their own that the engine does not know.
-- Where two inputs state the same rule, the wording of the operating
-  layer wins (CLAUDE.md, a definition, an agent file); the intent
-  supplies the why — use it for the short rationale sentences (e.g.
-  why 10-intent.md exists, why blind reviewers). What CLAUDE.md
-  delegates to a definition (what a brief carries, what the intent
-  and its threads hold, completeness and the Requirement style of
-  the assignment) is taken from the state file it names; the rosters
-  of section 8 from the `description` of each file in
-  `.claude/agents/`; what a command does from its skill; what a
-  script is for from its help header. State each rule once: no
-  sentence appears in
-  two sections (the only-door-to-git rule lives in Saving and syncing
-  only).
-- Tone: plain, direct, no marketing. UK English. Tables for
-  enumerable facts (roles, chain, commands, prefixes), prose only
-  where reasoning is being explained. Table cells carry one short
-  sentence each; longer mechanics move to prose below the table or to
-  Setup. Every core term (principal, brief, intent, assignment,
-  solution design, render, recipe, ledger, challenger, critic) is
-  set in bold at its
-  first definition, and "principal" is defined at its first use.
+  their own that the engine does not know. The README never names
+  who the current principal is: the identity of an instance is not
+  a property of the system.
+- Where two inputs state the same thing, the wording of the operating
+  layer wins (CLAUDE.md, a definition); the intent supplies the why.
+  State each thing once: no sentence appears in two sections.
+- Tone: plain, direct, no marketing. UK English. No long dash
+  anywhere: a colon, a full stop or a spaced hyphen where one would
+  stand. Every core term (principal, brief, intent, render, recipe)
+  is set in bold at its first definition, and "principal" is defined
+  at its first use.
 - The title is `# Forge of Thought <version>` — the current version
   of the forge intent (its front-matter version), no status
   annotations. Below it one line: the subtitle fixed by POS.0620,
   followed by ` · [Release notes](RELEASE-NOTES.md)`. The name
-  appears large exactly once; there is no separate version line.
+  appears large exactly once; there is no separate version line, and
+  the intent version in the title is the only version that appears
+  in the README's own words.
 - The masthead is the identity statement of Forge of Thought, built
   to be scanned: one short paragraph, three bold-led bullets, one
   closing paragraph. The opening paragraph leads with the identity
@@ -83,40 +68,35 @@ summarising the newest row. -->
   a raw, half-formed idea — a process redesign, a platform
   initiative, an organisational change, a D&D campaign; the fourth
   example is fixed, it signals domain-agnosticism per POS.0780 —
-  and tempers it into a
-  precise, self-contained handover for whoever delivers it: a team,
-  a colleague, your future self), and closes as a bridge naming the
-  working principle: it rests on one principle — **the machine
-  carries every part of the work that is not deciding** — in three
-  forms. The three forms follow as bullets with fixed bold lead-ins:
-  **It thinks with you.** — interviews and probes, criticises,
-  challenges, inspires; extracts what the principal has not yet
-  articulated; lays out options with their trade-offs; the bullet
-  ends "It proposes — you decide."; **It keeps the work
-  consistent.** — nothing wanders off in forgotten chats: the
-  thinking lives in versioned, templated artefacts, with decisions,
-  state and history keeping themselves in order and consistency
-  guarded across every output; **It carries the tedious work.** —
-  audience-facing outputs — a pitch, a deck, even this README — are
-  **renders** (bold here: this is the term's first definition): generated from the artefacts through recipes, regenerated
+  and tempers it into a precise, self-contained handover for whoever
+  delivers it: a team, a colleague, your future self), and closes as
+  a bridge naming the working principle: it rests on one principle —
+  **the machine carries every part of the work that is not
+  deciding** — in three forms. The three forms follow as bullets with
+  fixed bold lead-ins: **It thinks with you.** — interviews and
+  probes, criticises, challenges, inspires; extracts what the
+  principal has not yet articulated; lays out options with their
+  trade-offs; the bullet ends "It proposes; you decide."; **It keeps
+  the work consistent.** — nothing wanders off in forgotten chats:
+  the thinking lives in versioned, templated artefacts, with
+  decisions, state and history keeping themselves in order and
+  consistency guarded across every output; **It carries the tedious
+  work.** — audience-facing outputs — a pitch, a deck, this README,
+  the whole documentation — are **renders** (bold here: the term's
+  first definition): generated from the artefacts, regenerated
   whenever the thinking moves, never written by hand twice. The
   closing paragraph carries the ontological sentence saying what the
   forge technically is — a git repository: slash commands and
   isolated agents — challenger personas and critic lenses — for
-  Claude Code, templates, and the conventions binding
-  them — and states where the chain currently ends as a fact, never
-  as the goal. The README never names who the current principal is:
-  the identity of an instance is not a property of the system. The
-  masthead presents the forge as a place where thoughts are forged
-  (POS.0620). No conventions in the masthead, and never anchor the
-  text to a chain version number — the intent version in the title
-  is the only version that appears.
+  Claude Code, templates, and the conventions binding them — and
+  states where the chain currently ends as a fact, never as the
+  goal. The masthead presents the forge as a place where thoughts
+  are forged (POS.0620). No conventions in the masthead.
 - Directly below the masthead and before Section 1 stands one short
   paragraph for the reader with little time, with no heading of its
-  own and fixed in wording (a further exception to "derivable from
-  the inputs": the two files are renders of this project, and the
-  recipe carries their paths): "Short on time? Two one-page notes
-  say it briefly:
+  own and fixed in wording (the two files are renders of this
+  project, and the recipe carries their paths): "Short on time? Two
+  one-page notes say it briefly:
   [for a CTO](projects/forge/renders/cto-pitch.md) and
   [for a CEO](projects/forge/renders/ceo-pitch.md). Each has a Word
   version beside it." Two sentences and the two links, nothing
@@ -127,208 +107,57 @@ summarising the newest row. -->
   answer sentence "Forge of Thought is for those who chose to be
   better." followed in the same paragraph by the lead-in "The
   failure modes it exists to remove:" — then five bullets, no
-  closing line: thinking
-  scattered across chat sessions that die, taking their context with
-  them; handovers whose completeness depends on the mood of the day
-  they were written; the same thinking retold to every audience — a
-  pitch, a deck, a mail — each version rewritten by hand and
-  drifting from the others; feedback and decisions with no place to
-  land, so the same ground is fought over twice; assumptions nobody
-  attacked before reality did. No rhetoric and no restatement of the
-  principle — the masthead already carries the answer.
+  closing line: thinking scattered across chat sessions that die,
+  taking their context with them; handovers whose completeness
+  depends on the mood of the day they were written; the same
+  thinking retold to every audience — a pitch, a deck, a mail — each
+  version rewritten by hand and drifting from the others; feedback
+  and decisions with no place to land, so the same ground is fought
+  over twice; assumptions nobody attacked before reality did. No
+  rhetoric and no restatement of the principle — the masthead
+  already carries the answer.
 - Section 2 is "What you get": a strictly concrete capability list —
   six bullets, no philosophy (that is the masthead's job): a
   versioned document chain growing from a brief — your idea put
   together, yours by your approval — through the intent to the
   layers your project needs, an assignment to hand over and a
-  solution design among them; an elicitation interview that
-  forges the intent; blind adversarial reviewers, every verdict
-  recorded; audience-specific renders generated from
-  recipes, including an actual PowerPoint file through the user's
-  own template; external sources registered immutably and used only
-  as the principal directs; everything in files and git — nothing
-  depends on a chat's memory.
+  solution design among them; an elicitation interview that forges
+  the intent; blind adversarial reviewers — critics of the
+  documents, challengers of the thinking, checks of the
+  conventions — every verdict recorded; audience-specific renders
+  generated from recipes, including an actual PowerPoint file
+  through the user's own template; external sources registered
+  immutably and used only as the principal directs; everything in
+  files and git — nothing depends on a chat's memory. Each bullet
+  ends with a relative link in parentheses to the page of `docs/`
+  that explains it, taken from the index's own listing (the chain to
+  `docs/about/the-document-chain.md`, the interview to
+  `docs/about/elicitation.md`, the reviewers to
+  `docs/about/isolated-reviewers.md`, the renders to
+  `docs/about/renders-and-recipes.md`, the sources to
+  `docs/about/sources-and-research.md`, git to
+  `docs/about/persistence-in-git.md`).
 - Section 3 is a Quickstart with a common head and two named paths.
   The head, "First, once per machine", is a short fenced block: clone
   this repository (no URL; the reader is already looking at it, with
   a comment "you are looking at it"), install Claude Code first
-  (pointer to Setup), start `claude` — always from the engine root —
-  and `/setup` (comment: first run only — fills CLAUDE.local.md,
-  sets the model, Fable). Then two bold-led paths, each its own
-  fenced block: **Starting a new project** — `/new-project my-idea`,
-  `/forge intent`, `/save`; **Bringing an existing project** —
-  `/import-project <project url>` (comment: clones into `projects/` —
-  the commit identity is git's, resolved from your own
-  configuration) and
-  `/forge <project-slug>` (comment: the slug is the repository's
-  name; select the project before any work — the forge cannot guess
-  it). Closing
-  sentence: each project lives inside `projects/<slug>/` as a git
-  repository of its own, which the engine does not track — that is
-  why you name it first.
-- The language rule appears once, in Conventions, and says only this:
-  the forge dictates one output language per project — the artefacts
-  of the chain (intent, assignment, later layers) are written in the
-  language the project's ledger header declares (`language`, English
-  when absent); the briefs are the exception, kept in whatever
-  language they are written in; everything else a project
-  holds — ledger, decisions, history, reviews, challenges, indexes,
-  research, recipes — is always English, as is the notation (ID
-  prefixes, `shall`, status words, front-matter keys); a render may
-  be in any language its recipe declares. The conversation language
-  is per-instance configuration (it lives in `CLAUDE.local.md`) and
-  its value is never mentioned in the README.
-- The "How it is used" story is loose narrative, not documentation:
-  second person, four to six short paragraphs, commands appearing in
-  passing inside sentences, concrete micro-examples (a downloaded
-  security standard the intent is later verified against; a group
-  pitch as a render) beating abstractions. The opening
-  thought-arrives line carries one non-corporate example — a
-  campaign taking shape for your D&D table — echoing the masthead's
-  domain-agnostic signal. It mentions that composing
-  a recipe can be guided by a genre interview. No rule may be stated
-  there that the later sections do not also carry — the story
-  illustrates, it never legislates.
-- The "How the work feels" section is drawn from the Working methods
-  section of CLAUDE.md only: every method named there appears, in
-  CLAUDE.md's order and under its name verbatim; the one-sentence
-  glosses are re-derived. The words the reader types are given in
-  code: the verdict line `(a)ccept / (m)odify / (r)eject / (p)ark`
-  as CLAUDE.md gives it and the single letter that answers it
-  (POS.0850 of the intent) under the walkthrough, `??` under
-  Propose, never decide, `write` under One write per round.
-  It never mentions commands that no longer exist.
-- The worked example: until an exemplar project is chosen and
-  published (THR.0200 of the intent), the subsection "What it looks
-  like in practice" carries exactly one sentence — a worked example
-  from a real project will appear here once one is published — and
-  nothing else. Never construct an example from memory or from
-  projects the inputs do not contain.
-- Roles: a proper two-column table with a real header row (Role /
-  What they own), one row per role CLAUDE.md's Roles section names
-  and no other, followed by the standing-rules paragraph and one
-  sentence on the collaboration model: one instance serves one
-  principal, recipients collaborate through the artefacts; more
-  principals means more instances (see Planned extensions).
-- The Commands table mirrors CLAUDE.md's Commands table one to one in
-  commands and signatures; descriptions are at most one or two
-  sentences per cell. The `/ingest`, `/save` and `/release` mechanics
-  move to a short prose paragraph below the table, taken from those
-  three skills. `/forge` and `/ledger` are
-  described so the difference is obvious: `/forge` is the chain map
-  with a recommended next step; `/ledger` is the quick state readout
-  from the ledger. The star mechanics of `/forge <state>` are
-  explained plainly: the command is simply the name of the artefact
-  you want to work on.
-- "A typical journey" is a plain-language bullet story — what a
-  person does and wants, in order: brief, iterated intent, reviewer
-  pressure and verdicts, a presentation recipe rendered including the
-  PowerPoint, the distilled assignment, a solution design where one
-  is worth writing, saving as you go. Commands
-  appear only in parentheses as secondary information. No project
-  slugs at all — the journey speaks of "your project".
-- The chain section keeps the iteration rule and the write cadence to
-  one line each — they matter to the user but are agent discipline,
-  not README substance. The brief's row and one paragraph below the
-  table carry the brief rule per the brief's definition
-  (`.claude/skills/forge/states/brief.md`): a draft until the
-  principal approves it, changed after that as any artefact is,
-  never locked; three equally legitimate origins, `/forge brief` as
-  the door, later wholes as `00-brief-<name>.md`, mined into the
-  single intent with the ledger tracking how far.
-- Every artefact the forge has gets a paragraph of equal weight, one
-  per definition in `.claude/skills/forge/states/`, in the order of
-  their file numbers, each answering what it is, what it holds and
-  why it is shaped so; and the per-document table has one row per
-  definition, drawn from its `description`, Target and Inputs. No
-  artefact is described that has no definition, and none that has one
-  is left out: the listing of that directory is the one list of the
-  forge's artefacts (CLAUDE.md, Document chain). What each holds
-  comes from its definition, the prefixes of its items from
-  CLAUDE.md, ID scheme. Said with them, once: below the intent a
-  project takes the layers it needs, none is a condition of another,
-  and a layer a project does not have is not missing.
-- Exactly one principle in the README is set as a `>` callout block,
-  in the chain section, one line: a render is never edited by hand —
-  what is iterated is its recipe (opening the "Renders and recipes"
-  material). The callout is where the rule is stated: the surrounding
-  prose does not repeat it. No other callout anywhere (the quoted
-  illustrative requirement excepted).
-- The renders-and-recipes material in the chain section is two
-  paragraphs under their callout: (1) "Renders and recipes" — recipe
-  iterated, render generated, provenance front-matter, a render may
-  serve as an input of another render; (2) "From Markdown to slides" — everything is
-  Markdown; recipe composition may be guided by genre
-  (`/recipe presentation`); an output is made in two steps, each
-  with its own command, as CLAUDE.md, Document chain, Renders, says:
-  `/render` makes the Markdown and, where the recipe names a format
-  in its `Format` section, the plain `.docx` or `.pptx` beside it
-  through pandoc — cheap, the same every time, Mermaid diagrams as
-  blocks of code; `/publish` makes the designed file through a
-  model into `published/` — expensive, started by the principal
-  only, from the Markdown as it lies on disk, never rendering and
-  sending nothing anywhere; a recipe without a format ends at the
-  Markdown; a template or a reference document is named by path —
-  typically a document of a library project — and the page is A4
-  by default; the Markdown stays the source of truth; all other
-  format conversion happens outside the forge.
-- Conventions includes: the ID scheme and prefix table; the Terms
-  rule; the language rule (as above); the requirement style —
-  illustrated by this one fixed example, quoted verbatim and marked
-  as illustrative: "REQ.0010 The Platform shall record every request
-  and every response passing through the Gateway, with the identity
-  of the requesting User and the time." (the only text in the README
-  not derived from the inputs besides Setup); completeness over
-  brevity; the boundary in one sentence — an assignment assigns, it
-  does not solve; the machinery of executing delivery belongs to the
-  recipients (no enumerated list of banned apparatus); the
-  versioning scheme, followed by the **document kinds** table of
-  CLAUDE.md (section "Document kinds") reproduced in full — the six
-  columns Group / Kind / Meaning / Written by / Versioned / Behaviour
-  and every row, verbatim — introduced by one sentence that "document"
-  is every file of a project and "artefact" the documents of the
-  chain, and followed by two sentences from Versioning & status of
-  CLAUDE.md, on the history companion (`<file>.history.md`,
-  append-only, `last_change` in the front-matter) and on integer
-  versions being approved and a recipe never; project kinds — `thought` (the chain) and
-  `library` (`lib-` prefix, shared material, no chain) — and naming
-  (slugs), illustrated only with `forge` and the `lib-` prefix, never
-  with invented or instance projects. Naming has no numbered section
-  of its own.
-- Section for reviewers opens with a short summary — clean context
-  first ("they cannot be told what we really meant"), then that every
-  kind of reviewer is of one shape — and, after the summary, one
-  paragraph on "isolation is not independence" per the intent
-  (POS.0790): the reviewers share the author's model family, their
-  agreement is never validation, and the calibration point lies
-  outside the forge. Then one subsection per kind of reviewer, in the
-  order critic, challenger, check, and every kind that comes after,
-  each with: what it judges, in one sentence; its command; its roster
-  as a bullet list — one bullet per lens, persona or check, the name
-  in code, a dash, and what it reads, hunts or verifies in one
-  sentence, taken from the agent file's `description` — never woven
-  into a paragraph, so that a new lens, persona or check is a new
-  bullet; then its output and the states of its findings as a list in
-  exactly the vocabulary of `templates/ledger.md` (Findings,
-  Challenges), never a state of the render's own; a check's report is
-  filed only when it finds something. The verdict words are said once, in "How
-  the work feels" under the walkthrough, never per reviewer: they
-  are one set for every walkthrough.
-- Open threads (THR) are not enumerated; growth is summarised from
-  POS.0700 — the layer growth path — and the multi-principal outlook
-  (more principals, more instances). The engine/projects split is
-  no longer planned: it is the shape of the repository, described in
-  Setup and the chain section as fact (POS.0940).
-- The repository layout block mirrors CLAUDE.md's layout block in
-  full, including `CLAUDE.local.md`, the gitignored `projects/*`
-  with its per-project `.git/`, the library layout and the generated
-  `.pptx` sibling of a deck render. A comment there that only points
-  to a section of CLAUDE.md is replaced by the fact it points to: the
-  README stands alone.
-- The chain diagram shows the star, never a line: it must make
-  visible at first glance that the chain branches richly. It is this
-  mermaid block, pinned verbatim (solid arrows = built today, dashed
-  = illustrative growth):
+  (comment: what to install and how is `docs/start/install.md`),
+  start `claude` — always from the engine root — and `/setup`
+  (comment: first run only; what it asks is `docs/start/setup.md`).
+  Then two bold-led paths, each its own fenced block: **Starting a
+  new project** — `/new-project my-idea`, `/forge intent`, `/save`;
+  **Bringing an existing project** — `/import-project <project url>`
+  (comment: clones into `projects/`) and `/forge <project-slug>`
+  (comment: the slug is the repository's name; select the project
+  before any work — the forge cannot guess it). Closing sentence:
+  each project lives inside `projects/<slug>/` as a git repository
+  of its own, which the engine does not track — that is why you name
+  it first; the first sitting from nothing to a saved intent is
+  `docs/start/first-result.md`.
+- Section 4 is "The document chain in one picture". It carries the
+  star, never a line: it must make visible at first glance that the
+  chain branches richly. It is this mermaid block, pinned verbatim
+  (solid arrows = built today, dashed = illustrative growth):
 
   ```mermaid
   flowchart LR
@@ -356,135 +185,78 @@ summarising the newest row. -->
 
   Directly under it one bold legend line: blue = chain artefacts
   (light = not built yet), green = renders; dashed arrows = growth
-  that does not exist yet. The dashed layers are a fixed illustrative set of this recipe
-  (business analysis, an RFP, an article with its translation
-  render, strategy, an implementation deck),
-  never presented as planned or existing. Below the legend two
-  sentences: adding a layer is one definition file declaring its
-  inputs — nothing is renumbered and nothing existing is reworked,
-  which is why files are numbered in tens; and the authorship
-  boundary per POS.0710 — a chain artefact is composed by the
-  principal, a render is generated from artefacts (the article and
-  its translation in the diagram illustrate it).
-- Setup is written for a reader who has never used Claude Code and
-  has these parts:
-  - "Prerequisites" — one consolidated list: git; PowerShell 7
-    (pwsh) — the scripts are PowerShell, needed on macOS/Linux too;
-    Python 3 (for markitdown); a paid Claude subscription.
-  - "Getting the forge and Claude Code" — clone this repository (the
-    engine); install Claude Code (commands
-    fixed by this recipe, update them here when they change):
-    Windows `irm https://claude.ai/install.ps1 | iex`; macOS/Linux
-    `curl -fsSL https://claude.ai/install.sh | bash`; or
-    `npm install -g @anthropic-ai/claude-code`. Sign in on first
-    run — usage draws from the same pool as Claude chat. Always
-    start `claude` from the engine root so CLAUDE.md and
-    CLAUDE.local.md load. Then run `/setup` once (owner: the skill
-    `setup`; where this text and the skill differ, the skill wins):
-    it fills
-    `CLAUDE.local.md` (the conversation language, who the principal
-    is) from its template with you in a short interview — gitignored,
-    never committed — and creates `.claude/settings.local.json` with the
-    session model set to Fable, the strongest available model, which
-    the whole forge including the blind reviewers runs on; it tells
-    you so in one sentence, and `/model` or editing that file
-    changes it at any time (permissions come from the shared
-    `.claude/settings.json`). It closes with your git identity, which
-    is git's own: it asks for the hosts you push to with a name and
-    an e-mail for each and offers to write the `includeIf` stanzas
-    into your `~/.gitconfig` — one identity per host, resolved by git
-    from the remote's URL — together with one global guard,
-    `user.useConfigOnly = true`, so a repository on a host with no
-    stanza fails aloud instead of committing with a default;
-    declined, it prints the lines for you to apply by hand. The forge
-    itself sets no identity anywhere. `/setup` never overwrites
-    existing files.
-  - "Your projects" — each project is a directory under `projects/`
-    and a git repository of its own: `/new-project` creates the
-    files; `git init` in that directory and a remote if wanted are a
-    one-off act of yours, and the commit identity is git's, resolved
-    per host from your own configuration. An
-    existing project is brought in with `/import-project <git-url>`,
-    which clones it into `projects/<repository name>` through
-    `scripts/forge-clone.ps1` and reports the identity git resolves
-    for it. The
-    engine ignores `projects/*` (except its own `projects/forge`)
-    and the scripts find your project through its `.git`. A project
-    without a repository is reported as "not under git" — a fact,
-    not an error.
-  - "Script prerequisites" — one bullet per script: `doc2md.ps1`
-    needs markitdown
-    (`pip install "markitdown[docx,pptx,pdf,xlsx,xls]"`);
-    `md2pptx.ps1` and `md2docx.ps1` each have two engines
-    (`-Engine pandoc | claude`), and each engine its own need: the
-    `pandoc` engine, behind `/render`, needs pandoc
-    (https://pandoc.org/installing.html); the `claude` engine,
-    behind `/publish`, needs the `document-skills` plugin, installed
-    once from an interactive Claude Code session
-    (`/plugin marketplace add anthropics/skills`, then
-    `/plugin install document-skills@anthropic-agent-skills`); a
-    deck template is named by path (`-Template <file.potx>`), a
-    reference document for Word likewise (`-Reference`, a `.docx`,
-    `.dotx` or `.dotm`) — typically a document of a library
-    project — or none, in which case the model designs the visuals
-    and pandoc's built-in styles apply on an A4 page
-    (`-PageSize Letter` for US Letter); the git scripts need
-    nothing beyond git.
-  - "Saving and syncing" — two doors (owners: the skills `save` and
-    `release`; where this text and they differ, they win): `/save`
-    runs the light check,
-    then commits and pushes on the current branch, no render;
-    `/release`, from `main` only, runs its checks, settled with the
-    principal,
-    offers `critique essence` once, re-renders the README and release
-    notes and then saves with the release message and, at an approved
-    major, the tag `v<major>`; the scripts follow as the underlying
-    mechanism and, for Claude and every command of the forge, the
-    only door to git (stated here and nowhere else), each serving the engine and every project
-    repository — a bare save commits each repository with changes on
-    its own and pushes where it has a remote; `main` is the released
-    line, branches are voluntary (`forge-branch` creates or switches,
-    merging stays with git), one remote per repository, no URL
-    anywhere.
-  - "Upgrading" — written for the user who pulls a new version of the
-    engine. Upgrading the engine is `scripts/forge-pull.ps1`, a
-    fast-forward of `main`; your projects are untouched by it and
-    record no engine version. Read `RELEASE-NOTES.md`, the *Action
-    required* lines first: they say what a new version expects of
-    your projects and your instance files. Then, project by project,
-    run `/check light <slug>` and `/check project <slug>`: together
-    they measure the project against the current conventions and
-    report what no longer conforms, nothing else. Go through the
-    findings with Claude one at a time and agree what to migrate and
-    how; Claude makes the changes on your word, in the session, with
-    no migration tool in between — the checks and the release notes
-    are the tool. A project you leave as it is
-    stays valid under the conventions it was written to; migrating it
-    is your decision, per project, never assumed.
-- The Scripts section lists every script the repository uses — one
-  table row per file in `scripts/`: script, one-sentence purpose,
-  when it is run, and an install note where one is needed pointing
-  to Setup. Purposes come from each script's help header, and from
-  CLAUDE.md where it says when the script is run; invent nothing
-  beyond them. Below the table one short paragraph on portability,
-  from CLAUDE.md, Persistence (Portability).
+  that does not exist yet. The dashed layers are a fixed illustrative
+  set of this recipe (business analysis, an RFP, an article with its
+  translation render, strategy, an implementation deck), never
+  presented as planned or existing. Below the legend: one line per
+  artefact the forge has, one per definition in
+  `.claude/skills/forge/states/`, in the order of their file numbers,
+  the name in bold and one sentence from the definition's
+  `description`, each ending with a link to its page in `docs/about/`
+  as the index lists it; then one sentence that below the intent a
+  project takes the layers it needs, none a condition of another, and
+  many end at the intent; then exactly one principle set as a `>`
+  callout block, one line: a render is never edited by hand — what is
+  iterated is its recipe. No other callout anywhere, and nothing
+  else in this section: the chain is explained in `docs/`.
+- Section 5 is "Documentation". It opens with one sentence: the
+  documentation of the forge is in [`docs/`](docs/README.md), pages
+  of one topic each, generated from the engine like this README.
+  Then the three readers as three bullets, one line each, taken from
+  the index's "Where to start": the user, the extender, the
+  evaluator, each with where to begin as a relative link into
+  `docs/`. Then one sentence giving the version the documentation
+  was generated for and the date, taken from the index's own version
+  line, and that the index says it too. Nothing else: no page list,
+  no summary of what the pages say.
 - The section "Author and licence" precedes "About this README" and
   carries this fixed text verbatim, nothing more: "Forge of Thought ©
-  Petr Chlumsky (PCHe) — petr.chlumsky@gmail.com. Licensed under
+  Petr Chlumsky (PCHe) - petr.chlumsky@gmail.com. Licensed under
   [CC BY 4.0](LICENSE): use and adapt it freely; credit the author
   and link to this repository." and, as a paragraph of its own,
   "Feedback, ideas and changes are welcome: see
   [CONTRIBUTING.md](CONTRIBUTING.md)." (POS.1440 of the intent; the
-  link is relative, exactly as given). The author line is the one place the
-  README names a person: it is the licence holder, not the current
-  principal.
+  link is relative, exactly as given). The author line is the one
+  place the README names a person: it is the licence holder, not the
+  current principal.
 - The closing section is titled "About this README" and states that
   this file is a render: never edited by hand, regenerated by
   `/render readme` whenever the process changes (and by every
-  `/release` of the engine); fixes go into the recipe or the inputs. The
+  `/release` of the engine); fixes go into the recipe or the inputs;
+  the documentation in `docs/` is generated the same way, from the
+  engine, and its index says when and for which version. The
   render's YAML front-matter provenance is kept by design.
 - Keep the visible dated footer `_Last updated: <render date>_` at the
   end of the file.
+
+## Pinned facts (not rendered)
+These facts have no owner among the engine's files and this recipe
+is their one home until they get one (brief `documentation`, THR.0340:
+the place of the pinned facts). The README does not print them; the
+documentation's planner reads them here as an owner, and
+`docs/start/install.md` and `docs/start/setup.md` are where they
+reach the reader. Update them here when they change.
+- Prerequisites: git; PowerShell 7 (pwsh) — the scripts are
+  PowerShell, needed on macOS/Linux too; Python 3 (for markitdown);
+  a paid Claude subscription.
+- Installing Claude Code: Windows `irm https://claude.ai/install.ps1
+  | iex`; macOS/Linux `curl -fsSL https://claude.ai/install.sh |
+  bash`; or `npm install -g @anthropic-ai/claude-code`. Sign in on
+  first run — usage draws from the same pool as Claude chat. Always
+  start `claude` from the engine root so CLAUDE.md and
+  CLAUDE.local.md load.
+- The forge is cloned, not copied: `forge-save.ps1` refuses an
+  engine that is not a git repository.
+- Script prerequisites: `doc2md.ps1` needs markitdown
+  (`pip install "markitdown[docx,pptx,pdf,xlsx,xls]"`); the `pandoc`
+  engine of `md2pptx.ps1` and `md2docx.ps1`, behind `/render`, needs
+  pandoc (https://pandoc.org/installing.html); their `claude`
+  engine, behind `/publish`, needs the `document-skills` plugin,
+  installed once from an interactive Claude Code session
+  (`/plugin marketplace add anthropics/skills`, then
+  `/plugin install document-skills@anthropic-agent-skills`), unless
+  Claude Code already brings the docx and pptx skills; the git
+  scripts need nothing beyond git.
 
 ## Template
 # Forge of Thought <version>
@@ -497,9 +269,8 @@ principle as bridge — then the three bold-led bullets (It thinks
 with you / It keeps the work consistent / It carries the tedious
 work); closing paragraph with the ontological sentence (a git
 repository: slash commands, isolated agents — challenger personas
-and critic lenses — templates, conventions),
-where the chain ends today as fact — no mention of who the current
-principal is>
+and critic lenses — templates, conventions), where the chain ends
+today as fact — no mention of who the current principal is>
 
 <the fixed "Short on time?" paragraph with the two links to the CTO
 and the CEO note, exactly as the instruction gives it>
@@ -509,136 +280,40 @@ and the CEO note, exactly as the instruction gives it>
 per the instruction; no closing line>
 
 ## 2. What you get
-<the six concrete capability bullets per the instruction>
+<the six concrete capability bullets per the instruction, each
+ending with its link into docs/>
 
 ## 3. Quickstart
 <common head "First, once per machine" as a fenced block: clone this
-repository → install Claude Code (see Setup) → claude from the
-engine root → /setup; then two bold-led paths, each a fenced block:
-Starting a new project (/new-project my-idea → /forge intent →
-/save) and Bringing an existing project (/import-project
-<project url> → /forge <project-slug>, with the select-before-work
-comment); one closing sentence: each project is a repository of its
-own inside projects/, untracked by the engine — that is why you name
-it first>
+repository → install Claude Code (docs/start/install.md) → claude
+from the engine root → /setup (docs/start/setup.md); then two
+bold-led paths, each a fenced block: Starting a new project
+(/new-project my-idea → /forge intent → /save) and Bringing an
+existing project (/import-project <project url> →
+/forge <project-slug>, with the select-before-work comment); one
+closing sentence: each project is a repository of its own inside
+projects/, untracked by the engine — that is why you name it first;
+the first sitting is docs/start/first-result.md>
 
-## 4. How it is used
-### The flow
-<the general arc: an idea is put together as a brief — alone or in
-conversation with the forge; the intent is forged from it through
-interviews, iterated over days and sessions, everything living in
-files; sources are registered as they arrive and used only when the
-principal directs, /research grounds key topics; blind reviewers
-press on the thinking and the documents, nothing blocks; the
-assignment is distilled for the recipients and, where the way is not
-obvious, a solution design says how the things wanted are realised;
-renders as a first-class
-idea: recipes iterated (optionally through a genre interview),
-outputs — a pitch, slides incl. the actual PowerPoint, a mail, this
-very README — regenerated at every release; /save and /release keep
-it all in git>
+## 4. The document chain in one picture
+<the pinned star chain diagram (mermaid) with its legend line; one
+line per artefact from the definitions, each linked to its docs
+page; the one sentence on layers taken as needed; the
+render-never-hand-edited callout>
 
-### What it looks like in practice
-<one sentence only: a worked example from a real project will appear
-here once one is published>
+## 5. Documentation
+<one sentence with the link to docs/README.md; the three readers as
+bullets with where each begins; the version and date the
+documentation was generated for>
 
-## 5. How the work feels
-<one lead sentence: the forge is as much a way of working as a set of
-files, and these are the named methods of that work — the vocabulary
-you and Claude share; then a bold-name list of the Working methods
-of CLAUDE.md, every one of them, one sentence each, walkthrough
-first and given two sentences because it is the one you will use
-most;
-close with one sentence: none is a command, you invoke any of them in
-a word; then this table, fixed, verbatim:>
-
-| You type | What it does |
-|---|---|
-| `a`, `m`, `r` or `p` | Answers the verdict line `(a)ccept / (m)odify / (r)eject / (p)ark`, as your whole message. |
-| `write` | Orders the write of everything agreed in the round. Claude shows you the round first and writes on your yes. |
-| `??` | Asks for Claude's honest opinion of what you have just written. Three points at most, nothing written. |
-
-## 6. Roles
-<two-column table with header Role / What they own; standing-rules
-paragraph; collaboration-model sentence>
-
-## 7. The document chain
-<the pinned star chain diagram (mermaid) with its legend line and
-the two sentences below it; per-document table, one row per
-definition; the brief-rule paragraph (a draft until approved, never
-locked, origins, later briefs, mining); one paragraph per artefact;
-why 10-intent.md exists; iteration rule and write cadence one line
-each; feedback rule; the render-never-hand-edited callout followed by
-the two renders paragraphs: "Renders and recipes", "From Markdown to
-slides">
-
-## 8. Isolated reviewers
-<summary and the isolation paragraph per the instruction; then one
-subsection per kind — ### Critic (`/critique`), ### Challenger
-(`/challenge`), ### Checks (`/check`), and any kind that comes after —
-each: what it judges, the command, the roster as a bullet list (name —
-one sentence), the output and its states as a list>
-
-## 9. Commands
-<intro sentence; commands table mirroring CLAUDE.md with short cells;
-prose paragraph below the table with /ingest, /save and /release mechanics;
-note that plain conversation works too>
-### A typical journey
-<plain-language bullet story per the instruction>
-
-## 10. Conventions
-<IDs and numbering; prefix table; Terms rule; language rule;
-requirement style with the fixed illustrative item; completeness over
-brevity; the assigns-not-solves boundary sentence; versioning scheme;
-document kinds table with the history-companion sentences;
-project kinds; naming with forge and the lib- prefix only>
-
-## 11. Repository layout
-<fenced tree mirroring CLAUDE.md layout in full>
-
-## 12. Setup
-### Prerequisites
-<consolidated list>
-### Getting the forge and Claude Code
-<clone; install commands; sign-in; run from root; /setup
-(CLAUDE.local.md interview, settings.local.json with Fable, the git
-identity per host offered)>
-### Your projects
-<a repository of its own per project; /new-project creates files,
-git init is yours; /import-project brings an existing one through
-forge-clone; "not under git" is a fact>
-### Script prerequisites
-<one bullet per script>
-### Saving and syncing
-<the two doors — /save: the light check, then commit and push, no
-render; /release from main: its checks, README and release notes,
-then save with
-the release message and the major's tag; the scripts as mechanism
-and, for Claude and every command, the only door to git, serving
-the engine and every
-project repository; main the released line, branches voluntary via
-forge-branch, one remote per repository, no URL>
-### Upgrading
-<forge-pull as the upgrade, projects untouched; RELEASE-NOTES.md and
-its Action required lines; per project /check project, the findings
-agreed with Claude one at a time and migrated on your word; no
-migration tool; a project left as it is stays valid>
-
-## 13. Scripts
-<table of every script in scripts/: script, one-sentence purpose,
-when it is run, install note pointing to Setup>
-
-## 14. Planned extensions
-<growth path per POS.0700; more principals, more instances;
-projects/forge/ as the system's own project>
-
-## 15. Author and licence
+## 6. Author and licence
 <the fixed author-and-licence text>
 
-## 16. About this README
+## 7. About this README
 <this file is a render of projects/forge — regenerated by
 /render readme, never edited by hand; fixes go into the recipe or the
-inputs; provenance front-matter kept by design; system changes are
-recorded in projects/forge/>
+inputs; the documentation is generated the same way and its index
+says when and for which version; provenance front-matter kept by
+design; system changes are recorded in projects/forge/>
 
 _Last updated: <render date>_

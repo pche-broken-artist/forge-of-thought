@@ -1,8 +1,8 @@
 ---
-version: 4.58
-date: 2026-10-04
+version: 4.59
+date: 2026-10-09
 status: draft
-last_change: 4.58 (2026-10-04): the forge is open to those who use it, feedback and ideas wanted most, a finished change on the forge's own rule (POS.1440); `CONTRIBUTING.md` in the repository root, a render of the new recipe `contributing` (operating layer); the Essence says the chain ends where the project needs it to; the skills `ingest` and `render` cite Document chain by the item's name (operating layer, FND.0970).
+last_change: 4.59 (2026-10-09): the staging area of the intent is for the layer below, not for an assignment (POS.1340, `templates/intent.md`, the Map of the intent's definition); a position without an ID does not exist (`templates/intent.md`); both found by the documentation trial of 2026-10-09 (THR.0340).
 project: forge
 audience: principal + Claude only
 ---
@@ -278,9 +278,9 @@ position that already stands elsewhere.
   challenges, the principal the substance; a thread closes only on his
   word. The recipients, the objective and the success criteria are found
   here as soon as he sees them, in the section "Candidate structure for
-  assignment", so that the assignment distils them instead of finding
-  them first. No fate is recorded part by part at mining (REJ.0210).
-  Present shape 2026-10-02, from `00-brief-elicitation.md`.
+  the layer below", so that the layer takes them over instead of
+  finding them first. No fate is recorded part by part at mining
+  (REJ.0210). Present shape 2026-10-09, from `00-brief-elicitation.md`.
 - **POS.1350 The definition of the assignment's elicitation.** What it
   is to achieve: an assignment as POS.0130 has it, such that the
   recipients can act without the principal in the room and know the end
@@ -1607,7 +1607,7 @@ worked out by Claude; what Claude has worked out is never a FCT
   asks for one; the statuses are `draft`, `approved` and `superseded`
   (POS.0300).
 
-## Candidate structure for assignment
+## Candidate structure for the layer below
 
 Not applicable: this project's handover artefacts are the core itself
 (`CLAUDE.md`, `templates/`, `.claude/`) and `README.md`. A

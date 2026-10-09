@@ -58,7 +58,8 @@ it was considered and found not to apply.
   intent, was dropped, or was knowingly left behind;
 - what the layer below will need: the recipients, the objective
   and the success criteria, as soon as he sees them (where they
-  land: `templates/intent.md`, Candidate structure for assignment);
+  land: `templates/intent.md`, Candidate structure for the layer
+  below);
 - reality: what of it is feasible, and where the wheel already
   exists.
 

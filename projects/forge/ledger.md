@@ -2,7 +2,7 @@
 project: forge
 kind: thought
 language: en
-updated: 2026-10-05
+updated: 2026-10-09
 ---
 
 # Ledger — Forge of Thought
@@ -27,12 +27,13 @@ absorbed it; Note says what remains (partial) or the REJ (dropped). -->
 | 00-brief.md | — | placeholder: brief stage was skipped, intent is the earliest record | — | accepted under DEC.0010, not a check finding |
 | 00-brief-public-engine.md | 1.0 | approved | mined | born in the forge 2026-08-29 (THR.0130, THR.0090), locked 2026-08-29 in English after the CTO challenge; mined into intent 2.21 (POS.0940–0980, REJ.0140–0150, THR.0190–0200). Instance work it records — the one-off migration steps 1–6, the first projects after the split — stays here and under Waiting on principal, not in the intent |
 | 00-brief-elicitation.md | 1.0 | approved | mined | born in the forge and locked 2026-09-28; mined into intent 4.32 (POS.1300 to POS.1380, POS.0110, REJ.0180, REJ.0210, REJ.0220, THR.0440 to THR.0460; THR.0440 and THR.0450 closed at 4.46). The material for the briefs `brd` and `engine-split` is carried in THR.0230, THR.0300 and THR.0360. Not a model of a brief, see its opening note |
-| 00-brief-next-gen.md | 0.2 | draft | pending | born in the forge 2026-10-03, written in English on the principal's word; the needs of the next generation gathered in one round, to be sifted; the eighteen researches of 2026-10-03 cited under its sections (0.2); THR.0520 opened from it |
+| 00-brief-next-gen.md | 0.3 | draft | pending | born in the forge 2026-10-03, written in English on the principal's word; the needs of the next generation gathered in one round, to be sifted; the eighteen researches of 2026-10-03 cited under its sections (0.2); THR.0520 opened from it; the documentation moved out into the brief `documentation` (0.3) |
+| 00-brief-documentation.md | 0.1 | draft | pending | born 2026-10-09 from THR.0340 (the rounds of 2026-10-05 and 2026-10-07) and the principal's word of 2026-10-09; the documentation part of `next-gen` moved into it |
 
 ## Documents
 | File | Version | Status | Date |
 |---|---|---|---|
-| 10-intent.md | 4.58 | draft | 2026-10-04 |
+| 10-intent.md | 4.59 | draft | 2026-10-09 |
 | 40-solution-design.md | 0.3 | draft | 2026-10-04 |
 <!-- One row per layer below the intent, added when the layer is
 born; a layer the project does not have gets no row (CLAUDE.md,
@@ -43,7 +44,7 @@ Ledger). -->
 Document chain, Renders). Row mirrors the render's front-matter provenance. -->
 | Render | Audience | Recipe | Inputs | Generated |
 |---|---|---|---|---|
-| README.md (repo root) | humans arriving at the repository | recipes/readme.md v0.56 | CLAUDE.md, 10-intent.md v4.58, .claude/agents/, .claude/skills/forge/states/, .claude/skills/, scripts/, templates/ledger.md | 2026-10-04 |
+| README.md (repo root) | humans arriving at the repository | recipes/readme.md v0.57 | CLAUDE.md, 10-intent.md v4.59, .claude/skills/forge/states/, docs/README.md v4.59 | 2026-10-09 |
 | RELEASE-NOTES.md (repo root) | the user of the engine who has cloned it and takes upgrades through forge-pull | recipes/release-notes.md v0.12 | 10-intent.history.md, 10-intent.history.archive.md, 10-intent.md v4.58, decisions.md, previous edition (released sections) | 2026-10-04 |
 | CONTRIBUTING.md (repo root) | a visitor of the repository on GitHub who wants to say, ask or change something | recipes/contributing.md v0.1 | projects/forge/10-intent.md v4.58, CLAUDE.md | 2026-10-04 |
 | renders/executive-pitch.md | C-level executives whose experience of AI is chatting with it | recipes/executive-pitch.md v0.6 | projects/forge/10-intent.md v4.30, CLAUDE.md | 2026-09-27 |
@@ -236,7 +237,9 @@ as `rejected`. -->
 | FND.0990 | medium | conformance | open | 2026-10-05-check-single-source-of-truth.md | |
 | FND.1000 | low | conformance | open | 2026-10-05-check-single-source-of-truth.md | |
 | FND.1010 | low | conformance | open | 2026-10-05-check-single-source-of-truth.md | |
-| FND.1020 | low | conformance | open | 2026-10-07-check-light.md | |
+| FND.1020 | low | conformance | resolved | 2026-10-07-check-light.md | `proposal-documentation.md` deleted 2026-10-09 on the principal's word, its substance in the brief `documentation` and THR.0340 (named again in `2026-10-09-check-light.md`) |
+| FND.1030 | low | conformance | open | 2026-10-09-check-light.md | |
+| FND.1040 | low | conformance | resolved | 2026-10-09-check-light.md | `date: 2026-10-09` set in `00-brief-next-gen.md` (immediate fix, 2026-10-09) |
 
 Four review files are named outside the convention — accepted as they
 are by DEC.0140.
@@ -329,8 +332,13 @@ copy — CLAUDE.md, Ledger. -->
   scheduled.
 - THR.0430 — a command that ends a session; research of the
   transcript format first, nothing scheduled.
-- THR.0340 — the README split from the documentation; after
-  THR.0230.
+- THR.0340 — the documentation of the engine; worked as the brief
+  `documentation` (0.1, born 2026-10-09); the first version
+  generated 2026-10-09 into `docs/`, 79 pages and the index, from
+  `docs-map.md`, by the trial agents `docs-planner` and
+  `docs-writer`; the README not yet cut; to be mined by
+  `/forge intent`; `proposal-documentation.md` deleted 2026-10-09
+  (FND.1020 resolved); the map without a kind, FND.1030 open.
 - THR.0380 — executive pitch loose ends (S03 counts, the deck build
   without the `pptx` skill); opened 2026-09-14.
 - THR.0090 — multi-principal use; deliberately not worked on.

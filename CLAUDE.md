@@ -325,6 +325,10 @@ RELEASE-NOTES.md           # release notes — a render (/render
 CONTRIBUTING.md            # for a visitor who wants to say, ask or
                            # change something — a render (/render
                            # contributing)
+docs/                      # the documentation, generated: pages of
+                           # one topic each and their index, from
+                           # projects/forge/docs-map.md (brief
+                           # documentation, THR.0340)
 logo.png                   # project avatar
 LICENSE                    # CC BY 4.0 — the engine is published
                            # under attribution
@@ -335,7 +339,8 @@ scripts/                   # forge-save / forge-pull / forge-status
                            # PowerPoint), md2docx (render → Word),
                            # each by pandoc or by a model,
                            # hook-walkthrough (the per-prompt hook
-                           # of .claude/settings.json)
+                           # of .claude/settings.json), docs-index
+                           # (the documentation index from the map)
 .claude/                   # skills (the commands, the reviewers'
                            # contracts and the walkthrough method),
                            # agents, settings

@@ -20,9 +20,8 @@ today. -->
 
 ## Positions
 <!-- POS.NNNN: statements the principal currently holds. Numbering:
-CLAUDE.md, ID scheme. IDs may be omitted while the intent is still
-fluid; assign them once positions solidify enough to be referenced
-from the assignment. -->
+CLAUDE.md, ID scheme. A position without an ID does not exist: it
+carries its ID from birth, and the history records it by that ID. -->
 - **POS.0010** …
 
 ## Facts
@@ -36,9 +35,10 @@ re-litigating old ground and preserves the reasoning for future returns to
 the project. -->
 - **REJ.0010** …
 
-## Candidate structure for assignment
-<!-- Optional staging area before distillation: here the intent
-carries the recipients, the objective and the success criteria as soon
-as the principal sees them, as positions with IDs like everything
-else, so that the assignment distils them instead of finding them
-first. Delete once the assignment exists and leads. -->
+## Candidate structure for the layer below
+<!-- Optional staging area: what the layer below will need as soon as
+the principal sees it, the recipients, the objective and the success
+criteria where that layer is an assignment, as positions with IDs
+like everything else, so that the layer takes them over instead of
+finding them first. Left out where the project takes no layer;
+deleted once the layer exists and leads. -->
