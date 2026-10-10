@@ -2,9 +2,9 @@
 project: forge
 purpose: readme
 audience: humans arriving at the repository
-version: 0.60
+version: 0.62
 updated: 2026-10-10
-last_change: 0.60 (2026-10-10): the pinned facts carry the public address of the engine (FND.1320).
+last_change: 0.62 (2026-10-10): the Quickstart says what projects/forge is and that a user never opens it.
 output: /README.md
 ---
 
@@ -23,7 +23,10 @@ summarising the newest row. -->
 - .claude/skills/forge/states/   # the definitions of the artefacts:
                                  # one line each in the chain picture
 - docs/README.md                 # the documentation index: its
-                                 # version line and the three paths
+                                 # version line, the three paths and
+                                 # the contents
+- RELEASE-NOTES.md               # the newest approved section: what
+                                 # the major closed and what was added
 
 ## Instructions
 - The README orients and points. It presents what Forge of Thought
@@ -139,7 +142,16 @@ summarising the newest row. -->
   `docs/about/renders-and-recipes.md`, the sources to
   `docs/about/sources-and-research.md`, git to
   `docs/about/persistence-in-git.md`).
-- Section 3 is a Quickstart with a common head and two named paths.
+- Section 3 is "What is new in <major>", the major being the newest
+  approved section of RELEASE-NOTES.md. One short bold-led paragraph
+  per thing that section's opening paragraph says the major closed,
+  in its order, and one per command born in the span (the Added
+  group of that section, the commands only), each paragraph saying
+  what the reader can now do and why it matters, two or three
+  sentences, ending with a relative link to the page of `docs/` the
+  index lists for it. A closing line points to RELEASE-NOTES.md for
+  the full account. Nothing older than the newest major.
+- Section 4 is a Quickstart with a common head and two named paths.
   The head, "First, once per machine", is a short fenced block: clone
   this repository (no URL; the reader is already looking at it, with
   a comment "you are looking at it"), install Claude Code first
@@ -154,9 +166,13 @@ summarising the newest row. -->
   before any work — the forge cannot guess it). Closing sentence:
   each project lives inside `projects/<slug>/` as a git repository
   of its own, which the engine does not track — that is why you name
-  it first; the first sitting from nothing to a saved intent is
+  it first; then one sentence: `projects/forge` is the forge's own
+  project, the exemplar every render and page of the documentation
+  derives from, and the one directory under `projects/` the engine
+  tracks; a user never needs to open it; the first sitting from
+  nothing to a saved intent is
   `docs/start/first-result.md`.
-- Section 4 is "The document chain in one picture". It carries the
+- Section 5 is "The document chain in one picture". It carries the
   star, never a line: it must make visible at first glance that the
   chain branches richly. It is this mermaid block, pinned verbatim
   (solid arrows = built today, dashed = illustrative growth):
@@ -201,7 +217,7 @@ summarising the newest row. -->
   callout block, one line: a render is never edited by hand — what is
   iterated is its recipe. No other callout anywhere, and nothing
   else in this section: the chain is explained in `docs/`.
-- Section 5 is "Documentation". It opens with one sentence: the
+- Section 6 is "Documentation". It opens with one sentence: the
   documentation of the forge is in [`docs/`](docs/README.md), pages
   of one topic each, generated from the engine like this README.
   Then the three readers as three bullets, one line each, taken from
@@ -209,8 +225,11 @@ summarising the newest row. -->
   evaluator, each with where to begin as a relative link into
   `docs/`. Then one sentence giving the version the documentation
   was generated for and the date, taken from the index's own version
-  line, and that the index says it too. Nothing else: no page list,
-  no summary of what the pages say.
+  line, and that the index says it too. Then the contents of the
+  documentation, clickable: the five sections of the index in its
+  order, each as a bold line, under it one bullet per page with its
+  title linked to its relative path, titles only, the sentences stay
+  in the index.
 - The section "Author and licence" precedes "About this README" and
   carries this fixed text verbatim, nothing more: "Forge of Thought ©
   Petr Chlumsky (PCHe) - petr.chlumsky@gmail.com. Licensed under
@@ -289,7 +308,13 @@ per the instruction; no closing line>
 <the six concrete capability bullets per the instruction, each
 ending with its link into docs/>
 
-## 3. Quickstart
+## 3. What is new in <major>
+<one bold-led paragraph per thing the newest approved section of
+RELEASE-NOTES.md says the major closed, and per command born in the
+span, each ending with its link into docs/; a closing line pointing
+to RELEASE-NOTES.md>
+
+## 4. Quickstart
 <common head "First, once per machine" as a fenced block: clone this
 repository → install Claude Code (docs/start/install.md) → claude
 from the engine root → /setup (docs/start/setup.md); then two
@@ -299,23 +324,26 @@ existing project (/import-project <project url> →
 /forge <project-slug>, with the select-before-work comment); one
 closing sentence: each project is a repository of its own inside
 projects/, untracked by the engine — that is why you name it first;
-the first sitting is docs/start/first-result.md>
+one sentence on projects/forge, the forge's own project a user never
+opens; the first sitting is docs/start/first-result.md>
 
-## 4. The document chain in one picture
+## 5. The document chain in one picture
 <the pinned star chain diagram (mermaid) with its legend line; one
 line per artefact from the definitions, each linked to its docs
 page; the one sentence on layers taken as needed; the
 render-never-hand-edited callout>
 
-## 5. Documentation
+## 6. Documentation
 <one sentence with the link to docs/README.md; the three readers as
 bullets with where each begins; the version and date the
-documentation was generated for>
+documentation was generated for; then the contents: the five
+sections of the index as bold lines, one bullet per page, the title
+linked to its relative path, titles only>
 
-## 6. Author and licence
+## 7. Author and licence
 <the fixed author-and-licence text>
 
-## 7. About this README
+## 8. About this README
 <this file is a render of projects/forge — regenerated by
 /render readme, never edited by hand; fixes go into the recipe or the
 inputs; the documentation is generated the same way and its index

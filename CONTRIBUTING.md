@@ -1,102 +1,118 @@
 ---
 project: forge
 render: contributing
-generated: 2026-10-04
-recipe: recipes/contributing.md v0.1
+generated: 2026-10-10
+recipe: recipes/contributing.md v0.2
 inputs:
-  - projects/forge/10-intent.md v4.58
+  - projects/forge/10-intent.md v5.0
   - CLAUDE.md
+  - docs/README.md v5.0
 ---
 
 # Contributing to Forge of Thought
 
-Thank you for wanting to contribute. What I want most is your feedback
-and your ideas; a finished change is welcome too. I wrote the forge
-alone and I read every word that is sent to me.
+Thank you for wanting to contribute. What I want most is your
+feedback and your ideas; a finished change is welcome too. I wrote
+the forge alone, and I read every word you send me.
+
+## Find your way
+
+The documentation lives in [`docs/`](docs/README.md): pages of one
+topic each, generated from the engine as it stands. If you use the
+forge, begin in [`docs/start/`](docs/start/) and go on to
+[`docs/use/`](docs/use/) for every job. If you want to extend it,
+begin in [`docs/extend/`](docs/extend/), with
+[`docs/reference/`](docs/reference/) for the shapes. If you want to
+judge it, begin in [`docs/about/`](docs/about/), the concept pages.
+If you want to change something, two pages say
+[what the forge is made of](docs/extend/what-it-is-made-of.md) and
+[how a change is made](docs/extend/how-a-change-is-made.md).
 
 ## Tell me what you found
-If you have used the forge, tell me how it went: what worked, what did
-not, what was missing, where you got lost. You do not need a proposal
-or a fix. What happened to you is enough, and it is what I learn from
-most.
 
-The place for it is Discussions:
+Tell me what worked, what did not, what was missing and where you
+got lost. You need no proposal and no fix: what you saw is enough,
+and it is the most useful thing you can send me. Write it as a
+discussion:
+
 https://github.com/pche-broken-artist/forge-of-thought/discussions
 
 ## Something is broken
-A command does something other than it says. A file is missing. A link
-is dead. Tell me three things: what you ran, what you expected, and
-what happened.
 
-The place for it is Issues:
+A command does something other than it says, a file is missing, a
+link is dead. Open an issue and tell me three things: what you ran,
+what you expected, what happened. That is all I need to find it:
+
 https://github.com/pche-broken-artist/forge-of-thought/issues
 
 ## You have an idea
-An idea needs nothing but itself. You do not have to work it out, and
-you do not have to know how it would be built. Write it down in
-Discussions, the same place as above.
 
-What happens to it then: what enters the forge is my decision. Either
-I take your idea into the intent, the document that says what the
-forge is wanted to do and why, or I tell you why not.
+An idea needs nothing but itself: no design, no change, no proof.
+Write it as a discussion, in the same place as your feedback:
+
+https://github.com/pche-broken-artist/forge-of-thought/discussions
+
+Here is what happens to it. I take it into the intent, the document
+in which I say what I want of the forge and why, and from there it
+shapes what gets built. Or I say why not. What enters the forge is
+my decision, and I give you the reason either way.
 
 ## You want to send a change
-There are two kinds of change, and the line between them is drawn by
-what the change does, never by how big it is.
 
-A change of how the forge behaves is one kind: a command, a rule, a
-convention, what a reviewer looks for. It goes through the chain, the
-forge's own versioned documents, before it is built. The next section
-says how.
-
-A change that alters no behaviour is the other kind: a wording, a
-broken path, a slip. Send the pull request as it is. Nothing else is
-needed.
+There are two kinds of change, and the line between them is drawn
+by what the change does, never by its size. A change of how the
+forge behaves, a command, a rule, a convention, what a reviewer
+looks for, goes through the chain before it is built; the next
+section says how. A change that alters no behaviour, a wording, a
+broken path, a slip, does not: send the pull request as it is, and
+nothing else is needed.
 
 ### A change of how the forge behaves
-The forge is run through its own process: what it does is first
-written down as something wanted, with the reason, and only then
-built. A change that arrives without that leaves me with something
-built and nowhere it says what was wanted or why.
 
-So a pull request that changes behaviour carries three things:
+The forge is a chain of versioned documents, and the forge is itself
+run through its own chain: the intent says what is wanted and why,
+and the solution design, the layer below it, says how what is wanted
+is realised. A change that skips the chain makes the forge do
+something its own documents do not say, and from then on the two
+drift apart.
 
-- The position in `projects/forge/10-intent.md`, the intent, saying
-  what is wanted and why. With it comes its record in the history
-  beside it, `projects/forge/10-intent.history.md`, which says what
-  changed and for what reason.
-- The item in `projects/forge/40-solution-design.md`, the solution
-  design, which is the document that says how the things wanted are
-  realised. This one is needed where your change solves something.
-- The change itself.
+So a pull request that changes behaviour carries three things: a
+position in `projects/forge/10-intent.md` saying what is wanted and
+why, with its record in the history beside it,
+`projects/forge/10-intent.history.md`; the item in
+`projects/forge/40-solution-design.md` where the change solves
+something; and the change itself. A brief, a few sentences of what
+you want and why, may come first, and need not.
 
-A brief, a short text of what you want and why, may come first. It
-need not.
-
-The easiest way is to open a discussion before you write anything. We
-can settle there what is wanted, and you save yourself work that might
-not fit. The forge's own commands do this work with you: `/forge
-intent forge` takes you through the intent.
+The easiest way is to open a discussion first, before you write any
+of it. And if you run the forge, its own commands do this work for
+you: `/forge intent forge` takes your idea into the intent the way
+the forge takes every idea.
 
 ### A change of a document
-Three files in the root of the repository are renders, outputs
-generated from the forge's documents: `README.md`, `RELEASE-NOTES.md`
-and this file. They are never edited by hand. Each is made from its
-recipe, the file that says what the render reads, who it is for and
-what shape it has.
 
-If you want to change one of them, change its recipe in
-`projects/forge/recipes/`, or change what the recipe reads. The file
-is then generated again from there. A pull request that edits the
-generated file directly would be overwritten at the next render.
+`README.md`, `RELEASE-NOTES.md` and this file are renders: outputs
+generated from the chain for one audience each, never edited by
+hand. What is iterated is the recipe, one file in
+`projects/forge/recipes/` that names the inputs, the audience, the
+instructions and the output template; `/render` regenerates the
+file from it. So a change to one of these documents goes into its
+recipe, or into what the recipe reads, and the document is made
+anew.
+
+The pages of `docs/` are generated the same way, by `/document`,
+from the files that own each topic. A fix goes into the file the
+page mirrors, never into the page; how to find that file is on the
+page [Change a documentation page](docs/extend/change-a-documentation-page.md).
 
 ## Try it first
-Please try your change yourself before you send it. Run it, see that
-it does what you meant, and say in the pull request what you ran.
 
-A change written with an AI is welcome on the same rule. You tried it
-yourself, and the pull request says what was run.
+Try your change yourself before you send it: run the command, open
+the render, read the page as it comes out. A change written with an
+AI is welcome on the same rule, and the pull request says what you
+ran.
 
 ## Privately
-For anything that should not be public, write to me. My contacts are
-on my profile: https://github.com/pche-broken-artist
+
+For anything that should not be public, write to me; my contacts
+are on my profile, https://github.com/pche-broken-artist

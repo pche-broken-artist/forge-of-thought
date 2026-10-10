@@ -1,7 +1,7 @@
 ---
 project: forge
 directory: research
-updated: 2026-10-05
+updated: 2026-10-10
 ---
 
 # Index — research of Forge of Thought
@@ -207,3 +207,8 @@ ledger. Written by /research; verified by /check. -->
 - **Question:** how is a security policy (`SECURITY.md`) written on GitHub: what GitHub provides and recommends (the file's places, the Security tab, the default template, private vulnerability reporting, the report form), what the guidance and the evidence say a good one holds, and what frameworks comparable to the forge publish (Spec Kit, Claude Code, BMAD, OpenSpec; Superpowers and Agent OS not found). Pages read through a summarising fetch on 2026-10-05.
 - **Answer in short:** GitHub prescribes only two sections, supported versions and how to report, and shows the file in the Security tab and above the private report form, which is a repository setting independent of the file. The guidance condenses to five questions (which versions, how to report privately, what to include, what to expect, which channels are wrong) and to promises a maintainer can keep; the studies find the file in early adoption and the asks plain, add it or fix a dead address. The corporate neighbours delegate to a programme; the two small frameworks nearest the forge write their own and spend it on a threat model: what the tool is, what it does on the machine, what is in and out of scope, what the user vets himself. Recommendation, Claude's: that shape, about sixty lines, in the root, as a render of a recipe `security` on the CONTRIBUTING precedent; private vulnerability reporting switched on first; one position in the intent for the stance; no form, no bounty, no safe harbour.
 - **Consult when:** writing the forge's `SECURITY.md` and its recipe, deciding what the forge promises a reporter, naming the engine's threat model from the solution design (SOL.0510, SOL.0520, SOL.0030), or adding the other community health files.
+
+### `2026-10-10-a-user-only-distribution-of-the-engine.md`
+- **Question:** should the engine on GitHub have a version for those who only want to use the forge, without `projects/forge` (the briefs, the research, the reviews); how is that done, what are the standard mechanisms, does it help, should the forge do it?
+- **Answer in short:** not now. A clone carries 23 MB, of which the workshop is 3 MB and one directory; the engine cannot run without its own project (the `engine` check, `/document`, `/release forge` and the renders read it), and every filtered tree must be reconciled with the checks that verify the ledger against the directories. Of the standard mechanisms, `export-ignore` and a template repository give a tree the forge cannot run or upgrade; sparse checkout burdens the user; a second repository or a release branch filled by a workflow works but costs a workflow, a token and a derived ledger; a plugin from a marketplace is the field's answer and the forge's own path (THR.0190, THR.0230). Recommendation: one sentence in the readme recipe saying what `projects/forge` is and that a user never opens it; the user-only version decided in the brief `engine-split`.
+- **Consult when:** the question of a lighter clone returns, the brief `engine-split` is worked (THR.0230), or a plugin is designed (THR.0190).
