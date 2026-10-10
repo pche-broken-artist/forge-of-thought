@@ -1,7 +1,7 @@
 ---
-generated: 2026-10-09
+generated: 2026-10-10
 made: mirrored
-inputs-hash: d95e2b21d3a5646f
+inputs-hash: 0093e5e8cad1272b
 inputs:
   - templates/ledger.md
   - CLAUDE.md
@@ -9,147 +9,148 @@ inputs:
 
 # Ledger
 
-This page lists the fields and tables of a project's `ledger.md`, the single source of truth for the project's state, and the state words each table uses. It is for a user who reads or keeps a ledger and for an extender who needs its exact shape. The skeleton is `templates/ledger.md`. The ledger is freely rewritten and kept current after every operation.
+This page lists the ledger of a project as its template states it: the header fields, every table with its columns, the state words, and which tables a library keeps. It is for the user who reads or checks a ledger and for the extender who changes what it holds.
+
+The ledger (`ledger.md`) is the single source of truth for state. It is freely rewritten and kept current after every operation. It cites and never copies: what a resource is and is for lives in the index of its directory, not in the ledger.
 
 ## Header
 
-| Field | Value |
+| Field | Meaning |
 |---|---|
-| `project` | the project's slug |
-| `kind` | `thought` or `library` |
-| `language` | language of the chain's artefacts, an ISO 639-1 code; English when absent |
-| `updated` | date of the last update, `YYYY-MM-DD` |
+| `project` | The project's slug. |
+| `kind` | `thought` or `library`. A ledger without it reads as `thought`. |
+| `language` | The language of the chain's artefacts, as an ISO 639-1 code. English when absent. |
+| `updated` | The date of the last update, `YYYY-MM-DD`. |
 
-## Tables of a thought project
-
-A project of kind `thought` keeps every table below.
+## Tables
 
 ### Briefs
 
 One row per brief (`00-brief.md` and `00-brief-<name>.md`).
 
-| Column | Meaning |
+| Column | Content |
 |---|---|
-| File | the brief's file |
-| Version | its version |
-| Status | `draft` or `approved` |
-| Mined | `pending`, `partial`, `mined` or `dropped` |
-| Note | what remains (for `partial`), or the REJ (for `dropped`) |
+| File | The brief's file name. |
+| Version | The brief's version. |
+| Status | `draft` (being composed) or `approved` (version 1.0 and on, changed after that as any artefact is). |
+| Mined | How far the intent has absorbed the brief. |
+| Note | What remains, for `partial`; the rejected direction, for `dropped`. |
 
-Status words: `draft` is a brief being composed; `approved` is 1.0 and on, changed after that as any artefact is.
+Mined words:
 
-Mined words say how far the intent has absorbed the brief: `pending`, `partial`, `mined`, `dropped`.
+| Word | Reading |
+|---|---|
+| `pending` | Not yet absorbed. |
+| `partial` | Partly absorbed; the Note says what remains. |
+| `mined` | Absorbed. |
+| `dropped` | Set aside; the Note names the rejected direction. |
 
 ### Documents
 
 One row per layer below the intent, added when the layer is born. A layer the project does not have gets no row.
 
-| Column | Meaning |
+| Column | Content |
 |---|---|
-| File | the document's file |
-| Version | its version |
-| Status | its status |
-| Date | its date |
+| File | The document's file name. |
+| Version | Its version. |
+| Status | Its status. |
+| Date | Its date. |
 
 ### Renders
 
-Generated outputs, one row per recipe in `recipes/`. A row mirrors the provenance in the render's front-matter.
+Generated outputs: one row per rendered recipe, written at the first render and kept by every later one. The row mirrors the render's provenance front-matter.
 
-| Column |
-|---|
-| Render |
-| Audience |
-| Recipe |
-| Inputs |
-| Generated |
+| Column | Content |
+|---|---|
+| Render | The render's file. |
+| Audience | Whom it is for. |
+| Recipe | The recipe it was made from. |
+| Inputs | What it was made from. |
+| Generated | When it was generated. |
+
+The documentation index has a row here too, written by the documentation command. Its Recipe is "none, derived by `scripts/docs-index.py`", and its Inputs are the map with its generated date and the intent's version.
 
 ### Published
 
-Designed files made by `/publish`, one row per file.
+Designed files made by the publish command, one row per file.
 
-| Column |
-|---|
-| File |
-| Recipe |
-| From render |
-| Model |
-| Published |
-| State |
+| Column | Content |
+|---|---|
+| File | The published file. |
+| Recipe | The recipe it belongs to. |
+| From render | The render it was made from. |
+| Model | The model that made it. |
+| Published | When it was published. |
+| State | `current` or `stale`. |
 
-State words: `current` or `stale`. `/publish` sets a file to `current`; every `/render` of that recipe sets it to `stale`.
+State words: `current` is set when the file is published; `stale` is set by every render of that recipe.
 
 ### Sources
 
-Registration only. External inputs, immutable once registered. What a source is and is for lives in `sources/00-INDEX.md`, not in the ledger.
+Registration only. External inputs, immutable once registered.
 
-| Column | Meaning |
+| Column | Content |
 |---|---|
-| File | the source's file |
-| Date | best-effort origin date |
-| Date origin | `content`, `file` or `ingested` |
-| Form | `text`, `extract of <original>` or `binary`; one form per source |
+| File | The source's file or bundle. |
+| Date | Best-effort origin date. |
+| Date origin | `content`, `file` or `ingested`. |
+| Form | `text`, `extract of <original>` or `binary`: one form per source. |
 
 ### Dependencies
 
-Registration only. Documents of other repositories the project relies on, typically library documents, cited by path. No version is kept: library documents are maintained by their owner. What the document is for lives where it is used (the index entry or the recipe).
+Registration only. Documents of other repositories the project relies on, typically library documents, cited by path. They carry no version, because library documents are maintained by their owner.
 
-| Column |
-|---|
-| Path |
-| Library |
-| Used by |
-| Note |
+| Column | Content |
+|---|---|
+| Path | The path of the document. |
+| Library | The library it lives in. |
+| Used by | Where it is used (an index entry, a recipe or the chain). |
+| Note | A note. |
 
 ### Research
 
-Registration only. Immutable dated notes written by `/research`, or recorded expert estimates. What a note answers lives in `research/00-INDEX.md`.
+Registration only. Immutable dated notes written by the research command, or recorded expert estimates.
 
-| Column |
-|---|
-| File |
-| Date |
-| Derived from |
+| Column | Content |
+|---|---|
+| File | The note's file. |
+| Date | Its date. |
+| Derived from | What it was derived from. |
 
 ### Findings
 
 Findings of the critic and of the checks, in one sequence.
 
-| Column |
-|---|
-| ID |
-| Severity |
-| Category |
-| State |
-| Source review |
-| Resolution |
+| Column | Content |
+|---|---|
+| ID | The finding's ID. |
+| Severity | Its severity. |
+| Category | Its category. |
+| State | See below. |
+| Source review | The review that raised it. |
+| Resolution | For `resolved`: the assignment version, or for a check's finding what fixed it. For `rejected`: the decision's ID. |
 
-State words: `open`, `resolved`, `rejected`, `parked`, `obsolete`.
-
-Resolution: for `resolved`, the assignment version, or for a check's finding what fixed it; for `rejected`, a `DEC.NNNN`.
-
-An older record that says `overruled` reads as `rejected`.
+State words: `open`, `resolved`, `rejected`, `parked`, `obsolete`. The word `overruled` in an older record reads as `rejected`.
 
 ### Challenges
 
-| Column |
-|---|
-| ID |
-| State |
-| Headline |
-| Source review |
-| Resolution |
+| Column | Content |
+|---|---|
+| ID | The challenge's ID. |
+| State | See below. |
+| Headline | The challenge in a line. |
+| Source review | The review that raised it. |
+| Resolution | For `accepted`: the intent version. For `rejected`: the decision's ID. |
 
 State words: `open`, `accepted`, `rejected`, `parked`, `obsolete`.
 
-Resolution: the intent version for `accepted`, a `DEC.NNNN` for `rejected`.
-
 ### Waiting on principal
 
-A list, one line per matter waiting on the principal. The ledger cites and never copies. A matter that has an ID gets one line: the ID, a few words, its state; its substance stays in the thread or the record. Free text is for a matter with no ID yet, which gets one at the next write. An unfinished conversation is saved into its thread of the intent, never here.
+Not a table: one line per matter that waits on the principal. A matter that has an ID gets one line (the ID, a few words, its state), and its substance stays in the thread or the record. Free text is for a matter with no ID yet, which gets one at the next write.
 
-## Tables of a library
+## Which tables a library keeps
 
-A project of kind `library` keeps only Renders, Sources, Dependencies, Research and Waiting on principal. The Briefs, Documents, Published, Findings and Challenges tables are deleted when it is scaffolded. The Findings table returns with a check's first finding.
+A project of kind `thought` keeps every table above. A project of kind `library` keeps only Renders, Sources, Dependencies, Research and Waiting on principal. The Briefs, Documents, Published, Findings and Challenges tables are deleted when the library is scaffolded. The Findings table returns with the first finding of a check.
 
 ## See also
 

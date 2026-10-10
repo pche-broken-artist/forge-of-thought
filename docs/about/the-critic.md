@@ -1,7 +1,7 @@
 ---
-generated: 2026-10-09
+generated: 2026-10-10
 made: derived
-inputs-hash: 9ce04537ec0765cd
+inputs-hash: 561dc8494237052c
 inputs:
   - .claude/skills/critic-contract/SKILL.md
   - CLAUDE.md
@@ -11,152 +11,146 @@ inputs:
 # About the critic
 
 This page explains what the critic is, how it works and why it is
-built the way it is. It is for anyone who runs a critique on a
-project, anyone who wants to add a lens, and anyone judging whether
-the critic does its job. It was put together from the critic's
-contract (`.claude/skills/critic-contract/SKILL.md`), the Isolated
-reviewers section of `CLAUDE.md` and the positions of the forge
-intent (`projects/forge/10-intent.md`) that give the reasons behind
-the design.
+built the way it is: for the user who runs it on a project, the
+extender who wants to add a lens, and the evaluator who wants to
+know what its reports are worth. It was put together from the
+critic's contract (`.claude/skills/critic-contract/SKILL.md`), the
+Isolated reviewers section of `CLAUDE.md` and the review positions
+of the forge's own intent (`projects/forge/10-intent.md`).
 
 ## What the critic is
 
-The critic is one of the forge's isolated reviewers. Its subject is
-the quality of a project's artefacts as documents, read through a
-lens: whether the brief, the intent, the assignment and any later
-layer say what they say clearly and completely. It never judges the
-substance of the thinking. Whether the objective is the real
-problem, what the plan rests on, what it would do to the
-organisation: that is the challenger's work, and the critic does not
-duplicate it. If a document is sound but the thinking behind it is
-wrong, the critic says nothing.
+The critic is one of the three isolated reviewers of the forge,
+beside the challenger and the check. Its subject is the quality of a
+project's artefacts as documents, read through a lens: never the
+substance of the principal's thinking. Whether the objective is the
+real problem, what assumptions a plan rests on, what it does to the
+organisation: that belongs to the challenger. If a document is sound
+but the thinking behind it is wrong, the critic says nothing; that is
+not its job. Mechanical conformance with the conventions is the
+check's, not the critic's either.
 
-Like every reviewer in the forge, the critic runs as an isolated
-subagent. It sees the project's documents only, never the working
-conversation in which they were drafted, and it must not be told
-what the drafter intended. That blindness is the source of its
-value: it judges only what the documents say. It runs on the same
-model as the rest of the forge, because speed is bought with
-context, never with a weaker reviewer.
+The critic runs as an isolated subagent on the session model. It
+sees the project's documents only, never the working conversation,
+and it is never told what the drafter intended: it judges only what
+the documents say. That blindness is the source of its value. It is
+invoked by hand, with `/critique <lens>`; no reviewer runs on
+Claude's own judgement. A save runs no critic; a release offers the
+`essence` lens once and runs nothing on its own.
 
-The critic is invoked by hand, with `/critique <lens> [artefact]`.
-It never runs on Claude's own judgement, and a save runs no
-critique. A release offers the `essence` lens once, because that is
-the lens that guards what a release publishes; it runs no reviewer
-of its own accord.
-
-Its findings are advisory. The principal decides what to do with
-each one, and a rejected finding is a legitimate outcome, not a
-failure. Findings are settled by walkthrough, one item per message.
+The critic's findings are advisory. The principal decides, and a
+rejected finding is a legitimate outcome, not a failure. Findings
+are settled by walkthrough.
 
 ## Why two lenses
 
-The critic has two lenses because one critic, in the forge's
-experience, hunted formalities and never guarded the chain. The two
-lenses look at different things:
+There are two lenses because one critic hunted formalities and never
+guarded the chain. The lenses split the work by what they read:
 
-- `clarity` reads each artefact on its own, as a document that has
-  to stand by itself.
-- `essence` reads the chain. For every adjacent pair of artefacts,
-  the brief and the intent, the intent and the assignment, and every
-  later layer against its parent, it first distils, blind, the
-  essence of the downstream artefact in a few sentences, then the
-  upstream's in the same way, and compares the two. A finding is a
-  difference of essences, not of texts.
+- **`clarity`** reads each artefact on its own.
+- **`essence`** reads the chain. For every adjacent pair, brief to
+  intent, intent to assignment, and every later layer, it first
+  distils, blind, the essence of the downstream artefact in a few
+  sentences, then the upstream's the same way, and compares. A
+  finding is a difference of essences, not of texts.
 
-A target narrows the lens. Named with an artefact, as `/forge` names
-it (`brief`, `brief-<name>`, `intent`, `assignment`, later layers),
-`clarity` reads that artefact alone and `essence` reads that
-artefact against its parent. A transition is addressed by its
-downstream artefact: every layer has exactly one parent, so no arrow
-ever has to be typed. Without a target, a lens reads everything it
-is meant to read.
+What makes the two lenses one critic is the contract: the shared
+behaviour of every lens is written once, in the contract skill, and
+preloaded into each lens agent at launch. The contract owns conduct
+and isolation, the subject and its boundary, the way of working and
+the shape of the report. A lens file owns only its Lens section: a
+specialisation of the contract, never a replacement. It may narrow
+what is read or make a shared rule stricter; it may never rename,
+drop or duplicate a shared rule or field. The protocol changes in the
+contract alone. A new lens comes only by the principal's decision,
+and only where what it finds genuinely differs.
 
-The behaviour the two lenses share is written once, in a contract
-skill preloaded into each lens agent. The contract owns the subject
-and its boundary, the conduct and isolation, the way of working and
-the shape of the output. A lens file owns only its Lens section,
-which specialises the contract: it may narrow what is read or make a
-shared rule stricter, but never renames, drops or duplicates a
-shared rule or field. New lenses come only by the principal's
-decision, and only where what they would find genuinely differs from
-what the existing lenses find.
+## What a target does
+
+The critic takes an optional target: an artefact named as `/forge`
+names it, by its state file (`brief`, `brief-<name>`, `intent`,
+`assignment`, later layers as they come). Without a target, the lens
+reads everything it reads: the whole chain.
+
+A target narrows `clarity` to that one artefact and `essence` to
+that artefact against its parent. A transition is addressed by its
+downstream artefact, since every layer has exactly one parent, so no
+arrow is ever typed. This is what lets one file or one transition be
+reviewed alone.
 
 ## How it works
 
-A critique reads the whole chain of the project: the briefs, the
-intent, the open threads, every layer below the intent that exists,
-the decisions and the ledger, together with every earlier report in
-`reviews/`. It reads and never modifies; it never edits a chain
-artefact.
+The critic reads the whole chain of the project, never modifying it:
+the briefs, the intent, the open threads, every layer below the
+intent that exists, the decisions, the ledger, and every earlier
+report in `reviews/`. From there it works in a fixed way.
 
-Regression comes first. Before raising anything new, the lens
-re-tests every finding of its own that was marked resolved since its
-last run and reports each as verified or reopened. Findings of the
-retired single critic, from reports without a lens suffix, count as
-the lens's own where they fall under its categories; findings of a
-check, which share the same numbering, are never the critic's.
-Rejected findings are respected: a lens does not raise them again
-unless the document has changed in a way that materially alters the
-situation, and then it cites the decision that rejected them.
+**Regression first.** Before anything new, the critic re-tests every
+finding of its own lens that was marked resolved since its last run,
+and reports each as verified or reopened. A report from the retired
+single critic counts as its own where the findings fall under its
+categories; a check's report never does, though the two share one
+numbering of findings. Rejected findings are respected: the critic
+does not raise them again unless the document changed in a way that
+materially alters the situation, and then it references the decision
+that rejected them.
 
-Each artefact is judged against its own definition, the state file
-that says what that artefact is, and never against another's. The
-calibration matters: an assignment deliberately stays high-level and
-its recipients are assumed competent and senior, so completeness is
-the test, not brevity. Because the principal sets direction, a
-number of things are never reported as defects: a missing
-stakeholder list, RACI, impact analysis, MECE decomposition or table
-of contents, absent priorities, or a missing section that may be a
-deliberate delegation to the recipients. A solution design holds
-only what cannot be read off the thing itself, so a part whose
-detail is left to the file it names, a choice said to have had no
-real alternative, or a section deleted because it was empty are not
-defects either.
+**Each artefact against its own definition.** An artefact is judged
+against its own definition and never against another's. The
+assignment deliberately stays high-level and its recipients are
+assumed competent and senior; completeness is the test, not brevity.
+Because the principal sets direction, the critic never reports as
+defects what he may have left out on purpose: missing stakeholder
+lists, RACI, impact analysis, MECE decomposition, a table of
+contents, absent priorities, or a missing section that may be a
+delegation to the recipients. For a solution design, which holds
+what cannot be read off the thing itself, the same goes for a part
+whose detail is left to the file it names, a choice said to have had
+no real alternative, or a section deleted because it was empty.
 
-Testability is a recommendation, not a rule. The forge holds that
-assignments are deliberately high-level and that delegating
-concretisation to the recipients is a legitimate outcome, so wording
+**Testability is a recommendation, not a rule.** The forge's
+position is that testability is recommended, never required:
+assignments are deliberately high-level, and delegating the
+concretisation to the recipients is a legitimate outcome. So wording
 that is hard to test goes into the report's recommendations, never
 into a finding.
 
-Sharp and few beats thorough and long: five sharp findings beat
-twenty trivial ones. The critic never invents findings to appear
-thorough and never softens one because the fix is inconvenient. And
-it never proposes substance; what it proposes is the fix of the
+**Sharp and few.** Five sharp findings beat twenty trivial ones. The
+critic never invents findings to appear thorough and never softens a
+finding because the fix is inconvenient. It never edits a chain
+artefact and never proposes substance: it proposes the fix of the
 document.
 
 ## What it produces
 
-Each run writes one dated report into the project's `reviews/`
-directory, named `YYYY-MM-DD-critique-<lens>.md`, in English and
-immutable from the moment it is written; a second run on the same
-day takes a suffix. The report records which files were read, with
-their versions, and which target the run had.
+Each run writes one dated, immutable report into the project's
+`reviews/` directory, named `YYYY-MM-DD-critique-<lens>.md` (with a
+`-2` suffix if the lens already reported that day). Its front-matter
+records the date, the project, the lens, the target or `all`, every
+file read with its version, and the reviewer. The report carries:
 
-The report opens with a delta summary: which findings are new, which
-earlier ones were verified as resolved, which are still open and
-which have become obsolete. The findings follow. Each is an FND item
-with a global, stable number that continues the project's sequence
-and is never renumbered; each carries a severity (high, medium or
-low) and a category from the lens's own list, and says where the
-issue is, what it is, why it matters and how the document could be
-fixed. A recommendations section closes the shared part of the
-report: wording that is hard to test, groups that overlap, items
-that could be split. These are neither findings nor gates, and the
-principal may ignore them without recording anything. A lens may add
-sections of its own after that.
+- a **delta summary**: which findings are new, which earlier ones
+  were verified resolved, which are still open, which have become
+  obsolete;
+- the **findings**, each a `FND.NNNN` item continuing the project's
+  global sequence in tens and never renumbered, with a severity
+  (high, medium or low), a category from the lens, a location in the
+  documents, the issue, why it matters and a suggested fix;
+- **recommendations**: not findings, not gates. Wording that is hard
+  to test, groups that overlap, items that could be split; the
+  principal may ignore these without recording anything;
+- whatever further sections the lens defines for itself.
 
-After the report, the critic updates the project's ledger: new
-findings enter the Findings table as open, with the report as their
-source; re-tested ones get their verified or reopened state; the
-document states are refreshed. It touches no challenge and no other
-document.
+The critic then updates the project's ledger: new findings enter the
+Findings table as `open` with this report as their source, re-tested
+ones get their verified or reopened state, and the document states
+are refreshed. It touches no challenge and no other document. The
+finding states themselves are those of the ledger template
+(`templates/ledger.md`).
 
-Instance facts, such as the names, roles, addresses or hosts of
-those who run a forge, never enter a report, not even where they
-would explain a finding: a report is a public file, or may be
-quoted into one.
+Instance facts never enter a report: no names, roles, addresses or
+hosts, not even where they would explain a finding, because a report
+is a public file or may be quoted into one.
 
 ## See also
 

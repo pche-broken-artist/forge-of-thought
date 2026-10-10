@@ -27,7 +27,11 @@ other; generating the render is mechanical.
    step 5 verbatim, so the subagent never derives the provenance shape
    from a previous render. The subagent sees only the recipe and its
    inputs, never this conversation: a render is derived from the
-   artefacts, not from what was said about them. It must not read the
+   artefacts, not from what was said about them. Its prompt says, in
+   the words of the docs contract, that whatever its context carries
+   about the people who run this forge, their company, hosts,
+   addresses or preferences is not material and must not reach the
+   render (POS.0950). It must not read the
    previous render unless the recipe declares it among its inputs
    (the release-notes genre does, for the released sections), and
    must not touch the ledger. Prose is hard-wrapped as CLAUDE.md,
@@ -55,7 +59,12 @@ other; generating the render is mechanical.
    front-matter differs from the current version of that file, or a
    cited file no longer exists. This is the one definition; `/forge`
    and `/check` cite it (POS.1070).
-6. Back in the session: verify the file exists and its provenance is
+6. Back in the session: scan the written file mechanically for the
+   instance's facts, `python scripts/docs-check.py --file <render>`;
+   a hit is said aloud and the principal judges it: an instance fact
+   is regenerated out, never edited by hand; a public fixed text of
+   the recipe (POS.0990) or a fact of the engine's own history stands
+   (POS.0950). Verify the file exists and its provenance is
    correct, write or update the render's row in the ledger's Renders
    table (its shape: `templates/ledger.md`, Renders), and report
    what was rendered

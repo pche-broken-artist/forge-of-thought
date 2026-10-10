@@ -1,7 +1,7 @@
 ---
-generated: 2026-10-09
+generated: 2026-10-10
 made: mirrored
-inputs-hash: febccb88ea2c8e2c
+inputs-hash: 278982851bb48f74
 inputs:
   - .claude/skills/import-project/SKILL.md
   - scripts/forge-clone.py
@@ -10,36 +10,61 @@ inputs:
 
 # Bring in an existing project
 
-This page is for a user who already has a project in a git repository and wants to work on it in the forge. It shows how to bring it in with `/import-project`, what the command reports back and what to do next.
+This page is for a user who already has a project in a git repository
+and wants to work on it in the engine. It shows how to bring the
+project in with `/import-project` and what you see afterwards.
 
-## Run the command
+## Steps
 
-Give the command the address of the repository:
+1. Run `/import-project <git-url>` with the address of the
+   repository. The address is required.
+2. The project goes into `projects/<repository name>`. The name is
+   taken from the end of the address, so there is no slug to give. If
+   that directory already exists, the command stops and says so. An
+   existing directory is never overwritten: rename or remove it
+   first.
+3. On your word the command runs `python scripts/forge-clone.py
+   <git-url>`, which clones the repository. Git is reached through
+   this script only.
+4. Read the facts the script reports and the command relays to you.
+5. Select the project with `/forge <slug>`.
 
-```
-/import-project <git-url>
-```
+For example, the script's own help shows addresses of the form
+`https://example.com/team/my-idea.git`, which gives the project
+`projects/my-idea`.
 
-The command asks for your word before it runs. It then clones the repository through `scripts/forge-clone.py` into `projects/<repository name>`. The name of the directory falls out of the address: the last part, without a trailing `.git`. There is no slug to give.
+## What you see
 
-The script never overwrites. If `projects/<repository name>` already exists, the command stops and says so. Rename or remove the existing directory first, then run it again.
+After the clone the script reports four facts.
 
-The script sets no commit identity and carries no address of its own. Git resolves the identity from your own configuration, per host.
+| Fact | What it tells you |
+|---|---|
+| origin | the address the clone came from |
+| last commit | the newest commit: short hash, date and message |
+| identity | the commit identity git resolves for the fresh clone, taken from your own git configuration |
+| ledger | whether the project has a `ledger.md` with a `kind:` header, and the kind if it has |
 
-## What it reports
+Two of these need a word.
 
-When the clone is done, the command relays the facts the script prints:
+- **Identity.** The engine sets no commit identity and carries none.
+  If git resolves none for the clone, the report says so, and the
+  save script will report the missing identity and commit nothing
+  until one is resolved.
+- **Ledger.** A project without a ledger, or with a ledger that has
+  no `kind:` header, was not scaffolded by the forge. That is stated
+  as a fact, not a defect.
 
-- **Last commit:** the short hash, the date and the message of the newest commit.
-- **Origin:** the address the clone came from.
-- **Identity:** the commit identity git resolves for this clone. If git resolves none, the script says so, and the save script will report it and commit nothing until an identity is configured.
-- **Ledger:** whether the project has a `ledger.md` with a `kind:` header, and which kind. A project without one was not scaffolded by the forge. That is a fact, not a defect.
-
-Nothing is written into the imported project. The command only clones and reports.
+Nothing is written into the imported project by this command.
 
 ## Start working
 
-The command ends by recommending `/forge <slug>`, where the slug is the directory name under `projects/`. The engine does not track projects and cannot guess which one you mean, so you select the project by naming it. Run it as your first act of work on the imported project.
+The engine does not track projects and cannot guess which one you
+mean. The project is selected by naming it: run `/forge <slug>`,
+where the slug is the directory name under `projects/`. That gives
+you the map of where the project stands.
+
+If the project was written to older conventions, see the page on
+upgrading the engine for what to check.
 
 ## See also
 

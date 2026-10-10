@@ -1,7 +1,7 @@
 ---
-generated: 2026-10-09
+generated: 2026-10-10
 made: mirrored
-inputs-hash: 1bfeff3044e683d3
+inputs-hash: d8433cf286de3628
 inputs:
   - .claude/skills/render/SKILL.md
   - .claude/skills/publish/SKILL.md
@@ -10,15 +10,14 @@ inputs:
 
 # Render provenance
 
-This page is a reference for the front-matter every render opens with,
-the one definition of a stale render, and the places where a render, its
-plain file and its published file are kept. It is for the user who reads
-a render and for the extender who changes how renders are made.
+This page is for the user and the extender. It states the front-matter
+every render opens with, when a render is stale, and where a render, its
+plain file and its published file lie.
 
 ## The front-matter
 
-Every render opens with this YAML block, written when `/render`
-generates the file:
+Every render opens with this YAML block, written when the render is
+generated:
 
 ```yaml
 ---
@@ -36,45 +35,42 @@ inputs:
 | `project` | the slug of the project |
 | `render` | the name of the recipe |
 | `generated` | the date of generation |
-| `recipe` | the path of the recipe and its version |
-| `inputs` | one line per input: its path and its version |
+| `recipe` | the recipe's path with its version |
+| `inputs` | one line per input, the path with its version |
 
-An input without a version of its own, `CLAUDE.md` for example, is cited
-by path alone.
+An input without a version of its own, `CLAUDE.md` for one, is cited by
+its path alone.
 
-## Stale
+## A stale render
 
-A render is stale when any version cited in this front-matter differs
+A render is stale when any version cited in its front-matter differs
 from the current version of that file, or when a cited file no longer
-exists. This is the one definition of a stale render. `/forge`, `/check`
-and `/publish` use it.
+exists. This is the one definition of the term. Where a render is
+stale, the forge's state map and its checks report it, and `/publish`
+names the differing version before it runs.
 
-## Where the files are
+## Where the files lie
 
-| File | Place | Made by |
-|---|---|---|
-| the render (Markdown) | `renders/<recipe>.md`, or the recipe's `output:` path where it declares one (for example the repository README) | `/render` |
-| the plain file | beside the render: `renders/<recipe>.docx` or `renders/<recipe>.pptx`, where the recipe has a `## Format` section | `/render`, through pandoc |
-| the published file | `published/<recipe>.docx` or `published/<recipe>.pptx` | `/publish`, through a model, on the principal's command only |
+| File | Place |
+|---|---|
+| the render | `renders/<recipe>.md`, or the path the recipe's `output:` gives (the repository README is one) |
+| the plain file | beside the render: `renders/<recipe>.docx` or `renders/<recipe>.pptx`, made through pandoc where the recipe has a `## Format` section |
+| the published file | `published/<recipe>.docx` or `published/<recipe>.pptx`, made by `/publish` through a model |
 
-A render is overwritten on every `/render`; its history lives in git.
-Where pandoc is missing, the render stands and the plain file is not
-made. A recipe without a `## Format` section ends at the Markdown.
+A recipe without a `## Format` section ends at the Markdown: no plain
+file and no published file.
 
-## The published state
+## The state of a published file
 
-The ledger's Published table has a row for each published file: the
-file, the recipe with its version, the render it was made from (its
+The ledger's Published table has one row per published file: the file,
+the recipe with its version, the render it was made from (its
 `generated` date and the input versions of its front-matter), the model,
 the date and a state, `current` or `stale`.
 
-- `/publish` writes the row with the state `current`.
-- `/render` sets the row of its recipe to `stale`: the published file is
-  now older than its render. It remakes nothing.
-- `/publish` on a stale render says which version differs and waits for
-  the principal: publish as it is, or stop and `/render` first.
-
-The ledger's Renders table mirrors the front-matter of each render.
+A new row is `current`. When the render of that recipe is generated
+again, the row becomes `stale`: the published file is older than its
+render. Nothing remakes it; a published file is made only by
+`/publish`, on the principal's command.
 
 ## See also
 

@@ -1,7 +1,7 @@
 ---
-generated: 2026-10-09
+generated: 2026-10-10
 made: mirrored
-inputs-hash: b4e40c911de6383e
+inputs-hash: 43354a93d316ac8d
 inputs:
   - scripts/forge-save.py
   - scripts/forge-pull.py
@@ -23,117 +23,83 @@ inputs:
 
 # Scripts
 
-This page lists every file in `scripts/`: what it does, how it is called,
-what it needs and where its output lands. It is for the person who runs
-the scripts and for the one who extends them. Every script is run as
-`python scripts/<name>.py`, needs Python 3.8 or newer, and installs
-nothing itself.
+This page lists every file in `scripts/`: what it does, how it is called, what it needs and where its output lands. It is for the person who runs the forge and for the one who extends it. Each script carries the same help in its own module docstring.
 
-In the forms below, `<slug>` names a project under `projects/`, and
-`forge` names the engine itself.
+Every script runs as `python scripts/<name>.py`, with Python 3.8 or newer, on Linux, macOS and Windows alike.
+
+In the synopses, `[slug]` is a project's slug, and `forge` stands for the engine itself. Where a script has a bare form, running it without a slug acts on every repository it applies to.
 
 ## Git scripts
 
-The scripts in `scripts/` are the only door to git, reading state
-included. They carry no URL and no identity: the commit identity is
-git's own, resolved from the user's configuration. All five need `git`
-on PATH and `forge_repos.py` beside them.
+These are the only door to git, reading state included. They carry no URL and no identity, and each needs Python 3.8 or newer, `git` on PATH and `forge_repos.py` beside it.
 
 ### forge-save.py
 
-Saves to git: commit and push, for the engine and every project that is
-a repository of its own.
+Saves to git: commits and pushes the engine and every project that is a repository of its own. Run by `/save`, and by `/release` when it saves.
 
 ```
 python scripts/forge-save.py [slug] [-m MESSAGE] [--tag NAME]
 ```
 
-| Form | Effect |
-|---|---|
-| bare | visits the engine and every `projects/<slug>/.git`, and gives each one with changes its own commit |
-| `<slug>` | saves that repository only; `forge` means the engine |
-
-| Option | Meaning |
-|---|---|
-| `-m MESSAGE` | the commit message; without it one is generated from the files |
-| `--tag NAME` | tags the commit and pushes the tag with it; needs a slug, because it concerns one repository |
-
-Per repository it stages everything, commits, and, when an origin is
-configured, integrates remote changes by rebase and pushes. Without an
-origin the commit is kept locally and reported. When there is nothing to
-commit, `--tag` tags the current HEAD, so a tag can mark a state before a
-large change. An existing tag is refused. A project directory without a
-repository is skipped with a note (bare) or refused (slug). The script
-never sets an identity or a remote, never initialises a repository,
-never uses `git add -f` and never `git clean`.
+- Bare: visits the engine and every `projects/<slug>/.git` and gives each one with changes its own commit.
+- With a slug: saves that repository only. A project directory without a repository is skipped with a note (bare) or refused (slug).
+- Per repository: stages everything, commits (the message from `-m`, or a generated one), then, when an origin is configured, integrates remote changes by rebase and pushes. Without an origin the commit is kept locally and reported.
+- `--tag NAME` needs a slug. It tags the commit and pushes the tag with it. When there is nothing to commit, the current HEAD is tagged. An existing tag is refused.
+- It never sets an identity or a remote, never initialises a repository, never uses `git add -f` and never `git clean`.
 
 ### forge-pull.py
 
-Pulls the latest from the remotes: the engine (its upgrade channel) and
-every project that has an origin.
+Pulls the latest from the remotes: the engine, which is its upgrade channel, and every project that has an origin.
 
 ```
 python scripts/forge-pull.py [slug]
 ```
 
-Forms: bare pulls the engine, then every project with an origin;
-`<slug>` pulls that one repository, `forge` the engine. The pull is
-fast-forward only. A repository with unsaved changes is not touched: it
-is reported and skipped (bare) or refused (slug), and `forge-save.py` is
-run first. Projects without a repository or without an origin are
-reported and skipped.
+- Fast-forward only.
+- Bare: the engine, then every project with an origin configured. With a slug: that repository only.
+- A repository with unsaved changes is not touched: reported and skipped (bare) or refused (slug). Run `forge-save.py` first.
+- Projects without a repository or without an origin are reported and skipped.
 
 ### forge-status.py
 
-Reports the git state of the engine and every project. Read-only.
+Reports the git state of the engine and every project. Read-only, changes nothing. `/setup` uses it to learn the global git configuration.
 
 ```
 python scripts/forge-status.py
 ```
 
-It first names the global configuration file git actually reads. Then,
-for the engine and each project, it shows unsaved changes (or "clean"),
-the branch, the last commit and the origin, or "no origin" or "not under
-git". It takes no slug.
+It prints first the global configuration file git actually reads. Then, for the engine and each project: unsaved changes (or "clean"), the branch, the last commit and the origin, or "no origin" or "not under git".
 
 ### forge-clone.py
 
-Brings an existing project in by cloning its repository into `projects/`.
-`/import-project` is its door.
+Brings an existing project in: clones its repository into `projects/`. `/import-project` is its door.
 
 ```
 python scripts/forge-clone.py <url>
 ```
 
-The directory is `projects/<repository name>`, taken from the URL; an
-existing directory is never overwritten. Afterwards it reports the last
-commit, the origin, the commit identity git resolves for the clone, and
-whether the project carries a ledger with a `kind:` header. The absence
-of one is a fact, not a defect.
+- The directory is `projects/<repository name>`, taken from the URL. An existing directory is never overwritten.
+- Afterwards it reports the last commit, the origin, the commit identity git resolves for the clone, and whether the project carries a ledger with a `kind:` header.
 
 ### forge-branch.py
 
-Switches one repository to a branch, creating it if needed, or reports
-which branch it is on.
+Switches one repository to a branch, creating it if needed, or reports which branch it is on.
 
 ```
 python scripts/forge-branch.py <slug> [branch]
 ```
 
-The repository is named by its slug (`forge` for the engine); there is
-no bare form. With a branch name it switches to that branch, creating it
-from the current state if it does not exist; `main` switches back.
-Without a name it reports the current branch and lists the branches.
-Unsaved changes stop the switch: save first. Merging, deleting and
-pushing branches stay with git; a new branch reaches the remote with the
-first `forge-save.py` made on it, and a release is made from `main` only.
+- A branch name: switches to it, creating it from the current state when it does not exist yet (`main` switches back).
+- No name: reports the current branch and lists the branches.
+- The slug is required; there is no bare form. `forge` means the engine.
+- Unsaved changes stop the switch: save first.
+- Merging, deleting and pushing branches stay with git. A new branch reaches the remote with the first `forge-save.py` made on it. A release is made from `main` only.
 
 ## Conversion scripts
 
 ### doc2md.py
 
-Converts documents (Word, PowerPoint, PDF, Excel) to Markdown using
-markitdown. `/ingest` runs it for a source that is a binary.
+Converts documents (Word, PowerPoint, PDF, Excel) to Markdown using markitdown. `/ingest` converts a binary source through it.
 
 ```
 python scripts/doc2md.py <input> [<input> ...] [-o <dir>] [--suffix <text>]
@@ -141,36 +107,11 @@ python scripts/doc2md.py <input> [<input> ...] [-o <dir>] [--suffix <text>]
     [--dry-run] [--list-tools]
 ```
 
-Inputs may be mixed and repeated, in these notations:
-
-- a single file name;
-- glob notation, such as `"*.pdf"` or `"docs/**/*.pptx"`;
-- a list file: plain text, one path or glob per line, `#` or `;` starting
-  a comment, relative paths resolved against the list file's own
-  directory;
-- a directory, with `--recurse`.
-
-| Option | Meaning |
-|---|---|
-| `-o <dir>` | write the results in this directory; default is next to each document |
-| `--suffix <text>` | insert text before the `.md` extension (`.text` gives `report.text.md`) |
-| `--recurse` | descend into directories |
-| `--force` | overwrite an existing `.md`; otherwise it is skipped |
-| `--as-list` | treat the input as a list file |
-| `--markitdown-path <exe>` | name the markitdown executable |
-| `--dry-run` | list what would be converted, write nothing |
-| `--list-tools` | check that markitdown is reachable, and exit |
-
-Each document becomes `<name>.md`; a name collision within one run gets
-`_1`, `_2` and so on. Handled extensions: `.pdf` `.docx` `.docm` `.pptx`
-`.pptm` `.xlsx` `.xlsm` `.xls` `.epub` `.html` `.htm` `.csv` `.json`
-`.xml` `.msg`. The legacy binaries `.doc` `.ppt` `.rtf` `.odt` `.odp`
-`.ods` are reported as unsupported and are to be resaved as
-`.docx`, `.pptx` or `.xlsx` first.
-
-Needs: markitdown, resolved from PATH or named by `--markitdown-path`.
-The script never installs it; install it with
-`pip install "markitdown[docx,pptx,pdf,xlsx,xls]"`.
+- Inputs, mixed and repeated: a file name, a glob (`"*.pdf"`, `"docs/**/*.pptx"`), a list file (plain text, one path or glob per line, `#` or `;` starts a comment, relative paths resolved against the list file's directory), or a directory with `--recurse`.
+- Each document becomes `<name>.md` next to it, or in the directory `-o` names. An existing `.md` is skipped unless `--force`. `--suffix` inserts text before the `.md` extension. A name collision within one run gets `_1`, `_2` and so on.
+- `--dry-run` lists what would be converted and writes nothing. `--list-tools` checks that markitdown is reachable and exits.
+- Handled extensions: `.pdf .docx .docm .pptx .pptm .xlsx .xlsm .xls .epub .html .htm .csv .json .xml .msg`. The legacy binary `.doc .ppt .rtf .odt .odp .ods` are reported as unsupported: resave them as `.docx`, `.pptx` or `.xlsx` first.
+- Needs: Python 3.8 or newer and markitdown, resolved from PATH or named by `--markitdown-path`. The script never installs anything. Install it with `pip install "markitdown[docx,pptx,pdf,xlsx,xls]"`.
 
 ### md2pptx.py
 
@@ -182,25 +123,16 @@ python scripts/md2pptx.py <definition.md> [--engine pandoc|claude]
     [--model <model>]
 ```
 
-| Engine | What it does |
-|---|---|
-| `claude` (the default) | a model converts the free-form definition, through headless Claude Code with Anthropic's pptx skill; expensive, never the same twice; the engine of `/publish` |
-| `pandoc` | deterministic: one slide per second-level heading, nothing interpreted by a model; cheap, plain, the same result every time; the engine of `/render` |
+| Engine | What it does | Run by |
+|---|---|---|
+| `claude` (the default) | A model does the conversion: it runs Claude Code non-interactively (`claude -p`) with Anthropic's official pptx skill. The recipe may carry instructions for the model. Expensive, never the same twice. | `/publish` |
+| `pandoc` | Deterministic: pandoc writes a `.pptx`, one slide per second-level heading, nothing interpreted by a model. Cheap, the same every time, a deck for reading, not for showing. | `/render` |
 
-| Option | Meaning |
-|---|---|
-| `--template <path>` | a `.potx` or `.pptx`, named by path, typically a file in a library project's `sources/`; without it the claude engine designs its own style and pandoc uses its built-in one |
-| `--recipe <recipe.md>` | the recipe the definition was rendered from; the claude engine reads its Format section |
-| `-o <file.pptx>` | the output path; default is next to the input with the same basename |
-| `--model <model>` | model of the headless run; default `opus`; the claude engine only |
-
-Needs: `forge_tools.py` beside it. The pandoc engine needs pandoc on
-PATH. The claude engine needs the pptx skill under either of its names,
-`anthropic-skills:pptx` or `document-skills:pptx`; where neither is
-there, install the plugin once from an interactive Claude Code session
-(`/plugin marketplace add anthropics/skills`, then
-`/plugin install document-skills@anthropic-agent-skills`). The model is
-told to install and download nothing.
+- A template is named by path: `--template <path to a .potx or .pptx>`, typically a file in a library project. Without it the `claude` engine designs the style itself and the `pandoc` engine uses pandoc's built-in one.
+- `--recipe` names the recipe the definition was rendered from; the `claude` engine reads its Format section.
+- `--model` sets the model of the headless run, `opus` by default; the `claude` engine only.
+- The output lands next to the input with the same basename unless `-o` names a path.
+- Needs: Python 3.8 or newer and `forge_tools.py` beside it. What the engines need is under "What the conversions need" below. The script installs nothing.
 
 ### md2docx.py
 
@@ -212,108 +144,96 @@ python scripts/md2docx.py <render.md> [--engine pandoc|claude]
     [--recipe <recipe.md>] [-o <file.docx>] [--model <model>]
 ```
 
-| Engine | What it does |
-|---|---|
-| `pandoc` (the default) | deterministic: pandoc reads the Markdown and writes a `.docx`; cheap, the same result every time; the engine of `/render` |
-| `claude` | a model converts, through headless Claude Code with Anthropic's docx skill, the recipe's Format section giving its instructions; expensive, never the same twice; the engine of `/publish` |
+| Engine | What it does | Run by |
+|---|---|---|
+| `pandoc` (the default) | Deterministic: pandoc writes a `.docx`, nothing interpreted by a model. Cheap, the same every time. | `/render` |
+| `claude` | A model does the conversion: it runs Claude Code non-interactively (`claude -p`) with Anthropic's official docx skill, the recipe's Format section giving the instructions (`--recipe`). Expensive, never the same twice. | `/publish` |
 
-| Option | Meaning |
-|---|---|
-| `--reference <path>` | a `.docx`, or a Word template `.dotx` or `.dotm`, typically a file in a library project's `sources/`; pandoc takes its styles and ignores its content; the claude engine starts from it as its template |
-| `--page-size A4\|Letter` | the page; A4 when absent; applied only without `--reference`, because a reference document decides its own paper |
-| `--recipe <recipe.md>` | the recipe the render was made from; the claude engine reads its Format section |
-| `-o <file.docx>` | the output path; default is next to the input with the same basename |
-| `--model <model>` | model of the headless run; the claude engine only |
+- The Markdown render stays the source of truth; the `.docx` is a derivation for recipients who read Word.
+- The YAML front-matter at the top of the render is read by pandoc as metadata and does not appear in the document, which starts with the first heading.
+- Mermaid diagrams (```` ```mermaid ```` fences) are not rendered: they land in the document as blocks of code.
+- Styles come from a reference document: `--reference <path to a .docx, or a Word template .dotx/.dotm>`, typically a file in a library project. pandoc takes its styles and ignores its content. Without `--reference`, pandoc's built-in styles apply.
+- The page is A4 by default. Without `--reference` the script hands pandoc its built-in reference with the page size written in (`--page-size A4|Letter`, A4 when absent). With `--reference` the page setup is the reference document's own and `--page-size` is not applied. The `claude` engine takes the reference document as the template it starts from, and A4 where none is given.
+- The output lands next to the input with the same basename unless `-o` names a path.
+- Needs: Python 3.8 or newer and `forge_tools.py` beside it. The script installs nothing.
 
-The YAML front-matter at the top of the render is read as metadata and
-does not appear in the document. Mermaid diagrams are not rendered; they
-land as blocks of code. Without `--reference`, pandoc's built-in styles
-apply, with the page size written in.
+### What the conversions need
 
-Needs: `forge_tools.py` beside it. The pandoc engine needs pandoc on
-PATH. The claude engine needs the docx skill under either of its names,
-`anthropic-skills:docx` or `document-skills:docx`, installed as for
-`md2pptx.py`. The script installs nothing.
+As `forge_tools.py` owns it. Every tool is resolved from PATH and never installed by a script; the model of the `claude` engine is told to install and download nothing as well.
 
-## The per-prompt hook
+- pandoc, the engine of `/render`: install it yourself, one-off, from https://pandoc.org/installing.html (Windows: `winget install JohnMacFarlane.Pandoc`; macOS: `brew install pandoc`; Linux: your package manager).
+- The `claude` engine, behind `/publish`: the `claude` CLI on PATH and the official document skill of the format, pptx or docx, under either of its names, `anthropic-skills:<format>` where Claude Code brings it, `document-skills:<format>` where the plugin does. Where neither is there, install the plugin yourself, one-off, from an interactive Claude Code session:
+
+```
+/plugin marketplace add anthropics/skills
+/plugin install document-skills@anthropic-agent-skills
+```
+
+Examples:
+
+```
+python scripts/md2pptx.py <path>/deck.md
+python scripts/md2pptx.py deck.md --template <path>/template.potx
+python scripts/md2pptx.py deck.md --engine pandoc
+python scripts/md2pptx.py deck.md --recipe recipes/deck.md -o published/deck.pptx
+python scripts/md2docx.py <path>/render.md
+python scripts/md2docx.py brd.md --reference <path>/styles.docx
+python scripts/md2docx.py brd.md --engine claude --recipe recipes/brd.md -o published/brd.docx
+```
+
+## The hook
 
 ### hook-walkthrough.py
 
-The `UserPromptSubmit` hook of the engine, configured in
-`.claude/settings.json`. It repeats the one-item walkthrough rule at
-every prompt.
+The `UserPromptSubmit` hook of the engine, configured in `.claude/settings.json`.
 
 ```
 python scripts/hook-walkthrough.py
 ```
 
-Claude Code runs it on every user prompt and adds its output to the
-context of that turn. It prints the walkthrough rule with its verdict
-line, the pointer to the skill that holds the full shape, and three
-lines of conduct: use the forge's scripts, say what a command of one's
-own does and ask before running it, and change nothing that was not
-agreed and approved. It reads nothing, writes nothing and takes no
-arguments. It is independent of the working directory: the settings
-invoke it in exec form and hand it its own path through the
-`${CLAUDE_PROJECT_DIR}` placeholder.
-
-Needs: Python 3.8 or newer on PATH as `python`. Nothing else.
+- Claude Code runs it on every user prompt and adds its standard output to the context of that turn.
+- It prints two lines on the walkthrough (the one-item rule, including the verdict line that closes every proposition, and the pointer to the skill that holds the full shape) and three lines of conduct: use the forge's scripts, explain and ask before running a command of one's own, and change nothing that was not agreed and approved.
+- It reads nothing, writes nothing, takes no arguments and is independent of the working directory. `.claude/settings.json` invokes it in exec form and hands it its own path through the `${CLAUDE_PROJECT_DIR}` placeholder.
+- Needs: Python 3.8 or newer on PATH as `python`. Nothing else.
 
 ## Documentation scripts
 
-The three scripts serve `/document`
-(`.claude/skills/document/SKILL.md`). Each reads the documentation map
-through `docs_map.py` and needs nothing else. In the run, `docs-state.py`
-comes first and prepares the writers' tasks, `docs-index.py` derives the
-index, and `docs-check.py` verifies the pages. The map's `inputs` are
-relative to the target's root: the engine root when `target: engine`,
-else the owning project's directory.
+All three need Python 3.8 or newer and `docs_map.py` beside them, nothing else. `/document` runs them in this order: `docs-state.py` first, which says what to write and prepares the writers' tasks, then the page writers, then `docs-index.py` for the index and `docs-check.py` for the check.
 
 ### docs-state.py
 
-Computes the state of every page from the content of its inputs and
-prepares the writers' tasks.
+Computes the state of every page of the documentation from the content of its inputs, and prepares the writers' tasks.
 
 ```
 python scripts/docs-state.py <map> <docs-dir> --tasks <tmp-dir> [--date YYYY-MM-DD]
 ```
 
-For every entry it hashes the entry's text (its `state` line excepted)
-together with the content of every input file it names, and compares the
-result with the `inputs-hash` in the front-matter of the page at the
-entry's path. It sets the entry's `state` in the map:
+- For every entry of the map it hashes the entry's text (its `state` line excepted) together with the content of every input file the entry names. The page at the entry's path carries in its front-matter the hash it was made from, `inputs-hash`. The two are compared and the entry's `state` is set in the map:
 
 | State | Meaning |
 |---|---|
 | `new` | no page at the path |
-| `regenerate` | a page exists, its hash differs |
+| `regenerate` | a page exists, its hash differs (an input or the entry changed) |
 | `keep` | a page exists with the same hash |
 
-A page under `<docs-dir>` that no entry names is listed as `remove`
-(the index `README.md` excepted). For every `new` or `regenerate` entry
-one task file is written to `<tmp-dir>`: the engine root, the page's
-path, the date, the hash the page is to carry, the entry verbatim and
-the titles of the pages it links to. The task is a `docs-writer`
-agent's whole prompt. An input the map names and the disk lacks is
-reported and hashed as missing. The script rewrites only the `- state:`
-line of each entry and leaves the rest of the map byte for byte.
+- A page under `<docs-dir>` that no entry names is listed as `remove` (the index `README.md` excepted).
+- The state is computed, never judged: a page whose inputs did not change is not regenerated.
+- For every `new` or `regenerate` entry one task file is written to `<tmp-dir>`: the engine root, the page's path, the date, the hash the page is to carry, the entry verbatim and the titles of the pages it links to. The task is a `docs-writer` agent's whole prompt.
+- An input the map names and the disk does not have is reported and hashed as missing; the page is regenerated and its writer reports the gap.
+- The map's `inputs` are relative to the target's root: the engine root when `target: engine`, else the owning project's directory. The script rewrites only the `- state:` line of each entry and leaves the rest of the map byte for byte.
 
 ### docs-index.py
 
-Derives the documentation index from the map.
+Derives the documentation index from the documentation map.
 
 ```
 python scripts/docs-index.py <map> <docs-dir> [--date YYYY-MM-DD]
 ```
 
-It writes `<docs-dir>/README.md`: one line per page, grouped by section
-in the order start, use, about, extend, reference, each line the page's
-title linked to its relative path and the first sentence of its `says`.
-Deterministic: the same map gives the same index, and no model is
-involved. The index is never edited by hand. Its front-matter names the
-map as its one input and carries the version of the owning project's
-intent (`10-intent.md` beside the map). The opening paragraph and the
-three reading paths are fixed text of this script.
+- Reads the map a `docs-planner` run wrote and writes `<docs-dir>/README.md`: one line per page, grouped by section in the order of the outline (start, use, about, extend, reference), each line the page's title linked to its relative path and the first sentence of its `says`.
+- Deterministic: the same map gives the same index. No model is involved.
+- The index is a derivation of the map and never edited by hand: change the map and run the script again.
+- The front-matter of the index names the map as its one input and carries the version of the owning project's intent (`10-intent.md` beside the map), which for the engine is its version. The opening paragraph and the three reading paths are fixed text of the script.
 
 ### docs-check.py
 
@@ -321,44 +241,48 @@ Mechanical check of the generated documentation.
 
 ```
 python scripts/docs-check.py <map> <docs-dir> [--fact PATTERN ...]
+python scripts/docs-check.py --file <path> [--fact PATTERN ...]
 ```
 
-It prints every failure with its file and line, and exits 0 when
-everything holds and 1 when anything fails. It verifies that:
+First form, the check of the pages. It verifies the pages under `<docs-dir>` against the map and against the rules of a page (`.claude/agents/docs-writer.md`), and prints every failure with its file and line:
 
-- every entry of the map not in state `remove` has its page, and no page
-  lies in `<docs-dir>` that the map does not name (the index excepted);
+- every entry of the map not in state `remove` has its page, and no page lies in `<docs-dir>` that the map does not name (the index `README.md` excepted);
 - every relative link to a `.md` file resolves;
-- no page carries a long dash (em or en);
+- no long dash (em or en) on any page;
 - every page opens with a front-matter;
-- no page carries an instance fact: the values of `CLAUDE.local.md` at
-  the engine root (every word of four letters or more in a value,
-  looked for outside URLs), any e-mail address but a placeholder at
-  `example.*`, any absolute path of a machine (a drive letter, a user's
-  home directory), and every `--fact` pattern given.
+- no instance fact: the values of `CLAUDE.local.md` at the engine root (every word of four letters or more in a value, looked for outside URLs), any e-mail address but a placeholder at `example.*`, any absolute path of a machine (a drive letter, a user's home directory), and every `--fact` pattern given.
 
-The check mends nothing: a page that fails is regenerated by the
-documentation command. The script carries no name, address or host of
-its own; the instance facts are read from `CLAUDE.local.md` at run time.
+Second form, `--file <path>`, the one-file scan. In place of a map and a directory, one file is scanned for instance facts only: the values of `CLAUDE.local.md`, an absolute path of a machine and the `--fact` patterns. No map, no links, no dash and no e-mail rule. This is the scan `/render` runs on a render it has just written.
+
+- Exit code 0 when everything holds, 1 when anything fails.
+- The check mends nothing: a page that fails is regenerated by the documentation command, never edited by hand.
+- The script carries no name, address or host of its own: the instance facts are read from `CLAUDE.local.md` at run time. A match is reported with its line, so a false hit is seen and the rule, not the page, is adjusted.
+
+Examples of the documentation scripts:
+
+```
+python scripts/docs-state.py projects/<slug>/docs-map.md projects/<slug>/docs --tasks tmp/docs-tasks
+python scripts/docs-index.py projects/<slug>/docs-map.md projects/<slug>/docs
+python scripts/docs-check.py projects/<slug>/docs-map.md projects/<slug>/docs --fact <pattern>
+python scripts/docs-check.py --file README.md
+```
 
 ## Shared modules
 
-These are not commands. They are what the scripts beside them share.
+These are not commands. Each lies beside the scripts that share it.
 
-- `forge_repos.py`: what the `forge-*` git scripts share, namely the
-  engine root, the git check, the list of repositories to visit, running
-  git and coloured output.
-- `forge_tools.py`: what the conversion scripts (`doc2md.py`,
-  `md2pptx.py`, `md2docx.py`) share, namely finding an external tool on
-  PATH, resolving paths, running a tool and the headless Claude Code run.
-- `docs_map.py`: the one reader of the documentation map, shared by
-  `docs-state.py`, `docs-index.py` and `docs-check.py`.
+| Module | What the scripts beside it share |
+|---|---|
+| `forge_repos.py` | the engine root, the git check, the list of repositories to visit, running git, and coloured output, for the `forge-*` git scripts |
+| `forge_tools.py` | finding an external tool on PATH, resolving paths, running a tool and the headless Claude Code run, for `md2pptx.py` and `md2docx.py` |
+| `docs_map.py` | the one reader of the documentation map, for `docs-state.py`, `docs-index.py` and `docs-check.py` |
 
 ## Portability
 
-Every script is Python 3.8 or newer, run as `python scripts/<name>.py`.
+Python 3.8 or newer, run as `python scripts/<name>.py`; external tools (`git`, `markitdown`, `pandoc`, `claude`) are resolved from PATH.
 
 ## See also
 
 - [Install what the forge needs](../start/install.md): installing what the scripts need.
 - [Generate the documentation](../use/generate-the-documentation.md): the run the documentation scripts serve.
+- [Render an output](../use/render-an-output.md): the render that runs the one-file scan.

@@ -1,7 +1,7 @@
 ---
-generated: 2026-10-09
+generated: 2026-10-10
 made: mirrored
-inputs-hash: 12286338a7125d86
+inputs-hash: 02d0f2c3980074b7
 inputs:
   - .claude/skills/recipe/SKILL.md
   - .claude/skills/recipe/genres/presentation.md
@@ -13,65 +13,76 @@ inputs:
 
 # Compose a recipe
 
-This page is for a user who wants a new render, or wants to change how
-an existing one is made. A recipe is the file that says how a render is
-made, and `/recipe` is the command that composes it with you.
+This page is for a user who wants a new render, or wants to change
+how an existing one is made. It shows how to compose or iterate a
+recipe with `/recipe`, what you are asked, and what you see at the
+end.
 
-## Run the command
+A recipe is the file that says how a render is made: its inputs, its
+audience, its instructions and the template of the output. You never
+edit a render by hand. You iterate its recipe and regenerate the
+render from it.
 
-The command is `/recipe [genre] [slug]`. The slug names the project; if
-it is not clear from the conversation, you are asked.
+## What you type
 
-- **Bare `/recipe`.** You get the roster: the available genres, each
-  with a one-line description, and the recipes the project already has
-  with their versions. Where the conversation suggests a fit, a
-  recommendation comes with it.
-- **`/recipe <genre>`.** A guided composition through that genre. You
-  are asked the genre's questions one after another, with options and
-  trade-offs offered. The decisions are yours.
-- **`/recipe <name of an existing recipe>`.** If the name is not a genre
-  but the project has a recipe of that name, that recipe is iterated:
-  through its genre where one fits, otherwise in conversation.
-- **A name that is neither.** You are shown the genres that exist and
-  nothing is composed.
+`/recipe [genre] [slug]`. The slug names the project; where it is
+ambiguous you are asked.
 
-A recipe that fits no genre is still legitimate. It is composed in
-conversation from the base skeleton, `templates/recipe.md`, which has
-the sections Inputs, Instructions, an optional Format and Template.
-
-## What happens in a guided composition
-
-1. The genre's questions are put to you. Every genre closes with the
-   language question: the render's language is whatever the recipe
-   declares. The project's language is proposed from its ledger header
-   and you are asked; it is never assumed.
-2. The recipe is then composed from the genre's skeleton, with unused
-   placeholders and template comments removed.
-3. The recipe is written once per round, when you confirm. It carries a
-   version and an updated date but no status, and it stays at 0.x for
-   life, because recipes are tools that are iterated and never
-   approved. Its history goes into a companion file,
-   `recipes/<recipe>.history.md`, created with the recipe.
-4. `/render <recipe>` is offered as the next step. The recipe is
-   entered in the ledger's Renders table when its first render exists.
-
-A recipe may name a Format section for a plain or a designed file. That
-section exists so the files can be made later; the render itself
-carries content only.
-
-## The three genres today
-
-| Genre | What it produces |
+| You type | What happens |
 |---|---|
-| `presentation` | A recipe whose render is a slide-by-slide Markdown deck definition, the source for a PowerPoint file and never the presentation itself. |
-| `readme` | A recipe whose render is the project's `README.md` in the project root, regenerated at every release. |
-| `release-notes` | A recipe whose render is `RELEASE-NOTES.md` in the project root, for thought projects only. |
+| `/recipe` | The roster: the available genres, each with a one-line description, and the project's existing recipes with their versions. A fit is recommended where the conversation suggests one. |
+| `/recipe <genre>` | A guided composition of a new recipe through that genre's checklist. |
+| `/recipe <recipe-name>` | If the name is not a genre but a recipe exists under that name in the project, that recipe is iterated. A genre definition is used where one fits, otherwise the iteration is a conversation. |
 
-The presentation genre has the longest interview. The readme genre asks
-a shorter one, and if you ask for a first version without an interview
-it is drafted from the project's documents and handed to you as a draft
-to iterate. The release-notes genre has few degrees of freedom, so it
-asks little: which documents feed the notes and who reads them.
+If the name is neither a genre nor an existing recipe, you are shown
+the genres that exist and nothing else happens.
+
+## Composing through a genre
+
+1. Claude runs the genre's checklist as an interview, one question at
+   a time. It offers options and trade-offs; the decisions are yours.
+2. Every genre closes with the language question. Claude proposes the
+   project's language, read from its ledger header, and asks. It does
+   not assume. The render is in the language the recipe declares.
+3. The recipe is then composed from the genre's skeleton. Unused
+   placeholders and all template comments are deleted.
+4. The recipe is written once per round, when you confirm. It carries
+   a version and an updated date, and no status.
+5. Claude then offers `/render <recipe>` as the next step.
+
+## A recipe outside any genre
+
+A recipe that fits no genre is legitimate. Compose it in conversation
+from the base skeleton. That skeleton has these parts: a header
+naming the project, purpose and audience; **Inputs**, the chain
+artefacts the render is made from, one per line; **Instructions**,
+what the renderer must know beyond the template; an optional
+**Format** section, for a recipe that goes beyond Markdown to a
+PowerPoint or Word file; and **Template**, the literal skeleton of
+the render, always in Markdown.
+
+## Versions and history
+
+A recipe is versioned 0.x for life: it is iterated and never
+approved. Its history lives in a companion file beside it,
+`recipes/<recipe>.history.md`, created with the recipe. Each round
+you confirm is one version and adds its records there.
+
+## The three genres of today
+
+- **presentation**: a recipe whose render is a slide-by-slide
+  Markdown deck definition, source material for a presentation. A
+  plain PowerPoint file comes from `/render` and a designed one from
+  `/publish`.
+- **readme**: a project's README. The render is `README.md` in the
+  project root, regenerated at every release.
+- **release-notes**: the release notes of a thought project. The
+  render is `RELEASE-NOTES.md` in the project root, one section per
+  release in six fixed groups, derived from the history records of
+  the chain. A library has no release notes.
+
+Each genre's checklist in full is in
+[Recipe genres](../reference/recipe-genres.md).
 
 ## See also
 

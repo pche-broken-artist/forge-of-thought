@@ -1,7 +1,7 @@
 ---
-generated: 2026-10-09
+generated: 2026-10-10
 made: mirrored
-inputs-hash: 35a909fbea89b846
+inputs-hash: f5b1b0bb95da1f9e
 inputs:
   - .claude/skills/save/SKILL.md
   - scripts/forge-save.py
@@ -11,44 +11,70 @@ inputs:
 
 # Save your work
 
-This page is for a person who has worked on the engine or on a project and wants the work committed and pushed. `/save` is the quick door: a light check, a commit message you confirm, then the commit and the push, on whatever branch is checked out.
+This page is for the person who has finished a round of work and wants
+it kept in git. It shows what `/save` does, in order, and what you are
+asked along the way.
 
-## The command
+The command is `/save [slug] [-m "message"] [--tag name]`. It commits
+and pushes on whatever branch is checked out. It makes no render.
 
-```
-/save [slug] [-m "message"] [--tag name]
-```
+## What you do
 
-- `slug`: save one repository only. `forge` means the engine. Without a slug every repository with changes is saved.
-- `-m "message"`: your own commit message. Without it, one is drafted for you.
-- `--tag name`: tag the commit. A tag needs one repository, so a slug is required with it.
+1. **Run `/save`.** Name a project by its slug (`<slug>`) to save that
+   one repository, or use `forge` for the engine. Give no slug and
+   every repository with changes is visited.
+2. **See the scope.** The command first reads the state from the
+   status script. It reports the engine and each project separately,
+   each with the branch it is on. A project that is not under git is
+   named in the report and left alone: that is a property of the
+   project, not a defect.
+3. **Let the light check run.** The `light` check runs on every
+   repository in scope. Its findings are settled through `/check`. A
+   save never waits on a finding you have not asked to fix.
+4. **Confirm the commit message.** Unless you gave `-m`, a one-line
+   English message is drafted from the records the round appended to
+   the histories of the documents it touched. It is proposed to you,
+   and the commit uses the wording you confirm or adjust. When more
+   than one repository has changes, there is one message per
+   repository, or you run the save once per slug. The script's own
+   message, built from the list of files, is used only if you say so.
+5. **Decide on a tag.** A tag is set only on your word: `--tag name`,
+   or asked for in words. A tag needs one repository, so a slug.
+   If you ask for a tag without a name, the version of that
+   repository's intent is proposed as the name, and you may take it or
+   give any name you like.
+6. **The save runs.** Only now does the save script run.
 
-## What happens
+## What the save script does
 
-1. **Scope.** The status script reports the engine and each project separately, with the branch each is on. A project that is not under git is named in the report and otherwise left alone. That is a property of the project, not a defect.
-2. **The light check.** The `light` check runs on every repository in scope, and its findings are settled through `/check`. A save never waits on a finding you have not asked to fix.
-3. **The commit message.** Unless you gave `-m`, a one-line English message is drafted from the records the round appended to the histories of the documents it touched, and proposed to you. The commit uses the wording you confirm or adjust. When more than one repository has changes you get one message per repository, or you run the save once per slug. The script's own message, a list of the changed files, is used only if you say so.
-4. **A tag, only on your word.** A tag is set only if you give `--tag name` or ask for one in words. If you ask without naming it, a name is proposed from the version of that repository's intent, and you may take it or give any name you like. A tag that already exists is refused and nothing is changed.
-5. **The save script.** It stages everything in the repository, commits, and pushes. If the remote has changes of its own, they are integrated first. No render is made.
+For each repository it stages everything and commits with the
+confirmed message. When an origin is configured, it brings in remote
+changes and pushes. It prints the commit's file summary and the tag.
 
-## What you see
+What you may see instead:
 
-For each repository the script prints the commit and its file summary, and the tag if one was set. The outcome is one of these:
+- **Nothing to save.** The repository is reported as having nothing to
+  save. If you asked for a tag, the current state is tagged instead,
+  so a tag can mark a state before a large change.
+- **No commit identity.** Where git resolves no identity for the host,
+  nothing is committed in that repository. The report says to run
+  `/setup` for the per-host identity or to set a local one.
+- **A tag that exists.** An existing tag is refused and nothing is
+  changed.
+- **No origin.** The commit, and the tag if any, is kept locally and
+  reported as not pushed.
+- **A conflict with the remote.** Nothing is lost; the save stops and
+  tells you to ask for help before doing anything else.
+- **A project without a repository.** Bare, it is skipped with a note.
+  Named by slug, it is refused, with the one-off step that makes it a
+  repository.
 
-- saved and pushed to the remote;
-- nothing to save, when the repository is clean;
-- not pushed, when no remote is configured: the commit (and tag) stays local;
-- a project named as not a repository, when you asked for it by slug: it is refused until the repository exists.
-
-If the remote's changes conflict with yours, the script stops and says nothing was lost. Ask Claude for help before doing anything else. If the push fails, check the network and the access to the remote, then save again.
-
-## When nothing is committed
-
-The script commits nothing in a repository where git resolves no commit identity for this host. It says so and moves on. Run `/setup` for the per-host identity, or set a local one for that repository, then save again.
-
-When there is nothing to commit but you gave a tag, the current state is tagged, so a tag can mark a state before a large change.
+The script never sets an identity or a remote, never initialises a
+repository, and never forces a file into git or cleans anything.
 
 ## See also
 
-- [Release a version](release-a-version.md): the other door, from `main`, with the renders.
-- [About persistence in git](../about/persistence-in-git.md): why there are two doors and two speeds.
+- [Release a version](release-a-version.md): the other door, from
+  `main`, with the renders.
+- [About persistence in git](../about/persistence-in-git.md): why
+  there are two doors and two speeds.

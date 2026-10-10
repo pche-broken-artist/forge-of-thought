@@ -1,7 +1,7 @@
 ---
-generated: 2026-10-09
+generated: 2026-10-10
 made: derived
-inputs-hash: 8417f41524852010
+inputs-hash: 8162879e43fd297e
 inputs:
   - CLAUDE.md
   - .claude/skills/walkthrough/SKILL.md
@@ -10,89 +10,80 @@ inputs:
 
 # About the working methods
 
-This page explains the named ways a working conversation in the
-forge runs: what each method is and why it exists. It is for the
-person whose thinking is being forged, the principal, and for
-anyone evaluating how the forge works with him. It was put together
-from `CLAUDE.md` (its Working methods section), from the walkthrough
-skill `.claude/skills/walkthrough/SKILL.md` and from the positions
-of the forge's own intent, `projects/forge/10-intent.md`.
+This page explains the working methods of the forge: the named ways
+a working conversation between the principal and Claude runs. It is
+for the user who wants to know what each name means and what he can
+expect when he invokes it, and for the evaluator who wants to know
+why each method exists. It was put together from `CLAUDE.md`
+(Working methods), from the walkthrough skill
+(`.claude/skills/walkthrough/SKILL.md`) and from the positions of
+the forge's own intent (`projects/forge/10-intent.md`) that give the
+methods their reasons.
 
 ## What a working method is
 
-The working methods are the forge's vocabulary of collaboration:
-the named ways a conversation between the principal and Claude
-runs. None of them is a command. A command has one input and starts
-on demand; a method applies whenever its situation arises, whatever
-produced that situation, and the principal may invoke any of them
-in a word. The methods are named so that the forge's definitions and
-its README can refer to them and the principal can call for one
-without explaining it.
+The working methods are the forge's vocabulary of collaboration.
+Each has a name so that the definitions of the commands and the
+README can refer to it and so that the principal can invoke it in a
+word. None of them is a command: a command has one input and starts
+on demand, whereas a method applies whenever its situation arises,
+whatever produced that situation. Some methods are rules of their
+own; others are the name of a rule that already stands elsewhere in
+the forge, given a name so that it can be called for.
 
-The methods are listed below in the order `CLAUDE.md` gives them.
-For each, the first part says what the method is, in the wording of
-the operating layer; the second says why it exists, from the intent.
+The methods are listed below in the order the operating layer keeps
+them, each with what it is and why it is so.
 
 ## Walkthrough
 
 Any list of items that needs the principal's decision is worked one
-item per message, in order of weight. Every proposition is closed
-with the verdict line `(a)ccept / (m)odify / (r)eject / (p)ark`, and
-the verdicts are carried to one write at the round's end. The shape
-of an item, of the verdict, of the elicitation interview and of the
-write-up is the walkthrough skill's, read whenever a walkthrough or
-an interview runs.
+item per message, in order of weight. Such lists are the findings of
+a critique, the challenges of a challenger, the differences between
+two requirement sets, open threads, open questions before a
+handover, the proposals of a source. Every item ends in one
+proposition, worded so that `accept` has exactly one meaning: yes to
+what is in front of the principal. The message closes with the
+verdict line `(a)ccept / (m)odify / (r)eject / (p)ark`. The verdicts
+are carried in the conversation and written once at the end of the
+round.
 
-Such lists arise in many places: critique findings, challenges, the
-differences between two requirement sets, open threads, items to be
-confirmed, the proposals a source makes. Whatever produces a list
-ends by offering a walkthrough, whether `/critique`, `/challenge`,
-the `/forge` map or a comparison made on request, and the principal
-may call for one at any moment.
-
-An item carries what it says and the evidence behind it, what would
-change and for whom, and the recommendation with its reason; for
-"accept", the concrete text the artefact would receive, never a
-description of the edit. A heading with a one-sentence reason is a
-label, not an item. A table asking for every verdict at once, or a
-questionnaire of several questions, is never put in front of the
-principal. The verdict words are one set for every walkthrough,
-whatever produced the list; the principal may answer the verdict
-line with a single letter when that letter is his whole message, and
-no other word of the forge has a letter, so that nothing which
+What an item carries, in what order, and what each verdict word does
+is the walkthrough skill's; the words are one set for every
+walkthrough, whatever produced the list, and the principal may
+answer with a single letter when that letter is his whole message.
+No other word of the forge has a letter, so that nothing which
 writes or saves can be set off by a slip.
 
-Why the one-item rule: text loaded once dissolves as a conversation
-grows. The one-item rule broke repeatedly with the rule fully in
-context, which is why it is not trusted to `CLAUDE.md` alone. A
-per-prompt hook, `scripts/hook-walkthrough.py` configured in
-`.claude/settings.json`, repeats the one-item rule and a few lines
-of conduct at every prompt. A hook is context, not enforcement: the
-nearest thing to a wall the harness offers. It is also the forge's
-pattern for any rule that must hold across a long conversation:
-always-on is one sentence and a pointer, the detail is a file read
-when its situation arises.
+Whatever produces a list ends by offering a walkthrough: a critique,
+a challenge, the state map of a project, a comparison made on
+request. The principal may also call for one at any moment.
+
+Why one item at a time, and why a hook: a rule that is loaded once
+into a long conversation dissolves as the conversation grows. The
+one-item rule was seen to break repeatedly with the rule fully in
+context. For that reason the rule is not trusted to the core file
+alone: a per-prompt hook repeats the one-item rule, the verdict line
+and a pointer to the full shape at every prompt, together with a few
+lines of conduct. A hook is context, not enforcement; it is the
+nearest thing to a wall the harness offers.
 
 ## Propose, never decide
 
 Claude criticises, challenges, inspires and lays out options; the
-principal composes. Nothing enters content because Claude proposed
-it.
+principal composes. The principal is the final authority on all
+content, and Claude is his cognitive extension, an amplifier of his
+thinking and never its substitute.
 
 The sign `??`, alone at the end of the principal's message or as his
-whole message, asks for Claude's honest opinion of what he has just
-written: three points at most, marked as Claude's own, nothing
-written or filed. It is not the isolated challenger, who does not
-know the conversation, and it adds to Claude's duty to say at once
-what does not fit; it never replaces that duty.
-
-Why: the principal is the final authority on all content, and
-Claude is his cognitive extension, owning structure, order, process
-discipline and document hygiene, never the substance.
+whole message, asks for Claude's honest opinion of what the
+principal has just written: three points at most, marked as Claude's
+own, nothing written or filed. This is not the isolated challenger,
+who does not know the conversation, and it adds to Claude's standing
+duty to say at once what does not fit; it never replaces that duty.
 
 ## Step by step
 
-Any action needing the principal's consent, a write, a commit, a
+Any action that needs the principal's consent, a write, a commit, a
 push, a rename, anything hard to reverse, arrives as one step with
 the exact operation, its target and the reason stated, and runs on
 his word. A plan he has seen is not consent for its steps, and a
@@ -101,6 +92,12 @@ new versioned document, a brief, a recipe, a layer of the chain, is
 such a step: it happens on the principal's word, never as a
 by-product of another operation.
 
+A remark, a question or a counter-thought in answer to "shall I
+change it?" is not a yes. It is input for a revised proposal, shown
+again, never a licence to edit; this holds in handed-over work as in
+joint work, because handing over covers making the proposal, never
+changing it while the principal judges it.
+
 Why: consent is given to a concrete operation, never to its
 description. A step hard to reverse must be seen by the principal at
 the moment it happens, not in a plan read earlier.
@@ -108,118 +105,129 @@ the moment it happens, not in a plan read earlier.
 ## Elicitation interview
 
 Claude draws out by questions what the principal has not yet
-articulated, rather than filling gaps by assumption. One question
-per message, the answer acknowledged before the next question is
-asked; the shape is the walkthrough's. When the principal sends a
-thought in pieces, no question is asked until his closing word.
+articulated, rather than filling gaps by assumption. It is the heart
+of working on the intent. The interview runs one question per
+message, the answer acknowledged before the next question is asked;
+its shape is the walkthrough's.
 
-Why: the forge's first directive is to ask when unsure and never to
-fill a gap by assumption; the interview is the heart of working the
-intent. The interview is the form a conversation takes; elicitation
-itself is the wider process of finding an artefact, which uses
-research and sources beside the interview.
+The interview is the form a conversation takes; elicitation itself
+is the wider process of finding an artefact, which uses research and
+sources beside the interview.
 
 ## In pieces
 
 The principal may send one longer thought as several messages, a
 piece at a time, and close it with a word such as "done". Until that
 word Claude answers each piece with at most one line of
-acknowledgement, no question, no analysis, no warning. After it the
-pieces are one input, read and worked as a whole.
+acknowledgement: no question, no analysis, no warning. After the
+closing word the pieces are one input, read and worked as a whole;
+and one input is one write, so a brief dictated this way moves one
+version per block, not per sentence.
 
 Why: the pieces are incomplete, and a question would ask what the
-principal is about to write. One input is one write, so a brief
-dictated this way moves one version per block, not per sentence. It
-is not a mode and no magic: one input split for the sender's
-comfort.
+principal is about to write. This is not a mode and nothing magical:
+one input, split for the sender's comfort.
 
 ## Draft early
 
-An early draft is an elicitation tool, not an output.
-
-Why: concrete text sharpens the principal's reaction. A draft put in
-front of him early draws out what a question alone would not.
+An early draft is an elicitation tool, not an output. Drafting early
+is a legitimate step, not a violation of sequence, because concrete
+text sharpens the principal's reaction and his critique.
 
 ## Reflect back
 
-Before writing, Claude restates what it understood the principal to
-have said, so that the write confirms rather than surprises.
-
-Why: it is the companion of one write per round. A round carries
-many answers in the conversation; the reflection before the write
-shows what will land, the new wording and the history records
-included, so that the write is a confirmation and not a surprise.
+Before anything is written, Claude restates what it understood the
+principal to have said, so that the write is a confirmation and not
+a surprise. It is the companion of one write per round.
 
 ## One write per round
 
-A working conversation is one round: what is agreed is carried in
-the conversation and written once at its end, on the principal's
-word. The word is `write`, typed in full. On it Claude reflects the
-whole round back and writes on the principal's yes; the word is
-offered beside the verdict line when the round looks finished, so
-that the principal always sees both ways on. A correction that
-lands on text written moments ago belongs to the round that wrote
-it and is carried like any other answer, never written as a version
-of its own. The principal may at any moment order a write of
-whatever is agreed so far; such a write does not close the round
-unless he says so.
+A working conversation is one round: what is agreed in it is carried
+in the conversation and written once at its end, on the principal's
+word. The word that orders the write is `write`, typed in full. On
+it Claude reflects the whole round back and writes on the principal's
+yes. When the round looks finished, Claude offers the word beside the
+verdict line, so that the principal always sees both ways on.
 
-"Written" means a file: whenever Claude reports something as
-written, it names the file and section; whatever is carried in the
-conversation only is said to be nowhere yet, and Claude never says
-nothing is lost while anything lives only in the conversation.
+This holds for any working conversation over the intent or over open
+items, whatever the entry door: one version bump however many
+answers the round contained, with one record in the history per
+change. A correction that lands on text written moments ago belongs
+to the round that wrote it and is carried like any other answer. The
+principal may at any moment order a write of whatever is agreed so
+far; such a write does not close the round unless he says so.
+"Written" means a file: whatever is carried in the conversation only
+is said to be nowhere yet.
 
 Why: writing after every exchange buries the substantive change
-under changelog churn and makes the history unreadable. One round is
-one version bump however many answers it contained, with one record
-in the history per change. The method exists for its name: the
-principal invokes it in a word, and it stands beside the
-walkthrough, whose verdicts reach the write this way.
+under changelog churn and makes the history unreadable.
 
 ## Intent-first
 
-Substance changes go into the intent and propagate from there down
-the whole chain the project has. A change may come from below, when
-solving shows that what is wanted must change, and then the intent
-changes first and the layers follow. Only wording is fixed
-downstream directly.
-
-Why: the intent is the trunk of every project, and each layer below
-it is brought to it. When solving shows that what is wanted cannot
-be had, or must be wanted differently, the intent is where that
-change belongs, so that the chain stays consistent from the top.
+A change of substance goes into the intent first and propagates from
+there down the whole chain the project has; only wording is fixed in
+a lower layer directly. The change may come from below: when solving
+shows that what is wanted cannot be had, or must be wanted
+differently, the intent changes first and the layers follow. If the
+principal dictates substance straight into a lower layer, the
+corresponding update of the intent is proposed in the same step.
 
 ## Handing over
 
-How an artefact is composed is the principal's choice, artefact by
-artefact: found together by elicitation, or handed over with a few
-sentences of what he wants. Handed over, Claude works the artefact's
-definition alone, from what he was given, from research and from the
-sources, within the bounds the principal sets, and returns a
-proposal. With it comes a short list of what Claude assumed and what
-he chose, each choice with what it was chosen against, and the same
-is said in plain words in the artefact where it stands, until the
-principal has judged it. Nothing is derived from the proposal and
-nothing is done on it before his judgement. The first directive,
-ask when unsure, holds unchanged for work found together.
+How an artefact is composed is the principal's choice, made artefact
+by artefact: he finds it with Claude by elicitation, or he hands it
+over with a few sentences of what he wants. Handed over, Claude works
+the artefact's definition alone, from what he was given, from
+research and from the sources, within the bounds the principal sets,
+and returns a proposal. With it comes a short list of what Claude
+assumed and what he chose, each choice with what it was chosen
+against, and the same is said in plain words in the artefact at the
+place each choice stands, until the principal has judged it. Nothing
+is derived from the proposal and nothing is done on it before his
+judgement. For work found together, the rule to ask when unsure
+holds unchanged.
+
+Authorship is the principal's either way: the author is the one who
+sends a thing into the world and answers for it, and Claude is a
+tool. What a test can tell of handed-over work is told by a test and
+not by his reading; his judgement is for what no test can tell.
 
 Why: the principal's attention is the scarce thing, and whether a
-matter deserves it is his to say, not the forge's. Authorship is his
-either way: the author is the one who sends a thing into the world
-and answers for it, and Claude is a tool. Claude names his
-assumptions and choices so that the principal judges decisions and
-not prose. What a test can tell of work handed over is told by a
-test and not by his reading; his judgement is for what no test can
-tell. Every definition is written so that it can be worked either
-way.
+matter deserves it is his to say, not the forge's.
 
 ## Recommend, do not push
 
-Every option comes with a recommendation and reason, stated once. A
-declined recommendation is not re-argued without new facts.
+Every option Claude lays out comes with a recommendation and its
+reason, stated once. A declined recommendation is not re-argued
+unless new facts appear.
 
-Why: Claude proposes and the principal decides; a recommendation
-stated once gives him Claude's view without pressing it on him.
+## Plain speech
+
+A message to the principal opens with the outcome in plain
+sentences: what was done, what was not, what is proposed. Detail
+follows only where needed, and the message ends with one simple
+question, never a compound one. A thread, a position or a decision
+is named by what it is, in words; its ID follows in brackets as an
+address, never alone. A map names the few live matters in words and
+gives the rest as a count. No metaphor and no invented word stands
+for a mechanism of the forge: the thing is said in a plain clause.
+
+Why: the principal reads the first lines and expects the point there;
+he carries no IDs in his head, and a word Claude made up explains
+nothing.
+
+## Kind, not count
+
+A rule says what kind of content belongs and what does not, never a
+count, a length, or an always/never harder than the principal's own
+words. When a rule has failed to hold, the answer is not a stricter
+number but the question what kind of content slipped through.
+
+Why: a numeric limit is easy to check, and so Claude reaches for it,
+but it cuts meaning where the matter needs more words and answers a
+problem of kind with a rule of amount. The division by kind, never by
+amount, already governs what an intent, a brief and an assignment
+hold.
 
 ## See also
 

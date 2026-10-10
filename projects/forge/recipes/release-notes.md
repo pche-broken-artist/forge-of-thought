@@ -2,9 +2,9 @@
 project: forge
 purpose: release-notes
 audience: the user of the engine who has cloned it and takes upgrades through forge-pull
-version: 0.12
-updated: 2026-10-02
-last_change: 0.12 (2026-10-02): the way to two instructions moved to the history - the migration one came from, and how the minors stood before 4.0.
+version: 0.13
+updated: 2026-10-10
+last_change: 0.13 (2026-10-10): the solution design's history among the inputs and a section derived from the log of every input history (FND.1390).
 output: /RELEASE-NOTES.md
 ---
 
@@ -25,6 +25,9 @@ the records of the newest version. -->
                                        # the table before the log —
                                        # the Notes block of each row
                                        # is the source of its version
+- projects/forge/40-solution-design.history.md
+                                       # the log of the layer below
+                                       # the intent, likewise
 - projects/forge/10-intent.md          # current state: version, date,
                                        # status
 - projects/forge/decisions.md          # DEC records, for the pointers
@@ -44,7 +47,9 @@ the records of the newest version. -->
   earlier narrative shape (an Unreleased head, one section per
   major) is not carried over: it is replaced whole, every release
   compiled from its row.
-- A section is derived from the records of its version in the log:
+- A section is derived from the records of its version in the log
+  of every input history — the intent's and those of the layers
+  below it since the last release:
   each record that reaches the reader becomes one bullet under the
   group its kind gives — `created` under Added, `changed` and
   `closed` under Changed, `removed` under Removed, a created REJ

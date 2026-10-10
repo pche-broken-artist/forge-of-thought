@@ -21,3 +21,5 @@ with it. Lines are not wrapped. -->
 - 2026-09-30 | 0.11 | PCHe | Inputs | changed | The archive of the intent's history added, for the versions before the log (step 3 of THR.0470).
 - 2026-09-30 | 0.11 | PCHe | Instructions | changed | A section is derived from the records of the log, the kind giving the group and the Action carried word for word; a version before the log is compiled from its archived Notes (POS.0730, step 3 of THR.0470).
 - 2026-10-02 | 0.12 | PCHe | Instructions | changed | The way to two instructions moved to the history: the migration one came from, and how the minors stood before 4.0 (FND.0520). | Was: (the migration of 2026-09-05, POS.0730) [...] The sections of 3.1–3.x in the current edition are therefore carried over verbatim until 4.0 and folded then.
+- 2026-10-10 | 0.13 | PCHe | Inputs | changed | The solution design's history added, the layer below the intent the project has had since 4.59 (FND.1390).
+- 2026-10-10 | 0.13 | PCHe | Instructions | changed | A section is derived from the log of every input history, the intent's and the layers' below it, as the skeleton says (FND.1390). | Was: in the log:

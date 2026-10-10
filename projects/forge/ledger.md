@@ -36,7 +36,7 @@ absorbed it; Note says what remains (partial) or the REJ (dropped). -->
 ## Documents
 | File | Version | Status | Date |
 |---|---|---|---|
-| 10-intent.md | 4.65 | draft | 2026-10-10 |
+| 10-intent.md | 5.0 | approved | 2026-10-10 |
 | 40-solution-design.md | 0.8 | draft | 2026-10-10 |
 <!-- One row per layer below the intent, added when the layer is
 born; a layer the project does not have gets no row (CLAUDE.md,
@@ -51,9 +51,9 @@ written by /document: Recipe "none, derived by scripts/docs-index.py",
 Inputs the map with its generated date and the intent's version. -->
 | Render | Audience | Recipe | Inputs | Generated |
 |---|---|---|---|---|
-| README.md (repo root) | humans arriving at the repository | recipes/readme.md v0.58 | CLAUDE.md, 10-intent.md v4.59, .claude/skills/forge/states/, docs/README.md v4.59 | 2026-10-09 |
-| docs/README.md (the documentation index, kind page) | the three readers of the documentation | none: derived by scripts/docs-index.py (SOL.0460) | docs-map.md (generated 2026-10-09), 10-intent.md v4.62 | 2026-10-09 |
-| RELEASE-NOTES.md (repo root) | the user of the engine who has cloned it and takes upgrades through forge-pull | recipes/release-notes.md v0.12 | 10-intent.history.md, 10-intent.history.archive.md, 10-intent.md v4.58, decisions.md, previous edition (released sections) | 2026-10-04 |
+| README.md (repo root) | humans arriving at the repository | recipes/readme.md v0.60 | CLAUDE.md, 10-intent.md v5.0, .claude/skills/forge/states/, docs/README.md v4.62 | 2026-10-10 |
+| docs/README.md (the documentation index, kind page) | the three readers of the documentation | none: derived by scripts/docs-index.py (SOL.0460) | docs-map.md (generated 2026-10-10), 10-intent.md v5.0 | 2026-10-10 |
+| RELEASE-NOTES.md (repo root) | the user of the engine who has cloned it and takes upgrades through forge-pull | recipes/release-notes.md v0.13 | 10-intent.history.md, 10-intent.history.archive.md, 40-solution-design.history.md, 10-intent.md v5.0, decisions.md, previous edition (released sections) | 2026-10-10 |
 | CONTRIBUTING.md (repo root) | a visitor of the repository on GitHub who wants to say, ask or change something | recipes/contributing.md v0.1 | projects/forge/10-intent.md v4.58, CLAUDE.md | 2026-10-04 |
 | renders/executive-pitch.md | C-level executives whose experience of AI is chatting with it | recipes/executive-pitch.md v0.6 | projects/forge/10-intent.md v4.30, CLAUDE.md | 2026-09-27 |
 | renders/cto-pitch.md | technical leadership arriving at the repository - a CTO, a head of engineering or architecture | recipes/cto-pitch.md v0.6 | projects/forge/10-intent.md v4.58, CLAUDE.md | 2026-10-04 |
@@ -282,6 +282,15 @@ as `rejected`. -->
 | FND.1360 | low | conformance | resolved | 2026-10-10-check-light.md | the header date set to 2026-10-10 |
 | FND.1370 | low | conformance | resolved | 2026-10-10-check-light.md | the line says recipe 0.60 |
 | FND.1380 | low | conformance | resolved | 2026-10-10-check-light.md | both comments replaced by the template's wording |
+| FND.1390 | low | conformance | resolved | 2026-10-10-check-project.md | recipe release-notes 0.13: the solution design's history among the inputs |
+| FND.1400 | low | conformance | resolved | 2026-10-10-check-project.md | templates/recipe-readme.md carries the optional section Pinned facts (not rendered) |
+| FND.1410 | medium | conformance | resolved | 2026-10-10-check-engine.md | /render step 3 says instance facts are not material, step 6 scans the render with docs-check.py --file |
+| FND.1420 | medium | conformance | resolved | 2026-10-10-check-engine.md | front-matter brought to the shape of the three reviewer contracts |
+| FND.1430 | low | conformance | resolved | 2026-10-10-check-engine.md | the layout comment of CLAUDE.md names the documentation's contract and agents |
+| FND.1440 | low | conformance | parked | 2026-10-10-check-engine.md | wording agreed 2026-10-10, written in the first 5.x round; the intent stays 5.0 for the release |
+| FND.1450 | low | conformance | resolved | 2026-10-10-check-engine.md | the sentence of The system's own project says the threads stand beside the intent |
+| FND.1460 | low | conformance | resolved | 2026-10-10-check-engine.md | the brief skeleton derives last_change as the other skeletons do |
+| FND.1470 | low | conformance | resolved | 2026-10-10-check-light-2.md | the POS.1450 line deleted, both steps done 2026-10-10 |
 
 Four review files are named outside the convention — accepted as they
 are by DEC.0140.
@@ -323,7 +332,8 @@ copy — CLAUDE.md, Ledger. -->
   step 6 (the BRD) paused 2026-10-04.
 - THR.0570 — the presentation of the forge and what is to be ready
   for it; opened 2026-10-04, his verdict on the two pitch renders
-  open; the major 5.0 named 2026-10-09, its approval the next step.
+  open; the major 5.0 approved 2026-10-10, its release the next
+  step.
 - THR.0530 — what can be done deterministically is done by a script;
   the principal's stance of 2026-10-04, to be a prime directive;
   research of 2026-10-04; open.
@@ -377,10 +387,6 @@ copy — CLAUDE.md, Ledger. -->
 - THR.0590 — what the documentation of a project other than the
   engine reads; opened 2026-10-09 (intent 4.60), after the first
   `/document <slug>` on a project.
-- POS.1450 — the documentation command built and run twice
-  2026-10-09; left: the README re-rendered from recipe 0.60 and the
-  documentation regenerated from 5.0 at the major (the pages stale
-  against 4.64).
 - THR.0380 — executive pitch loose ends (S03 counts, the deck build
   without the `pptx` skill); opened 2026-09-14.
 - THR.0090 — multi-principal use; deliberately not worked on.
@@ -396,5 +402,10 @@ copy — CLAUDE.md, Ledger. -->
   raised 2026-10-02, nothing decided.
 - THR.0600 — a test of the forge's behaviour; opened 2026-10-10 from
   CHL.0220, not before 5.0.
+- THR.0610 — the horizon statement the intent lacks (POS.1360);
+  opened 2026-10-10 at the approval of 5.0, for a 5.x round.
+- FND.1440 — parked finding of the `engine` check: POS.1420 claims
+  a check the engine lacks; the wording agreed 2026-10-10, to be
+  written in the first 5.x round.
 - THR.0560 — three weakly founded places in the README; the readme
   recipe, at its next iteration.

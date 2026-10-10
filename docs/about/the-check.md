@@ -1,7 +1,7 @@
 ---
-generated: 2026-10-09
+generated: 2026-10-10
 made: derived
-inputs-hash: f88381d4ede57081
+inputs-hash: 2efbae68e6049fac
 inputs:
   - .claude/skills/check-contract/SKILL.md
   - CLAUDE.md
@@ -10,14 +10,15 @@ inputs:
 
 # About the check
 
-This page explains what a check is, how it works and why it is built
-the way it is: for a user who sees one run at a save, for an extender
-who wants to add one, and for an evaluator who wants to judge the
-design. It was put together from the contract every check shares
-(`.claude/skills/check-contract/SKILL.md`), from the sections
-Isolated reviewers and Persistence of `CLAUDE.md`, and from the
-positions of the forge intent (`projects/forge/10-intent.md`) that
-give the reasons.
+This page explains what a check is in the forge, how it works and
+why it is shaped as it is. It is for the user who sees checks run
+at a save or a release, for the extender who wants to add one, and
+for the evaluator who wants to know what a check promises and what
+it does not. It was put together from the check contract
+(`.claude/skills/check-contract/SKILL.md`), from `CLAUDE.md` and
+from the forge intent (`projects/forge/10-intent.md`); where those
+files differ in wording, the operating layer's wording is used and
+the intent's reason.
 
 ## What a check is
 
@@ -25,153 +26,132 @@ A check is one of the forge's three isolated reviewers, beside the
 critic and the challenger. Its subject is mechanical conformance:
 whether the files of its target follow the current conventions of
 the engine, as `CLAUDE.md` and the templates state them. It never
-judges substance, which is the challenger's job, and never document
-quality, which is the critic's. A document that is wrong or unclear
-but conforms gets no remark from a check; a rule that seems worth
-tightening is a matter for the intent, not for a check.
+judges substance, which is the challenger's job, and never
+document quality, which is the critic's. A document that is wrong
+or unclear but conforms gets no word from a check. A rule that
+seems worth tightening is a matter for the intent, not for a check.
 
-Each check owns one concern and none another's. The forge has a
-roster of them, open to new members: one check reads a project's
-structure, IDs, language, immutables, recipes and renders; one reads
-the bookkeeping, that is front-matter against the history companion,
-the ledger against the files, dependencies and resource indexes;
-one reads the engine's core against itself and the forge intent; one
-sweeps the whole operating layer for restatements of a rule that
-lives elsewhere; one reads a document with its history and reports
-where the division between them does not hold. A rule that an older
-text attributes to "the check" as one procedure belongs to the one
-check that owns its concern, never to two. Which checks exist and
-what each verifies is the page [Checks](../reference/checks.md).
+Each check owns one concern and none another's. The forge has
+several, each with its own agent file (`check-<name>`), and the
+roster is open: a new check comes only by the principal's decision,
+and only where what it finds genuinely differs from what the others
+find. Which checks exist and what each verifies is on the reference
+page linked below.
 
-A check takes a project by its slug, or the engine. Bare `/check`
-lists the roster and recommends a fit.
+A check runs as an isolated subagent on the session model. It sees
+the target's documents only, never the working conversation. The
+target is a project named by its slug, or the engine by its root.
 
-## How a check is built
+## How it works
 
-A check runs on the same mechanism as the other reviewers: an
-isolated subagent that sees the project's documents only, never the
-working conversation, on the session model. Every check is one
-agent file, `check-<name>`, and the behaviour all checks share is
-preloaded from one contract skill named in the agent's front-matter.
-The contract owns the subject and its boundary, the way of working
-and the shape of the report; the agent file owns its Lens section
-and only that. A Lens is a specialisation of the contract, never a
-replacement: it may narrow what is read or make a shared rule
-stricter, but it cannot rename, drop or duplicate a shared rule or
-field, and any change of protocol happens in the contract alone.
+**It reads the rules at their owners.** Every rule a check verifies
+has an owner: `CLAUDE.md`, a template, or a position of the forge
+intent. The check reads the rule there. Its own definition names
+the owner of each rule and never restates it, so that a rule lives
+in one place and a check cannot drift from it.
 
-The rules a check verifies have owners: `CLAUDE.md`, a template, a
-position of the forge intent. The check reads each rule at its owner
-and never restates it; its Lens names the owner of each rule. The
-reason is the forge's rule that one mechanism lives in one place: a
-rule stated twice is a defect, and a check that carried its own copy
-of the conventions would be checking against a copy that could drift
-from the original. The check also reads every file it cites from
-disk in its run, `CLAUDE.md` included, because the copy of
-`CLAUDE.md` in the session's context may be older than the file.
+**It is read-only.** A check changes nothing: not a document, not
+the ledger, not an index. Every fix is applied in the session, on
+the principal's word, after the walkthrough. Pure ledger
+bookkeeping, such as a stale version, a date or a count, may be
+marked as an immediate fix so the session can offer it at once.
 
-Instance facts never enter a check's report: names, roles, addresses
-and hosts are left out even where they would explain a finding,
-because a report is a public file or may be quoted into one.
+**It reports findings only.** What conforms is not reported, under
+no label. Every finding is precise: the file and line, or a range
+where it spans lines; the rule it breaks with its owner; and one
+proposed fix in a sentence. Findings are ranked by severity, by
+what would mislead or break first, never by the order they were
+found. Where a check's definition says a state is a fact and not a
+finding, such as a project without a repository or a missing logo,
+it is reported once, in one line, as a fact.
 
-## How a check works
+**It is advisory.** Nothing blocks. What becomes of a finding is
+decided at the walkthrough that follows the run, never by the
+check. A check is a recommended procedure, never a gate.
 
-**Read-only.** A check changes nothing: not a document, not the
-ledger, not an index. Every fix is applied in the session, on the
-principal's word, after the walkthrough. Pure ledger bookkeeping, a
-stale version, a date or a count, may be marked as an immediate fix
-so the session can offer it at once.
+**A finding decided once is not raised again.** A finding the
+project's decisions record as rejected, in an older record, as
+overruled or as a state accepted as it is, is not reported again;
+at most it is named once as a fact, with the decision cited.
 
-**Findings only.** What conforms is not reported, under no label:
-no observations, no notes, no summary of what is fine. Where a Lens
-says that a state is a fact and not a finding, for instance a project
-without a repository or a missing logo, the check reports it as a
-fact in one line, once.
+**A known finding keeps its ID.** Before it reports, a check reads
+the Findings table of the target's ledger and its own earlier
+reports in the target's `reviews/`. A finding already filed is
+reported under the ID it has, never as new: still open while it
+stands, reopened when the ledger has it resolved and it stands
+again. A rejected one is not raised.
 
-**Precise and ranked.** Every finding carries its file and line, or a
-range where it spans lines, the rule it breaks together with the
-rule's owner, and one proposed fix in a sentence. Findings are ranked
-by severity, by what would mislead or break first, never by the order
-in which they were found.
+**It reads what its definition says.** A check that names a scope
+reads that scope and nothing more. A check that names the whole
+reads the whole, honestly, however long it takes.
 
-**Advisory.** Nothing blocks. What becomes of a finding is decided at
-the walkthrough that follows the run, never by the check.
+Instance facts, such as names, roles, addresses or hosts, never
+enter a check's report, not even where they would explain a
+finding: a report is a public file, or may be quoted into one.
 
-**Decided once.** A finding the project's `decisions.md` records as
-rejected, whether in an older record, as overruled or as a state
-accepted as it is, is not raised again; at most the check names it
-once as a fact and cites the decision.
+## Where the report goes
 
-**Known findings keep their ID.** Before reporting, a check reads the
-Findings table of the target's ledger and its own earlier reports in
-the target's `reviews/`. A finding already filed is reported under
-the ID it has and never as new: still open while it stands, reopened
-when the ledger has it resolved and it stands again.
+A check returns its report in its final message and writes no file.
+The session files it in the target's `reviews/` as a dated report,
+`YYYY-MM-DD-check-<name>.md`, gives each new finding its ID and adds
+its row to the ledger. A known finding is named by the ID it has;
+a new one arrives without an ID.
 
-**Cheap where the Lens says so.** A check that names a scope reads
-that scope and nothing more; a check that names the whole reads the
-whole, honestly, however long it takes. The sweep of the whole
-operating layer is expensive by design and runs only on the
-principal's word, before a major release or after a round of work on
-the operating layer, never as part of a release on its own.
+Why the session and not the check files the report: the IDs of a
+project's findings are then given in one place, and a check that
+every save runs would otherwise write into the project at every
+save.
 
-## Who files the report, and why
+A check's findings are filed like a critic's: an FND of the
+project's one sequence, a dated report, a row in the ledger, settled
+by walkthrough, a rejected one by a decision and then not raised
+again. The reason is one mechanism for every reviewer. A finding
+without an ID would have no place for its verdict, so a rejected
+one would return at the next run, and a user could not tell why one
+reviewer's findings are kept and another's are not. A run that
+finds nothing files nothing: the reports are immutable, and an
+empty one would record nothing worth keeping.
 
-The check returns its report in its final message and writes no
-file. The `/check` procedure in the session files it as a dated,
-immutable report in the project's `reviews/`, gives each new finding
-its ID and adds a row to the ledger; the check gives a new finding no
-ID and names a known one by the ID it has.
+## Who runs it
 
-Two reasons stand behind this division. First, the IDs of a
-project's findings are given in one place: one sequence for the
-project, handed out by the session, so that no two reviewers can
-number the same finding differently. Second, a check that every save
-runs would otherwise write into the project at every save; an agent
-that reports and leaves cannot.
+No check runs on the forge's own judgement. A check is run by hand,
+through `/check <check> [slug]`, or by a command that composes
+checks into its own procedure. Composition is always the caller's,
+and checks never call each other.
 
-## Why findings are filed like a critic's
+Two commands compose checks. `/save` runs the `light` check, the
+bookkeeping check fit for a save, and then commits and pushes.
+`/release`, from `main` only, runs the project's full conformance
+checks and settles their findings with the principal before the
+release commit; for the engine that includes the `engine` check,
+the core against itself and the forge intent. Which checks each
+runs in full is its own definition's. The full check left the save
+because it cost minutes and a walkthrough every time; the save is
+meant to take seconds.
 
-A check's findings are filed exactly as a critic's are: as findings
-of the project's one sequence, in a dated report in `reviews/`, with
-a row in the ledger, settled by walkthrough, a rejected one recorded
-by a decision and then not raised again. The reason is one mechanism
-for every reviewer. A finding without an ID has no place for its
-verdict, so a rejected one would return at the next run, and a user
-could not tell why one reviewer's findings are kept and another's
-are not.
+The rest run on the principal's word. The most expensive one, the
+sweep of the whole operating layer for restatements, is run before
+a major or after a round on the operating layer, never by a release
+on its own.
 
-A run that finds nothing files nothing: there is no finding to give
-an ID to, nothing for a walkthrough to settle, and so no report to
-keep.
+Two things are deliberately not findings. The staleness of a render
+is never a check finding, the README and the release notes
+included: the release regenerates those two anyway, so the finding
+was void at every release and noise everywhere else; the forge map
+shows staleness instead. And a layer below the intent that a
+project does not have is not missing: the checks say nothing of it.
 
-## Who runs what
+## Why it is one mechanism with the critic and the challenger
 
-No check runs on Claude's own judgement; every run is invoked by
-hand or by a command whose definition names it. Composition is the
-caller's, and checks never call each other.
-
-The forge has two doors into git, at two speeds, and they divide the
-checks between them. `/save` runs the bookkeeping check, the one that
-reads front-matter against the companion, the ledger against the
-files, dependencies and resource indexes, and then commits and pushes
-on whatever branch is checked out: seconds, no render. `/release`,
-from `main` only, runs the checks of the project's full conformance,
-settles their findings with the principal at a walkthrough before the
-release commit, re-renders the README and the release notes and then
-saves with the release message and tag. Which checks each door runs
-is stated in its own definition (`.claude/skills/save/SKILL.md`,
-`.claude/skills/release/SKILL.md`). Every other check runs on the
-principal's word.
-
-The full check left the save because it cost minutes and a
-walkthrough every time. The release is a recommended procedure,
-never a gate: nothing blocks. The staleness of a render is never a
-check finding, the README and the release notes included: the
-release regenerates those two anyway, so the finding was void at
-every release and noise everywhere else; the `/forge` map shows
-staleness instead, and a render is regenerated only on the
-principal's word.
+Mechanical conformance runs on the same mechanism as the critic and
+the challenger: its own contract skill, one agent per kind of check,
+a roster, a run by hand. The contract owns conduct and isolation,
+the subject and its boundary, the way of working and the shape of
+the output. A check's own definition owns only its Lens section: a
+specialisation of the contract that may narrow what is read or make
+a shared rule stricter, never rename, drop or duplicate a shared
+rule or field. The protocol changes in the contract alone. The
+mechanism takes further kinds of reviewer as they come.
 
 ## See also
 

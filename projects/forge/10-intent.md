@@ -1,8 +1,8 @@
 ---
-version: 4.65
+version: 5.0
 date: 2026-10-10
-status: draft
-last_change: 4.65 (2026-10-10): what a major approves and what its test attests (POS.0300); the challenge of 2026-10-09 and the two critiques settled.
+status: approved
+last_change: 5.0 (2026-10-10): approved by the principal; version 5 closes how a thought is found and how the forge is read (THR.0570); THR.0610 opened on the horizon statement the intent lacks.
 project: forge
 audience: principal + Claude only
 ---

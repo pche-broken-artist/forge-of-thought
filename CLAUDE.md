@@ -369,9 +369,12 @@ scripts/                   # forge-save / forge-pull / forge-status
                            # documentation: the state of its pages,
                            # its index, its check; docs_map their
                            # shared reader of the map)
-.claude/                   # skills (the commands, the reviewers'
-                           # contracts and the walkthrough method),
-                           # agents, settings
+.claude/                   # skills (the commands, the contracts of
+                           # the reviewers and of the documentation
+                           # agents, and the walkthrough method),
+                           # agents (the reviewers, the
+                           # documentation's planner and writer),
+                           # settings
                            # (settings.local.json: the session
                            # model — gitignored)
 templates/                 # canonical skeletons
@@ -675,8 +678,8 @@ What a command does in full is its skill's
 
 ## The system's own project
 `projects/forge/` is Forge of Thought itself run through its own process:
-its brief, intent (design positions POS, open threads THR, rejected
-directions REJ), decisions and ledger; its README and release notes
+its brief, intent (design positions POS, rejected directions REJ)
+with its threads (THR), decisions and ledger; its README and release notes
 are the engine's, renders per Document chain, Renders from
 `projects/forge/recipes/`. A process change is complete only once
 that intent is updated and the README re-rendered.

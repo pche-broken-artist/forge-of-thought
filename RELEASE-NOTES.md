@@ -1,12 +1,13 @@
 ---
 project: forge
 render: release-notes
-generated: 2026-10-04
-recipe: recipes/release-notes.md v0.12
+generated: 2026-10-10
+recipe: recipes/release-notes.md v0.13
 inputs:
   - projects/forge/10-intent.history.md
   - projects/forge/10-intent.history.archive.md
-  - projects/forge/10-intent.md v4.58
+  - projects/forge/40-solution-design.history.md
+  - projects/forge/10-intent.md v5.0
   - projects/forge/decisions.md
   - RELEASE-NOTES.md (previous edition)
 ---
@@ -18,523 +19,206 @@ takes upgrades through `forge-pull`; Action required comes first in
 every section; the fine-grained log with the reasons lives in
 `projects/forge/10-intent.history.md`.
 
-## 4.58 — 2026-10-04
+## 5.0 — 2026-10-10 — approved
 
-### Added
-- The forge is open to those who use it, feedback and ideas wanted
-  most and a finished change welcome on the forge's own rule, and
-  `CONTRIBUTING.md` in the repository root, a render of the new recipe
-  `projects/forge/recipes/contributing.md`, says how (POS.1440,
-  SOL.0450). For you: you can give feedback, bring an idea or send a
-  change you have tried yourself, as `CONTRIBUTING.md` says.
-
-### Fixed
-- The skills `ingest` and `render` cite CLAUDE.md, Document chain, by
-  the item's name and no longer by a number that ceased to exist at
-  4.53 (FND.0970). For you: nothing to do.
-- The Essence of the forge intent says the chain ends where the project
-  needs it to, in place of the sentence that version 1 ends at the
-  assignment (POS.1400). For you: nothing to do; the intent no longer
-  contradicts its own positions.
-
-## 4.57 — 2026-10-04
+This major closes how a thought is found and how the forge is read,
+and is the point to pull to, tagged `v5`. Between 4.0 and 5.0 every
+artefact got a definition of its elicitation in the state files of
+`/forge`, the working methods stand named with their reasons, the
+chain grew below the intent to the solution design with the cut
+between what is wanted and what realises it, the history of a
+document became a log these notes derive from, and the forge explains
+itself from its own definitions: the documentation by `/document`,
+the scripts in Python, `CONTRIBUTING.md` for feedback. The test of a
+major ran on 2026-10-09 and was settled at 4.65: the check
+`single-source-of-truth`, both critic lenses and the challenge `cto`;
+the major approves the intent as the record of what the principal
+holds at this date, the solution design staying a draft at 0.8 and
+the open threads open. The sections of 4.1 to 4.65 are folded here;
+the detail per version stays in `projects/forge/10-intent.history.md`
+and its archive.
 
 ### Action required
+- Version 5 approved: the forge found and read (POS.0300, THR.0570).
+  For you: `v5` is the point to pull to once released; nothing changes
+  for a project on 4.x.
+- The nine PowerShell scripts are replaced by Python scripts of the
+  same names, with the shared modules `forge_repos.py` and
+  `forge_tools.py`, and `.claude/settings.json` starts the hook with
+  `python` (POS.0830, SOL.0620, THR.0150 closed). For you: PowerShell 7
+  is no longer needed; Python 3.8 or newer must be on PATH as `python`
+  (on Linux or macOS alias `python3` to it or install
+  `python-is-python3`). Where you typed `./scripts/<name>.ps1 -Tag x`,
+  type `python scripts/<name>.py --tag x`; `-Engine`, `-Recipe`,
+  `-Reference`, `-Template`, `-OutDir`/`-Out` are `--engine`,
+  `--recipe`, `--reference`, `--template`, `-o`.
+- The engine's `.claude/settings.json` carries a `UserPromptSubmit`
+  hook, anchored at the project root so that it does not depend on the
+  working directory (POS.1170). For you: after `forge-pull`, restart
+  the session once so the hook loads; it adds its lines of context at
+  every prompt.
+- The history of a versioned document is a log of changes, one line
+  per change (CLAUDE.md, Versioning & status; `templates/history.md`;
+  POS.0310, SOL.0200). For you: in each project, for every versioned
+  document, have Claude move `<file>.history.md` as it stands to
+  `<file>.history.archive.md`, untouched, and begin a new
+  `<file>.history.md` from `templates/history.md` with its header and
+  comment only; the log begins with the document's next version. One
+  project at a time, on your word.
+- The open threads of a project live in one file beside the intent,
+  `threads.md`, and every thread names the artefact it concerns, the
+  intent included (POS.0120; CLAUDE.md, Document chain). For you: in
+  each thought project, have Claude create `threads.md` from
+  `templates/threads.md`, move the section Open threads of
+  `10-intent.md` into it word for word and in its order, mark each
+  thread with the artefact it concerns, remove the section from the
+  intent, verify that the two files together give the old text
+  exactly, then bump the intent's version with a history row and set
+  the new version in the ledger; a project that already has
+  `10-intent.threads.md` renames it to `threads.md` and marks its
+  threads at its next write. One project at a time, on your word.
+- The commit identity is git's, per host through `includeIf` in your
+  `~/.gitconfig` (POS.0950). For you: after `forge-pull`, delete your
+  `identities.local.md`; where your repositories carry a local
+  `user.name`/`user.email` set by the forge, unset them so your
+  includes govern, or keep them, since git lets the local one win;
+  `/setup` writes the stanzas and the guard on a new machine.
+- The status `in_review` is cancelled; the statuses are `draft`,
+  `approved` and `superseded` (POS.0300, REJ.0230). For you: a document
+  whose front-matter says `status: in_review` is set to `draft`.
+- The locking of a brief is withdrawn: a brief is versioned like every
+  artefact, approved at 1.0 and changed after that, mined when the
+  principal says so, and no longer among the immutable documents
+  (POS.0110, POS.0920, POS.0320). For you: an approved brief stays as
+  it is and may be changed from now on; a position mined from a brief
+  cites the brief's version at its next write.
+- The verdict words of a walkthrough are one set: `accept`, `modify`,
+  `reject`, `park`, `obsolete` (POS.0850,
+  `.claude/skills/walkthrough/SKILL.md`). For you: in `/check`,
+  `accept` now means "do the fix" and `reject` means "leave it as it
+  is", the reverse of before; `fix`, `overrule`, `defer` and `leave
+  open` are gone.
+- A recipe says its format in a `## Format` section; the section
+  `## Build instructions` is retired and no longer copied into the
+  render (POS.0590, `templates/recipe.md`). For you: at the next
+  iteration of a recipe that is to become a file, rename the section
+  and give it the three lines of the skeleton; until then `/publish`
+  reads the old section and asks for the format.
+- A check that finds something leaves a report in `reviews/` and rows
+  in the ledger's Findings table (POS.1140). For you: nothing to do in
+  a thought project beyond refreshing the ledger's comments from
+  `templates/ledger.md` when the `light` check reports them; a library
+  receives its Findings table and `reviews/` from `/check` at its first
+  finding.
+- The migration path names both checks a release runs on a project
+  (POS.0940). For you: after `forge-pull`, run `/check light` as well
+  as `/check project` on each project.
+- The points of Document chain in CLAUDE.md are cited by name and no
+  longer by number, and the ledger's `terminal:` left the engine
+  (POS.0160, POS.1400). For you: a recipe or a document of a project
+  that cites `Document chain 5` or `Document chain 7` cites `Document
+  chain, External inputs` or `Document chain, Renders` at its next
+  write; the `terminal:` line of a project's ledger header may be
+  deleted.
 - The skeletons of the reviewers are renamed to one pattern,
   `<type>-definition.md`: `templates/critic-definition.md`,
   `templates/challenger-definition.md` and
-  `templates/check-definition.md`. For you: a persona, a lens or a check
-  of your own is unaffected; a document of yours that cites
-  `templates/critic.md`, `templates/challenger.md` or
+  `templates/check-definition.md`, beside the new
+  `templates/artefact-definition.md` (POS.1430). For you: a persona, a
+  lens or a check of your own is unaffected; a document of yours that
+  cites `templates/critic.md`, `templates/challenger.md` or
   `templates/check.md` cites the new name at its next write.
-
-### Added
-- `/new-artefact <name>` adds a new kind of artefact to the forge and
-  leads to everything a kind needs: its position in the forge intent,
-  its definition and template from the new skeleton
-  `templates/artefact-definition.md`, its prefixes, its reviewers and
-  its place in the solution design (POS.1430, POS.1090,
-  `.claude/skills/new-artefact/SKILL.md`). For you: you alone start it,
-  it decides nothing, and for now it adds to the engine, for every user
-  of it.
-
-## 4.56 — 2026-10-04
-
-### Changed
-- How the things wanted are realised moved out of the forge intent into
-  the solution design of the forge's project: the positions keep what
-  is wanted and why, and the files, scripts and settings that realise
-  them are named in its SOL items (THR.0520). For you: nothing to do; to
-  find the file that realises a position of the forge, read
-  `projects/forge/40-solution-design.md`.
-- What realises an item is named in the solution design where the
-  project has one, and no longer in the item; the rule as it stood
-  holds for a project without one (POS.0120,
-  `.claude/skills/forge/states/intent.md`). For you: in a project with a
-  solution design, an item of the intent no longer names the file that
-  realises it.
-
-### Removed
-- Five positions of the forge intent that were wholly solution, moved
-  to the solution design: the layout of the repository to SOL.0500, the
-  protection to SOL.0520, the two conversion scripts to SOL.0430 and
-  SOL.0440, the file shape of a command to SOL.0100 (POS.0500, POS.0520,
-  POS.0740, POS.1150, POS.1130). For you: nothing to do; what is wanted
-  of each stands in the positions that remain.
-
-## 4.55 — 2026-10-04
-
-### Changed
-- From the artefacts of the chain the thing must be buildable without
-  the finished product; the solution design stays the architecture, and
-  a technical specification is a layer a project takes where the one
-  who builds needs the detail (POS.1400). For you: nothing to do; the
-  technical specification is not introduced as a layer now.
-
-## 4.54 — 2026-10-04
-
-### Action required
-- One threads file for the project, `threads.md`, and every thread
-  names the artefact it concerns, the intent included (POS.0120). For
-  you: a project renames `10-intent.threads.md` to `threads.md` and
-  marks its threads at its next write.
 - The solution design has its definition,
   `.claude/skills/forge/states/solution-design.md`, its template,
   `templates/solution-design.md`, and a challenger persona of its own,
   `architect` (POS.1310, POS.0420). For you: run `/challenge architect
   solution-design` once a solution design stands; the readme recipe is
   iterated for the table of artefacts before the next release.
-
-### Changed
-- An accepted challenge is mended wherever it needs to be, and goes
-  above its layer only as a thread, where what is wanted cannot be
-  realised or only at a price not worth paying (POS.0440). For you:
-  accepting a challenge no longer obliges you to change the intent.
-- A thread may arise from any document, a challenge, a finding or an
-  item of a layer among them, not from a source alone (POS.0230). For
-  you: a thread that comes from a document names that document by path.
-- The lens `clarity` judges the scope of every artefact by the Aim of
-  its own definition and proposes the move, and its advisory checklist
-  is gone (`.claude/skills/critic-contract/SKILL.md`). For you: a report
-  of `/critique clarity` no longer closes with a checklist.
-- An open question of a solution design says whether it blocks
-  realisation, and the design is read by whoever realises it, a person
-  or an agent (POS.1420). For you: you can tell from its TBC items
-  whether a solution design is complete enough to build from.
-
-## 4.53 — 2026-10-03
-
-### Action required
-- The points of Document chain in CLAUDE.md are cited by name and no
-  longer by number, and the ledger's `terminal:` left CLAUDE.md, the
-  skill `forge`, the check `project` and `templates/ledger.md`
-  (POS.0160). For you: a recipe or a document of a project that cites
-  `Document chain 5` or `Document chain 7` cites `Document chain,
-  External inputs` or `Document chain, Renders` at its next write; the
-  `terminal:` line of a project's ledger header may be deleted.
-- The locking of a brief is withdrawn: a brief is versioned like every
-  artefact, approved at 1.0 and changed after that, mined when the
-  principal says so, and no longer among the immutable documents
-  (POS.0110, POS.0920, POS.0320). For you: an approved brief stays as it
-  is and may be changed from now on; a position mined from a brief
-  cites the brief's version at its next write.
-
-### Changed
-- The names of the artefacts left the engine: which artefacts the forge
-  has is the listing of `.claude/skills/forge/states/`, CLAUDE.md
-  carries the artefact as one kind and speaks of the layers below the
-  intent (POS.1080). For you: to see which artefacts the forge has, look
-  at the definitions; a layer your project does not have is not
-  reported.
-- CLAUDE.md is brought to the positions of 4.52: the chain ends where
-  the project needs it to, the intent does not solve, the prefix SOL,
-  Intent-first for the whole chain and from below, and Handing over as
-  a working method (POS.1400, POS.1390, POS.1420, POS.0900, POS.1410).
-  For you: you can hand an artefact over to Claude in a word and judge
-  the proposal he returns.
-
-## 4.52 — 2026-10-03
-
-### Action required
-- The ledger's `terminal:` is withdrawn: no layer below the intent is
-  missing, so the ledger declares no end of the chain (POS.0160,
-  POS.1400). For you: leave the `terminal:` line in a project's ledger
-  header until the engine stops reading it, then delete it.
+- The command `/document [slug]` generates the documentation of a
+  project into `docs/`, pages of one topic each and their index, from
+  the map `docs-map.md` beside the ledger (POS.1450, SOL.0460). For
+  you: nothing for an existing project; a project's documentation is
+  made by `/document <slug>` when wanted.
+- `templates/recipe-readme.md` owns what a project's README carries:
+  what the project is, what you get, how to start, where it stands,
+  documentation; the tables of renders, waiting matters and the layout
+  leave for the ledger and the documentation (POS.1450). For you: the
+  README of a project follows the new shape at its next `/recipe
+  readme`; until then its recipe renders the old one.
 
 ### Added
-- An intent says what the principal wants and why, and it does not
-  solve; the test of a sentence is whether it would still hold if the
-  thing were realised in a wholly different way (POS.1390). For you:
-  nothing to do yet; how a thing is built belongs to the solution
-  design, whoever said it.
+- Every artefact has a definition of its elicitation in seven blocks,
+  Target, Inputs, Aim, Partner, Map, Instruments, Course, living in the
+  state files of `/forge` and paired with the artefact's template; the
+  definitions are used at once and mended where they live (POS.1310,
+  POS.1330 to POS.1350, POS.1380, SOL.0120). For you: `/forge brief`,
+  `/forge intent`, `/forge assignment` and `/forge solution-design` run
+  by their definitions, and what holds for an artefact is read in its
+  state file under `.claude/skills/forge/states/`.
 - The solution design is an artefact of the chain,
   `40-solution-design.md`, derived from the lowest layer the project
-  has above it and made of SOL items with what is open as TBC
-  (POS.1400, POS.1420). For you: a project takes the layers it needs,
-  and many end at the intent; the definition of the solution design
-  comes with a later release.
+  has above it and made of SOL items with what is open as TBC; an
+  intent says what the principal wants and why and does not solve, the
+  test of a sentence being whether it would still hold if the thing
+  were realised in a wholly different way (POS.1390, POS.1400,
+  POS.1420). For you: a project takes the layers it needs, and many
+  end at the intent; how a thing is built belongs to the solution
+  design, whoever said it.
 - How an artefact is composed is the principal's choice, artefact by
   artefact: found together by elicitation, or handed over to Claude,
   who returns a proposal with what he assumed and what he chose
-  (POS.1410). For you: nothing is derived from work handed over before
-  you have judged it.
-
-### Changed
-- A change of substance runs the whole chain and in both directions:
-  every layer below the intent is brought to it, and a change may come
-  from below, when no solution is found (POS.0900). For you: the intent
-  still changes first, also where the change was found while solving.
-- The usual shape of a brief is light: topics with the research beside
-  them, composed in a round or two, and the definition of the brief
-  carries it (POS.0110). For you: `/forge brief` leads you to a short
-  brief and leaves the chiselling to the intent.
-
-## 4.51 — 2026-10-03
-
-### Added
-- THR.0520: the layer for the solution, its definition, its template
-  and where it stands in the chain. For you: nothing changes yet.
-
-### Fixed
-- The positional arguments of nine skills are counted from zero, as
-  Claude Code counts them: `forge`, `recipe`, `render`, `publish`,
-  `ledger`, `new-project`, `import-project`, `spinoff` and `man`. For
-  you: a command receives its arguments in the right places; `/forge
-  brief <name>` no longer takes the name for the state.
-
-## 4.50 — 2026-10-03
-
-### Action required
-- The migration path names both checks a release runs on a project
-  (POS.0940, FND.0850). For you: after `forge-pull`, run `/check light`
-  as well as `/check project` on each project.
-
-### Fixed
-- The positions on the two conversion scripts are rewritten in their
-  present shape, two engines each, and the exception from the session
-  model is both headless conversions behind `/publish` (POS.0740,
-  POS.1150, POS.0930, FND.0840). For you: nothing to do; the scripts did
-  not change.
-
-## 4.49 — 2026-10-02
-
-### Action required
-- The status `in_review` is cancelled; the statuses are `draft`,
-  `approved` and `superseded` (POS.0300, REJ.0230). For you: a document
-  whose front-matter says `status: in_review` is set to `draft`.
-
-### Changed
-- The rules of particular artefacts left CLAUDE.md for the definitions
-  in the state files of `/forge`: the wording of prime directive 8 and
-  the Requirement style stand in the assignment's definition, what the
-  threads hold and what an item keeps against its file in the intent's,
-  and a paragraph in Document chain says what a definition is (POS.1310,
-  POS.1380). For you: read what holds for a brief, an intent or an
-  assignment in its state file under `.claude/skills/forge/states/`;
-  CLAUDE.md keeps the rule in short.
-- The Commands table of CLAUDE.md is cut to the purpose of each command,
-  rules echoed inside CLAUDE.md are cut to their owner, no member of a
-  roster is named outside its file, and the critic lenses say their fit
-  in their descriptions (FND.0610, FND.0620, FND.0630, FND.0700,
-  FND.0720). For you: nothing to do; CLAUDE.md is shorter, and a
-  command, a lens or a check is described in its own file.
-- The demand for British English left the Requirement style: the
-  language of an assignment is the project's (POS.0250, POS.0060). For
-  you: an assignment of a project in another language is written in
-  full, correct sentences of that language.
-
-### Removed
-- The rule that an intent consolidated by Claude from the conversation
-  is `in_review` until every position has been walked through, with no
-  lower layer derived before (POS.1180, REJ.0230). For you: a
-  walkthrough of an intent runs when you ask for one, and no lower layer
-  waits for it.
-
-### Fixed
-- CLAUDE.md opens with the chain starting at the idea put together,
-  cites POS.1320 for the walk of a Map and says a recipe carries
-  `updated` in place of `date`; the skeletons of the readme and
-  release-notes recipes name a language in place of UK English (FND.0740
-  to FND.0820). For you: the README and the release notes of your
-  project are no longer told to be UK English.
-
-### Rejected
-- Stating the caveat on quoting an agent's description once in
-  CLAUDE.md; it stays in the three reviewer skeletons (DEC.0180,
-  FND.0720). For you: the skeleton a new lens, persona or check starts
-  from still tells you when to quote the description.
-
-## 4.48 — 2026-10-02
-
-### Changed
-- What a brief carries and how it is found is owned by its definition,
-  `.claude/skills/forge/states/brief.md`; how `/render` and `/publish`
-  run is owned by their skills; the verdicts other than accept stand
-  once, in the walkthrough skill; CLAUDE.md keeps a sentence and cites
-  the owner (FND.0540 to FND.0690). For you: nothing to do; a mechanism
-  is read in its own file, and CLAUDE.md tells you which.
-- The briefs are kept in whatever language they are written in; "stored
-  verbatim" left the language rule and prime directive 6 of CLAUDE.md
-  (POS.0060, FND.0540). For you: the rule no longer reads as a ban on
-  Claude working on the text of your brief.
-
-### Fixed
-- A change of the operating layer that touches no item of the intent has
-  a subject of its own in the log of the forge's project, now written in
-  the position and in `templates/history.md` (POS.0310, FND.0730). For
-  you: nothing to do; the subject serves the forge's own project.
-
-### Rejected
-- Leaving the detection of changed sources to the `project` check alone
-  (DEC.0170, FND.0710). For you: a bare `/ingest` goes on reporting
-  sources changed since registration and asks what to do with each.
-
-## 4.47 — 2026-10-02
-
-### Changed
-- The definitions of the brief, the intent and the assignment live in
-  the state files of `/forge`, seven blocks each, used at once and
-  mended there with no trial before (POS.1310, POS.1380, POS.1330,
-  POS.1340, POS.1350). For you: after `forge-pull`, `/forge brief`,
-  `/forge intent` and `/forge assignment` run by the new definitions;
-  your locked artefacts are untouched.
-- CLAUDE.md, in the brief's row of Document kinds and in Document chain
-  1, and the brief's state file are brought current with the intent
-  (THR.0470). For you: a brief born through `/forge brief` is no longer
-  born by the older rule; it holds what you chose from the finding and
-  carries no mark of authorship.
-
-## 4.46 — 2026-10-02
-
-### Changed
-- In the brief's definition Claude forms the record: on the principal's
-  word to write he takes what the talk arrived at and writes it down so
-  that it is understood, and the brief is the principal's by his
-  approval, whoever first said a thought (POS.1330, THR.0450). For you:
-  a brief found together need not be word for word what you said.
-- Once the talk over a brief turns to the intent's work, Claude offers
-  the lock once, as a recommendation (POS.1330, THR.0440). For you: you
-  are told when a brief begins to grow into an intent, and the decision
-  stays yours.
-- The Map of a brief names the thought and not whose words it is in, and
-  the boundaries are its fifth area (POS.1330, THR.0440). For you:
-  before the lock Claude also asks what you do not want and what is out
-  of scope.
-- The marks of a brief are narrowed: a source is cited where its
-  identity matters to the thought, a remark stands for a reservation or
-  an uncertainty only, and what the principal did not take is gone
-  unless he says it stays (POS.0110, THR.0440). For you: a brief carries
-  a citation or a remark only where it matters to the thought.
-- An assignment is complete also when its recipients know the end and
-  the reason well enough to act rightly where the plan no longer fits
-  (POS.1350, THR.0450). For you: completeness no longer pulls an
-  assignment towards specifying too much.
-- The questions up front of an assignment are bounded by their kind, the
-  detail of the handover against substance the intent has not settled,
-  and not by their number (POS.1350, THR.0440). For you: a question on
-  substance sends the work back to the intent, however few the questions
-  are.
-- A Map names also what is consciously verified, the last area of the
-  assignment's Map is named self-containment, and at the walk Claude
-  says of each area how it stands, aloud and unrecorded (POS.1320,
-  POS.1350, THR.0440, THR.0450). For you: you hear how each area stands
-  when a Map is walked, and nothing of it is written.
-- The questions of worth and feasibility are Claude's way of challenging
-  an idea in the intent, nothing recorded per idea (POS.1340, THR.0440).
-  For you: no matrix of good and feasible is kept for every idea.
-
-## 4.45 — 2026-10-02
-
-### Fixed
-- `/ingest` settles a changed source in a thought project in the three
-  ways the intent has, a new source beside it, the original restored or
-  the change knowingly accepted; in a library the sweep moves the ledger
-  date and corrects the index entry, and regenerating an extract is the
-  owner's act (POS.0180, `.claude/skills/ingest/SKILL.md`). For you: a
-  bare `/ingest` offers you all three ways for a changed source.
-- The FCT row of CLAUDE.md says apart that a source's fact cites its
-  file and that verification is never demanded (POS.0230). For you: a
-  fact taken from a source names its file, and no fact has to be proved.
-- The help and the identity message of `scripts/forge-save.ps1` no
-  longer set the commit identity at a project's creation (POS.0950). For
-  you: the script says what the forge does; the identity is git's and
-  the forge sets none.
-
-## 4.44 — 2026-10-02
-
-Nothing for the user of the engine.
-
-## 4.43 — 2026-10-02
-
-### Action required
-- A check that finds something now leaves a report in `reviews/` and
-  rows in the ledger's Findings table (POS.1140). For you: nothing to do
-  in a thought project beyond refreshing the ledger's comments from
-  `templates/ledger.md` when the `light` check reports them; a library
-  receives its Findings table and `reviews/` from `/check` at its first
-  finding.
-
-### Changed
-- Scripts are written in Python from now on: a new script at once, the
-  PowerShell scripts rewritten in time and standing as they are until
-  then (POS.0830, THR.0150). For you: nothing to do yet; the scripts you
-  run stay PowerShell until each is rewritten.
-
-## 4.42 — 2026-10-02
-
-### Changed
-- The forge's intent is cleaned whole: the way to 69 items and the
-  detail a file of its own carries moved into the history log, one
-  record per item and no stance changed, and the table written before
-  the log stands untouched in
-  `projects/forge/10-intent.history.archive.md` (THR.0470). For you: the
-  intent reads as the current state; the way to an item is in its
-  records of the log, and the versions before 4.42 are in the archive.
-
-## 4.41 — 2026-10-01
-
-Nothing for the user of the engine.
-
-## 4.40 — 2026-09-30
-
-### Changed
-- Detail leaves an item only for a file of its own; a part of a file,
-  CLAUDE.md among them, never carries it alone (POS.0120). For you:
-  nothing to do.
-
-## 4.39 — 2026-09-30
-
-### Action required
-- The history of a versioned document is a log of changes, one line per
-  change (CLAUDE.md, Versioning & status; `templates/history.md`). For
-  you: in each project, for every versioned document except a locked
-  brief, have Claude move `<file>.history.md` as it stands to
-  `<file>.history.archive.md`, untouched, and begin a new
-  `<file>.history.md` from `templates/history.md` with its header and
-  comment only; the log begins with the document's next version. One
-  project at a time, on your word.
-
-### Added
-- The check `history` reads a document with its history and proposes
-  what moves between them (POS.1140). For you: run it when a document is
-  to be cleaned; it moves nothing itself.
-
-### Changed
-- Release notes are derived from the records of the history log, what
-  you must do carried word for word from the record's `Action`
-  (POS.0730). For you: nothing to do; a version before the log still
-  comes from its archived Notes.
-
-## 4.38 — 2026-09-30
-
-### Action required
-- The open threads of an intent live in `10-intent.threads.md` beside it
-  (CLAUDE.md, Document chain 2; forge intent 4.37). For you: in each
-  thought project, have Claude create `10-intent.threads.md` from
-  `templates/threads.md`, move the section Open threads of
-  `10-intent.md` into it word for word and in its order, remove the
-  section from the intent, verify that the two files together give the
-  old text exactly, then bump the intent's version with a history row
-  and set the new version in the ledger; one project at a time, on your
-  word.
-
-## 4.37 — 2026-09-30
-
-### Changed
-- The open threads of an intent live in a file of their own,
-  `10-intent.threads.md` (POS.0120). For you: move the Open threads
-  section of each project's intent into it, word for word, on your word,
-  project by project.
-
-## 4.36 — 2026-09-30
-
-Nothing for the user of the engine.
-
-## 4.35 — 2026-09-30
-
-Nothing for the user of the engine.
-
-## 4.34 — 2026-09-29
-
-### Changed
-- The history of a document becomes a log of changes, one line per
-  change, and the release notes are derived from it (POS.0310,
-  POS.0730). For you: nothing to do yet; your history files keep their
-  tables until the operating layer follows in a later release.
-- The open threads of an intent move to a file of their own beside it
-  (POS.0120). For you: nothing to do yet; the move comes with a later
-  release.
-
-## 4.33 — 2026-09-28
-
-Nothing for the user of the engine.
-
-## 4.32 — 2026-09-28
-
-### Added
-- The elicitation of an artefact has a definition of seven blocks:
-  Target, Inputs, Aim, Partner, Map, Instruments, Course (POS.1310,
-  POS.1330 to POS.1350). For you: nothing to do yet; the state files of
-  `/forge` are rewritten to the shape in a later release.
-
-### Changed
-- A brief holds what the principal chose from the finding, not
-  everything the finding yielded, and carries no mark of authorship
-  (POS.0110, REJ.0220). For you: `/forge brief` runs by today's state
-  file until it is rewritten; a brief you have locked is untouched.
-
-## 4.31 — 2026-09-27
-
-Nothing for the user of the engine.
-
-## 4.30 — 2026-09-27
-
-### Changed
-- The `project` check no longer verifies a render's provenance against
-  the ledger's Renders table; the `light` check does
-  (`.claude/agents/check-project.md`, `.claude/agents/check-light.md`).
-  For you: a mismatch is reported once, at `/save` as well as at
-  `/release`.
-- A one-line reminder that names its owner is not a restatement
-  (POS.1070). For you: the `single-source-of-truth` check no longer
-  raises such lines; it still raises repeated steps, rules and shapes.
-
-## 4.29 — 2026-09-27
-
-### Changed
-- The `project` check no longer reports a stale README or release notes
-  (POS.0570, `.claude/agents/check-project.md`). For you: one empty
-  finding less at every release; `/forge` still shows staleness, and
-  `/release` regenerates both regardless.
-
-## 4.28 — 2026-09-27
-
-### Action required
-- The verdict words of a walkthrough are one set: `accept`, `modify`,
-  `reject`, `park`, `obsolete` (POS.0850,
-  `.claude/skills/walkthrough/SKILL.md`). For you: in `/check`, `accept`
-  now means "do the fix" and `reject` means "leave it as it is", the
-  reverse of before; `fix`, `overrule`, `defer` and `leave open` are
-  gone.
-- A recipe says its format in a `## Format` section; the section
-  `## Build instructions` is retired and no longer copied into the
-  render (POS.0590, `templates/recipe.md`). For you: at the next
-  iteration of a recipe that is to become a file, rename the section and
-  give it the three lines of the skeleton; until then `/publish` reads
-  the old section and asks for the format.
-
-### Added
+  (POS.1410, CLAUDE.md, Working methods). For you: you can hand an
+  artefact over in a word and judge the proposal he returns; nothing
+  is derived from it before you have judged it.
+- `/new-artefact <name>` adds a new kind of artefact to the forge and
+  leads to everything a kind needs: its position in the forge intent,
+  its definition and template from `templates/artefact-definition.md`,
+  its prefixes, its reviewers and its place in the solution design
+  (POS.1430, POS.1090, `.claude/skills/new-artefact/SKILL.md`). For
+  you: you alone start it, it decides nothing, and for now it adds to
+  the engine, for every user of it.
+- The documentation of a project is a set of pages of one topic each,
+  for the user, the extender and the evaluator, in five sections
+  filled only where the project has material, generated and never
+  composed by hand; two kinds of document carry it, `map` (state) and
+  `page` (rendering); `/document` runs a planner that writes the map
+  and a writer per page, with `scripts/docs-state.py`,
+  `scripts/docs-check.py`, `scripts/docs-index.py` and
+  `scripts/docs_map.py` behind it (POS.1450, POS.1080, SOL.0460,
+  THR.0340 closed). For you: the engine's documentation is in `docs/`,
+  its index first; a page mirrors its owner or is derived from the
+  project's documents, and is never a source of truth.
+- Three working methods stand in the forge for every instance: Step by
+  step as its own position, with the birth of a new versioned document
+  as such a step and the rule that a remark, a question or a
+  counter-thought in answer to "shall I change it?" is not a yes
+  (POS.1460); Plain speech, a message opening with the outcome, a
+  thread or a position named by what it is with its ID in brackets as
+  an address, no invented word for a mechanism (POS.1470); Kind, not
+  count, a rule saying what kind of content belongs and never a count
+  or a length (POS.1480). For you: Claude's messages open with the
+  point and name things in words; a rule he proposes names a kind, not
+  a number.
+- One write per round among the working methods (POS.1210, CLAUDE.md).
+  For you: say it in a word when you want everything agreed so far
+  carried to one write at the round's end.
+- In pieces (POS.1160). For you: send a long thought in several
+  messages and close with "done"; Claude reacts to the whole, not to
+  the parts.
 - Every proposition closes with the line
-  `(a)ccept / (m)odify / (r)eject / (p)ark`, and a single letter answers
-  it (POS.0850). For you: type `a`, `m`, `r` or `p` as your whole
-  message; every other word of the forge is typed in full.
+  `(a)ccept / (m)odify / (r)eject / (p)ark`, and a single letter
+  answers it (POS.0850). For you: type `a`, `m`, `r` or `p` as your
+  whole message; every other word of the forge is typed in full.
 - `write` orders the bulk write of everything carried in the round
   (POS.1210). For you: say `write` when you want the round written;
   Claude shows you the whole round first and writes on your yes.
 - The sign `??` asks for Claude's honest opinion (POS.0860, CLAUDE.md,
-  Working methods). For you: end a message with `??` standing alone and
-  you get three points at most, marked as Claude's own, with nothing
-  written.
+  Working methods). For you: end a message with `??` standing alone
+  and you get three points at most, marked as Claude's own, with
+  nothing written.
+- A `walkthrough` skill holds the shape of the walkthrough and the
+  elicitation interview (POS.0850). For you: CLAUDE.md is shorter and
+  the method is read when one runs; nothing to do.
 - `/publish <recipe>` makes the designed `.pptx` or `.docx` from the
   render through a model, into `published/` (POS.0590,
   `.claude/skills/publish/SKILL.md`). For you: you alone start it; it
@@ -543,288 +227,24 @@ Nothing for the user of the engine.
   from and whether it is `current` or `stale` (`templates/ledger.md`).
   For you: `/forge` shows a published file that is older than its
   render.
-
-### Changed
-- Finding states in the ledger: `overruled` is now `rejected`, and
-  `parked` is new (POS.0440, `templates/ledger.md`). For you: nothing to
-  do; the `light` check offers the conversion of your ledger as an
-  immediate fix, and an unconverted ledger is read correctly.
-- `/render` makes the plain file beside the Markdown through pandoc,
-  where the recipe names a format (POS.0590). For you: a Word file or a
-  deck for reading is fresh after every render; without pandoc the
-  Markdown is made and the file is not.
-- `scripts/md2pptx.ps1` and `scripts/md2docx.ps1` each have two engines,
-  `-Engine pandoc | claude` (POS.0740, POS.1150). For you: a call
-  without the switch does what it did before.
-
-## 4.27 — 2026-09-26
-
-Nothing for the user of the engine.
-
-## 4.26 — 2026-09-26
-
-### Added
-- One write per round among the working methods (POS.1210, CLAUDE.md).
-  For you: say it in a word when you want everything agreed so far
-  carried to one write at the round's end.
-
-### Changed
-- Prime directive 9: a correction on text just written belongs to the
-  round that wrote it, and a write you order does not close the round
-  unless you say so (POS.0190). For you: correcting a fresh write no
-  longer costs a version of its own.
-
-### Fixed
-- The per-prompt hook no longer depends on the working directory
-  (`.claude/settings.json`, `scripts/hook-walkthrough.ps1`, POS.1170).
-  For you: after `forge-pull`, restart the session once; the hook then
-  holds even when the working directory moves.
-
-## 4.25 — 2026-09-26
-
-Nothing for the user of the engine.
-
-## 4.24 — 2026-09-26
-
-Nothing for the user of the engine.
-
-## 4.23 — 2026-09-26
-
-Nothing for the user of the engine.
-
-## 4.22 — 2026-09-26
-
-Nothing for the user of the engine.
-
-## 4.21 — 2026-09-26
-
-### Changed
-- Claude cannot run `git` directly in the engine: `.claude/settings.json`
-  denies it in both shells, the scripts stay the only door (POS.1200).
-  For you: after `forge-pull` the deny rules apply from the next
-  session; your own git from the shell is untouched.
-- Commits made through the forge carry no `Co-Authored-By` or
-  `Claude-Session` trailer (POS.1200, `.claude/settings.json`). For you:
-  the commit message is the one you confirmed and nothing more.
-
-## 4.20 — 2026-09-21
-
-Nothing for the user of the engine.
-
-## 4.19 — 2026-09-21
-
-Nothing for the user of the engine.
-
-## 4.18 — 2026-09-21
-
-Nothing for the user of the engine.
-
-## 4.17 — 2026-09-20
-
-### Changed
-- The README says the scripts are the only door to git for Claude and
-  for every command of the forge (readme recipe 0.49; CLAUDE.md,
-  Persistence). For you: nothing forbids you your own git from the
-  shell; the rule binds the forge, not you.
-
-### Fixed
-- The agents `check-engine` and `critic-essence` have their
-  descriptions quoted, and every reviewer skeleton says when to quote
-  (`.claude/agents/`, `templates/`). For you: saving an agent file on
-  Windows no longer risks the agent silently leaving the roster.
-- `/new-project` takes a slug and nothing else, as it always did; the
-  hint of a working title is gone
-  (`.claude/skills/new-project/SKILL.md`). For you: the command's help
-  matches what it does.
-
-## 4.16 — 2026-09-20
-
-### Added
-- `templates/decisions.md`, the skeleton of `decisions.md` and of a DEC
-  record (POS.1070). For you: a new project gets its decisions file in
-  the forge's shape; an existing one keeps what it has.
-- `scripts/forge-status.ps1` opens with the global git configuration
-  file git reads. For you: one look tells you where your identity
-  stanzas live.
-
-### Changed
-- The tag `v<major>` is proposed at the release of any repository whose
-  intent stands at an integer version, not of the engine alone
-  (`.claude/skills/release/SKILL.md`). For you: your own project is
-  offered its tag at 1.0, on your word.
-- `/setup` learns the path of your global git configuration from
-  `scripts/forge-status.ps1` and asks git nothing directly
-  (`.claude/skills/setup/SKILL.md`). For you: nothing to do; `/setup`
-  works as before.
-- The README lists every working method of CLAUDE.md, "In pieces" among
-  them (readme recipe 0.48). For you: the method you could already use
-  is now in the manual.
-
-### Fixed
-- The checks `light` and `single-source-of-truth` run again: their
-  agents had not registered since 2026-09-14 (`.claude/agents/`,
-  `templates/check.md`). For you: `/save` can run its check; when you
-  write an agent file, quote a description that carries a colon and a
-  space.
-- `/walkthrough` no longer appears among the commands: the walkthrough
-  is a method, not a command (`.claude/skills/walkthrough/SKILL.md`).
-  For you: one entry less in the slash menu, nothing to change in how
-  you work.
-
-## 4.15 — 2026-09-20
-
-Nothing for the user of the engine.
-
-## 4.14 — 2026-09-20
-
-### Added
-- The per-prompt hook now repeats three rules of conduct to Claude: use
-  the forge's scripts, explain and ask before running a command of its
-  own, change nothing that was not agreed and approved (THR.0400,
-  `scripts/hook-walkthrough.ps1`). For you: after `forge-pull` Claude is
-  reminded of these at every prompt; nothing is enforced yet, so an
-  automatic permission mode still lets commands through.
-
-## 4.13 — 2026-09-20
-
-### Changed
-- A Word file built without a reference document is A4, no longer US
-  Letter; `-PageSize Letter` brings Letter back (POS.1150,
-  `scripts/md2docx.ps1`). For you: your `.docx` outputs print on A4
-  without a template; if you rely on Letter, pass `-PageSize Letter`.
-- `-Reference` takes a Word template `.dotx` or `.dotm` besides a
-  `.docx` (POS.1150). For you: you can point the conversion at a company
-  template as it is, without saving it as a document first.
-
-## 4.12 — 2026-09-18
-
-### Action required
-- The commit identity is git's, per host through `includeIf` in your
-  `~/.gitconfig` (POS.0950). For you: after `forge-pull`, delete your
-  `identities.local.md`; where your repositories carry a local
-  `user.name`/`user.email` set by the forge, unset them so your includes
-  govern, or keep them — git lets the local one win; `/setup` writes the
-  stanzas and the guard on a new machine.
-
-### Added
+- `scripts/md2docx.py`: a Markdown render to Word, through pandoc or
+  through a model, styles from a reference `.docx`, `.dotx` or `.dotm`
+  named by path, A4 when no reference is given (POS.0590, SOL.0440).
+  For you: you install pandoc once and hand recipients a Word file;
+  your `.docx` outputs print on A4 without a template, and you can
+  point the conversion at a company template as it is; Mermaid
+  diagrams arrive as code for now.
 - `/man [command or method]`, alias `/manual`: the forge's manual, read
   from CLAUDE.md, the skills and the agents (POS.1190). For you: `/man`
   lists the commands and the working methods, `/man check` shows every
   check and what it looks for.
-- THR.0390: the forge in front of the group, the plan for the weekend of
-  2026-09-19. For you: nothing changes yet.
-
-### Changed
-- `/setup` no longer interviews for git identities; it offers the
-  `includeIf` stanzas and the guard (POS.1050). For you: one interview
-  less on a new machine; the identity comes from the file git reads.
-- `scripts/forge-clone.ps1` lost `-Name` and `-Email`; `/import-project`
-  and `/new-project` set and propose no identity (POS.0550, POS.1060).
-  For you: a clone reports the identity git resolves; none resolved is
-  caught by `forge-save`.
-
-## 4.11 — 2026-09-15
-
-### Changed
-- Every rule of the operating layer is now written once and cited
-  elsewhere (POS.1070); CLAUDE.md owns the reviewers' overlap and
-  instance-facts rules and the prose wrap. For you: nothing to do; a
-  rule is found at its owner and the commands read shorter.
-- `/ledger` reports as the bare `/forge` map does. For you: the same
-  report from either door.
-
-## 4.10 — 2026-09-14
-
-### Changed
-- This project's ledger now cites its threads and records instead of
-  retelling them (POS.0160). For you: read the ledger for state and
-  follow the ID for substance; your own ledgers may be swept the same
-  way at their next save.
-
-## 4.9 — 2026-09-14
-
-### Action required
-- The engine's `.claude/settings.json` now carries a `UserPromptSubmit`
-  hook (POS.1170). For you: after `forge-pull`, restart the session once
-  so the hook loads; it adds two lines of context at every prompt.
-
-### Added
 - `/ingest` takes pasted text, always asks what a source is for, and
   stops before storing personal matter (POS.1040). For you: paste a
   source into the conversation and `/ingest` stores it; expect one
   question per source.
-- In pieces (POS.1160). For you: send a long thought in several messages
-  and close with "done"; Claude reacts to the whole, not to the parts.
-- `terminal:` in the ledger header names the artefact a project's chain
-  ends at (POS.0160). For you: a project that ends at a report declares
-  it and `/forge` stops reporting a missing assignment.
-- A `walkthrough` skill holds the shape of the walkthrough and the
-  elicitation interview (POS.0850). For you: CLAUDE.md is shorter and
-  the method is read when one runs; nothing to do.
-
-### Changed
-- A brief born by elicitation carries everything the conversation,
-  research and sources yielded, foreign blocks marked *(Claude)* or
-  *(source: path)* (POS.0110). For you: let Claude's part into the brief
-  and sort it in the intent; a brief you hand over finished is
-  unchanged.
-- A thread carries its origin and an intent Claude consolidated is
-  `in_review` until walked through (POS.0230, POS.1180). For you: no
-  lower layer is built from an intent you have not walked through.
-- Waiting on principal cites threads and records, never copies them
-  (POS.0160). For you: the ledger shrinks to pointers at its next sweep;
-  an unfinished conversation is saved into its thread.
-- `/setup` asks the conversation language before the role (POS.1050).
-  For you: a newcomer's first question arrives in the right language on
-  the second run.
-
-### Rejected
-- A "notes" kind or an intent beside a draft brief (REJ.0180), a
-  "parked" kind (REJ.0190), an edit mechanism for large artefacts
-  (REJ.0200). For you: nothing changes.
-
-## 4.8 — 2026-09-14
-
-### Changed
-- THR.0230, THR.0190 and THR.0300 to be worked as one brief `layers`
-  after THR.0350; THR.0350 given first priority (THR.0230, THR.0350).
-  For you: nothing changes yet.
-
-## 4.7 — 2026-09-13
-
-### Added
-- THR.0350: the lessons of the first run in the field, from
-  `sources/forge-run-record-health.md`, to be walked through. For you:
-  nothing changes yet.
-
-## 4.6 — 2026-09-12
-
-### Added
-- `scripts/md2docx.ps1`: a Markdown render to Word through pandoc,
-  styles from a reference `.docx` named by path (POS.1150). For you: you
-  install pandoc once and hand recipients a Word file; Mermaid diagrams
-  arrive as code for now.
-
-## 4.5 — 2026-09-11
-
-### Fixed
-- The intent's kind names facts beside positions, threads and
-  rejections (POS.1080). For you: the kinds table in CLAUDE.md and the
-  README now list all four prefixes of the intent.
-
-## 4.4 — 2026-09-10
-
-### Changed
-- The project's language covers the artefacts of the chain only;
-  ledger, decisions, history, reviews, challenges, indexes, research
-  and recipes stay English in every project (POS.0060). For you: write
-  a project in your language and keep its bookkeeping in English;
-  `check project` now flags a ledger or a decision written in the
-  project's language.
-
-## 4.3 — 2026-09-10
-
-### Added
+- The check `history` reads a document with its history and proposes
+  what moves between them (POS.1140). For you: run it when a document
+  is to be cleaned; it moves nothing itself.
 - The intent may carry facts as `FCT` items beside positions, on the
   principal's word or with provenance to a source (POS.0230). For you:
   write down what is so without dressing it as a position, and without
@@ -834,26 +254,342 @@ Nothing for the user of the engine.
   absent (POS.0060). For you: a project may now be written in Czech or
   any other language; add the line to a new project's ledger, existing
   ledgers need nothing.
+- `templates/decisions.md`, the skeleton of `decisions.md` and of a DEC
+  record (POS.1070). For you: a new project gets its decisions file in
+  the forge's shape; an existing one keeps what it has.
+- `scripts/forge-status.py` opens with the global git configuration
+  file git reads. For you: one look tells you where your identity
+  stanzas live.
+- The per-prompt hook repeats three rules of conduct to Claude: use
+  the forge's scripts, explain and ask before running a command of its
+  own, change nothing that was not agreed and approved (THR.0400,
+  `scripts/hook-walkthrough.py`). For you: Claude is reminded of these
+  at every prompt; nothing is enforced yet, so an automatic permission
+  mode still lets commands through.
+- The forge is open to those who use it, feedback and ideas wanted
+  most and a finished change welcome on the forge's own rule, and
+  `CONTRIBUTING.md` in the repository root, a render of the new recipe
+  `projects/forge/recipes/contributing.md`, says how (POS.1440,
+  SOL.0450). For you: you can give feedback, bring an idea or send a
+  change you have tried yourself, as `CONTRIBUTING.md` says.
+- Three threads stay open at the major: what the documentation leaves
+  undecided, the language of a project's pages among it (THR.0590), a
+  test of the forge's behaviour, not before 5.0 (THR.0600), and the
+  horizon statement the intent lacks (THR.0610). For you: nothing
+  changes yet.
 
 ### Changed
-- The language rule of CLAUDE.md now says "the project's language"
-  where it said "English" (POS.0060). For you: nothing changes for a
-  project that stays English.
+- A major of the forge intent approves the intent as the record of
+  what the principal holds at that date: the package it names is
+  finished and goes out, what is open stays open in its thread, and
+  the test of a major attests the documents, not the behaviour
+  (POS.0300). For you: a major claims nothing about readiness for a
+  deployment; what is open is in `threads.md`.
+- One model for the whole forge, with two exceptions: the headless
+  conversions behind `/publish`, and a mirrored page of the
+  documentation on a faster model, chosen by the page's entry in the
+  map, a derived page and the planner staying on the session model
+  (POS.0930, POS.0530). For you: the strongest model you run the forge
+  on is a decision and never an accident of an aged pin.
+- A subagent sees the session's whole context, memory included, and
+  may take it for the disk: every agent that writes an outward-facing
+  file reads CLAUDE.md from disk like every other input, and what it
+  wrote is scanned mechanically for instance facts (POS.0950,
+  THR.0580 closed). For you: no name, address or host of yours reaches
+  a page, a render or a report.
+- The staging area of the intent is named for the layer below, not for
+  an assignment, and a position without an ID does not exist
+  (POS.1340, `templates/intent.md`). For you: the section "Candidate
+  structure for the layer below" of an intent holds what the next
+  layer will need, whichever layer that is; every position carries an
+  ID from the start.
+- The project's language covers the artefacts of the chain only;
+  ledger, decisions, history, reviews, challenges, indexes, research
+  and recipes stay English in every project; the briefs are kept in
+  whatever language they are written in, and the demand for British
+  English left the Requirement style (POS.0060, POS.0250). For you:
+  write a project in your language and keep its bookkeeping in
+  English; `/check project` flags a ledger or a decision written in the
+  project's language; an assignment of a project in another language
+  is written in full, correct sentences of that language.
+- A brief holds what the principal chose from the finding, not
+  everything the finding yielded, carries no mark of authorship, and
+  its usual shape is light: topics with the research beside them,
+  composed in a round or two (POS.0110, REJ.0220). For you: `/forge
+  brief` leads you to a short brief and leaves the chiselling to the
+  intent; a brief carries a citation or a remark only where it matters
+  to the thought.
+- In the brief's definition Claude forms the record: on the principal's
+  word to write he takes what the talk arrived at and writes it down
+  so that it is understood, and the brief is the principal's by his
+  approval, whoever first said a thought; the Map of a brief names the
+  thought and not whose words it is in, and the boundaries are its
+  fifth area (POS.1330, THR.0440, THR.0450 closed). For you: a brief
+  found together need not be word for word what you said, and before
+  the write Claude also asks what you do not want and what is out of
+  scope.
+- An assignment is complete also when its recipients know the end and
+  the reason well enough to act rightly where the plan no longer fits,
+  and the questions up front are bounded by their kind, not by their
+  number (POS.1350). For you: completeness no longer pulls an
+  assignment towards specifying too much; a question on substance
+  sends the work back to the intent, however few the questions are.
+- A Map names also what is consciously verified, the last area of the
+  assignment's Map is named self-containment, and at the walk Claude
+  says of each area how it stands, aloud and unrecorded; the questions
+  of worth and feasibility are Claude's way of challenging an idea in
+  the intent, nothing recorded per idea (POS.1320, POS.1340,
+  POS.1350). For you: you hear how each area stands when a Map is
+  walked, and no matrix of good and feasible is kept for every idea.
+- A change of substance goes into the intent and propagates from there
+  down the whole chain the project has, and may come from below, when
+  solving shows that what is wanted must change; POS.0140 is the one
+  owner of the rule and the method Intent-first names it (POS.0140,
+  POS.0900). For you: the intent still changes first, also where the
+  change was found while solving.
+- How the things wanted are realised moved out of the forge intent
+  into the solution design of the forge's project: the positions keep
+  what is wanted and why, and the files, scripts and settings that
+  realise them are named in its SOL items; what realises an item is
+  named in the solution design where the project has one, and no
+  longer in the item (POS.0120, THR.0520). For you: to find the file
+  that realises a position of the forge, read
+  `projects/forge/40-solution-design.md`.
+- How `/setup` writes the git identity, where a clone lands and how its
+  name is fixed, and what `/ingest` does with a bundle's index moved
+  from the intent to the solution design (POS.1050, POS.1060,
+  POS.0180, SOL.0150, SOL.0160, SOL.0230). For you: nothing to do; the
+  commands run as before.
+- From the artefacts of the chain the thing must be buildable without
+  the finished product; the solution design stays the architecture,
+  and a technical specification is a layer a project takes where the
+  one who builds needs the detail (POS.1400). For you: the technical
+  specification is not introduced as a layer now.
+- An open question of a solution design says whether it blocks
+  realisation, and the design is read by whoever realises it, a person
+  or an agent (POS.1420). For you: you can tell from its TBC items
+  whether a solution design is complete enough to build from.
+- An accepted challenge is mended wherever it needs to be, and goes
+  above its layer only as a thread, where what is wanted cannot be
+  realised or only at a price not worth paying (POS.0440). For you:
+  accepting a challenge no longer obliges you to change the intent.
+- A thread may arise from any document, a challenge, a finding or an
+  item of a layer among them, not from a source alone, and carries its
+  origin (POS.0230). For you: a thread that comes from a document
+  names that document by path.
+- The lens `clarity` judges the scope of every artefact by the Aim of
+  its own definition and proposes the move, and its advisory checklist
+  is gone (`.claude/skills/critic-contract/SKILL.md`). For you: a
+  report of `/critique clarity` no longer closes with a checklist.
+- The names of the artefacts left the engine: which artefacts the forge
+  has is the listing of `.claude/skills/forge/states/`, CLAUDE.md
+  carries the artefact as one kind and speaks of the layers below the
+  intent; the README's table of artefacts is rendered from the
+  definitions (POS.1080). For you: to see which artefacts the forge
+  has, look at the definitions; a layer your project does not have is
+  not reported.
+- The rules of particular artefacts left CLAUDE.md for the definitions
+  in the state files of `/forge`, and a paragraph in Document chain
+  says what a definition is; every rule of the operating layer is
+  written once and cited elsewhere, the Commands table of CLAUDE.md is
+  cut to the purpose of each command, no member of a roster is named
+  outside its file, and the critic lenses say their fit in their
+  descriptions (POS.1310, POS.1380, POS.1070). For you: read what holds
+  for a brief, an intent or an assignment in its state file; CLAUDE.md
+  keeps the rule in short and tells you which file owns a mechanism.
+- Six positions of the forge intent carry the reason the documentation
+  writers found missing, and the intent is cleaned whole: the way to
+  an item lives in its records of the log, the table written before
+  the log in `projects/forge/10-intent.history.archive.md` (POS.0200,
+  POS.0250, POS.0550, POS.1040, POS.1140, POS.1310, THR.0470). For you:
+  the intent reads as the current state; the way to an item is in its
+  history.
+- Release notes are derived from the records of the history log of
+  every input history, what you must do carried word for word from the
+  record's `Action` (POS.0730). For you: nothing to do; a version
+  before the log still comes from its archived Notes.
+- A change of the operating layer that touches no item of the intent
+  has a subject of its own in the log of the forge's project (POS.0310,
+  `templates/history.md`). For you: nothing to do; the subject serves
+  the forge's own project.
+- The ledger cites and never copies: Waiting on principal cites threads
+  and records, and an unfinished conversation is saved into its thread
+  (POS.0160). For you: read the ledger for state and follow the ID for
+  substance; your own ledgers may be swept the same way at their next
+  save.
+- `/render` makes the plain file beside the Markdown through pandoc,
+  where the recipe names a format, and `scripts/md2pptx.py` and
+  `scripts/md2docx.py` each have two engines, `--engine pandoc |
+  claude` (POS.0590, SOL.0430, SOL.0440). For you: a Word file or a
+  deck for reading is fresh after every render; without pandoc the
+  Markdown is made and the file is not; a call without the switch does
+  what it did before.
+- Finding states in the ledger: `overruled` is now `rejected`, and
+  `parked` is new (POS.0440, `templates/ledger.md`). For you: nothing
+  to do; the `light` check offers the conversion of your ledger as an
+  immediate fix, and an unconverted ledger is read correctly.
+- Claude cannot run `git` directly in the engine: `.claude/settings.json`
+  denies it in both shells, the scripts stay the only door, and
+  commits made through the forge carry no `Co-Authored-By` or
+  `Claude-Session` trailer (POS.1200, SOL.0520). For you: the deny
+  rules apply from the next session and your own git from the shell
+  is untouched; the commit message is the one you confirmed and
+  nothing more.
+- `/setup` no longer interviews for git identities; it asks the
+  conversation language before the role, offers the `includeIf`
+  stanzas and the guard, and learns the path of your global git
+  configuration from `scripts/forge-status.py`; the clone script sets
+  no identity and `/import-project` and `/new-project` propose none
+  (POS.1050, POS.0550, POS.1060). For you: one interview less on a new
+  machine; a clone reports the identity git resolves, and none
+  resolved is caught by `forge-save`.
+- The tag `v<major>` is proposed at the release of any repository whose
+  intent stands at an integer version, not of the engine alone
+  (`.claude/skills/release/SKILL.md`). For you: your own project is
+  offered its tag at 1.0, on your word.
+- The README says the scripts are the only door to git for Claude and
+  for every command of the forge (CLAUDE.md, Persistence). For you:
+  nothing forbids you your own git from the shell; the rule binds the
+  forge, not you.
+- The `project` check no longer verifies a render's provenance against
+  the ledger's Renders table, the `light` check does; the `project`
+  check no longer reports a stale README or release notes; and a
+  one-line reminder that names its owner is not a restatement
+  (POS.0570, POS.1070, `.claude/agents/check-project.md`,
+  `.claude/agents/check-light.md`). For you: a mismatch is reported
+  once, at `/save` as well as at `/release`; `/forge` still shows
+  staleness, and `/release` regenerates both regardless; the
+  `single-source-of-truth` check still raises repeated steps, rules
+  and shapes.
+- `/ledger` reports as the bare `/forge` map does, and the `/forge` map
+  names the waiting matters in words and the rest as a count,
+  recommending in words with the ID as an address (POS.1470). For you:
+  the same report from either door, readable without the IDs in your
+  head.
+- The release skill reports the age of the documentation and offers
+  `/document`; the document skill hands a writer its task by path; the
+  description of `/setup` names the forge's default model and not its
+  name; the examples in the help of five scripts say what the example
+  is (SOL.0530). For you: at a release you are told whether the
+  documentation is stale; a script's help reads as an example and not
+  as a fact of someone's instance.
+- The engine's public address has one owner, the pinned facts of the
+  readme recipe; the solution design cites it (SOL.0500). For you: the
+  address a clone and a project's README point to is read from one
+  place.
 
-## 4.2 — 2026-09-08
+### Removed
+- Five positions of the forge intent that were wholly solution, moved
+  to the solution design: the layout of the repository to SOL.0500, the
+  protection to SOL.0520, the two conversion scripts to SOL.0430 and
+  SOL.0440, the file shape of a command to SOL.0100 (POS.0500, POS.0520,
+  POS.0740, POS.1150, POS.1130). For you: nothing to do; what is wanted
+  of each stands in the positions that remain.
+- `/walkthrough` no longer appears among the commands: the walkthrough
+  is a method, not a command (`.claude/skills/walkthrough/SKILL.md`).
+  For you: one entry less in the slash menu, nothing to change in how
+  you work.
 
-### Added
-- THR.0340: the README split from the documentation, to come after
-  THR.0230. For you: nothing to do yet; the README stays whole until
-  the engine boundary is drawn.
+### Fixed
+- Wording of the forge intent brought to the chain of today after the
+  two critic lenses of 2026-10-09: the solution design and the first
+  library exist, the product is the artefact and not the assignment
+  alone, intent-first and the birth step are said once each, the lock
+  is withdrawn where sentences still named it, and the staging area
+  names the recipients of the engine (FND.1220 to FND.1350, POS.0100,
+  POS.0600, POS.0620, POS.0700, POS.0970, POS.0860, POS.1380). For you:
+  nothing to do; the intent no longer contradicts its own positions.
+- A project without a repository is a legitimate shape; the sentence
+  that said every project is one is gone (POS.0550, POS.0940). For you:
+  you may keep sensitive work local without a finding.
+- The single-source-of-truth check of 2026-10-09 settled, sixteen
+  findings fixed: the documentation agents share the contract skill
+  `docs-contract` and the map has the skeleton `templates/docs-map.md`;
+  the ledger skeleton owns the `kind:` header rule and the Renders row;
+  `/spinoff` records a spin-off intent-first; the Format section's rule
+  stands in `/render` alone; `forge_tools.py` owns what the conversions
+  need; dispatchers, reviewer files, reminders, state files and script
+  headers cite their owner instead of restating it (FND.1060 to
+  FND.1170, FND.0980 to FND.1010, FND.0620, FND.0630). For you: nothing
+  to do; a rule is found at its owner.
+- The head of the forge's solution design says of its items what holds
+  of them, and SOL.0010 names the working methods it realises
+  (FND.1310, FND.1340). For you: nothing to do.
+- The skills `ingest` and `render` cite CLAUDE.md, Document chain, by
+  the item's name and no longer by a number that ceased to exist
+  (FND.0970). For you: nothing to do.
+- The Essence of the forge intent says the chain ends where the project
+  needs it to, in place of the sentence that version 1 ends at the
+  assignment (POS.1400). For you: nothing to do.
+- The positional arguments of nine skills are counted from zero, as
+  Claude Code counts them: `forge`, `recipe`, `render`, `publish`,
+  `ledger`, `new-project`, `import-project`, `spinoff` and `man`. For
+  you: a command receives its arguments in the right places; `/forge
+  brief <name>` no longer takes the name for the state.
+- CLAUDE.md opens with the chain starting at the idea put together,
+  cites POS.1320 for the walk of a Map and says a recipe carries
+  `updated` in place of `date`; the skeletons of the readme and
+  release-notes recipes name a language in place of UK English
+  (FND.0740 to FND.0820). For you: the README and the release notes of
+  your project are no longer told to be UK English.
+- `/ingest` settles a changed source in a thought project in the three
+  ways the intent has, a new source beside it, the original restored or
+  the change knowingly accepted; in a library the sweep moves the
+  ledger date and corrects the index entry (POS.0180,
+  `.claude/skills/ingest/SKILL.md`). For you: a bare `/ingest` offers
+  you all three ways for a changed source.
+- The FCT row of CLAUDE.md says apart that a source's fact cites its
+  file and that verification is never demanded (POS.0230). For you: a
+  fact taken from a source names its file, and no fact has to be
+  proved.
+- The help and the identity message of the save script no longer set
+  the commit identity at a project's creation (POS.0950). For you: the
+  script says what the forge does; the identity is git's and the forge
+  sets none.
+- The checks `light` and `single-source-of-truth` run again, the
+  agents `check-engine` and `critic-essence` have their descriptions
+  quoted, and every reviewer skeleton says when to quote
+  (`.claude/agents/`, `templates/`). For you: `/save` can run its
+  check; when you write an agent file, quote a description that
+  carries a colon and a space.
+- `/new-project` takes a slug and nothing else, as it always did; the
+  hint of a working title is gone
+  (`.claude/skills/new-project/SKILL.md`). For you: the command's help
+  matches what it does.
+- The intent's kind names facts beside positions, threads and
+  rejections (POS.1080). For you: the kinds table in CLAUDE.md lists
+  all four prefixes of the intent.
 
-## 4.1 — 2026-09-07
-
-### Changed
-- The engine question is worked as a brief in the forge project, not as
-  a project of its own (THR.0230). For you: nothing changes in the
-  engine yet; the boundary between engine and forge is being worked out
-  on the record, and a later split would arrive as an ordinary release.
+### Rejected
+- A claim of readiness for a company rollout by the major 5.0
+  (DEC.0190, CHL.0210). For you: a major closes a package of features
+  and sends it out; whom the engine is published for says nothing of a
+  rollout date.
+- A marking of positions into walls and defaults with a degraded form
+  (DEC.0200, CHL.0230). For you: the rules of the forge bind Claude,
+  not you; your recorded exception stands in `decisions.md`.
+- A recipe per page, the documentation as renders of `/render`
+  (REJ.0240); a site or a wiki for the documentation now (REJ.0250); a
+  hand-kept file of the philosophy in the project root (REJ.0260). For
+  you: the pages are Markdown in the repository, readable without a
+  build, and the why is read from the brief and the intent.
+- An intent consolidated by Claude held `in_review` until every
+  position has been walked through (REJ.0230). For you: a walkthrough
+  of an intent runs when you ask for one, and no lower layer waits for
+  it.
+- A fate recorded for every part of a brief at mining (REJ.0210); marks
+  of authorship in a brief (REJ.0220). For you: a brief carries no
+  *(Claude)* mark and no per-part bookkeeping.
+- A "notes" kind or an intent beside a draft brief (REJ.0180), a
+  "parked" kind (REJ.0190), an edit mechanism for large artefacts
+  (REJ.0200). For you: nothing changes.
+- Stating the caveat on quoting an agent's description once in
+  CLAUDE.md; it stays in the three reviewer skeletons (DEC.0180,
+  FND.0720). For you: the skeleton a new lens, persona or check starts
+  from still tells you when to quote the description.
+- Leaving the detection of changed sources to the `project` check alone
+  (DEC.0170, FND.0710). For you: a bare `/ingest` goes on reporting
+  sources changed since registration and asks what to do with each.
 
 ## 4.0 — 2026-09-06 — approved
 

@@ -1,7 +1,7 @@
 ---
-generated: 2026-10-09
+generated: 2026-10-10
 made: mirrored
-inputs-hash: f2a5621a930152be
+inputs-hash: bad86933fab1112e
 inputs:
   - .claude/skills/forge/SKILL.md
   - .claude/skills/ledger/SKILL.md
@@ -10,42 +10,51 @@ inputs:
 
 # See where a project stands
 
-This page is for anyone working in the forge who wants a quick picture of a project: what exists, what can be worked on next and what waits for a decision. Two commands give it: `/forge` and `/ledger`.
+This page is for the person who wants a quick picture of a project: what
+exists, what can be worked on next and what waits on them. It covers
+bare `/forge` and `/ledger`.
 
-## Get the map
+## Ask for the map
 
-Run `/forge` with a project slug, or without one when the project is clear from where you are. If it is ambiguous, you are asked which project you mean.
+Run `/forge` with no state name, and a project slug if the project is
+not clear from context. If it is ambiguous, you are asked which one.
 
-```
-/forge [slug]
-```
+The command reads the project's ledger and reports compactly:
 
-The forge reads the project's ledger and the list of available target states, then reports compactly:
+- the project's kind, and whether it is under git. "Not under git" is
+  stated as a fact, never as a defect;
+- the artefacts that exist, with version and status. The briefs come
+  with their mining state; a draft brief, or one marked `pending` or
+  `partial`, is named as work waiting. A layer the project does not
+  have is not reported as missing;
+- which target states can be worked from here because their inputs
+  exist, and which cannot yet, with what is missing;
+- which renders are stale, and which published files are stale (state
+  `stale` in the ledger's Published table). How a render becomes stale
+  is the render command's to say;
+- which libraries the project needs, from the ledger's Dependencies
+  table, and whether each is cloned alongside;
+- what waits on you: the few live matters named in words, each with its
+  ID in brackets as an address, and the rest as a count.
 
-- **Kind and git.** The project's kind, as the ledger header gives it, and whether it is under git, meaning it has its own repository. "Not under git" is stated as a fact about the project, not as a defect.
-- **Artefacts.** Which artefacts of the chain exist, at what version and status. Briefs are listed with their mining state. A draft brief, or one that is `pending` or `partial`, is named as work waiting. A layer the project does not have is not reported as missing.
-- **Target states.** Which target states can be worked from here because their inputs exist, and which cannot yet, with what is missing.
-- **Stale files.** Which renders are stale and which published files are stale. For published files this is the `stale` state in the ledger's Published table.
-- **Libraries.** Which libraries the project needs, from the ledger's Dependencies table, and whether each is cloned alongside.
-- **Waiting on you.** What the ledger lists as waiting on the principal.
+It ends with a recommended next step in words. The recommendation is
+never a gate: you are free to do something else. Where more than one
+matter waits on you, the report offers a walkthrough of them.
 
-The report ends with a recommended next step. It is a recommendation, never a gate: you may do something else. Where more than one matter waits on you, the report also offers a walkthrough, which takes them one by one (see [Walk through a list](walk-through-a-list.md)).
+## A library's map
 
-## A library's map is shorter
-
-A library is shared material, not a project waiting for a brief. Its map reports the sources and research it holds, from the ledger and the indexes, and stops after the git line. It has no chain, no target states and no next step beyond `/ingest`.
+A library is material, not a project waiting for a brief. Its map
+reports its sources and research, from the ledger and the indexes, and
+stops after the git line. It has no chain, no target states and no next
+step beyond `/ingest`.
 
 ## Read the ledger only
 
-```
-/ledger [slug]
-```
-
-`/ledger` gives the same report, read from the ledger alone. Give a slug for one project, or none for every project. It only reads and changes nothing.
-
-The ledger can differ from the files on disk. Reconciling the two, meaning versions, files and indexes, is the job of the light check, `/check light`. If `/ledger` meets an obvious discrepancy while reporting, it names it and points you to that check.
-
-For the ledger's tables and the state words, see [Ledger](../reference/ledger.md).
+`/ledger [slug]` gives the same report, read from the ledger alone, for
+one project or, with no slug, for all of them. It only reads. It does
+not reconcile the ledger with reality (versions, files on disk,
+indexes): that is the light check's (`/check light`). If a discrepancy
+is obvious while reporting, the command names it and points there.
 
 ## See also
 

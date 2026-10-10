@@ -1,7 +1,7 @@
 ---
-generated: 2026-10-09
+generated: 2026-10-10
 made: mirrored
-inputs-hash: 376c3dfb0b76bf0d
+inputs-hash: 7b07137929379738
 inputs:
   - .claude/skills/critique/SKILL.md
   - .claude/skills/critic-contract/SKILL.md
@@ -10,92 +10,83 @@ inputs:
 
 # Critique the documents
 
-This page is for the person who wants an independent reader to judge
-how well a project's documents are written. It shows how to run
-`/critique`, what happens during the run and what you are given at
-the end.
+This page is for the person who wants a critic to read a project's
+documents and say where they are weak as documents. It shows how to
+start a critique, what comes back and how to settle it.
 
 ## What a critique is
 
-A critique judges the quality of your documents as documents, read
-through one lens. It never judges the substance of your thinking:
-whether the objective is the real problem or the plan rests on sound
-assumptions is the work of the challenger, not the critic.
+A critique judges the quality of the documents, never the substance of
+the thinking in them. Whether the idea is right is the job of the
+challenger, not of the critic. A critic's findings are advice: you
+decide, and rejecting a finding is a legitimate outcome.
 
-The critic runs as one isolated agent. It sees the project's
-documents only and never the conversation, so it cannot be told what
-you meant: it judges what the documents say. Its findings are
-advice. You decide, and rejecting a finding is a legitimate outcome.
+One isolated agent does the reading. It sees the project's documents
+and never the conversation you are having, so it judges only what the
+documents say. Each agent looks through one lens, and the lens says
+what it reads and what it goes after.
 
 ## See the lenses
 
-Run the command bare:
+Type `/critique` with nothing after it. You get the roster of
+available lenses, with a recommendation of which fits the project's
+state now. The recommendation is only that; nothing is gated by it.
 
-```
-/critique
-```
+## Run a critique
 
-You get the roster of lenses, one per critic agent, each with the
-fit it states for itself, and a recommendation of which lens suits
-the project's state. The recommendation is never a gate. The lenses
-of today and what each goes after are on the page
-[Critic lenses](../reference/critic-lenses.md).
-
-## Run a lens
+Type:
 
 ```
 /critique <lens> [artefact] [slug]
 ```
 
-- `<lens>` is the lens you chose from the roster.
-- `[artefact]` is optional. It narrows the run to one artefact,
-  named as `/forge` names it: `brief`, `brief-<name>`, `intent`,
-  `assignment` or a later layer. How a lens narrows its work is the
-  lens's own. Without a target the lens reads the whole chain.
-- `[slug]` is the project. If it is not given, it is taken from
-  context, and if that is ambiguous you are asked.
+- `<lens>` is the lens to run.
+- `[artefact]` is optional. It narrows the run to one artefact, named
+  as `/forge` names it. Without it the lens reads the whole chain.
+- `[slug]` is the project. If it is left out, it is taken from the
+  context, and you are asked if that is ambiguous.
 
-Every run is your word. No lens runs at a save. What a release
-offers is the release's own matter.
+Every run is your own word. No lens runs when you save, and what a
+release offers is the release's own matter.
 
-## What the critic does
+## What the critic leaves behind
 
-Before it looks for anything new, the critic re-tests every earlier
-finding of its own lens that was marked resolved, and reports each
-as verified or reopened. It respects findings you rejected and does
-not raise them again unless the document changed in a way that
-materially alters the situation. It prefers a few sharp findings to
-many trivial ones.
+The agent writes a dated report in the project's `reviews/` directory.
+Reports are immutable: a later run writes a new one and never edits an
+old one. Each finding carries an `FND` number, a severity and a
+category, and the findings are entered as rows in the project's
+ledger. The agent also re-tests the findings of its own lens that were
+marked resolved earlier, and reports each as verified or reopened.
+Findings you rejected before are not raised again unless the document
+has changed materially.
 
-It then writes a dated report in the project's `reviews/` directory.
-The report is immutable: it is never edited afterwards, and
-corrections happen downstream. The findings, numbered FND, are also
-entered in the project's ledger. The report's shape and the
-vocabulary of its findings are described in the pages on the
-critic.
+When the agent returns, the command checks that the report file exists
+and that the ledger is updated, and mends the ledger bookkeeping if
+needed, without touching the findings.
 
 ## What you see afterwards
 
-When the critic returns, the command checks that the review file
-exists and that the ledger is up to date, and mends only the ledger
-bookkeeping, never the findings. Then it tells you, in the
-conversation:
+In the conversation you get a summary of what changed since the last
+run of that lens:
 
-- the new findings, with their severity;
-- the findings verified resolved;
-- the findings still open;
-- the findings that became obsolete;
+- new findings, with their severity;
+- findings verified as resolved;
+- findings still open;
+- findings that have become obsolete;
 - what awaits your verdict.
 
-Some lenses first show the distillations their findings rest on.
+For the `essence` lens the distillations come first, because the
+findings rest on them.
 
-The command ends by offering a walkthrough of the open findings. In
-a walkthrough you settle them one at a time; see
-[Walk through a list](walk-through-a-list.md). Choosing `accept` on
-a finding means an iteration of the artefact concerned through
-`/forge`, after which the finding is marked resolved. The other
-verdicts are the walkthrough's. If you decline the walkthrough, the
+The summary ends with an offer of a walkthrough of the open findings:
+you settle them one by one, each with a verdict. If you decline, the
 findings simply wait.
+
+## What accepting means
+
+In this walkthrough, `accept` means an iteration of the artefact the
+finding concerns, run through `/forge`, and the finding is then marked
+`resolved`. The other verdicts are the walkthrough's own.
 
 ## See also
 

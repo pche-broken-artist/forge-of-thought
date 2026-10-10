@@ -1051,7 +1051,8 @@ project: forge
   the open threads stay open." Short form: "5.0: the forge found and
   read". The test of the major ran 2026-10-09: the check
   `single-source-of-truth`, both lenses, one challenge, all settled
-  at 4.65.
+  at 4.65. Approved 2026-10-10 as 5.0; the text of the closing stands
+  in the approval record of the intent's history.
 - **THR.0590** [intent] What the documentation of a project other than
   the engine reads. A project may be self-contained like the forge, a
   strategy that generates a heap of files, a budgeting exercise, or
@@ -1075,6 +1076,16 @@ project: forge
   starts from; not before 5.0. Origin: the challenge of 2026-10-09
   (CHL.0220, accepted as modified) and that research. Opened
   2026-10-10.
+
+- **THR.0610** [intent] The horizon statement of the forge intent.
+  POS.1360 asks every intent for a statement of its horizon, even if
+  only that everything is in the first version; this intent carries
+  its horizon in the group Growth path and in the threads marked
+  deferred, and no one sentence says what of what it holds is done,
+  what 5.0 is and what lies beyond. Found at the walk of the Map
+  before the approval of 5.0 (POS.1320); left open by the principal's
+  word of 2026-10-10, to be settled in a 5.x round. Origin: Claude's
+  synthesis. Opened 2026-10-10.
 
 Note: the ID THR.0120 was inadvertently used twice — first for the
 readme-recipe thread (opened 1.14, closed 1.16), then for the

@@ -1,7 +1,7 @@
 ---
-generated: 2026-10-09
+generated: 2026-10-10
 made: derived
-inputs-hash: c26e3d8742bfc97a
+inputs-hash: 612b3f940dbf6ca2
 inputs:
   - CLAUDE.md
   - .claude/settings.json
@@ -11,139 +11,152 @@ inputs:
   - scripts/doc2md.py
   - scripts/md2pptx.py
   - scripts/md2docx.py
+  - scripts/forge_tools.py
   - projects/forge/recipes/readme.md
-  - projects/forge/40-solution-design.md
 ---
 
 # Install what the forge needs
 
-This page is for a newcomer about to run the forge on a machine for
-the first time. It says what must be installed before the forge
-runs, how each piece is installed, in the order you will need it,
-and how the engine itself gets onto the machine. It was put together
-from `CLAUDE.md`, `.claude/settings.json`, the help headers of the
-scripts in `scripts/`, the pinned facts of the readme recipe and the
-solution design of the forge.
+This page is for someone putting the forge on a machine for the
+first time. It says what must be installed before the forge runs,
+how each piece is installed and in which order a newcomer needs it,
+then how the engine itself is brought in and started. It was put
+together from `CLAUDE.md`, the engine's `.claude/settings.json`, the
+help headers of the scripts in `scripts/` and the pinned facts of the
+readme recipe, which are the one home of the prerequisites and of
+the engine's public address.
 
-Three things are required: git, Python and Claude Code. Everything
-else is optional and needed only by one command each. None of the
-forge's scripts installs anything for you: every tool is installed
-by you, once, and found on PATH.
+## What you need, in order
+
+Three things must be there before anything else works: git, Python,
+and Claude Code with a paid subscription. A few more tools are
+optional and serve one command each; install them when you reach
+that command. Every external tool is found on PATH and never
+installed by a script of the forge: you install each one yourself,
+once.
+
+The order below is the order in which each piece is first needed.
 
 ## 1. git
 
-Install git so that the command `git` is on PATH.
+The engine is a git repository and every project you make in it is
+a repository of its own. The forge's git scripts, `forge-save.py`
+among them, need `git` on PATH and stop with "git is not installed"
+when it is missing. Install git from your platform's usual source
+and check that `git` answers in a terminal.
 
-The engine is a git repository, and the forge's git scripts
-(`scripts/forge-save.py` and its siblings) are the forge's only door
-to git. They need nothing beyond git itself; they stop with
-`git is not installed.` when it is missing.
+## 2. Python 3.8 or newer, on PATH as `python`
 
-## 2. Python
+Everything the forge runs is Python: every script in `scripts/` and
+the hook that Claude Code runs at every prompt. That hook is started
+through the command `python` by the engine's settings, and the hook
+itself needs nothing but Python 3.8 or newer on PATH under that
+name. This is why Python comes before Claude Code: without it, the
+very first prompt of a session already fails.
 
-Install Python 3.8 or newer so that it is on PATH under the name
-`python`.
+What you do:
 
-Python is needed before anything else of the forge works: every
-script in `scripts/` is Python, and so is the hook that Claude Code
-runs at every prompt (`scripts/hook-walkthrough.py`, started as
-`python` by `.claude/settings.json`). The hook needs Python on PATH
-as `python` and nothing else.
+- Install Python 3.8 or newer.
+- Make sure the command `python` works in a terminal. The scripts
+  are run as `python scripts/<name>.py`; `python` on PATH is their
+  one prerequisite.
+- On Linux or macOS, where often only `python3` exists, give it the
+  name `python`: by an alias, or by the `python-is-python3` package
+  where your distribution offers it.
 
-On Linux or macOS, where only `python3` exists, give it the name
-`python` by an alias or by the `python-is-python3` package. The
-scripts are written to run unchanged on Linux and macOS: they are
-run as `python scripts/<name>.py`, and `python` on PATH is their one
-prerequisite.
+The scripts are written to run unchanged on Linux and macOS: paths
+are composed portably and external tools are resolved from PATH, so
+nothing in them is bound to one platform.
 
-## 3. Claude Code with a paid subscription
+## 3. Claude Code, with a paid subscription
 
-The forge runs inside Claude Code, and Claude Code needs a paid
-Claude subscription. Install it with one of these:
+The forge is run inside Claude Code. You need a paid Claude
+subscription; usage draws from the same pool as Claude chat.
+
+Install Claude Code by one of these commands:
 
 - Windows: `irm https://claude.ai/install.ps1 | iex`
 - macOS or Linux: `curl -fsSL https://claude.ai/install.sh | bash`
-- any platform with npm: `npm install -g @anthropic-ai/claude-code`
+- Any platform with npm: `npm install -g @anthropic-ai/claude-code`
 
-Sign in on the first run. Usage draws from the same pool as Claude
-chat.
+Sign in on the first run. After that the `claude` command is on
+PATH, which the forge's conversion scripts also rely on (step 4).
 
-## 4. Optional tools, by what they are for
+## 4. Optional tools, by what they serve
 
-Each of these is needed by one function only. Install what you will
-use; skip the rest. Each is resolved from PATH, and no script of the
-forge installs it for you.
+Each of these serves one command. None is needed to start; install
+the one you need when you reach that command. The scripts find each
+tool on PATH and install nothing themselves.
 
-### markitdown, for converting documents at `/ingest`
+### markitdown, for `/ingest`
 
-When an external document (Word, PowerPoint, PDF, Excel) is brought
-into a project with `/ingest`, the conversion to Markdown is done by
-`scripts/doc2md.py`, and the script does the conversion exclusively
-through markitdown. Install it with pip:
+`/ingest` converts a Word, PowerPoint, PDF or Excel document into a
+Markdown extract through `scripts/doc2md.py`, and that script does
+the conversion exclusively with markitdown. Install it with:
 
 ```
 pip install "markitdown[docx,pptx,pdf,xlsx,xls]"
 ```
 
-### pandoc, for the plain Word and PowerPoint files of `/render`
+Without it, text sources can still be registered; only the
+conversion of a binary document needs it.
 
-Where a recipe names a format, `/render` makes a plain `.docx` or
-`.pptx` beside the Markdown through pandoc (the `pandoc` engine of
-`scripts/md2docx.py` and `scripts/md2pptx.py`). Install pandoc once
-from https://pandoc.org/installing.html; on Windows
-`winget install JohnMacFarlane.Pandoc`, on macOS `brew install
-pandoc`, on Linux your package manager.
+### pandoc, for the plain files of `/render`
 
-### The document-skills plugin, for `/publish`
+Where a recipe names a Word or PowerPoint format, `/render` makes a
+plain `.docx` or `.pptx` beside the Markdown render through pandoc:
+deterministic, cheap, the same result every time. Install pandoc
+once from https://pandoc.org/installing.html; on Windows `winget
+install JohnMacFarlane.Pandoc`, on macOS `brew install pandoc`, on
+Linux through your package manager.
 
-`/publish` makes the designed Word or PowerPoint file through a
-model (the `claude` engine of the same two scripts). The model needs
-the docx and pptx skills, under either of their names:
-`anthropic-skills:docx` and `anthropic-skills:pptx` where Claude
-Code already brings them, `document-skills:docx` and
-`document-skills:pptx` where the plugin does. Where neither is
-there, install the plugin once, from an interactive Claude Code
-session:
+### The document skills, for `/publish`
+
+`/publish` makes the designed file through a model, running Claude
+Code non-interactively with the official document skill of the
+format, docx or pptx. The skill is present under either of two
+names: Claude Code may bring it itself, or the `document-skills`
+plugin provides it. Where neither is there, install the plugin once
+from an interactive Claude Code session:
 
 ```
 /plugin marketplace add anthropics/skills
 /plugin install document-skills@anthropic-agent-skills
 ```
 
-If Claude Code already brings the docx and pptx skills, nothing is
-to install.
+Skip this if Claude Code already brings the docx and pptx skills.
 
 ## 5. Clone the engine
 
 The engine's public home is
+https://github.com/pche-broken-artist/forge-of-thought. This is the
+address a clone and a project's README point to; it is a fact of the
+product, not of any one installation.
 
-```
-https://github.com/pche-broken-artist/forge-of-thought
-```
+Clone it with git. Do not copy the directory: the forge is cloned,
+not copied, and `forge-save.py` refuses an engine that is not a git
+repository ("The engine is not a git repository (clone it, do not
+copy it)"). A clone is also how the engine is upgraded later, since
+its released line is pulled from the remote.
 
-Clone it with git into a directory of your choice. That directory
-is the engine root.
+## 6. Always start `claude` from the engine root
 
-Clone, do not copy: the engine must be a git repository. The save
-script refuses an engine that is not one, with the message
-`The engine is not a git repository (clone it, do not copy it).`.
-The scripts recognise the engine root as the parent of their own
-`scripts/` directory, so the clone works wherever you put it.
-
-## 6. Start `claude` from the engine root
-
-Always start `claude` in the engine root, the directory that holds
-`CLAUDE.md`. Started there, Claude Code loads `CLAUDE.md`, the
-rules of the forge, and `CLAUDE.local.md`, the facts of your
-instance.
+Open a terminal in the directory you cloned, the engine root, and
+start `claude` there. Claude Code loads `CLAUDE.md` and
+`CLAUDE.local.md` from the directory it starts in; started anywhere
+else, the forge's rules and your instance facts are not loaded and
+the commands do not behave as the forge intends.
 
 ## What comes next
 
-With the machine prepared, the first run of the forge is `/setup`,
-which fills in the instance facts and sets the model. It is the next
-page.
+With the tools in place and the engine cloned, the first thing to do
+inside Claude Code is the first setup, `/setup`: it creates and
+fills the instance facts and sets the model. The page on setting up
+the forge takes it from here.
 
 ## See also
 
-- [Set up the forge](setup.md): the first run, `/setup`, which fills the instance facts and sets the model.
-- [Scripts](../reference/scripts.md): every script with what it needs and its options.
+- [Set up the forge](setup.md): the first run, `/setup`, which fills
+  the instance facts and sets the model.
+- [Scripts](../reference/scripts.md): every script with what it
+  needs and its options.

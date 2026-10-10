@@ -1,5 +1,7 @@
 ---
+name: docs-contract
 description: Contract of the documentation agents — the conduct shared by the planner and the writer (isolation, inputs from disk, what must never reach a page or the map), preloaded into docs-planner and docs-writer through the `skills` field of their front-matter. Not a command; nothing to invoke.
+user-invocable: false
 ---
 
 This skill is the one owner of what the two documentation agents

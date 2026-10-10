@@ -51,6 +51,15 @@ library: the ledger and the two resource indexes. -->
   https://github.com/pche-broken-artist/forge-of-thought."
 - Keep the visible dated footer `_Last updated: <render date>_`.
 
+## Pinned facts (not rendered)
+<!-- Optional. Facts of the project that no file of the project
+owns yet - prerequisites, how a tool is installed, the public home
+of the repository. The README does not print them; the
+documentation's planner reads them here as an owner
+(`.claude/agents/docs-planner.md`). One bullet each; dropped the day
+a file owns the fact. Omit the section when the project has none. -->
+- <fact>
+
 ## Template
 # <Project title> <intent version>
 
