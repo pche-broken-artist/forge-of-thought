@@ -381,79 +381,6 @@ project: forge
   kind of THR.0290, and the shape of the operating layer it reviews
   is POS.1120's and THR.0240's question. Opened 2026-09-05.
 
-- **THR.0350** [intent] Lessons of the first run in the field. The record of
-  the forge applied to a private project of the principal's,
-  10–13 September 2026, is registered as
-  `sources/forge-run-record-health.md`: a timeline, eight failures,
-  thirteen things that worked, thirteen engine gaps and sixteen
-  proposals (P.01–P.16), item-numbered for citation. To be analysed
-  properly and learned from — a walkthrough of the proposals, one at
-  a time — when the principal has the time; deferred 2026-09-13 at
-  his word, nothing decided. What he stated the same day, in his own
-  words, to be worked from — his stance, not yet positions:
-  - A brief that is born by joint elicitation carries Claude's part
-    too: he speaks, sources are ingested as they arrive, and the two
-    of them work the sources into the brief; the brief is then worked
-    into the intent. That is the wanted model. The record's "brief =
-    the principal's words only" (G.01) is not the model but a
-    misreading of it; what broke the run was Claude saying "written"
-    while nothing was written (F.01). Open: whether the brief marks
-    what he said and what Claude said (Claude's recommendation of
-    2026-09-13: yes, lightly, block by block, since the intent later
-    asks whose word a position rests on; not decided). P.07 of the
-    record (an intent draft beside a draft brief) is thereby set
-    aside as the wrong fix.
-  - The walkthrough is the failure he minds most: one item, worked
-    until it is agreed, and only then the next; never a proposed
-    resolution and the offer of the next item in one message. To be
-    made to hold, not promised again.
-  - The report of that project need not have been a new artefact:
-    in the wanted model the brief is led by elicitation over the
-    research and the ingested sources, worked into the intent, and
-    the report is a render of it. How the later artefacts are handled
-    is to be worked out as part of this thread.
-  - To consider: a mechanism that puts a fresh sentence into the
-    context at every prompt (the harness's hook that runs on each user
-    message, `UserPromptSubmit`, adding context), so that the rules
-    that matter — the one-item walkthrough above all — do not drift in
-    a long conversation. Opened 2026-09-13.
-  Priority given 2026-09-14: the first thread to be worked, before the
-  briefs `brd` and `engine-split` (THR.0230) — that brief is to be
-  born by the co-elicitation the record faulted (F.01, G.01, P.07, the
-  marking of whose word is whose), so that technique must hold first.
-  Walked through the same day, one proposal per message, directly
-  into the intent (the record is the anchor; a brief of it would have
-  been a copy):
-  - P.01 accepted → POS.0190. P.02 accepted in the principal's own
-    words as In pieces → POS.1160. P.03 accepted without the
-    "no warnings" part → POS.0020. P.04 accepted as a trial, the
-    hook and the `walkthrough` skill → POS.1170, POS.0850. P.05
-    accepted → POS.1090 (Step by step). P.06 accepted with the
-    principal's addition, the role always asked → POS.1040.
-  - P.07 rejected → REJ.0180. P.08 accepted, origin on THR only →
-    POS.0230, POS.1180 (dropped 2026-10-02, REJ.0230); the marking
-    of whose word is whose in a
-    co-elicited brief decided yes, lightly → POS.0110. P.09 split:
-    `terminal:` accepted → POS.0160; the layer opened as THR.0360.
-    P.10 the pasted-text half accepted → POS.1040, the editing
-    mechanism rejected → REJ.0200. P.11 accepted, unconditional →
-    POS.1040. P.12 rejected for now → REJ.0190. P.13 deferred into
-    THR.0360 with Claude's view of what a render is. P.14 covered by
-    POS.1160 and POS.0190. P.15 accepted, the ledger cites → POS.0160;
-    `/setup` asks the language first → POS.1050. P.16 not worked —
-    too specific for now.
-  - Of the principal's stance of 2026-09-13: the co-elicited brief
-    is POS.0110; the walkthrough shape POS.0850 with a new depth rule
-    from his correction; the report of `health` as a render is
-    THR.0360's; the per-prompt hook is POS.1170.
-  Still to do from this thread: the sweep of this project's ledger
-  (POS.0160), and the observation of the hook in the next
-  walkthroughs.
-  2026-09-28: the model of the co-elicited brief stated here on
-  2026-09-13 was turned. A brief holds the principal's choice from
-  the finding, not the pile, and carries no mark of authorship
-  (POS.0110, POS.1330).
-
 - **THR.0360** [intent] A layer with an external audience. The first real run
   below the intent (project `health`,
   `sources/forge-run-record-health.md`, D.05, G.05) needed a report
@@ -659,138 +586,6 @@ project: forge
   "composed from the skeleton"; against it stands that `/forge` is
   the door of the chain. Opened 2026-09-28 from
   `00-brief-elicitation.md`.
-- **THR.0470** [intent] The intent is too long to be read. At 4.32 the forge
-  intent has 2 997 lines, and the principal finds it so talkative
-  that a human cannot read it: an intent is to be structured
-  decisions and the understanding of the aim. Worked 2026-09-29 by
-  walkthrough, thirteen matters, every verdict the principal's. What
-  was decided stands in POS.0120 (what a position carries, detail
-  and the file that performs it, the threads in a file of their
-  own), POS.0310 (the history as a log, the old table in an
-  archive), POS.0730 (release notes derived from the log) and
-  POS.1140 (the check `history`). Answered: no assignment is made
-  for the forge; it would be a third copy beside the intent and the
-  operating layer, and precise wording has its home in the intent
-  until the file that performs it exists.
-  Order agreed 2026-09-29, ahead of the order of POS.1380: nine
-  steps, taken in this order.
-
-  | Step | What | State |
-  |---|---|---|
-  | 1 | Write the round of 2026-09-29 as 4.34, by the rules of the day | done 2026-09-29 |
-  | 2 | Cut out the threads: `10-intent.threads.md` is born, the threads move into it word for word, and everything that names them is mended so that they work on their own | done 2026-09-30 |
-  | 3 | Build the operating layer of the log, the check `history` with it | done 2026-09-30 |
-  | 4 | Prepare in the engine's `tmp/` the cleaned intent and the records of the history, the whole intent at once | done 2026-09-30, three passes |
-  | 5 | Write the instructions for the independent verification, one set for both verifiers | done 2026-10-01 |
-  | 6 | An isolated agent here and ChatGPT at the principal's, over the same three files | done 2026-10-01, M365 Copilot in the place of ChatGPT |
-  | 7 | Walk both reports with the principal and mend the prepared files | done 2026-10-01 |
-  | 8 | Write the project: the table moves to the archive, the log begins, the intent is replaced | done 2026-10-02, intent 4.42 |
-  | 9 | The check `history` over the project, and a look at the result | done 2026-10-02, the report filed as FND.0440 to FND.0530 and settled at 4.44 |
-
-  Step 2 mends what names the threads today: `CLAUDE.md` (where a
-  THR lives, the document kinds, the repository layout, the
-  sentence on saving an unfinished conversation); the template of
-  the intent and a new template of the threads file; the definition
-  of `/forge intent`, which starts from the threads inside the
-  intent; the checks that read IDs from the intent; the ledger,
-  whose lines under Waiting point at threads. Step 1 stays first
-  because the decisions of 2026-09-29 lived only in the
-  conversation; the plan and the open questions went into this
-  thread, which moves with the others in step 2.
-  Step 4 cleans the intent without its threads, whole and at once,
-  not finding by finding: Claude moves text and changes no stance,
-  and rephrases only where a sentence would break once the story is
-  taken out. The way to a position goes into the history; detail
-  goes there where the file that performs it exists, and the
-  position names the file. The real intent stays untouched until
-  step 8, so no backup is needed.
-  The cleaning of step 4 ran in two rounds on 2026-09-30, twelve
-  isolated agents, one per group, the instructions in the engine's
-  `tmp/cleaning/instructions.md`. The first round kept whatever it
-  doubted and took about a tenth off the intent; its doubts were
-  grouped into six kinds and the principal settled each with a rule,
-  and the second round ran again from the original text: (A) a rule
-  that a file of the engine carries word for word or in the same
-  sense leaves the item, which keeps what holds and why and names
-  the file; (B) a sentence that is both story and reason keeps the
-  reason in the words it has, a REJ's measurement that is its reason
-  stays; (C) an item keeps the latest date its text names, no date
-  added or inferred, a date older than the present shape listed for
-  the principal; (D) a reference to a brief or a source stays by
-  path, one to a thread, challenge, finding or decision that changed
-  the item leaves, one needed to understand the item stays; (E) what
-  no longer exists leaves unless the present rule depends on it; (F)
-  understanding wins over length, every changed item read once more
-  on its own. The definitions of the elicitation stay whole. (A2)
-  Rule A holds only where a file as a whole carries the detail; what
-  only a section of CLAUDE.md carries stays in the item (POS.0120).
-  Steps 5 and 6: the verifiers compare the live intent, the prepared
-  intent and the prepared history. Where a position names a file,
-  the verifier checks that the file carries the detail and says
-  nothing else. The isolated agent reads the engine's files itself;
-  ChatGPT gets them from the principal, and the instructions work
-  with them and without them, saying what stays unverified without
-  them. By the principal's word this verification stands in place
-  of the walkthrough of every position.
-  The migration reaches the other instances through the release
-  notes (POS.0940): each convention change of the migration carries
-  an Action required line in the Notes of its history row, with the
-  full procedure for a project, so that Claude on another instance
-  can carry it out on its user's word. The Notes line of 4.37 was
-  grouped as Changed; the Action required line of step 2 stands in
-  the row of 4.38. The engine is released once, after step 8, so
-  that the other instances take the migration whole.
-  Offered by Claude and to run only on the principal's word: a
-  mechanical check that every sentence of the old intent stands
-  either in the new intent or in a `Was` of the history.
-  How steps 5 to 8 ran, 2026-10-01, the write on 2026-10-02. The
-  instructions of the verification and the three reports lie in the
-  engine's `tmp/verification/`, outside git. The first run of the
-  isolated agent gave 25 findings, none high and no text lost: detail
-  had left five items for a section of CLAUDE.md against rule A2, an
-  exception had left POS.1040, two items could no longer be
-  understood on their own. M365 Copilot, without the engine's
-  files, gave two findings on one item. The principal walked two
-  findings and left the rest to Claude's judgement; Claude mended
-  the prepared files and named where he decided against a verifier.
-  A second run of the isolated agent over the mended files gave 15
-  findings, none high, mostly at other places than the first: seven
-  mended, the date of POS.0060 by the principal's verdict, the rest
-  left as text the cleaning had kept in doubt. The mechanical check
-  ran on the principal's word: 148 units, every word of the old
-  intent in the new item or in its `Was`, nothing changed without a
-  record. Claude's reading, marked as his: two readers found
-  different places from run to run, so a further run would find more
-  of the same kind, matters of judgement and not of loss.
-  The fifteen places where an item and the file it names said
-  different things, left by the cleaning, were walked with the
-  principal on 2026-10-02 and settled at 4.45, each in the record of
-  its item: the intent mended in eight items; the skill `ingest`,
-  the FCT row of CLAUDE.md and the help of `scripts/forge-save.ps1`
-  mended to the intent; one place found to hold as it stood
-  (POS.0440). For the brief the intent holds (POS.0110, REJ.0180,
-  REJ.0220), and the operating layer, CLAUDE.md and
-  `.claude/skills/forge/states/brief.md`, was brought current with
-  it at 4.47, when the definitions moved into their state files
-  (POS.1380).
-  The engine was released on 2026-10-02 at 4.49, by which the other
-  instances and the other projects take the migration; what is left
-  is the open question below.
-  Until a step is done, what it changes stands as it stood on
-  2026-09-28: the threads in the intent, the companions as tables
-  with their Notes, the release notes compiled from them.
-  Open: whether large files are split into smaller ones under a
-  master index. The intent has been divided by kind of content, not
-  by size: what holds, what is being worked, how it was reached. The
-  question is taken up again after the cleaning, on the measured
-  length of what is left. Measured 2026-10-01: the intent has 2 068
-  lines after the cleaning against 2 363 before it.
-  Claude's count of 2026-09-28, the estimates unverified: the
-  threads are 711 lines; the stories, the measurements and the
-  closed matters inside threads about 510; operating detail about
-  320; the three definitions in full 318 (POS.1330 to POS.1350). Two
-  samples of the log made on 2026-09-29 lie in the engine's `tmp/`,
-  outside git; the shape they show is POS.0310's. Opened 2026-09-28.
 - **THR.0480** [intent] How a new type is added to the engine — a new
   artefact of the chain, a whole new chain, a new elicitor, a new
   reviewer, genre, command or script. Opened 2026-09-30 at the
@@ -997,10 +792,6 @@ project: forge
   stand in an assignment written in another language; raised
   2026-10-02, nothing decided. Carried in the ledger without an ID
   until 2026-10-04 (FND.0930).
-- **THR.0560** [intent] Three weakly founded places in the README of
-  2026-10-02 (the next step of `/forge`, when two scripts are run,
-  the fifth verdict); the readme recipe, at its next iteration.
-  Carried in the ledger without an ID until 2026-10-04 (FND.0930).
 - **THR.0570** [intent] The presentation of the forge in the company,
   possibly at the group as well, the week after next by the
   principal's word of 2026-10-04, and what is to be ready for it. His
@@ -1095,8 +886,9 @@ project: forge
   | 9 | Several people on one project, the connection to the systems around (brief `next-gen`) | 3 | 4 sittings or more | decided after 2; today the worst collisions are silent |
   | 10 | A user's own extensions (THR.0300, THR.0480): where his artefact, lens or check lives so that `forge-pull` never overwrites it | 3 | 3 sittings | before the engine split, and possible without it |
   | 11 | The engine split and the plugin (THR.0230, THR.0190, the brief `engine-split`) | 4 | 10 sittings or more, a large rebuild | the feasibility research of the plugin first; not built until 2 and 10 say what the unit of installation is |
-  | 12 | Small: FND.1440, THR.0560 (to verify against the README of 2026-10-10), THR.0460, THR.0370, THR.0320, a SECURITY.md (research of 2026-10-05) | 4 | one sitting each | as the occasion comes |
+  | 12 | Small: FND.1440, THR.0460, THR.0370, THR.0320, a SECURITY.md (research of 2026-10-05); F.24 of the documentation audit (map, finding, lens, slug at their owners) and its Unowned list (Linux and macOS as a verified fact, which faster model and why, `/forge <state>` on a library, what Claude Code is beyond the engine running in it) | 4 | one sitting each | as the occasion comes |
   | 13 | Deferred by design: THR.0090, THR.0140, THR.0170, THR.0250, THR.0290, THR.0510, THR.0540, THR.0590 | 5 | | until their trigger comes |
+  | 14 | The reasons the writers of the documentation wanted and no file records, a round of the intent (POS.1450); the list stands in the closed record of THR.0630 | 2 | 1 to 2 sittings | after 2, before the pages are trusted as the forge's explanation of itself |
 
   What the two had not thought of together, Claude's: a pilot with
   a user other than the principal (3; the project `forge-rollout`
@@ -1120,85 +912,35 @@ project: forge
   the forge, whether the cost of a run is a problem today. Opened
   2026-10-10.
 
-- **THR.0630** [intent] The documentation audit of 2026-10-11
-  (`sources/docs-audit-2026-10-11.md`, 46 findings, 7 contradictions
-  inside the owners, 18 measurements): the six decisions of the
-  principal written at 5.2 (POS.1450, POS.1090) and three contradictions
-  settled (POS.0330, POS.1110, POS.0970); the round on the operating
-  layer done the same day (solution design 0.10: the generator, the
-  documentation contract, the writer, the planner with the map
-  skeleton, the scripts, and the owners outside the generator: the
-  release, setup and check skills, the readme recipe 0.63, the
-  contributing recipe 0.3, CLAUDE.md). What remains: `/document` in a
-  new session, since the harness loads an agent's definition once per
-  session (`.claude/skills/document/SKILL.md`, Harness note), and the
-  comparison of its result against the audit's measurements M.01 to
-  M.18, finding by finding; the words with several meanings at their
-  owners (F.24: map, finding, lens, slug), later. Opened 2026-10-11.
-  Run 2026-10-11 in a new session: 86 pages, 3 new (`/pull`, `/end`,
-  `/history`), the check clean after four regenerations on its findings
-  and three more on the writers' own slips; what the run found is
-  settled at solution design 0.12 (the reader, the state script, the
-  planner's rule), to be applied by a second `/document` in a new
-  session, the save after it. Unowned, from the planner: whether the
-  forge runs on Linux and macOS as a verified fact; which faster model
-  writes a mirrored page and why that one; what `/document <slug>` reads
-  for a project other than the engine and the language of its pages
-  (THR.0590); what `/forge <state>` does on a library beyond stopping
-  the map; what Claude Code is beyond "the engine runs in Claude Code".
-  Reasons the writers wanted and found recorded nowhere, for a round of
-  the intent (POS.1450): the briefs kept in their own language and
-  English as the notation; a check that finds nothing files nothing; why
-  a source is immutable at all; why a thread names its artefact; the
-  numbering in tens and hundreds and the three-letter prefix; prime
-  directives 2, 3 and 4 and "when unsure, ask" beyond POS.1370; a new
-  lens, persona or check only where what it finds differs; every finding
-  fixed or rejected with a reason; no reviewer on Claude's own
-  judgement; shared mechanism cited, never repeated in a definition;
-  regression before new findings and "sharp and few"; `projects/forge`
-  inside the engine's repository; the scripts-only door as a wall of the
-  harness and no attribution trailer (POS.1200); an item never depending
-  on an external link; the order of the three readers and the five
-  sections; the ledger citing, never copying; corrections to an
-  immutable document downstream; substance changes into the intent
-  first; the definitions directory as the one listing of the artefacts;
-  authorship as the boundary between chain and render; mechanics
-  designed only when a layer is taken up; one user per instance
-  (POS.1110); feedback above a finished change (POS.1440); a recipe 0.x
-  for life, `last_change` derived, the author of a record the one who
-  decided; a source at any stage (POS.0180); Recommend, do not push
-  (POS.0910); where the line between Claude's part and the principal's
-  is drawn and why nothing is implemented; no migration tool (POS.0940);
-  the engine defaults of md2pptx and md2docx; the attribution settings;
-  renders without an offer in `/end`; one question per research; briefs
-  before threads.
-  The second `/document` in a new session, 2026-10-11: 86 pages, 12
-  regenerated on the fixes of solution design 0.12, the check clean
-  after one regeneration (a relative link). The comparison against
-  the measurements M.01 to M.18, by a read-only script on the audit's
-  stated method: resolved M.03 (the index, median 13 words, longest
-  22), M.04 and M.07 (251 links in the bodies, 137 to the glossary),
-  M.10 (three diagrams), M.12 and M.13 (5.3 against 5.3, `/pull` and
-  `/end` on the pages), M.14 (one page names all of CLAUDE.md, none
-  all of the intent), M.16 (16 headings in use/, the outline's six on
-  24 to 27 of 27 pages), M.18 and F.25 (the voice holds; the pronoun
-  of the principal is the owners' word, closed without change); M.08
-  and M.09 better (About 11 to 8 per cent); M.02 up by 40 per cent,
-  the price of the examples and glosses, closed without change. Six
-  decisions walked and written at solution design 0.13: every page is
-  reached from another page (M.06, twelve pages still reached from
-  the index alone), the how-to names its example heading (M.16), an
-  enumeration with glosses is a list and a rule stands apart from its
-  reason, exception and purpose (F.21, the mean sentence of About
-  unmoved at 21 words), the generator hashed with the inputs so that
-  a rule change regenerates every page. Reasons the writers wanted
-  and found nowhere, added: why the evaluator gets the concept pages
-  and nothing of his own, and the order of the three readers; why the
-  definitions directory is the one listing of the artefacts and why
-  changes go intent-first (joined on the-document-chain, to be cut if
-  too far). Unowned unchanged. What remains: a third `/document` in a
-  new session, every page regenerated by the new hash, the save
-  after it; F.24 later.
+- **THR.0640** [intent] What of a thread survives its closing. A thread
+  was a small open matter and has grown: 35 threads, about 12 900
+  words on 2026-10-11, the five largest 900 to 1 500 words each and
+  plans with step tables, syntheses and measurements rather than a
+  question to elicit (THR.0470, THR.0230, THR.0520, THR.0630,
+  THR.0620). The rule that a settled thread leaves `threads.md` with
+  its working debate, its wording in git, was set provisionally at
+  4.37 ("until step 3 a closed thread leaves as before") and never
+  revisited; a closed thread left one `closed` record in the history
+  (THR.0490 at 5.1). The principal's word of 2026-10-11: not sure the
+  disappearance is right; some of it should rather be a brief, but
+  not all; and a thread holds open work well, one finds one's way in
+  it. Claude's options, offered once: the `closed` record carries
+  what was weighed and dropped, more than a sentence; a thread that
+  has become a plan is born as a brief; an archive of closed threads,
+  which he advised against as a new document kind. Decided at 5.4:
+  the `closed` record carries the thread's last text in `Was`
+  (POS.0310). Left: when a thread has become a plan and is rather
+  born as a brief. From THR.0470, closed at 5.5: whether large files
+  are split under a master index; the intent has 1 845 lines and the
+  threads 1 255 on 2026-10-11. Opened 2026-10-11.
+
+- **THR.0650** [solution-design] The new output of `forge-pull.py`
+  (before, after, the commits between) and the states `behind` and
+  `diverged` of `remote_state` are untested, since no repository has
+  been behind its origin; a test on a throwaway clone the principal
+  makes by hand, raw git being denied to Claude (SOL.0510). Carried
+  in the ledger without an ID from intent 5.1 until 5.4 (FND.1490).
+  Deferred 2026-10-11; opened 2026-10-11.
 
 Note: the ID THR.0120 was inadvertently used twice — first for the
 readme-recipe thread (opened 1.14, closed 1.16), then for the

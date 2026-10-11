@@ -89,8 +89,10 @@ principal takes none: a recommendation, never a gate.
 the project, are
 part of the intent as its history is: the intent says what holds,
 the threads what is being worked, the working debate included until
-a thread is settled; freely rewritten, no version, no history and no
-ledger row of their own (POS.0120). Every thread names, right after
+a thread is settled, and once it is settled the debate goes whole
+into the `Was` of the thread's `closed` record (POS.0310); freely
+rewritten, no version, no history and no ledger row of their own
+(POS.0120). Every thread names, right after
 its ID and in square brackets, the artefact it concerns, as `/forge`
 names it; several where it concerns several. An item says what is to be
 achieved and why; what realises it is named in the solution design

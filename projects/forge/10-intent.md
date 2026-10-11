@@ -1,8 +1,8 @@
 ---
-version: 5.3
+version: 5.5
 date: 2026-10-11
 status: draft
-last_change: 5.3 (2026-10-11): the history of one item is read through /history, a script gathering and Claude summarising (POS.1510); the command born with its script.
+last_change: 5.5 (2026-10-11): THR.0350, THR.0470, THR.0560 and THR.0630 closed, each with its last text in `Was`, the first closings by the rule of 5.4; their remainders in THR.0620 and THR.0640.
 project: forge
 audience: principal + Claude only
 ---
@@ -926,7 +926,12 @@ position that already stands elsewhere.
   `created`, `changed`, `closed` (a thread or an open question settled),
   `removed` (an item leaves the document and its ID is never used again)
   and `approved` (of the document as a whole: the approval of a brief or
-  of a major). Every record names its author: the one who decided the
+  of a major). A thread that is settled leaves `threads.md`; its
+  `closed` record says what was decided and where it now stands, and
+  carries in `Was` the thread's last text word for word, so that the way
+  to the decision stays in the log, where it costs nothing to keep
+  because the log is searched and never read whole. Every record names
+  its author: the one who decided the
   change, by the handle the instance gives its principal, never the one
   who typed it. The field is there from the first record because a log
   is never rewritten and a field it lacks cannot be added to what was
