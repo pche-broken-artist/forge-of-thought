@@ -631,21 +631,24 @@ project: forge
   versus instance, the test on CLAUDE.md). Without it a user's local
   additions grow into a derivation, and the one tool that does
   everything comes in through the door for user artefacts.
-- **THR.0430** [intent] A command that ends a session. It verifies that
-  nothing lives only in the conversation — an unwritten round, a
-  repository with changes (`forge-status`), a stale render — and
-  says what a shutdown would lose; then it records in the ledger the
-  time spent and the tokens burnt in the session. Claude cannot
-  measure either from inside the conversation; the harness can:
-  `/cost` reports the session, and the transcripts under
-  `~/.claude/projects/` carry usage and timestamps per message, so a
-  script can sum them per project by working directory, for past
-  sessions too — a lower bound where a project was worked on more
-  than one machine. Open: the name of the command, the ledger's
-  shape for the figures (a table, or a line in the header), whether
-  the sum is per session or cumulative, and the research of the
-  transcript format before any script. Opened 2026-09-27 at the
-  principal's direction.
+- **THR.0430** [intent] The measurement of a session. The command that
+  ends a session is decided, `/end` (POS.1500); what stays open is
+  the time spent and the tokens burnt, which it was to record. The
+  principal's word of 2026-10-11: the figures are stored per user,
+  not in a project's ledger, so where they live - outside the
+  repositories, at the user's own place - is open with them. Claude
+  cannot measure either from inside the conversation; the harness
+  can: `/cost` reports the session, and the transcripts of Claude
+  Code carry, per message, `usage` with the tokens and a
+  `timestamp`, verified on a transcript 2026-10-11. The same look
+  showed the limit: the working directory recorded is always the
+  engine root, so a sum per project is not to be had from the
+  transcript without reading its messages, and the transcripts lie
+  in one directory per configuration and per machine, so any sum is
+  a lower bound. Open: where the figures live, whether the sum is
+  per session or cumulative, a sum per project, and the research of
+  the transcript format before any script. Opened 2026-09-27 at the
+  principal's direction; narrowed 2026-10-11.
 - **THR.0460** [intent] `/recipe` and `/forge`: one dispatcher or two.
   Today the states of `/forge` and the genres of `/recipe` are one
   mechanism written twice in different shapes. A recipe is composed
@@ -826,24 +829,6 @@ project: forge
   can be added by a command has a definition, and the skeleton of
   each is named `templates/<type>-definition.md`, as the four of
   today are; every further type follows that name.
-- **THR.0490** [intent] A stale clone goes unnoticed. The principal works on
-  more than one machine, so a local engine behind its origin is the
-  normal case, not the exception. On 2026-10-01 the `/forge` map was
-  reported from a clone one commit behind (6856009 against f371de0)
-  and nothing in the forge could have said so: the map reports
-  whether a project is under git and nothing of its state against
-  the remote, and `scripts/forge-status.py` neither fetches nor
-  reports ahead/behind — it prints "clean" and the origin's URL. The
-  principal's word of 2026-10-01: the pull is to be offered
-  unprompted at `/forge`, as it was on 2026-09-30, and the rule is to
-  live in the forge, not in the assistant's memory. Open: where it
-  lives — `forge-status` fetching and reporting ahead/behind for the
-  engine and every project with an origin, and the `/forge` map
-  showing that line and offering `forge-pull` before anything else;
-  or a session-start step beside THR.0430's session end. Claude's
-  recommendation, marked as his: both, since a map drawn from a stale
-  clone is a map of the wrong state. Nothing decided. Opened
-  2026-10-01.
 - **THR.0500** [intent] The reviewers' mechanism out of the session. The
   principal's words of 2026-10-02: one mechanism for critic,
   challenger and check; and rather than Claude doing the bookkeeping,
@@ -1086,6 +1071,54 @@ project: forge
   before the approval of 5.0 (POS.1320); left open by the principal's
   word of 2026-10-10, to be settled in a 5.x round. Origin: Claude's
   synthesis. Opened 2026-10-10.
+
+- **THR.0620** [intent] A plan for the forge after 5.0. Claude's
+  synthesis of 2026-10-10 from every open thread, the brief
+  `next-gen` and the Growth path of the intent, on the principal's
+  word; nothing in it is decided, and the principal said at once
+  that he does not like a plan living as a thread: the forge has no
+  document kind for a plan (THR.0520 holds that question), and this
+  thread is where it waits until it has one. Weight 1 is highest;
+  the price is in sittings of about two hours with the principal,
+  Claude's isolated work beside.
+
+  | # | What | Weight | Price | Claude's recommendation |
+  |---|---|---|---|---|
+  | 1 | The presentation (THR.0570): what the audience is to hold, the verdict on the two pitches, the executive deck (THR.0380), Discussions and the topics on GitHub | 1 if the date stands | 2 sittings | at once; the pitches re-rendered from 5.0 |
+  | 2 | Mine the brief `next-gen` into the intent: of its eighteen sections what is 6.0, what later, what never; the horizon statement with it (THR.0610) | 1 | 4 to 6 sittings, several rounds | before anything else is built: it is the frame of the rest |
+  | 3 | A pilot with a first user other than the principal, one real project, the run record as a source as `health` was | 1 | 1 sitting to prepare, the user's time, 2 to evaluate | new; gives the facts the brief `next-gen` only assumes (who, how many, by what one tells it works) |
+  | 4 | A cheaper run: the check `light` as a script (THR.0530), the filing of findings by a script (THR.0500), the durations measured (THR.0410) | 2 | 3 sittings and scripts | the release of 2026-10-10 and the documentation cost millions of tokens and tens of minutes; `light` ran three times that day at two to three minutes each |
+  | 5 | Read the solution design whole and the second pass of the intent, the 22 positions where the solution stayed (THR.0520) | 2 | 3 sittings | the condition of building anything from the solution design |
+  | 6 | Upgrade and compatibility (brief `next-gen`): a format version in a project, a stable line, the migration of a project; THR.0490, the stale clone, with it | 2 | 2 sittings and scripts | needed before a rollout; THR.0490 small and valuable, at once |
+  | 7 | The BRD layer (THR.0520 step 6, THR.0360, the brief `brd`): the first trial of `/new-artefact`, the business analyst persona | 3 | 3 to 4 sittings | only if a project needs it within two months, else after 2 |
+  | 8 | The test of behaviour (THR.0600), the gate in front of the tools (THR.0400), the sweep of the boundary (THR.0210) | 3 | 2 sittings and scripts | a small set of scenarios from the recorded failures; cheap confidence before a rollout |
+  | 9 | Several people on one project, the connection to the systems around (brief `next-gen`) | 3 | 4 sittings or more | decided after 2; today the worst collisions are silent |
+  | 10 | A user's own extensions (THR.0300, THR.0480): where his artefact, lens or check lives so that `forge-pull` never overwrites it | 3 | 3 sittings | before the engine split, and possible without it |
+  | 11 | The engine split and the plugin (THR.0230, THR.0190, the brief `engine-split`) | 4 | 10 sittings or more, a large rebuild | the feasibility research of the plugin first; not built until 2 and 10 say what the unit of installation is |
+  | 12 | Small: FND.1440, THR.0560 (to verify against the README of 2026-10-10), THR.0460, THR.0370, THR.0320, a SECURITY.md (research of 2026-10-05) | 4 | one sitting each | as the occasion comes |
+  | 13 | Deferred by design: THR.0090, THR.0140, THR.0170, THR.0250, THR.0290, THR.0510, THR.0540, THR.0590 | 5 | | until their trigger comes |
+
+  What the two had not thought of together, Claude's: a pilot with
+  a user other than the principal (3; the project `forge-rollout`
+  exists and may be its place); the documentation regenerates whole
+  at every change of the intent, 82 of 83 pages on 2026-10-10,
+  because every page cites `10-intent.md` and the hash is of the
+  whole file with its version line, so hashing the body without the
+  front-matter, or the cited positions only, would cut a run to a
+  few pages; portability verified by a GitHub Actions workflow that
+  runs the scripts on ubuntu (`--help`, `docs-check`) at every push;
+  a public exemplar project (THR.0200), domain-neutral, run through
+  the whole chain, for the tutorial, the test of behaviour and the
+  pilot, its place open since `projects/*` is gitignored; the
+  writers on the faster model read their inputs loosely (three of
+  45 took CLAUDE.md from their context on 2026-10-10, many read its
+  head only), which the contract forbids and nothing verifies; and
+  one model for everything against the cost, to be decided before
+  the forge reaches more people. Questions to be asked one by one:
+  the date of the presentation, the target user of the pilot,
+  whether a project needs a BRD, the principal's hours per week for
+  the forge, whether the cost of a run is a problem today. Opened
+  2026-10-10.
 
 Note: the ID THR.0120 was inadvertently used twice — first for the
 readme-recipe thread (opened 1.14, closed 1.16), then for the

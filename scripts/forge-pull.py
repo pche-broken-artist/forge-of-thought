@@ -13,7 +13,17 @@ WHAT IT DOES
     unsaved changes is not touched: reported and skipped (bare) or
     refused (slug) - run forge-save.py first, so a pull can never
     create a conflict in half-finished work. Projects without a
-    repository or without an origin are reported and skipped.
+    repository or without an origin are reported and skipped. A
+    repository whose history has diverged from its origin is refused
+    and nothing is pulled: merge by hand, or forge-save.py rebases
+    your commits onto the remote. The script never merges on its own
+    (POS.1490 of the forge intent).
+
+    After a pull it prints where the repository moved from and to
+    (before: <hash> <subject>, after: <hash> <subject>) and the
+    subjects of the commits between, so that the releases crossed
+    ("release <version>") can be read off and their Action required
+    lines looked up in RELEASE-NOTES.md.
 
 WHAT IT NEEDS
     Python 3.8 or newer; git on PATH. `forge_repos.py` beside it.
@@ -55,10 +65,22 @@ def main(argv):
             fr.say(fr.label(name, "skipped"), "yellow")
             continue
         branch = fr.git_out(["rev-parse", "--abbrev-ref", "HEAD"], path)
+        before = fr.git_out(["rev-parse", "--short", "HEAD"], path)
         if fr.git(["pull", "--ff-only", "origin", branch], path, capture=False).returncode != 0:
-            fr.fail(f"Pull failed in {name} - local and remote history diverged. "
-                    "Run scripts/forge-save.py (it reconciles both), or ask Claude.")
-        fr.say(fr.label(name, "up to date"), "green")
+            fr.fail(f"Pull failed in {name} - local and remote history diverged; nothing pulled. "
+                    "Merge by hand, or scripts/forge-save.py rebases your commits onto the remote.")
+        after = fr.git_out(["rev-parse", "--short", "HEAD"], path)
+        if after == before:
+            fr.say(fr.label(name, "up to date"), "green")
+            continue
+        fr.say(fr.label(name, f"pulled {before} -> {after}"), "green")
+        print("   before: " + fr.git_out(["log", "-1", "--format=%h %s", before], path))
+        print("   after:  " + fr.git_out(["log", "-1", "--format=%h %s", after], path))
+        between = fr.git_out(["log", "--reverse", "--format=  %s", f"{before}..{after}"], path)
+        if between:
+            print("   commits between:")
+            for line in between.splitlines():
+                print("  " + line)
     return 0
 
 

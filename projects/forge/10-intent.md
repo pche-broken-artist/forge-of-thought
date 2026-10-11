@@ -1,8 +1,8 @@
 ---
-version: 5.0
-date: 2026-10-10
-status: approved
-last_change: 5.0 (2026-10-10): approved by the principal; version 5 closes how a thought is found and how the forge is read (THR.0570); THR.0610 opened on the horizon statement the intent lacks.
+version: 5.1
+date: 2026-10-11
+status: draft
+last_change: 5.1 (2026-10-11): the forge looks at the remote and offers, never pulls or merges itself (POS.1490, THR.0490 closed); a session ends with /end (POS.1500); /pull the door after a pull (POS.0940) and guarded (POS.1090); THR.0430 narrowed to the measurement, stored per user.
 project: forge
 audience: principal + Claude only
 ---
@@ -1217,12 +1217,35 @@ position that already stands elsewhere.
   `forge-pull` on the engine — a fast-forward of `main`. A project
   records no engine version: `/check` measures it against the current
   conventions. That is the whole migration path of any instance, the
-  principal's and a third party's alike: after `forge-pull`, `/check
-  light` and `/check project` on each project say what the conventions
-  changed (which check owns what: POS.1140), the release notes' Action
-  required lines say what to do, and Claude migrates on the user's word;
-  no migration tool exists, knowingly. Shapes rejected: REJ.0150.
-  Decided 2026-08-29.
+  principal's and a third party's alike: after a pull, `/pull` shows
+  the Action required lines of the releases crossed and offers `/check
+  light` and `/check project` on each project, which say what the
+  conventions changed (which check owns what: POS.1140), the release
+  notes' Action required lines say what to do, and Claude migrates on
+  the user's word; no migration tool exists, knowingly. Shapes
+  rejected: REJ.0150. Decided 2026-08-29.
+- **POS.1490** The forge looks at the remote and offers, it never
+  pulls or merges on its own. The `/forge` map and `/pull` ask
+  `forge-status --remote` for the state of the engine and of the
+  project against its origin and say it as a fact: up to date, behind,
+  ahead, diverged, no origin. Each state has one offer: behind and
+  clean, `/pull`; behind with unsaved work, `/save` first; ahead,
+  `/save`; diverged, the user merges by hand or lets `/save` rebase
+  his commits onto the remote, and nothing is pulled until he has. The
+  user knows and decides; the forge runs none of it unasked. Why: the
+  principal works on more than one machine, so a clone behind its
+  origin is the normal case and a map drawn from it is a map of the
+  wrong state; and a pull or a merge made on Claude's judgement would
+  be work done without the principal's word (POS.1460). Decided
+  2026-10-11 (THR.0490).
+- **POS.1500** A session ends with `/end`: it says what lives only in
+  the conversation and would be lost - an unwritten round, carried
+  verdicts, a promise - offers the write, reports every repository
+  with unsaved changes and offers `/save`, names stale renders as a
+  fact, and closes with one sentence saying whether shutting the
+  command line loses anything. It writes nothing itself. Why: the user
+  must be certain that closing the session loses nothing, and today
+  only his memory says so. Decided 2026-10-11 (THR.0430).
 - **POS.0950** The engine carries no instance facts. Who the principal
   is (by role) and what language the conversation runs in live in
   `CLAUDE.local.md`, a file of the instance kept out of the repository,
@@ -1309,9 +1332,10 @@ position that already stands elsewhere.
 - **POS.1090** The harness enforces the principal's word where it can.
   Claude is kept from the user's sensitive paths, and web access is
   approved by the user per domain. A command that writes, scaffolds,
-  commits or regenerates — `/save`, `/release`, `/spinoff`, `/setup`,
-  `/new-project`, `/new-artefact`, `/import-project`, `/ingest`,
-  `/render`, `/publish`, `/document` — is guarded by the harness, so
+  commits or regenerates — `/save`, `/release`, `/pull`, `/spinoff`,
+  `/setup`, `/new-project`, `/new-artefact`, `/import-project`,
+  `/ingest`, `/render`, `/publish`, `/document` — is guarded by the
+  harness, so
   that Claude cannot start it on his own judgement: the principal
   invokes it by slash, or asks in words and Claude follows the command's
   definition read by path. Maps, reports and rosters (`/forge`,

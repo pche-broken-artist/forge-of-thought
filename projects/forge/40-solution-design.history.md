@@ -38,3 +38,5 @@ with it. Lines are not wrapped. -->
 - 2026-10-10 | 0.8 | PCHe | SOL.0230 | changed | What `/ingest` does with a bundle's index and the split of a file, from POS.0180 (FND.1230). | Was: - **SOL.0230 The resource indexes.** `/ingest` and `/research` write the entries of `00-INDEX.md`, `/new-project` scaffolds the indexes and the check `light` verifies index against directory.
 - 2026-10-10 | 0.8 | PCHe | SOL.0500 | changed | One owner of the public address: the pinned facts of the readme recipe, as POS.1450 wants; this item cites (FND.1320, essence 2026-10-09). | Was: `forge-of-thought`, full name Forge of Thought in documents; its public home is `https://github.com/pche-broken-artist/forge-of-thought`, the address a clone and a project's README point to. The
 - 2026-10-10 | 0.8 | PCHe | SOL.0530 | changed | What the release does with the documentation, from POS.1450 (FND.1330). | Was: with the release message and tag: not a second procedure.
+- 2026-10-11 | 0.9 | PCHe | SOL.0180 | created
+- 2026-10-11 | 0.9 | PCHe | SOL.0510 | changed | The state against the origin: forge-status --remote with the shared function, and what forge-pull prints, from POS.1490.

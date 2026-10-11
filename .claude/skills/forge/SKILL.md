@@ -17,6 +17,12 @@ is CLAUDE.md, Document chain's. This dispatcher never changes.
    - the project's kind (ledger header, POS.0960) and whether it is
      under git — `projects/<slug>/.git` present or "not under git",
      stated as a fact, never as a defect (CLAUDE.md, Persistence);
+     and, for the engine and for the project, the state against the
+     origin from `python scripts/forge-status.py --remote`, said as
+     a fact with the words of POS.1490 (up to date, behind, ahead,
+     diverged, no origin) and with that state's one offer: `/pull`,
+     `/save` first, `/save`, or a merge by hand or by `/save`; the
+     map says it looked at the remote and runs none of it;
    - a `library` is material, not a project waiting for a brief:
      report its sources and research (from the ledger and the
      indexes) and stop after the git line — no chain, no target

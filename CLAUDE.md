@@ -485,7 +485,13 @@ pushes on whatever branch is checked out, no render. `/release`, from
 `main` only, runs its checks, re-renders the README and release notes
 and then saves with the release message and tag. Which checks each
 runs is its own definition's (`.claude/skills/save/SKILL.md`,
-`.claude/skills/release/SKILL.md`). Saves made directly from the shell
+`.claude/skills/release/SKILL.md`). `/pull` is the door inward: it
+looks at the remote and says the state as a fact, pulls only a clean
+repository that is behind, and offers the rest; the forge never pulls
+or merges on its own judgement (POS.1490). `/end` closes a session by
+saying what would be lost (POS.1500). What each does in full is its
+own definition's (`.claude/skills/pull/SKILL.md`,
+`.claude/skills/end/SKILL.md`). Saves made directly from the shell
 are unaffected.
 
 ## Versioning & status
@@ -672,6 +678,8 @@ What a command does in full is its skill's
 | `/check [check] [slug]` | run a check on a project or on the engine; bare = the check roster |
 | `/save [slug] [-m "message"] [--tag name]` | save one repository, or every one with changes |
 | `/release [slug] [-m "message"] [--tag name]` | release one repository from `main` |
+| `/pull [slug]` | look at the remote and, clean and behind, pull one repository or every one with an origin; after a pull of the engine, the Action required lines crossed and the offer of the checks |
+| `/end` | end a session: what lives only in the conversation, what is unsaved, what a shutdown would lose |
 | `/spinoff <project> <group> <slug>` | split a group into its own project |
 | `/man [command \| method]` | the forge's manual, read from its own definitions |
 | `/manual …` | alias of `/man` |

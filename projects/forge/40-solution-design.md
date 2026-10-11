@@ -1,8 +1,8 @@
 ---
-version: 0.8
-date: 2026-10-10
+version: 0.9
+date: 2026-10-11
 status: draft
-last_change: 0.8 (2026-10-10): the essence critique of 2026-10-09 settled (FND.1310 to FND.1340) and the how of three positions taken over (FND.1230).
+last_change: 0.9 (2026-10-11): /pull and /end (SOL.0180); the state against the origin in forge-status --remote and what forge-pull prints (SOL.0510), from POS.1490 and POS.1500.
 project: forge
 audience: whoever realises the solution, a person or an agent
 ---
@@ -282,6 +282,30 @@ direction, a boundary kept by hand or an order of work.
   content to copy; the cost is one more file to change with
   POS.1310. Where: `.claude/skills/new-artefact/SKILL.md`,
   `templates/artefact-definition.md`.
+- **SOL.0180 Pull and end.** `/pull [slug]` is a skill guarded like
+  every command that changes the disk (SOL.0110). It asks
+  `forge-status --remote` for the state of its scope against the
+  origin, says it in the words of POS.1490 and stops at the offer
+  where a repository has unsaved changes or has diverged; clean and
+  behind, it runs `forge-pull` (bare: the engine and every project
+  with an origin; `forge`: the engine; a slug: that project). After
+  a pull of the engine it reads the commit subjects the script
+  printed, opens in `RELEASE-NOTES.md` the sections of the releases
+  crossed and shows their Action required lines, then offers `/check
+  light` and `/check project` on each project; after a pull of a
+  project it reports. `/end` is a skill Claude may start, a report
+  (SOL.0110): it names what lives only in the conversation and
+  offers the write, runs `forge-status` without the remote and
+  offers `/save` where a repository has changes, names stale renders
+  by the ledger's Renders table as a fact, and closes with one
+  sentence on whether shutting the command line loses anything; it
+  writes nothing.
+  Realises: POS.1490, POS.1500, POS.0940, POS.1090. Choice: two
+  small commands against widening `/save` and `/forge`: a pull runs
+  the other way from a save, and the end of a session is another
+  moment than the map; the cost is two rows of the Commands table.
+  Decided 2026-10-11. Where: `.claude/skills/pull/SKILL.md`,
+  `.claude/skills/end/SKILL.md`, `.claude/skills/forge/SKILL.md`.
 
 ### The documents of a project
 - **SOL.0200 The history log.** A record is written as a list item,
@@ -603,9 +627,16 @@ direction, a boundary kept by hand or an order of work.
   brings an existing project in, and `forge-branch.py`, which
   creates a branch or switches to one, `main` included, with the
   slug alone reports the branch and lists the branches, and nothing
-  else.
-  Realises: POS.0550, POS.1060, POS.1110, POS.0940. Choice: scripts
-  as the only door against git typed by the model. Where:
+  else. `forge-status --remote` fetches the origin of each
+  repository, which changes nothing in the working tree, and reports
+  the branch against it: up to date, behind, ahead or diverged, with
+  the counts; without the flag it touches no network. The state
+  against the origin is one function of `forge_repos.py`, which
+  status and pull share. `forge-pull` prints where it moved from and
+  to and the subjects of the commits between, so that the releases
+  crossed can be read off.
+  Realises: POS.0550, POS.1060, POS.1110, POS.0940, POS.1490. Choice:
+  scripts as the only door against git typed by the model. Where:
   `scripts/forge-*.py`, `scripts/forge_repos.py`.
 - **SOL.0520 The wall.** Protection relies on Claude Code's
   permission system, not an OS-level sandbox: commands and file

@@ -2,7 +2,7 @@
 project: forge
 kind: thought
 language: en
-updated: 2026-10-10
+updated: 2026-10-11
 ---
 
 # Ledger — Forge of Thought
@@ -36,8 +36,8 @@ absorbed it; Note says what remains (partial) or the REJ (dropped). -->
 ## Documents
 | File | Version | Status | Date |
 |---|---|---|---|
-| 10-intent.md | 5.0 | approved | 2026-10-10 |
-| 40-solution-design.md | 0.8 | draft | 2026-10-10 |
+| 10-intent.md | 5.1 | draft | 2026-10-11 |
+| 40-solution-design.md | 0.9 | draft | 2026-10-11 |
 <!-- One row per layer below the intent, added when the layer is
 born; a layer the project does not have gets no row (CLAUDE.md,
 Ledger). -->
@@ -372,9 +372,6 @@ copy — CLAUDE.md, Ledger. -->
 - THR.0480 — how a new type is added to the engine; opened
   2026-09-30 (intent 4.35), the principal's stance saved, nothing
   decided; any time, before THR.0230.
-- THR.0490 — a stale clone goes unnoticed; `/forge` and
-  `forge-status` to say the state against the remote and offer the
-  pull; opened 2026-10-01 (intent 4.41), where it lives open.
 - THR.0500 — the reviewers' mechanism out of the session; filing by
   a script kept for later, research of 2026-10-02; opened 2026-10-02.
 - THR.0510 — live reference material by nightly export; the
@@ -384,8 +381,13 @@ copy — CLAUDE.md, Ledger. -->
   again 2026-10-05.
 - THR.0420 — derivations of the forge for other jobs; nothing
   scheduled.
-- THR.0430 — a command that ends a session; research of the
-  transcript format first, nothing scheduled.
+- THR.0430 — the measurement of a session, stored per user; where
+  it lives open; `/end` decided (POS.1500, intent 5.1).
+- the new output of `forge-pull.py` (before, after, the commits
+  between) and the states `behind` and `diverged` of `remote_state`
+  untested, since no repository is behind its origin; a test on a
+  throwaway clone, which the principal makes by hand (raw git is
+  denied to Claude), deferred 2026-10-11.
 - THR.0590 — what the documentation of a project other than the
   engine reads; opened 2026-10-09 (intent 4.60), after the first
   `/document <slug>` on a project.
@@ -406,6 +408,9 @@ copy — CLAUDE.md, Ledger. -->
   CHL.0220, not before 5.0.
 - THR.0610 — the horizon statement the intent lacks (POS.1360);
   opened 2026-10-10 at the approval of 5.0, for a 5.x round.
+- THR.0620 — a plan for the forge after 5.0, Claude's synthesis;
+  nothing decided, the questions to be asked one by one; opened
+  2026-10-10.
 - FND.1440 — parked finding of the `engine` check: POS.1420 claims
   a check the engine lacks; the wording agreed 2026-10-10, to be
   written in the first 5.x round.

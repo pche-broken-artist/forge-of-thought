@@ -62,6 +62,30 @@ def git_out(args, cwd):
     return r.stdout.strip() if r.returncode == 0 else ""
 
 
+def remote_state(path):
+    """The branch of `path` against its origin after a fetch: one of
+    'up to date', 'behind N', 'ahead N', 'diverged (ahead N, behind M)',
+    'no origin', 'no upstream'. The fetch changes nothing in the
+    working tree. Shared by forge-status (--remote) and forge-pull."""
+    if not git_out(["remote", "get-url", "origin"], path):
+        return "no origin"
+    branch = git_out(["rev-parse", "--abbrev-ref", "HEAD"], path)
+    if not branch or branch == "HEAD":
+        return "no upstream"
+    git(["fetch", "origin", branch], path)
+    counts = git_out(["rev-list", "--left-right", "--count", f"HEAD...origin/{branch}"], path)
+    if not counts:
+        return "no upstream"
+    ahead, behind = (int(x) for x in counts.split())
+    if ahead and behind:
+        return f"diverged (ahead {ahead}, behind {behind})"
+    if behind:
+        return f"behind {behind}"
+    if ahead:
+        return f"ahead {ahead}"
+    return "up to date"
+
+
 def project_path(slug):
     return ENGINE_ROOT / "projects" / slug
 
