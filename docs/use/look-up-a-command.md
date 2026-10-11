@@ -1,79 +1,60 @@
 ---
-generated: 2026-10-10
+generated: 2026-10-11
+version: 5.3
 made: mirrored
-inputs-hash: 130f511f53e7fcc2
+inputs-hash: a9a23d804d802b24
 inputs:
   - .claude/skills/man/SKILL.md
   - .claude/skills/manual/SKILL.md
-  - CLAUDE.md
 ---
 
 # Look up a command
 
-This page is for a user who wants to know what a command does, which
-arguments it takes or what a working method means, without leaving the
-conversation. The way to do that is `/man`.
+`/man` is the forge's manual: the command that prints what a command or a working method is, for the user who wants to know it before running it. The working methods are the named ways a conversation between the principal (the person whose thinking is being forged) and Claude runs.
 
-## What `/man` is
+## When to use it
 
-`/man [command | method]` is the forge's manual. It has no text of its
-own. Each time you call it, it reads the files that own the
-information, shortens them to the line, and prints the result in the
-conversation. Nothing it prints can be out of date with the forge.
+- You want the list of commands and methods.
+- You want to know what one command is for, what arguments it takes, and what each entry of its roster looks for before you run it.
+- You want the full wording of one working method.
 
-`/manual` is an alias: it does the same with the same arguments.
+## The command
 
-`/man` only reads. It runs none of the commands it describes. The word
-`help` is not used for this, because `help` is Claude Code's own
-command; hence the Unix name.
+```
+/man [command | method]
+```
 
-## The three ways to call it
+`/manual` is an alias and does the same with the same arguments. The word `help` is Claude Code's own command, which is why the forge's manual has the Unix name.
 
-### Bare: the overview
+## What happens
 
-Type `/man`. You see:
+`/man` reads its answer at the moment of the call from the files that own it, so the manual is never older than the forge. It shortens what it reads to a line where it can. It runs none of the commands it describes. It prints in the conversation language: descriptions and the sections it quotes are translated, while command names, file paths, IDs and front-matter keys stay English.
 
-1. Every command with its arguments, and its purpose cut to one line.
-   `/man` and `/manual` are in the list.
-2. Every working method by name, with the first sentence of its
-   paragraph.
-3. A closing line: `/man <command>` for a command's page,
-   `/man <method>` for a method's.
+1. Bare `/man` prints the overview. It lists every command with its arguments and its purpose cut to one line, `/man` and `/manual` included. Then it lists each working method with the first sentence of its paragraph. The last line says to use `/man <command>` for a command and `/man <method>` for a method.
+   You should now see two lists and the closing line.
+2. `/man <command>` prints the page of one command. It gives the purpose, the arguments and the full purpose from the commands table. Where the command works over a roster (checks, lenses, personas or genres), it lists each entry with its description. Where the entry's file has a section on what it looks for, that section is printed in full. For a genre, the checklist of questions is printed. The last line names the skill file that holds the whole procedure.
+   You should now see the command's purpose, its arguments, its roster if it has one, and the path of its skill file.
+3. `/man <method>` prints the page of one working method. The name is matched without regard to case, and hyphens and spaces count alike. It prints the paragraph in full and, where the method has a skill that holds its shape, that skill's path.
+   You should now see the method's paragraph and, where there is one, its skill path.
 
-### With a command: one command's page
+## If something goes wrong
 
-Type `/man` followed by a command name. You see:
+- The command you name does not exist: `/man` says so and prints the list of commands.
+- The method you name does not exist: `/man` says so and prints the list of methods.
 
-- the command's purpose, taken from its description;
-- its arguments;
-- the full purpose as the command table gives it;
-- where the command dispatches over a roster, each entry of that
-  roster with its description and what it looks for. For a check, a
-  critic lens or a challenger persona that is its lens section; for a
-  recipe genre it is its elicitation checklist. You can therefore
-  know what a check, a lens, a persona or a genre goes after before
-  you run it;
-- a closing line naming the skill file, for when you want the whole
-  procedure.
+## A worked example
 
-If no command of that name exists, `/man` says so and lists the
-commands.
+```
+/man <command>
+```
 
-### With a method: one working method's page
+Replace `<command>` with a name from the overview. You see the command's purpose, then its arguments, then, if the command dispatches over a roster, one block for each member with what it looks for, and last the path of the skill file to read for the whole procedure. Nothing has run; to use the command, type it.
 
-Type `/man` followed by the name of a working method. The name is
-matched without regard to case, and hyphens and spaces count alike. You
-see the method's paragraph in full and, where a skill holds the
-method's shape, the path of that skill. If the method is unknown,
-`/man` says so and lists the methods.
-
-## Language
-
-The whole page is printed in the conversation language, descriptions
-and lens sections included. Only the notation stays in English: command
-names, file paths, IDs, front-matter keys and the bold names of the
-methods, each followed by its translation once.
+The table of all commands is also on the page [Commands](../reference/commands.md).
 
 ## See also
 
 - [Commands](../reference/commands.md): the same table, as a page.
+- [Glossary](../reference/glossary.md): every term of the forge in one line.
+
+Generated on 2026-10-11 for version 5.3 from the files the front-matter names; never edited by hand.

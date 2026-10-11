@@ -56,9 +56,12 @@ owning project's ledger, never in `docs/`. The date is today's.
    project gets the index's row (its shape: `templates/ledger.md`,
    Renders). Report:
    pages new, regenerated, kept and removed; the Unowned list and what
-   did not fit, from the planner; what the writers left out; the
-   check's result. Every fact in Unowned waits for the principal to
-   give it a home; nothing is invented to fill it.
+   did not fit, from the planner; what the writers left out; every
+   place where a writer wanted a reason and none is recorded, as one
+   list (POS.1450: the reason, where the principal wants one, enters
+   the intent in its own round); the check's result. Every fact in
+   Unowned waits for the principal to give it a home; nothing is
+   invented to fill it.
 
 What a run never does: read the renders or the README as owners;
 touch a page by hand; run on Claude's own judgement (the command is

@@ -25,7 +25,9 @@ never a gate; no check runs on Claude's own judgement.
 **`/check <name> [slug]` — run it.** The target is a project by its
 slug (the engine's own project is `forge`) or the engine root; which
 of the two a check takes, and what a missing or an added slug means
-to it, is its Lens section's to say — read it there. Invoke the
+to it, is its Lens section's to say — read it there. Typed, that is
+`/check engine` (the engine root, no slug) or `/check light forge`
+(the forge's own project). Invoke the
 `check-<name>` subagent (Agent tool, session model) with the target
 path and nothing else (CLAUDE.md, Isolated reviewers). More than one
 check on one target may be launched at once and awaited together.

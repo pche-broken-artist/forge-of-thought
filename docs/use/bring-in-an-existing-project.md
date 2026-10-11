@@ -1,72 +1,89 @@
 ---
-generated: 2026-10-10
+generated: 2026-10-11
+version: 5.3
 made: mirrored
-inputs-hash: 278982851bb48f74
+inputs-hash: 6603046be4e4500d
 inputs:
   - .claude/skills/import-project/SKILL.md
   - scripts/forge-clone.py
-  - CLAUDE.md
 ---
 
 # Bring in an existing project
 
-This page is for a user who already has a project in a git repository
-and wants to work on it in the engine. It shows how to bring the
-project in with `/import-project` and what you see afterwards.
+This page shows how to bring a project you already have, kept in a git repository, into the `projects/` directory of the engine with `/import-project`. It is for you, the principal (the person whose thinking is forged), when the project exists elsewhere and you want to work on it here.
 
-## Steps
+## When to use it
 
-1. Run `/import-project <git-url>` with the address of the
-   repository. The address is required.
-2. The project goes into `projects/<repository name>`. The name is
-   taken from the end of the address, so there is no slug to give. If
-   that directory already exists, the command stops and says so. An
-   existing directory is never overwritten: rename or remove it
-   first.
-3. On your word the command runs `python scripts/forge-clone.py
-   <git-url>`, which clones the repository. Git is reached through
-   this script only.
-4. Read the facts the script reports and the command relays to you.
-5. Select the project with `/forge <slug>`.
+Use it when the project already lives in a git repository and `projects/` does not yet hold it. A project that is new is scaffolded instead, and this command does not do that.
 
-For example, the script's own help shows addresses of the form
-`https://example.com/team/my-idea.git`, which gives the project
-`projects/my-idea`.
+## The command
 
-## What you see
+```
+/import-project <git-url>
+```
 
-After the clone the script reports four facts.
+Replace `<git-url>` with the address of your repository. Claude asks for your word before it runs the clone.
 
-| Fact | What it tells you |
-|---|---|
-| origin | the address the clone came from |
-| last commit | the newest commit: short hash, date and message |
-| identity | the commit identity git resolves for the fresh clone, taken from your own git configuration |
-| ledger | whether the project has a `ledger.md` with a `kind:` header, and the kind if it has |
+## What happens
 
-Two of these need a word.
+1. Claude requires the address. The target directory is `projects/<repository name>`, and the name is taken from the address, so there is no slug to give. If that directory already exists, Claude stops and reports.
 
-- **Identity.** The engine sets no commit identity and carries none.
-  If git resolves none for the clone, the report says so, and the
-  save script will report the missing identity and commit nothing
-  until one is resolved.
-- **Ledger.** A project without a ledger, or with a ledger that has
-  no `kind:` header, was not scaffolded by the forge. That is stated
-  as a fact, not a defect.
+   You should now see the target named, or the stop reported.
+
+2. On your word, Claude runs the clone script, `scripts/forge-clone.py`, with the address. The script clones the repository into the target directory and never overwrites a directory that exists. It sets no commit identity of its own: the identity is the one git resolves from your own configuration.
+
+   You should now see git's clone output and the line "Cloned into projects/<repository name>".
+
+3. Claude relays the facts the script prints:
+   - the origin: the address the clone came from
+   - the last commit: its short hash, date and subject
+   - the identity: the name and e-mail git resolves for the clone; if git resolves none, the save script will report it and commit nothing
+   - the ledger: whether the project has a ledger with a `kind:` header; its absence is a fact, not a defect
+
+   You should now see these four lines, each with its fact.
+
+4. Claude recommends `/forge <slug>` as the first act of work. The engine does not track projects and cannot guess which one you mean, so you select the project by naming it.
+
+   You should now see the recommendation to select the project.
 
 Nothing is written into the imported project by this command.
 
-## Start working
+## What you have afterwards
 
-The engine does not track projects and cannot guess which one you
-mean. The project is selected by naming it: run `/forge <slug>`,
-where the slug is the directory name under `projects/`. That gives
-you the map of where the project stands.
+A clone of your repository in `projects/<repository name>`, with its own history and its origin untouched. Work starts when you select it with `/forge <slug>`, where the slug is the repository name.
 
-If the project was written to older conventions, see the page on
-upgrading the engine for what to check.
+## If something goes wrong
+
+- The directory `projects/<repository name>` already exists: the script stops with "projects/<name> already exists - never overwritten. Rename or remove it first." Rename or remove the existing directory, then run the command again.
+- A repository name cannot be read from the address: the script stops with "Cannot derive a repository name from '<address>'." Give the full address of the repository.
+- The clone fails: the script stops with "Clone of <address> failed." Check the address and your access to the repository.
+- Git is not on your path: the script cannot run, because it needs Python 3.8 or newer and git.
+- The identity line says "none resolved": the clone is fine, but the save script will report the missing identity and commit nothing until your git configuration provides one.
+
+## A worked example
+
+You run:
+
+```
+/import-project <git-url>
+```
+
+Claude asks for your word, you give it, and the script prints, for a repository named `my-idea`:
+
+```
+Cloned into projects/my-idea
+  origin:      <git-url>
+  last commit: <hash> <date> <subject>
+  identity:    <name> <e-mail> (from your git configuration)
+  ledger:      present, kind: thought
+```
+
+Claude then recommends `/forge my-idea`. If the ledger line had said "none - not scaffolded by the forge", the project would still be imported, and that line would be the fact to know about it. The map that `/forge` shows is described in [See where a project stands](see-where-a-project-stands.md). If the project was written to older conventions, [Upgrade the engine](upgrade-the-engine.md) says what to check.
 
 ## See also
 
 - [See where a project stands](see-where-a-project-stands.md): the `/forge` map that follows.
 - [Upgrade the engine](upgrade-the-engine.md): what to check when a project was written to older conventions.
+- [Glossary](../reference/glossary.md): every term of the forge in one line.
+
+Generated on 2026-10-11 for version 5.3 from the files the front-matter names; never edited by hand.

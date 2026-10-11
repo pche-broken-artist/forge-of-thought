@@ -9,7 +9,15 @@ SYNOPSIS
 WHAT IT DOES
     Reads the documentation map (`docs_map.py` is its reader) and, for
     every entry, hashes the entry's text (its `state` line excepted)
-    together with the content of every input file the entry names.
+    together with the content of every input the entry names: a whole
+    file, or the part of a file named after `#` (a section by its
+    heading, an item by its ID), hashed as that part, so that a change
+    elsewhere in the file leaves the page as it is (POS.1450).
+    The generator is hashed with the inputs: the writer's definition
+    (`.claude/agents/docs-writer.md`) and the contract
+    (`.claude/skills/docs-contract/SKILL.md`), so that a change of the
+    rule a page is made by regenerates every page made by the old one;
+    the planner's rules reach the pages through the entries it writes.
     The page that exists at the entry's path carries in its
     front-matter the hash it was made from, `inputs-hash`; the two are
     compared and the entry's `state` is set in the map:
@@ -17,19 +25,22 @@ WHAT IT DOES
         regenerate  a page exists, its hash differs (an input or the
                     entry changed)
         keep        a page exists with the same hash
-    A page under <docs-dir> that no entry names is listed as `remove`
-    (the index `README.md` excepted). The state is computed, never
-    judged: a page whose inputs did not change is not regenerated.
+    A page under <docs-dir> that no entry names, and the page of an
+    entry the planner marked `remove`, are listed as `remove` (the
+    index `README.md` excepted); such an entry keeps its state and
+    gets no task. The state is computed, never judged: a page whose
+    inputs did not change is not regenerated.
 
     For every `new` or `regenerate` entry one task file is written to
-    <tmp-dir>: the engine root, the page's path, the date, the hash
-    the page is to carry, the entry verbatim and the titles of the
-    pages it links to. The task is a `docs-writer` agent's whole
+    <tmp-dir>: the engine root, the page's path, the date, the version
+    the page is made for (the owning project's intent beside the map),
+    the hash the page is to carry, the entry verbatim and the titles
+    of the pages it links to. The task is a `docs-writer` agent's whole
     prompt (`.claude/skills/document/SKILL.md`, step 4).
 
-    An input the map names and the disk does not have is reported and
-    hashed as missing; the page is regenerated and its writer will
-    report the gap.
+    An input the map names and the disk does not have, a file or a
+    part, is reported and hashed as missing; the page is regenerated
+    and its writer will report the gap.
 
 WHAT IT NEEDS
     Python 3.8 or newer. `docs_map.py` beside it. Nothing else.
@@ -59,6 +70,10 @@ STATE_RE = re.compile(r"^- state:\s*.*$")
 HASH_RE = re.compile(r"^inputs-hash:\s*([0-9a-f]+)\s*$", re.M)
 
 
+GENERATOR = (".claude/agents/docs-writer.md", ".claude/skills/docs-contract/SKILL.md")
+ENGINE = Path(__file__).resolve().parent.parent
+
+
 def entry_hash(entry, root):
     h = hashlib.sha256()
     for line in entry["lines"]:
@@ -66,15 +81,19 @@ def entry_hash(entry, root):
             continue
         h.update(line.encode("utf-8"))
         h.update(b"\n")
+    for rel in GENERATOR:
+        h.update(f"--- generator {rel}\n".encode("utf-8"))
+        h.update((ENGINE / rel).read_text(encoding="utf-8").encode("utf-8"))
     missing = []
-    for rel in docs_map.input_paths(entry):
-        p = root / rel
-        h.update(f"--- {rel}\n".encode("utf-8"))
-        if p.is_file():
-            h.update(p.read_bytes())
+    for rel, part in docs_map.input_parts(entry):
+        name = rel if part is None else f"{rel}#{part}"
+        h.update(f"--- {name}\n".encode("utf-8"))
+        text = docs_map.part_text(root, rel, part)
+        if text is not None:
+            h.update(text.encode("utf-8"))
         else:
             h.update(b"<missing>")
-            missing.append(rel)
+            missing.append(name)
     return h.hexdigest()[:16], missing
 
 
@@ -99,7 +118,7 @@ def set_state(lines, state):
     return out
 
 
-def task_text(entry, root, docs_dir, date, digest, titles):
+def task_text(entry, root, docs_dir, date, version, digest, titles):
     rel = entry["path"][len("docs/"):]
     page = (docs_dir / rel).resolve()
     body = "\n".join(entry["lines"]).rstrip() + "\n"
@@ -109,6 +128,7 @@ def task_text(entry, root, docs_dir, date, digest, titles):
         f"Target root (input paths are relative to it): `{root}`.\n"
         f"Page to write: `{page}` (this is `{entry['path']}`; relative links are computed from that place).\n"
         f"Date: {date}.\n"
+        f"Version the page is made for (the `version` of its front-matter): {version or 'none'}.\n"
         f"inputs-hash to carry in the front-matter, exactly: {digest}\n\n"
         f"Your entry from the map, verbatim:\n\n{body}\n"
         f"Titles of the pages your entry links to, to cite them by:\n\n{tl}\n\n"
@@ -136,12 +156,19 @@ def main(argv):
     for old in tasks_dir.glob("*.md"):
         old.unlink()
     titles = {e["path"]: e["fields"].get("title", "").strip() for e in entries}
+    version = docs_map.intent_version(map_path)
 
     counts = {"new": 0, "regenerate": 0, "keep": 0}
     all_missing = []
+    marked = []  # pages of the entries the planner marked `remove`
     new_lines = text.splitlines()
     # rebuild the map text entry by entry, replacing only the state line
     for e in entries:
+        if e["fields"].get("state", "").strip() == "remove":
+            page = docs_dir / e["path"][len("docs/"):]
+            if page.is_file():
+                marked.append(page.as_posix())
+            continue
         digest, missing = entry_hash(e, root)
         all_missing += [(e["path"], m) for m in missing]
         rel = e["path"][len("docs/"):]
@@ -150,7 +177,7 @@ def main(argv):
         counts[state] += 1
         if state != "keep":
             name = rel.replace("/", "-").replace(".md", "") + ".md"
-            (tasks_dir / name).write_text(task_text(e, root, docs_dir, a.date, digest, titles),
+            (tasks_dir / name).write_text(task_text(e, root, docs_dir, a.date, version, digest, titles),
                                           encoding="utf-8", newline="\n")
         # locate the entry's lines in the file and replace the state line
         start = new_lines.index(e["lines"][0])
@@ -159,12 +186,12 @@ def main(argv):
     map_path.write_text("\n".join(new_lines) + "\n", encoding="utf-8", newline="\n")
 
     mapped = {e["path"] for e in entries}
-    remove = sorted(
+    remove = sorted(set(marked) | {
         (docs_dir / p.relative_to(docs_dir)).as_posix()
         for p in docs_dir.rglob("*.md")
         if p.name != "README.md"
         and ("docs/" + p.relative_to(docs_dir).as_posix()) not in mapped
-    )
+    })
     print(f"entries {len(entries)}: new {counts['new']}, regenerate {counts['regenerate']}, "
           f"keep {counts['keep']}; remove {len(remove)}; tasks written to {tasks_dir}")
     for r in remove:

@@ -14,7 +14,9 @@ WHAT IT DOES
         no page lies in <docs-dir> that the map does not name (the
         index `README.md` excepted);
       - every relative link to a `.md` file resolves;
-      - no long dash (em or en) on any page;
+      - no long dash (em or en) in the prose of any page; a code span
+        and a fenced block are exempt, since a literal is copied as
+        its owner has it;
       - every page opens with a front-matter;
       - no instance fact: the values of `CLAUDE.local.md` at the
         engine root (every word of four letters or more in a value,
@@ -66,6 +68,7 @@ GENERIC = [
     re.compile(r"/Users/|/home/"),
 ]
 DASH_RE = re.compile("[—–]")
+CODE_SPAN_RE = re.compile(r"`[^`]*`")
 LINK_RE = re.compile(r"\]\(([^)#]+\.md)(#[^)]*)?\)")
 URL_RE = re.compile(r"https?://\S+")
 
@@ -148,8 +151,12 @@ def main(argv):
         rel = p.relative_to(docs_dir).as_posix()
         if not text.startswith("---\n"):
             failures.append(f"{rel}: no front-matter")
+        fenced = False
         for i, line in enumerate(text.splitlines(), 1):
-            if DASH_RE.search(line):
+            if line.lstrip().startswith("```"):
+                fenced = not fenced
+                continue
+            if not fenced and DASH_RE.search(CODE_SPAN_RE.sub(" ", line)):
                 failures.append(f"{rel}:{i}: long dash")
             # a published address is public by nature: the values of
             # CLAUDE.local.md are not looked for inside a URL, the

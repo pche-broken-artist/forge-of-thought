@@ -1,7 +1,7 @@
 ---
 project: forge
 directory: sources
-updated: 2026-09-28
+updated: 2026-10-11
 ---
 
 # Index — sources of Forge of Thought
@@ -38,3 +38,9 @@ to its own 00-INDEX.md — two levels, never deeper. -->
 - **Origin:** Author and date not stated in the file; its front-matter names the reviewed document and the previous review. Found in `sources/` and registered on the principal's command on 28 September 2026.
 - **Role:** A review, like the one before it: read and weighed, the principal deciding by his own judgement what of it is taken.
 - **Use for:** To be looked at against `00-brief-elicitation.md` 0.4 and used as the principal sees fit.
+
+### `docs-audit-2026-10-11.md`
+- **What:** A structured record of one audit of the generated documentation in `docs/` against the forge's own intent (POS.1450, POS.1470, POS.0950) at commit `04e332a`: a verdict with a judgement by section, eighteen measurements (M.01–M.18) of the tree, forty-six findings (F.01–F.46) by severity with evidence, where each is to be mended and what was not re-checked, seven contradictions inside the owner files (C.01–C.07), eight things that work (W.01–W.08) and what was not verified. Decides nothing and changes nothing.
+- **Origin:** Written by Claude on 11 October 2026 in a session outside the forge, from a read-only clone, through six isolated read-only agents, one per part of `docs/`, plus a mechanical measuring pass; registered here the same day.
+- **Role:** An audit of the documentation by a separate agent that went through the whole of `docs/` without the context of this forge: the basis for deciding how the documentation is to be improved.
+- **Use for:** Deciding, finding by finding, what of the documentation and of its generator is changed (F.01–F.46, by walkthrough into the intent and the documentation's definitions); settling the contradictions inside the owner files before a regeneration (C.01–C.07); the measurements as the baseline a later audit is compared with (M.01–M.18).

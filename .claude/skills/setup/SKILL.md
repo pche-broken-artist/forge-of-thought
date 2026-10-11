@@ -50,11 +50,13 @@ speak whatever language the user speaks to you.
 2. **`.claude/settings.local.json`**.
    - If it already exists: report the model it names and do not touch
      it.
-   - Otherwise create it with `{ "model": "fable" }` and tell the
-     user in one sentence: the session is set to Fable — the
-     strongest available model, which the whole forge including the
-     blind reviewers runs on — and it can be changed at any time with
-     `/model` or by editing this file. A notice, not a question.
+   - Otherwise create it with `{ "model": "fable" }`, the strongest
+     model, and tell the user in one sentence: the session is set to
+     Fable, which the whole forge including the blind reviewers runs
+     on, and it can be changed at any time with `/model` or by
+     editing this file. Where the account does not offer Fable
+     (`/model` does not list it), write the strongest model it lists
+     and say which. A notice, not a question.
 3. Finish by pointing at the next step from the Quickstart: start a
    new project with `/new-project <slug>`, or bring an existing one
    with `/import-project <git-url>`.

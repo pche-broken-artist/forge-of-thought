@@ -1,7 +1,9 @@
 """
 forge_repos.py - what the forge-* git scripts share: the engine root,
-the git check, the list of repositories to visit, running git, and
-coloured output. Not a command.
+the git check, the list of repositories to visit, running git, the
+state of a repository against its origin (`remote_state`: up to date,
+behind, ahead, diverged, no origin; POS.1490) and coloured output. Not
+a command.
 
 The engine root is the parent of the directory this file lies in
 (`scripts/`). A project is `projects/<slug>`; it is a repository when

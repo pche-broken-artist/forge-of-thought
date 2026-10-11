@@ -359,7 +359,8 @@ LICENSE                    # CC BY 4.0 — the engine is published
                            # under attribution
 scripts/                   # forge-save / forge-pull / forge-status
                            # / forge-clone / forge-branch (git),
-                           # doc2md (document →
+                           # forge-history (the history of one
+                           # item), doc2md (document →
                            # Markdown), md2pptx (deck render →
                            # PowerPoint), md2docx (render → Word),
                            # each by pandoc or by a model,
@@ -522,8 +523,9 @@ into the item; the record is written in the same step as the change,
 and the reflection before a write shows the new wording and the
 records, `Was` included. What the user must do after a change is
 written with it, in `Action`. Before proposing a change to an item,
-Claude searches the history and its archive for the item's ID; the
-history is searched, never loaded whole. `last_change` is derived
+Claude reads its history through `/history <ID>`
+(`.claude/skills/history/SKILL.md`); the history is searched by its
+script, never loaded whole. `last_change` is derived
 from the records of the newest version by the write step that
 appends them, never by hand. The log is the single primary: the
 commit messages `/save` and `/release` draft and the release notes
@@ -576,11 +578,14 @@ and carry no priorities; the rule set is its definition's
 (`.claude/skills/forge/states/assignment.md`, Requirement style).
 
 ## Isolated reviewers
-All run as isolated subagents seeing the project's documents only,
-never the working conversation, on the session model (`model:
-inherit` — the whole forge runs on one model; speed is bought with
-context, never with a weaker reviewer). One shape, strictly separate
-jobs, each with its own output (below). All
+All run as isolated subagents that never see the working
+conversation: a reviewer reads the project's documents and the
+engine's rules, carries what every subagent carries (this file and
+the instance file, POS.0950), and a challenger may search the web;
+on the session model (`model: inherit` — the whole forge runs on one
+model; speed is bought with context, never with a weaker reviewer).
+One shape, strictly separate jobs, each with its own output (below).
+All
 are invoked by hand and settled by walkthrough; the reports are
 immutable and dated. No reviewer runs on Claude's own judgement;
 what a save and a release run is theirs to say (Persistence). The
@@ -675,6 +680,7 @@ What a command does in full is its skill's
 | `/challenge [persona] [artefact] [slug]` | run a challenger persona against the substance; bare = the persona roster |
 | `/research <topic> [slug]` | best-practices research into research/, indexed |
 | `/ledger [slug]` | state report from the ledger |
+| `/history <ID> [slug]` | the history of one item: its wording today, its records, the archive rows and the citations, by a script; Claude adds a few sentences |
 | `/check [check] [slug]` | run a check on a project or on the engine; bare = the check roster |
 | `/save [slug] [-m "message"] [--tag name]` | save one repository, or every one with changes |
 | `/release [slug] [-m "message"] [--tag name]` | release one repository from `main` |

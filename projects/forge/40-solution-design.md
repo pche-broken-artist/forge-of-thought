@@ -1,8 +1,8 @@
 ---
-version: 0.9
+version: 0.13
 date: 2026-10-11
 status: draft
-last_change: 0.9 (2026-10-11): /pull and /end (SOL.0180); the state against the origin in forge-status --remote and what forge-pull prints (SOL.0510), from POS.1490 and POS.1500.
+last_change: 0.13 (2026-10-11): the generator hashed with the inputs, from the comparison against the audit's measurements (SOL.0460).
 project: forge
 audience: whoever realises the solution, a person or an agent
 ---
@@ -307,6 +307,29 @@ direction, a boundary kept by hand or an order of work.
   Decided 2026-10-11. Where: `.claude/skills/pull/SKILL.md`,
   `.claude/skills/end/SKILL.md`, `.claude/skills/forge/SKILL.md`.
 
+- **SOL.0630 The history of an item.** `/history <ID> [slug]`
+  (`.claude/skills/history/SKILL.md`) is a skill Claude may start, a
+  report (SOL.0110): it runs `scripts/forge-history.py <ID> <slug>` and
+  prints what the script printed, then adds at most three sentences of
+  its own, marked as such: what the item says today, how it moved, what
+  hangs on it. The script, read-only, gathers from `projects/<slug>` the
+  item's wording today (the reader of a part shared with the
+  documentation scripts, `docs_map.part_text`), the records of every
+  history log whose subject names the ID, oldest first, the records of
+  other items that mention it in their reason, Action or Was, the rows
+  of the archives that mention it, and every other citation in the
+  project as file and line; the pages, the map, the renders and the
+  resources are left out as outputs and inputs. It accepts a short
+  form of the ID (`pos580`), prints one timeline of archive rows,
+  records and mentions with version and date, wrapped, a Was
+  shortened to its first sentence unless `--full` is given.
+  Realises: POS.1510,
+  POS.0310, POS.1090. Choice: a script with a thin skill against a skill
+  alone: the gathering is deterministic and was done by hand before,
+  differently every time; the cost is one more script. Decided
+  2026-10-11. Where: `.claude/skills/history/SKILL.md`, `scripts/forge-
+  history.py`, `scripts/docs_map.py`.
+
 ### The documents of a project
 - **SOL.0200 The history log.** A record is written as a list item,
   in the shape `templates/history.md` owns; its author is the third
@@ -561,24 +584,41 @@ direction, a boundary kept by hand or an order of work.
   (`.claude/skills/document/SKILL.md`) runs two agents and three scripts,
   asks nothing. The planner `docs-planner` (session model) reads the
   target on disk and writes the map `docs-map.md` beside the ledger of
-  the owning project, kind `map`: one entry per page under its path,
-  with title, kind, reader, what the page says, its exact inputs as
-  whole files, the pages it links to with a title and a sentence each,
-  what it must not say, `made: mirrored | derived` with the evidence for
-  a derived page, and the state new / regenerate / keep / remove. The
-  writer `docs-writer` makes one page from its entry alone, handed to
-  it as a task file in the engine's `tmp/` that it reads first, in the fixed
-  page shape of its definition, on a faster model for a mirrored page
-  and the session model for a derived one, chosen by the entry's `made`.
-  The script `scripts/docs-index.py` derives the index `docs/README.md`
-  from the map with the version of the owning project's intent; a run's
-  state is computed from the content hashes of each entry's inputs and
-  the pages are scanned for broken links, long dashes and instance facts
-  before they are kept. Pages, kind `page`, live in `docs/` of the
-  engine root or of the project, the map never there. The ledger's
-  Renders table carries the index with the map as its input. The pinned
-  facts the planner reads as an owner are the section "Pinned facts (not
-  rendered)" of the project's readme recipe.
+  the owning project, kind `map`: a Paths section with three to five
+  pages per reader in reading order, then one entry per page under
+  its path, with title, one line for the index, kind, reader, what the
+  page says, its exact inputs as files or as named parts of files (a
+  section by its heading, an item by its ID, a block by its bold
+  label), the pages it links to with a title and a sentence each,
+  what it must not say, `made:
+  mirrored | derived` with the evidence for a derived page, and the
+  state new / regenerate / keep / remove. The writer `docs-writer`
+  makes one page from its entry alone, handed to it as a task file in
+  the engine's `tmp/` that it reads first, in the fixed page shape of
+  its definition with one outline per kind of page (a how-to, an add
+  page, an artefact page, a concept page, a roster page) and the
+  version the page was made for in its front-matter, on a faster
+  model for a mirrored page and the session model for a derived one,
+  chosen by the entry's `made`. The two agents share their conduct
+  through the contract skill `docs-contract`, as the reviewers do,
+  which owns beside the isolation the voice and the sentence of a page
+  (one voice, one rule per sentence, no image in place of a mechanism,
+  a literal copied as its owner has it) and what never reaches a page
+  (a real project's content, an unrecorded reason, a date of history,
+  the generator speaking of itself). The script `scripts/docs-index.py`
+  derives the index `docs/README.md` from the map, the reader paths as
+  links and one line per page, with the version of the owning
+  project's intent; a run's state is computed by `scripts/docs-state.py`
+  from the content hashes of each entry's inputs, a part hashed as
+  that part, and of the generator (the writer's definition and the
+  contract), through the one reader `scripts/docs_map.py`; the pages
+  are scanned by `scripts/docs-check.py` for broken links, long dashes
+  in prose and instance facts before they are kept. Pages, kind
+  `page`, live in `docs/` of the engine root or of the project, the
+  map never there. The ledger's Renders table carries the index with
+  the map as its input. The pinned facts the planner reads as an
+  owner are the section "Pinned facts (not rendered)" of the
+  project's readme recipe.
   Realises: POS.1450, POS.1080, POS.0930. Choice: a command of its own
   against `/render`: a page has no recipe to iterate, the map is
   generated. The index named `README.md` against `index.md`: GitHub
@@ -587,13 +627,25 @@ direction, a boundary kept by hand or an order of work.
   understand it. The pinned facts in the recipe against a file of their
   own: a file would need a kind of its own, and the recipe is read by
   both the README and the planner today; the cost is that a render's
-  tool carries facts of the project. Built 2026-10-09 whole: the
-  skill, the three scripts and the two agents; the first run of
-  `/document` the same day regenerated 83 pages and the index, three
-  pages once more after the check named a failure in each. The two
-  agents share their conduct through the contract skill
-  `docs-contract`, as the reviewers do; the map's shape is the
-  skeleton `templates/docs-map.md`. Where:
+  tool carries facts of the project. Inputs by a named part against
+  hashing a file's body without its front-matter: the body changes at
+  every round too, and a page citing one position would still be
+  regenerated for every other; the cost is that a moved heading or a
+  renumbered ID loses the part and regenerates the page, the safe
+  side. The generator hashed with the inputs against a switch that
+  forces a run: the state stays computed, never judged; the cost is
+  that a change of the writer's definition or the contract
+  regenerates every page. The outlines per kind and the one-line field of the index
+  against trusting the writer's judgement: 106 different headings on
+  24 how-to pages and index entries of 187 words showed the judgement
+  does not converge (the documentation audit of 2026-10-11,
+  `projects/forge/sources/docs-audit-2026-10-11.md`). Built
+  2026-10-09 whole: the skill, the three scripts and the two agents;
+  the first run of `/document` the same day regenerated 83 pages and
+  the index, three pages once more after the check named a failure in
+  each; redrawn 2026-10-11 from the audit and run the same day: 86
+  pages, three new, four regenerated once after the check. The map's
+  shape is the skeleton `templates/docs-map.md`. Where:
   `.claude/skills/document/SKILL.md`,
   `.claude/skills/docs-contract/SKILL.md`, `templates/docs-map.md`,
   `.claude/agents/docs-planner.md`,

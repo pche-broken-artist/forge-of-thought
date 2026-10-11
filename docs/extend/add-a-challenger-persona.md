@@ -1,93 +1,101 @@
 ---
-generated: 2026-10-10
+generated: 2026-10-11
+version: 5.3
 made: mirrored
-inputs-hash: fd922b1578b496b1
+inputs-hash: 577d6ed44c4de220
 inputs:
   - templates/challenger-definition.md
   - .claude/skills/challenger-contract/SKILL.md
   - .claude/skills/challenge/SKILL.md
-  - CLAUDE.md
+  - CLAUDE.md#Isolated reviewers
 ---
 
 # Add a challenger persona
 
-This page is for the extender who wants a new challenger persona: a
-further reviewer of the substance of the thinking. It says when a
-persona is worth adding, what its one file holds, and how to see that
-it works.
+This page says how a new challenger persona is added to the forge, and it is for the extender. A challenger persona is one isolated reviewer (a subagent, that is a helper Claude starts in a context of its own) that tests the substance of the principal's thinking, the principal being whoever's thinking is being forged. A persona is one agent file, written from a template.
 
 ## Before you start
 
-A persona is added only by the principal's decision, and only where
-what it would find genuinely differs from the personas that exist.
-Two personas that would say the same thing in different words are
-noise. Read the existing roster first (see the list of personas
-linked below) and ask what blind spots the new one would see that no
-other does.
+- A persona is added only by the principal's decision. It is added only where the blind spots it hunts genuinely differ from those of the personas that exist. The list of those is in [Challenger personas](../reference/challenger-personas.md).
+- What every persona shares is owned by the challenger's contract, not by the persona file. Read what the contract owns in [The challenger](../about/the-challenger.md).
+- The addition is recorded and released as any change of the forge. How that goes is in [Make a change to the forge](how-a-change-is-made.md).
+- Terms of the forge are explained in the [Glossary](../reference/glossary.md).
 
-## What a persona costs
+## The files
 
-One file and no edits. A persona is an agent file,
-`.claude/agents/challenger-<persona>.md`, made from the skeleton
-`templates/challenger-definition.md`. The `/challenge` command does
-not change: the roster is a scan of the files matching
-`.claude/agents/challenger-*.md`, so the new file is found by being
-there.
+A persona costs one file and no edits elsewhere.
+
+- Create `.claude/agents/challenger-<persona>.md` from `templates/challenger-definition.md`.
+- The command `/challenge` does not change. The roster of personas is made by scanning the files `.claude/agents/challenger-*.md`, so the new file is found by itself.
 
 ## Steps
 
-1. Copy the skeleton to `.claude/agents/challenger-<persona>.md`,
-   with the persona's name as the suffix.
+1. Copy `templates/challenger-definition.md` to `.claude/agents/challenger-<persona>.md`. The name of the persona is the suffix of the file name.
 2. Fill the front-matter:
    - `name`: `challenger-<persona>`.
-   - `description`: one line saying who this persona is. The
-     skeleton's wording is `Challenger persona "<persona>" - <who
-     this is, in one line>. Challenges the substance of the
-     principal's thinking. Not a document auditor.` This line is
-     what the roster shows, so it is how the persona is chosen.
-   - `tools`: the skeleton's list, which includes web search and
-     fetch, because a persona grounds its challenges in how the
-     world actually works.
-   - `model: inherit`: the whole forge runs on the one session
-     model.
-   - `skills: challenger-contract`: the shared behaviour is loaded
-     from there.
-3. If the description contains a colon followed by a space, put the
-   whole description in single quotes (an apostrophe inside is
-   doubled). Otherwise the agent does not register.
-4. Write the `## Lens` section, in two parts and nothing else:
-   - **Who you are.** A role of its own, such as a CTO or a
-     strategist, never a mirror of the principal. It gives the
-     register and the vantage point from which the persona reviews
-     the thinking as an equal, with no stake in the principal being
-     right.
-   - **What to go after.** The blind spots this persona exists to
-     find, as a list of concrete angles.
-5. Delete the skeleton's comments from the file.
+   - `description`: one line saying who this persona is, then that it challenges the substance of the principal's thinking and is not a document auditor. The roster shows this line, and a recommendation of a fit is made from it.
+   - `tools`: as the template has them, web search included, because a challenger may search the web.
+   - `model`: `inherit`. The whole forge runs on one model.
+   - `skills`: `challenger-contract`, the one contract every persona carries.
+3. If the description holds a colon followed by a space, put the whole description in single quotes. An apostrophe inside it is doubled. Otherwise the agent does not register.
+4. Write the `## Lens` section, the only section that is the persona's own. It has two parts:
+   - Who you are: a role of its own, never a mirror of the principal. It gives the register and the vantage point from which the persona reviews the thinking as an equal, with no stake in the principal being right.
+   - What to go after: the blind spots this persona exists to find, as a list of concrete angles.
+5. Delete the comment of the template from the file.
+6. Restate nothing of the contract in the Lens section. The subject, the way of working, the severity marks, the report shape and the ledger step belong to the contract. A Lens section may narrow what is read or make a shared rule stricter. It never renames, drops or duplicates a shared rule or field.
 
-## What stays out of the file
+You should now see one new file with the front-matter and the Lens section and nothing else.
 
-Nothing of the contract is restated. The contract skill owns the
-subject, the way of working, the severity marks, the report shape and
-the ledger step for every persona. A Lens section specialises the
-contract and never replaces it: it may narrow what is read or make a
-shared rule stricter, but it never renames, drops or duplicates a
-shared rule or field. If the protocol should change, it changes in
-the contract alone.
+## Prove it
 
-## Check that it works
+Run the check of the engine:
 
-- Run `/check engine`, the mechanical check of the engine's
-  conformance with its conventions.
-- Run bare `/challenge`: the new persona appears in the roster with
-  its description.
-- Run `/challenge <persona>` on a target in a project. The persona
-  writes its report to `challenges/` and adds its challenges to the
-  project's ledger, as the other personas do.
+```
+/check engine
+```
+
+You should now see the check report no finding about the new file. A run that finds nothing files nothing.
+
+Then run the persona on a target:
+
+```
+/challenge <persona> <artefact> <project-slug>
+```
+
+You should now see Claude invoke the `challenger-<persona>` subagent on the project, a file `challenges/YYYY-MM-DD-challenge-<persona>.md` written, and the new challenges added to the ledger (the single table of state of the project) as open. Bare `/challenge` lists the roster, and the new persona stands in it.
+
+## Record and release
+
+The new file is saved and released as any change of the forge, by the steps of [Make a change to the forge](how-a-change-is-made.md).
+
+## A worked example
+
+The persona is named `<persona>`. The file `.claude/agents/challenger-<persona>.md` has this shape, the words in angle brackets being placeholders:
+
+```
+---
+name: challenger-<persona>
+description: Challenger persona "<persona>" - <who this is, in one line>. Challenges the substance of the principal's thinking. Not a document auditor.
+tools: Read, Edit, Glob, Grep, WebSearch, WebFetch, Write
+model: inherit
+skills:
+  - challenger-contract
+---
+
+## Lens
+
+<Who you are: the role of this persona and the vantage point from
+which it reviews the thinking as an equal.>
+
+<What to go after: a list of concrete blind spots this persona exists
+to find.>
+```
 
 ## See also
 
-- [About the challenger](../about/the-challenger.md): what the
-  contract owns.
-- [Challenger personas](../reference/challenger-personas.md): the
-  personas that exist.
+- [Make a change to the forge](how-a-change-is-made.md): proving, recording and releasing the change.
+- [The challenger](../about/the-challenger.md): what the contract owns.
+- [Challenger personas](../reference/challenger-personas.md): the personas that exist.
+- [Glossary](../reference/glossary.md): every term of the forge in one line.
+
+Generated on 2026-10-11 for version 5.3 from the files the front-matter names; never edited by hand.

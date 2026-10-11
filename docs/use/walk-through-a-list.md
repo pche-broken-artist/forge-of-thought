@@ -1,106 +1,109 @@
 ---
-generated: 2026-10-10
+generated: 2026-10-11
+version: 5.3
 made: mirrored
-inputs-hash: c60b38b55b9dda8b
+inputs-hash: 96780f82f777c81f
 inputs:
   - .claude/skills/walkthrough/SKILL.md
-  - CLAUDE.md
 ---
 
 # Walk through a list
 
-This page is for the person who works a list of items with Claude:
-critique findings, challenges, differences between two requirement
-sets, open threads, open questions, proposals from a source. It says
-how the conversation runs, what each item shows you and how your
-answers reach the files.
+A walkthrough is the way any list that needs your decision is worked: one item per message, in order of weight, each closed with a verdict you give. This page is for you, the principal (the person whose thinking is being forged), when Claude puts a list of findings, challenges, threads or open questions in front of you. Every term of the forge is in one line in the [Glossary](../reference/glossary.md).
 
-## What a walkthrough is
+## When to use it
 
-Whatever produces a list that needs your decision, the list is worked
-the same way, and Claude offers a walkthrough at the end of the
-command that made it. You see one item per message, in order of
-weight. You answer it, and only then does the next item come.
+A walkthrough runs whenever a list of items needs your decision. The list may come from a critique, a challenge, a check, a comparison of two requirement sets, the open threads, open questions or the proposals of a source. It makes no difference which command produced the list. Claude also offers a walkthrough at the end of such a command.
 
-Claude never puts a table asking for every verdict at once in front
-of you, and never a questionnaire of several questions. A check
-whether Claude has understood an item is an item of its own.
+The elicitation interview, in which Claude draws out by questions what you have not yet put into words, runs the same way.
 
-## What an item shows you
+## What you do
 
-Each item carries, in this order:
+You answer each item with one verdict. The closing line of every item is:
 
-1. What the item says and the situation or evidence behind it, in a
-   few sentences.
-2. What would change and for whom.
-3. The recommendation with its reason. For accept, it gives the
-   concrete text the document would receive, not a description of the
-   edit.
+```
+(a)ccept / (m)odify / (r)eject / (p)ark
+```
 
-A heading with a one-sentence reason is a label, not an item.
+You may answer with a single letter, `a`, `m`, `r` or `p`, when that letter is your whole message. Or you may type the word. Nothing else in the forge has a letter: `write` and `obsolete` are typed in full, and so is every command.
 
-## How you answer
+## What happens
 
-Every item ends in one proposition: it states what changes, or that
-nothing changes, and what is recorded. Where it goes against what the
-reviewer suggested, it says so. Accept always means yes to exactly
-what is in front of you. The message closes with this line:
+1. Claude puts one item in front of you and stops.
 
-`(a)ccept / (m)odify / (r)eject / (p)ark`
+   An item carries, in this order:
+   - what it says, with the situation or evidence behind it, in a few sentences;
+   - what would change, and for whom;
+   - the recommendation with its reason and, for `accept`, the concrete text the document would receive, never a description of the edit.
 
-- accept: agreed, the text goes in as shown.
-- modify: a discussion opens on the item, and the solution found is
-  put forward for you to accept. If you answer `m` alone, Claude asks
-  what you want changed.
-- reject: not agreed, nothing changes, your reason is recorded.
-- park: not now. The item waits and comes back.
-- obsolete: no longer relevant, with a note why. It is a fifth
-  verdict, not on the closing line.
+   The item ends in one proposition that says what changes, or that nothing changes, and what is recorded. Where the proposition goes against the reviewer's suggestion, it says so. `accept` always means yes to what is in front of you.
 
-You may answer with a single letter, `a`, `m`, `r` or `p`, when that
-letter is your whole message, or with the word. No other word of the
-forge has a letter: `write`, `obsolete` and every command are typed in
-full.
+   You should now see one item, the verdict line, and no second item.
 
-Claude's next message opens with one line naming your verdict in full
-and saying what it does, then carries the next item and nothing else.
+2. You give your verdict.
 
-A question from you keeps the item open until you close it. An open
-question is not a proposition, so such a message closes with the
-question alone. Declining a recommendation is respected: Claude does
-not argue it again without new facts.
+   - `accept`: agreed, the text goes in as shown.
+   - `modify`: a discussion opens on the item, and the solution you find together is put forward to be accepted. After a bare `m`, Claude asks what you want changed.
+   - `reject`: not agreed, nothing changes, and your reason is recorded.
+   - `park`: not now. The item waits and comes back.
+   - `obsolete`: no longer relevant, with a note why. It is a fifth verdict, not shown on the line.
 
-## How the verdicts are written
+   You should now see one line that names your verdict in full and says what it does.
 
-Nothing is written item by item. Your verdicts are carried in the
-conversation and written once, at the end of the round. When the round
-looks finished, `write` is added to the verdict line. When you say
-`write`, Claude reflects the whole round back to you first and, on
-your yes, writes everything as one round. Until then, what you have
-agreed is nowhere yet, and Claude says so.
+3. A question from you keeps the item open.
 
-What each verdict records:
+   You may ask instead of deciding. Claude answers, and the item stays open until you close it. Claude does not move to the next item while it is open. A question that is only a check whether Claude has understood an item is an item of its own.
 
-- accept writes what the command that produced the list says (for a
-  critique, a challenge or a check, that command's own way; for a
-  source's proposals, a position with its provenance).
-- reject records a decision with your reason, in the state `rejected`,
-  and the reviewer does not raise the item again. A source's proposal
-  that you reject becomes a rejected direction in the intent.
-- park sets the state `parked`.
-- obsolete sets the state `obsolete`, with what made the item moot.
+   You should now see the same item still open, with your question answered.
 
-States in the ledger change only, never delete.
+4. The next item follows.
 
-## The interview runs the same way
+   The message opens with the one-line acknowledgement and carries the next item, nothing else. You will never be shown a table that asks for every verdict at once, or a questionnaire of several questions. A heading with a one-sentence reason is a label, not an item.
 
-The elicitation interview, where Claude draws out what you have not
-yet put into words, follows the same rhythm: one question per message,
-and your answer acknowledged before the next question. If you send one
-thought in several pieces, Claude asks nothing until your closing
-word.
+   You should now see the next item, lighter in weight than the last.
+
+5. When the round looks finished, `write` is added to the verdict line. Type `write` in full.
+
+   Claude reflects the whole round back to you. On your yes it writes everything carried as one round.
+
+   You should now see the files and sections that were written, named.
+
+## What you have afterwards
+
+Verdicts are carried in the conversation and written once, at the round's end. Until `write`, everything agreed is nowhere yet, and Claude says so.
+
+What each verdict leaves behind, wherever the list came from:
+
+- `accept` writes what the producing command says: a critique, a challenge or a check files its findings in its own way; for the proposals of a source it is a position with its provenance.
+- `reject` writes a decision record with your reason, the item's state becomes `rejected`, and the reviewer does not raise it again. A source's proposal that you reject becomes a rejected direction in the intent.
+- `park` sets the state `parked`.
+- `obsolete` sets the state `obsolete`, with what made the item moot.
+
+States in the ledger (the single record of state of a project) only change; nothing is deleted.
+
+## If something goes wrong
+
+- You want to decide several items at once: it is not offered. Take them one by one; `park` is a legitimate verdict, not a failure.
+- You disagree with a recommendation: say `reject` or `modify`. A declined recommendation is not argued again unless there are new facts.
+- Claude asks an open question and gives no proposition: answer it. Claude turns a question into a proposition where it can, never by filling a gap with an assumption.
+- You send a thought in several pieces: Claude asks nothing until your closing word.
+
+## A worked example
+
+Claude shows one finding from a list, with a placeholder name:
+
+> Finding 3 of 7 (the heaviest left). The page on `example-topic` says the review is optional in one section and required in another. A reader cannot tell which holds. This would change one sentence in section 2, for everyone who reads the page. I recommend the required reading, because the other sections assume it. For `accept`, the sentence in section 2 becomes: "The review is required before a release."
+>
+> Proposition: the sentence in section 2 is replaced as shown; the finding is recorded as resolved.
+>
+> (a)ccept / (m)odify / (r)eject / (p)ark
+
+You answer `a`. Claude replies with one line, "Accepted: the sentence in section 2 is replaced as shown, to be written at the end of the round", and then shows finding 4. If you had answered `r` and given a reason, the reason would be recorded as a decision and the finding would not come back.
 
 ## See also
 
 - [Verdict words](../reference/verdict-words.md): the words and letters, exactly.
-- [About the working methods](../about/working-methods.md): why the one-item rule exists and how a hook holds it.
+- [The working methods](../about/working-methods.md): why the one-item rule exists and how a hook holds it.
+- [Glossary](../reference/glossary.md): every term of the forge in one line.
+
+Generated on 2026-10-11 for version 5.3 from the files the front-matter names; never edited by hand.

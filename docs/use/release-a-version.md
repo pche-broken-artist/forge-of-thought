@@ -1,88 +1,80 @@
 ---
-generated: 2026-10-10
+generated: 2026-10-11
+version: 5.3
 made: mirrored
-inputs-hash: e44842f45035e7b2
+inputs-hash: 0f62d93f65a9eec0
 inputs:
   - .claude/skills/release/SKILL.md
-  - CLAUDE.md
 ---
 
 # Release a version
 
-This page is for the person who wants to release a repository: a
-project, or the engine itself. It says what `/release` does, in what
-order, and where it waits for your word.
+This page is for you when a repository, a project or the engine, has reached a point worth publishing. `/release` checks one repository, regenerates its README and release notes, and then saves it with a release message and, at an approved major version, a tag.
+
+## When to use it
+
+- Use it when the work on `main` is ready to be published as a version.
+- A release is always one repository, never a sweep. Name the repository by its slug (its short name); `forge` means the engine. Without a slug, Claude asks which repository you mean.
+- For a plain save with no checks and no renders, use [Save your work](save-your-work.md).
+
+## The command
 
 ```
-/release [slug] [-m "message"] [--tag name]
+/release my-project -m "release 2.1: the scope is cut to two layers"
 ```
 
-A release is always one repository, never a sweep. Name it by its
-slug (`forge` means the engine); without a slug you are asked which
-repository.
+The slug, `-m` and `--tag` are all optional. Without `-m`, Claude drafts the message itself. A tag other than the one a major proposes is your own request through `--tag`.
 
-## Before anything: the branch
+## What happens
 
-A release runs on `main` only. On any other branch it stops, names the
-branch the repository is on and tells you how to get back
-(`python scripts/forge-branch.py <slug> main`, after saving).
-Merging a branch into `main` is git's business, by hand or by merge
-request, never this command's.
+The release runs on `main` only. Each step below follows the one before it, and the order is fixed.
 
-## The steps, in order
+1. Claude reads the state of the repository. On any other branch it stops, names the branch and says how to get back to `main`.
+   You should now see the repository on `main`, or a stop naming the branch you are on.
+2. Claude runs the checks and reports the result, even when it is clean. For a project these are `light` and `project`. For the engine they are `engine` on the engine itself, and `light` and `project` on its own project. They are launched at once and awaited together. Findings are settled by walkthrough, that is one item per message with the verdicts accept, modify, reject or park. A finding may be parked and the release goes on. The checks run before the renders so that a fix made in the walkthrough is already in what the renders read. See [Check conformance](check-conformance.md).
+   You should now see either the statement that the checks passed or each finding put to you in turn.
+3. Claude offers the `critique essence` review once, in one sentence. It guards what a release publishes against drift of the chain. On your word it runs and its findings are settled by walkthrough. On your no, or your silence, nothing runs.
+   You should now see either the review's findings or the next step, as you chose.
+4. Claude regenerates the README and the release notes from their recipes, unconditionally and with no test of staleness, through `/render`. The two renders are launched at once and awaited together. A recipe that is missing is reported as a finding and the repository is released without that render. Other renders are not regenerated here. See [Renders and recipes](../about/renders-and-recipes.md).
+   You should now see a short summary of what materially changed in the regenerated files. You rule on that change before anything is committed.
+5. Claude reports the age of the documentation: the version in `docs/README.md` against the version of the intent. A repository without `docs/` has none, and that is no finding. Claude offers `/document` in one sentence. On your word it runs before the save, so that the release carries current pages. On your no, or silence, nothing runs. The release never regenerates the documentation on its own. See [Generate the documentation](generate-the-documentation.md).
+   You should now see the documentation's version beside the intent's, or the statement that there is no documentation.
+6. Claude runs `/save` for the repository. The commit message is `release <intent version>: <one line>`, where the line sums up the rounds since the last release, taken from the intent's history. Your `-m` replaces it. For a library, whose history is git, the version is left out and the line says what changed. When the intent's version is an integer, an approved major, Claude proposes the tag `v<major>` and takes it only on your word. If the repository is the engine, Claude first names what the forge's own intent asks a major to pass. That is a reminder on your word, never a gate. See [Versioning and history](../about/versioning-and-history.md) for what a major approves and what its test attests, and [Save your work](save-your-work.md) for the save itself.
+   You should now see the commit and push reported, and the tag where you agreed to one.
 
-1. **The checks.** For a project they are `light` and `project`; for
-   the engine, `light`, `engine` and `project`, the last two on the
-   forge's own project. They are launched at once and awaited
-   together. The result is reported to you always, even when clean.
-   Findings are settled by walkthrough, one at a time, and a finding
-   may be parked: the release then goes on. Nothing is fixed silently,
-   and the release does not go on with an unsettled finding. The checks
-   run before the renders so that a fix made in the walkthrough is
-   already in what the renders are made from.
-2. **The essence critique, offered.** One sentence offers
-   `critique essence`, the lens that guards what a release publishes.
-   It runs only on your word, and its findings are settled by
-   walkthrough before the release goes on. On your no, or silence,
-   nothing runs: no reviewer runs at a release on Claude's own
-   judgement.
-3. **The README and the release notes.** Once the findings are
-   settled, both are regenerated from their recipes, unconditionally,
-   with no test of whether they are stale, each through `/render`. The
-   two are launched at once. You get a short summary of what
-   materially changed in the regenerated files and rule on it before
-   the commit. Other renders are never regenerated here. A project
-   whose recipe is missing is reported and released without that
-   render.
-4. **The age of the documentation.** The release reports the
-   `version` in the front-matter of the repository's `docs/README.md`
-   against the intent's version. A repository without `docs/` has no
-   such age, and that is no finding. `/document` is offered in one
-   sentence. On your word it runs before the save, so that the release
-   carries current pages; on your no, or silence, nothing runs. The
-   release never regenerates the documentation on its own.
-5. **The save.** `/save` runs for this repository with two things
-   decided here:
-   - The commit message is `release <intent version>: <one line>`,
-     the line summarising the rounds since the last release, taken
-     from the intent's history. Your `-m` replaces it. For a library,
-     whose history is git, the version is left out and the line says
-     what changed.
-   - When the intent's version is an integer, an approved major, the tag
-     `v<major>` is proposed and taken on your word. Where the
-     repository is the engine, Claude first names what the forge's own
-     intent asks a major to pass: a reminder, never a gate. Any other
-     tag is your request, as `/save` has it (`--tag name`).
+## What you have afterwards
 
-## The check is advisory
+- The settled checks, with any parked findings recorded as parked.
+- A README and release notes regenerated from the current sources.
+- Documentation as current as you chose to make it.
+- A commit on `main` with the release message, pushed, and the tag at an approved major.
 
-You may order the release at any moment regardless of findings. The
-checks and the critique inform; only you publish.
+## If something goes wrong
+
+- Not on `main`: the release stops. Save your work, then switch back with `python scripts/forge-branch.py <slug> main`. Merging a branch into `main` is git's business, by hand or by merge request, never this command's.
+- Findings you have not settled when you order the release to go on: they are parked by that word, said aloud. The check is advisory, so you may order the release at any moment.
+- A recipe is missing: it is reported as a finding and the release goes on without that render.
+
+For the terms used here, see the [Glossary](../reference/glossary.md).
+
+## A worked example
+
+You have finished a round of work on `my-project` and its intent stands at an integer version.
+
+1. You type `/release my-project`.
+2. Claude confirms the branch is `main`, runs `light` and `project`, and reports one finding. You park it.
+3. Claude offers the `critique essence` review. You say no, and nothing runs.
+4. Claude regenerates the README and the release notes and summarises the change. You accept it.
+5. Claude reports that the documentation is one version behind the intent and offers `/document`. You say yes, and the pages are regenerated before the save.
+6. Claude saves with `release <version>: <one line>`, proposes the tag `v<major>`, and you agree. The commit is pushed and tagged.
 
 ## See also
 
 - [Save your work](save-your-work.md): the save the release ends with.
 - [Check conformance](check-conformance.md): the checks and how their findings are settled.
-- [About renders and recipes](../about/renders-and-recipes.md): why the README and the release notes are renders.
+- [Renders and recipes](../about/renders-and-recipes.md): why the README and the release notes are renders.
 - [Generate the documentation](generate-the-documentation.md): the command the release offers for the documentation.
-- [About versioning and history](../about/versioning-and-history.md): what a major approves and what its test attests.
+- [Versioning and history](../about/versioning-and-history.md): what a major approves and what its test attests.
+- [Glossary](../reference/glossary.md): every term of the forge in one line.
+
+Generated on 2026-10-11 for version 5.3 from the files the front-matter names; never edited by hand.

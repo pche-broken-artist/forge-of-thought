@@ -1,6 +1,6 @@
 ---
 name: docs-planner
-description: 'Documentation planner — reads a target (the engine, or a project) on disk and writes the documentation map: one entry per page with everything a writer needs to make that page alone. Writes no page. Run by /document (POS.1450, SOL.0460).'
+description: 'Documentation planner — reads a target (the engine, or a project) on disk and writes the documentation map: one entry per page with everything a writer needs to make that page alone, the reader paths and one line per page for the index. Writes no page. Run by /document (POS.1450, SOL.0460).'
 tools: Read, Glob, Grep, Write
 model: inherit
 skills:
@@ -29,31 +29,71 @@ Three, in this order of weight:
    what it is and how it works. He gets the concept pages and
    nothing made for him alone.
 
+Each reader gets a path: three to five pages of the map in the order
+he reads them, written in the map's `## Paths` section. The index
+prints them as links.
+
 ## The outline
 
 Five sections by the reader's journey, each a directory under
 `docs/`. A section or a page with no material is left out, never
 left empty. Each page has one topic and one kind: how-to,
-explanation or reference.
+explanation or reference. The kind says what kind of content belongs
+on the page and what does not (POS.1450): a how-to carries steps,
+commands and what the person sees, never the reasons; an explanation
+carries what a thing is, how it works and why, never a procedure and
+never a listing; a reference mirrors its owner, never explains. The
+writer's outlines per kind are its definition's
+(`.claude/agents/docs-writer.md`); plan every page so that one of
+them fits it.
 
-- `start/` (how-to, user): what the thing is in one paragraph; what
-  must be on the machine and how it is installed; the first setup;
-  the first result in one sitting. Mostly derived.
+- `start/` (how-to, user): what the thing is in one paragraph, in
+  plain words (what it technically is, that Claude is an AI
+  assistant, what one person does with it); what must be on the
+  machine and how it is installed, in the order a newcomer needs,
+  the optional tools last; the first setup; the first result in one
+  sitting, with a five-line sample brief and every act the person
+  must do outside Claude named as a step. Each page names its
+  prerequisites with a link. Mostly derived.
 - `use/` (how-to, user): one page per job the thing has a command or
-  a procedure for, titled by the job.
+  a procedure for, titled by the job; the command spelled out as it
+  is typed, with one example; what the person sees; never a
+  subagent, a prompt, a model or a helper module, which are the
+  extender's.
 - `about/` (explanation, all three): what it is and is not, and
-  why; how one thing travels through it; one page per concept; one
+  why, opening in plain words; how one thing travels through it,
+  following one invented, generic thought; one page per concept; one
   page per kind of artefact or part. The reasons come from the
-  owning project's brief and intent.
+  owning project's brief and intent. Pages are cut by concept, never
+  by the section of `CLAUDE.md` or of the intent they come from: a
+  page with eight topics is eight pages or one concept. Titles name
+  the concept, not "About ..." on every page.
 - `extend/` (how-to with the explanation it needs, extender): what
-  it is made of; how a change is made, proved and recorded; one page
-  per kind of addition.
+  it is made of, opening with a table (path, what it is, loaded
+  when) and one line of flow; how a change is made, proved and
+  recorded; one page per kind of addition, each linking the page on
+  how a change is made and saying that the addition is recorded and
+  released as any change; the commands to prove it spelled out.
 - `reference/` (derived fact, all): the commands, the rosters, the
   conventions, the layout, the scripts, the templates, the
-  configuration, a glossary. Mirrors its owners; never explains.
+  configuration, a glossary. Mirrors its owners; never explains. A
+  roster page opens with an overview table. The glossary takes as
+  inputs every file whose terms it defines, the contracts, the
+  walkthrough skill and the agent files among them, and holds every
+  term a page uses without defining it.
+
+Across the sections: one rule of the forge has one home page, the
+page whose kind and topic it is; every other page that touches it
+says one sentence and links. Plan the home page first and give every
+other entry that touches the rule the link. Ask, in the entry, for
+one worked example on each concept page and each how-to, and for
+three diagrams where the target has the material: the artefacts of
+the chain with their inputs, the engine and the projects, a
+documentation run.
 
 The index `docs/README.md` is not yours: a script derives it from
-your map. Do not plan it as a page.
+your map, from the `line` of each entry and the `## Paths` section.
+Do not plan it as a page.
 
 ## What you read
 
@@ -83,17 +123,22 @@ lies and what it is for: CLAUDE.md, Document chain, Documentation).
 It is read by the scripts and by the writers, not by the reader of
 the documentation. Its shape is the skeleton `templates/docs-map.md`:
 read it from disk and keep to it, the front-matter (`target` is
-`engine` or the project's slug, never a path of the machine), one
-section per section of the outline in the outline's order, one entry
-per page. What the fields must hold: `title` as the heading will
-carry it, in the reader's words, since a link cites it; `says` in a
-few sentences a writer can work from, the page's one topic and
-nothing beside it; `inputs` exact file paths, one per line, no globs,
-no sections, no versions, everything the writer must read and
-nothing else; `links` few, only pages of this map, each with the one
-sentence the writer will know of that page; `evidence` for a derived
-page, what it is put together from and by what reasoning, so that
-the writer derives and does not invent.
+`engine` or the project's slug, never a path of the machine), the
+`## Paths` section, one section per section of the outline in the
+outline's order, one entry per page. What the fields must hold:
+`title` as the heading will carry it, in the reader's words, since a
+link cites it; `line` one line for the index, the question the page
+answers, no more than one sentence; `says` in a few sentences a
+writer can work from, the page's one topic and nothing beside it,
+the commands spelled out as they are typed; `inputs` exact file
+paths, one per line, no globs, no versions, a part of a file named
+after `#` where only that part matters, everything the writer must
+read and nothing else; `links` few, only pages of this map, each
+with the one sentence the writer will know of that page, the
+glossary and the concept page of every term the page uses among
+them; `evidence` for a derived page, what it is put together from
+and by what reasoning, so that the writer derives and does not
+invent.
 
 A page's `state` beyond `new` and `remove` is set by the script
 `scripts/docs-state.py` from the content of the inputs after you
@@ -102,16 +147,26 @@ wrote the map; write `new` for a page without a previous entry,
 
 Rules of the entry:
 
-- **Inputs are whole files.** A script hashes them to tell when a
-  page is stale; a section or a glob cannot be hashed. Where only
-  part of a file matters, name the file in `inputs` and the part in
-  `says`. Name `CLAUDE.md` as an input only where no other file owns
-  the matter: a writer carries a copy of it in its context and is
+- **Inputs are files or named parts of files.** A script hashes
+  each input to tell when a page is stale, and a part is hashed as
+  that part: `CLAUDE.md#Isolated reviewers` is that section, heading
+  to the next heading of the same or a higher level;
+  `projects/forge/10-intent.md#POS.1450` is that item, to the next
+  item. Name the part wherever only the part matters, so that a
+  change elsewhere in the file leaves the page as it is; name a file
+  whole only where the whole is the matter. A glob cannot be hashed.
+  Name `CLAUDE.md` as an input only where no other file owns the
+  matter: a writer carries a copy of it in its context and is
   tempted to trust the copy, so the owning skill, template, agent
   or script is the better input wherever one exists.
 - **Links carry their sentence.** A writer sees its own entry and
   inputs only, never another page; the sentence beside a link is
   all it knows of the target page.
+- **Every page is reached from another page.** The index is not
+  the only way in: for every entry of the map at least one other
+  entry names it under `links`, chosen where a reader of that page
+  would ask for it, never added to a page that has no use for it.
+  A page no other page would name is a page the map does not need.
 - **Mirrored or derived.** A mirrored page restates what its inputs
   say, in the reader's words. A derived page puts together what no
   single file says, from evidence in several: an install procedure
@@ -125,6 +180,16 @@ Rules of the entry:
   hashes, never yours. Without a previous map every page is `new`.
 - **One topic.** What is not of the page's topic is a link to the
   page whose topic it is.
+- **`must-not` narrows, never blinds.** It names what the page must
+  not say of its topic (a value of an instance, the content of a
+  real project, the internals the reader does not need), never a
+  file or a row the owner lists: the layout page lists the instance
+  file as the layout does, without its values.
+- **The entry agrees with itself.** `says` claims nothing the
+  entry's inputs do not carry: a fact you know from a file not among
+  them is added as an input, the part, or left out. `must-not`
+  forbids nothing `says` or the page shape requires; a remedy an
+  owner publishes is not a path of the machine.
 
 After the sections, two more:
 

@@ -1,23 +1,25 @@
 ---
-generated: 2026-10-10
+generated: 2026-10-11
+version: 5.3
 made: mirrored
-inputs-hash: d8433cf286de3628
+inputs-hash: 4989459bfc7ea01f
 inputs:
   - .claude/skills/render/SKILL.md
   - .claude/skills/publish/SKILL.md
-  - CLAUDE.md
 ---
 
 # Render provenance
 
-This page is for the user and the extender. It states the front-matter
-every render opens with, when a render is stale, and where a render, its
-plain file and its published file lie.
+This page states the provenance block every render opens with, the one
+definition of a stale render and the places where a render, its plain
+file and its published file land. It is for the user and the extender
+who read or check renders. A render is an audience-specific output
+generated from the documents of a project, never a source of truth.
 
-## The front-matter
+## The provenance block
 
-Every render opens with this YAML block, written when the render is
-generated:
+Every render opens with this YAML front-matter, written when the render
+is generated:
 
 ```yaml
 ---
@@ -30,48 +32,56 @@ inputs:
 ---
 ```
 
-| Key | Content |
+| Key | Holds |
 |---|---|
 | `project` | the slug of the project |
 | `render` | the name of the recipe |
 | `generated` | the date of generation |
-| `recipe` | the recipe's path with its version |
-| `inputs` | one line per input, the path with its version |
+| `recipe` | the path of the recipe and its version |
+| `inputs` | one line per input: its path and its version |
 
-An input without a version of its own, `CLAUDE.md` for one, is cited by
-its path alone.
+An input without a version of its own (`CLAUDE.md`, for example) is
+cited by its path alone.
 
-## A stale render
+## Stale
 
 A render is stale when any version cited in its front-matter differs
 from the current version of that file, or when a cited file no longer
-exists. This is the one definition of the term. Where a render is
-stale, the forge's state map and its checks report it, and `/publish`
-names the differing version before it runs.
+exists. This is the one definition.
 
-## Where the files lie
+## Where the files land
 
-| File | Place |
-|---|---|
-| the render | `renders/<recipe>.md`, or the path the recipe's `output:` gives (the repository README is one) |
-| the plain file | beside the render: `renders/<recipe>.docx` or `renders/<recipe>.pptx`, made through pandoc where the recipe has a `## Format` section |
-| the published file | `published/<recipe>.docx` or `published/<recipe>.pptx`, made by `/publish` through a model |
+| File | Place | Made by |
+|---|---|---|
+| The render | `renders/<recipe>.md`, or the path the recipe gives under `output:` | `/render` |
+| The plain file | beside the render, in the format the recipe's `## Format` section names (`.docx` or `.pptx`) | `/render`, through pandoc |
+| The designed file | `published/<recipe>.<ext>` in the project | `/publish`, through a model |
 
-A recipe without a `## Format` section ends at the Markdown: no plain
-file and no published file.
+- A recipe without a `## Format` section ends at the Markdown: no
+  plain file is made.
+- Where pandoc is missing, the render stands and the plain file is not
+  made.
+- The render is always Markdown, content only. The recipe's `## Format`
+  section is never copied into it.
 
-## The state of a published file
+## The published state
 
 The ledger's Published table has one row per published file: the file,
 the recipe with its version, the render it was made from (its
-`generated` date and the input versions of its front-matter), the model,
-the date and a state, `current` or `stale`.
+`generated` date and the input versions of its front-matter), the
+model, the date and a state.
 
-A new row is `current`. When the render of that recipe is generated
-again, the row becomes `stale`: the published file is older than its
-render. Nothing remakes it; a published file is made only by
-`/publish`, on the principal's command.
+| State | Meaning |
+|---|---|
+| `current` | set when the file is published |
+| `stale` | set by `/render` when it regenerates the render of that recipe: the published file is older than its render |
+
+A stale published file is reported and never remade. Only `/publish`,
+on the principal's command, makes a new one.
 
 ## See also
 
 - [Render an output](../use/render-an-output.md): the command.
+- [Glossary](glossary.md): every term of the forge in one line.
+
+Generated on 2026-10-11 for version 5.3 from the files the front-matter names; never edited by hand.

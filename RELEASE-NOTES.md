@@ -1,13 +1,13 @@
 ---
 project: forge
 render: release-notes
-generated: 2026-10-10
+generated: 2026-10-11
 recipe: recipes/release-notes.md v0.13
 inputs:
   - projects/forge/10-intent.history.md
   - projects/forge/10-intent.history.archive.md
   - projects/forge/40-solution-design.history.md
-  - projects/forge/10-intent.md v5.0
+  - projects/forge/10-intent.md v5.3
   - projects/forge/decisions.md
   - RELEASE-NOTES.md (previous edition)
 ---
@@ -18,6 +18,145 @@ One section per release of the engine, newest first, for the user who
 takes upgrades through `forge-pull`; Action required comes first in
 every section; the fine-grained log with the reasons lives in
 `projects/forge/10-intent.history.md`.
+
+## 5.3 — 2026-10-11
+
+### Action required
+- The generator of the documentation, the writer's definition and
+  the contract, is hashed with the inputs of every page, so that a
+  change of the rule a page is made by regenerates every page made by
+  the old one; the choice against a switch that forces a run is
+  recorded (SOL.0460). For you: run `/document` in a new session;
+  every page regenerates, as its hash changed.
+
+### Added
+- The command `/history <ID> [slug]` is born with its script,
+  `scripts/forge-history.py`: the script gathers what the project
+  holds of one item, its wording today, every record whose subject it
+  is, the records of other items that mention it, the rows of the
+  archive that mention it and every other place that cites it, and
+  prints it as one wrapped timeline, taking the short form of an ID;
+  Claude adds a few sentences of its own on top, marked as such, and
+  nothing is derived from them (POS.1510, SOL.0630; the row of the
+  Commands table and the scripts comment of CLAUDE.md). For you:
+  none; the command works on every project as it stands, and
+  `/history <ID>` gives you the whole way to an item in one call.
+
+### Changed
+- The rule of Versioning & status cites `/history` instead of
+  describing the search: this is the one way Claude reads an item's
+  history before proposing a change to it (POS.1510, POS.0310). For
+  you: the history is still never loaded whole; a proposal to change
+  an item now rests on the script's gathering, the same every time.
+- The planner's definition says that every page is reached from
+  another page, at least one other entry naming it under `links`
+  (operating layer, solution design 0.13). For you: no page of the
+  documentation hangs from the index alone.
+- The writer's outline of a how-to names the heading "A worked
+  example" (operating layer, solution design 0.13). For you: one
+  spelling of that heading on every how-to page.
+- The contract's sentence: an enumeration whose members carry a gloss
+  is a list, one member per line, and a rule, its reason, its
+  exception and its purpose are separate sentences (operating layer,
+  solution design 0.13). For you: shorter sentences on the pages at
+  the next `/document`.
+- The second run of the redrawn generator was compared against the
+  audit's measurements M.01 to M.18 (SOL.0460, THR.0630). For you: the
+  three changes above are what the comparison found.
+
+### Fixed
+- The first run of the redrawn generator, 86 pages, three new, the
+  check clean after four regenerations, found three defects, mended:
+  the reader of the map takes a block by its bold label, the
+  definitions' shape; the state script honours the planner's
+  `remove`, which it overwrote; the planner's entry agrees with itself
+  (SOL.0460). For you: a page the planner removes stays removed, and
+  `/document` runs clean.
+
+## 5.2 — 2026-10-11
+
+### Added
+- A thread on what remains of the documentation audit of 2026-10-11
+  after the round on the operating layer: the owners outside the
+  generator, then `/document` in a new session and the comparison
+  against the audit's measurements (THR.0630). For you: nothing
+  changes yet.
+
+### Changed
+- The documentation's rules are amended from the audit of 2026-10-11:
+  the kind of a page says what content belongs on it and one rule has
+  one home page; a generic example in the shape an owner defines, and
+  a diagram from the owners, are mirrors, not inventions; a reason the
+  inputs do not give stays off the page and is listed by the run; an
+  input may be a named part of a file, hashed as that part; one voice
+  on the pages, the full rule the documentation contract's (POS.1450).
+  For you: About no longer restates the how-tos and the references, a
+  page carries no reason its inputs do not give, and a change of one
+  section or one item regenerates the pages made from it and no
+  others, where 78 of 83 pages regenerated at 5.1 for about a dozen
+  changed.
+- The generator is redrawn to those rules: inputs as files or named
+  parts hashed as the part, the index from a line per entry and the
+  reader paths of the map, one outline per kind of page and the
+  version a page was made for, the contract owning the voice and the
+  sentence and what never reaches a page; the choices recorded
+  (SOL.0460). For you: `/document` works as before; the pages it makes
+  follow the amended rules.
+- The criterion that separates the guarded commands from the rest is
+  stated, where the list implied it and never said it (POS.1090). For
+  you: you can tell of any command whether it runs on your word only.
+
+### Fixed
+- A session can no longer be said to end "without loss": the
+  sentence contradicted `/end` and prime directive 9; `/end` says
+  what the conversation holds that the files do not, and `/ledger`
+  re-orients from the ledger (POS.0330, POS.1500). For you: end a
+  session with `/end` to know what closing it would lose.
+- `/save` rebases your commits onto the remote; the sentence that left
+  merge, rebase and conflicts to git by hand predated it (POS.1110,
+  POS.1490). For you: on a diverged repository `/save` rebases your
+  commits, or you merge by hand; merge requests stay git's.
+- A citation of a library document carries no version; the sentence
+  that called the version a visible, unguarded pin was written before
+  that decision (POS.0970, POS.1020). For you: cite a library document
+  by path alone.
+
+## 5.1 — 2026-10-11
+
+### Added
+- The forge looks at the remote and offers, it never pulls or merges
+  on its own: the `/forge` map and the new command `/pull` ask
+  `forge-status --remote` for the state of the engine and of the
+  project against its origin and say it as a fact, up to date, behind,
+  ahead, diverged or no origin, each state with one offer; `/pull`
+  pulls only a clean repository that is behind, and after a pull of
+  the engine shows the Action required lines of these notes crossed
+  and offers the checks (POS.1490, SOL.0180, THR.0490 closed). For
+  you: a clone behind its origin is shown at every map; take the
+  upgrade through `/pull` from inside a session or through
+  `forge-pull` as before, and nothing is pulled or merged unasked.
+- A session ends with `/end`: it says what lives only in the
+  conversation and would be lost, an unwritten round, carried
+  verdicts, a promise, offers the write, reports every repository with
+  unsaved changes and offers `/save`, names stale renders as a fact
+  and closes with one sentence saying whether shutting the command
+  line loses anything; it writes nothing itself (POS.1500, SOL.0180,
+  THR.0430). For you: end a session with `/end` and you know what
+  closing the command line loses; the measurement of what a session
+  carries stays open, to be stored per user.
+- `forge-status --remote` reports the state against the origin
+  through a function shared in `forge_repos.py`, and `forge-pull`
+  prints the state before, the state after and the commits between
+  (SOL.0510). For you: the scripts say what they found and what they
+  did.
+
+### Changed
+- The step after a pull of the engine is `/pull`, which shows the
+  Action required lines crossed and offers the checks (POS.0940). For
+  you: after `forge-pull`, run `/pull` instead of running `/check
+  light` and `/check project` on each project by hand.
+- `/pull` is among the guarded commands, since it changes the disk
+  (POS.1090). For you: it runs on your word only.
 
 ## 5.0 — 2026-10-10 — approved
 

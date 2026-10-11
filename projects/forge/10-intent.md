@@ -1,8 +1,8 @@
 ---
-version: 5.1
+version: 5.3
 date: 2026-10-11
 status: draft
-last_change: 5.1 (2026-10-11): the forge looks at the remote and offers, never pulls or merges itself (POS.1490, THR.0490 closed); a session ends with /end (POS.1500); /pull the door after a pull (POS.0940) and guarded (POS.1090); THR.0430 narrowed to the measurement, stored per user.
+last_change: 5.3 (2026-10-11): the history of one item is read through /history, a script gathering and Claude summarising (POS.1510); the command born with its script.
 project: forge
 audience: principal + Claude only
 ---
@@ -724,8 +724,9 @@ position that already stands elsewhere.
   say "supports v1 and v2"). Another project cites a library document by
   path. The citation is a cross-repository dependency taken knowingly:
   only someone with both repositories can read it, the assignment is
-  self-contained anyway, the version in the citation is a visible,
-  unguarded pin, and a check is added when it hurts. The library is not
+  self-contained anyway, the citation carries no version, the document
+  being a moving target by design (POS.1020), and a check is added when
+  it hurts. The library is not
   a condition of publication: the intention is decided, and the first
   library exists, so far rather a proof of concept (THR.0510).
 - **POS.1390** An intent says what the principal wants and why, and
@@ -950,9 +951,11 @@ position that already stands elsewhere.
 - **POS.0320** Immutable documents (reviews, challenges, sources,
   research) are never edited — a source from its registration, the
   others from creation; corrections happen downstream.
-- **POS.0330** State lives in files, never only in conversation. A
-  session can be ended at any point without loss; `/ledger` re-orients
-  from the ledger. One project per session is the hygienic default.
+- **POS.0330** State lives in files, never only in conversation. What
+  is in a file survives the session; what lives only in the
+  conversation does not, and `/end` says what that is (POS.1500);
+  `/ledger` re-orients from the ledger. One project per session is the
+  hygienic default.
 - **POS.0820** Artefacts do not expire with the conventions.
   Conventions evolve continuously and `/check` measures against the
   current ones — but an artefact remains valid under the conventions
@@ -960,6 +963,21 @@ position that already stands elsewhere.
   is a fact to report, never a defect to chase. Bringing a project
   to newer conventions is an explicit migration decision of the
   principal, made per project and never assumed.
+
+- **POS.1510** The history of one item is read through one command,
+  `/history <ID> [slug]`: a script gathers what the project holds of the
+  item, its wording today, every record whose subject it is, the records
+  of other items that mention it, the rows of the archive that mention
+  it and every other place in the project that cites it, and prints it
+  in full for that one item; Claude adds a few sentences of its own on
+  top, marked as such, and nothing else, and nothing is derived from
+  them. This is the one way Claude reads an item's history before
+  proposing a change to it (POS.0310). Why: the history of an item is
+  scattered over the log, the archive and the records of other items,
+  and reading a whole log is forbidden, so the search was done by hand
+  and differently every time; what is deterministic is a script's, the
+  judgement is what remains for the model (THR.0530). Decided
+  2026-10-11.
 
 ### Review
 - **POS.0400** Isolated kinds of review of one shape: the critic
@@ -1142,8 +1160,10 @@ position that already stands elsewhere.
 - **POS.1110** Branches are voluntary and belong to git. Whoever wants
   one gets it through one forge command — `forge-branch <name>` creates
   the branch or switches to it, `forge-branch main` switches back — and
-  never types git; merge, rebase and conflicts stay git's, by hand or by
-  merge request, and `forge-status` reports the current branch. Nothing
+  never types git; merge and conflicts stay git's, by hand or by merge
+  request; the one rebase the forge does is `/save`'s, the user's own
+  commits onto the remote (POS.1490); and `forge-status` reports the
+  current branch. Nothing
   forces a branch: whoever does not use them works on `main`, saves and
   now and then releases, and sees none of this. The forge's only
   knowledge of a merge is that `/release` runs on `main` after it and
@@ -1338,13 +1358,18 @@ position that already stands elsewhere.
   harness, so
   that Claude cannot start it on his own judgement: the principal
   invokes it by slash, or asks in words and Claude follows the command's
-  definition read by path. Maps, reports and rosters (`/forge`,
+  definition read by path. What separates them: a guarded command
+  changes files the moment it runs, with no round and no `write` in
+  between; a command that writes only at the end of a round on the
+  principal's word, or files the immutable record of a run he asked
+  for, needs no guard, because the word is already in the procedure.
+  Maps, reports and rosters (`/forge`,
   `/ledger`, `/check`, `/critique`, `/challenge`, `/research`, bare
   `/recipe`, the roster) stay Claude's to start, since he is meant to
   propose them. The guarantee of Step by step (POS.1460) thereby rests
   on the harness as well as on CLAUDE.md; the composition of a recipe is
   the birth of a versioned document, a step of its own there. Decided
-  2026-09-05.
+  2026-09-05; the criterion 2026-10-11 (audit C.06).
 - **POS.1140** Check runs on the reviewer mechanism — POS.0540 decided
   it, this is the shape. One command `/check <check> [slug]`, bare the
   roster; the roster open. The first checks, each owning one concern and
@@ -1540,7 +1565,15 @@ position that already stands elsewhere.
   layout, the scripts, the templates, a glossary; mirrors its owners,
   never explains). Each page is of one kind, how-to, explanation or
   reference, opens with what it is for and for whom, and stands on its
-  own. A section or a page with no material is left out, never left
+  own. The kind says what kind of content belongs on the page and what
+  does not: a how-to carries steps, commands and what the person sees,
+  never the reasons; an explanation carries what a thing is, how it
+  works and why, never a procedure and never a listing; a reference
+  mirrors its owner, never explains. One rule of the forge has one home
+  page, the page whose kind and topic it is; every other page that
+  touches it says one sentence and links. The same matter written on
+  two pages is a defect of the plan, not of the writer. A section or a
+  page with no material is left out, never left
   empty: a project that is not installed has no install page, and that
   is no gap. The documentation is generated from the project's documents
   and never composed or maintained by hand: a page either mirrors the
@@ -1554,11 +1587,26 @@ position that already stands elsewhere.
   pages first, the map, then every page made alone from its entry in the
   map and from the files the entry names, read from disk, nothing else;
   what the inputs do not support is left out and reported, never
-  guessed. A run regenerates only the pages whose inputs changed,
+  guessed. Nothing invented means no fact: an example that shows the
+  shape a template or a convention defines, plainly generic and taken
+  from no project, is a mirror of that owner and belongs on a concept
+  page and on a how-to; a diagram drawn from what the owners say is the
+  same. The content of a real project never reaches a page. A reason
+  the inputs do not give is not written on the page: the page says that
+  the reason is not recorded, the writer reports it, and the run lists
+  every such place for the principal; the reason, where he wants one,
+  enters the intent in its own round and reaches the page at the next
+  run. A run regenerates only the pages whose inputs changed,
   decided mechanically from the inputs, never by judgement, so that a
-  run is cheap and the page names stay stable. A page is not a render:
+  run is cheap and the page names stay stable. An input is a file or a
+  named part of one, a section by its heading or an item by its ID,
+  hashed as that part, so that a change elsewhere in the file leaves
+  the page as it is. A page is not a render:
   no recipe stands behind it and `/render` is untouched (REJ.0240). No
-  instance fact reaches a page (POS.0950). Facts no file owns, the
+  instance fact reaches a page (POS.0950). The pages speak in one
+  voice: Claude is "it", the reader of a how-to "you", the principal by
+  role; the full rule is the documentation contract's. Facts no file
+  owns, the
   install commands, the prerequisites, the public address of the
   repository, have one place in the project that both the README and the
   documentation read. A release never regenerates the documentation: it
@@ -1571,6 +1619,9 @@ position that already stands elsewhere.
   first version of the engine's documentation was generated 2026-10-09
   (79 pages); what the documentation of a project other than the engine
   reads is THR.0590. Decided 2026-10-09 from the brief `documentation`.
+  Amended 2026-10-11 from the documentation audit
+  (`sources/docs-audit-2026-10-11.md`: F.03, F.11, F.12, F.15, F.25,
+  F.31).
 - **POS.1010** A project may carry an icon: `logo.png` in the project
   root, supplied by the principal, picked up as the repository avatar by
   hosts that do so. Optional — a project without an icon is complete. No

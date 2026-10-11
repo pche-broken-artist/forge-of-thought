@@ -23,13 +23,16 @@ never a sweep.
 2. Run the checks over the sources through the `/check` procedure
    (`.claude/skills/check/SKILL.md`) and report the result to the
    principal — always, even when clean. A project: `light` and
-   `project`. The engine: `light`, `engine` and `project`, the two
-   project checks on `projects/forge`. Launched at once, awaited
-   together. Clean: state that the checks passed.
+   `project` on it. The engine: `engine` on the engine root, and
+   `light` and `project` on `projects/forge`, the forge's own
+   project. Launched at once, awaited together. Clean: state that
+   the checks passed.
    Findings: settle them by walkthrough (CLAUDE.md, Working methods);
    a finding may be parked, as the `/check` procedure says, and the
-   release proceeds. Never fix silently; never proceed with an unsettled
-   finding. The check runs before the renders so that a fix of the
+   release proceeds. Never fix silently; a finding the principal has
+   not settled when he orders the release to go on is parked by that
+   word, said aloud, since the check is advisory (POS.0430). The check
+   runs before the renders so that a fix of the
    walkthrough — an intent bump, a changed convention — is already in
    the inputs the renders derive from (POS.0570).
 3. Offer `/critique essence` once, in one sentence: the lens that
@@ -82,4 +85,5 @@ never a sweep.
    his request, as `/save` has it.
 
 The check is advisory (POS.0430): the principal may order the release
-at any moment regardless of findings.
+at any moment regardless of findings, and the findings he has not
+settled are parked by that word (step 2).

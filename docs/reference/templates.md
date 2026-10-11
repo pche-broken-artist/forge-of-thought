@@ -1,7 +1,8 @@
 ---
-generated: 2026-10-10
+generated: 2026-10-11
+version: 5.3
 made: mirrored
-inputs-hash: 8a08723ba2af0fdc
+inputs-hash: 432264fc6bdd5607
 inputs:
   - templates/CLAUDE.local.md
   - templates/brief.md
@@ -23,153 +24,169 @@ inputs:
   - templates/critic-definition.md
   - templates/challenger-definition.md
   - templates/check-definition.md
-  - CLAUDE.md
+  - CLAUDE.md#Templates
 ---
 
 # Templates
 
-This page lists every file in `templates/`, the canonical skeletons the
-forge makes new files from. It is for someone extending the forge or
-checking what a skeleton holds: for each file it says what it is the
-skeleton of, what creates from it, and its fields or sections in one
-line.
+The templates are the canonical skeletons in `templates/`: every new project, document, recipe and definition starts from one of them. This page is for the extender who needs to know which skeleton exists, what it is the skeleton of, and which procedure creates from it. For where the templates sit in the whole, see [What the forge is made of](../extend/what-it-is-made-of.md).
 
-## The naming rule
+## Naming rule
 
-A skeleton named `<type>-definition.md` is the skeleton of the
-definition of one member of a type the forge can be extended by: an
-artefact, a critic lens, a challenger persona or a check. Every other
-skeleton is named after the document it shapes.
+A template named `<type>-definition.md` is the skeleton of the definition of one member of a type the forge can be extended by. There are four such types: an artefact, a critic lens, a challenger persona and a check.
 
-## Instance and chain documents
+## Overview
 
-| File | Skeleton of | Created by | Fields or sections |
+| Template | Skeleton of | Created by | Lives at |
 |---|---|---|---|
-| `templates/CLAUDE.local.md` | the instance facts file at the engine root, gitignored | `/setup` fills it on a new machine | Principal (the role whose thinking is forged); Conversation language |
-| `templates/brief.md` | a brief | the brief's definition, `/forge brief` | Header only (project, title, date, author, version, status, last_change); the text below it is free-form |
-| `templates/intent.md` | the intent | the intent's definition, `/forge intent` | Header (version, date, status, last_change, project, audience); Essence; Positions; Facts; Rejected directions; Candidate structure for the layer below (optional staging area) |
-| `templates/threads.md` | the project's open threads | the intent's definition | Header (project); one list of threads, each `THR.NNNN`, the artefact it concerns in brackets, then its text |
-| `templates/assignment.md` | the assignment | the assignment's definition, `/forge assignment` | Header (same fields as the intent, audience: recipients); Purpose & Context; Objective; Scope (in scope, out of scope); Requirements (grouped); Constraints; Assumptions; Deliverables; Open Questions; Success Criteria; Terms |
-| `templates/solution-design.md` | the solution design | the solution design's definition, `/forge solution-design` | Header (audience: whoever realises the solution); How the parts work together; Parts (grouped SOL items: what it is, what it realises, the choice, where); Across the parts; Open |
-| `templates/ledger.md` | a project's ledger | project scaffolding, `/new-project` | Header (project, kind, language, updated); tables Briefs, Documents, Renders, Published, Sources, Dependencies, Research, Findings, Challenges; list Waiting on principal |
-| `templates/decisions.md` | the decisions record | the forge, at the principal's decisions | Header (project); one record per decision: Decision, Reason, Date |
-| `templates/history.md` | the history companion of a versioned document | written with every change of that document | Header (project, document); one log line per change: date, version, author, subject, kind, reason, Action, Was |
+| `CLAUDE.local.md` | the instance facts | `/setup` | engine root, `CLAUDE.local.md` |
+| `brief.md` | a brief | `/forge brief` | `00-brief.md` |
+| `intent.md` | the intent | `/forge intent` | `10-intent.md` |
+| `threads.md` | the open threads | worked through the intent's definition | `threads.md` |
+| `assignment.md` | the assignment | `/forge assignment` | `20-assignment.md` |
+| `solution-design.md` | the solution design | `/forge solution-design` | `40-solution-design.md` |
+| `ledger.md` | the ledger | a new project's scaffold | `ledger.md` |
+| `decisions.md` | the decision records | a new project's scaffold | `decisions.md` |
+| `history.md` | a history companion | with the birth of any versioned document | `<file>.history.md` |
+| `index.md` | a resource index | `/ingest`, `/research` | `sources/00-INDEX.md`, `research/00-INDEX.md` |
+| `index-bundle.md` | a bundle index | `/ingest` | `sources/<slug>/00-INDEX.md` |
+| `recipe.md` | a render recipe | `/recipe` | `recipes/<recipe>.md` |
+| `recipe-readme.md` | the readme recipe | `/recipe readme` | `recipes/readme.md` |
+| `recipe-release-notes.md` | the release-notes recipe | `/recipe release-notes` | `recipes/release-notes.md` |
+| `recipe-presentation.md` | a presentation recipe | `/recipe presentation` | `recipes/<recipe>.md` |
+| `docs-map.md` | the documentation map | the planner of `/document` | `docs-map.md` |
+| `artefact-definition.md` | the definition of an artefact | `/new-artefact` | `.claude/skills/forge/states/<state>.md` |
+| `critic-definition.md` | a critic lens | added by the principal's decision | `.claude/agents/critic-<lens>.md` |
+| `challenger-definition.md` | a challenger persona | added by the principal's decision | `.claude/agents/challenger-<persona>.md` |
+| `check-definition.md` | a check | added by the principal's decision | `.claude/agents/check-<name>.md` |
 
-A few points of detail on these skeletons:
+The "Created by" column for the scaffolded files, the two indexes and the three definitions of reviewers is taken from the conventions that name them. The skeletons themselves name the owner only for the rest.
 
-- The ledger's header comment is where the reduction for a library
-  lives: a library keeps only Renders, Sources, Dependencies, Research
-  and Waiting on principal.
-- The ledger's Renders table also takes the documentation index as a
-  row, written by `/document`.
-- A history log line is
-  `<date> | <version> | <author> | <subject> | <kind> | <reason> | Action: <what the user must do> | Was: <wording that ceased to hold>`.
-  The kinds are created, changed, closed, removed and approved. Reason
-  is left out on `created`; Action and Was appear only where the record
-  has them, Was always last.
+## Entries
 
-## Resource indexes
+### `CLAUDE.local.md`
+- **Skeleton of:** the instance facts file at the engine root, gitignored.
+- **Created by:** `/setup` on a new machine.
+- **Holds:** two bullets, the principal's role (whose thinking is being forged) and the conversation language.
 
-Two skeletons catalogue resources, so that a reader knows what exists
-and what it is for without opening it.
+### `brief.md`
+- **Skeleton of:** a brief, the ask a project starts from.
+- **Created by:** `/forge brief`.
+- **Holds:** front-matter `project`, `title`, `date`, `author`, `version`, `status`, `last_change`; the text below it is free-form.
 
-| File | Skeleton of | Created by | Fields |
-|---|---|---|---|
-| `templates/index.md` | the `00-INDEX.md` of a `sources/` or a `research/` directory | `/ingest` writes the sources entries, `/research` the research entries | Header (project, directory, updated); one entry per resource |
-| `templates/index-bundle.md` | the `00-INDEX.md` of a bundle, a subdirectory `sources/<slug>/` | `/ingest`, at registration of the bundle, if missing | Header (bundle, project, date, origin); one short paragraph on what the whole is and why it entered sources; one entry per file |
+### `intent.md`
+- **Skeleton of:** the intent, the trunk of every project.
+- **Created by:** `/forge intent`.
+- **Holds:** front-matter `version`, `date`, `status`, `last_change`, `project`, `audience`; sections Essence, Positions, Facts, Rejected directions and an optional Candidate structure for the layer below.
 
-The fields of a resource index entry:
+### `threads.md`
+- **Skeleton of:** the project's open threads.
+- **Created by:** the work on the intent.
+- **Holds:** front-matter `project`; a heading and a list of items, each with its thread ID, the artefact it concerns in brackets and its text.
 
-| Directory | Entry heading | Fields |
-|---|---|---|
-| sources | the file or bundle name | What; Origin; Role; Use for |
-| research | the dated note name, `YYYY-MM-DD-<topic>.md` | Question; Answer in short; Consult when |
+### `assignment.md`
+- **Skeleton of:** the assignment handed to the recipients.
+- **Created by:** `/forge assignment`.
+- **Holds:** front-matter as the intent's, with `audience: recipients`; sections Purpose & Context, Objective, Scope, Requirements, Constraints, Assumptions, Deliverables, Open Questions, Success Criteria and Terms.
 
-What each source field holds:
+### `solution-design.md`
+- **Skeleton of:** the solution design, how the things wanted are realised.
+- **Created by:** `/forge solution-design`.
+- **Holds:** front-matter as the intent's; sections How the parts work together, Parts, Across the parts and Open. Each part names what it realises, the choice made and where it lives.
 
-- **What**: what the resource is, in one or two sentences.
-- **Origin**: where it came from (author, URL, meeting), the date best
-  effort.
-- **Role**: free text, for example a standard to verify against,
-  inspiration, a counter-example, a meeting record.
-- **Use for**: what to reach for it for.
+### `ledger.md`
+- **Skeleton of:** the ledger, the single source of truth for state.
+- **Created by:** the scaffold of a new project; rewritten by every operation.
+- **Holds:** front-matter `project`, `kind` (thought or library), `language`, `updated`; tables Briefs, Documents, Renders, Published, Sources, Dependencies, Research, Findings and Challenges, and the list Waiting on principal. A library keeps only Renders, Sources, Dependencies, Research and Waiting on principal.
 
-What each research field holds:
+### `decisions.md`
+- **Skeleton of:** the append-only decision records.
+- **Created by:** the scaffold of a new project.
+- **Holds:** front-matter `project`; one record per decision with Decision, Reason and Date.
 
-- **Question**: what the note set out to answer.
-- **Answer in short**: two or three lines of the conclusion.
-- **Consult when**: the situations in which the note is worth opening.
+### `history.md`
+- **Skeleton of:** the history companion of a versioned document.
+- **Created by:** the birth of the document it belongs to.
+- **Holds:** front-matter `project` and `document`; one line per change in the order date, version, author, subject, kind, reason, Action, Was. The kinds are created, changed, closed, removed and approved. The full field list is in the history companion's own reference page.
 
-In a bundle index each per-file entry has the fields of the sources
-entry, in the same order. A bundle appears in the directory's own index
-as one entry that points to its inner index.
+### `index.md`
+- **Skeleton of:** the resource index of `sources/` or `research/`.
+- **Created by:** `/ingest` for sources, `/research` for research.
+- **Holds:** front-matter `project`, `directory`, `updated`; one entry per resource, in one of two forms.
 
-## Recipes
+A sources entry, headed by the file or bundle name:
 
-| File | Skeleton of | Created by | Sections |
-|---|---|---|---|
-| `templates/recipe.md` | any render recipe | `/recipe` | Header (project, purpose, audience, version, updated, last_change, optional output path); Inputs; Instructions; Format (optional); Template |
-| `templates/recipe-readme.md` | the readme-genre recipe, output `README.md` | `/recipe readme`, scaffolded by `/new-project` | Header (output `README.md`); Inputs; Instructions; Pinned facts (not rendered), optional; Template |
-| `templates/recipe-release-notes.md` | the release-notes-genre recipe, output `RELEASE-NOTES.md` | `/recipe release-notes`, scaffolded by `/new-project` | Header (output `RELEASE-NOTES.md`); Inputs (the histories, the intent, decisions, the previous edition); Instructions; Template |
-| `templates/recipe-presentation.md` | the presentation-genre recipe, a slide-by-slide deck definition | `/recipe presentation` | Header; Inputs; Instructions (including the per-slide format); Format (pptx); Template (a slide table) |
+| Field | Holds |
+|---|---|
+| What | what the resource is, in one or two sentences |
+| Origin | where it came from, with the date as well as it is known |
+| Role | free text: a standard to verify against, inspiration, a counter-example, a meeting record |
+| Use for | what to reach for it for, the questions it answers best |
 
-The Format section of a recipe is optional: a recipe without it ends at
-the Markdown. Where present, it names the format (`pptx` or `docx`),
-how the plain file made by `/render` through pandoc is set up
-(reference document, page size), and how the published file made by
-`/publish` through a model is set up (template, model, anything else
-the model must know).
+A research entry, headed by the dated note's file name:
 
-A genre skeleton is named `recipe-<genre>.md`, and `/recipe <genre>`
-composes a recipe from it through a genre interview.
+| Field | Holds |
+|---|---|
+| Question | what the note set out to answer |
+| Answer in short | two or three lines of the conclusion |
+| Consult when | the situations in which the note is worth opening |
 
-### The optional section "Pinned facts (not rendered)"
+### `index-bundle.md`
+- **Skeleton of:** the catalogue of one bundle, a set of related files that counts as one source.
+- **Created by:** `/ingest`, at registration of the bundle if the index is missing.
+- **Holds:** front-matter `bundle`, `project`, `date`, `origin`; one short paragraph on what the whole is and why it entered sources; then one entry per file, with the fields of the sources entry above, in the same order.
 
-The readme skeleton has an optional section, "Pinned facts (not
-rendered)". It holds facts of the project that no file of the project
-owns yet, such as prerequisites, how a tool is installed, or the public
-home of the repository. The README does not print them. The
-documentation's planner reads them there as an owner of those facts.
-Each fact is one bullet. A fact is dropped from the section the day a
-file owns it, and the section is omitted when the project has none.
+### `recipe.md`
+- **Skeleton of:** a render recipe of any genre.
+- **Created by:** `/recipe`.
+- **Holds:** front-matter `project`, `purpose`, `audience`, `version`, `updated`, `last_change` and an optional `output`; sections Inputs, Instructions, an optional Format and Template.
 
-## The documentation map
+### `recipe-readme.md`
+- **Skeleton of:** the recipe of a project's README.
+- **Created by:** `/recipe readme`.
+- **Holds:** the recipe sections with the output path `README.md`; the Template carries the README's sections: What this project is, What you get, How to start, Where it stands, Documentation and About this README, then a dated footer.
+- **Optional section "Pinned facts (not rendered)":** facts of the project that no file of the project owns yet, such as prerequisites, how a tool is installed or the public home of the repository. The README does not print them. The planner of `/document` reads them there as an owner. One bullet each; a fact is dropped the day a file owns it, and the section is left out when the project has none.
+- **Fixed closing:** the skeleton fixes the closing sentence of the README verbatim. It is not repeated here.
 
-| File | Skeleton of | Created by | Fields |
-|---|---|---|---|
-| `templates/docs-map.md` | the documentation map `docs-map.md`, kind `map`, beside the owning project's ledger | the planner agent of `/document` | Header (generated, target, owner, previous); one section per section of the outline (start, use, about, extend, reference), in that order; Unowned; Did not fit |
+### `recipe-release-notes.md`
+- **Skeleton of:** the recipe of a project's release notes.
+- **Created by:** `/recipe release-notes`.
+- **Holds:** the recipe sections with the output path `RELEASE-NOTES.md`; Inputs are the histories of the chain, the decisions and the previous edition. The Template has one section per release with the groups Action required, Added, Changed, Removed, Fixed and Rejected, and a major's section with highlights.
 
-Each page entry in a section carries: title, kind (how-to, explanation
-or reference), reader (user, extender or evaluator), says, inputs,
-links, must-not, made (mirrored or derived), evidence (derived pages
-only) and state (new, keep, regenerate or remove). Unowned lists every
-fact a page needs that no file supports, with the page that needs it.
-Did not fit lists what contradicted itself or the outline, and what was
-done with it. The fields in full are on the documentation map page.
+### `recipe-presentation.md`
+- **Skeleton of:** the recipe of a slide deck.
+- **Created by:** `/recipe presentation`.
+- **Holds:** the recipe sections with Format `pptx`; Instructions fix the per-slide format (title, On slide, Diagram, Speaker notes); the Template is a table of slide number, slide, content and diagram.
 
-The map is read by the scripts `docs-state`, `docs-index` and
-`docs-check` through `scripts/docs_map.py`, and by the writer agents.
-It is never shown to the reader of the documentation.
+### `docs-map.md`
+- **Skeleton of:** the documentation map, one entry per page and everything a page is made from.
+- **Created by:** the planner of `/document`. It is read by the documentation scripts and by the writers, never by the reader of the documentation.
+- **Holds:** front-matter `generated`, `target`, `owner`, `previous`; sections Paths, one section per section of the documentation, Unowned and Did not fit. The fields of an entry are on [Documentation map](documentation-map.md).
 
-## Skeletons of definitions
+### `artefact-definition.md`
+- **Skeleton of:** the definition of a kind of artefact.
+- **Created by:** `/new-artefact`.
+- **Holds:** front-matter `description`; seven blocks, each present: Target, Inputs, Aim, Partner, Map, Instruments and Course; then a closing paragraph on how the files are made.
 
-Each of these is the skeleton of one member of a type the forge extends
-by (see the naming rule above).
+### `critic-definition.md`
+- **Skeleton of:** a critic lens file.
+- **Created by:** hand, on the principal's decision.
+- **Holds:** agent front-matter `name`, `description`, `tools`, `model`, `skills`, then one Lens section of four parts: what it reads, what to go after, the categories of its findings and its own report sections.
 
-| File | Skeleton of | Created by | Contents |
-|---|---|---|---|
-| `templates/artefact-definition.md` | the definition of a kind of artefact, `.claude/skills/forge/states/<state>.md` | `/new-artefact` | Front-matter description; seven blocks: Target, Inputs, Aim, Partner, Map, Instruments, Course; then how the files are made (the artefact from its template as 0.1, its history companion, its row in the ledger's Documents table) |
-| `templates/critic-definition.md` | a critic lens file, `.claude/agents/critic-<lens>.md` | by the principal's decision to add a lens | Front-matter (name, description, tools, model, skills); a Lens section of four parts: what you read, what to go after, categories, own report sections |
-| `templates/challenger-definition.md` | a challenger persona file, `.claude/agents/challenger-<persona>.md` | by the principal's decision to add a persona | Front-matter (name, description, tools, model, skills); a Lens section of two parts: who you are, what to go after |
-| `templates/check-definition.md` | a check file, `.claude/agents/check-<name>.md` | by the principal's decision to add a check | Front-matter (name, description, tools, model, skills); a Lens section of three parts: what you read, what you verify, cost |
+### `challenger-definition.md`
+- **Skeleton of:** a challenger persona file.
+- **Created by:** hand, on the principal's decision.
+- **Holds:** agent front-matter as the critic's, then one Lens section of two parts: who the persona is and what blind spots it goes after.
 
-In the three agent skeletons the shared behaviour comes from the
-contract skill named in the front-matter, and only the Lens section is
-the file's own. When a description carries a colon followed by a space,
-the whole description goes in single quotes, or the agent does not
-register.
+### `check-definition.md`
+- **Skeleton of:** a check file.
+- **Created by:** hand, on the principal's decision.
+- **Holds:** agent front-matter as the critic's, then one Lens section of three parts: what it reads, what it verifies and its cost.
 
 ## See also
 
-- [About what the forge is made of](../extend/what-it-is-made-of.md): where the templates sit in the whole.
+- [What the forge is made of](../extend/what-it-is-made-of.md): where the templates sit in the whole.
 - [Documentation map](documentation-map.md): the map's fields in full.
+- [Glossary](glossary.md): every term of the forge in one line.
+
+Generated on 2026-10-11 for version 5.3 from the files the front-matter names; never edited by hand.

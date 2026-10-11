@@ -1,98 +1,122 @@
 ---
-generated: 2026-10-10
+generated: 2026-10-11
+version: 5.3
 made: mirrored
-inputs-hash: 4eeac4a2fd54ca47
+inputs-hash: 8aa44830ae8264aa
 inputs:
   - templates/critic-definition.md
   - .claude/skills/critic-contract/SKILL.md
   - .claude/skills/critique/SKILL.md
-  - CLAUDE.md
+  - CLAUDE.md#Isolated reviewers
 ---
 
 # Add a critic lens
 
-This page is for someone extending the forge with a new critic lens: a
-new way of reviewing the quality of a project's documents. It says
-what the file is made of, what you write in it and what you leave to
-the contract.
+A critic lens is one agent file that reviews the quality of a project's documents through one angle. This page is for the extender who wants to add a lens: it says which file to write, what goes into it and how to show that it works.
 
 ## Before you start
 
-A new lens is added only by the principal's decision, and only where
-what it finds genuinely differs from what the existing lenses find. If
-the angle you have in mind is already covered, do not add a lens.
+Adding a lens is the principal's decision. The principal is the person whose thinking is being forged. A lens is added only where what it finds genuinely differs from what the existing lenses find. The lenses that exist are listed on [Critic lenses](../reference/critic-lenses.md), and they serve as models of the shape.
 
-A critic reviews the documents as documents, never the substance of
-the thinking behind them. A lens that goes after substance belongs to
-the challengers, not here.
+A lens does not restate the contract that every lens shares. The contract owns the subject, the way of working and the shape of the report. [The critic](../about/the-critic.md) says what it owns. Your file adds only what is particular to the lens.
 
-## What a lens is
+The change is made, proved, recorded and released as any change of the forge. [Make a change to the forge](how-a-change-is-made.md) says how. Terms used here are in the [Glossary](../reference/glossary.md).
 
-A lens is one agent file, `.claude/agents/critic-<lens>.md`. You make
-it from the skeleton `templates/critic-definition.md`. The file has
-two things and nothing else: front-matter and a Lens section. The
-behaviour every lens shares lives in the contract skill
-`critic-contract`, which the front-matter names and which is loaded
-into the lens when it runs.
+## The files
+
+One new file is needed, made from a template:
+
+| File | What it is |
+|---|---|
+| `templates/critic-definition.md` | The template to start from: front-matter and a Lens section, nothing else. |
+| `.claude/agents/critic-<lens>.md` | The file you write. The name after `critic-` is the name of the lens. |
+
+The contract that the new agent carries is `.claude/skills/critic-contract/SKILL.md`. You do not edit it. A change to what every lens shares is a change of the contract alone.
+
+The command `/critique` does not change when a lens is added. It finds lenses by scanning `.claude/agents/critic-*.md`.
 
 ## Steps
 
-1. Copy the skeleton to `.claude/agents/critic-<lens>.md`, with the
-   lens's name in place of `<lens>`.
-2. Fill the front-matter:
+1. Copy `templates/critic-definition.md` to `.claude/agents/critic-<lens>.md`.
+2. Fill the front-matter. It has five keys:
    - `name`: `critic-<lens>`.
-   - `description`: one line saying what the lens reads and when it
-     fits the project.
-   - `tools`: as the skeleton gives them.
-   - `model: inherit`, so the lens runs on the session's model.
-   - `skills:` with `critic-contract` as its entry.
-3. Write the Lens section in four parts:
-   1. What the lens reads: each artefact on its own, or the chain as a
-      whole, and how a target narrows the read.
-   2. What it goes after: the defects the lens exists to find, as a
-      list of concrete angles.
-   3. Its categories: the vocabulary of the category field of a
-      finding.
-   4. Its own report sections: whatever it appends to the shared
-      report shape, if anything.
-4. Delete the comments the skeleton carries, in the front-matter's
-   neighbourhood and in the Lens section.
+   - `description`: one line that says what the lens reads and when it fits. Keep the closing sentences of the template (that it reviews the quality of the documents and is not a challenger of the thinking).
+   - `tools`: as the template has them.
+   - `model`: `inherit`, so that the lens runs on the same model as the rest of the forge.
+   - `skills`: a list holding `critic-contract`, which preloads the shared behaviour into the lens.
+3. Check the description for a colon followed by a space. If it has one, put the whole description in single quotes. An apostrophe inside the description is doubled. Without the quotes the agent does not register.
+4. Delete the comment block of the template.
+5. Write the Lens section in four parts:
+   - What you read: each artefact on its own, or the chain as a whole, and how a target narrows it.
+   - What to go after: the defects this lens exists to find, as a list of concrete angles.
+   - Categories: the vocabulary of the category field of a finding.
+   - Own report sections: what the lens appends to the shared report shape, if anything.
+6. Read the Lens section once against the contract. A lens may narrow what it reads or make a shared rule stricter. It never renames, drops or duplicates a shared rule or a shared field. Anything of that kind is removed from the lens file.
 
-## The description
+The description is also the roster line. Bare `/critique` and `/man critique` list each lens by its description and recommend one by the fit it states. A vague description therefore weakens the roster.
 
-The description does double duty. It is the line the roster shows when
-you run bare `/critique` and in `/man critique`, and the fit it states
-is what the roster uses to recommend a lens for the project's state.
-Write it so a reader can choose the lens from that line alone.
+## Prove it
 
-If the description contains a colon followed by a space, put the whole
-description in single quotes, doubling any apostrophe inside it.
-Otherwise the agent does not register.
+Run the engine check, which verifies mechanical conformance with the conventions:
 
-## What the lens does not restate
+```
+/check engine
+```
 
-The contract owns the subject and its boundary, the way of working,
-the shape of the report and the ledger step. Do not write any of that
-into the lens. A lens is a specialisation of the contract: it may
-narrow what is read, or make a shared rule stricter, but it never
-renames, drops or duplicates a shared rule or a shared field. If the
-protocol must change, it changes in the contract, for every lens at
-once.
+You should now see a report with no finding about the new file. A run that finds nothing files nothing.
 
-## Check that it works
+Then run the lens on a project, so that you see it register and work:
 
-- Run `/check engine`. It verifies that the contract skill the lens
-  names exists.
-- Run bare `/critique` and see that your lens appears in the roster
-  with its description.
-- Run the lens on a project with `/critique <lens> [artefact]`. The
-  run should write a review file and update the project's ledger, as
-  the contract says.
+```
+/critique
+/critique <lens> intent <project-slug>
+```
 
-Adding the lens does not change the `/critique` command: it finds
-lenses by scanning the agent files.
+You should now see the new lens in the roster of the bare command. You should then see a review file named `YYYY-MM-DD-critique-<lens>.md` in the project's `reviews/` directory, and its findings entered in the project's ledger. The ledger is the single record of state of a project.
+
+If the lens is missing from the roster, look at the description first: a colon followed by a space in an unquoted description is the usual cause.
+
+## Record and release
+
+Record the addition and release it as any change of the forge, by the steps of [Make a change to the forge](how-a-change-is-made.md).
+
+## A worked example
+
+A lens with the placeholder name `<lens>` that reads the assignment for wording that two recipients could read differently. The file is `.claude/agents/critic-<lens>.md`:
+
+```markdown
+---
+name: critic-<lens>
+description: 'Critic lens "<lens>": reads the assignment for wording that two recipients could read differently. Fits once an assignment exists. Reviews the quality of the documents. Not a challenger of the thinking.'
+tools: Read, Edit, Write, Glob, Grep
+model: inherit
+skills:
+  - critic-contract
+---
+
+## Lens
+
+### What you read
+The assignment. With a target, only the named artefact.
+
+### What to go after
+- An item whose subject can be read in two ways.
+- An item that says "as appropriate" without saying by whom.
+
+### Categories
+`ambiguity`, `vague-actor`
+
+### Own report sections
+None.
+```
+
+The description holds a colon followed by a space, so it is quoted whole. The Lens section says only what is particular to this lens. The shared report shape, the regression of earlier findings and the ledger step are not mentioned, because the contract owns them.
 
 ## See also
 
-- [About the critic](../about/the-critic.md): what the contract owns.
+- [Make a change to the forge](how-a-change-is-made.md): proving, recording and releasing the change.
+- [The critic](../about/the-critic.md): what the contract owns.
 - [Critic lenses](../reference/critic-lenses.md): the lenses that exist, as models of the shape.
+- [Glossary](../reference/glossary.md): every term of the forge in one line.
+
+Generated on 2026-10-11 for version 5.3 from the files the front-matter names; never edited by hand.

@@ -1120,6 +1120,86 @@ project: forge
   the forge, whether the cost of a run is a problem today. Opened
   2026-10-10.
 
+- **THR.0630** [intent] The documentation audit of 2026-10-11
+  (`sources/docs-audit-2026-10-11.md`, 46 findings, 7 contradictions
+  inside the owners, 18 measurements): the six decisions of the
+  principal written at 5.2 (POS.1450, POS.1090) and three contradictions
+  settled (POS.0330, POS.1110, POS.0970); the round on the operating
+  layer done the same day (solution design 0.10: the generator, the
+  documentation contract, the writer, the planner with the map
+  skeleton, the scripts, and the owners outside the generator: the
+  release, setup and check skills, the readme recipe 0.63, the
+  contributing recipe 0.3, CLAUDE.md). What remains: `/document` in a
+  new session, since the harness loads an agent's definition once per
+  session (`.claude/skills/document/SKILL.md`, Harness note), and the
+  comparison of its result against the audit's measurements M.01 to
+  M.18, finding by finding; the words with several meanings at their
+  owners (F.24: map, finding, lens, slug), later. Opened 2026-10-11.
+  Run 2026-10-11 in a new session: 86 pages, 3 new (`/pull`, `/end`,
+  `/history`), the check clean after four regenerations on its findings
+  and three more on the writers' own slips; what the run found is
+  settled at solution design 0.12 (the reader, the state script, the
+  planner's rule), to be applied by a second `/document` in a new
+  session, the save after it. Unowned, from the planner: whether the
+  forge runs on Linux and macOS as a verified fact; which faster model
+  writes a mirrored page and why that one; what `/document <slug>` reads
+  for a project other than the engine and the language of its pages
+  (THR.0590); what `/forge <state>` does on a library beyond stopping
+  the map; what Claude Code is beyond "the engine runs in Claude Code".
+  Reasons the writers wanted and found recorded nowhere, for a round of
+  the intent (POS.1450): the briefs kept in their own language and
+  English as the notation; a check that finds nothing files nothing; why
+  a source is immutable at all; why a thread names its artefact; the
+  numbering in tens and hundreds and the three-letter prefix; prime
+  directives 2, 3 and 4 and "when unsure, ask" beyond POS.1370; a new
+  lens, persona or check only where what it finds differs; every finding
+  fixed or rejected with a reason; no reviewer on Claude's own
+  judgement; shared mechanism cited, never repeated in a definition;
+  regression before new findings and "sharp and few"; `projects/forge`
+  inside the engine's repository; the scripts-only door as a wall of the
+  harness and no attribution trailer (POS.1200); an item never depending
+  on an external link; the order of the three readers and the five
+  sections; the ledger citing, never copying; corrections to an
+  immutable document downstream; substance changes into the intent
+  first; the definitions directory as the one listing of the artefacts;
+  authorship as the boundary between chain and render; mechanics
+  designed only when a layer is taken up; one user per instance
+  (POS.1110); feedback above a finished change (POS.1440); a recipe 0.x
+  for life, `last_change` derived, the author of a record the one who
+  decided; a source at any stage (POS.0180); Recommend, do not push
+  (POS.0910); where the line between Claude's part and the principal's
+  is drawn and why nothing is implemented; no migration tool (POS.0940);
+  the engine defaults of md2pptx and md2docx; the attribution settings;
+  renders without an offer in `/end`; one question per research; briefs
+  before threads.
+  The second `/document` in a new session, 2026-10-11: 86 pages, 12
+  regenerated on the fixes of solution design 0.12, the check clean
+  after one regeneration (a relative link). The comparison against
+  the measurements M.01 to M.18, by a read-only script on the audit's
+  stated method: resolved M.03 (the index, median 13 words, longest
+  22), M.04 and M.07 (251 links in the bodies, 137 to the glossary),
+  M.10 (three diagrams), M.12 and M.13 (5.3 against 5.3, `/pull` and
+  `/end` on the pages), M.14 (one page names all of CLAUDE.md, none
+  all of the intent), M.16 (16 headings in use/, the outline's six on
+  24 to 27 of 27 pages), M.18 and F.25 (the voice holds; the pronoun
+  of the principal is the owners' word, closed without change); M.08
+  and M.09 better (About 11 to 8 per cent); M.02 up by 40 per cent,
+  the price of the examples and glosses, closed without change. Six
+  decisions walked and written at solution design 0.13: every page is
+  reached from another page (M.06, twelve pages still reached from
+  the index alone), the how-to names its example heading (M.16), an
+  enumeration with glosses is a list and a rule stands apart from its
+  reason, exception and purpose (F.21, the mean sentence of About
+  unmoved at 21 words), the generator hashed with the inputs so that
+  a rule change regenerates every page. Reasons the writers wanted
+  and found nowhere, added: why the evaluator gets the concept pages
+  and nothing of his own, and the order of the three readers; why the
+  definitions directory is the one listing of the artefacts and why
+  changes go intent-first (joined on the-document-chain, to be cut if
+  too far). Unowned unchanged. What remains: a third `/document` in a
+  new session, every page regenerated by the new hash, the save
+  after it; F.24 later.
+
 Note: the ID THR.0120 was inadvertently used twice — first for the
 readme-recipe thread (opened 1.14, closed 1.16), then for the
 assignment-apparatus boundary (opened 1.24, closed 2.4). Citations of

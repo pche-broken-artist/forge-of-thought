@@ -2,9 +2,9 @@
 project: forge
 purpose: readme
 audience: humans arriving at the repository
-version: 0.62
-updated: 2026-10-10
-last_change: 0.62 (2026-10-10): the Quickstart says what projects/forge is and that a user never opens it.
+version: 0.63
+updated: 2026-10-11
+last_change: 0.63 (2026-10-11): the Quickstart names git and Python before the clone and makes the one-off git init a step of the new-project path with what to do when /save saves nothing; portability said as written for, not run on; section 6 lists the sections of the documentation, not every page; the pinned Python fact asks for a real executable (documentation audit F.01, F.04, F.06, F.44).
 output: /README.md
 ---
 
@@ -51,6 +51,9 @@ summarising the newest row. -->
 - Where two inputs state the same thing, the wording of the operating
   layer wins (CLAUDE.md, a definition); the intent supplies the why.
   State each thing once: no sentence appears in two sections.
+- Portability is said as the inputs say it: developed and run on
+  Windows, the scripts written to run unchanged on Linux and macOS
+  and not yet run there; never as a fact of having run.
 - Tone: plain, direct, no marketing. UK English. No long dash
   anywhere: a colon, a full stop or a spaced hyphen where one would
   stand. Every core term (principal, brief, intent, render, recipe)
@@ -152,14 +155,20 @@ summarising the newest row. -->
   index lists for it. A closing line points to RELEASE-NOTES.md for
   the full account. Nothing older than the newest major.
 - Section 4 is a Quickstart with a common head and two named paths.
-  The head, "First, once per machine", is a short fenced block: clone
-  this repository (no URL; the reader is already looking at it, with
-  a comment "you are looking at it"), install Claude Code first
-  (comment: what to install and how is `docs/start/install.md`),
-  start `claude` — always from the engine root — and `/setup`
-  (comment: first run only; what it asks is `docs/start/setup.md`).
-  Then two bold-led paths, each its own fenced block: **Starting a
-  new project** — `/new-project my-idea`, `/forge intent`, `/save`;
+  The head, "First, once per machine", is a short fenced block: a
+  comment line that git, Python and Claude Code must be installed
+  first (what and how is `docs/start/install.md`), clone this
+  repository (no URL; the reader is already looking at it, with a
+  comment "you are looking at it"), start `claude` — always from the
+  engine root — and `/setup` (comment: first run only; what it asks
+  is `docs/start/setup.md`). Then two bold-led paths, each its own
+  fenced block: **Starting a new project** — `/new-project my-idea`,
+  `/forge intent`, then the one-off act in the reader's own terminal
+  at the engine root, `git -C projects/my-idea init -b main`, with
+  the comment that Claude is not allowed to run git and a remote may
+  follow, then `/save`, with the comment that a save that commits
+  nothing names its cause (no repository, or no git identity for the
+  host) and `docs/start/first-result.md` says what to do;
   **Bringing an existing project** — `/import-project <project url>`
   (comment: clones into `projects/`) and `/forge <project-slug>`
   (comment: the slug is the repository's name; select the project
@@ -225,11 +234,10 @@ summarising the newest row. -->
   evaluator, each with where to begin as a relative link into
   `docs/`. Then one sentence giving the version the documentation
   was generated for and the date, taken from the index's own version
-  line, and that the index says it too. Then the contents of the
-  documentation, clickable: the five sections of the index in its
-  order, each as a bold line, under it one bullet per page with its
-  title linked to its relative path, titles only, the sentences stay
-  in the index.
+  line, and that the index says it too. Then the five sections of
+  the documentation as five bullets in the index's order, each the
+  section's name linked to its heading in the index and one sentence
+  on what the section holds; the page titles stay in the index.
 - The section "Author and licence" precedes "About this README" and
   carries this fixed text verbatim, nothing more: "Forge of Thought ©
   Petr Chlumsky (PCHe) - petr.chlumsky@gmail.com. Licensed under
@@ -257,10 +265,13 @@ the place of the pinned facts). The README does not print them; the
 documentation's planner reads them here as an owner, and
 `docs/start/install.md` and `docs/start/setup.md` are where they
 reach the reader. Update them here when they change.
-- Prerequisites: git; Python 3.8 or newer, on PATH as `python` -
-  the scripts and the per-prompt hook are Python (on Linux or macOS,
-  where only `python3` exists, give it that name by an alias or the
-  `python-is-python3` package); a paid Claude subscription.
+- Prerequisites: git; Python 3.8 or newer, on PATH as a real
+  executable named `python` - the scripts and the per-prompt hook
+  are Python, and the hook is started without a shell, so a shell
+  alias does not reach it (on Debian or Ubuntu the package
+  `python-is-python3`; elsewhere on Linux and on macOS a symlink,
+  `ln -s "$(command -v python3)" /usr/local/bin/python`); a paid
+  Claude subscription.
 - Installing Claude Code: Windows `irm https://claude.ai/install.ps1
   | iex`; macOS/Linux `curl -fsSL https://claude.ai/install.sh |
   bash`; or `npm install -g @anthropic-ai/claude-code`. Sign in on
@@ -315,11 +326,13 @@ span, each ending with its link into docs/; a closing line pointing
 to RELEASE-NOTES.md>
 
 ## 4. Quickstart
-<common head "First, once per machine" as a fenced block: clone this
-repository → install Claude Code (docs/start/install.md) → claude
-from the engine root → /setup (docs/start/setup.md); then two
-bold-led paths, each a fenced block: Starting a new project
-(/new-project my-idea → /forge intent → /save) and Bringing an
+<common head "First, once per machine" as a fenced block: git,
+Python and Claude Code installed first (docs/start/install.md) →
+clone this repository → claude from the engine root → /setup
+(docs/start/setup.md); then two bold-led paths, each a fenced block:
+Starting a new project (/new-project my-idea → /forge intent → git
+init in your own terminal → /save, with what a save that commits
+nothing means) and Bringing an
 existing project (/import-project <project url> →
 /forge <project-slug>, with the select-before-work comment); one
 closing sentence: each project is a repository of its own inside
@@ -336,9 +349,9 @@ render-never-hand-edited callout>
 ## 6. Documentation
 <one sentence with the link to docs/README.md; the three readers as
 bullets with where each begins; the version and date the
-documentation was generated for; then the contents: the five
-sections of the index as bold lines, one bullet per page, the title
-linked to its relative path, titles only>
+documentation was generated for; then the five sections as five
+bullets, each linked to its heading in the index with one sentence
+on what it holds>
 
 ## 7. Author and licence
 <the fixed author-and-licence text>

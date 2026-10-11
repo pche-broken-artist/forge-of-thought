@@ -11,8 +11,10 @@ WHAT IT DOES
     `<docs-dir>/README.md`: one line per page, grouped by section in
     the order of the outline (start, use, about, extend, reference),
     each line the page's title linked to its relative path and the
-    first sentence of its `says`. Deterministic: the same map gives
-    the same index. No model is involved.
+    entry's `line` (the first sentence of its `says` where an entry
+    has no `line`); before the sections, the reader paths of the map's
+    `## Paths` section, each page a link. Deterministic: the same map
+    gives the same index. No model is involved.
 
     The index is a derivation of the map and never edited by hand:
     change the map (through the planner) and run this script again.
@@ -25,9 +27,9 @@ NOTES
     carries the version of the owning project's intent (`10-intent.md`
     beside the map), which for the engine is its version; the opening
     says the same in words.
-    The opening paragraph and the three reading paths are fixed text
-    of this script, the one place that owns them (POS.1450,
-    SOL.0460). Run by `/document` (`.claude/skills/document/SKILL.md`).
+    The opening paragraph is fixed text of this script, the one place
+    that owns it; the reading paths are the planner's, in the map
+    (POS.1450, SOL.0460). Run by `/document` (`.claude/skills/document/SKILL.md`).
 
 EXAMPLES
     python scripts/docs-index.py projects/forge/docs-map.md docs
@@ -50,11 +52,7 @@ HEADINGS = {
     "extend": "Extend",
     "reference": "Reference",
 }
-PATHS = [
-    ("the user", "start/", "then use/ for every job"),
-    ("the extender", "extend/", "then reference/ for the shapes"),
-    ("the evaluator", "about/", "the concept pages, nothing made for him alone"),
-]
+READERS = {"user": "the user", "extender": "the extender", "evaluator": "the evaluator"}
 
 
 def first_sentence(text):
@@ -71,18 +69,7 @@ def first_sentence(text):
     return text
 
 
-def engine_version(map_path):
-    """The version of the owning project's intent beside the map, or None."""
-    intent = map_path.parent / "10-intent.md"
-    if not intent.exists():
-        return None
-    for line in intent.read_text(encoding="utf-8").splitlines()[:12]:
-        if line.startswith("version:"):
-            return line.split(":", 1)[1].strip()
-    return None
-
-
-def render(front, entries, map_rel, date, version):
+def render(front, entries, paths, map_rel, date, version):
     out = []
     out.append("---")
     out.append(f"generated: {date}")
@@ -104,11 +91,15 @@ def render(front, entries, map_rel, date, version):
         out.append("(the version of the engine's intent; a release carries the same")
         out.append("number).")
     out.append("")
-    out.append("## Where to start")
-    out.append("")
-    for who, where, then in PATHS:
-        out.append(f"- **{who}**: `{where}`, {then}.")
-    out.append("")
+    titles = {e["path"]: (e["fields"].get("title") or e["name"].replace("-", " ").capitalize())
+              for e in entries}
+    if paths:
+        out.append("## Where to start")
+        out.append("")
+        for reader, pages in paths:
+            links = ", ".join(f"[{titles.get(pg, pg)}]({pg[len('docs/'):]})" for pg in pages)
+            out.append(f"- **{READERS.get(reader, reader)}**: {links}.")
+        out.append("")
     by_section = {}
     for e in entries:
         by_section.setdefault(e["section"], []).append(e)
@@ -123,7 +114,7 @@ def render(front, entries, map_rel, date, version):
                 continue
             title = f.get("title") or e["name"].replace("-", " ").capitalize()
             rel = e["path"][len("docs/"):]
-            says = first_sentence(f.get("says", ""))
+            says = f.get("line", "").strip() or first_sentence(f.get("says", ""))
             line = f"- [{title}]({rel})"
             if says:
                 line += f": {says}"
@@ -151,7 +142,8 @@ def main(argv):
     docs = Path(a.docs)
     docs.mkdir(parents=True, exist_ok=True)
     map_rel = map_path.as_posix()
-    out = render(front, entries, map_rel, a.date, engine_version(map_path))
+    out = render(front, entries, docs_map.reader_paths(text), map_rel, a.date,
+                 docs_map.intent_version(map_path))
     (docs / "README.md").write_text(out, encoding="utf-8", newline="\n")
     print(f"{len(entries)} entries, index written to {docs / 'README.md'}")
     return 0

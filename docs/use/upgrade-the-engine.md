@@ -1,131 +1,167 @@
 ---
-generated: 2026-10-10
+generated: 2026-10-11
+version: 5.3
 made: derived
-inputs-hash: b455ca11ddf32f34
+inputs-hash: 848c85180a59559a
 inputs:
-  - scripts/forge-pull.py
-  - CLAUDE.md
-  - projects/forge/10-intent.md
-  - projects/forge/recipes/release-notes.md
+  - .claude/skills/pull/SKILL.md
+  - projects/forge/10-intent.md#POS.0940
+  - projects/forge/10-intent.md#POS.0820
+  - projects/forge/recipes/release-notes.md#Template
 ---
 
 # Upgrade the engine
 
-This page is for the user who has cloned the engine and wants to
-bring it to its latest release, and then wants to know what that
-means for the projects he keeps. It was put together from the help
-header of `scripts/forge-pull.py`, the Persistence section of
-`CLAUDE.md`, the engine's intent and the release-notes recipe.
+An upgrade of the engine is a pull of its `main` branch followed by a
+look at each of your projects against the conventions the new
+version brings. This page is for you, the user of a forge, when you
+have taken a new version of the engine and want to know what to do
+with the projects you keep. It says what the pull shows you, how the
+checks measure a project and how Claude brings a project to the
+current conventions on your word. The pull itself, what it refuses
+and what it reports, is on [Pull from the remote](pull-from-the-remote.md).
+Every term of the forge is in the [Glossary](../reference/glossary.md).
 
-## What an upgrade is
+## When to use it
 
-The engine is one git repository with a remote, and its `main`
-branch is the released line. Upgrading means fast-forwarding your
-copy of the engine to that line with `scripts/forge-pull.py`: the
-engine's own remote is its upgrade channel. Nothing else is
-involved: there is no installer and no migration tool, and that is
-by design.
+Use this job after `/pull forge`, or after a bare `/pull`, has
+fast-forwarded the engine. The engine does not know your projects.
+A project records no engine version. So the pull touches no project:
+a project is exactly as it was before. Whether a project follows the
+conventions the new engine holds is a separate question, and this
+job answers it project by project.
 
-Your projects are repositories of their own, which the engine does
-not know. A pull of the engine does not touch them, and a project
-records no engine version anywhere. What ties a project to the
-engine is only the conventions it was written to, and those are
-measured, not stored (see "After the pull").
+A project you leave as it is stays valid. It remains valid under the
+conventions it was written to. A finished or dormant project that no
+longer conforms is a fact to report, never a defect to chase.
+Bringing a project to newer conventions is an explicit decision of
+the principal (the person whose thinking the forge works on), made
+per project and never assumed.
 
-## Step 1: save first
+## What you do
 
-The pull refuses to touch a repository that has unsaved changes, so
-that a pull can never land in half-finished work. Save what you have
-first, in the engine and in any project you want pulled: how is
-[Save your work](save-your-work.md).
-
-## Step 2: pull
-
-Run, from the engine root:
-
-```
-python scripts/forge-pull.py forge
-```
-
-`forge` names the engine alone: this is the plain upgrade. The pull
-is fast-forward only, on whatever branch is checked out. You see
-one line per repository: `up to date` in green when it went through.
-
-The bare form pulls the engine and then every project under
-`projects/` that has an origin configured:
+There is no migration tool, and that is deliberate. The job is three
+commands, the first already run:
 
 ```
-python scripts/forge-pull.py
-```
-
-With a project's slug it pulls that one project:
-
-```
-python scripts/forge-pull.py <slug>
-```
-
-What happens when a repository is not clean depends on the form:
-
-- Bare: a repository with unsaved changes is reported, its changed
-  files listed, and skipped; the run goes on with the next one. A
-  project without a repository, or without an origin, is reported
-  and skipped as well.
-- With a slug (`forge` included): the same situation is a refusal.
-  The script stops and tells you to run `scripts/forge-save.py`
-  first, then pull again.
-
-If the pull fails because your local history and the remote's have
-diverged, the script says so and points you to `forge-save.py`,
-which reconciles both, or to asking Claude.
-
-The script needs Python 3.8 or newer, `git` on PATH and
-`forge_repos.py` beside it; it carries no address and no identity of
-its own.
-
-## Step 3: read the release notes
-
-After the pull, open `RELEASE-NOTES.md` in the engine root. It is
-written for exactly this moment: one section per release of the
-engine, newest first, for the user who takes upgrades through
-`forge-pull`. In every section the Action required lines stand
-first: each one says what changed and, after "For you:", what to do
-in your projects now that you have pulled. Read those first; the
-rest of a section tells you what was added, changed, removed, fixed
-or rejected, and what each means for you.
-
-## After the pull: project by project
-
-Because a project records no engine version, the way to learn what
-the new conventions mean for it is to measure it. For each project
-you want to bring along, run in the session:
-
-```
+/pull forge
 /check light <slug>
 /check project <slug>
 ```
 
-Each check compares the project against the current conventions
-and reports what no longer conforms. The two checks own different
-concerns, so run both. What a check is and how its report is
-settled is [Check conformance](check-conformance.md).
+`<slug>` is the name of one of your projects, such as `my-project`.
+The two checks are run once per project you keep, and only on your
+word: `/pull` offers them, it never runs them itself.
 
-The findings are then walked one at a time: Claude presents each
-one, you give the verdict, and on your word Claude makes the
-change in the session. That is the whole migration path, for every
-instance alike. There is no migration tool, knowingly: the release
-notes say what to do, the checks say where, and Claude does it on
-your word.
+## What happens
 
-## A project you leave as it is
+1. **The pull reports what it crossed.** `/pull` relays where the
+   engine moved from and to, and the subjects of the commits between.
+   Among them are the commits of the releases crossed, each named
+   `release <version>`. It then reads `RELEASE-NOTES.md` and shows
+   the Action required lines of every one of those releases.
 
-You do not have to migrate. Conventions evolve continuously and the
-checks always measure against the current ones, but a project stays
-valid under the conventions it was written to. Nonconformance of a
-finished or dormant project is a fact the check reports, never a
-defect to chase. Bringing a project to newer conventions is an
-explicit decision, made per project and never assumed.
+   You should now see the Action required lines of each release the
+   pull crossed, one release after another.
+
+2. **You read what is required.** Each Action required line names
+   what changed, with a pointer, and then says what to do in your
+   projects after pulling. If you would rather read the whole,
+   open `RELEASE-NOTES.md` yourself: it holds one section per
+   release, newest first, written for the user who takes upgrades
+   through the pull, and Action required stands first in every
+   section.
+
+   You should now see, for each release crossed, what the engine
+   asks of your projects, or that it asks nothing.
+
+3. **`/pull` offers the two checks.** For each project you keep it
+   offers `/check light <slug>` and `/check project <slug>`. Say
+   yes for the project you want measured; say nothing for a project
+   you leave as it is.
+
+   You should now see the offer, one line per project, and nothing
+   run until you answer.
+
+4. **The checks measure the project.** Each check compares the
+   project with the current conventions and reports what no longer
+   conforms. The release notes say what to do; the checks say where
+   in this project it applies. Running a check and the shape of its
+   report are on [Check conformance](check-conformance.md).
+
+   You should now see the findings of each check, or a report that
+   found nothing.
+
+5. **The findings are walked.** Claude puts the findings to you one
+   at a time, as a walkthrough (one item per message, each closed
+   with your verdict on it).
+
+   You should now see one finding per message, waiting for your
+   verdict.
+
+6. **Claude migrates on your word.** What you accepted, Claude
+   changes in the project in the session. Nothing is changed before
+   your word, and nothing is changed in a project whose findings you
+   did not walk.
+
+   You should now see each change named by its file and section.
+
+Repeat steps 3 to 6 for every project you keep. A project you skip
+is not behind and not broken: it stands under the conventions it was
+written to.
+
+## What you have afterwards
+
+- The engine on the new version of `main`.
+- For every project you walked, the project brought to the current
+  conventions in the places you accepted.
+- For every project you left, the project unchanged and valid as it
+  was written.
+
+## If something goes wrong
+
+- **The pull stopped before pulling the engine.** A repository with
+  unsaved changes or with a diverged history is not pulled; `/pull`
+  names the one offer that fits, `/save` first or a merge by hand,
+  and the rest is on [Pull from the remote](pull-from-the-remote.md).
+  There is nothing to upgrade until the engine has moved.
+- **No Action required lines appear.** The releases crossed asked
+  nothing of your projects. The checks may still find something:
+  they measure against the whole of the current conventions, not
+  only against what the notes list.
+- **A check reports findings in a project you do not mean to
+  migrate.** That is the intended outcome: nonconformance is reported
+  as a fact. Leave the findings as reported, and the project stays
+  valid under its own conventions.
+
+## A worked example
+
+You keep one project, `my-project`, and the engine's origin has
+moved on since your last pull.
+
+1. You type `/pull forge`. Claude runs the pull and shows where
+   `main` moved from and to with the subjects of the commits
+   between, one of them a `release <version>` commit.
+2. Claude then shows the Action required lines of that release,
+   read from `RELEASE-NOTES.md`. One line says that a template has a
+   new section, with the pointer to it, and that each project's copy
+   is to carry it.
+3. Claude offers `/check light my-project` and
+   `/check project my-project`. You say yes to both.
+4. The checks run and report one finding: the project's copy of
+   that template lacks the new section.
+5. Claude puts the finding to you as one message and asks for your
+   verdict. You accept.
+6. Claude adds the section to the project's file and names the file
+   and section it wrote.
+
+Had you answered no in step 3, `my-project` would have stayed as it
+was, valid under the conventions it was written to.
 
 ## See also
 
+- [Pull from the remote](pull-from-the-remote.md): the pull itself, what it refuses and reports.
 - [Check conformance](check-conformance.md): running a check and settling its findings.
-- [Save your work](save-your-work.md): saving before a pull.
+- [Glossary](../reference/glossary.md): every term of the forge in one line.
+
+Generated on 2026-10-11 for version 5.3 from the files the front-matter names; never edited by hand.

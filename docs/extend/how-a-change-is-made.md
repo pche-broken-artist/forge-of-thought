@@ -1,223 +1,281 @@
 ---
-generated: 2026-10-10
+generated: 2026-10-11
+version: 5.3
 made: derived
-inputs-hash: 9ff5be31c11f88cb
+inputs-hash: 3fc842cb455fbc73
 inputs:
-  - CLAUDE.md
-  - projects/forge/10-intent.md
+  - CLAUDE.md#The system's own project
+  - CLAUDE.md#Versioning & status
+  - projects/forge/10-intent.md#POS.0720
+  - projects/forge/10-intent.md#POS.0900
+  - projects/forge/10-intent.md#POS.1440
   - .claude/agents/check-engine.md
   - .claude/agents/check-single-source-of-truth.md
   - .claude/skills/release/SKILL.md
-  - .claude/skills/document/SKILL.md
-  - projects/forge/recipes/contributing.md
+  - projects/forge/recipes/contributing.md#Instructions
 ---
 
 # Make a change to the forge
 
-This page is for the extender: someone who wants to change how the
-forge behaves, a command, a rule, a convention, what a reviewer looks
-for, and wants to know the order in which that change is thought
-through, built, proved, recorded and released. It was put together
-from `CLAUDE.md`, the forge intent, the two check agents `engine` and
-`single-source-of-truth`, the `/release` and `/document` skills and
-the recipe of `CONTRIBUTING.md`; it joins what they say into the
-order of one change.
+A change to the forge is a change of how it behaves, and it is made
+the way the forge makes every change: through its own chain of
+documents before it is built, proved by its checks, recorded beside
+the documents it touched and released from `main`. This page says
+what you do, step by step, when you want the forge to behave
+differently, whether in your own clone, where you decide everything,
+or as a change you send to the public engine. It is written for the
+extender: the person who changes a command, a rule, a convention or
+what a reviewer looks for.
 
-## Two kinds of change
+## When to use it
 
-The forge draws one line between changes, and it is drawn by what a
-change does, never by its size.
+Use this page when your change alters what the forge does. The line
+between the two kinds of change is drawn by what the change does,
+never by its size:
 
-- **A change of how the forge behaves** goes through the chain before
-  it is built. The forge is run through its own process: it has a
-  project of its own, `projects/forge/`, with a brief, an intent, a
-  solution design, decisions and a ledger, and a change of behaviour
-  begins there, not in the files that implement it.
-- **A change that alters no behaviour**, a wording, a broken path, a
-  slip, is made directly in the file where it stands, and nothing
-  else is needed.
+- A change of how the forge behaves goes through the
+  [chain](../reference/glossary.md): a command, a rule, a
+  convention, what a reviewer looks for.
+- A change that alters no behaviour is made directly: a wording, a
+  broken path, a slip. Nothing of this page is needed for it. As a
+  visitor, you send it as it is.
 
-The rest of this page is the first kind, with one section at the end
-for a document that is a render and one for a visitor who sends a
-change from outside.
+Three files of the engine are renders and are never edited by hand:
+`README.md`, `RELEASE-NOTES.md` and `CONTRIBUTING.md`. A render is a
+file generated from a recipe, and a recipe is the versioned file that
+says what the render is made from and how. A change to one of these
+three goes into its recipe in `projects/forge/recipes/` or into what
+the recipe reads; the file is regenerated at the next release. The
+pages of `docs/` are generated the same way, by `/document`, from
+the files that own each topic: a fix goes into the file the page
+mirrors, and the page is regenerated (see
+[Generate the documentation](../use/generate-the-documentation.md)).
 
-## The order of a change of behaviour
+The forge's own project is `projects/forge/`: the forge run through
+its own process, with its brief, its intent, its solution design,
+its decisions and its ledger (the single source of truth for the
+project's state). Every step below works on that project. The slug
+`forge` names it in every command.
 
-### 1. Say what is wanted, in the intent
+## What you do
 
-Substance goes into the intent first and propagates down the chain
-from there; this is the forge's working method called intent-first.
-Even when a need shows up below, in the solution design or in a
-skill, the intent changes first and the layers follow.
+The commands, in the order you run them, with the one edit you make
+by hand between them:
 
-Run `/forge intent forge` and work the change as a position of the
-forge intent, `projects/forge/10-intent.md`: an item saying what is
-wanted and why, with the reason in it. A brief may come before the
-intent and need not. The work runs as one round: what is agreed is
-carried in the conversation, reflected back, and written once at the
-round's end on your word, one version bump for the whole round. The
-write appends a record to the intent's history companion,
-`10-intent.history.md`, in the same step as the change, with `Was`
-holding the wording that ceased to hold. Before a change to an
-existing item is proposed, its history is searched for the item's ID,
-so that a direction once tried and dropped is seen before it is
-tried again.
+```
+/forge intent forge
+/forge solution-design forge
+```
 
-### 2. Solve it, in the solution design
+Then edit the file of the operating layer that carries the
+behaviour: `CLAUDE.md`, a skill under `.claude/skills/`, an agent
+under `.claude/agents/`, a template under `templates/` or a script
+under `scripts/`. Then:
 
-Run `/forge solution-design forge` and bring the solution design,
-`projects/forge/40-solution-design.md`, to the new position: the item
-where the change solves something, what is built or done, what it
-realises and the choice it rests on. Its history companion receives
-its record the same way.
+```
+/check engine
+/check single-source-of-truth
+/release forge
+```
 
-### 3. Change the operating layer
+`/check single-source-of-truth` is not run at every change: it fits
+before a major or after a round on the operating layer. The rest
+run every time.
 
-Only now does the change reach the files that make the forge run:
-`CLAUDE.md`, the skills under `.claude/skills/`, the agents under
-`.claude/agents/`, the templates under `templates/` and the scripts
-under `scripts/`. Together these are the operating layer.
+## What happens
 
-Two rules govern how it is written:
+1. **You say what you want and why, and Claude writes the position.**
+   Run `/forge intent forge`. Claude works the forge intent through
+   its definition (see [Forge the intent](../use/forge-the-intent.md)):
+   it asks, reflects back what it understood and asks whether to
+   write. Before proposing a change to an existing position, it reads
+   that position's history through `/history <ID>`. A change of
+   substance goes into the intent first and propagates down the chain
+   from there, whichever layer showed the need for it. On your word
+   `write`, Claude writes the position and, in the same step, its
+   record in the history companion beside the intent,
+   `projects/forge/10-intent.history.md`: one record per change,
+   `Was` included, its author the one who decided it. The reflection
+   before the write shows you the new wording and the records.
+   You should now see the position in `projects/forge/10-intent.md`,
+   the intent's version bumped, its `last_change` derived from the
+   new record, and the record in the companion.
 
-- **One mechanism lives in one place.** Whatever the forge has a
-  procedure for is used through its own definition and cited by path
-  from anywhere else; a procedure stated in two places is a defect,
-  because the two copies drift and the copy without a rule silently
-  loses it. A rule that is new and has no owner gets one, a skeleton
-  or a section, never a second description.
-- **The operating layer honours the intent.** Every position of the
-  forge intent is to be honoured by the core documents, and nothing
-  withdrawn or rejected may still be advertised there. Where the
-  operating layer and the intent differ, that difference is a
-  finding, found by the check in step 5.
+2. **Claude writes the item of the solution design.** Run
+   `/forge solution-design forge`. The solution design is the layer
+   below the intent that says what realises what the intent wants.
+   Claude writes the item where your change solves something, and its
+   record in the companion beside it, in the same step.
+   You should now see the item in `projects/forge/40-solution-design.md`
+   and the record in `projects/forge/40-solution-design.history.md`.
 
-### 4. Record it
+3. **You change the operating layer.** Edit the file that carries the
+   behaviour. Keep one rule in one place: a procedure, a rule set or a
+   file shape that another file owns is cited by its path, never
+   restated. A command table in `CLAUDE.md`, a skill, an agent and
+   its front-matter, a template and a script's help header are all
+   read by the checks of the next step. Where the operating layer and
+   the intent differ after your edit, that difference is a finding of
+   `/check engine`.
+   You should now see the file changed and nothing of the old
+   behaviour advertised anywhere else in the core.
 
-Every versioned document keeps its history in an append-only
-companion beside it, and the record is written in the same step as
-the change. A round that touched the intent or the solution design
-already has its records from steps 1 and 2.
+4. **The checks prove the change.** Run `/check engine` (see
+   [Check conformance](../use/check-conformance.md)). The check reads
+   the core (`CLAUDE.md`, `templates/`, `.claude/skills/`,
+   `.claude/agents/`, `scripts/`) and the forge intent with its
+   threads and decisions, and verifies three things: the core agrees
+   with itself (the commands table against the skills on disk, the
+   agents against their files, every skill an agent names exists, the
+   scripts on disk against `CLAUDE.md`, the templates against the
+   conventions); every position is honoured by the core and nothing
+   withdrawn is still advertised; and no old name from a recorded
+   rename survives outside the historical records. Before a major, or
+   after a round on the operating layer, also run
+   `/check single-source-of-truth`: it reads the whole operating
+   layer and verifies that every rule, procedure and file shape is
+   written in one place and cited everywhere else, that a reviewer
+   file carries only its front-matter and its Lens section, and that
+   nothing operates directly where a mechanism exists. The result is
+   reported to you always, even when clean. Findings are settled by
+   walkthrough: one item per message, each closed with your verdict.
+   You should now see either the statement that the check passed or
+   its findings, one by one, waiting for your verdict.
 
-A change of the operating layer that touches no item of the intent
-still gets a record: in the forge's own project it is written under
-the subject `operating layer`, one record a round, so that the
-release notes can be derived from it. What the user must do after
-the change, if anything, is written with the record in its `Action`
-field; the release notes carry it word for word into their
-*Action required*.
+5. **The release records and publishes the change.** Run
+   `/release forge` (see
+   [Release a version](../use/release-a-version.md)). It runs on
+   `main` only. It runs the checks again: `engine` on the engine
+   root, `light` and `project` on `projects/forge`, launched at once,
+   settled by walkthrough. It offers `/critique essence` once, in one
+   sentence, and runs it on your word only. Once the findings are
+   settled it regenerates the README and the release notes from their
+   recipes, always, and reports what materially changed in them: you
+   rule on the delta before the commit. It then reports the age of
+   the documentation, the `version` of `docs/README.md` against the
+   intent's version, and offers `/document` in one sentence; on your
+   word it runs it before the save, on your no, or silence, it runs
+   nothing. A release never regenerates the documentation on its own.
+   Then it saves with the commit message
+   `release <intent version>: <one line>`, the line drawn from the
+   records of the intent's history since the last release, and, when
+   the intent's version is an integer, proposes the tag `v<major>`,
+   taken on your word.
+   You should now see the regenerated `README.md` and
+   `RELEASE-NOTES.md`, the release commit on `main` and, at an
+   approved major, its tag.
 
-The ledger, `projects/forge/ledger.md`, is kept current after every
-operation.
+A process change is complete only once the intent is updated and the
+README re-rendered. Until both are done, the change is not complete,
+whatever the operating layer already says.
 
-### 5. Prove it
+## What you have afterwards
 
-Two checks verify a change of the operating layer. Both are
-mechanical conformance checks, never a critic of the documents and
-never a challenger of the thinking, and each owns one concern and
-none of the other's.
+In your own clone you have the whole change in one place each:
 
-- `/check engine` is run at every release and whenever you want it.
-  It reads the core, `CLAUDE.md`, the templates, the skills, the
-  agents and the scripts, and the forge intent with its threads and
-  decisions, and verifies the core against itself and against the
-  intent: the commands table against the skills on disk, the agents
-  described against the agents present, every skill an agent names in
-  its front-matter present, every script on disk described in
-  `CLAUDE.md`, the templates in agreement with the conventions; every
-  position honoured and nothing withdrawn still advertised; every
-  decision reflected in the intent; and a sweep for names that were
-  renamed or dropped. It costs minutes, so a release can afford it
-  every time.
-- `/check single-source-of-truth` is the honest sweep, expensive by
-  design. It reads the whole operating layer, always the whole and
-  never a changed subset, and verifies that every rule, procedure and
-  file shape is written in one place and cited everywhere else, that
-  a reviewer file carries only its own front-matter and Lens section,
-  and that no skill or agent performs directly what a script, a
-  command or an agent exists for. It is fit before a major or after a
-  round on the operating layer, run on your word; a release never runs
-  it on its own, so that the rule costs a release nothing.
+- the position in `projects/forge/10-intent.md`, saying what is
+  wanted and why, with its record in the history companion;
+- the item in `projects/forge/40-solution-design.md` where the change
+  solves something, with its record;
+- the changed file of the operating layer, in agreement with both;
+- the check reports, where a check found something;
+- the README and the release notes regenerated, the release saved
+  and pushed from `main`.
 
-A check that finds nothing files nothing. Findings are filed as an
-immutable, dated report in `projects/forge/reviews/` and settled by
-walkthrough, one item per message; a finding may be parked. The
-check is advisory: nothing blocks, only you publish.
+The history log is the single primary record. The commit message of
+the release and the release notes are derived from it, never the
+other way round.
 
-### 6. Release it
+If you want the change in the public engine, `CONTRIBUTING.md` at
+the engine root says how a visitor sends feedback, an idea or a
+change. The easiest way is to open a discussion first. A pull request
+for a change of behaviour carries:
 
-Run `/release forge`. The release runs from `main` only; on another
-branch it stops and says how to get back. It then:
+- the position in `projects/forge/10-intent.md`, with its record in
+  the history beside it;
+- the item in `projects/forge/40-solution-design.md`;
+- the change itself;
+- one line on what you ran.
 
-1. runs the checks `light`, `engine` and `project` over the sources,
-   launched at once, and reports the result even when clean; findings
-   are settled by walkthrough before anything is rendered, so that a
-   fix of the walkthrough is already in what the renders derive from;
-2. offers the critic lens `essence` once, in one sentence, and runs
-   it only on your word;
-3. regenerates `README.md` and `RELEASE-NOTES.md` from their recipes
-   through `/render`, unconditionally, and reports what materially
-   changed in them, because a regeneration is stochastic and passes
-   under your eyes before the commit; no other render is regenerated
-   here;
-4. reports the age of the documentation, the `version` in the
-   front-matter of `docs/README.md` against the intent's version, and
-   offers `/document` in one sentence; it runs only on your word,
-   before the save, so that the release carries current pages. A
-   release never regenerates the documentation on its own;
-5. saves through `/save` with the message `release <intent version>:
-   <one line>`, the line drawn from the records of the intent's
-   history since the last release, and, when the intent's version is
-   an integer, proposes the tag `v<major>`, taken on your word.
+It does not carry a release, nor a regenerated README, release notes
+or documentation: the author makes those at the next release. A
+brief may come first and need not. Try your change yourself before
+you send it. A change written with an AI is welcome on the same
+rule, and the pull request says what was run. In your own clone you
+decide everything, the forge there is yours. What is merged into the
+public engine its author decides.
 
-A process change is complete only once the forge intent is updated
-and the README re-rendered.
+## If something goes wrong
 
-### 7. Regenerate the documentation
+- **`/release forge` stops before anything runs.** The repository is
+  not on `main`. The release reports the branch it is on and how to
+  get back: `python scripts/forge-branch.py forge main`, after
+  saving. Merging a branch into `main` is git's business, by hand or
+  by merge request, never the release's.
+- **`/check engine` reports that a position is not honoured, or
+  that something withdrawn is still advertised.** The operating layer
+  and the intent differ. Settle the finding in the walkthrough and
+  fix the side that is wrong: the intent first, where what is wanted
+  changed; the operating layer, where the intent is right.
+- **`/check engine` reports that the README contradicts `CLAUDE.md`
+  or the intent.** That is a recipe defect. Fix it in
+  `projects/forge/recipes/readme.md` or in what the recipe reads,
+  never in `README.md`; the release regenerates the file.
+- **`/check engine` reports a skill an agent names that does not
+  exist.** Claude Code skips a missing skill silently, so the agent
+  would run without its contract. Create the skill at
+  `.claude/skills/<name>/SKILL.md` or correct the name in the
+  agent's front-matter.
+- **`/check single-source-of-truth` reports a restatement.** The
+  same steps, rules or shape stand in two places, whatever the
+  wording. The fix is a reference to the owner and the deletion of
+  the copy. Where a shape has no owner at all, the finding proposes
+  one, a skeleton or a section of `CLAUDE.md`, never a second
+  description.
+- **A finding you do not want to settle now.** A finding may be
+  parked and the release proceeds. The check is advisory. A finding
+  you have not settled when you order the release to go on is parked
+  by that word, and the release says so aloud. Nothing is ever fixed
+  silently.
 
-The documentation in `docs/` is generated, never composed by hand.
-`/document` runs as one run that asks nothing: a planner writes the
-map, `projects/forge/docs-map.md`, a script computes which pages are
-stale from the hashes of each page's inputs, one writer per stale
-page remakes it, and scripts derive the index and check the pages.
-Only the pages whose inputs changed are regenerated; the rest are
-kept. What is wrong on a page is mended in the file that owns the
-matter, and the page is regenerated; a page is never touched by hand.
-The run is a guarded command: it starts on your word, by slash or by
-asking in words, never on Claude's own judgement.
+## A worked example
 
-## A change of a document that is a render
+The change is invented: you want `/end` to name the branch each
+repository is on when it says what a shutdown would lose.
 
-`README.md`, `RELEASE-NOTES.md` and `CONTRIBUTING.md` in the
-repository root are renders: generated from recipes, never edited by
-hand. A change to one of them goes into its recipe in
-`projects/forge/recipes/` (`readme.md`, `release-notes.md`,
-`contributing.md`) or into what the recipe reads, and the file is
-regenerated with `/render <recipe>`. The README and the release notes
-are regenerated at every release; `CONTRIBUTING.md` is not, so after
-a change to its recipe you run `/render contributing` yourself. A
-recipe is versioned and keeps a history companion like any artefact,
-but it stays at 0.x and is never approved.
+1. It changes what a command does, so it goes through the chain.
+2. `/forge intent forge`. You say what you want and why. Claude
+   reflects back one position: at the end of a session `/end` names
+   the branch of every repository with changes. You answer `write`.
+   Claude writes the position into `projects/forge/10-intent.md` and
+   its record into `projects/forge/10-intent.history.md`; the
+   intent's version bumps and `last_change` is derived from the
+   record.
+3. `/forge solution-design forge`. Claude writes the item that the
+   `/end` command lists the branch beside each repository, reading it
+   through `python scripts/forge-status.py`, the only door to git,
+   and the record beside it in
+   `projects/forge/40-solution-design.history.md`.
+4. You edit `.claude/skills/end/SKILL.md` and add the branch to what
+   it reports. You leave the commands table of `CLAUDE.md` as it is.
+5. `/check engine`. One finding: the purpose of `/end` in the
+   commands table of `CLAUDE.md` no longer matches what the skill
+   does. In the walkthrough you accept it and bring the table line up
+   to date. The check is clean on the next run.
+6. `/release forge`. The repository is on `main`. The checks pass and
+   Claude states so. You decline `/critique essence`. The README and
+   the release notes are regenerated; Claude reports that the release
+   notes gained one line on `/end`, and you accept the delta. Claude
+   reports that the documentation is older than the intent and offers
+   `/document`; you say yes, and the pages are regenerated before the
+   save. The commit `release <version>: /end names the branch of each
+   repository` lands on `main`. The version is not an integer, so no
+   tag is proposed.
 
-## Sending a change from outside
-
-A visitor to the repository finds the way in `CONTRIBUTING.md` in the
-root. It names three channels by kind: a discussion for what you
-found and for an idea, an issue for something broken, and a pull
-request for a change. Feedback and ideas are what is wanted most, and
-for a change of behaviour the easiest way is to open a discussion
-first.
-
-A pull request for a change of behaviour carries the same things as
-the order above: the position in `projects/forge/10-intent.md` saying
-what is wanted and why, with its record in the history beside it; the
-item in `projects/forge/40-solution-design.md` where the change
-solves something; and the change itself. The forge's own commands do
-this work. A pull request for a change that alters no behaviour
-carries the change alone. Whatever the kind, try your change yourself
-before you send it; a change written with an AI is welcome on the
-same rule, and the pull request says what was run. What enters the
-forge stays the principal's decision.
+As a visitor, you stop after step 5 and open a pull request carrying
+the position with its record, the item with its record, the changed
+skill and the line `ran /check engine, clean`. The release and the
+regenerated files are the author's, at the next release.
 
 ## See also
 
@@ -225,3 +283,6 @@ forge stays the principal's decision.
 - [Check conformance](../use/check-conformance.md): running the checks.
 - [Release a version](../use/release-a-version.md): the release.
 - [Generate the documentation](../use/generate-the-documentation.md): regenerating the pages.
+- [Glossary](../reference/glossary.md): every term of the forge in one line.
+
+Generated on 2026-10-11 for version 5.3 from the files the front-matter names; never edited by hand.
