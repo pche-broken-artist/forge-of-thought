@@ -2,9 +2,9 @@
 project: forge
 purpose: Slide-by-slide source material for a five-slide executive pitch of Forge of Thought
 audience: C-level executives whose experience of AI is chatting with it
-version: 0.7
-updated: 2026-10-02
-last_change: 0.7 (2026-10-02): the date and origin of the style decision moved to the history.
+version: 0.8
+updated: 2026-10-12
+last_change: 0.8 (2026-10-12): S02 says the idea is approved on its owner's word, not locked (FND.1560).
 ---
 
 # Recipe — Executive pitch
@@ -85,7 +85,7 @@ per slide:
 | # | Slide | Content | Diagram |
 |---|---|---|---|
 | S01 | The chat answers. Nobody checks the question. | Today: idea → chat → good answer → e-mail → assignment. The answer takes a minute; what was in the head was never examined. The error is not in the answer, it is in the question — and nobody reads the question. Closing line: **The mistake is upstream of the answer.** | Flow: idea → chat → assignment, with a question mark over the first arrow |
-| S02 | A forge, not a whisperer. | The idea enters as written and never changes. From it a working shape is hammered until it holds: what I want, why, what is open, what I dropped and why. Only then is an output cast — and the output can be anything: an assignment for a team, a strategy paper, a board proposal, an argument for the supervisory board, input to someone else's document. Form comes last; substance is forged once. The AI does not compose — it asks, argues back, keeps order. The human decides. Closing line: **Substance forged once, form cast at the end.** | Three stations: idea (locked) → working shape (rewritten) → outputs (many) |
+| S02 | A forge, not a whisperer. | The idea enters as its owner wrote it and is approved on his word. From it a working shape is hammered until it holds: what I want, why, what is open, what I dropped and why. Only then is an output cast — and the output can be anything: an assignment for a team, a strategy paper, a board proposal, an argument for the supervisory board, input to someone else's document. Form comes last; substance is forged once. The AI does not compose — it asks, argues back, keeps order. The human decides. Closing line: **Substance forged once, form cast at the end.** | Three stations: idea (approved) → working shape (rewritten) → outputs (many) |
 | S03 | Opponents that never saw you. | Each opponent has one job. One reads only the document and hunts for what is unclear or self-contradictory. Another reads only the document and attacks the substance: is this even the right problem? what happens in a year? More are added as the need shows: an opponent for each angle the idea must survive. All work in isolation — they do not know the conversation and cannot nod along. Every objection ends in a recorded verdict: accepted, rejected with a reason, left open. Example: one enterprise platform project — thirty-four objections, thirty-one accepted, three rejected with a written reason, before a single team member saw it. Closing line: **An AI that argues back, and a verdict that is written down.** | — |
 | S04 | One idea, every audience in its own language. | From the same forged substance the outputs are generated for each audience: a five-minute pitch for group leadership, a technical deck for a supplier, a one-page mail for a colleague, an executive summary, an architecture picture for someone outside IT, a deck for the delivery team. Each output has its own description — for whom, what, how long — and that is what gets tuned, never the text. The idea changes → everything regenerates at once, every output at the current version. No "which version of the deck is the right one", no rewriting five documents after one change. Closing line: **Change the idea once; every output follows.** | Hub: the forged substance in the centre, the six outputs of the Content around it, each labelled with its audience |
 | S05 | What it means for you. | Three lines, not a feature list: an assignment that survives the team's first question; every decision carries a date and a reason — a year later too; an idea from anyone, the same discipline for everyone, from the CEO to the analyst. Closing line: **A chat gives you an answer. The forge gives you a decision you can stand behind.** | — |

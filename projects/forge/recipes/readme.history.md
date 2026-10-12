@@ -14,7 +14,8 @@ is an ID, several IDs where the whole line holds for each, or a
 place without an ID: a section, the file, or in the forge's own
 project the operating layer. Reason is left out on
 `created`; `Action` and `Was` only where the record has them, `Was`
-always last, paragraphs in it divided by `<br>`. At the birth of a
+always last, paragraphs in it divided by `<br>`; a thread that
+closes carries its last text in `Was`. At the birth of a
 document, one record of the file and one naming every item born
 with it. Lines are not wrapped. -->
 
@@ -37,3 +38,4 @@ with it. Lines are not wrapped. -->
 - 2026-10-11 | 0.63 | PCHe | Instructions | changed | Section 6 lists the five sections of the documentation with one sentence each; the page titles stay in the index (audit F.44: lines 255 to 351 of the README repeated every title). | Was: Then the contents of the documentation, clickable: the five sections of the index in its order, each as a bold line, under it one bullet per page with its title linked to its relative path, titles only, the sentences stay in the index.
 - 2026-10-11 | 0.63 | PCHe | Pinned facts | changed | Python must be a real executable on PATH: the hook runs without a shell and an alias does not reach it; the package on Debian or Ubuntu, a symlink elsewhere (audit F.04). | Was: (on Linux or macOS, where only `python3` exists, give it that name by an alias or the `python-is-python3` package)
 - 2026-10-11 | 0.63 | PCHe | Template | changed | The Quickstart and section 6 placeholders follow the instructions (the same records).
+- 2026-10-12 | 0.64 | PCHe | Pinned facts | changed | The note cites the owners of the place, POS.1450 and SOL.0500, not the brief and the closed thread (FND.1550 of the engine check of 2026-10-12). | Was: brief `documentation`, THR.0340: the place of the pinned facts

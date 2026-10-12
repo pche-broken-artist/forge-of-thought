@@ -15,8 +15,8 @@ an import that is a fact the command reports, at a check a finding
 with the one-line fix (the one owner of this rule).
 Kind: `thought` keeps every table below. `library` (POS.0960) keeps
 only Renders, Sources, Dependencies, Research and Waiting on
-principal; the Briefs, Documents, Published, Findings and Challenges
-tables are deleted at scaffold time; the Findings table returns with
+principal; the Briefs, Documents, Published, Work, Findings and
+Challenges tables are deleted at scaffold time; the Findings table returns with
 a check's first finding (`.claude/skills/check/SKILL.md`). This
 comment is the one owner of that reduction (POS.1070). -->
 
@@ -54,6 +54,16 @@ Document chain, Renders). State: current | stale — set to current by
 /publish, to stale by every /render of that recipe. -->
 | File | Recipe | From render | Model | Published | State |
 |---|---|---|---|---|---|
+
+## Work
+<!-- Work products (CLAUDE.md, Document kinds; POS.1520): one row per
+work product, written by /work at the specification's birth and kept
+by every making. Specification = its version. State: current — set by
+the making; stale — set by a write of the specification not followed
+by a making; by hand — set on the principal's word when he has worked
+the file and does not want it remade. -->
+| File | Specification | Inputs | Made | State |
+|---|---|---|---|---|
 
 ## Sources
 <!-- Registration only. External inputs, immutable once registered.

@@ -1,8 +1,8 @@
 ---
-version: 5.5
-date: 2026-10-11
+version: 5.6
+date: 2026-10-12
 status: draft
-last_change: 5.5 (2026-10-11): THR.0350, THR.0470, THR.0560 and THR.0630 closed, each with its last text in `Was`, the first closings by the rule of 5.4; their remainders in THR.0620 and THR.0640.
+last_change: 5.6 (2026-10-12): POS.1520 created: the work product, a document kind of its own, in a group of its own, with the language of its specification and its file; POS.1080 and POS.0310 bring the kind along (FND.1520 to FND.1540).
 project: forge
 audience: principal + Claude only
 ---
@@ -786,6 +786,40 @@ position that already stands elsewhere.
   why, against what, at what price, and how the parts fit. A check keeps
   it true against what realises it. When it is complete is its
   definition's. Decided 2026-10-03.
+- **POS.1520 A work product.** A project may make outputs that are
+  neither artefacts nor renders: any result of Claude's work the
+  principal asked for, a model, an analysis, a worked task, in whatever
+  form the work needs. Such an output takes its inputs from the chain
+  and the resources, adds work of its own, is iterated, is handed over
+  as a result of the project, and what it shows flows back into the
+  intent. It is a document kind of its own, **work**, in a group of its
+  own, `work/`, and it is two files: the file that holds the content,
+  `work/<name>.<ext>`, and beside it the specification `work/<name>.md`
+  that holds the way and the why: what the task is, from which items and
+  files it starts, cited by ID and path and never copied, the method,
+  the assumptions as ASM items, what is open as TBC items with an owner,
+  and how the file is made from it; no prefix of its own. The
+  specification is written in the project's language as the artefacts
+  are, the file in whatever language the work needs, which `## Making`
+  says. The specification is versioned by the house scheme with its
+  history companion (POS.0310) and approvable, since a work product is
+  handed over and a sign-off means something there; the file is made
+  from it again whenever it changes. The principal works with the file
+  freely, that is what it is for: a conclusion that is to hold goes
+  intent-first into a position (POS.0900), a change of the structure
+  into the specification, and a file touched by hand and not remade is
+  said so in the ledger's Work table. It is composed as any artefact is,
+  by elicitation or handed over (POS.1410): Claude proposes with his
+  assumptions and choices listed, the principal judges. Its neighbours
+  stay what they are: a render is a view of the chain for an audience,
+  carries no content of its own and is never edited by hand (POS.0710);
+  a research note answers one question about the world outside and is
+  immutable (POS.0160); an artefact of the chain is the principal's
+  thinking in items with IDs, which a file of any form cannot carry.
+  Stretching the render to cover it was weighed and dropped: it would
+  have cost the rule that a render is never edited by hand. What
+  realises the kind is the solution design's. The principal's word of
+  2026-10-12.
 
 ### Structure and style of an assignment
 - **POS.0200** Structured items with stable IDs beat prose, even at very
@@ -846,7 +880,7 @@ position that already stands elsewhere.
   item text where they help; they are never part of the ID.
 
 ### Versioning and state
-- **POS.1080** A project's documents fall into five groups, and
+- **POS.1080** A project's documents fall into six groups, and
   the kinds the table lists; the kind determines what a document is, who
   writes it, whether it is versioned and how it behaves. "Document" is
   the word for every file of a project; "artefact" is reserved for the
@@ -867,6 +901,7 @@ position that already stands elsewhere.
   | rendering | recipe | how a render is made | Claude, principal iterates | yes | iterated, never approved |
   | rendering | render | audience-specific output, never a source of truth | generated | — | overwritten by /render |
   | rendering | page | a page of the documentation, or its index; never a source of truth | generated | — | overwritten by the documentation run |
+  | work | work | an output of the project made with work of its own: the file holds the content, the specification beside it the way and the why | Claude, the principal judges | yes, the specification | the file remade from the specification; the principal works with it freely |
   | resources | source | external input as it arrived | external, /ingest | — | immutable |
   | resources | research | durable answer to one question | Claude, /research | — | immutable |
 
@@ -908,7 +943,8 @@ position that already stands elsewhere.
   append-only companion `<file>.history.md` beside it, never in its
   body: the body is the current state, the companion the record. One
   rule without exception: brief, intent, assignment, every later
-  artefact and the recipe alike. The history is a log. One record is one
+  artefact, the recipe and the work specification alike. The history is
+  a log. One record is one
   change and one line; records are appended at the end of the file and
   never rewritten, so the order of the file is the order of the changes.
   A version may hold several records, of the same item too. `Was` is

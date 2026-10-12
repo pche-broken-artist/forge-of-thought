@@ -14,8 +14,10 @@ is an ID, several IDs where the whole line holds for each, or a
 place without an ID: a section, the file, or in the forge's own
 project the operating layer. Reason is left out on
 `created`; `Action` and `Was` only where the record has them, `Was`
-always last, paragraphs in it divided by `<br>`. At the birth of a
+always last, paragraphs in it divided by `<br>`; a thread that
+closes carries its last text in `Was`. At the birth of a
 document, one record of the file and one naming every item born
 with it. Lines are not wrapped. -->
 
 - 2026-10-02 | 0.7 | PCHe | Format | changed | The date and origin of the style decision moved to the history; the archive's row 0.3 holds the decision too (FND.0530). | Was: (principal's decision of 2026-09-10; no `.potx`)
+- 2026-10-12 | 0.8 | PCHe | Template | changed | S02 and its diagram: the idea is approved on its owner's word, the locking of a brief being withdrawn (POS.0110; FND.1560 of the engine check of 2026-10-12). | Was: The idea enters as written and never changes. … idea (locked)

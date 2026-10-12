@@ -14,8 +14,8 @@ an import that is a fact the command reports, at a check a finding
 with the one-line fix (the one owner of this rule).
 Kind: `thought` keeps every table below. `library` (POS.0960) keeps
 only Renders, Sources, Dependencies, Research and Waiting on
-principal; the Briefs, Documents, Published, Findings and Challenges
-tables are deleted at scaffold time; the Findings table returns with
+principal; the Briefs, Documents, Published, Work, Findings and
+Challenges tables are deleted at scaffold time; the Findings table returns with
 a check's first finding (`.claude/skills/check/SKILL.md`). This
 comment is the one owner of that reduction (POS.1070). -->
 
@@ -36,8 +36,8 @@ absorbed it; Note says what remains (partial) or the REJ (dropped). -->
 ## Documents
 | File | Version | Status | Date |
 |---|---|---|---|
-| 10-intent.md | 5.5 | draft | 2026-10-11 |
-| 40-solution-design.md | 0.13 | draft | 2026-10-11 |
+| 10-intent.md | 5.6 | draft | 2026-10-12 |
+| 40-solution-design.md | 0.14 | draft | 2026-10-12 |
 <!-- One row per layer below the intent, added when the layer is
 born; a layer the project does not have gets no row (CLAUDE.md,
 Ledger). -->
@@ -69,6 +69,16 @@ Document chain, Renders). State: current | stale — set to current by
 | published/executive-pitch.pptx | recipes/executive-pitch.md v0.4 | generated 2026-09-11, projects/forge/10-intent.md v4.4, CLAUDE.md | opus | 2026-09-11 | stale |
 | published/cto-pitch.docx | recipes/cto-pitch.md v0.5 | generated 2026-09-20, projects/forge/10-intent.md v4.15, CLAUDE.md | opus | 2026-09-27 | stale |
 | published/ba-intro.pptx | recipes/ba-intro.md v0.1 | generated 2026-10-12, CLAUDE.md, projects/forge/10-intent.md v5.5, .claude/skills/forge/states/, sixteen pages of docs/ v5.3, CONTRIBUTING.md | opus | 2026-10-12 | current |
+
+## Work
+<!-- Work products (CLAUDE.md, Document kinds; POS.1520): one row per
+work product, written by /work at the specification's birth and kept
+by every making. Specification = its version. State: current — set by
+the making; stale — set by a write of the specification not followed
+by a making; by hand — set on the principal's word when he has worked
+the file and does not want it remade. -->
+| File | Specification | Inputs | Made | State |
+|---|---|---|---|---|
 
 ## Sources
 <!-- Registration only. External inputs, immutable once registered.
@@ -299,6 +309,14 @@ as `rejected`. -->
 | FND.1490 | low | conformance | resolved | 2026-10-11-check-light.md | THR.0650 opened at intent 5.4, the line cut to the ID |
 | FND.1500 | low | conformance | resolved | 2026-10-12-check-light.md | both cells say sixteen pages |
 | FND.1510 | low | conformance | resolved | 2026-10-12-check-light.md | a line under Waiting on principal for the recipe ba-intro |
+| FND.1520 | low | conformance | resolved | 2026-10-12-check-engine.md | intent 5.6 POS.1520 and CLAUDE.md prime directive 6 say the language of the specification and the file |
+| FND.1530 | low | conformance | resolved | 2026-10-12-check-engine.md | CLAUDE.md Versioning & status and POS.0310 name the work specification |
+| FND.1540 | low | conformance | resolved | 2026-10-12-check-engine.md | POS.1080 says six groups |
+| FND.1550 | low | conformance | resolved | 2026-10-12-check-engine.md | readme recipe 0.64 cites POS.1450 and SOL.0500 |
+| FND.1560 | low | conformance | resolved | 2026-10-12-check-engine.md | executive-pitch recipe 0.8, S02 idea approved |
+| FND.1570 | low | conformance | resolved | 2026-10-12-check-engine.md | THR.0400 names scripts/hook-gate.py |
+| FND.1580 | low | conformance | resolved | 2026-10-12-check-light-2.md | the Work table and the header comment from the template |
+| FND.1590 | low | conformance | resolved | 2026-10-12-check-light-2.md | the comment of twelve history companions from the template |
 
 Four review files are named outside the convention — accepted as they
 are by DEC.0140.
@@ -342,14 +360,10 @@ copy — CLAUDE.md, Ledger. -->
   2026-10-11.
 - THR.0520 — a layer for the solution; priority; steps 1 to 5 done,
   step 6 (the BRD) paused 2026-10-04.
-- the recipe `ba-intro` 0.1, handed over 2026-10-11 for the
-  presentation to business analysts, its render and published deck
-  made 2026-10-12; the principal's judgement of the recipe open;
-  an ID at the next write of the intent.
 - THR.0570 — the presentation of the forge and what is to be ready
   for it; opened 2026-10-04; the major 5.0 approved and released
-  2026-10-10; his verdict on the two pitch renders and the rest of
-  the thread open.
+  2026-10-10; his verdict on the two pitch renders, his judgement
+  of the recipe `ba-intro` 0.1 and the rest of the thread open.
 - THR.0530 — what can be done deterministically is done by a script;
   the principal's stance of 2026-10-04, to be a prime directive;
   research of 2026-10-04; open.

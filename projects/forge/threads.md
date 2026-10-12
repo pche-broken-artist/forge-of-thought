@@ -455,7 +455,7 @@ project: forge
   approved. Done the same day, as the soft half: the per-prompt hook
   prints the three rules beside its two walkthrough lines
   (POS.1170). Open, the hard half: a `PreToolUse` hook,
-  `scripts/hook-gate.ps1` in Claude's proposal, that reads each
+  `scripts/hook-gate.py` in Claude's proposal, that reads each
   command and each write before it runs and answers deny (raw `git`,
   raw `pandoc` or `markitdown`, with the script to use instead),
   allow (plain reading; writes to the session's scratch and to
@@ -829,6 +829,9 @@ project: forge
   `single-source-of-truth`, both lenses, one challenge, all settled
   at 4.65. Approved 2026-10-10 as 5.0; the text of the closing stands
   in the approval record of the intent's history.
+  2026-10-12: the recipe `ba-intro` 0.1, handed over 2026-10-11 for the
+  presentation to business analysts, its render and published deck made
+  2026-10-12; the principal's judgement of the recipe open.
 - **THR.0590** [intent] What the documentation of a project other than
   the engine reads. A project may be self-contained like the forge, a
   strategy that generates a heap of files, a budgeting exercise, or

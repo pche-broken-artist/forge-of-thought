@@ -2,9 +2,9 @@
 project: forge
 purpose: readme
 audience: humans arriving at the repository
-version: 0.63
-updated: 2026-10-11
-last_change: 0.63 (2026-10-11): the Quickstart names git and Python before the clone and makes the one-off git init a step of the new-project path with what to do when /save saves nothing; portability said as written for, not run on; section 6 lists the sections of the documentation, not every page; the pinned Python fact asks for a real executable (documentation audit F.01, F.04, F.06, F.44).
+version: 0.64
+updated: 2026-10-12
+last_change: 0.64 (2026-10-12): the Pinned facts note cites POS.1450 and SOL.0500 as the owners of their place, not the closed thread (FND.1550).
 output: /README.md
 ---
 
@@ -260,8 +260,8 @@ summarising the newest row. -->
 
 ## Pinned facts (not rendered)
 These facts have no owner among the engine's files and this recipe
-is their one home until they get one (brief `documentation`, THR.0340:
-the place of the pinned facts). The README does not print them; the
+is their one home until they get one (POS.1450 and SOL.0500: the
+place of the pinned facts). The README does not print them; the
 documentation's planner reads them here as an owner, and
 `docs/start/install.md` and `docs/start/setup.md` are where they
 reach the reader. Update them here when they change.

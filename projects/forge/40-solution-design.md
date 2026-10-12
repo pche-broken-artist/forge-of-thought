@@ -1,8 +1,8 @@
 ---
-version: 0.13
-date: 2026-10-11
+version: 0.14
+date: 2026-10-12
 status: draft
-last_change: 0.13 (2026-10-11): the generator hashed with the inputs, from the comparison against the audit's measurements (SOL.0460).
+last_change: 0.14 (2026-10-12): SOL.0640 created: the work product, its command, its specification and its ledger table.
 project: forge
 audience: whoever realises the solution, a person or an agent
 ---
@@ -402,6 +402,32 @@ direction, a boundary kept by hand or an order of work.
   `.claude/skills/ingest/SKILL.md`,
   `.claude/skills/research/SKILL.md`,
   `.claude/skills/new-project/SKILL.md`,
+  `.claude/agents/check-light.md`.
+- **SOL.0640 The work product.** `/work <name> [slug]`
+  (`.claude/skills/work/SKILL.md`) is the one door to a work product:
+  bare, it lists the project's work products from the ledger; with a
+  name, it works the specification `work/<name>.md` with the principal,
+  by elicitation or handed over, and makes the file `work/<name>.<ext>`
+  from it in the same round on his word. The first specification is
+  created from `templates/work.md` as v0.1, with its companion
+  `work/<name>.history.md` from `templates/history.md` and its row in
+  the ledger's Work table; the specification's `## Making` section says
+  how the file is made from it, and nothing of it is copied into the
+  file. The Work table carries one row per work product: the file, the
+  specification with its version, the inputs with their versions, when
+  the file was made and its state: `current`, set by the making;
+  `stale`, set by a write of the specification not followed by a making;
+  `by hand`, set on the principal's word when he has worked the file and
+  does not want it remade. `CLAUDE.md` carries the kind in the Document
+  kinds table, `work/` in the layout and the command in the Commands
+  table; the check `light` verifies the Work table against the directory
+  as it does the other tables. Realises: POS.1520. Choice: one command
+  for the specification and the file against two, as `/recipe` and
+  `/render` are: the making is a step of the round and the specification
+  is iterated with the principal, so a second command would only
+  separate what one conversation does; the price is a skill that does
+  two things. Where: `.claude/skills/work/SKILL.md`,
+  `templates/work.md`, `templates/ledger.md`, `CLAUDE.md`,
   `.claude/agents/check-light.md`.
 
 ### The reviewers

@@ -60,7 +60,9 @@ never here.
    only that one output language per project, and the conversation
    language is per-instance configuration that never appears in
    outward-facing renders (the README among them). Translate on
-   write. The one exception among the artefacts is the briefs
+   write. A work specification follows the artefacts; its file is in
+   the language its `## Making` says. The one exception among the
+   artefacts is the briefs
    (`00-brief*.md`), kept in whatever language they are written in.
    A render may be in any language its recipe declares.
 7. **Structure over prose.** Items with stable IDs, even at very high
@@ -192,6 +194,7 @@ whether it is versioned and how it behaves:
 | rendering | recipe | how a render is made | Claude, principal iterates | yes | iterated, never approved |
 | rendering | render | audience-specific output, never a source of truth | generated | — | overwritten by /render |
 | rendering | page | a page of the documentation, or its index; never a source of truth | generated | — | overwritten by the documentation run |
+| work | work | an output of the project made with work of its own: the file holds the content, the specification beside it the way and the why | Claude, the principal judges | yes, the specification | the file remade from the specification; the principal works with it freely |
 | resources | source | external input as it arrived | external, /ingest | — | immutable |
 | resources | research | durable answer to one question | Claude, /research | — | immutable |
 
@@ -201,6 +204,8 @@ Every versioned kind keeps its history in a companion beside it
 binary — a `.potx` template, a graphic — is a source, so a library's
 assets are resources without a kind of their own; a library carries
 no artefacts and no records but its recipe's history companion.
+What a work product is and how it is worked is
+`.claude/skills/work/SKILL.md`'s.
 Prose in every document is hard-wrapped
 at about 72 columns so that git diffs stay legible; tables, code
 blocks and front-matter are never wrapped.
@@ -419,6 +424,9 @@ projects/<slug>/           # kind: thought — the chain
                                       # the recipe names a format
   published/<recipe>.pptx             # the designed file, made by
   published/<recipe>.docx             # /publish through a model
+  work/<name>.md                      # a work product: the specification,
+  work/<name>.history.md              # the way and the why, with its
+  work/<name>.<ext>                   # history; and the file, the content
   reviews/YYYY-MM-DD-critique-<lens>.md  # immutable critique runs
   reviews/YYYY-MM-DD-check-<name>.md     # immutable check reports,
                                       # filed when a check finds
@@ -509,8 +517,8 @@ Front-matter carries `version`, `date`, `status`
 must agree with the number: an integer version is `approved`, anything
 else is not; a recipe carries `updated` in place of `date`, no
 status, and stays 0.x.
-Every versioned document — every artefact and every recipe alike, no
-exception — keeps its **history** in an
+Every versioned document — every artefact, every recipe and every
+work specification alike, no exception — keeps its **history** in an
 append-only companion `<file>.history.md` beside it, never in its
 body: the body is the current state, the companion the record. The
 history is a log, one record per change, in the shape
@@ -559,9 +567,9 @@ lifecycle. Depth max two levels.
 | REQ | requirement | assignment |
 | OOS | out of scope / do-not | assignment |
 | CON | constraint — deliberate boundary, not to be challenged | assignment |
-| ASM | assumption | assignment |
+| ASM | assumption | assignment, work specification |
 | DEL | deliverable — may delegate work ("produce NFRs and return") | assignment |
-| TBC | open question / to be confirmed, with owner | assignment, solution design |
+| TBC | open question / to be confirmed, with owner | assignment, solution design, work specification |
 | SOL | part of the solution — what is built or done, what it realises, the choice it rests on | solution design |
 | SCR | success criterion — optional or delegated | assignment |
 | POS | position the principal currently holds | intent |
@@ -645,7 +653,8 @@ propose readiness. The mechanics are the command's
 
 ## Ledger
 `ledger.md` is the **single source of truth for state**: its tables —
-briefs, documents, renders, published files, sources, research,
+briefs, documents, renders, published files, work products, sources,
+research,
 dependencies, findings, challenges — are `templates/ledger.md`'s; resources and dependencies
 are registration only (what a resource is and is for lives in its
 directory's `00-INDEX.md`; a library document, cited by path, carries
@@ -676,6 +685,7 @@ What a command does in full is its skill's
 | `/publish <recipe> [slug]` | make the designed file from a render, through a model |
 | `/document [slug]` | generate the documentation of the engine or of a project into docs/ |
 | `/recipe [genre] [slug]` | compose or iterate a render recipe by genre; bare = the genre roster |
+| `/work [name] [slug]` | work a work product: its specification and its file; bare = the project's work products |
 | `/critique [lens] [artefact] [slug]` | run a critic lens on the quality of the documents; bare = the lens roster |
 | `/challenge [persona] [artefact] [slug]` | run a challenger persona against the substance; bare = the persona roster |
 | `/research <topic> [slug]` | best-practices research into research/, indexed |

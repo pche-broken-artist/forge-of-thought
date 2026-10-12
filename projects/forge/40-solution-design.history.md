@@ -14,7 +14,8 @@ is an ID, several IDs where the whole line holds for each, or a
 place without an ID: a section, the file, or in the forge's own
 project the operating layer. Reason is left out on
 `created`; `Action` and `Was` only where the record has them, `Was`
-always last, paragraphs in it divided by `<br>`. At the birth of a
+always last, paragraphs in it divided by `<br>`; a thread that
+closes carries its last text in `Was`. At the birth of a
 document, one record of the file and one naming every item born
 with it. Lines are not wrapped. -->
 
@@ -48,3 +49,4 @@ with it. Lines are not wrapped. -->
 - 2026-10-11 | 0.13 | PCHe | operating layer | changed | The planner's definition: every page is reached from another page, at least one other entry names it under `links` (M.06: twelve pages reached from the index alone, unchanged by the redraw).
 - 2026-10-11 | 0.13 | PCHe | operating layer | changed | The writer's outline of a how-to names the heading "A worked example" (M.16: three spellings of it on eleven pages, the heading named by nobody).
 - 2026-10-11 | 0.13 | PCHe | operating layer | changed | The contract's sentence: an enumeration whose members carry a gloss is a list, one member per line; a rule, its reason, its exception and its purpose are separate sentences (F.21: 117 sentences of 38 words and more in About, the mean unmoved by 5.2 at 21 words; the two kinds read off the longest).
+- 2026-10-12 | 0.14 | PCHe | SOL.0640 | created

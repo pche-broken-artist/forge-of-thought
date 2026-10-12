@@ -35,6 +35,11 @@ What you verify:
    the Published table and `published/` agree — a row without its
    file, a file without its row (whether a row is `current` or
    `stale` is `/publish`'s and `/render`'s to set, never a finding);
+   the Work table and `work/` agree — every specification in `work/`
+   has a row and every row its specification; a row whose file is not
+   yet made is the normal case before the first making; whether a row
+   is `current`, `stale` or `by hand` is `/work`'s to set, never a
+   finding;
    "Waiting on principal" matches what is actually open. A state
    word the template no longer carries (the mapping:
    `templates/ledger.md`, Findings) is an immediate fix, in the
