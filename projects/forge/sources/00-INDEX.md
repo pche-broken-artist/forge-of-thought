@@ -1,7 +1,7 @@
 ---
 project: forge
 directory: sources
-updated: 2026-10-11
+updated: 2026-10-13
 ---
 
 # Index — sources of Forge of Thought
@@ -44,3 +44,9 @@ to its own 00-INDEX.md — two levels, never deeper. -->
 - **Origin:** Written by Claude on 11 October 2026 in a session outside the forge, from a read-only clone, through six isolated read-only agents, one per part of `docs/`, plus a mechanical measuring pass; registered here the same day.
 - **Role:** An audit of the documentation by a separate agent that went through the whole of `docs/` without the context of this forge: the basis for deciding how the documentation is to be improved.
 - **Use for:** Deciding, finding by finding, what of the documentation and of its generator is changed (F.01–F.46, by walkthrough into the intent and the documentation's definitions); settling the contradictions inside the owner files before a regeneration (C.01–C.07); the measurements as the baseline a later audit is compared with (M.01–M.18).
+
+### `projects/lib-allwyn/sources/fork-brd/` (library document, cited, not copied)
+- **What:** the BRD layer built in a colleague's fork of the engine (intent 2.8, August 2026): the fork's rules, templates, skills and critic, three BRDs with three critique rounds, and the group's BRD standard and tutorial; the bundle's own index catalogues the fourteen files.
+- **Origin:** the company library, registered there on 2026-10-13; kept out of this public project because it carries names, company content and the group's internal standard.
+- **Role:** the material of the engine's own BRD artefact (`/new-artefact brd`, THR.0360, POS.0700): read for the research of the BRD layer and cited by path; nothing of it is copied into the engine.
+- **Use for:** what the fork's BRD layer is and how it held; the group standard's rules; worked BRDs to judge a template by.

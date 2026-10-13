@@ -102,6 +102,7 @@ are maintained by their owner. What the document is for lives where it
 is used (the index entry, the recipe). -->
 | Path | Library | Used by | Note |
 |---|---|---|---|
+| projects/lib-allwyn/sources/fork-brd/ (bundle, its 00-INDEX.md) | lib-allwyn | sources/00-INDEX.md; the research of the BRD layer of 2026-10-13 | private: names, company content, the group's internal standard |
 
 ## Research
 <!-- Registration only. Immutable dated notes written by /research (or
@@ -151,6 +152,8 @@ research/00-INDEX.md, never here. -->
 | 2026-10-10-a-user-only-distribution-of-the-engine.md | 2026-10-10 | the principal's question of 2026-10-10 after the release of 5.0; 10-intent.md v5.0 (POS.0940, POS.0950, THR.0190, THR.0230); the two distribution researches of 2026-08-29; the engine's tree measured on disk |
 | 2026-10-13-what-an-it-or-ai-strategy-contains-light-but-complete.md | 2026-10-13 | the principal's word of 2026-10-13 in the project ai-strategy (a strategy artefact for the forge, research first); 00-brief-next-gen.md v0.3 (Work without a known artefact); 10-intent.md v5.6 (POS.0700, POS.1430); research/2026-10-03-work-without-a-known-artefact-and-its-working-files.md; web sources |
 | 2026-10-13-ai-agents-and-tools-that-make-a-strategy.md | 2026-10-13 | the principal's word of 2026-10-13 in the project ai-strategy; research/2026-10-13-what-an-it-or-ai-strategy-contains-light-but-complete.md; research/2026-10-03-work-without-a-known-artefact-and-its-working-files.md; web sources |
+| 2026-10-13-the-brd-layer-of-the-fork-against-todays-engine.md | 2026-10-13 | the principal's word of 2026-10-13; projects/lib-allwyn/sources/fork-brd/ (cited by path); research/2026-09-07-brd-layer-fork-analysis.md; 10-intent.md v5.8 (POS.0700, POS.1310, POS.1320, POS.1350, POS.1360, POS.1430, POS.1520); threads.md THR.0360; decisions.md DEC.0060; the assignment's definition and the clarity lens |
+| 2026-10-13-what-a-brd-contains-and-how-it-is-found-today.md | 2026-10-13 | the principal's word of 2026-10-13; research/2026-10-13-the-brd-layer-of-the-fork-against-todays-engine.md; research/2026-09-07-brd-layer-fork-analysis.md; research/2026-09-28-artefact-layers-from-idea-to-handover.md; the group's standard and tutorial in the library bundle; web sources |
 
 ## Findings
 <!-- Findings of the critic and of the checks, one sequence. State:
