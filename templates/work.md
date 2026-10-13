@@ -2,9 +2,9 @@
 version: 0.1
 date: YYYY-MM-DD
 status: draft            # draft | approved | superseded
-last_change: <derived from the records of the newest version in work/<name>.history.md>
+last_change: <derived from the records of the newest version in work/<name>.spec.history.md>
 project: <slug>
-file: work/<name>.<ext>  # the file this specification makes
+file: work/<name>.<ext>  # the file this specification makes, named by the work alone
 ---
 
 # <Name> — Work specification

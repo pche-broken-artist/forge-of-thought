@@ -26,8 +26,8 @@ WHAT IT NEEDS
 
 LINES = [
     "Walkthrough rule: one item per reply - acknowledge the last verdict, put one item forward, "
-    "close a proposition with '(a)ccept / (m)odify / (r)eject / (p)ark', stop. "
-    "A question from the principal keeps the item open.",
+    "close a proposition with '(a)ccept / (m)odify / (q)uestion / (r)eject / (p)ark', stop. "
+    "A question from the principal keeps the item open: answer, then close it again.",
     "When a walkthrough or an interview is running, work by .claude/skills/walkthrough/SKILL.md.",
     "Tools: where the forge has a script (scripts/*.py), use the script, never the raw tool. "
     "git only through scripts/forge-*.py, reading state included.",

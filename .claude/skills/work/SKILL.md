@@ -5,9 +5,10 @@ argument-hint: "[name] [project-slug]"
 
 Role: the one door to a work product (CLAUDE.md, Document kinds;
 POS.1520, SOL.0640). A work product is two files in `work/`: the
-specification `work/<name>.md`, the way and the why, and the file
-`work/<name>.<ext>`, the content. Shared mechanism is cited and never
-repeated here: one write per round (CLAUDE.md, prime directive 9),
+specification `work/<name>.spec.md`, the way and the why, and the file
+`work/<name>.<ext>`, the content, named by the work alone. Shared
+mechanism is cited and never repeated here: one write per round
+(CLAUDE.md, prime directive 9),
 versioning with history and ledger (Versioning & status), the language
 (prime directive 6: the specification in the project's language, the
 file in whatever language the work needs, said in `## Making`), the
@@ -23,11 +24,12 @@ interview). The shape of the specification is `templates/work.md`.
 3. Recommend a next step only where the conversation suggests one.
 
 **`/work <name>` — work the specification and make the file.**
-1. Resolve `work/<name>.md`. If it does not exist, its birth is a step
-   of its own on the principal's word (CLAUDE.md, Working methods,
-   Step by step): the specification from `templates/work.md` as v0.1,
-   its companion `work/<name>.history.md` from `templates/history.md`,
-   its row in the ledger's Work table with Made `—` and state `stale`.
+1. Resolve `work/<name>.spec.md`. If it does not exist, its birth is
+   a step of its own on the principal's word (CLAUDE.md, Working
+   methods, Step by step): the specification from `templates/work.md`
+   as v0.1, its companion `work/<name>.spec.history.md` from
+   `templates/history.md`, its row in the ledger's Work table with
+   Made `—` and state `stale`.
 2. Read the inputs the specification names, by ID and by path, as they
    stand; the intent with the project's threads where it is among them.
 3. Work the specification with the principal, the way he chooses:

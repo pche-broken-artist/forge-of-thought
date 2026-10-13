@@ -1,8 +1,8 @@
 ---
-version: 0.14
-date: 2026-10-12
+version: 0.15
+date: 2026-10-13
 status: draft
-last_change: 0.14 (2026-10-12): SOL.0640 created: the work product, its command, its specification and its ledger table.
+last_change: 0.15 (2026-10-13): SOL.0640 changed: the file names of the work product as POS.1520 says them at 5.7.
 project: forge
 audience: whoever realises the solution, a person or an agent
 ---
@@ -406,11 +406,12 @@ direction, a boundary kept by hand or an order of work.
 - **SOL.0640 The work product.** `/work <name> [slug]`
   (`.claude/skills/work/SKILL.md`) is the one door to a work product:
   bare, it lists the project's work products from the ledger; with a
-  name, it works the specification `work/<name>.md` with the principal,
+  name, it works the specification `work/<name>.spec.md` with the
+  principal,
   by elicitation or handed over, and makes the file `work/<name>.<ext>`
   from it in the same round on his word. The first specification is
   created from `templates/work.md` as v0.1, with its companion
-  `work/<name>.history.md` from `templates/history.md` and its row in
+  `work/<name>.spec.history.md` from `templates/history.md` and its row in
   the ledger's Work table; the specification's `## Making` section says
   how the file is made from it, and nothing of it is copied into the
   file. The Work table carries one row per work product: the file, the

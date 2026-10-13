@@ -45,24 +45,28 @@ Every item of a walkthrough ends in one proposition, worded so that
 principal. The proposition states what changes, or that nothing
 changes, and what is recorded; where it goes against the reviewer's
 suggestion, it says so. The message closes with the line
-`(a)ccept / (m)odify / (r)eject / (p)ark`. An open question is not a
-proposition: it closes with the question alone. Where Claude can, he
-turns a question into a proposition, but never by filling a gap with
-an assumption.
+`(a)ccept / (m)odify / (q)uestion / (r)eject / (p)ark`. An open
+question of Claude's is not a proposition: it closes with the
+question alone. Where Claude can, he turns a question into a
+proposition, but never by filling a gap with an assumption.
 
 - `accept`: agreed, the text goes in as shown.
 - `modify`: a discussion opens on the item, and the solution found
   is put forward to be accepted.
+- `question`: the principal asks about the open item. Nothing
+  changes and nothing is written; Claude answers and closes the item
+  again with the verdict line. A question is never read as a
+  modification or a yes.
 - `reject`: not agreed, nothing changes, the reason is recorded.
 - `park`: not now. The item waits and comes back.
 - `obsolete`: no longer relevant, with a note why.
 
 The principal may answer the verdict line with a single letter, `a`,
-`m`, `r` or `p`, when that letter is his whole message. After `m`
-alone Claude asks what he wants changed. Claude's acknowledgement
-names the verdict in full and says what it does. No other word of
-the forge has a letter: `write`, `obsolete` and every command are
-typed in full.
+`m`, `q`, `r` or `p`, when that letter is his whole message. After
+`m` alone Claude asks what he wants changed; after `q` alone, what he
+wants to ask. Claude's acknowledgement names the verdict in full and
+says what it does. No other word of the forge has a letter: `write`,
+`obsolete` and every command are typed in full.
 
 These are the verdict words of every walkthrough, whatever produced
 the list; no command has words of its own.

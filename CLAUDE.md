@@ -102,7 +102,7 @@ any of them in a word.
 - **Walkthrough.** Any list of items needing the principal's decision
   is worked one item per message, in order of weight, every
   proposition closed with the verdict line
-  `(a)ccept / (m)odify / (r)eject / (p)ark`, the verdicts
+  `(a)ccept / (m)odify / (q)uestion / (r)eject / (p)ark`, the verdicts
   carried to one write at the round's end; the shape — of the item,
   of the verdict, of the elicitation interview, of the write-up — is
   `.claude/skills/walkthrough/SKILL.md`, read whenever a walkthrough
@@ -424,8 +424,8 @@ projects/<slug>/           # kind: thought — the chain
                                       # the recipe names a format
   published/<recipe>.pptx             # the designed file, made by
   published/<recipe>.docx             # /publish through a model
-  work/<name>.md                      # a work product: the specification,
-  work/<name>.history.md              # the way and the why, with its
+  work/<name>.spec.md                 # a work product: the specification,
+  work/<name>.spec.history.md         # the way and the why, with its
   work/<name>.<ext>                   # history; and the file, the content
   reviews/YYYY-MM-DD-critique-<lens>.md  # immutable critique runs
   reviews/YYYY-MM-DD-check-<name>.md     # immutable check reports,

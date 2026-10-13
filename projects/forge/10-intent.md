@@ -1,8 +1,8 @@
 ---
-version: 5.6
-date: 2026-10-12
+version: 5.8
+date: 2026-10-13
 status: draft
-last_change: 5.6 (2026-10-12): POS.1520 created: the work product, a document kind of its own, in a group of its own, with the language of its specification and its file; POS.1080 and POS.0310 bring the kind along (FND.1520 to FND.1540).
+last_change: 5.8 (2026-10-13): POS.0850 changed: the verdict `question` in the verdict line, a question on the open item that changes nothing.
 project: forge
 audience: principal + Claude only
 ---
@@ -115,15 +115,19 @@ position that already stands elsewhere.
   item ends in one proposition, worded so that `accept` has exactly one
   meaning — yes to what is in front of the principal, also where the
   proposition goes against the reviewer's suggestion — and the message
-  closes with the verdict line `(a)ccept / (m)odify / (r)eject /
-  (p)ark`. The verdict words are one set for every walkthrough, whatever
-  produced the list: `accept`, `modify` (a discussion opens and the
-  solution found is put forward to be accepted), `reject`, `park` and
-  `obsolete`; the producing command says only what `accept` writes. The
-  principal may answer the line with a single letter when that letter is
-  his whole message; no other word of the forge has a letter, so that
-  nothing which writes or saves can be set off by a slip. Decided
-  2026-09-27. Verdicts are carried in the conversation and written once
+  closes with the verdict line `(a)ccept / (m)odify / (q)uestion /
+  (r)eject / (p)ark`. The verdict words are one set for every
+  walkthrough, whatever produced the list: `accept`, `modify` (a
+  discussion opens and the solution found is put forward to be
+  accepted), `question` (a question on the open item: nothing changes,
+  Claude answers and closes the item again with the verdict line, so
+  that a question is never mistaken for a modification or a yes),
+  `reject`, `park` and `obsolete`; the producing command says only
+  what `accept` writes. The principal may answer the line with a single
+  letter when that letter is his whole message; no other word of the
+  forge has a letter, so that nothing which writes or saves can be set
+  off by a slip, and `question` writes nothing. Decided 2026-09-27,
+  `question` added 2026-10-13. Verdicts are carried in the conversation and written once
   at the round's end (POS.0190). Whatever produces a list ends by
   offering a walkthrough — `/critique`, `/challenge`, the `/forge` map,
   a comparison made on request — and the principal may call for one at
@@ -794,16 +798,18 @@ position that already stands elsewhere.
   as a result of the project, and what it shows flows back into the
   intent. It is a document kind of its own, **work**, in a group of its
   own, `work/`, and it is two files: the file that holds the content,
-  `work/<name>.<ext>`, and beside it the specification `work/<name>.md`
-  that holds the way and the why: what the task is, from which items and
-  files it starts, cited by ID and path and never copied, the method,
-  the assumptions as ASM items, what is open as TBC items with an owner,
-  and how the file is made from it; no prefix of its own. The
+  `work/<name>.<ext>`, named by the work alone, and beside it the
+  specification `work/<name>.spec.md` that holds the way and the why:
+  what the task is, from which items and files it starts, cited by ID
+  and path and never copied, the method, the assumptions as ASM items,
+  what is open as TBC items with an owner, and how the file is made
+  from it; no prefix of its own. The
   specification is written in the project's language as the artefacts
   are, the file in whatever language the work needs, which `## Making`
   says. The specification is versioned by the house scheme with its
-  history companion (POS.0310) and approvable, since a work product is
-  handed over and a sign-off means something there; the file is made
+  history companion `work/<name>.spec.history.md` (POS.0310) and
+  approvable, since a work product is handed over and a sign-off means
+  something there; the file is made
   from it again whenever it changes. The principal works with the file
   freely, that is what it is for: a conclusion that is to hold goes
   intent-first into a position (POS.0900), a change of the structure

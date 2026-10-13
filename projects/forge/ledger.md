@@ -36,8 +36,8 @@ absorbed it; Note says what remains (partial) or the REJ (dropped). -->
 ## Documents
 | File | Version | Status | Date |
 |---|---|---|---|
-| 10-intent.md | 5.6 | draft | 2026-10-12 |
-| 40-solution-design.md | 0.14 | draft | 2026-10-12 |
+| 10-intent.md | 5.8 | draft | 2026-10-13 |
+| 40-solution-design.md | 0.15 | draft | 2026-10-13 |
 <!-- One row per layer below the intent, added when the layer is
 born; a layer the project does not have gets no row (CLAUDE.md,
 Ledger). -->
@@ -319,7 +319,10 @@ as `rejected`. -->
 | FND.1570 | low | conformance | resolved | 2026-10-12-check-engine.md | THR.0400 names scripts/hook-gate.py |
 | FND.1580 | low | conformance | resolved | 2026-10-12-check-light-2.md | the Work table and the header comment from the template |
 | FND.1590 | low | conformance | resolved | 2026-10-12-check-light-2.md | the comment of twelve history companions from the template |
-| FND.1600 | low | conformance | resolved | reviews/2026-10-13-check-light.md | a line under Waiting on principal |
+| FND.1600 | low | conformance | resolved | 2026-10-13-check-light.md | a line under Waiting on principal |
+| FND.1610 | medium | conformance | resolved | 2026-10-13-check-light-2.md | Documents rows 5.8 and 0.15 |
+| FND.1620 | low | conformance | resolved | 2026-10-13-check-light-2.md | the line says the matter is tracked in the project ai-strategy |
+| FND.1630 | low | conformance | resolved | 2026-10-13-check-light-2.md | the bare file name |
 
 Four review files are named outside the convention — accepted as they
 are by DEC.0140.
@@ -357,15 +360,10 @@ intent version for accepted, DEC.NNNN for rejected. -->
 ## Waiting on principal
 <!-- What waits on the principal, one line per matter: cite, never
 copy — CLAUDE.md, Ledger. -->
-- a `strategy` artefact for the forge (`/new-artefact strategy`): his
-  word of 2026-10-13 in the project ai-strategy; the two researches
-  of 2026-10-13 done; a proof of concept of the structure made as
-  the work product `reconstruction` of that project; the birth of
-  the definition open; a thread at the next write of the intent.
-- the file name of a Markdown work file: by `templates/work.md` the
-  specification and a Markdown file would both be `work/<name>.md`;
-  the project ai-strategy carries `.strategy.md` (its TBC.0020); a
-  rule at the next write of the intent.
+- a `strategy` artefact for the forge (`/new-artefact strategy`):
+  tracked in the project ai-strategy (its work product
+  `reconstruction`, TBC.0010) until the principal calls the command;
+  the two researches of 2026-10-13 stand ready; no thread here.
 - THR.0640 — what of a thread survives its closing; the `Was` rule
   decided at 5.4 (POS.0310); open: when a thread is rather a brief,
   and whether large files are split (from THR.0470); opened
