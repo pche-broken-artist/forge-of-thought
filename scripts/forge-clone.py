@@ -31,9 +31,11 @@ from pathlib import Path
 
 sys.path.insert(0, str(Path(__file__).resolve().parent))
 import forge_repos as fr  # noqa: E402
+import forge_tools as ft  # noqa: E402
 
 
 def main(argv):
+    ft.utf8_console()
     ap = argparse.ArgumentParser(description=__doc__.splitlines()[1].strip())
     ap.add_argument("url", help="the repository to clone")
     a = ap.parse_args(argv)

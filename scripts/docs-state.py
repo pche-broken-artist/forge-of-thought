@@ -65,6 +65,7 @@ from pathlib import Path
 
 sys.path.insert(0, str(Path(__file__).resolve().parent))
 import docs_map  # noqa: E402
+import forge_tools as ft  # noqa: E402
 
 STATE_RE = re.compile(r"^- state:\s*.*$")
 HASH_RE = re.compile(r"^inputs-hash:\s*([0-9a-f]+)\s*$", re.M)
@@ -137,6 +138,7 @@ def task_text(entry, root, docs_dir, date, version, digest, titles):
 
 
 def main(argv):
+    ft.utf8_console()
     ap = argparse.ArgumentParser(description=__doc__.splitlines()[1].strip())
     ap.add_argument("map")
     ap.add_argument("docs")

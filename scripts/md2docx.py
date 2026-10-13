@@ -112,6 +112,7 @@ def built_in_reference(pandoc, page_size):
 
 
 def main(argv):
+    ft.utf8_console()
     ap = argparse.ArgumentParser(description=__doc__.splitlines()[1].strip())
     ap.add_argument("md", help="the Markdown render; its YAML front-matter is metadata and does not appear")
     ap.add_argument("--engine", choices=["pandoc", "claude"], default="pandoc",

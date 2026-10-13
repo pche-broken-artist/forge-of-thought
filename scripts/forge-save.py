@@ -44,6 +44,7 @@ from pathlib import Path
 
 sys.path.insert(0, str(Path(__file__).resolve().parent))
 import forge_repos as fr  # noqa: E402
+import forge_tools as ft  # noqa: E402
 
 
 def save_repo(name, path, message, tag):
@@ -105,6 +106,7 @@ def save_repo(name, path, message, tag):
 
 
 def main(argv):
+    ft.utf8_console()
     ap = argparse.ArgumentParser(description=__doc__.splitlines()[1].strip())
     ap.add_argument("slug", nargs="?", help="one repository ('forge' = the engine); bare = every one with changes")
     ap.add_argument("-m", "--message", help="commit message (default: generated from the files)")

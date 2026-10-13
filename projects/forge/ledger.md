@@ -2,7 +2,7 @@
 project: forge
 kind: thought
 language: en
-updated: 2026-10-12
+updated: 2026-10-13
 ---
 
 # Ledger — Forge of Thought
@@ -149,6 +149,8 @@ research/00-INDEX.md, never here. -->
 | 2026-10-04-how-a-contributing-file-is-written-on-github.md | 2026-10-04 | the principal's word of 2026-10-04 on a CONTRIBUTING for the forge; the Community Standards page of the forge's repository; 10-intent.md v4.57 (POS.0170, POS.0720, POS.0980, POS.0990) |
 | 2026-10-05-how-a-security-policy-is-written-on-github.md | 2026-10-05 | the principal's word of 2026-10-05 on a SECURITY.md for the forge; research/2026-10-04-how-a-contributing-file-is-written-on-github.md (finding 7); 10-intent.md v4.58 (POS.0760, POS.0950, POS.1440); 40-solution-design.md v0.3 (SOL.0030, SOL.0510, SOL.0520, SOL.0600) |
 | 2026-10-10-a-user-only-distribution-of-the-engine.md | 2026-10-10 | the principal's question of 2026-10-10 after the release of 5.0; 10-intent.md v5.0 (POS.0940, POS.0950, THR.0190, THR.0230); the two distribution researches of 2026-08-29; the engine's tree measured on disk |
+| 2026-10-13-what-an-it-or-ai-strategy-contains-light-but-complete.md | 2026-10-13 | the principal's word of 2026-10-13 in the project ai-strategy (a strategy artefact for the forge, research first); 00-brief-next-gen.md v0.3 (Work without a known artefact); 10-intent.md v5.6 (POS.0700, POS.1430); research/2026-10-03-work-without-a-known-artefact-and-its-working-files.md; web sources |
+| 2026-10-13-ai-agents-and-tools-that-make-a-strategy.md | 2026-10-13 | the principal's word of 2026-10-13 in the project ai-strategy; research/2026-10-13-what-an-it-or-ai-strategy-contains-light-but-complete.md; research/2026-10-03-work-without-a-known-artefact-and-its-working-files.md; web sources |
 
 ## Findings
 <!-- Findings of the critic and of the checks, one sequence. State:
@@ -317,6 +319,7 @@ as `rejected`. -->
 | FND.1570 | low | conformance | resolved | 2026-10-12-check-engine.md | THR.0400 names scripts/hook-gate.py |
 | FND.1580 | low | conformance | resolved | 2026-10-12-check-light-2.md | the Work table and the header comment from the template |
 | FND.1590 | low | conformance | resolved | 2026-10-12-check-light-2.md | the comment of twelve history companions from the template |
+| FND.1600 | low | conformance | resolved | reviews/2026-10-13-check-light.md | a line under Waiting on principal |
 
 Four review files are named outside the convention — accepted as they
 are by DEC.0140.
@@ -354,6 +357,15 @@ intent version for accepted, DEC.NNNN for rejected. -->
 ## Waiting on principal
 <!-- What waits on the principal, one line per matter: cite, never
 copy — CLAUDE.md, Ledger. -->
+- a `strategy` artefact for the forge (`/new-artefact strategy`): his
+  word of 2026-10-13 in the project ai-strategy; the two researches
+  of 2026-10-13 done; a proof of concept of the structure made as
+  the work product `reconstruction` of that project; the birth of
+  the definition open; a thread at the next write of the intent.
+- the file name of a Markdown work file: by `templates/work.md` the
+  specification and a Markdown file would both be `work/<name>.md`;
+  the project ai-strategy carries `.strategy.md` (its TBC.0020); a
+  rule at the next write of the intent.
 - THR.0640 — what of a thread survives its closing; the `Was` rule
   decided at 5.4 (POS.0310); open: when a thread is rather a brief,
   and whether large files are split (from THR.0470); opened

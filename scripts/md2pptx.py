@@ -54,6 +54,7 @@ import forge_tools as ft  # noqa: E402
 
 
 def main(argv):
+    ft.utf8_console()
     ap = argparse.ArgumentParser(description=__doc__.splitlines()[1].strip())
     ap.add_argument("md", help="the Markdown deck definition, one section per slide")
     ap.add_argument("--engine", choices=["pandoc", "claude"], default="claude",

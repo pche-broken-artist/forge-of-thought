@@ -64,6 +64,7 @@ from pathlib import Path
 sys.path.insert(0, str(Path(__file__).resolve().parent))
 import docs_map  # noqa: E402
 import forge_repos as fr  # noqa: E402
+import forge_tools as ft  # noqa: E402
 
 ID_RE = re.compile(r"^[A-Z]{3}\.\d{4}$")
 SHORT_RE = re.compile(r"^([A-Za-z]{3})[.\-_ ]?(\d{1,4})$")
@@ -159,6 +160,7 @@ def block(text, indent, first=None):
 
 
 def main(argv):
+    ft.utf8_console()
     full = "--full" in argv
     argv = [a for a in argv if a != "--full"]
     if len(argv) != 2:

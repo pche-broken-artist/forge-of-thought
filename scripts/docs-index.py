@@ -43,6 +43,7 @@ from pathlib import Path
 
 sys.path.insert(0, str(Path(__file__).resolve().parent))
 import docs_map  # noqa: E402
+import forge_tools as ft  # noqa: E402
 
 ORDER = docs_map.ORDER
 HEADINGS = {
@@ -128,6 +129,7 @@ def render(front, entries, paths, map_rel, date, version):
 
 
 def main(argv):
+    ft.utf8_console()
     ap = argparse.ArgumentParser(description=__doc__.splitlines()[1].strip())
     ap.add_argument("map", help="path of the documentation map")
     ap.add_argument("docs", help="documentation directory; README.md is written into it")

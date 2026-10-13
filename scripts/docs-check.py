@@ -61,6 +61,7 @@ from pathlib import Path
 
 sys.path.insert(0, str(Path(__file__).resolve().parent))
 import docs_map  # noqa: E402
+import forge_tools as ft  # noqa: E402
 
 GENERIC = [
     re.compile(r"[\w.+-]+@(?!example\.)[\w-]+\.[\w.-]+"),
@@ -117,6 +118,7 @@ def scan_file(path, engine_root, fact_patterns):
 
 
 def main(argv):
+    ft.utf8_console()
     ap = argparse.ArgumentParser(description=__doc__.splitlines()[1].strip())
     ap.add_argument("map", nargs="?")
     ap.add_argument("docs", nargs="?")

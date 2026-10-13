@@ -52,6 +52,9 @@ import subprocess
 import sys
 from pathlib import Path
 
+sys.path.insert(0, str(Path(__file__).resolve().parent))
+import forge_tools as ft  # noqa: E402
+
 DOC_EXT = {".pdf", ".docx", ".docm", ".pptx", ".pptm", ".xlsx", ".xlsm", ".xls",
            ".epub", ".html", ".htm", ".csv", ".json", ".xml", ".msg"}
 LIST_EXT = {".txt", ".lst", ".list", ".files", ".filelist"}
@@ -105,6 +108,7 @@ def resolve_inputs(token, base, recurse, as_list, depth=0):
 
 
 def main(argv):
+    ft.utf8_console()
     ap = argparse.ArgumentParser(description=__doc__.splitlines()[1].strip())
     ap.add_argument("inputs", nargs="*", help="files, globs, list files or directories")
     ap.add_argument("-o", "--out-dir", help="where to write the .md files (default: next to each source)")

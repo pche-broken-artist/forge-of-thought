@@ -1,7 +1,10 @@
 """
 forge_tools.py - what the conversion scripts share (md2pptx, md2docx):
 finding an external tool on PATH, resolving paths, running a tool, the
-headless Claude Code run. Not a command.
+headless Claude Code run; and the console set to UTF-8, which every
+script that prints the text of documents or paths calls first, because a
+Windows console defaults to a code page that cannot print the documents'
+characters (CLAUDE.md, Persistence, Portability). Not a command.
 
 WHAT THE CONVERSIONS NEED (the one owner of this text)
     Every tool is resolved from PATH and never installed by a script
@@ -28,6 +31,18 @@ import shutil
 import subprocess
 import sys
 from pathlib import Path
+
+
+def utf8_console():
+    """Print UTF-8 whatever the console's code page; a no-op where the
+    streams cannot be reconfigured (Python before 3.7, or a replaced
+    stream)."""
+    for s in (sys.stdout, sys.stderr):
+        if hasattr(s, "reconfigure"):
+            try:
+                s.reconfigure(encoding="utf-8", errors="replace")
+            except (ValueError, OSError):
+                pass
 
 
 def say(text, colour=None):
