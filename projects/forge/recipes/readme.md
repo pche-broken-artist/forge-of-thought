@@ -2,9 +2,9 @@
 project: forge
 purpose: readme
 audience: humans arriving at the repository
-version: 0.65
+version: 0.66
 updated: 2026-10-14
-last_change: 0.65 (2026-10-14): the teaching videos: a link in the header line and a paragraph in section 6 to the course page served from docs/videos/; the videos' public address and the md2video prerequisites among the pinned facts.
+last_change: 0.66 (2026-10-14): the videos promoted: a watch-first line under the title, a section "Watch it work" of their own after the challenge with every video tied to its page of the documentation, the Documentation section's reader paths opening with a video; the list of the videos pinned.
 output: /README.md
 ---
 
@@ -69,6 +69,13 @@ summarising the newest row. -->
   appears large exactly once; there is no separate version line, and
   the intent version in the title is the only version that appears
   in the README's own words.
+- Directly below the title line, before the masthead, stands one line
+  for the reader who has never seen the forge: bold-led "**New here?
+  Watch first.**", then one sentence: eight short videos of real
+  sessions, seven to fifteen minutes each, in two languages, show
+  the forge at work before a word of this README is read; the link
+  named "Videos" to the pinned course address. Nothing else on that
+  line.
 - The masthead is the identity statement of Forge of Thought, built
   to be scanned: one short paragraph, three bold-led bullets, one
   closing paragraph. The opening paragraph leads with the identity
@@ -125,7 +132,21 @@ summarising the newest row. -->
   over twice; assumptions nobody attacked before reality did. No
   rhetoric and no restatement of the principle — the masthead
   already carries the answer.
-- Section 2 is "What you get": a strictly concrete capability list —
+- Section 2 is "Watch it work": the videos as the first thing after
+  the challenge, because seeing beats reading for a newcomer. One
+  opening sentence: every video is a real session of the forge, cut
+  to a few minutes and played in the browser as a simulated
+  terminal with captions, in two languages, nothing staged. Then
+  the eight videos as eight bullets in the order of the pinned list,
+  each bold-led by the video's name, one sentence on what it shows
+  (taken from the pinned list), and two links at the end: "watch"
+  to the course address with the video's anchor (the pinned
+  address, a `#` and the video's file name), and "read" to the page
+  of `docs/` the pinned list pairs it with, as a relative link. A
+  closing sentence: the whole course is at the course page, where
+  each video has its scenes as chapters and the language is a
+  switch. No other content in this section.
+- Section 3 is "What you get": a strictly concrete capability list —
   six bullets, no philosophy (that is the masthead's job): a
   versioned document chain growing from a brief — your idea put
   together, yours by your approval — through the intent to the
@@ -146,7 +167,7 @@ summarising the newest row. -->
   `docs/about/renders-and-recipes.md`, the sources to
   `docs/about/sources-and-research.md`, git to
   `docs/about/persistence-in-git.md`).
-- Section 3 is "What is new in <major>", the major being the newest
+- Section 4 is "What is new in <major>", the major being the newest
   approved section of RELEASE-NOTES.md. One short bold-led paragraph
   per thing that section's opening paragraph says the major closed,
   in its order, and one per command born in the span (the Added
@@ -155,7 +176,7 @@ summarising the newest row. -->
   sentences, ending with a relative link to the page of `docs/` the
   index lists for it. A closing line points to RELEASE-NOTES.md for
   the full account. Nothing older than the newest major.
-- Section 4 is a Quickstart with a common head and two named paths.
+- Section 5 is a Quickstart with a common head and two named paths.
   The head, "First, once per machine", is a short fenced block: a
   comment line that git, Python and Claude Code must be installed
   first (what and how is `docs/start/install.md`), clone this
@@ -182,7 +203,7 @@ summarising the newest row. -->
   tracks; a user never needs to open it; the first sitting from
   nothing to a saved intent is
   `docs/start/first-result.md`.
-- Section 5 is "The document chain in one picture". It carries the
+- Section 6 is "The document chain in one picture". It carries the
   star, never a line: it must make visible at first glance that the
   chain branches richly. It is this mermaid block, pinned verbatim
   (solid arrows = built today, dashed = illustrative growth):
@@ -227,28 +248,26 @@ summarising the newest row. -->
   callout block, one line: a render is never edited by hand — what is
   iterated is its recipe. No other callout anywhere, and nothing
   else in this section: the chain is explained in `docs/`.
-- Section 6 is "Documentation". It opens with one sentence: the
+- Section 7 is "Documentation". It opens with one sentence: the
   documentation of the forge is in [`docs/`](docs/README.md), pages
   of one topic each, generated from the engine like this README.
   Then the three readers as three bullets, one line each, taken from
   the index's "Where to start": the user, the extender, the
-  evaluator, each with where to begin as a relative link into
-  `docs/`. Then one sentence giving the version the documentation
+  evaluator, each opening with the video to watch first (the user:
+  how a brief is born; the extender: a new artefact; the evaluator:
+  a challenger; each as a "watch" link with its anchor) and then
+  where to begin reading as a relative link into `docs/`. Then one sentence giving the version the documentation
   was generated for and the date, taken from the index's own version
   line, and that the index says it too. Then the five sections of
   the documentation as five bullets in the index's order, each the
   section's name linked to its heading in the index and one sentence
   on what the section holds; the page titles stay in the index.
-  Then a paragraph on the teaching videos, two or three sentences:
-  real sessions of the forge cut to a few minutes each and played in
-  the browser as a simulated terminal with captions, in Czech and in
-  English, at the course page (the pinned address, as a link named
-  "Videos"); one per principle of working with the forge — how a
-  brief is born, the walkthrough, from the brief to the intent, a
-  critic, a check at a save, a challenger, a new artefact, history
-  and threads; the files live in `docs/videos/` and are made from
-  the screenplay renders of the principal's rollout project by
-  `scripts/md2video.py`.
+  Then a paragraph on how the videos are made, two sentences: each
+  is a screenplay rendered from the session records of the
+  principal's rollout project and made into a player file by
+  `scripts/md2video.py`; the files live in `docs/videos/`, served
+  as the course page, and the documentation on making one is the
+  page "Make a teaching video from a recipe" (a relative link).
 - The section "Author and licence" precedes "About this README" and
   carries this fixed text verbatim, nothing more: "Forge of Thought ©
   Petr Chlumsky (PCHe) - petr.chlumsky@gmail.com. Licensed under
@@ -297,7 +316,35 @@ reach the reader. Update them here when they change.
   served by GitHub Pages from `docs/videos/` of this repository
   (POS.1540); a player page and one `html-player.js` file per video
   and language, made by `scripts/md2video.py` from screenplay renders
-  (POS.1530).
+  (POS.1530). The videos, in the order of the course, each with its
+  anchor on the course page, what it shows, and the page of `docs/`
+  it pairs with:
+  1. How a brief is born (`#01-brief-elicitation`): a brief found by
+     questions, a critique from outside, research, the lock, the
+     mining; `docs/use/write-a-brief.md`.
+  2. One item, one verdict (`#02-walkthrough`): a list settled one
+     item per message, the verdict line, one write at the end of
+     the round; `docs/use/walk-through-a-list.md`.
+  3. From the brief to the intent (`#03-brief-to-intent`): the
+     brief mined into positions, rejections and threads, cited at
+     its version; `docs/use/forge-the-intent.md`.
+  4. A critic and walking its findings (`#04-critique`): an
+     isolated reviewer of document quality, its findings mended or
+     rejected with a reason; `docs/use/critique-the-documents.md`.
+  5. A check at a save (`#05-check-at-save`): a save runs the
+     check, conformance findings settled before the commit, a
+     release with more; `docs/use/save-your-work.md`.
+  6. A challenger: peer review of the substance (`#06-challenger`):
+     a persona attacks the thinking, accepted goes into the
+     intent, rejected keeps its reason;
+     `docs/use/challenge-the-thinking.md`.
+  7. A layer below the intent and a new artefact
+     (`#07-new-artefact`): the chain grows by a definition and a
+     template, the first solution design;
+     `docs/extend/add-an-artefact.md`.
+  8. History and threads (`#08-history-threads`): why an item
+     changed, one command away; the open threads as the project's
+     memory; `docs/use/read-the-history-of-an-item.md`.
 - The forge is cloned, not copied: `forge-save.py` refuses an
   engine that is not a git repository.
 - Script prerequisites: `doc2md.py` needs markitdown
@@ -319,6 +366,8 @@ reach the reader. Update them here when they change.
 
 *<subtitle per POS.0620>* · [Documentation](docs/README.md) · [Videos](<the pinned course address>) · [Release notes](RELEASE-NOTES.md)
 
+**New here? Watch first.** <one sentence on the eight videos, with the link "Videos" to the course address>
+
 <masthead per the instruction: identity paragraph — AI cognitive
 extension of a thinking human, the principal; what it does; the
 principle as bridge — then the three bold-led bullets (It thinks
@@ -335,17 +384,22 @@ and the CEO note, exactly as the instruction gives it>
 <the fixed answer sentence and lead-in, then the five pain bullets
 per the instruction; no closing line>
 
-## 2. What you get
+## 2. Watch it work
+<the opening sentence; the eight videos as bold-led bullets in the
+pinned order, one sentence each and the two links watch / read; the
+closing sentence on the course page>
+
+## 3. What you get
 <the six concrete capability bullets per the instruction, each
 ending with its link into docs/>
 
-## 3. What is new in <major>
+## 4. What is new in <major>
 <one bold-led paragraph per thing the newest approved section of
 RELEASE-NOTES.md says the major closed, and per command born in the
 span, each ending with its link into docs/; a closing line pointing
 to RELEASE-NOTES.md>
 
-## 4. Quickstart
+## 5. Quickstart
 <common head "First, once per machine" as a fenced block: git,
 Python and Claude Code installed first (docs/start/install.md) →
 clone this repository → claude from the engine root → /setup
@@ -360,24 +414,25 @@ projects/, untracked by the engine — that is why you name it first;
 one sentence on projects/forge, the forge's own project a user never
 opens; the first sitting is docs/start/first-result.md>
 
-## 5. The document chain in one picture
+## 6. The document chain in one picture
 <the pinned star chain diagram (mermaid) with its legend line; one
 line per artefact from the definitions, each linked to its docs
 page; the one sentence on layers taken as needed; the
 render-never-hand-edited callout>
 
-## 6. Documentation
+## 7. Documentation
 <one sentence with the link to docs/README.md; the three readers as
-bullets with where each begins; the version and date the
-documentation was generated for; then the five sections as five
-bullets, each linked to its heading in the index with one sentence
-on what it holds; then the paragraph on the teaching videos with the
-link to the course page>
+bullets, each opening with its video to watch and then where to
+begin reading; the version and date the documentation was generated
+for; then the five sections as five bullets, each linked to its
+heading in the index with one sentence on what it holds; then the
+two sentences on how the videos are made, with the link to the page
+on making one>
 
-## 7. Author and licence
+## 8. Author and licence
 <the fixed author-and-licence text>
 
-## 8. About this README
+## 9. About this README
 <this file is a render of projects/forge — regenerated by
 /render readme, never edited by hand; fixes go into the recipe or the
 inputs; the documentation is generated the same way and its index
