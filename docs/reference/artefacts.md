@@ -1,8 +1,8 @@
 ---
-generated: 2026-10-11
-version: 5.3
+generated: 2026-10-14
+version: 5.9
 made: mirrored
-inputs-hash: 8abff7b34e76cd67
+inputs-hash: 227c43c06a588ec7
 inputs:
   - .claude/skills/forge/states/brief.md
   - .claude/skills/forge/states/intent.md
@@ -14,28 +14,77 @@ inputs:
 
 # Artefacts
 
-This page lists the artefacts of the chain as it stands today, one row per definition, with the file each is kept in, its template, what it is made from, the prefixes of its items and the command that works it. It is for anyone who wants to see at a glance which documents a project can carry. An artefact is a document of the chain (a versioned document the principal forms with Claude); a definition is the state file in `.claude/skills/forge/states/` that says what the artefact is and how it is found.
+This page lists the artefacts of today's chain, one row per definition: the file each one is, what it is for, the template that shapes it, what it is made from, the prefixes of its items and the command that works it. The list is the content of the directory `.claude/skills/forge/states/`, one definition per artefact, in the order of the file numbers. A reader who wants to know which documents a project can carry finds them here. The principal is whoever's thinking is being forged.
 
-The rows follow the order of the file numbers. The listing of that directory is the one list of artefacts.
+## Overview
 
-## The artefacts
+| Artefact | File | Description | Template | Command |
+|---|---|---|---|---|
+| Brief | `00-brief.md` or `00-brief-<name>.md` | "Compose or finish a brief: the principal's idea put together, found with Claude or handed over, approved when done" | `templates/brief.md` | `/forge brief` |
+| Intent | `10-intent.md` | "Iterate 10-intent.md: the briefs chiselled into what the principal holds" | `templates/intent.md` | `/forge intent` |
+| Assignment | `20-assignment.md` | "Iterate 20-assignment.md: the intent's in-scope substance carried to the recipients in a joint pass" | `templates/assignment.md` | `/forge assignment` |
+| Solution design | `40-solution-design.md` | "Iterate 40-solution-design.md: how the things wanted are realised, part by part, with the choices they rest on" | `templates/solution-design.md` | `/forge solution-design` |
 
-| Artefact file | What it is | Template | Inputs | Prefixes of its items | Command |
-|---|---|---|---|---|---|
-| `00-brief.md`, or `00-brief-<name>.md` for a later whole of thinking | Compose or finish a brief: the principal's idea put together, found with Claude or handed over, approved when done | `templates/brief.md` | The principal's thought, however it arrives. Around it, gathered during the elicitation: research notes (`research/`), sources (`sources/`) and Claude's own proposals. The existing intent and ledger are read only to know what already stands, never to shape the text. | None. A brief has no IDs and no conventions of the chain. | `/forge brief [slug]` |
-| `10-intent.md` | Iterate the intent: the briefs chiselled into what the principal holds | `templates/intent.md` | The briefs the principal says to mine (`00-brief.md` and any `00-brief-<name>.md`, approved or not), `decisions.md` and the ledger. Sources only as the principal directs. The intent as it stands is read with the project's threads, `threads.md`. | POS (position), FCT (fact), REJ (rejected direction). THR (open thread) lives in the project's `threads.md`. | `/forge intent [slug]` |
-| `20-assignment.md` | Iterate the assignment: the intent's in-scope substance carried to the recipients in a joint pass | `templates/assignment.md` | `10-intent.md`, `decisions.md` and the ledger. The intent is read with the project's threads, `threads.md`. | REQ (requirement), OOS (out of scope or do-not), CON (constraint), ASM (assumption), DEL (deliverable), TBC (open question), SCR (success criterion) | `/forge assignment [slug]` |
-| `40-solution-design.md` | Iterate the solution design: how the things wanted are realised, part by part, with the choices they rest on | `templates/solution-design.md` | The lowest layer the project has above it, the intent alone, the assignment or the BRD, and whatever stands above that. Also `decisions.md` and the ledger. The intent is read with the project's threads, `threads.md`. Where the thing already exists, what realises it is read as it stands. Research and sources as the principal directs. | SOL (part of the solution), TBC (open question) | `/forge solution-design [slug]` |
+## Inputs and prefixes
 
-The meaning of each prefix, and where it lives, is set by the ID scheme: REQ is a requirement, OOS an out-of-scope or do-not item, CON a constraint that is a deliberate boundary and not to be challenged, ASM an assumption, DEL a deliverable that may delegate work, TBC an open question with an owner, SOL a part of the solution with the choice it rests on, SCR a success criterion that is optional or delegated, POS a position the principal currently holds, THR an open thread, REJ a rejected direction with its reason, and FCT a fact.
+### Brief
 
-The numbers of the files leave gaps of ten, so that a layer can be added without renaming anything.
+- File: `00-brief.md` (bare), or `00-brief-<name>.md` for a later whole of thinking born during the project's life.
+- Inputs: the principal's thought, however it arrives. Around it, gathered during the elicitation: research notes (`research/`), sources (`sources/`) and Claude's own proposals. The existing intent and ledger are read only to know what already stands, never to shape the text.
+- Prefixes: none. A brief has a YAML header, then free form, with no IDs.
+- Command: `/forge brief [slug]`.
 
-A layer that a project does not have is not missing. The ledger and the checks say nothing of it.
+### Intent
+
+- File: `10-intent.md`, with the project's threads in `threads.md`.
+- Inputs: the briefs the principal says to mine (`00-brief.md` and any `00-brief-<name>.md`, approved or not), `decisions.md` and the ledger. Sources are read only as the principal directs. The intent as it stands is read with `threads.md`.
+- Prefixes:
+
+| Prefix | Meaning |
+|---|---|
+| POS | position the principal currently holds |
+| FCT | fact: what is the case, as the principal states it or as a source states it |
+| REJ | rejected direction, with the reason it was dropped |
+| THR | open thread, in `threads.md`; names the artefact it concerns |
+
+- Command: `/forge intent [slug]`.
+
+### Assignment
+
+- File: `20-assignment.md`.
+- Inputs: `10-intent.md`, `decisions.md` and the ledger. The intent is read with the project's threads, `threads.md`.
+- Prefixes:
+
+| Prefix | Meaning |
+|---|---|
+| REQ | requirement |
+| OOS | out of scope or do-not |
+| CON | constraint: deliberate boundary, not to be challenged |
+| ASM | assumption |
+| DEL | deliverable, which may delegate work |
+| TBC | open question or to be confirmed, with owner |
+| SCR | success criterion, optional or delegated |
+
+- Command: `/forge assignment [slug]`.
+
+### Solution design
+
+- File: `40-solution-design.md`.
+- Inputs: the lowest layer the project has above it (the intent alone, the assignment or the BRD, and whatever stands above that), `decisions.md` and the ledger. The intent is read with the project's threads, `threads.md`. Where the thing already exists, what realises it is read as it stands. Research and sources as the principal directs.
+- Prefixes:
+
+| Prefix | Meaning |
+|---|---|
+| SOL | part of the solution: what is built or done, what it realises, the choice it rests on |
+| TBC | open question or to be confirmed, with owner |
+
+- Command: `/forge solution-design [slug]`.
+
+A layer below the intent that a project does not have is not missing: the state map and the checks say nothing of it.
 
 ## See also
 
 - [The document chain](../about/the-document-chain.md): why the listing of that directory is the one list.
 - [Glossary](glossary.md): every term of the forge in one line.
 
-Generated on 2026-10-11 for version 5.3 from the files the front-matter names; never edited by hand.
+Generated on 2026-10-14 for version 5.9 from the files the front-matter names; never edited by hand.

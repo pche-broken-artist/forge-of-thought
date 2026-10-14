@@ -1,8 +1,8 @@
 ---
-generated: 2026-10-11
-version: 5.3
+generated: 2026-10-14
+version: 5.9
 made: mirrored
-inputs-hash: 248790b2e3857c29
+inputs-hash: cba39e65301d80ba
 inputs:
   - .claude/settings.json
   - .gitignore
@@ -13,78 +13,102 @@ inputs:
 
 # Configuration
 
-This page lists the files that configure one instance of the forge and what each holds, field by field. It is for the user who sets up an instance and for the extender who needs to know which file carries which setting. The command that fills the instance files is described in [Set up the forge](../start/setup.md). Terms of the forge are explained in the [Glossary](glossary.md).
+This page lists the files that configure one instance of the forge (one installation of the engine) and states what each holds, field by field. It is for the person who installs the forge and for the person who extends it.
+
+Two files are shared with everyone who clones the engine. Two are local to one machine and never committed. The git identity lives outside the engine. The command that fills the local files is described in [Set up the forge](../start/setup.md). A term used here without a gloss is in the [Glossary](glossary.md).
 
 ## Overview
 
-| File | Shared | Holds | Made by |
-|---|---|---|---|
-| `.claude/settings.json` | yes | attribution, deny rules, the prompt hook | the engine |
-| `.claude/settings.local.json` | no (gitignored) | the session model | `/setup` |
-| `CLAUDE.local.md` | no (gitignored) | the principal and the conversation language | `/setup`, from its template |
-| `.gitignore` | yes | what git leaves out of the engine | the engine |
-| the git identity | outside the engine | name and e-mail per host, and the guard | `/setup`, on the user's word |
+| File | Shared | Holds |
+|---|---|---|
+| `.claude/settings.json` | yes | attribution, deny rules, the per-prompt hook |
+| `.claude/settings.local.json` | no (gitignored) | the session model |
+| `CLAUDE.local.md` | no (gitignored) | the principal by role, the conversation language |
+| `.gitignore` | yes | what git leaves out of the engine |
+| the global git configuration | outside the engine | the git identity per host, the guard |
 
 ## `.claude/settings.json`
 
-The shared settings of the engine, the same on every instance.
+Shared by every instance. It holds three groups of settings.
 
-| Field | Value | What it does |
+### Attribution
+
+| Field | Value | Meaning |
 |---|---|---|
-| `attribution.commit` | empty | adds no attribution line to a commit |
-| `attribution.sessionUrl` | `false` | adds no session link to what is written |
-| `permissions.deny` | `Read(~/.ssh/**)` | Claude may not read the SSH folder of the home directory |
-| `permissions.deny` | `Read(~/.aws/**)` | Claude may not read the AWS folder of the home directory |
-| `permissions.deny` | `Bash(git *)` | Claude may not run raw git in the Bash shell; git is reached only through the scripts of `scripts/` |
-| `permissions.deny` | `PowerShell(git *)` | the same rule for the PowerShell shell |
-| `hooks.UserPromptSubmit` | one command hook | runs before each prompt of the principal (the person whose thinking is forged) is handled |
+| `attribution.commit` | empty | a commit message carries no attribution line |
+| `attribution.sessionUrl` | `false` | no session link is added |
 
-The hook runs `python` with one argument, `${CLAUDE_PROJECT_DIR}/scripts/hook-walkthrough.py`. The placeholder `${CLAUDE_PROJECT_DIR}` stands for the project directory of the session, so the same line works on every machine. The script repeats the walkthrough rule at every prompt so that it holds in a long conversation. Why the deny rules and the hook exist is told in [How the rules are held](../about/how-the-rules-are-held.md).
+### Deny rules
+
+Under `permissions.deny`, Claude may not use these.
+
+| Rule | What it blocks |
+|---|---|
+| `Read(~/.ssh/**)` | reading the SSH directory of the home folder |
+| `Read(~/.aws/**)` | reading the AWS directory of the home folder |
+| `Bash(git *)` | raw git in the Bash shell |
+| `PowerShell(git *)` | raw git in the PowerShell shell |
+
+Git is reached only through the scripts in `scripts/`. The reasons for the deny rules are in [How the rules are held](../about/how-the-rules-are-held.md).
+
+### Hook
+
+| Field | Value | Meaning |
+|---|---|---|
+| event | `UserPromptSubmit` | the hook runs at every prompt the principal sends |
+| `type` | `command` | the hook is a program |
+| `command` | `python` | the program is `python`, taken from the PATH |
+| `args` | `${CLAUDE_PROJECT_DIR}/scripts/hook-walkthrough.py` | the script it runs, found from the engine root |
 
 ## `.claude/settings.local.json`
 
-Gitignored, so it belongs to one machine.
+Local to one machine and gitignored. `/setup` creates it when it is missing and leaves an existing one untouched.
 
 | Field | Holds |
 |---|---|
-| `model` | the model the session runs on; the whole forge, the isolated reviewers included, runs on it |
+| `model` | the session model, which the whole forge runs on, the blind reviewers included |
 
-`/setup` creates the file when it is missing and leaves an existing one untouched. The model can be changed at any time with `/model` or by editing the file.
+`/setup` writes the strongest model the account offers. It can be changed at any time with `/model` or by editing the file.
 
 ## `CLAUDE.local.md`
 
-Gitignored, at the engine root. `/setup` copies it from `templates/CLAUDE.local.md` and fills it by interview, and it leaves an existing file untouched. It holds the facts of the instance, which are not properties of the system.
+Local to one machine, gitignored, at the engine root. It carries instance facts: what belongs to this installation and not to the system. `/setup` copies it from `templates/CLAUDE.local.md` and fills it by interview, the language first. An existing file is reported and not touched.
 
 | Field | Holds |
 |---|---|
-| Principal | the role of the person whose thinking is being forged (for example "the CTO"), never a name needed by the system |
-| Conversation language | the language the working conversation runs in; the language of the documents follows the project, not this field |
+| Principal | the role of whoever's thinking is being forged, for example "the CTO" |
+| Conversation language | the language the working conversation runs in |
+
+The language of the documents is not set here. It follows the project's own rule.
 
 ## `.gitignore` of the engine
 
-| Entry | What it leaves out |
+Shared. Each entry names what git leaves out.
+
+| Entry | What it keeps out |
 |---|---|
-| `.claude/settings.local.json` | the local settings of one machine |
+| `.claude/settings.local.json` | the machine's own settings |
 | `/CLAUDE.local.md` | the instance facts |
-| `projects/*` | every project, because each is a repository of its own |
-| `!projects/forge` | re-includes the engine's own project; the pattern is `projects/*` and never `projects/` so that the re-include works |
-| `/tmp/` | private scratch at the engine root |
-| `Thumbs.db`, `desktop.ini` | Windows file-manager noise |
-| `~$*` | lock files of open office documents |
-| `__pycache__/` | Python byte-code caches, which the documentation scripts create |
+| `projects/*`, except `projects/forge` | every project, each being a repository of its own |
+| `Thumbs.db`, `desktop.ini` | Windows noise |
+| `~$*` | lock files of open Office documents |
+| `/tmp/` | the principal's private scratch at the engine root |
+| `__pycache__/` | Python byte-code caches |
 
-## The git identity
+## The git identity, outside the engine
 
-This is not a file of the engine. Git reads it from the global git configuration of the user, per host, and the forge sets none by itself. `/setup` offers to write it on the user's word, reads the file first and never overwrites existing content.
+The git identity is git's own and is set per host, not in the engine. The engine sets none. `/setup` offers to write it, only on the principal's word, into the global git configuration file that git reads. It never overwrites existing content and it runs no git operation. A configuration the principal declines is printed for the principal to apply by hand.
+
+For each host, written as `<host>`:
 
 | Part | Holds |
 |---|---|
-| Stanza for HTTPS remotes | `[includeIf "hasconfig:remote.*.url:https://<host>/**"]` with `path` set to the absolute path of `.gitconfig-<host>` |
-| Stanza for SSH remotes | `[includeIf "hasconfig:remote.*.url:git@<host>:*/**"]` with the same `path` |
-| `.gitconfig-<host>` | `[user]` with `name` and `email` for that host, created beside the global file when missing |
-| Guard | `user.useConfigOnly = true` under `[user]`, so that a repository on a host without a stanza fails aloud instead of taking a default |
+| a stanza `[includeIf "hasconfig:remote.*.url:https://<host>/**"]` | the rule for remotes addressed by https |
+| a stanza `[includeIf "hasconfig:remote.*.url:git@<host>:*/**"]` | the rule for remotes addressed by ssh |
+| `path` in both stanzas | the absolute path of `.gitconfig-<host>`, beside the global file |
+| `.gitconfig-<host>` | `[user]` with `name` and `email`, created when missing |
 
-The `path` is absolute because `~` may mean different things to git and to the shell. The guard only takes effect once a `user.name` or `user.email` in the global file is removed. If the user declines, `/setup` prints the stanzas and the lines to apply by hand.
+The global guard is `user.useConfigOnly = true` under `[user]`. A repository on a host with no stanza then fails aloud instead of taking a default. Where the global file already carries a `user.name` or `user.email`, the guard takes effect only once that identity is removed. `/setup` offers the removal, again only on the principal's word.
 
 ## See also
 
@@ -92,4 +116,4 @@ The `path` is absolute because `~` may mean different things to git and to the s
 - [How the rules are held](../about/how-the-rules-are-held.md): why the deny rules and the hook exist.
 - [Glossary](glossary.md): every term of the forge in one line.
 
-Generated on 2026-10-11 for version 5.3 from the files the front-matter names; never edited by hand.
+Generated on 2026-10-14 for version 5.9 from the files the front-matter names; never edited by hand.

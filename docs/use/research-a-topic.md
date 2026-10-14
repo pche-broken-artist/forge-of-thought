@@ -1,8 +1,8 @@
 ---
-generated: 2026-10-11
-version: 5.3
+generated: 2026-10-14
+version: 5.9
 made: mirrored
-inputs-hash: cf17dfe26672e58c
+inputs-hash: 09a435a8bb470b77
 inputs:
   - .claude/skills/research/SKILL.md
   - templates/index.md
@@ -10,11 +10,11 @@ inputs:
 
 # Research a topic
 
-`/research` looks up current best practice on one question and files the answer as a durable, indexed note in a project. This page is for the principal (the person whose thinking is being forged) who wants to ground a decision in what the world has already solved instead of reinventing it.
+`/research` gets you a durable, indexed research note on one question, grounded in current web sources. It is for the principal (whoever's thinking is being forged), who does not want to reinvent what the world has already solved. For what research is for and why a note is never edited, see [Sources and research](../about/sources-and-research.md).
 
 ## When to use it
 
-Use it when a question of your project has an answer that others have already worked out, and you want that answer with its sources before you decide. What research is for and why its notes never change is explained in [Sources and research](../about/sources-and-research.md).
+Use it when an artefact you are working on rests on a question that others have already answered, and you want their best practice before you decide.
 
 ## The command
 
@@ -22,65 +22,58 @@ Use it when a question of your project has an answer that others have already wo
 /research <topic> [slug]
 ```
 
-The last word is the project slug if it names a project; everything before it is the topic. Without a slug, Claude takes the project you are working in.
-
-Example, with a placeholder slug:
-
-```
-/research release checklists for small teams my-project
-```
+The last word is the project slug if it names a directory under `projects/`. Everything before it is the topic. Terms of the forge are explained in the [Glossary](../reference/glossary.md).
 
 ## What happens
 
 1. Claude searches the web for current best practice, established frameworks and notable recent developments. It prefers primary and high-quality sources and notes their publication dates. It marks each finding as consensus, emerging or contested.
 
-   You should now see Claude working through sources on your one question.
+   You should now see Claude working through sources for your topic.
 
-2. Claude writes the note into the project's `research/` directory, as `research/YYYY-MM-DD-<topic-slug>.md`, in English. The note holds:
+2. Claude writes one note, `research/YYYY-MM-DD-<topic-slug>.md`, in the project. The note is in English and is immutable. It holds:
    - the question
-   - the key findings, each with its sources
+   - the key findings, with sources
    - the options, with their trade-offs
-   - a short section on relevance to this project, with a concrete recommendation
+   - a short section on relevance to the project, with a concrete recommendation
 
-   You should now see a new dated file in `research/`.
+   You should now see a new dated file in the project's `research/` directory.
 
-3. Claude adds an entry to `research/00-INDEX.md`, creating the index if it is missing. The entry has three fields: Question, Answer in short and Consult when. Claude also adds a row to the Research table of the project's ledger (the single record of the project's state).
+3. Claude indexes the note and registers it. It adds an entry to `research/00-INDEX.md`, creating the index if it is missing. The entry names three fields: the question, the answer in short and when to consult the note. It also adds a row to the Research table of the ledger, the file that is the single source of truth for a project's state.
 
-   You should now see the entry in the index and the row in the ledger.
+   You should now see the note in the index and a row for it in the ledger.
 
-4. Claude summarises the note for you. The summary leads with the recommendation and the trade-offs, not with a review of the literature.
+4. Claude summarises the result for you. The summary leads with the recommendation and the trade-offs, not with a literature review.
 
    You should now see the recommendation first.
 
-5. If the findings suggest a change to an artefact of the chain, Claude proposes it explicitly and points you to `/forge <state>`. It never changes the artefact silently.
+5. If the findings suggest a change to an artefact of the chain, Claude proposes it explicitly. The change is made through `/forge <state>`, never silently.
 
-   You should now see a proposal, or nothing if no change follows.
+   You should now see a proposal, and nothing changed in the artefact until you take it up.
+
+## One question, one note
+
+A research has one question. If your topic turns out to be several questions, Claude writes several notes, each answering one. It never writes one combined document.
 
 ## What you have afterwards
 
-- One immutable, dated note in `research/`. It is not edited later.
-- An index entry that tells you, without re-reading the note, what it asked, what it concluded and when to open it.
-- A registration row in the ledger.
-- A recommendation you can accept, change or ignore. The decision stays yours.
-
-## If something goes wrong
-
-- A topic that turns out to be several questions becomes several notes, each answering one question. Claude never writes one combined document.
-- No stop condition or error message is recorded for this command.
+- One dated, immutable note per question in `research/`.
+- An entry for each note in `research/00-INDEX.md`.
+- A registration row for each note in the ledger.
+- A summary that led with the recommendation.
 
 ## A worked example
 
-You run, in a project with the placeholder slug `my-project`:
+You want to know how teams keep an onboarding checklist current. You type:
 
 ```
-/research how small teams keep a changelog my-project
+/research keeping an onboarding checklist current my-project
 ```
 
-Claude finds that keeping a changelog by hand is consensus, that generating it from commit messages is emerging, and that a single format for both is contested. It writes `research/2026-10-11-changelog-practice.md` with the question, the findings and their sources, the options with trade-offs, and a recommendation for `my-project`. It adds the index entry and the ledger row. It then tells you the recommendation first, with the trade-offs. If the recommendation would change an artefact, it proposes that through `/forge <state>` and waits for you.
+Claude finds the question has two parts: who owns the checklist, and how changes are detected. It writes two notes, for example `research/2026-10-14-checklist-ownership.md` and `research/2026-10-14-checklist-change-detection.md`. Each states its question, findings with sources marked consensus, emerging or contested, options with trade-offs, and a recommendation. Both appear in `research/00-INDEX.md` and in the ledger. Claude's summary opens with the recommendation of each note. It then proposes, if the findings call for it, a change to an artefact through `/forge <state>`, and waits for you.
 
 ## See also
 
 - [Sources and research](../about/sources-and-research.md): what research is for and why it is immutable.
 - [Glossary](../reference/glossary.md): every term of the forge in one line.
 
-Generated on 2026-10-11 for version 5.3 from the files the front-matter names; never edited by hand.
+Generated on 2026-10-14 for version 5.9 from the files the front-matter names; never edited by hand.

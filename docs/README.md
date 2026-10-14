@@ -1,6 +1,6 @@
 ---
-generated: 2026-10-11
-version: 5.3
+generated: 2026-10-14
+version: 5.9
 made: derived
 inputs:
   - projects/forge/docs-map.md
@@ -12,7 +12,7 @@ This is the documentation of Forge of Thought: pages of one topic
 each, generated from the engine as it stands, for three readers.
 Every page stands on its own; start where your question is.
 
-Generated on 2026-10-11 for Forge of Thought at version 5.3
+Generated on 2026-10-14 for Forge of Thought at version 5.9
 (the version of the engine's intent; a release carries the same
 number).
 
@@ -38,10 +38,12 @@ number).
 - [Forge the intent](use/forge-the-intent.md): How do you iterate the intent with `/forge intent`, round by round?
 - [Distil an assignment](use/distil-an-assignment.md): How do you derive the assignment from the intent with `/forge assignment`?
 - [Design the solution](use/design-the-solution.md): How do you iterate the solution design with `/forge solution-design`?
+- [Work a work product](use/work-a-work-product.md): How do you make an output of the project with work of its own, a model, an analysis, a worked task, with `/work`?
 - [Register a source](use/register-a-source.md): How do you store, register and catalogue external input with `/ingest`?
 - [Research a topic](use/research-a-topic.md): How do you get a durable, indexed research note with `/research`?
 - [Compose a recipe](use/compose-a-recipe.md): How do you compose or iterate a render recipe by genre with `/recipe`?
 - [Render an output](use/render-an-output.md): How do you regenerate a render, and its plain file, with `/render`?
+- [Make a teaching video from a recipe](use/make-a-video-from-a-recipe.md): How do you turn real sessions into a screenplay and into a video or a player file with `/recipe screenplay` and `/render`?
 - [Publish a designed file](use/publish-a-designed-file.md): How do you make the designed Word or PowerPoint file with `/publish`?
 - [Generate the documentation](use/generate-the-documentation.md): How does `/document` make the pages and the index, and what do you get at the end?
 - [Critique the documents](use/critique-the-documents.md): How do you run a critic lens on document quality with `/critique`?
@@ -71,6 +73,7 @@ number).
 - [The intent](about/the-intent.md): What does the intent hold, why is it rewritten every round, and where does solving go instead?
 - [The assignment](about/the-assignment.md): What makes an assignment complete, and where does assigning end and solving begin?
 - [The solution design](about/the-solution-design.md): What does a solution design hold, and why does it restate nothing above it?
+- [The work product](about/the-work-product.md): What is a work product, why is it two files, and why is it neither an artefact nor a render?
 - [Documents and records](about/documents-and-records.md): What kinds of document does a project hold, and why does state live in files?
 - [Versioning and history](about/versioning-and-history.md): What does a version number mean, what is a major, and where does a document's history live?
 - [Stable IDs](about/stable-ids.md): Why does every item carry an ID that is never renumbered?
@@ -79,6 +82,7 @@ number).
 - [The challenger](about/the-challenger.md): What does a challenger persona attack, and why may it be wrong?
 - [The check](about/the-check.md): What does a check verify, why is it read-only, and who files its report?
 - [Renders and recipes](about/renders-and-recipes.md): Why is an output generated from a recipe and never edited by hand?
+- [The screenplay and its player](about/the-screenplay-and-its-player.md): What is a teaching video of the forge made of, why does one script make both of its formats, and why does the engine host the public files?
 - [The documentation](about/the-documentation.md): What is the documentation, who reads it, and why is it generated rather than written?
 - [Sources and research](about/sources-and-research.md): Why are sources immutable, why is registration not intake, and what is a research note for?
 - [Projects and the engine](about/projects-and-the-engine.md): Why is every project a repository of its own that the engine does not know?
@@ -109,7 +113,7 @@ number).
 - [Checks](reference/checks.md): The checks of today, what each verifies, its cost, and which a save and a release run.
 - [Recipe genres](reference/recipe-genres.md): The genres of `/recipe` with their skeletons, outputs and checklists in full.
 - [ID scheme](reference/id-scheme.md): The format, the numbering rules and the prefix table, exactly.
-- [Versioning and front-matter](reference/versioning-and-front-matter.md): The version scheme and the front-matter fields of an artefact, a brief and a recipe, exactly.
+- [Versioning and front-matter](reference/versioning-and-front-matter.md): The version scheme and the front-matter fields of an artefact, a brief, a recipe and a work specification, exactly.
 - [History companion](reference/history-companion.md): The shape of `<file>.history.md`, record by record, exactly.
 - [Requirement style](reference/requirement-style.md): The rule set of the items of an assignment, exactly.
 - [Document kinds](reference/document-kinds.md): The table of document kinds, verbatim, with the companion, library and wrapping rules.

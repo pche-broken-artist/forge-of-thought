@@ -1,8 +1,8 @@
 ---
-generated: 2026-10-11
-version: 5.3
+generated: 2026-10-14
+version: 5.9
 made: derived
-inputs-hash: 47d8db7229ff082d
+inputs-hash: fa4966a7fda86cfb
 inputs:
   - CLAUDE.md#Persistence (git)
   - CLAUDE.md#Repository layout
@@ -17,125 +17,175 @@ inputs:
 
 A script of the forge is a Python file in `scripts/`, run as
 `python scripts/<name>.py`, that carries its own help in its module
-docstring and shares what it has in common with its neighbours
-through one module beside it. This page is for the extender who
-wants to add one: it says what files are touched, how the script is
-written so that it runs unchanged on Linux and macOS, how it is
-proved and how the change is recorded. The scripts are the only
-layer of the forge that is bound to a platform; why they are the one
-door to git is said on [Persistence in git](../about/persistence-in-git.md),
-and the scripts that exist today are listed on
-[Scripts](../reference/scripts.md).
+docstring and uses nothing bound to one operating system. This page
+is for the extender who writes a new script: what the file must look
+like, what it may share with the scripts beside it, where it is
+named and how the addition is proved. The forge is the engine that
+runs the chain of a project; a script is one of its doors to the
+machine, git among the things behind them.
 
 ## Before you start
 
-Read [Make a change to the forge](how-a-change-is-made.md): a new
-script is a change of the engine (the forge itself, as opposed to a
-project run through it: see the [Glossary](../reference/glossary.md))
-and is recorded and released as any change of the forge.
+A script is a change to the forge like any other. How a change is
+proposed, proved, recorded and released is on
+[Make a change to the forge](how-a-change-is-made.md); this page
+adds only what is particular to a script. The addition is recorded
+and released as any change of the forge.
 
-Two things hold before a line is written.
+Before you write, look at what exists. The scripts the forge has
+today are listed on [Scripts](../reference/scripts.md). Why the
+scripts in `scripts/` are the only door to git, reading state
+included, is explained on
+[Persistence in git](../about/persistence-in-git.md). The terms of
+the forge are gathered in one line each in the
+[Glossary](../reference/glossary.md).
 
-- The rules below are writing rules. Portability is proved by
-  running the whole set of scripts on Linux. Until that has been
-  done it is not claimed.
-- Nothing of the instance (one installation of the forge) enters a
-  script: no remote URL, no author identity, no first-run
-  initialisation. Git configuration belongs to the user.
+Two facts frame every script:
+
+- `scripts/` is the only platform-bound layer of the forge. It is
+  written to run unchanged on Linux and macOS. This is a writing
+  rule, not a verified claim: portability is verified by running the
+  set on Linux, and until then the rules below are what holds.
+- Instance facts stay out of the scripts. A script carries no remote
+  URL, no author identity and no first-run initialisation. The git
+  configuration belongs to the user of the installation.
 
 ## The files
 
-- `scripts/<name>.py`: the script itself, a new file.
-- One shared module beside it, only where the script shares
-  something with its family:
-  - `scripts/forge_repos.py` for a git script, that is, one that
-    joins `forge-save`, `forge-pull`, `forge-status`, `forge-clone`
-    and `forge-branch`
-  - `scripts/forge_tools.py` for a conversion, that is, one that
-    joins `doc2md`, `md2pptx` and `md2docx`
-  - `scripts/docs_map.py` for a documentation script, that is, one
-    that joins `docs-state`, `docs-index` and `docs-check`
-- `CLAUDE.md`, Repository layout: the comment on the `scripts/`
-  line, where every script is named with a phrase of what it does.
-- `CLAUDE.md`, Persistence (git): the sentence that names each git
-  script with one clause, touched only when the new script is a git
-  script.
-- `.claude/settings.json`, touched only when the new script is a
-  hook: a hook is started by `python` from there.
+- `scripts/<name>.py`: the script itself. Its module docstring is its
+  help and the one owner of the facts about it.
+- `scripts/forge_repos.py`, `scripts/forge_tools.py`,
+  `scripts/docs_map.py`: the shared modules. What several scripts
+  share lives in one of them, never twice.
+- `CLAUDE.md`, the comment on `scripts/` in the section
+  "Repository layout": every script is named there in a few words.
+- `CLAUDE.md`, the section "Persistence (git)": a script that serves
+  git is also named there, with one clause on what it does.
+- The skill or the agent that uses the script: it cites the script
+  by path and reads its docstring for the facts. It does not restate
+  them.
 
 ## Steps
 
-1. Create `scripts/<name>.py` for Python 3.8 or newer, started as
-   `python scripts/<name>.py`. `python` on PATH is the one
-   prerequisite of the scripts. A system that has only `python3`
-   gives it that name; the script does not.
+### 1. Decide what the script owns
 
-2. Open the file with its module docstring. The docstring is the
-   one place the facts of the script stand; CLAUDE.md names the
-   script in a phrase and leaves the full description to this
-   header. It holds, in this order:
-   - the first line: `<name>.py - ` and what the script does, in
-     one sentence
-   - `SYNOPSIS`: the line as it is typed, with its options in
-     brackets
-   - `WHAT IT DOES`: what happens, what it changes or that it
-     changes nothing, and what each option adds
-   - `WHAT IT NEEDS`: the Python version, every tool it expects on
-     PATH, and the shared module it imports
-   - `EXAMPLES`: one line per example, each followed by a comment
-     saying what that example shows
-   The examples carry no path of any platform and no invocation
-   of any particular shell.
+A script owns one job and the facts about that job. Anything the job
+shares with another script (the engine root, the check that `git` is
+installed, the list of repositories a bare or a slug form visits,
+running git, a tool on PATH, the reader of the documentation map)
+is already in a shared module. Read the three modules before you
+write: what they have, you import; what two scripts would need and
+no module has, you add to the module that fits, not to both scripts.
 
-3. Write the body to run unchanged on Linux and macOS. The rules
-   are:
-   - paths are composed with `pathlib`, never as strings
-   - a process is started with `subprocess` and an argument list,
-     never through a shell
-   - an external tool (`git`, `markitdown`, `pandoc`, `claude`) is
-     resolved from PATH; when it is missing, the script stops with
-     an error that names it, and installs nothing
-   - colour is printed only when the output is a terminal; the
-     shared `say` of `forge_repos.py` prints plain text when it is
-     not, or when `NO_COLOR` is set
-   - nothing Windows-only
-   - no URL and no identity anywhere in the file
+The three modules and whom they serve:
 
-4. Put what the script shares with its family into the shared
-   module and import it from there. A script imports the module by
-   path: it adds its own directory to the import path and then
-   imports the module by name. What each module holds today:
-   - `forge_repos.py`: the engine root (the parent of `scripts/`),
-     the check that git is installed and that the engine is a
-     repository, the list of repositories a bare or a slug form
-     visits (a project is a repository when `projects/<slug>/.git`
-     exists), running git with and without captured output, the
-     state of a branch against its origin after a fetch, and the
-     coloured output
-   - `forge_tools.py`: a tool on PATH, resolving paths, and the
-     headless Claude Code run
-   - `docs_map.py`: the reader of the documentation map
-   Something two scripts need is written once, in the module, never
-   in both scripts. A module is not a command: it has no synopsis
-   and is not run on its own.
+- `forge_repos.py`: the engine root, the git check, the list of
+  repositories to visit, running git, the state of a repository
+  against its origin and coloured output. Shared by the git scripts.
+- `forge_tools.py`: a tool on PATH, resolving paths, the headless
+  Claude Code run. Shared by the conversions.
+- `docs_map.py`: the reader of the documentation map. Shared by the
+  documentation scripts.
 
-5. Name the script in the layout comment of `CLAUDE.md`, on the
-   `scripts/` line of Repository layout, with a phrase of what it
-   does. Where the script is a git script, add its clause to the
-   sentence of Persistence (git) that names the git scripts. Where
-   the script is a hook, name it in `.claude/settings.json`.
+You should now know what the script does itself and what it imports.
+
+### 2. Write the docstring first
+
+The module docstring is the help of the script. It is what a person
+reads with the file open and what a command cites instead of
+describing the script a second time. It holds, in this order:
+
+- one line that names the script and says what it does;
+- SYNOPSIS: the command as it is typed, with its options and
+  arguments;
+- WHAT IT DOES: what the script changes and what it leaves alone,
+  what each option does, and where the output lands when the script
+  writes a file;
+- WHAT IT NEEDS: the Python version, the tools that must be on PATH,
+  the shared module it imports;
+- EXAMPLES: runs that can be typed as they stand, each with a short
+  comment on what that run does.
+
+The examples name no path of one operating system and no path of
+one installation. A run is written as `python scripts/<name>.py`,
+nothing else. Where the script acts on a project, the examples use a
+placeholder slug.
+
+The smallest model on disk is the docstring of
+`scripts/forge-status.py`: four headings, the one option explained
+under WHAT IT DOES, two examples. A shared module has a docstring
+too; `scripts/forge_repos.py` opens with what it shares, whom it
+serves and the sentence "Not a command", so that nobody runs it.
+
+You should now have a docstring from which the script can be
+written and which a command can cite.
+
+### 3. Write the body by the rules
+
+The body follows the docstring. The rules it keeps:
+
+- Python 3.8 or newer. Use nothing newer than that.
+- Nothing Windows-only.
+- Paths are composed with `pathlib`, never with a string and a
+  separator.
+- Processes run through `subprocess` with an argument list, never
+  through a shell.
+- External tools (`git`, `markitdown`, `pandoc`, `claude`) are
+  resolved from PATH. A script that needs one checks that it is
+  there and fails aloud when it is not; it never installs it.
+  `forge_repos.py` does this for `git` with one call.
+- Colour is printed only on a terminal. The shared `say` of
+  `forge_repos.py` prints plain text when the output is not a
+  terminal or when `NO_COLOR` is set in the environment.
+- No URL and no identity. The script does not know where a remote
+  is or who commits.
+- The help in the body is the docstring: an argument parser takes
+  its description from the docstring's first line rather than from
+  a second sentence of its own. `forge-status.py` does this.
+
+A shared module is imported by path: the script puts its own
+directory first on the import path and imports the module by name.
+`forge-status.py` shows the two lines; copy that way of importing,
+not another. The model script also calls `utf8_console()` of
+`forge_tools.py` before it prints anything.
+
+You should now have a script that runs with `python
+scripts/<name>.py` and prints its help with `--help`.
+
+### 4. Name it in `CLAUDE.md`
+
+Add the script to the comment on `scripts/` in the section
+"Repository layout", in the few words the other scripts get there.
+A script that serves git is also named in the section "Persistence
+(git)", in the sentence that lists the git scripts, with one clause
+on what it does. Nothing more goes into `CLAUDE.md`: the facts about
+the script stay in its docstring.
+
+Where a command or an agent uses the script, that definition cites
+the script by path and says that what it needs and where its output
+lands are the docstring's. The facts are stated once, in the
+docstring.
+
+You should now see the script in the layout comment and, where it
+serves git, in the Persistence section.
+
+### 5. Share, do not copy
+
+If while writing you found that a second script needs the same
+function, move it to the module that fits and import it from both.
+A function that stands in two scripts is a defect the check does not
+catch for you; keep it out yourself.
+
+You should now have nothing in the script that another script also
+has.
 
 ## Prove it
 
-Run the examples of the docstring as they stand, from the engine
-root. For the smallest script of the set that is:
+Run the script as its synopsis says and read its help:
 
 ```
-python scripts/forge-status.py
+python scripts/<name>.py --help
 ```
-
-You should now see the output the docstring describes, and nothing
-changed on disk.
 
 Then run the engine check:
 
@@ -143,59 +193,64 @@ Then run the engine check:
 /check engine
 ```
 
-It verifies the scripts on disk against `CLAUDE.md`: every file in
-`scripts/` is described in the layout comment and its governing
-rule, and nothing described there is missing on disk. A script that
-is on disk and not in the comment is a finding; so is a name in the
-comment with no file behind it.
+The check reads `scripts/` against `CLAUDE.md`: every file in
+`scripts/` must be described in the layout comment and its governing
+rule, and nothing described there may be missing on disk. A script
+you wrote and did not name, or a name you changed in one place only,
+is a finding of that check. The check verifies conformance with the
+conventions only; whether the script works is yours to prove by
+running it.
+
+Whether the set runs on Linux and macOS is not something the check
+says. The rules of step 3 are what the forge holds the script to.
 
 ## Record and release
 
-The change is recorded and released as any change of the forge:
-[Make a change to the forge](how-a-change-is-made.md) says how. The
-script's own facts stay in its docstring; the record says that the
-script was added and why.
+The addition is a change of the forge and is recorded and released
+as one: how that is done, step by step, is on
+[Make a change to the forge](how-a-change-is-made.md). The write
+happens on the word of the principal, the person whose thinking the
+forge serves and who alone decides what is written.
 
 ## A worked example
 
-The docstring of a generic script, `forge-example.py`, that reports
-something about every project and changes nothing. It shows the
-shape; the script itself is made up.
+The docstring of a new script, with placeholders where the script's
+own facts go. Its shape is the shape of `scripts/forge-status.py`.
 
 ```
-forge-example.py - report, for the engine and every project, the
-thing this script exists to report.
+"""
+<name>.py - <one line: what the script does>.
 
 SYNOPSIS
-    python scripts/forge-example.py [slug] [--verbose]
+    python scripts/<name>.py [--option] <slug>
 
 WHAT IT DOES
-    Read-only, changes nothing. Bare, it visits the engine and every
-    project under projects/ that is a repository and prints one line
-    for each; the others are reported and skipped. With a slug it
-    visits that one project, which must exist and be a repository.
-
-    With --verbose it prints the detail behind each line. Without
-    the flag the script touches no network.
+    <What the script reads, what it changes and what it leaves
+    alone. Which project <slug> names. What --option adds and
+    what the run does without it. Where the output lands, when
+    the script writes a file.>
 
 WHAT IT NEEDS
-    Python 3.8 or newer; git on PATH. `forge_repos.py` beside it.
+    Python 3.8 or newer; <tool> on PATH. `<module>.py` beside it.
 
 EXAMPLES
-    python scripts/forge-example.py              # every repository, one line each
-    python scripts/forge-example.py my-project   # one project
-    python scripts/forge-example.py --verbose    # every repository, with the detail
+    python scripts/<name>.py my-project             # <what this run does>
+    python scripts/<name>.py --option my-project    # <what this run does>
+"""
 ```
 
-The slug in the examples is a placeholder. No path of a platform
-appears, no shell is assumed, and the tool the script needs is
-named, not installed.
+`my-project` is a placeholder slug. Nothing in the docstring names a
+host, a drive, a user or a remote.
 
 ## See also
 
-- [Make a change to the forge](how-a-change-is-made.md): proving, recording and releasing the change.
+- [Make a change to the forge](how-a-change-is-made.md): proving,
+  recording and releasing the change.
 - [Scripts](../reference/scripts.md): the scripts that exist.
-- [Persistence in git](../about/persistence-in-git.md): why the scripts are the only door.
-- [Glossary](../reference/glossary.md): every term of the forge in one line.
+- [Persistence in git](../about/persistence-in-git.md): why the
+  scripts are the only door.
+- [Glossary](../reference/glossary.md): every term of the forge in
+  one line.
 
-Generated on 2026-10-11 for version 5.3 from the files the front-matter names; never edited by hand.
+Generated on 2026-10-14 for version 5.9 from the files the
+front-matter names; never edited by hand.

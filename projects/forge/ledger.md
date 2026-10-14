@@ -51,8 +51,8 @@ written by /document: Recipe "none, derived by scripts/docs-index.py",
 Inputs the map with its generated date and the intent's version. -->
 | Render | Audience | Recipe | Inputs | Generated |
 |---|---|---|---|---|
-| README.md (repo root) | humans arriving at the repository | recipes/readme.md v0.63 | CLAUDE.md, 10-intent.md v5.3, .claude/skills/forge/states/, docs/README.md v5.3, RELEASE-NOTES.md | 2026-10-11 |
-| docs/README.md (the documentation index, kind page) | the three readers of the documentation | none: derived by scripts/docs-index.py (SOL.0460) | docs-map.md (generated 2026-10-11), 10-intent.md v5.3 | 2026-10-11 |
+| README.md (repo root) | humans arriving at the repository | recipes/readme.md v0.65 | CLAUDE.md, 10-intent.md v5.9, .claude/skills/forge/states/, docs/README.md v5.9, RELEASE-NOTES.md | 2026-10-14 |
+| docs/README.md (the documentation index, kind page) | the three readers of the documentation | none: derived by scripts/docs-index.py (SOL.0460) | docs-map.md (generated 2026-10-14), 10-intent.md v5.9 | 2026-10-14 |
 | RELEASE-NOTES.md (repo root) | the user of the engine who has cloned it and takes upgrades through forge-pull | recipes/release-notes.md v0.13 | 10-intent.history.md, 10-intent.history.archive.md, 40-solution-design.history.md, 10-intent.md v5.3, decisions.md, previous edition (released sections) | 2026-10-11 |
 | CONTRIBUTING.md (repo root) | a visitor of the repository on GitHub who wants to say, ask or change something | recipes/contributing.md v0.3 | projects/forge/10-intent.md v5.3, CLAUDE.md, docs/README.md v5.3 | 2026-10-11 |
 | renders/executive-pitch.md | C-level executives whose experience of AI is chatting with it | recipes/executive-pitch.md v0.6 | projects/forge/10-intent.md v4.30, CLAUDE.md | 2026-09-27 |
@@ -328,6 +328,7 @@ as `rejected`. -->
 | FND.1630 | low | conformance | resolved | 2026-10-13-check-light-2.md | the bare file name |
 | FND.1640 | low | conformance | resolved | 2026-10-14-check-light.md | the Waiting line of POS.1530 names the operating layer only (2026-10-14) |
 | FND.1650 | low | conformance | resolved | 2026-10-14-check-light.md | lines for TBC.0040 and TBC.0030 under Waiting on principal (2026-10-14) |
+| FND.1660 | low | conformance | resolved | 2026-10-14-check-light-2.md | the Waiting line of POS.1530 says the operating layer is realised and the README re-rendered (2026-10-14) |
 
 Four review files are named outside the convention — accepted as they
 are by DEC.0140.
@@ -366,11 +367,13 @@ intent version for accepted, DEC.NNNN for rejected. -->
 <!-- What waits on the principal, one line per matter: cite, never
 copy — CLAUDE.md, Ledger. -->
 - POS.1530, POS.1540, POS.1550 — the screenplay genre, the engine as
-  public host, languages of a recipe: decided at 5.9, to be realised
-  in the operating layer (the script
-  `md2video.py`, the genre, the skills render and recipe, the
-  templates, CLAUDE.md, `/document` and `docs/videos/`), then the
-  README; the trial scripts stand in `tmp/video-trial/` until then.
+  public host, languages of a recipe: realised in the operating layer
+  2026-10-14, the README re-rendered from recipe 0.65; the trial
+  scripts in `tmp/video-trial/` to be dropped on the principal's word;
+  the `.json` spelling of the player file in POS.1530, SOL.0650 and
+  SOL.0660 (the operating layer has `.js`), the model of a screenplay
+  render (POS.0930) and the player's skeleton as the page's source
+  (TBC.0040) for the next rounds of the intent and the solution design.
 - THR.0660 — the course of the teaching videos; opened 2026-10-14.
 - TBC.0040 — a document kind for the player page, or none; opened
   2026-10-14 (solution design 0.16).

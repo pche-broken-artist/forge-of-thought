@@ -1,8 +1,8 @@
 ---
-generated: 2026-10-11
-version: 5.3
+generated: 2026-10-14
+version: 5.9
 made: mirrored
-inputs-hash: 5bb5e4e8ce318ce4
+inputs-hash: 68424bea8d0d186
 inputs:
   - .claude/skills/save/SKILL.md
   - scripts/forge-save.py
@@ -11,11 +11,11 @@ inputs:
 
 # Save your work
 
-`/save` is the command that puts your work into git: it runs the light check, drafts a commit message with you, then commits and pushes. This page is for the principal (the person whose thinking is forged) who wants to keep a round of work safe without releasing a version.
+`/save` is the command that commits your work and pushes it, after a light check, on whatever branch is checked out. This page is for the principal (the person whose thinking is forged) who wants to keep what the round has produced. Terms of the forge are one line each in the [Glossary](../reference/glossary.md).
 
 ## When to use it
 
-Use it at the end of a round of work, or at any point where you want what is written to be kept and shared. It runs on whatever branch is checked out and renders nothing. To release a version from `main`, with the renders regenerated, use the other door, [Release a version](release-a-version.md). The reason for two doors is in [Persistence in git](../about/persistence-in-git.md).
+Use `/save` at the end of a round of work, or at any moment you want the state kept. It makes no render. When you want the renders regenerated and a release made, use the other door, described in [Release a version](release-a-version.md).
 
 ## The command
 
@@ -23,73 +23,68 @@ Use it at the end of a round of work, or at any point where you want what is wri
 /save [slug] [-m "message"] [--tag name]
 ```
 
-- `slug` names one repository. `forge` means the engine. Without it, every repository with changes is saved.
-- `-m "message"` gives the commit message yourself. Without it, Claude drafts one and asks you.
-- `--tag name` tags the commit. It needs a slug.
+Without a slug, `/save` visits the engine and every project that is a repository of its own, and saves each one that has changes. With a slug it saves that one repository only; `forge` means the engine. A tag needs one repository, so `--tag` needs a slug.
 
-For example, to save one project under the placeholder slug:
+For example, to save one project with your own message:
 
 ```
-/save <slug>
+/save <slug> -m "intent: sharpen the objective"
 ```
 
 ## What happens
 
-1. Claude finds the scope. It runs the status script, which reports the engine and each project as a separate repository, each with the branch it is on. A project that is not under git is named in the report and left alone.
+1. Claude finds the scope. It runs the status script, which reports the engine and each project separately, with the branch each is on and whether it has unsaved changes.
+   You should now see, per repository, its changes or "clean - nothing to save", and its branch.
+   A project that is not under git and has changes is named in the report and otherwise left alone.
 
-   You should now see each repository listed with its unsaved changes, or "clean - nothing to save", and its branch.
+2. Claude runs the `light` check on every repository in scope and settles its report through `/check`, the command that runs a check and files its result. A save never waits on a finding you have not asked to fix.
+   You should now see the report of the check, and the save goes on.
 
-2. Claude runs the `light` check on every repository in scope and settles its report through `/check`. The `light` check is the one check a save runs. The other checks belong to a release. A save never waits on a finding you have not asked to fix.
+3. Claude proposes a one-line English commit message, unless you gave `-m`. It drafts the line from the records that the round appended to the histories of the documents it touched. You confirm the line or adjust it.
+   You should now see one proposed line, and it is the one that will be used once you confirm it.
+   When more than one repository has changes, Claude drafts one message per repository, or you run the save once per slug.
+   The script's own message, which lists the changed files, is used only if you say so.
 
-   You should now see the check's report, with nothing held back for a finding you left alone.
+4. A tag is set only on your word: either you gave `--tag <name>`, or you asked for one in words. If you ask for a tag without naming it, Claude proposes `v<intent version>` of that repository's intent, and you take it or give any name you like.
+   You should now see the tag name agreed, or no tag at all.
 
-3. Claude drafts a one-line commit message in English. It draws the message from the records the round added to the histories of the documents it touched. It proposes the message and commits with the wording you confirm or adjust. With `-m`, this step is skipped. When more than one repository has changes, Claude drafts one message per repository, or the save is run once per slug. The file list that the script generates is used only if you say so.
-
-   You should now see a proposed message, or your own `-m` wording taken as given.
-
-4. A tag is set only on your word: either `--tag name` is given, or you ask for one in words. A tag marks one repository, so it needs a slug. If you ask for a tag without naming it, Claude proposes `v` followed by the version of that repository's intent. You may take it or give any name git accepts.
-
-   You should now see the tag named, or no tag at all if you did not ask for one.
-
-5. Claude runs the save script. For each repository it stages everything, commits, puts your commits on top of what the remote already has, and pushes. If the script finds that git resolves no identity for the host, it commits nothing in that repository and says so.
-
-   You should now see the commit's file summary and a line such as "saved and pushed to" the remote, in green.
+5. Claude runs the save script with your arguments. For each repository it stages everything, commits with the confirmed message and, where an origin is configured, rebases your commits onto the remote changes and pushes on the branch that is checked out. With a tag it tags the commit and pushes the tag with it.
+   You should now see the commit's file summary, the tag if there is one, and the line "saved and pushed" naming the origin.
 
 ## What you have afterwards
 
-- One commit per repository that had changes, with the message you confirmed.
-- The commit pushed to the remote on the branch that was checked out.
-- A tag on the commit, only if you asked for one. It is pushed with the commit.
-- Nothing rendered. The README and release notes are left as they were.
+- A commit in each repository that had changes, with the message you confirmed.
+- The same commit on the remote, where an origin is configured.
+- The tag on the commit, if you asked for one. When there was nothing to commit, the tag marks the current state, so a tag can mark a state before a large change.
+- No render: the renders and the README stay as they were.
 
 ## If something goes wrong
 
-- **No identity.** The script says that git resolves no commit identity for this host and commits nothing there. Run `/setup` for the per-host identity, or set a local one, then save again.
-- **Nothing to save.** The repository has no changes, and the script says so. With a tag requested, the script tags the current state instead.
-- **No remote.** The commit is kept locally and the script says it was not pushed. A tag is kept locally too.
-- **Remote changes conflict with yours.** The script stops and says nothing was lost. Ask Claude for help before doing anything else.
-- **The push fails.** The script tells you to check the network and the access to the remote and try again.
-- **The tag exists already.** The script refuses it and changes nothing in that repository.
-- **A tag without a slug.** The script refuses and asks you to name one repository.
-- **A project without a repository.** Named with a slug, it is refused. Bare, it is skipped with a note. Initialise its repository once, then save.
+- **"no commit identity":** git resolves no identity for this host, so nothing is committed in that repository. Run `/setup` for the per-host identity, or set a local identity in that repository, and save again.
+- **"nothing to save":** the repository has no changes and you asked for no tag. Nothing was done.
+- **"not pushed - no origin configured":** the commit is kept locally. A project without a remote is a property, not a defect.
+- **A project that is not a repository:** a bare `/save` skips it with a note. A save that names it by slug is refused, with the one-time step that makes it a repository.
+- **A tag that already exists:** the save is refused and nothing is changed. Choose another name.
+- **A tag without a slug:** the save is refused. Name the repository.
+- **Remote changes conflict with yours:** the script stops and nothing is lost. Ask Claude for help before doing anything else.
+- **The push fails:** check the network and the access to the remote, and try again.
+- **A tag was created but could not be pushed:** the commit is saved. Push the tag later.
 
 ## A worked example
 
-You have finished a round on a project and want it kept. You type:
+You have worked a round on the intent of a project and want it kept, with a tag.
 
 ```
-/save <slug>
+/save <slug> --tag v0.4
 ```
 
-Claude reports the status of that repository: three files changed, branch `main`. It runs the `light` check and finds nothing. It proposes the message `<slug>: <what the round changed>`, drawn from the round's history records. You confirm. Claude runs the save script, and you see the commit's file summary and the line "saved and pushed to" the remote.
-
-If you had also wanted a tag, you would have said so before the script ran, and Claude would have proposed a name for you to confirm or replace.
+Claude reads the status of `<slug>` and sees the changed files on `main`. It runs the `light` check, and the check reports no finding you must act on. It drafts the line "intent: sharpen the objective and close two open questions" from the history records of the round and asks you to confirm it. You say yes. It runs the save script, which prints the commit's file summary, "tagged: v0.4" and "saved and pushed" with the address of the origin.
 
 ## See also
 
 - [Release a version](release-a-version.md): the other door, from `main`, with the renders.
-- [End a session](end-a-session.md): the end of a session, which names what is unsaved and offers the save.
+- [End a session](end-a-session.md): the end of a session, which names what is unsaved.
 - [Persistence in git](../about/persistence-in-git.md): why there are two doors and two speeds.
 - [Glossary](../reference/glossary.md): every term of the forge in one line.
 
-Generated on 2026-10-11 for version 5.3 from the files the front-matter names; never edited by hand.
+Generated on 2026-10-14 for version 5.9 from the files the front-matter names; never edited by hand.

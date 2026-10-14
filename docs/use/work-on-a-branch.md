@@ -1,25 +1,21 @@
 ---
-generated: 2026-10-11
-version: 5.3
+generated: 2026-10-14
+version: 5.9
 made: mirrored
-inputs-hash: f383b1e926aff1c3
+inputs-hash: 1b5c3002db06ede2
 inputs:
   - scripts/forge-branch.py
 ---
 
 # Work on a branch
 
-This page shows how to switch a repository to a branch, or to report
-which branch it is on, without typing git. It is for the principal
-(the person whose thinking is forged) who wants a branch. Branches
-are voluntary: whoever does not want one works on `main` and never
-meets this page.
+This page shows how you switch a repository to a branch, or back to `main`, with one script and without typing git. It is for anyone who wants a branch. Branches are voluntary: whoever does not want one works on `main` and never meets the script.
 
 ## When to use it
 
-- You want to work apart from `main` and come back to it later.
-- You want to know which branch a repository is on and which
-  branches it has.
+- You want to work on a change apart from `main`.
+- You want to know which branch a repository is on.
+- You want to go back to `main`.
 
 ## The command
 
@@ -27,92 +23,81 @@ meets this page.
 python scripts/forge-branch.py <slug> <branch>
 ```
 
-The slug names the repository. The word `forge` means the engine.
-There is no form without a slug, because switching every repository
-at once is never what anyone wants.
+The slug names the repository. The slug `forge` means the engine. There is no form without a slug, because switching every repository at once is never what anyone wants.
 
-Two other forms exist:
-
-- `python scripts/forge-branch.py <slug>` reports the branch the
-  repository is on and lists its branches.
-- `python scripts/forge-branch.py <slug> main` switches back to
-  `main`.
-
-## What happens
-
-1. You name the repository, and a branch if you want to switch. The
-   script reads the branch the repository is on.
-   You should now see the repository's name and "on branch" with the
-   branch, when you gave no branch name. A second line lists the
-   branches when the repository has more than one.
-2. When you named the branch the repository is already on, nothing
-   changes.
-   You should now see "already on" with that branch.
-3. When you named another branch, the script first looks for unsaved
-   changes. Unsaved changes stop the switch, so that nothing is
-   carried across or lost.
-   You should now see either the stop message or the next step.
-4. When the branch exists, the script switches to it.
-   You should now see "switched to" with the branch.
-5. When the branch does not exist, the script creates it from the
-   current state and switches to it.
-   You should now see "created" with the branch, "from" with the
-   branch you left, and a second line saying the branch reaches the
-   remote with the first save made on it.
-
-## What you have afterwards
-
-The repository is on the branch you named. Your next save is made on
-that branch. A new branch reaches the remote by the first save made
-on it, as [Save your work](save-your-work.md) describes. Merging,
-deleting and pushing branches stay with git, and a release is made
-from `main` only. [Persistence in git](../about/persistence-in-git.md)
-says why merging is left to git.
-
-## If something goes wrong
-
-- The repository has unsaved changes: the script stops and prints
-  that the repository has unsaved changes, with the number of files,
-  and asks you to save first. Save, then switch again.
-- The project does not exist: the script prints that the project was
-  not found. Check the slug.
-- The folder is not a repository: the script prints that there is
-  nothing to switch.
-- The current branch cannot be read, or the switch or the creation
-  fails: the script prints that it could not read, switch or create.
-  Nothing else is said.
-
-## A worked example
-
-You want to work apart from `main` in the repository `<slug>`.
+With the slug alone, the script reports where the repository stands:
 
 ```
 python scripts/forge-branch.py <slug>
 ```
 
-You should now see that the repository is on branch `main`.
+## What happens
 
-```
-python scripts/forge-branch.py <slug> <branch>
-```
+1. The script finds the repository named by the slug. You should now see no error. If the slug is not a repository, the script stops and says so.
+2. Without a branch name, it prints the branch the repository is on. You should now see a line "on branch" followed by the name. When the repository has more than one branch, a second line lists them after "branches:".
+3. With a branch name that is the current branch, it changes nothing. You should now see "already on" and the name.
+4. With another name, it first checks for unsaved changes. If there are any, it stops (see below). You should now see no stop message.
+5. If the branch exists, it switches to it. You should now see "switched to" and the name.
+6. If the branch does not exist, it creates the branch from the current state and switches to it. You should now see "created" the branch "from" the previous one "and switched to it", then a second line saying that the branch reaches the remote with the first save made on it.
 
-You should now see that `<branch>` was created from `main` and the
-repository switched to it. Work and save as usual. When you want to
-return:
+Use `main` as the branch name to switch back.
 
-```
-python scripts/forge-branch.py <slug> main
-```
+## What you have afterwards
 
-You should now see that the repository switched to `main`.
+The repository is on the branch you named, and nothing else has changed. The script does two things only: it switches, and it reports.
+
+What stays with git, outside the script:
+
+- Merging a branch into `main` is done by hand or by merge request. The reason is on [Persistence in git](../about/persistence-in-git.md).
+- Deleting a branch.
+- Pushing a branch.
+
+A new branch reaches the remote by the first save made on it. How a save is made is on [Save your work](save-your-work.md).
+
+A release is made from `main` only. Switch back to `main` before you release.
+
+## If something goes wrong
+
+- Unsaved changes: the script stops with "has unsaved changes", the number of files, and the instruction to save first. Save the repository, then switch again. Nothing is carried across the switch and nothing is lost.
+- The project does not exist: the script stops with "Project ... not found", naming the path it looked at.
+- The slug is not a repository: the script stops with "is not a repository - nothing to switch".
+- The current branch cannot be read: the script stops with "Cannot read the current branch".
+- The switch or the creation fails: the script stops with "Could not switch" or "Could not create branch", naming the branch.
+
+## A worked example
+
+You want to try a change in a project without touching `main`.
+
+1. Look at where the project stands:
+
+   ```
+   python scripts/forge-branch.py <slug>
+   ```
+
+   You should now see that it is on `main`.
+
+2. Create the branch and switch to it:
+
+   ```
+   python scripts/forge-branch.py <slug> <branch>
+   ```
+
+   You should now see that `<branch>` was created from `main` and switched to.
+
+3. Work, then save on the branch. The first save pushes the new branch to the remote.
+
+4. When you want to leave the branch, save first, then switch back:
+
+   ```
+   python scripts/forge-branch.py <slug> main
+   ```
+
+   You should now see that the repository switched to `main`.
 
 ## See also
 
-- [Save your work](save-your-work.md): the save that carries a
-  branch to the remote.
-- [Persistence in git](../about/persistence-in-git.md): why merging
-  is left to git.
-- [Glossary](../reference/glossary.md): every term of the forge in
-  one line.
+- [Save your work](save-your-work.md): the save that carries a branch to the remote.
+- [Persistence in git](../about/persistence-in-git.md): why merging is left to git.
+- [Glossary](../reference/glossary.md): every term of the forge in one line.
 
-Generated on 2026-10-11 for version 5.3 from the files the front-matter names; never edited by hand.
+Generated on 2026-10-14 for version 5.9 from the files the front-matter names; never edited by hand.

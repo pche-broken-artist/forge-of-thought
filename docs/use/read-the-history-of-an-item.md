@@ -1,8 +1,8 @@
 ---
-generated: 2026-10-11
-version: 5.3
+generated: 2026-10-14
+version: 5.9
 made: mirrored
-inputs-hash: fa16e6ce110e3205
+inputs-hash: fb6f6cf7777f2414
 inputs:
   - .claude/skills/history/SKILL.md
   - scripts/forge-history.py
@@ -10,108 +10,75 @@ inputs:
 
 # Read the history of an item
 
-This page shows how to see the whole history of one item (a position,
-a requirement, a part of the solution design) with `/history`. It is
-for the principal, the person whose thinking is forged, and for anyone
-who wants to know how an item came to say what it says before
-changing it.
+This page shows how you see the whole history of one position, requirement or other numbered item with `/history`. It is for anyone who wants to know what an item says today, how it came to say it and what else in the project refers to it. The command only reads; it changes nothing.
 
 ## When to use it
 
-Use it before you propose a change to an item, or whenever you want
-to know when an item was born, how often it changed and what refers
-to it. This is the one way Claude reads an item's history. The
-history is a log kept beside each document, and the command searches
-it for the one item instead of loading the whole log into the
-conversation (see [Versioning and history](../about/versioning-and-history.md)).
+Use it before you propose a change to an item, or whenever you ask why an item reads as it does. Each item carries a stable ID such as `REQ.0120`, and the command gathers everything the project holds about that one ID. The history of a document is a log kept beside it and is searched, never loaded whole, so this command is the way to read one item's part of it. The reason is given in [Versioning and history](../about/versioning-and-history.md).
 
 ## The command
 
 ```
-/history req0120 my-project
+/history <ID> [slug]
 ```
 
-The form is `/history <ID> [slug]`.
+- `<ID>` is the item's ID. A short form is accepted: `pos580` is read as `POS.0580`.
+- `[slug]` names the project. Without it, Claude takes the project in context, and asks if that is ambiguous. `forge` is the engine's own project.
 
-- `<ID>` is the item's ID. A short form such as `req0120` is
-  accepted and read as `REQ.0120`.
-- `[slug]` is the project. Left out, Claude takes the project in
-  context and asks if that is ambiguous. `forge` is the engine's own
-  project.
+Claude runs the history script for you. To run the script yourself, type:
 
-Add `--full` to the script's call if you want every Was printed whole
-instead of shortened to its first sentences. Terms of the forge are
-explained in the [Glossary](../reference/glossary.md).
+```
+python scripts/forge-history.py <ID> <slug>
+```
+
+Add `--full` to print every "Was" whole instead of shortened to its first sentences. A "Was" is the item's previous wording, kept in the record of the change.
 
 ## What happens
 
-1. Claude runs the history script for the item and the project.
-   You should now see the item as it stands today: the file that
-   holds it and its wording.
-2. The script prints the timeline, oldest first. You should now see
-   one line per event with its version and, where the log has one,
-   its date. The events come from three places:
-   - the archive rows of the history archives that mention the item;
-   - the item's own records (born, changed, closed, removed,
-     approved);
-   - the records of other items that mention it.
-   A record's reason follows its line, and its Action and its Was
-   follow as marked lines. The shape of a record is described in
-   [History companion](../reference/history-companion.md).
-3. The script prints every other citation in the project. You should
-   now see each place that names the item, as file and line with the
-   line shortened: decisions, threads, the ledger, reviews,
-   challenges and the other artefacts.
-4. Claude prints all of this unshortened and then adds at most three
-   sentences of its own, marked as its own. You should now see what
-   the item says today, how it moved (born when, changed how many
-   times, last at which version) and what hangs on it (a thread, a
-   finding or a challenge among the citations).
+1. Claude runs the script for the item and the project.
+   You should now see the item as it stands today: the file that holds it and its wording.
+2. The script prints the timeline, oldest first. Each line has a version, a date where the log has one, and what happened:
+   - `born`, `changed`, `closed`, `removed` or `approved`, from the history logs of the project's documents and recipes;
+   - `mentioned by <ID>`, from the records of other items that name this one;
+   - `archive`, from the rows of an older history table that mention it.
+
+   A record's reason follows its line. Its Action and its Was follow as marked lines. The shape of such a record is described in [History companion](../reference/history-companion.md).
+   You should now see the item's life from birth to its latest version.
+3. The script prints every other place in the project that names the ID, as file and line number with the line shortened: decisions, threads, the ledger, reviews, challenges and other documents.
+   You should now see what else hangs on the item.
+4. Claude adds at most three sentences of its own, marked as its own: what the item says today, how it moved (born when, changed how many times, last at which version) and what hangs on it.
+   You should now see a short comment set apart from the printed output.
 
 ## What you have afterwards
 
-You have the item's history in the conversation. Nothing is written
-and nothing is derived from Claude's three sentences. If the reading
-suggests a change, it is proposed in the round that owns the item.
-The command is read-only.
+You have the printed history in the conversation and nothing else. Nothing is written to any file. If the reading suggests a change, Claude proposes it in the round that owns the item, and does not make it here.
 
 ## If something goes wrong
 
-- An ID that nothing in the project knows is said so, as the script
-  says it. Claude never guesses a near ID. Check the ID and the slug.
-- The pages of `docs/`, the documentation map, the renders, the
-  resources and `tmp/` are never searched, because they are outputs
-  or inputs and not the project's record. A mention there does not
-  show.
+- If nothing in the project knows the ID, the script says so. Claude never guesses a near ID, so check the ID and run the command again.
+- If the project is ambiguous, Claude asks which slug you mean.
+- The pages of `docs/`, the documentation map, the renders, the sources, the research and `tmp/` are never searched. An ID that appears only there is reported as unknown.
 
 ## A worked example
 
-You type:
+You want the history of requirement `REQ.0120` in a project with the placeholder slug `my-project`, with every earlier wording in full:
 
 ```
-/history req0120 my-project
+python scripts/forge-history.py REQ.0120 my-project --full
 ```
 
-What you see has this shape (the lines are generic):
+Through the command, the same request without `--full` is:
 
 ```
-Today
-  10-intent.md  REQ.0120  The system shall <what the item says>.
-
-Timeline
-  0.3   2026-01-10  born        <reason of the record>
-  0.7   2026-02-02  changed     <reason of the record>
-                    Action: <what to do after the change>
-                    Was: <the earlier wording, shortened>
-  1.0   2026-03-01  mentioned by REQ.0200  <reason of that record>
-
-Cited today
-  threads.md:41   <the line that names the item>
+/history req120 my-project
 ```
 
-Claude then adds, marked as its own: the item says <what it says>;
-it was born at 0.3 and changed once, last at 0.7; an open thread
-cites it.
+You see, in order:
+
+1. The item today, with the file that holds it.
+2. A timeline from its birth to its latest change, each line with a version and a date, followed by its reason.
+3. The list of citations, each as file and line.
+4. At most three sentences from Claude, marked as its own.
 
 ## See also
 
@@ -119,4 +86,4 @@ cites it.
 - [History companion](../reference/history-companion.md): the shape of a record the script reads.
 - [Glossary](../reference/glossary.md): every term of the forge in one line.
 
-Generated on 2026-10-11 for version 5.3 from the files the front-matter names; never edited by hand.
+Generated on 2026-10-14 for version 5.9 from the files the front-matter names; never edited by hand.

@@ -1,8 +1,8 @@
 ---
-generated: 2026-10-11
-version: 5.3
+generated: 2026-10-14
+version: 5.9
 made: derived
-inputs-hash: 0aaa478aa3ff6163
+inputs-hash: a410ebe921649e9d
 inputs:
   - .claude/skills/recipe/SKILL.md
   - .claude/skills/recipe/genres/presentation.md
@@ -12,270 +12,301 @@ inputs:
 
 # Add a recipe genre
 
-A recipe genre is one kind of render that `/recipe` knows how to
-compose by interview: a genre definition carries the questions
-Claude asks and points at the skeleton the recipe is composed from.
-This page is for the extender who wants `/recipe` to offer a new
-genre. It says which two files make a genre, what each holds, and how
-you prove the addition works. What a recipe is and how a render is
-made from it is explained in [Renders and
-recipes](../about/renders-and-recipes.md); the genres that exist
-today are listed in [Recipe genres](../reference/recipe-genres.md).
+A recipe genre is one kind of render recipe that `/recipe` can
+compose by interview: a definition that carries the questions to ask
+and a skeleton the recipe is composed from. This page is for the
+extender who wants a genre the forge does not have yet. It says which
+two files make a genre, what each holds, and how the addition is
+proved, recorded and released. What a recipe is and how a render is
+made from it is said on [Renders and recipes](../about/renders-and-recipes.md);
+the genres that exist are listed on
+[Recipe genres](../reference/recipe-genres.md); every term of the
+forge is in the [Glossary](../reference/glossary.md).
 
 ## Before you start
 
-A genre is a change to the forge. How a change is proved, recorded
-and released is said in [Make a change to the
-forge](how-a-change-is-made.md); read that page first. The addition
-of a genre is recorded and released as any change of the forge.
+Read [Make a change to the forge](how-a-change-is-made.md): a genre
+is a change of the forge like any other, and it is recorded and
+released by the steps that page gives.
 
-Two things hold before you touch a file:
+Two facts set the frame of the work.
 
-- The `/recipe` command itself is a dispatcher and never changes
-  when a genre is added. It lists the genre directory, resolves the
-  genre you name and follows the genre file. Adding a genre means
-  adding two files and nothing else.
-- A recipe outside any genre stays legitimate. It is composed
-  conversationally from `templates/recipe.md`. When a kind of render
-  deserves a genre of its own is not recorded.
+- A genre is two files and nothing else. The command `/recipe` is a
+  dispatcher: it resolves the genre file by name and follows it. The
+  dispatcher, `.claude/skills/recipe/SKILL.md`, never changes when a
+  genre is added.
+- A recipe outside any genre stays legitimate. Claude composes it in
+  conversation with the principal (the person whose thinking is
+  forged, who decides every content question) from the base
+  skeleton `templates/recipe.md`. A genre is therefore not needed
+  for a recipe that is made once. The inputs record no rule on when
+  a kind of render deserves a genre of its own; that judgement is
+  yours.
+
+Every genre runs in the same frame, and the frame is the
+dispatcher's, not the genre's:
+
+- The checklist of the genre closes with the language question. The
+  render's language, or its languages where the genre allows a
+  primary and its translations, is what the recipe declares. Claude
+  proposes the project's language from its ledger header and asks;
+  it never assumes.
+- The recipe is then composed from the genre's skeleton, with unused
+  placeholders and all template comments deleted.
+- The recipe is composed with the principal: options and trade-offs
+  are offered, the decisions are his. It is written once per round,
+  on confirmation, with a version and an updated date and no status,
+  and its history companion `recipes/<recipe>.history.md` is created
+  from `templates/history.md` with it.
+- After the write, Claude offers `/render <recipe>` as the next step.
+
+A genre file states none of this; it relies on it.
 
 ## The files
 
-A genre is exactly two files. Their names share the genre's name.
+| File | What it is |
+|---|---|
+| `.claude/skills/recipe/genres/<genre>.md` | the definition: one line of description, the skeleton and the product named, the role, the numbered elicitation checklist |
+| `templates/recipe-<genre>.md` | the skeleton: the base recipe shape with what the genre fixes filled in and what the interview decides left as placeholders |
 
-| File | What it is | Modelled on |
-|---|---|---|
-| `.claude/skills/recipe/genres/<genre>.md` | the genre definition: what the render is, the role Claude takes, the elicitation checklist | `.claude/skills/recipe/genres/presentation.md` |
-| `templates/recipe-<genre>.md` | the genre skeleton: the recipe shape with the genre's fixed rules and placeholders filled in | `templates/recipe-presentation.md` |
+### The definition
 
-The base shape every recipe keeps is `templates/recipe.md`. That
-skeleton owns the shape only: the front-matter, the title and the
-four sections Inputs, Instructions, Format and Template. A genre
-skeleton extends that shape and never replaces it. It keeps every
-section and fills in what the genre fixes.
+The definition is a short Markdown file in this shape, modelled on
+`.claude/skills/recipe/genres/presentation.md`:
 
-### The genre definition
-
-The definition `.claude/skills/recipe/genres/<genre>.md` holds, in
-this order:
-
-- Front-matter with one key, `description`: one line saying what the
-  genre composes and what comes out of it. Bare `/recipe` prints this
-  line in its roster, so it is written for the reader of the roster.
-- One line naming the genre and its skeleton:
+- Front-matter with one key, `description:`, in one line. Bare
+  `/recipe` lists the directory `.claude/skills/recipe/genres/` and
+  prints this line for each genre; it is how the genre appears in
+  the roster.
+- An opening line that names the genre and its skeleton:
   `Genre: <genre>. Skeleton: templates/recipe-<genre>.md.`
-- A short paragraph on the product: what the render of this genre
-  is, and what is or is not made from it afterwards. The
-  presentation genre, for instance, says its render is source
-  material for a deck and never the deck itself, and that the
-  PowerPoint files are made from it in two further steps.
-- The role Claude takes: interviewer. It elicits the answers from the
-  principal (the person whose thinking is forged), offers options and
-  trade-offs, leaves the decisions to him and then composes the
-  recipe from the skeleton.
-- The elicitation checklist: a numbered list of the points the
-  interview settles, each with a bold name and a clause on what is
-  asked. The points are the genre's own: they are the questions a
-  recipe of this kind cannot be composed without. Where the render
-  has a file beside it, the checklist's last point settles the
-  format and the placeholders of the skeleton's Format section.
-- The closing line: the language question and the composition from
-  the skeleton close every genre.
+- A paragraph on the product: what the render of this genre is, and
+  what it is not. Where the render has a file beside it, the
+  paragraph says that the file is made from the render in the two
+  steps of `/render` and `/publish` and that what each step needs is
+  in the recipe's Format section.
+- The role: Claude is the interviewer. It elicits the answers of the
+  checklist from the principal, offers options and trade-offs,
+  leaves the decisions to him, and then composes the recipe from the
+  skeleton.
+- The elicitation checklist, numbered. Each item is one question the
+  recipe must have answered, in bold, followed by the alternatives
+  the principal chooses between. The items are the genre's own; they
+  are what makes one genre differ from another. Where the render has
+  a file beside it, one item asks for the format and for what each
+  of the two steps needs: these are the placeholders of the
+  skeleton's Format section.
+- A closing line that says the language question and the composition
+  from the skeleton close every genre, as the dispatcher's step 2
+  has it.
 
-The checklist does not ask the language question itself. That
-question belongs to the frame every genre runs in, not to the genre,
-and is asked after the checklist by `/recipe` step 2. The render's
-language is what the recipe declares, so the question is never
-skipped and never assumed.
+The arguments of a genre file are those that follow the genre name on
+the command line.
 
-### The genre skeleton
+### The skeleton
 
-The skeleton `templates/recipe-<genre>.md` is `templates/recipe.md`
-with the genre written in. It keeps:
+The skeleton extends the base recipe shape, `templates/recipe.md`.
+The base owns these parts:
 
-- The front-matter of the base shape: `project`, `purpose`,
-  `audience`, `version: 0.1`, `updated`, `last_change` derived from
-  the history companion, and the optional `output` override.
-  `purpose` may carry the genre's fixed wording with a placeholder
-  inside it.
-- The title `# Recipe — <purpose>`.
-- A template comment under the title saying the recipe is composed
-  through `/recipe <genre>` and what its render is.
-- `## Inputs`: the artefacts the render is generated from, one per
-  line, with a comment on what the genre takes as inputs.
-- `## Instructions`: the rules the genre fixes for every recipe of
-  its kind, with a placeholder `<...>` wherever the interview fills a
-  value. The placeholders answer to the checklist: a point of the
-  checklist has a place in the Instructions where its answer lands.
-- `## Format`: only where the render has a plain file beside it. The
-  base shape says a recipe without this section ends at the Markdown.
-  Where the section stands, the genre fixes the format (`pptx` or
-  `docx`) and leaves placeholders for the plain file's reference and
-  the published file's template, model and further instructions.
-- `## Template`: the literal skeleton of the render, always Markdown,
-  with the genre's shape and placeholders.
+- Front-matter: `project`, `purpose`, `audience`, `version: 0.1`,
+  `updated`, `last_change` (derived from the records of the newest
+  version in the history companion, never written by hand), and two
+  optional, commented keys: `output:` to override the default
+  `renders/<recipe>.md`, and `languages:`.
+- The title line `# Recipe — <purpose>`.
+- `## Inputs`: the artefacts the render is generated from, by path,
+  one per line; more than one is legitimate.
+- `## Instructions`: audience, tone, what to emphasise, what to omit,
+  target length, register; everything the renderer must know beyond
+  the template.
+- `## Format`, optional: a recipe without it ends at the Markdown.
+  It names the format (`pptx`, `docx`, `video` or `html-player`),
+  the plain file made by `/render` through pandoc with its reference
+  and page size, and the published file made by `/publish` through a
+  model with its template, model and anything else the model must
+  know. A screenplay's `video` or `html-player` is made through
+  `scripts/md2video.py` instead and has no published file. The
+  section is never copied into the render.
+- `## Template`: the literal skeleton of the render, with
+  placeholders, always Markdown.
 
-A placeholder stands in angle brackets. A template comment stands in
-`<!-- -->`. Both are deleted when a recipe is composed: `/recipe`
-step 2 removes unused placeholders and all template comments, so the
-skeleton may carry as much guidance as the composer needs.
+A genre's skeleton keeps every part of the base and fills in what the
+genre fixes:
+
+- The `purpose` line and the title carry the genre's wording with a
+  placeholder for the one recipe.
+- `## Instructions` carries the lines every recipe of this genre
+  needs, each with a placeholder where the interview decides, so that
+  the answers of the checklist have a place to land. The presentation
+  skeleton, for instance, carries a line for the audience and
+  register, one for the one message, one for the density of a slide,
+  one for the vocabulary that must not blur, one for what must not
+  appear, and the per-item format of the render.
+- `## Format` is present where the render has a file beside it, with
+  the format fixed and the rest as placeholders. The presentation
+  skeleton fixes `Format: pptx` and leaves the reference of the plain
+  file and the template and model of the published file open. A
+  genre whose render ends at the Markdown leaves the section out.
+- `languages:` stays in the front-matter where the genre allows a
+  primary language and its translations. The base skeleton carries it
+  as an optional line: the first language is the primary, the rest
+  are its translations, and the render is one file per language,
+  `renders/<recipe>.<lang>.md`. The presentation skeleton carries no
+  `languages:` line. The inputs record no reason for that choice.
+- `## Template` carries the shape of the render of this genre, with
+  placeholders; the presentation skeleton gives a table of slides.
+
+The comments of the base skeleton may stay in the genre's skeleton as
+guidance for the composer. The composition deletes them from the
+recipe.
 
 ## Steps
 
-1. Write the genre definition
-   `.claude/skills/recipe/genres/<genre>.md`. Start from the
-   presentation definition as the model of the shape. Keep the
-   front-matter `description`, the `Genre:` line, the product
-   paragraph, the role, the checklist and the closing line. Replace
-   the checklist's points with the ones your render needs settled.
-   Keep the closing line as it stands.
-   You should now see a file whose `description` reads as one line of
-   a roster and whose checklist names the points of your genre only.
-2. Write the genre skeleton `templates/recipe-<genre>.md`. Start from
-   `templates/recipe.md` for the shape and from
-   `templates/recipe-presentation.md` for the way a genre fills it.
-   Keep every section of the base shape. Write the genre's fixed
-   rules into Instructions with a placeholder for each answer the
-   interview gives. Keep or drop Format by whether the render has a
-   file beside it. Write the render's shape into Template.
-   You should now see a skeleton where every point of your checklist
-   has a place for its answer.
-3. Check the two files agree. The `Genre:` line of the definition
-   names the skeleton by its path. The checklist's last point, where
-   the render has a file beside it, names the Format section's
-   placeholders. No point of the checklist is without a place in the
-   skeleton and no placeholder in the skeleton is without a point of
-   the checklist that fills it.
-   You should now see one name, `<genre>`, in both file names and in
-   the `Genre:` line.
-4. Run bare `/recipe`. It lists the genre directory, so the new genre
-   appears with its one-line description without any change to the
-   command.
-   You should now see your genre in the roster beside the ones that
-   existed before.
+1. Write the definition `.claude/skills/recipe/genres/<genre>.md`
+   in the shape above. Give it the one-line `description:` first:
+   it is what the roster shows.
+2. Write the skeleton `templates/recipe-<genre>.md`, starting from a
+   copy of `templates/recipe.md`. Fix what the genre fixes, leave as
+   a placeholder what the interview decides, drop `## Format` if the
+   render ends at the Markdown, keep or drop `languages:` as the
+   genre allows translations or not.
+3. Make sure every item of the checklist has a place in the skeleton
+   and every placeholder of the skeleton has an item in the
+   checklist. The dispatcher composes the recipe from the skeleton
+   with the checklist's answers; an answer without a place is lost,
+   and a placeholder without a question stays unanswered.
+4. Change nothing else. The dispatcher scans the directory; it is not
+   told about the genre.
 
 ## Prove it
 
-The commands, as they are typed:
+Run the check of the engine:
 
-- `/check engine`: the conformance check of the engine, on the two
-  new files among the rest.
-- `/recipe <genre> <slug>`: one composition on a project, where
-  `<slug>` is the slug of a project you have. Claude follows the
-  checklist point by point, asks the language question last, and
-  composes the recipe from your skeleton into `recipes/<recipe>.md`
-  with its history companion beside it. After the write it offers
-  `/render <recipe>`.
+```
+/check engine
+```
 
-The composition proves the genre: a point of the checklist with no
-place in the skeleton, or a placeholder no point fills, shows up
-there.
+Then compose one recipe of the new genre on a project, with the slug
+of a project of yours in place of `<slug>`:
+
+```
+/recipe <genre> <slug>
+```
+
+What you should see, in order:
+
+- Claude resolves `.claude/skills/recipe/genres/<genre>.md` and asks
+  the questions of your checklist, offering the alternatives each
+  item gives.
+- The last question is the language question: Claude proposes the
+  project's language from its ledger header and asks.
+- Claude composes the recipe from your skeleton, with unused
+  placeholders and template comments deleted, reflects it back and
+  writes it on your confirmation to `recipes/<recipe>.md`, with
+  `recipes/<recipe>.history.md` beside it.
+- Claude offers `/render <recipe>`.
+
+Two further signs that the genre is in place:
+
+- Bare `/recipe` lists the new genre with its `description:` line
+  among the others.
+- `/recipe <name>` for a name that is neither a genre nor a recipe
+  of the project lists the genres that do exist and stops; the new
+  genre is in that list.
 
 ## Record and release
 
-The two files are recorded and released as any change of the forge,
-by the steps of [Make a change to the
-forge](how-a-change-is-made.md). The roster of bare `/recipe` reads
-the genre directory and needs no change of its own.
+The two files are recorded and released as any change of the forge.
+The steps are on [Make a change to the forge](how-a-change-is-made.md).
 
 ## A worked example
 
-You want `/recipe` to compose a genre called `<genre>`.
+The genre is `<genre>` throughout; the project is `<slug>`.
 
-First you write `.claude/skills/recipe/genres/<genre>.md`:
+The definition, `.claude/skills/recipe/genres/<genre>.md`:
 
-```markdown
+```
 ---
 description: Compose a <genre> recipe — <what the render is, in one line>
 ---
 
 Genre: <genre>. Skeleton: `templates/recipe-<genre>.md`.
 
-The product is a recipe whose render is <what the render is> —
-<what it is not>. <What is made from it afterwards, where the render
-has a file beside it; what each step needs is the recipe's Format
-section.>
+The product is a recipe whose render is <what the render is>, never
+<what it is not>. <Where a file is made beside it: the file is made
+from the render in the two steps of /render and /publish; what each
+step needs is the recipe's Format section.>
 
 Role: interviewer. Elicit the answers below from the principal —
 options and trade-offs offered, decisions his (`/recipe`, step 2) —
 then compose the recipe from the skeleton.
 
 Elicitation checklist:
-1. **<First point>.** <What is asked.>
-2. **<Second point>.** <What is asked.>
-3. **Inputs.** Which chain artefacts feed the render.
-4. **<Further points of this genre>.** <What is asked.>
-5. **Format.** <Only where the render has a file beside it: the
-   format, and the placeholders of the skeleton's Format section.>
+1. **<The first thing the recipe must know.>** <The alternatives.>
+2. **<The second.>** <The alternatives.>
+3. **Inputs.** <Which artefacts feed the render; the default.>
+<...>
+N. **Format.** <Where the render has a file beside it: the format,
+   and what the plain and the published file each need.>
 
 The language question and the composition from the skeleton close
 every genre (`/recipe`, step 2).
 ```
 
-Then you write `templates/recipe-<genre>.md`:
+The skeleton, `templates/recipe-<genre>.md`:
 
-```markdown
+```
 ---
 project: <slug>
-purpose: <the genre's fixed purpose wording> <the particular>
+purpose: <The genre's purpose line> for <the one recipe>
 audience: <audience>
 version: 0.1
 updated: YYYY-MM-DD
 last_change: <derived from the records of the newest version in recipes/<recipe>.history.md>
 # output: <path>   # optional — overrides the default renders/<recipe>.md
+# languages: <cs, en>   # keep only where the genre allows a primary and its translations
 ---
 
-# Recipe — <name>
-
-<!-- <genre>-genre recipe, composed via /recipe <genre>; the render
-is <what the render is>. A recipe: CLAUDE.md, Document chain,
-Renders. -->
+# Recipe — <the one recipe>
 
 ## Inputs
-<!-- Chain artefacts the render is generated from. -->
 - 10-intent.md
 
 ## Instructions
-- <A rule the genre fixes for every recipe of its kind.>
-- Audience: <audience>. Register: <register>. Language: <English>.
-- <The answer to the first point lands here.>
-- <The answer to the second point lands here.>
-- Content comes from the Inputs only — no invention, no softening.
+- <One line per item of the checklist, with a placeholder where the
+  interview decides.>
+- Audience: <audience>. Register: <register>. Language: <language>.
+- Must not appear: <what this audience must not see>.
 
 ## Format
-<!-- Only where the render has a file beside it. The shape:
-templates/recipe.md. -->
-- Format: <pptx | docx>
+- Format: <pptx | docx | video | html-player>
 - Plain file, made by `/render` through pandoc: reference
   <path | none>.
 - Published file, made by `/publish` through a model: template
   <path | none>, model <name>, <anything else the model must know>.
 
 ## Template
-<The literal skeleton of the render, in Markdown, with
-placeholders.>
+<The literal shape of the render, with placeholders.>
 ```
 
-Then you type `/recipe`. The roster lists `<genre>` with its one-line
-description. Then you type `/recipe <genre> <slug>` on a project of
-yours. Claude asks the points of your checklist one after another,
-asks the language question last, proposes the language of the
-project's ledger header, and on your confirmation writes
-`recipes/<recipe>.md` and `recipes/<recipe>.history.md` from your
-skeleton with the placeholders and comments removed. It offers
-`/render <recipe>`. Then you type `/check engine` and settle what it
-finds. Then the two files go the way of every change of the forge.
+The run:
+
+```
+/recipe <genre> <slug>
+```
+
+Claude asks the N questions of the checklist, then the language
+question, proposing the language of the project's ledger header. On
+your confirmation it writes `projects/<slug>/recipes/<recipe>.md` at
+version 0.1 with the day's date, creates
+`projects/<slug>/recipes/<recipe>.history.md` from
+`templates/history.md`, and offers `/render <recipe>`.
 
 ## See also
 
-- [Make a change to the forge](how-a-change-is-made.md): proving,
-  recording and releasing the change.
-- [Recipe genres](../reference/recipe-genres.md): the genres that
-  exist.
-- [Renders and recipes](../about/renders-and-recipes.md): what a
-  recipe is.
-- [Glossary](../reference/glossary.md): every term of the forge in
-  one line.
+- [Make a change to the forge](how-a-change-is-made.md): proving, recording and releasing the change.
+- [Recipe genres](../reference/recipe-genres.md): the genres that exist.
+- [Renders and recipes](../about/renders-and-recipes.md): what a recipe is.
+- [Glossary](../reference/glossary.md): every term of the forge in one line.
 
-Generated on 2026-10-11 for version 5.3 from the files the
-front-matter names; never edited by hand.
+Generated on 2026-10-14 for version 5.9 from the files the front-matter names; never edited by hand.

@@ -1,8 +1,8 @@
 ---
-generated: 2026-10-11
-version: 5.3
+generated: 2026-10-14
+version: 5.9
 made: derived
-inputs-hash: 7df6010775b5997f
+inputs-hash: ea11a9b70ab5cb2d
 inputs:
   - CLAUDE.md#ID scheme
   - projects/forge/10-intent.md#POS.0200
@@ -14,161 +14,138 @@ inputs:
 
 # Stable IDs
 
-A stable ID is the address of one item of a document: a three-letter
-prefix, a dot and four digits, given once and never changed. This
-page says what the scheme is, how an item is numbered and grouped,
-and why the forge writes its documents as items with such addresses
-rather than as prose. It is for anyone who reads, writes or evaluates
-a document of the chain and wants to know why `REQ.0020` means the
-same thing on every page, in every review and in every later version.
-The prefixes themselves and the numbering rules, exactly as they
-stand, are in [ID scheme](../reference/id-scheme.md); the words of
-the forge are in the [Glossary](../reference/glossary.md).
+A stable ID is the address of one item of a document of the forge:
+a requirement, a position, a fact, a thread, a finding, a decision.
+Every such item carries one, in the shape `PREFIX.NNNN`, and the ID
+never changes once given. This page says what the scheme is, how it
+numbers items and why the forge writes its documents as items with
+IDs rather than as prose. It is for anyone who reads or writes a
+document of the forge: the user who works with the principal (the
+person whose thinking is forged), the extender who adds to the
+engine and the evaluator who judges how it works. The prefix table
+and the numbering rules as a plain listing are in the
+[ID scheme](../reference/id-scheme.md); every term of the forge in
+one line is in the [Glossary](../reference/glossary.md).
 
 ## What it is
 
-Every item of a document of the chain carries an ID in the format
-`PREFIX.NNNN`. The prefix is three letters and says what kind of item
-it is: a requirement, a position, a fact, a thread, a finding, a
-decision and so on. The number is four digits. The ID is global:
-it points at one item, and at that item only, wherever it is cited.
-The ID is stable: it is never renumbered. An item may move from one
-group to another without a change of its ID.
+An ID has the format `PREFIX.NNNN`. The prefix is three letters.
+The number has four digits. Each prefix names one kind of item,
+such as `REQ` for a requirement of an assignment, `POS` for a
+position the principal holds, `FCT` for a fact, `THR` for an open
+thread, `FND` for a finding of a reviewer and `DEC` for a decision.
+Each kind of item lives in one document: requirements in the
+assignment, positions and facts in the intent, threads in the
+project's `threads.md`, findings in the ledger (the single source
+of truth for the project's state) and in the review reports,
+decisions in `decisions.md`.
 
-Items stand in groups, and a group is a plain heading. A group has no
-ID, no metadata and no lifecycle of its own. Groups are at most two
-levels deep.
-
-Which prefix belongs to which kind of item and where each kind lives
-is a fixed vocabulary of the forge. It is a house convention, aligned
-with a BRD standard where that standard has an equivalent. No
-universal standard for such prefixes exists; the convention is
-derived from the standard the principal's organisation already uses.
-The principal is the one whose thinking is being forged, the final
-authority on all content.
+IDs are global and stable. Global means that an ID is unique across
+the project, not only within a group or a document. Stable means
+that an item keeps its ID for its whole life. It is never
+renumbered, not when items around it are dropped, not when it moves
+to another group and not when the document is rewritten.
 
 ## How it works
 
-Within a group, items are numbered in tens: `REQ.0010`, `REQ.0020`,
-`REQ.0030`. Each new group starts at the next hundred: the second
-group of requirements begins at `REQ.0100`, the third at `REQ.0200`.
-When a group runs out of numbers between its neighbours, the next
-item takes the next free number anywhere in the sequence. The reason
-for the tens and the hundreds is not recorded.
+Items are numbered in tens: the first item of a group is `0010`,
+the next `0020`, and so on. Each new group starts at the next
+hundred: a second group begins at `0100`, a third at `0200`. When a
+group runs out of room, a new item takes the next free number
+anywhere. The reason for the gaps of ten and of a hundred is not
+recorded in the inputs of this page.
 
-Once an item has its ID, the ID is its name for good. When the
-document is reworked, items are added, reworded, rejected or moved
-between groups; none of that touches an ID. A gap left by a dropped
-item stays a gap. A later version of the document cites the same
-item by the same address as the earlier one.
+Groups are plain headings. They carry no ID, no metadata and no
+lifecycle. A document nests groups at most two levels deep. The
+reason for the cap at two levels is not recorded.
 
-The prefix says the kind of item. Three kinds of the intent are worth
-telling apart, because they look alike on the page and are not:
+Because the ID is global and the group is only a heading, an item
+may move from one group to another without changing its ID. Whoever
+cited the item before the move still finds it after the move.
 
-- A position (`POS`) is what the principal holds or wants: a stance.
-- A fact (`FCT`) is what is the case. The principal states it on his
-  word, or a source states it and the fact cites the source's file.
-  Verification of a fact is never demanded.
-- A thread (`THR`) is an unresolved matter to elicit next. It names
-  the artefact it concerns and carries its origin: the principal's
-  word, which is the default and needs no mark; a document, named by
-  its path; or Claude's own synthesis.
-
-What Claude has worked out is never a fact, since a fact is the
-principal's word or a source's. Making a source's fact the
-principal's own stance is a new position, not an edit of the fact.
-
-The three-letter dotted form replaced single-letter and hyphenated
-prefixes such as `R-001` and `P-01`. It was chosen to align with the
-BRD standard. Beyond that alignment, no reason for three letters
-rather than another length is recorded.
+The vocabulary of prefixes is a house convention. It is aligned
+with a company standard for business requirement documents where
+that standard has an equivalent. No universal standard for prefixes
+exists.
 
 ## Why
 
-The forge prefers structured items with stable IDs over prose, even
-at a very high level of abstraction. Narrative is confined to the
-sections where it belongs, such as the purpose and context of a
-document and its objective. The reason is that an item with a stable
-ID can be cited, reviewed, traced into the layer below and changed
-one at a time. Prose cannot be pointed at. A reviewer's finding, a
-decision, a requirement that realises a position in the layer below:
-each of these names the item it concerns by its address, and the
-address holds across every version of the document.
+**Items over prose.** Structured items with stable IDs are
+preferred to prose, even at very high abstraction. Narrative is
+confined to the two sections where it belongs, Purpose and Context
+and Objective. The reason is that an item with a stable ID can be
+cited, reviewed, traced into the layer below and changed one at a
+time. Prose cannot be pointed at: a reviewer cannot name the
+sentence it objects to, a decision cannot say which item it
+settles, and an assignment cannot say which position of the intent
+each of its requirements carries down.
 
-The ID is never renumbered because everything that cites it would
-otherwise point at the wrong item. The ID is global for the same
-reason: a citation must resolve to one item wherever it is read.
-
-Groups are plain headings and not entities of their own. Workstreams
-with IDs and a lifecycle of their own were rejected as structure for
+**Headings over workstreams.** Groups were deliberately left as
+plain headings. Workstreams as entities of their own, with their
+own IDs and lifecycle, were considered and rejected as structure for
 its own sake. Plain heading groups together with stable global IDs
-achieve the same at lower cost. Because the group carries nothing
-but its heading, an item can move between groups freely: nothing
-about the item changes except where it stands. The cap of two levels
-of depth is a rule of the convention; its reason is not recorded.
+achieve the same at lower cost.
 
-A fact, a position and a thread have prefixes of their own because
-they would otherwise be confused. Without a prefix of its own, a fact
-would have passed for a position: what is the case would have read as
-what the principal wants. A thread carries its origin so that a
-hypothesis of Claude's stays visibly its own until the principal
-takes it up. A matter the principal raised, a matter a document
-raised and a matter Claude synthesised are three different things for
-the one who decides what to do with them next.
+**Three letters, dotted.** Single-letter and hyphenated prefixes
+such as `R-001` or `P-01` were replaced by the three-letter dotted
+form. The reason given is alignment with the company standard the
+prefixes follow.
+
+**A prefix of its own for a fact, a position and a thread.** A fact
+(`FCT`) is what is the case. It is stated by the principal on his
+word or by a source cited to its file. Verification is never
+demanded. A position (`POS`) is what the principal holds or wants.
+The two are kept apart by prefix because without a prefix of its
+own a fact would have passed for a position. When the principal
+makes a source's fact his own stance, that is a new position, not a
+change to the fact.
+
+A thread (`THR`) is an unresolved matter to elicit next. It names
+the artefact it concerns and carries its origin. The origin is one
+of three: the principal's word, which is the default and needs no
+mark; a document, cited by path; or Claude's synthesis. The origin
+is carried so that a hypothesis of Claude's stays visibly its own
+until the principal takes it up. What Claude has worked out is never
+written as a fact. Because a fact is the principal's word or a
+source's, Claude's own reasoning has no place under `FCT` and lives
+as a thread with its origin marked.
 
 ## A worked example
 
-An assignment on a placeholder project `my-idea` opens with two
-groups of requirements and one out-of-scope item. The groups are
-headings; the items carry the IDs:
+An assignment of a placeholder project has two groups of
+requirements. The groups are headings; the items carry the IDs.
 
 ```
-## Scope of the service
+## Onboarding
 
-- **REQ.0010** The service shall accept a request in the agreed
-  form.
-- **REQ.0020** The service shall answer within the agreed time.
+- **REQ.0010** The recipient shall publish a welcome page for every
+  new team member.
+- **REQ.0020** The recipient shall record each onboarding in the
+  team's register.
 
-## Operation
+## Reporting
 
-- **REQ.0100** The service shall be run by the recipients.
-- **REQ.0110** The service shall report its state daily.
-
-## Out of scope
-
-- **OOS.0010** The service shall not store the request after the
-  answer.
+- **REQ.0100** The recipient shall report onboarding figures every
+  month.
 ```
 
-A review of the assignment finds that the second requirement is
-ambiguous. The finding names it as `REQ.0020`. The principal decides
-the requirement is a matter of operation, not of scope, and moves it
-under Operation. The item keeps its ID:
+The first group starts at `0010` and counts in tens; the second
+starts at the next hundred. If the principal later decides that
+`REQ.0020` belongs under Reporting, the item moves under that
+heading and keeps the number `REQ.0020`. A review that cited
+`REQ.0020` still points at the right item. If a new requirement is
+needed under Onboarding, it becomes `REQ.0030`; if Onboarding were
+ever full, the item would take the next free number anywhere.
 
-```
-## Scope of the service
-
-- **REQ.0010** The service shall accept a request in the agreed
-  form.
-
-## Operation
-
-- **REQ.0020** The service shall answer within the agreed time, the
-  time being the one named in the Terms.
-- **REQ.0100** The service shall be run by the recipients.
-- **REQ.0110** The service shall report its state daily.
-```
-
-The finding still points at the right item. A new requirement of
-operation added later takes `REQ.0120`. A thread opened on the same
-project because a registered document raised a question would read
-`THR.0010` with its origin given as the document's path, such as
-`sources/offer-vendor.md`; a thread the principal raised in
-conversation would carry no origin mark at all.
+In the same project's `threads.md`, a thread that Claude raised from
+its own reading of the sources carries the mark of its origin,
+Claude's synthesis, beside the matter and the artefact it concerns.
+A thread the principal raised himself carries no mark. A thread
+raised by a document names that document by its path.
 
 ## See also
 
-- [ID scheme](../reference/id-scheme.md): the prefix table and the numbering rules, exactly.
+- [ID scheme](../reference/id-scheme.md): the prefix table and the numbering rules.
 - [Glossary](../reference/glossary.md): every term of the forge in one line.
 
-Generated on 2026-10-11 for version 5.3 from the files the front-matter names; never edited by hand.
+Generated on 2026-10-14 for version 5.9 from the files the front-matter names; never edited by hand.

@@ -2,9 +2,9 @@
 project: forge
 purpose: readme
 audience: humans arriving at the repository
-version: 0.64
-updated: 2026-10-12
-last_change: 0.64 (2026-10-12): the Pinned facts note cites POS.1450 and SOL.0500 as the owners of their place, not the closed thread (FND.1550).
+version: 0.65
+updated: 2026-10-14
+last_change: 0.65 (2026-10-14): the teaching videos: a link in the header line and a paragraph in section 6 to the course page served from docs/videos/; the videos' public address and the md2video prerequisites among the pinned facts.
 output: /README.md
 ---
 
@@ -63,6 +63,7 @@ summarising the newest row. -->
   of the forge intent (its front-matter version), no status
   annotations. Below it one line: the subtitle fixed by POS.0620,
   followed by ` · [Documentation](docs/README.md) ·
+  [Videos](<the pinned course address>) ·
   [Release notes](RELEASE-NOTES.md)`, the two links a reader looks
   for first, on the first line. The name
   appears large exactly once; there is no separate version line, and
@@ -238,6 +239,16 @@ summarising the newest row. -->
   the documentation as five bullets in the index's order, each the
   section's name linked to its heading in the index and one sentence
   on what the section holds; the page titles stay in the index.
+  Then a paragraph on the teaching videos, two or three sentences:
+  real sessions of the forge cut to a few minutes each and played in
+  the browser as a simulated terminal with captions, in Czech and in
+  English, at the course page (the pinned address, as a link named
+  "Videos"); one per principle of working with the forge — how a
+  brief is born, the walkthrough, from the brief to the intent, a
+  critic, a check at a save, a challenger, a new artefact, history
+  and threads; the files live in `docs/videos/` and are made from
+  the screenplay renders of the principal's rollout project by
+  `scripts/md2video.py`.
 - The section "Author and licence" precedes "About this README" and
   carries this fixed text verbatim, nothing more: "Forge of Thought ©
   Petr Chlumsky (PCHe) - petr.chlumsky@gmail.com. Licensed under
@@ -281,12 +292,21 @@ reach the reader. Update them here when they change.
 - Public home of the engine:
   https://github.com/pche-broken-artist/forge-of-thought, the address
   a clone and a project's README point to.
+- The teaching videos: the course page
+  https://pche-broken-artist.github.io/forge-of-thought/videos/,
+  served by GitHub Pages from `docs/videos/` of this repository
+  (POS.1540); a player page and one `html-player.js` file per video
+  and language, made by `scripts/md2video.py` from screenplay renders
+  (POS.1530).
 - The forge is cloned, not copied: `forge-save.py` refuses an
   engine that is not a git repository.
 - Script prerequisites: `doc2md.py` needs markitdown
   (`pip install "markitdown[docx,pptx,pdf,xlsx,xls]"`); the `pandoc`
   engine of `md2pptx.py` and `md2docx.py`, behind `/render`, needs
-  pandoc (https://pandoc.org/installing.html); their `claude`
+  pandoc (https://pandoc.org/installing.html); `md2video.py`, behind
+  `/render` of a screenplay, needs Pillow (`pip install pillow`) and
+  ffmpeg on PATH for the video format and nothing beyond Python for
+  the player format; their `claude`
   engine, behind `/publish`, needs the `document-skills` plugin,
   installed once from an interactive Claude Code session
   (`/plugin marketplace add anthropics/skills`, then
@@ -297,7 +317,7 @@ reach the reader. Update them here when they change.
 ## Template
 # Forge of Thought <version>
 
-*<subtitle per POS.0620>* · [Documentation](docs/README.md) · [Release notes](RELEASE-NOTES.md)
+*<subtitle per POS.0620>* · [Documentation](docs/README.md) · [Videos](<the pinned course address>) · [Release notes](RELEASE-NOTES.md)
 
 <masthead per the instruction: identity paragraph — AI cognitive
 extension of a thinking human, the principal; what it does; the
@@ -351,7 +371,8 @@ render-never-hand-edited callout>
 bullets with where each begins; the version and date the
 documentation was generated for; then the five sections as five
 bullets, each linked to its heading in the index with one sentence
-on what it holds>
+on what it holds; then the paragraph on the teaching videos with the
+link to the course page>
 
 ## 7. Author and licence
 <the fixed author-and-licence text>

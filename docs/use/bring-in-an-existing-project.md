@@ -1,8 +1,8 @@
 ---
-generated: 2026-10-11
-version: 5.3
+generated: 2026-10-14
+version: 5.9
 made: mirrored
-inputs-hash: 6603046be4e4500d
+inputs-hash: 5252475f474ef655
 inputs:
   - .claude/skills/import-project/SKILL.md
   - scripts/forge-clone.py
@@ -10,11 +10,11 @@ inputs:
 
 # Bring in an existing project
 
-This page shows how to bring a project you already have, kept in a git repository, into the `projects/` directory of the engine with `/import-project`. It is for you, the principal (the person whose thinking is forged), when the project exists elsewhere and you want to work on it here.
+This page shows how to clone a project you already have into `projects/` with `/import-project`. It is for the principal (the person whose thinking is forged) who has a project in a git repository and wants to work on it here. Terms of the forge are in the [Glossary](../reference/glossary.md).
 
 ## When to use it
 
-Use it when the project already lives in a git repository and `projects/` does not yet hold it. A project that is new is scaffolded instead, and this command does not do that.
+Use it when the project already exists as a git repository, and you want it to sit under `projects/` next to the others. For a project that does not exist yet, this page does not apply.
 
 ## The command
 
@@ -22,63 +22,67 @@ Use it when the project already lives in a git repository and `projects/` does n
 /import-project <git-url>
 ```
 
-Replace `<git-url>` with the address of your repository. Claude asks for your word before it runs the clone.
+`<git-url>` is the address of the repository. The directory is not a parameter: it is `projects/<repository name>`, and the name is taken from the end of the URL (a trailing `.git` is dropped). Claude runs the clone on your word.
 
 ## What happens
 
-1. Claude requires the address. The target directory is `projects/<repository name>`, and the name is taken from the address, so there is no slug to give. If that directory already exists, Claude stops and reports.
+1. Claude checks that you gave a URL. If the directory `projects/<repository name>` already exists, it stops and says so.
 
-   You should now see the target named, or the stop reported.
+   You should now see either a clone starting or the report that the directory exists.
 
-2. On your word, Claude runs the clone script, `scripts/forge-clone.py`, with the address. The script clones the repository into the target directory and never overwrites a directory that exists. It sets no commit identity of its own: the identity is the one git resolves from your own configuration.
+2. On your word, Claude runs `python scripts/forge-clone.py <git-url>`. The script clones the repository into `projects/<repository name>`. It never overwrites an existing directory. It sets no commit identity and carries no URL of its own.
 
-   You should now see git's clone output and the line "Cloned into projects/<repository name>".
+   You should now see the line `Cloned into projects/<repository name>`.
 
 3. Claude relays the facts the script prints:
-   - the origin: the address the clone came from
-   - the last commit: its short hash, date and subject
-   - the identity: the name and e-mail git resolves for the clone; if git resolves none, the save script will report it and commit nothing
-   - the ledger: whether the project has a ledger with a `kind:` header; its absence is a fact, not a defect
 
-   You should now see these four lines, each with its fact.
+   - `origin`: the address the clone came from.
+   - `last commit`: the short hash, date and subject of the newest commit.
+   - `identity`: the commit identity git resolves for the fresh clone, taken from your own git configuration.
+   - `ledger`: whether the project has a ledger (the file that holds the project's state) and whether its header carries a `kind:` line.
 
-4. Claude recommends `/forge <slug>` as the first act of work. The engine does not track projects and cannot guess which one you mean, so you select the project by naming it.
+   You should now see these four lines under the "Cloned into" line.
 
-   You should now see the recommendation to select the project.
+4. Claude recommends `/forge <slug>` as the first act of work. The engine does not track the project and cannot guess it, so you select the project by naming it. The `/forge` map is described in [See where a project stands](see-where-a-project-stands.md).
 
-Nothing is written into the imported project by this command.
+   You should now see Claude recommend `/forge <slug>`.
 
 ## What you have afterwards
 
-A clone of your repository in `projects/<repository name>`, with its own history and its origin untouched. Work starts when you select it with `/forge <slug>`, where the slug is the repository name.
+- A clone of the repository in `projects/<repository name>`.
+- The four facts above, said once.
+- Nothing written into the project: the command changes no file of it.
 
 ## If something goes wrong
 
-- The directory `projects/<repository name>` already exists: the script stops with "projects/<name> already exists - never overwritten. Rename or remove it first." Rename or remove the existing directory, then run the command again.
-- A repository name cannot be read from the address: the script stops with "Cannot derive a repository name from '<address>'." Give the full address of the repository.
-- The clone fails: the script stops with "Clone of <address> failed." Check the address and your access to the repository.
-- Git is not on your path: the script cannot run, because it needs Python 3.8 or newer and git.
-- The identity line says "none resolved": the clone is fine, but the save script will report the missing identity and commit nothing until your git configuration provides one.
+The script prints these messages and stops.
+
+- `Cannot derive a repository name from '<url>'.` The URL gives no name at its end. Give the full address of the repository.
+- `projects/<name> already exists - never overwritten. Rename or remove it first.` A directory of that name is already there. Rename or remove it yourself, then run the command again.
+- `Clone of <url> failed.` Git could not clone the address. Check the address and your access to it.
+
+Two lines of the report are facts, not failures:
+
+- `identity: none resolved - forge-save will report it and skip the commit`. Git resolves no commit identity for the clone. The save script then reports this and commits nothing, until your git configuration gives one.
+- `ledger: none - not scaffolded by the forge (a fact, not a defect)` or `ledger: present, no kind: header`. The project was not made by the forge, or its ledger lacks the header. If the project was written to older conventions, see [Upgrade the engine](upgrade-the-engine.md) for what to check.
 
 ## A worked example
 
-You run:
-
 ```
-/import-project <git-url>
+/import-project https://example.com/team/my-idea.git
 ```
 
-Claude asks for your word, you give it, and the script prints, for a repository named `my-idea`:
+Claude asks for your word, then runs the clone. The report ends like this, with your own values in place of the placeholders:
 
 ```
 Cloned into projects/my-idea
-  origin:      <git-url>
+  origin:      https://example.com/team/my-idea.git
   last commit: <hash> <date> <subject>
-  identity:    <name> <e-mail> (from your git configuration)
-  ledger:      present, kind: thought
+  identity:    <name> <email> (from your git configuration)
+  ledger:      present, kind: <kind>
 ```
 
-Claude then recommends `/forge my-idea`. If the ledger line had said "none - not scaffolded by the forge", the project would still be imported, and that line would be the fact to know about it. The map that `/forge` shows is described in [See where a project stands](see-where-a-project-stands.md). If the project was written to older conventions, [Upgrade the engine](upgrade-the-engine.md) says what to check.
+Claude then recommends `/forge my-idea`.
 
 ## See also
 
@@ -86,4 +90,4 @@ Claude then recommends `/forge my-idea`. If the ledger line had said "none - not
 - [Upgrade the engine](upgrade-the-engine.md): what to check when a project was written to older conventions.
 - [Glossary](../reference/glossary.md): every term of the forge in one line.
 
-Generated on 2026-10-11 for version 5.3 from the files the front-matter names; never edited by hand.
+Generated on 2026-10-14 for version 5.9 from the files the front-matter names; never edited by hand.

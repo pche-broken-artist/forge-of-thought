@@ -1,8 +1,8 @@
 ---
-generated: 2026-10-11
-version: 5.3
+generated: 2026-10-14
+version: 5.9
 made: mirrored
-inputs-hash: a0466f35e09606fd
+inputs-hash: 60040c95ff44af25
 inputs:
   - templates/history.md
   - CLAUDE.md#Versioning & status
@@ -10,98 +10,92 @@ inputs:
 
 # History companion
 
-The history companion is the file `<file>.history.md` that lies beside every versioned document and records each change to it, one line per change. This page gives its shape exactly, for the user who reads it and the extender who writes it. A term of the forge that is not glossed here is in the [Glossary](glossary.md), and the fields the companion feeds are in [Versioning and front-matter](versioning-and-front-matter.md).
+The history companion is the file `<file>.history.md` that sits beside a versioned document and records every change made to it. This page gives its shape, record by record, for the user who reads it and for the extender who writes records.
 
-## Where it lies
+## The file
 
-| Fact | Value |
+The companion has a front-matter of two keys, a heading and the records.
+
+| Part | Content |
 |---|---|
-| Name | `<file>.history.md`, beside the document |
-| Which documents | every versioned document, artefacts and recipes alike, without exception |
-| Behaviour | append-only: a record is added at the end and never rewritten |
-| Ledger row | none: the companion is part of its document |
-| Hand-over | with the document, by the link into git |
+| `project` | the slug of the project |
+| `document` | the versioned document the history belongs to |
+| heading | `# History — <file>` |
+| records | one line each, appended at the end, never rewritten |
 
-## Front-matter
-
-| Key | Value |
-|---|---|
-| `project` | the project's slug |
-| `document` | the versioned document this history belongs to |
-
-The heading under the front-matter is `# History - <file>`.
+Lines are not wrapped.
 
 ## The record line
 
-One record is one line, appended at the end. The fields stand in this order, divided by ` | `:
+One record is one line. Its fields come in this order, divided by ` | `:
 
 ```
-- <date> | <version> | <author> | <subject> | <kind> | <reason> | Action: <what the user must do> | Was: <wording that ceased to hold>
+<date> | <version> | <author> | <subject> | <kind> | <reason> | Action: <what the user must do> | Was: <wording that ceased to hold>
 ```
 
-| Position | Field | Holds |
-|---|---|---|
-| 1 | date | the date of the change, `YYYY-MM-DD` |
-| 2 | version | the version of the document that carries the change |
-| 3 | author | the one who decided the change, by the handle the instance gives its principal |
-| 4 | subject | what the record is about (see Subject) |
-| 5 | kind | one of the five kinds |
-| 6 | reason | why the change was made |
-| 7 | `Action:` | what the user must do after the change |
-| 8 | `Was:` | the wording that ceased to hold |
+| Field | Content |
+|---|---|
+| date | the date of the change, `YYYY-MM-DD` |
+| version | the version of the document the change belongs to |
+| author | the one who decided the change, by the handle the instance gives its principal (the person whose thinking is forged) |
+| subject | what changed: an ID, or a place without an ID |
+| kind | one of the five kinds below |
+| reason | why the item changed: what was said, trials, measurements, which research turned it |
+| `Action:` | what the user must do after the change |
+| `Was:` | the wording that ceased to hold |
 
 ## The five kinds
 
-| Kind | Used for |
-|---|---|
-| `created` | an item or a document comes into being |
-| `changed` | an item changes |
-| `closed` | an item is closed |
-| `removed` | an item is removed |
-| `approved` | a version is approved |
+- `created`: the item or the file is born.
+- `changed`: the item has a new wording.
+- `closed`: the item is settled and closes.
+- `removed`: the item is taken out.
+- `approved`: the version is signed off.
 
-## Subject
+## The subject
 
-The subject is one of these:
+The subject is one of:
 
-- an ID
-- several IDs, where the whole line holds for each of them
-- a place without an ID: a section, or the file
-- in the forge's own project, the operating layer
+- an ID.
+- several IDs, where the whole line holds for each of them.
+- a place without an ID: a section, or the file.
+- in the forge's own project, the operating layer.
 
-## When a field is left out
+## Fields left out
 
-- The reason is left out on `created`.
-- `Action` is written only where the record has one.
-- `Was` is written only where the record has one.
-
-## Order and form of the last fields
-
-- `Was` is always the last field.
-- Paragraphs inside a field are divided by `<br>`.
-- Lines are not wrapped.
+- `reason` is left out on `created`.
+- `Action` is written only where the record has an action.
+- `Was` is written only where the record has a wording that ceased to hold.
+- `Was` is always last.
+- Paragraphs inside `Was` are divided by `<br>`.
+- A thread that closes carries its last text in `Was`.
 
 ## The two records at a document's birth
 
-At the birth of a document two records are written:
+At the birth of a document there are two records:
 
-1. one record of the file
-2. one record naming every item born with it
+- one of the file.
+- one naming every item born with it.
 
 ```
-- YYYY-MM-DD | 0.1 | <author> | <file> | created
-- YYYY-MM-DD | 0.1 | <author> | PREFIX.0010, PREFIX.0020 | created
+YYYY-MM-DD | 0.1 | <author> | <file> | created
+YYYY-MM-DD | 0.1 | <author> | <ID>, <ID>, <ID> | created
 ```
 
-## What goes into a record
+Each is written as a list item with a leading `- ` in the file.
 
-The way to an item goes into its record and never into the item. That means why it changed, what was said, trials, measurements and which research turned it. The record is written in the same step as the change. A round is one version and as many records as it made changes.
+## Rules of the log
+
+- The log is append-only: a record is added, never rewritten.
+- A round is one version and as many records as it made changes.
+- A record is written in the same step as the change it records.
+- The way to an item goes into its record, never into the item.
+- The companion is part of its document: it has no ledger row and is handed over with the document by the link into git.
+- The log is the single primary: the commit messages that a save and a release draft, and the release notes, are derived from it.
 
 ## The archive
 
-A companion written before the log keeps its table untouched. It moves as it stands to `<file>.history.archive.md`, which is immutable from then on. The log begins with the next version. The history of an item is a search of both files.
-
-A Version History table, in the body of a document or in its companion, is a finding of the conformance check. The move to the archive settles it, on the principal's word, project by project.
+A companion written before the log keeps its table untouched. It moves as it stands to `<file>.history.archive.md`, immutable from then on, and the log begins with the next version. The history of an item is a search of both files. A Version History table in the body of a document, or in its companion, is a finding of a check, settled by that move on the principal's word, project by project.
 
 ## See also
 
@@ -109,4 +103,4 @@ A Version History table, in the body of a document or in its companion, is a fin
 - [Read the history of an item](../use/read-the-history-of-an-item.md): reading one item's records by command.
 - [Glossary](glossary.md): every term of the forge in one line.
 
-Generated on 2026-10-11 for version 5.3 from the files the front-matter names; never edited by hand.
+Generated on 2026-10-14 for version 5.9 from the files the front-matter names; never edited by hand.

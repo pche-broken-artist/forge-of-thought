@@ -1,8 +1,8 @@
 ---
-generated: 2026-10-11
-version: 5.3
+generated: 2026-10-14
+version: 5.9
 made: mirrored
-inputs-hash: d428177294646f35
+inputs-hash: 5e275cf69a60243c
 inputs:
   - .claude/skills/new-project/SKILL.md
   - templates/ledger.md
@@ -11,11 +11,11 @@ inputs:
 
 # Start a project
 
-This page shows how you scaffold a new project with `/new-project`, either a thought project (the chain of documents) or a library (shared material only). It is for anyone who is about to forge a first thought, or to collect material for several projects. The principal is the person whose thinking is forged, and the command works for that person.
+This page shows how to scaffold a new project with `/new-project`, either a thought project (the chain of documents) or a library (shared material only). It is for you as the principal, the person whose thinking is being forged.
 
 ## When to use it
 
-Use it when a new idea needs a place of its own, or when material is to be shared across projects. It creates files only. It never touches git.
+Use it when you begin a new body of thinking, or when you want a place to keep material that several projects share. A project is a repository of its own under `projects/`.
 
 ## The command
 
@@ -23,110 +23,97 @@ Use it when a new idea needs a place of its own, or when material is to be share
 /new-project <slug>
 ```
 
-The slug is lowercase, with hyphens and no spaces. Replace `<slug>` with the name you choose.
+The slug is lowercase with hyphens and no spaces. Claude takes the kind from the slug and from your words:
 
-Claude decides the kind of project from the slug and from your words:
+- A slug with the prefix `lib-` is a library: material shared across projects, with no chain.
+- Any other slug is a thought project, the default.
 
-- A thought project is the default. It holds the chain of documents.
-- A library has a slug that starts with `lib-`. It holds material shared across projects and has no chain.
+Claude asks when your words leave the kind unclear. It also asks which language the chain artefacts are written in when your words leave that open, and assumes English unless you name another.
 
-If your words leave the kind open, Claude asks. For a library, see [Share material through a library](share-material-through-a-library.md).
-
-Every project also declares the language of its chain documents. It is English unless you name another. If your words leave it open, Claude asks. Both choices are written in the header of the project's ledger (the single record of the project's state):
-
-```
-project: <slug>
-kind: thought
-language: en
-```
-
-For why a project has one output language, see [Languages](../about/languages.md).
+The kind and the language are declared in the header of the project's ledger, the file that holds the project's state. The header carries `kind:` (`thought` or `library`) and `language:` (an ISO 639-1 code such as `en`).
 
 ## What happens
 
-### A thought project
+The command creates files only. It never touches git.
 
 1. Claude checks the slug. If `projects/<slug>/` already exists, it stops and reports. It never overwrites.
 
-   You should now see the slug accepted, or a report that the folder exists.
+   You should now see either a stop with a report, or the work going ahead.
 
-2. Claude creates the folder structure and the first files.
+2. Claude creates the files of the kind.
 
-   - `sources/`, `research/`, `reviews/` and `challenges/`. The first two each hold an empty index. The other two are empty.
-   - `ledger.md`, with the slug, the kind, the language and today's date. The brief is listed as a 0.1 draft, pending.
-   - `decisions.md`, with no records yet.
-   - `recipes/readme.md` and `recipes/release-notes.md`, each with a history companion. They are the recipes that later make the README and the release notes. The command does not render them.
+   For a thought project:
 
-   You should now see these files under `projects/<slug>/`.
+   - `sources/`, `reviews/`, `challenges/` and `research/`, empty except for a `00-INDEX.md` in `sources/` and in `research/`
+   - `ledger.md`, with the slug, `kind: thought`, the language and today's date, and the brief row as a 0.1 draft, pending
+   - `decisions.md`, with the slug filled and no sample record
+   - `recipes/readme.md` and `recipes/release-notes.md`, each with its history companion
 
-3. Claude asks you to paste or dictate the founding brief now. The brief is the first document of the chain. Composing it is described in [Write a brief](write-a-brief.md), not here.
+   For a library:
 
-   You should now see Claude asking for the brief.
+   - `ledger.md` with `kind: library`, reduced to the tables a library keeps (Renders, Sources, Dependencies, Research and Waiting on principal)
+   - `sources/00-INDEX.md` and `research/00-INDEX.md`
+   - `recipes/readme.md` with its history companion, the recipe of the library's README, which is its catalogue
 
-4. Claude creates no intent and no lower layer. Each is born when you first run `/forge <state>` for it.
+   A library has no brief, no decisions, no reviews or challenges and no release notes.
 
-   You should now see no `10-intent.md` in the folder.
+   You should now see the new folder `projects/<slug>/` with these files.
 
-5. Claude updates the ledger and proposes the next step: run `/forge intent` to start the elicitation interview. It also reminds you that the project is not under git until you initialise its repository.
+3. For a thought project, Claude asks you to paste or dictate the founding brief now and hands it to the brief procedure. How the brief is composed is described in [Write a brief](write-a-brief.md).
 
-   You should now see the proposal of `/forge intent` and the reminder.
+   You should now see a brief file in the project and its row in the ledger.
 
-### A library
+4. Claude creates no intent and no layer below it. Each is born at its own first `/forge <state>`, so the first one is `/forge intent`, which starts the elicitation interview.
 
-Claude creates only the following under `projects/<slug>/`:
+   You should now see Claude propose `/forge intent` as the next step.
 
-- `ledger.md`, with `kind: library`. It keeps only the tables a library needs: renders, sources, dependencies, research and what waits on the principal.
-- `sources/00-INDEX.md` and `research/00-INDEX.md`, the two empty catalogues.
-- `recipes/readme.md` and its history companion `recipes/readme.history.md`. The README of a library is its catalogue.
+5. For a library, Claude finishes by proposing `/ingest` for the first documents. The brief step and the intent do not apply.
 
-A library has no brief, no decisions, no reviews or challenges and no release notes. Claude finishes by proposing `/ingest` for the first documents.
-
-You should now see the library files and the proposal of `/ingest`.
+   You should now see Claude propose `/ingest`.
 
 ## What you have afterwards
 
-- A folder `projects/<slug>/` with the files above, and a ledger that declares the kind and the language.
-- For a thought project, a brief handed to its own procedure, and a ledger row for it.
-- No git repository. A project that starts without one is a property, not a defect.
-- A `logo.png` is optional. You may put one in the project's root as its avatar. Claude mentions it once and never asks for it.
+- A project folder holding the files of its kind.
+- A project that is not under git yet. A project that starts without git is a property, not a defect, and Claude tells you so once at the end.
+- Optionally a `logo.png` in the project root as the repository avatar. You supply it. Claude mentions it once and never asks for it.
 
-## The one-off act that is yours
+## Put it under git
 
-A project is a repository of its own that the engine does not track. Initialising it and adding a remote are your one-off act:
+Initialising the repository and adding a remote are your one-off act. The command does neither. The way in is:
 
 ```
 git -C projects/<slug> init -b main
 ```
 
-Then add a remote if you want one. The commit identity is git's, resolved from your own configuration. Claude proposes none and the forge sets none. For why a project is separate from the engine, see [Projects and the engine](../about/projects-and-the-engine.md).
+Then add a remote if you want one. The commit identity is git's, resolved per host from your own git configuration. Neither the command nor the scripts set an identity or carry a URL.
 
 ## If something goes wrong
 
-- The slug names a folder that exists: Claude stops and reports. Choose another slug.
-- The kind or the language is unclear: Claude asks you. Answer, and it goes on.
+- The command stops and reports when `projects/<slug>/` already exists. Choose another slug or leave the existing project as it is.
+- When the slug or your words leave the kind or the language open, Claude asks. Answer once and the command goes on.
 
 ## A worked example
 
 You type:
 
 ```
-/new-project <slug>
+/new-project my-idea
 ```
 
-Claude infers a thought project, asks for the language, and you answer "English". It creates `projects/<slug>/` with the ledger, the decisions file, the two indexes, the two recipes and the empty folders. It asks for the brief and hands it to the brief procedure. It ends by proposing `/forge intent` and reminding you that the project is not under git. You then run, in the shell:
+Claude infers a thought project from the slug and asks for the language. You answer "English". It creates `projects/my-idea/` with the files above and asks for the brief. You paste your text, and the brief procedure stores it. Claude ends by proposing `/forge intent` and reminds you that the project is not under git. You then run:
 
 ```
-git -C projects/<slug> init -b main
+git -C projects/my-idea init -b main
 ```
 
-For `/new-project lib-<name>`, Claude infers a library from the prefix and creates the smaller set above.
+For a library the same command with a slug such as `lib-shared` creates only the reduced ledger, the two indexes and the README recipe, and Claude proposes `/ingest`.
 
 ## See also
 
 - [Write a brief](write-a-brief.md): composing the founding brief.
-- [Share material through a library](share-material-through-a-library.md): what a library is for and how it is used.
-- [Projects and the engine](../about/projects-and-the-engine.md): why a project is a repository of its own that the engine does not know.
-- [Languages](../about/languages.md): why a project declares one output language and what each kind of document carries.
+- [Share material through a library](share-material-through-a-library.md): what a library is for.
+- [Projects and the engine](../about/projects-and-the-engine.md): why a project is a repository of its own.
+- [Languages](../about/languages.md): why a project declares one output language.
 - [Glossary](../reference/glossary.md): every term of the forge in one line.
 
-Generated on 2026-10-11 for version 5.3 from the files the front-matter names; never edited by hand.
+Generated on 2026-10-14 for version 5.9 from the files the front-matter names; never edited by hand.

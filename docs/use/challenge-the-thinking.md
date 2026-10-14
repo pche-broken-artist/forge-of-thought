@@ -1,8 +1,8 @@
 ---
-generated: 2026-10-11
-version: 5.3
+generated: 2026-10-14
+version: 5.9
 made: mirrored
-inputs-hash: f2396183dc7b7788
+inputs-hash: 902614c6336b766f
 inputs:
   - .claude/skills/challenge/SKILL.md
   - .claude/skills/challenger-contract/SKILL.md#Output
@@ -10,84 +10,86 @@ inputs:
 
 # Challenge the thinking
 
-This page shows how you have a challenger persona attack the substance of your work with `/challenge`. It is for the principal (the person whose thinking is being forged) who wants the thinking tested before more is built on it.
+`/challenge` has one isolated reviewer, a persona, attack the substance of an artefact, so that you hear the objections before the next layer is built on it. It is for the principal, the person whose thinking is being forged. The persona judges the thinking, never the quality of the document.
+
+A persona is a reviewer that exists to find one kind of blind spot. It runs as a subagent, a separate Claude run that never sees your conversation with Claude. An artefact is a document of the chain, such as the intent.
 
 ## When to use it
 
-Use it before the next layer is first derived from the artefact you want tested. For the intent, that means before the first layer below it, while an accepted challenge is still cheap to absorb. Run it again after any major shift of direction. Running it on a near-final artefact is late but not useless.
-
-A challenge judges the substance of the thinking, never the quality of the document. For the quality of the writing, see [The challenger](../about/the-challenger.md), which also says why a challenger may be wrong.
+- Run it before the next layer is first derived from the artefact. For the intent that means before the first layer below it, while an accepted challenge is still cheap to absorb.
+- Run it again after any major shift of direction.
+- Running it on a near-final artefact is late but not useless.
 
 ## The command
 
-To see the personas and a recommendation of which one fits your project, type the command bare:
+```
+/challenge [persona] [artefact] [slug]
+```
+
+All three parts are optional.
+
+- Bare `/challenge` shows the roster of personas and recommends the one that fits your project's subject. The recommendation is never a gate.
+- `/challenge <persona> [artefact] [slug]` runs the persona. The artefact is named as `/forge` names it. Without one, the persona reads the whole chain. The slug names the project; Claude infers it from context and asks if it is ambiguous.
+
+The personas of today are listed in [Challenger personas](../reference/challenger-personas.md).
+
+## What happens
+
+1. Claude starts the chosen persona on your project and names the target artefact. It passes nothing else, so the persona forms its view from the documents alone.
+
+   You should now see Claude waiting while the persona works.
+
+2. The persona writes a dated report in the project's `challenges/` folder. The report is immutable: it is never edited afterwards. It holds three to seven challenges, ordered by severity, what is strong in the artefact, and the questions the persona cannot answer from the documents. Each new challenge is entered in the ledger, the project's table of state, as `open`.
+
+   You should now see a new file in `challenges/` named with today's date and the persona.
+
+3. Claude checks that the file exists and that the ledger is updated. It fixes the bookkeeping only, never the challenges.
+
+4. Claude presents the result to you.
+
+   You should now see the overall read first, then each challenge compressed to two or three sentences. If Claude disagrees with a challenge, it says so plainly and separately, marked as its own view. It does not defend earlier drafting choices.
+
+5. Where the answer to a persona's open question exists in your conversation with Claude but not in the documents, Claude answers it and flags it to you. Such a question usually means something true is missing from the artefact.
+
+6. Claude offers a walkthrough of the challenges. A walkthrough settles a list one item per message, each closed by the verdict line, as described in [Walk through a list](walk-through-a-list.md).
+
+   You should now see the offer. If you decline it, the challenges wait.
+
+## What `accept` does
+
+Accepting a challenge means it is mended through `/forge` in the artefact it concerns. The challenge is then in state `accepted`. The other verdicts are those of the walkthrough.
+
+## What you have afterwards
+
+- One immutable report in `challenges/`.
+- New challenges in the ledger, `open` until you settle them.
+- Challenges that you settle by walkthrough, with the accepted ones mended in the artefact.
+
+A rejected challenge is a normal, healthy outcome. So is a challenge that survives three rounds unresolved: park it and move on. The persona can be wrong, as [The challenger](../about/the-challenger.md) explains.
+
+## A worked example
+
+You have a project `my-project` with a finished intent and have not yet written the layer below it.
 
 ```
 /challenge
 ```
 
-To run one persona against one artefact of one project:
+Claude lists the personas and recommends one for the subject, say `<persona>`.
 
 ```
-/challenge cto intent my-project
+/challenge <persona> intent my-project
 ```
 
-The persona and the artefact are both optional after the first word. The artefact is named as `/forge` names it. Without one, the whole chain is challenged. Without a project slug, Claude infers the project from the context and asks if it is ambiguous. The personas of today and what each hunts are listed in [Challenger personas](../reference/challenger-personas.md).
+Claude runs the persona on the intent. It then tells you the overall read, for instance that the intent is aimed at the right goal but rests on an unstated assumption. It gives four challenges in order of severity, each in a few sentences, and adds a line marked as its own: it thinks the third challenge misreads the intent. It closes by offering a walkthrough.
 
-## What happens
-
-1. Claude lists the personas, or, with a persona named, hands the project path and the target to one isolated agent (a subagent that never sees your conversation).
-
-   You should now see, for the bare command, the roster with a recommended fit. The recommendation is never a gate.
-
-2. The agent reads the project's documents and attacks the substance. It writes a dated report in the project's `challenges/` directory. The report is immutable. It holds three to seven challenges ordered by severity. Each challenge is falsifiable and carries its epistemic status. The report also says what is strong and which questions the agent cannot answer from the documents.
-
-   You should now see a new file in `challenges/` and the new challenges recorded as open in the project's ledger (the single record of state). Claude checks both and repairs only the bookkeeping, never the challenges.
-
-3. Claude presents the result to you.
-
-   You should now see the overall read first, then each challenge compressed to two or three sentences. If Claude disagrees with a challenge, it says so plainly and separately, marked as its own view. It does not defend earlier drafting choices.
-
-4. Claude answers the agent's open questions where the answer exists in the conversation but not in the documents, and flags those answers to you. They usually mean that something true is missing from the artefact.
-
-   You should now see which questions were answered from the conversation.
-
-5. Claude offers a walkthrough of the challenges. A walkthrough settles the items one per message, each closed with a verdict. The shape is described in [Walk through a list](walk-through-a-list.md).
-
-   You should now see the offer. If you decline it, the challenges wait.
-
-## What you have afterwards
-
-- A dated report in `challenges/` that is never edited.
-- The challenges listed in the ledger, open until you settle them.
-- For each challenge you accept, a mend: `accept` means the challenge is mended through `/forge` in the artefact it concerns, and its state becomes `accepted`. The other verdicts are those of the walkthrough.
-
-## If something goes wrong
-
-- If the project is ambiguous, Claude asks which one you mean.
-- If you decline the walkthrough, nothing is lost: the challenges stay open in the ledger and wait.
-- If a challenge survives three rounds unresolved, park it and move on.
-- A rejected challenge is a normal, healthy outcome. It is not a failure of the run.
-
-## A worked example
-
-You have an intent for a project called `my-project` and have not yet derived anything below it.
-
-```
-/challenge architect intent my-project
-```
-
-Claude reports that the agent has written `challenges/<date>-challenge-architect.md` with, say, four challenges, and opens with the overall read: what the intent is really about as written and whether it aims at the right thing. The first challenge, a major one, says that two positions in the intent cannot both hold. Claude compresses it to three sentences. The agent states what would change its mind: a stated priority between the two positions. Its epistemic status is "my judgement".
-
-Claude adds: "My own view: I disagree with the third challenge, because the intent already rules that case out." It also notes that one open question, about who will run the result, is answered in your conversation but not in the intent, so a fact is missing from the intent. It then offers a walkthrough.
-
-You accept the first challenge and reject the third. The first is mended through `/forge intent my-project`. The third stays in the ledger as rejected.
+You accept the walkthrough. You accept the first challenge, so Claude mends it in the intent through `/forge`. You reject the third, which is a healthy outcome, and park the fourth.
 
 ## See also
 
-- [Challenger personas](../reference/challenger-personas.md): the personas of today and what each hunts.
+- [Challenger personas](../reference/challenger-personas.md): the personas of today.
 - [Walk through a list](walk-through-a-list.md): settling the challenges one by one.
 - [The challenger](../about/the-challenger.md): what the challenger judges and why it may be wrong.
 - [Glossary](../reference/glossary.md): every term of the forge in one line.
 
-Generated on 2026-10-11 for version 5.3 from the files the front-matter names; never edited by hand.
+Generated on 2026-10-14 for version 5.9 from the files the front-matter names; never edited by hand.
