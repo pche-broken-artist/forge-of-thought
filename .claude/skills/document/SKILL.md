@@ -19,6 +19,8 @@ engine root, the owning project is `projects/forge`, the pages land in
 its root and the owning project are `projects/<slug>`, the pages land
 in `projects/<slug>/docs/`. The map is `docs-map.md` beside the
 owning project's ledger, never in `docs/`. The date is today's.
+`docs/videos/` of the engine is not the documentation's (POS.1540):
+the planner never maps it, the scripts read `docs/` without it.
 
 1. **Plan.** Launch the agent `docs-planner` (Agent tool, type
    `docs-planner`, session model, never a model override). The task

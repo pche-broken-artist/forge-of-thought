@@ -191,7 +191,7 @@ def main(argv):
     remove = sorted(set(marked) | {
         (docs_dir / p.relative_to(docs_dir)).as_posix()
         for p in docs_dir.rglob("*.md")
-        if p.name != "README.md"
+        if p.name != "README.md" and "videos" not in p.relative_to(docs_dir).parts
         and ("docs/" + p.relative_to(docs_dir).as_posix()) not in mapped
     })
     print(f"entries {len(entries)}: new {counts['new']}, regenerate {counts['regenerate']}, "

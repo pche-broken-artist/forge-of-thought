@@ -1,8 +1,8 @@
 ---
-version: 0.15
-date: 2026-10-13
+version: 0.16
+date: 2026-10-14
 status: draft
-last_change: 0.15 (2026-10-13): SOL.0640 changed: the file names of the work product as POS.1520 says them at 5.7.
+last_change: 0.16 (2026-10-14): SOL.0650 and SOL.0660 created: the screenplay conversion and the player page with the public folder; SOL.0130, SOL.0400, SOL.0420 and SOL.0460 follow (the genre screenplay, languages, the third format, the folder outside the documentation); TBC.0040 opened.
 project: forge
 audience: whoever realises the solution, a person or an agent
 ---
@@ -213,8 +213,17 @@ direction, a boundary kept by hand or an order of work.
   has its interview in `.claude/skills/recipe/genres/presentation.md`
   and its render is turned into a PowerPoint file by SOL.0430. The
   genres today are `presentation`, `readme` and `release-notes`,
-  each invoked as `/recipe <genre>`.
-  Realises: POS.0770, POS.1000. Choice: no real alternative once
+  each invoked as `/recipe <genre>`. The fourth genre, `screenplay`
+  (POS.1530), has its interview in
+  `.claude/skills/recipe/genres/screenplay.md` and its skeleton in
+  `templates/recipe-screenplay.md`; its checklist asks, beyond the
+  presentation's audience, purpose, inputs, dramaturgy, vocabulary
+  and what must not appear: the sessions and the beats pinned by
+  their times, what the viewer leaves with, what is shown in full,
+  the rules of the quotes, the languages and the pace, the format
+  (`video` or `html-player`) and, for `html-player`, whether the file
+  goes out to the engine's `docs/videos/` by `output:` (POS.1540).
+  Realises: POS.0770, POS.1000, POS.1530. Choice: no real alternative once
   SOL.0120 stood, Claude's judgement, the intent records none.
   Where: `.claude/skills/recipe/SKILL.md`,
   `.claude/skills/recipe/genres/`, `templates/recipe.md`,
@@ -506,8 +515,17 @@ direction, a boundary kept by hand or an order of work.
   an isolated subagent into `renders/<recipe>.md`, or the recipe's
   optional `output:` path, history in git. Every render opens with
   YAML front-matter provenance citing the recipe and every input
-  with their versions; the ledger's Renders table mirrors it.
-  Realises: POS.0710, POS.0930. Choice: visible YAML
+  with their versions; the ledger's Renders table mirrors it. A
+  recipe may declare `languages:` (POS.1550): the subagent of
+  `/render` writes the primary render and then, in the same run, each
+  translation as a render of its own, `renders/<recipe>.<lang>.md`,
+  scene for scene and line for line, its provenance naming the
+  primary render it was made from; one Renders row per file, the
+  format file following the name. A recipe without `languages:`
+  renders as before. The `output:` path may lie outside the project,
+  in the engine's `docs/videos/` (POS.1540); the project's ledger
+  keeps the row, the engine none.
+  Realises: POS.0710, POS.0930, POS.1550, POS.1540. Choice: visible YAML
   provenance against an invisible comment: provenance is control
   information, the audience rarely meets raw Markdown, and GitLab
   does not display front-matter. Where:
@@ -529,7 +547,10 @@ direction, a boundary kept by hand or an order of work.
   designed file with the plain one. The format and what each step
   needs stand in the recipe's `## Format` section, which is never
   copied into the render: the render carries content only, or the
-  plain file would carry the instructions as text. The ledger's
+  plain file would carry the instructions as text. A third format,
+  the screenplay's `video` or `html-player`, has the plain file only
+  (SOL.0650): `/publish` does nothing with it, and the Published
+  table carries no row of it. The ledger's
   Published table says what each published file was made from and
   its state: `current` set by `/publish`, `stale` by every `/render`
   of that recipe; a date could not tell, since a render may run
@@ -589,6 +610,36 @@ direction, a boundary kept by hand or an order of work.
   and PDF is not: pandoc writes Word without a further engine, and a
   PDF is the recipient's one click from Word. Present shape
   2026-09-27. Where: `scripts/md2docx.py`.
+- **SOL.0650 The screenplay conversion.** `scripts/md2video.py` makes
+  the format file of a screenplay render by one of two formats, chosen
+  by `--format video | html-player`. It reads the render (the
+  front-matter for the language, the cards, the scenes with their
+  captions and terminal blocks), computes the timeline — typing, the
+  stand before Enter, the reveal of an answer, the hold for reading, the
+  breath at a scene's end — from the pace given as `--pace
+  <principal>,<claude>,<file-report>` words a second, defaults 4, 8, 16,
+  and the labels of the captions by language. `video` paints every frame
+  with Pillow as a simulated terminal (1280×890, a monospace font for
+  the terminal, a sans font for the caption band, with fallbacks where
+  the Windows fonts are missing) and pipes them into ffmpeg (H.264, 30
+  fps); `html-player` writes the timeline as JSON of events. The file
+  lands beside the render with the render's basename unless `-o` names a
+  path; where the path lies under the engine's `docs/videos/`, the
+  script renews the list of files in `docs/videos/index.html`
+  (SOL.0660). What it needs — Pillow, ffmpeg on PATH — `forge_tools.py`
+  says, as it says for pandoc; the script installs nothing. The pace and
+  the look come from the recipe's Format section as arguments; the
+  render carries none of it (SOL.0420). Realises: POS.1530, POS.0590,
+  POS.0830. Choice: one script with two formats against two scripts: the
+  parsing and the pace are one mechanism, and the position says so.
+  Pillow and ffmpeg against VHS, asciinema with agg, or a browser driven
+  by Playwright: the research of 2026-10-14 (forge-rollout,
+  `research/2026-10-14-terminal-video-from-screenplay.md`) found VHS
+  broken on Windows, agg ending at GIF and the browser the most code; a
+  painter in the language the scripts already are, with one encoder, was
+  the least to install and runs on the three platforms. Trial 2026-10-14
+  in `tmp/video-trial/`. Where: `scripts/md2video.py`,
+  `scripts/forge_tools.py`.
 - **SOL.0450 The repository's CONTRIBUTING.** `CONTRIBUTING.md` in
   the repository root is a render of
   `projects/forge/recipes/contributing.md`, made on the principal's
@@ -642,7 +693,9 @@ direction, a boundary kept by hand or an order of work.
   are scanned by `scripts/docs-check.py` for broken links, long dashes
   in prose and instance facts before they are kept. Pages, kind
   `page`, live in `docs/` of the engine root or of the project, the
-  map never there. The ledger's Renders table carries the index with
+  map never there; `docs/videos/` of the engine is not the
+  documentation's: the planner, the index, the state and the check
+  read `docs/` without it (SOL.0660). The ledger's Renders table carries the index with
   the map as its input. The pinned facts the planner reads as an
   owner are the section "Pinned facts (not rendered)" of the
   project's readme recipe.
@@ -679,6 +732,37 @@ direction, a boundary kept by hand or an order of work.
   `.claude/agents/docs-writer.md`, `scripts/docs-state.py`,
   `scripts/docs-index.py`, `scripts/docs-check.py`,
   `scripts/docs_map.py`, `projects/forge/docs-map.md`, `docs/`.
+- **SOL.0660 The player page and the public folder.** `docs/videos/` of
+  the engine is the public folder of POS.1540: flat, the
+  `html-player.json` files of the projects' screenplays sent there by
+  their recipes' `output:`, and one fixed page,
+  `docs/videos/index.html`, that plays them. The page is a single file
+  with no dependency beyond the browser: a sidebar listing the files in
+  the order of their names, by the title of each file's title card; the
+  player — the simulated terminal, the caption band, the cards; play and
+  pause, speed, the scenes of a video as chapters, the language where a
+  file has siblings in other languages, three font sizes remembered in
+  the browser. The list of files is embedded in the page and renewed by
+  `md2video.py` whenever it writes into the folder (SOL.0650), since
+  GitHub Pages cannot list a folder; the page itself is never edited by
+  hand and never regenerated by a model: it is a file of the engine,
+  versioned by git like a script. `docs/.nojekyll`, empty, makes Pages
+  serve the folder as it lies. The documentation leaves the folder
+  alone: `docs-planner`, `docs-index.py`, `docs-state.py` and
+  `docs-check.py` read `docs/` without `docs/videos/`, and the index of
+  the documentation does not list it. Video files (`.mp4`) are not
+  written here: a video goes out as an asset of a release. Realises:
+  POS.1540, POS.1530. Choice: a fixed page with the list embedded
+  against a generated index file beside it, a course recipe with an
+  outline, or folders as sections: the three were weighed on 2026-10-14
+  and the principal chose the alphabet of file names for now, the rest
+  THR.0660's; the cost is that the script touches a page of the engine.
+  A single file against a page with scripts and styles beside it: one
+  file is one thing to serve and to copy. Where:
+  `docs/videos/index.html`, `docs/.nojekyll`,
+  `.claude/agents/docs-planner.md`, `scripts/docs-index.py`,
+  `scripts/docs-state.py`, `scripts/docs-check.py`,
+  `scripts/md2video.py`.
 
 ### Persistence
 - **SOL.0500 The repositories.** The engine is one git repository,
@@ -838,3 +922,9 @@ direction, a boundary kept by hand or an order of work.
 - **TBC.0030** (owner: principal) The independent challengers of
   POS.0800 are not built and have no part here. Closed by: their
   design when the principal takes them up. Blocks realisation: no.
+- **TBC.0040** (owner: principal) The player page,
+  `docs/videos/index.html`, is a file of the engine kept by hand and
+  touched by a script, neither a render nor a page of the documentation:
+  no document kind of CLAUDE.md names it. Closed by: the principal's
+  decision whether it gets a kind, or stands as a script does. Blocks
+  realisation: no.

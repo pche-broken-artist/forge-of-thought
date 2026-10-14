@@ -944,6 +944,16 @@ project: forge
   makes by hand, raw git being denied to Claude (SOL.0510). Carried
   in the ledger without an ID from intent 5.1 until 5.4 (FND.1490).
   Deferred 2026-10-11; opened 2026-10-11.
+- **THR.0660** [intent] The course of the teaching videos. Today
+  `docs/videos/` is flat and the player page lists its files in the
+  order of their names (POS.1540); open: sections of a course (tutorial,
+  advanced concepts) and an order beyond the alphabet — a list beside
+  the files, a recipe of the engine with an outline, or folders as
+  sections, the three weighed on 2026-10-14 and none chosen; asciicast
+  as a possible third format of a screenplay, played by the asciinema
+  player; an animated SVG for a short example in a README; GitLab Pages
+  for the company's version of the videos; whether the documentation is
+  ever to be a web as well as the repository view. Opened 2026-10-14.
 
 Note: the ID THR.0120 was inadvertently used twice — first for the
 readme-recipe thread (opened 1.14, closed 1.16), then for the

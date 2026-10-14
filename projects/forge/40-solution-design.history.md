@@ -51,3 +51,9 @@ with it. Lines are not wrapped. -->
 - 2026-10-11 | 0.13 | PCHe | operating layer | changed | The contract's sentence: an enumeration whose members carry a gloss is a list, one member per line; a rule, its reason, its exception and its purpose are separate sentences (F.21: 117 sentences of 38 words and more in About, the mean unmoved by 5.2 at 21 words; the two kinds read off the longest).
 - 2026-10-12 | 0.14 | PCHe | SOL.0640 | created
 - 2026-10-13 | 0.15 | PCHe | SOL.0640 | changed | The file names of the work product as POS.1520 says them at 5.7: the specification `work/<name>.spec.md`, its history `work/<name>.spec.history.md`, the file the bare name. | Was: it works the specification `work/<name>.md` with the principal<br>with its companion `work/<name>.history.md` from `templates/history.md`
+- 2026-10-14 | 0.16 | PCHe | SOL.0650, SOL.0660 | created
+- 2026-10-14 | 0.16 | PCHe | SOL.0130 | changed | The genre `screenplay`, the fourth, with its interview, its skeleton and what its checklist asks (POS.1530). | Was: the item ended at "each invoked as `/recipe <genre>`." and realised POS.0770 and POS.1000.
+- 2026-10-14 | 0.16 | PCHe | SOL.0400 | changed | Languages of a recipe, one render per language with the translation in the same run (POS.1550), and an `output:` path into the engine's `docs/videos/` (POS.1540). | Was: the item ended at "the ledger's Renders table mirrors it." and realised POS.0710 and POS.0930.
+- 2026-10-14 | 0.16 | PCHe | SOL.0420 | changed | A third format, the screenplay's, with the plain file only and no row in the Published table (SOL.0650). | Was: no sentence on a third format.
+- 2026-10-14 | 0.16 | PCHe | SOL.0460 | changed | `docs/videos/` of the engine is not the documentation's (SOL.0660). | Was: "live in `docs/` of the engine root or of the project, the map never there."
+- 2026-10-14 | 0.16 | PCHe | TBC.0040 | created

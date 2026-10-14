@@ -74,6 +74,12 @@ LINK_RE = re.compile(r"\]\(([^)#]+\.md)(#[^)]*)?\)")
 URL_RE = re.compile(r"https?://\S+")
 
 
+def pages_of(docs_dir):
+    """The Markdown pages of the documentation: docs/videos/, the public
+    folder of the player (POS.1540), is not the documentation's."""
+    return (p for p in docs_dir.rglob("*.md") if "videos" not in p.relative_to(docs_dir).parts)
+
+
 def local_facts(engine_root):
     f = engine_root / "CLAUDE.local.md"
     words = set()
@@ -138,7 +144,7 @@ def main(argv):
     failures = []
     expected = {e["path"] for e in entries if e["fields"].get("state", "").strip() != "remove"}
     present = {"docs/" + p.relative_to(docs_dir).as_posix()
-               for p in docs_dir.rglob("*.md") if p.name != "README.md"}
+               for p in pages_of(docs_dir) if p.name != "README.md"}
     for m in sorted(expected - present):
         failures.append(f"missing page: {m}")
     for x in sorted(present - expected):
@@ -148,7 +154,7 @@ def main(argv):
     fact_res = [re.compile(re.escape(w), re.I) for w in sorted(facts)]
     fact_res += [re.compile(p, re.I) for p in a.fact]
 
-    for p in sorted(docs_dir.rglob("*.md")):
+    for p in sorted(pages_of(docs_dir)):
         text = p.read_text(encoding="utf-8", errors="replace")
         rel = p.relative_to(docs_dir).as_posix()
         if not text.startswith("---\n"):
@@ -180,7 +186,7 @@ def main(argv):
             if not (p.parent / target).resolve().exists():
                 failures.append(f"{rel}: broken link {target}")
 
-    pages = len(list(docs_dir.rglob("*.md")))
+    pages = len(list(pages_of(docs_dir)))
     if failures:
         print(f"{pages} files checked, {len(failures)} failures")
         for f in failures:

@@ -35,13 +35,22 @@ other; generating the render is mechanical.
    previous render unless the recipe declares it among its inputs
    (the release-notes genre does, for the released sections), and
    must not touch the ledger. Prose is hard-wrapped as CLAUDE.md,
-   Document kinds, says for every document.
+   Document kinds, says for every document. Where the recipe
+   declares `languages:`, the subagent writes the primary render
+   first and then each translation as a file of its own, scene for
+   scene and line for line, its provenance naming the primary
+   render it was made from; nothing is re-cut.
    Content only, always Markdown: the render carries no instructions
    for a conversion — the recipe's `## Format` section is never
    copied into it.
-4. The subagent writes to `renders/$0.md`, or to the recipe's
-   `output:` path if it declares one (e.g. the repository README).
-   Overwrite freely; history lives in git.
+4. The subagent writes to `renders/$0.md`, or, where the recipe
+   declares languages, to `renders/$0.<lang>.md` per language, or
+   to the recipe's `output:` path if it declares one (e.g. the
+   repository README). An `output:` path may lie outside the
+   project, in the engine's `docs/videos/` (POS.1540): that is the
+   place of the format file of step 7 only, and the Markdown render
+   always stays in the project's `renders/`. Overwrite freely;
+   history lives in git.
 5. The render opens with YAML front-matter provenance, written by the
    subagent:
    ```yaml
@@ -54,6 +63,8 @@ other; generating the render is mechanical.
      - <path> v<version>
    ---
    ```
+   A render in one of several languages adds `language: <lang>`,
+   and a translation `translated_from: renders/<recipe>.<primary>.md`.
    Inputs without a version of their own (e.g. CLAUDE.md) are cited by
    path alone. A render is **stale** when any version cited in this
    front-matter differs from the current version of that file, or a
@@ -66,17 +77,24 @@ other; generating the render is mechanical.
    the recipe (POS.0990) or a fact of the engine's own history stands
    (POS.0950). Verify the file exists and its provenance is
    correct, write or update the render's row in the ledger's Renders
-   table (its shape: `templates/ledger.md`, Renders), and report
+   table (its shape: `templates/ledger.md`, Renders; one row per
+   render file, a translation citing the primary render), and report
    what was rendered
    from what.
 7. The plain file (CLAUDE.md, Document chain, Renders). Where the recipe
    carries a `## Format` section, run the script of its format —
    `python scripts/md2docx.py` or `python scripts/md2pptx.py` — on the
    render with `--engine pandoc` and the reference document and page size
-   the section names; the file lands beside the render. Where pandoc
-   is missing, the render stands, the plain file is not made, and
-   that is said aloud. A recipe without the section ends at the
-   Markdown. The designed file is `/publish`'s, never made here.
+   the section names; the file lands beside the render. Where the
+   format is `video` or `html-player`, run `python
+   scripts/md2video.py` on each language's render with the format,
+   the pace and the date the section names, the file beside the
+   render or at the recipe's `output:` (`docs/videos/`, where the
+   script renews the player page). Where pandoc, or Pillow and
+   ffmpeg, is missing, the render stands, the plain file is not
+   made, and that is said aloud. A recipe without the section ends
+   at the Markdown. The designed file is `/publish`'s, never made
+   here; a screenplay has none, and step 8 does not apply to it.
 8. Where the ledger's Published table carries a row of this recipe,
    set its state to `stale` and say so: the published file is now
    older than its render. Remake nothing.

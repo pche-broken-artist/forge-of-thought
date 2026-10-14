@@ -1,8 +1,8 @@
 ---
-version: 5.8
-date: 2026-10-13
+version: 5.9
+date: 2026-10-14
 status: draft
-last_change: 5.8 (2026-10-13): POS.0850 changed: the verdict `question` in the verdict line, a question on the open item that changes nothing.
+last_change: 5.9 (2026-10-14): POS.1530, POS.1540 and POS.1550 created: the screenplay genre and its two formats by one script, the engine as the public host of what a project shows, a recipe in several languages; POS.0590 and POS.0770 follow; THR.0660 opened.
 project: forge
 audience: principal + Claude only
 ---
@@ -669,6 +669,19 @@ position that already stands elsewhere.
   architecture picture as `render: <file>` — provided the citing recipe
   declares it among its Inputs, so provenance and staleness track the
   dependency.
+- **POS.1550 A recipe may render in several languages.** A recipe
+  declares its output languages in `languages:`, the first primary, the
+  rest its translations: `/render` generates the primary render and, in
+  the same run, translates it into every other language scene for scene
+  and line for line — the same cut, since the quotes of a transcript,
+  the beats and the captions are chosen once, and a second generation
+  would choose them again differently. One render per language,
+  `renders/<recipe>.<lang>.md`, each with its own provenance and its own
+  row in the ledger's Renders table, the translation citing the primary
+  render it was made from; the format file follows the name. A recipe
+  with one language keeps `renders/<recipe>.md` as today. Prime
+  directive 6 reads with this: a render may be in any language, or
+  languages, its recipe declares. The principal's word of 2026-10-14.
 - **POS.0720** README.md is a render of the forge project. README.md is
   never edited by hand: content fixes go into the recipe or the inputs,
   and the file is regenerated: a process change is complete only once
@@ -826,6 +839,27 @@ position that already stands elsewhere.
   have cost the rule that a render is never edited by hand. What
   realises the kind is the solution design's. The principal's word of
   2026-10-12.
+- **POS.1530 A screenplay and its player.** A recipe of the genre
+  `screenplay` renders a screenplay of a terminal conversation: a title
+  card, a card of what the viewer will see, scenes with the real time of
+  day, each with a caption of two parts — what happens now, why the
+  forge does it this way — and a fenced block of what the terminal
+  shows; its inputs are session records registered as sources and the
+  brief that says what the videos are for. Its Format names one of two
+  formats, never both: `video`, an MP4 painted frame by frame from the
+  render, or `html-player`, a JSON of timed events for the player page
+  of the engine (`renders/<recipe>.<lang>.html-player.json`). Both are
+  made by one script, `scripts/md2video.py`, deterministic, the same
+  file from the same render every time, no model in it: the plain file
+  of `/render` (POS.0590), landing beside the render; `/publish` has no
+  part, since there is no designed step a model could add. The pace of
+  reading — words a second for the principal's lines, Claude's answers
+  and the lines that only report a file — the look of the terminal and
+  the labels of the captions stand in the recipe's Format section and
+  reach the script as its arguments, never in the render (SOL.0420). The
+  parsing of the screenplay and the pace live in the script alone; the
+  player page plays what the script computed. Proved on the first
+  teaching video, 2026-10-14; the principal's word of the same day.
 
 ### Structure and style of an assignment
 - **POS.0200** Structured items with stable IDs beat prose, even at very
@@ -1235,7 +1269,9 @@ position that already stands elsewhere.
   included: a presentation is a `.md` saying what is on each slide
   (mermaid for pictures). The forge still ends at content, but it
   carries its delivery-format tools at its edge: one turns a Markdown
-  deck render into a `.pptx`, another a Markdown render into a `.docx`.
+  deck render into a `.pptx`, another a Markdown render into a `.docx`,
+  a third turns a screenplay render into a video or into the events its
+  player plays, by a script alone, with no designed step (POS.1530).
   The Markdown render remains the sole source of truth; the generated
   file is an output of second order — regenerated at will, never edited
   by hand. All other format conversion stays outside the forge, as git
@@ -1261,7 +1297,8 @@ position that already stands elsewhere.
   first genre is `presentation` — a slide-by-slide deck definition whose
   render is turned into a PowerPoint file. The genre is named
   "presentation" rather than "deck" for company-wide legibility at
-  rollout.
+  rollout. The genres today: `presentation`, `readme`, `release-notes`
+  and `screenplay` (POS.1530).
 - **POS.0830** The forge runs beyond Windows. `scripts/` is the only
   platform-bound layer, and its scripts are written to run unchanged on
   Linux and macOS. Instance facts are out of the scripts: no remote URL,
@@ -1560,6 +1597,30 @@ position that already stands elsewhere.
   read-only, its last complete state tagged `pre-split`. Until a
   public exemplar exists (THR.0200) the README carries no example
   project. Present shape 2026-08-30 (from `00-brief-public-engine.md`).
+- **POS.1540 The engine hosts what a project shows in public.** A
+  project's recipe may send its format file out of the project into the
+  engine's repository by its `output:` path, into `docs/videos/`: the
+  engine, public on GitHub and served by GitHub Pages from `docs/`, is
+  the one public place of the principal's instance, while the project
+  that made the file stays where its sources require — a private
+  repository, the company's GitLab. The engine carries the file only;
+  its recipe, its render, its provenance and its history stay in the
+  project, and whoever has the project regenerates it. A video kept for
+  the company names no `output:` and stays in the project's `renders/`.
+  What goes out is chosen in the recipe, video by video, and the file is
+  read by the principal before the engine is saved: that is the clearing
+  of a public version, one step. `docs/videos/` is flat, its files in
+  the order of their names, and foreign to `/document` and its checks,
+  which generate and verify the documentation around it and leave it
+  alone; the player page, `docs/videos/index.html`, is one fixed file of
+  the engine, and the script that writes a file into the folder renews
+  the list of files the page plays, since Pages cannot list a folder.
+  Video files (`.mp4`) never enter the tree: they go out as assets of a
+  release. GitHub Pages is switched on by the principal once, by hand,
+  on `main` and `/docs`, with an empty `docs/.nojekyll` so that the
+  files are served as they lie; the documentation keeps being read in
+  the repository view as today. Sections and the order of a course:
+  THR.0660. The principal's word of 2026-10-14.
 - **POS.0990** The public face. The engine lives at a public repository
   of the principal's, named `forge-of-thought` — the bare word "forge"
   is overloaded on every code host and says nothing in a search — under

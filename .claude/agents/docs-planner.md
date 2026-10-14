@@ -36,7 +36,8 @@ prints them as links.
 ## The outline
 
 Five sections by the reader's journey, each a directory under
-`docs/`. A section or a page with no material is left out, never
+`docs/`; `docs/videos/` is not a section of the documentation and
+is never mapped. A section or a page with no material is left out, never
 left empty. Each page has one topic and one kind: how-to,
 explanation or reference. The kind says what kind of content belongs
 on the page and what does not (POS.1450): a how-to carries steps,

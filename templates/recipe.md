@@ -6,6 +6,7 @@ version: 0.1
 updated: YYYY-MM-DD
 last_change: <derived from the records of the newest version in recipes/<recipe>.history.md>
 # output: <path>   # optional — overrides the default renders/<recipe>.md
+# languages: <cs, en>   # optional — the first primary, the rest its translations, one render per language renders/<recipe>.<lang>.md (POS.1550)
 ---
 
 # Recipe — <purpose>
@@ -29,9 +30,12 @@ register. Everything the renderer must know beyond the template. -->
 The two steps: CLAUDE.md, Document chain, Renders. Never copied into the
 render (/render step 3). An older recipe's `## Build instructions` reads as this
 section until its next iteration. -->
-- Format: <pptx | docx>
+- Format: <pptx | docx | video | html-player>
 - Plain file, made by `/render` through pandoc: reference
-  <path | none>, page size <A4 | Letter>.
+  <path | none>, page size <A4 | Letter>. <A screenplay's `video` or
+  `html-player` is made through `scripts/md2video.py` instead, with
+  the pace, the date and the look stated here; it has no published
+  file (POS.1530).>
 - Published file, made by `/publish` through a model: template
   <path | none>, model <name>, <anything else the model must
   know>.

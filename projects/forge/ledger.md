@@ -2,7 +2,7 @@
 project: forge
 kind: thought
 language: en
-updated: 2026-10-13
+updated: 2026-10-14
 ---
 
 # Ledger — Forge of Thought
@@ -36,8 +36,8 @@ absorbed it; Note says what remains (partial) or the REJ (dropped). -->
 ## Documents
 | File | Version | Status | Date |
 |---|---|---|---|
-| 10-intent.md | 5.8 | draft | 2026-10-13 |
-| 40-solution-design.md | 0.15 | draft | 2026-10-13 |
+| 10-intent.md | 5.9 | draft | 2026-10-14 |
+| 40-solution-design.md | 0.16 | draft | 2026-10-14 |
 <!-- One row per layer below the intent, added when the layer is
 born; a layer the project does not have gets no row (CLAUDE.md,
 Ledger). -->
@@ -326,6 +326,8 @@ as `rejected`. -->
 | FND.1610 | medium | conformance | resolved | 2026-10-13-check-light-2.md | Documents rows 5.8 and 0.15 |
 | FND.1620 | low | conformance | resolved | 2026-10-13-check-light-2.md | the line says the matter is tracked in the project ai-strategy |
 | FND.1630 | low | conformance | resolved | 2026-10-13-check-light-2.md | the bare file name |
+| FND.1640 | low | conformance | resolved | 2026-10-14-check-light.md | the Waiting line of POS.1530 names the operating layer only (2026-10-14) |
+| FND.1650 | low | conformance | resolved | 2026-10-14-check-light.md | lines for TBC.0040 and TBC.0030 under Waiting on principal (2026-10-14) |
 
 Four review files are named outside the convention — accepted as they
 are by DEC.0140.
@@ -363,6 +365,17 @@ intent version for accepted, DEC.NNNN for rejected. -->
 ## Waiting on principal
 <!-- What waits on the principal, one line per matter: cite, never
 copy — CLAUDE.md, Ledger. -->
+- POS.1530, POS.1540, POS.1550 — the screenplay genre, the engine as
+  public host, languages of a recipe: decided at 5.9, to be realised
+  in the operating layer (the script
+  `md2video.py`, the genre, the skills render and recipe, the
+  templates, CLAUDE.md, `/document` and `docs/videos/`), then the
+  README; the trial scripts stand in `tmp/video-trial/` until then.
+- THR.0660 — the course of the teaching videos; opened 2026-10-14.
+- TBC.0040 — a document kind for the player page, or none; opened
+  2026-10-14 (solution design 0.16).
+- TBC.0030 — the independent challengers of POS.0800, not built; open
+  since solution design 0.1.
 - a `strategy` artefact for the forge (`/new-artefact strategy`):
   tracked in the project ai-strategy (its work product
   `reconstruction`, TBC.0010) until the principal calls the command;

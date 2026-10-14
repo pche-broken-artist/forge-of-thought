@@ -1,0 +1,207 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Forge of Thought — videos</title>
+<!-- The player page of the engine (CLAUDE.md, Document chain, Renders;
+POS.1530, POS.1540). This file is the skeleton in templates/; the
+served page docs/videos/index.html is written from it by
+scripts/md2video.py, which replaces the FILES placeholder with the
+list of the folder's html-player files and the SCRIPTS placeholder
+with a script tag per file: the data arrive through forgeVideo()
+calls, so the page works from a file on disk as well as from GitHub
+Pages. Never edit the served page: edit this skeleton and let the
+script write the page anew. -->
+<script>
+// The data of the videos, one forgeVideo() call per html-player file.
+window.FORGE = [];
+function forgeVideo(d){ window.FORGE.push(d); }
+</script>
+<!--SCRIPTS-->
+<style>
+:root{--bg:#0c0c0c;--fg:#ccc;--dim:#767676;--box:#5a5a5a;--green:#13a10e;--tab:#1f1f1f;--cap:#161616;--acc:#e0a85c;--ui:#222;--fs:18px;--cs:21px;--card:21px;--cardh:34px}
+*{box-sizing:border-box}
+body{margin:0;background:#000;color:var(--fg);font-family:"Segoe UI",system-ui,sans-serif}
+#app{display:flex;height:100vh}
+#side{width:300px;background:#151515;border-right:1px solid #2a2a2a;display:flex;flex-direction:column;min-width:0}
+#side h1{font-size:16px;margin:0;padding:14px 16px;color:#eee;border-bottom:1px solid #2a2a2a}
+#list{overflow:auto;flex:1}
+#list .v{padding:10px 16px;cursor:pointer;border-bottom:1px solid #1f1f1f}
+#list .v:hover{background:#1c1c1c}#list .v.on{background:#242424;border-left:3px solid var(--acc)}
+#list .v .t{color:#eee;font-size:14px}#list .v .m{color:#888;font-size:12px;margin-top:2px}
+#list .sc{padding:4px 16px 4px 30px;font-size:12px;color:#999;cursor:pointer}
+#list .sc:hover{color:#eee}#list .scenes{display:none}#list .scenes.open{display:block}#list .sc.on{color:var(--acc)}
+#list .v .t{display:flex;align-items:center}#list .v .t .tg{width:1.2em;color:#888;cursor:pointer;flex:none}#list .v .t .tg:hover{color:#eee}
+#main{flex:1;display:flex;flex-direction:column;min-width:0}
+#bar{display:flex;gap:10px;align-items:center;padding:8px 12px;background:var(--ui);font-size:14px;flex-wrap:wrap}
+#bar button,#bar select{background:#333;color:#eee;border:1px solid #555;border-radius:4px;padding:4px 10px;font:inherit;cursor:pointer}
+#bar button.on{background:var(--acc);color:#000}
+#bar .sp{flex:1}
+#prog{height:4px;background:#333;cursor:pointer}#prog i{display:block;height:100%;background:var(--acc);width:0}
+#screen{flex:1;display:flex;flex-direction:column;background:var(--bg);min-height:0;position:relative}
+#tab{height:36px;background:var(--tab);display:flex;align-items:center;font-family:"Cascadia Mono","Cascadia Code",Consolas,Menlo,monospace;font-size:15px}
+#tab .t{background:var(--bg);height:32px;margin:4px 0 0 8px;padding:6px 22px;color:var(--fg)}
+#tab .clock{margin-left:auto;margin-right:30px;color:var(--dim)}
+#term{flex:1;overflow:hidden;padding:12px 18px;font-family:"Cascadia Mono","Cascadia Code",Consolas,Menlo,monospace;font-size:var(--fs);line-height:1.5;display:flex;flex-direction:column;justify-content:flex-end;min-height:0}
+#conv{overflow:hidden}
+#conv div{white-space:normal;overflow-wrap:anywhere}#conv div.pre{white-space:pre}#conv div.li{padding-left:1.6em;text-indent:-1.6em}#conv div+div{margin-top:2px}#conv .gap{height:.9em}
+#conv .u{color:var(--dim)}#conv .c{color:var(--fg)}#conv .t{color:var(--dim)}
+#conv .dot::before{content:"";display:inline-block;width:10px;height:10px;border-radius:50%;background:var(--green);margin:0 8px 1px 0}
+#spin{color:var(--acc);height:1.5em}
+#box{border:1px solid var(--box);border-radius:4px;padding:4px 12px;margin-top:6px;min-height:2.2em;color:var(--fg);white-space:normal;overflow-wrap:anywhere}
+#box .cur{display:inline-block;width:.55em;height:1.1em;background:var(--fg);vertical-align:text-bottom;animation:bl 1s steps(1) infinite}
+@keyframes bl{50%{opacity:0}}
+#hint{color:var(--dim);font-family:"Cascadia Mono",Consolas,Menlo,monospace;font-size:14px;padding:2px 20px 8px}
+#capband{background:var(--cap);border-top:2px solid #2a2a2a;padding:14px 40px;min-height:150px;font-size:var(--cs);line-height:1.45;color:#e6e6e6}
+#capband b{color:var(--acc);margin-right:10px}#capband p{margin:0 0 6px 0}
+#card{position:absolute;inset:0;background:var(--bg);display:none;flex-direction:column;justify-content:center;align-items:center;padding:60px 120px;text-align:center}
+#card h1{font-size:var(--cardh);margin:0 0 20px 0;color:#fff}#card p{font-size:var(--card);margin:0 0 14px 0;color:#ddd;max-width:1040px}
+#cardline{position:absolute;left:0;bottom:0;height:4px;background:var(--acc);width:0;z-index:2}
+#empty{position:absolute;inset:0;display:flex;align-items:center;justify-content:center;color:#888;font-size:18px}
+@media (max-width:900px){#app{flex-direction:column}#side{width:auto;max-height:35vh;border-right:0;border-bottom:1px solid #2a2a2a}}
+</style>
+</head>
+<body>
+<div id="app">
+ <div id="side"><h1>Forge of Thought — videos</h1><div id="list"></div></div>
+ <div id="main">
+  <div id="bar">
+   <button id="play" title="space">▶</button>
+   <select id="speed"><option value="1">1×</option><option value="1.5">1.5×</option><option value="2">2×</option></select>
+   <span id="fonts"><button data-f="s">A</button><button data-f="m" class="on" style="font-size:17px">A</button><button data-f="l" style="font-size:21px">A</button></span>
+   <span class="sp"></span>
+   <span id="langs"></span>
+   <span id="time" style="color:#999;font-family:Consolas,Menlo,monospace"></span>
+  </div>
+  <div id="prog"><i></i></div>
+  <div id="screen">
+   <div id="tab"><span class="t">⌂  PowerShell</span><span class="clock" id="clock"></span></div>
+   <div id="term"><div id="conv"></div><div id="spin"></div><div id="box"><span>&gt; </span><span id="inp"></span><span class="cur"></span></div></div>
+   <div id="hint">? for shortcuts</div>
+   <div id="capband"></div>
+   <div id="card"></div>
+   <div id="empty">Choose a video on the left.</div>
+  </div>
+ </div>
+</div>
+<script>
+// The list of html-player files in this folder, written by scripts/md2video.py.
+const FILES = /*FILES*/;
+const DEFAULT_LANG = 'en';
+const SPIN = ['✻','✢','✳','✶'];
+const $ = id => document.getElementById(id);
+const esc = s => String(s).replace(/&/g,'&amp;').replace(/</g,'&lt;');
+
+// files grouped by video: <name>.<lang>.html-player.js; the data of each
+// file came in through forgeVideo() and carry the file's name
+const DATA = {};
+for (const d of (window.FORGE || [])) DATA[d.file] = d;
+const VIDEOS = [];
+for (const f of FILES) {
+  const m = /^(.*)\.([a-z]{2})\.html-player\.js$/.exec(f);
+  if (!m || !DATA[f]) continue;
+  let v = VIDEOS.find(x => x.name === m[1]);
+  if (!v) { v = {name: m[1], langs: {}}; VIDEOS.push(v); }
+  v.langs[m[2]] = f;
+}
+
+let video = null, lang = null, data = null, ev = [], i = 0, playing = false, speed = 1, timer = null, total = 0;
+
+function durOf(e){ if(e.k==='type') return e.typing+e.hold+0.35; if(e.k==='say') return e.paras.reduce((a,p)=>a+p.n,0)*e.line+e.hold; if(e.k==='tool') return 2*e.line; return e.dur||0; }
+function elapsed(k){ let t=0; for(let j=0;j<k;j++) t+=durOf(ev[j]); return t; }
+function fmt(s){ s=Math.round(s); return Math.floor(s/60)+':'+String(s%60).padStart(2,'0'); }
+function nearestScene(k){ for(let j=Math.min(k,ev.length-1);j>=0;j--) if(ev[j].k==='scene'||ev[j].k==='card') return j; return 0; }
+const conv = () => $('conv');
+function addLine(cls, text, dot, extra){ const d=document.createElement('div'); d.className=cls+(dot?' dot':'')+(extra?' '+extra:''); d.innerHTML=esc(text); conv().appendChild(d); trim(); }
+function gap(){ const g=document.createElement('div'); g.className='gap'; conv().appendChild(g); }
+function trim(){ const c=conv(); while(c.scrollHeight>c.clientHeight+2 && c.firstChild) c.removeChild(c.firstChild); }
+function paraClass(p){ return (p.pre?'pre ':'')+(/^\s*(?:[-*•]|\d+[.)]|[a-z][.)])\s/.test(p.t)?'li':''); }
+function wait(s){ return new Promise(r=>{ timer=setTimeout(r, 1000*s/speed); }); }
+function stop(){ playing=false; if(timer) clearTimeout(timer); timer=null; $('play').textContent='▶'; }
+
+// terminal, captions, card text, card title
+const SIZES={s:['15px','18px','18px','30px'],m:['18px','21px','21px','34px'],l:['22px','25px','26px','40px']};
+function setFont(f){ const r=document.documentElement.style; r.setProperty('--fs',SIZES[f][0]); r.setProperty('--cs',SIZES[f][1]); r.setProperty('--card',SIZES[f][2]); r.setProperty('--cardh',SIZES[f][3]); document.querySelectorAll('#fonts button').forEach(b=>b.classList.toggle('on',b.dataset.f===f)); try{localStorage.setItem('fs',f);}catch(e){} }
+document.querySelectorAll('#fonts button').forEach(b=>b.onclick=()=>setFont(b.dataset.f));
+try{ setFont(localStorage.getItem('fs')||'m'); }catch(e){ setFont('m'); }
+
+async function buildList(){
+  const openNames = new Set([...document.querySelectorAll('#list .scenes.open')].map(x=>x.dataset.name));
+  // the list follows the chosen language: titles and scenes from that
+  // language's data where the video has it, else from its first language
+  const list=$('list'); list.innerHTML='';
+  for (const v of VIDEOS) {
+    const l = pick(v); const dd = DATA[v.langs[l]];
+    v.title = dd.title; v.duration = dd.duration; v.scenes = dd.events.filter(e=>e.k==='scene');
+    const d=document.createElement('div'); d.className='v'+(video===v?' on':''); d.dataset.name=v.name;
+    const wasOpen = openNames.has(v.name);
+    d.innerHTML='<div class="t"><span class="tg">'+(wasOpen?'▾':'▸')+'</span><span>'+esc(v.title)+'</span></div><div class="m">'+Object.keys(v.langs).join(' · ')+(v.duration?' · '+fmt(v.duration):'')+'</div>';
+    d.onclick=()=>open(v, pick(v), true);
+    list.appendChild(d);
+    const sc=document.createElement('div'); sc.className='scenes'+(wasOpen?' open':''); sc.dataset.name=v.name;
+    // the outline folds under the title: the arrow toggles it, the title opens the video
+    d.querySelector('.tg').onclick=(ev)=>{ ev.stopPropagation(); const o=sc.classList.toggle('open'); d.querySelector('.tg').textContent=o?'▾':'▸'; };
+    (v.scenes||[]).forEach(s=>{ const e=document.createElement('div'); e.className='sc'; e.textContent=s.time+'  '+s.title; e.onclick=()=>{ if(video!==v) open(v, pick(v)).then(()=>jumpScene(s.no)); else jumpScene(s.no); }; sc.appendChild(e); });
+    list.appendChild(sc);
+  }
+}
+function jumpScene(no){ const k=ev.findIndex(e=>e.k==='scene'&&e.no===no); if(k>=0) jump(k); }
+
+async function open(v, l, chosen){
+  stop(); const relist = (l!==lang); video=v; lang=l;
+  data = DATA[v.langs[l]]; ev = data.events; total = ev.reduce((a,e)=>a+durOf(e),0); i=0;
+  if(relist) await buildList();
+  document.querySelectorAll('#list .v').forEach(d=>d.classList.toggle('on', d.dataset.name===v.name)); if(chosen) expand(v);
+  $('langs').innerHTML = Object.keys(v.langs).map(x=>`<button data-l="${x}" class="${x===l?'on':''}">${x}</button>`).join(' ');
+  document.querySelectorAll('#langs button').forEach(b=>b.onclick=()=>{ const k=nearestScene(i), was=playing; open(v, b.dataset.l).then(()=>{ jump(k); if(was) run(); }); });
+  $('empty').style.display='none'; document.title = data.title + ' — Forge of Thought';
+  render(0);
+}
+function render(k){
+  $('card').style.display='none'; conv().innerHTML=''; $('inp').textContent=''; $('spin').textContent='';
+  let start=k; while(start>0 && !(ev[start].k==='scene' && ev[start].clear) && ev[start].k!=='card') start--;
+  for(let j=start;j<k;j++) apply(ev[j]);
+  const e=ev[k]; if(e.k==='card'){showCard(e);} else if(e.k==='scene'){scene(e);}
+  progress(k); markScene(k);
+}
+function progress(k){ $('prog').firstElementChild.style.width=(100*elapsed(k)/total)+'%'; $('time').textContent=fmt(elapsed(k))+' / '+fmt(total); }
+function markScene(k){ const s=ev[nearestScene(k)]; document.querySelectorAll('#list .v.on + .scenes .sc').forEach(d=>d.classList.toggle('on', s.k==='scene' && d.textContent.startsWith(s.time))); }
+function expand(v){ const sc=document.querySelector('#list .scenes[data-name="'+v.name+'"]'); if(sc && !sc.classList.contains('open')){ sc.classList.add('open'); const tg=sc.previousElementSibling.querySelector('.tg'); if(tg) tg.textContent='▾'; } }
+// a card is still: a thin line runs along its bottom for as long as it stands
+function showCard(e, run){ const c=$('card'); c.innerHTML='<h1>'+esc(e.title)+'</h1>'+e.text.map(p=>'<p>'+esc(p)+'</p>').join('')+'<div id="cardline"></div>'; c.style.display='flex';
+  if(run){ const l=$('cardline'); void l.offsetWidth; l.style.transition='width '+(e.dur/speed)+'s linear'; l.style.width='100%'; } }
+function scene(e){ $('card').style.display='none'; if(e.clear) conv().innerHTML=''; $('clock').textContent=(data.date?data.date+'   ':'')+e.time; $('capband').innerHTML=e.caption.map(([l,t])=>'<p><b>'+esc(l)+':</b>'+esc(t)+'</p>').join(''); }
+function apply(e){
+  if(e.k==='scene'){scene(e);}
+  else if(e.k==='type'){ addLine('u','> '+e.text); gap(); }
+  else if(e.k==='say'){ e.paras.forEach((p,n)=>addLine('c', p.t, n===0, paraClass(p))); gap(); }
+  else if(e.k==='tool'){ addLine('c','  '+e.text, true); addLine('t','     ⎿  ok','', 'pre'); gap(); }
+}
+function jump(k){ stop(); i=k; render(k); }
+async function run(){
+  if(!data) return;
+  playing=true; $('play').textContent='❚❚';
+  while(playing && i<ev.length){
+    const e=ev[i]; progress(i); markScene(i);
+    if(e.k==='card'){ showCard(e, true); await wait(e.dur); }
+    else if(e.k==='scene'){ scene(e); await wait(e.dur); }
+    else if(e.k==='hold'||e.k==='end'){ await wait(e.dur); }
+    else if(e.k==='think'){ for(let n=0;n<Math.floor(e.dur/0.12)&&playing;n++){ $('spin').textContent=SPIN[n%4]+' Thinking…'; await wait(0.12);} $('spin').textContent=''; }
+    else if(e.k==='type'){ const per=e.typing/e.text.length; for(let n=1;n<=e.text.length&&playing;n++){ $('inp').textContent=e.text.slice(0,n); await wait(per);} await wait(e.hold); $('inp').textContent=''; apply(e); await wait(0.35); }
+    else if(e.k==='say'){ for(let n=0;n<e.paras.length&&playing;n++){ const p=e.paras[n]; addLine('c', p.t, n===0, paraClass(p)); await wait(e.line*p.n);} gap(); await wait(e.hold); }
+    else if(e.k==='tool'){ addLine('c','  '+e.text,true); await wait(e.line); addLine('t','     ⎿  ok','', 'pre'); gap(); await wait(e.line); }
+    if(!playing) break; i++;
+  }
+  if(i>=ev.length){ stop(); i=0; }
+}
+$('play').onclick=()=>{ if(playing) stop(); else run(); };
+$('speed').onchange=e=>{ speed=parseFloat(e.target.value); };
+$('prog').onclick=e=>{ if(!data) return; const t=total*e.offsetX/e.currentTarget.clientWidth; let k=0; while(k+1<ev.length && elapsed(k+1)<=t) k++; jump(nearestScene(k)); };
+document.addEventListener('keydown',e=>{ if(e.code==='Space' && e.target.tagName!=='SELECT'){e.preventDefault(); $('play').click();} });
+// the language: the one chosen before, else English, else the file's first
+function pick(v){ const want = lang || DEFAULT_LANG; return v.langs[want] ? want : (v.langs[DEFAULT_LANG] ? DEFAULT_LANG : Object.keys(v.langs)[0]); }
+buildList().then(()=>{ const h=location.hash.slice(1); const v=VIDEOS.find(x=>x.name===h)||VIDEOS[0]; if(v) open(v, pick(v)); });
+</script>
+</body>
+</html>
