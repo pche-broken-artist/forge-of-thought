@@ -360,3 +360,4 @@ with it. Lines are not wrapped. -->
 - 2026-10-15 | 5.10 | PCHe | POS.1420 | changed | FND.1440 of the engine check of 2026-10-10: no check of the roster keeps a solution design true against what realises it; the position says what is wanted and names the thread, so that it claims no mechanism the engine lacks. | Was: A check keeps it true against what realises it.
 - 2026-10-15 | 5.11 | PCHe | THR.0670 | created
 - 2026-10-15 | 5.11 | PCHe | THR.0360 | changed | The principal's word of 2026-10-15 on the pace and the way of the brief brd: fast, from the material at hand, nearly whole by Claude.
+- 2026-10-15 | 5.12 | PCHe | THR.0680 | created

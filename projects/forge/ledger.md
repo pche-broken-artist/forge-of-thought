@@ -36,7 +36,7 @@ absorbed it; Note says what remains (partial) or the REJ (dropped). -->
 ## Documents
 | File | Version | Status | Date |
 |---|---|---|---|
-| 10-intent.md | 5.11 | draft | 2026-10-15 |
+| 10-intent.md | 5.12 | draft | 2026-10-15 |
 | 40-solution-design.md | 0.17 | draft | 2026-10-15 |
 <!-- One row per layer below the intent, added when the layer is
 born; a layer the project does not have gets no row (CLAUDE.md,
@@ -371,6 +371,8 @@ copy — CLAUDE.md, Ledger. -->
 - THR.0660 — the course of the teaching videos; opened 2026-10-14.
 - THR.0670 — a chain handed over whole; Claude's synthesis, nothing
   decided, not before the first such project; opened 2026-10-15.
+- THR.0680 — a question put to the manual, `/man <free text>`;
+  Claude's synthesis, to be built; opened 2026-10-15.
 - TBC.0030 — the independent challengers of POS.0800, not built; open
   since solution design 0.1.
 - a `strategy` artefact for the forge (`/new-artefact strategy`):

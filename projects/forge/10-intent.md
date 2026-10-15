@@ -1,8 +1,8 @@
 ---
-version: 5.11
+version: 5.12
 date: 2026-10-15
 status: draft
-last_change: 5.11 (2026-10-15): THR.0670 opened, a chain handed over whole; THR.0360 carries the principal's word that the brief brd is made fast and nearly alone.
+last_change: 5.12 (2026-10-15): THR.0680 opened, a question put to the manual, `/man <free text>`.
 project: forge
 audience: principal + Claude only
 ---
