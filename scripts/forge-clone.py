@@ -60,7 +60,9 @@ def main(argv):
     if id_name and id_email:
         print(f"  identity:    {id_name} <{id_email}> (from your git configuration)")
     else:
-        print("  identity:    none resolved - forge-save will report it and skip the commit")
+        print("  identity:    none - git resolves no user.name/user.email for this repository: "
+              "run /setup for the per-host identity (absolute paths), or set a local one: "
+              f"git -C '{target}' config user.name/user.email; forge-save commits nothing until then")
     ledger = target / "ledger.md"
     if ledger.exists():
         m = re.search(r"^kind:\s*(\S+)", ledger.read_text(encoding="utf-8", errors="replace"), re.M)

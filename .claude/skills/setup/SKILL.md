@@ -1,5 +1,5 @@
 ---
-description: First run after cloning the engine — create and fill CLAUDE.local.md by interview, set the session model to the forge's default, offer the git identity per host and the global guard in ~/.gitconfig; never overwrites, runs no git operation
+description: First run after cloning the engine — create and fill CLAUDE.local.md by interview, set the session model to the forge's default, offer the git identity per host and the global guard in the global git configuration git reads; never overwrites, runs no git operation
 disable-model-invocation: true
 ---
 
@@ -36,10 +36,16 @@ speak whatever language the user speaks to you.
        `[includeIf "hasconfig:remote.*.url:https://<host>/**"]` and
        one `[includeIf "hasconfig:remote.*.url:git@<host>:*/**"]`,
        both with `path = <absolute path>/.gitconfig-<host>` — the
-       path absolute, beside that global file, since `~` in git's
-       hands and in the shell's may differ — and the file
-       `.gitconfig-<host>` created with `[user]` `name` and `email`
-       when missing;
+       path absolute and the file in the user's local profile (on
+       Windows `C:/Users/<user>`), not necessarily beside the global
+       file: the global file follows HOME, and HOME may differ by
+       place — a network home at work, the local profile at home —
+       so a `~` path, or a file beside a global file that moves, is
+       found from one place and not from the other (found
+       2026-10-15); the file `.gitconfig-<host>` created with
+       `[user]` `name` and `email` when missing. Where the global
+       file already carries such a stanza with a `~` path, report it
+       and offer to make the path absolute;
      - the global guard `user.useConfigOnly = true` under `[user]`.
        Where the global file carries a `user.name` or `user.email`,
        say the guard only bites once that identity is removed, and
@@ -47,6 +53,10 @@ speak whatever language the user speaks to you.
      Declined: print the stanzas and the lines for the user to apply
      by hand. These are the only edits outside the engine; they are
      configuration text files, not a git operation.
+     The identity is verified by git itself at the first
+     `/import-project`: `scripts/forge-clone.py` reports the identity
+     git resolves for the clone, and `/import-project` says what to do
+     when it resolves none.
 2. **`.claude/settings.local.json`**.
    - If it already exists: report the model it names and do not touch
      it.

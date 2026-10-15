@@ -2,7 +2,7 @@
 project: forge
 kind: thought
 language: en
-updated: 2026-10-14
+updated: 2026-10-15
 ---
 
 # Ledger — Forge of Thought
@@ -330,6 +330,7 @@ as `rejected`. -->
 | FND.1650 | low | conformance | resolved | 2026-10-14-check-light.md | lines for TBC.0040 and TBC.0030 under Waiting on principal (2026-10-14) |
 | FND.1660 | low | conformance | resolved | 2026-10-14-check-light-2.md | the Waiting line of POS.1530 says the operating layer is realised and the README re-rendered (2026-10-14) |
 | FND.1670 | low | conformance | resolved | 2026-10-14-check-light-3.md | the Waiting line of POS.1530 names recipe 0.66 (2026-10-14) |
+| FND.1680 | low | conformance | parked | 2026-10-15-check-light.md | the Dependencies row cites `projects/lib-allwyn/sources/fork-brd/`, absent from the library's clone of 2026-10-03; closes after `/save lib-allwyn` on the instance that registered it and `/pull lib-allwyn` here |
 
 Four review files are named outside the convention — accepted as they
 are by DEC.0140.
@@ -465,3 +466,7 @@ copy — CLAUDE.md, Ledger. -->
 - FND.1440 — parked finding of the `engine` check: POS.1420 claims
   a check the engine lacks; the wording agreed 2026-10-10, to be
   written in the first 5.x round.
+- FND.1680 — parked finding of the `light` check: the library bundle
+  `fork-brd` cited by the Dependencies row is not in the clone of
+  lib-allwyn; closes after `/save lib-allwyn` on the instance that
+  registered it and `/pull lib-allwyn` here; parked 2026-10-15.
