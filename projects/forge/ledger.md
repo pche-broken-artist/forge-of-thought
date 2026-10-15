@@ -36,8 +36,8 @@ absorbed it; Note says what remains (partial) or the REJ (dropped). -->
 ## Documents
 | File | Version | Status | Date |
 |---|---|---|---|
-| 10-intent.md | 5.9 | draft | 2026-10-14 |
-| 40-solution-design.md | 0.16 | draft | 2026-10-14 |
+| 10-intent.md | 5.10 | draft | 2026-10-15 |
+| 40-solution-design.md | 0.17 | draft | 2026-10-15 |
 <!-- One row per layer below the intent, added when the layer is
 born; a layer the project does not have gets no row (CLAUDE.md,
 Ledger). -->
@@ -306,7 +306,7 @@ as `rejected`. -->
 | FND.1410 | medium | conformance | resolved | 2026-10-10-check-engine.md | /render step 3 says instance facts are not material, step 6 scans the render with docs-check.py --file |
 | FND.1420 | medium | conformance | resolved | 2026-10-10-check-engine.md | front-matter brought to the shape of the three reviewer contracts |
 | FND.1430 | low | conformance | resolved | 2026-10-10-check-engine.md | the layout comment of CLAUDE.md names the documentation's contract and agents |
-| FND.1440 | low | conformance | parked | 2026-10-10-check-engine.md | wording agreed 2026-10-10, written in the first 5.x round; the intent stays 5.0 for the release |
+| FND.1440 | low | conformance | resolved | 2026-10-10-check-engine.md | intent 5.10: POS.1420 names the check as wanted (THR.0520) |
 | FND.1450 | low | conformance | resolved | 2026-10-10-check-engine.md | the sentence of The system's own project says the threads stand beside the intent |
 | FND.1460 | low | conformance | resolved | 2026-10-10-check-engine.md | the brief skeleton derives last_change as the other skeletons do |
 | FND.1470 | low | conformance | resolved | 2026-10-10-check-light-2.md | the POS.1450 line deleted, both steps done 2026-10-10 |
@@ -330,7 +330,7 @@ as `rejected`. -->
 | FND.1650 | low | conformance | resolved | 2026-10-14-check-light.md | lines for TBC.0040 and TBC.0030 under Waiting on principal (2026-10-14) |
 | FND.1660 | low | conformance | resolved | 2026-10-14-check-light-2.md | the Waiting line of POS.1530 says the operating layer is realised and the README re-rendered (2026-10-14) |
 | FND.1670 | low | conformance | resolved | 2026-10-14-check-light-3.md | the Waiting line of POS.1530 names recipe 0.66 (2026-10-14) |
-| FND.1680 | low | conformance | parked | 2026-10-15-check-light.md | the Dependencies row cites `projects/lib-allwyn/sources/fork-brd/`, absent from the library's clone of 2026-10-03; closes after `/save lib-allwyn` on the instance that registered it and `/pull lib-allwyn` here |
+| FND.1680 | low | conformance | resolved | 2026-10-15-check-light.md | the bundle saved and pushed from lib-allwyn 2026-10-15 (commit 3366304); the clone that lacked it pulls |
 
 Four review files are named outside the convention — accepted as they
 are by DEC.0140.
@@ -368,17 +368,7 @@ intent version for accepted, DEC.NNNN for rejected. -->
 ## Waiting on principal
 <!-- What waits on the principal, one line per matter: cite, never
 copy — CLAUDE.md, Ledger. -->
-- POS.1530, POS.1540, POS.1550 — the screenplay genre, the engine as
-  public host, languages of a recipe: realised in the operating layer
-  2026-10-14, the README re-rendered from recipe 0.66; the trial
-  scripts in `tmp/video-trial/` to be dropped on the principal's word;
-  the `.json` spelling of the player file in POS.1530, SOL.0650 and
-  SOL.0660 (the operating layer has `.js`), the model of a screenplay
-  render (POS.0930) and the player's skeleton as the page's source
-  (TBC.0040) for the next rounds of the intent and the solution design.
 - THR.0660 — the course of the teaching videos; opened 2026-10-14.
-- TBC.0040 — a document kind for the player page, or none; opened
-  2026-10-14 (solution design 0.16).
 - TBC.0030 — the independent challengers of POS.0800, not built; open
   since solution design 0.1.
 - a `strategy` artefact for the forge (`/new-artefact strategy`):
@@ -463,10 +453,3 @@ copy — CLAUDE.md, Ledger. -->
 - THR.0620 — a plan for the forge after 5.0, Claude's synthesis;
   nothing decided, the questions to be asked one by one; opened
   2026-10-10.
-- FND.1440 — parked finding of the `engine` check: POS.1420 claims
-  a check the engine lacks; the wording agreed 2026-10-10, to be
-  written in the first 5.x round.
-- FND.1680 — parked finding of the `light` check: the library bundle
-  `fork-brd` cited by the Dependencies row is not in the clone of
-  lib-allwyn; closes after `/save lib-allwyn` on the instance that
-  registered it and `/pull lib-allwyn` here; parked 2026-10-15.

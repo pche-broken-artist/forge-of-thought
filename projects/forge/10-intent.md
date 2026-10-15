@@ -1,8 +1,8 @@
 ---
-version: 5.9
-date: 2026-10-14
+version: 5.10
+date: 2026-10-15
 status: draft
-last_change: 5.9 (2026-10-14): POS.1530, POS.1540 and POS.1550 created: the screenplay genre and its two formats by one script, the engine as the public host of what a project shows, a recipe in several languages; POS.0590 and POS.0770 follow; THR.0660 opened.
+last_change: 5.10 (2026-10-15): POS.1530 and POS.1540 follow the operating layer: the player file is `.html-player.js`, a script the page plays from disk as well as from Pages, and the player page is written anew from the skeleton `templates/html-player.html`; POS.1420 names the check it wants as wanted (FND.1440).
 project: forge
 audience: principal + Claude only
 ---
@@ -800,9 +800,9 @@ position that already stands elsewhere.
   its own, the item names the file and the detail is the file's; where
   it is only part of a file, or no file exists yet, the item carries the
   detail. The document holds what cannot be read off the thing itself:
-  why, against what, at what price, and how the parts fit. A check keeps
-  it true against what realises it. When it is complete is its
-  definition's. Decided 2026-10-03.
+  why, against what, at what price, and how the parts fit. It is to be
+  kept true against what realises it by a check (THR.0520). When it is
+  complete is its definition's. Decided 2026-10-03.
 - **POS.1520 A work product.** A project may make outputs that are
   neither artefacts nor renders: any result of Claude's work the
   principal asked for, a model, an analysis, a worked task, in whatever
@@ -847,9 +847,10 @@ position that already stands elsewhere.
   shows; its inputs are session records registered as sources and the
   brief that says what the videos are for. Its Format names one of two
   formats, never both: `video`, an MP4 painted frame by frame from the
-  render, or `html-player`, a JSON of timed events for the player page
-  of the engine (`renders/<recipe>.<lang>.html-player.json`). Both are
-  made by one script, `scripts/md2video.py`, deterministic, the same
+  render, or `html-player`, the timed events for the player page of the
+  engine, wrapped as a script (`renders/<recipe>.<lang>.html-player.js`)
+  so that the page plays a file from disk as well as from Pages. Both
+  are made by one script, `scripts/md2video.py`, deterministic, the same
   file from the same render every time, no model in it: the plain file
   of `/render` (POS.0590), landing beside the render; `/publish` has no
   part, since there is no designed step a model could add. The pace of
@@ -1612,9 +1613,10 @@ position that already stands elsewhere.
   of a public version, one step. `docs/videos/` is flat, its files in
   the order of their names, and foreign to `/document` and its checks,
   which generate and verify the documentation around it and leave it
-  alone; the player page, `docs/videos/index.html`, is one fixed file of
-  the engine, and the script that writes a file into the folder renews
-  the list of files the page plays, since Pages cannot list a folder.
+  alone; the player page, `docs/videos/index.html`, is written anew by
+  the script from a skeleton of the engine, `templates/html-player.html`,
+  with the folder's files, whenever a file is written into the folder,
+  since Pages cannot list a folder.
   Video files (`.mp4`) never enter the tree: they go out as assets of a
   release. GitHub Pages is switched on by the principal once, by hand,
   on `main` and `/docs`, with an empty `docs/.nojekyll` so that the
