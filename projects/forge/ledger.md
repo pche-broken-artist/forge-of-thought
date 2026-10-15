@@ -36,7 +36,7 @@ absorbed it; Note says what remains (partial) or the REJ (dropped). -->
 ## Documents
 | File | Version | Status | Date |
 |---|---|---|---|
-| 10-intent.md | 5.10 | draft | 2026-10-15 |
+| 10-intent.md | 5.11 | draft | 2026-10-15 |
 | 40-solution-design.md | 0.17 | draft | 2026-10-15 |
 <!-- One row per layer below the intent, added when the layer is
 born; a layer the project does not have gets no row (CLAUDE.md,
@@ -369,6 +369,8 @@ intent version for accepted, DEC.NNNN for rejected. -->
 <!-- What waits on the principal, one line per matter: cite, never
 copy — CLAUDE.md, Ledger. -->
 - THR.0660 — the course of the teaching videos; opened 2026-10-14.
+- THR.0670 — a chain handed over whole; Claude's synthesis, nothing
+  decided, not before the first such project; opened 2026-10-15.
 - TBC.0030 — the independent challengers of POS.0800, not built; open
   since solution design 0.1.
 - a `strategy` artefact for the forge (`/new-artefact strategy`):
@@ -393,7 +395,8 @@ copy — CLAUDE.md, Ledger. -->
 - THR.0400 — a gate in front of the tools; the soft half done, the
   hard half open, nothing scheduled.
 - THR.0360 — a layer with an external audience, opened 2026-09-14;
-  worked in the brief `brd`, to be born (`/forge brief brd`).
+  worked in the brief `brd`, to be born (`/forge brief brd`) fast and
+  nearly alone, the principal's word of 2026-10-15.
 - THR.0370 — Mermaid diagrams in Word; deferred 2026-09-12, open.
 - THR.0320 — a `harness` lens; decided in substance 2026-09-05,
   mechanism open, no priority.

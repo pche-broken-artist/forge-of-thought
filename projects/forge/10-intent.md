@@ -1,8 +1,8 @@
 ---
-version: 5.10
+version: 5.11
 date: 2026-10-15
 status: draft
-last_change: 5.10 (2026-10-15): POS.1530 and POS.1540 follow the operating layer: the player file is `.html-player.js`, a script the page plays from disk as well as from Pages, and the player page is written anew from the skeleton `templates/html-player.html`; POS.1420 names the check it wants as wanted (FND.1440).
+last_change: 5.11 (2026-10-15): THR.0670 opened, a chain handed over whole; THR.0360 carries the principal's word that the brief brd is made fast and nearly alone.
 project: forge
 audience: principal + Claude only
 ---

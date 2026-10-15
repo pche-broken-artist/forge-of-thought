@@ -418,6 +418,10 @@ project: forge
   must be worth it on its own; a later possibility is never what
   justifies it
   (`research/2026-09-28-artefact-layers-from-idea-to-handover.md`).
+  2026-10-15: the principal's word: the brief `brd` is made fast,
+  from the material at hand (the bundle `fork-brd` of lib-allwyn, the
+  two researches of 2026-10-13), nearly whole by Claude; the layer
+  THR.0670's picture ends at.
 - **THR.0370** [intent] Mermaid diagrams in Word. `scripts/md2docx.py`
   (SOL.0440) converts a render to Word through pandoc and leaves
   Mermaid blocks as code. Agreed in the walkthrough of 2026-09-12 but
@@ -954,6 +958,28 @@ project: forge
   player; an animated SVG for a short example in a README; GitLab Pages
   for the company's version of the videos; whether the documentation is
   ever to be a web as well as the repository view. Opened 2026-10-14.
+- **THR.0670** [intent] A chain handed over whole. The principal's
+  picture of 2026-10-15: a small project where little is at stake, a
+  quick prototype; the brief found together, then Claude takes the chain
+  alone down to the solution design and the BRD, and the result goes to
+  a coding agent; or an intent already worked out, and the lower layers
+  pushed through, "make the BRD, make the assignment yourself". Handing
+  over (POS.1410) covers it but for one sentence: nothing is derived
+  from a handed-over proposal before the principal has judged it, which
+  forbids a lower layer from an unjudged intent. Claude's synthesis, not
+  judged: (1) a handover names the stop where the principal judges,
+  every artefact as today by default, a prototype naming its last layer;
+  the cost, said knowingly, that an error in the intent passes down; (2)
+  between stops the isolated reviewers stand in for his judgement, the
+  critic `essence` for drift and one challenger for the reality check,
+  the handover saying which run after each layer, by his word an
+  exception to POS.0430; (3) what Claude assumed in the intent in place
+  of the principal's answer travels down as ASM, so that the recipient
+  reads it as an assumption and never as a fact (POS.1370); the brief
+  stays the principal's own (POS.1330). The definition is not changed
+  before the first such project: it is mended on real work (POS.1380).
+  The picture ends at the BRD, whose brief is THR.0360's. Opened
+  2026-10-15; origin: the principal's word and Claude's synthesis.
 
 Note: the ID THR.0120 was inadvertently used twice — first for the
 readme-recipe thread (opened 1.14, closed 1.16), then for the
