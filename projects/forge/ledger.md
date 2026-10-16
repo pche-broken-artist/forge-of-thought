@@ -2,7 +2,7 @@
 project: forge
 kind: thought
 language: en
-updated: 2026-10-15
+updated: 2026-10-16
 ---
 
 # Ledger — Forge of Thought
@@ -31,6 +31,7 @@ absorbed it; Note says what remains (partial) or the REJ (dropped). -->
 | 00-brief-public-engine.md | 1.0 | approved | mined | born in the forge 2026-08-29 (THR.0130, THR.0090), locked 2026-08-29 in English after the CTO challenge; mined into intent 2.21 (POS.0940–0980, REJ.0140–0150, THR.0190–0200). Instance work it records — the one-off migration steps 1–6, the first projects after the split — stays here and under Waiting on principal, not in the intent |
 | 00-brief-elicitation.md | 1.0 | approved | mined | born in the forge and locked 2026-09-28; mined into intent 4.32 (POS.1300 to POS.1380, POS.0110, REJ.0180, REJ.0210, REJ.0220, THR.0440 to THR.0460; THR.0440 and THR.0450 closed at 4.46). The material for the briefs `brd` and `engine-split` is carried in THR.0230, THR.0300 and THR.0360. Not a model of a brief, see its opening note |
 | 00-brief-next-gen.md | 0.3 | draft | pending | born in the forge 2026-10-03, written in English on the principal's word; the needs of the next generation gathered in one round, to be sifted; the eighteen researches of 2026-10-03 cited under its sections (0.2); THR.0520 opened from it; the documentation moved out into the brief `documentation` (0.3) |
+| 00-brief-brd.md | 0.2 | draft | pending | born 2026-10-16 handed over (THR.0360); 0.2 on the principal's judgement: the fork's BRD is the base, checked against the standards and improved; the IDs being decided one at a time, the first (BR, UC, DEP) without a verdict yet |
 | 00-brief-documentation.md | 0.1 | draft | mined | born 2026-10-09 from THR.0340 (the rounds of 2026-10-05 and 2026-10-07) and the principal's word of 2026-10-09; the documentation part of `next-gen` moved into it; mined into intent 4.60 (POS.1450, POS.1080, POS.0930, POS.0950, REJ.0240 to REJ.0260, THR.0590) and solution design 0.4 (SOL.0460) the same day |
 
 ## Documents
@@ -102,7 +103,7 @@ are maintained by their owner. What the document is for lives where it
 is used (the index entry, the recipe). -->
 | Path | Library | Used by | Note |
 |---|---|---|---|
-| projects/lib-allwyn/sources/fork-brd/ (bundle, its 00-INDEX.md) | lib-allwyn | sources/00-INDEX.md; the research of the BRD layer of 2026-10-13 | private: names, company content, the group's internal standard |
+| projects/lib-allwyn/sources/fork-brd/ (bundle, its 00-INDEX.md) | lib-allwyn | sources/00-INDEX.md; the research of the BRD layer of 2026-10-13; 00-brief-brd.md | private: names, company content, the group's internal standard |
 
 ## Research
 <!-- Registration only. Immutable dated notes written by /research (or
@@ -330,6 +331,9 @@ as `rejected`. -->
 | FND.1650 | low | conformance | resolved | 2026-10-14-check-light.md | lines for TBC.0040 and TBC.0030 under Waiting on principal (2026-10-14) |
 | FND.1660 | low | conformance | resolved | 2026-10-14-check-light-2.md | the Waiting line of POS.1530 says the operating layer is realised and the README re-rendered (2026-10-14) |
 | FND.1670 | low | conformance | resolved | 2026-10-14-check-light-3.md | the Waiting line of POS.1530 names recipe 0.66 (2026-10-14) |
+| FND.1690 | low | conformance | resolved | 2026-10-16-check-light.md | the Waiting line of THR.0360 says the brief `brd` was born and stands at 0.2 (2026-10-16) |
+| FND.1700 | low | conformance | resolved | 2026-10-16-check-light.md | `updated: 2026-10-16` (2026-10-16) |
+| FND.1710 | low | conformance | resolved | 2026-10-16-check-light.md | `00-brief-brd.md` added to the Used by of the `fork-brd` row (2026-10-16) |
 | FND.1680 | low | conformance | resolved | 2026-10-15-check-light.md | the bundle saved and pushed from lib-allwyn 2026-10-15 (commit 3366304); the clone that lacked it pulls |
 
 Four review files are named outside the convention — accepted as they
@@ -397,8 +401,8 @@ copy — CLAUDE.md, Ledger. -->
 - THR.0400 — a gate in front of the tools; the soft half done, the
   hard half open, nothing scheduled.
 - THR.0360 — a layer with an external audience, opened 2026-09-14;
-  worked in the brief `brd`, to be born (`/forge brief brd`) fast and
-  nearly alone, the principal's word of 2026-10-15.
+  worked in the brief `brd`, born 2026-10-16 and at 0.2 draft (the
+  Briefs row); its IDs being decided one at a time.
 - THR.0370 — Mermaid diagrams in Word; deferred 2026-09-12, open.
 - THR.0320 — a `harness` lens; decided in substance 2026-09-05,
   mechanism open, no priority.
