@@ -1,8 +1,8 @@
 ---
-version: 5.15
-date: 2026-10-17
+version: 5.20
+date: 2026-10-18
 status: draft
-last_change: 5.15 (2026-10-17): POS.1580 widened to the renders, one sentence per line everywhere.
+last_change: 5.20 (2026-10-18): the first release of the brief collaboration built on main in one stretch, the branch of DEC.0220 withdrawn (DEC.0230, THR.0620).
 project: forge
 audience: principal + Claude only
 ---
@@ -737,7 +737,9 @@ position that already stands elsewhere.
   read wherever the ledger's header was read (POS.0060, POS.0960). Why:
   once the ledger leaves git (POS.1600) they would have no home, and a
   library's repository is at its creation this file alone. Decided
-  2026-10-17 (brief `collaboration`).
+  2026-10-17 (brief `collaboration`). A fixture project, the test bed of
+  the forge's own tests (POS.1750), carries `fixture: true` in its
+  project file, and a bare `/save` skips it.
 - **POS.0970** A library is a project of kind `library` — no chain: a
   ledger, `sources/` and `research/` with their indexes,
   `recipes/readme.md` and the README it renders (POS.1000) — a
@@ -894,36 +896,41 @@ position that already stands elsewhere.
   metadata and no lifecycle; depth is capped at two levels. An ID keeps
   four digits as long as the number fits and takes a fifth only beyond
   9999 (`POS.10000`); no zero is added to an existing ID, and every
-  sorting of IDs is numeric by prefix and number. The next free number
-  is one neither used nor reserved (POS.1730). Why: a prefix has 99
-  hundreds, the engine's POS stand past 1500 after two months, and
-  reservations by the hundred spend them faster than use; the widening
-  costs less before the reservations than after. Decided 2026-10-17.
-- **POS.1730** An ID on a branch comes from a block reserved through git
-  itself: a reservation file, `ids.md`, in the project's root on main,
-  one line per block ("THR 0700 to 0790: branch, author"), immutable
-  lines of way 2; one hundred per prefix, the nearest free hundred,
-  reserved on demand, the first THR a branch needs reserving a hundred
-  of THR, so that the space is consumed by use and not by the number of
-  branches. The reservation happens at the reflection before the write,
-  which already knows which prefixes the round brings new items for,
-  never inside the write step: a write is one per round on confirmation,
-  and a network that drops inside it would fail the whole round. It is
-  written to main without a checkout, and the push is the
-  compare-and-swap, so two people never hold the same block; a branch
-  without a reservation allocates no new ID until one has happened; a
-  project without an origin needs none; after a reservation the local
-  main is behind its origin, which is true and surprises nobody told;
-  where main is protected against a direct push the reservation does not
-  work, a known limit. Blocks are never released: a group born on a
-  branch keeps its hundred, and after the landing main adds to it by
-  overflow anywhere, so "group = hundred" no longer reads for groups
-  from branches, acceptable. The next free number is one neither used
-  nor reserved (POS.0220); a project without the file reads as no
-  reservations; a check on main reports an overlap. Why: it closes the
-  last hole of POS.1110, and until then the ledger script at least
-  reports a collision. Alternatives: REJ.0270. Decided 2026-10-17 (brief
-  `collaboration`).
+  sorting of IDs is numeric by prefix and number. Where a project has ID
+  blocks, the next free number is the next in the author's block
+  (POS.1730). Why: a prefix has 99 hundreds, the engine's POS stand past
+  1500 after two months, and reservations by the hundred spend them
+  faster than use; the widening costs less before the reservations than
+  after. Decided 2026-10-17.
+- **POS.1730** An ID on a branch comes from a block of its author.
+  `ids.md` in the project's root on main, one line per block ("THR 1000
+  to 1990: <author>"), immutable lines of way 2, a thousand per prefix
+  (a hundred IDs at the step of ten), assigned once by hand by the
+  integrator (POS.1770) through an ordinary round and `/save`, the
+  contributor having it after `/pull`; no network at the reflection,
+  works offline and on a protected main. Everyone writes from his own
+  block, the integrator too: the next free number is the next in my
+  block, groups by hundreds hold inside the block, and the competition
+  for a number between main and the branches disappears. Blocks are
+  assigned above the highest number used by that prefix outside a block,
+  and the overlap check reports a block over a used number as it reports
+  a block over a block; two concurrent hand assignments are settled by
+  the driver (immutable lines, union) and by that check. A project
+  without `ids.md`, one author or the engine, runs as today, from the
+  sequence. The author of a block is an exact key: `/setup` writes
+  `author: <handle>` into `CLAUDE.local.md`, the same string the author
+  column of a history carries, and `ids.md` keys on it; where `ids.md`
+  exists and no block matches the handle, the write step refuses the
+  allocation and names the fix, and never falls back to the sequence,
+  which would reopen the hole of POS.1110. Why: it closes the last hole
+  of POS.1110 without a push to main, which a protected main refuses,
+  and without the network inside a round (CHL.0260). Alternatives:
+  REJ.0270, REJ.0320. Decided 2026-10-17 (brief `collaboration`; the
+  blocks per author on CHL.0260,
+  `sources/architect-challenge-review.md`,
+  `sources/architect-challenge-review-2.md`). Built when a second author
+  writes into a project; until then the blocks change nothing, and the
+  conversion does not wait for them (DEC.0220).
 - **POS.0230** Prefix vocabulary, aligned with the group BRD standard
   where an equivalent exists: REQ, OOS, CON, ASM, DEL, TBC, SCR in the
   assignment; POS, THR, REJ, FCT in the intent; FND, CHL, DEC
@@ -1082,13 +1089,17 @@ position that already stands elsewhere.
   conversation does not, and `/end` says what that is (POS.1500);
   `/ledger` re-orients from the ledger. One project per session is the
   hygienic default.
-- **POS.0820** Artefacts do not expire with the conventions.
-  Conventions evolve continuously and `/check` measures against the
-  current ones — but an artefact remains valid under the conventions
-  it was written to: nonconformance of a finished or dormant project
-  is a fact to report, never a defect to chase. Bringing a project
-  to newer conventions is an explicit migration decision of the
-  principal, made per project and never assumed.
+- **POS.0820** Artefacts do not expire with the conventions. Conventions
+  evolve continuously and `/check` measures against the current ones —
+  but an artefact remains valid under the conventions it was written to:
+  nonconformance of a finished or dormant project is a fact to report,
+  never a defect to chase. Bringing a project to newer conventions is an
+  explicit migration decision of the principal, made per project and
+  never assumed. After an upgrade of the engine that changes the shape
+  of files, taken on the user's word (POS.0940), a project of the old
+  shape is read, not written, until he migrates it (POS.1740): the
+  engine cannot write two shapes, and the migration stays his decision
+  per project (CHL.0300). Narrowed 2026-10-17.
 
 - **POS.1510** The history of one item is read through one command,
   `/history <ID> [slug]`: a script gathers what the project holds of the
@@ -1129,18 +1140,29 @@ position that already stands elsewhere.
   Markdown and proves its result by comparing pandoc's syntax tree of
   every file before and after; and `/check` carries a light rule that a
   line does not carry two sentences, approximate, since without a check
-  the reflow returns at the first larger round. Decided 2026-10-17
-  (brief `collaboration`; the conversion THR.0690).
+  the reflow returns at the first larger round. The conversion is a
+  release of its own, the third of the brief's, before the blocks of
+  IDs, which wait for a second author (DEC.0220), at a moment when
+  nothing is in flight, since it is the one irreversible change that
+  reaches every line of every project and every fork and its gain is
+  diff and blame, not merging (CHL.0320, DEC.0210); the hash of the
+  conversion commit goes into `.git-blame-ignore-revs`, which git's
+  `blame.ignoreRevsFile` and GitHub honour, so that blame does not point
+  at the conversion. Decided 2026-10-17 (brief `collaboration`; the
+  conversion THR.0690; the order DEC.0210).
 - **POS.1600** The ledger is made at read time and is not kept in git: a
   script builds it from the documents, the file is gitignored, and the
-  map, `/ledger`, `/end` and the checks call the script. The script
-  exits with an error over an unparsable file and never silently drops a
-  row. Price: the ledger is not on the remote (POS.1650). Why: the
-  ledger was the one file present at every collision of two people or
-  two windows on one project, since every operation writes it; made at
-  read time it stops existing as a thing to merge, and merge requests on
-  the server stop conflicting on it. Decided 2026-10-17 (brief
-  `collaboration`).
+  map, `/ledger`, `/end` and the checks call the script. An unparsable
+  file is a finding, not a crash: the row drops aloud, the ledger's
+  header says what was not parsed, the light check reports it, and
+  `/save` commits and pushes on, since checks inform and the save is
+  what does not lose work (prime directive 5); the script tolerates the
+  shape one release back, as the driver does (CHL.0280). Price: the
+  ledger is not on the remote (POS.1650). Why: the ledger was the one
+  file present at every collision of two people or two windows on one
+  project, since every operation writes it; made at read time it stops
+  existing as a thing to merge, and merge requests on the server stop
+  conflicting on it. Decided 2026-10-17 (brief `collaboration`).
 - **POS.1610** What only the ledger knew lives in records, never in a
   header field, so that a branch can write it; a record stands in the
   history of the document that changed. The mining of a brief and its
@@ -1203,21 +1225,24 @@ position that already stands elsewhere.
   versioned document with `+` records, and the version of each record is
   computed at read time from the next `landed` after it. The landing is
   done by the first `/save` or `/release` on main that finds `+`
-  records; the merge itself stays a person's. The write step on main
-  refuses to write a document while its history holds unlanded `+`
-  records, "land first", per document, so a landing always precedes a
-  round and the attribution holds. An approval is an act on main: an
-  approved artefact with `+` records on a branch is reported as "5.0
-  with N unlanded records", its header says nothing of it, and "integer
-  = approved" holds without exception. On main a round is a landing, so
-  prime directive 9 keeps its wording; one version per landing holds for
-  branches. The driver's order keeps the attribution right (POS.1670).
-  Two clones on main at the same time are not covered: concurrent work
-  is a branch, two clones on main are sequential, and where it happens
-  anyway the script reports two versions with one number. Why: the
-  version conflict disappears when two branches touch the same artefact,
-  without an exception to the append-only history. Decided 2026-10-17
-  (brief `collaboration`).
+  records; the merge itself stays a person's. On main, while a history
+  carries unlanded `+` records, every new record of that history carries
+  `+` too and lands with them; the landing is the first act of the save,
+  before the add, so after the check whose settlement writes `closed`
+  records; a round on main in that window joins the landing, one version
+  per landing as on a branch, and the attribution holds, since every `+`
+  record precedes the `landed` that follows (CHL.0360). An approval is
+  an act on main: an approved artefact with `+` records on a branch is
+  reported as "5.0 with N unlanded records", its header says nothing of
+  it, and "integer = approved" holds without exception. On main a round
+  is a landing, so prime directive 9 keeps its wording; one version per
+  landing holds for branches. The driver's order keeps the attribution
+  right (POS.1670). Two clones on main at the same time are not covered:
+  concurrent work is a branch, two clones on main are sequential, and
+  where it happens anyway the script reports two versions with one
+  number. Why: the version conflict disappears when two branches touch
+  the same artefact, without an exception to the append-only history.
+  Decided 2026-10-17 (brief `collaboration`).
 
 ### Review
 - **POS.0400** Isolated kinds of review of one shape: the critic
@@ -1245,7 +1270,15 @@ position that already stands elsewhere.
   of essences, not of texts. A target narrows `clarity` to that artefact
   and `essence` to that artefact against its parent — a transition is
   addressed by its downstream artefact, since every layer has exactly
-  one parent, so no arrow is ever typed. Decided 2026-09-03.
+  one parent, so no arrow is ever typed. Decided 2026-09-03. The target
+  may also be any file of the project, named by its path (`/critique
+  <lens> <path>`): the critic reads it with the chain around it, a work
+  product with its specification, and the report names the file; where
+  the file gives the lens nothing to work on, the report says so and
+  carries nothing else. Why: what Claude composes and the principal
+  judges, a work product above all, deserves the isolated look as much
+  as the chain; the cost is a report that sometimes says there was
+  nothing to find. Widened 2026-10-17.
 - **POS.0420** `/challenge <persona> [artefact]` reviews the thinking
   through a chosen persona — one isolated agent per persona
   (`challenger-<persona>`), each defined by the blind spots it exists to
@@ -1269,7 +1302,15 @@ position that already stands elsewhere.
   when first needed, and only where their blind spots genuinely differ:
   personas that would say the same things in different words are noise.
   Bare `/challenge` lists the roster and recommends a fit for the
-  project's subject.
+  project's subject. The target may also be any file of the project,
+  named by its path (`/challenge <persona> <path>`): the challenger
+  reads it with the chain around it, a work product with its
+  specification, and the report names the file; where the file gives the
+  persona nothing to work on, the report says so and carries nothing
+  else. Why: what Claude composes and the principal judges, a work
+  product above all, deserves the isolated look as much as the chain;
+  the cost is a report that sometimes says there was nothing to find.
+  Widened 2026-10-17.
 - **POS.1120** The shared behaviour of a kind of reviewer is a contract,
   written once — never a copy. Each kind — the critic, the challenger,
   check (POS.0540), whatever comes after — owns one contract, and every
@@ -1279,13 +1320,13 @@ position that already stands elsewhere.
   stay in each contract in its own words — three contracts and no common
   one, reopened only if a fourth kind repeats them. A contract is
   addressed to every lens of its kind, never a template with
-  placeholders. The contract owns conduct, subject, way of working,
-  report shape and ledger step; the lens file owns what it reads, what
-  it goes after, its categories and its own report sections; a lens is a
-  specialisation, never a replacement: it may make a rule stricter,
-  never rename, drop or duplicate one; the protocol changes in the
-  contract. The contract never names a lens; the lens file does. Decided
-  2026-09-06.
+  placeholders. The contract owns conduct, subject, way of working and
+  report shape; the filing, the IDs and the ledger row are the command's
+  (POS.1140); the lens file owns what it reads, what it goes after, its
+  categories and its own report sections; a lens is a specialisation,
+  never a replacement: it may make a rule stricter, never rename, drop
+  or duplicate one; the protocol changes in the contract. The contract
+  never names a lens; the lens file does. Decided 2026-09-06.
 - **POS.0430** Nothing blocks. There are no hard quality gates;
   checklists and findings are advisory and the principal alone decides
   what is published.
@@ -1410,20 +1451,20 @@ position that already stands elsewhere.
 - **POS.1110** Branches are voluntary and belong to git. Whoever wants
   one gets it through one forge command — `forge-branch <name>` creates
   the branch or switches to it, `forge-branch main` switches back — and
-  never types git; merge and conflicts stay git's, by hand or by merge
-  request; the one rebase the forge does is `/save`'s, the user's own
-  commits onto the remote (POS.1490); and `forge-status` reports the
-  current branch. Nothing forces a branch: whoever does not use them
-  works on `main`, saves and now and then releases, and sees none of
-  this. What the forge knows of a merge is the four ways of merging it
-  tells git (POS.1560) and the landing (POS.1660); the hole of two
-  branches taking the same ID is closed by POS.1730. The boundary
-  against the wrapper of git the principal does not want: the script
-  does creation and switching, which only change where the next commit
-  lands, and nothing that rewrites history. Several people on one
-  project are several branches or clones of its repository, each in his
-  own instance (POS.1750; the multi-principal chain THR.0090). Decided
-  2026-09-05 with POS.1100.
+  never types git; a merge is git's, through `/merge` on the user's
+  word, its conflicts settled in a walkthrough (POS.1760); the one
+  rebase the forge does is `/save`'s, the user's own commits onto the
+  remote (POS.1490); and `forge-status` reports the current branch.
+  Nothing forces a branch: whoever does not use them works on `main`,
+  saves and now and then releases, and sees none of this. What the forge
+  knows of a merge is the four ways of merging it tells git (POS.1560)
+  and the landing (POS.1660); the hole of two branches taking the same
+  ID is closed by POS.1730. The boundary against the wrapper of git the
+  principal does not want: the script does creation and switching, which
+  only change where the next commit lands, and nothing that rewrites
+  history. Several people on one project are several branches or clones
+  of its repository, each in his own instance (POS.1750; the
+  multi-principal chain THR.0090). Decided 2026-09-05 with POS.1100.
 - **POS.1560** Every file of a project has one of four ways of merging,
   and the forge tells git which one. The forge still never merges, pulls
   or rebases on its own judgement (POS.1490, POS.1110). Way 1, composed
@@ -1481,9 +1522,14 @@ position that already stands elsewhere.
   of the engine: way 2 on the record files, `merge=ours` on the renders,
   the documentation, the state render and the published companions,
   `binary` on the published files; `/new-project` creates it, `/check
-  project` reports a project without it, and the engine carries the same
-  patterns with its own project's prefix. Neither `ours` nor the driver
-  is built into git: `/setup` registers both in the global configuration
+  project` reports a project without it, and the engine carries a list
+  of its own, since its way-3 files lie at its root: the record files
+  under `projects/forge/`, and `README.md`, `RELEASE-NOTES.md`,
+  `CONTRIBUTING.md` and `docs/` at the root (CHL.0350). `forge-save`
+  pulls by merge, never by rebase, when a merge commit is among the
+  commits to push, since a rebase would drop it (CHL.0340); the rebase
+  stays for one's own linear commits. Neither `ours` nor the driver is
+  built into git: `/setup` registers both in the global configuration
   once for every repository of the machine, with the rebase backend that
   honours drivers and with renormalisation, and the status report says
   when the registration is missing or points nowhere, because an
@@ -1495,9 +1541,10 @@ position that already stands elsewhere.
   never merges with a driver: two people who both append to any history
   or to the decisions will always have a conflicting merge request
   there; the forge's path is a branch, `/save` (a rebase with the
-  driver), a local merge into main, `/save`, and `/pull` says so at the
-  state diverged; a merge request is a tool for reading, not for
-  merging. Decided 2026-10-17 (brief `collaboration`).
+  driver), `/merge` into main (POS.1760) and `/save`, in the roles of
+  POS.1770, and `/pull` says so at the state diverged; a merge request
+  is a tool for reading, not for merging. Decided 2026-10-17 (brief
+  `collaboration`).
 - **POS.1700** Two windows of one person take a slug: a bare `/save` is
   for one window, since it commits every repository with changes, the
   other window's half-written work included. On two projects the windows
@@ -1527,8 +1574,12 @@ position that already stands elsewhere.
   round (POS.1730). `/save` pushes a clean repository that is ahead of
   its origin, so that a rebase finished by hand has a door to the push;
   a rebase that conflicts is aborted by `/save` and finished by a person
-  through git, step by step and beginning anew. Decided 2026-10-17
-  (brief `collaboration`).
+  through git, step by step and beginning anew. A release, the
+  documentation and a publish, everything that makes files of way 3 on
+  main, refuse a repository that is behind or diverged, since
+  `merge=ours` turns round in the rebase of `/save`: a fresh README
+  would silently lose to an older one and a major's tag mark a wrong
+  state (CHL.0290). Decided 2026-10-17 (brief `collaboration`).
 - **POS.1740** A release that changes the shape of files comes with a
   migration, run always on the user's word: `/migrate [slug]`, one
   command, a script for every deterministic step and Claude within the
@@ -1537,20 +1588,34 @@ position that already stands elsewhere.
   of marks, one per step, never by an engine version in the project, and
   runs only the steps that are missing; each step verifies itself and an
   unfinished project is reported; it commits nothing, `/save` follows;
-  it undoes from its own manifest, since a restore from the index would
-  undo neither what it created nor what it took out of the index, and
-  `git clean` stays forbidden. It refuses to run when the repository is
-  not clean, is behind its origin or is not on main: the migration is
-  one large change and runs once, on one clone; everyone else pulls
-  before working on. The registration of the drivers is `/setup`'s on
-  every machine, not the project's. After a pull of the engine, Action
-  required says to run it on every project, on one clone, then `/save`;
-  the map, `/check project` and every skill that would write into a
-  project of the old shape say "shape before the migration, run
-  `/migrate`" and do not write. Why: the position on upgrades (POS.0940)
-  was made for upgrades of a few lines; this one rewrites files of every
-  project, here and in every colleague's clone, and must come out the
-  same everywhere. Decided 2026-10-17 (brief `collaboration`).
+  it undoes a changed tracked file from the index, since it stages
+  nothing, and the created files and the removals from the index from
+  its own manifest; `git clean` stays forbidden. Before it applies, it
+  looks at the origin, lists the branches not merged into main and
+  refuses until they are landed or knowingly given up, since the
+  conversion to one sentence per line changes every line and an open
+  branch would conflict on every paragraph; a tool that rewrites a
+  branch's commits with the conversion applied and rebases it onto the
+  converted main is bounded work for later, until then every branch is
+  landed or given up before the conversion's release, forks of the
+  engine the same, a known limit (CHL.0270). It refuses to run when the
+  repository is not clean, is behind its origin or is not on main: the
+  migration is one large change and runs once, on one clone; everyone
+  else pulls before working on. The registration of the drivers is
+  `/setup`'s on every machine, not the project's. After a pull of the
+  engine, Action required says to run it on every project, on one clone,
+  then `/save`; the map, `/check project` and every skill that would
+  write into a project of the old shape say "shape before the migration,
+  run `/migrate`" and do not write. Why: the position on upgrades
+  (POS.0940) was made for upgrades of a few lines; this one rewrites
+  files of every project, here and in every colleague's clone, and must
+  come out the same everywhere. Decided 2026-10-17 (brief
+  `collaboration`). The tag before a migration is taken per project
+  immediately before its `/migrate`, the engine's before its own; the
+  way back is the principal's hand through git, a reset and a forced
+  push or a revert, on a protected main a maintainer's, and always the
+  engine and every project together, since the engine refuses the old
+  shape once released (CHL.0420).
 - **POS.1750** What the forge promises: on the clone, at a local merge
   and at the rebase of `/save`, the record files merge by themselves,
   the derived state is made anew at read time, and the threads and the
@@ -1558,9 +1623,71 @@ position that already stands elsewhere.
   sentence; two windows of one person are two working trees on one
   project, two repositories on two, and `/save` with a slug in both; two
   clones on main are sequential; a merge request on the server is for
-  reading. The order in which it is built is a plan and lives in
-  THR.0620; verified on a throwaway clone by four tests (THR.0650).
-  Decided 2026-10-17 (brief `collaboration`).
+  reading; the roles are POS.1770's. The order in which it is built is a
+  plan and lives in THR.0620; verified on a throwaway clone by four
+  tests after the releases and three before them: `ours` under rebase
+  before the first, a stub driver under rebase before the second, and
+  the ledger script run dry over every project of today and diffed
+  against the hand-kept ledger before the first (THR.0650; CHL.0270,
+  CHL.0280). Decided 2026-10-17 (brief `collaboration`). A test before a
+  release that is red stops it: back to the design, the TBC open, the
+  release does not run (CHL.0410). The fixture of the tests is a project
+  of the forge, made by a script and driven by the forge's commands
+  (POS.1590, CHL.0380).
+- **POS.1760** A merge is git's, through the forge's door, on the user's
+  word. `/merge` has two directions: `/merge <branch>` on main merges
+  the branch into main, `/merge main` on a branch merges main into the
+  branch, the direction the driver's ordering rule is written for
+  (POS.1670) and a long branch needs as it goes. The source: main is
+  `origin/main` after a fetch, since a contributor's local main may be
+  stale; the branch is the local one where it exists locally, a worktree
+  or a project without an origin, else `origin/<branch>` after a fetch;
+  a fast-forward allowed. The driver merges the record files by itself,
+  and what remains in conflict is by definition the legitimate case, the
+  same item or sentence changed on both sides, or a breach of an
+  immutable unit; those conflicts are worked in a walkthrough, one
+  conflict one question, the principal's verdict, Claude writing the
+  chosen wording, since the conflict markers are text in a Markdown
+  file, and the verdict on every conflict of an artefact is a `changed`
+  record in its history, or in the intent's for a thread, as every
+  change of a thread is: the subject the item, the reason "merge of
+  <branch>" with why, `Was` the other wording, the version token `+`,
+  since it belongs to the landing under way (POS.1660). The script
+  stages and commits on his confirmation and ends with the push, as a
+  release does; a refused push is met by a merge of `origin/main` into
+  main with the driver and a walkthrough where needed, never by a
+  rebase, since a rebase drops a merge commit and replays the branch's
+  commits one by one. It refuses a repository that is behind or diverged
+  before it starts. `forge-branch --done <name>` ends a merged branch on
+  the clone: it removes its worktree and deletes the local branch, git
+  itself refusing an unmerged one; the branch on the origin stays, it
+  belongs to whoever pushed it. rerere is set as a convenience, not a
+  mechanism: it keys on one automerge, which a replay never repeats.
+  Nothing of it is a merge on the forge's judgement: it is elicitation
+  over a conflict, the mechanism the forge has for every decision. Why:
+  the design had left the local merge as the one step outside the forge
+  while taking the server merge away, a dealbreaker for an analyst who
+  does not type git (CHL.0250); REJ.0170 rejected a fixed working branch
+  with a switch that merges, not a merge of a named branch on the word;
+  one direction and one source decided the one-person case silently
+  (CHL.0310); a resolution without a record would have been the one
+  content change outside the log (CHL.0330); rerere was called
+  load-bearing and is not (CHL.0340). Whether `/save` takes the same
+  path in place of aborting a conflicting rebase is THR.0700. Decided
+  2026-10-17 (`sources/architect-challenge-review.md`, `-2.md`,
+  `-3.md`).
+- **POS.1770** One integrator and N contributors. A hosted project's
+  main is protected by default, on GitLab push and merge are the
+  maintainers', so the work of several people on one project has a
+  stated model: a contributor works on a branch and saves it, `/save`
+  pushing the branch; the integrator, a maintainer and typically the
+  principal, merges it locally through `/merge` with the driver and
+  saves on main; a merge request on the server is for reading. Why: the
+  design had assumed a push to main by everyone, which the default
+  protection refuses (CHL.0260); the model is consistent with a forge
+  built around the principal and removes every need to write to main
+  from a branch. Decided 2026-10-17 (CHL.0260,
+  `sources/architect-challenge-review.md`).
 - **POS.0580** Work on the chain is invoked by target state, never by
   verb: `/forge <state>` (`/forge intent`, `/forge assignment`) —
   knowing the name of the target artefact is knowing the command, with
@@ -1640,14 +1767,14 @@ position that already stands elsewhere.
   origin and say it as a fact: up to date, behind, ahead, diverged, no
   origin. Each state has one offer: behind and clean, `/pull`; behind
   with unsaved work, `/save` first; ahead, `/save`; diverged, the user
-  merges by hand or lets `/save` rebase his commits onto the remote, and
-  nothing is pulled until he has. The user knows and decides; the forge
-  runs none of it unasked. Why: the principal works on more than one
-  machine, so a clone behind its origin is the normal case and a map
-  drawn from it is a map of the wrong state; and a pull or a merge made
-  on Claude's judgement would be work done without the principal's word
-  (POS.1460). The state is the map's last word (POS.1710). Decided
-  2026-10-11 (THR.0490).
+  merges through `/merge` (POS.1760) or lets `/save` rebase his commits
+  onto the remote, and nothing is pulled until he has. The user knows
+  and decides; the forge runs none of it unasked. Why: the principal
+  works on more than one machine, so a clone behind its origin is the
+  normal case and a map drawn from it is a map of the wrong state; and a
+  pull or a merge made on Claude's judgement would be work done without
+  the principal's word (POS.1460). The state is the map's last word
+  (POS.1710). Decided 2026-10-11 (THR.0490).
 - **POS.1500** A session ends with `/end`: it says what lives only in
   the conversation and would be lost - an unwritten round, carried
   verdicts, a promise - offers the write, reports every repository
@@ -1787,12 +1914,17 @@ position that already stands elsewhere.
   run that finds nothing files nothing. Reason: one mechanism for every
   reviewer. A finding without an ID has no place for its verdict, so a
   rejected one returns at the next run, and a user cannot tell why one
-  reviewer's findings are kept and another's are not. The session
-  gives the IDs and files the report, never the agent: the IDs of a
-  project's findings are given in one place, and a check that every
-  save runs would otherwise write into the project at every save
-  (reason given 2026-10-09). Present shape
-  2026-10-02; the `/research` point stays in THR.0290.
+  reviewer's findings are kept and another's are not. The session gives
+  the IDs and files the report, never the agent, for every kind of
+  reviewer alike, the critic and the challenger as the check: the IDs of
+  a project's findings and challenges are given in one place, a check
+  that every save runs would otherwise write into the project at every
+  save, and two reviewers run at once would otherwise take one ID and
+  write one ledger twice; the agent returns its report with its findings
+  unnumbered, the command numbers and files it, and reviewers of any
+  kind may therefore run in parallel (reason given 2026-10-09, widened
+  2026-10-17). Present shape 2026-10-02; the `/research` point stays in
+  THR.0290.
 - **POS.1190 The forge explains itself from its own definitions.** `/man
   [command|method]`, alias `/manual`, is the forge's manual — a reader,
   never a text of its own (POS.1070). Named after the Unix manual,
@@ -2271,6 +2403,12 @@ worked out by Claude; what Claude has worked out is never a FCT
   event log, and the splitting of directories in advance. Rejected
   2026-10-17: the records stay one file one line and merge by the driver
   (POS.1670); nothing is split before it hurts.
+- **REJ.0320** The reservation of ID blocks by a push onto origin/main
+  from a branch, by plumbing. Rejected 2026-10-17: a hosted main is
+  protected by default and refuses the push, and the network at the
+  reflection before a write is a dependency a round should not have
+  (CHL.0260); blocks per author assigned by hand need neither
+  (POS.1730).
 
 ## Candidate structure for the layer below
 

@@ -645,7 +645,8 @@ finding: a report is a public file, or may be quoted into one. Bare
 `/challenge`, `/critique` and `/check` list the roster — the
 `description` of each agent file — and recommend a fit. The critic
 and the challenger take an optional target, an artefact named as
-`/forge` names it, by its state file; without one, the whole chain. A check takes a project
+`/forge` names it, by its state file, or any file of the project by
+its path; without one, the whole chain. A check takes a project
 by its slug, or the engine.
 - **critic** (`/critique <lens> [artefact]`) — document quality, never
   substance. What each lens reads and goes after is its agent

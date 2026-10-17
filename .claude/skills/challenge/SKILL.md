@@ -1,6 +1,6 @@
 ---
 description: Run a challenger persona against the substance of any chain artefact — bare = persona roster
-argument-hint: "[persona] [artefact] [project-slug]"
+argument-hint: "[persona] [artefact|path] [project-slug]"
 ---
 
 Challenger personas live as `.claude/agents/challenger-<persona>.md` —
@@ -18,10 +18,10 @@ chooses the persona, passes the target and verifies the bookkeeping.
 `.claude/agents/challenger-*.md`) and recommend which fits the
 project's subject. A recommendation, never a gate.
 
-**`/challenge <persona> [artefact] [slug]` — run it.** The target is
-an artefact named as `/forge` names it (CLAUDE.md, Isolated
-reviewers); how it narrows the run is the contract's and the persona
-file's. Invoke the `challenger-<persona>`
+**`/challenge <persona> [artefact|path] [slug]` — run it.** The target
+is an artefact named as `/forge` names it, or any file of the project by
+its path (CLAUDE.md, Isolated reviewers); how it narrows the run is the
+contract's and the persona file's. Invoke the `challenger-<persona>`
 subagent on the project (infer it from context; if ambiguous, ask),
 naming the target artefact. Pass only the project path and the target,
 nothing else (CLAUDE.md, Isolated reviewers).

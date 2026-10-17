@@ -1,6 +1,6 @@
 ---
 description: Run a critic lens on the quality of a project's documents — bare = lens roster
-argument-hint: "[lens] [artefact] [project-slug]"
+argument-hint: "[lens] [artefact|path] [project-slug]"
 ---
 
 Critic lenses live as `.claude/agents/critic-<lens>.md` — one isolated
@@ -21,9 +21,10 @@ recommendation, never a gate. No lens runs at a save; what a release
 offers is `/release`'s (`.claude/skills/release/SKILL.md`); every run
 is the principal's word.
 
-**`/critique <lens> [artefact] [slug]` — run it.** The target is an
-artefact named as `/forge` names it (CLAUDE.md, Isolated reviewers);
-how it narrows the run is the lens file's. Invoke the `critic-<lens>`
+**`/critique <lens> [artefact|path] [slug]` — run it.** The target is an
+artefact named as `/forge` names it, or any file of the project by its
+path (CLAUDE.md, Isolated reviewers); how it narrows the run is the lens
+file's. Invoke the `critic-<lens>`
 subagent on the project (infer it from context; if ambiguous, ask),
 naming the target if given. Pass only the project path and the
 target, nothing else (CLAUDE.md, Isolated reviewers).

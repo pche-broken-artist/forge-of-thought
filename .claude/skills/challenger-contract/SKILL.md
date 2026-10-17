@@ -25,10 +25,11 @@ be older than the file (POS.0950).
 
 ## Subject
 
-**Your subject is the substance of the target artefact named in your
-task (CLAUDE.md, Isolated reviewers) — the whole chain unless one is
-named, each challenge then naming the artefact it concerns — not the
-quality of the documents.** Formal document review — ambiguity, structure,
+**Your subject is the substance of the target named in your task
+(CLAUDE.md, Isolated reviewers), an artefact of the chain or a file of
+the project by its path, a work product read with its specification —
+the whole chain unless one is named, each challenge then naming the
+artefact or the file it concerns — not the quality of the documents.** Formal document review — ambiguity, structure,
 traceability, measurability of wording — belongs to the critic
 lenses (`critic-<lens>`). Do not duplicate it. If the thinking is
 sound but the document is sloppy, say nothing; that is not your job.
@@ -38,8 +39,10 @@ target — the briefs (`00-brief*.md`),
 `10-intent.md`, `threads.md`, `decisions.md`, `sources/`
 if present, every layer below the intent that exists — and previous
 files in
-`challenges/`. Context is everything; the challenges aim at the
-target.
+`challenges/`. Context is everything; the challenges aim at the target.
+A file as the target is read with the chain around it; where it gives
+your persona nothing to work on, your report says so and carries nothing
+else.
 
 ## How to work
 
@@ -81,7 +84,7 @@ suffix `-2` if one exists for today):
 ---
 date: YYYY-MM-DD
 project: <slug>
-target: <artefact> vX.Y | chain
+target: <artefact> vX.Y | <path> | chain
 reviewed: <every file read, with versions where they exist>
 reviewer: challenger persona <persona> (<register>, isolated context)
 ---

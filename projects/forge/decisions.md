@@ -310,3 +310,74 @@ them here was THR.0070, resolved by DEC.0040 (no back-fill). -->
   from it. A marking of positions would add a mechanism for five
   cases in sixty versions.
 - **Date:** 2026-10-09
+
+## DEC.0210 — The order of the releases of the brief `collaboration` reversed: the conversion to one sentence per line last and on its own; the verdict "A2 first" overturned
+- **Decision:** The five releases run in the order of THR.0620, row 9:
+  the project file, the header, the ledger at read time, threads as
+  files, the attributes with `ours` and `binary`, the registration,
+  the unique names of reports and the migration first; the driver,
+  `/merge` and the worktree second; the version as a boundary third;
+  the blocks of IDs fourth; the conversion to one sentence per line
+  fifth, on its own, when nothing is in flight, with
+  `.git-blame-ignore-revs`. The verdict of the walkthrough of
+  2026-10-17 on the brief 0.6, "A2 in the first release, before C1",
+  is overturned.
+- **Reason:** CHL.0320 (`challenges/2026-10-17-challenge-architect-2.md`,
+  settled by `sources/architect-challenge-review-3.md`): the
+  conversion is the one irreversible change that reaches every line
+  of every project and every fork; its justification for merging, a
+  false conflict of neighbouring positions, was reasoning, never
+  observed, and its gain is diff and blame, not merging; the driver
+  removes three of the five evidenced collisions and costs no reflow.
+  Cutting the threads into files changes no lines and stays in the
+  first release. The earlier verdict was given without this evidence.
+- **Date:** 2026-10-17
+
+## DEC.0220 — Four releases of the brief `collaboration`: the version as a boundary joins the driver and `/merge`, the blocks of IDs wait for a second author, the first release is built on a branch of the engine; DEC.0210 changed in its order
+- **Decision:** The brief `collaboration` is built in four releases
+  (THR.0620, row 9; the plan `work/collaboration-cutover.md`): the
+  first the project file, the header, the ledger at read time,
+  threads as files, the attributes with `ours` and `binary`, the
+  registration, the unique names of reports and the migration; the
+  second, collaboration, the driver, `/merge`, the worktree and the
+  version as a boundary together; the third the conversion to one
+  sentence per line, on its own; the fourth the blocks of IDs, on
+  the trigger of a second author writing into a project, not in the
+  order. The first release is built on the engine's branch `r1` in a
+  second working tree, `../forge-of-thought@r1`, made by the
+  principal's hand once; the merge of the branch into main at its
+  end is the last manual git. DEC.0210 stands in that the conversion
+  is never first; its five releases become four.
+- **Reason:** CHL.0400 (`challenges/2026-10-17-challenge-architect-3.md`,
+  settled by `sources/cutover-challenge-review.md`): between a release
+  with branches and one with the version as a boundary, a round on a
+  branch raises the header as on main, every merge collides on the
+  version line, and the records of two rounds carry one version
+  number, which the boundary then reads as two versions with one
+  number, never renumbered; the two must ship together. CHL.0430:
+  the blocks of IDs change nothing until a second author exists and
+  the conversion does not depend on them. CHL.0370: the engine's
+  main is the public upgrade channel, and twenty-seven intermediate
+  states of a half-built engine do not belong on it; the branch
+  costs one tree made by hand and one manual merge.
+- **Date:** 2026-10-17
+
+## DEC.0230 — The first release of the brief `collaboration` is built on main, in one stretch; the branch of DEC.0220 withdrawn
+- **Decision:** The first release is built on `main`, in one stretch
+  of sittings, with no work on the projects between them and no pull
+  of the engine on the second machine until the release; the way
+  back is the tag `pre-r1` taken on `main` before the first building
+  commit, the return the principal's own git, the engine and every
+  project together (POS.1740). The branch `r1` and its second tree of
+  DEC.0220 are withdrawn; the rest of DEC.0220 stands.
+- **Reason:** The principal's word of 2026-10-18 on the architect's
+  fourth challenge (`challenges/2026-10-17-challenge-architect-4.md`,
+  CHL.0440 to CHL.0460): the branch was complexity for a risk he
+  controls. The engine's main is pulled today by his second machine
+  only; a stranger's clone of a half-built engine is a risk the
+  public repository carries anyway; and what a second tree would
+  protect, the daily work on the projects, is protected by not doing
+  it between the sittings. The branch's own consequences, the
+  engine's project branched with it, a release refused on a branch,
+  the throwaway clones without a home, cost more than the risk.
+- **Date:** 2026-10-18

@@ -2,7 +2,7 @@
 project: forge
 kind: thought
 language: en
-updated: 2026-10-17
+updated: 2026-10-18
 ---
 
 # Ledger — Forge of Thought
@@ -38,8 +38,8 @@ absorbed it; Note says what remains (partial) or the REJ (dropped). -->
 ## Documents
 | File | Version | Status | Date |
 |---|---|---|---|
-| 10-intent.md | 5.15 | draft | 2026-10-17 |
-| 40-solution-design.md | 0.18 | draft | 2026-10-17 |
+| 10-intent.md | 5.20 | draft | 2026-10-18 |
+| 40-solution-design.md | 0.22 | draft | 2026-10-18 |
 <!-- One row per layer below the intent, added when the layer is
 born; a layer the project does not have gets no row (CLAUDE.md,
 Ledger). -->
@@ -81,6 +81,7 @@ by a making; by hand — set on the principal's word when he has worked
 the file and does not want it remade. -->
 | File | Specification | Inputs | Made | State |
 |---|---|---|---|---|
+| work/collaboration-cutover.md | work/collaboration-cutover.spec.md v0.2 | 40-solution-design.md v0.20 (SOL.0670 to SOL.0820, SOL.0300, SOL.0330, TBC.0050 to TBC.0080), 10-intent.md v5.17 (POS.1560 to POS.1770, POS.1120, POS.1140), threads.md (THR.0620, THR.0650, THR.0690, THR.0700), decisions.md (DEC.0210), 00-brief-collaboration.md v0.8 (M) | 2026-10-17 | by hand |
 
 ## Sources
 <!-- Registration only. External inputs, immutable once registered.
@@ -106,6 +107,11 @@ of <original> | binary — one form per source. -->
 | mining-critique.md | 2026-10-17 | ingested | text |
 | design-critique.md | 2026-10-17 | ingested | text |
 | design-critique-2.md | 2026-10-17 | ingested | text |
+| architect-challenge-review.md | 2026-10-17 | ingested | text |
+| architect-challenge-review-2.md | 2026-10-17 | ingested | text |
+| architect-challenge-review-3.md | 2026-10-17 | ingested | text |
+| cutover-plan-critique.md | 2026-10-17 | ingested | text |
+| cutover-challenge-review.md | 2026-10-17 | ingested | text |
 
 ## Dependencies
 <!-- Registration only. Documents of other repositories this project
@@ -351,6 +357,8 @@ as `rejected`. -->
 | FND.1680 | low | conformance | resolved | 2026-10-15-check-light.md | the bundle saved and pushed from lib-allwyn 2026-10-15 (commit 3366304); the clone that lacked it pulls |
 | FND.1720 | low | conformance | resolved | 2026-10-17-check-light.md | the brief collaboration 0.6 puts eleven points to the principal, Waiting on principal did not cite it; the line added |
 | FND.1730 | low | conformance | resolved | 2026-10-17-check-light-2.md | TBC.0070 (the principal's, solution design 0.18) has no line under Waiting on principal; THR.0650's line does not carry the four tests of the brief collaboration (TBC.0050); both lines added |
+| FND.1740 | low | conformance | resolved | 2026-10-18-check-light.md | TBC.0010 of work/collaboration-cutover.spec.md (the principal's) has no line under Waiting on principal; the line added |
+| FND.1750 | low | conformance | resolved | 2026-10-18-check-light.md | the THR.0650 line says the four tests come after the first and the second release, the design at 0.22 says before the second, none after the first; the line brought to the design at 0.22 |
 
 Four review files are named outside the convention — accepted as they
 are by DEC.0140.
@@ -384,6 +392,31 @@ intent version for accepted, DEC.NNNN for rejected. -->
 | CHL.0220 | accepted | The test of a major tests the paper against the paper: nothing runs the engine, no check keeps the design true to the files, essence declined at both majors (major) | 2026-10-09-challenge-cto.md | intent 4.65 (POS.0300, THR.0600), as modified: the test attests the documents, the behavioural test is a thread, not before 5.0 |
 | CHL.0230 | rejected | The rules are written as walls and held as preferences, five exceptions on record, and a second user reading the documentation cannot tell which is which (major) | 2026-10-09-challenge-cto.md | DEC.0200 |
 | CHL.0240 | accepted | The intent's own Map is not walked for the forge: no recipient, objective or success criterion, the layer-below section stale, the chain positions unused since 2026-09-04 (minor) | 2026-10-09-challenge-cto.md | intent 4.65 (the closing section; the Map walked at the write of 5.0), as modified: no success criteria before 5.0, open in the brief `next-gen` |
+| CHL.0250 | accepted | The merge is the one step left outside the forge, and the design has just taken the server merge away: no door for the local merge into main, the fallback raw git the user types and Claude is denied (major; dealbreaker if the collaborators are analysts) | 2026-10-17-challenge-architect.md | accepted 2026-10-17: `/merge <branch>` through the forge's door, the conflicts in a walkthrough (POS.1760, SOL.0820; THR.0700 for `/save`) |
+| CHL.0260 | accepted | The reservation of IDs pushes to main, and main is protected by default on GitLab; TBC.0070 is the case, not a limit; a block per author assigned once was never weighed (major) | 2026-10-17-challenge-architect.md | accepted 2026-10-17: one integrator and N contributors (POS.1770), ID blocks per author assigned by hand (POS.1730, SOL.0790), the plumbing rejected (REJ.0320); TBC.0070 closed |
+| CHL.0270 | accepted | The migration reflows every line of prose and sees no branch, fork or clone in flight; --undo cannot undo the reflow; the release that carries it goes out before the four tests (major) | 2026-10-17-challenge-architect.md | accepted 2026-10-17: the migration refuses while branches are in flight, the undo from the index (POS.1740, SOL.0800), the tests before the releases (POS.1750, TBC.0050), the branch tool TBC.0080 |
+| CHL.0280 | accepted | The ledger script is a single point of failure for the map and the save, strict by rule, no degraded form, repair of a bad record a breach of append-only, and no word on what /save does when it fails (major) | 2026-10-17-challenge-architect.md | accepted 2026-10-17: the ledger script degrades aloud and tolerates one release back, `/save` saves on (POS.1600, SOL.0680, SOL.0530), the dry run before the first release (TBC.0050) |
+| CHL.0290 | accepted | merge=ours turns round in the rebase of /save: a release made on a clone that is behind tags the other person's older README silently (major) | 2026-10-17-challenge-architect.md | accepted 2026-10-17: a release, the documentation and a publish refuse a repository behind or diverged (POS.1710, SOL.0530, SOL.0460, SOL.0420) |
+| CHL.0300 | accepted | The design makes the migration a precondition of every write while POS.0820 says a migration is a per-project decision never assumed; the narrowing is not in the intent (minor) | 2026-10-17-challenge-architect.md | accepted 2026-10-17: POS.0820 narrowed with its reason, the old shape for reading until migrated |
+| CHL.0310 | accepted | The merge has one direction and one source: nothing brings main into a branch though the driver's ordering rule and a test are designed for it; /merge reads origin/<branch> only, so a local worktree branch on a project without an origin cannot be merged; a branch and its worktree have a birth and no end (major) | 2026-10-17-challenge-architect-2.md | accepted 2026-10-17: `/merge` in both directions, the source by where the branch lives, `forge-branch --done` (POS.1760, SOL.0820, SOL.0770) |
+| CHL.0320 | accepted | The first release is the one-way door and realises the least of the evidenced pain: the reflow and the threads, justified by a conflict the evidence does not contain, ride in it with "land first" and the blame reset; the driver, which removes three of the five evidenced collisions, waits in the second; the unique report names sit a release behind the branches (major) | 2026-10-17-challenge-architect-2.md | accepted 2026-10-17: the order of the releases reversed, the conversion last and on its own with a blame ignore-revs file, the unique names in the first (DEC.0210, POS.1580, THR.0620, SOL.0710, SOL.0810) |
+| CHL.0330 | accepted | The resolution of a conflict at /merge is the one content change without a record in the history that is the single primary; a driver's conflict is by construction a breach, and what the driver leaves in the file at a conflict is unspecified while the walkthrough assumes text markers (minor) | 2026-10-17-challenge-architect-2.md | accepted 2026-10-17: the verdict of a conflict as a `changed` record, the driver's conflict in standard markers with the base kept for an immutable unit (POS.1760, SOL.0820, SOL.0750) |
+| CHL.0340 | accepted | rerere is called the load-bearing mechanism of /merge, but a rebase drops the merge commit and git says the resolution must be re-applied; it matches for a one-commit branch only; the guard that holds is the refusal, or /merge pushing as its last step (minor) | 2026-10-17-challenge-architect-2.md | accepted 2026-10-17: rerere a convenience, `/merge` ending with the push and merging on refusal, `forge-save` pulling a merge commit by merge (POS.1760, POS.1690, SOL.0740, SOL.0530) |
+| CHL.0350 | accepted | The engine's .gitattributes with the prefix projects/forge/ misses every way-3 file the engine actually has: README, release notes, CONTRIBUTING and docs/ at the root get the text merge (minor) | 2026-10-17-challenge-architect-2.md | accepted 2026-10-17: the engine's own attribute list with its way-3 files at the root (POS.1690, SOL.0730) |
+| CHL.0360 | accepted | The landing's place in the save is stated three ways (first; inside forge-save before committing; after the light check), and one order deadlocks: a closed record written by the check's settlement into a history with + records meets "land first: /save" from inside /save (minor) | 2026-10-17-challenge-architect-2.md | accepted 2026-10-17: joining the landing in place of land first, the landing the first act of the save (POS.1660, SOL.0760, SOL.0530) |
+| CHL.0370 | accepted | The plan does not say where release 1 is built: on main the upgrade channel carries half-built states for the duration, on a branch there is one tree and the merge is raw git; the duration that decides is not priced (major) | 2026-10-17-challenge-architect-3.md | accepted 2026-10-17: the first release built on the engine's branch r1 in a second tree, six to eight sittings, one release (DEC.0220, THR.0620, the plan) |
+| CHL.0380 | accepted | The fixture is placed in tmp/, where no forge script resolves a repository; nine closings "on the fixture" and the four tests of THR.0650 cannot run there without raw git (major) | 2026-10-17-challenge-architect-3.md | accepted 2026-10-17: the fixture two projects made by a script, skipped by a bare save (SOL.0830, POS.1590, POS.1750) |
+| CHL.0390 | accepted | R1.19's refusal of the old shape lands four steps before R1.23 migrates the engine's own project, so Claude cannot write into it meanwhile; R1.22's checks cannot be clean by construction; ASM.0030 says first, the order says last (major) | 2026-10-17-challenge-architect-3.md | accepted 2026-10-17: the engine's project migrated right after the two scripts, the refusal the last code step, R1.22 dropped (the plan) |
+| CHL.0400 | accepted | Between release 2 and 3 a branch round still bumps the header, so every merge of a worked branch conflicts on version and its records read as two boundaries later; R2.06 files a content change as a state record; the second interval has no sentence as the first has (major) | 2026-10-17-challenge-architect-3.md | accepted 2026-10-17: the version as a boundary in the second release with the driver and /merge, four releases (DEC.0220, SOL.0760) |
+| CHL.0410 | accepted | Three closings cannot close as written: R1.09's diff against a hand-kept ledger known to differ, R5.01's byte-identical video, and the pre-release tests with no word for a red result (minor) | 2026-10-17-challenge-architect-3.md | accepted 2026-10-17: the pass of the dry run, the proof by the events file, the word for red (THR.0650, TBC.0050, POS.1750) |
+| CHL.0420 | accepted | The way back is a tag, walked only by git in a person's hand; a project cannot go back alone once the engine refuses its old shape; R1.26 tags every project before only one migrates (minor) | 2026-10-17-challenge-architect-3.md | accepted 2026-10-17: the tag per project before its migration, the way back said truthfully (POS.1740, SOL.0800) |
+| CHL.0430 | accepted | Release 4 realises nothing until a second author exists and release 5 waits behind it by ASM.0010, not by dependency; the plan marks no trigger and no dependency between releases (minor) | 2026-10-17-challenge-architect-3.md | accepted 2026-10-17: the blocks of IDs on the trigger of a second author, the dependencies marked (DEC.0220, POS.1730, the plan) |
+| CHL.0440 | obsolete | The branch branches the forge's own project: the merge of r1 into main is a merge across the migration unless main is frozen, and nothing freezes it (major) | 2026-10-17-challenge-architect-4.md | obsolete 2026-10-18: the branch withdrawn, the first release on main in one stretch (DEC.0230) |
+| CHL.0450 | obsolete | R1.24 runs /document and /release on the branch, where both refuse; merging first and releasing on main was not weighed (major) | 2026-10-17-challenge-architect-4.md | obsolete 2026-10-18: no release on a branch, the branch withdrawn (DEC.0230) |
+| CHL.0460 | obsolete | The second tree holds only projects/forge: the throwaway clones of every project have no stated home, and the home they will get carries the real origins (major) | 2026-10-17-challenge-architect-4.md | obsolete 2026-10-18: no second tree; the throwaway clones live under projects/ of the one tree as fixture-flagged projects (DEC.0230) |
+| CHL.0470 | accepted | The three gates that stop a release are placed before the parts they test, against the method's own rule (major) | 2026-10-17-challenge-architect-4.md | accepted 2026-10-18: each gate after what it tests, the fixture born in the old shape and migrated (the plan R1.00, R1.02, R2.01; SOL.0830, TBC.0050) |
+| CHL.0480 | accepted | R1.23 closes with a command built sixteen rows later and checks whose agents learn the new shape afterwards; the window the review called one step is seven rows (minor) | 2026-10-17-challenge-architect-4.md | accepted 2026-10-18: the header-reading scripts before the migration, the migration by the script directly, the checks at the release (the plan R1.10, R1.11, R1.23) |
+| CHL.0490 | accepted | Two parts of the design have no step (the state render, the Role before the write), and the tests disagree with TBC.0050 in both directions (minor) | 2026-10-17-challenge-architect-4.md | accepted 2026-10-18: the state render and the Role before the write as steps (R1.27, R1.28), the four tests before the second release, none after the first (R2.12, TBC.0050) |
 
 ## Waiting on principal
 <!-- What waits on the principal, one line per matter: cite, never
@@ -394,12 +427,15 @@ copy — CLAUDE.md, Ledger. -->
 - THR.0680 — a question put to the manual, `/man <free text>`;
   Claude's synthesis, to be built; opened 2026-10-15.
 - THR.0690 — the conversion to one sentence per line (POS.1580),
-  the first release of the brief collaboration; opened 2026-10-17.
+  the third release of the brief collaboration (DEC.0220); opened
+  2026-10-17.
+- THR.0700 — `/save` taking the conflict walkthrough of `/merge` in
+  place of aborting a rebase; not now; opened 2026-10-17.
 - TBC.0030 — the independent challengers of POS.0800, not built; open
   since solution design 0.1.
-- TBC.0070 — the reservation of IDs where main is protected against a
-  direct push; a decision when a project meets it; opened at solution
-  design 0.18.
+- TBC.0010 of `work/collaboration-cutover.spec.md` — whether
+  `single-source-of-truth` runs at every release of the plan or at the
+  first and the last; opened 2026-10-17.
 - a `strategy` artefact for the forge (`/new-artefact strategy`):
   tracked in the project ai-strategy (its work product
   `reconstruction`, TBC.0010) until the principal calls the command;
@@ -459,8 +495,8 @@ copy — CLAUDE.md, Ledger. -->
   it lives open; `/end` decided (POS.1500, intent 5.1).
 - THR.0650 — the test of forge-pull's new output and the states
   behind and diverged on a throwaway clone, deferred 2026-10-11; the
-  four tests of the brief `collaboration` (TBC.0050), after the first
-  and the second release.
+  four tests of the brief `collaboration` (TBC.0050) before the second
+  release, none after the first.
 - THR.0590 — what the documentation of a project other than the
   engine reads; opened 2026-10-09 (intent 4.60), after the first
   `/document <slug>` on a project.
