@@ -3,9 +3,9 @@ project: forge
 title: Work of several people, branches and windows on one project
 date: 2026-10-17
 author: PCHe
-version: 0.6
+version: 0.8
 status: draft
-last_change: 0.6 (2026-10-17): the fifth critique worked in (sources/merge-brief-critique-5.md): updated leaves the recipes too, the key of a reservation carries its prefix, a missing ids.md reads as no reservations, the closed record of an engine finding keeps the finding as its subject.
+last_change: 0.8 (2026-10-17): the sixth critique worked in (sources/merge-brief-critique-6.md): a worktree addressed as <slug>@<branch>, the write step never fetching, the manual rebase steps corrected, IDs four-digit until 9999 with a numeric sort, the order of releases against the steps of one run, the engine's second root; two windows on two projects need no worktree, only /save with a slug.
 ---
 
 <!-- Only this header is fixed; the text below it is free-form. The
@@ -97,13 +97,13 @@ space, since the HTML would differ in whitespace even when the
 conversion is right; and `/check` carries a light rule "a line does
 not carry two sentences" (approximate, abbreviations and IDs such as
 `POS.0590.` tolerated), because without a check the reflow returns
-at the first larger round. Recommended; it is the one part that can
-be deferred without harm to the others.
+at the first larger round. Decided 2026-10-17: in the first release,
+before C1, so that the threads are cut already in sentences.
 
 **B0. The project file.** `kind` and `language` live today only in
 the ledger's header, and a library's repository is at its creation
 the ledger alone; after B they would have no home. A small file in
-git, name to be decided (`project.md`), header `project`, `kind`,
+git, `project.md` (decided 2026-10-17), header `project`, `kind`,
 `language`, written once at the creation, way 1; read by
 forge-clone, `/import-project`, `/new-project`, `/forge`, `/recipe`
 and prime directive 6 in place of the ledger's header. Without it B
@@ -279,9 +279,10 @@ entry is written, so that Role is in the entry from its birth; a
 later correction of an index is normal operation and merges as a
 one-sided change (remark: the first critique's derivation of the
 research index was not taken, the notes stay untouched; the second
-critique's mutable blocks were taken over the principal's first word
-of immutable blocks, because a correction of a typo must not be a
-conflict and the driver has the mutable case for the map anyway).
+critique's mutable blocks were taken because a correction of a typo
+must not be a conflict and the driver has the mutable case for the
+map anyway; the principal's first word had been immutable blocks,
+decided mutable 2026-10-17).
 Value: the histories, the decisions, the indexes and the map stop
 halting a merge, and stay as they are.
 
@@ -331,13 +332,48 @@ people who both append to any history or to the decisions will
 always have a conflicting merge request there: the forge's path is a
 branch, `/save` (a rebase with the driver), a local merge into main,
 `/save`; a merge request is a tool for reading, not for merging. Two
-windows of one person are two working trees: `forge-branch <name>
---worktree` creates the branch and its own working tree, the second
-window opens in it; open: where that tree lies (a worktree inside
-`projects/` would read as another project, so outside it or by a
-pattern `<slug>@<branch>` the engine maps to the slug) and the fact
-that a worktree's `.git` is a file, which forge_repos does not
-recognise today.
+windows of one person on two projects collide nowhere: each project
+is a repository of its own, and the one thing that touches both is a
+bare `/save`, which commits every repository with changes, the other
+window's half-written work included, so in that mode `/save` takes a
+slug. Two windows on one project are two working trees:
+`forge-branch <name> --worktree` creates the branch and its own
+working tree, the second window opens in it. The tree lies at
+`projects/<slug>@<branch>/` (decided 2026-10-17): inside the one
+tree the forge knows and gitignores. Both windows run from the
+engine's root with the same cwd, so the tree is named by the slug,
+never read from the cwd: `<slug>@<branch>` is the slug of the second
+tree for every command (`/save platform@rework`,
+`/forge platform@rework`), the bare slug is `projects/<slug>`, the
+map says "platform, branch rework", and forge-save without a slug
+visits both trees. The one exception is the engine itself, whose
+project lives in the engine's repository, so its second tree is a
+second root beside it, `../forge-of-thought@<branch>/`, and the
+second window opens in that root; it carries in `projects/` only
+`projects/forge`, since the engine gitignores every other project, a
+property to know, not a defect. forge_repos recognises a worktree's
+`.git`, which is a file, not a directory.
+
+The path through git, from the collision at the save of 0.6 on
+2026-10-17 (the ledger on both sides, a double FND.1690): the map
+`/forge` ends with the state of every repository against its origin
+and that state's offer, as its last word, since the map runs over
+several screens and the state is its key message; a state "behind"
+is a recommendation to pull before anything is written into the
+project, because a rebase over a foreign commit in the ledger is
+exactly the collision this brief is about. The reflection before a
+write reads that state from the last `forge-status --remote`, where
+it also makes the reservation (F2), and `/save` reads it itself; the
+write step never fetches, it only repeats the state the reflection
+knew, and an unknown or stale state never blocks a write, since F2
+drove the network out of the write so that an outage cannot spoil
+the round. forge-save pushes a clean repository that is ahead of its
+origin (today it stops at "nothing to save"), so that a rebase
+finished by hand has a door to the push. forge-save aborts a rebase
+that conflicts, so finishing one stays a person's work through git,
+step by step and beginning anew: `git pull --rebase`, resolve, add,
+`rebase --continue` (a merge instead ends in a commit and has no
+continue), then the push through forge-save.
 
 **E. Unique names of reports.** A second run on the same day gets,
 instead of `-2`, the time to the minute and four hex characters of a
@@ -390,15 +426,21 @@ reads as no reservations, for the allocation and for the driver
 alike, so M does not create it. A check on main reports an overlap.
 Hash IDs change
 the scheme and lazy IDs rewrite the whole branch; neither. Five
-digits are another matter, recommended now (remark: 0.3 refused them
-as a widening of the scheme; the numbers put on the table changed
-the recommendation): POS of the engine stands at 1550 after two
+digits are another matter, decided 2026-10-17 (remark: 0.3 refused
+them as a widening of the scheme; the numbers put on the table
+changed the recommendation): POS of the engine stands at 1550 after two
 months, a prefix has 99 hundreds, and reservations by the hundred
-spend them faster than use; `\d{4,5}` keeps every old ID valid, and
-the scope is known: 15 files, two of them code (forge-history,
-docs_map), the rest the text `NNNN` in CLAUDE.md, eight templates
-and four skills, all of it M's; it costs less now, before the
-reservations, than after. Value: it closes the last hole of
+spend them faster than use. The shape: an ID keeps four digits as
+long as the number fits, no zero is added (`POS.0010` stays
+`POS.0010`, the next ID after `POS.1550` is `POS.1560`), and the
+fifth digit comes only beyond 9999 (`POS.10000`); the scripts read
+both, `\d{4,5}` keeps every old ID valid, and every sorting of IDs
+in the scripts is numeric by (prefix, number), since as a string
+`POS.10000` comes before `POS.9990`. The scope is known: 15 files,
+two of them code (forge-history, docs_map), the rest the text `NNNN`
+in CLAUDE.md, eight templates and four skills, all of it M's; it
+costs less now, before the reservations, than after, and no
+existing ID or example changes. Value: it closes the last hole of
 POS.1110. It is the last part, because until then the ledger script
 at least reports a collision.
 
@@ -438,13 +480,21 @@ flow-ba `10-intent.threads.md`, cut by `- **THR.NNNN**` into files,
 guesses printed for review, default the principal), D (the
 `.gitattributes` from the template, for the engine with its prefix),
 then A2 where it holds (the conversion with the syntax-tree check),
-and at the end `/check light` and `/check project`. For a library
+and at the end `/check light` and `/check project`; this is the
+order of the steps of one run, not the order of the releases below,
+and the conversion goes last so that it walks the threads already
+cut into files. For a library
 only A, B0, B and D. F1 rewrites nothing: a record with a version is
 its own boundary, a record with `+` reads from the next `landed`. C
 and E need no migration; F2 none in the projects (a missing
-`ids.md` reads as no reservations), but the fifth digit, if taken,
-is a textual migration of the engine, 13 files of
-`NNNN` and two scripts. The registration of the drivers is
+`ids.md` reads as no reservations), but the fifth digit is a textual
+migration of the engine, 13 files of `NNNN` and two scripts (the
+regular expressions and the numeric sort), no ID rewritten.
+`/migrate` is the one command (decided 2026-10-17): the script does
+every deterministic step, Claude within the same command what needs
+judgement (the origin of the threads, from the script's printed
+guesses), and the user says `/migrate` and then `/save`; the result
+is the same on every clone. The registration of the drivers is
 `/setup`'s on every machine, not the project's. `/pull` of the
 engine says in Action required: run `/migrate <slug>` on every
 project, on one clone, then `/save`; the map, `/check project` and
@@ -460,12 +510,14 @@ artefacts conflict only where two people changed the same item or
 sentence. A merge request on GitLab or GitHub does not know the
 driver; the path is the branch, `/save`, a local merge, `/save`, and
 `/pull` says so at the state "diverged". Two windows of one person
-are two working trees, two clones on main are sequential.
+on one project are two working trees, on two projects two
+repositories and `/save` with a slug; two clones on main are
+sequential.
 
 **What does not change.** The chain, the artefacts and their
 definitions, the immutability of records, one write per round on
 main, IDs never renumbered, the format of the ID scheme but for the
-fifth digit if taken, git only through the scripts, no merge on the
+fifth digit, git only through the scripts, no merge on the
 forge's judgement, forge-save's order, no file per record for the
 histories and the decisions, no splitting of directories in advance,
 the research notes, the kinds of a history record but for `landed`,
@@ -488,11 +540,13 @@ Scripts: forge-ledger, forge-merge, forge-land, forge-migrate new;
 forge-history computing the version and reading five digits;
 forge-branch the reservation by plumbing (`--reserve`) and
 `--worktree`; forge-status the registration and the version check;
-forge-clone reading the project file; forge_repos recognising a
-worktree; the documentation scripts taking the previous map from
-git. Skills: the 26 writing the ledger, `/setup`, `/new-project`,
-`/import-project`, `/save`, `/release` (the state render), `/pull`,
-`/check light`, `/check project`, `/forge`, `/end`, `/ledger`,
+forge-save pushing an ahead repository; forge-clone reading the
+project file; forge_repos recognising a worktree; the documentation
+scripts taking the previous map from git. Skills: the 26 writing the
+ledger, `/setup`, `/new-project`, `/import-project`, `/save` (pull
+first when behind), `/release` (the state render), `/pull`,
+`/check light`, `/check project`, `/forge` (the state against origin
+as the map's last word), `/end`, `/ledger`,
 `/ingest` (Role before the write), `/document` (main only),
 `/migrate` new, the definition of the intent (the mining recorded in
 its history), the walkthrough (the reservation at the reflection),
@@ -504,20 +558,21 @@ the reviewers for the `closed` record of a finding, the recipe
 intent: POS.1110 narrowed, the position on upgrades narrowed, new
 positions for the four ways, the ledger at read time, the driver,
 threads as files, the version as a boundary, the reservation of
-IDs, the worktree, the promise; THR.0090 and THR.0640 moved; threads
-for A2 and the open points.
+IDs, the worktree, the promise; THR.0090 and THR.0640 moved; a
+thread for A2's conversion.
 
-**Order.** First release: B0, A, B and C1 together (one parser of
-threads, never two), the `.gitattributes` with `ours` and `binary`,
-`/setup` with the config and forge-status with its check, and M for
-all of it. Second release: C with the attributes of way 2, the rest
+**Order.** First release: A2 first (its conversion and its check),
+then B0, A, B and C1 together (one parser of threads, never two),
+the `.gitattributes` with `ours` and `binary`, `/setup` with the
+config and forge-status with its check, the map's last word and
+forge-save's push, and M for all of it. Second release: C with the
+attributes of way 2, the rest
 of D, and E: it changes no doctrine and removes the second pain, the
 histories and the decisions merged by hand, before F1 reaches into
 the write step and the release. Third: F1 (`+`, `landed`,
-forge-land, land first, the ordering rule). Fourth: F2, with the
-fifth digit decided before it. A2 at any time, best before C1 so
-that the threads are cut already in sentences, with its conversion
-and its check.
+forge-land, land first, the ordering rule). Fourth: F2; the fifth
+digit is part of the first release's migration, so that the scripts
+read five digits before any reservation needs them.
 
 **Verification.** A throwaway clone (THR.0650), four tests.
 Branches on different artefacts: each appends a record to a
@@ -537,28 +592,16 @@ sides must remain a conflict exactly there.
 
 ## Open, for the principal to decide
 
-- A2: yes, or deferred.
-- The project file: its name, or another home for `kind` and
-  `language`.
-- The state on GitHub: `renders/state.md` at a release, or nothing.
-- The version as a landing on a branch: the header written on main
-  only, `+`, `landed`, land first, the ordering rule of the driver;
-  a state-only round raising no version on main, a landing always
-  raising.
-- The reservation of IDs per prefix on demand at the reflection,
-  written to main by plumbing into `ids.md`; its limit under branch
-  protection; "group = hundred" lost for groups from branches.
-- Five digits now (Claude's recommendation, reversed from 0.3 on
-  the numbers; 15 files).
-- Both indexes as mutable blocks (Claude's recommendation against
-  the principal's first word of immutable blocks).
-- The `closed` record for a settled finding instead of new kinds;
-  the mining recorded in the intent's history.
-- The Waiting rule: open threads, the principal's TBCs, open critic
-  findings and challenges; the parked under a heading of their own.
-- The worktree for the second window: where it lies, how the slug
-  resolves, the `.git` file.
-- The migration script against the position of 2026-08-29.
+Nothing. The eleven points of 0.6 were decided on 2026-10-17 in a
+walkthrough, all eleven accepted: A2 in the first release before C1;
+the project file `project.md`; the state on GitHub as
+`renders/state.md` at a release; the version as a boundary (F1) as
+written; the reservation of IDs (F2) as written; five digits now,
+within the first migration; both indexes as mutable blocks; the
+`closed` record and the mining in the intent's history; the Waiting
+rule as written; the worktree at `projects/<slug>@<branch>/`;
+`/migrate` as the one command of the migration. The brief is ready
+to be mined (`/forge intent`).
 
 ## Material
 
@@ -621,6 +664,13 @@ sides must remain a conflict exactly there.
   missing `ids.md` as no reservations with `/new-project` creating
   it, and the finding as the subject of its `closed` record for the
   engine come from it.
+- `sources/merge-brief-critique-6.md`: the critique of 0.7; the
+  worktree addressed as `<slug>@<branch>`, the write step never
+  fetching, the manual rebase steps corrected, IDs four-digit until
+  9999 with a numeric sort (remark: the walkthrough of 2026-10-17
+  had taken five digits from the migration on; the principal took
+  the critique's shape), the order of the steps of a run against the
+  order of releases, and the engine's second root come from it.
 - The combined diff of the two merge commits of agentic-platform
   (f748539, d7216ca), read on 2026-10-17: the files merged from both
   sides.

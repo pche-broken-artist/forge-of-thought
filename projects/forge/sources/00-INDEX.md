@@ -87,6 +87,12 @@ to its own 00-INDEX.md — two levels, never deeper. -->
 - **Role:** the critique the brief `collaboration` 0.6 works in; the brief cites it where a point came from it (the principal's word of 2026-10-17).
 - **Use for:** checking, when the brief is mined, which part rests on this critique's correction; the key of `ids.md`; the shape of a `closed` record.
 
+### `merge-brief-critique-6.md`
+- **What:** a critique of the brief `collaboration` 0.7 in six points: `<slug>@<branch>` as the slug of a worktree for the commands, forge-save without a slug visiting both trees; the write step never fetching, the state read at the reflection and a stale state never blocking; the steps of finishing a rebase by hand corrected (add, then continue; the manual path starting with the person's own pull --rebase); new IDs four-digit until 9999 with no padding, and a numeric sort by (prefix, number); the order of releases against the order of the steps of one migration run; the engine's second root carrying only `projects/forge`. Proposes, decides nothing.
+- **Origin:** written in Czech by a model in a session outside the forge, from the brief 0.7; pasted into the conversation by the principal on 2026-10-17 and stored in English on his word.
+- **Role:** the critique the brief `collaboration` 0.8 works in; the brief cites it where a point came from it (the principal's word of 2026-10-17).
+- **Use for:** checking, when the brief is mined, which part rests on this critique's correction; the addressing of a worktree; the shape of IDs past 9999.
+
 ### `projects/lib-allwyn/sources/fork-brd/` (library document, cited, not copied)
 - **What:** the BRD layer built in a colleague's fork of the engine (intent 2.8, August 2026): the fork's rules, templates, skills and critic, three BRDs with three critique rounds, and the group's BRD standard and tutorial; the bundle's own index catalogues the fourteen files.
 - **Origin:** the company library, registered there on 2026-10-13; kept out of this public project because it carries names, company content and the group's internal standard.
