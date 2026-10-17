@@ -99,6 +99,18 @@ to its own 00-INDEX.md — two levels, never deeper. -->
 - **Role:** the critique the mining of the brief `collaboration` works in before the write of intent 5.13 (the principal's word of 2026-10-17).
 - **Use for:** checking, after the write, which cut of the positions rests on this critique; the size of a position as a model (POS.1660).
 
+### `design-critique.md`
+- **What:** a critique of Claude's proposal of 2026-10-17 for the solution design pass over the brief `collaboration` (0.17 to 0.18), in five points: the first report of a day on two branches collides, so every report carries the time-and-hash suffix (a change of POS.1720); the ledger script reads the threads and the project file too; CLAUDE.md and the documentation missing from the Where of several parts; the fixed shape of a verdict in a DEC for the script; smaller points (the instance files in a worktree, the owners of the 72-column rule, the registration's choice, `/end`, the provenance of research and critiques, the README recipe's input, the turning over of "Not built" at a release). Approves the shape of the pass. Proposes, decides nothing.
+- **Origin:** written in Czech by a model in a session outside the forge, from the proposal; pasted into the conversation by the principal on 2026-10-17 and stored in English on his word.
+- **Role:** the critique the solution design pass works in before the write of 0.18 (the principal's word of 2026-10-17).
+- **Use for:** checking, after the write, which part of the design rests on this critique; the shape of a DEC verdict the ledger script parses.
+
+### `design-critique-2.md`
+- **What:** a second critique of the corrected solution design pass over the brief `collaboration`, three points: POS.1720 must say what SOL.0810 says (verified, it does); whether the renders are written one sentence per line too, and the render skill's line 37; several Verdict lines in one decision and a partial verdict as the verdict on the whole ID. Proposes, decides nothing.
+- **Origin:** written in Czech by a model in a session outside the forge, from the corrected proposal; pasted into the conversation by the principal on 2026-10-17 and stored in English on his word.
+- **Role:** the second critique the solution design pass works in before the write of 0.18 (the principal's word of 2026-10-17).
+- **Use for:** checking, after the write, why POS.1580 reaches the renders and why a decision carries several Verdict lines.
+
 ### `projects/lib-allwyn/sources/fork-brd/` (library document, cited, not copied)
 - **What:** the BRD layer built in a colleague's fork of the engine (intent 2.8, August 2026): the fork's rules, templates, skills and critic, three BRDs with three critique rounds, and the group's BRD standard and tutorial; the bundle's own index catalogues the fourteen files.
 - **Origin:** the company library, registered there on 2026-10-13; kept out of this public project because it carries names, company content and the group's internal standard.

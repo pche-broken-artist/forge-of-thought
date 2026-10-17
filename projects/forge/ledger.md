@@ -38,8 +38,8 @@ absorbed it; Note says what remains (partial) or the REJ (dropped). -->
 ## Documents
 | File | Version | Status | Date |
 |---|---|---|---|
-| 10-intent.md | 5.13 | draft | 2026-10-17 |
-| 40-solution-design.md | 0.17 | draft | 2026-10-15 |
+| 10-intent.md | 5.15 | draft | 2026-10-17 |
+| 40-solution-design.md | 0.18 | draft | 2026-10-17 |
 <!-- One row per layer below the intent, added when the layer is
 born; a layer the project does not have gets no row (CLAUDE.md,
 Ledger). -->
@@ -104,6 +104,8 @@ of <original> | binary — one form per source. -->
 | merge-brief-critique-5.md | 2026-10-17 | ingested | text |
 | merge-brief-critique-6.md | 2026-10-17 | ingested | text |
 | mining-critique.md | 2026-10-17 | ingested | text |
+| design-critique.md | 2026-10-17 | ingested | text |
+| design-critique-2.md | 2026-10-17 | ingested | text |
 
 ## Dependencies
 <!-- Registration only. Documents of other repositories this project
@@ -348,6 +350,7 @@ as `rejected`. -->
 | FND.1710 | low | conformance | resolved | 2026-10-16-check-light.md | `00-brief-brd.md` added to the Used by of the `fork-brd` row (2026-10-16) |
 | FND.1680 | low | conformance | resolved | 2026-10-15-check-light.md | the bundle saved and pushed from lib-allwyn 2026-10-15 (commit 3366304); the clone that lacked it pulls |
 | FND.1720 | low | conformance | resolved | 2026-10-17-check-light.md | the brief collaboration 0.6 puts eleven points to the principal, Waiting on principal did not cite it; the line added |
+| FND.1730 | low | conformance | resolved | 2026-10-17-check-light-2.md | TBC.0070 (the principal's, solution design 0.18) has no line under Waiting on principal; THR.0650's line does not carry the four tests of the brief collaboration (TBC.0050); both lines added |
 
 Four review files are named outside the convention — accepted as they
 are by DEC.0140.
@@ -394,6 +397,9 @@ copy — CLAUDE.md, Ledger. -->
   the first release of the brief collaboration; opened 2026-10-17.
 - TBC.0030 — the independent challengers of POS.0800, not built; open
   since solution design 0.1.
+- TBC.0070 — the reservation of IDs where main is protected against a
+  direct push; a decision when a project meets it; opened at solution
+  design 0.18.
 - a `strategy` artefact for the forge (`/new-artefact strategy`):
   tracked in the project ai-strategy (its work product
   `reconstruction`, TBC.0010) until the principal calls the command;
@@ -452,7 +458,9 @@ copy — CLAUDE.md, Ledger. -->
 - THR.0430 — the measurement of a session, stored per user; where
   it lives open; `/end` decided (POS.1500, intent 5.1).
 - THR.0650 — the test of forge-pull's new output and the states
-  behind and diverged on a throwaway clone; deferred 2026-10-11.
+  behind and diverged on a throwaway clone, deferred 2026-10-11; the
+  four tests of the brief `collaboration` (TBC.0050), after the first
+  and the second release.
 - THR.0590 — what the documentation of a project other than the
   engine reads; opened 2026-10-09 (intent 4.60), after the first
   `/document <slug>` on a project.

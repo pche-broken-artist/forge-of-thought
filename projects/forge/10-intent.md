@@ -1,8 +1,8 @@
 ---
-version: 5.13
+version: 5.15
 date: 2026-10-17
 status: draft
-last_change: 5.13 (2026-10-17): the brief collaboration mined: twenty positions on the four ways of merging, the ledger at read time, the version as a boundary, threads as files, IDs on a branch and the migration; five rejected directions; THR.0690 opened.
+last_change: 5.15 (2026-10-17): POS.1580 widened to the renders, one sentence per line everywhere.
 project: forge
 audience: principal + Claude only
 ---
@@ -1117,18 +1117,19 @@ position that already stands elsewhere.
   the rounds were about. Decided 2026-10-17 (brief `collaboration`).
 - **POS.1580** Prose is written one sentence per line, not wrapped at 72
   columns: in the artefacts, the threads, the decisions, the skills, the
-  agents, the templates and CLAUDE.md; tables, headers and records stay
-  as they are. Pandoc and GitHub read a soft line break as a space, so
-  no render changes. Why: the 72-column rule was made for legible diffs,
-  and one sentence per line serves that purpose better: a changed word
-  changes one line instead of the rest of the paragraph, diff and blame
-  work by sentence, and the reflow of the end of one position no longer
-  reaches the neighbouring one, which made two branches editing two
-  neighbours a false conflict. Two conditions: the conversion guards the
-  traps of Markdown and proves its result by comparing pandoc's syntax
-  tree of every file before and after; and `/check` carries a light rule
-  that a line does not carry two sentences, approximate, since without a
-  check the reflow returns at the first larger round. Decided 2026-10-17
+  agents, the templates, CLAUDE.md and the renders, which a model writes
+  anyway; tables, headers and records stay as they are. Pandoc and
+  GitHub read a soft line break as a space, so no render changes. Why:
+  the 72-column rule was made for legible diffs, and one sentence per
+  line serves that purpose better: a changed word changes one line
+  instead of the rest of the paragraph, diff and blame work by sentence,
+  and the reflow of the end of one position no longer reaches the
+  neighbouring one, which made two branches editing two neighbours a
+  false conflict. Two conditions: the conversion guards the traps of
+  Markdown and proves its result by comparing pandoc's syntax tree of
+  every file before and after; and `/check` carries a light rule that a
+  line does not carry two sentences, approximate, since without a check
+  the reflow returns at the first larger round. Decided 2026-10-17
   (brief `collaboration`; the conversion THR.0690).
 - **POS.1600** The ledger is made at read time and is not kept in git: a
   script builds it from the documents, the file is gitignored, and the
@@ -1331,11 +1332,15 @@ position that already stands elsewhere.
   the forge over a CLI link, so that `/challenge` can send in a lens
   with genuinely different priors. The direction is decided; the
   mechanics are designed when taken up.
-- **POS.1720** A second report of one reviewer on one day is named by
-  the time to the minute and four hex characters of a content hash, not
-  by `-2`. Why: two branches must not make the same name, and the time
-  alone is not enough for two people. Decided 2026-10-17 (brief
-  `collaboration`).
+- **POS.1720** Every report of a reviewer is named by its date, the time
+  to the minute and four hex characters of a content hash,
+  `YYYY-MM-DD-<kind>-<name>-HHMM-<hash>.md`; the names given before stay
+  as they are, immutable. Why: two branches must not make the same name,
+  and the first report of a day on two branches would, since `/save`
+  runs the light check on every branch; the time alone is not enough for
+  two people. Decided 2026-10-17 (brief `collaboration`; narrowed from
+  the second report of a day to every report on the critique of the
+  design pass, `sources/design-critique.md`).
 
 ### Operating environment
 - **POS.0510** Commands are entry points into phases, not the only
