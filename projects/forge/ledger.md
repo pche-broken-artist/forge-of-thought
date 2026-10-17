@@ -2,7 +2,7 @@
 project: forge
 kind: thought
 language: en
-updated: 2026-10-16
+updated: 2026-10-17
 ---
 
 # Ledger — Forge of Thought
@@ -33,6 +33,7 @@ absorbed it; Note says what remains (partial) or the REJ (dropped). -->
 | 00-brief-next-gen.md | 0.3 | draft | pending | born in the forge 2026-10-03, written in English on the principal's word; the needs of the next generation gathered in one round, to be sifted; the eighteen researches of 2026-10-03 cited under its sections (0.2); THR.0520 opened from it; the documentation moved out into the brief `documentation` (0.3) |
 | 00-brief-brd.md | 0.2 | draft | pending | born 2026-10-16 handed over (THR.0360); 0.2 on the principal's judgement: the fork's BRD is the base, checked against the standards and improved; the IDs being decided one at a time, the first (BR, UC, DEP) without a verdict yet |
 | 00-brief-documentation.md | 0.1 | draft | mined | born 2026-10-09 from THR.0340 (the rounds of 2026-10-05 and 2026-10-07) and the principal's word of 2026-10-09; the documentation part of `next-gen` moved into it; mined into intent 4.60 (POS.1450, POS.1080, POS.0930, POS.0950, REJ.0240 to REJ.0260, THR.0590) and solution design 0.4 (SOL.0460) the same day |
+| 00-brief-collaboration.md | 0.6 | draft | pending | born 2026-10-17 from the principal's word of the day (the ledger as the file where every operation collides; two people, two branches, two windows on one project): the complete proposal of the merge mechanism stored as shown, from two researches of 2026-10-17, the evidence of agentic-platform and the reviews of another model (sources ledger-merge-review, merge-design-review); 0.2 to 0.6 the same day work in five critiques (merge-brief-critique, -2, -3, -4, -5): B0 the project file, the header written on main only, land first, the driver's ordering rule, the reservation per prefix at the reflection, five digits recommended, both indexes mutable, the state render, the Waiting rule, M the migration; open: eleven points listed in the brief |
 
 ## Documents
 | File | Version | Status | Date |
@@ -94,6 +95,13 @@ of <original> | binary — one form per source. -->
 | forge-elicitation-brief-review.md | 2026-09-28 | ingested | text |
 | forge-elicitation-brief-review-v0.4.md | 2026-09-28 | ingested | text |
 | docs-audit-2026-10-11.md | 2026-10-11 | content | text |
+| ledger-merge-review.md | 2026-10-17 | ingested | text |
+| merge-design-review.md | 2026-10-17 | ingested | text |
+| merge-brief-critique.md | 2026-10-17 | ingested | text |
+| merge-brief-critique-2.md | 2026-10-17 | ingested | text |
+| merge-brief-critique-3.md | 2026-10-17 | ingested | text |
+| merge-brief-critique-4.md | 2026-10-17 | ingested | text |
+| merge-brief-critique-5.md | 2026-10-17 | ingested | text |
 
 ## Dependencies
 <!-- Registration only. Documents of other repositories this project
@@ -153,6 +161,8 @@ research/00-INDEX.md, never here. -->
 | 2026-10-10-a-user-only-distribution-of-the-engine.md | 2026-10-10 | the principal's question of 2026-10-10 after the release of 5.0; 10-intent.md v5.0 (POS.0940, POS.0950, THR.0190, THR.0230); the two distribution researches of 2026-08-29; the engine's tree measured on disk |
 | 2026-10-13-what-an-it-or-ai-strategy-contains-light-but-complete.md | 2026-10-13 | the principal's word of 2026-10-13 in the project ai-strategy (a strategy artefact for the forge, research first); 00-brief-next-gen.md v0.3 (Work without a known artefact); 10-intent.md v5.6 (POS.0700, POS.1430); research/2026-10-03-work-without-a-known-artefact-and-its-working-files.md; web sources |
 | 2026-10-13-ai-agents-and-tools-that-make-a-strategy.md | 2026-10-13 | the principal's word of 2026-10-13 in the project ai-strategy; research/2026-10-13-what-an-it-or-ai-strategy-contains-light-but-complete.md; research/2026-10-03-work-without-a-known-artefact-and-its-working-files.md; web sources |
+| 2026-10-17-mergeable-shared-records-in-git.md | 2026-10-17 | the principal's word of 2026-10-17 (work of several people, branches or windows on one project collides in the ledger, the histories and the indexes); 10-intent.md v5.12 (POS.1110, POS.1490, REJ.0170); threads.md (THR.0090); CLAUDE.md (Ledger, Versioning & status); web sources |
+| 2026-10-17-git-merge-drivers-and-their-limits.md | 2026-10-17 | the principal's word of 2026-10-17; research/2026-10-17-mergeable-shared-records-in-git.md; 10-intent.md v5.12 (POS.1110, POS.1490); web sources |
 | 2026-10-13-the-brd-layer-of-the-fork-against-todays-engine.md | 2026-10-13 | the principal's word of 2026-10-13; projects/lib-allwyn/sources/fork-brd/ (cited by path); research/2026-09-07-brd-layer-fork-analysis.md; 10-intent.md v5.8 (POS.0700, POS.1310, POS.1320, POS.1350, POS.1360, POS.1430, POS.1520); threads.md THR.0360; decisions.md DEC.0060; the assignment's definition and the clarity lens |
 | 2026-10-13-what-a-brd-contains-and-how-it-is-found-today.md | 2026-10-13 | the principal's word of 2026-10-13; research/2026-10-13-the-brd-layer-of-the-fork-against-todays-engine.md; research/2026-09-07-brd-layer-fork-analysis.md; research/2026-09-28-artefact-layers-from-idea-to-handover.md; the group's standard and tutorial in the library bundle; web sources |
 
@@ -335,6 +345,7 @@ as `rejected`. -->
 | FND.1700 | low | conformance | resolved | 2026-10-16-check-light.md | `updated: 2026-10-16` (2026-10-16) |
 | FND.1710 | low | conformance | resolved | 2026-10-16-check-light.md | `00-brief-brd.md` added to the Used by of the `fork-brd` row (2026-10-16) |
 | FND.1680 | low | conformance | resolved | 2026-10-15-check-light.md | the bundle saved and pushed from lib-allwyn 2026-10-15 (commit 3366304); the clone that lacked it pulls |
+| FND.1720 | low | conformance | resolved | 2026-10-17-check-light.md | the brief collaboration 0.6 puts eleven points to the principal, Waiting on principal did not cite it; the line added |
 
 Four review files are named outside the convention — accepted as they
 are by DEC.0140.
@@ -377,6 +388,9 @@ copy — CLAUDE.md, Ledger. -->
   decided, not before the first such project; opened 2026-10-15.
 - THR.0680 — a question put to the manual, `/man <free text>`;
   Claude's synthesis, to be built; opened 2026-10-15.
+- the brief `collaboration` 0.6, a draft handed over: eleven points
+  in its section "Open, for the principal to decide"; opened
+  2026-10-17.
 - TBC.0030 — the independent challengers of POS.0800, not built; open
   since solution design 0.1.
 - a `strategy` artefact for the forge (`/new-artefact strategy`):

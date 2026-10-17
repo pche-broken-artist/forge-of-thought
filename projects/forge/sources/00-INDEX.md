@@ -1,7 +1,7 @@
 ---
 project: forge
 directory: sources
-updated: 2026-10-13
+updated: 2026-10-17
 ---
 
 # Index — sources of Forge of Thought
@@ -44,6 +44,48 @@ to its own 00-INDEX.md — two levels, never deeper. -->
 - **Origin:** Written by Claude on 11 October 2026 in a session outside the forge, from a read-only clone, through six isolated read-only agents, one per part of `docs/`, plus a mechanical measuring pass; registered here the same day.
 - **Role:** An audit of the documentation by a separate agent that went through the whole of `docs/` without the context of this forge: the basis for deciding how the documentation is to be improved.
 - **Use for:** Deciding, finding by finding, what of the documentation and of its generator is changed (F.01–F.46, by walkthrough into the intent and the documentation's definitions); settling the contradictions inside the owner files before a regeneration (C.01–C.07); the measurements as the baseline a later audit is compared with (M.01–M.18).
+
+### `ledger-merge-review.md`
+- **What:** a second look at why the ledger merges badly when two branches or two people write it, from the shape of the file rather than from the field: five causes (the `updated` counter, long one-line notes, appends at the tail, free rewriting, the shared next ID), what git offers (`merge=union`, a table-aware custom driver, `rerere`), four format changes for the ledger itself, an event-sourced ledger rendered from an append-only log, and lazy ID allocation finalised at the release. Proposes, decides nothing.
+- **Origin:** written in Czech by a model in a session outside the forge, from a read-only look at the repository at v5.9; pasted into the conversation by the principal on 2026-10-17 and stored in English on his word.
+- **Role:** the same question as the research of 2026-10-17 on mergeable shared records, asked from another angle; to be compared and synthesised with it before anything enters the intent (the principal's word of 2026-10-17).
+- **Use for:** the synthesis of the two views on the ledger's merge problem; the list of format defects of today's ledger; the event-log alternative and lazy IDs as candidates when the counters are taken up.
+
+### `merge-design-review.md`
+- **What:** a review in three parts of Claude's complete proposal for the merge mechanism of the forge's files (the four ways of merging, the generated ledger, the record driver, threads as files, the version as a boundary, ID blocks per branch): what git does not do as the proposal assumed (`ours` not built in and reversed in a rebase), the ledger out of git, the counters before the test, deletion in an immutable file as a conflict, the version as a boundary record, decisions as unmutated blocks, a closed thread immutable. Proposes, decides nothing.
+- **Origin:** written in Czech by a model in a session outside the forge, the second and third parts answering Claude's replies; pasted into the conversation by the principal on 2026-10-17 and stored in English on his word.
+- **Role:** the outside review of the proposal that the brief `collaboration` stores; its accepted points are in the brief, the brief cites it where a point came from it (the principal's word of 2026-10-17).
+- **Use for:** checking, when the brief is mined, which part of the mechanism rests on the review's correction and why; the arguments for the ledger out of git and for the version as a boundary.
+
+### `merge-brief-critique.md`
+- **What:** a critique of the brief `collaboration` 0.1 against the repository, in seven sections: factual errors (docs-map.md is authored, not derived; the research index is derivable only after the note carries Answer and Consult when; `kind` and `language` lose their home with the ledger; the ID block from a branch name collides by the birthday paradox; the order of forge-save; the verification as written cannot pass), what in B has no home (Work, the brief's Note, Dependencies, parked and obsolete, Waiting), F1 sharpened (`<base>+`, a `landed` record per document, forge-land, no reordering of a history, two clones on main), the details of C and D (rebase.backend, renormalize, /document on main, the driver's name), A2's traps and check, what is missing (git worktree for two windows, git rm --cached at the migration, the wording of the principle), and a revised order. Proposes, decides nothing.
+- **Origin:** written in Czech by a model in a session outside the forge, from the brief and the repository; pasted into the conversation by the principal on 2026-10-17 and stored in English on his word.
+- **Role:** the critique the brief `collaboration` 0.2 works in; the brief cites it where a point came from it (the principal's word of 2026-10-17).
+- **Use for:** checking, when the brief is mined, which part rests on this critique's correction; the arithmetic of the ID space; the list of what the ledger alone knows today.
+
+### `merge-brief-critique-2.md`
+- **What:** a critique of the brief `collaboration` 0.2 in ten sections: `<base>+` in the header conflicts in the very case F1 solves (a branch must never touch the header); F2 inconsistent (per branch or per author) and without a mechanism of writing the reservation to main (plumbing without a checkout, branch protection as a limit, one hundred across prefixes, allocation on main reading the reservations); immutable indexes make every correction a conflict; a round on main before the landing breaks the attribution (land first); the driver's gaps (keys, regions outside records, record kinds, the merged-unseen report, a closed thread changed after closing, the driver's version); M (the archive read, --undo by a manifest, the shape as markers, the engine's prefixes); the state as a release render instead of README tables; two facts on worktrees; the order (C1 with B, D split); minor points. Proposes, decides nothing.
+- **Origin:** written in Czech by a model in a session outside the forge, from the brief 0.2 and the repository; pasted into the conversation by the principal on 2026-10-17 and stored in English on his word.
+- **Role:** the critique the brief `collaboration` 0.3 works in; the brief cites it where a point came from it (the principal's word of 2026-10-17).
+- **Use for:** checking, when the brief is mined, which part rests on this critique's correction; the plumbing of the reservation; the keys of the driver's units.
+
+### `merge-brief-critique-3.md`
+- **What:** a critique of the brief `collaboration` 0.3 in eight sections: a merge of main into a branch breaks the attribution of versions (an ordering rule in the driver: the side whose new records hold a landed goes first); `mined:` and `state:` in headers contradict the untouched header (records instead, threads the named exception); a hundred per branch across prefixes burns the ID space by branches, not by use (per prefix on demand; five digits to be decided now, with the numbers); provenance on a branch cites a version that does not exist (`v5.12+N`); the A2 render check must compare the AST or normalised whitespace; the closed-thread check must compare with the closing commit; C before F1 in the order; minor points (land first per document, "until F2" dropped for history lines, a finding settled by no version, the Work state and the Sources Form in M, `forge-branch --reserve`). Proposes, decides nothing.
+- **Origin:** written in Czech by a model in a session outside the forge, from the brief 0.3 and the repository; pasted into the conversation by the principal on 2026-10-17 and stored in English on his word.
+- **Role:** the critique the brief `collaboration` 0.4 works in; the brief cites it where a point came from it (the principal's word of 2026-10-17).
+- **Use for:** checking, when the brief is mined, which part rests on this critique's correction; the ordering rule of the driver; the arithmetic of the four-digit space.
+
+### `merge-brief-critique-4.md`
+- **What:** a critique of the brief `collaboration` 0.4 in six sections: the record of a mining belongs in the intent's history with the brief as subject (its version column says which intent mined it); state records and the version (a state-only round on main raises nothing, a landing always raises); the reservation of IDs at the reflection and not inside the write, into the nearest free hundred, blocks never released and the consequence for groups, the file `ids.md`; the scope of five digits (27 places in 15 files); the Waiting rule against today's practice (the parked under a heading of their own); minor points (the header wording, more Markdown traps, the double `landed`, a state-only round in the test). Proposes, decides nothing.
+- **Origin:** written in Czech by a model in a session outside the forge, from the brief 0.4 and the repository; pasted into the conversation by the principal on 2026-10-17 and stored in English on his word.
+- **Role:** the critique the brief `collaboration` 0.5 works in; the brief cites it where a point came from it (the principal's word of 2026-10-17).
+- **Use for:** checking, when the brief is mined, which part rests on this critique's correction; the rule of state records and versions; the Waiting rule.
+
+### `merge-brief-critique-5.md`
+- **What:** a critique of the brief `collaboration` 0.5 in four points: `updated` leaves the recipes' headers too, not only the indexes; the key of a reservation line is the prefix with the start of the block, not the start alone; a missing `ids.md` reads as no reservations and `/new-project` creates it from the template, so the migration need not; the `closed` record of an engine finding keeps the finding as its subject, the fixed layer named in the reason. Proposes, decides nothing.
+- **Origin:** written in Czech by a model in a session outside the forge, from the brief 0.5 and CLAUDE.md; pasted into the conversation by the principal on 2026-10-17 and stored in English on his word.
+- **Role:** the critique the brief `collaboration` 0.6 works in; the brief cites it where a point came from it (the principal's word of 2026-10-17).
+- **Use for:** checking, when the brief is mined, which part rests on this critique's correction; the key of `ids.md`; the shape of a `closed` record.
 
 ### `projects/lib-allwyn/sources/fork-brd/` (library document, cited, not copied)
 - **What:** the BRD layer built in a colleague's fork of the engine (intent 2.8, August 2026): the fork's rules, templates, skills and critic, three BRDs with three critique rounds, and the group's BRD standard and tutorial; the bundle's own index catalogues the fourteen files.

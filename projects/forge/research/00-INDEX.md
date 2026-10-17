@@ -1,7 +1,7 @@
 ---
 project: forge
 directory: research
-updated: 2026-10-13
+updated: 2026-10-17
 ---
 
 # Index — research of Forge of Thought
@@ -232,3 +232,13 @@ ledger. Written by /research; verified by /check. -->
 - **Question:** what current practice says a business requirements document contains and how it is found — ISO 29148, BABOK, IREB, INCOSE, ISO 25010, the light forms, use cases against stories, the qualities, traceability, analysis with a model — and what of it the Map and the reviewers of the `brd` artefact must carry. Companion of the note on the fork's layer.
 - **Answer in short:** the standards agree on the requirement (one sentence, necessary, singular, verifiable, traceable, identified) and on the document (purpose, scope, stakeholders, terms, groupings), while their outlines stay behind sale; there is no BABOK v4; depth fits the project; Cockburn's brief, casual and fully dressed use cases with user-goal level, fully dressed only where the behaviour is critical; the quality categories are stable and the value is the stakeholders'; traceability links are recorded as the work is done and flagged suspect on change; one 2026 study finds a model's recall higher and the analyst's precision higher, so the model recasts and finds gaps and never fills them. A ten-item failure checklist sorted to the essence lens, the clarity lens, the check and the Map walk. The Map's areas hold against the field, the transition area the one most templates forget.
 - **Consult when:** the `brd` definition's Map, template or Requirement style is written or questioned, a reviewer is calibrated for a BRD, or the use case's form is decided.
+
+### `2026-10-17-mergeable-shared-records-in-git.md`
+- **Question:** how git-based projects keep shared record files (changelogs, decision logs, indexes, registries, lockfiles) from conflicting when several branches, windows or people write them, and what that says about the forge's cascade, where one change writes the artefact, its history, the ledger and sometimes a thread or an index. Counters (IDs, versions) deferred to a step of their own.
+- **Answer in short:** the forge's shared files have three shapes and the field has an answer for two: derived state (the ledger's mirror tables) is regenerated, never merged by hand, with a check-only hook guarding staleness; append-only logs (histories, decisions, indexes) are either one file per record assembled at release (towncrier, ADR practice) or merged as a set of records; git's `merge=union` loses lines at the seam and is rejected; no driver runs where a merge request is merged on the server. Recommendation in order: the ledger derived by a script, a record-aware set-union merge driver for the logs registered by `/setup`, the counters next.
+- **Consult when:** redesigning the ledger or the cascade of writes behind one operation, deciding what the forge promises for two people, two branches or two windows on one project (THR.0090, POS.1110), or when a ledger or history conflict is on the table.
+
+### `2026-10-17-git-merge-drivers-and-their-limits.md`
+- **Question:** what git itself offers for merging one file automatically - the `merge` attribute, the built-in drivers, the custom driver's contract - where it applies (merge, cherry-pick, revert, rebase by inference) and where it does not (the hosting platforms), so that the forge knows what a driver on its record files may promise.
+- **Answer in short:** a driver is chosen per path in `.gitattributes`, runs only on a non-trivial conflict and only on the merging clone, is defined in the unshared `.git/config` so every clone must register it (`/setup`), and never runs on GitLab.com, self-managed GitLab without an administrator, Bitbucket or GitHub's web merge. `union` is positional and unsafe; the right semantics for a record file is a set union with deduplication and a sort key, which git has only for notes and a few lines of Python give; a driver must validate what it writes and never exit 0 on damage.
+- **Consult when:** writing or registering the forge's merge driver, scaffolding a project's `.gitattributes`, wording what `/save` and a merge request can and cannot do, or testing drivers under rebase on the throwaway clone of THR.0650.
