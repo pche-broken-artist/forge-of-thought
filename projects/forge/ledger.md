@@ -33,12 +33,12 @@ absorbed it; Note says what remains (partial) or the REJ (dropped). -->
 | 00-brief-next-gen.md | 0.3 | draft | pending | born in the forge 2026-10-03, written in English on the principal's word; the needs of the next generation gathered in one round, to be sifted; the eighteen researches of 2026-10-03 cited under its sections (0.2); THR.0520 opened from it; the documentation moved out into the brief `documentation` (0.3) |
 | 00-brief-brd.md | 0.2 | draft | pending | born 2026-10-16 handed over (THR.0360); 0.2 on the principal's judgement: the fork's BRD is the base, checked against the standards and improved; the IDs being decided one at a time, the first (BR, UC, DEP) without a verdict yet |
 | 00-brief-documentation.md | 0.1 | draft | mined | born 2026-10-09 from THR.0340 (the rounds of 2026-10-05 and 2026-10-07) and the principal's word of 2026-10-09; the documentation part of `next-gen` moved into it; mined into intent 4.60 (POS.1450, POS.1080, POS.0930, POS.0950, REJ.0240 to REJ.0260, THR.0590) and solution design 0.4 (SOL.0460) the same day |
-| 00-brief-collaboration.md | 0.8 | draft | pending | born 2026-10-17 from the principal's word of the day (the ledger as the file where every operation collides; two people, two branches, two windows on one project): the complete proposal of the merge mechanism stored as shown, from two researches of 2026-10-17, the evidence of agentic-platform and the reviews of another model (sources ledger-merge-review, merge-design-review); 0.2 to 0.8 the same day work in six critiques (merge-brief-critique, -2 to -6): B0 the project file, the header written on main only, land first, the driver's ordering rule, the reservation per prefix at the reflection, five digits recommended, both indexes mutable, the state render, the Waiting rule, M the migration; 0.7 the eleven open points decided in a walkthrough 2026-10-17, all accepted, and the path through git from the collision at the save of 0.6; 0.8 the worktree addressed by slug, IDs four-digit until 9999; open: none, ready to mine |
+| 00-brief-collaboration.md | 0.8 | draft | mined | born 2026-10-17 from the principal's word of the day (the ledger as the file where every operation collides; two people, two branches, two windows on one project): the complete proposal of the merge mechanism stored as shown, from two researches of 2026-10-17, the evidence of agentic-platform and the reviews of another model (sources ledger-merge-review, merge-design-review); 0.2 to 0.8 the same day work in six critiques (merge-brief-critique, -2 to -6): B0 the project file, the header written on main only, land first, the driver's ordering rule, the reservation per prefix at the reflection, five digits recommended, both indexes mutable, the state render, the Waiting rule, M the migration; 0.7 the eleven open points decided in a walkthrough 2026-10-17, all accepted, and the path through git from the collision at the save of 0.6; 0.8 the worktree addressed by slug, IDs four-digit until 9999; mined into intent 5.13 (POS.1560 to POS.1750, REJ.0270 to REJ.0310, THR.0690; THR.0090, THR.0640, THR.0650, THR.0620 changed); the bare save narrowed against the brief's D on the mining (one window only) |
 
 ## Documents
 | File | Version | Status | Date |
 |---|---|---|---|
-| 10-intent.md | 5.12 | draft | 2026-10-15 |
+| 10-intent.md | 5.13 | draft | 2026-10-17 |
 | 40-solution-design.md | 0.17 | draft | 2026-10-15 |
 <!-- One row per layer below the intent, added when the layer is
 born; a layer the project does not have gets no row (CLAUDE.md,
@@ -103,6 +103,7 @@ of <original> | binary — one form per source. -->
 | merge-brief-critique-4.md | 2026-10-17 | ingested | text |
 | merge-brief-critique-5.md | 2026-10-17 | ingested | text |
 | merge-brief-critique-6.md | 2026-10-17 | ingested | text |
+| mining-critique.md | 2026-10-17 | ingested | text |
 
 ## Dependencies
 <!-- Registration only. Documents of other repositories this project
@@ -389,16 +390,17 @@ copy — CLAUDE.md, Ledger. -->
   decided, not before the first such project; opened 2026-10-15.
 - THR.0680 — a question put to the manual, `/man <free text>`;
   Claude's synthesis, to be built; opened 2026-10-15.
+- THR.0690 — the conversion to one sentence per line (POS.1580),
+  the first release of the brief collaboration; opened 2026-10-17.
 - TBC.0030 — the independent challengers of POS.0800, not built; open
   since solution design 0.1.
 - a `strategy` artefact for the forge (`/new-artefact strategy`):
   tracked in the project ai-strategy (its work product
   `reconstruction`, TBC.0010) until the principal calls the command;
   the two researches of 2026-10-13 stand ready; no thread here.
-- THR.0640 — what of a thread survives its closing; the `Was` rule
-  decided at 5.4 (POS.0310); open: when a thread is rather a brief,
-  and whether large files are split (from THR.0470); opened
-  2026-10-11.
+- THR.0640 — when a thread that has become a plan is rather a brief,
+  and whether large files are split; the `Was` question settled
+  2026-10-17 (POS.1680); opened 2026-10-11.
 - THR.0520 — a layer for the solution; priority; steps 1 to 5 done,
   step 6 (the BRD) paused 2026-10-04.
 - THR.0570 — the presentation of the forge and what is to be ready
@@ -456,7 +458,9 @@ copy — CLAUDE.md, Ledger. -->
   `/document <slug>` on a project.
 - THR.0380 — executive pitch loose ends (S03 counts, the deck build
   without the `pptx` skill); opened 2026-09-14.
-- THR.0090 — multi-principal use; deliberately not worked on.
+- THR.0090 — the multi-principal chain, an assignment handed to a
+  colleague's instance; several people on one project answered
+  2026-10-17 (POS.1560 to POS.1750); deliberately not worked on.
 - THR.0140 — the delivery side; deferred until a subject project
   needs the linkage.
 - THR.0210 — the guard rail for the public boundary; at stake again

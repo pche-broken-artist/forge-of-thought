@@ -93,6 +93,12 @@ to its own 00-INDEX.md — two levels, never deeper. -->
 - **Role:** the critique the brief `collaboration` 0.8 works in; the brief cites it where a point came from it (the principal's word of 2026-10-17).
 - **Use for:** checking, when the brief is mined, which part rests on this critique's correction; the addressing of a worktree; the shape of IDs past 9999.
 
+### `mining-critique.md`
+- **What:** a critique of Claude's proposal of 2026-10-17 for mining the brief `collaboration` 0.8 into the intent, in six points: positions too large and carrying realisation and history (split POS.1600 and POS.1650, realisation to the solution design); a bare `/save` contradicting itself between two projects and two trees; four existing positions left untouched (the header fields, the language rule, the library born as the ledger, the Waiting rule); double ownership of the driver's ordering rule and of the free-number rule; the four releases a plan, not a stance; small points (more REJ, groups, `v<base>+N`). Proposes, decides nothing.
+- **Origin:** written in Czech by a model in a session outside the forge, from the proposal; pasted into the conversation by the principal on 2026-10-17 and stored in English on his word.
+- **Role:** the critique the mining of the brief `collaboration` works in before the write of intent 5.13 (the principal's word of 2026-10-17).
+- **Use for:** checking, after the write, which cut of the positions rests on this critique; the size of a position as a model (POS.1660).
+
 ### `projects/lib-allwyn/sources/fork-brd/` (library document, cited, not copied)
 - **What:** the BRD layer built in a colleague's fork of the engine (intent 2.8, August 2026): the fork's rules, templates, skills and critic, three BRDs with three critique rounds, and the group's BRD standard and tutorial; the bundle's own index catalogues the fourteen files.
 - **Origin:** the company library, registered there on 2026-10-13; kept out of this public project because it carries names, company content and the group's internal standard.

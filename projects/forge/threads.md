@@ -15,6 +15,12 @@ project: forge
   assignment handed to a colleague's instance as his brief — how it
   is seeded, how the IDs continue, where the essence lens finds a
   parent; this thread's, when it is taken up.
+
+  Several people on one project is answered by the brief
+  `collaboration`, mined 2026-10-17 (POS.1560 to POS.1750): branches or
+  clones, each in his own instance. Open stays the genuine
+  multi-principal chain: the assignment handed to a colleague's instance
+  as his brief.
 - **THR.0140** [intent] The delivery side. Whether the forge's output one day
   feeds a delivery chain as grown layers of the forge or hands over
   to a separate delivery framework is open and deliberately not
@@ -890,7 +896,7 @@ project: forge
   | 6 | Upgrade and compatibility (brief `next-gen`): a format version in a project, a stable line, the migration of a project; THR.0490, the stale clone, with it | 2 | 2 sittings and scripts | needed before a rollout; THR.0490 small and valuable, at once |
   | 7 | The BRD layer (THR.0520 step 6, THR.0360, the brief `brd`): the first trial of `/new-artefact`, the business analyst persona | 3 | 3 to 4 sittings | only if a project needs it within two months, else after 2 |
   | 8 | The test of behaviour (THR.0600), the gate in front of the tools (THR.0400), the sweep of the boundary (THR.0210) | 3 | 2 sittings and scripts | a small set of scenarios from the recorded failures; cheap confidence before a rollout |
-  | 9 | Several people on one project, the connection to the systems around (brief `next-gen`) | 3 | 4 sittings or more | decided after 2; today the worst collisions are silent |
+  | 9 | Several people on one project: decided in the brief `collaboration`, mined 2026-10-17 (POS.1560 to POS.1750); built in four releases: the first one sentence per line, then the project file, the header, the ledger at read time and threads as files together, the attributes with `ours` and `binary`, the registration and its check, the map's last word and the push of an ahead repository, the migration for all of it with the fifth digit; the second the driver with the attributes of way 2 and the unique names of reports; the third the version as a boundary; the fourth the reservation of IDs. The connection to the systems around stays with the brief `next-gen` | 1 | 4 releases | at once, in that order |
   | 10 | A user's own extensions (THR.0300, THR.0480): where his artefact, lens or check lives so that `forge-pull` never overwrites it | 3 | 3 sittings | before the engine split, and possible without it |
   | 11 | The engine split and the plugin (THR.0230, THR.0190, the brief `engine-split`) | 4 | 10 sittings or more, a large rebuild | the feasibility research of the plugin first; not built until 2 and 10 say what the unit of installation is |
   | 12 | Small: FND.1440, THR.0460, THR.0370, THR.0320, a SECURITY.md (research of 2026-10-05); F.24 of the documentation audit (map, finding, lens, slug at their owners) and its Unowned list (Linux and macOS as a verified fact, which faster model and why, `/forge <state>` on a library, what Claude Code is beyond the engine running in it) | 4 | one sitting each | as the occasion comes |
@@ -941,6 +947,11 @@ project: forge
   are split under a master index; the intent has 1 845 lines and the
   threads 1 255 on 2026-10-11. Opened 2026-10-11.
 
+  The `Was` question settled 2026-10-17: a closed thread stays as its
+  file, immutable, and carries no `Was` (POS.1680). Open stay the two
+  questions: when a thread that has become a plan is rather born as a
+  brief, and whether large files are split.
+
 - **THR.0650** [solution-design] The new output of `forge-pull.py`
   (before, after, the commits between) and the states `behind` and
   `diverged` of `remote_state` are untested, since no repository has
@@ -948,6 +959,16 @@ project: forge
   makes by hand, raw git being denied to Claude (SOL.0510). Carried
   in the ledger without an ID from intent 5.1 until 5.4 (FND.1490).
   Deferred 2026-10-11; opened 2026-10-11.
+
+  The tests of the brief `collaboration` (POS.1750), 2026-10-17, four on
+  the throwaway clone: branches on different artefacts (a record to a
+  different history, a thread, a decision, a research, a render, one
+  branch a round of state only; the merge without conflict, the
+  state-only round raising no version); branches over the same artefact
+  changing different positions with the headers untouched (the test of
+  the history driver); a long branch pulling main into itself after a
+  landing, its `+` records staying unlanded; the same position changed
+  on both sides remaining a conflict exactly there.
 - **THR.0660** [intent] The course of the teaching videos. Today
   `docs/videos/` is flat and the player page lists its files in the
   order of their names (POS.1540); open: sections of a course (tutorial,
@@ -1009,3 +1030,10 @@ as-is; IDs are never renumbered. Likewise POS.0005 and REJ.0125,
 outside the numbering in tens, and the group Working methods starting
 at POS.0850 rather than at a hundred, stand as they are by DEC.0110
 and DEC.0130.
+
+- **THR.0690** [intent, solution-design] The conversion to one sentence
+  per line (POS.1580): the script that converts the engine's and the
+  projects' prose, its guard of the Markdown traps, its proof by
+  pandoc's syntax tree before and after, and the light rule of `/check`;
+  in the first release, before the threads are cut into files
+  (THR.0620). Opened 2026-10-17.
