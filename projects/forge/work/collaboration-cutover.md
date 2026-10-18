@@ -11,7 +11,8 @@ change when a row moves. Dependencies: the second release needs the
 first, the third the second, the fourth the first and its trigger, a
 second author writing into a project or a second clone of the same
 author with a branch in flight. What touches nothing the migration
-migrates ships first, in an ordinary release, the preparation. The
+migrates is built first, the preparation, shipped by its saves on
+main and the tag pre-r1, not by a release of its own (DEC.0260). The
 first release is then built on main, in one stretch, with no work on
 the projects between its sittings and no pull of the engine on the
 second machine until its release (DEC.0230, DEC.0240); estimated at
@@ -21,18 +22,18 @@ immediately before the first commit of the shape. Worked by hand since 2026-10-1
 `sources/cutover-challenge-review.md`, DEC.0230,
 `sources/cutover-challenge-review-2.md`, DEC.0240, DEC.0250).
 
-## Preparation, an ordinary release before the stretch: what touches nothing the migration migrates
+## Preparation, before the stretch: what touches nothing the migration migrates
 
 | id | step | part | files | closes with | state |
 |---|---|---|---|---|---|
 | R1.01 | filing by the command: the ledger step leaves the two contracts, `/critique` and `/challenge` number and file the report as `/check` does | SOL.0300, SOL.0330 | critic-contract, challenger-contract, critique, challenge skills | a critique run and filed | done |
 | R1.18 | unique names of reports | SOL.0810 | critique, challenge, check skills | two runs on one day | done |
 | R1.08 | the fifth digit: the regular expressions and the numeric sort in the scripts, the text NNNN in CLAUDE.md, the templates and the skills | SOL.0790 | scripts/forge-history.py, scripts/docs_map.py, CLAUDE.md, templates, skills | check engine; forge-history on an existing ID | done |
-| R1.12 | the push of an ahead repository; the registration check | SOL.0780, SOL.0740 | scripts/forge-save.py, scripts/forge-status.py, scripts/forge_repos.py | a save and a status on the fixture | doing |
+| R1.12 | the push of an ahead repository; the registration check | SOL.0780, SOL.0740 | scripts/forge-save.py, scripts/forge-status.py, scripts/forge_repos.py | a save and a status on the fixture | done |
 | R1.14 | `/setup`: the registration of `ours`, the backend, renormalize, rerere; `author:` in the instance file | SOL.0740, SOL.0150 | setup skill, templates/CLAUDE.local.md | a run on this machine | done |
-| R1.28 | `/ingest` asks what a source is for before the entry is written | SOL.0750 | ingest skill | an ingest on the fixture | doing |
-| R1.00 | the fixture by hand, once: a bare remote in `tmp/fixture.git` and one project `projects/fixture` cloned from it by the principal's git, a copy of a small real project's files in the old shape; on it `--apply`, `--undo` and the test of `ours` run; the fixture script, the shapes and the skip by name deferred (DEC.0250) | SOL.0830, TBC.0050 | none; the principal's git | the project cloned, forge-status clean | todo |
-| R0.01 | `/document`, `/release` on main: an ordinary release, no migration, no Action | SOL.0530 | docs/, README.md, RELEASE-NOTES.md | the release pushed | todo |
+| R1.28 | `/ingest` asks what a source is for before the entry is written | SOL.0750 | ingest skill | an ingest on the fixture | done |
+| R1.00 | the fixture by hand, once: a bare remote in `tmp/fixture.git` and one project `projects/fixture` cloned from it by the principal's git, a copy of a small real project's files in the old shape; on it `--apply`, `--undo` and the test of `ours` run; the fixture script, the shapes and the skip by name deferred (DEC.0250) | SOL.0830, TBC.0050 | none; the principal's git | the project cloned, forge-status clean | done |
+| R0.01 | `/document`, `/release` on main: an ordinary release, no migration, no Action; dropped 2026-10-18 (DEC.0260): the preparation ships by its saves and the tag, the documentation and the release notes catch up at the first release | SOL.0530 | docs/, README.md, RELEASE-NOTES.md | the release pushed | dropped |
 
 ## Release 1, on main in one stretch: the project file, the header, the ledger at read time, threads as files, the attributes with ours and binary, the registration, unique names of reports, the migration
 

@@ -438,3 +438,25 @@ them here was THR.0070, resolved by DEC.0040 (no back-fill). -->
   both sides. What the rest should look like is better decided on a
   migrated engine than on paper.
 - **Date:** 2026-10-18
+
+## DEC.0260 — The preparation ships by its saves on main and the tag pre-r1, not by a release of its own; the documentation and the release notes catch up at the first release
+- **Decision:** The preparation of the brief `collaboration`, the rows
+  of the cutover plan that touch nothing the migration migrates, ships
+  by its ordinary saves on `main`; the stretch of the first release
+  begins with the tag `pre-r1` taken on the last commit of the
+  preparation (R1.26 of the plan) and no release of its own stands
+  before it. The documentation and the release notes catch up at the
+  first release, which regenerates both. The part of DEC.0240 and of
+  CHL.0590 that asked for an ordinary release before the stretch is
+  changed in this; the rest of both stands.
+- **Reason:** The principal's word of 2026-10-18: `/document` and the
+  renders of a release before the stretch would be made again right
+  after it, at the cost of time and tokens and for no use. What the
+  release was to give is had cheaper: the way back is the tag, which
+  `/save forge --tag pre-r1` takes without a release; the second machine
+  pulls `main`, not a release, and the preparation is there since the
+  saves of 2026-10-18; the freeze is shortened by the building itself.
+  The one loss, a README and a documentation that do not yet speak of
+  `forge-report`, the registration and the question of `/ingest` until
+  the first release, is accepted.
+- **Date:** 2026-10-18

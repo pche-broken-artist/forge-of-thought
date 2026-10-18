@@ -1,8 +1,8 @@
 ---
-version: 0.5
+version: 0.6
 date: 2026-10-18
 status: draft
-last_change: 0.5 (2026-10-18): the inputs completed with the seven items the plan cites and the specification did not name (FND.1760).
+last_change: 0.6 (2026-10-18): the preparation without a release of its own, shipped by its saves and the tag pre-r1 (DEC.0260).
 project: forge
 file: work/collaboration-cutover.md
 ---
@@ -29,7 +29,7 @@ release and the migration of every project; it stays as it lies.
 - 40-solution-design.md: SOL.0670 to SOL.0830, each with its `Where` and its release mark; SOL.0300 and SOL.0330; SOL.0530 (the release, every release's run), SOL.0150 (the instance file, R1.14), SOL.0160 (the scaffold, R1.15), SOL.0420 and SOL.0460 (the publish and the documentation refusing the old shape, R1.20), SOL.0500 (the engine's own attributes, R1.07); TBC.0050, TBC.0060, TBC.0080
 - 10-intent.md: POS.1560 to POS.1770, POS.1120, POS.1140, POS.0220 (the renumbering at a clash, R2.14)
 - threads.md: THR.0620 (row 9), THR.0650, THR.0690, THR.0700, THR.0710
-- decisions.md: DEC.0210, DEC.0220, DEC.0230, DEC.0240, DEC.0250
+- decisions.md: DEC.0210, DEC.0220, DEC.0230, DEC.0240, DEC.0250, DEC.0260
 - 00-brief-collaboration.md, section M (the steps of a migration run)
 - sources/cutover-plan-critique.md, sources/cutover-challenge-review.md, sources/cutover-challenge-review-2.md: the reviews the file was worked by hand against
 
@@ -41,7 +41,9 @@ cannot read a template that does not exist; the mechanism second
 cannot call a script that does not exist; then the tests the release
 needs before it (TBC.0050); then the release's run: the checks,
 `/document`, `/release`, the marks of the design turned over (SOL.0530),
-the migration where the release has one. A step carries an id (R1.01),
+the migration where the release has one. The preparation has no run
+of its own: it ships by its saves on main and ends with the tag
+`pre-r1` (DEC.0260). A step carries an id (R1.01),
 what is done, the part of the design it realises, the files, what closes
 it (a test, a check, a run) and a state: todo, doing, done, dropped. The
 state is the only thing that changes after the file is made.

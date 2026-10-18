@@ -81,7 +81,7 @@ by a making; by hand — set on the principal's word when he has worked
 the file and does not want it remade. -->
 | File | Specification | Inputs | Made | State |
 |---|---|---|---|---|
-| work/collaboration-cutover.md | work/collaboration-cutover.spec.md v0.5 | 40-solution-design.md v0.24 (SOL.0670 to SOL.0830, SOL.0300, SOL.0330, SOL.0530, SOL.0150, SOL.0160, SOL.0420, SOL.0460, SOL.0500, TBC.0050, TBC.0060, TBC.0080), 10-intent.md v5.22 (POS.1560 to POS.1770, POS.1120, POS.1140, POS.0220), threads.md (THR.0620, THR.0650, THR.0690, THR.0700, THR.0710), decisions.md (DEC.0210 to DEC.0250), 00-brief-collaboration.md v0.8 (M), sources/cutover-plan-critique.md, sources/cutover-challenge-review.md, sources/cutover-challenge-review-2.md | 2026-10-17 | by hand |
+| work/collaboration-cutover.md | work/collaboration-cutover.spec.md v0.6 | 40-solution-design.md v0.24 (SOL.0670 to SOL.0830, SOL.0300, SOL.0330, SOL.0530, SOL.0150, SOL.0160, SOL.0420, SOL.0460, SOL.0500, TBC.0050, TBC.0060, TBC.0080), 10-intent.md v5.22 (POS.1560 to POS.1770, POS.1120, POS.1140, POS.0220), threads.md (THR.0620, THR.0650, THR.0690, THR.0700, THR.0710), decisions.md (DEC.0210 to DEC.0260), 00-brief-collaboration.md v0.8 (M), sources/cutover-plan-critique.md, sources/cutover-challenge-review.md, sources/cutover-challenge-review-2.md | 2026-10-17 | by hand |
 
 ## Sources
 <!-- Registration only. External inputs, immutable once registered.
@@ -382,6 +382,8 @@ as `rejected`. -->
 | FND.1940 | low | contradiction | resolved | 2026-10-18-critique-clarity.md | the design's head says no part answers POS.0700 while SOL.0170 realises it, and its list of items added since 0.1 names four of twenty-five; design 0.26 (head) |
 | FND.1950 | low | conformance | resolved | 2026-10-18-check-engine-1746-9a79.md | the check skill still contrasts the check agent with a critic and a challenger that write, after both stopped writing (R1.01); the sentence says like, not unlike |
 | FND.1960 | low | conformance | resolved | 2026-10-18-check-engine-1746-9a79.md | the readme recipe's pinned text of video 1 names "the lock" among the steps of a brief's birth, a mechanism withdrawn (POS.0110, THR.0520); recipe readme 0.67 says the approval, the README at the next render |
+| FND.1970 | low | conformance | resolved | 2026-10-18-check-light-3-2114-fb83.md | TBC.0010 and TBC.0020 of the design, the principal's, have no line under Waiting on principal; the lines of THR.0370 and THR.0520 name them |
+| FND.1980 | low | conformance | resolved | 2026-10-18-check-light-3-2114-fb83.md | the Waiting line of THR.0620 says nothing decided while its row 9 is decided and in building; the line says so |
 
 Four review files are named outside the convention — accepted as they
 are by DEC.0140.
@@ -481,8 +483,9 @@ copy — CLAUDE.md, Ledger. -->
 - THR.0640 — when a thread that has become a plan is rather a brief,
   and whether large files are split; the `Was` question settled
   2026-10-17 (POS.1680); opened 2026-10-11.
-- THR.0520 — a layer for the solution; priority; steps 1 to 5 done,
-  step 6 (the BRD) paused 2026-10-04.
+- THR.0520 — a layer for the solution; priority; steps 1 to 5 done, step
+  6 (the BRD) paused 2026-10-04; TBC.0020 of the design, which check
+  keeps it true, decided here.
 - THR.0570 — the presentation of the forge and what is to be ready
   for it; opened 2026-10-04; the major 5.0 approved and released
   2026-10-10; his verdict on the two pitch renders, his judgement
@@ -497,7 +500,8 @@ copy — CLAUDE.md, Ledger. -->
 - THR.0360 — a layer with an external audience, opened 2026-09-14;
   worked in the brief `brd`, born 2026-10-16 and at 0.2 draft (the
   Briefs row); its IDs being decided one at a time.
-- THR.0370 — Mermaid diagrams in Word; deferred 2026-09-12, open.
+- THR.0370 — Mermaid diagrams in Word; deferred 2026-09-12, open;
+  TBC.0010 of the design, the mermaid-cli dependency, his decision.
 - THR.0320 — a `harness` lens; decided in substance 2026-09-05,
   mechanism open, no priority.
 - THR.0240 — the size of CLAUDE.md; first instance of the answer at
@@ -557,6 +561,7 @@ copy — CLAUDE.md, Ledger. -->
   CHL.0220, not before 5.0.
 - THR.0610 — the horizon statement the intent lacks (POS.1360);
   opened 2026-10-10 at the approval of 5.0, for a 5.x round.
-- THR.0620 — a plan for the forge after 5.0, Claude's synthesis;
-  nothing decided, the questions to be asked one by one; opened
-  2026-10-10.
+- THR.0620 — a plan for the forge after 5.0, Claude's synthesis; row 9
+  decided in the brief `collaboration` and in building (DEC.0250, the
+  plan `work/collaboration-cutover.md`), the other rows open, their
+  questions to be asked one by one; opened 2026-10-10.
