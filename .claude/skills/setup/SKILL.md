@@ -1,5 +1,5 @@
 ---
-description: First run after cloning the engine — create and fill CLAUDE.local.md by interview, set the session model to the forge's default, offer the git identity per host and the global guard in the global git configuration git reads; never overwrites, runs no git operation
+description: First run after cloning the engine — create and fill CLAUDE.local.md by interview, set the session model to the forge's default, offer the git identity per host, the global guard and the registration of the merge drivers in the global git configuration git reads; never overwrites, runs no git operation
 disable-model-invocation: true
 ---
 
@@ -13,15 +13,20 @@ The conversation language is not configured yet on a true first run:
 speak whatever language the user speaks to you.
 
 1. **`CLAUDE.local.md`** at the engine root.
-   - If it already exists: report briefly what it holds and do not
-     touch it.
+   - If it already exists: report briefly what it holds, touch
+     nothing it has, and offer the lines the template has and the
+     file lacks (an `Author` line on an instance made before it
+     existed), asked for one by one and written on the user's word.
    - Otherwise copy `templates/CLAUDE.local.md` to the root and fill
      it by elicitation interview, one question at a time, the
      language first so that every later question arrives in it:
      - **Conversation language** — the language the working
        conversation runs in (the template says what follows it);
      - **Principal** — the role, whose thinking is being forged (the
-       template's placeholder).
+       template's placeholder);
+     - **Author** — the principal's handle, short, as it stands in
+       the author column of every history record he decides and as
+       the key of his ID block (SOL.0790).
    - Keep the template's format; the file is gitignored and never
      committed.
    - Close with the **git identity**, which is git's, per host
@@ -57,6 +62,24 @@ speak whatever language the user speaks to you.
      `/import-project`: `scripts/forge-clone.py` reports the identity
      git resolves for the clone, and `/import-project` says what to do
      when it resolves none.
+   - Then the **registration of the merge drivers**, in the same
+     global file, once per machine, on the user's word (SOL.0740):
+     `scripts/forge-status.py` says first whether it is there; the
+     file is read, every key already carrying its value is reported
+     and left, every other is offered:
+     - `[merge "ours"]` `driver = true` and `[merge]` `renormalize =
+       true`;
+     - `[rebase]` `backend = merge` (the apply backend ignores
+       drivers);
+     - `[rerere]` `enabled = true`, a convenience;
+     - and, offered apart, `[merge]` `conflictStyle = zdiff3`.
+     Say in one sentence that these hold for every repository on the
+     machine: the merge backend is git's own default, renormalize
+     only evens line endings at a merge. The key of the
+     `forge-records` driver arrives with the driver and is not
+     offered before. Declined: print the lines for the user to apply
+     by hand. `forge-status` reports the registration afterwards, ok
+     or the keys missing.
 2. **`.claude/settings.local.json`**.
    - If it already exists: report the model it names and do not touch
      it.

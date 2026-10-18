@@ -1,8 +1,8 @@
 ---
-version: 0.29
+version: 0.30
 date: 2026-10-18
 status: draft
-last_change: 0.29 (2026-10-18): R1.12 of the cutover plan built: `forge-save` pushes a clean repository that is ahead and prints the manual steps of a conflicting rebase (SOL.0780); `forge-status` reports a missing registration of the drivers (SOL.0740).
+last_change: 0.30 (2026-10-18): R1.14 of the cutover plan built: `/setup` registers the merge drivers and writes `author:` into the instance file (SOL.0740, SOL.0150).
 project: forge
 audience: whoever realises the solution, a person or an agent
 ---
@@ -260,9 +260,13 @@ boundary kept by hand or an order of work.
   configuration files are the one thing it may edit outside the engine.
   It also registers the merge drivers and the git settings they need
   (SOL.0740), and writes `author: <handle>` into `CLAUDE.local.md`, the
-  key of an ID block and the author of every record (SOL.0790).
-  Realises: POS.1050, POS.0950. Choice: no real alternative recorded.
-  Where: `.claude/skills/setup/SKILL.md`, `templates/CLAUDE.local.md`,
+  key of an ID block and the author of every record (SOL.0790). On an
+  instance made before the `Author` line existed `/setup` offers the
+  lines the template has and the file lacks, written on the user's word,
+  never touching what is there. Realises: POS.1050, POS.0950. Choice: no
+  real alternative recorded. The registration and `author:` built
+  2026-10-18, the preparation of the cutover plan (R1.14). Where:
+  `.claude/skills/setup/SKILL.md`, `templates/CLAUDE.local.md`,
   `.claude/settings.local.json`, `scripts/forge-status.py`.
 - **SOL.0160 A project is born or brought in.** `/new-project` scaffolds
   a project by its kind from `templates/`, asks for the founding brief
@@ -1099,12 +1103,12 @@ boundary kept by hand or an order of work.
   against a registration per repository, which the migration must not
   touch; a second clone of the engine on the machine runs the primary's
   driver, and `forge-status` reports a difference of release (SOL.0750
-  tolerates one). Partly built: the report of `forge-status` 2026-10-18,
-  the preparation (R1.12), the three keys and the driver's path when
-  set; the registration itself R1.14, the driver's key the second
-  release with the driver. Where: `.claude/skills/setup/SKILL.md`,
-  `CLAUDE.md` (Persistence), `scripts/forge-status.py`,
-  `scripts/forge_repos.py`.
+  tolerates one). Built 2026-10-18, the preparation of the cutover plan:
+  the report of `forge-status` (R1.12), the registration by `/setup` of
+  `ours`, the backend, renormalize and rerere with the offer of zdiff3
+  (R1.14); the driver's own key arrives with the driver, the second
+  release. Where: `.claude/skills/setup/SKILL.md`, `CLAUDE.md`
+  (Persistence), `scripts/forge-status.py`, `scripts/forge_repos.py`.
 - **SOL.0750 The driver for sets of records.**
   `scripts/forge-records.py`, git's merge driver `forge-records` (base,
   ours, theirs, path): the case by path, immutable lines (histories,

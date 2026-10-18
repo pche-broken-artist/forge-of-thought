@@ -16,11 +16,11 @@ chain grows by adding a
 layer's definition, without reworking anything that exists. Nothing is
 implemented here; the engine specifies.
 
-Who the principal is and what language the conversation runs in are
-instance facts, not properties of the system: they live in
-`CLAUDE.local.md` at the engine root (gitignored, created from
-`templates/CLAUDE.local.md` and filled by `/setup` on a new machine),
-never here.
+Who the principal is, what language the conversation runs in and the
+handle the principal signs records with are instance facts, not
+properties of the system: they live in `CLAUDE.local.md` at the engine
+root (gitignored, created from `templates/CLAUDE.local.md` and filled by
+`/setup` on a new machine), never here.
 
 ## Roles
 - **Principal:** whoever's thinking is being forged. Supplies ideas,
@@ -487,7 +487,11 @@ stanzas in `~/.gitconfig`, offered by `/setup`), and the forge sets
 none. The recommended global guard is `user.useConfigOnly = true`
 with no global `user.name`/`user.email` (offered by `/setup`), so a
 repository on a host with no stanza fails aloud instead of taking a
-default. A project "not under git" is a
+default. `/setup` also registers, once per machine and on the user's
+word, the merge drivers and the git settings they need in that same
+global file, and `forge-status` says when the registration is
+missing, since an unregistered clone silently falls back to a
+conflict (SOL.0740). A project "not under git" is a
 property, not a defect. The scripts in `scripts/` are the only door
 to git — reading state included, no exceptions, for Claude enforced
 by the deny rules of `.claude/settings.json`; how many there are is
