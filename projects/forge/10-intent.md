@@ -1,8 +1,8 @@
 ---
-version: 5.20
+version: 5.22
 date: 2026-10-18
 status: draft
-last_change: 5.20 (2026-10-18): the first release of the brief collaboration built on main in one stretch, the branch of DEC.0220 withdrawn (DEC.0230, THR.0620).
+last_change: 5.22 (2026-10-18): an ID on a branch of one clone allocated over every local branch, the blocks between clones and authors, the trigger of the fourth release widened to a second clone (POS.1730, POS.1110); the one exception to never renumbered, at a clash of a merge, the thread file renamed with it (POS.0220, POS.1680).
 project: forge
 audience: principal + Claude only
 ---
@@ -521,7 +521,10 @@ position that already stands elsewhere.
   `concerns` (the artefact, today's bracket), `origin`, `status: open |
   closed`. A thread is not an artefact: its header is its state and
   changes on a branch too, the one header that does. A thread is never
-  moved, renamed or deleted; closing is `status: closed` and a `closed`
+  moved, renamed or deleted, with the one exception of POS.0220: a
+  thread whose number clashed at a merge is renamed with its new
+  number, by the same `changed` record (CHL.0510); closing is
+  `status: closed` and a `closed`
   record in the intent's history that says when and by what; a closed
   thread is immutable and is the archive, so `Was` for a thread is
   dropped; what returns is a new thread citing the old one. No title and
@@ -838,9 +841,12 @@ position that already stands elsewhere.
   something there; the file is made
   from it again whenever it changes. The principal works with the file
   freely, that is what it is for: a conclusion that is to hold goes
-  intent-first into a position (POS.0900), a change of the structure
-  into the specification, and a file touched by hand and not remade is
-  said so in the ledger's Work table. It is composed as any artefact is,
+  intent-first into a position (POS.0900); a change of the way or the
+  why made in the file, its task, its inputs, its method or what it
+  assumes, is carried into the specification in the same round and
+  written with it, the states of the work and its wording being the
+  file's alone; and a file touched by hand and not remade is said so
+  in the ledger's Work table. It is composed as any artefact is,
   by elicitation or handed over (POS.1410): Claude proposes with his
   assumptions and choices listed, the principal judges. Its neighbours
   stay what they are: a render is a view of the chain for an audience,
@@ -891,8 +897,15 @@ position that already stands elsewhere.
   delivery. Decided 2026-08-17.
 - **POS.0220** IDs use the format `PREFIX.NNNN` with three-letter
   prefixes, numbered in tens, each new group starting at the next
-  hundred. IDs are global and stable, never renumbered; items may move
-  between groups freely. Groups are plain headings with no IDs, no
+  hundred. IDs are global and stable, never renumbered, with one
+  exception, written here as such: where a merge shows two items that
+  took one number on two branches, the item of the branch that landed
+  second takes a new number, allocated over the local branches
+  (POS.1730), which see a third branch not yet landed, never from the
+  block or the sequence the two drew from; a `changed` record with the
+  reason "ID clash at merge" and `Was` the old number, its citations
+  corrected in that branch, and for a thread the file renamed with it
+  (POS.1680; CHL.0510). Items may move between groups freely. Groups are plain headings with no IDs, no
   metadata and no lifecycle; depth is capped at two levels. An ID keeps
   four digits as long as the number fits and takes a fifth only beyond
   9999 (`POS.10000`); no zero is added to an existing ID, and every
@@ -902,7 +915,17 @@ position that already stands elsewhere.
   1500 after two months, and reservations by the hundred spend them
   faster than use; the widening costs less before the reservations than
   after. Decided 2026-10-17.
-- **POS.1730** An ID on a branch comes from a block of its author.
+- **POS.1730** An ID on a branch of one clone is the next free number
+  read over every local branch of the repository: `forge_repos` lists
+  the branches and the highest number of the prefix in the histories,
+  the decisions and the thread files of each, by `git grep` over the
+  refs without a checkout, file by file, and the allocation takes the
+  maximum over the branches plus the step; no network, no block, two
+  worktrees and sequential branches of one author alike. It reads the
+  committed state of the branches: two windows allocating in the same
+  round before either has saved may still clash, a known limit, the
+  remedy POS.0220. Between clones
+  and between authors the number comes from a block of its author:
   `ids.md` in the project's root on main, one line per block ("THR 1000
   to 1990: <author>"), immutable lines of way 2, a thousand per prefix
   (a hundred IDs at the step of ten), assigned once by hand by the
@@ -928,9 +951,16 @@ position that already stands elsewhere.
   REJ.0270, REJ.0320. Decided 2026-10-17 (brief `collaboration`; the
   blocks per author on CHL.0260,
   `sources/architect-challenge-review.md`,
-  `sources/architect-challenge-review-2.md`). Built when a second author
-  writes into a project; until then the blocks change nothing, and the
-  conversion does not wait for them (DEC.0220).
+  `sources/architect-challenge-review-2.md`; the allocation over the
+  local branches on CHL.0510, `sources/cutover-challenge-review-2.md`).
+  Built when a second author writes into a project, or a second clone
+  of the same author carries a branch in flight while another clone
+  writes; a clone that pulls before it writes and carries no branch
+  does not collide, so a second machine that only pulls is no trigger
+  (the principal's word of 2026-10-18, CHL.0570); until then the blocks
+  change nothing, and the conversion does not wait for them; the
+  allocation over the local branches is the second release's
+  (DEC.0240).
 - **POS.0230** Prefix vocabulary, aligned with the group BRD standard
   where an equivalent exists: REQ, OOS, CON, ASM, DEL, TBC, SCR in the
   assignment; POS, THR, REJ, FCT in the intent; FND, CHL, DEC
@@ -1459,7 +1489,9 @@ position that already stands elsewhere.
   saves and now and then releases, and sees none of this. What the forge
   knows of a merge is the four ways of merging it tells git (POS.1560)
   and the landing (POS.1660); the hole of two branches taking the same
-  ID is closed by POS.1730. The boundary against the wrapper of git the
+  ID is closed by POS.1730, within one clone by the allocation over the
+  local branches, between clones and authors by the blocks. The
+  boundary against the wrapper of git the
   principal does not want: the script does creation and switching, which
   only change where the next commit lands, and nothing that rewrites
   history. Several people on one project are several branches or clones

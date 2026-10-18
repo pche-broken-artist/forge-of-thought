@@ -1,8 +1,8 @@
 ---
-version: 0.2
-date: 2026-10-17
+version: 0.5
+date: 2026-10-18
 status: draft
-last_change: 0.2 (2026-10-17): the specification worked handed over: the task, the inputs, the method of steps per release, three assumptions, one open point, the making; the file made in the same round; renamed from operating-layer-plan to collaboration-cutover on the principal's word.
+last_change: 0.5 (2026-10-18): the inputs completed with the seven items the plan cites and the specification did not name (FND.1760).
 project: forge
 file: work/collaboration-cutover.md
 ---
@@ -16,20 +16,22 @@ companion, templates/history.md); its language: prime directive 6. -->
 
 ## Task
 A working plan of the building of the operating layer for the brief
-`collaboration`: the five releases of DEC.0210, each broken into steps
-in the order of building, every step naming the part of the design it
-realises, the files it touches, what closes it and its state, so that
-Claude follows it step by step on the principal's word and the principal
-tunes the order and the cut. For the principal and Claude. Dead after
-the fifth release and the migration of every project; it stays as it
-lies.
+`collaboration`: the preparation and the first release now, on `main`
+in one stretch (DEC.0230, DEC.0250), the other releases of DEC.0220
+kept as rows and deferred, their form decided after the first release
+(THR.0710); each release broken into steps in the order of building, every step naming the part of the design it realises, the
+files it touches, what closes it and its state, so that Claude follows
+it step by step on the principal's word and the principal tunes the
+order and the cut. For the principal and Claude. Dead after the fourth
+release and the migration of every project; it stays as it lies.
 
 ## Inputs
-- 40-solution-design.md: SOL.0670 to SOL.0820, each with its `Where` and its release mark; SOL.0300 and SOL.0330; TBC.0050, TBC.0060, TBC.0080
-- 10-intent.md: POS.1560 to POS.1770, POS.1120, POS.1140
-- threads.md: THR.0620 (row 9), THR.0650, THR.0690, THR.0700
-- decisions.md: DEC.0210
+- 40-solution-design.md: SOL.0670 to SOL.0830, each with its `Where` and its release mark; SOL.0300 and SOL.0330; SOL.0530 (the release, every release's run), SOL.0150 (the instance file, R1.14), SOL.0160 (the scaffold, R1.15), SOL.0420 and SOL.0460 (the publish and the documentation refusing the old shape, R1.20), SOL.0500 (the engine's own attributes, R1.07); TBC.0050, TBC.0060, TBC.0080
+- 10-intent.md: POS.1560 to POS.1770, POS.1120, POS.1140, POS.0220 (the renumbering at a clash, R2.14)
+- threads.md: THR.0620 (row 9), THR.0650, THR.0690, THR.0700, THR.0710
+- decisions.md: DEC.0210, DEC.0220, DEC.0230, DEC.0240, DEC.0250
 - 00-brief-collaboration.md, section M (the steps of a migration run)
+- sources/cutover-plan-critique.md, sources/cutover-challenge-review.md, sources/cutover-challenge-review-2.md: the reviews the file was worked by hand against
 
 ## Method
 One section per release. Within a release the steps in the order of
@@ -48,9 +50,10 @@ state is the only thing that changes after the file is made.
 - **ASM.0010** The releases are built one at a time in the order of DEC.0210, each released before the next starts.
 - **ASM.0020** A release is a round on the operating layer; the intent and the design change only where building shows they must, intent-first (CLAUDE.md, Working methods).
 - **ASM.0030** The engine's own project migrates first, on this clone, within the first release; every other project after it, each on one clone, by the principal.
+- **ASM.0040** During the first release no project is worked on and the engine is not pulled on the second machine until its release (DEC.0230); should that fail, the way back is the tag `pre-r1` on the engine and on every project.
 
 ## Open
-- **TBC.0010** (owner: principal) Whether `single-source-of-truth` runs at every release of the plan or at the first and the last only. Closed by: his word.
+- **TBC.0020** (owner: principal) Whether `agentic-platform` already has a second author by handle, the brief speaking of research from another account: if so, the fourth release's trigger has fired and the project gets its blocks at its migration. Closed by: his word.
 
 ## Making
 The file `work/collaboration-cutover.md`, English, Markdown: a heading

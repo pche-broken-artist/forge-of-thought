@@ -38,8 +38,8 @@ absorbed it; Note says what remains (partial) or the REJ (dropped). -->
 ## Documents
 | File | Version | Status | Date |
 |---|---|---|---|
-| 10-intent.md | 5.20 | draft | 2026-10-18 |
-| 40-solution-design.md | 0.22 | draft | 2026-10-18 |
+| 10-intent.md | 5.22 | draft | 2026-10-18 |
+| 40-solution-design.md | 0.23 | draft | 2026-10-18 |
 <!-- One row per layer below the intent, added when the layer is
 born; a layer the project does not have gets no row (CLAUDE.md,
 Ledger). -->
@@ -81,7 +81,7 @@ by a making; by hand — set on the principal's word when he has worked
 the file and does not want it remade. -->
 | File | Specification | Inputs | Made | State |
 |---|---|---|---|---|
-| work/collaboration-cutover.md | work/collaboration-cutover.spec.md v0.2 | 40-solution-design.md v0.20 (SOL.0670 to SOL.0820, SOL.0300, SOL.0330, TBC.0050 to TBC.0080), 10-intent.md v5.17 (POS.1560 to POS.1770, POS.1120, POS.1140), threads.md (THR.0620, THR.0650, THR.0690, THR.0700), decisions.md (DEC.0210), 00-brief-collaboration.md v0.8 (M) | 2026-10-17 | by hand |
+| work/collaboration-cutover.md | work/collaboration-cutover.spec.md v0.5 | 40-solution-design.md v0.23 (SOL.0670 to SOL.0830, SOL.0300, SOL.0330, SOL.0530, SOL.0150, SOL.0160, SOL.0420, SOL.0460, SOL.0500, TBC.0050, TBC.0060, TBC.0080), 10-intent.md v5.22 (POS.1560 to POS.1770, POS.1120, POS.1140, POS.0220), threads.md (THR.0620, THR.0650, THR.0690, THR.0700, THR.0710), decisions.md (DEC.0210 to DEC.0250), 00-brief-collaboration.md v0.8 (M), sources/cutover-plan-critique.md, sources/cutover-challenge-review.md, sources/cutover-challenge-review-2.md | 2026-10-17 | by hand |
 
 ## Sources
 <!-- Registration only. External inputs, immutable once registered.
@@ -112,6 +112,8 @@ of <original> | binary — one form per source. -->
 | architect-challenge-review-3.md | 2026-10-17 | ingested | text |
 | cutover-plan-critique.md | 2026-10-17 | ingested | text |
 | cutover-challenge-review.md | 2026-10-17 | ingested | text |
+| cutover-challenge-review-2.md | 2026-10-18 | ingested | text |
+| cutover-challenge-review-3.md | 2026-10-18 | ingested | text |
 
 ## Dependencies
 <!-- Registration only. Documents of other repositories this project
@@ -359,6 +361,9 @@ as `rejected`. -->
 | FND.1730 | low | conformance | resolved | 2026-10-17-check-light-2.md | TBC.0070 (the principal's, solution design 0.18) has no line under Waiting on principal; THR.0650's line does not carry the four tests of the brief collaboration (TBC.0050); both lines added |
 | FND.1740 | low | conformance | resolved | 2026-10-18-check-light.md | TBC.0010 of work/collaboration-cutover.spec.md (the principal's) has no line under Waiting on principal; the line added |
 | FND.1750 | low | conformance | resolved | 2026-10-18-check-light.md | the THR.0650 line says the four tests come after the first and the second release, the design at 0.22 says before the second, none after the first; the line brought to the design at 0.22 |
+| FND.1760 | medium | conformance | resolved | 2026-10-18-check-light-2.md | the work file collaboration-cutover.md cites SOL.0150, SOL.0160, SOL.0420, SOL.0460, SOL.0500, SOL.0530 and POS.0220, which its specification's Inputs do not name; the specification 0.5: the seven items added to its Inputs, each with the step it serves |
+| FND.1770 | low | conformance | resolved | 2026-10-18-check-light-2.md | the Work row's Inputs cell stands at the specification's 0.2 while the row says v0.4; the Inputs cell brought to the specification's Inputs |
+| FND.1780 | low | conformance | resolved | 2026-10-18-check-light-2.md | 00-brief-brd.history.md carries the template's placeholder comment in its document field; the comment deleted from the field |
 
 Four review files are named outside the convention — accepted as they
 are by DEC.0140.
@@ -417,6 +422,18 @@ intent version for accepted, DEC.NNNN for rejected. -->
 | CHL.0470 | accepted | The three gates that stop a release are placed before the parts they test, against the method's own rule (major) | 2026-10-17-challenge-architect-4.md | accepted 2026-10-18: each gate after what it tests, the fixture born in the old shape and migrated (the plan R1.00, R1.02, R2.01; SOL.0830, TBC.0050) |
 | CHL.0480 | accepted | R1.23 closes with a command built sixteen rows later and checks whose agents learn the new shape afterwards; the window the review called one step is seven rows (minor) | 2026-10-17-challenge-architect-4.md | accepted 2026-10-18: the header-reading scripts before the migration, the migration by the script directly, the checks at the release (the plan R1.10, R1.11, R1.23) |
 | CHL.0490 | accepted | Two parts of the design have no step (the state render, the Role before the write), and the tests disagree with TBC.0050 in both directions (minor) | 2026-10-17-challenge-architect-4.md | accepted 2026-10-18: the state render and the Role before the write as steps (R1.27, R1.28), the four tests before the second release, none after the first (R2.12, TBC.0050) |
+| CHL.0500 | accepted | The throwaway clones of every project have no way into the one tree: forge-clone names by URL and has no target, the flag has no home before the migration makes it, and a bare save pushes a migrated clone to its real origin (major) | 2026-10-18-challenge-architect.md | accepted 2026-10-18: the tests on the fixture alone, a real project dry in place, `forge-clone <url> <name>`, the skip of a bare save by name (SOL.0830, SOL.0800, DEC.0240; the plan R1.00, R1.09, R1.10, R1.13); `sources/cutover-challenge-review-2.md` |
+| CHL.0510 | accepted | Two branches of one author take the same ID, the second release's own use case; the fourth release's trigger is the wrong event and its mechanism would not close the hole (major) | 2026-10-18-challenge-architect.md | accepted 2026-10-18: the allocation over the local branches within one clone, the blocks between clones and authors, the trigger widened to a second clone, the one exception to never renumbered at a clash (POS.1730, POS.1110, POS.0220, POS.1680, SOL.0790, DEC.0240; the plan R2.13, R2.12, the heading of release 4; TBC.0020 of the specification for agentic-platform); `sources/cutover-challenge-review-2.md` |
+| CHL.0520 | accepted | The fixture is born from the templates of the day, so after the stretch the migration has nothing to test; nothing tests one release back or the conversion step on it (minor) | 2026-10-18-challenge-architect.md | accepted 2026-10-18: the fixture carries the old shape itself, a tag per shape on the bare remote (SOL.0830; the plan R1.00, R5.04) |
+| CHL.0530 | accepted | Three mechanics of the third release cannot run as written: the ignore-revs hash of a commit the script never makes, no mark for the conversion, the blame configuration on one machine (minor) | 2026-10-18-challenge-architect.md | accepted 2026-10-18: the sixth mark, the conversion's commit through forge-save and the hash by a second save, the blame file among the registrations of /setup on every machine (SOL.0800; the plan R5.04, R5.07) |
+| CHL.0540 | accepted | The second machine is not in the plan: three /setup runs, the release notes' Action wrong for it, the freeze a habit without a mechanism (minor) | 2026-10-18-challenge-architect.md | accepted 2026-10-18: the Action for every other machine in every release (SOL.0800; the plan R1.24, R2.11, R5.07, R4.06); the freeze by a refusal of forge-pull not built, DEC.0230 covers it today, on the principal's word |
+| CHL.0550 | accepted | The engine's own 35 threads get their origin guessed with nobody judging, and the round that corrects them has no step (minor) | 2026-10-18-challenge-architect.md | accepted 2026-10-18: a walkthrough over the origins of the engine's threads, the plan R1.29 |
+| CHL.0560 | accepted | R1.09's dry run in place overwrites the tracked hand-kept ledger it is diffed against and leaves a change a bare save pushes; its pass criterion was written for a migrated clone and cannot be graded over the old shape (major) | 2026-10-18-challenge-architect-2.md | accepted 2026-10-18: the ledger script writes only where the ledger is out of the index, else stdout or --out to tmp/, the old tables read as the archive (SOL.0680, TBC.0050, THR.0650; the plan R1.09) |
+| CHL.0570 | accepted | The fourth release's trigger, a second clone of the same author writing into a project, has already fired on the brief's own evidence (the double FND.1690); the plan treats it as future and builds the blocks on the first release alone although R4.02 extends R2.13 (major) | 2026-10-18-challenge-architect-2.md | accepted 2026-10-18 as modified: the trigger narrowed to a second clone with a branch in flight, a pulling clone no trigger; the principal's word: the collision of 2026-10-17 was his own two clones, the second only pulls (POS.1730, DEC.0240, THR.0620; the plan's heading of release 4 and intro); the merge of the fourth release into the second declined |
+| CHL.0580 | accepted | The remedy for a clash of IDs, the one exception to never renumbered, has no step, no owning command, and R2.13's test is written to avoid the race that would show it (major) | 2026-10-18-challenge-architect-2.md | accepted 2026-10-18: /merge runs the ledger script after the merge and settles a duplicate in its walkthrough, the light check reports one elsewhere (SOL.0820; the plan R2.14 with the race on the fixture) |
+| CHL.0590 | accepted | The stretch is equated with the release, not with the shape change: nine rows change nothing the migration migrates and could ship in an ordinary release before it, shortening the freeze (minor) | 2026-10-18-challenge-architect-2.md | accepted 2026-10-18: a Preparation section, an ordinary release before the stretch, with R1.01, R1.18, R1.08, R1.12, R1.14, R1.28, R0.02, R1.00, R0.01; the stretch begins at the first commit of the shape, the tag before it (DEC.0240, THR.0620; the plan) |
+| CHL.0600 | accepted | R1.00 uses forge-clone's target built in R1.10, the tag pre-r1 comes after two building commits, and R1.02 and R2.01 still say the clone the principal makes (minor) | 2026-10-18-challenge-architect-2.md | accepted 2026-10-18: the clone target as R0.02 before the fixture, R1.26 before R1.03, R1.02 and R2.01 on the fixture (the plan) |
+| CHL.0610 | accepted | The fixture's shape tags live on a bare remote in the gitignored tmp/ of one machine, so the one-release-back bed accepted for CHL.0520 does not survive the machine (minor) | 2026-10-18-challenge-architect-2.md | accepted 2026-10-18: the shapes as the script's own data, `fixture.py --shape <version>`, no tag on the bare remote (SOL.0830; the plan R1.00, R1.24, R5.07) |
 
 ## Waiting on principal
 <!-- What waits on the principal, one line per matter: cite, never
@@ -426,16 +443,19 @@ copy — CLAUDE.md, Ledger. -->
   decided, not before the first such project; opened 2026-10-15.
 - THR.0680 — a question put to the manual, `/man <free text>`;
   Claude's synthesis, to be built; opened 2026-10-15.
+- TBC.0020 of `work/collaboration-cutover.spec.md` — whether
+  `agentic-platform` already has a second author by handle; opened
+  2026-10-18.
 - THR.0690 — the conversion to one sentence per line (POS.1580),
   the third release of the brief collaboration (DEC.0220); opened
   2026-10-17.
+- THR.0710 — the form of the deferred releases of the brief
+  `collaboration`, the designed mechanism or git opened to Claude;
+  after the first release (DEC.0250); opened 2026-10-18.
 - THR.0700 — `/save` taking the conflict walkthrough of `/merge` in
   place of aborting a rebase; not now; opened 2026-10-17.
 - TBC.0030 — the independent challengers of POS.0800, not built; open
   since solution design 0.1.
-- TBC.0010 of `work/collaboration-cutover.spec.md` — whether
-  `single-source-of-truth` runs at every release of the plan or at the
-  first and the last; opened 2026-10-17.
 - a `strategy` artefact for the forge (`/new-artefact strategy`):
   tracked in the project ai-strategy (its work product
   `reconstruction`, TBC.0010) until the principal calls the command;

@@ -52,6 +52,11 @@ interview). The shape of the specification is `templates/work.md`.
    ledger row: the inputs with their versions, the date made, the
    state `current`. A file the principal has worked by hand and does
    not want remade is `by hand` on his word; Claude never remakes it
-   on his own judgement — he names it and offers.
+   on his own judgement — he names it and offers. A file by hand carries
+   the states of the work and its wording; a change of the way or the
+   why made in it, its task, its inputs, its method or what it
+   assumes, is carried into the specification in the same round and
+   written with it, the record in the specification's history naming
+   the change of the file (POS.1520).
 6. End by naming what was written and where, and what the ledger row
    says.

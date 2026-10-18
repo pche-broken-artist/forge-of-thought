@@ -1,7 +1,7 @@
 ---
 project: forge
 directory: sources
-updated: 2026-10-17
+updated: 2026-10-18
 ---
 
 # Index — sources of Forge of Thought
@@ -140,6 +140,18 @@ to its own 00-INDEX.md — two levels, never deeper. -->
 - **Origin:** written in Czech by a model in a session outside the forge, from the challenge report and the plan; pasted into the conversation by the principal on 2026-10-17 and stored in English on his word.
 - **Role:** the review by which the seven challenges of the cutover plan were settled, intent 5.19, design 0.21, DEC.0220 and the plan reworked (the principal's word of 2026-10-17).
 - **Use for:** the reasons behind the branch of the engine, the fixture script, the four releases and the trigger of the ID blocks.
+
+### `cutover-challenge-review-2.md`
+- **What:** a review of the architect's second challenge of the cutover plan (`challenges/2026-10-18-challenge-architect.md`), a verdict and a way of mending for each of CHL.0500 to CHL.0550, all six accepted: the next free number on a branch read over every local branch of the clone, the blocks per handle only between clones and authors, the trigger of the fourth release widened to a second clone of the same author, the one exception to "never renumbered" at a clash; the tests on the fixture alone, `forge-clone` with a target name, the guard of the fixture by name; the fixture carrying the old shape itself with a tag per shape; the conversion committing through forge-save, a sixth mark, the blame file; the Action for every other machine; a walkthrough over the origins of the engine's threads. Answers the challenger's four questions. In two pieces, the second three corrections of the first (the new number allocated over the branches, the thread file renamed at a clash, the test over the three kinds of records). Proposes; the principal adopted it whole on 2026-10-18.
+- **Origin:** written in the conversation's language by a model in a session outside the forge, from the challenge report and the plan; pasted into the conversation by the principal on 2026-10-18 and stored in English on his word.
+- **Role:** the review by which the six challenges of 2026-10-18 were settled, intent 5.22, design 0.23, DEC.0240, the specification 0.4 and the plan reworked (the principal's word of 2026-10-18).
+- **Use for:** the reasons behind the allocation over local branches, the renumbering at a clash, the fixture with its own old shape and the path of a second machine.
+
+### `cutover-challenge-review-3.md`
+- **What:** the third piece of the review of the architect's second challenge of the cutover plan, four corrections after the write of the second piece: the trigger in the plan's introduction, R1.26 the engine's tag alone, a concrete shape number with its closing in the release rows, and the limit of the allocation over the local branches, which reads the committed state only, two windows before a save may clash, the remedy POS.0220.
+- **Origin:** written in the conversation's language by a model in a session outside the forge; pasted into the conversation by the principal on 2026-10-18 and stored in English on his word.
+- **Role:** the piece by which POS.1730 got its sentence on the committed state and the plan its corrections of 2026-10-18; the shape tag it corrects was dropped the same day by CHL.0610.
+- **Use for:** the reason the allocation over branches is a rule with a known limit and not a guarantee.
 
 ### `projects/lib-allwyn/sources/fork-brd/` (library document, cited, not copied)
 - **What:** the BRD layer built in a colleague's fork of the engine (intent 2.8, August 2026): the fork's rules, templates, skills and critic, three BRDs with three critique rounds, and the group's BRD standard and tutorial; the bundle's own index catalogues the fourteen files.

@@ -39,7 +39,9 @@ What you verify:
    has a row and every row its specification; a row whose file is not
    yet made is the normal case before the first making; whether a row
    is `current`, `stale` or `by hand` is `/work`'s to set, never a
-   finding;
+   finding; a work file that cites an item by ID (DEC, SOL, POS, TBC,
+   THR) not named among its specification's Inputs is a finding: the
+   file has moved past the way and the why (POS.1520);
    "Waiting on principal" matches what is actually open. A state
    word the template no longer carries (the mapping:
    `templates/ledger.md`, Findings) is an immediate fix, in the

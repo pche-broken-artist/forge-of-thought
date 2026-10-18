@@ -381,3 +381,60 @@ them here was THR.0070, resolved by DEC.0040 (no back-fill). -->
   engine's project branched with it, a release refused on a branch,
   the throwaway clones without a home, cost more than the risk.
 - **Date:** 2026-10-18
+
+## DEC.0240 — The trigger of the fourth release widened to a second clone with a branch in flight, the allocation over the local branches in the second release, the tests on the fixture alone, the first release's preparation shipped before the stretch; DEC.0220 and DEC.0230 changed in these
+- **Decision:** An ID on a branch of one clone is allocated over every
+  local branch of the repository, built in the second release of the
+  brief `collaboration` (POS.1730, SOL.0790); the blocks of IDs stay
+  the fourth release, on the trigger of a second author writing into a
+  project or a second clone of the same author carrying a branch in
+  flight while another clone writes; a clone that only pulls is no
+  trigger. The tests before and within the releases run on the fixture
+  alone; no clone of a real project is made, a real project gets the
+  dry run in place, its output to `tmp/` and never over a tracked
+  ledger (SOL.0830, SOL.0800, SOL.0680). The rows of the first release
+  that touch nothing the migration migrates ship before the stretch in
+  an ordinary release; the stretch begins at the first commit of the
+  new shape, the tag `pre-r1` immediately before it. DEC.0220 and
+  DEC.0230 stand in the rest.
+- **Reason:** CHL.0510 and CHL.0500
+  (`challenges/2026-10-18-challenge-architect.md`, settled by
+  `sources/cutover-challenge-review-2.md`): the blocks per handle
+  leave two branches of one handle taking the same number, the case
+  of two windows the second release is built for, so the hole opens
+  with the second release and the trigger "a second author" was the
+  wrong event; both worktrees are one repository, so the free number
+  can be read over its local branches with no network and no block. A
+  clone of a real project has no way into the one tree through
+  `forge-clone` and would be swept and pushed by a bare save; the
+  fixture, carried by a script, is enough. CHL.0560 to CHL.0600
+  (`challenges/2026-10-18-challenge-architect-2.md`, settled in a
+  walkthrough on 2026-10-18): the collision of 2026-10-17 was the
+  principal's own two clones, the second of which only pulls, and
+  during the migration nobody else writes, on his word, so the trigger
+  as widened had not fired and is narrowed; the dry run in place would
+  have overwritten a tracked ledger; the freeze protects the change of
+  the shape, not the whole release, so what does not touch the shape
+  ships first and the stretch shortens by a sitting or two.
+- **Date:** 2026-10-18
+
+## DEC.0250 — The brief `collaboration` built as the preparation and the first release now; the second and the fourth release deferred, their form decided after the first release; the fixture one project made by hand
+- **Decision:** The brief `collaboration` is built as the preparation
+  and the first release now. The second and the fourth release are
+  deferred; their form, the driver, `/merge`, the worktree and the
+  allocation as designed, or git opened to Claude with the deny rule
+  narrowed to the destructive verbs, is decided after the first
+  release from how it works (THR.0710), with a second author the
+  trigger of the designed form in any case. The third release stays
+  optional, when nothing is in flight. The fixture is one project
+  `projects/fixture`, made by hand once from a bare remote in `tmp/`
+  as a copy of a small real project in the old shape; the fixture
+  script, the shapes and the skip by name are deferred with the
+  second release. DEC.0240 and DEC.0220 stand in the rest.
+- **Reason:** The principal's word of 2026-10-18: one author, a second
+  machine that only pulls, no colleague yet; two days of reviews had
+  added defences for cases that have not occurred, and the first
+  release alone removes the collision of 2026-10-17, the ledger on
+  both sides. What the rest should look like is better decided on a
+  migrated engine than on paper.
+- **Date:** 2026-10-18

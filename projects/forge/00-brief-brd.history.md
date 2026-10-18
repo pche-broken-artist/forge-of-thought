@@ -1,6 +1,6 @@
 ---
 project: forge
-document: 00-brief-brd.md  # the versioned document this history belongs to
+document: 00-brief-brd.md
 ---
 
 # History — 00-brief-brd.md
