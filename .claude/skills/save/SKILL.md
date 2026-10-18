@@ -1,6 +1,6 @@
 ---
-description: Save the forge to git — the light check, then commit and push; no renders
-argument-hint: '[project-slug] [-m "message"] [--tag name]'
+description: Save the forge to git — the light check, then commit and push; no renders; --quick leaves the check out
+argument-hint: '[project-slug] [-m "message"] [--tag name] [--quick]'
 disable-model-invocation: true
 ---
 
@@ -12,7 +12,8 @@ own (POS.0940); what the save does per repository is stated in the
 help header of `scripts/forge-save.py`, and CLAUDE.md (Persistence)
 carries the one-line summary (POS.1070).
 Arguments (`[slug]`, `-m "message"`, `--tag <name>`) are passed
-through to the script; a project without a repository is a property,
+through to the script; `--quick` is this skill's alone, leaves the
+check out and nothing else (POS.1100), and is never passed on; a project without a repository is a property,
 not a defect (CLAUDE.md, Persistence) — relay the script's note in
 the report.
 
@@ -21,7 +22,8 @@ the report.
    engine and each project
    separately, with the branch each is on. A project "not under git"
    with changes is named in the report and otherwise left alone.
-1a. Run the `light` check on every repository in scope and settle
+1a. Unless `--quick` was given, run the `light` check on every
+   repository in scope and settle
    its report through the `/check` procedure
    (`.claude/skills/check/SKILL.md`; the engine's project is
    `forge`); a save never waits on a finding the principal has not
@@ -41,6 +43,7 @@ the report.
    name git accepts (`pre-save-release-split` as readily as a
    number). The one fixed name, `v<major>` at an approved major, is
    `/release`'s rule; it runs this command with it (POS.1100).
-4. Only then run `python scripts/forge-save.py $ARGUMENTS` and report the
+4. Only then run `python scripts/forge-save.py $ARGUMENTS`, `--quick`
+   left out, and report the
    outcome — the script itself prints the commit's file summary and
    the tag; no direct git verification afterwards.

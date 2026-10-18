@@ -514,7 +514,8 @@ docstring; what several scripts share lives in a module beside them
 (`forge_repos.py`, `forge_tools.py`, `docs_map.py`), never twice.
 
 Two doors, two speeds. `/save` runs its check and then commits and
-pushes on whatever branch is checked out, no render. `/release`, from
+pushes on whatever branch is checked out, no render; `--quick` leaves
+the check out. `/release`, from
 `main` only, runs its checks, re-renders the README and release notes
 and then saves with the release message and tag. Which checks each
 runs is its own definition's (`.claude/skills/save/SKILL.md`,
@@ -717,7 +718,7 @@ What a command does in full is its skill's
 | `/ledger [slug]` | state report from the ledger |
 | `/history <ID> [slug]` | the history of one item: its wording today, its records, the archive rows and the citations, by a script; Claude adds a few sentences |
 | `/check [check] [slug]` | run a check on a project or on the engine; bare = the check roster |
-| `/save [slug] [-m "message"] [--tag name]` | save one repository, or every one with changes |
+| `/save [slug] [-m "message"] [--tag name] [--quick]` | save one repository, or every one with changes; `--quick` without the check |
 | `/release [slug] [-m "message"] [--tag name]` | release one repository from `main` |
 | `/pull [slug]` | look at the remote and, clean and behind, pull one repository or every one with an origin; after a pull of the engine, the Action required lines crossed and the offer of the checks |
 | `/end` | end a session: what lives only in the conversation, what is unsaved, what a shutdown would lose |

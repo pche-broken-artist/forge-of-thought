@@ -1,8 +1,8 @@
 ---
-version: 5.22
+version: 5.23
 date: 2026-10-18
 status: draft
-last_change: 5.22 (2026-10-18): an ID on a branch of one clone allocated over every local branch, the blocks between clones and authors, the trigger of the fourth release widened to a second clone (POS.1730, POS.1110); the one exception to never renumbered, at a clash of a merge, the thread file renamed with it (POS.0220, POS.1680).
+last_change: 5.23 (2026-10-18): a quick way of the save, `--quick`, leaving the light check out and nothing else (POS.1100).
 project: forge
 audience: principal + Claude only
 ---
@@ -1464,9 +1464,14 @@ position that already stands elsewhere.
 - **POS.1100** Save and release are two commands. `/save` runs the
   `light` check (POS.1140) and then commits and pushes on whatever
   branch is checked out, through `forge-save`, no render, seconds.
-  `/release` runs on `main` only and refuses elsewhere, naming the
-  branch: its checks, with their walkthrough (POS.0570); the README and
-  release notes from the settled sources (POS.0730, POS.1000, POS.0810);
+  `/save --quick` leaves the `light` check out and nothing else: the
+  message is drafted from the records and confirmed as always, or given
+  with `-m`; the quick way is the principal's for a save he wants on the
+  remote at once, and `/release` has none, its checks being the
+  condition of a release. `/release` runs on `main` only and refuses
+  elsewhere, naming the branch: its checks, with their walkthrough
+  (POS.0570); the README and release notes from the settled sources
+  (POS.0730, POS.1000, POS.0810);
   the release commit "release <intent version>" and, at an approved
   major, the tag `v<major>`. The release number is the intent's version
   (POS.0730). Any other tag on request, `/save --tag` or `/release --tag`,

@@ -38,8 +38,8 @@ absorbed it; Note says what remains (partial) or the REJ (dropped). -->
 ## Documents
 | File | Version | Status | Date |
 |---|---|---|---|
-| 10-intent.md | 5.22 | draft | 2026-10-18 |
-| 40-solution-design.md | 0.23 | draft | 2026-10-18 |
+| 10-intent.md | 5.23 | draft | 2026-10-18 |
+| 40-solution-design.md | 0.24 | draft | 2026-10-18 |
 <!-- One row per layer below the intent, added when the layer is
 born; a layer the project does not have gets no row (CLAUDE.md,
 Ledger). -->
@@ -81,7 +81,7 @@ by a making; by hand — set on the principal's word when he has worked
 the file and does not want it remade. -->
 | File | Specification | Inputs | Made | State |
 |---|---|---|---|---|
-| work/collaboration-cutover.md | work/collaboration-cutover.spec.md v0.5 | 40-solution-design.md v0.23 (SOL.0670 to SOL.0830, SOL.0300, SOL.0330, SOL.0530, SOL.0150, SOL.0160, SOL.0420, SOL.0460, SOL.0500, TBC.0050, TBC.0060, TBC.0080), 10-intent.md v5.22 (POS.1560 to POS.1770, POS.1120, POS.1140, POS.0220), threads.md (THR.0620, THR.0650, THR.0690, THR.0700, THR.0710), decisions.md (DEC.0210 to DEC.0250), 00-brief-collaboration.md v0.8 (M), sources/cutover-plan-critique.md, sources/cutover-challenge-review.md, sources/cutover-challenge-review-2.md | 2026-10-17 | by hand |
+| work/collaboration-cutover.md | work/collaboration-cutover.spec.md v0.5 | 40-solution-design.md v0.24 (SOL.0670 to SOL.0830, SOL.0300, SOL.0330, SOL.0530, SOL.0150, SOL.0160, SOL.0420, SOL.0460, SOL.0500, TBC.0050, TBC.0060, TBC.0080), 10-intent.md v5.22 (POS.1560 to POS.1770, POS.1120, POS.1140, POS.0220), threads.md (THR.0620, THR.0650, THR.0690, THR.0700, THR.0710), decisions.md (DEC.0210 to DEC.0250), 00-brief-collaboration.md v0.8 (M), sources/cutover-plan-critique.md, sources/cutover-challenge-review.md, sources/cutover-challenge-review-2.md | 2026-10-17 | by hand |
 
 ## Sources
 <!-- Registration only. External inputs, immutable once registered.

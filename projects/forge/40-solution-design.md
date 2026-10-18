@@ -1,8 +1,8 @@
 ---
-version: 0.23
+version: 0.24
 date: 2026-10-18
 status: draft
-last_change: 0.23 (2026-10-18): the architect's two challenges of the plan settled: the allocation over the local branches and the renumbering at a clash (SOL.0790), its owner in /merge and the light check (SOL.0820), the sixth mark, the conversion's commit and the path of a second machine (SOL.0800), the fixture carrying every shape as its own data, cloned under a given name and skipped by name, the tests on it alone (SOL.0830), the ledger script's output mode and the old tables as the archive (SOL.0680, TBC.0050).
+last_change: 0.24 (2026-10-18): the Action of the migration said per project, not per machine: a project migrated once, on one clone, by whoever keeps it, every other clone pulling (SOL.0800).
 project: forge
 audience: whoever realises the solution, a person or an agent
 ---
@@ -1253,13 +1253,15 @@ direction, a boundary kept by hand or an order of work.
   until then every branch is landed or given up before the conversion's
   release; forks of the engine the same, a known limit. Claude within
   `/migrate` judges the origins of the threads from the script's print.
-  `/pull` of the engine says in Action required: `/migrate <slug>` on
-  every project, on one clone, then `/save`; and for every other
-  machine, the second clone of the engine first of all: `forge-pull`
-  of the engine, `/setup` for the registrations, `/pull` of every
-  project, no `/migrate` there (CHL.0540); the map, `check-project`
-  and every writing skill say "shape before the migration, run
-  `/migrate`" on a project of the old shape and do not write. Realises:
+  `/pull` of the engine says in Action required: `forge-pull` of the
+  engine, `/setup` for the registrations, then every project the clone
+  keeps: one already migrated elsewhere pulled by `/pull`, one not yet
+  migrated run through `/migrate` on that one clone and saved; whose
+  machine or instance the clone is makes no difference, every user of
+  the engine migrates his own projects (CHL.0540); the map,
+  `check-project` and every writing skill say "shape before the
+  migration, run `/migrate`" on a project of the old shape and do not
+  write. Realises:
   POS.1740, POS.0940, POS.0820. Choice: one script and one command
   against the hand migration of POS.0940, since every clone must come
   out the same; marks against an engine version in the project, which
