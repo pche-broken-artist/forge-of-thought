@@ -1,5 +1,5 @@
 ---
-description: Register external input (a file, or text pasted into the conversation) in sources/ — store, catalogue, ask what it is for, nothing more
+description: Register external input (a file, or text pasted into the conversation) in sources/ — store, ask what it is for, catalogue, nothing more
 argument-hint: "[file-or-path] [project-slug]"
 disable-model-invocation: true
 ---
@@ -69,15 +69,22 @@ else. Never silently re-register.
    `.extract.md` names; a binary already in git beside its extract
    is taken out of git only by the principal's own act there, by
    hand: no script of the forge does it, and never a sweep.
-4. **Index entry.** Add the source to `sources/00-INDEX.md` as an
+4. **Role, before anything is written.** Role is the principal's
+   word, asked before the index entry and the ledger row exist, so
+   that the entry carries it from its birth: an entry of the index
+   is a mutable block of the record driver, and a Role filled in
+   later would be a change of the block (POS.1670). One question,
+   "what is it for?", per source — a bundle one question for the
+   whole — one per message, as the elicitation interview has it; in
+   sweep mode source by source. The principal answers with the role,
+   or tells Claude to infer it — then Claude writes what the file
+   itself declares, marked *(inferred)*. Never inferred unasked, and
+   nothing of the source written before he answers.
+5. **Index entry.** Add the source to `sources/00-INDEX.md` as an
    entry in the shape of `templates/index.md` (create the index from
    it if missing), having read enough of the file to say truthfully
-   what it is. Role is the principal's word: after registration
-   Claude always asks "what is it for?"; the principal answers with
-   the role, or tells Claude to infer it — then Claude writes what the
-   file itself declares, marked *(inferred)*. Never inferred unasked;
-   `—` until he answers.
-5. **A library document is cited, not copied.** When the principal
+   what it is, the Role as answered.
+6. **A library document is cited, not copied.** When the principal
    points a project at a document that lives in a library
    (`projects/lib-<name>/…`), nothing is stored in `sources/`: add an
    index entry that names the path and says what it is for, and a
@@ -85,16 +92,15 @@ else. Never silently re-register.
    has it (POS.1020). Moving a document out of a project into a
    library is the reverse: ingest it there, replace the project's
    entry with the citation, register the dependency.
-6. **Nothing is processed.** `/ingest` never carries content into the
+7. **Nothing is processed.** `/ingest` never carries content into the
    intent or any other document; the rule — registration is not
    intake, the principal directs every use, provenance cites the
    file — is CLAUDE.md, Document chain, External inputs.
-7. **Bookkeeping and summary.** Update the Sources table in
+8. **Bookkeeping and summary.** Update the Sources table in
    `ledger.md`, a row as `templates/ledger.md` has the table;
    what the source is and is for lives in the index alone. In sweep
    mode, also fill index gaps for files already registered. The
-   reply after registration is three lines at most: the file stored
+   reply after registration is two lines at most: the file stored
    and its index entry; what the source adds to the intent, in one
-   line, or "nothing new"; the question "what is it for?" (step 4).
-   No analysis of the source's content and no next step implied; the
-   sources wait for the principal.
+   line, or "nothing new". No analysis of the source's content and no
+   next step implied; the sources wait for the principal.

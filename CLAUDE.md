@@ -253,8 +253,9 @@ POS.1320.
    the conversion runs and what it needs installed is the skill's and
    the script's header's. Registration does not
    imply intake: a source's role is individual, noted as free-text
-   Role in the resource index, and the principal alone directs how
-   and when each source is used. A set of related files
+   Role in the resource index, asked before the entry is written
+   (POS.1670), and the principal alone directs how and when each
+   source is used. A set of related files
    (e.g. a downloaded site with its index) lives as a subdirectory
    `sources/<slug>/` and counts as one source with one ledger entry;
    intent provenance cites individual files by path. Every bundle

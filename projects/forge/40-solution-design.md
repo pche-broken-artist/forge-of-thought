@@ -1,8 +1,8 @@
 ---
-version: 0.30
+version: 0.31
 date: 2026-10-18
 status: draft
-last_change: 0.30 (2026-10-18): R1.14 of the cutover plan built: `/setup` registers the merge drivers and writes `author:` into the instance file (SOL.0740, SOL.0150).
+last_change: 0.31 (2026-10-18): R1.28 of the cutover plan built: `/ingest` asks what a source is for before its entry is written (SOL.0750, POS.1670).
 project: forge
 audience: whoever realises the solution, a person or an agent
 ---
@@ -1131,8 +1131,11 @@ boundary kept by hand or an order of work.
   POS.0550, POS.1660 (the ordering). Choice: a driver of the forge's
   against `merge=union` (REJ.0280) and against a file per record
   (REJ.0310); the price is a script that must be registered on every
-  machine (SOL.0740). Not built; deferred (DEC.0250, THR.0710). Where:
-  `scripts/forge-records.py`.
+  machine (SOL.0740). The question of `/ingest` before the entry is
+  written, so that Role is in the mutable block from its birth
+  (POS.1670), built 2026-10-18, the preparation of the cutover plan
+  (R1.28); the driver Not built; deferred (DEC.0250, THR.0710). Where:
+  `scripts/forge-records.py`, `.claude/skills/ingest/SKILL.md`.
 - **SOL.0760 The version as a boundary.** A record on a branch carries
   `+` in its version column; `scripts/forge-land.py <slug>` appends one
   `landed` record per versioned document with `+` records and writes the
