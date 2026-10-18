@@ -2,8 +2,9 @@
 forge_repos.py - what the forge-* git scripts share: the engine root,
 the git check, the list of repositories to visit, running git, the
 state of a repository against its origin (`remote_state`: up to date,
-behind, ahead, diverged, no origin; POS.1490) and coloured output. Not
-a command.
+behind, ahead, diverged, no origin; POS.1490), the registration of
+the merge drivers on the machine (`registration_state`; SOL.0740) and
+coloured output. Not a command.
 
 The engine root is the parent of the directory this file lies in
 (`scripts/`). A project is `projects/<slug>`; it is a repository when
@@ -86,6 +87,37 @@ def remote_state(path):
     if ahead:
         return f"ahead {ahead}"
     return "up to date"
+
+
+# The registration /setup makes in the global git configuration, once
+# per machine (SOL.0740): the keys with the values they must carry.
+# `rerere.enabled` is a convenience and is never reported missing. The
+# driver's own key, `merge.forge-records.driver`, is checked only when
+# it is set, for a path that leads nowhere; it arrives with the driver.
+REGISTRATION = (
+    ("merge.ours.driver", "true"),
+    ("rebase.backend", "merge"),
+    ("merge.renormalize", "true"),
+)
+DRIVER_KEY = "merge.forge-records.driver"
+
+
+def registration_state():
+    """The registration of the merge drivers in the global git
+    configuration: (missing, broken) - the keys of REGISTRATION that
+    are absent or carry another value, and the registered command of
+    the forge-records driver when its script does not exist (None
+    otherwise). An unregistered clone silently falls back to a
+    conflict, so forge-status reports both (SOL.0740)."""
+    missing = [key for key, value in REGISTRATION
+               if git_out(["config", "--global", "--get", key], ENGINE_ROOT) != value]
+    driver = git_out(["config", "--global", "--get", DRIVER_KEY], ENGINE_ROOT)
+    broken = None
+    if driver:
+        script = next((t.strip("'\"") for t in driver.split() if t.endswith(".py")), None)
+        if script is None or not Path(script).is_file():
+            broken = driver
+    return missing, broken
 
 
 def project_path(slug):

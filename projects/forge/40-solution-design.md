@@ -1,8 +1,8 @@
 ---
-version: 0.28
+version: 0.29
 date: 2026-10-18
 status: draft
-last_change: 0.28 (2026-10-18): R1.08 of the cutover plan built: the fifth digit in the two patterns, the short form and CLAUDE.md (SOL.0790).
+last_change: 0.29 (2026-10-18): R1.12 of the cutover plan built: `forge-save` pushes a clean repository that is ahead and prints the manual steps of a conflicting rebase (SOL.0780); `forge-status` reports a missing registration of the drivers (SOL.0740).
 project: forge
 audience: whoever realises the solution, a person or an agent
 ---
@@ -1099,9 +1099,12 @@ boundary kept by hand or an order of work.
   against a registration per repository, which the migration must not
   touch; a second clone of the engine on the machine runs the primary's
   driver, and `forge-status` reports a difference of release (SOL.0750
-  tolerates one). Not built; the first release. Where:
-  `.claude/skills/setup/SKILL.md`, `CLAUDE.md` (Persistence),
-  `scripts/forge-status.py`, `scripts/forge_repos.py`.
+  tolerates one). Partly built: the report of `forge-status` 2026-10-18,
+  the preparation (R1.12), the three keys and the driver's path when
+  set; the registration itself R1.14, the driver's key the second
+  release with the driver. Where: `.claude/skills/setup/SKILL.md`,
+  `CLAUDE.md` (Persistence), `scripts/forge-status.py`,
+  `scripts/forge_repos.py`.
 - **SOL.0750 The driver for sets of records.**
   `scripts/forge-records.py`, git's merge driver `forge-records` (base,
   ours, theirs, path): the case by path, immutable lines (histories,
@@ -1185,9 +1188,11 @@ boundary kept by hand or an order of work.
   the state read once at the map and the reflection against a fetch at
   the write, so that the network never fails a round. The roles: a
   contributor's branch and `/save`, the integrator's `/merge` and
-  `/save` on main (POS.1770, SOL.0820). Partly built; the push of an
-  ahead repository the first release. Where:
-  `.claude/skills/forge/SKILL.md`,
+  `/save` on main (POS.1770, SOL.0820). Built 2026-10-18, the
+  preparation of the cutover plan (R1.12): the ahead counted against the
+  upstream without a fetch, a branch with no upstream reaching the
+  remote with its first commit as before; the roles with SOL.0820.
+  Where: `.claude/skills/forge/SKILL.md`,
   `.claude/skills/walkthrough/SKILL.md`, `scripts/forge-save.py`.
 - **SOL.0790 IDs on a branch.** Within one clone the allocation at the
   write reads every local branch: `forge_repos` lists the branches and

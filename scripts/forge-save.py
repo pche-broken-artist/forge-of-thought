@@ -18,7 +18,14 @@ WHAT IT DOES
 
     Per repository: stage everything, commit (message from -m, or a
     generated one), then - when an origin is configured - integrate
-    remote changes by rebase and push. Without an origin the commit is
+    remote changes by rebase and push. A clean repository that is
+    ahead of its upstream - a rebase finished by hand, a push that
+    failed - is pushed the same way, so that the push has a door
+    (SOL.0780 of the forge solution design); a branch with no upstream
+    yet reaches the remote with its first commit. A rebase that
+    conflicts is aborted, nothing lost, and the steps to finish it by
+    hand are printed: pull with rebase, resolve, add, continue, then
+    this script again. Without an origin the commit is
     kept locally and reported. With --tag <name> (one repository, so a
     slug is required) the commit is tagged and the tag pushed with it;
     when there is nothing to commit, the current HEAD is tagged, so a
@@ -58,9 +65,13 @@ def save_repo(name, path, message, tag):
 
     fr.git(["add", "-A"], path, check=True)
     nothing_to_commit = fr.git(["diff", "--cached", "--quiet"], path).returncode == 0
+    ahead = 0
     if nothing_to_commit and not tag:
-        fr.say(fr.label(name, "nothing to save"), "grey")
-        return
+        counts = fr.git_out(["rev-list", "--count", "@{u}..HEAD"], path)
+        ahead = int(counts) if counts else 0
+        if not ahead:
+            fr.say(fr.label(name, "nothing to save"), "grey")
+            return
 
     msg = message
     if not msg and not nothing_to_commit:
@@ -70,8 +81,10 @@ def save_repo(name, path, message, tag):
         more = f", +{len(files) - 5} more" if len(files) > 5 else ""
         msg = f"{scope}: {len(files)} file(s) - {shown}{more}"
 
-    if nothing_to_commit:
+    if nothing_to_commit and tag:
         fr.say(fr.label(name, "nothing to commit - tagging the current state"), "grey")
+    elif nothing_to_commit:
+        fr.say(fr.label(name, f"nothing to commit - {ahead} commit(s) ahead of origin, pushing"), "grey")
     else:
         r = fr.git(["commit", "-m", msg], path)
         if r.returncode != 0:
@@ -94,8 +107,13 @@ def save_repo(name, path, message, tag):
     if fr.git(["ls-remote", "--exit-code", "--heads", "origin", branch], path).returncode == 0:
         if fr.git(["pull", "--rebase", "origin", branch], path, capture=False).returncode != 0:
             fr.git(["rebase", "--abort"], path)
-            fr.fail(f"Remote changes in {name} conflict with yours. Nothing was lost - "
-                    "ask Claude for help before doing anything else.")
+            slug = "forge" if name.startswith("forge") else name
+            fr.fail(f"Remote changes in {name} conflict with yours. The rebase was aborted, "
+                    "nothing was lost. Finish it by hand, step by step, from a shell:\n"
+                    f"  git -C '{path}' pull --rebase origin {branch}\n"
+                    f"  resolve each conflicted file, then: git -C '{path}' add <file>\n"
+                    f"  git -C '{path}' rebase --continue   (again after each conflict, until it ends)\n"
+                    f"  python scripts/forge-save.py {slug}   (pushes the clean repository that is ahead)")
     if fr.git(["push", "-u", "origin", branch], path, capture=False).returncode != 0:
         fr.fail(f"Push failed in {name}. Check network / remote access and try again.")
     if tag and fr.git(["push", "origin", tag], path, capture=False).returncode != 0:
