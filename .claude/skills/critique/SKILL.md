@@ -11,8 +11,10 @@ does not change (who creates a lens, and when: CLAUDE.md, Isolated
 reviewers).
 
 Shared behaviour: the contract skill named in each lens file's
-front-matter (CLAUDE.md, Isolated reviewers). This command only
-chooses the lens, passes the project and verifies the bookkeeping.
+front-matter (CLAUDE.md, Isolated reviewers). Like `/check`, the lens
+agent writes nothing: it returns its report and this command files
+it. This command chooses the lens, passes the target, files the
+report and presents it.
 
 **Bare `/critique` — the roster.** List the available lenses (scan
 `.claude/agents/critic-*.md`) and recommend which fits the project's
@@ -30,9 +32,18 @@ naming the target if given. Pass only the project path and the
 target, nothing else (CLAUDE.md, Isolated reviewers).
 
 When it returns:
-1. Verify it created the review file and updated the ledger; fix ledger
-   bookkeeping if needed (states, links), without altering the findings
-   themselves.
+1. File the report. Write it into the project as
+   `reviews/YYYY-MM-DD-critique-<lens>.md`, suffix `-2` if one exists
+   for today: the agent's text word for word, its front-matter
+   included, nothing added, dropped or reworded but the IDs: the next
+   free `FND.NNNN` of the project's sequence, in tens, set at the head
+   of each new finding and listed in the delta summary's New line.
+   Then the ledger: a row per new finding in the Findings table
+   (severity and category from the finding, state `open`, source
+   review = this file); a finding the report has as reopened back to
+   `open`, as newly obsolete to `obsolete`; the document states
+   refreshed. Reports of several reviewers on one project are filed
+   one after another, never at once, so that no ID is given twice.
 2. Present the delta summary to the principal in the conversation
    language (`CLAUDE.local.md`): new findings (with severity), verified
    resolved, still open, newly obsolete, and what awaits his verdict.

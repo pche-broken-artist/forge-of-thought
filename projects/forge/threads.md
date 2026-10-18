@@ -1043,16 +1043,6 @@ project: forge
   of the commands table, a sentence in POS.1190. Opened 2026-10-15;
   origin: the principal's word and Claude's synthesis.
 
-Note: the ID THR.0120 was inadvertently used twice — first for the
-readme-recipe thread (opened 1.14, closed 1.16), then for the
-assignment-apparatus boundary (opened 1.24, closed 2.4). Citations of
-THR.0120 in the record of POS.0210 (history, 4.42) and in the
-archive's row of 2.4 refer to the latter. Recorded
-as-is; IDs are never renumbered. Likewise POS.0005 and REJ.0125,
-outside the numbering in tens, and the group Working methods starting
-at POS.0850 rather than at a hundred, stand as they are by DEC.0110
-and DEC.0130.
-
 - **THR.0690** [intent, solution-design] The conversion to one sentence
   per line (POS.1580): the script that converts the engine's and the
   projects' prose, its guard of the Markdown traps, its proof by
@@ -1071,12 +1061,25 @@ and DEC.0130.
   elicitation over a conflict, one conflict one question. Not now: first
   `/merge` in the first release of the brief `collaboration`, then this
   on what it taught. From CHL.0250. Opened 2026-10-17.
-- **THR.0710** [solution-design] The form of the deferred releases of
-  the brief `collaboration` (DEC.0250): the designed mechanism, the
-  driver, `/merge`, the worktree and the allocation over the local
-  branches, or git opened to Claude with the deny rule narrowed to the
-  destructive verbs, which would reverse POS.1490; decided after the
-  first release from how the migrated engine works, a second author
-  the trigger of the designed form in any case. What is seen on the
-  way, a merge that hurt, a version or an ID taken twice, is noted
-  here. The principal's word of 2026-10-18. Opened 2026-10-18.
+- **THR.0710** [intent, solution-design] The form of the deferred
+  releases of the brief `collaboration` (DEC.0250): the designed
+  mechanism, the driver, `/merge`, the worktree and the allocation over
+  the local branches, or git opened to Claude with the deny rule
+  narrowed to the destructive verbs, which would reverse POS.0550 and
+  POS.1200, the scripts as the one door and the harness as its wall,
+  POS.1490 and the `/merge` of POS.1760, and reopen the hole POS.1110
+  records as closed; decided after the first release from how the
+  migrated engine works, a second author the trigger of the designed
+  form in any case. What is seen on the way, a merge that hurt, a
+  version or an ID taken twice, is noted here. The principal's word of
+  2026-10-18. Opened 2026-10-18.
+
+Note: the ID THR.0120 was inadvertently used twice — first for the
+readme-recipe thread (opened 1.14, closed 1.16), then for the
+assignment-apparatus boundary (opened 1.24, closed 2.4). Citations of
+THR.0120 in the record of POS.0210 (history, 4.42) and in the
+archive's row of 2.4 refer to the latter. Recorded
+as-is; IDs are never renumbered. Likewise POS.0005 and REJ.0125,
+outside the numbering in tens, and the group Working methods starting
+at POS.0850 rather than at a hundred, stand as they are by DEC.0110
+and DEC.0130.

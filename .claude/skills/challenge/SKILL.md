@@ -11,8 +11,10 @@ those files. Adding a persona means adding an agent file from
 a persona, and when: CLAUDE.md, Isolated reviewers).
 
 Shared behaviour: the contract skill named in each persona file's
-front-matter (CLAUDE.md, Isolated reviewers). This command only
-chooses the persona, passes the target and verifies the bookkeeping.
+front-matter (CLAUDE.md, Isolated reviewers). Like `/check`, the
+persona agent writes nothing: it returns its report and this command
+files it. This command chooses the persona, passes the target, files
+the report and presents it.
 
 **Bare `/challenge` — the roster.** List the available personas (scan
 `.claude/agents/challenger-*.md`) and recommend which fits the
@@ -33,8 +35,15 @@ shift of direction. Running it on a near-final artefact is late but
 not useless.
 
 When it returns:
-1. Verify the challenge file exists and the ledger Challenges table is
-   updated; fix bookkeeping only, never the challenges themselves.
+1. File the report. Write it into the project as
+   `challenges/YYYY-MM-DD-challenge-<persona>.md`, suffix `-2` if one
+   exists for today: the agent's text word for word, its front-matter
+   included, nothing added, dropped or reworded but the IDs: the next
+   free `CHL.NNNN` of the project's sequence, in tens, set at the head
+   of each challenge. Then a row per challenge in the ledger's
+   Challenges table (state `open`, its headline, source review = this
+   file). Reports of several reviewers on one project are filed one
+   after another, never at once.
 2. Present it to the principal: the overall
    read first, then each
    challenge compressed to two or three sentences. Do not editorialise and

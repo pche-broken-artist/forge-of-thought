@@ -620,7 +620,9 @@ model; speed is bought with context, never with a weaker reviewer).
 One shape, strictly separate jobs, each with its own output (below).
 All
 are invoked by hand and settled by walkthrough; the reports are
-immutable and dated. No reviewer runs on Claude's own judgement;
+immutable and dated. Every agent returns its report with its findings
+unnumbered and writes nothing; the command numbers it, files it and
+writes the ledger row (POS.1140). No reviewer runs on Claude's own judgement;
 what a save and a release run is theirs to say (Persistence). The
 challenger has personas, the critic has lenses, the check has checks: one agent file
 each (`challenger-<persona>`, `critic-<lens>`, `check-<name>`), the
@@ -664,8 +666,7 @@ by its slug, or the engine.
 - **checks** (`/check <check> [slug]`) — mechanical conformance with
   the conventions, never substance or quality. Each check owns one
   concern and none another's; what each verifies is its agent file's,
-  the conduct and the report shape the contract's. The agent returns
-  its report and the command files it: `FND` in `reviews/`
+  the conduct and the report shape the contract's. `FND` in `reviews/`
   (`YYYY-MM-DD-check-<name>.md`), states as `templates/ledger.md` has
   them; a run that finds nothing files nothing. Composition is
   the caller's (`/save`, `/release`); checks never call each other.

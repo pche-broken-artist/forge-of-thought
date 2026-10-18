@@ -1,7 +1,7 @@
 ---
 name: challenger-<persona>
 description: Challenger persona "<persona>" — <who this is, in one line>. Challenges the substance of the principal's thinking. Not a document auditor.
-tools: Read, Edit, Glob, Grep, WebSearch, WebFetch, Write
+tools: Read, Glob, Grep, WebSearch, WebFetch
 model: inherit
 skills:
   - challenger-contract

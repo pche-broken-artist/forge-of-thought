@@ -1,7 +1,7 @@
 ---
 name: critic-<lens>
 description: Critic lens "<lens>" — <what this lens reads, in one line>. Reviews the quality of the documents. Not a challenger of the thinking.
-tools: Read, Edit, Write, Glob, Grep
+tools: Read, Glob, Grep
 model: inherit
 skills:
   - critic-contract

@@ -1,6 +1,6 @@
 ---
 name: critic-contract
-description: Contract of the critic — the behaviour shared by every critic lens (subject, way of working, report shape, ledger step), preloaded into each `critic-<lens>` agent through the `skills` field of its front-matter. Not a command; nothing to invoke.
+description: Contract of the critic — the behaviour shared by every critic lens (subject, way of working, report shape), preloaded into each `critic-<lens>` agent through the `skills` field of its front-matter. Not a command; nothing to invoke.
 user-invocable: false
 ---
 
@@ -61,9 +61,10 @@ file in `reviews/`.
   unless the document changed in a way that materially alters the
   situation (then reference the DEC). An older state word reads as
   `templates/ledger.md` (Findings) maps it.
-- **New findings** continue the global FND sequence, format `FND.NNNN`
-  in tens; never renumber. Severity high | medium | low; category from
-  your Lens section.
+- **New findings** carry no ID: the `/critique` procedure gives each
+  the next of the project's FND sequence, in tens, and never renumbers
+  (CLAUDE.md, Isolated reviewers). Severity high | medium | low;
+  category from your Lens section.
 - **Calibration.** Each artefact is judged against its own
   definition (`.claude/skills/forge/states/<artefact>.md`), never
   against another's. The assignment deliberately stays high-level and its
@@ -90,8 +91,11 @@ file in `reviews/`.
 
 ## Output
 
-Write `reviews/YYYY-MM-DD-critique-<lens>.md` (English, immutable;
-suffix `-2` if one exists for today):
+Return the report in your final message and write no file: the
+`/critique` procedure files it as `reviews/YYYY-MM-DD-critique-<lens>.md`
+and gives each new finding its ID (`.claude/skills/critique/SKILL.md`).
+Give a new finding no ID; name a known one by the ID it has. The
+report, English:
 
 ```markdown
 ---
@@ -106,14 +110,14 @@ reviewer: critic lens <lens> (isolated context)
 # Critique (<lens>) — YYYY-MM-DD
 
 ## Delta summary
-- **New:** FND.00xx, …
+- **New:** <count>, numbered by the command
 - **Verified resolved:** FND.00xx, …          <!-- regression-checked -->
 - **Still open:** FND.00xx, …
 - **Newly obsolete:** FND.00xx, …
 
 ## Findings
 
-### FND.00xx [severity] [category]
+### [severity] [category] — <one-line headline>
 - **Location:** <file, section / item ID>
 - **Issue:** …
 - **Why it matters:** …
@@ -127,7 +131,5 @@ without recording anything. -->
 <!-- the lens's own sections follow, as its Lens section defines them -->
 ```
 
-Then update `ledger.md`: add new FND entries to the Findings table
-(state `open`, source review = this file), set verified or reopened
-states on re-tested ones, and refresh the document states. Do not
-touch challenges (CHL) or any other document.
+Then nothing else: no file, no ledger. The session files the report
+and offers the walkthrough.

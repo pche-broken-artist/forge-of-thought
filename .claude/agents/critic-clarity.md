@@ -1,7 +1,7 @@
 ---
 name: critic-clarity
 description: Critic lens "clarity" — reads each artefact on its own for ambiguity, contradiction, duplication, scope hygiene and Requirement style. Fit before a handover. Reviews the quality of the documents. Not a challenger of the thinking.
-tools: Read, Edit, Write, Glob, Grep
+tools: Read, Glob, Grep
 model: inherit
 skills:
   - critic-contract

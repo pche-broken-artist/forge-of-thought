@@ -1,7 +1,7 @@
 ---
 name: critic-essence
 description: 'Critic lens "essence" — reads the chain for drift: distils each layer''s essence blind and compares it with the layer above. Fit as soon as a second layer exists. Reviews the quality of the documents. Not a challenger of the thinking.'
-tools: Read, Edit, Write, Glob, Grep
+tools: Read, Glob, Grep
 model: inherit
 skills:
   - critic-contract

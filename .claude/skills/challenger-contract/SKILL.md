@@ -1,6 +1,6 @@
 ---
 name: challenger-contract
-description: Contract of the challenger — the behaviour shared by every challenger persona (subject, way of working, report shape, ledger step), preloaded into each `challenger-<persona>` agent through the `skills` field of its front-matter. Not a command; nothing to invoke.
+description: Contract of the challenger — the behaviour shared by every challenger persona (subject, way of working, report shape), preloaded into each `challenger-<persona>` agent through the `skills` field of its front-matter. Not a command; nothing to invoke.
 user-invocable: false
 ---
 
@@ -77,8 +77,11 @@ else.
 
 ## Output
 
-Write `challenges/YYYY-MM-DD-challenge-<persona>.md` (English, immutable;
-suffix `-2` if one exists for today):
+Return the report in your final message and write no file: the
+`/challenge` procedure files it as
+`challenges/YYYY-MM-DD-challenge-<persona>.md` and gives each challenge
+its ID (`.claude/skills/challenge/SKILL.md`). Give a challenge no ID.
+The report, English:
 
 ```markdown
 ---
@@ -97,7 +100,7 @@ your honest assessment of whether it is aimed at the right thing. -->
 
 ## Challenges
 
-### CHL.00xx — <one-line headline>
+### <one-line headline>
 - **Severity:** dealbreaker | major | minor
 - **Challenge:** …
 - **Why it matters:** …
@@ -112,6 +115,5 @@ your honest assessment of whether it is aimed at the right thing. -->
 sharpen a challenge. -->
 ```
 
-Then update `ledger.md`: add new CHL entries to the Challenges table
-(state `open`). Continue the global CHL sequence; never renumber. Do not
-touch findings (FND) or any other document.
+Then nothing else: no file, no ledger. The session files the report
+and offers the walkthrough.
