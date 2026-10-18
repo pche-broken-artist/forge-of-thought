@@ -382,7 +382,8 @@ LICENSE                    # CC BY 4.0 — the engine is published
 scripts/                   # forge-save / forge-pull / forge-status
                            # / forge-clone / forge-branch (git),
                            # forge-history (the history of one
-                           # item), doc2md (document →
+                           # item), forge-report (the unique name
+                           # of a report), doc2md (document →
                            # Markdown), md2pptx (deck render →
                            # PowerPoint), md2docx (render → Word),
                            # each by pandoc or by a model, md2video
@@ -451,11 +452,14 @@ projects/<slug>/           # kind: thought — the chain
   work/<name>.spec.md                 # a work product: the specification,
   work/<name>.spec.history.md         # the way and the why, with its
   work/<name>.<ext>                   # history; and the file, the content
-  reviews/YYYY-MM-DD-critique-<lens>.md  # immutable critique runs
-  reviews/YYYY-MM-DD-check-<name>.md     # immutable check reports,
-                                      # filed when a check finds
-                                      # something
-  challenges/YYYY-MM-DD-challenge-<persona>.md  # immutable peer reviews
+  reviews/YYYY-MM-DD-critique-<lens>-HHMM-<hash>.md  # immutable
+                                      # critique runs; the name
+                                      # completed by forge-report
+  reviews/YYYY-MM-DD-check-<name>-HHMM-<hash>.md  # immutable check
+                                      # reports, filed when a check
+                                      # finds something
+  challenges/YYYY-MM-DD-challenge-<persona>-HHMM-<hash>.md  # immutable
+                                      # peer reviews
   research/YYYY-MM-DD-<topic>.md      # immutable research notes
   CLAUDE.md                # optional project-specific polish; note
                            # that Claude Code's /export writes into
@@ -654,21 +658,24 @@ by its slug, or the engine.
 - **critic** (`/critique <lens> [artefact]`) — document quality, never
   substance. What each lens reads and goes after is its agent
   file's, the shared conduct and the report shape the contract's. Produces `FND` in `reviews/`
-  (`YYYY-MM-DD-critique-<lens>.md`). Finding states: as
+  (`YYYY-MM-DD-critique-<lens>-HHMM-<hash>.md`, the name completed by
+  `scripts/forge-report.py`, as every report's is). Finding states: as
   `templates/ledger.md` has them.
 - **challengers** (`/challenge <persona> [artefact]`) — substance of
   the thinking, never document quality. The blind spots each persona
   hunts are its agent file's, severity,
   epistemic status and the ban on fabrication the contract's.
-  Produces `CHL` in `challenges/` (`YYYY-MM-DD-challenge-<persona>.md`).
+  Produces `CHL` in `challenges/`
+  (`YYYY-MM-DD-challenge-<persona>-HHMM-<hash>.md`).
   Challenge states: as `templates/ledger.md` has them. An accepted
   challenge is mended where it needs to be (POS.0440).
 - **checks** (`/check <check> [slug]`) — mechanical conformance with
   the conventions, never substance or quality. Each check owns one
   concern and none another's; what each verifies is its agent file's,
   the conduct and the report shape the contract's. `FND` in `reviews/`
-  (`YYYY-MM-DD-check-<name>.md`), states as `templates/ledger.md` has
-  them; a run that finds nothing files nothing. Composition is
+  (`YYYY-MM-DD-check-<name>-HHMM-<hash>.md`), states as
+  `templates/ledger.md` has them; a run that finds nothing files
+  nothing. Composition is
   the caller's (`/save`, `/release`); checks never call each other.
 
 ## Spin-off rule

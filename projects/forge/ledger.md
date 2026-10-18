@@ -39,7 +39,7 @@ absorbed it; Note says what remains (partial) or the REJ (dropped). -->
 | File | Version | Status | Date |
 |---|---|---|---|
 | 10-intent.md | 5.24 | draft | 2026-10-18 |
-| 40-solution-design.md | 0.26 | draft | 2026-10-18 |
+| 40-solution-design.md | 0.27 | draft | 2026-10-18 |
 <!-- One row per layer below the intent, added when the layer is
 born; a layer the project does not have gets no row (CLAUDE.md,
 Ledger). -->

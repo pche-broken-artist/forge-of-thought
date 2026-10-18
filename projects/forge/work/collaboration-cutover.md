@@ -26,7 +26,7 @@ immediately before the first commit of the shape. Worked by hand since 2026-10-1
 | id | step | part | files | closes with | state |
 |---|---|---|---|---|---|
 | R1.01 | filing by the command: the ledger step leaves the two contracts, `/critique` and `/challenge` number and file the report as `/check` does | SOL.0300, SOL.0330 | critic-contract, challenger-contract, critique, challenge skills | a critique run and filed | done |
-| R1.18 | unique names of reports | SOL.0810 | critique, challenge, check skills | two runs on one day | todo |
+| R1.18 | unique names of reports | SOL.0810 | critique, challenge, check skills | two runs on one day | done |
 | R1.08 | the fifth digit: the regular expressions and the numeric sort in the scripts, the text NNNN in CLAUDE.md, the templates and the skills | SOL.0790 | scripts/forge-history.py, scripts/docs_map.py, CLAUDE.md, templates, skills | check engine; forge-history on an existing ID | todo |
 | R1.12 | the push of an ahead repository; the registration check | SOL.0780, SOL.0740 | scripts/forge-save.py, scripts/forge-status.py, scripts/forge_repos.py | a save and a status on the fixture | todo |
 | R1.14 | `/setup`: the registration of `ours`, the backend, renormalize, rerere; `author:` in the instance file | SOL.0740, SOL.0150 | setup skill, templates/CLAUDE.local.md | a run on this machine | todo |

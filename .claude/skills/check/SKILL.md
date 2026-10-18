@@ -35,12 +35,16 @@ check on one target may be launched at once and awaited together.
 When it returns:
 1. File the report, when it has findings. Write it into the target
    project (for the engine `projects/forge`) as
-   `reviews/YYYY-MM-DD-check-<name>.md`, suffix `-2` if one exists
-   for today: a front-matter of `date`, `project`, `check`, `target`
-   and `reviewer: check <name> (isolated context)`, then the agent's
-   text word for word — nothing added, dropped or reworded but the
-   ID, the next free `FND.NNNN` of the project's sequence, in tens,
-   set at the head of each new finding. Add a row per new finding to
+   `reviews/YYYY-MM-DD-check-<name>.md`: a front-matter of `date`,
+   `project`, `check`, `target` and `reviewer: check <name> (isolated
+   context)`, then the agent's text word for word — nothing added,
+   dropped or reworded but the ID, the next free `FND.NNNN` of the
+   project's sequence, in tens, set at the head of each new finding;
+   then `python scripts/forge-report.py <path>` completes the name in
+   place with the time and the hash,
+   `YYYY-MM-DD-<kind>-<name>-HHMM-<hash>.md`, and prints it (POS.1720,
+   SOL.0810); the printed name is the one the ledger cites.
+   Add a row per new finding to
    the ledger's Findings table (category `conformance`, state `open`,
    source review = this file); a finding the report names as reopened
    goes back to `open`. A library has no Findings table and no

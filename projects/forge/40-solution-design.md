@@ -1,8 +1,8 @@
 ---
-version: 0.26
+version: 0.27
 date: 2026-10-18
 status: draft
-last_change: 0.26 (2026-10-18): the critiques of 2026-10-18 settled in the design: the rule of the mark "Not built" said once in the head and SOL.0530's walk worded for both marks (FND.1910); the fixture skipped by one key, the name (FND.1920); `--reserve` gone from SOL.0510 (FND.1930); the head's list of POS.0700 and of the items added since corrected (FND.1940); the diverged main in SOL.0820, the nesting of the two rules in SOL.0790 and the THR cited without a file in SOL.0680 following the intent 5.24.
+last_change: 0.27 (2026-10-18): R1.18 of the cutover plan built: every report named with time and hash by `scripts/forge-report.py`, the draft renamed in place (SOL.0810).
 project: forge
 audience: whoever realises the solution, a person or an agent
 ---
@@ -667,14 +667,24 @@ boundary kept by hand or an order of work.
 - **SOL.0810 Unique names of reports.** The filing of `/critique`,
   `/challenge` and `/check` names every report
   `YYYY-MM-DD-<kind>-<name>-HHMM-<4 hex of a content hash>.md`; the
-  names given before stay. Realises: POS.1720. Choice: time and hash on
-  every report against a counter or a suffix on the second report only,
-  since two branches both make a first report of the day. Not built; the
-  first release, where the branches are. Where:
-  `.claude/skills/critique/SKILL.md`,
-  `.claude/skills/challenge/SKILL.md`, `.claude/skills/check/SKILL.md`.
-
-### Rendering and publishing
+  names given before stay. The command writes the report under its date,
+  kind and name into `reviews/` or `challenges/` and
+  `scripts/forge-report.py <path>` completes the name in place, the
+  local time to the minute and the first four hex characters of the
+  SHA-256 of the file's bytes, and prints it; it refuses a name that
+  carries the tail already and a target that exists, and touches nothing
+  else, no helper directory, no git. Realises: POS.1720. Choice: time
+  and hash on every report against a counter or a suffix on the second
+  report only, since two branches both make a first report of the day;
+  the hash by a script against a one-liner at every filing or a model's
+  arithmetic, since what is deterministic is a script's (THR.0530); a
+  draft renamed in place against a draft in `tmp/`, which only this
+  machine has (the principal's word of 2026-10-18). Built 2026-10-18,
+  the preparation of the cutover plan (R1.18). Where:
+  `scripts/forge-report.py`, `.claude/skills/critique/SKILL.md`,
+  `.claude/skills/challenge/SKILL.md`, `.claude/skills/check/SKILL.md`;
+  the shape cited in CLAUDE.md and in the contracts.  ### Rendering and
+  publishing
 - **SOL.0400 Recipe and render.** A recipe is one file,
   `recipes/<recipe>.md`. `/render <recipe>` generates the output in an
   isolated subagent into `renders/<recipe>.md`, or the recipe's optional

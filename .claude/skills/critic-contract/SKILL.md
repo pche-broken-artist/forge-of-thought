@@ -55,7 +55,7 @@ file in `reviews/`.
   resolved since your last run; report each as verified or reopened.
   A report without a lens suffix (`YYYY-MM-DD-critique.md`) belongs to
   the retired single critic: its findings are yours if they fall under
-  your categories. A report named `YYYY-MM-DD-check-<name>.md` is a
+  your categories. A report named `*-check-<name>*.md` is a
   check's: its findings share the FND sequence and are never yours.
   Respect rejected findings — do not re-raise them
   unless the document changed in a way that materially alters the
@@ -92,7 +92,7 @@ file in `reviews/`.
 ## Output
 
 Return the report in your final message and write no file: the
-`/critique` procedure files it as `reviews/YYYY-MM-DD-critique-<lens>.md`
+`/critique` procedure files it as `reviews/YYYY-MM-DD-critique-<lens>-HHMM-<hash>.md`
 and gives each new finding its ID (`.claude/skills/critique/SKILL.md`).
 Give a new finding no ID; name a known one by the ID it has. The
 report, English:

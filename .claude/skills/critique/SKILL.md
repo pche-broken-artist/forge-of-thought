@@ -33,11 +33,14 @@ target, nothing else (CLAUDE.md, Isolated reviewers).
 
 When it returns:
 1. File the report. Write it into the project as
-   `reviews/YYYY-MM-DD-critique-<lens>.md`, suffix `-2` if one exists
-   for today: the agent's text word for word, its front-matter
-   included, nothing added, dropped or reworded but the IDs: the next
-   free `FND.NNNN` of the project's sequence, in tens, set at the head
-   of each new finding and listed in the delta summary's New line.
+   `reviews/YYYY-MM-DD-critique-<lens>.md`: the agent's text word for
+   word, its front-matter included, nothing added, dropped or reworded
+   but the IDs: the next free `FND.NNNN` of the project's sequence, in
+   tens, set at the head of each new finding and listed in the delta
+   summary's New line; then `python scripts/forge-report.py <path>`
+   completes the name in place with the time and the hash,
+   `YYYY-MM-DD-<kind>-<name>-HHMM-<hash>.md`, and prints it (POS.1720,
+   SOL.0810); the printed name is the one the ledger cites.
    Then the ledger: a row per new finding in the Findings table
    (severity and category from the finding, state `open`, source
    review = this file); a finding the report has as reopened back to

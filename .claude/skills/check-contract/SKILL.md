@@ -64,7 +64,7 @@ names the owner of each rule and never restates it (POS.1070).
 - **Known findings.** Before you report, read the Findings table of
   the target's ledger (for the engine `projects/forge/ledger.md`)
   and your own earlier reports in its `reviews/`
-  (`*-check-<name>.md`). A finding already filed is reported under
+  (`*-check-<name>*.md`). A finding already filed is reported under
   the ID it has and never as new: still open while it stands,
   reopened when the ledger has it resolved and it stands again. A
   rejected one is not raised.

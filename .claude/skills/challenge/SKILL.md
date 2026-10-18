@@ -36,11 +36,15 @@ not useless.
 
 When it returns:
 1. File the report. Write it into the project as
-   `challenges/YYYY-MM-DD-challenge-<persona>.md`, suffix `-2` if one
-   exists for today: the agent's text word for word, its front-matter
-   included, nothing added, dropped or reworded but the IDs: the next
-   free `CHL.NNNN` of the project's sequence, in tens, set at the head
-   of each challenge. Then a row per challenge in the ledger's
+   `challenges/YYYY-MM-DD-challenge-<persona>.md`: the agent's text
+   word for word, its front-matter included, nothing added, dropped or
+   reworded but the IDs: the next free `CHL.NNNN` of the project's
+   sequence, in tens, set at the head of each challenge; then `python
+   scripts/forge-report.py <path>` completes the name in place with the
+   time and the hash, `YYYY-MM-DD-<kind>-<name>-HHMM-<hash>.md`, and
+   prints it (POS.1720, SOL.0810); the printed name is the one the
+   ledger cites.
+   Then a row per challenge in the ledger's
    Challenges table (state `open`, its headline, source review = this
    file). Reports of several reviewers on one project are filed one
    after another, never at once.
