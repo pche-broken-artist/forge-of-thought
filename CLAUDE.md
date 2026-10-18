@@ -582,9 +582,12 @@ edited — a source from its registration, the others from creation;
 corrections happen downstream.
 
 ## ID scheme
-Format **`PREFIX.NNNN`**, all prefixes three letters. IDs are **global and
-stable — never renumbered.** Items may move between groups without ID
-change.
+Format **`PREFIX.NNNN`**, all prefixes three letters; `NNNN` here, in
+the templates and in the skills stands for the number: four digits as
+long as the number fits, a fifth only beyond 9999 (`POS.10000`), no
+zero added to an existing ID, and every sorting of IDs numeric by
+prefix and number (POS.0220). IDs are **global and stable — never
+renumbered.** Items may move between groups without ID change.
 
 Numbering: items in tens (`REQ.0010, REQ.0020`), each new group starting
 at the next hundred (`REQ.0100, REQ.0110`). Overflow takes the next free

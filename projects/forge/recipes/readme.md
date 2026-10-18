@@ -2,9 +2,9 @@
 project: forge
 purpose: readme
 audience: humans arriving at the repository
-version: 0.66
-updated: 2026-10-14
-last_change: 0.66 (2026-10-14): the videos promoted: a watch-first line under the title, a section "Watch it work" of their own after the challenge with every video tied to its page of the documentation, the Documentation section's reader paths opening with a video; the list of the videos pinned.
+version: 0.67
+updated: 2026-10-18
+last_change: 0.67 (2026-10-18): the pinned text of video 1 names the approval, not the lock, among the steps of a brief's birth (FND.1960).
 output: /README.md
 ---
 
@@ -320,7 +320,7 @@ reach the reader. Update them here when they change.
   anchor on the course page, what it shows, and the page of `docs/`
   it pairs with:
   1. How a brief is born (`#01-brief-elicitation`): a brief found by
-     questions, a critique from outside, research, the lock, the
+     questions, a critique from outside, research, the approval, the
      mining; `docs/use/write-a-brief.md`.
   2. One item, one verdict (`#02-walkthrough`): a list settled one
      item per message, the verdict line, one write at the end of

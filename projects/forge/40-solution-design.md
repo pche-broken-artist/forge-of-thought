@@ -1,8 +1,8 @@
 ---
-version: 0.27
+version: 0.28
 date: 2026-10-18
 status: draft
-last_change: 0.27 (2026-10-18): R1.18 of the cutover plan built: every report named with time and hash by `scripts/forge-report.py`, the draft renamed in place (SOL.0810).
+last_change: 0.28 (2026-10-18): R1.08 of the cutover plan built: the fifth digit in the two patterns, the short form and CLAUDE.md (SOL.0790).
 project: forge
 audience: whoever realises the solution, a person or an agent
 ---
@@ -1219,11 +1219,13 @@ boundary kept by hand or an order of work.
   the price is the integrator's hand at every new author and a dead rest
   of a block; the allocation over the local branches against the blocks
   alone (CHL.0510): two branches of one handle would take the same
-  number from one block. The fifth digit is built within the first
-  release; the allocation over the local branches and the blocks are Not
-  built; deferred (DEC.0250, THR.0710), the blocks in any case on the
-  trigger of a second author or a second clone with a branch in flight
-  (DEC.0240); the fifth digit within the first. Where:
+  number from one block. The fifth digit built 2026-10-18, the
+  preparation of the cutover plan (R1.08): the two patterns, the short
+  form and the sentence of CLAUDE.md, no script sorting IDs today, the
+  numeric sort a rule for the ones to come; the allocation over the
+  local branches and the blocks are Not built; deferred (DEC.0250,
+  THR.0710), the blocks in any case on the trigger of a second author or
+  a second clone with a branch in flight (DEC.0240). Where:
   `scripts/forge_repos.py`, `templates/ids.md`,
   `scripts/forge-history.py`, `scripts/docs_map.py`,
   `.claude/skills/walkthrough/SKILL.md`,

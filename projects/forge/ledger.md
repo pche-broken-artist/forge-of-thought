@@ -39,7 +39,7 @@ absorbed it; Note says what remains (partial) or the REJ (dropped). -->
 | File | Version | Status | Date |
 |---|---|---|---|
 | 10-intent.md | 5.24 | draft | 2026-10-18 |
-| 40-solution-design.md | 0.27 | draft | 2026-10-18 |
+| 40-solution-design.md | 0.28 | draft | 2026-10-18 |
 <!-- One row per layer below the intent, added when the layer is
 born; a layer the project does not have gets no row (CLAUDE.md,
 Ledger). -->
@@ -380,6 +380,8 @@ as `rejected`. -->
 | FND.1920 | medium | contradiction | resolved | 2026-10-18-critique-clarity.md | the bare save skips the fixture by the flag in SOL.0510 and SOL.0670 and by the name `projects/fixture-*` in SOL.0830, and the interim `projects/fixture` matches neither; design 0.26 (SOL.0830, SOL.0510, SOL.0670) |
 | FND.1930 | low | contradiction | resolved | 2026-10-18-critique-clarity.md | SOL.0510 names `forge-branch --reserve`, a reservation of IDs that SOL.0790 no longer has (REJ.0320); design 0.26 (SOL.0510) |
 | FND.1940 | low | contradiction | resolved | 2026-10-18-critique-clarity.md | the design's head says no part answers POS.0700 while SOL.0170 realises it, and its list of items added since 0.1 names four of twenty-five; design 0.26 (head) |
+| FND.1950 | low | conformance | resolved | 2026-10-18-check-engine-1746-9a79.md | the check skill still contrasts the check agent with a critic and a challenger that write, after both stopped writing (R1.01); the sentence says like, not unlike |
+| FND.1960 | low | conformance | resolved | 2026-10-18-check-engine-1746-9a79.md | the readme recipe's pinned text of video 1 names "the lock" among the steps of a brief's birth, a mechanism withdrawn (POS.0110, THR.0520); recipe readme 0.67 says the approval, the README at the next render |
 
 Four review files are named outside the convention — accepted as they
 are by DEC.0140.

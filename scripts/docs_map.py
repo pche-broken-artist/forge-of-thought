@@ -44,7 +44,7 @@ ENTRY_RE = re.compile(r"^### (docs/([a-z]+)/(.+?)\.md)\s*$")
 FIELD_RE = re.compile(r"^- (\w[\w-]*):\s*(.*)$")
 PATHS_LINE_RE = re.compile(r"^- (\w+):\s*(.*)$")
 HEADING_RE = re.compile(r"^(#{1,6})\s+(.*?)\s*#*\s*$")
-ID_RE = re.compile(r"^[A-Z]{3}\.\d{4}$")
+ID_RE = re.compile(r"^[A-Z]{3}\.\d{4,5}$")  # four digits, a fifth beyond 9999 (POS.0220)
 
 
 def parse(text):

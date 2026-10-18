@@ -11,10 +11,10 @@ does not change (who creates a check, and when: CLAUDE.md, Isolated
 reviewers).
 
 Shared behaviour: the contract skill named in each check file's
-front-matter (CLAUDE.md, Isolated reviewers). Unlike the critic and
-the challenger, a check agent writes nothing: it returns its report
-and this command files it. This command chooses the check, passes
-the target, files the report and presents it.
+front-matter (CLAUDE.md, Isolated reviewers). Like the critic and the
+challenger, a check agent writes nothing: it returns its report and this
+command files it. This command chooses the check, passes the target,
+files the report and presents it.
 
 **Bare `/check` — the roster.** List the available checks (scan
 `.claude/agents/check-*.md`, their `description` fields — each says

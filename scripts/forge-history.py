@@ -9,8 +9,9 @@ SYNOPSIS
 
 WHAT IT DOES
     Read-only, changes nothing, no model involved. For an item named
-    by its ID (`PREFIX.NNNN`, CLAUDE.md, ID scheme; a short form such
-    as `pos580` is read as `POS.0580`) in the project `projects/<slug>`
+    by its ID (`PREFIX.NNNN`, four digits and a fifth beyond 9999,
+    CLAUDE.md, ID scheme; a short form such as `pos580` is read as
+    `POS.0580`, `pos10000` as `POS.10000`) in the project `projects/<slug>`
     (`forge` is the engine's own project) it prints:
       1. Today: the file that holds the item and its wording, from the
          line that opens the item to the next item or heading (the
@@ -66,8 +67,8 @@ import docs_map  # noqa: E402
 import forge_repos as fr  # noqa: E402
 import forge_tools as ft  # noqa: E402
 
-ID_RE = re.compile(r"^[A-Z]{3}\.\d{4}$")
-SHORT_RE = re.compile(r"^([A-Za-z]{3})[.\-_ ]?(\d{1,4})$")
+ID_RE = re.compile(r"^[A-Z]{3}\.\d{4,5}$")  # four digits, a fifth beyond 9999 (POS.0220)
+SHORT_RE = re.compile(r"^([A-Za-z]{3})[.\-_ ]?(\d{1,5})$")
 RECORD_RE = re.compile(r"^- (\d{4}-\d{2}-\d{2}) \| ([^|]+?) \| ([^|]+?) \| ([^|]+?) \| ([^|]+?)(?: \| (.*))?$")
 SKIP_DIRS = {"docs", "renders", "published", "tmp", "sources", "research", ".git"}
 SKIP_FILES = {"docs-map.md"}
@@ -127,7 +128,7 @@ def parse_log(path):
 
 
 def subject_ids(subject):
-    return set(re.findall(r"[A-Z]{3}\.\d{4}", subject))
+    return set(re.findall(r"[A-Z]{3}\.\d{4,5}", subject))
 
 
 def sentence_with(text, id_):
