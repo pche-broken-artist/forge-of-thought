@@ -475,7 +475,10 @@ def reports(p, open_threads, closed_threads):
     cited = {}
     for f in sorted(p.proj.rglob("*.md")):
         top = p.rel(f).split("/")[0]
-        if ".history." in f.name or f.name in ("ledger.md", "ledger.archive.md") or top in ("threads", "sources"):
+        # the chain, the decisions, the work and the indexes cite the project's own threads;
+        # a render, a recipe or a page may cite another project's, and is not read
+        if ".history." in f.name or f.name in ("ledger.md", "ledger.archive.md") or top in (
+                "threads", "sources", "renders", "recipes", "docs", "published", "reviews", "challenges"):
             continue
         for id_ in set(re.findall(r"THR\.\d{4,5}", fd.read(f))):
             cited.setdefault(id_, set()).add(p.rel(f))

@@ -55,7 +55,8 @@ WHAT IT DOES
     The author of every record it writes is the handle of the instance
     file (CLAUDE.local.md, `Author:`); without it the script refuses.
     `--apply` refuses a project that is not a repository, a working
-    tree that is not clean, a branch behind or diverged from its
+    tree with unsaved changes to tracked files (an untracked file is
+    no risk: --undo restores tracked files), a branch behind or diverged from its
     origin and any branch but main: the migration is one large change,
     run once, on one clone; everyone else pulls. It commits nothing;
     `/save` follows. `--undo` takes back the last `--apply` from the
@@ -471,8 +472,8 @@ def refusals(t):
     if not (t.repo / ".git").exists():
         reasons.append("not a repository")
         return reasons
-    if fr.git_out(["status", "--porcelain"], t.repo):
-        reasons.append("the working tree is not clean: save first")
+    if fr.git_out(["status", "--porcelain", "--untracked-files=no"], t.repo):
+        reasons.append("the working tree has unsaved changes to tracked files: save first")
     branch = fr.git_out(["rev-parse", "--abbrev-ref", "HEAD"], t.repo)
     if branch != "main":
         reasons.append(f"on branch {branch}, not main")
