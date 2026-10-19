@@ -52,15 +52,16 @@ root (gitignored, created from `templates/CLAUDE.local.md` and filled by
 6. **Language:** conversation in the principal's language (set in
    `CLAUDE.local.md`); the artefacts of the chain — intent,
    assignment, later layers — in the project's language: the
-   `language` of its ledger header, English when absent. Records,
-   state, research and recipes are always English: they are read by
-   Claude, the reviewers and the checks, never handed to the
-   recipients. English is the notation throughout (ID prefixes,
-   `shall`, status words, front-matter keys). The forge dictates
-   only that one output language per project, and the conversation
-   language is per-instance configuration that never appears in
-   outward-facing renders (the README among them). Translate on
-   write. A work specification follows the artefacts; its file is in
+   `language` of its project file (`project.md`, POS.1590), English
+   when absent. Records, state, research and recipes are always
+   English: they are read by Claude, the reviewers and the checks,
+   never handed to the recipients. English is the notation throughout
+   (ID prefixes, `shall`, status words, front-matter keys). The forge
+   dictates only that one output language per project, and the
+   conversation language is per-instance configuration that never
+   appears in outward-facing renders (the README among them).
+   Translate on write. A work specification follows the artefacts;
+   its file is in
    the language its `## Making` says. The one exception among the
    artefacts is the briefs
    (`00-brief*.md`), kept in whatever language they are written in.
@@ -191,6 +192,7 @@ whether it is versioned and how it behaves:
 | records | decisions | the principal's decisions with reasons | forge | — | append-only |
 | records | review, challenge | one dated reviewer run | reviewer agent | — | immutable |
 | state | ledger | single source of truth for state | forge | — | freely rewritten |
+| state | project | the project file: slug, kind, language | /new-project | — | written once (POS.1590) |
 | state | index | catalogue of a resource directory | forge | — | freely rewritten |
 | state | map | the documentation map: one entry per page, everything a page is made from | generated | — | freely rewritten by the documentation run |
 | rendering | recipe | how a render is made | Claude, principal iterates | yes | iterated, never approved |
@@ -394,8 +396,10 @@ scripts/                   # forge-save / forge-pull / forge-status
                            # of .claude/settings.json), docs-state,
                            # docs-index and docs-check (the
                            # documentation: the state of its pages,
-                           # its index, its check; docs_map their
-                           # shared reader of the map)
+                           # its index, its check); forge_repos,
+                           # forge_tools and docs_map the modules
+                           # the scripts share (Persistence,
+                           # Portability)
 .claude/                   # skills (the commands, the contracts of
                            # the reviewers and of the documentation
                            # agents, and the walkthrough method),
@@ -415,6 +419,8 @@ projects/<slug>/           # kind: thought — the chain
   docs-map.md  docs/                  # the documentation and its map
                                       # (Document chain, Documentation)
   logo.png                            # optional project avatar
+  project.md                          # the project file: slug, kind,
+                                      # language (POS.1590)
   00-brief.md  10-intent.md           # the trunk of every project
   NN-<layer>.md                       # layers below the intent, as
                                       # the project needs them
@@ -425,7 +431,7 @@ projects/<slug>/           # kind: thought — the chain
                                       # (Versioning & status)
   <file>.history.archive.md           # a history table before the
                                       # log, immutable
-  decisions.md  ledger.md             # ledger header carries kind:
+  decisions.md  ledger.md             # decisions; the ledger (Ledger)
   sources/00-INDEX.md                 # resource index (rewritten)
   sources/<name>.<ext>                # immutable external inputs, one
                                       # form each: <slug>.md extract of
@@ -467,8 +473,9 @@ projects/<slug>/           # kind: thought — the chain
                            # the working directory — export outside
                            # the project or gitignore it
 projects/lib-<name>/       # kind: library — material shared across
-  .git/  ledger.md         # projects, no chain: only the ledger,
-  README.md  logo.png      # sources and research; documents
+  .git/  project.md        # projects, no chain: only the project
+  ledger.md                # file, the ledger, sources and research;
+  README.md  logo.png      # documents
   recipes/readme.md        # maintained by their owner; README =
   recipes/readme.history.md  # the catalogue, a render of its recipe
   sources/00-INDEX.md

@@ -2,7 +2,7 @@
 project: forge
 kind: thought
 language: en
-updated: 2026-10-18
+updated: 2026-10-19
 ---
 
 # Ledger — Forge of Thought
@@ -384,6 +384,8 @@ as `rejected`. -->
 | FND.1960 | low | conformance | resolved | 2026-10-18-check-engine-1746-9a79.md | the readme recipe's pinned text of video 1 names "the lock" among the steps of a brief's birth, a mechanism withdrawn (POS.0110, THR.0520); recipe readme 0.67 says the approval, the README at the next render |
 | FND.1970 | low | conformance | resolved | 2026-10-18-check-light-3-2114-fb83.md | TBC.0010 and TBC.0020 of the design, the principal's, have no line under Waiting on principal; the lines of THR.0370 and THR.0520 name them |
 | FND.1980 | low | conformance | resolved | 2026-10-18-check-light-3-2114-fb83.md | the Waiting line of THR.0620 says nothing decided while its row 9 is decided and in building; the line says so |
+| FND.1990 | low | conformance | resolved | 2026-10-19-check-engine-1237-204e.md | threads.md THR.0620 row 9, 2026-10-19: the preparation ships by its saves and the tag pre-r1 (DEC.0260) |
+| FND.2000 | low | conformance | resolved | 2026-10-19-check-engine-1237-204e.md | CLAUDE.md layout, 2026-10-19: the three shared modules named together in the scripts/ comment |
 
 Four review files are named outside the convention — accepted as they
 are by DEC.0140.
