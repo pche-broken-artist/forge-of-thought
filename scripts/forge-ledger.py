@@ -286,7 +286,8 @@ def dependencies(p):
         top = p.rel(f).split("/")[0]
         if f.name in ("ledger.md", "ledger.archive.md") or top in ("reviews", "challenges", "sources", "published", "renders", "docs"):
             continue
-        for m in re.finditer(r"projects/([\w-]+)/((?:sources|research)/(?:[\w.-]+/)?)?", fd.read(f)):
+        # not inside a web address or a longer path: nothing but a space, a quote or a bracket before it
+        for m in re.finditer(r"(?<![\w/.])projects/([\w-]+)/((?:sources|research)/(?:[\w.-]+/)?)?", fd.read(f)):
             if m.group(1) == p.slug or m.group(1) in ("<slug>", "<other>", "<name>", "lib-<name>"):
                 continue  # the project citing itself, or a placeholder of a rule
             path = "projects/" + m.group(1) + "/" + (m.group(2) or "")
