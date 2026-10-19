@@ -1,5 +1,5 @@
 ---
-version: 0.31
+version: 0.32
 status: draft
 project: forge
 audience: whoever realises the solution, a person or an agent
@@ -459,7 +459,7 @@ boundary kept by hand or an order of work.
   `/forge`, `/recipe`, the ledger script and prime directive 6 of
   CLAUDE.md. Realises: POS.1590, POS.0060, POS.0960. Choice: a file of
   its own against the header of the ledger, which leaves git (SOL.0680);
-  no other home was found. Not built; the first release (THR.0620).
+  no other home was found. Built 2026-10-19 in the first release (the cutover plan, R1.03, R1.10).0620).
   Where: `templates/project.md`, `CLAUDE.md` (prime directive 6,
   Repository layout), `scripts/forge-clone.py`,
   `.claude/skills/new-project/SKILL.md`,
@@ -503,7 +503,7 @@ boundary kept by hand or an order of work.
   against the model keeping the file, since the ledger is derived and
   every operation rewrote it; the price is the most complex script of
   the engine, reading dozens of reports at every map, under a second but
-  known. Not built; the first release. Where: `scripts/forge-ledger.py`,
+  known. Built 2026-10-19 in the first release (the cutover plan, R1.09, R1.16). Where: `scripts/forge-ledger.py`,
   `templates/ledger.md`, `templates/recipe-readme.md`, `CLAUDE.md`
   (Ledger, Document kinds), `.claude/skills/ledger/SKILL.md`,
   `.claude/skills/forge/SKILL.md`, `.claude/skills/end/SKILL.md`,
@@ -527,7 +527,7 @@ boundary kept by hand or an order of work.
   record carrying the version without raising it. Realises: POS.1610,
   POS.1630. Choice: records in the existing histories and a field in the
   decisions against new kinds of record or a file per item: fewer
-  conventions, the same information. Not built; the first release.
+  conventions, the same information. Built 2026-10-19 in the first release (the cutover plan, R1.05, R1.17).
   Where: `templates/history.md`, `templates/index.md`,
   `templates/decisions.md`, `.claude/skills/forge/states/intent.md`,
   `.claude/skills/walkthrough/SKILL.md`,
@@ -545,7 +545,7 @@ boundary kept by hand or an order of work.
   and the documentation run takes the previous map from git through
   `forge_repos` (`git show`). CLAUDE.md, Versioning & status, names the
   fields that stay. Realises: POS.1570. Choice: no real alternative once
-  the fields are the certain conflict. Not built; the first release.
+  the fields are the certain conflict. Built 2026-10-19 in the first release (the cutover plan, R1.04, R1.11).
   Where: `CLAUDE.md` (Versioning & status), `templates/intent.md`,
   `templates/brief.md`, `templates/assignment.md`,
   `templates/solution-design.md`, `templates/recipe.md` and the genre
@@ -586,9 +586,7 @@ boundary kept by hand or an order of work.
   THR row of CLAUDE.md, ID scheme, names the directory. Realises:
   POS.1680, POS.0120, POS.0310. Choice: a file per thread against one
   file with blocks, so that the driver handles no block with an inner
-  state; the cost is a directory of many small files. Not built; the
-  first release, together with the project file, the header and the
-  ledger script, one parser of threads. Where: `templates/thread.md`,
+  state; the cost is a directory of many small files. Built 2026-10-19 in the first release (the cutover plan, R1.06, R1.17, R1.23, R1.29). Where: `templates/thread.md`,
   `CLAUDE.md` (ID scheme, Repository layout),
   `.claude/skills/forge/states/intent.md`,
   `.claude/skills/walkthrough/SKILL.md`, `.claude/skills/end/SKILL.md`,
@@ -1080,8 +1078,7 @@ boundary kept by hand or an order of work.
   four ways and the promise. Realises: POS.1560, POS.1690, POS.1750.
   Choice: the attributes per project against a global configuration
   alone, since the attributes travel with the repository and the
-  registration (SOL.0740) does not. Not built; the first release with
-  `ours` and `binary`, the second with `forge-records`. Where:
+  registration (SOL.0740) does not. Built 2026-10-19 in the first release with `ours` and `binary` (the cutover plan, R1.07, R1.02); `forge-records` is the second release's, deferred (DEC.0250). Where:
   `templates/gitattributes`, `.gitattributes`, `CLAUDE.md`
   (Persistence), `.claude/skills/new-project/SKILL.md`,
   `.claude/agents/check-project.md`.
@@ -1290,7 +1287,7 @@ boundary kept by hand or an order of work.
   POS.1740, POS.0940, POS.0820. Choice: one script and one command
   against the hand migration of POS.0940, since every clone must come
   out the same; marks against an engine version in the project, which
-  POS.0940 refuses. Not built; the first release. Where:
+  POS.0940 refuses. Built 2026-10-19 in the first release (the cutover plan, R1.13, R1.19, R1.23). Where:
   `scripts/forge-migrate.py`, `.claude/skills/migrate/SKILL.md`,
   `.claude/skills/pull/SKILL.md`, `.claude/skills/forge/SKILL.md`,
   `.claude/agents/check-project.md`, `templates/ledger.md` (the

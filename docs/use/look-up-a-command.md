@@ -1,8 +1,8 @@
 ---
-generated: 2026-10-14
-version: 5.9
+generated: 2026-10-19
+version: 5.26
 made: mirrored
-inputs-hash: 959d3ff5e9750d00
+inputs-hash: 898e99ea268bcee5
 inputs:
   - .claude/skills/man/SKILL.md
   - .claude/skills/manual/SKILL.md
@@ -10,13 +10,11 @@ inputs:
 
 # Look up a command
 
-`/man` is the forge's manual: a command that prints, in the conversation, what a command or a working method is for and how it is called. It is for you when you want to know what a command does before you run it. A working method is one of the named ways a conversation runs, such as the walkthrough.
+This page shows how to use `/man`, the forge's manual, to read what a command or a working method does before you run it. It is for the principal (the person whose thinking is forged) who wants the answer in the conversation, without opening the files that define the command.
 
 ## When to use it
 
-- You want the list of commands and working methods.
-- You want the purpose, the arguments and the roster of one command before you run it.
-- You want the paragraph of one working method.
+Use `/man` when you do not know which command fits, or when you know the command and want to see its arguments first. Use it too when you want the exact wording of a working method, such as the walkthrough.
 
 ## The command
 
@@ -24,53 +22,55 @@ inputs:
 /man [command | method]
 ```
 
-`/manual` is an alias and does the same with the same arguments. The word `help` is not used, because it is Claude Code's own command.
+`/manual` is an alias and takes the same arguments. The word `help` is not used because it is Claude Code's own command, hence the Unix name.
 
 ## What happens
 
-`/man` reads the files that own the information at the moment of the call. It keeps no text of its own, so what it prints is always as current as those files. It only reads: it runs none of the commands it describes.
+`/man` is a reader, not a text of its own. Claude reads the files that own the matter at the moment of the call, so the page it prints is never older than those files. It runs nothing that it describes.
 
 1. Bare `/man` prints the overview.
-   - Every command, with its arguments and its purpose cut to one line. `/man` and `/manual` are in the list.
-   - Every working method, with the first sentence of its paragraph.
+   - Every command with its arguments, and its purpose cut to one line. `/man` and `/manual` are included.
+   - Every working method with the first sentence of its paragraph.
    - A closing line: `/man <command>` for a command's page, `/man <method>` for a method's.
 
-   You should now see the two lists and the closing line.
+   You should now see the commands and the working methods as two lists, and the closing line.
 
-2. `/man <command>`, for example `/man critique`, prints the page of that command.
+2. `/man <command>` prints the page of one command.
    - Its purpose and its arguments.
    - Its purpose in full, as the table of commands gives it.
-   - The roster it dispatches over, where it has one. Each member of the roster (a lens, a persona, a check or a genre) comes with its own description and with what it looks for, so that you know it before you run it.
-   - A closing line that names the skill file, the file that holds the whole procedure.
+   - The roster it dispatches over, where it has one. Each entry shows the description of its own file and, where the file has one, what the entry looks for: a lens section for a lens, a persona or a check, the elicitation checklist for a genre.
+   - A closing line naming the skill file, for the reader who wants the whole procedure.
 
    You should now see the command's page, ending with the path of its skill file.
 
-3. `/man <method>`, for example `/man walkthrough`, prints the paragraph of that working method in full. Case does not matter, and a hyphen and a space are alike. Where a skill holds the method's shape, its path follows.
+3. `/man <method>` prints the page of one working method. Claude matches the name without regard to case, and hyphens and spaces count alike. It prints the paragraph of the method in full and, where the method names a skill that holds its shape, the path of that skill.
 
-   You should now see the method's paragraph and, where there is one, the path of its skill.
+   You should now see the paragraph of the method, and a skill path where there is one.
+
+The page is printed in the conversation language, the whole of it, descriptions and lens sections included. Only the notation stays English: command names, file paths, IDs, front-matter keys and the names of the methods. Each method name is followed once by its translation.
 
 ## What you have afterwards
 
-A page in the conversation, in the conversation language. Command names, file paths, front-matter keys and the names of the methods stay in English, and each method name is followed once by its translation. Nothing is written to a file and nothing is run.
+You have the page in the conversation and nothing else. No file is written and no command has run.
 
 ## If something goes wrong
 
-- A command that does not exist: `/man` says so and prints the list of commands.
-- A method that does not exist: `/man` says so and prints the list of methods.
+- A name that is not a command: `/man` says so and lists the commands.
+- A name that is not a working method: `/man` says so and lists the methods.
 
 ## A worked example
 
-You want to know what the critic's lenses look for before choosing one.
+You want to know what a critic lens looks for before you run one. You type:
 
 ```
 /man critique
 ```
 
-You should now see the purpose and arguments of `/critique`, then the roster of lenses. Each lens is shown with its description and with its own section on what it goes after. The page ends with the path of the skill file of `/critique`. You choose a lens and run `/critique <lens>` yourself.
+Claude prints the purpose of the command, its arguments, and its purpose in full. Then it lists the lenses, each with its description and what it goes after. The page closes with the path of the skill file of the command. You now choose a lens and run it. If you want the whole table of commands as a page, it is in the reference below.
 
 ## See also
 
 - [Commands](../reference/commands.md): the same table, as a page.
 - [Glossary](../reference/glossary.md): every term of the forge in one line.
 
-Generated on 2026-10-14 for version 5.9 from the files the front-matter names; never edited by hand.
+Generated on 2026-10-19 for version 5.26 from the files the front-matter names; never edited by hand.

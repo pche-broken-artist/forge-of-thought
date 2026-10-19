@@ -1,11 +1,12 @@
 ---
-generated: 2026-10-14
-version: 5.9
+generated: 2026-10-19
+version: 5.26
 made: mirrored
-inputs-hash: 5252475f474ef655
+inputs-hash: 3225fe54c7518d2d
 inputs:
   - .claude/skills/import-project/SKILL.md
   - scripts/forge-clone.py
+  - templates/project.md
 ---
 
 # Bring in an existing project
@@ -39,7 +40,7 @@ Use it when the project already exists as a git repository, and you want it to s
    - `origin`: the address the clone came from.
    - `last commit`: the short hash, date and subject of the newest commit.
    - `identity`: the commit identity git resolves for the fresh clone, taken from your own git configuration.
-   - `ledger`: whether the project has a ledger (the file that holds the project's state) and whether its header carries a `kind:` line.
+   - `project`: the project file (the small file that names the project's kind and language) with its kind and language. Where the project has no project file, the line says the project is of the shape before the migration, with the kind and language read from the ledger's header, and that the one remedy is `/migrate`. A project with neither a project file nor a ledger was not made by the forge. That is a fact, not a defect.
 
    You should now see these four lines under the "Cloned into" line.
 
@@ -63,8 +64,8 @@ The script prints these messages and stops.
 
 Two lines of the report are facts, not failures:
 
-- `identity: none resolved - forge-save will report it and skip the commit`. Git resolves no commit identity for the clone. The save script then reports this and commits nothing, until your git configuration gives one.
-- `ledger: none - not scaffolded by the forge (a fact, not a defect)` or `ledger: present, no kind: header`. The project was not made by the forge, or its ledger lacks the header. If the project was written to older conventions, see [Upgrade the engine](upgrade-the-engine.md) for what to check.
+- `identity: none - git resolves no user.name/user.email for this repository ...`. Git has no name and e-mail to sign commits on this host. The login that cloned the repository is a different thing. The save script commits nothing until git resolves an identity. The message names the ways out: run `/setup` for the per-host identity, or set a local one in the project's repository. The forge writes none.
+- `project: shape before the migration ... run /migrate`, or `project: no project file - not scaffolded by the forge (a fact, not a defect)`. For the first, see [Migrate a project](migrate-a-project.md). For a project written to older conventions, see [Upgrade the engine](upgrade-the-engine.md) for what to check.
 
 ## A worked example
 
@@ -79,7 +80,7 @@ Cloned into projects/my-idea
   origin:      https://example.com/team/my-idea.git
   last commit: <hash> <date> <subject>
   identity:    <name> <email> (from your git configuration)
-  ledger:      present, kind: <kind>
+  project:     kind <kind>, language <language>
 ```
 
 Claude then recommends `/forge my-idea`.
@@ -87,7 +88,8 @@ Claude then recommends `/forge my-idea`.
 ## See also
 
 - [See where a project stands](see-where-a-project-stands.md): the `/forge` map that follows.
+- [Migrate a project](migrate-a-project.md): what to do with a project of the shape before the migration.
 - [Upgrade the engine](upgrade-the-engine.md): what to check when a project was written to older conventions.
 - [Glossary](../reference/glossary.md): every term of the forge in one line.
 
-Generated on 2026-10-14 for version 5.9 from the files the front-matter names; never edited by hand.
+Generated on 2026-10-19 for version 5.26 from the files the front-matter names; never edited by hand.

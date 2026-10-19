@@ -1,8 +1,8 @@
 ---
-generated: 2026-10-14
-version: 5.9
+generated: 2026-10-19
+version: 5.26
 made: derived
-inputs-hash: 1fc0e15e0bcf6db1
+inputs-hash: c91a9b0e61851941
 inputs:
   - CLAUDE.md#Document chain
   - templates/index.md
@@ -15,238 +15,188 @@ inputs:
 
 # Sources and research
 
-A source is an external input kept as it arrived, and a research
-note is a durable answer to one question; together they are the
-resources a project keeps beside its chain of documents. This page
-says what each is, how it is stored and catalogued, why a source is
-immutable, why registering a source is not the same as taking it
-into the thinking, and why an ingest stops before it stores anything
-when it meets personal matter. It is written for the user of the
-forge and for an evaluator who wants to judge the rules. The
-procedures are on the how-to pages linked under See also.
+A source is an external input that a project keeps as it arrived, and
+a research note is a durable answer to one question. This page
+explains how both are kept, why a source is never changed once it is
+registered, why registering a source does not mean using it, and what
+the index beside them is for. It is written for anyone who works in a
+project and for anyone who evaluates how the forge treats outside
+material.
 
 ## What it is
 
-### A source
+A project of the forge holds two directories of resources.
 
-A source is an external input to a project: a transcript, an offer,
-a document, a standard, or text pasted into the conversation. It
-lives in the project's `sources/` directory under a plain slug
-filename. A source may arrive at any stage of a project's life:
-before the [brief](../reference/glossary.md) as material for writing
-it, during the work on the intent, or after. From its registration
-on, a source is immutable.
+- `sources/` holds the external inputs: transcripts, offers,
+  documents, standards. They may arrive at any stage of a project,
+  even before the brief.
+- `research/` holds the research notes. Each note answers one
+  question, and its file name carries its date
+  (`YYYY-MM-DD-<topic>.md`).
 
-A source has one form. A file in `sources/` is either text or a
-functional binary, never both by default. A binary is converted to a
-Markdown extract only on the explicit word of the principal (the
-person whose thinking is forged); the extract is then the source,
-and the original is not copied into the project. Where the principal
-says no, the binary is the source as a functional thing, such as a
-deck template, a graphic or a logo. Keeping both the binary and the
-extract is the exception, again on the principal's explicit word.
-Extracts are produced by one script of the forge,
-`scripts/doc2md.py`, never by ad-hoc parsing.
+Both kinds of file are immutable: once a source is registered, or a
+research note is written, it is not edited again.
 
-A set of related files may live as a bundle: a subdirectory
-`sources/<slug>/`. Examples are a downloaded site with its index, or
-a document with its attachments. A bundle counts as one source with
-one entry in the ledger (the project's single source of truth for
-state) and is immutable as a whole from its registration. File-level
-detail is not lost: provenance in the intent cites individual files
-of the bundle by path, and the bundle's own index lists its contents.
-Isolated files stay directly in `sources/`.
-
-### A research note
-
-A research note is a durable answer to one question. Claude
-researches current best practice for key topics rather than
-inventing; outside inspiration is a legitimate input. What it finds
-and what is worth keeping is stored in the project's `research/`
-directory, not left in the conversation. A note is a dated file,
-`YYYY-MM-DD-<topic>.md`, and like a source it is immutable once
-written.
-
-### The resource index
-
-Every `sources/` and every `research/` directory carries a
-`00-INDEX.md`, the resource index. It is a light catalogue of what
-exists in the directory and what it is for, in fixed fields written
-in free text. It is a working aid, not a record of thinking: it
-tracks nothing, neither a processing state nor a position, and it is
-an automatic input of no command. Unlike the files it catalogues,
-the index is freely rewritten, like the ledger.
+Every `sources/` and `research/` directory carries an index,
+`00-INDEX.md`. The index is a light catalogue. It lets Claude and the
+principal (the person whose thinking the project forges) know what
+resources exist and what they are for without re-reading them. The
+[Glossary](../reference/glossary.md) gives every term of the forge in
+one line.
 
 ## How it works
 
-### Registration
+### A source
 
-The command `/ingest` stores a source, registers it and catalogues
-it, and does nothing more. Without arguments it sweeps `sources/`:
-it registers files the principal has dropped there by hand and
-reports files changed since their registration, with a question what
-to do with each. The command also takes text pasted into the
-conversation. How the command is run is the page
+A source is stored under a plain slug filename. It is registered by
+the command `/ingest`, which stores, registers and catalogues the
+file and does nothing more. Run bare, `/ingest` sweeps `sources/` for
+files that are not registered yet. The procedure is on
 [Register a source](../use/register-a-source.md).
 
-Before anything is stored, personal matter stops the command and
-asks. Personal matter is a named private person, an identifying
-detail, a matter of health, or anything of that kind.
+A source has one form. It is either text or a functional binary,
+never both by default.
 
-At the ingest, every binary file gets one question: convert to
-Markdown? Yes means the extract becomes the source; no means the
-binary is the source as a functional thing.
+- **Text:** the source is read as it stands.
+- **An extract:** a binary such as a PDF or a document is converted
+  to Markdown, on the principal's explicit word, by the script
+  `scripts/doc2md.py`. The extract is then the source, and the
+  original is not copied into the project. Extracts are never made by
+  ad-hoc parsing.
+- **A functional binary:** a file used as a thing, such as a deck
+  template, a graphic or a logo, is kept as the source itself.
 
-The date of origin is recorded best-effort in the ledger and is
-never demanded from the principal.
+Keeping both the binary and its extract is the exception, on the
+principal's explicit word.
 
-After registration, Claude asks the principal once what the source
-is for. The answer is the source's Role, free text in the resource
-index. The Role stays empty until the principal gives it and is
-never inferred unasked. The principal may instead tell Claude to
-infer it; the inferred Role is then written marked *(inferred)*.
+Before anything is stored, personal matter stops the ingest and
+Claude asks. Personal matter is a named private person, an
+identifying detail, health or anything of the kind.
 
-The ledger holds registration only: a Sources table and a Research
-table, with no content columns. What a source is and what it is for
-stands in the index alone.
+A set of related files, such as a downloaded site with its index or a
+document with its attachments, is a bundle. A bundle lives as a
+subdirectory `sources/<slug>/` and counts as one source with one
+ledger entry (the ledger is the project's single record of state).
+It is immutable as a whole from its registration. Every bundle
+carries its own `00-INDEX.md`, made from the template
+`templates/index-bundle.md`, and `/ingest` creates it at registration
+where it is missing. Isolated files stay directly in `sources/`.
 
-### Intake
+When a registered source changes, what that means depends on the kind
+of project.
 
-Registration does not imply intake. What a source is for is
-individual: a standard to verify against, inspiration, a meeting
-record, material to absorb. The principal alone directs how and when
-each source is used, in whatever work he chooses.
+- **A thought project** (a project with a chain of documents): a
+  changed source is a breach of immutability, to be settled by a new
+  source beside it, by restoring the original, or by accepting the
+  change knowingly.
+- **A library** (a project of shared material, with no chain): a
+  changed source is the owner's normal maintenance. Its index entry is
+  corrected and its date moved.
 
-When content of a source does enter the intent, it is the
-principal's explicit act, cited with provenance to the file. What
-someone said in a meeting is never silently promoted to the
-principal's own position.
+### Registration is not intake
 
-### A changed source
+Registering a source says only that it is there. What a source is for
+is individual: a standard to verify against, inspiration, a meeting
+record, material to absorb. That purpose is the principal's word, and
+it is written as the free-text Role of the source's entry in the
+index. Claude asks what the source is for before the entry is written.
+The principal answers with the role, or tells Claude to infer it. An
+inferred role is written marked *(inferred)*. A role is never
+inferred unasked.
 
-A sweep by `/ingest` reports a file that changed after its
-registration. What that means depends on the kind of the project. In
-a thought project the change is a breach of immutability, settled in
-one of three ways:
+The principal alone directs how and when each source is used. When
+the content of a source does enter the intent, that is his explicit
+act, cited with provenance to the file. A file of a bundle is cited
+by its own path. What someone said in a meeting is never silently
+promoted to the principal's own position.
 
-- a new source is registered beside the changed one,
-- the original is restored,
-- the change is knowingly accepted.
+### A research note
 
-In a library project a changed file is the normal case, the owner's
-maintenance: the date in the ledger is moved and the index entry is
-corrected.
+For key topics Claude looks up current best practice rather than
+inventing. The durable findings are stored in `research/` as a note,
+written by the command `/research`. The procedure is on
+[Research a topic](../use/research-a-topic.md).
 
-### The index at work
+### The index
 
-The index has one shape for every directory. A sources entry carries
-four fields:
+Each entry of an index has fixed fields in free text, in the shape
+the template `templates/index.md` shows.
 
-- **What**: what the resource is, in one or two sentences.
-- **Origin**: where it came from, such as an author, a URL or a
-  meeting, with the date as far as it is known.
-- **Role**: free text, the principal's word on what the source is
-  for.
-- **Use for**: what to reach for the file for, that is, the
-  questions it answers best.
+A source entry holds:
 
-A research entry carries three fields:
+- **What:** what the resource is.
+- **Origin:** where it came from, such as an author, a URL or a
+  meeting.
+- **Date:** taken best effort from the content, the file or the
+  ingest, and never asked of the principal.
+- **Form:** text, an extract of an original, or a binary.
+- **Role:** what the principal says the source is for.
+- **Use for:** the questions it answers best.
 
-- **Question**: what the note set out to answer.
-- **Answer in short**: two or three lines of the conclusion.
-- **Consult when**: the situations in which the note is worth
+A research entry holds:
+
+- **Question:** what the note set out to answer.
+- **Answer in short:** the conclusion in a few lines.
+- **Consult when:** the situations in which the note is worth
   opening.
 
-A bundle keeps its own `00-INDEX.md` inside and appears in the top
-index as one entry pointing into it. The bundle index is the same
-catalogue one level down: its own header and opening paragraph say
-what the whole bundle is and why it entered `sources/`, and each file
-of the bundle gets the fields of a sources entry. There are two
-levels, never deeper, and the top index never repeats the bundle's
-contents. Where a bundle lacks its index, `/ingest` creates it at
-registration.
+A bundle appears in the top index as one entry pointing to its inner
+index. That is two levels, never deeper, and the top index never
+repeats the contents of the bundle. The inner index opens with a
+short paragraph on what the whole bundle is and why it entered
+sources, then gives one source entry per file.
 
-`/ingest` writes the entries of the sources index and `/research`
-those of the research index; how research is run is the page
-[Research a topic](../use/research-a-topic.md). The check of the
-forge verifies that the index agrees with the directory.
-
-No command reads the index on its own. The state map of a project,
-the critics and the challengers do not confront the chain with the
-material by themselves. A contradiction between the intent and a
-source is not a finding. Claude reaches for a file by its own
-judgement or when the principal asks, for example "check the
-assessment against the requirements in file X".
+The index tracks nothing: no processing state and no positions. It is
+an automatic input of no command. A contradiction between the intent
+and a resource is therefore not a finding. Claude reaches for a file
+by its own judgement or when the principal asks. Unlike the files it
+catalogues, the index is freely rewritten. `/ingest` and `/research`
+write the entries, and `/check` verifies the index against the
+directory.
 
 ## Why
 
-Research is kept in `research/` so that durable findings are not
-lost in the conversation. The reason behind researching at all is
-that current best practice is looked up rather than invented, and
-outside inspiration is a legitimate input.
-
-Why a source is immutable from its registration is not recorded in
-the inputs of this page. What is recorded is what follows from it:
-a source travels into git as it was registered, and a change after
-registration in a thought project is a breach to be settled, never
-a silent correction.
-
-Personal matter stops an ingest before the store because of that
-immutability. A source is immutable from its registration and
-travels into git, so what has entered cannot be taken back. The
-question must therefore come before the store, not after.
-
-Registration is not intake because what a source is for differs
-from source to source. A source may be a counter-example, a mere
-inspiration or a record of what someone else said. That is why a
-contradiction between the intent and a source is not a finding, and
-why no command confronts the chain with the material on its own.
-For the same reason, source content enters the intent only by the
-principal's explicit act with provenance: what someone else said is
-his position only once he has made it so. The inputs record that
-the Role is the principal's word; a reason beyond that for asking it
-rather than inferring it is not recorded.
-
-A source has one form because the repository carries what the forge
-works with, which is text. A binary nobody reads from git is weight
-without use. A binary that is used as a thing, such as a template or
-a logo, is kept because it is used.
-
-The resource index exists so that Claude and the principal know what
-resources exist and what they are for without re-reading the files.
-It tracks nothing because it is a working aid, not a record of
-thinking. The ledger holds registration only, with no content
-columns, so that nothing is described in two places. Every index has
-one shape, in free-text fields rather than a table, because Role and
-Use for are what an index is for, and a table does not carry them.
-The reason for the limit of two levels of index is not recorded.
-
-Dates of origin are recorded best-effort and never demanded because
-they are metadata, not ceremony.
+- **One form per source.** The repository carries what the forge
+  works with, which is text. A binary that nobody reads from git is
+  weight without use. A binary that is used as a thing is kept because
+  it is used.
+- **Personal matter stops the ingest before the store.** A source is
+  immutable from its registration and travels into git. What has
+  entered cannot be taken back, so the question must come before the
+  store.
+- **Sources are immutable.** The reason is not recorded.
+- **Registration is not intake.** A source may be a counter-example, a
+  mere inspiration or a record of what someone else said. Because of
+  this, the commands do not confront the chain with the material on
+  their own, and a contradiction with a source is not a finding.
+- **The role is asked before the entry is written.** The entry then
+  carries the principal's word from its birth, and the role is never a
+  guess of Claude's.
+- **Provenance when a source enters the intent.** What someone else
+  said stays distinguishable from what the principal holds.
+- **Research is stored.** Durable findings belong in `research/`, not
+  left in the conversation, and research comes before inventing.
+- **An index at all.** Claude and the principal know what exists and
+  what it is for without re-reading the files.
+- **One shape for every index, in fields of free text.** Role and Use
+  for are what an index is for, and a table does not carry them.
+- **The ledger holds registration only.** Nothing is described in two
+  places.
 
 ## A worked example
 
-One entry of a sources index, as the skeleton shapes it, for a
-transcript registered under the slug `kickoff-transcript`:
+A generic entry in the index of `sources/`, in the shape the template
+gives, for a source taken from no project:
 
+```markdown
+### `example-standard.md`
+- **What:** An extract of a published standard for writing requirements.
+- **Origin:** The standard's publisher, downloaded as a PDF.
+- **Date:** 2026-01-15, from the content
+- **Form:** extract of example-standard.pdf
+- **Role:** a standard to verify against
+- **Use for:** checking the wording of requirements before they are written.
 ```
-### `kickoff-transcript.md`
-- **What:** Transcript of the kickoff meeting of the initiative, as
-  exported from the meeting tool.
-- **Origin:** The kickoff meeting of 2026-03-02, exported by its
-  organiser; the date is the one on the export.
-- **Role:** A meeting record: what was said in the room, not the
-  principal's position.
-- **Use for:** Which objections were raised at the start and what
-  was promised to the attendees.
-```
-
-The entry shows the rules at work. The filename is a plain slug. The
-Role is the principal's word; before he gave it, the field stood
-empty. Nothing in the entry says whether the transcript has been
-read or what the intent took from it: that is the intent's
-provenance, not the index's business. The ledger has one row for the
-same file, with its registration and nothing of this content.
 
 ## See also
 
@@ -257,5 +207,5 @@ same file, with its registration and nothing of this content.
 - [Glossary](../reference/glossary.md): every term of the forge in
   one line.
 
-Generated on 2026-10-14 for version 5.9 from the files the
+Generated on 2026-10-19 for version 5.26 from the files the
 front-matter names; never edited by hand.

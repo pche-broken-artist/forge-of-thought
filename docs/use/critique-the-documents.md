@@ -1,8 +1,8 @@
 ---
-generated: 2026-10-14
-version: 5.9
+generated: 2026-10-19
+version: 5.26
 made: mirrored
-inputs-hash: 82a6d6f08ebeb50f
+inputs-hash: 69797cafb031cde9
 inputs:
   - .claude/skills/critique/SKILL.md
   - .claude/skills/critic-contract/SKILL.md#Output
@@ -10,81 +10,72 @@ inputs:
 
 # Critique the documents
 
-This page shows how you run a critic lens on the quality of a project's documents with `/critique`. It is for the principal, the person whose thinking is forged and who alone decides what happens to the result. A lens is one way of reading the documents, and each lens is run by its own isolated agent.
+`/critique` runs a critic lens on the quality of a project's documents. It is for the principal (the person whose thinking is being forged) who wants an independent reading of the documents. The lens judges how well the documents are written, never whether their substance is right.
 
 ## When to use it
 
-Use it when you want the documents of a project read for their quality: whether they are clear, consistent and complete in form. It never judges substance, which is the challenger's work. Every run is your word. No lens runs at a save. A release offers the lens `essence` once, in one sentence, and runs it only if you agree.
+Use it when you want the documents read by a reviewer that has not seen your conversation. Each lens reads the documents for one kind of fault. The lenses of today are listed in [Critic lenses](../reference/critic-lenses.md). What the critic judges, and why it is blind to substance, is explained in [The critic](../about/the-critic.md).
+
+No lens runs by itself. A save runs none. A release offers the lens `essence` once. Every other run is your word.
 
 ## The command
 
-```
-/critique [lens] [artefact] [slug]
-```
-
-All three parts are optional. A typed example:
+To see the lenses and which one fits the project now:
 
 ```
-/critique essence my-project
+/critique
 ```
 
-- `lens`: the lens to run. See [Critic lenses](../reference/critic-lenses.md) for the lenses of today.
-- `artefact`: narrows the run to one artefact, named the way `/forge` names it. How the target narrows the run is stated by the lens itself.
-- `slug`: the project. Claude infers it from context and asks if it is ambiguous.
+To run one lens over the whole project:
 
-Bare `/critique` runs nothing. It lists the available lenses and recommends which one fits the project's state, going by the fit each lens states. The recommendation is advice and never a gate.
+```
+/critique essence
+```
+
+To narrow the run, name a target after the lens. The target is an artefact, named as `/forge` names it, or any file of the project by its path. The optional last word is the project slug, given when it cannot be inferred from the context:
+
+```
+/critique essence intent my-project
+```
+
+A file given by path is read with the chain around it.
 
 ## What happens
 
-1. You give a lens. Claude starts the agent of that lens and passes it only the project and the target, if you named one.
-
-   You should now see Claude waiting while the agent works; you see nothing of the agent's reading.
-
-2. The agent reads the project's documents in isolation and judges their quality through its lens. It never sees your conversation with Claude.
-
-3. The agent writes a dated report in `reviews/` and adds its findings to the project's ledger. The ledger is the file that holds the project's state. The report is immutable: it is never edited afterwards, and a second run on the same day gets a suffixed name.
-
-   You should now see a new file `reviews/YYYY-MM-DD-critique-<lens>.md`.
-
-4. Claude checks that the report was filed and that the ledger was updated. It repairs the ledger bookkeeping where needed, without touching the findings themselves.
-
-5. Claude presents a delta summary in the conversation language. It names:
-   - the new findings, each with its severity
-   - the findings verified as resolved
-   - the findings still open
-   - the findings that became obsolete
-   - what awaits your verdict
-
-   For `essence`, the distillations come first, because the findings rest on them.
-
-   You should now see the delta summary.
-
-6. Claude offers a walkthrough of the open findings. A walkthrough settles a list one item per message, as described in [Walk through a list](walk-through-a-list.md). Answering `accept` on a finding means an iteration of the artefact concerned through `/forge`, and the finding is then marked `resolved`. The other verdicts are those of the walkthrough.
-
-   You should now see the offer of a walkthrough. If you decline it, the findings wait.
+1. Bare `/critique` lists the lenses and recommends one that fits the state of the project. The recommendation is advice, not a gate.
+   You should now see the roster of lenses with one recommended.
+2. With a lens, Claude first makes the project's ledger (the file that records the state of the project) afresh, so that the reviewer reads a current file.
+   You should now see no output yet, only the run starting.
+3. Claude starts one subagent (an isolated reviewer that sees none of your conversation) for the lens. It is given the project and the target, nothing else. It reads the project's documents and judges their quality through its lens. It writes nothing and returns its report.
+   You should now see Claude waiting for the report.
+4. The report comes back with its findings unnumbered. Claude gives each new finding its number, then files the report word for word in the project's `reviews/` folder. The file is named by its date, the kind (critique), the lens, the time and a short hash of its content. Claude then makes the ledger again, so that the findings appear in it.
+   You should now see a new file in `reviews/`.
+5. Claude presents the summary of what changed since the last run, in the language of your conversation: the new findings with their severity, those verified as resolved, those still open, those now obsolete, and what waits for your verdict. For `essence`, the distillations come first, because the findings rest on them.
+   You should now see that summary.
+6. Claude offers a walkthrough of the open findings. A walkthrough settles a list one item per message; see [Walk through a list](walk-through-a-list.md). The verdict `accept` means an iteration of the artefact concerned through `/forge`, and the finding is then marked resolved. The other verdicts are the walkthrough's. If you decline the walkthrough, the findings wait.
+   You should now see the first finding, closed with the line of verdicts.
 
 ## What you have afterwards
 
-- One immutable report in `reviews/`, in English.
-- New findings in the ledger, each with its own ID, a severity and a category. [The critic](../about/the-critic.md) says what they mean.
-- Earlier findings re-tested and their states updated.
-- Nothing changed in any document of the chain until you accept a finding.
+- A report in `reviews/`, immutable, exactly as the reviewer returned it apart from the finding numbers.
+- The new findings in the ledger.
+- Open findings that wait for your verdict, or are settled if you took the walkthrough.
 
 ## If something goes wrong
 
-- If no project is clear from context, Claude asks which one you mean.
-- If the report or the ledger update is missing when the agent returns, Claude repairs the ledger bookkeeping. It does not change what the findings say.
-- If you decline the walkthrough, nothing is lost: the findings stay open in the ledger until you settle them.
+- If the project cannot be inferred from the context, Claude asks which project is meant.
+- A report is never filed twice at once. Reports of several reviewers are filed one after another, so that no finding number is given twice.
+- If the lens you name is not in the roster, run bare `/critique` and take a name from it.
 
 ## A worked example
 
-You have just revised the intent of a project with the slug `my-project` and want it read before a release.
+You have just iterated the intent of a project called `my-project` and want it read for quality.
 
-1. You type `/critique` to see the roster. Claude lists the lenses and recommends one.
+1. You type `/critique` and see the roster. Claude recommends `essence`.
 2. You type `/critique essence intent my-project`.
-3. Claude reports: two new findings, one earlier finding verified resolved, one still open, none obsolete.
-4. Claude offers a walkthrough. You accept it and take the first finding with `accept`.
-5. The intent is iterated through `/forge`, and the finding is marked `resolved`.
+3. Claude makes the ledger, the reviewer reads the intent with the chain around it, and Claude files the report in `reviews/`.
+4. Claude tells you: three new findings, one earlier finding verified as resolved, two still open. It offers a walkthrough.
+5. You say yes. The first finding appears, you answer `accept`, and Claude iterates the intent through `/forge` to mend it.
 
 ## See also
 
@@ -93,4 +84,4 @@ You have just revised the intent of a project with the slug `my-project` and wan
 - [The critic](../about/the-critic.md): what the critic judges and why it is blind.
 - [Glossary](../reference/glossary.md): every term of the forge in one line.
 
-Generated on 2026-10-14 for version 5.9 from the files the front-matter names; never edited by hand.
+Generated on 2026-10-19 for version 5.26 from the files the front-matter names; never edited by hand.

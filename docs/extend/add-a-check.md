@@ -1,8 +1,8 @@
 ---
-generated: 2026-10-14
-version: 5.9
+generated: 2026-10-19
+version: 5.26
 made: mirrored
-inputs-hash: 07e27ca3de1b5af0
+inputs-hash: a83ffcab8964a651
 inputs:
   - templates/check-definition.md
   - .claude/skills/check-contract/SKILL.md
@@ -12,104 +12,89 @@ inputs:
 
 # Add a check
 
-A check is a reviewer that verifies one concern of mechanical conformance with the conventions, and it is added as one agent file. This page is for the extender who wants a new check on the roster that `/check` lists.
+This page shows an extender how to add a new check to the forge. A check is a reviewer that verifies one kind of mechanical conformance with the conventions, and it is added as one agent file.
 
 ## Before you start
 
-Read [Make a change to the forge](how-a-change-is-made.md). It says how a change is proved, recorded and released. The new check is recorded and released as any other change of the forge.
+A change to the forge is made, proved, recorded and released in one way, described in [Make a change to the forge](how-a-change-is-made.md). The new check is recorded and released as any change of the forge.
 
-A new check is added only by the decision of the principal (the person whose thinking is forged). It is added only where what it finds genuinely differs from what an existing check finds. See [Checks](../reference/checks.md) for the checks that exist. See [The check](../about/the-check.md) for what the shared contract owns, so that your file does not repeat it.
+A new check is added only by the decision of the principal (the person whose thinking is being forged). It is added only where what it finds genuinely differs from what the existing checks find. [Checks](../reference/checks.md) lists the ones that exist, so read it first.
 
-One check owns one concern and no other check's concern.
+Each check owns one concern and none another's. If your idea mixes two concerns, it is two checks. If it judges whether a document is wrong, unclear or badly written, it is not a check at all: a check never judges substance or document quality.
+
+Terms of the forge are explained in [Glossary](../reference/glossary.md). What the shared contract of every check holds is described in [The check](../about/the-check.md).
 
 ## The files
 
-You add one file and change none.
+You add one file and change no other.
 
-- `.claude/agents/check-<name>.md` is the agent file of the new check. The suffix after `check-` is the name of the check.
-- `templates/check-definition.md` is the skeleton you start from.
+- `.claude/agents/check-<name>.md`: the agent file of the new check. Its skeleton is `templates/check-definition.md`.
 
-The `/check` command is not changed. It finds the new check by scanning the agent files, so the roster grows by itself.
+The command `/check` does not change. It finds the roster by scanning the agent files `.claude/agents/check-*.md` and reading their `description` fields.
 
 ## Steps
 
-1. Copy `templates/check-definition.md` to `.claude/agents/check-<name>.md`.
-2. Fill the front-matter.
-   - `name` is `check-<name>`.
-   - `description` says what the check verifies and when it fits. The roster shows this line, so it is what lets a reader choose the check.
-   - `tools` stays read-only: `Read, Glob, Grep`. A check changes nothing.
-   - `model` is `inherit`, so that the check runs on the session model.
-   - `skills` lists `check-contract`, which brings in the shared behaviour.
-3. Quote the description if it holds a colon followed by a space. Put the whole description in single quotes and double any apostrophe inside it. Otherwise the agent does not register.
-4. Delete the comment that the skeleton carries.
-5. Write the Lens section in its three parts.
-   - What you read: a project, every project or the engine. Say how the target narrows it and what a library reduces it to.
-   - What you verify: the rules, each with its owner cited (a section of `CLAUDE.md`, a template or a position) and never restated. Say which states are a fact to report and not a finding.
+1. Choose the name. The file is `check-<name>.md` and the name is the suffix of the agent name.
+2. Copy `templates/check-definition.md` to `.claude/agents/check-<name>.md`.
+3. Fill the front-matter.
+   - `name`: `check-<name>`.
+   - `description`: what the check verifies and when it fits, in one line. The roster shows this line, so it is how a person picks the check. If the description contains a colon followed by a space, put the whole description in single quotes (an apostrophe inside is doubled), or the agent does not register.
+   - `tools`: read-only tools (`Read, Glob, Grep` in the skeleton). A check changes nothing.
+   - `model`: `inherit`, so the check runs on the model of the session.
+   - `skills`: `check-contract`, the contract that carries the behaviour every check shares.
+4. Delete the comments of the skeleton.
+5. Write the Lens section, the only part of the file that is the check's own. It has three parts.
+   - What the check reads: a project, every project, or the engine. Say how the target narrows it, and what a library reduces it to.
+   - What the check verifies: the rules. Name the owner of each rule (a section of `CLAUDE.md`, a template, a position of the intent) and never restate the rule. Say which states are a fact and not a finding, if any.
    - Cost: the scope the check reads, either named files or the whole, stated honestly.
-6. Leave out of the Lens section anything the contract already says. A Lens section may narrow what is read or make a shared rule stricter. It never renames, drops or repeats a shared rule or field.
+6. Leave the shared behaviour to the contract. The Lens section may narrow what is read or make a shared rule stricter. It may not rename, drop or duplicate a shared rule or field.
 
-The check does not write its report to a file. It returns the report, and the `/check` procedure files it, gives each new finding its number and adds it to the ledger.
-
-Whether a save or a release runs the new check is for the definition of that caller to say. Adding the agent file does not put the check into either of them.
+The check writes nothing. It returns its report, and the `/check` procedure files the report and gives each new finding its number. Whether a save or a release runs the new check is for the definition of that caller to say, so the check file does not decide it. Checks never call each other.
 
 ## Prove it
 
-Run the check on the engine:
+Run the check on the engine, which takes no slug:
 
 ```
 /check engine
 ```
 
-Run it on a project, with a placeholder slug here:
+Then run the new check on a project, with a placeholder slug:
 
 ```
-/check <name> <project-slug>
+/check <name> <slug>
 ```
 
-Which of the two targets the check takes, and what a missing or an added slug means to it, is said in its Lens section. Use the one it declares.
+You should now see a report that opens with one line, either "conforms" or a count of findings. Each finding names a file and line, the rule with its owner, and one proposed fix. A run that finds nothing files nothing.
 
-You should now see a one-line verdict, either "conforms" or the number of findings. Findings come ranked, each with a place, the rule and its owner, and one proposed fix. A report that says "conforms" is filed nowhere.
+Which of the two targets a check takes, and what a missing or an added slug means to it, is said in its Lens section, so test the target your Lens names.
 
-Run bare `/check` as well. You should now see your check in the roster with its description.
+## Record and release
+
+Record and release the new file as any change of the forge, as [Make a change to the forge](how-a-change-is-made.md) describes.
 
 ## A worked example
 
-This example is generic and invented. It shows the shape of a file, not a check that exists. The check `naming` verifies that the files of a target follow one naming convention.
+This example is generic. The check `<name>` verifies one concern, for instance that a kind of file carries a field its template requires.
 
-File: `.claude/agents/check-naming.md`
+1. Copy the skeleton to `.claude/agents/check-<name>.md`.
+2. Set the front-matter:
 
 ```
 ---
-name: check-naming
-description: Check "naming" — verifies that file names follow the naming convention. Verifies conformance with the conventions. Not a critic of the documents, not a challenger of the thinking.
+name: check-<name>
+description: Check "<name>" - <what it verifies, in one line>. Verifies conformance with the conventions. Not a critic of the documents, not a challenger of the thinking.
 tools: Read, Glob, Grep
 model: inherit
 skills:
   - check-contract
 ---
-
-## Lens
-
-### What you read
-The file names of one project, named by its path. Given the
-engine root, the file names of the engine. A library is reduced to
-its sources and research directories.
-
-### What you verify
-Each file name against the naming convention, which belongs to
-its owner (<the section of CLAUDE.md that states it>). A project
-with no sources directory is a fact, reported once in one line,
-and not a finding.
-
-### Cost
-Directory listings only; no file is opened.
 ```
 
-Then prove it with `/check naming <project-slug>`.
+3. Write the Lens section: the project it reads, the owner of the rule it verifies (cited, not restated), and the cost of its scope.
+4. Run `/check engine`, then `/check <name> <slug>`.
 
-## Record and release
-
-Record the addition and release it as any change of the forge, by the steps in [Make a change to the forge](how-a-change-is-made.md).
+You should now see the check in the bare `/check` roster, and its report on the target.
 
 ## See also
 
@@ -118,4 +103,4 @@ Record the addition and release it as any change of the forge, by the steps in [
 - [Checks](../reference/checks.md): the checks that exist.
 - [Glossary](../reference/glossary.md): every term of the forge in one line.
 
-Generated on 2026-10-14 for version 5.9 from the files the front-matter names; never edited by hand.
+Generated on 2026-10-19 for version 5.26 from the files the front-matter names; never edited by hand.

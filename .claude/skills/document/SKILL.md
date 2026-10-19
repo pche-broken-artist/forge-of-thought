@@ -15,7 +15,10 @@ regenerated.
 
 Target and places. Bare, the target is the engine: its root is the
 engine root, the owning project is `projects/forge`, the pages land in
-`docs/` at the engine root. With a slug, the target is that project:
+`docs/` at the engine root. The run is on `main` only and refuses a
+repository behind or diverged from its origin (`python
+scripts/forge-status.py --remote`; the offer is `/pull`): the pages
+are taken as `ours` at a merge (POS.1690, POS.1710). With a slug, the target is that project:
 its root and the owning project are `projects/<slug>`, the pages land
 in `projects/<slug>/docs/`. The map is `docs-map.md` beside the
 owning project's ledger, never in `docs/`. The date is today's.

@@ -14,7 +14,8 @@ rules: CLAUDE.md, Document chain, Renders. -->
 
 ## Inputs
 <!-- What the README is generated from. A thought project: the ledger
-(state), the brief (what was asked), the intent (essence and
+(state; made by the script before the render, /render step 2), the
+brief (what was asked), the intent (essence and
 positions), the layers below it once they exist, and the
 documentation index docs/README.md where the project has one. A
 library: the ledger and the two resource indexes. -->

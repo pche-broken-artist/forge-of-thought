@@ -13,6 +13,10 @@ anywhere.
 
 1. Infer the current project from context ($1, or ask if ambiguous)
    and read `recipes/$0.md`. If it does not exist, say so and stop.
+   The run is on `main` only and refuses a repository behind or
+   diverged from its origin (`python scripts/forge-status.py
+   --remote`; the offer is `/pull`): a published file is binary and
+   never merged (POS.1690, POS.1710).
 2. Read the recipe's `## Format` section (skeleton
    `templates/recipe.md`). A recipe without it ends at the Markdown:
    say so and stop. An older recipe carrying `## Build instructions`

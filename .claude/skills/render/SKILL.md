@@ -15,6 +15,9 @@ other; generating the render is mechanical.
    through `/recipe` (a genre where one fits, else bare from
    `templates/recipe.md`) and stop.
 2. Read the recipe's declared inputs at their current versions.
+   Where the inputs name `ledger.md`, make it first, `python
+   scripts/forge-ledger.py <slug>`: the ledger is made at read time
+   (CLAUDE.md, Ledger) and a render reads the file on disk.
    Every input, CLAUDE.md included, is read from disk in the run:
    the copy of CLAUDE.md a subagent carries in its context is the
    session's and may be older than the file (POS.0950).

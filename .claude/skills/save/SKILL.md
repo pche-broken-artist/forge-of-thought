@@ -27,7 +27,10 @@ the report.
    its report through the `/check` procedure
    (`.claude/skills/check/SKILL.md`; the engine's project is
    `forge`); a save never waits on a finding the principal has not
-   asked to fix (POS.0430).
+   asked to fix (POS.0430). When the ledger script fails or names
+   files it could not parse, the check reads the ledger as it lies,
+   the save goes on and says so: the save is what does not lose work
+   (SOL.0530).
 2. Unless `-m` was supplied, draft a one-line English commit message
    summarising the round — from the records the round appended to
    the touched documents' histories, the primary record of every

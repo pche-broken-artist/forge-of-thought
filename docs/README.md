@@ -1,6 +1,6 @@
 ---
-generated: 2026-10-14
-version: 5.9
+generated: 2026-10-19
+version: 5.26
 made: derived
 inputs:
   - projects/forge/docs-map.md
@@ -12,7 +12,7 @@ This is the documentation of Forge of Thought: pages of one topic
 each, generated from the engine as it stands, for three readers.
 Every page stands on its own; start where your question is.
 
-Generated on 2026-10-14 for Forge of Thought at version 5.9
+Generated on 2026-10-19 for Forge of Thought at version 5.26
 (the version of the engine's intent; a release carries the same
 number).
 
@@ -54,6 +54,7 @@ number).
 - [Release a version](use/release-a-version.md): What does `/release` run, render and tag, in what order?
 - [Pull from the remote](use/pull-from-the-remote.md): How does `/pull` look at the remote, and what does it pull and refuse?
 - [Upgrade the engine](use/upgrade-the-engine.md): How do you take a new version of the engine and bring your projects to its conventions?
+- [Migrate a project](use/migrate-a-project.md): How do you bring a project to the shape of files a new release expects, with `/migrate`?
 - [End a session](use/end-a-session.md): How does `/end` tell you what a shutdown would lose?
 - [Read the history of an item](use/read-the-history-of-an-item.md): How do you see the whole history of one position, requirement or part with `/history`?
 - [Work on a branch](use/work-on-a-branch.md): How do you switch a repository to a branch without typing git?
@@ -75,6 +76,7 @@ number).
 - [The solution design](about/the-solution-design.md): What does a solution design hold, and why does it restate nothing above it?
 - [The work product](about/the-work-product.md): What is a work product, why is it two files, and why is it neither an artefact nor a render?
 - [Documents and records](about/documents-and-records.md): What kinds of document does a project hold, and why does state live in files?
+- [The ledger, made from the records](about/the-ledger.md): Why is the ledger made at read time from the other files, and where does the state it shows really live?
 - [Versioning and history](about/versioning-and-history.md): What does a version number mean, what is a major, and where does a document's history live?
 - [Stable IDs](about/stable-ids.md): Why does every item carry an ID that is never renumbered?
 - [The isolated reviewers](about/isolated-reviewers.md): Why do three kinds of reviewer never see the conversation, and what does their agreement mean?
@@ -87,6 +89,7 @@ number).
 - [Sources and research](about/sources-and-research.md): Why are sources immutable, why is registration not intake, and what is a research note for?
 - [Projects and the engine](about/projects-and-the-engine.md): Why is every project a repository of its own that the engine does not know?
 - [Persistence in git](about/persistence-in-git.md): Why are the scripts the only door to git, and why two doors, two speeds?
+- [Upgrades and migration](about/upgrades-and-migration.md): How does a project follow a new release of the engine, and why does a change of the shape of files come with a migration?
 - [How the rules are held](about/how-the-rules-are-held.md): How does the forge keep its rules in force across a long conversation and inside a subagent?
 - [Languages](about/languages.md): Which language does each kind of document carry, and why only one output language per project?
 - [Where the forge is going](about/where-it-is-going.md): In which direction is the forge developed, and what is deliberately not promised?
@@ -113,18 +116,18 @@ number).
 - [Checks](reference/checks.md): The checks of today, what each verifies, its cost, and which a save and a release run.
 - [Recipe genres](reference/recipe-genres.md): The genres of `/recipe` with their skeletons, outputs and checklists in full.
 - [ID scheme](reference/id-scheme.md): The format, the numbering rules and the prefix table, exactly.
-- [Versioning and front-matter](reference/versioning-and-front-matter.md): The version scheme and the front-matter fields of an artefact, a brief, a recipe and a work specification, exactly.
+- [Versioning and front-matter](reference/versioning-and-front-matter.md): The version scheme and the header fields of an artefact, a brief, a recipe, a work specification and an index, exactly.
 - [History companion](reference/history-companion.md): The shape of `<file>.history.md`, record by record, exactly.
 - [Requirement style](reference/requirement-style.md): The rule set of the items of an assignment, exactly.
 - [Document kinds](reference/document-kinds.md): The table of document kinds, verbatim, with the companion, library and wrapping rules.
-- [Ledger](reference/ledger.md): The ledger's header, tables, columns and state words, exactly.
-- [Render provenance](reference/render-provenance.md): The provenance block every render opens with, the definition of stale, and where the files land.
+- [Ledger](reference/ledger.md): The ledger's header, tables, columns, state words and reports, exactly, with where each column is read from.
+- [Render provenance](reference/render-provenance.md): The provenance block every render opens with, the definition of stale, the published companion, and where the files land.
 - [Documentation map](reference/documentation-map.md): The fields of the map, of a writer's task, of a page's front-matter and of the index, exactly.
 - [Verdict words](reference/verdict-words.md): The words and letters the principal types in a walkthrough, exactly.
 - [Repository layout](reference/repository-layout.md): The layout of the engine root, a thought project and a library, file by file.
 - [Scripts](reference/scripts.md): Every script with its synopsis, options, forms, what it needs and the command that runs it.
 - [Templates](reference/templates.md): Every skeleton in `templates/`, what it is the skeleton of, and which procedure creates from it.
-- [Configuration](reference/configuration.md): The files that configure an instance and what each holds, field by field.
+- [Configuration](reference/configuration.md): The files that configure an instance and a project, and what each holds, field by field.
 - [Glossary](reference/glossary.md): Every term of the forge in one line, with the file that defines it.
 
 The map these pages are generated from, with every page's inputs,

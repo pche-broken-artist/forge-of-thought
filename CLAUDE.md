@@ -466,8 +466,14 @@ projects/<slug>/           # kind: thought — the chain
   renders/<recipe>.<lang>.mp4         # the plain file of a screenplay,
   renders/<recipe>.<lang>.html-player.js  # by md2video; or in the
                                       # engine's docs/videos/ by output:
+  renders/state.md                    # the ledger as a render, written
+                                      # by /release on main (POS.1650)
   published/<recipe>.pptx             # the designed file, made by
   published/<recipe>.docx             # /publish through a model
+  published/<recipe>.md               # the companion: the provenance
+                                      # of the published file (/publish
+                                      # step 6), read by the Published
+                                      # table
   work/<name>.spec.md                 # a work product: the specification,
   work/<name>.spec.history.md         # the way and the why, with its
   work/<name>.<ext>                   # history; and the file, the content
@@ -556,7 +562,9 @@ or merges on its own judgement (POS.1490). `/end` closes a session by
 saying what would be lost (POS.1500). A release that changes the
 shape of files comes with a migration, `/migrate [slug]` through
 `scripts/forge-migrate.py`: once per project, on one clone, on the
-principal's word, never on Claude's (POS.1740). What each does in full is its
+principal's word, never on Claude's (POS.1740). Until a project is
+migrated nothing writes into it: the map, the checks and every
+writing command say what `templates/project.md` says and stop. What each does in full is its
 own definition's (`.claude/skills/pull/SKILL.md`,
 `.claude/skills/end/SKILL.md`, `.claude/skills/migrate/SKILL.md`). Saves made directly from the shell
 are unaffected.

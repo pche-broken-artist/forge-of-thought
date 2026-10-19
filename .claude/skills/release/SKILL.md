@@ -13,11 +13,15 @@ repository is named by its slug, `forge` meaning the engine; without
 a slug, ask which repository — a release is always one repository,
 never a sweep.
 
-1. Determine the state from `python scripts/forge-status.py` (the scripts
-   are the only door to git — CLAUDE.md, Persistence). A release runs
-   on `main` only: on any other
+1. Determine the state from `python scripts/forge-status.py --remote`
+   (the scripts are the only door to git — CLAUDE.md, Persistence). A
+   release runs on `main` only: on any other
    branch, stop and report the branch the repository is on and how to
    get back (`python scripts/forge-branch.py <slug> main`, after saving).
+   A repository behind or diverged from its origin is refused with
+   the offer of `/pull`: the renders a release makes are taken as
+   `ours` at a merge, and that turns round in the rebase of the save
+   (POS.1710, SOL.0530).
    Merging a branch into `main` is git's business, by hand or by
    merge request, never this command's (POS.1110).
 2. Run the checks over the sources through the `/check` procedure
@@ -57,7 +61,12 @@ never a sweep.
    recipe is missing is reported (a `/check` finding)
    and released without the render. Other renders are never
    regenerated here; their staleness is the principal's business,
-   shown by the `/forge` map (POS.0570).
+   shown by the `/forge` map (POS.0570). Then the state render:
+   `python scripts/forge-ledger.py <slug> --out renders/state.md`
+   (for the engine `projects/forge/renders/state.md`), the ledger as
+   a tracked render, made only on main, so that the state is on the
+   remote where it is wanted (POS.1650); the Renders table does not
+   list it, it being the ledger itself.
 5. Report the age of the documentation: the `version` in the
    front-matter of the repository's `docs/README.md` against the
    intent's version (a repository without `docs/` has none, and that

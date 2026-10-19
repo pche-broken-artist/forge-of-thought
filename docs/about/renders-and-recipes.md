@@ -1,8 +1,8 @@
 ---
-generated: 2026-10-14
-version: 5.9
+generated: 2026-10-19
+version: 5.26
 made: derived
-inputs-hash: 394bc59a646a2a4b
+inputs-hash: 906acf35aad028a1
 inputs:
   - CLAUDE.md#Document chain
   - templates/recipe.md
@@ -21,312 +21,280 @@ inputs:
 
 # Renders and recipes
 
-A render is an output made for one audience, generated from the
-documents of a project and never edited by hand. This page says what
-a render is, what its recipe is, how an output is made from the two
-and why the forge keeps them apart from the chain. It is for anyone
-who works with a project of the forge, extends it or wants to
-understand why an output is regenerated rather than corrected: the
-principal (the person whose thinking is being forged), a colleague
-who receives a render, and a reader who only evaluates the forge.
+A render is an output for one audience that Claude generates from the
+documents of a project, and a recipe is the file that says how it is
+made. This page explains what the two are, how an output travels from
+a recipe to a finished file, and why a render is never edited by hand.
+It is written for anyone who uses the forge, extends it or wants to
+understand how it works.
 
 ## What it is
 
-A render is an audience-specific output generated from the chain
-(the versioned documents of a project, from its brief and intent
-downward). A pitch for a group, an architecture picture, an executive
-summary and the README of the repository are renders.
+A project's thinking lives in its chain: the versioned documents
+(called artefacts) that run from a brief through the intent to any
+layers below it. The principal (the person whose thinking is being
+forged) composes the chain together with Claude. Every term of this
+kind is explained in one line in the [Glossary](../reference/glossary.md).
 
-A render is never a source of truth. The artefacts of the chain
-remain the sole source of truth. A render assigns nothing and is not
-part of the chain.
+A **render** is an audience-specific output generated from the chain.
+Examples are a pitch for a group, an architecture picture, an executive
+summary or the README of a repository. A render assigns nothing.
+A render is not part of the chain. The artefacts stay the one source of
+truth.
 
-A render is never edited by hand. What is iterated is its recipe. A
-recipe is one versioned file, `recipes/<recipe>.md`, holding in one
-place:
+A **recipe** is the file a render is made from, `recipes/<recipe>.md`.
+It holds in one versioned file:
 
-- the inputs: one artefact of the chain or several, by path
-- the audience
-- the instructions: tone, what to emphasise, what to omit, register
-- the literal output template, with placeholders
-- optionally a format section, saying what file is made beyond the
-  Markdown and what each step needs
-
-The command `/render <recipe>` regenerates the render from its
-recipe. Where the render lands, how the generation is isolated and
-what provenance it opens with are defined in
-`.claude/skills/render/SKILL.md`. How to compose a recipe is on
-[Compose a recipe](../use/compose-a-recipe.md); how to regenerate a
-render is on [Render an output](../use/render-an-output.md).
+- the inputs: the artefacts the render is generated from, one or
+  several;
+- the audience and the purpose;
+- the instructions: tone, emphasis, what to leave out, length;
+- the format, optionally: which delivery file is made beside the
+  Markdown;
+- the template: the literal skeleton of the render, with placeholders.
 
 The boundary between the chain and a render is authorship, not
-audience. A chain artefact is composed by the principal: Claude (the
-model that runs the forge) proposes, the principal composes. A render
-is generated from artefacts. An article the principal writes is a
-layer of the chain; its translation is a render.
+audience. A chain artefact is composed by the principal. A render is
+generated from artefacts. An article the principal writes is therefore
+a layer of the chain, and its translation is a render.
 
-A recipe is a tool, not a record of thinking. It carries a version
-and an `updated` date in its front-matter, enough for a render to
-cite, and no status field. A recipe is never approved and stays at a
-0.x version for life. Being versioned, a recipe keeps its history in
-a companion file beside it, `recipes/<recipe>.history.md`, like every
-versioned kind of document.
+A recipe is a tool, not a record of thinking. It carries a version and
+no status, because a recipe is never approved. It stays at a version
+below 1.0 for its whole life. Being versioned, it keeps its history in
+a companion file beside it, like every versioned document of the forge.
 
-Two things look like renders and are not. A page of the
-documentation is generated from the project's documents without a
-recipe: see [The documentation](the-documentation.md). A work product
-is an output made with work of its own and is neither artefact nor
-render: see [The work product](the-work-product.md).
+Two outputs of a project are always renders. Every project has a README
+made from its own `recipes/readme.md`. A thought project also has
+release notes made from `recipes/release-notes.md`. A library (a
+project of shared material with no chain) has a README only, which is a
+catalogue of what it holds.
+
+The documentation of a project is not a render. Its pages are
+generated without a recipe, as [The documentation](the-documentation.md)
+explains.
 
 ## How it works
 
-### Provenance and staleness
+### From a recipe to a render
 
-Every render opens with its provenance: the recipe and every input,
-each cited with its version. The ledger (the file `ledger.md`, the
-single source of truth for a project's state) mirrors the provenance
-in its Renders table.
+A render is never edited by hand. What the principal iterates is its
+recipe. The command `/render <recipe>` then regenerates the output from
+it. [Render an output](../use/render-an-output.md) shows the job step by
+step, and [Compose a recipe](../use/compose-a-recipe.md) shows how a
+recipe is written.
 
-A render is stale when a cited version differs from the one its
-recipe or an input now has. What the provenance block holds and how
-stale is defined exactly is on
+Every render opens with its provenance: it cites the recipe and every
+input, each with its version. The ledger (the file that holds the state
+of a project) mirrors that provenance in its Renders table. A render
+whose recipe or inputs have moved past the versions it cites is stale.
+The exact block and the definition of stale are in
 [Render provenance](../reference/render-provenance.md).
 
-No check reports the staleness of a render. The state map of the
-project, shown by `/forge`, shows it. Claude never regenerates a
-render on its own judgement: it reports staleness and offers. A
-render is regenerated only by the principal's explicit `/render` or
-by `/release`. A release regenerates the README and the release notes
-of the project. Every other render is as stale as the principal lets
-it be.
+A recipe is loose on purpose. Its template fixes the structure and what
+information appears where. It never fixes the wording: a presentation
+recipe says what belongs on a slide, not how it is phrased. Each
+rendering derives the words again from the current inputs. Where a
+wording carries weight (a title, a claim, a fixed line), the recipe pins
+it as fixed text. What is pinned is regenerated word for word, and
+everything else is derived freely.
 
-A recipe may pin load-bearing wording as fixed text: a title, a
-claim, a fixed line. What is pinned regenerates verbatim. Everything
-else re-derives freely from the current inputs. A release that
-regenerated renders reports in its summary what materially changed in
-them, so that the principal rules on the difference before the
-release commit without reading a full diff.
+A render may serve as an input of another render. One example is a
+slide of a deck that shows an architecture picture made by another
+recipe. The citing recipe must then declare the other render among its
+inputs.
+
+### When a render is regenerated
+
+A render is regenerated in two cases only:
+
+- the principal runs `/render` explicitly;
+- a `/release` regenerates it.
+
+Claude never regenerates a render on its own judgement. It reports that
+a render is stale and offers to regenerate it. Every `/release` of a
+project regenerates its README and its release notes. Every other render
+stays as stale as the principal lets it be. No check reports the
+staleness of any render. The state map that `/forge` shows does.
+
+A release that regenerated renders says in its summary what materially
+changed in them. The principal rules on that change before the release
+is committed, without reading a full comparison.
 
 ### Several languages
 
-A recipe may declare several languages in `languages:`. The first
-is primary; the rest are its translations. `/render` generates the
-primary render and, in the same run, translates it into every other
-language, scene for scene and line for line, so that every language
-carries the same cut.
+A recipe may declare several output languages in `languages:`. The
+first language is the primary one, and the others are its translations.
+`/render` generates the primary render and, in the same run, translates
+it into every other language, scene for scene and line for line. Each
+language gets its own render, `renders/<recipe>.<lang>.md`, with its own
+provenance. A translation cites the primary render it was made from. A
+recipe with one language keeps the single file `renders/<recipe>.md`.
 
-There is one render per language, `renders/<recipe>.<lang>.md`,
-each with its own provenance and its own row in the ledger's Renders
-table. A translation cites the primary render it was made from. A
-format file follows the name of its render. A recipe with one
-language keeps `renders/<recipe>.md`. A render may be in any
-language, or languages, its recipe declares.
-
-### Two steps, divided by cost
+### Two steps to a delivery file
 
 Everything the forge produces is Markdown, renders included. A
-presentation is a `.md` file saying what is on each slide, with
-mermaid for pictures. The forge ends at content, but carries its
-delivery-format tools at its edge. An output is made in two steps,
-each with its own command.
+presentation is a Markdown file saying what is on each slide. Where the
+recipe's `## Format` section names a format, the output is made in two
+steps, each with its own command:
 
-The first step is `/render`. It generates the Markdown and, where the
-recipe names a format, the plain file beside it: a `.docx` or a
-`.pptx` through pandoc, in `renders/`. For a screenplay the same step
-makes a video or the events of its player through
-`scripts/md2video.py` instead. This step is deterministic and cheap
-and is repeated freely.
+1. `/render` generates the Markdown and the plain file beside it. A deck
+   becomes a PowerPoint file and a document becomes a Word file, both
+   through pandoc. A screenplay becomes a video, or the events its
+   player plays, through `scripts/md2video.py`. This step is
+   deterministic and cheap, and it can be repeated freely.
+2. `/publish` makes the designed file through a model and its document
+   skills, into `published/`. This step is expensive. It runs only on
+   the principal's command, never by `/render`, never by `/release` and
+   never on Claude's own judgement.
+   [Publish a designed file](../use/publish-a-designed-file.md) shows the
+   job.
 
-The second step is `/publish`. It makes the designed file through a
-model and its document skills, into `published/`. It runs only on
-the principal's command, never by `/render`, never by `/release` and
-never on Claude's own judgement. It makes a file and sends nothing
-anywhere. `/publish` takes the render as it lies on disk and never
-renders: a stale render is named before the conversion, and the word
-is the principal's. The ledger's Published table says what each
-published file was made from and whether it is `current` or `stale`.
-See [Publish a designed file](../use/publish-a-designed-file.md).
+A screenplay has no designed step and no published file.
+[The screenplay and its player](the-screenplay-and-its-player.md)
+explains its two formats and where a public one lands. A recipe that
+names no format ends at the Markdown.
 
-A screenplay has no designed step and no published file. What a
-screenplay is, its two formats and where a public one lands is on
-[The screenplay and its player](the-screenplay-and-its-player.md).
+`/publish` takes the render as it lies on disk and never renders it
+again. A stale render is named before the conversion, and the principal
+decides. The ledger's Published table says what each published file was
+made from and whether it is `current` or `stale`.
 
-The format and what each step needs stand in the recipe's `## Format`
-section and are never copied into the render. A recipe that names no
-format ends at the Markdown. The conversions are three scripts,
-`scripts/md2pptx.py`, `scripts/md2docx.py` and `scripts/md2video.py`.
-What each needs installed, how a template or a reference document is
-named, where the output lands and what becomes of a diagram is said
-by each script's own header. A plain or a published file is tracked
-in git like any render output and never edited by hand: the Markdown
-render stays the source of truth.
+A plain file and a published file are kept in git like any render and
+are never edited by hand. The Markdown render stays the source of truth.
 
-### The README and the release notes
+```mermaid
+flowchart LR
+    A[Artefacts of the chain] --> R[Recipe]
+    R -->|/render| M[Markdown render]
+    M -->|/render, where a format is named| P[Plain file]
+    M -->|/publish, on the principal's command| D[Designed file]
+```
 
-Every project has a README as a render of its own
-`recipes/readme.md`, with its output in the project root. A thought
-project also has release notes from `recipes/release-notes.md`. The
-engine's own README and release notes are made by the same mechanism.
-Every `/release` of the project regenerates both after its check.
+### Recipes by genre
 
-The README presents the project to a human meeting its repository
-for the first time: a recipient, a colleague, the principal after
-weeks away. It stands alone, so that no claim requires opening the
-chain. It carries what the thing is, what one gets, how to start,
-where it stands and where the documentation is. Every claim is
-derivable from the inputs; nothing is invented, and anything
-superseded in the inputs does not survive. Content fixes go into the
-recipe or the inputs, and the file is regenerated. A process change
-is complete only once the intent is updated and the README
-re-rendered.
+A recipe may be composed through a genre interview, `/recipe <genre>`.
+Each genre has a definition carrying the questions to ask and a
+skeleton, `templates/recipe-<genre>.md`. The skeleton extends the base
+recipe shape and never replaces it. The genres are `presentation`,
+`readme`, `release-notes` and `screenplay`. The README and the release
+notes recipes are scaffolded by `/new-project`.
 
-The release notes are a log of releases, not a story: one section
-per release, newest first, with fixed groups in a fixed order and one
-sentence per change from the reader's side. The sections are derived
-at the release from the records of the history log since the previous
-release. One thing is never derived: what the reader must do after a
-change is written with the change, in the `Action` field of its
-history record, and the render carries it into its "Action required"
-part word for word.
+The readme genre owns what a README carries:
 
-A library has a README only: a catalogue of what it holds and how to
-use it, from its ledger and indexes. Release notes are derived from
-the history of an intent, which a library does not have; its history
-is git.
+- what the thing is;
+- what one gets;
+- how to start;
+- where it stands;
+- where the documentation is.
 
-### Genres
-
-A recipe may be composed through a genre interview, `/recipe <genre>`,
-with one definition per genre carrying the elicitation checklist and
-the genre's skeleton, `templates/recipe-<genre>.md`, extending the
-base recipe shape and never replacing it. The genres today are
-`presentation`, `readme`, `release-notes` and `screenplay`. The
-readme and the release-notes recipes of a new project are scaffolded
-by `/new-project`.
-
-A render may cite another render as a picture source, such as a deck
-slide citing an architecture picture, when the citing recipe declares
-that render among its inputs. Provenance and staleness then track the
-dependency.
+A README stands alone for a reader who meets the repository for the
+first time. Every claim in it can be derived from its inputs. It closes
+with a short section saying that it is a render, regenerated at every
+release and never edited by hand.
 
 ## Why
 
-A render is never edited by hand because it is generated: a hand
-edit would be lost at the next regeneration, and the artefacts, not
-the render, are the source of truth. A fix therefore goes into the
-recipe or into the inputs, and the file is regenerated.
+**The artefacts stay the one source of truth.** A render only restates
+what the chain holds and assigns nothing. A content fix therefore goes
+into the recipe or into the inputs, and the output is regenerated.
 
-The recipe is kept loose on purpose. The template fixes the structure
-and what information appears where, never the wording. A presentation
-recipe says what belongs on a slide, not its phrasing or its placement
-on a picture. Each rendering re-derives the words from the current
-inputs. Fixing the text in the template would turn the recipe into
-the render and make the inputs meaningless.
+**The wording is not fixed in the recipe.** Fixing the text in the
+template would turn the recipe into the render and make the inputs
+meaningless.
 
-A regenerated render passes under the principal's eyes because
-regeneration is stochastic: the same inputs never guarantee the same
-words. An unreviewed regeneration is therefore an unreviewed edit of
-an outward-facing document. For the same reason `/publish` never
-renders: a second render would publish a text the principal has not
-read.
+**Regeneration is under the principal's eyes.** Regeneration is
+stochastic: the same inputs never guarantee the same words. An
+unreviewed regeneration is therefore an unreviewed edit of a document
+that faces outward. Pinned wording and the release summary of what
+changed are the two light defences. Neither of them blocks anything.
 
-A recipe with several languages translates in one run, from the
-primary render, because the quotes of a transcript, the beats and the
-captions are chosen once. A second generation would choose them again
-differently, and the languages would not carry the same cut.
+**The translations come from one generation.** The quotes of a
+transcript, the beats and the captions are chosen once. A second
+generation would choose them again differently. Translating the primary
+render keeps the same cut in every language.
 
-The two steps are divided by cost so that the expensive conversion
-runs as seldom as possible. The plain file is cheap and deterministic
-and may be remade at every render. The designed file costs a model
-run and is made only when the principal asks for it. The word
-"publish" was the principal's choice; it agrees with the rule that
-only the principal publishes.
+**The two steps are divided by cost.** The expensive conversion runs as
+seldom as possible. `/publish` never makes a new render, because a
+render is made by a model and is never the same twice. A second one
+would publish a text the principal has not read.
 
-Regenerating only stale renders at every save was considered and
-rejected. It would have saved little on the engine and nothing on
-projects, whose README input, the ledger, moves at every operation,
-and it would have added a staleness state that several commands must
-all read alike. The present shape, a cheap save without a render and
-a release that regenerates the README and the release notes, saves
-everything and adds nothing.
+**Release notes are a log, not a story.** A reader wants to see plainly
+what was added, changed and removed.
 
-Making the documentation out of renders, one recipe per page, was
-considered and rejected. Many pages would mean as many recipes to
-iterate by hand. A recipe is a tool the principal shapes, while a
-page is to come from the project's documents with no hand in between.
-The documentation map replaces the recipes, with one generated entry
-per page.
+**Rejected: rendering only what is stale at every save.** One command
+that regenerated at a save only the renders whose recipe or input had
+moved was considered and dropped. It would save little: on a project
+the README's inputs move at every operation. It would also add a state
+of staleness that several commands must all read alike. Two commands,
+`/save` without rendering and `/release` with it, cover every case and
+add nothing.
 
-Every README closes with one fixed sentence, part of the readme
-genre, so that whoever finds the project knows what runs it. The
-engine's own README is the one exception, because that sentence
-exists to point a visitor to the engine and the engine's README is
-that destination.
+**Rejected: the documentation as renders.** A recipe per page of the
+documentation was considered and dropped. Many pages would mean as many
+recipes to iterate by hand. A recipe is a tool the principal shapes,
+while a page is to come from the project's documents with no hand in
+between. The documentation map, one generated entry per page, takes
+the place of the recipes.
 
 ## A worked example
 
-A generic recipe for a short summary of a project's intent, for a
-recipient who has not read the chain, has this shape. The slug and
-the paths are placeholders.
+A generic recipe for an executive summary in two languages, in the shape
+the recipe template defines. Every value is a placeholder.
 
 ```markdown
 ---
 project: <slug>
-purpose: a one-page summary of the intent for the recipients
-audience: the recipients of the assignment
-version: 0.3
-updated: 2026-10-14
-last_change: <derived from the records of the newest version in recipes/summary.history.md>
-languages: en, fr
+purpose: executive summary
+audience: <the readers of the summary>
+version: 0.1
+languages: en, de
 ---
 
-# Recipe - a one-page summary of the intent
+# Recipe — executive summary
 
 ## Inputs
 - 10-intent.md
 - 20-assignment.md
 
 ## Instructions
-- One page. Plain, direct. No history of how a position was reached.
-- The title is pinned: "What we are asking for".
-- Omit every rejected direction; carry every position in scope.
+Audience: <who reads it>. Tone: plain, direct. One page. Emphasise
+<what matters most>; leave out <what must not appear>.
 
 ## Format
 - Format: docx
 - Plain file, made by `/render` through pandoc: reference none,
   page size A4.
-- Published file, made by `/publish` through a model: template none.
+- Published file, made by `/publish` through a model: template none,
+  model <name>.
 
 ## Template
-# What we are asking for
-
-## Why
-<two or three sentences from the intent's purpose>
-
-## What
-<one line per position in scope, grouped as the intent groups them>
-
-## What we expect back
-<one line per deliverable of the assignment>
+# <Project title>: executive summary
+## The problem
+## What is proposed
+## What is asked of the reader
 ```
 
-`/render summary` would make `renders/summary.en.md` from the two
-inputs and, in the same run, `renders/summary.fr.md` translated from
-it, each opening with its own provenance and each with a plain
-`.docx` beside it. If the intent then moves to a newer version, both
-renders are stale until the principal asks for `/render summary`
-again. `/publish summary` would make the designed file from the
-render as it lies on disk, only when the principal says so.
+From this recipe, `/render` writes `renders/<recipe>.en.md` and its
+German translation `renders/<recipe>.de.md`, each with its provenance,
+and a Word file beside each. The designed Word file is made only when
+the principal runs `/publish`.
 
 ## See also
 
 - [Compose a recipe](../use/compose-a-recipe.md): composing a recipe.
 - [Render an output](../use/render-an-output.md): generating a render.
-- [Publish a designed file](../use/publish-a-designed-file.md): the designed file.
-- [The screenplay and its player](the-screenplay-and-its-player.md): the screenplay, its two formats and where a public one lands.
-- [The work product](the-work-product.md): the output that is not a render.
-- [Render provenance](../reference/render-provenance.md): the provenance block and the definition of stale.
-- [The documentation](the-documentation.md): the pages, generated without a recipe.
-- [Glossary](../reference/glossary.md): every term of the forge in one line.
+- [Publish a designed file](../use/publish-a-designed-file.md): the
+  designed file.
+- [The screenplay and its player](the-screenplay-and-its-player.md):
+  the screenplay, its two formats and where a public one lands.
+- [The work product](the-work-product.md): the output that is not a
+  render.
+- [Render provenance](../reference/render-provenance.md): the
+  provenance block and the definition of stale.
+- [The documentation](the-documentation.md): the pages, generated
+  without a recipe.
+- [Glossary](../reference/glossary.md): every term of the forge in one
+  line.
 
-Generated on 2026-10-14 for version 5.9 from the files the front-matter names; never edited by hand.
+Generated on 2026-10-19 for version 5.26 from the files the
+front-matter names; never edited by hand.

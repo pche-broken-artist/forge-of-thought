@@ -1,22 +1,22 @@
 ---
-generated: 2026-10-14
-version: 5.9
+generated: 2026-10-19
+version: 5.26
 made: mirrored
-inputs-hash: 68fe9e2d1023ce5a
+inputs-hash: 15bc9095eec8b1ff
 inputs:
   - .claude/skills/forge/SKILL.md
   - .claude/skills/ledger/SKILL.md
+  - templates/project.md
+  - templates/ledger.md#Reports
 ---
 
 # See where a project stands
 
-The bare `/forge` command reports the state map of a project: what exists, what can be worked next and what waits on the principal (the person whose thinking is being forged). This page is for anyone who wants that picture before deciding what to do. `/ledger` gives the same report from the ledger alone.
+This page shows how to ask Claude where a project stands, with the bare `/forge` command or with `/ledger`, and what each answer tells you. It is for the principal (whoever's thinking is being forged) who opens a project and wants to know what exists, what is stale and what waits for a decision.
 
 ## When to use it
 
-- At the start of work, to see where a project stands.
-- After a break, to find what is waiting.
-- When you want the report without Claude looking at anything but the ledger (the single file that records the state of a project; see [Ledger](../reference/ledger.md)).
+Use it at the start of a working session, after a pause, or before you decide what to work on next. The answer is read-only: it changes nothing in the project except the ledger, which is made fresh each time. The ledger is the single record of a project's state, made from the project's own records at the moment it is read (see [The ledger, made from the records](../about/the-ledger.md)).
 
 ## The command
 
@@ -24,110 +24,81 @@ The bare `/forge` command reports the state map of a project: what exists, what 
 /forge my-project
 ```
 
-The slug is optional where Claude can tell the project from context. If it cannot, it asks which project you mean.
-
-The ledger-only reading:
+The slug is optional when the conversation already makes the project clear. If it is ambiguous, Claude asks which project you mean. To read only the ledger, for one project or for all of them:
 
 ```
 /ledger my-project
 ```
 
-Without a slug, `/ledger` reads every project.
-
 ## What happens
 
-Claude reads the project's ledger and lists the target states that exist. It then reports the following, in this order.
+1. Claude makes the project's ledger with its script, then reads it. You should now see Claude report from a ledger that is current as of this moment.
+2. Claude reports the map in this order. You should now see each of these lines:
+   - The project's kind and language, read from the project file, and whether the project is under git. Not being under git is stated as a fact, not as a defect.
+   - The chain artefacts that exist, with version and status. The briefs are listed with their mining state, that is how far the intent has absorbed them. A draft brief, or one whose mining is `pending` or `partial`, is named as work waiting. A layer the project does not have is not reported as missing.
+   - Which target states can be worked from here, and for those that cannot yet, what is missing.
+   - Which renders are stale, and which published files are stale. What makes a render stale is defined by the `/render` command, not here.
+   - Which libraries the project needs, and whether each is cloned alongside it.
+   - What waits on the principal: the few live matters named in words with the ID in brackets as an address, and the rest as a count.
+3. Claude recommends the natural next step in words. The recommendation is never a gate. Where more than one matter waits on you, Claude also offers a walkthrough, which means working the items one at a time with a verdict on each (see [Walk through a list](walk-through-a-list.md)). You should now see one recommendation and, where it applies, the offer.
+4. The last word of the map is the state of the engine and of the project against the origin (the remote repository), taken from a status script run with `--remote`. It is one of: up to date, behind, ahead, diverged, no origin. Each state comes with its one offer. For a repository that is behind, that offer is described in [Pull from the remote](pull-from-the-remote.md). The map only says it looked at the remote; it runs none of the offers. You should now see the state of the engine and of the project as the final line.
 
-1. The kind of the project and whether it is under git.
-   - A project not under git is stated as a fact, never as a defect.
-   - For the engine and for the project, Claude also says the state against the origin: up to date, behind, ahead, diverged or no origin.
-   - Each state comes with its one offer: `/pull`, `/save` first, `/save`, or a merge by hand or by `/save`. See [Pull from the remote](pull-from-the-remote.md) for the case of a repository that is behind.
-   - The map says that it looked at the remote. It runs none of the offers.
+## Special cases
 
-   You should now see the kind, the git line and the state against the origin.
+- A library is material, not a project waiting for a brief. For a library the map reports its sources and research, gives the git line, and stops. There is no chain, no target state and no next step beyond `/ingest`.
+- A project of the shape before the migration is said to be so, and nothing more is reported against it. The remedy is in [Migrate a project](migrate-a-project.md).
 
-2. The artefacts that exist, with their version and status.
-   - Briefs are listed with their mining state.
-   - A draft brief, or one marked `pending` or `partial`, is named as work waiting.
-   - A layer the project does not have is not reported as missing.
+## What `/ledger` adds
 
-   You should now see one line per artefact with version and status.
+`/ledger` makes the ledger and gives the same report from it, for one project or for all of them. It is the door for reading the ledger alone.
 
-3. The target states, split in two.
-   - Those that can be worked from here, because their inputs exist.
-   - Those that cannot yet, with what is missing.
+Claude reads aloud two things that the ledger script may leave in it:
 
-   You should now see both groups, the second with its reason.
+- The `unparsed:` lines of the ledger header, which name files the script could not parse.
+- The Reports section, which stands only when there is something to say: an ID defined twice, a closed thread touched by a later commit, or a thread cited with neither a thread file nor a closed record.
 
-4. The stale renders and the stale published files.
-   - A published file is stale when the ledger's Published table says `stale`.
-   - What makes a render stale is defined by `/render`, not here.
-
-   You should now see the stale ones named, or nothing where none is stale.
-
-5. The libraries the project needs, from the ledger's Dependencies table, and whether each is cloned alongside.
-
-   You should now see each library with its cloned state.
-
-6. What waits on the principal, from the ledger.
-   - The few live matters are named in words, with the ID in brackets as an address.
-   - The rest are given as a count.
-
-   You should now see the live matters and a count of the others.
-
-7. A recommended next step, in words. It is a recommendation, never a gate. Where more than one matter waits on the principal, Claude also offers a walkthrough of them. See [Walk through a list](walk-through-a-list.md).
-
-   You should now see one recommendation, and the offer where there is a list.
-
-A library is material, not a project waiting for a brief. Its map reports the sources and the research, from the ledger and the indexes, and stops after the git line. It has no chain, no target states and no next step beyond `/ingest`.
+Fixing them is not the map's work. It belongs to the light check, run with `/check light`.
 
 ## What you have afterwards
 
-You have a report and nothing else. Neither command changes a file. The map offers `/pull` or `/save` but runs neither.
-
-The `/ledger` report is read from the ledger only. If Claude notices a mismatch between the ledger and reality while reporting, it names it and points to `/check light`. Reconciling the ledger with versions, files on disk and indexes is the job of that check.
+You have a spoken picture of the project and a recommendation for the next step. Nothing is written except the ledger, which is never kept in git. The tables and state words behind the report are listed on the reference page [Ledger](../reference/ledger.md).
 
 ## If something goes wrong
 
-- Claude asks which project you mean: the slug was ambiguous. Name the slug.
-- Claude names a discrepancy between the ledger and reality: run `/check light`, which is where it is reconciled.
-- A term in the report is unfamiliar: the [Glossary](../reference/glossary.md) gives every term of the forge in one line.
+- If Claude cannot tell which project you mean, it asks. Give the slug.
+- If the map says the project is of the shape before the migration, run the migration described in [Migrate a project](migrate-a-project.md).
+- If the report ends with lines named `unparsed:` or with a Reports section, those are things the ledger script could not settle. Run `/check light` to have them fixed.
 
 ## A worked example
 
-The slug and everything in the report are generic.
+A generic map for a thought project with the placeholder slug `my-project`, in outline:
 
 ```
-/forge my-project
+Project my-project: thought, language en, under git.
+
+Artefacts: brief 1.0 approved (mined), intent 0.4 draft.
+Work from here: intent can be worked now; assignment cannot yet,
+the intent is not approved.
+Stale: one render (the README); no published file stale.
+Libraries: none needed.
+Waiting on you: two open threads (the first on the scope of the
+pilot) and 3 further matters.
+
+Next: settle the pilot-scope thread. Two matters wait on you:
+shall we walk through them?
+
+State against the origin: behind by 1 commit. Offer: /pull.
 ```
 
-Claude reports, in words close to these:
-
-```
-my-project is a thought project, under git. Against the origin it is
-behind; the offer is /pull. I looked at the remote and ran nothing.
-
-Artefacts: brief 1.0 approved, mined; intent 0.4 draft.
-
-Can be worked from here: intent. Cannot yet: assignment, because the
-intent is not approved.
-
-Stale: the render "overview". No published file is stale.
-
-Libraries: one needed, cloned alongside.
-
-Waiting on you: two matters, one about the scope of the intent and
-one about a rejected direction; no others.
-
-Next: settle the two matters, then approve the intent. I can walk
-you through the two, one at a time. Shall I?
-```
+The names, versions and counts here are invented to show the shape. Terms used on this page are explained in the [Glossary](../reference/glossary.md).
 
 ## See also
 
+- [The ledger, made from the records](../about/the-ledger.md): what the ledger is made from and why nobody writes it.
 - [Pull from the remote](pull-from-the-remote.md): the offer the map makes when a repository is behind.
+- [Migrate a project](migrate-a-project.md): what to do when the map says a project is of the old shape.
 - [Walk through a list](walk-through-a-list.md): how the matters waiting on the principal are worked.
 - [Ledger](../reference/ledger.md): the ledger's tables and state words.
 - [Glossary](../reference/glossary.md): every term of the forge in one line.
 
-Generated on 2026-10-14 for version 5.9 from the files the front-matter names; never edited by hand.
+Generated on 2026-10-19 for version 5.26 from the files the front-matter names; never edited by hand.

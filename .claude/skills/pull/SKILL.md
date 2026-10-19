@@ -25,5 +25,11 @@ engine and every project with an origin.
    Action required lines of every release whose commit the script
    listed (`release <version>`); then offer `/check light <slug>` and
    `/check project <slug>` on each project the user keeps (POS.0940),
-   and run them only on his word.
+   and run them only on his word. Where an Action required line names
+   a migration, offer `/migrate <slug>` for each project the user
+   keeps that is of the shape before the migration
+   (`templates/project.md`), each on one clone and then `/save`; a
+   project migrated elsewhere is pulled by `/pull`. Whose machine or
+   instance the clone is makes no difference: every user of the
+   engine migrates his own projects (SOL.0800).
 4. After a pull of a project, report what the script printed.

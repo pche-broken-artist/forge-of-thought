@@ -1,8 +1,8 @@
 ---
-generated: 2026-10-14
-version: 5.9
+generated: 2026-10-19
+version: 5.26
 made: mirrored
-inputs-hash: de69471c32990efd
+inputs-hash: 3aae9aed805060b1
 inputs:
   - .claude/skills/document/SKILL.md
   - scripts/docs-state.py
@@ -12,11 +12,13 @@ inputs:
 
 # Generate the documentation
 
-This page shows how the command `/document` makes the pages of the documentation and their index, and what you have at the end of a run. It is for the person who runs the command, whether a user of the forge or an extender. The principal (the person whose thinking is forged) gives the command; Claude runs it.
+This page shows how to make the documentation of the engine or of a project with `/document`, and what you get at the end. It is for the user who wants the pages current and for the extender who changes what they are made from.
 
 ## When to use it
 
-Run it when the documentation should match the target as it stands now: after the engine or a project has changed, or when no documentation exists yet. The run regenerates only the pages whose material changed, so it is cheap to repeat. What the documentation is and why it is generated is on [The documentation](../about/the-documentation.md).
+Use it when the documentation is missing, or when something it is made from has changed and you want the pages to follow. Run it only when you mean to: Claude never runs it on its own judgement. A release does not run it either. A release reports how old the index is and offers the command.
+
+A page is never mended by hand. What is wrong on a page is mended in the file that owns the matter, and the page is regenerated. See [Change a documentation page](../extend/change-a-documentation-page.md). For what the documentation is and why it is generated, see [The documentation](../about/the-documentation.md).
 
 ## The command
 
@@ -24,98 +26,78 @@ Run it when the documentation should match the target as it stands now: after th
 /document
 ```
 
-Bare, the target is the engine. The pages land in `docs/` at the engine root, and the documentation map (the plan that lists every page and what it is made from) lies beside the ledger of `projects/forge`. The ledger is the file that holds a project's state.
+Bare, the target is the engine. The pages land in `docs/`, and the documentation map (the file that lists every page with the files it is made from) is kept beside the ledger of `projects/forge`. The ledger is the single file that holds the state of a project.
 
 ```
 /document <slug>
 ```
 
-With a slug, the target is that project. Its pages land in `projects/<slug>/docs/`, and its documentation map lies beside its own ledger.
+With a slug, the target is that project. The pages land in `projects/<slug>/docs/`, and the map lies beside that project's ledger. The map is never shown to the reader and never lies in `docs/`.
 
-The run asks you nothing. Where something is unclear, Claude decides and says so in the report.
+The run asks you nothing. It happens on `main` only, and it refuses a repository that is behind its origin or has diverged from it. When it refuses, it offers `/pull`.
+
+`docs/videos/` of the engine is not part of the documentation. The run leaves it alone.
 
 ## What happens
 
-1. **Plan.** A planner (a subagent: a helper that Claude starts and that sees only its own task) reads the target on disk and writes the documentation map. If a map exists, the planner is given the previous one to compare against.
+Two kinds of subagent (a helper Claude launches that sees only its own task) and three scripts do the work. A planner decides what pages there are. A writer makes one page each.
 
-   You should now see the planner's report: the counts, the list of what is unowned, and what did not fit.
+1. **The previous map is taken from git.** Claude asks a script for the map as last committed, so that the planner can compare. You should now see a path printed, or the word `none` when the map was never committed.
+2. **A planner reads the target and writes the map.** It reads the target on disk and writes the documentation map. You should now see the planner's report: the counts, the Unowned list (facts that no page has a home for) and what did not fit.
+3. **A script computes the state of every page.** It does not judge. It compares what each page was made from (its entry, the content of its input files, and the rules the pages are written by) with what the existing page records. The state of each page is one of these:
+   - new: there is no page yet.
+   - regenerate: the page exists, but an input or the rule changed.
+   - keep: the page exists and nothing it is made from changed.
+   
+   Where an input is only a part of a file, a section or an item, a change elsewhere in that file leaves the page as it is. The script writes one task per page that is new or to be regenerated. You should now see a summary line with the counts, and a note for any input the map names and the disk does not have.
+4. **Pages that lost their entry are deleted.** A page that no entry names, or whose entry the planner marked for removal, is removed, and Claude says which. You should now see those pages gone from `docs/`.
+5. **One writer makes each page.** Each writer reads its task and its input files from disk and writes its page, and nothing else. Up to twenty writers run at once, and the rest follow as the first ones return. You should now see the new and regenerated pages in place.
+6. **A script derives the index.** It writes `README.md` in the documentation folder from the map: the reading paths first, then one line per page, grouped by section. It is deterministic, and it is never edited by hand. You should now see the index listing every page.
+7. **A script checks every page.** The check verifies these things:
+   - every page the map names exists, and no page lies there that the map does not name;
+   - every relative link to a Markdown file resolves;
+   - no long dash stands in prose;
+   - every page opens with front-matter;
+   - no instance fact (a value private to one installation, such as a name or a machine path) and no e-mail address reached a page.
 
-2. **State.** A script computes the state of every page from the content of the page's inputs and of the rule the pages are made by. The state is one of four words:
-   - `new`: no page exists yet.
-   - `regenerate`: a page exists, but an input or the rule changed.
-   - `keep`: a page exists and nothing it is made from changed.
-   - `remove`: a page exists that no entry of the map names, or its entry was marked for removal.
-
-   The script also writes one task for every page that is new or to be regenerated. The state is computed, never judged.
-
-   You should now see a summary line with the number of entries, the pages per state and the folder the tasks were written to, followed by the pages to remove and any input that the map names and the disk does not have.
-
-3. **Remove.** The pages that lost their entry are deleted.
-
-   You should now see Claude name each page it deleted.
-
-4. **Write the pages.** One writer (a subagent) makes each page from its task alone. It reads its entry and its inputs from disk and nothing else, and writes the page. Several writers run at once.
-
-   You should now see each page that was new or to be regenerated written, and a short report from each writer of what its inputs did not support.
-
-5. **Index.** A script derives the index, `README.md` in the documentation folder. It lists every page by section with its title and one line, and it needs no model: the same map gives the same index.
-
-   You should now see a line saying the index was written.
-
-6. **Check.** A script checks every page against the map and the rules of a page: the page exists, every link resolves, no long dash stands in the prose, the front-matter is there, and no fact of the instance (a name, an address, a path of a machine) has reached the text. A page that fails is regenerated once with the failure named. A page that fails twice is left out of the documentation: it is deleted and its entry is marked for removal in the map, and Claude says so aloud. It is never mended by hand.
-
-   You should now see a result line saying how many files were checked and that none failed.
-
-7. **Record and report.** The index gets its row in the Renders table of the ledger of the owning project. Then Claude gives you the closing report below.
-
-   You should now see the report.
-
-Two things lie outside the run. The folder `docs/videos/` of the engine is not part of the documentation: the planner never maps it, and the scripts read `docs/` without it. A release never runs `/document`: it reports the age of the index and offers the command.
-
-What is wrong on a page is not mended on the page. It is mended in the file that owns the matter, and the page is regenerated. How that is done is on [Change a documentation page](../extend/change-a-documentation-page.md). The three scripts and their options are on [Scripts](../reference/scripts.md).
+   A page that fails is regenerated once, with the failure named in its task. A page that fails twice is left out of the documentation: it is deleted, its entry is marked for removal in the map, and Claude says so aloud. You should now see the check report "no failure".
+8. **The ledger is remade.** The Renders table of the ledger reads the index's front-matter, so nobody writes a row. You should now see the index among the renders of the ledger.
 
 ## What you have afterwards
 
-- The pages under `docs/`, one topic each, and their index `README.md`.
-- The documentation map beside the ledger of the owning project. It is not shown to a reader of the documentation.
-- A row for the index in the Renders table of the ledger.
-- The closing report:
-  - the pages new, regenerated, kept and removed;
-  - the Unowned list: facts the planner found that no page owns, each waiting for you to give it a home, since nothing is invented to fill it;
-  - what did not fit the outline;
-  - what the writers left out because their inputs did not support it;
-  - every place where a writer wanted a reason and none is recorded, as one list, so that you can enter the reason where it belongs;
-  - the result of the check.
+The documentation is in `docs/` (or `projects/<slug>/docs/`) with its index. The closing report gives:
+
+- the pages new, regenerated, kept and removed, as counts;
+- the Unowned list: facts that wait for you to give them a home, and nothing is invented to fill it;
+- what did not fit, from the planner;
+- what the writers left out because their inputs did not support it;
+- the places where a reason is wanted and none is recorded, as one list, so that you can decide whether the reason enters the intent;
+- the result of the check;
+- the ledger, remade.
 
 ## If something goes wrong
 
-- The state summary lists a missing input: the map names a file or a part of a file that the disk does not have. The page is regenerated and its writer reports the gap.
-- The check names a page and a line: that page is regenerated once with the failure named. If it fails again, it is left out and reported.
-- A page is wrong in substance: do not edit it. Change the file that owns the matter and run the command again.
+- **The run refuses to start.** The repository is behind or diverged from its origin, or the branch is not `main`. Switch to `main`, or run `/pull` as it offers, and run `/document` again.
+- **The state summary names a missing input.** The map names a file or a part the disk does not have. The page is regenerated and its writer reports the gap. Mend the map's source by running `/document` again after the file is restored, or accept the gap as reported.
+- **The check prints failures.** Each failure is printed with its file and line. The page is regenerated once. If it fails again, it is left out and reported. Never mend it by hand: mend the file that owns the matter, then run the command again.
 
 ## A worked example
 
-A generic closing report of a run on a project with the placeholder slug `my-project`:
+A generic closing report of `/document <slug>` after one input changed:
 
 ```
-/document my-project
-
-Pages: <n> new, <n> regenerated, <n> kept, <n> removed.
-Removed: docs/about/old-topic.md.
-
-Unowned: <n> facts with no page.
-  - <a fact the planner found, with the file it came from>
-Did not fit: <n> items.
-  - <an item the outline had no section for>
-
-Writers left out:
-  - docs/use/some-job.md: <what its inputs did not support>
-Reason not recorded:
-  - docs/about/some-concept.md: why <a rule> holds
-
-Check: <n> files checked, no failure.
-Ledger: the index row of projects/my-project/docs/README.md recorded.
+Documentation of <slug>
+  pages: <n> new, <n> regenerated, <n> kept, <n> removed
+  removed: docs/<section>/<old-page>.md
+  Unowned: <fact the planner could not place>
+  did not fit: <what the planner could not plan>
+  writers left out: <what the inputs did not support>
+  reason not recorded: <page>, <place>
+  check: <n> files checked, no failure
+  ledger: remade, the Renders table carries the index
 ```
+
+You read the Unowned list and the places where a reason is not recorded first. They are the only items that wait for you.
 
 ## See also
 
@@ -124,4 +106,4 @@ Ledger: the index row of projects/my-project/docs/README.md recorded.
 - [Scripts](../reference/scripts.md): the three documentation scripts with their options.
 - [Glossary](../reference/glossary.md): every term of the forge in one line.
 
-Generated on 2026-10-14 for version 5.9 from the files the front-matter names; never edited by hand.
+Generated on 2026-10-19 for version 5.26 from the files the front-matter names; never edited by hand.
