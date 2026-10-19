@@ -117,5 +117,17 @@ the Verdict of a decision. -->
 
 ## Waiting on principal
 <!-- What waits on the principal, one line per matter: cite, never
-copy — CLAUDE.md, Ledger. -->
+copy — CLAUDE.md, Ledger. The rule (POS.1620): the open threads, each
+by its first sentence and its last dated paragraph; the TBCs whose
+owner is the principal; the open findings of a critic and the open
+challenges; under Parked the parked findings and challenges with
+their decision. Free text without an ID has no place here. -->
+- …
+
+## Reports
+<!-- What the merged files cannot say, found by the ledger script
+(POS.1640); the section stands only when there is something: an ID
+defined twice, a closed thread touched by a later commit, a THR cited
+with neither a thread file nor a closed record. A file the script
+could not parse is a line `unparsed:` of the header, not a row. -->
 - …

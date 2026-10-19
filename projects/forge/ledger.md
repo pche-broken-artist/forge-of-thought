@@ -81,7 +81,7 @@ by a making; by hand — set on the principal's word when he has worked
 the file and does not want it remade. -->
 | File | Specification | Inputs | Made | State |
 |---|---|---|---|---|
-| work/collaboration-cutover.md | work/collaboration-cutover.spec.md v0.6 | 40-solution-design.md v0.24 (SOL.0670 to SOL.0830, SOL.0300, SOL.0330, SOL.0530, SOL.0150, SOL.0160, SOL.0420, SOL.0460, SOL.0500, TBC.0050, TBC.0060, TBC.0080), 10-intent.md v5.22 (POS.1560 to POS.1770, POS.1120, POS.1140, POS.0220), threads.md (THR.0620, THR.0650, THR.0690, THR.0700, THR.0710), decisions.md (DEC.0210 to DEC.0260), 00-brief-collaboration.md v0.8 (M), sources/cutover-plan-critique.md, sources/cutover-challenge-review.md, sources/cutover-challenge-review-2.md | 2026-10-17 | by hand |
+| work/collaboration-cutover.md | work/collaboration-cutover.spec.md v0.7 | 40-solution-design.md v0.24 (SOL.0670 to SOL.0830, SOL.0300, SOL.0330, SOL.0530, SOL.0150, SOL.0160, SOL.0420, SOL.0460, SOL.0500, TBC.0050, TBC.0060, TBC.0080), 10-intent.md v5.22 (POS.1560 to POS.1770, POS.1120, POS.1140, POS.0220), threads.md (THR.0620, THR.0650, THR.0690, THR.0700, THR.0710), decisions.md (DEC.0210 to DEC.0260), 00-brief-collaboration.md v0.8 (M), sources/cutover-plan-critique.md, sources/cutover-challenge-review.md, sources/cutover-challenge-review-2.md | 2026-10-17 | by hand |
 
 ## Sources
 <!-- Registration only. External inputs, immutable once registered.
@@ -390,6 +390,10 @@ as `rejected`. -->
 | FND.2020 | low | conformance | resolved | 2026-10-19-check-engine-1309-7a10.md | /recipe step 2 and the release-notes skeleton, 2026-10-19: no header date named |
 | FND.2030 | low | conformance | resolved | 2026-10-19-check-engine-1325-c191.md | /forge skill, 2026-10-19: the state against the origin is step 5, the map's last word; noted at R1.19 of the plan |
 | FND.2040 | low | conformance | resolved | 2026-10-19-check-engine-1325-c191.md | templates/ledger.md Sources comment, 2026-10-19: the list dropped, the index entry the one owner |
+| FND.2050 | low | conformance | resolved | 2026-10-19-check-light-1416-38f5.md | the plan's R1.09 cell cites the specification's own record, 2026-10-19 |
+| FND.2060 | low | conformance | open | 2026-10-19-check-light-1416-38f5.md | the hand-kept ledger in the template's shape before R1.05 and R1.09; settled by R1.23 and the ledger script |
+| FND.2070 | low | conformance | open | 2026-10-19-check-light-1416-38f5.md | the headers of the project's documents carry the fields R1.04 removed; settled by R1.23, step A |
+| FND.2080 | low | conformance | resolved | 2026-10-19-check-light-1416-38f5.md | the template's comment in the sixteen companions, 2026-10-19 |
 
 Four review files are named outside the convention — accepted as they
 are by DEC.0140.
@@ -469,7 +473,7 @@ copy — CLAUDE.md, Ledger. -->
   decided, not before the first such project; opened 2026-10-15.
 - THR.0680 — a question put to the manual, `/man <free text>`;
   Claude's synthesis, to be built; opened 2026-10-15.
-- TBC.0020 of `work/collaboration-cutover.spec.md` — whether
+- TBC.0090 of `work/collaboration-cutover.spec.md` — whether
   `agentic-platform` already has a second author by handle; opened
   2026-10-18.
 - THR.0690 — the conversion to one sentence per line (POS.1580),

@@ -193,7 +193,15 @@ def main(argv):
             home, wording = p, text
             break
 
-    fr.say(f"{id_}  projects/{slug}" + (f"  {doc_rel(home)}" if home else ""), "bold")
+    head = f"{id_}  projects/{slug}"
+    if home:
+        # the version from the header, the date computed from the records (POS.1570)
+        hfront, _ = docs_map.parse(home.read_text(encoding="utf-8"))
+        version = hfront.get("version")
+        own_log = home.with_name(home.name.replace(".md", ".history.md"))
+        last = [r["date"] for r in parse_log(own_log)] if own_log.exists() else []
+        head += f"  {doc_rel(home)}" + (f"  v{version}" if version else "") + (f"  last record {last[-1]}" if last else "")
+    fr.say(head, "bold")
     print("-" * WIDTH)
     fr.say("Today", "cyan")
     if home:

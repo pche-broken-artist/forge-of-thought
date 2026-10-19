@@ -25,9 +25,11 @@ the planner never maps it, the scripts read `docs/` without it.
 1. **Plan.** Launch the agent `docs-planner` (Agent tool, type
    `docs-planner`, session model, never a model override). The task
    names the target's root, the owning project, the path of the map
-   to write, the date, and the previous map where one exists: copy
-   the current map to the engine's `tmp/docs-map.previous.md` first
-   and name that copy; without one say `none`. The planner reads the
+   to write, the date, and the previous map where one exists: take
+   it from git first, `python scripts/docs-state.py <map> --previous
+   tmp/docs-map.previous.md` (the engine's gitignored `tmp/`), and
+   name the path it prints; when it prints `none`, say `none`
+   (SOL.0700: the header carries no `previous`). The planner reads the
    target on disk and writes the map. Its report gives the counts,
    the Unowned list and what did not fit: keep them for step 7.
 2. **State.** Run `python scripts/docs-state.py <map> <docs-dir>

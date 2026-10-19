@@ -391,7 +391,10 @@ scripts/                   # forge-save / forge-pull / forge-status
                            # / forge-clone / forge-branch (git),
                            # forge-history (the history of one
                            # item), forge-report (the unique name
-                           # of a report), doc2md (document →
+                           # of a report), forge-ledger (the ledger
+                           # made at read time), forge-migrate (a
+                           # project brought to the shape of a
+                           # release), doc2md (document →
                            # Markdown), md2pptx (deck render →
                            # PowerPoint), md2docx (render → Word),
                            # each by pandoc or by a model, md2video
@@ -402,9 +405,9 @@ scripts/                   # forge-save / forge-pull / forge-status
                            # docs-index and docs-check (the
                            # documentation: the state of its pages,
                            # its index, its check); forge_repos,
-                           # forge_tools and docs_map the modules
-                           # the scripts share (Persistence,
-                           # Portability)
+                           # forge_tools, forge_docs and docs_map
+                           # the modules the scripts share
+                           # (Persistence, Portability)
 .claude/                   # skills (the commands, the contracts of
                            # the reviewers and of the documentation
                            # agents, and the walkthrough method),
@@ -536,7 +539,8 @@ Windows-only — paths composed with `pathlib`, external tools (`git`,
 in the scripts' help free of Windows-specific paths and
 invocations (POS.0830). Each script carries its help in its module
 docstring; what several scripts share lives in a module beside them
-(`forge_repos.py`, `forge_tools.py`, `docs_map.py`), never twice.
+(`forge_repos.py`, `forge_tools.py`, `forge_docs.py`, `docs_map.py`),
+never twice.
 
 Two doors, two speeds. `/save` runs its check and then commits and
 pushes on whatever branch is checked out, no render; `--quick` leaves

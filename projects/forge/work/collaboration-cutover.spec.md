@@ -1,8 +1,8 @@
 ---
-version: 0.6
-date: 2026-10-18
+version: 0.7
+date: 2026-10-19
 status: draft
-last_change: 0.6 (2026-10-18): the preparation without a release of its own, shipped by its saves and the tag pre-r1 (DEC.0260).
+last_change: 0.7 (2026-10-19): TBC.0020 renumbered TBC.0090, the number having been taken by the design's TBC.0020 since 2026-10-04; IDs are global (POS.0220), the ledger script reported the clash.
 project: forge
 file: work/collaboration-cutover.md
 ---
@@ -55,7 +55,7 @@ state is the only thing that changes after the file is made.
 - **ASM.0040** During the first release no project is worked on and the engine is not pulled on the second machine until its release (DEC.0230); should that fail, the way back is the tag `pre-r1` on the engine and on every project.
 
 ## Open
-- **TBC.0020** (owner: principal) Whether `agentic-platform` already has a second author by handle, the brief speaking of research from another account: if so, the fourth release's trigger has fired and the project gets its blocks at its migration. Closed by: his word.
+- **TBC.0090** (owner: principal) Whether `agentic-platform` already has a second author by handle, the brief speaking of research from another account: if so, the fourth release's trigger has fired and the project gets its blocks at its migration. Closed by: his word.
 
 ## Making
 The file `work/collaboration-cutover.md`, English, Markdown: a heading

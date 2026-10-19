@@ -13,6 +13,7 @@ carry no URL and no identity.
 """
 
 import os
+import re
 import shutil
 import subprocess
 import sys
@@ -122,6 +123,33 @@ def registration_state():
 
 def project_path(slug):
     return ENGINE_ROOT / "projects" / slug
+
+
+def project_file(path):
+    """The project file of the project at `path` (SOL.0670, POS.1590):
+    a dict with project, kind, language, fixture and shape. `shape` is
+    'current' when project.md exists, 'before the migration' when
+    only a hand-kept ledger.md carries the header (its kind and
+    language are read then, one release back tolerated), 'none' when
+    the directory has neither. Kind defaults to thought, language to
+    en (POS.0960, POS.0060). The one reader of the file."""
+    path = Path(path)
+    info = {"project": path.name, "kind": "thought", "language": "en", "fixture": False, "shape": "none"}
+    src = None
+    if (path / "project.md").exists():
+        src, info["shape"] = path / "project.md", "current"
+    elif (path / "ledger.md").exists():
+        src, info["shape"] = path / "ledger.md", "before the migration"
+    if src is None:
+        return info
+    text = src.read_text(encoding="utf-8", errors="replace")
+    front = text.split("\n---", 2)[0] if text.startswith("---") else ""
+    for key in ("project", "kind", "language", "fixture"):
+        m = re.search(r"^" + key + r":\s*([^#\n]*)", front, re.M)
+        if m and m.group(1).strip():
+            value = m.group(1).strip().strip('"').strip("'")
+            info[key] = (value.lower() == "true") if key == "fixture" else value
+    return info
 
 
 def repos_to_visit(slug, strict_message=None):

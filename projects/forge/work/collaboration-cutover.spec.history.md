@@ -15,9 +15,22 @@ place without an ID: a section, the file, or in the forge's own
 project the operating layer. Reason is left out on
 `created`; `Action` and `Was` only where the record has them, `Was`
 always last, paragraphs in it divided by `<br>`; a thread that
-closes carries its last text in `Was`. At the birth of a
+closes gets a `closed` record saying when and by what, no `Was`:
+the closed file is the archive (POS.1680). At the birth of a
 document, one record of the file and one naming every item born
-with it. Lines are not wrapped. -->
+with it. Lines are not wrapped.
+A record of state only carries the current version and does not
+raise it (POS.1630). Its shapes: the mining of a brief, in the
+intent's history with the brief's file as subject,
+`00-brief-<name>.md | changed | mined: pending | partial | mined |
+dropped, <note>`; a finding or a challenge settled, `FND.NNNN |
+closed | <what fixed it>`, in the history of the artefact whose
+version settled it, or of the intent where no version did or the
+check was of the engine, resolved for a finding, accepted for a
+challenge; a work product's state, `<file> | changed | state: by
+hand` or the making's record, in its specification's history.
+`rejected`, `parked` and `obsolete` are a decision's Verdict
+(templates/decisions.md), never a record here (POS.1610). -->
 
 - 2026-10-17 | 0.1 | PCHe | work/collaboration-cutover.spec.md | created
 - 2026-10-17 | 0.2 | PCHe | work/collaboration-cutover.spec.md | changed | Worked handed over on the principal's word: the task, the inputs, the method (steps per release in the order shape, mechanism, use, tests, run), ASM.0010 to ASM.0030, TBC.0010, the making; the file made in the same round, 55 steps over five releases.
@@ -32,3 +45,4 @@ with it. Lines are not wrapped. -->
 - 2026-10-18 | 0.4 | PCHe | Task, Inputs | changed | The cut of DEC.0250 on the principal's word of 2026-10-18: the preparation and the first release now, the rest deferred as rows under one heading, R0.02 dropped, R1.00 the fixture by hand; DEC.0250 and THR.0710 among the inputs. | Was: the four releases of DEC.0220, the first on `main` in one stretch (DEC.0230), each broken into steps
 - 2026-10-18 | 0.5 | PCHe | Inputs | changed | FND.1760 of the light check of 2026-10-18 (reviews/2026-10-18-check-light-2.md), the first catch of the rule of POS.1520 at 5.21: SOL.0530, SOL.0150, SOL.0160, SOL.0420, SOL.0460, SOL.0500 and POS.0220, each with the step it serves, added. | Was: - 40-solution-design.md: SOL.0670 to SOL.0830, each with its `Where` and its release mark; SOL.0300 and SOL.0330; TBC.0050, TBC.0060, TBC.0080<br>- 10-intent.md: POS.1560 to POS.1770, POS.1120, POS.1140
 - 2026-10-18 | 0.6 | PCHe | Method, Inputs | changed | The principal's word of 2026-10-18 (DEC.0260): the release of the preparation dropped as cost without use, `/document` and the renders to be made again right after the stretch; the preparation ships by its saves on main and ends with the tag `pre-r1`, the first step of the stretch; R0.01 dropped in the plan, DEC.0260 among the inputs. | Was: the preparation an ordinary release before the stretch (DEC.0240, CHL.0590), its run `/document`, `/release` as R0.01.
+- 2026-10-19 | 0.7 | PCHe | TBC.0090 | changed | Renumbered from TBC.0020: the number was already the design's (40-solution-design.md, since 2026-10-04) and IDs are global; the younger item takes the next free number (POS.0220), the clash reported by the ledger script's first run (R1.09). | Was: TBC.0020

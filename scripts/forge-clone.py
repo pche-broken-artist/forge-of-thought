@@ -13,8 +13,11 @@ WHAT IT DOES
     identity is git's (CLAUDE.md, Persistence); the script sets none
     and carries no identity and no URL. Afterwards it reports facts:
     the last commit, the origin, the commit identity git resolves for
-    the fresh clone, and whether the project carries a ledger with a
-    kind: header (its absence: templates/ledger.md, header).
+    the fresh clone, and the project file (templates/project.md): its
+    kind and language; a project of the shape before the migration
+    gives them from its hand-kept ledger's header and is told to run
+    /migrate; a project with neither was not scaffolded by the forge,
+    a fact, not a defect.
 
 WHAT IT NEEDS
     Python 3.8 or newer; git on PATH. `forge_repos.py` beside it.
@@ -63,12 +66,15 @@ def main(argv):
         print("  identity:    none - git resolves no user.name/user.email for this repository: "
               "run /setup for the per-host identity (absolute paths), or set a local one: "
               f"git -C '{target}' config user.name/user.email; forge-save commits nothing until then")
-    ledger = target / "ledger.md"
-    if ledger.exists():
-        m = re.search(r"^kind:\s*(\S+)", ledger.read_text(encoding="utf-8", errors="replace"), re.M)
-        print(f"  ledger:      present, kind: {m.group(1)}" if m else "  ledger:      present, no kind: header")
+    info = fr.project_file(target)
+    if info["shape"] == "current":
+        print(f"  project:     kind {info['kind']}, language {info['language']}"
+              + (", fixture" if info["fixture"] else ""))
+    elif info["shape"] == "before the migration":
+        print(f"  project:     shape before the migration - kind {info['kind']}, language {info['language']} "
+              "from the ledger's header; run /migrate")
     else:
-        print("  ledger:      none - not scaffolded by the forge (a fact, not a defect)")
+        print("  project:     no project file - not scaffolded by the forge (a fact, not a defect)")
     return 0
 
 

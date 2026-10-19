@@ -5,6 +5,7 @@ from the content of its inputs, and prepare the writers' tasks.
 
 SYNOPSIS
     python scripts/docs-state.py <map> <docs-dir> --tasks <tmp-dir> [--date YYYY-MM-DD]
+    python scripts/docs-state.py <map> --previous <path>   # the map as last committed, for the planner
 
 WHAT IT DOES
     Reads the documentation map (`docs_map.py` is its reader) and, for
@@ -137,15 +138,44 @@ def task_text(entry, root, docs_dir, date, version, digest, titles):
     )
 
 
+def previous_map(map_path, out):
+    """Write the map as last committed to `out` through forge_repos
+    (`git show HEAD:<map>`), the previous map of a documentation run
+    now that the header carries no `previous` (SOL.0700): 0 and the
+    path when there is one, 0 and 'none' when the map was never
+    committed."""
+    import forge_repos as fr
+    map_path = map_path.resolve()
+    repo = fr.ENGINE_ROOT if fr.ENGINE_ROOT in map_path.parents and not (map_path.parent / ".git").exists() \
+        else map_path.parent
+    while repo != repo.parent and not (repo / ".git").exists():
+        repo = repo.parent
+    rel = map_path.relative_to(repo).as_posix()
+    text = fr.git_out(["show", f"HEAD:{rel}"], repo)
+    if not text:
+        print("none")
+        return 0
+    out.parent.mkdir(parents=True, exist_ok=True)
+    out.write_text(text + "\n", encoding="utf-8", newline="\n")
+    print(out.as_posix())
+    return 0
+
+
 def main(argv):
     ft.utf8_console()
     ap = argparse.ArgumentParser(description=__doc__.splitlines()[1].strip())
     ap.add_argument("map")
-    ap.add_argument("docs")
-    ap.add_argument("--tasks", required=True, help="directory for the writers' task files")
+    ap.add_argument("docs", nargs="?")
+    ap.add_argument("--tasks", help="directory for the writers' task files")
     ap.add_argument("--date", default=datetime.date.today().isoformat())
+    ap.add_argument("--previous", metavar="PATH",
+                    help="write the map as last committed to PATH and stop: the previous map of a run (SOL.0700)")
     a = ap.parse_args(argv)
     map_path = Path(a.map)
+    if a.previous:
+        return previous_map(map_path, Path(a.previous))
+    if not a.docs or not a.tasks:
+        ap.error("docs and --tasks are required unless --previous is given")
     text = map_path.read_text(encoding="utf-8")
     front, entries = docs_map.parse(text)
     if not entries:

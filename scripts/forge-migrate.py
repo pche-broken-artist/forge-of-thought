@@ -86,13 +86,14 @@ import sys
 from pathlib import Path
 
 sys.path.insert(0, str(Path(__file__).resolve().parent))
+import forge_docs as fd  # noqa: E402
 import forge_repos as fr  # noqa: E402
 import forge_tools as ft  # noqa: E402
 
 TEMPLATES = fr.ENGINE_ROOT / "templates"
-ID_RE = re.compile(r"\b[A-Z]{3}\.\d{4,5}\b")
-THREAD_RE = re.compile(r"^- \*\*(THR\.\d{4,5})\*\*\s*(?:\[([^\]]*)\])?\s*(.*)$")
+ID_RE = fd.ID_RE
 TODAY = datetime.date.today().isoformat()
+read, split_front, front_value, tables, waiting_lines = fd.read, fd.split_front, fd.front_value, fd.tables, fd.waiting_lines
 
 LEAVING = {
     "artefact": ("date", "last_change"),
@@ -103,31 +104,6 @@ LEAVING = {
 
 
 # ---------------------------------------------------------------- files
-
-def read(path):
-    return path.read_text(encoding="utf-8")
-
-
-def split_front(text):
-    """(front lines without the dashes, body text) or (None, text)."""
-    lines = text.split("\n")
-    if not lines or lines[0].strip() != "---":
-        return None, text
-    for i in range(1, len(lines)):
-        if lines[i].strip() == "---":
-            return lines[1:i], "\n".join(lines[i + 1:])
-    return None, text
-
-
-def front_value(front, key):
-    for line in front or []:
-        m = re.match(r"^" + re.escape(key) + r":\s*(.*)$", line)
-        if m:
-            value = m.group(1)
-            value = re.sub(r"\s+#.*$", "", value).strip()
-            return value.strip('"').strip("'")
-    return None
-
 
 def header_files(proj):
     """(path, kind) of every file whose header step A touches."""
@@ -158,37 +134,6 @@ def leaving_fields(path, kind):
             or any(l.startswith(k + ":") for l in front)]
 
 
-def tables(text):
-    """The tables of a hand-kept ledger: {section: [row dict]}."""
-    out, section, header = {}, None, None
-    for line in text.split("\n"):
-        if line.startswith("## "):
-            section, header = line[3:].strip(), None
-            out.setdefault(section, [])
-            continue
-        if section is None or not line.startswith("|"):
-            continue
-        cells = [c.strip() for c in line.strip().strip("|").split("|")]
-        if header is None:
-            header = cells
-            continue
-        if all(set(c) <= set("-: ") for c in cells):
-            continue
-        out[section].append(dict(zip(header, cells)))
-    return out
-
-
-def waiting_lines(text):
-    lines, inside = [], False
-    for line in text.split("\n"):
-        if line.startswith("## "):
-            inside = line.startswith("## Waiting")
-            continue
-        if inside and line.startswith("- "):
-            lines.append(line[2:].strip())
-    return lines
-
-
 # ------------------------------------------------------------ the target
 
 class Target:
@@ -205,9 +150,8 @@ class Target:
         self.manifest = {"slug": slug, "date": TODAY, "changed": [], "created": [],
                          "deleted": [], "unindexed": [], "gitignore": None}
         self.ledger = self.proj / "ledger.md"
-        front, _ = split_front(read(self.ledger)) if self.ledger.exists() else (None, "")
-        self.kind = (front_value(front, "kind") or "thought") if front else "thought"
-        self.language = (front_value(front, "language") or "en") if front else "en"
+        info = fr.project_file(self.proj)  # the one reader of the project file (SOL.0670)
+        self.kind, self.language = info["kind"], info["language"]
 
     def rel(self, path):
         return Path(os.path.relpath(path, self.repo)).as_posix()
@@ -447,7 +391,7 @@ def step_c1(t, apply, out):
     _, body = split_front(read(old))
     blocks, trailing, current = [], [], None
     for line in body.split("\n"):
-        m = THREAD_RE.match(line)
+        m = fd.THREAD_BLOCK_RE.match(line)
         if m:
             current = {"id": m.group(1), "concerns": (m.group(2) or "intent").strip(), "lines": [m.group(3)]}
             blocks.append(current)

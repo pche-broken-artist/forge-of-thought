@@ -3,7 +3,8 @@ docs_map.py - the one reader of the documentation map, shared by the
 docs-* scripts (docs-state, docs-index, docs-check). Not a command.
 
 The map's shape is the skeleton `templates/docs-map.md`: a
-front-matter (`generated`, `target`, `owner`, `previous`), a
+front-matter (`target`, `owner`; the previous map comes from git,
+docs-state --previous), a
 `## Paths` section with one line per reader, and one entry per page:
 
     ### docs/<section>/<page>.md

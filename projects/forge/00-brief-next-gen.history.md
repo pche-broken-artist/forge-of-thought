@@ -15,9 +15,22 @@ place without an ID: a section, the file, or in the forge's own
 project the operating layer. Reason is left out on
 `created`; `Action` and `Was` only where the record has them, `Was`
 always last, paragraphs in it divided by `<br>`; a thread that
-closes carries its last text in `Was`. At the birth of a
+closes gets a `closed` record saying when and by what, no `Was`:
+the closed file is the archive (POS.1680). At the birth of a
 document, one record of the file and one naming every item born
-with it. Lines are not wrapped. -->
+with it. Lines are not wrapped.
+A record of state only carries the current version and does not
+raise it (POS.1630). Its shapes: the mining of a brief, in the
+intent's history with the brief's file as subject,
+`00-brief-<name>.md | changed | mined: pending | partial | mined |
+dropped, <note>`; a finding or a challenge settled, `FND.NNNN |
+closed | <what fixed it>`, in the history of the artefact whose
+version settled it, or of the intent where no version did or the
+check was of the engine, resolved for a finding, accepted for a
+challenge; a work product's state, `<file> | changed | state: by
+hand` or the making's record, in its specification's history.
+`rejected`, `parked` and `obsolete` are a decision's Verdict
+(templates/decisions.md), never a record here (POS.1610). -->
 
 - 2026-10-03 | 0.1 | PCHe | 00-brief-next-gen.md | created
 - 2026-10-03 | 0.2 | PCHe | 00-brief-next-gen.md | changed | The eighteen researches of 2026-10-03 run and cited under the sections they serve, each with a line or two on what it found and, where it limits a thought of the brief or leaves a question to the principal, saying so; no need reworded. THR.0520, opened from the talk over the brief, linked under what already stands in the intent and in the two sections that rest on it. What is still open rewritten: where the researches disagree and what they rest on. | Was: - What Claude Code itself already carries of all this.<br>- Research, proposed and not yet run: how comparable frameworks and Claude Code itself solve extensions kept apart from the core, upgrade, several people on one project, the testing of behaviour, and documentation with news. So that we do not invent the wheel.
