@@ -86,9 +86,10 @@ else. Never silently re-register.
    what it is, the Role as answered, the Date of step 2 and the Form
    of step 3 (POS.1610: the entry is the one home of a source's
    registration; the ledger's Sources table reads it).
-6. **A library document is cited, not copied.** When the principal
-   points a project at a document that lives in a library
-   (`projects/lib-<name>/…`), nothing is stored in `sources/`: add an
+6. **Another project's document is cited, not copied.** When the
+   principal points a project at a document that lives in another
+   project, a library's (`projects/lib-<name>/…`) or any other's
+   (`projects/<slug>/…`, POS.1020), nothing is stored in `sources/`: add an
    index entry that names the path and says what it is for; the
    ledger's Dependencies table finds the citation by itself
    (POS.1020, SOL.0680). Moving a document out of a project into a

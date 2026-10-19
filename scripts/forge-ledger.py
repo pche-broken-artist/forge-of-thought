@@ -26,7 +26,9 @@ WHAT IT DOES
     every item without a record of the new shape, a newer record
     overriding it; a project not yet migrated is read whole from its
     hand-kept ledger as the archive. Dependencies are the citations of
-    `projects/lib-*/` anywhere in the project.
+    another project's documents, `projects/<slug>/`, a library's or
+    any other's (POS.1020), in the chain, the indexes, the recipes,
+    the work and the research.
 
     Waiting on principal and the Reports section follow the rule and
     the list of templates/ledger.md, where each is defined; a closed
@@ -284,9 +286,9 @@ def dependencies(p):
         top = p.rel(f).split("/")[0]
         if f.name in ("ledger.md", "ledger.archive.md") or top in ("reviews", "challenges", "sources", "published", "renders", "docs"):
             continue
-        for m in re.finditer(r"projects/(lib-[\w-]+)/((?:sources|research)/(?:[\w.-]+/)?)?", fd.read(f)):
-            if m.group(1) == p.slug:
-                continue  # a library citing itself
+        for m in re.finditer(r"projects/([\w-]+)/((?:sources|research)/(?:[\w.-]+/)?)?", fd.read(f)):
+            if m.group(1) == p.slug or m.group(1) in ("<slug>", "<other>", "<name>", "lib-<name>"):
+                continue  # the project citing itself, or a placeholder of a rule
             path = "projects/" + m.group(1) + "/" + (m.group(2) or "")
             found.setdefault(path, (m.group(1), set()))[1].add(p.rel(f))
     return [[path, lib, ", ".join(sorted(users)), arch.get(path, {}).get("Note", "—")]

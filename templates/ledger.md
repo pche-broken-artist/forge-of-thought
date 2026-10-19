@@ -79,12 +79,12 @@ the index, never here (CLAUDE.md, Document chain, External inputs). -->
 |---|---|---|---|
 
 ## Dependencies
-<!-- Registration only: the citations of another repository's
-documents, typically a library's (POS.1020), found in the chain, the
+<!-- Registration only: the citations of another project's documents,
+a library's or any other's (POS.1020), found in the chain, the
 indexes, the recipes, the work and the research, one row per cited
-directory, Used by the citing files. No version: library documents
-are maintained by their owner. What the document is for lives where
-it is used. -->
+directory, Library the cited project's slug, Used by the citing
+files. No version: another project's documents are maintained by
+their owner. What the document is for lives where it is used. -->
 | Path | Library | Used by | Note |
 |---|---|---|---|
 
