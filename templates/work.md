@@ -25,11 +25,13 @@ companion, templates/history.md); its language: prime directive 6. -->
 the file. -->
 
 ## Assumptions
-<!-- ASM.NNNN, the ID scheme of CLAUDE.md. Delete if empty. -->
+<!-- ASM.NNNN, the ID scheme of CLAUDE.md: the next free number of the
+project, after every specification it already has (DEC.0270). Delete if empty. -->
 - **ASM.0010** …
 
 ## Open
-<!-- TBC.NNNN with an owner and what would close it. Delete if empty. -->
+<!-- TBC.NNNN with an owner and what would close it, the number the
+project's next free one as above. Delete if empty. -->
 - **TBC.0010** (owner: <who>) … Closed by: <what>.
 
 ## Making

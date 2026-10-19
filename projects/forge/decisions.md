@@ -460,3 +460,22 @@ them here was THR.0070, resolved by DEC.0040 (no back-fill). -->
   `forge-report`, the registration and the question of `/ingest` until
   the first release, is accepted.
 - **Date:** 2026-10-18
+
+## DEC.0270 — The IDs of a project are one sequence across its work specifications, as across every document
+- **Decision:** ASM and TBC items of a work specification take the
+  next free number of the project, not of the specification: one
+  number is one item in the whole project, as the ID scheme says of
+  every ID. A new specification begins after the highest number any
+  specification of the project carries. The three specifications of
+  forge-rollout, each born at 0010, are renumbered: the oldest keeps
+  its numbers, the two younger take the next free ones, each with a
+  record in its history.
+- **Reason:** The principal's word of 2026-10-19 at the first run of
+  the ledger script over the migrated projects, which reported ASM.0010,
+  ASM.0020, TBC.0010 and TBC.0020 defined three times in forge-rollout.
+  The alternative, numbers that hold only inside their specification,
+  would be an exception to the global scheme carried into the
+  walkthrough's allocation, the checks, the documentation and the
+  allocation over branches to come; the scheme stands on one number
+  being one thing.
+- **Date:** 2026-10-19
