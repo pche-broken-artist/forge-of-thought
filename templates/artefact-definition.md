@@ -12,7 +12,7 @@ The definition of the <artefact>'s elicitation, in the seven blocks
 of POS.1310 of the forge intent; what it is to achieve and why is
 POS.NNNN. Shared mechanism is cited and never repeated here: the form
 of the conversation and one write per round (CLAUDE.md, Working
-methods and prime directive 9), versioning with history and ledger
+methods and prime directive 9), versioning with history
 (CLAUDE.md, Versioning & status), the language (CLAUDE.md, prime
 directive 6).
 
@@ -41,7 +41,7 @@ offered>: a recommendation, never a gate.
 
 How the files are made: the first <artefact> is created from
 `templates/<artefact>.md` as v0.1, with its companion
-`NN-<artefact>.history.md` from `templates/history.md` and its row in
-the ledger's Documents table. <PREFIX> items follow the ID scheme of
+`NN-<artefact>.history.md` from `templates/history.md`; the ledger
+reads the header (CLAUDE.md, Ledger). <PREFIX> items follow the ID scheme of
 CLAUDE.md. A write rewrites for coherence, never appends; empty
 sections and all template comments are deleted.

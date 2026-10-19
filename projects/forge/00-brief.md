@@ -1,7 +1,6 @@
 ---
 project: forge
 title: Forge of Thought — general engine for forging thoughts into assignments
-date: 2026-07-31
 author: PCHe
 note: No brief exists for this project. See below.
 ---

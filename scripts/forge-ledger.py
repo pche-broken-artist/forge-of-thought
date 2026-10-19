@@ -12,7 +12,8 @@ WHAT IT DOES
     Reads eleven kinds of document and builds `ledger.md` in the shape
     of templates/ledger.md, the template's own comments kept:
     the project file (the header; a project of the shape before the
-    migration gives its hand-kept ledger's header instead), the
+    migration, templates/project.md, gives its hand-kept ledger's
+    header instead), the
     artefacts' headers (Briefs, Documents), the histories (the date of
     a document, the mining of a brief, the state of a work product,
     the `closed` record of a finding or a challenge), the decisions
@@ -27,18 +28,11 @@ WHAT IT DOES
     hand-kept ledger as the archive. Dependencies are the citations of
     `projects/lib-*/` anywhere in the project.
 
-    Waiting on principal is a rule (POS.1620): the open threads, each
-    by its first sentence and its last dated paragraph; the TBCs whose
-    owner is the principal; the open findings of a critic and the open
-    challenges; under Parked the parked findings and challenges with
-    their decision. Free text has no place there.
-
-    Reports (POS.1640), in the section Reports, written only when
-    there is one: an ID defined twice; a closed thread touched by a
-    commit later than the one that closed it (through forge_repos);
-    a THR cited in the project with neither a file nor a `closed`
-    record. An unparsable file is a line `unparsed: <file>:<line>` in
-    the header, never a crash; the exit code is 0 (POS.1600).
+    Waiting on principal and the Reports section follow the rule and
+    the list of templates/ledger.md, where each is defined; a closed
+    thread's later commit is found through forge_repos. An
+    unparsable file is a line `unparsed: <file>:<line>` in the
+    header, never a crash; the exit code is 0 (POS.1600).
 
     Writes `ledger.md` only where it is out of git's index; where it
     is tracked, the script refuses to write and prints to stdout or
@@ -69,7 +63,7 @@ import forge_tools as ft  # noqa: E402
 TEMPLATE = fr.ENGINE_ROOT / "templates" / "ledger.md"
 TODAY = datetime.date.today().isoformat()
 LIBRARY_DROPS = ("Briefs", "Documents", "Published", "Work", "Challenges")
-FND_CHECK_RE = re.compile(r"^### (FND\.\d{4,5}) — (\w+) — (.*)$")
+FND_CHECK_RE = re.compile(r"^### (FND\.\d{4,5}) — (\w+) [—-] (.*)$")
 FND_CRIT_RE = re.compile(r"^### (FND\.\d{4,5}) \[(\w+)\](?: \[([^\]]+)\])? [—-] (.*)$")
 CHL_RE = re.compile(r"^### (CHL\.\d{4,5}) — (.*)$")
 VERDICT_RE = re.compile(r"\*\*Verdict:\*\*\s*([A-Z]{3}\.\d{4,5})\s+(rejected|parked(?: until .*?)?|obsolete)\s*$")
@@ -90,6 +84,8 @@ class Project:
         self.kind, self.language = info["kind"], info["language"]
         archive = self.proj / "ledger.md" if self.old_shape else self.proj / "ledger.archive.md"
         self.archive = fd.tables(fd.read(archive)) if archive.exists() else {}
+        afront, _ = fd.split_front(fd.read(archive)) if archive.exists() else (None, "")
+        self.archive_date = fd.front_value(afront, "updated") or "0000-00-00"
         self.histories = {p: fd.records(p) for p in sorted(self.proj.rglob("*.history.md"))}
 
     def rel(self, path):
@@ -327,16 +323,26 @@ def _state(id_, closed, verdicts, arch, accepted_word):
 
 
 def findings(p, closed, verdicts):
-    items, arch = {}, p.archive_rows("Findings", "ID")
+    items, arch, reopened = {}, p.archive_rows("Findings", "ID"), {}
     for f in sorted(p.proj.glob("reviews/*.md")):
-        for n, line in enumerate(fd.read(f).split("\n"), 1):
+        lines = fd.read(f).split("\n")
+        front, _ = fd.split_front("\n".join(lines))
+        date = fd.front_value(front, "date") or f.name[:10]
+        for n, line in enumerate(lines):
             m = FND_CHECK_RE.match(line)
-            if m:
-                items[m.group(1)] = [m.group(2), "conformance", f.name, m.group(3)]
+            item = [m.group(1), m.group(2), "conformance", m.group(3)] if m else None
+            if item is None:
+                m = FND_CRIT_RE.match(line)
+                item = [m.group(1), m.group(2), m.group(3) or "—", m.group(4)] if m else None
+            if item is None:
                 continue
-            m = FND_CRIT_RE.match(line)
-            if m:
-                items[m.group(1)] = [m.group(2), m.group(3) or "—", f.name, m.group(4)]
+            id_, sev, cat, head = item
+            # the first report that names the finding is its source; a later
+            # one that names it as reopened opens it again from that date
+            items.setdefault(id_, [sev, cat, f.name, head])
+            known = next((k for k in lines[n + 1:n + 8] if k.startswith("- **Known as:**")), "")
+            if "reopened" in known:
+                reopened[id_] = (date, f.name)
     for id_, a in arch.items():
         if id_ and id_ not in items:
             items[id_] = [a.get("Severity", "—"), a.get("Category", "—"), a.get("Source review", "—"), ""]
@@ -344,6 +350,14 @@ def findings(p, closed, verdicts):
     for id_ in sorted(items, key=lambda i: int(i.split(".")[1])):
         sev, cat, src, _ = items[id_]
         state, res = _state(id_, closed, verdicts, arch, "resolved")
+        # a reopening counts when its report is younger than the record or
+        # the verdict that settled the finding and than the archive, which
+        # already reflects every report before the migration
+        if id_ in reopened:
+            rdate = reopened[id_][0]
+            settled = max([closed.get(id_, ("",))[0], verdicts.get(id_, ("",))[0]])
+            if rdate > settled and (id_ not in arch or rdate >= p.archive_date):
+                state, res = "open", f"reopened by {reopened[id_][1]}"
         rows.append([id_, sev, cat, state, src, res])
     return rows, items
 
@@ -490,9 +504,11 @@ def compose(p):
 
     template = fd.read(TEMPLATE)
     tfront, tbody = fd.split_front(template)
-    front = [f"project: {p.slug}", f"kind: {p.kind}", f"language: {p.language}", f"updated: {TODAY}"]
+    front = [f"project: {p.slug}", f"updated: {TODAY}",
+             f"kind: {p.kind}             # read from project.md (templates/project.md)",
+             f"language: {p.language}         # read from project.md"]
     if p.old_shape:
-        front.append("shape: before the migration - read from the hand-kept ledger as the archive; run /migrate")
+        front.append("shape: before the migration (templates/project.md) - read from the hand-kept ledger as the archive")
     for path, line, what in fd.problems:
         front.append(f"unparsed: {Path(path).name}:{line} ({what})")
     out = ["---", *front, "---"]

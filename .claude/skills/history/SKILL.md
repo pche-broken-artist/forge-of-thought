@@ -16,11 +16,8 @@ the conversation.
    is ambiguous, ask.
 2. Run `python scripts/forge-history.py <ID> <slug>` (a short form
    such as `pos580` is accepted) and print what it printed,
-   unshortened: the item as it stands today, its timeline oldest
-   first (archive rows, its own records, the records of other items
-   that mention it, each with version and date) and every other
-   citation in the project. What the script gathers, from where and
-   in what shape is its header's; `--full` prints every Was whole.
+   unshortened. What the script gathers, from where and in what
+   shape is its header's; `--full` prints every Was whole.
 3. Add at most three sentences of Claude's own, marked as such: what
    the item says today, how it moved (born when, changed how many
    times, last at which version), and what hangs on it (a thread, a

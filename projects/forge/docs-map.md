@@ -1,8 +1,6 @@
 ---
-generated: 2026-10-14
 target: engine
 owner: projects/forge
-previous: tmp/docs-map.previous.md
 ---
 
 # Documentation map - the engine

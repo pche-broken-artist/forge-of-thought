@@ -34,9 +34,14 @@ anywhere.
    Format section names, and
    `-o projects/<slug>/published/$0.<ext>`. What each script needs
    installed is its header's.
-6. Back in the session: verify the file exists, write its row in the
-   ledger's Published table — the file, the recipe with its version,
-   the render it was made from (its `generated` date and the input
-   versions of its front-matter), the model, the date, state
-   `current` — and report what was published from what. A failed run
-   changes nothing in the ledger.
+6. Back in the session: verify the file exists and write its
+   companion `published/<recipe>.md`, the provenance of the published
+   file (POS.1610; this step is the one owner of its shape): a
+   front-matter of `project`, `file` (the published file's name),
+   `recipe` (with its version), `render` (`generated <date>` and the
+   input versions of the render's front-matter), `model` and
+   `published` (the date), nothing else; the state, current or stale,
+   is computed by the ledger script from the render's `generated`
+   date, never written. Remake the ledger,
+   `python scripts/forge-ledger.py <slug>`, and report what was
+   published from what. A failed run writes no companion.

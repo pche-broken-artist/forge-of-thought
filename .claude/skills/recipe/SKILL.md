@@ -34,7 +34,7 @@ changes.
    language, or languages where the genre allows a primary and its
    translations (`languages:`), is what the recipe declares
    (CLAUDE.md, prime directive 6); propose the project's language
-   from its ledger header and ask, never assume — and the recipe is
+   from its project file (`project.md`) and ask, never assume — and the recipe is
    then composed from the genre's
    skeleton, unused placeholders and all template comments deleted.
    The recipe is composed with the

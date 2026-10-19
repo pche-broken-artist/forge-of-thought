@@ -33,22 +33,10 @@ and what must never reach it are the contract's
 One topic, the one the entry's `says` gives, in the kind the entry
 names. The reader is the one the entry names, and the page stands
 alone: a reader who lands on it first understands it without
-another page. The kind says what kind of content belongs on the page
-and what does not (POS.1450):
-
-- A **how-to** page says what the person does, step by step where
-  there are steps, and what he sees; practical, not complete; never
-  the reasons, which are the explanation page's.
-- An **explanation** page says what a thing is, how it works and
-  why it is so, the reasons from the inputs; never a procedure and
-  never a listing, which are the how-to's and the reference's.
-- A **reference** page states facts in the structure of what it
-  mirrors, free of interpretation; a table where the input is a
-  table; never explains.
-
-A **mirrored** page restates what its inputs say, in the reader's
-words. A **derived** page puts together what the entry's
-`evidence` says, by the reasoning it gives. Nothing on the page
+another page. What belongs on a page of each kind, how-to,
+explanation or reference, and what a mirrored and a derived page
+are, is the contract's (docs-contract, The kinds of a page); the
+outline of each kind is below. Nothing on the page
 comes from anywhere but the inputs: what they do not support is
 left out, not guessed, and reported; a reason the inputs do not give
 is said to be not recorded. An example that shows the shape an owner

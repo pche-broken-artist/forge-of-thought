@@ -13,15 +13,15 @@ store it as `sources/<slug>.md`, the slug proposed from its content,
 with a two-line header (origin: pasted into the conversation; date),
 and register it like any file.
 **Without arguments:** sweep mode — scan `sources/` for files not yet
-recorded in the ledger and register them all; and report files
-changed since registration (modification time later than the
-ledger's registration date) with a question — what to do with each.
+in the index and register them all; and report files changed since
+registration (modification time later than the Date of the index
+entry) with a question — what to do with each.
 The meaning depends on the project's kind (POS.0180, POS.0960): in a
 `thought` project a changed source is a breach of immutability to
 resolve (re-register beside as a new source, restore, or accept the
 change knowingly on the principal's word); in a
 `library` a changed document is the owner's ordinary maintenance
-(POS.0970) — update the index entry and the ledger date, nothing
+(POS.0970) — update the index entry, its Date included, nothing
 else. Never silently re-register.
 
 0. **Personal matter stops the command.** Before storing, if the text
@@ -35,22 +35,22 @@ else. Never silently re-register.
    a short descriptive slug derived from the content or original name
    (e.g. `steerco-transcript.pdf`, `vendor-offer.docx`). No dates in
    filenames. On a name collision, suffix `-2`. Never rename or modify a
-   file already recorded in the ledger: sources are immutable from the
+   file already in the index: sources are immutable from the
    moment of registration (CLAUDE.md, Versioning & status).
    **Bundles** (CLAUDE.md, Document chain, External inputs): store a set of related
-   files as `sources/<slug>/`, one ledger row; in sweep mode, register
+   files as `sources/<slug>/`, one index entry; in sweep mode, register
    a subdirectory as one bundle, never file by file. Create its
    `00-INDEX.md` from `templates/index-bundle.md` if the bundle
    arrives without one; validate a supplied one against the actual
    contents and report gaps. A file may later be split out to its own
-   ledger row if it needs separate tracking.
+   entry if it needs separate tracking.
 2. **Date, best effort, never a question** (CLAUDE.md, Document
-   chain, External inputs). Record the document's origin
-   date in the ledger if it can be determined for free: from the content
-   (meeting date in a transcript header, offer date), else from file
-   metadata, else the ingest date. Note the origin in the words
-   `templates/ledger.md` gives the Sources table. Do not ask the
-   principal for dates.
+   chain, External inputs). The document's origin date goes into the
+   `Date` field of its index entry if it can be determined for free:
+   from the content (meeting date in a transcript header, offer
+   date), else from file metadata, else the ingest date; the field
+   says which, in the words `templates/index.md` gives it. Do not
+   ask the principal for dates.
 3. **One form per source (POS.1040).** For every binary file (PDF,
    DOCX, PPTX, XLSX, …) — isolated or inside a bundle — ask one
    question, per file: convert to Markdown?
@@ -70,7 +70,7 @@ else. Never silently re-register.
    is taken out of git only by the principal's own act there, by
    hand: no script of the forge does it, and never a sweep.
 4. **Role, before anything is written.** Role is the principal's
-   word, asked before the index entry and the ledger row exist, so
+   word, asked before the index entry exists, so
    that the entry carries it from its birth: an entry of the index
    is a mutable block of the record driver, and a Role filled in
    later would be a change of the block (POS.1670). One question,
@@ -83,22 +83,24 @@ else. Never silently re-register.
 5. **Index entry.** Add the source to `sources/00-INDEX.md` as an
    entry in the shape of `templates/index.md` (create the index from
    it if missing), having read enough of the file to say truthfully
-   what it is, the Role as answered.
+   what it is, the Role as answered, the Date of step 2 and the Form
+   of step 3 (POS.1610: the entry is the one home of a source's
+   registration; the ledger's Sources table reads it).
 6. **A library document is cited, not copied.** When the principal
    points a project at a document that lives in a library
    (`projects/lib-<name>/…`), nothing is stored in `sources/`: add an
-   index entry that names the path and says what it is for, and a
-   row in the ledger's Dependencies table as `templates/ledger.md`
-   has it (POS.1020). Moving a document out of a project into a
+   index entry that names the path and says what it is for; the
+   ledger's Dependencies table finds the citation by itself
+   (POS.1020, SOL.0680). Moving a document out of a project into a
    library is the reverse: ingest it there, replace the project's
-   entry with the citation, register the dependency.
+   entry with the citation.
 7. **Nothing is processed.** `/ingest` never carries content into the
    intent or any other document; the rule — registration is not
    intake, the principal directs every use, provenance cites the
    file — is CLAUDE.md, Document chain, External inputs.
-8. **Bookkeeping and summary.** Update the Sources table in
-   `ledger.md`, a row as `templates/ledger.md` has the table;
-   what the source is and is for lives in the index alone. In sweep
+8. **Bookkeeping and summary.** Remake the ledger from the records,
+   `python scripts/forge-ledger.py <slug>`; what the source is and is for lives
+   in the index alone. In sweep
    mode, also fill index gaps for files already registered. The
    reply after registration is two lines at most: the file stored
    and its index entry; what the source adds to the intent, in one

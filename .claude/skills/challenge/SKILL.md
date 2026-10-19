@@ -23,7 +23,9 @@ project's subject. A recommendation, never a gate.
 **`/challenge <persona> [artefact|path] [slug]` — run it.** The target
 is an artefact named as `/forge` names it, or any file of the project by
 its path (CLAUDE.md, Isolated reviewers); how it narrows the run is the
-contract's and the persona file's. Invoke the `challenger-<persona>`
+contract's and the persona file's. Remake the project's ledger
+first, `python scripts/forge-ledger.py <slug>`, so that the agent
+reads a current file (SOL.0680); then invoke the `challenger-<persona>`
 subagent on the project (infer it from context; if ambiguous, ask),
 naming the target artefact. Pass only the project path and the target,
 nothing else (CLAUDE.md, Isolated reviewers).
@@ -40,14 +42,11 @@ When it returns:
    word for word, its front-matter included, nothing added, dropped or
    reworded but the IDs: the next free `CHL.NNNN` of the project's
    sequence, in tens, set at the head of each challenge; then `python
-   scripts/forge-report.py <path>` completes the name in place with the
-   time and the hash, `YYYY-MM-DD-<kind>-<name>-HHMM-<hash>.md`, and
-   prints it (POS.1720, SOL.0810); the printed name is the one the
-   ledger cites.
-   Then a row per challenge in the ledger's
-   Challenges table (state `open`, its headline, source review = this
-   file). Reports of several reviewers on one project are filed one
-   after another, never at once.
+   scripts/forge-report.py <path>`; the printed name is the one the
+   ledger cites. Then `python scripts/forge-ledger.py <slug>`: how the
+   report becomes rows is `templates/ledger.md`'s (Challenges).
+   Reports of several reviewers on one project are filed one after
+   another, never at once.
 2. Present it to the principal: the overall
    read first, then each
    challenge compressed to two or three sentences. Do not editorialise and

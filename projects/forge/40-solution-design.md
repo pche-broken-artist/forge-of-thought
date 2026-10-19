@@ -1,8 +1,6 @@
 ---
 version: 0.31
-date: 2026-10-18
 status: draft
-last_change: 0.31 (2026-10-18): R1.28 of the cutover plan built: `/ingest` asks what a source is for before its entry is written (SOL.0750, POS.1670).
 project: forge
 audience: whoever realises the solution, a person or an agent
 ---

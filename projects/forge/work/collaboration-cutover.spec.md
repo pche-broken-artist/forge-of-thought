@@ -1,8 +1,6 @@
 ---
 version: 0.7
-date: 2026-10-19
 status: draft
-last_change: 0.7 (2026-10-19): TBC.0020 renumbered TBC.0090, the number having been taken by the design's TBC.0020 since 2026-10-04; IDs are global (POS.0220), the ledger script reported the clash.
 project: forge
 file: work/collaboration-cutover.md
 ---

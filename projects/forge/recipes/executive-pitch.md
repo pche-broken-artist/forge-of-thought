@@ -3,8 +3,6 @@ project: forge
 purpose: Slide-by-slide source material for a five-slide executive pitch of Forge of Thought
 audience: C-level executives whose experience of AI is chatting with it
 version: 0.8
-updated: 2026-10-12
-last_change: 0.8 (2026-10-12): S02 says the idea is approved on its owner's word, not locked (FND.1560).
 ---
 
 # Recipe — Executive pitch

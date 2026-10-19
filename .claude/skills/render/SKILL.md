@@ -76,11 +76,10 @@ other; generating the render is mechanical.
    is regenerated out, never edited by hand; a public fixed text of
    the recipe (POS.0990) or a fact of the engine's own history stands
    (POS.0950). Verify the file exists and its provenance is
-   correct, write or update the render's row in the ledger's Renders
-   table (its shape: `templates/ledger.md`, Renders; one row per
-   render file, a translation citing the primary render), and report
-   what was rendered
-   from what.
+   correct — the provenance is the row the ledger's Renders table
+   reads, a translation citing the primary render; nobody writes a
+   row — remake the ledger, `python scripts/forge-ledger.py <slug>`,
+   and report what was rendered from what.
 7. The plain file (CLAUDE.md, Document chain, Renders). Where the recipe
    carries a `## Format` section, run the script of its format —
    `python scripts/md2docx.py` or `python scripts/md2pptx.py` — on the
@@ -95,6 +94,6 @@ other; generating the render is mechanical.
    made, and that is said aloud. A recipe without the section ends
    at the Markdown. The designed file is `/publish`'s, never made
    here; a screenplay has none, and step 8 does not apply to it.
-8. Where the ledger's Published table carries a row of this recipe,
-   set its state to `stale` and say so: the published file is now
-   older than its render. Remake nothing.
+8. Where `published/<recipe>.md` exists, say that the published file
+   is now older than its render: the ledger computes its state
+   `stale` from the dates (SOL.0680), nobody sets it. Remake nothing.

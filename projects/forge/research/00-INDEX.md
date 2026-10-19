@@ -1,7 +1,6 @@
 ---
 project: forge
 directory: research
-updated: 2026-10-17
 ---
 
 # Index — research of Forge of Thought

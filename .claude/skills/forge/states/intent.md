@@ -6,7 +6,7 @@ The definition of the intent's elicitation, in the seven blocks of
 POS.1310 of the forge intent; what it is to achieve and why is
 POS.1340. Shared mechanism is cited and never repeated here: the form
 of the conversation and one write per round (CLAUDE.md, Working
-methods and prime directive 9), versioning with history and ledger
+methods and prime directive 9), versioning with history
 (CLAUDE.md, Versioning & status), the language (CLAUDE.md, prime
 directive 6).
 
@@ -16,7 +16,7 @@ directive 6).
 **Inputs.** The briefs the principal says to mine (`00-brief.md`
 and any `00-brief-<name>.md`, approved or not), `decisions.md`, the ledger; sources only as the
 principal directs. The intent as it stands is read with the
-project's threads, `threads.md`.
+project's threads, `threads/`.
 
 **Aim.** The intent chisels the briefs into what the principal
 holds: from the briefs, the sources and the conversation it keeps
@@ -85,27 +85,33 @@ what stays open; when the Aim's completion is reached, name the
 layers that can follow from it, or offer the approval where the
 principal takes none: a recommendation, never a gate.
 
-**Threads and files.** The threads in `threads.md`, one file for
-the project, are
-part of the intent as its history is: the intent says what holds,
-the threads what is being worked, the working debate included until
-a thread is settled, and once it is settled the debate goes whole
-into the `Was` of the thread's `closed` record (POS.0310); freely
-rewritten, no version, no history and no ledger row of their own
-(POS.0120). Every thread names, right after
-its ID and in square brackets, the artefact it concerns, as `/forge`
-names it; several where it concerns several. An item says what is to be
-achieved and why; what realises it is named in the solution design
-where the project has one, and in the item where it has none
-(POS.0120).
+**Threads and files.** The threads are files, `threads/THR.NNNN.md`
+from `templates/thread.md`, one per thread (POS.1680), and are part
+of the intent as its history is: the intent says what holds, the
+threads what is being worked, the working debate included until a
+thread is settled. A thread's header is its state: `concerns` the
+artefact it concerns, as `/forge` names it, several where several;
+`origin` the principal's word, a document by path or Claude's
+synthesis; `status` open or closed. Freely rewritten while open,
+the header too; no version, no history of its own (POS.0120). A
+thread is never moved, renamed or deleted, the one exception the
+renumbering at an ID clash (POS.0220); closing is `status: closed`
+and a `closed` record in the intent's history saying when and by
+what, no `Was`: the closed file is immutable and is the archive;
+what returns is a new thread citing the old one. An item says what
+is to be achieved and why; what realises it is named in the
+solution design where the project has one, and in the item where it
+has none (POS.0120).
 
 How the files are made: the first intent is created from
 `templates/intent.md` as v0.1, with its companion
-`10-intent.history.md` from `templates/history.md` and the threads
-`threads.md` from `templates/threads.md`. A write rewrites
-for coherence, never appends; the text is in the project's language
-(CLAUDE.md, prime directive 6); POS, FCT, THR and REJ follow the ID
-scheme of CLAUDE.md; the words of the Mined column are
-`templates/ledger.md`'s.
-Whatever remains unsettled is saved into its thread before the
-session ends (CLAUDE.md, Ledger).
+`10-intent.history.md` from `templates/history.md` and an empty
+`threads/`. A write rewrites for coherence, never appends; the text
+is in the project's language (CLAUDE.md, prime directive 6); POS,
+FCT, THR and REJ follow the ID scheme of CLAUDE.md. The mining of a
+brief is the mining record as `templates/history.md` has it (the
+records of state; POS.1610), written at the round that mines; the
+ledger's Briefs table reads the newest. Whatever
+remains unsettled is saved into its thread before the session ends
+(CLAUDE.md, Ledger); the ledger is remade after the write,
+`python scripts/forge-ledger.py <slug>`.

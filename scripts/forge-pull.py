@@ -15,9 +15,8 @@ WHAT IT DOES
     create a conflict in half-finished work. Projects without a
     repository or without an origin are reported and skipped. A
     repository whose history has diverged from its origin is refused
-    and nothing is pulled: merge by hand, or forge-save.py rebases
-    your commits onto the remote. The script never merges on its own
-    (POS.1490 of the forge intent).
+    and nothing is pulled; what to do then is /pull's to offer. The
+    script never merges on its own (POS.1490 of the forge intent).
 
     After a pull it prints where the repository moved from and to
     (before: <hash> <subject>, after: <hash> <subject>) and the

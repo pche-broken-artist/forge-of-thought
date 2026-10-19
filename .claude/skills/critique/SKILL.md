@@ -26,7 +26,9 @@ is the principal's word.
 **`/critique <lens> [artefact|path] [slug]` — run it.** The target is an
 artefact named as `/forge` names it, or any file of the project by its
 path (CLAUDE.md, Isolated reviewers); how it narrows the run is the lens
-file's. Invoke the `critic-<lens>`
+file's. Remake the project's ledger first, `python
+scripts/forge-ledger.py <slug>`, so that the agent reads a current
+file (SOL.0680); then invoke the `critic-<lens>`
 subagent on the project (infer it from context; if ambiguous, ask),
 naming the target if given. Pass only the project path and the
 target, nothing else (CLAUDE.md, Isolated reviewers).
@@ -37,16 +39,14 @@ When it returns:
    word, its front-matter included, nothing added, dropped or reworded
    but the IDs: the next free `FND.NNNN` of the project's sequence, in
    tens, set at the head of each new finding and listed in the delta
-   summary's New line; then `python scripts/forge-report.py <path>`
-   completes the name in place with the time and the hash,
-   `YYYY-MM-DD-<kind>-<name>-HHMM-<hash>.md`, and prints it (POS.1720,
-   SOL.0810); the printed name is the one the ledger cites.
-   Then the ledger: a row per new finding in the Findings table
-   (severity and category from the finding, state `open`, source
-   review = this file); a finding the report has as reopened back to
-   `open`, as newly obsolete to `obsolete`; the document states
-   refreshed. Reports of several reviewers on one project are filed
-   one after another, never at once, so that no ID is given twice.
+   summary's New line; then `python scripts/forge-report.py <path>`;
+   the printed name is the one the ledger cites. Then `python
+   scripts/forge-ledger.py <slug>`: how the report becomes rows is
+   `templates/ledger.md`'s (Findings); a finding the report has as
+   newly obsolete gets a DEC with the Verdict `obsolete` at the
+   walkthrough. Reports of several reviewers on one project are
+   filed one after another, never at once, so that no ID is given
+   twice.
 2. Present the delta summary to the principal in the conversation
    language (`CLAUDE.local.md`): new findings (with severity), verified
    resolved, still open, newly obsolete, and what awaits his verdict.

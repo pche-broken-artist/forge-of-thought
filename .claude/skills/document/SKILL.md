@@ -56,9 +56,10 @@ the planner never maps it, the scripts read `docs/` without it.
    is reported and left out of the documentation (deleted, its entry
    marked `remove` in the map by hand, said aloud), never mended by
    hand.
-7. **Record and report.** The ledger's Renders table of the owning
-   project gets the index's row (its shape: `templates/ledger.md`,
-   Renders). Report:
+7. **Record and report.** Remake the owning project's ledger,
+   `python scripts/forge-ledger.py <slug>`: its Renders table reads the index's
+   provenance (`docs/README.md`, front-matter), nobody writes a row.
+   Report:
    pages new, regenerated, kept and removed; the Unowned list and what
    did not fit, from the planner; what the writers left out; every
    place where a writer wanted a reason and none is recorded, as one

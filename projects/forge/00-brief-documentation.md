@@ -1,11 +1,9 @@
 ---
 project: forge
 title: Documentation — generated pages of one topic each, for the engine and for any project
-date: 2026-10-09
 author: PCHe
 version: 0.1
 status: draft
-last_change: 0.1 (2026-10-09): draft begun; born from THR.0340 (the rounds of 2026-10-05 and 2026-10-07) and the principal's word of the day.
 ---
 
 <!-- Only this header is fixed; the text below it is free-form. The

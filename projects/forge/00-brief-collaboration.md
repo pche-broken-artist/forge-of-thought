@@ -1,11 +1,9 @@
 ---
 project: forge
 title: Work of several people, branches and windows on one project
-date: 2026-10-17
 author: PCHe
 version: 0.8
 status: draft
-last_change: 0.8 (2026-10-17): the sixth critique worked in (sources/merge-brief-critique-6.md): a worktree addressed as <slug>@<branch>, the write step never fetching, the manual rebase steps corrected, IDs four-digit until 9999 with a numeric sort, the order of releases against the steps of one run, the engine's second root; two windows on two projects need no worktree, only /save with a slug.
 ---
 
 <!-- Only this header is fixed; the text below it is free-form. The

@@ -6,7 +6,7 @@ The definition of the assignment's elicitation, in the seven blocks
 of POS.1310 of the forge intent; what it is to achieve and why is
 POS.1350. Shared mechanism is cited and never repeated here: the form
 of the conversation and one write per round (CLAUDE.md, Working
-methods and prime directive 9), versioning with history and ledger
+methods and prime directive 9), versioning with history
 (CLAUDE.md, Versioning & status), the language (CLAUDE.md, prime
 directive 6).
 
@@ -14,7 +14,7 @@ directive 6).
 `templates/assignment.md`.
 
 **Inputs.** `10-intent.md`, `decisions.md`, the ledger. The intent is
-read with the project's threads, `threads.md`.
+read with the project's threads, `threads/`.
 
 **Aim.** The assignment carries the in-scope substance of the
 intent to the recipients, complete and precise, so that they can

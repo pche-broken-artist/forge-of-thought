@@ -45,7 +45,7 @@ your lens reads.
 
 Inputs (read, never modify): the whole chain — the briefs
 (`00-brief*.md`), `10-intent.md`,
-`threads.md`, every layer below the intent that exists,
+the threads (`threads/THR.NNNN.md`), every layer below the intent that exists,
 `decisions.md`, `ledger.md` — and every
 file in `reviews/`.
 

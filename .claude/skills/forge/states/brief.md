@@ -6,7 +6,7 @@ The definition of the brief's elicitation, in the seven blocks of
 POS.1310 of the forge intent; what it is to achieve and why is
 POS.1330. Shared mechanism is cited and never repeated here: the form
 of the conversation and one write per round (CLAUDE.md, Working
-methods and prime directive 9), versioning with history and ledger
+methods and prime directive 9), versioning with history
 (CLAUDE.md, Versioning & status), the language (CLAUDE.md, prime
 directive 6).
 
@@ -21,7 +21,7 @@ prime directive 6.
 **Inputs.** The principal's thought, however it arrives. Around
 it, gathered during the elicitation: research notes (`research/`),
 sources (`sources/`) and Claude's own proposals. The existing
-intent and ledger are read only to know what already stands, never
+intent and the ledger (`python scripts/forge-ledger.py <slug>`) are read only to know what already stands, never
 to shape the text.
 
 **Aim.** The brief puts the idea together: what the principal
@@ -124,7 +124,7 @@ to hold, is a finding like any other and stands in the research
 note; it enters the brief where the principal takes it.
 
 **Course.** Resolve the project and the file; create the brief
-with its companion and ledger row if it does not exist; an approved
+with its companion if it does not exist; an approved
 brief is changed like any artefact, and a new whole is a new brief.
 However the text arrives: pasted whole — store it verbatim and ask
 whether it is finished, if so approve at once; begun outside — store what came,
@@ -148,7 +148,7 @@ of the approval.
 
 How the files are made: a new brief is created from
 `templates/brief.md` (the minimal YAML header, nothing else) with
-its companion `<file>.history.md` from `templates/history.md` and
-its row in the ledger's Briefs table (Mined: pending). The ledger
-row is updated with every version, and the whole is mined by
-`/forge intent`.
+its companion `<file>.history.md` from `templates/history.md`; the
+ledger's Briefs table reads the header and the mining record of the
+intent's history (pending until one exists), and the whole is mined
+by `/forge intent`.

@@ -14,22 +14,29 @@ resolved per host from his own configuration (CLAUDE.md,
 Persistence) — nothing to propose.
 
 **Kind.** Every project has a kind, declared as `kind:` in its
-ledger header (POS.0960): `thought` (default — the chain, everything
+project file (`project.md`, `templates/project.md`; POS.0960,
+POS.1590): `thought` (default — the chain, everything
 below) or `library` (slug prefix `lib-`, material shared across
 projects, no chain). Infer `library` from the `lib-` prefix or the
 principal's words; when unclear, ask.
 
 **Language.** Every project declares the language of its chain
-artefacts as `language:` in its ledger header (CLAUDE.md, prime directive 6;
-POS.0060 of the forge intent): English unless the principal names
-another; ask when his words leave it open.
+artefacts as `language:` in its project file (CLAUDE.md, prime
+directive 6; POS.0060 of the forge intent): English unless the
+principal names another; ask when his words leave it open.
 
-**Library** (`kind: library`): create only `projects/$0/ledger.md`
-from `templates/ledger.md` with `kind: library`, reduced as the
-template's header says (POS.1070), plus `sources/00-INDEX.md`
+**Every project** gets `project.md` from `templates/project.md`
+(slug, kind, language; written once, SOL.0670), `.gitattributes`
+from `templates/gitattributes` (the ways of merging by path,
+SOL.0730) and `.gitignore` with the line `ledger.md`: the ledger is
+made at read time by `python scripts/forge-ledger.py <slug>`, never
+written by hand and never in git (SOL.0680).
+
+**Library** (`kind: library`): create only those three files, plus
+`sources/00-INDEX.md`
 and `research/00-INDEX.md` from `templates/index.md`, and
 `recipes/readme.md` from `templates/recipe-readme.md` with library
-inputs (ledger and the two indexes) and its companion
+inputs (the ledger made by the script and the two indexes) and its companion
 `recipes/readme.history.md` from `templates/history.md` — its README
 is the catalogue (POS.1000). No brief, no decisions, no reviews or challenges, no
 release notes. Finish by proposing `/ingest` for the first documents;
@@ -41,12 +48,12 @@ steps 3–5 below do not apply.
    already exists, stop and report — never overwrite.
 2. Create the folder structure:
    - `projects/$0/sources/`, `projects/$0/reviews/`,
-     `projects/$0/challenges/` and `projects/$0/research/` — empty
+     `projects/$0/challenges/`, `projects/$0/research/` and
+     `projects/$0/threads/` — empty
      except `sources/00-INDEX.md` and `research/00-INDEX.md` from
      `templates/index.md` (header filled, no entries)
-   - `projects/$0/ledger.md` from `templates/ledger.md`, filled with
-     project slug, `kind: thought`, the language and today's date;
-     brief row as 0.1 draft, pending
+   - `projects/$0/project.md`, `.gitattributes` and `.gitignore` as
+     Every project says above
    - `projects/$0/decisions.md` from `templates/decisions.md` — the
      slug filled, the sample record removed
    - `projects/$0/recipes/readme.md` from `templates/recipe-readme.md`
@@ -61,12 +68,13 @@ steps 3–5 below do not apply.
 3. **00-brief.md:** ask the principal to paste or dictate the brief
    now and hand it to the `/forge brief` procedure
    (`.claude/skills/forge/states/brief.md`, its Course): it
-   creates the file, its companion and its Briefs row, stores, asks
+   creates the file and its companion, stores, asks
    whether the text is finished, approves or leaves the draft. Nothing
    of that procedure is restated here (POS.1070).
 4. Do NOT create 10-intent.md or any layer below it yet — each is
    born from its own first `/forge <state>`.
-5. Update the ledger and finish by proposing the next step: run
+5. Make the ledger once, `python scripts/forge-ledger.py $0`, and
+   finish by proposing the next step: run
    `/forge intent` to start the elicitation interview — and remind
    the principal that the project is not under git until he
    initialises its repository.

@@ -191,7 +191,7 @@ whether it is versioned and how it behaves:
 | records | history | what changed in a versioned document, and why | forge | — | append-only |
 | records | decisions | the principal's decisions with reasons | forge | — | append-only |
 | records | review, challenge | one dated reviewer run | reviewer agent | — | immutable |
-| state | ledger | single source of truth for state | forge | — | freely rewritten |
+| state | ledger | single source of truth for state, made at read time | script | — | never in git (POS.1600) |
 | state | project | the project file: slug, kind, language | /new-project | — | written once (POS.1590) |
 | state | thread | one open matter of the intent | the principal with Claude | — | freely rewritten while open, immutable once closed (POS.1680) |
 | state | index | catalogue of a resource directory | forge | — | freely rewritten |
@@ -302,12 +302,9 @@ POS.1320.
    chain, its translation is a render. Everything is Markdown, content only.
    An output is made in two steps, each with its own command.
    `/render` generates the Markdown and, where the recipe names a
-   format, the plain file beside it through pandoc
-   (`renders/<recipe>.docx` or `.pptx`), or a screenplay's video or
-   the events of its player through `scripts/md2video.py`
-   (`renders/<recipe>.<lang>.mp4` or `.html-player.js`; a
-   screenplay has no published file): deterministic, cheap,
-   repeated freely. `/publish` makes the designed file through a
+   format, the plain file through the script the format names, as
+   `/render` step 7 says (a screenplay has no published file):
+   deterministic, cheap, repeated freely. `/publish` makes the designed file through a
    model and its document skills:
    expensive, only on the principal's command, never by `/render`,
    by `/release` or on Claude's own judgement. How each step runs —
@@ -425,6 +422,8 @@ projects/<slug>/           # kind: thought — the chain
   .git/                               # the project's own repository
   .gitattributes                      # the ways of merging by path
                                       # (templates/gitattributes)
+  .gitignore                          # the ledger, made at read time
+                                      # (Ledger)
   README.md  RELEASE-NOTES.md         # renders (Document chain, Renders)
   docs-map.md  docs/                  # the documentation and its map
                                       # (Document chain, Documentation)
@@ -443,6 +442,8 @@ projects/<slug>/           # kind: thought — the chain
   <file>.history.archive.md           # a history table before the
                                       # log, immutable
   decisions.md  ledger.md             # decisions; the ledger (Ledger)
+  ledger.archive.md                   # the hand-kept ledger at the
+                                      # migration, immutable
   sources/00-INDEX.md                 # resource index (rewritten)
   sources/<name>.<ext>                # immutable external inputs, one
                                       # form each: <slug>.md extract of
@@ -485,8 +486,8 @@ projects/<slug>/           # kind: thought — the chain
                            # the project or gitignore it
 projects/lib-<name>/       # kind: library — material shared across
   .git/  project.md        # projects, no chain: only the project
-  .gitattributes           # file, the attributes, the ledger,
-  ledger.md                # sources and research; documents
+  .gitattributes           # file, the attributes, the ignore of
+  .gitignore  ledger.md    # the ledger, sources and research; documents
   README.md  logo.png      # maintained by their owner; README =
   recipes/readme.md        # the catalogue, a render of its recipe
   recipes/readme.history.md
@@ -552,9 +553,12 @@ runs is its own definition's (`.claude/skills/save/SKILL.md`,
 looks at the remote and says the state as a fact, pulls only a clean
 repository that is behind, and offers the rest; the forge never pulls
 or merges on its own judgement (POS.1490). `/end` closes a session by
-saying what would be lost (POS.1500). What each does in full is its
+saying what would be lost (POS.1500). A release that changes the
+shape of files comes with a migration, `/migrate [slug]` through
+`scripts/forge-migrate.py`: once per project, on one clone, on the
+principal's word, never on Claude's (POS.1740). What each does in full is its
 own definition's (`.claude/skills/pull/SKILL.md`,
-`.claude/skills/end/SKILL.md`). Saves made directly from the shell
+`.claude/skills/end/SKILL.md`, `.claude/skills/migrate/SKILL.md`). Saves made directly from the shell
 are unaffected.
 
 ## Versioning & status
@@ -654,8 +658,8 @@ One shape, strictly separate jobs, each with its own output (below).
 All
 are invoked by hand and settled by walkthrough; the reports are
 immutable and dated. Every agent returns its report with its findings
-unnumbered and writes nothing; the command numbers it, files it and
-writes the ledger row (POS.1140). No reviewer runs on Claude's own judgement;
+unnumbered and writes nothing; the command numbers it and files it
+(POS.1140). No reviewer runs on Claude's own judgement;
 what a save and a release run is theirs to say (Persistence). The
 challenger has personas, the critic has lenses, the check has checks: one agent file
 each (`challenger-<persona>`, `critic-<lens>`, `check-<name>`), the
@@ -715,21 +719,23 @@ propose readiness. The mechanics are the command's
 (`.claude/skills/spinoff/SKILL.md`).
 
 ## Ledger
-`ledger.md` is the **single source of truth for state**: its tables —
+`ledger.md` is the **single source of truth for state**, made at
+read time and never in git (POS.1600): `python scripts/forge-ledger.py
+<slug>` builds it from the documents, as its header says in full
+(SOL.0680), and writes it gitignored. Its tables —
 briefs, documents, renders, published files, work products, sources,
-research,
-dependencies, findings, challenges — are `templates/ledger.md`'s; resources and dependencies
-are registration only (what a resource is and is for lives in its
-directory's `00-INDEX.md`; a library document, cited by path, carries
-no version). It is freely rewritten. Keep it current
-after every operation. The ledger cites and never copies: under
-Waiting on principal a matter that has an ID gets one line — the ID,
-a few words, its state — and its substance stays in the thread or the
-record; free text only for a matter with no ID yet, which gets one at
-the next write; an unfinished conversation is saved into its thread
-of the intent, never here. A layer below the intent
-that a project does not have is not missing: `/forge` and the checks
-say nothing of it.
+research, dependencies, findings, challenges — are
+`templates/ledger.md`'s; resources and dependencies are registration
+only (what a resource is and is for lives in its directory's
+`00-INDEX.md`; a library document, cited by path, carries no
+version). Nobody writes a row: what only the ledger knew lives in
+records, a field of an index entry, a published companion or a
+decision's Verdict (POS.1610, `templates/history.md`), and every
+command that changes state remakes the ledger by the script. Waiting
+on principal is a rule, not a list (POS.1620); an unfinished
+conversation is saved into its thread of the intent, never here. A
+layer below the intent that a project does not have is not missing:
+`/forge` and the checks say nothing of it.
 
 ## Commands
 What a command does in full is its skill's
@@ -760,6 +766,7 @@ What a command does in full is its skill's
 | `/pull [slug]` | look at the remote and, clean and behind, pull one repository or every one with an origin; after a pull of the engine, the Action required lines crossed and the offer of the checks |
 | `/end` | end a session: what lives only in the conversation, what is unsaved, what a shutdown would lose |
 | `/spinoff <project> <group> <slug>` | split a group into its own project |
+| `/migrate [slug]` | bring a project to the shape of a release that changed the shape of files: a dry run, the migration on the principal's word, then `/save` |
 | `/man [command \| method]` | the forge's manual, read from its own definitions |
 | `/manual …` | alias of `/man` |
 

@@ -1,6 +1,6 @@
 ---
 name: check-light
-description: 'Check "light" — verifies a project''s bookkeeping: front-matter against the history companion, ledger tables against the files, dependencies and resource indexes against the directories. Fit for a save. Verifies conformance with the conventions. Not a critic of the documents, not a challenger of the thinking.'
+description: 'Check "light" — verifies a project''s bookkeeping: front-matter and the history companions against the templates, the ledger script''s own reports, the index entries, the published companions and the thread files against the directories and the rules. Fit for a save. Verifies conformance with the conventions. Not a critic of the documents, not a challenger of the thinking.'
 tools: Read, Glob, Grep
 model: inherit
 skills:
@@ -23,43 +23,42 @@ What you verify:
    form of its log as `templates/history.md` gives it. Whether
    a text belongs in the document or its history is the `history`
    check's, never yours.
-2. **Ledger accuracy** — the ledger shaped as `templates/ledger.md`
-   says for its kind; documents table vs front-matter and files on
-   disk; findings and challenges vs files in `reviews/` and
-   `challenges/`; every file in `sources/` and `research/` registered
-   (Sources and Research tables carry registration only, no content
-   columns); a binary without an extract and an extract without its
-   original are the normal case (POS.1040), never a finding, and a
-   binary listed in `sources/.gitignore` is not an unregistered file;
-   the Renders table mirrors every render's front-matter provenance;
-   the Published table and `published/` agree — a row without its
-   file, a file without its row (whether a row is `current` or
-   `stale` is `/publish`'s and `/render`'s to set, never a finding);
-   the Work table and `work/` agree — every specification in `work/`
-   has a row and every row its specification; a row whose file is not
-   yet made is the normal case before the first making; whether a row
-   is `current`, `stale` or `by hand` is `/work`'s to set, never a
-   finding; a work file that cites an item by ID (DEC, SOL, POS, TBC,
-   THR) not named among its specification's Inputs is a finding: the
-   file has moved past the way and the why (POS.1520);
-   "Waiting on principal" matches what is actually open. A state
-   word the template no longer carries (the mapping:
-   `templates/ledger.md`, Findings) is an immediate fix, in the
-   ledger only — never in a review or a decision record, which keep
-   the word they were written with.
+2. **The ledger's own reports** — the ledger is made at read time
+   by `scripts/forge-ledger.py` from the records (SOL.0680; the
+   command that launches you remade it) and is never a thing to
+   compare with the files: each line of its Reports section and
+   each `unparsed:` line of its header (templates/ledger.md, Reports)
+   is a finding of yours, with the file it names. A project whose
+   ledger header says `shape: before the migration` is reported as
+   `templates/project.md` says.
+   **Records and companions** — the published companions
+   `published/<recipe>.md` and the files of `published/` agree (a
+   companion without its file, a file without its companion; the
+   state current or stale is computed, never a finding); every
+   specification in `work/` has its history companion; a work file
+   that cites an item by ID (DEC, SOL, POS, TBC, THR) not named among
+   its specification's Inputs is a finding: the file has moved past
+   the way and the why (POS.1520); every thread file carries the
+   header of `templates/thread.md`, and a closed one is unchanged
+   since its closing. A state word a record or a Verdict carries that
+   the templates do not know is a finding, never a change to a review
+   or a decision record, which keep the word they were written with.
    **Dependencies** (POS.1020) — every path in the Dependencies table
    exists on disk (a missing library is the finding "library `<name>`
    not cloned alongside — `/import-project <its remote>`", advisory);
-   every index entry, recipe or chain citation pointing outside the
-   project (`projects/<other>/…`) has a row; no row points inside the
-   project.
+   the rows are the citations the script found, nothing to add.
    **Resource indexes** — `sources/00-INDEX.md` and
    `research/00-INDEX.md` exist and agree with their directories: a
    file (or bundle) without an entry, an entry without a file, a
-   bundle entry whose inner `00-INDEX.md` is missing. Never judge
-   what the entries say.
+   bundle entry whose inner `00-INDEX.md` is missing; a sources entry
+   without its `Date` and `Form` fields (templates/index.md) is an
+   immediate fix; a binary without an extract and an extract without
+   its original are the normal case (POS.1040), never a finding, and
+   a binary listed in `sources/.gitignore` is not an unregistered
+   file. Never judge what the entries say.
 
 Most of what you find is pure bookkeeping: mark it "immediate fix".
 
-Cost: the ledger, the front-matter of every document, the companions'
-newest records, the directory listings — seconds, not minutes.
+Cost: the ledger's header and Reports, the front-matter of every
+document, the companions' newest records, the directory listings —
+seconds, not minutes.

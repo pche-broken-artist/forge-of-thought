@@ -3,8 +3,6 @@ project: forge
 purpose: A short public pitch of Forge of Thought to a CEO - what it can mean for a company, not how it works
 audience: a CEO or another C-level executive whose experience of AI is chatting with it, arriving at the repository or handed the document by their technology lead
 version: 0.6
-updated: 2026-10-04
-last_change: 0.6 (2026-10-04): the status of block 4 brought to today - the forge carries an idea as far as the design of the solution, a requirements layer is still to come.
 ---
 
 # Recipe — CEO pitch (public)

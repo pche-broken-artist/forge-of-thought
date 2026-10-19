@@ -1,11 +1,9 @@
 ---
 project: forge
 title: Elicitation — one mechanism and shape for composing every artefact, user-definable
-date: 2026-09-28
 author: PCHe
 version: 1.0
 status: approved
-last_change: 1.0 (2026-09-28): locked by the principal as it stood at 0.6, after two reviews and two researches of the same day; drafts 0.1-0.6 born in the forge.
 ---
 
 <!-- Born in the forge on 2026-09-28. Everything below is the

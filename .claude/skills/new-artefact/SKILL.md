@@ -8,7 +8,7 @@ The definition of how a new kind of artefact is found, in the seven
 blocks of POS.1310 of the forge intent; what it is to achieve and why
 is POS.1430. Shared mechanism is cited and never repeated here: the
 form of the conversation and one write per round (CLAUDE.md, Working
-methods and prime directive 9), versioning with history and ledger
+methods and prime directive 9), versioning with history
 (CLAUDE.md, Versioning & status), the shape of a definition and of
 its Map (POS.1310, POS.1320).
 

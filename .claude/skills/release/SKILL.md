@@ -52,7 +52,7 @@ never a sweep.
    regenerated files (POS.0810, POS.1000): the principal rules on the
    delta before the commit. A render made from the settled sources is
    current by construction; its verification is `/render` step 6 (the
-   file, its provenance, the ledger), not a check. Which renders a
+   file, its provenance), not a check. Which renders a
    repository has is CLAUDE.md, Document chain, Renders's. A project whose
    recipe is missing is reported (a `/check` finding)
    and released without the render. Other renders are never

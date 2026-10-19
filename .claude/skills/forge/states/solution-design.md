@@ -7,7 +7,7 @@ blocks of POS.1310 of the forge intent; what it is to achieve and
 why is POS.1400 and POS.1420. Shared mechanism is cited and never
 repeated here: the form of the conversation and one write per round
 (CLAUDE.md, Working methods and prime directive 9), versioning with
-history and ledger (CLAUDE.md, Versioning & status), the language
+history (CLAUDE.md, Versioning & status), the language
 (CLAUDE.md, prime directive 6).
 
 **Target.** `40-solution-design.md`. Shape of the result:
@@ -16,7 +16,7 @@ history and ledger (CLAUDE.md, Versioning & status), the language
 **Inputs.** The lowest layer the project has above it, the intent
 alone, the assignment or the BRD, and whatever stands above that;
 `decisions.md`, the ledger. The intent is read with the project's
-threads, `threads.md`. Where the thing already exists, what
+threads, `threads/`. Where the thing already exists, what
 realises it is read as it stands. Research and sources as the
 principal directs.
 
@@ -85,8 +85,8 @@ is reached, offer the approval: a recommendation, never a gate.
 
 How the files are made: the first design is created from
 `templates/solution-design.md` as v0.1, with its companion
-`40-solution-design.history.md` from `templates/history.md` and its
-row in the ledger's Documents table. SOL and TBC follow the ID
+`40-solution-design.history.md` from `templates/history.md`; the
+ledger's Documents table reads the header. SOL and TBC follow the ID
 scheme of CLAUDE.md. A write rewrites for coherence, never appends;
 empty sections and all template comments are deleted.
 

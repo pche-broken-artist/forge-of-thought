@@ -28,8 +28,9 @@ Method, for every adjacent pair from the top of the chain:
    written in English.
 3. **Compare the two essences**, in both directions, and look for the
    trace of every difference: a REJ or DEC for something dropped, a
-   DEL or TBC for something delegated, the ledger's Briefs table
-   (mining state and note) for what of a brief is still pending.
+   DEL or TBC for something delegated, the mining record of the
+   intent's history (the ledger's Briefs table reads it: mining
+   state and note) for what of a brief is still pending.
 
 A finding is a difference of essences, never a difference of texts:
 that the intent does not repeat a sentence of the brief is nothing;

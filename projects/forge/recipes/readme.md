@@ -3,8 +3,6 @@ project: forge
 purpose: readme
 audience: humans arriving at the repository
 version: 0.67
-updated: 2026-10-18
-last_change: 0.67 (2026-10-18): the pinned text of video 1 names the approval, not the lock, among the steps of a brief's birth (FND.1960).
 output: /README.md
 ---
 

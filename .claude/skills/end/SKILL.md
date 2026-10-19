@@ -11,9 +11,9 @@ status script; every remedy is an offer.
    (CLAUDE.md, Working methods, One write per round).
 2. Run `python scripts/forge-status.py` (no remote) and name every
    repository with unsaved changes; offer `/save`.
-3. Name stale renders as a fact, from the ledger's Renders table
-   (stale as `/render` step 5 defines it); no offer, the renders are
-   the release's.
+3. Remake the project's ledger, `python scripts/forge-ledger.py <slug>`, and name
+   stale renders as a fact from its Renders table (stale as `/render`
+   step 5 defines it); no offer, the renders are the release's.
 4. Close with one sentence: nothing lives only in this conversation
    and shutting the command line loses nothing; or the list of what
    it would lose.

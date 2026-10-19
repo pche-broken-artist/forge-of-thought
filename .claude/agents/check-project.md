@@ -12,14 +12,17 @@ skills:
 You read one project — the path your task names — or, when the task
 names none, every project under `projects/` except `forge`, each
 reported on its own. The bookkeeping of a project — front-matter,
-history companions, ledger tables, dependencies, resource indexes —
+history companions, the ledger's reports, dependencies, resource indexes —
 is the `light` check's, never yours; run beside it at a release
 (`/release` step 2), you verify everything else.
 
 What you verify:
 
-0. **Kind and repository** — the ledger header declares `kind:
-   thought | library` (missing: `templates/ledger.md`, header). `projects/<slug>/.git` exists; a project that is
+0. **Kind and repository** — the project file `project.md` declares
+   `kind: thought | library` and `language` (`templates/project.md`,
+   which also says what a project without it is and how it is
+   reported); `.gitattributes` exists (`templates/gitattributes`,
+   SOL.0730); `threads/` exists in a thought project. `projects/<slug>/.git` exists; a project that is
    not a repository is a fact, never a finding, reported with the
    one-line way in ("project is not a repository —
    the way in CLAUDE.md, Persistence, names"),
@@ -37,8 +40,8 @@ What you verify:
    have is not missing and is never a finding (CLAUDE.md, Ledger);
    `recipes/` and `renders/` paired — every render traces to a recipe
    and carries provenance front-matter (legacy pre-recipe editions,
-   dated filenames, are exempt); whether that provenance matches the
-   ledger's Renders table is the `light` check's;
+   dated filenames, are exempt); the ledger's Renders table is read
+   from that provenance, nothing to compare;
    every file in `published/` traces to a recipe that carries a
    `## Format` section, and a `.pptx` or `.docx` in `renders/` to a
    render beside it (CLAUDE.md, Document chain, Renders). An older recipe
@@ -47,12 +50,8 @@ What you verify:
    iteration.
    The README and release-notes recipes of CLAUDE.md, Document chain,
    Renders, exist (fix: scaffold from `templates/recipe-<genre>.md`).
-   Every `00-brief*.md` in the directory has
-   a row in the ledger's Briefs table and vice versa; a brief marked
-   `mined` is cited somewhere in the intent. Under the ledger's
-   Waiting on principal, a line that copies a thread, a decision or a
-   history record instead of citing it by ID is a finding (CLAUDE.md,
-   Ledger).
+   A brief whose mining record says `mined` is cited somewhere in
+   the intent.
 2. **ID hygiene** — against the ID scheme in CLAUDE.md, every rule
    there (POS.1070), in every document that carries IDs.
 3. **Language** — CLAUDE.md, prime directive 6, for every artefact

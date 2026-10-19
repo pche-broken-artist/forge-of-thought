@@ -3,8 +3,6 @@ project: forge
 purpose: CONTRIBUTING.md of the engine's repository - how a visitor gives feedback, brings an idea or sends a change
 audience: a visitor of the repository on GitHub who has used the forge or read about it and wants to say, ask or change something; he arrives from the Contributing tab, the sidebar, or the page where an issue or a pull request is created
 version: 0.3
-updated: 2026-10-11
-last_change: 0.3 (2026-10-11): who decides what, in one sentence (your clone is yours, the public engine is its author's); what a pull request for a change of behaviour carries and does not carry (documentation audit F.18).
 output: /CONTRIBUTING.md
 ---
 

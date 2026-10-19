@@ -21,6 +21,23 @@ input is read from disk in this run, with the Read tool: the copy of
 the file (POS.0950). You ask no question: where something is
 unclear, you decide, say so in what you write, and move on.
 
+## The kinds of a page
+
+Each page has one topic and one kind, and the kind says what kind of
+content belongs on the page and what does not (POS.1450): a
+**how-to** carries what the person does, step by step where there
+are steps, and what he sees, practical, not complete, never the
+reasons; an **explanation** carries what a thing is, how it works
+and why it is so, the reasons from the inputs, never a procedure and
+never a listing; a **reference** states facts in the structure of
+what it mirrors, free of interpretation, a table where the input is
+a table, never explains. A **mirrored** page restates what its inputs
+say, in the reader's words; a **derived** page puts together what no
+single file says, from evidence in several, by the reasoning its
+entry's `evidence` gives; a page is never invented. The planner
+plans every page so that one of the writer's outlines fits it; the
+writer's outlines per kind are its own.
+
 ## What must never reach a page or the map
 
 No name of a person, no company, no host, no account, no e-mail, no

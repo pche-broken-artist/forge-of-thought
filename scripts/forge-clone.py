@@ -14,10 +14,9 @@ WHAT IT DOES
     and carries no identity and no URL. Afterwards it reports facts:
     the last commit, the origin, the commit identity git resolves for
     the fresh clone, and the project file (templates/project.md): its
-    kind and language; a project of the shape before the migration
-    gives them from its hand-kept ledger's header and is told to run
-    /migrate; a project with neither was not scaffolded by the forge,
-    a fact, not a defect.
+    kind and language, or what a project without the file is, as the
+    template says; a project with neither file nor ledger was not
+    scaffolded by the forge, a fact, not a defect.
 
 WHAT IT NEEDS
     Python 3.8 or newer; git on PATH. `forge_repos.py` beside it.

@@ -37,16 +37,11 @@ prints them as links.
 
 Five sections by the reader's journey, each a directory under
 `docs/`; `docs/videos/` is not a section of the documentation and
-is never mapped. A section or a page with no material is left out, never
-left empty. Each page has one topic and one kind: how-to,
-explanation or reference. The kind says what kind of content belongs
-on the page and what does not (POS.1450): a how-to carries steps,
-commands and what the person sees, never the reasons; an explanation
-carries what a thing is, how it works and why, never a procedure and
-never a listing; a reference mirrors its owner, never explains. The
-writer's outlines per kind are its definition's
-(`.claude/agents/docs-writer.md`); plan every page so that one of
-them fits it.
+is never mapped (CLAUDE.md, Repository layout; POS.1540). A section
+or a page with no material is left out, never left empty. Each page
+has one topic and one kind, how-to, explanation or reference, as the
+contract defines them (docs-contract, The kinds of a page); plan
+every page so that one of the writer's outlines fits it.
 
 - `start/` (how-to, user): what the thing is in one paragraph, in
   plain words (what it technically is, that Claude is an AI
@@ -103,7 +98,7 @@ For the engine: `CLAUDE.md`; every file under `.claude/skills/`
 the contracts, the walkthrough skill); every file under
 `.claude/agents/`; `.claude/settings.json`; every file under
 `templates/`; the help header of every script under `scripts/`; in
-the owning project: the briefs, the intent, `threads.md`, the
+the owning project: the briefs, the intent, the threads (`threads/`), the
 solution design, `decisions.md`, and the recipes, which own pinned
 facts no other file carries (install lines, the repository's
 address); `research/00-INDEX.md` for orientation only.
@@ -168,12 +163,11 @@ Rules of the entry:
   entry names it under `links`, chosen where a reader of that page
   would ask for it, never added to a page that has no use for it.
   A page no other page would name is a page the map does not need.
-- **Mirrored or derived.** A mirrored page restates what its inputs
-  say, in the reader's words. A derived page puts together what no
-  single file says, from evidence in several: an install procedure
-  from what the scripts require and the skills install, a glossary
-  from the terms the files use. `evidence` says the derivation. A
-  page is never invented: what no file supports goes to Unowned.
+- **Mirrored or derived** (docs-contract, The kinds of a page): an
+  install procedure from what the scripts require and the skills
+  install, a glossary from the terms the files use, are derived;
+  `evidence` says the derivation. What no file supports goes to
+  Unowned.
 - **Stable names.** Lowercase, hyphens, the job or the topic as the
   name, never a number. With a previous map, keep every path that
   still has material and mark it `keep`; mark `remove` what has no

@@ -3,8 +3,6 @@ project: forge
 purpose: A short public pitch of Forge of Thought to a CTO or head of engineering
 audience: technical leadership arriving at the repository - a CTO, a head of engineering or architecture, a peer of the author who does not know him
 version: 0.6
-updated: 2026-10-04
-last_change: 0.6 (2026-10-04): the status of block 4 brought to today - the chain runs to an assignment and a solution design, a BRD layer is next and not built yet.
 ---
 
 # Recipe — CTO pitch (public)

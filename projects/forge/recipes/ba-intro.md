@@ -3,8 +3,6 @@ project: forge
 purpose: Slide-by-slide source material for an introduction of Forge of Thought to business analysts, followed by a live demonstration and a homework
 audience: business analysts meeting the forge for the first time, in one room with the author, who shows it live after the slides and sets them a task to try it themselves
 version: 0.1
-updated: 2026-10-11
-last_change: 0.1 (2026-10-11): born, handed over to Claude on the principal's word of 2026-10-11 and not yet judged by him.
 ---
 
 # Recipe — BA introduction

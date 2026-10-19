@@ -1,11 +1,9 @@
 ---
 project: forge
 title: Next generation, the requirements for a forge that can be rolled out into real operation
-date: 2026-10-09
 author: PCHe
 version: 0.3
 status: draft
-last_change: 0.3 (2026-10-09): the documentation and the cut of the README moved out of "Documentation and news" into the brief `documentation`; the section is "News".
 ---
 
 <!-- Only this header is fixed; the text below it is free-form. The

@@ -11,10 +11,13 @@ is CLAUDE.md, Document chain's. This dispatcher never changes.
 **Bare `/forge` — report the map.**
 1. Infer the current project from context ($0 may be a slug; if
    ambiguous, ask).
-2. Read the project's ledger and list `.claude/skills/forge/states/` for the
-   available target states.
+2. Make the project's ledger, `python scripts/forge-ledger.py <slug>`
+   (the ledger is made at read time, SOL.0680; a project of the shape
+   before the migration is said as `templates/project.md` says), read it and
+   list `.claude/skills/forge/states/` for the available target states.
 3. Report compactly:
-   - the project's kind (ledger header, POS.0960) and whether it is
+   - the project's kind and language (the project file, POS.1590,
+     POS.0960) and whether it is
      under git — `projects/<slug>/.git` present or "not under git",
      stated as a fact, never as a defect (CLAUDE.md, Persistence);
    - a `library` is material, not a project waiting for a brief:
@@ -43,9 +46,8 @@ is CLAUDE.md, Document chain's. This dispatcher never changes.
    origin, from `python scripts/forge-status.py --remote`, as the
    map's last word (POS.1710): said as a fact with the words of
    POS.1490 (up to date, behind, ahead, diverged, no origin) and with
-   that state's one offer: `/pull`, `/save` first, `/save`, or a
-   merge by hand or by `/save`; the map says it looked at the remote
-   and runs none of it.
+   that state's one offer, as `/pull` step 1 has it; the map says it
+   looked at the remote and runs none of it.
 
 **`/forge <state>` — work on that artefact.**
 1. Resolve `.claude/skills/forge/states/$0.md`. If it does not exist, list

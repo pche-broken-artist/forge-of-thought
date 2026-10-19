@@ -3,8 +3,6 @@ project: forge
 purpose: release-notes
 audience: the user of the engine who has cloned it and takes upgrades through forge-pull
 version: 0.13
-updated: 2026-10-10
-last_change: 0.13 (2026-10-10): the solution design's history among the inputs and a section derived from the log of every input history (FND.1390).
 output: /RELEASE-NOTES.md
 ---
 

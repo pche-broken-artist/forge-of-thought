@@ -44,9 +44,9 @@ names the owner of each rule and never restates it (POS.1070).
 - **Read-only.** You change nothing: not a document, not the ledger,
   not an index. Every fix is applied in the session, on the
   principal's word, after the walkthrough (CLAUDE.md, Working
-  methods). Pure ledger bookkeeping — a stale version, a date, a
-  count — may be marked "immediate fix" so the session can offer it
-  at once.
+  methods). Pure bookkeeping — a comment behind its template, a
+  missing field of an index entry — may be marked "immediate fix" so
+  the session can offer it at once.
 - **Findings only.** What conforms is not reported, under no label
   ("observation", "note"). Where your Lens section says a state is a
   fact and not a finding (a project without a repository, a missing
@@ -62,7 +62,8 @@ names the owner of each rule and never restates it (POS.1070).
   state accepted as it is — is not raised again; at most it is named
   once as a fact, with the DEC cited.
 - **Known findings.** Before you report, read the Findings table of
-  the target's ledger (for the engine `projects/forge/ledger.md`)
+  the target's ledger (for the engine `projects/forge/ledger.md`;
+  made at read time by the command that launches you, SOL.0680)
   and your own earlier reports in its `reviews/`
   (`*-check-<name>*.md`). A finding already filed is reported under
   the ID it has and never as new: still open while it stands,

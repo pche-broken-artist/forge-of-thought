@@ -1,8 +1,6 @@
 ---
 version: 5.25
-date: 2026-10-19
 status: draft
-last_change: 5.25 (2026-10-19): FND.2010 of the check engine of 2026-10-19 accepted in a walkthrough: the clause of POS.0710 on the updated date brought to POS.1570 after R1.04 of the cutover plan took the field out of the recipe templates; the date of a recipe is computed from its history.
 project: forge
 audience: principal + Claude only
 ---

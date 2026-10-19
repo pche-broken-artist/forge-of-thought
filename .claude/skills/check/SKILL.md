@@ -27,7 +27,9 @@ slug (the engine's own project is `forge`) or the engine root; which
 of the two a check takes, and what a missing or an added slug means
 to it, is its Lens section's to say — read it there. Typed, that is
 `/check engine` (the engine root, no slug) or `/check light forge`
-(the forge's own project). Invoke the
+(the forge's own project). First remake the
+target's ledger, `python scripts/forge-ledger.py <slug>` (for the engine `forge`), so
+that the agent reads a current file; then invoke the
 `check-<name>` subagent (Agent tool, session model) with the target
 path and nothing else (CLAUDE.md, Isolated reviewers). More than one
 check on one target may be launched at once and awaited together.
@@ -40,16 +42,11 @@ When it returns:
    context)`, then the agent's text word for word — nothing added,
    dropped or reworded but the ID, the next free `FND.NNNN` of the
    project's sequence, in tens, set at the head of each new finding;
-   then `python scripts/forge-report.py <path>` completes the name in
-   place with the time and the hash,
-   `YYYY-MM-DD-<kind>-<name>-HHMM-<hash>.md`, and prints it (POS.1720,
-   SOL.0810); the printed name is the one the ledger cites.
-   Add a row per new finding to
-   the ledger's Findings table (category `conformance`, state `open`,
-   source review = this file); a finding the report names as reopened
-   goes back to `open`. A library has no Findings table and no
-   `reviews/` until its first finding: add both then, the table as
-   `templates/ledger.md` has it. Reports of several checks on one
+   then `python scripts/forge-report.py <path>`; the printed name is
+   the one the ledger cites. Then `python scripts/forge-ledger.py
+   <slug>`: how the report becomes rows is `templates/ledger.md`'s
+   (Findings). A library has no `reviews/` until its first finding:
+   create the directory then. Reports of several checks on one
    target are filed one after another, never at once, so that no ID
    is given twice. A report that says "conforms" is filed nowhere.
 2. Present the report to the principal as it came: the one-line

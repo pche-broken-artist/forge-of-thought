@@ -1,11 +1,9 @@
 ---
 project: forge
 title: BRD — a layer of business requirements below the assignment
-date: 2026-10-16
 author: PCHe
 version: 0.2
 status: draft
-last_change: 0.2 (2026-10-16): rewritten on the principal's judgement of 0.1: the starting point is the fork's BRD, which already works; the IDs of the fork listed; the open points said plainly.
 ---
 
 <!-- Only this header is fixed; the text below it is free-form. The

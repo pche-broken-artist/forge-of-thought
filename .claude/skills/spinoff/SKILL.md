@@ -34,4 +34,5 @@ run in one step (CLAUDE.md, Spin-off rule).
    link item — "REQ.NNNN: Delivered by project *$2*, see its
    assignment." This command itself writes only the DEC in
    decisions.md (the shape of a record: `templates/decisions.md`).
-6. Update both ledgers and report the result.
+6. Remake both ledgers, `python scripts/forge-ledger.py <slug>` for
+   each, and report the result.
