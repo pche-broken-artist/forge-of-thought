@@ -3,8 +3,6 @@ project: <slug>
 purpose: <purpose>
 audience: <audience>
 version: 0.1
-updated: YYYY-MM-DD
-last_change: <derived from the records of the newest version in recipes/<recipe>.history.md>
 # output: <path>   # optional — overrides the default renders/<recipe>.md
 # languages: <cs, en>   # optional — the first primary, the rest its translations, one render per language renders/<recipe>.<lang>.md (POS.1550)
 ---

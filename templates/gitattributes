@@ -1,0 +1,15 @@
+# .gitattributes of a project (templates/gitattributes; POS.1690,
+# SOL.0730 of the forge solution design): the ways of merging by
+# path. Normalise line endings so files do not fight between machines.
+* text=auto
+# Way 3, derived: made only on main, taken as ours at a merge and
+# made again
+renders/** merge=ours
+README.md merge=ours
+RELEASE-NOTES.md merge=ours
+CONTRIBUTING.md merge=ours
+docs/** merge=ours
+published/*.md merge=ours
+# The published files: binary, never merged
+published/*.pptx binary
+published/*.docx binary

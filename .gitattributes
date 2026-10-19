@@ -1,2 +1,16 @@
+# The engine's own list (SOL.0730 of the forge solution design), not a
+# copy of templates/gitattributes: its derived files lie at the root
+# and under projects/forge/.
 # Normalise line endings so files do not fight between machines
 * text=auto
+# Way 3, derived: made only on main, taken as ours at a merge and
+# made again
+README.md merge=ours
+RELEASE-NOTES.md merge=ours
+CONTRIBUTING.md merge=ours
+docs/** merge=ours
+projects/forge/renders/** merge=ours
+projects/forge/published/*.md merge=ours
+# The published files: binary, never merged
+projects/forge/published/*.pptx binary
+projects/forge/published/*.docx binary

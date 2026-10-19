@@ -38,7 +38,7 @@ absorbed it; Note says what remains (partial) or the REJ (dropped). -->
 ## Documents
 | File | Version | Status | Date |
 |---|---|---|---|
-| 10-intent.md | 5.24 | draft | 2026-10-18 |
+| 10-intent.md | 5.25 | draft | 2026-10-19 |
 | 40-solution-design.md | 0.31 | draft | 2026-10-18 |
 <!-- One row per layer below the intent, added when the layer is
 born; a layer the project does not have gets no row (CLAUDE.md,
@@ -386,6 +386,10 @@ as `rejected`. -->
 | FND.1980 | low | conformance | resolved | 2026-10-18-check-light-3-2114-fb83.md | the Waiting line of THR.0620 says nothing decided while its row 9 is decided and in building; the line says so |
 | FND.1990 | low | conformance | resolved | 2026-10-19-check-engine-1237-204e.md | threads.md THR.0620 row 9, 2026-10-19: the preparation ships by its saves and the tag pre-r1 (DEC.0260) |
 | FND.2000 | low | conformance | resolved | 2026-10-19-check-engine-1237-204e.md | CLAUDE.md layout, 2026-10-19: the three shared modules named together in the scripts/ comment |
+| FND.2010 | low | conformance | resolved | 2026-10-19-check-engine-1256-4697.md | intent 5.25 (POS.0710 brought to POS.1570) |
+| FND.2020 | low | conformance | resolved | 2026-10-19-check-engine-1309-7a10.md | /recipe step 2 and the release-notes skeleton, 2026-10-19: no header date named |
+| FND.2030 | low | conformance | resolved | 2026-10-19-check-engine-1325-c191.md | /forge skill, 2026-10-19: the state against the origin is step 5, the map's last word; noted at R1.19 of the plan |
+| FND.2040 | low | conformance | resolved | 2026-10-19-check-engine-1325-c191.md | templates/ledger.md Sources comment, 2026-10-19: the list dropped, the index entry the one owner |
 
 Four review files are named outside the convention — accepted as they
 are by DEC.0140.

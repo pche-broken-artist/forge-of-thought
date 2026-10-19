@@ -42,9 +42,8 @@ interview). The shape of the specification is `templates/work.md`.
    says how the file is made from it.
 4. Reflect the round back and write once, on the principal's word:
    the specification rewritten for coherence, unused placeholders and
-   template comments deleted; the records appended to the companion
-   and `last_change` derived from them; the ledger row with the new
-   version and the state `stale`. Approval of the specification (1.0
+   template comments deleted; the records appended to the companion;
+   the ledger row with the new version and the state `stale`. Approval of the specification (1.0
    and on) is the principal's word, as the house scheme has it.
 5. Make the file on the principal's word, in the same round or a
    later one, as `## Making` says: `work/<name>.<ext>`, carrying of the

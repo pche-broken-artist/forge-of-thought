@@ -3,8 +3,6 @@ project: <slug>
 purpose: release-notes
 audience: the recipients and the principal tracking the project's releases
 version: 0.1
-updated: YYYY-MM-DD
-last_change: <derived from the records of the newest version in recipes/release-notes.history.md>
 output: RELEASE-NOTES.md
 ---
 
@@ -21,7 +19,7 @@ The rules: CLAUDE.md, Document chain, Renders. -->
                             # row is the source of its version
 - <NN-layer>.history.md     # one line per layer below the intent the
                             # project has, likewise, with its archive
-- 10-intent.md              # current state: version, date, status
+- 10-intent.md              # current state: version, status
 - decisions.md              # DEC records, for the pointers of Rejected
                             # lines
 - RELEASE-NOTES.md          # previous edition — sections of earlier

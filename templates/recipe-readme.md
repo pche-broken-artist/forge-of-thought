@@ -3,8 +3,6 @@ project: <slug>
 purpose: readme
 audience: humans arriving at the project's repository
 version: 0.1
-updated: YYYY-MM-DD
-last_change: <derived from the records of the newest version in recipes/readme.history.md>
 output: README.md
 ---
 

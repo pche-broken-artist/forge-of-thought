@@ -9,6 +9,11 @@
 projects/*
 !projects/forge
 
+# The ledger of the engine's own project is made at read time, never
+# in git (SOL.0680); in effect once the migration takes it out of the
+# index
+projects/forge/ledger.md
+
 # Windows noise
 Thumbs.db
 desktop.ini

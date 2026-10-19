@@ -3,8 +3,6 @@ project: <slug>
 purpose: Slide-by-slide source material for <the presentation>
 audience: <audience>
 version: 0.1
-updated: YYYY-MM-DD
-last_change: <derived from the records of the newest version in recipes/<recipe>.history.md>
 # output: <path>   # optional — overrides the default renders/<recipe>.md
 ---
 

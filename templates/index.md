@@ -1,7 +1,6 @@
 ---
 project: <slug>
 directory: sources | research
-updated: YYYY-MM-DD
 ---
 
 # Index — <sources | research> of <Project>
@@ -14,7 +13,9 @@ to its own 00-INDEX.md. -->
 <!-- sources entry -->
 ### `<file-or-bundle>`
 - **What:** <what the resource is, in one or two sentences>
-- **Origin:** <where it came from — author, URL, meeting, …; date best effort>
+- **Origin:** <where it came from — author, URL, meeting, …>
+- **Date:** YYYY-MM-DD, from the content | the file | the ingest   # best effort, never asked
+- **Form:** text | extract of <original> | binary   # one form per source (POS.1040)
 - **Role:** <free text: a standard to verify against, inspiration, a counter-example, a meeting record, …>
 - **Use for:** <what to reach for it for — the questions it answers best>
 

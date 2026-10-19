@@ -40,7 +40,7 @@ changes.
    The recipe is composed with the
    principal — options and trade-offs offered, decisions his — and
    written once per round on confirmation, per CLAUDE.md, Versioning
-   & status (a recipe: version and updated date, no status), into
+   & status (a recipe: a version and no status), into
    `recipes/<recipe>.history.md` — created from `templates/history.md`
    with the recipe.
 3. After writing, offer `/render <recipe>` as the natural next step.

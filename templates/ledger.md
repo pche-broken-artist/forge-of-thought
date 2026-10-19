@@ -18,14 +18,20 @@ only Renders, Sources, Dependencies, Research and Waiting on
 principal; the Briefs, Documents, Published, Work, Findings and
 Challenges tables are deleted at scaffold time; the Findings table returns with
 a check's first finding (`.claude/skills/check/SKILL.md`). This
-comment is the one owner of that reduction (POS.1070). -->
+comment is the one owner of that reduction (POS.1070).
+`ledger.archive.md`: the hand-kept ledger's Briefs, Work, Findings
+and Challenges tables as they stood at the migration, immutable,
+read for every item without a record of the new shape, a newer
+record overriding (POS.1610). -->
 
 ## Briefs
 <!-- One row per brief (00-brief.md and 00-brief-<name>.md). Status:
 draft (being composed) | approved (1.0 and on, changed after that as
 any artefact is).
 Mined: pending | partial | mined | dropped — how far the intent has
-absorbed it; Note says what remains (partial) or the REJ (dropped). -->
+absorbed it; Note says what remains (partial) or the REJ (dropped).
+Mined and Note are read from the mining record of the intent's
+history (templates/history.md). -->
 | File | Version | Status | Mined | Note |
 |---|---|---|---|---|
 | 00-brief.md | 0.1 | draft | pending | — |
@@ -61,16 +67,17 @@ work product, written by /work at the specification's birth and kept
 by every making. Specification = its version. State: current — set by
 the making; stale — set by a write of the specification not followed
 by a making; by hand — set on the principal's word when he has worked
-the file and does not want it remade. -->
+the file and does not want it remade. Made, Inputs and State are
+read from the records of the specification's history. -->
 | File | Specification | Inputs | Made | State |
 |---|---|---|---|---|
 
 ## Sources
 <!-- Registration only. External inputs, immutable once registered.
-Date = best-effort origin date; origin: content | file | ingested. What
-a source is and is for lives in sources/00-INDEX.md, never here
-(CLAUDE.md, Document chain, External inputs). Form (POS.1040): text | extract
-of <original> | binary — one form per source. -->
+What a source is and is for lives in sources/00-INDEX.md, never here
+(CLAUDE.md, Document chain, External inputs). Form (POS.1040): one
+form per source. Date, its origin and Form are read from the fields
+of the source's index entry (templates/index.md). -->
 | File | Date | Date origin | Form |
 |---|---|---|---|
 
@@ -95,13 +102,16 @@ research/00-INDEX.md, never here. -->
 open | resolved | rejected | parked | obsolete. Resolution:
 assignment version, or for a check's finding what fixed it, for
 resolved; DEC.NNNN for rejected. `overruled` in an older record reads
-as `rejected`. -->
+as `rejected`. State and Resolution are read from the `closed` record
+of a history, or from the Verdict of a decision. -->
 | ID | Severity | Category | State | Source review | Resolution |
 |---|---|---|---|---|---|
 
 ## Challenges
 <!-- State: open | accepted | rejected | parked | obsolete. Resolution:
-intent version for accepted, DEC.NNNN for rejected. -->
+intent version for accepted, DEC.NNNN for rejected. State and
+Resolution are read from the `closed` record of a history, or from
+the Verdict of a decision. -->
 | ID | State | Headline | Source review | Resolution |
 |---|---|---|---|---|
 

@@ -1,8 +1,6 @@
 ---
 version: 0.1
-date: YYYY-MM-DD
 status: draft            # draft | approved | superseded
-last_change: <derived from the records of the newest version in 10-intent.history.md>
 project: <slug>
 audience: principal + Claude only
 ---

@@ -1,8 +1,8 @@
 ---
-version: 5.24
-date: 2026-10-18
+version: 5.25
+date: 2026-10-19
 status: draft
-last_change: 5.24 (2026-10-18): the critiques `essence` and `clarity` of 2026-10-18 settled: sixteen findings, FND.1790 to FND.1940, all accepted, the medium ones in a walkthrough and the low ones by Claude's judgement on the principal's word; POS.1750 brought to DEC.0240, TBC.0050 and DEC.0250; the diverged state owned by POS.1490 and POS.1760; six positions brought to the ledger made at read time (POS.1610); the role asked before the entry (POS.1670); the two rules of POS.1730 nested; THR.0710 addressed to the intent too.
+last_change: 5.25 (2026-10-19): FND.2010 of the check engine of 2026-10-19 accepted in a walkthrough: the clause of POS.0710 on the updated date brought to POS.1570 after R1.04 of the cutover plan took the field out of the recipe templates; the date of a recipe is computed from its history.
 project: forge
 audience: principal + Claude only
 ---
@@ -666,9 +666,10 @@ position that already stands elsewhere.
   is a layer of the chain, its translation is a render. Dated hand-made
   editions of the earlier derivative convention remain in place as
   legacy history. Recipes are tools, not records of thinking: they carry
-  a version and an updated date in front-matter — enough for a render to
-  cite — and no status field, because a recipe is never approved and
-  stays 0.x for life. Being versioned, a recipe keeps its history in the
+  a version in front-matter and no status field, because a recipe is
+  never approved and stays 0.x for life; the date of a recipe is
+  computed from its history (POS.1570), and a render cites the version.
+  Being versioned, a recipe keeps its history in the
   companion like every versioned kind (POS.0310); the companion records
   what changed in the recipe at its own grain, the substantive turns
   live in the intent. Recipes are deliberately loose: the template fixes

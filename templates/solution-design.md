@@ -1,8 +1,6 @@
 ---
 version: 0.1
-date: YYYY-MM-DD
 status: draft            # draft | approved | superseded
-last_change: <derived from the records of the newest version in 40-solution-design.history.md>
 project: <slug>
 audience: whoever realises the solution, a person or an agent
 ---

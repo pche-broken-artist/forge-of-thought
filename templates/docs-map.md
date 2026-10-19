@@ -1,8 +1,6 @@
 ---
-generated: YYYY-MM-DD
 target: engine | <slug>
 owner: projects/<slug>
-previous: tmp/docs-map.previous.md | none
 ---
 
 # Documentation map — <target>
