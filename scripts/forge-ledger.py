@@ -482,7 +482,12 @@ def reports(p, open_threads, closed_threads):
             continue
         for id_ in set(re.findall(r"THR\.\d{4,5}", fd.read(f))):
             cited.setdefault(id_, set()).add(p.rel(f))
-    for id_ in sorted(set(cited) - known, key=lambda i: int(i.split(".")[1])):
+    # a thread of another project under projects/ may be cited by path or by ID alone
+    elsewhere = set()
+    for other in (fr.ENGINE_ROOT / "projects").glob("*/threads/THR.*.md"):
+        if other.resolve().parent != (p.proj / "threads").resolve():
+            elsewhere.add(other.stem)
+    for id_ in sorted(set(cited) - known - elsewhere, key=lambda i: int(i.split(".")[1])):
         out.append(f"- {id_} cited in {', '.join(sorted(cited[id_]))} with neither a thread file nor a closed record")
     return out
 

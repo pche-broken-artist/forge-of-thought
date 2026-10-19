@@ -1,5 +1,5 @@
 ---
-version: 0.32
+version: 0.33
 status: draft
 project: forge
 audience: whoever realises the solution, a person or an agent
@@ -459,7 +459,7 @@ boundary kept by hand or an order of work.
   `/forge`, `/recipe`, the ledger script and prime directive 6 of
   CLAUDE.md. Realises: POS.1590, POS.0060, POS.0960. Choice: a file of
   its own against the header of the ledger, which leaves git (SOL.0680);
-  no other home was found. Built 2026-10-19 in the first release (the cutover plan, R1.03, R1.10).0620).
+  no other home was found. Built 2026-10-19 in the first release (the cutover plan, R1.03, R1.10).
   Where: `templates/project.md`, `CLAUDE.md` (prime directive 6,
   Repository layout), `scripts/forge-clone.py`,
   `.claude/skills/new-project/SKILL.md`,
@@ -683,8 +683,9 @@ boundary kept by hand or an order of work.
   the preparation of the cutover plan (R1.18). Where:
   `scripts/forge-report.py`, `.claude/skills/critique/SKILL.md`,
   `.claude/skills/challenge/SKILL.md`, `.claude/skills/check/SKILL.md`;
-  the shape cited in CLAUDE.md and in the contracts.  ### Rendering and
-  publishing
+  the shape cited in CLAUDE.md and in the contracts.
+
+### Rendering and publishing
 - **SOL.0400 Recipe and render.** A recipe is one file,
   `recipes/<recipe>.md`. `/render <recipe>` generates the output in an
   isolated subagent into `renders/<recipe>.md`, or the recipe's optional
