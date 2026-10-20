@@ -2,9 +2,10 @@
 forge_repos.py - what the forge-* git scripts share: the engine root,
 the git check, the list of repositories to visit, running git, the
 state of a repository against its origin (`remote_state`: up to date,
-behind, ahead, diverged, no origin; POS.1490), the registration of
-the merge drivers on the machine (`registration_state`; SOL.0740) and
-coloured output. Not a command.
+behind, ahead, diverged, no origin; POS.1490), the files of the
+global git configuration as git reads them (`global_config_files`),
+the registration of the merge drivers on the machine
+(`registration_state`; SOL.0740) and coloured output. Not a command.
 
 The engine root is the parent of the directory this file lies in
 (`scripts/`). A project is `projects/<slug>`; it is a repository when
@@ -101,6 +102,44 @@ REGISTRATION = (
     ("merge.renormalize", "true"),
 )
 DRIVER_KEY = "merge.forge-records.driver"
+
+
+def _unquote(path):
+    """A path as git prints it in --show-origin: C-quoted when it holds
+    a backslash, a quote or a byte beyond ASCII ("C:\\\\Users\\\\..."),
+    plain otherwise."""
+    if not (len(path) >= 2 and path[0] == path[-1] == '"'):
+        return path
+    body, out, i = path[1:-1], bytearray(), 0
+    while i < len(body):
+        if body[i] == "\\" and i + 1 < len(body):
+            if re.match(r"[0-7]{3}", body[i + 1:i + 4]):
+                out.append(int(body[i + 1:i + 4], 8))
+                i += 4
+                continue
+            out += {"n": b"\n", "t": b"\t"}.get(body[i + 1], body[i + 1].encode())
+            i += 2
+            continue
+        out += body[i].encode()
+        i += 1
+    return out.decode("utf-8", "replace")
+
+
+def global_config_files():
+    """The files of the global git configuration as git itself reads
+    them, the global file first and then every file it includes; empty
+    when there is none yet. The forge never names the file by a path of
+    its own: git decides where it lies (HOME, HOMEDRIVE and HOMEPATH,
+    GIT_CONFIG_GLOBAL), and it may differ from place to place."""
+    listing = git_out(["config", "--global", "--list", "--show-origin"], ENGINE_ROOT)
+    files = []
+    for line in listing.splitlines():
+        m = re.match(r"^file:(.+?)\t", line)
+        if m:
+            f = _unquote(m.group(1))
+            if f not in files:
+                files.append(f)
+    return files
 
 
 def registration_state():

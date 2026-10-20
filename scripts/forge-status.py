@@ -36,7 +36,6 @@ EXAMPLES
 """
 
 import argparse
-import re
 import sys
 from pathlib import Path
 
@@ -78,16 +77,10 @@ def main(argv):
     a = ap.parse_args(argv)
     fr.need_git()
     fr.need_engine_repo()
-    # The global configuration file git actually reads, named here so
-    # that /setup never has to ask git directly (CLAUDE.md,
-    # Persistence). With includes in play git names every file it read;
-    # the first is the global file itself.
-    listing = fr.git_out(["config", "--global", "--list", "--show-origin"], fr.ENGINE_ROOT)
-    files = []
-    for line in listing.splitlines():
-        m = re.match(r"^file:(.+?)\t", line)
-        if m and m.group(1) not in files:
-            files.append(m.group(1))
+    # The global configuration file git actually reads (CLAUDE.md,
+    # Persistence); the first is the global file itself, the rest the
+    # files it includes.
+    files = fr.global_config_files()
     print("global git config: " + (", ".join(files) if files
                                    else "none yet - git creates ~/.gitconfig at its first write"))
     missing, broken = fr.registration_state()
