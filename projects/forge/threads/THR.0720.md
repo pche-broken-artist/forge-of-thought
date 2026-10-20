@@ -54,3 +54,28 @@ forge-config), CLAUDE.md Persistence (~/.gitconfig, "that same
 global file") and the Repository layout's scripts line; the open
 item of /setup, the Author line PCHe in CLAUDE.local.md, still
 waits for a verdict.
+
+Run 2026-10-20 on the principal's word, on his machine: --register
+--zdiff3 and --guard written; the stanzas of github.com and
+gitlab.sazka.cz rewritten to `.gitconfig-github.com` and
+`.gitconfig-gitlab.sazka.cz` by --identity --replace, the names set
+by the author of his commits on each host (git log): PCHe
+<petr.chlumsky@gmail.com> on github.com, "Petr Chlumsky"
+<chlumsky@allwyn.cz> on gitlab.sazka.cz; --replace widened to
+rewrite a differing name or e-mail in the identity file. The
+relative include path verified by git itself (--show-origin names
+the file beside the global one, in the engine and in ai-strategy).
+Found on the way: the engine's own `.git/config` carried a local
+user.name and user.email, a remnant of the identity once set at
+creation, which overrode every stanza (today's commit 08f4ee7 was
+signed by it); removed by the principal with `git config --unset`.
+Worth considering in the round: forge-config or forge-status
+reporting a repository-local identity, since the forge sets none
+(POS.0950). The old files .gitconfig-github and .gitconfig-sazka
+are used by nothing; the principal may delete them.
+
+State 2026-10-20: open. The machine is done. Left: the intent round
+(POS.1050, POS.0950, SOL.0150, SOL.0740, the setup skill, CLAUDE.md
+Persistence and the Repository layout's scripts line, the report of
+a local identity) and the Author line PCHe in CLAUDE.local.md,
+waiting for a verdict.

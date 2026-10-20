@@ -23,6 +23,8 @@ WHAT IT DOES
     A key that already carries the value asked is reported and left;
     a key that carries another value is reported and left as well,
     never overwritten, unless --replace is given for an identity.
+    Values are compared as git stores them, so a name differing in a
+    diacritic differs.
 
     Bare: what is there - the file git reads, the registration of the
     merge drivers, the guard, a global identity and the per-host
@@ -48,8 +50,9 @@ WHAT IT DOES
     the identity file always lies beside the file that includes it;
     then that file, with [user] name and email, written by
     `git config --file` where it is missing. A stanza that carries
-    another path, an absolute one among them, is reported and left;
-    --replace rewrites it to the relative path.
+    another path, an absolute one among them, and an identity file
+    that carries another name or e-mail are reported and left;
+    --replace rewrites them.
 
 WHAT IT NEEDS
     Python 3.8 or newer; git 2.36 or newer on PATH (hasconfig in
@@ -162,8 +165,8 @@ def identity(host, name, email, replace):
         fr.fail("git reports no global configuration file after the write.")
     target = Path(files[0]).parent / include
     scope = ("--file", str(target))
-    ensure("user.name", name, False, *scope)
-    ensure("user.email", email, False, *scope)
+    ensure("user.name", name, replace, *scope)
+    ensure("user.email", email, replace, *scope)
     print(f"   identity file: {target}")
 
 
@@ -180,7 +183,7 @@ def main(argv):
     ap.add_argument("--identity", nargs=3, metavar=("HOST", "NAME", "EMAIL"),
                     help="the two includeIf stanzas of one host and its identity file")
     ap.add_argument("--replace", action="store_true",
-                    help="with --identity: rewrite a stanza that carries another path")
+                    help="with --identity: rewrite a stanza or an identity that differs")
     a = ap.parse_args(argv)
     fr.need_git()
     if a.zdiff3 and not a.register:
