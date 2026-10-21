@@ -79,3 +79,7 @@ State 2026-10-20: open. The machine is done. Left: the intent round
 Persistence and the Repository layout's scripts line, the report of
 a local identity) and the Author line PCHe in CLAUDE.local.md,
 waiting for a verdict.
+
+State 2026-10-21: open. The engine check of 2026-10-21 found the gap
+as FND.2260, the setup skill against forge-config; the round above
+settles both.

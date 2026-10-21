@@ -2,7 +2,7 @@
 project: forge
 purpose: readme
 audience: humans arriving at the repository
-version: 0.67
+version: 0.68
 output: /README.md
 ---
 
@@ -185,8 +185,8 @@ summarising the newest row. -->
   fenced block: **Starting a new project** — `/new-project my-idea`,
   `/forge intent`, then the one-off act in the reader's own terminal
   at the engine root, `git -C projects/my-idea init -b main`, with
-  the comment that Claude is not allowed to run git and a remote may
-  follow, then `/save`, with the comment that a save that commits
+  the comment that Claude writes nothing into git itself, the init
+  and a remote being the reader's one-off act, then `/save`, with the comment that a save that commits
   nothing names its cause (no repository, or no git identity for the
   host) and `docs/start/first-result.md` says what to do;
   **Bringing an existing project** — `/import-project <project url>`

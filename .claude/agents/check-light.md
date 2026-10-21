@@ -50,7 +50,9 @@ What you verify:
    **Resource indexes** — `sources/00-INDEX.md` and
    `research/00-INDEX.md` exist and agree with their directories: a
    file (or bundle) without an entry, an entry without a file, a
-   bundle entry whose inner `00-INDEX.md` is missing; a sources entry
+   bundle entry whose inner `00-INDEX.md` is missing, a file inside a
+   bundle without an entry in the bundle's index, an entry there
+   without a file; a sources entry
    without its `Date` and `Form` fields (templates/index.md) is an
    immediate fix; a binary without an extract and an extract without
    its original are the normal case (POS.1040), never a finding, and

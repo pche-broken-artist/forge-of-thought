@@ -1,6 +1,6 @@
 ---
 description: Register external input (a file, or text pasted into the conversation) in sources/ — store, ask what it is for, catalogue, nothing more
-argument-hint: "[file-or-path] [project-slug]"
+argument-hint: "[file-or-path] [project-slug] [--bundle name]"
 disable-model-invocation: true
 ---
 
@@ -44,6 +44,17 @@ else. Never silently re-register.
    arrives without one; validate a supplied one against the actual
    contents and report gaps. A file may later be split out to its own
    entry if it needs separate tracking.
+   **Growing bundles** (`--bundle <name>`): a bundle of one origin
+   that keeps arriving. `sources/<name>/` missing: it is born as
+   growing, its `00-INDEX.md` from `templates/index-bundle.md` with
+   the opening paragraph saying it grows, the file inside. Existing
+   and growing: store the file inside it, never beside it, its own
+   entry in the bundle's index, the top entry's What kept true.
+   Existing and arrived whole: refuse and say why. In sweep mode a
+   file inside a bundle without an entry in the bundle's index is
+   offered for registration there, never reported as a changed
+   source, and a new subdirectory is asked whether it grows at the
+   question of its role.
 2. **Date, best effort, never a question** (CLAUDE.md, Document
    chain, External inputs). The document's origin date goes into the
    `Date` field of its index entry if it can be determined for free:
@@ -75,7 +86,8 @@ else. Never silently re-register.
    is a mutable block of the record driver, and a Role filled in
    later would be a change of the block (POS.1670). One question,
    "what is it for?", per source — a bundle one question for the
-   whole — one per message, as the elicitation interview has it; in
+   whole, a file added to a growing bundle one of its own — one per
+   message, as the elicitation interview has it; in
    sweep mode source by source. The principal answers with the role,
    or tells Claude to infer it — then Claude writes what the file
    itself declares, marked *(inferred)*. Never inferred unasked, and

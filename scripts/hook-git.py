@@ -19,9 +19,11 @@ WHAT IT DOES
         with a value, log --output, fetch --prune), a global option
         that changes how git runs (-c, --git-dir, --work-tree,
         --exec-path), git inside another command (xargs, sh -c, a
-        substitution) and a part the script cannot read. It never
-        answers ask: an ask is not known to hold in an automatic
-        permission mode, a deny holds in every mode.
+        substitution) and a part the script cannot read. No rule
+        answers ask today; the script composes an ask over the whole
+        command where a rule would, since the test of 2026-10-21
+        showed an ask holds in the automatic permission mode
+        (THR.0400); a deny holds in every mode.
     A part that is not git is left to the harness: the hook answers
     allow only where every part of the command is a reading git,
     deny where any part is a git it refuses, and nothing otherwise.

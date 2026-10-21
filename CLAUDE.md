@@ -262,6 +262,10 @@ POS.1320.
    source is used. A set of related files
    (e.g. a downloaded site with its index) lives as a subdirectory
    `sources/<slug>/` and counts as one source with one ledger entry;
+   a bundle of one origin that keeps arriving (issues, minutes) grows
+   file by file through `/ingest --bundle <name>`, each file immutable
+   from its own registration, which of the two a bundle is its index
+   says (POS.0180);
    intent provenance cites individual files by path. Every bundle
    carries its own `00-INDEX.md` catalogue (skeleton
    `templates/index-bundle.md`), created by `/ingest` at registration
@@ -391,7 +395,11 @@ scripts/                   # forge-save / forge-pull / forge-status
                            # of a report), forge-ledger (the ledger
                            # made at read time), forge-migrate (a
                            # project brought to the shape of a
-                           # release), doc2md (document →
+                           # release), forge-config (the user's
+                           # global git configuration through git:
+                           # the registration of the drivers, the
+                           # guard, the identity per host), doc2md
+                           # (document →
                            # Markdown), md2pptx (deck render →
                            # PowerPoint), md2docx (render → Word),
                            # each by pandoc or by a model, md2video
@@ -413,9 +421,10 @@ scripts/                   # forge-save / forge-pull / forge-status
                            # agents, and the walkthrough method),
                            # agents (the reviewers, the
                            # documentation's planner and writer),
-                           # settings
-                           # (settings.local.json: the session
-                           # model — gitignored)
+                           # settings (settings.json: the two
+                           # hooks and the deny rule of the other
+                           # shell, POS.1200; settings.local.json:
+                           # the session model — gitignored)
 templates/                 # canonical skeletons
 projects/                  # gitignored (projects/*) except
                            # projects/forge — every other project is
@@ -519,7 +528,9 @@ with no global `user.name`/`user.email` (offered by `/setup`), so a
 repository on a host with no stanza fails aloud instead of taking a
 default. `/setup` also registers, once per machine and on the user's
 word, the merge drivers and the git settings they need in that same
-global file, and `forge-status` says when the registration is
+global file, the stanzas, the guard and the registration written
+through `scripts/forge-config.py`, and `forge-status` says when the
+registration is
 missing, since an unregistered clone silently falls back to a
 conflict (SOL.0740). A project "not under git" is a
 property, not a defect. The scripts in `scripts/` are the only door
@@ -630,7 +641,9 @@ the templates and in the skills stands for the number: four digits as
 long as the number fits, a fifth only beyond 9999 (`POS.10000`), no
 zero added to an existing ID, and every sorting of IDs numeric by
 prefix and number (POS.0220). IDs are **global and stable — never
-renumbered.** Items may move between groups without ID change.
+renumbered**, the one exception POS.0220's: two items with one
+number, the younger renumbered with a record. Items may move between
+groups without ID change.
 
 Numbering: items in tens (`REQ.0010, REQ.0020`), each new group starting
 at the next hundred (`REQ.0100, REQ.0110`). Overflow takes the next free
@@ -762,7 +775,7 @@ What a command does in full is its skill's
 | `/import-project <git-url>` | bring an existing project into `projects/` |
 | `/forge [slug]` | the state map of a project |
 | `/forge <state> [slug]` | iterate the target artefact through its definition |
-| `/ingest [file] [slug]` | store, register and index external input in sources/; bare = sweep sources/ |
+| `/ingest [file] [slug] [--bundle name]` | store, register and index external input in sources/; `--bundle` into a growing bundle, born at its first file; bare = sweep sources/ |
 | `/render <recipe> [slug]` | regenerate a render from its recipe |
 | `/publish <recipe> [slug]` | make the designed file from a render, through a model |
 | `/document [slug]` | generate the documentation of the engine or of a project into docs/ |

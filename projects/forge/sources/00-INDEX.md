@@ -5,14 +5,10 @@ directory: sources
 
 # Index — sources of Forge of Thought
 
-<!-- Resource index: a light catalogue so that Claude and the principal
-know what exists here and what it is for without re-reading the files.
-Freely rewritten (like the ledger) while the files it catalogues stay
-immutable. Tracks nothing — no processing state, no positions — and is
-an automatic input of no command; a contradiction between the intent
-and a resource is not a finding. Registration state lives in the ledger.
-Written by /ingest; verified by /check. A bundle is ONE entry pointing
-to its own 00-INDEX.md — two levels, never deeper. -->
+<!-- Resource index: what exists here and what it is for; the rules
+are CLAUDE.md's (Document chain, External inputs). Written by /ingest (sources) and
+/research (research). A bundle (sources/<slug>/) is ONE entry pointing
+to its own 00-INDEX.md. -->
 
 ### `forge-run-record-health.md`
 - **What:** A structured record of one real run of the forge (10–13 September 2026) on a private project whose terminal artefact was a report for a third party, not an assignment: a timeline (E), the mechanisms used (D), eight failures (F), thirteen things that worked (W), thirteen engine gaps (G) and sixteen proposals (P), with stable item numbers for citation. Carries nothing of the subject project's content.
@@ -197,6 +193,14 @@ to its own 00-INDEX.md — two levels, never deeper. -->
 - **Form:** text
 - **Role:** the piece by which POS.1730 got its sentence on the committed state and the plan its corrections of 2026-10-18; the shape tag it corrects was dropped the same day by CHL.0610.
 - **Use for:** the reason the allocation over branches is a rule with a known limit and not a guarantee.
+
+### `github-issues/`
+- **What:** the issues visitors open on the engine's GitHub repository, one file per issue with its comments at download; a growing bundle, each file immutable from its registration, catalogued by its own `00-INDEX.md`. Holds issue #3 (repository detection by `.git` instead of asking git).
+- **Origin:** https://github.com/pche-broken-artist/forge-of-thought/issues, downloaded through the GitHub API by Claude on the principal's word.
+- **Date:** 2026-10-21, from the ingest
+- **Form:** text
+- **Role:** the reports of visitors from which threads of the intent are opened; what each issue is for is its entry in the bundle's index.
+- **Use for:** what a visitor reported, in his words and with the principal's public replies.
 
 ### `projects/lib-allwyn/sources/fork-brd/` (library document, cited, not copied)
 - **What:** the BRD layer built in a colleague's fork of the engine (intent 2.8, August 2026): the fork's rules, templates, skills and critic, three BRDs with three critique rounds, and the group's BRD standard and tutorial; the bundle's own index catalogues the fourteen files.

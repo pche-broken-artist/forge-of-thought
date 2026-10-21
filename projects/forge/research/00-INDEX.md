@@ -5,12 +5,10 @@ directory: research
 
 # Index — research of Forge of Thought
 
-<!-- Resource index: a light catalogue so that Claude and the principal
-know what exists here and what it is for without re-reading the files.
-Freely rewritten (like the ledger) while the files it catalogues stay
-immutable. Tracks nothing — no processing state, no positions — and is
-an automatic input of no command. Registration state lives in the
-ledger. Written by /research; verified by /check. -->
+<!-- Resource index: what exists here and what it is for; the rules
+are CLAUDE.md's (Document chain, External inputs). Written by /ingest (sources) and
+/research (research). A bundle (sources/<slug>/) is ONE entry pointing
+to its own 00-INDEX.md. -->
 
 ### `2026-08-25-comparable-projects-landscape.md`
 - **Question:** do projects like Forge of Thought exist — a governed chain from raw idea to a versioned, adversarially reviewed assignment — and if so, what can be borrowed, and how unique is the forge? Three families swept: AI spec-driven frameworks (Spec Kit, BMAD and kin), structured-thinking and adversarial-review tooling (ADR, RFC/PEP, multi-agent critique), requirements standards (29148, INCOSE, BABOK).

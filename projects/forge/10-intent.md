@@ -1,5 +1,5 @@
 ---
-version: 5.27
+version: 5.28
 status: draft
 project: forge
 audience: principal + Claude only
@@ -596,8 +596,15 @@ position that already stands elsewhere.
   to the file; what someone said in a meeting is never silently promoted
   to the principal's own position. A set of related files — a downloaded
   site with its index, a document with attachments — may live as a
-  subdirectory `sources/<slug>/`: one source, one entry of the index,
-  immutable as a whole from registration. File-level detail is not lost:
+  subdirectory `sources/<slug>/`: one source, one entry of the index. A
+  bundle is either a whole that arrived at once, immutable as a whole
+  from registration, or a stream of one origin that keeps arriving, the
+  issues of a repository or the minutes of a standing meeting: such a
+  bundle grows, a new file added with its own entry in the bundle's
+  index on the principal's word through `/ingest`, each file immutable
+  from its own registration, the bundle's opening paragraph saying which
+  of the two it is (decided 2026-10-21, THR.0730). File-level detail is
+  not lost:
   provenance in the intent cites individual files by path, and the
   bundle's index or extract lists its contents. Isolated files stay
   directly in `sources/`. Every bundle carries a `00-INDEX.md` catalogue
@@ -900,15 +907,22 @@ position that already stands elsewhere.
 - **POS.0220** IDs use the format `PREFIX.NNNN` with three-letter
   prefixes, numbered in tens, each new group starting at the next
   hundred. IDs are global and stable, never renumbered, with one
-  exception, written here as such: where a merge shows two items that
-  took one number on two branches, the item of the branch that landed
-  second takes a new number, allocated over the local branches
-  (POS.1730), within the author's block where the project has one, which
-  see a third branch not yet landed, never re-read from the last number
-  the two both drew from; a `changed` record with the reason "ID clash
-  at merge" and `Was` the old number, its citations corrected in that
-  branch, and for a thread the file renamed with it (POS.1680;
-  CHL.0510). Items may move between groups freely. Groups are plain
+  exception, written here as such: two items with one number in one
+  project, however they came to it — a merge of two branches, a hand's
+  edit, two windows, documents born apart as three work specifications
+  of one project were on 2026-10-19 (DEC.0270) — are settled the same
+  way: the older keeps its number, the younger takes a new one, with a
+  `changed` record whose reason names the clash and `Was` the old
+  number, its citations corrected, and for a thread the file renamed
+  with it (POS.1680; CHL.0510). The younger is the item whose `created`
+  record is the later; at a merge the item of the branch that landed
+  second, its number allocated over the local branches (POS.1730),
+  within the author's block where the project has one, which see a
+  third branch not yet landed, never re-read from the last number the
+  two both drew from; where the histories do not decide, the
+  principal's word. The ledger script reports the clash (POS.1640) and
+  writes nothing: the renumbering is a write into the artefacts,
+  Claude's with the principal. Items may move between groups freely. Groups are plain
   headings with no IDs, no metadata and no lifecycle; depth is capped at
   two levels. An ID keeps four digits as long as the number fits and
   takes a fifth only beyond 9999 (`POS.10000`); no zero is added to an
@@ -1466,9 +1480,11 @@ position that already stands elsewhere.
   allow for a reading verb and deny for everything else, naming the
   script to use instead: a verb it does not know, an alias, a reading
   verb with a writing flag or a global option that changes where or how
-  git runs, and a part it cannot read are denied, never asked, since an
-  ask is not known to hold in an automatic permission mode; a part of
-  the command that is not git is left to the harness. The prefix deny
+  git runs, and a part it cannot read are denied, never asked today; an
+  ask was tried on 2026-10-21 and holds in the automatic permission
+  mode, and the hook can compose one over the whole command, kept for
+  the writing half of THR.0710; a part of the command that is not git
+  is left to the harness. The prefix deny
   rules of the harness were the wall from 2026-09-21 to 2026-10-21 and
   were not kept for the writing verbs: a prefix rule matches the text
   usually typed, not the command, so that `git -C . push` passes it, a
@@ -1807,7 +1823,11 @@ position that already stands elsewhere.
   Linux and macOS. Instance facts are out of the scripts: no remote URL,
   no author identity, no first-run initialisation — git configuration is
   the user's (POS.0950). Portability is verified by running the set on
-  Linux (WSL suffices); until then it is a writing rule, not a claim.
+  Linux: the git scripts, the ledger and docs-state ran there in
+  October 2026 on a user's machine
+  (`sources/github-issues/issue-3-repo-detection.md`, his PR #2 of
+  2026-10-21 made there); the conversions and the two hooks are a
+  writing rule still, not a claim, until a run on Linux says otherwise.
   The scripts are Python, decided 2026-10-02 on the feedback of the
   forge's users and done 2026-10-09, the per-prompt hook included:
   `python` on PATH is their one prerequisite, the same Python the

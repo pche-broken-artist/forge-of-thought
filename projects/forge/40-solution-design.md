@@ -1,5 +1,5 @@
 ---
-version: 0.35
+version: 0.36
 status: draft
 project: forge
 audience: whoever realises the solution, a person or an agent
@@ -418,7 +418,16 @@ boundary kept by hand or an order of work.
   index against directory. A bundle's `00-INDEX.md` is created by
   `/ingest` at registration when the bundle lacks one, and a supplied
   one is validated against the contents, origin dates best effort, never
-  asked for; if a bundle's files ever need separate fates, a file is
+  asked for; a growing bundle (POS.0180) takes a new file through
+  `/ingest <file> [slug] --bundle <name>`: the bundle born as growing at
+  its first file, its `00-INDEX.md` from the skeleton with the paragraph
+  saying it grows, the file stored inside, its entry written in the
+  bundle's index after the question of its role, the top entry's What
+  kept true, the flag refused where the bundle arrived whole; in sweep
+  mode a file inside a bundle without an entry is offered for
+  registration there, never reported as a breach, and a new
+  subdirectory is asked whether it grows at the question of its role;
+  if a bundle's files ever need separate fates, a file is
   split out to a ledger row of its own, the ledger being freely
   rewritten. Realises: POS.0840. Choice: no real alternative recorded.
   Where: `templates/index.md`, `templates/index-bundle.md`,
@@ -1029,8 +1038,11 @@ boundary kept by hand or an order of work.
   `find -exec`, an interpreter with `-c` or `-e`) and git inside a
   command substitution; the word git as an argument of any other
   program, a commit message for `forge-save.py` among them, is text and
-  left to the harness (the refusal of 2026-09-26, THR.0400). It never
-  answers ask. Its cases are its own `--test`, run before it is
+  left to the harness (the refusal of 2026-09-26, THR.0400). No rule
+  of it answers ask today; it composes an ask over the whole command
+  where a rule would, since the test of 2026-10-21 showed an ask holds
+  in the automatic mode (THR.0400). Its cases are its own `--test`, run
+  before it is
   registered and after every change; `--judge` prints the verdict of one
   command. The PowerShell tool stays closed to git whole,
   `PowerShell(git *)` under `permissions.deny`, so that there is one
