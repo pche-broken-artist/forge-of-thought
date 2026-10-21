@@ -398,7 +398,10 @@ scripts/                   # forge-save / forge-pull / forge-status
                            # (screenplay render → video or player
                            # events),
                            # hook-walkthrough (the per-prompt hook
-                           # of .claude/settings.json), docs-state,
+                           # of .claude/settings.json), hook-git
+                           # (the wall between reading git and
+                           # writing it, a PreToolUse hook of the
+                           # same file), docs-state,
                            # docs-index and docs-check (the
                            # documentation: the state of its pages,
                            # its index, its check); forge_repos,
@@ -520,9 +523,11 @@ global file, and `forge-status` says when the registration is
 missing, since an unregistered clone silently falls back to a
 conflict (SOL.0740). A project "not under git" is a
 property, not a defect. The scripts in `scripts/` are the only door
-to git — reading state included, no exceptions, for Claude enforced
-by the deny rules of `.claude/settings.json`; how many there are is
-not a rule. The scripts that serve the engine and every project repository, each
+to a write of git; reading git directly is open, the line between
+the two held for Claude by the hook `scripts/hook-git.py` of
+`.claude/settings.json`, which denies every write and names the
+script to use (POS.1200); how many scripts there are is not a
+rule. The scripts that serve the engine and every project repository, each
 described in full by its own help header: `forge-save.py` commits and
 pushes, `forge-pull.py` fast-forwards from the remotes (on the engine
 the upgrade channel), `forge-status.py` reports state without

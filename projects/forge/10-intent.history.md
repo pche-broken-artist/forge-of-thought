@@ -15,8 +15,8 @@ place without an ID: a section, the file, or in the forge's own
 project the operating layer. Reason is left out on
 `created`; `Action` and `Was` only where the record has them, `Was`
 always last, paragraphs in it divided by `<br>`; a thread that
-closes gets a `closed` record saying when and by what, no `Was`:
-the closed file is the archive (POS.1680). At the birth of a
+closes gets a `closed` record, no `Was` (the rules of a thread:
+`.claude/skills/forge/states/intent.md`, Threads and files). At the birth of a
 document, one record of the file and one naming every item born
 with it. Lines are not wrapped.
 A record of state only carries the current version and does not
@@ -27,8 +27,11 @@ dropped, <note>`; a finding or a challenge settled, `FND.NNNN |
 closed | <what fixed it>`, in the history of the artefact whose
 version settled it, or of the intent where no version did or the
 check was of the engine, resolved for a finding, accepted for a
-challenge; a work product's state, `<file> | changed | state: by
-hand` or the making's record, in its specification's history.
+challenge; a work product's state in its specification's history:
+the making's record `<file> | changed | state: current; made <date>
+from <the inputs with their versions>`, a write of the specification
+after a making `<file> | changed | state: stale`, the principal's
+word `<file> | changed | state: by hand`.
 `rejected`, `parked` and `obsolete` are a decision's Verdict
 (templates/decisions.md), never a record here (POS.1610). -->
 
@@ -473,3 +476,9 @@ hand` or the making's record, in its specification's history.
 - 2026-10-19 | 5.25 | PCHe | FND.2090, FND.2100, FND.2110, FND.2120, FND.2130, FND.0980, FND.2140, FND.2150, FND.2160, FND.2170, FND.2180, FND.2190, FND.2200, FND.2210, FND.2220 | closed | the walkthrough of the light, engine and single-source-of-truth checks of 2026-10-19 after R1.15 to R1.17 of the cutover plan, all accepted: the plan cites the note on the IDs outside the pattern without the ID; the ledger skeleton's header, comments and archive sentence say what each column holds and where it is read from, kind and language echoed from the project file; the layout names the project's .gitignore and ledger.archive.md; templates/project.md owns what a project without the file is, cited by the two checks, the map, /import-project and the two script headers; the skill /migrate built as the door to scripts/forge-migrate.py, its Commands row and its sentence in Persistence; the Waiting rule and the Reports list in the ledger skeleton alone; the rules of a thread in the intent's definition alone; the kinds of a page and mirrored or derived in the docs contract; the three reviewer commands cut to the invocations; the state records' shapes in templates/history.md alone, the making's record among them; four lists cut to their citation; the offers of a remote state /pull's alone; the identity causes /setup's alone.
 - 2026-10-19 | 5.26 | PCHe | the operating layer | changed | The first release of the brief collaboration built, R1.03 to R1.29 of the cutover plan: the project file, the headers without changing fields, the state in records, threads as files, the attributes, the ledger made at read time, the migration and its door /migrate (SOL.0670 to SOL.0730, SOL.0800). | Action: on every machine that holds the engine: `forge-pull`, then `/setup` for the registration of the merge drivers; then every project you keep, each on one clone: `/migrate <slug>` and `/save <slug>`, a project already migrated elsewhere `/pull <slug>`; nobody works in two on one project before the second release.
 - 2026-10-19 | 5.26 | PCHe | FND.2230 | closed | the layout of CLAUDE.md names the published companion published/<recipe>.md (the check engine of 2026-10-19 after R1.20 and R1.27, the immediate fix taken).
+- 2026-10-21 | 5.27 | PCHe | POS.0550 | changed | The scripts the only door to a write of git, reading opened to Claude: the scripts copied git verb by verb to read state, and the harness itself runs a reading git without a prompt once the deny rule is gone (THR.0710, the principal's word of 2026-10-21). | Was: The scripts in `scripts/` are the only door to git — reading state included, no exceptions, enforced for Claude by POS.1200; how many there are is whatever the door needs, never a rule.
+- 2026-10-21 | 5.27 | PCHe | POS.1200 | changed | The wall moves from the deny rule `Bash(git *)` to a PreToolUse hook, scripts/hook-git.py, on Bash alone, PowerShell closed whole as before: the deny rule blocked reading with writing, cannot be carved by an allow rule and is passed by `git -C . push`; the hook reads the whole command and denies, never asks (THR.0400, THR.0710). | Was: The scripts-only door to git is a wall of the harness, not conduct alone; a commit carries no attribution. The rule of POS.0550 — the scripts in `scripts/` are the only door to git, reading state included — is enforced by the harness. The rule binds the forge, not the principal: his own git from the shell is his. Claude Code no longer adds or proposes a `Co-Authored-By` or `Claude-Session` trailer: the commit message is the one the principal confirmed, word for word. Decided 2026-09-21 by the principal.
+- 2026-10-21 | 5.27 | PCHe | THR.0710 | changed | The reading half decided ahead of the trigger, the writing half left open on it.
+- 2026-10-21 | 5.27 | PCHe | THR.0400 | changed | The hard half built for git alone, allow or deny, never ask; pandoc, markitdown and the ask on writes still open.
+- 2026-10-21 | 5.27 | PCHe | FND.2240 | closed | the two cells of work/collaboration-cutover.md (R1.23, R1.29) cite the note on the IDs outside the pattern without the ID, as the resolution of FND.2090 said (the light check of 2026-10-21, the immediate fix taken).
+- 2026-10-21 | 5.27 | PCHe | FND.2250 | closed | the template's comment, as it stands in templates/history.md since 2026-10-19, in all sixteen history companions (the light check of 2026-10-21, the immediate fix taken).

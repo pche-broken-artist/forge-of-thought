@@ -1,5 +1,5 @@
 ---
-version: 0.34
+version: 0.35
 status: draft
 project: forge
 audience: whoever realises the solution, a person or an agent
@@ -131,7 +131,8 @@ boundary kept by hand or an order of work.
   Realises: POS.1170, POS.0850. Choice: a hook that repeats the rule
   against trusting text loaded once; the cost is that a hook is
   context and not enforcement. The gate that would enforce the three
-  lines of conduct is open, THR.0400. Where:
+  lines of conduct is open, THR.0400, its git half built (SOL.0520).
+  Where:
   `.claude/settings.json`, `scripts/hook-walkthrough.py`.
 - **SOL.0040 The walkthrough skill.** The shape of the walkthrough
   and of the elicitation interview lives in
@@ -1004,23 +1005,49 @@ boundary kept by hand or an order of work.
   where it moved from and to and the subjects of the commits between, so
   that the releases crossed can be read off. Realises: POS.0550,
   POS.1060, POS.1110, POS.0940, POS.1490. Choice: scripts as the only
-  door against git typed by the model. Where: `scripts/forge-*.py`,
+  door to a write against git typed by the model. Where:
+  `scripts/forge-*.py`,
   `scripts/forge_repos.py`.
-- **SOL.0520 The wall.** Protection relies on Claude Code's
-  permission system, not an OS-level sandbox: commands and file
-  operations run under permission prompts and allowlists, shared
-  deny rules in `.claude/settings.json` block sensitive paths
-  (`~/.ssh`, `~/.aws`) and raw `git`, and web access is approved per
-  domain on first use. The file denies Claude the `git` command in
-  both shells (`Bash(git *)`, `PowerShell(git *)` under
-  `permissions.deny`). In the same file `attribution.commit` is
-  empty and `attribution.sessionUrl` is false, so Claude Code adds
-  and proposes no `Co-Authored-By` or `Claude-Session` trailer.
-  Realises: POS.0550, POS.1200, POS.1090. Choice: the permission
-  system against an OS-level sandbox, which was tried on 2026-08-04
-  and deliberately dropped: it is unavailable on Windows, where
-  enforcing it meant no shell at all. Where:
-  `.claude/settings.json`.
+- **SOL.0520 The wall.** Protection relies on Claude Code's permission
+  system, not an OS-level sandbox: commands and file operations run
+  under permission prompts and allowlists, shared deny rules in
+  `.claude/settings.json` block sensitive paths (`~/.ssh`, `~/.aws`),
+  and web access is approved per domain on first use. The line between
+  reading git and writing it is a `PreToolUse` hook of the forge's own,
+  `scripts/hook-git.py`, registered in the same file on the Bash tool
+  and started in exec form like the per-prompt hook (SOL.0030): it
+  splits the command at the shell's separators, cuts out heredoc bodies
+  as text, finds every call of git past its global options and answers
+  allow for a reading verb with reading flags, deny for everything else
+  with the script to use instead, and nothing for a command that is not
+  git. Denied are the writing verbs, a verb it does not know, an alias
+  among them, a reading verb with a writing flag (`branch -d`, `tag v1`,
+  `config` with a value, `log --output`, `fetch --prune`), a global
+  option that changes how git runs (`-c`, `--git-dir`, `--work-tree`,
+  `--exec-path`; `-C` and `--no-pager` pass), git behind a wrapper that
+  runs what it is given (`sh -c`, `eval`, `xargs`, `env`, `timeout`,
+  `find -exec`, an interpreter with `-c` or `-e`) and git inside a
+  command substitution; the word git as an argument of any other
+  program, a commit message for `forge-save.py` among them, is text and
+  left to the harness (the refusal of 2026-09-26, THR.0400). It never
+  answers ask. Its cases are its own `--test`, run before it is
+  registered and after every change; `--judge` prints the verdict of one
+  command. The PowerShell tool stays closed to git whole,
+  `PowerShell(git *)` under `permissions.deny`, so that there is one
+  parser and one door. In the same file `attribution.commit` is empty
+  and `attribution.sessionUrl` is false, so Claude Code adds and
+  proposes no `Co-Authored-By` or `Claude-Session` trailer. Realises:
+  POS.0550, POS.1200, POS.1090. Choice: the permission system against an
+  OS-level sandbox, which was tried on 2026-08-04 and deliberately
+  dropped: it is unavailable on Windows, where enforcing it meant no
+  shell at all; the hook against the deny rule `Bash(git *)` that was
+  the wall from 2026-09-21 to 2026-10-21 and against deny rules on the
+  writing verbs: a prefix rule matches the text usually typed and `git
+  -C . push` passes it, a deny rule cannot be carved by an allow rule
+  and is not overridden by a hook, and two walls with one hole read
+  worse than one; the cost is a parser of the shell that is a heuristic,
+  so what it cannot read it denies. Where: `.claude/settings.json`,
+  `scripts/hook-git.py`.
 - **SOL.0530 Save and release.** `/release` runs its checks (SOL.0330),
   settles their findings, renders the README and the release notes
   unconditionally, with no staleness test, and ends by running `/save`
@@ -1422,7 +1449,7 @@ boundary kept by hand or an order of work.
   for the three documentation scripts; `forge_repos.py` also recognises
   a working tree, whose `.git` is a file, and resolves `<slug>@<branch>`
   (SOL.0770), and the five scripts of the brief `collaboration` share it
-  (SOL.0510). The per-prompt hook is a Python script too, started by
+  (SOL.0510). The two hooks are Python scripts too, started by
   `python` from `.claude/settings.json`. Rewritten from PowerShell 7 on
   2026-10-09, all nine at once, and tested that day against a fixture: a
   local bare remote, an engine cloned from it, a project with a remote

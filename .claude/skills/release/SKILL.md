@@ -14,7 +14,7 @@ a slug, ask which repository — a release is always one repository,
 never a sweep.
 
 1. Determine the state from `python scripts/forge-status.py --remote`
-   (the scripts are the only door to git — CLAUDE.md, Persistence). A
+   (the forge reads state by its script — CLAUDE.md, Persistence). A
    release runs on `main` only: on any other
    branch, stop and report the branch the repository is on and how to
    get back (`python scripts/forge-branch.py <slug> main`, after saving).

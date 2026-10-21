@@ -70,6 +70,10 @@ The sweep of THR.0210 — names
 from `CLAUDE.local.md` searched in what is about to be saved — is
 a neighbour of this gate and stays that thread's. Opened
 2026-09-20 (Claude's proposal, the principal's rules).
+State 2026-10-21: the hard half built for git, as `scripts/hook-git.py`
+(POS.1200), narrower than the gate proposed here: it reads git alone,
+answers allow or deny and never ask, and names the script to use where
+it denies. Still open: `pandoc` and `markitdown`, and the ask on writes.
 
 <!-- A thread (POS.1680): one open matter of the intent, in
 threads/THR.NNNN.md; not an artefact: no title, no version, no

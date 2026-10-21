@@ -17,8 +17,8 @@ check out and nothing else (POS.1100), and is never passed on; a project without
 not a defect (CLAUDE.md, Persistence) — relay the script's note in
 the report.
 
-1. Determine scope from `python scripts/forge-status.py` (the scripts are
-   the only door to git — CLAUDE.md, Persistence). It reports the
+1. Determine scope from `python scripts/forge-status.py` (the forge
+   reads state by its script — CLAUDE.md, Persistence). It reports the
    engine and each project
    separately, with the branch each is on. A project "not under git"
    with changes is named in the report and otherwise left alone.

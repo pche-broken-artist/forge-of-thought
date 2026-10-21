@@ -15,8 +15,8 @@ place without an ID: a section, the file, or in the forge's own
 project the operating layer. Reason is left out on
 `created`; `Action` and `Was` only where the record has them, `Was`
 always last, paragraphs in it divided by `<br>`; a thread that
-closes gets a `closed` record saying when and by what, no `Was`:
-the closed file is the archive (POS.1680). At the birth of a
+closes gets a `closed` record, no `Was` (the rules of a thread:
+`.claude/skills/forge/states/intent.md`, Threads and files). At the birth of a
 document, one record of the file and one naming every item born
 with it. Lines are not wrapped.
 A record of state only carries the current version and does not
@@ -27,8 +27,11 @@ dropped, <note>`; a finding or a challenge settled, `FND.NNNN |
 closed | <what fixed it>`, in the history of the artefact whose
 version settled it, or of the intent where no version did or the
 check was of the engine, resolved for a finding, accepted for a
-challenge; a work product's state, `<file> | changed | state: by
-hand` or the making's record, in its specification's history.
+challenge; a work product's state in its specification's history:
+the making's record `<file> | changed | state: current; made <date>
+from <the inputs with their versions>`, a write of the specification
+after a making `<file> | changed | state: stale`, the principal's
+word `<file> | changed | state: by hand`.
 `rejected`, `parked` and `obsolete` are a decision's Verdict
 (templates/decisions.md), never a record here (POS.1610). -->
 
@@ -174,3 +177,5 @@ hand` or the making's record, in its specification's history.
 - 2026-10-19 | 0.33 | PCHe | SOL.0670 | changed | The mark sentence mended: the turning over of 0.32 left the tail of the old citation behind. | Was: Built 2026-10-19 in the first release (the cutover plan, R1.03, R1.10).0620).
 - 2026-10-19 | 0.33 | PCHe | The reviewers, Rendering and publishing | changed | The heading "### Rendering and publishing" stood fused to the end of SOL.0810's paragraph since the part was appended at 0.26, so the group The reviewers ran on to Persistence for every reader by heading; the heading is a line of its own again, found by the documentation planner of 2026-10-19.
 - 2026-10-21 | 0.34 | vobornik | SOL.0680 | changed | The mark of the write was the index alone, and a project of the old shape outside git is never in an index: the `/forge` map and `/ledger` on such a project overwrote the hand-kept ledger, the archive `/migrate` freezes, with the generated one, against POS.1740 (found on a project symlinked from outside the engine, restored from a backup). The script now refuses on the old shape whether or not it is under git, prints, and says to run `/migrate`; over an old shape with no threads file Waiting says the threads were not read instead of "nothing". | Was: The script writes `ledger.md` only where the ledger is out of the index (the mark of SOL.0800); where it is tracked it refuses to write and prints to stdout or to `--out <path>`, the dry run of a real project going to `tmp/` (CHL.0560).
+- 2026-10-21 | 0.35 | PCHe | SOL.0520 | changed | The wall between reading git and writing it is the hook scripts/hook-git.py on Bash, the deny rule `Bash(git *)` dropped, PowerShell closed whole as before; what the hook allows, denies and leaves to the harness, and the choice against deny rules on the writing verbs (POS.1200, THR.0710, THR.0400). | Was: **SOL.0520 The wall.** Protection relies on Claude Code's permission system, not an OS-level sandbox: commands and file operations run under permission prompts and allowlists, shared deny rules in `.claude/settings.json` block sensitive paths (`~/.ssh`, `~/.aws`) and raw `git`, and web access is approved per domain on first use. The file denies Claude the `git` command in both shells (`Bash(git *)`, `PowerShell(git *)` under `permissions.deny`). In the same file `attribution.commit` is empty and `attribution.sessionUrl` is false, so Claude Code adds and proposes no `Co-Authored-By` or `Claude-Session` trailer. Realises: POS.0550, POS.1200, POS.1090. Choice: the permission system against an OS-level sandbox, which was tried on 2026-08-04 and deliberately dropped: it is unavailable on Windows, where enforcing it meant no shell at all. Where: `.claude/settings.json`.
+- 2026-10-21 | 0.35 | PCHe | SOL.0030, SOL.0510, Scripts in Python | changed | The gate's git half named as built (SOL.0520); the scripts the only door to a write; the two hooks Python scripts.

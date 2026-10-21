@@ -7,7 +7,6 @@
     "deny": [
       "Read(~/.ssh/**)",
       "Read(~/.aws/**)",
-      "Bash(git *)",
       "PowerShell(git *)"
     ]
   },
@@ -18,7 +17,23 @@
           {
             "type": "command",
             "command": "python",
-            "args": ["${CLAUDE_PROJECT_DIR}/scripts/hook-walkthrough.py"]
+            "args": [
+              "${CLAUDE_PROJECT_DIR}/scripts/hook-walkthrough.py"
+            ]
+          }
+        ]
+      }
+    ],
+    "PreToolUse": [
+      {
+        "matcher": "Bash",
+        "hooks": [
+          {
+            "type": "command",
+            "command": "python",
+            "args": [
+              "${CLAUDE_PROJECT_DIR}/scripts/hook-git.py"
+            ]
           }
         ]
       }

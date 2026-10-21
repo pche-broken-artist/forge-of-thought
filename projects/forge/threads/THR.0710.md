@@ -17,6 +17,15 @@ migrated engine works, a second author the trigger of the designed
 form in any case. What is seen on the way, a merge that hurt, a
 version or an ID taken twice, is noted here. The principal's word of
 2026-10-18. Opened 2026-10-18.
+State 2026-10-21: the reading half decided ahead of the trigger. Reading
+git directly is opened to Claude and the wall becomes the hook of
+POS.1200; what the thread still holds is the writing half, the deferred
+releases in their designed form or git opened for writing with the deny
+narrowed to the destructive verbs, on the same trigger as before.
+Claude's reading, offered once: the writing half carries what the
+harness does not know, the message word for word, the rebase before the
+push, the migration as a condition, the check before a save, and would
+leave those to text alone.
 
 <!-- A thread (POS.1680): one open matter of the intent, in
 threads/THR.NNNN.md; not an artefact: no title, no version, no

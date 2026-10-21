@@ -12,8 +12,9 @@ WHAT IT DOES
     the skill that holds the full shape. Since 2026-09-20 it also
     prints three lines of conduct: use the forge's scripts, explain
     and ask before running a command of one's own, and change nothing
-    that was not agreed and approved (THR.0400 of the forge intent; a
-    gate that enforces them is the thread's open matter).
+    that was not agreed and approved (THR.0400 of the forge intent; the
+    git half of the gate that enforces them is scripts/hook-git.py,
+    the rest the thread's open matter).
     It reads nothing, writes nothing, takes no arguments, and is
     independent of the working directory: a hook runs in the
     session's current working directory, not the engine root, so
@@ -30,7 +31,7 @@ LINES = [
     "A question from the principal keeps the item open: answer, then close it again.",
     "When a walkthrough or an interview is running, work by .claude/skills/walkthrough/SKILL.md.",
     "Tools: where the forge has a script (scripts/*.py), use the script, never the raw tool. "
-    "git only through scripts/forge-*.py, reading state included.",
+    "git: read directly, every write through scripts/forge-*.py (the hook denies the rest).",
     "Own commands: before running anything of your own that is not plain reading, say what it does "
     "and why, and wait for the principal's yes.",
     "Consent: write, run and change nothing that was not agreed and approved. "

@@ -1,5 +1,5 @@
 ---
-version: 5.26
+version: 5.27
 status: draft
 project: forge
 audience: principal + Claude only
@@ -1440,24 +1440,44 @@ position that already stands elsewhere.
   `main` the released line, branches allowed and left to git (POS.1110);
   every user project is likewise a repository of its own where its owner
   wants one, with whatever remote and visibility he gives it (POS.0940).
-  The scripts in `scripts/` are the only door to git — reading state
-  included, no exceptions, enforced for Claude by POS.1200; how many
-  there are is whatever the door needs, never a rule. No remote is
-  configured anywhere in the forge: git carries that information itself.
+  The scripts in `scripts/` are the only door to a write of git: nothing
+  of Claude's own commits, pushes, pulls, merges, rebases, branches,
+  tags, stashes, resets or touches a remote or a configuration except
+  through a script; reading git directly is open to Claude, since
+  reading changes nothing and the scripts had to copy git verb by verb
+  to serve it (decided 2026-10-21, THR.0710); the line between the two
+  and its enforcement is POS.1200's; how many scripts there are is
+  whatever the door needs, never a rule. No remote is configured
+  anywhere in the forge: git carries that information itself.
   Immutability of documents remains a process rule enforced by
   convention, not by git: git protects nothing from a commit that
   rewrites a file, the rule costs nothing, and a mechanism would be one
   more layer to maintain that still would not stop a hand edit (reason
   given 2026-10-09); the driver of POS.1670 raises an alarm at a merge
   that breaches it and locks nothing.
-- **POS.1200 The scripts-only door to git is a wall of the harness, not
+- **POS.1200 The door to a write of git is a wall of the harness, not
   conduct alone; a commit carries no attribution.** The rule of POS.0550
-  — the scripts in `scripts/` are the only door to git, reading state
-  included — is enforced by the harness. The rule binds the forge, not
-  the principal: his own git from the shell is his. Claude Code no
-  longer adds or proposes a `Co-Authored-By` or `Claude-Session`
+  is enforced by one `PreToolUse` hook of the forge's own,
+  `scripts/hook-git.py`, on the one shell tool through which Claude runs
+  git, Bash; the other shell tool stays closed to git whole by the deny
+  rule of `.claude/settings.json`, so that there is one parser and one
+  door. The hook reads the whole command, finds every call of git in it
+  past the shell's separators and git's own global options, and answers
+  allow for a reading verb and deny for everything else, naming the
+  script to use instead: a verb it does not know, an alias, a reading
+  verb with a writing flag or a global option that changes where or how
+  git runs, and a part it cannot read are denied, never asked, since an
+  ask is not known to hold in an automatic permission mode; a part of
+  the command that is not git is left to the harness. The prefix deny
+  rules of the harness were the wall from 2026-09-21 to 2026-10-21 and
+  were not kept for the writing verbs: a prefix rule matches the text
+  usually typed, not the command, so that `git -C . push` passes it, a
+  deny rule cannot be carved by an allow rule and is not overridden by a
+  hook, and two walls with one hole read worse than one. The rule binds
+  the forge, not the principal: his own git from the shell is his.
+  Claude Code adds or proposes no `Co-Authored-By` or `Claude-Session`
   trailer: the commit message is the one the principal confirmed, word
-  for word. Decided 2026-09-21 by the principal.
+  for word. Decided 2026-09-21 and 2026-10-21 by the principal.
 - **POS.0570** The project's full conformance and the renders belong to
   the release, the bookkeeping check to the save. `/release` (POS.1100)
   settles the findings of its checks with the principal before the
