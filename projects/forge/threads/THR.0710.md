@@ -26,6 +26,22 @@ Claude's reading, offered once: the writing half carries what the
 harness does not know, the message word for word, the rebase before the
 push, the migration as a condition, the check before a save, and would
 leave those to text alone.
+State 2026-10-21, evening: not decided. Tried the same day: a hook's ask
+holds in the automatic permission mode, on this machine, with a fresh
+command never confirmed before (a first run was spoilt by a confirmation
+the harness remembered). Laid out and not yet judged: the deferred
+releases analysed row by row against git opened to Claude for writing
+under a hook in three tiers, allow for reading, deny for the
+irreversible verbs, ask for every other write, the scripts staying the
+normal door; Claude's reading, offered once: the driver, `/merge`, the
+landing, one sentence per line and the blocks of IDs would then be
+ceremony around the walkthrough over a conflict the forge already has,
+and what would remain is the hook in three tiers, a rule paragraph on
+merging with `merge=union` on the histories tried on the fixture, and
+`forge-save` pulling a merge commit by merge; a proposal of the intent
+round (POS.0550, POS.1200, POS.1560, POS.1580, POS.1660, POS.1670,
+POS.1730, POS.1760, five REJ, DEC.0270) was shown and not written. Next:
+the principal's decision on the writing half, then that round.
 
 <!-- A thread (POS.1680): one open matter of the intent, in
 threads/THR.NNNN.md; not an artefact: no title, no version, no

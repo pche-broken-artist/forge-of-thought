@@ -349,8 +349,11 @@ def judge(command):
             reasons.append(f"git inside a substitution or a script cannot be read; {DOOR}")
             continue
         verdicts.append("other")
+    judged = [v for v in verdicts if v != "other"]
     if "deny" in verdicts:
-        return "deny", "; ".join(r for v, r in zip([v for v in verdicts if v != "other"], reasons) if v == "deny")
+        return "deny", "; ".join(r for v, r in zip(judged, reasons) if v == "deny")
+    if "ask" in verdicts:
+        return "ask", "; ".join(r for v, r in zip(judged, reasons) if v == "ask")
     if verdicts and all(v == "allow" for v in verdicts):
         return "allow", "; ".join(reasons)
     return None, ""

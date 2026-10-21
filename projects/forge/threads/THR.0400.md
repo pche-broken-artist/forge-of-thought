@@ -74,6 +74,13 @@ State 2026-10-21: the hard half built for git, as `scripts/hook-git.py`
 (POS.1200), narrower than the gate proposed here: it reads git alone,
 answers allow or deny and never ask, and names the script to use where
 it denies. Still open: `pandoc` and `markitdown`, and the ask on writes.
+State 2026-10-21, evening: ask tried and holds. A hook answering ask in
+the automatic permission mode put the dialog before the principal, on a
+fresh command the harness had never been asked about; a command
+confirmed once is remembered and asks no more, which spoilt the first
+run. The hook composes an ask over the whole command since that test
+(unsaved at the time of writing). What the gate still owes: `pandoc`,
+`markitdown`, and the ask on writes into the repository.
 
 <!-- A thread (POS.1680): one open matter of the intent, in
 threads/THR.NNNN.md; not an artefact: no title, no version, no
