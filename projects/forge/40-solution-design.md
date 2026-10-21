@@ -1,5 +1,5 @@
 ---
-version: 0.33
+version: 0.34
 status: draft
 project: forge
 audience: whoever realises the solution, a person or an agent
@@ -491,9 +491,17 @@ boundary kept by hand or an order of work.
   means: over a project of the old shape the Findings and Challenges
   tables, the mining and the work states are read from the hand-kept
   ledger's own tables as the archive. The script writes `ledger.md` only
-  where the ledger is out of the index (the mark of SOL.0800); where it
-  is tracked it refuses to write and prints to stdout or to `--out
-  <path>`, the dry run of a real project going to `tmp/` (CHL.0560).
+  on a project of the current shape (the project file exists,
+  templates/project.md) whose ledger is out of the index (the mark of
+  SOL.0800); on a project of the old shape, under git or not, it says
+  "shape before the migration, run `/migrate`" and does not write,
+  since there `ledger.md` is the hand-kept ledger, the archive
+  `/migrate` freezes, and a project outside git has no index to mark
+  it (POS.1740); where the ledger is tracked it refuses the same way;
+  either refusal prints to stdout or to `--out <path>`, the dry run of
+  a real project going to `tmp/` (CHL.0560). Over an old shape with
+  no threads file, Waiting says the threads were not read rather than
+  that nothing waits.
   Called by the `/forge` map, `/ledger`, `/end`, `check-light` and
   `check-project`; the readme recipe of a project reads the script's
   output where it read the ledger; the 26 skills that write a ledger row

@@ -36,10 +36,13 @@ WHAT IT DOES
     unparsable file is a line `unparsed: <file>:<line>` in the
     header, never a crash; the exit code is 0 (POS.1600).
 
-    Writes `ledger.md` only where it is out of git's index; where it
-    is tracked, the script refuses to write and prints to stdout or
-    to --out PATH, the dry run of a real project going to tmp/. The
-    slug `forge` is the engine's own project.
+    Writes `ledger.md` only on a project of the current shape whose
+    ledger is out of git's index; on a project of the shape before
+    the migration, under git or not, `ledger.md` is the hand-kept
+    ledger and is never written, and where the ledger is tracked the
+    same: the script prints to stdout or to --out PATH, the dry run
+    of a real project going to tmp/. The slug `forge` is the engine's
+    own project.
 
 WHAT IT NEEDS
     Python 3.8 or newer; git on PATH. forge_docs.py, forge_repos.py
@@ -500,6 +503,8 @@ def reports(p, open_threads, closed_threads):
 def compose(p):
     closed, verdicts = p.closed_records(), p.verdicts()
     open_threads, closed_threads = threads_of(p)
+    # an old shape without a threads file keeps its threads where threads_of does not read
+    threads_unread = p.old_shape and not any((p.proj / n).exists() for n in ("threads.md", "10-intent.threads.md"))
     fnd_rows, fnd_items = findings(p, closed, verdicts)
     chl_rows, chl_items = challenges(p, closed, verdicts)
     data = {
@@ -546,7 +551,9 @@ def compose(p):
                 out.append(line)
             continue  # the template's sample rows are dropped
         if section == "Waiting on principal" and line.strip() == "- …":
-            out.extend(waiting_lines or ["- nothing: no open thread, no TBC of the principal, no open finding of a critic, no open challenge"])
+            if threads_unread:
+                out.append("- not known: the shape before the migration with no threads.md, so the threads were not read")
+            out.extend(waiting_lines or ([] if threads_unread else ["- nothing: no open thread, no TBC of the principal, no open finding of a critic, no open challenge"]))
             continue
         if section == "Reports":
             if line.strip() == "- …":
@@ -581,7 +588,14 @@ def main(argv):
     if a.out:
         Path(a.out).parent.mkdir(parents=True, exist_ok=True)
         Path(a.out).write_text(text, encoding="utf-8")
-        fr.say(f"{a.slug}: ledger written to {a.out}" + (" (ledger.md is tracked; not touched)" if tracked else ""), "green")
+        kept = " (the hand-kept ledger.md not touched)" if p.old_shape else " (ledger.md is tracked; not touched)" if tracked else ""
+        fr.say(f"{a.slug}: ledger written to {a.out}{kept}", "green")
+    elif p.old_shape:
+        # the shape before the migration: ledger.md is the hand-kept ledger, the
+        # archive /migrate freezes, and a project outside git has no index to
+        # mark it (POS.1740)
+        sys.stdout.write(text)
+        fr.say(f"{a.slug}: shape before the migration - ledger.md is the hand-kept ledger, not written; run /migrate", "yellow")
     elif tracked:
         sys.stdout.write(text)
         fr.say(f"{a.slug}: ledger.md is tracked by git - not written; the shape before the migration, run /migrate", "yellow")
