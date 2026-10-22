@@ -518,7 +518,11 @@ The engine is one git repository with a remote; `main` is the
 released line, branches are voluntary and left to git (below); every
 project under `projects/` is a repository of its own
 (gitignored by the engine, `projects/forge` excepted), recognised by
-the scripts through `projects/<slug>/.git`. Initialising a project's
+the scripts by asking git whether the project's directory is the top
+of a repository, never by a `.git` looked for; anything else is a
+project outside git, on which the forge runs no git whatever
+repository lies above it (POS.0550), and such a project comes in by
+hand, a copy or a link into `projects/`. Initialising a project's
 repository and adding its remote are the
 user's one-off act at creation; the commit identity is git's,
 resolved per host by the user's own configuration (`includeIf`
@@ -577,8 +581,8 @@ repository that is behind, and offers the rest; the forge never pulls
 or merges on its own judgement (POS.1490). `/end` closes a session by
 saying what would be lost (POS.1500). A release that changes the
 shape of files comes with a migration, `/migrate [slug]` through
-`scripts/forge-migrate.py`: once per project, on one clone, on the
-principal's word, never on Claude's (POS.1740). Until a project is
+`scripts/forge-migrate.py`: once per project, on one clone, under git
+or not, on the principal's word, never on Claude's (POS.1740). Until a project is
 migrated nothing writes into it: the map, the checks and every
 writing command say what `templates/project.md` says and stop. What each does in full is its
 own definition's (`.claude/skills/pull/SKILL.md`,

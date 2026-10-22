@@ -46,7 +46,7 @@ import forge_tools as ft  # noqa: E402
 
 def show_repo(name, path, remote=False):
     fr.say(f"== {name}", "cyan")
-    if not (path / ".git").exists():
+    if not fr.own_repo(path):
         print("   not under git")
         print()
         return

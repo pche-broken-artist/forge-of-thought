@@ -1,5 +1,5 @@
 ---
-version: 5.28
+version: 5.29
 status: draft
 project: forge
 audience: principal + Claude only
@@ -1454,6 +1454,17 @@ position that already stands elsewhere.
   `main` the released line, branches allowed and left to git (POS.1110);
   every user project is likewise a repository of its own where its owner
   wants one, with whatever remote and visibility he gives it (POS.0940).
+  Of its own means that git names the project's directory as the top of
+  its repository: the one question the scripts ask of git, never the
+  presence of a `.git`. A project whose top lies elsewhere, a directory
+  of another's repository (GitHub issue #3,
+  `sources/github-issues/issue-3-repo-detection.md`, 2026-10-21), or
+  that has none, is for the forge a project outside git: the scripts
+  write its files to disk and run no git, the repository above it being
+  its owner's and asked nothing, not even what it tracks
+  (`sources/repo-detection-challenge-2.md`). A project outside git comes
+  in by hand, a copy or a link into `projects/`, and the forge knows it
+  from then on. Decided 2026-10-22.
   The scripts in `scripts/` are the only door to a write of git: nothing
   of Claude's own commits, pushes, pulls, merges, rebases, branches,
   tags, stashes, resets or touches a remote or a configuration except
@@ -1682,7 +1693,15 @@ position that already stands elsewhere.
   engine the same, a known limit (CHL.0270). It refuses to run when the
   repository is not clean, is behind its origin or is not on main: the
   migration is one large change and runs once, on one clone; everyone
-  else pulls before working on. The registration of the drivers is
+  else pulls before working on. A project outside git (POS.0550) is
+  migrated the same, since being outside git is a property, not a
+  defect: none of the refusals of git applies, the way back is the
+  backup the script tells the user to take before `--apply`, and a run
+  that stops midway is finished by running it again, the marks being its
+  memory (`sources/repo-detection-challenge.md`). Decided 2026-10-22: the
+  first release's migration refused every project outside git while the
+  ledger script sent such a project to the migration, a dead end nobody
+  saw (THR.0730). The registration of the drivers is
   `/setup`'s on every machine, not the project's. After a pull of the
   engine, Action required says to run it on every project, on one clone,
   then `/save`; the map, `/check project` and every skill that would

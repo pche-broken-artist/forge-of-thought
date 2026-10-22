@@ -21,19 +21,11 @@ outer repository tracks. Nine sites verified on main (forge_repos
 second assumption: pathspecs relative to the project directory,
 .gitignore and .gitattributes written there.
 
-Direction accepted 2026-10-21 (to be written into the intent): one
-helper in forge_repos asking `git rev-parse --show-toplevel`; a
-project inside the engine's own tree with no repository of its own
-is "not under git", the engine itself required to be exactly the
-top of its repository (the contributor's exclusion compared the
-top with ENGINE_ROOT literally, which a copied engine under another
-git would pass); `proj` and `repo` kept apart in every script as
-forge-migrate already does for the engine's project; pathspecs
-relative to the repository; .gitignore and .gitattributes stay in
-the project directory, git honouring both below it. POS.0550's
-"every project a repository of its own" widens to "or a directory
-of one"; CLAUDE.md Persistence's "recognised through
-projects/<slug>/.git" changes with it.
+Direction accepted 2026-10-21, reversed 2026-10-22: one helper
+asking `git rev-parse --show-toplevel`; the engine required to be
+the top of its repository; `proj` and `repo` kept apart in every
+script; pathspecs relative to the repository; the forge managing a
+project inside another's repository.
 
 Decided the same day on the way and written 2026-10-21: GitHub
 issues enter the project as a growing bundle
@@ -42,9 +34,51 @@ its registration, the bundle's index rewritten; POS.0180, SOL.0230,
 CLAUDE.md External inputs and the Commands table, the ingest skill
 (`--bundle`), the light check and the bundle skeleton.
 
-State 2026-10-21: open. Next: the intent round (POS.0550,
-POS.1200), the solution design (forge_repos, the five
-scripts), CLAUDE.md Persistence and External inputs, the ingest
-skill; then the scripts, tested on the fixture with a project that
-is a subdirectory of a repository; the contributor told in the
-issue when the thread exists.
+Decided 2026-10-22, written at intent 5.29 and solution design 0.37
+(POS.0550, POS.1740, SOL.0510, SOL.0680, SOL.0800, SOL.0830,
+CLAUDE.md Persistence, the skills migrate and import-project): the
+forge's git acts only on a repository the forge owns whole, and a
+project inside another's repository is not that. Two sentences
+replace the direction of the day before. A project is a repository
+of its own when git names its directory as the top, resolved paths
+compared, never a `.git` looked for; everything else, a directory of
+another's repository or no git at all, is a project outside git, on
+which the forge runs no git and asks the repository above it
+nothing, not even what it tracks (the guard condition of
+`sources/repo-detection-challenge-2.md`): the owner who built the
+layout runs git himself. The migration runs without git, since a
+project outside git is a property, not a defect: none of the refusals
+of git, no `--undo`, the user's backup before `--apply`, a run that
+stops midway finished by running it again; the first release's
+migration refused every project outside git while the ledger script
+sent such a project to the migration, a dead end none of the ten
+challenges of the cutover plan saw. What the first release of the
+engine had already protected, the hand-kept ledger of the old shape
+(pull request #2), is what made the question of the other's index
+unnecessary. The way through the round: a map of nine layouts and
+every operation showed that only three things change, the detection,
+the migration without git and one sentence; the principal's measure
+for the rest, as little mechanism around git as possible.
+
+The challenge of the proposal (`sources/repo-detection-challenge.md`,
+six points) settled 2026-10-22: point 2 taken (a run that stops
+midway is finished by running again, written into POS.1740 and
+SOL.0800); point 5 taken (the import sentence reworded, the skill
+import-project); point 3 confirms the resolved paths, nothing
+changed; points 1 and 4 made moot by the simplification, since the
+other's index is not asked and there is no refusal to test; point 6
+does not apply, docs-state resolving the repository once per run
+for one file. No REJ written for 1, 4 and 6: none is a direction
+dropped, the first two fell with the simplification and the third
+misreads the code (the principal's judgement on this stands open).
+
+What the contributor gets against what he asked: the detection as he
+proposed and the dead end of the migration opened; not the forge's
+save, pull and branch acting on his repository.
+
+State 2026-10-22: open. Next, each on the principal's word: the
+scripts (forge_repos's one question, the six `.git` tests, docs-state's
+parent walk, forge-migrate without git, the `tracked` guard of
+forge-ledger for the forge's own repository only); the fixture
+without a repository and the test of the migration on it; the reply
+in the issue; then this thread closes.

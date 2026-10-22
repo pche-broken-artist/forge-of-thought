@@ -207,3 +207,27 @@ to its own 00-INDEX.md. -->
 - **Origin:** the company library, registered there on 2026-10-13; kept out of this public project because it carries names, company content and the group's internal standard.
 - **Role:** the material of the engine's own BRD artefact (`/new-artefact brd`, THR.0360, POS.0700): read for the research of the BRD layer and cited by path; nothing of it is copied into the engine.
 - **Use for:** what the fork's BRD layer is and how it held; the group standard's rules; worked BRDs to judge a template by.
+
+### `repo-detection-challenge.md`
+- **What:** a challenge of the proposal of 2026-10-22 for a project inside a larger repository (THR.0730) as Claude reflected it before the write: the scope of the write guard (only `ledger.md`, or every file), the non-atomic migration without git, the resolved paths of the symlink cases, a missing negative test of the tracked ledger, the ambiguous import sentence, the cost of one subprocess per project in docs-state. Proposes, decides nothing.
+- **Origin:** written in Czech by Gemini in a session outside the forge, in a conversation the principal ran on his tasks; pasted into the conversation by the principal on 2026-10-22 and stored in English on his word.
+- **Date:** 2026-10-22, from the ingest
+- **Form:** text
+- **Role:** a challenge the proposal of THR.0730 was worked against on 2026-10-22 (the principal's word).
+- **Use for:** the edge cases weighed for the detection of a repository and the migration without git, and which of them the round took and which it dropped.
+
+### `repo-detection-challenge-2.md`
+- **What:** the simplification of the same proposal by one guard condition: a project is a repository of its own when git names its directory as the top, and everything else is a plain directory the forge runs no git on, the other's index never asked; with the wordings of POS.0550, SOL.0510 and SOL.0800 it would give. Proposes, decides nothing.
+- **Origin:** written in Czech by Gemini in a session outside the forge, in a conversation the principal ran on his tasks, answering his question whether the proposal could be simplified by one limiting condition; pasted into the conversation by the principal on 2026-10-22 and stored in English on his word.
+- **Date:** 2026-10-22, from the ingest
+- **Form:** text
+- **Role:** the simplification the round of 2026-10-22 took for THR.0730: no question to a repository that is not the forge's (the principal's word).
+- **Use for:** the reason the forge asks another's git nothing, not even whether it tracks the ledger.
+
+### `repo-detection-challenge-3.md`
+- **What:** a challenge of the operating layer proposed for THR.0730 on 2026-10-22, the scripts shown as a block before they were applied: the fall-back of docs-state to the engine's repository, true for every project under `projects/`; a `.strip()` on git's output; the other scripts and the test procedure confirmed; the fixture copy to be removed after the test. Proposes, decides nothing.
+- **Origin:** written in Czech by Gemini in a session outside the forge, in a conversation the principal ran on his tasks; pasted into the conversation by the principal on 2026-10-22 and stored in English on his word.
+- **Date:** 2026-10-22, from the ingest
+- **Form:** text
+- **Role:** a challenge the operating layer of THR.0730 was worked against on 2026-10-22 before it was applied (the principal's word).
+- **Use for:** why docs-state falls back to the engine's repository only for the engine and `projects/forge`, and what the test of the migration outside git covered.

@@ -8,9 +8,11 @@ the registration of the merge drivers on the machine
 (`registration_state`; SOL.0740) and coloured output. Not a command.
 
 The engine root is the parent of the directory this file lies in
-(`scripts/`). A project is `projects/<slug>`; it is a repository when
-`projects/<slug>/.git` exists (CLAUDE.md, Persistence). The scripts
-carry no URL and no identity.
+(`scripts/`). A project is `projects/<slug>`; it is a repository of
+its own when git names its directory as the top of a repository
+(`own_repo`), never by a `.git` looked for; anything else is a project
+outside git, on which the forge runs no git (CLAUDE.md, Persistence;
+POS.0550). The scripts carry no URL and no identity.
 """
 
 import os
@@ -43,8 +45,8 @@ def need_git():
 
 
 def need_engine_repo():
-    if not (ENGINE_ROOT / ".git").exists():
-        fail("The engine is not a git repository (clone it, do not copy it).")
+    if not own_repo(ENGINE_ROOT):
+        fail("The engine is not the top of a git repository (clone it, do not copy it).")
 
 
 def git(args, cwd, check=False, capture=True):
@@ -58,6 +60,17 @@ def git(args, cwd, check=False, capture=True):
     if check and r.returncode != 0:
         fail(f"git {' '.join(args)} failed in {cwd}:\n{(r.stdout or '').strip()}")
     return r
+
+
+def own_repo(path):
+    """True when `path` is itself the top of a git repository: git's
+    `rev-parse --show-toplevel` run inside it names `path`, resolved
+    paths compared, a worktree and a linked directory alike. A
+    directory inside another repository, the engine's included, or
+    under no git at all is not a repository of its own, and the forge
+    runs no git on it (CLAUDE.md, Persistence; POS.0550, SOL.0510)."""
+    top = git_out(["rev-parse", "--show-toplevel"], path)
+    return bool(top) and Path(top).resolve() == Path(path).resolve()
 
 
 def git_out(args, cwd):
@@ -203,7 +216,7 @@ def repos_to_visit(slug, strict_message=None):
         path = project_path(slug)
         if not path.exists():
             fail(f"Project '{slug}' not found ({path} does not exist).")
-        if not (path / ".git").exists():
+        if not own_repo(path):
             fail((strict_message or "Project '{slug}' is not a repository.").format(slug=slug))
         repos.append((slug, path))
         return repos
@@ -212,7 +225,7 @@ def repos_to_visit(slug, strict_message=None):
         projects = ENGINE_ROOT / "projects"
         if projects.is_dir():
             for d in sorted(p for p in projects.iterdir() if p.is_dir() and p.name != "forge"):
-                if (d / ".git").exists():
+                if own_repo(d):
                     repos.append((d.name, d))
                 else:
                     say(f"{d.name:<20} not under git - skipped", "grey")

@@ -32,3 +32,6 @@ refusals and the way back are the script's).
    that save. Should anything be wrong, the way back is
    `python scripts/forge-migrate.py <slug> --undo` before the save,
    the tag before the migration after it (CLAUDE.md, Persistence).
+   A project outside git has neither: its way back is the backup
+   the dry run told the principal to take, and a run that stopped
+   midway is finished by running it again (POS.1740).

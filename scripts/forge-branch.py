@@ -56,7 +56,7 @@ def main(argv):
         name, path = a.slug, fr.project_path(a.slug)
         if not path.exists():
             fr.fail(f"Project '{a.slug}' not found ({path} does not exist).")
-    if not (path / ".git").exists():
+    if not fr.own_repo(path):
         fr.fail(f"'{a.slug}' is not a repository - nothing to switch.")
 
     current = fr.git_out(["rev-parse", "--abbrev-ref", "HEAD"], path)

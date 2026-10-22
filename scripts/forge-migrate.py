@@ -54,17 +54,22 @@ WHAT IT DOES
 
     The author of every record it writes is the handle of the instance
     file (CLAUDE.local.md, `Author:`); without it the script refuses.
-    `--apply` refuses a project that is not a repository, a working
-    tree with unsaved changes to tracked files (an untracked file is
-    no risk: --undo restores tracked files), a branch behind or diverged from its
-    origin and any branch but main: the migration is one large change,
-    run once, on one clone; everyone else pulls. It commits nothing;
-    `/save` follows. `--undo` takes back the last `--apply` from the
-    script's own manifest (tmp/forge-migrate-<slug>.json at the engine
-    root): changed and deleted tracked files restored from the index,
-    created files removed, the ledger put back into the index, the
-    .gitignore line taken out. The slug `forge` is the engine's own
-    project, whose repository is the engine.
+    `--apply` refuses, where the project is a repository of its own
+    (forge_repos.own_repo), a working tree with unsaved changes to
+    tracked files (an untracked file is no risk: --undo restores
+    tracked files), a branch behind or diverged from its origin and
+    any branch but main: the migration is one large change, run once,
+    on one clone; everyone else pulls. A project outside git gets none
+    of these refusals: the forge runs no git on it, the way back is
+    the backup its user takes before --apply, --undo refuses there,
+    and a run that stops midway is finished by running it again, the
+    marks being the memory (POS.1740). It commits nothing; `/save`
+    follows. `--undo` takes back the last `--apply` from the script's
+    own manifest (tmp/forge-migrate-<slug>.json at the engine root):
+    changed and deleted tracked files restored from the index, created
+    files removed, the ledger put back into the index, the .gitignore
+    line taken out. The slug `forge` is the engine's own project,
+    whose repository is the engine.
 
 WHAT IT NEEDS
     Python 3.8 or newer; git on PATH. forge_repos.py and forge_tools.py
@@ -147,6 +152,7 @@ class Target:
             self.repo = self.proj = fr.project_path(slug)
         if not self.proj.is_dir():
             fr.fail(f"Project '{slug}' not found ({self.proj} does not exist).")
+        self.under_git = fr.own_repo(self.repo)  # asked once; False: no git is run (POS.0550)
         self.manifest_path = fr.ENGINE_ROOT / "tmp" / f"forge-migrate-{slug}.json"
         self.manifest = {"slug": slug, "date": TODAY, "changed": [], "created": [],
                          "deleted": [], "unindexed": [], "gitignore": None}
@@ -158,7 +164,7 @@ class Target:
         return Path(os.path.relpath(path, self.repo)).as_posix()
 
     def tracked(self, path):
-        return fr.git(["ls-files", "--error-unmatch", self.rel(path)], self.repo).returncode == 0
+        return self.under_git and fr.git(["ls-files", "--error-unmatch", self.rel(path)], self.repo).returncode == 0
 
     # -- marks
     def marks(self):
@@ -327,10 +333,12 @@ def step_b(t, apply, out, author):
     if not archive.exists():
         out.append(f"B   copy ledger.md to {t.rel(archive)} as it stands, immutable")
         t.write(archive, text, apply)
-    out.append("B   git rm --cached ledger.md; ledger.md into .gitignore")
-    if apply:
+    out.append("B   git rm --cached ledger.md; ledger.md into .gitignore" if t.under_git
+               else "B   ledger.md into .gitignore (no index of the forge's here)")
+    if apply and t.under_git:
         fr.git(["rm", "--cached", "-q", t.rel(t.ledger)], t.repo, check=True)
         t.manifest["unindexed"].append(t.rel(t.ledger))
+    if apply:
         gi = t.repo / ".gitignore" if t.slug == "forge" else t.proj / ".gitignore"
         line = "projects/forge/ledger.md" if t.slug == "forge" else "ledger.md"
         existing = read(gi) if gi.exists() else ""
@@ -469,9 +477,8 @@ def author_handle():
 
 def refusals(t):
     reasons = []
-    if not (t.repo / ".git").exists():
-        reasons.append("not a repository")
-        return reasons
+    if not t.under_git:
+        return reasons  # none of git's refusals applies outside git (POS.1740)
     if fr.git_out(["status", "--porcelain", "--untracked-files=no"], t.repo):
         reasons.append("the working tree has unsaved changes to tracked files: save first")
     branch = fr.git_out(["rev-parse", "--abbrev-ref", "HEAD"], t.repo)
@@ -485,7 +492,11 @@ def refusals(t):
 
 def run(t, apply, author):
     marks = t.marks()
-    print(f"{t.slug}: kind {t.kind}, language {t.language}, repository {t.repo}")
+    print(f"{t.slug}: kind {t.kind}, language {t.language}, "
+          + (f"repository {t.repo}" if t.under_git else "not under git - the forge runs no git here"))
+    if not t.under_git:
+        fr.say("no way back by --undo here: back up the project before --apply; "
+               "a run that stops midway is finished by running it again", "yellow")
     for name, ok in marks.items():
         print(f"  [{'x' if ok else ' '}] {name}")
     if all(marks.values()):
@@ -514,10 +525,13 @@ def run(t, apply, author):
         fr.say("steps ran but these marks still fail: " + "; ".join(failed), "red")
         fr.say(f"undo with: python scripts/forge-migrate.py {t.slug} --undo", "yellow")
         sys.exit(1)
-    fr.say(f"migrated: steps {', '.join(ran)}; manifest {t.manifest_path}; nothing committed - /save follows", "green")
+    tail = "nothing committed - /save follows" if t.under_git else "nothing to commit here, the project is outside git"
+    fr.say(f"migrated: steps {', '.join(ran)}; manifest {t.manifest_path}; {tail}", "green")
 
 
 def undo(t):
+    if not t.under_git:
+        fr.fail("not under git - nothing to restore from; the way back is the backup taken before --apply.")
     if not t.manifest_path.exists():
         fr.fail(f"No manifest at {t.manifest_path} - nothing to undo.")
     m = json.loads(read(t.manifest_path))
@@ -559,7 +573,7 @@ def main(argv):
         if reasons:
             fr.fail(f"{a.slug}: " + "; ".join(reasons) + " - nothing was changed.")
     else:
-        reasons = refusals(t) if (t.repo / ".git").exists() else ["not a repository"]
+        reasons = refusals(t)
         if reasons:
             fr.say(f"{a.slug}: --apply would refuse: " + "; ".join(reasons), "yellow")
     run(t, a.apply, author)

@@ -27,3 +27,7 @@ Bring the project at `$0` into the forge (POS.1060). Git is done by
    project is selected by naming it.
 
 Nothing is written into the imported project by this command.
+`/import-project` clones. A project already on this machine, in a
+repository of its own, in another's or in none, is copied or linked
+into `projects/<slug>` by hand, and the forge knows it from
+`/forge <slug>` on (POS.0550).

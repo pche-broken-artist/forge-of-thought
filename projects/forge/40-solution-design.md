@@ -1,5 +1,5 @@
 ---
-version: 0.36
+version: 0.37
 status: draft
 project: forge
 audience: whoever realises the solution, a person or an agent
@@ -502,12 +502,14 @@ boundary kept by hand or an order of work.
   tables, the mining and the work states are read from the hand-kept
   ledger's own tables as the archive. The script writes `ledger.md` only
   on a project of the current shape (the project file exists,
-  templates/project.md) whose ledger is out of the index (the mark of
-  SOL.0800); on a project of the old shape, under git or not, it says
-  "shape before the migration, run `/migrate`" and does not write,
-  since there `ledger.md` is the hand-kept ledger, the archive
-  `/migrate` freezes, and a project outside git has no index to mark
-  it (POS.1740); where the ledger is tracked it refuses the same way;
+  templates/project.md) whose ledger is out of the index where the
+  project is a repository of its own (the mark of SOL.0800, met by
+  itself outside git); on a project of the old shape, under git or not,
+  it says "shape before the migration, run `/migrate`" and does not
+  write, since there `ledger.md` is the hand-kept ledger, the archive
+  `/migrate` freezes (POS.1740); where its own repository tracks the
+  ledger it refuses the same way, and a repository that is not the
+  forge's is asked nothing (POS.0550);
   either refusal prints to stdout or to `--out <path>`, the dry run of
   a real project going to `tmp/` (CHL.0560). Over an old shape with
   no threads file, Waiting says the threads were not read rather than
@@ -991,7 +993,14 @@ boundary kept by hand or an order of work.
   2026-08-29. Where: `.gitignore`, `projects/`, `LICENSE`,
   `scripts/forge_repos.py`.
 - **SOL.0510 The git scripts.** The scripts that serve the engine and
-  every project that is a repository (`projects/<slug>/.git`), each
+  every project that is a repository of its own: git names its directory
+  as the top, one `rev-parse --show-toplevel` in `forge_repos`, resolved
+  paths compared, a worktree and a linked directory alike, never a
+  `.git` looked for; the engine's own project the one exception, its
+  repository the engine. Anything else is a project outside git: the
+  scripts skip or refuse it as today and run no git on it, whatever
+  repository may lie above it. docs-state's walk up the parents for a
+  `.git` goes the same way. Each script is
   described by its own help header: `forge-save.py`, which also pushes a
   clean repository that is ahead, aborts a conflicting rebase with the
   manual steps printed (SOL.0780) and lands the `+` records on main
@@ -1016,7 +1025,8 @@ boundary kept by hand or an order of work.
   POS.1060, POS.1110, POS.0940, POS.1490. Choice: scripts as the only
   door to a write against git typed by the model. Where:
   `scripts/forge-*.py`,
-  `scripts/forge_repos.py`.
+  `scripts/forge_repos.py`, `scripts/docs-state.py`,
+  `.claude/skills/import-project/SKILL.md`.
 - **SOL.0520 The wall.** Protection relies on Claude Code's permission
   system, not an OS-level sandbox: commands and file operations run
   under permission prompts and allowlists, shared deny rules in
@@ -1311,11 +1321,19 @@ boundary kept by hand or an order of work.
   refuses until they are landed or named as given up (`--abandon
   <branch>`), and writes the hash of the conversion commit into
   `.git-blame-ignore-revs`; refuses an unclean repository, one behind
-  its origin or not on main; commits nothing, with the one exception of
+  its origin or not on main, where the project is a repository of its
+  own; a project outside git (SOL.0510) gets none of these: the dry run
+  and `--apply` say that the forge runs no git here and that the way
+  back is the user's backup, taken before `--apply`; `--undo` refuses
+  there; step B takes the ledger out of an index only where the forge's
+  repository has one; a run that stops midway is finished by running it
+  again, the marks being the memory; commits nothing, with the one
+  exception of
   the conversion's step, which commits through `forge-save` and writes
   the hash of that commit into `.git-blame-ignore-revs` by a second
   save, since the hash does not exist before the commit (CHL.0530).
-  `--apply` and `--undo` are tested on the fixture (SOL.0830); a real
+  `--apply` and `--undo` are tested on the fixture (SOL.0830), the
+  migration outside git on the fixture without a repository; a real
   project gets the dry run in place and then its one `--apply`, never a
   clone (DEC.0240). A branch that must survive
   the conversion needs a tool that rewrites its commits with the
@@ -1417,7 +1435,11 @@ boundary kept by hand or an order of work.
   release. Not built; deferred (DEC.0250, THR.0710): until then the
   fixture is one project `projects/fixture`, made by hand once from a
   bare remote in `tmp/` as a copy of a small real project in the old
-  shape, on which `--apply`, `--undo` and the test of `ours` run. Where:
+  shape, on which `--apply`, `--undo` and the test of `ours` run.
+  `fixture.py --no-git` makes `fixture-a` without a repository, for the
+  migration and the ledger outside git (SOL.0800); until it is built, a
+  copy of `projects/fixture` without its `.git`, made by hand once.
+  Where:
   `scripts/fixture.py`, `scripts/forge-clone.py`, `templates/project.md`
   (the flag), `scripts/forge-save.py`.
 

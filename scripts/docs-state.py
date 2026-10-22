@@ -146,10 +146,14 @@ def previous_map(map_path, out):
     committed."""
     import forge_repos as fr
     map_path = map_path.resolve()
-    repo = fr.ENGINE_ROOT if fr.ENGINE_ROOT in map_path.parents and not (map_path.parent / ".git").exists() \
-        else map_path.parent
-    while repo != repo.parent and not (repo / ".git").exists():
-        repo = repo.parent
+    proj = map_path.parent
+    if fr.own_repo(proj):
+        repo = proj
+    elif proj in (fr.ENGINE_ROOT, fr.ENGINE_ROOT / "projects" / "forge"):
+        repo = fr.ENGINE_ROOT
+    else:  # a project outside git: the forge runs no git on it (POS.0550)
+        print("none")
+        return 0
     rel = map_path.relative_to(repo).as_posix()
     text = fr.git_out(["show", f"HEAD:{rel}"], repo)
     if not text:

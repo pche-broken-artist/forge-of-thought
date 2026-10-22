@@ -82,6 +82,7 @@ class Project:
         self.proj = fr.ENGINE_ROOT / "projects" / "forge" if slug == "forge" else fr.project_path(slug)
         if not self.proj.is_dir():
             fr.fail(f"Project '{slug}' not found ({self.proj} does not exist).")
+        self.under_git = fr.own_repo(self.repo)  # asked once; False: no git is run (POS.0550)
         self.root = fr.ENGINE_ROOT if slug == "forge" else self.proj  # where the root renders lie
         self.reports = []
         info = fr.project_file(self.proj)  # the one reader of the project file (SOL.0670)
@@ -463,8 +464,8 @@ def reports(p, open_threads, closed_threads):
     for id_, places in sorted(seen.items()):
         if len(places) > 1:
             out.append(f"- {id_} defined twice: {', '.join(places)}")
-    # a closed thread touched later
-    for t in closed_threads:
+    # a closed thread touched later, read from the forge's own repository only
+    for t in closed_threads if p.under_git else []:
         rel = Path(t["path"]).resolve().relative_to(p.repo.resolve()).as_posix()
         closing = fr.git_out(["log", "--format=%H", "--diff-filter=AM", "-S", "status: closed", "--", rel], p.repo)
         last = fr.git_out(["log", "-1", "--format=%H", "--", rel], p.repo)
@@ -584,7 +585,7 @@ def main(argv):
     text = compose(p)
     target = p.proj / "ledger.md"
     rel = target.resolve().relative_to(p.repo.resolve()).as_posix()
-    tracked = (p.repo / ".git").exists() and fr.git(["ls-files", "--error-unmatch", rel], p.repo).returncode == 0
+    tracked = p.under_git and fr.git(["ls-files", "--error-unmatch", rel], p.repo).returncode == 0
     if a.out:
         Path(a.out).parent.mkdir(parents=True, exist_ok=True)
         Path(a.out).write_text(text, encoding="utf-8")
@@ -592,8 +593,8 @@ def main(argv):
         fr.say(f"{a.slug}: ledger written to {a.out}{kept}", "green")
     elif p.old_shape:
         # the shape before the migration: ledger.md is the hand-kept ledger, the
-        # archive /migrate freezes, and a project outside git has no index to
-        # mark it (POS.1740)
+        # archive /migrate freezes (POS.1740); a repository that is not the
+        # forge's is asked nothing (POS.0550)
         sys.stdout.write(text)
         fr.say(f"{a.slug}: shape before the migration - ledger.md is the hand-kept ledger, not written; run /migrate", "yellow")
     elif tracked:
