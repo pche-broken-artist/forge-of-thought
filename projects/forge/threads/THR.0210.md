@@ -59,6 +59,14 @@ names held in `CLAUDE.local.md` so that the list itself never
 reaches git; the rule on content stays a rule. A neighbour of the
 gate of THR.0400. To be taken up; nothing decided.
 
+State 2026-10-22: half of the sketch of 2026-09-20 is built for one
+output: `scripts/docs-check.py` reads the values of `CLAUDE.local.md`
+at run time and scans every page of the documentation for them
+(POS.0950, 2026-10-09). For a reviewer's report, a render, a record
+of a history or a thread no scan exists; there the contracts' one
+sentence holds. The rule on content and the check that owns it stay
+as parked.
+
 <!-- A thread (POS.1680): one open matter of the intent, in
 threads/THR.NNNN.md; not an artefact: no title, no version, no
 history of its own. Freely rewritten while open, the header too,

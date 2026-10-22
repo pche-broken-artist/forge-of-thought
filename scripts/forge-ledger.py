@@ -467,7 +467,7 @@ def reports(p, open_threads, closed_threads):
     # a closed thread touched later, read from the forge's own repository only
     for t in closed_threads if p.under_git else []:
         rel = Path(t["path"]).resolve().relative_to(p.repo.resolve()).as_posix()
-        closing = fr.git_out(["log", "--format=%H", "--diff-filter=AM", "-S", "status: closed", "--", rel], p.repo)
+        closing = fr.git_out(["log", "--format=%H", "--diff-filter=AM", "-G", "^status: closed$", "--", rel], p.repo)
         last = fr.git_out(["log", "-1", "--format=%H", "--", rel], p.repo)
         if closing and last and closing.split("\n")[-1] != last:
             out.append(f"- {t['id']} closed and touched by a later commit {last[:7]}: a closed thread is immutable")

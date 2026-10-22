@@ -2,7 +2,7 @@
 id: THR.0380
 concerns: intent
 origin: Claude's synthesis
-status: open
+status: closed
 ---
 
 Executive pitch, loose ends. The five-slide deck
@@ -13,6 +13,11 @@ S03 counts rest on the recipe's Template alone, no input carries
 them; and the headless build had no `document-skills:pptx` skill
 available and built the deck with python-pptx instead — to watch at
 the next build. Opened 2026-09-14 from the ledger.
+
+Closed 2026-10-22: into THR.0570: the two loose ends of 2026-09-11
+are gone, the recipe at 0.8, the render of 2026-09-27 and /publish
+with the model engine of md2pptx in place of the headless build; the
+published deck of 2026-09-11 is stale.
 
 <!-- A thread (POS.1680): one open matter of the intent, in
 threads/THR.NNNN.md; not an artefact: no title, no version, no

@@ -34,6 +34,20 @@ Open: the wording of the directive and where it stands; what is
 rewritten and in what order; how it sits with THR.0150, THR.0410
 and THR.0500. Opened 2026-10-04.
 
+State 2026-10-22: of the note's list the ledger, the history of an
+item, the name of a report, the migration, the global git
+configuration and the state of the documentation are scripts since
+(forge-ledger, forge-history, forge-report, forge-migrate,
+forge-config, docs-state, docs-check); Python is the one
+prerequisite of every machine (POS.0830), so the note's price on a
+save fell; THR.0150 is closed. The rule stands in passing in
+POS.1510 and SOL.0810 and nowhere as a directive. Left to the model:
+the check light at every save, most of project and engine, the
+write of a round, the provenance of a render, and the next ID of a
+finding, which joins this thread from THR.0500 (closed 2026-10-22).
+Open as before: the wording of the directive and where it stands,
+and the order of what is rewritten next.
+
 <!-- A thread (POS.1680): one open matter of the intent, in
 threads/THR.NNNN.md; not an artefact: no title, no version, no
 history of its own. Freely rewritten while open, the header too,

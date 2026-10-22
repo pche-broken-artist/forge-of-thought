@@ -1,5 +1,5 @@
 ---
-version: 0.37
+version: 0.38
 status: draft
 project: forge
 audience: whoever realises the solution, a person or an agent
@@ -1423,7 +1423,7 @@ boundary kept by hand or an order of work.
   since the project file that would carry a flag does not exist before
   the migration; `fixture: true` in their project file stays for the map
   (CHL.0500). The three tests before the releases and the four of
-  THR.0650 run on it, and on it alone, as rounds of the forge by slug,
+  the brief (POS.1750) run on it, and on it alone, as rounds of the forge by slug,
   never as hand tests and never on a clone of a real project (DEC.0240),
   since the scripts are the only door to git and `forge_repos` visits
   only `projects/<slug>`. Realises: POS.1750, POS.1590, POS.0550.
@@ -1506,9 +1506,11 @@ boundary kept by hand or an order of work.
   ledger). Closed by: the principal's
   decision on the dependency. Blocks realisation: no.
 - **TBC.0020** (owner: principal) Which check keeps this design true
-  against what realises it; POS.1420 wants one and none exists
-  (THR.0520, Open). Closed by: a decision in THR.0520. Blocks
-  realisation: no.
+  against what realises it; POS.1420 wants one and none exists. With
+  it, how a layer is told to have fallen behind the intent it was
+  brought to, since an artefact names no version of the intent
+  (THR.0520, closed 2026-10-22). Closed by: the principal's decision
+  on the check. Blocks realisation: no.
 - **TBC.0030** (owner: principal) The independent challengers of
   POS.0800 are not built and have no part here. Closed by: their
   design when the principal takes them up. Blocks realisation: no.
@@ -1518,10 +1520,11 @@ boundary kept by hand or an order of work.
   first; a stub driver under rebase before the second, for
   `rebase.backend merge`, the reversal of ours and renormalize; the
   ledger script run dry over every project of today and diffed against
-  the hand-kept ledger before the first) and the four of THR.0650 before
-  the second release's own release, none after the first, which alone
+  the hand-kept ledger before the first) and the four of the brief
+  before the second release's own release, none after the first, which alone
   carries no work of two people. Closed by: the tests run and their
-  result recorded in THR.0650. Blocks realisation: the three before the
+  result recorded in the cutover plan, in the cell that closes each
+  row. Blocks realisation: the three before the
   releases block the release each precedes; a red one stops it, back to
   the design (SOL.0530 for `ours`, SOL.0740 for the backend), this TBC
   open. The dry run over a real project writes to `tmp/` through

@@ -1,5 +1,5 @@
 ---
-version: 5.29
+version: 5.30
 status: draft
 project: forge
 audience: principal + Claude only
@@ -1723,14 +1723,15 @@ position that already stands elsewhere.
   sentence; two windows of one person are two working trees on one
   project, two repositories on two, and `/save` with a slug in both; two
   clones on main are sequential; a merge request on the server is for
-  reading; the roles are POS.1770's. The order in which it is built is a
-  plan and lives in THR.0620; verified on the fixture (POS.1590) and
+  reading; the roles are POS.1770's. The order in which it is built is the
+  cutover plan, `work/collaboration-cutover.md` (POS.1520); verified on the fixture (POS.1590) and
   never on a clone of a real project (DEC.0240): three tests before the
   releases, `ours` under rebase before the first, a stub driver under
   rebase before the second, and the ledger script run dry over every
   project of today in place and diffed against the hand-kept ledger
-  before the first; and the four tests of THR.0650 before the second
-  release, none after the first (TBC.0050; CHL.0270, CHL.0280,
+  before the first; and the four tests of the brief before the second
+  release, none after the first, their results in the cell that
+  closes each row of the cutover plan (TBC.0050; CHL.0270, CHL.0280,
   CHL.0490). Decided 2026-10-17 (brief `collaboration`). A test before a
   release that is red stops it: back to the design, the TBC open, the
   release does not run (CHL.0410). The fixture is a project of the forge

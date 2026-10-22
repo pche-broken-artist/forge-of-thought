@@ -2,7 +2,7 @@
 project: forge
 title: Next generation, the requirements for a forge that can be rolled out into real operation
 author: PCHe
-version: 0.3
+version: 0.4
 status: draft
 ---
 
@@ -271,6 +271,47 @@ Opened from the talk over this brief: THR.0520, the intent carries
 the solution and a layer for the solution is missing; priority. The
 sections "The shape of the whole" and "A technical clean-up" rest on
 it.
+
+## Where it stands on 2026-10-22
+
+Taken up since this brief was written: the documentation, as the
+brief `documentation` (mined into intent 4.60); several people on
+one project, as the brief `collaboration` (mined 5.13, its first
+release 5.26, the second and the fourth deferred, DEC.0250); the
+solution design as the layer for the solution (THR.0520, intent
+4.52 to 4.57); of Upgrade and compatibility the migration
+(POS.1740), not the format version and not the stable line.
+
+What waits on this brief's mining, carried over from the plan of
+2026-10-10 (THR.0620, closed into this section): the pilot with a
+first user other than the principal, one real project, the run
+record as a source (the project `forge-rollout` may be its place);
+reading the solution design whole and the second pass of the
+intent, the 22 positions where the solution stayed (THR.0520); a
+user's own extensions (THR.0300, THR.0480) before the engine split
+(THR.0230, THR.0190); the test of behaviour (THR.0600), the rest
+of the gate (THR.0400) and the sweep of the boundary (THR.0210);
+the reasons the writers of the documentation wanted and no file
+records (the closed record of THR.0630); the small ones, THR.0460,
+THR.0370, THR.0320, a SECURITY.md, F.24 of the documentation audit
+and its Unowned list.
+
+Noticed on the way and not yet thought through together: the
+documentation regenerates whole at every change of the intent,
+since every page cites `10-intent.md` and the hash is of the whole
+file; portability could be verified by a workflow running the
+scripts on ubuntu at every push; a public, domain-neutral exemplar
+project (THR.0200) would serve the tutorial, the test of behaviour
+and the pilot; the writers on the faster model read their inputs
+loosely and nothing verifies it; one model for everything against
+the cost.
+
+Questions to be asked one by one at the mining: the target user of
+the pilot, whether a project needs a BRD, the principal's hours per
+week for the forge, whether the cost of a run is a problem today.
+
+The principal's word of 2026-10-22: this brief is to be worked
+through again, and better, before it is mined.
 
 ## Still open
 

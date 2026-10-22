@@ -2,7 +2,7 @@
 id: THR.0650
 concerns: solution-design
 origin: Claude's synthesis
-status: open
+status: closed
 ---
 
 The new output of `forge-pull.py`
@@ -46,6 +46,14 @@ equal before and after, never the video; a test before a release that
 is red stops the release, back to the design, the TBC open.
 
 The test of `ours` under rebase run 2026-10-19 on the fixture (R1.02 of the cutover plan): a copy of the clone as a second clone of the same remote, each side appending a different line to `README.md` (`merge=ours` by `templates/gitattributes`), the second `forge-save` rebasing onto the first's push. Green: the rebase ran without a conflict, the replayed commit was dropped as "patch contents already upstream", the README kept the remote's text, the push went through and the clone stands clean and up to date; `ours` under rebase is upstream, as the refusal of a release behind its origin assumes (SOL.0530). The two tests before the second release and the four of the brief stand as they are.
+
+Closed 2026-10-22: forge-pull's new output and the state behind ran
+on the principal's second machine and work (his word of 2026-10-22);
+of the tests before the releases, ours under rebase and the dry run
+of the ledger script ran green on 2026-10-19; the results of the
+tests still to come, the stub driver and the four of the brief
+before the second release, are recorded in the cutover plan, in the
+cell that closes each row, as the two of the first release were.
 
 <!-- A thread (POS.1680): one open matter of the intent, in
 threads/THR.NNNN.md; not an artefact: no title, no version, no

@@ -2,7 +2,7 @@
 id: THR.0360
 concerns: intent
 origin: sources/forge-run-record-health.md
-status: open
+status: closed
 ---
 
 A layer with an external audience. The first real run
@@ -46,6 +46,11 @@ justifies it
 from the material at hand (the bundle `fork-brd` of lib-allwyn, the
 two researches of 2026-10-13), nearly whole by Claude; the layer
 THR.0670's picture ends at.
+
+Closed 2026-10-22: two matters, each with a home: a report for a
+third party is a work product (POS.1520); the layer below the intent
+for a handover is the BRD, worked through the brief brd. The
+principal's word of 2026-10-22.
 
 <!-- A thread (POS.1680): one open matter of the intent, in
 threads/THR.NNNN.md; not an artefact: no title, no version, no

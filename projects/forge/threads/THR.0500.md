@@ -2,7 +2,7 @@
 id: THR.0500
 concerns: intent
 origin: the principal
-status: open
+status: closed
 ---
 
 The reviewers' mechanism out of the session. The
@@ -34,6 +34,14 @@ and a new kind of reviewer gives FND unless accepting its finding
 changes a stance, which keeps the prefixes at two (CHL stays, the
 principal's verdict of 2026-10-02). Bears on THR.0460 and THR.0480.
 Opened 2026-10-02.
+
+Closed 2026-10-22: solved for one author: the command numbers and
+files for all three kinds alike (SOL.0300), the name is
+forge-report's (SOL.0810), the ledger is made at read time
+(SOL.0680) and reviewers run in parallel since the agent numbers
+nothing. What remains, the next ID given by a script, joins
+THR.0530; running reviewers without the session stays with the
+brief next-gen.
 
 <!-- A thread (POS.1680): one open matter of the intent, in
 threads/THR.NNNN.md; not an artefact: no title, no version, no

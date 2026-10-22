@@ -54,6 +54,9 @@ are settled with it; one stays parked, FND.0650, the genre
 checklists beside their skeletons. What must be always-on beyond
 that is still this thread's question.
 
+2026-10-22: 815 lines, the first release of the brief collaboration
+and the hook on git among what grew it; FND.0650 stays parked.
+
 <!-- A thread (POS.1680): one open matter of the intent, in
 threads/THR.NNNN.md; not an artefact: no title, no version, no
 history of its own. Freely rewritten while open, the header too,

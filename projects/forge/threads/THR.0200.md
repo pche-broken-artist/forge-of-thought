@@ -7,8 +7,11 @@ status: open
 
 The public face: an exemplar project for the README — the
 forge itself, or one created later; the company projects cannot
-travel. Until one exists the README carries a one-sentence placeholder
-(readme recipe 0.24). Repository name and licence settled in POS.0990.
+travel. Until one exists the README carries no example project (POS.0980);
+the placeholder sentence of readme recipe 0.24 is gone since the cut
+of the README (POS.1450), and the README says only that
+`projects/forge` is the forge's own project, which every render and
+page derives from. Repository name and licence settled in POS.0990.
 The About of the repository, set by the principal by hand on
 2026-10-04 and held nowhere in the repository until then, which is
 how the earlier one went stale unseen. Description: "A chat gives

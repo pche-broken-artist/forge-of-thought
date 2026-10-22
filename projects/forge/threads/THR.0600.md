@@ -14,7 +14,8 @@ POS.1170, the edits behind POS.1460, the raw git reads behind
 THR.0400), with assertions on the files at the end, several trials
 each, run before a release and its result in the approval record.
 Open: whether to build it, in what form, and which failures it
-starts from; not before 5.0. Origin: the challenge of 2026-10-09
+starts from; 5.0 passed on 2026-10-10 without it; nothing
+scheduled. Origin: the challenge of 2026-10-09
 (CHL.0220, accepted as modified) and that research. Opened
 2026-10-10.
 

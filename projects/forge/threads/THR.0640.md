@@ -32,6 +32,15 @@ file, immutable, and carries no `Was` (POS.1680). Open stay the two
 questions: when a thread that has become a plan is rather born as a
 brief, and whether large files are split.
 
+State 2026-10-22: the first question answered by practice in the
+walk of the threads: a thread that has become a plan goes to a brief
+where it is thinking to be sifted (THR.0620 into the brief next-gen)
+and to a work product where it is work to be done (the cutover plan,
+POS.1520; the tests of THR.0650 into it), and a thread stays a
+question (POS.0920). Three cases of one day, not yet a position.
+Open stays whether large files are split: 41 thread files and an
+intent of 2 532 lines on 2026-10-22.
+
 <!-- A thread (POS.1680): one open matter of the intent, in
 threads/THR.NNNN.md; not an artefact: no title, no version, no
 history of its own. Freely rewritten while open, the header too,

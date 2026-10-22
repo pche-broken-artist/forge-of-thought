@@ -79,7 +79,7 @@ the automatic permission mode put the dialog before the principal, on a
 fresh command the harness had never been asked about; a command
 confirmed once is remembered and asks no more, which spoilt the first
 run. The hook composes an ask over the whole command since that test
-(unsaved at the time of writing). What the gate still owes: `pandoc`,
+(saved at 2c7d723 and written into POS.1200 at 5.28). What the gate still owes: `pandoc`,
 `markitdown`, and the ask on writes into the repository.
 
 <!-- A thread (POS.1680): one open matter of the intent, in

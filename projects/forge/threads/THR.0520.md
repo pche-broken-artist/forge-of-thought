@@ -2,7 +2,7 @@
 id: THR.0520
 concerns: intent, solution-design
 origin: the principal
-status: open
+status: closed
 ---
 
 The intent carries the solution, and a layer for the
@@ -100,6 +100,16 @@ reports and the mechanical check lie in the engine's
 principal has not read whole. The sections "A technical clean-up"
 and "The shape of the whole" of the brief `next-gen` rest on this
 thread. Opened 2026-10-03.
+
+Closed 2026-10-22: steps 1 to 5 done between 2026-10-03 and
+2026-10-04, step 6 living in the brief brd; what the thread left on
+purpose was overtaken by the migration of 2026-10-19; its open
+questions have their homes: a plan is a work product (POS.1520), the
+check that keeps the design true is TBC.0020, the second pass of the
+22 positions waits in the brief next-gen, a technical specification
+comes by /new-artefact when a project needs it, work handed over is
+POS.1410's; how a layer is told to have fallen behind its intent
+joins TBC.0020.
 
 <!-- A thread (POS.1680): one open matter of the intent, in
 threads/THR.NNNN.md; not an artefact: no title, no version, no

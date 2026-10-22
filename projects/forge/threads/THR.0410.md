@@ -2,7 +2,7 @@
 id: THR.0410
 concerns: intent
 origin: the principal
-status: open
+status: closed
 ---
 
 The duration of `/save` and `/release`. Watched since
@@ -21,6 +21,13 @@ two and four inputs, 191 seconds on Opus 5.5 with seven inputs, run
 on that model once on the principal's word against the rule of
 `/render`. The recipe changed between the runs, so the comparison
 is not clean.
+
+Closed 2026-10-22: the watch ends: the measurements of 2026-09-02 to
+2026-10-02 stand in research/2026-09-14-save-and-release-duration.md
+and in this thread, the releases of 2026-10-10 and 2026-10-19
+unmeasured; what would change the numbers is the check light as a
+script (THR.0530), where the next measurement is taken, once and
+against these.
 
 <!-- A thread (POS.1680): one open matter of the intent, in
 threads/THR.NNNN.md; not an artefact: no title, no version, no

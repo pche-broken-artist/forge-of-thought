@@ -2,7 +2,7 @@
 id: THR.0730
 concerns: intent, solution-design
 origin: sources/github-issues/issue-3-repo-detection.md
-status: open
+status: closed
 ---
 
 A project directory and its repository are two things: the scripts
@@ -76,9 +76,13 @@ What the contributor gets against what he asked: the detection as he
 proposed and the dead end of the migration opened; not the forge's
 save, pull and branch acting on his repository.
 
-State 2026-10-22: open. Next, each on the principal's word: the
-scripts (forge_repos's one question, the six `.git` tests, docs-state's
-parent walk, forge-migrate without git, the `tracked` guard of
-forge-ledger for the forge's own repository only); the fixture
-without a repository and the test of the migration on it; the reply
-in the issue; then this thread closes.
+Closed 2026-10-22: the scripts built and saved on main at c71285a
+(forge_repos.own_repo, the `.git` tests gone from status, branch,
+migrate, ledger and docs-state, forge-migrate without git, the
+`tracked` guard of forge-ledger for the forge's own repository only),
+tested on a copy of the fixture without a repository (dry run,
+`--apply`, the ledger, `--undo` refused, a second run with nothing to
+do), the copy removed; the light check's one finding fixed
+(FND.2340); the contributor answered in the issue and the issue closed
+by the principal. What stays for later lives in the solution design:
+`fixture.py --no-git` when the fixture script is built (SOL.0830).

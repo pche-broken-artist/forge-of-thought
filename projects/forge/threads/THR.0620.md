@@ -2,7 +2,7 @@
 id: THR.0620
 concerns: intent
 origin: Claude's synthesis
-status: open
+status: closed
 ---
 
 A plan for the forge after 5.0. Claude's
@@ -53,6 +53,11 @@ the date of the presentation, the target user of the pilot,
 whether a project needs a BRD, the principal's hours per week for
 the forge, whether the cost of a run is a problem today. Opened
 2026-10-10.
+
+Closed 2026-10-22: into the brief next-gen 0.4, section "Where it
+stands on 2026-10-22": what of the brief was taken up since
+2026-10-03 and what of the plan still waits on its mining; a plan is
+worked through the brief, not beside it in a thread.
 
 <!-- A thread (POS.1680): one open matter of the intent, in
 threads/THR.NNNN.md; not an artefact: no title, no version, no

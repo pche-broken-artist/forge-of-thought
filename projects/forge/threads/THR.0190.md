@@ -22,7 +22,7 @@ when `forge-pull` proves an insufficient upgrade channel. Research:
 `2026-08-29-claude-code-packaging.md`,
 `2026-08-29-framework-distribution-in-the-field.md`.
 2026-09-14: to be merged into the brief `engine-split` (THR.0230),
-after THR.0350. The research
+after THR.0350 (closed 2026-10-11). The research
 above answered a different question — how
 the forge reaches users with projects of their own, where the clone
 with nested repositories won (POS.0940), rightly — and is not

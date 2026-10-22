@@ -2,7 +2,7 @@
 id: THR.0570
 concerns: intent
 origin: the principal
-status: open
+status: closed
 ---
 
 The presentation of the forge in the company,
@@ -45,6 +45,13 @@ in the approval record of the intent's history.
 2026-10-12: the recipe `ba-intro` 0.1, handed over 2026-10-11 for the
 presentation to business analysts, its render and published deck made
 2026-10-12; the principal's judgement of the recipe open.
+
+Closed 2026-10-22: presentations are made when they are needed,
+through their recipes and /render, and need no thread; the
+principal's word of 2026-10-22. What stood open here, the judgement
+of ba-intro, the verdict on the pitch renders, the stale executive
+deck, the repository link, Discussions and the topics, is worked
+when a presentation is next made.
 
 <!-- A thread (POS.1680): one open matter of the intent, in
 threads/THR.NNNN.md; not an artefact: no title, no version, no

@@ -94,8 +94,8 @@ against it, the BRD layer and the field feedback (THR.0350) are
 wanted quickly. Order agreed 2026-09-14: THR.0350 first, since the
 brief is to be born by co-elicitation, the technique the
 run record faulted. The order of the briefs is POS.1380's since
-2026-09-28: `brd` first, then `engine-split`. The
-brief's first item is research of its own into what Claude Code
+2026-09-28: `brd` first, then `engine-split`; the
+brief brd born 2026-10-16. The brief's first item is research of its own into what Claude Code
 offers today for an engine carrying several frameworks — the
 packaging research of 2026-08-29 served the
 engine/projects split and is not reused. Whether every new position
