@@ -2,7 +2,7 @@
 project: forge
 title: BRD — a layer of business requirements below the assignment
 author: PCHe
-version: 0.4
+version: 0.5
 status: draft
 ---
 
@@ -124,6 +124,31 @@ system of an entity, the mechanics of taking it left to the
 solution design; ten categories of quality with safety among them;
 the phasing names its items; an open question may carry
 `owner: unassigned` until the role is named.
+
+## The first trial
+
+The third way in was tried the same evening on the project
+agentic-platform: a BRD drafted automatically from the transcript
+of a vendor meeting into `work/`, then the clarity and the essence
+lens, the `business-analyst` persona and the `brd` check run on it,
+and the result compared with the requirements catalogue derived
+from the same meeting in August. The catalogue had taken nearly
+everything the vendor said as a requirement; the BRD kept the
+room's asks as rules and the vendor's descriptions as dependencies,
+and carried what the catalogue has not: stakeholders as roles, the
+scope of the document, what is out, the phasing, the follow-ups
+with owners, what must come from outside. Three faults of the
+automatic pass, found by the reviewers and brought into the
+definition, the template, the check and the persona on the same
+day, the output left as it is: asks of the room lost because the
+items were written before the provenance map, so the map is built
+first now; the vendor's answers leaking into rules and use cases,
+so a rule cites the principal's side only and the check verifies
+it; matters called unknown that the libraries already held, so the
+resource indexes are an input always and the list of what comes
+from outside says what the forge holds. The reviewers' findings on
+that file stay parked in the project, the file a trial and not an
+artefact.
 
 ## Still open
 

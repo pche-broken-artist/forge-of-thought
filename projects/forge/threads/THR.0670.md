@@ -28,6 +28,13 @@ before the first such project: it is mended on real work (POS.1380).
 The picture ends at the BRD, whose brief is THR.0360's. Opened
 2026-10-15; origin: the principal's word and Claude's synthesis.
 
+2026-10-23: the BRD has its definition (POS.1800) and the picture
+has its last layer; a BRD from a file put in is a work product and the
+way into the chain for such a file is the intent handed over from it
+(POS.1810), which is this thread's case. What the handover of a whole
+chain stops at, and which reviewers stand in for the principal's
+judgement between the layers, stays open.
+
 <!-- A thread (POS.1680), one file per thread in threads/; the header
 is its state: what it concerns, where it came from, whether it is
 open. The rules of a thread, its life and its closing:

@@ -668,13 +668,17 @@ lifecycle. Depth max two levels.
 | Prefix | Meaning | Lives in |
 |---|---|---|
 | REQ | requirement | assignment |
-| OOS | out of scope / do-not | assignment |
+| OOS | out of scope / do-not | assignment, BRD |
 | CON | constraint — deliberate boundary, not to be challenged | assignment |
-| ASM | assumption | assignment, work specification |
+| ASM | assumption | assignment, BRD, work specification |
 | DEL | deliverable — may delegate work ("produce NFRs and return") | assignment |
-| TBC | open question / to be confirmed, with owner | assignment, solution design, work specification |
+| TBC | open question / to be confirmed, with owner | assignment, BRD, solution design, work specification |
 | SOL | part of the solution — what is built or done, what it realises, the choice it rests on | solution design |
-| SCR | success criterion — optional or delegated | assignment |
+| SCR | success criterion — optional or delegated | assignment, BRD |
+| BR | business requirement — one rule of the business, testable, citing the REQ or POS it carries | BRD |
+| UC | use case — behaviour agreed as a sequence, at user-goal level | BRD |
+| DEP | dependency — what the BRD relies on outside itself | BRD |
+| NFR | non-functional requirement — a quality by category, its value the stakeholders' or a TBC | BRD |
 | POS | position the principal currently holds | intent |
 | THR | open thread — unresolved matter to elicit next; names the artefact it concerns and carries its origin: the principal's word (the default), a document by path, or Claude's synthesis | the project's `threads/`, one file per thread (POS.1680) |
 | REJ | rejected direction, with the reason it was dropped | intent |
@@ -687,6 +691,9 @@ lifecycle. Depth max two levels.
 The items of an assignment are written with **shall** / **shall not**
 and carry no priorities; the rule set is its definition's
 (`.claude/skills/forge/states/assignment.md`, Requirement style).
+The items of a BRD follow the same style made stricter; those rules
+are its definition's (`.claude/skills/forge/states/brd.md`,
+Requirement style).
 
 ## Isolated reviewers
 All run as isolated subagents that never see the working

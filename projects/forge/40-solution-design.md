@@ -1,5 +1,5 @@
 ---
-version: 0.43
+version: 0.44
 status: draft
 project: forge
 audience: whoever realises the solution, a person or an agent
@@ -213,9 +213,11 @@ boundary kept by hand or an order of work.
   `.claude/skills/forge/states/brief.md`,
   `.claude/skills/forge/states/intent.md`,
   `.claude/skills/forge/states/assignment.md`,
+  `.claude/skills/forge/states/brd.md`,
   `.claude/skills/forge/states/solution-design.md`,
   `templates/brief.md`, `templates/intent.md`, `templates/thread.md`,
-  `templates/assignment.md`, `templates/solution-design.md`.
+  `templates/assignment.md`, `templates/brd.md`,
+  `templates/solution-design.md`.
 - **SOL.0130 The `/recipe` dispatcher and the genres.** The same
   shape as SOL.0120: a thin dispatcher plus one definition file per
   genre, the genre's skeleton in `templates/recipe-<genre>.md`. The
@@ -590,6 +592,32 @@ boundary kept by hand or an order of work.
   `.claude/skills/forge/states/intent.md`,
   `.claude/skills/walkthrough/SKILL.md`, `.claude/skills/end/SKILL.md`,
   `scripts/forge-ledger.py`, `scripts/forge-migrate.py`.
+
+- **SOL.0850 The BRD.** The pair `states/brd.md` and
+  `templates/brd.md` in the shape of SOL.0120, one more definition the
+  dispatcher reads from disk; the persona
+  `challenger-business-analyst` as SOL.0300 has a persona, reading the
+  resource indexes first; the check `check-brd` as SOL.0330 has a
+  check, verifying the mechanics of a BRD and, in a BRD from a source,
+  that every rule cites the principal's side; a BRD from a file put in
+  is a work product of SOL.0640, never `30-brd.md`; the resource
+  indexes of SOL.0230 are an input of every BRD. The ledger reads a
+  TBC of the principal in the BRD's shape (SOL.0210). Built
+  2026-10-23 from the brief `brd` before the positions (POS.1780),
+  tried the same day on a vendor transcript into `work/` and on the
+  assignment of agentic-platform into its chain, the reviewers run on
+  the first. Realises: POS.1800, POS.1810, POS.1820, POS.1830,
+  POS.1840, POS.1850, POS.1360, POS.0700. Choice: no critic lens of
+  the BRD's own against one, the fork's single critic doing three
+  jobs; the cost is that a BRD's quality is read by two lenses that
+  know it only through its definition. A persona and a check against
+  the lenses alone: the trial showed the persona finding the world
+  outside the parent and the check the matrix, which no lens hunts;
+  the cost is two more agent files. Where:
+  `.claude/skills/forge/states/brd.md`, `templates/brd.md`,
+  `.claude/agents/challenger-business-analyst.md`,
+  `.claude/agents/check-brd.md`, `scripts/forge-ledger.py`,
+  CLAUDE.md (ID scheme, Requirement style).
 
 ### The reviewers
 - **SOL.0300 Contracts and agent files.** Each kind of reviewer owns one

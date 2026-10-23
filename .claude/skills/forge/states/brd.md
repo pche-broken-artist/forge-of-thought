@@ -39,7 +39,12 @@ cited by path (POS.1020), for now the fork's template in
 `projects/lib-allwyn/sources/fork-brd/template-brd.md`; a project
 with no enterprise around it has no roster, says `Roster: none`
 and walks the area against nothing; the group's standard in the
-same bundle; sources and research as the principal directs.
+same bundle; the indexes of the project's resources and of every
+library it depends on (`sources/00-INDEX.md`,
+`research/00-INDEX.md`, `projects/lib-*/sources/00-INDEX.md`), read
+always, so that a standard, a regulation or a report the forge
+already holds is cited and never declared unknown; sources and
+research as the principal directs.
 
 **Aim.** The BRD breaks the parent into rules, behaviour and
 qualities that the stakeholders can review on their own, the
@@ -82,7 +87,12 @@ stakeholders have not given, no behaviour of a system he has not
 read, no rule of a standard he has not been shown. In their place
 stands a DEP or a TBC with an owner, and the pass ends with the
 list of what must be supplied from outside, said plainly as the
-analyst's work. He copies nothing of the parent, invents no
+analyst's work and divided in two: what the forge already holds,
+by path, and what must be fetched. The owner of a DEP or a TBC is
+a role of the roster or of the stakeholders wherever one fits;
+`unassigned` only where none does. An assumption never settles an
+open question: what a TBC asks, no ASM answers. He copies nothing
+of the parent, invents no
 requirement the parent does not carry, and what he finds missing
 in the parent he raises as a question; a change of substance goes
 to the intent first (CLAUDE.md, Working methods).
@@ -92,8 +102,10 @@ Walked before the recast, to see what the parent does not answer,
 and at the end; an area may stay empty when it was considered and
 found not to apply, said with the reason where the roster of the
 instance makes the area mandatory.
-- the stakeholders: who approves, who reviews, who is consulted or
-  informed, as roles;
+- the stakeholders: who is responsible, who approves, who reviews,
+  who is consulted or informed, as roles; the roles the roster
+  names as signing or reviewing walked into the table, each with
+  its involvement or the reason it has none;
 - the scope of work and the scope of the document: what is done
   and not done, and what this BRD does not cover that a reader
   would expect, with where it is covered;
@@ -151,11 +163,17 @@ a gate. The ways in:
   not answer; the recast with the provenance map; the walkthrough
   by group, the touched areas walked one per item;
 - no BRD yet, on the principal's word automatically (draft early,
-  CLAUDE.md, Working methods, Handing over): Claude walks the Map
-  alone, writes what the parent answers, leaves what it does not as
-  a TBC or as an ASM, asks nothing, and returns the draft with the
+  CLAUDE.md, Working methods, Handing over): Claude first builds
+  the provenance map from the parent — every item of the parent,
+  or in a source every turn of the principal's side, listed as an
+  ask, a question or an agreement — then walks the Map alone and
+  writes the items from the map, so that nothing of the parent is
+  lost in silence; he leaves what the parent does not answer as a
+  TBC or as an ASM, asks nothing, and returns the draft with the
   provenance map, the list of what he assumed and the list of what
-  must be supplied from outside; a TBC whose owner the parent does
+  must be supplied from outside; a step of a use case or a
+  guarantee that no place of the parent gives is marked as Claude's
+  reading, as the phasing is; a TBC whose owner the parent does
   not name carries `owner: unassigned`, a valid open state and not
   a residue of the skeleton, until the principal names the role;
   nothing is derived from the draft before the principal has judged
@@ -194,7 +212,10 @@ with these made stricter for the BRD:
 - no value that no stakeholder gave: a category without a value is
   a TBC with an owner, never a figure from the skeleton;
 - every BR and UC cites its parent (`REQ.NNNN` or `POS.NNNN`; in a
-  work product from a source, the path and the place); an NFR
+  work product from a source, the path and the place, and the place
+  is a turn of the principal's side: what a vendor or any other
+  party said is cited only by a DEP or by a note after an item,
+  never by a shall); an NFR
   cites the REQ or POS it follows from where there is one, and
   otherwise its category of the template, since the qualities are
   asked of every ask whether the parent named them or not; an item

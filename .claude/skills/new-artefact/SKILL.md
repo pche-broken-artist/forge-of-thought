@@ -83,8 +83,11 @@ over; neither, and the Map is walked by interview. The order of what
 is born: the position in the intent; the definition, then its
 template; the row of a new prefix in CLAUDE.md, ID scheme; the
 reviewers, a persona file and the calibration of the critic's
-contract where decided; the item of the solution design. End by
-naming what was born and what stays open, offer `/check engine`,
+contract where decided; the item of the solution design. Where the kind needs a
+trial on real work before its position can hold, the order is
+POS.1780's: the brief, the pair with its reviewers, the trial, then
+the position and the item of the design, the brief the authority until
+then. End by naming what was born and what stays open, offer `/check engine`,
 and propose the first `/forge $0` on a project. The rosters need
 nothing: `/forge`, `/man` and the README read the definitions from
 disk.

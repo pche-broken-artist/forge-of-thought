@@ -7,7 +7,7 @@ inputs:
   - projects/forge/10-intent.history.md
   - projects/forge/10-intent.history.archive.md
   - projects/forge/40-solution-design.history.md
-  - projects/forge/10-intent.md v5.34
+  - projects/forge/10-intent.md v5.35
   - projects/forge/decisions.md
   - RELEASE-NOTES.md
 ---
@@ -18,6 +18,137 @@ One section per release of the engine, newest first, for the user who
 takes upgrades through `forge-pull`; Action required comes first in
 every section; the fine-grained log with the reasons lives in
 `projects/forge/10-intent.history.md`.
+
+## 5.35 - 2026-10-23
+
+### Added
+- The BRD is an artefact of the chain, `30-brd.md`, below the
+  assignment and above the solution design: the business requirements
+  that break the parent into rules the stakeholders of each area
+  review on their own, behaviour agreed as a sequence, and qualities
+  with their values from the stakeholders, so that the delivery can
+  estimate and the solution design can start; its definition is
+  `states/brd.md` with `templates/brd.md`, the fifth pair of the
+  chain, and the dispatcher reads both (POS.1800, POS.1310, SOL.0850,
+  SOL.0120). For you: `/forge brd` works the layer in a project that
+  needs it; the company's content, the roster of areas, the roles,
+  the systems and the publishing convention, lives in your instance's
+  library, the engine carries a generic Map only.
+- Three ways into a BRD: the assignment read with the intent and the
+  threads, the parent of an item a REQ; the intent alone where the
+  project has no assignment, the parent a POS; and a file you put in,
+  registered as a source, which yields a work product in `work/` and
+  never an artefact of the chain (POS.1810). For you: on your word
+  the draft is built automatically, the provenance map from the
+  parent first and the items from it, what the parent does not answer
+  left as a TBC with an owner or an ASM, Claude's own reading marked
+  as his; a BRD wanted in the chain from a transcript starts with an
+  intent handed over from the same file.
+- Four prefixes of its own, BR, UC, DEP and NFR, in the ID scheme of
+  CLAUDE.md; OOS, ASM, TBC and SCR reused; a BR and a UC cite their
+  parent, an NFR its parent or its category; the Requirement style of
+  the BRD is the assignment's made stricter, testability mandatory,
+  one idea per item, a role as owner, no value nobody gave, `shall`
+  for a BR and an NFR and the active voice for the steps of a UC
+  (POS.1830, POS.0230, the operating layer). For you: an item's type
+  is told by its prefix and never by a number range; the stricter
+  rules are the definition's, CLAUDE.md points at them.
+- What the forge cannot know, it names: no value of a quality the
+  stakeholders have not given, no behaviour of a system Claude has not
+  read, no rule of a standard he has not been shown; in their place a
+  DEP or a TBC with an owner, and every pass ends with the list of
+  what must be supplied from outside, divided into what the forge
+  already holds, by path, and what must be fetched; the resource
+  indexes of the project and of its libraries are an input of every
+  BRD, and an ASM never answers a TBC (POS.1820). For you: a standard
+  or a report lying in your `sources/` or in a library is never
+  called unknown, and what a BRD still needs from the supplier, the
+  systems or the operations is handed to you as a list, not written
+  from imagination.
+- The reviewers of a BRD: the challenger persona `business-analyst`,
+  which reads the resource indexes first and hunts what only someone
+  who knows the business and its world would see, and the check
+  `brd`, which verifies the mechanics, traceability both ways, a
+  parent on every item, the sections that may not be silent, terms,
+  links and skeleton residue; no new critic, `clarity` reads a BRD
+  with its Requirement style and `essence` compares it with its
+  parent (POS.1840, POS.0420). For you: `/challenge business-analyst`
+  and `/check brd` after a pass of `/forge brd`; the two critic
+  lenses as before.
+- The sign-off of a BRD happens outside the forge, by RACI where the
+  company does it; the forge records your approval as an integer
+  version and, in the BRD's Stakeholders section, the roles with
+  their involvement, never names; a report for a third party is a
+  work product, not a BRD (POS.1850). For you: a decision in
+  `decisions.md` where you want the sign-off kept, not a rule; which
+  artefacts a coding agent is given, you decide.
+
+### Changed
+- `forge-status` reports a repository-local identity as a fact, the
+  instance template gives a neutral handle as its example in place of
+  a person's own, and a write that finds no Author handle in
+  `CLAUDE.local.md` stops before it appends a record and offers
+  `/setup` (SOL.0550, THR.0720, POS.0950, POS.1050, the operating
+  layer). For you: an instance without an Author line is stopped at
+  its next write of a history record, not guessed for; run `/setup`
+  to add the line.
+- The ledger reads a TBC of the principal also in the BRD's shape,
+  `(owner: the principal; blocks estimation: ...)` (SOL.0850, the
+  operating layer). For you: the open questions a BRD puts to you
+  reach Waiting on principal like the assignment's.
+- `/new-artefact` follows the order of POS.1780 where a new kind of
+  artefact needs a trial: the brief first, then the build and its
+  test, then the rounds of the intent and the design right after it
+  (POS.1430, the operating layer). For you: a kind that must be tried
+  is built and tried before its positions are written, as the BRD
+  was.
+- The BRD's definition, template, persona and check mended from the
+  critique of the first build and from the first trial before the
+  layer was released: an NFR ends with its parent or its category, a
+  TBC may carry `owner: unassigned` as a valid open state, a UC
+  declares its parent in its Carries line and carries a trigger, a
+  success outcome and a minimal guarantee, the entities with their
+  states and their source system in the Map and the Terms table, the
+  phasing by phase with the items carried and a `not phased` row
+  where the parent forbids an order, ten categories of quality with
+  safety, the stakeholders' involvement with responsible, the roster's
+  signing roles walked into Stakeholders, a rule in a source-born BRD
+  citing the principal's side only, and the persona narrowed to the
+  world outside the parent (FND.2530 to FND.2620, POS.1360, the
+  operating layer). For you: the shape of a BRD as the layer first
+  reaches you; nothing of yours changes.
+- The growth path names the BRD as a layer that exists, no longer one
+  that is certain to come, and a BRD before the solution design is no
+  longer "one day" (POS.0700, POS.0450). For you: nothing to do; the
+  rest of the growth path, integration intended and a strategy layer
+  possible, is unchanged.
+
+### Fixed
+- The comment of the history companions brought to
+  `templates/history.md` as it stands, the records untouched
+  (FND.2520). For you: wording only; a new companion carries the
+  template's comment.
+
+### Rejected
+- REF as a prefix of the BRD for a related document (REJ.0390). For
+  you: a document is cited by its path, an item carries no link, and
+  related documents are a list without IDs.
+- The number range 0900 for the non-functional requirements
+  (REJ.0400). For you: NFR is a prefix, and groups take the next
+  hundred by the ID scheme.
+- FR as a prefix beside BR and NFR (REJ.0410). For you: a BR carries
+  the functional substance at the business level; a functional
+  specification below the BRD is the next stage's.
+- A BRD made from a file put in as an artefact of the chain
+  (REJ.0420). For you: such a BRD is a work product in `work/`; the
+  way into the chain is an intent handed over from the same file.
+- A critic lens of the BRD's own (REJ.0430). For you: `clarity` and
+  `essence` read a BRD as they read an assignment; the mechanics are
+  the check's, the substance the persona's.
+- The challenge that the growth path displaces the functions owning
+  business analysis, revisited at the birth of the BRD; the decision
+  stands (DEC.0060). For you: the BRD deepens specification, it does
+  not reach into execution.
 
 ## 5.34 - 2026-10-23
 

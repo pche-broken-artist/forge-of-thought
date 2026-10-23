@@ -37,11 +37,20 @@ What you verify:
    none (`.claude/skills/forge/states/brd.md`, Requirement style);
    a UC declares its parent in its `Carries` line, and its block
    ends with its tables. An item with none of these is a finding.
+   Where the parent is a source with speakers, the place a BR or a
+   UC cites is a turn of the principal's side; a BR whose every
+   place is another party's turn is a finding
+   (`.claude/skills/forge/states/brd.md`, Requirement style).
 3. **The sections that may not be silent** — Phasing is present and
-   not empty, every item it carries exists (POS.1360); every area
-   of the roster the BRD cites is in the Touched areas table as
-   found or not applicable with a reason, and `Roster: none` with
-   its one row is a fact, not a finding; every NFR category kept
+   not empty, every item it carries exists, and every BR and UC
+   stands in a phase or in the `not phased` row (POS.1360); every
+   area of the roster the BRD cites is in the Touched areas table
+   by the roster's own name, as found or not applicable with a
+   reason, and `Roster: none` with its one row is a fact, not a
+   finding; every role the roster names as signing or reviewing is
+   in the Stakeholders table or named as absent with a reason; an
+   ASM whose content answers what a TBC of the same BRD asks is a
+   finding; every NFR category kept
    carries a value or a TBC with an owner, never the skeleton's
    wording; every TBC has an owner — a role, or `unassigned`, which
    is a valid open state — and says whether it blocks estimation.

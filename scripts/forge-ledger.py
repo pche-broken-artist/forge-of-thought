@@ -419,7 +419,7 @@ def waiting(p, open_threads, fnd_rows, fnd_items, chl_rows, chl_items):
             continue
         flines = fd.read(f).split("\n")
         for n, line in enumerate(flines):
-            m = re.match(r"^- \*\*(TBC\.\d{4,5})\*\*\s*\(owner:\s*principal\)\s*(.*)$", line)
+            m = re.match(r"^- \*\*(TBC\.\d{4,5})\*\*\s*\(owner:\s*(?:the\s+)?principal(?:;[^)]*)?\)\s*(.*)$", line)
             if m:
                 text = [m.group(2)]
                 for cont in flines[n + 1:]:

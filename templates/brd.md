@@ -116,8 +116,9 @@ with the REQ or POS it follows from, or with its category where the
 parent named none. Delete the categories found not to apply, with
 the reason in the Touched areas or here. -->
 - **NFR.0010** Reliability (service hours, availability, fault
-  tolerance, recovery point, recovery time): … (TBC.NNNN, owner:
-  <role>) (category: reliability)
+  tolerance, recovery point, recovery time): The <thing> shall meet
+  the service hours, availability and recovery the stakeholders set
+  (TBC.NNNN, owner: <role>). (category: reliability)
 - **NFR.0020** Performance (response, throughput, capacity under
   peak, scalability): …
 - **NFR.0030** Security and privacy (authentication, authorisation,
@@ -146,6 +147,7 @@ this document. -->
 | Phase | Delivers | Items carried | Depends on |
 |---|---|---|---|
 | 1 | … | BR.NNNN, UC.NNNN | … |
+| not phased | <why these hold across every phase, or wait on a TBC> | BR.NNNN | … |
 
 ## Success criteria
 <!-- How the stakeholders will know the ask was met. May be delegated

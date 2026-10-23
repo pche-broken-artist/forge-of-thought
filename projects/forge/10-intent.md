@@ -1,5 +1,5 @@
 ---
-version: 5.34
+version: 5.35
 status: draft
 project: forge
 audience: principal + Claude only
@@ -289,9 +289,10 @@ position that already stands elsewhere.
   carries in the brief's, what the intent and its threads hold in the
   intent's, completeness and the Requirement style in the assignment's.
   CLAUDE.md keeps of each artefact what it is, how it joins the chain,
-  and a pointer. The definitions of the four artefacts of today's chain
-  are the state files `brief.md`, `intent.md`, `assignment.md` and
-  `solution-design.md`; POS.1330, POS.1340 and POS.1350, and for the
+  and a pointer. The definitions of the five artefacts of today's chain
+  are the state files `brief.md`, `intent.md`, `assignment.md`,
+  `brd.md` and `solution-design.md`; POS.1330, POS.1340 and POS.1350,
+  for the BRD POS.1800 with POS.1810 to POS.1850, and for the
   solution design POS.1400 with POS.1420, say what each is to achieve
   and why. Present shape 2026-10-02, from `00-brief-elicitation.md`.
 - **POS.1320 A Map is a map of what must be found, not a
@@ -353,8 +354,11 @@ position that already stands elsewhere.
   everything is in the first version. "Later" in an assignment is
   not out of scope: out of scope is never done, later is done, only
   not now. The shape for the intent and the assignment is not solved
-  here, and the whole is the principal's stance for now, confirmed
-  when the BRD gets its definition in the brief `brd` (THR.0360). The
+  here, and the whole is the principal's stance for now, confirmed on
+  2026-10-23 with the BRD's definition (POS.1800): where the parent
+  forbids deriving an order, as an assignment of the End Game does, the
+  BRD's phasing is one row, `not phased`, with the reason and the open
+  question it waits on. The
   division is the forge's own and is tried, not assumed. Decided
   2026-09-28 from `00-brief-elicitation.md`.
 - **POS.1370 How sure a claim is, is said in words.** Whatever
@@ -889,6 +893,108 @@ position that already stands elsewhere.
   player page plays what the script computed. Proved on the first
   teaching video, 2026-10-14; the principal's word of the same day.
 
+- **POS.1800 The BRD.** The BRD is an artefact of the chain,
+  `30-brd.md`, below the assignment and above the solution design:
+  the business requirements, found by the analyst working as
+  principal with Claude as partner, that break the parent into rules
+  the stakeholders of each area review on their own, behaviour that
+  must be agreed as a sequence, and qualities with their values from
+  the stakeholders, so that the delivery can estimate and the
+  solution design can start. It is built on the standards of the
+  field (ISO/IEC/IEEE 29148, BABOK, IREB, the group's own BRD
+  standard); the BRD a colleague built in a fork of the engine is its
+  inspiration and nothing of it is taken over: what held on real work
+  is distilled, the rest left. The company's content — the roster of
+  areas and which are mandatory, the roles, the systems, the
+  publishing convention — lives in the instance's library; the engine
+  carries a generic Map. Its definition is `states/brd.md` with
+  `templates/brd.md` as its pair; what it is to achieve and why is
+  this position, with POS.1810 to POS.1850. Decided 2026-10-23 from
+  `00-brief-brd.md` 0.5; the challenge of DEC.0060 revisited the same
+  day, the decision stands.
+- **POS.1810 How a BRD starts.** Three ways in. The assignment, read
+  with the intent and the threads for the reasons it does not carry,
+  the parent of an item a REQ; the intent alone where the project has
+  no assignment, the parent a POS, no assignment invented for it; and
+  a file the principal puts in — a transcript, an offer, a document of
+  someone else — registered as a source and cited by path. The first
+  two make `30-brd.md`; the third makes a work product in `work/`
+  only, never an artefact of the chain, since what someone said does
+  not become the principal's position by being run through a skill
+  (POS.0180); where that BRD is wanted in the chain, an intent is
+  handed over from the same file first and the BRD re-parented on it
+  (THR.0670). On the principal's word a BRD is drafted automatically,
+  draft early: Claude builds the provenance map from the parent
+  first and writes the items from it, so that nothing of the parent
+  is lost in silence; what the parent does not answer he leaves as a
+  TBC, its owner a role of the roster or `unassigned` where none
+  fits, or as an ASM; a step or a guarantee no place of the parent
+  gives he marks as his reading; he asks nothing and returns the
+  draft with the map, what he assumed and what must come from
+  outside; nothing is derived from the draft before the principal has
+  judged it. Reason: the principal's mode of operation, a BRD pulled
+  fast out of a document to see what it shows; and the trial of
+  2026-10-23 on a vendor meeting's transcript, where items written
+  before the map lost four asks of the room. Decided 2026-10-23.
+- **POS.1820 What the forge cannot know, it names.** Much of a BRD is
+  not in the intent or the assignment: the documentation of the
+  supplier and of the systems touched, the standards and the
+  regulation that apply, what the operations know. The forge does not
+  do that work and will not; it reminds. Claude writes nothing of it
+  from imagination — no value of a quality the stakeholders have not
+  given, no behaviour of a system he has not read, no rule of a
+  standard he has not been shown; in its place stands a DEP or a TBC
+  with an owner, and the pass ends with the list of what must be
+  supplied from outside, divided into what the forge already holds,
+  by path, and what must be fetched. The resource indexes of the
+  project and of its libraries are an input of every BRD, so that a
+  standard, a regulation or a report the forge holds is never called
+  unknown. An assumption never settles an open question: what a TBC
+  asks, no ASM answers. Reason: the trial of 2026-10-23, where the
+  regulatory survey and the architecture rules lay in the library and
+  the draft declared them unknown, and where the vendor's answers
+  leaked into rules and use cases. Decided 2026-10-23.
+- **POS.1830 The items of a BRD.** Four prefixes of its own: BR, a
+  business requirement; UC, a use case at user-goal level; DEP, a
+  dependency on what the BRD relies on outside itself; NFR, a
+  non-functional requirement, a quality by category whose value is the
+  stakeholders'. OOS, ASM, TBC and SCR are reused; REQ, or POS, is
+  cited as the parent of every BR and UC, and an NFR cites its parent
+  or, where the parent named none, its category. A type is never told
+  by a number: the prefix says what an item is, the group where it
+  belongs. The Requirement style of the BRD is the assignment's made
+  stricter: testability mandatory; one idea per item, a short list
+  inside it allowed; a note after an item carrying no requirement; a
+  role as owner; no value nobody gave; in a BRD from a source a rule
+  cites the principal's side only; `shall` for a BR and an NFR, the
+  active voice for the steps of a UC. Reason: the standards agree on
+  the shape of a requirement and know no prefix; what the fork added
+  beyond them is rejected (REJ.0390 to REJ.0410). Decided 2026-10-23.
+- **POS.1840 The reviewers of a BRD.** No new critic: `clarity` reads
+  a BRD with the BRD's Requirement style, `essence` compares it with
+  its parent. A challenger persona `business-analyst` hunts what only
+  someone who knows the business and its world would see: the inside
+  written as if the system or the regulation had been consulted, the
+  standard that applies and is not there, the quality that is silent,
+  the process that already exists, the stakeholder not in the room,
+  solving in the wrong layer, the assumption that is a decision, and
+  what cannot be known here; it reads the resource indexes first. A
+  check `brd` verifies the mechanics: traceability both ways, a parent
+  on every item, the sections that may not be silent, terms and links,
+  skeleton residue. Reason: the fork's one critic did three jobs, and
+  the engine has three places for them (POS.0410, POS.0420,
+  POS.1140); the first trial showed the persona finding what the
+  lenses and the check do not. Decided 2026-10-23.
+- **POS.1850 The sign-off and the use of a BRD.** The stakeholders'
+  approval by RACI happens outside the forge, where the company does
+  it; the forge records the principal's approval as an integer
+  version and, in the BRD's Stakeholders section, the roles with their
+  involvement, never names; a decision in `decisions.md` where the
+  principal wants the sign-off kept, not a rule. A report for a third
+  party is a work product, not a BRD (POS.1520). A coding agent that
+  takes a chain is given the artefacts that are available; which, a
+  person decides. Decided 2026-10-23.
+
 ### Structure and style of an assignment
 - **POS.0200** Structured items with stable IDs beat prose, even at very
   high abstraction. Narrative is confined to Purpose & Context and
@@ -932,7 +1038,8 @@ position that already stands elsewhere.
   go (REJ.0370).
 - **POS.0230** Prefix vocabulary, aligned with the group BRD standard
   where an equivalent exists: REQ, OOS, CON, ASM, DEL, TBC, SCR in the
-  assignment; POS, THR, REJ, FCT in the intent; FND, CHL, DEC
+  assignment; BR, UC, DEP, NFR with OOS, ASM, TBC, SCR in the BRD
+  (POS.1830); POS, THR, REJ, FCT in the intent; FND, CHL, DEC
   internally. No universal standard for prefixes exists; this is a
   house convention derived from the group's own. A fact (FCT) is what
   is the case — stated by the principal on his word, or by a source
@@ -1239,9 +1346,11 @@ position that already stands elsewhere.
   organisational reality, failure modes, missing dimensions, the serious
   counter-case; the second is `architect`, for the solution design: he
   takes what is wanted as given and asks whether this is the way to get
-  it; further personas — a strategist, a business analyst with the BRD —
-  are created from the lens-file skeleton by the principal's decision
-  when first needed, and only where their blind spots genuinely differ:
+  it; the third is
+  `business-analyst`, for the BRD (POS.1840), born 2026-10-23; further
+  personas — a strategist among them — are created from the lens-file
+  skeleton by the principal's decision when first needed, and only
+  where their blind spots genuinely differ:
   personas that would say the same things in different words are noise.
   Bare `/challenge` lists the roster and recommends a fit for the
   project's subject. The target may also be any file of the project,
@@ -1289,8 +1398,7 @@ position that already stands elsewhere.
   written with; no ledger of a project carried the word by 2026-10-18,
   so nothing is converted.
 - **POS.0450** An artefact is best challenged before the next layer is
-  first derived from it — the intent before the first assignment, one
-  day a BRD before the solution design — while accepted challenges are
+  first derived from it — the intent before the first assignment, a BRD before the solution design — while accepted challenges are
   still cheap to absorb. Whether it runs again later — after a draft,
   before approval — is left to the judgement of whoever is running the
   process; no rule prescribes it.
@@ -1933,9 +2041,8 @@ position that already stands elsewhere.
 
 ### Growth path
 - **POS.0700** The principal intends to keep extending the engine
-  downward: thoughts are forged as far as he needs them taken. The BRD
-  layer is certain to come; integration is intended; a strategy layer is
-  possible if it proves to make sense. Which layers are added, and in
+  downward: thoughts are forged as far as he needs them taken. The BRD layer exists since 2026-10-23 (POS.1800); integration is
+  intended; a strategy layer is possible if it proves to make sense. Which layers are added, and in
   what order, is open — possibly all of these, possibly none yet.
   Nothing is approved for construction: the mechanics of a layer
   (commands, agents, reviewer calibration) are designed when that layer
@@ -1966,7 +2073,11 @@ position that already stands elsewhere.
   every user of it. A user is to be able to add an artefact of his
   own as easily, kept at his own place; where that place is waits for
   THR.0300 and THR.0230. Types other than an artefact, a whole chain,
-  a reviewer, a genre, are not this command's (THR.0480). Reason: a
+  a reviewer, a genre, are not this command's (THR.0480). Where the
+  kind needs a trial on real work before its position can hold, the
+  order is POS.1780's: the brief, the pair built with its reviewers and
+  tried, then the position and the item of the design; the BRD was
+  born so on 2026-10-23. Reason: a
   kind added by hand took a search for everything it touches, and two
   of the things it needs, a prefix and a challenger, are easily
   forgotten. Decided 2026-10-04.
@@ -2443,6 +2554,30 @@ worked out by Claude; what Claude has worked out is never a FCT
   of every project and every fork for a gain in diffs that the hard wrap
   at 72 columns serves well enough, and no part of collaboration
   (THR.0690 closed). TBC.0060 and TBC.0080 removed with it.
+- **REJ.0390** REF as a prefix of the BRD for a related document, as
+  the fork had it. Rejected 2026-10-23: the forge cites a document by
+  its path, an item carries no link, and related documents are a
+  list without IDs.
+- **REJ.0400** The number range 0900 for the non-functional
+  requirements, as the fork had it. Rejected 2026-10-23: a type is
+  never told by a number; NFR is a prefix instead, and groups take the
+  next hundred by the ID scheme.
+- **REJ.0410** FR as a prefix beside BR and NFR. Rejected 2026-10-23:
+  a BR carries the functional substance at the business level, as the
+  group's standard has it; a functional specification below the BRD
+  is the next stage's, and the line between a BR and an FR would be
+  drawn at every item without ground in the content.
+- **REJ.0420** A BRD made from a file put in as an artefact of the
+  chain. Rejected 2026-10-23: the trunk of the chain is the intent,
+  and what someone said in a meeting does not become the principal's
+  position by a skill; the file yields a work product, and the way
+  into the chain is an intent handed over from the same file
+  (POS.1810).
+- **REJ.0430** A critic lens of the BRD's own. Rejected 2026-10-23:
+  the clarity and the essence lens read a BRD as they read an
+  assignment, the mechanics are a check's, and the substance a
+  persona's; a fourth kind of reviewer would say the same things in
+  different words (POS.1840).
 ## Candidate structure for the layer below
 
 The layer below exists: `40-solution-design.md`, a draft, where what
