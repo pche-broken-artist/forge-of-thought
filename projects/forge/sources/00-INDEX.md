@@ -231,3 +231,11 @@ to its own 00-INDEX.md. -->
 - **Form:** text
 - **Role:** a challenge the operating layer of THR.0730 was worked against on 2026-10-22 before it was applied (the principal's word).
 - **Use for:** why docs-state falls back to the engine's repository only for the engine and `projects/forge`, and what the test of the migration outside git covered.
+
+### `collaboration-simplification-challenge.md`
+- **What:** a challenge of the cutover of the brief `collaboration` after its first release: release 1 named as what solved most real conflicts (the ledger out of git, the clean headers, threads as files, unique report names), the deferred releases 2 to 4 named a "moloch" (a custom merge driver, versions with `+`, blocks of IDs, one sentence per line), and a simplified shape proposed: `merge=union` on the histories and the decisions, sequential IDs with duplicates detected by the ledger script and fixed after the merge, conflicts in text read and resolved by Claude under the hook with the principal's consent, branches as plain git, releases 2 to 4 cancelled for one principle. Proposes, decides nothing.
+- **Origin:** written in Czech by Gemini in a session outside the forge, in a conversation the principal ran on his tasks; pasted into the conversation by the principal on 2026-10-23 and stored in English on his word.
+- **Date:** 2026-10-23, from the ingest
+- **Form:** text
+- **Role:** the second of two proposals laid side by side on 2026-10-23 for the simplification of what the brief `collaboration` delivers (the principal's word), Claude's own proposal of the same day being the first; the proposal of the whole solution and implementation is worked against both.
+- **Use for:** the argument for cancelling the deferred releases (a reaction to two conflicts of one person whose causes release 1 removed; a custom driver fails on CI and for an external contributor), the simplified shape in a table, and where it differs from Claude's proposal (the breadth of git opened to Claude, who fixes a duplicate, the version after a merge, two windows).

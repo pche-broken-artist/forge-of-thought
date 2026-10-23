@@ -2,7 +2,7 @@
 project: forge
 title: Work of several people, branches and windows on one project
 author: PCHe
-version: 0.8
+version: 0.9
 status: draft
 ---
 
@@ -34,17 +34,27 @@ RELEASE-NOTES.
 ## Principle
 
 The forge still never merges, pulls or rebases on its own judgement
-(POS.1490, POS.1110 hold). One thing changes: every file of a
-project gets one of four ways of merging, and the forge tells git
-which one. Derived state (the ledger) is not kept in git at all but
-made at read time; derived documents for a reader (renders, the
-documentation, a render of the state) are in git, made only on
-main. What is a record is merged as a set of records. What is
-composed text is merged by git block by block, and a person settles
-only the same item changed twice. Immutability is a process rule, as
-it is for reviews and research today: git knows no attribute for
-it, the driver raises an alarm at a merge that breaches it, and
-nothing is locked.
+(POS.1490, POS.1110 hold). One person on one project is the norm and
+needs nothing of this. Two people on one project is the exception, and
+the exception is handled with git as everyone knows it: branches, pull,
+merge; the forge does not automate it and does not stand in for git.
+Where git leaves a conflict, the forge helps a person settle it: Claude
+lays both sides out, the person decides, Claude writes the chosen
+wording. The one project where several hands will meet is the forge
+itself, and there the hands meet as on any open-source repository:
+issues and pull requests on GitHub, one integrator. The first release of
+this brief (5.26, 2026-10-19) removed the causes of the collisions that
+prompted it: the ledger made at read time, the headers without changing
+fields, the threads as files, the unique names of reports. What the
+brief went on to design beyond that, a driver of records, a merge of its
+own, worktrees, the version as a landing, blocks of IDs, one sentence
+per line, is a git built over git, and that is not the value of the
+forge; it is let go on 2026-10-23. Where a rule of the forge or a
+setting of its harness stands in the way of this simpler shape, the rule
+changes, the hook's wall included.
+
+What was thought on 2026-10-17, the four ways of merging; way 2 is let
+go, the others stand:
 
 | Way | Files | At a merge |
 |---|---|---|
@@ -54,6 +64,11 @@ nothing is locked.
 | 4 immutable, unique | reviews, challenges, research, sources, closed threads | never conflicts; the name unique across branches too; immutability a process rule |
 
 ## Mechanism
+
+Built in the first release (5.26, 2026-10-19): A, B0, B, C1, D's `ours`
+and `binary` with the registration, E, M. Let go 2026-10-23: A2, F1, C,
+D's way 2, F2; their text stays below as what was thought, see
+Principle.
 
 **A. A header without fields that change at every operation.**
 `date` and `last_change` leave the header of the artefacts and the
@@ -70,6 +85,8 @@ on main (F1); nothing that changes with a round enters a header, so
 that no field ever asks for a write on a branch. Value: it removes
 the certain conflict of every pair of rounds in every artefact,
 whatever the rounds were about.
+
+*Let go 2026-10-23, see Principle.*
 
 **A2. Prose one sentence per line instead of 72 columns.** For the
 artefacts, the threads, the decisions, the skills, the agents, the
@@ -202,6 +219,8 @@ of way 3 like the README, nothing added by force (forge-save never
 adds a file by force, so committing `ledger.md` only at a release is
 out).
 
+*Let go 2026-10-23, see Principle.*
+
 **F1. The version as a boundary in the history, for branches.** A
 branch never changes an artefact's header: `version` and `status`
 are written only by forge-land on main, so the header on a branch
@@ -240,6 +259,8 @@ where it happens anyway, the driver leaves the two `landed` side by
 side and the ledger script reports two versions with one number.
 Value: the version conflict disappears when two branches touch the
 same artefact, without an exception to the append-only history.
+
+*Let go 2026-10-23, see Principle.*
 
 **C. The driver for sets of records.** A script,
 `scripts/forge-merge.py`, registered under the unambiguous name
@@ -299,6 +320,8 @@ stays without a version and without a history of its own, the
 intent's history records it as today. Value: two people on different
 threads never conflict, Claude reads only the threads he needs, and
 the driver need not handle blocks with an inner state. Migration: M.
+
+*Built in the first release with `ours` and `binary` and the registration; way 2 let go 2026-10-23, see Principle.*
 
 **D. `.gitattributes`, registration and where things are made.** A
 template `templates/gitattributes`: `text=auto` unchanged, way 2 on
@@ -377,6 +400,8 @@ continue), then the push through forge-save.
 instead of `-2`, the time to the minute and four hex characters of a
 content hash. Value: two branches do not make the same name; the
 time alone is not enough for two people.
+
+*Let go 2026-10-23, see Principle.*
 
 **F2. IDs on a branch.** Not a block from a hash of the branch name:
 the ID space is about 85 free hundreds per prefix and ten branches
@@ -501,105 +526,47 @@ every skill that would write into a project of the old shape say
 
 ## Promise, impact, order, verification
 
-**What the forge promises.** On the clone, at a local merge and at
-the rebase of `/save`: the record files merge by themselves, the
-derived state is made anew at read time, the threads and the
-artefacts conflict only where two people changed the same item or
-sentence. A merge request on GitLab or GitHub does not know the
-driver; the path is the branch, `/save`, a local merge, `/save`, and
-`/pull` says so at the state "diverged". Two windows of one person
-on one project are two working trees, on two projects two
-repositories and `/save` with a slug; two clones on main are
-sequential.
+**What the forge promises.** One person on one project: `/save` and
+`/pull`, as today. Two people, or two branches: the derived state is
+made anew at read time and never conflicts; a conflict in a history, in
+`decisions.md` or in an index is two tails and is settled by keeping
+both; a conflict in an artefact is the same item or sentence changed on
+both sides and is settled by a person with Claude's help; `/save` leaves
+such a conflict standing instead of aborting, and the finishing commands
+of git run on the hook's ask. IDs stay sequential; a number taken twice
+is reported by the ledger script and the younger is renumbered
+(POS.0220). A version given twice is settled by whoever merges, with the
+next number and one record. A merge request without conflict is merged
+on the server; with conflict it is fetched and settled on a clone. Two
+windows of one person on one project are not solved now: the person
+either does work the two windows can merge afterwards, or arranges it
+himself through git.
 
 **What does not change.** The chain, the artefacts and their
-definitions, the immutability of records, one write per round on
-main, IDs never renumbered, the format of the ID scheme but for the
-fifth digit, git only through the scripts, no merge on the
-forge's judgement, forge-save's order, no file per record for the
-histories and the decisions, no splitting of directories in advance,
-the research notes, the kinds of a history record but for `landed`,
-the brief's history as the history of the brief's own changes.
+definitions, the immutability of records, one write per round, IDs never
+renumbered but at a clash, the scripts as the door of the routine
+(`/save`, `/pull`, `/release`), no merge on the forge's judgement.
 
-**Where it lands.** CLAUDE.md: Document kinds (the ledger made at
-read time, the new kinds `thread` and project file, the map as an
-authored record file, the wrapping), Ledger (the Waiting rule),
-Persistence (the four ways, the driver, `.gitattributes`, the
-worktree, the promise, the path through branches), Versioning (the
-header written on main only, `+`, `landed`, land first, `v+N` in a
-provenance, state records and the version), ID scheme (the THR row,
-the free number as neither used nor reserved, `ids.md`, the fifth
-digit), the position on upgrades. Templates: ledger (its header
-moves to the project file), index (date, origin, form), history
-(`landed`, `+`, the `mined` and `state` records), thread new,
-threads dropped, gitattributes new, project file new, ids new,
-headers without `date` and `last_change`, docs-map (fields under A).
-Scripts: forge-ledger, forge-merge, forge-land, forge-migrate new;
-forge-history computing the version and reading five digits;
-forge-branch the reservation by plumbing (`--reserve`) and
-`--worktree`; forge-status the registration and the version check;
-forge-save pushing an ahead repository; forge-clone reading the
-project file; forge_repos recognising a worktree; the documentation
-scripts taking the previous map from git. Skills: the 26 writing the
-ledger, `/setup`, `/new-project`, `/import-project`, `/save` (pull
-first when behind), `/release` (the state render), `/pull`,
-`/check light`, `/check project`, `/forge` (the state against origin
-as the map's last word), `/end`, `/ledger`,
-`/ingest` (Role before the write), `/document` (main only),
-`/migrate` new, the definition of the intent (the mining recorded in
-its history), the walkthrough (the reservation at the reflection),
-the write step of every artefact (the header untouched on a branch,
-land first per document, state records without a raise), `/render`,
-`/research` and `/critique` (the `v+N` provenance), the contracts of
-the reviewers for the `closed` record of a finding, the recipe
-`release-notes` (a landing without content changes). The forge
-intent: POS.1110 narrowed, the position on upgrades narrowed, new
-positions for the four ways, the ledger at read time, the driver,
-threads as files, the version as a boundary, the reservation of
-IDs, the worktree, the promise; THR.0090 and THR.0640 moved; a
-thread for A2's conversion.
+**Where it lands.** The hook on git gains a third answer, ask, for the
+commands that finish a conflict; `forge-save` leaves a conflict
+standing; CLAUDE.md Persistence says the promise in one paragraph; the
+intent's positions from this brief are rewritten or rejected as the
+proposal `work/collaboration-cutover` lists them; the cutover plan's
+deferred rows are dropped.
 
-**Order.** First release: A2 first (its conversion and its check),
-then B0, A, B and C1 together (one parser of threads, never two),
-the `.gitattributes` with `ours` and `binary`, `/setup` with the
-config and forge-status with its check, the map's last word and
-forge-save's push, and M for all of it. Second release: C with the
-attributes of way 2, the rest
-of D, and E: it changes no doctrine and removes the second pain, the
-histories and the decisions merged by hand, before F1 reaches into
-the write step and the release. Third: F1 (`+`, `landed`,
-forge-land, land first, the ordering rule). Fourth: F2; the fifth
-digit is part of the first release's migration, so that the scripts
-read five digits before any reservation needs them.
-
-**Verification.** A throwaway clone (THR.0650), four tests.
-Branches on different artefacts: each appends a record to a
-different history, opens a thread and adds a decision with IDs from
-different hundreds (or, before F2, with the ledger script's report
-expected), makes a research on a different question, renders a
-different recipe, and one of them runs a round of state only, a
-finding closed without a change of the intent; the merge without
-conflict, `/check light` clean, the state-only round raising no
-version, after the first and second release. Branches over the same
-artefact: each changes a different position, the headers untouched;
-the merge without conflict with F1, and this is the test that
-exercises the history driver. A long branch pulling main into itself
-after a landing on main: its `+` records stay unlanded in `/history`
-and the map (the ordering rule). The same position changed on both
-sides must remain a conflict exactly there.
+**Verification.** One test on the fixture: two clones, a conflict in a
+history and in an artefact, settled through the conflict step and
+pushed.
 
 ## Open, for the principal to decide
 
-Nothing. The eleven points of 0.6 were decided on 2026-10-17 in a
-walkthrough, all eleven accepted: A2 in the first release before C1;
-the project file `project.md`; the state on GitHub as
-`renders/state.md` at a release; the version as a boundary (F1) as
-written; the reservation of IDs (F2) as written; five digits now,
-within the first migration; both indexes as mutable blocks; the
-`closed` record and the mining in the intent's history; the Waiting
-rule as written; the worktree at `projects/<slug>@<branch>/`;
-`/migrate` as the one command of the migration. The brief is ready
-to be mined (`/forge intent`).
+Nothing of the mechanism: 0.9 was decided on 2026-10-23 by the
+principal's word, the proposal of the whole solution and its
+implementation living in `work/collaboration-cutover`. One direction, not
+a mechanism: two windows of one person on one project. Where the windows
+meet is to be mapped from what each operation writes; when it comes to
+it the answer is git's, a branch, or a second clone where a branch in
+one tree is not enough (noted 2026-10-23 as an aside, not decided).
 
 ## Material
 
@@ -675,3 +642,11 @@ to be mined (`/forge intent`).
 - The analysis of the files of the project forge and of the engine
   on 2026-10-17: records one per line, prose wrapped at 72 columns,
   measured by file group.
+- `sources/collaboration-simplification-challenge.md`: the challenge of
+  the cutover after the first release, from another model (2026-10-23);
+  the naming of releases 2 to 4 as a reaction to two conflicts of one
+  person whose causes the first release removed, and the simplified shape
+  in a table, come from it; its `merge=union` was not taken (remark:
+  REJ.0280 and the research of 2026-10-17 stand, union loses a line at the
+  seam). Claude's own proposal of the same day is the first of the two
+  laid side by side and lives in `work/collaboration-cutover`.

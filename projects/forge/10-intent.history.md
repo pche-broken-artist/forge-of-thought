@@ -518,3 +518,4 @@ word `<file> | changed | state: by hand`.
 - 2026-10-22 | 5.30 | PCHe | the operating layer | changed | scripts/forge-ledger.py finds the closing commit of a thread by the header line `status: closed` added or removed (`git log -G`), no longer by the count of the words, which every thread file carries in its comment and which made the creating commit the closing one (FND.2350).
 - 2026-10-22 | 5.30 | PCHe | FND.2350 | closed | the pickaxe of the ledger script replaced by a line match, the report line gone (the light check of 2026-10-22, the immediate fix taken).
 - 2026-10-22 | 5.30 | PCHe | FND.2360 | closed | the created record of the brief next-gen 0.4 split, the reason carried by a changed record (the light check of 2026-10-22, the immediate fix taken).
+- 2026-10-23 | 5.30 | PCHe | THR.0740 | created
