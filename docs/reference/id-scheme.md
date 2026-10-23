@@ -1,35 +1,40 @@
 ---
-generated: 2026-10-19
-version: 5.26
+generated: 2026-10-23
+version: 5.33
 made: mirrored
-inputs-hash: ef85bb7c59f13194
+inputs-hash: 7826e80fe88194ae
 inputs:
   - CLAUDE.md#ID scheme
 ---
 
 # ID scheme
 
-This page states the format of an ID, the rules for numbering items and the table of prefixes, for anyone who reads, writes or checks the items of a project. Terms of the forge are explained in the [Glossary](glossary.md).
+This page is the reference for the IDs that mark the items of a project: their format, the rules that number them and the table of prefixes. It is for anyone who reads, writes or checks items that carry an ID. The principal is the person whose thinking is forged, and the ledger is the state report that is made from the documents when it is read.
 
 ## Format
 
-An ID has the form `PREFIX.NNNN`.
+An ID has the format `PREFIX.NNNN`.
 
-- The prefix is three letters.
-- `NNNN` stands for the number, here and in the templates and skills.
-- The number has four digits as long as it fits. A fifth digit is used only beyond 9999 (for example `REQ.10000`).
+- The prefix is always three letters.
+- `NNNN` stands for the number. It has four digits as long as the number fits. A fifth digit is used only beyond 9999 (`POS.10000`).
 - No zero is added to an existing ID.
 - Every sorting of IDs is numeric, by prefix and then by number.
 
-IDs are global and stable. They are never renumbered. Items may move between groups without a change of ID. The reasons are on [Stable IDs](../about/stable-ids.md).
+## Stability
 
-## Numbering
+IDs are global and stable. An ID is never renumbered.
+
+The one exception is two items that carry one number. The younger item is renumbered, and the renumbering is recorded.
+
+Items may move between groups without a change of ID.
+
+## Numbering rules
 
 - Items are numbered in tens (`REQ.0010`, `REQ.0020`).
 - Each new group starts at the next hundred (`REQ.0100`, `REQ.0110`).
 - Overflow takes the next free number anywhere.
-- Groups are plain headings: they carry no IDs, no metadata and no lifecycle.
-- Depth is two levels at most.
+- Groups are plain headings. They have no IDs, no metadata and no lifecycle.
+- Groups nest to a depth of two levels at most.
 
 ## Prefixes
 
@@ -44,18 +49,16 @@ IDs are global and stable. They are never renumbered. Items may move between gro
 | SOL | part of the solution: what is built or done, what it realises, the choice it rests on | solution design |
 | SCR | success criterion, optional or delegated | assignment |
 | POS | position the principal currently holds | intent |
-| THR | open thread: an unresolved matter to elicit next; names the artefact it concerns and carries its origin, which is the principal's word (the default), a document by path, or Claude's synthesis | the project's `threads/`, one file per thread |
+| THR | open thread: an unresolved matter to elicit next; it names the artefact it concerns and carries its origin, which is the principal's word (the default), a document by path, or Claude's synthesis | the project's `threads/`, one file per thread |
 | REJ | rejected direction, with the reason it was dropped | intent |
 | FCT | fact: what is the case, as the principal states it or as a source states it; not a stance; a source's fact cites its file, the principal's needs none; verification is never demanded | intent |
 | FND | finding of a critic (document quality) or of a check (conformance) | ledger, reviews |
 | CHL | peer-review challenge (substance) | ledger, challenges |
-| DEC | decision, including rejected findings and challenges | `decisions.md` |
-
-The principal is the person whose thinking is being forged. The ledger is the file that holds the state of a project.
+| DEC | decision, including rejected findings and challenges | decisions.md |
 
 ## See also
 
-- [Stable IDs](../about/stable-ids.md): why IDs are never renumbered.
+- [Stable IDs](../about/stable-ids.md): why IDs are never renumbered, and how the one exception is settled.
 - [Glossary](glossary.md): every term of the forge in one line.
 
-Generated on 2026-10-19 for version 5.26 from the files the front-matter names; never edited by hand.
+Generated on 2026-10-23 for version 5.33 from the files the front-matter names; never edited by hand.

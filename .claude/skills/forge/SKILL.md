@@ -18,7 +18,9 @@ is CLAUDE.md, Document chain's. This dispatcher never changes.
 3. Report compactly:
    - the project's kind and language (the project file, POS.1590,
      POS.0960) and whether it is
-     under git — `projects/<slug>/.git` present or "not under git",
+     under git — as `python scripts/forge-status.py --remote` of step
+     4 reports it, a repository of its own or "not under git"
+     (POS.0550),
      stated as a fact, never as a defect (CLAUDE.md, Persistence);
    - a `library` is material, not a project waiting for a brief:
      report its sources and research (from the ledger and the

@@ -1,13 +1,14 @@
 ---
-description: First run after cloning the engine — create and fill CLAUDE.local.md by interview, set the session model to the forge's default, offer the git identity per host, the global guard and the registration of the merge drivers in the global git configuration git reads; never overwrites, runs no git operation
+description: First run after cloning the engine — create and fill CLAUDE.local.md by interview, set the session model to the forge's default, offer the git identity per host, the global guard and the registration of the merge driver `ours`, written through `scripts/forge-config.py`; never overwrites
 disable-model-invocation: true
 ---
 
 Prepare this instance of the forge (POS.1050). Run after cloning the
 engine, before any other work. Two files in the engine — plus, on the
-user's word, the git identity configuration outside it, which is
-git's own (CLAUDE.md, Persistence); the command runs no git
-operation.
+user's word, the global git configuration outside it, which is git's
+own (CLAUDE.md, Persistence), written only through
+`scripts/forge-config.py`; what each of its calls writes and what it
+leaves is its header's.
 
 The conversation language is not configured yet on a true first run:
 speak whatever language the user speaks to you.
@@ -30,54 +31,39 @@ speak whatever language the user speaks to you.
    - Keep the template's format; the file is gitignored and never
      committed.
    - Close with the **git identity**, which is git's, per host
-     (CLAUDE.md, Persistence): ask for the git hosts the user will
-     push to (e.g. github.com, a company host) with a name and an
-     e-mail for each — may be left for later; say so. Then offer to
-     write, on the user's word, into the global git configuration
-     file git actually reads (`scripts/forge-status.py` names it;
-     read it first, never overwrite existing content, report an
-     existing stanza or guard and leave it):
-     - per host, one stanza
-       `[includeIf "hasconfig:remote.*.url:https://<host>/**"]` and
-       one `[includeIf "hasconfig:remote.*.url:git@<host>:*/**"]`,
-       both with `path = <absolute path>/.gitconfig-<host>` — the
-       path absolute and the file in the user's local profile (on
-       Windows `C:/Users/<user>`), not necessarily beside the global
-       file: the global file follows HOME, and HOME may differ by
-       place — a network home at work, the local profile at home —
-       so a `~` path, or a file beside a global file that moves, is
-       found from one place and not from the other (found
-       2026-10-15); the file `.gitconfig-<host>` created with
-       `[user]` `name` and `email` when missing. Where the global
-       file already carries such a stanza with a `~` path, report it
-       and offer to make the path absolute;
-     - the global guard `user.useConfigOnly = true` under `[user]`.
-       Where the global file carries a `user.name` or `user.email`,
-       say the guard only bites once that identity is removed, and
-       offer the removal — again only on the user's word.
-     Declined: print the stanzas and the lines for the user to apply
-     by hand. These are the only edits outside the engine; they are
-     configuration text files, not a git operation.
+     (CLAUDE.md, Persistence). First show what is there:
+     `python scripts/forge-config.py` names the file git reads, the
+     registration, the guard, a global identity and the per-host
+     stanzas. Ask for the git hosts the user will push to (e.g.
+     github.com, a company host) with a name and an e-mail for each —
+     may be left for later; say so. Then offer, on the user's word,
+     one call per host,
+     `python scripts/forge-config.py --identity <host> <name> <email>`.
+     A stanza or an identity file the script reports and leaves
+     (another path, an absolute one among them, another name or
+     e-mail) is shown, and `--replace` offered for it apart, again on
+     the user's word. Then the global guard, `--guard`; where the
+     script reports a global `user.name` or `user.email`, say the
+     guard only bites once that identity is removed and offer
+     `--guard --unset-identity`, again only on the user's word. On a
+     machine whose home differs by place (a network home at work, the
+     local profile at home) git reads another global file in each
+     place: say so, and that `/setup` runs once in each. Declined:
+     print the commands for the user to run by hand.
      The identity is verified by git itself at the first
      `/import-project`: `scripts/forge-clone.py` reports the identity
      git resolves for the clone, and `/import-project` says what to do
      when it resolves none.
-   - Then the **registration of the merge drivers**, in the same
-     global file, once per machine, on the user's word (SOL.0740):
-     `scripts/forge-status.py` says first whether it is there; the
-     file is read, every key already carrying its value is reported
-     and left, every other is offered:
-     - `[merge "ours"]` `driver = true` and `[merge]` `renormalize =
-       true`;
-     - `[rebase]` `backend = merge` (the apply backend ignores
-       drivers);
-     - `[rerere]` `enabled = true`, a convenience;
-     - and, offered apart, `[merge]` `conflictStyle = zdiff3`.
-     Say in one sentence that these hold for every repository on the
-     machine: the merge backend is git's own default, renormalize
-     only evens line endings at a merge. Declined: print the lines for the user to apply
-     by hand. `forge-status` reports the registration afterwards, ok
-     or the keys missing.
+   - Then the **registration of the merge driver** `ours`, once per machine
+     and once in each place where git reads another global file, on
+     the user's word (SOL.0740): the bare run above says whether it is
+     there; offer `python scripts/forge-config.py --register`, and
+     `--zdiff3` apart. Say in one sentence that these hold for every
+     repository on the machine: the merge backend is git's own
+     default, renormalize only evens line endings at a merge.
+     Declined: print the command for the user to run by hand.
+     `forge-status` reports the registration afterwards, ok or the
+     keys missing.
 2. **`.claude/settings.local.json`**.
    - If it already exists: report the model it names and do not touch
      it.

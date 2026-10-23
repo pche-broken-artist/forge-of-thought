@@ -3,7 +3,7 @@
 # and under projects/forge/.
 # Normalise line endings so files do not fight between machines
 * text=auto
-# Way 3, derived: made only on main, taken as ours at a merge and
+# Way 2, derived: made only on main, taken as ours at a merge and
 # made again
 README.md merge=ours
 RELEASE-NOTES.md merge=ours

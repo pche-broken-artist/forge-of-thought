@@ -63,8 +63,9 @@ def main(argv):
         print(f"  identity:    {id_name} <{id_email}> (from your git configuration)")
     else:
         print("  identity:    none - git resolves no user.name/user.email for this repository: "
-              "run /setup for the per-host identity (absolute paths), or set a local one: "
-              f"git -C '{target}' config user.name/user.email; forge-save commits nothing until then")
+              "run /setup, or python scripts/forge-config.py --identity <host> <name> <email>, "
+              f"or set a local one: git -C '{target}' config user.name/user.email; "
+              "forge-save commits nothing until then")
     info = fr.project_file(target)
     if info["shape"] == "current":
         print(f"  project:     kind {info['kind']}, language {info['language']}"

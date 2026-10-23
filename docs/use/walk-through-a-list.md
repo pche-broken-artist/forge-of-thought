@@ -1,96 +1,93 @@
 ---
-generated: 2026-10-19
-version: 5.26
+generated: 2026-10-23
+version: 5.33
 made: mirrored
-inputs-hash: 83985f66487d946d
+inputs-hash: eee833918fbcae3a
 inputs:
   - .claude/skills/walkthrough/SKILL.md
 ---
 
 # Walk through a list
 
-This page shows how a list that needs your decision is worked, one item at a time, and how your verdicts reach the files. It is for the principal (the person whose thinking is forged and who decides), and it applies to any list: findings of a critic, challenges, open threads, open questions, proposals from a source.
-
-A walkthrough is the name of this way of working. Claude is the assistant that runs it. The ledger is the file that holds the state of a project; it is made afresh after the write.
+This page shows how any list that needs your decision is worked: one item at a time, with a fixed set of answers. It is for you as the principal, the person whose thinking is being forged. The same way runs on findings, challenges, open threads, open questions and the proposals of a source.
 
 ## When to use it
 
-Use it whenever a command ends with a list of items for you to decide, or whenever you ask Claude to go through such a list. Claude offers it at the end of every command that produces a list. The same way of working runs the elicitation interview, in which Claude draws out by questions what you have not yet put into words.
+You use it whenever Claude hands you a list to decide. Claude puts the list into this form on its own, whatever produced it. A list of findings or challenges ends by offering it. An elicitation interview, where Claude draws out by questions what you have not yet put into words, runs the same way.
 
 ## What you do
 
-You answer each item with one letter, or the word in full. The line you answer is shown at the end of every item:
+You answer each item with one verdict. The verdict line closing every item is:
 
 `(a)ccept / (m)odify / (q)uestion / (r)eject / (p)ark`
 
-When the letter is your whole message, it is read as the verdict. The exact words and letters are in [Verdict words](../reference/verdict-words.md).
-
-`obsolete` is a further verdict. It is typed in full, as is `write`, because no other word of the forge has a letter.
+You may answer with the single letter or with the word. A letter is accepted only when it is your whole message. When the round looks finished, Claude adds `write` to the line. Type `write` and `obsolete` in full, because no other word of the forge has a letter.
 
 ## What happens
 
-1. Claude puts one item in front of you and stops.
-   You should now see a single item, never a table of items or a questionnaire.
-2. You read the item. It carries, in this order, what it says with the situation behind it, what would change and for whom, and Claude's recommendation with its reason. For `accept`, the recommendation includes the concrete text that would be written, not a description of the edit.
-   You should now see everything you need to decide without asking for an explanation.
-3. The item closes with one proposition, worded so that `accept` means yes to exactly what is in front of you. It says what changes, or that nothing changes, and what is recorded.
-   You should now see the verdict line below the proposition.
-4. You give your verdict.
-   - `accept`: agreed, the text goes in as shown.
-   - `modify`: a discussion opens on the item, and the solution found is put forward to be accepted. Alone, `m` makes Claude ask what you want changed.
-   - `question`: you ask about the open item. Nothing changes and nothing is written. Claude answers and closes the item again with the verdict line. A question is never read as a modification or a yes. Alone, `q` makes Claude ask what you want to ask.
-   - `reject`: not agreed, nothing changes, and your reason is recorded.
-   - `park`: not now. The item waits and comes back.
-   - `obsolete`: no longer relevant, with a note why.
+1. Claude puts one item in front of you and stops. It works the items in order of weight, and it never asks for several verdicts at once.
 
-   You should now see Claude's acknowledgement, which names the verdict in full and says what it does.
-5. The next message opens with that one line of acknowledgement and then carries the next item. Items are worked in order of weight.
-   You should now see exactly one new item.
-6. When the round looks finished, Claude adds `write` to the verdict line. Until you say `write`, everything agreed is carried in the conversation only. It is written nowhere yet, and Claude says so.
-7. On `write`, Claude reflects the whole round back to you. On your yes, it writes everything carried as one round.
-   You should now see a statement of which files were written.
+   You should now see one item that carries, in this order: what it says and the situation behind it; what would change and for whom; and a recommendation with its reason. For `accept`, the recommendation includes the exact text the document would receive. The item ends with one proposition and the verdict line. The proposition says what changes, or that nothing does, and what is recorded.
+
+2. You give your verdict.
+
+   - `accept`: you agree, and the text goes in as shown.
+   - `modify`: a discussion opens on the item. The solution you find together is put forward for you to accept.
+   - `question`: you ask about the open item. Nothing changes and nothing is written. Claude answers and closes the item again with the verdict line. A question is never read as a change or as a yes.
+   - `reject`: you do not agree. Nothing changes, and your reason is recorded.
+   - `park`: not now. The item waits and comes back.
+   - `obsolete`: the item no longer matters, and a note says why.
+
+   After `m` alone, Claude asks what you want changed. After `q` alone, it asks what you want to ask.
+
+   You should now see one line that names your verdict in full and says what it does, followed by the next item and nothing else.
+
+3. You repeat until the list is done. Nothing is written yet.
+
+   You should now see Claude say that what you agreed is carried in the conversation only. It is saved nowhere until the write.
+
+4. You type `write`. Claude reflects the whole round back to you first. On your yes, it writes everything carried as one round.
+
+   You should now see what was written, with the file and section named.
 
 ## What you have afterwards
 
-The verdicts are written once, at the end of the round. Each kind of verdict leaves this behind:
+- For each `accept`, the fix that the producing command defines, together with a record that the item is closed.
+- For each `reject`, a decision with your reason and a verdict line saying the item is rejected. A rejected item is not raised again.
+- For each `park`, a decision with your reason and a verdict line saying what the item waits for.
+- For each `obsolete`, a decision with the verdict line saying it is obsolete and what made it moot.
+- A rejected proposal of a source becomes a rejected direction in the intent.
+- The ledger, which Claude makes afresh after the write.
 
-- `accept`: what the command that produced the list says is written (for a critic, the fix), together with a closing record of the item.
-- `reject`: a decision with your reason and its verdict line. The item is not raised again.
-- `park`: a decision with your reason and its verdict line, saying until what the item waits.
-- `obsolete`: a decision with your reason and its verdict line, saying what made the item moot.
-
-A state is never changed by deleting a record. It changes by a newer record. After the write, the ledger is made afresh from the records, so it shows the new state.
-
-A proposal from a source that you reject is also kept as a rejected direction in the intent, so that it is not proposed again.
+A state is changed by a newer record, never by deleting one.
 
 ## If something goes wrong
 
-- You are unsure about an item. Answer `question`. The item stays open until you close it with another verdict.
-- Claude puts two items in one message, or asks for every verdict at once. That is not the method. Say so, and it returns to one item per message.
-- You sent a long thought in pieces. Claude acknowledges each piece in a line and asks nothing until your closing word.
-
-Why the rule of one item exists and how it is held in a long conversation is explained in [The working methods](../about/working-methods.md).
+- If you ask something instead of giving a verdict, the item stays open until you close it. Claude never moves to the next item on its own judgement.
+- If a table of verdicts or a questionnaire of several questions is put in front of you, that is not the method. Ask for one item at a time.
+- If you send one longer thought in several messages, Claude acknowledges each piece with at most one line and asks nothing until your closing word.
 
 ## A worked example
 
-Claude has finished a critic run and offers a walkthrough. The first item arrives like this (the slug, the section and the wording are placeholders):
+This is one generic item from a list of findings.
 
-> The assignment of project `example` says in one section that delivery is monthly and in another that it is quarterly. The reader cannot tell which holds. Fixing it changes one sentence for the recipients and nothing else.
+> Finding 2 of 5: the section "Scope" names a recipient group in one place and a different group in another. The first mention is in the opening paragraph, the second in the closing list.
 >
-> Recommendation: keep the quarterly rhythm, because the second section is the one the success criteria rest on. The sentence would read: "Delivery is quarterly."
+> What would change: the closing list would use the same group as the opening paragraph. Readers of the document would no longer have to guess which group is meant.
 >
-> Accept: the sentence goes in as shown and the item is closed in a record.
+> I recommend accepting. The opening paragraph is the older wording and the closing list repeats it with a slip. The closing list would read: "Recipients: the platform team."
 >
-> `(a)ccept / (m)odify / (q)uestion / (r)eject / (p)ark`
+> Proposition: the closing list is changed as shown and the item is recorded as closed.
+>
+> (a)ccept / (m)odify / (q)uestion / (r)eject / (p)ark
 
-You ask: `q`. Claude asks what you want to ask. You write "Does the monthly figure appear anywhere else?" Claude answers, changes nothing, and closes the item again with the same verdict line. You answer `a`.
-
-Claude acknowledges in one line, "Accepted: the sentence goes in as shown, written at the round's end", and carries the second item. After the last item you say `write`. Claude reflects the round back, you say yes, and the fixes and records are written in one round. The ledger is then made afresh.
+You answer `q` and then ask which wording came first. Claude answers and shows the item again with the same verdict line. You answer `a`. Claude acknowledges that you accepted and what that does, then shows finding 3.
 
 ## See also
 
 - [Verdict words](../reference/verdict-words.md): the words and letters, exactly.
 - [The working methods](../about/working-methods.md): why the one-item rule exists and how a hook holds it.
+- [Settle a conflict](settle-a-conflict.md): the conflict of a save, laid out one conflict per message in the same way.
 - [Glossary](../reference/glossary.md): every term of the forge in one line.
 
-Generated on 2026-10-19 for version 5.26 from the files the front-matter names; never edited by hand.
+Generated on 2026-10-23 for version 5.33 from the files the front-matter names; never edited by hand.

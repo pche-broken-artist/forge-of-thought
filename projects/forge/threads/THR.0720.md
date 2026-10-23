@@ -84,6 +84,11 @@ State 2026-10-21: open. The engine check of 2026-10-21 found the gap
 as FND.2260, the setup skill against forge-config; the round above
 settles both.
 
+State 2026-10-23: open. The round done for the setup skill, POS.1050,
+SOL.0150 and SOL.0740 (FND.2260). Left: the report of a
+repository-local identity, not built, and the verdict on the Author
+line.
+
 <!-- A thread (POS.1680), one file per thread in threads/; the header
 is its state: what it concerns, where it came from, whether it is
 open. The rules of a thread, its life and its closing:

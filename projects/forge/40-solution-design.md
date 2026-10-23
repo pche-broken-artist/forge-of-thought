@@ -1,5 +1,5 @@
 ---
-version: 0.39
+version: 0.42
 status: draft
 project: forge
 audience: whoever realises the solution, a person or an agent
@@ -50,12 +50,17 @@ each run in a subagent that sees the files it is given and never the
 working conversation, all on the one session model.
 
 Git, the conversion of documents and the hook are scripts. The
-harness denies Claude raw `git`, so the scripts are the only door.
+scripts are the door to a write of git; reading git is open, and the
+hook holds the line between the two, putting the few commands that
+finish the step of a conflict to the principal (SOL.0520, SOL.0840).
 
 Every file has a way of merging and the forge tells git which
-(SOL.0730): records merge as sets by a driver, derived state is made at
-read time and never kept in git, composed text merges as text, and the
-forge still merges nothing itself.
+(SOL.0730): composed text and the record files merge as text, a
+conflict in a record file two tails kept both; derived state is made
+at read time and never kept in git, or made only on main and taken as
+ours at a merge; immutable files never conflict. Where git leaves a
+conflict, Claude lays both sides out and the principal decides
+(SOL.0840); the forge still merges nothing itself.
 
 The main courses of events. A round of work: `/forge <state>` reads
 the definition of the target artefact, the conversation runs by the
@@ -67,7 +72,7 @@ settled by walkthrough and written in one round. A render: `/render`
 generates the Markdown in an isolated subagent from a recipe and its
 inputs and writes the provenance; `/publish` makes the designed file
 from the render as it lies on disk. Persistence: `/save` runs the
-check `light` and commits and pushes through `forge-save`; `/release`
+check `light`, unless `--quick`, and commits and pushes through `forge-save`; `/release`
 runs its checks, settles them, regenerates the README and the release
 notes and then saves with the release message and tag. The release writes the state render
 (SOL.0530).
@@ -76,7 +81,7 @@ Deliberately not designed here: the wording and the steps of each
 command, definition, contract, template and script, which are that
 file's; how an artefact is found, which is its definition's; anything
 beyond the files the forge makes. No part answers POS.0600, POS.0780,
-POS.0790, POS.0980 and POS.1380: they state a name, a direction, a
+POS.0790, POS.0980, POS.1380 and POS.1780: they state a name, a direction, a
 boundary kept by hand or an order of work.
 
 ## Parts
@@ -243,28 +248,33 @@ boundary kept by hand or an order of work.
 - **SOL.0150 The first run.** `/setup` fills `CLAUDE.local.md` from its
   template and creates `.claude/settings.local.json` with the session
   model. It closes with the git identity: it asks for the hosts the user
-  pushes to and a name and an e-mail for each, and offers to write the
-  `includeIf` stanzas into the global git configuration file git
-  actually reads (named by `scripts/forge-status.py`, the stanza paths
-  absolute, since `~` in git's hands and in the shell's may differ),
-  each `.gitconfig-<host>` beside that file created with its `[user]`
-  when missing, together with the global guard `user.useConfigOnly =
-  true`: the file read first, never overwriting existing content, an
-  existing stanza or guard reported and left. Where the file carries a
-  global `user.name` or `user.email`, `/setup` says the guard only bites
-  once that identity is removed and offers the removal, again only on
-  the user's word. Declined, the configuration is printed for the user
-  to apply by hand. `/setup` runs no git operation; the user's git
-  configuration files are the one thing it may edit outside the engine.
-  It also registers the merge drivers and the git settings they need
-  (SOL.0740), and writes `author: <handle>` into `CLAUDE.local.md`, the
+  pushes to and a name and an e-mail for each, and offers to write them
+  through `scripts/forge-config.py`: per host `--identity`, the two
+  `includeIf` stanzas written by `git config --global` into the file git
+  reads, each with `path = .gitconfig-<host>` relative to that file, the
+  identity file beside it created with its `[user]` when missing; then
+  `--guard`, the global `user.useConfigOnly = true`. An existing key is
+  reported and left; a stanza or an identity file that differs is
+  reported, and `--replace` offered apart. Where a global `user.name` or
+  `user.email` survives, `/setup` says the guard only bites once it is
+  removed and offers `--guard --unset-identity`, again only on the
+  user's word. Declined, the commands are printed for the user to run by
+  hand. The user's global git configuration is the one thing `/setup`
+  changes outside the engine, and only through the script. It also
+  registers the merge driver `ours` and the git settings it needs through the
+  same script (SOL.0740), and writes `author: <handle>` into `CLAUDE.local.md`, the
   author of every record he decides (templates/history.md). On an
   instance made before the `Author` line existed `/setup` offers the
   lines the template has and the file lacks, written on the user's word,
-  never touching what is there. Realises: POS.1050, POS.0950. Choice: no
-  real alternative recorded. The registration and `author:` built
-  2026-10-18, the preparation of the cutover plan (R1.14). Where:
-  `.claude/skills/setup/SKILL.md`, `templates/CLAUDE.local.md`,
+  never touching what is there. Realises: POS.1050, POS.0950. Choice:
+  through `git config --global` against a path named by the forge, which
+  moves with HOME on a domain machine; against `GIT_CONFIG_GLOBAL` set by
+  `/setup` (a change to the user's system) and the registration per
+  repository (it reverses SOL.0740) (THR.0720). The registration and
+  `author:` built 2026-10-18, the preparation of the cutover plan
+  (R1.14); the script built 2026-10-20, the skill brought to it
+  2026-10-23 (FND.2260). Where: `.claude/skills/setup/SKILL.md`,
+  `scripts/forge-config.py`, `templates/CLAUDE.local.md`,
   `.claude/settings.local.json`, `scripts/forge-status.py`.
 - **SOL.0160 A project is born or brought in.** `/new-project` scaffolds
   a project by its kind from `templates/`, asks for the founding brief
@@ -482,8 +492,8 @@ boundary kept by hand or an order of work.
   threads and `ledger.archive.md`, the archive read for every item
   without a record of the new shape, a newer record overriding. Waiting
   on principal by the rule of POS.1620, a thread's line its first
-  sentence and its last dated paragraph. It reports a duplicate ID, two
-  versions with one number, a closed thread touched by a later commit
+  sentence and its last dated paragraph. It reports a duplicate ID, a
+  closed thread touched by a later commit
   (through `forge_repos`), and a THR cited in any file of the project
   with neither a thread file nor a `closed` record (POS.1640). An
   unparsable file is a finding, not a crash: the row drops aloud, the
@@ -974,9 +984,8 @@ boundary kept by hand or an order of work.
   `forge-branch.py`, which creates a branch or switches to one, `main`
   included, with the slug alone reports the branch and lists the
   branches (TBC.0100); and the two of the brief `collaboration`: `forge-
-  ledger.py` (SOL.0680) and `forge-migrate.py` (SOL.0800); `fixture.py`
-  (SOL.0830) is not built. `forge-save` without a slug skips the fixture
-  by name (SOL.0830). `forge-status --remote` fetches the origin of each
+  ledger.py` (SOL.0680) and `forge-migrate.py` (SOL.0800).
+  `forge-status --remote` fetches the origin of each
   repository, which changes nothing in the working tree, and reports the
   branch against it: up to date, behind, ahead or diverged, with the
   counts; without the flag it touches no network. The state against the
@@ -1060,8 +1069,10 @@ boundary kept by hand or an order of work.
   intent. The script pushes a tag with the commit and keeps it without
   an origin. `forge-save` checks that git resolves an identity for the
   repository and, where it resolves none, reports it with the command to
-  set one and commits nothing until it is. Realises: POS.1100, POS.0570,
-  POS.0730, POS.0810, POS.1070, POS.1710. Choice: two commands against one,
+  set one and commits nothing until it is. A bare `/save` saves every
+  repository with changes; with two windows open the slug narrows it to
+  the one the window works in (POS.1700). Realises: POS.1100, POS.0570,
+  POS.0730, POS.0810, POS.1070, POS.1710, POS.1650, POS.1700. Choice: two commands against one,
   alternatives REJ.0160 and REJ.0170; the cost is a README stale between
   releases, visibly. Where: `.claude/skills/save/SKILL.md`,
   `.claude/skills/release/SKILL.md`, `scripts/forge-save.py`.
@@ -1104,8 +1115,10 @@ boundary kept by hand or an order of work.
   `templates/gitattributes`, `.gitattributes`, `CLAUDE.md`
   (Persistence), `.claude/skills/new-project/SKILL.md`,
   `.claude/agents/check-project.md`.
-- **SOL.0740 The registration on the machine.** `/setup` registers in
-  the global git configuration, once per machine and on the user's word,
+- **SOL.0740 The registration on the machine.** `/setup` registers
+  through `scripts/forge-config.py --register` in the global git
+  configuration, once per machine and once in each place where git
+  reads another global file, on the user's word,
   `merge.ours.driver true`, `rebase.backend merge` (the apply backend
   ignores drivers), `merge.renormalize true` (files committed with CRLF
   before normalisation would conflict whole), sets `rerere.enabled true`
@@ -1121,7 +1134,8 @@ boundary kept by hand or an order of work.
   rerere with the offer of zdiff3 (R1.14); the driver's own key,
   `merge.forge-records.driver`, let go 2026-10-23 with the driver
   (REJ.0340), never registered. Where: `.claude/skills/setup/SKILL.md`,
-  `CLAUDE.md` (Persistence), `scripts/forge-status.py`,
+  `scripts/forge-config.py`, `CLAUDE.md` (Persistence),
+  `scripts/forge-status.py`,
   `scripts/forge_repos.py`.
 
 - **SOL.0780 The path through git.** The map ends with the state against
@@ -1192,48 +1206,28 @@ boundary kept by hand or an order of work.
   forced push or a revert, on a protected main a maintainer's, and
   always the engine and every project together, since the engine refuses
   the old shape once released (CHL.0420).
-- **SOL.0830 The fixture.** `scripts/fixture.py` makes the test bed of
-  the forge's own tests: a bare remote `tmp/fixture.git` and, through
-  `forge-clone <url> <name>`, the target a second argument, two projects
-  `projects/fixture-a` and `projects/fixture-b` cloned from it,
-  deterministic on every machine, born in the old shape the script
-  itself carries as its own content, never from the templates, which
-  after the first release make the new shape only (CHL.0520); carrying
-  what the tests need, histories, decisions, threads, an index, a render
-  and a published companion, and brought to the new shape by the
-  migration itself, which it thereby tests. `fixture.py --shape
-  <version>` makes the fixture in a named shape: the script carries
-  every shape it can make as its own data, today's old shape first, and
-  keeps the previous one whenever a release with a migration teaches it
-  the next, so that a fixture of the shape of release N-1 is a command
-  on every clone of the engine and a later migration has a lasting bed; no tag
-  on the bare remote, which is gitignored and per machine (CHL.0610). A
-  bare `/save` skips the fixture by name, `projects/fixture*`, today's
-  `projects/fixture` and the script's `fixture-a` and `fixture-b` alike,
-  since the project file that would carry a flag does not exist before
-  the migration; `fixture: true` in their project file stays for the map
-  (CHL.0500). The tests of POS.1750 run on it, and on it alone, as rounds of the forge by slug,
-  never as hand tests and never on a clone of a real project (DEC.0240),
-  since the scripts are the only door to git and `forge_repos` visits
-  only `projects/<slug>`. Realises: POS.1750, POS.1590, POS.0550.
-  Choice: a script making two projects against a fixture in `tmp/`
-  driven by hand (CHL.0380): the forge cannot run its own tests outside
-  `projects/`; the cost is one more script and two directories that are
-  projects without being thought; the old shape carried by the script
-  against the templates of the day: the templates die with the first
-  release. Not built; let go with the deferred releases (DEC.0280): the
-  fixture is one project `projects/fixture`, made by hand once from a
-  bare remote in `tmp/` as a copy of a small real project in the old
-  shape, on which `--apply`, the test of `ours` and the test of the step
-  of a conflict ran, the last with a second clone made by hand and
-  removed after it (R6.03); the bare remote's HEAD stands on `master`,
-  so a clone opens on the old branch and is switched to `main`.
-  `fixture.py --no-git` makes `fixture-a` without a repository, for the
-  migration and the ledger outside git (SOL.0800); until it is built, a
-  copy of `projects/fixture` without its `.git`, made by hand once.
-  Where:
-  `scripts/fixture.py`, `scripts/forge-clone.py`, `templates/project.md`
-  (the flag), `scripts/forge-save.py`.
+- **SOL.0830 The fixture.** The test bed of the forge's own tests is one
+  project, `projects/fixture`, made by hand once from a bare remote
+  `tmp/fixture.git` as a copy of a small real project in the old shape
+  and brought to the new shape by the migration, which it thereby
+  tested; its project file carries `fixture: true`, which `forge-clone`
+  and `forge-migrate` read. On it `--apply`, the test of `ours` and the
+  test of the step of a conflict ran, the last with a second clone made
+  by hand in `tmp/` and removed after it (R6.03). The bare remote is per
+  machine, and its HEAD stands on `master`, so a clone opens on the old
+  branch and is switched to `main`. The tests of POS.1750 run on it, and
+  on it alone, as rounds of the forge by slug, never on a clone of a
+  real project (DEC.0240). Realises: POS.1750, POS.1590, POS.0550.
+  Choice: one project made by hand against `scripts/fixture.py`,
+  designed 2026-10-17 (CHL.0380, CHL.0520, CHL.0610, CHL.0500) and let
+  go with the deferred releases (DEC.0280): two projects `fixture-a` and
+  `fixture-b` from a bare remote, born in the old shape the script
+  carried, every shape kept by `--shape <version>`, a project without
+  git by `--no-git`, and a bare `/save` skipping `projects/fixture*` by
+  name; the cost of the hand-made bed is that it lives on one machine
+  and is remade by hand where a test needs it. Where: `projects/fixture`
+  and `tmp/fixture.git`, outside git, `templates/project.md` (the flag),
+  `scripts/forge_repos.py`.
 
 - **SOL.0840 The step of a conflict.** `forge-save` leaves a conflicting
   rebase standing: the commit is made, the script prints the files in

@@ -2,7 +2,7 @@
 # SOL.0730 of the forge solution design): the ways of merging by
 # path. Normalise line endings so files do not fight between machines.
 * text=auto
-# Way 3, derived: made only on main, taken as ours at a merge and
+# Way 2, derived: made only on main, taken as ours at a merge and
 # made again
 renders/** merge=ours
 README.md merge=ours

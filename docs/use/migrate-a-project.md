@@ -1,8 +1,8 @@
 ---
-generated: 2026-10-19
-version: 5.26
+generated: 2026-10-23
+version: 5.33
 made: mirrored
-inputs-hash: 6a1753c6b14ed1bb
+inputs-hash: a8138475f5854194
 inputs:
   - .claude/skills/migrate/SKILL.md
   - scripts/forge-migrate.py
@@ -11,15 +11,15 @@ inputs:
 
 # Migrate a project
 
-This page shows how you bring a project to the shape of files a new release expects, with `/migrate`. It is for the principal (the person whose thinking is forged) who has upgraded the engine and now finds that a project is still of the older shape.
+This page shows how you bring a project to the shape of files a new release expects, with `/migrate`. It is for the principal (the person whose thinking is forged) who has [upgraded the engine](upgrade-the-engine.md) and finds that a release changed the shape of files.
 
 ## When to use it
 
-Use `/migrate` when a release has changed the shape of files and a project does not yet have the new shape. A project without a project file is of the older shape.
+Use it when a release has changed the shape of files and a project is still in the old shape. A project without its project file is in the old shape, and the commands and checks say so and name `/migrate` as the one remedy.
 
-A migration runs once per project, on one clone, on `main`. Everyone else who works on the project does not migrate: they pull the migrated project. The upgrade it belongs to is in [Upgrade the engine](upgrade-the-engine.md). Why a shape change comes with a migration, and why it runs only once, is in [Upgrades and migration](../about/upgrades-and-migration.md).
+A migration runs once per project, on one clone, on `main`. Everyone else who works on the project pulls the migrated project and does not migrate it again. The slug `forge` is the engine's own project.
 
-Terms of the forge are in the [Glossary](../reference/glossary.md).
+The reasons a shape change comes with a migration, and why it runs once, are on [Upgrades and migration](../about/upgrades-and-migration.md).
 
 ## The command
 
@@ -27,69 +27,62 @@ Terms of the forge are in the [Glossary](../reference/glossary.md).
 /migrate my-idea
 ```
 
-The slug is optional when Claude can tell the project from the conversation. The slug `forge` names the engine's own project.
+Without a slug, Claude infers the project from context and asks if that is ambiguous. Claude is the model that works with you. The script behind the command is `scripts/forge-migrate.py`; its forms and what it needs are on [Scripts](../reference/scripts.md).
 
 ## What happens
 
-1. Claude runs the dry run, `python scripts/forge-migrate.py my-idea`, and shows you its print as it came. The print lists the marks of the shape, the steps that would run and what each would change. The dry run changes nothing.
+1. Claude runs the dry run, `python scripts/forge-migrate.py my-idea`, and shows its print as it came. The print holds the marks of the shape, the steps that would run and what each would change.
+   You should now see the marks, and for every step still missing, what it would change. A project already in shape ends here, with nothing to do.
 
-   You should now see the marks of the shape, each ticked or empty, and the closing line "dry run: steps ... would run; nothing changed". A project already in shape ends here, with the line "already in the shape of the first release - nothing to do".
+2. On your word, and only then, Claude runs `python scripts/forge-migrate.py my-idea --apply`. The steps run in this order:
+   - The fields that change with a round leave the headers of the artefacts, the work specifications, the recipes, the indexes and the documentation map.
+   - The project file is written from its template, with the project's slug, its kind and its language.
+   - What only the ledger knew becomes records and index fields. The hand-kept ledger is kept as an immutable archive, and the ledger leaves git.
+   - The threads file is cut into one file per thread.
+   - The `.gitattributes` is written.
 
-2. You give your word. Only then does Claude run `python scripts/forge-migrate.py my-idea --apply`. The script commits nothing. It runs the steps still missing, in this order:
+   A library takes fewer steps: the headers, the project file, the ledger and the attributes, but no threads.
+   The script commits nothing.
+   You should now see the script report each step it ran, and the project's files changed in the working tree.
 
-   - The fields that change with a round leave the headers of the artefacts, work specifications, recipes, indexes and the documentation map.
-   - The project file is written, with the project's slug, its kind and its language.
-   - What only the ledger knew becomes records and index fields. The ledger is the table of the project's state. The hand-kept ledger is kept as an immutable archive beside it, and the ledger leaves git.
-   - The threads file is cut into one file per thread, in a `threads/` directory.
-   - The `.gitattributes` file is written.
+3. Claude walks through what the script printed, for your judgement. Above all this is the origin the script guessed for each thread. Claude lays the origins out as a walkthrough (one item at a time, each closed with your verdict), as [Walk through a list](walk-through-a-list.md) describes. What you correct is written into the thread files at the round's end. Text the script found that was not a thread goes where it belongs, usually a record of the intent's history. Waiting lines without an ID are printed too, because they have no home in the records.
+   You should now see each thread's origin confirmed or corrected, and no text left without a place.
 
-   A library takes fewer steps: the header fields, the project file, the ledger and the `.gitattributes`. It has no threads to cut.
-
-   You should now see the line "migrated: steps ...; nothing committed - /save follows". If a mark still fails afterwards, the script says so and names the way back.
-
-3. Claude walks you through what the script printed, for your judgement. This is a walkthrough (a list worked one item at a time, see [Walk through a list](walk-through-a-list.md)).
-   - The main item is the origin the script guessed for each thread: your own word, a document named by its path, or Claude's synthesis. The script guesses it from the first sentence of the thread, so it can be wrong.
-   - Claude lays out one table of its judgement from the texts, and you correct what is wrong.
-   - The corrected origins are written into the thread files at the round's end.
-   - Text after the last thread that was not a thread, and ledger lines with no ID, go where they belong. Usually that is a record in the history of the intent.
-
-   You should now see each thread file carrying the origin you confirmed.
-
-4. Claude makes the ledger, `python scripts/forge-ledger.py my-idea`, and proposes `/save my-idea`. The migrated shape reaches the remote by that save, described in [Save your work](save-your-work.md).
-
-   You should now see the ledger made and the save proposed.
+4. Claude makes the ledger and proposes `/save my-idea`. The migrated shape reaches the remote by that save, as [Save your work](save-your-work.md) describes.
+   You should now see the ledger rebuilt and the save proposed.
 
 ## What you have afterwards
 
-- The project has a project file, headers without the fields that change with a round, and its threads as one file each.
-- The ledger is no longer in git. The old hand-kept ledger is kept as an archive that is never edited.
-- The `.gitattributes` file is in place.
-- Nothing is committed until you save.
+The project has a project file, headers without the fields that change with a round, one file per thread, a `.gitattributes`, and its records and index fields filled from what only the ledger knew. The old hand-kept ledger is an immutable archive, and the ledger is made at read time and is no longer in git. Nothing is committed until you save.
+
+## The way back
+
+Before the save, the way back is `python scripts/forge-migrate.py my-idea --undo`. After the save, the way back is the tag taken before the migration.
+
+A project outside git is migrated the same way, with none of git's refusals. The dry run tells you to take a backup before `--apply`, and that backup is its way back. `--undo` refuses there. A run that stops midway is finished by running it again.
 
 ## If something goes wrong
 
-The script refuses `--apply`, and changes nothing, in these cases. The dry run prints the same refusals as a warning.
+The script stops before it changes anything, and prints that nothing was changed, when one of these holds for a project that is a repository of its own:
 
-- Not a repository: "not a repository".
-- A working tree that is not clean: "the working tree is not clean: save first".
-- A branch that is behind or diverged from its origin: "... against the origin: /pull first".
-- Any branch but `main`: "on branch ..., not main".
-- An instance file without the `Author` line: "No Author in CLAUDE.local.md - run /setup; the records need the handle." The instance file is `CLAUDE.local.md` at the engine root.
+- The working tree has unsaved changes to tracked files.
+- The branch is behind its origin or has diverged from it.
+- The branch is not `main`.
 
-If you judge after the migration that something is wrong, the way back depends on whether you have saved:
+For every project, the script refuses when the instance file has no `Author` line. It prints: "No Author in CLAUDE.local.md - run /setup; the records need the handle." Run `/setup`, then migrate again.
 
-- Before the save, run `python scripts/forge-migrate.py my-idea --undo`. It restores the changed and deleted files, removes the created ones and puts the ledger back into git.
-- After the save, return to the tag taken before the migration.
+If the project is not found, the script says the directory does not exist. Check the slug.
+
+`--undo` prints "No manifest ... nothing to undo." when no migration has been applied, and, outside git, "not under git - nothing to restore from; the way back is the backup taken before --apply."
 
 ## A worked example
 
-You have upgraded the engine and the project `my-idea` is of the older shape.
+You have pulled a release that changed the shape of files, and `my-idea` is still in the old shape.
 
-1. You type `/migrate my-idea`.
-2. Claude shows the dry run. The marks for the project file, the threads and the `.gitattributes` are empty, and the steps list what each would change.
-3. You say "go on". Claude runs the script with `--apply`.
-4. Claude shows a table of the threads with the origin it guessed for each. You correct two of them. Claude writes the corrections into the thread files.
-5. Claude makes the ledger and proposes `/save my-idea`. You agree, and the migrated project reaches the remote.
+1. You type `/migrate my-idea`. Claude runs the dry run and shows you the marks: the project file missing, headers with fields to remove, a threads file to cut. You see the steps that would run.
+2. You say to go ahead. Claude runs the script with `--apply`. It reports each step and commits nothing.
+3. Claude shows a table of the threads with the origin guessed for each. You correct two. Claude writes the corrections into the thread files at the end of the round, and places the one stray paragraph in the intent's history.
+4. Claude makes the ledger and proposes `/save my-idea`. You agree, and the migrated project reaches the remote.
 
 ## See also
 
@@ -100,4 +93,4 @@ You have upgraded the engine and the project `my-idea` is of the older shape.
 - [Scripts](../reference/scripts.md): `forge-migrate.py`, its forms and what it needs.
 - [Glossary](../reference/glossary.md): every term of the forge in one line.
 
-Generated on 2026-10-19 for version 5.26 from the files the front-matter names; never edited by hand.
+Generated on 2026-10-23 for version 5.33 from the files the front-matter names; never edited by hand.

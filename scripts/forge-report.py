@@ -23,7 +23,9 @@ WHAT IT DOES
     rule stay as they are.
 
     It refuses, exit 1, with the reason printed: a path that is not a
-    file; a name that already carries the tail `-HHMM-<hash>`; a target
+    file; a name that already carries the tail `-HHMM-<hash>`; a name
+    that ends in a run number (`-2.md`), since the tail alone tells two
+    runs apart; a target
     name that exists. It changes no name but the one it was given.
 
 EXAMPLES
@@ -38,6 +40,7 @@ from datetime import datetime
 from pathlib import Path
 
 TAIL = re.compile(r"-\d{4}-[0-9a-f]{4}\.md$")
+RUN = re.compile(r"-\d{1,2}\.md$")
 
 
 def main(argv):
@@ -50,6 +53,11 @@ def main(argv):
         return 1
     if TAIL.search(path.name):
         print(f"forge-report: already named with time and hash: {path.name}")
+        return 1
+    if RUN.search(path.name):
+        print(f"forge-report: a run number before the tail: {path.name};"
+              " file it under its plain name, the time and the hash tell"
+              " two runs of a day apart (POS.1720)")
         return 1
     if path.suffix != ".md":
         print(f"forge-report: not a Markdown file: {path.name}")

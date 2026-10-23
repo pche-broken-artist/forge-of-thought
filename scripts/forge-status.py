@@ -9,7 +9,7 @@ SYNOPSIS
 WHAT IT DOES
     Read-only, changes nothing. First the global configuration file
     git actually reads, which /setup needs to know, and the
-    registration of the merge drivers in it: "ok", or the keys that
+    registration of the merge driver ours in it: "ok", or the keys that
     are missing (`merge.ours.driver`, `rebase.backend`,
     `merge.renormalize`, as /setup registers them) - an unregistered
     clone silently falls back to a conflict on the derived files

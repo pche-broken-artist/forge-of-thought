@@ -24,7 +24,8 @@ run in one step (CLAUDE.md, Spin-off rule).
 4. Mine the brief into the new project's intent through the
    `/forge intent` procedure
    (`.claude/skills/forge/states/intent.md`, its Course), which
-   creates 10-intent.md and keeps the Mined column.
+   creates 10-intent.md and writes the brief's mining record in the
+   intent's history (`templates/history.md`).
 5. In the source project, intent-first (CLAUDE.md, Working methods):
    record the spin-off in the source intent through the `/forge
    intent` procedure (the group's substance is now delivered by

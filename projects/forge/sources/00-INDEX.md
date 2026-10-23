@@ -205,6 +205,8 @@ to its own 00-INDEX.md. -->
 ### `projects/lib-allwyn/sources/fork-brd/` (library document, cited, not copied)
 - **What:** the BRD layer built in a colleague's fork of the engine (intent 2.8, August 2026): the fork's rules, templates, skills and critic, three BRDs with three critique rounds, and the group's BRD standard and tutorial; the bundle's own index catalogues the fourteen files.
 - **Origin:** the company library, registered there on 2026-10-13; kept out of this public project because it carries names, company content and the group's internal standard.
+- **Date:** 2026-10-13, from the ingest
+- **Form:** text
 - **Role:** the material of the engine's own BRD artefact (`/new-artefact brd`, THR.0360, POS.0700): read for the research of the BRD layer and cited by path; nothing of it is copied into the engine.
 - **Use for:** what the fork's BRD layer is and how it held; the group standard's rules; worked BRDs to judge a template by.
 

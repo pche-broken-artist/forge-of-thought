@@ -1,13 +1,13 @@
 ---
 project: forge
 render: release-notes
-generated: 2026-10-19
+generated: 2026-10-23
 recipe: recipes/release-notes.md v0.13
 inputs:
   - projects/forge/10-intent.history.md
   - projects/forge/10-intent.history.archive.md
   - projects/forge/40-solution-design.history.md
-  - projects/forge/10-intent.md v5.26
+  - projects/forge/10-intent.md v5.34
   - projects/forge/decisions.md
   - RELEASE-NOTES.md
 ---
@@ -18,6 +18,243 @@ One section per release of the engine, newest first, for the user who
 takes upgrades through `forge-pull`; Action required comes first in
 every section; the fine-grained log with the reasons lives in
 `projects/forge/10-intent.history.md`.
+
+## 5.34 - 2026-10-23
+
+### Changed
+- The ledger script no longer promises to report a version given twice
+  after a merge: that report was never built and cannot be built
+  without false alarms, and git finds the case itself, the header's
+  `version:` line conflicting whenever both sides raised it (POS.1640,
+  POS.1790, SOL.0680). For you: a document raised to the same version
+  on two branches shows up as a conflict at the merge, settled by
+  whoever merges with the next number and one `changed` record.
+
+### Fixed
+- `/save` goes on with the step of a conflict when `forge-save` leaves
+  a rebase standing, and reports when it refuses a rebase or merge
+  already in progress (FND.2490). For you: a conflict at a save goes
+  straight into the step of a conflict, both sides laid out for your
+  decision.
+- The `/forge` map asks `forge-status` whether a project is a
+  repository instead of looking for a `.git`, and the `project` check
+  no longer checks it (POS.0550, FND.2500). For you: a worktree or a
+  linked directory is recognised as a repository like any other.
+- The hint of `forge-clone` names `forge-config.py --identity` in place
+  of absolute paths (POS.1050). For you: set the identity for a new
+  host through the script, as `/setup` does.
+- `/spinoff` writes the mining of the brief as a record in the
+  intent's history in place of a Mined column (POS.1610). For you: a
+  spin-off leaves its state where the ledger reads it.
+- CLAUDE.md, `/setup`, `forge-config`, `forge-status` and the solution
+  design speak of the one merge driver, `ours`, the records driver
+  being gone since 5.31 (SOL.0150, FND.2500). For you: wording only;
+  nothing merges differently.
+
+## 5.33 - 2026-10-23
+
+### Fixed
+- The solution design no longer promises `fixture.py` or a bare
+  `forge-save` that skips the fixture: the script was let go and the
+  skip never built, and the fixture is one project made by hand
+  (SOL.0830, SOL.0510, FND.2480). For you: a bare `/save` does not skip
+  the fixture, contrary to what 5.19 announced.
+- The rejected directions of the collaboration and the position on the
+  ledger give their reasons on what stands since 5.31, the record files
+  as text and IDs settled by detection (REJ.0270 to REJ.0320, POS.1600,
+  FND.2450). For you: nothing changes in how the forge works.
+- The fifth digit of an ID is kept on its own reason, the reservations
+  of IDs it once served being let go (POS.0220, FND.2460). For you: an
+  ID still takes a fifth digit beyond 9999, `POS.10000`.
+
+## 5.32 - 2026-10-23
+
+### Fixed
+- `/setup` writes your global git configuration, the identity, the
+  guard and the registration, only through `scripts/forge-config.py`,
+  which goes through `git config --global`, names no path to the file
+  and points an identity stanza to its file by a path relative to it
+  (POS.1050, SOL.0150, SOL.0740, FND.2260). For you: where your global
+  git file moves with HOME, run `/setup` once in each place.
+- The comments of `templates/gitattributes` and of the engine's
+  `.gitattributes` say "Way 2, derived", as POS.1560 numbers the ways
+  since 5.31 (FND.2420). For you: a comment only; nothing merges
+  differently.
+- CLAUDE.md names `scripts/forge-check.py` with its module
+  `forge_check.py` in the Repository layout (FND.2410). For you:
+  `forge-check.py light <slug>` is the light check as a program, run on
+  trial beside the `light` agent (THR.0530).
+- `scripts/forge-report.py` refuses a report name that ends in a run
+  number (FND.2430). For you: a report's name is completed by the
+  script alone; reports already filed keep their names.
+
+## 5.31 - 2026-10-23
+
+### Added
+- A conflicting rebase is left standing by `/save`, the commit made and
+  nothing lost: the script prints the files in conflict and the step
+  that follows, `forge-status` says a rebase or a merge is in progress,
+  and the step of a conflict lays both sides out as a walkthrough, one
+  conflict one question, Claude writing the chosen wording and a
+  `changed` record (POS.1710, POS.1490, SOL.0840, SOL.0780). For you: a
+  conflict at a save is settled in the session, in place of the abort
+  and the four manual steps of 5.24; then `/save` again.
+- The hook `scripts/hook-git.py` has a third answer, ask, for the
+  commands that finish the step of a conflict: `git add`, `git rebase
+  --continue` or `--abort`, `git merge --continue` or `--abort`, `git
+  merge <branch>`, `git checkout --ours` or `--theirs` on a file; git
+  inside `$(` is denied, and the shell's redirections are stripped
+  before a verb is judged (POS.1200, POS.0550, SOL.0520). For you: these
+  commands come to you as a permission question; every other write of
+  git stays denied with the script to use named.
+- `/save` refuses a repository with a rebase or a merge already
+  standing before it stages anything, and pushes a branch without an
+  upstream (POS.1710, SOL.0530, SOL.0780). For you: conflict markers
+  are never committed, and a clone switched to a branch has a door to
+  the push.
+- IDs stay one sequence per project with no blocks; two branches that
+  took one number are reported by the ledger script after the merge
+  and settled in a walkthrough, the younger renumbered with a record;
+  a version given twice is settled by whoever merges, the merged
+  document taking the next number and one `changed` record naming the
+  merge (POS.1790, POS.0220, POS.1110). For you: an ID or a version
+  clash after a merge is mended by you, never by Claude alone.
+- A change of the operating layer that needs a test goes brief first,
+  then the build and its test on the fixture, then the rounds of the
+  intent and the design, never across a release (POS.1780). For you:
+  the intent describes what is built at every release.
+
+### Changed
+- Three ways of merging in place of four: the record files, the
+  histories, the decisions, the resource indexes and the documentation
+  map, merge as text, and a conflict in them is two tails kept both in
+  the step of a conflict (POS.1560, POS.1690, SOL.0730). For you: no
+  driver is needed for the record files on any machine.
+- The forge promises two people git, with its help at a conflict; the
+  integrator merges on the server or through the step of a conflict,
+  and the engine's own project is an open-source repository whose
+  issues enter as sources and threads and whose pull requests the
+  integrator carries into the chain (POS.1750, POS.1770). For you: to
+  contribute, open an issue or a pull request.
+- Two windows of one person on one project are not solved by the
+  forge: the answer is git's, a branch or a second clone (POS.1700).
+  For you: a bare `/save` still commits every repository with changes,
+  so keep one window per project or give the slug.
+
+### Removed
+- The second, third and fourth release of the brief `collaboration`
+  are cancelled: the forge's driver for the record files, `/merge`, the
+  worktree `projects/<slug>@<branch>/`, the version as a landing with
+  its `+` records, `landed` and `v<base>+N`, the blocks of IDs in
+  `ids.md` and the allocation over the branches, the conversion to one
+  sentence per line, and the fixture script (POS.1580, POS.1660,
+  POS.1670, POS.1730, POS.1760, SOL.0710, SOL.0750, SOL.0760, SOL.0770,
+  SOL.0790, SOL.0820, DEC.0280). For you: none of these comes; the
+  shape of the first release, 5.26, stands.
+- The driver's key `merge.forge-records.driver`, never registered, is
+  gone from `/setup`, `forge-config`, `forge-status` and `forge_repos`
+  (SOL.0740). For you: the registration of `/setup` is `ours`, the
+  backend, renormalize and rerere, with the offer of zdiff3.
+
+### Rejected
+- The version as a boundary in the history for branches (REJ.0330,
+  DEC.0280). For you: a version given twice is settled by whoever
+  merges.
+- The forge's driver for the record files, and `merge=union` with it
+  (REJ.0340, REJ.0280). For you: the record files are text.
+- `/merge` as a command of the forge (REJ.0350). For you: the merge
+  stays git's, with the step of a conflict as the help.
+- The worktree of a branch and `<slug>@<branch>` as a slug (REJ.0360).
+  For you: two windows on one project use a branch or a second clone.
+- The blocks of IDs per author and the allocation over the local
+  branches (REJ.0370). For you: a clash of IDs is found by detection
+  and settled by renumbering.
+- The conversion of the prose to one sentence per line (REJ.0380). For
+  you: the hard wrap at about 72 columns stays.
+
+## 5.30 - 2026-10-22
+
+### Fixed
+- `scripts/forge-ledger.py` finds the closing commit of a thread by the
+  header line `status: closed` added or removed, no longer by a count
+  of words that made the creating commit the closing one (FND.2350).
+  For you: the ledger dates a closed thread by the commit that closed
+  it.
+
+## 5.29 - 2026-10-22
+
+### Action required
+- A project is a repository of its own only where git names its
+  directory as the top (POS.0550, SOL.0510, SOL.0680). For you:
+  solution design (SOL.0510, SOL.0680, SOL.0800, SOL.0830), CLAUDE.md
+  Persistence, the skills import-project and migrate, the scripts, the
+  reply in the issue.
+- A project outside git is migrated the same (POS.1740, SOL.0800). For
+  you: SOL.0800, the skill migrate, scripts/forge-migrate.py.
+
+### Fixed
+- The scripts ask git once whether a project's directory is the top of
+  a repository, never look for a `.git`, and run no git on anything
+  else; a project whose top lies elsewhere, such as one linked into
+  `projects/` from a subdirectory of another repository, is a project
+  outside git whose files are written and whose surrounding repository
+  is asked nothing (POS.0550, SOL.0510, SOL.0680, GitHub issue #3). For
+  you: such a project is no longer refused; it comes in by hand, and
+  its git is yours.
+- The migration runs on a project outside git: none of the refusals of
+  git, the way back your backup taken before `--apply`, `--undo`
+  refused, and a run that stops midway finished by running it again
+  (POS.1740, SOL.0800). For you: take a backup before `/migrate` on a
+  project outside git.
+
+## 5.28 - 2026-10-21
+
+### Added
+- A bundle may grow: `/ingest --bundle <name>` adds one file at a time
+  to a bundle born at its first file, each file immutable from its own
+  registration and its role asked per file; a bundle that arrived whole
+  refuses it, and a bare sweep offers an unregistered file inside a
+  bundle for registration there (POS.0180, SOL.0230). For you: issues
+  or minutes of one origin are kept as one growing bundle, its index
+  saying which kind it is.
+
+### Changed
+- Two items with one number from any cause, not only a merge, are the
+  one exception to "never renumbered": the younger by its `created`
+  record is renumbered, and the ledger reports the clash and never
+  writes (POS.0220, DEC.0270, FND.2280). For you: the ASM and TBC items
+  of a work specification take the next free number of the project.
+- The hook composes an ask over the whole command where a rule would,
+  since an ask holds in the automatic permission mode (POS.1200,
+  SOL.0520). For you: nothing changes yet; no rule answers ask.
+- A user runs the forge on Linux: the git scripts, the ledger and
+  `docs-state` are verified there (POS.0830). For you: the
+  conversions and the hooks are not yet verified beyond Windows.
+
+### Fixed
+- CLAUDE.md's Repository layout names `forge-config` and the two hooks
+  and the deny rule of the other shell in `settings.json`, and the
+  README says that the scripts are the door to a write of git, not to
+  git as a whole (FND.2270, FND.2300, FND.2290). For you: the README
+  and CLAUDE.md describe the engine as it is.
+
+## 5.27 - 2026-10-21
+
+### Changed
+- Reading git is open to Claude and the scripts in `scripts/` are the
+  only door to a write: the deny rule `Bash(git *)` is replaced by a
+  `PreToolUse` hook, `scripts/hook-git.py`, on Bash, PowerShell closed
+  whole as before; the hook allows a reading verb and denies a write,
+  naming the script to use (POS.0550, POS.1200, SOL.0520, SOL.0030).
+  For you: Claude reads the state of git without a prompt, and every
+  commit, push or pull still goes through the scripts.
+
+### Fixed
+- `scripts/forge-ledger.py` refuses a project of the old shape whether
+  or not it is under git, prints and says to run `/migrate`, where the
+  `/forge` map and `/ledger` used to overwrite the hand-kept ledger of
+  such a project outside git (SOL.0680, POS.1740). For you: an
+  unmigrated project's ledger is never overwritten; migrate it first.
 
 ## 5.26 - 2026-10-19
 

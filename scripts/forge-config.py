@@ -27,10 +27,10 @@ WHAT IT DOES
     diacritic differs.
 
     Bare: what is there - the file git reads, the registration of the
-    merge drivers, the guard, a global identity and the per-host
+    merge driver ours, the guard, a global identity and the per-host
     identity stanzas. Changes nothing.
 
-    --register: the merge drivers and the settings they need, once per
+    --register: the merge driver ours and the settings it needs, once per
     place (SOL.0740): merge.ours.driver true, merge.renormalize true,
     rebase.backend merge (the apply backend ignores drivers) and
     rerere.enabled true, a convenience. --zdiff3 adds
@@ -129,7 +129,7 @@ def show():
 
 
 def register(zdiff3):
-    print("registration of the merge drivers (SOL.0740):")
+    print("registration of the merge driver ours (SOL.0740):")
     for key, value in fr.REGISTRATION:
         ensure(key, value)
     ensure("rerere.enabled", "true")
@@ -171,7 +171,7 @@ def main(argv):
     ft.utf8_console()
     ap = argparse.ArgumentParser(description=__doc__.splitlines()[1].strip())
     ap.add_argument("--register", action="store_true",
-                    help="the merge drivers and the settings they need")
+                    help="the merge driver ours and the settings it needs")
     ap.add_argument("--zdiff3", action="store_true",
                     help="with --register: merge.conflictStyle zdiff3")
     ap.add_argument("--guard", action="store_true", help="user.useConfigOnly true")

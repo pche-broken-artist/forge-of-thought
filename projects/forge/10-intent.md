@@ -1,5 +1,5 @@
 ---
-version: 5.31
+version: 5.34
 status: draft
 project: forge
 audience: principal + Claude only
@@ -924,9 +924,12 @@ position that already stands elsewhere.
   four digits as long as the number fits and takes a fifth only beyond
   9999 (`POS.10000`); no zero is added to an existing ID, and every
   sorting of IDs is numeric by prefix and number. Why: a prefix has 99
-  hundreds, the engine's POS stand past 1500 after two months, and
-  reservations by the hundred spend them faster than use; the widening
-  costs less before the reservations than after. Decided 2026-10-17.
+  hundreds, numbered in tens with a new group at each hundred, and the
+  engine's POS stand past 1700 after two months, so a prefix may outgrow
+  four digits on use alone; the widening was built 2026-10-18 and costs
+  nothing kept. Decided 2026-10-17; kept 2026-10-23 when F2 of brief
+  `collaboration` 0.9, the reservations it was first wanted for, was let
+  go (REJ.0370).
 - **POS.0230** Prefix vocabulary, aligned with the group BRD standard
   where an equivalent exists: REQ, OOS, CON, ASM, DEL, TBC, SCR in the
   assignment; POS, THR, REJ, FCT in the intent; FND, CHL, DEC
@@ -1128,7 +1131,7 @@ position that already stands elsewhere.
   header says what was not parsed, the light check reports it, and
   `/save` commits and pushes on, since checks inform and the save is
   what does not lose work (prime directive 5); the script tolerates the
-  shape one release back, as the driver does (CHL.0280). Price: the
+  shape one release back (CHL.0280). Price: the
   ledger is not on the remote (POS.1650). Why: the ledger was the one
   file present at every collision of two people or two windows on one
   project, since every operation writes it; made at read time it stops
@@ -1170,7 +1173,7 @@ position that already stands elsewhere.
   stale, as every raise does. Decided 2026-10-17 (brief
   `collaboration`).
 - **POS.1640** The ledger script reports what the merged files cannot:
-  two items with one ID and two versions with one number; a closed
+  two items with one ID; a closed
   thread touched by any commit later than the one that closed it; a THR
   cited anywhere in the project that has neither a file nor a `closed`
   record. `/check light` compares nothing with the ledger any more and
@@ -1653,8 +1656,9 @@ position that already stands elsewhere.
   raised a document to the same number, is settled by whoever merges:
   the merged document takes the next number and one `changed` record
   naming the merge and what was joined, the records of both sides
-  keeping their numbers, and the ledger script says that a number
-  appears twice. Why: a clash is a few times a year on a project of one
+  keeping their numbers; it is found by git itself, the header's
+  `version:` line conflicting whenever both sides raised it, and settled
+  in the step of a conflict (POS.1710), as on the fixture (R6.03). Why: a clash is a few times a year on a project of one
   or two people and detection with the existing remedy costs nothing,
   where the blocks of IDs, the allocation over the local branches and
   the version as a landing (REJ.0330, REJ.0370) cost the most code of
@@ -2207,10 +2211,16 @@ position that already stands elsewhere.
   first minute is no place for a model decision. `/setup` never
   overwrites. The interview closes with the git identity, which is git's
   (POS.0950): `/setup` offers to write the user's git configuration and
-  its guard, on his word and never overwriting (SOL.0150). `/setup` runs
-  no git operation — the user's git
-  configuration files are the one thing it may edit outside the engine,
-  on his word. Named `/setup`, not `/init`: Claude Code's built-in
+  its guard, on his word and never overwriting (SOL.0150). `/setup`
+  writes the user's global git configuration only through
+  `scripts/forge-config.py`, which goes through `git config --global`
+  and so lands in the file git itself reads, wherever HOME puts it: the
+  forge names no path to that file, and an identity stanza points to its
+  file by a path relative to it, since a user may keep his profile
+  anywhere and the global file moves with HOME (THR.0720, found
+  2026-10-20 on a domain machine). On a machine whose home differs by
+  place, `/setup` runs once in each. That configuration is the one thing
+  `/setup` changes outside the engine, on the user's word. Named `/setup`, not `/init`: Claude Code's built-in
   `/init` generates a CLAUDE.md, and the collision would send a newcomer
   to exactly the wrong action at the most sensitive moment. Decided
   2026-09-01.
@@ -2365,29 +2375,34 @@ worked out by Claude; what Claude has worked out is never a FCT
   among ten branches with a probability near 40 % (the birthday
   paradox); hash IDs change the scheme; lazy IDs rewrite the whole
   branch; a hundred across all prefixes would spend the 85 free hundreds
-  in as many weeks at one branch a week (POS.1730).
+  in as many weeks at one branch a week; IDs stay sequential and a clash
+  is settled by detection and POS.0220 (POS.1790, REJ.0370).
 - **REJ.0280** `merge=union` for the record files, and the ledger
   committed only at a release. Rejected 2026-10-17: union duplicates and
-  does not order, by git's own documentation (POS.1670); a file added by
+  does not order, by git's own documentation, and the record files merge
+  as text, a conflict in them two tails kept both (POS.1560, REJ.0340);
+  a file added by
   force at a release is a door `forge-save` does not have (POS.1650).
 - **REJ.0290** The entries of the resource indexes as immutable blocks,
   the principal's first word. Rejected 2026-10-17: a correction of a
-  typo must not be a conflict, and the driver has the mutable case for
-  the map anyway (POS.1670).
+  typo must not be a conflict, and an index merges as text like every
+  record file, the same entry changed on both sides settled in the step
+  of a conflict (POS.1560, POS.1710).
 - **REJ.0300** `<base>+` written into an artefact's header on a branch.
-  Rejected 2026-10-17: a header changed on a branch is the conflict the
-  boundary removes; the version on a branch is computed and reported,
-  never written (POS.1660, POS.1640).
+  Rejected 2026-10-17: a header changed on a branch conflicts with
+  main's at every merge; a version given twice is settled by whoever
+  merges (POS.1790, REJ.0330).
 - **REJ.0310** A file per record for the histories and the decisions, an
   event log, and the splitting of directories in advance. Rejected
-  2026-10-17: the records stay one file one line and merge by the driver
-  (POS.1670); nothing is split before it hurts.
+  2026-10-17: the records stay one file one line and merge as text, a
+  conflict two tails kept both (POS.1560); nothing is split before it
+  hurts.
 - **REJ.0320** The reservation of ID blocks by a push onto origin/main
   from a branch, by plumbing. Rejected 2026-10-17: a hosted main is
   protected by default and refuses the push, and the network at the
   reflection before a write is a dependency a round should not have
-  (CHL.0260); blocks per author assigned by hand need neither
-  (POS.1730).
+  (CHL.0260); no reservation is needed, a clash being settled by
+  detection and POS.0220 (POS.1790, REJ.0370).
 
 - **REJ.0330** The version as a boundary in the history for branches:
   `+` records, a `landed` record, `forge-land`, `v<base>+N` in a

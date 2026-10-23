@@ -1,8 +1,8 @@
 ---
-generated: 2026-10-19
-version: 5.26
+generated: 2026-10-23
+version: 5.34
 made: mirrored
-inputs-hash: 949112cc470fa7f3
+inputs-hash: 64b1f091b7c6a57c
 inputs:
   - .claude/skills/pull/SKILL.md
   - scripts/forge-pull.py
@@ -11,21 +11,15 @@ inputs:
 
 # Pull from the remote
 
-`/pull` brings the latest work from a repository's remote (the copy
-it was cloned from, called its origin) into your copy. This page is
-for you as the principal (the person whose thinking is forged) when
-you want the engine's newest release, or a project saved from
-another machine. The command looks first, pulls only what is safe and
-leaves everything else to you.
+`/pull` is the command that brings the latest work from a remote into the engine or into a project, and only when that is safe. It is for you, the principal (the person whose thinking is forged), when you want to take in what others pushed or to upgrade the engine. It first looks and says what it sees. It pulls only a repository that is clean and behind its remote, and it never merges.
 
 ## When to use it
 
-- You want to upgrade the engine to its newest release.
-- A project was saved from another machine and this copy is behind.
-- You want to know where each repository stands against its origin,
-  with a pull only if one is safe.
+- You want the newest engine, which is how the engine is upgraded.
+- A colleague or another machine pushed to a project and you want it here.
+- You want to know where each repository stands against its remote, with the offer that fits.
 
-Terms of the forge are explained in the [Glossary](../reference/glossary.md).
+For the reasons the forge looks at the remote and offers instead of acting, see [Persistence in git](../about/persistence-in-git.md).
 
 ## The command
 
@@ -33,16 +27,13 @@ Terms of the forge are explained in the [Glossary](../reference/glossary.md).
 /pull [slug]
 ```
 
-- Bare `/pull` covers the engine and every project that has an
-  origin.
+- Bare, `/pull` covers the engine and every project that has an origin (the remote the repository was set up with).
 - `/pull forge` covers the engine only.
-- `/pull my-project` covers that one project (a placeholder slug,
-  replaced by the slug of your own project).
+- `/pull <slug>` covers that one project.
 
 ## What happens
 
-1. Claude looks at each repository in scope and reports its state
-   against its origin as a fact. The states are:
+1. Claude looks at each repository in scope against its origin and reports the state as a fact. The state is one of these:
    - up to date
    - behind
    - ahead
@@ -50,90 +41,60 @@ Terms of the forge are explained in the [Glossary](../reference/glossary.md).
    - no origin
    - not under git
 
-   You should now see one state per repository.
+   You should now see one state for each repository.
 
-2. A repository with unsaved changes, or with a diverged history,
-   stops here. Nothing is pulled from it. Claude gives its one offer:
-   `/save` first (see [Save your work](save-your-work.md)), or for a
-   diverged history a merge by hand, or `/save`, which puts your
-   commits on top of the remote's. You should now see the offer
-   beside that repository, and its files unchanged.
+2. A repository with unsaved changes, or with a diverged history, stops here and nothing is pulled from it. It gets one offer:
+   - for unsaved changes, `/save` first, as described in [Save your work](save-your-work.md);
+   - for a diverged history, a merge by hand, or `/save`, which rebases your commits onto the remote.
 
-3. For each repository that is clean and behind, Claude runs the pull
-   script. It only fast-forwards, so it can never create a conflict
-   in half-finished work. You should now see, per repository, where
-   it moved from and to (the earlier and the later commit, each with
-   its subject) and the subjects of the commits between.
+   If the save of a diverged repository meets a conflict, [Settle a conflict](settle-a-conflict.md) says what to do. You should now see the stopped repository named with its offer.
 
-4. After a pull of the engine, Claude reads the release notes and
-   shows the "Action required" lines of every release the pull
-   crossed. You should now see those lines, or none if the releases
-   asked nothing of you.
+3. For every repository that is clean and behind, the pull script fast-forwards it: the repository moves forward to the remote's newest commit without any merge. You should now see, for each one, where it moved from and to, and the subjects of the commits between.
 
-5. Claude then offers two checks on each project you keep: the
-   `light` check and the `project` check. It runs them only on your
-   word. You should now see the offer, and no check running.
+4. After a pull of the engine, Claude reads the release notes and shows the Action required lines of every release the pull crossed. You should now see those lines, or none if the releases asked for nothing.
 
-6. Where an "Action required" line names a migration, Claude offers
-   `/migrate <slug>` for each of your projects that is still of the
-   old shape. Each is migrated on one clone, then saved. A project
-   migrated on another machine is brought in by `/pull`. It makes no
-   difference whose machine the clone is: every user of the engine
-   migrates his own projects. See
-   [Migrate a project](migrate-a-project.md).
+5. Claude then offers two checks, a light check and a project check, on each project you keep. It runs them only on your word.
 
-7. After a pull of a project, Claude reports what the script printed.
+6. Where an Action required line names a migration, Claude offers `/migrate <slug>` for each project of the old shape. Each project is migrated on one clone and then saved. A project migrated elsewhere reaches you by `/pull`. Every user of the engine migrates their own projects. See [Migrate a project](migrate-a-project.md).
+
+   You should now see one offer for each project that still has the old shape.
+
+After a pull of a project, Claude reports what the script printed.
 
 ## What you have afterwards
 
-- Every repository that was clean and behind is up to date.
-- Every other repository is exactly as it was, with its offer.
-- Nothing was merged, and no check was run unasked.
-
-What to do next after an engine pull is on
-[Upgrade the engine](upgrade-the-engine.md). The reason the forge
-looks and offers instead of pulling on its own is on
-[Persistence in git](../about/persistence-in-git.md).
+- Every clean repository that was behind is at its remote's newest commit.
+- Repositories that were up to date, ahead, diverged, unsaved, without origin or not under git are as they were.
+- After an engine pull, you know which releases were crossed and what each asked of you. [Upgrade the engine](upgrade-the-engine.md) says what to do next.
 
 ## If something goes wrong
 
-The script refuses in these cases. Each refusal changes nothing.
+The scripts refuse in these cases. With a slug the refusal stops the run. Bare, the repository is reported and skipped, and the run goes on to the next.
 
-- **No origin.** A repository with no origin is reported as
-  "no origin - skipped". Asked for by slug, the same case stops the
-  run instead of being skipped.
-- **Unsaved changes.** The repository is listed with its changes and
-  skipped. Asked for by slug, the run stops with "Run
-  scripts/forge-save.py first, then pull." Save first with `/save`,
-  then pull again.
-- **Diverged history.** The run stops with "local and remote history
-  diverged; nothing pulled". Merge by hand, or use `/save`, which
-  puts your commits on top of the remote's.
-- **Not under git.** A project with no repository is reported and
-  skipped.
+- **No origin:** the script prints "no origin - skipped". Set up a remote first, or leave the repository alone.
+- **Unsaved changes:** the script lists the changes and, with a slug, tells you "Run scripts/forge-save.py first, then pull." Bare, it prints "skipped". Save first, so that a pull cannot create a conflict in half-finished work.
+- **Diverged history:** the script prints "Pull failed ... local and remote history diverged; nothing pulled. Merge by hand, or scripts/forge-save.py rebases your commits onto the remote." Choose one of the two as the message says.
+- **Not under git:** the repository is reported as such and nothing is pulled.
+
+The forge never pulls or merges on its own. Anything beyond a fast-forward is yours to decide.
 
 ## A worked example
 
-You have just heard that the engine has a new release. You type:
+You run `/pull` with a project `<slug>` that has unsaved changes and the engine that is behind.
 
 ```
-/pull forge
+/pull
 ```
 
-Claude reports the engine as "behind", with the engine clean. It runs
-the pull and prints where the engine moved from and to, and a short
-list of commit subjects, one of them a release. It then shows that
-release's "Action required" line, which names a migration. It offers
-the `light` and `project` checks on `my-project` and offers
-`/migrate my-project`. You say yes to the migration, then save the
-project with `/save my-project`.
+Claude reports the engine as behind and `<slug>` as having unsaved changes, with the offer to `/save` it first. You decide to take the engine now. The script prints the engine's before and after commits and the subjects between them, one of which reads `release <version>`. Claude shows that release's Action required line, which names a migration. It offers the two checks on `<slug>` and offers `/migrate <slug>` because `<slug>` is of the old shape. You save `<slug>` first, then accept the migration.
 
 ## See also
 
 - [Upgrade the engine](upgrade-the-engine.md): what to do after a pull of the engine.
 - [Migrate a project](migrate-a-project.md): the migration a release may ask for.
 - [Save your work](save-your-work.md): the save that must come first on unsaved work.
+- [Settle a conflict](settle-a-conflict.md): what to do when the save of a diverged repository meets a conflict.
 - [Persistence in git](../about/persistence-in-git.md): why the forge looks at the remote and offers.
 - [Glossary](../reference/glossary.md): every term of the forge in one line.
 
-Generated on 2026-10-19 for version 5.26 from the files the front-matter names; never edited by hand.
+Generated on 2026-10-23 for version 5.34 from the files the front-matter names; never edited by hand.

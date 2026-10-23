@@ -18,17 +18,11 @@ is the `light` check's, never yours; run beside it at a release
 
 What you verify:
 
-0. **Kind and repository** — the project file `project.md` declares
+0. **Kind** — the project file `project.md` declares
    `kind: thought | library` and `language` (`templates/project.md`,
    which also says what a project without it is and how it is
    reported); `.gitattributes` exists (`templates/gitattributes`,
-   SOL.0730); `threads/` exists in a thought project. `projects/<slug>/.git` exists; a project that is
-   not a repository is a fact, never a finding, reported with the
-   one-line way in ("project is not a repository —
-   the way in CLAUDE.md, Persistence, names"),
-   the one git-related check, since the engine does not track
-   projects and a local-only project is a legitimate shape
-   (POS.0940). A `library` needs no chain: Structure reduces to the
+   SOL.0730); `threads/` exists in a thought project. A `library` needs no chain: Structure reduces to the
    library's file set (CLAUDE.md, Repository layout); ID hygiene does
    not apply; Language, Immutables and Recipes
    and renders apply as written, except that a library's documents

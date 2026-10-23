@@ -1,157 +1,187 @@
 ---
-generated: 2026-10-19
-version: 5.26
+generated: 2026-10-23
+version: 5.34
 made: derived
-inputs-hash: 663585abde05284f
+inputs-hash: 465b46285f195657
 inputs:
   - CLAUDE.md#ID scheme
   - projects/forge/10-intent.md#POS.0200
+  - projects/forge/10-intent.md#POS.0220
   - projects/forge/10-intent.md#POS.0230
+  - projects/forge/10-intent.md#POS.1790
   - projects/forge/10-intent.md#REJ.0020
   - projects/forge/10-intent.md#REJ.0100
 ---
 
 # Stable IDs
 
-A stable ID is the short address every item of a document carries,
-such as `REQ.0010`, and it never changes once given. This page
-explains what the address looks like, how numbers are given and why
-the forge holds its documents as items with such addresses rather
-than as prose. It is for anyone who uses the forge, extends it or
-weighs it.
+A stable ID is the address every item of a document carries, in the
+form `PREFIX.NNNN`. Once an item has its ID, the number is never
+renumbered. This page explains why every item carries such an ID and
+why the number does not change. It also explains the one case where
+a number does change: two items in one project that share one
+number. It is written for anyone who uses the forge, extends it or
+evaluates it. The prefixes themselves and the numbering rules are
+listed in [ID scheme](../reference/id-scheme.md).
 
 ## What it is
 
-An item is one statement of a document with an ID in front of it: a
-requirement, a position, a fact, an open question and so on. Every ID
-has the form `PREFIX.NNNN`. The prefix is always three letters and
-says what kind of item it is. The number has four digits as long as
-the number fits. It takes a fifth digit only beyond 9999, as in
-`POS.10000`. No zero is added to an ID that already exists. The full
-list of prefixes and the rules of numbering stand on
-[ID scheme](../reference/id-scheme.md), and every term used here is
-in the [Glossary](../reference/glossary.md).
+An item is one requirement, one position, one thread or any other
+single entry of a document. Each item carries an ID made of two
+parts:
 
-An ID is global and stable. It is never renumbered.
+- a prefix: three letters that say what kind of item it is, such as
+  `REQ` for a requirement or `POS` for a position the principal (the
+  person whose thinking is being forged) holds;
+- a number: four digits as long as the number fits.
+
+The number takes a fifth digit only beyond 9999 (`POS.10000`). No
+zero is added to an existing ID. Every sorting of IDs is numeric, by
+prefix and then by number.
+
+IDs are global and stable. An item keeps its ID for its whole life.
+An item may move from one group of a document to another, and its ID
+does not change. Groups are plain headings: they carry no ID, no
+metadata and no lifecycle. A document has at most two levels of
+groups.
 
 ## How it works
 
-Items are numbered in tens: `REQ.0010`, `REQ.0020`. Items are
-gathered under headings called groups. Each new group starts at the
-next hundred: `REQ.0100`, `REQ.0110`. When a group runs out of
-numbers, the item takes the next free number anywhere.
+### Numbering
 
-A group is a plain heading. It has no ID, no metadata and no
-lifecycle of its own. Groups go at most two levels deep. An item may
-move from one group to another, and its ID does not change when it
-moves.
+Items are numbered in tens: `REQ.0010`, `REQ.0020`. Each new group
+starts at the next hundred: `REQ.0100`, `REQ.0110`. When a group
+runs out of room, the next item takes the next free number anywhere.
 
-Every sorting of IDs is numeric: first by prefix, then by number. A
-five-digit number therefore sorts after a four-digit one.
+IDs are one sequence per project. A number is taken at the moment
+the item is written. There are no blocks of numbers set aside for
+one author or for one branch.
 
-The reason for numbering in tens and starting groups at the hundred
-is not recorded. The reason for the numeric sorting is not recorded
-either.
+### Two items with one number
+
+A number can end up on two items in one project. This can happen in
+several ways:
+
+- two branches merged, each of which took the same number;
+- a number typed by hand;
+- documents of one project written apart from each other.
+
+However it happened, the clash is settled the same way:
+
+1. The older item keeps its number. The older item is the one whose
+   `created` record in the history is earlier. At a merge, the item
+   from the branch merged second is the younger. Where the histories
+   do not decide, the principal decides.
+2. The younger item takes a new number. At a merge, this is the next
+   free number of the merged state.
+3. The younger item gets a `changed` record in its history. The
+   reason of the record names the clash, and its `Was` field holds the
+   old number.
+4. Every citation of the younger item is corrected to the new number.
+5. If the younger item is a thread (one open matter of the intent,
+   kept in a file of its own), its file is renamed with it.
+
+The ledger (the state of a project, made by a script from the
+documents at read time) reports the clash. The ledger script writes
+nothing into the documents. The renumbering is a write into the
+artefacts. Claude does it together with the principal, in a
+walkthrough (a list of decisions worked one item at a time). Claude
+never renumbers on its own.
+
+After a merge of two branches, this is where a number taken twice
+usually shows up. See [Settle a conflict](../use/settle-a-conflict.md).
 
 ## Why
 
-### Items over prose
+### Why items instead of prose
 
-The forge writes its documents as structured items with stable IDs,
-even where the thinking is still very abstract. Narrative is kept to
-two places: the sections Purpose & Context and Objective.
+An item with a stable ID can be cited. It can be reviewed, traced
+into the layer below and changed one at a time. Prose cannot be
+pointed at. This holds even for very abstract content. Narrative is
+kept to the sections that set out purpose and context and the
+objective.
 
-The reason is that an item with a stable ID can be pointed at. It
-can be:
+### Why the number never changes
 
-- cited: another document or a record names it by its ID;
-- reviewed: a reviewer's result names the item it is about;
-- traced: an item in the layer below says which item above it
-  carries forward;
-- changed one at a time: one item is rewritten while the others
-  stand.
+The reason for stability is the same as the reason for items: an ID
+is only useful as an address if it keeps pointing at the same item.
+A citation, a review or a trace into the layer below relies on it.
 
-Prose cannot be pointed at in this way.
+### Why a fifth digit
 
-### Groups are only headings
+A prefix may outgrow four digits through use alone. Items are
+numbered in tens and every new group starts at the next hundred, so
+the numbers of a busy prefix climb quickly. The wider form costs
+nothing to keep.
 
-Groups could have been things of their own, with their own IDs and
-lifecycle. That was rejected as structure for its own sake. Plain
-heading groups together with stable global IDs achieve the same at
-lower cost.
+### Why a fact, a position and a thread have prefixes of their own
 
-### Three letters and a dot
+A fact (`FCT`) is what is the case. It is stated by the principal on
+his own word, or by a source cited to its file. A position (`POS`) is
+what the principal holds or wants. Without a prefix of its own, a
+fact would pass for a position. A fact of a source becomes the
+principal's stance only as a new position.
 
-Single-letter and hyphenated prefixes, such as `R-001` or `P-01`,
-were rejected. They were replaced by the three-letter dotted form
-`PREFIX.NNNN`. The prefixes are aligned with an existing convention
-for requirements documents where an equivalent exists. No universal
-standard for prefixes exists, so the vocabulary is a house
-convention derived from that one. No further reason against the old
-form is recorded.
+A thread (`THR`) carries its origin:
 
-### A fact, a position and a thread each have their own prefix
+- the principal's word, the default, which needs no mark;
+- a document, cited by its path;
+- Claude's own synthesis.
 
-The principal is the person whose thinking is being forged and who
-decides everything in it. The intent (the document of what the
-principal wants now) holds three kinds of item that look alike in
-prose but are not alike:
+The origin is kept so that a hypothesis of Claude's stays visibly
+Claude's until the principal takes it up. For the same reason, what
+Claude has worked out is never recorded as a fact.
 
-- a fact (`FCT`): what is the case, stated by the principal on his
-  word or by a source cited to its file;
-- a position (`POS`): what the principal holds or wants;
-- a thread (`THR`): an open matter still to be drawn out of the
-  principal.
+### Why three-letter dotted prefixes
 
-A fact needs a prefix of its own. Without one, a fact would pass for
-a position. Taking a source's fact as the principal's own stance is
-a new position. Verification of a fact is never demanded.
+Single-letter and hyphenated prefixes (`R-001`, `P-01`) were rejected
+and replaced by the three-letter dotted form `PREFIX.NNNN`. No
+universal standard for prefixes exists. The prefixes are a house
+convention, aligned with an existing requirements-document standard
+where an equivalent exists.
 
-A thread carries its origin. The origin is one of three:
+### Why groups have no IDs
 
-- the principal's word, which is the default and needs no mark;
-- a document, named by its path;
-- Claude's synthesis.
+Workstreams as entities with their own IDs and lifecycle were
+rejected as structure for its own sake. Plain heading groups together
+with stable global IDs achieve the same at a lower cost.
 
-The origin is carried so that a hypothesis of Claude's stays visibly
-Claude's until the principal takes it up. What Claude has worked out
-is never a fact, because a fact is the principal's word or a
-source's.
+### Why detection instead of blocks of IDs
+
+A clash is rare on a project of one or two people: a few times a
+year. Detecting the clash and settling it with the existing remedy
+costs nothing. The alternatives were rejected because they cost the
+most code:
+
+- blocks of IDs reserved per author;
+- allocation of numbers read over the local branches.
 
 ## A worked example
 
-A generic intent opens with two groups:
+A project has requirements up to `REQ.0120`. Two people each work on
+a branch of their own. Each adds a requirement and gives it the next
+number, `REQ.0130`.
 
-```
-## Scope
-- **POS.0010** ...
-- **POS.0020** ...
-- **POS.0030** ...
+The first branch is merged, then the second. The project now holds
+two items numbered `REQ.0130`. The ledger reports the clash and
+changes nothing.
 
-## Delivery
-- **POS.0100** ...
-- **POS.0110** ...
-```
-
-A new position about scope is added. It takes `POS.0040`, the next
-step of ten in its group.
-
-`POS.0020` turns out to belong under Delivery. It moves there and is
-still `POS.0020`. Whatever cited `POS.0020` still points at the same
-item.
-
-A third group, Risks, is opened. Its first item takes `POS.0200`,
-the next hundred.
-
-Much later the numbers pass 9999. The next position is `POS.10000`.
-Sorted numerically, `POS.9990` comes before `POS.10000`. The older
-IDs keep their four digits and gain no zero.
+Claude lays the clash out to the principal in a walkthrough. The
+item from the first branch is the older and keeps `REQ.0130`. The
+item from the second branch is the younger. It takes the next free
+number of the merged state, here `REQ.0140`. Its history gets a
+`changed` record: the reason names the clash, and `Was` holds
+`REQ.0130`. Every place that cited the second item as `REQ.0130` now
+cites `REQ.0140`.
 
 ## See also
 
 - [ID scheme](../reference/id-scheme.md): the prefix table and the
   numbering rules.
+- [Settle a conflict](../use/settle-a-conflict.md): where a number
+  taken twice usually shows up, after a merge.
 - [Glossary](../reference/glossary.md): every term of the forge in
   one line.
 
-Generated on 2026-10-19 for version 5.26 from the files the front-matter names; never edited by hand.
+Generated on 2026-10-23 for version 5.34 from the files the
+front-matter names; never edited by hand.

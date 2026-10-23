@@ -397,8 +397,12 @@ scripts/                   # forge-save / forge-pull / forge-status
                            # project brought to the shape of a
                            # release), forge-config (the user's
                            # global git configuration through git:
-                           # the registration of the drivers, the
-                           # guard, the identity per host), doc2md
+                           # the registration of the merge driver ours, the
+                           # guard, the identity per host),
+                           # forge-check (the mechanical clauses of
+                           # a check as a program, with its module
+                           # forge_check; the trial of THR.0530),
+                           # doc2md
                            # (document →
                            # Markdown), md2pptx (deck render →
                            # PowerPoint), md2docx (render → Word),
@@ -531,7 +535,7 @@ none. The recommended global guard is `user.useConfigOnly = true`
 with no global `user.name`/`user.email` (offered by `/setup`), so a
 repository on a host with no stanza fails aloud instead of taking a
 default. `/setup` also registers, once per machine and on the user's
-word, the merge drivers and the git settings they need in that same
+word, the merge driver `ours` and the git settings it needs in that same
 global file, the stanzas, the guard and the registration written
 through `scripts/forge-config.py`, and `forge-status` says when the
 registration is

@@ -1,8 +1,8 @@
 ---
-generated: 2026-10-19
-version: 5.26
+generated: 2026-10-23
+version: 5.33
 made: derived
-inputs-hash: 2928724f2fa6a5bb
+inputs-hash: 0c165b157a74cf56
 inputs:
   - CLAUDE.md#Document kinds
   - templates/decisions.md
@@ -15,152 +15,153 @@ inputs:
 
 # Documents and records
 
-A document is any file of a project, and every document has exactly
-one kind. This page explains the kinds a project holds, how they are
-grouped, and why the state of a project lives in files. It is for
-anyone who uses the forge, extends it or evaluates it. The full table
-of kinds is on [Document kinds](../reference/document-kinds.md); this
-page explains it and does not repeat it.
+A project of Forge of Thought is a set of files, and every file has
+one kind that says what it is and how it behaves. This page explains
+the six groups those kinds fall into, why the state of a project
+lives in files and never in the conversation, and why some files are
+never edited. It is for anyone who uses the forge, extends it or
+weighs it, and wants to know what a project directory holds and
+which files may change.
 
 ## What it is
 
 "Document" is the word for every file of a project. "Artefact" is
-kept for one narrower thing: the documents of the chain (the
-versioned documents a thought travels through in a project). An
-artefact is a document the principal composes, the reviewers read
-and the renders are generated from. The principal is the person
-whose thinking is being forged. Terms of the forge are each given in
-one line in the [Glossary](../reference/glossary.md).
+reserved for the documents of the chain. These are the documents the
+principal (the person whose thinking is being forged) composes with
+Claude, the reviewers read, and the renders are generated from.
 
-The kind of a document says four things about it:
+Every document has exactly one kind. The kind says four things:
 
-- what it is;
+- what the document is;
 - who writes it;
 - whether it is versioned;
 - how it behaves once it exists.
 
-The kinds fall into six groups.
-
-- **Artefacts:** the documents of the chain. The principal writes
-  them with Claude, they are versioned, and they are rewritten
-  freely.
-- **Records:** what happened, kept so that it can be read later.
-  The history of a versioned document and the decisions of the
-  principal are append-only. A review and a challenge are each one
-  dated run of a reviewer agent (a subagent: a separate Claude that
-  sees nothing of the working conversation), and they are immutable.
-- **State:** where the project stands. The ledger is made at read
-  time by a script. The project file (slug, kind, language) is
-  written once, when the project is created. A thread holds one open
-  matter of the intent: it is rewritten freely while open and
-  immutable once closed. An index catalogues a resource directory
-  and is rewritten freely. The documentation map holds one entry per
-  page of the documentation and is rewritten by the documentation
-  run.
-- **Rendering:** how outputs for an audience are made. A recipe says
-  how a render is made; it is versioned and iterated but never
-  approved. A render and a page of the documentation are generated,
-  overwritten on every run, and never a source of truth.
-- **Work:** an output of the project made with work of its own. The
-  file holds the content and a specification beside it holds the way
-  and the why. It is explained on
-  [The work product](the-work-product.md).
-- **Resources:** what comes from outside or is found out once. A
-  source is external input as it arrived. A research note is the
-  durable answer to one question. Both are immutable.
+The full table of kinds is on the page
+[Document kinds](../reference/document-kinds.md). Every term used
+here has one line in the [Glossary](../reference/glossary.md).
 
 ## How it works
 
-Each kind behaves in one of a few ways.
+The kinds fall into six groups.
 
-- **Rewritten freely:** the file shows only its current state.
-  Artefacts work this way between versions.
-- **Append-only:** new entries are added at the end and old ones are
-  never changed. The history and the decisions work this way.
-- **Immutable:** once created, the file is never edited.
-  Corrections happen downstream. Reviews, challenges and research
-  are immutable from their creation, and a source from its
-  registration.
-- **Generated:** the file is made again from its inputs and never
-  edited by hand. Renders, pages and the ledger work this way.
+- **Artefacts:** the documents of the chain. They are versioned,
+  written by the principal with Claude, and rewritten freely. What
+  each artefact is, its definition says.
+- **Records:** what has happened. The history of a versioned
+  document and the decisions of the principal are append-only. A
+  review or a challenge (one dated run of a reviewer) is immutable.
+- **State:** where the project stands. The ledger is made at read
+  time by a script. The project file (slug, kind, language) is
+  written once, when the project is created. A thread (one open
+  matter of the intent) is freely rewritten while open and immutable
+  once closed. An index (the catalogue of a resource directory) is
+  freely rewritten. The documentation map is freely rewritten by the
+  documentation run.
+- **Rendering:** what is generated for readers. A recipe says how a
+  render is made; it is versioned, iterated and never approved. A
+  render and a page of the documentation are overwritten each time
+  they are generated, and neither is ever a source of truth.
+- **Work:** an output of the project made with work of its own. The
+  file holds the content and a specification beside it holds the way
+  and the why.
+- **Resources:** what comes from outside or from looking things up.
+  A source is external input as it arrived. A research note is a
+  durable answer to one question. Both are immutable.
 
-Every versioned kind keeps its history in an append-only companion
-file beside it, never in its own body. How versions and histories
-work is explained on
-[Versioning and history](versioning-and-history.md).
+The behaviours differ in what they allow:
 
-A decision record has a fixed shape. One record is written per
-decision of the principal, numbered in the global sequence of IDs,
-newest last. A record is never edited. A later decision that changes
-it is a new record that names the old one. Each record carries the
-decision, its reason including what was weighed against it, and its
-date. A decision that rules on a finding or a challenge also carries
-one verdict line for each ID it rules on.
+- **Rewritten freely:** the file is the current state, and it changes
+  as the work changes.
+- **Append-only:** new entries are added at the end, and nothing
+  already written is changed.
+- **Immutable:** the file is never edited after it exists. A source
+  is fixed from its registration. A review, a challenge and a
+  research note are fixed from their creation. A correction happens
+  downstream, in a later document, never in the immutable one.
+- **Overwritten:** the file is generated again from its inputs, so a
+  hand edit would be lost.
+
+Every versioned kind keeps its history in a companion file beside
+it, described on the page
+[Versioning and history](versioning-and-history.md). The work kind
+has a page of its own, [The work product](the-work-product.md). The
+documentation map and the pages are described on the page
+[The documentation](the-documentation.md). The map is state of the
+project that owns the documentation. It is never shown to the
+documentation's reader.
 
 The ledger is the single source of truth for the state of a project,
-made by a script from the other files and never written by hand; what
-it is made from is explained on
-[The ledger, made from the records](the-ledger.md). The ledger cites
-and never copies: the substance of a matter stays in its thread or
-its record. An unfinished conversation is saved into its thread,
-never into the ledger.
+made by a script from the other files and never written by hand
+([The ledger, made from the records](the-ledger.md)).
 
-The documentation map and the pages generated from it are explained
-on [The documentation](the-documentation.md). The map is state of
-the project that owns the documentation and is never shown to the
-reader of the pages.
+A decision is one record in the project's decisions file, newest
+last. A record is never edited. A later decision supersedes an
+earlier one by a new record that names it. A decision that rules on a
+finding (a result of a critic or a check) or on a challenge carries
+one verdict line for each item it rules on.
 
-Prose in every document is hard-wrapped at about 72 columns. Tables,
-code blocks and front-matter are never wrapped.
+A functional binary, such as a presentation template or a graphic, is
+a source. So the assets of a library (a project of shared material
+without a chain) are resources without a kind of their own. A library
+carries no artefacts and no records, apart from the history companion
+of its recipe.
+
+All prose in every document is hard-wrapped at about 72 columns.
+Tables, code blocks and front-matter are never wrapped.
 
 ## Why
 
-The kinds exist so that one place says what any file is. The kind
-decides what a document is, who writes it, whether it is versioned
-and how it behaves. The table of kinds is the one page all of this is
-read from.
+**Why state lives in files.** What is in a file survives the session
+(one sitting of work with Claude, from start to close). What lives
+only in the conversation does not. So nothing of a project's state is
+kept only in the conversation. The command described on
+[End a session](../use/end-a-session.md) says what still lives only in
+the conversation before you close. The ledger lets Claude find its
+bearings again from the files in the next session. An unfinished
+conversation is saved into its thread, never into the ledger. One
+project per session is the recommended default.
 
-"Artefact" is kept for the chain because it marks the boundary to a
-render. An artefact is composed by the principal. A render is
-generated from artefacts and is never a source of truth.
+**Why immutability is a process rule.** Immutability is kept by
+convention, not enforced by git. Git protects nothing from a commit
+that rewrites a file. The rule costs nothing. A mechanism would be one
+more layer to maintain, and it still would not stop a hand edit.
 
-State lives in files, never only in the conversation. What is in a
-file survives the session (one run of Claude, from start to close).
-What lives only in the conversation does not survive it. The command
-on [End a session](../use/end-a-session.md) says what lives only in
-the conversation before a session closes.
+**Why records are append-only or immutable.** The reason is not
+recorded. What is recorded is the consequence: corrections happen
+downstream.
 
-Immutability is a process rule kept by convention, not a mechanism of
-git. Git protects nothing from a commit that rewrites a file. The
-rule costs nothing to keep. A mechanism would be one more layer to
-maintain, and it still would not stop an edit by hand.
-
-Prose is hard-wrapped so that the differences git shows between two
-versions stay legible.
-
-The reason the ledger is kept out of git is not recorded. The reason
-the project file is written only once is not recorded. The reason
-the history and the decisions are append-only rather than immutable
-is not recorded.
+**Why prose is hard-wrapped.** Hard-wrapped prose keeps git diffs
+legible.
 
 ## A worked example
 
-A generic project, `<slug>`, after a few rounds of work might hold
-these files, each named with its group:
+A generic thought project, `example-project`, shortly after its intent
+was first written, might hold these files. Each is marked with its
+group and kind.
 
 ```
-projects/<slug>/
-  <artefact>.md               artefact: rewritten freely
-  <artefact>.history.md       record: its history, append-only
-  decisions.md                record: append-only
-  reviews/<dated report>.md   record: immutable
-  challenges/<dated run>.md   record: immutable
-  research/<dated note>.md    resource: immutable
-  ledger.md                   state: made at read time, never in git
+example-project/
+  project.md                       state: project (written once)
+  00-brief.md                      artefact (versioned)
+  00-brief.history.md              records: history (append-only)
+  10-intent.md                     artefact (versioned)
+  10-intent.history.md             records: history (append-only)
+  threads/<thread>.md              state: thread (open, rewritten)
+  decisions.md                     records: decisions (append-only)
+  ledger.md                        state: ledger (made at read time)
+  sources/00-INDEX.md              state: index (rewritten)
+  sources/<slug>.md                resources: source (immutable)
+  research/00-INDEX.md             state: index (rewritten)
+  research/YYYY-MM-DD-<topic>.md   resources: research (immutable)
+  reviews/<dated report>.md        records: review (immutable)
+  recipes/readme.md                rendering: recipe (versioned)
+  recipes/readme.history.md        records: history (append-only)
+  README.md                        rendering: render (overwritten)
 ```
 
-A decision record in `decisions.md` follows the shape of the
-template:
+When the principal later decides something, one record is added to
+the end of `decisions.md` in the shape the decisions template gives:
 
 ```
 ## DEC.NNNN — <the decision in one line>
@@ -169,9 +170,8 @@ template:
 - **Date:** YYYY-MM-DD
 ```
 
-If the principal later changes his mind, the old record stays as it
-is. A new record is appended that names the old one and says what
-now holds.
+The records above it stay as they are. If the decision is later
+reversed, a new record names the one it supersedes.
 
 ## See also
 
@@ -179,14 +179,14 @@ now holds.
   kinds, verbatim.
 - [The ledger, made from the records](the-ledger.md): what the ledger
   is made from and why nobody writes it.
-- [End a session](../use/end-a-session.md): the command that says
-  what lives only in the conversation.
+- [End a session](../use/end-a-session.md): the command that says what
+  lives only in the conversation.
 - [Versioning and history](versioning-and-history.md): the history
   companion of every versioned kind.
 - [The documentation](the-documentation.md): the map and the pages.
 - [The work product](the-work-product.md): the work kind.
-- [Glossary](../reference/glossary.md): every term of the forge in
-  one line.
+- [Glossary](../reference/glossary.md): every term of the forge in one
+  line.
 
-Generated on 2026-10-19 for version 5.26 from the files the
+Generated on 2026-10-23 for version 5.33 from the files the
 front-matter names; never edited by hand.

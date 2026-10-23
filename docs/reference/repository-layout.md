@@ -1,17 +1,15 @@
 ---
-generated: 2026-10-19
-version: 5.26
+generated: 2026-10-23
+version: 5.34
 made: mirrored
-inputs-hash: 9f6476d3f45b5613
+inputs-hash: b46fcdac12cb8ebc
 inputs:
   - CLAUDE.md#Repository layout
 ---
 
 # Repository layout
 
-This page lists the files and directories of the engine root, of a thought project and of a library, each with the comment the engine gives it. It is for anyone who needs to know where a file lives and what it is. For the terms used here, see the [Glossary](glossary.md). For why projects are repositories of their own, see [Projects and the engine](../about/projects-and-the-engine.md).
-
-The ledger is the file that holds the state of a project. A render is an output generated from the documents of a project.
+This page lists the files and directories of the engine root, of a thought project and of a library, with the comment the engine's core file gives each one. It is for the user, the extender and the evaluator who need to know what lies where. A thought project is a project that has a chain of documents. A library is a project that holds shared material and has no chain. The ledger is the file that records the state of a project and is made at read time. The principal is the person whose thinking is forged.
 
 ## The engine root
 
@@ -48,26 +46,40 @@ scripts/                   # forge-save / forge-pull / forge-status
                            # of a report), forge-ledger (the ledger
                            # made at read time), forge-migrate (a
                            # project brought to the shape of a
-                           # release), doc2md (document → Markdown),
-                           # md2pptx (deck render → PowerPoint),
-                           # md2docx (render → Word), each by pandoc
-                           # or by a model, md2video (screenplay
-                           # render → video or player events),
+                           # release), forge-config (the user's
+                           # global git configuration through git:
+                           # the registration of the merge driver ours, the
+                           # guard, the identity per host),
+                           # forge-check (the mechanical clauses of
+                           # a check as a program, with its module
+                           # forge_check; the trial),
+                           # doc2md
+                           # (document →
+                           # Markdown), md2pptx (deck render →
+                           # PowerPoint), md2docx (render → Word),
+                           # each by pandoc or by a model, md2video
+                           # (screenplay render → video or player
+                           # events),
                            # hook-walkthrough (the per-prompt hook
-                           # of .claude/settings.json), docs-state,
+                           # of .claude/settings.json), hook-git
+                           # (the wall between reading git and
+                           # writing it, a PreToolUse hook of the
+                           # same file), docs-state,
                            # docs-index and docs-check (the
                            # documentation: the state of its pages,
                            # its index, its check); forge_repos,
                            # forge_tools, forge_docs and docs_map
                            # the modules the scripts share
+                           # (Persistence, Portability)
 .claude/                   # skills (the commands, the contracts of
                            # the reviewers and of the documentation
                            # agents, and the walkthrough method),
                            # agents (the reviewers, the
                            # documentation's planner and writer),
-                           # settings
-                           # (settings.local.json: the session
-                           # model — gitignored)
+                           # settings (settings.json: the two
+                           # hooks and the deny rule of the other
+                           # shell; settings.local.json:
+                           # the session model — gitignored)
 templates/                 # canonical skeletons
 projects/                  # gitignored (projects/*) except
                            # projects/forge — every other project is
@@ -77,14 +89,18 @@ projects/                  # gitignored (projects/*) except
 
 ## A thought project
 
+The path `projects/<slug>/` holds a project of kind thought, the chain. Here `<slug>` stands for the project's short name.
+
 ```
 projects/<slug>/           # kind: thought — the chain
   .git/                               # the project's own repository
   .gitattributes                      # the ways of merging by path
                                       # (templates/gitattributes)
   .gitignore                          # the ledger, made at read time
-  README.md  RELEASE-NOTES.md         # renders
+                                      # (Ledger)
+  README.md  RELEASE-NOTES.md         # renders (Document chain, Renders)
   docs-map.md  docs/                  # the documentation and its map
+                                      # (Document chain, Documentation)
   logo.png                            # optional project avatar
   project.md                          # the project file: slug, kind,
                                       # language
@@ -96,9 +112,10 @@ projects/<slug>/           # kind: thought — the chain
                                       # intent's definition)
   00-brief-<name>.md                  # later briefs, one per whole
   <file>.history.md                   # history companion
+                                      # (Versioning & status)
   <file>.history.archive.md           # a history table before the
                                       # log, immutable
-  decisions.md  ledger.md             # decisions; the ledger
+  decisions.md  ledger.md             # decisions; the ledger (Ledger)
   ledger.archive.md                   # the hand-kept ledger at the
                                       # migration, immutable
   sources/00-INDEX.md                 # resource index (rewritten)
@@ -151,6 +168,8 @@ projects/<slug>/           # kind: thought — the chain
 
 ## A library
 
+The path `projects/lib-<name>/` holds a project of kind library.
+
 ```
 projects/lib-<name>/       # kind: library — material shared across
   .git/  project.md        # projects, no chain: only the project
@@ -168,4 +187,4 @@ projects/lib-<name>/       # kind: library — material shared across
 - [Projects and the engine](../about/projects-and-the-engine.md): why projects are repositories of their own.
 - [Glossary](glossary.md): every term of the forge in one line.
 
-Generated on 2026-10-19 for version 5.26 from the files the front-matter names; never edited by hand.
+Generated on 2026-10-23 for version 5.34 from the files the front-matter names; never edited by hand.

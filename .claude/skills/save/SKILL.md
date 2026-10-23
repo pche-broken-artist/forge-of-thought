@@ -49,4 +49,8 @@ the report.
 4. Only then run `python scripts/forge-save.py $ARGUMENTS`, `--quick`
    left out, and report the
    outcome — the script itself prints the commit's file summary and
-   the tag; no direct git verification afterwards.
+   the tag; no direct git verification afterwards. Where the script
+   leaves a conflicting rebase standing, the session goes on with the
+   step of a conflict as CLAUDE.md, Persistence, has it (POS.1710) and
+   saves again; where it refuses because a rebase or merge is already
+   standing, report that refusal and the step it names.

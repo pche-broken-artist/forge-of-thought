@@ -1,6 +1,6 @@
 ---
-generated: 2026-10-19
-version: 5.26
+generated: 2026-10-23
+version: 5.34
 made: derived
 inputs:
   - projects/forge/docs-map.md
@@ -12,7 +12,7 @@ This is the documentation of Forge of Thought: pages of one topic
 each, generated from the engine as it stands, for three readers.
 Every page stands on its own; start where your question is.
 
-Generated on 2026-10-19 for Forge of Thought at version 5.26
+Generated on 2026-10-23 for Forge of Thought at version 5.34
 (the version of the engine's intent; a release carries the same
 number).
 
@@ -51,6 +51,7 @@ number).
 - [Check conformance](use/check-conformance.md): How do you run a check against the conventions with `/check`?
 - [Walk through a list](use/walk-through-a-list.md): How is a list of findings, challenges or threads worked one item at a time?
 - [Save your work](use/save-your-work.md): What does `/save` check, ask and commit?
+- [Settle a conflict](use/settle-a-conflict.md): What do you do when `/save` stops on a conflict with the remote, or a merge leaves one?
 - [Release a version](use/release-a-version.md): What does `/release` run, render and tag, in what order?
 - [Pull from the remote](use/pull-from-the-remote.md): How does `/pull` look at the remote, and what does it pull and refuse?
 - [Upgrade the engine](use/upgrade-the-engine.md): How do you take a new version of the engine and bring your projects to its conventions?
@@ -78,7 +79,7 @@ number).
 - [Documents and records](about/documents-and-records.md): What kinds of document does a project hold, and why does state live in files?
 - [The ledger, made from the records](about/the-ledger.md): Why is the ledger made at read time from the other files, and where does the state it shows really live?
 - [Versioning and history](about/versioning-and-history.md): What does a version number mean, what is a major, and where does a document's history live?
-- [Stable IDs](about/stable-ids.md): Why does every item carry an ID that is never renumbered?
+- [Stable IDs](about/stable-ids.md): Why does every item carry an ID that is never renumbered, and what happens when two items share one number?
 - [The isolated reviewers](about/isolated-reviewers.md): Why do three kinds of reviewer never see the conversation, and what does their agreement mean?
 - [The critic](about/the-critic.md): What does a critic lens judge, and why two lenses?
 - [The challenger](about/the-challenger.md): What does a challenger persona attack, and why may it be wrong?
@@ -88,7 +89,8 @@ number).
 - [The documentation](about/the-documentation.md): What is the documentation, who reads it, and why is it generated rather than written?
 - [Sources and research](about/sources-and-research.md): Why are sources immutable, why is registration not intake, and what is a research note for?
 - [Projects and the engine](about/projects-and-the-engine.md): Why is every project a repository of its own that the engine does not know?
-- [Persistence in git](about/persistence-in-git.md): Why are the scripts the only door to git, and why two doors, two speeds?
+- [Persistence in git](about/persistence-in-git.md): Why are the scripts the only door to a write of git, and why two doors, two speeds?
+- [Working together on one project](about/working-together.md): What does the forge promise when two people, or two branches, work on one project, and how does each kind of file merge?
 - [Upgrades and migration](about/upgrades-and-migration.md): How does a project follow a new release of the engine, and why does a change of the shape of files come with a migration?
 - [How the rules are held](about/how-the-rules-are-held.md): How does the forge keep its rules in force across a long conversation and inside a subagent?
 - [Languages](about/languages.md): Which language does each kind of document carry, and why only one output language per project?

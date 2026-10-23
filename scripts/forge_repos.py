@@ -4,7 +4,7 @@ the git check, the list of repositories to visit, running git, the
 state of a repository against its origin (`remote_state`: up to date,
 behind, ahead, diverged, no origin; POS.1490), the files of the
 global git configuration as git reads them (`global_config_files`),
-the registration of the merge drivers on the machine
+the registration of the merge driver ours on the machine
 (`registration_state`; SOL.0740) and coloured output. Not a command.
 
 The engine root is the parent of the directory this file lies in
