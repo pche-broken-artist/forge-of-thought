@@ -56,6 +56,11 @@ def show_repo(name, path, remote=False):
             print(f"   {line}")
     else:
         fr.say("   clean - nothing to save", "green")
+    standing = fr.in_progress(path)
+    if standing:
+        n = len(fr.conflicted(path))
+        fr.say(f"   {standing} in progress - {n} file(s) in conflict; the step of a conflict, "
+               f"then forge-save (R6.02)", "yellow")
     branch = fr.git_out(["rev-parse", "--abbrev-ref", "HEAD"], path)
     print("   branch:      " + (branch or "none yet"))
     last = fr.git_out(["log", "-1", "--format=%h %s"], path)

@@ -83,3 +83,8 @@ waiting for a verdict.
 State 2026-10-21: open. The engine check of 2026-10-21 found the gap
 as FND.2260, the setup skill against forge-config; the round above
 settles both.
+
+<!-- A thread (POS.1680), one file per thread in threads/; the header
+is its state: what it concerns, where it came from, whether it is
+open. The rules of a thread, its life and its closing:
+`.claude/skills/forge/states/intent.md`, Threads and files. -->

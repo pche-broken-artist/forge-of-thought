@@ -519,3 +519,5 @@ word `<file> | changed | state: by hand`.
 - 2026-10-22 | 5.30 | PCHe | FND.2350 | closed | the pickaxe of the ledger script replaced by a line match, the report line gone (the light check of 2026-10-22, the immediate fix taken).
 - 2026-10-22 | 5.30 | PCHe | FND.2360 | closed | the created record of the brief next-gen 0.4 split, the reason carried by a changed record (the light check of 2026-10-22, the immediate fix taken).
 - 2026-10-23 | 5.30 | PCHe | THR.0740 | created
+- 2026-10-23 | 5.30 | PCHe | FND.2390 | closed | the template's comment, as it stands in templates/thread.md, in the 31 open thread files that carried the older one and added to THR.0720; the 9 closed threads left as they lie (the light check of 2026-10-23, the immediate fix taken).
+- 2026-10-23 | 5.30 | PCHe | FND.2400 | closed | the template's comment, as it stands in templates/decisions.md, in decisions.md; the records untouched (the light check of 2026-10-23, the immediate fix taken).

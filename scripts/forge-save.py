@@ -23,9 +23,16 @@ WHAT IT DOES
     failed - is pushed the same way, so that the push has a door
     (SOL.0780 of the forge solution design); a branch with no upstream
     yet reaches the remote with its first commit. A rebase that
-    conflicts is aborted, nothing lost, and the steps to finish it by
-    hand are printed: pull with rebase, resolve, add, continue, then
-    this script again. Without an origin the commit is
+    conflicts is left standing, the commit made and nothing lost: the
+    script prints the files in conflict and the step that follows,
+    the step of a conflict (the cutover plan, R6.02; brief
+    collaboration 0.9): each file settled, Claude laying both sides
+    out and the principal deciding, then `git add <file>` and `git
+    rebase --continue`, both on the hook's ask, then this script
+    again, which pushes the clean repository that is ahead. A
+    repository with a rebase or a merge already in progress is
+    refused before anything is staged, so that conflict markers are
+    never committed. Without an origin the commit is
     kept locally and reported. With --tag <name> (one repository, so a
     slug is required) the commit is tagged and the tag pushed with it;
     when there is nothing to commit, the current HEAD is tagged, so a
@@ -62,12 +69,30 @@ def save_repo(name, path, message, tag):
         return
     if tag and fr.git(["rev-parse", "--verify", "--quiet", f"refs/tags/{tag}"], path).returncode == 0:
         fr.fail(f"Tag '{tag}' already exists in {name} - nothing was changed.")
+    standing = fr.in_progress(path)
+    if standing:
+        files = fr.conflicted(path)
+        shown = "\n".join(f"  {f}" for f in files) or "  (none left in conflict)"
+        fr.fail(f"A {standing} is in progress in {name} - nothing was staged or committed. "
+                f"Finish the step of a conflict first, then save again:\n{shown}\n"
+                f"  settle each file, then: git -C '{path}' add <file>\n"
+                f"  git -C '{path}' {standing} --continue   (or --abort to give it up)")
 
     fr.git(["add", "-A"], path, check=True)
     nothing_to_commit = fr.git(["diff", "--cached", "--quiet"], path).returncode == 0
     ahead = 0
     if nothing_to_commit and not tag:
         counts = fr.git_out(["rev-list", "--count", "@{u}..HEAD"], path)
+        if not counts and fr.git_out(["remote", "get-url", "origin"], path):
+            # no upstream yet (a branch made locally, a clone switched by
+            # forge-branch): count against the remote's branch of the same
+            # name after a fetch, or push a branch the remote does not have
+            branch = fr.git_out(["rev-parse", "--abbrev-ref", "HEAD"], path)
+            fr.git(["fetch", "origin", branch], path)
+            if fr.git(["rev-parse", "--verify", "--quiet", f"refs/remotes/origin/{branch}"], path).returncode == 0:
+                counts = fr.git_out(["rev-list", "--count", f"origin/{branch}..HEAD"], path)
+            else:
+                counts = fr.git_out(["rev-list", "--count", "HEAD"], path)
         ahead = int(counts) if counts else 0
         if not ahead:
             fr.say(fr.label(name, "nothing to save"), "grey")
@@ -106,13 +131,17 @@ def save_repo(name, path, message, tag):
     branch = fr.git_out(["rev-parse", "--abbrev-ref", "HEAD"], path)
     if fr.git(["ls-remote", "--exit-code", "--heads", "origin", branch], path).returncode == 0:
         if fr.git(["pull", "--rebase", "origin", branch], path, capture=False).returncode != 0:
-            fr.git(["rebase", "--abort"], path)
             slug = "forge" if name.startswith("forge") else name
-            fr.fail(f"Remote changes in {name} conflict with yours. The rebase was aborted, "
-                    "nothing was lost. Finish it by hand, step by step, from a shell:\n"
-                    f"  git -C '{path}' pull --rebase origin {branch}\n"
-                    f"  resolve each conflicted file, then: git -C '{path}' add <file>\n"
-                    f"  git -C '{path}' rebase --continue   (again after each conflict, until it ends)\n"
+            if fr.in_progress(path) != "rebase":
+                fr.fail(f"The pull with rebase failed in {name} and left no rebase to finish; "
+                        "the commit is made and nothing was lost. Check network / remote access and save again.")
+            files = fr.conflicted(path)
+            shown = "\n".join(f"  {f}" for f in files) or "  (none left in conflict)"
+            fr.fail(f"Remote changes in {name} conflict with yours. The rebase stands where it stopped, "
+                    "the commit is made and nothing was lost. The step of a conflict follows, one file at a time:\n"
+                    f"{shown}\n"
+                    f"  settle each file (both sides laid out, the principal deciding), then: git -C '{path}' add <file>\n"
+                    f"  git -C '{path}' rebase --continue   (again after each conflict, until it ends; --abort gives it up)\n"
                     f"  python scripts/forge-save.py {slug}   (pushes the clean repository that is ahead)")
     if fr.git(["push", "-u", "origin", branch], path, capture=False).returncode != 0:
         fr.fail(f"Push failed in {name}. Check network / remote access and try again.")

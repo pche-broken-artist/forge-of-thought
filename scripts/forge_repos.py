@@ -80,6 +80,27 @@ def git_out(args, cwd):
     return r.stdout.strip() if r.returncode == 0 else ""
 
 
+def in_progress(path):
+    """'rebase' or 'merge' when `path` has one standing, else None: a
+    conflict forge-save left for the step of a conflict (the cutover
+    plan, R6.02), or one the user began by hand. Read from git's own
+    marks (rebase-merge, rebase-apply, MERGE_HEAD), nothing of the
+    forge's."""
+    for mark in ("rebase-merge", "rebase-apply"):
+        p = git_out(["rev-parse", "--git-path", mark], path)
+        if p and (Path(path) / p).exists():
+            return "rebase"
+    if git(["rev-parse", "--verify", "--quiet", "MERGE_HEAD"], path).returncode == 0:
+        return "merge"
+    return None
+
+
+def conflicted(path):
+    """The files in conflict, as git lists them."""
+    out = git_out(["diff", "--name-only", "--diff-filter=U"], path)
+    return out.splitlines() if out else []
+
+
 def remote_state(path):
     """The branch of `path` against its origin after a fetch: one of
     'up to date', 'behind N', 'ahead N', 'diverged (ahead N, behind M)',

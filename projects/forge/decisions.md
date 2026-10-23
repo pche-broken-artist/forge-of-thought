@@ -4,9 +4,14 @@ project: forge
 
 # Decisions
 
-<!-- Append-only. DEC.NNNN: decision, reason, date. Design-phase rejected
-directions are recorded in 10-intent.md (REJ.NNNN); whether to back-fill
-them here was THR.0070, resolved by DEC.0040 (no back-fill). -->
+<!-- Append-only (CLAUDE.md, Document kinds). One record per decision
+of the principal, numbered DEC.NNNN in the global sequence of the ID
+scheme, newest last; a record is never edited, a later decision
+supersedes it by a new record that names it. A decision that
+rules on a finding or a challenge carries a Verdict line per ID, as
+many lines as IDs it rules on; a partial verdict is read as the
+verdict on the whole ID, the rest a `changed` record of the history
+(POS.1610). -->
 
 ## DEC.0010 — No brief exists for this project; reconstruction discarded
 - **Decision:** `00-brief.md` holds no brief content, only a note that

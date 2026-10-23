@@ -12,6 +12,16 @@ WHAT IT DOES
     judges every part that calls git:
       - a reading verb (status, log, diff, show, fetch, ...) with
         reading flags: allow;
+      - the commands that finish a conflict and its step, named one
+        by one: ask, so that the harness puts the command to the
+        principal and runs it on his yes (the cutover plan, R6.01;
+        brief collaboration 0.9). They are `add` without --force and
+        without the interactive flags, `rebase --continue` and
+        `rebase --abort`, `merge --continue` and `merge --abort`,
+        `merge <branch>` with one name and no flag, and `checkout
+        --ours` or `--theirs` on a file. An ask holds in the
+        automatic permission mode, as the test of 2026-10-21 showed
+        (THR.0400); a deny holds in every mode;
       - everything else: deny, with the script of the forge to use
         instead where one exists. Denied are the writing verbs, a
         verb the script does not know (an alias among them), a
@@ -19,16 +29,14 @@ WHAT IT DOES
         with a value, log --output, fetch --prune), a global option
         that changes how git runs (-c, --git-dir, --work-tree,
         --exec-path), git inside another command (xargs, sh -c, a
-        substitution) and a part the script cannot read. No rule
-        answers ask today; the script composes an ask over the whole
-        command where a rule would, since the test of 2026-10-21
-        showed an ask holds in the automatic permission mode
-        (THR.0400); a deny holds in every mode.
+        substitution) and a part the script cannot read.
     A part that is not git is left to the harness: the hook answers
-    allow only where every part of the command is a reading git,
-    deny where any part is a git it refuses, and nothing otherwise.
-    The reason of a deny names the rule and the door: the scripts in
-    scripts/ are the only door to a write of git.
+    deny where any part is a git it refuses, ask where none is
+    refused and one is an asking git, allow where every part is a
+    reading git, and nothing otherwise. The reason of a deny names
+    the rule and the door: the scripts in scripts/ are the door to a
+    write of git, the ask the one exception for the step of a
+    conflict.
 
     It reads no file and writes nothing. The hook is for Claude's
     tools alone; the principal's own git from the shell is his.
@@ -52,17 +60,17 @@ DOOR = "the scripts in scripts/ are the only door to a write of git (CLAUDE.md, 
 INSTEAD = {
     "commit": "python scripts/forge-save.py <slug> -m \"<message>\" (/save)",
     "push": "python scripts/forge-save.py <slug> (/save)",
-    "add": "python scripts/forge-save.py <slug> (/save stages everything it commits)",
+    "add": "python scripts/forge-save.py <slug> (/save stages everything it commits); git add <paths> without --force runs on the principal's ask",
     "rm": "remove the file and let /save commit it",
     "mv": "rename the file and let /save commit it",
     "pull": "python scripts/forge-pull.py [slug] (/pull)",
-    "checkout": "python scripts/forge-branch.py <slug> <branch> (a branch) or the principal's own hand (a file)",
+    "checkout": "python scripts/forge-branch.py <slug> <branch> (a branch) or the principal's own hand (a file); git checkout --ours|--theirs <file> runs on the principal's ask",
     "switch": "python scripts/forge-branch.py <slug> <branch>",
     "branch": "python scripts/forge-branch.py <slug> <branch>",
     "clone": "python scripts/forge-clone.py <git-url> (/import-project)",
     "config": "python scripts/forge-config.py (/setup) for the global file; a repository's configuration is the principal's",
-    "merge": "a merge is git's, by the principal's hand or by a merge request (CLAUDE.md, Persistence)",
-    "rebase": "the one rebase of the forge is /save's (python scripts/forge-save.py)",
+    "merge": "a merge is git's: git merge <branch>, --continue or --abort run on the principal's ask, the rest by his hand or by a merge request (CLAUDE.md, Persistence)",
+    "rebase": "the one rebase of the forge is /save's (python scripts/forge-save.py); git rebase --continue or --abort runs on the principal's ask",
     "tag": "python scripts/forge-save.py <slug> --tag <name>, or /release",
     "fetch": "python scripts/forge-status.py --remote (fetches without pruning)",
     "init": "the principal's one-off act: git -C projects/<slug> init -b main (CLAUDE.md, Persistence)",
@@ -96,6 +104,7 @@ GLOBAL_VALUE_BAD = {"-c", "--config-env", "--git-dir", "--work-tree", "--namespa
                     "--super-prefix", "--list-cmds", "--attr-source"}
 
 SEPARATORS = {";", "&&", "||", "|", "|&", "&", "(", ")", "\n"}
+SUBSTITUTED = "\x00$("  # the first token of a part that runs inside `$( )`
 
 
 def split_parts(command):
@@ -125,6 +134,16 @@ def split_parts(command):
     parts, cur = [], []
     for t in tokens:
         if t in SEPARATORS or (set(t) <= set(";|&()") and t):
+            # `$(` is a substitution, not a subshell: what follows is
+            # run inside another command and is marked so
+            if t == "(" and cur and cur[-1].endswith("$"):
+                cur[-1] = cur[-1][:-1]
+                if cur[-1] == "":
+                    cur.pop()
+                if cur:
+                    parts.append(cur)
+                cur = [SUBSTITUTED]
+                continue
             if cur:
                 parts.append(cur)
             cur = []
@@ -202,8 +221,32 @@ def judge_git(tokens):
         return "deny", f"global option {t} not known as reading; {DOOR}"
     if i >= len(tokens):
         return "allow", "git alone prints its usage"
-    verb, args = tokens[i], tokens[i + 1:]
+    verb, args = tokens[i], strip_redirections(tokens[i + 1:])
     return judge_verb(verb, args)
+
+
+REDIRECT = re.compile(r"^\d*(>>?|<|>&|<&|&>)\d*$")       # a bare operator, its target the next token
+REDIRECT_WITH_TARGET = re.compile(r"^\d*(>>?|<|&>)[^\s<>&]+$")  # 2>/dev/null, >out.txt
+
+
+def strip_redirections(args):
+    """The shell's redirections are not git's arguments: `2>&1`,
+    `> out`, `2>/dev/null` are dropped before a verb is judged (the
+    `&` of `2>&1` is a separator to the splitter, so the operator may
+    arrive as a bare `2>`)."""
+    out, skip = [], False
+    for a in args:
+        if skip:
+            skip = False
+            continue
+        if REDIRECT.match(a):
+            # a bare operator eats the next token as its target; `2>&1` and `>&2` carry theirs
+            skip = bool(re.match(r"^\d*(>>?|<)$", a))
+            continue
+        if REDIRECT_WITH_TARGET.match(a):
+            continue
+        out.append(a)
+    return out
 
 
 def flags_and_positionals(args, value_flags=()):
@@ -313,6 +356,30 @@ def judge_verb(verb, args):
         return "allow", "git submodule reads"
     if verb == "bundle" and args and args[0] in ("verify", "list-heads"):
         return "allow", "git bundle reads"
+    # the step of a conflict: ask, the principal's yes runs it (R6.01)
+    ask = lambda what: ("ask", f"git {verb}: {what}; the step of a conflict runs on the principal's yes (CLAUDE.md, Persistence)")
+    if verb == "add":
+        flags, pos = flags_and_positionals(args)
+        for f in flags:
+            key = f.split("=", 1)[0]
+            if key in ("-f", "--force", "-i", "--interactive", "-p", "--patch", "-e", "--edit"):
+                return deny(f"{key} forces or edits what is staged")
+        return ask("stages for the commit that follows")
+    if verb == "rebase":
+        if args in (["--continue"], ["--abort"]):
+            return ask(f"{args[0]} ends the rebase in progress")
+        return deny("starts or skips; only --continue and --abort are asked")
+    if verb == "merge":
+        if args in (["--continue"], ["--abort"]):
+            return ask(f"{args[0]} ends the merge in progress")
+        flags, pos = flags_and_positionals(args)
+        if not flags and len(pos) == 1:
+            return ask(f"merges {pos[0]} into the current branch")
+        return deny("a merge with flags or with several names is not the plain merge that is asked")
+    if verb == "checkout":
+        flags, pos = flags_and_positionals(args)
+        if flags and all(f in ("--ours", "--theirs") for f in flags) and pos:
+            return ask(f"takes {flags[0]} for {len(pos)} file(s) in conflict")
     if verb in INSTEAD:
         return deny("writes")
     return deny("not known as a reading verb (an alias is not read)")
@@ -337,6 +404,13 @@ def judge(command):
             verdicts.append("other")
             continue
         head, rest = part[k], part[k + 1:]
+        if head == SUBSTITUTED:
+            if any(is_git(t) for t in rest) or git_behind(rest[0], rest[1:]) if rest else False:
+                verdicts.append("deny")
+                reasons.append(f"git inside a substitution or a script cannot be read; {DOOR}")
+            else:
+                verdicts.append("other")
+            continue
         if is_git(head):
             v, why = judge_git(part[k:])
             verdicts.append(v)
@@ -386,10 +460,27 @@ CASES = [
     # writing
     ("git commit -m 'x'", "deny"), ("git push", "deny"), ("git push origin main", "deny"),
     ("git -C . push origin main", "deny"), ("git -c push.default=current push", "deny"),
-    ("git 'push' origin main", "deny"), ("git add .", "deny"), ("git pull", "deny"),
+    ("git 'push' origin main", "deny"), ("git pull", "deny"),
     ("git checkout main", "deny"), ("git checkout -- CLAUDE.md", "deny"), ("git switch -c x", "deny"),
     ("git restore CLAUDE.md", "deny"), ("git reset --hard", "deny"), ("git clean -fd", "deny"),
-    ("git merge x", "deny"), ("git rebase main", "deny"), ("git cherry-pick abc", "deny"),
+    ("git rebase main", "deny"), ("git cherry-pick abc", "deny"),
+    # the step of a conflict: ask (R6.01)
+    ("git add CLAUDE.md", "ask"), ("git add .", "ask"), ("git add -A", "ask"), ("git add -u -- projects/forge", "ask"),
+    ("git -C projects/fixture add README.md", "ask"),
+    ("git add -f x", "deny"), ("git add --force x", "deny"), ("git add -p", "deny"), ("git add -i", "deny"),
+    ("git rebase --continue", "ask"), ("git rebase --abort", "ask"), ("git rebase --skip", "deny"),
+    ("git rebase --continue --no-verify", "deny"), ("git rebase -i HEAD~3", "deny"),
+    ("git merge --continue", "ask"), ("git merge --abort", "ask"), ("git merge x", "ask"),
+    ("git merge origin/main", "ask"), ("git -C projects/fixture merge r1", "ask"),
+    ("git merge --squash x", "deny"), ("git merge --no-commit x", "deny"), ("git merge -X ours x", "deny"),
+    ("git merge x y", "deny"), ("git merge", "deny"),
+    ("git checkout --ours CLAUDE.md", "ask"), ("git checkout --theirs -- a.md b.md", "ask"),
+    ("git checkout --ours", "deny"), ("git checkout --ours -b x", "deny"),
+    ("git status && git add CLAUDE.md", "ask"), ("git add x && git push", "deny"),
+    ("git rebase --continue 2>&1 | tail -3", "ask"), ("GIT_EDITOR=true git -C projects/x rebase --continue 2>&1", "ask"),
+    ("git merge --abort > /dev/null 2>&1", "ask"), ("git status 2>/dev/null", "allow"), ("git log -1 > out.txt", "allow"),
+    ("git rebase --continue --skip 2>&1", "deny"),
+    ("git add x; git commit -m y", "deny"), ("sh -c 'git add x'", "deny"), ("echo $(git add x)", "deny"),
     ("git branch -d x", "deny"), ("git branch -D x", "deny"), ("git branch x", "deny"),
     ("git branch -m x y", "deny"), ("git branch --set-upstream-to=origin/main", "deny"),
     ("git tag v6", "deny"), ("git tag -d v6", "deny"), ("git tag -a v6 -m x", "deny"),
