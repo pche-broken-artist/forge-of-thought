@@ -7,5 +7,4 @@ identity is git's, per host in ~/.gitconfig. -->
 - **Conversation language:** <the language the principal talks in;
   what the documents follow is CLAUDE.md, prime directive 6>
 - **Author:** <the principal's handle, short, e.g. "PCHe": the author
-  of every record he decides and the key of his ID block (CLAUDE.md,
-  Versioning & status; SOL.0790 of the forge solution design)>
+  of every record he decides (CLAUDE.md, Versioning & status)>

@@ -82,9 +82,8 @@ else. Never silently re-register.
    hand: no script of the forge does it, and never a sweep.
 4. **Role, before anything is written.** Role is the principal's
    word, asked before the index entry exists, so
-   that the entry carries it from its birth: an entry of the index
-   is a mutable block of the record driver, and a Role filled in
-   later would be a change of the block (POS.1670). One question,
+   that the entry carries it from its birth and no later hand
+   changes it (POS.1040). One question,
    "what is it for?", per source — a bundle one question for the
    whole, a file added to a growing bundle one of its own — one per
    message, as the elicitation interview has it; in

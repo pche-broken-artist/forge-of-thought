@@ -1,5 +1,5 @@
 ---
-version: 0.38
+version: 0.39
 status: draft
 project: forge
 audience: whoever realises the solution, a person or an agent
@@ -69,9 +69,8 @@ inputs and writes the provenance; `/publish` makes the designed file
 from the render as it lies on disk. Persistence: `/save` runs the
 check `light` and commits and pushes through `forge-save`; `/release`
 runs its checks, settles them, regenerates the README and the release
-notes and then saves with the release message and tag. On main both land
-the records of branches first, and the release writes the state render
-(SOL.0760, SOL.0530).
+notes and then saves with the release message and tag. The release writes the state render
+(SOL.0530).
 
 Deliberately not designed here: the wording and the steps of each
 command, definition, contract, template and script, which are that
@@ -193,19 +192,19 @@ boundary kept by hand or an order of work.
   its own inputs: a future layer is added by one file and the dispatcher
   stays untouched. Bare, the dispatcher reports the state map of a
   project, the staleness of renders among it; the map ends with the
-  state against the origin (SOL.0780), takes `<slug>@<branch>` as a slug
-  (SOL.0770) and refuses a project of the shape before the migration
-  (SOL.0800). The Terms section is in `templates/assignment.md`. When an
-  artefact is complete is the Aim of its definition. When a challenge of
-  the intent and of the solution design is offered is its definition's,
-  under Instruments; the definitions of the brief and of the assignment
-  name none. Realises: POS.0580, POS.1300, POS.1310, POS.1320, POS.1330,
-  POS.1340, POS.1350, POS.1360, POS.1390, POS.1400, POS.1420, POS.0100,
-  POS.0130, POS.0140, POS.0210, POS.0240, POS.0250, POS.0260, POS.0280,
-  POS.0290, POS.0450. Choice: a dispatcher with state files against one
-  command per verb; what else it was chosen against is not recorded.
-  Whether `/forge` and `/recipe` are one dispatcher or two is open,
-  THR.0460. Where: `.claude/skills/forge/SKILL.md`,
+  state against the origin (SOL.0780) and refuses a project of the shape
+  before the migration (SOL.0800). The Terms section is in
+  `templates/assignment.md`. When an artefact is complete is the Aim of
+  its definition. When a challenge of the intent and of the solution
+  design is offered is its definition's, under Instruments; the
+  definitions of the brief and of the assignment name none. Realises:
+  POS.0580, POS.1300, POS.1310, POS.1320, POS.1330, POS.1340, POS.1350,
+  POS.1360, POS.1390, POS.1400, POS.1420, POS.0100, POS.0130, POS.0140,
+  POS.0210, POS.0240, POS.0250, POS.0260, POS.0280, POS.0290, POS.0450.
+  Choice: a dispatcher with state files against one command per verb;
+  what else it was chosen against is not recorded. Whether `/forge` and
+  `/recipe` are one dispatcher or two is open, THR.0460. Where:
+  `.claude/skills/forge/SKILL.md`,
   `.claude/skills/forge/states/brief.md`,
   `.claude/skills/forge/states/intent.md`,
   `.claude/skills/forge/states/assignment.md`,
@@ -259,7 +258,7 @@ boundary kept by hand or an order of work.
   configuration files are the one thing it may edit outside the engine.
   It also registers the merge drivers and the git settings they need
   (SOL.0740), and writes `author: <handle>` into `CLAUDE.local.md`, the
-  key of an ID block and the author of every record (SOL.0790). On an
+  author of every record he decides (templates/history.md). On an
   instance made before the `Author` line existed `/setup` offers the
   lines the template has and the file lacks, written on the user's word,
   never touching what is there. Realises: POS.1050, POS.0950. Choice: no
@@ -274,12 +273,11 @@ boundary kept by hand or an order of work.
   clones into `projects/<repository name>`; a nonconforming name is
   fixed by renaming the directory afterwards. `/spinoff` creates files
   only. None of them touches git beyond the clone. `/new-project`
-  validates the slug, and creates the project file, `.gitattributes`,
-  `ids.md` and `threads/` (SOL.0670, SOL.0730, SOL.0790, SOL.0720);
-  `forge-clone` reads the project file for the kind and the language.
-  Realises: POS.0110, POS.0610, POS.0940, POS.0960, POS.1060. Choice: no
-  real alternative recorded. Where:
-  `.claude/skills/new-project/SKILL.md`,
+  validates the slug, and creates the project file, `.gitattributes` and
+  `threads/` (SOL.0670, SOL.0730, SOL.0720); `forge-clone` reads the
+  project file for the kind and the language. Realises: POS.0110,
+  POS.0610, POS.0940, POS.0960, POS.1060. Choice: no real alternative
+  recorded. Where: `.claude/skills/new-project/SKILL.md`,
   `.claude/skills/import-project/SKILL.md`,
   `.claude/skills/spinoff/SKILL.md`, `scripts/forge-clone.py`,
   `templates/`.
@@ -344,15 +342,13 @@ boundary kept by hand or an order of work.
   resources are left out as outputs and inputs. It accepts a short form
   of the ID (`pos580`), prints one timeline of archive rows, records and
   mentions with version and date, wrapped, a Was shortened to its first
-  sentence unless `--full` is given. It computes a record's version from
-  the next `landed` after it (SOL.0760) and reads IDs of four or five
-  digits with a numeric sort (SOL.0790). Realises: POS.1510, POS.0310,
-  POS.1090. Choice: a script with a thin skill against a skill alone:
-  the gathering is deterministic and was done by hand before,
+  sentence unless `--full` is given. It reads IDs of four or five digits
+  with a numeric sort (CLAUDE.md, ID scheme). Realises: POS.1510,
+  POS.0310, POS.1090. Choice: a script with a thin skill against a skill
+  alone: the gathering is deterministic and was done by hand before,
   differently every time; the cost is one more script. Decided
   2026-10-11. Where: `.claude/skills/history/SKILL.md`, `scripts/forge-
   history.py`, `scripts/docs_map.py`.
-
 ### The documents of a project
 - **SOL.0200 The history log.** A record is written as a list item, in
   the shape `templates/history.md` owns; its author is the third field.
@@ -361,24 +357,23 @@ boundary kept by hand or an order of work.
   In `Was` the line breaks of the wrapping become spaces and paragraphs
   are divided by `<br>`. The document's front-matter carries version and
   status; `date` and `last_change` are computed from the records
-  (SOL.0700). A record written on a branch carries `+` in its version
-  column and a landing appends `landed` (SOL.0760). The way there, for a
-  companion written before the log: its table stays untouched, the file
-  moves as it stands to `<file>.history.archive.md`, immutable from that
-  moment, and the log begins in a new `<file>.history.md` with the next
-  version of the document. Nothing is converted: the rows are a record
-  and stay in the words they were written in. The history of an item is
-  a search of both files. A Version History table, in the body of a
-  document or in its companion, is a `/check` finding settled by that
-  move; that is how a project migrates (POS.0820), on the principal's
-  word, project by project. Realises: POS.0310, POS.0120, POS.0820.
-  Choice: a log beside the document against a table in its body; the
-  research behind it is
-  `projects/forge/research/2026-09-29-change-history-of-document-items.md`
-  and `2026-09-29-change-record-file-format.md`. `last_change` is called
-  machine-written and is written by the model; whether a script takes
-  the write over is open, THR.0530. Where: `templates/history.md`,
-  `.claude/agents/check-light.md`, `.claude/agents/check-history.md`.
+  (SOL.0700). The way there, for a companion written before the log: its
+  table stays untouched, the file moves as it stands to
+  `<file>.history.archive.md`, immutable from that moment, and the log
+  begins in a new `<file>.history.md` with the next version of the
+  document. Nothing is converted: the rows are a record and stay in the
+  words they were written in. The history of an item is a search of both
+  files. A Version History table, in the body of a document or in its
+  companion, is a `/check` finding settled by that move; that is how a
+  project migrates (POS.0820), on the principal's word, project by
+  project. Realises: POS.0310, POS.0120, POS.0820. Choice: a log beside
+  the document against a table in its body; the research behind it is
+  `projects/forge/research/2026-09-29-change-history-of-document-
+  items.md` and `2026-09-29-change-record-file-format.md`. `last_change`
+  is called machine-written and is written by the model; whether a
+  script takes the write over is open, THR.0530. Where:
+  `templates/history.md`, `.claude/agents/check-light.md`,
+  `.claude/agents/check-history.md`.
 - **SOL.0210 The ledger.** One Markdown file per project, `ledger.md`,
   made at read time by the ledger script and never in git (SOL.0680),
   its tables owned by `templates/ledger.md`. The kind of the project and
@@ -413,27 +408,26 @@ boundary kept by hand or an order of work.
 - **SOL.0230 The resource indexes.** `/ingest` and `/research` write the
   entries of `00-INDEX.md`, `/ingest` asking what a source is for before
   the entry is written, an entry carrying the source's date, origin and
-  form (SOL.0690) and merging as a mutable block (SOL.0750);
-  `/new-project` scaffolds the indexes and the check `light` verifies
-  index against directory. A bundle's `00-INDEX.md` is created by
-  `/ingest` at registration when the bundle lacks one, and a supplied
-  one is validated against the contents, origin dates best effort, never
-  asked for; a growing bundle (POS.0180) takes a new file through
-  `/ingest <file> [slug] --bundle <name>`: the bundle born as growing at
-  its first file, its `00-INDEX.md` from the skeleton with the paragraph
-  saying it grows, the file stored inside, its entry written in the
-  bundle's index after the question of its role, the top entry's What
-  kept true, the flag refused where the bundle arrived whole; in sweep
-  mode a file inside a bundle without an entry is offered for
-  registration there, never reported as a breach, and a new
-  subdirectory is asked whether it grows at the question of its role;
-  if a bundle's files ever need separate fates, a file is
-  split out to a ledger row of its own, the ledger being freely
-  rewritten. Realises: POS.0840. Choice: no real alternative recorded.
-  Where: `templates/index.md`, `templates/index-bundle.md`,
+  form (SOL.0690); `/new-project` scaffolds the indexes and the check
+  `light` verifies index against directory. A bundle's `00-INDEX.md` is
+  created by `/ingest` at registration when the bundle lacks one, and a
+  supplied one is validated against the contents, origin dates best
+  effort, never asked for; a growing bundle (POS.0180) takes a new file
+  through `/ingest <file> [slug] --bundle <name>`: the bundle born as
+  growing at its first file, its `00-INDEX.md` from the skeleton with
+  the paragraph saying it grows, the file stored inside, its entry
+  written in the bundle's index after the question of its role, the top
+  entry's What kept true, the flag refused where the bundle arrived
+  whole; in sweep mode a file inside a bundle without an entry is
+  offered for registration there, never reported as a breach, and a new
+  subdirectory is asked whether it grows at the question of its role; if
+  a bundle's files ever need separate fates, a file is split out to a
+  ledger row of its own, the ledger being freely rewritten. Realises:
+  POS.0840. Choice: no real alternative recorded. Where:
+  `templates/index.md`, `templates/index-bundle.md`,
   `.claude/skills/ingest/SKILL.md`, `.claude/skills/research/SKILL.md`,
-  `.claude/skills/new-project/SKILL.md`,
-  `.claude/agents/check-light.md`.
+  `.claude/skills/new-project/SKILL.md`, `.claude/agents/check-
+  light.md`.
 - **SOL.0640 The work product.** `/work <name> [slug]`
   (`.claude/skills/work/SKILL.md`) is the one door to a work product:
   bare, it lists the project's work products from the ledger; with a
@@ -489,46 +483,42 @@ boundary kept by hand or an order of work.
   without a record of the new shape, a newer record overriding. Waiting
   on principal by the rule of POS.1620, a thread's line its first
   sentence and its last dated paragraph. It reports a duplicate ID, two
-  versions with one number, an item with records of two authors in one
-  landing, a closed thread touched by a later commit (through
-  `forge_repos`, the one door to git), a THR cited in any file of the
-  project with neither a thread file nor a `closed` record, an artefact
-  with unlanded records; on a branch it states `v<base>+N`. An
+  versions with one number, a closed thread touched by a later commit
+  (through `forge_repos`), and a THR cited in any file of the project
+  with neither a thread file nor a `closed` record (POS.1640). An
   unparsable file is a finding, not a crash: the row drops aloud, the
   ledger's header carries a line "unparsed: <file>:<line>", the exit is
   zero and `check-light` reports it; the shape one release back is
-  tolerated, as the driver tolerates it, which for the first release
-  means: over a project of the old shape the Findings and Challenges
-  tables, the mining and the work states are read from the hand-kept
-  ledger's own tables as the archive. The script writes `ledger.md` only
-  on a project of the current shape (the project file exists,
-  templates/project.md) whose ledger is out of the index where the
-  project is a repository of its own (the mark of SOL.0800, met by
-  itself outside git); on a project of the old shape, under git or not,
-  it says "shape before the migration, run `/migrate`" and does not
-  write, since there `ledger.md` is the hand-kept ledger, the archive
-  `/migrate` freezes (POS.1740); where its own repository tracks the
-  ledger it refuses the same way, and a repository that is not the
-  forge's is asked nothing (POS.0550);
-  either refusal prints to stdout or to `--out <path>`, the dry run of
-  a real project going to `tmp/` (CHL.0560). Over an old shape with
-  no threads file, Waiting says the threads were not read rather than
-  that nothing waits.
-  Called by the `/forge` map, `/ledger`, `/end`, `check-light` and
-  `check-project`; the readme recipe of a project reads the script's
-  output where it read the ledger; the 26 skills that write a ledger row
-  today stop. CLAUDE.md, Ledger, ceases to say "freely rewritten, keep
-  it current after every operation". Realises: POS.1600, POS.1610,
+  tolerated, which for the first release means: over a project of the
+  old shape the Findings and Challenges tables, the mining and the work
+  states are read from the hand-kept ledger's own tables as the archive.
+  The script writes `ledger.md` only on a project of the current shape
+  (the project file exists, templates/project.md) whose ledger is out of
+  the index where the project is a repository of its own (the mark of
+  SOL.0800, met by itself outside git); on a project of the old shape,
+  under git or not, it says "shape before the migration, run `/migrate`"
+  and does not write, since there `ledger.md` is the hand-kept ledger,
+  the archive `/migrate` freezes (POS.1740); where its own repository
+  tracks the ledger it refuses the same way, and a repository that is
+  not the forge's is asked nothing (POS.0550); either refusal prints to
+  stdout or to `--out <path>`, the dry run of a real project going to
+  `tmp/` (CHL.0560). Over an old shape with no threads file, Waiting
+  says the threads were not read rather than that nothing waits. Called
+  by the `/forge` map, `/ledger`, `/end`, `check-light` and `check-
+  project`; the readme recipe of a project reads the script's output
+  where it read the ledger; the 26 skills that write a ledger row today
+  stop. CLAUDE.md, Ledger, ceases to say "freely rewritten, keep it
+  current after every operation". Realises: POS.1600, POS.1610,
   POS.1620, POS.1630, POS.1640, POS.0160, POS.0330. Choice: a script
   against the model keeping the file, since the ledger is derived and
   every operation rewrote it; the price is the most complex script of
   the engine, reading dozens of reports at every map, under a second but
-  known. Built 2026-10-19 in the first release (the cutover plan, R1.09, R1.16). Where: `scripts/forge-ledger.py`,
-  `templates/ledger.md`, `templates/recipe-readme.md`, `CLAUDE.md`
-  (Ledger, Document kinds), `.claude/skills/ledger/SKILL.md`,
-  `.claude/skills/forge/SKILL.md`, `.claude/skills/end/SKILL.md`,
-  `.claude/agents/check-light.md`, `.claude/agents/check-project.md`,
-  `.gitignore`.
+  known. Built 2026-10-19 in the first release (the cutover plan, R1.09,
+  R1.16). Where: `scripts/forge-ledger.py`, `templates/ledger.md`,
+  `templates/recipe-readme.md`, `CLAUDE.md` (Ledger, Document kinds),
+  `.claude/skills/ledger/SKILL.md`, `.claude/skills/forge/SKILL.md`,
+  `.claude/skills/end/SKILL.md`, `.claude/agents/check-light.md`,
+  `.claude/agents/check-project.md`, `.gitignore`.
 - **SOL.0690 Where the state lives.** The records that replace the
   ledger's columns: the mining of a brief as a record in the intent's
   history with the brief's file as subject (`00-brief-<name>.md |
@@ -574,28 +564,7 @@ boundary kept by hand or an order of work.
   `.claude/skills/forge/states/*.md`, `scripts/forge-history.py`,
   `scripts/docs_map.py`, `scripts/docs-state.py`,
   `templates/recipe-readme.md`.
-- **SOL.0710 One sentence per line.** A conversion script of the engine
-  (its name TBC.0060) converts the prose of the artefacts, the threads,
-  the decisions, the skills, the agents, the templates, CLAUDE.md and
-  the renders to one sentence per line: it skips tables, code and
-  front-matter, guards the Markdown traps (a sentence beginning with a
-  number and a full stop or `1)`, with `-`, `*`, `+`, `>`, `|` or `#`;
-  the indentation of a list item's continuation) and proves its result
-  by `pandoc -t json` of every file before and after, a soft break read
-  as a space. The wrapping rule of CLAUDE.md, Document kinds, changes
-  with it, and the render skill's line that cites it; a render's
-  terminal block is a code fence the rule skips, and `md2video` joins
-  and wraps its lines itself. `check-light` carries the light rule: a
-  line does not carry two sentences, approximate. Realises: POS.1580.
-  Choice: a script with a proof against the model reflowing by hand, and
-  one sentence per line against a blank line between items, the cheaper
-  partial remedy; one rule for the renders too against an exception for
-  generated files, since a model writes them anyway. The hash of the
-  conversion commit goes into `.git-blame-ignore-revs`, honoured by
-  git's `blame.ignoreRevsFile` and by GitHub. Not built; the third
-  release, on its own, when nothing is in flight (THR.0690, DEC.0220).
-  Where: the script, `CLAUDE.md` (Document kinds),
-  `.claude/skills/render/SKILL.md`, `.claude/agents/check-light.md`.
+
 - **SOL.0720 Threads as files.** `threads/THR.NNNN.md` from
   `templates/thread.md` (`id`, `concerns`, `origin`, `status`);
   `templates/threads.md` is dropped; the intent's definition creates and
@@ -617,20 +586,20 @@ boundary kept by hand or an order of work.
   skill `.claude/skills/<kind>-contract/SKILL.md` (`critic-contract`,
   `challenger-contract`, `check-contract`; the suffix because `check/`
   is the command), named in the front-matter (`skills:`) of every lens,
-  persona or check file of that kind, which then carries its
-  front-matter and its Lens section and nothing else; Claude Code
-  injects the whole skill at launch. A contract opens by citing
-  `CLAUDE.md`, Isolated reviewers, which is the one owner of that
-  division since POS.1070, for what the contract owns, what the lens
-  file owns and the overlap rule, because the contract lands after the
-  lens's own text and the agent must know which yields. The skill is
-  `user-invocable: false`, out of the `/` menu, its description staying
-  in the session's context (`disable-model-invocation` would also forbid
-  the preload), with a description saying it is preloaded.
-  `templates/critic-definition.md`, `templates/challenger-definition.md`
-  and `templates/check-definition.md` are the skeletons of a lens file.
-  The check `engine` verifies that every skill an agent names exists,
-  since a missing one is skipped silently. Every agent declares `model:
+  persona or check file of that kind, which then carries its front-
+  matter and its Lens section and nothing else; Claude Code injects the
+  whole skill at launch. A contract opens by citing `CLAUDE.md`,
+  Isolated reviewers, which is the one owner of that division since
+  POS.1070, for what the contract owns, what the lens file owns and the
+  overlap rule, because the contract lands after the lens's own text and
+  the agent must know which yields. The skill is `user-invocable:
+  false`, out of the `/` menu, its description staying in the session's
+  context (`disable-model-invocation` would also forbid the preload),
+  with a description saying it is preloaded. `templates/critic-
+  definition.md`, `templates/challenger-definition.md` and
+  `templates/check-definition.md` are the skeletons of a lens file. The
+  check `engine` verifies that every skill an agent names exists, since
+  a missing one is skipped silently. Every agent declares `model:
   inherit` (SOL.0600). What a release offers of the reviewers is
   `.claude/skills/release/SKILL.md`. Regression, the FND sequence, the
   delta report, what is a finding of no lens and the critic's part in
@@ -639,20 +608,17 @@ boundary kept by hand or an order of work.
   (POS.1140); the agent returns its report with its findings unnumbered,
   so that reviewers of any kind run in parallel. The three contracts
   name the `closed` record a settled finding or challenge leaves in the
-  artefact's history (SOL.0690) and the `v<base>+N` a report cites on a
-  branch (SOL.0760). Realises: POS.1120, POS.0400, POS.0410, POS.0420,
-  POS.0540, POS.0270. Choice: a preloaded skill against a copy of the
-  shared text in every agent file. Facts of the mechanism, worked out by
-  Claude: the skill arrives at the end of the first user message, after
-  the task, not in the system prompt; a headless `--agent` run preloads
-  nothing, so reviewers run as subagents only. Decided 2026-09-06.
-  Where: `.claude/skills/critic-contract/SKILL.md`,
-  `.claude/skills/challenger-contract/SKILL.md`,
-  `.claude/skills/check-contract/SKILL.md`,
-  `.claude/agents/critic-clarity.md`,
-  `.claude/agents/critic-essence.md`,
-  `.claude/agents/challenger-cto.md`,
-  `.claude/agents/challenger-architect.md`,
+  artefact's history (SOL.0690). Realises: POS.1120, POS.0400, POS.0410,
+  POS.0420, POS.0540, POS.0270. Choice: a preloaded skill against a copy
+  of the shared text in every agent file. Facts of the mechanism, worked
+  out by Claude: the skill arrives at the end of the first user message,
+  after the task, not in the system prompt; a headless `--agent` run
+  preloads nothing, so reviewers run as subagents only. Decided
+  2026-09-06. Where: `.claude/skills/critic-contract/SKILL.md`,
+  `.claude/skills/challenger-contract/SKILL.md`, `.claude/skills/check-
+  contract/SKILL.md`, `.claude/agents/critic-clarity.md`,
+  `.claude/agents/critic-essence.md`, `.claude/agents/challenger-
+  cto.md`, `.claude/agents/challenger-architect.md`,
   `.claude/skills/critique/SKILL.md`,
   `.claude/skills/challenge/SKILL.md`,
   `.claude/skills/release/SKILL.md`, `templates/critic-definition.md`,
@@ -669,21 +635,21 @@ boundary kept by hand or an order of work.
   ledger's rules, the kinds and the optional logo in `check-project`;
   front-matter against the companion, what the ledger script reports,
   dependencies, indexes, the one form of a source and a line carrying
-  two sentences in `check-light` (SOL.0680, SOL.0710); a missing
-  `.gitattributes` or project file and an overlap of ID reservations in
-  `check-project` (SOL.0730, SOL.0670, SOL.0790); a document against its
-  history in `check-history`. Realises: POS.1140, POS.0540, POS.0570,
-  POS.1070, POS.1010, POS.1020, POS.1040. Choice: the session files the
-  report, and not the agent, so that the IDs are given at one place and
-  a check that every save runs has no right to write, since 2026-10-17
-  the rule of every reviewer (POS.1140, SOL.0300); whether a script
-  takes the filing over is open, THR.0500. `context: fork` is set aside:
-  the field fixes the agent type in a skill's front-matter, so it cannot
-  serve a dispatcher that chooses an agent by argument; the isolation
-  stays what `/critique` and `/challenge` do, the Agent tool with the
-  target path and nothing else. Where: `.claude/skills/check/SKILL.md`,
-  `.claude/skills/check-contract/SKILL.md`, `.claude/agents/check-*.md`,
-  `templates/check-definition.md`.
+  two sentences in `check-light` (SOL.0680); a missing `.gitattributes`
+  or project file in `check-project` (SOL.0730, SOL.0670); a document
+  against its history in `check-history`. Realises: POS.1140, POS.0540,
+  POS.0570, POS.1070, POS.1010, POS.1020, POS.1040. Choice: the session
+  files the report, and not the agent, so that the IDs are given at one
+  place and a check that every save runs has no right to write, since
+  2026-10-17 the rule of every reviewer (POS.1140, SOL.0300); whether a
+  script takes the filing over is open, THR.0500. `context: fork` is set
+  aside: the field fixes the agent type in a skill's front-matter, so it
+  cannot serve a dispatcher that chooses an agent by argument; the
+  isolation stays what `/critique` and `/challenge` do, the Agent tool
+  with the target path and nothing else. Where:
+  `.claude/skills/check/SKILL.md`, `.claude/skills/check-
+  contract/SKILL.md`, `.claude/agents/check-*.md`, `templates/check-
+  definition.md`.
 - **SOL.0810 Unique names of reports.** The filing of `/critique`,
   `/challenge` and `/check` names every report
   `YYYY-MM-DD-<kind>-<name>-HHMM-<4 hex of a content hash>.md`; the
@@ -709,25 +675,24 @@ boundary kept by hand or an order of work.
 - **SOL.0400 Recipe and render.** A recipe is one file,
   `recipes/<recipe>.md`. `/render <recipe>` generates the output in an
   isolated subagent into `renders/<recipe>.md`, or the recipe's optional
-  `output:` path, history in git. Every render opens with YAML
-  front-matter provenance citing the recipe and every input with their
-  versions; the ledger's Renders table mirrors it. On a branch the
-  provenance cites `v<base>+N` (SOL.0760); the renders of a release are
-  made only on main (POS.1690); a project's readme recipe reads the
-  ledger script's output where it read the ledger (SOL.0680). A recipe
-  may declare `languages:` (POS.1550): the subagent of `/render` writes
-  the primary render and then, in the same run, each translation as a
-  render of its own, `renders/<recipe>.<lang>.md`, scene for scene and
-  line for line, its provenance naming the primary render it was made
-  from; one Renders row per file, the format file following the name. A
-  recipe without `languages:` renders as before. The `output:` path may
-  lie outside the project, in the engine's `docs/videos/` (POS.1540);
-  the project's ledger keeps the row, the engine none. Realises:
-  POS.0710, POS.0930, POS.1550, POS.1540. Choice: visible YAML
-  provenance against an invisible comment: provenance is control
-  information, the audience rarely meets raw Markdown, and GitLab does
-  not display front-matter. Where: `.claude/skills/render/SKILL.md`,
-  `templates/recipe.md`.
+  `output:` path, history in git. Every render opens with YAML front-
+  matter provenance citing the recipe and every input with their
+  versions; the ledger's Renders table mirrors it. The renders of a
+  release are made only on main (POS.1690); a project's readme recipe
+  reads the ledger script's output where it read the ledger (SOL.0680).
+  A recipe may declare `languages:` (POS.1550): the subagent of
+  `/render` writes the primary render and then, in the same run, each
+  translation as a render of its own, `renders/<recipe>.<lang>.md`,
+  scene for scene and line for line, its provenance naming the primary
+  render it was made from; one Renders row per file, the format file
+  following the name. A recipe without `languages:` renders as before.
+  The `output:` path may lie outside the project, in the engine's
+  `docs/videos/` (POS.1540); the project's ledger keeps the row, the
+  engine none. Realises: POS.0710, POS.0930, POS.1550, POS.1540. Choice:
+  visible YAML provenance against an invisible comment: provenance is
+  control information, the audience rarely meets raw Markdown, and
+  GitLab does not display front-matter. Where:
+  `.claude/skills/render/SKILL.md`, `templates/recipe.md`.
 - **SOL.0410 The engine's README.** Its recipe lives at
   `projects/forge/recipes/readme.md` with `output:` pointing at the
   repository root; the natural inputs are the intent and
@@ -982,16 +947,14 @@ boundary kept by hand or an order of work.
   nested git repositories in a gitignored `projects/*` with
   `projects/forge` re-included (`!projects/forge`; the pattern must be
   `projects/*`, not `projects/`, or the re-include fails silently).
-  `.gitignore` carries `projects/forge/ledger.md` (SOL.0680); the
-  engine's second working tree is `../forge-of-thought@<branch>/`
-  (SOL.0770). A per-project `CLAUDE.md` is polish only where genuinely
-  needed. How the scripts recognise a project is in
-  `scripts/forge_repos.py`, which the git scripts share. Realises:
-  POS.0760, POS.0940, POS.0990. Choice: nested repositories under a
-  gitignored directory against submodules, subtree, worktrees, a
-  template repository and a plugin as the only shape (REJ.0150). Decided
-  2026-08-29. Where: `.gitignore`, `projects/`, `LICENSE`,
-  `scripts/forge_repos.py`.
+  `.gitignore` carries `projects/forge/ledger.md` (SOL.0680). A per-
+  project `CLAUDE.md` is polish only where genuinely needed. How the
+  scripts recognise a project is in `scripts/forge_repos.py`, which the
+  git scripts share. Realises: POS.0760, POS.0940, POS.0990. Choice:
+  nested repositories under a gitignored directory against submodules,
+  subtree, worktrees, a template repository and a plugin as the only
+  shape (REJ.0150). Decided 2026-08-29. Where: `.gitignore`,
+  `projects/`, `LICENSE`, `scripts/forge_repos.py`.
 - **SOL.0510 The git scripts.** The scripts that serve the engine and
   every project that is a repository of its own: git names its directory
   as the top, one `rev-parse --show-toplevel` in `forge_repos`, resolved
@@ -1000,33 +963,30 @@ boundary kept by hand or an order of work.
   repository the engine. Anything else is a project outside git: the
   scripts skip or refuse it as today and run no git on it, whatever
   repository may lie above it. docs-state's walk up the parents for a
-  `.git` goes the same way. Each script is
-  described by its own help header: `forge-save.py`, which also pushes a
-  clean repository that is ahead, aborts a conflicting rebase with the
-  manual steps printed (SOL.0780) and lands the `+` records on main
-  (SOL.0760); `forge-pull.py`; `forge-status.py`, which also reports a
-  missing registration of the drivers (SOL.0740); `forge-clone.py`,
-  which brings an existing project in; `forge-branch.py`, which creates
-  a branch or switches to one, `main` included, with the slug alone
-  reports the branch and lists the branches, with `--worktree` makes a
-  working tree (SOL.0770) and with `--done` ends a merged branch
-  (SOL.0820); and the five of the brief `collaboration`:
-  `forge-ledger.py` (SOL.0680), `forge-records.py` (SOL.0750),
-  `forge-land.py` (SOL.0760), `forge-migrate.py` (SOL.0800) and
-  `forge-merge.py` (SOL.0820); and `fixture.py` (SOL.0830). `forge-save`
-  without a slug skips the fixture by name (SOL.0830). `forge-status
-  --remote` fetches the origin of each repository, which changes nothing
-  in the working tree, and reports the branch against it: up to date,
-  behind, ahead or diverged, with the counts; without the flag it
-  touches no network. The state against the origin is one function of
-  `forge_repos.py`, which status and pull share. `forge-pull` prints
-  where it moved from and to and the subjects of the commits between, so
-  that the releases crossed can be read off. Realises: POS.0550,
-  POS.1060, POS.1110, POS.0940, POS.1490. Choice: scripts as the only
-  door to a write against git typed by the model. Where:
-  `scripts/forge-*.py`,
-  `scripts/forge_repos.py`, `scripts/docs-state.py`,
-  `.claude/skills/import-project/SKILL.md`.
+  `.git` goes the same way. Each script is described by its own help
+  header: `forge-save.py`, which also pushes a clean repository that is
+  ahead, a branch without an upstream counted against the remote's
+  branch (SOL.0780), leaves a conflicting rebase standing for the step
+  of a conflict and refuses a standing rebase or merge before it stages
+  (SOL.0840); `forge-pull.py`; `forge-status.py`, which also reports a
+  missing registration (SOL.0740) and a rebase or merge in progress
+  (SOL.0840); `forge-clone.py`, which brings an existing project in;
+  `forge-branch.py`, which creates a branch or switches to one, `main`
+  included, with the slug alone reports the branch and lists the
+  branches (TBC.0100); and the two of the brief `collaboration`: `forge-
+  ledger.py` (SOL.0680) and `forge-migrate.py` (SOL.0800); `fixture.py`
+  (SOL.0830) is not built. `forge-save` without a slug skips the fixture
+  by name (SOL.0830). `forge-status --remote` fetches the origin of each
+  repository, which changes nothing in the working tree, and reports the
+  branch against it: up to date, behind, ahead or diverged, with the
+  counts; without the flag it touches no network. The state against the
+  origin is one function of `forge_repos.py`, which status and pull
+  share. `forge-pull` prints where it moved from and to and the subjects
+  of the commits between, so that the releases crossed can be read off.
+  Realises: POS.0550, POS.1060, POS.1110, POS.0940, POS.1490. Choice:
+  scripts as the only door to a write against git typed by the model.
+  Where: `scripts/forge-*.py`, `scripts/forge_repos.py`, `scripts/docs-
+  state.py`, `.claude/skills/import-project/SKILL.md`.
 - **SOL.0520 The wall.** Protection relies on Claude Code's permission
   system, not an OS-level sandbox: commands and file operations run
   under permission prompts and allowlists, shared deny rules in
@@ -1037,9 +997,15 @@ boundary kept by hand or an order of work.
   and started in exec form like the per-prompt hook (SOL.0030): it
   splits the command at the shell's separators, cuts out heredoc bodies
   as text, finds every call of git past its global options and answers
-  allow for a reading verb with reading flags, deny for everything else
+  allow for a reading verb with reading flags, ask for the commands that
+  finish the step of a conflict (SOL.0840: `add` without `--force` and
+  the interactive flags, `rebase --continue` and `--abort`, `merge
+  --continue` and `--abort`, `merge <branch>` with one name and no flag,
+  `checkout --ours` or `--theirs` on a file), deny for everything else
   with the script to use instead, and nothing for a command that is not
-  git. Denied are the writing verbs, a verb it does not know, an alias
+  git; over a whole command deny outranks ask and ask outranks allow,
+  `$(` marks a substitution whose git is denied whatever it is, and the
+  shell's redirections are stripped before a verb is judged. Denied are the writing verbs, a verb it does not know, an alias
   among them, a reading verb with a writing flag (`branch -d`, `tag v1`,
   `config` with a value, `log --output`, `fetch --prune`), a global
   option that changes how git runs (`-c`, `--git-dir`, `--work-tree`,
@@ -1048,10 +1014,9 @@ boundary kept by hand or an order of work.
   `find -exec`, an interpreter with `-c` or `-e`) and git inside a
   command substitution; the word git as an argument of any other
   program, a commit message for `forge-save.py` among them, is text and
-  left to the harness (the refusal of 2026-09-26, THR.0400). No rule
-  of it answers ask today; it composes an ask over the whole command
-  where a rule would, since the test of 2026-10-21 showed an ask holds
-  in the automatic mode (THR.0400). Its cases are its own `--test`, run
+  left to the harness (the refusal of 2026-09-26, THR.0400). The ask
+  holds in the automatic permission mode (tried 2026-10-21, THR.0400;
+  seen 2026-10-23 at R6.01). Its cases are its own `--test`, run
   before it is
   registered and after every change; `--judge` prints the verdict of one
   command. The PowerShell tool stays closed to git whole,
@@ -1076,10 +1041,7 @@ boundary kept by hand or an order of work.
   with the release message and tag: not a second procedure. It never
   regenerates the documentation: it reports the age of the index against
   the intent's version and offers `/document` (POS.1450), the detail the
-  release skill's. On main the landing of the `+` records is the first
-  act of `forge-save`, before the add and after the check (SOL.0760),
-  and `forge-save` pulls by merge, never by rebase, when a merge commit
-  is among the commits to push (POS.1690); the release writes
+  release skill's. The release writes
   `renders/state.md` from the ledger script (POS.1650), its
   release-notes recipe tolerates a version without content changes
   (POS.1630), and its walkthrough walks the parts of this design marked
@@ -1087,7 +1049,9 @@ boundary kept by hand or an order of work.
   built in it, and turns them over to built, so that the mark does not
   outlive the building (TBC.0020). `/save` saves even when the light
   check cannot build the ledger, and says so, since the save is what
-  does not lose work; `/release` refuses a repository that is behind or
+  does not lose work; a rebase that conflicts is left standing by
+  `forge-save` for the step of a conflict, and a standing rebase or
+  merge is refused before anything is staged (SOL.0840); `/release` refuses a repository that is behind or
   diverged, as do `/document` (SOL.0460) and `/publish` (SOL.0420),
   since `merge=ours` turns round in the rebase of the save (POS.1710).
   The renders come after the check and its walkthrough, not before: a
@@ -1097,7 +1061,7 @@ boundary kept by hand or an order of work.
   an origin. `forge-save` checks that git resolves an identity for the
   repository and, where it resolves none, reports it with the command to
   set one and commits nothing until it is. Realises: POS.1100, POS.0570,
-  POS.0730, POS.0810, POS.1070. Choice: two commands against one,
+  POS.0730, POS.0810, POS.1070, POS.1710. Choice: two commands against one,
   alternatives REJ.0160 and REJ.0170; the cost is a README stale between
   releases, visibly. Where: `.claude/skills/save/SKILL.md`,
   `.claude/skills/release/SKILL.md`, `scripts/forge-save.py`.
@@ -1120,189 +1084,68 @@ boundary kept by hand or an order of work.
   one host serves two roles. Where: `.claude/skills/setup/SKILL.md`;
   outside the engine, the user's global git configuration file,
   named by `scripts/forge-status.py`.
-- **SOL.0730 The four ways and the attributes.**
-  `templates/gitattributes`, copied by `/new-project` into a project's
-  `.gitattributes`: `text=auto`; `merge=forge-records` on
-  `*.history.md`, `decisions.md`, `**/00-INDEX.md`, `docs-map.md`,
-  `ids.md`; `merge=ours` on `renders/**`, `README.md`,
-  `RELEASE-NOTES.md`, `CONTRIBUTING.md`, `docs/**`, `published/*.md`;
-  `binary` on `published/*.pptx` and `published/*.docx`. The engine's
-  own `.gitattributes` is a list of its own: way 2 on the record files
-  under `projects/forge/`, `merge=ours` on `README.md`,
+- **SOL.0730 The ways and the attributes.** `templates/gitattributes`,
+  copied by `/new-project` into a project's `.gitattributes`:
+  `text=auto`; `merge=ours` on `renders/**`, `README.md`, `RELEASE-
+  NOTES.md`, `CONTRIBUTING.md`, `docs/**`, `published/*.md`; `binary` on
+  `published/*.pptx` and `published/*.docx`; the record files carry no
+  attribute and merge as text (POS.1560). The engine's own
+  `.gitattributes` is a list of its own: `merge=ours` on `README.md`,
   `RELEASE-NOTES.md`, `CONTRIBUTING.md` and `docs/**` at the root and on
   `projects/forge/renders/**` and the published companions, `binary` on
   the published files (CHL.0350). `check-project` reports a project
   without the file, with the fix. CLAUDE.md, Persistence, carries the
-  four ways and the promise. Realises: POS.1560, POS.1690, POS.1750.
-  Choice: the attributes per project against a global configuration
-  alone, since the attributes travel with the repository and the
-  registration (SOL.0740) does not. Built 2026-10-19 in the first release with `ours` and `binary` (the cutover plan, R1.07, R1.02); `forge-records` is the second release's, deferred (DEC.0250). Where:
+  ways and the promise. Realises: POS.1560, POS.1690, POS.1750. Choice:
+  the attributes per project against a global configuration alone, since
+  the attributes travel with the repository and the registration
+  (SOL.0740) does not. Built 2026-10-19 in the first release (the
+  cutover plan, R1.07, R1.02); the attribute of way 2, `merge=forge-
+  records`, let go 2026-10-23 with the driver (REJ.0340). Where:
   `templates/gitattributes`, `.gitattributes`, `CLAUDE.md`
   (Persistence), `.claude/skills/new-project/SKILL.md`,
   `.claude/agents/check-project.md`.
 - **SOL.0740 The registration on the machine.** `/setup` registers in
   the global git configuration, once per machine and on the user's word,
-  `merge.forge-records.driver` (the path to `scripts/forge-records.py`
-  with `%O %A %B %P`), `merge.ours.driver true`, `rebase.backend merge`
-  (the apply backend ignores drivers), `merge.renormalize true` (files
-  committed with CRLF before normalisation would conflict whole), sets
-  `rerere.enabled true` as a convenience, since a replay never repeats
-  the automerge it keys on (CHL.0340), and offers `merge.conflictStyle
-  zdiff3`. `forge-status` reports a missing registration or a driver
-  path that leads nowhere, since an unregistered clone silently falls
-  back to today's conflict. Realises: POS.1690, POS.1740 (the
-  registration is the machine's, not the project's). Choice: one
-  registration per machine, pointing at the primary clone of the engine,
-  against a registration per repository, which the migration must not
-  touch; a second clone of the engine on the machine runs the primary's
-  driver, and `forge-status` reports a difference of release (SOL.0750
-  tolerates one). Built 2026-10-18, the preparation of the cutover plan:
-  the report of `forge-status` (R1.12), the registration by `/setup` of
-  `ours`, the backend, renormalize and rerere with the offer of zdiff3
-  (R1.14); the driver's own key arrives with the driver, the second
-  release. Where: `.claude/skills/setup/SKILL.md`, `CLAUDE.md`
-  (Persistence), `scripts/forge-status.py`, `scripts/forge_repos.py`.
-- **SOL.0750 The driver for sets of records.**
-  `scripts/forge-records.py`, git's merge driver `forge-records` (base,
-  ours, theirs, path): the case by path, immutable lines (histories,
-  `ids.md`), immutable blocks (`## DEC.` in the decisions), mutable
-  blocks (`` ### `file` `` in the indexes, `### docs/…` in the map); the
-  keys as POS.1670 names them; union by key, conflict on a changed or
-  deleted immutable unit and on a mutable block changed on both sides,
-  side by side for two immutable records with one key; the histories
-  never reordered and the side with the `landed` first, the others
-  appended; the regions outside the records merged three-way; the file's
-  shape verified after writing, exit non-zero on failure; CRLF
-  tolerated, LF written; no repository read, nothing heavy imported; the
-  shape one release back tolerated. A conflict is written with git's
-  standard markers, on which git's detection, rerere and zdiff3 rest:
-  for an immutable unit the record from the base stays in the file,
-  followed by a conflict block with both variants; for a mutable block
-  the markers around both versions of the block; the walkthrough of
-  `/merge` reads them as for way 1, the default verdict for an immutable
-  unit being to restore the base (CHL.0330). Realises: POS.1670,
-  POS.0550, POS.1660 (the ordering). Choice: a driver of the forge's
-  against `merge=union` (REJ.0280) and against a file per record
-  (REJ.0310); the price is a script that must be registered on every
-  machine (SOL.0740). The question of `/ingest` before the entry is
-  written, so that Role is in the mutable block from its birth
-  (POS.1670), built 2026-10-18, the preparation of the cutover plan
-  (R1.28); the driver Not built; deferred (DEC.0250, THR.0710). Where:
-  `scripts/forge-records.py`, `.claude/skills/ingest/SKILL.md`.
-- **SOL.0760 The version as a boundary.** A record on a branch carries
-  `+` in its version column; `scripts/forge-land.py <slug>` appends one
-  `landed` record per versioned document with `+` records and writes the
-  header's `version` and `status`; `forge-save` and `/release` call it
-  on main before committing; `forge-history` and the ledger script
-  compute each record's version from the next `landed`; on main, while a
-  history carries unlanded `+` records, every new record of that history
-  carries `+` too and lands with them, the landing being the first act
-  of `forge-save`, before the add and after the light check; the map,
-  `/history` and the ledger script report "N unlanded records" as a
-  state, not a finding. The provenance `v<base>+N` on a branch is
-  written by whoever writes a provenance: `/render` in the render's
-  front-matter (SOL.0400), `/research` in `derived_from`, the critic and
-  the challenger in the report's header, the ledger script recomputing
-  after the landing. CLAUDE.md, Versioning & status, carries `+`,
-  `landed` and land first. Realises: POS.1660, POS.0300, POS.0310,
-  POS.1640. Choice: a token and a boundary record against the header
-  written on a branch (REJ.0300) and against a version per branch; the
-  cost is one more kind of record and a script. Not built; deferred (DEC.0250, THR.0710),
-  together with the driver and `/merge`, since without the boundary a
-  round on a branch damages the histories (DEC.0220). Where:
-  `scripts/forge-land.py`, `scripts/forge-save.py`,
-  `scripts/forge-history.py`, `scripts/forge-ledger.py`,
-  `templates/history.md`, `CLAUDE.md` (Versioning & status),
-  `.claude/skills/forge/states/*.md`, `.claude/skills/release/SKILL.md`,
-  `.claude/skills/history/SKILL.md`, `.claude/skills/render/SKILL.md`,
-  `.claude/skills/research/SKILL.md`,
-  `.claude/skills/critic-contract/SKILL.md`,
-  `.claude/skills/challenger-contract/SKILL.md`.
-- **SOL.0770 Two windows and the worktree.** `forge-branch <name>
-  --worktree` creates the branch and its working tree at
-  `projects/<slug>@<branch>/` (`git worktree add`), for the engine at
-  `../forge-of-thought@<branch>/`, where it also copies the gitignored
-  instance files, `CLAUDE.local.md` and `.claude/settings.local.json`,
-  since without them the second window knows neither the principal, nor
-  the conversation language, nor the model; a project's tree runs from
-  the engine's root and needs no copy. `forge_repos` recognises a
-  worktree's `.git`, a file, and resolves `<slug>@<branch>` as a slug
-  for every script; every command takes the slug as it stands; `/save`
-  with two windows takes a slug, and the map says "slug, branch name";
-  `forge-branch --done <name>` removes the tree and the local branch
-  after the merge (SOL.0820). Realises: POS.1700. Choice: a worktree
-  inside `projects/` against a second clone, which would need its own
-  remote round trip for every exchange; the engine's tree outside, since
-  the engine is the root. Not built; deferred (DEC.0250, THR.0710). Where:
-  `scripts/forge-branch.py`, `scripts/forge_repos.py`, `CLAUDE.md`
-  (Persistence), `.claude/skills/save/SKILL.md`,
-  `.claude/skills/forge/SKILL.md`.
+  `merge.ours.driver true`, `rebase.backend merge` (the apply backend
+  ignores drivers), `merge.renormalize true` (files committed with CRLF
+  before normalisation would conflict whole), sets `rerere.enabled true`
+  as a convenience, since a replay never repeats the automerge it keys
+  on (CHL.0340), and offers `merge.conflictStyle zdiff3`. `forge-status`
+  reports a missing registration, since an unregistered clone silently
+  falls back to a conflict on the derived files. Realises: POS.1690,
+  POS.1740 (the registration is the machine's, not the project's).
+  Choice: one registration per machine against a registration per
+  repository, which the migration must not touch. Built 2026-10-18, the
+  preparation of the cutover plan: the report of `forge-status` (R1.12),
+  the registration by `/setup` of `ours`, the backend, renormalize and
+  rerere with the offer of zdiff3 (R1.14); the driver's own key,
+  `merge.forge-records.driver`, let go 2026-10-23 with the driver
+  (REJ.0340), never registered. Where: `.claude/skills/setup/SKILL.md`,
+  `CLAUDE.md` (Persistence), `scripts/forge-status.py`,
+  `scripts/forge_repos.py`.
+
 - **SOL.0780 The path through git.** The map ends with the state against
   the origin and its offer (built, `/forge` step 3); the reflection
   before a write reads that state from the last `forge-status --remote`
   and says "behind: pull first" as a recommendation; the write step
-  never fetches; `forge-save` pushes a clean repository that is ahead
-  (today "nothing to save") and aborts a conflicting rebase with the
-  manual steps printed (`git pull --rebase`, resolve, add, `rebase
-  --continue`, then `forge-save`). Realises: POS.1710, POS.1490. Choice:
-  the state read once at the map and the reflection against a fetch at
-  the write, so that the network never fails a round. The roles: a
-  contributor's branch and `/save`, the integrator's `/merge` and
-  `/save` on main (POS.1770, SOL.0820). Built 2026-10-18, the
+  never fetches; `forge-save` pushes a clean repository that is ahead, a
+  branch without an upstream counted against `origin/<branch>` after a
+  fetch or pushed as new, and leaves a conflicting rebase standing with
+  the files and the step printed (SOL.0840). Realises: POS.1710,
+  POS.1490. Choice: the state read once at the map and the reflection
+  against a fetch at the write, so that the network never fails a round.
+  The roles: a contributor's branch and `/save`, the integrator's merge
+  and `/save` on main (POS.1770, SOL.0840). Built 2026-10-18, the
   preparation of the cutover plan (R1.12): the ahead counted against the
   upstream without a fetch, a branch with no upstream reaching the
-  remote with its first commit as before; the roles with SOL.0820.
-  Where: `.claude/skills/forge/SKILL.md`,
+  remote with its first commit; the push of a clean branch without an
+  upstream and the conflict left standing 2026-10-23 (R6.02). Where:
+  `.claude/skills/forge/SKILL.md`,
   `.claude/skills/walkthrough/SKILL.md`, `scripts/forge-save.py`.
-- **SOL.0790 IDs on a branch.** Within one clone the allocation at the
-  write reads every local branch: `forge_repos` lists the branches and
-  the highest number of the prefix in the histories, `decisions.md` and
-  the thread files of each, by `git grep` over the refs without a
-  checkout, file by file, the committed state of the branches, and takes
-  the maximum over the branches plus the step, within the author's block
-  where the project has one (POS.1730). Between clones and authors
-  `ids.md` in the project's root from `templates/ids.md`, one line per
-  block, "<prefix> <from> to <to>: <author>", a thousand per prefix,
-  assigned by hand by the integrator in an ordinary round and saved; the
-  allocation at the write reads the block of the author, keyed on
-  `author: <handle>` of `CLAUDE.local.md`, which `/setup` writes
-  (SOL.0150) and which the author column of a history carries, and takes
-  the next number in it; where the file exists and no block matches the
-  handle it refuses the allocation and names the fix, never falling back
-  to the sequence; a project without the file allocates from the
-  sequence as today; `check-project` reports a block over a block and a
-  block over a number used by that prefix outside a block; the fifth
-  digit: `\d{4,5}` in `forge-history` and `docs_map`, a numeric sort by
-  (prefix, number), and the text `NNNN` in CLAUDE.md, the templates and
-  the skills, no ID rewritten; at a clash shown by a merge the item of
-  the branch that landed second takes a new number by the same
-  allocation, a `changed` record "ID clash at merge", a thread's file
-  renamed with it (POS.0220, POS.1680). Realises: POS.1730, POS.0220,
-  POS.1110, POS.1680, POS.1770. Choice: blocks per author assigned by
-  hand against a reservation by plumbing onto main (REJ.0320) and a hash
-  block (REJ.0270): no network, no push, a protected main no obstacle;
-  the price is the integrator's hand at every new author and a dead rest
-  of a block; the allocation over the local branches against the blocks
-  alone (CHL.0510): two branches of one handle would take the same
-  number from one block. The fifth digit built 2026-10-18, the
-  preparation of the cutover plan (R1.08): the two patterns, the short
-  form and the sentence of CLAUDE.md, no script sorting IDs today, the
-  numeric sort a rule for the ones to come; the allocation over the
-  local branches and the blocks are Not built; deferred (DEC.0250,
-  THR.0710), the blocks in any case on the trigger of a second author or
-  a second clone with a branch in flight (DEC.0240). Where:
-  `scripts/forge_repos.py`, `templates/ids.md`,
-  `scripts/forge-history.py`, `scripts/docs_map.py`,
-  `.claude/skills/walkthrough/SKILL.md`,
-  `.claude/agents/check-project.md`, `CLAUDE.md` (ID scheme),
-  `templates/*.md`.
 - **SOL.0800 The migration.** `scripts/forge-migrate.py <slug> [--apply
   | --undo]`, door `/migrate [slug]`: a dry run by default; the shape as
   marks (the project file exists, no `date` in the headers, `threads/`
-  exists, `.gitattributes` exists, the ledger out of the index, and for
-  the conversion `wrapping: sentences` in the project file, written by
-  the conversion's step, so that the refusal of the old shape fires for
-  it too); the
+  exists, `.gitattributes` exists, the ledger out of the index, ); the
   steps in the order of one run: A (the header fields), B0 (the project
   file from the ledger's header), B (the mining and the work state as
   records, the index fields, the published companions, the Findings and
@@ -1311,96 +1154,44 @@ boundary kept by hand or an order of work.
   `.gitignore`, a Waiting line without an ID printed), C1 (`threads.md`,
   in flow-ba `10-intent.threads.md`, cut by `- **THR.NNNN**` into files,
   `origin` guessed and printed), D (the attributes), then `/check light`
-  and `/check project`; for a library A, B0, B and D; A2 (SOL.0710) is a
-  step of its own run, in the conversion's release; each step verifies
+  and `/check project`; for a library A, B0, B and D; each step verifies
   itself; `--undo` restores every changed tracked file from the index
   through `forge_repos`, since the script stages nothing, and the
   created files and the removals from the index from its own manifest;
-  before the conversion's step it lists through `forge_repos` the
-  branches of the origin and of the clone not merged into main and
-  refuses until they are landed or named as given up (`--abandon
-  <branch>`), and writes the hash of the conversion commit into
-  `.git-blame-ignore-revs`; refuses an unclean repository, one behind
-  its origin or not on main, where the project is a repository of its
-  own; a project outside git (SOL.0510) gets none of these: the dry run
-  and `--apply` say that the forge runs no git here and that the way
-  back is the user's backup, taken before `--apply`; `--undo` refuses
-  there; step B takes the ledger out of an index only where the forge's
-  repository has one; a run that stops midway is finished by running it
-  again, the marks being the memory; commits nothing, with the one
-  exception of
-  the conversion's step, which commits through `forge-save` and writes
-  the hash of that commit into `.git-blame-ignore-revs` by a second
-  save, since the hash does not exist before the commit (CHL.0530).
-  `--apply` and `--undo` are tested on the fixture (SOL.0830), the
-  migration outside git on the fixture without a repository; a real
-  project gets the dry run in place and then its one `--apply`, never a
-  clone (DEC.0240). A branch that must survive
-  the conversion needs a tool that rewrites its commits with the
-  conversion applied and rebases it onto the converted main, TBC.0080;
-  until then every branch is landed or given up before the conversion's
-  release; forks of the engine the same, a known limit. Claude within
-  `/migrate` judges the origins of the threads from the script's print.
-  `/pull` of the engine says in Action required: `forge-pull` of the
-  engine, `/setup` for the registrations, then every project the clone
-  keeps: one already migrated elsewhere pulled by `/pull`, one not yet
-  migrated run through `/migrate` on that one clone and saved; whose
-  machine or instance the clone is makes no difference, every user of
-  the engine migrates his own projects (CHL.0540); the map,
-  `check-project` and every writing skill say "shape before the
-  migration, run `/migrate`" on a project of the old shape and do not
-  write. Realises:
-  POS.1740, POS.0940, POS.0820. Choice: one script and one command
-  against the hand migration of POS.0940, since every clone must come
-  out the same; marks against an engine version in the project, which
-  POS.0940 refuses. Built 2026-10-19 in the first release (the cutover plan, R1.13, R1.19, R1.23). Where:
-  `scripts/forge-migrate.py`, `.claude/skills/migrate/SKILL.md`,
-  `.claude/skills/pull/SKILL.md`, `.claude/skills/forge/SKILL.md`,
-  `.claude/agents/check-project.md`, `templates/ledger.md` (the
-  archive's shape), `CLAUDE.md` (the Commands table, Persistence). The
-  tag before a migration is taken per project immediately before its
-  `/migrate` and the engine's before its own; the way back from a tag is
-  the principal's hand through git, a reset and a forced push or a
-  revert, on a protected main a maintainer's, and always the engine and
-  every project together, since the engine refuses the old shape once
-  released (CHL.0420).
-- **SOL.0820 The merge through the forge's door.** `/merge
-  [<branch>|main] [slug]` (`.claude/skills/merge/SKILL.md`), script
-  `scripts/forge-merge.py`: on main it merges a branch into main, on a
-  branch it merges main into the branch; a clean repository only, not
-  behind; on a diverged main with no branch named it merges
-  `origin/main` into main, the path of a refused push; main is
-  `origin/main` after a fetch, the branch the local one where it exists
-  locally, else `origin/<branch>` after a fetch; git's merge without
-  committing, a fast-forward allowed, the driver merging the record
-  files; it prints the files left in conflict; the skill works them in a
-  walkthrough, one conflict one question, Claude writing the chosen
-  wording into the file, the markers being text, and a `changed` record
-  with `+` into the history of the artefact, or of the intent for a
-  thread, the subject the item, the reason "merge of <branch>" with why,
-  `Was` the other wording; for a conflict of an immutable unit of way 2
-  the default verdict is to restore the base, a breach; the script
-  stages and commits on the word, the message naming the branch, and
-  pushes; a refused push is met by a merge of `origin/main` into main
-  through the same path, never by a rebase. `forge-branch --done <name>`
-  removes the worktree and deletes the local branch after the merge, git
-  refusing an unmerged one; the branch on the origin stays. rerere
-  (SOL.0740) is a convenience. After the merge and before the push the
-  command runs the ledger script; a duplicate ID it reports is settled
-  in the same walkthrough: the item of the branch that landed second
-  takes a new number by the allocation over the local branches, the
-  `changed` record "ID clash at merge", a thread's file renamed, the
-  citations corrected (POS.0220); outside a merge, after the rebase of a
-  save, `check-light` reports a duplicate as a finding with the fix in
-  one line (CHL.0580). Realises: POS.1760, POS.1770, POS.1490, POS.1110,
-  POS.1670, POS.0220. Choice: a command against raw git typed by the
-  user (CHL.0250): the merge stays git's, the conflicts are elicitation;
-  two directions and the source by where the branch lives against one
-  direction from the origin (CHL.0310); the cost is one more command and
-  one more script. Whether `/save` takes the same path is THR.0700. Not
-  built; deferred (DEC.0250, THR.0710). Where:
-  `.claude/skills/merge/SKILL.md`, `scripts/forge-merge.py`,
-  `scripts/forge-branch.py`, `CLAUDE.md` (Commands, Persistence).
+  refuses an unclean repository, one behind its origin or not on main,
+  where the project is a repository of its own; a project outside git
+  (SOL.0510) gets none of these: the dry run and `--apply` say that the
+  forge runs no git here and that the way back is the user's backup,
+  taken before `--apply`; `--undo` refuses there; step B takes the
+  ledger out of an index only where the forge's repository has one; a
+  run that stops midway is finished by running it again, the marks being
+  the memory; commits nothing. `--apply` and `--undo` are tested on the
+  fixture (SOL.0830), the migration outside git on the fixture without a
+  repository; a real project gets the dry run in place and then its one
+  `--apply`, never a clone (DEC.0240). Claude within `/migrate` judges
+  the origins of the threads from the script's print. `/pull` of the
+  engine says in Action required: `forge-pull` of the engine, `/setup`
+  for the registrations, then every project the clone keeps: one already
+  migrated elsewhere pulled by `/pull`, one not yet migrated run through
+  `/migrate` on that one clone and saved; whose machine or instance the
+  clone is makes no difference, every user of the engine migrates his
+  own projects (CHL.0540); the map, `check-project` and every writing
+  skill say "shape before the migration, run `/migrate`" on a project of
+  the old shape and do not write. Realises: POS.1740, POS.0940,
+  POS.0820. Choice: one script and one command against the hand
+  migration of POS.0940, since every clone must come out the same; marks
+  against an engine version in the project, which POS.0940 refuses.
+  Built 2026-10-19 in the first release (the cutover plan, R1.13, R1.19,
+  R1.23). Where: `scripts/forge-migrate.py`,
+  `.claude/skills/migrate/SKILL.md`, `.claude/skills/pull/SKILL.md`,
+  `.claude/skills/forge/SKILL.md`, `.claude/agents/check-project.md`,
+  `templates/ledger.md` (the archive's shape), `CLAUDE.md` (the Commands
+  table, Persistence). The tag before a migration is taken per project
+  immediately before its `/migrate` and the engine's before its own; the
+  way back from a tag is the principal's hand through git, a reset and a
+  forced push or a revert, on a protected main a maintainer's, and
+  always the engine and every project together, since the engine refuses
+  the old shape once released (CHL.0420).
 - **SOL.0830 The fixture.** `scripts/fixture.py` makes the test bed of
   the forge's own tests: a bare remote `tmp/fixture.git` and, through
   `forge-clone <url> <name>`, the target a second argument, two projects
@@ -1415,15 +1206,13 @@ boundary kept by hand or an order of work.
   every shape it can make as its own data, today's old shape first, and
   keeps the previous one whenever a release with a migration teaches it
   the next, so that a fixture of the shape of release N-1 is a command
-  on every clone of the engine and the one-release-back tolerance of the
-  driver (SOL.0750) and the conversion's step have a lasting bed; no tag
+  on every clone of the engine and a later migration has a lasting bed; no tag
   on the bare remote, which is gitignored and per machine (CHL.0610). A
   bare `/save` skips the fixture by name, `projects/fixture*`, today's
   `projects/fixture` and the script's `fixture-a` and `fixture-b` alike,
   since the project file that would carry a flag does not exist before
   the migration; `fixture: true` in their project file stays for the map
-  (CHL.0500). The three tests before the releases and the four of
-  the brief (POS.1750) run on it, and on it alone, as rounds of the forge by slug,
+  (CHL.0500). The tests of POS.1750 run on it, and on it alone, as rounds of the forge by slug,
   never as hand tests and never on a clone of a real project (DEC.0240),
   since the scripts are the only door to git and `forge_repos` visits
   only `projects/<slug>`. Realises: POS.1750, POS.1590, POS.0550.
@@ -1432,10 +1221,13 @@ boundary kept by hand or an order of work.
   `projects/`; the cost is one more script and two directories that are
   projects without being thought; the old shape carried by the script
   against the templates of the day: the templates die with the first
-  release. Not built; deferred (DEC.0250, THR.0710): until then the
+  release. Not built; let go with the deferred releases (DEC.0280): the
   fixture is one project `projects/fixture`, made by hand once from a
   bare remote in `tmp/` as a copy of a small real project in the old
-  shape, on which `--apply`, `--undo` and the test of `ours` run.
+  shape, on which `--apply`, the test of `ours` and the test of the step
+  of a conflict ran, the last with a second clone made by hand and
+  removed after it (R6.03); the bare remote's HEAD stands on `master`,
+  so a clone opens on the old branch and is switched to `main`.
   `fixture.py --no-git` makes `fixture-a` without a repository, for the
   migration and the ledger outside git (SOL.0800); until it is built, a
   copy of `projects/fixture` without its `.git`, made by hand once.
@@ -1443,6 +1235,39 @@ boundary kept by hand or an order of work.
   `scripts/fixture.py`, `scripts/forge-clone.py`, `templates/project.md`
   (the flag), `scripts/forge-save.py`.
 
+- **SOL.0840 The step of a conflict.** `forge-save` leaves a conflicting
+  rebase standing: the commit is made, the script prints the files in
+  conflict (`git diff --name-only --diff-filter=U`) and the step that
+  follows, and it refuses a repository with a rebase or a merge already
+  standing before it stages anything (`forge_repos.in_progress`, read
+  from git's own marks, `rebase-merge`, `rebase-apply`, `MERGE_HEAD`;
+  `forge_repos.conflicted`), so that conflict markers are never
+  committed; `forge-status` says "rebase in progress, N file(s) in
+  conflict". The step itself is the walkthrough
+  (`.claude/skills/walkthrough/SKILL.md`): Claude reads both sides
+  through the reading git the hook allows, one conflict one question,
+  the principal's verdict, Claude writing the chosen wording into the
+  file and a `changed` record into the history of the artefact, for a
+  record file both tails kept; the commands that finish it run on the
+  hook's ask (SOL.0520); `forge-save` then pushes the clean repository
+  that is ahead, a branch without an upstream counted against
+  `origin/<branch>` after a fetch or pushed as new. A version given
+  twice and an ID taken twice are settled as POS.1790 says, the ledger
+  script reporting both (SOL.0680). Realises: POS.1710, POS.1750,
+  POS.1790, POS.1560, POS.1770. Choice: the help in `/save` and the
+  hook's ask against `/merge` with a script of its own and the worktree
+  (REJ.0350, REJ.0360); against `forge-save --continue` alone, since the
+  ask also serves a merge the integrator makes by hand; against git
+  opened to Claude whole, which would leave the commit message, the
+  rebase before the push and the check before a save to text; no driver
+  and no `merge=union` for the record files (REJ.0340, REJ.0280). Built
+  2026-10-23 (the cutover plan, R6.01 to R6.03) and tested on the
+  fixture with a second clone: a conflict in a history and in an
+  artefact, two verdicts, `add` and `rebase --continue` on the ask,
+  pushed and pulled back. Where: `scripts/forge-save.py`,
+  `scripts/forge_repos.py`, `scripts/forge-status.py`, `scripts/hook-
+  git.py`, `.claude/skills/walkthrough/SKILL.md`,
+  `.claude/skills/save/SKILL.md`.
 ## Across the parts
 - **SOL.0600 One model.** The reviewer agents declare `model:
   inherit` explicitly. The session model is chosen in
@@ -1480,25 +1305,22 @@ boundary kept by hand or an order of work.
   visits, running git) for the five git scripts, `forge_tools.py` (a
   tool on PATH, resolving paths, the headless Claude Code run) for the
   three conversions, `docs_map.py` (the reader of the documentation map)
-  for the three documentation scripts; `forge_repos.py` also recognises
-  a working tree, whose `.git` is a file, and resolves `<slug>@<branch>`
-  (SOL.0770), and the five scripts of the brief `collaboration` share it
-  (SOL.0510). The two hooks are Python scripts too, started by
-  `python` from `.claude/settings.json`. Rewritten from PowerShell 7 on
-  2026-10-09, all nine at once, and tested that day against a fixture: a
-  local bare remote, an engine cloned from it, a project with a remote
-  and one without, 56 cases over every script and its refusals; the
-  `claude` engine of the conversions was not run. Realises: POS.0830.
-  Choice: Python against PowerShell 7, the principal's decision of
-  2026-10-02 on the feedback of the forge's users; `python` as the one
-  command name against `python3`, since Windows has only the first and a
-  Unix system gives it by an alias or a package, and the hook can name
-  one. Options in the Python spelling (`--tag`, `--engine`, `--recipe`,
-  `--reference`, `--template`, `--page-size`, `-o`) against the
-  PowerShell ones, since argparse is the convention of the language.
-  Portability is not verified: the set has not been run on Linux. Where:
-  `scripts/`.
-
+  for the three documentation scripts; `forge_repos.py` is shared by the
+  scripts of the brief `collaboration` too (SOL.0510). The two hooks are
+  Python scripts too, started by `python` from `.claude/settings.json`.
+  Rewritten from PowerShell 7 on 2026-10-09, all nine at once, and
+  tested that day against a fixture: a local bare remote, an engine
+  cloned from it, a project with a remote and one without, 56 cases over
+  every script and its refusals; the `claude` engine of the conversions
+  was not run. Realises: POS.0830. Choice: Python against PowerShell 7,
+  the principal's decision of 2026-10-02 on the feedback of the forge's
+  users; `python` as the one command name against `python3`, since
+  Windows has only the first and a Unix system gives it by an alias or a
+  package, and the hook can name one. Options in the Python spelling
+  (`--tag`, `--engine`, `--recipe`, `--reference`, `--template`,
+  `--page-size`, `-o`) against the PowerShell ones, since argparse is
+  the convention of the language. Portability is not verified: the set
+  has not been run on Linux. Where: `scripts/`.
 ## Open
 - **TBC.0010** (owner: principal) Mermaid diagrams in a Word file:
   rendering them to pictures needs `mermaid-cli`, a further
@@ -1514,33 +1336,11 @@ boundary kept by hand or an order of work.
 - **TBC.0030** (owner: principal) The independent challengers of
   POS.0800 are not built and have no part here. Closed by: their
   design when the principal takes them up. Blocks realisation: no.
-- **TBC.0050** (owner: principal) The tests of the merge on the fixture:
-  three before the releases, each run only after what it tests exists,
-  the attributes and the registration (`ours` under rebase before the
-  first; a stub driver under rebase before the second, for
-  `rebase.backend merge`, the reversal of ours and renormalize; the
-  ledger script run dry over every project of today and diffed against
-  the hand-kept ledger before the first) and the four of the brief
-  before the second release's own release, none after the first, which alone
-  carries no work of two people. Closed by: the tests run and their
-  result recorded in the cutover plan, in the cell that closes each
-  row. Blocks realisation: the three before the
-  releases block the release each precedes; a red one stops it, back to
-  the design (SOL.0530 for `ours`, SOL.0740 for the backend), this TBC
-  open. The dry run over a real project writes to `tmp/` through
-  `--out`, never over a tracked ledger, and passes when the output
-  differs from the hand-kept ledger only in Waiting made from the rule,
-  lines named as unrecognised and origins guessed, the old ledger's own
-  tables read as the archive for what the records do not yet carry
-  (CHL.0560); the four tests and the three run on the fixture
-  (SOL.0830) as rounds of the forge by slug.
-- **TBC.0060** (owner: Claude) The name of the conversion script and the
-  exact list of Markdown traps it guards (SOL.0710, THR.0690). Closed
-  by: the script written and proven on the engine. Blocks realisation:
-  the third release.
-- **TBC.0080** (owner: Claude) A tool that rewrites the commits of a
-  branch in flight with the conversion to one sentence per line applied
-  to every tree and rebases it onto the converted main, so that its
-  conflicts shrink to the real ones (SOL.0800, CHL.0270). Closed by: the
-  tool written and tried on a throwaway clone. Blocks realisation: no;
-  every branch is landed or given up before the conversion's release.
+
+- **TBC.0100** (owner: Claude) `forge-branch` creates a local branch
+  from the current state even when the origin has a branch of that name;
+  it should track `origin/<branch>` where it exists (found at R6.03,
+  2026-10-23, the second clone of the fixture opening on `master`).
+  Closed by: the script changed and tried on the fixture. Blocks
+  realisation: no; `forge-pull` brings the branch to the origin's and
+  `forge-save` sets the upstream at the push.

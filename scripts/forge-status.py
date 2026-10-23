@@ -11,10 +11,9 @@ WHAT IT DOES
     git actually reads, which /setup needs to know, and the
     registration of the merge drivers in it: "ok", or the keys that
     are missing (`merge.ours.driver`, `rebase.backend`,
-    `merge.renormalize`, as /setup registers them) and a registered
-    forge-records driver whose script does not exist - an unregistered
-    clone silently falls back to a conflict (SOL.0740 of the forge
-    solution design). Then, for the
+    `merge.renormalize`, as /setup registers them) - an unregistered
+    clone silently falls back to a conflict on the derived files
+    (SOL.0740 of the forge solution design). Then, for the
     engine and each projects/<slug>: unsaved changes (or "clean"), the
     branch it is on, the last commit, and the origin - or "no origin" /
     "not under git". Exists so that even reading git state goes through
@@ -88,14 +87,11 @@ def main(argv):
     files = fr.global_config_files()
     print("global git config: " + (", ".join(files) if files
                                    else "none yet - git creates ~/.gitconfig at its first write"))
-    missing, broken = fr.registration_state()
-    if not missing and not broken:
-        fr.say("registration:      ok - the merge drivers and the settings they need", "green")
-    if missing:
+    missing = fr.registration_state()
+    if not missing:
+        fr.say("registration:      ok - the merge driver ours and the settings it needs", "green")
+    else:
         fr.say("registration:      missing " + ", ".join(missing) + " - run /setup", "yellow")
-    if broken:
-        fr.say(f"registration:      the forge-records driver leads nowhere: {broken} - run /setup",
-               "yellow")
     print()
     show_repo("forge (engine)", fr.ENGINE_ROOT, a.remote)
     projects = fr.ENGINE_ROOT / "projects"

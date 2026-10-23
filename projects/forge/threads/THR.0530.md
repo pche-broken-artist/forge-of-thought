@@ -48,6 +48,17 @@ finding, which joins this thread from THR.0500 (closed 2026-10-22).
 Open as before: the wording of the directive and where it stands,
 and the order of what is rewritten next.
 
+State 2026-10-23: the trial of the light check as a program ran beside
+the agent at both saves of the day. Agreement on the bookkeeping of the
+plan and the specification (FND.2370, FND.2380) and on the comment of
+the thread files (FND.2390); the program alone raised the `closed`
+records with a `Was` from before the rule and the comment in the nine
+closed threads, which the agent exempted as immutable, and after the fix
+it still reads `the specification's former TBC.0090` as a citation, a
+string where the agent read history. Two clauses to teach the program
+before the decision of 2026-10-25: a closed thread is left alone, and an
+ID said as former or as history is not a citation.
+
 <!-- A thread (POS.1680), one file per thread in threads/; the header
 is its state: what it concerns, where it came from, whether it is
 open. The rules of a thread, its life and its closing:

@@ -25,8 +25,8 @@ speak whatever language the user speaks to you.
      - **Principal** — the role, whose thinking is being forged (the
        template's placeholder);
      - **Author** — the principal's handle, short, as it stands in
-       the author column of every history record he decides and as
-       the key of his ID block (SOL.0790).
+       the author column of every history record he decides
+       (templates/history.md).
    - Keep the template's format; the file is gitignored and never
      committed.
    - Close with the **git identity**, which is git's, per host
@@ -75,9 +75,7 @@ speak whatever language the user speaks to you.
      - and, offered apart, `[merge]` `conflictStyle = zdiff3`.
      Say in one sentence that these hold for every repository on the
      machine: the merge backend is git's own default, renormalize
-     only evens line endings at a merge. The key of the
-     `forge-records` driver arrives with the driver and is not
-     offered before. Declined: print the lines for the user to apply
+     only evens line endings at a merge. Declined: print the lines for the user to apply
      by hand. `forge-status` reports the registration afterwards, ok
      or the keys missing.
 2. **`.claude/settings.local.json`**.

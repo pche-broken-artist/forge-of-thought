@@ -127,15 +127,12 @@ def remote_state(path):
 
 # The registration /setup makes in the global git configuration, once
 # per machine (SOL.0740): the keys with the values they must carry.
-# `rerere.enabled` is a convenience and is never reported missing. The
-# driver's own key, `merge.forge-records.driver`, is checked only when
-# it is set, for a path that leads nowhere; it arrives with the driver.
+# `rerere.enabled` is a convenience and is never reported missing.
 REGISTRATION = (
     ("merge.ours.driver", "true"),
     ("rebase.backend", "merge"),
     ("merge.renormalize", "true"),
 )
-DRIVER_KEY = "merge.forge-records.driver"
 
 
 def _unquote(path):
@@ -177,21 +174,13 @@ def global_config_files():
 
 
 def registration_state():
-    """The registration of the merge drivers in the global git
-    configuration: (missing, broken) - the keys of REGISTRATION that
-    are absent or carry another value, and the registered command of
-    the forge-records driver when its script does not exist (None
-    otherwise). An unregistered clone silently falls back to a
-    conflict, so forge-status reports both (SOL.0740)."""
-    missing = [key for key, value in REGISTRATION
-               if git_out(["config", "--global", "--get", key], ENGINE_ROOT) != value]
-    driver = git_out(["config", "--global", "--get", DRIVER_KEY], ENGINE_ROOT)
-    broken = None
-    if driver:
-        script = next((t.strip("'\"") for t in driver.split() if t.endswith(".py")), None)
-        if script is None or not Path(script).is_file():
-            broken = driver
-    return missing, broken
+    """The registration of the merge driver `ours` and the settings it
+    needs in the global git configuration: the keys of REGISTRATION
+    that are absent or carry another value. An unregistered clone
+    silently falls back to a conflict on the derived files, so
+    forge-status reports it (SOL.0740)."""
+    return [key for key, value in REGISTRATION
+            if git_out(["config", "--global", "--get", key], ENGINE_ROOT) != value]
 
 
 def project_path(slug):

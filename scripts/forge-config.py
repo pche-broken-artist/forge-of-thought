@@ -35,8 +35,7 @@ WHAT IT DOES
     rebase.backend merge (the apply backend ignores drivers) and
     rerere.enabled true, a convenience. --zdiff3 adds
     merge.conflictStyle zdiff3. They hold for every repository the
-    configuration serves. The key of the forge-records driver arrives
-    with the driver and is not written here.
+    configuration serves.
 
     --guard: user.useConfigOnly true, so that a repository on a host
     with no identity stanza fails aloud instead of taking a default.
@@ -106,13 +105,11 @@ def show():
     files = fr.global_config_files()
     print("global git config: " + (files[0] if files
                                    else "none yet - git creates it at its first write"))
-    missing, broken = fr.registration_state()
-    if not missing and not broken:
+    missing = fr.registration_state()
+    if not missing:
         fr.say("registration:      ok", "green")
-    if missing:
+    else:
         fr.say("registration:      missing " + ", ".join(missing) + " - --register", "yellow")
-    if broken:
-        fr.say(f"registration:      the forge-records driver leads nowhere: {broken}", "yellow")
     guard = get("user.useConfigOnly")
     fr.say("guard:             " + ("user.useConfigOnly = true" if guard == "true"
                                     else "missing - --guard"),

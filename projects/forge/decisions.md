@@ -484,3 +484,30 @@ verdict on the whole ID, the rest a `changed` record of the history
   allocation over branches to come; the scheme stands on one number
   being one thing.
 - **Date:** 2026-10-19
+
+## DEC.0280 — The brief `collaboration` delivers its first release and a simplified second, the step of a conflict, the hook's ask and the rules of ID and version after a merge; the releases two to four of DEC.0220 are cancelled
+- **Decision:** The brief `collaboration` delivers what its first
+  release built (5.26, 2026-10-19) and a simplified second release:
+  `forge-save` leaves a conflicting rebase standing for the step of a
+  conflict, a walkthrough over both sides with the finishing commands
+  of git on the hook's ask; IDs stay sequential and a clash is settled
+  by detection and POS.0220; a version given twice is settled by
+  whoever merges; the record files merge as text, two tails kept both.
+  The second, third and fourth release of DEC.0220, the driver of
+  records, `/merge`, the worktree, the version as a landing, one
+  sentence per line and the blocks of IDs, are cancelled; this
+  supersedes DEC.0220 and DEC.0250 in what they say of them, and
+  DEC.0230, DEC.0240 and DEC.0260 stand for the first release as made.
+  The deferred rows of the cutover plan are dropped, R6.01 to R6.07
+  built in their place; the brief is redirected at 0.9.
+- **Reason:** The principal's word of 2026-10-23: the first release
+  removed the causes of the collisions that prompted the brief, the
+  ledger in git and the changing headers; what followed was a git
+  built over git, not the value of the forge, and not worth his
+  thinking; one person on one project is the norm, two the exception
+  handled with git, the forge itself an open-source repository with
+  one integrator. Two proposals laid side by side, Claude's and
+  `sources/collaboration-simplification-challenge.md`; `merge=union`,
+  which both wanted, not taken (REJ.0280). Tested on the fixture with
+  a second clone the same day (the cutover plan, R6.03).
+- **Date:** 2026-10-23

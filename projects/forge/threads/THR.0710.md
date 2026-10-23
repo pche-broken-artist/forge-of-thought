@@ -2,7 +2,7 @@
 id: THR.0710
 concerns: intent, solution-design
 origin: the principal
-status: open
+status: closed
 ---
 
 The form of the deferred
@@ -42,6 +42,13 @@ merging with `merge=union` on the histories tried on the fixture, and
 round (POS.0550, POS.1200, POS.1560, POS.1580, POS.1660, POS.1670,
 POS.1730, POS.1760, five REJ, DEC.0270) was shown and not written. Next:
 the principal's decision on the writing half, then that round.
+
+Closed 2026-10-23 by the principal's word: neither form. The deferred
+releases are let go (brief 0.9, DEC.0280); built in their place are the
+step of a conflict in `/save` and the hook's third answer, ask, for the
+few commands that finish it, the scripts staying the door of the routine
+(POS.0550, POS.1200, POS.1710); a second author of the engine comes by
+pull request and never writes into the integrator's clone (POS.1770).
 
 <!-- A thread (POS.1680), one file per thread in threads/; the header
 is its state: what it concerns, where it came from, whether it is

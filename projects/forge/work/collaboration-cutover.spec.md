@@ -28,10 +28,10 @@ the principal and Claude. Dead after the simplified second release
 (R6.07); it stays as it lies.
 
 ## Inputs
-- 40-solution-design.md: SOL.0670 to SOL.0830, each with its `Where` and its release mark; SOL.0300 and SOL.0330; SOL.0520 (the hook's ask, R6.01, R6.05); TBC.0020 (the clash reported at R1.09); SOL.0530 (the release, every release's run), SOL.0150 (the instance file, R1.14), SOL.0160 (the scaffold, R1.15), SOL.0420 and SOL.0460 (the publish and the documentation refusing the old shape, R1.20), SOL.0500 (the engine's own attributes, R1.07); TBC.0050, TBC.0060, TBC.0080
-- 10-intent.md: POS.1560 to POS.1770, POS.1120, POS.1140, POS.0220 (the renumbering at a clash, R2.14); POS.0550, POS.1200 (R6.04)
+- 40-solution-design.md: SOL.0670 to SOL.0830, each with its `Where` and its release mark; SOL.0300 and SOL.0330; SOL.0520 (the hook's ask, R6.01, R6.05); SOL.0840 and TBC.0100 (R6.05); TBC.0020 (the clash reported at R1.09); SOL.0530 (the release, every release's run), SOL.0150 (the instance file, R1.14), SOL.0160 (the scaffold, R1.15), SOL.0420 and SOL.0460 (the publish and the documentation refusing the old shape, R1.20), SOL.0500 (the engine's own attributes, R1.07); TBC.0050, TBC.0060, TBC.0080
+- 10-intent.md: POS.1560 to POS.1770, POS.1120, POS.1140, POS.0220 (the renumbering at a clash, R2.14); POS.0550, POS.1200, POS.1780, POS.1790 (R6.04)
 - threads/: THR.0620 (row 9), THR.0650, THR.0690, THR.0700, THR.0710 (the form of the deferred releases, open 2026-10-18 to 2026-10-23)
-- decisions.md: DEC.0210, DEC.0220, DEC.0230, DEC.0240, DEC.0250, DEC.0260
+- decisions.md: DEC.0210, DEC.0220, DEC.0230, DEC.0240, DEC.0250, DEC.0260, DEC.0280 (the simplified second release, R6.04)
 - 00-brief-collaboration.md, section M (the steps of a migration run); v0.9, Principle and Promise (the redirection of 2026-10-23)
 - sources/collaboration-simplification-challenge.md: the second of the two proposals of 2026-10-23, Claude's the first (the Method, Choices of 2026-10-23)
 - research/2026-10-17-mergeable-shared-records-in-git.md and research/2026-10-17-git-merge-drivers-and-their-limits.md: the evidence against `merge=union` (REJ.0280), which both proposals of 2026-10-23 had wanted and which stands

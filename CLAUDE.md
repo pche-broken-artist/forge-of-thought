@@ -258,7 +258,7 @@ POS.1320.
    the script's header's. Registration does not
    imply intake: a source's role is individual, noted as free-text
    Role in the resource index, asked before the entry is written
-   (POS.1670), and the principal alone directs how and when each
+   (POS.1040), and the principal alone directs how and when each
    source is used. A set of related files
    (e.g. a downloaded site with its index) lives as a subdirectory
    `sources/<slug>/` and counts as one source with one ledger entry;
@@ -537,18 +537,25 @@ through `scripts/forge-config.py`, and `forge-status` says when the
 registration is
 missing, since an unregistered clone silently falls back to a
 conflict (SOL.0740). A project "not under git" is a
-property, not a defect. The scripts in `scripts/` are the only door
-to a write of git; reading git directly is open, the line between
-the two held for Claude by the hook `scripts/hook-git.py` of
+property, not a defect. The scripts in `scripts/` are the door to a
+write of git; reading git directly is open; the line between the
+two is held for Claude by the hook `scripts/hook-git.py` of
 `.claude/settings.json`, which denies every write and names the
-script to use (POS.1200); how many scripts there are is not a
-rule. The scripts that serve the engine and every project repository, each
+script to use, but for the few commands that finish the step of a
+conflict, which it puts to the principal and runs on his yes
+(POS.1200, POS.1710); how many scripts there are is not a rule. The scripts that serve the engine and every project repository, each
 described in full by its own help header: `forge-save.py` commits and
 pushes, `forge-pull.py` fast-forwards from the remotes (on the engine
 the upgrade channel), `forge-status.py` reports state without
 changing anything, `forge-clone.py` brings an existing project in
 (`/import-project` is its door), `forge-branch.py` switches or
-creates a branch — merging is git's, by hand or by merge request. The
+creates a branch — merging is git's, by hand or by merge request. A
+conflict `forge-save` meets is left standing, not aborted, and
+settled in the step of a conflict: Claude lays both sides out as a
+walkthrough, the principal decides, Claude writes the wording, and
+the finishing commands of git run on the hook's ask; what the forge
+promises two people on one project is POS.1750's, and the record
+files merge as text, two tails kept both. The
 way into git for a project is `git -C projects/<slug> init -b main`,
 then a remote if wanted. The scripts carry no URL and no identity.
 Which release receives the tag `v<major>` is `/release`'s to say

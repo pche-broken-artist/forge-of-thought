@@ -2,7 +2,7 @@
 id: THR.0690
 concerns: intent, solution-design
 origin: 00-brief-collaboration.md
-status: open
+status: closed
 ---
 
 The conversion to one sentence
@@ -20,6 +20,12 @@ cut into files in the first release (5.26) and are converted with
 everything else. The rows are R5.01 to R5.09 of the cutover plan;
 the script's name and its list of Markdown traps TBC.0060, the
 rewrite of a branch in flight TBC.0080.
+
+Closed 2026-10-23: the conversion let go with the deferred releases of
+the brief `collaboration` (brief 0.9, DEC.0280, REJ.0380), a destructive
+change of every line of every project for a gain in diffs the hard wrap
+serves well enough, and no part of collaboration; TBC.0060 and TBC.0080
+removed with it.
 
 <!-- A thread (POS.1680), one file per thread in threads/; the header
 is its state: what it concerns, where it came from, whether it is
