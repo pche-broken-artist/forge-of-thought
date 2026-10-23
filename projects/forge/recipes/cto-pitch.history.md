@@ -18,7 +18,11 @@ always last, paragraphs in it divided by `<br>`; a thread that
 closes gets a `closed` record, no `Was` (the rules of a thread:
 `.claude/skills/forge/states/intent.md`, Threads and files). At the birth of a
 document, one record of the file and one naming every item born
-with it. Lines are not wrapped.
+with it. Lines are not wrapped. The author is the handle the
+instance file gives its principal (CLAUDE.md, Versioning & status);
+where it gives none, a write that would append a record stops before
+it writes and offers `/setup`, which adds the line (POS.1050); the
+handle is never guessed.
 A record of state only carries the current version and does not
 raise it (POS.1630). Its shapes: the mining of a brief, in the
 intent's history with the brief's file as subject,

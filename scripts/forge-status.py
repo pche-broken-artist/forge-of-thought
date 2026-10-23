@@ -16,7 +16,9 @@ WHAT IT DOES
     (SOL.0740 of the forge solution design). Then, for the
     engine and each projects/<slug>: unsaved changes (or "clean"), the
     branch it is on, the last commit, and the origin - or "no origin" /
-    "not under git". Exists so that even reading git state goes through
+    "not under git", and a user.name or user.email set in the
+    repository itself, which wins over the per-host stanza and which
+    the forge never sets (POS.0950, SOL.0550). Exists so that even reading git state goes through
     the scripts (CLAUDE.md, Persistence).
 
     With --remote it also fetches each repository's origin and reports
@@ -66,6 +68,11 @@ def show_repo(name, path, remote=False):
     print("   last commit: " + (last or "none yet"))
     origin = fr.git_out(["remote", "get-url", "origin"], path)
     print("   origin:      " + (origin or "no origin"))
+    name = fr.git_out(["config", "--local", "--get", "user.name"], path)
+    email = fr.git_out(["config", "--local", "--get", "user.email"], path)
+    if name or email:
+        fr.say(f"   identity:    {name} <{email}> - set in this repository, "
+               "wins over the per-host stanza", "yellow")
     if remote and origin:
         state = fr.remote_state(path)
         colour = "green" if state == "up to date" else "yellow"

@@ -2,7 +2,7 @@
 id: THR.0720
 concerns: intent, solution-design
 origin: the principal
-status: open
+status: closed
 ---
 
 The global git configuration moves with HOME, and the forge must not
@@ -88,6 +88,13 @@ State 2026-10-23: open. The round done for the setup skill, POS.1050,
 SOL.0150 and SOL.0740 (FND.2260). Left: the report of a
 repository-local identity, not built, and the verdict on the Author
 line.
+
+State 2026-10-23: closed. The Author line confirmed by the principal,
+the template's example made neutral ("JDo") and a missing handle
+made a stop before a record is written (templates/history.md); the
+repository-local identity reported by forge-status as a fact
+(SOL.0550), shown at once on the fixture, whose origin is a local
+path no stanza serves.
 
 <!-- A thread (POS.1680), one file per thread in threads/; the header
 is its state: what it concerns, where it came from, whether it is

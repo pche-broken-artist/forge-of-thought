@@ -18,7 +18,11 @@ always last, paragraphs in it divided by `<br>`; a thread that
 closes gets a `closed` record, no `Was` (the rules of a thread:
 `.claude/skills/forge/states/intent.md`, Threads and files). At the birth of a
 document, one record of the file and one naming every item born
-with it. Lines are not wrapped.
+with it. Lines are not wrapped. The author is the handle the
+instance file gives its principal (CLAUDE.md, Versioning & status);
+where it gives none, a write that would append a record stops before
+it writes and offers `/setup`, which adds the line (POS.1050); the
+handle is never guessed.
 A record of state only carries the current version and does not
 raise it (POS.1630). Its shapes: the mining of a brief, in the
 intent's history with the brief's file as subject,
@@ -573,3 +577,6 @@ word `<file> | changed | state: by hand`.
 - 2026-10-23 | 5.34 | PCHe | FND.2490 | closed | step 4 of the save skill goes on with the step of a conflict when forge-save leaves a rebase standing, and reports the refusal of a standing rebase or merge (the engine check of 2026-10-23).
 - 2026-10-23 | 5.34 | PCHe | FND.2500 | closed | the merge driver ours in the singular in CLAUDE.md, the setup skill, forge-config, forge-status, forge_repos and SOL.0150; the heading of check-project's first clause made Kind, its repository clause gone in this round (the engine check of 2026-10-23).
 - 2026-10-23 | 5.34 | PCHe | FND.2510 | closed | Date 2026-10-13 from the ingest and Form text in the sources index entry of the library bundle fork-brd, the date from its Origin (the light check of 2026-10-23, the immediate fix taken).
+- 2026-10-23 | 5.34 | PCHe | the operating layer | changed | THR.0720: forge-status reports a repository-local identity; templates/CLAUDE.local.md gives a neutral handle as its example in place of the principal's own; templates/history.md stops a write that finds no handle and offers /setup (POS.0950, POS.1050).
+- 2026-10-23 | 5.34 | PCHe | THR.0720 | closed | The global configuration through forge-config without a path (5.32, FND.2260), the local identity reported, the Author line confirmed and its absence made a stop.
+- 2026-10-23 | 5.34 | PCHe | FND.2520 | closed | the comment of the 16 history companions of the project brought to templates/history.md as it stands, the records untouched (the light check of 2026-10-23, the immediate fix taken).

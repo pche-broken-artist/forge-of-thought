@@ -1,5 +1,5 @@
 ---
-version: 0.42
+version: 0.43
 status: draft
 project: forge
 audience: whoever realises the solution, a person or an agent
@@ -1084,7 +1084,8 @@ boundary kept by hand or an order of work.
   and no global `user.name`/`user.email`; a surviving global
   identity defeats the guard, and `/setup` says so. Where one host
   serves two roles the user sets a local `git config user.*` of his
-  own, which git lets win over the include.
+  own, which git lets win over the include; `forge-status` reports a
+  repository-local identity as a fact, never as a defect (THR.0720).
   Realises: POS.0950, POS.1050. Choice: git's per-host includes
   against an identity kept by the forge; the cost is the two-roles
   case POS.0950 accepts. Reversed 2026-09-16: the identity had been
@@ -1092,9 +1093,10 @@ boundary kept by hand or an order of work.
   proposed by the command layer from a roster in
   `identities.local.md`, and the per-host include had been rejected
   because a host is only a correlate of the identity and fails where
-  one host serves two roles. Where: `.claude/skills/setup/SKILL.md`;
-  outside the engine, the user's global git configuration file,
-  named by `scripts/forge-status.py`.
+  one host serves two roles. Where: `.claude/skills/setup/SKILL.md`,
+  `scripts/forge-status.py` (the local identity); outside the engine,
+  the user's global git configuration file, named by
+  `scripts/forge-status.py`.
 - **SOL.0730 The ways and the attributes.** `templates/gitattributes`,
   copied by `/new-project` into a project's `.gitattributes`:
   `text=auto`; `merge=ours` on `renders/**`, `README.md`, `RELEASE-
