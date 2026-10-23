@@ -2,7 +2,7 @@
 project: forge
 purpose: readme
 audience: humans arriving at the repository
-version: 0.70
+version: 0.71
 output: /README.md
 ---
 
@@ -19,11 +19,7 @@ summarising the newest row. -->
 - CLAUDE.md
 - projects/forge/10-intent.md
 - .claude/skills/forge/states/   # the definitions of the artefacts:
-                                 # the built nodes and the solid
-                                 # arrows of the chain picture, and
-                                 # one line each below it
-- projects/forge/recipes/        # the engine's own recipes: the
-                                 # render nodes of the picture
+                                 # one line each in the chain picture
 - docs/README.md                 # the documentation index: its
                                  # version line, the three paths and
                                  # the contents
@@ -207,31 +203,39 @@ summarising the newest row. -->
   `docs/start/first-result.md`.
 - Section 6 is "The document chain in one picture". It carries the
   star, never a line: it must make visible at first glance that the
-  chain branches richly. Nothing in the picture is drawn by hand; it
-  is derived from the files in this run, a `flowchart LR` mermaid
-  block with three kinds of node:
-  - the artefacts the forge has, one node per definition file in
-    `.claude/skills/forge/states/`, labelled by the file name the
-    definition's Target names (`00-brief`, `10-intent`, …), ordered
-    by their file numbers; a solid arrow from every parent the
-    definition's Inputs block names to the node, a parent being an
-    artefact of the chain (a definition that takes "the assignment or
-    the intent" draws both arrows); class `built`;
-  - the growth the forge intent foresees, one dashed node per layer
-    its position on the growth path (POS.0700) names as intended or
-    possible, labelled by the layer's name, a dashed arrow from the
-    artefact it would follow as the position says, and nothing the
-    position does not name; class `future`;
-  - the renders, one green stadium node per artefact that the
-    engine's own recipes in `projects/forge/recipes/` render from
-    mainly, labelled "renders: " and the recipes' purposes in a few
-    words, a solid arrow from that artefact; class `render`.
-  The three classes, fixed: `classDef built fill:#1f6feb,stroke:#1158c7,color:#ffffff`,
-  `classDef future fill:#c6dbfa,stroke:#1f6feb,color:#24292f`,
-  `classDef render fill:#2da44e,stroke:#1a7f37,color:#ffffff`.
-  Directly under it one bold legend line: blue = chain artefacts the
-  forge has, light blue dashed = growth the intent foresees and
-  nothing built, green = renders. Below the legend: one line per
+  chain branches richly. It is this mermaid block, pinned verbatim
+  (solid arrows = built today, dashed = illustrative growth):
+
+  ```mermaid
+  flowchart LR
+      B["00-brief"] --> I["10-intent"]
+      I --> A["20-assignment"]
+      I --> SD["40-solution-design"]
+      A --> SD
+      I --> RI(["renders: pitch, deck, summary …"])
+      A --> RA(["renders: mail …"])
+      A --> BRD["30-brd"]
+      BRD --> SD
+      A -.-> RFP["an RFP"]
+      I -.-> ART["an article"]
+      ART -.-> RT(["render: a translation"])
+      I -.-> ST["strategy"]
+      SD -.-> IMP["implementation deck"]
+
+      classDef built fill:#1f6feb,stroke:#1158c7,color:#ffffff
+      classDef future fill:#c6dbfa,stroke:#1f6feb,color:#24292f
+      classDef render fill:#2da44e,stroke:#1a7f37,color:#ffffff
+      class B,I,A,BRD,SD built
+      class RFP,ART,ST,IMP future
+      class RI,RA,RT render
+  ```
+
+  Directly under it one bold legend line: blue = chain artefacts
+  (light = not built yet), green = renders; dashed arrows = growth
+  that does not exist yet. The dashed layers are a fixed illustrative
+  set of this recipe (an RFP, an article with its translation render,
+  strategy, an implementation deck), never
+  presented as planned or existing. Below the legend: one line per
   artefact the forge has, one per definition in
   `.claude/skills/forge/states/`, in the order of their file numbers,
   the name in bold and one sentence from the definition's
@@ -409,8 +413,7 @@ one sentence on projects/forge, the forge's own project a user never
 opens; the first sitting is docs/start/first-result.md>
 
 ## 6. The document chain in one picture
-<the star chain diagram (mermaid) derived from the definitions, the
-intent's growth path and the engine's recipes, with its legend line; one
+<the pinned star chain diagram (mermaid) with its legend line; one
 line per artefact from the definitions, each linked to its docs
 page; the one sentence on layers taken as needed; the
 render-never-hand-edited callout>
