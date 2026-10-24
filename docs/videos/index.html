@@ -34,6 +34,26 @@ function forgeVideo(d){ window.FORGE.push(d); }
 <script src="07-history-threads.en.html-player.js"></script>
 <script src="08-new-artefact.cs.html-player.js"></script>
 <script src="08-new-artefact.en.html-player.js"></script>
+<script src="12-brd.cs.html-player.js"></script>
+<script src="12-brd.en.html-player.js"></script>
+<script src="13-deep-research.cs.html-player.js"></script>
+<script src="13-deep-research.en.html-player.js"></script>
+<script src="s01-git-wall.cs.html-player.js"></script>
+<script src="s01-git-wall.en.html-player.js"></script>
+<script src="s02-consent.cs.html-player.js"></script>
+<script src="s02-consent.en.html-player.js"></script>
+<script src="s03-mistake-to-rule.cs.html-player.js"></script>
+<script src="s03-mistake-to-rule.en.html-player.js"></script>
+<script src="s04-research-plan.cs.html-player.js"></script>
+<script src="s04-research-plan.en.html-player.js"></script>
+<script src="s05-elicitation.cs.html-player.js"></script>
+<script src="s05-elicitation.en.html-player.js"></script>
+<script src="s06-handing-over.cs.html-player.js"></script>
+<script src="s06-handing-over.en.html-player.js"></script>
+<script src="s07-reviewers.cs.html-player.js"></script>
+<script src="s07-reviewers.en.html-player.js"></script>
+<script src="s08-github.cs.html-player.js"></script>
+<script src="s08-github.en.html-player.js"></script>
 <style>
 :root{--bg:#0c0c0c;--fg:#ccc;--dim:#767676;--box:#5a5a5a;--green:#13a10e;--tab:#1f1f1f;--cap:#161616;--acc:#e0a85c;--ui:#222;--fs:18px;--cs:21px;--card:21px;--cardh:34px}
 *{box-sizing:border-box}
@@ -108,7 +128,7 @@ body{margin:0;background:#000;color:var(--fg);font-family:"Segoe UI",system-ui,s
 </div>
 <script>
 // The list of html-player files in this folder, written by scripts/md2video.py.
-const FILES = ["01-brief-elicitation.cs.html-player.js", "01-brief-elicitation.en.html-player.js", "02-walkthrough.cs.html-player.js", "02-walkthrough.en.html-player.js", "03-brief-to-intent.cs.html-player.js", "03-brief-to-intent.en.html-player.js", "04-critique.cs.html-player.js", "04-critique.en.html-player.js", "05-check-at-save.cs.html-player.js", "05-check-at-save.en.html-player.js", "06-challenger.cs.html-player.js", "06-challenger.en.html-player.js", "07-history-threads.cs.html-player.js", "07-history-threads.en.html-player.js", "08-new-artefact.cs.html-player.js", "08-new-artefact.en.html-player.js"];
+const FILES = ["01-brief-elicitation.cs.html-player.js", "01-brief-elicitation.en.html-player.js", "02-walkthrough.cs.html-player.js", "02-walkthrough.en.html-player.js", "03-brief-to-intent.cs.html-player.js", "03-brief-to-intent.en.html-player.js", "04-critique.cs.html-player.js", "04-critique.en.html-player.js", "05-check-at-save.cs.html-player.js", "05-check-at-save.en.html-player.js", "06-challenger.cs.html-player.js", "06-challenger.en.html-player.js", "07-history-threads.cs.html-player.js", "07-history-threads.en.html-player.js", "08-new-artefact.cs.html-player.js", "08-new-artefact.en.html-player.js", "12-brd.cs.html-player.js", "12-brd.en.html-player.js", "13-deep-research.cs.html-player.js", "13-deep-research.en.html-player.js", "s01-git-wall.cs.html-player.js", "s01-git-wall.en.html-player.js", "s02-consent.cs.html-player.js", "s02-consent.en.html-player.js", "s03-mistake-to-rule.cs.html-player.js", "s03-mistake-to-rule.en.html-player.js", "s04-research-plan.cs.html-player.js", "s04-research-plan.en.html-player.js", "s05-elicitation.cs.html-player.js", "s05-elicitation.en.html-player.js", "s06-handing-over.cs.html-player.js", "s06-handing-over.en.html-player.js", "s07-reviewers.cs.html-player.js", "s07-reviewers.en.html-player.js", "s08-github.cs.html-player.js", "s08-github.en.html-player.js"];
 const DEFAULT_LANG = 'en';
 const SPIN = ['✻','✢','✳','✶'];
 const $ = id => document.getElementById(id);
