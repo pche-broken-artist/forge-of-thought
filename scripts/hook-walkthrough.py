@@ -12,7 +12,9 @@ WHAT IT DOES
     the skill that holds the full shape. Since 2026-09-20 it also
     prints three lines of conduct: use the forge's scripts, explain
     and ask before running a command of one's own, and change nothing
-    that was not agreed and approved (THR.0400 of the forge intent; the
+    that was not agreed and approved, and since 2026-10-24 that every
+    step needing consent is a proposition closed by the verdict line, a
+    yes with a question in it being `q` (POS.0850; THR.0400 of the forge intent; the
     git half of the gate that enforces them is scripts/hook-git.py,
     the rest the thread's open matter).
     It reads nothing, writes nothing, takes no arguments, and is
@@ -35,7 +37,9 @@ LINES = [
     "Own commands: before running anything of your own that is not plain reading, say what it does "
     "and why, and wait for the principal's yes.",
     "Consent: write, run and change nothing that was not agreed and approved. "
-    "A yes covers exactly what was asked, never its consequences.",
+    "A yes covers exactly what was asked, never its consequences. "
+    "Every step that needs consent (a write, a run, a commit, a change of a setting) is a proposition "
+    "and ends with the verdict line; a yes that carries a question is q.",
 ]
 
 if __name__ == "__main__":

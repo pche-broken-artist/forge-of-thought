@@ -1,20 +1,28 @@
 ---
 description: Research a topic from a plan the principal confirms first, on two model families, into a bundle of notes with a synthesis
-argument-hint: "[--quick | --deep] <topic> [project-slug]"
+argument-hint: "[--quick | --deep [--engine <name>]] <topic> [project-slug]"
 ---
 
 Research $ARGUMENTS — the last token is the project slug if it names
 a directory under `projects/`, a first token `--quick` or `--deep` is
 the depth the principal wants, the rest is the topic. Two depths, one
-command: `--deep` is the whole course below, a plan of several cards,
-the second engine's review of it, two engines on every card, a bundle
-with a synthesis; `--quick` is one card on the session model alone,
-shown in one message with the verdict line before anything is
-searched, no plan review, no second engine, no synthesis, the note
-filed as a single note; the card before the search, the note's shape
-and the citation check (step 6) hold for both. Without the word,
-Claude proposes the depth in step 2 with its reason, and the
-principal decides. Purpose:
+command: `--deep` is the whole course below on the session model, a
+plan of several cards, a bundle with a synthesis; `--deep --engine
+<name>` adds a second engine beside it, which reviews the draft plan
+(step 3) and takes every card (step 5), `<name>` a row of the engine
+table of `scripts/forge-engine.py` (`antigravity` today), the option
+repeatable for a third engine, the forge naming engines and never
+models; `--quick` is one card on the session model alone, shown in
+one message with the verdict line before anything is searched, no
+plan review, no second engine, no synthesis, the note filed as a
+single note, and it takes no `--engine`; the card before the search,
+the note's shape and the citation check (step 6) hold for both.
+Without the word, Claude proposes the depth in step 2 with its
+reason, and the principal decides. An engine named but unusable (not
+on PATH, no login, quota spent, an envelope that cannot be read) is
+said in one sentence with the script's reason, the research goes on
+as without `--engine`, and the Deviations of the bundle record it:
+never silently, never a question in the middle of the run. Purpose:
 inspiration and grounding for the principal's artefacts; he does not
 want to reinvent what the world has already solved (POS.0050). The
 quality of a research is made by its plan, not by the searching: the
@@ -68,7 +76,8 @@ when asked.
    overrides it. A quick research skips steps 3 and 7 and runs step 5
    on the session model only.
 
-3. **The second engine reads the draft.** Make the run folder
+3. **The second engine reads the draft** (only with `--engine`;
+   without it, go to step 4). Make the run folder
    `tmp/research/YYYY-MM-DD-<topic>/` and in it
    `plan-review/packet.md`: the draft plan whole and the question
    "what does this plan miss, what does it assume about where the
@@ -100,20 +109,35 @@ when asked.
    `templates/research.md`, verbatim; the list of the attached
    notes; the sentence that the agent writes no file and returns the
    whole note as its final message. Nothing of the conversation
-   reaches a packet. Then, in parallel and with the model and the
-   size said first:
+   reaches a packet, and no packet names a path of the bundle or of
+   another engine's note: the bundle is named by its directory name
+   alone. Then, in parallel and with the model and the size said
+   first:
    - the session model: one isolated subagent per card
      (`general-purpose`, web access), its prompt the packet's text
      and the path of its folder; the agents never speak to each
      other;
-   - the second engine: per card
-     `python scripts/forge-engine.py antigravity --packet tmp/research/<run>/<card> --out research/YYYY-MM-DD-<topic>/<card>.antigravity.md --allow-all --sandbox`,
+   - the second engine, only with `--engine`: per card
+     `python scripts/forge-engine.py <name> --packet tmp/research/<run>/<card> --out research/YYYY-MM-DD-<topic>/<card>.<name>.md --allow-all --sandbox`,
      the script's header saying what it does with the envelope, the
-     workspace and the tree.
+     profile and the tree; a run that fails is said with the
+     script's reason and the card goes on with the session model's
+     note alone, the Deviations recording it.
    A session agent's return is written by Claude to
-   `<card>.claude.md` with the template's header filled (`engine:
-   claude`, `model` the session model, `usage: —`, `run` the packet
-   folder).
+   `tmp/research/<run>/hold/<card>.claude.md` (a folder the other
+   engine's profile denies, `scripts/forge-engine.py`, header 2a)
+   with the template's header
+   filled (`engine: claude`, `model` the session model, `usage: —`,
+   `run` the packet folder), and moves into the bundle as
+   `<card>.claude.md` only when the second engine's note of that card
+   has returned or the principal has closed the card single-engine:
+   an engine with its tools allowed reads any path on the disk that
+   its profile does not deny (the probe of 2026-10-24,
+   `scripts/forge-engine.py`, header 2a), so the independence of the
+   two engines is kept by the profile's deny rules and the order of
+   filing, never by the place of the run. A second-engine run made after the
+   first engine's note is filed is allowed, and its independence is
+   then shown by the measure of step 6 alone.
 
 6. **Check before filing.** Every note against the template's
    shape: a finding resting on a snippet or a summarised fetch alone
@@ -136,6 +160,14 @@ when asked.
    filed as it is, and the synthesis names every finding that rests
    on a failed citation as without support. An unverifiable URL
    (403, a timeout) is said so and never counted as a failure.
+   Then the independence of the engines, card by card:
+   `python scripts/forge-cite.py --independence <bundle>` counts the
+   URLs the two notes share and the sentences they have in common; a
+   note that shares most of its sources or its sentences with the
+   other engine's was written from it, not from the web (the run of
+   2026-10-24: four of six), and goes back to its agent once the other
+   note is out of its reach, or is said in the synthesis to be no
+   second voice.
 
 7. **Synthesis**, by Claude in the session, from the notes alone,
    when every note has returned: the Synthesis section of
@@ -144,7 +176,8 @@ when asked.
    found and where it was looked; the stop rule met or why searching
    ended; what the disconfirming query found); the engines' answers
    side by side with the engine named, agreement reported as
-   consistency and never validation, the differences spelled out;
+   consistency and never validation, the differences spelled out,
+   the measure of independence of step 6 stated per card;
    the Unexpected sections gathered and sorted, shown before any
    judgement; what was not found; Claude's own view last and apart
    (POS.1370). `status: immutable`. A second round only for gaps

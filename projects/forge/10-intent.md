@@ -1,5 +1,5 @@
 ---
-version: 5.35
+version: 5.36
 status: draft
 project: forge
 audience: principal + Claude only
@@ -123,8 +123,15 @@ position that already stands elsewhere.
   what `accept` writes. The principal may answer the line with a single
   letter when that letter is his whole message; no other word of the
   forge has a letter, so that nothing which writes or saves can be set
-  off by a slip, and `question` writes nothing. Decided 2026-09-27,
-  `question` added 2026-10-13. Verdicts are carried in the conversation and written once
+  off by a slip, and `question` writes nothing. The line closes every
+  step that needs the principal's consent outside a walkthrough as
+  well (a write, a run, a commit, a change of a setting; Step by step
+  in CLAUDE.md), and a message that says yes and asks a question is
+  `question`: a free question such as "shall I run it?" let a yes with
+  a question in it be read as consent on 2026-10-24, and three files
+  were written on it. Decided 2026-09-27,
+  `question` added 2026-10-13, the steps outside a walkthrough
+  2026-10-24. Verdicts are carried in the conversation and written once
   at the round's end (POS.0190). Whatever produces a list ends by
   offering a walkthrough — `/critique`, `/challenge`, the `/forge` map,
   a comparison made on request — and the principal may call for one at

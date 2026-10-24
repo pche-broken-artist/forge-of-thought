@@ -18,13 +18,37 @@ WHAT IT DOES
        context of the run (the card, the agent's brief, the note's
        shape, the attached notes), composed by the command from the
        forge's own definition (.claude/skills/research/SKILL.md). The
-       engine is given THAT folder as its workspace and runs in it;
-       never the forge root, whose hooks and instance file an engine
-       must not see or execute.
-    3. Records a fingerprint of every file in the packet folder, runs
-       the engine once, non-interactively, stdin closed, with its JSON
-       envelope asked for and a time limit set, and compares the
-       folder afterwards: a run that changed or added anything in it is
+       engine is given THAT folder as its workspace and runs in it,
+       under the project's tmp/ so that the run stays traceable; never
+       the forge root, whose hooks and instance file an engine must
+       not see or execute.
+    2a. The lock. The place alone locks nothing: with every tool
+       allowed (--allow-all, the only way a headless run reads at all
+       in an untrusted folder) the engine reads any path on the disk
+       (the probe of 2026-10-24: CLAUDE.md four levels up and a sibling
+       packet, read without a question; the sandbox restrains the
+       terminal, not the reading), and the engine reads permission
+       rules from its user-level settings file alone, which the forge
+       never writes. So the script gives the engine a PROFILE OF ITS
+       OWN for the run: <run>/.home/.gemini/antigravity-cli/
+       settings.json, a copy of the user's settings with `permissions`
+       added - allow `read_url(*)`; deny `command(*)`, `write_file(*)`
+       and `read_file(<path>)` for every entry of the engine root but
+       tmp/ and for <run>/hold/ (where the first engine's notes wait),
+       the paths computed from where this script lies - and starts
+       the engine with HOME and USERPROFILE pointing at that profile.
+       Verified 2026-10-24: a deny rule holds under --allow-all
+       ("Matches user-configured deny rule"), the shell is refused,
+       the engine's own web tools work, and the login is found. The
+       profile stays in the run folder as its record; the user's
+       global settings are not touched. Independence of the engines
+       is still shown at the synthesis (forge-cite --independence).
+       --no-profile runs without it, for a trial of the engine alone.
+    3. Records a fingerprint of every file in the packet folder, the
+       envelopes and logs of earlier runs left out, runs the engine
+       once, non-interactively, stdin closed, with its JSON envelope
+       asked for and a time limit set, and compares the folder
+       afterwards: a run that changed or added anything in it is
        refused and nothing is filed - read-only is verified, never
        trusted.
     4. Reads the envelope: `status` must say success and `response`
@@ -59,6 +83,8 @@ FLAGS
                   What a headless run does without it is untested
                   (brief research, Later).
     --sandbox     passes the engine's sandbox flag where it has one.
+    --no-profile  runs the engine under the user's own settings, no
+                  per-run profile (step 2a): a trial, never a research.
     --schema      a JSON schema file the engine must shape its final
                   answer by; off by default, the note's shape being in
                   the packet.
@@ -79,6 +105,7 @@ EXAMPLES
 import argparse
 import hashlib
 import json
+import os
 import re
 import subprocess
 import sys
@@ -113,9 +140,15 @@ def version_of(exe, args):
 
 
 def fingerprint(folder):
-    """{relative path: sha256} of every file under the folder."""
+    """{relative path: sha256} of every file under the folder, the
+    envelopes and logs of earlier runs left out (they are the caller's
+    record beside the packet, not the packet)."""
     fp = {}
     for f in sorted(p for p in folder.rglob("*") if p.is_file()):
+        if f.name.startswith(("envelope", "run")) and f.suffix in (".json", ".log"):
+            continue
+        if ".home" in f.parts:
+            continue
         fp[str(f.relative_to(folder))] = hashlib.sha256(f.read_bytes()).hexdigest()
     return fp
 
@@ -166,6 +199,33 @@ def read_envelope_antigravity(text):
 COMMANDS = {"antigravity": (command_antigravity, read_envelope_antigravity)}
 
 
+def profile_for(packet):
+    """The per-run profile (header, step 2a): <run>/.home with the
+    engine's settings file carrying the permission rules. Returns the
+    environment to start the engine with."""
+    engine_root = Path(__file__).resolve().parents[1]
+    run = packet.parent
+    home = run / ".home"
+    cfg_dir = home / ".gemini" / "antigravity-cli"
+    cfg_dir.mkdir(parents=True, exist_ok=True)
+    user_cfg = Path(os.path.expanduser("~")) / ".gemini" / "antigravity-cli" / "settings.json"
+    settings = {}
+    if user_cfg.is_file():
+        try:
+            settings = json.loads(user_cfg.read_text(encoding="utf-8"))
+        except json.JSONDecodeError:
+            settings = {}
+    posix = lambda p: str(p).replace("\\", "/")
+    deny = [f"read_file({posix(c)})" for c in sorted(engine_root.iterdir()) if c.name != "tmp"]
+    deny += [f"read_file({posix(run / 'hold')})", "command(*)", "write_file(*)"]
+    settings["permissions"] = {"allow": ["read_url(*)"], "deny": deny}
+    (cfg_dir / "settings.json").write_text(json.dumps(settings, indent=2, ensure_ascii=False) + "\n", encoding="utf-8")
+    env = dict(os.environ)
+    env["HOME"] = str(home)
+    env["USERPROFILE"] = str(home)
+    return env, home
+
+
 def relative_or_absolute(path):
     """The path relative to the working directory where it lies under
     it (as written in a note's `run`), else absolute (Python 3.8 has no
@@ -202,6 +262,7 @@ def main():
     ap.add_argument("--allow-all", action="store_true", help="approve every tool call of the engine")
     ap.add_argument("--sandbox", action="store_true", help="the engine's sandbox, where it has one")
     ap.add_argument("--prompt", default=DEFAULT_PROMPT)
+    ap.add_argument("--no-profile", action="store_true", help="no per-run profile: the user's own settings (a trial, never a research)")
     a = ap.parse_args()
 
     spec = ENGINES[a.engine]
@@ -219,13 +280,17 @@ def main():
     if out.exists():
         fail(f"{out} exists; a note is immutable, choose another name.")
 
+    # the run in the packet folder itself (header, step 2), under the
+    # per-run profile (step 2a)
+    env, home = (dict(os.environ), None) if a.no_profile else profile_for(packet)
     before = fingerprint(packet)
     build, read = COMMANDS[a.engine]
     cmd = build(exe, a, packet)
-    say(f"{a.engine} {'.'.join(map(str, v))}: running on {packet.name} (timeout {a.timeout}s)", "cyan")
+    say(f"{a.engine} {'.'.join(map(str, v))}: running on {packet.name} (timeout {a.timeout}s"
+        f"{'; profile ' + relative_or_absolute(home) if home else '; no profile'})", "cyan")
     try:
         proc = subprocess.run(cmd, cwd=str(packet), capture_output=True, text=True,
-                              encoding="utf-8", errors="replace",
+                              encoding="utf-8", errors="replace", env=env,
                               stdin=subprocess.DEVNULL, timeout=a.timeout + 60)
     except subprocess.TimeoutExpired:
         fail(f"{a.engine} did not finish within {a.timeout + 60}s.")
@@ -234,7 +299,7 @@ def main():
     if after != before:
         changed = sorted(set(before) ^ set(after) | {k for k in before if k in after and before[k] != after[k]})
         (packet / "envelope.rejected.json").write_text(proc.stdout or "", encoding="utf-8")
-        fail(f"the run changed the packet folder ({', '.join(changed)}); nothing filed. Output kept in envelope.rejected.json.")
+        fail(f"the run changed its workspace ({', '.join(changed)}); nothing filed. Output kept in envelope.rejected.json.")
 
     ok, response, model, usage, detail = read(proc.stdout or "")
     (packet / "envelope.json").write_text(proc.stdout or "", encoding="utf-8")

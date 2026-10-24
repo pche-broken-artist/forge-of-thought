@@ -131,6 +131,9 @@ any of them in a word.
   principal's word, never as a by-product of another operation. A
   remark, a question or a counter-thought in answer to "shall I
   change it?" is not a yes: the proposal is reworked and asked again.
+  Every such step closes with the walkthrough's verdict line,
+  `(a)ccept / (m)odify / (q)uestion / (r)eject / (p)ark`, so that the
+  word is a letter and a yes that carries a question is `question`.
 - **Elicitation interview.** Draw out by questions what the principal
   has not yet articulated (prime directive 1). One question per
   message; the shape is the walkthrough's.
@@ -822,7 +825,7 @@ What a command does in full is its skill's
 | `/work [name] [slug]` | work a work product: its specification and its file; bare = the project's work products |
 | `/critique [lens] [artefact] [slug]` | run a critic lens on the quality of the documents; bare = the lens roster |
 | `/challenge [persona] [artefact] [slug]` | run a challenger persona against the substance; bare = the persona roster |
-| `/research [--quick \| --deep] <topic> [slug]` | research from a plan the principal confirms first: deep on two model families into a bundle with its synthesis, quick as one card on the session model into one note; without the word Claude proposes the depth; indexed |
+| `/research [--quick \| --deep [--engine <name>]] <topic> [slug]` | research from a plan the principal confirms first: deep on the session model into a bundle with its synthesis, a named engine beside it on the word, quick as one card into one note; without the depth word Claude proposes it; indexed |
 | `/ledger [slug]` | state report from the ledger |
 | `/history <ID> [slug]` | the history of one item: its wording today, its records, the archive rows and the citations, by a script; Claude adds a few sentences |
 | `/check [check] [slug]` | run a check on a project or on the engine; bare = the check roster |

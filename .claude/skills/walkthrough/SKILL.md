@@ -69,7 +69,12 @@ says what it does. No other word of the forge has a letter: `write`,
 `obsolete` and every command are typed in full.
 
 These are the verdict words of every walkthrough, whatever produced
-the list; no command has words of its own.
+the list; no command has words of its own. They are also the words
+of every step that needs the principal's consent outside a
+walkthrough (CLAUDE.md, Working methods, Step by step): a write, a
+run, a commit, a change of a setting arrives as one proposition and
+closes with the same line, and a message that says yes and asks a
+question is `question`, never consent (2026-10-24).
 
 ## The elicitation interview
 

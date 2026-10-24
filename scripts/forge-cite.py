@@ -9,6 +9,7 @@ that for the forge, so that nobody checks fourteen links by hand.
 
     python scripts/forge-cite.py <note.md | bundle-dir> [--timeout 20]
         [--out <report.md>]
+    python scripts/forge-cite.py --independence <bundle-dir>
 
 WHAT IT DOES
     1. Reads the note, or every *.md of a bundle directory, and collects
@@ -26,6 +27,17 @@ WHAT IT DOES
        Markdown report to --out when given (the run folder under tmp/
        is the place). Exit 0 when nothing is dead or mismatched, 1
        otherwise; 2 on a usage error.
+
+INDEPENDENCE (--independence <bundle-dir>)
+    For every card of a research bundle that has a note from more than
+    one engine, prints the URLs the notes share and the sentences they
+    have in common, as counts, and a verdict: a second engine's note
+    that shares most of its sources or a third of its sentences with
+    the first engine's was written from it, not from the web (the run
+    of 2026-10-24: four of six notes of one engine rewritten from the
+    other's). The sentences counted are the longer ones (over sixty
+    characters), so the card's own text quoted by both counts little.
+    No network is touched.
 
 WHAT IT DOES NOT DO
     It does not judge content, does not open paywalls, and does not
@@ -134,15 +146,59 @@ def classify(url, line, timeout):
     return "ok", f"HTTP {status}"
 
 
+def independence(bundle):
+    """Per card with more than one engine's note: shared URLs and
+    identical sentences between the notes, printed with a verdict."""
+    import difflib
+
+    def body(p):
+        t = p.read_text(encoding="utf-8", errors="replace")
+        return t.split("---", 2)[2] if t.startswith("---") else t
+
+    def sents(t):
+        return {s.strip() for s in re.split(r"(?<=[.!?])\s+", re.sub(r"\s+", " ", t)) if len(s.strip()) > 60}
+
+    def urls_in(t):
+        return {u for u, _ in urls_of(t)}
+
+    cards = {}
+    for f in sorted(bundle.glob("card-*.md")):
+        card, engine = f.name[:-3].rsplit(".", 1)
+        cards.setdefault(card, {})[engine] = body(f)
+    rows = 0
+    for card, by in sorted(cards.items()):
+        engines = sorted(by)
+        for i in range(len(engines)):
+            for j in range(i + 1, len(engines)):
+                a, b = by[engines[i]], by[engines[j]]
+                sa, sb, ua, ub = sents(a), sents(b), urls_in(a), urls_in(b)
+                ratio = difflib.SequenceMatcher(None, a, b).ratio()
+                shared_s, shared_u = len(sa & sb), len(ua & ub)
+                dependent = shared_u > min(len(ua), len(ub)) // 2 or shared_s > min(len(sa), len(sb)) // 3
+                say(f"{card}: {engines[i]} / {engines[j]}: shared URLs {shared_u}/{min(len(ua), len(ub))}, "
+                    f"identical sentences {shared_s}/{min(len(sa), len(sb))}, text ratio {ratio:.2f}  "
+                    f"{'dependent' if dependent else 'independent'}", "red" if dependent else "green")
+                rows += 1
+    if not rows:
+        say("no card with notes of two engines", "yellow")
+
+
 def main():
     utf8_console()
     ap = argparse.ArgumentParser(description=__doc__.split("\n\n")[0])
     ap.add_argument("target", help="a note, or a bundle directory")
+    ap.add_argument("--independence", action="store_true", help="measure the independence of the engines' notes in a bundle")
     ap.add_argument("--timeout", type=int, default=20, help="seconds per URL; default 20")
     ap.add_argument("--out", help="write the report as Markdown here")
     a = ap.parse_args()
 
     t = Path(a.target)
+    if a.independence:
+        if not t.is_dir():
+            say("ERROR: --independence takes a bundle directory.", "red")
+            sys.exit(2)
+        independence(t)
+        sys.exit(0)
     if t.is_dir():
         files = sorted(p for p in t.glob("*.md"))
     elif t.is_file():

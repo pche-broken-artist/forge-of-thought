@@ -3,7 +3,7 @@ date: 2026-10-24
 project: forge
 topic: an RFP for an IT project derived from the artefacts of the chain
 status: immutable
-engines: claude (antigravity reviewed the draft plan only; its card runs failed on quota)
+engines: claude, antigravity
 derived_from: the principal's word of 2026-10-24 (a research on the RFP: its parts, its template, what of it follows from intent, assignment, BRD and solution design and what a person must add; IT projects of a private group; the document and its boundary to the process); the second engine's review of the draft plan, tmp/research/2026-10-24-rfp-from-the-chain/plan-review/; 00-brief-research.md v0.2 (the first research run the new way); research/2026-10-13-what-a-brd-contains-and-how-it-is-found-today.md (what the project knew of the vendor side)
 ---
 
@@ -15,83 +15,110 @@ word, and under it the synthesis made when every note has returned
 
 ## Summary
 
-The principal's hypothesis holds in a narrow form. Six notes of one
-engine agree that most of an IT RFP's substance follows from the
-chain, and that what does not follow is a thin set of sourcing
-decisions no layer above owns; so the RFP is best made as a render
-of the chain plus a thin artefact that holds those decisions, not as
-a layer that restates requirements.
+Two model families, twelve notes, one shape. The principal's
+hypothesis holds in a narrow form: most of an IT RFP's substance
+follows from the chain, what does not follow is a thin set of
+sourcing decisions no layer above owns, and both engines, reading
+different sources, arrive at the same picture: the RFP is a render
+of the chain over an explicit layer of human decisions, branched by
+the archetype of the purchase, never a layer that restates
+requirements.
 
-What follows from the chain: the intent gives background, problem
-and objectives; the assignment gives scope, out of scope,
-constraints (which become mandatory items), deliverables (the core
-of the statement of work) and success criteria (acceptance and
-performance); the BRD gives the functional requirements, the
-scenarios behind them, the non-functional requirements and the
-dependencies as integration requirements; the solution design gives
-only justified constraints (integration, data, identity, security),
-and whether more of it enters depends on the archetype (cards 1, 3).
+What follows from the chain, by both engines: the intent gives
+background, problem and objectives; the assignment gives scope, out
+of scope, constraints (which become mandatory items), deliverables
+(the core of the statement of work) and success criteria; the BRD
+gives the functional requirements, the scenarios behind them, the
+non-functional requirements and the dependencies as integration
+requirements; the solution design gives integration boundaries and
+technical guardrails, and whether more of it enters depends on the
+archetype (cards 1, 3).
 
-What a person must add, consistently in every source: legal,
+What a person must add, the same list in both engines: legal,
 commercial, security, risk and vendor-management requirements; the
 evaluation process and its weights; the tiering of items into
 pass/fail gates and rated items; the standard contract; the
-submission instructions; budget, timeline, confidentiality; the
-regulatory and contractual gates (data protection, sector rules such
-as DORA, IP, liability, security attestations) as disqualifying
-conditions (cards 3, 4).
+submission rules and the timetable; budget, pricing structure,
+confidentiality; the regulatory gates (data protection, DORA and
+NIS2 resilience clauses, security attestations) as disqualifying
+conditions, which the second engine shows have moved from the
+contract stage into the RFP as pre-scoring gates (cards 3, 4).
 
-What decides who wins and has no upstream owner: the tier of each
-item, the weights, the scale and its anchors, the hurdle thresholds,
-the award formula (which the one peer-reviewed study says can change
+What decides who wins and has no upstream owner, both engines
+agreeing on the division and citing the same economists: the tier of
+each item, the weights, the scale, the hurdle thresholds, the award
+formula (relative price scoring suffers rank reversal and can change
 the winner by itself), the response-code set and the evidence each
-code demands, the pricing model per scope item, and the archetype
-decision whether the buyer's design is asked for or left to the
-bidder (card 4). These are decisions with reasons that deserve a
-history and a reviewer, which the forge gives to artefacts, not to
-recipes; the rows of the compliance matrix and of the pricing
-schedule, by contrast, are a mechanical projection of the BRD and
-the deliverables.
+code demands, the pricing model per scope item, and whether the
+buyer's design is asked for or left to the bidder (card 4). The rows
+of the compliance matrix and of the pricing schedule are a
+mechanical projection of the BRD and the deliverables; everything
+that gives them effect is a buyer decision with reasons, which the
+forge gives a history and a reviewer to only in an artefact.
 
-What a derived RFP must avoid: writing the solution as requirements,
+What a derived RFP must avoid: the solution written as requirements,
 a checklist of business rules, the solution design's choices as
 "shall" items; the counter-movement asks for the problem, the fixed
 limits, scenarios and disclosed weighting inside the RFP, and the
-classic form persists while its content moves to outcomes (card 2).
-The RFP wants a different requirement style from the chain's: every
-"shall" is read as a disqualifier, use cases score badly, the
-recommended form is a capability statement; the requirement part
-becomes contract text. The derivation is therefore a transformation
-with rules of its own, not a copy (cards 1, 3).
+classic form persists while its content moves to outcomes (card 2,
+both engines). The RFP wants a different requirement style from the
+chain's: every "shall" is read as a disqualifier, use cases score
+badly, the recommended form is a capability statement, and the
+requirement part becomes contract text; the second engine gives the
+frame: an RFP is a Lastenheft, the problem space, and a buyer's
+design in it is a Pflichtenheft injected where the vendor's belongs
+(cards 1, 3).
 
 The skeleton to produce is the procurement institute's four parts
-and appendices (instructions and conditions with the evaluation; the
-requirement; the information the proposer supplies; the proposed
-contract; schedules), issued as a package with a core document, not
-one monolithic file; the vocabulary is RFI before, RFP where the need
-is not fully defined, RFT/ITT where it is, RFQ where price decides
-(card 1). The RFP ends at the proposal due date: before it the
-document changes by amendment, vendor questions are answered to all;
-after it nothing is written into it, and the exchanges that follow
-are the procurement officer's; what returns upstream is a changed
-requirement, through the intent first (card 5). The market's
-"AI RFP generation" has the shape of a render, template plus sources
-plus instruction, and leaves evaluation criteria to people in every
-tool opened (card 6).
+and appendices, issued as a package with a core document (both
+engines; the second calls the monolithic narrative RFP obsolete, the
+first finds the package to be the canon's own shape); the vocabulary
+is RFI before, RFP where the need is not fully defined, RFT/ITT where
+it is, RFQ where price decides (card 1). The RFP ends at the proposal
+due date: before it the document changes by amendment, vendor
+questions are answered to all; after it nothing is written into it,
+and what returns upstream is a changed requirement, through the
+intent first; the contract incorporates the RFP, its addenda and the
+proposal in an order of precedence (card 5, both). The market's "AI
+RFP generation" has the shape of a render, template plus sources plus
+prompt, leaves criteria and gates to people in every tool either
+engine opened, and the second engine adds the loop it is causing:
+AI-inflated RFPs answered by AI-inflated proposals, driving buyers to
+three-to-five-page outcome briefs with live demonstrations (card 6).
 
-Where the engines differ: nothing can be said. The second engine's
-quota was exhausted after its review of the draft plan and before
-any card ran; this bundle is one engine's work, its agreement across
-six cards is consistency under one set of priors, not validation,
-and the principal closed it single-engine on 2026-10-24.
+Where the engines differ, the valuable part: the second engine
+sources three archetypes with distinct anatomies, the custom build
+included (a design in the RFP turns it into an execution tender), and
+quantifies what the first could not: the vendor's risk premium for
+ambiguity at 15 to 40 per cent and more as a practitioner rule of
+thumb, the share of solicitations vendors decline at 37 to 40 per
+cent, and the regret of software buyers after a purchase at 56 to 60
+per cent (Gartner); the first found the custom build unsourced and no
+figures. The second demotes the compliance
+matrix to a hygiene filter, since SaaS vendors claim 90 per cent
+compliance and AI answers the rest, and elevates scripted
+demonstrations and proofs of concept; the first keeps the matrix with
+graded codes and per-code evidence. The second finds the document not
+cleanly frozen in complex IT procurement: competitive dialogue
+iterates specifications with shortlisted vendors until a freeze at
+the final offer; the first finds the seam at the due date with
+amendments before it. The second is consistently more assertive and
+found more; the first marks more as not found. Agreement is
+consistency of two families on the same web, not validation.
 
-Unexpected, worth the principal's eye: the requirement part of an
-RFP is contract text; the award formula gets the least attention and
-decides the most; the classic RFP may already be the minority route
-for technology purchases; the CIPS cycle does not contain the word
-RFP; vendors name prior engagement during requirements definition as
-the strongest predictor of winning, which is what a chain composed
-before vendor contact prevents.
+Unexpected, worth the principal's eye: the requirement part of an RFP
+is contract text; the award formula gets the least attention and
+decides the most; regulatory gates now disqualify before scoring;
+the classic RFP may already be the minority route for technology
+purchases; the CIPS cycle does not contain the word RFP; vendors name
+prior engagement during requirements definition as the strongest
+predictor of winning, which is what a chain composed before vendor
+contact prevents and may cost; many "objective" RFPs are wired, their
+specifications borrowed from an incumbent's collateral and the other
+bidders invited as column fodder for a three-bid rule; buyer regret
+peaks before implementation, from the procurement itself; and the
+e-sourcing platforms treat an RFP as a relational schema of lines, so
+a monolithic text forces re-keying.
 
 ## Plan (confirmed 2026-10-24)
 
@@ -250,251 +277,363 @@ review entered the plan by Claude's own judgement.
 
 ## Deviations from the plan
 
-- The plan said twelve agents on two engines. Six ran: the session
-  model's, one per card. The second engine (Antigravity CLI) reviewed
-  the draft plan (90 s) and then returned RESOURCE_EXHAUSTED on all
-  six card packets launched in parallel on its default model; a rerun
-  of five of them on `gemini-3.8-flash-high` returned "Individual
-  quota reached, resets in 124h"; the sixth (card 2), believed to be
-  running, had died of the same error. No second-engine note exists
-  in this bundle; the Claude notes carry no comparison.
-- The six card packets were launched at once; the plan did not say
-  how many runs the engine's quota bears, and the day's earlier runs
-  (a ping, a trial card, the plan review) had already used part of
-  it. A rule for the brief: one engine's quota is a budget of the
+- Twelve agents ran as planned, but not in one wave. The six session
+  agents returned within twenty minutes. The second engine
+  (Antigravity CLI) reviewed the draft plan (90 s) and then returned
+  RESOURCE_EXHAUSTED on all six card packets launched in parallel on
+  its default model, and "Individual quota reached, resets in 124h"
+  on a rerun of five on `gemini-3.8-flash-high`: the login was not
+  the enterprise licence. The research was closed single-engine on
+  2026-10-24 at 17:05 on the principal's word, committed in that
+  state, and reopened the same day when the login was corrected.
+- A rule for the brief: one engine's quota is a budget of the
   research day, unknowable before a run, to be spent one or two runs
-  at a time, and the adapter is to say the reset time plainly.
-- A false refusal of card 2's run: the citation reports of the Claude
-  notes were written into the packet folders while the other engine
-  was still running, and `forge-engine` refused the changed tree.
-  The skill now puts the reports under `tmp/research/<run>/cite/`.
-- The principal closed the research on 2026-10-24 with the six notes
-  of one engine, the second engine's run owed; this bundle is
-  immutable from that closing, so a later run on another engine is a
-  new research citing this one, not an addition to it.
-- Card 3's and card 1's agents found no primary source for the
-  custom-build archetype and none for ISO/IEC/IEEE 29148's
-  acquisition text; the plan's assumption that the standards give the
-  frame is unmet, and the archetype split stands at two (product
-  selection; services and implementation partner), not three.
+  at a time, never six at once; the adapter is to say the reset time
+  plainly (it does).
+- Contamination, found and cured. The six packets rerun after the
+  reopening were launched from folders under the forge's `tmp/`, a
+  tree the engine's own settings trust whole (`trustedWorkspaces`);
+  with its tools allowed, the engine walked up to the bundle the
+  packet cites and read the first engine's notes lying beside it.
+  Measured: card 4's note 71 per cent identical sentences and 14 of
+  14 URLs shared with the first engine's; cards 3, 5 and 6 rewritten
+  with 13 of 18, 14 of 14 and 14 of 15 shared URLs; cards 1 and 2
+  independent (0 of 11, 1 of 15). The four were set aside in `tmp/`
+  as evidence, `forge-engine` was changed to copy every packet to an
+  isolated folder outside every repository and the trusted tree and
+  to run the engine there, and cards 3 to 6 were run again: shared
+  URLs 0 of 30, 0 of 16, 0 of 21, 0 of 12. The engine's sandbox
+  restrains its terminal, not its reading.
+- The measure of independence, once made a script
+  (`forge-cite --independence`), found a fifth rewritten note: card 2's,
+  made in the same wave, 11 of 15 URLs shared with the first engine's
+  (among them a `?p=` address no two agents find alone); the hand
+  measure had undercounted it by cutting URLs at a parenthesis. The
+  isolated copy outside the repository was no lock either: a probe
+  showed an engine with its tools allowed reading any path on the
+  disk, trusted folder or not, and the engine reads permission rules
+  from the user's global settings alone, which the forge must not
+  write. The lock built that evening: `forge-engine` gives the engine a
+  profile of its own for the run (`tmp/research/<run>/.home/`), a copy
+  of the user's settings with deny rules for every entry of the engine
+  root but `tmp/`, for the folder where the first engine's notes wait,
+  and for the shell, and starts the engine with HOME and USERPROFILE
+  on it; a probe confirmed the deny rules hold under `--allow-all`
+  ("Matches user-configured deny rule"), the shell is refused, the
+  engine's own web tools work and the login is found; the user's
+  global settings untouched. Card 2 was run again under that profile,
+  from a packet that no longer names the bundle's path: shared URLs 0
+  of 13, independent. The first engine's notes are filed only after
+  the second engine's return from now on (the skill, step 5).
+- Fabricated citations, returned once. The citation check found 2
+  dead URLs in the second engine's card 3, 4 in card 6 and 11 of 15
+  in card 4 (domains of the shape `technologymatch.com/rfp-compliance-
+  matrix-response-codes`, never existing). The three notes went back
+  to their agent with the report, as the skill has it; the returned
+  notes resolve 15 of 15, 12 of 12 and 12 of 16 URLs, card 4's one
+  dead URL standing under Opened and not used, cited for nothing. The
+  first engine's six notes had no dead cited URL; their dead links
+  are pages the agents themselves listed as not opened.
+- A false refusal of card 2's first run: the citation reports of the
+  first engine's notes were written into the packet folders while
+  the second engine ran; the skill now puts the reports under
+  `tmp/research/<run>/cite/`.
+- Card 1's and card 3's first-engine agents found no primary source
+  for the custom-build archetype and none for ISO/IEC/IEEE 29148's
+  acquisition text; the second engine's agents did source the custom
+  build (card 2 F8, card 3 F5) and cite 29148 and IREB for the frame
+  (card 3, card 4), so the plan's assumption that the standards give
+  the frame is met by one engine only.
 
 ## Synthesis (2026-10-24)
 
 ### Completeness, card by card
 
-- Card 1 (canon and anatomy): answered. Stop rule met in both parts
-  (nothing new from the last two queries; the procurement officer and
-  the architect each with primary sources), 13 openings. The
-  disconfirming query found nobody denying a shared vocabulary or
-  skeleton and found the "modular package" to be the canon's own
-  shape; "kill the RFP" exists only in vendor blogs and a paywalled
-  abstract.
-- Card 2 (where the RFP fails): answered. Ended on the opening budget
-  (17 attempts); the architect and the vendor each with primaries.
-  The disconfirming query found no openable evidence that
-  outcome-based or agile procurement failed in private enterprise,
-  and consistent indirect evidence that detailed-requirements RFPs
-  remain the norm (the same complaint in 2009 and 2026, rising RFP
-  volume, selection guidance still built on weighted requirements).
-- Card 3 (what follows from the chain): answered for the SaaS/COTS
-  branch, not for the custom build. Ended on the opening budget (17
-  attempts, 9 lost to unreachable pages); the second part of the stop
-  rule unmet: no primary on the custom-build archetype or on 29148's
-  acquisition clauses, the evaluator and compliance perspectives on
-  public-body guidance and a regulation copy, not on a private
-  group's practice. The disconfirming query found no evidence that
-  enterprise RFPs reject pre-specified designs outright, only the
-  softer rule: justify every technical requirement, keep mandatory
-  ones few.
-- Card 4 (requirement to response instrument): answered. Ended on the
-  opening budget (14); each perspective with a primary (evaluator,
-  vendor, requirements engineer). The disconfirming query found the
-  box-ticking critique as practitioner claim, aimed at yes/no items
-  not at the matrix, and no source that expert free-form evaluation
-  outperforms a matrix; the one controlled study found weakens expert
-  ratings too.
-- Card 5 (document and process): answered. Ended on the opening
-  budget (14); the procurement officer and the evaluator with
-  primaries; the first part of the stop rule met weakly (no
-  private-group primary ever reached). The disconfirming query found
-  the "living RFP" position as a methodological argument, not as
-  practice, and even there a document is issued and final offers made
-  against it.
-- Card 6 (buyer-side tools): answered. Ended over the opening budget
-  (19 fetches, 9 failed); the procurement officer with primaries, the
-  evaluator only through the same pages and one 2023 test. The
-  disconfirming query found no independent review in either
-  direction: the field is vendor claims and one dated practitioner
-  test.
+- Card 1 (canon and anatomy): answered by both engines. First: stop
+  rule met in both parts, 13 openings; disconfirming query found
+  nobody denying a shared vocabulary or skeleton and the modular
+  package to be the canon's own shape. Second: both parts of the stop
+  rule met within the budget; disconfirming query found the
+  monolithic narrative RFP obsolete and the modular package the norm.
+- Card 2 (where the RFP fails): answered by both. First: opening
+  budget (17 attempts), architect and vendor with primaries; no
+  openable evidence that outcome-based or agile procurement failed in
+  private enterprise, consistent indirect evidence that
+  detailed-requirements RFPs remain the norm. Second (its independent
+  run, under the profile): stop rule met, 13 URLs of which 7
+  unverifiable (403 and timeouts, Gartner among them), none dead;
+  disconfirming query found outcome-based procurement constrained by
+  metric attribution, supplier risk resistance and governance, the
+  detailed catalogue kept for auditability, consensus across silos and
+  comparable scoring; the form persisting, the content shifting.
+- Card 3 (what follows from the chain): answered by both; the custom
+  build sourced by the second engine only. First: opening budget (17
+  attempts, 9 lost), second part of the stop rule unmet (custom
+  build, 29148). Second: every perspective with a primary within
+  fifteen openings, 29148 and IREB cited for the frame, the custom
+  build as an execution tender sourced; disconfirming query in both:
+  enterprises reject prescriptive designs for COTS, the derivable
+  share is large, not small.
+- Card 4 (requirement to response instrument): answered by both.
+  First: opening budget (14), each perspective with a primary;
+  disconfirming found the box-ticking critique aimed at yes/no items
+  and no superiority of free-form evaluation. Second, after one
+  return for fabricated citations: every perspective with a primary;
+  disconfirming found the matrix saturated by vendor compliance claims
+  and AI answers, scripted demonstrations elevated.
+- Card 5 (document and process): answered by both. First: opening
+  budget (14), procurement officer and evaluator with primaries, no
+  private-group primary reached. Second: stop rule met; disconfirming
+  found the "living RFP" as a methodology and, in complex IT,
+  competitive dialogue iterating until the final offer.
+- Card 6 (buyer-side tools): answered by both. First: over the
+  budget (19 fetches, 9 failed), evaluator weak; no independent
+  review either way. Second, after one return: stop rule met;
+  disconfirming found consensus that uncalibrated AI output is
+  boilerplate and the substance stays human.
 
 ### Answers side by side
 
-One engine only (Deviations). Per card the answer of the session
-model, as its note's In short has it:
-
-- Card 1: there is a canon (CIPS template with guidance notes of
-  January 2025; Info-Tech's RFP family; Forrester's paywalled
-  template); a settled four-part skeleton with appendices, the same
-  in every route opened; the IT content lives in the requirement
+- Card 1. Claude: a canon exists (CIPS 2025 template and guidance,
+  Info-Tech's RFP family, Forrester paywalled); a settled four-part
+  skeleton with appendices; the IT content lives in the requirement
   part, generic at the institute, filled per category by the
   analysts; two archetypes supported, custom development not found.
-- Card 2: the dominant failure is the solution written as
-  requirements; the remedy converges on the problem, the limits and
-  scenarios; the vendor prices, games or declines an unclear RFP; the
-  form persists, the content moves to outcomes.
-- Card 3: the requirements core follows from the chain and is the
-  bulk of the work; legal, commercial, security, risk, evaluation,
-  contract and gates are people's; tiering is a decision with no
-  upstream owner; for SaaS/COTS the design is the winner's, with
-  justified constraints surviving; the custom build unsourced.
-- Card 4: the rows of the instruments follow mechanically from the
-  requirements; everything that gives them effect (codes, gates,
-  weights, scale, formula, pricing model) is a buyer decision, and
-  the formula alone can change the winner.
-- Card 5: the seam is the proposal due date; amendments before it,
-  equal-treatment exchanges after it; the document carries the rules
-  of its process; what returns upstream is a changed requirement.
-- Card 6: no buyer-side tool opened derives an RFP from a structured
-  requirements set; inputs are a template, a request, a prompt, a
-  form or a conversation; criteria are human input everywhere; the
-  market's generation has the shape of a render.
+  Antigravity: the same canon, ISM and Gartner named beside; the
+  monolithic narrative RFP obsolete, the modular package (tender
+  brief, technical SOW, response workbook, security questionnaire,
+  pricing schedule) the norm; three archetypes with sharply different
+  anatomy. Consistent on canon, skeleton and package; the archetype
+  count differs by what each engine could source.
+- Card 2. Claude: the solution written as requirements is the
+  dominant failure; the remedy converges on problem, limits,
+  scenarios; vendors price, game or decline an unclear RFP, no
+  quantification found; form persists, content moves; branching
+  supported for COTS only. Antigravity: the same failure and remedy
+  from different sources; buyer regret after a purchase at 56 to 60
+  per cent and peaking before implementation (Gartner); large linear
+  IT projects failed or challenged in over 69 per cent of cases;
+  vendors declining 37 to 40 per cent of solicitations and adding 15
+  to 40 per cent and more to fixed-price bids for ambiguity; the
+  wired RFP with column-fodder bidders; outcome-based procurement
+  constrained by metric attribution and governance; branching across
+  all three archetypes. Consistent; the second engine found figures
+  the first did not, and asserts more.
+- Card 3. Claude: the requirements core follows from the chain and is
+  the bulk of the work; legal, commercial, security, risk,
+  evaluation, contract and gates are people's; tiering has no
+  upstream owner; SaaS/COTS: the design is the winner's, justified
+  constraints survive; the custom build unsourced; recommendation: a
+  thin artefact of sourcing decisions plus a render. Antigravity: the
+  same mapping and the same human list; the custom build sourced (a
+  full design makes an execution tender; a two-phase discovery and
+  build procurement where the design is incomplete); DORA and NIS2
+  clauses as pre-scoring disqualifiers; the RFP as a Lastenheft;
+  recommendation: an archetype-branched composite render with a
+  "human parameter manifest". Consistent in substance; the first
+  gives the decisions an artefact with history, the second a manifest
+  it does not version.
+- Card 4. Claude: rows mechanical, effect-giving parameters human;
+  the award formula can change the winner (Stilger 2017, Bergman and
+  Lundberg); the matrix kept with graded codes and per-code evidence;
+  recommendation: the decisions as an artefact. Antigravity: the same
+  division, named as a mechanical pipeline and a commercial policy
+  layer; rank reversal of relative price scoring (Bergman and
+  Lundberg); the matrix saturated in SaaS and demoted to a hygiene
+  filter, scripted demonstrations and proofs of concept carrying the
+  evaluation; recommendation: a dual-artefact model with an explicit
+  governance configuration, and a warning against rank-reversing
+  formulas as a check. Consistent on the division; they differ on the
+  matrix's weight in the evaluation.
+- Card 5. Claude: the seam is the proposal due date; amendments
+  before, equal-treatment exchanges after; the document carries its
+  process rules; vendor answers return as sources, a changed
+  requirement goes to the intent first; the Q&A and amendment record
+  needs a versioned home. Antigravity: the same seam and the same
+  change-control reading; the contract incorporates RFP, Q&A logs,
+  addenda and proposal in an order of precedence; competitive
+  dialogue in complex IT iterates specifications until the final
+  offer; proprietary vendor architectures cannot be fed upstream; the
+  e-sourcing platforms treat the RFP as relational data. Consistent
+  on the seam; the second engine's dialogue finding bends it for
+  complex purchases.
+- Card 6. Claude: no buyer-side tool derives an RFP from a structured
+  requirements set; inputs are templates, requests, prompts, forms or
+  conversations; criteria are human everywhere; the market's
+  generation has the shape of a render; the Coupa agent a lead.
+  Antigravity: the same picture from a partly different set of tools;
+  the intake platforms (Zip, Fairmarkit, Tonkean) as the locus of
+  innovation; the double-AI loop pushing buyers to short outcome
+  briefs and live gates. Consistent; the second engine adds the
+  market's reaction.
 
-Agreement across the six notes (the render shape of the market, the
-thin set of sourcing decisions, the SaaS/COTS branch, the style
-transformation) is consistency under one engine's priors, not
-validation; a second family has not read these cards.
+Agreement across the twelve notes is consistency of two model
+families reading the same web, stronger than one family's agreement
+and still not validation (POS.0790): neither engine reached a
+private group's internal procurement practice, and both lean on
+public-sector and advisory material.
 
 ### Unexpected, gathered
 
 Finds that reconfigure a question or bring a mechanism from
-elsewhere, shown before any judgement:
+elsewhere:
 
-- The requirement part of an RFP is contract text (CIPS Part 2 and
-  3): whatever the chain supplies becomes an obligation, which asks a
-  different standard of wording than an intent or a BRD (card 1).
-- The RFP wants a different requirement style: "shall" is read as
-  mandatory, use cases are hard to answer and to score, the
-  recommended form is a capability statement; the derivation is a
-  transformation, not a copy (card 3).
-- The award formula, not the criteria, is where buyers pay least
-  attention and where the outcome is most sensitive; monetising
-  quality dissolves the weight question into a price question
-  (card 4).
+- The requirement part of an RFP is contract text (CIPS Part 2 and 3,
+  Claude card 1); whatever the chain supplies becomes an obligation.
+- The RFP wants a different requirement style: "shall" is mandatory,
+  use cases score badly, the form is a capability statement (Claude
+  card 3); the RFP is a Lastenheft, the problem space, and a buyer's
+  design in a COTS RFP is a Pflichtenheft where the vendor's belongs
+  (Antigravity card 3).
+- The award formula gets the least attention and decides the most;
+  relative price scoring reverses ranks when a bidder is added or
+  dropped (both engines, card 4).
+- Regulatory resilience rules (DORA Article 30, NIS2) have moved from
+  contract negotiation into the RFP as pass/fail gates before any
+  scoring (Antigravity card 3); two of their items are derivable from
+  the chain (Claude card 3).
+- The compliance matrix has lost its discriminating power in SaaS:
+  vendors claim 90 per cent compliance, AI answers the rest;
+  evaluation moves to scripted demonstrations and proofs of concept
+  (Antigravity card 4); Info-Tech issues a Scenario Template beside
+  the RFP, a destination for the chain's use cases (Claude card 1).
 - The market's "AI RFP generation" has the shape of the forge's
-  render: template, sources, instruction, regenerate (card 6).
-- The CIPS cycle names RFI, ITT and RFQ and never RFP; an artefact
-  called "RFP" names one member of a family (card 5).
-- Prior engagement with the buyer during requirements definition is
-  the vendor's strongest predictor of winning; a chain composed before
-  vendor contact is what vendors try to get into (card 2).
+  render (both, card 6), and it has produced a loop: AI-inflated RFPs
+  met by AI-inflated proposals, pushing buyers to three-to-five-page
+  outcome briefs with live gates (Antigravity card 6).
+- The CIPS cycle names RFI, ITT and RFQ and never RFP (Claude card 5).
+- Prior engagement during requirements definition is the vendor's
+  strongest predictor of winning; a chain composed before vendor
+  contact is what vendors try to get into, and a cold RFP risks
+  no-bids (both engines, card 2).
+- Many specification-driven RFPs are wired: the specifications
+  borrowed from an incumbent's collateral, the other bidders invited
+  as column fodder to satisfy a three-bid rule; vendors treat
+  hyper-specific proprietary criteria as a no-bid trigger
+  (Antigravity card 2).
+- Software buyers' regret peaks before implementation begins: the
+  procurement process itself, not the system, exhausts the
+  stakeholders (Antigravity card 2, citing Gartner).
 - The classic RFP may be the minority route for technology purchases
-  (a Gartner survey reported by trade press: agile or lean methods
-  and panels more frequent in Australia); the chain's derivable
-  content is needed under any route (card 3).
-- Two items of the DORA gate (the description of functions and
-  services, the service levels) are derivable from the assignment
-  and the BRD; the gate is not wholly outside the chain (card 3).
-- The institute's pricing clause asks the proposer for its
+  (Gartner survey via trade press, Claude card 3); agile frameworks
+  reject the big-bang RFP outright (Antigravity card 1).
+- The e-sourcing platforms treat an RFP as a relational schema of
+  requirement lines linked to bid cells and scorecards; a monolithic
+  text forces re-keying (Antigravity card 5).
+- The institute's pricing clause asks the proposer for its own
   dependencies and assumptions: the chain's ASM and DEP items have a
-  mirror on the supplier's side of the same document (card 1).
-- Product-security questions (SBOM, disclosure policy, MFA, SSO,
-  logs) are project-independent and belong with reusable material,
-  not a project's chain (card 3, the agent's inference).
-- Info-Tech issues a Scenario Template beside the RFP: the chain's
-  use cases may have a destination other than the requirement tables
-  (card 1, not opened).
+  mirror on the supplier's side (Claude card 1).
+- Product-security questions are project-independent and belong with
+  reusable material (Claude card 3, the agent's inference).
+- Vendor architectures received in proposals cannot be fed upstream
+  without breaching confidentiality and fairness: the return channel
+  is asymmetric (Antigravity card 5).
 
-Finds that add a source to a point already made (noise by the test
-of the research of 2026-10-24): the agile route moving the design
-into the dialogue (card 5, the same as card 2's F7 and card 3's F4);
-the three-way choice amend, cancel, other (card 5, a detail of F2).
+Finds that add a source to a point already made: the agile route
+moving the design into the dialogue (several cards); the three-way
+choice amend, cancel, other (Claude card 5); intake platforms as a
+front door (Antigravity card 6, a detail of its F1).
 
 ### Not found, gathered
 
 - The acquisition text of ISO/IEC/IEEE 29148 and BABOK's Vendor
-  Assessment technique: paywalled; nothing cited (cards 1, 3, 5).
-- A primary treating custom development as an RFP archetype of its
-  own, or saying where the solution design belongs in a custom-build
-  RFP (cards 1, 2, 3).
-- Any private-company or private-group procurement guide on Q&A,
-  amendments, clarification, final offers, evaluation methodology or
-  response templates: everything reachable was public-sector,
-  supplier-side or advisory (cards 3, 4, 5).
-- A requirements-to-RFP traceability matrix from an advisory firm;
-  Gartner's toolkits and surveys (every page 403); Forrester's
-  template body (cards 1, 3).
-- A benchmark of IT procurement or RFP failure and cancellation
-  rates (McKinsey/Oxford timed out, Standish not opened); a
-  quantification of the risk premium ambiguity adds to a bid
-  (card 2).
-- An independent review (2024 to 2026) of an RFP generated by a
-  buyer-side platform's AI; Coupa's sourcing-event agent; the Gartner
-  Market Guide's own text (card 6).
-- A buyer-side primary using the terms "compliance matrix" or "BAFO"
-  (CIPS writes "BFO"); ISM's glossary; IT-specific evaluation weights
-  (card 1).
-- A study comparing matrix-based with free-form expert evaluation;
-  a private-sector figure for how often the formula changes the
-  winner (card 4).
+  Assessment: paywalled for the first engine (cards 1, 3, 5); the
+  second engine cites both for the frame without quoting the body.
+- A primary on the custom-build archetype: not found by the first
+  engine (cards 1, 2, 3); sourced by the second from practitioner and
+  advisory texts, not from a standard.
+- Any private-company procurement guide on Q&A, amendments,
+  clarification, final offers, evaluation methodology or response
+  templates: neither engine reached one; everything is public-sector,
+  supplier-side or advisory.
+- A benchmark of RFP failure or cancellation rates; a measured risk
+  premium for ambiguity (the second engine's 15 to 30 per cent is a
+  rule of thumb, not a study).
+- A formula that derives evaluation weights from requirement text;
+  a universal weighting ratio between commercial and technical
+  criteria (both engines, card 3 and 4).
+- An independent review of an RFP generated by a buyer-side
+  platform's AI; a controlled study of outcomes of AI-generated
+  against human-drafted RFPs (both, card 6).
+- A measured cost of over-specifying a design in a COTS purchase; a
+  measured frequency of material amendments in private IT RFPs
+  (second engine, cards 3 and 5).
+- A buyer-side primary using "compliance matrix" or "BAFO" (CIPS
+  writes "BFO"); ISM's glossary; IT-specific evaluation weights
+  (first engine, card 1).
 
 ### Claude's view
 
 My own, marked as such; verified where it rests on the notes'
 sources, a hypothesis where it goes beyond them.
 
-Verified on the notes: the RFP is two things in one package. The
-document is generated: its requirement part is a transformation of
-the chain (intent, assignment, BRD; the solution design only as
-justified constraints for a purchase, more for a build), its other
-parts are people's text (instructions, evaluation process, terms,
-contract, gates), and its shape is the institute's four parts and
-schedules. The decisions that make it an instrument (archetype, the
-tier of every item, the weights, the hurdles, the award formula, the
-response codes and their evidence, the pricing model per scope item,
-the gates and who supplies them) are nobody's upstream and change
-who wins.
+Verified on the notes of both families: the RFP is two things in one
+package. The document is generated: its requirement part is a
+transformation of the chain into the problem space, a Lastenheft
+(intent, assignment, BRD; of the solution design only integration
+boundaries and justified constraints for a purchase, the design
+itself for a build), its other parts are people's text (instructions,
+evaluation process, terms, contract, gates), and its shape is the
+institute's four parts and schedules issued as a package. The
+decisions that make it an instrument (archetype, the tier of every
+item, the weights, the hurdles, the award formula, the response codes
+and their evidence, the pricing model per scope item, the gates and
+who supplies them) are nobody's upstream and change who wins.
 
 Hypothesis, mine: the forge should give those decisions a home of
 their own, a thin artefact of sourcing decisions with items, a
-history and a reviewer, placed beside or below the solution design,
-and make the RFP itself a render of the chain, that artefact and a
-person-supplied file of terms, in the CIPS skeleton, with a recipe
-that translates the chain's style (shall and use cases into
-capabilities and scenarios) and names the archetype. The artefact
-would also be the versioned home of the amendment and Q&A record up
-to the proposal due date, which card 5 says a render cannot give;
-after the due date the forge stops. Vendor questions and proposals
-come in as sources; a changed requirement goes to the intent first.
-This is the agent's option 3 of card 3 and option 2 of card 4, which
-I take over, and it is what the market's render-shaped tools cannot
-do (card 6), which I read as the opening rather than the warning.
+history and a reviewer, placed below the solution design, and make
+the RFP itself a render of the chain, that artefact and a
+person-supplied file of terms, in the CIPS skeleton as a package,
+with a recipe that branches on the archetype and translates the
+chain's style (shall and use cases into capabilities and scenarios).
+From the second engine I take three things into this: the scenario
+and demonstration scripts as an instrument of their own made from the
+use cases, beside a matrix demoted to a filter; the rank-reversal
+warning as a check on the chosen formula; and the regulatory gates
+asked up front as pass/fail items the compliance owner supplies. The
+artefact is also the versioned home of the amendment and Q&A record
+up to the proposal due date, after which the forge stops; where a
+project runs a competitive dialogue, the record runs to the final
+offer. Vendor questions and proposals come in as sources; a changed
+requirement goes to the intent first; a vendor's architecture never
+goes upstream.
 
-Two cautions. Nothing above has been read by a second family; the
-six notes share one engine's priors and all six found the same
-shape, which is exactly the consistency POS.0790 warns about. And
-the custom-build branch is unsourced across three cards: if the
-group's first RFP is a build, the hypothesis above is untested where
-it matters most.
+Two cautions. Two families agreeing on the same web is still
+consistency; neither reached a private group's own practice, and
+both engines were briefed from one plan written by one of them. And
+the custom-build branch rests on one engine's practitioner sources:
+if the group's first RFP is a build, the branch is the least tested
+part.
 
 What I propose for the chain, through `/forge intent` and never
 here: a position that an RFP is a render over a thin artefact of
-sourcing decisions, the artefact born through `/new-artefact` on a
-real purchase (POS.1430, POS.1380); the brief `next-gen` or a brief
-of its own to carry the material until then; and a quick research
-card on the custom-build archetype before the first build is sourced.
+sourcing decisions, branched by archetype, the artefact born through
+`/new-artefact` on a real purchase (POS.1430, POS.1380); the brief
+`next-gen` or a brief of its own to carry the material until then;
+and, before the first custom-build sourcing, a quick research card on
+that branch.
 
 ## Notes
 
-- `card-1-canon-and-anatomy.claude.md`, from
+- `card-1-canon-and-anatomy.claude.md` and `.antigravity.md`, from
   `tmp/research/2026-10-24-rfp-from-the-chain/card-1-canon-and-anatomy/`
-- `card-2-where-the-rfp-fails.claude.md`, from `…/card-2-where-the-rfp-fails/`
-- `card-3-what-follows-from-the-chain.claude.md`, from
-  `…/card-3-what-follows-from-the-chain/`
-- `card-4-requirement-to-response-instrument.claude.md`, from
-  `…/card-4-requirement-to-response-instrument/`
-- `card-5-document-and-process.claude.md`, from `…/card-5-document-and-process/`
-- `card-6-buyer-side-tools.claude.md`, from `…/card-6-buyer-side-tools/`
-- No `<card>.antigravity.md`: the second engine's quota was exhausted
-  before any card ran (Deviations). Its review of the draft plan is
-  in `…/plan-review/antigravity.md`, under `tmp/`, not a note of the
-  bundle. The citation reports of the six notes are in `…/cite/`.
+- `card-2-where-the-rfp-fails.claude.md` and `.antigravity.md`, from
+  `…/card-2-where-the-rfp-fails/` (the second engine's first run
+  contaminated, kept there as `antigravity.contaminated.md`; the
+  filed note is the run under the profile)
+- `card-3-what-follows-from-the-chain.claude.md` and `.antigravity.md`,
+  the second from `…/card-3-what-follows-from-the-chain-return/` (the
+  first run contaminated, the second returned for dead URLs; both
+  kept in `…/card-3-what-follows-from-the-chain/`)
+- `card-4-requirement-to-response-instrument.claude.md` and
+  `.antigravity.md`, the second from
+  `…/card-4-requirement-to-response-instrument-return/` (likewise)
+- `card-5-document-and-process.claude.md` and `.antigravity.md`, the
+  second from `…/card-5-document-and-process/` (its first run
+  contaminated, kept there)
+- `card-6-buyer-side-tools.claude.md` and `.antigravity.md`, the
+  second from `…/card-6-buyer-side-tools-return/` (likewise)
+- The second engine's review of the draft plan:
+  `…/plan-review/antigravity.md`, under `tmp/`, not a note of the
+  bundle. The citation reports of all twelve notes: `…/cite/`.
