@@ -302,11 +302,23 @@ def dependencies(p):
 
 def research(p):
     rows = []
-    for f in sorted(p.proj.glob("research/*.md")):
+    # a note, or a bundle of one research read by its head 00-plan.md
+    # (templates/research-plan.md); a bundle without a head is said
+    for f in sorted(p.proj.glob("research/*")):
         if f.name == "00-INDEX.md":
             continue
-        front, _ = fd.front_of(f)
-        rows.append([f.name, fd.front_value(front, "date") or f.name[:10], fd.front_value(front, "derived_from") or "—"])
+        if f.is_dir():
+            head = f / "00-plan.md"
+            if not head.is_file():
+                rows.append([f.name + "/", "—", "a bundle without 00-plan.md"])
+                continue
+            name, src = f.name + "/", head
+        elif f.suffix == ".md":
+            name, src = f.name, f
+        else:
+            continue
+        front, _ = fd.front_of(src)
+        rows.append([name, fd.front_value(front, "date") or f.name[:10], fd.front_value(front, "derived_from") or "—"])
     return rows
 
 

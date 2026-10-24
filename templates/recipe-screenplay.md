@@ -80,6 +80,10 @@ what it needs: the header of scripts/md2video.py. -->
   pace <4,8,16> words a second for the principal's lines, Claude's
   answers and the lines that only report a file; the date in the
   tab bar <"28. 9. 2026">; the labels of the captions by language.
+  <html-player only: the section of the course on the player page
+  <"Tutorial">, and the name the page lists per language, what the
+  viewer will learn (<cs "…", en "…">); the number of `output:` is
+  the place in the course.>
   <video: `renders/<recipe>.<lang>.mp4`, the look of a simulated
   Windows Terminal, no voice-over, the languages differ in text
   only. | html-player: `<recipe>.<lang>.html-player.js`, played by

@@ -1,0 +1,5 @@
+# The engine's working folder (README.md beside this file): the folder
+# travels with the clone, its contents never do.
+*
+!.gitignore
+!README.md

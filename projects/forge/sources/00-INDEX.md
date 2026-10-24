@@ -241,3 +241,11 @@ to its own 00-INDEX.md. -->
 - **Form:** text
 - **Role:** the second of two proposals laid side by side on 2026-10-23 for the simplification of what the brief `collaboration` delivers (the principal's word), Claude's own proposal of the same day being the first; the proposal of the whole solution and implementation is worked against both.
 - **Use for:** the argument for cancelling the deferred releases (a reaction to two conflicts of one person whose causes release 1 removed; a custom driver fails on CI and for an external contributor), the simplified shape in a table, and where it differs from Claude's proposal (the breadth of git opened to Claude, who fixes a duplicate, the version after a merge, two windows).
+
+### `gemini-research-protocol-proposal.md`
+- **What:** "Deep Research Protocol Specification v2": a proposal for redesigning `/research` as a plan-first, human-approved, multi-model workflow (perspective-driven decomposition, contrarian queries, source filtering, triangulation, a serendipity tag, a definition of done; Gemini and Claude running the same plan in parallel with a cross-synthesis; Gemini skills under `.gemini/skills/`, a JSON payload to the Antigravity CLI). Written in the shape of a specification with intent, command and skill files sketched inside it.
+- **Origin:** Gemini, in a conversation with the principal rather than a deep research; downloaded as `specification_of_research_protocol_improvements (1).md`
+- **Date:** 2026-10-24, from the content (the example run id carries the date)
+- **Form:** text
+- **Role:** a counter-proposal from another model on the same topic as the four research notes of 2026-10-24; inspiration for the round on `/research`, the multi-model execution the part the principal wants to take over; to be weighed against the notes, never taken as given
+- **Use for:** the round on the plan step of `/research` and its position in the intent; the design of a research run on another engine (THR.0740, THR.0290); comparing an outside proposal's architecture with the forge's own rules

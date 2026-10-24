@@ -3,7 +3,7 @@
 <head>
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
-<title>Forge of Thought — videos</title>
+<title>Forge of Thought: videos</title>
 <!-- The player page of the engine (CLAUDE.md, Document chain, Renders;
 POS.1530, POS.1540). This file is the skeleton in templates/; the
 served page docs/videos/index.html is written from it by
@@ -30,10 +30,10 @@ function forgeVideo(d){ window.FORGE.push(d); }
 <script src="05-check-at-save.en.html-player.js"></script>
 <script src="06-challenger.cs.html-player.js"></script>
 <script src="06-challenger.en.html-player.js"></script>
-<script src="07-new-artefact.cs.html-player.js"></script>
-<script src="07-new-artefact.en.html-player.js"></script>
-<script src="08-history-threads.cs.html-player.js"></script>
-<script src="08-history-threads.en.html-player.js"></script>
+<script src="07-history-threads.cs.html-player.js"></script>
+<script src="07-history-threads.en.html-player.js"></script>
+<script src="08-new-artefact.cs.html-player.js"></script>
+<script src="08-new-artefact.en.html-player.js"></script>
 <style>
 :root{--bg:#0c0c0c;--fg:#ccc;--dim:#767676;--box:#5a5a5a;--green:#13a10e;--tab:#1f1f1f;--cap:#161616;--acc:#e0a85c;--ui:#222;--fs:18px;--cs:21px;--card:21px;--cardh:34px}
 *{box-sizing:border-box}
@@ -49,6 +49,7 @@ body{margin:0;background:#000;color:var(--fg);font-family:"Segoe UI",system-ui,s
 #list .v .t{color:#eee;font-size:14px}#list .v .m{color:#888;font-size:12px;margin-top:2px}
 #list .sc{padding:4px 16px 4px 30px;font-size:12px;color:#999;cursor:pointer}
 #list .sc:hover{color:#eee}#list .scenes{display:none}#list .scenes.open{display:block}#list .sc.on{color:var(--acc)}
+#list .sec{padding:14px 16px 6px;font-size:11px;letter-spacing:.08em;text-transform:uppercase;color:var(--acc);border-bottom:1px solid #2a2a2a}
 #list .v .t{display:flex;align-items:center}#list .v .t .tg{width:1.2em;color:#888;cursor:pointer;flex:none}#list .v .t .tg:hover{color:#eee}
 #main{flex:1;display:flex;flex-direction:column;min-width:0}
 #bar{display:flex;gap:10px;align-items:center;padding:8px 12px;background:var(--ui);font-size:14px;flex-wrap:wrap}
@@ -81,7 +82,7 @@ body{margin:0;background:#000;color:var(--fg);font-family:"Segoe UI",system-ui,s
 </head>
 <body>
 <div id="app">
- <div id="side"><h1>Forge of Thought — videos</h1>
+ <div id="side"><h1>Forge of Thought: videos</h1>
   <!-- the engine's public home (POS.0990): the one absolute address on the page -->
   <div class="home"><a href="https://github.com/pche-broken-artist/forge-of-thought">Forge of Thought on GitHub</a> · <a href="https://github.com/pche-broken-artist/forge-of-thought#readme">README</a></div>
   <div id="list"></div></div>
@@ -107,7 +108,7 @@ body{margin:0;background:#000;color:var(--fg);font-family:"Segoe UI",system-ui,s
 </div>
 <script>
 // The list of html-player files in this folder, written by scripts/md2video.py.
-const FILES = ["01-brief-elicitation.cs.html-player.js", "01-brief-elicitation.en.html-player.js", "02-walkthrough.cs.html-player.js", "02-walkthrough.en.html-player.js", "03-brief-to-intent.cs.html-player.js", "03-brief-to-intent.en.html-player.js", "04-critique.cs.html-player.js", "04-critique.en.html-player.js", "05-check-at-save.cs.html-player.js", "05-check-at-save.en.html-player.js", "06-challenger.cs.html-player.js", "06-challenger.en.html-player.js", "07-new-artefact.cs.html-player.js", "07-new-artefact.en.html-player.js", "08-history-threads.cs.html-player.js", "08-history-threads.en.html-player.js"];
+const FILES = ["01-brief-elicitation.cs.html-player.js", "01-brief-elicitation.en.html-player.js", "02-walkthrough.cs.html-player.js", "02-walkthrough.en.html-player.js", "03-brief-to-intent.cs.html-player.js", "03-brief-to-intent.en.html-player.js", "04-critique.cs.html-player.js", "04-critique.en.html-player.js", "05-check-at-save.cs.html-player.js", "05-check-at-save.en.html-player.js", "06-challenger.cs.html-player.js", "06-challenger.en.html-player.js", "07-history-threads.cs.html-player.js", "07-history-threads.en.html-player.js", "08-new-artefact.cs.html-player.js", "08-new-artefact.en.html-player.js"];
 const DEFAULT_LANG = 'en';
 const SPIN = ['✻','✢','✳','✶'];
 const $ = id => document.getElementById(id);
@@ -150,10 +151,18 @@ async function buildList(){
   const openNames = new Set([...document.querySelectorAll('#list .scenes.open')].map(x=>x.dataset.name));
   // the list follows the chosen language: titles and scenes from that
   // language's data where the video has it, else from its first language
+  // the course: grouped by section, sections and videos in the order of
+  // the file names; a video without a section comes last, unheaded
   const list=$('list'); list.innerHTML='';
-  for (const v of VIDEOS) {
+  for (const v of VIDEOS) { const dd = DATA[v.langs[pick(v)]]; v.section = dd.section || ''; }
+  const secs = [...new Set(VIDEOS.map(v=>v.section).filter(Boolean))];
+  const ordered = [...secs.flatMap(s=>VIDEOS.filter(v=>v.section===s)), ...VIDEOS.filter(v=>!v.section)];
+  let lastSec = null;
+  for (const v of ordered) {
     const l = pick(v); const dd = DATA[v.langs[l]];
-    v.title = dd.title; v.duration = dd.duration; v.scenes = dd.events.filter(e=>e.k==='scene');
+    if (v.section && v.section!==lastSec) { const h=document.createElement('div'); h.className='sec'; h.textContent=v.section; list.appendChild(h); }
+    lastSec = v.section;
+    v.title = dd.name || dd.title; v.duration = dd.duration; v.scenes = dd.events.filter(e=>e.k==='scene');
     const d=document.createElement('div'); d.className='v'+(video===v?' on':''); d.dataset.name=v.name;
     const wasOpen = openNames.has(v.name);
     d.innerHTML='<div class="t"><span class="tg">'+(wasOpen?'▾':'▸')+'</span><span>'+esc(v.title)+'</span></div><div class="m">'+Object.keys(v.langs).join(' · ')+(v.duration?' · '+fmt(v.duration):'')+'</div>';
@@ -175,7 +184,7 @@ async function open(v, l, chosen){
   document.querySelectorAll('#list .v').forEach(d=>d.classList.toggle('on', d.dataset.name===v.name)); if(chosen) expand(v);
   $('langs').innerHTML = Object.keys(v.langs).map(x=>`<button data-l="${x}" class="${x===l?'on':''}">${x}</button>`).join(' ');
   document.querySelectorAll('#langs button').forEach(b=>b.onclick=()=>{ const k=nearestScene(i), was=playing; open(v, b.dataset.l).then(()=>{ jump(k); if(was) run(); }); });
-  $('empty').style.display='none'; document.title = data.title + ' — Forge of Thought';
+  $('empty').style.display='none'; document.title = (data.name || data.title) + ' | Forge of Thought';
   render(0);
 }
 function render(k){

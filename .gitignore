@@ -21,8 +21,9 @@ desktop.ini
 # Office lock files (open documents)
 ~$*
 
-# Principal's private scratch at the engine root - never shared
-/tmp/
+# tmp/ is the engine's working folder, in git with its own .gitignore
+# and README; its contents are ignored there (CLAUDE.md, Repository
+# layout)
 
 # Principal's local launcher - never shared
 /start-claude.ps1

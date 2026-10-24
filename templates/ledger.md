@@ -89,8 +89,9 @@ their owner. What the document is for lives where it is used. -->
 |---|---|---|---|
 
 ## Research
-<!-- Registration only, one row per note in research/: Date and
-Derived from out of the note's front-matter. What a note answers
+<!-- Registration only, one row per note in research/, or per bundle
+of one research read by its head 00-plan.md: Date and
+Derived from out of the front-matter. What a note answers
 lives in research/00-INDEX.md, never here. -->
 | File | Date | Derived from |
 |---|---|---|

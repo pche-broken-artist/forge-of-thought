@@ -5,8 +5,8 @@ the timed events its player plays in the browser.
 
 SYNOPSIS
     python scripts/md2video.py <render.md> --format video|html-player
-        [--pace 4,8,16] [--date "28. 9. 2026"] [-o <file>]
-        [--frame <seconds> <file.png>]
+        [--pace 4,8,16] [--date "28. 9. 2026"] [--section <name>]
+        [--name <name>] [-o <file>] [--frame <seconds> <file.png>]
 
 WHAT IT DOES
     Reads a screenplay render of the genre `screenplay` (CLAUDE.md,
@@ -38,6 +38,15 @@ WHAT IT DOES
     a version, a ledger row); the default is 4,8,16. The pace, the date
     shown in the tab bar and the look come from the recipe's Format
     section, as arguments; the render carries none of it.
+
+    The course on the player page comes from the recipe's Format the
+    same way: --section names the section of the course the video
+    belongs to, --name the name the list shows in the render's
+    language, in place of the title card's title. Both go into the
+    html-player file's data; the page groups the videos by section,
+    sections and videos alike in the order of the file names, so the
+    numbers of the recipe's `output:` order the course. A file without
+    them is listed under its title, after the sections.
 
     The output lands next to the input with the render's basename
     (<name>.mp4 or <name>.html-player.js) unless -o names a path.
@@ -563,10 +572,12 @@ def write_frame(ev, at, png, date):
     ft.say(f"frame at {at:.1f} s of {total:.1f} -> {png}")
 
 
-def write_player_js(ev, out, lang, title, date, pace):
+def write_player_js(ev, out, lang, title, date, pace, section="", name=""):
     """The events as a script the player page loads by a script tag:
-    one call of forgeVideo with the data, the file's own name inside."""
-    data = dict(file=out.name, lang=lang, title=title, date=date, pace=[pace.user, pace.claude, pace.auto],
+    one call of forgeVideo with the data, the file's own name inside;
+    the section and the name of the course where the recipe gives them."""
+    data = dict(file=out.name, lang=lang, title=title, section=section, name=name,
+                date=date, pace=[pace.user, pace.claude, pace.auto],
                 duration=round(duration(ev), 1),
                 events=[{k: v for k, v in e.items() if k != "lines"} for e in ev])
     out.write_text("forgeVideo(" + json.dumps(data, ensure_ascii=False) + ");\n", encoding="utf-8")
@@ -595,6 +606,8 @@ def main(argv):
     ap.add_argument("--pace", default="4,8,16",
                     help="reading rates in words a second: the principal's lines, Claude's answers, file reports (default 4,8,16)")
     ap.add_argument("--date", default="", help="the date shown in the tab bar beside the scene's time, e.g. \"28. 9. 2026\"")
+    ap.add_argument("--section", default="", help="html-player: the section of the course on the player page, e.g. \"Tutorial\"")
+    ap.add_argument("--name", default="", help="html-player: the name the player page lists, in the render's language (default: the title card's title)")
     ap.add_argument("-o", "--out", help="output file (default: next to the input, the render's basename)")
     ap.add_argument("--frame", nargs=2, metavar=("SECONDS", "PNG"), help="paint one frame of the video and stop")
     a = ap.parse_args(argv)
@@ -626,7 +639,7 @@ def main(argv):
     else:
         out = Path(a.out).resolve() if a.out else md.with_name(base + ".html-player.js")
         out.parent.mkdir(parents=True, exist_ok=True)
-        write_player_js(ev, out, lang, title, a.date, pace)
+        write_player_js(ev, out, lang, title, a.date, pace, a.section, a.name)
         if out.parent.resolve() == PUBLIC_FOLDER.resolve():
             renew_player_page(PUBLIC_FOLDER)
     ft.say(f"written {out} ({ft.size_kb(out)} kB)", "green")

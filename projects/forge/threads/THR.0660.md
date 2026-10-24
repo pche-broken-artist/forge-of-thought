@@ -16,6 +16,14 @@ player; an animated SVG for a short example in a README; GitLab Pages
 for the company's version of the videos; whether the documentation is
 ever to be a web as well as the repository view. Opened 2026-10-14.
 
+2026-10-24: the brief `video-tutorials` 0.3 of forge-rollout says
+what is wanted of the player page: a course, not a folder listing;
+sections (a tutorial first, the advanced concepts after), a viewing
+order, a meaningful name per video saying what the viewer will
+learn, and the series named as a whole; order and names the
+principal's, chosen once, not read off the file names or the title
+cards. Where they live remains this thread's.
+
 <!-- A thread (POS.1680), one file per thread in threads/; the header
 is its state: what it concerns, where it came from, whether it is
 open. The rules of a thread, its life and its closing:

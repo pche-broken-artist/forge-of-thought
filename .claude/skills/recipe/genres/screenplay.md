@@ -60,7 +60,9 @@ Elicitation checklist:
     For `html-player`: whether the file goes out to the engine's
     `docs/videos/` by `output:` (POS.1540), with its number for the
     order of the course, or stays in the project's `renders/` for
-    the company.
+    the company; and the course on the player page: the section the
+    video belongs to and its name per language, what the viewer will
+    learn, listed in place of the title card's title.
 
 The language question is point 9 here; the composition from the
 skeleton closes the genre (`/recipe`, step 2).

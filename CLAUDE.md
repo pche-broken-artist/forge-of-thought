@@ -201,7 +201,7 @@ whether it is versioned and how it behaves:
 | rendering | page | a page of the documentation, or its index; never a source of truth | generated | — | overwritten by the documentation run |
 | work | work | an output of the project made with work of its own: the file holds the content, the specification beside it the way and the why | Claude, the principal judges | yes, the specification | the file remade from the specification; the principal works with it freely |
 | resources | source | external input as it arrived | external, /ingest | — | immutable |
-| resources | research | durable answer to one question | Claude, /research | — | immutable |
+| resources | research | durable answer to one question; a research of several questions is a bundle with the plan and the synthesis at its head and one note per question per engine | Claude, /research | — | immutable |
 
 Which artefacts the forge has is said in Document chain.
 Every versioned kind keeps its history in a companion beside it
@@ -402,6 +402,11 @@ scripts/                   # forge-save / forge-pull / forge-status
                            # forge-check (the mechanical clauses of
                            # a check as a program, with its module
                            # forge_check; the trial of THR.0530),
+                           # forge-engine (one packet run on a model
+                           # of another family over its CLI, the
+                           # answer back as a note), forge-cite
+                           # (every URL of a note opened before it
+                           # is filed; both of the brief research),
                            # doc2md
                            # (document →
                            # Markdown), md2pptx (deck render →
@@ -420,6 +425,14 @@ scripts/                   # forge-save / forge-pull / forge-status
                            # forge_tools, forge_docs and docs_map
                            # the modules the scripts share
                            # (Persistence, Portability)
+tmp/                       # the engine's working folder: packets
+                           # and envelopes of runs on another engine
+                           # (tmp/research/<run>/), the tasks of a
+                           # documentation run, dry ledgers, check
+                           # reports before filing; in git with its
+                           # own README and .gitignore, its contents
+                           # never; no source of truth, read by no
+                           # check, ledger or history
 .claude/                   # skills (the commands, the contracts of
                            # the reviewers and of the documentation
                            # agents, and the walkthrough method),
@@ -502,6 +515,10 @@ projects/<slug>/           # kind: thought — the chain
   challenges/YYYY-MM-DD-challenge-<persona>-HHMM-<hash>.md  # immutable
                                       # peer reviews
   research/YYYY-MM-DD-<topic>.md      # immutable research notes
+  research/YYYY-MM-DD-<topic>/        # a research of several
+    00-plan.md                        # questions: the plan and the
+    <card>.<engine>.md                # synthesis, one note per card
+                                      # per engine (/research)
   CLAUDE.md                # optional project-specific polish; note
                            # that Claude Code's /export writes into
                            # the working directory — export outside
@@ -805,7 +822,7 @@ What a command does in full is its skill's
 | `/work [name] [slug]` | work a work product: its specification and its file; bare = the project's work products |
 | `/critique [lens] [artefact] [slug]` | run a critic lens on the quality of the documents; bare = the lens roster |
 | `/challenge [persona] [artefact] [slug]` | run a challenger persona against the substance; bare = the persona roster |
-| `/research <topic> [slug]` | best-practices research into research/, indexed |
+| `/research [--quick \| --deep] <topic> [slug]` | research from a plan the principal confirms first: deep on two model families into a bundle with its synthesis, quick as one card on the session model into one note; without the word Claude proposes the depth; indexed |
 | `/ledger [slug]` | state report from the ledger |
 | `/history <ID> [slug]` | the history of one item: its wording today, its records, the archive rows and the citations, by a script; Claude adds a few sentences |
 | `/check [check] [slug]` | run a check on a project or on the engine; bare = the check roster |

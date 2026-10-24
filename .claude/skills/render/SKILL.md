@@ -90,7 +90,8 @@ other; generating the render is mechanical.
    the section names; the file lands beside the render. Where the
    format is `video` or `html-player`, run `python
    scripts/md2video.py` on each language's render with the format,
-   the pace and the date the section names, the file beside the
+   the pace, the date and, for `html-player`, the section of the
+   course and that language's name the section names, the file beside the
    render or at the recipe's `output:` (`docs/videos/`, where the
    script renews the player page). Where pandoc, or Pillow and
    ffmpeg, is missing, the render stands, the plain file is not
