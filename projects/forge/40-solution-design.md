@@ -1,5 +1,5 @@
 ---
-version: 0.44
+version: 0.45
 status: draft
 project: forge
 audience: whoever realises the solution, a person or an agent
@@ -708,6 +708,68 @@ boundary kept by hand or an order of work.
   `scripts/forge-report.py`, `.claude/skills/critique/SKILL.md`,
   `.claude/skills/challenge/SKILL.md`, `.claude/skills/check/SKILL.md`;
   the shape cited in CLAUDE.md and in the contracts.
+- **SOL.0860 The research.** `/research` is the skill
+  `.claude/skills/research/SKILL.md`, which owns the course (the
+  questions before the plan, the draft, the second engine's review,
+  the walkthrough of the plan, the dispatch, the check before filing,
+  the synthesis, the index, the report) and the agent's brief,
+  verbatim in every packet. The plan and the synthesis have the
+  shape of `templates/research-plan.md`, a note that of
+  `templates/research.md`, `In short` at its head, Unexpected, Not
+  found, Opened and not used and the Search record among its
+  sections. A deep research is a bundle `research/YYYY-MM-DD-<topic>/`
+  with `00-plan.md` at its head and one note per card per engine,
+  `<card>.<engine>.md`, one entry in `research/00-INDEX.md` for the
+  bundle (SOL.0230); a quick research stays a single note. A session
+  agent is one `general-purpose` subagent per card with web access,
+  its prompt the packet's text and the path of its folder; its return
+  is written to `tmp/research/<run>/hold/` and moves into the bundle
+  only when the second engine's note of the card has returned or the
+  card is closed single-engine. Realises: POS.0050, POS.1860,
+  POS.1870, POS.1890, POS.1370. Choice: the plan as the unit of
+  consent against the finished note as before, the principal's wish;
+  one packet for both engines against a packet per engine, so that
+  the answers compare; the hold folder and the order of filing
+  against the place of the run, which the probe of 2026-10-24 showed
+  to lock nothing. Built 2026-10-24 and run once whole (the RFP
+  research, twelve notes). Where: `.claude/skills/research/SKILL.md`,
+  `templates/research-plan.md`, `templates/research.md`,
+  `templates/index.md`.
+- **SOL.0870 The engine adapter.** `scripts/forge-engine.py` runs one
+  packet on an engine of its table and brings the answer back as a
+  note; what it does in full, the version floor, the profile, the
+  fingerprint of the folder, the envelope and the flags
+  `--allow-all`, `--sandbox` and `--no-profile`, is its header's. The
+  profile is a copy of the user's settings file for the engine with
+  `permissions` added: allow the web; deny the shell, every write and
+  the reading of every entry of the engine root but `tmp/` and of
+  the run's `hold/`, the paths computed from where the script lies;
+  the engine started with HOME and USERPROFILE pointing at it.
+  Verified 2026-10-24 that a deny rule holds under every tool
+  allowed, the shell is refused, the web tools work and the login is
+  found. Realises: POS.1880, POS.0800, POS.0950, POS.1070. Choice: a
+  CLI against a library and an MCP server (REJ.0490), the one-shot
+  shape being shared by four CLIs; a per-run profile against the
+  place of the run alone, after the probe showed an engine reading
+  CLAUDE.md four levels up without a question; the price is one
+  settings shape to know per engine, kept in the engine's row. Where:
+  `scripts/forge-engine.py`.
+- **SOL.0880 The citation check and the measure of independence.**
+  `scripts/forge-cite.py` opens every URL of a note or a bundle once
+  and classifies it ok, dead, unverifiable or mismatch (an arXiv
+  title sharing too few words with the note's entry), writes the
+  report to the run folder and exits 1 on anything dead or
+  mismatched; `--independence <bundle>` counts, per card with notes
+  from more than one engine, the URLs the notes share and the longer
+  sentences they have in common, with a verdict, touching no network.
+  Nothing is written into a note; what the check finds goes into the
+  synthesis. Realises: POS.1890, POS.1870. Choice: resolving the URL
+  against a count of agreeing sources (REJ.0460), the one mitigation
+  with a measured effect; shared URLs and sentences as the measure of
+  independence against trusting the place of the run (the four of six
+  of 2026-10-24); a 403 never a failure, since a site that blocks
+  bots is the normal case. Built 2026-10-24. Where:
+  `scripts/forge-cite.py`.
 
 ### Rendering and publishing
 - **SOL.0400 Recipe and render.** A recipe is one file,
@@ -1301,8 +1363,11 @@ boundary kept by hand or an order of work.
   `scripts/md2pptx.py` and `scripts/md2docx.py` with `--engine
   claude`, carry the default of their own in `--model`. The model a
   recipe may recommend in its Format section is the headless
-  conversion's.
-  Realises: POS.0930, POS.0530, POS.1050. Choice: an explicit
+  conversion's. A second engine beside the session model is reached
+  through the adapter (SOL.0870) and named by its row, never by a
+  model; `--model` passes a word to it where the principal asks for
+  one and records it in the note.
+  Realises: POS.0930, POS.0530, POS.1050, POS.1880. Choice: an explicit
   `inherit` against per-agent pins, which age. Where:
   `.claude/agents/`, `.claude/settings.local.json`.
 - **SOL.0610 One owner for every shape.** Where a shape had no owner
@@ -1345,6 +1410,17 @@ boundary kept by hand or an order of work.
   `--page-size`, `-o`) against the PowerShell ones, since argparse is
   the convention of the language. Portability is not verified: the set
   has not been run on Linux. Where: `scripts/`.
+- **SOL.0890 The working folder.** `tmp/` at the engine root, in git
+  with `tmp/README.md` and `tmp/.gitignore` (everything but the two
+  ignored), its subfolders made by the scripts and commands that need
+  them: `tmp/research/<run>/` with a folder per packet, the hold, the
+  cite reports, the profile `.home/` and the envelopes; the
+  documentation's tasks; a dry ledger; a check's report before it is
+  filed; a migration's manifest. Realises: POS.1900. Choice: one
+  folder in the engine against the system's temporary directory or
+  the session's scratchpad, so that a run is traceable on the machine
+  and a profile's deny rules have one path to name; the price is a
+  folder to empty by hand. Where: `tmp/README.md`, `tmp/.gitignore`.
 ## Open
 - **TBC.0010** (owner: principal) Mermaid diagrams in a Word file:
   rendering them to pictures needs `mermaid-cli`, a further
@@ -1357,9 +1433,12 @@ boundary kept by hand or an order of work.
   brought to, since an artefact names no version of the intent
   (THR.0520, closed 2026-10-22). Closed by: the principal's decision
   on the check. Blocks realisation: no.
-- **TBC.0030** (owner: principal) The independent challengers of
-  POS.0800 are not built and have no part here. Closed by: their
-  design when the principal takes them up. Blocks realisation: no.
+- **TBC.0030** (owner: principal) The reviewers on a different model
+  family (POS.0800) are not built: the link exists (SOL.0870) and the
+  research runs on it; `/challenge` and `/critique` on it, the
+  consultation and the spool have no part here (THR.0740). Closed by:
+  their design when the principal takes them up. Blocks realisation:
+  no.
 
 - **TBC.0100** (owner: Claude) `forge-branch` creates a local branch
   from the current state even when the origin has a branch of that name;

@@ -70,6 +70,17 @@ position for the consultation, POS.0790 on the layout of several
 answers. State 2026-10-23: researched, nothing designed, nothing
 decided.
 
+State 2026-10-24: the link built as `scripts/forge-engine.py` and run
+for the research (POS.1880, SOL.0870): one script, a table of
+engines, Antigravity's row first, a per-run profile denying the
+forge's tree and the shell, read-only verified by comparing the
+tree; POS.0800 reworded and POS.0790 given the layout of several
+answers at intent 5.37. The quota question answered for the research
+by POS.1870 (a budget of the day, spent one or two runs at a time).
+Open from the list above: the consultation command and the spool
+with their names; whether the engine enters a report's file name
+beside the persona; `/challenge` and `/critique` on the link.
+
 <!-- A thread (POS.1680), one file per thread in threads/; the header
 is its state: what it concerns, where it came from, whether it is
 open. The rules of a thread, its life and its closing:

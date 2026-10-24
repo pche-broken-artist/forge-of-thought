@@ -1,5 +1,5 @@
 ---
-version: 5.36
+version: 5.37
 status: draft
 project: forge
 audience: principal + Claude only
@@ -69,6 +69,8 @@ solution is the kind of content, never the amount.
 - **POS.0050** For key topics Claude researches current best practice
   rather than inventing. Outside inspiration is a legitimate input;
   durable findings are stored in `research/`, not left in chat.
+  How a research is run, planned before it is searched and on two
+  model families where it carries weight, is POS.1860 to POS.1890's.
 - **POS.0060** The forge as a system dictates only that a project has
   one output language: the artefacts of the chain — intent, assignment
   and every later layer — are written in the language its project file
@@ -1415,8 +1417,13 @@ position that already stands elsewhere.
   between the reviewers is therefore never treated as validation —
   it only means the artefact is consistent under one set of priors.
   The calibration point lies outside: review by humans or by a
-  different model family, invited at the principal's discretion —
-  independent different-family challengers are planned (POS.0800).
+  different model family, invited at the principal's discretion. A
+  different family is reached over the link of POS.1880, the research
+  running on it since 2026-10-24 and the reviewers to follow
+  (POS.0800); where several engines answer one question, Claude lays
+  the answers side by side with the engines named and the principal
+  is the chairman: agreement is consistency and never validation,
+  difference is spelled out.
   External human review of the forge by experienced practitioners
   has already taken place and shaped it through the ordinary door,
   like any other input. A challenge may inspire, but supplied
@@ -1424,12 +1431,130 @@ position that already stands elsewhere.
   reviewer wrote it, only because the principal composed it — and an
   accepted challenge may change the intent by subtraction as readily
   as by addition (POS.0440 read accordingly).
-- **POS.0800** Independent challengers will be built: challenger
-  personas running on a different model family than the author's,
-  composed by the principal in Microsoft AI Foundry and invoked from
-  the forge over a CLI link, so that `/challenge` can send in a lens
-  with genuinely different priors. The direction is decided; the
-  mechanics are designed when taken up.
+- **POS.0800 Reviewers on a different model family.** A challenger
+  persona, and a critic lens, may be sent to another engine over the
+  link of POS.1880, so that `/challenge` can send in a lens with
+  genuinely different priors: what is composed is the forge's own
+  persona and contract, the engine reading the project from disk as
+  a subagent does, the report scanned for instance values and checked
+  for its shape before the command numbers and files it unchanged.
+  The engine is named at the call; Microsoft AI Foundry is one engine
+  among several, intended without priority; Gemini's family first.
+  The direction decided 2026-08-17 (CHL.0020) holds; the mechanics
+  are known from the research of 2026-10-23 and built for the
+  research on 2026-10-24 (POS.1870); the reviewers on the link are
+  not yet built (THR.0740). Reworded 2026-10-24.
+- **POS.1860 A research is planned before it is searched.** `/research`
+  shows the plan before anything is searched and the principal
+  confirms it in a walkthrough: the purpose; the perspectives from
+  which the topic is looked at, each with the cards that serve it or
+  none; the assumptions, with a premortem answered once and marked as
+  Claude's; what is left out; the cards, each one question answered
+  by one kind of evidence from one kind of source; the agents and the
+  rule that fixed their count. The quality of a research is made by
+  this decomposition, not by the searching, and the plan is where the
+  principal sees the questions before they cost anything. Two depths,
+  said by the principal as a parameter in the shape `/save --quick`
+  has: `--deep` is the plan on the session model, one isolated agent
+  per card, a bundle `research/YYYY-MM-DD-<topic>/` with the plan and
+  the synthesis at its head and one note per card per engine;
+  `--quick` is one card on the session model alone, filed as one
+  note, the card still shown before the search. Without the word
+  Claude proposes the depth in the plan with his reason, quick where
+  one question is to be answered and cited, deep where a position, a
+  layer of the chain or a design will rest on the answer, and the
+  principal decides. Every agent sees a packet composed from the
+  forge's own definition and nothing of the conversation; the agent's
+  brief is the research skill's, verbatim in every packet (POS.1070).
+  The synthesis is Claude's, from the notes alone: completeness card
+  by card with the stop rule and the disconfirming query, the
+  engines' answers side by side, the Unexpected gathered before any
+  judgement, what was not found, Claude's own view last and apart
+  (POS.1370). A note, a bundle and its plan are immutable from their
+  filing; the bundle opens with a summary and every note with its
+  answer in a few sentences, in the words the principal would be
+  told it in. A second round only for gaps the notes name, run on
+  the principal's word; no third. The four research notes of
+  2026-10-24 on how a research is planned, kept honest and kept wide
+  are the ground. Decided 2026-10-24 (brief `research` 0.3).
+- **POS.1870 Two model families on one plan.** A deep research may
+  run on a second engine beside the session model, `/research --deep
+  --engine <name>`: the second engine reads the draft plan before the
+  walkthrough and says what it misses, its additions shown beside
+  Claude's draft and marked as the engine's, nothing taken by
+  Claude's own judgement; then it takes every card whole, on the same
+  packet as the session agent, so that two full answers to one
+  question can be laid side by side. No split of roles between the
+  engines (REJ.0440). In the synthesis the answers stand side by side
+  with the engine named; agreement is consistency of two families
+  reading the same web, stronger than one family's and still never
+  validation (POS.0790). Independence is measured, never assumed: an
+  engine with its tools allowed reads any path on the disk its
+  profile does not deny, so the first engine's notes are held outside
+  the bundle until the second engine's note of the card has returned,
+  and the URLs and the sentences the two notes share are counted
+  before filing; a note written from the other engine's rather than
+  from the web goes back to its agent once the other note is out of
+  its reach, or is said in the synthesis to be no second voice (the
+  run of 2026-10-24: four of six notes of one engine rewritten from
+  the other's, before the profile and the order of filing existed).
+  An engine named but unusable is said in one sentence with the
+  script's reason, the research goes on as without it and the
+  bundle's Deviations record it: never silently, never a question in
+  the middle of the run. One engine's quota is a budget of the
+  research day, unknowable before a run, since an engine reports its
+  usage after a run and never before: spent one or two runs at a
+  time, never six at once, the reset time said plainly. Decided
+  2026-10-24 (brief `research`; the RFP research of 2026-10-24,
+  twelve notes, the first run the whole way).
+- **POS.1880 The link to another engine.** The forge reaches a model
+  of another family through one script, `scripts/forge-engine.py`,
+  with a table of engines, one row each, over the engine's own CLI:
+  the login is the user's, made once outside the forge in the
+  engine's own tool, and the forge carries no key, no account and no
+  configuration of who connects; the forge names engines, never
+  models. The engine is given a packet folder under the engine's
+  `tmp/` as its workspace, never the forge's root, whose hooks and
+  instance file an engine must not see or execute; and since the
+  place alone locks nothing, the script gives the engine a profile of
+  its own for the run, a copy of the user's settings with the forge's
+  tree and the shell denied and the web allowed, the user's own
+  settings untouched and the profile kept in the run folder as its
+  record. A headless run denies a tool call it cannot ask about and
+  returns nothing, so every call is allowed and the engine's sandbox
+  contains it; read-only is verified by comparing the folder before
+  and after, never trusted, and a run that changed anything is
+  refused and nothing is filed. The answer comes back as a note with
+  the engine, the model word, the usage and the run in its
+  front-matter; the command files it, indexes it and remakes the
+  ledger, as for every reviewer (POS.1140). The research is the first
+  job on this link (POS.1870); the challenger, the critic and the
+  consultation of THR.0740 follow on the same one. Antigravity
+  (`agy`) is the first row; Codex, Claude Code and Copilot share the
+  one-shot shape and are rows to add when wanted (research of
+  2026-10-23). Decided 2026-10-24; built and verified by probes the
+  same day (brief `research`, THR.0740).
+- **POS.1890 Every citation is opened before a note is filed.** No
+  research note is filed before a script, `scripts/forge-cite.py`,
+  has opened every URL it cites and read an arXiv page for its title:
+  a dead page or an identifier that names another paper is the mark
+  of a fabricated citation, and the note goes back to its agent once,
+  with the report, as a failed run; a note that comes back still
+  failing is filed as it is, and the synthesis names every finding
+  that rests on a failed citation as without support. A page that
+  refused or did not answer is unverifiable, said so and never
+  counted as a failure. The check writes nothing into the note: the
+  note is the agent's record. Before it, Claude reads the note
+  against the template's shape and sends back one that rests on a
+  snippet without saying so, cites a source it did not open or has an
+  empty search record; and every note is scanned for the instance's
+  facts (POS.0950). Why: the trial of 2026-10-24 showed one engine
+  inventing or misnumbering three of fourteen sources in ten minutes,
+  and nobody checks that by hand across cards and engines; resolving
+  the URL is the one mitigation of fabricated citations with a
+  measured effect (research of 2026-10-24, keeping the quality and
+  currency of web sources). A quote checked against its page is
+  later (brief `research`, Later). Decided 2026-10-24.
 - **POS.1720** Every report of a reviewer is named by its date, the time
   to the minute and four hex characters of a content hash,
   `YYYY-MM-DD-<kind>-<name>-HHMM-<hash>.md`; the names given before stay
@@ -1518,6 +1643,16 @@ position that already stands elsewhere.
   trailer: the commit message is the one the principal confirmed, word
   for word. Decided 2026-09-21 and 2026-10-21 by the principal; the ask
   2026-10-23 (brief `collaboration` 0.9, the cutover plan R6.01).
+- **POS.1900 The engine's working folder.** `tmp/` at the engine's
+  root is the one working folder of the forge: the packets, envelopes
+  and profiles of runs on another engine (`tmp/research/<run>/`), the
+  tasks of a documentation run, a check's report before it is filed,
+  a dry ledger, the manifest of a migration. The folder is in git
+  with its own README and `.gitignore`, so that it exists on every
+  clone; its contents never are. Nothing in it is a source of truth:
+  no check, no ledger and no history reads from it, and a run is
+  kept for inspection and deleted by hand, never by a script.
+  Decided 2026-10-24 (brief `research`).
 - **POS.0570** The project's full conformance and the renders belong to
   the release, the bookkeeping check to the save. `/release` (POS.1100)
   settles the findings of its checks with the principal before the
@@ -1939,7 +2074,11 @@ position that already stands elsewhere.
   made mechanically by the page's entry, never per run; the trial of
   2026-10-09 showed Opus more complete on derived pages and Sonnet
   sufficient on mirrored ones (THR.0340, closed 2026-10-09). Present
-  shape 2026-09-02, the writer decided 2026-10-09.
+  shape 2026-09-02, the writer decided 2026-10-09. A second engine
+  beside the session model (POS.1870, POS.1880) is no exception to
+  this: it runs beside, never instead, the session model keeps every
+  job of the forge, and the forge names the engine and leaves the
+  model to it.
 - **POS.1070** One mechanism lives in one place and is used from there.
   Whatever the forge already has a procedure for — a command, a skill, a
   script, an agent — is invoked through that procedure whenever its
@@ -2020,7 +2159,8 @@ position that already stands elsewhere.
   agent returns its report with its findings unnumbered, the command
   numbers and files it, and reviewers of any kind may therefore run in
   parallel (reason given 2026-10-09, widened 2026-10-17). Present shape
-  2026-10-02; the `/research` point stays in THR.0290.
+  2026-10-02; the `/research` point of THR.0290 settled 2026-10-24: a
+  research has depths and engines, not kinds (POS.1860, POS.1870).
 - **POS.1190 The forge explains itself from its own definitions.** `/man
   [command|method]`, alias `/manual`, is the forge's manual — a reader,
   never a text of its own (POS.1070). Named after the Unix manual,
@@ -2585,6 +2725,32 @@ worked out by Claude; what Claude has worked out is never a FCT
   assignment, the mechanics are a check's, and the substance a
   persona's; a fourth kind of reviewer would say the same things in
   different words (POS.1840).
+- **REJ.0440** A split of roles between the engines, one searching
+  and the other reasoning. Rejected 2026-10-24: two halves cannot be
+  compared; both engines do the full work on every card so that the
+  answers can be laid side by side (POS.1870).
+- **REJ.0450** Recursive deep-diving to a fixed depth. Rejected
+  2026-10-24: depth comes from the decomposition into cards and from
+  a second round only for gaps the notes name, never a third
+  (POS.1860).
+- **REJ.0460** A fact verified by a count of agreeing sources.
+  Rejected 2026-10-24: agreement of copies is not agreement; a source
+  is opened, dated and placed by kind, conflicts are named, and a
+  citation is verified by resolving it (POS.1890).
+- **REJ.0470** Saturation as a percentage. Rejected 2026-10-24: the
+  stop rule is a kind rule, a differently-worded query bringing
+  nothing new and every perspective with a primary source, or the
+  openings spent, written into the search record (POS.1860).
+- **REJ.0480** Skills on the other engine's side. Rejected
+  2026-10-24: the forge's definition is the one owner of the agent's
+  rules and travels in the packet verbatim; a skill installed in the
+  engine would be a second place (POS.1070, POS.1880).
+- **REJ.0490** A library or an MCP server as the link to another
+  engine. Rejected 2026-10-24: a library is a model without tools and
+  needs a key the forge must not carry; an MCP server is the same
+  CLI call under a hat, returning through the model; the CLI shares
+  one headless shape across four engines (research of 2026-10-23;
+  POS.1880).
 ## Candidate structure for the layer below
 
 The layer below exists: `40-solution-design.md`, a draft, where what
