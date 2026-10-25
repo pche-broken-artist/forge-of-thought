@@ -62,7 +62,7 @@ WHAT IT DOES
        answer has none. The caller files, indexes and remakes the
        ledger (the command's steps).
 
-ENGINES (one row each; add a row, never a branch)
+ENGINES (one row each; a new engine is a row and its pair in COMMANDS)
     antigravity   `agy -p <prompt> --add-dir <packet> --output-format json
                    --print-timeout <s>s --disable-slash-commands
                    [--model] [--effort] [--json-schema] [--sandbox]

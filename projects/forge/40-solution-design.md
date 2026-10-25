@@ -1,5 +1,5 @@
 ---
-version: 0.46
+version: 0.47
 status: draft
 project: forge
 audience: whoever realises the solution, a person or an agent
@@ -746,8 +746,11 @@ boundary kept by hand or an order of work.
   (REJ.0490), the one-shot shape being shared by four CLIs; a per-run
   profile against the place of the run alone, after the probe showed an
   engine reading CLAUDE.md four levels up without a question; the price
-  is one settings shape to know per engine, kept in the engine's row.
-  Where: `scripts/forge-engine.py`.
+  is one settings shape to know per engine. An engine is a row of the
+  table and a pair of functions in `COMMANDS`, one building its command
+  and one reading its envelope; the settings path of the profile is
+  written for the first engine and moves into its row when a second
+  engine comes. Where: `scripts/forge-engine.py`.
 - **SOL.0880 The citation check and the measure of independence.**
   `scripts/forge-cite.py` opens every URL of a note or a bundle once
   and classifies it ok, dead, unverifiable or mismatch (an arXiv
@@ -1394,22 +1397,28 @@ boundary kept by hand or an order of work.
   visits, running git) for the five git scripts, `forge_tools.py` (a
   tool on PATH, resolving paths, the headless Claude Code run) for the
   three conversions, `docs_map.py` (the reader of the documentation map)
-  for the three documentation scripts; `forge_repos.py` is shared by the
-  scripts of the brief `collaboration` too (SOL.0510). The two hooks are
-  Python scripts too, started by `python` from `.claude/settings.json`.
-  Rewritten from PowerShell 7 on 2026-10-09, all nine at once, and
-  tested that day against a fixture: a local bare remote, an engine
-  cloned from it, a project with a remote and one without, 56 cases over
-  every script and its refusals; the `claude` engine of the conversions
-  was not run. Realises: POS.0830. Choice: Python against PowerShell 7,
-  the principal's decision of 2026-10-02 on the feedback of the forge's
-  users; `python` as the one command name against `python3`, since
-  Windows has only the first and a Unix system gives it by an alias or a
-  package, and the hook can name one. Options in the Python spelling
-  (`--tag`, `--engine`, `--recipe`, `--reference`, `--template`,
-  `--page-size`, `-o`) against the PowerShell ones, since argparse is
-  the convention of the language. Portability is not verified: the set
-  has not been run on Linux. Where: `scripts/`.
+  for the three documentation scripts, `forge_docs.py` (the
+  front-matter, the records, the ledger tables, the index entries and
+  the threads as the scripts read them) for forge-ledger, forge-migrate
+  and forge-history, `forge_check.py` (a finding and its report, the
+  keys and comments a template owns) for forge-check; `forge_repos.py`
+  is shared by the scripts of the brief `collaboration` too (SOL.0510).
+  The two hooks are Python scripts too, started by `python` from
+  `.claude/settings.json`. Rewritten from PowerShell 7 on 2026-10-09,
+  all nine at once, and tested that day against a fixture: a local bare
+  remote, an engine cloned from it, a project with a remote and one
+  without, 56 cases over every script and its refusals; the `claude`
+  engine of the conversions was not run. Realises: POS.0830. Choice:
+  Python against PowerShell 7, the principal's decision of 2026-10-02 on
+  the feedback of the forge's users; `python` as the one command name
+  against `python3`, since Windows has only the first and a Unix system
+  gives it by an alias or a package, and the hook can name one. Options
+  in the Python spelling (`--tag`, `--engine`, `--recipe`,
+  `--reference`, `--template`, `--page-size`, `-o`) against the
+  PowerShell ones, since argparse is the convention of the language.
+  Portability is verified in part: the git scripts, the ledger and
+  docs-state ran on Linux (POS.0830); the conversions and the two hooks
+  have not. Where: `scripts/`.
 - **SOL.0890 The working folder.** `tmp/` at the engine root, in git
   with `tmp/README.md` and `tmp/.gitignore` (everything but the two
   ignored), its subfolders made by the scripts and commands that need

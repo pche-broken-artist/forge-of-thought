@@ -112,7 +112,7 @@ any of them in a word.
   `/challenge`, the `/forge` map, a comparison on request) ends by
   offering a walkthrough. A per-prompt hook,
   `scripts/hook-walkthrough.py` configured in
-  `.claude/settings.json`, repeats the one-item rule and three lines
+  `.claude/settings.json`, repeats the one-item rule and four lines
   of conduct at every prompt: a rule that must hold in a long
   conversation is not trusted to this file alone.
 - **Propose, never decide.** Claude criticises, challenges, inspires
@@ -133,7 +133,11 @@ any of them in a word.
   it?" is not a yes: the proposal is reworked and asked again. Every
   such step closes with the walkthrough's verdict line, `(a)ccept /
   (m)odify / (q)uestion / (r)eject / (p)ark`, so that the word is a
-  letter and a yes that carries a question is `question`.
+  letter and a yes that carries a question is `question`. So does
+  every question that asks the principal to decide: a choice between
+  options, an either/or, whether to write, each one proposition with
+  Claude's recommendation as what `accept` means; only a question
+  for information Claude lacks closes with the question alone.
 - **Elicitation interview.** Draw out by questions what the principal
   has not yet articulated (prime directive 1). One question per
   message; the shape is the walkthrough's.
@@ -420,7 +424,8 @@ scripts/                   # forge-save / forge-pull / forge-status
                            # docs-index and docs-check (the
                            # documentation: the state of its pages,
                            # its index, its check); forge_repos,
-                           # forge_tools, forge_docs and docs_map
+                           # forge_tools, forge_docs, docs_map and
+                           # forge_check
                            # the modules the scripts share
                            # (Persistence, Portability)
 tmp/                       # the engine's working folder: packets,
@@ -533,24 +538,25 @@ projects/lib-<name>/       # kind: library — material shared across
   research/00-INDEX.md
 ```
 
-## Persistence (git) The engine is one git repository with a remote;
-`main` is the released line, branches are voluntary and left to git
-(below); every project under `projects/` is a repository of its own
-(gitignored by the engine, `projects/forge` excepted), recognised by the
-scripts by asking git whether the project's directory is the top of a
-repository, never by a `.git` looked for; anything else is a project
-outside git, on which the forge runs no git whatever repository lies
-above it (POS.0550), and such a project comes in by hand, a copy or a
-link into `projects/`. Initialising a project's repository and adding
-its remote are the user's one-off act at creation; the commit identity
-is git's, resolved per host by the user's own configuration (`includeIf`
-stanzas in `~/.gitconfig`, offered by `/setup`), and the forge sets
-none. The recommended global guard is `user.useConfigOnly = true` with
-no global `user.name`/`user.email` (offered by `/setup`), so a
-repository on a host with no stanza fails aloud instead of taking a
-default. `/setup` also registers, once per machine and on the user's
-word, the merge driver `ours` and the git settings it needs in that same
-global file, the stanzas, the guard and the registration written through
+## Persistence (git)
+The engine is one git repository with a remote; `main` is the released
+line, branches are voluntary and left to git (below); every project
+under `projects/` is a repository of its own (gitignored by the engine,
+`projects/forge` excepted), recognised by the scripts by asking git
+whether the project's directory is the top of a repository, never by a
+`.git` looked for; anything else is a project outside git, on which the
+forge runs no git whatever repository lies above it (POS.0550), and such
+a project comes in by hand, a copy or a link into `projects/`.
+Initialising a project's repository and adding its remote are the user's
+one-off act at creation; the commit identity is git's, resolved per host
+by the user's own configuration (`includeIf` stanzas in `~/.gitconfig`,
+offered by `/setup`), and the forge sets none. The recommended global
+guard is `user.useConfigOnly = true` with no global
+`user.name`/`user.email` (offered by `/setup`), so a repository on a
+host with no stanza fails aloud instead of taking a default. `/setup`
+also registers, once per machine and on the user's word, the merge
+driver `ours` and the git settings it needs in that same global file,
+the stanzas, the guard and the registration written through
 `scripts/forge-config.py`, and `forge-status` says when the registration
 is missing, since an unregistered clone silently falls back to a
 conflict (SOL.0740). A project "not under git" is a property, not a
@@ -581,7 +587,9 @@ documents is a process rule, not a git mechanism.
 
 **Portability.** The forge runs beyond Windows; `scripts/` is the
 only platform-bound layer and is written to run unchanged on Linux
-and macOS: Python 3.8 or newer, run as `python scripts/<name>.py`
+and macOS; the git scripts, the ledger and docs-state have run on
+Linux, the conversions and the two hooks are a writing rule until a
+run says otherwise: Python 3.8 or newer, run as `python scripts/<name>.py`
 (`python` on PATH is the one prerequisite of the scripts; a system
 that has only `python3` gives it that name), with nothing
 Windows-only — paths composed with `pathlib`, external tools (`git`,
@@ -589,8 +597,8 @@ Windows-only — paths composed with `pathlib`, external tools (`git`,
 in the scripts' help free of Windows-specific paths and
 invocations (POS.0830). Each script carries its help in its module
 docstring; what several scripts share lives in a module beside them
-(`forge_repos.py`, `forge_tools.py`, `forge_docs.py`, `docs_map.py`),
-never twice.
+(`forge_repos.py`, `forge_tools.py`, `forge_docs.py`, `docs_map.py`,
+`forge_check.py`), never twice.
 
 Two doors, two speeds. `/save` runs its check and then commits and
 pushes on whatever branch is checked out, no render; `--quick` leaves

@@ -1,8 +1,8 @@
 ---
 generated: 2026-10-25
-version: 6.0
+version: 6.1
 made: derived
-inputs-hash: 0a79355b14eaaedb
+inputs-hash: fd4d418dd8aeba62
 inputs:
   - .claude/skills/new-project/SKILL.md
   - .claude/skills/ingest/SKILL.md
@@ -13,21 +13,25 @@ inputs:
 
 # Share material through a library
 
-A library is a project of kind `library` that holds material shared
-across projects and has no chain of documents of its own. This page
-is for the person who keeps such material in one place and wants
-other projects to use it. It shows how a library is made, how
-documents enter it and how a project cites them.
+A library is a project of its own kind that holds material shared
+across projects: documents, templates, graphics and research, with no
+chain of artefacts. This page is for you if you want to keep such
+material in one place and use it from several projects without
+copying it. It shows how a library is made, how documents enter it,
+how a project cites one of them, and how you find out which libraries
+a project needs. The principal (the person whose thinking is being
+forged) decides what goes into a library and what each document is
+for. Why a library is a kind of project is explained in
+[Projects and the engine](../about/projects-and-the-engine.md); every
+term of the forge has its line in the [Glossary](../reference/glossary.md).
 
 ## When to use it
 
-Use a library when several projects need the same documents. A deck
-template, a graphic or a shared reference are such documents. A
-project does not copy them. It cites them by their path in the
-library.
-
-Why a library is a kind of project of its own is explained in
-[Projects and the engine](../about/projects-and-the-engine.md).
+- Several projects need the same document, such as a deck template, a
+  standard or a piece of research.
+- You want to move a document out of one project so that others can
+  use it too.
+- A project's state map lists a library that is not on your machine.
 
 ## The command
 
@@ -35,109 +39,143 @@ Why a library is a kind of project of its own is explained in
 /new-project lib-<name>
 ```
 
-The slug starts with `lib-`. Claude infers the kind `library` from
-that prefix.
+The prefix `lib-` makes the project a library. A project's kind is
+declared as `kind: library` in its project file (`project.md`).
 
 ## What happens
 
-1. **The library is made.** `/new-project lib-<name>` creates the
-   folder `projects/lib-<name>/` with these files and nothing else:
+1. **The library is made.** `/new-project lib-<name>` creates
+   `projects/lib-<name>/` with only these files:
    - `project.md`: the project file, with the slug, the kind
-     `library` and the language.
-   - `.gitattributes`: the ways git merges the files by path.
-   - `.gitignore`: one line, `ledger.md`.
+     `library` and the language;
+   - `.gitattributes`: the ways git merges files by path;
+   - `.gitignore`: with the line `ledger.md`;
    - `sources/00-INDEX.md` and `research/00-INDEX.md`: the two
-     resource indexes, empty.
-   - `recipes/readme.md` with its history companion
+     resource indexes, empty;
+   - `recipes/readme.md` and its history companion
      `recipes/readme.history.md`: the recipe of the library's README.
 
-   A library gets no brief, no decisions, no reviews, no challenges
+   The library gets no brief, no decisions, no reviews or challenges
    and no release notes. Its README is a catalogue of what it holds,
-   made from the recipe. The recipe's inputs are the ledger and the two
-   indexes. The ledger is the state record of a project. It is made at
-   read time by `python scripts/forge-ledger.py lib-<name>`, as for
-   every project, and it is never kept in git. The command writes files
-   only and never touches git. A library that starts "not under git" is
+   made from the ledger and the two indexes. The ledger (the one
+   record of a project's state) is made at read time by
+   `python scripts/forge-ledger.py lib-<name>`, as for every project,
+   and is never kept in git. The command touches no git: the library
+   is "not under git" until you initialise its repository, and that is
    a property, not a defect.
-   You should now see `projects/lib-<name>/` with those files, and
-   Claude proposing `/ingest` for the first documents.
 
-2. **Documents enter the library.** Each document is registered with
-   `/ingest <file> lib-<name>`, the same way a source enters any
-   project (see [Register a source](register-a-source.md)). Claude asks
-   what the document is for before it writes the index entry. For a
-   binary file it asks whether to convert it to Markdown. A deck
-   template or a graphic is kept as it is: the binary itself is the
-   source.
-   You should now see the document in `sources/` of the library and
-   its entry in `sources/00-INDEX.md`.
+   You should now see the folder `projects/lib-<name>/` with these
+   files, and a proposal to run `/ingest` for the first documents.
 
-3. **A changed document is kept up to date.** In a library, a
-   document that changes is the owner's ordinary maintenance, not a
-   breach. Run `/ingest lib-<name>` with no file. Claude reports the
-   files changed since their registration and asks what to do with
-   each. For a library it updates the index entry, its Date included,
-   and nothing else.
-   You should now see the changed document's entry with a new Date.
+2. **Documents enter the library.** You register each document with
+   `/ingest`, exactly as in any project; how that runs is on
+   [Register a source](register-a-source.md). Claude asks what each
+   document is for before it writes the index entry. A binary you
+   keep as a functional thing (a deck template, a graphic, a logo) is
+   stored as it is, with no Markdown extract.
 
-4. **A project cites a library document.** Point the project at the
-   document by its path, for example
-   `/ingest projects/lib-<name>/sources/<file> <slug>`. Nothing is
-   copied into the project's `sources/`. Claude adds an index entry
-   that names the path and says what the document is for. The ledger
-   finds the citation by itself and lists it in its Dependencies
-   table.
-   You should now see the entry with the library path in the
-   project's `sources/00-INDEX.md`.
+   You should now see the document in `projects/lib-<name>/sources/`
+   and its entry in `sources/00-INDEX.md`.
 
-5. **The project's state map shows the libraries.** Run
-   `/forge <slug>`. The state map says which libraries the project
-   needs, from the ledger's Dependencies table, and whether each is
-   cloned alongside it. Run on the library itself, `/forge lib-<name>`
-   reports its sources and research and stops: a library has no chain
-   and no next step beyond `/ingest`.
-   You should now see each library the project cites, with whether it
-   is present beside the project.
+3. **A changed document is maintenance.** In a library the owner keeps
+   the documents up to date. When you run a bare `/ingest` in the
+   library, Claude reports each document changed since its
+   registration and asks what to do with it. In a library the answer
+   is ordinary upkeep: the index entry is updated, its Date included,
+   and nothing else. A thought project treats the same change
+   differently, as a breach of a source's immutability.
+
+   You should now see the changed document's index entry carry the
+   new Date.
+
+4. **A project cites a library document.** You point the project at
+   the document's path with `/ingest`. Nothing is copied into the
+   project's `sources/`. Claude adds an index entry that names the
+   path, such as `projects/lib-<name>/sources/<file>`, and says what
+   it is for. The ledger finds the citation by itself and lists it in
+   its Dependencies table. Nobody writes that row.
+
+   You should now see the new entry in the project's
+   `sources/00-INDEX.md`, naming the library path, and the library in
+   the Dependencies table of the project's ledger.
+
+5. **Moving a document into a library.** This is the reverse of step
+   4. You ingest the document into the library, then the project's
+   own entry is replaced by the citation of the library path.
+
+   You should now see the document in the library's `sources/` and a
+   citation in place of the project's own entry.
+
+6. **You see which libraries a project needs.** A bare `/forge` in a
+   project reports its state map. One of its lines names the libraries
+   the project needs, from the ledger's Dependencies table, and says
+   whether each is cloned alongside. In a library itself, `/forge`
+   reports the sources and research and the git state, and stops
+   there: a library has no chain and no next step beyond `/ingest`.
+
+   You should now see each library the project cites, marked as
+   cloned alongside or not.
 
 ## What you have afterwards
 
-- A library `projects/lib-<name>/` with its documents registered in
-  its indexes and a README that catalogues them.
-- A project whose index cites the library documents by path, and
-  whose ledger lists them as dependencies.
+- A library under `projects/lib-<name>/` with its project file, its
+  indexes and its README recipe.
+- Its documents registered in its `sources/` and `research/`, each
+  with an index entry.
+- In every project that uses one of them, an index entry naming the
+  library path, and the library listed in that project's ledger under
+  Dependencies.
 
 ## If something goes wrong
 
-- **A library the project cites is not there.** The light check
-  verifies that every path in the Dependencies table exists on disk.
-  A missing library is reported as an advisory finding: the library is
-  not cloned alongside, and the way to bring it in is
-  `/import-project <its remote>`. How that works is on
+- **A library is not cloned alongside.** The light check (the check
+  of a project's bookkeeping, fit for a save) verifies that every path
+  in the Dependencies table exists on disk. A missing library is
+  reported as a finding: the library `<name>` is not cloned alongside,
+  and you bring it in with `/import-project` and its remote. The
+  finding is advisory. How a project is cloned in is on
   [Bring in an existing project](bring-in-an-existing-project.md).
-- **The kind is unclear.** If the slug has no `lib-` prefix and your
-  words leave it open, Claude asks whether the project is a library.
-- **You want to move a document out of a project into a library.**
-  Ingest it in the library, then replace the project's entry with the
-  citation of its new path.
+- **The slug has no `lib-` prefix and the kind is unclear.** Claude
+  asks whether the new project is a thought project or a library
+  before it creates anything.
 
 ## A worked example
 
-You keep a shared deck template for several projects.
+You keep a deck template that two projects use.
 
-1. `/new-project lib-<name>` creates `projects/lib-<name>/` with its
-   project file, `.gitattributes`, `.gitignore`, the two indexes and
-   the readme recipe.
-2. `/ingest <template-file> lib-<name>` stores the template. Asked
-   whether to convert it, you say no: the template is used as it is.
-   Asked what it is for, you answer with its role. The entry appears
-   in `projects/lib-<name>/sources/00-INDEX.md`.
-3. In a project `<slug>`, `/ingest projects/lib-<name>/sources/<template-file> <slug>`
-   adds an entry that names that path. Nothing is copied.
-4. `/forge <slug>` lists `lib-<name>` among the libraries the project
-   needs and says it is cloned alongside.
+1. Make the library:
 
-For every term used here in one line, see the
-[Glossary](../reference/glossary.md).
+   ```
+   /new-project lib-<name>
+   ```
+
+   `projects/lib-<name>/` appears with `project.md`, `.gitattributes`,
+   `.gitignore`, the two indexes and the readme recipe.
+
+2. Register the template in the library:
+
+   ```
+   /ingest deck-template.potx lib-<name>
+   ```
+
+   Claude asks whether to convert it to Markdown; you answer no,
+   because it is a functional file. It asks what the file is for; you
+   answer "the deck template of our pitches". The file lands in
+   `projects/lib-<name>/sources/deck-template.potx` with its index
+   entry.
+
+3. Point a project at it:
+
+   ```
+   /ingest projects/lib-<name>/sources/deck-template.potx <slug>
+   ```
+
+   Nothing is copied. The project's `sources/00-INDEX.md` gains an
+   entry naming the path and its purpose, and the ledger of `<slug>`
+   lists `lib-<name>` under Dependencies.
+
+4. Run `/forge <slug>`. The state map says that the project needs
+   `lib-<name>` and whether it is cloned alongside.
 
 ## See also
 
@@ -150,5 +188,5 @@ For every term used here in one line, see the
 - [Glossary](../reference/glossary.md): every term of the forge in one
   line.
 
-Generated on 2026-10-25 for version 6.0 from the files the
+Generated on 2026-10-25 for version 6.1 from the files the
 front-matter names; never edited by hand.

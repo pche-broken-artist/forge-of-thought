@@ -263,3 +263,5 @@ word `<file> | changed | state: by hand`.
 - 2026-10-25 | 0.46 | PCHe | FND.2780 | closed | SOL.0200, SOL.0210, SOL.0220, SOL.0230 and SOL.0640 brought to the ledger made at read time.
 - 2026-10-25 | 0.46 | PCHe | FND.2820 | closed | SOL.0720 and SOL.0460 without the driver.
 - 2026-10-25 | 0.46 | PCHe | FND.2830 | closed | SOL.0180's offer at diverged as SOL.0840 has it.
+- 2026-10-25 | 0.47 | PCHe | SOL.0620 | changed | The shared modules counted five, forge_docs and forge_check named with their users; portability verified in part as POS.0830 says (the documentation run of 2026-10-25). | Was: `docs_map.py` (the reader of the documentation map) for the three documentation scripts; … Portability is not verified: the set has not been run on Linux.
+- 2026-10-25 | 0.47 | PCHe | SOL.0870 | changed | A new engine is a row and a pair of functions in COMMANDS, the profile's settings path written for the first engine; the design brought to the script (the documentation run of 2026-10-25). | Was: the price is one settings shape to know per engine, kept in the engine's row.

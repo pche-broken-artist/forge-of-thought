@@ -222,6 +222,6 @@ with these made stricter for the BRD:
   with neither is a finding of the check;
 - `shall` / `shall not` is the wording of a BR and an NFR; the
   steps of a UC are written in the active voice, present tense
-  ("the Player submits the bet"), as a scenario and not as a rule;
+  ("the Customer submits the order"), as a scenario and not as a rule;
 - a type is never told by a number: the prefix says what an item
   is, the group says where it belongs.

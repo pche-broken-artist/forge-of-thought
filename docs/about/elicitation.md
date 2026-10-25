@@ -1,8 +1,8 @@
 ---
 generated: 2026-10-25
-version: 6.0
+version: 6.1
 made: derived
-inputs-hash: 8b6c14ed35c3280a
+inputs-hash: 5669d4a5591aa5e0
 inputs:
   - projects/forge/10-intent.md#Elicitation
   - templates/artefact-definition.md
@@ -14,196 +14,207 @@ inputs:
 Elicitation is the process by which the principal (the person whose
 thinking is being forged) and Claude find an artefact together and
 form the knowledge it holds. An artefact is a document of the chain,
-such as a brief or an intent. This page explains what elicitation is
-and what it is not. It also explains the definition, which is the
-file that says how one kind of artefact is found. It is written for
-anyone who uses the forge, extends it with a kind of artefact of
-their own, or evaluates how it works.
+such as a brief, an intent or a BRD. This page explains what
+elicitation is, what a definition of an artefact is, and why the two
+are shaped as they are. It is written for anyone who uses the forge,
+extends it with an artefact of their own, or weighs whether it is
+sound.
 
 ## What it is
 
-Elicitation is the finding of an artefact's content by the principal
-and Claude together. It is not any conversation of theirs.
+Elicitation is not every conversation between the principal and
+Claude. In its meaning it is not a conversation at all. The
+conversation is only the medium in which it happens.
 
-The conversation is only the medium. The instruments of the finding
-are several:
+Elicitation works through several instruments:
 
-- the interview: Claude draws out by questions what the principal
-  has not yet put into words;
+- the interview: questions that draw out what the principal has not
+  yet put into words;
 - research;
-- sources, that is, external inputs registered in the project.
+- sources: external inputs such as transcripts, offers, documents or
+  standards, kept unchanged in the project's `sources/`.
 
-Three things are kept apart:
+Elicitation differs by artefact. The talk over a brief, the talk over
+an intent and the talk over a BRD are three different talks. That is
+why every kind of artefact has a definition of its own.
 
-- the Map: what must be found for the artefact to be complete;
-- the process: how the Map is walked;
-- the template: the skeleton where the result lands.
+Some work looks like elicitation and is not:
 
-Elicitation differs by artefact. The talk over a brief, the talk
-over an intent and the talk over a business requirements document
-are three different talks. For that reason every kind of artefact
-has a definition of its own.
-
-Some work of the forge is not elicitation:
-
-- composing a recipe (the file that says how a render is made);
-- `/setup`, which prepares a new installation;
-- the walkthrough of a reviewer's findings, that is, going through
-  them with the principal one item at a time.
+- composing a recipe (the file that says how a render is made): this
+  is configuration chosen from known options, not the finding of
+  knowledge;
+- `/setup`, the first run that prepares an instance (one installation
+  of the forge): the reason it is not counted as elicitation is not
+  recorded;
+- a walkthrough of a reviewer's findings (a walkthrough is a list of
+  items put to the principal for his decision): it has its own shape
+  already and nothing in it differs per artefact.
 
 ## How it works
 
+### Three things kept apart
+
+Elicitation keeps three things separate:
+
+- the map: what must be found for the artefact to be complete;
+- the process: how the map is walked;
+- the template: the skeleton where the result lands.
+
+The map comes before the template. A template only says where a
+result lands. The map says what has to be found.
+
 ### The definition
 
-Every artefact of the chain has a definition. A definition is a
-state file, `.claude/skills/forge/states/<state>.md`, worked through
-`/forge <state>`. It is paired with the artefact's template:
-
-- the definition says what the artefact is and how it is found, by
-  questions, research and sources, and it owns the artefact's rules;
-- the template says what comes out.
-
-Which artefacts the forge has is the listing of the directory of
-definitions, one definition each. They are listed nowhere else. How
-the definitions shape the chain as a whole is described in
-[The document chain](the-document-chain.md).
-
-### The seven blocks
+Every artefact of the chain has a definition. A definition is the
+state file of that artefact in `.claude/skills/forge/states/`, and it
+is worked through `/forge <state>`. Each definition is paired with
+the artefact's template. The definition says how the artefact is
+reached. The template says what is to come out. The listing of the
+definitions is the listing of the artefacts the forge has: they are
+listed nowhere else. How the definitions together shape the chain is
+explained on [The document chain](the-document-chain.md).
 
 A definition has seven blocks, in this reading order:
 
-| Block | What it holds |
-|---|---|
-| Target | the artefact's file and its template |
-| Inputs | what the finding starts from |
-| Aim | what the elicitation achieves and when the artefact is complete |
-| Partner | Claude's stance: what it does, what it does not do, who steers the finding and who takes the decisions |
-| Map | what must be found |
-| Instruments | only the mechanisms of the forge this artefact uses in a way of its own, cited and never described |
-| Course | the ways in, the order, and what is offered when the Aim's completion is reached |
+- **Target**: the artefact's file and its template.
+- **Inputs**: what the finding starts from.
+- **Aim**: what the elicitation achieves and when the artefact is
+  complete. This is the one place where completion is stated.
+- **Partner**: Claude's stance. It says what Claude does beyond the
+  Aim and what it does not do, who steers the finding and who makes
+  the decisions.
+- **Map**: what must be found.
+- **Instruments**: only those mechanisms of the forge that this
+  artefact uses in a way of its own. They are cited, never described.
+- **Course**: the ways in, the order, and what is offered when the
+  Aim's completion is reached. The Course states no completion of
+  its own.
 
-The Aim is the one place where completion is stated. The Course
-states no completion of its own. The Aim and the Partner do not
-repeat each other. The Aim says what is true of the artefact at the
-end. The Partner says what Claude does beyond that, citing the Aim.
+Every definition carries all seven blocks. A block left empty on
+purpose says so, with the reason. It is never silently left out.
 
-Every definition carries all seven blocks. A block that is empty on
-purpose says so, with its reason. It is never silently left out.
+Aim and Partner do not repeat each other. The Aim says what is true
+of the artefact at the end. The Partner says what Claude does beyond
+that, and it cites the Aim.
 
-Some mechanism is shared by every definition and lives outside it.
-A definition cites it and never repeats it:
+Some mechanism is shared by every artefact. It stays outside the
+definition and is cited there, never repeated:
 
 - the form of the conversation;
 - one write per round;
-- versioning with history;
-- creation of the file from its template;
-- the question of the language;
+- versioning with a history companion, and the ledger (the record of
+  the project's state);
+- creation of the artefact from its template;
+- the language the artefact is written in;
 - ending by naming the state.
 
-The skeleton of a definition is `templates/artefact-definition.md`.
-How to write a definition of one's own is described in
-[Add an artefact](../extend/add-an-artefact.md).
-
-The genre files of `/recipe` map onto this shape without loss. Genre
-and skeleton map to Target, role to Partner, and the elicitation
-checklist to Map. The seven blocks themselves are for the artefacts
-of the chain.
+The rules of a particular artefact live in its definition. The
+project's core instructions (`CLAUDE.md`) keep of each artefact only
+what it is, how it joins the chain, and a pointer to the definition.
+How to write a definition for a new kind of artefact is shown on
+[Add an artefact](../extend/add-an-artefact.md). The skeleton of a
+definition is `templates/artefact-definition.md`. Other terms of the
+forge are in the [Glossary](../reference/glossary.md).
 
 ### The Map
 
-A Map is a map of what must be found. It is not a questionnaire.
+A Map is a map of what must be found, not a questionnaire. It names,
+in the artefact's own words, what the finding looks at or
+consciously verifies.
 
-It names, in the artefact's own vocabulary, what the finding looks
-at or consciously verifies. It prescribes neither the headings of
-the document nor the order of the conversation. It is neither a list
-of questions nor a list of criteria. How an area is found depends on
-the situation: a question, a research step or a source.
+A Map prescribes neither the headings of the document nor the order
+of the conversation. It is not a list of questions. It is not a list
+of criteria.
 
 A Map is walked at the moments its definition names. The walk asks
-whether each area has been consciously considered. At the walk
-Claude says of each area how it stands:
+of each area whether it has been consciously considered. At the walk
+Claude says how each area stands:
 
 - found;
 - considered and left open;
 - considered and found not to apply;
 - not looked at.
 
-An area may stay empty when it was considered and found not to
-apply. The walk is said aloud, and nothing of it is recorded.
+The walk is said aloud, and nothing of it is recorded. An area may
+stay empty when it was considered and found not to apply. How an
+area is found depends on the situation: a question, a research step
+or a source.
 
 ### Found together or handed over
 
 How an artefact is composed is the principal's choice, made artefact
-by artefact. There are two ways:
+by artefact. There are two ways.
 
-- found together: the principal finds it with Claude by elicitation;
-- handed over: the principal gives a few sentences of what he wants,
-  and Claude composes the whole and returns it for his judgement.
+- **Found together.** The principal finds the artefact with Claude
+  by elicitation. Where Claude is unsure, it asks. It fills no gap by
+  assumption.
+- **Handed over.** The principal hands the artefact over with a few
+  sentences of what he wants. Claude works the definition alone. The
+  Map says what must be found, and Claude finds it from what it was
+  given, from research and from the sources. It returns the whole as
+  a proposal, within the bounds the principal set.
 
-Found together, the forge's rule holds as it stands. Where Claude is
-unsure, it asks, and it fills no gap by assumption.
+Work handed over comes back with a short list of what Claude assumed
+and what it chose. Each choice names what it was chosen against. The
+same is said in plain words in the artefact, at the place where each
+choice stands, until the principal has judged it. Nothing is derived
+from the proposal and nothing is done on it before his judgement.
+What a test can tell is told by a test. His judgement is for what no
+test can tell.
 
-Handed over, Claude works the definition alone. The Map says what
-must be found. Claude finds it from what it was given, from research
-and from the sources. It says what it assumed and what it chose,
-with what each choice was chosen against. This is said in two
-places: in a short list returned with the work, and in plain words
-in the artefact where each choice stands, until the principal has
-judged it. Work handed over keeps the bounds the principal sets. It
-comes back as a proposal. Nothing is derived from it and nothing is
-done on it before he has judged it. What a test can tell of work
-handed over is told by a test, not by his reading.
-
-Every definition is written so that it can be worked either way.
-Authorship is the principal's in both.
+Authorship is the principal's either way. Every definition is
+written so that it can be worked in both ways.
 
 ## Why
 
-The Map stands before the template because a template can be filled
-and still miss what the artefact is for. The Map says what has to be
-found. The template says only where it lands.
-
-A recipe is not elicitation because composing it is configuration
-from known options. It is not the finding of knowledge. The
-walkthrough of findings is not elicitation because it has its shape
-already and nothing in it depends on the artefact. Why `/setup` is
-not elicitation is not recorded.
-
-Every definition carries all seven blocks so that the shape can be
-checked. The reason a Map is not a questionnaire is not recorded
-beyond the reason above for putting the Map before the template.
-
-Authorship stays with the principal because the author is the one
-who sends a thing into the world and answers for it. Claude is a
-tool. The principal chooses between finding together and handing
-over because his attention is the scarce thing. Whether a matter
-deserves it is his to say, not the forge's.
+- **The map stands before the template** because a template can be
+  filled and still miss what the artefact is for.
+- **Every kind of artefact has its own definition** because the talk
+  differs by artefact: what must be found for a brief is not what
+  must be found for an intent.
+- **Every definition carries all seven blocks** so that the shape can
+  be checked.
+- **Shared mechanism is cited, not repeated.** The reason is not
+  recorded.
+- **A Map is not a questionnaire.** The reason is not recorded.
+- **Handed-over choices are listed** so that the principal judges
+  decisions and not prose.
+- **Authorship stays with the principal** because the author is the
+  one who sends a thing into the world and answers for it. Claude is
+  a tool.
+- **The choice of found together or handed over is the principal's**
+  because his attention is the scarce thing. Whether a matter
+  deserves it is his to say, not the forge's.
 
 ## A worked example
 
-The artefact below is invented for this example: a "lessons
-learned" document of no real project. Its definition might give a
-Map like this:
+Take an invented artefact, a "meeting charter" that says why a
+recurring meeting exists. It is not an artefact of the forge. It only
+shows the shape. Its definition's Map might name these areas, in the
+artefact's own words:
 
-- what happened, in the participants' own terms;
-- what went well and should be kept;
-- what went badly and why it went badly;
-- what is changed next time, and who owns each change.
+- the purpose the meeting serves;
+- who must attend and who may;
+- the decisions the meeting is allowed to take;
+- what ends the meeting series.
 
-The definition names the moment of the walk, say before the first
-write. At that moment Claude goes through the areas aloud:
+The Map does not say which heading each area becomes. That belongs to
+the charter's template. The Map does not say which area is talked
+about first.
 
-- what happened: found;
-- what went well: found;
-- what went badly: considered and left open, because the cause of
-  one failure is still unknown;
-- what is changed next time: not looked at.
+Suppose the definition names the walk at the moment the principal
+asks to write. Claude then says aloud how each area stands:
 
-Nothing of this is written into the document. The principal now sees
-that one area was never looked at and one stays open. He decides
-whether to look further or to write as things stand. The headings of
-the document come from its template, not from the Map. The order in
-which the areas were talked about was free.
+| Area | How it stands |
+|---|---|
+| the purpose the meeting serves | found |
+| who must attend and who may | considered and left open |
+| the decisions the meeting is allowed to take | considered and found not to apply: the meeting only informs |
+| what ends the meeting series | not looked at |
+
+Nothing of this table is written into any file. The principal now
+sees that one area was never looked at. It can be taken up with a
+question, a source or a research step.
 
 ## See also
 
@@ -214,5 +225,5 @@ which the areas were talked about was free.
 - [Glossary](../reference/glossary.md): every term of the forge in
   one line.
 
-Generated on 2026-10-25 for version 6.0 from the files the
+Generated on 2026-10-25 for version 6.1 from the files the
 front-matter names; never edited by hand.

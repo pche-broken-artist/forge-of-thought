@@ -2,7 +2,7 @@
 project: forge
 purpose: readme
 audience: humans arriving at the repository
-version: 0.73
+version: 0.75
 output: /README.md
 ---
 
@@ -202,39 +202,34 @@ shape only. -->
   nothing to a saved intent is
   `docs/start/first-result.md`.
 - Section 6 is "The document chain in one picture". It carries the
-  star, never a line: it must make visible at first glance that the
-  chain branches richly. It is this mermaid block, pinned verbatim
-  (solid arrows = built today, dashed = illustrative growth):
+  artefacts of the chain in one row and everything else branching
+  from it: the renders of each layer, a work product standing on its
+  own like a brief, and the growth. It is this mermaid block, pinned
+  verbatim (solid arrows = built today, dashed = illustrative growth):
 
   ```mermaid
   flowchart LR
-      B["00-brief"] --> I["10-intent"]
-      I --> A["20-assignment"]
-      I --> SD["40-solution-design"]
-      A --> SD
-      I --> RI(["renders: pitch, deck, summary …"])
-      A --> RA(["renders: mail …"])
-      A --> BRD["30-brd"]
-      BRD --> SD
+      B["00-brief"] --> I["10-intent"] --> A["20-assignment"] --> BRD["30-brd"] --> SD["40-solution-design"]
+      WP["any document (/work)"] --> RT(["renders: a translation, a summary, a video …"])
+      I --> RI(["renders: a pitch, a deck, a summary, a video, a README …"])
+      A --> RA(["renders: a mail, a handover deck, a video …"])
       A -.-> RFP["an RFP"]
-      I -.-> ART["an article"]
-      ART -.-> RT(["render: a translation"])
       I -.-> ST["strategy"]
       SD -.-> IMP["implementation deck"]
 
       classDef built fill:#1f6feb,stroke:#1158c7,color:#ffffff
       classDef future fill:#c6dbfa,stroke:#1f6feb,color:#24292f
       classDef render fill:#2da44e,stroke:#1a7f37,color:#ffffff
-      class B,I,A,BRD,SD built
-      class RFP,ART,ST,IMP future
+      class B,I,A,BRD,SD,WP built
+      class RFP,ST,IMP future
       class RI,RA,RT render
   ```
 
-  Directly under it one bold legend line: blue = chain artefacts
-  (light = not built yet), green = renders; dashed arrows = growth
-  that does not exist yet. The dashed layers are a fixed illustrative
-  set of this recipe (an RFP, an article with its translation render,
-  strategy, an implementation deck), never
+  Directly under it one bold legend line: blue = chain artefacts and
+  a work product (light = not built yet), green = renders, the dots
+  saying the list is open; dashed arrows = growth that does not exist
+  yet. The dashed layers are a fixed illustrative set of this recipe
+  (an RFP, strategy, an implementation deck), never
   presented as planned or existing. Below the legend: one line per
   artefact the forge has, one per definition in
   `.claude/skills/forge/states/`, in the order of their file numbers,
@@ -377,7 +372,7 @@ reach the reader. Update them here when they change.
 
 *<subtitle per POS.0620>* · [Documentation](docs/README.md) · [Videos](<the pinned course address>) · [Release notes](RELEASE-NOTES.md)
 
-**New here? Watch first.** <one sentence on the eight videos, with the link "Videos" to the course address>
+**New here? Watch first.** <one sentence on the ten videos and the eight short clips, with the link "Videos" to the course address>
 
 <masthead per the instruction: identity paragraph — AI cognitive
 extension of a thinking human, the principal; what it does; the
@@ -396,7 +391,7 @@ and the CEO note, exactly as the instruction gives it>
 per the instruction; no closing line>
 
 ## 2. Watch it work
-<the opening sentence; the eight videos as bold-led bullets in the
+<the opening sentence; the ten videos as bold-led bullets in the
 pinned order, one sentence each and the two links watch / read; the
 closing sentence on the course page>
 

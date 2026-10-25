@@ -45,10 +45,12 @@ Every item of a walkthrough ends in one proposition, worded so that
 principal. The proposition states what changes, or that nothing
 changes, and what is recorded; where it goes against the reviewer's
 suggestion, it says so. The message closes with the line
-`(a)ccept / (m)odify / (q)uestion / (r)eject / (p)ark`. An open
-question of Claude's is not a proposition: it closes with the
-question alone. Where Claude can, he turns a question into a
-proposition, but never by filling a gap with an assumption.
+`(a)ccept / (m)odify / (q)uestion / (r)eject / (p)ark`. Every question
+of Claude's that asks the principal to decide, in a walkthrough or
+outside it, is a proposition with Claude's recommendation as what
+`accept` means and closes with the line; only a question for
+information Claude lacks closes with the question alone. A
+proposition never fills a gap with an assumption.
 
 - `accept`: agreed, the text goes in as shown.
 - `modify`: a discussion opens on the item, and the solution found

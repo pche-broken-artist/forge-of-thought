@@ -1,8 +1,8 @@
 ---
 generated: 2026-10-25
-version: 6.0
+version: 6.1
 made: mirrored
-inputs-hash: 92a1852266042a0e
+inputs-hash: 3b01f5f9fd0ad746
 inputs:
   - scripts/forge-save.py
   - scripts/forge-pull.py
@@ -36,462 +36,749 @@ inputs:
 
 # Scripts
 
-This page lists every script in `scripts/`: what it is for, how it is called, which options it takes, what it needs installed and which command runs it. It is for the user who wants to run a script by hand and for the extender who wants to know what exists before writing another.
+This page lists every script in `scripts/` with its synopsis, its
+options, what it needs and the command that runs it. It is for the
+user who runs a script by hand and for the extender who reads one
+before writing another. The scripts are the forge's door to git, to
+the ledger, to file conversion and to the documentation: Claude
+reaches git writes only through them. In this page the principal is
+whoever's thinking is being forged, the ledger is the state report
+made from a project's documents, and a harness is the program that
+runs Claude and calls its hooks.
 
-Every script carries its own help in its module docstring. The principal is whoever's thinking is being forged. The ledger is the file that holds a project's state, made from the project's documents each time it is read.
+Every script is run as `python scripts/<name>.py` and carries its own
+help in its module docstring. Installing what the conversions need is
+described in [Install what the forge needs](../start/install.md).
 
-## Overview
+## The scripts at a glance
 
-| Script | What it is for | Run by | What it needs |
+| Script | What it is for | Command that runs it | What it needs |
 |---|---|---|---|
-| `forge-save.py` | commit and push the engine and the projects | `/save`, `/release` | Python, git |
-| `forge-pull.py` | fast-forward from the remotes | `/pull` | Python, git |
-| `forge-status.py` | report the git state, read-only | by hand | Python, git |
-| `forge-clone.py` | clone an existing project into `projects/` | `/import-project` | Python, git |
-| `forge-branch.py` | switch to a branch, creating it, or report the branch | by hand | Python, git |
-| `forge-config.py` | read and write the global git configuration the forge needs | `/setup` | Python, git 2.36 or newer |
-| `forge-history.py` | print the history of one item by its ID | `/history` | Python |
-| `forge-report.py` | complete the unique name of a reviewer's report | `/critique`, `/challenge`, `/check` | Python |
-| `forge-ledger.py` | make a project's ledger from its documents | `/ledger` and every command that changes state | Python, git |
-| `forge-migrate.py` | bring a project to the shape of a release | `/migrate` | Python, git |
-| `forge-check.py` | run the mechanical clauses of the light check as a program | by hand | Python, git |
-| `forge-engine.py` | run one packet on a model of another family | `/research` | Python, the engine's CLI |
-| `forge-cite.py` | open every URL of a research note | `/research` | Python, network |
-| `doc2md.py` | convert documents to Markdown | `/ingest` | Python, markitdown |
-| `md2pptx.py` | make a PowerPoint deck from a Markdown deck | `/render`, `/publish` | Python, pandoc or the claude engine |
-| `md2docx.py` | make a Word document from a Markdown render | `/render`, `/publish` | Python, pandoc or the claude engine |
-| `md2video.py` | make a video or a player file from a screenplay render | `/render` | Python, Pillow and ffmpeg for video |
-| `hook-walkthrough.py` | repeat the walkthrough rule and the conduct lines at every prompt | hook of `.claude/settings.json` | Python |
-| `hook-git.py` | hold the wall between reading git and writing it | hook of `.claude/settings.json` | Python |
-| `docs-state.py` | compute the state of every page and prepare the writers' tasks | `/document` | Python |
-| `docs-index.py` | write the documentation index from the map | `/document` | Python |
-| `docs-check.py` | check the generated pages mechanically | `/document`, `/render` | Python |
-| `forge_repos.py`, `forge_docs.py`, `forge_tools.py`, `docs_map.py`, `forge_check.py` | modules the scripts share; not commands | the scripts | Python |
+| `forge-save.py` | commit and push the engine and the projects | `/save`, `/release` | Python 3.8+, git |
+| `forge-pull.py` | fast-forward from the remotes | `/pull` | Python 3.8+, git |
+| `forge-status.py` | report the git state, read-only | none named in the inputs | Python 3.8+, git |
+| `forge-clone.py` | clone an existing project into `projects/` | `/import-project` | Python 3.8+, git |
+| `forge-branch.py` | switch to a branch, creating it, or report it | none named in the inputs | Python 3.8+, git |
+| `forge-config.py` | read and write the global git configuration | `/setup` | Python 3.8+, git 2.36+ |
+| `forge-history.py` | the history of one item as a timeline | `/history` | Python 3.8+ |
+| `forge-report.py` | complete the unique name of a report | `/critique`, `/challenge`, `/check` | Python 3.8+ |
+| `forge-ledger.py` | make a project's ledger at read time | remade by every command that changes state | Python 3.8+, git |
+| `forge-migrate.py` | bring a project to the current shape | `/migrate` | Python 3.8+, git |
+| `forge-check.py` | the mechanical clauses of the light check | none: run by hand | Python 3.8+, git |
+| `forge-engine.py` | run one packet on a model of another family | `/research` | Python 3.8+, the engine's CLI |
+| `forge-cite.py` | open every URL of a research note | `/research` | Python 3.8+ |
+| `doc2md.py` | convert documents to Markdown | `/ingest` | Python 3.8+, markitdown |
+| `md2pptx.py` | Markdown deck to PowerPoint | `/render`, `/publish` | Python 3.8+, pandoc or the claude CLI |
+| `md2docx.py` | Markdown render to Word | `/render`, `/publish` | Python 3.8+, pandoc or the claude CLI |
+| `md2video.py` | screenplay render to video or player events | `/render` | Python 3.8+; Pillow and ffmpeg for video |
+| `hook-walkthrough.py` | the per-prompt hook that repeats the conduct rules | called by the harness at every prompt | Python 3.8+ as `python` |
+| `hook-git.py` | the hook that separates reading git from writing it | called by the harness before every Bash command | Python 3.8+ as `python` |
+| `docs-state.py` | the state of every documentation page and the writers' tasks | `/document` | Python 3.8+ |
+| `docs-index.py` | the documentation index, from the map | `/document` | Python 3.8+ |
+| `docs-check.py` | the mechanical check of the documentation, and the one-file scan | `/document`, `/render` | Python 3.8+ |
 
-Installing what the scripts need is described in [Install what the forge needs](../start/install.md).
+Five modules are shared by the scripts and are not commands. They are
+listed at the end of the page.
 
-## The git scripts
+## Git: save, pull, status, clone, branch, config
 
-These scripts are the door to every write of git. The engine and each project under `projects/` are separate repositories. The slug `forge` means the engine. A project that is not a repository of its own is reported or refused, never touched.
+These six are the door to git. The engine is one repository and every
+project under `projects/` is a repository of its own, which a script
+recognises by asking git whether the project's directory is the top
+of a repository. A project that is not one is a project outside git,
+on which no script runs git.
 
 ### forge-save.py
 
-Commits and pushes the engine and every project that has changes. Run by `/save` and `/release`.
+Commits and pushes the engine and every project that has changes.
 
-```
-python scripts/forge-save.py [slug] [-m MESSAGE] [--tag NAME]
-```
-
-- Without a slug it visits the engine and every project repository, and gives each one with changes its own commit. With a slug it saves that repository only. A project directory without a repository is skipped with a note (bare) or refused (slug).
-- Per repository it stages everything, commits (the message from `-m`, or a generated one) and, when an origin is configured, integrates remote changes by rebase and pushes. Without an origin the commit is kept locally and reported.
-- A clean repository that is ahead of its upstream is pushed the same way. A branch with no upstream yet reaches the remote with its first commit.
-- `--tag NAME` tags the commit and pushes the tag with it. It needs a slug, because it works on one repository. When there is nothing to commit, the current state is tagged. An existing tag is refused.
-- A rebase that conflicts is left standing. The commit is made and nothing is lost. The script prints the files in conflict and the step that follows, then you run it again, and it pushes the clean repository that is ahead. The step itself is described in [Settle a conflict](../use/settle-a-conflict.md).
-- A repository with a rebase or a merge already in progress is refused before anything is staged, so that conflict markers are never committed.
-- It never sets an identity or a remote, never initialises a repository, never uses `git add -f` and never runs `git clean`.
-
-Needs: Python 3.8 or newer, git on PATH, `forge_repos.py` beside it.
+- **Synopsis:** `python scripts/forge-save.py [slug] [-m MESSAGE] [--tag NAME]`
+- **Forms:** without arguments it visits the engine and every
+  project repository and gives each one with changes its own commit.
+  With a slug it saves that one repository (`forge` means the
+  engine). A project directory without a repository is skipped with a
+  note when bare and refused when named.
+- **Options:** `-m` gives the commit message, otherwise one is
+  generated. `--tag NAME` tags the commit and pushes the tag with it;
+  it needs a slug. When there is nothing to commit it tags the
+  current HEAD. An existing tag is refused.
+- **Per repository:** it stages everything, commits, and when an
+  origin is configured integrates remote changes by rebase and pushes.
+  A clean repository that is ahead of its upstream is pushed the same
+  way. A branch with no upstream reaches the remote with its first
+  commit. Without an origin the commit stays local and is reported.
+- **A conflict is left standing:** when the rebase conflicts, the
+  commit is made, nothing is lost, and the script prints the files in
+  conflict and the step that follows. The step is described in
+  [Settle a conflict](../use/settle-a-conflict.md). Running the script
+  again afterwards pushes the clean repository that is ahead.
+- **A standing rebase or merge is refused:** a repository with a
+  rebase or a merge already in progress is refused before anything is
+  staged, so that conflict markers are never committed.
+- **It never** sets an identity or a remote, initialises a
+  repository, uses `git add -f` or runs `git clean`.
+- **Needs:** Python 3.8 or newer; git on PATH; `forge_repos.py`.
 
 ### forge-pull.py
 
-Pulls the latest state from the remotes. Run by `/pull`.
+Fast-forwards the engine (its upgrade channel) and every project that
+has an origin.
 
-```
-python scripts/forge-pull.py [slug]
-```
-
-- Fast-forward only. Without a slug it pulls the engine, then every project that has an origin. With a slug it pulls that repository.
-- A repository with unsaved changes is not touched: it is reported and skipped (bare) or refused (slug). A project without a repository or without an origin is reported and skipped.
-- A repository whose history has diverged from its origin is refused and nothing is pulled. The script never merges on its own.
-- After a pull it prints where the repository moved from and to (hash and subject, before and after) and the subjects of the commits between, so that the releases crossed can be read off and their "Action required" lines looked up in `RELEASE-NOTES.md`.
-
-Needs: Python 3.8 or newer, git on PATH, `forge_repos.py` beside it.
+- **Synopsis:** `python scripts/forge-pull.py [slug]`
+- **Forms:** bare pulls the engine, then every project with an
+  origin. With a slug it pulls that one repository.
+- **Refusals:** a repository with unsaved changes is skipped when
+  bare and refused when named. A repository whose history has
+  diverged from its origin is refused and nothing is pulled. Projects
+  without a repository or an origin are reported and skipped. The
+  script never merges.
+- **Output:** after a pull it prints where the repository moved from
+  and to, with the hash and subject of each end, and the subjects of
+  the commits between, so that the releases crossed can be read off
+  and their Action required lines looked up in `RELEASE-NOTES.md`.
+- **Needs:** Python 3.8 or newer; git on PATH; `forge_repos.py`.
 
 ### forge-status.py
 
-Reports the git state of the engine and every project. Read-only. Run by hand.
+Reports the git state of the engine and every project. It is
+read-only.
 
-```
-python scripts/forge-status.py [--remote]
-```
-
-- First it prints the global git configuration file git actually reads and the registration of the merge driver `ours` in it: "ok", or the keys that are missing (the required keys are those of `forge-config.py --register`). An unregistered clone silently falls back to a conflict on the derived files.
-- Then, for the engine and each project: unsaved changes (or "clean"), the branch, the last commit and the origin, or "no origin" or "not under git". A rebase or a merge in progress is shown with the number of files in conflict. A `user.name` or `user.email` set in the repository itself is shown, because it wins over the per-host identity and the forge never sets it.
-- `--remote` also fetches each origin and reports the branch against it: "up to date", "behind N", "ahead N" or "diverged (ahead N, behind M)". The fetch changes nothing in the working tree. Without the flag the script touches no network.
-
-Needs: Python 3.8 or newer, git on PATH, `forge_repos.py` beside it.
+- **Synopsis:** `python scripts/forge-status.py [--remote]`
+- **First it reports** the global configuration file git actually
+  reads and the registration of the merge driver `ours` in it. The
+  merge driver is the git setting that lets the derived files merge
+  without a conflict. The report says `ok`, or names the missing keys
+  (the required keys are those of `forge-config.py --register`).
+  Without the registration a clone silently falls back to a conflict
+  on the derived files.
+- **Then, for the engine and each project:** unsaved changes or
+  `clean`; a rebase or a merge in progress with the number of files in
+  conflict; the branch; the last commit; the origin, or `no origin`
+  or `not under git`. A `user.name` or `user.email` set in the
+  repository itself is reported, since it wins over the per-host
+  identity and the forge never sets it.
+- **With `--remote`** it fetches each origin and reports the branch
+  against it: `up to date`, `behind N`, `ahead N` or `diverged (ahead
+  N, behind M)`. The fetch changes nothing in the working tree.
+  Without the flag the script touches no network.
+- **Needs:** Python 3.8 or newer; git on PATH; `forge_repos.py`.
 
 ### forge-clone.py
 
-Brings an existing project in by cloning its repository into `projects/`. Run by `/import-project`.
+Brings an existing project in by cloning its repository into
+`projects/`.
 
-```
-python scripts/forge-clone.py <url>
-```
-
-- The directory is `projects/<repository name>`, taken from the URL. An existing directory is never overwritten. The script carries no URL and no identity.
-- Afterwards it reports facts: the last commit, the origin, the commit identity git resolves for the fresh clone, and the project file (its kind and language, or what a project without the file is). A project with neither a project file nor a ledger was not scaffolded by the forge. That is a fact, not a defect.
-- Where git resolves no `user.name` or `user.email`, it prints a hint: run `/setup`, or `forge-config.py --identity <host> <name> <email>`, or set a local identity in the repository. `forge-save.py` commits nothing until then.
-
-Needs: Python 3.8 or newer, git on PATH, `forge_repos.py` beside it.
+- **Synopsis:** `python scripts/forge-clone.py <url>`
+- **Where it lands:** `projects/<repository name>`, the name taken
+  from the URL. An existing directory is never overwritten.
+- **Facts it reports afterwards:**
+  - the last commit and the origin;
+  - the commit identity git resolves for the fresh clone;
+  - the project file, that is its kind and language, or what a
+    project without the file is. A project with neither the file nor a
+    ledger was not scaffolded by the forge, which is a fact and not a
+    defect.
+- **The hint:** where git resolves no `user.name` and `user.email` for
+  the clone, it prints that `forge-save` commits nothing until then,
+  and names the three ways out: `/setup`, `forge-config.py
+  --identity <host> <name> <email>`, or a local identity set in the
+  repository.
+- **It sets** no identity and carries no URL.
+- **Needs:** Python 3.8 or newer; git on PATH; `forge_repos.py`.
 
 ### forge-branch.py
 
-Switches one repository to a branch, or reports the branch. Run by hand.
+Switches one repository to a branch, creating it if needed, or
+reports the branch it is on.
 
-```
-python scripts/forge-branch.py <slug> [branch]
-```
-
-- With a branch name it switches to that branch and creates it from the current state when it does not exist. `main` switches back.
-- Without a name it reports the current branch and lists the branches.
-- There is no bare form. Unsaved changes stop the switch: save first, then switch.
-- Merging, deleting and pushing branches stay with git. A new branch reaches the remote with the first save made on it. A release is made from `main` only.
-
-Needs: Python 3.8 or newer, git on PATH, `forge_repos.py` beside it.
+- **Synopsis:** `python scripts/forge-branch.py <slug> [branch]`
+- **Forms:** with a branch name it switches, creating the branch from
+  the current state when it does not exist (`main` switches back).
+  Without a name it reports the current branch and lists the others.
+  There is no bare form: the slug is always required (`forge` means
+  the engine).
+- **Refusal:** unsaved changes stop the switch. Save first, then
+  switch.
+- **Left to git:** merging, deleting and pushing branches. A new
+  branch reaches the remote by the first `forge-save` made on it.
+- **Needs:** Python 3.8 or newer; git on PATH; `forge_repos.py`.
 
 ### forge-config.py
 
-Reads and writes the global git configuration the forge needs, through `git config --global` alone, so that it lands in the file git itself reads. Run by `/setup`.
+Reads and writes the global git configuration the forge needs, through
+`git config --global` alone, so that it lands in the file git itself
+reads, wherever that lies.
 
-```
-python scripts/forge-config.py
-python scripts/forge-config.py --register [--zdiff3]
-python scripts/forge-config.py --guard [--unset-identity]
-python scripts/forge-config.py --identity <host> <name> <email> [--replace]
-```
+- **Synopsis:**
+  - `python scripts/forge-config.py`
+  - `python scripts/forge-config.py --register [--zdiff3]`
+  - `python scripts/forge-config.py --guard [--unset-identity]`
+  - `python scripts/forge-config.py --identity <host> <name> <email> [--replace]`
+- **Bare form:** shows what is there and changes nothing: the file git
+  reads, the registration of the merge driver `ours`, the guard, a
+  global identity and the per-host identity stanzas.
+- **`--register`:** writes `merge.ours.driver true`,
+  `merge.renormalize true`, `rebase.backend merge` and
+  `rerere.enabled true`. With `--zdiff3` it adds
+  `merge.conflictStyle zdiff3`.
+- **`--guard`:** writes `user.useConfigOnly true`. It bites only once
+  no global `user.name` or `user.email` is left. `--unset-identity`
+  removes them.
+- **`--identity <host> <name> <email>`:** writes the two
+  `includeIf` stanzas of one host (the `https` and the `git@` form of
+  the remote URL), each with a path `.gitconfig-<host>` relative to the
+  global file, and then that file with the `user` name and e-mail where
+  it is missing. A stanza with another path, or an identity file with
+  another name or e-mail, is reported and left. `--replace` rewrites
+  them.
+- **Rule for every key:** a key that already carries the value asked
+  is reported and left. A key that carries another value is reported
+  and left too, never overwritten, unless `--replace` is given for an
+  identity. Values are compared as git stores them.
+- **Needs:** Python 3.8 or newer; git 2.36 or newer on PATH (for
+  `hasconfig` in `includeIf`); `forge_repos.py` and `forge_tools.py`.
 
-- Bare: shows what is there (the file git reads, the registration of the merge driver `ours`, the guard, a global identity and the per-host identity stanzas) and changes nothing.
-- `--register`: writes the merge driver `ours` and the settings it needs, once per place: `merge.ours.driver true`, `merge.renormalize true`, `rebase.backend merge` and `rerere.enabled true`. `--zdiff3` adds `merge.conflictStyle zdiff3`.
-- `--guard`: writes `user.useConfigOnly true`. It bites only once no global `user.name` or `user.email` is left. `--unset-identity` removes them.
-- `--identity <host> <name> <email>`: writes the two `includeIf` stanzas of one host, for the `https://` and the `git@` form of its URLs, each with a path `.gitconfig-<host>` relative to the global file. It then writes that file with `[user] name` and `email` where it is missing.
-- A key that already carries the value asked is reported and left. A key that carries another value is reported and left, never overwritten. `--replace` rewrites a stanza or an identity file that carries another path, name or e-mail.
-
-Needs: Python 3.8 or newer, git 2.36 or newer on PATH (`hasconfig` in `includeIf`), `forge_repos.py` and `forge_tools.py` beside it.
-
-## The record and state scripts
+## The record: history, report, ledger, migrate, check
 
 ### forge-history.py
 
-Prints the history of one item of a project as one timeline. Read-only, no model involved. Run by `/history`. How to read the result is described in [Read the history of an item](../use/read-the-history-of-an-item.md).
+Prints the history of one item by its ID, gathered from the history
+logs, their archives and the places that cite it. It is read-only, and
+no model is involved. The command behind it is described in
+[Read the history of an item](../use/read-the-history-of-an-item.md).
 
-```
-python scripts/forge-history.py <ID> <slug> [--full]
-```
-
-- The ID is `PREFIX.NNNN`. A short form such as `pos580` is read as `POS.0580`. The slug `forge` is the engine's own project.
-- Output in three parts: Today (the file that holds the item and its wording), Timeline (one line per event, oldest first, from the history logs and their archives, with the records of other items that mention it) and Cited today (every other place in the project that names the ID, as file and line).
-- A record's reason follows its line. Its "Action" and "Was" follow as marked lines. `--full` prints each "Was" in full, otherwise it is shortened.
-- The pages of `docs/`, the documentation map, the renders, the resources and `tmp/` are never searched. An ID with no item and no record is said so.
-
-Needs: Python 3.8 or newer, `forge_repos.py` and `docs_map.py` beside it.
+- **Synopsis:** `python scripts/forge-history.py <ID> <slug> [--full]`
+- **The ID:** `PREFIX.NNNN`; a short form such as `pos580` is read as
+  `POS.0580`. `forge` as the slug is the engine's own project.
+- **Output, in three parts:**
+  - Today: the file that holds the item and its wording;
+  - Timeline: one line per event, oldest first (`born`, `changed`,
+    `closed`, `removed`, `approved`, `mentioned by <ID>`, `archive`),
+    each with its version and date, followed by the reason and the
+    Action and Was lines of the record;
+  - Cited today: every other place in the project that names the ID,
+    as file and line.
+- **`--full`:** prints each Was in full instead of its first
+  sentences.
+- **Not searched:** the pages of `docs/`, the documentation map, the
+  renders, the published files, the resources and `tmp/`.
+- **Needs:** Python 3.8 or newer; `forge_repos.py` and `docs_map.py`.
 
 ### forge-report.py
 
-Completes the unique name of a reviewer's report. No model, no git. Run by `/critique`, `/challenge` and `/check` after they file a report.
+Completes the unique name of a reviewer's report, in place.
 
-```
-python scripts/forge-report.py <path>
-```
-
-- It renames the file `YYYY-MM-DD-<kind>-<name>.md` in place to `YYYY-MM-DD-<kind>-<name>-HHMM-<hash>.md`, with the local time to the minute and the first four hex characters of the SHA-256 of the file, and prints the new path.
-- It refuses with exit code 1 and the reason: a path that is not a file; a name that already carries the tail; a name that ends in a run number such as `-2.md`; a target name that exists.
-
-Needs: Python 3.8 or newer.
+- **Synopsis:** `python scripts/forge-report.py <path>`
+- **The name it completes:** the command that files a report writes it
+  as `YYYY-MM-DD-<kind>-<name>.md`. The script renames it to
+  `YYYY-MM-DD-<kind>-<name>-HHMM-<hash>.md`, where `HHMM` is the local
+  time to the minute and `<hash>` the first four hex characters of the
+  SHA-256 of the file. It prints the new path.
+- **Refusals (exit 1, with the reason printed):** a path that is not a
+  file; a name that already carries the tail; a name that ends in a run
+  number (`-2.md`); a target name that exists. Wrong usage exits 2.
+- **Needs:** Python 3.8 or newer. No model and no git.
 
 ### forge-ledger.py
 
-Makes the ledger of a project from its documents. Run by `/ledger` and by every command that changes state.
+Makes the ledger of a project at read time from its documents.
 
-```
-python scripts/forge-ledger.py <slug> [--out PATH]
-```
-
-- It reads the project file, the headers of the artefacts, the histories, the decisions, the resource indexes, the reviews and challenges, the provenance of the renders and of the documentation index, the published companions, the work specifications, the threads and `ledger.archive.md`. It builds `ledger.md` in the shape of `templates/ledger.md`.
-- An unparsable file becomes a line `unparsed: <file>:<line>` in the header, never a crash. The exit code is 0.
-- It writes `ledger.md` only on a project of the current shape whose ledger is out of git's index. On a project of the shape before the migration, or where the ledger is tracked, the file is never written: the script prints to standard output, or to the path `--out` names.
-- The slug `forge` is the engine's own project.
-
-Needs: Python 3.8 or newer, git on PATH, `forge_docs.py`, `forge_repos.py` and `forge_tools.py` beside it, and `templates/ledger.md`.
+- **Synopsis:** `python scripts/forge-ledger.py <slug> [--out PATH]`
+- **What it writes:** `ledger.md` in the shape of the ledger template,
+  its tables made from the project file, the headers of the
+  artefacts, the histories, the decisions, the resource indexes, the
+  reviews and challenges, the provenance of the renders, the published
+  companions, the work specifications, the threads and the archive of
+  an older hand-kept ledger. It also holds the rule of what waits on
+  the principal and the reports of what the merged files cannot say.
+- **Unreadable files:** an unparsable file becomes a line
+  `unparsed: <file>:<line>` in the header. The script never crashes
+  on it, and the exit code is 0.
+- **Where the output lands:** it writes `ledger.md` only on a project
+  of the current shape whose ledger is out of git's index. On a
+  project of the shape before the migration, and where the ledger is
+  tracked, `ledger.md` is the hand-kept one and is never written; the
+  script prints to stdout, or to `--out PATH` (a dry run of a real
+  project goes to `tmp/`).
+- **Slug `forge`:** the engine's own project.
+- **Needs:** Python 3.8 or newer; git on PATH; `forge_docs.py`,
+  `forge_repos.py` and `forge_tools.py`; the ledger template.
 
 ### forge-migrate.py
 
-Brings one project to the shape of a release. Run by `/migrate`. The job is described in [Migrate a project](../use/migrate-a-project.md).
+Brings one project to the current shape of files. The command behind
+it is described in [Migrate a project](../use/migrate-a-project.md).
 
-```
-python scripts/forge-migrate.py <slug>            # dry run
-python scripts/forge-migrate.py <slug> --apply    # perform
-python scripts/forge-migrate.py <slug> --undo     # take back
-```
-
-- The shape of a project is a set of marks, one per step, never an engine version in the project:
-  - B0: the project file exists.
-  - A: no header of an artefact, specification, recipe, index or map carries a field that changes with a round.
-  - C1: `threads/` exists, or the project has no threads file.
-  - D: `.gitattributes` exists.
-  - B: `ledger.md` is out of git's index.
-- The dry run is the default. It prints the marks and, for every step still missing, what it would change.
-- `--apply` runs the missing steps in the order A, B0, B, C1, D, each verifying its own mark afterwards. A library takes A, B0, B and D. It commits nothing; `/save` follows.
-- `--undo` takes back the last `--apply` from the script's own manifest in `tmp/forge-migrate-<slug>.json` at the engine root.
-- The author of every record it writes is the handle in the instance file (`Author:`). Without it the script refuses.
-- Where the project is a repository of its own, `--apply` refuses a working tree with unsaved changes to tracked files, a branch behind or diverged from its origin, and any branch but `main`. The migration is one large change, run once, on one clone.
-- A project outside git gets none of these refusals, because the forge runs no git on it. The way back is the backup its user takes before `--apply`, and `--undo` refuses there. A run that stops midway is finished by running it again, the marks being the memory.
-- Items it cannot place are printed for the principal: a Waiting line without an ID, the guessed origin of a thread, text after the last thread.
-
-Needs: Python 3.8 or newer, git on PATH, `forge_repos.py` and `forge_tools.py` beside it, and the templates `project.md`, `thread.md` and `gitattributes`.
+- **Synopsis:**
+  - `python scripts/forge-migrate.py <slug>` (dry run)
+  - `python scripts/forge-migrate.py <slug> --apply`
+  - `python scripts/forge-migrate.py <slug> --undo`
+- **The marks:** the shape of a project is a set of marks, one per
+  step, and never an engine version written in the project.
+  - `A`: no header of an artefact, specification, recipe, index or map
+    carries a field that changes with a round.
+  - `B0`: the project file exists.
+  - `B`: `ledger.md` is out of git's index; what only the ledger knew
+    has become records.
+  - `C1`: `threads/` exists, or the project has no threads file.
+  - `D`: `.gitattributes` exists.
+- **Dry run:** the default. It prints the marks and, for every step
+  still missing, what it would change.
+- **`--apply`:** runs the missing steps in the order A, B0, B, C1, D,
+  each verifying its own mark afterwards. A library takes A, B0, B and
+  D. It commits nothing; `/save` follows. The author of every record it
+  writes is the handle of the instance file; without it the script
+  refuses.
+- **`--undo`:** takes back the last `--apply` from the script's own
+  manifest in `tmp/`: changed and deleted tracked files are restored,
+  created files removed, the ledger put back into the index and the
+  `.gitignore` line taken out.
+- **Refusals of `--apply`,** where the project is a repository of its
+  own: a working tree with unsaved changes to tracked files, a branch
+  behind or diverged from its origin, and any branch but `main`.
+  Untracked files are no risk.
+- **A project outside git:** it gets none of these refusals, since no
+  git is run on it. The way back is the backup its user takes before
+  `--apply`, and `--undo` refuses there. A run that stops midway is
+  finished by running it again, the marks being the memory.
+- **Needs:** Python 3.8 or newer; git on PATH; `forge_repos.py` and
+  `forge_tools.py`; the project, thread and gitattributes templates.
 
 ### forge-check.py
 
-Runs the mechanical clauses of a check as a program instead of a model. Run by hand beside the check, and by no command.
+Runs the mechanical clauses of the light check as a program instead of
+a model.
 
-```
-python scripts/forge-check.py light <slug> [--out PATH]
-```
+- **Synopsis:** `python scripts/forge-check.py light <slug> [--out PATH]`
+- **What it verifies for one project:**
+  - front-matter and history: header keys against the skeleton,
+    version and status, the companion beside each document, the shape
+    and order of every record;
+  - the ledger's own reports, composed in memory (nothing is written);
+  - records and companions: the published companions, work files
+    against their specification's inputs, the thread files, the
+    Verdict words of the decisions;
+  - dependencies: every path of the ledger's Dependencies table on
+    disk;
+  - resource indexes: header, registration of every file, bundles and
+    their inner indexes, the fields of each entry.
+- **Report:** printed in the shape of the check contract: a verdict
+  line, the findings ranked by severity, each with where, the rule
+  with its owner and one fix (marked immediate where it is pure
+  bookkeeping). No ID is given. A closing section, Left to reading,
+  names the clauses of the check that the script does not verify.
+- **Run:** by hand, beside the check. No command runs it. It reads
+  only, and the exit code is always 0; the report is the result.
+- **Needs:** Python 3.8 or newer; git on PATH; `forge_check.py`,
+  `forge_docs.py`, `forge_repos.py`, `forge_tools.py` and
+  `forge-ledger.py`; the templates.
 
-- It runs the clauses of the light check that are a comparison of files, and prints a report in the shape of the check contract: the verdict line, the findings ranked by severity, each with its place (file and line, relative to the project), the rule with its owner and one fix. Pure bookkeeping is marked "immediate fix:". No ID is given, because the check command numbers and files a report.
-- The clauses it verifies:
-  - front-matter and history: the header keys of every versioned document, version and status, the companion beside it, every record in the shape of the log, no Version History table left;
-  - the ledger's own reports, composed in memory by `forge-ledger.py` and written nowhere;
-  - records and companions: the published companions, the work files against their specifications, the thread files, the Verdict words of the decisions;
-  - dependencies: every path of the ledger's Dependencies table on disk;
-  - resource indexes: the header, the registration of every file, the bundle indexes and the fields of each entry.
-- A section "Left to reading" closes the report. It names the clauses of the check that the script does not verify, so that the script and the check can be compared clause by clause.
-- It reads only. The exit code is always 0; the report is the result. `--out` writes the report to a path.
+## Research: engine and citations
 
-Needs: Python 3.8 or newer, git on PATH, `forge_check.py`, `forge_docs.py`, `forge_repos.py`, `forge_tools.py` and `forge-ledger.py` beside it, and `templates/`.
-
-## The research scripts
-
-Both are run by `/research`. The job is described in [Research a topic](../use/research-a-topic.md).
+Both scripts are run by `/research`, described in
+[Research a topic](../use/research-a-topic.md).
 
 ### forge-engine.py
 
-Runs one packet on a model of another family and brings its answer back as a note. It is the forge's adapter to such an engine's command-line tool. The login is the user's, made once outside the forge, and the forge carries no key, account or configuration.
+Runs one packet on a model of another family and brings its answer
+back as a note. It is the forge's adapter to the engine's command-line
+tool; the login is the user's, made once outside the forge, and the
+forge carries no key, account or configuration.
 
-```
-python scripts/forge-engine.py <engine> --packet <dir> --out <file>
-    [--model <word>] [--effort low|medium|high|xhigh|max]
-    [--timeout <seconds>] [--schema <file.json>] [--allow-all]
-    [--sandbox] [--prompt <text>] [--no-profile]
-```
-
-- The engine table has one row, `antigravity`, whose tool is `agy`, with a minimum version of 1.1.1. Other rows (codex, claude, copilot) are to be added when wanted. A row is added, never a branch. Adding one is described in [Add an engine](../extend/add-an-engine.md).
-- The packet folder must hold `packet.md`, the whole context of the run. The engine is given that folder as its workspace and runs in it, under the project's `tmp/`, never the forge root.
-- The per-run profile: the script writes a settings file under `<run>/.home/`, a copy of the user's settings with permission rules added. Web reading is allowed. The shell and file writing are denied. Reading is denied for every entry of the engine root except `tmp/`, and for the folder where the first engine's notes wait. The engine is started with its home pointing at that profile. The profile stays in the run folder as its record. The user's global settings are not touched. `--no-profile` runs under the user's own settings, for a trial of the engine alone.
-- The verified read-only folder: the script records a fingerprint of every file in the packet folder (the envelopes and logs of earlier runs left out), runs the engine once, non-interactively, and compares the folder afterwards. A run that changed or added anything in it is refused and nothing is filed.
-- The envelope: the engine's JSON answer. Its `status` must say success and its `response` must be non-empty. It is saved beside the packet as `envelope.json`. The run folder is kept, never cleaned.
-- The note: the answer is written to `--out` with `engine`, `model`, `usage`, `run` and `status: immutable` in its front-matter. The caller files and indexes it.
-- Flags:
-  - `--model`: the model word, recorded in the note.
-  - `--effort`: the effort level.
-  - `--timeout`: seconds for the run, 1800 by default; passed to the engine where it has a flag and enforced here a minute later.
-  - `--schema`: a JSON schema file the final answer must follow; off by default.
-  - `--allow-all`: passes the engine's flag that approves every tool call. It is needed when the engine's web tools would otherwise wait for a permission nobody can give in a headless run.
-  - `--sandbox`: passes the engine's sandbox flag where it has one.
-  - `--no-profile`: see above.
-  - `--prompt`: the one sentence the engine is started with. By default it says to read `packet.md` in the workspace and do exactly what it says.
-- Exit codes: 0 when the note is written; 1 for a refusal, with the reason on standard error (tool missing, version below the minimum, packet without `packet.md`, folder changed by the run, envelope unreadable, empty answer). The engine's own non-zero exit is reported with its standard error.
-
-Needs: Python 3.8 or newer, the engine's command-line tool on PATH, `forge_tools.py` beside it.
+- **Synopsis:** `python scripts/forge-engine.py <engine> --packet <dir> --out <file>`
+  with the flags `[--model <word>] [--effort low|medium|high|xhigh|max]
+  [--timeout <seconds>] [--schema <file.json>] [--allow-all]
+  [--sandbox] [--no-profile] [--prompt <text>]`.
+- **The engine table:** one row per engine in `ENGINES`. The table has
+  one row, `antigravity`, whose tool is `agy` with a version floor of
+  1.1.1. A new engine is a row in the table and its pair in
+  `COMMANDS` (the function that builds its command and the function
+  that reads its envelope). Adding one is described in
+  [Add an engine](../extend/add-an-engine.md). Further rows
+  (codex, claude, copilot) are named in the header as to be added when
+  wanted.
+- **The packet folder:** it must hold `packet.md`, the whole context of
+  the run. The engine is given that folder as its workspace, under the
+  project's `tmp/`, and never the forge root.
+- **The per-run profile:** the place alone locks nothing, so the script
+  gives the engine a profile of its own for the run, in the run folder.
+  It is a copy of the user's settings with permissions added: reading
+  URLs is allowed; the shell, writing files and reading every entry of
+  the engine root but `tmp/` are denied, and so is the folder where
+  the first engine's notes wait. The engine is started with its home
+  pointing at that profile. The user's global settings are not touched,
+  and the profile stays in the run folder as the record.
+  `--no-profile` runs without it, as a trial of the engine alone and
+  never as a research.
+- **The verified read-only folder:** the script records a fingerprint
+  of every file in the packet folder, runs the engine once,
+  non-interactively with stdin closed, and compares the folder
+  afterwards. A run that changed or added anything is refused and
+  nothing is filed.
+- **The envelope:** the engine's JSON answer. Its `status` must say
+  success and its `response` must be non-empty; an exit 0 with an
+  empty answer is a failure. The envelope is saved beside the packet
+  as `envelope.json`, and the run folder is kept.
+- **The note:** the answer is written to `--out` with `engine`,
+  `model` (from the envelope, else the `--model` word, else
+  "engine default"), `usage`, `run` and `status: immutable` in its
+  front-matter. The caller files, indexes and remakes the ledger.
+- **Flags:**
+  - `--model` and `--effort`: passed to the engine where it has them;
+  - `--timeout`: seconds for the run, 1800 by default; passed to the
+    engine where it has a flag and enforced by the script a minute
+    later;
+  - `--schema`: a JSON schema file the engine must shape its final
+    answer by; off by default;
+  - `--allow-all`: passes the engine's "approve every tool call" flag,
+    needed when its web tools would otherwise wait for a permission
+    nobody can give in a headless run;
+  - `--sandbox`: passes the engine's sandbox flag where it has one;
+  - `--no-profile`: see above;
+  - `--prompt`: the one sentence the engine is started with; by
+    default it reads `packet.md` and does exactly what it says.
+- **Exit codes:** 0 when the note is written; 1 for a refusal with the
+  reason on stderr (tool missing, version below the floor, a packet
+  without `packet.md`, the folder changed by the run, an unreadable
+  envelope or an empty answer). The engine's own non-zero exit is
+  reported with its stderr.
+- **Needs:** Python 3.8 or newer; the engine's tool on PATH (`agy` for
+  the one row).
 
 ### forge-cite.py
 
-Verifies the citations of a research note before it is filed.
+Opens every URL of a research note before the note is filed, and
+reports its state.
 
-```
-python scripts/forge-cite.py <note.md | bundle-dir> [--timeout 20] [--out <report.md>]
-python scripts/forge-cite.py --independence <bundle-dir>
-```
+- **Synopsis:**
+  - `python scripts/forge-cite.py <note.md | bundle-dir> [--timeout 20] [--out <report.md>]`
+  - `python scripts/forge-cite.py --independence <bundle-dir>`
+- **The four states of a URL:**
+  - `ok`: the answer is 2xx;
+  - `dead`: 404 or 410, the page is gone or never existed;
+  - `unverifiable`: 401, 403, 429, a timeout or a network error; the
+    page refused or did not answer, which is not wrong and is said so;
+  - `mismatch`: an arXiv abstract page whose title shares too few words
+    with the note's entry, the mark of a fabricated citation.
+- **How it works:** it collects every http(s) URL with its line, opens
+  each once (GET, redirects followed, a time limit per URL) and prints
+  one line per URL and a count.
+- **`--out`:** writes the same report as Markdown to the file given;
+  the run folder under `tmp/` is the place.
+- **`--timeout`:** seconds per URL, 20 in the synopsis.
+- **`--independence <bundle-dir>`:** for every card of a research
+  bundle with a note from more than one engine, it prints the URLs the
+  notes share and the longer sentences (over sixty characters) they
+  have in common, as counts, with a verdict. A second engine's note
+  that shares most of its sources or a third of its sentences with the
+  first engine's was written from it and not from the web. No network
+  is touched.
+- **Exit codes:** 0 when nothing is dead or mismatched, 1 otherwise,
+  2 on a usage error.
+- **It does not** judge content, open paywalls, or check a quote
+  against its page, and it writes nothing into the note.
+- **Needs:** Python 3.8 or newer.
 
-- It collects every http(s) URL of the note, or of every `.md` of a bundle directory, with its line, opens each once (redirects followed, the time limit per URL) and classifies it into one of four states:
-  - `ok`: a 2xx answer.
-  - `dead`: 404 or 410, the page is gone or never existed.
-  - `unverifiable`: 401, 403, 429, a timeout or a network error. The page refused or did not answer. This is not counted as wrong.
-  - `mismatch`: a preprint abstract page whose title shares too few words with the note's entry, the mark of a fabricated citation.
-- It prints one line per URL and a count. `--out` also writes a Markdown report. `--timeout` is the limit per URL.
-- Exit codes: 0 when nothing is dead or mismatched, 1 otherwise, 2 on a usage error.
-- `--independence <bundle-dir>` compares, for every card that has notes from more than one engine, the URLs the notes share and the longer sentences (over sixty characters) they have in common, as counts, with a verdict. A second engine's note that shares most of its sources or a third of its sentences with the first's was written from it, not from the web. No network is touched.
-- It does not judge content, does not open paywalls and does not check a quote against its page. Nothing is written into the note.
+## Conversions
 
-Needs: Python 3.8 or newer, network access, `forge_tools.py` beside it.
-
-## The conversion scripts
-
-Each is run by `/render` for the plain file and by `/publish` for the designed one. The conversions are described in [Render an output](../use/render-an-output.md). Each installs nothing: the tools are resolved from PATH, and `forge_tools.py` says what pandoc and the claude engine need and how each is installed.
+The three conversion scripts share `forge_tools.py`, whose header says
+what pandoc and the claude engine need and how each is installed.
+Their install steps are described in
+[Install what the forge needs](../start/install.md). None of them
+installs anything. The job that runs them is described in
+[Render an output](../use/render-an-output.md).
 
 ### doc2md.py
 
-Converts documents (Word, PowerPoint, PDF, Excel) to Markdown using markitdown. Run by `/ingest`.
+Converts Word, PowerPoint, PDF and Excel documents to Markdown.
 
-```
-python scripts/doc2md.py <input> [<input> ...] [-o <dir>] [--suffix <text>]
-    [--recurse] [--force] [--as-list] [--markitdown-path <exe>]
-    [--dry-run] [--list-tools]
-```
-
-- An input is a file name, a glob, a list file (one path or glob per line, `#` or `;` starts a comment) or a directory with `--recurse`. The notations can be mixed.
-- Each document becomes `<name>.md` next to it, or in the directory `-o` names. An existing `.md` is skipped unless `--force`. `--suffix` inserts text before the extension. A name collision within one run gets `_1`, `_2`.
-- `--dry-run` lists what would be converted. `--list-tools` checks that markitdown is reachable and exits.
-- Handled extensions: `.pdf .docx .docm .pptx .pptm .xlsx .xlsm .xls .epub .html .htm .csv .json .xml .msg`. The legacy `.doc .ppt .rtf .odt .odp .ods` are reported as unsupported; resave them as `.docx`, `.pptx` or `.xlsx` first.
-
-Needs: Python 3.8 or newer, markitdown on PATH or named by `--markitdown-path`; installed with `pip install "markitdown[docx,pptx,pdf,xlsx,xls]"`.
+- **Synopsis:** `python scripts/doc2md.py <input> [<input> ...] [-o <dir>]
+  [--suffix <text>] [--recurse] [--force] [--as-list]
+  [--markitdown-path <exe>] [--dry-run] [--list-tools]`
+- **Input forms, mixable and repeatable:** a file name, a glob such as
+  `"*.pdf"`, a list file (plain text, one path or glob per line,
+  `#` or `;` starting a comment, relative paths read against the list
+  file's own directory) and a directory with `--recurse`.
+- **Output:** each document becomes `<name>.md` next to it, or in the
+  directory `-o` names. An existing `.md` is skipped unless `--force`.
+  `--suffix` inserts text before the extension. A name collision
+  within one run gets `_1`, `_2`. `--dry-run` lists and writes
+  nothing. `--list-tools` checks that markitdown is reachable and
+  exits.
+- **Handled:** `.pdf`, `.docx`, `.docm`, `.pptx`, `.pptm`, `.xlsx`,
+  `.xlsm`, `.xls`, `.epub`, `.html`, `.htm`, `.csv`, `.json`, `.xml`
+  and `.msg`. The legacy `.doc`, `.ppt`, `.rtf`, `.odt`, `.odp` and
+  `.ods` are reported as unsupported and are resaved first as
+  `.docx`, `.pptx` or `.xlsx`.
+- **Needs:** Python 3.8 or newer; markitdown, resolved from PATH or
+  named by `--markitdown-path`.
 
 ### md2pptx.py
 
 Generates a PowerPoint deck from a Markdown deck definition.
 
-```
-python scripts/md2pptx.py <definition.md> [--engine pandoc|claude]
-    [--template <file.potx>] [--recipe <recipe.md>] [-o <file.pptx>]
-    [--model <model>]
-```
-
-- Two engines. `claude` (the default) has a model do the conversion through headless Claude Code with the official pptx skill; it is expensive and never the same twice, and it is the engine of `/publish`. `pandoc` converts deterministically, one slide per second-level heading; it is cheap, plain, and the engine of `/render`.
-- `--template` names a `.potx` or `.pptx` by path, typically a file in a library project. Without it the claude engine designs the style itself and pandoc uses its built-in one.
-- `--recipe` names the recipe; the claude engine reads its Format section. `--model` names the model of the headless run; the claude engine only.
-- The output lands next to the input with the same basename unless `-o` names a path.
-
-Needs: Python 3.8 or newer, `forge_tools.py` beside it, pandoc or the claude engine.
+- **Synopsis:** `python scripts/md2pptx.py <definition.md>
+  [--engine pandoc|claude] [--template <file.potx>] [--recipe <recipe.md>]
+  [-o <file.pptx>] [--model <model>]`
+- **The two engines:**
+  - `claude` (the default): a model converts the free-form definition,
+    following the instructions of the recipe's Format section.
+    Expensive and never the same twice. It is the engine of
+    `/publish`.
+  - `pandoc`: a deterministic conversion, one slide per second-level
+    heading, nothing interpreted by a model. It is the engine of
+    `/render`.
+- **Template:** `--template` names a `.potx` or `.pptx` by path. Without
+  it the claude engine designs the style and pandoc uses its built-in
+  one.
+- **`--model`:** the model of the headless run, `opus` by default; the
+  claude engine only.
+- **Output:** next to the input with the same basename, unless `-o`
+  names a path.
+- **Needs:** Python 3.8 or newer; `forge_tools.py`; pandoc, or the
+  claude CLI with the document skill of the format.
 
 ### md2docx.py
 
 Converts a Markdown render into a Word document.
 
-```
-python scripts/md2docx.py <render.md> [--engine pandoc|claude]
-    [--reference <styles.docx>] [--page-size A4|Letter]
-    [--recipe <recipe.md>] [-o <file.docx>] [--model <model>]
-```
-
-- Two engines. `pandoc` (the default) converts deterministically; it is the engine of `/render`. `claude` has a model do the conversion through headless Claude Code with the official docx skill, the recipe's Format section giving the instructions; it is the engine of `/publish`.
-- The YAML front-matter of the render is read as metadata and does not appear. Mermaid diagrams are not rendered; they land as blocks of code.
-- `--reference` names a `.docx`, `.dotx` or `.dotm` whose styles the output takes. Without it pandoc's built-in styles apply.
-- The page is A4 by default. Without `--reference` the script writes the page size into pandoc's built-in reference (`--page-size A4|Letter`). With `--reference` the page setup is the reference document's own and `--page-size` is not applied.
-- The output lands next to the input with the same basename unless `-o` names a path.
-
-Needs: Python 3.8 or newer, `forge_tools.py` beside it, pandoc or the claude engine.
+- **Synopsis:** `python scripts/md2docx.py <render.md>
+  [--engine pandoc|claude] [--reference <styles.docx>]
+  [--page-size A4|Letter] [--recipe <recipe.md>] [-o <file.docx>]
+  [--model <model>]`
+- **The two engines:**
+  - `pandoc` (the default): deterministic, nothing interpreted by a
+    model. It is the engine of `/render`.
+  - `claude`: a model converts, the recipe's Format section giving its
+    instructions (`--recipe`). Expensive and never the same twice. It
+    is the engine of `/publish`.
+- **Front-matter and diagrams:** the render's YAML front-matter is read
+  as metadata and does not appear in the document. Mermaid diagrams are
+  not rendered and land as blocks of code.
+- **Styles and page:** `--reference` names a `.docx`, `.dotx` or
+  `.dotm` whose styles the output takes; the page setup is then the
+  reference's own and `--page-size` is not applied. Without a
+  reference the page is A4, or Letter with `--page-size Letter`. The
+  claude engine takes the reference as the template it starts from,
+  and A4 where none is given.
+- **`--model`:** `opus` by default; the claude engine only.
+- **Output:** next to the input with the same basename, unless `-o`
+  names a path.
+- **Needs:** Python 3.8 or newer; `forge_tools.py`; pandoc, or the
+  claude CLI with the document skill of the format.
 
 ### md2video.py
 
-Makes the format file of a screenplay render: a video, or the timed events its player plays in the browser. The job is described in [Make a teaching video from a recipe](../use/make-a-video-from-a-recipe.md).
+Makes the format file of a screenplay render. The job is described in
+[Make a teaching video from a recipe](../use/make-a-video-from-a-recipe.md).
 
-```
-python scripts/md2video.py <render.md> --format video|html-player
-    [--pace 4,8,16] [--date <date>] [--section <name>]
-    [--name <name>] [-o <file>] [--frame <seconds> <file.png>]
-```
+- **Synopsis:** `python scripts/md2video.py <render.md> --format video|html-player
+  [--pace 4,8,16] [--date "<date>"] [--section <name>] [--name <name>]
+  [-o <file>] [--frame <seconds> <file.png>]`
+- **Input:** a render of the screenplay genre: a title card, a card of
+  what the viewer will see, scenes each with a caption of two parts
+  (Now, Why) and a fenced block of what the terminal shows, and an end
+  card.
+- **The two formats:**
+  - `video`: every frame painted with Pillow as a simulated terminal
+    (1280x890) and piped into ffmpeg (H.264, 30 fps). The same file
+    comes from the same render every time.
+  - `html-player`: the timeline as JSON of events, wrapped as a script
+    (`forgeVideo({...})` in `<name>.html-player.js`) so that the player
+    page can load it from a file on disk as well as from GitHub
+    Pages.
+- **The pace:** three reading rates in words a second, for the
+  principal's lines, Claude's answers and the lines that only report
+  a file. The default is `4,8,16`. The pace, the date shown in the tab
+  bar and the look come from the recipe's Format section as
+  arguments; the render carries none of it.
+- **The section and the name:** `--section` names the section of the
+  course the video belongs to and `--name` the name the list shows,
+  in place of the title card's title. Both go into the player file's
+  data. The page groups the videos by section, sections and videos
+  alike in the order of the file names. A file without them is listed
+  under its title, after the sections.
+- **`--frame <seconds> <file.png>`:** paints one frame of the video at
+  that second to a PNG and stops, as a check of the look.
+- **Where the file lands:** next to the input with the render's
+  basename (`<name>.mp4` or `<name>.html-player.js`) unless `-o` names
+  a path. Where the output lands under the engine's `docs/videos/`,
+  the player page `docs/videos/index.html` is written anew from the
+  template with the folder's files listed and loaded.
+- **Needs:** Python 3.8 or newer; `forge_tools.py`. For `video`:
+  Pillow and ffmpeg on PATH. Fonts are taken from the system where
+  they exist, and Pillow's built-in font otherwise.
 
-- It reads a screenplay render: the language from the front-matter, a title card, a card of what the viewer will see, scenes with a time of day, each with a caption of two parts (Now, Why) and a fenced block of what the terminal shows, and an end card. It computes the timeline from the pace and writes one of two formats.
-- `video`: every frame painted as a simulated terminal and piped into ffmpeg (H.264, 30 frames a second). Deterministic.
-- `html-player`: the timeline as JSON of events, wrapped as a script in `<name>.html-player.js`, so that the player page loads it from a file on disk as well as from a hosted page. Where the output lands under the engine's `docs/videos/`, the player page `docs/videos/index.html` is written anew from `templates/html-player.html`, with the folder's files listed and loaded.
-- The pace is three reading rates in words a second: the principal's lines, Claude's answers, and the lines that only report a file. The default is 4,8,16. The pace, the date shown in the tab bar and the look come from the recipe's Format section, as arguments.
-- `--section` names the section of the course on the player page that the video belongs to. `--name` names the video in the list, in the render's language, in place of the title card's title. Both go into the player file's data. The page groups the videos by section, sections and videos alike in the order of the file names. A file without them is listed under its title, after the sections.
-- `--frame <seconds> <file.png>` paints one frame of the video at that second to a PNG and stops, as a check of the look.
-- The output lands next to the input with the render's basename (`<name>.mp4` or `<name>.html-player.js`) unless `-o` names a path.
+## Hooks
 
-Needs: Python 3.8 or newer, `forge_tools.py` beside it. For video also Pillow (`pip install pillow`) and ffmpeg on PATH. Fonts come from the system where they exist, and from Pillow's built-in font otherwise.
-
-## The hooks
-
-A hook is a script that Claude Code runs at a fixed moment. Both are configured in `.claude/settings.json`. Both need Python 3.8 or newer on PATH as `python`, and nothing else.
+Both hooks are configured in `.claude/settings.json` and are called by
+the harness, which here means the program that runs Claude. Neither
+takes the principal's arguments in normal use.
 
 ### hook-walkthrough.py
 
-The hook that runs at every prompt of the principal. Claude Code adds its standard output to the context of that turn. It reads nothing, writes nothing and takes no arguments. It is independent of the working directory: `.claude/settings.json` invokes it in exec form and hands it its own path.
+A hook that runs at every prompt the principal sends. The harness adds
+its standard output to the context of that turn.
 
-It prints:
-
-- the walkthrough rule: one item per reply, a proposition closed with the verdict line `(a)ccept / (m)odify / (q)uestion / (r)eject / (p)ark`, a question from the principal keeping the item open;
-- the pointer to the walkthrough skill, to work by when a walkthrough or an interview runs;
-- three lines of conduct: use the forge's scripts rather than the raw tool; say what an own command does and why, and wait for the principal's yes before running it; write, run and change nothing that was not agreed and approved.
+- **What it answers:** it prints lines that repeat the one-item
+  walkthrough rule with the verdict line that closes every
+  proposition, the pointer to the walkthrough skill, and the conduct
+  rules: use the forge's scripts and never the raw tool, explain and
+  ask before running a command of one's own, change nothing that was
+  not agreed and approved, and close every step needing consent with
+  the verdict line (a yes with a question in it counts as a question).
+- **It reads and writes nothing,** takes no arguments, and is
+  independent of the working directory: the settings file invokes it
+  with its own path through the `${CLAUDE_PROJECT_DIR}` placeholder.
+- **Needs:** Python 3.8 or newer on PATH as `python`.
 
 ### hook-git.py
 
-The hook that runs before every Bash command Claude sends. It is the wall between reading git and writing it. The PowerShell tool stays closed to git whole by a deny rule, so that there is one parser and one door. The script reads the command from the hook's JSON on standard input, splits it at the shell's separators and judges every part that calls git.
+A hook that runs before every Bash command Claude sends. It separates
+reading git from writing it. The PowerShell tool is closed to git
+whole by a deny rule, so that there is one parser and one door.
 
-It answers:
+- **What it does:** it reads the command from the hook's JSON on
+  stdin, splits it at the shell's separators, and judges every part
+  that calls git.
+- **What it answers, per part:**
+  - `allow`: a reading verb (status, log, diff, show, fetch and the
+    like) with reading flags.
+  - `ask`: the commands that finish a conflict and its step, so that
+    the harness puts the command to the principal and runs it on his
+    yes. They are `add` without `--force` and without the interactive
+    flags, `rebase --continue` and `--abort`, `merge --continue` and
+    `--abort`, `merge <branch>` with one name and no flag, and
+    `checkout --ours` or `--theirs` on a file. An ask holds in the
+    automatic permission mode.
+  - `deny`: everything else, with the script of the forge to use
+    instead where one exists. Denied are the writing verbs, a verb the
+    script does not know (an alias among them), a reading verb with a
+    writing flag, a global option that changes how git runs (`-c`,
+    `--git-dir`, `--work-tree`, `--exec-path`), git inside another
+    command and a part the script cannot read.
+- **Across a whole command:** a part that is not git is left to the
+  harness. The answer is deny where any part is a git it refuses, ask
+  where none is refused and one asks, allow where every part is a
+  reading git, and nothing otherwise.
+- **Reach:** it reads no file and writes nothing. It is for Claude's
+  tools alone; the principal's own git from the shell is his.
+- **Forms:**
+  - `python scripts/hook-git.py` as a hook, with JSON on stdin;
+  - `python scripts/hook-git.py --test` runs the built-in cases and
+    exits 1 on a failure;
+  - `echo 'git status' | python scripts/hook-git.py --judge` judges one
+    command and prints the verdict.
+- **Needs:** Python 3.8 or newer on PATH as `python`.
 
-- allow: a reading verb with reading flags (status, log, diff, show, fetch and the like).
-- ask, so that Claude Code puts the command to the principal and runs it on his yes: the commands that finish a conflict and its step, namely `add` without `--force` and the interactive flags, `rebase --continue` and `--abort`, `merge --continue` and `--abort`, `merge <branch>` with one name and no flag, and `checkout --ours` or `--theirs` on a file.
-- deny: everything else. That is the writing verbs, a verb the script does not know (an alias among them), a reading verb with a writing flag, a global option that changes how git runs (`-c`, `--git-dir`, `--work-tree`, `--exec-path`), git inside another command (`xargs`, `sh -c`, a substitution) and a part the script cannot read. The reason names the rule and the script of the forge to use instead, where one exists.
+## Documentation
 
-A part that is not git is left to Claude Code. Over the whole command, deny wins, then ask, then allow. The hook is for Claude's tools alone; the principal's own git from the shell is his. It reads no file and writes nothing.
-
-Forms:
-
-```
-python scripts/hook-git.py            # as a hook: JSON on standard input
-python scripts/hook-git.py --test     # the built-in cases, exit 1 on a failure
-echo 'git status' | python scripts/hook-git.py --judge   # one command, the verdict printed
-```
-
-## The documentation scripts
-
-The three scripts serve `/document`, which is described in [Generate the documentation](../use/generate-the-documentation.md). Each needs Python 3.8 or newer and `docs_map.py` beside it, and nothing else. The map is the documentation map, one entry per page.
+The three documentation scripts are steps of the run of `/document`,
+described in [Generate the documentation](../use/generate-the-documentation.md).
+They read the documentation map through `docs_map.py` and need Python
+3.8 or newer and nothing else.
 
 ### docs-state.py
 
-Computes the state of every page from the content of its inputs and prepares the writers' tasks. It runs before the writers.
+Computes the state of every page from the content of its inputs and
+prepares the writers' tasks. It runs first in the run.
 
-```
-python scripts/docs-state.py <map> <docs-dir> --tasks <tmp-dir> [--date YYYY-MM-DD]
-python scripts/docs-state.py <map> --previous <path>
-```
-
-- For every entry it hashes the entry's text (its `state` line excepted) together with the content of every input the entry names: a whole file, or the part named after `#` (a section by its heading, an item by its ID), hashed as that part. The writer's definition and the documentation contract are hashed with the inputs.
-- The page at the entry's path carries the hash it was made from in its front-matter as `inputs-hash`. The two are compared and the entry's `state` is set in the map to `new` (no page), `regenerate` (the hash differs) or `keep` (the same hash).
-- A page under the documentation directory that no entry names, and the page of an entry marked `remove`, are listed as `remove`. The index `README.md` is excepted.
-- For every `new` or `regenerate` entry it writes one task file to the `--tasks` directory: the engine root, the page's path, the date, the version the page is made for, the hash the page is to carry, the entry verbatim and the titles of the pages it links to. The task is the whole prompt of a writer.
-- An input the map names and the disk does not have is reported and hashed as missing. The page is regenerated and its writer reports the gap.
-- `--previous <path>` prints the map as last committed, for the planner.
-- The script rewrites only the `- state:` line of each entry.
+- **Synopsis:**
+  - `python scripts/docs-state.py <map> <docs-dir> --tasks <tmp-dir> [--date YYYY-MM-DD]`
+  - `python scripts/docs-state.py <map> --previous <path>`
+- **The state:** for each entry it hashes the entry's text (its
+  `state` line excepted) with the content of every input, a part of a
+  file hashed as that part. The generator is hashed with the inputs:
+  the writer's definition and the contract. The hash is compared with
+  the `inputs-hash` in the front-matter of the page at the entry's
+  path, and the entry's `state` is set in the map:
+  - `new`: no page at the path;
+  - `regenerate`: a page exists and its hash differs;
+  - `keep`: a page exists with the same hash.
+- **Removal:** a page under the documentation directory that no entry
+  names, and the page of an entry marked `remove`, are listed as
+  `remove`. The index `README.md` is excepted.
+- **Tasks:** for every `new` or `regenerate` entry one task file is
+  written to the folder given: the engine root, the page's path, the
+  date, the version the page is made for, the hash it is to carry, the
+  entry verbatim and the titles of the pages it links to. A task is a
+  writer agent's whole prompt.
+- **Missing inputs:** an input the map names and the disk does not
+  have is reported and hashed as missing. The page is regenerated and
+  its writer reports the gap.
+- **The `--previous` form:** prints the map as last committed, for the
+  planner.
+- **It rewrites** only the `- state:` line of each entry.
 
 ### docs-index.py
 
-Derives the documentation index from the map. Deterministic, no model.
+Derives the documentation index from the map.
 
-```
-python scripts/docs-index.py <map> <docs-dir> [--date YYYY-MM-DD]
-```
-
-- It writes `<docs-dir>/README.md`: before the sections, the reader paths of the map, each page a link. Then one line per page, grouped by section in the order start, use, about, extend, reference, each line the page's title linked to its relative path and the entry's `line` (the first sentence of its `says` where an entry has no `line`).
-- The front-matter names the map as its one input and carries the version of the owning project's intent. The opening paragraph is fixed text of this script.
-- The index is never edited by hand: change the map and run the script again.
+- **Synopsis:** `python scripts/docs-index.py <map> <docs-dir> [--date YYYY-MM-DD]`
+- **Output:** writes `<docs-dir>/README.md`: before the sections, the
+  reader paths of the map with each page a link; then one line per
+  page grouped by section in the order start, use, about, extend,
+  reference, each line the page's title linked to its path and the
+  entry's `line`.
+- **Deterministic:** no model is involved; the same map gives the same
+  index. The index is never edited by hand.
 
 ### docs-check.py
 
-Checks the generated documentation mechanically. It runs after the pages are written.
+Checks the generated documentation mechanically.
 
-```
-python scripts/docs-check.py <map> <docs-dir> [--fact PATTERN ...]
-python scripts/docs-check.py --file <path> [--fact PATTERN ...]
-```
-
-- With a map and a directory it verifies, and prints every failure with its file and line:
-  - every entry of the map not marked `remove` has its page, and no page lies in the directory that the map does not name (the index excepted);
+- **Synopsis:**
+  - `python scripts/docs-check.py <map> <docs-dir> [--fact PATTERN ...]`
+  - `python scripts/docs-check.py --file <path> [--fact PATTERN ...]`
+- **What it verifies, printing each failure with file and line:**
+  - every entry not in state `remove` has its page, and no page lies
+    in the directory that the map does not name;
   - every relative link to a `.md` file resolves;
-  - no long dash in the prose of any page (a code span and a fenced block are exempt);
+  - no long dash in the prose of a page (a code span and a fenced
+    block are exempt);
   - every page opens with a front-matter;
-  - no instance fact: the values of the instance file `CLAUDE.local.md` (every word of four letters or more in a value, looked for outside URLs), any e-mail address but a placeholder at `example.*`, any absolute path of a machine, and every `--fact` pattern given.
-- With `--file <path>` one file is scanned for instance facts only: the values of `CLAUDE.local.md`, an absolute path of a machine and the `--fact` patterns. There is no map, no link check, no dash rule and no e-mail rule. This is the scan that `/render` runs on a render it has just written.
-- The exit code is 0 when everything holds and 1 when anything fails. The script mends nothing: a page that fails is regenerated, never edited by hand.
-- The script carries no name, address or host of its own. The instance facts are read from `CLAUDE.local.md` at run time.
+  - no instance fact: the values of `CLAUDE.local.md`, any e-mail
+    address but a placeholder at `example.*`, any absolute path of a
+    machine, and every `--fact` pattern given.
+- **The one-file scan:** with `--file <path>` in place of a map and a
+  directory, one file is scanned for instance facts only (the values
+  of `CLAUDE.local.md`, an absolute path of a machine and the `--fact`
+  patterns). This is the scan `/render` runs on a render it has just
+  written.
+- **Exit codes:** 0 when everything holds, 1 when anything fails. The
+  check mends nothing: a page that fails is regenerated, never edited
+  by hand.
 
-## The shared modules
+## Shared modules
 
-These are not commands. They are used by the scripts above and live beside them, never twice.
+These five modules are imported by the scripts and are not commands.
 
-- `forge_repos.py`: what the git scripts share. The engine root, the git check, the list of repositories to visit, running git, the state of a repository against its origin, the files of the global git configuration, the registration of the merge driver `ours` and coloured output.
-- `forge_docs.py`: what the scripts that read a project's documents share. Front-matter, the records of a history companion, the tables of a ledger, the entries of a resource index and the threads. Used by `forge-ledger.py`, `forge-migrate.py` and `forge-history.py`. A reader never raises on a malformed file: it lists what it could not read.
-- `forge_tools.py`: what the conversion scripts share. Finding an external tool on PATH, resolving paths, running a tool, the headless Claude Code run, and the console set to UTF-8. It is the one owner of the text on what pandoc and the claude engine need.
-- `docs_map.py`: the one reader of the documentation map, shared by the three documentation scripts and by `forge-history.py`. An input is a file, a section named after `#` by its heading, an item by its ID, or a block by its bold label.
-- `forge_check.py`: what the mechanical checks of `forge-check.py` share. A finding and its report in the shape of the check contract, the front-matter keys and the comment a template owns, and the kinds of the versioned documents. A check there raises on nothing: what a file does not give is a finding or is left unread, named in the report.
+- `forge_repos.py`: what the git scripts share, that is the engine
+  root, the list of repositories to visit, running git, the state of a
+  repository against its origin, the global git configuration files,
+  the registration of the merge driver and coloured output.
+- `forge_tools.py`: what the conversion scripts share, that is finding
+  a tool on PATH, running it, the headless Claude Code run and the
+  console set to UTF-8; it owns the text of what the conversions need.
+- `forge_docs.py`: what the scripts that read a project's documents
+  share, that is front-matter, history records, ledger tables, resource
+  index entries and threads; it never raises on a malformed file.
+- `docs_map.py`: the one reader of the documentation map, shared by the
+  three documentation scripts and by `forge-history.py`.
+- `forge_check.py`: what the mechanical checks share, that is a
+  finding and its report in the shape of the check contract, the keys
+  and comments a template owns, and the kinds of the versioned
+  documents.
 
 ## Portability
 
-The scripts are the only platform-bound layer. They are written to run unchanged on Linux, macOS and Windows: Python 3.8 or newer, run as `python scripts/<name>.py`, paths composed with `pathlib`, external tools resolved from PATH.
-
-Writing a script of your own is described in [Add a script](../extend/add-a-script.md).
+The scripts are the only platform-bound layer of the forge, and each
+is written to run unchanged on Linux and macOS: Python 3.8 or newer
+run as `python scripts/<name>.py`, paths composed with `pathlib`,
+external tools resolved from PATH and nothing Windows-only. This is a
+writing rule. The inputs do not record which scripts have run on
+Linux. To write a script of one's own under the same rule, see
+[Add a script](../extend/add-a-script.md).
 
 ## See also
 
@@ -507,4 +794,4 @@ Writing a script of your own is described in [Add a script](../extend/add-a-scri
 - [Add an engine](../extend/add-an-engine.md): adding a row to the engine table.
 - [Glossary](glossary.md): every term of the forge in one line.
 
-Generated on 2026-10-25 for version 6.0 from the files the front-matter names; never edited by hand.
+Generated on 2026-10-25 for version 6.1 from the files the front-matter names; never edited by hand.

@@ -1,8 +1,8 @@
 ---
 generated: 2026-10-25
-version: 6.0
+version: 6.1
 made: mirrored
-inputs-hash: 0bde1371de3a8843
+inputs-hash: 9072d03c025ec65c
 inputs:
   - templates/challenger-definition.md
   - .claude/skills/challenger-contract/SKILL.md
@@ -12,83 +12,110 @@ inputs:
 
 # Add a challenger persona
 
-This page shows an extender how to add a new challenger persona to the forge. A persona is one agent file: an isolated reviewer (a subagent, that is, a helper Claude runs in a context of its own) that tests the substance of the principal's thinking from a vantage point of its own. The principal is the person whose thinking is being forged.
+This page shows how to add a new challenger persona to the forge. A persona is a reviewer that attacks the substance of the principal's thinking from a vantage point of its own. The principal is the person whose thinking is being forged. The page is for the extender who wants one more such vantage point.
 
 ## Before you start
 
-A new persona is added only by the principal's decision, and only where what it would find genuinely differs from what the existing personas find. Look at the existing ones first: [Challenger personas](../reference/challenger-personas.md) lists them.
+A persona is added only by the principal's decision, and only where what it would find genuinely differs from what the existing personas find. Check the personas that exist first: [Challenger personas](../reference/challenger-personas.md) lists them.
 
-What every persona shares is owned by one contract (conduct, isolation, the subject, the way of working and the shape of the report), and a persona file never restates it. [The challenger](../about/the-challenger.md) explains what the contract owns.
+The shared behaviour of every persona (what it reads, how it works, the shape of its report) is owned by the challenger contract. A persona file does not restate it. [The challenger](../about/the-challenger.md) explains what the contract owns.
 
-How a change is proven, recorded and released is described in [Make a change to the forge](how-a-change-is-made.md). The new persona is recorded and released as any change of the forge.
+The addition is a change of the forge like any other. How a change is proved, recorded and released is described in [Make a change to the forge](how-a-change-is-made.md). The addition is recorded and released in that way.
 
-Terms of the forge are explained in the [Glossary](../reference/glossary.md).
+Terms of the forge that appear here are defined in the [Glossary](../reference/glossary.md).
 
 ## The files
 
-One file is added and none is edited:
+You write one file:
 
-- `.claude/agents/challenger-<persona>.md`: the persona, made from the skeleton `templates/challenger-definition.md`.
+- `.claude/agents/challenger-<persona>.md`, made from the skeleton `templates/challenger-definition.md`.
 
-The command `/challenge` does not change. Its roster is made by scanning the agent files named `challenger-*.md`, so the new file appears in it by existing.
+You edit nothing else. The `/challenge` command finds personas by scanning `.claude/agents/challenger-*.md`, so the new file joins the roster by existing. The command, the contract and the other personas do not change.
 
 ## Steps
 
-1. Copy the skeleton `templates/challenger-definition.md` to `.claude/agents/challenger-<persona>.md`. The name of the persona is the suffix of the file name.
-2. Fill the front-matter:
-   - `name`: `challenger-<persona>`.
-   - `description`: the persona in one line, saying who it is and what blind spots it exists to find. The roster shows this line, and the recommendation of a fit is made from it.
-   - `tools`: the skeleton's list, which includes web search (`WebSearch`, `WebFetch`) so that the persona can ground a claim in how the world works.
-   - `model`: `inherit`, so that the persona runs on the model of the session.
-   - `skills`: the list holding `challenger-contract`, which loads the shared contract into the persona.
-3. If the description holds a colon followed by a space, put the whole description in single quotes (an apostrophe inside is doubled). Otherwise the agent does not register.
-4. Delete the comment in the skeleton.
-5. Write the `## Lens` section, the only section that is the persona's own. It has two parts:
-   - Who you are: a role of its own, never a mirror of the principal. It gives the register and the vantage point from which the persona reviews the thinking as an equal, with no stake in the principal being right.
-   - What to go after: the blind spots this persona exists to find, as a list of concrete angles.
-6. Leave out anything the contract already says. The Lens section may narrow what is read or make a shared rule stricter. It never renames, drops or duplicates a shared rule or field.
+1. Copy the skeleton `templates/challenger-definition.md` to `.claude/agents/challenger-<persona>.md`. The suffix of the file name is the persona's name.
 
-You should now see one new file, with front-matter and a Lens section, and nothing else changed.
+   You should now see the new file beside the other `challenger-*.md` files.
+
+2. Fill the front-matter:
+
+   - `name`: `challenger-<persona>`.
+   - `description`: one line saying who this persona is and what blind spots it exists to find. This line is what the roster shows, so it is how the persona is recognised and chosen.
+   - `tools`: `Read, Glob, Grep, WebSearch, WebFetch`. The persona reads files and may search the web.
+   - `model: inherit`. The persona runs on the model of the session.
+   - `skills`: a list holding `challenger-contract`. This loads the shared behaviour into the persona.
+
+   If the description holds a colon followed by a space, put the whole description in single quotes, and double any apostrophe inside it. Otherwise the agent does not register.
+
+   You should now see a front-matter whose `name` matches the file name.
+
+3. Delete the comment in the skeleton. The persona file holds the front-matter and the Lens section, nothing else.
+
+4. Write the Lens section in two parts:
+
+   - Who you are. Give the persona a role of its own, such as a CTO or a strategist, never a mirror of the principal. State the register and the vantage point from which it reviews the thinking as an equal, with no stake in the principal being right.
+   - What to go after. List the blind spots this persona exists to find, as concrete angles.
+
+   The Lens may narrow what is read or make a shared rule stricter. It never renames, drops or duplicates a rule or a field of the contract.
+
+   You should now see a Lens section with two parts and no sentence that restates the contract.
+
+### A worked example
+
+The file below shows the shape with the placeholder `<persona>`. The angles are generic stand-ins that show the form, not a real persona's.
+
+```markdown
+---
+name: challenger-<persona>
+description: Challenger persona "<persona>" - <who this is, in one line>. Challenges the substance of the principal's thinking. Not a document auditor.
+tools: Read, Glob, Grep, WebSearch, WebFetch
+model: inherit
+skills:
+  - challenger-contract
+---
+
+## Lens
+
+You are <a role of its own>, reviewing the thinking as an equal from
+<its vantage point>, with no stake in the principal being right.
+
+Go after:
+
+- <a concrete angle: a kind of blind spot this role sees>
+- <another concrete angle>
+- <another concrete angle>
+```
 
 ## Prove it
 
-Check the engine against its conventions:
+Run the checks on the engine:
 
 ```
 /check engine
 ```
 
-You should now see no finding about the new file. A run that finds nothing files nothing.
+You should now see the check report no finding about the new file. A run that finds nothing files nothing.
 
-List the roster:
+Then see that the roster lists the persona:
 
 ```
 /challenge
 ```
 
-You should now see `<persona>` among the personas, with its description.
+You should now see `challenger-<persona>` with its description, among the others.
 
-Run the persona on a target, an artefact named as `/forge` names it or any file of a project by its path:
+Then run the persona on a target. The target is an artefact named as `/forge` names it, or any file of the project by its path:
 
 ```
-/challenge <persona> <artefact> <slug>
+/challenge <persona> 10-intent.md <slug>
 ```
 
-You should now see a report in the shape of the contract. The command files it in the project's `challenges/` folder and offers a walkthrough of its challenges.
+You should now see the persona's report: an overall read, then challenges ordered by severity. The command files the report in the project's `challenges/` folder and offers a walkthrough of the challenges.
 
 ## Record and release
 
-The new file is recorded and released as any change of the forge, by the steps in [Make a change to the forge](how-a-change-is-made.md).
-
-## A worked example
-
-The principal decides that a new persona, `<persona>`, is wanted, for a vantage point none of the existing personas takes.
-
-1. You copy the skeleton to `.claude/agents/challenger-<persona>.md`.
-2. You set `name: challenger-<persona>` and a one-line `description` starting `Challenger persona "<persona>"` and naming who this is. The description holds no colon followed by a space, so it needs no quotes.
-3. You keep `tools`, `model: inherit` and the `challenger-contract` skill as the skeleton has them.
-4. Under `## Lens` you write, first, a short paragraph of who `<persona>` is and the register it speaks in, and second, a list of the concrete blind spots it goes after.
-5. You run `/check engine`, then `/challenge`, which lists `<persona>`, then `/challenge <persona> <artefact> <slug>` on a project of yours.
+Record and release the addition as any change of the forge, by the steps in [Make a change to the forge](how-a-change-is-made.md).
 
 ## See also
 
@@ -97,4 +124,4 @@ The principal decides that a new persona, `<persona>`, is wanted, for a vantage 
 - [Challenger personas](../reference/challenger-personas.md): the personas that exist.
 - [Glossary](../reference/glossary.md): every term of the forge in one line.
 
-Generated on 2026-10-25 for version 6.0 from the files the front-matter names; never edited by hand.
+Generated on 2026-10-25 for version 6.1 from the files the front-matter names; never edited by hand.

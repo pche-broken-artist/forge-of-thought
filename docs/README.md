@@ -1,6 +1,6 @@
 ---
 generated: 2026-10-25
-version: 6.0
+version: 6.1
 made: derived
 inputs:
   - projects/forge/docs-map.md
@@ -12,7 +12,7 @@ This is the documentation of Forge of Thought: pages of one topic
 each, generated from the engine as it stands, for three readers.
 Every page stands on its own; start where your question is.
 
-Generated on 2026-10-25 for Forge of Thought at version 6.0
+Generated on 2026-10-25 for Forge of Thought at version 6.1
 (the version of the engine's intent; a release carries the same
 number).
 

@@ -37,9 +37,12 @@ LINES = [
     "Own commands: before running anything of your own that is not plain reading, say what it does "
     "and why, and wait for the principal's yes.",
     "Consent: write, run and change nothing that was not agreed and approved. "
-    "A yes covers exactly what was asked, never its consequences. "
-    "Every step that needs consent (a write, a run, a commit, a change of a setting) is a proposition "
-    "and ends with the verdict line; a yes that carries a question is q.",
+    "A yes covers exactly what was asked, never its consequences.",
+    "Decisions: every question that asks the principal to decide - a step that needs consent "
+    "(a write, a run, a commit, a change of a setting), a choice between options, an either/or, "
+    "whether to write - is one proposition with Claude's recommendation as what accept means, "
+    "and ends with the verdict line; a yes that carries a question is q. Only a question for "
+    "information Claude lacks ends with the question alone.",
 ]
 
 if __name__ == "__main__":

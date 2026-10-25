@@ -1,6 +1,6 @@
 ---
-version: 6.0
-status: approved
+version: 6.1
+status: draft
 project: forge
 audience: principal + Claude only
 ---
@@ -126,13 +126,17 @@ position that already stands elsewhere.
   letter when that letter is his whole message; no other word of the
   forge has a letter, so that nothing which writes or saves can be set
   off by a slip, and `question` writes nothing. The line closes every
-  step that needs the principal's consent outside a walkthrough as well
-  (a write, a run, a commit, a change of a setting; Step by step in
-  CLAUDE.md), and a message that says yes and asks a question is
-  `question`, since a yes with a question in it was once read as
-  consent. Present shape 2026-10-24. Verdicts are carried in the
-  conversation and written once at the round's end (POS.0190). Whatever
-  produces a list ends by offering a walkthrough — `/critique`,
+  question that asks the principal to decide outside a walkthrough as
+  well: a step that needs his consent (a write, a run, a commit, a
+  change of a setting; Step by step in CLAUDE.md), a choice between
+  options, an either/or, whether to write, each one proposition with
+  Claude's recommendation as what `accept` means; only a question for
+  information Claude lacks ends with the question alone, so that every
+  decision is answered in the same system. A message that says yes and
+  asks a question is `question`, since a yes with a question in it was
+  once read as consent. Present shape 2026-10-25. Verdicts are carried
+  in the conversation and written once at the round's end (POS.0190).
+  Whatever produces a list ends by offering a walkthrough — `/critique`,
   `/challenge`, the `/forge` map, a comparison made on request — and the
   principal may call for one at any moment.
 - **POS.0860 Propose, never decide.** Claude criticises, challenges,
