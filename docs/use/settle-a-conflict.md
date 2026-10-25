@@ -1,8 +1,8 @@
 ---
-generated: 2026-10-23
-version: 5.34
+generated: 2026-10-25
+version: 6.0
 made: derived
-inputs-hash: a17007c9b9ad573d
+inputs-hash: 21c1ebc7c373a930
 inputs:
   - CLAUDE.md#Persistence (git)
   - scripts/forge-save.py
@@ -15,181 +15,179 @@ inputs:
 
 # Settle a conflict
 
-Settling a conflict is the job you do when your changes and someone
-else's touch the same lines and git cannot join them alone. This page
-is for you if `/save` has stopped on a conflict with the remote, or a
-merge of a branch has left files in conflict. It shows what you see,
-how Claude puts each conflict in front of you, and which commands
-finish the job.
-
-On this page the principal is the person whose thinking is forged and
-who decides: here, that is you. A walkthrough is the way a list of
-decisions runs: one item per message, each closed by your verdict. A
-hook is a small script that Claude Code runs before each command
-Claude sends; this one guards every write of git.
+Settling a conflict is the step that finishes a save or a merge that
+git could not finish on its own, because the same lines changed on
+both sides. This page is for the principal (the person whose thinking
+is forged and who decides every wording). It takes you from the
+moment `/save` stops on a conflict, or a merge leaves one, to the
+repository pushed clean. Terms of the forge used here are explained
+in one line each in the [Glossary](../reference/glossary.md).
 
 ## When to use it
 
-Use it in one of two situations:
+Use it in either of two situations:
 
-- `/save` stopped because the rebase of your commits onto the remote
-  conflicts. A rebase replays your commits on top of the remote's.
-- A merge of a branch was left by git in conflict.
+- a save whose rebase of your commits onto the remote conflicts (the
+  save that stops is described in [Save your work](save-your-work.md));
+- a merge of a branch that git leaves in conflict, such as a branch
+  of a contributor merged on your clone with `git merge <branch>`.
 
-The save that stops and the save that follows are described in
-[Save your work](save-your-work.md).
+## The command
 
-## What you do
-
-You answer one conflict at a time, then say yes to the commands that
-finish the step, then save again:
+The step ends with the save that pushes the repository:
 
 ```
 /save <slug>
 ```
 
+Before it, the step runs as a conversation with Claude, and the git
+commands that finish it are put to you one at a time.
+
 ## What happens
 
-1. **The save stops and says so.** The save script has already made
-   your commit, so nothing is lost. It leaves the rebase standing
-   where it stopped instead of aborting it. It prints the files in
-   conflict and the step that follows, in this shape:
+1. **The save stops.** The save script has made your commit and left
+   the rebase standing where it stopped. Nothing is lost. It prints
+   that remote changes conflict with yours, the files in conflict,
+   and the step that follows:
 
    ```
-   Remote changes in <slug> conflict with yours. The rebase stands where it stopped, the commit is made and nothing was lost. The step of a conflict follows, one file at a time:
-     <file>
-     settle each file (both sides laid out, the principal deciding), then: git -C '<path>' add <file>
-     git -C '<path>' rebase --continue   (again after each conflict, until it ends; --abort gives it up)
-     python scripts/forge-save.py <slug>   (pushes the clean repository that is ahead)
+   settle each file (both sides laid out, the principal deciding), then: git -C '<path>' add <file>
+   git -C '<path>' rebase --continue   (again after each conflict, until it ends; --abort gives it up)
+   python scripts/forge-save.py <slug>   (pushes the clean repository that is ahead)
    ```
 
-   You should now see the list of files in conflict and the three
-   lines of the step.
+   You should now see the list of files in conflict under the
+   message "Remote changes in <slug> conflict with yours."
 
-2. **The state can be checked at any time.** Run:
+2. **The state is visible.** `python scripts/forge-status.py` says
+   that a rebase or a merge is in progress and how many files are in
+   conflict. A further save is refused before anything is staged
+   until the step is finished. This is so that conflict markers are
+   never committed.
 
-   ```
-   python scripts/forge-status.py
-   ```
+   You should now see a line such as `rebase in progress - 2 file(s)
+   in conflict` for the repository.
 
-   It says, for the repository concerned, that a rebase or a merge is
-   in progress and how many files are in conflict.
+3. **Claude lays both sides out, one conflict per message.** The step
+   runs as a walkthrough (a list of items put to you one item per
+   message, each closed by your verdict; the shape is described in
+   [Walk through a list](walk-through-a-list.md)). Claude reads both
+   sides of each conflict and puts one conflict in front of you with
+   its proposition: the wording it recommends and why. Each message
+   closes with the verdict line
+   `(a)ccept / (m)odify / (q)uestion / (r)eject / (p)ark`. A message
+   that says yes and asks a question counts as a question, not as
+   consent.
 
-   You should now see a line such as
-   `rebase in progress - 2 file(s) in conflict` under the project.
+   You should now see one conflict, its two sides and one
+   proposition, and nothing else, in each message.
 
-3. **A further save is refused until the step is finished.** While a
-   rebase or a merge is in progress, the save script refuses the
-   repository before it stages anything. It prints the files still in
-   conflict and the commands that finish the step. This happens so
-   that conflict markers are never committed.
+4. **Claude writes the chosen wording.** At the round's end Claude
+   writes the wording you chose into the file. For an artefact (a
+   document of the chain, such as the intent) it also appends a
+   `changed` record to the artefact's history, as for any change.
+   A conflict in a history, in `decisions.md` or in a resource index
+   is different. It is two tails appended after one last line, and it
+   is settled by keeping both.
 
-   You should now see "A rebase is in progress" (or "A merge is in
-   progress") and "nothing was staged or committed".
+   You should now see the files free of conflict markers, and a new
+   `changed` record in the history of each artefact that conflicted.
 
-4. **Claude lays out each conflict as a walkthrough.** Claude reads
-   both sides of the file. It puts one conflict per message in front
-   of you: what each side says, what would change, and its
-   proposition for the joined wording. The message closes with the
-   verdict line `(a)ccept / (m)odify / (q)uestion / (r)eject /
-   (p)ark`. You answer, and only then does the next conflict come.
-   The shape of the walkthrough is described in
-   [Walk through a list](walk-through-a-list.md).
-
-   You should now see one conflict and one proposition at a time,
-   never a table of all of them.
-
-5. **Claude writes the chosen wording at the round's end.** When the
-   conflicts are decided, Claude writes the wording you chose into
-   the file. For an artefact (a versioned document of the chain), it
-   also writes a `changed` record into the artefact's history, as for
-   any change.
-
-   A conflict in a record file is settled differently. A record file
-   is a history, `decisions.md` or a resource index. There, the
-   conflict is two tails appended after one last line, and it is
-   settled by keeping both.
-
-   You should now see the files without conflict markers.
-
-6. **The finishing commands run on your yes.** The hook puts each of
-   these commands to you, and it runs only when you say yes:
-
-   - `git add <file>`: marks a settled file as ready.
-   - `git rebase --continue`: carries the rebase on. Run again after
-     each conflict, until the rebase ends.
-   - `git rebase --abort`: gives the rebase up instead.
+5. **The finishing commands run on your yes.** Claude may not write
+   to git directly. A hook (a script that Claude Code, the program
+   Claude runs in, starts before each shell command) stops every git
+   write but a few named commands, and puts those to you instead.
+   The commands that finish the step are these:
+   - `git add <file>`: marks a settled file;
+   - `git rebase --continue`: carries on with the rebase, again after
+     each conflict until it ends;
+   - `git rebase --abort`: gives the rebase up;
    - `git merge --continue` or `git merge --abort`: the same after a
      merge.
 
-   You should now see each command offered to you for a yes before it
-   runs.
+   You should now see each command offered for your approval before
+   it runs, and the rebase or merge ended once the last one has run.
 
-7. **Save again.** Run `/save <slug>`. The repository is now clean
-   and ahead of the remote, and the save pushes it.
+6. **Save again.** Run `/save <slug>`. It pushes the clean repository
+   that is ahead of the remote.
 
-   You should now see "saved and pushed to" followed by the remote.
+   You should now see that the repository is saved and pushed.
 
 ## What you have afterwards
 
-Your commits and the remote's are joined in one line and pushed. Every
-conflict was decided by you, one at a time. Each artefact that was
-joined carries a `changed` record in its history. Each record file
-holds both tails.
-
-## If something goes wrong
-
-- **Two sides raised one document to the same version.** Git itself
-  shows this: the header's `version:` line conflicts. Whoever merges
-  settles it. The merged document takes the next number, with one
-  `changed` record naming the merge and what was joined. The records
-  of both sides keep their numbers.
-- **One item number was taken on both sides.** It is renumbered as
-  [Stable IDs](../about/stable-ids.md) says.
-- **The save says the pull with rebase failed and left no rebase to
-  finish.** The commit is made and nothing was lost. The save script
-  says to check the network and remote access, then save again.
-- **You want to give the step up.** Say yes to `git rebase --abort`
-  (or `git merge --abort` after a merge) when it is put to you.
+The repository is clean and pushed, with both sides joined in the
+wording you chose. Each artefact that conflicted carries a `changed`
+record for the settlement. Each record file that conflicted keeps the
+records of both sides.
 
 What the forge promises two people on one project, and how each kind
 of file merges, is described in
 [Working together on one project](../about/working-together.md).
 
+## If something goes wrong
+
+- **Both sides raised one document to the same version.** Git shows
+  it itself: the header's `version:` line conflicts. The merged
+  document takes the next number, with one `changed` record naming
+  the merge and what was joined. The records of both sides keep their
+  numbers.
+- **Both sides took the same item number.** The younger item is
+  renumbered with a record, as [Stable IDs](../about/stable-ids.md)
+  describes.
+- **The save is refused with "A rebase is in progress" (or "A merge
+  is in progress").** Nothing was staged or committed. The step is
+  not finished yet: settle the files it lists, run the finishing
+  commands, then save again.
+- **The pull with rebase failed and left no rebase to finish.** This
+  is not a conflict. The commit is made and nothing was lost. Check
+  the network or your access to the remote, and save again.
+- **You want to give the step up.** Approve `git rebase --abort`, or
+  `git merge --abort` after a merge.
+
 ## A worked example
 
-You save the project `<slug>`. Someone else has pushed a change to the
-same artefact, `10-intent.md`. Before either change, the artefact was
-at version 1.2. You both raised it to 1.3, and you both changed the
-wording of the same item.
+You run `/save <slug>`, and the save stops with two files in
+conflict: the intent `10-intent.md` and its history
+`10-intent.history.md`.
 
-The save makes your commit and stops. It lists two files in conflict:
+In the intent, you and the other side changed one sentence of the
+same item:
 
 ```
-  10-intent.md
-  10-intent.history.md
+<<<<<<< one side
+The review runs once a month.
+=======
+The review runs after every release.
+>>>>>>> the other side
 ```
 
-In `10-intent.md` git shows two conflicts: the wording of the item,
-and the header's `version:` line, which both sides raised.
+Both sides had also raised the intent from version 0.3 to 0.4, so
+the header's `version:` line conflicts as well.
 
-Claude's first message lays out the item: the remote's wording, your
-wording, and a proposition that joins them. It closes with the verdict
-line. You answer `a`.
-
-Claude's next message takes the version. Both sides gave 1.3, so the
-proposition is that the merged document takes 1.4, with one `changed`
+Claude puts the sentence to you as one item: both wordings, and a
+proposition such as "The review runs after every release and at
+least once a month." You answer `a`. Claude puts the version to you
+as the next item: the merged intent takes 0.5, with one `changed`
 record naming the merge and what was joined. You answer `a`.
 
-`10-intent.history.md` is a record file. Both sides appended their
-records after the same last line. Claude proposes keeping both tails.
-Both sets of records keep their number 1.3. You answer `a`.
+In the history, each side appended its own records after the same
+last line:
 
-At the round's end you say `write`. Claude writes the joined wording,
-the version 1.4 and the `changed` record. The hook then puts
-`git add 10-intent.md`, `git add 10-intent.history.md` and
-`git rebase --continue` to you, one at a time, and each runs on your
-yes. You run `/save <slug>`, and the clean repository is pushed.
+```
+<<<<<<< one side
+<the records of one side, version 0.4>
+=======
+<the records of the other side, version 0.4>
+>>>>>>> the other side
+```
+
+This is two tails, so both are kept, each with its own number.
+
+At the round's end Claude writes the sentence and version 0.5 into
+the intent, and the `changed` record into its history. It then
+offers `git add 10-intent.md`, `git add 10-intent.history.md` and
+`git rebase --continue`, each run on your yes. You run
+`/save <slug>`, and the repository is pushed.
 
 ## See also
 
@@ -200,10 +198,10 @@ yes. You run `/save <slug>`, and the clean repository is pushed.
 - [Working together on one project](../about/working-together.md):
   what the forge promises two people on one project and how each kind
   of file merges.
-- [Stable IDs](../about/stable-ids.md): how an item number taken twice
-  is settled.
-- [Glossary](../reference/glossary.md): every term of the forge in one
-  line.
+- [Stable IDs](../about/stable-ids.md): how an item number taken
+  twice is settled.
+- [Glossary](../reference/glossary.md): every term of the forge in
+  one line.
 
-Generated on 2026-10-23 for version 5.34 from the files the
+Generated on 2026-10-25 for version 6.0 from the files the
 front-matter names; never edited by hand.

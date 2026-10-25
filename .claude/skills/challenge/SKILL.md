@@ -45,8 +45,6 @@ When it returns:
    scripts/forge-report.py <path>`; the printed name is the one the
    ledger cites. Then `python scripts/forge-ledger.py <slug>`: how the
    report becomes rows is `templates/ledger.md`'s (Challenges).
-   Reports of several reviewers on one project are filed one after
-   another, never at once.
 2. Present it to the principal: the overall
    read first, then each
    challenge compressed to two or three sentences. Do not editorialise and

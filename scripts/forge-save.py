@@ -25,11 +25,8 @@ WHAT IT DOES
     yet reaches the remote with its first commit. A rebase that
     conflicts is left standing, the commit made and nothing lost: the
     script prints the files in conflict and the step that follows,
-    the step of a conflict (the cutover plan, R6.02; brief
-    collaboration 0.9): each file settled, Claude laying both sides
-    out and the principal deciding, then `git add <file>` and `git
-    rebase --continue`, both on the hook's ask, then this script
-    again, which pushes the clean repository that is ahead. A
+    the step of a conflict, as CLAUDE.md, Persistence, has it, then
+    this script again, which pushes the clean repository that is ahead. A
     repository with a rebase or a merge already in progress is
     refused before anything is staged, so that conflict markers are
     never committed. Without an origin the commit is

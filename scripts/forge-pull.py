@@ -11,7 +11,7 @@ WHAT IT DOES
     projects/<slug>/.git with an origin configured; with a slug pulls
     that one repository ('forge' means the engine). A repository with
     unsaved changes is not touched: reported and skipped (bare) or
-    refused (slug) - run forge-save.py first, so a pull can never
+    refused (slug), so a pull can never
     create a conflict in half-finished work. Projects without a
     repository or without an origin are reported and skipped. A
     repository whose history has diverged from its origin is refused

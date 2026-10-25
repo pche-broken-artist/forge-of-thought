@@ -42,7 +42,8 @@ audit, standard, vendor report, practitioner claim), then the
 substance with its sources cited inline as [n]. A finding that rests
 on a summarised fetch or a snippet alone says so. Two sources that
 disagree are both named; "contradicted by [n]" where it applies. A
-time-sensitive figure carries the date of its youngest source.>
+time-sensitive figure carries the date of its youngest source. Fact
+and speculation apart: future tense and "could" are speculation.>
 
 ## Unexpected
 
@@ -75,7 +76,8 @@ opening.>
 <Numbered as cited. Per source: title, author or organisation, date
 and how it was dated (byline | structured data | archive snapshot |
 undated), URL; kind (primary | secondary | tertiary); how read (in
-full | partially, which part | summarised fetch | not opened, why);
+full | partially, which part, "partially" alone being no answer |
+summarised fetch | not opened, why);
 original or copy (and of what). Nothing fabricated: a source the
 agent could not open is listed as not opened and never cited for
 content.>
@@ -87,7 +89,10 @@ question, a copy, below the bar, superseded by [n].>
 
 ## Search record
 
-<The queries run, in order, in a few words each; then the reason
+<The queries run, in order, in a few words each; apart from them
+the pages opened, an opening being a fetch of a page and the
+budget counting openings; what the disconfirming query found,
+including nothing; then the reason
 the run ended, which of the stop rule's two parts ended it (nothing
 new from a differently-worded query; every perspective of the card
 has a primary source) or the opening budget.>

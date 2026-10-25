@@ -2,18 +2,15 @@
 project: forge
 purpose: readme
 audience: humans arriving at the repository
-version: 0.71
+version: 0.73
 output: /README.md
 ---
 
 # Recipe — readme
 
-<!-- A recipe is the iterated thing; its render is generated output.
-Never polish a render by hand: change the recipe, run
-/render readme. Recipes are tools: version + updated date in
-front-matter and no status (a recipe is never approved); its Version
-History lives in the companion <recipe>.history.md, last_change
-summarising the newest row. -->
+<!-- A recipe: CLAUDE.md, Document chain, Renders (what it is) and
+Versioning & status (how it is versioned). This skeleton owns the
+shape only. -->
 
 ## Inputs
 - CLAUDE.md
@@ -49,9 +46,11 @@ summarising the newest row. -->
 - Where two inputs state the same thing, the wording of the operating
   layer wins (CLAUDE.md, a definition); the intent supplies the why.
   State each thing once: no sentence appears in two sections.
-- Portability is said as the inputs say it: developed and run on
-  Windows, the scripts written to run unchanged on Linux and macOS
-  and not yet run there; never as a fact of having run.
+- Portability is said as the inputs say it (POS.0830): developed and
+  run on Windows; the git scripts, the ledger and docs-state run on
+  Linux on a user's machine; the conversions and the two hooks are
+  written to run unchanged on Linux and macOS, never said as having
+  run there.
 - Tone: plain, direct, no marketing. UK English. No long dash
   anywhere: a colon, a full stop or a spaced hyphen where one would
   stand. Every core term (principal, brief, intent, render, recipe)
@@ -69,8 +68,8 @@ summarising the newest row. -->
   in the README's own words.
 - Directly below the title line, before the masthead, stands one line
   for the reader who has never seen the forge: bold-led "**New here?
-  Watch first.**", then one sentence: eight short videos of real
-  sessions, seven to fifteen minutes each, in two languages, show
+  Watch first.**", then one sentence: ten videos and eight short
+  clips of real sessions, in two languages, show
   the forge at work before a word of this README is read; the link
   named "Videos" to the pinned course address. Nothing else on that
   line.
@@ -135,7 +134,7 @@ summarising the newest row. -->
   opening sentence: every video is a real session of the forge, cut
   to a few minutes and played in the browser as a simulated
   terminal with captions, in two languages, nothing staged. Then
-  the eight videos as eight bullets in the order of the pinned list,
+  the ten videos as ten bullets in the order of the pinned list,
   each bold-led by the video's name, one sentence on what it shows
   (taken from the pinned list), and two links at the end: "watch"
   to the course address with the video's anchor (the pinned
@@ -143,7 +142,8 @@ summarising the newest row. -->
   of `docs/` the pinned list pairs it with, as a relative link. A
   closing sentence: the whole course is at the course page, where
   each video has its scenes as chapters and the language is a
-  switch. No other content in this section.
+  switch, and where the eight short clips of the pinned list stand
+  in the order of a talk. No other content in this section.
 - Section 3 is "What you get": a strictly concrete capability list —
   six bullets, no philosophy (that is the masthead's job): a
   versioned document chain growing from a brief — your idea put
@@ -336,13 +336,26 @@ reach the reader. Update them here when they change.
      a persona attacks the thinking, accepted goes into the
      intent, rejected keeps its reason;
      `docs/use/challenge-the-thinking.md`.
-  7. A layer below the intent and a new artefact
-     (`#07-new-artefact`): the chain grows by a definition and a
-     template, the first solution design;
-     `docs/extend/add-an-artefact.md`.
-  8. History and threads (`#08-history-threads`): why an item
+  7. History and threads (`#07-history-threads`): why an item
      changed, one command away; the open threads as the project's
      memory; `docs/use/read-the-history-of-an-item.md`.
+  8. Solution design: a new layer of the chain
+     (`#08-new-artefact`): the chain grows by a definition and a
+     template, the first solution design;
+     `docs/extend/add-an-artefact.md`.
+  9. The BRD, a new artefact (`#12-brd`): a new artefact from its
+     definition to its first document; `docs/use/write-a-brd.md`.
+  10. Research: a plan, two LLMs and a synthesis
+     (`#13-deep-research`): the plan confirmed before the search, the
+     same cards on two model families, the synthesis;
+     `docs/use/research-a-topic.md`.
+  The section "Presentation shorts" of the course page holds eight
+  short clips in the order of a talk (`#s01-git-wall` to
+  `#s08-github`): the wall between reading git and writing it, the
+  principal deciding by a letter, a mistake becoming a rule,
+  research planned first, elicitation one question at a time,
+  handing over, reviewers that never saw the conversation, and
+  GitHub from an issue to an answer.
 - The forge is cloned, not copied: `forge-save.py` refuses an
   engine that is not a git repository.
 - Script prerequisites: `doc2md.py` needs markitdown

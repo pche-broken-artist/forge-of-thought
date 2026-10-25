@@ -37,8 +37,7 @@ WHAT IT DOES
     merge.conflictStyle zdiff3. They hold for every repository the
     configuration serves.
 
-    --guard: user.useConfigOnly true, so that a repository on a host
-    with no identity stanza fails aloud instead of taking a default.
+    --guard: user.useConfigOnly true (why: CLAUDE.md, Persistence).
     It bites only once no global user.name or user.email is left;
     --unset-identity removes them.
 

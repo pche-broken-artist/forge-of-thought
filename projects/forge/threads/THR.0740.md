@@ -81,6 +81,11 @@ Open from the list above: the consultation command and the spool
 with their names; whether the engine enters a report's file name
 beside the persona; `/challenge` and `/critique` on the link.
 
+2026-10-25: two parts of the Later of the brief `research` are carried
+here as well, so that all of it stands in one place: divergent probes as
+agents of their own (an adjacent field, a named dissent, the new or
+contested), and a pass over what the agents opened and did not use.
+
 <!-- A thread (POS.1680), one file per thread in threads/; the header
 is its state: what it concerns, where it came from, whether it is
 open. The rules of a thread, its life and its closing:

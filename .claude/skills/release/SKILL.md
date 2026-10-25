@@ -19,7 +19,7 @@ never a sweep.
    branch, stop and report the branch the repository is on and how to
    get back (`python scripts/forge-branch.py <slug> main`, after saving).
    A repository behind or diverged from its origin is refused with
-   the offer of `/pull`: the renders a release makes are taken as
+   the offer of `/pull` (CLAUDE.md, Persistence): the renders a release makes are taken as
    `ours` at a merge, and that turns round in the rebase of the save
    (POS.1710, SOL.0530).
    Merging a branch into `main` is git's business, by hand or by

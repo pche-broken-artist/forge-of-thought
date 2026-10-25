@@ -1,8 +1,8 @@
 ---
-generated: 2026-10-23
-version: 5.34
+generated: 2026-10-25
+version: 6.0
 made: derived
-inputs-hash: a3eb2b1725f68847
+inputs-hash: 8f210ae04489b336
 inputs:
   - projects/forge/recipes/readme.md#Pinned facts (not rendered)
   - CLAUDE.md#Persistence (git)
@@ -14,169 +14,197 @@ inputs:
   - scripts/doc2md.py
   - scripts/forge_tools.py
   - scripts/md2video.py
+  - scripts/forge-engine.py
 ---
 
 # Install what the forge needs
 
 This page lists what must be on your machine before Forge of Thought
-runs, and the order to put it there in. Forge of Thought is a
-workshop where an idea travels a chain of versioned documents under
-review, with Claude working beside you
-([What Forge of Thought is](what-it-is.md)). The page is for you if
-you are about to use the forge for the first time. It covers git,
-Python, Claude Code, the engine itself and the optional tools that
-some commands need. The terms of the forge are each explained in one
-line in the [Glossary](../reference/glossary.md).
+runs, in the order you need each piece. Forge of Thought is a
+workspace where an idea travels a chain of versioned documents under
+review. It is described in one paragraph on
+[What Forge of Thought is](what-it-is.md). The required pieces come
+first. The optional tools come last, each needed only by the command
+that uses it. The page ends where the first setup begins.
 
 ## When to use it
 
-Use it once per machine, before the first setup. Come back to the
-optional tools when you first need the command that uses them.
+Use this page once per machine, before you start the forge for the
+first time.
+Use the optional part again when you first need a command that
+converts documents, makes Word or PowerPoint files, makes a video, or
+runs a research on two model families.
 
 ## What you do
 
-The steps below are in the order you first need each piece. The one
-line that brings the forge itself onto your machine is:
+The required steps, in order:
 
-```
-git clone https://github.com/pche-broken-artist/forge-of-thought
-```
+1. Install git.
+2. Install Python 3.8 or newer, reachable as `python`.
+3. Install Claude Code and sign in.
+4. Clone the engine from its public home.
+5. Start `claude` from the engine root.
+
+The optional tools follow, in any order.
 
 ## What happens
 
-1. **Install git.** The forge keeps every document in git. The
-   scripts that save, pull and report state need nothing beyond
-   git. If you want the first setup to write a commit identity per
-   host for you, git must be version 2.36 or newer. Every tool the
-   forge uses is found on PATH, so git must be reachable there.
-   You should now see a version of 2.36 or newer when you ask git
-   for its version.
+### 1. git
 
-2. **Install Python 3.8 or newer, reachable as `python`.** The
-   forge's scripts are Python. The two hooks are Python as well. A
-   hook is a small script Claude Code runs on its own at set moments:
-   one repeats the rules of a walkthrough (a list worked one item
-   per message) at every prompt, and one stands before every shell
-   command Claude sends and stops any write to git that does not go
-   through the forge's scripts. Claude Code starts both hooks without
-   a shell, by the name `python`. Because of that, a shell alias does
-   not reach them: `python` must be a real executable on PATH. On a
-   system that has only `python3`, give it the name `python`:
-   - on Debian or Ubuntu, install the package `python-is-python3`;
-   - elsewhere on Linux and on macOS, make a symlink named `python`
-     that points to `python3`, in a directory on PATH.
+Install git.
+The git scripts of the forge need nothing beyond git.
+Where `/setup` is to write your identity per host, git must be
+version 2.36 or newer. The configuration it writes relies on a
+feature of git that older versions lack.
 
-   The scripts are written to run unchanged on Linux and macOS.
-   You should now see a version of 3.8 or newer when you run
-   `python --version`.
+You should now see a version of 2.36 or newer when you type
+`git --version`.
 
-3. **Install Claude Code and sign in.** The forge runs inside Claude
-   Code and needs a paid Claude subscription. Its usage draws from
-   the same pool as Claude chat. One way to install it is:
+### 2. Python 3.8 or newer, named `python`
 
-   ```
-   npm install -g @anthropic-ai/claude-code
-   ```
+Install Python 3.8 or newer.
+It must be on PATH as a real executable named `python`.
+This is because the scripts of the forge are Python, and so are its
+two hooks. A hook is a small script Claude Code starts by itself: one
+runs at every prompt, one before every shell command Claude sends.
+Claude Code starts both hooks as `python` without a shell.
+So a shell alias that maps `python` to `python3` does not reach them.
 
-   Sign in the first time you run `claude`.
-   You should now see Claude Code start and ask you to sign in, and
-   after that accept a prompt.
+Where your system has only `python3`, give it the name `python`:
 
-4. **Clone the engine from its public home.** The engine's public
-   home is https://github.com/pche-broken-artist/forge-of-thought.
-   Clone it with git; do not copy its files. The forge's git scripts
-   refuse an engine that is not the top of a git repository.
-   You should now see a folder `forge-of-thought` that git reports
-   as a repository.
+- on Debian or Ubuntu, install the package `python-is-python3`;
+- elsewhere on Linux and on macOS, make a symlink:
+  `ln -s "$(command -v python3)" /usr/local/bin/python`.
 
-5. **Start `claude` from the engine root, always.** The engine root
-   is the folder you just cloned. Claude Code reads the forge's rules
-   from `CLAUDE.md` and the facts of your installation from
-   `CLAUDE.local.md`, both at that root. Started anywhere else, they
-   do not load.
-   You should now see Claude Code start inside the engine folder.
+The scripts are written to run unchanged on Linux and macOS as well
+as Windows.
 
-6. **Install the optional tools when you need them.** No script
-   installs anything. Each tool is found on PATH, and you install it
-   yourself, once:
-   - **markitdown**, for the conversions of `/ingest` (a Word,
-     PowerPoint, PDF or Excel file turned into Markdown):
+You should now see a version of 3.8 or newer when you type
+`python --version`.
 
-     ```
-     pip install "markitdown[docx,pptx,pdf,xlsx,xls]"
-     ```
+### 3. Claude Code, with a paid subscription
 
-   - **pandoc**, for the plain Word and PowerPoint files `/render`
-     makes. Install it from pandoc's own installation page or with
-     your system's package manager.
-   - **Pillow and ffmpeg**, for the video format of a screenplay
-     render. Pillow is installed with `pip install pillow`; ffmpeg must
-     be on PATH. The player format of a screenplay needs nothing
-     beyond Python.
-   - **the document-skills plugin**, for `/publish`, which makes the
-     designed Word or PowerPoint file through a model. You need it
-     only where Claude Code does not already bring the docx and pptx
-     skills. Install it once from an interactive Claude Code session:
+Claude Code needs a paid Claude subscription.
+Install it with one of these lines:
 
-     ```
-     /plugin marketplace add anthropics/skills
-     /plugin install document-skills@anthropic-agent-skills
-     ```
+- on Windows: `irm https://claude.ai/install.ps1 | iex`
+- on macOS or Linux: `curl -fsSL https://claude.ai/install.sh | bash`
+- anywhere npm is installed: `npm install -g @anthropic-ai/claude-code`
 
-   You should now see, for markitdown, the check
-   `python scripts/doc2md.py --list-tools` report that markitdown is
-   reachable.
+Sign in when you start `claude` for the first time.
+Its usage draws from the same pool as Claude chat.
+
+You should now see Claude Code start and ask you to sign in, and
+then accept your prompts.
+
+### 4. Clone the engine
+
+Clone the engine from its public home,
+https://github.com/pche-broken-artist/forge-of-thought.
+Clone it; never copy it.
+The git scripts refuse an engine that is not a git repository.
+
+You should now see a folder holding `CLAUDE.md`, `scripts/`,
+`templates/` and `.claude/`.
+
+### 5. Start `claude` from the engine root
+
+Always start `claude` from the engine root, that is the folder the
+clone made.
+Only there do `CLAUDE.md` and the instance file `CLAUDE.local.md`
+load. The instance file holds the facts of your installation, and
+`/setup` creates it on the first run.
+
+You should now see Claude Code open in the engine root, ready for
+`/setup`.
+
+### Optional tools
+
+Each tool below is resolved from PATH.
+No script of the forge installs any of them: you install each
+yourself, once.
+
+- **markitdown**, for the conversions of `/ingest` (a Word,
+  PowerPoint, PDF or Excel file turned into Markdown):
+  `pip install "markitdown[docx,pptx,pdf,xlsx,xls]"`.
+  You should now see `python scripts/doc2md.py --list-tools` report
+  that markitdown is reachable.
+- **pandoc**, for the plain Word and PowerPoint files that `/render`
+  makes: install it from pandoc's own installation page, or through
+  your system's package manager.
+- **Pillow and ffmpeg**, for the video format of a screenplay:
+  `pip install pillow`, and ffmpeg on PATH.
+  The player format of a screenplay needs nothing beyond Python.
+- **The `document-skills` plugin**, for `/publish`, unless Claude
+  Code already brings the docx and pptx skills.
+  Install it once from an interactive Claude Code session (one run
+  of `claude` in which you type), with these two lines:
+  `/plugin marketplace add anthropics/skills`, then
+  `/plugin install document-skills@anthropic-agent-skills`.
+- **The command-line tool of a second engine**, for a research on
+  two model families, described on [Research a topic](../use/research-a-topic.md).
+  Today one engine is supported: the row `antigravity`, whose tool is
+  `agy`.
+  It must be on PATH at version 1.1.1 or newer.
+  Sign in to it once, in its own tool.
+  The forge carries no key and no account for it.
+
+What every script needs, with its options, is listed on
+[Scripts](../reference/scripts.md).
 
 ## What you have afterwards
 
-You have git, `python` and Claude Code on your machine, the engine
-cloned as a git repository, and Claude Code started from its root.
-The next step is the first run, `/setup`, which prepares this
-installation: [Set up the forge](setup.md). What each script needs
-and its options are listed in [Scripts](../reference/scripts.md).
+You have git, Python reachable as `python`, a signed-in Claude Code
+and a clone of the engine.
+You have whichever optional tools the commands you plan to use need.
+The next step is the first run, `/setup`, on
+[Set up the forge](setup.md).
+Terms of the forge you meet there are explained in one line each in
+the [Glossary](../reference/glossary.md).
 
 ## If something goes wrong
 
-- **A script stops with "The engine is not the top of a git
-  repository (clone it, do not copy it)."** The engine was copied,
-  not cloned. Clone it again from its public home and work in the
-  clone.
-- **A script stops with "git is not installed."** git is not on
-  PATH. Install it, or put it on PATH, and start again.
-- **The hooks fail although `python3` works in your shell.** The
-  hooks are started without a shell, so an alias does not reach
-  them. Make `python` a real executable on PATH as step 2 says.
-- **Claude does not follow the forge's rules.** Claude Code was
-  started outside the engine root, so `CLAUDE.md` and
-  `CLAUDE.local.md` did not load. Quit and start `claude` again from
-  the engine root.
+- **A hook fails because `python` is not found.** `python` is an
+  alias, or only `python3` exists. Give Python the real name
+  `python`, as in step 2.
+- **A git script refuses the engine.** The engine was copied, not
+  cloned. Clone it from its public home.
+- **`CLAUDE.md` does not seem to apply.** `claude` was started
+  outside the engine root. Start it again from the engine root.
+- **The identity per host does not take effect.** git is older than
+  2.36. Update git.
+- **A conversion says markitdown is not reachable.** Install it with
+  the pip line above, or check that it is on PATH.
+- **A research refuses the second engine.** The research script
+  refuses when the tool is missing from PATH, or when its version is
+  below 1.1.1. Install or update `agy`, and sign in to it once.
 
 ## A worked example
 
-One install on a machine that already has git, Python and npm, with
-placeholders for your own folder:
+One run on macOS or Linux, the folder name a placeholder:
 
 ```
 git --version
 python --version
-npm install -g @anthropic-ai/claude-code
-cd <your-folder-for-repositories>
-git clone https://github.com/pche-broken-artist/forge-of-thought
-cd forge-of-thought
+curl -fsSL https://claude.ai/install.sh | bash
+git clone https://github.com/pche-broken-artist/forge-of-thought <folder>
+cd <folder>
 claude
 ```
 
-Inside Claude Code, the next command is `/setup`.
+At the first start, sign in; then type `/setup`.
 
 ## See also
 
 - [What Forge of Thought is](what-it-is.md): what you are installing,
   in one paragraph.
 - [Set up the forge](setup.md): the first run, `/setup`.
-- [Scripts](../reference/scripts.md): every script with what it
-  needs and its options.
+- [Research a topic](../use/research-a-topic.md): the research that
+  uses a second engine.
+- [Scripts](../reference/scripts.md): every script with what it needs
+  and its options.
 - [Glossary](../reference/glossary.md): every term of the forge in
   one line.
 
-Generated on 2026-10-23 for version 5.34 from the files the
+Generated on 2026-10-25 for version 6.0 from the files the
 front-matter names; never edited by hand.

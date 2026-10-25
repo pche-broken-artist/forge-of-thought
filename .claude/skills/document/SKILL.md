@@ -15,10 +15,9 @@ regenerated.
 
 Target and places. Bare, the target is the engine: its root is the
 engine root, the owning project is `projects/forge`, the pages land in
-`docs/` at the engine root. The run is on `main` only and refuses a
-repository behind or diverged from its origin (`python
-scripts/forge-status.py --remote`; the offer is `/pull`): the pages
-are taken as `ours` at a merge (POS.1690, POS.1710). With a slug, the target is that project:
+`docs/` at the engine root. On `main` only, behind or diverged refused
+(CLAUDE.md, Persistence; `python scripts/forge-status.py --remote`):
+the pages are taken as `ours` at a merge (POS.1690). With a slug, the target is that project:
 its root and the owning project are `projects/<slug>`, the pages land
 in `projects/<slug>/docs/`. The map is `docs-map.md` beside the
 owning project's ledger, never in `docs/`. The date is today's.
@@ -47,7 +46,8 @@ the planner never maps it, the scripts read `docs/` without it.
    page's material: a mirrored page (`made:
    mirrored` in its entry) with the model override `sonnet`, a
    derived page without an override, on the session model (POS.0930).
-   Up to twenty run at once; launch the rest as the first return.
+   The models and the number of pages are said before the launch
+   (CLAUDE.md, Working methods, Step by step). Up to twenty run at once; launch the rest as the first return.
    Every writer reads its inputs from disk and writes its page with
    the `inputs-hash` its task gives it. Collect the reports: what the
    inputs did not support goes to step 7.

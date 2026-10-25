@@ -46,9 +46,7 @@ When it returns:
    the one the ledger cites. Then `python scripts/forge-ledger.py
    <slug>`: how the report becomes rows is `templates/ledger.md`'s
    (Findings). A library has no `reviews/` until its first finding:
-   create the directory then. Reports of several checks on one
-   target are filed one after another, never at once, so that no ID
-   is given twice. A report that says "conforms" is filed nowhere.
+   create the directory then. A report that says "conforms" is filed nowhere.
 2. Present the report to the principal as it came: the one-line
    verdict, then the findings in their ranking with their IDs,
    compactly.

@@ -38,6 +38,7 @@ after a making `<file> | changed | state: stale`, the principal's
 word `<file> | changed | state: by hand`.
 `rejected`, `parked` and `obsolete` are a decision's Verdict
 (templates/decisions.md), never a record here (POS.1610). -->
+
 - 2026-10-24 | 0.1 | PCHe | 00-brief-research.md | created
 - 2026-10-24 | 0.1 | PCHe | What I want, Why now, What I take and what I do not, How I want it built, Later, Open | created
 - 2026-10-24 | 0.2 | PCHe | How I want it built, Later | changed | the first trial on the Antigravity CLI (tmp/research/2026-10-24-trial/source-quality): the engine returned a full note in ten minutes; three of its fourteen sources invented or misnumbered (two arXiv IDs naming other papers, a blog that does not exist), two URLs wrong to real studies, every source "read partially" with no opening recorded; the URL check therefore moves from Later into the first version as scripts/forge-cite.py, and the principal's wish for a summary first (the bundle's Summary, the note's In short) is added; the headless permission question is answered by the trial (a headless run denies what it cannot ask about; --allow-all with --sandbox is the standard) and leaves Later | Was: Try it, tune it, and only then write it into the intent, the design and whatever else it touches.<br>Later: … the check of every cited URL as a program; … what a headless run does when a tool asks for permission; …

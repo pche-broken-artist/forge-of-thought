@@ -28,8 +28,6 @@ engine and every project with an origin.
    and run them only on his word. Where an Action required line names
    a migration, offer `/migrate <slug>` for each project the user
    keeps that is of the shape before the migration
-   (`templates/project.md`), each on one clone and then `/save`; a
-   project migrated elsewhere is pulled by `/pull`. Whose machine or
-   instance the clone is makes no difference: every user of the
-   engine migrates his own projects (SOL.0800).
+   (`templates/project.md`); the one-clone rule is CLAUDE.md's
+   (Persistence) and the script's.
 4. After a pull of a project, report what the script printed.

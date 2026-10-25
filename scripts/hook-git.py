@@ -14,8 +14,8 @@ WHAT IT DOES
         reading flags: allow;
       - the commands that finish a conflict and its step, named one
         by one: ask, so that the harness puts the command to the
-        principal and runs it on his yes (the cutover plan, R6.01;
-        brief collaboration 0.9). They are `add` without --force and
+        principal and runs it on his yes (the step of a conflict:
+        CLAUDE.md, Persistence). They are `add` without --force and
         without the interactive flags, `rebase --continue` and
         `rebase --abort`, `merge --continue` and `merge --abort`,
         `merge <branch>` with one name and no flag, and `checkout

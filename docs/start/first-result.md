@@ -1,8 +1,8 @@
 ---
-generated: 2026-10-23
-version: 5.34
+generated: 2026-10-25
+version: 6.0
 made: derived
-inputs-hash: 7f176efec3f981e5
+inputs-hash: 27d643e93dbe1598
 inputs:
   - projects/forge/recipes/readme.md#Instructions
   - projects/forge/recipes/readme.md#Pinned facts (not rendered)
@@ -16,153 +16,161 @@ inputs:
 
 # Get a first result
 
-A first result is a new project with an approved brief and a first
-intent, saved to git, made in one sitting. This page is for you when
-the forge is set up and you want to go from nothing to a saved
-intent. You are the principal: the person whose thinking is forged
-and who decides on everything that is written. Every act outside
-Claude is a step of its own, and the page says which one is yours.
+This page takes you from nothing to a saved intent in one sitting.
+It is for you as the principal (the person whose thinking is forged
+and who decides every piece of content; see the
+[Glossary](../reference/glossary.md)), working with Claude in the
+engine you have just set up. Every act outside Claude is a step of
+its own, and the page names each one.
 
 ## When to use it
 
-Use it the first time you work in the forge, after
-[Set up the forge](setup.md). Use it again whenever you start a
-fresh idea from nothing. If the project already exists in a git
-repository somewhere, use the other door at the end of
-"What you do".
+Use it the first time you start a project in the forge.
 
-The same sitting is shown on real work in the teaching videos, on
-the course page
-https://pche-broken-artist.github.io/forge-of-thought/videos/.
+You need a finished setup first: [Set up the forge](setup.md).
+Start `claude` from the engine root, as setup does.
 
-## What you do
+This sitting is shown on real work in the teaching videos, on the
+course page https://pche-broken-artist.github.io/forge-of-thought/videos/.
 
-Start `claude` from the engine root, then type these, one at a time,
-answering Claude between them:
+## The command
+
+The sitting is five acts, in this order:
 
 ```
 /new-project my-idea
+(paste the brief when asked, and say it is finished)
 /forge intent
-```
-
-In your own terminal, at the engine root:
-
-```
 git -C projects/my-idea init -b main
-```
-
-Back in Claude:
-
-```
 /save
 ```
 
-Claude writes nothing into git itself. Initialising the project's
-repository, and adding a remote if you want one, is your one-off act.
+`my-idea` is a placeholder slug: use a slug of your own, in
+lowercase with hyphens and no spaces.
 
-The other door, for a project you already have in a git repository:
-
-```
-/import-project <project url>
-/forge <project-slug>
-```
-
-The slug is the repository's name. You name the project first
-because the engine does not track it and cannot guess it. The full
-job is [Bring in an existing project](../use/bring-in-an-existing-project.md).
+The fourth line is typed in your own terminal at the engine root,
+not given to Claude.
 
 ## What happens
 
-1. **`/new-project my-idea` scaffolds the files.** Claude checks the
-   slug (lowercase, hyphens, no spaces) and creates `projects/my-idea/`
-   with its folders, its project file, its decisions file and the
-   recipes of its README and release notes. It may ask in which
-   language the project's documents are written. English holds
-   unless you name another. It creates files only and never touches
-   git. The full job is [Start a project](../use/start-a-project.md).
-   You should now see Claude asking you to paste or dictate the brief.
+1. **Scaffold the project.** Type `/new-project my-idea`. Claude
+   creates `projects/my-idea/` from the templates:
+   - the project file;
+   - the folders for sources, research, reviews, challenges and
+     threads;
+   - the decisions file;
+   - the recipes of the project's README and release notes.
 
-2. **You paste the brief and say it is finished.** A brief is your
-   idea put together, in your own words. Claude stores what you paste
-   as it stands and asks whether the text is finished. When you say
-   it is, the brief is approved at once. A brief can be as short as
-   this invented sample:
+   It writes files only and never touches git. Where your words
+   leave it open, it asks which language the project's documents are
+   written in. English is the default. The intent is not created
+   yet: it is born from its own first `/forge intent`.
+   You should now see the folder `projects/my-idea/` and Claude
+   asking you for the brief.
+
+2. **Paste the brief.** A brief is your idea put together in your
+   own words. Paste it whole when Claude asks for it. Claude stores
+   it verbatim as `00-brief.md` and asks whether the text is
+   finished. Say that it is. A brief you call finished is approved
+   at once. Five lines are enough to start, for example:
 
    ```
-   Our team loses half a day each week to status meetings.
-   I want a way to share progress that needs no meeting.
-   It must work for people in three time zones.
-   It must not add a new tool everyone has to learn.
-   I am not sure yet whether written updates are enough.
+   Our weekly team meeting runs long and decides little.
+   I want a meeting format that ends with clear decisions and owners.
+   It must fit in thirty minutes.
+   Not in scope: tools or software for running meetings.
+   Why now: two projects slipped because nobody owned the next step.
    ```
 
-   Claude then makes the ledger (the file that states where the
-   project stands, built from its documents) and proposes the next
-   step. You should now see Claude proposing `/forge intent` and
-   reminding you that the project is not under git until you
-   initialise its repository.
+   You should now see Claude name the brief as approved and propose
+   `/forge intent`.
 
-3. **`/forge intent` mines the brief into the first intent.** The
-   intent is the document of the positions you hold on the idea.
-   Claude reads the approved brief and works it with you in an
-   interview, one theme at a time, drawing out what the brief leaves
-   open. Your answers are carried in the conversation. Nothing is
-   written until the round ends and you confirm. Then the first
-   intent is created as version 0.1, with its history beside it and a
-   `threads/` folder for what is still open. The full job is
-   [Forge the intent](../use/forge-the-intent.md). You should now see
-   Claude naming what changed and what stays open.
+3. **Forge the intent.** Type `/forge intent`. The intent is the
+   statement of the positions you hold about the idea. With no
+   intent yet, Claude consolidates the brief into the first one
+   through an interview, one theme at a time. You answer, and Claude
+   carries the answers in the conversation. The intent is written
+   once, at the end of the round, on your confirmation. Claude ends
+   by naming what changed and what stays open.
+   You should now see `10-intent.md` in `projects/my-idea/` at
+   version 0.1, with what stays open kept as threads in `threads/`.
 
-4. **You initialise the repository in your own terminal.** At the
-   engine root you type `git -C projects/my-idea init -b main`, then
-   add a remote if you want one. A remote is optional. Claude is not
-   allowed to run this step. Until it is done, "not under git" is a
-   fact about the project, not an error. You should now see the
-   project inside a repository of its own, so that the next save
-   treats it as one.
+4. **Put the project under git.** In your own terminal, at the
+   engine root, type:
 
-5. **`/save` checks, commits and pushes.** Claude runs the light
-   check (a mechanical check of the forge's conventions) on the
-   project and settles anything it finds with you. A save never waits
-   on a finding you have not asked to fix. Claude then drafts a
+   ```
+   git -C projects/my-idea init -b main
+   ```
+
+   This is a one-off act, and it is yours. Claude writes nothing
+   into git itself: a guard in the engine denies it every write of
+   git, so the init and a remote are left to you. A remote is
+   optional; add one with git if you want the project pushed
+   anywhere.
+   Until this step the project is "not under git". That is a fact
+   about the project, not an error.
+   You should now see `projects/my-idea/` as a repository of its own,
+   so the next save no longer reports it as not under git.
+
+5. **Save.** Type `/save`. Claude runs the light check on the
+   repository first. A finding of the check never holds the save
+   back unless you ask for it to be fixed. Claude then drafts a
    one-line commit message from what the round changed and proposes
-   it. You confirm or adjust it. The full job is
-   [Save your work](../use/save-your-work.md). You should now see the
-   commit's file summary printed by the save.
+   it. Confirm it or adjust it. The save commits and pushes.
+   You should now see the commit's file summary for
+   `projects/my-idea` in the report.
 
 ## What you have afterwards
 
-- `projects/my-idea/` as a git repository of its own, which the
-  engine does not track.
-- An approved brief, `00-brief.md`, with its history beside it.
-- A first intent, `10-intent.md`, at version 0.1, with its history
-  and its open threads.
-- A commit that holds them, pushed where a remote exists.
+- A project of your own under `projects/my-idea/`, in a git
+  repository of its own that the engine does not track.
+- An approved brief.
+- A first intent, with what stays open kept as threads.
+- One commit holding all of it.
 
-The terms used here are listed in the [Glossary](../reference/glossary.md).
+From here, [Forge the intent](../use/forge-the-intent.md) is the full
+job of iterating the intent, and
+[Start a project](../use/start-a-project.md) is the full job of
+starting one.
 
 ## If something goes wrong
 
-- **`projects/my-idea/` already exists.** `/new-project` stops and
-  reports. It never overwrites. Choose another slug.
-- **The save commits nothing.** The save names its cause: there is
-  no repository, or git has no identity for this host. With no
-  repository, do step 4. With no identity, git has no name and e-mail
-  to sign commits on this machine. The login that cloned a repository
-  is a different thing. The usual causes and the ways out are in the
-  identity step of [Set up the forge](setup.md). The forge writes no
-  identity itself.
-- **The save names the project as "not under git".** A project
-  without a repository that has changes is named in the save's report
-  and otherwise left alone. Do step 4 and save again.
-- **The save stops on a rebase or merge.** Where the save meets a
-  conflict, it leaves the conflict standing and names the step to
-  take. Where a rebase or merge is already standing, it refuses and
-  says so. Claude lays both sides out for you, you decide, and the
-  save is run again.
-- **`/import-project` finds the directory taken.** The target is
-  `projects/<repository name>`. If it already exists, the command
-  stops and reports.
+- **`/new-project` stops at once.** The folder
+  `projects/my-idea/` already exists. Claude never overwrites it.
+  Choose another slug.
+- **`/save` commits nothing and says the project is not under git.**
+  Step 4 has not been done. Run the `git init` line in your own
+  terminal and save again.
+- **`/save` commits nothing because git has no identity for this
+  host.** Git has no name and e-mail to sign commits with on this
+  machine. The login you use for a remote is a different thing. The
+  forge sets no identity: it is resolved by your own git
+  configuration, per host. Setup offers the per-host settings and a
+  guard that makes a missing identity fail aloud instead of taking a
+  default. Return to the identity step of
+  [Set up the forge](setup.md), then save again.
+- **`/save` refuses because a rebase or merge is already
+  standing.** Claude reports the refusal and the step it names.
+  What a save does and asks in full is on
+  [Save your work](../use/save-your-work.md).
+
+## The other door: a project you already have
+
+Where the project already exists in a git repository, bring it in
+instead of creating it:
+
+```
+/import-project <git-url>
+/forge <project-slug>
+```
+
+`/import-project` clones the repository into `projects/`, under the
+repository's name, and reports the commit identity git resolves for
+it. Then name the project with `/forge <project-slug>`, the slug
+being the repository's name. You select it before any work. The
+reason is that the engine does not track the project and cannot
+guess it. The full job is on
+[Bring in an existing project](../use/bring-in-an-existing-project.md).
 
 ## See also
 
@@ -178,5 +186,5 @@ The terms used here are listed in the [Glossary](../reference/glossary.md).
 - [Glossary](../reference/glossary.md): every term of the forge in
   one line.
 
-Generated on 2026-10-23 for version 5.34 from the files the
+Generated on 2026-10-25 for version 6.0 from the files the
 front-matter names; never edited by hand.

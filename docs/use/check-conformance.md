@@ -1,8 +1,8 @@
 ---
-generated: 2026-10-19
-version: 5.26
+generated: 2026-10-25
+version: 6.0
 made: mirrored
-inputs-hash: 711f107bc28b2cc3
+inputs-hash: e1ec550d63395b2f
 inputs:
   - .claude/skills/check/SKILL.md
   - .claude/skills/check-contract/SKILL.md#Output
@@ -10,111 +10,69 @@ inputs:
 
 # Check conformance
 
-This page shows how to run a check with `/check`: a read-only
-verification that a project or the engine follows the conventions of
-the forge. It is for anyone who keeps a project or the engine and
-wants to know where it departs from those conventions. Terms of the
-forge are explained in the [Glossary](../reference/glossary.md).
+This page shows how to run a check with `/check`: a read-only test that a project or the engine follows the conventions of the forge. It is for the user, that is the principal, the person whose thinking is forged (terms of the forge are in the [Glossary](../reference/glossary.md)).
 
 ## When to use it
 
-Use it when you want a mechanical answer to the question "does this
-follow the conventions?". A check judges conformance only. It does
-not judge the substance of the thinking or the quality of a document;
-other commands do that. Nothing runs on Claude's own judgement: a
-check runs when you ask for it, or when a save or a release runs it.
-Which checks a save and a release run is said by those two commands.
-After an upgrade, see [Upgrade the engine](upgrade-the-engine.md).
+Use it when you want to know whether a project or the engine still keeps the mechanical rules: names, headers, registrations and the like. A check never judges substance or the quality of a document. Nothing blocks: a finding may stay open and a release may go ahead.
 
 ## The command
 
-Bare, the command lists the checks:
+Bare, it lists the checks:
 
 ```
 /check
 ```
 
-With a check, it runs that check:
+With a check and a target, it runs one:
 
 ```
-/check light my-project
+/check light forge
 ```
 
-The form is `/check [check] [slug]`. The slug names a project. The
-engine's own project is `forge`, so `/check light forge` checks it.
-The engine itself is checked as `/check engine`, with no slug. Which
-of the two targets a check takes, and what a missing or an added slug
-means to it, is said by the check itself. The checks that exist today
-are in [Checks](../reference/checks.md).
+`forge` is the slug of the engine's own project. For a project of yours, put its slug in its place, for example `/check light my-project`. For the engine itself, there is no slug:
+
+```
+/check engine
+```
+
+Which target a check takes, and what a missing or an added slug means to it, is said by the check itself. The checks of today are on the [Checks](../reference/checks.md) page.
 
 ## What happens
 
-1. Bare `/check` lists the available checks, each with the moment it
-   fits, and recommends one for now. You should now see the roster
-   and one recommendation, which you are free to ignore.
-2. With a check, Claude first remakes the target's ledger (the file
-   that holds the state of the project), so that the check reads a
-   current file. You should now see the ledger refreshed before the
-   check starts.
-3. Claude starts one isolated subagent for the check (a helper that
-   does not see your conversation) and gives it the target path and
-   nothing else. The subagent only reads. It returns its report and
-   writes no file. Several checks on one target may be started at
-   once and awaited together.
-4. When the report returns, Claude files it, but only when it has
-   findings. It saves the report in the `reviews/` folder of the
-   target project (for the engine, the folder of the forge's own
-   project) under a unique dated name. Each new finding receives the
-   next free finding number of that project. The ledger is remade so
-   that the findings appear in it. Reports of several checks on one
-   target are filed one after another. A report that says "conforms"
-   is filed nowhere. You should now see the name of the filed report,
-   or nothing filed if the target conforms.
-5. Claude shows you the report as it came: a one-line verdict, then
-   the findings in their ranking, each with its number. You should
-   now see the verdict and the ranked findings.
-6. Claude offers every finding marked "immediate fix" (pure
-   bookkeeping) as one step. The fixes are applied on your word, and
-   the findings are then marked resolved.
-7. Claude closes by offering a walkthrough of the remaining findings
-   (a list worked one item per message, with a verdict from you on
-   each). See [Walk through a list](walk-through-a-list.md). Accepting
-   a finding there writes the fix once, at the end of the round, and
-   marks the finding resolved. A rule that is worth changing goes to
-   the intent instead.
+1. Bare `/check` lists the checks, each with the moment it fits, and recommends one. You should now see the roster and a recommendation. No check runs unless you ask for it.
+2. With a check named, Claude first makes the target's ledger again (the file that holds the current state of a project, made when it is read), so that the check reads a current file. You should now see the ledger rebuilt.
+3. Claude starts the check as a subagent (a helper that runs on its own and never sees your conversation). It gets the target and nothing else. It reads and writes nothing. It returns a report. You should now see the check return a verdict of one line.
+4. When the report has findings, Claude files it in the project's `reviews/` folder under a unique dated name and gives each new finding its number. A report that says the target conforms is filed nowhere. You should now see the file name and the numbers.
+5. Claude presents the findings to you as they came, the verdict first, then the findings ranked by severity with their numbers.
+6. Claude offers every finding marked as an immediate fix (pure bookkeeping) at once, as one step. It applies them on your word and marks them resolved. You should now see those findings resolved.
+7. Claude closes by offering a walkthrough of the rest, one finding at a time. How that goes is on the [Walk through a list](walk-through-a-list.md) page. Accepting a finding means the fix is agreed here and written once at the end of the round. If a rule itself is worth changing, the change goes to the intent.
+
+Several checks on one target may run at once. Claude waits for all of them.
 
 ## What you have afterwards
 
-- A filed, dated report in `reviews/`, when the check found anything.
-- Findings with numbers, listed in the ledger.
-- Immediate fixes applied, if you agreed to them.
-- The remaining findings either settled in a walkthrough or left open.
+- A report in `reviews/`, when there were findings, and a rebuilt ledger that cites it.
+- Findings resolved, parked or waiting for your walkthrough.
+- No change to any document apart from what you accepted.
 
-Nothing blocks. A release may proceed with a finding parked.
+A save and a release each run their own checks; which ones is for `/save` and `/release` to say, not for this command. After an upgrade of the engine the checks are offered too: see [Upgrade the engine](upgrade-the-engine.md).
+
+## If something goes wrong
+
+- A check that finds nothing prints that the target conforms and files nothing. That is not an error.
+- A library has no `reviews/` folder until its first finding. Claude creates it then.
+- A finding you do not want to fix now can be parked. It blocks nothing.
 
 ## A worked example
 
-You have a project `my-project` and you want to know whether it
-follows the conventions.
-
-```
-/check
-```
-
-Claude lists the checks and recommends one. You pick the light check:
+You have just reorganised a project with the slug `my-project` and want to know whether it still conforms.
 
 ```
 /check light my-project
 ```
 
-Claude remakes the ledger of `my-project` and starts the check. The
-report comes back with three findings. Claude files it in
-`my-project/reviews/` and gives the findings their numbers. It shows
-the verdict "3 findings" and the ranking. One finding is marked
-"immediate fix", so Claude offers it as a step. You agree, and it is
-applied and marked resolved. Claude then offers a walkthrough of the
-other two. If the report had said "conforms", nothing would have been
-filed.
+Claude rebuilds the ledger and starts the check. The check returns "2 findings". Claude files the report in `reviews/` and gives the two findings numbers. It shows you a high finding and a low one. The low one is an immediate fix, so Claude offers it as one step. You agree and it is applied. Claude then offers a walkthrough of the high finding. You walk through it and decide.
 
 ## See also
 
@@ -123,4 +81,4 @@ filed.
 - [Upgrade the engine](upgrade-the-engine.md): the checks after an upgrade.
 - [Glossary](../reference/glossary.md): every term of the forge in one line.
 
-Generated on 2026-10-19 for version 5.26 from the files the front-matter names; never edited by hand.
+Generated on 2026-10-25 for version 6.0 from the files the front-matter names; never edited by hand.

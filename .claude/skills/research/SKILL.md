@@ -55,11 +55,8 @@ when asked.
    has it; nothing is searched. Read the two indexes and name the
    notes and sources the plan will build on.
 
-2. **Draft the plan** in the shape of `templates/research-plan.md`,
-   the Plan section: purpose; perspectives, each with the cards that
-   serve it or "no card"; assumptions, with the premortem answered
-   once and marked as Claude's; what is left out; the cards; the
-   agents and the rule that fixed their count. A card is one
+2. **Draft the plan** as the Plan section of
+   `templates/research-plan.md` has it. A card is one
    question answered by one kind of evidence from one kind of
    source; a card that needs two kinds is two cards; a card with no
    sentence under "why it matters" is cut. For a topic new to the
@@ -84,13 +81,11 @@ when asked.
    answer lives, which perspective has no card, which card would
    you cut, and why"; run
    `python scripts/forge-engine.py antigravity --packet tmp/research/<run>/plan-review --out tmp/research/<run>/plan-review/antigravity.md --allow-all --sandbox`
-   (the two flags are the standard of every run: a headless run
-   denies a tool call it cannot ask about and returns nothing, so
-   every call is allowed and the engine's sandbox contains it; the
-   script's header says so). Show the engine's additions beside the draft, marked as the
+   (the flags and the profile: `scripts/forge-engine.py`, its
+   header). Show the engine's additions beside the draft, marked as the
    engine's, nothing taken into the plan by Claude's own judgement.
-   Say the model and the size before the run, as before any run of
-   agents.
+   Say the model and the size before the run (CLAUDE.md, Working
+   methods, Step by step).
 
 4. **Walkthrough of the plan.** Perspectives first, then the
    cards, then the rest; one item per message with the verdict
@@ -130,12 +125,10 @@ when asked.
    filled (`engine: claude`, `model` the session model, `usage: —`,
    `run` the packet folder), and moves into the bundle as
    `<card>.claude.md` only when the second engine's note of that card
-   has returned or the principal has closed the card single-engine:
-   an engine with its tools allowed reads any path on the disk that
-   its profile does not deny (the probe of 2026-10-24,
-   `scripts/forge-engine.py`, header 2a), so the independence of the
-   two engines is kept by the profile's deny rules and the order of
-   filing, never by the place of the run. A second-engine run made after the
+   has returned or the principal has closed the card single-engine,
+   so that the independence of the two engines rests on the
+   profile's deny rules and the order of filing, never on the place
+   of the run (why: `scripts/forge-engine.py`, its header). A second-engine run made after the
    first engine's note is filed is allowed, and its independence is
    then shown by the measure of step 6 alone.
 
@@ -148,39 +141,26 @@ when asked.
    facts, as every file that may be quoted is scanned (POS.0950).
    Then every citation by the script:
    `python scripts/forge-cite.py <note> --out tmp/research/<run>/cite/<card>.<engine>.md`
-   (never into a packet folder: a file added there while the other
-   engine still runs makes `forge-engine` refuse that run as a
-   changed tree)
-   opens every URL and reads an arXiv page for its title; a dead URL
-   or an arXiv ID that names another paper is the mark of a
-   fabricated citation (the trial of 2026-10-24: three of fourteen
-   sources of one engine invented or misnumbered). A note with a
+   (never into a packet folder; why, and what the check opens and
+   what a dead or mismatched citation means: the headers of
+   `scripts/forge-engine.py` and `scripts/forge-cite.py`). A note with a
    dead or mismatched citation goes back to its agent once, with the
    report, as a failed run; a note that comes back still failing is
    filed as it is, and the synthesis names every finding that rests
    on a failed citation as without support. An unverifiable URL
    (403, a timeout) is said so and never counted as a failure.
    Then the independence of the engines, card by card:
-   `python scripts/forge-cite.py --independence <bundle>` counts the
-   URLs the two notes share and the sentences they have in common; a
-   note that shares most of its sources or its sentences with the
-   other engine's was written from it, not from the web (the run of
-   2026-10-24: four of six), and goes back to its agent once the other
+   `python scripts/forge-cite.py --independence <bundle>` (what it
+   counts and the threshold: its header); a note it marks as written
+   from the other engine's goes back to its agent once the other
    note is out of its reach, or is said in the synthesis to be no
    second voice.
 
 7. **Synthesis**, by Claude in the session, from the notes alone,
    when every note has returned: the Synthesis section of
-   `00-plan.md` as the template has it: deviations from the plan
-   with their reasons; completeness card by card (answered or not
-   found and where it was looked; the stop rule met or why searching
-   ended; what the disconfirming query found); the engines' answers
-   side by side with the engine named, agreement reported as
-   consistency and never validation, the differences spelled out,
-   the measure of independence of step 6 stated per card;
-   the Unexpected sections gathered and sorted, shown before any
-   judgement; what was not found; Claude's own view last and apart
-   (POS.1370). `status: immutable`. A second round only for gaps
+   `00-plan.md` as `templates/research-plan.md` has it, the measure
+   of independence of step 6 stated per card and Claude's own view
+   last and apart (POS.1370). `status: immutable`. A second round only for gaps
    the notes name, proposed with the gaps listed and run on the
    principal's word; no third.
 
@@ -232,35 +212,19 @@ agent's rules (POS.1070):
 > sources where it does not; for a recent topic, what the search
 > returns beats what you remember.
 >
-> Record every source: kind (primary, secondary, tertiary), its
-> date and how it was dated, how you read it (in full, partially
-> and which part, through a summarising fetch, not opened and why),
-> original or copy. "Partially" without naming the part you read is
-> not an answer; a page you did not open is "not opened", whatever
-> the search result said about it. In the Search record keep the
-> pages you opened apart from the queries you ran: an opening is a
-> fetch of a page, a query is not one, and the opening budget counts
-> openings. Give every finding its epistemic status
-> (consensus, emerging, contested, single source, vendor claim) and
-> name the kind of evidence behind it. Separate fact from
-> speculation: future tense and "could" are speculation. Name
-> conflicts: two sources that disagree are both cited, never one
-> picked in silence; agreement of copies is not agreement. Say what
-> you did not find: "no reliable source on X" is a finding and goes
-> under Not found; a figure with no source is a gap, never an
-> estimate. Keep a section Unexpected for what did not answer the
-> card but seems to matter, as leads with provenance, never as
-> conclusions; "None" is allowed. List what you opened and did not
-> use, one line each, with the reason. Run the disconfirming query
-> of the card and report what it found, including nothing.
+> Record every source and every finding as the note's shape asks;
+> a page you did not open is "not opened", whatever the search
+> result said about it. Name conflicts: two sources that disagree
+> are both cited, never one picked in silence; agreement of copies
+> is not agreement. Say what you did not find: "no reliable source
+> on X" is a finding. Run the disconfirming query of the card and
+> report what it found, including nothing.
 >
 > Spend your openings on primaries: about ten to fifteen pages
 > opened, never many more; more calls have been measured to lower
-> the accuracy of citations, not raise it. Stop when a
-> differently-worded query brings nothing you have not seen and
-> every perspective of the card has a primary source, or when the
-> openings are spent; write in the Search record which of these
-> ended the run. Never fabricate a source, a quote, a date or a
+> the accuracy of citations, not raise it. Stop by the card's stop
+> rule or when the openings are spent, and write in the Search
+> record which ended the run. Never fabricate a source, a quote, a date or a
 > figure; a quote is verbatim and short, with where in the page it
 > stands; an identifier (an arXiv number, a DOI) is cited only from
 > the page you opened under it, never from memory, since every URL

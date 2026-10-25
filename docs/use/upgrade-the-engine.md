@@ -1,127 +1,136 @@
 ---
-generated: 2026-10-23
-version: 5.33
+generated: 2026-10-25
+version: 6.0
 made: derived
-inputs-hash: ab6d0a3e195468ad
+inputs-hash: b97d92cae6fa0352
 inputs:
   - .claude/skills/pull/SKILL.md
   - projects/forge/10-intent.md#POS.0940
   - projects/forge/10-intent.md#POS.0820
-  - projects/forge/recipes/release-notes.md#Template
+  - projects/forge/recipes/release-notes.md#Instructions
 ---
 
 # Upgrade the engine
 
 Upgrading the engine means taking its new version from the remote
-and then bringing each of your projects to the conventions that
-version holds. This page is for you as the one who runs the engine
-and keeps projects in it. It covers the job that follows a pull of
-the engine: what you read, which checks you run on each project, and
-when a project needs a migration.
+and then bringing your projects to its conventions, one project at a
+time. This page is for anyone who runs an instance of the forge (one
+installation of the engine with its projects) and has just pulled,
+or is about to pull, a new version of the engine. It covers the job
+after the pull. The pull itself is on its own page.
 
 ## When to use it
 
-Use it after `/pull` has fast-forwarded the engine to a newer
-version. The pull itself is described in [Pull from the
-remote](pull-from-the-remote.md). The pull moves the engine only.
-Your projects are not touched by it, and a project records no
-version of the engine it was made with.
+Use it when the engine is behind its remote and you want the new
+version. Use it again after the pull, whenever you want a project
+you keep to follow the conventions the new version brings.
+
+A project records no engine version. The pull of the engine does not
+touch your projects. A project you leave as it is stays valid under
+the conventions it was written to. If a release changed the shape of
+files, a project of the old shape is still read, but nothing writes
+into it until it is migrated. Why it is so is on
+[Upgrades and migration](../about/upgrades-and-migration.md).
 
 ## The command
 
-After the pull, the job runs project by project. For a project with
-the placeholder slug `my-project`, the first command is:
-
 ```
-/check light my-project
+/pull forge
 ```
 
-The other commands of the job are `/check project my-project` and,
-only where a release asks for it, `/migrate my-project`.
+`forge` names the engine. The rest of the job runs through the
+commands Claude offers after the pull, each on your word.
 
 ## What happens
 
-1. **Read the Action required lines.** After a pull of the engine,
-   `/pull` reads the release notes and shows the Action required
-   lines of every release the pull crossed. In the release notes,
-   Action required stands first in the section of every release. Each
-   line says what changed and what you do in your projects after
-   pulling.
-   You should now see the Action required lines of the crossed
-   releases, and an offer of the two checks for each project you
-   keep.
+1. **Pull the engine.** Claude looks at the remote first and says
+   whether the engine is up to date, behind, ahead or diverged. Only
+   a clean engine that is behind is pulled. The details are on
+   [Pull from the remote](pull-from-the-remote.md).
+   You should now see where the engine moved from and to, and the
+   subjects of the commits in between.
 
-2. **Measure each project against the current conventions.** For
-   each project, run `/check light <slug>` and `/check project
-   <slug>`. A check is an isolated reviewer that tests mechanical
-   conformance with the conventions. It runs as a subagent (a
-   separate agent that never sees your conversation). Claude runs the
-   checks only on your word. Between them they say what the new
-   conventions changed for that project. How a check runs is
-   described in [Check conformance](check-conformance.md).
-   You should now see the findings of each check (a finding is one
-   result of a reviewer), or the word that the check found nothing.
+2. **Read the Action required lines.** Claude reads the release
+   notes and shows the Action required lines of every release the
+   pull crossed. Action required stands first in every section of
+   the release notes. It carries, word for word, what a change asks
+   you to do.
+   You should now see the Action required lines of the releases you
+   have just taken, or none where a release asked nothing of you.
 
-3. **Walk the findings and bring the project current.** The findings
-   are worked in a walkthrough (a review of a list one item at a
-   time, each settled by the principal's verdict). The principal is
-   the person whose thinking the project forges: here, you. Claude
-   brings the project to the current conventions on your word, as
-   the Action required lines say to do.
-   You should now see each finding settled and the changes you
-   agreed made in the project.
+3. **Check each project.** Claude offers two checks on each project
+   you keep, and runs them only on your word:
+   - `/check light <slug>`
+   - `/check project <slug>`
 
-4. **Migrate where a release changed the shape of files.** Where a
-   release changed the shape of files, its Action required line says
-   so. `/pull` then offers `/migrate <slug>` for each project you keep
-   that is still of the shape before the migration. Each such project
-   is migrated once, on one clone, and then saved with `/save`. A
-   project already migrated on another clone is brought in by `/pull`,
-   not migrated again. The migration is described in [Migrate a
-   project](migrate-a-project.md).
-   You should now see each project of the old shape migrated and
-   saved, or pulled where it was migrated elsewhere.
+   Both measure the project against the current conventions, so
+   their findings (the results a check reports) say what the new
+   conventions changed for that project. Running a check and
+   settling its findings is on
+   [Check conformance](check-conformance.md).
+   You should now see the findings of each check, or the word that
+   it found nothing.
+
+4. **Walk the findings and bring the project current.** The findings
+   are worked one at a time in a walkthrough (one item per message,
+   each closed with your verdict). Claude brings the project to the
+   current conventions on your word, never on its own judgement.
+   You should now see the changes you agreed made in the project's
+   files.
+
+5. **Migrate, where a release changed the shape of files.** A
+   release that changed the shape of files says so in its Action
+   required line. Claude then offers `/migrate <slug>` for each
+   project you keep that is still of the old shape. Each such
+   project is migrated once, on one clone, and then saved. Where the
+   project was already migrated on another clone, you pull it
+   instead of migrating it again. The migration itself is on
+   [Migrate a project](migrate-a-project.md).
+   You should now see the project in the new shape, saved.
 
 ## What you have afterwards
 
-The engine is at its new version. Each project you chose to bring
-current conforms to the current conventions. A project you leave as
-it is stays valid under the conventions it was written to. Its
-nonconformance is a fact the checks report, not a defect to chase.
-Bringing a project to newer conventions is your decision, made per
-project. A project of the old shape of files is the one exception:
-it is read and not written until it is migrated. Why a project
-records no engine version, and when a release comes with a
-migration, is explained in [Upgrades and
-migration](../about/upgrades-and-migration.md).
+- The engine at its new version.
+- Each project you chose to bring forward following the current
+  conventions, its findings settled.
+- Each project you left as it is, still valid under the conventions
+  it was written to. A project of an old shape stays readable, and
+  it is written to again once you migrate it.
 
 ## If something goes wrong
 
-- **The engine has unsaved changes.** `/pull` stops for it and pulls
-  nothing. It offers `/save` first.
-- **The engine's history has diverged from the remote.** `/pull`
-  stops for it and pulls nothing. It offers a merge by your own hand,
-  or `/save`, which rebases your own commits onto the remote.
-- **Claude does not write into a project.** The project is still of
-  the shape before a migration, and it is read, not written. Migrate
-  it with `/migrate <slug>`, or pull it where it was migrated on
-  another clone.
+- **The engine has unsaved changes.** Nothing is pulled. The offer
+  is `/save` first.
+- **The engine's history has diverged from the remote.** Nothing is
+  pulled. The offer is a merge by your own hand, or `/save`, which
+  rebases your commits onto the remote.
+- **A check reports findings on a finished or dormant project.**
+  That is a fact to report, not a defect to chase. Bringing the
+  project forward is your decision, project by project.
+- **A command will not write into a project.** The project is of a
+  shape a release has changed and is not yet migrated. Run
+  `/migrate <slug>` on one clone, or pull the project if it was
+  migrated elsewhere.
 
 ## A worked example
 
-You keep two projects, `my-project` and `other-project`.
+You keep one project, `my-project`, and the engine is behind its
+remote.
 
-1. You run `/pull`. The engine moves forward across two releases.
-   `/pull` shows their Action required lines. One line says a release
-   changed the shape of files.
-2. For `my-project` you run `/check light my-project` and `/check
-   project my-project`. The checks report a few findings. You walk
-   them one at a time, and Claude brings the project current on your
-   word.
-3. `/pull` offered `/migrate my-project`, because the project is of
-   the old shape. You run it on this clone, then `/save`.
-4. `other-project` was already migrated and saved on another clone.
-   You run `/pull other-project` here instead of migrating it again.
+1. You type `/pull forge`. Claude says the engine is clean and
+   behind, pulls it and lists the commits it crossed.
+2. Claude shows the Action required lines of the releases crossed.
+   One of them says that the shape of files changed and that each
+   project is to be migrated.
+3. Claude offers `/check light my-project` and
+   `/check project my-project`. You say yes, and both run.
+4. Claude offers `/migrate my-project`. You say yes on the one clone
+   where you work on the project, and the project is migrated and
+   saved.
+5. The findings of the checks are walked one at a time. Claude makes
+   the changes you accept.
+6. On your other machine, you pull `my-project` instead of migrating
+   it again.
 
 ## See also
 
@@ -136,5 +145,5 @@ You keep two projects, `my-project` and `other-project`.
 - [Glossary](../reference/glossary.md): every term of the forge in
   one line.
 
-Generated on 2026-10-23 for version 5.33 from the files the
+Generated on 2026-10-25 for version 6.0 from the files the
 front-matter names; never edited by hand.

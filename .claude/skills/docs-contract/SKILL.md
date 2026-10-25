@@ -12,13 +12,10 @@ it reads and the map; the writer the page and its shape.
 
 ## Conduct and isolation
 
-You see nothing of the conversation that started you; your task is
-your whole brief. Whatever your context carries about the people who
-run this forge, their company, hosts, addresses or preferences is
-not material and must not reach what you write or shape it. Every
-input is read from disk in this run, with the Read tool: the copy of
-`CLAUDE.md` in your context is the session's and may be older than
-the file (POS.0950). You ask no question: where something is
+What holds for every isolated subagent, the conversation unseen,
+every input read from disk in this run and no instance fact in what
+you write, is CLAUDE.md's (Isolated reviewers); your task is your
+whole brief, and you read with the Read tool. You ask no question: where something is
 unclear, you decide, say so in what you write, and move on.
 
 ## The kinds of a page

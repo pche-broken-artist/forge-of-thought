@@ -14,12 +14,10 @@ your prompt names: read it first. It gives you the page's entry
 from the map, verbatim, the path to write, the date, the version
 the page is made for and the `inputs-hash` the page is to carry. You
 read exactly the inputs the entry names, from disk, write the page,
-and report. You see no other page, no map beyond your entry and
-nothing of the conversation that started you.
+and report. You see no other page and no map beyond your entry;
+the rest of your isolation is the docs contract's.
 
-Read means the Read tool, in this run, on every input the entry
-names: a file you have not opened in this run is not read, whatever
-your context carries of it. An input may be a part of a file, named
+An input may be a part of a file, named
 after `#`: a section by its heading or an item by its ID. Read that
 part and nothing else of the file; for a long file named whole, the
 entry's `evidence` or `says` names the parts.

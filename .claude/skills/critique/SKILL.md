@@ -44,9 +44,7 @@ When it returns:
    scripts/forge-ledger.py <slug>`: how the report becomes rows is
    `templates/ledger.md`'s (Findings); a finding the report has as
    newly obsolete gets a DEC with the Verdict `obsolete` at the
-   walkthrough. Reports of several reviewers on one project are
-   filed one after another, never at once, so that no ID is given
-   twice.
+   walkthrough.
 2. Present the delta summary to the principal in the conversation
    language (`CLAUDE.local.md`): new findings (with severity), verified
    resolved, still open, newly obsolete, and what awaits his verdict.

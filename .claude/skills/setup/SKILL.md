@@ -45,10 +45,9 @@ speak whatever language the user speaks to you.
      the user's word. Then the global guard, `--guard`; where the
      script reports a global `user.name` or `user.email`, say the
      guard only bites once that identity is removed and offer
-     `--guard --unset-identity`, again only on the user's word. On a
-     machine whose home differs by place (a network home at work, the
-     local profile at home) git reads another global file in each
-     place: say so, and that `/setup` runs once in each. Declined:
+     `--guard --unset-identity`, again only on the user's word. Where
+     git reads another global file in each place, as the script's
+     header says, say so: `/setup` runs once in each. Declined:
      print the commands for the user to run by hand.
      The identity is verified by git itself at the first
      `/import-project`: `scripts/forge-clone.py` reports the identity
@@ -59,8 +58,8 @@ speak whatever language the user speaks to you.
      the user's word (SOL.0740): the bare run above says whether it is
      there; offer `python scripts/forge-config.py --register`, and
      `--zdiff3` apart. Say in one sentence that these hold for every
-     repository on the machine: the merge backend is git's own
-     default, renormalize only evens line endings at a merge.
+     repository on the machine; what each key does is the script's
+     header.
      Declined: print the command for the user to run by hand.
      `forge-status` reports the registration afterwards, ok or the
      keys missing.

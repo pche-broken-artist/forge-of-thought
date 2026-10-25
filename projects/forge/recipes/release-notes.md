@@ -2,18 +2,15 @@
 project: forge
 purpose: release-notes
 audience: the user of the engine who has cloned it and takes upgrades through forge-pull
-version: 0.13
+version: 0.14
 output: /RELEASE-NOTES.md
 ---
 
 # Recipe — release-notes
 
-<!-- A recipe is the iterated thing; its render is generated output.
-Never polish a render by hand: change the recipe, run
-/render release-notes. Recipes are tools: version + updated date in
-front-matter and no status (a recipe is never approved); its history
-lives in the companion <recipe>.history.md, last_change derived from
-the records of the newest version. -->
+<!-- A recipe: CLAUDE.md, Document chain, Renders (what it is) and
+Versioning & status (how it is versioned). This skeleton owns the
+shape only. -->
 
 ## Inputs
 - projects/forge/10-intent.history.md  # the intent's history — its

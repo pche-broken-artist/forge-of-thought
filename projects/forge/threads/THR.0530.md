@@ -59,6 +59,13 @@ string where the agent read history. Two clauses to teach the program
 before the decision of 2026-10-25: a closed thread is left alone, and an
 ID said as former or as history is not a citation.
 
+2026-10-25: the decision on the light check as a program, due today,
+deferred by the principal's word. The cto challenge (CHL.0670, accepted
+as a recommendation) proposes the order: the last sixty light findings
+read by what each protected for a reader of the project, the clauses
+that protected nothing cut, and only the remainder written as the
+program, so that the noise is not made free and permanent.
+
 <!-- A thread (POS.1680), one file per thread in threads/; the header
 is its state: what it concerns, where it came from, whether it is
 open. The rules of a thread, its life and its closing:

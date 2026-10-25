@@ -60,3 +60,5 @@ word `<file> | changed | state: by hand`.
 - 2026-10-23 | 0.8 | PCHe | FND.2370 | closed | SOL.0520, POS.0550 and POS.1200 named among the Inputs of the specification (the light check of 2026-10-23, the immediate fix taken).
 - 2026-10-23 | 0.8 | PCHe | FND.2380 | closed | TBC.0020 named among the Inputs, the cell of R1.09 citing the specification's former TBC.0090 as history (the light check of 2026-10-23, the immediate fix taken).
 - 2026-10-23 | 0.8 | PCHe | Inputs | changed | DEC.0280, POS.1780, POS.1790, SOL.0840 and TBC.0100 named among the inputs, cited by the rows R6.04 and R6.05 as done (the same round as 0.8; the light check program of 2026-10-23).
+- 2026-10-25 | 0.8 | PCHe | TBC.0110 | changed | Renumbered from TBC.0010: the number was already the design's (40-solution-design.md, since 2026-10-04) and IDs are global; the younger item takes the next free number (POS.0220), closed as it was on 2026-10-18 (FND.2970). | Was: TBC.0010
+- 2026-10-25 | 0.8 | PCHe | FND.2970 | closed | the specification's closed TBC.0010 renumbered TBC.0110, as TBC.0020 was renumbered TBC.0090 (the project check of 2026-10-25).

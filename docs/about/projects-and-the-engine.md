@@ -1,8 +1,8 @@
 ---
-generated: 2026-10-23
-version: 5.34
+generated: 2026-10-25
+version: 6.0
 made: derived
-inputs-hash: a9d11b5f280b2e7e
+inputs-hash: d020514ff0ac3bed
 inputs:
   - CLAUDE.md#Repository layout
   - CLAUDE.md#Persistence (git)
@@ -24,276 +24,223 @@ inputs:
 
 # Projects and the engine
 
-The engine is the one git repository that holds the forge itself,
-and every other project is a git repository of its own that the
-engine does not know. This page explains how the two are arranged,
-how a project is recognised, what a project declares about itself,
-and why the forge is built this way. It is for anyone who uses the
-forge, extends it or weighs whether to adopt it.
+The engine is the one public repository of Forge of Thought: its core
+and its own project. Every other project is a git repository of its
+own that the engine does not know. This page explains how the two fit
+together, how the scripts tell a project under git from one outside
+it, and why the forge is split this way. It is for anyone who uses
+the forge, extends it or weighs whether to adopt it.
 
 ## What it is
 
-The engine is one public git repository. It holds two things:
+The **engine** is one git repository with a remote. It holds the
+universal core in its root:
 
-- the universal core in its root: `CLAUDE.md` (the rules Claude
-  works by), `README.md` for humans, `templates/`, `scripts/` and
-  `.claude/`;
-- `projects/forge`, the forge's own project (the forge run through
-  its own process).
+- `CLAUDE.md`: the rules Claude works by.
+- `README.md`: the description for humans.
+- `templates/`: the canonical skeletons.
+- `scripts/`: the programs that do the mechanical work, git among it.
+- `.claude/`: the commands, the agents and their settings.
 
-Every other project lives under `projects/` as a repository of its
-own. The engine ignores `projects/` in git, with `projects/forge` as
-the one exception. Each project repository may have any remote and
-any visibility its owner gives it, or no remote at all, or no
-repository at all.
+Beside the core it holds `projects/forge`, the forge's own project:
+Forge of Thought run through its own process. In the engine `main` is
+the released line. Branches are allowed and left to git.
 
-A project is one of two kinds:
+A **project** is one body of work forged with the engine. Every
+project other than `projects/forge` lives under `projects/<slug>/`
+and is a repository of its own where its owner wants one. Its owner
+gives it whatever remote and visibility he chooses, or none. The
+engine ignores these repositories: its `.gitignore` excludes
+`projects/*` and re-includes `projects/forge` alone.
 
-- **thought**: a project with a chain of documents, starting at a
-  brief and running through the intent (the principal's positions);
-  the default kind;
-- **library**: shared material with no chain, used across projects.
-
-Here the principal is the person whose thinking is being forged.
-
-```
-<engine root>/                  the engine: one public repository
-  CLAUDE.md  README.md
-  templates/  scripts/  .claude/
-  .gitignore                    projects/*  and  !projects/forge
-  projects/
-    forge/                      the forge's own project, tracked
-                                by the engine
-    <slug>/                     a thought project: a repository
-      .git/                     of its own, ignored by the engine
-      project.md
-      00-brief.md  10-intent.md  ...
-    lib-<name>/                 a library: a repository of its
-      .git/                     own, ignored by the engine
-      project.md
-      sources/  research/  recipes/readme.md
-```
-
-The full layout, file by file, is on
-[Repository layout](../reference/repository-layout.md). Every term
-used here has one line in the [Glossary](../reference/glossary.md).
+The engine carries no instance facts. An instance is one
+installation of the forge. Who the principal is (the person whose
+thinking is forged, named by role), the language the conversation
+runs in and the handle the principal signs records with live in
+`CLAUDE.local.md` at the engine root. That file is kept out of the
+repository.
 
 ## How it works
 
+### The layout
+
+```
+engine root/                 one git repository, public
+  CLAUDE.md  README.md       the universal core
+  templates/  scripts/  .claude/
+  CLAUDE.local.md            instance facts, never in git
+  .gitignore                 projects/*   then   !projects/forge
+  projects/
+    forge/                   the forge's own project, part of the engine
+    <slug>/                  a thought project
+      .git/                  its own repository, any remote or none
+      project.md
+    lib-<name>/              a library
+      .git/                  its own repository, its own visibility
+      project.md
+```
+
+The pattern in `.gitignore` must be `projects/*`, not `projects/`.
+With `projects/` the re-include of `projects/forge` fails silently.
+The file layout of a project, file by file, is on
+[Repository layout](../reference/repository-layout.md).
+
 ### How a project is recognised
 
-The scripts ask git one question about a project: is the project's
-directory the top of a repository? They never look for a `.git`
-folder. When git names the project's directory as the top, the
-project is under git, and the scripts commit, push and pull it.
+The scripts ask git one question about a project's directory: is it
+the top of a repository? They never look for a `.git` folder to
+decide. The reason for asking git rather than looking for a folder is
+not recorded.
 
-Anything else is a project outside git. That covers two cases:
+- If git names the project's directory as the top, the project is
+  under git. The git scripts commit, push, pull and report on it.
+- If the top lies elsewhere, the project is outside git. This is the
+  case for a directory inside someone else's repository.
+- If there is no repository at all, the project is outside git too.
 
-- the directory has no repository at all;
-- the directory lies inside another repository, so that the top of
-  the repository is somewhere above it.
+On a project outside git the forge writes its files to disk and runs
+no git. The repository above it, if any, is asked nothing, not even
+what it tracks, because that repository belongs to its owner. Such a
+project comes into the forge by hand: a copy or a link into
+`projects/`. From then on the forge knows it.
 
-For a project outside git, the forge writes its files to disk and
-runs no git on it. The repository above it belongs to its owner.
-The forge asks that repository nothing, not even what it tracks. A
-project outside git is a property, not a defect.
+A project not under git is a property, not a defect. A project
+without a repository, or with a repository and no origin, is a
+legitimate shape, such as a sensitive project kept local. The second
+keeps the history that renders and recipes rely on; the first does
+not.
 
-### How a project comes in
+### Who creates the repository
 
-A project is created by `/new-project`, which writes files only and
-never touches git. Making the project a repository and adding a
-remote is the user's own one-off act:
-
-```
-git -C projects/<slug> init -b main
-```
-
-A remote follows if one is wanted. The scripts carry no address
-and no identity. An existing project with a remote is brought in by
-`/import-project`. A project outside git comes in by hand, as a
-copy or a link into `projects/`, and the forge knows it from then
-on.
-
-### The ignore pattern
-
-The engine's `.gitignore` names `projects/*` and re-includes
-`!projects/forge`. The pattern must be `projects/*` and not
-`projects/`. With `projects/`, the re-include fails silently.
+`/new-project` and `/spinoff` create files only and never touch git.
+Initialising a project's repository and adding its remote are your
+own one-off act at creation. The way in is
+`git -C projects/<slug> init -b main`, then a remote if you want one.
+The scripts carry no URL and no identity. The commit identity is
+git's: your own git configuration resolves it per host, and the forge
+sets none.
 
 ### The project file
 
-Every project has a project file, `project.md`, written once at its
-creation by `/new-project` or by a migration, never by a working
-round. It declares three things:
+Every project has a project file, `project.md`, in its root. It is
+written once, at the project's creation, by `/new-project` or by a
+migration, and never by a working round. It declares three things:
 
-- `project`: the slug of the project;
-- `kind`: `thought` or `library`;
-- `language`: the language of the chain's artefacts, as an ISO
-  639-1 code.
+- `project`: the slug.
+- `kind`: `thought` or `library`, `thought` by default.
+- `language`: the language of the chain's artefacts, as an ISO 639-1
+  code.
 
-It is read wherever the kind or the language of a project is needed.
 The rules of each kind live in the engine. The project carries only
-the marker. A project's optional `CLAUDE.md` is polish and never
-holds rules of its kind.
+the marker. A project's optional `CLAUDE.md` stays polish and never
+holds rules of its kind, because that would copy the engine into the
+project.
 
-A project without a project file has the shape from before a
-migration. The one remedy is `/migrate`.
+A project without this file has the shape from before the migration.
+Its one remedy is `/migrate`. Until it runs, nothing writes into the
+project.
 
-### A library
+### Libraries
 
-A library is a project of kind `library`, named with the prefix
-`lib-`. It has no chain. It holds a ledger, `sources/` and
-`research/` with their indexes, and a README rendered from
-`recipes/readme.md` that catalogues what it holds. The ledger is the
-project's state, made from its documents when it is read. Its
-documents are maintained by their owner, who may overwrite one or
-put a new version beside it.
+A library is a project of kind `library`, its slug prefixed `lib-`.
+It has no chain (the versioned documents a thought project forges).
+It holds a ledger (the table of the project's state, made by a
+script), `sources/` and `research/` with their indexes, and a README
+that catalogues what it holds. Its documents are maintained by an
+owner who is also their author.
 
-Another project cites a library document by its path. Such a
-citation is a dependency on another repository, taken knowingly:
+Another project cites a library document by path. That citation is a
+dependency across repositories, taken knowingly:
 
-- only someone who has both repositories can read it;
-- the citation carries no version, because the library document is a
-  moving target by design;
-- the citing project registers it in the Dependencies table of its
-  ledger.
+- Only someone with both repositories can read it.
+- It carries no version, because the library document is a moving
+  target by design.
+- The citing project's ledger lists it in its Dependencies table, so
+  that the dependency is written down where state lives.
 
-How you use a library is on
+How to use one is on
 [Share material through a library](../use/share-material-through-a-library.md).
 
-### What lives outside the engine
+### What the engine knows of a project
 
-The facts of one installation (an instance) live in
-`CLAUDE.local.md` at the engine root. That file says who the
-principal is by role, the language the conversation runs in and the
-handle the principal signs records with. It is kept out of the
-repository. The commit identity is not the forge's: it lives in the
-user's own git configuration, resolved per host, and the forge sets
-none.
+The engine does not record which projects exist. A project records no
+engine version either: `/check` measures it against the current
+conventions, as
+[Upgrades and migration](../about/upgrades-and-migration.md) explains.
 
-How the forge behaves lives in the engine, in `CLAUDE.md`, the
-commands and the templates. It never lives in the assistant's
-private memory. The assistant (Claude Code) keeps a memory per
-directory outside the repository. Whatever it learns there about
-how the forge should work is written into the engine and removed
-from that memory. Only what is personal to one principal stays in
-memory.
+The engine is the one public place of an instance: a project's recipe
+may send a file it makes, such as a video for the player page, into
+the engine's `docs/videos/`, as
+[The screenplay and its player](../about/the-screenplay-and-its-player.md)
+describes. The file goes out alone. Its recipe, render and history
+stay in the project.
 
-### Two consequences
+### Where behaviour lives
 
-A project records no engine version: how it follows the engine is
-on [Upgrades and migration](upgrades-and-migration.md).
-
-The engine is the one public place of an instance, so a file a
-project shows in public goes out into the engine's `docs/videos/`
-while the project stays where it is, as
-[The screenplay and its player](the-screenplay-and-its-player.md)
-explains.
+How the forge behaves lives in the engine, never in the assistant's
+private memory. Claude Code keeps a memory per directory outside the
+repository. Whatever it learns there about how the forge should work
+is written into `CLAUDE.md`, the commands or the templates and
+removed from memory. Memory keeps only what is personal to one
+principal. Instance facts go to `CLAUDE.local.md`.
 
 ## Why
 
-**Publication with nothing sensitive.** The engine (the core
-together with `projects/forge`) is public. It contains nothing
-sensitive and no instance facts. Users keep their projects wherever
-they choose. They are responsible for what those projects contain
-and where they live, generated decks with a company's branding
-included. Keeping projects out of the engine's repository is what
-lets the engine be published.
+The engine is public and contains nothing sensitive and no instance
+facts. Users keep their projects wherever they choose. They are
+themselves responsible for what those projects contain and where they
+live, branded decks a project generates included. Because each
+project is its own repository, it has its own visibility. Access is
+therefore granted project by project.
 
-**Access per project.** Because every project is its own repository,
-it has its own visibility. A library has its own repository and
-therefore its own visibility too.
+The project file exists because the slug, the kind and the language
+need a home in git. The ledger is made at read time and is not in
+git. A library's repository is, at its creation, this file alone.
 
-**A project without a remote, or without a repository, is
-legitimate.** A sensitive project may be kept local. A repository
-without a remote keeps the history that renders and recipes rely on.
-A project with no repository does not keep it.
+Behaviour lives in the engine so that every instance behaves the
+same. A new user meets the same forge as the principal.
 
-**Work inside the engine.** Projects lie under `projects/` inside
-the engine's directory, and the same scripts serve the engine and
-every project repository. A reason beyond that arrangement is not
-recorded.
-
-**The repository above is not asked.** A project lying inside
-someone else's repository belongs to that repository's owner. So the
-forge runs no git there and asks it nothing.
-
-**Why instance facts are kept out and kept small.** Everything in
-`CLAUDE.local.md` reaches every subagent (a separate Claude run with
-its own brief, such as an isolated reviewer). So only what must be
-always on and is harmless in a public report lives there. Names,
-e-mail addresses and hosts live in the user's own git
-configuration.
-
-**Why behaviour never lives in memory.** Every instance of the forge
-then behaves the same. A new user meets the same forge as the
-principal.
-
-**Why the project file exists.** The ledger is made when it is read
-and is kept out of git. The slug, the kind and the language of a
-project therefore need a home of their own. A library's repository
-is, at its creation, this file alone.
-
-### The shapes rejected
+### Shapes rejected
 
 - **Git submodules, subtree and worktrees.** They model a
-  dependency, and the relation between the engine and its projects
-  is not one.
-- **The engine as a template repository, or the engine copied into
-  projects.** Every comparable project that does so ends in
-  manifests, override layers and migrations.
-- **A plugin as the only shape.** It is rejected for now. The reason
-  is not recorded.
-- **A `local/` folder for user-local files.** It existed only to
-  keep company material out of the repository. The ignored
-  `projects/*` does that. Deck templates live in a library and are
-  named by path.
+  dependency, and the relation of the engine to its projects is not
+  one.
+- **The engine as a template repository, or copied into each
+  project.** Every comparable project that does so ends in manifests,
+  override layers and migrations.
+- **A plugin as the only shape.** The reason is not recorded.
+- **A `local/` directory for files kept off the repository.** It
+  existed only to keep company material out of the repository. The
+  gitignored `projects/*` now does that, and deck templates live in a
+  library, named by path.
 
 ## A worked example
 
-You start a new thought project with the placeholder slug
-`my-idea`:
+Someone starts a project with the placeholder slug `my-project`.
 
-```
-/new-project my-idea
-```
-
-The command writes `projects/my-idea/` with its `project.md`:
-
-```
----
-project: my-idea
-kind: thought
-language: en
----
-```
-
-The engine's git does not see the folder, because `projects/*` is
-ignored. Until you act, `my-idea` is a project outside git: Claude
-writes its files, and the scripts run no git on it.
-
-You make it a repository of its own:
-
-```
-git -C projects/my-idea init -b main
-```
-
-Now git names `projects/my-idea` as the top of a repository, and the
-scripts save it on its own. You may add a private remote, a public
-one, or none. The engine's repository is unchanged throughout.
+1. `/new-project my-project` creates `projects/my-project/` with its
+   files and its `project.md`, which says `project: my-project`,
+   `kind: thought` and `language: en`. No git has run.
+2. The project is now outside git. The forge writes its files, and
+   the engine's own repository does not see them, because
+   `projects/*` is ignored.
+3. The owner types `git -C projects/my-project init -b main` and adds
+   a private remote. Git now names `projects/my-project` as the top of
+   a repository, so the git scripts treat it as under git.
+4. Later the owner makes a library, `lib-shared`, as its own
+   repository, and a recipe of `my-project` names a template in it by
+   path. The ledger of `my-project` lists that template under
+   Dependencies.
+5. The engine is upgraded by a fast-forward of its `main`. Neither
+   project changes, and neither records which engine version it was
+   made with.
 
 ## See also
 
-- [Share material through a library](../use/share-material-through-a-library.md):
-  using a library.
-- [Upgrades and migration](upgrades-and-migration.md): why a project
-  records no engine version and how it follows the engine.
-- [The screenplay and its player](the-screenplay-and-its-player.md):
-  the public files a project sends into the engine.
-- [Repository layout](../reference/repository-layout.md): the layout,
-  file by file.
-- [Glossary](../reference/glossary.md): every term of the forge in
-  one line.
+- [Share material through a library](../use/share-material-through-a-library.md): using a library.
+- [Upgrades and migration](../about/upgrades-and-migration.md): why a project records no engine version and how it follows the engine.
+- [The screenplay and its player](../about/the-screenplay-and-its-player.md): the public files a project sends into the engine.
+- [Repository layout](../reference/repository-layout.md): the layout, file by file.
+- [Glossary](../reference/glossary.md): every term of the forge in one line.
 
-Generated on 2026-10-23 for version 5.34 from the files the
-front-matter names; never edited by hand.
+Generated on 2026-10-25 for version 6.0 from the files the front-matter names; never edited by hand.

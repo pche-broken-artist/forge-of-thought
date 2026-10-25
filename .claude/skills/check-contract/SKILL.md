@@ -17,9 +17,8 @@ is its Lens section, and only that; its parts are the skeleton's
 Your check's name is the suffix of your agent name (`check-<name>`);
 wherever `<name>` appears below, it stands for that name.
 
-Every file you cite, CLAUDE.md included, is read from disk in this
-run: the copy of CLAUDE.md in your context is the session's and may
-be older than the file (POS.0950).
+What holds for every isolated subagent, every file you cite read
+from disk in this run among it, is CLAUDE.md's (Isolated reviewers).
 
 ## Subject
 

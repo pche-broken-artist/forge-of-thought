@@ -23,10 +23,8 @@ What you verify:
    form of its log as `templates/history.md` gives it. Whether
    a text belongs in the document or its history is the `history`
    check's, never yours.
-2. **The ledger's own reports** — the ledger is made at read time
-   by `scripts/forge-ledger.py` from the records (SOL.0680; the
-   command that launches you remade it) and is never a thing to
-   compare with the files: each line of its Reports section and
+2. **The ledger's own reports** — the ledger, made as the contract says,
+   is never a thing to compare with the files: each line of its Reports section and
    each `unparsed:` line of its header (templates/ledger.md, Reports)
    is a finding of yours, with the file it names. A project whose
    ledger header says `shape: before the migration` is reported as

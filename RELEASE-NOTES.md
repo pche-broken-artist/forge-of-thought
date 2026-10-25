@@ -1,13 +1,13 @@
 ---
 project: forge
 render: release-notes
-generated: 2026-10-23
-recipe: recipes/release-notes.md v0.13
+generated: 2026-10-25
+recipe: recipes/release-notes.md v0.14
 inputs:
   - projects/forge/10-intent.history.md
   - projects/forge/10-intent.history.archive.md
   - projects/forge/40-solution-design.history.md
-  - projects/forge/10-intent.md v5.35
+  - projects/forge/10-intent.md v6.0
   - projects/forge/decisions.md
   - RELEASE-NOTES.md
 ---
@@ -19,7 +19,63 @@ takes upgrades through `forge-pull`; Action required comes first in
 every section; the fine-grained log with the reasons lives in
 `projects/forge/10-intent.history.md`.
 
-## 5.35 - 2026-10-23
+## 6.0 - 2026-10-25 - approved
+
+This major closes how the forge is worked by more than one hand and
+how far it reaches below the intent, and is the point to pull to,
+`v6`. Between 5.0 and 6.0 one integrator and contributors came to work
+on git with the step of a conflict and the hook between reading and
+writing git, the ledger came to be made at read time and the threads
+became files, with a migration to that shape, the BRD became a layer
+of the chain, and research came to be planned before it is searched,
+on two model families on your word, every citation opened. The test of
+a major ran on 2026-10-25 and was settled at 5.38: every check,
+`single-source-of-truth` included, both critic lenses and the
+challenge `cto`; the major approves the intent as the record of what
+the principal holds at this date, the solution design staying a draft
+at 0.46, the cut between the intent and the design and the re-test of
+the walls parked into 6.x (DEC.0310, DEC.0320) and the open threads
+open. The sections of 5.1 to 5.35 are folded here; the detail per
+version stays in `projects/forge/10-intent.history.md` and
+`projects/forge/40-solution-design.history.md`.
+
+### Action required
+- Version 6 approved: the forge shared and grounded (POS.0300). For
+  you: `v6` is the point to pull to once released; a project of the
+  shape before the migration runs `/migrate` once.
+- The first release of the brief `collaboration` changes the shape of
+  the files of every project: the project file, headers without the
+  fields that change, the state in records, threads as files, the
+  attributes, the ledger made at read time and the migration with its
+  door `/migrate` (SOL.0670 to SOL.0730, SOL.0800). For you: on every
+  machine that holds the engine: `forge-pull`, then `/setup` for the
+  registration of the merge drivers; then every project you keep, each
+  on one clone: `/migrate <slug>` and `/save <slug>`, a project already
+  migrated elsewhere `/pull <slug>`.
+- The generator of the documentation, the writer's definition and the
+  contract, is hashed with the inputs of every page, so that a change
+  of the rule a page is made by regenerates every page made by the old
+  one; the choice against a switch that forces a run is recorded
+  (SOL.0460). For you: run `/document` in a new session; every page
+  regenerates, as its hash changed.
+- The specification of a work product is `work/<name>.spec.md` with
+  its history `work/<name>.spec.history.md`, and the file keeps the
+  bare name `work/<name>.<ext>` (POS.1520, SOL.0640). For you: an
+  existing work product's specification and history are renamed to
+  `.spec.md` and `.spec.history.md`, its file to the bare name, the
+  ledger's Work row and the file's header with them.
+- A change of the way or the why of a work product made in its file,
+  its task, its inputs, its method or what it assumes, is carried into
+  the specification in the same round; the states of the work and its
+  wording are the file's alone (POS.1520). For you: the light check
+  gains the rule; /work step 5 cites it.
+- A project is a repository of its own only where git names its
+  directory as the top (POS.0550, SOL.0510, SOL.0680). For you:
+  solution design (SOL.0510, SOL.0680, SOL.0800, SOL.0830), CLAUDE.md
+  Persistence, the skills import-project and migrate, the scripts, the
+  reply in the issue.
+- A project outside git is migrated the same (POS.1740, SOL.0800). For
+  you: SOL.0800, the skill migrate, scripts/forge-migrate.py.
 
 ### Added
 - The BRD is an artefact of the chain, `30-brd.md`, below the
@@ -38,12 +94,13 @@ every section; the fine-grained log with the reasons lives in
   threads, the parent of an item a REQ; the intent alone where the
   project has no assignment, the parent a POS; and a file you put in,
   registered as a source, which yields a work product in `work/` and
-  never an artefact of the chain (POS.1810). For you: on your word
-  the draft is built automatically, the provenance map from the
-  parent first and the items from it, what the parent does not answer
-  left as a TBC with an owner or an ASM, Claude's own reading marked
-  as his; a BRD wanted in the chain from a transcript starts with an
-  intent handed over from the same file.
+  never an artefact of the chain; the first two make `30-brd.md`, or
+  on your word a work product in `work/` as a quick look (POS.1810).
+  For you: on your word the draft is built automatically, the
+  provenance map from the parent first and the items from it, what
+  the parent does not answer left as a TBC with an owner or an ASM,
+  Claude's own reading marked as his; a BRD wanted in the chain from a
+  transcript starts with an intent handed over from the same file.
 - Four prefixes of its own, BR, UC, DEP and NFR, in the ID scheme of
   CLAUDE.md; OOS, ASM, TBC and SCR reused; a BR and a UC cite their
   parent, an NFR its parent or its category; the Requirement style of
@@ -82,26 +139,305 @@ every section; the fine-grained log with the reasons lives in
   work product, not a BRD (POS.1850). For you: a decision in
   `decisions.md` where you want the sign-off kept, not a rule; which
   artefacts a coding agent is given, you decide.
+- A research is planned before it is searched: `/research` shows the
+  plan first, the purpose, the perspectives, the assumptions with a
+  premortem, what is left out, the cards, each one question answered
+  by one kind of evidence from one kind of source, and the agents, and
+  you confirm it in a walkthrough; `--deep` runs one isolated agent
+  per card into a bundle `research/YYYY-MM-DD-<topic>/` with the plan
+  and the synthesis at its head, `--quick` one card into one note, and
+  without the word Claude proposes the depth with his reason
+  (POS.1860, POS.1140, SOL.0860). For you: the questions of a research
+  are seen and judged before they cost anything; a second round runs
+  only for gaps the notes name and on your word, never a third.
+- Two model families on one plan: `/research --deep --engine <name>`
+  adds a second engine, which reads the draft plan and says what it
+  misses, then takes every card whole on the same packet, the two
+  answers laid side by side in the synthesis; independence is
+  measured, the first engine's notes held until the second's return
+  and the URLs and sentences they share counted by `forge-cite
+  --independence`, and an engine named but unusable is said in one
+  sentence and skipped (POS.1870, POS.0790, SOL.0860, SOL.0880). For
+  you: the second engine is asked for by name, since the time and
+  money of a research are your choice; agreement of two families is
+  consistency, never validation, and one engine's quota is spent one
+  or two runs at a time.
+- The link to another engine is one script, `scripts/forge-engine.py`,
+  with a table of engines over the engine's own CLI, Antigravity
+  (`agy`) of Gemini's family the first row: the login is yours, made
+  once in the engine's own tool, the forge carries no key, the engine
+  works in a packet folder under `tmp/` under a profile of its own
+  that denies the forge's tree and the shell, and a run that changed
+  anything is refused (POS.1880, SOL.0870). For you: your own settings
+  are left untouched; the research is the first job on the link, the
+  reviewers on it are not yet built.
+- Every citation is opened before a note is filed:
+  `scripts/forge-cite.py` opens every URL a note cites and reads an
+  arXiv page for its title, a dead page or a wrong title sends the
+  note back to its agent once, and a page that did not answer is
+  unverifiable and never counted as a failure (POS.1890, SOL.0880).
+  For you: a finding that rests on a citation still failing is named
+  in the synthesis as without support.
+- `tmp/` at the engine's root is the one working folder of the forge,
+  for the packets, envelopes and profiles of runs on another engine,
+  the tasks of a documentation run, a check's report before it is
+  filed, a dry ledger and the manifest of a migration; it is in git
+  with its README and `.gitignore`, its contents never (POS.1900,
+  SOL.0890). For you: nothing in it is a source of truth, and a run
+  kept there for inspection is deleted by hand.
+- `/migrate [slug]` is the door to `scripts/forge-migrate.py`: it
+  recognises the shape of a project by its marks, runs only the steps
+  that are missing, verifies each, commits nothing, takes a tag per
+  project before it applies and undoes through `--undo`; it refuses a
+  repository that is not clean, is behind its origin or is not on
+  `main`, and runs on a project outside git as well, none of the
+  refusals of git applying there (POS.1740, POS.0820, SOL.0800). For
+  you: a project is migrated once, on one clone, and every other clone
+  of it pulls; a project of the old shape is read, not written, until
+  it is migrated; take a backup before `/migrate` on a project outside
+  git, where `--undo` is refused and a run that stops midway is
+  finished by running it again.
+- Every project has a project file, `project.md`, written once at its
+  creation and carrying `project`, `kind` and `language`, read wherever
+  the ledger's header was read (POS.1590, POS.0060, POS.0960,
+  SOL.0670). For you: the kind and the language of a project are set
+  in `project.md`, no longer in the ledger.
+- The ledger is made at read time by `scripts/forge-ledger.py` from the
+  documents and is no longer kept in git; an unparsable file drops its
+  row aloud and the save goes on; the script reports two items with one
+  ID and a THR cited with neither a file nor a `closed` record
+  (POS.1600, POS.1640, SOL.0680). For you: never edit `ledger.md` by
+  hand; the map, `/ledger`, `/end` and the checks call the script, and
+  the hand-kept ledger of a migrated project lies in
+  `ledger.archive.md`.
+- Waiting on principal is a rule, not a hand-kept list: the open
+  threads, the TBCs the principal owns, the open findings of a critic
+  and the open challenges, the parked ones under a heading of their
+  own (POS.1620). For you: free text without an ID has no place there.
+- Where the state is wanted on the remote, a release on main writes
+  `renders/state.md` from the ledger script (POS.1650). For you: the
+  ledger itself never reaches git.
+- Threads are files, `threads/THR.NNNN.md`, with a header of `id`,
+  `concerns`, `origin` and `status`; a thread closes by `status:
+  closed` and a `closed` record in the intent's history, and a closed
+  thread is immutable and is its own archive (POS.1680, POS.0120,
+  POS.0310, SOL.0720). For you: `threads.md` is gone; a thread is
+  opened, worked and closed in its own file.
+- Every project carries a `.gitattributes` from
+  `templates/gitattributes`, and every file has one of three ways of
+  merging: composed text, the record files among it, which are the
+  histories, the decisions, the resource indexes and the documentation
+  map, merging as text; derived documents, the renders, the
+  documentation and the published companions, under `merge=ours` and
+  made again; and immutable files with unique names, the published
+  files `binary`; the engine carries a list of its own (POS.1560,
+  POS.1690, SOL.0730). For you: no driver is needed for the record
+  files on any machine, a conflict in them is two tails kept both, and
+  a render or a page in conflict keeps one side and is made again.
+- A conflicting rebase is left standing by `/save`, the commit made and
+  nothing lost: the script prints the files in conflict and the step
+  that follows, `forge-status` says a rebase or a merge is in progress,
+  and the step of a conflict lays both sides out as a walkthrough, one
+  conflict one question, Claude writing the chosen wording and a
+  `changed` record (POS.1710, POS.1490, SOL.0840, SOL.0780). For you: a
+  conflict at a save is settled in the session; then `/save` again.
+- `/save` refuses a repository with a rebase or a merge already
+  standing before it stages anything, pushes a branch without an
+  upstream, and `forge-save` pushes a clean repository that is ahead
+  of its origin (POS.1710, SOL.0530, SOL.0780). For you: conflict
+  markers are never committed, a clone switched to a branch has a door
+  to the push, and commits left unpushed go out with the next `/save`.
+- IDs stay one sequence per project with no blocks; two items with one
+  number from any cause, a merge or otherwise, are the one exception
+  to "never renumbered", the younger by its `created` record renumbered
+  with a record and a thread renamed with it, reported by the ledger
+  script, which never writes, and settled in a walkthrough (POS.1790,
+  POS.0220, POS.1110, DEC.0270). For you: an ID clash is mended by
+  you, never by Claude alone; the ASM and TBC items of a work
+  specification take the next free number of the project.
+- An ID takes a fifth digit beyond 9999, `POS.10000`, never a zero
+  added to an existing ID, and IDs sort numerically (POS.0220). For
+  you: no ID changes.
+- A change of the operating layer that needs a test goes brief first,
+  then the build and its test on the fixture, then the rounds of the
+  intent and the design, never across a release; `/new-artefact`
+  follows the same order where a new kind of artefact needs a trial
+  (POS.1780, POS.1430). For you: the intent describes what is built at
+  every release, and a kind that must be tried is built and tried
+  before its positions are written.
+- Every reviewer's report is named by its date, the time to the minute
+  and four hex characters of a content hash, the name completed by
+  `scripts/forge-report.py`, which refuses a name that ends in a run
+  number, and through which `/critique`, `/challenge` and `/check`
+  file (POS.1720, SOL.0810). For you: reports are named
+  `YYYY-MM-DD-<kind>-<name>-HHMM-<hash>.md`; the names given before
+  stay as they are.
+- `/setup` registers `merge.ours.driver`, `rebase.backend`,
+  `merge.renormalize` and `rerere.enabled` and offers
+  `merge.conflictStyle zdiff3`, reading every key first and leaving an
+  existing value, and writes your global git configuration, the
+  identity, the guard and the registration, only through
+  `scripts/forge-config.py`, which goes through `git config --global`
+  and points an identity stanza to its file by a relative path; it
+  adds the `Author` line to `CLAUDE.local.md` and offers an existing
+  instance file the lines it lacks, on your word (SOL.0740, SOL.0150,
+  POS.1050). For you: the handle in `Author` is the author of every
+  record and is asked once; where your global git file moves with
+  HOME, run `/setup` once in each place.
+- `forge-status` reports the registration keys missing on the machine
+  (SOL.0740). For you: a machine without the registration is said so.
+- `/save --quick` leaves out the `light` check and nothing else, the
+  message drafted and confirmed as always or given with `-m`
+  (POS.1100). For you: a change settled in a round reaches the remote
+  at once; `/release` keeps its checks.
+- A bundle may grow: `/ingest --bundle <name>` adds one file at a time
+  to a bundle born at its first file, each file immutable from its own
+  registration and its role asked per file; a bundle that arrived whole
+  refuses it, and a bare sweep offers an unregistered file inside a
+  bundle for registration there (POS.0180, SOL.0230). For you: issues
+  or minutes of one origin are kept as one growing bundle, its index
+  saying which kind it is.
+- A new document kind, **work**: an output of the project made with
+  work of its own, the file holding the content and a specification
+  beside it holding the way and the why, versioned with its history
+  and approvable, worked through `/work <name> [slug]` (POS.1520,
+  POS.1080, POS.0310, SOL.0640). For you: a model, an analysis or a
+  worked task has its own home in `work/`.
+- A recipe of the genre `screenplay`, the fourth genre, renders a
+  screenplay of a terminal conversation, made into a video or the
+  events of the player page by `scripts/md2video.py`, with no designed
+  step (POS.1530, POS.0590, POS.0770, SOL.0650). For you:
+  `/recipe screenplay` composes one; `/render` makes the file and
+  `/publish` has no part.
+- A recipe may render in several languages, `languages:`, the first
+  primary, the rest translated in the same run, one render per
+  language, `renders/<recipe>.<lang>.md` (POS.1550, SOL.0400). For
+  you: a recipe with one language keeps `renders/<recipe>.md`.
+- A project's recipe may send its file into the engine's
+  `docs/videos/` by its `output:` path, the one public place, served by
+  GitHub Pages and left alone by `/document` (POS.1540, SOL.0660). For
+  you: read the file before the engine is saved; that is its clearing
+  for the public.
+- The command `/history <ID> [slug]` is born with its script,
+  `scripts/forge-history.py`: the script gathers what the project
+  holds of one item, its wording today, every record whose subject it
+  is, the records of other items that mention it, the rows of the
+  archive that mention it and every other place that cites it, and
+  prints it as one wrapped timeline, taking the short form of an ID;
+  Claude adds a few sentences of its own on top, marked as such, and
+  nothing is derived from them (POS.1510, SOL.0630). For you: the
+  command works on every project as it stands, and `/history <ID>`
+  gives you the whole way to an item in one call.
+- The forge looks at the remote and offers, it never pulls or merges
+  on its own: the `/forge` map ends with the state of every repository
+  against its origin, up to date, behind, ahead, diverged or no
+  origin, each state with one offer, and the new command `/pull` pulls
+  only a clean repository that is behind, and after a pull of the
+  engine shows the Action required lines of these notes crossed and
+  offers the checks (POS.1490, POS.1710, SOL.0180). For you: read the
+  map's last line first, a state behind being a recommendation to pull
+  before anything is written; take the upgrade through `/pull` from
+  inside a session or through `forge-pull` as before.
+- A session ends with `/end`: it says what lives only in the
+  conversation and would be lost, an unwritten round, carried
+  verdicts, a promise, offers the write, reports every repository with
+  unsaved changes and offers `/save`, names stale renders as a fact
+  and closes with one sentence saying whether shutting the command
+  line loses anything; it writes nothing itself (POS.1500, SOL.0180,
+  THR.0430). For you: end a session with `/end` and you know what
+  closing the command line loses.
+- `forge-status --remote` reports the state against the origin
+  through a function shared in `forge_repos.py`, and `forge-pull`
+  prints the state before, the state after and the commits between
+  (SOL.0510). For you: the scripts say what they found and what they
+  did.
+- A thread on a third kind of project, `workshop`, which uses the
+  forge's functionality without working on the artefacts of the chain,
+  its unit of work a thread (THR.0750). For you: nothing changes yet.
+- Threads on the course of the teaching videos (THR.0660), on a chain
+  handed over whole for a small project where little is at stake
+  (THR.0670), on a question put to the manual in free text,
+  `/man <free text>` (THR.0680), and on what of a thread survives its
+  closing (THR.0640). For you: nothing changes yet.
 
 ### Changed
-- `forge-status` reports a repository-local identity as a fact, the
-  instance template gives a neutral handle as its example in place of
-  a person's own, and a write that finds no Author handle in
-  `CLAUDE.local.md` stops before it appends a record and offers
-  `/setup` (SOL.0550, THR.0720, POS.0950, POS.1050, the operating
-  layer). For you: an instance without an Author line is stopped at
-  its next write of a history record, not guessed for; run `/setup`
-  to add the line.
+- The verdict line `(a)ccept / (m)odify / (q)uestion / (r)eject /
+  (p)ark` closes every step that needs your consent, a write, a run, a
+  commit, a change of a setting, not only an item of a walkthrough;
+  `(q)uestion` asks on the open item, nothing changes and nothing is
+  written, and a message that says yes and asks a question is
+  `question` (POS.0850). For you: answer with a single letter, and a
+  yes that carries a question is answered and asked again.
+- Before a run of several agents Claude says the model and the size of
+  the run, and it runs on your word as a step of its own (the
+  operating layer, CLAUDE.md, Step by step). For you: a costly run is
+  never started unannounced.
+- Reading git is open to Claude and the scripts in `scripts/` are the
+  only door to a write: the deny rule `Bash(git *)` is replaced by a
+  `PreToolUse` hook, `scripts/hook-git.py`, on Bash, PowerShell closed
+  whole as before; the hook allows a reading verb, denies a write
+  naming the script to use, and asks, over the whole command, for the
+  commands that finish the step of a conflict, `git add`, `git rebase
+  --continue` or `--abort`, `git merge --continue` or `--abort`, `git
+  merge <branch>`, `git checkout --ours` or `--theirs` on a file; git
+  inside `$(` is denied and the shell's redirections are stripped
+  before a verb is judged (POS.0550, POS.1200, SOL.0520, SOL.0030).
+  For you: Claude reads the state of git without a prompt, the
+  finishing commands come to you as a permission question, and every
+  commit, push or pull still goes through the scripts.
+- The forge promises two people git, with its help at a conflict: one
+  integrator and contributors, a contributor working and saving on a
+  branch, the integrator merging on the server or through the step of
+  a conflict; the engine's own project is an open-source repository
+  whose issues enter as sources and threads and whose pull requests the
+  integrator carries into the chain (POS.1750, POS.1770). For you: to
+  contribute, open an issue or a pull request; a protected main is the
+  normal case.
+- Two windows of one person on one project are not solved by the
+  forge: the answer is git's, a branch or a second clone (POS.1700).
+  For you: a bare `/save` still commits every repository with changes,
+  so keep one window per project or give the slug.
+- A release, the documentation and a publish refuse a repository that
+  is behind or diverged (POS.1710). For you: pull before a release.
+- A header carries nothing that changes with a round: `date` and
+  `last_change` leave the artefacts and the work specifications,
+  `updated` and `last_change` the recipes, `updated` the indexes,
+  `generated` and `previous` the documentation map, all of it derived
+  from the history or from the run (POS.1570, SOL.0700, SOL.0200). For
+  you: the date of a version is the date of its records; `version` and
+  `status` stay.
+- What only the ledger knew lives in records: the mining of a brief in
+  the intent's history, a source's date and origin in its index entry,
+  a finding or a challenge settled as a `closed` record, a work
+  product's state in its specification's history, the provenance of a
+  published file in a companion beside it, `published/<recipe>.md`
+  (POS.1610, SOL.0690, FND.2230). For you: settle findings and mining
+  by records; the ledger shows them.
+- A record of state only carries the current version and does not
+  raise it (POS.1630, SOL.0690). For you: a round that only closes
+  findings after a check is no longer a version.
+- The ledger script no longer promises to report a version given twice
+  after a merge: git finds the case itself, the header's `version:`
+  line conflicting whenever both sides raised it (POS.1640, POS.1790,
+  SOL.0680). For you: a document raised to the same version on two
+  branches shows up as a conflict at the merge, settled by whoever
+  merges with the next number and one `changed` record.
 - The ledger reads a TBC of the principal also in the BRD's shape,
   `(owner: the principal; blocks estimation: ...)` (SOL.0850, the
   operating layer). For you: the open questions a BRD puts to you
   reach Waiting on principal like the assignment's.
-- `/new-artefact` follows the order of POS.1780 where a new kind of
-  artefact needs a trial: the brief first, then the build and its
-  test, then the rounds of the intent and the design right after it
-  (POS.1430, the operating layer). For you: a kind that must be tried
-  is built and tried before its positions are written, as the BRD
-  was.
+- `forge-status` reports a repository-local identity as a fact, the
+  instance template gives a neutral handle as its example, and a write
+  that finds no Author handle in `CLAUDE.local.md` stops before it
+  appends a record and offers `/setup` (SOL.0550, THR.0720, POS.0950,
+  POS.1050, the operating layer). For you: an instance without an
+  Author line is stopped at its next write of a history record, not
+  guessed for; run `/setup` to add the line.
+- The analyst of a BRD works as the principal of a project of his own:
+  a subject project has one principal, and the several hands of the
+  integrator and contributors meet in the forge's own project
+  (POS.1800, CHL.0660). For you: a BRD is worked in its own project by
+  whoever writes it.
 - The BRD's definition, template, persona and check mended from the
   critique of the first build and from the first trial before the
   layer was released: an NFR ends with its parent or its category, a
@@ -117,19 +453,257 @@ every section; the fine-grained log with the reasons lives in
   world outside the parent (FND.2530 to FND.2620, POS.1360, the
   operating layer). For you: the shape of a BRD as the layer first
   reaches you; nothing of yours changes.
-- The growth path names the BRD as a layer that exists, no longer one
-  that is certain to come, and a BRD before the solution design is no
-  longer "one day" (POS.0700, POS.0450). For you: nothing to do; the
-  rest of the growth path, integration intended and a strategy layer
-  possible, is unchanged.
+- The growth path names the BRD as a layer that exists, and a BRD
+  before the solution design is no longer "one day" (POS.0700,
+  POS.0450, POS.0100). For you: nothing to do; the rest of the growth
+  path, integration intended and a strategy layer possible, is
+  unchanged.
+- A challenger persona, and a critic lens, may be sent to another
+  engine over the link of `forge-engine`, the forge's own persona and
+  contract composed and the report checked before it is filed;
+  Microsoft AI Foundry is one engine among several, Gemini's family
+  first, and a second engine beside the session model is no exception
+  to the one model of the forge (POS.0800, POS.0790, POS.0930,
+  SOL.0600, TBC.0030). For you: the link exists, the reviewers on it
+  are not yet built (THR.0740).
+- The thread on a second way of researching is closed: it arrived as
+  depths and engines, not kinds (THR.0290, POS.1860, POS.1870). For
+  you: `--quick` and `--deep` are the two ways.
+- `/critique` and `/challenge` take as target any file of the project
+  by its path, a work product with its specification; a reviewer that
+  finds nothing to work on says so (POS.0400, POS.0410, POS.0420). For
+  you: a plan or a work product can be challenged as an artefact can.
+- The command, not the agent, numbers and files the report of every
+  reviewer, `/critique` and `/challenge` writing its state as `/check`
+  does; the agents write nothing (POS.1120, POS.1140, SOL.0300). For
+  you: reviewers of any kind can run at once.
+- `/ingest` asks "what is it for?" before the index entry is written,
+  one question per source, a bundle one for the whole, and the entry
+  carries the role from its birth (POS.1040, POS.0180). For you: the
+  Role field is never left empty waiting for your answer.
+- `/pull` and `/migrate` are among the guarded commands, since they
+  change the disk, and the criterion that separates the guarded
+  commands from the rest is stated: a guarded command changes files the
+  moment it runs, with no round and no `write` in between (POS.1090).
+  For you: they run on your word only, and you can tell of any command
+  whether it does.
+- The step after a pull of the engine is `/pull`, which shows the
+  Action required lines crossed and offers the checks (POS.0940). For
+  you: after `forge-pull`, run `/pull` instead of running `/check
+  light` and `/check project` on each project by hand.
+- The first release of the brief `collaboration` was built on `main`
+  in one stretch, the way back the tag `pre-r1` (DEC.0230, THR.0620).
+  For you: the tag `pre-r1` on the engine marks the state before the
+  new shape.
+- The fixture, the test bed of the forge's own tests, is one project
+  made by hand, of its own and not tracked by the engine, and nothing
+  skips it (POS.1590, POS.1750, SOL.0830, SOL.0670). For you: the
+  forge's tests never touch a clone of your projects; a bare `/save`
+  does not skip the fixture.
+- A user runs the forge on Linux: the git scripts, the ledger and
+  `docs-state` are verified there (POS.0830). For you: the
+  conversions and the hooks are not yet verified beyond Windows.
+- The documentation's rules are amended from the audit of 2026-10-11:
+  the kind of a page says what content belongs on it and one rule has
+  one home page; a generic example in the shape an owner defines, and
+  a diagram from the owners, are mirrors, not inventions; a reason the
+  inputs do not give stays off the page and is listed by the run; an
+  input may be a named part of a file, hashed as that part; one voice
+  on the pages, the full rule the documentation contract's (POS.1450).
+  For you: About no longer restates the how-tos and the references, a
+  page carries no reason its inputs do not give, and a change of one
+  section or one item regenerates the pages made from it and no
+  others.
+- The generator is redrawn to those rules: inputs as files or named
+  parts hashed as the part, the index from a line per entry and the
+  reader paths of the map, one outline per kind of page and the
+  version a page was made for, the contract owning the voice and the
+  sentence and what never reaches a page (SOL.0460). For you:
+  `/document` works as before; the pages it makes follow the amended
+  rules.
+- From the comparison of the second run of the redrawn generator with
+  the audit's measurements M.01 to M.18: every page is reached from
+  another page, the outline of a how-to names the heading "A worked
+  example", and the contract's sentence makes an enumeration whose
+  members carry a gloss a list and a rule, its reason, its exception
+  and its purpose separate sentences (SOL.0460, THR.0630, the
+  operating layer). For you: no page hangs from the index alone, and
+  the pages have shorter sentences.
+- The rule of Versioning & status cites `/history` instead of
+  describing the search: this is the one way Claude reads an item's
+  history before proposing a change to it (POS.1510, POS.0310). For
+  you: the history is still never loaded whole; a proposal to change
+  an item rests on the script's gathering, the same every time.
+
+### Removed
+- The second, third and fourth release of the brief `collaboration`
+  are cancelled: the forge's driver for the record files, `/merge`, the
+  worktree `projects/<slug>@<branch>/`, the version as a landing with
+  its `+` records, `landed` and `v<base>+N`, the blocks of IDs in
+  `ids.md` and the allocation over the branches, the conversion to one
+  sentence per line, and the fixture script (POS.1580, POS.1660,
+  POS.1670, POS.1730, POS.1760, SOL.0710, SOL.0750, SOL.0760, SOL.0770,
+  SOL.0790, SOL.0820, DEC.0280). For you: none of these comes; the
+  shape of the first release stands.
+- The driver's key `merge.forge-records.driver`, never registered, is
+  gone from `/setup`, `forge-config`, `forge-status` and `forge_repos`
+  (SOL.0740). For you: the registration of `/setup` is `ours`, the
+  backend, renormalize and rerere, with the offer of zdiff3.
 
 ### Fixed
+- The positions keep only the date of their present shape, the way to
+  them, the dates, counts and trials, moved into their records; the
+  operating layer cut so that each rule has one owner, among them what
+  holds for every isolated subagent in CLAUDE.md, Isolated reviewers,
+  the guard on main only in CLAUDE.md, Persistence, and the research
+  skill citing the headers of its scripts and its templates (POS.0120,
+  FND.2760, FND.2850 to FND.2950, FND.2980, FND.2990). For you: to know
+  a rule, read its owner; to know why a position stands, run
+  `/history <ID>`.
+- The solution design brought to the ledger made at read time and to
+  the driver let go: the dependencies found as citations, the Work
+  table made by the ledger script, no ledger row split out by hand, no
+  page for the driver, the threads merging as text (SOL.0200 to
+  SOL.0230, SOL.0640, SOL.0720, SOL.0460, FND.2750 to FND.2830). For
+  you: the solution design describes the engine as it is.
+- `/save` goes on with the step of a conflict when `forge-save` leaves
+  a rebase standing, and reports when it refuses a rebase or merge
+  already in progress (FND.2490). For you: a conflict at a save goes
+  straight into the step of a conflict, both sides laid out for your
+  decision.
+- The scripts ask git once whether a project's directory is the top of
+  a repository, never look for a `.git`, and run no git on anything
+  else; a project whose top lies elsewhere, such as one linked into
+  `projects/` from a subdirectory of another repository, is a project
+  outside git whose files are written and whose surrounding repository
+  is asked nothing; the `/forge` map asks `forge-status` the same, and
+  the `project` check no longer checks it (POS.0550, SOL.0510,
+  SOL.0680, FND.2500, GitHub issue #3). For you: such a project is no
+  longer refused, a worktree or a linked directory is recognised as a
+  repository like any other, and a project outside git comes in by
+  hand, its git yours.
+- `scripts/forge-ledger.py` refuses a project of the old shape whether
+  or not it is under git, prints and says to run `/migrate`, where the
+  `/forge` map and `/ledger` used to overwrite the hand-kept ledger of
+  such a project outside git (SOL.0680, POS.1740). For you: an
+  unmigrated project's ledger is never overwritten; migrate it first.
+- `scripts/forge-ledger.py` finds the closing commit of a thread by the
+  header line `status: closed` added or removed, no longer by a count
+  of words that made the creating commit the closing one (FND.2350).
+  For you: the ledger dates a closed thread by the commit that closed
+  it.
+- The hint of `forge-clone` names `forge-config.py --identity` in place
+  of absolute paths (POS.1050). For you: set the identity for a new
+  host through the script, as `/setup` does.
+- `/spinoff` writes the mining of the brief as a record in the
+  intent's history in place of a Mined column (POS.1610). For you: a
+  spin-off leaves its state where the ledger reads it.
+- CLAUDE.md, `/setup`, `forge-config`, `forge-status` and the solution
+  design speak of the one merge driver, `ours` (SOL.0150, FND.2500).
+  For you: wording only; nothing merges differently.
+- The comments of `templates/gitattributes` and of the engine's
+  `.gitattributes` say "Way 2, derived", as POS.1560 numbers the ways
+  (FND.2420). For you: a comment only; nothing merges differently.
+- CLAUDE.md names `scripts/forge-check.py` with its module
+  `forge_check.py` in the Repository layout (FND.2410). For you:
+  `forge-check.py light <slug>` is the light check as a program, run on
+  trial beside the `light` agent (THR.0530).
+- CLAUDE.md's Repository layout names `forge-config` and the two hooks
+  and the deny rule of the other shell in `settings.json`, and the
+  README says that the scripts are the door to a write of git, not to
+  git as a whole (FND.2270, FND.2300, FND.2290). For you: the README
+  and CLAUDE.md describe the engine as it is.
+- The rejected directions of the collaboration and the position on the
+  ledger give their reasons on what stands, the record files as text
+  and IDs settled by detection, and the fifth digit of an ID is kept on
+  its own reason (REJ.0270 to REJ.0320, POS.1600, POS.0220, FND.2450,
+  FND.2460). For you: nothing changes in how the forge works.
 - The comment of the history companions brought to
   `templates/history.md` as it stands, the records untouched
   (FND.2520). For you: wording only; a new companion carries the
   template's comment.
+- The checks of 2026-10-19 found rules said in two places, mended so
+  that each has one owner: `templates/ledger.md` says what each column
+  holds and where it is read from, with the Waiting rule and the
+  Reports list; `templates/project.md` what a project without the file
+  is; `templates/history.md` the shapes of the state records; the
+  intent's definition the rules of a thread; the documentation
+  contract the kinds of a page (FND.2090 to FND.2220, FND.0980). For
+  you: to know one of these rules, read its owner.
+- The engine's own project is migrated: its ledger made at read time,
+  the hand-kept one archived as `ledger.archive.md`, the fields `date`,
+  `last_change` and `updated` out of every document and index
+  (FND.2060, FND.2070, SOL.0700). For you: the engine's project shows
+  what a migrated project looks like.
+- The position on recipes still spoke of an updated date after the
+  field left the recipe templates (POS.0710). For you: a recipe carries
+  `version` and no date; its date is computed from its history.
+- Positions that still spoke of ledger rows say where the state now
+  comes from: a source's origin date is a field of its index entry,
+  how far a brief is mined is the mining record, a work product
+  touched by hand is a record, a finding's state is a `closed` record
+  in the history that settled it (POS.0180, POS.0920, POS.1520,
+  POS.1140, POS.0400, POS.0440). For you: these are what the ledger is
+  made from.
+- A position cites its brief by path; the version it was mined at is
+  the mining record's (POS.0110, POS.0920). For you: cite a brief
+  without a version.
+- The `html-player` format is the timed events wrapped as a script
+  call, `renders/<recipe>.<lang>.html-player.js`, so that the player
+  page plays a file from disk as well as from Pages; the spelling
+  `.json` never existed on disk (POS.1530, SOL.0650). For you: look
+  for the `.js` file beside the render.
+- The player page, `docs/videos/index.html`, is written anew by
+  `md2video` from `templates/html-player.html` whenever a file is
+  written into the folder; the skeleton is what is edited, and the page
+  has no document kind of its own (POS.1540, SOL.0660, TBC.0040). For
+  you: never edit the page by hand.
+- A position claimed a check that keeps a solution design true against
+  what realises it, which the roster does not have (POS.1420). For you:
+  no check verifies a solution design against the files.
+- The table of document kinds has six groups since the kind work, and
+  the position says so, its research row one text with CLAUDE.md's
+  (POS.1080, FND.2680). For you: nothing to do.
+- The first run of the redrawn generator, 86 pages, three new, the
+  check clean after four regenerations, found three defects, mended:
+  the reader of the map takes a block by its bold label, the
+  definitions' shape; the state script honours the planner's
+  `remove`, which it overwrote; the planner's entry agrees with itself
+  (SOL.0460). For you: a page the planner removes stays removed, and
+  `/document` runs clean.
+- A session can no longer be said to end "without loss": the
+  sentence contradicted `/end` and prime directive 9; `/end` says
+  what the conversation holds that the files do not, and `/ledger`
+  re-orients from the ledger (POS.0330, POS.1500). For you: end a
+  session with `/end` to know what closing it would lose.
+- `/save` rebases your commits onto the remote; the sentence that left
+  merge, rebase and conflicts to git by hand predated it (POS.1110,
+  POS.1490). For you: on a diverged repository `/save` rebases your
+  commits, or you merge by hand; merge requests stay git's.
+- A citation of a library document carries no version; the sentence
+  that called the version a visible, unguarded pin was written before
+  that decision (POS.0970, POS.1020). For you: cite a library document
+  by path alone.
 
 ### Rejected
+- A split of roles between the engines, one searching and the other
+  reasoning (REJ.0440). For you: both engines do the full work on
+  every card, so that the answers can be laid side by side.
+- Recursive deep-diving to a fixed depth (REJ.0450). For you: depth
+  comes from the cards and from a second round only for gaps the notes
+  name, never a third.
+- A fact verified by a count of agreeing sources (REJ.0460). For you:
+  a source is opened, dated and placed by kind, and a citation is
+  verified by resolving it.
+- Saturation as a percentage (REJ.0470). For you: the stop rule is a
+  kind rule, a differently-worded query bringing nothing new, written
+  into the search record.
+- Skills on the other engine's side (REJ.0480). For you: the forge's
+  definition travels in the packet verbatim, the one owner of the
+  agent's rules.
+- A library or an MCP server as the link to another engine
+  (REJ.0490). For you: the link is the engine's own CLI, and the forge
+  carries no key.
 - REF as a prefix of the BRD for a related document (REJ.0390). For
   you: a document is cited by its path, an item carries no link, and
   related documents are a list without IDs.
@@ -149,847 +723,32 @@ every section; the fine-grained log with the reasons lives in
   business analysis, revisited at the birth of the BRD; the decision
   stands (DEC.0060). For you: the BRD deepens specification, it does
   not reach into execution.
-
-## 5.34 - 2026-10-23
-
-### Changed
-- The ledger script no longer promises to report a version given twice
-  after a merge: that report was never built and cannot be built
-  without false alarms, and git finds the case itself, the header's
-  `version:` line conflicting whenever both sides raised it (POS.1640,
-  POS.1790, SOL.0680). For you: a document raised to the same version
-  on two branches shows up as a conflict at the merge, settled by
-  whoever merges with the next number and one `changed` record.
-
-### Fixed
-- `/save` goes on with the step of a conflict when `forge-save` leaves
-  a rebase standing, and reports when it refuses a rebase or merge
-  already in progress (FND.2490). For you: a conflict at a save goes
-  straight into the step of a conflict, both sides laid out for your
-  decision.
-- The `/forge` map asks `forge-status` whether a project is a
-  repository instead of looking for a `.git`, and the `project` check
-  no longer checks it (POS.0550, FND.2500). For you: a worktree or a
-  linked directory is recognised as a repository like any other.
-- The hint of `forge-clone` names `forge-config.py --identity` in place
-  of absolute paths (POS.1050). For you: set the identity for a new
-  host through the script, as `/setup` does.
-- `/spinoff` writes the mining of the brief as a record in the
-  intent's history in place of a Mined column (POS.1610). For you: a
-  spin-off leaves its state where the ledger reads it.
-- CLAUDE.md, `/setup`, `forge-config`, `forge-status` and the solution
-  design speak of the one merge driver, `ours`, the records driver
-  being gone since 5.31 (SOL.0150, FND.2500). For you: wording only;
-  nothing merges differently.
-
-## 5.33 - 2026-10-23
-
-### Fixed
-- The solution design no longer promises `fixture.py` or a bare
-  `forge-save` that skips the fixture: the script was let go and the
-  skip never built, and the fixture is one project made by hand
-  (SOL.0830, SOL.0510, FND.2480). For you: a bare `/save` does not skip
-  the fixture, contrary to what 5.19 announced.
-- The rejected directions of the collaboration and the position on the
-  ledger give their reasons on what stands since 5.31, the record files
-  as text and IDs settled by detection (REJ.0270 to REJ.0320, POS.1600,
-  FND.2450). For you: nothing changes in how the forge works.
-- The fifth digit of an ID is kept on its own reason, the reservations
-  of IDs it once served being let go (POS.0220, FND.2460). For you: an
-  ID still takes a fifth digit beyond 9999, `POS.10000`.
-
-## 5.32 - 2026-10-23
-
-### Fixed
-- `/setup` writes your global git configuration, the identity, the
-  guard and the registration, only through `scripts/forge-config.py`,
-  which goes through `git config --global`, names no path to the file
-  and points an identity stanza to its file by a path relative to it
-  (POS.1050, SOL.0150, SOL.0740, FND.2260). For you: where your global
-  git file moves with HOME, run `/setup` once in each place.
-- The comments of `templates/gitattributes` and of the engine's
-  `.gitattributes` say "Way 2, derived", as POS.1560 numbers the ways
-  since 5.31 (FND.2420). For you: a comment only; nothing merges
-  differently.
-- CLAUDE.md names `scripts/forge-check.py` with its module
-  `forge_check.py` in the Repository layout (FND.2410). For you:
-  `forge-check.py light <slug>` is the light check as a program, run on
-  trial beside the `light` agent (THR.0530).
-- `scripts/forge-report.py` refuses a report name that ends in a run
-  number (FND.2430). For you: a report's name is completed by the
-  script alone; reports already filed keep their names.
-
-## 5.31 - 2026-10-23
-
-### Added
-- A conflicting rebase is left standing by `/save`, the commit made and
-  nothing lost: the script prints the files in conflict and the step
-  that follows, `forge-status` says a rebase or a merge is in progress,
-  and the step of a conflict lays both sides out as a walkthrough, one
-  conflict one question, Claude writing the chosen wording and a
-  `changed` record (POS.1710, POS.1490, SOL.0840, SOL.0780). For you: a
-  conflict at a save is settled in the session, in place of the abort
-  and the four manual steps of 5.24; then `/save` again.
-- The hook `scripts/hook-git.py` has a third answer, ask, for the
-  commands that finish the step of a conflict: `git add`, `git rebase
-  --continue` or `--abort`, `git merge --continue` or `--abort`, `git
-  merge <branch>`, `git checkout --ours` or `--theirs` on a file; git
-  inside `$(` is denied, and the shell's redirections are stripped
-  before a verb is judged (POS.1200, POS.0550, SOL.0520). For you: these
-  commands come to you as a permission question; every other write of
-  git stays denied with the script to use named.
-- `/save` refuses a repository with a rebase or a merge already
-  standing before it stages anything, and pushes a branch without an
-  upstream (POS.1710, SOL.0530, SOL.0780). For you: conflict markers
-  are never committed, and a clone switched to a branch has a door to
-  the push.
-- IDs stay one sequence per project with no blocks; two branches that
-  took one number are reported by the ledger script after the merge
-  and settled in a walkthrough, the younger renumbered with a record;
-  a version given twice is settled by whoever merges, the merged
-  document taking the next number and one `changed` record naming the
-  merge (POS.1790, POS.0220, POS.1110). For you: an ID or a version
-  clash after a merge is mended by you, never by Claude alone.
-- A change of the operating layer that needs a test goes brief first,
-  then the build and its test on the fixture, then the rounds of the
-  intent and the design, never across a release (POS.1780). For you:
-  the intent describes what is built at every release.
-
-### Changed
-- Three ways of merging in place of four: the record files, the
-  histories, the decisions, the resource indexes and the documentation
-  map, merge as text, and a conflict in them is two tails kept both in
-  the step of a conflict (POS.1560, POS.1690, SOL.0730). For you: no
-  driver is needed for the record files on any machine.
-- The forge promises two people git, with its help at a conflict; the
-  integrator merges on the server or through the step of a conflict,
-  and the engine's own project is an open-source repository whose
-  issues enter as sources and threads and whose pull requests the
-  integrator carries into the chain (POS.1750, POS.1770). For you: to
-  contribute, open an issue or a pull request.
-- Two windows of one person on one project are not solved by the
-  forge: the answer is git's, a branch or a second clone (POS.1700).
-  For you: a bare `/save` still commits every repository with changes,
-  so keep one window per project or give the slug.
-
-### Removed
-- The second, third and fourth release of the brief `collaboration`
-  are cancelled: the forge's driver for the record files, `/merge`, the
-  worktree `projects/<slug>@<branch>/`, the version as a landing with
-  its `+` records, `landed` and `v<base>+N`, the blocks of IDs in
-  `ids.md` and the allocation over the branches, the conversion to one
-  sentence per line, and the fixture script (POS.1580, POS.1660,
-  POS.1670, POS.1730, POS.1760, SOL.0710, SOL.0750, SOL.0760, SOL.0770,
-  SOL.0790, SOL.0820, DEC.0280). For you: none of these comes; the
-  shape of the first release, 5.26, stands.
-- The driver's key `merge.forge-records.driver`, never registered, is
-  gone from `/setup`, `forge-config`, `forge-status` and `forge_repos`
-  (SOL.0740). For you: the registration of `/setup` is `ours`, the
-  backend, renormalize and rerere, with the offer of zdiff3.
-
-### Rejected
 - The version as a boundary in the history for branches (REJ.0330,
-  DEC.0280). For you: a version given twice is settled by whoever
-  merges.
+  REJ.0300, DEC.0280). For you: a version given twice is settled by
+  whoever merges, and nothing is written into a header on a branch.
 - The forge's driver for the record files, and `merge=union` with it
-  (REJ.0340, REJ.0280). For you: the record files are text.
+  (REJ.0340, REJ.0280). For you: the record files are text; union
+  duplicates and does not order.
 - `/merge` as a command of the forge (REJ.0350). For you: the merge
   stays git's, with the step of a conflict as the help.
 - The worktree of a branch and `<slug>@<branch>` as a slug (REJ.0360).
   For you: two windows on one project use a branch or a second clone.
 - The blocks of IDs per author and the allocation over the local
-  branches (REJ.0370). For you: a clash of IDs is found by detection
+  branches, and before them IDs from a hash of the branch name, hash
+  IDs, lazy IDs at the landing, a hundred reserved per branch and the
+  reservation of blocks by a push onto `origin/main` (REJ.0370,
+  REJ.0270, REJ.0320). For you: a clash of IDs is found by detection
   and settled by renumbering.
 - The conversion of the prose to one sentence per line (REJ.0380). For
   you: the hard wrap at about 72 columns stays.
-
-## 5.30 - 2026-10-22
-
-### Fixed
-- `scripts/forge-ledger.py` finds the closing commit of a thread by the
-  header line `status: closed` added or removed, no longer by a count
-  of words that made the creating commit the closing one (FND.2350).
-  For you: the ledger dates a closed thread by the commit that closed
-  it.
-
-## 5.29 - 2026-10-22
-
-### Action required
-- A project is a repository of its own only where git names its
-  directory as the top (POS.0550, SOL.0510, SOL.0680). For you:
-  solution design (SOL.0510, SOL.0680, SOL.0800, SOL.0830), CLAUDE.md
-  Persistence, the skills import-project and migrate, the scripts, the
-  reply in the issue.
-- A project outside git is migrated the same (POS.1740, SOL.0800). For
-  you: SOL.0800, the skill migrate, scripts/forge-migrate.py.
-
-### Fixed
-- The scripts ask git once whether a project's directory is the top of
-  a repository, never look for a `.git`, and run no git on anything
-  else; a project whose top lies elsewhere, such as one linked into
-  `projects/` from a subdirectory of another repository, is a project
-  outside git whose files are written and whose surrounding repository
-  is asked nothing (POS.0550, SOL.0510, SOL.0680, GitHub issue #3). For
-  you: such a project is no longer refused; it comes in by hand, and
-  its git is yours.
-- The migration runs on a project outside git: none of the refusals of
-  git, the way back your backup taken before `--apply`, `--undo`
-  refused, and a run that stops midway finished by running it again
-  (POS.1740, SOL.0800). For you: take a backup before `/migrate` on a
-  project outside git.
-
-## 5.28 - 2026-10-21
-
-### Added
-- A bundle may grow: `/ingest --bundle <name>` adds one file at a time
-  to a bundle born at its first file, each file immutable from its own
-  registration and its role asked per file; a bundle that arrived whole
-  refuses it, and a bare sweep offers an unregistered file inside a
-  bundle for registration there (POS.0180, SOL.0230). For you: issues
-  or minutes of one origin are kept as one growing bundle, its index
-  saying which kind it is.
-
-### Changed
-- Two items with one number from any cause, not only a merge, are the
-  one exception to "never renumbered": the younger by its `created`
-  record is renumbered, and the ledger reports the clash and never
-  writes (POS.0220, DEC.0270, FND.2280). For you: the ASM and TBC items
-  of a work specification take the next free number of the project.
-- The hook composes an ask over the whole command where a rule would,
-  since an ask holds in the automatic permission mode (POS.1200,
-  SOL.0520). For you: nothing changes yet; no rule answers ask.
-- A user runs the forge on Linux: the git scripts, the ledger and
-  `docs-state` are verified there (POS.0830). For you: the
-  conversions and the hooks are not yet verified beyond Windows.
-
-### Fixed
-- CLAUDE.md's Repository layout names `forge-config` and the two hooks
-  and the deny rule of the other shell in `settings.json`, and the
-  README says that the scripts are the door to a write of git, not to
-  git as a whole (FND.2270, FND.2300, FND.2290). For you: the README
-  and CLAUDE.md describe the engine as it is.
-
-## 5.27 - 2026-10-21
-
-### Changed
-- Reading git is open to Claude and the scripts in `scripts/` are the
-  only door to a write: the deny rule `Bash(git *)` is replaced by a
-  `PreToolUse` hook, `scripts/hook-git.py`, on Bash, PowerShell closed
-  whole as before; the hook allows a reading verb and denies a write,
-  naming the script to use (POS.0550, POS.1200, SOL.0520, SOL.0030).
-  For you: Claude reads the state of git without a prompt, and every
-  commit, push or pull still goes through the scripts.
-
-### Fixed
-- `scripts/forge-ledger.py` refuses a project of the old shape whether
-  or not it is under git, prints and says to run `/migrate`, where the
-  `/forge` map and `/ledger` used to overwrite the hand-kept ledger of
-  such a project outside git (SOL.0680, POS.1740). For you: an
-  unmigrated project's ledger is never overwritten; migrate it first.
-
-## 5.26 - 2026-10-19
-
-### Action required
-- The first release of the brief `collaboration` is built and changes
-  the shape of the files of every project: the project file, headers
-  without the fields that change, the state in records, threads as
-  files, the attributes, the ledger made at read time and the
-  migration with its door `/migrate` (SOL.0670 to SOL.0730, SOL.0800).
-  For you: on every machine that holds the engine: `forge-pull`, then
-  `/setup` for the registration of the merge drivers; then every
-  project you keep, each on one clone: `/migrate <slug>` and `/save
-  <slug>`, a project already migrated elsewhere `/pull <slug>`; nobody
-  works in two on one project before the second release.
-
-### Added
-- `/migrate [slug]` is the door to `scripts/forge-migrate.py`: it
-  recognises the shape of a project by its marks, runs only the steps
-  that are missing, verifies each, commits nothing and undoes through
-  `--undo`; it refuses a repository that is not clean, is behind its
-  origin or is not on `main` (POS.1740, SOL.0800). For you: a project
-  is migrated once, on one clone, and every other clone of it pulls; a
-  project of the old shape is read, not written, until it is migrated
-  (POS.0820).
-- Every project has a project file, `project.md`, written once at its
-  creation and carrying `project`, `kind` and `language`, read wherever
-  the ledger's header was read (POS.1590, SOL.0670). For you: the kind
-  and the language of a project are set in `project.md`, no longer in
-  the ledger.
-- The ledger is made at read time by `scripts/forge-ledger.py` from the
-  documents and is no longer kept in git; an unparsable file drops its
-  row aloud and the save goes on; the script reports two items with one
-  ID, two versions with one number and a THR cited with neither a file
-  nor a `closed` record (POS.1600, POS.1640, SOL.0680). For you: never
-  edit `ledger.md` by hand; the map, `/ledger`, `/end` and the checks
-  call the script, and the hand-kept ledger of a migrated project lies
-  in `ledger.archive.md`.
-- Threads are files, `threads/THR.NNNN.md`, with a header of `id`,
-  `concerns`, `origin` and `status`; a thread closes by `status:
-  closed` and a `closed` record in the intent's history, and a closed
-  thread is immutable and is its own archive (POS.1680, POS.0120,
-  SOL.0720). For you: `threads.md` is gone; a thread is opened, worked
-  and closed in its own file.
-- Every project carries a `.gitattributes` from
-  `templates/gitattributes`: `merge=ours` on the renders, the
-  documentation and the published companions, `binary` on the
-  published files; the engine carries a list of its own (POS.1690,
-  SOL.0730). For you: a render or a page in conflict keeps one side
-  and is made again; the driver for the record files stays the second
-  release's (DEC.0250).
-
-### Changed
-- A header carries nothing that changes with a round: `date` and
-  `last_change` leave the artefacts and the work specifications,
-  `updated` and `last_change` the recipes, `updated` the indexes,
-  `generated` and `previous` the documentation map, all of it derived
-  from the history or from the run (POS.1570, SOL.0700). For you: the
-  date of a version is the date of its records; `version` and `status`
-  stay.
-- What only the ledger knew lives in records: the mining of a brief in
-  the intent's history, a source's date and origin in its index entry,
-  a finding or a challenge settled as a `closed` record, a work
-  product's state in its specification's history, the provenance of a
-  published file in a companion beside it, `published/<recipe>.md`
-  (POS.1610, SOL.0690, FND.2230). For you: settle findings and mining
-  by records; the ledger shows them.
-- A record of state only carries the current version and does not
-  raise it (POS.1630, SOL.0690). For you: a round that only closes
-  findings after a check is no longer a version.
-
-## 5.25 - 2026-10-19
-
-### Fixed
-- The position on recipes still spoke of an updated date after the
-  field left the recipe templates (POS.0710). For you: a recipe carries
-  `version` and no date; its date is computed from its history.
-- The checks of 2026-10-19 found rules said in two places, mended so
-  that each has one owner: `templates/ledger.md` says what each column
-  holds and where it is read from, with the Waiting rule and the
-  Reports list; `templates/project.md` what a project without the file
-  is; `templates/history.md` the shapes of the state records; the
-  intent's definition the rules of a thread; the documentation
-  contract the kinds of a page (FND.2090 to FND.2220, FND.0980). For
-  you: to know one of these rules, read its owner.
-- The engine's own project is migrated: its ledger made at read time,
-  the hand-kept one archived as `ledger.archive.md`, the fields `date`,
-  `last_change` and `updated` out of every document and index
-  (FND.2060, FND.2070, SOL.0700). For you: the engine's project shows
-  what a migrated project looks like.
-
-## 5.24 - 2026-10-18
-
-### Added
-- Every reviewer's report is named by its date, the time to the minute
-  and four hex characters of a content hash, the name completed by
-  `scripts/forge-report.py`, through which `/critique`, `/challenge`
-  and `/check` file (POS.1720, SOL.0810). For you: reports are named
-  `YYYY-MM-DD-<kind>-<name>-HHMM-<hash>.md`; the names given before
-  stay as they are.
-- `/setup` registers `merge.ours.driver`, `rebase.backend`,
-  `merge.renormalize` and `rerere.enabled` in the global file git
-  reads and offers `merge.conflictStyle zdiff3`, reading every key
-  first and leaving an existing value; it adds the `Author` line to
-  `CLAUDE.local.md` and offers an existing instance file the lines it
-  lacks, on your word (SOL.0740, SOL.0150). For you: the handle in
-  `Author` is the author of every record and is asked once.
-- `forge-status` reports the registration keys missing on the machine
-  (SOL.0740). For you: a machine without the registration is said so.
-- `forge-save` pushes a clean repository that is ahead of its origin;
-  a conflicting rebase is aborted and the four manual steps printed,
-  the save the last of them (SOL.0780, POS.1710). For you: commits
-  left unpushed by a rebase finished by hand go out with the next
-  `/save`.
-- An ID takes a fifth digit beyond 9999, `POS.10000`, never a zero
-  added to an existing ID (POS.0220, SOL.0790). For you: no ID
-  changes.
-
-### Changed
-- `/critique` and `/challenge` number and file the report and write
-  its state as `/check` does; the agents write nothing (POS.1140,
-  SOL.0300). For you: reviewers of any kind can run at once.
-- `/ingest` asks "what is it for?" before the index entry is written,
-  one question per source, a bundle one for the whole, and the entry
-  carries the role from its birth (POS.1040, POS.0180). For you: the
-  Role field is never left empty waiting for your answer.
-
-### Fixed
-- Positions that still spoke of ledger rows say where the state now
-  comes from: a source's origin date is a field of its index entry,
-  how far a brief is mined is the mining record, a work product
-  touched by hand is a record, a finding's state is a `closed` record
-  in the history that settled it (POS.0180, POS.0920, POS.1520,
-  POS.1140, POS.0400, POS.0440). For you: these are what the ledger is
-  made from since 5.26.
-- A position cites its brief by path; the version it was mined at is
-  the mining record's (POS.0110, POS.0920). For you: cite a brief
-  without a version.
-- The designed merge is made consistent: `/merge` refuses a repository
-  behind only, a diverged main with no branch named merges
-  `origin/main` into main, and the next free number is read over the
-  local branches within the author's block where the project has one
-  (POS.1760, POS.1490, POS.1690, POS.1730, POS.0220). For you: nothing
-  changes; this is deferred (DEC.0250).
-
-## 5.23 - 2026-10-18
-
-### Added
-- `/save --quick` leaves out the `light` check and nothing else, the
-  message drafted and confirmed as always or given with `-m`
-  (POS.1100). For you: a change settled in a round reaches the remote
-  at once; `/release` keeps its checks.
-
-## 5.22 - 2026-10-18
-
-### Added
-- A thread on the form of the deferred releases: the driver, `/merge`,
-  the worktree and the allocation as designed, or git opened to Claude
-  with the deny rule narrowed to the destructive verbs (THR.0710). For
-  you: nothing changes yet.
-
-### Changed
-- The brief `collaboration` is built as the preparation and the first
-  release now; the second and the fourth release are deferred, their
-  form decided after the first from how it works, and the third stays
-  optional (DEC.0250, THR.0620). For you: the driver, `/merge`, the
-  worktrees and the blocks of IDs do not come with the first release.
-- An ID on a branch of one clone is to be the next free number read
-  over every local branch, with no network and no block; blocks per
-  author wait for a second clone with a branch in flight (POS.1730,
-  POS.1110, DEC.0240). For you: nothing changes until it is built.
-- Two items with one number after a merge are the one exception to
-  "never renumbered": one is given the next free number, and a thread
-  is renamed with it (POS.0220, POS.1680). For you: an ID clash after
-  a merge is mended by renumbering, and only then.
-- The migration's instruction is said per project: a project is
-  migrated once, on one clone, by whoever keeps it, and every other
-  clone of it pulls (SOL.0800). For you: this is the shape of the
-  Action required of 5.26.
-
-## 5.21 - 2026-10-18
-
-### Action required
-- A change of the way or the why of a work product made in its file,
-  its task, its inputs, its method or what it assumes, is carried into
-  the specification in the same round; the states of the work and its
-  wording are the file's alone (POS.1520). For you: the light check
-  gains the rule; /work step 5 cites it.
-
-## 5.20 - 2026-10-18
-
-### Changed
-- The first release of the brief `collaboration` is built on `main` in
-  one stretch, the way back the tag `pre-r1` (DEC.0230, THR.0620). For
-  you: the tag `pre-r1` on the engine marks the state before the new
-  shape.
-
-### Rejected
-- Building the first release on a branch of the engine in a second
-  working tree (DEC.0230). For you: the branch was complexity for a
-  risk the principal controls.
-
-## 5.19 - 2026-10-17
-
-### Changed
-- The brief `collaboration` is planned in four releases: the first the
-  project file, the header, the ledger at read time, threads as files,
-  the attributes, the registration, the unique names of reports and
-  the migration; the second the driver, `/merge`, the worktree and the
-  version as a boundary together; the third one sentence per line; the
-  fourth the blocks of IDs, on a trigger (DEC.0220, POS.1580,
-  POS.1730). For you: nothing changes yet.
-- The migration takes a tag per project before it applies, and the way
-  back is said truthfully (POS.1740). For you: a project can be
-  returned to the state before its migration.
-- The fixture, the test bed of the forge's own tests, is a project of
-  its own that a bare `/save` skips (POS.1590, POS.1750). For you: the
-  forge's tests never touch a clone of your projects.
-
-## 5.18 - 2026-10-17
-
-### Changed
-- `/critique` and `/challenge` take as target any file of the project
-  by its path, a work product with its specification; a reviewer that
-  finds nothing to work on says so (POS.0410, POS.0420). For you: a
-  plan or a work product can be challenged as an artefact can.
-
-## 5.17 - 2026-10-17
-
-### Action required
-- The second challenge of the architect is settled and the order of
-  the releases of the brief `collaboration` reversed, the conversion to
-  one sentence per line last and on its own (DEC.0210). For you: nobody
-  works in two on one project before the second release of the brief
-  collaboration: the first alone merges the histories as text and
-  leaves a merge to raw git.
-
-### Changed
-- The command, not the agent, numbers and files the report of every
-  reviewer, the critic and the challenger as the check (POS.1120,
-  POS.1140). For you: reviewers of any kind may run at once.
-- The designed merge gains both directions, `/merge <branch>` on main
-  and `/merge main` on a branch, the record of every verdict and the
-  push as the last step; "join the landing" replaces "land first";
-  rerere is a convenience (POS.1760, POS.1660, POS.1690, POS.1730,
-  POS.1580, POS.1740). For you: nothing changes until it is built.
-
-## 5.16 - 2026-10-17
-
-### Added
-- A merge is git's through the forge's door: `/merge` on the user's
-  word, the driver merging the record files and what remains in
-  conflict worked in a walkthrough, one conflict one question
-  (POS.1760). For you: nothing changes until it is built.
-- One integrator and N contributors: a contributor works and saves on
-  a branch, the integrator merges it locally through `/merge` and saves
-  on main, a merge request on the server is for reading (POS.1770).
-  For you: a protected main is the normal case.
-- A thread on whether `/save` takes the conflict walkthrough of
-  `/merge` in place of aborting a conflicting rebase (THR.0700). For
-  you: nothing changes yet.
-
-### Changed
-- IDs on a branch come from blocks per author assigned by hand, a
-  thousand per prefix (POS.1730, POS.0220). For you: nothing changes
-  until it is built.
-- The ledger script degrades aloud instead of failing the save
-  (POS.1600). For you: an unparsable file never stops a save.
-- A release, the documentation and a publish refuse a repository that
-  is behind or diverged (POS.1710). For you: pull before a release.
-- The migration refuses while branches are in flight, and undoes a
-  changed file from the index and the rest from its manifest
-  (POS.1740). For you: land or give up every branch before migrating.
-- After an upgrade that changes the shape of files, a project of the
-  old shape is read, not written, until it is migrated (POS.0820). For
-  you: the migration stays your decision, project by project.
-
-### Rejected
-- The reservation of ID blocks by a push onto `origin/main` from a
-  branch, by plumbing (REJ.0320). For you: a hosted main is protected
-  by default and refuses such a push.
-
-## 5.15 - 2026-10-17
-
-### Changed
-- One sentence per line is to hold in the renders too, since a model
-  writes them, and `md2video` joins and wraps lines itself (POS.1580).
-  For you: nothing changes until the conversion is built.
-
-## 5.14 - 2026-10-17
-
-### Changed
-- Every report of a reviewer, not only the second of a day, is to
-  carry the time and a hash in its name, since the first report of a
-  day on two branches collides too (POS.1720). For you: built at 5.24.
-
-## 5.13 - 2026-10-17
-
-### Added
-- The brief `collaboration` is mined: several people, branches and
-  windows on one project become possible, built in releases planned in
-  THR.0620 (POS.1560 to POS.1750, POS.1110, THR.0690). For you:
-  nothing changes until a release builds it.
-- Every file of a project has one of four ways of merging, and the
-  forge tells git which one: composed text, a set of records merged by
-  the forge's driver, derived documents made again at a merge, and
-  immutable files with unique names (POS.1560, POS.1670). For you: the
-  forge still never merges on its own judgement.
-- A project file, a header with nothing that changes with a round, the
-  ledger made at read time, the state in records and threads as files
-  (POS.1590, POS.1570, POS.1600, POS.1610, POS.1680). For you: built
-  at 5.26.
-- Waiting on principal is a rule, not a hand-kept list: the open
-  threads, the TBCs the principal owns, the open findings of a critic
-  and the open challenges, the parked ones under a heading of their
-  own (POS.1620). For you: free text without an ID has no place there.
-- The ledger script reports what the merged files cannot, among them
-  two items with one ID and records of two authors in one landing
-  (POS.1640). For you: a silent merge of two sentences is reported for
-  review.
-- Where the state is wanted on the remote, a release on main writes
-  `renders/state.md` from the ledger script (POS.1650). For you: the
-  ledger itself never reaches git.
-- The version is a boundary written on main only: a branch never
-  changes an artefact's header, and the records written on it are
-  landed on main (POS.1660). For you: nothing changes until it is
-  built.
-- Every project carries a `.gitattributes` from a template of the
-  engine (POS.1690). For you: built at 5.26.
-- Two windows of one person on one project are two working trees,
-  `projects/<slug>@<branch>/`, and a bare `/save` is for one window
-  (POS.1700). For you: with two windows open, save with a slug.
-- The map ends with the state of every repository against its origin
-  and its offer, and a state behind is a recommendation to pull before
-  anything is written (POS.1710). For you: read the map's last line
-  first.
-- A release that changes the shape of files comes with a migration,
-  `/migrate [slug]`, run on the user's word (POS.1740, POS.0940). For
-  you: built at 5.26.
-- Prose is to be written one sentence per line instead of wrapped at
-  72 columns (POS.1580). For you: nothing changes until the conversion
-  is built.
-
-### Changed
-- The language and the kind of a project move to the project file,
-  since the ledger leaves git (POS.0060, POS.0960). For you: built at
-  5.26.
-- An ID may take a fifth digit beyond 9999 and IDs sort numerically
-  (POS.0220). For you: built at 5.24.
-- A closed thread stays as its file, and the rule of 5.4 that its last
-  text goes into `Was` is withdrawn (POS.0310, POS.0120). For you: a
-  closed thread is read in its own file.
-
-### Rejected
-- IDs on a branch from a hash of the branch name, hash IDs, lazy IDs
-  at the landing or a hundred reserved across all prefixes per branch
-  (REJ.0270). For you: a block from a hash collides among ten branches
-  with a probability near 40 %.
-- `merge=union` for the record files, and the ledger committed only at
-  a release (REJ.0280). For you: union duplicates and does not order.
 - The entries of the resource indexes as immutable blocks (REJ.0290).
   For you: a typo corrected in an entry is never a conflict.
-- `<base>+` written into an artefact's header on a branch (REJ.0300).
-  For you: the version on a branch is computed and reported, never
-  written.
 - A file per record for the histories and the decisions, an event log,
   and the splitting of directories in advance (REJ.0310). For you: a
   record stays one line in one file.
-
-## 5.12 - 2026-10-15
-
-### Added
-- A thread on a question put to the manual in free text, `/man <free
-  text>` (THR.0680). For you: nothing changes yet.
-
-## 5.11 - 2026-10-15
-
-### Added
-- A thread on a chain handed over whole, for a small project where
-  little is at stake (THR.0670). For you: nothing changes yet.
-
-## 5.10 - 2026-10-15
-
-### Fixed
-- The `html-player` format is the timed events wrapped as a script
-  call, `renders/<recipe>.<lang>.html-player.js`, so that the player
-  page plays a file from disk as well as from Pages; the spelling
-  `.json` never existed on disk (POS.1530, SOL.0650). For you: look
-  for the `.js` file beside the render.
-- The player page, `docs/videos/index.html`, is written anew by
-  `md2video` from `templates/html-player.html` whenever a file is
-  written into the folder; the skeleton is what is edited, and the page
-  has no document kind of its own (POS.1540, SOL.0660, TBC.0040). For
-  you: never edit the page by hand.
-- A position claimed a check that keeps a solution design true against
-  what realises it, which the roster does not have (POS.1420). For you:
-  no check verifies a solution design against the files.
-
-## 5.9 - 2026-10-14
-
-### Added
-- A recipe of the genre `screenplay`, the fourth genre, renders a
-  screenplay of a terminal conversation, made into a video or the
-  events of the player page by `scripts/md2video.py`, with no designed
-  step (POS.1530, POS.0590, POS.0770, SOL.0650). For you:
-  `/recipe screenplay` composes one; `/render` makes the file and
-  `/publish` has no part.
-- A recipe may render in several languages, `languages:`, the first
-  primary, the rest translated in the same run, one render per
-  language, `renders/<recipe>.<lang>.md` (POS.1550, SOL.0400). For
-  you: a recipe with one language keeps `renders/<recipe>.md`.
-- A project's recipe may send its file into the engine's
-  `docs/videos/` by its `output:` path, the one public place, served by
-  GitHub Pages and left alone by `/document` (POS.1540, SOL.0660). For
-  you: read the file before the engine is saved; that is its clearing
-  for the public.
-- A thread on the course of the teaching videos (THR.0660). For you:
-  nothing changes yet.
-
-## 5.8 - 2026-10-13
-
-### Changed
-- The verdict line of a walkthrough gains `(q)uestion`: a question on
-  the open item, nothing changes, Claude answers and closes the item
-  again, and `q` writes nothing (POS.0850). For you: none; the hook
-  prints the new line from the next prompt.
-
-## 5.7 - 2026-10-13
-
-### Action required
-- The specification of a work product is `work/<name>.spec.md` with
-  its history `work/<name>.spec.history.md`, and the file keeps the
-  bare name `work/<name>.<ext>` (POS.1520, SOL.0640). For you: an
-  existing work product's specification and history are renamed to
-  `.spec.md` and `.spec.history.md`, its file to the bare name, the
-  ledger's Work row and the file's header with them.
-
-## 5.6 - 2026-10-12
-
-### Added
-- A new document kind, **work**: an output of the project made with
-  work of its own, the file holding the content and a specification
-  beside it holding the way and the why, versioned with its history
-  and approvable, worked through `/work <name> [slug]` (POS.1520,
-  POS.1080, POS.0310, SOL.0640). For you: a model, an analysis or a
-  worked task has its own home in `work/`.
-
-### Fixed
-- The table of document kinds has six groups since the kind work, and
-  the position says so (POS.1080). For you: nothing to do.
-
-## 5.5 - 2026-10-11
-
-Nothing for the user of the engine.
-
-## 5.4 - 2026-10-11
-
-### Added
-- A thread on what of a thread survives its closing (THR.0640), and a
-  thread on testing the new output of `forge-pull` (THR.0650). For
-  you: nothing changes yet.
-
-### Changed
-- A thread that closes carries its last text in the `Was` of its
-  `closed` record (POS.0310). For you: the way to a decision stays
-  searchable in the log.
-
-## 5.3 - 2026-10-11
-
-### Action required
-- The generator of the documentation, the writer's definition and
-  the contract, is hashed with the inputs of every page, so that a
-  change of the rule a page is made by regenerates every page made by
-  the old one; the choice against a switch that forces a run is
-  recorded (SOL.0460). For you: run `/document` in a new session;
-  every page regenerates, as its hash changed.
-
-### Added
-- The command `/history <ID> [slug]` is born with its script,
-  `scripts/forge-history.py`: the script gathers what the project
-  holds of one item, its wording today, every record whose subject it
-  is, the records of other items that mention it, the rows of the
-  archive that mention it and every other place that cites it, and
-  prints it as one wrapped timeline, taking the short form of an ID;
-  Claude adds a few sentences of its own on top, marked as such, and
-  nothing is derived from them (POS.1510, SOL.0630; the row of the
-  Commands table and the scripts comment of CLAUDE.md). For you:
-  none; the command works on every project as it stands, and
-  `/history <ID>` gives you the whole way to an item in one call.
-
-### Changed
-- The rule of Versioning & status cites `/history` instead of
-  describing the search: this is the one way Claude reads an item's
-  history before proposing a change to it (POS.1510, POS.0310). For
-  you: the history is still never loaded whole; a proposal to change
-  an item now rests on the script's gathering, the same every time.
-- The planner's definition says that every page is reached from
-  another page, at least one other entry naming it under `links`
-  (operating layer, solution design 0.13). For you: no page of the
-  documentation hangs from the index alone.
-- The writer's outline of a how-to names the heading "A worked
-  example" (operating layer, solution design 0.13). For you: one
-  spelling of that heading on every how-to page.
-- The contract's sentence: an enumeration whose members carry a gloss
-  is a list, one member per line, and a rule, its reason, its
-  exception and its purpose are separate sentences (operating layer,
-  solution design 0.13). For you: shorter sentences on the pages at
-  the next `/document`.
-- The second run of the redrawn generator was compared against the
-  audit's measurements M.01 to M.18 (SOL.0460, THR.0630). For you: the
-  three changes above are what the comparison found.
-
-### Fixed
-- The first run of the redrawn generator, 86 pages, three new, the
-  check clean after four regenerations, found three defects, mended:
-  the reader of the map takes a block by its bold label, the
-  definitions' shape; the state script honours the planner's
-  `remove`, which it overwrote; the planner's entry agrees with itself
-  (SOL.0460). For you: a page the planner removes stays removed, and
-  `/document` runs clean.
-
-## 5.2 - 2026-10-11
-
-### Added
-- A thread on what remains of the documentation audit of 2026-10-11
-  after the round on the operating layer: the owners outside the
-  generator, then `/document` in a new session and the comparison
-  against the audit's measurements (THR.0630). For you: nothing
-  changes yet.
-
-### Changed
-- The documentation's rules are amended from the audit of 2026-10-11:
-  the kind of a page says what content belongs on it and one rule has
-  one home page; a generic example in the shape an owner defines, and
-  a diagram from the owners, are mirrors, not inventions; a reason the
-  inputs do not give stays off the page and is listed by the run; an
-  input may be a named part of a file, hashed as that part; one voice
-  on the pages, the full rule the documentation contract's (POS.1450).
-  For you: About no longer restates the how-tos and the references, a
-  page carries no reason its inputs do not give, and a change of one
-  section or one item regenerates the pages made from it and no
-  others, where 78 of 83 pages regenerated at 5.1 for about a dozen
-  changed.
-- The generator is redrawn to those rules: inputs as files or named
-  parts hashed as the part, the index from a line per entry and the
-  reader paths of the map, one outline per kind of page and the
-  version a page was made for, the contract owning the voice and the
-  sentence and what never reaches a page; the choices recorded
-  (SOL.0460). For you: `/document` works as before; the pages it makes
-  follow the amended rules.
-- The criterion that separates the guarded commands from the rest is
-  stated, where the list implied it and never said it (POS.1090). For
-  you: you can tell of any command whether it runs on your word only.
-
-### Fixed
-- A session can no longer be said to end "without loss": the
-  sentence contradicted `/end` and prime directive 9; `/end` says
-  what the conversation holds that the files do not, and `/ledger`
-  re-orients from the ledger (POS.0330, POS.1500). For you: end a
-  session with `/end` to know what closing it would lose.
-- `/save` rebases your commits onto the remote; the sentence that left
-  merge, rebase and conflicts to git by hand predated it (POS.1110,
-  POS.1490). For you: on a diverged repository `/save` rebases your
-  commits, or you merge by hand; merge requests stay git's.
-- A citation of a library document carries no version; the sentence
-  that called the version a visible, unguarded pin was written before
-  that decision (POS.0970, POS.1020). For you: cite a library document
-  by path alone.
-
-## 5.1 - 2026-10-11
-
-### Added
-- The forge looks at the remote and offers, it never pulls or merges
-  on its own: the `/forge` map and the new command `/pull` ask
-  `forge-status --remote` for the state of the engine and of the
-  project against its origin and say it as a fact, up to date, behind,
-  ahead, diverged or no origin, each state with one offer; `/pull`
-  pulls only a clean repository that is behind, and after a pull of
-  the engine shows the Action required lines of these notes crossed
-  and offers the checks (POS.1490, SOL.0180, THR.0490 closed). For
-  you: a clone behind its origin is shown at every map; take the
-  upgrade through `/pull` from inside a session or through
-  `forge-pull` as before, and nothing is pulled or merged unasked.
-- A session ends with `/end`: it says what lives only in the
-  conversation and would be lost, an unwritten round, carried
-  verdicts, a promise, offers the write, reports every repository with
-  unsaved changes and offers `/save`, names stale renders as a fact
-  and closes with one sentence saying whether shutting the command
-  line loses anything; it writes nothing itself (POS.1500, SOL.0180,
-  THR.0430). For you: end a session with `/end` and you know what
-  closing the command line loses; the measurement of what a session
-  carries stays open, to be stored per user.
-- `forge-status --remote` reports the state against the origin
-  through a function shared in `forge_repos.py`, and `forge-pull`
-  prints the state before, the state after and the commits between
-  (SOL.0510). For you: the scripts say what they found and what they
-  did.
-
-### Changed
-- The step after a pull of the engine is `/pull`, which shows the
-  Action required lines crossed and offers the checks (POS.0940). For
-  you: after `forge-pull`, run `/pull` instead of running `/check
-  light` and `/check project` on each project by hand.
-- `/pull` is among the guarded commands, since it changes the disk
-  (POS.1090). For you: it runs on your word only.
+- Building the first release of the brief `collaboration` on a branch
+  of the engine in a second working tree (DEC.0230). For you: the
+  branch was complexity for a risk the principal controls.
 
 ## 5.0 - 2026-10-10 - approved
 

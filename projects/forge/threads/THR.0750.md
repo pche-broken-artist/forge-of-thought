@@ -33,6 +33,13 @@ since the project file is written once (POS.1590). The name
 `workshop` is decided; `framework` was weighed and dropped, since
 the framework is the forge itself. Opened 2026-10-24.
 
+2026-10-25: a consequence named by the cto challenge (CHL.0630): a
+workshop has no intent, so it cannot hold a fact or a position. If
+`forge-rollout` becomes a workshop, what a rollout must know (the
+managed settings, who the user is), which DEC.0190 sent to
+`forge-rollout` and to the brief `next-gen`, has its home in `next-gen`
+alone.
+
 <!-- A thread (POS.1680), one file per thread in threads/; the header
 is its state: what it concerns, where it came from, whether it is
 open. The rules of a thread, its life and its closing:

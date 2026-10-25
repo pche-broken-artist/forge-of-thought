@@ -18,9 +18,8 @@ other; generating the render is mechanical.
    Where the inputs name `ledger.md`, make it first, `python
    scripts/forge-ledger.py <slug>`: the ledger is made at read time
    (CLAUDE.md, Ledger) and a render reads the file on disk.
-   Every input, CLAUDE.md included, is read from disk in the run:
-   the copy of CLAUDE.md a subagent carries in its context is the
-   session's and may be older than the file (POS.0950).
+   Every input is read from disk in the run (CLAUDE.md, Isolated
+   reviewers: what holds for every isolated subagent).
 3. Generate in isolation: spawn one subagent (Agent tool, type
    `general-purpose`, session model — never a model override) whose
    prompt names the project, the recipe path, the output path and the
@@ -30,11 +29,9 @@ other; generating the render is mechanical.
    step 5 verbatim, so the subagent never derives the provenance shape
    from a previous render. The subagent sees only the recipe and its
    inputs, never this conversation: a render is derived from the
-   artefacts, not from what was said about them. Its prompt says, in
-   the words of the docs contract, that whatever its context carries
-   about the people who run this forge, their company, hosts,
-   addresses or preferences is not material and must not reach the
-   render (POS.0950). It must not read the
+   artefacts, not from what was said about them. Its prompt cites what
+   holds for every isolated subagent (CLAUDE.md, Isolated reviewers),
+   no instance fact in the render among it. It must not read the
    previous render unless the recipe declares it among its inputs
    (the release-notes genre does, for the released sections), and
    must not touch the ledger. Prose is hard-wrapped as CLAUDE.md,

@@ -1,8 +1,8 @@
 ---
-generated: 2026-10-19
-version: 5.26
+generated: 2026-10-25
+version: 6.0
 made: derived
-inputs-hash: 5ef24764c8e52478
+inputs-hash: 29744a52a2f9c74f
 inputs:
   - .claude/skills/recipe/genres/screenplay.md
   - templates/recipe-screenplay.md
@@ -13,204 +13,200 @@ inputs:
 
 # Make a teaching video from a recipe
 
-A teaching video of the forge is a cut of a real terminal
-conversation with Claude. It is written first as a screenplay and
-then made by a script into a video or into a file for the player
-page in the browser. This page takes you through the job from end
-to end: from the records of your sessions to the finished file. It
-is for the principal (the person whose thinking is forged, here
-you) who wants to show how the work went.
+A teaching video in the forge is a cut of real terminal sessions with
+Claude, written as a screenplay and turned into a video file or into a
+file for the player page in the browser. This page takes you through
+the whole job, from the session records to the finished file. It is
+for the principal, that is the person whose thinking is forged in the
+project, and for anyone who makes such a video for him. What a
+screenplay is and why one script makes both formats is explained in
+[The screenplay and its player](../about/the-screenplay-and-its-player.md).
 
 ## When to use it
 
-Use it when you want to show real work with the forge to people who
-watch rather than read. A session here means one sitting of work in
-the terminal with Claude, and its record is the transcript of what
-was typed and answered. The video shows that work as it happened,
-with a caption under each scene that says what happens and why.
+Use it when you want to show how the forge is used, with real work
+rather than a demo. The material is one or more sessions: a session is
+one working conversation with Claude in the terminal, and its record is
+a transcript of what was typed and answered.
 
 ## The command
 
-The job runs in three commands, one after the other:
+The recipe is composed once, then rendered as often as you like:
 
 ```
-/ingest <file> <slug>
 /recipe screenplay <slug>
 /render <recipe> <slug>
 ```
 
-`<slug>` stands for your project and `<recipe>` for the name of the
-recipe you compose. `/publish` has no part in this job: a screenplay
-has no designed file.
+`<slug>` is your project, `<recipe>` the name of the screenplay recipe.
 
 ## What happens
 
-1. **Register the session records as sources.** Run `/ingest` on
-   the transcript of the sessions you want to show (see
-   [Register a source](register-a-source.md)). A source is an
-   external input, stored as it arrived and never edited. Every line
-   the terminal shows in the video comes from this source, found by
-   its timestamps. Write also the brief of the videos: the text that
-   says who they are for, what they are for and which principles of
-   the forge they show.
-   You should now see the transcript in the project's `sources/`,
-   with its entry in the resource index.
+1. **Register the session records and write the brief.** Store the
+   transcript of the sessions as a source of the project with
+   `/ingest`, as [Register a source](register-a-source.md) shows; a
+   source is an external input, kept unchanged once registered. Write
+   the brief of the videos: who they are for, what they are for, which
+   principles of the forge they show.
+   You should now see the transcript in `sources/` with its entry in
+   `sources/00-INDEX.md`, and the brief in the project.
 
 2. **Compose the recipe.** Run `/recipe screenplay <slug>`. A recipe
-   is the versioned file that says how a render is made: its inputs,
-   its instructions, its format and its template. Claude runs the
-   genre interview (see [Compose a recipe](compose-a-recipe.md)): it
-   asks, offers options with their trade-offs, and you decide. The
-   questions follow this checklist:
-   - **Audience and register:** who watches, whether they have seen
-     Claude Code, and how the captions speak.
-   - **Purpose and the one message:** what the viewer leaves with,
-     said on the end card.
-   - **Inputs:** the transcript and the sessions in it, the brief of
-     the videos, and a document the video shows being born, named by
-     its path.
-   - **The beats:** the scenes, each pinned by the time of day of its
-     first line, and the lines that must appear, so that every render
-     is the same cut; and what is left out.
-   - **The quotes:** your lines as typed, with gross errors only
-     corrected; which of Claude's answers are shown in full; tool
-     calls as one dim line, tool output and permission prompts not at
-     all.
-   - **Length:** the minutes of video, and what is shortened when
-     there is too much (Claude's lines, never yours and never the
-     captions).
-   - **The title card:** the disclosure that this is real work, how
-     many sessions and hours, the times real, the lines verbatim and
-     shortened.
-   - **What must not appear:** names, companies, hosts and paths
-     outside the forge.
-   - **Languages:** the primary language first (the language of the
-     sessions), then the translations made from it in the same run.
-   - **Pace and look:** the three reading rates in words a second
-     (your lines, Claude's answers, the lines that only report a
-     file; 4, 8 and 16 unless you want otherwise), the date shown in
-     the tab bar, and the labels of the captions by language.
-   - **Format:** `video` or `html-player`, one of them, never both.
-     For `html-player` you also decide whether the file goes out to
-     the engine's public folder `docs/videos/` by an `output:` line,
-     with a number in its name for the order of the course, or stays
-     in the project's `renders/`.
+   is the versioned file that says how a render is made; the render is
+   the generated output. Claude interviews you through the genre's
+   checklist, as [Compose a recipe](compose-a-recipe.md) describes, and
+   the decisions are yours. It asks about:
+   - the audience and the register: who watches, whether they have
+     seen Claude Code, how the captions speak (plain, factual, no
+     praise of the tool);
+   - the one message: what the viewer leaves with, said on the end
+     card;
+   - the inputs: the transcript, the brief, and any document the video
+     shows being born, named by its path;
+   - the beats: the scenes pinned by the time of day of their first
+     line, and the lines that must appear, so that every render is the
+     same cut;
+   - the quotes: your lines as typed, with gross errors only corrected;
+     which of Claude's answers are shown in full and which are cut to
+     the sentences that carry the move;
+   - the length in minutes, and what is shortened when there is too
+     much (Claude's lines, never yours and never the captions);
+   - the title card: the disclosure that this is real work, how many
+     sessions and hours, the times real, the lines verbatim and
+     shortened;
+   - what must not appear: names, companies, hosts, paths outside the
+     forge;
+   - the languages: the primary first (the language of the sessions),
+     then the translations made from it;
+   - the pace and the look: three reading rates in words a second (your
+     lines, Claude's answers, lines that only report a file; 4, 8, 16
+     unless you want otherwise), the date shown in the tab bar, the
+     labels of the captions by language;
+   - the format: `video` or `html-player`, one of them, never both.
 
-   Claude then composes the recipe from the screenplay template.
-   You should now see `recipes/<recipe>.md` with `languages:` in its
-   front-matter, the beats under Instructions and a `## Format`
-   section naming the format, the pace and the date.
+   For `html-player` it asks two things more:
+   - whether the file goes out to the engine's public folder
+     `docs/videos/` by an `output:` line in the recipe, with a number
+     that sets its place in the course, or stays in the project's
+     `renders/`;
+   - the section of the course the video belongs to, and its name per
+     language: what the viewer will learn, listed on the player page in
+     place of the title.
 
-3. **Render the screenplay.** Run `/render <recipe> <slug>` (see
-   [Render an output](render-an-output.md)). Claude writes the
-   screenplay in isolation, that is, by a separate agent that reads
-   only the recipe and its inputs. The primary language comes first,
-   then each translation as a file of its own, scene for scene and
-   line for line; nothing is re-cut. The screenplay holds a title
-   card, a card of what the viewer will see, the scenes with their
-   time of day, a caption of two parts (Now and Why) and a block of
-   what the terminal shows, and an end card. Claude then scans each
-   file for the facts of your instance (one installation of the
-   forge, with its names and hosts); a hit is said aloud and you
-   judge it.
-   You should now see one render per language,
-   `renders/<recipe>.<lang>.md`, each opening with its provenance;
-   a translation names the primary render it was made from.
+   You should now see `recipes/<recipe>.md`, with its inputs, its
+   instructions, a `## Format` section and the template of the
+   screenplay.
 
-4. **The format file is made.** In the same run Claude runs
-   `python scripts/md2video.py` on each language's render, with the
-   format, the pace and the date the Format section names (see
-   [Scripts](../reference/scripts.md)). The script prints how many
-   parts, events and seconds the render holds, and its language.
-   - For `video` it paints every frame as a simulated terminal and
-     writes an MP4 beside the render: `renders/<recipe>.<lang>.mp4`.
-   - For `html-player` it writes the timed events as
-     `<recipe>.<lang>.html-player.js`, beside the render or at the
-     recipe's `output:` path in `docs/videos/`. Where the file lands
-     in `docs/videos/`, the script also writes the player page
-     `docs/videos/index.html` anew, with every player file of the
-     folder listed in the order of their names.
+3. **Render the screenplay.** Run `/render <recipe> <slug>`. Claude
+   hands the work to a subagent, that is a separate Claude that sees
+   only the recipe and its inputs and never your conversation. It
+   writes the screenplay in the primary language first, then each
+   translation as a file of its own, scene for scene and line for line.
+   The Markdown render always stays in the project's `renders/`, one
+   file per language. Claude then scans each file for the instance's
+   facts and says aloud any hit; you judge it.
+   You should now see `renders/<recipe>.<lang>.md` for each language,
+   each opening with its provenance; a translation names the primary
+   render it was made from.
 
-   You should now see a line `written <file> (<size> kB)`, and for a
-   file in `docs/videos/` also `player page renewed with <n>
-   file(s)`.
+4. **Make the format file.** In the same run, `/render` runs
+   `python scripts/md2video.py` on each language's render with the
+   format, the pace and the date the recipe's `## Format` section
+   names, and for `html-player` that section of the course and that
+   language's name. The script prints the number of parts, events and
+   seconds and the language, then `written <file>` with its size.
+   You should now see one of these:
+   - for `video`: `renders/<recipe>.<lang>.mp4` beside the render;
+   - for `html-player` without `output:`:
+     `renders/<recipe>.<lang>.html-player.js` beside the render;
+   - for `html-player` with `output:`: the file in `docs/videos/`, and
+     the line `player page renewed with <n> file(s)`, because the
+     script writes the player page `docs/videos/index.html` anew with
+     every file of the folder listed.
 
-5. **Read a public file before you save the engine.** A player file
-   in `docs/videos/` is public once the engine is saved. Read it
-   first: that reading is the clearing of the public version, one
-   step. A video kept for the company names no `output:` and stays
-   in the project's `renders/`.
-   You should now have read the file and either saved the engine or
-   changed the recipe and rendered again.
+5. **Read a public file before the engine is saved.** A file sent to
+   `docs/videos/` becomes public once the engine is saved. Read it
+   yourself first: that reading is the clearing of the public version.
+   A video kept for the company names no `output:` and stays in the
+   project's `renders/`.
+   You should now see the video in the player page and be content to
+   publish it.
+
+`/publish` has no part in this job: a screenplay has no designed file.
 
 ## What you have afterwards
 
-- `recipes/<recipe>.md`, the recipe you iterate whenever the video
-  should change.
-- `renders/<recipe>.<lang>.md`, one screenplay per language. It is
-  never edited by hand; you change the recipe and render again.
-- The format file of each language: `renders/<recipe>.<lang>.mp4`,
-  or `<recipe>.<lang>.html-player.js` in `renders/` or in the
-  engine's `docs/videos/`.
-- For a file in `docs/videos/`: the player page
-  `docs/videos/index.html`, renewed with the folder's files. The
-  engine carries the file only; the recipe, the render and their
-  history stay in the project.
+- The recipe `recipes/<recipe>.md` with its history, iterated and
+  rendered again whenever you like.
+- One screenplay render per language in `renders/`, the source of the
+  video and never edited by hand.
+- One format file per language: an MP4, or a player file in `renders/`
+  or in the engine's `docs/videos/`.
+
+The engine carries only the public player file. The recipe, the
+render, the provenance and the history stay in the project, and
+whoever has the project can make the file again. The same render gives
+the same video every time.
 
 ## If something goes wrong
 
-- **Pillow or ffmpeg is missing.** The render stands, the video is
-  not made, and Claude says so aloud. The script prints
-  ``Pillow not found - install it with `pip install pillow`.`` or a
-  message that begins `ffmpeg not found on PATH` and says where to
-  install it from. The script installs nothing itself.
-- **`ffmpeg failed.`** ffmpeg stopped while writing the video.
-- **`<render> has no cards or scenes of a screenplay.`** The file
-  the script was given is not a screenplay of the genre: its
-  headings do not match the template.
+- **Pillow or ffmpeg is missing.** The render stands, the video is not
+  made, and Claude says so. The script says
+  ``Pillow not found - install it with `pip install pillow`.`` or
+  `ffmpeg not found on PATH - install it from https://ffmpeg.org.`
+  Install what it names; the script installs nothing. What it needs in
+  full is listed under `md2video.py` in [Scripts](../reference/scripts.md).
+- **`ffmpeg failed.`** The video encoder stopped with an error; the
+  file is not made.
 - **`--pace takes three numbers, e.g. 4,8,16.`** The pace in the
-  Format section is not three numbers separated by commas.
-- **`the player's template ... is missing.`** The player page could
-  not be renewed because `templates/html-player.html` is not in the
-  engine.
-- **The look is wrong.** Paint a single frame to check it without
-  making the whole video:
-  `python scripts/md2video.py renders/<recipe>.<lang>.md --format video --frame <seconds> check.png`.
+  recipe's `## Format` section is not three numbers separated by
+  commas. Correct the recipe and render again.
+- **`<file> has no cards or scenes of a screenplay.`** The render does
+  not have the screenplay's shape: no title card, cards or scenes the
+  script can read. Check that the recipe is of the screenplay genre and
+  render again.
+- **`the player's template ... is missing.`** The skeleton of the
+  player page, `templates/html-player.html`, is not in the engine; the
+  page cannot be renewed.
+- **The look is wrong.** You can paint one frame without the whole
+  video: `python scripts/md2video.py renders/<recipe>.<lang>.md
+  --format video --frame <seconds> check.png`.
 
 ## A worked example
 
-You have a transcript of two sessions and want a player file in two
-languages, `<primary>` and `<other>`, published as the first video of
-the course.
+A project `<slug>` has a recipe `<recipe>` in two languages, `<xx>`
+primary and `<yy>` its translation, format `html-player`, sent out to
+the course with this line in its front-matter:
 
-1. `/ingest <transcript>.md <slug>` registers the transcript; you
-   write the brief of the videos.
-2. `/recipe screenplay <slug>` runs the interview. You choose
-   `html-player`, the languages `<primary>, <other>`, the default
-   pace and the date for the tab bar. The recipe's front-matter
-   carries:
+```
+output: docs/videos/<NN>-<recipe>.<lang>.html-player.js
+```
 
-   ```
-   languages: <primary>, <other>
-   output: docs/videos/01-<recipe>.<lang>.html-player.js
-   ```
+Its `## Format` section names the pace 4,8,16, the date for the tab
+bar, the section of the course and the name per language. You run:
 
-3. `/render <recipe> <slug>` writes `renders/<recipe>.<primary>.md`
-   and `renders/<recipe>.<other>.md`, then runs for each:
+```
+/render <recipe> <slug>
+```
 
-   ```
-   python scripts/md2video.py renders/<recipe>.<primary>.md --format html-player --pace 4,8,16 --date "<date>" -o docs/videos/01-<recipe>.<primary>.html-player.js
-   ```
+The run writes `renders/<recipe>.<xx>.md` and then
+`renders/<recipe>.<yy>.md`. For each, it runs a line of this shape:
 
-   The script reports `written ...` and `player page renewed with 2
-   file(s)`.
-4. You read both files in `docs/videos/` and then save the engine.
+```
+python scripts/md2video.py renders/<recipe>.<xx>.md --format html-player --pace 4,8,16 --date "<date>" --section "<section>" --name "<name>" -o docs/videos/<NN>-<recipe>.<xx>.html-player.js
+```
+
+Each run ends with `written ...` and `player page renewed with <n>
+file(s)`. You open `docs/videos/index.html`, watch both files, and only
+then save the engine. Had the recipe named `video` and no `output:`,
+the same run would have left `renders/<recipe>.<xx>.mp4` and
+`renders/<recipe>.<yy>.mp4` beside the renders.
 
 ## See also
 
 - [The screenplay and its player](../about/the-screenplay-and-its-player.md):
-  what a screenplay is, why one script makes both formats, and why
-  the engine hosts the public files.
+  what a screenplay is, why one script makes both formats, and why the
+  engine hosts the public files.
 - [Compose a recipe](compose-a-recipe.md): the genre interview every
   recipe runs through.
 - [Render an output](render-an-output.md): the render and its plain
@@ -219,8 +215,8 @@ the course.
   records.
 - [Scripts](../reference/scripts.md): `md2video.py`, its options and
   what it needs.
-- [Glossary](../reference/glossary.md): every term of the forge in
-  one line.
+- [Glossary](../reference/glossary.md): every term of the forge in one
+  line.
 
-Generated on 2026-10-19 for version 5.26 from the files the
+Generated on 2026-10-25 for version 6.0 from the files the
 front-matter names; never edited by hand.

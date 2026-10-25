@@ -29,9 +29,6 @@ refusals and the way back are the script's).
    where it belongs, usually a record of the intent's history.
 4. Make the ledger, `python scripts/forge-ledger.py <slug>`, and
    propose `/save <slug>`; the migrated shape reaches the remote by
-   that save. Should anything be wrong, the way back is
-   `python scripts/forge-migrate.py <slug> --undo` before the save,
-   the tag before the migration after it (CLAUDE.md, Persistence).
-   A project outside git has neither: its way back is the backup
-   the dry run told the principal to take, and a run that stopped
-   midway is finished by running it again (POS.1740).
+   that save. Should anything be wrong, the way back is the
+   script's, as its header says; the tag before the migration is
+   POS.1740's.

@@ -1,5 +1,5 @@
 ---
-version: 0.45
+version: 0.46
 status: draft
 project: forge
 audience: whoever realises the solution, a person or an agent
@@ -80,8 +80,7 @@ notes and then saves with the release message and tag. The release writes the st
 Deliberately not designed here: the wording and the steps of each
 command, definition, contract, template and script, which are that
 file's; how an artefact is found, which is its definition's; anything
-beyond the files the forge makes. No part answers POS.0600, POS.0780,
-POS.0790, POS.0980, POS.1380 and POS.1780: they state a name, a direction, a
+beyond the files the forge makes. No part answers POS.0600, POS.0780, POS.0980, POS.1380 and POS.1780: they state a name, a direction, a
 boundary kept by hand or an order of work.
 
 ## Parts
@@ -218,25 +217,24 @@ boundary kept by hand or an order of work.
   `templates/brief.md`, `templates/intent.md`, `templates/thread.md`,
   `templates/assignment.md`, `templates/brd.md`,
   `templates/solution-design.md`.
-- **SOL.0130 The `/recipe` dispatcher and the genres.** The same
-  shape as SOL.0120: a thin dispatcher plus one definition file per
-  genre, the genre's skeleton in `templates/recipe-<genre>.md`. The
-  genre `presentation`
-  has its interview in `.claude/skills/recipe/genres/presentation.md`
-  and its render is turned into a PowerPoint file by SOL.0430. The
-  genres today are `presentation`, `readme` and `release-notes`,
-  each invoked as `/recipe <genre>`. The fourth genre, `screenplay`
-  (POS.1530), has its interview in
-  `.claude/skills/recipe/genres/screenplay.md` and its skeleton in
-  `templates/recipe-screenplay.md`; its checklist asks, beyond the
-  presentation's audience, purpose, inputs, dramaturgy, vocabulary
-  and what must not appear: the sessions and the beats pinned by
-  their times, what the viewer leaves with, what is shown in full,
+- **SOL.0130 The `/recipe` dispatcher and the genres.** The same shape
+  as SOL.0120: a thin dispatcher plus one definition file per genre, the
+  genre's skeleton in `templates/recipe-<genre>.md`. The genre
+  `presentation` has its interview in
+  `.claude/skills/recipe/genres/presentation.md` and its render is
+  turned into a PowerPoint file by SOL.0430. The genres today are
+  `presentation`, `readme`, `release-notes` and `screenplay` (POS.1530),
+  each invoked as `/recipe <genre>`. The genre `screenplay` has its
+  interview in `.claude/skills/recipe/genres/screenplay.md` and its
+  skeleton in `templates/recipe-screenplay.md`; its checklist asks,
+  beyond the presentation's audience, purpose, inputs, dramaturgy,
+  vocabulary and what must not appear: the sessions and the beats pinned
+  by their times, what the viewer leaves with, what is shown in full,
   the rules of the quotes, the languages and the pace, the format
   (`video` or `html-player`) and, for `html-player`, whether the file
   goes out to the engine's `docs/videos/` by `output:` (POS.1540).
-  Realises: POS.0770, POS.1000, POS.1530. Choice: no real alternative once
-  SOL.0120 stood, Claude's judgement, the intent records none.
+  Realises: POS.0770, POS.1000, POS.1530. Choice: no real alternative
+  once SOL.0120 stood, Claude's judgement, the intent records none.
   Where: `.claude/skills/recipe/SKILL.md`,
   `.claude/skills/recipe/genres/`, `templates/recipe.md`,
   `templates/recipe-<genre>.md`.
@@ -317,27 +315,29 @@ boundary kept by hand or an order of work.
   every command that changes the disk (SOL.0110). It asks `forge-status
   --remote` for the state of its scope against the origin, says it in
   the words of POS.1490 and stops at the offer where a repository has
-  unsaved changes or has diverged, at diverged naming the path: a
-  branch, `/save`, a local merge into main, `/save` (POS.1690); clean
-  and behind, it runs `forge-pull` (bare: the engine and every project
-  with an origin; `forge`: the engine; a slug: that project). After a
-  pull of the engine it reads the commit subjects the script printed,
-  opens in `RELEASE-NOTES.md` the sections of the releases crossed and
-  shows their Action required lines, then offers `/check light` and
-  `/check project` on each project, and after a release that changes the
-  shape of files says in Action required `/migrate <slug>` (SOL.0800);
-  after a pull of a project it reports. `/end` is a skill Claude may
-  start, a report (SOL.0110): it names what lives only in the
-  conversation and offers the write, runs `forge-status` without the
-  remote and offers `/save` where a repository has changes, names stale
-  renders by the ledger's Renders table as a fact, and closes with one
-  sentence on whether shutting the command line loses anything; it
-  writes nothing. Realises: POS.1490, POS.1500, POS.0940, POS.1090.
-  Choice: two small commands against widening `/save` and `/forge`: a
-  pull runs the other way from a save, and the end of a session is
-  another moment than the map; the cost is two rows of the Commands
-  table. Decided 2026-10-11. Where: `.claude/skills/pull/SKILL.md`,
-  `.claude/skills/end/SKILL.md`, `.claude/skills/forge/SKILL.md`.
+  unsaved changes or has diverged, at diverged naming the path: `/save`,
+  whose rebase leaves a conflict standing for the step of a conflict
+  (SOL.0840), or a branch where the work is to stay apart (the roles:
+  POS.1690); clean and behind, it runs `forge-pull` (bare: the engine
+  and every project with an origin; `forge`: the engine; a slug: that
+  project). After a pull of the engine it reads the commit subjects the
+  script printed, opens in `RELEASE-NOTES.md` the sections of the
+  releases crossed and shows their Action required lines, then offers
+  `/check light` and `/check project` on each project, and after a
+  release that changes the shape of files says in Action required
+  `/migrate <slug>` (SOL.0800); after a pull of a project it reports.
+  `/end` is a skill Claude may start, a report (SOL.0110): it names what
+  lives only in the conversation and offers the write, runs
+  `forge-status` without the remote and offers `/save` where a
+  repository has changes, names stale renders by the ledger's Renders
+  table as a fact, and closes with one sentence on whether shutting the
+  command line loses anything; it writes nothing. Realises: POS.1490,
+  POS.1500, POS.0940, POS.1090. Choice: two small commands against
+  widening `/save` and `/forge`: a pull runs the other way from a save,
+  and the end of a session is another moment than the map; the cost is
+  two rows of the Commands table. Decided 2026-10-11. Where:
+  `.claude/skills/pull/SKILL.md`, `.claude/skills/end/SKILL.md`,
+  `.claude/skills/forge/SKILL.md`.
 
 - **SOL.0630 The history of an item.** `/history <ID> [slug]`
   (`.claude/skills/history/SKILL.md`) is a skill Claude may start, a
@@ -361,6 +361,7 @@ boundary kept by hand or an order of work.
   differently every time; the cost is one more script. Decided
   2026-10-11. Where: `.claude/skills/history/SKILL.md`, `scripts/forge-
   history.py`, `scripts/docs_map.py`.
+
 ### The documents of a project
 - **SOL.0200 The history log.** A record is written as a list item, in
   the shape `templates/history.md` owns; its author is the third field.
@@ -380,10 +381,8 @@ boundary kept by hand or an order of work.
   project migrates (POS.0820), on the principal's word, project by
   project. Realises: POS.0310, POS.0120, POS.0820. Choice: a log beside
   the document against a table in its body; the research behind it is
-  `projects/forge/research/2026-09-29-change-history-of-document-
-  items.md` and `2026-09-29-change-record-file-format.md`. `last_change`
-  is called machine-written and is written by the model; whether a
-  script takes the write over is open, THR.0530. Where:
+  `projects/forge/research/2026-09-29-change-history-of-document-items.md`
+  and `2026-09-29-change-record-file-format.md`. Where:
   `templates/history.md`, `.claude/agents/check-light.md`,
   `.claude/agents/check-history.md`.
 - **SOL.0210 The ledger.** One Markdown file per project, `ledger.md`,
@@ -394,26 +393,25 @@ boundary kept by hand or an order of work.
   intent's history (SOL.0690); `/forge`, `/forge intent` and `/check`
   use it as their definitions say. The Dependencies table carries what
   the project relies on outside its repository; the `/forge` map shows
-  them, the README carries a line of them and `/ingest` registers them.
-  The check `project` verifies that the ledger cites and does not copy.
-  `/new-project`, the `/forge` map and `/check` treat each kind of
-  project as their definitions say. The 26 skills that wrote a ledger
-  row stop with SOL.0680. Realises: POS.0160, POS.0920, POS.0960,
-  POS.1020, POS.0330, POS.0440. Choice: Markdown tables; what they were
-  chosen against and why is not recorded in the intent. The research of
-  2026-10-04 names the price, tables are a weak store for a script
-  (THR.0530). Where: `templates/ledger.md`,
-  `templates/recipe-readme.md`, `.claude/skills/ingest/SKILL.md`,
-  `.claude/skills/ledger/SKILL.md`, `.claude/skills/forge/SKILL.md`,
+  them, the README carries a line of them and the ledger script finds
+  them as citations (SOL.0690). The check `project` verifies that the
+  ledger cites and does not copy. `/new-project`, the `/forge` map and
+  `/check` treat each kind of project as their definitions say.
+  Realises: POS.0160, POS.0920, POS.0960, POS.1020, POS.0330, POS.0440.
+  Choice: Markdown tables; what they were chosen against and why is not
+  recorded in the intent. The research of 2026-10-04 names the price,
+  tables are a weak store for a script (THR.0530). Where:
+  `templates/ledger.md`, `templates/recipe-readme.md`,
+  `.claude/skills/ingest/SKILL.md`, `.claude/skills/ledger/SKILL.md`,
+  `.claude/skills/forge/SKILL.md`,
   `.claude/skills/forge/states/intent.md`,
   `.claude/agents/check-project.md`.
 - **SOL.0220 Sources and their conversion.** Bare, `/ingest` sweeps
-  `sources/` and tells a changed file by its modification time
-  against the ledger date.
-  It runs `scripts/doc2md.py` file by file on every binary the
-  principal chooses to convert, in bundles as well as for isolated
-  files; the output is `sources/<slug>.md`, the source itself.
-  Realises: POS.0180, POS.1040. Choice: one script for every
+  `sources/` and tells a changed file by its modification time against
+  the Date of its index entry. It runs `scripts/doc2md.py` file by file
+  on every binary the principal chooses to convert, in bundles as well
+  as for isolated files; the output is `sources/<slug>.md`, the source
+  itself. Realises: POS.0180, POS.1040. Choice: one script for every
   conversion against ad-hoc parsing by the model. Where:
   `.claude/skills/ingest/SKILL.md`, `scripts/doc2md.py`,
   `templates/ledger.md`.
@@ -432,14 +430,12 @@ boundary kept by hand or an order of work.
   entry's What kept true, the flag refused where the bundle arrived
   whole; in sweep mode a file inside a bundle without an entry is
   offered for registration there, never reported as a breach, and a new
-  subdirectory is asked whether it grows at the question of its role; if
-  a bundle's files ever need separate fates, a file is split out to a
-  ledger row of its own, the ledger being freely rewritten. Realises:
-  POS.0840. Choice: no real alternative recorded. Where:
+  subdirectory is asked whether it grows at the question of its role.
+  Realises: POS.0840. Choice: no real alternative recorded. Where:
   `templates/index.md`, `templates/index-bundle.md`,
   `.claude/skills/ingest/SKILL.md`, `.claude/skills/research/SKILL.md`,
-  `.claude/skills/new-project/SKILL.md`, `.claude/agents/check-
-  light.md`.
+  `.claude/skills/new-project/SKILL.md`,
+  `.claude/agents/check-light.md`.
 - **SOL.0640 The work product.** `/work <name> [slug]`
   (`.claude/skills/work/SKILL.md`) is the one door to a work product:
   bare, it lists the project's work products from the ledger; with a
@@ -448,26 +444,26 @@ boundary kept by hand or an order of work.
   `work/<name>.<ext>` from it in the same round on his word. The first
   specification is created from `templates/work.md` as v0.1, with its
   companion `work/<name>.spec.history.md` from `templates/history.md`
-  and its row in the ledger's Work table; the specification's `##
-  Making` section says how the file is made from it, and nothing of it
-  is copied into the file. The Work table, made by the ledger script
-  from the records of the specification's history (SOL.0680, SOL.0690),
-  carries one row per work product: the file, the specification with its
-  version, the inputs with their versions, when the file was made and
-  its state: `current`, the making's record; `stale`, a write of the
-  specification not followed by a making; `by hand`, a `changed` record
-  `state: by hand` on the principal's word when he has worked the file
-  and does not want it remade. `CLAUDE.md` carries the kind in the
-  Document kinds table, `work/` in the layout and the command in the
-  Commands table; the check `light` verifies the Work table against the
-  directory as it does the other tables. Realises: POS.1520. Choice: one
-  command for the specification and the file against two, as `/recipe`
-  and `/render` are: the making is a step of the round and the
-  specification is iterated with the principal, so a second command
-  would only separate what one conversation does; the price is a skill
-  that does two things. Where: `.claude/skills/work/SKILL.md`,
-  `templates/work.md`, `templates/ledger.md`, `CLAUDE.md`,
-  `.claude/agents/check-light.md`.
+  and its row in the Work table, made by the ledger script from its
+  first record; the specification's `## Making` section says how the
+  file is made from it, and nothing of it is copied into the file. The
+  Work table, made by the ledger script from the records of the
+  specification's history (SOL.0680, SOL.0690), carries one row per work
+  product: the file, the specification with its version, the inputs with
+  their versions, when the file was made and its state: `current`, the
+  making's record; `stale`, a write of the specification not followed by
+  a making; `by hand`, a `changed` record `state: by hand` on the
+  principal's word when he has worked the file and does not want it
+  remade. `CLAUDE.md` carries the kind in the Document kinds table,
+  `work/` in the layout and the command in the Commands table; the check
+  `light` verifies the Work table against the directory as it does the
+  other tables. Realises: POS.1520. Choice: one command for the
+  specification and the file against two, as `/recipe` and `/render`
+  are: the making is a step of the round and the specification is
+  iterated with the principal, so a second command would only separate
+  what one conversation does; the price is a skill that does two things.
+  Where: `.claude/skills/work/SKILL.md`, `templates/work.md`,
+  `templates/ledger.md`, `CLAUDE.md`, `.claude/agents/check-light.md`.
 - **SOL.0670 The project file.** `project.md` in the project's root,
   header `project`, `kind`, `language`, written once at the creation
   from `templates/project.md` and never by a round; read in place of the
@@ -475,14 +471,13 @@ boundary kept by hand or an order of work.
   `/forge`, `/recipe`, the ledger script and prime directive 6 of
   CLAUDE.md. Realises: POS.1590, POS.0060, POS.0960. Choice: a file of
   its own against the header of the ledger, which leaves git (SOL.0680);
-  no other home was found. Built 2026-10-19 in the first release (the cutover plan, R1.03, R1.10).
-  Where: `templates/project.md`, `CLAUDE.md` (prime directive 6,
-  Repository layout), `scripts/forge-clone.py`,
-  `.claude/skills/new-project/SKILL.md`,
+  no other home was found. Built 2026-10-19 in the first release (the
+  cutover plan, R1.03, R1.10). Where: `templates/project.md`,
+  `CLAUDE.md` (prime directive 6, Repository layout),
+  `scripts/forge-clone.py`, `.claude/skills/new-project/SKILL.md`,
   `.claude/skills/import-project/SKILL.md`,
   `.claude/skills/forge/SKILL.md`, `.claude/skills/recipe/SKILL.md`. A
-  fixture project carries `fixture: true` for the map, and a bare
-  `/save` skips it by name (SOL.0830).
+  fixture project carries `fixture: true` (SOL.0830).
 - **SOL.0680 The ledger made at read time.** `scripts/forge-ledger.py
   <slug>` builds `ledger.md` from the documents and writes it gitignored
   (`projects/<slug>/.gitignore`, for the engine `.gitignore` with
@@ -582,14 +577,15 @@ boundary kept by hand or an order of work.
   `templates/threads.md` is dropped; the intent's definition creates and
   closes threads as files, the walkthrough's write and `/end`, which
   saves an unfinished conversation into its thread, with it; the ledger
-  script makes the list; the driver never touches them (way 1); a closed
-  thread is immutable and the ledger script reports a later touch. The
-  THR row of CLAUDE.md, ID scheme, names the directory. Realises:
-  POS.1680, POS.0120, POS.0310. Choice: a file per thread against one
-  file with blocks, so that the driver handles no block with an inner
-  state; the cost is a directory of many small files. Built 2026-10-19 in the first release (the cutover plan, R1.06, R1.17, R1.23, R1.29). Where: `templates/thread.md`,
-  `CLAUDE.md` (ID scheme, Repository layout),
-  `.claude/skills/forge/states/intent.md`,
+  script makes the list; they merge as text and a thread is never in a
+  record file (way 1); a closed thread is immutable and the ledger
+  script reports a later touch. The THR row of CLAUDE.md, ID scheme,
+  names the directory. Realises: POS.1680, POS.0120, POS.0310. Choice: a
+  file per thread against one file with blocks, so that no merge handles
+  a block with an inner state; the cost is a directory of many small
+  files. Built 2026-10-19 in the first release (the cutover plan, R1.06,
+  R1.17, R1.23, R1.29). Where: `templates/thread.md`, `CLAUDE.md` (ID
+  scheme, Repository layout), `.claude/skills/forge/states/intent.md`,
   `.claude/skills/walkthrough/SKILL.md`, `.claude/skills/end/SKILL.md`,
   `scripts/forge-ledger.py`, `scripts/forge-migrate.py`.
 
@@ -710,50 +706,48 @@ boundary kept by hand or an order of work.
   the shape cited in CLAUDE.md and in the contracts.
 - **SOL.0860 The research.** `/research` is the skill
   `.claude/skills/research/SKILL.md`, which owns the course (the
-  questions before the plan, the draft, the second engine's review,
-  the walkthrough of the plan, the dispatch, the check before filing,
-  the synthesis, the index, the report) and the agent's brief,
-  verbatim in every packet. The plan and the synthesis have the
-  shape of `templates/research-plan.md`, a note that of
-  `templates/research.md`, `In short` at its head, Unexpected, Not
-  found, Opened and not used and the Search record among its
-  sections. A deep research is a bundle `research/YYYY-MM-DD-<topic>/`
-  with `00-plan.md` at its head and one note per card per engine,
-  `<card>.<engine>.md`, one entry in `research/00-INDEX.md` for the
-  bundle (SOL.0230); a quick research stays a single note. A session
-  agent is one `general-purpose` subagent per card with web access,
-  its prompt the packet's text and the path of its folder; its return
-  is written to `tmp/research/<run>/hold/` and moves into the bundle
-  only when the second engine's note of the card has returned or the
-  card is closed single-engine. Realises: POS.0050, POS.1860,
-  POS.1870, POS.1890, POS.1370. Choice: the plan as the unit of
-  consent against the finished note as before, the principal's wish;
-  one packet for both engines against a packet per engine, so that
-  the answers compare; the hold folder and the order of filing
-  against the place of the run, which the probe of 2026-10-24 showed
-  to lock nothing. Built 2026-10-24 and run once whole (the RFP
+  questions before the plan, the draft, the second engine's review, the
+  walkthrough of the plan, the dispatch, the check before filing, the
+  synthesis, the index, the report) and the agent's brief, verbatim in
+  every packet. The plan and the synthesis have the shape of
+  `templates/research-plan.md`, a note that of `templates/research.md`,
+  `In short` at its head, Unexpected, Not found, Opened and not used and
+  the Search record among its sections. A deep research is a bundle
+  `research/YYYY-MM-DD-<topic>/` with `00-plan.md` at its head and one
+  note per card per engine, `<card>.<engine>.md`, one entry in
+  `research/00-INDEX.md` for the bundle (SOL.0230); a quick research
+  stays a single note. A session agent is one `general-purpose` subagent
+  per card with web access, its prompt the packet's text and the path of
+  its folder; its return is written to `tmp/research/<run>/hold/` and
+  moves into the bundle only when the second engine's note of the card
+  has returned or the card is closed single-engine. Realises: POS.0050,
+  POS.1860, POS.1870, POS.1890, POS.1370, POS.0790. Choice: the plan as
+  the unit of consent against the finished note as before, the
+  principal's wish; one packet for both engines against a packet per
+  engine, so that the answers compare; the hold folder and the order of
+  filing against the place of the run, which the probe of 2026-10-24
+  showed to lock nothing. Built 2026-10-24 and run once whole (the RFP
   research, twelve notes). Where: `.claude/skills/research/SKILL.md`,
   `templates/research-plan.md`, `templates/research.md`,
   `templates/index.md`.
 - **SOL.0870 The engine adapter.** `scripts/forge-engine.py` runs one
-  packet on an engine of its table and brings the answer back as a
-  note; what it does in full, the version floor, the profile, the
-  fingerprint of the folder, the envelope and the flags
-  `--allow-all`, `--sandbox` and `--no-profile`, is its header's. The
-  profile is a copy of the user's settings file for the engine with
-  `permissions` added: allow the web; deny the shell, every write and
-  the reading of every entry of the engine root but `tmp/` and of
-  the run's `hold/`, the paths computed from where the script lies;
-  the engine started with HOME and USERPROFILE pointing at it.
-  Verified 2026-10-24 that a deny rule holds under every tool
-  allowed, the shell is refused, the web tools work and the login is
-  found. Realises: POS.1880, POS.0800, POS.0950, POS.1070. Choice: a
-  CLI against a library and an MCP server (REJ.0490), the one-shot
-  shape being shared by four CLIs; a per-run profile against the
-  place of the run alone, after the probe showed an engine reading
-  CLAUDE.md four levels up without a question; the price is one
-  settings shape to know per engine, kept in the engine's row. Where:
-  `scripts/forge-engine.py`.
+  packet on an engine of its table and brings the answer back as a note;
+  what it does in full, the version floor, the profile, the fingerprint
+  of the folder, the envelope and the flags `--allow-all`, `--sandbox`
+  and `--no-profile`, is its header's. The profile is a copy of the
+  user's settings file for the engine with `permissions` added: allow
+  the web; deny the shell, every write and the reading of every entry of
+  the engine root but `tmp/` and of the run's `hold/`, the paths
+  computed from where the script lies; the engine started with HOME and
+  USERPROFILE pointing at it. Verified 2026-10-24 that a deny rule holds
+  under every tool allowed, the shell is refused, the web tools work and
+  the login is found. Realises: POS.1880, POS.0800, POS.0790, POS.0950,
+  POS.1070. Choice: a CLI against a library and an MCP server
+  (REJ.0490), the one-shot shape being shared by four CLIs; a per-run
+  profile against the place of the run alone, after the probe showed an
+  engine reading CLAUDE.md four levels up without a question; the price
+  is one settings shape to know per engine, kept in the engine's row.
+  Where: `scripts/forge-engine.py`.
 - **SOL.0880 The citation check and the measure of independence.**
   `scripts/forge-cite.py` opens every URL of a note or a bundle once
   and classifies it ok, dead, unverifiable or mismatch (an arXiv
@@ -805,15 +799,15 @@ boundary kept by hand or an order of work.
   `projects/forge/recipes/release-notes.md`,
   `templates/recipe-readme.md`, `templates/recipe-release-notes.md`.
 - **SOL.0420 The two steps of an output.** `/render` makes its plain
-  file through pandoc. The two files never share a place, or the next
-  render would overwrite the designed file with the plain one. The
-  format and what each step needs stand in the recipe's `## Format`
-  section, which is never copied into the render: the render carries
-  content only, or the plain file would carry the instructions as text.
-  A third format, the screenplay's `video` or `html-player`, has the
-  plain file only (SOL.0650): `/publish` does nothing with it, and the
-  Published table carries no row of it. `/publish` runs on main and
-  refuses a repository behind or diverged (POS.1710). The ledger's
+  file through the script the format names. The two files never share a
+  place, or the next render would overwrite the designed file with the
+  plain one. The format and what each step needs stand in the recipe's
+  `## Format` section, which is never copied into the render: the render
+  carries content only, or the plain file would carry the instructions
+  as text. A third format, the screenplay's `video` or `html-player`,
+  has the plain file only (SOL.0650): `/publish` does nothing with it,
+  and the Published table carries no row of it. `/publish` runs on main
+  and refuses a repository behind or diverged (POS.1710). The ledger's
   Published table says what each published file was made from and its
   state: `current` set by `/publish`, `stale` by every `/render` of that
   recipe; a date could not tell, since a render may run twice a day.
@@ -995,9 +989,10 @@ boundary kept by hand or an order of work.
   brief `collaboration` the pages about/persistence-in-git,
   reference/ledger, reference/document-kinds,
   about/versioning-and-history, use/work-on-a-branch, use/save-your-work
-  and use/pull-from-the-remote are regenerated and the driver, the
-  migration and the branches get entries of the map; the release offers
-  the run (POS.1450). Where: `.claude/skills/document/SKILL.md`,
+  and use/pull-from-the-remote are regenerated and the migration, the
+  branches and the step of a conflict get entries of the map; the
+  release offers the run (POS.1450). Where:
+  `.claude/skills/document/SKILL.md`,
   `.claude/skills/docs-contract/SKILL.md`, `templates/docs-map.md`,
   `.claude/agents/docs-planner.md`, `.claude/agents/docs-writer.md`,
   `scripts/docs-state.py`, `scripts/docs-index.py`,
@@ -1073,19 +1068,19 @@ boundary kept by hand or an order of work.
   (SOL.0840); `forge-clone.py`, which brings an existing project in;
   `forge-branch.py`, which creates a branch or switches to one, `main`
   included, with the slug alone reports the branch and lists the
-  branches (TBC.0100); and the two of the brief `collaboration`: `forge-
-  ledger.py` (SOL.0680) and `forge-migrate.py` (SOL.0800).
-  `forge-status --remote` fetches the origin of each
-  repository, which changes nothing in the working tree, and reports the
-  branch against it: up to date, behind, ahead or diverged, with the
-  counts; without the flag it touches no network. The state against the
-  origin is one function of `forge_repos.py`, which status and pull
-  share. `forge-pull` prints where it moved from and to and the subjects
-  of the commits between, so that the releases crossed can be read off.
-  Realises: POS.0550, POS.1060, POS.1110, POS.0940, POS.1490. Choice:
-  scripts as the only door to a write against git typed by the model.
-  Where: `scripts/forge-*.py`, `scripts/forge_repos.py`, `scripts/docs-
-  state.py`, `.claude/skills/import-project/SKILL.md`.
+  branches (TBC.0100); `forge-ledger.py` (SOL.0680); and
+  `forge-migrate.py` (SOL.0800). `forge-status --remote` fetches the
+  origin of each repository, which changes nothing in the working tree,
+  and reports the branch against it: up to date, behind, ahead or
+  diverged, with the counts; without the flag it touches no network. The
+  state against the origin is one function of `forge_repos.py`, which
+  status and pull share. `forge-pull` prints where it moved from and to
+  and the subjects of the commits between, so that the releases crossed
+  can be read off. Realises: POS.0550, POS.1060, POS.1110, POS.0940,
+  POS.1490. Choice: scripts as the only door to a write against git
+  typed by the model. Where: `scripts/forge-*.py`,
+  `scripts/forge_repos.py`, `scripts/docs-state.py`,
+  `.claude/skills/import-project/SKILL.md`.
 - **SOL.0520 The wall.** Protection relies on Claude Code's permission
   system, not an OS-level sandbox: commands and file operations run
   under permission prompts and allowlists, shared deny rules in
@@ -1251,7 +1246,7 @@ boundary kept by hand or an order of work.
 - **SOL.0800 The migration.** `scripts/forge-migrate.py <slug> [--apply
   | --undo]`, door `/migrate [slug]`: a dry run by default; the shape as
   marks (the project file exists, no `date` in the headers, `threads/`
-  exists, `.gitattributes` exists, the ledger out of the index, ); the
+  exists, `.gitattributes` exists, the ledger out of the index); the
   steps in the order of one run: A (the header fields), B0 (the project
   file from the ledger's header), B (the mining and the work state as
   records, the index fields, the published companions, the Findings and
@@ -1302,23 +1297,27 @@ boundary kept by hand or an order of work.
   project, `projects/fixture`, made by hand once from a bare remote
   `tmp/fixture.git` as a copy of a small real project in the old shape
   and brought to the new shape by the migration, which it thereby
-  tested; its project file carries `fixture: true`, which `forge-clone`
-  and `forge-migrate` read. On it `--apply`, the test of `ours` and the
-  test of the step of a conflict ran, the last with a second clone made
-  by hand in `tmp/` and removed after it (R6.03). The bare remote is per
-  machine, and its HEAD stands on `master`, so a clone opens on the old
-  branch and is switched to `main`. The tests of POS.1750 run on it, and
-  on it alone, as rounds of the forge by slug, never on a clone of a
-  real project (DEC.0240). Realises: POS.1750, POS.1590, POS.0550.
-  Choice: one project made by hand against `scripts/fixture.py`,
-  designed 2026-10-17 (CHL.0380, CHL.0520, CHL.0610, CHL.0500) and let
-  go with the deferred releases (DEC.0280): two projects `fixture-a` and
-  `fixture-b` from a bare remote, born in the old shape the script
-  carried, every shape kept by `--shape <version>`, a project without
-  git by `--no-git`, and a bare `/save` skipping `projects/fixture*` by
-  name; the cost of the hand-made bed is that it lives on one machine
-  and is remade by hand where a test needs it. Where: `projects/fixture`
-  and `tmp/fixture.git`, outside git, `templates/project.md` (the flag),
+  tested; its project file carries `fixture: true`, written by
+  `forge-migrate` for a slug that starts with `fixture` and shown by
+  `forge-clone`; nothing skips it: a bare `/save` saves it like any
+  repository with changes, and since its origin is the bare remote in
+  `tmp/`, nothing of it leaves the machine. On it `--apply`, the test of
+  `ours` and the test of the step of a conflict ran, the last with a
+  second clone made by hand in `tmp/` and removed after it (R6.03). The
+  bare remote is per machine, and its HEAD stands on `master`, so a
+  clone opens on the old branch and is switched to `main`. The tests of
+  POS.1750 run on it, and on it alone, as rounds of the forge by slug,
+  never on a clone of a real project (DEC.0240). Realises: POS.1750,
+  POS.1590, POS.0550. Choice: one project made by hand against
+  `scripts/fixture.py`, designed 2026-10-17 (CHL.0380, CHL.0520,
+  CHL.0610, CHL.0500) and let go with the deferred releases (DEC.0280):
+  two projects `fixture-a` and `fixture-b` from a bare remote, born in
+  the old shape the script carried, every shape kept by `--shape
+  <version>`, a project without git by `--no-git`, and a bare `/save`
+  skipping `projects/fixture*` by name; the cost of the hand-made bed is
+  that it lives on one machine and is remade by hand where a test needs
+  it. Where: `projects/fixture` and `tmp/fixture.git`, not tracked by
+  the engine, `templates/project.md` (the flag),
   `scripts/forge_repos.py`.
 
 - **SOL.0840 The step of a conflict.** `forge-save` leaves a conflicting
@@ -1354,6 +1353,7 @@ boundary kept by hand or an order of work.
   `scripts/forge_repos.py`, `scripts/forge-status.py`, `scripts/hook-
   git.py`, `.claude/skills/walkthrough/SKILL.md`,
   `.claude/skills/save/SKILL.md`.
+
 ## Across the parts
 - **SOL.0600 One model.** The reviewer agents declare `model:
   inherit` explicitly. The session model is chosen in
@@ -1421,6 +1421,7 @@ boundary kept by hand or an order of work.
   the session's scratchpad, so that a run is traceable on the machine
   and a profile's deny rules have one path to name; the price is a
   folder to empty by hand. Where: `tmp/README.md`, `tmp/.gitignore`.
+
 ## Open
 - **TBC.0010** (owner: principal) Mermaid diagrams in a Word file:
   rendering them to pictures needs `mermaid-cli`, a further

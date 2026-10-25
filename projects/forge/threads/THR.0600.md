@@ -19,6 +19,13 @@ scheduled. Origin: the challenge of 2026-10-09
 (CHL.0220, accepted as modified) and that research. Opened
 2026-10-10.
 
+2026-10-25: the cto challenge (CHL.0650, parked here) asks for the walls
+to be re-tested, not only the conduct: the hook's cases and the engine
+profile's probes as one script run at `/pull` of the engine or at
+`/setup`, red said aloud; then the smallest suite on the three recorded
+failures, with a date. The rollout among people widens the harness
+versions the walls meet.
+
 <!-- A thread (POS.1680), one file per thread in threads/; the header
 is its state: what it concerns, where it came from, whether it is
 open. The rules of a thread, its life and its closing:

@@ -511,3 +511,105 @@ verdict on the whole ID, the rest a `changed` record of the history
   which both wanted, not taken (REJ.0280). Tested on the fixture with
   a second clone the same day (the cutover plan, R6.03).
 - **Date:** 2026-10-23
+
+## DEC.0290 — The forge grows piecemeal by the principal's choice; no gate waits on the brief `next-gen`
+- **Decision:** What the forge takes up next, and when, is the
+  principal's choice alone: he works on what he has time for and what he
+  gives priority. The positions born since 5.0 through the briefs
+  `documentation`, `collaboration`, `brd` and `research` were taken
+  piecemeal by that choice, and 6.0 approves them as they stand. The
+  brief `next-gen` is not mined into 6.0; much of it has been taken up
+  since 2026-10-03 through the later briefs, and it is worked through
+  again when the principal turns to it. No rule ties a position, a brief
+  or a major to its mining. Claude's part is to name the consequences of
+  a choice when it is made, never to hold it back. The framing stays as
+  a recommendation, kept for its consistency: when a new brief is born
+  or a position is taken outside `next-gen`, Claude reminds the
+  principal once that `next-gen` was meant to frame the whole, and the
+  principal decides.
+- **Reason:** The principal's word of 2026-10-25 on the challenge of the
+  day (cto): the challenger's reasoning is logical, but a gate in front
+  of the next major is formal friction on work done in his own time; the
+  order of work is his to set, and what he wants from the forge is to be
+  reminded of what a choice costs so that nothing is forgotten.
+- **Verdict:** CHL.0620 rejected
+- **Verdict:** CHL.0150 obsolete
+- **Date:** 2026-10-25
+
+## DEC.0300 — The evidence of use comes with the rollout; until now the forge was prepared with few users
+- **Decision:** CHL.0630 rejected as a call to act now, its reading of
+  the facts acknowledged: the forge has been prepared so far with a
+  minimum of users, and the evidence of use that the challenge misses is
+  expected from the rollout among people now beginning. Its one
+  consequence that must not be forgotten is noted in THR.0750: a
+  `workshop` cannot hold the rollout's facts and positions, which then
+  live in `next-gen`.
+- **Reason:** The principal's word of 2026-10-25: the challenger is
+  right, but it does not matter at this stage; what the use shows is
+  seen once the forge is rolled out among people.
+- **Verdict:** CHL.0630 rejected
+- **Date:** 2026-10-25
+
+## DEC.0310 — The cut between the forge's intent and its design is decided in 6.x
+- **Decision:** CHL.0640, a good finding, parked until 6.x, after the
+  release of 6.0, in THR.0640: either the test of POS.1390 applied to
+  the positions born or rewritten since 5.0 and what fails it moved into
+  the design, or the design folded back into the intent for the forge's
+  own project. The principal leans to the first way: the positions gone
+  through by the test and cut, the mechanism moved into the design,
+  rather than the present state accepted by folding the design back. 6.0
+  approves the intent as it stands, the design staying a draft.
+- **Reason:** The principal's word of 2026-10-25: a decision of shape,
+  not a fix, too large for the day of the major.
+- **Verdict:** CHL.0640 parked until 6.x, the pass of THR.0640
+- **Date:** 2026-10-25
+
+## DEC.0320 — The re-test of the walls is taken up in 6.x
+- **Decision:** CHL.0650 parked until 6.x, in THR.0600: the probes of
+  the engine's profile and the cases of the git hook kept as a script
+  and run at `/pull` of the engine or at `/setup`, a red result said
+  aloud; the smallest behavioural suite on the recorded failures given a
+  date there.
+- **Reason:** The principal's word of 2026-10-25: right, not for the day
+  of the major. The consequence named: a harness or CLI update can turn
+  an ask into an allow without notice.
+- **Verdict:** CHL.0650 parked until 6.x, in THR.0600
+- **Date:** 2026-10-25
+
+## DEC.0330 — The correction of a research note before its first save, of 2026-09-30, stands as recorded
+- **Decision:** The correction of
+  `research/2026-09-30-adding-a-new-type-to-the-engine.md` before its
+  first save, recorded at intent 4.35, is accepted as it stands, as
+  DEC.0110 accepted the one-off edits of 2026-08-30 and 2026-09-04, and
+  is not raised again.
+- **Reason:** Claude's judgement on the low findings the principal
+  handed over on 2026-10-25: the note was two hours old and not yet in
+  git when it was corrected; a note downstream would record nothing a
+  reader needs.
+- **Verdict:** FND.2720 rejected
+- **Date:** 2026-10-25
+
+## DEC.0340 — The verdict line stays written out in CLAUDE.md beside the walkthrough skill
+- **Decision:** The verdict line and the clause that a yes carrying a
+  question is `question` stay written out in CLAUDE.md, Working methods,
+  beside the walkthrough skill that owns the shape.
+- **Reason:** Claude's judgement on the low findings the principal
+  handed over on 2026-10-25: CLAUDE.md is in context at every prompt,
+  the skill only when a walkthrough runs; the clause entered CLAUDE.md
+  on 2026-10-24 after a yes with a question was read as consent, for the
+  same reason the per-prompt hook repeats it (POS.1170).
+- **Verdict:** FND.2920 rejected
+- **Date:** 2026-10-25
+
+## DEC.0350 — The research bundle of the RFP, reopened the day it was closed, stands as recorded
+- **Decision:** The bundle `research/2026-10-24-rfp-from-the-chain/`,
+  closed single-engine on 2026-10-24 and reopened the same day when the
+  second engine's login was corrected, is accepted as it stands: its
+  Deviations record the closing, the reopening and every note run again,
+  and no note downstream is written.
+- **Reason:** Claude's judgement on the project check of 2026-10-25,
+  accepted by the principal the same day: the reopening was the
+  principal's word, said openly in the bundle and in both commits; a
+  note downstream would record nothing a reader does not find there.
+- **Verdict:** FND.2960 rejected
+- **Date:** 2026-10-25

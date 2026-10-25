@@ -41,6 +41,15 @@ question (POS.0920). Three cases of one day, not yet a position.
 Open stays whether large files are split: 41 thread files and an
 intent of 2 532 lines on 2026-10-22.
 
+2026-10-25: the cto challenge (CHL.0640, parked here until 6.x) reads
+the growth of the intent as the cut of POS.1390 not surviving velocity:
+positions since 5.0 carry the mechanism. Two ways named: the test
+applied and the mechanism moved down, or the design folded back into the
+intent for the forge's own project. The principal leans to the first:
+the positions since 5.0 gone through by the test and cut, rather than
+the present state accepted. The split of large files asked above is one
+answer to the same pressure.
+
 <!-- A thread (POS.1680), one file per thread in threads/; the header
 is its state: what it concerns, where it came from, whether it is
 open. The rules of a thread, its life and its closing:

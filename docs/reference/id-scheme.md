@@ -1,55 +1,58 @@
 ---
-generated: 2026-10-23
-version: 5.33
+generated: 2026-10-25
+version: 6.0
 made: mirrored
-inputs-hash: 7826e80fe88194ae
+inputs-hash: fb7f45a65ec0c0f4
 inputs:
   - CLAUDE.md#ID scheme
 ---
 
 # ID scheme
 
-This page is the reference for the IDs that mark the items of a project: their format, the rules that number them and the table of prefixes. It is for anyone who reads, writes or checks items that carry an ID. The principal is the person whose thinking is forged, and the ledger is the state report that is made from the documents when it is read.
+This page states the format of the IDs that name every item of a project, the rules that number them and the table of prefixes. It is for anyone who reads or writes items: the principal (the person whose thinking is forged), an extender and an evaluator. For the reasons behind the rules, see [Stable IDs](../about/stable-ids.md). For any term of the forge, see the [Glossary](glossary.md).
 
 ## Format
 
-An ID has the format `PREFIX.NNNN`.
+An ID is written `PREFIX.NNNN`.
 
-- The prefix is always three letters.
-- `NNNN` stands for the number. It has four digits as long as the number fits. A fifth digit is used only beyond 9999 (`POS.10000`).
+- The prefix is three letters.
+- `NNNN` stands for the number. In the templates and in the skills it is written the same way.
+- The number has four digits as long as it fits. A fifth digit comes only beyond 9999 (`POS.10000`).
 - No zero is added to an existing ID.
 - Every sorting of IDs is numeric, by prefix and then by number.
 
 ## Stability
 
-IDs are global and stable. An ID is never renumbered.
+- IDs are global and stable. They are never renumbered.
+- The one exception: two items that carry one number. The younger is renumbered, and the renumbering is recorded.
+- Items may move between groups without a change of ID.
 
-The one exception is two items that carry one number. The younger item is renumbered, and the renumbering is recorded.
-
-Items may move between groups without a change of ID.
-
-## Numbering rules
+## Numbering
 
 - Items are numbered in tens (`REQ.0010`, `REQ.0020`).
 - Each new group starts at the next hundred (`REQ.0100`, `REQ.0110`).
-- Overflow takes the next free number anywhere.
-- Groups are plain headings. They have no IDs, no metadata and no lifecycle.
-- Groups nest to a depth of two levels at most.
+- On overflow, an item takes the next free number anywhere.
+- Groups are plain headings: they carry no IDs, no metadata and no lifecycle.
+- Depth is two levels at most.
 
 ## Prefixes
 
 | Prefix | Meaning | Lives in |
 |---|---|---|
 | REQ | requirement | assignment |
-| OOS | out of scope / do-not | assignment |
-| CON | constraint, a deliberate boundary not to be challenged | assignment |
-| ASM | assumption | assignment, work specification |
-| DEL | deliverable, which may delegate work ("produce NFRs and return") | assignment |
-| TBC | open question / to be confirmed, with owner | assignment, solution design, work specification |
+| OOS | out of scope / do-not | assignment, BRD |
+| CON | constraint: a deliberate boundary, not to be challenged | assignment |
+| ASM | assumption | assignment, BRD, work specification |
+| DEL | deliverable: may delegate work ("produce NFRs and return") | assignment |
+| TBC | open question / to be confirmed, with owner | assignment, BRD, solution design, work specification |
 | SOL | part of the solution: what is built or done, what it realises, the choice it rests on | solution design |
-| SCR | success criterion, optional or delegated | assignment |
+| SCR | success criterion: optional or delegated | assignment, BRD |
+| BR | business requirement: one rule of the business, testable, citing the REQ or POS it carries | BRD |
+| UC | use case: behaviour agreed as a sequence, at user-goal level | BRD |
+| DEP | dependency: what the BRD relies on outside itself | BRD |
+| NFR | non-functional requirement: a quality by category, its value the stakeholders' or a TBC | BRD |
 | POS | position the principal currently holds | intent |
-| THR | open thread: an unresolved matter to elicit next; it names the artefact it concerns and carries its origin, which is the principal's word (the default), a document by path, or Claude's synthesis | the project's `threads/`, one file per thread |
+| THR | open thread: an unresolved matter to elicit next; names the artefact it concerns and carries its origin | the project's `threads/`, one file per thread |
 | REJ | rejected direction, with the reason it was dropped | intent |
 | FCT | fact: what is the case, as the principal states it or as a source states it; not a stance; a source's fact cites its file, the principal's needs none; verification is never demanded | intent |
 | FND | finding of a critic (document quality) or of a check (conformance) | ledger, reviews |
@@ -61,4 +64,4 @@ Items may move between groups without a change of ID.
 - [Stable IDs](../about/stable-ids.md): why IDs are never renumbered, and how the one exception is settled.
 - [Glossary](glossary.md): every term of the forge in one line.
 
-Generated on 2026-10-23 for version 5.33 from the files the front-matter names; never edited by hand.
+Generated on 2026-10-25 for version 6.0 from the files the front-matter names; never edited by hand.

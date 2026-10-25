@@ -5,7 +5,7 @@ owner: projects/forge
 
 # Documentation map - the engine
 
-Paths under `inputs` are relative to the engine root. Every page of the previous map keeps its path and is `keep`; no page is `new` and none is `remove`. `docs/videos/` is not a section of the documentation and is not mapped. For every entry at least one other entry names it under `links`.
+Paths under `inputs` are relative to the engine root. Every page of the previous map keeps its path and is `keep`; the pages the BRD, the research on two model families and the link to another engine brought are `new`; none is `remove`. `docs/videos/` is not a section of the documentation and is not mapped. For every entry at least one other entry names it under `links`.
 
 ## Paths
 - user: docs/start/what-it-is.md, docs/start/install.md, docs/start/setup.md, docs/start/first-result.md, docs/use/forge-the-intent.md
@@ -35,14 +35,14 @@ Paths under `inputs` are relative to the engine root. Every page of the previous
 - must-not: no commands, no file names, no conventions, no history of the project, no name of a person, no instance fact, no version number; no address but the course page's and none of the other pinned facts.
 - made: derived
 - evidence: CLAUDE.md, What this workspace is, gives the identity sentence; Roles the two roles; the Essence "runs in Claude Code", the reviewers and the domain; POS.0780 where a run ends; POS.0600 the name; the pinned facts the course page and what is played there. The technical sentence is composed from the Essence's last paragraph.
-- state: keep
+- state: regenerate
 
 ### docs/start/install.md
 - title: Install what the forge needs
 - line: What must be on your machine, and in what order, before the forge runs?
 - kind: how-to
 - reader: user
-- says: Steps in the order a newcomer needs them, each with what you see when it worked: git, version 2.36 or newer where `/setup` is to write the identity per host; Python 3.8 or newer on PATH as a real executable named `python` (the scripts and the two hooks are Python and the hooks are started without a shell; the package or symlink the pinned facts name for Linux and macOS); Claude Code with a paid subscription, installed by the lines the pinned facts give, signed in on first run; clone the engine from its public home (never copy it: the scripts refuse an engine that is not a repository); always start `claude` from the engine root. The optional tools last, each resolved from PATH and installed by no script: markitdown through pip for `/ingest`'s conversions, pandoc for the plain Word and PowerPoint files of `/render`, Pillow and ffmpeg for the video format of a screenplay (the player format needs nothing beyond Python), the document-skills plugin for `/publish` unless Claude Code already brings the docx and pptx skills. Closes by pointing at the first setup. One worked example: the sequence as typed, with placeholders.
+- says: Steps in the order a newcomer needs them, each with what you see when it worked: git, version 2.36 or newer where `/setup` is to write the identity per host; Python 3.8 or newer on PATH as a real executable named `python` (the scripts and the two hooks are Python and the hooks are started without a shell; the package or symlink the pinned facts name for Linux and macOS); Claude Code with a paid subscription, installed by the lines the pinned facts give, signed in on first run; clone the engine from its public home (never copy it: the scripts refuse an engine that is not a repository); always start `claude` from the engine root. The optional tools last, each resolved from PATH and installed by no script: markitdown through pip for `/ingest`'s conversions, pandoc for the plain Word and PowerPoint files of `/render`, Pillow and ffmpeg for the video format of a screenplay (the player format needs nothing beyond Python), the document-skills plugin for `/publish` unless Claude Code already brings the docx and pptx skills, and the command-line tool of a second engine for a research on two model families (today `agy`, the row `antigravity`, at version 1.1.1 or newer, on PATH and signed in once in its own tool, the forge carrying no key or account). Closes by pointing at the first setup. One worked example: the sequence as typed, with placeholders.
 - inputs:
   projects/forge/recipes/readme.md#Pinned facts (not rendered)
   CLAUDE.md#Persistence (git)
@@ -54,14 +54,16 @@ Paths under `inputs` are relative to the engine root. Every page of the previous
   scripts/doc2md.py
   scripts/forge_tools.py
   scripts/md2video.py
+  scripts/forge-engine.py
 - links:
   `docs/start/what-it-is.md`: what you are installing, in one paragraph.
   `docs/start/setup.md`: the first run, `/setup`.
+  `docs/use/research-a-topic.md`: the research that uses a second engine.
   `docs/reference/scripts.md`: every script with what it needs and its options.
   `docs/reference/glossary.md`: every term of the forge in one line.
-- must-not: no account, no author line, no e-mail; no address other than the engine's public home and the course page as the pinned facts give them; nothing of the readme recipe beyond its pinned facts; no platform-specific path; no claim that the scripts have been run on Linux or macOS; nothing on the identity per host or the registration of the merge driver beyond the git version they need (the setup page's); no mention of PowerShell; nothing of the script bodies below their headers.
+- must-not: no account, no author line, no e-mail; no address other than the engine's public home and the course page as the pinned facts give them; nothing of the readme recipe beyond its pinned facts; no platform-specific path; no claim that the scripts have been run on Linux or macOS; nothing on the identity per host or the registration of the merge driver beyond the git version they need (the setup page's); no mention of PowerShell; nothing of the script bodies below their headers; no install line for the second engine's tool, which no file gives; no vendor or model family named for the second engine beyond `antigravity` and `agy`; no date or probe from the engine script's header.
 - made: derived
-- evidence: the pinned facts own the prerequisites, the `python` remedies, the Claude Code install lines, "clone, not copy", "start from the engine root", the script prerequisites and the addresses; CLAUDE.md, Persistence (Portability) gives Python 3.8 or newer and the tools resolved from PATH; `.claude/settings.json` starts both hooks through `python`, and the two hook headers say what each needs; `forge-config.py`'s header that the identity stanzas need git 2.36 or newer; `forge_repos.py` refuses an engine that is not a clone; `doc2md.py` gives the pip line; `forge_tools.py` owns what pandoc and the claude engine need; `md2video.py`'s header what the video and the player formats need. The order is the writer's, by when each piece is first needed.
+- evidence: the pinned facts own the prerequisites, the `python` remedies, the Claude Code install lines, "clone, not copy", "start from the engine root", the script prerequisites and the addresses; CLAUDE.md, Persistence (Portability) gives Python 3.8 or newer and the tools resolved from PATH; `.claude/settings.json` starts both hooks through `python`, and the two hook headers say what each needs; `forge-config.py`'s header that the identity stanzas need git 2.36 or newer; `forge_repos.py` refuses an engine that is not a clone; `doc2md.py` gives the pip line; `forge_tools.py` owns what pandoc and the claude engine need; `md2video.py`'s header what the video and the player formats need; `forge-engine.py`'s header that the engine's tool is found on PATH, the version floor of the one row, and that the login is the user's, made once outside the forge. The order is the writer's, by when each piece is first needed.
 - state: regenerate
 
 ### docs/start/setup.md
@@ -194,7 +196,7 @@ Paths under `inputs` are relative to the engine root. Every page of the previous
   `docs/reference/glossary.md`: every term of the forge in one line.
 - must-not: no restatement of the Map's areas; nothing of the Partner block as instruction to Claude; no language rule beyond "kept in the language it is written in".
 - made: mirrored
-- state: keep
+- state: regenerate
 
 ### docs/use/forge-the-intent.md
 - title: Forge the intent
@@ -213,7 +215,7 @@ Paths under `inputs` are relative to the engine root. Every page of the previous
   `docs/reference/glossary.md`: every term of the forge in one line.
 - must-not: no ID scheme; no restatement of the Map; no Partner text as instruction to Claude; no position or thread of the forge project; no renumbering of a thread at a merge, which is not built.
 - made: mirrored
-- state: keep
+- state: regenerate
 
 ### docs/use/distil-an-assignment.md
 - title: Distil an assignment
@@ -229,10 +231,32 @@ Paths under `inputs` are relative to the engine root. Every page of the previous
   `docs/reference/requirement-style.md`: the rule set of the items.
   `docs/use/critique-the-documents.md`: running the essence lens.
   `docs/use/spin-off-a-group.md`: a requirement group that becomes a project of its own.
+  `docs/use/write-a-brd.md`: the business requirements that may be broken out of the assignment next.
   `docs/reference/glossary.md`: every term of the forge in one line.
 - must-not: no restatement of the Requirement style rules; no ID numbering rules; no item of a real project.
 - made: mirrored
-- state: keep
+- state: regenerate
+
+### docs/use/write-a-brd.md
+- title: Write a BRD
+- line: How do you break an assignment, an intent or a document someone gave you into business requirements with `/forge brd`?
+- kind: how-to
+- reader: user
+- says: `/forge brd [slug]` iterates `30-brd.md`, the business requirements. When asking for it you name its parent: the assignment (read with the intent and the threads), or the intent where the project has no assignment. A file someone else gave you (a transcript, an offer, a document) is registered first with `/ingest` and yields a draft that is always a work product in `work/`, never `30-brd.md`; to have it in the chain, an intent is first handed over from the same file. The ways in, and what you see in each: found together, questions up front one per message on the stakeholders, the scope of the document and the phasing, then the whole draft with its provenance map, then a walkthrough by group with the touched areas of the enterprise one per item; on your word drafted automatically, Claude asking nothing and returning the draft with the provenance map, what he assumed and the list of what must be supplied from outside, in two parts, what the forge already holds by path and what must be fetched, an open question with no owner marked `owner: unassigned` until you name a role; a parent that moved, and the pass runs on what changed; a wording fix, made directly. Where a draft of the first two ways lands, in the chain or as a quick look in `work/`, is your word when you ask. The round ends by naming what changed, what stays open and what must come from outside, and offers the approval; the stakeholders' sign-off is your organisation's act, recorded outside the forge or as a decision where you want it kept. The reviewers offered for it: `/critique essence` and `/critique clarity`, `/challenge business-analyst`, `/check brd`. One worked example with `<slug>`, generic.
+- inputs:
+  .claude/skills/forge/states/brd.md
+  templates/brd.md
+- links:
+  `docs/about/the-brd.md`: what a BRD is, what it holds and why the forge names what it cannot know.
+  `docs/use/work-a-work-product.md`: the work product a BRD from someone else's file becomes.
+  `docs/use/register-a-source.md`: registering the file put in.
+  `docs/use/challenge-the-thinking.md`: running the business-analyst persona.
+  `docs/use/check-conformance.md`: running the `brd` check.
+  `docs/reference/requirement-style.md`: the rule set of a BRD's items.
+  `docs/reference/glossary.md`: every term of the forge in one line.
+- must-not: no library path, company, group standard or fork the definition cites (the roster of areas is "a document of the instance's library, cited by path"); no item of a real project; no trial, transcript or vendor; nothing of the Partner block as an instruction to Claude; no restatement of the Map's areas or of the Requirement style; no thread number.
+- made: mirrored
+- state: new
 
 ### docs/use/design-the-solution.md
 - title: Design the solution
@@ -249,7 +273,7 @@ Paths under `inputs` are relative to the engine root. Every page of the previous
   `docs/reference/glossary.md`: every term of the forge in one line.
 - must-not: no shape of a SOL item beyond one sentence; no item of the forge's own design.
 - made: mirrored
-- state: keep
+- state: regenerate
 
 ### docs/use/work-a-work-product.md
 - title: Work a work product
@@ -268,7 +292,7 @@ Paths under `inputs` are relative to the engine root. Every page of the previous
   `docs/reference/glossary.md`: every term of the forge in one line.
 - must-not: no work product of a real project; no ID numbering rules beyond naming ASM and TBC; nothing of the skill as an instruction to Claude; no record line copied from the history template.
 - made: mirrored
-- state: keep
+- state: regenerate
 
 ### docs/use/register-a-source.md
 - title: Register a source
@@ -288,23 +312,31 @@ Paths under `inputs` are relative to the engine root. Every page of the previous
   `docs/reference/glossary.md`: every term of the forge in one line.
 - must-not: no example file with a real name; no ledger column detail; nothing of the skill as an instruction to Claude; no example of a real bundle (issues, minutes of a named body).
 - made: mirrored
-- state: keep
+- state: regenerate
 
 ### docs/use/research-a-topic.md
 - title: Research a topic
-- line: How do you get a durable, indexed research note with `/research`?
+- line: How do you get a planned, checked and indexed research with `/research`, quick or deep, on one model family or two?
 - kind: how-to
 - reader: user
-- says: `/research <topic> [slug]` looks up current best practice on one question with web sources, marks consensus, emerging and contested, and writes an immutable dated note into `research/` with the question, findings with sources, options with trade-offs and a recommendation; several questions become several notes. Indexed in `research/00-INDEX.md`; the ledger's Research table reads the note itself. The summary leads with the recommendation; a change to an artefact is proposed through `/forge <state>`. One worked example, generic.
+- says: `/research [--quick | --deep [--engine <name>]] <topic> [slug]`. Two depths: `--deep` is a plan of several cards and a bundle `research/YYYY-MM-DD-<topic>/` with the plan and the synthesis at its head and one note per card per engine; `--deep --engine antigravity` adds a second engine of another model family, which reads the draft plan and answers every card on the same packet; `--quick` is one card answered on the session model alone and filed as one note. Without the word Claude proposes the depth with its reason, and you decide. What happens, step by step: Claude asks what the research serves and what you already know or want left out, one question per message, and names the notes and sources it will build on; it drafts the plan (purpose, perspectives, assumptions with a premortem, what is left out, the cards, each one question with why it matters, what would answer it, where to look, a disconfirming query and a stop rule); with a second engine, its additions to the plan are shown beside the draft and marked as the engine's; a walkthrough of the plan, perspectives first, then the cards, `(m)odify` the normal verdict on a card; nothing is searched and nothing written until you confirm, and on your word the bundle is born with its plan; Claude tells you the models and the number of runs before it dispatches; each card is searched apart from the conversation; every note is checked against its shape, scanned for instance facts and has every URL it cites opened by `python scripts/forge-cite.py <note>` before it is filed, a note with a dead or mismatched citation sent back once; with two engines, how independent the two notes of each card are is measured by `python scripts/forge-cite.py --independence <bundle>`; the synthesis follows, with Claude's own view last and apart; a second round only for gaps the notes name, on your word, no third; one index entry for the bundle, the ledger remade. A quick research shows its one card with the verdict line before anything is searched. An engine named but unusable (not on PATH, not signed in, quota spent) is said in one sentence with the script's reason and the research goes on without it. What you see at the end: a report leading with what the research says and where the engines differ; a change to an artefact proposed through `/forge <state>`, never made silently. The run folder `tmp/research/<run>/` stays for inspection and is no source of truth. One worked example, generic.
 - inputs:
   .claude/skills/research/SKILL.md
+  templates/research-plan.md
+  templates/research.md
   templates/index.md
+  scripts/forge-engine.py
+  scripts/forge-cite.py
 - links:
+  `docs/about/the-research.md`: why a research is planned before it is searched and how what it found is kept honest.
+  `docs/about/another-model-family.md`: what the second engine is, how it is reached and how its independence is measured.
+  `docs/reference/research-bundle.md`: the shape of a note, a bundle and its plan.
   `docs/about/sources-and-research.md`: what research is for and why it is immutable.
+  `docs/start/install.md`: what a second engine needs on the machine.
   `docs/reference/glossary.md`: every term of the forge in one line.
-- must-not: no topic of the forge project; no index field detail beyond naming the three fields.
+- must-not: no agent's brief copied; no subagent, agent type or model named; no profile, envelope or hold folder internals beyond one clause; no topic, bundle or note of the forge project; no date, probe or trial from the headers; no script flags beyond the two forms of `forge-cite.py` named; no vendor or model family named beyond the engine `antigravity`.
 - made: mirrored
-- state: keep
+- state: regenerate
 
 ### docs/use/compose-a-recipe.md
 - title: Compose a recipe
@@ -327,7 +359,7 @@ Paths under `inputs` are relative to the engine root. Every page of the previous
   `docs/reference/glossary.md`: every term of the forge in one line.
 - must-not: no checklist reproduced; no Format section detail beyond its existence; not the parenthesis of the release-notes genre that the forge's own recipe reads the intent alone.
 - made: mirrored
-- state: keep
+- state: regenerate
 
 ### docs/use/render-an-output.md
 - title: Render an output
@@ -346,14 +378,14 @@ Paths under `inputs` are relative to the engine root. Every page of the previous
   `docs/reference/glossary.md`: every term of the forge in one line.
 - must-not: no subagent prompt text; no provenance block (reference); no script options beyond `--file`; no render of the forge project named; no version on a branch in a provenance, which is not built.
 - made: mirrored
-- state: keep
+- state: regenerate
 
 ### docs/use/make-a-video-from-a-recipe.md
 - title: Make a teaching video from a recipe
 - line: How do you turn real sessions into a screenplay and into a video or a player file with `/recipe screenplay` and `/render`?
 - kind: how-to
 - reader: user
-- says: The job from end to end: register the session records as sources (`/ingest`) and write the brief of the videos; `/recipe screenplay` composes the recipe through its checklist (audience, the one message, the beats pinned by time of day, the quotes, the length, the title card, what must not appear, the languages with the primary first, the pace and the look, the format `video` or `html-player`, and for the player format whether the file goes out to the engine's `docs/videos/` by `output:` with its number for the order); `/render <recipe>` writes the screenplay, one render per language, and makes the format file through `python scripts/md2video.py` with the pace and the date the Format section names: an MP4 beside the render, or a `<recipe>.<lang>.html-player.js` beside the render or in `docs/videos/`, where the script renews the player page's list of files. A file sent to `docs/videos/` is read by you before the engine is saved; a video kept for the company names no `output:`. `/publish` has no part. What you see at each step; the script's messages under "If something goes wrong". One worked example with `<recipe>` and placeholder languages.
+- says: The job from end to end: register the session records as sources (`/ingest`) and write the brief of the videos; `/recipe screenplay` composes the recipe through its checklist (audience, the one message, the beats pinned by time of day, the quotes, the length, the title card, what must not appear, the languages with the primary first, the pace and the look, the format `video` or `html-player`, and for the player format whether the file goes out to the engine's `docs/videos/` by `output:`, its section of the course and its name); `/render <recipe>` writes the screenplay, one render per language, and makes the format file through `python scripts/md2video.py` with the pace, the date and, for the player, the section and the name the Format section names: an MP4 beside the render, or a `<recipe>.<lang>.html-player.js` beside the render or in `docs/videos/`, where the script renews the player page's list of files. A file sent to `docs/videos/` is read by you before the engine is saved; a video kept for the company names no `output:`. `/publish` has no part. What you see at each step; the script's messages under "If something goes wrong". One worked example with `<recipe>` and placeholder languages.
 - inputs:
   .claude/skills/recipe/genres/screenplay.md
   templates/recipe-screenplay.md
@@ -367,10 +399,10 @@ Paths under `inputs` are relative to the engine root. Every page of the previous
   `docs/use/register-a-source.md`: registering the session records.
   `docs/reference/scripts.md`: `md2video.py`, its options and what it needs.
   `docs/reference/glossary.md`: every term of the forge in one line.
-- must-not: no recipe, render or video of a real project; no course address (the start pages carry it); no name of a person; no reasons beyond one sentence each; no project slug from the script's examples (use `<slug>`).
+- must-not: no recipe, render or video of a real project; no course address (the start pages carry it); no name of a person; no reasons beyond one sentence each; no project slug from the script's examples (use `<slug>`); no section name of the forge's own course.
 - made: derived
-- evidence: the genre file gives the checklist and the product; the skeleton the recipe's shape, the Format section and where the player file lands; the render skill steps 3, 4 and 7 the languages, the `output:` into `docs/videos/` and the run of the script; the script's header its synopsis, the two formats, where the output lands, the renewal of the player page and what it needs; POS.1540 that the file is read by the principal before the engine is saved and that a company video stays in `renders/`. The page joins them into one job in the order the person does it.
-- state: keep
+- evidence: the genre file gives the checklist and the product; the skeleton the recipe's shape, the Format section and where the player file lands; the render skill steps 3, 4 and 7 the languages, the `output:` into `docs/videos/`, the section and the name for the player and the run of the script; the script's header its synopsis, the two formats, where the output lands, the renewal of the player page and what it needs; POS.1540 that the file is read by the principal before the engine is saved and that a company video stays in `renders/`. The page joins them into one job in the order the person does it.
+- state: regenerate
 
 ### docs/use/publish-a-designed-file.md
 - title: Publish a designed file
@@ -388,14 +420,14 @@ Paths under `inputs` are relative to the engine root. Every page of the previous
   `docs/reference/glossary.md`: every term of the forge in one line.
 - must-not: no model name as a recommendation; no script options beyond `--engine claude`.
 - made: mirrored
-- state: keep
+- state: regenerate
 
 ### docs/use/generate-the-documentation.md
 - title: Generate the documentation
 - line: How does `/document` make the pages and the index, and what do you get at the end?
 - kind: how-to
 - reader: user, extender
-- says: `/document [slug]` generates the documentation in one run that asks nothing: bare, the engine's into `docs/` with the map beside the ledger of `projects/forge`; with a slug, that project's into `projects/<slug>/docs/`. It runs on `main` only and refuses a repository behind or diverged from its origin, offering `/pull`. The steps in the person's terms: the previous map is taken from git; a planner reads the target on disk and writes the map; a script computes every page's state from the content of its inputs and of the rule the pages are made by (new, regenerate, keep, remove) and writes one task per page; pages that lost their entry are deleted; one writer per page makes it from its entry and inputs alone; a script derives the index; a script checks every page, a failing page regenerated once and one that fails twice left out. `docs/videos/` of the engine is not the documentation's and is left alone. What you get at the end: the counts, the Unowned list, what did not fit, what the writers left out, the places where a reason is not recorded, the check's result, the ledger remade so that its Renders table carries the index. A release never runs it: it reports the index's age and offers the command. One worked example of the closing report, generic.
+- says: `/document [slug]` generates the documentation in one run that asks nothing: bare, the engine's into `docs/` with the map beside the ledger of `projects/forge`; with a slug, that project's into `projects/<slug>/docs/`. It runs on `main` only and refuses a repository behind or diverged from its origin, offering `/pull`. The steps in the person's terms: the previous map is taken from git into the engine's working folder `tmp/`; a planner reads the target on disk and writes the map; a script computes every page's state from the content of its inputs and of the rule the pages are made by (new, regenerate, keep, remove) and writes one task per page; pages that lost their entry are deleted; Claude says how many pages it is about to make and on which models before it launches the writers; one writer per page makes it from its entry and inputs alone; a script derives the index; a script checks every page, a failing page regenerated once and one that fails twice left out. `docs/videos/` of the engine is not the documentation's and is left alone. What you get at the end: the counts, the Unowned list, what did not fit, what the writers left out, the places where a reason is not recorded, the check's result, the ledger remade so that its Renders table carries the index. A release never runs it: it reports the index's age and offers the command. One worked example of the closing report, generic.
 - inputs:
   .claude/skills/document/SKILL.md
   scripts/docs-state.py
@@ -408,7 +440,7 @@ Paths under `inputs` are relative to the engine root. Every page of the previous
   `docs/reference/glossary.md`: every term of the forge in one line.
 - must-not: no agent prompt or task text; no model name; no field of the map; no page count or date of a run; nothing of the check script's `--file` mode.
 - made: mirrored
-- state: keep
+- state: regenerate
 
 ### docs/use/critique-the-documents.md
 - title: Critique the documents
@@ -426,7 +458,7 @@ Paths under `inputs` are relative to the engine root. Every page of the previous
   `docs/reference/glossary.md`: every term of the forge in one line.
 - must-not: no report shape; no severity or category vocabulary beyond naming that they exist; no finding of the forge project; no naming script options.
 - made: mirrored
-- state: keep
+- state: regenerate
 
 ### docs/use/challenge-the-thinking.md
 - title: Challenge the thinking
@@ -444,7 +476,7 @@ Paths under `inputs` are relative to the engine root. Every page of the previous
   `docs/reference/glossary.md`: every term of the forge in one line.
 - must-not: no report shape; no persona text; no challenge of the forge project.
 - made: mirrored
-- state: keep
+- state: regenerate
 
 ### docs/use/check-conformance.md
 - title: Check conformance
@@ -462,24 +494,25 @@ Paths under `inputs` are relative to the engine root. Every page of the previous
   `docs/reference/glossary.md`: every term of the forge in one line.
 - must-not: no report shape; no Lens text; no finding of the forge project.
 - made: mirrored
-- state: keep
+- state: regenerate
 
 ### docs/use/walk-through-a-list.md
 - title: Walk through a list
 - line: How is a list of findings, challenges or threads worked one item at a time?
 - kind: how-to
 - reader: user
-- says: How any list that needs your decision is worked: one item per message, in order of weight; what an item carries; the proposition closing with `(a)ccept / (m)odify / (q)uestion / (r)eject / (p)ark`, answered with a single letter or the word; `question` asks about the open item and changes nothing, Claude answers and closes the item again; `obsolete` as a further verdict. The verdicts are carried and written once at the round's end on `write`, Claude reflecting the whole round back first; `accept` writes what the producing command says and a closing record; `reject`, `park` and `obsolete` each write a decision with your reason and its verdict line, and a rejected item is not raised again; the ledger is made afresh after the write. The elicitation interview runs the same way. One worked example of one item, generic.
+- says: How any list that needs your decision is worked: one item per message, in order of weight; what an item carries; the proposition closing with `(a)ccept / (m)odify / (q)uestion / (r)eject / (p)ark`, answered with a single letter or the word; `question` asks about the open item and changes nothing, Claude answers and closes the item again; `obsolete` as a further verdict. The verdicts are carried and written once at the round's end on `write`, Claude reflecting the whole round back first; `accept` writes what the producing command says and a closing record; `reject`, `park` and `obsolete` each write a decision with your reason and its verdict line, and a rejected item is not raised again; the ledger is made afresh after the write. The elicitation interview runs the same way, and every single step that needs your consent closes with the same verdict line. One worked example of one item, generic.
 - inputs:
   .claude/skills/walkthrough/SKILL.md
+  CLAUDE.md#Working methods
 - links:
   `docs/reference/verdict-words.md`: the words and letters, exactly.
   `docs/about/working-methods.md`: why the one-item rule exists and how a hook holds it.
   `docs/use/settle-a-conflict.md`: the conflict of a save, laid out one conflict per message in the same way.
   `docs/reference/glossary.md`: every term of the forge in one line.
-- must-not: no hook text; nothing addressed to Claude; no record or decision line copied from a template.
+- must-not: no hook text; nothing addressed to Claude; no record or decision line copied from a template; nothing of the Working methods beyond the Walkthrough, the Elicitation interview and the verdict line of Step by step.
 - made: mirrored
-- state: keep
+- state: regenerate
 
 ### docs/use/save-your-work.md
 - title: Save your work
@@ -544,7 +577,7 @@ Paths under `inputs` are relative to the engine root. Every page of the previous
   `docs/reference/glossary.md`: every term of the forge in one line.
 - must-not: no version number of the forge; no description of what a major must pass beyond the pointer; no claim that the release regenerates the documentation on its own.
 - made: mirrored
-- state: keep
+- state: regenerate
 
 ### docs/use/pull-from-the-remote.md
 - title: Pull from the remote
@@ -577,17 +610,17 @@ Paths under `inputs` are relative to the engine root. Every page of the previous
   .claude/skills/pull/SKILL.md
   projects/forge/10-intent.md#POS.0940
   projects/forge/10-intent.md#POS.0820
-  projects/forge/recipes/release-notes.md#Template
+  projects/forge/recipes/release-notes.md#Instructions
 - links:
   `docs/use/pull-from-the-remote.md`: the pull itself.
   `docs/use/check-conformance.md`: running a check and settling its findings.
   `docs/use/migrate-a-project.md`: the migration of a project to a new shape of files.
   `docs/about/upgrades-and-migration.md`: why a project records no engine version and when a migration comes with a release.
   `docs/reference/glossary.md`: every term of the forge in one line.
-- must-not: no version numbers; no history of past migrations; no repository address; nothing of the release-notes recipe beyond its reader and that Action required stands first; no reasons beyond the link.
+- must-not: no version numbers; no history of past migrations; no repository address; nothing of the release-notes recipe beyond that Action required stands first in every section and carries a record's Action word for word; no reasons beyond the link.
 - made: derived
-- evidence: the pull skill's step 3 gives what follows a pull of the engine and the offer of `/migrate`; POS.0940 that a project records no engine version, the migration path through the two checks with Claude migrating on the user's word and a migration for a release that changes the shape of files; POS.0820 that an artefact stays valid under the conventions it was written to and that a project of the old shape is read, not written; the recipe's Template that Action required stands first. The page joins them into one job.
-- state: keep
+- evidence: the pull skill's step 3 gives what follows a pull of the engine and the offer of `/migrate`; POS.0940 that a project records no engine version, the migration path through the two checks with Claude migrating on the user's word and a migration for a release that changes the shape of files; POS.0820 that an artefact stays valid under the conventions it was written to and that a project of the old shape is read, not written; the recipe's Instructions that Action required stands first among the groups and carries the Action of a record. The page joins them into one job.
+- state: regenerate
 
 ### docs/use/migrate-a-project.md
 - title: Migrate a project
@@ -608,7 +641,7 @@ Paths under `inputs` are relative to the engine root. Every page of the previous
   `docs/reference/glossary.md`: every term of the forge in one line.
 - must-not: no slug from the script's examples (`fixture` and the like; use `<slug>` or `my-idea`); no name of a release or of a brief of the forge project; no conversion to one sentence per line, which is not built; no manifest path or file name of the script's internals; no git command for the way back after the save; no reasons beyond the link.
 - made: mirrored
-- state: keep
+- state: regenerate
 
 ### docs/use/end-a-session.md
 - title: End a session
@@ -642,7 +675,7 @@ Paths under `inputs` are relative to the engine root. Every page of the previous
   `docs/reference/glossary.md`: every term of the forge in one line.
 - must-not: no item of the forge project quoted; no script internals below the docstring.
 - made: mirrored
-- state: keep
+- state: regenerate
 
 ### docs/use/work-on-a-branch.md
 - title: Work on a branch
@@ -660,7 +693,7 @@ Paths under `inputs` are relative to the engine root. Every page of the previous
   `docs/reference/glossary.md`: every term of the forge in one line.
 - must-not: no git command other than through the script; no branch name or slug from the script's examples other than `forge` and `main`; no worktree, `--done` or `/merge`, which are not built.
 - made: mirrored
-- state: keep
+- state: regenerate
 
 ### docs/use/spin-off-a-group.md
 - title: Spin off a group
@@ -691,7 +724,7 @@ Paths under `inputs` are relative to the engine root. Every page of the previous
   `docs/reference/glossary.md`: every term of the forge in one line.
 - must-not: no copy of the Commands table.
 - made: mirrored
-- state: keep
+- state: regenerate
 
 ### docs/use/share-material-through-a-library.md
 - title: Share material through a library
@@ -740,25 +773,27 @@ Paths under `inputs` are relative to the engine root. Every page of the previous
   `docs/about/the-principal-and-claude.md`: the two roles and the rule between them.
   `docs/about/where-it-is-going.md`: the direction the forge is developed in.
   `docs/reference/glossary.md`: every term of the forge in one line.
-- must-not: no name or handle of the first principal or author; no company; no origin story beyond "it began as one person's tool, an instance fact"; no commands.
+- must-not: no name or handle of the first principal or author; no company; no origin story beyond "it began as one person's tool, an instance fact"; no commands; no company rollout.
 - made: derived
 - evidence: CLAUDE.md gives the identity; the Essence and the positions the general engine, the amplifier, where a run ends, state in files, the name; the two REJ what was rejected.
-- state: keep
+- state: regenerate
 
 ### docs/about/how-a-thought-travels.md
 - title: How a thought travels through the forge
 - line: What happens to one idea from a rough brief to a saved release?
 - kind: explanation
 - reader: user, extender, evaluator
-- says: One invented, generic thought followed through: it arrives as a brief; is chiselled into the intent by elicitation, rewritten for coherence every round; below the intent the project takes the layers it needs, an assignment, a solution design, many ending at the intent; at every layer blind reviewers press on the documents and the thinking; outputs for every audience are generated through recipes, work products made beside them where the project needs work of its own, the documentation generated the same way; everything saved to git and released. Sources and research arrive at any stage. The main courses of events in one sentence each.
+- says: One invented, generic thought followed through: it arrives as a brief; is chiselled into the intent by elicitation, rewritten for coherence every round; below the intent the project takes the layers it needs, an assignment, a BRD, a solution design, many ending at the intent; at every layer blind reviewers press on the documents and the thinking; research is planned and run where a position will rest on what the world already knows; outputs for every audience are generated through recipes, work products made beside them where the project needs work of its own, the documentation generated the same way; everything saved to git and released. Sources and research arrive at any stage. The main courses of events in one sentence each.
 - inputs:
   CLAUDE.md#Document chain
   projects/forge/40-solution-design.md#How the parts work together
   projects/forge/10-intent.md#POS.0110
   projects/forge/10-intent.md#POS.0120
   projects/forge/10-intent.md#POS.0130
+  projects/forge/10-intent.md#POS.1800
   projects/forge/10-intent.md#POS.1400
   projects/forge/10-intent.md#POS.0400
+  projects/forge/10-intent.md#POS.1860
   projects/forge/10-intent.md#POS.0710
   projects/forge/10-intent.md#POS.0180
   projects/forge/10-intent.md#POS.1100
@@ -766,12 +801,13 @@ Paths under `inputs` are relative to the engine root. Every page of the previous
 - links:
   `docs/about/the-document-chain.md`: the chain as a star.
   `docs/about/isolated-reviewers.md`: why the reviewers never see the conversation.
+  `docs/about/the-research.md`: how a research is planned before it is searched.
   `docs/about/renders-and-recipes.md`: how an output is generated from the artefacts.
   `docs/about/the-work-product.md`: an output made with work of its own.
   `docs/reference/glossary.md`: every term of the forge in one line.
-- must-not: no command syntax beyond names in passing; no forge project detail; no version numbers; nothing of merging and conflicts beyond "saved to git" (the working-together page's); no position the design's head lists as answered by no part.
+- must-not: no command syntax beyond names in passing; no forge project detail; no version numbers; nothing of merging and conflicts beyond "saved to git" (the working-together page's); no position the design's head lists as answered by no part; nothing of the BRD beyond one clause.
 - made: derived
-- evidence: CLAUDE.md, Document chain gives the chain; the solution design's head the main courses of events; the positions what each station is for, POS.1520 the work product. The page tells it in the order a thought meets it.
+- evidence: CLAUDE.md, Document chain gives the chain; the solution design's head the main courses of events; the positions what each station is for, POS.1800 the BRD among the layers, POS.1860 the research, POS.1520 the work product. The page tells it in the order a thought meets it.
 - state: regenerate
 
 ### docs/about/the-principal-and-claude.md
@@ -803,14 +839,14 @@ Paths under `inputs` are relative to the engine root. Every page of the previous
 - must-not: no name, role or handle of an instance's principal; no directive as an instruction to Claude beyond what it means for the person; no decision record cited; no project the reasons were learnt on.
 - made: derived
 - evidence: CLAUDE.md, Roles and Prime directives give the rules; the positions their reasons. A directive whose reason no position gives is said to have its reason not recorded.
-- state: keep
+- state: regenerate
 
 ### docs/about/working-methods.md
 - title: The working methods
 - line: What are the named ways a working conversation runs, and why each exists?
 - kind: explanation
 - reader: user, evaluator
-- says: The forge's vocabulary of collaboration, none a command: Walkthrough, Propose never decide (and `??`), Step by step, Elicitation interview, In pieces, Draft early, Reflect back, One write per round (`write`), Intent-first, Handing over, Recommend do not push, Plain speech, Kind not count. For each, what it is in the operating layer's wording and why in the intent's: the one-item rule because text loaded once dissolves in a long conversation, which is why a hook repeats it; `question` as a verdict so that a question is never mistaken for a yes; one write per round; step by step because consent is given to a concrete operation; handing over because the principal's attention is the scarce thing; plain speech; kind not count. Every list that needs a decision ends by offering a walkthrough. One worked example of a method invoked, generic.
+- says: The forge's vocabulary of collaboration, none a command: Walkthrough, Propose never decide (and `??`), Step by step, Elicitation interview, In pieces, Draft early, Reflect back, One write per round (`write`), Intent-first, Handing over, Recommend do not push, Plain speech, Kind not count. For each, what it is in the operating layer's wording and why in the intent's: the one-item rule because text loaded once dissolves in a long conversation, which is why a hook repeats it; `question` as a verdict so that a question is never mistaken for a yes; one write per round; step by step because consent is given to a concrete operation, every such step closing with the verdict line so that the word is a letter and a yes that carries a question is a question; handing over because the principal's attention is the scarce thing; plain speech; kind not count. Every list that needs a decision ends by offering a walkthrough. One worked example of a method invoked, generic.
 - inputs:
   CLAUDE.md#Working methods
   .claude/skills/walkthrough/SKILL.md
@@ -823,8 +859,8 @@ Paths under `inputs` are relative to the engine root. Every page of the previous
   `docs/reference/glossary.md`: every term of the forge in one line.
 - must-not: no hook text; no dates or incidents of the intent's reasons; no project the methods were learnt on; nothing of the assistant's memory.
 - made: derived
-- evidence: CLAUDE.md, Working methods gives every method's name and wording; the walkthrough skill the shape and the verdicts; the intent's group Working methods and POS.1410 the reasons. The page keeps CLAUDE.md's order.
-- state: keep
+- evidence: CLAUDE.md, Working methods gives every method's name and wording, the verdict line of Step by step among it; the walkthrough skill the shape and the verdicts; the intent's group Working methods and POS.1410 the reasons. The page keeps CLAUDE.md's order.
+- state: regenerate
 
 ### docs/about/elicitation.md
 - title: Elicitation
@@ -843,14 +879,14 @@ Paths under `inputs` are relative to the engine root. Every page of the previous
 - must-not: no block of a particular artefact's definition; no brief of the forge project named; nothing of the Elicitation group's history beyond the reasons.
 - made: derived
 - evidence: the intent's group Elicitation states what elicitation is, the seven blocks and the Map; the skeleton shows the blocks; CLAUDE.md, Document chain says every artefact has a definition paired with its template.
-- state: keep
+- state: regenerate
 
 ### docs/about/the-document-chain.md
 - title: The document chain
 - line: Why is the chain a star of definitions, and how does it grow?
 - kind: explanation
 - reader: user, extender, evaluator
-- says: The chain starts at a brief and its trunk is the intent; below the intent a project takes the layers it needs, none a condition of another. The chain is a star: each definition declares its own inputs, so a layer branches from any artefact by adding one definition, and the dispatcher never changes. Files numbered in tens. Which artefacts exist is the listing of the definitions directory. Substance changes go into the intent first. The chain never spans two principals. The diagram: the artefacts of today's chain with their inputs as the definitions declare them. One worked example, generic.
+- says: The chain starts at a brief and its trunk is the intent; below the intent a project takes the layers it needs, none a condition of another. The chain is a star: each definition declares its own inputs, so a layer branches from any artefact by adding one definition, and the dispatcher never changes. Files numbered in tens. Which artefacts exist is the listing of the definitions directory. Substance changes go into the intent first. The chain never spans two principals. The diagram: the artefacts of today's chain with their inputs as the definitions declare them (the brief; the intent from the briefs; the assignment from the intent; the BRD from the assignment, or from the intent where there is none, a file someone gave yielding a work product instead; the solution design from the lowest layer above it). One worked example, generic.
 - inputs:
   CLAUDE.md#What this workspace is
   CLAUDE.md#Document chain
@@ -858,6 +894,7 @@ Paths under `inputs` are relative to the engine root. Every page of the previous
   .claude/skills/forge/states/brief.md#Inputs
   .claude/skills/forge/states/intent.md#Inputs
   .claude/skills/forge/states/assignment.md#Inputs
+  .claude/skills/forge/states/brd.md#Inputs
   .claude/skills/forge/states/solution-design.md#Inputs
   projects/forge/10-intent.md#POS.0100
   projects/forge/10-intent.md#POS.0140
@@ -867,10 +904,11 @@ Paths under `inputs` are relative to the engine root. Every page of the previous
 - links:
   `docs/about/the-brief.md`: the first artefact.
   `docs/about/the-intent.md`: the trunk.
+  `docs/about/the-brd.md`: the business requirements below the assignment.
   `docs/about/elicitation.md`: what a definition is.
   `docs/reference/artefacts.md`: the definitions of today, one row each.
   `docs/reference/glossary.md`: every term of the forge in one line.
-- must-not: no planned layer drawn as if it existed; no forge project history.
+- must-not: no planned layer drawn as if it existed; no forge project history; no library path or company the BRD's definition cites.
 - made: derived
 - evidence: CLAUDE.md gives the trunk, the growth and the numbering; the `/forge` skill the star; the Inputs blocks the arrows of the diagram; the positions the reasons. Where no input gives a reason, the page says the reason is not recorded.
 - state: regenerate
@@ -898,7 +936,7 @@ Paths under `inputs` are relative to the engine root. Every page of the previous
 - must-not: no brief of the forge project named or quoted; no Course steps; no author field value; nothing of the prime directives but directive 6's language exception.
 - made: derived
 - evidence: the definition gives the wording and how the files are made; the template the header; the positions what a brief is and why, POS.0920 the mining record; the three REJ what was rejected; prime directive 6 the language exception.
-- state: keep
+- state: regenerate
 
 ### docs/about/the-intent.md
 - title: The intent
@@ -924,7 +962,7 @@ Paths under `inputs` are relative to the engine root. Every page of the previous
 - must-not: no position or thread of the forge project quoted; no numbering rules beyond naming the prefixes; no renumbering of a thread at a merge, which is not built.
 - made: derived
 - evidence: the definition gives the wording and the Threads and files block; the template and the thread template the shapes; the positions what a position, a fact and a thread carry, POS.1680 why threads are files, and the intent/solution test; REJ.0010 why a Q&A log was rejected.
-- state: keep
+- state: regenerate
 
 ### docs/about/the-assignment.md
 - title: The assignment
@@ -946,10 +984,44 @@ Paths under `inputs` are relative to the engine root. Every page of the previous
   `docs/about/stable-ids.md`: why every item carries an ID.
   `docs/reference/requirement-style.md`: the rule set.
   `docs/reference/glossary.md`: every term of the forge in one line.
-- must-not: no rule set reproduced; no item of an instance project; no spin-off mechanics; nothing of the ID group's merge clash or blocks of IDs, which are not built.
+- must-not: no rule set reproduced; no item of an instance project; no spin-off mechanics; nothing of the ID group's merge clash or blocks of IDs, which are not built; no group or company standard named.
 - made: derived
 - evidence: the definition gives the wording and the two "why not"; the positions the reasons; the three REJ what was rejected.
-- state: keep
+- state: regenerate
+
+### docs/about/the-brd.md
+- title: The BRD
+- line: What does a BRD hold, how does it start, and why does the forge name what it cannot know instead of writing it?
+- kind: explanation
+- reader: user, extender, evaluator
+- says: An artefact page. What it is: the business requirements, `30-brd.md`, below the assignment and above the solution design; it breaks its parent into rules the stakeholders of each area review on their own, behaviour that must be agreed as a sequence, and qualities with values from the stakeholders, so that the delivery can estimate and the solution design can start. Who writes and reads it: an analyst working as the principal of his own project, with Claude as partner doing the recast; the stakeholders and the delivery teams read it. Made from: the assignment, read with the intent and the threads, or the intent alone where there is none; a file someone else gave is a third way in and yields a work product, never the artefact, since what someone said does not become the principal's position by being run through a command. What it holds: four prefixes of its own (BR a business requirement, UC a use case at user-goal level, DEP a dependency, NFR a quality by category) beside OOS, ASM, TBC and SCR; the stakeholders as roles, the scope of the document, the touched areas of the enterprise walked against the instance's roster of areas or `Roster: none`, the phasing always stated, the terms, a traceability appendix; every BR and UC cites its parent; the Requirement style is the assignment's made stricter. Complete when nothing of the parent is left out in silence, every matter that must come from outside has its owner, and no open question that blocks estimation remains. How it is found: found together or drafted automatically on the principal's word, from a provenance map first. What the forge cannot know, it names: the suppliers' and systems' documentation, the standards and regulation, what the operations know are brought by the analyst; Claude writes none of it from imagination and puts a DEP or a TBC with an owner in its place, and the pass ends with the list of what must be supplied from outside. The reviewers: no lens of its own, `clarity` and `essence` read it as they read an assignment, a persona `business-analyst` hunts the world outside the parent, a check `brd` the mechanics. The stakeholders' sign-off is the organisation's act outside the forge. Why: each, as the positions give it; why no prefix REF, no range of numbers for qualities, no FR, no lens of its own, no BRD of the chain from someone else's file. One worked example: a generic BR item with its parent and a generic NFR with a TBC for its value.
+- inputs:
+  .claude/skills/forge/states/brd.md
+  templates/brd.md
+  projects/forge/10-intent.md#POS.1800
+  projects/forge/10-intent.md#POS.1810
+  projects/forge/10-intent.md#POS.1820
+  projects/forge/10-intent.md#POS.1830
+  projects/forge/10-intent.md#POS.1840
+  projects/forge/10-intent.md#POS.1850
+  projects/forge/10-intent.md#REJ.0390
+  projects/forge/10-intent.md#REJ.0400
+  projects/forge/10-intent.md#REJ.0410
+  projects/forge/10-intent.md#REJ.0420
+  projects/forge/10-intent.md#REJ.0430
+- links:
+  `docs/use/write-a-brd.md`: iterating it with `/forge brd`.
+  `docs/about/the-assignment.md`: the usual parent of a BRD.
+  `docs/about/the-work-product.md`: what a BRD from someone else's file becomes.
+  `docs/about/sources-and-research.md`: why what someone said is never silently the principal's position.
+  `docs/reference/requirement-style.md`: the rule set of its items.
+  `docs/reference/challenger-personas.md`: the business-analyst persona.
+  `docs/reference/checks.md`: the `brd` check.
+  `docs/reference/glossary.md`: every term of the forge in one line.
+- must-not: no company, group standard, colleague, fork, library path or instance roster named (the public standards the position names may stand); no trial, transcript, vendor, date, challenge or decision the positions cite; no thread number; no item of a real project; nothing of the Partner block as an instruction to Claude.
+- made: derived
+- evidence: the definition gives the target, the three ways in, the Aim and its completion, the Partner's line of what Claude does not do, the Map's areas and the Requirement style; the template the sections, `parent:` and the appendix; POS.1800 what the BRD is and where it stands; POS.1810 the ways in and the reason for the work product; POS.1820 what the forge names; POS.1830 the prefixes and the stricter style; POS.1840 the reviewers; POS.1850 the sign-off; the five REJ what was rejected and why. Where the definition and the positions differ in wording, the definition's wording and the position's reason stand.
+- state: new
 
 ### docs/about/the-solution-design.md
 - title: The solution design
@@ -970,7 +1042,7 @@ Paths under `inputs` are relative to the engine root. Every page of the previous
 - must-not: no item of the forge's own design quoted; no check named that does not exist.
 - made: derived
 - evidence: the definition gives the wording; the three positions the reasons.
-- state: keep
+- state: regenerate
 
 ### docs/about/the-work-product.md
 - title: The work product
@@ -992,14 +1064,14 @@ Paths under `inputs` are relative to the engine root. Every page of the previous
 - must-not: no work product of a real project; no command steps beyond one sentence; nothing of the design's group beyond SOL.0640.
 - made: derived
 - evidence: POS.1520 gives what a work product is, the two files, its neighbours and the reason the render was not stretched; SOL.0640 the one command, the Work table read from the records and its choice; the template the shape of the specification; CLAUDE.md, Document kinds the row of the kind.
-- state: keep
+- state: regenerate
 
 ### docs/about/documents-and-records.md
 - title: Documents and records
 - line: What kinds of document does a project hold, and why does state live in files?
 - kind: explanation
 - reader: user, extender, evaluator
-- says: "Document" is every file of a project; "artefact" is reserved for the documents of the chain. Every document has one kind, in six groups: artefacts; records (history and decisions append-only; reviews and challenges immutable); state (the ledger made at read time, the project file written once, the threads, the indexes, the documentation map); rendering (recipes, renders, pages); work (the work product); resources (sources and research). Why state lives in files and never in the conversation. The ledger is the single source of truth for state, made from the other files and never written by hand, said in one sentence with a link. Why immutability is a process rule. Prose hard-wrapped at about 72 columns. One worked example, generic.
+- says: "Document" is every file of a project; "artefact" is reserved for the documents of the chain. Every document has one kind, in six groups: artefacts; records (history and decisions append-only; reviews and challenges immutable); state (the ledger made at read time, the project file written once, the threads, the indexes, the documentation map); rendering (recipes, renders, pages); work (the work product); resources (sources and research, a research of several questions being a bundle). Why state lives in files and never in the conversation. The ledger is the single source of truth for state, made from the other files and never written by hand, said in one sentence with a link. Why immutability is a process rule. Prose hard-wrapped at about 72 columns. One worked example, generic.
 - inputs:
   CLAUDE.md#Document kinds
   templates/decisions.md
@@ -1019,7 +1091,7 @@ Paths under `inputs` are relative to the engine root. Every page of the previous
 - must-not: no table reproduced; no forge project ledger content; no merge driver of the record files, which is not built; no "one sentence per line", which is not built.
 - made: derived
 - evidence: CLAUDE.md, Document kinds gives the groups and kinds; the decisions skeleton the shape of a record; the positions the reasons. Where no input gives a reason, the page says the reason is not recorded.
-- state: keep
+- state: regenerate
 
 ### docs/about/the-ledger.md
 - title: The ledger, made from the records
@@ -1075,7 +1147,7 @@ Paths under `inputs` are relative to the engine root. Every page of the previous
 - must-not: no record of the forge project; no version number of the forge; no list of the checks a major of the forge ran; no `landed` kind, `+` token, landing on main or version written on main only, which are not built.
 - made: derived
 - evidence: CLAUDE.md gives the scheme, the header rule and the companion rule; the template the record and the records of state; the positions the reasons, POS.1570 the header and POS.1630 the state records; REJ.0110 the rejected scheme.
-- state: keep
+- state: regenerate
 
 ### docs/about/stable-ids.md
 - title: Stable IDs
@@ -1105,7 +1177,7 @@ Paths under `inputs` are relative to the engine root. Every page of the previous
 - line: Why do three kinds of reviewer never see the conversation, and what does their agreement mean?
 - kind: explanation
 - reader: user, extender, evaluator
-- says: Three kinds of reviewer of one shape: the critic, the challenger, the check. All run as isolated subagents that see the project's documents and never the working conversation, on the session model; their blindness is the source of their value. All invoked by hand, settled by walkthrough, reports immutable and dated, each named by its date, the time and a short content hash so that two branches never make the same name; nothing blocks. Every agent returns its report with its findings unnumbered and writes nothing; the command numbers it and files it, so that the IDs are given in one place and reviewers may run in parallel. The shared behaviour of each kind is one contract, the agent file owns only its Lens. Isolation is not independence: their agreement is never validation. Instance facts never enter a report. One worked example, generic.
+- says: Three kinds of reviewer of one shape: the critic, the challenger, the check. All run as isolated subagents that see the project's documents and never the working conversation, on the session model; their blindness is the source of their value. All invoked by hand, settled by walkthrough, reports immutable and dated, each named by its date, the time and a short content hash so that two branches never make the same name; nothing blocks. Every agent returns its report with its findings unnumbered and writes nothing; the command numbers it and files it, so that the IDs are given in one place and reviewers may run in parallel. The shared behaviour of each kind is one contract, the agent file owns only its Lens. Isolation is not independence: the reviewers share one model family with the author, so their agreement is never validation; the calibration lies outside, in people or another model family, said in one sentence with a link. Instance facts never enter a report. One worked example, generic.
 - inputs:
   CLAUDE.md#Isolated reviewers
   projects/forge/10-intent.md#POS.0400
@@ -1122,12 +1194,13 @@ Paths under `inputs` are relative to the engine root. Every page of the previous
   `docs/about/the-critic.md`: what the critic judges.
   `docs/about/the-challenger.md`: what the challenger judges.
   `docs/about/the-check.md`: what a check verifies.
+  `docs/about/another-model-family.md`: the link to a model of another family, and why its reviewers are not built yet.
   `docs/use/walk-through-a-list.md`: how findings are settled.
   `docs/reference/glossary.md`: every term of the forge in one line.
-- must-not: no roster; no contract text; no planned challengers on another model family presented as built; the documentation agents are not reviewers; no version on a branch in a report, which is not built.
+- must-not: no roster; no contract text; no reviewer on another model family presented as built; the documentation agents are not reviewers; no version on a branch in a report, which is not built; no date the positions cite.
 - made: derived
-- evidence: CLAUDE.md gives the mechanism and the filing by the command; POS.1140 why the command numbers and files; POS.1720 why the names are unique; the other positions the reasons; REJ.0080 why review and challenge are two reviewers.
-- state: keep
+- evidence: CLAUDE.md gives the mechanism and the filing by the command; POS.1140 why the command numbers and files; POS.1720 why the names are unique; POS.0790 that isolation is not independence and that another family is reached over the link, the research first; the other positions the reasons; REJ.0080 why review and challenge are two reviewers.
+- state: regenerate
 
 ### docs/about/the-critic.md
 - title: The critic
@@ -1148,7 +1221,7 @@ Paths under `inputs` are relative to the engine root. Every page of the previous
 - must-not: no report template; no instruction to the agent copied as such; no finding of the forge project.
 - made: derived
 - evidence: the contract gives subject, target, way of working and output; the positions why two lenses, why a file may be the target and why testability is a recommendation.
-- state: keep
+- state: regenerate
 
 ### docs/about/the-challenger.md
 - title: The challenger
@@ -1170,14 +1243,14 @@ Paths under `inputs` are relative to the engine root. Every page of the previous
 - must-not: no report template; no challenge of the forge project; no persona text.
 - made: derived
 - evidence: the contract gives subject, target, way of working and output; the positions the reasons.
-- state: keep
+- state: regenerate
 
 ### docs/about/the-check.md
 - title: The check
 - line: What does a check verify, why is it read-only, and who files its report?
 - kind: explanation
 - reader: user, extender, evaluator
-- says: A check verifies mechanical conformance with the current conventions, never substance or quality, each check owning one concern; it reads the rules at their owners. Read-only: it returns its report and the command files it, only when it has findings. Findings only, precise to file and line, ranked; a finding decided once by a decision is not raised again, and a known one is reported under the ID it has. Advisory. Composition is the caller's: `/save` runs `light` unless told otherwise, `/release` runs `light` and `project`, for the engine `engine` too. One worked example, generic.
+- says: A check verifies mechanical conformance with the current conventions, never substance or quality, each check owning one concern; it reads the rules at their owners. Read-only: it returns its report and the command files it, only when it has findings. Findings only, precise to file and line, ranked; a finding decided once by a decision is not raised again, and a known one is reported under the ID it has. Advisory. Composition is the caller's: `/save` runs `light` unless told otherwise, `/release` runs `light` and `project`, for the engine `engine` too; any other check, such as one for a single kind of artefact, runs on the principal's word. One worked example, generic.
 - inputs:
   .claude/skills/check-contract/SKILL.md
   projects/forge/10-intent.md#POS.0540
@@ -1225,14 +1298,14 @@ Paths under `inputs` are relative to the engine root. Every page of the previous
 - must-not: no recipe of the forge project quoted; no author line; no pitch content; no script options; not the readme skeleton's fixed closing sentence; no version on a branch in a provenance, which is not built.
 - made: derived
 - evidence: CLAUDE.md, Document chain (Renders) gives the mechanism, the languages, the published table and the three conversions; the recipe skeleton the sections; the readme skeleton's Instructions what a README carries; the positions the reasons, POS.1550 the languages and POS.0590 the two steps; the two REJ what was rejected.
-- state: keep
+- state: regenerate
 
 ### docs/about/the-screenplay-and-its-player.md
 - title: The screenplay and its player
 - line: What is a teaching video of the forge made of, why does one script make both of its formats, and why does the engine host the public files?
 - kind: explanation
 - reader: user, extender, evaluator
-- says: A concept page: a recipe of the genre `screenplay` renders a screenplay of a terminal conversation cut from session records: a title card that discloses the composition, a card of what the viewer will see, scenes with the real time of day, each with a caption of two parts (what happens now, why the forge does it this way) and a fenced block of what the terminal shows, and an end card; the caption is the teaching, the terminal the evidence. Its inputs are session records registered as sources and the brief of the videos; a recipe may render in several languages, the translations cut scene for scene from the primary. Its Format names one of two formats: `video`, an MP4 painted frame by frame as a simulated terminal, or `html-player`, the timed events for the player page of the engine; both made by one script, deterministic, no model in it, the plain file of `/render`, no designed step and no published file; the pace of reading and the look stand in the recipe's Format section and reach the script as arguments, never in the render. The player page is one fixed file of the engine, a single file with no dependency beyond the browser: a sidebar of the videos by title, the simulated terminal with its caption band and cards, play and pause, speed, the scenes as chapters, the language where a video has siblings, three font sizes; it is written anew from its skeleton by the script, never by hand and never by a model. Why the engine hosts what a project shows in public: the engine, public and served by GitHub Pages from `docs/`, is the one public place of an instance, while the project that made the file stays private; the engine carries the file only, the recipe, render, provenance and history stay in the project; what goes out is chosen in the recipe, video by video, and read by the principal before the engine is saved; the folder is flat, in the order of file names, foreign to the documentation and its checks; video files never enter the tree. The choices and their price as the solution design records them. One worked example: a generic scene of a screenplay.
+- says: A concept page: a recipe of the genre `screenplay` renders a screenplay of a terminal conversation cut from session records: a title card that discloses the composition, a card of what the viewer will see, scenes with the real time of day, each with a caption of two parts (what happens now, why the forge does it this way) and a fenced block of what the terminal shows, and an end card; the caption is the teaching, the terminal the evidence. Its inputs are session records registered as sources and the brief of the videos; a recipe may render in several languages, the translations cut scene for scene from the primary. Its Format names one of two formats: `video`, an MP4 painted frame by frame as a simulated terminal, or `html-player`, the timed events for the player page of the engine; both made by one script, deterministic, no model in it, the plain file of `/render`, no designed step and no published file; the pace of reading and the look stand in the recipe's Format section and reach the script as arguments, never in the render. The player page is one fixed file of the engine, a single file with no dependency beyond the browser: a sidebar of the videos by title, grouped by the section of the course each file names, the simulated terminal with its caption band and cards, play and pause, speed, the scenes as chapters, the language where a video has siblings, three font sizes; it is written anew from its skeleton by the script, never by hand and never by a model. Why the engine hosts what a project shows in public: the engine, public and served by GitHub Pages from `docs/`, is the one public place of an instance, while the project that made the file stays private; the engine carries the file only, the recipe, render, provenance and history stay in the project; what goes out is chosen in the recipe, video by video, and read by the principal before the engine is saved; the folder is flat, foreign to the documentation and its checks; video files never enter the tree. The choices and their price as the solution design records them. One worked example: a generic scene of a screenplay.
 - inputs:
   projects/forge/10-intent.md#POS.1530
   projects/forge/10-intent.md#POS.1540
@@ -1248,10 +1321,10 @@ Paths under `inputs` are relative to the engine root. Every page of the previous
   `docs/reference/scripts.md`: the script that makes both formats.
   `docs/reference/recipe-genres.md`: the genre's checklist in full.
   `docs/reference/glossary.md`: every term of the forge in one line.
-- must-not: no video, recipe or project of an instance named; no course address; no name of a person; no sections or order of a course beyond "in the order of file names" (open); nothing of the page's styles or code; no research or trial of a project named.
+- must-not: no video, recipe or project of an instance named; no course address; no name of a person; no section name or order of the forge's own course; nothing of the page's styles or code; no research or trial of a project named.
 - made: derived
-- evidence: POS.1530 gives the screenplay, the two formats and the one script with its reason; POS.1540 the engine as the public host, what goes out, the clearing, the flat folder and the player page; POS.1550 the languages; SOL.0650 the script's choices and their price; SOL.0660 what the page does, that the script renews its list, that the documentation leaves the folder alone, and the choice of the alphabet of file names; the genre file the product and the inputs; the skeleton's head comment that the page is written from it by the script and never edited.
-- state: keep
+- evidence: POS.1530 gives the screenplay, the two formats and the one script with its reason; POS.1540 the engine as the public host, what goes out, the clearing, the flat folder and the player page; POS.1550 the languages; SOL.0650 the script's choices and their price; SOL.0660 what the page does, its grouping, that the script renews its list and that the documentation leaves the folder alone; the genre file the product and the inputs; the skeleton's head comment that the page is written from it by the script and never edited.
+- state: regenerate
 
 ### docs/about/the-documentation.md
 - title: The documentation
@@ -1282,16 +1355,17 @@ Paths under `inputs` are relative to the engine root. Every page of the previous
 - must-not: no count of pages or date of a run; no model name; no entry of the engine's map quoted; no name of a project other than `forge`; nothing of the contract as an instruction to Claude; no list of pages the design says are to be regenerated after a release.
 - made: derived
 - evidence: CLAUDE.md, Document chain (Documentation) gives what the documentation is and where the map lies; the `/document` skill the one run, the main-only rule and the previous map from git; the contract what the two agents share and the kinds of a page; the planner the readers, the outline and the videos folder left alone; the writer the page's shape; the map's skeleton its header; POS.1450 the position whole with its reason, POS.0930 the faster model for a mirrored page; the three REJ what was rejected; SOL.0460 the choices and the parts of a run the diagram draws. Where no input gives a reason, the page says the reason is not recorded.
-- state: keep
+- state: regenerate
 
 ### docs/about/sources-and-research.md
 - title: Sources and research
-- line: Why are sources immutable, why is registration not intake, and what is a research note for?
+- line: Why are sources immutable, why is registration not intake, and what is a research for?
 - kind: explanation
 - reader: user, evaluator
-- says: External inputs live in `sources/`, immutable once registered, one form each; a related set is a bundle. Registration is not intake: what a source is for is the principal's word, asked before its index entry is written so that the entry carries it from its birth, its Role in the index; source content enters the intent only by his explicit act with provenance. Research is a durable answer to one question, immutable and dated. Every `sources/` and `research/` directory carries an index that tracks nothing and is an automatic input of no command; a source's date, origin and form are fields of its entry. Why personal matter stops an ingest before the store. One worked example: a generic index entry.
+- says: External inputs live in `sources/`, immutable once registered, one form each; a related set is a bundle. Registration is not intake: what a source is for is the principal's word, asked before its index entry is written so that the entry carries it from its birth, its Role in the index; source content enters the intent only by his explicit act with provenance, so that what someone said is never silently promoted to his position. Research is a durable answer to a question: a single note for one card on one engine, or a bundle of a plan, one note per card per engine and a synthesis; immutable from its filing and dated; how it is planned and checked is said in one sentence with a link. Every `sources/` and `research/` directory carries an index that tracks nothing and is an automatic input of no command; a source's date, origin and form are fields of its entry. Why personal matter stops an ingest before the store. One worked example: a generic index entry.
 - inputs:
   CLAUDE.md#Document chain
+  CLAUDE.md#Document kinds
   templates/index.md
   templates/index-bundle.md
   projects/forge/10-intent.md#POS.0050
@@ -1301,11 +1375,70 @@ Paths under `inputs` are relative to the engine root. Every page of the previous
 - links:
   `docs/use/register-a-source.md`: the ingest procedure.
   `docs/use/research-a-topic.md`: the research procedure.
+  `docs/about/the-research.md`: how a research is planned before it is searched and kept honest.
   `docs/reference/glossary.md`: every term of the forge in one line.
-- must-not: no source of the forge project; no index entry reproduced; no merge driver of the index, which is not built.
+- must-not: no source of the forge project; no index entry reproduced; no merge driver of the index, which is not built; nothing of the research's course beyond the one sentence and the link.
 - made: derived
-- evidence: CLAUDE.md gives the rules; the skeletons the fields; the positions the reasons. Where no input gives a reason, the page says the reason is not recorded.
-- state: keep
+- evidence: CLAUDE.md, Document chain gives the rules of sources and indexes; Document kinds the research row with the bundle; the skeletons the fields; the positions the reasons. Where no input gives a reason, the page says the reason is not recorded.
+- state: regenerate
+
+### docs/about/the-research.md
+- title: How a research is made
+- line: Why is a research planned before it is searched, and how is what it found kept honest?
+- kind: explanation
+- reader: user, extender, evaluator
+- says: A concept page. What it is: a research grounds the principal's artefacts in what the world has already solved, so that he does not reinvent it; its quality is made by its plan, not by the searching. How it works: the plan comes first and is confirmed in a walkthrough before anything is searched or costs anything: the purpose, the perspectives each with its cards or none, the assumptions with a premortem marked as Claude's, what is left out on purpose, and the cards, each one question answered by one kind of evidence from one kind of source, with why it matters, where to look, a disconfirming query and a stop rule; a card that needs two kinds is two cards, a card with nothing under why it matters is cut. Two depths: deep, a bundle with one note per card per engine and a synthesis; quick, one card filed as one note, still shown before the search. Every card is searched by an agent that sees a packet made from the forge's own definition and nothing of the conversation, the agent's brief the same in every packet: start wide, open a page or do not cite it, go upstream to the first publisher, exclude sources by kind, name conflicts and what was not found, never fabricate. Before a note is filed it is read against its shape, scanned for instance facts and every URL it cites opened by a script; a dead page or an identifier that names another paper sends it back once, an unanswered page is unverifiable and never a failure. The synthesis is Claude's from the notes alone: completeness card by card, the answers side by side, the unexpected gathered before any judgement, what was not found, Claude's own view last and apart. A second round only for gaps the notes name, never a third. Why: each, as the positions give it; why no recursive deep-dive to a fixed depth, no fact verified by a count of agreeing sources, no saturation as a percentage. The research on a second model family is said in one sentence with a link. One worked example: a generic card.
+- inputs:
+  projects/forge/10-intent.md#POS.0050
+  projects/forge/10-intent.md#POS.1860
+  projects/forge/10-intent.md#POS.1890
+  projects/forge/10-intent.md#POS.1370
+  projects/forge/10-intent.md#REJ.0450
+  projects/forge/10-intent.md#REJ.0460
+  projects/forge/10-intent.md#REJ.0470
+  projects/forge/40-solution-design.md#SOL.0860
+  .claude/skills/research/SKILL.md
+  templates/research-plan.md
+- links:
+  `docs/use/research-a-topic.md`: running `/research`.
+  `docs/about/another-model-family.md`: the second engine, how it is reached and how its independence is measured.
+  `docs/about/sources-and-research.md`: research as a resource of the project.
+  `docs/reference/research-bundle.md`: the shape of a note, a bundle and its plan.
+  `docs/reference/glossary.md`: every term of the forge in one line.
+- must-not: no agent's brief copied as an instruction to an agent; no topic, bundle or note of the forge project; no date, trial or count of notes the positions or the design cite; no brief named; no subagent type; no model name; nothing of the second engine beyond the sentence and the link.
+- made: derived
+- evidence: POS.0050 gives the purpose; POS.1860 the plan before the search, the cards, the two depths, the packet, the synthesis and the second round, with the reason; POS.1890 the check before filing and its reason; POS.1370 Claude's own view apart; the three REJ what was rejected and why; SOL.0860 the choice of the plan as the unit of consent; the research skill the course and the agent's brief in the operating layer's wording; the plan skeleton the sections of a plan and a card. Where the skill and the positions differ, the skill's wording and the position's reason stand.
+- state: new
+
+### docs/about/another-model-family.md
+- title: Another model family
+- line: Why does the forge reach a model of another family, how is it reached, and how is its answer kept independent?
+- kind: explanation
+- reader: user, extender, evaluator
+- says: A concept page. What it is: the author, the critic and the challengers share one model family, so what that family cannot see none of them finds; a model of another family is a calibration point outside. How it is reached: one script runs one packet on an engine of its table, one row per engine, over that engine's own command-line tool; the login is the user's, made once in the engine's own tool, and the forge carries no key, no account and no configuration; the forge names engines, never models. The engine works in a packet folder under the engine's working folder `tmp/`, never at the forge's root, whose hooks and instance file it must not see; because the place alone locks nothing, the script gives the engine a profile of its own for the run, which denies the forge's tree and the shell and allows the web, the user's own settings untouched and the profile kept in the run folder as its record. Every tool call is allowed and the engine's sandbox contains it, since a run that cannot ask returns nothing; read-only is verified by comparing the folder before and after, and a run that changed anything is refused. The answer comes back as a note with the engine, the model word, the usage and the run in its front-matter, and the command files it. Where it is used today: a deep research may take a second engine by name; it reads the draft plan and answers every card in full on the same packet, so that two whole answers lie side by side; agreement is consistency, never validation, and difference is spelled out. Independence is measured, never assumed: the first engine's notes are held out of reach until the second's note of the card has returned, and the URLs and the sentences the two notes share are counted before filing; a note written from the other's goes back once or is said to be no second voice. An engine's quota is spent one or two runs at a time. The reviewers on this link are intended and not built. Why: each, as the positions give it; why both engines do the whole work rather than a split of roles; why no skill on the other engine's side; why a command-line tool and not a library or a server. One worked example: one generic card answered by two engines and the measure of their independence.
+- inputs:
+  projects/forge/10-intent.md#POS.0790
+  projects/forge/10-intent.md#POS.0800
+  projects/forge/10-intent.md#POS.1870
+  projects/forge/10-intent.md#POS.1880
+  projects/forge/10-intent.md#REJ.0440
+  projects/forge/10-intent.md#REJ.0480
+  projects/forge/10-intent.md#REJ.0490
+  projects/forge/40-solution-design.md#SOL.0870
+  projects/forge/40-solution-design.md#SOL.0880
+  scripts/forge-engine.py
+  scripts/forge-cite.py
+- links:
+  `docs/about/the-research.md`: the research, the first job on this link.
+  `docs/about/isolated-reviewers.md`: the reviewers of one family and why their agreement is not validation.
+  `docs/use/research-a-topic.md`: a research with `--engine`.
+  `docs/extend/add-an-engine.md`: adding an engine as one row of the table.
+  `docs/reference/scripts.md`: the engine script and the citation script, their options.
+  `docs/reference/glossary.md`: every term of the forge in one line.
+- must-not: no vendor, product or model family named beyond the table's row `antigravity` and its tool `agy`; no date, probe, trial, count of notes or research of the forge project; no path of the user's settings file or of the profile beyond "in the run folder"; no thread or challenge number; no consultation or spool; no reviewer on the link presented as built; no flags beyond naming that every tool call is allowed and the sandbox is on.
+- made: derived
+- evidence: POS.0790 gives isolation not independence and the calibration outside; POS.0800 the reviewers intended on the link and not built; POS.1870 the second engine on one plan, the side-by-side answers, the measured independence, the unusable engine and the quota; POS.1880 the one script, the login, the packet folder, the profile, the verified read-only and the returned note; the three REJ what was rejected; SOL.0870 the profile's allow and deny and its price; SOL.0880 the counts of independence; the two scripts' headers what each does in the operating layer's wording. Where a header and a position differ, the header's wording and the position's reason stand.
+- state: new
 
 ### docs/about/projects-and-the-engine.md
 - title: Projects and the engine
@@ -1460,7 +1593,7 @@ Paths under `inputs` are relative to the engine root. Every page of the previous
 - must-not: no claim that a hook or a deny rule guarantees behaviour; no incident story or date; no thread of the forge project; nothing of the hooks' docstrings beyond what the walkthrough hook prints and what the git hook answers; no list of the git hook's verbs.
 - made: derived
 - evidence: prime directive 10 and the Walkthrough method give the one-place rule and the hook; the settings the deny rules and the two hooks; the walkthrough hook's `LINES` what it prints; the git hook's header that it holds the line, in one sentence; the positions the reasons; the design's group how the core, the instance file, the hook and the walkthrough skill are realised.
-- state: keep
+- state: regenerate
 
 ### docs/about/languages.md
 - title: Languages
@@ -1479,14 +1612,14 @@ Paths under `inputs` are relative to the engine root. Every page of the previous
 - must-not: no language value of an instance; no example project; nothing of the prime directives but directive 6; nothing of POS.1450 but the documentation's language.
 - made: derived
 - evidence: prime directive 6 gives the rule, the project file as its source, the work specification and the languages of a render; POS.0060 the reason; POS.1450 that the documentation is English only. Where no input gives a reason, the page says the reason is not recorded.
-- state: keep
+- state: regenerate
 
 ### docs/about/where-it-is-going.md
 - title: Where the forge is going
 - line: In which direction is the forge developed, and what is deliberately not promised?
 - kind: explanation
 - reader: user, extender, evaluator
-- says: Direction without destination: the chain is to be extended downward as far as the principal needs a thought taken, a BRD layer certain, a strategy layer possible; nothing approved for construction. A new kind of artefact is added by one command; a user is to be able to add one of his own at his own place, which is open. Independent challengers on another model family are planned. One principal per instance for now. Developed at its owner's discretion and pace; feedback and ideas are wanted most.
+- says: Direction without destination: the chain is extended downward as far as the principal needs a thought taken; the BRD layer exists, integration is intended, a strategy layer possible; nothing further approved for construction, the mechanics of a layer designed when it is taken up. A new kind of artefact is added by one command; a user is to be able to add one of his own at his own place, which is open. A model of another family is reached today for research; reviewers on that link, a challenger and a critic lens, are intended and not built. One principal per instance for now, and the chain never spans two principals. Developed at its owner's discretion and pace; feedback and ideas are wanted most.
 - inputs:
   projects/forge/10-intent.md#POS.0700
   projects/forge/10-intent.md#POS.0780
@@ -1495,12 +1628,13 @@ Paths under `inputs` are relative to the engine root. Every page of the previous
   projects/forge/10-intent.md#POS.1440
 - links:
   `docs/about/the-document-chain.md`: how a layer is added.
+  `docs/about/another-model-family.md`: the link to another model family as it stands.
   `docs/extend/how-a-change-is-made.md`: how a change reaches the forge.
   `docs/reference/glossary.md`: every term of the forge in one line.
-- must-not: no thread quoted; no date; no version; no company rollout; no name; no vendor or product of the planned challengers.
+- must-not: no thread quoted; no date; no version; no company rollout; no name; no vendor, product or model family of the planned reviewers; no challenge number.
 - made: derived
 - evidence: positions only. Where no input gives a reason, the page says the reason is not recorded.
-- state: keep
+- state: regenerate
 
 ## extend
 
@@ -1509,11 +1643,13 @@ Paths under `inputs` are relative to the engine root. Every page of the previous
 - line: Which files make up the operating layer, what is each, and when is it loaded?
 - kind: how-to
 - reader: extender
-- says: Opens with a table (path, what it is, loaded when): `CLAUDE.md`, the always-on core; `.claude/skills/<name>/SKILL.md`, one per command, with the `/forge` state files and the `/recipe` genre files as supporting files, and the skills that are not commands (the three reviewer contracts, the documentation contract, the walkthrough skill); `.claude/agents/`, one file per lens, persona and check, and the documentation's planner and writer; `.claude/settings.json`, the two hooks and the deny rules; `templates/`, the skeletons, the player page's skeleton among them; `scripts/`, Python with the shared modules beside them, the two hooks among the scripts; `.gitattributes`, the engine's own ways of merging its derived files; `projects/forge`, the forge's own project; `docs/`, the generated documentation, with `docs/videos/` the public folder of the videos, not the documentation's. Then one line of flow. Then the ideas that carry it. One worked example: one command traced through the layer.
+- says: Opens with a table (path, what it is, loaded when): `CLAUDE.md`, the always-on core; `.claude/skills/<name>/SKILL.md`, one per command, with the `/forge` state files and the `/recipe` genre files as supporting files, and the skills that are not commands (the three reviewer contracts, the documentation contract, the walkthrough skill); `.claude/agents/`, one file per lens, persona and check, and the documentation's planner and writer; `.claude/settings.json`, the two hooks and the deny rules; `templates/`, the skeletons, the player page's skeleton among them; `scripts/`, Python with the shared modules beside them, the two hooks among the scripts; `.gitattributes`, the engine's own ways of merging its derived files; `tmp/`, the engine's working folder, in git with its own README and ignore file, its contents never, no source of truth and read by no check, ledger or history, kept for inspection and emptied by hand; `projects/forge`, the forge's own project; `docs/`, the generated documentation, with `docs/videos/` the public folder of the videos, not the documentation's. Then one line of flow. Then the ideas that carry it. One worked example: one command traced through the layer.
 - inputs:
   CLAUDE.md#Repository layout
   CLAUDE.md#Templates
   CLAUDE.md#Persistence (git)
+  tmp/README.md
+  projects/forge/10-intent.md#POS.1900
   projects/forge/40-solution-design.md#How the parts work together
   projects/forge/40-solution-design.md#The instruction layer
   projects/forge/40-solution-design.md#The commands
@@ -1527,9 +1663,9 @@ Paths under `inputs` are relative to the engine root. Every page of the previous
   `docs/extend/how-a-change-is-made.md`: changing any of it.
   `docs/about/the-documentation.md`: what `docs/` and the map are.
   `docs/reference/glossary.md`: every term of the forge in one line.
-- must-not: no listing of individual commands or agents; no file of an instance; no repository address; no count of pages or date of a run; no thread named in the layout comments; no script, command or template the design names that does not exist on disk (a record driver, a merge command, a fixture script, ID reservations); no position the design's head lists as answered by no part.
+- must-not: no listing of individual commands or agents; no file of an instance; no repository address; no count of pages or date of a run; no thread named in the layout comments; no script, command or template the design names that does not exist on disk (a record driver, a merge command, a fixture script, ID reservations); no position the design's head lists as answered by no part; no file found in `tmp/` named.
 - made: derived
-- evidence: CLAUDE.md, Repository layout and Templates give the directories, the settings with the two hooks and the `<type>-definition.md` rule; Persistence the shared modules; the design's head the ideas and its groups what each kind of file is and when the harness loads it; SOL.0300 and SOL.0330 the reviewer files. The table and the line of flow are the writer's join.
+- evidence: CLAUDE.md, Repository layout and Templates give the directories, the settings with the two hooks, `tmp/` and the `<type>-definition.md` rule; Persistence the shared modules; `tmp/README.md` and POS.1900 what the working folder holds and that nothing in it is a source of truth; the design's head the ideas and its groups what each kind of file is and when the harness loads it; SOL.0300 and SOL.0330 the reviewer files. The table and the line of flow are the writer's join.
 - state: regenerate
 
 ### docs/extend/how-a-change-is-made.md
@@ -1558,14 +1694,14 @@ Paths under `inputs` are relative to the engine root. Every page of the previous
 - must-not: no channel URL, account, profile or name; no pull-request mechanics beyond what the recipe gives; no claim that the release regenerates the documentation on its own; no brief, plan, fixture, release number or date of the forge project.
 - made: derived
 - evidence: CLAUDE.md gives the completeness rule and the `operating layer` subject; the positions intent-first, the open rule and, POS.1780, the order of a change that needs a test; the contributing recipe's Instructions the line between the two kinds of change, who decides what and the channels by kind; the two check agents what proves a change; the release skill what a release re-renders.
-- state: keep
+- state: regenerate
 
 ### docs/extend/add-an-artefact.md
 - title: Add an artefact
 - line: How is a new kind of artefact added to the chain with `/new-artefact`?
 - kind: how-to
 - reader: extender
-- says: An add page: `/new-artefact <name>` leads to everything a kind needs and decides nothing: a position in the forge intent first; the definition in the seven blocks from `templates/artefact-definition.md` and its template `templates/<name>.md`; the row of a new prefix; the reviewers; the item of the solution design. The rosters need nothing: `/forge`, `/man` and the README read the definitions from disk. Prove it: `/check engine`; the first artefact of the kind through `/forge <name>` on real work is the trial. Recorded and released as any change. One worked example with `<name>`.
+- says: An add page: `/new-artefact <name>` leads to everything a kind needs and decides nothing: a position in the forge intent first; the definition in the seven blocks from `templates/artefact-definition.md` and its template `templates/<name>.md`; the row of a new prefix; the reviewers; the item of the solution design. Where the kind needs a trial on real work before its position can hold, the order changes: the brief first, then the pair with its reviewers, the trial, then the position and the item of the design, the brief the authority until then. The rosters need nothing: `/forge`, `/man` and the README read the definitions from disk. Prove it: `/check engine`; the first artefact of the kind through `/forge <name>` on real work is the trial. Recorded and released as any change. One worked example with `<name>`.
 - inputs:
   .claude/skills/new-artefact/SKILL.md
   templates/artefact-definition.md
@@ -1574,11 +1710,12 @@ Paths under `inputs` are relative to the engine root. Every page of the previous
   `docs/about/elicitation.md`: the seven blocks and the Map.
   `docs/about/where-it-is-going.md`: the layers the forge's owner intends to add.
   `docs/extend/add-a-challenger-persona.md`: the persona a kind may need.
+  `docs/extend/add-a-check.md`: the check a kind may need.
   `docs/reference/templates.md`: the skeletons a definition and a persona start from.
   `docs/reference/glossary.md`: every term of the forge in one line.
-- must-not: no planned artefact named as if being added; no brief of the forge project.
+- must-not: no planned artefact named as if being added; no brief of the forge project; no kind of the forge named as the example of the trial order.
 - made: mirrored
-- state: keep
+- state: regenerate
 
 ### docs/extend/add-a-critic-lens.md
 - title: Add a critic lens
@@ -1598,7 +1735,7 @@ Paths under `inputs` are relative to the engine root. Every page of the previous
   `docs/reference/glossary.md`: every term of the forge in one line.
 - must-not: no contract text copied; no existing lens's angles copied as content.
 - made: mirrored
-- state: keep
+- state: regenerate
 
 ### docs/extend/add-a-challenger-persona.md
 - title: Add a challenger persona
@@ -1618,7 +1755,7 @@ Paths under `inputs` are relative to the engine root. Every page of the previous
   `docs/reference/glossary.md`: every term of the forge in one line.
 - must-not: no contract text copied; no existing persona's angles copied as content.
 - made: mirrored
-- state: keep
+- state: regenerate
 
 ### docs/extend/add-a-check.md
 - title: Add a check
@@ -1638,7 +1775,7 @@ Paths under `inputs` are relative to the engine root. Every page of the previous
   `docs/reference/glossary.md`: every term of the forge in one line.
 - must-not: no contract text copied; no existing check's clauses copied as content.
 - made: mirrored
-- state: keep
+- state: regenerate
 
 ### docs/extend/add-a-recipe-genre.md
 - title: Add a recipe genre
@@ -1659,7 +1796,7 @@ Paths under `inputs` are relative to the engine root. Every page of the previous
 - must-not: no checklist copied as content; no genre named as planned.
 - made: derived
 - evidence: the `/recipe` skill says a genre is two files, that the dispatcher never changes and gives the shared frame with the language question; the presentation genre file and its skeleton are the model of the two shapes; `templates/recipe.md` owns the base shape, `languages:` among it.
-- state: keep
+- state: regenerate
 
 ### docs/extend/add-a-command.md
 - title: Add a command
@@ -1692,7 +1829,7 @@ Paths under `inputs` are relative to the engine root. Every page of the previous
 - line: How is a new script written so that it is portable, documented in its docstring and the one owner of its facts?
 - kind: how-to
 - reader: extender
-- says: An add page: a script is Python 3.8 or newer, run as `python scripts/<name>.py`, with its help in its module docstring: synopsis, what it does, what it needs, options, where the output lands, examples; the docstring owns those facts and commands cite it. Rules: nothing Windows-only, `pathlib`, `subprocess` with argument lists, external tools resolved from PATH and never installed, colour only on a terminal, examples free of platform paths, no URL and no identity. What several scripts share lives in one module beside them: `forge_repos.py`, `forge_tools.py`, `forge_docs.py`, `docs_map.py`. Named in the layout comment of `CLAUDE.md`. Prove it: `/check engine`. Recorded and released as any change. One worked example: a generic docstring.
+- says: An add page: a script is Python 3.8 or newer, run as `python scripts/<name>.py`, with its help in its module docstring: synopsis, what it does, what it needs, options, where the output lands, examples; the docstring owns those facts and commands cite it. Rules: nothing Windows-only, `pathlib`, `subprocess` with argument lists, external tools resolved from PATH and never installed, colour only on a terminal, examples free of platform paths, no URL and no identity. What several scripts share lives in one module beside them: `forge_repos.py`, `forge_tools.py`, `forge_docs.py`, `docs_map.py`. A script's working files go to the engine's working folder `tmp/`, never to the system's temporary directory. Named in the layout comment of `CLAUDE.md`. Prove it: `/check engine`. Recorded and released as any change. One worked example: a generic docstring.
 - inputs:
   CLAUDE.md#Persistence (git)
   CLAUDE.md#Repository layout
@@ -1700,16 +1837,40 @@ Paths under `inputs` are relative to the engine root. Every page of the previous
   scripts/forge_repos.py
   .claude/agents/check-engine.md
   projects/forge/10-intent.md#POS.0830
+  projects/forge/10-intent.md#POS.1900
   projects/forge/40-solution-design.md#SOL.0620
+  projects/forge/40-solution-design.md#SOL.0890
 - links:
   `docs/extend/how-a-change-is-made.md`: proving, recording and releasing the change.
   `docs/reference/scripts.md`: the scripts that exist.
   `docs/about/persistence-in-git.md`: why the scripts are the only door.
+  `docs/extend/add-an-engine.md`: a row of the engine script, which needs no script of its own.
   `docs/reference/glossary.md`: every term of the forge in one line.
-- must-not: no claim that the set has been run on Linux or macOS; no instance path; no mention of PowerShell; no script body; nothing of SOL.0620 beyond how the scripts are written and what they share.
+- must-not: no claim that the set has been run on Linux or macOS; no instance path; no mention of PowerShell; no script body; nothing of SOL.0620 beyond how the scripts are written and what they share; no date.
 - made: derived
-- evidence: CLAUDE.md gives the writing rules, the four shared modules and the layout comment; POS.0830 the reason; SOL.0620 how the scripts are written; `forge-status.py` the smallest model of a docstring, `forge_repos.py` of a shared module; the `check-engine` agent that scripts on disk are verified against the layout comment.
+- evidence: CLAUDE.md gives the writing rules, the four shared modules and the layout comment; POS.0830 the reason; SOL.0620 how the scripts are written; POS.1900 and SOL.0890 that `tmp/` is the one working folder and why it is chosen over the system's temporary directory; `forge-status.py` the smallest model of a docstring, `forge_repos.py` of a shared module; the `check-engine` agent that scripts on disk are verified against the layout comment.
 - state: regenerate
+
+### docs/extend/add-an-engine.md
+- title: Add an engine
+- line: How is a model of another family added as one row of the engine table, and how is the row proved?
+- kind: how-to
+- reader: extender
+- says: An add page. An engine is one row of the engine table of `scripts/forge-engine.py`, "a row, never a branch": the engine's command-line tool in its one-shot, non-interactive shape (the prompt, the packet folder added as the workspace, the JSON envelope asked for, a time limit, and where it has them the model, the effort, a schema, the sandbox and the flag that approves every tool call); the fields of its envelope the script reads (a status that says success, a non-empty response, the usage) and whether the model is in it; a version floor where a bug is known; and the shape of the engine's own settings file, since the script writes the per-run profile in that shape with the web allowed and the forge's tree, the shell and every write denied. The forge names engines, never models, and carries no key or account: the login is the user's, made once in the engine's own tool. The row's name is what `/research --deep --engine <name>` takes. Prove it: a trial of the engine alone with `--no-profile` on a scratch packet under `tmp/research/`, which is a trial and never a research; then a run with the profile, `python scripts/forge-engine.py <name> --packet tmp/research/<run>/<card> --out tmp/research/<run>/<card>/<name>.md --allow-all --sandbox`, with a check that the profile's deny rules hold; then `/research --deep --engine <name> <topic>` on a real question; `/check engine`. Recorded and released as any change. One worked example with `<name>`.
+- inputs:
+  scripts/forge-engine.py
+  .claude/skills/research/SKILL.md
+  projects/forge/10-intent.md#POS.1880
+  projects/forge/40-solution-design.md#SOL.0870
+- links:
+  `docs/extend/how-a-change-is-made.md`: proving, recording and releasing the change.
+  `docs/about/another-model-family.md`: what the link to another engine is and why it is a command-line tool.
+  `docs/reference/scripts.md`: the engine script, its flags and exit codes.
+  `docs/reference/glossary.md`: every term of the forge in one line.
+- must-not: no script body; no row invented beyond the one the header shows; no flag of another vendor's tool; no vendor, product or model family named beyond the row `antigravity` and its tool `agy`; no date or probe; no path of the user's settings file; no packet path of the forge project's research.
+- made: derived
+- evidence: the script's header gives the table (one row each, add a row, never a branch), the shape of the one row, the envelope's fields, the version floor, the profile and the flags with `--no-profile` as a trial; the research skill that `<name>` is a row of the table and that the forge names engines, never models; POS.1880 the login, no key and no configuration, and the one-shot shape shared by the command-line tools; SOL.0870 that the price of the profile is one settings shape to know per engine, kept in the engine's row. The order of the proof is the writer's join of the header's trial form and the skill's run form.
+- state: new
 
 ### docs/extend/change-a-documentation-page.md
 - title: Change a documentation page
@@ -1733,7 +1894,7 @@ Paths under `inputs` are relative to the engine root. Every page of the previous
 - must-not: no model name; no agent text as an instruction to Claude; no address; no page named as an example that may not exist; no instance fact; nothing of the check script's `--file` mode.
 - made: derived
 - evidence: the `/document` skill gives "mended in the file that owns the matter", the state computed from the inputs, the twice-failing page and the harness note; the contract what must never reach a page and the kinds of a page; the writer the page's front-matter; the planner that the map is written from the target at every run and Unowned; the state script's docstring the parts and the generator hashed; the check script's docstring what it looks for; the readme skeleton's comment the home of pinned facts.
-- state: keep
+- state: regenerate
 
 ## reference
 
@@ -1742,7 +1903,7 @@ Paths under `inputs` are relative to the engine root. Every page of the previous
 - line: Every command with its signature, purpose, arguments and whether it is guarded.
 - kind: reference
 - reader: user, extender, evaluator
-- says: A roster page: one overview table first (command, purpose, arguments, guarded or not), then one entry per command in the order of the Commands table of `CLAUDE.md`: the row's signature and purpose, the skill's `description` and `argument-hint`, and whether it carries `disable-model-invocation: true`; `/work`, `/pull`, `/end`, `/history`, `/migrate`, `/man` and `/manual` included.
+- says: A roster page: one overview table first (command, purpose, arguments, guarded or not), then one entry per command in the order of the Commands table of `CLAUDE.md`: the row's signature and purpose, the skill's `description` and `argument-hint`, and whether it carries `disable-model-invocation: true`; `/work`, `/research` with its two depths and `--engine`, `/pull`, `/end`, `/history`, `/migrate`, `/man` and `/manual` included.
 - inputs:
   CLAUDE.md#Commands
   .claude/skills/setup/SKILL.md
@@ -1783,20 +1944,22 @@ Paths under `inputs` are relative to the engine root. Every page of the previous
 - line: The artefacts of today's chain, one row per definition, with template, inputs, prefixes and command.
 - kind: reference
 - reader: user, extender, evaluator
-- says: A roster page: one overview table first, then one row per definition in `.claude/skills/forge/states/` in the order of the file numbers: the artefact's file, its `description`, its template, its inputs (Target and Inputs blocks), the prefixes of its items, and the command that works it. One line below: a layer a project does not have is not missing.
+- says: A roster page: one overview table first, then one row per definition in `.claude/skills/forge/states/` in the order of the file numbers (brief, intent, assignment, BRD, solution design): the artefact's file, its `description`, its template, its inputs (Target and Inputs blocks), the prefixes of its items, and the command that works it. One line below: a layer a project does not have is not missing.
 - inputs:
   .claude/skills/forge/states/brief.md
   .claude/skills/forge/states/intent.md
   .claude/skills/forge/states/assignment.md
+  .claude/skills/forge/states/brd.md
   .claude/skills/forge/states/solution-design.md
   CLAUDE.md#ID scheme
   CLAUDE.md#Ledger
 - links:
   `docs/about/the-document-chain.md`: why the listing of that directory is the one list.
+  `docs/about/the-brd.md`: what the BRD holds and why.
   `docs/reference/glossary.md`: every term of the forge in one line.
-- must-not: no Aim, Partner, Map or Course text; no explanation.
+- must-not: no Aim, Partner, Map or Course text; no explanation; no library path or company the BRD's Inputs block cites (say "the instance's roster of areas, a library document cited by path").
 - made: mirrored
-- state: keep
+- state: regenerate
 
 ### docs/reference/critic-lenses.md
 - title: Critic lenses
@@ -1813,37 +1976,39 @@ Paths under `inputs` are relative to the engine root. Every page of the previous
   `docs/reference/glossary.md`: every term of the forge in one line.
 - must-not: no contract text; no explanation.
 - made: mirrored
-- state: keep
+- state: regenerate
 
 ### docs/reference/challenger-personas.md
 - title: Challenger personas
 - line: The challenger personas of today and what each hunts.
 - kind: reference
 - reader: user, extender
-- says: A roster page: one overview table first, then one entry per `.claude/agents/challenger-*.md`: the persona name, its `description`, and its Lens section, as `/man challenge` prints them.
+- says: A roster page: one overview table first, then one entry per `.claude/agents/challenger-*.md` (`architect`, `business-analyst`, `cto`): the persona name, its `description`, and its Lens section, as `/man challenge` prints them.
 - inputs:
   .claude/agents/challenger-cto.md
   .claude/agents/challenger-architect.md
+  .claude/agents/challenger-business-analyst.md
 - links:
   `docs/use/challenge-the-thinking.md`: running a persona.
   `docs/extend/add-a-challenger-persona.md`: adding a persona.
   `docs/reference/glossary.md`: every term of the forge in one line.
 - must-not: no contract text; no explanation.
 - made: mirrored
-- state: keep
+- state: regenerate
 
 ### docs/reference/checks.md
 - title: Checks
 - line: The checks of today, what each verifies, its cost, and which a save and a release run.
 - kind: reference
 - reader: user, extender
-- says: A roster page: one overview table first, then one entry per `.claude/agents/check-*.md`: the check name, its `description`, and its Lens section (what it reads, what it verifies with the owner of each rule, its cost), as `/man check` prints them; one line on which a save and a release run, from the two skills.
+- says: A roster page: one overview table first, then one entry per `.claude/agents/check-*.md` (`brd`, `engine`, `history`, `light`, `project`, `single-source-of-truth`): the check name, its `description`, and its Lens section (what it reads, what it verifies with the owner of each rule, its cost), as `/man check` prints them; one line on which a save and a release run, from the two skills.
 - inputs:
   .claude/agents/check-light.md
   .claude/agents/check-project.md
   .claude/agents/check-engine.md
   .claude/agents/check-history.md
   .claude/agents/check-single-source-of-truth.md
+  .claude/agents/check-brd.md
   .claude/skills/save/SKILL.md
   .claude/skills/release/SKILL.md
 - links:
@@ -1873,14 +2038,14 @@ Paths under `inputs` are relative to the engine root. Every page of the previous
   `docs/reference/glossary.md`: every term of the forge in one line.
 - must-not: no skeleton reproduced; no explanation; not the parenthesis of the release-notes genre that the forge's own recipe reads the intent alone.
 - made: mirrored
-- state: keep
+- state: regenerate
 
 ### docs/reference/id-scheme.md
 - title: ID scheme
 - line: The format, the numbering rules and the prefix table, exactly.
 - kind: reference
 - reader: user, extender, evaluator
-- says: The format `PREFIX.NNNN` with the fifth digit beyond 9999 and the numeric sort, the rule that IDs are global and stable with its one exception (two items with one number, the younger renumbered with a record), the numbering rules, and the prefix table with meaning and where each lives (threads in `threads/`, one file per thread), as the ID scheme of `CLAUDE.md` has them.
+- says: The format `PREFIX.NNNN` with the fifth digit beyond 9999 and the numeric sort, the rule that IDs are global and stable with its one exception (two items with one number, the younger renumbered with a record), the numbering rules, and the prefix table with meaning and where each lives (threads in `threads/`, one file per thread; BR, UC, DEP and NFR in the BRD), as the ID scheme of `CLAUDE.md` has them.
 - inputs:
   CLAUDE.md#ID scheme
 - links:
@@ -1888,28 +2053,30 @@ Paths under `inputs` are relative to the engine root. Every page of the previous
   `docs/reference/glossary.md`: every term of the forge in one line.
 - must-not: no explanation; no example from a project; no position ID from the text (the bracketed IDs are left out).
 - made: mirrored
-- state: keep
+- state: regenerate
 
 ### docs/reference/versioning-and-front-matter.md
 - title: Versioning and front-matter
 - line: The version scheme and the header fields of an artefact, a brief, a recipe, a work specification and an index, exactly.
 - kind: reference
 - reader: user, extender, evaluator
-- says: The version scheme; the rule that a header carries nothing that changes with a round, the date and the last change computed from the history; the header fields of an artefact (`version`, `status`, `project`, `audience`), of a brief (`project`, `title`, `author`, `version`, `status`), of a recipe (`version` and no status, optional `output:` and `languages:`), of a work specification (`file:`), of a resource index (`directory`); the status rule; the companion and archive file names, as `CLAUDE.md` and the templates have them.
+- says: The version scheme; the rule that a header carries nothing that changes with a round, the date and the last change computed from the history; the header fields of an artefact (`version`, `status`, `project`, `audience`; a BRD adds `parent:`), of a brief (`project`, `title`, `author`, `version`, `status`), of a recipe (`version` and no status, optional `output:` and `languages:`), of a work specification (`file:`), of a resource index (`directory`); the status rule; the companion and archive file names, as `CLAUDE.md` and the templates have them.
 - inputs:
   CLAUDE.md#Versioning & status
   templates/intent.md
   templates/brief.md
+  templates/brd.md
   templates/recipe.md
   templates/work.md
   templates/index.md
 - links:
   `docs/reference/history-companion.md`: the record's shape.
   `docs/about/versioning-and-history.md`: why.
+  `docs/reference/research-bundle.md`: the front-matter of a research note and plan, which carry no version.
   `docs/reference/glossary.md`: every term of the forge in one line.
 - must-not: no explanation; no example values from a project; no author value.
 - made: mirrored
-- state: keep
+- state: regenerate
 
 ### docs/reference/history-companion.md
 - title: History companion
@@ -1926,29 +2093,31 @@ Paths under `inputs` are relative to the engine root. Every page of the previous
   `docs/reference/glossary.md`: every term of the forge in one line.
 - must-not: no record from a project; no explanation.
 - made: mirrored
-- state: keep
+- state: regenerate
 
 ### docs/reference/requirement-style.md
 - title: Requirement style
-- line: The rule set of the items of an assignment, exactly.
+- line: The rule set of the items of an assignment, and the stricter one of a BRD, exactly.
 - kind: reference
 - reader: user, extender
-- says: The rule set as the Requirement style of the assignment's definition has it.
+- says: The rule set as the Requirement style of the assignment's definition has it; then the rules the BRD's definition makes stricter for its items, as that Requirement style has them.
 - inputs:
   .claude/skills/forge/states/assignment.md#Requirement style
+  .claude/skills/forge/states/brd.md#Requirement style
 - links:
-  `docs/about/the-assignment.md`: why the items are written so.
+  `docs/about/the-assignment.md`: why the items of an assignment are written so.
+  `docs/about/the-brd.md`: why the items of a BRD are written so.
   `docs/reference/glossary.md`: every term of the forge in one line.
 - must-not: no example item; no explanation.
 - made: mirrored
-- state: keep
+- state: regenerate
 
 ### docs/reference/document-kinds.md
 - title: Document kinds
 - line: The table of document kinds, verbatim, with the companion, library and wrapping rules.
 - kind: reference
 - reader: user, extender, evaluator
-- says: The table of document kinds of `CLAUDE.md`, verbatim, six columns and every row, the ledger, the project file, the thread and the work kind among them; one line each on the companion of every versioned kind, on a library's reduced set, and on the wrapping rule.
+- says: The table of document kinds of `CLAUDE.md`, verbatim, six columns and every row, the ledger, the project file, the thread, the map, the work kind and the research with its bundle among them; one line each on the companion of every versioned kind, on a library's reduced set, and on the wrapping rule.
 - inputs:
   CLAUDE.md#Document kinds
 - links:
@@ -1956,14 +2125,14 @@ Paths under `inputs` are relative to the engine root. Every page of the previous
   `docs/reference/glossary.md`: every term of the forge in one line.
 - must-not: no explanation; no position ID from the table's cells (the table's bracketed IDs are left out).
 - made: mirrored
-- state: keep
+- state: regenerate
 
 ### docs/reference/ledger.md
 - title: Ledger
 - line: The ledger's header, tables, columns, state words and reports, exactly, with where each column is read from.
 - kind: reference
 - reader: user, extender
-- says: The ledger as `templates/ledger.md` owns it: the header (the slug and the day it was made, the kind and the language echoed from the project file); every table with its columns (Briefs, Documents, Renders, Published, Work, Sources, Dependencies, Research, Findings, Challenges) and, for each, which header, record, field or report its columns are read from; the state words of briefs, published files, work products, findings and challenges; the row of the documentation index in Renders; the rule of Waiting on principal; the Reports section with its three reports and the `unparsed:` header line; which tables a library keeps; `ledger.archive.md` read for items without a newer record. That it is made by `python scripts/forge-ledger.py <slug>` and never kept in git.
+- says: The ledger as `templates/ledger.md` owns it: the header (the slug and the day it was made, the kind and the language echoed from the project file); every table with its columns (Briefs, Documents, Renders, Published, Work, Sources, Dependencies, Research, Findings, Challenges) and, for each, which header, record, field or report its columns are read from, a research bundle read by its head; the state words of briefs, published files, work products, findings and challenges; the row of the documentation index in Renders; the rule of Waiting on principal; the Reports section with its three reports and the `unparsed:` header line; which tables a library keeps; `ledger.archive.md` read for items without a newer record. That it is made by `python scripts/forge-ledger.py <slug>` and never kept in git.
 - inputs:
   templates/ledger.md
   CLAUDE.md#Ledger
@@ -1992,7 +2161,26 @@ Paths under `inputs` are relative to the engine root. Every page of the previous
   `docs/reference/glossary.md`: every term of the forge in one line.
 - must-not: no explanation; no example from a project; nothing of the scan a render passes.
 - made: mirrored
-- state: keep
+- state: regenerate
+
+### docs/reference/research-bundle.md
+- title: Research note and bundle
+- line: The places, the front-matter and the sections of a research note, of a research bundle and of its plan, exactly.
+- kind: reference
+- reader: user, extender
+- says: Where a research lands, as the research skill's Target has it: a bundle `research/YYYY-MM-DD-<topic>/` with `00-plan.md` at its head and one note per card per engine, `<card>.<engine>.md`, one entry in `research/00-INDEX.md` for the bundle; a research of one card on one engine a single note `research/YYYY-MM-DD-<topic>.md`; immutable from the filing of the synthesis; English. The plan's front-matter (`date`, `project`, `topic`, `status` draft then immutable, `engines`, `derived_from`) and its sections in order (Summary; Plan with Purpose, Perspectives, Assumptions, Left out, Cards, Agents, the second engine's review; Deviations from the plan; Synthesis with Completeness card by card, Answers side by side, Unexpected gathered, Not found gathered, Claude's view; Notes), and the six fields of a card. The note's front-matter (`date`, `project`, `topic`, `status`, `engine`, `model`, `usage`, `run`, `derived_from`) and its sections in order (In short, Question, Key findings with their epistemic status words, Unexpected, Not found, Options, Relevance to this project, Sources with the fields of a source, Opened and not used, Search record). The research entry of the resource index. The working files of a run under `tmp/research/<run>/`, which are no source of truth.
+- inputs:
+  .claude/skills/research/SKILL.md#Target
+  templates/research-plan.md
+  templates/research.md
+  templates/index.md
+- links:
+  `docs/use/research-a-topic.md`: the command that makes them.
+  `docs/about/the-research.md`: why a plan comes first and what the sections are for.
+  `docs/reference/glossary.md`: every term of the forge in one line.
+- must-not: no explanation; no note, bundle or topic of a project; no skeleton reproduced whole; no position ID from the comments; no vendor or model family beyond the engine words the skeletons show.
+- made: mirrored
+- state: new
 
 ### docs/reference/documentation-map.md
 - title: Documentation map
@@ -2013,30 +2201,30 @@ Paths under `inputs` are relative to the engine root. Every page of the previous
   `docs/reference/glossary.md`: every term of the forge in one line.
 - must-not: no entry of the engine's map quoted; no explanation; no model name; nothing of the agents' conduct beyond the shapes.
 - made: mirrored
-- state: keep
+- state: regenerate
 
 ### docs/reference/verdict-words.md
 - title: Verdict words
-- line: The words and letters the principal types in a walkthrough, exactly.
+- line: The words and letters the principal types in a walkthrough or at a step that needs his word, exactly.
 - kind: reference
 - reader: user
-- says: The words and what each does, as the walkthrough skill owns them: the verdict line `(a)ccept / (m)odify / (q)uestion / (r)eject / (p)ark` and the single letters `a`, `m`, `q`, `r`, `p` as a whole message; `obsolete`; `write`; `??`; a closing word such as "done" for a thought sent in pieces; that no other word of the forge has a letter and every command is typed in full.
+- says: The words and what each does, as the walkthrough skill owns them: the verdict line `(a)ccept / (m)odify / (q)uestion / (r)eject / (p)ark` and the single letters `a`, `m`, `q`, `r`, `p` as a whole message; that every step needing the principal's consent closes with the same line, and a yes that carries a question is `question`; `obsolete`; `write`; `??`; a closing word such as "done" for a thought sent in pieces; that no other word of the forge has a letter and every command is typed in full.
 - inputs:
   .claude/skills/walkthrough/SKILL.md
   CLAUDE.md#Working methods
 - links:
   `docs/use/walk-through-a-list.md`: the procedure the words belong to.
   `docs/reference/glossary.md`: every term of the forge in one line.
-- must-not: no explanation; no reason; nothing of the Working methods beyond `??`, `write` and the closing word of In pieces.
+- must-not: no explanation; no reason; nothing of the Working methods beyond `??`, `write`, the verdict line of Step by step and the closing word of In pieces.
 - made: mirrored
-- state: keep
+- state: regenerate
 
 ### docs/reference/repository-layout.md
 - title: Repository layout
 - line: The layout of the engine root, a thought project and a library, file by file.
 - kind: reference
 - reader: user, extender, evaluator
-- says: The layout block of `CLAUDE.md`, Repository layout, in full: the engine root with `.gitattributes`, the scripts comment (the trial script `forge-check` with its module among them) and `docs/videos/` as the comments have them; a thought project with its project file, `.gitattributes`, `.gitignore`, `threads/`, `ledger.archive.md`, `renders/state.md`, the published companions, `work/` and the renders per language; a library; each comment kept as a fact.
+- says: The layout block of `CLAUDE.md`, Repository layout, in full: the engine root with `.gitattributes`, the scripts comment (the trial script `forge-check` with its module, `forge-engine` and `forge-cite` among them), `tmp/` the working folder and `docs/videos/` as the comments have them; a thought project with its project file, `.gitattributes`, `.gitignore`, `threads/`, `ledger.archive.md`, `renders/state.md`, the published companions, `work/`, the renders per language, and research as single notes or bundles with their plan; a library; each comment kept as a fact.
 - inputs:
   CLAUDE.md#Repository layout
 - links:
@@ -2051,7 +2239,7 @@ Paths under `inputs` are relative to the engine root. Every page of the previous
 - line: Every script with its synopsis, options, forms, what it needs and the command that runs it.
 - kind: reference
 - reader: user, extender
-- says: A roster page: one overview table first (script, what it is for, the command that runs it, what it needs), then one entry per file in `scripts/` from its module docstring: what it does, its synopsis and options, its forms, what it needs installed, where its output lands; for `forge-save.py` the conflict left standing and the refusal of a standing rebase or merge; for `forge-status.py` the registration of the merge driver `ours` and a rebase or merge in progress; for `forge-clone.py` the facts it reports and the hint it prints where git resolves no identity; for `forge-config.py` its bare form, `--register` with `--zdiff3`, `--guard` with `--unset-identity`, `--identity` with `--replace`, and git 2.36 or newer; for `forge-check.py` the mechanical clauses of the light check run as a program, its report in the check contract's shape with a section of what it leaves to reading, run by hand beside the check and by no command, and its module `forge_check.py`; for `forge-ledger.py` the ledger it writes and its `--out` form; for `forge-migrate.py` the dry run, `--apply` and `--undo`, the marks, the refusals and a project outside git; for `forge-report.py` the name it completes; for `md2pptx.py` and `md2docx.py` the two engines; for `md2video.py` the two formats, the pace, `--frame`, where the file lands and that it renews the player page under `docs/videos/`; for `hook-walkthrough.py` and `hook-git.py` the hook each is and what it answers, and the git hook's `--test` and `--judge`; for the three documentation scripts their place in the run of `/document`, `docs-state.py`'s `--previous` form and `docs-check.py`'s one-file scan; the four shared modules each in one line. Below, the portability rule in one line.
+- says: A roster page: one overview table first (script, what it is for, the command that runs it, what it needs), then one entry per file in `scripts/` from its module docstring: what it does, its synopsis and options, its forms, what it needs installed, where its output lands; for `forge-save.py` the conflict left standing and the refusal of a standing rebase or merge; for `forge-status.py` the registration of the merge driver `ours` and a rebase or merge in progress; for `forge-clone.py` the facts it reports and the hint it prints where git resolves no identity; for `forge-config.py` its bare form, `--register` with `--zdiff3`, `--guard` with `--unset-identity`, `--identity` with `--replace`, and git 2.36 or newer; for `forge-check.py` the mechanical clauses of the light check run as a program, its report in the check contract's shape with a section of what it leaves to reading, run by hand beside the check and by no command, and its module `forge_check.py`; for `forge-ledger.py` the ledger it writes and its `--out` form; for `forge-migrate.py` the dry run, `--apply` and `--undo`, the marks, the refusals and a project outside git; for `forge-report.py` the name it completes; for `forge-engine.py` the engine table with its one row, the packet folder, the per-run profile, the verified read-only folder, the envelope, the flags (`--model`, `--effort`, `--timeout`, `--schema`, `--allow-all`, `--sandbox`, `--no-profile`, `--prompt`) and the exit codes, run by `/research`; for `forge-cite.py` the four states of a URL, `--out`, `--timeout`, `--independence` and the exit codes, run by `/research`; for `md2pptx.py` and `md2docx.py` the two engines; for `md2video.py` the two formats, the pace, `--frame`, the section and the name of a player file, where the file lands and that it renews the player page under `docs/videos/`; for `hook-walkthrough.py` and `hook-git.py` the hook each is and what it answers, and the git hook's `--test` and `--judge`; for the three documentation scripts their place in the run of `/document`, `docs-state.py`'s `--previous` form and `docs-check.py`'s one-file scan; the four shared modules each in one line. Below, the portability rule in one line.
 - inputs:
   scripts/forge-save.py
   scripts/forge-pull.py
@@ -2065,6 +2253,8 @@ Paths under `inputs` are relative to the engine root. Every page of the previous
   scripts/forge-migrate.py
   scripts/forge-check.py
   scripts/forge_check.py
+  scripts/forge-engine.py
+  scripts/forge-cite.py
   scripts/forge_repos.py
   scripts/forge_docs.py
   scripts/doc2md.py
@@ -2087,9 +2277,11 @@ Paths under `inputs` are relative to the engine root. Every page of the previous
   `docs/use/read-the-history-of-an-item.md`: the command behind the history script.
   `docs/use/migrate-a-project.md`: the command behind the migration script.
   `docs/use/settle-a-conflict.md`: the step the save script leaves standing.
+  `docs/use/research-a-topic.md`: the command behind the engine and the citation scripts.
   `docs/extend/add-a-script.md`: writing a script of one's own.
+  `docs/extend/add-an-engine.md`: adding a row to the engine table.
   `docs/reference/glossary.md`: every term of the forge in one line.
-- must-not: nothing below a docstring; no example path, slug, name or e-mail of the docstrings (they carry `platform-strategy`, `agentic-platform`, `acme`, `flow-ba`, `fixture`, a `lib-acme` path, a path into the forge project's renders, a forge report's name, a branch name, a person's name and an address in the configuration script's example, replaced by `<slug>`, `<path>`, `<branch>`, `<name>` and `<email>`; `forge`, `main`, `my-idea`, `github.com` as a host placeholder and `example.com` may stand); no date, thread number, plan row, design or brief name from a docstring; no explanation; no version tag from an example.
+- must-not: nothing below a docstring; no example path, slug, name or e-mail of the docstrings (they carry `platform-strategy`, `agentic-platform`, `acme`, `flow-ba`, `fixture`, a `lib-acme` path, a path into the forge project's renders and research, a forge report's name, a branch name, a person's name and an address in the configuration script's example, replaced by `<slug>`, `<path>`, `<branch>`, `<name>` and `<email>`; `forge`, `main`, `my-idea`, `github.com` as a host placeholder and `example.com` may stand); no date, probe, thread number, plan row, design, research or brief name from a docstring; no explanation; no version tag from an example; no vendor, product or model family beyond the row `antigravity`, its tool `agy` and the rows the header names as to be added.
 - made: mirrored
 - state: regenerate
 
@@ -2098,7 +2290,7 @@ Paths under `inputs` are relative to the engine root. Every page of the previous
 - line: Every skeleton in `templates/`, what it is the skeleton of, and which procedure creates from it.
 - kind: reference
 - reader: extender
-- says: A roster page: one overview table first, then one entry per file in `templates/`: what it is the skeleton of, which command or procedure creates from it, and its fields or sections in one line; the `<type>-definition.md` naming rule; the project file's skeleton and what a project without the file is; the thread's skeleton; the attributes template a project's `.gitattributes` is copied from; the map's skeleton; the work specification's skeleton; the screenplay recipe's skeleton; the player page's skeleton, from which the script writes the served page; the readme skeleton's "Pinned facts (not rendered)" section; the fields of a resource index entry and of a bundle index; the decision's Verdict line.
+- says: A roster page: one overview table first, then one entry per file in `templates/`: what it is the skeleton of, which command or procedure creates from it, and its fields or sections in one line; the `<type>-definition.md` naming rule; the project file's skeleton and what a project without the file is; the thread's skeleton; the attributes template a project's `.gitattributes` is copied from; the BRD's skeleton with its `parent:`; the research note's and the research plan's skeletons; the map's skeleton; the work specification's skeleton; the screenplay recipe's skeleton; the player page's skeleton, from which the script writes the served page; the readme skeleton's "Pinned facts (not rendered)" section; the fields of a resource index entry and of a bundle index; the decision's Verdict line.
 - inputs:
   templates/CLAUDE.local.md
   templates/project.md
@@ -2107,6 +2299,7 @@ Paths under `inputs` are relative to the engine root. Every page of the previous
   templates/intent.md
   templates/thread.md
   templates/assignment.md
+  templates/brd.md
   templates/solution-design.md
   templates/work.md
   templates/ledger.md
@@ -2114,6 +2307,8 @@ Paths under `inputs` are relative to the engine root. Every page of the previous
   templates/history.md
   templates/index.md
   templates/index-bundle.md
+  templates/research.md
+  templates/research-plan.md
   templates/recipe.md
   templates/recipe-readme.md
   templates/recipe-release-notes.md
@@ -2129,11 +2324,12 @@ Paths under `inputs` are relative to the engine root. Every page of the previous
 - links:
   `docs/extend/what-it-is-made-of.md`: where the templates sit in the whole.
   `docs/reference/documentation-map.md`: the map's fields in full.
+  `docs/reference/research-bundle.md`: the research note and plan in full.
   `docs/about/the-work-product.md`: the kind the work skeleton serves.
   `docs/reference/glossary.md`: every term of the forge in one line.
-- must-not: no skeleton reproduced whole; no explanation; not the readme skeleton's fixed closing sentence; nothing of the player page's styles or code beyond its head comment; no position or design ID from the comments.
+- must-not: no skeleton reproduced whole; no explanation; not the readme skeleton's fixed closing sentence; nothing of the player page's styles or code beyond its head comment; no position or design ID from the comments; no standard named in the BRD skeleton's comments beyond the public one it names.
 - made: mirrored
-- state: keep
+- state: regenerate
 
 ### docs/reference/configuration.md
 - title: Configuration
@@ -2166,7 +2362,7 @@ Paths under `inputs` are relative to the engine root. Every page of the previous
 - line: Every term of the forge in one line, with the file that defines it.
 - kind: reference
 - reader: user, extender, evaluator
-- says: The terms in one line each, with the file that defines each: principal, recipients, Claude as cognitive extension, session, harness, document, artefact, brief, intent, position, fact, thread, thread file, rejected direction, assignment, solution design, layer, definition, template, Map, elicitation, walkthrough, verdict, round, write, history companion, record, record of state, archive, ledger, made at read time, Waiting on principal, Reports, decision, Verdict line, source, bundle, growing bundle, extract, research, resource index, Role, project file, kind, recipe, render, plain file, published file, published companion, format file, genre, screenplay, player page, public folder, primary render, translation, provenance, stale, state render, work product, specification, critic, lens, challenger, persona, check, finding, challenge, contract, Lens section, subagent, isolation, project, thought project, library, dependency, project outside git, engine, instance, instance fact, session model, save, release, pull, migration, shape of a project, major, tag, branch, way of merging, derived file, merge driver `ours`, step of a conflict, the hook's ask, registration of the merge driver, integrator, contributor, immutable, mined, documentation, documentation map, page, index, mirrored, derived, how-to, explanation, reference, pinned fact, Unowned, guarded command, working method, prime directive.
+- says: The terms in one line each, with the file that defines each: principal, recipients, Claude as cognitive extension, session, harness, document, artefact, brief, intent, position, fact, thread, thread file, rejected direction, assignment, BRD, business requirement, use case, dependency, non-functional requirement, parent of an item, roster of areas, touched area, provenance map, solution design, layer, definition, template, Map, elicitation, walkthrough, verdict, round, write, history companion, record, record of state, archive, ledger, made at read time, Waiting on principal, Reports, decision, Verdict line, source, bundle, growing bundle, extract, research, research note, research bundle, plan, card, perspective, disconfirming query, stop rule, quick and deep, synthesis, citation check, independence of engines, engine in its two senses (the forge's engine; another engine of a model family, a row of the engine table), second engine, packet, run folder, profile, envelope, working folder, resource index, Role, project file, kind, recipe, render, plain file, published file, published companion, format file, genre, screenplay, player page, public folder, primary render, translation, provenance, stale, state render, work product, specification, critic, lens, challenger, persona, check, finding, challenge, contract, Lens section, subagent, isolation, project, thought project, library, dependency, project outside git, instance, instance fact, session model, save, release, pull, migration, shape of a project, major, tag, branch, way of merging, derived file, merge driver `ours`, step of a conflict, the hook's ask, registration of the merge driver, integrator, contributor, immutable, mined, documentation, documentation map, page, index, mirrored, derived, how-to, explanation, reference, pinned fact, Unowned, guarded command, working method, prime directive.
 - inputs:
   CLAUDE.md
   projects/forge/10-intent.md#POS.0120
@@ -2185,13 +2381,22 @@ Paths under `inputs` are relative to the engine root. Every page of the previous
   projects/forge/10-intent.md#POS.1610
   projects/forge/10-intent.md#POS.1740
   projects/forge/10-intent.md#POS.1770
+  projects/forge/10-intent.md#POS.1800
+  projects/forge/10-intent.md#POS.1830
+  projects/forge/10-intent.md#POS.1860
+  projects/forge/10-intent.md#POS.1870
+  projects/forge/10-intent.md#POS.1880
+  projects/forge/10-intent.md#POS.1890
+  projects/forge/10-intent.md#POS.1900
   projects/forge/10-intent.md#Elicitation
   .claude/skills/forge/states/brief.md
   .claude/skills/forge/states/intent.md
   .claude/skills/forge/states/assignment.md
+  .claude/skills/forge/states/brd.md
   .claude/skills/forge/states/solution-design.md
   .claude/skills/walkthrough/SKILL.md
   .claude/skills/ingest/SKILL.md
+  .claude/skills/research/SKILL.md
   .claude/skills/render/SKILL.md
   .claude/skills/publish/SKILL.md
   .claude/skills/document/SKILL.md
@@ -2209,46 +2414,62 @@ Paths under `inputs` are relative to the engine root. Every page of the previous
   templates/decisions.md
   templates/project.md
   templates/thread.md
+  templates/brd.md
+  templates/research.md
+  templates/research-plan.md
   templates/recipe-readme.md#Pinned facts (not rendered)
+  scripts/forge-engine.py
+  scripts/forge-cite.py
+  tmp/README.md
 - links:
   `docs/about/what-it-is-and-is-not.md`: the forge in prose.
-- must-not: no term invented; no definition longer than a sentence; no name, handle or instance value; no address; no term of a mechanism the forge does not have (landing, `+` token, a merge driver of the forge's own for record files, `/merge`, worktree, ID blocks).
+- must-not: no term invented; no definition longer than a sentence; no name, handle or instance value; no address; no term of a mechanism the forge does not have (landing, `+` token, a merge driver of the forge's own for record files, `/merge`, worktree, ID blocks); no vendor, product or model family beyond the row `antigravity`; no library path or company the BRD's definition cites.
 - made: derived
-- evidence: each term is defined where a file first defines it: the roles, the document kinds, the chain, the reviewers, the ledger, persistence (the door, the hook's ask, the step of a conflict, the registration of the merge driver `ours`, a project outside git), the commands in CLAUDE.md (whole, since the terms span its sections); the artefacts in their definitions, the thread file in the intent's definition and its template; position, fact, thread, rejection in POS.0120 and POS.0230; elicitation, Map, definition in the Elicitation group; walkthrough, verdict, round, write in the walkthrough skill; growing bundle in the ingest skill; render, provenance, stale, primary render, translation in the render skill and POS.1550; published companion in the publish skill; the work product and its specification in POS.1520 and the work skill; screenplay, format file, player page, public folder in POS.1530 and POS.1540; way of merging and derived file in POS.1560; integrator and contributor in POS.1770; the states against the origin in the pull skill; the migration and the shape of a project in the migrate skill, the project file skeleton and POS.1740; the project file and kind in POS.1590 and its skeleton; made at read time, record of state, Waiting on principal, Reports and the archive in POS.1600, POS.1610 and the ledger and history skeletons; the Verdict line in the decisions skeleton; lens, persona, check, finding, challenge, contract, Lens section, isolation in the three contracts; session, harness, instance, subagent, how-to, explanation, reference, mirrored, derived in the docs contract; the ledger's state words in its template; engine, instance fact in POS.0950; major in POS.0300; guarded command in POS.1090; documentation, map, page, index in POS.1450, the `/document` skill and the two agents; pinned fact in the readme skeleton's section. A term no file defines is left out.
+- evidence: each term is defined where a file first defines it: the roles, the document kinds, the chain, the reviewers, the ledger, persistence (the door, the hook's ask, the step of a conflict, the registration of the merge driver `ours`, a project outside git), the commands in CLAUDE.md (whole, since the terms span its sections); the artefacts in their definitions, the thread file in the intent's definition and its template; position, fact, thread, rejection in POS.0120 and POS.0230; the BRD, its four prefixes, the parent, the roster of areas, the touched areas and the provenance map in POS.1800, POS.1830, the BRD's definition and its skeleton; elicitation, Map, definition in the Elicitation group; walkthrough, verdict, round, write in the walkthrough skill; growing bundle in the ingest skill; research note, research bundle, plan, card, perspective, disconfirming query, stop rule, quick and deep, synthesis in the research skill, POS.1860 and the two research skeletons; citation check in POS.1890 and `forge-cite.py`'s header; independence, second engine, packet, run folder, profile, envelope in POS.1870, POS.1880 and `forge-engine.py`'s header; working folder in POS.1900 and `tmp/README.md`; render, provenance, stale, primary render, translation in the render skill and POS.1550; published companion in the publish skill; the work product and its specification in POS.1520 and the work skill; screenplay, format file, player page, public folder in POS.1530 and POS.1540; way of merging and derived file in POS.1560; integrator and contributor in POS.1770; the states against the origin in the pull skill; the migration and the shape of a project in the migrate skill, the project file skeleton and POS.1740; the project file and kind in POS.1590 and its skeleton; made at read time, record of state, Waiting on principal, Reports and the archive in POS.1600, POS.1610 and the ledger and history skeletons; the Verdict line in the decisions skeleton; lens, persona, check, finding, challenge, contract, Lens section, isolation in the three contracts; session, harness, instance, subagent, how-to, explanation, reference, mirrored, derived in the docs contract; the ledger's state words in its template; engine, instance fact in POS.0950; major in POS.0300; guarded command in POS.1090; documentation, map, page, index in POS.1450, the `/document` skill and the two agents; pinned fact in the readme skeleton's section. A term no file defines is left out.
 - state: regenerate
 
 ## Unowned
 
 - Whether the forge runs on Linux and macOS as a verified fact, needed by `docs/start/install.md`, `docs/about/persistence-in-git.md` and `docs/extend/add-a-script.md`: CLAUDE.md, POS.0830 and SOL.0620 say it is a writing rule until verified. The pages state the rule and no claim.
+- How the command-line tool of a second engine (`agy`, the row `antigravity`) is installed and signed in: needed by `docs/start/install.md` and `docs/use/research-a-topic.md`. The engine script's header gives the tool's name, the version floor and that the login is made once in the engine's own tool; no file gives an install line. The pages name the tool, the floor and the login and leave the install out.
 - What `/document <slug>` reads for a project other than the engine beyond the planner's paragraph, and in which language a project's pages are written when its artefacts are not English: needed by `docs/about/the-documentation.md` and `docs/use/generate-the-documentation.md`, which say nothing of it.
 - What `/forge <state>` does on a project of kind `library`: not needed by any page; recorded so that no page invents it.
 - What Claude Code is beyond "the engine runs in Claude Code": `docs/start/what-it-is.md` says what the Essence says and nothing beyond it.
 - What document kind the player page `docs/videos/index.html` is: no row of CLAUDE.md, Document kinds names it; `docs/about/the-screenplay-and-its-player.md` says it is a file of the engine written by the script and names no kind.
-- The sections and the order of the course of videos beyond the alphabet of file names: the pinned facts list the videos in the course's order, SOL.0660 orders the folder by file names; `docs/about/the-screenplay-and-its-player.md` and `docs/use/make-a-video-from-a-recipe.md` say "in the order of their names" and no more.
+- What document kind a file of the working folder `tmp/` is: CLAUDE.md, Document kinds has no row for it; `docs/extend/what-it-is-made-of.md` says what POS.1900 and `tmp/README.md` say (no source of truth) and names no kind.
 - How the tag before a migration is taken: the migrate skill names "the tag before the migration" as the way back after the save, POS.1740 and SOL.0800 say it is taken per project immediately before `/migrate`, the way back being the principal's hand through git; no skill takes the tag. `docs/use/migrate-a-project.md` names the tag as the way back and nothing more.
 - How a merge by the integrator is started on his clone, and which command a merge request is fetched with: POS.1770 and POS.1750 say it is fetched and settled on a clone through the step of a conflict; no skill and no script describes the fetch or the start of the merge beyond the hook asking `git merge <branch>`. `docs/about/working-together.md` and `docs/use/settle-a-conflict.md` describe the step and not the start.
+- What the BRD's roster of areas holds when an instance has one, and where it lies beyond "a library document cited by path": the BRD's definition names one instance's library path as "for now"; `docs/about/the-brd.md` and `docs/use/write-a-brd.md` describe the roster as the instance's and name no path.
 
 ## Did not fit
 
-- The previous map's Did-not-fit items on the operating layer are resolved on disk and leave this list: the `/forge` skill (step 3) now takes whether a project is under git from the status script and `check-project` no longer checks a `.git` (POS.0550); the clone script's hint names `python scripts/forge-config.py --identity <host> <name> <email>` in place of absolute paths; the spinoff skill writes the mining record in place of the Mined column; `forge-check` with its module is named in the scripts comment of CLAUDE.md, Repository layout. The entries that read those files say what the files now say (`docs/use/bring-in-an-existing-project.md`, `docs/use/see-where-a-project-stands.md`, `docs/use/spin-off-a-group.md`, `docs/reference/scripts.md`, `docs/reference/repository-layout.md`).
-- The previous map's Unowned item on a version given twice is resolved: POS.1640 no longer names the report, POS.1790 says git finds it as a conflict of the header's `version:` line, and `templates/ledger.md` (Reports) agrees. `docs/use/settle-a-conflict.md` and `docs/about/working-together.md` say how it is found; both forbid a claim that the ledger reports it.
-- The setup skill, CLAUDE.md, Persistence and SOL.0150 now speak of "the merge driver `ours`" in the singular where they spoke of "the merge drivers"; the entries of the setup, persistence, configuration, scripts and glossary pages say "the merge driver `ours` and the git settings it needs". The forge has no driver of its own for record files (REJ.0340), and the `must-not` fields that forbid it now say "for record files".
-- The mechanisms of the brief `collaboration` that earlier maps forbade as "not built" (the forge's own driver for record files, `/merge`, the worktree, the version as a landing, the blocks of IDs, the conversion to one sentence per line) are rejected directions (REJ.0330 to REJ.0380). Entries whose text did not otherwise change keep their old `must-not` wording, which is still true.
+- The BRD's definition (`.claude/skills/forge/states/brd.md`, its head) says that what the BRD is to achieve and why is the brief `00-brief-brd.md` until its position is written after the first trials; the intent now carries POS.1800 to POS.1850 and SOL.0850 marks the BRD built. The pages take the definition's wording and the positions' reasons; no brief is an input.
+- The BRD's definition (Inputs) names one instance's library by a path that carries a company's name, as the roster "for now"; POS.1800 names a colleague's fork, the company's content and the group's standard. Every entry that reads them forbids the path, the company, the fork and the group's standard; the public standards POS.1800 names may stand on `docs/about/the-brd.md`.
+- "Engine" has two senses on disk: the forge's engine (CLAUDE.md throughout) and another engine of a model family, a row of the table of `scripts/forge-engine.py` (the research skill, POS.1870, POS.1880); `md2pptx.py` and `md2docx.py` use "engine" a third way, for pandoc and claude. The glossary gives the senses apart; `docs/about/another-model-family.md`, `docs/use/research-a-topic.md` and `docs/extend/add-an-engine.md` say "a second engine" or "another engine" at their first use.
+- POS.0800 names vendors and a model family for the reviewers on another engine; POS.1880 names the one row's vendor family and the rows to add. The pages name the row `antigravity` and its tool `agy` as the operating layer has them and forbid every other vendor, product and family.
+- The headers of `scripts/forge-engine.py` and `scripts/forge-cite.py` carry dates, probes, counts of rewritten notes and paths into the forge project's research; the positions POS.1870 to POS.1890 cite the RFP research and a brief. The pages keep the mechanisms and forbid the rest.
+- `use/` never names a subagent or a model; `docs/use/research-a-topic.md` says each card is searched apart from the conversation and that Claude states the models and the number of runs before it dispatches, because the skill's steps say so; no agent type and no model name reaches the page. The same holds for `docs/use/generate-the-documentation.md`.
+- `projects/forge/recipes/release-notes.md#Template` would be cut at once by the level-one heading the Template carries, so the part would be empty for the hash and for the writer; `docs/use/upgrade-the-engine.md` now cites the recipe's Instructions, which give the order of the groups with Action required first.
+- The pinned facts list eight videos of the course with the page each pairs with; the player page groups the videos by the section each file names (render skill step 7, `md2video.py`). The pages say the videos are grouped by section and name neither the sections nor the order of the forge's own course.
+- The previous map's Did-not-fit items on the operating layer remain resolved on disk: the `/forge` skill takes whether a project is under git from the status script; the clone script's hint names `python scripts/forge-config.py --identity <host> <name> <email>`; the spinoff skill writes the mining record; `forge-check` with its module is named in the scripts comment of CLAUDE.md, Repository layout.
+- The setup skill, CLAUDE.md, Persistence and SOL.0150 speak of "the merge driver `ours`" in the singular; the entries say "the merge driver `ours` and the git settings it needs". The forge has no driver of its own for record files (REJ.0340), and the `must-not` fields that forbid it say "for record files".
+- The mechanisms of the brief `collaboration` that earlier maps forbade as "not built" are rejected directions (REJ.0330 to REJ.0380). Entries whose text did not otherwise change keep their old `must-not` wording, which is still true.
 - POS.1110 writes the branch command as `forge-branch <name>`; the script takes `<slug> [branch]`. The operating layer wins.
 - SOL.0220 says the sweep of `/ingest` tells a changed file against the ledger date; the ingest skill says against the Date of the index entry. The operating layer wins.
 - CLAUDE.md, Repository layout names `forge-check` as "the trial of THR.0530"; Portability lists four shared modules and not `forge_check.py`, which serves `forge-check.py` alone. No command runs the script. `docs/reference/scripts.md` lists both as the docstrings describe them and says no command runs it; `docs/reference/repository-layout.md` keeps the comment without the thread number; `docs/about/the-check.md` does not present the program as a check.
-- The solution design's head (How the parts work together) now lists POS.1780 among the positions no part answers; `docs/about/how-a-thought-travels.md` and `docs/extend/what-it-is-made-of.md` read the head and keep that list off the page.
-- The scripts' header says an item is found by the line that carries `**POS.1450**`; titled items carry the ID and a title in bold (`**SOL.0840 The step of a conflict.**`). `scripts/docs_map.py` matches the ID followed by `**` or a space, so the map cites titled items by ID.
+- The solution design's head (How the parts work together) lists POS.0600, POS.0780, POS.0980, POS.1380 and POS.1780 among the positions no part answers; `docs/about/how-a-thought-travels.md` and `docs/extend/what-it-is-made-of.md` read the head and keep that list off the page.
+- The scripts' header says an item is found by the line that carries `**POS.1450**`; titled items carry the ID and a title in bold (`**SOL.0840 The step of a conflict.**`). `scripts/docs_map.py` matches the ID followed by `**` or a space, so the map cites titled items by ID. The bold labels of a definition (`**Inputs.**`, `**Requirement style.**`, `**Target.**`) are cited by their label.
 - The contract allows no address but the target's public home; the start pages carry the course page of the teaching videos, which the pinned facts name as the engine's own repository served by GitHub Pages. Kept on the start pages from the pinned facts and forbidden on every other page.
 - `docs/start/what-it-is.md` is an explanation in a section the outline marks how-to; kept in `start/` with `kind: explanation`.
 - The skeleton's heading `# Documentation map — <target>` carries a long dash; this map's heading carries a spaced hyphen.
-- `use/` never names a subagent or a model; `docs/use/generate-the-documentation.md` says "a planner" and "a writer" because the skill's steps are nothing without them; no agent file and no model name reaches the page. `docs/use/settle-a-conflict.md` names the hook because the finishing commands are put to the principal by it; no hook text reaches the page.
+- `docs/use/settle-a-conflict.md` names the hook because the finishing commands are put to the principal by it; no hook text reaches the page.
 - The release-notes genre file says the forge itself reads the intent alone, while the forge's recipe reads the solution design's history as well; the pages leave the parenthesis out.
 - CLAUDE.md, Isolated reviewers speaks of three contracts; the documentation agents share a fourth and are not reviewers; the pages say so.
 - The owning project's recipes carry facts no page may carry: the readme recipe's author line with a name and an e-mail, the contributing recipe's channels as addresses and the author's profile; the pages that read either name the section they read and keep those off the page. The pitch recipes and `ba-intro` own nothing a page needs.
-- The scripts' docstrings carry example slugs, paths, a branch name, a person's name and an e-mail address (`platform-strategy`, `agentic-platform`, `acme`, `lib-acme`, `flow-ba`, `fixture`, `work-release`, a path into the forge project's renders, a forge report name, a name and address in `forge-config.py`'s example), and the migration script's header names the brief `collaboration` and "the first release"; the save, status, hook and configuration headers name plan rows, threads and dates. The pages replace them by placeholders and say "a release that changes the shape of files".
+- The scripts' docstrings carry example slugs, paths, a branch name, a person's name and an e-mail address (`platform-strategy`, `agentic-platform`, `acme`, `lib-acme`, `flow-ba`, `fixture`, `work-release`, a path into the forge project's renders and research, a forge report name, a name and address in `forge-config.py`'s example), and the migration script's header names the brief `collaboration` and "the first release"; the save, status, hook and configuration headers name plan rows, threads and dates. The pages replace them by placeholders and say "a release that changes the shape of files".
 - The intent's positions on merging (POS.1560, POS.1690, POS.1750, POS.1770, POS.1790) cite a real project's merges, the fixture, challenges, decisions, plan rows and a GitLab default; `docs/about/working-together.md` takes the rules and reasons and forbids the rest in `must-not`.
 - The forge intent names its first principal by handle in POS.0005, POS.0990 names the licence holder; the briefs carry an `author` field; every page that reads the intent has "no name, no handle" in its `must-not` or reads no such item.
-- `00-brief.md` says no brief exists for the forge; the other briefs were read for orientation only and their substance stands in the intent, so the reasons of the `about/` pages come from the intent and no brief is an input. The threads, `decisions.md` and the research index were read for orientation and are the input of no page; the pull skill reads `RELEASE-NOTES.md`, a render, which the map never names as an input.
+- `00-brief.md` says no brief exists for the forge; the other briefs (`brd` and `research` among them) were read for orientation only through what the intent mined from them, so the reasons of the `about/` pages come from the intent and no brief is an input. The threads, `decisions.md` and the research index were read for orientation and are the input of no page; the pull skill reads `RELEASE-NOTES.md`, a render, which the map never names as an input.
+- `tmp/` holds working files of other projects and of earlier runs; none was read beyond `tmp/README.md`, which is the folder's own description, and the previous map, which the task named.
 - The reasons the writers wanted and no file records stay unrecorded; the entries say the page says the reason is not recorded.
 - The renders, the README, `CONTRIBUTING.md`, `RELEASE-NOTES.md`, `docs/` and `docs/videos/` of the target were not read, as the definition says.

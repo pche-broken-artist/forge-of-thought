@@ -10,8 +10,8 @@ WHAT IT DOES
     Read-only, changes nothing. First the global configuration file
     git actually reads, which /setup needs to know, and the
     registration of the merge driver ours in it: "ok", or the keys that
-    are missing (`merge.ours.driver`, `rebase.backend`,
-    `merge.renormalize`, as /setup registers them) - an unregistered
+    are missing (the required keys of
+    `forge-config.py --register`, its header) - an unregistered
     clone silently falls back to a conflict on the derived files
     (SOL.0740 of the forge solution design). Then, for the
     engine and each projects/<slug>: unsaved changes (or "clean"), the
