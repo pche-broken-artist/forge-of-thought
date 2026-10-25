@@ -1682,18 +1682,6 @@ upgraded through `forge-pull` and kept apart from private work.
 - The public face: repository `forge-of-thought`, licence CC BY 4.0, the
   author credited (POS.0990, LICENSE). For you: you may use and share
   the engine under attribution.
-
-### Changed
-- The forge project's locked brief and both CTO challenges rewritten
-  once for the public boundary (POS.0980). For you: nothing
-  company-specific reaches you.
-- CLAUDE.md, `.gitignore`, scripts, templates and commands rebuilt for
-  the split (readme recipe 0.25). For you: the engine you clone works
-  stand-alone.
-
-## 2.21 - 2026-08-29
-
-### Added
 - The engine/projects split: nested repositories in a gitignored
   `projects/*`, scripts recognising a project by its `.git`, upgrade by
   `forge-pull`, a git tag per approved major (POS.0940). For you: you
@@ -1706,152 +1694,26 @@ upgraded through `forge-pull` and kept apart from private work.
 - Project kind `thought | library` (POS.0960); the library project with
   its knowingly unguarded cross-repository citation (POS.0970). For you:
   you can keep shared material in `lib-<name>` and cite it by path.
-
-### Changed
-- A bare `/ingest` reports changed sources with a question (POS.0180);
-  the model lives in `settings.local.json` (POS.0930); a deck template
-  is named by path (POS.0740). For you: changed sources are noticed, the
-  model is yours to set, templates come from a library.
-
-### Removed
-- `local/` (POS.0750, REJ.0140). For you: user-local files move to a
-  library project.
-
-### Rejected
-- Submodules, subtree, a template repository, copying the engine,
-  plugin-only distribution (REJ.0150). For you: the split stays nested
-  repositories and nothing else.
-
-## 2.20 - 2026-08-29
-
-### Added
 - Brief `00-brief-public-engine.md` locked at 1.0 after the first CTO
   challenge of a brief (CHL.0070 to 0130). For you: you can read how the
   public engine was decided.
-
-### Fixed
-- Reviewers no longer pin a model; POS.0400 says "isolated" (POS.0530,
-  POS.0930). For you: a reviewer runs on your session model.
-
-### Rejected
-- Path-filtered history for the public engine; a fresh history instead,
-  the company copy read-only (DEC.0080). For you: the public repository
-  starts at 3.0.
-
-## 2.19 - 2026-08-29
-
-### Changed
-- A brief's free form means no required structure; a structured summary
-  is stored as shown (POS.0110, `/forge brief`). For you: you may write
-  a brief with headings, tables and use cases, and what you paste stays
-  as pasted.
-
-## 2.18 - 2026-08-29
-
-### Added
 - Research notes on framework distribution, Claude Code packaging and
   the engine/projects git separation (`research/2026-08-29-*.md`). For
   you: you can read what the field does and what Claude Code allows.
-
-## 2.17 - 2026-08-27
-
-### Changed
-- One model for the whole forge; the agents `model: inherit` (POS.0930).
-  For you: everything runs on the session model you chose.
-- `/render` generates in an isolated subagent (POS.0930). For you: a
-  render is faster and cheaper on any model.
-
-### Rejected
-- Per-command pinning to a faster model; a per-recipe `model:` deferred
-  (POS.0930). For you: no command silently runs on a weaker model.
-
-## 2.16 - 2026-08-27
-
-### Fixed
-- A brief is immutable from its lock, other immutables from creation,
-  carried through CLAUDE.md, the commands, the templates and the
-  reviewers (POS.0320, POS.0060). For you: every file says the same
-  about immutability.
-
-## 2.15 - 2026-08-27
-
-### Changed
-- `/forge brief` runs under the principal's moderation; Claude clarifies
-  and correlates with reality through `/research` and `/ingest`, never
-  adds content (POS.0110). For you: in a brief conversation you steer
-  and nothing enters without your word.
-
-## 2.14 - 2026-08-27
-
-### Added
 - Briefs redefined: draft while written, locked at 1.0; `/forge brief
   [name]`; more than one brief per project; the ledger's Briefs table
   with a mining state (POS.0110, POS.0920, `templates/ledger.md`). For
   you: you can compose a brief in the forge and add later briefs to a
   running project.
-
-### Changed
-- CLAUDE.md, `templates/ledger.md`, the `/forge` map, `/forge intent`,
-  `/new-project` and `/check` aligned to the brief's states. For you:
-  every command knows a draft brief from a locked one.
-
-## 2.13 - 2026-08-27
-
-### Changed
-- The portability rule in CLAUDE.md Persistence; the Windows-flavoured
-  examples in `doc2md.ps1` and `md2pptx.ps1` neutralised (POS.0830). For
-  you: the scripts' help reads the same on Linux and macOS.
-
-### Fixed
-- The heading "Two isolated reviewers"; the ledger header no longer
-  calls the ledger the only rewritten file (FND.0060, FND.0080). For
-  you: nothing to do.
-
-## 2.12 - 2026-08-27
-
-### Added
 - Working methods named in CLAUDE.md: Walkthrough, Propose never decide,
   Elicitation interview, Draft early, Reflect back, Intent-first,
   Recommend do not push (POS.0850 to 0910). For you: you can invoke any of
   them in a word.
-
-### Changed
-- `/critique` and `/challenge` end by offering a walkthrough; the README
-  gains a Working methods section (readme recipe 0.17). For you: a
-  review ends with the first item in front of you.
-
-### Removed
-- `/resolve`, without alias (POS.0850). For you: you give verdicts
-  inside a walkthrough.
-
-## 2.11 - 2026-08-27
-
-### Added
 - Resource indexes: every `sources/` and `research/` carries a freely
   rewritten `00-INDEX.md`, written by `/ingest` and `/research`,
   verified by `/check` (POS.0840, `templates/index.md`). For you: you
   know what a project's sources and research are for without re-reading
   them.
-
-### Changed
-- The ledger reduced to registration: Purpose leaves the Sources table,
-  a Research table is added (POS.0160, POS.0180). For you: what a
-  resource is for lives in one place, the index.
-
-## 2.10 - 2026-08-25
-
-Nothing for the user of the engine.
-
-## 2.9 - 2026-08-25
-
-### Changed
-- The forge runs beyond Windows: `scripts/` is cross-platform PowerShell
-  7 with nothing Windows-only (POS.0830). For you: you can run the forge
-  on Linux and macOS.
-
-## 2.8 - 2026-08-18
-
-### Added
 - Five positions from the first CTO challenge: the forge ends where its
   owner is satisfied (POS.0780); isolation is not independence
   (POS.0790); challengers on another model family to come (POS.0800);
@@ -1859,26 +1721,59 @@ Nothing for the user of the engine.
   wording (POS.0810); artefacts do not expire with the conventions
   (POS.0820). For you: reviewer agreement is never sold to you as
   validation, and your old artefacts stay valid.
+- `scripts/forge-status.ps1`, read-only; `forge-save.ps1` prints the
+  committed file summary (POS.0550). For you: you can see unsaved
+  changes without touching git, and a save shows what it committed.
+- `/recipe <genre>`: guided composition of a render recipe; first genre
+  `presentation` (POS.0770, `templates/recipe-presentation.md`). For
+  you: you compose a recipe by interview instead of from a blank
+  skeleton.
+- A render may serve as an input of another render (POS.0710). For you:
+  a slide of yours can cite an architecture picture.
+- `scripts/md2pptx.ps1` turns a Markdown deck render into a `.pptx`
+  through headless Claude Code (POS.0740). For you: you can hand over a
+  PowerPoint file without leaving the forge.
 
 ### Changed
+- The forge project's locked brief and both CTO challenges rewritten
+  once for the public boundary (POS.0980). For you: nothing
+  company-specific reaches you.
+- CLAUDE.md, `.gitignore`, scripts, templates and commands rebuilt for
+  the split (readme recipe 0.25). For you: the engine you clone works
+  stand-alone.
+- A bare `/ingest` reports changed sources with a question (POS.0180);
+  the model lives in `settings.local.json` (POS.0930); a deck template
+  is named by path (POS.0740). For you: changed sources are noticed, the
+  model is yours to set, templates come from a library.
+- A brief's free form means no required structure; a structured summary
+  is stored as shown (POS.0110, `/forge brief`). For you: you may write
+  a brief with headings, tables and use cases, and what you paste stays
+  as pasted.
+- One model for the whole forge; the agents `model: inherit` (POS.0930).
+  For you: everything runs on the session model you chose.
+- `/render` generates in an isolated subagent (POS.0930). For you: a
+  render is faster and cheaper on any model.
+- `/forge brief` runs under the principal's moderation; Claude clarifies
+  and correlates with reality through `/research` and `/ingest`, never
+  adds content (POS.0110). For you: in a brief conversation you steer
+  and nothing enters without your word.
+- CLAUDE.md, `templates/ledger.md`, the `/forge` map, `/forge intent`,
+  `/new-project` and `/check` aligned to the brief's states. For you:
+  every command knows a draft brief from a locked one.
+- The portability rule in CLAUDE.md Persistence; the Windows-flavoured
+  examples in `doc2md.ps1` and `md2pptx.ps1` neutralised (POS.0830). For
+  you: the scripts' help reads the same on Linux and macOS.
+- `/critique` and `/challenge` end by offering a walkthrough; the README
+  gains a Working methods section (readme recipe 0.17). For you: a
+  review ends with the first item in front of you.
+- The ledger reduced to registration: Purpose leaves the Sources table,
+  a Research table is added (POS.0160, POS.0180). For you: what a
+  resource is for lives in one place, the index.
+- The forge runs beyond Windows: `scripts/` is cross-platform PowerShell
+  7 with nothing Windows-only (POS.0830). For you: you can run the forge
+  on Linux and macOS.
 - `/save` reports the material delta of regenerated renders (POS.0810).
   For you: you rule on what a re-render changed before it is committed.
-
-### Rejected
-- The growth path as a contradiction (CHL.0030, DEC.0060); the meta-work
-  as a budgeted work stream (CHL.0060, DEC.0070). For you: nothing
-  changes.
-
-## 2.7 - 2026-08-17
-
-### Fixed
-- README re-rendered at the current version; the decisions header
-  updated; DEC.0050 appended (FND.0010 to 0040). For you: the README title
-  matches the version you have.
-
-## 2.6 - 2026-08-17
-
-### Changed
 - Release notes continuously current: an Unreleased section on top,
   regenerated at every `/save` of the core (POS.0730, release-notes
   recipe 0.2). For you: the release notes no longer end at the last
@@ -1886,64 +1781,54 @@ Nothing for the user of the engine.
 - The README restructured for scannability (readme recipe 0.12 to 0.15).
   For you: you find the challenge, the capabilities and the reference in
   that order.
-
-## 2.5 - 2026-08-17
-
-### Added
-- `scripts/forge-status.ps1`, read-only; `forge-save.ps1` prints the
-  committed file summary (POS.0550). For you: you can see unsaved
-  changes without touching git, and a save shows what it committed.
-
-### Changed
 - `/save` determines its scope through `forge-status`; the scripts-only
   door covers reading state (POS.0550). For you: no command calls git
   directly, reading included.
-
-## 2.4 - 2026-08-17
-
-### Changed
 - An assignment assigns, it does not solve: the enumerated ban of
   delivery apparatus dropped (POS.0210, CLAUDE.md directive 8, `/forge
   assignment`). For you: you may put a stakeholder matrix or an impact
   analysis into an assignment where it sets direction.
-
-## 2.3 - 2026-08-17
-
-### Changed
 - The README overhauled after an external critique (readme recipe 0.10).
   For you: the README tells you how to obtain the forge and shows a real
   requirement.
 - The forge dictates only the output language; the conversation language
   is per-instance (POS.0060). For you: your conversation language never
   appears in a render.
-
-## 2.2 - 2026-08-17
-
-### Added
-- `/recipe <genre>`: guided composition of a render recipe; first genre
-  `presentation` (POS.0770, `templates/recipe-presentation.md`). For
-  you: you compose a recipe by interview instead of from a blank
-  skeleton.
-- A render may serve as an input of another render (POS.0710). For you:
-  a slide of yours can cite an architecture picture.
-
-### Changed
 - `md2pptx.ps1` gains `-Model` (POS.0740). For you: you choose the model
   for a deck conversion.
 
-## 2.1 - 2026-08-17
+### Removed
+- `local/` (POS.0750, REJ.0140). For you: user-local files move to a
+  library project.
+- `/resolve`, without alias (POS.0850). For you: you give verdicts
+  inside a walkthrough.
 
-### Added
-- `scripts/md2pptx.ps1` turns a Markdown deck render into a `.pptx`
-  through headless Claude Code (POS.0740). For you: you can hand over a
-  PowerPoint file without leaving the forge.
-- `local/` for user-local files, gitignored; `.potx` templates by bare
-  name (POS.0750; removed at 2.21). For you: your deck templates had a
-  home outside git.
+### Fixed
+- Reviewers no longer pin a model; POS.0400 says "isolated" (POS.0530,
+  POS.0930). For you: a reviewer runs on your session model.
+- A brief is immutable from its lock, other immutables from creation,
+  carried through CLAUDE.md, the commands, the templates and the
+  reviewers (POS.0320, POS.0060). For you: every file says the same
+  about immutability.
+- The heading "Two isolated reviewers"; the ledger header no longer
+  calls the ledger the only rewritten file (FND.0060, FND.0080). For
+  you: nothing to do.
+- README re-rendered at the current version; the decisions header
+  updated; DEC.0050 appended (FND.0010 to 0040). For you: the README title
+  matches the version you have.
 
-### Changed
-- Course set for splitting the engine from private projects (POS.0760,
-  THR.0130). For you: the engine will become shareable.
+### Rejected
+- Submodules, subtree, a template repository, copying the engine,
+  plugin-only distribution (REJ.0150). For you: the split stays nested
+  repositories and nothing else.
+- Path-filtered history for the public engine; a fresh history instead,
+  the company copy read-only (DEC.0080). For you: the public repository
+  starts at 3.0.
+- Per-command pinning to a faster model; a per-recipe `model:` deferred
+  (POS.0930). For you: no command silently runs on a weaker model.
+- The growth path as a contradiction (CHL.0030, DEC.0060); the meta-work
+  as a budgeted work stream (CHL.0060, DEC.0070). For you: nothing
+  changes.
 
 ## 2.0 - 2026-08-15 - approved
 
@@ -1965,208 +1850,98 @@ hand.
 - `RELEASE-NOTES.md`, rendered from `recipes/release-notes.md`
   (POS.0730). For you: you can read what each version of the system
   brought.
-
-## 1.24 - 2026-08-15
+- `scripts/doc2md.ps1` (markitdown) as the only document-to-Markdown
+  path, with `-Suffix` (POS.0180, `/ingest`). For you: you convert
+  documents with one script, and `/ingest` uses it.
+- Challenger personas: `/challenge <persona>`, one agent per persona,
+  bare `/challenge` lists the roster; first persona `cto` (POS.0400,
+  POS.0420). For you: you choose who challenges you.
+- `/check-forge` gains "Recipes and renders" and `/check` the
+  per-project equivalent (POS.0540). For you: your recipes and renders
+  are checked for shape, inputs and staleness.
+- `recipes/readme.md` v0.1; the README rendered for the first time
+  (POS.0720). For you: the README is generated, and you change it
+  through its recipe.
+- `/forge`: bare a state map, `/forge <state>` works on that artefact,
+  one definition file per state (POS.0580). For you: you work the chain
+  by naming the artefact you want.
+- Renders: `recipes/<recipe>.md` iterated, `/render <recipe>`
+  generates `renders/<recipe>.md` with provenance;
+  `templates/recipe.md`; the ledger's Renders table (POS.0710). For you:
+  you iterate the recipe and regenerate the output.
+- Every source bundle carries a `00-INDEX.md`, created by `/ingest` when
+  missing (POS.0180). For you: a bundle you ingest is catalogued for
+  you.
+- Source bundles: `sources/<slug>/` as one source with one ledger entry
+  (POS.0180). For you: you can ingest a set of related files as one
+  source.
+- `/save`: the scope-routed check, findings settled, then the script
+  (POS.0570). For you: you save through one command with the check built
+  in.
+- POS.0070: Claude criticises, challenges, inspires and lays out
+  options; the principal composes (CLAUDE.md Roles). For you: nothing
+  becomes content because Claude proposed it.
+- The pre-save conformance check (POS.0570); shared
+  `.claude/settings.json` with the model pin and the permission policy.
+  For you: a save through Claude is checked first, and the settings come
+  with the clone.
+- Git persistence: `forge-save.ps1` and `forge-pull.ps1`, linear history
+  on `main` (POS.0550); `logo.png` as the project avatar (POS.0560). For
+  you: you save and sync with two scripts.
 
 ### Changed
 - An assignment carries the complete in-scope substance, length whatever
   fidelity requires; "short and airy" dropped (POS.0130, CLAUDE.md
   directive 8). For you: your assignment is as long as the subject needs
   and omits nothing silently.
-
-## 1.23 - 2026-08-15
-
-### Added
-- `scripts/doc2md.ps1` (markitdown) as the only document-to-Markdown
-  path, with `-Suffix` (POS.0180, `/ingest`). For you: you convert
-  documents with one script, and `/ingest` uses it.
-
-## 1.22 - 2026-08-15
-
-### Changed
 - `/save` re-renders the README unconditionally on a save touching the
   core (POS.0570). For you: the README is current after every core save.
-
-### Rejected
-- Staleness detection for the README (POS.0570). For you: nothing to
-  configure.
-
-## 1.21 - 2026-08-15
-
-### Changed
-- `/render <recipe>`: the argument relabelled from `<purpose>`. For you:
-  the argument's name says what you pass.
-
-## 1.20 - 2026-08-15
-
-### Changed
 - `/challenge <persona> [artefact]` may target any chain artefact,
   default `intent` (POS.0420, POS.0450, DEC.0020). For you: you can
   challenge an assignment as well as an intent.
-
-## 1.19 - 2026-08-15
-
-### Changed
 - Challenges carry a severity (dealbreaker | major | minor) and a wider
   epistemic scale; anti-fabrication discipline (POS.0420). For you: you
   see how serious each challenge is and how sure the challenger is.
-
-### Rejected
-- Proposing rewrites, interactivity, unbounded breadth for the
-  challenger (POS.0420). For you: a challenger stays sharp and few.
-
-## 1.18 - 2026-08-15
-
-### Added
-- Challenger personas: `/challenge <persona>`, one agent per persona,
-  bare `/challenge` lists the roster; first persona `cto` (POS.0400,
-  POS.0420). For you: you choose who challenges you.
-
-### Changed
 - Challenge files carry the persona in their name. For you: you see at a
   glance which persona wrote a challenge.
-
-## 1.17 - 2026-08-15
-
-### Added
-- `/check-forge` gains "Recipes and renders" and `/check` the
-  per-project equivalent (POS.0540). For you: your recipes and renders
-  are checked for shape, inputs and staleness.
-
-### Changed
 - The README's "How it is used" splits into the general flow and a
   worked example (readme recipe 0.2). For you: you see a real project's
   flow.
-
-## 1.16 - 2026-08-15
-
-### Added
-- `recipes/readme.md` v0.1; the README rendered for the first time
-  (POS.0720). For you: the README is generated, and you change it
-  through its recipe.
-
-### Changed
 - A recipe's template fixes structure and placement, never wording
   (POS.0710). For you: each render re-derives the words from the current
   inputs.
-
-## 1.15 - 2026-08-15
-
-### Changed
 - Recipes exempt from the versioning apparatus (POS.0710; reversed at
   3.21). For you: your recipes carried only a version and a date.
 - CLAUDE.md's Ledger section enumerates all ledger tables. For you: you
   can look up every table in one place.
-
-## 1.14 - 2026-08-15
-
-### Added
-- `/forge`: bare a state map, `/forge <state>` works on that artefact,
-  one definition file per state (POS.0580). For you: you work the chain
-  by naming the artefact you want.
-- Renders: `recipes/<purpose>.md` iterated, `/render <purpose>`
-  generates `renders/<purpose>.md` with provenance;
-  `templates/recipe.md`; the ledger's Renders table (POS.0710). For you:
-  you iterate the recipe and regenerate the output.
-
-### Changed
 - README.md is a render of the forge project (POS.0720); everything the
   forge produces is Markdown (POS.0590). For you: you convert formats
   outside the forge.
-
-### Removed
-- `/clarify` and `/draft`, without aliases; `derivatives/`, migrated to
-  `renders/`. For you: use `/forge intent` and `/forge assignment`.
-
-## 1.13 - 2026-08-09
-
-### Added
-- Derivatives: audience-specific condensations of the intent in
-  `projects/<slug>/derivatives/` as dated editions (POS.0710; replaced
-  at 1.14). For you: you could keep a pitch or a summary beside the
-  chain.
-
-## 1.12 - 2026-08-08
-
-### Removed
-- The fixed assignment size limit (POS.0130, CLAUDE.md directive 8). For
-  you: your assignment may be as long as the subject needs.
-
-## 1.11 - 2026-08-08
-
-### Changed
 - `/ingest` stores, registers and catalogues only; the ledger's State
   column replaced by free-text Purpose (POS.0180). For you: you decide
   how and when each source is used.
-
-## 1.10 - 2026-08-08
-
-### Added
-- Every source bundle carries a `00-INDEX.md`, created by `/ingest` when
-  missing (POS.0180). For you: a bundle you ingest is catalogued for
-  you.
-
-## 1.9 - 2026-08-08
-
-### Added
-- Source bundles: `sources/<slug>/` as one source with one ledger entry
-  (POS.0180). For you: you can ingest a set of related files as one
-  source.
-
-## 1.8 - 2026-08-08
-
-### Changed
 - `/new-project` creates `00-brief.md` with the header pre-filled
   (POS.0110). For you: you paste your text into a ready file.
-
-## 1.7 - 2026-08-04
-
-### Changed
 - `/save` drafts the commit message unless `-m` is given. For you: you
   confirm a proposed message instead of writing one.
-
-## 1.6 - 2026-08-04
-
-### Added
-- `/save`: the scope-routed check, findings settled, then the script
-  (POS.0570). For you: you save through one command with the check built
-  in.
-
-## 1.5 - 2026-08-04
-
-### Added
-- POS.0070: Claude criticises, challenges, inspires and lays out
-  options; the principal composes (CLAUDE.md Roles). For you: nothing
-  becomes content because Claude proposed it.
-
-## 1.4 - 2026-08-04
-
-### Changed
 - OS-level sandboxing dropped for the permission system (POS.0520). For
   you: the shell works on Windows; you approve through prompts and
   allowlists.
-
-## 1.3 - 2026-08-04
-
-### Added
-- The pre-save conformance check (POS.0570); shared
-  `.claude/settings.json` with the model pin and the permission policy.
-  For you: a save through Claude is checked first, and the settings come
-  with the clone.
-
-## 1.2 - 2026-08-04
-
-### Added
-- Git persistence: `forge-save.ps1` and `forge-pull.ps1`, linear history
-  on `main` (POS.0550); `logo.png` as the project avatar (POS.0560). For
-  you: you save and sync with two scripts.
-
-## 1.1 - 2026-08-03
-
-### Changed
 - The forge's self-description: "a workshop where thought is tempered
   and shaped" (POS.0620). For you: the README no longer presents the
   forge as a machine for assignments.
+
+### Removed
+- `/clarify` and `/draft`, without aliases. For you: use `/forge intent`
+  and `/forge assignment`.
+- The fixed assignment size limit (POS.0130, CLAUDE.md directive 8). For
+  you: your assignment may be as long as the subject needs.
+
+### Rejected
+- Staleness detection for the README (POS.0570). For you: nothing to
+  configure.
+- Proposing rewrites, interactivity, unbounded breadth for the
+  challenger (POS.0420). For you: a challenger stays sharp and few.
 
 ## 1.0 - 2026-08-02 - approved
 
@@ -2180,88 +1955,44 @@ settled that `/challenge` runs before the first draft. For the user of
 the engine this is a working engine with a fixed vocabulary and a
 process that writes once per round, on confirmation.
 
-Nothing for the user of the engine.
-
-## 0.11 - 2026-08-02
+### Added
+- `/check-forge` and `/check [slug]`, advisory and read-only (POS.0540).
+  For you: you can check conformance without anything being changed.
+- `sources/` per project and `/ingest`; the ledger's Sources table
+  (POS.0180). For you: you can register external inputs in a project.
+- The core (CLAUDE.md), the templates and the command set; the group BRD
+  conventions and the Forge of Thought naming. For you: you get a
+  working engine.
 
 ### Changed
 - Write once per iteration round for any working conversation, promoted
   to a prime directive (POS.0190). For you: the intent is written at the
   round's end on your confirmation, or whenever you order it.
-
-## 0.10 - 2026-08-02
-
-### Added
-- `/check-forge` and `/check [slug]`, advisory and read-only (POS.0540).
-  For you: you can check conformance without anything being changed.
-
-## 0.9 - 2026-08-02
-
-### Changed
 - "Chaotic" dropped from the tagline and the essence (POS.0600); the
   README's planned extensions match the intent. For you: the forge
   presumes nothing about your thoughts.
-
-### Fixed
-- README title typo; a heading level; a REJ.0125 citation. For you:
-  nothing to do.
-
-## 0.8 - 2026-08-02
-
-Nothing for the user of the engine.
-
-## 0.7 - 2026-08-02
-
-### Changed
 - `/status` renamed `/ledger` (DEC.0030); the expansion intent recorded
   as POS.0700. For you: you call `/ledger` for the state report.
-
-### Removed
-- The premature `/elaborate` mechanics (THR.0020, THR.0030). For you:
-  nothing to do.
-
-### Rejected
-- Back-filling DEC records (DEC.0040). For you: decisions are recorded
-  from now on, not retroactively.
-
-## 0.6 - 2026-08-02
-
-### Changed
 - `/challenge` runs before the first draft, further runs at the solver's
   discretion (POS.0450, DEC.0020). For you: you challenge once before
   drafting and again when you choose.
-
-## 0.5 - 2026-08-01
-
-### Changed
-- `/clarify` writes the intent once per iteration, not per answer
-  (POS.0190). For you: you answer freely and see one write at the end.
-
-## 0.4 - 2026-07-31
-
-### Changed
 - No dates in source filenames; origin dates best-effort in the ledger;
   a bare `/ingest` sweeps `sources/`; `/status` reports unregistered
   sources. For you: you drop a file into `sources/` under a plain name
   and it gets registered.
-
-## 0.3 - 2026-07-31
-
-### Added
-- `sources/` per project and `/ingest`; the ledger's Sources table
-  (POS.0180). For you: you can register external inputs in a project.
-
-## 0.2 - 2026-07-31
-
-### Changed
 - The forge is a general engine usable by anyone; the growth path toward
   BRD and beyond as the primary ambition, version 1 ending at the
   assignment (00-brief.md). For you: the forge is for your thinking
   whoever you are.
 
-## 0.1 - 2026-07-31
+### Removed
+- The premature `/elaborate` mechanics (THR.0020, THR.0030). For you:
+  nothing to do.
 
-### Added
-- The core (CLAUDE.md), the templates and the command set; the group BRD
-  conventions and the Forge of Thought naming. For you: you get a
-  working engine.
+### Fixed
+- README title typo; a heading level; a REJ.0125 citation. For you:
+  nothing to do.
+
+### Rejected
+- Back-filling DEC records (DEC.0040). For you: decisions are recorded
+  from now on, not retroactively.

@@ -2,7 +2,7 @@
 project: forge
 purpose: release-notes
 audience: the user of the engine who has cloned it and takes upgrades through forge-pull
-version: 0.14
+version: 0.15
 output: /RELEASE-NOTES.md
 ---
 
@@ -75,6 +75,11 @@ shape only. -->
   and the sections of those minors are not carried over — they leave
   the file, the detail per version staying in the history companion.
   Between majors every release keeps its section.
+  A minor's section still standing below its major in the previous
+  edition, compiled before this rule and carried over since, folds
+  into that major at the next render by the same rule: its lines
+  taken as they stand, superseded ones dropped, the major's
+  highlights kept, and the section leaves the file.
 - No Unreleased section: at the moment of a render, which only
   `/release` runs, nothing is unreleased.
 - Released sections never change retroactively. Only factual
