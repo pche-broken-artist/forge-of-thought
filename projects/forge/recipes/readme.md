@@ -2,7 +2,7 @@
 project: forge
 purpose: readme
 audience: humans arriving at the repository
-version: 0.75
+version: 0.76
 output: /README.md
 ---
 
@@ -409,7 +409,8 @@ to RELEASE-NOTES.md>
 <common head "First, once per machine" as a fenced block: git,
 Python and Claude Code installed first (docs/start/install.md) →
 clone this repository → claude from the engine root → /setup
-(docs/start/setup.md); then two bold-led paths, each a fenced block:
+(docs/start/setup.md); one sentence on where it runs, as the
+portability instruction says; then two bold-led paths, each a fenced block:
 Starting a new project (/new-project my-idea → /forge intent → git
 init in your own terminal → /save, with what a save that commits
 nothing means) and Bringing an

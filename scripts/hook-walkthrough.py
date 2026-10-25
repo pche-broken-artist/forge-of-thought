@@ -9,12 +9,12 @@ WHAT IT DOES
     of that turn. It prints two lines on the walkthrough: the rule that
     must hold in a long conversation - the verdict line that closes
     every proposition included, since 2026-09-27 - and the pointer to
-    the skill that holds the full shape. Since 2026-09-20 it also
-    prints three lines of conduct: use the forge's scripts, explain
-    and ask before running a command of one's own, and change nothing
-    that was not agreed and approved, and since 2026-10-24 that every
-    step needing consent is a proposition closed by the verdict line, a
-    yes with a question in it being `q` (POS.0850; THR.0400 of the forge intent; the
+    the skill that holds the full shape. Since 2026-09-20 it also prints lines of conduct, four since
+    2026-10-25: use the forge's scripts, explain and ask before running
+    a command of one's own, change nothing that was not agreed and
+    approved, and that every question asking the principal to decide
+    is a proposition closed by the verdict line, a yes with a question
+    in it being `q` (POS.0850; THR.0400 of the forge intent; the
     git half of the gate that enforces them is scripts/hook-git.py,
     the rest the thread's open matter).
     It reads nothing, writes nothing, takes no arguments, and is

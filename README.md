@@ -2,16 +2,16 @@
 project: forge
 render: readme
 generated: 2026-10-25
-recipe: recipes/readme.md v0.75
+recipe: recipes/readme.md v0.76
 inputs:
   - CLAUDE.md
-  - projects/forge/10-intent.md v6.1
+  - projects/forge/10-intent.md v6.2
   - .claude/skills/forge/states/
   - docs/README.md v6.1
   - RELEASE-NOTES.md
 ---
 
-# Forge of Thought 6.1
+# Forge of Thought 6.2
 
 *A workshop where thought is tempered and shaped.* · [Documentation](docs/README.md) · [Videos](https://pche-broken-artist.github.io/forge-of-thought/videos/) · [Release notes](RELEASE-NOTES.md)
 
@@ -20,32 +20,33 @@ sessions, in two languages, show the forge at work before a word of
 this README is read: [Videos](https://pche-broken-artist.github.io/forge-of-thought/videos/).
 
 Forge of Thought is an **AI cognitive extension** of a thinking human,
-the **principal**: whoever's thinking is being forged. It is a place
-where thoughts are forged. It takes a raw, half-formed idea - a
-process redesign, a platform initiative, an organisational change, a
-D&D campaign - and tempers it into a precise, self-contained handover
-for whoever delivers it: a team, a colleague, your future self. It
-rests on one principle, **the machine carries every part of the work
-that is not deciding**, in three forms:
+the **principal**: the person whose thinking is being forged, who
+supplies the ideas, answers and decisions and has the final word on
+all content. It takes a raw, half-formed idea - a process redesign, a
+platform initiative, an organisational change, a D&D campaign - and
+tempers it into a precise, self-contained handover for whoever
+delivers it: a team, a colleague, your future self. It rests on one
+principle, **the machine carries every part of the work that is not
+deciding**, in three forms.
 
 - **It thinks with you.** It interviews and probes, criticises,
-  challenges and inspires; it extracts what the principal has not yet
+  challenges and inspires; it draws out what you have not yet
   articulated and lays out options with their trade-offs. It
   proposes; you decide.
 - **It keeps the work consistent.** Nothing wanders off in forgotten
   chats: the thinking lives in versioned, templated artefacts, with
   decisions, state and history keeping themselves in order and
   consistency guarded across every output.
-- **It carries the tedious work.** Audience-facing outputs - a pitch,
-  a deck, this README, the whole documentation - are **renders**:
+- **It carries the tedious work.** Audience-facing outputs, a pitch,
+  a deck, this README, the whole documentation, are **renders**:
   generated from the artefacts, regenerated whenever the thinking
   moves, never written by hand twice.
 
-Technically the forge is a git repository: slash commands and isolated
-agents - challenger personas and critic lenses - for Claude Code,
-templates, and the conventions binding them. Today the chain reaches
-from the brief through the intent and the assignment to a BRD and a
-solution design.
+It is a place where thoughts are forged. Technically it is a git
+repository: slash commands and isolated agents (challenger personas
+and critic lenses) for Claude Code, templates, and the conventions
+binding them. Today the chain reaches from the brief through the
+intent, the assignment and the BRD to the solution design.
 
 Short on time? Two one-page notes say it briefly:
 [for a CTO](projects/forge/renders/cto-pitch.md) and
@@ -61,8 +62,8 @@ modes it exists to remove:
   context with them.
 - Handovers whose completeness depends on the mood of the day they
   were written.
-- The same thinking retold to every audience - a pitch, a deck, a
-  mail - each version rewritten by hand and drifting from the others.
+- The same thinking retold to every audience, a pitch, a deck, a
+  mail, each version rewritten by hand and drifting from the others.
 - Feedback and decisions with no place to land, so the same ground is
   fought over twice.
 - Assumptions nobody attacked before reality did.
@@ -90,7 +91,7 @@ languages, nothing staged.
   ([watch](https://pche-broken-artist.github.io/forge-of-thought/videos/#04-critique),
   [read](docs/use/critique-the-documents.md))
 - **A check at a save.** A save runs the check, conformance findings
-  settled before the commit, a release with more.
+  are settled before the commit, and a release runs more.
   ([watch](https://pche-broken-artist.github.io/forge-of-thought/videos/#05-check-at-save),
   [read](docs/use/save-your-work.md))
 - **A challenger: peer review of the substance.** A persona attacks
@@ -98,12 +99,12 @@ languages, nothing staged.
   rejected keeps its reason.
   ([watch](https://pche-broken-artist.github.io/forge-of-thought/videos/#06-challenger),
   [read](docs/use/challenge-the-thinking.md))
-- **History and threads.** Why an item changed, one command away; the
-  open threads as the project's memory.
+- **History and threads.** Why an item changed, one command away, and
+  the open threads as the project's memory.
   ([watch](https://pche-broken-artist.github.io/forge-of-thought/videos/#07-history-threads),
   [read](docs/use/read-the-history-of-an-item.md))
 - **Solution design: a new layer of the chain.** The chain grows by a
-  definition and a template, the first solution design.
+  definition and a template, and the first solution design is made.
   ([watch](https://pche-broken-artist.github.io/forge-of-thought/videos/#08-new-artefact),
   [read](docs/extend/add-an-artefact.md))
 - **The BRD, a new artefact.** A new artefact from its definition to
@@ -123,18 +124,18 @@ switch, and where eight short clips stand in the order of a talk.
 
 ## 3. What you get
 
-- A versioned document chain growing from a **brief** - your idea put
-  together, yours by your approval - through the **intent**, what you
-  hold, to the layers your project needs, an assignment to hand over
-  and a solution design among them
+- A versioned document chain growing from a **brief**, your idea put
+  together and yours by your approval, through the **intent** to the
+  layers your project needs, an assignment to hand over and a
+  solution design among them
   ([the document chain](docs/about/the-document-chain.md)).
 - An elicitation interview that forges the intent, one question at a
   time ([elicitation](docs/about/elicitation.md)).
-- Blind adversarial reviewers - critics of the documents, challengers
-  of the thinking, checks of the conventions - every verdict recorded
+- Blind adversarial reviewers: critics of the documents, challengers
+  of the thinking, checks of the conventions, every verdict recorded
   ([the isolated reviewers](docs/about/isolated-reviewers.md)).
-- Audience-specific renders generated from a **recipe** each,
-  including an actual PowerPoint file through your own template
+- Audience-specific renders generated from recipes, including an
+  actual PowerPoint file through your own template
   ([renders and recipes](docs/about/renders-and-recipes.md)).
 - External sources registered immutably and used only as the
   principal directs
@@ -144,91 +145,95 @@ switch, and where eight short clips stand in the order of a talk.
 
 ## 4. What is new in 6.0
 
-**Several hands on one project.** An integrator and contributors can
-now work one project through git. A conflict at a save is left
-standing with nothing lost and settled in the session as a
-walkthrough, one conflict one question, and a hook holds the wall
-between reading git and writing it, so every write goes through the
-forge's scripts
-([working together](docs/about/working-together.md)).
+**More than one hand on a project.** One integrator and contributors
+now work on one project through git: a conflict at a save is left
+standing, nothing lost, and settled in the session as a walkthrough,
+one conflict one question, while a hook lets Claude read git freely
+and keeps every write behind the forge's scripts. Two people can
+share a project without a merge ever being guessed for them
+([working together on one project](docs/about/working-together.md)).
 
-**The ledger made from the records, threads as files.** The ledger is
-built at read time from the documents and never kept in git, so it
-cannot drift from them or conflict in a merge. Every thread is a file
-of its own, immutable once closed, and an existing project is brought
-to this shape by a migration
-([the ledger](docs/about/the-ledger.md)).
+**The ledger made at read time, threads as files.** The ledger is
+built by a script from the documents whenever it is read and never
+kept in git, and every open matter of the intent is a file of its own
+in `threads/`. State can no longer drift from the records it is made
+of, and two clones cannot fight over a hand-kept table
+([the ledger, made from the records](docs/about/the-ledger.md)).
 
-**The BRD as a layer of the chain.** `/forge brd` breaks an
-assignment, an intent or a document you put in into business rules,
-behaviour and qualities that the stakeholders can review and the
-delivery can estimate. What the forge cannot know it names as a
-dependency or an open question with an owner instead of inventing it
-([the BRD](docs/about/the-brd.md)).
+**The BRD as a layer of the chain.** A BRD can now be worked below
+the assignment, from the assignment, from the intent alone or from a
+document someone gave you, breaking it into business rules, behaviour
+and qualities the stakeholders review and the delivery can estimate.
+What the forge cannot know, a value only the stakeholders can give,
+it names instead of writing ([the BRD](docs/about/the-brd.md)).
 
-**Research planned before it is searched.** `/research` shows its
-plan first, so you judge the questions before they cost anything;
-`--deep` runs one isolated agent per card, a second model family on
-your word, and every cited URL is opened before a note is filed.
-Agreement of two families is consistency, never validation
+**Research planned before it is searched.** A research shows its
+plan first and runs only once you confirm it, quick or deep, and on
+your word on a second model family over the same plan, with the
+independence of the two measured and every cited URL opened before a
+note is filed. The questions are judged before they cost anything,
+and what rests on a dead citation is said to be without support
 ([how a research is made](docs/about/the-research.md)).
 
-**`/migrate`.** Brings a project to the shape of files a new release
-expects: it runs only the steps that are missing, verifies each and
-commits nothing. A project is migrated once, on one clone, and every
-other clone pulls
+**`/migrate`.** A project is brought to the shape of files a new
+release expects, once, on one clone, with only the missing steps run
+and verified and an undo where the project is under git. Every other
+clone then simply pulls
 ([migrate a project](docs/use/migrate-a-project.md)).
 
-**`/work`.** Gives an output made with work of its own - a model, an
-analysis, a worked task - a home in `work/`: the file holding the
-content and a versioned specification beside it holding the way and
-the why ([work a work product](docs/use/work-a-work-product.md)).
+**`/work`.** An output made with work of its own, a model, an
+analysis, a worked task, has its home in `work/`: the file holds the
+content and a versioned specification beside it the way and the why
+([work a work product](docs/use/work-a-work-product.md)).
 
-**`/history`.** Shows the whole way to one item in one call: its
-wording today, every record of it, the archive rows and every
-citation, gathered by a script, so the reason behind a change is
-never lost
+**`/history`.** One command gathers the whole way to an item: its
+wording today, every record of it, the archive rows and every place
+that cites it, as one timeline. Before an item is changed, why it
+stands as it does is one call away
 ([read the history of an item](docs/use/read-the-history-of-an-item.md)).
 
-**`/pull`.** Looks at the remote and says the state as a fact; it
-pulls only a clean repository that is behind and offers the rest, so
-the forge never pulls or merges on its own
+**`/pull`.** The forge looks at the remote and says the state of
+every repository, and pulls only a clean repository that is behind,
+never on its own judgement. After a pull of the engine it shows what
+the release notes ask you to do
 ([pull from the remote](docs/use/pull-from-the-remote.md)).
 
-**`/end`.** Closes a session by saying what lives only in the
-conversation, what is unsaved and whether shutting the command line
-loses anything; it writes nothing itself
+**`/end`.** A session closes by saying what lives only in the
+conversation, which repositories hold unsaved changes and whether
+shutting the command line loses anything; it writes nothing itself
 ([end a session](docs/use/end-a-session.md)).
 
 The full account is in [RELEASE-NOTES.md](RELEASE-NOTES.md).
 
 ## 5. Quickstart
 
-First, once per machine:
+**First, once per machine**
 
 ```
-# git, Python and Claude Code must be installed first:
-# see docs/start/install.md
+# git, Python and Claude Code installed first (docs/start/install.md)
 git clone <this repository>    # you are looking at it
 cd forge-of-thought
 claude                         # always from the engine root
-/setup                         # first run only; what it asks is
-                               # docs/start/setup.md
+/setup                         # first run only (docs/start/setup.md)
 ```
+
+The forge is developed and run on Windows; the git scripts, the
+ledger and docs-state have run on Linux on a user's machine, and the
+conversions and the two hooks are written to run unchanged on Linux
+and macOS.
 
 **Starting a new project**
 
 ```
 /new-project my-idea
 /forge intent
-# in your own terminal, at the engine root: Claude writes nothing
-# into git itself; the init and a remote are your one-off act
+# in your own terminal, at the engine root (Claude writes nothing
+# into git itself; the init and a remote are your one-off act):
 git -C projects/my-idea init -b main
 /save                          # a save that commits nothing names its
                                # cause (no repository, or no git
                                # identity for the host);
-                               # docs/start/first-result.md says what
-                               # to do
+                               # docs/start/first-result.md says what to do
 ```
 
 **Bringing an existing project**
@@ -236,16 +241,16 @@ git -C projects/my-idea init -b main
 ```
 /import-project <project url>  # clones into projects/
 /forge <project-slug>          # the slug is the repository's name;
-                               # select the project before any work:
+                               # select the project before any work,
                                # the forge cannot guess it
 ```
 
 Each project lives inside `projects/<slug>/` as a git repository of
 its own, which the engine does not track: that is why you name it
-first. `projects/forge` is the forge's own project, the exemplar every
-render and page of the documentation derives from, and the one
+first. `projects/forge` is the forge's own project, the exemplar
+every render and page of the documentation derives from, and the one
 directory under `projects/` the engine tracks; a user never needs to
-open it. The first sitting from nothing to a saved intent is
+open it, and the first sitting from nothing to a saved intent is
 [docs/start/first-result.md](docs/start/first-result.md).
 
 ## 6. The document chain in one picture
@@ -280,9 +285,9 @@ growth that does not exist yet.**
 - **Assignment:** the intent's in-scope substance carried to the
   recipients in a joint pass
   ([the assignment](docs/about/the-assignment.md)).
-- **BRD:** the business requirements: the assignment, the intent or a
-  source put in, broken into rules, behaviour and qualities the
-  stakeholders can review and the delivery can estimate
+- **BRD:** the business requirements, the assignment, the intent or a
+  source broken into rules, behaviour and qualities the stakeholders
+  can review and the delivery can estimate
   ([the BRD](docs/about/the-brd.md)).
 - **Solution design:** how the things wanted are realised, part by
   part, with the choices they rest on
@@ -291,7 +296,7 @@ growth that does not exist yet.**
 Below the intent a project takes the layers it needs, none a
 condition of another, and many end at the intent.
 
-> A render is never edited by hand: what is iterated is its recipe.
+> A render is never edited by hand: what is iterated is its **recipe**.
 
 ## 7. Documentation
 
@@ -303,12 +308,10 @@ of one topic each, generated from the engine like this README.
   then begin with [What Forge of Thought is](docs/start/what-it-is.md).
 - **The extender:** watch
   [a new artefact](https://pche-broken-artist.github.io/forge-of-thought/videos/#08-new-artefact),
-  then begin with
-  [What the forge is made of](docs/extend/what-it-is-made-of.md).
+  then begin with [What the forge is made of](docs/extend/what-it-is-made-of.md).
 - **The evaluator:** watch
   [a challenger](https://pche-broken-artist.github.io/forge-of-thought/videos/#06-challenger),
-  then begin with
-  [What the forge is and is not](docs/about/what-it-is-and-is-not.md).
+  then begin with [What the forge is and is not](docs/about/what-it-is-and-is-not.md).
 
 The documentation was generated on 2026-10-25 for version 6.1, and
 its index says so too.
@@ -316,19 +319,19 @@ its index says so too.
 - [Start](docs/README.md#start): what the forge is, what to install,
   the first setup and a first result.
 - [Use](docs/README.md#use): one page per task, from starting a
-  project to saving, releasing and pulling.
+  project to releasing a version.
 - [About](docs/README.md#about): why the forge works as it does, one
   idea per page.
-- [Extend](docs/README.md#extend): how the forge is changed and grown,
-  by an artefact, a reviewer, a genre, a command, a script or an
-  engine.
-- [Reference](docs/README.md#reference): the exact tables and shapes,
-  commands, IDs, front-matter, scripts, templates and the glossary.
+- [Extend](docs/README.md#extend): how the forge is changed and
+  grown, by a new artefact, lens, persona, check, genre, command,
+  script or engine.
+- [Reference](docs/README.md#reference): the exact tables, shapes and
+  rosters, from the commands to the glossary.
 
 Each video is a screenplay rendered from the session records of the
 principal's rollout project and made into a player file by
 `scripts/md2video.py`. The files live in `docs/videos/`, served as
-the course page, and the documentation on making one is the page
+the course page, and making one is the page
 [Make a teaching video from a recipe](docs/use/make-a-video-from-a-recipe.md).
 
 ## 8. Author and licence
@@ -342,12 +345,12 @@ Feedback, ideas and changes are welcome: see
 
 ## 9. About this README
 
-This file is a render of `projects/forge`: it is never edited by hand
-and is regenerated by `/render readme` whenever the process changes,
-and by every `/release` of the engine. Fixes go into the recipe or
-the inputs, and system changes are recorded in `projects/forge/`. The
-documentation in `docs/` is generated the same way, from the engine,
-and its index says when and for which version. The YAML front-matter
-provenance at the top of this file is kept by design.
+This file is a render of `projects/forge`: never edited by hand,
+regenerated by `/render readme` whenever the process changes and by
+every `/release` of the engine. Fixes go into the recipe or the
+inputs, and changes of the system are recorded in `projects/forge/`.
+The documentation in `docs/` is generated the same way, from the
+engine, and its index says when and for which version. The YAML
+front-matter provenance of this file is kept by design.
 
 _Last updated: 2026-10-25_

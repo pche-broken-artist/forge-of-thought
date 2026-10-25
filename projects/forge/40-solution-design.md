@@ -1,5 +1,5 @@
 ---
-version: 0.47
+version: 0.48
 status: draft
 project: forge
 audience: whoever realises the solution, a person or an agent
@@ -118,25 +118,24 @@ boundary kept by hand or an order of work.
   `templates/CLAUDE.local.md`.
 - **SOL.0030 The per-prompt hook.** The harness's `UserPromptSubmit`
   hook adds context at every prompt; the engine's
-  `.claude/settings.json` carries one such hook. It prints two lines
-  on the walkthrough, the one-item rule itself, since 2026-09-27
-  with the verdict line that closes a proposition, and a pointer to
+  `.claude/settings.json` carries one such hook. It prints two lines on
+  the walkthrough, the one-item rule itself, since 2026-09-27 with the
+  verdict line that closes a proposition, and a pointer to
   `.claude/skills/walkthrough/SKILL.md` for the full shape when a
-  walkthrough or an interview runs, and three lines of conduct, the
-  principal's rules, worded in `scripts/hook-walkthrough.py`. The
-  hook's command is anchored at the project root:
-  `.claude/settings.json` invokes it in exec form, `python` with
+  walkthrough or an interview runs, and four lines of conduct, the
+  principal's rules, worded in `scripts/hook-walkthrough.py`. The hook's
+  command is anchored at the project root: `.claude/settings.json`
+  invokes it in exec form, `python` with
   `${CLAUDE_PROJECT_DIR}/scripts/hook-walkthrough.py` as its one
   argument. A relative path is resolved against the session's working
-  directory, not the engine root; the placeholder always names the
-  root the session started in, and the exec form hands the path to
-  the program without a shell.
-  Realises: POS.1170, POS.0850. Choice: a hook that repeats the rule
-  against trusting text loaded once; the cost is that a hook is
-  context and not enforcement. The gate that would enforce the three
-  lines of conduct is open, THR.0400, its git half built (SOL.0520).
-  Where:
-  `.claude/settings.json`, `scripts/hook-walkthrough.py`.
+  directory, not the engine root; the placeholder always names the root
+  the session started in, and the exec form hands the path to the
+  program without a shell. Realises: POS.1170, POS.0850. Choice: a hook
+  that repeats the rule against trusting text loaded once; the cost is
+  that a hook is context and not enforcement. The gate that would
+  enforce the lines of conduct is open, THR.0400, its git half built
+  (SOL.0520). Where: `.claude/settings.json`,
+  `scripts/hook-walkthrough.py`.
 - **SOL.0040 The walkthrough skill.** The shape of the walkthrough
   and of the elicitation interview lives in
   `.claude/skills/walkthrough/SKILL.md`, read whenever a walkthrough

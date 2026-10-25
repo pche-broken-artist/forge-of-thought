@@ -1,5 +1,5 @@
 ---
-version: 6.1
+version: 6.2
 status: draft
 project: forge
 audience: principal + Claude only
@@ -234,7 +234,7 @@ position that already stands elsewhere.
   it (F.02): text loaded once dissolves as the conversation grows. What
   is repeated is the one-item rule itself, with the verdict line that
   closes a proposition (POS.0850) and a pointer to the full shape, and
-  three lines of conduct, the principal's rules. That is also the first
+  four lines of conduct, the principal's rules. That is also the first
   instance of the pattern THR.0240 asks for: always-on is one sentence
   and a pointer, the detail is a file read when its situation arises. A
   hook is context, not enforcement — the nearest thing to a wall the
@@ -1887,14 +1887,17 @@ position that already stands elsewhere.
   raised a document to the same number, is settled by whoever merges:
   the merged document takes the next number and one `changed` record
   naming the merge and what was joined, the records of both sides
-  keeping their numbers; it is found by git itself, the header's
-  `version:` line conflicting whenever both sides raised it, and settled
-  in the step of a conflict (POS.1710), as on the fixture (R6.03). Why: a clash is a few times a year on a project of one
-  or two people and detection with the existing remedy costs nothing,
-  where the blocks of IDs, the allocation over the local branches and
-  the version as a landing (REJ.0330, REJ.0370) cost the most code of
-  the plan. Decided 2026-10-23 (brief 0.9; tested on the fixture,
-  R6.03).
+  keeping their numbers; it is found by git itself: both sides appended
+  their records to the end of the document's history, which conflicts as
+  text whenever both raised it, while the header's `version:` line
+  conflicts only where the two numbers differ and merges silently where
+  they are the same; it is settled in the step of a conflict (POS.1710),
+  as on the fixture (R6.03). Why: a clash is a few times a year on a
+  project of one or two people and detection with the existing remedy
+  costs nothing, where the blocks of IDs, the allocation over the local
+  branches and the version as a landing (REJ.0330, REJ.0370) cost the
+  most code of the plan. Decided 2026-10-23 (brief 0.9; tested on the
+  fixture, R6.03).
 - **POS.0580** Work on the chain is invoked by target state, never by
   verb: `/forge <state>` (`/forge intent`, `/forge assignment`) —
   knowing the name of the target artefact is knowing the command, with
