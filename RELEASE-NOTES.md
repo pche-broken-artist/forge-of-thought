@@ -2,12 +2,12 @@
 project: forge
 render: release-notes
 generated: 2026-10-25
-recipe: recipes/release-notes.md v0.14
+recipe: recipes/release-notes.md v0.15
 inputs:
   - projects/forge/10-intent.history.md
   - projects/forge/10-intent.history.archive.md
   - projects/forge/40-solution-design.history.md
-  - projects/forge/10-intent.md v6.0
+  - projects/forge/10-intent.md v6.2
   - projects/forge/decisions.md
   - RELEASE-NOTES.md
 ---
@@ -18,6 +18,56 @@ One section per release of the engine, newest first, for the user who
 takes upgrades through `forge-pull`; Action required comes first in
 every section; the fine-grained log with the reasons lives in
 `projects/forge/10-intent.history.md`.
+
+## 6.2 - 2026-10-25
+
+### Changed
+- A version given twice on two sides is found by the conflict of the
+  two tails of the history, not by the `version:` line, which git
+  merges silently when both sides wrote the same number (POS.1790).
+  For you: when two people raised one document to the same version,
+  expect the conflict in its history companion and settle it there in
+  the step of a conflict.
+- The per-prompt hook is counted at four lines of conduct since the
+  line Decisions, the fourth worded as every question that asks you to
+  decide, in the intent, the solution design and the hook's own header
+  (POS.1170, SOL.0030). For you: nothing to do; the documents now say
+  what the hook already repeats.
+- `forge-status` reports a standing conflict without the row of an
+  internal plan, which meant nothing to a user (the operating layer).
+  For you: the line of a standing conflict names only what you need to
+  finish it.
+
+## 6.1 - 2026-10-25
+
+### Changed
+- Every question that asks you to decide closes with the verdict line,
+  in a walkthrough or outside it, and only a question for information
+  Claude lacks ends bare; the rule stands in CLAUDE.md, Step by step,
+  in the walkthrough skill and as the hook's line Decisions (POS.0850,
+  the operating layer). For you: a choice, an either/or or a question
+  whether to write arrives as one proposition with Claude's
+  recommendation, answered by a letter.
+- The example of a use case in the BRD definition is made generic, "the
+  Customer submits the order" (the operating layer). For you: the
+  definition carries no example tied to one domain.
+- Portability in CLAUDE.md is brought to the intent, and the shared
+  modules of the scripts are counted five with `forge_check.py`, each
+  named with the scripts that use it (POS.0830, SOL.0620, the operating
+  layer). For you: what has run on Linux and what is still a writing
+  rule is said as the intent says it.
+- A new engine of `forge-engine` is a row and its pair of functions in
+  the script's table of commands, as the header of the script and the
+  solution design now say (SOL.0870). For you: adding an engine means
+  one row and two functions, nothing else in the script.
+
+### Fixed
+- CLAUDE.md mended after the rewrap of its long lines: the heading of
+  Persistence (git) stands on a line of its own again, the per-prompt
+  hook is said to repeat four lines of conduct, and `forge_check` is
+  named among the shared modules in the Repository layout (the
+  operating layer). For you: nothing to do; the file reads as before
+  the rewrap.
 
 ## 6.0 - 2026-10-25 - approved
 
