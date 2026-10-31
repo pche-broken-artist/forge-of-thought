@@ -28,9 +28,9 @@ principal names another; ask when his words leave it open.
 **Every project** gets `project.md` from `templates/project.md`
 (slug, kind, language; written once, SOL.0670), `.gitattributes`
 from `templates/gitattributes` (the ways of merging by path,
-SOL.0730) and `.gitignore` with the line `ledger.md`: the ledger is
-made at read time by `python scripts/forge-ledger.py <slug>`, never
-written by hand and never in git (SOL.0680).
+SOL.0730) and `.gitignore` from `templates/gitignore`: the ledger,
+made at read time by `python scripts/forge-ledger.py <slug>` and never
+in git (SOL.0680), and the lock files of an open Office document.
 
 **Library** (`kind: library`): create only those three files, plus
 `sources/00-INDEX.md`

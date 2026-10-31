@@ -455,8 +455,9 @@ projects/<slug>/           # kind: thought — the chain
   .git/                               # the project's own repository
   .gitattributes                      # the ways of merging by path
                                       # (templates/gitattributes)
-  .gitignore                          # the ledger, made at read time
-                                      # (Ledger)
+  .gitignore                          # what never enters git: the
+                                      # ledger, Office lock files
+                                      # (templates/gitignore)
   README.md  RELEASE-NOTES.md         # renders (Document chain, Renders)
   docs-map.md  docs/                  # the documentation and its map
                                       # (Document chain, Documentation)
