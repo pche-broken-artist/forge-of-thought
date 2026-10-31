@@ -331,7 +331,11 @@ POS.1320.
    named, where the output lands and what becomes of a diagram is its
    header's. A plain or a published file is tracked in git like any
    render output and never edited by hand: the Markdown render stays the
-   source of truth. A recipe may be composed through a genre interview
+   source of truth. Beside the forge's files the principal may keep his
+   own in `renders/` and `published/`, made by hand from them, a copy
+   under a new name he edits, a PDF saved from Word or PowerPoint, an
+   HTML of a diagram: in git with the rest, no companion, no row, no
+   check (POS.1910). A recipe may be composed through a genre interview
    (`/recipe <genre>`, skeleton `templates/recipe-<genre>.md`); a render
    may cite another render as a picture source when the recipe declares
    it among its inputs. A recipe may declare several languages
@@ -508,6 +512,8 @@ projects/<slug>/           # kind: thought — the chain
                                       # of the published file (/publish
                                       # step 6), read by the Published
                                       # table
+  renders/<own>.*  published/<own>.*  # the principal's own files, made by
+                                      # hand from the forge's (POS.1910)
   work/<name>.spec.md                 # a work product: the specification,
   work/<name>.spec.history.md         # the way and the why, with its
   work/<name>.<ext>                   # history; and the file, the content

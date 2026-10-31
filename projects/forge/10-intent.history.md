@@ -683,3 +683,5 @@ word `<file> | changed | state: by hand`.
 - 2026-10-25 | 6.2 | PCHe | POS.1170 | changed | The hook repeats four lines of conduct since the line Decisions (2026-10-25). | Was: three lines of conduct
 - 2026-10-25 | 6.2 | PCHe | the operating layer | changed | forge-status says a standing conflict without the plan row, which means nothing to a user; the header of hook-walkthrough counts four lines of conduct and words the fourth as every question that asks the principal to decide (the documentation run of 2026-10-25). | Was: "then forge-save (R6.02)"; "three lines of conduct ... every step needing consent is a proposition"
 - 2026-10-25 | 6.2 | PCHe | THR.0760 | created
+- 2026-10-31 | 6.3 | PCHe | POS.1910 | created
+- 2026-10-31 | 6.3 | PCHe | POS.1910 | changed | the principal's word of 2026-10-31 at the save of forge-rollout: a PDF saved by hand beside the published deck came up in the light check as a file without a companion; the forge makes no PDF, the principal copies, edits and exports the forge's files himself (forge-rollout, DEC.0010).

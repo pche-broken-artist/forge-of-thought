@@ -31,8 +31,9 @@ What you verify:
    `templates/project.md` says.
    **Records and companions** — the published companions
    `published/<recipe>.md` and the files of `published/` agree (a
-   companion without its file, a file without its companion; the
-   state current or stale is computed, never a finding); every
+   companion without its file is a finding; a file without a
+   companion is the principal's own, POS.1910, never one; the state
+   current or stale is computed, never a finding); every
    specification in `work/` has its history companion; a work file
    that cites an item by ID (DEC, SOL, POS, TBC, THR) not named among
    its specification's Inputs is a finding: the file has moved past

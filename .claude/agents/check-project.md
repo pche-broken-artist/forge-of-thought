@@ -32,13 +32,16 @@ What you verify:
 1. **Structure** — the files and folders of CLAUDE.md, Repository
    layout, exist; a layer below the intent that the project does not
    have is not missing and is never a finding (CLAUDE.md, Ledger);
-   `recipes/` and `renders/` paired — every render traces to a recipe
-   and carries provenance front-matter (legacy pre-recipe editions,
-   dated filenames, are exempt); the ledger's Renders table is read
-   from that provenance, nothing to compare;
-   every file in `published/` traces to a recipe that carries a
-   `## Format` section, and a `.pptx` or `.docx` in `renders/` to a
-   render beside it (CLAUDE.md, Document chain, Renders). An older recipe
+   `recipes/` and `renders/` paired — every render that carries
+   provenance front-matter traces to a recipe; the ledger's Renders
+   table is read from that provenance, nothing to compare; every file
+   in `published/` that a companion claims traces to a recipe that
+   carries a `## Format` section, and a `.pptx` or `.docx` in
+   `renders/` named after a render beside it to that render
+   (CLAUDE.md, Document chain, Renders). Any other file in `renders/`
+   or `published/` is the principal's own, made by hand from the
+   forge's files, never a finding (POS.1910); the legacy pre-recipe
+   editions, dated filenames, are among them. An older recipe
    still carrying `## Build instructions` (the alias:
    `templates/recipe.md`, Format) is a finding fixed at its next
    iteration.

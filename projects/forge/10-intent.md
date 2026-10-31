@@ -1,5 +1,5 @@
 ---
-version: 6.2
+version: 6.3
 status: draft
 project: forge
 audience: principal + Claude only
@@ -697,6 +697,16 @@ position that already stands elsewhere.
   architecture picture as `render: <file>` — provided the citing recipe
   declares it among its Inputs, so provenance and staleness track the
   dependency.
+- **POS.1910 The principal's own files beside the forge's.** The forge
+  owns in `renders/` and `published/` only the files its recipes name:
+  the render and its translations, the plain file, the designed file
+  and its companion. Any other file there is the principal's own,
+  derived by hand from the forge's files: a copy under a new name that
+  he edits, a PDF saved from Word or PowerPoint, an HTML of a diagram.
+  It is kept in git beside them, has no companion, no row and no check;
+  the forge never reads, overwrites or raises it. The forge's own file
+  stays untouched by hand (POS.0710, POS.0590): what is to change is
+  copied first.
 - **POS.1550 A recipe may render in several languages.** A recipe
   declares its output languages in `languages:`, the first primary, the
   rest its translations: `/render` generates the primary render and, in
