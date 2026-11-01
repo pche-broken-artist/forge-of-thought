@@ -1,8 +1,8 @@
 ---
-generated: 2026-10-25
-version: 6.0
+generated: 2026-11-01
+version: 6.4
 made: derived
-inputs-hash: 41c7b8ac532adce3
+inputs-hash: 53cd6d1d2040653c
 inputs:
   - projects/forge/10-intent.md#POS.0700
   - projects/forge/10-intent.md#POS.0780
@@ -13,142 +13,163 @@ inputs:
 
 # Where the forge is going
 
-The forge has a direction of growth but no destination: it names
-where it is heading and promises nothing beyond what is built. This
-page is for the user who wants to know what to expect, the extender
-who wants to know where an addition fits, and the evaluator who wants
-to know what is settled and what is open. Each term of the forge used
-here is said in one line in the [Glossary](../reference/glossary.md).
+The forge has a direction of growth but no destination: it is
+developed further down the chain of documents, one layer at a time,
+and it promises no layer, no date and no outcome beyond that. This
+page is for anyone who uses the forge, extends it or weighs whether
+to adopt it, and who wants to know what may come and what is
+deliberately left open.
 
 ## What it is
 
-The forge is a general tool for forging thoughts. A run ends where
-its owner is satisfied. The outcome is an artefact (a document of the
-chain) that the principal stands behind, and nothing further. The
-principal is the person whose thinking is being forged.
+The forge is a general tool for forging thoughts. A thought travels
+a chain of versioned documents (the chain), and each document of the
+chain is an artefact. The principal (the person whose thinking is
+being forged, and who has the final say on its content) decides how
+far a thought is taken. A run of the forge ends where the principal
+is satisfied. Its outcome is an artefact the principal stands
+behind, and nothing further.
 
-The direction is named. Destinations and deadlines are not. The
-forge is developed at its owner's discretion and pace, by his needs.
+The mechanics of the chain are domain-agnostic. The same machinery
+that forges a platform assignment would forge a role-playing
+campaign: an intent of the story, then materials rendered for the
+game master. A thought may be immaterial and carry no delivery at
+all.
 
-Several things are deliberately not promised:
+The forge is developed at its owner's discretion and pace, by his
+needs and by the feedback that use returns. Its direction may be
+named. Destinations and deadlines are not.
 
-- which further layers of the chain are built, and in what order;
-- whether the forge will one day feed a delivery chain, and whether
-  such a delivery side would be grown layers of the forge or a
-  separate framework;
-- sponsorship, funding, adoption and delivery outcomes, which are
-  outside the forge's scope and outside its sight.
+Where the forge is going is said in four directions:
+
+- the chain, which grows downward;
+- new kinds of artefact, which are added by one command;
+- a model of another family, which is reached today for research;
+- the people who use the forge, whose feedback is wanted.
+
+For each direction, the forge says what exists, what is intended and
+what is open.
 
 ## How it works
 
 ### The chain grows downward
 
-The chain is the sequence of versioned documents a thought travels,
-from a brief through the intent and below. It is extended downward
-as far as the principal needs a thought taken. How a layer is added
-is described in [The document chain](the-document-chain.md).
+The principal intends to keep extending the chain downward, so that
+a thought can be taken as far as he needs it taken. The page
+[The document chain](the-document-chain.md) says how a layer is
+added.
 
-- The BRD layer exists.
-- Integration is intended.
-- A strategy layer is possible, if it proves to make sense.
+- **The BRD layer** (a business requirements document) exists.
+- **Integration** is intended.
+- **A strategy layer** is possible, if it proves to make sense.
 
-Which of these layers are added, and in what order, is open. It may
-be all of them, or none yet. Nothing further is approved for
-construction. The mechanics of a layer (its commands, its agents,
-the calibration of its reviewers) are designed when that layer is
-actually taken up, not in advance.
+Which layers are added, and in what order, is open. Possibly all of
+these are added, possibly none yet. Nothing is approved for
+construction.
+
+The mechanics of a layer are designed when that layer is actually
+taken up, not in advance. The mechanics are its commands, its agents
+(the separate Claude runs that do one job each) and the calibration
+of its reviewers. The reason is not recorded.
 
 The layers below the assignment grow in the same project, by the
-same principal's hand, when he chooses to take his own thought
-further. A BRD is his next layer, not someone else's deliverable.
+same principal's hand. A BRD is his own next layer when he chooses
+to take his own thought further. It is not someone else's
+deliverable.
 
-### One principal per chain
+A recipient who receives an assignment takes it further in his own
+forge run, in his own instance (one installation of the forge). The
+assignment becomes his brief. Today he does this by hand: an
+assignment is self-contained for exactly that purpose. A command of
+its own for this step comes only when it is needed. The chain never
+spans two principals. The reason is not recorded.
 
-The chain never spans two principals. A recipient who receives an
-assignment runs his own forge in his own instance (one installation
-of the forge). There the assignment becomes his brief. Today he does
-that by hand, and an assignment is self-contained for exactly that
-purpose. A command of its own for this step is not built.
+Delivery lies outside the forge's scope and outside its sight. That
+covers sponsorship, funding, adoption and the outcomes of a
+delivery. The door stays open: the forge may one day feed a delivery
+chain. Whether a delivery side would be further layers of the forge
+or a separate framework is deliberately undecided. Experience from
+use comes back through the ordinary way in: the principal brings it
+into the intent (the trunk document of a project, holding the
+positions he currently takes) as input like any other.
 
-### A new kind of artefact
+### A new kind of artefact is added by one command
 
 A new kind of artefact is added to the forge by one command,
 `/new-artefact <name>`. The command leads through everything a kind
-needs:
+needs and forgets none of it:
 
-- what the artefact is, for whom, and from what it is derived and
-  why, held as a position of the forge's own intent before anything
-  is built;
+- what the artefact is, for whom, from what it is derived and why,
+  held as a position of the forge's own intent before anything is
+  built;
 - its definition and its template, as a pair;
 - the prefixes of its items, where it needs its own;
 - whether it needs a challenger of its own, and what the critic must
   know of it;
-- where it is realised, in the solution design.
+- where it is realised, in the forge's solution design.
 
-The command decides nothing. Each of these parts is born on the
-principal's word. The first artefact of the new kind is not made by
-the command. It is made through `/forge <name>` on real work, and
-that run is the trial of the definition.
+The command decides nothing. How the kind is composed is the
+principal's choice, and each of these parts is born on his word.
 
-For now the command adds to the engine, for every user of it. A user
-is to be able to add an artefact of his own as easily, kept at his
-own place. Where that place is remains open. Other types of addition
-(a whole chain, a reviewer, a genre) are not this command's.
+The first artefact of the new kind is not made by the command. It is
+made through `/forge <name>` on real work, and that is the trial of
+the definition. Where a kind needs a trial on real work before its
+position can hold, the order is this: the brief first, then the
+definition and the template built with their reviewers and tried,
+then the position and the item of the design.
 
-### Another model family
+For now the command adds the new kind to the engine, for every user
+of it. A user is to be able to add an artefact of his own as easily,
+kept at his own place. Where that place is remains open. Types other
+than an artefact are not this command's: a whole chain, a reviewer
+and a genre of recipe are left out of it.
 
-A model of another family is reached today over a link, and that
-link is built for research. How it stands is described in
-[Another model family](another-model-family.md).
+### Reviewers on another model family
 
-Reviewers on that link are intended and not built. A challenger
-persona and a critic lens may be sent to another engine over it. What
-is sent is the forge's own persona and contract. The engine reads the
-project from disk, as a subagent (an isolated helper agent that never
-sees the conversation) does. Its report is scanned for instance
-values and checked for its shape before the command numbers and
-files it unchanged. The engine is named at the call.
+A model of another family is reached today over a link built for
+research. The page [Another model family](another-model-family.md)
+says how that link stands.
+
+Reviewers on that link are intended and not built. They are a
+challenger persona (a reviewer of the substance of the thinking) and
+a critic lens (a reviewer of the quality of the documents). What
+would be sent is the forge's own persona and contract. The other
+model would read the project from disk, as a subagent (a separate
+Claude run that sees nothing of the conversation) does. Its report
+would be scanned for instance values and checked for its shape.
+Only then would the command number it and file it, unchanged. Which
+model is used would be named at the call.
 
 ### Open to those who use it
 
-What the forge wants most from those who use it is feedback and
-ideas. A finished change is welcome too, on the forge's own rule:
+The forge is open to those who use it. What it wants of them most
+is feedback and ideas. A finished change is welcome too, on the
+forge's own rule:
 
-- a change of how the forge behaves goes through the chain before it
-  is built;
-- a document that is a render goes through its recipe;
+- a change of how the forge behaves goes through the chain before
+  it is built;
+- a change to a generated document goes through its recipe;
 - nobody sends a change he has not tried himself.
 
-What enters the forge stays the principal's decision. How a change
-reaches the forge is described in
-[Make a change to the forge](../extend/how-a-change-is-made.md).
-
-Experience from use flows back through the ordinary door. The
-principal takes it in through `/forge intent`, as input like any
-other.
+The page [Make a change to the forge](../extend/how-a-change-is-made.md)
+says how a change reaches the forge. What enters the forge stays the
+principal's decision.
 
 ## Why
 
-Why direction is named but destinations are not: the reason is not
-recorded.
-
-Why the mechanics of a layer wait until it is taken up: the reason
-is not recorded.
-
-Why the chain never spans two principals: the reason is not
-recorded.
-
-A new kind of artefact has a command because a kind added by hand
-took a search for everything it touches. Two of the things a kind
-needs, a prefix and a challenger, are easily forgotten. With the
-command the chain grows without anyone having to know by heart what
-a kind of artefact is made of.
+A new kind is added by one command because a kind added by hand took
+a search for everything it touches. Two of the things a kind needs,
+a prefix and a challenger, are easily forgotten.
 
 Reviewers on another model family are intended so that a challenge
-can bring a lens with genuinely different priors.
+can bring in a lens with genuinely different priors.
 
-Why what enters the forge stays the principal's decision: the reason
-is not recorded.
+Why no destination and no deadline is promised is not recorded
+beyond the owner's discretion and pace. Why feedback and ideas are
+wanted most is not recorded either.
+
+The terms of the forge, each in one line, are in the
+[Glossary](../reference/glossary.md).
 
 ## See also
 
@@ -160,5 +181,5 @@ is not recorded.
 - [Glossary](../reference/glossary.md): every term of the forge in
   one line.
 
-Generated on 2026-10-25 for version 6.0 from the files the
+Generated on 2026-11-01 for version 6.4 from the files the
 front-matter names; never edited by hand.

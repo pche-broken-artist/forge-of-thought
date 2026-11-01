@@ -1,22 +1,28 @@
 ---
-generated: 2026-10-25
-version: 6.0
+generated: 2026-11-01
+version: 6.4
 made: mirrored
-inputs-hash: 6433be71e3a7bfa3
+inputs-hash: 422aedcf9e321c43
 inputs:
   - .claude/skills/publish/SKILL.md
   - templates/ledger.md#Published
+  - projects/forge/10-intent.md#POS.1910
 ---
 
 # Publish a designed file
 
-`/publish` makes the designed Word or PowerPoint file of a render, through a model and its document skills. This page is for you, the principal (the person whose thinking is forged), when a render is read and approved and you want the designed file to hand on.
+This page shows how you make the designed Word or PowerPoint file of a render with `/publish`. It is for you as the principal, the person whose thinking is forged, once you have read a render and want it as a finished file.
 
 ## When to use it
 
-Use it when the Markdown render is as you want it and you want the designed `.pptx` or `.docx`. Nothing else makes this file: `/render` never does, `/release` never does and Claude does not do it on its own judgement. It starts only when you type the command. The command makes a file and sends it nowhere.
+Use it when the Markdown render of a recipe is the text you have read and you want it as a designed `.pptx` or `.docx`. The Markdown and the plain file come first, through `/render` (see [Render an output](render-an-output.md)).
 
-The recipe must have a `## Format` section that names the format. A recipe without one ends at the Markdown, and `/publish` says so and stops. A screenplay has no published file.
+Only you start this command. `/render`, `/release` and Claude's own judgement never run it, because it is expensive: a model works through its document skills and the run takes minutes.
+
+Two recipes end before this command:
+
+- A recipe without a `## Format` section ends at the Markdown. `/publish` says so and stops.
+- A screenplay has no published file.
 
 ## The command
 
@@ -24,68 +30,57 @@ The recipe must have a `## Format` section that names the format. A recipe witho
 /publish <recipe> [slug]
 ```
 
-The slug names the project. Without it Claude infers the project from context and asks if that is ambiguous. The Markdown and the plain file that come before this step are made by `/render`; see [Render an output](render-an-output.md).
+`<recipe>` is the name of a file in the project's `recipes/`. The slug names the project; without it Claude infers the project from context and asks if that is ambiguous.
 
 ## What happens
 
-1. Claude reads the recipe `recipes/<recipe>.md`. It stops, saying so, if the recipe does not exist. It also refuses unless the repository is on `main` and level with its origin, because a published file is binary and is never merged. A repository that is behind or has diverged is refused, and `/pull` is offered.
-
-   You should now see either the next step starting or a refusal that names the reason.
-
-2. Claude reads the `## Format` section. A recipe without it ends at the Markdown, and Claude says so and stops. An older recipe that still has a `## Build instructions` section is read as its Format section. Where that names no format, Claude asks once, and offers to bring the recipe in line through `/recipe`.
-
-   You should now see the format (Word or PowerPoint) settled, or a plain statement that the recipe ends at the Markdown.
-
-3. Claude finds the render, `renders/<recipe>.md` or the path the recipe's `output:` gives. It stops, saying so, if there is none. It never renders: what is published is the Markdown as it lies on disk, the text you have read.
-
-   You should now see no message about a missing render.
-
-4. If the render is stale, Claude names which version differs before anything runs, and waits for your word. You either publish as it is, or stop and run `/render` first. What makes a render stale is on [Render provenance](../reference/render-provenance.md).
-
-   You should now see the question only if the render is stale, and nothing runs until you answer.
-
-5. Claude says in one line what runs and that it takes minutes, because the run is expensive. Then it runs the script of the format (`md2pptx.py` or `md2docx.py`) with `--engine claude`, naming the recipe, the template or reference document and the model that the Format section gives. The file is written into `published/`. What each script needs installed is on [Scripts](../reference/scripts.md).
-
-   You should now see the one-line notice, then the designed file `published/<recipe>.pptx` or `published/<recipe>.docx` once the run ends.
-
-6. Claude checks that the file exists and writes its companion `published/<recipe>.md`. Then it remakes the ledger and reports what was published from what.
-
-   You should now see the report naming the file and the render it was made from.
+1. Claude reads the recipe. It must be on the `main` branch, and the repository must not be behind or diverged from its origin. If it is, `/publish` refuses and offers `/pull`.
+   You should now see the recipe accepted, or a refusal that names the branch or the state against origin.
+2. Claude reads the recipe's `## Format` section and finds the render, `renders/<recipe>.md` or the path the recipe's `output:` names.
+   You should now see no stop. If the recipe has no Format section, or the render does not exist, Claude says so and stops.
+3. If the render is stale, Claude names which version differs and waits for your word: publish as it is, or stop so that you can run `/render` first. `/publish` never renders. What it publishes is the Markdown as it lies on disk, the text you have read. The definition of a stale render is on [Render provenance](../reference/render-provenance.md).
+   You should now see either no remark, when the render is current, or the version that differs and a question to you.
+4. Claude says in one line what runs and that it takes minutes. Then it runs the script of the format, `md2pptx.py` or `md2docx.py`, with `--engine claude`, the recipe, and the template or reference document and the model that the Format section names. What the scripts need installed is on [Scripts](../reference/scripts.md).
+   You should now see the one line, and then the run in progress.
+5. Claude checks that the file exists in `published/` and writes the companion `published/<recipe>.md`, then remakes the ledger.
+   You should now see a report of what was published from what.
 
 ## What you have afterwards
 
-- The designed file in `published/`.
-- The companion `published/<recipe>.md`, which records what the file was made from: the project, the file name, the recipe with its version, the render (its generated date and the input versions of its front-matter), the model and the date of publishing. Its fields are described on [Render provenance](../reference/render-provenance.md).
-- A row in the Published table of the ledger. The row is read from the companion and shows the file, the recipe, the render it came from, the model, the date and the state. The state is `current` while the render's generated date is the one the companion names. It is `stale` once the render is newer or missing. The state is computed when the ledger is made and is never written into the companion.
-
-A stale published file is only reported. `/publish` never remakes it by itself.
+- The designed file in `published/`, as `<recipe>.pptx` or `<recipe>.docx`.
+- The companion `published/<recipe>.md`. It records which recipe and which render the file was made from, the model and the date. The shape is on [Render provenance](../reference/render-provenance.md).
+- A row in the Published table of the ledger. The ledger reads the companion and shows the file `current`. It shows `stale` once its render is newer or missing. A stale file is only reported, never remade for you.
 
 ## If something goes wrong
 
 - The recipe does not exist: Claude says so and stops.
-- The repository is not on `main`, or is behind or diverged from its origin: Claude refuses and offers `/pull`.
-- The recipe has no `## Format` section: it ends at the Markdown, and Claude says so and stops.
-- The render does not exist: Claude says so and stops. Run `/render` first.
-- The render is stale: Claude waits for your word, to publish as it is or to stop.
-- The run fails: no companion is written, so the ledger shows no new published file. The reason for a failure is the script's output; what each script needs installed is on [Scripts](../reference/scripts.md).
+- The recipe has no `## Format` section: it ends at the Markdown, and Claude says so and stops. An older recipe with `## Build instructions` is read as its Format. Where it names no format, Claude asks once and offers to bring the recipe in line through `/recipe`.
+- The render does not exist: Claude says so and stops. Run `/render <recipe>` first.
+- The repository is not on `main`, or is behind or diverged from its origin: `/publish` refuses. Use `/pull` when it is offered.
+- The run fails: no companion is written, so the ledger shows no new row for it. Run the command again.
+
+## The designed file is not edited by hand
+
+Do not edit the published file. If you want to change it, copy it first under a name of your own and work on the copy. That copy, or a PDF you save from Word or PowerPoint, is yours: keep it in `published/`, and the forge sets no companion, no ledger row and no check on it. Why the forge's own files stay untouched is on [Renders and recipes](../about/renders-and-recipes.md).
 
 ## A worked example
 
-The recipe is `<recipe>` in the project `<slug>`, with a `## Format` section that names Word.
+The project has the slug `my-project`, and its recipe `pitch` names a Word format. The render `renders/pitch.md` is current.
 
 ```
-/publish <recipe> <slug>
+/publish pitch my-project
 ```
 
-The repository is on `main` and level with its origin. The render `renders/<recipe>.md` is older than none of its inputs, so Claude raises no stale warning. It prints one line saying that the Word file is being made through a model and takes minutes. When the run ends, `projects/<slug>/published/<recipe>.docx` exists and so does `published/<recipe>.md`. Claude reports that the file was published from the render of the recipe, and the Published table of the ledger shows the file as `current`.
+Claude is on `main`, in step with its origin. It says that a Word file is being made through a model and that this takes minutes. When the run ends, `projects/my-project/published/pitch.docx` and `projects/my-project/published/pitch.md` exist. The ledger shows the file as `current`.
 
-Later you change the intent and run `/render <recipe>`. The render is now newer than the companion names, and the table shows the file as `stale`. Nothing remakes it until you run `/publish <recipe> <slug>` again.
+Later you change the intent and run `/render pitch my-project`. The render is now newer than the companion records, so the ledger shows the file as `stale`. Nothing remakes it until you run `/publish pitch my-project` again.
 
 ## See also
 
 - [Render an output](render-an-output.md): the Markdown and the plain file that come first.
 - [Render provenance](../reference/render-provenance.md): the published companion and the definition of a stale render.
 - [Scripts](../reference/scripts.md): `md2pptx.py` and `md2docx.py`, the `claude` engine and what it needs.
+- [Renders and recipes](../about/renders-and-recipes.md): why the forge's files are never edited by hand and what the principal's own files beside them are.
 - [Glossary](../reference/glossary.md): every term of the forge in one line.
 
-Generated on 2026-10-25 for version 6.0 from the files the front-matter names; never edited by hand.
+Generated on 2026-11-01 for version 6.4 from the files the front-matter names; never edited by hand.

@@ -1,19 +1,19 @@
 ---
-generated: 2026-10-25
-version: 6.0
+generated: 2026-11-01
+version: 6.4
 made: mirrored
-inputs-hash: 43cffa43c6d1e53b
+inputs-hash: a9bf346fa01a46e6
 inputs:
   - .claude/skills/spinoff/SKILL.md
 ---
 
 # Spin off a group
 
-`/spinoff` splits one requirement group of an assignment into a project of its own. This page is for you, the principal (the person whose thinking is being forged), when a group has grown into something that deserves its own chain.
+This page is for the principal (whoever's thinking is being forged) who wants one requirement group of an assignment to become a project of its own. `/spinoff` splits that group out of its source project, creates the new project and leaves a link behind. Claude is the AI that runs the steps.
 
 ## When to use it
 
-Use it when a group of requirements in one project should be delivered by a project of its own. Claude may tell you that a group looks ready. It never runs the command on its own: the spin-off happens only on your explicit instruction.
+Use it when a group of requirements has grown into something that deserves its own chain of documents. The command runs only on your explicit instruction. Claude may point out that a group looks ready, but it never proposes and runs the split in one step.
 
 ## The command
 
@@ -21,65 +21,52 @@ Use it when a group of requirements in one project should be delivered by a proj
 /spinoff <project> <group> <slug>
 ```
 
-- `<project>` is the project that holds the group.
-- `<group>` is the name of the requirement group.
-- `<slug>` is the slug of the new project.
+- `<project>`: the source project that holds the assignment.
+- `<group>`: the name of the requirement group to move.
+- `<slug>`: the short name of the new project.
 
 ## What happens
 
-1. Claude lists the items of the group that will move. They can be requirements, out-of-scope items, constraints, assumptions, deliverables, open questions and success criteria. You may adjust the list.
-
-   You should now see the list of items, confirmed by you.
-
-2. Claude creates the new project by the same procedure as a new project, as a thought project. It makes files only. The new project's git repository and remote are your one-off act afterwards. What the new project is made of is described in [Start a project](start-a-project.md).
-
-   You should now see the new project's folder with its files, and no repository in it.
-
-3. Claude derives a short brief for the new project from the relevant parts of the source project's intent. The brief says why this became its own project and what it inherits. It is written in the language settled in the previous step. Claude shows it to you as a draft. On your word it is approved through the brief procedure of `/forge`.
-
-   You should now see an approved brief in the new project.
-
-4. Claude mines the brief into the new project's intent through the intent procedure of `/forge`. That creates the intent and writes the mining record in the intent's history.
-
-   You should now see the new intent, and its history holding the record of the mining.
-
-5. Claude turns to the source project and works intent-first. It records the spin-off in the source intent, saying that the group's substance is now delivered by the new project. Then it derives the change in the source assignment. The moved items are marked superseded, never deleted. The group is replaced by one link item that reads "Delivered by project *slug*, see its assignment." The command itself writes only the decision, in the source project's decisions file.
-
-   You should now see the moved items marked superseded, the one link item in their place, and the decision recorded.
-
-6. Claude makes the ledger of each project afresh and reports the result. The ledger is the state report that is made at read time and never kept in git.
-
+1. Claude lists the items of the group that will move (requirements, out-of-scope items, constraints, assumptions, deliverables, open questions and success criteria). You may adjust the list.
+   You should now see the list of items, and the scope confirmed by you.
+2. Claude creates the new project as a thought project, in the way `/new-project` creates one. It makes files only. The new project's git repository and its remote are your one-off act afterwards.
+   You should now see the new project folder with its files.
+3. Claude derives a short brief for the new project from the relevant parts of the source intent. The brief says why this became its own project and what it inherits. It is written in the language settled in step 2. Claude shows it as a draft, and on your word it is approved in the same way as any brief.
+   You should now see the approved brief in the new project.
+4. Claude mines the brief into the new project's intent in the usual way. This creates the new intent, and the mining is recorded in that intent's history.
+   You should now see the new intent and its history record.
+5. In the source project the change goes intent first. Claude records the spin-off in the source intent: the group's substance is now delivered by the new project. It then derives the change in the source assignment. The moved items are marked superseded, never deleted. The group is replaced with one link item: "Delivered by project *slug*, see its assignment."
+   You should now see the spin-off in the source intent and the link item in the source assignment.
+6. The command itself writes only the decision record in the source project's decisions file.
+   You should now see a new decision recorded.
+7. Claude makes both ledgers (the state records of the two projects) afresh and reports the result.
    You should now see a report on both projects.
 
 ## What you have afterwards
 
-- A new project with an approved brief, an intent and its history.
-- In the source project, an intent that records the spin-off, an assignment whose moved items are superseded and replaced by one link item, and a decision.
-- A fresh ledger for both projects.
-
-The new project has no git repository yet. Creating it and adding a remote is your step. For terms used here, see the [Glossary](../reference/glossary.md).
+- A new thought project with its own brief, intent and history. See [Start a project](start-a-project.md) for what a new project is made of.
+- A source assignment whose moved items are superseded and whose group is replaced by one link item.
+- A source intent that records the spin-off.
+- A decision record of the spin-off.
+- Fresh ledgers for both projects.
 
 ## If something goes wrong
 
-The inputs record no error messages for this command. Two stops are stated:
-
-- Without your explicit instruction the command does not run, and Claude never proposes and runs it in one step.
-- Nothing is derived from the draft brief until you approve it.
+The inputs name no error messages and no stop conditions beyond these: nothing runs without your explicit instruction, and the brief is not approved without your word. If the list of items is wrong, adjust it at step 1 before anything is created.
 
 ## A worked example
 
-You have a project `alpha` whose assignment holds a group called `Reporting`.
+You have a project `alpha` whose assignment has a group `reporting`. You type:
 
-1. You type `/spinoff alpha Reporting reporting-tool`.
-2. Claude lists the items of `Reporting`. You remove one item that belongs with the rest of `alpha` and confirm.
-3. Claude creates `projects/reporting-tool/` and drafts its brief. You approve the brief.
-4. Claude mines the brief into the intent of `reporting-tool`.
-5. In `alpha`, the intent records that `Reporting` is delivered by `reporting-tool`. The assignment marks the confirmed items superseded and puts one link item where the group stood. The decision is written.
-6. Both ledgers are made afresh and Claude reports. You then create the repository of `reporting-tool` yourself.
+```
+/spinoff alpha reporting reporting-tool
+```
+
+Claude lists the items of `reporting` and you drop one of them from the move. Claude creates `reporting-tool`, shows you a draft brief, and you approve it. Claude mines the brief into the new intent. In `alpha` the intent records that reporting is now delivered by `reporting-tool`, the moved items of the assignment become superseded, and one link item points to the new project. A decision is recorded, and both ledgers are made again.
 
 ## See also
 
 - [Start a project](start-a-project.md): what the new project is made of.
 - [Glossary](../reference/glossary.md): every term of the forge in one line.
 
-Generated on 2026-10-25 for version 6.0 from the files the front-matter names; never edited by hand.
+Generated on 2026-11-01 for version 6.4 from the files the front-matter names; never edited by hand.

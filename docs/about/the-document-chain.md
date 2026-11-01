@@ -1,8 +1,8 @@
 ---
-generated: 2026-10-25
-version: 6.1
+generated: 2026-11-01
+version: 6.4
 made: derived
-inputs-hash: 6ccfbf580107e929
+inputs-hash: 9fc8fdc19e4e10f0
 inputs:
   - CLAUDE.md#What this workspace is
   - CLAUDE.md#Document chain
@@ -21,202 +21,176 @@ inputs:
 
 # The document chain
 
-The document chain is the series of versioned documents an idea
-travels in Forge of Thought, from the idea put together onward. This
-page explains how the chain is shaped, why it is a star of
-definitions rather than a fixed line, and how it grows. It is for
-anyone who uses the forge, extends it or weighs it up.
+The document chain is the set of versioned documents that one idea
+travels through in a project, from a brief down to whatever layer the
+project needs. This page explains how the chain is shaped, why it is
+a star of definitions rather than a fixed line, and how it grows. It
+is for anyone who uses the forge, extends it or weighs it up.
 
 ## What it is
 
-Every project of thought has a chain of artefacts. An artefact is a
-document of the chain, composed by the principal (the person whose
-thinking is being forged) with Claude. The chain ends where the
-project needs it to.
+The chain belongs to one principal (the person whose thinking is
+being forged, with final authority over its content). Each document
+of the chain is called an artefact. Every artefact is versioned and
+keeps its history beside it.
 
-- **The start.** A chain starts at a brief: the principal's own text
-  of one whole of thinking. See [The brief](the-brief.md).
-- **The trunk.** The intent is the trunk of every chain: what the
-  principal currently holds, chiselled from the briefs. See
-  [The intent](the-intent.md).
-- **The layers below.** Below the intent, a project takes the layers
-  it needs. None of them is a condition of another. Many projects
-  end at the intent, where what is wanted needs no solution written
-  down.
+The chain has a fixed start and a fixed trunk:
 
-A layer a project does not have is not missing. The state map of the
-project and the checks say nothing of it, and no end of the chain is
-declared anywhere.
+- **The brief** is where the chain starts: the principal's own text
+  of what he wants and why. See [The brief](the-brief.md).
+- **The intent** is the trunk: the positions the principal holds,
+  chiselled out of the briefs. See [The intent](the-intent.md).
 
-Each artefact has a definition: a file in
-`.claude/skills/forge/states/`, paired with the artefact's template.
-The definition says what the artefact is, how it is found and what
-its inputs are; the template says what comes out. What a definition
-holds in full is described in [Elicitation](elicitation.md). Which
-artefacts the forge has is simply the listing of that directory, one
-definition each. They are listed nowhere else. The table of artefacts
-in the README is rendered from the definitions, and
-[Artefacts](../reference/artefacts.md) gives today's definitions one
-row each.
+Below the intent a project takes the layers it needs. No layer below
+the intent is a condition of another. Many projects end at the
+intent. A layer a project does not have is not missing: the state
+map of `/forge` and the checks say nothing of it.
+
+The chain ends where the project needs it to. Nothing is implemented
+in the forge: the chain specifies what is wanted and, where the
+project takes that layer, how it is realised.
 
 ## How it works
 
-### One command per target, one definition per artefact
+### Every artefact has a definition
 
-You work on the chain by naming the artefact you want to work on:
-`/forge intent`, `/forge assignment`, `/forge brd`. The command
-`/forge` is a dispatcher. It finds the definition of the named
-artefact and follows it. Everything specific to the artefact (its
-inputs, its working rules) lives in that definition, so the
-dispatcher itself never changes.
+Every artefact of the chain has a definition (see
+[Elicitation](elicitation.md)). The definition is the file
+`.claude/skills/forge/states/<state>.md`, paired with the artefact's
+template. The definition says what the artefact is, how it is found
+and which inputs it is made from. The template says what comes out.
 
-### The star
+Which artefacts the forge has is the listing of the definitions
+directory, one definition per artefact. They are listed nowhere
+else. The table of artefacts in the README is rendered from the
+definitions. [Artefacts](../reference/artefacts.md) lists the
+definitions of today, one row each.
+
+### The chain is a star
 
 Each definition declares its own inputs. So the chain is a star, not
-a fixed line: a new layer can branch from any existing artefact by
-adding one definition. Nothing that exists has to be reworked for it.
+a fixed line. A new layer can branch from any artefact by adding one
+definition, without reworking anything that exists.
 
-Today's definitions declare these inputs:
+Work on the chain is invoked by the name of the target artefact:
+`/forge <state>`, such as `/forge intent` or `/forge assignment`.
+The `/forge` command is a dispatcher. It finds the definition for
+the state named and follows it. The dispatcher never changes when a
+layer is added. Called bare, `/forge` reports the state map of the
+project, including which artefacts can be worked on from here and
+which cannot yet, and what is missing for them.
 
-- **Brief:** the principal's thought, however it arrives, with the
-  research notes, sources and Claude's proposals gathered around it.
-  The existing intent is read only to know what already stands.
-- **Intent:** the briefs the principal says to mine, approved or
-  not.
-- **Assignment:** the intent.
-- **BRD:** one parent, named by the principal. The parent is the
-  assignment where the project has one, otherwise the intent. See
-  [The BRD](the-brd.md).
-- **Solution design:** the lowest layer the project has above it
-  (the intent alone, the assignment or the BRD) and whatever stands
-  above that.
+### The chain of today
 
-A file someone else gave (a transcript, an offer, a document) is a
-third way into a BRD, but it is not a parent in the chain. It yields
-a draft BRD that is always a work product in `work/`, never the
-chain's BRD. The reason is that what someone said is never silently
-promoted to the principal's own position. Where the principal wants
-that BRD in the chain, an intent is first made from the same source
-and the BRD is then re-parented on it.
-
-The diagram shows these arrows as the definitions declare them.
-A dotted arrow is a way in that is not a parent of the chain.
+The diagram shows the artefacts that exist today, with the inputs
+each definition declares. A solid arrow is the usual parent. A
+dashed arrow is an alternative parent or a way in from outside the
+chain.
 
 ```mermaid
 flowchart TD
-    T["the principal's thought"] --> B["brief<br/>00-brief.md"]
-    B --> I["intent<br/>10-intent.md"]
-    I --> A["assignment<br/>20-assignment.md"]
-    A --> R["BRD<br/>30-brd.md"]
-    I -->|"no assignment"| R
-    F["a file someone gave"] -.-> W["draft BRD<br/>work product in work/"]
-    I -->|"lowest layer above"| S["solution design<br/>40-solution-design.md"]
-    A -->|"lowest layer above"| S
-    R -->|"lowest layer above"| S
+  T["The principal's thought, with research, sources and Claude's proposals"] --> B["Brief: 00-brief.md and any 00-brief-name.md"]
+  B -->|the briefs the principal says to mine| I["Intent: 10-intent.md"]
+  I --> A["Assignment: 20-assignment.md"]
+  A -->|parent| R["BRD: 30-brd.md"]
+  I -.->|parent where there is no assignment| R
+  F["A file someone gave, registered in sources/"] -.->|a third way in, not a parent| W["Draft BRD as a work product in work/"]
+  I -.->|lowest layer above| S["Solution design: 40-solution-design.md"]
+  A -.->|lowest layer above| S
+  R -.->|lowest layer above| S
 ```
 
-The solution design takes exactly one of its three arrows: the one
-from the lowest layer the project has above it.
+The inputs, as each definition declares them:
 
-### Numbering in tens
+- **Brief**: the principal's thought, however it arrives. Around it:
+  research notes, sources and Claude's own proposals. The existing
+  intent and the ledger (the project's single source of truth for
+  state, made at read time) are read only to know what already
+  stands.
+- **Intent**: the briefs the principal says to mine, approved or
+  not, with the decisions and the ledger. Sources are read only as
+  the principal directs.
+- **Assignment**: the intent, with the decisions and the ledger.
+- **BRD**: one parent, named by the principal. The parent is the
+  assignment where there is one, otherwise the intent. A file
+  someone else gave (a transcript, an offer, a document) is a third
+  way in. It yields a draft BRD that is always a work product, never
+  the chain's BRD. See [The BRD](the-brd.md).
+- **Solution design**: the lowest layer the project has above it
+  (the intent alone, the assignment or the BRD) and whatever stands
+  above that.
+
+### Files numbered in tens
 
 The files of the chain are numbered in tens: `00-brief.md`,
 `10-intent.md`, `20-assignment.md`, `30-brd.md`,
-`40-solution-design.md`. Later briefs are `00-brief-<name>.md`. The
-gaps leave room for a layer to be added later without renaming
-anything that exists. The number orders the files. It prescribes no
-sequence of work: the inputs of each artefact are what its
-definition says, not what the number suggests.
+`40-solution-design.md`. A gap of ten leaves room for a layer to be
+added without renumbering. The number in a file name orders the
+files. It prescribes no sequence: which artefact is made from which
+is what the definitions say.
 
-### Changes of substance go into the intent first
+### Substance goes into the intent first
 
 A change of substance goes into the intent first. From there it
-propagates down the whole chain the project has: the assignment, the
-BRD and the solution design are each brought in line with it. Only
-wording is fixed directly in a lower layer.
+propagates down the whole chain the project has. Only wording is
+fixed in a lower layer directly.
 
 A change may also come from below. When solving shows that what is
 wanted cannot be had, or must be wanted differently, the intent
-still changes first and the layers follow. If the principal dictates
-substance straight into a lower layer, Claude proposes the matching
-change of the intent in the same step.
+changes first and the layers follow. If the principal dictates
+substance straight into a lower layer, the matching change to the
+intent is proposed in the same step.
 
-### One principal per chain
+### One chain, one principal
 
-The chain never spans two principals. The layers below the
-assignment grow in the same project, by the same principal's hand,
-when he chooses to take his own thought further. What a recipient
-does with an assignment handed to him is his own run of the forge,
-in his own installation: the assignment becomes his brief. An
-assignment is written to be self-contained for exactly that.
+The chain never spans two principals. Layers below the assignment
+grow in the same project, by the same principal's hand, when he
+chooses to take his own thought further. What a recipient does with
+an assignment handed to him is his own run of the forge. In that run
+the assignment becomes his brief. An assignment is self-contained so
+that it can serve as such a brief.
 
 ## Why
 
-- **A star, not a line.** Knowing the name of the target artefact is
-  knowing the command. Nothing has to be memorised as layers are
-  added, and a new layer branches from any artefact by adding one
-  definition, with the dispatcher left as it is.
-- **The listing of one directory.** Which artefacts exist is said in
-  one place, the directory of definitions, and nowhere else. The
-  reason for listing them nowhere else is not recorded beyond the
-  README table being rendered from them.
-- **Layers only as needed.** A project takes the layers it needs
-  because many ideas need no solution written down. A solution
-  design is worth writing where the way is not obvious, where a
-  choice has a price, or where two hands would solve the same matter
-  differently if it were not written down. Whether a project has one
-  is the principal's decision.
-- **Numbering in tens.** The gaps let a layer be added without
-  renaming anything that exists. The BRD and the solution design
-  were both added this way.
-- **Intent first.** The intent is the trunk from which every layer is
-  derived. The reason for routing every change of substance through
-  it, beyond that, is not recorded.
-- **One principal.** Others act on an assignment in their own run of
-  the forge, so the chain stays the thinking of the one principal
-  whose project it is.
-- **Growth on demand.** The engine is meant to keep extending
-  downward, as far as thoughts need to be taken. The mechanics of a
-  new layer are designed when that layer is actually taken up, not
-  in advance.
+- **A star rather than a line.** Knowing the name of the target
+  artefact is knowing the command. Nothing has to be memorised as
+  layers are added. A future layer branches from any artefact by
+  adding one definition, so the dispatcher never has to change.
+- **Layers taken as needed.** Many projects end at the intent,
+  because what is wanted there needs no solution written down. A
+  solution design is worth writing where the way is not obvious,
+  where a choice has a price, or where two hands would solve the
+  same matter differently if it were not written down. Whether it is
+  written is the principal's call.
+- **Numbering in tens.** Later layers can be added without renaming
+  anything that exists.
+- **The listing of the definitions as the only list of artefacts.**
+  The reason is not recorded.
+- **Substance in the intent first.** The reason is not recorded.
+- **One principal per chain.** The reason is not recorded. What is
+  recorded is the consequence: a recipient continues in a run of his
+  own, from the assignment as his brief.
 
 ## A worked example
 
-A project `example-project` starts with one brief:
+A principal opens the project `example-project` and writes
+`00-brief.md`. He mines it with `/forge intent`, and `10-intent.md`
+holds his positions.
 
-```
-projects/example-project/
-  00-brief.md
-```
+For a while the project ends there. The state map reports the brief
+and the intent and says nothing of an assignment, a BRD or a
+solution design, because a layer the project does not have is not
+missing.
 
-The principal mines it into the intent with `/forge intent`. The
-idea needs no assignment and no BRD, but the way to realise it is not
-obvious, so he asks for a solution design. Its definition takes the
-lowest layer above it, which here is the intent alone:
+Later the principal wants the way of realisation written down, but
+hands nothing to recipients. He runs `/forge solution-design`. Its
+definition takes the lowest layer above it, which here is the intent
+alone. The project now holds `00-brief.md`, `10-intent.md` and
+`40-solution-design.md`. The gap at 20 and 30 is not a defect.
 
-```
-projects/example-project/
-  00-brief.md
-  10-intent.md
-  40-solution-design.md
-```
-
-Later the principal decides to hand part of the work to a team and
-writes an assignment with `/forge assignment`. It takes the free
-number `20`, and nothing existing is renamed:
-
-```
-projects/example-project/
-  00-brief.md
-  10-intent.md
-  20-assignment.md
-  40-solution-design.md
-```
-
-The solution design now has a lower layer above it, the assignment,
-which becomes its input. When the principal changes his mind on a
-matter of substance, he changes `10-intent.md` first, and the
-assignment and the solution design are brought in line with it.
+While solving, the principal finds that one thing he wanted cannot
+be had as stated. The intent is changed first. The solution design
+is then brought to the new intent.
 
 ## See also
 
@@ -230,5 +204,4 @@ assignment and the solution design are brought in line with it.
 - [Glossary](../reference/glossary.md): every term of the forge in
   one line.
 
-Generated on 2026-10-25 for version 6.1 from the files the
-front-matter names; never edited by hand.
+Generated on 2026-11-01 for version 6.4 from the files the front-matter names; never edited by hand.

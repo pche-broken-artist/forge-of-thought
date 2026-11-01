@@ -1,8 +1,8 @@
 ---
-generated: 2026-10-25
-version: 6.0
+generated: 2026-11-01
+version: 6.4
 made: mirrored
-inputs-hash: ef9bad232f703f29
+inputs-hash: 12606bca01997e10
 inputs:
   - .claude/skills/work/SKILL.md
   - templates/work.md
@@ -11,104 +11,120 @@ inputs:
 
 # Work a work product
 
-This page shows how you make an output of the project that needs work of its own, such as a model, an analysis or a worked task, with `/work`. It is for the principal (the person whose thinking is being forged) who wants that output made, and kept honest about the way and the reason it was made. What a work product is, and why it is neither an artefact of the chain nor a render, is explained in [The work product](../about/the-work-product.md).
-
-A work product is two files in the project's `work/` folder. The specification, `work/<name>.spec.md`, holds the way and the why. The file, `work/<name>.<ext>`, holds the content.
+This page shows how you make an output of the project that has work of its own, such as a model, an analysis or a worked task, with `/work`. It is for you as the principal, the person whose thinking is forged. What a work product is, and why it is neither an artefact nor a render, is explained in [The work product](../about/the-work-product.md). Terms of the forge are in the [Glossary](../reference/glossary.md).
 
 ## When to use it
 
-- You want an output that is made with work of its own and is not a document of the chain.
-- You want to see which work products the project has and whether each is up to date.
-- You have worked a work product's file by hand and want it left alone.
+Use `/work` when the project needs a file that is made by work, not composed as a document of the chain and not generated from the chain. A work product is two files in the folder `work/`:
+
+- the specification `work/<name>.spec.md`, which holds the way and the why;
+- the file `work/<name>.<ext>`, which holds the content.
+
+Use it bare to see which work products the project has.
 
 ## The command
 
-```
-/work [name] [slug]
-```
-
-Both words are optional. Without a name the command lists the project's work products. With a name it works that product. The slug names the project; where it is left out, Claude infers the project from the conversation and asks if that is ambiguous.
-
-A line you can type as it stands:
+To see the roster of the project's work products:
 
 ```
-/work <name>
+/work
 ```
+
+To work one product, with a name and optionally the slug of the project:
+
+```
+/work <name> <slug>
+```
+
+Claude infers the project from the conversation. If it is ambiguous, Claude asks which one you mean.
 
 ## What happens
 
 ### Bare: the roster
 
-1. Claude remakes the ledger (the file that holds the state of the project, made from its documents each time it is read) with its script.
-   You should now see the ledger's Work table.
-2. Claude lists each work product from that table:
-   - its file
-   - its specification and the specification's version
-   - its inputs
-   - when it was made
-   - its state
+1. Claude remakes the ledger (the file that holds the state of the project, made by a script each time it is read) and reads its Work table.
+2. Claude lists each work product with its file, its specification and the specification's version, its inputs, when it was made and its state.
 
-   You should now see one entry per work product, and a next step only where the conversation suggests one.
+You should now see one line per work product. The state is one of:
 
-The three states are `current`, `stale` and `by hand`. Their meaning is in [Ledger](../reference/ledger.md).
+- `current`: the file was made from the specification as it stands.
+- `stale`: the specification has changed since the file was made, or the file was never made. A product that has no making yet shows `—` for the date and `stale`.
+- `by hand`: you worked the file yourself and do not want it remade.
+
+The table and its state words are described in [Ledger](../reference/ledger.md). Claude recommends a next step only where the conversation suggests one.
 
 ### With a name: the specification
 
-1. Claude looks for `work/<name>.spec.md`. If it does not exist, its birth is a step of its own and happens on your word. The specification comes from the work template as a first draft, with its history companion `work/<name>.spec.history.md` beside it.
-   You should now see two new files, and the Work table showing the product with no made date and the state `stale`.
+1. If `work/<name>.spec.md` does not exist yet, Claude proposes to create it. It is born on your word, as a step of its own, from the work template as a draft, together with its history companion (the append-only file beside it that records every change).
+
+   You should now see the new specification and its history companion, and the work product in the roster as `stale`.
+
 2. Claude reads the inputs the specification names, as they stand. Where the intent is among them, it reads the project's threads too.
-   You should now see Claude working from the named inputs and not from memory.
-3. You choose how the specification is worked.
-   - Handed over: Claude works it alone from what you gave it, from research and from the sources. It returns a proposal with its assumptions listed and each choice listed with what it was chosen against.
+
+   You should now see Claude work from the named inputs and nothing else.
+
+3. You work the specification with Claude, in the way you choose:
+
+   - Handed over: you give Claude a few sentences, and it works the specification alone from them, from research and from the sources. It returns a proposal with its assumptions listed and each of its choices named with what it was chosen against.
    - Found together: Claude interviews you, one question at a time.
 
-   You should now see either a proposal with its assumptions and choices, or the first question of the interview.
-4. Claude reflects the round back to you. It writes once, on your word: the specification rewritten for coherence, unused placeholders and template comments removed, and records added to the history companion. Where the file had been made before, a record puts the state back to `stale`.
-   You should now see the names of the files written and, in the specification, the sections Task, Inputs, Method, Making, and Assumptions and Open where they have content.
+   The specification points to its inputs and never copies them. Assumptions are written as ASM items and open matters as TBC items, each open matter with an owner.
 
-The specification cites its inputs by ID and by path and never copies them. Its assumptions are written as ASM items and its open matters as TBC items, each open matter with an owner and what would close it. Its approval, from version 1.0 on, is your word alone.
+   You should now see a proposal, or the answers gathered in the interview, reflected back to you before anything is written.
 
-### With a name: the file
+4. At the end of the round Claude asks whether to write, and writes once, on your word. It rewrites the specification for coherence, deletes unused placeholders and template comments, and appends the records to the history companion. When a file had already been made, a record marks the product `stale`.
 
-1. On your word, in the same round or a later one, Claude makes `work/<name>.<ext>` as the specification's Making section says: by what means, in what format and in what language. The file carries of the specification only what Making says it carries.
-   You should now see the file in `work/`.
-2. Claude records the making in the specification's history. The Work table reads that record and shows the state `current`.
-   You should now see the Work row with its made date and the state `current`.
-3. Claude remakes the ledger and names what it wrote and where, and what the Work row says.
-   You should now see that summary.
+   You should now see Claude name what it wrote and where.
+
+5. Claude makes the file `work/<name>.<ext>` on your word, in the same round or a later one. The `## Making` section of the specification says how: by what means, in what format and language, and what of the specification the file carries. Claude then records the making in the specification's history.
+
+   You should now see the file in `work/`, and the Work row read `current`.
+
+6. Claude remakes the ledger and ends by naming what was written, where, and what the Work row says.
 
 ### A file you worked by hand
 
-If you have worked the file by hand and do not want it remade, say so. The state becomes `by hand` on your word. Claude never remakes such a file on its own judgement. It may name the file and offer.
+If you have worked the file yourself and do not want it remade, tell Claude. On your word the product is recorded as `by hand`. Claude never remakes such a file on its own judgement. It may name the file and offer, and you decide.
 
-A file by hand carries the states of the work and its wording. If you change the way or the reason in it, that is, its task, its inputs, its method or what it assumes, the change is carried into the specification in the same round and written with it. The record in the specification's history names the change of the file.
+A file by hand carries the states of the work and its wording. If you change in the file the way or the why, that is its task, its inputs, its method or what it assumes, the change is carried into the specification in the same round and written with it. The record in the specification's history names the change of the file.
+
+## The specification
+
+The specification has these sections:
+
+- `Task`: what is asked, for whom, and what the file is to show.
+- `Inputs`: items by ID and files by path, as they stand, never copied.
+- `Method`: how the work is done, such as the model, the steps and the structure of the file.
+- `Assumptions`: the ASM items. Left out when empty.
+- `Open`: the TBC items, each with an owner and what would close it. Left out when empty.
+- `Making`: how the file is made from the specification. It is never copied into the file.
+
+The specification follows the language of the project. The file is in whatever language the work needs, and `Making` says which.
 
 ## What you have afterwards
 
-- A specification in `work/` with its history companion, which says the way and the why.
-- The file, made from the specification, in the language and format the specification gave.
-- A Work row that reads `current`, or `by hand` for a file you keep.
+- A specification `work/<name>.spec.md` with its history companion.
+- A file `work/<name>.<ext>`, once you have asked for it to be made.
+- A Work row in the ledger that reads `current`, or `by hand` where you said so.
 
-A conclusion that is to hold does not live in a work product. It goes into the intent first, as described in [Forge the intent](forge-the-intent.md).
+Approval of the specification, from version 1.0 on, is your word as the house scheme of versions has it.
+
+A conclusion that is to hold does not live in the work product. It goes into the intent first, and the work then cites it. How the intent is worked is in [Forge the intent](forge-the-intent.md).
 
 ## If something goes wrong
 
-- The roster is empty: the project has no work product yet. Name one, and its specification is born on your word.
-- The Work row reads `stale`: the specification has no making recorded, or a change was written after the last making. Make the file again on your word, or mark it `by hand` if you keep it.
-- The project is ambiguous: Claude asks which project is meant. Give the slug.
-
-The inputs record no further stop conditions or messages of the command.
+- The project is ambiguous: Claude asks which project you mean. Give the slug.
+- The roster shows `stale` after you changed the specification: the file is out of date. Ask Claude to make it again.
+- The roster shows `stale` and `—` for a product just born: the file has not been made yet. This is the normal state until a making is recorded.
 
 ## A worked example
 
-You want a model of how orders move through a process. The product is called `<name>`.
+You are in a project with the slug `<slug>` and want an analysis called `<name>`.
 
-1. You type `/work` and see that the project has no work product with this name.
-2. You type `/work <name>`. Claude proposes to begin a specification and a history companion. You say yes. The Work table shows `<name>` as `stale`.
-3. You hand the task over in two sentences. Claude returns a proposal. It lists two assumptions and one choice, with what that choice was chosen against. One open matter is recorded with an owner. You answer, and Claude reflects the round back. You say write, and the specification is written once.
-4. You say make it. Claude makes `work/<name>.<ext>` as Making says and records the making in the specification's history.
-5. You type `/work` again. The row for `<name>` shows its file, the specification and its version, its inputs, the made date and the state `current`.
-6. Later you edit the file by hand and want it kept. You say so, and the row reads `by hand`.
+1. You type `/work <name> <slug>`. The specification does not exist, so Claude proposes to create it and its history companion. You agree.
+2. You hand Claude two sentences about what the analysis is to show. Claude returns a specification proposal with a list of assumptions and choices. You answer, Claude reflects the answers back, and on your word it writes the specification once.
+3. You say the file may be made. Claude makes `work/<name>.<ext>` as `Making` says and records the making.
+4. You type `/work`. The roster shows `<name>` with its file, its specification and version, its inputs, the day it was made and the state `current`.
 
 ## See also
 
@@ -117,4 +133,4 @@ You want a model of how orders move through a process. The product is called `<n
 - [Ledger](../reference/ledger.md): the Work table and its state words.
 - [Glossary](../reference/glossary.md): every term of the forge in one line.
 
-Generated on 2026-10-25 for version 6.0 from the files the front-matter names; never edited by hand.
+Generated on 2026-11-01 for version 6.4 from the files the front-matter names; never edited by hand.

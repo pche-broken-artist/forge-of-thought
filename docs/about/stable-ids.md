@@ -1,8 +1,8 @@
 ---
-generated: 2026-10-25
-version: 6.0
+generated: 2026-11-01
+version: 6.4
 made: derived
-inputs-hash: 0835e3dfeabf1f68
+inputs-hash: ba0a10a7d2f3e0ff
 inputs:
   - CLAUDE.md#ID scheme
   - projects/forge/10-intent.md#POS.0200
@@ -15,177 +15,147 @@ inputs:
 
 # Stable IDs
 
-A stable ID is the address every item of a document carries, such as
-`POS.0310` or `REQ.0120`, and it never changes once given. This page
-explains why items carry IDs at all, how the numbers are given, why
-they are never renumbered, and what happens in the one case where
-two items end up with the same number. It is for anyone who uses the
-forge, extends it or weighs it up.
+A stable ID is the address every item of a document carries, in the
+form `PREFIX.NNNN`, and it is never renumbered. This page explains
+why items carry such IDs, how the numbers are given and the one case
+in which a number does change: two items that share one number. It is
+for anyone who uses the forge, extends it or weighs it up.
 
 ## What it is
 
-An item is one numbered statement in a document: a requirement, a
-position the principal holds, a fact, an open thread. The principal
-is the person whose thinking is being forged, and the final
-authority on all content.
+Every item of a document carries an ID of the form `PREFIX.NNNN`.
+The prefix is three letters and says what kind of item it is. A
+requirement is `REQ`, a position of the principal (the person whose
+thinking is being forged) is `POS`, a fact is `FCT` and a thread is
+`THR`. The full list of prefixes and where each lives is on
+[ID scheme](../reference/id-scheme.md).
 
-Every item carries an ID in the form `PREFIX.NNNN`:
+The number has four digits as long as the number fits. It takes a
+fifth digit only beyond 9999, as in `POS.10000`. No zero is added to
+an existing ID. Every sorting of IDs is numeric, by prefix and then
+by number.
 
-- `PREFIX`: three letters that say what kind of item it is, such as
-  `REQ` for a requirement or `POS` for a position.
-- `NNNN`: the number, four digits as long as the number fits.
-
-The full list of prefixes and the numbering rules stand in
-[ID scheme](../reference/id-scheme.md). A term of the forge not
-explained here is in the [Glossary](../reference/glossary.md).
-
-IDs are global and stable. An ID is never renumbered, with one
-exception, described below. An item may move from one group to
-another and keep its ID.
+An ID is global within its project and stable. It is never
+renumbered, with one exception, described below.
 
 ## How it works
 
-### How a number is given
+### Giving a number
 
-- Items are numbered in tens: `REQ.0010`, `REQ.0020`.
-- Each new group starts at the next hundred: `REQ.0100`, `REQ.0110`.
-- When a group overflows, the item takes the next free number
-  anywhere.
-- Groups are plain headings. A group has no ID, no metadata and no
-  lifecycle. Groups nest at most two levels deep.
+Items are numbered in tens: `REQ.0010`, `REQ.0020`. Each new group
+starts at the next hundred: `REQ.0100`, `REQ.0110`. When the room is
+used up, an item takes the next free number anywhere.
+
+Groups are plain headings. A group has no ID, no metadata and no
+lifecycle. Items may move between groups freely, and their IDs do
+not change when they move. Groups go at most two levels deep.
 
 IDs are one sequence per project. A number is taken at the moment
-the item is written. There are no blocks of numbers reserved for one
-author or one branch.
+the item is written. There are no blocks of numbers set aside per
+author or per branch.
 
-### The fifth digit
+### Two items with one number
 
-An ID keeps four digits as long as the number fits. It takes a fifth
-digit only beyond 9999, as in `POS.10000`. No zero is added to an
-existing ID: `POS.0310` stays `POS.0310` after `POS.10000` exists.
+The one exception to "never renumbered" is two items with one number
+in one project. It does not matter how they came to share it:
 
-Every sorting of IDs is numeric, by prefix and then by number.
-Sorted as text, `POS.10000` would fall between `POS.1000` and
-`POS.1010`. Sorted by number, it comes after `POS.9990`.
+- a merge of two branches, each of which took the same next number;
+- an edit by hand;
+- documents of one project born apart, each starting its own count.
 
-### The one exception: two items with one number
+Every such clash is settled the same way:
 
-Two items in one project can end up with the same number. This can
-happen in several ways:
+- The older item keeps its number. The older is the one whose
+  `created` record in the history is the earlier.
+- The younger item takes a new number. At a merge, the item of the
+  branch merged second takes the next free number of the merged
+  state. Where the histories do not decide which is younger, the
+  principal decides.
+- The renumbering is written in the history as a `changed` record.
+  Its reason names the clash, and its `Was` gives the old number.
+- Every citation of the younger item is corrected to the new number.
+- If the item is a thread (one open matter of the intent, kept in a
+  file of its own), its file is renamed with it.
 
-- two branches of the project each took the same number, and were
-  then merged;
-- someone edited a document by hand;
-- two documents were born apart and only later found to share a
-  number.
+The ledger script finds the clash. The ledger is the state report
+of a project, made from its documents each time it is read. The
+script reports the clash and writes nothing, because the renumbering
+is a write into the artefacts. Claude does the renumbering with the
+principal, in a walkthrough (one item put to the principal at a
+time, each with a verdict). Claude never renumbers alone.
 
-However it happened, the clash is settled the same way:
-
-1. The older item keeps its number.
-2. The younger item takes a new number.
-3. The change gets a `changed` record in the document's history. Its
-   reason names the clash, and its `Was` field holds the old number.
-4. Every citation of the younger item is corrected to the new
-   number.
-5. If the younger item is a thread, its file is renamed with it.
-
-The younger item is the one whose `created` record in the history is
-the later. After a merge, the item of the branch merged second takes
-the next free number of the merged state. Where the histories do not
-decide, the principal's word decides.
-
-The ledger is the project's state report, built by a script from the
-documents each time it is read. The ledger script reports the clash
-and writes nothing. The renumbering is a write into the documents,
-so Claude does it together with the principal. Claude never does it
-alone. It is worked through as a walkthrough, that is, one item per
-message, each closed by the principal's verdict.
-
-A clash usually shows up after a merge. What to do then is in
+After a merge, a number taken twice usually shows up beside other
+conflicts of the merge; what you do then is on
 [Settle a conflict](../use/settle-a-conflict.md).
 
 ## Why
 
-### Why items, not prose
+### Why items and not prose
 
-Structured items with stable IDs beat prose, even at a very high
-level of abstraction. An item with a stable ID can be cited,
-reviewed, traced into the layer below and changed one at a time.
-Prose cannot be pointed at.
+An item with a stable ID can be cited, reviewed, traced into the
+layer below and changed one at a time. Prose cannot be pointed at.
+This is why structured items stand even at a very high level of
+abstraction, and narrative is kept to the few sections meant for it.
 
-Workstreams as entities with IDs and a lifecycle of their own were
-rejected as structure for its own sake. Plain heading groups plus
-stable global IDs achieve the same at lower cost.
-
-### Why the fifth digit
-
-A prefix has 99 hundreds. Items are numbered in tens, and each new
-group starts at a new hundred. So a prefix may outgrow four digits
-on use alone. Widening to a fifth digit only where needed costs
-nothing that already exists.
+Plain heading groups together with stable global IDs do the work
+that groups with IDs of their own would do. Groups with their own
+IDs and lifecycle were rejected as structure for its own sake.
 
 ### Why three-letter dotted prefixes
 
-Single-letter and hyphenated prefixes such as `R-001` or `P-01` were
-rejected. They were replaced by the three-letter dotted
-`PREFIX.NNNN`, aligned with an existing convention for business
-requirement documents. No universal standard for prefixes exists;
-the vocabulary is a house convention.
+The form `PREFIX.NNNN` with a three-letter prefix replaced earlier
+single-letter and hyphenated prefixes such as `R-001` and `P-01`. It
+follows an existing requirements standard where an equivalent
+prefix exists. No universal standard for prefixes exists, so the
+vocabulary is a house convention.
 
-### Why a fact, a position and a thread each have a prefix
+### Why a fact, a position and a thread have prefixes of their own
 
-- A fact (`FCT`) is what is the case. The principal states it on his
-  word, or a source states it and is cited by its file. Its
-  verification is never demanded.
-- A position (`POS`) is what the principal holds or wants. When the
-  principal makes a fact from a source his own stance, that is a new
-  position.
+A fact (`FCT`) is what is the case. It is stated by the principal on
+his word, or by a source cited to its file. A position (`POS`) is
+what the principal holds or wants. Without a prefix of its own, a
+fact would pass for a position. Taking a source's fact as his own
+stance is therefore a new position.
 
-Without a prefix of its own, a fact would have passed for a
-position.
+A thread (`THR`) carries its origin: the principal's word, a
+document by its path, or Claude's own synthesis. The reason is that
+a hypothesis of Claude's stays visibly Claude's until the principal
+takes it up. What Claude has worked out is never a fact, since a
+fact is the principal's word or a source's.
 
-A thread (`THR`) is an open matter still to be worked out. It
-carries its origin: the principal's word, a document by its path, or
-Claude's own synthesis. The principal's word is the default and
-needs no mark. The origin is kept so that a hypothesis of Claude's
-stays visibly Claude's until the principal takes it up. What Claude
-has worked out is never a fact, because a fact is the principal's
-word or a source's.
+### Why a fifth digit
 
-### Why detection, not reserved blocks
+A prefix has 99 hundreds. Items are numbered in tens and each new
+group starts a new hundred, so a prefix may outgrow four digits on
+use alone. Widening to a fifth digit costs nothing that is kept.
+
+### Why detection and not blocks of numbers
 
 A clash happens only a few times a year on a project of one or two
-people. Detecting it and settling it by the existing rule costs
-nothing.
-
-The alternatives were rejected. Blocks of IDs reserved per author,
-and allocation of numbers by looking over the local branches, would
-have cost the most code of the plan.
+people. Detecting it with the ledger script and settling it with the
+existing remedy costs nothing. The alternatives were rejected: blocks
+of IDs set aside per author and an allocation of numbers read over
+the local branches. They would have cost the most code of the plan.
 
 ## A worked example
 
-A project `my-project` has positions up to `POS.0300`. Two people
-work on two branches.
+Two people work on one project, each on a branch. The last
+requirement on `main` is `REQ.0220`.
 
-- On the first branch, a new position is written as `POS.0310`.
-- On the second branch, a different new position is also written as
-  `POS.0310`.
-
-The second branch is merged after the first. The ledger script now
-reports that `POS.0310` is taken twice, and changes nothing.
-
-The item of the branch merged second is the younger. Claude lays the
-clash out to the principal, and on the principal's word:
-
-- the younger position becomes `POS.0320`, the next free number of
-  the merged state;
-- its history gets a `changed` record whose reason names the clash,
-  with `Was` set to `POS.0310`;
-- every citation of that position is corrected to `POS.0320`.
-
-The older `POS.0310` is untouched. Had the clashing items been
-threads, the younger thread's file would have been renamed from
-`threads/THR.0310.md` to `threads/THR.0320.md` as well.
+1. On the first branch, a requirement is written as `REQ.0230`. Its
+   `created` record is dated earlier.
+2. On the second branch, a different requirement is also written as
+   `REQ.0230`.
+3. The first branch is merged, then the second. The project now has
+   two items numbered `REQ.0230`.
+4. The ledger script reports the clash and changes nothing.
+5. Claude puts the clash to the principal in a walkthrough. The item
+   of the branch merged second is the younger. It takes the next
+   free number of the merged state, say `REQ.0240`.
+6. The history gets a `changed` record for `REQ.0240`. Its reason
+   names the clash with `REQ.0230`, and its `Was` reads `REQ.0230`.
+7. Every place that cited the second requirement now cites
+   `REQ.0240`. The first requirement keeps `REQ.0230` untouched.
 
 ## See also
 
@@ -196,5 +166,5 @@ threads, the younger thread's file would have been renamed from
 - [Glossary](../reference/glossary.md): every term of the forge in
   one line.
 
-Generated on 2026-10-25 for version 6.0 from the files the
+Generated on 2026-11-01 for version 6.4 from the files the
 front-matter names; never edited by hand.

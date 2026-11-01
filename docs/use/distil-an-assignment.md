@@ -1,8 +1,8 @@
 ---
-generated: 2026-10-25
-version: 6.0
+generated: 2026-11-01
+version: 6.4
 made: mirrored
-inputs-hash: dbbaa34a7c7ed3e7
+inputs-hash: fda189c650b6dbf4
 inputs:
   - .claude/skills/forge/states/assignment.md
   - templates/assignment.md
@@ -10,13 +10,26 @@ inputs:
 
 # Distil an assignment
 
-This page shows how you derive the assignment, the file `20-assignment.md`, from the intent with `/forge assignment`. It is for the principal, the person whose thinking is being forged, who has an intent and now wants to hand its in-scope substance to the recipients. Terms of the forge are in the [Glossary](../reference/glossary.md).
+This page shows how to derive the assignment, the document that
+carries the intent to the people who will act on it, with
+`/forge assignment`. It is for the principal (whoever's thinking is
+being forged) who has an intent and wants it handed over complete and
+precise. For what makes an assignment complete, see
+[The assignment](../about/the-assignment.md). Terms of the forge are
+in the [Glossary](../reference/glossary.md).
 
 ## When to use it
 
-Use it when the intent is ready to be handed over and the project has no assignment yet. Use it again when an assignment stands and the intent has moved since. Claude says whether the intent is ready to be derived from. That is advice, never a gate.
+- The project has an intent and no assignment yet: the pass runs
+  whole.
+- The assignment stands and the intent has moved: the pass runs on
+  what changed.
+- The assignment needs only a wording fix: you do not need the pass.
+  The fix is made in the assignment directly.
 
-What an assignment is and what makes it complete is on the page [The assignment](../about/the-assignment.md).
+A change of substance asked for while you work on the assignment is
+different. It goes to the intent first, and the assignment follows
+from there.
 
 ## The command
 
@@ -24,79 +37,137 @@ What an assignment is and what makes it complete is on the page [The assignment]
 /forge assignment [slug]
 ```
 
-The slug names the project. Claude resolves the project, then reads the intent and the assignment as it stands.
+Without a slug Claude resolves the project itself. The target is
+`20-assignment.md` in the project, shaped by the assignment template.
+Its history is kept in the companion `20-assignment.history.md`.
 
 ## What happens
 
-The work is a joint pass of three phases. It is one conversation, with one write at its end, on your word.
+Claude first reads the intent, its threads and the assignment as it
+stands. It tells you whether the intent looks ready to be derived
+from. This is advice, never a gate. Then the joint pass runs in three
+phases.
 
-1. **Questions up front.** Claude asks only what is yours to answer and the intent does not. Such questions are:
-   - who the recipients are
-   - what is delegated and what is specified
-   - whether success criteria are present, delegated or deliberately absent
-   - what is later
+1. **Questions up front.** Claude asks, one per message, only what is
+   yours to answer and the intent does not already answer. These are
+   who the recipients are, what is delegated and what is specified,
+   whether success criteria are present, delegated or deliberately
+   absent, and what comes later. Where the intent answers everything,
+   there are no questions. A question about the detail of the
+   handover is asked here. A question about substance that the intent
+   has not settled means the intent is not ready, and the work returns
+   to the intent.
 
-   It asks one question per message. Where the intent answers everything, it asks none. A question on a detail of the handover is asked here. A question on substance the intent has not settled means the intent is not ready, and the work returns to the intent.
+   You should now see your answers reflected back, and no question
+   left that the intent could have answered.
 
-   You should now see either no questions, or one question at a time until the open points are answered.
+2. **The recast.** Claude writes the whole draft from the intent. With
+   it comes a provenance map: each group, its items and the positions
+   of the intent they came from. The map also lists any in-scope
+   position that landed nowhere, and any item that has no position
+   behind it (drift). Both lists are meant to be empty. The map is a
+   tool of the pass and is not part of the assignment.
 
-2. **The recast.** Claude writes the whole draft from the intent. With it comes a provenance map: each group, its items, and the positions of the intent they came from. The map also lists two things that should both be empty: in-scope positions that landed nowhere, and items that have no position behind them (drift). The map is a tool of the pass and is not part of the assignment.
+   You should now see a complete draft and the provenance map beside
+   it.
 
-   You should now see the draft and the provenance map, with both lists empty or each entry named.
+3. **The walkthrough by group.** Each item of the walkthrough is one
+   group of requirements. Claude says what the group covers, which
+   positions it comes from, what in it is a deliverable (`DEL`) or an
+   open question (`TBC`), and what is optional or later. You give one
+   verdict per group. If you have a question about a single item, it
+   opens a sub-item that is closed before the walk moves on. Dozens
+   of items pass in a handful of messages, nothing is skipped, and the
+   provenance is visible at each step.
 
-3. **The walkthrough by group.** A walkthrough is the forge's way of working a list, one item per message. Here one item is one group of the draft. Claude states what the group covers, from which positions it comes, what in it is delegated or open, and what is optional or later. You give one verdict per group. A question on a single item opens a sub-item and is closed before the next group. Dozens of items pass in a handful of messages and nothing is skipped, because the provenance is visible at each.
+   You should now see every group closed with your verdict.
 
-   You should now see each group closed with a verdict, one after another.
+The items are written in the Requirement style (shall and shall not,
+no priorities, one idea each). The rules are on the page
+[Requirement style](../reference/requirement-style.md). Claude words
+them. The substance stays yours. Where the intent is silent, Claude
+raises a `TBC` instead of filling the gap.
 
-Two rules hold throughout:
+After the pass, Claude offers `/critique essence`, the independent
+test of drift. It never runs on Claude's own judgement. How to run it
+is on [Critique the documents](critique-the-documents.md). Its
+findings are settled as an ordinary walkthrough.
 
-- A substance change goes to the intent first, and the assignment follows from it.
-- A wording fix is made directly in the assignment.
-
-After the pass, Claude names what changed and offers `/critique essence`, an independent test of drift run by a reviewer that never sees the conversation (a subagent, a separate Claude run). It never runs on Claude's own judgement. Its findings are worked as an ordinary walkthrough. See [Critique the documents](critique-the-documents.md).
-
-When the assignment is complete, Claude offers the approval. That is a recommendation, never a gate.
+When the assignment is complete, Claude offers the approval as a
+recommendation. You decide.
 
 ## What you have afterwards
 
-- `20-assignment.md`, made from the assignment template. Its sections are:
-  - Purpose & Context
-  - Objective
-  - Scope
-  - Requirements, in groups
-  - Constraints
-  - Assumptions
-  - Deliverables
-  - Open Questions
-  - Success Criteria
-  - Terms
-- `20-assignment.history.md`, its history companion, which records the change.
-- The items are written in the Requirement style, the rule set for the items, which is on the page [Requirement style](../reference/requirement-style.md).
-- Empty sections and all template comments are deleted. The Terms section lists only the prefixes and terms actually used.
+- `20-assignment.md`, with purpose and context, objective, scope,
+  requirements in groups, and constraints, assumptions, deliverables,
+  open questions and success criteria where they apply. Empty sections
+  and template comments are deleted.
+- A terms section that lists only the prefixes and terms actually
+  used.
+- The companion `20-assignment.history.md`, with the round recorded.
+- A statement from Claude of what changed in the round.
 
-Anything the recipients would need is either written, delegated as a deliverable, or open on purpose as a question with an owner. Silence is not allowed.
+Two follow-ups are open to you:
+
+- A requirement group may become a project of its own: see
+  [Spin off a group](spin-off-a-group.md).
+- The business requirements may be broken out of the assignment next:
+  see [Write a BRD](write-a-brd.md).
 
 ## If something goes wrong
 
-- **The intent does not settle a matter the assignment needs.** Claude raises it as an open question and does not fill it. If it is a matter of substance, the work returns to the intent.
-- **The provenance map shows a position that landed nowhere, or an item with no position.** Neither is left standing: the position is carried into the assignment, or the item is removed, or the intent is changed first.
-- **The intent moved after the assignment was approved.** Run the command again. The pass runs on what changed, and the provenance map shows what the change touched.
+- **The intent is not ready.** Claude says so and the work returns to
+  the intent. Many questions in phase 1 are a sign of this, not a
+  measure of it.
+- **The intent is silent on something the recipients need.** Claude
+  does not fill it. It raises a `TBC`, or you delegate the matter
+  with a `DEL`. Delegated or open on purpose counts as complete;
+  silent does not.
+- **A substance change comes up in the walkthrough.** It is made in
+  the intent first, and the assignment is then derived again for what
+  it touched.
+- **The provenance map shows an orphan.** A position that landed
+  nowhere or an item with no position is not left standing. Either
+  the item is placed or removed, or the position is carried into the
+  assignment.
 
 ## A worked example
 
-A generic project, `<slug>`, whose intent has positions on a notification service. Claude has written the recast and brings the first group to the walkthrough:
+The walkthrough item for one group looks like this. The project and
+the group are generic.
 
-> **Group: Delivery channels.** Covers how messages reach the recipients of the service. It comes from three positions of the intent. It holds four requirements, one deliverable that delegates the choice of the message format to the recipients, and one open question owned by the recipients, on whether a second channel is needed at launch. One requirement is marked optional. Nothing in the group is later. No in-scope position of the intent is left out of it.
+```
+### Reporting
 
-You answer with one verdict for the group. If you question a single requirement, Claude opens a sub-item on it, settles it, and then asks for the verdict on the group again.
+Covers: how the teams shall report progress to the principal.
+From positions: three in-scope positions of the intent on cadence
+and content of reports.
+Deliverables and open questions: one DEL asks the recipients to
+propose the report format and bring it back; one TBC, owned by the
+recipients, asks who receives the report on their side.
+Optional or later: a dashboard is marked optional on its item.
+
+(a)ccept / (m)odify / (q)uestion / (r)eject / (p)ark
+```
+
+You answer with one letter. A question on the dashboard item would
+open a sub-item, be answered and be closed before the next group is
+shown. The verdicts of all groups are carried to one write at the end
+of the round.
 
 ## See also
 
-- [The assignment](../about/the-assignment.md): what makes an assignment complete.
-- [Requirement style](../reference/requirement-style.md): the rule set of the items.
-- [Critique the documents](critique-the-documents.md): running the essence lens.
-- [Spin off a group](spin-off-a-group.md): a requirement group that becomes a project of its own.
-- [Write a BRD](write-a-brd.md): the business requirements that may be broken out of the assignment next.
-- [Glossary](../reference/glossary.md): every term of the forge in one line.
+- [The assignment](../about/the-assignment.md): what makes an
+  assignment complete.
+- [Requirement style](../reference/requirement-style.md): the rule
+  set of the items.
+- [Critique the documents](critique-the-documents.md): running the
+  essence lens.
+- [Spin off a group](spin-off-a-group.md): a requirement group that
+  becomes a project of its own.
+- [Write a BRD](write-a-brd.md): the business requirements that may
+  be broken out of the assignment next.
+- [Glossary](../reference/glossary.md): every term of the forge in
+  one line.
 
-Generated on 2026-10-25 for version 6.0 from the files the front-matter names; never edited by hand.
+Generated on 2026-11-01 for version 6.4 from the files the front-matter names; never edited by hand.

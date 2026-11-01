@@ -1,8 +1,8 @@
 ---
-generated: 2026-10-25
-version: 6.0
+generated: 2026-11-01
+version: 6.4
 made: mirrored
-inputs-hash: a4a9dbe0e4ea20ce
+inputs-hash: 5f479c16c7c05e97
 inputs:
   - .claude/skills/new-artefact/SKILL.md
   - templates/artefact-definition.md
@@ -10,103 +10,111 @@ inputs:
 
 # Add an artefact
 
-This page is for an extender who wants a new kind of artefact in the chain. The command `/new-artefact <name>` leads Claude through everything a kind needs: it proposes and decides nothing, and every file is born on the word of the principal (the person whose thinking is forged).
+This page shows how a new kind of artefact is added to the chain with `/new-artefact <name>`. It is for the extender, who wants the forge to carry a layer or a document it does not have yet. The command leads to everything a kind needs and decides nothing: the principal (the person whose thinking is being forged) decides every file, and Claude proposes.
 
 ## Before you start
 
-Read [Make a change to the forge](how-a-change-is-made.md) first: it says how a change is proved, recorded and released. The new kind is recorded and released as any change of the forge.
+Read [Make a change to the forge](how-a-change-is-made.md). It says how a change is proved, recorded and released. The addition is recorded and released as any change of the forge.
 
 Check that the kind does not exist yet. If `.claude/skills/forge/states/<name>.md` is there, the command stops: a kind that exists is changed through the intent, not added.
 
+Know where the new kind meets an existing one: the layer above it and the layer below. Raise any overlap as a question before anything is written. For the layers the forge's owner intends to add, see [Where the forge is going](../about/where-it-is-going.md).
+
 Decide how the kind is composed. There are three ways in:
 
-- A brief holds the kind, and it is mined.
-- The principal gives a few sentences of what he wants, and the kind is handed over to Claude, which returns a proposal with its assumptions and choices.
-- Neither exists, and Claude walks the Map by interview.
-
-You are the one who says where the new kind meets an existing one, the layer above and the layer below. Claude raises an overlap as a question. No existing definition is copied: the definitions on disk are models of the shape, never of the content.
+- A brief of the forge project already holds the kind. It is mined.
+- You give a few sentences of what you want. The kind is handed over to Claude, which returns a proposal.
+- Neither exists. The command walks the areas of the Map by interview, one question per message.
 
 ## The files
 
-A new kind is a pair of files, and what stands around the pair in the forge's own project.
+A kind of artefact is a pair of files, plus what stands around the pair in the forge's own project:
 
-- `.claude/skills/forge/states/<name>.md`: the definition, made from `templates/artefact-definition.md`.
-- `templates/<name>.md`: the template of the artefact. It has no skeleton, because each template differs whole.
-- A position in the forge intent: why the kind is wanted.
-- The row of a new prefix in the ID scheme of `CLAUDE.md`, where the kind has items with a prefix of their own.
-- The reviewers, where decided: a persona file, and the calibration of the critic's contract.
-- An item of the solution design: where the kind is realised.
+| File | What it is |
+|---|---|
+| `.claude/skills/forge/states/<name>.md` | the definition, from the skeleton `templates/artefact-definition.md` |
+| `templates/<name>.md` | the template; it has no skeleton, because each template differs whole |
+| a position of the forge intent | why the kind is wanted and what it is to achieve |
+| an item of the solution design | where the kind is realised |
+| a row in CLAUDE.md, ID scheme | only where the kind brings a new prefix |
+| a challenger persona file | only where the principal decides the kind needs its own |
+| a calibration of the critic's contract | only where decided: what the critic must know is no defect in the kind |
 
-The definition keeps seven blocks, all present. A block that is empty on purpose says so, with the reason.
-
-- Target: the file `NN-<name>.md` and the template that shapes it.
-- Inputs: what the finding starts from.
-- Aim: what is true of the artefact at the end, and when it is complete.
-- Partner: what Claude does beyond the Aim, and what it does not.
-- Map: what the finding covers, whatever the order.
-- Instruments: the mechanisms of the forge the artefact uses in a way of its own.
-- Course: the ways in, and what is offered at the end.
-
-The blocks and the Map are explained in [Elicitation](../about/elicitation.md). The skeletons are listed in [Templates](../reference/templates.md).
+The skeletons are listed in [Templates](../reference/templates.md).
 
 ## Steps
 
-1. Run `/new-artefact <name>`. Claude walks the Map. An area may stay empty when it was considered and found not to apply. The areas are these:
-   - what the artefact is and why it is wanted;
-   - where it stands in the chain;
-   - its boundary against the layers above and below;
-   - how it is found;
-   - what comes out;
-   - its items and their prefixes;
-   - its wording;
-   - its reviewers;
-   - how it reaches a reader;
-   - where it is realised.
-2. Write the position in the intent first. Claude uses `/forge intent forge` for it, so the position is written through the intent's own definition before anything is built.
-3. Write the definition, then its template. Where the kind has a practice outside the forge, Claude proposes `/research <topic>`, and it runs on your word.
-4. Add the row of a new prefix to the ID scheme of `CLAUDE.md`, if the kind needs one.
-5. Decide the reviewers. A challenger persona is added only where what it hunts genuinely differs; see [Add a challenger persona](add-a-challenger-persona.md). A check is added only where a check must know the kind; see [Add a check](add-a-check.md). The critic's contract is calibrated where you decide it.
-6. Write the item of the solution design, through `/forge solution-design forge`.
-7. Claude ends by naming what was born and what stays open, offers `/check engine`, and proposes the first `/forge <name>` on a project.
+The command finds the kind by a Map. Each area may stay empty when it was considered and found not to apply:
 
-You should now see the definition and its template on disk, and the position and the item in the forge's own project.
+- what the artefact is and why it is wanted: for whom, what it holds that no other artefact holds, when a project takes it and when it does not
+- where it stands: what it is derived from, what stands above it, its number in the chain
+- the boundary: what of the layer above it cites or carries, what it must not hold, and what a layer below takes from it
+- how it is found: the seven blocks of its definition, its Map above all
+- what comes out: its template, the sections and the shape of an item
+- its items: the prefixes, existing or new, and where each lives
+- its wording: any rule of style of its own
+- its reviewers: whether it needs a challenger of its own and what that one hunts, what the critic must know is no defect in it, whether a check must know it
+- how it reaches a reader: whether a render or the README must show it
+- where it is realised: the item of the solution design
 
-The rosters need nothing. `/forge`, `/man` and the README read the definitions from disk, so the new kind appears in them without an edit.
+The order in which the files are born:
+
+1. The position in the intent, written through `/forge intent forge`, before anything is built. You should now see the position in the intent, with its reason.
+2. The definition in the seven blocks of the skeleton (Target, Inputs, Aim, Partner, Map, Instruments, Course). Every block is present; a block empty on purpose says so with the reason. The blocks and the Map are explained in [Elicitation](../about/elicitation.md). You should now see `.claude/skills/forge/states/<name>.md` with no skeleton comments left.
+3. The template `templates/<name>.md`. You should now see the file beside the other templates.
+4. The row of a new prefix in CLAUDE.md, ID scheme, where the kind brings one. You should now see the prefix in the table.
+5. The reviewers, where decided: a persona file ([Add a challenger persona](add-a-challenger-persona.md)), the calibration of the critic's contract, and a check that knows the kind ([Add a check](add-a-check.md)). You should now see the files you decided on, and no others.
+6. The item of the solution design, written through `/forge solution-design forge`. You should now see the item naming how the kind is realised.
+
+Every file is born on the principal's word, one step at a time. Research is proposed with `/research <topic>` where the kind has a practice outside the forge, and run only on the principal's word.
 
 ### When the kind needs a trial first
 
-Some kinds cannot hold a position until they have been tried on real work. For such a kind the order changes:
+Some kinds cannot be reasoned in advance: they need a trial on real work before their position can hold. The order then changes:
 
-1. The brief first.
-2. The pair of definition and template, with its reviewers.
-3. The trial on real work.
-4. Then the position and the item of the solution design.
+1. The brief.
+2. The pair (definition and template) with its reviewers.
+3. The trial.
+4. Then the position in the intent and the item of the solution design.
 
-Until then the brief is the authority.
+Until the trial is done, the brief is the authority.
+
+### Rosters
+
+The rosters need nothing. `/forge`, `/man` and the README read the definitions from disk, so the new kind appears in them without an edit.
 
 ## Prove it
 
+Run the check of the engine:
+
 ```
-python scripts/forge-check.py engine
+/check engine
 ```
 
-This is the mechanical part of `/check engine`, which Claude offers once the kind stands and never runs on its own judgement. Run `/check engine` in the harness (the program that runs Claude and its commands) if you want the full check.
+Claude offers it once the kind stands and never runs it on its own judgement. Whether the definition holds is told by the first artefact of the kind made on real work, through:
 
-The real proof is the first artefact of the kind. Run `/forge <name>` on real work: whether the definition holds is told there, and that run is the trial. It belongs to `/forge <name>`, not to `/new-artefact`.
+```
+/forge <name>
+```
+
+That first run is the trial. The command ends by naming what was born and what stays open, and proposes this first run on a project.
 
 ## Record and release
 
-Save and release the addition as any change, as [Make a change to the forge](how-a-change-is-made.md) describes. The history of each versioned file records the change in the same step as the write. Which layers the forge's owner intends to add is told in [Where the forge is going](../about/where-it-is-going.md).
+The addition is recorded in the history of the files it changes and released as any change of the forge. The steps are in [Make a change to the forge](how-a-change-is-made.md).
 
 ## A worked example
 
-You want a kind called `<name>`, and you have a few sentences of what it should be.
+You want a new kind `<name>`.
 
-1. You type `/new-artefact <name>`. Nothing exists at `.claude/skills/forge/states/<name>.md`, so the command goes on.
-2. You hand the kind over with your sentences. Claude returns a proposal and a short list of what it assumed and what it chose, each choice with what it was chosen against.
-3. You judge it. On your word the position is written in the intent, then the definition and `templates/<name>.md`, then the prefix row and the item of the design. Each file is born on its own step.
-4. Claude names what is born and what stays open, and offers `/check engine`. You accept.
-5. You run `/forge <name>` on a project with real work. The artefact it makes is the trial. If the definition does not hold, you change the kind through the intent.
+1. You type `/new-artefact <name>`. Claude finds no `.claude/skills/forge/states/<name>.md` and goes on.
+2. You hand over a few sentences of what the kind is for. Claude returns a proposal with a short list of what it assumed and what it chose, each choice with what it was chosen against.
+3. You judge the proposal. On your word the position is written in the intent, then the definition, then `templates/<name>.md`.
+4. The kind needs one new prefix. Claude proposes the row, and on your word it is added to CLAUDE.md, ID scheme.
+5. You decide the kind needs no challenger of its own. No persona file is born.
+6. The item of the solution design is written.
+7. Claude names what was born and what stays open, and offers `/check engine`.
+8. You run it, then start `/forge <name>` on a real project. The first artefact made is the trial.
 
 ## See also
 
@@ -118,4 +126,4 @@ You want a kind called `<name>`, and you have a few sentences of what it should 
 - [Templates](../reference/templates.md): the skeletons a definition and a persona start from.
 - [Glossary](../reference/glossary.md): every term of the forge in one line.
 
-Generated on 2026-10-25 for version 6.0 from the files the front-matter names; never edited by hand.
+Generated on 2026-11-01 for version 6.4 from the files the front-matter names; never edited by hand.

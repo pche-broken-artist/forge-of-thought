@@ -1,8 +1,8 @@
 ---
-generated: 2026-10-25
-version: 6.1
+generated: 2026-11-01
+version: 6.4
 made: derived
-inputs-hash: 3db56ddf0bf1a171
+inputs-hash: 216cc6352a2bf91d
 inputs:
   - CLAUDE.md
   - projects/forge/10-intent.md#POS.0120
@@ -10,6 +10,7 @@ inputs:
   - projects/forge/10-intent.md#POS.0300
   - projects/forge/10-intent.md#POS.0950
   - projects/forge/10-intent.md#POS.1090
+  - projects/forge/10-intent.md#POS.1190
   - projects/forge/10-intent.md#POS.1450
   - projects/forge/10-intent.md#POS.1520
   - projects/forge/10-intent.md#POS.1530
@@ -28,6 +29,7 @@ inputs:
   - projects/forge/10-intent.md#POS.1880
   - projects/forge/10-intent.md#POS.1890
   - projects/forge/10-intent.md#POS.1900
+  - projects/forge/10-intent.md#POS.1910
   - projects/forge/10-intent.md#Elicitation
   - .claude/skills/forge/states/brief.md
   - .claude/skills/forge/states/intent.md
@@ -43,6 +45,7 @@ inputs:
   - .claude/skills/pull/SKILL.md
   - .claude/skills/work/SKILL.md
   - .claude/skills/migrate/SKILL.md
+  - .claude/skills/man/SKILL.md
   - .claude/skills/critic-contract/SKILL.md
   - .claude/skills/challenger-contract/SKILL.md
   - .claude/skills/check-contract/SKILL.md
@@ -65,163 +68,172 @@ inputs:
 
 # Glossary
 
-This glossary lists the terms of Forge of Thought, each in one line
-with the file that defines it. It is for the user who works with the
-forge, the extender who adds to it and the evaluator who wants to
-understand it. The principal (the person whose thinking is being
-forged) and Claude (the AI assistant that works with him) are the two
-roles most terms refer to. A term stands where it sorts by its first
-word; a term with two senses has one row per sense. For the forge
-told in prose, read the page linked under See also.
+The glossary is the list of every term of the forge, one line each,
+with the file that defines it. It is for anyone who meets a word on
+another page and wants its meaning in one sentence: the user, the
+extender and the evaluator. The principal (whoever's thinking is
+being forged) and Claude (the AI assistant working with him) are
+defined in the table like every other term. For the forge described
+in prose, see [What the forge is and is not](../about/what-it-is-and-is-not.md).
 
-## Terms
+The terms stand in alphabetical order. Where one word has two
+meanings, each meaning has its own row, with the sense in brackets.
+"The forge intent" in the last column is the file
+`projects/forge/10-intent.md`, cited by the section that holds the
+term.
 
-| Term | Meaning | Defined in |
+| Term | What it is | Defined in |
 |---|---|---|
-| archive | A file that keeps an older record as it stood, immutable and still read: `<file>.history.archive.md` holds a history table from before the log, `ledger.archive.md` the hand-kept ledger at the migration. | `CLAUDE.md`, Versioning & status; `templates/ledger.md` |
-| artefact | A document of the chain, composed by the principal with Claude and versioned. | `CLAUDE.md`, Document kinds |
-| assignment | `20-assignment.md`, the layer that carries the in-scope substance of the intent to the recipients, complete and precise, so that they can act without the principal in the room. | `.claude/skills/forge/states/assignment.md` |
-| branch | A line of work in git, voluntary and left to git, on which a contributor saves his work for the integrator to merge. | `CLAUDE.md`, Persistence (git); `projects/forge/10-intent.md`, Operating environment |
-| BRD | `30-brd.md`, the layer of business requirements that breaks its parent into rules, behaviour and qualities the stakeholders can review and the delivery can estimate. | `.claude/skills/forge/states/brd.md`; `templates/brd.md` |
-| brief | `00-brief.md` or `00-brief-<name>.md`, the principal's own text of one whole of thinking (what he wants and why), rough on purpose and mined into the intent. | `.claude/skills/forge/states/brief.md` |
-| bundle | A set of related files stored as `sources/<slug>/`, counted as one source with one ledger entry and catalogued by its own `00-INDEX.md`. | `CLAUDE.md`, Document chain |
-| business requirement | An item of a BRD with the prefix `BR`: one testable rule of the business that cites the parent it carries. | `CLAUDE.md`, ID scheme; `.claude/skills/forge/states/brd.md` |
-| card | One question of a research plan, answered by one kind of evidence from one kind of source. | `.claude/skills/research/SKILL.md`; `templates/research-plan.md` |
-| challenge | One result of a challenger about the substance of the thinking, with the prefix `CHL`. | `CLAUDE.md`, ID scheme; `.claude/skills/challenger-contract/SKILL.md` |
-| challenger | The isolated reviewer that tests the substance of the thinking through one persona, never the quality of the documents. | `CLAUDE.md`, Isolated reviewers; `.claude/skills/challenger-contract/SKILL.md` |
-| check | An isolated reviewer that verifies mechanical conformance with the conventions, one concern per check, never substance or quality. | `CLAUDE.md`, Isolated reviewers; `.claude/skills/check-contract/SKILL.md` |
-| citation check | The run of `scripts/forge-cite.py` that opens every URL a research note cites before the note is filed. | `scripts/forge-cite.py`, its header; `projects/forge/10-intent.md`, Research |
-| Claude | The AI assistant that acts as the principal's cognitive extension: it owns structure, order, process discipline and document hygiene, and proposes but never decides. | `CLAUDE.md`, Roles |
-| contract | The skill that owns what every member of one kind of agent shares: conduct, isolation, subject, way of working and the shape of the output. | `CLAUDE.md`, Isolated reviewers; `.claude/skills/critic-contract/SKILL.md` |
-| contributor | A person who works on a branch of a hosted project and saves it, leaving the merge to the integrator. | `projects/forge/10-intent.md`, Operating environment |
-| critic | The isolated reviewer that judges the quality of the documents through one lens, never the substance of the thinking. | `CLAUDE.md`, Isolated reviewers; `.claude/skills/critic-contract/SKILL.md` |
-| decision | A record with the prefix `DEC` in the append-only `decisions.md`: one decision of the principal with its reason. | `templates/decisions.md` |
-| definition | The state file `.claude/skills/forge/states/<state>.md` of an artefact, which says what the artefact is, how it is found and which rules it keeps, in seven blocks. | `CLAUDE.md`, Document chain; `projects/forge/10-intent.md`, Elicitation |
-| dependency (of a BRD) | An item of a BRD with the prefix `DEP`: something the BRD relies on outside itself. | `.claude/skills/forge/states/brd.md`; `templates/brd.md` |
-| dependency (of a project) | A citation of another project's document, a library's or any other's, registered in the ledger's Dependencies table without a version. | `templates/ledger.md` |
-| derived (page) | A page that puts together what no single file says, from evidence in several files. | `.claude/skills/docs-contract/SKILL.md` |
-| derived file | A file made for a reader (a render, the README, the documentation, a published file) that is kept in git, made only on `main`, taken as `ours` at a merge and made again. | `projects/forge/10-intent.md`, Operating environment |
-| disconfirming query | One search per card, written to find the opposite of what is expected. | `templates/research-plan.md`; `.claude/skills/research/SKILL.md` |
-| document | Every file of a project, each of one kind that says what it is, who writes it and how it behaves. | `CLAUDE.md`, Document kinds |
-| documentation | The generated pages of one topic each in `docs/`, with their index, for the user, the extender and the evaluator. | `CLAUDE.md`, Document chain; `.claude/skills/document/SKILL.md` |
-| documentation map | `docs-map.md` beside the owning project's ledger: one entry per page with everything the page is made from, never shown to the reader. | `CLAUDE.md`, Document kinds; `.claude/agents/docs-planner.md` |
-| elicitation | The process by which the principal and Claude find an artefact together and form the knowledge it holds, the conversation being only its medium. | `projects/forge/10-intent.md`, Elicitation |
-| engine (of the forge) | The forge's own repository of commands, skills, agents, templates and scripts, which carries no instance fact and does not know the projects. | `CLAUDE.md`, Repository layout; `projects/forge/10-intent.md`, Operating environment |
-| engine (of another model family) | A model of another family reached over its own command-line tool, one row of the engine table in `scripts/forge-engine.py`, such as `antigravity`. | `scripts/forge-engine.py`, its header |
-| envelope | The JSON answer an engine returns for one run, saved beside the packet as `envelope.json` for inspection. | `scripts/forge-engine.py`, its header |
-| explanation | A kind of page that says what a thing is, how it works and why, never a procedure or a listing. | `.claude/skills/docs-contract/SKILL.md` |
-| extract | The Markdown conversion of a binary, made by `scripts/doc2md.py` on the principal's word, which then is the source. | `CLAUDE.md`, Document chain; `.claude/skills/ingest/SKILL.md` |
-| fact | An item of the intent with the prefix `FCT`: what is the case, on the principal's word or on a source cited to its file, never a stance. | `CLAUDE.md`, ID scheme; `projects/forge/10-intent.md`, Structure and style of an assignment |
-| finding | A result of a critic (document quality) or of a check (conformance), with the prefix `FND`; the word is used for a reviewer's result only. | `CLAUDE.md`, ID scheme; `.claude/skills/docs-contract/SKILL.md` |
-| format file | The file made from a render in the format its recipe names, which follows the render's name and may be sent to the engine's public folder. | `.claude/skills/render/SKILL.md`; `projects/forge/10-intent.md`, Growth path |
-| genre | A kind of recipe composed through an interview by `/recipe <genre>`, from the skeleton `templates/recipe-<genre>.md`. | `CLAUDE.md`, Document chain |
-| growing bundle | A bundle of one origin that keeps arriving, born at its first file by `/ingest --bundle <name>` and grown file by file. | `.claude/skills/ingest/SKILL.md` |
-| guarded command | A command that changes files the moment it runs, which the harness keeps Claude from starting on its own judgement. | `projects/forge/10-intent.md`, Operating environment |
-| harness | The program Claude runs in, which loads its skills and agents and enforces the principal's word where it can. | `projects/forge/10-intent.md`, Operating environment |
-| history companion | `<file>.history.md`, the append-only log beside every versioned document, one record per change. | `CLAUDE.md`, Versioning & status; `templates/history.md` |
-| hook's ask | The moment the git hook `scripts/hook-git.py` puts one of the few commands that finish the step of a conflict to the principal and runs it on his yes. | `CLAUDE.md`, Persistence (git) |
-| how-to | A kind of page that carries what the reader does, step by step, and what he sees, never the reasons. | `.claude/skills/docs-contract/SKILL.md` |
-| immutable | Never edited once registered or created, as sources, reviews, challenges, research and closed threads are, by a process rule and not by git. | `CLAUDE.md`, Versioning & status |
-| independence of engines | The measure, never an assumption, of how many URLs and sentences two engines' notes of one card share, counted by `scripts/forge-cite.py --independence`. | `scripts/forge-cite.py`, its header; `projects/forge/10-intent.md`, Research |
-| index (of the documentation) | `docs/README.md`, derived by a script from the documentation map, listing every page and each reader's path through them. | `.claude/skills/document/SKILL.md`; `.claude/agents/docs-planner.md` |
-| instance | One installation of the forge, whose facts live in `CLAUDE.local.md` at the engine root. | `CLAUDE.md`, What this workspace is; `.claude/skills/docs-contract/SKILL.md` |
-| instance fact | Whatever `CLAUDE.local.md` and the assistant's memory carry (who the principal is, the conversation language, the author's handle), which never enters a report or a page. | `projects/forge/10-intent.md`, Operating environment; `CLAUDE.md`, Isolated reviewers |
-| integrator | The maintainer of a hosted project, typically the principal, who merges the contributors' branches. | `projects/forge/10-intent.md`, Operating environment |
-| intent | `10-intent.md`, the working document of the consolidated current state of what the principal holds: positions, facts, threads and rejections with their reasons. | `.claude/skills/forge/states/intent.md`; `projects/forge/10-intent.md`, Document chain |
-| isolated subagent | A subagent that never sees the working conversation and reads every input from disk in its own run. | `CLAUDE.md`, Isolated reviewers |
-| isolation | The rule that a reviewer or a documentation agent sees nothing of the conversation, reads its inputs from disk and puts no instance fact into what it writes. | `CLAUDE.md`, Isolated reviewers; `.claude/skills/docs-contract/SKILL.md` |
-| kind | Of a project, `thought` or `library` in its project file; of a document, one of the kinds the table of document kinds names. | `templates/project.md`; `CLAUDE.md`, Document kinds |
-| layer | An artefact of the chain below the intent, taken by a project as it needs it; a layer the project does not have is not missing. | `CLAUDE.md`, Document chain |
-| ledger | `ledger.md`, the single source of truth for state, made at read time by `scripts/forge-ledger.py` and never kept in git. | `CLAUDE.md`, Ledger; `templates/ledger.md` |
-| lens | One specialisation of the critic, an agent file `critic-<lens>` of its own. | `CLAUDE.md`, Isolated reviewers; `.claude/skills/critic-contract/SKILL.md` |
-| Lens section | The one part of a reviewer's agent file that is its own, which specialises its contract and never replaces it. | `CLAUDE.md`, Isolated reviewers |
-| library | A project of kind `library`: material shared across projects, with no chain, whose README is a catalogue of what it holds. | `CLAUDE.md`, Repository layout |
-| made at read time | Built by a script from the documents whenever it is read and never kept in git, as the ledger is. | `projects/forge/10-intent.md`, Versioning and state |
-| major | An integer version of the forge intent that closes a set of features the principal names and passes every check, both critic lenses and one challenge before its tag. | `projects/forge/10-intent.md`, Versioning and state |
-| Map | The block of a definition that names what must be found for the artefact to be complete, walked as the question whether each area was considered, never a questionnaire. | `projects/forge/10-intent.md`, Elicitation |
-| merge driver `ours` | The git setting that keeps one's own side of a derived file at a merge, so that the file can be made again. | `CLAUDE.md`, Persistence (git); `projects/forge/10-intent.md`, Operating environment |
-| migration | The run of `/migrate [slug]` through `scripts/forge-migrate.py` that brings a project, once and on one clone, to the shape of a release that changed the shape of files. | `.claude/skills/migrate/SKILL.md`; `projects/forge/10-intent.md`, Operating environment |
-| mined | Said of a brief whose substance has been carried into the intent, recorded as `pending`, `partial`, `mined` or `dropped`. | `.claude/skills/forge/states/brief.md`; `templates/ledger.md` |
+| archive | A history table written before the log, moved as it stands to `<file>.history.archive.md`, or the hand-kept ledger kept as `ledger.archive.md`; immutable, and searched together with the log. | `CLAUDE.md` (Versioning & status), `templates/ledger.md` |
+| artefact | A document of the chain (a brief, the intent or a layer below it), composed by the principal with Claude and versioned. | `CLAUDE.md` (Document kinds) |
+| assignment | The layer `20-assignment.md`, which carries the in-scope substance of the intent to the recipients, complete and precise, so that they can act without the principal in the room. | `.claude/skills/forge/states/assignment.md` |
+| BRD | The layer `30-brd.md` below the assignment and above the solution design: the business requirements that break the parent into rules, behaviour and qualities the stakeholders can review and the delivery can estimate. | `.claude/skills/forge/states/brd.md`, `templates/brd.md` |
+| branch | A voluntary line of work in git, created or switched to through `scripts/forge-branch.py`, its merge left to git by hand or by merge request. | `CLAUDE.md` (Persistence) |
+| brief | The principal's free-form text of one whole of thinking (what he wants and why), rough on purpose and mined into the intent, kept as `00-brief.md` or `00-brief-<name>.md`. | `.claude/skills/forge/states/brief.md` |
+| bundle | A set of related files kept as one source in `sources/<slug>/`, with one entry in the resource index and its own `00-INDEX.md`. | `CLAUDE.md` (Document chain), `.claude/skills/ingest/SKILL.md` |
+| business requirement (BR) | One rule of the business in a BRD, testable and worded with `shall`, citing the REQ or POS that is its parent. | `.claude/skills/forge/states/brd.md` |
+| card | One question of a research plan, answered by one kind of evidence from one kind of source, with its disconfirming query and its stop rule. | `.claude/skills/research/SKILL.md`, `templates/research-plan.md` |
+| challenge (CHL) | One result of a challenger on the substance of the thinking, given its ID by the command and settled by walkthrough. | `CLAUDE.md` (ID scheme), `.claude/skills/challenger-contract/SKILL.md` |
+| challenger | An isolated reviewer of the substance of the thinking, never of document quality, run as `/challenge <persona> [artefact]` with its reports filed in `challenges/`. | `CLAUDE.md` (Isolated reviewers), `.claude/skills/challenger-contract/SKILL.md` |
+| check | An isolated reviewer of mechanical conformance with the conventions of the engine, run as `/check <check> [slug]`, filing a report in `reviews/` only when it finds something. | `CLAUDE.md` (Isolated reviewers), `.claude/skills/check-contract/SKILL.md` |
+| citation check | The run of `scripts/forge-cite.py` that opens every URL of a research note before the note is filed and classes each as ok, dead, unverifiable or mismatch. | `scripts/forge-cite.py`, the forge intent (Research) |
+| Claude | The AI assistant that works as the cognitive extension of the principal: it owns structure, order, process discipline and document hygiene, and it proposes but never decides. | `CLAUDE.md` (Roles) |
+| contract | The skill that owns what every member of one kind of agent shares (the subject, the way of working, the shape of the output), preloaded into each agent of that kind. | `CLAUDE.md` (Isolated reviewers), `.claude/skills/docs-contract/SKILL.md` |
+| contributor | One who works on a branch of a hosted project and saves it there, leaving the merge to the integrator. | the forge intent (Operating environment) |
+| critic | An isolated reviewer of the quality of the documents, never of their substance, run as `/critique <lens> [artefact]` with its reports filed in `reviews/`. | `CLAUDE.md` (Isolated reviewers), `.claude/skills/critic-contract/SKILL.md` |
+| decision (DEC) | A record of one decision of the principal with its reason in the append-only `decisions.md`, never edited and superseded only by a newer record that names it. | `templates/decisions.md` |
+| definition | The state file `.claude/skills/forge/states/<state>.md` of one artefact, in seven blocks (Target, Inputs, Aim, Partner, Map, Instruments, Course), by which `/forge <state>` works that artefact. | `CLAUDE.md` (Document chain), the forge intent (Elicitation) |
+| dependency (DEP, in a BRD) | An item of a BRD naming what the BRD relies on outside itself, such as another system or a document that must be supplied from outside the forge. | `.claude/skills/forge/states/brd.md`, `templates/brd.md` |
+| dependency (of a project) | A document of another repository that a project cites, a library's among them, registered in the ledger's Dependencies table without a version. | `templates/ledger.md` |
+| derived (page) | A page that puts together what no single file says, from evidence in several. | `.claude/skills/docs-contract/SKILL.md` |
+| derived file | A file made from others for a reader (a render, the README, the release notes, the documentation, the state render, a published file), made only on `main` and taken as `ours` at a merge. | `CLAUDE.md` (Persistence), the forge intent (Operating environment) |
+| disconfirming query | One search of a card written to find the opposite of what is expected, its result reported even when it finds nothing. | `templates/research-plan.md`, `.claude/skills/research/SKILL.md` |
+| document | Every file of a project, each of one kind that says what it is, who writes it, whether it is versioned and how it behaves. | `CLAUDE.md` (Document kinds) |
+| documentation | The pages of one topic each in `docs/` with their index, generated by `/document` for the user, the extender and the evaluator and never composed by hand. | `CLAUDE.md` (Document chain), `.claude/skills/document/SKILL.md` |
+| documentation map | The file `docs-map.md` beside the owning project's ledger, with one entry per page holding everything that page is made from, never shown to the reader. | `CLAUDE.md` (Document kinds), `.claude/agents/docs-planner.md` |
+| elicitation | The process by which the principal and Claude find an artefact together and form the knowledge it holds, the conversation being its medium and the interview, research and sources its instruments. | the forge intent (Elicitation) |
+| engine (of the forge) | The git repository of Forge of Thought itself, with its rules, skills, agents, scripts and templates, which carries no instance facts. | `CLAUDE.md` (Persistence), the forge intent (Operating environment) |
+| engine (of another model family) | A model of another family reached by `scripts/forge-engine.py` over its own command-line tool, one row of the script's engine table each, `antigravity` the first. | `scripts/forge-engine.py`, the forge intent (Research) |
+| envelope | The structured answer an engine's run returns (its status, its response and its usage), saved beside the packet as `envelope.json` for inspection. | `scripts/forge-engine.py` |
+| explanation | A kind of page that carries what a thing is, how it works and why, never a procedure and never a listing. | `.claude/skills/docs-contract/SKILL.md` |
+| extract | The Markdown text `scripts/doc2md.py` makes of a binary on the principal's word, which then is the source in place of the original. | `CLAUDE.md` (Document chain), `.claude/skills/ingest/SKILL.md` |
+| fact (FCT) | An item of the intent saying what is the case, on the principal's word or on a source's cited to its file, never a stance and never verified on demand. | the forge intent (Structure and style of an assignment) |
+| finding (FND) | One result of a critic (document quality) or of a check (conformance), numbered in the project's one FND sequence. | `CLAUDE.md` (ID scheme), `.claude/skills/critic-contract/SKILL.md`, `.claude/skills/check-contract/SKILL.md` |
+| format file | The file a recipe's Format makes from a render through the format's script (a `.docx`, a `.pptx`, a video or player events), landing beside the render or at the recipe's `output:` path. | `.claude/skills/render/SKILL.md`, the forge intent (Growth path) |
+| genre | A kind of recipe composed through an interview with `/recipe <genre>`, from its skeleton `templates/recipe-<genre>.md`. | `CLAUDE.md` (Document chain) |
+| growing bundle | A bundle of one origin that keeps arriving (issues, minutes), grown file by file through `/ingest --bundle <name>`, each file immutable from its own registration. | `.claude/skills/ingest/SKILL.md` |
+| guarded command | A command that changes files the moment it runs (such as `/save`, `/release`, `/render` or `/document`), which the harness keeps Claude from starting on its own judgement. | the forge intent (Operating environment) |
+| harness | The program Claude runs in, which loads its agents and enforces the guards, hooks and permissions on the principal's behalf. | the forge intent (Operating environment), `.claude/skills/document/SKILL.md` |
+| history companion | The append-only file `<file>.history.md` beside every versioned document, holding one record per change while the body holds the current state. | `CLAUDE.md` (Versioning & status), `templates/history.md` |
+| hook's ask | The question `scripts/hook-git.py` puts to the principal for one of the few git commands that finish the step of a conflict, run on his yes, while every other write of git is denied with the name of the script to use. | `CLAUDE.md` (Persistence) |
+| how-to | A kind of page that carries what the person does, step by step where there are steps, and what he sees, never the reasons. | `.claude/skills/docs-contract/SKILL.md` |
+| immutable | Said of a document never edited once written (a review, a challenge, a research note, a source from its registration, a closed thread), by a process rule and not by a mechanism of git. | `CLAUDE.md` (Versioning & status) |
+| independence of engines | The measure, never the assumption, that a second engine's note was written from the web and not from the first engine's, counted over shared URLs and sentences by `scripts/forge-cite.py --independence`. | the forge intent (Research), `scripts/forge-cite.py` |
+| index (of the documentation) | The file `docs/README.md`, derived by a script from the documentation map, listing every page by its line and each reader's path. | `.claude/skills/document/SKILL.md`, `.claude/agents/docs-planner.md` |
+| instance | One installation of the forge, prepared by `/setup` after the engine is cloned. | `CLAUDE.md` (Commands), `.claude/skills/docs-contract/SKILL.md` |
+| instance fact | A fact of one instance (who the principal is, the conversation language, the author's handle), kept in the gitignored `CLAUDE.local.md` and never let into a report, a render or a page. | `CLAUDE.md` (What this workspace is, Isolated reviewers), the forge intent (Operating environment) |
+| integrator | The maintainer of a hosted project, typically the principal, who merges the contributors' branches: on the server where there is no conflict, on his clone through the step of a conflict where there is. | the forge intent (Operating environment) |
+| intent | The working document `10-intent.md`: the principal's current positions, facts, threads and rejected directions, chiselled from the briefs and rewritten for coherence each round. | `.claude/skills/forge/states/intent.md`, the forge intent (Document chain) |
+| isolated subagent | A subagent that sees nothing of the working conversation, reads every input from disk in its own run and lets no instance fact into what it returns. | `CLAUDE.md` (Isolated reviewers) |
+| isolation | The rule that a reviewer judges only what the documents say and is never told what the drafter intended. | `.claude/skills/critic-contract/SKILL.md`, `CLAUDE.md` (Isolated reviewers) |
+| kind (of a document) | The one class each document has (an artefact, a history, a ledger, a render and the others of the table), which says who writes it, whether it is versioned and how it behaves. | `CLAUDE.md` (Document kinds) |
+| kind (of a project) | `thought` or `library`, declared in the project file, `thought` by default. | `templates/project.md`, the forge intent (Document chain) |
+| layer | An artefact of the chain below the intent (the assignment, the BRD, the solution design), taken by a project only where it needs it. | `CLAUDE.md` (Document chain) |
+| ledger | The file `ledger.md`, the single source of truth for a project's state, built from the documents by `scripts/forge-ledger.py` and never kept in git. | `CLAUDE.md` (Ledger), `templates/ledger.md` |
+| lens | One specialisation of the critic, an agent file `critic-<lens>` of its own with its Lens section. | `CLAUDE.md` (Isolated reviewers) |
+| Lens section | The one section of a critic, challenger or check agent file that is its own, which may narrow its contract or make a shared rule stricter but never renames, drops or duplicates one. | `CLAUDE.md` (Isolated reviewers) |
+| library | A project of kind `library`, its name prefixed `lib-`, with no chain: material shared across projects, maintained by its owner and cited by path. | `CLAUDE.md` (Repository layout), `.claude/skills/ingest/SKILL.md` |
+| made at read time | Said of the ledger: built by its script from the documents whenever it is needed, so that it never exists as a file to merge. | the forge intent (Versioning and state) |
+| major | An approved integer version of the forge intent that closes a set of features the principal names, its release tagged `v<major>`. | the forge intent (Versioning and state), `CLAUDE.md` (Persistence) |
+| manual | The command `/man` (alias `/manual`), which reads the forge's own definitions at the call and answers for a command, a working method or a need said in free words. | `.claude/skills/man/SKILL.md` |
+| Map (of a definition) | The block of a definition that names what must be found for the artefact to be complete, walked as the question whether each area was consciously considered, never a questionnaire. | the forge intent (Elicitation) |
+| merge driver `ours` | The git setting by which a derived file keeps one side at a merge and is then made again instead of merged. | `CLAUDE.md` (Persistence), the forge intent (Operating environment) |
+| migration | The run of `/migrate [slug]` through `scripts/forge-migrate.py` that brings a project to the shape of a release that changed the shape of files, once per project, on one clone, on the principal's word. | `.claude/skills/migrate/SKILL.md`, the forge intent (Operating environment) |
+| mined | Said of a brief whose substance the intent has absorbed, recorded in the intent's history as pending, partial, mined or dropped. | `.claude/skills/forge/states/brief.md`, `templates/history.md`, `templates/ledger.md` |
 | mirrored (page) | A page that restates what its inputs say, in the reader's words. | `.claude/skills/docs-contract/SKILL.md` |
-| non-functional requirement | An item of a BRD with the prefix `NFR`: a quality by category, its value given by the stakeholders or held open as an open question. | `CLAUDE.md`, ID scheme; `.claude/skills/forge/states/brd.md` |
-| packet | A folder under `tmp/` whose `packet.md` is the whole context of one agent's run: the card, the agent's brief, the note's shape and the attached notes. | `.claude/skills/research/SKILL.md`; `scripts/forge-engine.py`, its header |
-| page | One page of the documentation, of one topic and one kind, generated and never a source of truth. | `CLAUDE.md`, Document kinds; `.claude/skills/docs-contract/SKILL.md` |
-| parent of an item | The requirement of the assignment (`REQ`) or the position of the intent (`POS`) that a business requirement or a use case carries and cites. | `.claude/skills/forge/states/brd.md` |
-| persona | One specialisation of the challenger, an agent file `challenger-<persona>` of its own. | `CLAUDE.md`, Isolated reviewers; `.claude/skills/challenger-contract/SKILL.md` |
-| perspective | A standpoint from which a research topic is looked at, listed in the plan with the cards that serve it. | `templates/research-plan.md` |
-| pinned fact | A fact of a project that no file owns yet (a prerequisite, an install line, the public home), kept in the section "Pinned facts (not rendered)" of the readme recipe. | `templates/recipe-readme.md`, Pinned facts (not rendered) |
-| plain file | The `.docx`, `.pptx`, video or player file a script makes from a render, deterministically, where the recipe names a format. | `CLAUDE.md`, Document chain; `.claude/skills/render/SKILL.md` |
-| plan | The head of a research bundle, `00-plan.md`: purpose, perspectives, assumptions, what is left out, the cards and the agents, confirmed by the principal before anything is searched. | `.claude/skills/research/SKILL.md`; `templates/research-plan.md` |
-| player page | `docs/videos/index.html`, written anew by `scripts/md2video.py` from `templates/html-player.html` whenever a file enters the public folder. | `projects/forge/10-intent.md`, Growth path |
-| position | An item of the intent with the prefix `POS`: what the principal holds or wants, why, and what it comes from. | `CLAUDE.md`, ID scheme; `projects/forge/10-intent.md`, Document chain |
-| prime directive | One of the ten numbered rules at the head of `CLAUDE.md` that hold for all of Claude's work. | `CLAUDE.md`, Prime directives |
-| primary render | The render in the first language a recipe declares, from which the others are translated. | `.claude/skills/render/SKILL.md`; `projects/forge/10-intent.md`, Document chain |
-| principal | Whoever's thinking is being forged, who supplies ideas, answers and decisions and has the final authority on all content. | `CLAUDE.md`, Roles |
-| profile | A copy of the user's settings made for one run of another engine, with the forge's tree and the shell denied and the web allowed, kept in the run folder. | `scripts/forge-engine.py`, its header |
-| project | A directory `projects/<slug>/` of kind `thought` or `library`, usually a git repository of its own that the engine does not know. | `CLAUDE.md`, Repository layout |
-| project file | `project.md`, written once at a project's creation, holding its slug, its kind and its language. | `templates/project.md` |
-| project outside git | A project whose directory is not the top of a git repository, on which the forge runs no git; a property, not a defect. | `CLAUDE.md`, Persistence (git) |
-| provenance | The front-matter a render opens with: the project, the recipe with its version, the date and every input with its version. | `.claude/skills/render/SKILL.md` |
-| provenance map | The tool of a joint pass that maps every group to its items and the items to what they came from, with what landed nowhere and what has no source; it is not part of the artefact. | `.claude/skills/forge/states/assignment.md` |
-| published companion | `published/<recipe>.md`, the provenance of a published file, from which the ledger computes whether it is `current` or `stale`. | `.claude/skills/publish/SKILL.md` |
-| published file | The designed `.pptx` or `.docx` made from a render through a model by `/publish`, only on the principal's command. | `.claude/skills/publish/SKILL.md` |
-| pull | The command `/pull`, which says each repository's state against its origin (up to date, behind, ahead, diverged, no origin, not under git) and pulls only one that is clean and behind. | `.claude/skills/pull/SKILL.md` |
-| quick and deep | The two depths of a research: `--quick` is one card on the session model filed as one note, `--deep` a plan of several cards filed as a bundle with a synthesis. | `.claude/skills/research/SKILL.md` |
-| recipe | `recipes/<recipe>.md`, the versioned file of a render's inputs, audience, instructions and output template. | `CLAUDE.md`, Document chain |
-| recipients | Those who receive an assignment: teams, colleagues or the principal's future self. | `CLAUDE.md`, What this workspace is |
-| record | One line of a history companion: date, version, author, subject, kind, reason and, where it has them, `Action` and `Was`. | `templates/history.md` |
-| record of state | A record that carries the current version without raising it and says a state: a brief mined, a finding or challenge settled, a work product's state. | `templates/history.md`; `projects/forge/10-intent.md`, Versioning and state |
-| reference | A kind of page that states facts in the structure of what it mirrors, free of interpretation. | `.claude/skills/docs-contract/SKILL.md` |
-| registration of the merge driver | The once-per-machine entry of the merge driver `ours` into the global git configuration, made by `/setup` through `scripts/forge-config.py`, without which a clone falls back to a conflict. | `CLAUDE.md`, Persistence (git) |
-| rejected direction | An item of the intent with the prefix `REJ`: a direction dropped, with the reason. | `CLAUDE.md`, ID scheme; `.claude/skills/forge/states/intent.md` |
-| release | The command `/release`, which from `main` only runs its checks, re-renders the README and the release notes and saves with the release message and tag. | `CLAUDE.md`, Persistence (git) |
-| render | An audience-specific output generated from the chain by `/render` from its recipe, never edited by hand and never a source of truth. | `CLAUDE.md`, Document chain; `.claude/skills/render/SKILL.md` |
-| Reports | The section of the ledger in which its script says what the merged files cannot, such as an ID defined twice. | `templates/ledger.md` |
-| research | A document kind: a durable answer to one question, immutable, made by `/research`. | `CLAUDE.md`, Document kinds |
-| research bundle | `research/YYYY-MM-DD-<topic>/`, with the plan and the synthesis in `00-plan.md` at its head and one note per card per engine. | `.claude/skills/research/SKILL.md` |
-| research note | The answer of one engine to one card, in the shape of `templates/research.md`, immutable from its filing. | `templates/research.md` |
-| resource index | The `00-INDEX.md` of every `sources/` and `research/` directory: a light catalogue in fixed free-text fields that tracks nothing. | `CLAUDE.md`, Document chain |
-| Role | The free-text field of a source's index entry that says what the source is for, the principal's word, asked before the entry is written. | `.claude/skills/ingest/SKILL.md`; `CLAUDE.md`, Document chain |
-| roster of areas | The instance's list of the areas of the enterprise a BRD must consider and which of them are mandatory, a library document cited by path, or `Roster: none`. | `.claude/skills/forge/states/brd.md`; `templates/brd.md` |
-| round | One working conversation whose agreed answers are carried and written once at its end, on the principal's word, as one version. | `CLAUDE.md`, Prime directives; `.claude/skills/walkthrough/SKILL.md` |
-| run folder | `tmp/research/YYYY-MM-DD-<topic>/`, which holds the packets, envelopes, profiles, held notes and citation reports of one research run, kept for inspection. | `.claude/skills/research/SKILL.md`; `scripts/forge-engine.py`, its header |
-| save | The command `/save`, which runs its check and then commits and pushes on the branch checked out; `--quick` leaves the check out. | `CLAUDE.md`, Persistence (git) |
-| screenplay | A recipe genre that renders a terminal conversation as a title card and timed scenes with captions, made into a video or player events by `scripts/md2video.py`. | `projects/forge/10-intent.md`, Document chain |
-| second engine | An engine of another model family run beside the session model in a deep research, named by `--engine <name>`, which reviews the draft plan and takes every card. | `.claude/skills/research/SKILL.md`; `projects/forge/10-intent.md`, Research |
-| session | One run of Claude with the principal, whose conversation lives only until it ends; `/end` closes it by saying what would be lost. | `CLAUDE.md`, Persistence (git); `.claude/skills/docs-contract/SKILL.md` |
-| session model | The model of the session, on which the whole forge runs, the reviewers included. | `CLAUDE.md`, Isolated reviewers |
-| shape of a project | The set of marks, one per migration step, by which the migration script recognises whether a project is in the shape of a release. | `.claude/skills/migrate/SKILL.md`; `templates/project.md`; `projects/forge/10-intent.md`, Operating environment |
-| solution design | `40-solution-design.md`, the layer that says how the things wanted are realised, part by part, with the choices they rest on. | `.claude/skills/forge/states/solution-design.md` |
-| source | External input as it arrived, kept in `sources/`, immutable from its registration and of one form. | `CLAUDE.md`, Document kinds and Document chain |
-| specification | `work/<name>.spec.md`, the versioned way and why of a work product: its task, its inputs cited, its method, its assumptions, what is open and how the file is made. | `.claude/skills/work/SKILL.md`; `projects/forge/10-intent.md`, Document chain |
-| stale | Said of a render whose provenance cites a version that differs from the file's current one or a file that no longer exists, and of a published file whose render is newer. | `.claude/skills/render/SKILL.md`; `templates/ledger.md` |
-| state render | `renders/state.md`, the ledger as a render, written by `/release` on `main`. | `CLAUDE.md`, Repository layout |
-| step of a conflict | The way a conflict left standing by `forge-save` is settled: Claude lays both sides out as a walkthrough, the principal decides, Claude writes the wording and the finishing commands run on the hook's ask. | `CLAUDE.md`, Persistence (git) |
-| stop rule | The rule of a card for when searching ends: nothing new from a differently-worded query and a primary source for every perspective of the card, or the opening budget spent. | `templates/research-plan.md`; `templates/research.md` |
-| subagent | A separate agent Claude launches for one job, which returns its report and carries `CLAUDE.md` and the instance file. | `CLAUDE.md`, Isolated reviewers |
-| synthesis | Claude's section of `00-plan.md`, made from the notes alone: completeness card by card, the engines' answers side by side, the unexpected and the not found gathered, and its own view last and apart. | `templates/research-plan.md`; `.claude/skills/research/SKILL.md` |
-| tag | A name given to a commit; `/release` says which release receives `v<major>`, and any other tag is the principal's request. | `CLAUDE.md`, Persistence (git) |
-| template | A canonical skeleton in `templates/` that says what comes out. | `CLAUDE.md`, Templates and Document chain |
-| thought project | A project of kind `thought`, which carries the chain. | `CLAUDE.md`, Repository layout; `templates/project.md` |
-| thread | An item of the intent with the prefix `THR`: one open matter, naming the artefact it concerns and its origin and carrying the working debate until it is settled. | `.claude/skills/forge/states/intent.md`; `projects/forge/10-intent.md`, Document chain |
-| thread file | `threads/THR.NNNN.md`, one file per thread with `id`, `concerns`, `origin` and `status` in its header, freely rewritten while open and immutable once closed. | `templates/thread.md`; `.claude/skills/forge/states/intent.md` |
-| touched area | An area of the roster that a BRD finds or knowingly finds not to apply, a mandatory one never left silent. | `.claude/skills/forge/states/brd.md` |
-| translation | A render in a further language of a recipe's `languages:`, made from the primary render in the same run, scene for scene and line for line. | `.claude/skills/render/SKILL.md`; `projects/forge/10-intent.md`, Document chain |
-| Unowned | The section of the documentation map that lists every fact a page needs and no file supports, which the writer leaves out. | `.claude/agents/docs-planner.md` |
-| use case | An item of a BRD with the prefix `UC`: behaviour agreed as a sequence at user-goal level, its steps in the active voice. | `CLAUDE.md`, ID scheme; `.claude/skills/forge/states/brd.md` |
-| verdict | The principal's answer to one item: accept, modify, question, reject or park, offered by the line `(a)ccept / (m)odify / (q)uestion / (r)eject / (p)ark`, with obsolete typed in full. | `.claude/skills/walkthrough/SKILL.md` |
-| Verdict line | The line of a decision that records its ruling on a finding or a challenge: rejected, parked until a named matter, or obsolete. | `templates/decisions.md` |
-| Waiting on principal | The section of the ledger that lists by rule what waits on the principal: open threads, open questions he owns, open findings and challenges, and the parked ones. | `templates/ledger.md` |
-| walkthrough | The working method in which a list of items needing the principal's decision is worked one item per message, in order of weight, each closed with the verdict line. | `.claude/skills/walkthrough/SKILL.md`; `CLAUDE.md`, Working methods |
-| way of merging | One of the three ways each file of a project is merged (text, derived, or immutable and unique), told to git by the project's `.gitattributes`. | `projects/forge/10-intent.md`, Operating environment |
-| work product | An output of a project made with work of its own, neither artefact nor render: a file in `work/` with its specification beside it. | `.claude/skills/work/SKILL.md`; `projects/forge/10-intent.md`, Document chain |
-| working folder | `tmp/` at the engine root, the forge's one working folder, in git with its README and `.gitignore` while its contents never are, and never a source of truth. | `tmp/README.md`; `projects/forge/10-intent.md`, Operating environment |
-| working method | One of the named ways a working conversation runs, applied whenever its situation arises and never a command. | `CLAUDE.md`, Working methods |
-| write | The principal's word that ends a round, on which Claude reflects the round back and writes it to files on his yes. | `.claude/skills/walkthrough/SKILL.md`; `CLAUDE.md`, Prime directives |
+| non-functional requirement (NFR) | A quality in a BRD by category, its value given by the stakeholders or left open as a TBC with an owner. | `.claude/skills/forge/states/brd.md`, `templates/brd.md` |
+| packet | The folder holding `packet.md`, the whole context of one agent's run on a card or on a draft plan, the same for both engines and free of the conversation. | `.claude/skills/research/SKILL.md`, `scripts/forge-engine.py` |
+| page | One page of the documentation, of one topic and one kind, or its index; never a source of truth. | `CLAUDE.md` (Document kinds), the forge intent (Growth path) |
+| parent (of an item) | The item of the layer above that a BRD item carries and cites: a REQ of the assignment, or a POS where the project has no assignment. | `.claude/skills/forge/states/brd.md` |
+| persona | One specialisation of the challenger, an agent file `challenger-<persona>` of its own with its Lens section. | `CLAUDE.md` (Isolated reviewers) |
+| perspective | One standpoint from which a research plan looks at its topic, listed with the cards that serve it or with none. | `templates/research-plan.md` |
+| pinned fact | A fact of a project that no file owns yet (a prerequisite, an install line, the public home of the repository), kept in the "Pinned facts" section of the README recipe for the documentation and never printed in the README. | `templates/recipe-readme.md` |
+| plain file | The `.docx`, `.pptx`, video or player file that `/render` makes from a render through the script its format names, deterministic and cheap. | `CLAUDE.md` (Document chain), `.claude/skills/render/SKILL.md` |
+| plan | The research plan shown and confirmed before anything is searched: its purpose, perspectives, assumptions, what is left out, its cards and its agents. | `.claude/skills/research/SKILL.md`, `templates/research-plan.md` |
+| player page | The page `docs/videos/index.html` that plays the player events of screenplays, written anew by `scripts/md2video.py` from `templates/html-player.html`. | the forge intent (Growth path) |
+| position (POS) | An item of the intent saying what the principal holds or wants and why, naming the brief or source it comes from. | the forge intent (Document chain, Structure and style of an assignment) |
+| primary render | The render in the first language a recipe declares, from which the renders in its other languages are translated. | the forge intent (Document chain) |
+| prime directive | One of the ten rules at the head of `CLAUDE.md` that hold in every working conversation, such as "When unsure, ask". | `CLAUDE.md` (Prime directives) |
+| principal | Whoever's thinking is being forged: the one who supplies ideas, answers and decisions, and the final authority on all content. | `CLAUDE.md` (Roles) |
+| principal's own file | Any file in `renders/` or `published/` that no recipe names, made by hand from the forge's files and kept in git with no companion, no row and no check. | `CLAUDE.md` (Document chain), the forge intent (Document chain) |
+| profile | A copy of the user's settings made for one run of another engine, with the forge's tree and the shell denied and the web allowed, kept in the run folder as its record. | the forge intent (Research), `scripts/forge-engine.py` |
+| project | One body of work under `projects/<slug>/`, of kind thought or library, a git repository of its own unless it is outside git. | `CLAUDE.md` (Repository layout, Persistence) |
+| project file | The file `project.md`, written once at a project's creation, holding its slug, its kind and its language. | `templates/project.md`, the forge intent (Document chain) |
+| project outside git | A project whose directory is not the top of a git repository, on which the forge runs no git: a property, not a defect. | `CLAUDE.md` (Persistence) |
+| provenance | The front-matter a render opens with, naming its recipe and every input with its version, and in the intent what a position names as its origin. | `.claude/skills/render/SKILL.md`, the forge intent (Document chain) |
+| provenance map | The tool of a joint pass that maps every group to its items and to the parent items they came from, showing what landed nowhere and what has no parent, never part of the artefact. | `.claude/skills/forge/states/assignment.md` |
+| public folder | The engine's `docs/videos/`, the one public place of an instance, into which a recipe's `output:` path may send a format file, left alone by `/document`. | `CLAUDE.md` (Document chain), the forge intent (Growth path) |
+| published companion | The file `published/<recipe>.md` beside a published file, holding its provenance (recipe, render, model, date), its state current or stale computed by the ledger. | `.claude/skills/publish/SKILL.md` |
+| published file | The designed `.pptx` or `.docx` that `/publish` makes from a render through a model, only on the principal's command. | `CLAUDE.md` (Document chain), `.claude/skills/publish/SKILL.md` |
+| pull | The command `/pull`, which looks at the remote, says each repository's state against the origin and pulls only a clean repository that is behind. | `.claude/skills/pull/SKILL.md` |
+| quick and deep | The two depths of `/research`: `--quick` is one card on the session model filed as one note, `--deep` a plan of several cards filed as a bundle with a synthesis. | `.claude/skills/research/SKILL.md`, the forge intent (Research) |
+| recipe | The versioned file `recipes/<recipe>.md` that says how a render is made (its inputs, audience, instructions and output template), iterated and never approved. | `CLAUDE.md` (Document chain) |
+| recipients | Those who receive an assignment: teams, colleagues or the principal's future self. | `CLAUDE.md` (What this workspace is) |
+| record | One line of a history companion for one change, with its date, version, author, subject, kind and reason, and its Action and Was where it has them. | `templates/history.md` |
+| record of state | A record that changes a state only (a mining, a finding closed, a thread closed, a work product's state), carrying the current version without raising it. | `templates/history.md`, the forge intent (Versioning and state) |
+| reference (page) | A kind of page that states facts in the structure of what it mirrors, a table where the input is a table, and never explains. | `.claude/skills/docs-contract/SKILL.md` |
+| registration of the merge driver | The once-per-machine write of the merge driver `ours` and the git settings it needs into the user's global git configuration, by `/setup` through `scripts/forge-config.py` on the user's word. | `CLAUDE.md` (Persistence) |
+| rejected direction (REJ) | An item of the intent recording a direction the principal dropped, with the reason it was dropped. | `CLAUDE.md` (ID scheme), `.claude/skills/forge/states/intent.md` |
+| release | The command `/release`, from `main` only, which runs its checks, renders the README and the release notes again and then saves with the release message and, at an approved major, the tag. | `CLAUDE.md` (Persistence) |
+| render | An output for one audience generated from the chain by `/render <recipe>`, never edited by hand and never a source of truth. | `CLAUDE.md` (Document chain), `.claude/skills/render/SKILL.md` |
+| Reports | The section of the ledger in which its script says what the merged files cannot, such as an ID defined twice, present only when there is something to say. | `templates/ledger.md` |
+| research | A durable answer to a question about the world outside, made by `/research`, filed in `research/` and immutable. | `CLAUDE.md` (Document kinds), `.claude/skills/research/SKILL.md` |
+| research bundle | The folder `research/YYYY-MM-DD-<topic>/` with the plan and the synthesis at its head in `00-plan.md` and one note per card per engine. | `.claude/skills/research/SKILL.md` |
+| research note | One card answered by one engine in the shape of `templates/research.md`, immutable from its filing. | `templates/research.md` |
+| resource index | The `00-INDEX.md` of `sources/` and of `research/`, a light catalogue of what each resource is and is for, which tracks no state. | `CLAUDE.md` (Document chain) |
+| Role | The free-text field of a source's index entry that says what the source is for, the principal's word asked before the entry is written. | `CLAUDE.md` (Document chain), `.claude/skills/ingest/SKILL.md` |
+| roster of areas | The instance's list of the areas of the enterprise a BRD must consider and which of them are mandatory, a library document cited by path, or `Roster: none` where there is none. | `.claude/skills/forge/states/brd.md` |
+| round | One working conversation over an artefact or open items, its answers carried in the conversation and written once at its end as one version. | `CLAUDE.md` (Prime directives), `.claude/skills/walkthrough/SKILL.md` |
+| run folder | The folder `tmp/research/<run>/` holding the packets, envelopes, profiles and citation reports of one research run, kept for inspection. | `.claude/skills/research/SKILL.md`, `scripts/forge-engine.py` |
+| save | The command `/save`, which runs its check and then commits and pushes on whatever branch is checked out, `--quick` leaving the check out. | `CLAUDE.md` (Persistence) |
+| screenplay | A render of the genre `screenplay` that tells a terminal conversation in scenes with captions, made into a video or into player events by `scripts/md2video.py`. | the forge intent (Document chain) |
+| second engine | An engine of another model family asked for by name with `/research --deep --engine <name>`, which reviews the draft plan and answers every card beside the session model. | `.claude/skills/research/SKILL.md`, the forge intent (Research) |
+| session | One working conversation of Claude with the principal, whose context a subagent may see and which `/end` closes. | `CLAUDE.md` (Persistence), the forge intent (Operating environment) |
+| session model | The one model on which every command, chain state and reviewer of the forge runs, set in the gitignored `.claude/settings.local.json` and inherited by the agents. | `CLAUDE.md` (Repository layout, Isolated reviewers) |
+| shape of a project | The set of marks, one per step of a migration, by which `scripts/forge-migrate.py` recognises a project, a project without `project.md` being of the shape before the migration. | the forge intent (Operating environment), `templates/project.md` |
+| solution design | The layer `40-solution-design.md`, which says how the things wanted are realised, part by part as SOL items, with the choices they rest on. | `.claude/skills/forge/states/solution-design.md` |
+| source | An external input as it arrived (a transcript, an offer, a document), kept in `sources/` in one form, text or a functional binary, and immutable from its registration. | `CLAUDE.md` (Document chain) |
+| specification | The versioned file `work/<name>.spec.md` of a work product, which holds the way and the why and from which the work file is made. | `.claude/skills/work/SKILL.md`, the forge intent (Document chain) |
+| stale | Said of a render when a version its provenance cites differs from the current version of that file or the file is gone, and of a published file when its render is newer. | `.claude/skills/render/SKILL.md`, `templates/ledger.md` |
+| state against the origin | A repository's standing as `/pull` reports it: up to date, behind, ahead, diverged, no origin or not under git. | `.claude/skills/pull/SKILL.md` |
+| state map | What bare `/forge [slug]` shows: the state of a project's chain. | `CLAUDE.md` (Commands) |
+| state render | The file `renders/state.md`, the ledger as a render, written by `/release` on `main`. | `CLAUDE.md` (Repository layout) |
+| step of a conflict | The settling of a conflict that `scripts/forge-save.py` meets and leaves standing: Claude lays both sides out as a walkthrough, the principal decides and Claude writes the wording. | `CLAUDE.md` (Persistence) |
+| stop rule | The condition on a card that ends its search: nothing new from a differently worded query and a primary source for every perspective, or the budget of openings spent. | `templates/research-plan.md`, `templates/research.md` |
+| subagent | An agent Claude launches for one job in a context of its own, such as a reviewer, a renderer, a documentation agent or a research agent. | `CLAUDE.md` (Isolated reviewers) |
+| synthesis | Claude's account of a research from its notes alone: completeness card by card, the engines' answers side by side, the unexpected, what was not found and its own view last and apart. | `.claude/skills/research/SKILL.md`, `templates/research-plan.md` |
+| tag | A named mark on one commit in git: `v<major>` on the release of an approved major, any other on the principal's request with a free name. | `CLAUDE.md` (Persistence) |
+| template | A canonical skeleton in `templates/` from which a new document is created, a skeleton named `<type>-definition.md` being that of one member of a type the forge can be extended by. | `CLAUDE.md` (Templates) |
+| thought project | A project of kind `thought`, whose chain starts at a brief and has the intent as its trunk. | `CLAUDE.md` (Repository layout, Document chain) |
+| thread (THR) | One open matter of the intent, carrying its origin and, while it is unsettled, the working debate. | the forge intent (Document chain, Structure and style of an assignment), `.claude/skills/forge/states/intent.md` |
+| thread file | The file `threads/THR.NNNN.md` of one thread, whose header says what it concerns, its origin and whether it is open, freely rewritten while open and immutable once closed. | `.claude/skills/forge/states/intent.md`, `templates/thread.md` |
+| touched area | An area of the roster that a BRD must find or knowingly find not to apply, a mandatory area never left silent. | `.claude/skills/forge/states/brd.md`, `templates/brd.md` |
+| translation | A render in a further language a recipe declares, made from the primary render in the same run, scene for scene and line for line. | the forge intent (Document chain), `.claude/skills/render/SKILL.md` |
+| Unowned | The section of the documentation map listing every fact a page needs that no file supports, left off the page until a file gives it a home. | `.claude/agents/docs-planner.md` |
+| use case (UC) | Behaviour in a BRD agreed as a sequence at user-goal level, its steps in the active voice, citing its parent. | `.claude/skills/forge/states/brd.md`, `templates/brd.md` |
+| verdict | The principal's word on one item (accept, modify, question, reject, park or obsolete), given in answer to the verdict line `(a)ccept / (m)odify / (q)uestion / (r)eject / (p)ark`. | `.claude/skills/walkthrough/SKILL.md` |
+| Verdict line (of a decision) | The line of a decision that rules on a finding or a challenge, one per ID, saying it is rejected, parked until an event, or obsolete. | `templates/decisions.md` |
+| Waiting on principal | The section of the ledger that lists by rule what waits on the principal: the open threads, the TBCs he owns, the open findings of a critic and the open challenges, and the parked ones with their decision. | `templates/ledger.md` |
+| walkthrough | The working method that puts a list of items needing the principal's decision before him one item per message, in order of weight, each closed with the verdict line. | `.claude/skills/walkthrough/SKILL.md` |
+| way of merging | One of the three ways git is told to merge a file by its path: text, derived, or immutable and unique. | the forge intent (Operating environment) |
+| work product | An output of a project made with work of its own (a model, an analysis), kept as two files in `work/`: the file with the content and its specification. | `.claude/skills/work/SKILL.md`, the forge intent (Document chain) |
+| working folder | The folder `tmp/` at the engine's root, where runs leave their packets, tasks, dry ledgers and manifests, in git as a folder but never its contents, and no source of truth. | `tmp/README.md`, the forge intent (Operating environment) |
+| working method | One of the named ways a working conversation runs, such as the walkthrough or one write per round, applied whenever its situation arises. | `CLAUDE.md` (Working methods) |
+| write | The principal's word that closes a round, on which Claude reflects the round back and, on his yes, writes it as one version. | `.claude/skills/walkthrough/SKILL.md`, `CLAUDE.md` (Prime directives) |
 
 ## See also
 
 - [What the forge is and is not](../about/what-it-is-and-is-not.md):
   the forge in prose.
 
-Generated on 2026-10-25 for version 6.1 from the files the front-matter names; never edited by hand.
+Generated on 2026-11-01 for version 6.4 from the files the front-matter names; never edited by hand.

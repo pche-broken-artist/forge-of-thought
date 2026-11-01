@@ -1,8 +1,8 @@
 ---
-generated: 2026-10-25
-version: 6.0
+generated: 2026-11-01
+version: 6.4
 made: derived
-inputs-hash: cb3545aa05b57b23
+inputs-hash: 9e46bccb7cf0560e
 inputs:
   - CLAUDE.md#What this workspace is
   - projects/forge/10-intent.md#Essence
@@ -19,148 +19,163 @@ inputs:
 
 # What the forge is and is not
 
-Forge of Thought is a place for forging thoughts: a workshop where
-thought is tempered and shaped. This page is for anyone who uses the
-forge, extends it or weighs whether it fits. It says what the forge
-is, what it is not, and why it is built and named the way it is.
+Forge of Thought is a general engine for forging any thought: an
+idea travels a chain of versioned documents, from the idea put
+together onward, under isolated adversarial review. This page says
+what the forge is, what it is not, and why it is built so. It is
+for anyone who meets the forge for the first time: someone who will
+use it, someone who will extend it, or someone who is weighing it.
 
 ## What it is
 
-Forge of Thought is a general engine for forging any thought. An
-idea travels a chain of versioned documents, from the idea put
-together onward. Along the way it is put under isolated adversarial
-review: AI reviewers that never see the working conversation press on
-the documents from different angles. The course of one thought
-through that chain is described in
-[How a thought travels through the forge](how-a-thought-travels.md).
+The forge is a place for forging thoughts. Its own subtitle calls it
+"*A workshop where thought is tempered and shaped.*" In plain terms,
+a thought is written down, questioned, reviewed and rewritten over
+many versions until the principal stands behind it.
 
-The forge is bound to no person and to no management relationship.
+It is a general engine. It is bound to no one person and to no one
+management relationship.
 
-- **The principal** is whoever's thinking is being forged. Anyone can
-  be the principal.
-- **The recipients** are whoever receives an assignment. They may be
-  teams, colleagues, or the principal's future self.
-- **The subject matter** is deliberately unconstrained: process
-  redesign, platform initiatives, organisational topics, anything.
+- **The principal**: whoever's thinking is being forged. Anyone can
+  be the principal. The principal supplies ideas, answers and
+  decisions, and has the final word on all content.
+- **The recipients**: whoever receives what the forge produces, such
+  as an assignment. They may be teams, colleagues, or the principal's
+  own future self.
+- **The subject matter**: deliberately unconstrained. It may be
+  process redesign, platform initiatives, organisational topics,
+  anything.
 
-Who the principal of one installation (an instance) is, is a fact of
-that instance, not a property of the system. The forge began as one
-person's tool; that origin is an instance fact too.
+It began as one person's tool. That origin is now an instance fact
+(a fact of one installation of the forge, kept outside the engine),
+not a property of the system.
 
-Claude is the principal's cognitive extension, not a supplier. The
-two roles are set out in
-[The principal and Claude](the-principal-and-claude.md).
+**Claude** is the second role. Claude is the principal's cognitive
+extension, not a supplier. It owns structure, order, process
+discipline and the hygiene of the documents. The principal owns the
+content and every decision about it.
 
-- Claude owns structure, order, process discipline and document
-  hygiene.
-- The principal owns the content and every decision about it.
-- Claude criticises, challenges, inspires and lays out options.
-- The principal composes: he assembles what the forge offers into
-  his own positions and decisions.
+Claude's contribution to content is of four kinds:
 
-Nothing enters the content because Claude proposed it. It enters only
-because the principal took it up. "Cognitive extension" therefore
-means an amplifier of the principal's thinking, never its substitute.
-Claude proposes and never decides.
+- to criticise;
+- to challenge;
+- to inspire;
+- to lay out options.
+
+The composition is the principal's. Nothing enters the content
+because Claude proposed it. It enters only because the principal
+took it up. "Cognitive extension" therefore means an amplifier of
+the principal's thinking, never its substitute. In short, Claude
+proposes and never decides.
 
 ## What it is not
 
-- **Not a program.** Nothing is implemented in the forge. The engine
-  specifies.
-- **Not a delivery tool.** A run of the forge ends where its owner is
-  satisfied. The outcome is an artefact (a document of the chain) that
-  the principal stands behind, and nothing further. An intent may be
-  immaterial and carry no delivery at all. Sponsorship, funding,
-  adoption and delivery outcomes are outside the forge's scope and
-  outside its sight.
-- **Not a chat.** State lives in files, never only in the
-  conversation. What is in a file survives the working session (one
-  sitting with Claude); what lives only in the conversation does not.
-- **Not tied to one domain.** The mechanics of the chain are
-  domain-agnostic. The same machinery that forges a platform
-  assignment would forge a tabletop role-playing campaign: an intent
-  of the story, then materials made from it for the game master.
+**It is not a program.** Nothing is implemented in the forge. The
+engine specifies: what it produces are documents that say what is
+wanted, not a working system.
 
-The door to delivery is left open, not closed. The forge may one day
-feed a delivery chain. Experience from use then flows back through
-the principal, as input like any other. Whether a delivery side would
-be grown as layers of the forge or as a separate framework is
-deliberately undecided. The direction the forge is developed in is
-described in [Where the forge is going](where-it-is-going.md).
+**It is not a delivery tool.** A run of the forge ends where its
+owner is satisfied. The outcome is an artefact (a document of the
+chain, see the [Glossary](../reference/glossary.md)) that the
+principal stands behind, and nothing further. An intent (the
+principal's own positions on the thought) may be immaterial and
+carry no delivery at all. Sponsorship, funding, adoption and
+delivery outcomes are outside the forge's scope and outside its
+sight. The door is left open: the forge may one day feed a delivery
+chain. Whether such a delivery side would grow as layers of the
+forge or as a separate framework is deliberately undecided.
+
+**It is not a chat.** State lives in files, never only in the
+conversation. What is in a file survives the session (one sitting
+of work with Claude). What lives only in the conversation does not.
+
+**It is not tied to one domain.** The mechanics of the chain are
+domain-agnostic. The same machinery that forges an assignment for a
+platform would forge a tabletop role-playing campaign: an intent of
+the story, then materials rendered for the game master.
+
+**It is not one person's briefing tool.** Framing the system as a
+tool for one manager briefing the people who report to him was
+rejected. That framing describes the first installation, not the
+engine.
 
 ## How it works
 
-The chain ends where the project needs it to. Every chain has a
-trunk, the intent (the principal's positions on the thought). Below
-the intent a project takes the layers it needs, and many projects end
-at the intent. A layer is a further document of the chain, such as an
-assignment.
+A thought travels a chain of versioned documents. Its trunk is the
+intent. Below the intent a project takes the layers it needs, such
+as an assignment, a BRD or a solution design, up to a specification
+ready for implementation.
 
-The chain grows by adding the definition of a new layer. Nothing that
-already exists is reworked when it does. The wider ambition is the
-full chain: from a raw idea to a deck ready for realisation, layer by
-layer, through an assignment, a business requirements document and a
-solution design up to a specification ready for implementation,
-integration included.
+The chain ends where the project needs it to. Many projects end at
+the intent. The chain grows by adding the definition of a new layer,
+without reworking anything that exists.
 
-The terms used here are each given in one line in the
-[Glossary](../reference/glossary.md).
+Claude runs the process and keeps the documents in order. Isolated
+reviewers (AI reviewers deliberately blind to the working
+conversation) put the documents under adversarial pressure from
+different angles. Every decision about content remains the
+principal's.
 
 ## Why
 
-**Why a general engine.** The first framing of the system was a
-tool for one role briefing its direct reports. That framing was
-dropped because it describes the first instance, not the engine. The
-general-engine framing replaced it.
+**Why the name.** The thoughts are the raw material, of whatever
+kind, and nothing is presumed about them. The forged artefacts are
+the product, an assignment among them. The name was chosen with the
+full chain in mind, from an assignment through a BRD and a solution
+design to a deck ready for realisation. In daily speech the short
+form "Forge" is expected.
 
-**Why the name.** The system is named Forge of Thought because
-thoughts are the raw material and forged artefacts are the product.
-Nothing is presumed about the thoughts: they may be of any kind. The
-name was chosen with the full chain in mind. Other names were
-weighed and set aside.
+Other names were considered and dropped:
 
-- "Cascade" was rejected because it literally names the waterfall.
-- "Foundry" was rejected because the name collides with existing
-  products.
-- "Continuum", "Strata", "Idea Forge" and a word in another language
-  were considered, and Forge of Thought was chosen over them. The
-  reason each of these was passed over is not recorded.
+- "Cascade": it literally names the waterfall.
+- "Foundry": it collides with the names of existing products.
+- "Continuum", "Strata" and "Idea Forge": considered, not chosen. The
+  reason is not recorded.
+
+A name in the conversation language of the first instance was also
+considered and not chosen. The reason is not recorded.
 
 **Why "thought" and not "assignment".** An assignment is one place a
-chain may end, not the goal. So any subtitle or one-line description
-of the forge presents it as a place where thoughts are forged. It
-never names the assignment as the goal. The subtitle reads: "A
-workshop where thought is tempered and shaped."
+chain may end, not the goal. The primary ambition is the full chain,
+growing layer by layer from a raw idea. For that reason any subtitle
+or one-line description must present the forge as a place where
+thoughts are forged, and must not name the assignment as the goal.
 
 **Why the chain ends where the project needs it to.** A run ends
-where its owner is satisfied, with an artefact he stands behind. A
-project therefore takes only the layers it needs. Every design
-decision is made with the growth of the chain in mind. That is why
-files and IDs are numbered with gaps: a layer can be added later
-without renaming or renumbering anything.
+where its owner is satisfied, and an intent may carry no delivery at
+all. Every design decision of the forge is made with the growth of
+the chain in mind. This is why files and IDs are numbered with gaps:
+a layer can be added later without renaming anything. Why a project
+may stop at any layer rather than run the whole chain is not
+recorded beyond this.
 
-**Why state lives in files.** What is in a file survives the working
-session, and what lives only in the conversation does not.
+**Why Claude only proposes.** Claude is meant to amplify the
+principal's thinking, never to replace it. The outcome of a run is
+an artefact the principal stands behind.
 
 ## A worked example
 
-A principal wants to settle how a small reading circle picks its
-books for the year. The thought is invented here; it belongs to no
-project.
+This example is invented and generic.
 
-1. The idea is put together and worked into an intent: the
-   principal's positions, such as "each member proposes two books".
-   Claude asks, lays out options and challenges. The principal
-   decides each position.
-2. Isolated reviewers press on the intent from their angles. The
-   principal settles what they raise.
-3. The principal stands behind the intent. The run ends here.
+Someone wants to rethink how a small volunteer group shares out its
+weekly tasks. That person is the principal of a project with the
+placeholder slug `example-thought`.
 
-There is no assignment, no further layer and nothing delivered.
-Nothing is missing: the chain ended where this project needed it to.
-Had the principal wanted to hand the work to someone, an assignment
-would have followed as the next layer, and the run would have ended
-there instead.
+1. The principal puts the idea together in writing: what is wanted,
+   and why.
+2. Working with Claude, the principal shapes it into an intent over
+   several versions. Claude asks, criticises and lays out options.
+   The principal decides each position.
+3. Isolated reviewers read the intent and push back on it. The
+   principal weighs what they raise and decides.
+4. The principal now stands behind the intent. The group needs an
+   agreed way of working, not something handed to a team to build.
+
+The run ends here, at the intent. No assignment, no BRD and no
+solution design is written, and nothing is missing: the project
+took the layers it needed. Had the principal later wanted to hand
+the work to others, an assignment could be added below the intent
+without reworking what exists.
 
 ## See also
 
@@ -170,8 +185,8 @@ there instead.
   roles and the rule between them.
 - [Where the forge is going](where-it-is-going.md): the direction the
   forge is developed in.
-- [Glossary](../reference/glossary.md): every term of the forge in
-  one line.
+- [Glossary](../reference/glossary.md): every term of the forge in one
+  line.
 
-Generated on 2026-10-25 for version 6.0 from the files the
+Generated on 2026-11-01 for version 6.4 from the files the
 front-matter names; never edited by hand.

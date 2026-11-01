@@ -1,8 +1,8 @@
 ---
-generated: 2026-10-25
-version: 6.0
+generated: 2026-11-01
+version: 6.4
 made: derived
-inputs-hash: d209828028cdc33a
+inputs-hash: 4e99acd5e2317843
 inputs:
   - .claude/skills/challenger-contract/SKILL.md
   - projects/forge/10-intent.md#POS.0420
@@ -13,205 +13,257 @@ inputs:
 
 # The challenger
 
-The challenger is the reviewer that attacks the substance of the
-thinking, not the quality of the documents. This page explains what
-a challenger persona goes after, how it works, what it hands back and
-why its word is never final. It is for anyone who runs a challenge,
-anyone who wants to add a persona, and anyone judging whether the
-forge's review can be trusted.
+The challenger is a reviewer that attacks the substance of the
+thinking, not the quality of the documents that hold it. This page
+explains what a challenger persona goes after, how it works, what it
+hands back and why its challenges may be wrong. It is for anyone who
+runs a challenge, adds a persona of their own or wants to judge how
+far a challenge can be trusted.
 
 ## What it is
 
-A challenger is an isolated subagent: a separate Claude run that
-never sees the working conversation and reads everything it needs
-from disk. It works on behalf of the principal, that is the person
-whose thinking is being forged and who has the final say on all
-content.
+The challenger works on what the principal thinks. The principal is
+the person whose thinking is being forged, with the final word on
+all content.
 
-Every challenger works through a persona. A persona has a register
-of its own (the voice and standpoint it speaks from) and a set of
-blind spots it exists to find. Each persona is one agent file. What
-every persona shares is written once, in one contract. The persona
-file adds only what that persona goes after. The personas and what
-each hunts are listed in
+A challenger always runs through a persona. A persona is one
+reviewer agent with a register of its own and the blind spots it
+exists to find. Each persona runs as an isolated subagent: a
+separate run of Claude that never sees the working conversation and
+reads every input from disk itself. The personas and what each one
+hunts are listed in
 [Challenger personas](../reference/challenger-personas.md).
 
-The challenger's subject is substance. Ambiguous wording, weak
-structure, missing traceability and unmeasurable phrasing belong to
-the critic, the reviewer of document quality. Where the thinking is
-sound but the document is sloppy, the challenger says nothing.
+Every persona keeps one shared contract, whatever its register. The
+persona adds only what it goes after.
 
-Its target is one of three things:
+A persona reads as a peer with no stake in the principal being
+right. Its report is headed a peer review.
 
-- an artefact of the chain (one of the forge's versioned documents,
-  such as the intent);
-- any file of the project, named by its path, read together with the
+The challenger's subject is substance alone. Formal review belongs
+to the critic lenses, such as ambiguity, structure, traceability and
+whether wording can be measured. Where the thinking is sound but the
+document is sloppy, the challenger says nothing.
+
+Its target is one of these:
+
+- an artefact of the chain (one of the versioned documents a
+  project's thinking travels through, from the brief to the intent
+  and the layers below it);
+- any file of the project, named by its path and read with the
   chain around it;
+- a work product, read with its specification;
 - the whole chain, when no target is named.
 
-Whatever the target, the challenger reads the whole chain above and
-around it as context. That context includes the briefs, the intent,
-the open threads, the decisions, the sources and every layer below
-the intent that exists. It also reads earlier challenges. It changes
-none of them. Where the whole chain is the target, each challenge
-names the artefact or the file it concerns. Where a single file gives
-the persona nothing to work on, the report says so and carries
-nothing else.
-
-How to run a persona is described in
-[Challenge the thinking](../use/challenge-the-thinking.md). Every
-term of the forge has one line in the [Glossary](../reference/glossary.md).
+When the target is the whole chain, each challenge names the
+artefact or file it concerns. When a single file gives the persona
+nothing to work on, its report says so and carries nothing else.
 
 ## How it works
 
-The challenger reads for what is not there as much as for what is.
-Silence in the intent is its richest material.
+The persona reads the whole chain above and around the target:
 
-It grounds itself outside the project when a claim hinges on how the
-world actually works. Examples are how comparable organisations solve
-the same problem, or known failure rates and patterns. For that it
-may search the web. Search is for grounding, never for padding. On a
-purely technical trade-off, the mechanism leads, not an analyst's
-framework.
+- the briefs;
+- the intent;
+- the threads (the open matters of the intent);
+- the decisions;
+- the sources, where there are any;
+- every layer below the intent that exists;
+- the earlier challenge reports.
 
-It never fabricates. A precise "I don't know the current figure" is
-better than an invented statistic or citation. Any number, benchmark
-or citation it reconstructs from memory instead of verifying is
-flagged as such.
+It reads all of this and changes none of it. The context is
+everything, but the challenges aim at the target.
 
-It corrects a flawed assumption in the material before building on
-it. A challenge stacked on the material's own error is worthless.
+### Reading for what is not there
 
-It is concrete. "Consider stakeholder alignment" is not a challenge.
-A challenge names who or what is affected and what the material
-leaves out.
+The persona reads for what is missing as much as for what is
+written. Silence in the intent is its richest material.
 
-It is sharp and few. A run carries three to seven challenges. Where
-it has nothing serious to say about something, it says nothing.
+### Grounding outside the documents
 
-Each challenge carries a severity:
-
-- dealbreaker: a flaw that undoes the thinking;
-- major: a serious weakness;
-- minor: a weakness worth knowing.
-
-The challenges are ordered by severity, so that a fatal flaw is never
-buried among cosmetic ones.
-
-Each challenge also carries an epistemic status, which says what kind
-of ground it stands on:
+A claim may hinge on how the world actually works. Examples are how
+comparable organisations solve a problem, or the known failure rates
+and patterns. Then the persona searches the web for it, and not to
+pad the report. It says plainly which of these a point is:
 
 - consensus;
 - active debate;
 - emerging practice;
-- the challenger's own judgement.
+- its own judgement.
 
-It is direct. There is no flattery, hedging or softening. Where the
+On a purely technical trade-off, the mechanism leads, not an
+analyst's framework.
+
+### Never fabricating
+
+A precise "I don't know the current figure" is worth more than an
+invented statistic or a made-up citation. Any number, benchmark or
+citation the persona reconstructs from memory instead of verifying
+is flagged as such.
+
+The persona corrects a flawed assumption in the material before it
+builds on it. A challenge stacked on the material's own error is
+worthless.
+
+### Few, sharp and ordered
+
+Each challenge is concrete. "Consider stakeholder alignment" is not
+a challenge. Naming two owners who both lose scope under a plan,
+where neither is named anywhere, is one.
+
+A report carries three to seven challenges. Where the persona has
+nothing serious to say about something, it says nothing about it.
+
+Each challenge carries a severity:
+
+- dealbreaker;
+- major;
+- minor.
+
+The challenges are ordered by severity. A fatal flaw is never buried
+in a flat list next to cosmetic ones.
+
+Each challenge also says what would change the persona's mind, in
+terms that can be tested. It carries its epistemic status, from the
+four kinds listed above.
+
+The persona is direct, with no flattery and no softening. Where the
 thinking is strong, it says so in one line and moves on.
 
-It never proposes edits, wording or structure. It challenges the
-thinking. The principal decides what to do about it.
+### Never proposing edits
 
-It may be wrong. Where a challenge rests on facts the challenger
-cannot verify from the documents, it says what it assumes and asks.
+The persona never proposes edits, wording or structure for a
+document. It challenges the thinking, and the principal decides
+what to do about it.
+
+### It may be wrong
+
+A persona may be wrong, and its contract says so. Where a challenge
+rests on facts it cannot check from the documents, it says what it
+is assuming and asks.
+
+The challenger also shares one model family with the author and the
+critics. What that family systematically cannot see, none of them
+will find. Agreement between the reviewers is therefore never taken
+as proof. It only means the artefact is consistent under one set of
+priors. The point of calibration lies outside: review by people, or
+by a model of a different family, invited when the principal
+chooses.
 
 ### What it produces
 
-The challenger returns one report and writes no file itself. The
-command that ran it numbers each challenge and files the report in
-the project's `challenges/` directory. The report is dated and never
-changed afterwards. The report holds:
+The persona returns one report and writes no file. The report holds
+these parts:
 
-- an overall read of what the work is really about and whether it is
-  aimed at the right thing;
-- the challenges, each with a one-line headline, its severity, the
-  challenge itself, why it matters, a concrete and falsifiable "what
-  would change my mind", and its epistemic status;
-- a short note of what is genuinely strong;
-- the questions it cannot answer from the documents, which the
-  principal may know and which often sharpen or invalidate a
-  challenge.
+- an overall read of what the initiative is really about as written,
+  and whether it is aimed at the right thing;
+- the challenges, each with its severity, why it matters, what would
+  change the persona's mind and its epistemic status;
+- what is genuinely strong, briefly;
+- the questions it cannot answer from the documents.
 
-After filing, the challenges are settled one by one in a walkthrough
-(a conversation that puts one item at a time to the principal for a
-verdict).
+The last part matters because the principal often knows what the
+persona does not. Such an answer may sharpen a challenge or overturn
+it.
+
+The `/challenge` command files the report in the project's
+`challenges/` directory and gives each challenge its ID. The report
+is never changed afterwards. Claude then offers a walkthrough: the
+challenges are put to the principal one at a time, each for a
+verdict. How to run a persona is in
+[Challenge the thinking](../use/challenge-the-thinking.md).
+
+### What happens to a challenge
+
+Every challenge is either acted on or explicitly rejected, with the
+reason recorded as a decision. Rejecting and parking are legitimate
+outcomes. Silently ignoring a challenge is not.
+
+An accepted challenge is mended wherever it needs to be. A challenge
+that mends nothing was not accepted.
+
+A challenge of a layer below the intent is mended in that layer. It
+changes nothing above it, unless it shows that what is wanted cannot
+be realised, or only at a price not worth paying. Then a thread is
+opened in the intent, citing the challenge, and what is wanted is
+decided there.
+
+Nothing enters the intent because a reviewer wrote it. It enters only
+because the principal composed it. An accepted challenge may change
+the intent by taking something out as readily as by adding
+something.
 
 ## Why
 
-### Why there are several personas
+**Why a persona with blind spots of its own.** Each persona is
+defined by the blind spots it exists to find. A new persona is made
+only where those blind spots genuinely differ. Personas that would
+say the same things in different words are noise. How to add one is
+in [Add a challenger persona](../extend/add-a-challenger-persona.md).
 
-A persona is defined by the blind spots it exists to find. A new
-persona is only worth adding where its blind spots genuinely differ
-from those already there. Personas that would say the same things in
-different words are noise. How to add one is described in
-[Add a challenger persona](../extend/add-a-challenger-persona.md).
+**Why one contract for every persona.** The behaviour every persona
+shares is written once and never copied. A persona can make a shared
+rule stricter, but it never renames, drops or repeats one.
 
-### Why it may be wrong
+**Why few challenges, ordered by severity.** The principal needs a
+signal, not encouragement. A fatal flaw buried among cosmetic points
+is easy to miss.
 
-Isolation is not independence. The author, the critic and the
-challengers share one model family. What that family systematically
-cannot see, none of them will find. Agreement between the reviewers
-is therefore never treated as validation. It only means the artefact
-is consistent under one set of priors. The calibration point lies
-outside: review by humans or by a model of a different family,
-invited at the principal's discretion.
+**Why no fabrication.** A challenge built on an invented figure
+misleads the one person who has to decide on it. An honest "I don't
+know" leaves the decision where it belongs.
 
-### Why it is best run before the next layer
+**Why it is best run before the next layer.** An artefact is best
+challenged before the next layer is first derived from it, for
+example the intent before the first assignment, or a business
+requirements document before the solution design. At that point an
+accepted challenge is still cheap to absorb. Whether to run it again
+later, after a draft or before approval, is left to whoever runs the
+process. No rule prescribes it.
 
-An artefact is best challenged before the next layer is first derived
-from it. Examples are the intent before the first assignment, or a
-business requirements document before the solution design. At that
-point an accepted challenge is still cheap to absorb. Whether to
-challenge again later, after a draft or before approval, is left to
-the judgement of whoever runs the process. No rule prescribes it.
+**Why a rejected challenge is healthy.** The persona may be wrong.
+It works only from the documents and from what it can check, and the
+principal often knows what it does not. Nothing in the forge blocks
+on a review, and the principal alone decides. A challenge rejected
+with a recorded reason is therefore a legitimate outcome: the
+thinking was tested and held, and the reason is kept.
 
-### Why a rejected challenge is healthy
-
-Every challenge is either fixed or explicitly rejected with a
-recorded reason, kept as a decision. Rejecting and parking are
-legitimate outcomes. Silently ignoring a challenge is not. Why a
-rejection is positively healthy, beyond being legitimate, is not
-recorded.
-
-A challenge may inspire, but nothing enters the intent because a
-reviewer wrote it. Content enters only because the principal composed
-it.
-
-### Why an accepted challenge is mended where it needs to be
-
-An accepted challenge is mended wherever it needs to be. One that
-mends nothing was not accepted. A challenge of a layer below the
-intent is mended in that layer and changes nothing above it. The
-exception is a challenge showing that what is wanted cannot be
-realised, or only at a price not worth paying. Then a thread (an
-open matter of the intent) is opened in the intent, citing the
-challenge, and what is wanted is decided there. An accepted challenge
-may change the intent by subtraction as readily as by addition.
+**Why an accepted challenge is mended where it needs to be.**
+Accepting a challenge that changes nothing would leave the flaw in
+place while recording it as dealt with. A challenge of a lower layer
+is mended in that layer, so the intent above stays untouched. The
+intent is reopened only when the challenge shows that what is wanted
+itself cannot stand.
 
 ## A worked example
 
-A project's intent says that a team will move its weekly reporting
-to a shared dashboard, and that this will save each analyst half a
-day a week. The principal runs a persona against the intent before
-the first assignment is derived from it.
+A generic project, `<slug>`, has an intent that sets out to move a
+team's monthly reporting to a shared dashboard. Before the first
+assignment is derived, the principal runs a persona on the intent.
 
-One challenge in the report could read, in substance:
+The report's overall read says the intent is aimed at faster
+reporting, but never says who acts on the reports. It then carries
+four challenges, the first of them like this:
 
-- headline: the saving assumes the reports are read the same way
-  after the move;
-- severity: major;
-- the challenge: the intent counts the time saved in producing the
-  reports, but says nothing of who reads them today or how;
-- why it matters: if the readers ask for the old format alongside
-  the dashboard, the work doubles instead of halving;
-- what would change its mind: a named group of readers who have
-  agreed to read only the dashboard;
-- epistemic status: the challenger's own judgement.
+- **Headline:** the intent assumes the reports are read.
+- **Severity:** major.
+- **Challenge:** nothing in the intent names who reads the monthly
+  reports or what decision they feed. A faster dashboard for an
+  unread report solves nothing.
+- **Why it matters:** the whole effort may speed up an output nobody
+  uses.
+- **What would change my mind:** a named group that acts on the
+  reports, and the decision each report feeds.
+- **Epistemic status:** my judgement.
 
-The challenger proposes no new wording. In the walkthrough the
-principal may accept it and add a position on the readers to the
-intent. He may also reject it, with the reason recorded, because he
-knows something the documents do not say.
+Among its questions, the report asks whether the principal knows of
+readers the documents do not name.
+
+In the walkthrough the principal answers that two groups use the
+reports, which the intent never said. He accepts the challenge, and
+the intent gains a position naming the readers. A minor challenge
+about the choice of tool he rejects, because the tool is already
+fixed elsewhere, and that reason is recorded as a decision.
 
 ## See also
 
@@ -224,5 +276,5 @@ knows something the documents do not say.
 - [Glossary](../reference/glossary.md): every term of the forge in
   one line.
 
-Generated on 2026-10-25 for version 6.0 from the files the
+Generated on 2026-11-01 for version 6.4 from the files the
 front-matter names; never edited by hand.

@@ -1,6 +1,6 @@
 ---
-generated: 2026-10-25
-version: 6.1
+generated: 2026-11-01
+version: 6.4
 made: derived
 inputs:
   - projects/forge/docs-map.md
@@ -12,7 +12,7 @@ This is the documentation of Forge of Thought: pages of one topic
 each, generated from the engine as it stands, for three readers.
 Every page stands on its own; start where your question is.
 
-Generated on 2026-10-25 for Forge of Thought at version 6.1
+Generated on 2026-11-01 for Forge of Thought at version 6.4
 (the version of the engine's intent; a release carries the same
 number).
 
@@ -61,7 +61,7 @@ number).
 - [Read the history of an item](use/read-the-history-of-an-item.md): How do you see the whole history of one position, requirement or part with `/history`?
 - [Work on a branch](use/work-on-a-branch.md): How do you switch a repository to a branch without typing git?
 - [Spin off a group](use/spin-off-a-group.md): How does `/spinoff` make a requirement group a project of its own?
-- [Look up a command](use/look-up-a-command.md): How does `/man` print the manual of a command or a working method?
+- [Look up a command, or ask how to do something](use/look-up-a-command.md): How does `/man` print the manual of a command or a working method, and answer a need you say in your own words?
 - [Share material through a library](use/share-material-through-a-library.md): How do you keep material shared across projects in a library and cite it?
 
 ## About
