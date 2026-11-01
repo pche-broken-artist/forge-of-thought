@@ -31,4 +31,5 @@ refusals and the way back are the script's).
    propose `/save <slug>`; the migrated shape reaches the remote by
    that save. Should anything be wrong, the way back is the
    script's, as its header says; the tag before the migration is
-   POS.1740's.
+   POS.1740's, taken through `/save <slug> --tag <name>` before
+   `--apply`.

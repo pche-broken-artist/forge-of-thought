@@ -32,8 +32,12 @@ it.
    it from git first, `python scripts/docs-state.py <map> --previous
    tmp/docs-map.previous.md` (the engine's gitignored `tmp/`), and
    name the path it prints; when it prints `none`, say `none`
-   (SOL.0700: the header carries no `previous`). The planner reads the
-   target on disk and writes the map. Its report gives the counts,
+   (SOL.0700: the header carries no `previous`), and the open findings
+   of the last documentation report that concern the map (the
+   ledger's Findings, source `check-documentation`), so that the
+   planner brings those entries to their owners' wording instead of
+   carrying them over. The planner reads the target on disk and
+   writes the map. Its report gives the counts,
    the Unowned list and what did not fit: keep them for step 7.
 2. **State.** Run `python scripts/docs-state.py <map> <docs-dir>
    --tasks tmp/docs-tasks` (the engine's gitignored `tmp/`): what it
@@ -63,14 +67,24 @@ it.
 7. **Record and report.** Remake the owning project's ledger,
    `python scripts/forge-ledger.py <slug>`: its Renders table reads the index's
    provenance (`docs/README.md`, front-matter), nobody writes a row.
-   Report:
-   pages new, regenerated, kept and removed; the Unowned list and what
-   did not fit, from the planner; what the writers left out; every
-   place where a writer wanted a reason and none is recorded, as one
-   list (POS.1450: the reason, where the principal wants one, enters
-   the intent in its own round); the check's result. Every fact in
-   Unowned waits for the principal to give it a home; nothing is
-   invented to fill it.
+   Report: pages new, regenerated, kept and removed, and the check's
+   result. Then file what the run could not place as the run's own
+   report (POS.1450): the Unowned list and what did not fit, from the
+   planner; what the writers left out, a claim the map asked for and
+   no input carried; every place where a writer wanted a reason and
+   none is recorded. One finding per matter, in the shape the check
+   contract gives a report (`.claude/skills/check-contract/SKILL.md`,
+   Output), the Unowned and the disagreements of map and owner as
+   medium, an unrecorded reason as low, each numbered with the next
+   free `FND.NNNN` of the owning project, written as
+   `reviews/YYYY-MM-DD-check-documentation.md` with the front-matter a
+   check's report carries and `reviewer: the documentation run`, the
+   name completed by `python scripts/forge-report.py <path>`; the
+   ledger reads it as any check's report, the findings are settled by
+   walkthrough, and a mend lands in the owner, never on a page. A run
+   that leaves nothing files nothing. Nothing is invented to fill a
+   gap: a fact without an owner waits for the principal to give it a
+   home.
 
 What a run never does: read the renders or the README as owners;
 touch a page by hand; run on Claude's own judgement (the command is

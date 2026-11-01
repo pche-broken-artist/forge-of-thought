@@ -17,6 +17,11 @@ places neither kind (FND.1270). Trigger: the first `/document
 <slug>` on a project. Opened 2026-10-09 from the brief
 `documentation`.
 
+2026-11-01: the language of the pages is decided, the project's, as
+its artefacts are (POS.1450, CLAUDE.md prime directive 6, the
+documentation contract); the README stays English. What `/document
+<slug>` reads for a project other than the engine stays open here.
+
 <!-- A thread (POS.1680), one file per thread in threads/; the header
 is its state: what it concerns, where it came from, whether it is
 open. The rules of a thread, its life and its closing:

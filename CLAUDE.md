@@ -20,7 +20,10 @@ Who the principal is, what language the conversation runs in and the
 handle the principal signs records with are instance facts, not
 properties of the system: they live in `CLAUDE.local.md` at the engine
 root (gitignored, created from `templates/CLAUDE.local.md` and filled by
-`/setup` on a new machine), never here.
+`/setup` on a new machine), never here. The forge runs in Claude
+Code, Anthropic's agent for the command line: the slash commands,
+the skills, the agents and the hooks are its mechanisms, and the
+forge is what they are told.
 
 ## Roles
 - **Principal:** whoever's thinking is being forged. Supplies ideas,
@@ -51,7 +54,8 @@ root (gitignored, created from `templates/CLAUDE.local.md` and filled by
    deliberate delegation to the recipients, not a defect.
 6. **Language:** conversation in the principal's language (set in
    `CLAUDE.local.md`); the artefacts of the chain — intent,
-   assignment, later layers — in the project's language: the
+   assignment, later layers — and the documentation in the project's
+   language: the
    `language` of its project file (`project.md`, POS.1590), English
    when absent. Records, state, research and recipes are always
    English: they are read by Claude, the reviewers and the checks,
@@ -203,7 +207,7 @@ whether it is versioned and how it behaves:
 | state | thread | one open matter of the intent | the principal with Claude | — | freely rewritten while open, immutable once closed (POS.1680) |
 | state | index | catalogue of a resource directory | forge | — | freely rewritten |
 | state | map | the documentation map: one entry per page, everything a page is made from | generated | — | freely rewritten by the documentation run |
-| rendering | recipe | how a render is made | Claude, principal iterates | yes | iterated, never approved |
+| rendering | recipe | how a render is made | Claude, principal iterates | yes | iterated; an integer only on the principal's word, his own mark, not an approval |
 | rendering | render | audience-specific output, never a source of truth | generated | — | overwritten by /render |
 | rendering | page | a page of the documentation, or its index; never a source of truth | generated | — | overwritten by the documentation run |
 | work | work | an output of the project made with work of its own: the file holds the content, the specification beside it the way and the why | Claude, the principal judges | yes, the specification | the file remade from the specification; the principal works with it freely |
@@ -215,7 +219,10 @@ Every versioned kind keeps its history in a companion beside it
 (Versioning & status). A functional
 binary — a `.potx` template, a graphic — is a source, so a library's
 assets are resources without a kind of their own; a library carries
-no artefacts and no records but its recipe's history companion.
+no artefacts and no records but its recipe's history companion. A
+file of `tmp/`, the player page of `docs/videos/` and the
+principal's own file in `renders/` or `published/` have no kind:
+the forge reads none of them as a document (POS.1540, POS.1910).
 What a work product is and how it is worked is
 `.claude/skills/work/SKILL.md`'s.
 Prose in every document is hard-wrapped
@@ -580,7 +587,9 @@ the remotes (on the engine the upgrade channel), `forge-status.py`
 reports state without changing anything, `forge-clone.py` brings an
 existing project in (`/import-project` is its door), `forge-branch.py`
 switches or creates a branch — merging is git's, by hand or by merge
-request. A conflict `forge-save` meets is left standing, not aborted,
+request: the integrator merges on his own clone with git itself,
+outside the forge's scripts, and what git leaves standing is settled
+in the step of a conflict below. A conflict `forge-save` meets is left standing, not aborted,
 and settled in the step of a conflict: Claude lays both sides out as a
 walkthrough, the principal decides, Claude writes the wording, and the
 finishing commands of git run on the hook's ask; what the forge promises
@@ -646,7 +655,9 @@ and `author`, an index's `directory`. The date and the last change
 of a document are computed from its history by whatever reads them
 (`/history`, the ledger), never carried in its header. Status must
 agree with the number: an integer version is `approved`, anything
-else is not; a recipe carries no status and stays 0.x.
+else is not; a recipe carries no status; it stays 0.x unless the
+principal names an integer, from which the count goes on, Claude
+never proposing one.
 Every versioned document — every artefact, every recipe and every
 work specification alike, no exception — keeps its **history** in an
 append-only companion `<file>.history.md` beside it, never in its

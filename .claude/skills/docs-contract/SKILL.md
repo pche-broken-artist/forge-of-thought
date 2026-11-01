@@ -58,7 +58,8 @@ generator about itself, its inputs or its run, beyond the fixed
 closing line the writer's shape gives. Where the operating layer
 (`CLAUDE.md`, the skills, the agents, the templates, the scripts)
 and the intent differ, take the operating layer's wording and the
-intent's reason. English, plain, in the spelling the inputs use.
+intent's reason. In the project's language (its project file),
+plain, in the spelling the inputs use.
 
 ## The voice
 

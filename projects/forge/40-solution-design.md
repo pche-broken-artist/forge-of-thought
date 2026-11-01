@@ -1,5 +1,5 @@
 ---
-version: 0.49
+version: 0.50
 status: draft
 project: forge
 audience: whoever realises the solution, a person or an agent
@@ -965,7 +965,12 @@ boundary kept by hand or an order of work.
   the index, the state and the check read `docs/` without it (SOL.0660).
   The ledger's Renders table carries the index with the map as its
   input. The pinned facts the planner reads as an owner are the section
-  "Pinned facts (not rendered)" of the project's readme recipe.
+  "Pinned facts (not rendered)" of the project's readme recipe. What a
+  run cannot place, the planner's Unowned and did-not-fit, a claim the
+  map asked for and no input carried, a reason a page wants and no
+  file records, the command files as the run's own report in
+  `reviews/`, in the check contract's shape with FND numbers, read by
+  the ledger as any check's report and settled by walkthrough.
   Realises: POS.1450, POS.1080, POS.0930. Choice: a command of its own
   against `/render`: a page has no recipe to iterate, the map is
   generated. The index named `README.md` against `index.md`: GitHub

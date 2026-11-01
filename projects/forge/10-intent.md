@@ -1,5 +1,5 @@
 ---
-version: 6.4
+version: 6.6
 status: draft
 project: forge
 audience: principal + Claude only
@@ -681,9 +681,15 @@ position that already stands elsewhere.
   is a layer of the chain, its translation is a render. Dated hand-made
   editions of the earlier derivative convention remain in place as
   legacy history. Recipes are tools, not records of thinking: they carry
-  a version in front-matter and no status field, because a recipe is
-  never approved and stays 0.x for life; the date of a recipe is
-  computed from its history (POS.1570), and a render cites the version.
+  a version in front-matter and no status field. Approval has a meaning
+  only where someone receives the document, and a recipe is received by
+  nobody; it is iterated continuously and stays 0.x unless the
+  principal says otherwise. When he names an integer, 1.0 or 2.0, the
+  recipe takes it and the count goes on from there, 2.1, 2.2; Claude
+  never proposes it, the number means nothing beyond his own mark, and
+  nothing guards or reads it (the principal's word, 2026-11-01). The
+  date of a recipe is computed from its history (POS.1570), and a
+  render cites the version.
   Being versioned, a recipe keeps its history in the
   companion like every versioned kind (POS.0310); the companion records
   what changed in the recipe at its own grain, the substantive turns
@@ -1117,7 +1123,7 @@ position that already stands elsewhere.
   | state | thread | one open matter of the intent | the principal with Claude | — | freely rewritten while open, immutable once closed (POS.1680) |
   | state | index | catalogue of a resource directory | forge | — | freely rewritten |
   | state | map | the documentation map: one entry per page, everything a page is made from | generated | — | freely rewritten by the documentation run |
-  | rendering | recipe | how a render is made | Claude, principal iterates | yes | iterated, never approved |
+  | rendering | recipe | how a render is made | Claude, principal iterates | yes | iterated; an integer only on the principal's word, his own mark, not an approval |
   | rendering | render | audience-specific output, never a source of truth | generated | — | overwritten by /render |
   | rendering | page | a page of the documentation, or its index; never a source of truth | generated | — | overwritten by the documentation run |
   | work | work | an output of the project made with work of its own: the file holds the content, the specification beside it the way and the why | Claude, the principal judges | yes, the specification | the file remade from the specification; the principal works with it freely |
@@ -1337,7 +1343,13 @@ position that already stands elsewhere.
   that sometimes says there was nothing to find. Neither runs at a save;
   `/release` offers `critique essence` once and runs no reviewer on its
   own — the one lens that guards what a release publishes, the drift of
-  the chain (decided 2026-09-05, POS.1100).
+  the chain (decided 2026-09-05, POS.1100). A reviewer runs on the
+  principal's word alone because a run costs tokens, some checks a
+  great deal, and what is spent is his to decide; there is no other
+  reason. The word may be given once, in a command's definition that
+  names the checks it runs, as `/save` and `/release` have it; what is
+  ruled out is a run on Claude's own judgement (the principal's
+  answer, 2026-11-01).
 - **POS.0410** The critic has two lenses, because one critic hunted
   formalities and never guarded the chain. `clarity` reads each artefact
   on its own. `essence` reads the chain: for every adjacent pair (brief
@@ -1525,7 +1537,9 @@ position that already stands elsewhere.
   table of engines, one row each, over the engine's own CLI: the login
   is the user's, made once outside the forge in the engine's own tool,
   and the forge carries no key, no account and no configuration of who
-  connects; the forge names engines, never models. The engine is given a
+  connects; how the tool is installed and signed in is the tool's own
+  documentation's, the forge asking only that it is on PATH; the forge
+  names engines, never models. The engine is given a
   packet folder under the engine's `tmp/` as its workspace, never the
   forge's root, whose hooks and instance file an engine must not see or
   execute; and since the place alone locks nothing, the script gives the
@@ -1545,6 +1559,12 @@ position that already stands elsewhere.
   Codex, Claude Code and Copilot share the one-shot shape and are rows
   to add when wanted (research of 2026-10-23). Decided 2026-10-24; built
   and verified by probes the same day (brief `research`, THR.0740).
+  The forge names engines and tiers, never versions, so that a name
+  always means the newest of its kind: `opus` or `sonnet` in a model
+  override, `claude` or `antigravity` in the engine table, and the
+  version is the tool's, resolved at the call. When a new version
+  arrives nothing in the forge changes, and everything that ran on
+  that name runs on the new one (the principal's answer, 2026-11-01).
 - **POS.1890 Every citation is opened before a note is filed.** No
   research note is filed before a script, `scripts/forge-cite.py`, has
   opened every URL it cites and read an arXiv page for its title: a dead
@@ -1965,7 +1985,9 @@ position that already stands elsewhere.
   forge's users and done 2026-10-09, the per-prompt hook included:
   `python` on PATH is their one prerequisite, the same Python the
   document conversion needed already, and a system that has only
-  `python3` gives it that name (THR.0150 closed). How they are
+  `python3` gives it that name (THR.0150 closed). Nothing has run on
+  macOS: for it the whole set is the writing rule alone, and the
+  documentation says so (2026-11-01). How they are
   written and what they share is the solution design's (SOL.0620).
 - **POS.0940** The engine does not know the projects. `git init` and the
   remote are the user's one-off act: `/new-project` and `/spinoff`
@@ -2367,6 +2389,16 @@ position that already stands elsewhere.
   from what it mirrors. The README is cut to what orients and points,
   its chapters the readme skeleton's (`templates/recipe-readme.md`, the
   one owner), and the README is English only, a translation a render.
+  The pages are written in the project's language, as its artefacts
+  are (the project file, POS.1590); the README stays English. A page
+  is never mended by hand because the next run of `/document` writes
+  it again from its owners and the mend is gone; only a mend in the
+  file that owns the matter survives, and the page takes it at the
+  next run. What a run cannot place, a fact with no owner, a matter the
+  map and the intent disagree on, a reason a page wants and no file
+  records, is a finding of the run: filed in `reviews/` as a check's
+  report and settled as a check's findings are, since the
+  documentation finds what no other check does (decided 2026-11-01).
   The documentation is made by a command of its own, `/document [slug]`,
   guarded like every command that writes (POS.1090), in one run that
   asks nothing: a plan of the pages first, the map, then every page made
@@ -2451,7 +2483,14 @@ position that already stands elsewhere.
   for?", so that the entry carries its role from its birth and no later
   hand changes it (decided 2026-10-17, brief `collaboration`), and he
   answers with the role or tells Claude to infer it, which is then
-  written marked *(inferred)* (P.06, F.05).
+  written marked *(inferred)* (P.06, F.05). A source and a research
+  note are immutable because they record a moment, a state of the
+  world the forge did not make and has no business editing; a newer
+  state is a new file, a research run again, a document that arrives
+  in a new version a further file of a bundle of one origin, whose
+  index says which is the newest and which it supersedes, so that
+  every citation of the intent keeps pointing at the text it was made
+  from (the principal's answer, 2026-11-01).
 - **POS.1050** First run is one command. After cloning the engine,
   `/setup` prepares the instance: it fills the facts of the instance in
   an elicitation interview — the conversation language first, then who
