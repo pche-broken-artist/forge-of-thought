@@ -1,5 +1,5 @@
 ---
-version: 6.8
+version: 6.9
 status: draft
 project: forge
 audience: principal + Claude only
@@ -2356,6 +2356,38 @@ position that already stands elsewhere.
   himself. A visitor is told how, where the readers of GitHub look
   for it. What enters the forge stays the principal's decision
   (POS.0070). Decided 2026-10-04.
+- **POS.1920 The two fixed files of the root.** Beside the renders of
+  the root stand two files that are no render and derive from nothing
+  in the chain: `SECURITY.md`, the security policy, and
+  `CODE_OF_CONDUCT.md`, the code of conduct. The policy is the
+  principal's own text: a problem is reported through GitHub's private
+  vulnerability reporting, a setting of the repository switched on
+  before the file points at it, with the profile CONTRIBUTING names as
+  the fallback and never a public issue; the forge promises an
+  acknowledgement within seven days, a fix or a decision at the
+  principal's pace told to the reporter first, credit in the advisory
+  unless declined, and nothing else, no bounty, no safe harbour, no
+  form; supported is the latest release on `main` only, a fix the next
+  release; what the forge does on the machine is said by kind,
+  instruction files, no server, the user's permissions, programs from
+  PATH, nothing sent but what the user sends, data that may carry
+  instructions, permissions a guard and not a sandbox, the specifics
+  left to the documentation pages a release regenerates, so that the
+  file stays true without a recipe; in scope is a script, a hook, a
+  file of the engine or a piece of data making the forge write, run,
+  send or publish what its rules do not say, out of scope Claude Code
+  and the tools the scripts call, the user's permission mode and the
+  content of his projects. The code of conduct is the Contributor
+  Covenant 3.0 word for word, under its own licence CC BY-SA 4.0 named
+  in the README beside CC BY 4.0, its reporting sentence pointing at
+  the private way of CONTRIBUTING, its suggested remedies kept. Neither
+  file is a render; neither has a companion, a row or a check, as
+  POS.1910 holds for the principal's own files; a change to either is
+  the principal's word. Why: a policy whose threat model is derived
+  from the design stays true only when re-rendered, and a release
+  re-renders the documentation, not a policy; a standard adopted is
+  worth exactly its unchanged text. Research 2026-10-05 and
+  2026-11-01. Decided 2026-11-01.
 - **POS.1000** Every project has a README and, if it is a thought
   project, release notes — both renders of the project's own recipes
   (`recipes/readme.md`, `recipes/release-notes.md`, `output:` in the

@@ -2,7 +2,7 @@
 project: forge
 purpose: readme
 audience: humans arriving at the repository
-version: 0.76
+version: 0.77
 output: /README.md
 ---
 
@@ -265,7 +265,9 @@ shape only. -->
   carries this fixed text verbatim, nothing more: "Forge of Thought ©
   Petr Chlumsky (PCHe) - petr.chlumsky@gmail.com. Licensed under
   [CC BY 4.0](LICENSE): use and adapt it freely; credit the author
-  and link to this repository." and, as a paragraph of its own,
+  and link to this repository. The code of conduct,
+  [CODE_OF_CONDUCT.md](CODE_OF_CONDUCT.md), is the Contributor
+  Covenant 3.0 under CC BY-SA 4.0." and, as a paragraph of its own,
   "Feedback, ideas and changes are welcome: see
   [CONTRIBUTING.md](CONTRIBUTING.md)." (POS.1440 of the intent; the
   link is relative, exactly as given). The author line is the one

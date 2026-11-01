@@ -2,7 +2,7 @@
 project: forge
 purpose: CONTRIBUTING.md of the engine's repository - how a visitor gives feedback, brings an idea or sends a change
 audience: a visitor of the repository on GitHub who has used the forge or read about it and wants to say, ask or change something; he arrives from the Contributing tab, the sidebar, or the page where an issue or a pull request is created
-version: 0.4
+version: 0.5
 output: /CONTRIBUTING.md
 ---
 
@@ -106,9 +106,14 @@ output: /CONTRIBUTING.md
   says to send the pull request and that nothing else is needed.
 - Never promise a time of answer. Never invent a channel, a label, a
   template or a rule the inputs and these instructions do not give.
-- Omit: code of conduct, security policy, commit message rules,
-  branch names, tests and build. The forge has none of them to
-  describe.
+- Two fixed files of the root are pointed at, never restated: in
+  "Before you start", one sentence that the code of conduct,
+  `CODE_OF_CONDUCT.md`, holds everywhere the forge is talked about,
+  as a relative link; in "Something is broken", one sentence that a
+  security problem never goes into an issue and takes the way
+  `SECURITY.md` says, as a relative link (POS.1920).
+- Omit: commit message rules, branch names, tests and build. The
+  forge has none of them to describe.
 
 ## Template
 # Contributing to Forge of Thought
@@ -119,7 +124,8 @@ ideas; I wrote the forge alone and I read everything.>
 ## Before you start
 <A GitHub account, free; nothing else is needed to say something.
 Where a start is made: docs/start/ (install, setup, first result),
-as relative links.>
+as relative links. One sentence: the code of conduct holds, as a
+relative link to CODE_OF_CONDUCT.md.>
 
 ## Find your way
 <The documentation in docs/, pages of one topic each, generated from
@@ -138,7 +144,9 @@ https://github.com/pche-broken-artist/forge-of-thought/discussions>
 link is dead. How to get there: the Issues tab, "New issue". The
 skeleton to fill in: what you ran, what you expected, what happened,
 the forge's version, your operating system. Everything here is
-public: no names, no company content. Fixed: the channel is Issues,
+public: no names, no company content. One sentence: a security
+problem never goes here, it takes the way SECURITY.md says, as a
+relative link. Fixed: the channel is Issues,
 https://github.com/pche-broken-artist/forge-of-thought/issues>
 
 ## You have an idea
