@@ -1,13 +1,13 @@
 ---
 project: forge
 render: release-notes
-generated: 2026-10-25
+generated: 2026-11-01
 recipe: recipes/release-notes.md v0.15
 inputs:
   - projects/forge/10-intent.history.md
   - projects/forge/10-intent.history.archive.md
   - projects/forge/40-solution-design.history.md
-  - projects/forge/10-intent.md v6.2
+  - projects/forge/10-intent.md v6.4
   - projects/forge/decisions.md
   - RELEASE-NOTES.md
 ---
@@ -18,6 +18,49 @@ One section per release of the engine, newest first, for the user who
 takes upgrades through `forge-pull`; Action required comes first in
 every section; the fine-grained log with the reasons lives in
 `projects/forge/10-intent.history.md`.
+
+## 6.4 - 2026-11-01
+
+### Action required
+- /document regenerates docs/use/look-up-a-command.md and
+  reference/commands.md at the next run; the README is re-rendered at
+  the release.
+
+### Changed
+- `/man` takes a need said in free words, `/man <question>`, and
+  answers it with the way the forge has for it, read in the run from
+  the documentation's index and the pages it routes to, never from
+  memory, cited by path; where the forge has nothing, the answer says
+  so and marks what Claude would do without a mechanism as his own
+  (POS.1190, SOL.0140, THR.0680, the operating layer). For you: ask
+  `/man` how to do something in your own words, and the alias
+  `/manual` takes the same question.
+
+### Fixed
+- The description of the BRD definition no longer offers a BRD made
+  from a source put in, which the forge rejects, and names its roster
+  as a library document of the instance instead of a path of one
+  instance (the operating layer, FND.3000, FND.3010). For you: the BRD
+  is derived from the assignment or the intent, and a source put in
+  yields a work product.
+
+### Rejected
+- A help command of its own, `/howto`, is dropped: the forge explains
+  itself through one door, and a second name for a question is one
+  more thing to learn (REJ.0500). For you: every question about the
+  forge goes to `/man`.
+
+## 6.3 - 2026-10-31
+
+### Added
+- Any file in `renders/` and `published/` that no recipe names is your
+  own, derived by hand from the forge's files - a copy under a new name
+  that you edit, a PDF saved from Word or PowerPoint, an HTML of a
+  diagram - kept in git with no companion, no row and no check, and
+  the forge never reads, overwrites or raises it (POS.1910). For you:
+  keep your own exports beside the forge's files freely, and copy a
+  forge file first when you want to change it, since the forge's own
+  file stays untouched by hand.
 
 ## 6.2 - 2026-10-25
 

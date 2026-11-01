@@ -115,22 +115,21 @@ when asked.
    - the second engine, only with `--engine`: per card
      `python scripts/forge-engine.py <name> --packet tmp/research/<run>/<card> --out research/YYYY-MM-DD-<topic>/<card>.<name>.md --allow-all --sandbox`,
      the script's header saying what it does with the envelope, the
-     profile and the tree; a run that fails is said with the
-     script's reason and the card goes on with the session model's
-     note alone, the Deviations recording it.
-   A session agent's return is written by Claude to
-   `tmp/research/<run>/hold/<card>.claude.md` (a folder the other
-   engine's profile denies, `scripts/forge-engine.py`, header 2a)
-   with the template's header
-   filled (`engine: claude`, `model` the session model, `usage: —`,
-   `run` the packet folder), and moves into the bundle as
-   `<card>.claude.md` only when the second engine's note of that card
-   has returned or the principal has closed the card single-engine,
-   so that the independence of the two engines rests on the
-   profile's deny rules and the order of filing, never on the place
-   of the run (why: `scripts/forge-engine.py`, its header). A second-engine run made after the
-   first engine's note is filed is allowed, and its independence is
-   then shown by the measure of step 6 alone.
+     profile and the tree; a run that fails is said with the script's
+     reason and the card goes on with the session model's note alone,
+     the Deviations recording it. A session agent's return is written by
+     Claude to `tmp/research/<run>/hold/<card>.claude.md` (a folder the
+     other engine's profile denies, `scripts/forge-engine.py`, header
+     2a) with the template's header filled (`engine: claude`, `model`
+     the session model, `usage: —`, `run` the packet folder), and moves
+     into the bundle as `<card>.claude.md` only when the second engine's
+     note of that card has returned or the principal has closed the card
+     single-engine, so that the independence of the two engines rests on
+     the profile's deny rules and the order of filing, never on the
+     place of the run (why: `scripts/forge-engine.py`, its header). A
+     second-engine run made after the first engine's note is filed is
+     allowed, and its independence is then shown by the measure of step
+     6 alone.
 
 6. **Check before filing.** Every note against the template's
    shape: a finding resting on a snippet or a summarised fetch alone

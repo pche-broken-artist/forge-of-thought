@@ -73,13 +73,13 @@ else. Never silently re-register.
      `sources/.gitignore` and leave it there, local only.
    - **No:** the binary is the source as a functional thing (a deck
      template, a graphic, a logo): store, register and index it as is,
-     no extract.
-   Text files get no question. Keeping both is the exception, on the
-   principal's explicit word. The script is the only conversion path
-   (CLAUDE.md, Document chain, External inputs). Extracts made before this rule keep their
-   `.extract.md` names; a binary already in git beside its extract
-   is taken out of git only by the principal's own act there, by
-   hand: no script of the forge does it, and never a sweep.
+     no extract. Text files get no question. Keeping both is the
+     exception, on the principal's explicit word. The script is the only
+     conversion path (CLAUDE.md, Document chain, External inputs).
+     Extracts made before this rule keep their `.extract.md` names; a
+     binary already in git beside its extract is taken out of git only
+     by the principal's own act there, by hand: no script of the forge
+     does it, and never a sweep.
 4. **Role, before anything is written.** Role is the principal's
    word, asked before the index entry exists, so
    that the entry carries it from its birth and no later hand

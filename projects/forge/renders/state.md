@@ -1,6 +1,6 @@
 ---
 project: forge
-updated: 2026-10-25
+updated: 2026-11-01
 kind: thought             # read from project.md (templates/project.md)
 language: en         # read from project.md
 ---
@@ -49,8 +49,8 @@ history (a state record does not move it, POS.1630); a layer the
 project does not have gets no row (CLAUDE.md, Ledger). -->
 | File | Version | Status | Date |
 |---|---|---|---|
-| 10-intent.md | 6.0 | approved | 2026-10-25 |
-| 40-solution-design.md | 0.46 | draft | 2026-10-25 |
+| 10-intent.md | 6.4 | draft | 2026-11-01 |
+| 40-solution-design.md | 0.49 | draft | 2026-11-01 |
 
 ## Renders
 <!-- One row per render file, from the render's own provenance
@@ -61,14 +61,14 @@ from its own front-matter: Recipe "none: derived by
 scripts/docs-index.py", Inputs the map and the intent's version. -->
 | Render | Audience | Recipe | Inputs | Generated |
 |---|---|---|---|---|
-| README.md (repo root) | humans arriving at the repository | recipes/readme.md v0.73 | CLAUDE.md, projects/forge/10-intent.md v6.0, .claude/skills/forge/states/, docs/README.md v6.0, RELEASE-NOTES.md | 2026-10-25 |
-| RELEASE-NOTES.md (repo root) | the user of the engine who has cloned it and takes upgrades through forge-pull | recipes/release-notes.md v0.14 | projects/forge/10-intent.history.md, projects/forge/10-intent.history.archive.md, projects/forge/40-solution-design.history.md, projects/forge/10-intent.md v6.0, projects/forge/decisions.md, RELEASE-NOTES.md | 2026-10-25 |
+| README.md (repo root) | humans arriving at the repository | recipes/readme.md v0.76 | CLAUDE.md, projects/forge/10-intent.md v6.4, .claude/skills/forge/states/, docs/README.md v6.1, RELEASE-NOTES.md | 2026-11-01 |
+| RELEASE-NOTES.md (repo root) | the user of the engine who has cloned it and takes upgrades through forge-pull | recipes/release-notes.md v0.15 | projects/forge/10-intent.history.md, projects/forge/10-intent.history.archive.md, projects/forge/40-solution-design.history.md, projects/forge/10-intent.md v6.4, projects/forge/decisions.md, RELEASE-NOTES.md | 2026-11-01 |
 | CONTRIBUTING.md (repo root) | a visitor of the repository on GitHub who has used the forge or read about it and wants to say, ask or change something; he arrives from the Contributing tab, the sidebar, or the page where an issue or a pull request is created | recipes/contributing.md v0.4 | projects/forge/10-intent.md v6.0, CLAUDE.md, docs/README.md v5.34 | 2026-10-25 |
 | renders/ba-intro.md (with renders/ba-intro.pptx, plain) | business analysts meeting the forge for the first time, in one room with the author, who shows it live after the slides and sets them a task to try it themselves | recipes/ba-intro.md v0.1 | CLAUDE.md, projects/forge/10-intent.md v5.5, .claude/skills/forge/states/, docs/start/what-it-is.md v5.3, docs/about/what-it-is-and-is-not.md v5.3, docs/about/how-a-thought-travels.md v5.3, docs/about/the-document-chain.md v5.3, docs/about/the-principal-and-claude.md v5.3, docs/about/elicitation.md v5.3, docs/about/working-methods.md v5.3, docs/about/the-brief.md v5.3, docs/about/the-intent.md v5.3, docs/about/the-assignment.md v5.3, docs/reference/requirement-style.md v5.3, docs/about/isolated-reviewers.md v5.3, docs/about/documents-and-records.md v5.3, docs/about/renders-and-recipes.md v5.3, docs/start/install.md v5.3, docs/start/first-result.md v5.3, CONTRIBUTING.md | 2026-10-12 |
 | renders/ceo-pitch.md (with renders/ceo-pitch.docx, plain) | a CEO or another C-level executive whose experience of AI is chatting with it, arriving at the repository or handed the document by their technology lead | recipes/ceo-pitch.md v0.6 | projects/forge/10-intent.md v4.58, CLAUDE.md | 2026-10-04 |
 | renders/cto-pitch.md (with renders/cto-pitch.docx, plain) | technical leadership arriving at the repository - a CTO, a head of engineering or architecture, a peer of the author who does not know him | recipes/cto-pitch.md v0.6 | projects/forge/10-intent.md v4.58, CLAUDE.md | 2026-10-04 |
 | renders/executive-pitch.md (with renders/executive-pitch.pptx, plain) | C-level executives whose experience of AI is chatting with it | recipes/executive-pitch.md v0.6 | projects/forge/10-intent.md v4.30, CLAUDE.md | 2026-09-27 |
-| docs/README.md (the documentation index, kind page) | the three readers of the documentation | none: derived by scripts/docs-index.py (SOL.0460) | projects/forge/docs-map.md, 10-intent.md v6.0 | 2026-10-25 |
+| docs/README.md (the documentation index, kind page) | the three readers of the documentation | none: derived by scripts/docs-index.py (SOL.0460) | projects/forge/docs-map.md, 10-intent.md v6.1 | 2026-10-25 |
 
 ## Published
 <!-- One row per designed file, from its companion
@@ -139,7 +139,7 @@ their owner. What the document is for lives where it is used. -->
 | Path | Library | Used by | Note |
 |---|---|---|---|
 | projects/flow-ba/sources/ | flow-ba | research/2026-10-13-what-a-brd-contains-and-how-it-is-found-today.md | — |
-| projects/lib-allwyn/sources/fork-brd/ | lib-allwyn | 00-brief-brd.md, research/00-INDEX.md, research/2026-10-13-the-brd-layer-of-the-fork-against-todays-engine.md, research/2026-10-13-what-a-brd-contains-and-how-it-is-found-today.md | private: names, company content, the group's internal standard |
+| projects/lib-allwyn/sources/fork-brd/ | lib-allwyn | 00-brief-brd.md, 10-intent.history.md, research/00-INDEX.md, research/2026-10-13-the-brd-layer-of-the-fork-against-todays-engine.md, research/2026-10-13-what-a-brd-contains-and-how-it-is-found-today.md | private: names, company content, the group's internal standard |
 
 ## Research
 <!-- Registration only, one row per note in research/, or per bundle
@@ -514,6 +514,9 @@ record reads as `rejected`. -->
 | FND.2970 | low | conformance | resolved | 2026-10-25-check-project-1610-f707.md | the specification's closed TBC.0010 renumbered TBC.0110, as TBC.0020 was renumbered TBC.0090 (the project check of 2026-10-25). |
 | FND.2980 | low | conformance | resolved | 2026-10-25-check-engine-1610-0336.md | the operating layer: the tmp/ comment of CLAUDE.md, Repository layout, names the profiles and the manifest of a migration (POS.1900; the engine check of 2026-10-25). |
 | FND.2990 | low | conformance | resolved | 2026-10-25-check-engine-1610-0336.md | the operating layer: the paragraphs of CLAUDE.md with lines past about 72 columns rewrapped, the wording unchanged (the engine check of 2026-10-25). |
+| FND.3000 | medium | conformance | resolved | 2026-11-01-check-engine-1351-2779.md | resolved: the BRD definition's description says the assignment or the intent, a source put in yielding a work product (intent 6.4) |
+| FND.3010 | low | conformance | resolved | 2026-11-01-check-engine-1351-2779.md | resolved: the BRD definition names the roster as a library document of the instance, no path of an instance (intent 6.4) |
+| FND.3020 | low | conformance | resolved | 2026-11-01-check-engine-1351-2779.md | resolved: the paragraphs re-wrapped to 72 columns, wording unchanged (intent 6.4) |
 
 ## Challenges
 <!-- One sequence, born by the report in challenges/: Headline from
@@ -624,9 +627,9 @@ their decision. Free text without an ID has no place here. -->
 - THR.0640 — What of a thread survives its closing. 2026-10-25: the cto challenge (CHL.0640, parked here until 6.x) reads the growth of the intent as the cut of POS.1390 not surviving velocity: positions since 5.0 carry the mechanism. Two ways named: the test applied and the mechanism moved down, or the design folded back into the intent for the forge's own project. The principal leans to the first: the positions since 5.0 gone through by the test and cut, rather than the present state accepted. The split of large files asked above is one answer to the same pressure.
 - THR.0660 — The course of the teaching videos. 2026-10-24: the brief `video-tutorials` 0.3 of forge-rollout says what is wanted of the player page: a course, not a folder listing; sections (a tutorial first, the advanced concepts after), a viewing order, a meaningful name per video saying what the viewer will learn, and the series named as a whole; order and names the principal's, chosen once, not read off the file names or the title cards. Where they live remains this thread's.
 - THR.0670 — A chain handed over whole. 2026-10-23: the BRD has its definition (POS.1800) and the picture has its last layer; a BRD from a file put in is a work product and the way into the chain for such a file is the intent handed over from it (POS.1810), which is this thread's case. What the handover of a whole chain stops at, and which reviewers stand in for the principal's judgement between the layers, stays open.
-- THR.0680 — A question put to the manual: `/man <free text>`.
 - THR.0740 — The forge sends work to a model of another family - a challenger, a critic, a research, or a question about what Claude has just said - through one mechanism, the user logged into that model once outside the forge, the forge carrying no account; Gemini first, Microsoft AI Foundry and anything else later. 2026-10-25: two parts of the Later of the brief `research` are carried here as well, so that all of it stands in one place: divergent probes as agents of their own (an adjacent field, a named dissent, the new or contested), and a pass over what the agents opened and did not use.
 - THR.0750 — A third kind of project, `workshop`: a project that uses the forge's functionality without working on the artefacts of the chain. 2026-10-25: a consequence named by the cto challenge (CHL.0630): a workshop has no intent, so it cannot hold a fact or a position. If `forge-rollout` becomes a workshop, what a rollout must know (the managed settings, who the user is), which DEC.0190 sent to `forge-rollout` and to the brief `next-gen`, has its home in `next-gen` alone.
+- THR.0760 — The source archive GitHub makes of a tag should hold the engine alone.
 - TBC.0010 of 40-solution-design.md — Mermaid diagrams in a Word file: rendering them to pictures needs `mermaid-cli`, a further dependency not decided on (THR.0370; Waiting on principal in the ledger).
 - TBC.0020 of 40-solution-design.md — Which check keeps this design true against what realises it; POS.1420 wants one and none exists.
 - TBC.0030 of 40-solution-design.md — The reviewers on a different model family (POS.0800) are not built: the link exists (SOL.0870) and the research runs on it; `/challenge` and `/critique` on it, the consultation and the spool have no part here (THR.0740).

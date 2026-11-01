@@ -20,15 +20,15 @@ What you verify:
 
 0. **Kind** — the project file `project.md` declares
    `kind: thought | library` and `language` (`templates/project.md`,
-   which also says what a project without it is and how it is
-   reported); `.gitattributes` exists (`templates/gitattributes`,
-   SOL.0730); `threads/` exists in a thought project. A `library` needs no chain: Structure reduces to the
-   library's file set (CLAUDE.md, Repository layout); ID hygiene does
-   not apply; Language, Immutables and Recipes
-   and renders apply as written, except that a library's documents
-   may be overwritten by their owner (POS.0970) — not an immutability
-   breach. `logo.png` is optional everywhere and its absence is never
-   a finding (POS.1010).
+   which also says what a project without it is and how it is reported);
+   `.gitattributes` exists (`templates/gitattributes`, SOL.0730);
+   `threads/` exists in a thought project. A `library` needs no chain:
+   Structure reduces to the library's file set (CLAUDE.md, Repository
+   layout); ID hygiene does not apply; Language, Immutables and Recipes
+   and renders apply as written, except that a library's documents may
+   be overwritten by their owner (POS.0970) — not an immutability
+   breach. `logo.png` is optional everywhere and its absence is never a
+   finding (POS.1010).
 1. **Structure** — the files and folders of CLAUDE.md, Repository
    layout, exist; a layer below the intent that the project does not
    have is not missing and is never a finding (CLAUDE.md, Ledger);

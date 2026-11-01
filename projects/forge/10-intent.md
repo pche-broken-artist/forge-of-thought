@@ -1,5 +1,5 @@
 ---
-version: 6.3
+version: 6.4
 status: draft
 project: forge
 audience: principal + Claude only
@@ -2152,10 +2152,19 @@ position that already stands elsewhere.
   2026-10-02; the `/research` point of THR.0290 settled 2026-10-24: a
   research has depths and engines, not kinds (POS.1860, POS.1870).
 - **POS.1190 The forge explains itself from its own definitions.** `/man
-  [command|method]`, alias `/manual`, is the forge's manual — a reader,
+  [command|method|question]`, alias `/manual`, is the forge's manual — a reader,
   never a text of its own (POS.1070). Named after the Unix manual,
-  `/help` being a built-in of Claude Code. Decided 2026-09-18 for the
-  newcomer's first hour and for the reader who opens the repository.
+  `/help` being a built-in of Claude Code. A need said in free words,
+  `/man <question>`, is answered with the way the forge has for it:
+  read from the documentation and the definitions in the run, never
+  from memory, said in plain sentences and cited by path, never
+  retold; where the forge has nothing, the answer says so and marks
+  what Claude would do without a mechanism as his own (POS.1370),
+  which is where threads are born. One door: no command and no alias
+  of its own (REJ.0500). Decided 2026-09-18 for the newcomer's first
+  hour and for the reader who opens the repository; the question
+  2026-11-01 after six trial questions in the conversation
+  (THR.0680).
 
 ### Naming
 - **POS.0600** The system is named **Forge of Thought**: thoughts are
@@ -2737,6 +2746,11 @@ worked out by Claude; what Claude has worked out is never a FCT
   CLI call under a hat, returning through the model; the CLI shares
   one headless shape across four engines (research of 2026-10-23;
   POS.1880).
+- **REJ.0500** A help command of its own, `/howto`. Dropped
+  2026-11-01: the forge explains itself through one door (POS.1190);
+  a second name for a question is one more thing to learn, and an
+  alias costs a skill file of its own (SOL.0140). Considered in
+  THR.0680.
 
 ## Candidate structure for the layer below
 

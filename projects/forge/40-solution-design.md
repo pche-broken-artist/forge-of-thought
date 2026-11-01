@@ -1,5 +1,5 @@
 ---
-version: 0.48
+version: 0.49
 status: draft
 project: forge
 audience: whoever realises the solution, a person or an agent
@@ -238,12 +238,20 @@ boundary kept by hand or an order of work.
   `.claude/skills/recipe/genres/`, `templates/recipe.md`,
   `templates/recipe-<genre>.md`.
 - **SOL.0140 The manual.** `/man` reads the forge's own definitions
-  and prints them. The alias `/manual` is
-  a second skill whose whole body invokes the first, since a skill
-  has no alias field.
-  Realises: POS.1190, POS.1070. Choice: no real alternative for the
-  alias. Where:
-  `.claude/skills/man/SKILL.md`, `.claude/skills/manual/SKILL.md`.
+  and prints them; the alias `/manual` is a second skill whose whole
+  body invokes the first, since a skill has no alias field. A
+  question in free words is routed by the documentation's index,
+  `docs/README.md`, where every page carries the one question it
+  answers: the pages chosen are read in the run and the answer is
+  composed from them in plain sentences, the paths named once at
+  the end. Realises: POS.1190, POS.1070, POS.1370. Choice: the index
+  as the router rather than a search over the skills, since a page
+  is written for the reader and carries its question, a skill is
+  written for Claude; the pages read in the run rather than answered
+  from the context, since an answer from memory is the risk
+  THR.0680 named; no alternative for the alias. Where:
+  `.claude/skills/man/SKILL.md`, `.claude/skills/manual/SKILL.md`,
+  `docs/README.md`.
 - **SOL.0150 The first run.** `/setup` fills `CLAUDE.local.md` from its
   template and creates `.claude/settings.local.json` with the session
   model. It closes with the git identity: it asks for the hosts the user

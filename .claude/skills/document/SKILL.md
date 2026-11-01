@@ -16,13 +16,14 @@ regenerated.
 Target and places. Bare, the target is the engine: its root is the
 engine root, the owning project is `projects/forge`, the pages land in
 `docs/` at the engine root. On `main` only, behind or diverged refused
-(CLAUDE.md, Persistence; `python scripts/forge-status.py --remote`):
-the pages are taken as `ours` at a merge (POS.1690). With a slug, the target is that project:
-its root and the owning project are `projects/<slug>`, the pages land
-in `projects/<slug>/docs/`. The map is `docs-map.md` beside the
-owning project's ledger, never in `docs/`. The date is today's.
-`docs/videos/` of the engine is not the documentation's (POS.1540):
-the planner never maps it, the scripts read `docs/` without it.
+(CLAUDE.md, Persistence; `python scripts/forge-status.py --remote`): the
+pages are taken as `ours` at a merge (POS.1690). With a slug, the target
+is that project: its root and the owning project are `projects/<slug>`,
+the pages land in `projects/<slug>/docs/`. The map is `docs-map.md`
+beside the owning project's ledger, never in `docs/`. The date is
+today's. `docs/videos/` of the engine is not the documentation's
+(POS.1540): the planner never maps it, the scripts read `docs/` without
+it.
 
 1. **Plan.** Launch the agent `docs-planner` (Agent tool, type
    `docs-planner`, session model, never a model override). The task
@@ -40,17 +41,17 @@ the planner never maps it, the scripts read `docs/` without it.
    is the script's, never a judgement.
 3. **Remove.** Delete the pages listed as `remove`. Say which.
 4. **Write the pages.** For every task file launch one agent
-   `docs-writer` (Agent tool, type `docs-writer`) whose prompt names
-   the task file by path and nothing else; the writer reads it from
-   disk first, as its definition says, so that the session carries no
-   page's material: a mirrored page (`made:
-   mirrored` in its entry) with the model override `sonnet`, a
-   derived page without an override, on the session model (POS.0930).
-   The models and the number of pages are said before the launch
-   (CLAUDE.md, Working methods, Step by step). Up to twenty run at once; launch the rest as the first return.
-   Every writer reads its inputs from disk and writes its page with
-   the `inputs-hash` its task gives it. Collect the reports: what the
-   inputs did not support goes to step 7.
+   `docs-writer` (Agent tool, type `docs-writer`) whose prompt names the
+   task file by path and nothing else; the writer reads it from disk
+   first, as its definition says, so that the session carries no page's
+   material: a mirrored page (`made: mirrored` in its entry) with the
+   model override `sonnet`, a derived page without an override, on the
+   session model (POS.0930). The models and the number of pages are said
+   before the launch (CLAUDE.md, Working methods, Step by step). Up to
+   twenty run at once; launch the rest as the first return. Every writer
+   reads its inputs from disk and writes its page with the `inputs-hash`
+   its task gives it. Collect the reports: what the inputs did not
+   support goes to step 7.
 5. **Index.** Run `python scripts/docs-index.py <map> <docs-dir>`;
    what it derives is its header's.
 6. **Check.** Run `python scripts/docs-check.py <map> <docs-dir>`;

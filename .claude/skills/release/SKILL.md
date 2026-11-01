@@ -15,15 +15,15 @@ never a sweep.
 
 1. Determine the state from `python scripts/forge-status.py --remote`
    (the forge reads state by its script — CLAUDE.md, Persistence). A
-   release runs on `main` only: on any other
-   branch, stop and report the branch the repository is on and how to
-   get back (`python scripts/forge-branch.py <slug> main`, after saving).
-   A repository behind or diverged from its origin is refused with
-   the offer of `/pull` (CLAUDE.md, Persistence): the renders a release makes are taken as
-   `ours` at a merge, and that turns round in the rebase of the save
-   (POS.1710, SOL.0530).
-   Merging a branch into `main` is git's business, by hand or by
-   merge request, never this command's (POS.1110).
+   release runs on `main` only: on any other branch, stop and report the
+   branch the repository is on and how to get back
+   (`python scripts/forge-branch.py <slug> main`, after saving). A
+   repository behind or diverged from its origin is refused with the
+   offer of `/pull` (CLAUDE.md, Persistence): the renders a release
+   makes are taken as `ours` at a merge, and that turns round in the
+   rebase of the save (POS.1710, SOL.0530). Merging a branch into `main`
+   is git's business, by hand or by merge request, never this command's
+   (POS.1110).
 2. Run the checks over the sources through the `/check` procedure
    (`.claude/skills/check/SKILL.md`) and report the result to the
    principal — always, even when clean. A project: `light` and

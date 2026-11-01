@@ -848,7 +848,7 @@ What a command does in full is its skill's
 | `/end` | end a session: what lives only in the conversation, what is unsaved, what a shutdown would lose |
 | `/spinoff <project> <group> <slug>` | split a group into its own project |
 | `/migrate [slug]` | bring a project to the shape of a release that changed the shape of files |
-| `/man [command \| method]` | the forge's manual, read from its own definitions |
+| `/man [command \| method \| question]` | the forge's manual, read from its own definitions; a need in free words gets the way the forge has for it |
 | `/manual …` | alias of `/man` |
 
 ## The system's own project

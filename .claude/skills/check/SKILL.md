@@ -22,17 +22,17 @@ when it fits) and recommend which fits the moment; what a save or a
 release runs is `/save`'s and `/release`'s to say. A recommendation,
 never a gate; no check runs on Claude's own judgement.
 
-**`/check <name> [slug]` — run it.** The target is a project by its
-slug (the engine's own project is `forge`) or the engine root; which
-of the two a check takes, and what a missing or an added slug means
-to it, is its Lens section's to say — read it there. Typed, that is
-`/check engine` (the engine root, no slug) or `/check light forge`
-(the forge's own project). First remake the
-target's ledger, `python scripts/forge-ledger.py <slug>` (for the engine `forge`), so
-that the agent reads a current file; then invoke the
-`check-<name>` subagent (Agent tool, session model) with the target
-path and nothing else (CLAUDE.md, Isolated reviewers). More than one
-check on one target may be launched at once and awaited together.
+**`/check <name> [slug]` — run it.** The target is a project by its slug
+(the engine's own project is `forge`) or the engine root; which of the
+two a check takes, and what a missing or an added slug means to it, is
+its Lens section's to say — read it there. Typed, that is
+`/check engine` (the engine root, no slug) or `/check light forge` (the
+forge's own project). First remake the target's ledger,
+`python scripts/forge-ledger.py <slug>` (for the engine `forge`), so
+that the agent reads a current file; then invoke the `check-<name>`
+subagent (Agent tool, session model) with the target path and nothing
+else (CLAUDE.md, Isolated reviewers). More than one check on one target
+may be launched at once and awaited together.
 
 When it returns:
 1. File the report, when it has findings. Write it into the target

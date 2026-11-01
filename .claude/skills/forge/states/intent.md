@@ -13,10 +13,10 @@ directive 6).
 **Target.** `10-intent.md`. Shape of the result:
 `templates/intent.md`.
 
-**Inputs.** The briefs the principal says to mine (`00-brief.md`
-and any `00-brief-<name>.md`, approved or not), `decisions.md`, the ledger; sources only as the
-principal directs. The intent as it stands is read with the
-project's threads, `threads/`.
+**Inputs.** The briefs the principal says to mine (`00-brief.md` and any
+`00-brief-<name>.md`, approved or not), `decisions.md`, the ledger;
+sources only as the principal directs. The intent as it stands is read
+with the project's threads, `threads/`.
 
 **Aim.** The intent chisels the briefs into what the principal
 holds: from the briefs, the sources and the conversation it keeps

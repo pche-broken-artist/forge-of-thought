@@ -2,7 +2,7 @@
 id: THR.0680
 concerns: intent
 origin: the principal
-status: open
+status: closed
 ---
 
 A question put to the manual: `/man <free
@@ -24,6 +24,19 @@ stands in no file; the citation by path is the guard, as it is for
 `/man` today. The work: a third paragraph of the skill `man`, the row
 of the commands table, a sentence in POS.1190. Opened 2026-10-15;
 origin: the principal's word and Claude's synthesis.
+
+Closed 2026-11-01. Tried in the conversation on six questions before
+anything was written: a colleague's Word document to turn into
+requirements, a one-page summary for the management, the time spent on
+a project, a broken git, a company project, a transcript of a meeting
+where the business presented an assignment. The principal's judgement:
+it works, natural language is what matters, asking back is fine, the
+company git is to be said more plainly. What the trial showed: the
+speed came from CLAUDE.md in the context and the documentation's index
+read once; the answers partly came from memory, which is the risk this
+thread named, so the mechanism reads the pages in the run. Built the
+same day: the third entry of the skill `man`, the row of the Commands
+table, POS.1190, REJ.0500, SOL.0140. `/howto` not built (REJ.0500).
 
 <!-- A thread (POS.1680), one file per thread in threads/; the header
 is its state: what it concerns, where it came from, whether it is

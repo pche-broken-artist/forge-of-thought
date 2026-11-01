@@ -1,5 +1,5 @@
 ---
-description: 'Iterate 30-brd.md — the business requirements: the assignment, the intent or a source put in, broken into rules, behaviour and qualities the stakeholders can review and the delivery can estimate'
+description: 'Iterate 30-brd.md — the business requirements: the assignment or the intent broken into rules, behaviour and qualities the stakeholders can review and the delivery can estimate; a source put in yields a draft BRD as a work product'
 ---
 
 The definition of the BRD's elicitation, in the seven blocks of
@@ -34,12 +34,11 @@ chain, an intent is handed over from the same source first
 Around the parent: `decisions.md`, the ledger, the DEL items of an
 assignment as the list of what the BRD is asked to bring back;
 the roster of the instance — the areas of the enterprise a BRD must
-consider and which of them are mandatory — a library document
-cited by path (POS.1020), for now the fork's template in
-`projects/lib-allwyn/sources/fork-brd/template-brd.md`; a project
-with no enterprise around it has no roster, says `Roster: none`
-and walks the area against nothing; the group's standard in the
-same bundle; the indexes of the project's resources and of every
+consider and which of them are mandatory — a library document of
+the instance, cited by path (POS.1020); a project with no
+enterprise around it has no roster, says `Roster: none` and walks
+the area against nothing; the group's standard, where the instance
+has one, a library document likewise; the indexes of the project's resources and of every
 library it depends on (`sources/00-INDEX.md`,
 `research/00-INDEX.md`, `projects/lib-*/sources/00-INDEX.md`), read
 always, so that a standard, a regulation or a report the forge
@@ -142,16 +141,16 @@ instance makes the area mandatory.
 - what stays open: every TBC with an owner, which of them block
   estimation, and the list of what must be supplied from outside.
 
-**Instruments.** The provenance map of the recast, as the
-assignment's definition has it
-(`.claude/skills/forge/states/assignment.md`, the joint pass);
-`/critique essence` for drift from the parent; `/critique clarity`
-with the Requirement style below; `/challenge business-analyst`
-for what was written from the parent though it belongs to the
-world outside it; `/check brd` for the mechanics; `/ingest` for a
-file put in and for the roster and the standard of the instance
-into the library; `/work` for the draft a file put in yields; `/recipe` for the page the instance
-publishes, a render and never the artefact.
+**Instruments.** The provenance map of the recast, as the assignment's
+definition has it (`.claude/skills/forge/states/assignment.md`, the
+joint pass); `/critique essence` for drift from the parent;
+`/critique clarity` with the Requirement style below;
+`/challenge business-analyst` for what was written from the parent
+though it belongs to the world outside it; `/check brd` for the
+mechanics; `/ingest` for a file put in and for the roster and the
+standard of the instance into the library; `/work` for the draft a file
+put in yields; `/recipe` for the page the instance publishes, a render
+and never the artefact.
 
 **Course.** Resolve the project, the parent the principal names
 and the BRD as it stands; say whether the parent is stable enough
