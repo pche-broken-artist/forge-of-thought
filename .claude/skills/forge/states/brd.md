@@ -3,9 +3,8 @@ description: 'Iterate 30-brd.md — the business requirements: the assignment or
 ---
 
 The definition of the BRD's elicitation, in the seven blocks of
-POS.1310 of the forge intent; what it is to achieve and why is the
-brief `00-brief-brd.md` 0.3 of the forge project until its position
-in the intent is written after the first trials (POS.1780). Shared
+POS.1310 of the forge intent; what it is to achieve and why is
+POS.1800 of the forge intent, with POS.1810 to POS.1850. Shared
 mechanism is cited and never repeated here: the form of the
 conversation and one write per round (CLAUDE.md, Working methods
 and prime directive 9), versioning with history (CLAUDE.md,

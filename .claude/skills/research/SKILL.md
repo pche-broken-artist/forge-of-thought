@@ -80,7 +80,7 @@ when asked.
    "what does this plan miss, what does it assume about where the
    answer lives, which perspective has no card, which card would
    you cut, and why"; run
-   `python scripts/forge-engine.py antigravity --packet tmp/research/<run>/plan-review --out tmp/research/<run>/plan-review/antigravity.md --allow-all --sandbox`
+   `python scripts/forge-engine.py <name> --packet tmp/research/<run>/plan-review --out tmp/research/<run>/plan-review/<name>.md --allow-all --sandbox`
    (the flags and the profile: `scripts/forge-engine.py`, its
    header). Show the engine's additions beside the draft, marked as the
    engine's, nothing taken into the plan by Claude's own judgement.

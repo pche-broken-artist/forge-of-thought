@@ -2,7 +2,8 @@
 """
 forge-check.py - the mechanical clauses of a check, run as a program
 instead of a model: what the files fully determine, verified by
-reading them (THR.0530 of the forge intent; the trial of 2026-10-22).
+reading them (THR.0530 of the forge intent, open; begun as the trial of
+2026-10-22, today the light check's mechanical clauses, `light <slug>`).
 
 SYNOPSIS
     python scripts/forge-check.py light <slug> [--out PATH]

@@ -642,3 +642,60 @@ verdict on the whole ID, the rest a `changed` record of the history
   before it. The principal's word of 2026-11-01.
 - **Verdict:** FND.3560 rejected
 - **Date:** 2026-11-01
+
+## DEC.0380 — The map's defects of the documentation run wait for the next run
+- **Decision:** FND.3600, FND.3610, FND.3620 and FND.3630 (the
+  documentation run of 2026-11-01) are parked until the next
+  documentation run: an entry's order against its owner, seventeen
+  entries asking for claims no named input carries, four input
+  anchors the state script cannot isolate, and roster columns no
+  owner states. No owner changes for them.
+- **Reason:** Every one lies in `docs-map.md`, which the planner
+  writes at each run, and the planner's task names the open findings
+  of the map so that it brings the entries to their owners itself:
+  the inputs completed, a claim without an owner cut, a whole file
+  named where a part has no heading, a column no owner states no
+  longer asked for. Mending the map by hand now would change no page
+  before a run. The principal's word of 2026-11-01.
+- **Verdict:** FND.3600 parked until the next documentation run
+- **Verdict:** FND.3610 parked until the next documentation run
+- **Verdict:** FND.3620 parked until the next documentation run
+- **Verdict:** FND.3630 parked until the next documentation run
+- **Date:** 2026-11-01
+
+## DEC.0390 — How the integrator fetches a merge request's branch waits for the first merge request
+- **Decision:** FND.3580 (the documentation run of 2026-11-01), the
+  unowned fact of how a merge request's branch reaches the
+  integrator's clone and the merge is started there, is parked until
+  the first merge request on a project of two people.
+- **Reason:** No merge request has been made on any project yet;
+  a sentence written before one would be a guess, and the step of a
+  conflict has its owners for what follows. The principal's word of
+  2026-11-01.
+- **Verdict:** FND.3580 parked until the first merge request on a project of two people
+- **Date:** 2026-11-01
+
+## DEC.0400 — Twelve unrecorded reasons wait for a round of their own
+- **Decision:** FND.3690 to FND.3800 (the documentation run of
+  2026-11-01), twelve places where a page says the reason of a rule
+  is not recorded, are parked until the principal gives the reasons
+  in one round of their own, an elicitation interview, one question
+  per message.
+- **Reason:** A rule without a recorded reason stands and the pages
+  say so (the solution design: where a reason is not recorded, none
+  is invented); the reasons are the principal's to give, and they are
+  worth one round, not the release's. The principal's word of
+  2026-11-01.
+- **Verdict:** FND.3690 parked until the principal gives the reasons
+- **Verdict:** FND.3700 parked until the principal gives the reasons
+- **Verdict:** FND.3710 parked until the principal gives the reasons
+- **Verdict:** FND.3720 parked until the principal gives the reasons
+- **Verdict:** FND.3730 parked until the principal gives the reasons
+- **Verdict:** FND.3740 parked until the principal gives the reasons
+- **Verdict:** FND.3750 parked until the principal gives the reasons
+- **Verdict:** FND.3760 parked until the principal gives the reasons
+- **Verdict:** FND.3770 parked until the principal gives the reasons
+- **Verdict:** FND.3780 parked until the principal gives the reasons
+- **Verdict:** FND.3790 parked until the principal gives the reasons
+- **Verdict:** FND.3800 parked until the principal gives the reasons
+- **Date:** 2026-11-01

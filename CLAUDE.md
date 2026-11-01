@@ -415,7 +415,8 @@ scripts/                   # forge-save / forge-pull / forge-status
                            # project brought to the shape of a
                            # release), forge-config (the user's
                            # global git configuration through git:
-                           # the registration of the merge driver ours, the
+                           # the registration of the merge driver ours and
+                           # its settings, the
                            # guard, the identity per host),
                            # forge-check (the mechanical clauses of
                            # a check as a program, with its module

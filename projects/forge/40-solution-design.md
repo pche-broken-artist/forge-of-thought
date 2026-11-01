@@ -1,5 +1,5 @@
 ---
-version: 0.51
+version: 0.52
 status: draft
 project: forge
 audience: whoever realises the solution, a person or an agent
@@ -1310,7 +1310,11 @@ boundary kept by hand or an order of work.
   forced push or a revert, on a protected main a maintainer's, and
   always the engine and every project together, since the engine refuses
   the old shape once released (CHL.0420).
-- **SOL.0830 The fixture.** The test bed of the forge's own tests is one
+- **SOL.0830 The fixture.** The fixture is a kind a project may
+  declare, `fixture: true`; the fixture project of the cutover,
+  `projects/fixture`, was deleted on 2026-11-01 (DEC.0360) and none
+  exists today; what follows is how it was made and what ran on it. The
+  test bed of the forge's own tests was one
   project, `projects/fixture`, made by hand once from a bare remote
   `tmp/fixture.git` as a copy of a small real project in the old shape
   and brought to the new shape by the migration, which it thereby

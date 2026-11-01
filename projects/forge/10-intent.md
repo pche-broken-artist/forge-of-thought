@@ -1,5 +1,5 @@
 ---
-version: 6.9
+version: 6.10
 status: draft
 project: forge
 audience: principal + Claude only
@@ -924,9 +924,10 @@ position that already stands elsewhere.
   sequence, and qualities with their values from the stakeholders, so
   that the delivery can estimate and the solution design can start. It
   is built on the standards of the field (ISO/IEC/IEEE 29148, BABOK,
-  IREB, the group's own BRD standard); the BRD a colleague built in a
-  fork of the engine is its inspiration and nothing of it is taken over:
-  what held on real work is distilled, the rest left. The company's
+  IREB and the standard of the instance's group where it has one, a
+  library document); a BRD built in a fork of the engine before this
+  definition is its inspiration and nothing of it is taken over: what
+  held on real work is distilled, the rest left. The organisation's
   content — the roster of areas and which are mandatory, the roles, the
   systems, the publishing convention — lives in the instance's library;
   the engine carries a generic Map. Its definition is `states/brd.md`
@@ -1722,8 +1723,9 @@ position that already stands elsewhere.
   between visibly (the `/forge` map), never silently. Decided
   2026-09-05; alternatives REJ.0160, REJ.0170.
 - **POS.1110** Branches are voluntary and belong to git. Whoever wants
-  one gets it through one forge command — `forge-branch <name>` creates
-  the branch or switches to it, `forge-branch main` switches back — and
+  one gets it through one forge command — `forge-branch <slug> <name>`
+  creates the branch or switches to it, `forge-branch <slug> main`
+  switches back — and
   never types git; a merge is git's, by the user's hand or by a merge
   request, and a conflict `/save` meets is settled in the step of a
   conflict (POS.1710); the one rebase the forge does is `/save`'s, the
@@ -1751,8 +1753,10 @@ position that already stands elsewhere.
   appended after one last line, kept both. Way 2, derived: state, the
   ledger, never in git and made at read time (POS.1600); documents for a
   reader, the renders, the README, the release notes, CONTRIBUTING, the
-  documentation, the state render and the published files, in git, made
-  only on main, `ours` at a merge and made again. Way 3, immutable and
+  documentation, the state render and the published companions, in
+  git, made only on main, `ours` at a merge and made again; the
+  published files themselves `binary`, never merged (POS.1690). Way 3,
+  immutable and
   unique: reviews, challenges, research, sources and closed threads;
   never conflicts, the name unique across branches too, immutability a
   process rule as today (POS.0550), nothing locked. Why: at both
@@ -2840,7 +2844,12 @@ worked out by Claude; what Claude has worked out is never a FCT
   2026-11-01: the forge explains itself through one door (POS.1190);
   a second name for a question is one more thing to learn, and an
   alias costs a skill file of its own (SOL.0140). Considered in
-  THR.0680.
+  THR.0680. For a project other than the engine the planner reads its
+  briefs, intent and threads, the layers below the intent, its ledger,
+  the indexes of `sources/` and `research/` and its recipes, and
+  whatever those documents point to on disk; what a project wants
+  documented beyond that is not a setting of its own (THR.0590, closed
+  2026-11-01).
 
 ## Candidate structure for the layer below
 
