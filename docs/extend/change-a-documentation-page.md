@@ -1,8 +1,8 @@
 ---
 generated: 2026-11-01
-version: 6.4
+version: 6.8
 made: derived
-inputs-hash: 7490371474804de7
+inputs-hash: b66902ae92bfaeb5
 inputs:
   - .claude/skills/document/SKILL.md
   - .claude/skills/docs-contract/SKILL.md
@@ -11,230 +11,250 @@ inputs:
   - scripts/docs-state.py
   - scripts/docs-check.py
   - templates/recipe-readme.md#Pinned facts (not rendered)
+  - projects/forge/10-intent.md#POS.1450
 ---
 
 # Change a documentation page
 
-A documentation page is a generated file: it is made from the files
-its front-matter names and is never edited by hand. This page is for
-the extender who finds a page wrong, wants a page added or dropped,
-or wants every page to take a different shape. It shows where each of
-these changes is made and how the pages are then remade. Running the
-command itself is described in
-[Generate the documentation](../use/generate-the-documentation.md).
+A page of the documentation is a generated file: `/document` writes
+it from the files that own its topic, and a run of the command writes
+it again whenever those files change. This page is for the extender
+who finds something wrong on a page, or wants a page that does not
+exist, or wants every page shaped differently, and needs to know
+which file to change so that the change survives the next run.
 
 ## When to use it
 
-Use it when a page says something that is wrong or out of date.
+Use this page whenever you want the documentation to say something
+else, and never reach for the page itself. A page is never edited by
+hand. The next run of `/document` writes the page again from its
+owners, and a mend made on the page is gone. Only a mend in the file
+that owns the matter survives, and the page takes it at the next run.
 
-Use it when a page is missing, or a page should no longer exist.
+The same holds for four different wishes, each with its own owner:
 
-Use it when you want to change what every page looks like, or what
-kind of content a page of each kind carries.
-
-Use it when a fact a page needs has no file that owns it.
-
-In every case the rule is the same. What is wrong on a page is mended
-in the file that owns the matter, and the page is regenerated. The
-reason a page is never edited by hand is not recorded beyond that
-rule.
+- what one page says: the files its front-matter names as `inputs`;
+- the shape every page has, or what kind of content a page of each
+  kind carries: the writer's definition and the documentation
+  contract;
+- which pages exist, who reads them and in what order: the planner's
+  definition and the position of the forge intent that defines the
+  documentation;
+- what the check refuses: the check script and, for the values it
+  reads, the instance file.
 
 ## What you do
 
-1. Find the owner of what is wrong.
-2. Change the owning file, as any change of the forge is made.
-3. Run the documentation command:
+Mend the owner, then run the command, bare for the engine or with a
+slug for a project:
 
 ```
 /document
+/document <slug>
 ```
 
-For a project in place of the engine, name its slug, for example
-`/document my-project`.
-
-The change to the owning file goes through the chain any change of
-the forge goes through: see
-[Make a change to the forge](how-a-change-is-made.md).
+The command asks nothing. It runs on `main` only and refuses a
+repository that is behind or diverged from its origin. How the run
+proceeds as a whole is on [Generate the
+documentation](../use/generate-the-documentation.md).
 
 ## What happens
 
-1. **You find the owner.** Every page opens with a front-matter. Its
-   `inputs` list names the files, or the parts of files, that the
-   page was made from. A part is named after `#`: a section by its
-   heading, or an item by its ID. The fields of the front-matter and
-   of an entry of the documentation map are described in
-   [Documentation map](../reference/documentation-map.md).
-   Which owner to change depends on what you want to change:
+1. **Find the owner.** Open the page and read its front-matter. The
+   `inputs` list names every file, or every named part of a file,
+   the page was made from; a part is written after `#`, a section
+   by its heading or an item by its ID. The paths are relative to
+   the target's root: the engine root for the engine's documentation,
+   the project's directory for a project's. The fields of the
+   front-matter are on [Documentation
+   map](../reference/documentation-map.md). You should now see the
+   one file, or the one part of a file, whose wording the page
+   restates.
 
-   - **What a page says:** the input file, or the named part, that
-     carries the matter.
-   - **The shape every page has, or what kind of content a page of
-     each kind carries:** the writer's definition
-     (`.claude/agents/docs-writer.md`) and the documentation contract
-     (`.claude/skills/docs-contract/SKILL.md`).
-   - **Which pages exist, which reader a page is for, what a page is
-     made from:** the planner's definition
-     (`.claude/agents/docs-planner.md`), which holds the readers and
-     the outline, and the target's own files, which the planner reads.
-     What the documentation is and for whom is also a position of the
-     forge's own intent.
-   - **A fact a page needs and no file owns:** see step 5.
+2. **Mend the owner.** Change that file where the matter stands, as
+   any change of the forge is made: the chain a change goes through
+   is on [Make a change to the forge](how-a-change-is-made.md). Where
+   the owner is a skill, a template, an agent or a script, change its
+   wording; where the owner is the forge intent, the reason the page
+   wants enters the intent in its own round. You should now see the
+   mend in the owning file and nothing changed under `docs/`.
 
-   You should now see one file, or one part of a file, that you will
-   change.
+3. **Run `/document`.** The planner, an isolated subagent (an agent
+   that sees nothing of the conversation and reads every input from
+   disk), reads the target on disk and writes the documentation map
+   anew at every run, one entry per page. A script then hashes, for
+   every entry, the entry's own text together with the content of
+   every input it names, a part hashed as that part, and compares the
+   result with the `inputs-hash` the page carries. The entry's state
+   is set from the comparison alone: `new` where no page exists,
+   `regenerate` where the hash differs, `keep` where it is the same.
+   Only the pages in state `new` or `regenerate` are written again,
+   each by one writer that reads its entry and its inputs from disk
+   and nothing else. You should now see the command say which pages
+   are new, regenerated, kept and removed.
 
-2. **You change the owning file.** Change it and record the change as
-   any change of the forge is recorded. Do not touch the page and do
-   not touch the documentation map (the file `docs-map.md` that lists
-   every page and what it is made from). The planner writes the map
-   afresh from the target at every run, so the map is not where a
-   page is changed.
+4. **Read the check's result.** A script checks the pages against
+   the map and against the rules of a page and prints every failure
+   with its file and line. A page that fails is regenerated once
+   with the failure named in its task. A page that fails twice is
+   reported and left out of the documentation: deleted, its entry
+   marked `remove` in the map, said aloud, never mended by hand. You
+   should now see the check's result in the command's report, and
+   the page you wanted changed carrying a new `inputs-hash` and the
+   wording of the mended owner.
 
-   You should now see your change in the owning file and nothing
-   changed under `docs/`.
+5. **Read the run's report.** What the run could not place is filed
+   as a check's report in the owning project's `reviews/`, under the
+   name `YYYY-MM-DD-check-documentation` completed as every report's
+   name is, with `reviewer: the documentation run`. It holds one
+   finding per matter: a fact a page needs and no file owns, a
+   disagreement between the map and an owner, a claim the map asked
+   for and no input carried, each as medium; a reason a page wanted
+   and no file records, as low. The ledger (the project's state
+   report, made at read time) reads it as any check's report, and
+   the findings are settled by walkthrough (one item per message,
+   each closed with a verdict), as [Check
+   conformance](../use/check-conformance.md) describes; a mend lands
+   in the owner, never on a page. A run that leaves nothing files
+   nothing. You should now see either a new report in `reviews/`, or
+   none.
 
-3. **If you changed an agent's definition, you start a new session.**
-   Claude Code (the harness, that is the program Claude runs in)
-   loads an agent's definition once per session (one conversation
-   with Claude, from its start to its end). A change to
-   `docs-planner.md` or `docs-writer.md` reaches the agents only in a
-   new session. If the command runs in the same session that made the
-   change, it passes the changed rule in each writer's task and says
-   so in its report.
+### To change the shape of every page
 
-   You should now see a fresh session, or a report that names the
-   changed rule.
+The shape of a page, its front-matter, its headings per kind, the
+voice and the sentence, and what must never reach a page, are owned
+by two files: the writer's definition
+(`.claude/agents/docs-writer.md`) and the documentation contract
+(`.claude/skills/docs-contract/SKILL.md`). The state script hashes
+both together with the inputs of every entry, with their whitespace
+normalised: every run of whitespace, line breaks included, is
+collapsed to one space before hashing. So a change of a sentence in
+either file regenerates every page made by the old rule, and a
+re-wrap of either file regenerates nothing.
 
-4. **You run `/document`.** The planner writes the map from the
-   target. The script `scripts/docs-state.py` then computes, for every
-   page, a hash of three things:
+### To change which pages exist or who reads them
 
-   - the page's entry in the map (its `state` line excepted);
-   - the content of every input the entry names, a named part hashed
-     as that part only;
-   - the generator: the writer's definition and the documentation
-     contract.
+The map is not edited: the planner writes it from the target at
+every run. What the planner plans, the three readers and their
+order, the five sections of the outline and what each holds, the
+rules of an entry, is owned by the planner's definition
+(`.claude/agents/docs-planner.md`) and by the position of the forge
+intent that defines the documentation. The planner's rules reach
+the pages through the entries it writes: the entry's text is part of
+the hash, so an entry the planner words differently regenerates its
+page, and an entry it words the same leaves its page as it is.
 
-   The page carries in its front-matter the hash it was made from
-   (`inputs-hash`). Where the two hashes differ, the page is
-   `regenerate`; where they agree, it is `keep`; where no page exists,
-   it is `new`. The state is computed, never judged. Only the pages
-   whose inputs, entry or generating rule changed are remade. A change
-   elsewhere in a file leaves a page as it is when the page names only
-   a part of that file. A change to the writer's definition or the
-   contract regenerates every page, so that no page stays made by the
-   old rule. The planner's rules reach the pages through the entries
-   it writes.
+### To give a home to a fact no file owns
 
-   You should now see the state summary, in the shape
-   `entries N: new N, regenerate N, keep N; remove N; tasks written to ...`,
-   with the page you meant to change among the regenerated ones.
+A fact a page needs and no file supports is not invented: the
+planner lists it under `## Unowned` in the map, the writer leaves it
+out, and the run files it as a finding. Such a fact waits for the
+principal (whoever's thinking is being forged, the one who decides)
+to give it a home. The readme recipe of the owning project has a
+section for exactly this, `## Pinned facts (not rendered)`, whose
+skeleton is `templates/recipe-readme.md`: facts of the project that
+no file owns yet, such as prerequisites, how a tool is installed or
+the public home of the repository, one bullet each. The README does
+not print them; the planner reads them there as an owner. A fact is
+dropped from the section the day a file owns it.
 
-5. **A fact with no owner is reported, not invented.** Where a page
-   needs a fact that no file supports, the planner lists it under
-   `## Unowned` in the map, with the page that needs it. The writer
-   leaves the fact out, and the command's report lists it. The fact
-   waits for the principal (the person whose thinking is forged and
-   who has the final word on content) to give it a home. One home is
-   the section "Pinned facts (not rendered)" of the project's readme
-   recipe, made from the skeleton `templates/recipe-readme.md`:
+### A changed agent reaches the next session
 
-   - it is optional and is left out when the project has no such
-     facts;
-   - it holds facts no file of the project owns yet, such as
-     prerequisites, how a tool is installed, or the public home of the
-     repository;
-   - it holds one bullet per fact;
-   - the README does not print it, but the planner reads it as an
-     owner;
-   - a fact is dropped from it the day a file owns the fact.
-
-   You should now see the fact gone from the Unowned list at the next
-   run, and on the page that needed it.
-
-6. **The pages are checked.** After the pages and the index are
-   written, `scripts/docs-check.py` checks them against the map and
-   the rules of a page. It refuses:
-
-   - an entry of the map not marked `remove` that has no page;
-   - a page in the documentation directory that the map does not name
-     (the index `README.md` excepted);
-   - a relative link to a `.md` file that does not resolve;
-   - a long dash (em or en) in prose, code spans and fenced blocks
-     exempt;
-   - a page that does not open with a front-matter;
-   - an instance fact: a value of the instance file of the
-     installation, an e-mail address other than a placeholder at
-     `example.*`, an absolute path of a machine, or any pattern given
-     to it with `--fact`.
-
-   The check mends nothing. A page that fails is regenerated once with
-   the failure named in its task.
-
-   You should now see `N files checked, no failure`.
+Claude Code, the harness the forge runs in (the program that loads
+the commands, the skills and the agents), loads an agent's definition
+once per session. A change to `.claude/agents/docs-planner.md` or
+`.claude/agents/docs-writer.md` reaches the planner or the writers
+only in a new session. Within the session that changed one of them,
+the changed rule is passed in the agents' task and the run's report
+says so.
 
 ## What you have afterwards
 
-The owning file carries the change, recorded as any change. The pages
-made from it are regenerated and every other page is kept as it was.
-The index is derived again from the map, and the owning project's
-ledger (the state report made from the documents at read time) is
-remade from the index's provenance.
+The owning file carries the mend; the page carries the owner's new
+wording and a new `inputs-hash`; the pages whose inputs did not
+change are untouched, byte for byte; the map carries every entry's
+state as the script set it; the owning project's ledger is remade,
+its Renders table reading the index's provenance; and where the run
+could not place something, a check's report lies in `reviews/` for
+a walkthrough.
 
 ## If something goes wrong
 
-- **The command refuses to run.** It runs on `main` only, and refuses
-  a repository that is behind or diverged from its origin. Bring the
-  repository up to date first.
-- **The page you changed is listed as `keep`.** Its hash did not
-  change: the file you changed is not among its inputs, or the change
-  fell outside the part the page names. Look again at the page's
-  `inputs`.
-- **The summary prints `missing input: ... (named by ...)`.** The map
-  names a file or a part the disk does not have. The page is
-  regenerated and its writer reports the gap.
-- **A page fails the check twice.** It is reported and left out of the
-  documentation: the page is deleted and its entry marked `remove` in
-  the map by hand, said aloud. It is never mended by hand. Mend the
-  owner of what failed and run the command again.
-- **A false hit of the instance-fact rule.** A match is reported with
-  its line. Where a common word happens to be a value of the instance
-  file, the rule is adjusted, not the page.
-- **A changed agent rule did not show.** The agent's definition was
-  loaded before the change. Start a new session (step 3).
+- **The check prints a failure with a file and a line.** What it
+  looks for: every entry of the map not in state `remove` has its
+  page, and no page lies under `docs/` that the map does not name
+  (the index `README.md` excepted); every relative link to a `.md`
+  file resolves; no long dash, em or en, in the prose of any page,
+  a code span and a fenced block exempt; every page opens with a
+  front-matter; no instance fact, that is the values of
+  `CLAUDE.local.md` at the engine root (every word of four letters or
+  more in a value, looked for outside URLs), any e-mail address but a
+  placeholder at `example.*`, any absolute path of a machine (a
+  drive letter, a user's home directory), and every `--fact` pattern
+  the run was given. The exit code is 0 when everything holds and 1
+  when anything fails. The check mends nothing: the command
+  regenerates the failing page once, with the failure named in its
+  task.
+- **A page fails twice.** It is reported and left out of the
+  documentation: deleted, its entry marked `remove` in the map, said
+  aloud. Mend the owner that produced the failing text, or the entry
+  it comes from through the planner's rules, and run `/document`
+  again.
+- **The check reports a false hit.** A common word that happens to
+  be a value of the instance file is reported with its line so that
+  it is seen; the rule, not the page, is adjusted.
+- **An input the map names is not on disk.** A file or a part that
+  was renamed or removed is reported by the state script and hashed
+  as missing; the page is regenerated and its writer reports the
+  gap, which the run files as a finding. Restore the name the map
+  expects, or let the planner's next map name the new one.
+- **The run refuses to start.** `/document` runs on `main` only and
+  refuses a repository behind or diverged from its origin; it offers
+  the pull. It never runs on Claude's own judgement.
+- **Your mend did not reach the page.** The page's `inputs-hash`
+  did not change because none of its inputs changed: the mend landed
+  in a file, or in a part of a file, the entry does not name. Read
+  the front-matter again and mend the named owner, or, where the
+  entry names the wrong owner, raise it as a disagreement of the map
+  and the owner so that the planner's rules are mended.
+- **The agents behave as before your change to them.** The agent's
+  definition was loaded at the start of the session. Start a new
+  session and run `/document` again.
 
 ## A worked example
 
-An invented fix, traced through. A page under `docs/use/<job>.md`
-tells you to type an option that the command no longer takes.
+An invented fix, traced through. A how-to of `use/` says that a
+command takes an optional slug, and the slug was dropped from the
+command a round ago.
 
-1. You open the page. Its front-matter lists
-   `.claude/skills/<command>/SKILL.md` among its inputs.
-2. You correct the option in that skill, and record the change as any
-   change of the forge.
-3. You run `/document`. The state script finds the page's hash
-   changed, because one of its inputs changed. It reports that page,
-   and any other page that names the same file or part, as
-   `regenerate`, and every other page as `keep`.
-4. A writer remakes the page from the corrected skill. The index is
-   derived again, and the check prints `N files checked, no failure`.
-5. The page now gives the right option, and no page was touched by
-   hand.
-
-Had you instead changed a rule in the writer's definition, step 3
-would have reported every page as `regenerate`, since the generator
-is hashed with every page's inputs.
+1. You open `docs/use/<job>.md` and read its front-matter. Its
+   `inputs` list names `.claude/skills/<command>/SKILL.md`, whole.
+   That skill is the owner.
+2. You do not touch the page. You correct the skill's wording where
+   it describes the arguments, and you record and release the change
+   as any change of the forge.
+3. You run `/document`. The planner writes the map again; the entry
+   of the page is worded as before, since the skill's description did
+   not change. The state script hashes the entry together with the
+   skill's content: the content changed, the hash differs from the
+   `inputs-hash` on the page, the entry is set to `regenerate`. Every
+   other page whose inputs did not change is `keep`. One writer
+   remakes the one page from the mended skill.
+4. The check passes. The command reports one page regenerated, the
+   rest kept, and the check's result. The page now says what the
+   skill says, and carries the new hash.
+5. Had the skill been silent on why the slug was dropped, the page
+   would say that the reason is not recorded, the writer would
+   report the place, and the run would file it as a low finding in
+   `reviews/`. The reason, where the principal wants one, enters the
+   intent in its own round and reaches the page at the next run.
 
 ## See also
 
-- [Generate the documentation](../use/generate-the-documentation.md):
-  running the command.
-- [Documentation map](../reference/documentation-map.md): the fields
-  of an entry and of a page's front-matter.
-- [Make a change to the forge](how-a-change-is-made.md): the chain a
-  change of the forge goes through.
-- [Glossary](../reference/glossary.md): every term of the forge in one
-  line.
+- [Generate the documentation](../use/generate-the-documentation.md): running the command.
+- [Documentation map](../reference/documentation-map.md): the fields of an entry and of a page's front-matter.
+- [Make a change to the forge](how-a-change-is-made.md): the chain a change of the forge goes through.
+- [Check conformance](../use/check-conformance.md): how a report's findings are settled by walkthrough.
+- [Glossary](../reference/glossary.md): every term of the forge in one line.
 
-Generated on 2026-11-01 for version 6.4 from the files the
-front-matter names; never edited by hand.
+Generated on 2026-11-01 for version 6.8 from the files the front-matter names; never edited by hand.

@@ -1,8 +1,8 @@
 ---
 generated: 2026-11-01
-version: 6.4
+version: 6.8
 made: mirrored
-inputs-hash: 6258e5c61608fbb4
+inputs-hash: c3a72b0e1797952a
 inputs:
   - .claude/skills/check/SKILL.md
   - .claude/skills/check-contract/SKILL.md#Output
@@ -10,88 +10,90 @@ inputs:
 
 # Check conformance
 
-This page shows how to run a check with `/check`, which verifies that a project or the engine follows the conventions of the forge. It is for the principal (whoever's thinking is being forged), who runs the command and settles what it finds. Terms of the forge are explained in the [Glossary](../reference/glossary.md).
+This page shows how to run `/check`, the command that has an isolated, read-only agent verify that a project or the engine follows the forge's conventions. It is for you, the principal (the person whose thinking is forged), when you want to know whether the documents are in the shape the conventions ask for. A check judges conformance only. It never judges substance or the quality of the writing.
 
 ## When to use it
 
-Use it when you want to know whether the documents of a project, or the engine itself, still keep the mechanical rules: the conventions of names, headers, records and files. A check judges conformance only. It does not judge substance or the quality of a document; other commands do that.
+- You want to see which checks exist and which one fits the moment.
+- You want the mechanical conventions of a project verified before you save or release it.
+- You have upgraded the engine and want to see that the project still conforms (see [Upgrade the engine](upgrade-the-engine.md)).
 
-Use it, for example, after an [upgrade of the engine](upgrade-the-engine.md), or at any moment you doubt the state of a project. No check runs on Claude's own judgement: you start it.
+Nothing blocks. A release may go ahead with a finding parked, and no check runs unless you ask for it.
 
 ## The command
 
-To see which checks exist and which fits the moment, type it bare:
+To see the roster of checks and a recommendation for the moment:
 
 ```
 /check
 ```
 
-To run one check, name it and, for a project, its slug:
+To run one check on the engine's own project:
+
+```
+/check light forge
+```
+
+To run one on a project of yours, give the check and the slug:
 
 ```
 /check light my-project
 ```
 
-The engine's own project has the slug `forge`, so its check is `/check light forge`. The engine root is the target of `/check engine`, with no slug.
+To run one on the engine itself, give no slug:
 
-Which of the two targets a check takes, and what a missing or an added slug means to it, is stated by that check. The [Checks](../reference/checks.md) page lists the checks of today.
+```
+/check engine
+```
+
+Which of the two targets a check takes, and what a missing or an added slug means to it, is stated by the check itself. The roster says when each check fits, and [Checks](../reference/checks.md) lists the checks of today.
 
 ## What happens
 
-1. Bare `/check` lists the available checks, each with the line that says when it fits, and Claude recommends one for the moment. The recommendation is advice, never a gate.
-
-   You should now see the roster and a recommended check.
-
-2. With a check named, Claude first remakes the ledger of the target (the file that holds the state of a project, made at read time), so that the check reads a current one.
-
-   You should now see Claude start the check on a freshly made ledger.
-
-3. Claude hands the target to one isolated agent (a subagent that sees nothing of your conversation and only reads). The agent verifies the conformance and returns its report. It writes no file.
-
-   You should now see the agent return its report, which opens with a one-line verdict.
-
-4. If the report has findings, Claude files it in the `reviews/` folder of the target project (`projects/forge` for the engine) under a unique dated name. Each new finding receives its `FND` number there. A report that says the target conforms is filed nowhere.
-
-   You should now see the name under which the report was filed.
-
-5. Claude presents the report: the verdict line, then the findings ranked by severity with their numbers.
-
-   You should now see the ranked findings, compactly.
-
-6. Claude offers every finding marked "immediate fix" (pure bookkeeping) at once, as one step. It applies them on your word and marks them resolved.
-
-   You should now see the immediate fixes applied and marked resolved.
-
-7. Claude ends by offering a [walkthrough](walk-through-a-list.md) of the remaining findings: one finding per message, each closed by the verdict line. What `accept` writes here is the fix, agreed and written once at the end of the round, and the finding is marked resolved. A rule worth changing goes to the intent of the forge. The other verdicts are those of the walkthrough.
-
+1. Bare `/check` lists the checks, each with the line that says when it fits, and recommends one. The recommendation is not a gate.
+   You should now see the roster and one recommended check.
+2. With a check named, Claude first remakes the target's ledger, so that the agent reads a current file. The ledger is the single source of truth for state, made from the documents at the moment it is read.
+   You should now see the ledger rebuilt for the target.
+3. Claude starts the check as a subagent, an isolated agent that sees nothing of your conversation. It receives the target path and nothing else. It reads the target, writes no file and returns a report. You may start several checks on one target at once, and Claude waits for all of them.
+   You should now see the report come back, headed by one line: either "conforms" or the number of findings.
+4. If the report has findings, Claude files it in the `reviews/` folder of the target project (for the engine, that of `projects/forge`) under a unique dated name. It gives each new finding the next free finding number of the project, and a finding that is already known keeps the number it has. A report that says "conforms" is filed nowhere.
+   You should now see the filed report, and the ledger rebuilt so that the findings appear in it.
+5. Claude presents the report as it came: the one-line verdict, then the findings in their ranking with their numbers, compactly.
+   You should now see the ranked findings.
+6. Claude offers every finding marked "immediate fix" as one step. These are findings of pure bookkeeping. On your word it applies them and marks the findings `resolved`.
+   You should now see those findings resolved.
+7. Claude offers a walkthrough of the remaining findings. In a walkthrough Claude takes one item per message and you answer each with a verdict. The method is described in [Walk through a list](walk-through-a-list.md). Here `accept` means that the fix is agreed and is written once at the end of the round, with the finding marked `resolved`. A rule that is worth changing goes to the intent, the document where your positions on the forge are kept. The other verdicts are the walkthrough's.
    You should now see the first remaining finding, with the verdict line.
-
-Several checks on one target may run at once. Claude launches them together and waits for all of them.
 
 ## What you have afterwards
 
-- A report in `reviews/`, only if the check had findings.
-- A number for each new finding.
-- The ledger remade, so that it shows the findings.
-- Fixes applied for the immediate ones, and for those you accepted in the walkthrough.
+- A report in `reviews/` under a unique dated name, if there were findings. It is immutable once filed.
+- A finding number on every new finding, and the ledger rebuilt so that it lists them.
+- Findings resolved, or parked, or under a verdict of the walkthrough.
+- Nothing, when the check conforms: no file is written.
 
 ## If something goes wrong
 
-Nothing blocks. A finding that you park does not stop a release: a release may go ahead with a finding left open.
-
-Which checks a save and a release run is stated by those commands, not by this one.
-
-The sources do not record what the command prints when the ledger cannot be made.
+- A check does not run on Claude's own judgement. If you did not ask for one, none ran.
+- A check cannot repair anything. It writes no file, and fixes happen only on your word, in step 6 or in the walkthrough.
+- A finding that concerns substance or the quality of the writing is not a check's business. Those belong to `/critique` and `/challenge`.
+- A finding does not stop a save or a release. You may park it and go on.
 
 ## A worked example
 
-You have changed a few documents of a project with the placeholder slug `my-project` and want to know whether they keep the conventions.
+You have finished a round on a project with the slug `my-project`, and you want to know whether its documents conform.
 
-1. You type `/check`. Claude lists the checks and recommends `light` as the fit.
-2. You type `/check light my-project`. Claude remakes the ledger of `my-project` and starts the check.
-3. The agent returns a report with three findings. Claude files it in `reviews/` of `my-project` and numbers the three findings.
-4. Claude shows the verdict line and the three findings, most severe first. One is marked "immediate fix". Claude offers it as one step. You accept, and it is applied and marked resolved.
-5. Claude offers a walkthrough of the other two. You accept one and park the other. The parked finding stays open and blocks nothing.
+```
+/check
+```
+
+Claude lists the checks and recommends `light`, since you want a quick pass over the project. You then type:
+
+```
+/check light my-project
+```
+
+Claude rebuilds the ledger of `my-project` and hands the target to the `light` check. The report comes back with three findings, one of them an immediate fix. Claude files it in `projects/my-project/reviews/` under a dated name and numbers the three findings. It shows you the verdict "3 findings" and the ranked list, then offers the immediate fix as one step. You answer `accept`, and that finding is resolved. Claude offers a walkthrough of the other two. You take the first, answer `accept`, and park the second. A release now may proceed with the parked finding standing.
 
 ## See also
 
@@ -100,4 +102,4 @@ You have changed a few documents of a project with the placeholder slug `my-proj
 - [Upgrade the engine](upgrade-the-engine.md): the checks after an upgrade.
 - [Glossary](../reference/glossary.md): every term of the forge in one line.
 
-Generated on 2026-11-01 for version 6.4 from the files the front-matter names; never edited by hand.
+Generated on 2026-11-01 for version 6.8 from the files the front-matter names; never edited by hand.

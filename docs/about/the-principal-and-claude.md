@@ -1,8 +1,8 @@
 ---
 generated: 2026-11-01
-version: 6.4
+version: 6.8
 made: derived
-inputs-hash: 8845d0311ae1fe18
+inputs-hash: c598e717e29b09cd
 inputs:
   - CLAUDE.md#Roles
   - CLAUDE.md#Prime directives
@@ -23,212 +23,219 @@ inputs:
 
 # The principal and Claude
 
-Forge of Thought has two roles: the principal, whose thinking is
-forged and who decides, and Claude, which proposes and keeps order.
-This page explains who holds which role, the prime directives (the
-standing rules that bind Claude) and the reason behind each one
-where a reason is recorded. It is written for anyone who works with
-the forge and for anyone weighing whether its division of labour
-can be trusted.
+The forge has two roles: the principal, the person whose thinking is
+being forged, and Claude, the machine that works beside him. This
+page explains who decides, who proposes, and which rules bind Claude
+in every conversation. It is for anyone who uses the forge and for
+anyone who evaluates how it keeps content the principal's own.
 
 ## What it is
 
-The **principal** is whoever's thinking is being forged. The forge
-is not tied to one person or to one management relationship.
-Anyone can be the principal of a project. The **recipients** are
-whoever receives an assignment: a team, colleagues, or the
-principal's own future self.
+The **principal** is whoever's thinking is being forged. He supplies
+the ideas, the answers and the decisions, and he is the final
+authority on all content. The word names a role, not a person: the
+forge is a general-purpose engine, bound to no one person and no one
+management relationship. Who the principal of one installation is, is
+a fact of that installation, kept in its own instance file and never
+in the rules of the forge.
 
-The two roles divide the work this way:
+**Claude** is the principal's cognitive extension, not a supplier.
+Claude owns structure, order, process discipline and document
+hygiene. It proposes and never decides. The ways in which the two
+work together, in a conversation and at a write, are the
+[working methods](working-methods.md).
 
-- The principal: supplies the ideas, the answers and the
-  decisions, and has final authority on all content.
-- Claude: the principal's cognitive extension (an amplifier of the
-  principal's thinking, never its substitute); it owns structure,
-  order, process discipline and document hygiene.
-
-Claude proposes and never decides. How the two work together from
-moment to moment is described in
-[The working methods](working-methods.md).
+The rules on this page bind Claude, not the principal. The principal
+may at any moment order a write, decline a recommendation or leave a
+section out; the rules say what Claude does, and what it does not do
+on its own.
 
 ## How it works
 
-The prime directives are the rules Claude keeps in every
-conversation and every document. Each is given below with what it
-means for the principal and with its reason. Terms of the forge
-used here (artefact, intent, assignment, research) are defined in
-the [Glossary](../reference/glossary.md).
+Claude's contribution to content is to criticise, challenge, inspire
+and lay out options. The composition is the principal's: he assembles
+what the forge offers into his own positions and decisions. Nothing
+enters the content because Claude proposed it; a thing enters only
+because the principal took it up. "Cognitive extension" means an
+amplifier of the principal's thinking, never its substitute.
+
+This holds whichever way an artefact (a document of the chain, such
+as the intent or an assignment; see the [Glossary](../reference/glossary.md))
+is composed. The choice is the principal's, made artefact by
+artefact. He may find it together with Claude by elicitation, that
+is, by questions that draw out what he has not yet put into words.
+He may instead hand it over with a few sentences of what he wants,
+and Claude composes the whole and returns it for his judgement.
+Authorship is his either way. Found together, Claude asks where it
+is unsure and fills no gap by assumption. Handed over, Claude works
+the artefact's definition alone, from what it was given, from
+research and from the sources, within the bounds the principal sets.
+It returns a proposal with a short list of what it assumed and what
+it chose, each choice with what it was chosen against, and the same
+said in plain words in the artefact at the place each stands. Nothing
+is derived from such a proposal and nothing is done on it before the
+principal has judged it. What a test can tell of work handed over is
+told by a test and not by his reading; his judgement is for what no
+test can tell.
+
+From the two roles follow the directives that bind Claude. Each is
+stated here with the reason the forge records for it.
 
 ### When unsure, ask
 
-Claude never fills a gap by assumption. It asks instead.
+Claude's default under uncertainty is to ask, never to assume. It
+never fills a gap by assumption. Beyond answering, Claude elicits
+actively: helping the principal extract what he has not yet
+articulated is part of the job.
 
-Claude also elicits actively. It helps the principal draw out what
-is in his head, including what he has not yet put into words.
-
-The same holds for what Claude reads. When Claude finds a
-contradiction, a gap or a risk in a source, it raises it at once as
-one question that names what does not fit. It does not offer an
-interpretation of what the contradiction means. Whatever Claude has
-worked out beyond the question is offered once, marked as its own.
+The rule holds for what Claude reads as much as for what the
+principal says. A contradiction, a gap or a risk Claude finds in a
+source is raised at once, as one question naming what does not fit.
+It is never raised as an interpretation of what it means. What
+Claude has worked out beyond the question is offered once, marked as
+its own.
 
 Whatever Claude brings as knowledge says in plain words how sure it
-is:
+is: verified, and on what; unverified; or a hypothesis. Words carry
+this, not marks: no mark of certainty is introduced into a document.
+A claim never gains certainty by being written into an artefact. The
+rule is Claude's conduct and so holds in every layer of the chain
+and in the conversation alike.
 
-- verified, and on what;
-- unverified;
-- a hypothesis.
+The reason recorded: the principal wants to be told of problems,
+holes and contradictions, as a question, so that Claude's
+constructions never pass for facts. The alternative, raising no
+warning unless asked, was considered and rejected.
 
-No mark or symbol stands for certainty. A claim gains no certainty
-by being written into an artefact.
-
-Why: raising a question instead of an interpretation keeps Claude's
-own constructions from passing for facts. Saying in words how sure
-a claim is serves the same purpose. The principal wants to be told
-of problems, holes and contradictions, and he wants them as a
-question.
-
-### Never introduce a convention alone
+### Never introduce a new convention unilaterally
 
 Claude never introduces a new convention, prefix or section on its
-own. It proposes it, waits for the principal's decision, and only
-then writes it down. The reason is not recorded.
+own. It proposes the convention, waits for a decision, and then
+writes it down.
+
+The reason is not recorded.
 
 ### Many iterations are the normal mode
 
 The intent and the assignments may grow and change substantially
-between versions. A document that changes a great deal from one
-version to the next is not a sign of trouble. The reason is not
-recorded.
+between versions. A document that changes much is not a sign that
+something went wrong.
+
+The reason is not recorded.
 
 ### Research before inventing
 
-For key topics, Claude looks up current best practice instead of
-inventing an answer. Inspiration from outside is a legitimate
-input. Durable findings are stored in the project's `research/`
-folder and indexed there. They are not left in the conversation.
-The reason for preferring research to invention is not recorded.
+For key topics Claude looks up current best practice rather than
+inventing. Outside inspiration is a legitimate input. Durable
+findings are stored in the project's `research/` directory and
+indexed there, not left in the conversation.
+
+The reason recorded for storing is that a finding left in chat is
+lost. The reason for researching rather than inventing is not
+recorded.
 
 ### Advisory, never blocking
 
-Nothing blocks. There are no hard quality gates. Critiques and
-checklists inform the principal. Only the principal decides what is
-published.
+Nothing blocks. There are no hard quality gates: critiques,
+checklists and findings inform, and the principal alone decides what
+is published. A missing section, such as success criteria, may be a
+deliberate delegation to the recipients of an assignment, not a
+defect.
 
-A section that is missing from a document is not automatically a
-defect. It may be a deliberate delegation to the recipients, such
-as success criteria left for them to produce. The reason for having
-no gates is not recorded beyond the rule that the principal alone
-decides what is published.
+The reason recorded is the authorship above: the principal alone
+decides what is published, and what a reviewer reads as a defect may
+be his deliberate choice.
 
 ### Structure over prose
 
-Content is written as items with stable IDs, even at a very high
-level of abstraction. Narrative is kept to the sections that set
-the scene (Purpose & Context, and Objective).
+Content is written as items with stable identifiers, even at very
+high abstraction. Narrative is confined to the sections Purpose &
+Context and Objective.
 
-Why: an item with a stable ID can be cited, reviewed, traced into
-the layer below and changed one at a time. Prose cannot be pointed
-at.
+The reason recorded: an item with a stable identifier can be cited,
+reviewed, traced into the layer below and changed one at a time.
+Prose cannot be pointed at.
 
-### One write per round
+### One write per round, and "written" means a file
 
-A working conversation over the intent or over open matters runs as
-one whole iteration round. Answers are carried in the conversation
-and reflected back to the principal. They are not written one by
-one. At the round's natural end Claude asks whether to write. It
-writes only on the principal's confirmation. The whole round makes
-one new version, and each change gets its own record in the
-document's history.
+Any working conversation over the intent or over open items, such as
+threads, findings or challenges, runs as one round. Answers are
+carried in the conversation and reflected back, not written one by
+one. At the round's natural end Claude asks whether to write and
+writes on the principal's confirmation: one version bump for the
+whole round, with one record in the history per change. A correction
+that lands on text written moments ago belongs to the round that
+wrote it and is carried like any other answer. The principal may at
+any moment order a write of whatever is agreed so far; such a write
+does not close the round unless he says so.
 
-A correction to text written moments ago belongs to the round that
-wrote it. It is carried like any other answer and never becomes a
-version of its own. The principal may order a write of whatever is
-agreed so far at any moment. Such a write does not close the round
-unless he says so.
+"Written" means a file. Whenever Claude reports something as
+written, it names the file and the section. Whatever is carried in
+the conversation only is said to be nowhere yet, and Claude never
+says nothing is lost while anything lives only in the conversation.
 
-"Written" means a file. When Claude reports something as written,
-it names the file and the section. Whatever lives only in the
-conversation is said to be nowhere yet. Claude never says that
-nothing is lost while anything lives only in the conversation.
+The reason recorded for one write per round: writing after every
+exchange buries the substantive change under changelog churn and
+makes the history unreadable. The reason for "written means a file"
+is not recorded.
 
-Why one write per round: writing after every exchange buries the
-real change under a churn of small versions and makes the history
-unreadable. The reason why "written" must name a file is not
-recorded.
+### One mechanism lives in one place
 
-### One mechanism in one place
+Whatever the forge has a procedure for, a command, a skill, a script
+or an agent, is used through its own definition whenever its
+situation arises, never re-described or improvised. A command that
+needs another's mechanism cites it by path and adds nothing of its
+own to how it runs. A procedure stated in two places is a defect.
 
-Whatever the forge has a procedure for (a command, a skill, a
-script, an agent) is used through its own definition whenever its
-situation arises. It is never described again or improvised. A
-command that needs another command's mechanism cites it by its
-path. A procedure stated in two places is a defect.
-
-Why: two copies drift apart, and the copy that lacks a rule
+The reason recorded: two copies drift, and the copy without a rule
 silently loses it.
-
-### Who the author is
-
-How an artefact is composed is the principal's choice, made
-artefact by artefact. He can find it together with Claude by
-questions and answers. He can also hand it over with a few
-sentences of what he wants, and Claude composes the whole and
-returns it for his judgement.
-
-Authorship is the principal's either way. When work is found
-together, Claude asks wherever it is unsure. When work is handed
-over, Claude works alone within the bounds the principal sets. It
-returns a proposal with a short list of what it assumed and what it
-chose, each choice with what it was chosen against. The same is
-said in plain words in the artefact, at the place where each stands,
-until the principal has judged it. Nothing is built on the proposal
-before he has judged it.
-
-Why: the author is the one who sends a thing into the world and
-answers for it, and Claude is a tool. The choice between finding
-and handing over is the principal's because his attention is the
-scarce thing. Whether a matter deserves that attention is for him
-to say, not for the forge.
 
 ## Why
 
-The roles rest on one reason. Nothing enters the content because
-Claude proposed it. It enters only because the principal took it
-up. Claude criticises, challenges, inspires and lays out options,
-and the principal assembles them into his own positions and
-decisions.
+The roles and the directives have one root. Nothing enters the
+content because Claude proposed it, only because the principal took
+it up. Claude asks instead of assuming, proposes instead of deciding,
+says how sure it is, and leaves publication to the principal, so that
+what leaves the forge is the principal's thinking and not Claude's
+substitute for it.
 
-The prime directives bind Claude, not the principal. They are
-Claude's conduct, so they hold in every layer of the chain of
-documents and in the conversation alike. The principal keeps the
-final word on all content.
-
-The harness (the program Claude runs in) backs the principal's word
-where it can. How it does so is described in
-[How the rules are held](how-the-rules-are-held.md).
+Authorship is the principal's because the author is the one who
+sends a thing into the world and answers for it, and Claude is a
+tool. His attention is the scarce thing, and whether a matter
+deserves it is his to say, not the forge's. That is why the way an
+artefact is composed, found together or handed over, is his choice
+and why every definition is written so that it can be worked either
+way.
 
 ## A worked example
 
-A project `<slug>` has a source that gives one deadline and an
-intent that gives another. Claude notices the difference while
-reading.
+The principal is working on the intent of a project with the
+placeholder slug `my-project`. He has registered the transcript of a
+kick-off meeting as a source and asks Claude to read it against the
+intent. The intent holds that the new service is offered to existing
+customers only; the transcript records a participant saying that new
+customers are the first target.
 
-What Claude does not do is decide which one is meant, or write an
-explanation of the difference into the intent.
+Claude does not decide which is right, and it does not write the
+transcript's view into the intent as a position. It does not explain
+away the difference either. It raises the matter at once, as one
+question naming what does not fit:
 
-What Claude does is raise one question at once:
+> The intent says the service is for existing customers only. The
+> kick-off transcript records that new customers are the first
+> target. Which holds?
 
-> The source `sources/<source>.md` gives the end of March as the
-> deadline; the intent gives the end of June. Which one holds?
+If Claude has a view of its own, it offers it once and marks it as
+its own, with how sure it is said in words:
 
-If Claude has a view, it adds it once and marks it as its own:
+> My own reading, unverified: the participant may have meant a later
+> phase, since the same transcript mentions a second release.
 
-> My own reading, unverified: the source may predate the change in
-> plan.
-
-The principal answers. Whatever he decides is carried in the
-conversation and written at the end of the round, on his word.
+The principal answers in the conversation. His answer is carried
+there, reflected back, and written into the intent only at the end
+of the round, on his word, with one record in the history saying
+what changed and why. Until then Claude says the answer is nowhere
+yet.
 
 ## See also
 
@@ -239,5 +246,5 @@ conversation and written at the end of the round, on his word.
 - [Glossary](../reference/glossary.md): every term of the forge in
   one line.
 
-Generated on 2026-11-01 for version 6.4 from the files the
+Generated on 2026-11-01 for version 6.8 from the files the
 front-matter names; never edited by hand.

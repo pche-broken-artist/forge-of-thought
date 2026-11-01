@@ -589,17 +589,18 @@ existing project in (`/import-project` is its door), `forge-branch.py`
 switches or creates a branch — merging is git's, by hand or by merge
 request: the integrator merges on his own clone with git itself,
 outside the forge's scripts, and what git leaves standing is settled
-in the step of a conflict below. A conflict `forge-save` meets is left standing, not aborted,
-and settled in the step of a conflict: Claude lays both sides out as a
-walkthrough, the principal decides, Claude writes the wording, and the
-finishing commands of git run on the hook's ask; what the forge promises
-two people on one project is POS.1750's, and the record files merge as
-text, two tails kept both. The way into git for a project is `git -C
-projects/<slug> init -b main`, then a remote if wanted. The scripts
-carry no URL and no identity. Which release receives the tag `v<major>`
-is `/release`'s to say (`.claude/skills/release/SKILL.md`); any other
-tag is the principal's request, with a free name. Immutability of
-documents is a process rule, not a git mechanism.
+in the step of a conflict below. A conflict `forge-save` meets is
+left standing, not aborted, and settled in the step of a conflict:
+Claude lays both sides out as a walkthrough, the principal decides,
+Claude writes the wording, and the finishing commands of git run on
+the hook's ask; what the forge promises two people on one project is
+POS.1750's, and the record files merge as text, two tails kept both.
+The way into git for a project is `git -C projects/<slug> init -b
+main`, then a remote if wanted. The scripts carry no URL and no
+identity. Which release receives the tag `v<major>` is `/release`'s
+to say (`.claude/skills/release/SKILL.md`); any other tag is the
+principal's request, with a free name. Immutability of documents is a
+process rule, not a git mechanism.
 
 **Portability.** The forge runs beyond Windows; `scripts/` is the
 only platform-bound layer and is written to run unchanged on Linux

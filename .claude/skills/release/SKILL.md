@@ -18,8 +18,9 @@ comes first.
 
 `--auto` runs the whole release through (POS.1100): the checks and
 their agents, the documentation, the renders and the save with the
-drafted message, no step put to the principal, the model and the size
-of every run of agents said as information. It stops only where a
+drafted message, no step put to the principal but the one question of
+the documentation (step 4), the model and the size of every run of
+agents said as information. It stops only where a
 thing is serious, as each step below says, and always at the tag of
 a major. Nothing is parked on the principal's behalf: what `--auto`
 cannot settle stays open, and the release waits for his word.
@@ -73,9 +74,10 @@ cannot settle stays open, and the release waits for his word.
    the release carries current pages and the README reads the
    current index; on his no, or silence, run nothing. A release by
    hand never regenerates the documentation on its own (POS.1450);
-   with `--auto` the documentation runs as a part of the release,
-   the models and the number of pages said before the writers are
-   launched.
+   with `--auto` the release asks once, before anything runs, whether
+   the documentation runs, the default yes, and on yes runs it as a
+   part of the release, the models and the number of pages said
+   before the writers are launched.
 5. Only once the findings are settled and the documentation stands,
    regenerate the repository's README and release notes from their
    recipes — unconditionally, no staleness test, always through the

@@ -1,6 +1,6 @@
 ---
 generated: 2026-11-01
-version: 6.4
+version: 6.8
 made: derived
 inputs:
   - projects/forge/docs-map.md
@@ -12,7 +12,7 @@ This is the documentation of Forge of Thought: pages of one topic
 each, generated from the engine as it stands, for three readers.
 Every page stands on its own; start where your question is.
 
-Generated on 2026-11-01 for Forge of Thought at version 6.4
+Generated on 2026-11-01 for Forge of Thought at version 6.8
 (the version of the engine's intent; a release carries the same
 number).
 
@@ -53,7 +53,7 @@ number).
 - [Walk through a list](use/walk-through-a-list.md): How is a list of findings, challenges or threads worked one item at a time?
 - [Save your work](use/save-your-work.md): What does `/save` check, ask and commit?
 - [Settle a conflict](use/settle-a-conflict.md): What do you do when `/save` stops on a conflict with the remote, or a merge leaves one?
-- [Release a version](use/release-a-version.md): What does `/release` run, render and tag, in what order?
+- [Release a version](use/release-a-version.md): What does `/release` run, render and tag, in what order, and what does `--auto` decide on its own?
 - [Pull from the remote](use/pull-from-the-remote.md): How does `/pull` look at the remote, and what does it pull and refuse?
 - [Upgrade the engine](use/upgrade-the-engine.md): How do you take a new version of the engine and bring your projects to its conventions?
 - [Migrate a project](use/migrate-a-project.md): How do you bring a project to the shape of files a new release expects, with `/migrate`?
@@ -126,7 +126,7 @@ number).
 - [Versioning and front-matter](reference/versioning-and-front-matter.md): The version scheme and the header fields of an artefact, a brief, a recipe, a work specification and an index, exactly.
 - [History companion](reference/history-companion.md): The shape of `<file>.history.md`, record by record, exactly.
 - [Requirement style](reference/requirement-style.md): The rule set of the items of an assignment, and the stricter one of a BRD, exactly.
-- [Document kinds](reference/document-kinds.md): The table of document kinds, verbatim, with the companion, library and wrapping rules.
+- [Document kinds](reference/document-kinds.md): The table of document kinds, verbatim, with the companion, library and wrapping rules and the files that have no kind.
 - [Ledger](reference/ledger.md): The ledger's header, tables, columns, state words and reports, exactly, with where each column is read from.
 - [Render provenance](reference/render-provenance.md): The provenance block every render opens with, the definition of stale, the published companion, and where the files land.
 - [Research note and bundle](reference/research-bundle.md): The places, the front-matter and the sections of a research note, of a research bundle and of its plan, exactly.

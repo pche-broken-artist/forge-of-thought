@@ -1,8 +1,8 @@
 ---
 generated: 2026-11-01
-version: 6.4
+version: 6.8
 made: mirrored
-inputs-hash: 44e8034c026485c1
+inputs-hash: 7d5181fe3f02c9da
 inputs:
   - .claude/skills/research/SKILL.md#Target
   - templates/research-plan.md
@@ -12,141 +12,178 @@ inputs:
 
 # Research note and bundle
 
-This page lists the places, the front-matter and the sections of a research note, of a research bundle and of its plan, exactly as the forge shapes them. It is for the user who reads a finished research and for the extender who checks or changes its shape. The principal is whoever's thinking is being forged.
+This page states where a research lands and the exact shape of what
+it leaves: the bundle, its plan, its notes and its entry in the
+research index. It is for the reader who looks up a field or a
+section, and for the extender who changes one. The principal is the
+person whose thinking is being forged.
 
 ## Where a research lands
 
-A research lands in the `research/` directory of the project, in one of two forms.
+| Research | Lands as |
+|---|---|
+| Several cards, or more than one engine | a bundle, the directory `research/YYYY-MM-DD-<topic>/` |
+| One card on one engine | a single note, `research/YYYY-MM-DD-<topic>.md` |
 
-| Form | Path | Holds |
-|---|---|---|
-| Bundle | `research/YYYY-MM-DD-<topic>/` | `00-plan.md` at its head, and one note per card per engine, `<card>.<engine>.md` |
-| Single note | `research/YYYY-MM-DD-<topic>.md` | one card on one engine, in the shape of a note |
+A bundle holds:
 
-- A bundle has one entry in `research/00-INDEX.md`, named by its directory.
-- A research of one card on one engine stays a single note.
+- `00-plan.md` at its head: the plan as confirmed, then the synthesis.
+- One note per card per engine, named `<card>.<engine>.md`.
+
+Rules that hold for both:
+
+- The bundle has one entry in `research/00-INDEX.md`.
 - A bundle is immutable from the filing of the synthesis.
 - A note is immutable from its filing.
 - Everything is written in English.
 
-## The working files of a run
+The command that makes them is described in
+[Research a topic](../use/research-a-topic.md).
 
-The files of a run are made under `tmp/research/<run>/`. They are no source of truth. The folder stays as it is after the run, for inspection.
-
-## The plan (`00-plan.md`)
+## The plan, `00-plan.md`
 
 ### Front-matter
 
-| Key | Value |
+| Key | Holds |
 |---|---|
-| `date` | the date, `YYYY-MM-DD` |
-| `project` | the project slug |
+| `date` | the date of the research |
+| `project` | the project's slug |
 | `topic` | the topic in a few words |
-| `status` | `draft` from the plan's confirmation, `immutable` from the filing of the synthesis |
+| `status` | `draft` from the plan's confirmation, then `immutable` from the filing of the synthesis |
 | `engines` | the engines the plan went to |
-| `derived_from` | the principal's word and its date, the notes and sources the plan names, the second engine's review of the draft plan |
+| `derived_from` | the principal's word, the notes and sources the plan names, and the second engine's review of the draft plan |
 
 ### Sections, in order
 
-1. **Summary.** Written at the synthesis, placed first. It is empty until then. The index entry's "Answer in short" is drawn from it.
-2. **Plan (confirmed `YYYY-MM-DD`).** The plan word for word as confirmed, in these subsections:
-   - **Purpose:** what the research serves, and the notes and sources already known.
-   - **Perspectives:** the standpoints, one line each, with the cards that serve them, or "no card".
-   - **Assumptions:** what the plan takes for granted about where the answer lives, then the premortem.
-   - **Left out:** the fields and questions deliberately not pursued.
-   - **Cards:** one subsection per card.
-   - **Agents:** how many, the rule that fixed the count, the engines, and whether a second round is allowed.
-   - **The second engine's review of the draft:** what it said the draft missed, and what the principal took in.
-3. **Deviations from the plan.** Every difference between the plan and the run, with its reason. "None" is a legitimate entry.
-4. **Synthesis (`YYYY-MM-DD`).** In these subsections:
-   - **Completeness, card by card:** per card, answered or not found, the stop rule met or why searching ended, and what the disconfirming query found.
-   - **Answers side by side:** the engines' answers beside each other, with the differences spelled out.
-   - **Unexpected, gathered:** the Unexpected sections of every note.
-   - **Not found, gathered:** what every note reported not finding.
-   - **Claude's view:** last and apart, marked as Claude's own.
-5. **Notes.** The files of the bundle, one line each, with the packet folder under `tmp/research/<run>/` each was made from.
+1. Summary
+2. Plan (confirmed on a date), with these subsections in order:
+   - Purpose
+   - Perspectives
+   - Assumptions
+   - Left out
+   - Cards
+   - Agents
+   - The second engine's review of the draft
+3. Deviations from the plan
+4. Synthesis (with a date), with these subsections in order:
+   - Completeness, card by card
+   - Answers side by side
+   - Unexpected, gathered
+   - Not found, gathered
+   - Claude's view
+5. Notes
 
-### The six fields of a card
+| Section | Holds |
+|---|---|
+| Summary | what the research says, where the engines differ, what it suggests for the project, what was unexpected; written at the synthesis and placed first |
+| Purpose | what the research serves, and the notes and sources already known that the plan builds on |
+| Perspectives | the standpoints the topic is treated from, one line each, with the cards that serve it, or "no card" |
+| Assumptions | what the plan takes for granted about where the answer lives, and the premortem |
+| Left out | the fields and questions considered and deliberately not pursued |
+| Cards | the cards, numbered |
+| Agents | how many agents and the rule that fixed the count, the engines, whether a second round is allowed and for what |
+| The second engine's review of the draft | what the second engine said the draft missed or assumed, and what of it the principal took into the plan |
+| Deviations from the plan | every difference between the plan as confirmed and the run, with its reason; "None" is a legitimate entry |
+| Completeness, card by card | per card: answered or not found, the stop rule met or why searching ended, what the disconfirming query found |
+| Answers side by side | per card, the engines' answers beside each other, the differences spelled out |
+| Unexpected, gathered | the Unexpected sections of every note, sorted into finds that reconfigured a question and finds that add a source to a point already made |
+| Not found, gathered | what every note reported not finding |
+| Claude's view | Claude's own reading, marked as its own, last and apart |
+| Notes | the files of the bundle, one line each, with the packet folder it was made from |
 
-A card is headed `Card N: <the question in a few words>`.
+### A card
 
-| Field | Content |
+A card has six fields:
+
+| Field | Holds |
 |---|---|
 | Question | what is asked, about what, in what context, against what alternative |
-| Why it matters | the decision or artefact it serves, one sentence |
+| Why it matters | the decision or artefact it serves, in one sentence |
 | What would answer it | one kind of evidence, and the kind of source it lives in |
 | Where to look | source kinds, more than one route, and the known items that must turn up |
 | Disconfirming query | one search written to find the opposite of what is expected, and what is expected |
-| Stop rule | nothing new from a differently-worded query, and every perspective of the card has a primary source; the opening budget |
+| Stop rule | nothing new from a differently-worded query, every perspective of the card has a primary source, and the opening budget |
 
-## The note (`<card>.<engine>.md`)
+## The note, `<card>.<engine>.md`
 
 ### Front-matter
 
-| Key | Value |
+| Key | Holds |
 |---|---|
-| `date` | the date, `YYYY-MM-DD` |
-| `project` | the project slug |
+| `date` | the date of the note |
+| `project` | the project's slug |
 | `topic` | the card's question in a few words |
 | `status` | `immutable` |
-| `engine` | the engine that made the note (`claude`, `antigravity`, and so on); the forge names engines, never models |
-| `model` | as the engine's envelope reports it, or "engine default" |
+| `engine` | the engine that made the note, such as `claude` or `antigravity` |
+| `model` | the model as the engine's envelope reports it, or "engine default" |
 | `usage` | the envelope's usage, compact; `—` for a session agent |
 | `run` | the packet folder the note was made from, `tmp/research/<run>/<card>` |
-| `derived_from` | the plan and the card, the known notes the card named, the web sources |
+| `derived_from` | the plan and its card number, the known notes the card named, and the web sources |
 
 A single note of one card on one engine uses the same front-matter.
 
 ### Sections, in order
 
-1. **In short.** The answer in a few sentences: what was found, how sure it is, what the disconfirming query did to it, the one unexpected thing if there is one. Written last, placed first.
-2. **Question.** The card verbatim, then one paragraph on the baseline the note must beat.
-3. **Key findings.** Numbered F1, F2 and on. Each is a statement in bold, then its epistemic status in brackets, then the substance with sources cited inline as [n].
-4. **Unexpected.** Leads, never conclusions, one paragraph each with its source [n]. "None" is a legitimate entry.
-5. **Not found.** What was looked for and not found, and where it was looked.
-6. **Options.** The distinct ways the project could act, each with trade-offs. Left out when the card asked for a fact, not a choice.
-7. **Relevance to this project.** The recommendation, what it rests on, what it is chosen against, ending with "Consult when:".
-8. **Sources.** Numbered as cited.
-9. **Opened and not used.** One line per source opened and left out, with the reason.
-10. **Search record.** The queries in order, the pages opened, what the disconfirming query found, and which part of the stop rule or the opening budget ended the run.
-
-### Epistemic status words
-
-A finding carries one of these words in brackets, with the kind of evidence named (controlled study, audit, standard, vendor report, practitioner claim).
-
-- consensus
-- emerging
-- contested
-- single source
-- vendor claim
-
-### The fields of a source
-
-Each entry of Sources has these fields.
-
-| Field | Content |
+| Section | Holds |
 |---|---|
-| Title | the title of the source |
-| Author or organisation | who published it |
-| Date | the date and how it was dated: byline, structured data, archive snapshot or undated |
+| In short | the answer to the card in a few sentences: what was found, how sure it is, what the disconfirming query did to it |
+| Question | the card verbatim, then one paragraph on the baseline the note must beat |
+| Key findings | findings numbered F1, F2 and so on |
+| Unexpected | leads, never conclusions; "None" is a legitimate entry |
+| Not found | what was looked for and not found, and where it was looked |
+| Options | the distinct ways the project could act, each with its trade-offs; left out when the card asked for a fact |
+| Relevance to this project | the recommendation and what it rests on, ending with "Consult when:" |
+| Sources | the sources, numbered as cited |
+| Opened and not used | one line per source opened and left out, with the reason |
+| Search record | the queries in order, the pages opened, what the disconfirming query found, and the reason the run ended |
+
+### A finding
+
+A finding is a statement in bold, followed by its epistemic status in
+brackets and the kind of evidence named, then the substance with its
+sources cited inline as [n].
+
+The epistemic status is one of:
+
+- `consensus`
+- `emerging`
+- `contested`
+- `single source`
+- `vendor claim`
+
+The kind of evidence is named beside it, such as controlled study,
+audit, standard, vendor report or practitioner claim.
+
+### A source
+
+Each entry of Sources carries:
+
+| Field | Values |
+|---|---|
+| Title, author or organisation | as published |
+| Date | and how it was dated: `byline`, `structured data`, `archive snapshot` or `undated` |
 | URL | the address |
-| Kind | primary, secondary or tertiary |
-| How read | in full; partially, with which part; summarised fetch; or not opened, with the reason |
-| Original or copy | and of what it is a copy |
+| Kind | `primary`, `secondary` or `tertiary` |
+| How read | `in full`, `partially` with which part, `summarised fetch`, or `not opened` with why |
+| Original or copy | and of what |
 
-A source that could not be opened is listed as not opened and is never cited for content.
+## The entry in the research index
 
-## The research entry of the resource index
+The research entry of `research/00-INDEX.md` is one block with a
+heading and three fields. The heading is the bundle's directory name,
+or the file name for a single note.
 
-`research/00-INDEX.md` has one entry per bundle or single note. Its heading is the bundle's directory name, or the note's file name `YYYY-MM-DD-<topic>.md`. The entry has three fields.
-
-| Field | Content |
+| Field | Holds |
 |---|---|
-| Question | what the note set out to answer |
+| Question | what the research set out to answer |
 | Answer in short | two or three lines of the conclusion |
-| Consult when | the situations in which the note is worth opening |
+| Consult when | the situations in which the research is worth opening |
 
-For a bundle the entry is written from the synthesis, and it waits for the synthesis.
+## The working files of a run
+
+The working files of a run live under `tmp/research/<run>/`: packets,
+plan review, held notes and citation reports. They are no source of
+truth, and nothing reads them as a document.
 
 ## See also
 
@@ -154,4 +191,4 @@ For a bundle the entry is written from the synthesis, and it waits for the synth
 - [How a research is made](../about/the-research.md): why a plan comes first and what the sections are for.
 - [Glossary](glossary.md): every term of the forge in one line.
 
-Generated on 2026-11-01 for version 6.4 from the files the front-matter names; never edited by hand.
+Generated on 2026-11-01 for version 6.8 from the files the front-matter names; never edited by hand.

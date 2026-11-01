@@ -7,7 +7,7 @@ inputs:
   - projects/forge/10-intent.history.md
   - projects/forge/10-intent.history.archive.md
   - projects/forge/40-solution-design.history.md
-  - projects/forge/10-intent.md v6.4
+  - projects/forge/10-intent.md v6.8
   - projects/forge/decisions.md
   - RELEASE-NOTES.md
 ---
@@ -18,6 +18,119 @@ One section per release of the engine, newest first, for the user who
 takes upgrades through `forge-pull`; Action required comes first in
 every section; the fine-grained log with the reasons lives in
 `projects/forge/10-intent.history.md`.
+
+## 6.8 - 2026-11-01
+
+### Changed
+- `/release --auto` asks once, before anything runs, whether the
+  documentation runs, the default yes; it is the one step put to the
+  principal under `--auto`, and a release by hand offers `/document`
+  as before, since the documentation is the dearest step of a release
+  and the README reads its index (POS.1100, POS.1450, FND.3530, the
+  release skill). For you: an automatic release still runs through,
+  but you say at its start whether the documentation is regenerated,
+  and a release by hand never regenerates it on its own judgement.
+
+### Fixed
+- The documentation planner writes the map in parts, the head and the
+  first section first and every further section appended to it,
+  after the map of the engine, some 2 500 lines, exceeded what one
+  answer may carry and the write was cut off with nothing written
+  (the operating layer). For you: `/document` on a large project no
+  longer loses its map to a cut-off write.
+
+## 6.7 - 2026-11-01
+
+### Added
+- `/release --auto` runs the whole release through and stops only at
+  a serious thing, never past the tag of a major: the checks and
+  their agents without asking, the renders taken as they came, the
+  save with the drafted message (POS.1100, THR.0770, the release
+  skill, the Commands row). For you: a release becomes one command
+  that pauses only where something serious is found or a major is
+  tagged.
+
+### Changed
+- Every release runs in one order, the documentation before the
+  README and the release notes, so that the README reads the index
+  just made, and the save at its end runs without a second light
+  check, the release's own checks being the condition (POS.1100, the
+  release skill). For you: a release no longer repeats the light
+  check at its save, and the README never lags behind the
+  documentation.
+- `docs-state.py` hashes the generator with its whitespace
+  normalised, so that a re-wrap of the writer's definition or of the
+  documentation contract regenerates no page (SOL.0460). For you: a
+  change of line breaks alone in the generator no longer remakes
+  every page at the next `/document`.
+
+### Fixed
+- `forge-check.py` no longer raises a recipe's integer version as a
+  fault, since a recipe takes an integer on the principal's word and
+  nothing guards it (POS.0710, FND.3510). For you: a recipe you have
+  marked with an integer passes the check.
+- `templates/recipe.md` says how an `output:` path is read: relative
+  to the project root, a leading slash meaning the engine root, the
+  form the engine's own recipes use (FND.3550). For you: a recipe
+  that sends its render elsewhere than `renders/` writes its path as
+  the template now shows.
+
+## 6.6 - 2026-11-01
+
+### Changed
+- `/forge <state>` on a library stops: a library has no chain and no
+  artefact to iterate (the forge skill, the documentation run of
+  2026-11-01). For you: a target state asked of a library is refused
+  with that word, not worked.
+- The tag before a migration is taken through `/save --tag` (the
+  migrate skill, the documentation run of 2026-11-01). For you:
+  before `/migrate`, mark the state with `/save --tag <name>` rather
+  than with a tag of your own.
+- Nothing has run on macOS: portability there is a writing rule alone
+  until a run says otherwise (POS.0830). For you: on macOS the
+  scripts are written to run unchanged, but nobody has yet run them.
+- How an engine's tool is installed and signed in is the tool's own
+  documentation's (POS.1880). For you: for another engine's CLI, read
+  its own documentation; the forge does not describe it.
+
+### Fixed
+- The documentation map brought to its owners' wording: a version
+  given twice, the start page's evidence, the install page's
+  addresses, the placeholder ID of the state map, the inputs of nine
+  entries; the planner's task names the open map findings; CLAUDE.md
+  says what Claude Code is, which three files have no kind and that
+  the integrator merges on his own clone (FND.3040 to FND.3070,
+  FND.3110 to FND.3170, FND.3290, FND.3320, FND.3460, FND.3490, the
+  documentation run of 2026-11-01). For you: the pages take the
+  corrected wording at the next `/document`.
+
+## 6.5 - 2026-11-01
+
+### Changed
+- The pages of the documentation are written in the project's
+  language, as its artefacts are, and the README is no longer held to
+  English; a page is never mended by hand, since the next run writes
+  it again; what a run cannot place is filed as a check's report in
+  `reviews/` and settled by walkthrough (POS.1450, SOL.0460, prime
+  directive 6, the documentation contract, the document skill). For
+  you: a project in another language gets its documentation in that
+  language, and the leftovers of a `/document` run reach you as a
+  report, not as a list in the conversation.
+- A recipe stays 0.x unless the principal names an integer, from
+  which the count goes on; Claude never proposes one, and the integer
+  is the principal's own mark, not an approval (POS.0810, Versioning
+  & status, the Document kinds table). For you: you may give a recipe
+  an integer version when you want to mark it; the forge neither asks
+  for it nor reads it as a sign-off.
+- Three rules now carry their reason: a source and a research note
+  are immutable because each is a record of a moment the forge did
+  not make, a document in a new version being a further file of a
+  bundle of one origin (POS.1040); a reviewer runs on the principal's
+  word alone because of tokens, and the word may be given once in a
+  command's definition (POS.0400); engines and tiers are named, never
+  versions, because a name means the newest of its kind and nothing
+  changes when a version arrives (POS.1880). For you: nothing changes
+  in how you work; the documentation can say why.
 
 ## 6.4 - 2026-11-01
 

@@ -613,3 +613,32 @@ verdict on the whole ID, the rest a `changed` record of the history
   note downstream would record nothing a reader does not find there.
 - **Verdict:** FND.2960 rejected
 - **Date:** 2026-10-25
+
+## DEC.0360 — The fixture deleted; the skip clause of POS.1590 not worth a round
+- **Decision:** FND.3520 (the engine check at the release of 6.8) is
+  rejected: POS.1590 says a bare `/save` skips a fixture project,
+  the core never did and the solution design (SOL.0830) says nothing
+  does; the fixture project is deleted by the principal on
+  2026-11-01, and the clause of POS.1590 stands as it is, not raised
+  again.
+- **Reason:** The fixture was the test bed of the cutover, used once
+  (R6.03) and by nothing since; its clause carries nothing, and a
+  round of the intent for a dead sentence was weighed against leaving
+  it and found not worth it. The principal's word of 2026-11-01.
+- **Verdict:** FND.3520 rejected
+- **Date:** 2026-11-01
+
+## DEC.0370 — The critique report of another engine named outside the roster accepted, never raised again
+- **Decision:** FND.3560 (the project check at the release of 6.8) is
+  rejected: `reviews/2026-10-23-critique-external-gemini-2153-337a.md`,
+  with its lens `external (Gemini)` and its reviewer outside the
+  forge, stands as it is. How a report from another engine is named
+  is written into its owner when THR.0740 builds the mechanism.
+- **Reason:** The report is a one-off critique by another engine,
+  filed by hand before THR.0740 had a mechanism; it is immutable and
+  cited by the ledger (FND.2530 to FND.2620), by `00-brief-brd.md`
+  and by the clarity critique of 2026-10-25, so a rename would break
+  the record for a cosmetic gain, as DEC.0140 ruled for four files
+  before it. The principal's word of 2026-11-01.
+- **Verdict:** FND.3560 rejected
+- **Date:** 2026-11-01

@@ -1,10 +1,11 @@
 ---
 generated: 2026-11-01
-version: 6.4
+version: 6.8
 made: derived
-inputs-hash: ccd0f1eb67fca1ec
+inputs-hash: 43ea09b9072b17f3
 inputs:
   - CLAUDE.md#Prime directives
+  - .claude/skills/docs-contract/SKILL.md#What must never reach a page or the map
   - projects/forge/10-intent.md#POS.0060
   - projects/forge/10-intent.md#POS.1450
 ---
@@ -12,110 +13,136 @@ inputs:
 # Languages
 
 The language rule of the forge says which language each kind of
-document in a project is written in. The forge sets one output
-language per project and keeps everything else in English. This page
-is for the user who starts a project in a language other than English,
-and for the evaluator who wants to know why a project holds documents
-in more than one language.
+document carries: the documents of a project that reach its
+recipients are written in one language, the project's own, and
+everything the forge keeps for its own reading is English. This page
+is for the user who wants to know what language a file will be in
+before it is written, and for the evaluator who wants to understand
+why a project may hold two languages side by side without
+contradiction.
 
 ## What it is
 
-The forge as a system dictates one thing about language: a project
-has one output language. The artefacts of the chain are written in
-it. An artefact is a versioned document of the chain, such as the
-intent, an assignment or any later layer. Every other document either
-follows the artefacts or is fixed in English.
+The forge dictates one thing about language: a project has one
+output language. That language is declared in the project file
+(`project.md`, its `language` field). Where the project file declares
+none, the output language is English.
 
-The principal is the person whose thinking is forged in the project.
-He talks with Claude in a language of his own. That conversation
-language is per-installation configuration, not a rule of the system.
+Every document of a project falls on one of two sides of this rule.
+
+- The artefacts of the chain (the intent, the assignment and every
+  later layer) are written in the project's language.
+- The pages of the documentation are written in the project's
+  language, as its artefacts are. The page you are reading follows
+  the same rule; what the pages are and how they are made is said on
+  [The documentation](the-documentation.md).
+- The records (the histories and the decisions), the state (the
+  ledger, that is the one file that states where a project stands,
+  and the project's threads), the research and the recipes are
+  always English, whatever the project's language.
+- The notation is English throughout: the ID prefixes, the word
+  `shall`, the status words and the front-matter keys.
+
+Three cases complete the rule.
+
+- The briefs (`00-brief*.md`) are the one exception among the
+  artefacts: a brief is kept in whatever language it was written in.
+- A work specification follows the artefacts and is in the project's
+  language; the work file beside it is in the language the
+  specification's `## Making` section says.
+- A render may be in any language, or languages, its recipe
+  declares, the first primary and the rest its translations, one
+  render per language; how a recipe declares them is said on
+  [Renders and recipes](renders-and-recipes.md).
+
+The README is English only. A README in another language is a
+translation, and a translation is a render.
 
 ## How it works
 
-The output language is declared in the project file (`project.md`)
-under the key `language`, as an ISO 639-1 code. Where the key is
-absent, the output language is English.
+The project file is the one source of the output language. Claude
+reads the `language` field there and writes every artefact and every
+page of the documentation in that language, English when the field is
+absent. Nothing else in the project says what language a document is
+in: a document's language follows from its kind and from that one
+field.
 
-Each kind of document then carries its language as follows:
+The conversation is a different matter. The language Claude speaks
+with the principal (the person whose thinking is being forged) is not
+a rule of the system but a setting of the instance, that is of one
+installation of the forge. It is set in `CLAUDE.local.md` at the
+engine root and read from there by every command. How it is set is
+said on [Set up the forge](../start/setup.md). It is never written
+into the operating layer, and it is never presented outward: the
+README and every other outward-facing render state only the
+output-language rule and say nothing of the language the conversation
+runs in.
 
-- The artefacts of the chain (intent, assignment, later layers): the
-  project's output language.
-- The briefs (`00-brief*.md`): whatever language they are written in.
-  They are the one exception among the artefacts.
-- A work specification: the language of the artefacts.
-- The file of a work product: the language its `## Making` section
-  says.
-- Records: always English.
-- State: always English.
-- Research: always English.
-- Recipes: always English.
-- A render: any language, or languages, its recipe declares. The first
-  is the primary, and the rest are its translations, one render per
-  language. How a recipe declares several languages is explained in
-  [Renders and recipes](renders-and-recipes.md).
-- The README of a project: English only. A translation of the README
-  is a render.
+So a conversation may run in one language while the artefacts it
+produces are written in another. The forge translates on write: what
+is agreed in the conversation is written into each document in the
+language that document carries. A position found in the conversation
+lands in the intent in the project's language, and the record of how
+it changed lands in the history in English, in the same write.
 
-English is also the notation throughout, whatever the project's
-language. This covers:
-
-- ID prefixes.
-- The words `shall` and `shall not` in requirements.
-- Status words.
-- Front-matter keys.
-
-Claude translates on write. The conversation may run in the
-principal's language, and what lands in a file is written in the
-language that file's kind carries.
-
-The conversation language is set per installation, in the file of
-instance facts `CLAUDE.local.md`, and every command reads it from
-there. Where it is set on a new machine is shown in
-[Set up the forge](../start/setup.md). It is never written into the
-operating layer of the forge. It never appears in anything presented
-outward. The README and the other outward-facing renders state only
-the output-language rule.
-
-For any term used here, see the [Glossary](../reference/glossary.md).
+The pages of the documentation take the project's language from the
+same project file, and their words keep the spelling the project's
+documents use. The README stays English even where the pages are not.
 
 ## Why
 
-Records, state, research and recipes are always English for two
-reasons:
+The reason the records, the state, the research and the recipes are
+always English is recorded: they are read by Claude, by the reviewers
+(the isolated agents that critique, challenge and check a project)
+and by the checks, and they are never handed to the recipients. One
+operating language is what lets Claude and the reviewers read every
+project the same way, whatever language the project itself is written
+in.
 
-- They are read by Claude, the reviewers and the checks, and never
-  handed to the recipients of the project.
-- One operating language lets those readers read every project the
-  same way.
+Why the artefacts and the pages carry the project's language rather
+than a fixed one is not recorded beyond the rule itself: the forge
+dictates one output language per project, and the project file
+declares it.
 
-The reason the briefs are exempt is not recorded. The reason a work
-product's file takes the language its `## Making` section says is not
-recorded. The reason the README is English only is not recorded. The
-reason the conversation language is never presented outward is not
-recorded beyond its being per-installation configuration rather than
-a rule of the system.
+Why the conversation language is a setting of the instance and not a
+rule of the system, and why it is kept out of every outward-facing
+render, is not recorded.
+
+Why the briefs are kept in whatever language they are written in, the
+one exception among the artefacts, is not recorded.
+
+Why the README is English only, a translation being a render, is not
+recorded.
 
 ## A worked example
 
-A generic project declares French in its project file:
+Take a project under the placeholder slug `<slug>` whose project file
+declares a language other than English, written here as `xx`. The
+table shows what language each file of that project carries; the
+instance's conversation language does not appear in it, because no
+file of the project depends on it.
 
-```
-language: fr
-```
+| File | Language | Because |
+|---|---|---|
+| `project.md` | `language: xx` | the one source of the output language |
+| `00-brief.md` | as written | the one exception among the artefacts |
+| `10-intent.md` | `xx` | an artefact of the chain |
+| `20-assignment.md` | `xx` | an artefact of the chain |
+| `10-intent.history.md` | English | a record |
+| `decisions.md` | English | a record |
+| `ledger.md`, `threads/THR.NNNN.md` | English | state |
+| `research/…` | English | research |
+| `recipes/<recipe>.md` | English | a recipe |
+| `work/<name>.spec.md` | `xx` | a work specification follows the artefacts |
+| `work/<name>.<ext>` | as its `## Making` says | the work file |
+| `renders/<recipe>.md` | as the recipe declares | a render, one per declared language |
+| `README.md` | English | English only; a translation is a render |
+| `docs/…` | `xx` | the pages, as the artefacts are |
 
-The principal talks with Claude in another language. The files of the
-project then come out as follows:
-
-| Document | Language |
-|---|---|
-| `00-brief.md` | whatever the principal wrote it in |
-| `10-intent.md` | French, with English ID prefixes, status words and front-matter keys |
-| a note in `research/` | English |
-| `recipes/<recipe>.md` | English |
-| the render of a recipe that declares `fr` and `en` | one render in French, the primary, and one in English, its translation |
-| `README.md` | English |
-
-Nothing in any of these files names the language of the conversation.
+The IDs inside every file, `POS.NNNN` or `REQ.NNNN`, the word `shall`
+in the assignment, the status `draft` or `approved` in a header and
+every front-matter key stay English in each of them, because the
+notation is English throughout.
 
 ## See also
 
@@ -123,7 +150,10 @@ Nothing in any of these files names the language of the conversation.
   language is set.
 - [Renders and recipes](renders-and-recipes.md): a recipe in several
   languages.
-- [Glossary](../reference/glossary.md): every term of the forge in one
-  line.
+- [The documentation](the-documentation.md): the pages, generated in
+  the project's language.
+- [Glossary](../reference/glossary.md): every term of the forge in
+  one line.
 
-Generated on 2026-11-01 for version 6.4 from the files the front-matter names; never edited by hand.
+Generated on 2026-11-01 for version 6.8 from the files the
+front-matter names; never edited by hand.

@@ -1,224 +1,259 @@
 ---
 generated: 2026-11-01
-version: 6.4
+version: 6.8
 made: derived
-inputs-hash: 1a9f30c916bf9b2a
+inputs-hash: 59962cdf7a754f60
 inputs:
   - .claude/skills/critic-contract/SKILL.md
   - projects/forge/10-intent.md#POS.0400
   - projects/forge/10-intent.md#POS.0410
   - projects/forge/10-intent.md#POS.0270
+  - CLAUDE.md#Isolated reviewers
 ---
 
 # The critic
 
-The critic is the reviewer that judges how well the documents of a
-project are written, never whether the thinking in them is right.
-This page explains what the critic judges, why it has two lenses,
-how it works and what it hands back. It is for anyone who uses the
-critic, adds a lens to it or wants to judge whether it can be
-trusted.
+The critic is the reviewer that judges the quality of a project's
+[artefacts](../reference/glossary.md) as documents, read through a
+[lens](../reference/critic-lenses.md), and never the substance of the
+thinking in them. This page explains what a critic lens judges, how a
+run works, why there are two lenses and what a run produces. It is
+for the user who wants to know what a critique will and will not tell
+him, for the extender who wants to add a lens, and for the evaluator
+who wants to understand why the critic is built as it is. How to run
+a lens is on [Critique the documents](../use/critique-the-documents.md).
 
 ## What it is
 
-The critic judges the quality of the project's
-[artefacts](../reference/glossary.md) as documents. An artefact is a
-document of the chain: the brief, the intent and every layer below
-it that the project has.
+The critic is one of the forge's isolated kinds of review. It reads
+the documents of a project and reports on their quality as documents:
+whether an artefact says what it means, whether the chain of
+artefacts still carries one essence from layer to layer. Whether the
+objective is the real problem, what assumptions a plan rests on, what
+it would do to an organisation: that is the substance of the
+thinking, and it belongs to the challenger, not to the critic. If a
+document is sound and the thinking in it is wrong, the critic says
+nothing.
 
-The critic never judges the substance of the thinking. Whether the
-objective is the real problem, which assumptions a plan rests on and
-what it does to an organisation belong to the challenger, a separate
-kind of reviewer. Where a document is sound but the thinking in it is
-wrong, the critic says nothing.
+The critic has lenses. A lens is one angle of reading, with one agent
+file of its own (`critic-<lens>`). What every lens shares, the
+subject and its boundary, the way of working and the shape of the
+report, is written once in a contract, the skill
+`.claude/skills/critic-contract/SKILL.md`, and preloaded into every
+lens agent at launch. A lens owns only its Lens section: what it
+reads and what it goes after. A Lens section specialises the
+contract and never replaces it. It may narrow what is read or make a
+shared rule stricter. It never renames, drops or duplicates a shared
+rule or field. The lenses the forge has today, and the angle of each,
+are listed on [Critic lenses](../reference/critic-lenses.md). Adding
+one is described on [Add a critic lens](../extend/add-a-critic-lens.md).
 
-The critic always looks through one lens. A lens is one angle of
-reading, run as its own agent. There are two:
+There are two lenses:
 
-- `clarity`: reads each artefact on its own.
-- `essence`: reads the chain, one adjacent pair of artefacts at a
-  time (brief and intent, intent and assignment, every later layer
-  and its parent).
+- `clarity` reads each artefact on its own.
+- `essence` reads the chain. For every adjacent pair of artefacts (the
+  brief and the intent, the intent and the assignment, every later
+  layer and its parent) it first distils, blind, the essence of the
+  downstream artefact in a few sentences, then the essence of the
+  upstream artefact the same way, and compares the two. A finding of
+  `essence` is a difference of essences, not a difference of texts.
 
-What each lens goes after in detail is on
-[Critic lenses](../reference/critic-lenses.md). How you start a run
-is on [Critique the documents](../use/critique-the-documents.md).
+Every lens runs as an isolated subagent (an agent run of its own that
+sees nothing of the working conversation). It did not take part in
+drafting and is not told what the drafter intended. It judges only
+what the documents say. Its findings are advisory: the principal (the
+person whose thinking is being forged) decides, and a rejected
+finding is a legitimate outcome, not a failure.
 
 ## How it works
 
-### An isolated reviewer
+**The target.** A run may take a target, or none.
 
-Each lens runs as an isolated subagent. A subagent is a separate
-instance of Claude launched for one job: it sees nothing of the
-working conversation and reads every input from disk in its own run.
-It did not take part in drafting and is never told what the drafter
-intended. It judges only what the documents say.
+- Without a target, the lens reads everything its angle covers: the
+  whole chain.
+- An artefact as target, named as the state map names it (`brief`,
+  `intent`, `assignment`, later layers as they come), narrows the run
+  to that artefact. For `clarity` that is the artefact alone. For
+  `essence` it is that artefact against its parent. A transition
+  between two layers is addressed by its downstream artefact, because
+  every layer has exactly one parent, so no arrow is ever typed.
+- Any file of the project as target, named by its path, is read with
+  the chain around it. A work product is read with its specification.
+  Where the file gives the lens nothing to work on, the report says
+  so and carries nothing else.
 
-It runs on the session model, that is the model the whole working
-session of Claude runs on. The principal (the person whose thinking
-is being forged) starts every run by hand. No run of the critic
-happens at a save. A release offers one run of `essence` and runs
-none on its own.
+**What the lens reads.** The whole chain of the project: the briefs,
+the intent, the threads, every layer below the intent that exists,
+the decisions and the ledger (the project's single source of truth
+for state, made at read time), and every file in `reviews/`. It reads
+every input from disk in its own run, and it never modifies any of
+them.
 
-### What it reads
+**Regression first.** Before anything new, the lens re-tests every
+finding of its own lens that was marked resolved since its last run,
+and reports each as verified or reopened. A report from the retired
+single critic, one named without a lens suffix, belongs to the lens
+whose categories its findings fall under. A check's report, one named
+`*-check-<name>*.md`, shares the finding sequence but is never the
+critic's. A rejected finding is respected: it is not raised again
+unless the document changed in a way that materially alters the
+situation, and then the decision that rejected it is referenced.
 
-Without a target, a lens reads everything it is meant to read:
+**Calibration.** Each artefact is judged against its own definition
+(its state file under `.claude/skills/forge/states/`), never against
+another's. The assignment deliberately stays high-level and its
+recipients are assumed competent and senior, so completeness is the
+test, not brevity. Because the principal sets direction, the critic
+never reports as defects:
 
-- the briefs;
-- the intent;
-- the threads (the open matters of the intent, one file each);
-- every layer below the intent that exists;
-- the decisions;
-- the ledger (the file that holds the state of the project);
-- every earlier review report.
+- a missing stakeholder list, RACI, impact analysis or MECE
+  decomposition;
+- a missing table of contents;
+- absent priorities on the items of an assignment;
+- a missing section that may be a deliberate delegation to the
+  recipients;
+- in a solution design: a part whose detail is left to the file it
+  names, a choice said to have had no real alternative, or a section
+  deleted because it was empty.
 
-It reads these and never changes them.
+**Testability is a recommendation, not a rule.** Wording that is hard
+to test goes into the Recommendations part of the report, never in as
+a finding.
 
-### What a target does
+**Sharp and few.** Five sharp findings beat twenty trivial ones. The
+lens never invents a finding to appear thorough, and never softens one
+because the fix is inconvenient. It never edits a chain artefact and
+never proposes substance: it proposes the fix of the document.
 
-A run may name a target. The target narrows the run in one of two
-ways:
+**The report and its filing.** The lens returns its report in its
+final message and writes no file. Its new findings carry no ID; a
+known finding is named by the ID it already has. The `/critique`
+command then gives each new finding the next number of the project's
+finding sequence, in tens, never renumbering, and files the report as
+`reviews/YYYY-MM-DD-critique-<lens>-HHMM-<hash>.md`, the name
+completed by `scripts/forge-report.py`. The report is immutable from
+then on. Claude files the report and offers a walkthrough (the
+findings worked one per message, in order of weight, each closed with
+a verdict). The report is written in English; the reason is not
+recorded in the inputs of this page.
 
-- An artefact, named the way the forge names it (`intent`,
-  `assignment` and so on). `clarity` then reads that artefact alone.
-  `essence` reads that artefact against its parent.
-- Any file of the project, named by its path. The file is read with
-  the chain around it. A work product (an output of the project made
-  with work of its own) is read with its specification.
+**What the report holds.** A delta summary first: how many findings
+are new, which earlier ones are verified resolved, which are still
+open and which have become obsolete. Then the findings, each with a
+severity (high, medium or low), a category from the lens's own
+section, a one-line headline, a location in the documents, the issue,
+why it matters and a suggested fix. Then recommendations: not
+findings and not gates, such as wording that is hard to test, groups
+that overlap or items that could be split; the principal may ignore
+them without recording anything. A lens may add sections of its own
+after these, as its Lens section defines them. The states a finding
+passes through afterwards are those the ledger template defines, and
+the ledger is made from them.
 
-A transition between two artefacts is named by the lower one.
-Because every layer has exactly one parent, no pair has to be typed.
-Where the named file gives the lens nothing to work on, the report
-says so and carries nothing else.
-
-### How `essence` compares
-
-For every adjacent pair, `essence` first writes down, blind, the
-essence of the lower artefact in a few sentences. It then does the
-same for the upper one, and compares the two. A finding of `essence`
-is a difference between the two essences, not between the two texts.
-
-### The way of working
-
-Every lens works in the same way:
-
-- **Regression first.** Before anything new, the lens tests again
-  every finding of its own lens marked resolved since its last run.
-  It reports each one as verified or reopened.
-- **Rejected findings are respected.** A finding the principal
-  rejected is not raised again. The exception is a document that has
-  changed in a way that materially alters the situation. The lens
-  then cites the decision that rejected it.
-- **Each artefact against its own definition.** Every artefact has a
-  definition: the file that says what that artefact is and owns its
-  rules. The lens judges an artefact by its own definition, never by
-  another's.
-- **Deliberate omissions are never defects.** An assignment stays
-  high-level on purpose, and its recipients are taken to be competent
-  and senior. Completeness is the test, not brevity. The lens
-  therefore never reports as a defect a missing list of
-  stakeholders, a RACI, an impact analysis, a MECE breakdown, a table
-  of contents, absent priorities, or a missing section that may be a
-  task handed to the recipients. In a solution design it never
-  reports a part whose detail is left to the file it names, a choice
-  said to have had no real alternative, or a section deleted because
-  it was empty.
-- **Testability is a recommendation.** Wording that would be hard to
-  test goes among the recommendations, never among the findings.
-- **Sharp and few.** Five sharp findings beat twenty trivial ones.
-  The lens never invents a finding to look thorough. It never softens
-  one because the fix is inconvenient.
-- **The fix of the document, not of the thinking.** The lens proposes
-  how to mend the document. It proposes no substance and edits no
-  artefact.
-
-### What it produces
-
-A lens returns one report and writes no file. The `/critique`
-command files the report in the project's `reviews/` folder under a
-dated name, and it gives each new finding its number in the
-project's sequence of findings. A filed report is never changed.
-
-The report holds:
-
-- a summary of what changed since the last run: new findings,
-  findings verified as resolved, findings still open and findings
-  that have become obsolete;
-- the findings, each with a severity (high, medium or low), a
-  category defined by the lens, where it stands, what the problem is,
-  why it matters and a suggested fix;
-- recommendations, which are not findings and which the principal
-  may ignore without recording anything;
-- any further sections the lens defines for itself.
-
-Every finding is advisory. The principal decides each one in a
-walkthrough (one item at a time, each closed with a verdict), and
-"rejected" is a legitimate outcome, not a failure.
+**On the principal's word.** No lens runs on Claude's own judgement.
+A critique runs when the principal invokes it, or where a command's
+definition names it, as `/release` does when it offers `essence`
+once.
 
 ## Why
 
-**Why isolation.** The reviewer never sees the working conversation,
-and that blindness is the source of its value.
+**Why the critic sees nothing of the conversation.** That blindness
+is the source of its value. A reviewer that knew what the drafter
+intended would read the intention into the text instead of judging
+what the text says.
 
-**Why two lenses.** A single critic hunted formalities and never
-guarded the chain. `clarity` covers the reading of each artefact on
-its own. `essence` guards the chain: what one artefact passes down
-to the next.
+**Why two lenses.** One critic hunted formalities and never guarded
+the chain. The two lenses split the work: `clarity` guards each
+artefact as a document, `essence` guards what passes from one layer
+to the next. Comparing distilled essences rather than texts is what
+makes a drift of the chain visible as a finding.
 
-**Why a release offers `essence`.** It is the one lens that guards
-the drift of the chain, and that drift is what a release would
-publish.
+**Why a file may be a target.** What Claude composes and the
+principal judges, a work product above all, deserves the isolated
+look as much as the chain does. The cost is a report that sometimes
+says there was nothing to find, and that cost is accepted.
 
-**Why a file may be the target.** What Claude composes and the
-principal judges deserves the isolated look as much as the chain
-does, and a work product above all. The cost is a report that
-sometimes says there was nothing to find.
+**Why the lens does not number its findings.** Every agent returns
+its findings unnumbered and writes nothing; the command numbers and
+files one report at a time, so that no ID is given twice.
 
 **Why testability is only recommended.** Assignments are deliberately
-high-level. Handing the making-concrete of an item to the recipients
-as a deliverable is a legitimate outcome.
+high-level. Delegating the concretisation to the recipients through a
+deliverable item is a legitimate outcome, so wording that is not yet
+testable is not a defect.
 
-**Why deliberate omissions are not defects.** The principal sets the
-direction. A missing section may be a task deliberately handed to the
-recipients.
+**Why omissions are not defects.** The principal sets direction, and a
+missing section may be a deliberate delegation to the recipients
+rather than a gap. The critic reads what the documents say, not what
+a checklist would expect of them.
 
-**Why rejected findings stay rejected.** The principal decides, and a
-rejection is a legitimate outcome of a review.
+**Why a run happens only on the principal's word.** A run costs
+tokens, and what is spent is his to decide. There is no other reason.
+The word may be given once, in a command's definition that names what
+it runs; what is ruled out is a run on Claude's own judgement.
 
-**Why regression comes first.** The reason is not recorded.
+**Why one contract for every lens.** A contract owns the conduct, the
+isolation, the subject and its boundary, the way of working and the
+shape of the output, so that the protocol changes in one place and a
+new lens is only its own angle. New lenses are added only by the
+principal's decision, and only where what they find genuinely
+differs.
 
-**Why the lens returns its report instead of filing it.** The reason
-is not recorded.
+**Why findings never carry an instance fact.** A report is a public
+file, or may be quoted into one. Names, roles, addresses and hosts of
+the installation never enter it, not even where they would explain a
+finding.
+
+**Why regression comes first.** The inputs of this page record the
+rule and not its reason; the reason is not recorded.
+
+**Why the same model as the rest of the forge.** Speed is bought with
+context, never with a weaker reviewer.
 
 ## A worked example
 
-A generic run of `clarity` on an intent might return this one new
-finding:
+A project with the placeholder slug `my-project` has an intent and an
+assignment. The principal runs the `essence` lens with the assignment
+as target. The lens distils the essence of the assignment in a few
+sentences, then the essence of the intent the same way, and compares.
+It finds that the intent wants a service the recipients can run
+without the principal's team, while the assignment reads as a service
+the principal's team keeps operating. That is a difference of
+essences, and it becomes one finding, returned without an ID:
 
-- **Severity:** medium
-- **Category:** one of the categories the lens defines
-- **Headline:** two positions use one term for two different things
-- **Location:** `10-intent.md`, two positions of one group
-- **Issue:** the word "owner" means the team that runs a service in
-  the first position and the person who approves a change in the
-  second.
-- **Why it matters:** a recipient of the assignment cannot tell which
-  of the two is meant where the word appears later.
-- **Suggested fix:** keep "owner" for one meaning and name the other
-  differently in both places.
+- severity: high
+- category: the one the lens's own section names for a drift
+- headline: the assignment keeps what the intent hands over
+- location: the assignment, the group of requirements on operation
+- issue: the intent places the running of the service with the
+  recipients; the requirements of the assignment describe the
+  principal's team as the operator, and no item hands the operation
+  over
+- why it matters: the recipients would build for the wrong operator,
+  and the layer below the intent no longer carries the intent's
+  essence
+- suggested fix: reword the requirements on operation so that the
+  recipients are the operator, or add one item that hands the
+  operation over; the substance stays the principal's to decide
 
-The finding carries no number when the lens returns it. The command
-gives it one when it files the report. The principal then accepts,
-modifies, questions, rejects or parks it in a walkthrough.
-
-To write a lens of your own, see
-[Add a critic lens](../extend/add-a-critic-lens.md).
+The command gives the finding the next free number of the project's
+finding sequence, files the report under `reviews/` with the day, the
+lens, the time and a hash in its name, and offers a walkthrough.
+Whether the assignment is wrong or the intent has moved on is the
+principal's call: if he rejects the finding, the rejection is
+recorded as a decision, and the lens will not raise it again unless
+the documents change materially.
 
 ## See also
 
-- [Critique the documents](../use/critique-the-documents.md): running a lens.
-- [Critic lenses](../reference/critic-lenses.md): the lenses and their angles.
-- [Add a critic lens](../extend/add-a-critic-lens.md): adding a lens of one's own.
-- [Glossary](../reference/glossary.md): every term of the forge in one line.
+- [Critique the documents](../use/critique-the-documents.md): running
+  a lens.
+- [Critic lenses](../reference/critic-lenses.md): the lenses and their
+  angles.
+- [Add a critic lens](../extend/add-a-critic-lens.md): adding a lens
+  of one's own.
+- [Glossary](../reference/glossary.md): every term of the forge in one
+  line.
 
-Generated on 2026-11-01 for version 6.4 from the files the front-matter names; never edited by hand.
+Generated on 2026-11-01 for version 6.8 from the files the
+front-matter names; never edited by hand.

@@ -1,8 +1,8 @@
 ---
 generated: 2026-11-01
-version: 6.4
+version: 6.8
 made: derived
-inputs-hash: b18f5a251f02b2b4
+inputs-hash: 3b50535b4e4e4e9f
 inputs:
   - projects/forge/10-intent.md#POS.1520
   - projects/forge/40-solution-design.md#SOL.0640
@@ -14,222 +14,200 @@ inputs:
 
 A work product is an output of a project made with work of its own:
 a model, an analysis, a worked task, in whatever form the work needs.
-This page explains what a work product is, why it is kept as two
-files, and why it is neither an artefact of the chain nor a render.
-It is written for anyone who uses the forge, extends it or weighs
-whether it fits their way of working.
+This page explains what a work product is, why it is two files, and
+why it is neither an artefact of the chain nor a render. It is for the
+user who asks for one, the extender who meets the kind in the rules,
+and the evaluator who wants to know where its state is recorded.
 
 ## What it is
 
-A work product is any result of Claude's work that the principal
-asked for. The principal is the person whose thinking is being
-forged, and who has the final say on every document.
+A work product is any result of Claude's work that the principal (the
+person whose thinking is being forged) asked for. It takes its inputs
+from the chain, the versioned documents of the project, and from the
+resources, the sources and research notes the project holds. It adds
+work of its own. It is iterated. It is handed over as a result of the
+project. What it shows flows back into the intent.
 
-A work product has these traits:
+It is a document kind of its own, `work`, in a group of its own, the
+directory `work/`. In the table of document kinds ([Documents and
+records](documents-and-records.md)) it stands in one row:
 
-- It takes its inputs from the chain and from the project's
-  resources (its sources and research).
-- It adds work of its own to those inputs.
-- It is iterated, like any document the principal works on.
-- It is handed over as a result of the project.
-- What it shows flows back into the intent.
+| Group | Kind | Meaning | Written by | Versioned | Behaviour |
+|---|---|---|---|---|---|
+| work | work | an output of the project made with work of its own: the file holds the content, the specification beside it the way and the why | Claude, the principal judges | yes, the specification | the file remade from the specification; the principal works with it freely |
 
-It is a kind of document of its own, called **work**, and it lives in
-a folder of its own, `work/`. The forge's table of document kinds
-describes it as "an output of the project made with work of its own:
-the file holds the content, the specification beside it the way and
-the why". Claude writes it and the principal judges it. The
-specification is versioned. The file is remade from the
-specification, and the principal works with the file freely. The
-other kinds a project holds are described on
-[Documents and records](documents-and-records.md).
+A work product is two files:
+
+- the file, `work/<name>.<ext>`: it holds the content and is named by
+  the work alone, in whatever format the work needs;
+- the specification, `work/<name>.spec.md`: it holds the way and the
+  why.
+
+The specification carries no prefix of its own. What it holds is:
+
+- the task: what is asked, for whom, and what the file is to show;
+- the inputs: items cited by ID and files cited by path, as they
+  stand, never copied;
+- the method: how the work is done, the model, the steps, the
+  structure of the file;
+- the assumptions, as ASM items;
+- what is open, as TBC items, each with an owner and what would
+  close it;
+- the making: how the file is made from the specification, by what
+  means, in what format and language, and what of the specification
+  the file carries.
+
+The skeleton of the specification is `templates/work.md` ([Templates](../reference/templates.md)).
 
 ## How it works
 
-### Two files
-
-A work product is two files side by side in `work/`:
-
-- `work/<name>.<ext>`: the file, which holds the content. It is
-  named by the work alone, and its extension is whatever the work
-  needs.
-- `work/<name>.spec.md`: the specification, which holds the way and
-  the why.
-
-The specification says:
-
-- what the task is: what is asked, for whom, and what the file is to
-  show;
-- which items and files the work starts from, cited by ID and by
-  path and never copied;
-- the method: how the work is done, and the structure of the file;
-- what is assumed, as assumption items (`ASM`);
-- what is still open, as open items (`TBC`), each with an owner and
-  what would close it;
-- how the file is made from the specification, in its `## Making`
-  section.
-
-Nothing of the `## Making` section is copied into the file. The
-specification has no ID prefix of its own. Its skeleton is the
-template `templates/work.md`, listed on [Templates](../reference/templates.md).
-
-### Language
+The specification is versioned by the house scheme, drafts as `0.x`
+and signed-off versions as integers. Its history lives in a companion
+beside it, `work/<name>.spec.history.md`, one record per change. The
+specification can be approved, because a work product is handed over
+and a sign-off means something there. The file is made from the
+specification again whenever the specification changes.
 
 The specification is written in the project's language, as the
-artefacts of the chain are. The file is written in whatever language
-the work needs. The `## Making` section says which.
+artefacts are. The file is written in whatever language the work
+needs, and the specification's `## Making` section says which.
 
-### Versions and sign-off
+The specification is composed as any artefact is: by elicitation, or
+handed over with a few sentences of what the principal wants. Handed
+over, Claude proposes the specification with its assumptions and its
+choices listed, and the principal judges. One command, `/work <name>`,
+works the specification with the principal and makes the file from it
+in the same round on his word ([Work a work
+product](../use/work-a-work-product.md)). The first specification is
+created from `templates/work.md` as version 0.1, with its history
+companion beside it. Nothing of the specification is copied into the
+file.
 
-The specification is versioned by the forge's house scheme: `0.1`,
-`0.2` and so on for drafts, integers for approved versions. It keeps
-its history in a companion file beside it,
-`work/<name>.spec.history.md`, one record per change. The
-specification can be approved. Because a work product is handed over,
-a sign-off means something there. Whenever the specification changes,
-the file is made from it again.
+The principal works with the file freely; that is what the file is
+for. Three rules keep the two files and the intent in step:
 
-### Working with the file
+- a conclusion that is to hold goes intent-first into a position of
+  the intent, and from there down the chain;
+- a change of the way or the why made in the file (its task, its
+  inputs, its method, what it assumes) is carried into the
+  specification in the same round and written with it; the state of
+  the work and its wording stay the file's alone;
+- a file touched by hand and not remade is said so by a record in
+  the specification's history.
 
-The principal works with the file freely, since that is what it is
-for. Three rules keep the two files honest:
+The ledger (the project's state report, built by a script at read
+time and never kept in git) carries a Work table with one row per
+work product. The row is made from the records of the specification's
+history, never written by hand. It shows the file, the specification
+with its version, the inputs with their versions, when the file was
+made, and the state of the file:
 
-- A conclusion that is to hold goes into the intent first, as a
-  position of the principal.
-- A change to the way or the why made in the file (its task, its
-  inputs, its method or what it assumes) is carried into the
-  specification in the same round and written with it.
-- A file the principal has touched by hand and does not want remade
-  is said so by a record in the specification's history.
+- `current`: the last record is the making of the file;
+- `stale`: the specification was written and no making followed;
+- `by hand`: a record says the principal has worked the file and does
+  not want it remade, on his word.
 
-The wording and the states of the work itself belong to the file
-alone.
-
-### The Work table
-
-The ledger is the project's one record of state, made by a script at
-read time from the documents. Its Work table carries one row per work
-product, made by the ledger script from the records of the
-specification's history. Each row shows:
-
-- the file;
-- the specification, with its version;
-- the inputs, with their versions;
-- when the file was made;
-- its state.
-
-The state is one of three:
-
-| State | Meaning |
-|---|---|
-| `current` | the last record is the making of the file |
-| `stale` | the specification was written and the file was not made again after it |
-| `by hand` | the principal has worked the file and does not want it remade, recorded on his word |
-
-### The command
-
-One command, `/work`, serves both files: it works the specification
-with the principal and makes the file from it in the same round. How
-to run it is on [Work a work product](../use/work-a-work-product.md).
+The check `light` verifies the Work table against the directory, as it
+does the other tables of the ledger.
 
 ## Why
 
-### Why two files
+The work product is a kind of its own because its neighbours stay what
+they are, and none of them can carry it:
 
-The file holds the content in whatever form the work needs. A file of
-any form cannot carry the principal's thinking as items with IDs, and
-it cannot carry its own way and why. The specification carries them,
-so the task, the inputs, the method and the assumptions stay visible
-and can be versioned and approved while the principal works the file
-freely.
+- a render is a view of the chain for an audience; it carries no
+  content of its own and is never edited by hand ([Renders and
+  recipes](renders-and-recipes.md));
+- a research note answers one question about the world outside, and
+  it is immutable;
+- an artefact of the chain is the principal's thinking in items with
+  IDs, which a file of any form cannot carry.
 
-### Why it is not a render
-
-A render is a view of the chain for an audience. It carries no
-content of its own and is never edited by hand; it is remade from its
-recipe instead. A work product adds work of its own, and the
-principal works its file freely. The render is described on
-[Renders and recipes](renders-and-recipes.md).
-
-Stretching the render to cover work products was weighed and
+Stretching the render to cover the work product was weighed and
 dropped. It would have cost the rule that a render is never edited by
 hand.
 
-### Why it is not a research note
+The specification is approvable because a work product is handed over,
+and a sign-off means something there.
 
-A research note answers one question about the world outside the
-project, and it is immutable once written. A work product is iterated
-and worked on.
+The work product has one command for the specification and the file,
+rather than two as a recipe and a render have. The making is a step of
+the round, and the specification is iterated with the principal, so a
+second command would only separate what one conversation does. The
+price is a skill that does two things.
 
-### Why it is not an artefact of the chain
-
-An artefact of the chain is the principal's thinking written as items
-with stable IDs. The file of a work product may have any form, and a
-file of any form cannot carry such items.
-
-### Why one command for both files
-
-The making of the file is a step of the round in which the
-specification is iterated with the principal. A second command would
-only separate what one conversation does. The price is a command that
-does two things. The forge chose this against the pair `/recipe` and
-`/render`, which split the same kind of work into two commands.
+The Work table is made from the records of the specification's history
+because nobody writes a row of the ledger: what only the ledger would
+know lives in records, and the ledger is remade from them.
 
 ## A worked example
 
-A generic specification, in the shape the template gives. The project
-slug, the name and the items are placeholders.
+A principal of a project with the placeholder slug `<slug>` asks for a
+capacity model: how many units of a thing are needed per period, over
+the horizon the intent sets. The work product is two files in `work/`:
 
-```markdown
+- `work/capacity-model.xlsx`, the file: the model itself, in the form
+  the work needs, a spreadsheet;
+- `work/capacity-model.spec.md`, the specification: the way and the
+  why, with `work/capacity-model.spec.history.md` beside it.
+
+The specification, in the shape `templates/work.md` gives, at its
+first version:
+
+```
 ---
 version: 0.1
 status: draft
-project: example-project
-file: work/cost-model.xlsx
+project: <slug>
+file: work/capacity-model.xlsx
 ---
 
-# Cost model — Work specification
+# Capacity model — Work specification
 
 ## Task
-A cost model of the proposed change, for the steering group, showing
-the yearly running cost of each option.
+A model of how many units are needed per period over the horizon
+the intent sets, for the principal, to show where the need
+exceeds what is available.
 
 ## Inputs
-- 10-intent.md: POS.0100, POS.0110
-- sources/vendor-offer.md
+- 10-intent.md: POS.NNNN
+- sources/<demand-figures>.md
 
 ## Method
-One sheet per option, one row per cost item, a summary sheet that
-compares the options over three years.
+One sheet per period; the need per period computed from the demand
+figures of the source by the rule the position states; a summary
+sheet with the periods where the need exceeds what is available.
 
 ## Assumptions
-- **ASM.0010** Prices stay as the vendor offer states them for the
-  three years.
+- **ASM.0010** The demand figures of the source hold for the whole
+  horizon.
 
 ## Open
-- **TBC.0010** (owner: finance) The internal hourly rate to use.
-  Closed by: the rate confirmed by finance.
+- **TBC.0010** (owner: the principal) What is available per period.
+  Closed by: a figure per period in the intent.
 
 ## Making
-Made by Claude as a spreadsheet in English from the Method above; the
-file carries the figures and the sheets, none of this specification.
+A spreadsheet made by Claude from this specification, one sheet per
+period and a summary, in the project's language; the task and the
+method are not copied into it.
 ```
 
-Beside it would stand `work/cost-model.xlsx`, the file, and
-`work/cost-model.spec.history.md`, the history companion.
+The ASM and TBC numbers are the project's next free ones, after every
+specification the project already has. When the principal says
+`write`, the file is made from the specification in the same round,
+a record of the making is appended to the history companion, and the
+ledger's Work table shows the row with the state `current`. If the
+principal later changes the specification and no making follows, the
+row says `stale`. If he works the spreadsheet by hand and does not
+want it remade, he says so, a record is appended, and the row says
+`by hand`.
 
 ## See also
 
-- [Work a work product](../use/work-a-work-product.md): working one
-  with `/work`.
-- [Renders and recipes](renders-and-recipes.md): the render, which a
-  work product is not.
-- [Documents and records](documents-and-records.md): the kinds of
-  document a project holds.
-- [Templates](../reference/templates.md): the specification's
-  skeleton.
-- [Glossary](../reference/glossary.md): every term of the forge in
-  one line.
+- [Work a work product](../use/work-a-work-product.md): working one with `/work`.
+- [Renders and recipes](renders-and-recipes.md): the render, which a work product is not.
+- [Documents and records](documents-and-records.md): the kinds of document a project holds.
+- [Templates](../reference/templates.md): the specification's skeleton.
+- [Glossary](../reference/glossary.md): every term of the forge in one line.
 
-Generated on 2026-11-01 for version 6.4 from the files the
-front-matter names; never edited by hand.
+Generated on 2026-11-01 for version 6.8 from the files the front-matter names; never edited by hand.

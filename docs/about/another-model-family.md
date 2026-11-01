@@ -1,8 +1,8 @@
 ---
 generated: 2026-11-01
-version: 6.4
+version: 6.8
 made: derived
-inputs-hash: 963b14f7220a2c0f
+inputs-hash: 0490e5886e1a5ac5
 inputs:
   - projects/forge/10-intent.md#POS.0790
   - projects/forge/10-intent.md#POS.0800
@@ -19,244 +19,290 @@ inputs:
 
 # Another model family
 
-A model of another family is a second, outside voice that Claude can
-send one piece of work to and get one answer back from. This page
-explains why the forge reaches such a model, how the link works and
-how the forge checks that the answer is really independent. It is
-for anyone who uses the forge, extends it or weighs whether to trust
-it.
+A model of another family is a second mind the forge can ask the same
+question it asks its own, so that the answer of one family can be set
+beside the answer of another. This page explains why the forge reaches
+such a model, how the link to it is built, how the run is kept from
+seeing or changing anything of the forge, and how the independence of
+the second answer is measured rather than assumed. It is written for
+the user who runs a research on two engines, for the extender who
+wants to know what the link is before adding an engine to it, and for
+the evaluator who asks what the forge's second opinion is worth.
 
 ## What it is
 
-The author, the critic and the challengers of the forge all run on
-one model family. The critic and the challengers are isolated
-reviewers, explained in
-[The isolated reviewers](isolated-reviewers.md). Isolation is not
-independence. What that one family systematically cannot see, none
-of them will find. So agreement between the reviewers is never
-treated as validation. It only means the work is consistent under
-one set of priors.
+Claude is the author of the forge's documents. The critics and the
+challengers are isolated reviewers (see [The isolated
+reviewers](isolated-reviewers.md)), each a subagent, that is, a run of
+Claude that sees nothing of the working conversation. The author and
+all its reviewers share one model family. What that family cannot see
+as a matter of course, none of them finds. When the reviewers agree
+with the author, the agreement therefore means only that the document
+is consistent under one set of priors. It is never treated as
+validation.
 
 The calibration point lies outside the family. It is a review by
-humans, or by a model of a different family, invited when the
-principal wants it. The principal is the person whose thinking is
-being forged and who decides everything in it.
+humans, or a review by a model of a different family. Both are invited
+at the discretion of the principal, the person whose thinking is being
+forged. The link to another model family is the forge's way of
+reaching the second of these.
 
-The forge reaches such a model over one link. Today one job uses the
-link: the deep research, explained in
-[How a research is made](the-research.md). Reviewers on the link are
-intended and not built. A challenger persona or a critic lens is
-meant to be sent to another engine over the same link, so that a
-review can come in with genuinely different priors.
+The forge calls what it reaches an engine. An engine is one row of a
+table in one script, and the row names the engine's own command-line
+tool. The forge names engines and tiers, never models or versions. A
+name therefore always means the newest of its kind, and the version is
+the tool's own, resolved at the call. The first row of the table is
+`antigravity`, reached through its tool `agy`.
 
 ## How it works
 
-### One script, one table of engines
+### The link
 
-One script, `scripts/forge-engine.py`, runs one packet on an engine
-and brings its answer back as a note. A packet is a folder holding
-`packet.md`, the whole context of the run: the card, the agent's
-brief, the shape of the note and any attached notes. The command
-composes it from the forge's own definition.
+One script, `scripts/forge-engine.py`, runs one packet on one engine
+of its table and brings the answer back as a note (see
+[Scripts](../reference/scripts.md) for its options). The packet is a
+folder with one file, `packet.md`, which holds the whole context of
+the run: the question, the agent's brief, the shape of the note that
+is wanted and any attached notes. Claude composes the packet from the
+forge's own definitions. Nothing of the conversation goes into it.
 
-The script has a table of engines, one row per engine. Each engine
-is reached over its own command-line tool. The first row is
-`antigravity`, whose tool is `agy`. Adding an engine is adding a row,
-as [Add an engine](../extend/add-an-engine.md) shows.
+The login is the user's. It is made once, outside the forge, in the
+engine's own tool. How that tool is installed and signed in is said by
+the tool's own documentation, not by the forge. The forge asks only
+that the tool is on PATH. It carries no key, no account and no
+configuration of who connects.
 
-- **The login.** The login is the user's own, made once outside the
-  forge in the engine's own tool. The forge carries no key, no
-  account and no configuration of who connects.
-- **Engines, not models.** The forge names engines, never models.
-  The reason is not recorded.
+The script finds the tool on PATH and checks its version against the
+floor the row sets. Below the floor a known bug lies, and the script
+refuses to run.
 
-The script refuses to run, with its reason, when:
+### The place of the run
 
-- the engine's tool is not found;
-- the tool's version is below the floor the table sets;
-- the packet folder holds no `packet.md`;
-- the run changed anything in its folder;
-- the engine's answer cannot be read or is empty.
+The engine is given the packet folder as its workspace. That folder
+lies under `tmp/`, the working folder of the forge's own repository,
+never at the repository's root. The root holds the forge's hooks and
+its instance file, and an engine must neither see nor execute them.
 
-### Where the engine works, and the profile
+The place alone locks nothing. An engine that is allowed every tool
+call reads any path on the disk that its own permission rules do not
+deny, and it reads those rules from the user's own settings, which the
+forge never writes. So the script gives the engine a profile of its
+own for the run. The profile is a copy of the user's settings with
+permissions added:
 
-The engine works in the packet folder, under the engine's working
-folder `tmp/`. It never works at the forge's root. The root holds the
-hooks and the instance file, and an engine must not see or execute
-them. A hook is a script Claude's tooling runs on its own at fixed
-moments; the instance file holds the facts of one installation.
+- the web is allowed;
+- the shell is denied;
+- every write is denied;
+- the reading of every entry of the forge's repository is denied,
+  except `tmp/`;
+- the reading of the run's `hold/` folder is denied, where the first
+  engine's notes wait.
 
-The place alone locks nothing. With every tool allowed, an engine
-reads any path on the disk that its settings do not deny. So the
-script gives the engine a profile of its own for each run:
+The paths of the denied entries are computed from where the script
+lies. The engine is started with its home pointed at the profile. The
+user's own settings are not touched. The profile stays in the run
+folder as the record of what the engine was allowed.
 
-- **Allowed:** the web.
-- **Denied:** the shell, every write, and the reading of every part
-  of the forge's tree but `tmp/`.
+### What the engine may do, and what is verified
 
-The profile is a copy of the user's settings for that engine with
-these rules added. The user's own settings are not touched. The
-profile stays in the run folder as the record of the run. The price
-of the profile is one settings shape to know per engine.
+Every tool call is allowed, and the engine's sandbox is switched on.
+Because a headless run has nobody to ask, an engine that meets a tool
+call it cannot ask about denies it and returns nothing. So every call
+is allowed and the sandbox contains it.
 
-### Every tool call allowed, the sandbox on
+Read-only is verified, never trusted. Before the run the script
+records a fingerprint of every file in the packet folder, leaving out
+the envelopes and logs of earlier runs. It runs the engine once,
+non-interactively, with its input closed, its answer asked for in the
+tool's own envelope and a time limit set. Afterwards it compares the
+folder. A run that changed or added anything is refused, and nothing
+is filed.
 
-A run that cannot ask a question denies every tool call it would
-have asked about, and then returns nothing. So every tool call is
-allowed and the engine's sandbox contains the run.
+### The answer
 
-Read-only is verified, never trusted. The script records every file
-of the folder before the run and compares the folder afterwards. A
-run that changed or added anything is refused and nothing is filed.
+The envelope must say success, and the answer must not be empty. An
+exit without error but with an empty answer is a failure. The envelope
+is kept beside the packet for inspection, and the run folder is never
+cleaned.
 
-### The answer as a note
+The answer is written as a note. Its front-matter carries the engine,
+the model word (as the envelope or the call says, else "engine
+default"), the usage and the run. The command that asked for the run
+files the note, indexes it and remakes the ledger, the project's state
+file that is made at read time. This is the same path every
+reviewer's report takes.
 
-The answer comes back as a note. Its front-matter carries:
+A refusal comes back with its reason: the tool missing, the version
+below the floor, a packet without `packet.md`, a folder changed by the
+run, an envelope that cannot be read or an answer that is empty. An
+engine named but unusable is said in one sentence with the script's
+reason. The work goes on as if the engine had not been named, and the
+bundle's Deviations record it. It is never silent, and never a
+question in the middle of the run.
 
-- `engine`: the engine's name in the table;
-- `model`: the model word, as the engine reports it or as it was
-  given, else "engine default";
-- `usage`: what the engine reports it spent;
-- `run`: the folder the run worked in.
+### Where it is used today
 
-The command then files the note, indexes it and remakes the ledger
-(the file that holds the state of a project, made from its documents
-whenever it is read). The options of the script are listed in
-[Scripts](../reference/scripts.md).
+The research is the first job on this link (see [How a research is
+made](the-research.md)). A deep research may take a second engine by
+name, `/research --deep --engine <name>` (see [Research a
+topic](../use/research-a-topic.md)). The second engine is asked for by
+name and is not the default of a deep research, since how much time
+and money a research is given is the person's choice, made at the
+call.
 
-### The second engine in a deep research
+The second engine first reads the draft plan, before the principal
+confirms it, and says what it misses. Its additions are shown beside
+Claude's draft and marked as the engine's. Claude takes nothing of
+them by its own judgement. Then the second engine takes every card
+whole, on the same packet as Claude's own agent, so that two full
+answers to one question can be laid side by side. There is no split
+of roles between the engines.
 
-A deep research may take a second engine beside the session model
-(the model Claude runs on in the current conversation). The engine is
-asked for by name, as
-[Research a topic](../use/research-a-topic.md) shows; it is never
-the default of a deep research. A research on the session model
-alone is still a deep research.
+In the synthesis the answers stand side by side with the engine
+named. Agreement is the consistency of two families reading the same
+web. It is stronger than one family's consistency, and it is still
+never validation. Difference is spelled out.
 
-The second engine does two things:
+One engine's quota is a budget of the research day. It cannot be
+known before a run, since an engine reports its usage after a run and
+never before. So the quota is spent one or two runs at a time, never
+all cards at once, and the time at which it resets is said plainly.
 
-1. It reads the draft plan before the walkthrough (the conversation
-   in which the principal decides item by item) and says what the
-   plan misses. Its additions are shown beside Claude's draft,
-   marked as the engine's. Claude takes none of them on its own
-   judgement.
-2. It answers every card whole, on the same packet as the session
-   agent (an isolated subagent: a helper run of Claude that sees only
-   its packet). Two full answers to one question then lie side by
-   side.
+A challenger persona and a critic lens may one day be sent to another
+engine over the same link, so that a challenge can come in with
+genuinely different priors. What would be composed is the forge's own
+persona and contract, the engine reading the project from disk as a
+subagent does, and the report would be scanned and checked before the
+command files it unchanged. The reviewers on this link are intended
+and not built. The engine would be named at the call.
 
-In the synthesis the two answers stand side by side with the engine
-named. Agreement is consistency of two families reading the same
-web. It is stronger than one family's agreement, and still never
-validation. Where the answers differ, the difference is spelled out.
+### Independence, measured
 
-An engine that is named but unusable is said in one sentence, with
-the script's reason. The research goes on as without it, and the
-research bundle records the deviation. It is never silent and never
-a question in the middle of the run.
+Independence is measured, never assumed. An engine with its tools
+allowed reads any path its profile does not deny. Two guards stand
+against a second note written from the first instead of from the web:
 
-### Independence is measured
+- the first engine's notes are held outside the bundle, in the run's
+  `hold/` folder, until the second engine's note of the card has
+  returned;
+- before filing, a second script, `scripts/forge-cite.py`, counts for
+  every card with notes from more than one engine the URLs the notes
+  share and the longer sentences they have in common, and gives a
+  verdict.
 
-Independence is measured, never assumed. Two steps hold it:
+The sentences counted are the longer ones, so that the card's own text
+quoted by both notes counts little. A second note that shares most of
+its sources or a third of its sentences with the first was written
+from it, not from the web. Such a note goes back to its agent once,
+after the other note is out of its reach, or it is said in the
+synthesis to be no second voice. The measure touches no network and
+writes nothing into a note. What it finds goes into the synthesis.
 
-- **Held out of reach.** The first engine's notes wait in a folder
-  the second engine's profile denies, until the second engine's note
-  of the same card has returned.
-- **Counted before filing.** A second script, `scripts/forge-cite.py`,
-  counts for every card with notes from two engines the URLs the
-  notes share and the longer sentences they have in common, and gives
-  a verdict. It touches no network.
-
-The verdict is "dependent" when the notes share more than half of
-the smaller note's URLs, or more than a third of its longer
-sentences. Such a note was written from the other note, not from the
-web. It goes back to its agent once, with the other note out of its
-reach. Otherwise the synthesis says it is no second voice.
-
-The same script also opens every URL a note cites before the note is
-filed.
-
-### The quota
-
-An engine reports what a run cost only after the run, never before.
-So an engine's quota is spent one or two runs at a time, never many
-at once, and the time it resets is said plainly.
+The same script opens every URL a note cites before the note is
+filed. That check is the research's and is explained on its page.
 
 ## Why
 
-- **Why another family at all.** Reviewers of one family share one
-  set of priors. Their agreement cannot show what the family cannot
-  see. A different family is a calibration point outside it.
-- **Why both engines do the whole work.** A split of roles, one
-  engine searching and the other reasoning, was rejected. Two halves
-  cannot be compared. Both engines answer every card in full so that
-  the answers can be laid side by side.
-- **Why no skill on the other engine's side.** The forge's
-  definition is the one owner of the agent's rules, and it travels
-  in the packet word for word. A skill installed in the other engine
-  would be a second place for the same rules.
-- **Why a command-line tool, and not a library or a server.** A
-  library gives a model without tools. It also needs a key, and the
-  forge must not carry one. A server between the forge and the engine
-  would be the same command-line call under another layer, with the
-  answer returning through the model. The command-line tools of
-  several engines share one shape for a single run without a person
-  present.
-- **Why a packet folder under `tmp/`.** The run stays traceable
-  there. The forge's root holds the hooks and the instance file, which
-  an engine must not see or execute.
-- **Why a profile, and not the place alone.** With every tool
-  allowed, an engine reads any path on the disk its settings do not
-  deny. The folder it works in does not stop that; the profile's deny
-  rules do.
-- **Why every tool call is allowed.** A run that cannot ask denies
-  what it would ask about and returns nothing. The sandbox contains
-  the run, and the comparison of the folder proves it read only.
-- **Why the second engine is asked for by name.** How much time and
-  money a research is given is the person's choice, made when the
-  command is called.
-- **Why independence is measured.** An engine with its tools allowed
-  reads any path its profile does not deny. Without the hold and the
-  count, a second note could be a rewrite of the first and look like
-  a second voice.
-- **Why the forge names engines and never models.** The reason is
-  not recorded.
+**Why reach another family at all.** One family's blind spots are
+shared by everything that runs on it. Only a reader outside the family
+can show what the family systematically misses. Agreement within one
+family is consistency, and the forge does not call it more than that.
+
+**Why both engines do the whole work.** A split of roles, one engine
+searching and the other reasoning, was rejected. Two halves cannot be
+compared. Both engines answer every card in full, so that the answers
+can be laid side by side.
+
+**Why no skill on the other engine's side.** The forge's definition is
+the one owner of the agent's rules, and it travels in the packet
+verbatim. A skill installed in the other engine would be a second
+place for the same rules.
+
+**Why a command-line tool and not a library or a server.** A library
+is a model without tools, and it needs a key that the forge must not
+carry. A server that wraps the model is the same command-line call
+under a hat, returning through the model. The command-line tools of
+several engines share one headless shape, so that one script with one
+table can hold them all.
+
+**Why a packet folder under `tmp/`.** The root of the forge's
+repository holds hooks and the instance file, which an engine must
+neither see nor execute. A run under `tmp/` also stays traceable.
+
+**Why a profile of its own.** The place alone locks nothing, because
+an engine with every tool allowed reads any path its rules do not
+deny, and those rules live in the user's own settings. A profile per
+run denies the forge's tree and the shell without touching the user's
+settings, and it stays as the record of the run. The price is one
+settings shape to know per engine.
+
+**Why every tool call is allowed.** A headless run cannot ask, and an
+engine that is refused a call it needs returns nothing. The sandbox
+contains what the allowance opens.
+
+**Why read-only is verified.** The forge does not take the engine's
+word that it only read. The comparison of the folder before and after
+is the proof, and a run that fails it is refused.
+
+**Why engines and tiers, never versions.** A name that means the
+newest of its kind needs no change in the forge when a new version
+arrives, and everything that ran on that name runs on the new one.
+
+**Why independence is measured.** Isolation of the run is not
+independence of the answer. An engine with its tools allowed can
+reach the other engine's note wherever its profile does not deny it,
+and a note written from another note is no second voice. Counting
+shared sources and shared sentences is the measure chosen against
+trusting the place of the run.
+
+**Why the quota goes one or two runs at a time.** An engine reports
+its usage after a run and never before, so a budget spent all at once
+cannot be known until it is gone.
+
+**Why the login is the user's and the forge carries no key.** The
+forge states this as a rule. The reason beyond the rule is not
+recorded.
 
 ## A worked example
 
-One generic card of a deep research, `card-1`, asks one question. The
-session agent and `antigravity` each answer it on the same packet.
+A deep research is run on Claude's own model and on the engine
+`antigravity`. One of its cards reads:
 
-```
-            packet of card-1
-           /                \
-   session agent         antigravity
-   (note filed,          (runs while the first
-    then held out         note is out of reach)
-    of reach)                   |
-           \                    /
-            two notes of card-1
-                    |
-       forge-cite.py --independence
-       shared URLs, shared sentences
-                    |
-          verdict per pair of notes
-```
+> Does pre-registering a study reduce selective reporting, and what
+> kind of evidence says so?
 
-Say the session agent's note cites 8 URLs and holds 30 longer
-sentences. The `antigravity` note cites 10 URLs and holds 26 longer
-sentences.
+Claude composes one packet for the card: the card, the agent's brief,
+the shape of the note and nothing of the conversation. The same packet
+goes to Claude's own research agent and to the second engine. The
+second engine runs in `tmp/research/<run>/<card>/`, under a profile
+that denies the forge's tree and the shell and allows the web, with
+every tool call allowed and the sandbox on. Claude's agent's note of
+the card waits in `hold/`, which the profile denies.
 
-- **Independent.** The notes share 3 URLs and 2 sentences. Half of
-  the smaller URL count is 4 and a third of the smaller sentence
-  count is 8. Neither is exceeded, so the verdict is "independent".
-  The synthesis lays both answers side by side, names each engine,
-  calls what they agree on consistency and spells out where they
-  differ.
-- **Dependent.** The notes share 6 URLs. That is more than half of
-  8, so the verdict is "dependent". The `antigravity` note goes back
-  to its agent once, with the other note out of its reach. If it is
-  not run again, the synthesis says it is no second voice.
+The second engine's answer comes back as a note whose front-matter
+carries `engine: antigravity`, the model word, the usage and the run.
+The folder is compared before and after and is unchanged, so the note
+is accepted.
+
+Before filing, the independence of the two notes is counted for the
+card:
+
+- URLs shared: one, of seven in the first note and nine in the
+  second;
+- longer sentences shared: none;
+- verdict: independent.
+
+The one shared URL is a primary source both engines found. No longer
+sentence is shared, so neither note was written from the other. Both
+notes are filed, and in the synthesis their answers stand side by
+side with the engine named. Where they agree, the synthesis says the
+two families read the same web consistently. Where they differ, the
+synthesis spells the difference out and leaves the judgement to the
+principal.
+
+Had the count shown most sources and a third of the sentences shared,
+the second note would have gone back to its agent once, or been said
+in the synthesis to be no second voice.
 
 ## See also
 
@@ -266,12 +312,12 @@ sentences.
   one family and why their agreement is not validation.
 - [Research a topic](../use/research-a-topic.md): a research with
   `--engine`.
-- [Add an engine](../extend/add-an-engine.md): adding an engine as
-  one row of the table.
+- [Add an engine](../extend/add-an-engine.md): adding an engine as one
+  row of the table.
 - [Scripts](../reference/scripts.md): the engine script and the
   citation script, their options.
 - [Glossary](../reference/glossary.md): every term of the forge in
   one line.
 
-Generated on 2026-11-01 for version 6.4 from the files the
-front-matter names; never edited by hand.
+Generated on 2026-11-01 for version 6.8 from the files the front-matter
+names; never edited by hand.

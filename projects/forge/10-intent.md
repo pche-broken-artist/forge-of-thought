@@ -1,5 +1,5 @@
 ---
-version: 6.7
+version: 6.8
 status: draft
 project: forge
 audience: principal + Claude only
@@ -1694,12 +1694,14 @@ position that already stands elsewhere.
   inside every release, by hand or with `--auto`, is checks,
   documentation, README and release notes, state render, save: the
   README reads the documentation's index, so the documentation comes
-  first, offered on the principal's word in a release by hand and run
-  in one with `--auto`. `/release --auto` runs the whole release
-  through, since a release done step by step was the forge's biggest
-  chore (the principal, 2026-11-01): the checks and their agents
-  without asking, the documentation, the renders and the save with the
-  drafted message; it stops only where a thing is serious, a repository
+  first, offered on the principal's word in a release by hand and,
+  with `--auto`, asked once before anything runs, the default yes.
+  `/release --auto` runs the whole release through, since a release
+  done step by step was the forge's biggest chore (the principal,
+  2026-11-01): the checks and their agents without asking, the
+  documentation on the one question it asks before anything runs, the
+  renders and the save with the drafted message; it stops only where
+  a thing is serious, a repository
   behind or diverged, a finding that would change a position or a rule,
   a new instance fact in a render, and always at the tag of a major,
   which is a deliberate act; `critique essence` is not run. What is
@@ -2440,10 +2442,12 @@ position that already stands elsewhere.
   rule is the documentation contract's. Facts no file owns, the install
   commands, the prerequisites, the public address of the repository,
   have one place in the project that both the README and the
-  documentation read. A release never regenerates the documentation: it
-  reports the age of the index against the intent's version and offers
-  `/document`; the pages pass under the principal's eyes as every
-  regenerated render does (POS.0810). Reason: the README was the whole
+  documentation read. A release never regenerates the documentation on
+  its own judgement: by hand it reports the age of the index against
+  the intent's version and offers `/document`, with `--auto` it asks
+  once before anything runs (POS.1100); the pages pass under the
+  principal's eyes as every regenerated render does (POS.0810).
+  Reason: the README was the whole
   documentation of the engine and poor as one, three things at once; a
   page of one topic can say a thing well, and people inside the company
   and outside it should understand the forge and use it in full. What

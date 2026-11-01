@@ -1,8 +1,8 @@
 ---
 generated: 2026-11-01
-version: 6.4
+version: 6.8
 made: mirrored
-inputs-hash: 2e5f8220fecf5f48
+inputs-hash: 29aaa0563d4a0a53
 inputs:
   - .claude/skills/forge/states/intent.md
   - templates/intent.md
@@ -11,98 +11,95 @@ inputs:
 
 # Forge the intent
 
-`/forge intent` is the command that iterates the intent of a project, round by round, with Claude. This page is for the principal (the person whose thinking is being forged) who wants to bring a brief, an open thread or a new thought into the intent, and to know what happens in a round and what is written when.
+`/forge intent [slug]` iterates the intent, the file `10-intent.md`, one round at a time. This page is for the principal, the person whose thinking is being forged, who wants to bring briefs, open threads or new thoughts into the intent. A round is one working conversation with Claude that ends in one write.
 
 ## When to use it
 
 Use it in any of these cases:
 
-- The project has no intent yet and has one or more briefs. The briefs are consolidated into the first intent.
-- A brief is pending or only partly mined. It is mined whole by whole, one brief at a time.
-- A thread is open, you have a new word, or the recipients of an assignment sent something back. The round starts there.
-
-Briefs are offered before threads. What the intent holds, and why it is rewritten for coherence, is explained in [The intent](../about/the-intent.md).
+- You have no intent yet and want the briefs consolidated into the first one.
+- A brief is pending or only partly mined.
+- A thread is open and you want to work on it.
+- You have a new word of your own to bring in.
+- The recipients of an assignment have sent something back.
 
 ## The command
 
 ```
-/forge intent [slug]
+/forge intent <slug>
 ```
 
-Without a slug, Claude resolves the project as `/forge` does for any state. The intent is the file `10-intent.md` of that project.
+The slug names the project. Where it is left out, Claude resolves the project itself.
 
 ## What happens
 
-1. Claude reads the briefs you say to mine, the decisions, the ledger (the state of the project, made from the documents when it is read), the intent as it stands and the project's `threads/`.
+1. Claude resolves the project and reads the briefs you say to mine, the decisions, the ledger and the intent as it stands, together with the project's threads.
 
-   You should now see Claude naming where the round starts: a brief, a thread, or your new word.
+   You should now see Claude start from the way in that fits: a first intent, a brief to mine, or a thread or word to take up.
 
-2. The round works one theme at a time. Claude probes contradictions, gaps and unstated assumptions, and asks of an idea two separate questions: is it good, and is it feasible. Nothing is recorded per idea from that asking. It offers options with their trade-offs, and proposes research where a thread needs outside grounding. Research runs only on your word.
+2. The round starts where you are. Briefs are offered before threads. A brief is mined whole by whole, one brief at a time. A thread, a new word of yours or what the recipients sent back starts a round of its own.
 
-   You should now see one theme in front of you, not the whole intent at once.
+   You should now see one brief or one thread offered as the start of the round.
 
-3. Your answers are carried in the conversation. Nothing is written yet. The way the conversation runs is described in [The working methods](../about/working-methods.md).
+3. The round runs one theme at a time. Claude probes contradictions, gaps and unstated assumptions. It asks two questions about an idea and keeps them apart: whether the idea is good, and whether it is feasible. It offers options with trade-offs and may propose research where a thread needs outside grounding. Research runs only on your word.
 
-   You should now see Claude reflecting the answers back as structure.
+   You should now see answers carried in the conversation, not written one by one. They are written at the end, as step 5 says.
 
-4. The reality check comes last in the round, before any lower layer is proposed. Claude runs it with you. The independent check, a challenger run against the intent, is offered afterwards (see "The independent check" below).
+4. The reality check comes last, before a lower layer is proposed. Claude runs it with you, and you can then ask for the independent one with `/challenge <persona> intent`. Claude only offers it and never runs it on its own judgement. How it runs is on [Challenge the thinking](challenge-the-thinking.md).
 
-   You should now see the joint check done, and the independent one offered.
+   You should now see what of the intent is feasible, and where the wheel already exists.
 
-5. At the natural end of the round Claude asks whether to write. You answer `write`. Claude first reflects the round back, showing the new wording and the records, and writes once the reflection is confirmed. The write rewrites the intent for coherence and never merely appends. One version is made for the whole round.
+5. Claude reflects the round back as structure and asks whether to write. You confirm with `write`. The intent is rewritten for coherence, never appended to, and the whole round is one version with its changes recorded in the history. Resolved threads move into positions or rejections and are closed. The mining of each brief you touched is recorded.
 
-   You should now see the intent changed, with its history companion carrying the records of the round.
+   You should now see Claude name the file and the section it wrote.
 
-6. On the write, resolved threads move into positions or into rejected directions, and are closed. For every brief the round touched, the record of how far it is mined is kept. Claude then remakes the ledger.
+6. The round ends by naming what changed and what stays open. Where the intent is complete for now, Claude names the layers that can follow from it. Where you take no approval for the intent, it offers the approval instead. Both are a recommendation, never a gate.
 
-   You should now see closed threads, and the ledger up to date.
+   You should now see a short statement of what changed, what stays open and what can follow.
 
-7. The round ends with Claude naming what changed and what stays open. When the intent is complete for now (no thread blocks the next layer), it names the layers that can follow. Where the project takes no approval of the intent, it offers it instead. That is a recommendation, never a gate.
+## The threads
 
-   You should now see a short statement of what changed, what is open and what can follow.
+The open matters of the intent are files in `threads/`, one file per thread. Each file's header says what it concerns, where it came from and whether it is open:
 
-## Threads
+```
+---
+id: THR.NNNN
+concerns: intent
+origin: the principal
+status: open
+---
+```
 
-Each open thread is a file in `threads/`, one file per thread. Its header says three things:
+- `concerns` is the artefact the thread concerns, named as `/forge` names it. It lists several where several apply.
+- `origin` is your word, a document by its path, or Claude's own synthesis.
+- `status` is `open` or `closed`.
 
-- `concerns`: the artefact the thread concerns, named as `/forge` names it. It lists several where several apply.
-- `origin`: where the thread came from. This is the principal (the default), a document by path, or Claude's synthesis.
-- `status`: `open` or `closed`.
+The first sentence of a thread is its headline. Its last dated paragraph is its state. A thread is freely rewritten while it is open, and its debate stays in it until it is settled. A thread closes only on your word. Closing sets `status: closed` and adds a `closed` record to the intent's history. A closed thread is never changed, moved or deleted, and it stays as the archive. A matter that returns is a new thread that cites the old one.
 
-While a thread is open it is freely rewritten, header included. Its first sentence is its headline and its last dated paragraph is its state. A closed thread is not edited, moved or deleted. A closed thread is the archive. If the matter returns, a new thread is opened that cites the old one. Closing happens only on your word.
-
-An unfinished conversation is saved into its thread before the session (one run of Claude with you) ends, so that nothing lives only in the conversation.
-
-## The independent check
-
-The reality check Claude runs with you is joint. `/challenge <persona> intent` is the independent one: a reviewer who sees nothing of the conversation. Claude offers it once the joint check is done and never runs it on its own judgement. How to run it is described in [Challenge the thinking](challenge-the-thinking.md).
+An unfinished conversation is saved into its thread before the session ends. A session is one run of Claude from start to end.
 
 ## What you have afterwards
 
-- A new version of `10-intent.md`, with the round's records in `10-intent.history.md`.
-- Resolved threads closed, the open ones saved in `threads/`.
-- The ledger remade.
-- A statement of what changed and what stays open.
+- A rewritten `10-intent.md` with its essence, positions, facts and rejected directions, and a new version.
+- A history companion, `10-intent.history.md`, with one record per change and the mining record of each brief touched.
+- Threads that were settled, closed, and open threads that hold the state of what is unfinished.
+- A remade ledger. The ledger is the state of the project, made at read time from the documents.
 
 ## If something goes wrong
 
-- A conversation ends before you say `write`: what was agreed lives only in the conversation. Ask Claude to save the unsettled matter into its thread first. A write you order mid-round does not close the round unless you say so.
-- A correction lands on text written moments ago: it belongs to the same round and is carried like any other answer, not written as a version of its own.
-- A thread seems done but you have not said so: it stays open, because a thread closes only on your word.
-
-The inputs name no other stop conditions or messages for this command.
+The inputs record no stop conditions and no messages for this job. The one rule that applies: whatever remains unsettled is saved into its thread before the session ends, so nothing lives only in the conversation.
 
 ## A worked example
 
-A project `my-project` has a brief and no intent yet.
+A generic round on a project with the placeholder slug `my-idea`, started from an open thread.
 
 ```
-/forge intent my-project
+/forge intent my-idea
 ```
 
-Claude reads the brief and says it will mine it whole. It takes the first theme, the reason the work exists, and asks what you want and why. You answer. Claude reflects your answer back as an essence and two candidate positions, and asks one question on whether the second is good and whether it is feasible. You say the second is good but far away, and that a third idea is dropped because it duplicates existing work. Claude carries both answers and moves to the next theme. One question stays unanswered.
+Claude reads the intent and the threads and offers the one open thread, which asks whether the idea needs a first version for a pilot team. It leaves the other themes for later. You answer, Claude probes one gap in the answer, and you settle it. A second theme follows in the same way. Nothing is written yet.
 
-At the end Claude runs the reality check with you, then asks whether to write. You say `write`. Claude shows the intent as it would read: an essence, the positions, a rejected direction with its reason, and one open thread for the unanswered question. You confirm, and the first intent is written as version 0.1 with its history. Claude names what changed, names the open thread as what stays open, and offers `/challenge <persona> intent` as the independent check.
+Claude then reflects the round back: one new position, one fact, and one direction dropped with its reason. You say `write`. Claude rewrites the intent, bumps its version, records the changes in the history, and closes the thread, whose matter is now a position and a rejection. It ends by saying what changed, that one thread still stays open, and that the intent is ready for the independent check with `/challenge <persona> intent`.
 
 ## See also
 
@@ -111,4 +108,4 @@ At the end Claude runs the reality check with you, then asks whether to write. Y
 - [Challenge the thinking](challenge-the-thinking.md): running the independent reality check.
 - [Glossary](../reference/glossary.md): every term of the forge in one line.
 
-Generated on 2026-11-01 for version 6.4 from the files the front-matter names; never edited by hand.
+Generated on 2026-11-01 for version 6.8 from the files the front-matter names; never edited by hand.

@@ -1,8 +1,8 @@
 ---
 generated: 2026-11-01
-version: 6.4
+version: 6.8
 made: mirrored
-inputs-hash: 3b898300dc27a89e
+inputs-hash: 0794dc881103f104
 inputs:
   - .claude/skills/save/SKILL.md
   - scripts/forge-save.py
@@ -12,11 +12,11 @@ inputs:
 
 # Save your work
 
-`/save` is the command that commits your work to git and pushes it, after a light check. It is for you, the principal (the person whose thinking is being forged), whenever a round of work should be kept. It works on whatever branch is checked out and makes no render.
+`/save` commits your work to git and pushes it, after a light check and on whatever branch is checked out. It is for the principal (the person whose thinking is being forged) who wants a round kept safe without making a release.
 
 ## When to use it
 
-Use it at the end of a round, or whenever you want what you have written kept in git and on the remote. A save keeps work and loses none. For a release from `main`, which also regenerates the renders, use the other door: [Release a version](release-a-version.md).
+Use it at the end of a round, or whenever work should not be lost. It makes no render. The other door, which runs from `main` and renders the README and the release notes, is [Release a version](release-a-version.md). The reason for two doors and two speeds is in [Persistence in git](../about/persistence-in-git.md).
 
 ## The command
 
@@ -24,65 +24,63 @@ Use it at the end of a round, or whenever you want what you have written kept in
 /save [slug] [-m "message"] [--tag name] [--quick]
 ```
 
-- `slug`: the one repository to save (`forge` stands for the engine, any other slug for the project of that name). Without it, every repository with changes is saved.
-- `-m "message"`: the commit message, so that Claude does not draft one.
-- `--tag name`: a tag on the commit. It needs a slug.
-- `--quick`: leaves the check out and nothing else.
+- `slug` narrows the save to one repository. `forge` means the engine.
+- `-m "message"` gives the commit message, so that Claude drafts none.
+- `--tag name` tags the commit. It needs a slug.
+- `--quick` leaves the light check out and nothing else.
 
-A typed line looks like this:
+A bare `/save` commits every repository that has changes. With two windows open, give the slug so that the save touches only the one you work in.
+
+A typed line that stands as it is:
 
 ```
-/save <slug> -m "<one line saying what the round changed>"
+/save <slug> -m "tighten the scope of the intent"
 ```
 
 ## What happens
 
-1. Claude finds the scope. It reads the state of the engine and of each project through the status script, which reports every repository with the branch it is on. A project that is not under git and has changes is named in the report and otherwise left alone. You should now see each repository with its changes and its branch.
-2. Claude runs the `light` check on every repository in scope, unless you gave `--quick`. It settles the report through `/check`. A save never waits on a finding you have not asked to fix. Where the ledger script (the one that builds the ledger, the file that holds the state of a project) fails or names files it could not read, the check reads the ledger as it lies, the save goes on and says so aloud. You should now see the check's result, or the remark that the save went on without a readable ledger.
-3. Claude proposes the commit message, unless you gave `-m`. It drafts one English line from the records that the round appended to the histories of the documents it touched, and you confirm or adjust the wording. When more than one repository has changes, it drafts one message per repository, or you run the save once per slug. The script's own generated message, a list of files, is used only if you say so. You should now see a one-line message waiting for your word.
-4. A tag is set only on your word. Give `--tag name`, or ask for one in words. Any name git accepts will do. If you ask for a tag without naming it, Claude proposes a name from the intent version of that repository, and takes yours if you give one. You should now see the tag named, or no tag at all.
-5. Claude runs the save script. For each repository it stages everything, commits, rebases your commit onto the remote's changes and pushes. You should now see the commit's file summary, the tag if there is one, and a line saying the repository was saved and pushed.
+1. Claude reads the scope from the status script. It reports the engine and each project separately, each with the branch it is on. A project that is not under git is named if it has changes and is otherwise left alone.
+   You should now see each repository listed with its branch.
+2. Claude runs the `light` check on every repository in scope and settles its report through `/check`. This step is skipped with `--quick`. A save never waits on a finding you have not asked to fix. Where the ledger script cannot read a file, the check reads the ledger as it lies, the save goes on and Claude says so aloud, because the save is what does not lose work.
+   You should now see the check's result, or a statement that the check was left out.
+3. Claude drafts a one-line English commit message from the records the round added to the histories of the touched documents. It proposes the message and you confirm or adjust it. With `-m` it drafts nothing. When more than one repository has changes, it drafts one message per repository, or you run the save per slug.
+   You should now see the message you confirmed.
+4. A tag is set only on your word: `--tag` given, or asked for in words. If you ask for a tag without a name, Claude proposes `v<intent version>` of that repository's intent, and you may take it or give your own. Any name git accepts will do.
+   You should now see the tag name agreed, or no tag at all.
+5. Claude runs the save script. It stages everything, commits, rebases your commits onto the remote and pushes. It prints the commit's file summary and the tag.
+   You should now see a line saying the repository was saved and pushed.
 
-## What the save does in special cases
-
-- A clean repository that is ahead of its origin is pushed. A branch with no upstream yet reaches the remote with its first commit.
-- A rebase that conflicts is left standing. The commit is made and nothing is lost. The script prints the files in conflict and the step that follows. The session (the running conversation with Claude) goes on with the step of a conflict, as [Settle a conflict](settle-a-conflict.md) describes, and then you save again.
-- A repository with a rebase or a merge already in progress is refused before anything is staged. The refusal names the step to finish first, so that conflict markers are never committed.
-- Without an origin the commit stays local, and the script says so.
-- Where git resolves no identity for the repository, nothing is committed. The script says what to set up.
-- With a tag and nothing to commit, the tag marks the current state. A tag that already exists is refused and nothing is changed.
+The script also pushes a clean repository that is ahead of its origin, for example after a rebase finished by hand or a push that failed. A branch with no upstream yet reaches the remote with its first commit. When there is nothing to commit and a tag is given, the current state is tagged.
 
 ## What you have afterwards
 
-Your work is committed on the branch that was checked out, pushed to its origin if it has one, and tagged if you asked. Nothing was rendered. A bare save visits every repository with changes, so when you have two windows open, give the slug of the one you work in and the other is left alone.
+- One commit per repository with changes, with the confirmed message.
+- The commit pushed to the origin, on the branch that was checked out.
+- The tag, if you asked for one, pushed with the commit.
+
+No render is made and no other check than `light` has run.
 
 ## If something goes wrong
 
-- "no commit identity": git resolves no name or e-mail for this host. Run `/setup` for the per-host identity. Nothing was committed.
-- "Tag ... already exists": choose another name. Nothing was changed.
-- "A rebase is in progress" (or a merge): finish the step of a conflict first, then save again. Nothing was staged.
-- "Remote changes ... conflict with yours": the rebase stands where it stopped and the commit is made. Settle the conflict as [Settle a conflict](settle-a-conflict.md) says, then save again.
-- "The pull with rebase failed ... left no rebase to finish": the commit is made. Check the network and the remote access, then save again.
-- "Push failed": the commit is made. Check the network and the remote access, then save again.
-- "Tag ... could not be pushed": the tag was created locally. The script prints the way to push it later.
-- "not pushed - no origin configured": the commit is kept locally. This is a property of the repository, not a defect.
-- "Project ... is not a repository": a project without its own repository cannot be saved by slug. The script says how to start one.
+- **A rebase conflicts.** The rebase is left standing. The commit is made and nothing is lost. The script prints the files in conflict and the step that follows. Claude goes on with the step of a conflict and you save again afterwards. See [Settle a conflict](settle-a-conflict.md).
+- **A rebase or a merge is already in progress.** The script refuses before anything is staged, so that conflict markers are never committed. The refusal names the step to finish first.
+- **There is no origin.** The commit stays local, and the script says it was not pushed.
+- **Git resolves no identity.** The script commits nothing and says so.
+- **The tag exists already.** The script refuses and changes nothing.
+- **The push fails.** The script reports it; check the network and the remote access, then save again.
+- **The repository is not under git.** The save skips it with a note, or refuses it when you named its slug.
+
+If you are unsure what is still unsaved when you stop, see [End a session](end-a-session.md).
 
 ## A worked example
 
-You have finished a round on a project and want it kept.
+You have worked one round in a project and want it kept. You type:
 
 ```
 /save <slug>
 ```
 
-Claude reads the status and sees the project with its changes on `main`. It runs the `light` check and finds nothing to fix. It reads the round's history records and proposes one line:
-
-```
-<what the round changed, in one English line>
-```
-
-You confirm it. Claude runs the save script. The script commits, rebases onto the remote and pushes, and prints the file summary and a line saying the project was saved and pushed.
+Claude lists the project with its branch and runs the `light` check. The check finds nothing to fix. Claude proposes `intent: narrow the scope to the first release` from the round's history records, and you accept it. The script prints the file summary and then a line that the project was saved and pushed to its origin. Nothing more has been done: no render ran and no tag was set.
 
 ## See also
 
@@ -92,4 +90,4 @@ You confirm it. Claude runs the save script. The script commits, rebases onto th
 - [Persistence in git](../about/persistence-in-git.md): why there are two doors and two speeds.
 - [Glossary](../reference/glossary.md): every term of the forge in one line.
 
-Generated on 2026-11-01 for version 6.4 from the files the front-matter names; never edited by hand.
+Generated on 2026-11-01 for version 6.8 from the files the front-matter names; never edited by hand.

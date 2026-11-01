@@ -1,8 +1,8 @@
 ---
 generated: 2026-11-01
-version: 6.4
+version: 6.8
 made: derived
-inputs-hash: 3b2b5855a67deeff
+inputs-hash: 6d01f4538219a75d
 inputs:
   - .claude/skills/forge/states/brief.md
   - templates/brief.md
@@ -16,217 +16,260 @@ inputs:
 
 # The brief
 
-A brief is the principal's own text of one whole of thinking: what he
-wants and why. The principal is the person whose thinking is being
-forged, and the final authority on its content. This page explains
-what a brief is, who writes it, what it holds and why it is rough on
-purpose. It is for anyone who uses the forge and for anyone weighing
-whether its way of starting a project is sound.
+A brief is the principal's text of one whole of thinking: what he
+wants and why, with what he chose to take from the finding around it.
+The principal is the person whose thinking is forged. This page says
+what a brief is, who writes and reads it, what it holds, when it is
+complete and why it is rough on purpose. It is for the user who wants
+to know what the first document of a project is and for the evaluator
+who wants to know why it has so little structure. How to compose one
+is the page [Write a brief](../use/write-a-brief.md).
 
 ## What it is
 
-A brief is the first artefact of every chain, that is, the first
-versioned document a project's thinking travels through. It puts an
-idea together. It holds what the principal wants, why he wants it,
-and what he chose to take from the finding around it.
+A brief is the first artefact of a project's chain, the document the
+chain starts at. An artefact is a document of the chain, composed by
+the principal with Claude and versioned. The founding brief is the
+file `00-brief.md`. A later brief is `00-brief-<name>.md`, one per
+later whole of thinking.
 
-A brief is free form. Only a minimal header is fixed. Below it the
-principal may use any structure he finds useful: prose, headings,
-tables, lists or use cases. A brief has no required content and no
-IDs, and none of the conventions of the chain apply to it.
+A brief is free form. Any structure the principal finds useful may
+stand in it: prose, headings, tables, lists, use cases. It has no
+required content and no IDs. The only fixed part is a minimal YAML
+header. The conventions of the chain do not apply to its text.
 
 A brief holds thoughts to be processed, not decisions. Nothing in it
 is yet a position. Its thoughts may be changed, reworked or dropped
-when it is mined, that is, when its thoughts are worked into
-[The intent](the-intent.md). Only the intent turns them into
-positions.
+when they are mined. Only [the intent](the-intent.md) turns them
+into positions.
 
 A brief is rough on purpose, neither perfect nor detailed. The
-chiselling is the intent's work: a brief is the raw piece, and the
-intent is where it is shaped. A brief polished until the intent has
-nothing left to do has gone too far. It is where thoughts are thrown
-in before they are sifted. Not all of them survive, and the sifting
-happens in the intent.
+chiselling belongs to the intent. A brief polished until the intent
+has nothing left to do has gone too far. It is the place where
+thoughts are thrown in before they are sifted: not all of them
+survive, and the sifting is the work of the intent.
+
+A brief is not the record of the finding. The finding around it is
+wide: research, sources, the principal's ideas and Claude's. The
+brief carries what the principal chose to take from it. What he left
+out lives in `research/` and `sources/` where it is a finding or a
+source, and otherwise nowhere.
+
+A brief is versioned as every artefact is. It is a draft until the
+principal approves it, then 1.0, and it is changed after that as any
+artefact is. It is not locked and not immutable. What it said at any
+version stands in its history and in git.
+
+A brief is kept in the language it is written in. This is the one
+exception among the artefacts, which otherwise follow the language of
+the project. The reason for the exception is not recorded in the
+inputs of this page; what the forge does with languages is the page
+[Languages](languages.md).
 
 ## Who writes and reads it
 
-The brief belongs to the principal. Whatever stands in it he
-approved, whoever first said it.
+The brief is the principal's. What is in it he approved, whoever
+first said it. Claude is his cognitive extension: it proposes,
+verifies, draws out and writes down, and it decides nothing about
+what goes in.
 
-Claude (the AI assistant the forge runs on) helps compose it. At the
-opening Claude is the active one. It brings how the same thing is
-done elsewhere, verifies what can be verified, and proposes research
-and the intake of outside material. Then, on the principal's word to
-write, Claude writes down what the talk arrived at so that it is
-understood. It may translate, mend the grammar and word an idea of
-its own that the principal has accepted. It reflects back what it
-has formulated before it is written. Claude does not decide what
-goes in, and it does not chisel the brief into an intent.
+Nothing in a brief marks authorship. Two marks stay, because they
+carry something other than authorship:
 
-The brief is read when it is mined into the intent. Positions mined
-from it cite it as their provenance. The ledger (the table of a
-project's state, built from its documents when it is read) has a
-Briefs table with one row per brief.
+- `(source: <path>)` stands where the identity of a source supports,
+  limits or contradicts the thought. At mining it becomes a fact with
+  provenance. What merely inspired the thought carries no mark and
+  stays discoverable through the research note.
+- `(remark: …)` stands where a reservation or an uncertainty must
+  stay visible. It is named by what it is and not by who made it.
+
+A suggestion or an alternative the principal did not take is gone,
+unless he says it stays.
+
+The brief is read by Claude when it is mined into the intent through
+`/forge intent`. The ledger reads its header. The ledger is the
+project's single source of truth for state, made at read time from
+the documents. Its Briefs table shows one row per brief and how far
+each is mined, from the record of the mining in the intent's history.
 
 ## Made from
 
 A brief is made from the principal's thought, however it arrives.
-Around it, the finding gathers more:
+Around it, gathered during the elicitation, stand research notes in
+`research/`, sources in `sources/` and Claude's own proposals. A
+proposal of Claude's, however large, serves the finding and is not
+the brief. The existing intent and the ledger are read only to know
+what already stands, never to shape the text.
 
-- research notes, kept in `research/`;
-- sources, the outside material kept in `sources/`;
-- Claude's own proposals.
-
-The finding is wide and gathers as many ideas as it can. The brief
-is not the record of the finding. What goes in and what stays out is
-the principal's decision, made on what was found. What stays out
-lives in `research/` or `sources/` where it is a finding or a source.
-Otherwise it lives nowhere.
-
-A brief can arrive in one of three ways:
-
-- finished from outside, and stored as it came;
-- begun outside, and finished with Claude in the forge;
-- born in the forge from the first word.
-
-All three are equally legitimate. The forge does not distinguish
-them.
+The file is created from `templates/brief.md`. The template is the
+minimal YAML header and nothing else. Beside it a history companion
+`<file>.history.md` is created from `templates/history.md`. The
+history is an append-only record of what changed in the brief and
+why; the body of the brief is the current state, the companion the
+record.
 
 ## What it holds
 
-The file is `00-brief.md` for the founding brief. A later whole of
-thinking is a file of its own, `00-brief-<name>.md`. Each brief has
-a history companion beside it, `<file>.history.md`, as every
-versioned document has.
+The header holds the project's slug, a working title, the author,
+the version and the status. The status is `draft` until the brief is
+approved.
 
-The fixed header is the one the template `templates/brief.md` gives:
+Below the header the text is the principal's. Its usual shape is
+light:
 
-- `project`: the slug of the project;
-- `title`: a working title;
-- `author`: the principal's handle;
-- `version`: the version number;
-- `status`: `draft`, `approved` or `superseded`.
-
-Its usual shape is light:
-
-- the topics of the whole;
-- for each topic, a few sentences of what the principal wants of it;
-- beside each, the research that verifies or limits it;
+- the topics of the whole, each with a few sentences of what the
+  principal wants of it;
+- the research that verifies or limits each topic, cited beside it;
 - what is still open.
 
-Nothing in a brief marks who wrote what. Two marks may stand,
-because they carry something other than authorship:
-
-- `(source: <path>)`: stands where the identity of a source
-  supports, limits or contradicts the thought. At mining it becomes
-  a fact with its provenance.
-- `(remark: …)`: a short note that stands where a reservation or an
-  uncertainty must stay visible. It is named by what it is, not by
-  who made it.
-
-What merely inspired a thought carries no mark. It stays
-discoverable through its research note. A suggestion or an
-alternative the principal did not take is gone, unless he says it
-stays.
-
-A brief is kept in the language it is written in. It is the one
-artefact that does not follow the language of its project. The
-reason is not recorded here; [Languages](languages.md) covers the
-languages of the forge.
-
-### A worked example
-
-A generic brief, its header as the template gives it and five lines
-of text:
-
-```
----
-project: <slug>
-title: <working title>
-author: <principal>
-version: 0.1
-status: draft
----
-
-We want new team members to be productive in their first week.
-Today the knowledge sits in people's heads and in scattered notes.
-What we want: one starting path, owned by the team, kept current.
-What we do not want: a heavy portal nobody maintains.
-Open: who keeps it current (remark: unclear whether anyone has time).
-```
-
-It has no headings, no IDs and no polish. Sorting it into positions
-is left to the intent.
+A brief says what the idea is and why. It may carry a mechanism where
+the mechanism is part of the idea. A summary or a structured proposal
+the principal orders into a brief is stored as shown, never
+re-narrated.
 
 ## Complete when
 
 A brief is complete when the principal says so and approves it.
-Before the approval is offered, Claude walks the Map of the brief's
-definition once. The Map lists the areas the finding looks at. The
-walk asks whether each area was consciously considered, and an area
-may leave nothing in the brief.
+Approval is his explicit word, never a by-product of another step.
+Before the approval is offered, the Map of the brief's definition is
+walked once. The definition is the file that says what the artefact
+is and how it is found; its Map names the areas the finding looks at:
 
-A brief is versioned like every artefact. It is a draft until the
-principal approves it, which makes it version 1.0. After that it is
-changed as any artefact is. It is not locked and not immutable: what
-it said at any version stands in its history and in git.
+- the thought: what the principal wants, why, and what prompted it;
+- the boundaries: what he does not want, and what is out of scope;
+- the world around it: what exists that does the same or the
+  opposite, and what of it is inspiration, counter-example or proof
+  that the wheel exists;
+- the material: the sources and research the thought rests on,
+  registered so that the intent can cite them;
+- what is still open: what was not decided or verified.
 
-A brief may be mined into the intent when the principal says so,
-approved or not.
+The walk asks whether each area has been consciously considered. An
+area may leave nothing in the brief. The walk asks and does not mend:
+a tension, an alternative left undecided or a boundary left vague may
+stay as it is, because resolving them is the intent's work.
+
+A brief is mined into the single intent when the principal says so,
+approved or not. Positions mined from it cite the brief with the
+version they were mined at. A whole that dies on the way leaves the
+brief as it stands and one rejected direction in the intent with the
+reason, so that the trace survives either way. How much of a brief is
+mined is a judgement recorded in the mining record of the intent's
+history and in the provenance of the positions, never a metric.
 
 ## How it is found
 
-A project may have more than one brief. The founding brief is
-`00-brief.md`. A later whole of thinking that would otherwise land in
-the intent as a batch of unproven positions is born as
-`00-brief-<name>.md`. It has the same header, the same states and the
-same rules.
+Three origins are equally legitimate, and the forge does not
+distinguish them:
 
-Every brief is mined into the single intent of the project, when the
-principal says so. How far each brief is mined is recorded in the
-intent's history. The record is kept there because mining changes
-the intent, not the brief. The ledger reads that record and shows it
-in its Briefs table. "How much" is a judgement recorded in the
-mining record and in the provenance of the positions, never a
-metric.
+- the brief arrives finished from outside and is stored as it came;
+- it is begun outside and finished with Claude in the forge;
+- it is born in the forge from the first word.
 
-A whole that dies on the way leaves its brief as it stands. The
-intent then records one rejected direction with the reason, so the
-trace survives either way.
+`/forge brief [name]` is the door for the latter two. At the opening
+Claude is the active one: it inspires, brings how the same thing is
+done elsewhere and how original the idea is, verifies what can be
+verified, and proposes research (`/research`) and the registration of
+outside material (`/ingest`). Both run on the principal's word. After
+a research step Claude says what it changed in the thought, what
+stays uncertain and whether more research is likely to change
+anything.
 
-How you compose a brief is shown in [Write a brief](../use/write-a-brief.md).
-The terms used here are in the [Glossary](../reference/glossary.md).
+Then the brief is written. Claude moves the principal to say what he
+wants, why and what he does not want, and forms the record: on the
+principal's word to write, it takes what the talk arrived at and
+writes it down so that it is understood. It may translate, mend the
+grammar and word an idea of its own that the principal has accepted.
+What it has formulated it reflects back before it is written. It does
+not take the brief over: it does not decide what goes in, and it does
+not chisel the brief into an intent.
+
+Claude holds the form. Once the talk turns to taking the idea apart
+and agreeing it piece by piece, Claude says in one sentence that this
+is the intent's work and offers once to go on in the intent. That is
+a recommendation, never a gate. The principal decides whether the
+matter stays in the brief as one open line or is let go. No
+walkthrough runs over the text of a brief; a walkthrough is the
+forge's way of working a list of decisions one item per message.
+
+At any time the principal may have Claude give the brief a structure:
+the text gathered under headings in a logical order, what repeats
+pointed out, the grammar mended. Claude adds nothing, drops nothing
+and rewords no thought. The step is the principal's to ask for and
+never a condition of the approval.
+
+What Claude thinks of the brief it says when asked. What does not fit
+it says at once and unasked, in one sentence: a wrong assumption, a
+contradiction, a risk.
 
 ## Why
 
-- **No required structure.** A required structure would force
-  premature tidiness. A templated brief with chapters (goal,
-  high-level idea and so on) was rejected for that reason. No
-  structure is forbidden either.
-- **No second home for what the brief leaves out.** A draft intent
-  beside a draft brief, a separate notes record and a new artefact
-  before the brief were all rejected. The brief holds the
-  principal's choice, and what he does not take needs no home. A
-  finding or a source already has `research/` and `sources/`. What
-  merely fell by in the conversation is gone with it.
-- **No marks of authorship.** Whatever is in the brief the principal
-  approved, whoever first said it. A mark that names a model also
-  reads differently on every model the forge runs on. The two marks
-  that stay are named by what they are so that they read the same on
-  any model.
-- **More than one brief.** A big new whole needs a place where the
-  thought can be tempered before it enters the intent, without a new
-  kind of document. It works much like a branch in git. A thread
-  (one open matter of the intent) was wrong for it, because a thread
-  is a question and not a body of work.
-- **Rough on purpose.** The chiselling belongs to the intent. A brief
-  that does the intent's work leaves the intent nothing to do.
+No structure is required, because a required one would force
+premature tidiness. None is forbidden either. A templated brief with
+chapters, such as goal and high-level idea, was considered and
+rejected for the same reason.
+
+The brief is rough because the chiselling belongs to the intent. A
+brief that is composed in a round or two and then mined leaves the
+intent the work the intent is for.
+
+The brief is not the record of the finding because what the principal
+does not take needs no home. A finding or a source already has
+`research/` and `sources/`. What merely fell by in the conversation
+is gone with it. A second home for the rest, such as a draft intent
+beside a draft brief, a notes record or a new artefact before the
+brief, was considered and rejected.
+
+Nothing marks authorship because a mark that names a model reads
+differently on every model the forge runs on. Marks such as
+*(Claude)* before every block that was not the principal's own were
+dropped for this reason. What carried something other than authorship
+stays as `(source: <path>)` and `(remark: …)`, so that the brief
+reads the same whatever model the forge runs on.
+
+A project may have more than one brief because a big new whole needs
+a place where the thought can be tempered before it enters the trunk
+of the chain, like a branch in git, without a new document kind. A
+thread was wrong for it, since a thread is a question and not a body
+of work. A working space with positions before the merge was judged
+heavy for now. Every later whole that would otherwise land in the
+intent as a batch of unproven positions is therefore born as a brief
+under the same rules.
+
+The brief is never locked because what it said at any version stands
+in its history and in git.
+
+## A worked example
+
+Below the header the template gives, a brief may be as short as this.
+The project and the source are placeholders.
+
+```
+Every team keeps its own calendar and we lose a morning a week
+finding each other.
+
+I want one calendar every team reads and writes, where the teams
+already work, not another tool to log into.
+
+Two products do this already (source: sources/calendar-survey.md);
+one of them is free (remark: the free one may not survive the year).
+
+Not wanted: a calendar that also books rooms.
+
+Open: who owns the calendar once it exists.
+```
+
+Nothing in it is a position yet. The source mark becomes a fact with
+provenance when the brief is mined. The remark keeps a doubt visible
+without saying who had it. The open line is the kind of matter the
+intent resolves.
 
 ## See also
 
 - [Write a brief](../use/write-a-brief.md): composing one.
 - [The intent](the-intent.md): where the brief is mined.
 - [Languages](languages.md): why a brief keeps its language.
-- [Glossary](../reference/glossary.md): every term of the forge in one line.
+- [Glossary](../reference/glossary.md): every term of the forge in
+  one line.
 
-Generated on 2026-11-01 for version 6.4 from the files the front-matter names; never edited by hand.
+Generated on 2026-11-01 for version 6.8 from the files the front-matter names; never edited by hand.

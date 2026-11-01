@@ -1,8 +1,8 @@
 ---
 generated: 2026-11-01
-version: 6.4
+version: 6.8
 made: mirrored
-inputs-hash: 6fe78e773da19345
+inputs-hash: e247fa90380f9fd1
 inputs:
   - .claude/skills/ingest/SKILL.md
   - scripts/doc2md.py
@@ -12,18 +12,14 @@ inputs:
 
 # Register a source
 
-This page shows how you store, register and catalogue external input with `/ingest`. It is for the principal (the person whose thinking is being forged) who has a document, a pasted text or a set of files that the project should keep as a source.
-
-A source is external input as it arrived: a transcript, an offer, a standard. Registering it stores it in `sources/` and writes one entry for it in the index `sources/00-INDEX.md`. Nothing more happens.
+`/ingest` stores external input in the `sources/` folder of a project, asks what it is for and catalogues it in the folder's index. This page is for you when a transcript, an offer, a standard or a pasted text has to enter a project. Nothing is processed: the command registers a source and does no more. The principal (the person whose thinking is being forged) decides if and how the source is ever used.
 
 ## When to use it
 
-- You have a file, or a text you can paste, that belongs to the project as input.
-- A set of related files arrives whole, or files of one origin keep arriving.
-- You want to find out which files in `sources/` are not yet registered, or which have changed since they were.
-- You want the project to point at a document that lives in another project.
-
-Registration is not intake. The source waits until you decide how and when to use it, and nothing of it is carried into the intent. Why sources are immutable and why registration is not intake is explained in [Sources and research](../about/sources-and-research.md).
+- A document, or text you have at hand, should be kept as an immutable input of the project.
+- Several files of one origin keep arriving and belong together.
+- You want to find files that lie in `sources/` without an entry, or files that changed after they were registered.
+- A document of another project should be pointed at without a copy.
 
 ## The command
 
@@ -31,98 +27,95 @@ Registration is not intake. The source waits until you decide how and when to us
 /ingest [file] [slug] [--bundle name]
 ```
 
-The slug names the project and is taken from context when you leave it out. The forms are:
+The second argument is the project slug. Where it is left out, Claude takes it from the context and asks if that is ambiguous.
 
-- `/ingest vendor-offer.docx my-project`: registers that document.
-- Text pasted into the conversation, with `/ingest`: Claude stores the text as `sources/<slug>.md`, the slug proposed from its content. The file opens with a two-line header: the origin (pasted into the conversation) and the date.
-- `/ingest minutes-1.pdf my-project --bundle meeting-notes`: puts the file into a bundle of one origin that keeps arriving. The bundle is born with its first file.
-- `/ingest` with no arguments: a sweep, described below.
+One line that can be typed as it stands, with a placeholder:
+
+```
+/ingest path/to/offer.pdf <slug>
+```
+
+The forms of the command:
+
+- With a file, that document is registered.
+- With text pasted into the conversation, the text becomes the source and is stored as `sources/<slug>.md`. Claude proposes the slug from the content and adds a two-line header: the origin (pasted into the conversation) and the date.
+- With `--bundle <name>`, the file goes into a bundle of one origin that keeps arriving.
+- Bare, `/ingest` sweeps `sources/` for files that are not yet in the index and registers them. It also reports files changed since their registration.
 
 ## What happens
 
-1. **Personal matter stops the command.**
-   Before anything is stored, Claude checks whether the text carries personal matter, such as a named private person, an identifying detail or health. If it does, Claude asks whether to store it as it is, redact it first, or drop it. Redaction happens before registration because a registered source cannot be changed.
-   You should now see a question from Claude, or no question at all when nothing personal is in the text.
+1. **Personal matter stops the command.** Before anything is stored, Claude checks the text for personal matter, such as a named private person, an identifying detail or health. If it finds some, it asks you to choose: store as it is, redact before registration, or drop. You should now see a question and no file in `sources/` yet. A registered source cannot be changed, so redaction can only happen before registration.
+2. **The file is stored.** It is copied into `sources/` as `<short-slug>.<ext>`, a short descriptive slug without a date. On a name collision the slug gets the suffix `-2`. You should now see the file in `sources/`.
+3. **Every binary gets one question: convert to Markdown?** A binary is a PDF, a Word, PowerPoint or Excel file and the like. Text files get no question.
+   - Yes: `scripts/doc2md.py` makes the extract. The extract is then the source, and its entry names the original as its origin. The original is not copied into the project. If it already lay in `sources/`, it stays there as a local file that git does not track.
+   - No: the binary is the source as a functional thing, such as a deck template or a graphic. It is stored and registered as it is, with no extract.
+   - Keeping both is the exception, and only on your explicit word.
 
-2. **The file is stored.**
-   Claude copies the document into `sources/` as `<short-slug>.<ext>`, a short descriptive name with no date in it. On a name collision it adds the suffix `-2`. A file already registered is never renamed or modified.
-   You should now see the file in `sources/`.
-
-3. **Every binary gets one question: convert to Markdown?**
-   A text file gets no question. For a binary (PDF, Word, PowerPoint, Excel and the like) Claude asks once per file.
-   - Yes: Claude runs `python scripts/doc2md.py <file> -o sources/`. The Markdown extract is then the source, and the original is not copied into the project. If the original already lay in `sources/`, it stays there as a local file only.
-   - No: the binary is the source as a functional thing, such as a deck template or a logo. It is stored and registered as it is, with no extract.
-   Keeping both is an exception, made only on your explicit word. The script is the only way a conversion is made. Its formats and what it needs are in [Scripts](../reference/scripts.md).
-   You should now see the extract `<short-slug>.md` in `sources/`, or the binary itself.
-
-4. **Claude asks what the source is for.**
-   This is asked before the index entry exists, so the entry carries the answer from its birth. You answer with the role, for example a standard to verify against, inspiration, a counter-example or a meeting record. Or you tell Claude to infer it. Then Claude writes what the file itself declares and marks it as inferred. Claude never infers it unasked, and it writes nothing of the source before you answer. A bundle gets one question for the whole, and each file added later to a growing bundle gets one of its own.
-   You should now see your answer, or the marked inference, carried into the next step.
-
-5. **The index entry is written.**
-   Claude adds the entry to `sources/00-INDEX.md`, creating the index if it is missing. The entry has these fields:
+   You should now see either the `.md` extract or the binary in `sources/`.
+4. **Claude asks what the source is for.** The question comes before the index entry exists, so that the entry carries your answer from its birth. Your answer is the Role of the source. You may instead tell Claude to infer it. Then Claude writes what the file itself declares and marks it as inferred. Claude never infers it unasked, and it writes nothing about the source before you answer. A bundle gets one question for the whole, and a file added to a growing bundle one of its own. You should now see the question, and after your answer the entry.
+5. **The index entry is written** in `sources/00-INDEX.md`, which is created from its template if it is missing. The entry has these fields:
    - What: what the source is, in one or two sentences.
-   - Origin: where it came from, such as an author, a meeting or an extract of the original.
-   - Date: the document's own date, best effort. It comes from the content if it can be found, else from the file, else it is the day of registration. The field says which. You are never asked for a date.
-   - Form: text, extract of the original, or binary. Each source has one form.
-   - Role: your answer from the previous step.
-   - Use for: the questions the source answers best.
-   You should now see the new entry in `sources/00-INDEX.md`.
+   - Origin: where it came from.
+   - Date: the date of the source, found for free and never asked. The field says whether it comes from the content, from the file or from the ingest.
+   - Form: text, extract of the original, or binary.
+   - Role: your answer.
+   - Use for: what to reach for the source for.
 
-6. **Claude replies in two lines at most.**
-   The first line names the file stored and its index entry. The second says in one line what the source adds to the intent, or "nothing new". There is no analysis of the content and no next step implied.
-   You should now see those two lines.
+   You should now see the entry in the index.
+6. **Claude remakes the ledger** (the project's state report, built from its documents) and replies in two lines at most: the file stored and its index entry, then what the source adds to the intent in one line, or "nothing new". There is no analysis of the content and no next step implied. You should now see those two lines.
 
-### A related set that arrives whole
+## Bundles
 
-A set of related files, such as a downloaded site with its index, is stored as a subdirectory `sources/<slug>/`. It counts as one source with one entry in the main index. It carries its own index `00-INDEX.md`. Claude creates that index from the bundle template if the set arrives without one. If one was supplied, Claude checks it against the actual contents and reports the gaps. The index opens with a short paragraph saying what the whole is, why it entered the project, and that it arrived whole.
+A related set that arrives whole is stored as `sources/<slug>/` and counts as one source with one entry in the main index. Its own `00-INDEX.md` is made from the bundle template if it arrives without one. A supplied one is checked against the real contents and gaps are reported. In a sweep, a subdirectory is registered as one bundle and never file by file.
 
-### A bundle that keeps growing
+A bundle of one origin that keeps arriving is registered with `--bundle <name>`:
 
-With `--bundle <name>`, the bundle is for one origin that keeps arriving. If `sources/<name>/` is missing, it is born at the first file, its index saying in the opening paragraph that it grows. If it exists and grows, the file is stored inside it, never beside it, and gets its own entry in the bundle's index. Each file is immutable from its own registration. A bundle that arrived whole refuses new files, and Claude says why.
+- If `sources/<name>/` does not exist, it is born at the first file as a growing bundle. Its index opening paragraph says that it grows.
+- If it exists and grows, the file is stored inside it, never beside it, with its own entry in the bundle's index. Each file is immutable from its own registration.
+- If it exists and arrived whole, the command refuses and says why.
 
-### Bare `/ingest`: the sweep
+## Another project's document
 
-Without arguments, Claude scans `sources/` for files that have no index entry and registers them, source by source, with the questions above. A new subdirectory is registered as one bundle, never file by file, and Claude asks whether it grows. A file inside an existing bundle that has no entry in the bundle's index is offered for registration there.
-
-The sweep also reports files whose modification time is later than the date of their entry, and asks what to do with each. What a change means depends on the kind of project:
-
-- In a thought project, a changed source is a breach of immutability. You resolve it by registering the new version beside the old as a new source, by restoring the original, or by accepting the change knowingly. Claude never re-registers silently.
-- In a library, a changed document is its owner's ordinary maintenance. Claude updates the index entry, its date included, and nothing else.
-
-### A document of another project
-
-When you point a project at a document that lives in another project, nothing is stored in `sources/`. Claude adds an index entry that names the path and says what the document is for. The ledger (the file that shows the state of the project, made when it is read) finds the citation by itself. This is how a library's document is used; the whole way is in [Share material through a library](share-material-through-a-library.md).
+A document that lives in another project, a library's among them, is cited and not copied. Nothing is stored in `sources/`. Claude adds an index entry that names the path and says what the document is for. The ledger finds the citation by itself. How a library is used is described in [Share material through a library](share-material-through-a-library.md).
 
 ## What you have afterwards
 
-- The source in `sources/`: the text file, the extract, the binary, or the bundle directory.
-- One entry in `sources/00-INDEX.md` with its role, date and form, and for a bundle its own index.
-- A remade ledger. What the source is and is for lives in the index alone.
-- Nothing carried into the intent or any other document.
+- The source in `sources/`: a text file, an extract or a binary, never changed again.
+- An entry in the index with its Role, Date and Form.
+- For a bundle, its folder, its own index and one entry in the main index.
+- Nothing carried into the intent. Registration is not intake: you direct every later use of the source. The reasons are in [Sources and research](../about/sources-and-research.md).
+
+## Sweep and changed files
+
+A bare `/ingest` also reports files whose modification time is later than the Date of their entry, and asks what to do with each. The answer depends on the kind of project:
+
+- In a thought project, a changed source breaches immutability. You choose between registering it beside the old one as a new source, restoring it, or accepting the change on your word.
+- In a library, a changed document is the owner's ordinary maintenance. Claude updates the entry, its Date included, and nothing else.
+
+Claude never re-registers silently.
 
 ## If something goes wrong
 
-- Claude stops with a question about personal matter. Answer with one of the three choices: store as it is, redact before registration, or drop. Nothing is stored before you answer.
-- A registered source has changed. In a thought project, Claude lists it in the sweep and asks what to do. Pick one of the three ways above.
-- A bundle that arrived whole refuses a new file. Register the file as a source of its own, or as the first file of a growing bundle with another name.
-- The conversion does not run. `doc2md.py` uses markitdown, which it never installs itself. Install it as the script's help says. The legacy formats `.doc`, `.ppt`, `.rtf`, `.odt`, `.odp` and `.ods` are reported as unsupported, so resave them as `.docx`, `.pptx` or `.xlsx` first. See [Scripts](../reference/scripts.md).
-- You do not know what a source is for. Tell Claude to infer the role. The entry then says so.
+- The text carries personal matter: the command stops and asks before storing. Decide to store, redact or drop.
+- A file is already in the index: it is never renamed or modified. A changed file is handled as in the sweep above.
+- `--bundle` names a bundle that arrived whole: the command refuses. Register the file as its own source or choose another bundle name.
+- The conversion fails: `doc2md.py` needs markitdown, which it never installs itself. It also reports the legacy formats `.doc`, `.ppt`, `.rtf`, `.odt`, `.odp` and `.ods` as unsupported. Resave them as `.docx`, `.pptx` or `.xlsx` first. The formats and the installation are described in [Scripts](../reference/scripts.md).
 
 ## A worked example
 
-You have a Word file with a supplier's offer and a project called `my-project`.
+You have a PDF offer and a project with the slug `<slug>`.
 
 ```
-/ingest supplier-offer.docx my-project
+/ingest path/to/offer.pdf <slug>
 ```
 
-Claude finds no personal matter. It asks: "supplier-offer.docx is a binary. Convert to Markdown?" You answer yes. It runs `python scripts/doc2md.py supplier-offer.docx -o sources/` and the extract `sources/supplier-offer.md` is the source. It asks: "What is it for?" You answer: "a price to compare against". Claude writes the entry in `sources/00-INDEX.md` with the origin "extract of `supplier-offer.docx` (markitdown)", the date taken from the offer's own header, the form "extract of supplier-offer.docx" and your role. Then it replies:
+1. Claude finds no personal matter and copies the file into `sources/` as `example-offer.pdf`.
+2. It asks: convert to Markdown? You answer yes. It runs the conversion and keeps `sources/example-offer.md` as the source, and the PDF stays out of the project.
+3. It asks what the source is for. You answer: a price list to compare against.
+4. It writes the entry in `sources/00-INDEX.md` with Origin "extract of the PDF (markitdown)", the Date from the content, Form "extract" and your Role.
+5. It replies in two lines: the extract stored with its entry, and "nothing new" for the intent.
 
-```
-Stored sources/supplier-offer.md and indexed it.
-Adds nothing new to the intent.
-```
+Terms of the forge are explained in the [Glossary](../reference/glossary.md).
 
 ## See also
 
@@ -131,4 +124,4 @@ Adds nothing new to the intent.
 - [Scripts](../reference/scripts.md): `doc2md.py`, its formats and what it needs.
 - [Glossary](../reference/glossary.md): every term of the forge in one line.
 
-Generated on 2026-11-01 for version 6.4 from the files the front-matter names; never edited by hand.
+Generated on 2026-11-01 for version 6.8 from the files the front-matter names; never edited by hand.

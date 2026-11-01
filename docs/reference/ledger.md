@@ -1,8 +1,8 @@
 ---
 generated: 2026-11-01
-version: 6.4
+version: 6.8
 made: mirrored
-inputs-hash: 962e18d6a541fd80
+inputs-hash: 2e256333a1982205
 inputs:
   - templates/ledger.md
   - CLAUDE.md#Ledger
@@ -11,41 +11,32 @@ inputs:
 
 # Ledger
 
-This page states the shape of a project's ledger exactly: its header, its tables and their columns, the state words, the Waiting on principal rule and the Reports section, with the place each column is read from. It is for the user who reads a ledger and for the extender who changes how it is made. The ledger is the single place that holds the state of a project (briefs, documents, renders, findings and the rest).
+The ledger is the file `ledger.md` of a project: the single source of truth for its state, in tables, for the principal (the person whose thinking is forged) and for anyone who extends the forge. This page states its header, its tables, where each column is read from and the words its states use.
 
 ## How it is made
 
-- The ledger is made at the moment it is read, by `python scripts/forge-ledger.py <slug>`.
-- It is built from the project's documents and written as `ledger.md` in the project.
-- It is never kept in git. The project's ignore file keeps it out.
-- Nobody writes a row. Every command that changes state makes the ledger again with the script.
-- The shape is that of `templates/ledger.md`, and the comments of that template are kept in the ledger.
-- `--out PATH` writes the ledger to another file instead (a dry run).
-- A project whose files are still in the shape before the migration is not written: its `ledger.md` is the hand-kept ledger, and the script prints to the terminal instead.
-- A project whose `ledger.md` is tracked by git is not written either: the script prints to the terminal.
-- A project layer that the project does not have gets no row and is not reported missing.
+- It is made by `python scripts/forge-ledger.py <slug>` at the time it is read.
+- It is never kept in git. The script writes it as a gitignored file.
+- Nobody writes a row. Every command that changes state remakes the ledger with the script.
+- The shape is that of `templates/ledger.md`, whose comments the script keeps.
+- The script can print to standard output, or to a path given with `--out`, instead of writing the file (a dry run).
+- On a project of the shape before the migration, `ledger.md` is the hand-kept ledger and the script does not write it. The same holds where git tracks the ledger.
+- An unparsable file is not a crash. The script exits with 0 and names the file in the header.
 
 ## The header
 
-| Line | Holds | Read from |
-|---|---|---|
-| `project` | the project's slug | the argument given to the script |
-| `updated` | the day the ledger was made | the day of the run |
-| `kind` | `thought` or `library` | the project file, echoed |
-| `language` | the project's language | the project file, echoed |
-| `shape` | present only for a project before the migration | the project file |
-| `unparsed: <file>:<line> (<what>)` | one line per file the script could not parse | the run |
-
-An unparsable file never stops the script. It becomes an `unparsed:` line of the header, never a table row, and the exit code stays 0.
-
-## Which tables a project keeps
-
-| Kind | Tables |
+| Field | Holds |
 |---|---|
-| `thought` | every table below |
-| `library` | Renders, Sources, Dependencies, Research and Waiting on principal; the Findings table returns with the first finding of a check |
+| `project` | the slug |
+| `updated` | the day the ledger was made |
+| `kind` | read from the project file, echoed |
+| `language` | read from the project file, echoed |
+| `shape` | present only on a project of the shape before the migration |
+| `unparsed:` | one line per file the script could not parse, as `unparsed: <file>:<line> (<what>)` |
 
 ## The tables
+
+A project of kind `thought` keeps every table. A project of kind `library` keeps only Renders, Sources, Dependencies, Research and Waiting on principal. Its Findings table returns with a check's first finding.
 
 ### Briefs
 
@@ -59,25 +50,23 @@ One row per brief (`00-brief.md` and `00-brief-<name>.md`).
 | Mined | the newest mining record of the intent's history; `pending` until one exists |
 | Note | the same record; `—` until one exists |
 
-Mined words:
+State words of Mined:
 
-| Word | Meaning |
-|---|---|
-| `pending` | the intent has not absorbed the brief |
-| `partial` | the intent has absorbed part of it; the Note says what remains |
-| `mined` | the intent has absorbed it |
-| `dropped` | the brief is set aside; the Note names the rejected direction |
+- `pending`: the intent has not absorbed the brief.
+- `partial`: the intent has absorbed part of it; Note says what remains.
+- `mined`: the intent has absorbed it.
+- `dropped`: Note gives the rejected direction.
 
 ### Documents
 
-One row per layer of the chain below the briefs.
+One row per layer of the chain below the briefs. A layer the project does not have gets no row.
 
 | Column | Read from |
 |---|---|
-| File | the file name |
-| Version | the document's header |
-| Status | the document's header |
-| Date | the newest content record of the document's history; a state record (a mining, a work state, a closing) does not move it |
+| File | the layer's file name |
+| Version | the header |
+| Status | the header |
+| Date | the newest content record of the history; a state record does not move it |
 
 ### Renders
 
@@ -85,13 +74,13 @@ One row per render file, read from the render's own provenance front-matter. A t
 
 | Column | Read from |
 |---|---|
-| Render | the render file |
-| Audience | the audience of its recipe |
-| Recipe | the provenance front-matter |
-| Inputs | the provenance front-matter |
-| Generated | the provenance front-matter |
+| Render | the file; a plain file made beside it is named in brackets |
+| Audience | the render's recipe |
+| Recipe | the provenance |
+| Inputs | the provenance |
+| Generated | the provenance |
 
-The documentation index (`docs/README.md`) has a row of its own, read from its front-matter. Its Recipe reads "none: derived by scripts/docs-index.py". Its Inputs are the map and the intent's version.
+The documentation index has a row of its own, read from its front-matter. Its Recipe is "none: derived by scripts/docs-index.py". Its Inputs are the documentation map and the version of the intent.
 
 ### Published
 
@@ -104,14 +93,12 @@ One row per designed file, read from its companion `published/<recipe>.md`.
 | From render | the companion |
 | Model | the companion |
 | Published | the companion |
-| State | compared with the render's generated date |
+| State | computed |
 
 State words:
 
-| Word | Meaning |
-|---|---|
-| `current` | the render's generated date is the one the companion names |
-| `stale` | the render is newer, or missing |
+- `current`: the render's generated date is the one the companion names.
+- `stale`: the render is newer or missing.
 
 ### Work
 
@@ -122,67 +109,67 @@ One row per work product.
 | File | the specification's header |
 | Specification | the specification's header |
 | Inputs | the newest state record of the specification's history |
-| Made | the newest state record of the specification's history |
-| State | the newest state record of the specification's history |
+| Made | the same record |
+| State | the same record |
 
 State words:
 
-| Word | Meaning |
-|---|---|
-| `current` | the file is made from the specification as it stands |
-| `stale` | the file is behind its inputs; also the state, with `—` in Inputs and Made, until a record exists |
-| `by hand` | the file is worked by hand |
+- `current`
+- `stale`
+- `by hand`
+
+Until a record exists, Inputs and Made are `—` and State is `stale`.
 
 ### Sources
 
-Registration only, one row per entry of `sources/00-INDEX.md`. What a source is and is for lives in the index, never in the ledger.
+Registration only: one row per entry of `sources/00-INDEX.md`. What a source is and is for lives in the index.
 
 | Column | Read from |
 |---|---|
-| File | the entry's heading |
+| File | the entry |
 | Date | the entry's Date field |
 | Date origin | the entry's Date field |
 | Form | the entry's Form field |
 
 ### Dependencies
 
-Registration only. One row per cited directory of another project's documents (a library's or any other's), found in the chain, the indexes, the recipes, the work and the research. No version is shown: another project's documents are kept by their owner.
+Registration only: the citations of another project's documents, a library's or any other's. They are found in the chain, the indexes, the recipes, the work and the research. There is one row per cited directory and no version, because the owner maintains those documents.
 
 | Column | Read from |
 |---|---|
 | Path | the cited directory |
-| Library | the cited project's slug |
+| Library | the slug of the cited project |
 | Used by | the citing files |
-| Note | the hand-kept ledger archive, `—` otherwise |
+| Note | the archive, where it has one; else `—` |
 
 ### Research
 
-Registration only. One row per note in `research/`, or per bundle of one research, which is read by its head `00-plan.md`. A bundle without that head is said as a row. What a note answers lives in `research/00-INDEX.md`.
+Registration only: one row per note in `research/`, or per bundle of one research. A bundle is read by its head, `00-plan.md`. A bundle without a head is said so in the row. What a note answers lives in `research/00-INDEX.md`.
 
 | Column | Read from |
 |---|---|
 | File | the note, or the bundle's directory |
-| Date | the front-matter of the note or of the head |
-| Derived from | the front-matter of the note or of the head |
+| Date | the front-matter |
+| Derived from | the front-matter |
 
 ### Findings
 
-The findings of the critic and of the checks, in one sequence.
+The findings of the critic and of the checks, in one sequence. A finding is born by its report in `reviews/`.
 
 | Column | Read from |
 |---|---|
-| ID | the heading in the report in `reviews/` |
+| ID | the heading of the report |
 | Severity | the heading |
 | Category | the heading; a check's category is `conformance` |
-| State | `open` at birth, then the newest of the records below |
+| State | `open` at birth, then the newest of the sources below |
 | Source review | the first report that names the finding |
-| Resolution | the record or decision that settled it |
+| Resolution | the newest of the sources below |
 
 State and Resolution come from the newest of these:
 
-- a `closed` record with the finding as its subject: `resolved`, with the record's reason;
-- the Verdict of a decision: `rejected`, `parked` or `obsolete`, with the decision;
-- a later report that names the finding as reopened under Known as: `open` again.
+- a `closed` record with the finding as its subject gives `resolved` and the record's reason.
+- a decision's Verdict gives `rejected`, `parked` or `obsolete`, and the decision.
+- a later report that names the finding as reopened under Known as gives `open` again.
 
 `overruled` in an older record reads as `rejected`.
 
@@ -192,42 +179,39 @@ One sequence, born by the report in `challenges/`.
 
 | Column | Read from |
 |---|---|
-| ID | the heading in the report |
-| State | `open` at birth, then the newest of the records below |
+| ID | the heading |
+| State | `open` at birth, then the newest of the sources below |
 | Headline | the heading, with the severity in brackets |
 | Source review | the report |
-| Resolution | the record or decision that settled it |
+| Resolution | the newest of the sources below |
 
 State and Resolution come from the newest of these:
 
-- a `closed` record: `accepted`, with the record's reason;
-- the Verdict of a decision: `rejected`, `parked` or `obsolete`, with the decision.
+- a `closed` record gives `accepted` and the record's reason.
+- a decision's Verdict gives `rejected`, `parked` or `obsolete`, and the decision.
 
 ## Waiting on principal
 
-One line per matter, citing and never copying. The section holds:
+This section lists what waits on the principal, one line per matter, citing and never copying. It is a rule, not a list written by hand. It holds:
 
-- each open thread, by its first sentence and its last dated paragraph;
-- each TBC whose owner is the principal;
-- each open finding of a critic;
-- each open challenge;
+- the open threads, each by its first sentence and its last dated paragraph.
+- the open questions marked to be confirmed whose owner is the principal.
+- the open findings of a critic and the open challenges.
 - under "Parked, with their decision", the parked findings and challenges with their decision.
 
-Free text without an ID has no place here. When nothing waits, the section says so in one line.
+Free text without an ID has no place here. An unfinished conversation is saved into its thread of the intent, never into the ledger. Where nothing waits, the section says so.
 
 ## Reports
 
-The section holds what the merged files cannot say. It stands only when there is something to report, and it holds:
+The section lists what the merged files cannot say. It stands only when there is something to report:
 
-- an ID defined twice;
-- a closed thread touched by a later commit;
+- an ID defined twice.
+- a closed thread touched by a later commit.
 - a thread cited with neither a thread file nor a closed record.
-
-A file the script could not parse is not a report: it is an `unparsed:` line of the header.
 
 ## The archive
 
-`ledger.archive.md` is the hand-kept ledger as it stood at the migration. It is immutable. Its Briefs, Work, Findings and Challenges rows are read for every item that has no record of the newer shape. A newer record overrides the archive row.
+`ledger.archive.md` is the hand-kept ledger as it stood at the migration, and it is immutable. Its Briefs, Work, Findings and Challenges rows are read for every item without a record of the new shape. A newer record overrides the archive.
 
 ## See also
 
@@ -235,4 +219,4 @@ A file the script could not parse is not a report: it is an `unparsed:` line of 
 - [The ledger, made from the records](../about/the-ledger.md): why the ledger is made from the records.
 - [Glossary](glossary.md): every term of the forge in one line.
 
-Generated on 2026-11-01 for version 6.4 from the files the front-matter names; never edited by hand.
+Generated on 2026-11-01 for version 6.8 from the files the front-matter names; never edited by hand.

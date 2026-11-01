@@ -189,9 +189,6 @@ class Light:
             if kind == "recipe":
                 if status is not None:
                     faults.append("a `status`, which a recipe does not carry")
-                if vt and vt[0] >= 1:
-                    faults.append(f"the version {version}, past the 0.x a recipe stays at")
-                    immediate = False
             elif "status" in allowed:
                 if status is None:
                     faults.append("no `status`")
@@ -207,7 +204,7 @@ class Light:
             if faults:
                 self.add(severity, f"The header of `{self.rel(doc)}` carries " + "; ".join(faults),
                          self.where(doc, 1),
-                         f"{rule_vs} (`version` and `status` and what does not change with the work; status agrees with the number; a recipe carries no status and stays 0.x); `templates/{kind}.md`, the header",
+                         f"{rule_vs} (`version` and `status` and what does not change with the work; status agrees with the number; a recipe carries no status); `templates/{kind}.md`, the header",
                          "the header of the skeleton: version and status of the house scheme, nothing the history computes", immediate=immediate)
             if re.search(r"^#+ .*Version History|^\| *Version *\|", text, re.M):
                 self.add("medium", f"`{self.rel(doc)}` carries a Version History table in its body",

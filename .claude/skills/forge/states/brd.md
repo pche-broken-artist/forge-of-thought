@@ -38,8 +38,8 @@ consider and which of them are mandatory — a library document of
 the instance, cited by path (POS.1020); a project with no
 enterprise around it has no roster, says `Roster: none` and walks
 the area against nothing; the group's standard, where the instance
-has one, a library document likewise; the indexes of the project's resources and of every
-library it depends on (`sources/00-INDEX.md`,
+has one, a library document likewise; the indexes of the project's
+resources and of every library it depends on (`sources/00-INDEX.md`,
 `research/00-INDEX.md`, `projects/lib-*/sources/00-INDEX.md`), read
 always, so that a standard, a regulation or a report the forge
 already holds is cited and never declared unknown; sources and
