@@ -268,3 +268,4 @@ word `<file> | changed | state: by hand`.
 - 2026-10-25 | 0.48 | PCHe | SOL.0030 | changed | The hook repeats four lines of conduct since the line Decisions (2026-10-25). | Was: and three lines of conduct; The gate that would enforce the three lines of conduct
 - 2026-11-01 | 0.49 | PCHe | SOL.0140 | changed | A question in free words routed by the documentation's index and answered from pages read in the run (THR.0680, POS.1190). | Was: Realises: POS.1190, POS.1070. Choice: no real alternative for the alias. Where: `.claude/skills/man/SKILL.md`, `.claude/skills/manual/SKILL.md`.
 - 2026-11-01 | 0.50 | PCHe | SOL.0460 | changed | The leftovers of a run filed as a check's report in reviews/ (POS.1450, 2026-11-01).
+- 2026-11-01 | 0.51 | PCHe | SOL.0460 | changed | The generator hashed with its whitespace normalised, so that a re-wrap regenerates nothing (THR.0770). | Was: and of the generator (the writer's definition and the contract)

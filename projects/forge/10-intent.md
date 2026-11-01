@@ -1,5 +1,5 @@
 ---
-version: 6.6
+version: 6.7
 status: draft
 project: forge
 audience: principal + Claude only
@@ -1688,8 +1688,23 @@ position that already stands elsewhere.
   `/save --quick` leaves the `light` check out and nothing else: the
   message is drafted from the records and confirmed as always, or given
   with `-m`; the quick way is the principal's for a save he wants on the
-  remote at once, and `/release` has none, its checks being the
-  condition of a release. `/release` runs on `main` only and refuses
+  remote at once, and `/release` has none for itself, its checks being
+  the condition of a release; the save it ends with runs without the
+  `light` check, which the release ran already (2026-11-01). The order
+  inside every release, by hand or with `--auto`, is checks,
+  documentation, README and release notes, state render, save: the
+  README reads the documentation's index, so the documentation comes
+  first, offered on the principal's word in a release by hand and run
+  in one with `--auto`. `/release --auto` runs the whole release
+  through, since a release done step by step was the forge's biggest
+  chore (the principal, 2026-11-01): the checks and their agents
+  without asking, the documentation, the renders and the save with the
+  drafted message; it stops only where a thing is serious, a repository
+  behind or diverged, a finding that would change a position or a rule,
+  a new instance fact in a render, and always at the tag of a major,
+  which is a deliberate act; `critique essence` is not run. What is
+  autonomous and what stops is the release skill's. `/release` runs on
+  `main` only and refuses
   elsewhere, naming the branch: its checks, with their walkthrough
   (POS.0570); the README and release notes from the settled sources
   (POS.0730, POS.1000, POS.0810);

@@ -1,5 +1,5 @@
 ---
-version: 0.50
+version: 0.51
 status: draft
 project: forge
 audience: whoever realises the solution, a person or an agent
@@ -956,7 +956,9 @@ boundary kept by hand or an order of work.
   links and one line per page, with the version of the owning project's
   intent; a run's state is computed by `scripts/docs-state.py` from the
   content hashes of each entry's inputs, a part hashed as that part, and
-  of the generator (the writer's definition and the contract), through
+  of the generator (the writer's definition and the contract) with its
+  whitespace normalised, so that a re-wrap regenerates nothing
+  (2026-11-01), through
   the one reader `scripts/docs_map.py`; the pages are scanned by
   `scripts/docs-check.py` for broken links, long dashes in prose and
   instance facts before they are kept. Pages, kind `page`, live in

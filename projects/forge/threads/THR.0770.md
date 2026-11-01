@@ -2,7 +2,7 @@
 id: THR.0770
 concerns: intent, solution-design
 origin: the principal
-status: open
+status: closed
 ---
 
 A release that runs on its own: `/release --auto`, with an agreed
@@ -37,3 +37,19 @@ hash and remade all 101 pages; the README rendered before
 was rendered again after it. Open: the walk of the rows one by one,
 then one write of a position, the skill `release` and the row of
 the Commands table.
+
+Closed 2026-11-01, the day it was opened, after a walkthrough of six
+items: the boundary of the findings `--auto` fixes and where it
+stops; the renders taken without a ruling, the one stop a new
+instance fact; the drafted message used; the order of every
+release, documentation before the README, and the save without a
+second `light` check; the generator's hash with its whitespace
+normalised, so that a re-wrap regenerates nothing; `--auto` as a
+sentence of POS.1100, the Commands row, `critique essence` not run,
+the tag of a major never automatic. Written at intent 6.7, design
+0.51, the release skill, `scripts/docs-state.py`.
+
+<!-- A thread (POS.1680), one file per thread in threads/; the header
+is its state: what it concerns, where it came from, whether it is
+open. The rules of a thread, its life and its closing:
+`.claude/skills/forge/states/intent.md`, Threads and files. -->
