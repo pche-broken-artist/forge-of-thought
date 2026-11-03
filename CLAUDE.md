@@ -406,6 +406,9 @@ LICENSE                    # CC BY 4.0 — the engine is published
 .gitattributes             # the engine's own ways of merging by
                            # path, its derived files at the root and
                            # under projects/forge/
+.mailmap                   # the author's names in the history
+                           # mapped to one handle; git's own
+                           # mechanism, the history untouched
 scripts/                   # forge-save / forge-pull / forge-status
                            # / forge-clone / forge-branch (git),
                            # forge-history (the history of one
