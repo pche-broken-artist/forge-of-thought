@@ -1,5 +1,5 @@
 ---
-version: 6.10
+version: 6.11
 status: draft
 project: forge
 audience: principal + Claude only
@@ -2141,20 +2141,25 @@ position that already stands elsewhere.
   approved by the user per domain. A command that writes, scaffolds,
   commits or regenerates — `/save`, `/release`, `/pull`, `/spinoff`,
   `/setup`, `/new-project`, `/new-artefact`, `/import-project`,
-  `/ingest`, `/render`, `/publish`, `/document`, `/migrate` — is guarded
-  by the harness, so that Claude cannot start it on his own judgement:
-  the principal invokes it by slash, or asks in words and Claude follows
-  the command's definition read by path. What separates them: a guarded
+  `/ingest`, `/render`, `/publish`, `/document`, `/migrate` — starts
+  on the principal's word and never on Claude's judgement: the
+  principal invokes it by slash, or asks in words and Claude invokes
+  the skill itself, never its steps replayed by hand; the guard is
+  conduct, Step by step (POS.1460), and the wall on git (POS.1200).
+  The harness field that once blocked the model from these commands
+  is dropped: it did not make Claude wait for the word, it made him
+  mimic the command outside the skill where the principal could not
+  see it, and the mimicry became his standard. What separates them:
+  a guarded
   command changes files the moment it runs, with no round and no `write`
   in between; a command that writes only at the end of a round on the
   principal's word, or files the immutable record of a run he asked for,
   needs no guard, because the word is already in the procedure. Maps,
   reports and rosters (`/forge`, `/ledger`, `/check`, `/critique`,
   `/challenge`, `/research`, bare `/recipe`, the roster) stay Claude's
-  to start, since he is meant to propose them. The guarantee of Step by
-  step (POS.1460) thereby rests on the harness as well as on CLAUDE.md;
-  the composition of a recipe is the birth of a versioned document, a
-  step of its own there. Present shape 2026-10-25 (audit C.06).
+  to start, since he is meant to propose them. The composition of a
+  recipe is the birth of a versioned document, a step of its own in
+  Step by step (POS.1460). Present shape 2026-11-03.
 - **POS.1140** Check runs on the reviewer mechanism — POS.0540 decided
   it, this is the shape. One command `/check <check> [slug]`, bare the
   roster; the roster open. The first checks, each owning one concern and

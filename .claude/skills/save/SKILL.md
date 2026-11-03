@@ -1,7 +1,6 @@
 ---
 description: Save the forge to git — the light check, then commit and push; no renders; --quick leaves the check out
 argument-hint: '[project-slug] [-m "message"] [--tag name] [--quick]'
-disable-model-invocation: true
 ---
 
 Save the forge to git: the light check, then commit and push on whatever

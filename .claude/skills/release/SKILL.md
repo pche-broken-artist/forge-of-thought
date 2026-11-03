@@ -1,7 +1,6 @@
 ---
 description: Release one repository from main — its checks with walkthrough, the documentation, README and release notes, then /save with the release message and the tag at an approved major; --auto runs through and stops only at a serious thing
 argument-hint: '[project-slug] [-m "message"] [--tag name] [--auto]'
-disable-model-invocation: true
 ---
 
 Release one repository from `main` (POS.1100): the checks POS.1140

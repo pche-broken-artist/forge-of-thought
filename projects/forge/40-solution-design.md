@@ -1,5 +1,5 @@
 ---
-version: 0.52
+version: 0.53
 status: draft
 project: forge
 audience: whoever realises the solution, a person or an agent
@@ -177,19 +177,17 @@ boundary kept by hand or an order of work.
   supporting files without registration, `context: fork` with an
   agent type (set aside, SOL.0330) and named `arguments`. Decided
   2026-09-06. Where: `.claude/skills/`.
-- **SOL.0110 The guard against starting a command unasked.** The
-  commands POS.1090 names as guarded carry
-  `disable-model-invocation: true` in their front-matter. The state
-  and genre files are supporting files registered as nothing and
-  need no guard. The descriptions of the guarded commands thereby
-  leave the always-on context. A guarded command asked for in words
-  is followed as the dispatchers follow a state file. The
-  commands POS.1090 names as Claude's to start carry no such field
-  and stay model-invocable.
-  Realises: POS.1090. Choice: the harness's field against conduct
-  alone, so that Step by step rests on the harness as well as on
-  `CLAUDE.md`. Decided 2026-09-05. Where:
-  `.claude/skills/<name>/SKILL.md` of each guarded command.
+- **SOL.0110 The guard against starting a command unasked.** No
+  command of the forge carries `disable-model-invocation`: every
+  skill is model-invocable, and the commands POS.1090 names as
+  guarded start only on the principal's word, invoked as skills
+  through the harness's Skill tool, never replayed from their
+  definition by hand. The descriptions of all commands stay in the
+  always-on context.
+  Realises: POS.1090. Choice: conduct and the git wall (SOL.0520)
+  against the harness's field, which from 2026-09-05 to 2026-11-03
+  led to the commands being mimicked outside the skill. Decided
+  2026-11-03. Where: `.claude/skills/<name>/SKILL.md`.
 - **SOL.0120 The `/forge` dispatcher and the definitions.** A thin
   dispatcher plus one definition file per target state, each declaring
   its own inputs: a future layer is added by one file and the dispatcher

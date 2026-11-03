@@ -1,7 +1,6 @@
 ---
 description: Bring an existing project into projects/ — clone through scripts/forge-clone.py, which reports the commit identity git resolves
 argument-hint: "<git-url>"
-disable-model-invocation: true
 ---
 
 Bring the project at `$0` into the forge (POS.1060). Git is done by

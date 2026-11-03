@@ -1,7 +1,6 @@
 ---
 description: Scaffold a new project from templates — a thought project (the chain) or a library (material only); files only, never git
 argument-hint: "<slug>"
-disable-model-invocation: true
 ---
 
 Create a new project under `projects/$0/`. Files only: the command never

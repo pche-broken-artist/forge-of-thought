@@ -1,7 +1,6 @@
 ---
 description: Register external input (a file, or text pasted into the conversation) in sources/ — store, ask what it is for, catalogue, nothing more
 argument-hint: "[file-or-path] [project-slug] [--bundle name]"
-disable-model-invocation: true
 ---
 
 Ingest external input into the project (slug from the second argument or

@@ -1,7 +1,6 @@
 ---
 description: Generate the documentation of the engine or of a project into docs/ - pages of one topic each and their index, from a map
 argument-hint: "[project-slug]"
-disable-model-invocation: true
 ---
 
 Role: the documentation command (what the documentation is and for
