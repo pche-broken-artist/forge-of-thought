@@ -135,7 +135,7 @@ def expand_ranges(text):
     """IDs of a text, a range `POS.0010 to POS.0030` or `POS.0010-POS.0030`
     expanded in tens."""
     found = ids_in(text)
-    for m in re.finditer(r"\b([A-Z]{3})\.(\d{4,5})\s*(?:to|-|–|—)\s*(?:\1\.)?(\d{4,5})\b", text):
+    for m in re.finditer(r"\b([A-Z]{2,3})\.(\d{4,5})\s*(?:to|-|–|—)\s*(?:\1\.)?(\d{4,5})\b", text):
         prefix, a, b = m.group(1), int(m.group(2)), int(m.group(3))
         for n in range(a, b + 1, 10):
             found.add(f"{prefix}.{n:04d}")

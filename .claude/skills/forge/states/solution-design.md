@@ -14,7 +14,8 @@ history (CLAUDE.md, Versioning & status), the language
 `templates/solution-design.md`.
 
 **Inputs.** The lowest layer the project has above it, the intent
-alone, the assignment or the BRD, and whatever stands above that;
+alone, the assignment, the BRD or the user stories, and whatever
+stands above that;
 `decisions.md`, the ledger. The intent is read with the project's
 threads, `threads/`. Where the thing already exists, what
 realises it is read as it stands. Research and sources as the

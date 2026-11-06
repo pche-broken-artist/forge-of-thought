@@ -683,3 +683,17 @@ word `<file> | changed | state: by hand`.
 - 2026-10-25 | 6.2 | PCHe | POS.1170 | changed | The hook repeats four lines of conduct since the line Decisions (2026-10-25). | Was: three lines of conduct
 - 2026-10-25 | 6.2 | PCHe | the operating layer | changed | forge-status says a standing conflict without the plan row, which means nothing to a user; the header of hook-walkthrough counts four lines of conduct and words the fourth as every question that asks the principal to decide (the documentation run of 2026-10-25). | Was: "then forge-save (R6.02)"; "three lines of conduct ... every step needing consent is a proposition"
 - 2026-10-25 | 6.2 | PCHe | THR.0760 | created
+- 2026-11-02 | 6.2 | FT- | THR.0770 | created
+- 2026-11-02 | 6.2 | FT- | THR.0780 | created
+- 2026-11-02 | 6.3 | FT- | POS.1910, POS.1920, POS.1930, POS.1940 | created
+- 2026-11-02 | 6.3 | FT- | POS.0220 | changed | prefixes of two letters allowed: BR and UC already had two, US joined them, the scripts were the one limit and were widened with the ledgers of three projects unchanged (the user-stories layer, brief 0.3) | Was: IDs use the format `PREFIX.NNNN` with three-letter prefixes, …; Present shape 2026-10-23 (REJ.0370).
+- 2026-11-02 | 6.3 | FT- | POS.0230 | changed | US added for the user stories (POS.1930) | Was: … SCR in the BRD (POS.1830); POS, THR, REJ, FCT in the intent; …
+- 2026-11-02 | 6.3 | FT- | Essence | changed | the chain's ambition names the user stories between the BRD and the solution design | Was: assignment, then a BRD, then solution design, up to implementation-ready specification including integration.
+- 2026-11-02 | 6.3 | FT- | 00-brief-user-stories.md | changed | mined: mined, the brief 0.3 mined into intent 6.3: POS.1910 to POS.1940 born after the trial on a small project (POS.1780); POS.0220 and POS.0230 changed
+- 2026-11-02 | 6.4 | FT- | POS.0770 | changed | the genre user-stories-table of POS.1910 added to the genres of today; check engine FND.3020 | Was: The genres today: `presentation`, `readme`, `release-notes` and `screenplay` (POS.1530).
+- 2026-11-02 | 6.4 | FT- | FND.3000 | closed | resolved: the user stories among the inputs of states/solution-design.md
+- 2026-11-02 | 6.4 | FT- | FND.3010 | closed | resolved: the placeholders of templates/user-stories.md and of the recipe skeleton in English, the section heading, the purpose line and the description column of the skeleton placeholders elicited by the genre from the instance's export; the Story style's examples in English and the vague word and the conditional told by their kind in states/user-stories.md and check-user-stories.md; the project's own recipe keeps its words
+- 2026-11-02 | 6.4 | FT- | FND.3020 | closed | resolved: POS.0770 names user-stories-table among the genres
+- 2026-11-02 | 6.4 | FT- | FND.3030 | closed | resolved: UC.NNNN in the Reference placeholder of both skeletons
+- 2026-11-04 | 6.5 | FT- | POS.1910 | changed | the export without a table: a paste of the table into Jira and Confluence ran each story into one paragraph, since a Markdown table cannot break a line in a cell; the genre renamed user-stories-export, its pattern sources/example-user-stories-v2.md | Was: The export the instance hands over, a table pasted into a wiki, is a render of the genre `user-stories-table`, which leaves out every reference to a POS, since the stakeholders never see the intent.
+- 2026-11-04 | 6.5 | FT- | POS.0770 | changed | the genre renamed user-stories-export with POS.1910 | Was: `screenplay` (POS.1530) and `user-stories-table` (POS.1910).

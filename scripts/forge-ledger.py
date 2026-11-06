@@ -71,8 +71,8 @@ LIBRARY_DROPS = ("Briefs", "Documents", "Published", "Work", "Challenges")
 FND_CHECK_RE = re.compile(r"^### (FND\.\d{4,5}) — (\w+) [—-] (.*)$")
 FND_CRIT_RE = re.compile(r"^### (FND\.\d{4,5}) \[(\w+)\](?: \[([^\]]+)\])? [—-] (.*)$")
 CHL_RE = re.compile(r"^### (CHL\.\d{4,5}) — (.*)$")
-VERDICT_RE = re.compile(r"\*\*Verdict:\*\*\s*([A-Z]{3}\.\d{4,5})\s+(rejected|parked(?: until .*?)?|obsolete)\s*$")
-DEF_RE = re.compile(r"^- \*\*([A-Z]{3}\.\d{4,5})\*\*")
+VERDICT_RE = re.compile(r"\*\*Verdict:\*\*\s*([A-Z]{2,3}\.\d{4,5})\s+(rejected|parked(?: until .*?)?|obsolete)\s*$")
+DEF_RE = re.compile(r"^- \*\*([A-Z]{2,3}\.\d{4,5})\*\*")
 
 
 class Project:

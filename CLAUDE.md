@@ -674,7 +674,7 @@ edited — a source from its registration, the others from creation;
 corrections happen downstream.
 
 ## ID scheme
-Format **`PREFIX.NNNN`**, all prefixes three letters; `NNNN` here, in
+Format **`PREFIX.NNNN`**, prefixes of two or three letters; `NNNN` here, in
 the templates and in the skills stands for the number: four digits as
 long as the number fits, a fifth only beyond 9999 (`POS.10000`), no
 zero added to an existing ID, and every sorting of IDs numeric by
@@ -702,6 +702,7 @@ lifecycle. Depth max two levels.
 | UC | use case — behaviour agreed as a sequence, at user-goal level | BRD |
 | DEP | dependency — what the BRD relies on outside itself | BRD |
 | NFR | non-functional requirement — a quality by category, its value the stakeholders' or a TBC | BRD |
+| US | user story — behaviour seen from outside, with its acceptance criteria, citing the BR, NFR, UC, DEP or POS it serves | user stories |
 | POS | position the principal currently holds | intent |
 | THR | open thread — unresolved matter to elicit next; names the artefact it concerns and carries its origin (the intent's definition) | the project's `threads/`, one file per thread (POS.1680) |
 | REJ | rejected direction, with the reason it was dropped | intent |
