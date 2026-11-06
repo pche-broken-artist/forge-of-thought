@@ -1,5 +1,5 @@
 ---
-version: 6.15
+version: 6.16
 status: draft
 project: forge
 audience: principal + Claude only
@@ -300,12 +300,13 @@ position that already stands elsewhere.
   carries in the brief's, what the intent and its threads hold in the
   intent's, completeness and the Requirement style in the assignment's.
   CLAUDE.md keeps of each artefact what it is, how it joins the chain,
-  and a pointer. The definitions of the five artefacts of today's chain
-  are the state files `brief.md`, `intent.md`, `assignment.md`,
-  `brd.md` and `solution-design.md`; POS.1330, POS.1340 and POS.1350,
-  for the BRD POS.1800 with POS.1810 to POS.1850, and for the
-  solution design POS.1400 with POS.1420, say what each is to achieve
-  and why. Present shape 2026-10-02, from `00-brief-elicitation.md`.
+  and a pointer. The definitions of today's chain are the state files of
+  `.claude/skills/forge/states/`, listed nowhere else (POS.1080);
+  POS.1330, POS.1340 and POS.1350, for the BRD POS.1800 with POS.1810 to
+  POS.1850, for the user stories POS.1930 with POS.1940 to POS.1960, and
+  for the solution design POS.1400 with POS.1420, say what each is to
+  achieve and why. Present shape 2026-10-02, from
+  `00-brief-elicitation.md`.
 - **POS.1320 A Map is a map of what must be found, not a
   questionnaire.** It names, in the artefact's own vocabulary, what
   the finding looks at or consciously verifies; it prescribes neither
@@ -819,10 +820,11 @@ position that already stands elsewhere.
 - **POS.1400** The solution design is an artefact of the chain,
   `40-solution-design.md`: how the things wanted are realised. It is
   derived from the lowest layer the project has above it, the intent
-  alone, the assignment or the BRD, and whatever stands above it is
-  its input. No layer below the intent is a condition of another: a
-  project takes the layers it needs, and many end at the intent,
-  where what is wanted needs no solution written down. It is worth
+  alone, the assignment, the BRD or the user stories, and whatever
+  stands above it is its input. No layer below the intent is a
+  condition of another: a project takes the layers it needs, and
+  many end at the intent, where what is wanted needs no solution
+  written down. It is worth
   writing where the way is not obvious, where a choice has a price,
   or where two hands would solve the same matter differently if it
   were not written down; whether it is, the principal says. A layer a
