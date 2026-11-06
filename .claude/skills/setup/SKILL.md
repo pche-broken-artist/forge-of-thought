@@ -1,6 +1,5 @@
 ---
 description: First run after cloning the engine — create and fill CLAUDE.local.md by interview, set the session model to the forge's default, offer the git identity per host, the global guard and the registration of the merge driver `ours`, written through `scripts/forge-config.py`; never overwrites
-disable-model-invocation: true
 ---
 
 Prepare this instance of the forge (POS.1050). Run after cloning the

@@ -682,9 +682,15 @@ position that already stands elsewhere.
   is a layer of the chain, its translation is a render. Dated hand-made
   editions of the earlier derivative convention remain in place as
   legacy history. Recipes are tools, not records of thinking: they carry
-  a version in front-matter and no status field, because a recipe is
-  never approved and stays 0.x for life; the date of a recipe is
-  computed from its history (POS.1570), and a render cites the version.
+  a version in front-matter and no status field. Approval has a meaning
+  only where someone receives the document, and a recipe is received by
+  nobody; it is iterated continuously and stays 0.x unless the
+  principal says otherwise. When he names an integer, 1.0 or 2.0, the
+  recipe takes it and the count goes on from there, 2.1, 2.2; Claude
+  never proposes it, the number means nothing beyond his own mark, and
+  nothing guards or reads it (the principal's word, 2026-11-01). The
+  date of a recipe is computed from its history (POS.1570), and a
+  render cites the version.
   Being versioned, a recipe keeps its history in the
   companion like every versioned kind (POS.0310); the companion records
   what changed in the recipe at its own grain, the substantive turns
@@ -698,6 +704,16 @@ position that already stands elsewhere.
   architecture picture as `render: <file>` — provided the citing recipe
   declares it among its Inputs, so provenance and staleness track the
   dependency.
+- **POS.1910 The principal's own files beside the forge's.** The forge
+  owns in `renders/` and `published/` only the files its recipes name:
+  the render and its translations, the plain file, the designed file
+  and its companion. Any other file there is the principal's own,
+  derived by hand from the forge's files: a copy under a new name that
+  he edits, a PDF saved from Word or PowerPoint, an HTML of a diagram.
+  It is kept in git beside them, has no companion, no row and no check;
+  the forge never reads, overwrites or raises it. The forge's own file
+  stays untouched by hand (POS.0710, POS.0590): what is to change is
+  copied first.
 - **POS.1550 A recipe may render in several languages.** A recipe
   declares its output languages in `languages:`, the first primary, the
   rest its translations: `/render` generates the primary render and, in
@@ -909,9 +925,10 @@ position that already stands elsewhere.
   sequence, and qualities with their values from the stakeholders, so
   that the delivery can estimate and the solution design can start. It
   is built on the standards of the field (ISO/IEC/IEEE 29148, BABOK,
-  IREB, the group's own BRD standard); the BRD a colleague built in a
-  fork of the engine is its inspiration and nothing of it is taken over:
-  what held on real work is distilled, the rest left. The company's
+  IREB and the standard of the instance's group where it has one, a
+  library document); a BRD built in a fork of the engine before this
+  definition is its inspiration and nothing of it is taken over: what
+  held on real work is distilled, the rest left. The organisation's
   content — the roster of areas and which are mandatory, the roles, the
   systems, the publishing convention — lives in the instance's library;
   the engine carries a generic Map. Its definition is `states/brd.md`
@@ -1186,7 +1203,7 @@ position that already stands elsewhere.
   | state | thread | one open matter of the intent | the principal with Claude | — | freely rewritten while open, immutable once closed (POS.1680) |
   | state | index | catalogue of a resource directory | forge | — | freely rewritten |
   | state | map | the documentation map: one entry per page, everything a page is made from | generated | — | freely rewritten by the documentation run |
-  | rendering | recipe | how a render is made | Claude, principal iterates | yes | iterated, never approved |
+  | rendering | recipe | how a render is made | Claude, principal iterates | yes | iterated; an integer only on the principal's word, his own mark, not an approval |
   | rendering | render | audience-specific output, never a source of truth | generated | — | overwritten by /render |
   | rendering | page | a page of the documentation, or its index; never a source of truth | generated | — | overwritten by the documentation run |
   | work | work | an output of the project made with work of its own: the file holds the content, the specification beside it the way and the why | Claude, the principal judges | yes, the specification | the file remade from the specification; the principal works with it freely |
@@ -1406,7 +1423,13 @@ position that already stands elsewhere.
   that sometimes says there was nothing to find. Neither runs at a save;
   `/release` offers `critique essence` once and runs no reviewer on its
   own — the one lens that guards what a release publishes, the drift of
-  the chain (decided 2026-09-05, POS.1100).
+  the chain (decided 2026-09-05, POS.1100). A reviewer runs on the
+  principal's word alone because a run costs tokens, some checks a
+  great deal, and what is spent is his to decide; there is no other
+  reason. The word may be given once, in a command's definition that
+  names the checks it runs, as `/save` and `/release` have it; what is
+  ruled out is a run on Claude's own judgement (the principal's
+  answer, 2026-11-01).
 - **POS.0410** The critic has two lenses, because one critic hunted
   formalities and never guarded the chain. `clarity` reads each artefact
   on its own. `essence` reads the chain: for every adjacent pair (brief
@@ -1594,7 +1617,9 @@ position that already stands elsewhere.
   table of engines, one row each, over the engine's own CLI: the login
   is the user's, made once outside the forge in the engine's own tool,
   and the forge carries no key, no account and no configuration of who
-  connects; the forge names engines, never models. The engine is given a
+  connects; how the tool is installed and signed in is the tool's own
+  documentation's, the forge asking only that it is on PATH; the forge
+  names engines, never models. The engine is given a
   packet folder under the engine's `tmp/` as its workspace, never the
   forge's root, whose hooks and instance file an engine must not see or
   execute; and since the place alone locks nothing, the script gives the
@@ -1614,6 +1639,12 @@ position that already stands elsewhere.
   Codex, Claude Code and Copilot share the one-shot shape and are rows
   to add when wanted (research of 2026-10-23). Decided 2026-10-24; built
   and verified by probes the same day (brief `research`, THR.0740).
+  The forge names engines and tiers, never versions, so that a name
+  always means the newest of its kind: `opus` or `sonnet` in a model
+  override, `claude` or `antigravity` in the engine table, and the
+  version is the tool's, resolved at the call. When a new version
+  arrives nothing in the forge changes, and everything that ran on
+  that name runs on the new one (the principal's answer, 2026-11-01).
 - **POS.1890 Every citation is opened before a note is filed.** No
   research note is filed before a script, `scripts/forge-cite.py`, has
   opened every URL it cites and read an arXiv page for its title: a dead
@@ -1737,8 +1768,25 @@ position that already stands elsewhere.
   `/save --quick` leaves the `light` check out and nothing else: the
   message is drafted from the records and confirmed as always, or given
   with `-m`; the quick way is the principal's for a save he wants on the
-  remote at once, and `/release` has none, its checks being the
-  condition of a release. `/release` runs on `main` only and refuses
+  remote at once, and `/release` has none for itself, its checks being
+  the condition of a release; the save it ends with runs without the
+  `light` check, which the release ran already (2026-11-01). The order
+  inside every release, by hand or with `--auto`, is checks,
+  documentation, README and release notes, state render, save: the
+  README reads the documentation's index, so the documentation comes
+  first, offered on the principal's word in a release by hand and,
+  with `--auto`, asked once before anything runs, the default yes.
+  `/release --auto` runs the whole release through, since a release
+  done step by step was the forge's biggest chore (the principal,
+  2026-11-01): the checks and their agents without asking, the
+  documentation on the one question it asks before anything runs, the
+  renders and the save with the drafted message; it stops only where
+  a thing is serious, a repository
+  behind or diverged, a finding that would change a position or a rule,
+  a new instance fact in a render, and always at the tag of a major,
+  which is a deliberate act; `critique essence` is not run. What is
+  autonomous and what stops is the release skill's. `/release` runs on
+  `main` only and refuses
   elsewhere, naming the branch: its checks, with their walkthrough
   (POS.0570); the README and release notes from the settled sources
   (POS.0730, POS.1000, POS.0810);
@@ -1754,8 +1802,9 @@ position that already stands elsewhere.
   between visibly (the `/forge` map), never silently. Decided
   2026-09-05; alternatives REJ.0160, REJ.0170.
 - **POS.1110** Branches are voluntary and belong to git. Whoever wants
-  one gets it through one forge command — `forge-branch <name>` creates
-  the branch or switches to it, `forge-branch main` switches back — and
+  one gets it through one forge command — `forge-branch <slug> <name>`
+  creates the branch or switches to it, `forge-branch <slug> main`
+  switches back — and
   never types git; a merge is git's, by the user's hand or by a merge
   request, and a conflict `/save` meets is settled in the step of a
   conflict (POS.1710); the one rebase the forge does is `/save`'s, the
@@ -1783,8 +1832,10 @@ position that already stands elsewhere.
   appended after one last line, kept both. Way 2, derived: state, the
   ledger, never in git and made at read time (POS.1600); documents for a
   reader, the renders, the README, the release notes, CONTRIBUTING, the
-  documentation, the state render and the published files, in git, made
-  only on main, `ours` at a merge and made again. Way 3, immutable and
+  documentation, the state render and the published companions, in
+  git, made only on main, `ours` at a merge and made again; the
+  published files themselves `binary`, never merged (POS.1690). Way 3,
+  immutable and
   unique: reviews, challenges, research, sources and closed threads;
   never conflicts, the name unique across branches too, immutability a
   process rule as today (POS.0550), nothing locked. Why: at both
@@ -2034,7 +2085,9 @@ position that already stands elsewhere.
   forge's users and done 2026-10-09, the per-prompt hook included:
   `python` on PATH is their one prerequisite, the same Python the
   document conversion needed already, and a system that has only
-  `python3` gives it that name (THR.0150 closed). How they are
+  `python3` gives it that name (THR.0150 closed). Nothing has run on
+  macOS: for it the whole set is the writing rule alone, and the
+  documentation says so (2026-11-01). How they are
   written and what they share is the solution design's (SOL.0620).
 - **POS.0940** The engine does not know the projects. `git init` and the
   remote are the user's one-off act: `/new-project` and `/spinoff`
@@ -2167,20 +2220,25 @@ position that already stands elsewhere.
   approved by the user per domain. A command that writes, scaffolds,
   commits or regenerates — `/save`, `/release`, `/pull`, `/spinoff`,
   `/setup`, `/new-project`, `/new-artefact`, `/import-project`,
-  `/ingest`, `/render`, `/publish`, `/document`, `/migrate` — is guarded
-  by the harness, so that Claude cannot start it on his own judgement:
-  the principal invokes it by slash, or asks in words and Claude follows
-  the command's definition read by path. What separates them: a guarded
+  `/ingest`, `/render`, `/publish`, `/document`, `/migrate` — starts
+  on the principal's word and never on Claude's judgement: the
+  principal invokes it by slash, or asks in words and Claude invokes
+  the skill itself, never its steps replayed by hand; the guard is
+  conduct, Step by step (POS.1460), and the wall on git (POS.1200).
+  The harness field that once blocked the model from these commands
+  is dropped: it did not make Claude wait for the word, it made him
+  mimic the command outside the skill where the principal could not
+  see it, and the mimicry became his standard. What separates them:
+  a guarded
   command changes files the moment it runs, with no round and no `write`
   in between; a command that writes only at the end of a round on the
   principal's word, or files the immutable record of a run he asked for,
   needs no guard, because the word is already in the procedure. Maps,
   reports and rosters (`/forge`, `/ledger`, `/check`, `/critique`,
   `/challenge`, `/research`, bare `/recipe`, the roster) stay Claude's
-  to start, since he is meant to propose them. The guarantee of Step by
-  step (POS.1460) thereby rests on the harness as well as on CLAUDE.md;
-  the composition of a recipe is the birth of a versioned document, a
-  step of its own there. Present shape 2026-10-25 (audit C.06).
+  to start, since he is meant to propose them. The composition of a
+  recipe is the birth of a versioned document, a step of its own in
+  Step by step (POS.1460). Present shape 2026-11-03.
 - **POS.1140** Check runs on the reviewer mechanism — POS.0540 decided
   it, this is the shape. One command `/check <check> [slug]`, bare the
   roster; the roster open. The first checks, each owning one concern and
@@ -2221,10 +2279,19 @@ position that already stands elsewhere.
   2026-10-02; the `/research` point of THR.0290 settled 2026-10-24: a
   research has depths and engines, not kinds (POS.1860, POS.1870).
 - **POS.1190 The forge explains itself from its own definitions.** `/man
-  [command|method]`, alias `/manual`, is the forge's manual — a reader,
+  [command|method|question]`, alias `/manual`, is the forge's manual — a reader,
   never a text of its own (POS.1070). Named after the Unix manual,
-  `/help` being a built-in of Claude Code. Decided 2026-09-18 for the
-  newcomer's first hour and for the reader who opens the repository.
+  `/help` being a built-in of Claude Code. A need said in free words,
+  `/man <question>`, is answered with the way the forge has for it:
+  read from the documentation and the definitions in the run, never
+  from memory, said in plain sentences and cited by path, never
+  retold; where the forge has nothing, the answer says so and marks
+  what Claude would do without a mechanism as his own (POS.1370),
+  which is where threads are born. One door: no command and no alias
+  of its own (REJ.0500). Decided 2026-09-18 for the newcomer's first
+  hour and for the reader who opens the repository; the question
+  2026-11-01 after six trial questions in the conversation
+  (THR.0680).
 
 ### Naming
 - **POS.0600** The system is named **Forge of Thought**: thoughts are
@@ -2377,6 +2444,38 @@ position that already stands elsewhere.
   himself. A visitor is told how, where the readers of GitHub look
   for it. What enters the forge stays the principal's decision
   (POS.0070). Decided 2026-10-04.
+- **POS.1920 The two fixed files of the root.** Beside the renders of
+  the root stand two files that are no render and derive from nothing
+  in the chain: `SECURITY.md`, the security policy, and
+  `CODE_OF_CONDUCT.md`, the code of conduct. The policy is the
+  principal's own text: a problem is reported through GitHub's private
+  vulnerability reporting, a setting of the repository switched on
+  before the file points at it, with the profile CONTRIBUTING names as
+  the fallback and never a public issue; the forge promises an
+  acknowledgement within seven days, a fix or a decision at the
+  principal's pace told to the reporter first, credit in the advisory
+  unless declined, and nothing else, no bounty, no safe harbour, no
+  form; supported is the latest release on `main` only, a fix the next
+  release; what the forge does on the machine is said by kind,
+  instruction files, no server, the user's permissions, programs from
+  PATH, nothing sent but what the user sends, data that may carry
+  instructions, permissions a guard and not a sandbox, the specifics
+  left to the documentation pages a release regenerates, so that the
+  file stays true without a recipe; in scope is a script, a hook, a
+  file of the engine or a piece of data making the forge write, run,
+  send or publish what its rules do not say, out of scope Claude Code
+  and the tools the scripts call, the user's permission mode and the
+  content of his projects. The code of conduct is the Contributor
+  Covenant 3.0 word for word, under its own licence CC BY-SA 4.0 named
+  in the README beside CC BY 4.0, its reporting sentence pointing at
+  the private way of CONTRIBUTING, its suggested remedies kept. Neither
+  file is a render; neither has a companion, a row or a check, as
+  POS.1910 holds for the principal's own files; a change to either is
+  the principal's word. Why: a policy whose threat model is derived
+  from the design stays true only when re-rendered, and a release
+  re-renders the documentation, not a policy; a standard adopted is
+  worth exactly its unchanged text. Research 2026-10-05 and
+  2026-11-01. Decided 2026-11-01.
 - **POS.1000** Every project has a README and, if it is a thought
   project, release notes — both renders of the project's own recipes
   (`recipes/readme.md`, `recipes/release-notes.md`, `output:` in the
@@ -2427,6 +2526,16 @@ position that already stands elsewhere.
   from what it mirrors. The README is cut to what orients and points,
   its chapters the readme skeleton's (`templates/recipe-readme.md`, the
   one owner), and the README is English only, a translation a render.
+  The pages are written in the project's language, as its artefacts
+  are (the project file, POS.1590); the README stays English. A page
+  is never mended by hand because the next run of `/document` writes
+  it again from its owners and the mend is gone; only a mend in the
+  file that owns the matter survives, and the page takes it at the
+  next run. What a run cannot place, a fact with no owner, a matter the
+  map and the intent disagree on, a reason a page wants and no file
+  records, is a finding of the run: filed in `reviews/` as a check's
+  report and settled as a check's findings are, since the
+  documentation finds what no other check does (decided 2026-11-01).
   The documentation is made by a command of its own, `/document [slug]`,
   guarded like every command that writes (POS.1090), in one run that
   asks nothing: a plan of the pages first, the map, then every page made
@@ -2453,10 +2562,12 @@ position that already stands elsewhere.
   rule is the documentation contract's. Facts no file owns, the install
   commands, the prerequisites, the public address of the repository,
   have one place in the project that both the README and the
-  documentation read. A release never regenerates the documentation: it
-  reports the age of the index against the intent's version and offers
-  `/document`; the pages pass under the principal's eyes as every
-  regenerated render does (POS.0810). Reason: the README was the whole
+  documentation read. A release never regenerates the documentation on
+  its own judgement: by hand it reports the age of the index against
+  the intent's version and offers `/document`, with `--auto` it asks
+  once before anything runs (POS.1100); the pages pass under the
+  principal's eyes as every regenerated render does (POS.0810).
+  Reason: the README was the whole
   documentation of the engine and poor as one, three things at once; a
   page of one topic can say a thing well, and people inside the company
   and outside it should understand the forge and use it in full. What
@@ -2511,7 +2622,14 @@ position that already stands elsewhere.
   for?", so that the entry carries its role from its birth and no later
   hand changes it (decided 2026-10-17, brief `collaboration`), and he
   answers with the role or tells Claude to infer it, which is then
-  written marked *(inferred)* (P.06, F.05).
+  written marked *(inferred)* (P.06, F.05). A source and a research
+  note are immutable because they record a moment, a state of the
+  world the forge did not make and has no business editing; a newer
+  state is a new file, a research run again, a document that arrives
+  in a new version a further file of a bundle of one origin, whose
+  index says which is the newest and which it supersedes, so that
+  every citation of the intent keeps pointing at the text it was made
+  from (the principal's answer, 2026-11-01).
 - **POS.1050** First run is one command. After cloning the engine,
   `/setup` prepares the instance: it fills the facts of the instance in
   an elicitation interview — the conversation language first, then who
@@ -2806,6 +2924,16 @@ worked out by Claude; what Claude has worked out is never a FCT
   CLI call under a hat, returning through the model; the CLI shares
   one headless shape across four engines (research of 2026-10-23;
   POS.1880).
+- **REJ.0500** A help command of its own, `/howto`. Dropped
+  2026-11-01: the forge explains itself through one door (POS.1190);
+  a second name for a question is one more thing to learn, and an
+  alias costs a skill file of its own (SOL.0140). Considered in
+  THR.0680. For a project other than the engine the planner reads its
+  briefs, intent and threads, the layers below the intent, its ledger,
+  the indexes of `sources/` and `research/` and its recipes, and
+  whatever those documents point to on disk; what a project wants
+  documented beyond that is not a setting of its own (THR.0590, closed
+  2026-11-01).
 
 ## Candidate structure for the layer below
 

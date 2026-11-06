@@ -1,12 +1,13 @@
 ---
-generated: 2026-10-25
-version: 6.0
+generated: 2026-11-01
+version: 6.8
 made: derived
-inputs-hash: 3eff6194e2f3827e
+inputs-hash: ad588dbbfae71b21
 inputs:
   - projects/forge/10-intent.md#POS.1530
   - projects/forge/10-intent.md#POS.1540
   - projects/forge/10-intent.md#POS.1550
+  - projects/forge/40-solution-design.md#SOL.0420
   - projects/forge/40-solution-design.md#SOL.0650
   - projects/forge/40-solution-design.md#SOL.0660
   - .claude/skills/recipe/genres/screenplay.md
@@ -15,223 +16,245 @@ inputs:
 
 # The screenplay and its player
 
-A screenplay is the render of a teaching video: a written cut of a
-real terminal conversation with Claude, from which one script makes
-either a video file or the events of a player page. This page explains
-what a screenplay is made of, why one script makes both of its
-formats, and why the engine (the public repository of the forge
-itself) hosts the files a project shows in public. It is for anyone
-who uses, extends or evaluates the forge.
+A screenplay is a render of the forge that tells a terminal
+conversation as a teaching video: scenes cut from the records of real
+sessions, each with a caption that teaches and a block of terminal
+that proves. This page explains what such a video is made of, how one
+script turns the same screenplay into either of its two formats, what
+the player page of the engine is, and why the engine, not the project,
+hosts the files a project shows in public. It is for the user who
+wants to understand what he is making, for the extender who meets the
+script and the skeleton, and for the evaluator who wants to know why
+the pieces lie where they do. How the job is done, from the recipe to
+the played file, is the how-to
+[Make a teaching video from a recipe](../use/make-a-video-from-a-recipe.md).
 
 ## What it is
 
-A screenplay is the output of a recipe of the genre `screenplay`. A
-recipe is the versioned file that says how a render is made; a render
-is a generated output, never edited by hand
-([Renders and recipes](renders-and-recipes.md)). The person whose
-thinking is forged is called the principal.
+A screenplay is one render among the [renders and
+recipes](renders-and-recipes.md) of a project: a recipe of the genre
+`screenplay` names its inputs, its audience and its format, and
+`/render` generates the screenplay from it. The render is never the
+video. The video, or the events the player page plays, is a plain
+file made from the render by a script.
 
-A screenplay is made of these parts, in order:
+The screenplay has a fixed composition:
 
-- a title card: it discloses the composition, that is, that the
-  video shows real work, how many sessions and hours it covers, that
-  the times are real and the lines verbatim or shortened;
-- a card of what the viewer will see;
-- scenes, each with the real time of day, a caption and a fenced block
-  of what the terminal shows;
-- an end card, which says the one message the viewer leaves with.
+- a title card, which discloses how the video was composed: real
+  work, how many sessions, how many hours, the times real, the lines
+  verbatim and shortened
+- a card of what the viewer will see
+- scenes, each pinned to the real time of day of its first line
+- in every scene a caption of two parts: what happens now, and why
+  the forge does it this way
+- in every scene a fenced block of what the terminal shows
+- an end card, which says the one message the viewer leaves with
 
-The caption of a scene has two parts:
+The caption is the teaching; the terminal is the evidence.
 
-- Now: what happens in the scene;
-- Why: why the forge does it this way.
+Its inputs are of two kinds. The session records are registered as
+sources of the project, as a transcript extract cut by timestamps.
+The brief of the videos says what the videos are for. A document the
+video shows being born may stand beside them as a dependency, cited
+by path.
 
-The caption is the teaching. The terminal is the evidence.
+A recipe may declare several languages. The first is the primary
+language, the language of the sessions. The rest are its
+translations, made in the same run, scene for scene and line for
+line, so that every language shows the same cut. One render is
+written per language, `renders/<recipe>.<lang>.md`, each with its own
+provenance; a translation cites the primary render it was made from.
+The notation of the render stays English; its content is in the
+render's language. A recipe with one language keeps
+`renders/<recipe>.md`.
 
-The inputs of a screenplay recipe are of two kinds:
+The Format section of the recipe names one of two formats, never
+both:
 
-- session records registered as sources (a transcript extract, cut by
-  timestamps); a session here is one working conversation with
-  Claude;
-- the brief that says what the videos are for.
+- `video`: an MP4, painted frame by frame as a simulated terminal
+- `html-player`: the timed events for the player page of the engine,
+  written as a script file, `renders/<recipe>.<lang>.html-player.js`
 
-The render is never the video. The file is made from the render by a
-script, in the format the recipe names.
+Both are the plain file of `/render`. There is no designed step and
+no published file: `/publish` does nothing with a screenplay, and the
+Published table of the ledger (the state report of a project, made at
+read time) carries no row of it.
 
 ## How it works
 
-### Two formats, one script
+One script makes both formats, `scripts/md2video.py` (its place in
+the roster is [Scripts](../reference/scripts.md)). It is
+deterministic: the same render gives the same file every time, and
+no model takes part. It installs nothing. What it needs, Pillow and
+ffmpeg on the PATH, is said by the shared tools module beside it, as
+it is said for pandoc.
 
-The recipe's Format section names one of two formats, never both:
+The script reads the render: the front-matter for the language, the
+cards, and the scenes with their captions and terminal blocks. From
+them it computes a timeline:
 
-- `video`: an MP4, painted frame by frame as a simulated terminal;
-- `html-player`: the timed events for the player page of the engine.
+- the typing of a line
+- the stand before Enter
+- the reveal of an answer
+- the hold for reading
+- the breath at a scene's end
 
-Both are made by one script, `scripts/md2video.py`
-([Scripts](../reference/scripts.md)). The script reads the render,
-computes the timeline and writes the file. The timeline covers the
-typing, the pause before Enter, the reveal of an answer, the hold for
-reading and the breath at the end of a scene. The script is
-deterministic: the same render gives the same file every time. No
-model takes part in it.
+The pace of reading is three rates in words a second: one for the
+principal's lines (the principal is the person whose thinking is
+forged), one for Claude's answers, one for the lines that only report
+a file. The defaults are 4, 8 and 16. The pace, the look of the
+terminal, the date shown in the tab bar and the labels of the captions
+by language stand in the recipe's Format section. They reach the
+script as its arguments and never appear in the render. The parsing
+of the screenplay and the pace live in the script alone; the player
+page plays what the script computed.
 
-The file is the plain file of `/render`, the command that regenerates
-a render from its recipe, and it lands beside the render. A
-screenplay has no designed step and no published file: `/publish`
-has no part in it, because there is no designed step a model could
-add.
+For `video` the script paints every frame with Pillow as a simulated
+terminal, 1280 by 890 pixels, with a monospace font for the terminal
+and a sans font for the caption band, and fallbacks where the Windows
+fonts are missing. It pipes the frames into ffmpeg, which encodes
+H.264 at 30 frames a second.
 
-The `html-player` file is the timeline as events wrapped in a script
-call. The wrapping lets the player page play the file from disk as
-well as from the web.
+For `html-player` the script writes the timeline as JSON events,
+wrapped in a script call, so that the page plays the file from disk
+as well as from GitHub Pages. The file lands beside the render with
+the render's basename, unless the recipe's `output:` names another
+path. Where that path lies under the engine's `docs/videos/`, the
+script also writes the player page, `docs/videos/index.html`, anew
+from its skeleton, `templates/html-player.html`, with the list of the
+folder's files embedded. The list is embedded because GitHub Pages
+cannot list a folder. The skeleton holds two placeholders, one for the
+list of files and one for a script tag per file; the served page is
+never edited by hand and never by a model. What is edited is the
+skeleton.
 
-### Pace and look
+The player page is a single file with no dependency beyond the
+browser. It offers:
 
-The pace of reading is given in words a second, for three kinds of
-line:
+- a sidebar listing the videos by title, in the order of their file
+  names, grouped under the section of the course each file names,
+  with the section's name in each language; a recipe may give, in
+  place of the title, one line of what the viewer will learn
+- the simulated terminal with its caption band and its cards
+- play and pause
+- speed
+- the scenes of a video as chapters
+- the language, where a video has siblings in other languages
+- three font sizes, remembered in the browser
 
-- the principal's lines (4 unless the principal wants otherwise);
-- Claude's answers (8);
-- the lines that only report a file (16).
+The public folder `docs/videos/` is flat. Its files lie in the order
+of their names, and a recipe that sends a file there gives it a
+number for the order of the course. Video files (`.mp4`) never enter
+the tree: a video goes out as an asset of a release. The reason is
+not recorded. GitHub Pages is switched on once by the principal, by
+hand, on `main` and the `/docs` folder; an empty `docs/.nojekyll`
+makes Pages serve the files as they lie. The documentation keeps
+being read in the repository view as before.
 
-The pace, the look of the terminal and the labels of the captions
-stand in the recipe's Format section. They reach the script as its
-arguments, never in the render. The parsing of the screenplay and the
-pace live in the script alone; the player page plays what the script
-computed.
-
-### Languages
-
-A recipe may declare several output languages. The first is the
-primary; the rest are its translations. `/render` generates the
-primary render and, in the same run, translates it into every other
-language scene for scene and line for line. Each language has its own
-render, named `renders/<recipe>.<lang>.md`, and the format file
-follows that name. The render's notation stays English; its content is
-in the render's language.
-
-### The player page
-
-The player page is one fixed file of the engine,
-`docs/videos/index.html`. It is a single file with no dependency
-beyond the browser. It holds:
-
-- a sidebar of the videos by the title of each file's title card,
-  grouped by the section of the course each file names, sections and
-  videos in the order of the file names, a video without a section
-  last;
-- the simulated terminal with its caption band and cards;
-- play and pause, and the speed;
-- the scenes of a video as chapters;
-- the language, where a video has siblings in other languages;
-- three font sizes, remembered in the browser.
-
-The page is written anew by the script from its template,
-`templates/html-player.html`, whenever the script writes a file into
-`docs/videos/`. The list of files is embedded in the page. What is
-edited is the template, never the page, and no model touches either.
-
-### The public folder
-
-A project's recipe may send its `html-player` file out of the project
-into the engine's `docs/videos/`, by the recipe's `output:` path.
-
-- The engine carries the file only. The recipe, the render, the
-  provenance and the history stay in the project, and whoever has the
-  project can regenerate the file.
-- A video kept private names no `output:` and stays in the project's
-  `renders/`.
-- What goes out is chosen in the recipe, video by video.
-- The principal reads the file before the engine is saved. That
-  reading is the clearing of a public version, in one step.
-- `docs/videos/` is flat, its files in the order of their names.
-- The documentation and its checks leave the folder alone: they read
-  `docs/` without `docs/videos/`, and the index of the documentation
-  does not list it.
-- Video files (`.mp4`) never enter the repository's tree. They go out
-  as assets of a release.
-- An empty `docs/.nojekyll` makes GitHub Pages serve the folder as it
-  lies.
+A video kept for the company names no `output:` and stays in the
+project's `renders/`.
 
 ## Why
 
-**Why the engine hosts the public files.** The engine is public and
-is served by GitHub Pages from `docs/`, so it is the one public place
-of an instance (one installation of the forge). The project that made
-a video stays where its sources require, such as a private repository.
-Why the engine is public while a project is a repository of its own
-is explained in [Projects and the engine](projects-and-the-engine.md).
+**Why the caption and the terminal are two parts.** The caption is
+the teaching and the terminal the evidence: the viewer sees what the
+forge does and reads, at the same moment, why it does it so.
 
 **Why one script makes both formats.** The parsing of the screenplay
-and the pace are one mechanism, so they live in one script rather than
-two.
+and the pace are one mechanism. Two scripts would carry that
+mechanism twice; one script with two formats was chosen against two
+scripts for that reason.
 
-**Why the video is painted by the script itself.** The script paints
-the frames in Python and pipes them into one encoder. The alternatives
-weighed were existing terminal recorders and a browser driven by a
-program. One recorder was found broken on Windows, another ended at
-GIF, and the browser took the most code. A painter in the language
-the scripts already are, with one encoder, was the least to install
-and runs on Windows, Linux and macOS.
+**Why the Format section never reaches the render.** The render
+carries content only. If the pace and the look stood in the render,
+the plain file would carry the instructions as text.
 
-**Why translations are cut from the primary.** The quotes of a
+**Why no model in it, and no published file.** The plain file of a
+screenplay is made by a deterministic script, so that the same render
+gives the same file every time. There is no designed step a model
+could add, so `/publish` has no part. The two steps of an output in
+general, a plain file by a script and a designed file by a model, are
+divided by cost; what that division was chosen against is not
+recorded.
+
+**Why Pillow and ffmpeg.** The alternatives weighed were VHS,
+asciinema with agg, and a browser driven by Playwright. VHS was found
+broken on Windows; agg ends at a GIF; the browser was the most code.
+A painter in the language the scripts already are, with one encoder,
+was the least to install and runs on the three platforms the forge
+runs on.
+
+**Why the translations are cut from the primary.** The quotes of a
 transcript, the beats and the captions are chosen once. A second
-generation would choose them again, differently. Translating scene for
-scene keeps every language the same cut.
+generation would choose them again, differently, and the languages
+would show different videos.
 
-**Why there is no published file.** A model adds a designed step to a
-published file, and a screenplay has none it could add.
+**Why the engine hosts what a project shows in public.** The engine
+is public on GitHub and served by GitHub Pages from `docs/`, so it is
+the one public place of an instance (one installation of the forge).
+The project that made the file stays where its sources require, in a
+private repository; why that is so is explained in
+[Projects and the engine](projects-and-the-engine.md). The engine
+carries the file only. The recipe, the render, the provenance and the
+history stay in the project, and whoever has the project regenerates
+the file. What goes out is chosen in the recipe, video by video, and
+the file is read by the principal before the engine is saved. That
+reading is the clearing of a public version, one step.
 
-**Why the list of files is embedded in the page.** GitHub Pages
-cannot list a folder.
+**Why the folder is foreign to the documentation.** `docs/videos/` is
+not a page of the documentation. The documentation's planner, its
+index, its state and its check read `docs/` without `docs/videos/`,
+generate and verify the documentation around it and leave it alone,
+and the index of the documentation does not list it.
 
-**Why the page is one fixed file.** One file is one thing to serve and
-to copy. A generated index file beside the page, a course recipe with
-an outline, and folders as sections were weighed against it; the order
-of file names was chosen for now. The price is that the script touches
-a page of the engine.
+**Why a fixed page with the list embedded.** It was weighed against a
+generated index file beside the page, against a course recipe with an
+outline, and against folders as sections. The principal chose the
+order of file names for now; the shape of a course beyond that is
+still open. The price is that the script touches a page of the
+engine.
 
-**Why the pace stays out of the render.** The reason is not recorded.
-
-**Why video files go out as release assets rather than into the
-tree.** The reason is not recorded.
+**Why a single file.** A page with scripts and styles beside it was
+the alternative. One file is one thing to serve and to copy.
 
 ## A worked example
 
-One generic scene of a screenplay, in the shape the genre defines.
-The project and the lines are placeholders.
-
-````markdown
-## Scene 2 - 10:42
-
-**Now:** The principal asks for the state map of the project.
-**Why:** The forge shows the state before anything is changed.
+One scene of a screenplay, generic, from no project. The scene is
+pinned to the time of day of its first line. The caption carries its
+two parts. The fenced block shows what the terminal showed: the
+principal's line as typed, a tool call as one dim line, and Claude's
+answer cut to the sentences that carry the move.
 
 ```
-> /forge example-project
-  ... the state map of example-project ...
-```
-````
+## 14:32
 
-The heading carries the real time of day. The two-part caption
-teaches, and the fenced block is the evidence of what the terminal
-showed. The script turns this into frames of a video, or into timed
-events the player page plays.
+Now: The principal asks for the state map of the project and Claude
+reads it from the documents, not from memory.
+Why: The ledger is made at read time, so what the map says is what
+the files say.
+
+~~~
+> /forge my-project
+
+  Read projects/my-project/ledger.md
+
+  The intent is at 0.4, two threads open. The assignment is not
+  started. Shall we work the oldest thread first?
+~~~
+```
+
+The same scene, in a second language of the recipe, is the same
+scene: the same time, the same lines of the terminal, the caption
+translated. The script computes the same timeline for both, from the
+same pace.
 
 ## See also
 
-- [Make a teaching video from a recipe](../use/make-a-video-from-a-recipe.md):
-  the job from the recipe to the played file.
-- [Renders and recipes](renders-and-recipes.md): the render and its
-  recipe, which a screenplay is one of.
-- [Projects and the engine](projects-and-the-engine.md): why the
-  engine is public and a project is a repository of its own.
-- [Scripts](../reference/scripts.md): the script that makes both
-  formats.
-- [Recipe genres](../reference/recipe-genres.md): the genre's
-  checklist in full.
-- [Glossary](../reference/glossary.md): every term of the forge in one
-  line.
+- [Make a teaching video from a recipe](../use/make-a-video-from-a-recipe.md): the job from the recipe to the played file.
+- [Renders and recipes](renders-and-recipes.md): the render and its recipe, which a screenplay is one of.
+- [Projects and the engine](projects-and-the-engine.md): why the engine is public and a project is a repository of its own.
+- [Scripts](../reference/scripts.md): the script that makes both formats.
+- [Recipe genres](../reference/recipe-genres.md): the genre's checklist in full.
+- [Glossary](../reference/glossary.md): every term of the forge in one line.
 
-Generated on 2026-10-25 for version 6.0 from the files the
-front-matter names; never edited by hand.
+Generated on 2026-11-01 for version 6.8 from the files the front-matter names; never edited by hand.

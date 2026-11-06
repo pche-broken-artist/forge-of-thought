@@ -1,7 +1,6 @@
 ---
 description: Bring a project to the shape of a release that changed the shape of files — a dry run first, the migration on the principal's word, the threads' origins judged, then /save
 argument-hint: "[project-slug]"
-disable-model-invocation: true
 ---
 
 The door to `scripts/forge-migrate.py` (SOL.0800, POS.1740): the
@@ -31,4 +30,5 @@ refusals and the way back are the script's).
    propose `/save <slug>`; the migrated shape reaches the remote by
    that save. Should anything be wrong, the way back is the
    script's, as its header says; the tag before the migration is
-   POS.1740's.
+   POS.1740's, taken through `/save <slug> --tag <name>` before
+   `--apply`.

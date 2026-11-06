@@ -53,7 +53,9 @@ is CLAUDE.md, Document chain's. This dispatcher never changes.
 
 **`/forge <state>` — work on that artefact.**
 1. Resolve `.claude/skills/forge/states/$0.md`. If it does not exist, list
-   the states that do and stop.
+   the states that do and stop. On a `library`, which has no chain
+   (CLAUDE.md, Document chain), say so and stop: no state is worked
+   there.
 2. Read the file and follow it. It declares the target artefact, its
    inputs and its working rules; everything else (write-once-per-round,
    versioning, ledger upkeep) follows the core conventions. A state

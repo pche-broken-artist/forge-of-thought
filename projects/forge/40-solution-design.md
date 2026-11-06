@@ -177,19 +177,17 @@ boundary kept by hand or an order of work.
   supporting files without registration, `context: fork` with an
   agent type (set aside, SOL.0330) and named `arguments`. Decided
   2026-09-06. Where: `.claude/skills/`.
-- **SOL.0110 The guard against starting a command unasked.** The
-  commands POS.1090 names as guarded carry
-  `disable-model-invocation: true` in their front-matter. The state
-  and genre files are supporting files registered as nothing and
-  need no guard. The descriptions of the guarded commands thereby
-  leave the always-on context. A guarded command asked for in words
-  is followed as the dispatchers follow a state file. The
-  commands POS.1090 names as Claude's to start carry no such field
-  and stay model-invocable.
-  Realises: POS.1090. Choice: the harness's field against conduct
-  alone, so that Step by step rests on the harness as well as on
-  `CLAUDE.md`. Decided 2026-09-05. Where:
-  `.claude/skills/<name>/SKILL.md` of each guarded command.
+- **SOL.0110 The guard against starting a command unasked.** No
+  command of the forge carries `disable-model-invocation`: every
+  skill is model-invocable, and the commands POS.1090 names as
+  guarded start only on the principal's word, invoked as skills
+  through the harness's Skill tool, never replayed from their
+  definition by hand. The descriptions of all commands stay in the
+  always-on context.
+  Realises: POS.1090. Choice: conduct and the git wall (SOL.0520)
+  against the harness's field, which from 2026-09-05 to 2026-11-03
+  led to the commands being mimicked outside the skill. Decided
+  2026-11-03. Where: `.claude/skills/<name>/SKILL.md`.
 - **SOL.0120 The `/forge` dispatcher and the definitions.** A thin
   dispatcher plus one definition file per target state, each declaring
   its own inputs: a future layer is added by one file and the dispatcher
@@ -238,12 +236,20 @@ boundary kept by hand or an order of work.
   `.claude/skills/recipe/genres/`, `templates/recipe.md`,
   `templates/recipe-<genre>.md`.
 - **SOL.0140 The manual.** `/man` reads the forge's own definitions
-  and prints them. The alias `/manual` is
-  a second skill whose whole body invokes the first, since a skill
-  has no alias field.
-  Realises: POS.1190, POS.1070. Choice: no real alternative for the
-  alias. Where:
-  `.claude/skills/man/SKILL.md`, `.claude/skills/manual/SKILL.md`.
+  and prints them; the alias `/manual` is a second skill whose whole
+  body invokes the first, since a skill has no alias field. A
+  question in free words is routed by the documentation's index,
+  `docs/README.md`, where every page carries the one question it
+  answers: the pages chosen are read in the run and the answer is
+  composed from them in plain sentences, the paths named once at
+  the end. Realises: POS.1190, POS.1070, POS.1370. Choice: the index
+  as the router rather than a search over the skills, since a page
+  is written for the reader and carries its question, a skill is
+  written for Claude; the pages read in the run rather than answered
+  from the context, since an answer from memory is the risk
+  THR.0680 named; no alternative for the alias. Where:
+  `.claude/skills/man/SKILL.md`, `.claude/skills/manual/SKILL.md`,
+  `docs/README.md`.
 - **SOL.0150 The first run.** `/setup` fills `CLAUDE.local.md` from its
   template and creates `.claude/settings.local.json` with the session
   model. It closes with the git identity: it asks for the hosts the user
@@ -981,7 +987,9 @@ boundary kept by hand or an order of work.
   links and one line per page, with the version of the owning project's
   intent; a run's state is computed by `scripts/docs-state.py` from the
   content hashes of each entry's inputs, a part hashed as that part, and
-  of the generator (the writer's definition and the contract), through
+  of the generator (the writer's definition and the contract) with its
+  whitespace normalised, so that a re-wrap regenerates nothing
+  (2026-11-01), through
   the one reader `scripts/docs_map.py`; the pages are scanned by
   `scripts/docs-check.py` for broken links, long dashes in prose and
   instance facts before they are kept. Pages, kind `page`, live in
@@ -990,7 +998,12 @@ boundary kept by hand or an order of work.
   the index, the state and the check read `docs/` without it (SOL.0660).
   The ledger's Renders table carries the index with the map as its
   input. The pinned facts the planner reads as an owner are the section
-  "Pinned facts (not rendered)" of the project's readme recipe.
+  "Pinned facts (not rendered)" of the project's readme recipe. What a
+  run cannot place, the planner's Unowned and did-not-fit, a claim the
+  map asked for and no input carried, a reason a page wants and no
+  file records, the command files as the run's own report in
+  `reviews/`, in the check contract's shape with FND numbers, read by
+  the ledger as any check's report and settled by walkthrough.
   Realises: POS.1450, POS.1080, POS.0930. Choice: a command of its own
   against `/render`: a page has no recipe to iterate, the map is
   generated. The index named `README.md` against `index.md`: GitHub
@@ -1328,7 +1341,11 @@ boundary kept by hand or an order of work.
   forced push or a revert, on a protected main a maintainer's, and
   always the engine and every project together, since the engine refuses
   the old shape once released (CHL.0420).
-- **SOL.0830 The fixture.** The test bed of the forge's own tests is one
+- **SOL.0830 The fixture.** The fixture is a kind a project may
+  declare, `fixture: true`; the fixture project of the cutover,
+  `projects/fixture`, was deleted on 2026-11-01 (DEC.0360) and none
+  exists today; what follows is how it was made and what ran on it. The
+  test bed of the forge's own tests was one
   project, `projects/fixture`, made by hand once from a bare remote
   `tmp/fixture.git` as a copy of a small real project in the old shape
   and brought to the new shape by the migration, which it thereby

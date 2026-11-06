@@ -1,7 +1,7 @@
 ---
 name: docs-planner
 description: 'Documentation planner — reads a target (the engine, or a project) on disk and writes the documentation map: one entry per page with everything a writer needs to make that page alone, the reader paths and one line per page for the index. Writes no page. Run by /document (POS.1450, SOL.0460).'
-tools: Read, Glob, Grep, Write
+tools: Read, Glob, Grep, Write, Edit
 model: inherit
 skills:
   - docs-contract
@@ -116,6 +116,11 @@ help header.
 
 One file, Markdown, written at the path your task names (where it
 lies and what it is for: CLAUDE.md, Document chain, Documentation).
+It is written in parts, never whole in one write: the front-matter,
+the `## Paths` section and the first section of the outline with
+Write, every further section appended with Edit at the end of the
+file, since a map of a hundred pages is longer than one answer may
+carry and a write that is cut off writes nothing.
 It is read by the scripts and by the writers, not by the reader of
 the documentation. Its shape is the skeleton `templates/docs-map.md`:
 read it from disk and keep to it, the front-matter (`target` is

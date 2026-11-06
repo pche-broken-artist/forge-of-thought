@@ -16,8 +16,10 @@ WHAT IT DOES
     elsewhere in the file leaves the page as it is (POS.1450).
     The generator is hashed with the inputs: the writer's definition
     (`.claude/agents/docs-writer.md`) and the contract
-    (`.claude/skills/docs-contract/SKILL.md`), so that a change of the
-    rule a page is made by regenerates every page made by the old one;
+    (`.claude/skills/docs-contract/SKILL.md`), with their whitespace
+    normalised, so that a change of the rule a page is made by
+    regenerates every page made by the old one and a re-wrap of the
+    rule regenerates nothing;
     the planner's rules reach the pages through the entries it writes.
     The page that exists at the entry's path carries in its
     front-matter the hash it was made from, `inputs-hash`; the two are
@@ -76,6 +78,15 @@ GENERATOR = (".claude/agents/docs-writer.md", ".claude/skills/docs-contract/SKIL
 ENGINE = Path(__file__).resolve().parent.parent
 
 
+def _normalised(text):
+    """The generator's text with its whitespace normalised: every run
+    of whitespace, line breaks included, collapsed to one space, so that
+    a re-wrap of the contract or the writer's definition regenerates
+    nothing and a change of a sentence regenerates every page
+    (SOL.0460, 2026-11-01)."""
+    return " ".join(text.split())
+
+
 def entry_hash(entry, root):
     h = hashlib.sha256()
     for line in entry["lines"]:
@@ -85,7 +96,7 @@ def entry_hash(entry, root):
         h.update(b"\n")
     for rel in GENERATOR:
         h.update(f"--- generator {rel}\n".encode("utf-8"))
-        h.update((ENGINE / rel).read_text(encoding="utf-8").encode("utf-8"))
+        h.update(_normalised((ENGINE / rel).read_text(encoding="utf-8")).encode("utf-8"))
     missing = []
     for rel, part in docs_map.input_parts(entry):
         name = rel if part is None else f"{rel}#{part}"

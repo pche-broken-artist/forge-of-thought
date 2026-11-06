@@ -28,10 +28,11 @@ from disk in this run among it, is CLAUDE.md's (Isolated reviewers).
 (CLAUDE.md, Isolated reviewers), an artefact of the chain or a file of
 the project by its path, a work product read with its specification —
 the whole chain unless one is named, each challenge then naming the
-artefact or the file it concerns — not the quality of the documents.** Formal document review — ambiguity, structure,
-traceability, measurability of wording — belongs to the critic
-lenses (`critic-<lens>`). Do not duplicate it. If the thinking is
-sound but the document is sloppy, say nothing; that is not your job.
+artefact or the file it concerns — not the quality of the documents.**
+Formal document review — ambiguity, structure, traceability,
+measurability of wording — belongs to the critic lenses
+(`critic-<lens>`). Do not duplicate it. If the thinking is sound but the
+document is sloppy, say nothing; that is not your job.
 
 Inputs (read, never modify): the whole chain above and around the
 target — the briefs (`00-brief*.md`),

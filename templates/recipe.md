@@ -3,7 +3,7 @@ project: <slug>
 purpose: <purpose>
 audience: <audience>
 version: 0.1
-# output: <path>   # optional — overrides the default renders/<recipe>.md
+# output: <path>   # optional — overrides the default renders/<recipe>.md; read relative to the project root, a leading slash the engine root (the form the engine's own project uses for its README, release notes and CONTRIBUTING)
 # languages: <cs, en>   # optional — the first primary, the rest its translations, one render per language renders/<recipe>.<lang>.md (POS.1550)
 ---
 

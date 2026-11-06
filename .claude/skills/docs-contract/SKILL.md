@@ -12,10 +12,10 @@ it reads and the map; the writer the page and its shape.
 
 ## Conduct and isolation
 
-What holds for every isolated subagent, the conversation unseen,
-every input read from disk in this run and no instance fact in what
-you write, is CLAUDE.md's (Isolated reviewers); your task is your
-whole brief, and you read with the Read tool. You ask no question: where something is
+What holds for every isolated subagent, the conversation unseen, every
+input read from disk in this run and no instance fact in what you write,
+is CLAUDE.md's (Isolated reviewers); your task is your whole brief, and
+you read with the Read tool. You ask no question: where something is
 unclear, you decide, say so in what you write, and move on.
 
 ## The kinds of a page
@@ -58,7 +58,8 @@ generator about itself, its inputs or its run, beyond the fixed
 closing line the writer's shape gives. Where the operating layer
 (`CLAUDE.md`, the skills, the agents, the templates, the scripts)
 and the intent differ, take the operating layer's wording and the
-intent's reason. English, plain, in the spelling the inputs use.
+intent's reason. In the project's language (its project file),
+plain, in the spelling the inputs use.
 
 ## The voice
 

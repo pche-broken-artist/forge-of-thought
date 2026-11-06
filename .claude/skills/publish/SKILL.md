@@ -1,7 +1,6 @@
 ---
 description: Make the designed .pptx or .docx from the render of a recipe, through a model — started by the principal only
 argument-hint: "<recipe> [project-slug]"
-disable-model-invocation: true
 ---
 
 Role: publisher (what a render, its plain file and a published file

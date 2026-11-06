@@ -1,8 +1,8 @@
 ---
-generated: 2026-10-25
-version: 6.1
+generated: 2026-11-01
+version: 6.8
 made: derived
-inputs-hash: 79543a5a97152171
+inputs-hash: c43785f6dafe5169
 inputs:
   - CLAUDE.md#Repository layout
   - CLAUDE.md#Templates
@@ -15,188 +15,178 @@ inputs:
   - projects/forge/40-solution-design.md#SOL.0300
   - projects/forge/40-solution-design.md#SOL.0330
   - projects/forge/40-solution-design.md#Across the parts
+  - .claude/settings.json
 ---
 
 # What the forge is made of
 
-The operating layer of the forge is the set of files that tell
-Claude how to work: a small core read always, and skills, agents,
-templates and scripts read or run when their situation arises. This
-page is for the extender, someone who changes or adds to the forge.
-It says which file is which, when each is loaded, and where a change
-of a given kind lands.
+The forge is not a program but a set of instruction files that
+Claude Code reads, with the deterministic work kept at the edge in
+scripts. This page is for you, the extender: before you change any
+of it, you need to know which files make up that operating layer,
+what each one is, and at what moment the harness (Claude Code, the
+program that runs Claude and reads these files) loads it. The table
+below gives the files, one line gives the flow through them, and the
+ideas that carry the layer follow. Every term of the forge is in one
+line in the [Glossary](../reference/glossary.md).
 
 ## When to use it
 
-Use this page before you change anything in the engine and need to
-know which file owns the thing you want to change. Use it too when a
-command behaves unexpectedly and you want to know which files took
-part. How a change is then made, recorded and released is
+Use this page when you are about to add or change something in the
+forge and want to find the file that owns it, or when you want to
+know why a change in one file is read by Claude at one moment and
+not at another. The full directory listing, every project file
+included, is the [Repository layout](../reference/repository-layout.md).
+How a change is then recorded and released is
 [Make a change to the forge](how-a-change-is-made.md).
 
 ## What you do
 
-Find the kind of thing you want to change in the table below. The
-path tells you where it lives. The last column tells you when Claude
-Code (the harness, that is the program that runs Claude and loads
-its files) reads or runs it. The whole tree is laid out in
-[Repository layout](../reference/repository-layout.md).
+Find the kind of file you mean in the table. The third column says
+when the harness reads it.
 
 | Path | What it is | Loaded when |
 |---|---|---|
-| `CLAUDE.md` | the universal core: roles, prime directives, working methods in short, document kinds, the chain, layout, persistence, versioning, IDs, reviewers, ledger and the list of commands | in every session and for every subagent |
-| `.claude/skills/<name>/SKILL.md` | one skill per command | when the command is invoked |
-| `.claude/skills/forge/states/<state>.md` | the definitions of the artefacts, supporting files of `/forge`, registered as nothing | read by path when `/forge <state>` runs |
-| `.claude/skills/recipe/genres/<genre>.md` | the genre interviews, supporting files of `/recipe`, registered as nothing | read by path when `/recipe <genre>` runs |
-| `.claude/skills/<kind>-contract/SKILL.md` | skills that are not commands: the contracts of the three kinds of reviewer (`critic-contract`, `challenger-contract`, `check-contract`) and the documentation contract (`docs-contract`) | injected whole into an agent at its launch, by the agent's front-matter |
-| `.claude/skills/walkthrough/SKILL.md` | the shape of the walkthrough and of the elicitation interview; not a command | whenever a walkthrough or an interview runs |
-| `.claude/agents/` | one file per critic lens, challenger persona and check, and the documentation's planner and writer | when a command launches the agent as a subagent |
-| `.claude/settings.json` | the two hooks and the deny rule of the other shell | the per-prompt hook at every prompt; the git hook before a tool is used |
-| `templates/` | the canonical skeletons, the player page's skeleton `templates/html-player.html` among them | when a command that needs one reads it |
-| `scripts/` | Python scripts with the modules they share beside them; the two hooks are among them | when a command, a hook or you run one |
-| `.gitattributes` | the engine's own ways of merging by path, for its derived files at the root and under `projects/forge/` | by git, at a merge |
-| `tmp/` | the engine's working folder, in git with its own `README.md` and `.gitignore`, its contents never | written by scripts and commands on the way to a result; read by no check, ledger or history |
-| `projects/forge/` | the forge's own project: its brief, intent, threads, decisions and the recipes of the engine's README and release notes | when a command is run on the project `forge` |
-| `docs/` | the documentation, generated by `/document` from the documentation map | never by Claude as a rule; it is output |
-| `docs/videos/` | the public folder of the projects' player files and the player page, served by GitHub Pages; not part of the documentation | written by `md2video`; left alone by `/document` |
+| `CLAUDE.md` | The always-on core: the roles, the prime directives, the working methods in short, the document kinds, the chain, the layout, persistence, versioning, the ID scheme, the reviewers, the ledger and the list of commands. A rule of one artefact is not here but in that artefact's definition. | Into every session and into every subagent. |
+| `.claude/skills/<name>/SKILL.md` | One skill per command. The state files of `/forge` (`.claude/skills/forge/states/<state>.md`) and the genre files of `/recipe` (`.claude/skills/recipe/genres/<genre>.md`) are supporting files of their dispatcher: read by path, registered as nothing. Beside the commands stand the skills that are not commands: the three reviewer contracts (one per kind of reviewer), the documentation contract and the walkthrough skill. "Command" is the word for what you invoke by slash; "skill" names the file shape. | A command's body only when it is invoked. A supporting file when its dispatcher reads it. A contract injected whole into the agent that names it, at launch. The walkthrough skill whenever a walkthrough or an interview runs. |
+| `.claude/agents/` | One file per critic lens, challenger persona and check, each carrying its front-matter and its Lens section and nothing else, the shared conduct being its contract's; and the documentation's planner and writer. Every agent declares `model: inherit`. | When a command launches the agent as an isolated subagent. |
+| `.claude/settings.json` | The two hooks and the deny rules. The hooks: one at every prompt (`scripts/hook-walkthrough.py`) and one before every call of the shell tool `Bash` (`scripts/hook-git.py`), each started as `python` with the script path anchored at `${CLAUDE_PROJECT_DIR}`. The deny rules: reading two sensitive paths (`~/.ssh/**`, `~/.aws/**`) and running `git` in the other shell tool (`PowerShell(git *)`). | The per-prompt hook at every prompt. The git hook before every `Bash` call. The deny rules hold for the whole session. |
+| `templates/` | The canonical skeletons for every new project and for every shape that has no other owner. A skeleton named `<type>-definition.md` is that of the definition of one member of a type the forge can be extended by: an artefact, a critic lens, a challenger persona, a check. The player page's skeleton, `templates/html-player.html`, is among them. The roster is [Templates](../reference/templates.md). | When a command makes a file from it. |
+| `scripts/` | Python 3.8 or newer, run as `python scripts/<name>.py`, the only platform-bound layer, written to run unchanged on Linux and macOS. Each script carries its help in its module docstring. What several scripts share lives in one module beside them (`forge_repos.py`, `forge_tools.py`, `forge_docs.py`, `docs_map.py`, `forge_check.py`), never twice. The two hooks are scripts of this folder too. | When a command, a hook or you run one. They are never read as instructions. |
+| `.gitattributes` | The engine's own ways of merging by path: its derived files at the root and under `projects/forge/`. | By git at a merge. |
+| `tmp/` | The engine's working folder: the packets, envelopes and profiles of runs on another engine (`tmp/research/<run>/`), the tasks of a documentation run, a dry ledger, the manifest of a migration, a check's report before it is filed. The folder is in git with its own `README.md` and `.gitignore`; its contents never are. Nothing in it is a source of truth. A run is kept for inspection and deleted by hand, never by a script. | Written by the scripts and commands on the way to a result. Read by no check, no ledger and no history. |
+| `projects/forge/` | The forge's own project, run through the forge's own process. It is the one project in the engine's repository: everything else under `projects/` is gitignored and a repository of its own. The documentation map, `docs-map.md`, lies beside its ledger. | When a command works on it, as on any project. |
+| `docs/` | The generated documentation: pages of one topic each and their index, made by `/document` from the map. `docs/videos/` is the public folder of the projects' html-player files and the player page `index.html`, written by `md2video` from the player skeleton; it belongs to the videos, not to the documentation, and `/document` leaves it alone. `docs/.nojekyll` keeps GitHub Pages from touching the folder. What a page and the map are is [The documentation](../about/the-documentation.md). | Written by `/document`. Read by `/man` when a question in free words is routed by the index. |
 
-The flow through these files, in one line:
+Two files beside these hold what differs per instance (one
+installation) and are gitignored: the instance facts in
+`CLAUDE.local.md` at the root, created from its template, and the
+session model in `.claude/settings.local.json`. Neither is part of
+the layer you change.
 
-`CLAUDE.md` always → the command's skill on its slash → the
-definitions, contracts and templates it names → agents in isolation
-→ scripts at the edge → the files of the project.
+The flow in one line: a session opens with `CLAUDE.md`; every prompt
+gets the hook's lines; a command you type reads its skill, which
+reads its supporting files and templates by path, launches an agent
+with its contract where it needs isolation and calls a script where
+the work is deterministic; what results is written into the files of
+a project, never into the conversation, and reaches git through the
+scripts.
 
-A few ideas carry the layer, and each tells you where a change
-belongs:
+## What happens
 
-- One always-on core, everything else on demand. `CLAUDE.md` is
-  loaded always. A command, a definition, a contract or a template
-  is read only when it is invoked. What must hold through a long
-  conversation is repeated by a hook at every prompt. Why the core
-  is kept small is [How the rules are held](../about/how-the-rules-are-held.md).
-- State lives in Markdown files of the project. It never lives in
-  the conversation or in the assistant's memory. A project is a
-  directory of artefacts, their history logs, the ledger (the
-  state report of the project, made from its files at read time),
-  the reviewers' records and the resources.
-- Isolation is bought with subagents. A subagent is a separate
-  run of Claude that sees only the files it is given and never the
-  working conversation. A reviewer, a check and a render each run in
-  one, all on the one session model.
-- Git, the conversion of documents and the hooks are scripts. The
-  scripts are the door to a write of git, and reading git is open.
-  A hook holds the line between the two.
-- Every file has a way of merging, and the forge tells git which in
-  `.gitattributes`.
+Five ideas carry the layer. They say why each file is loaded when
+it is, and why a change lands where it does.
 
-Some rules of placement follow from the owners:
+1. One always-on core, and everything else read when its situation
+   arises. `CLAUDE.md` is loaded into every session and every
+   subagent (an isolated run of Claude that sees the files it is
+   given and never the working conversation). A command, a
+   definition, a contract or a template is a file read when it is
+   invoked. What must hold through a long conversation is repeated
+   by a hook at every prompt. The per-prompt hook prints the
+   one-item rule of the walkthrough (the method by which a list of
+   decisions is worked one item per message) with its verdict line,
+   a pointer to the walkthrough skill, and four lines of conduct.
+   Why the core is small and the rest on demand is
+   [How the rules are held](../about/how-the-rules-are-held.md).
 
-- A rule of one artefact belongs in that artefact's definition,
-  not in `CLAUDE.md`.
-- A lens, persona or check file carries its front-matter and its
-  Lens section and nothing else. The shared behaviour is its
-  contract's skill, named in the file's front-matter.
-- A new check is one file in `.claude/agents/`.
-- A future layer of the chain is added by one definition file; the
-  `/forge` dispatcher stays untouched.
-- A skeleton named `<type>-definition.md` is the skeleton of the
-  definition of one member of a type the forge can be extended by:
-  an artefact, a critic lens, a challenger persona, a check. Every
-  skeleton is listed in [Templates](../reference/templates.md).
-- What several scripts share lives in one module beside them
-  (`forge_repos.py`, `forge_tools.py`, `forge_docs.py`,
-  `docs_map.py`, `forge_check.py`), never twice. Each script carries
-  its help in its module docstring.
-- The scripts run unchanged on Windows, Linux and macOS: Python 3.8
-  or newer, run as `python scripts/<name>.py`, paths through
-  `pathlib`, external tools found on PATH.
-- Nothing in `tmp/` is a source of truth. A run there is kept for
-  inspection and deleted by hand, never by a script.
-- `docs/` is generated, never edited by hand. What it is and the map
-  it is made from are said in [The documentation](../about/the-documentation.md).
+2. State lives in Markdown files of the project, never in the
+   conversation and never in Claude's memory. A project is a
+   directory: the artefacts of the chain, their history logs, the
+   ledger (the one source of truth for state, made at read time), the
+   records of the reviewers and the resources.
+
+3. Isolation is bought with subagents. A reviewer, a check and a
+   render each run in a subagent, all on the one session model. A
+   reviewer's agent file carries only its front-matter and its Lens
+   section; the shared conduct arrives as a contract skill, injected
+   at launch. The contract opens by citing `CLAUDE.md`, Isolated
+   reviewers, for what the contract owns and what the lens file
+   owns. Because the contract lands after the agent's own text, the
+   agent must know which yields.
+
+4. Git, the conversion of documents and the hooks are scripts. The
+   scripts are the door to a write of git; reading git directly is
+   open. The git hook holds the line between the two: it denies every
+   write and names the script to use. The few commands that finish
+   the step of a conflict are the exception; the hook puts them to
+   the principal (whoever's thinking is being forged) and runs them
+   on his yes.
+
+5. Every file has a way of merging, and the forge tells git which in
+   `.gitattributes`. Composed text and the record files merge as
+   text; a conflict in a record file keeps both tails. Derived state
+   is made at read time and never kept in git, or made only on `main`
+   and taken as ours at a merge. Immutable files never conflict.
+   Where git leaves a conflict standing, Claude lays both sides out
+   and the principal decides; the forge merges nothing itself.
+
+Two more rules shape the files you will touch. A skeleton named
+`<type>-definition.md` in `templates/` is the skeleton of a
+definition, so that a new artefact, lens, persona or check starts
+from a shape and not from a copy of a neighbour. And `tmp/` is one
+folder in the engine rather than the system's temporary directory,
+so that a run is traceable on the machine and a profile's deny rules
+have one path to name; the price is a folder you empty by hand.
 
 ## What you have afterwards
 
-You know which file owns the thing you want to change and when that
-file takes effect. A change to `CLAUDE.md` or to a hook acts on
-every session. A change to a skill, a definition, a contract or a
-template acts the next time it is invoked. A change to a script acts
-the next time it runs.
-
-## If something goes wrong
-
-- **An agent behaves as though its contract were missing.** A skill
-  an agent names that does not exist is skipped silently. The check
-  `engine` (`/check engine`) verifies that every skill an agent names
-  exists.
-- **A command shows the first line of its body as its description.**
-  A front-matter with CRLF line endings and an unquoted
-  `argument-hint` of two bracketed items fails to parse. Quote every
-  `argument-hint`.
-- **A command does something other than its skill says.** A skill
-  shadows a command file of the same name. Move a command to a skill
-  whole, never in part.
-- **The per-prompt hook does not run.** A relative path to a hook is
-  resolved against the session's working directory, not the engine
-  root. The engine's `.claude/settings.json` names the script through
-  `${CLAUDE_PROJECT_DIR}` in exec form, and a hook you add should do
-  the same.
-- **Claude starts a guarded command on its own.** A command that is
-  to run only when asked carries `disable-model-invocation: true` in
-  its front-matter.
+You know the file that owns the thing you want to change and the
+moment Claude reads it: the core for what must hold always, a skill
+for what one command does, a supporting file for one state or one
+genre, an agent file for what one reviewer hunts, a template for a
+shape, a script for deterministic work. The change itself, its
+record and its release are
+[Make a change to the forge](how-a-change-is-made.md).
 
 ## A worked example
 
-One command traced through the layer: you run the light check on a
-project with the placeholder slug `my-project`.
+One command traced through the layer: a check run on a project with
+the placeholder slug `my-project`.
 
 ```
 /check light my-project
 ```
 
-1. When the session opened, Claude Code loaded `CLAUDE.md`. At your
-   prompt the per-prompt hook `scripts/hook-walkthrough.py` added its
-   lines on the walkthrough (the way a list of decisions is worked
-   with the principal, the person whose thinking is forged: one item
-   per message) and on conduct.
-   You should now see the check under way, with no file of the
-   project changed.
-2. The slash reads `.claude/skills/check/SKILL.md`, the skill of the
-   command. It launches the agent `.claude/agents/check-light.md` as
-   a subagent, and Claude Code injects the contract
-   `.claude/skills/check-contract/SKILL.md` into it at launch.
-   You should now see the agent's report returned, its findings
-   unnumbered; the agent writes nothing.
-3. Where the check found something, the command numbers the
-   findings and files the report into the project's `reviews/`.
-   `scripts/forge-report.py` completes the report's name. A run that
-   finds nothing files nothing.
-   You should now see a file
-   `reviews/YYYY-MM-DD-check-light-HHMM-<hash>.md` in `my-project`.
-4. The ledger is remade by `scripts/forge-ledger.py my-project`.
-   You should now see `ledger.md` current, with the new findings in
-   its Findings table, and still outside git.
-5. The findings are settled by walkthrough.
-   You should now see the first finding alone, closed by the verdict
-   line `(a)ccept / (m)odify / (q)uestion / (r)eject / (p)ark`.
+1. The session already holds `CLAUDE.md`, loaded when it opened. The
+   prompt that carries the command passes through
+   `scripts/hook-walkthrough.py`, which adds the one-item rule and
+   the four lines of conduct.
+2. Claude reads `.claude/skills/check/SKILL.md`, the skill of the
+   command. Until now that file was not in context.
+3. The skill launches `.claude/agents/check-light.md` as an isolated
+   subagent. Its front-matter names `check-contract`, so the harness
+   injects `.claude/skills/check-contract/SKILL.md` whole at launch;
+   the agent carries `CLAUDE.md` as every subagent does. The agent
+   file itself holds only its front-matter and its Lens section.
+4. The agent reads the documents of `projects/my-project/` from disk
+   in its own run, stays read-only and returns its report with the
+   findings unnumbered. It sees nothing of your conversation.
+5. The command gives the findings their IDs and files the report in
+   the project's `reviews/`; `scripts/forge-report.py` completes the
+   file name in place. A report on its way to being filed may lie in
+   `tmp/` meanwhile; nothing reads it there. A run that finds nothing
+   files nothing.
+6. The findings are settled by walkthrough, one item per message, in
+   the shape of `.claude/skills/walkthrough/SKILL.md`, read now
+   because a walkthrough runs.
+7. The write at the round's end lands in the project's files, and a
+   save reaches git through `scripts/forge-save.py`. Had Claude typed
+   a `git` write itself, `scripts/hook-git.py` would have denied it
+   and named the script.
 
-The core, one command's skill, one agent file, one contract and two
-scripts took part. To change what the light check verifies, you
-change `.claude/agents/check-light.md` alone.
+The files touched, in order: the core, a hook script, a skill, an
+agent file with its contract skill, the project's documents, a
+script, a method skill, a git script. Nothing was read that the
+moment did not call for.
 
 ## See also
 
-- [Repository layout](../reference/repository-layout.md): the layout
-  block.
+- [Repository layout](../reference/repository-layout.md): the layout block.
 - [Templates](../reference/templates.md): every skeleton.
-- [How the rules are held](../about/how-the-rules-are-held.md): why
-  the core is small and the rest on demand.
-- [Make a change to the forge](how-a-change-is-made.md): changing any
-  of it.
-- [The documentation](../about/the-documentation.md): what `docs/`
-  and the map are.
-- [Glossary](../reference/glossary.md): every term of the forge in
-  one line.
+- [How the rules are held](../about/how-the-rules-are-held.md): why the core is small and the rest on demand.
+- [Make a change to the forge](how-a-change-is-made.md): changing any of it.
+- [The documentation](../about/the-documentation.md): what `docs/` and the map are.
+- [Glossary](../reference/glossary.md): every term of the forge in one line.
 
-Generated on 2026-10-25 for version 6.1 from the files the
-front-matter names; never edited by hand.
+Generated on 2026-11-01 for version 6.8 from the files the front-matter names; never edited by hand.

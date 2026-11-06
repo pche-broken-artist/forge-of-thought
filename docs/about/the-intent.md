@@ -1,8 +1,8 @@
 ---
-generated: 2026-10-25
-version: 6.0
+generated: 2026-11-01
+version: 6.8
 made: derived
-inputs-hash: 2c3eb364178d12ca
+inputs-hash: 50dbc77205ae64e8
 inputs:
   - .claude/skills/forge/states/intent.md
   - templates/intent.md
@@ -16,233 +16,246 @@ inputs:
 
 # The intent
 
-The intent is the document that says what the principal holds today:
-what he wants, why, what is the case and what he dropped. The
-principal is the person whose thinking is being forged. This page
-explains what the intent holds, why it is rewritten every round
-instead of growing as a log, and why solving goes elsewhere. It is
-for a user who works an intent and for an evaluator who wants to
-know what the document is.
+The intent is the artefact of the chain that says what the principal
+(the person whose thinking is being forged) wants and why, as it
+stands today. This page is for the user who works an intent with
+Claude and for the evaluator who wants to know what the file is, what
+belongs in it and what is kept out of it on purpose. It explains; how
+an intent is iterated is the page [Forge the
+intent](../use/forge-the-intent.md), and every term used here is in
+the [Glossary](../reference/glossary.md).
 
 ## What it is
 
-The intent is the file `10-intent.md` of a project. It is the
-consolidated current state of what the principal holds. It is the
-trunk of the chain of documents: every project has one after its
-brief, and many projects end at it.
+The intent is the file `10-intent.md` of a project, the trunk of its
+chain: a chain starts at a brief, the intent chisels the briefs into
+what the principal holds, and every layer below is derived from it.
 
-The intent is not a log. Each round rewrites it for coherence, so
-that everything in it fits together and nothing is said twice. The
-changes of a round are recorded in a history companion beside it
-(see [Versioning and history](versioning-and-history.md)). The
-intent is versioned like every artefact of the chain.
+It is the consolidated current state of what the principal holds. It
+is not a log. Every round rewrites it for coherence and never appends
+to it; what changed, and why, is recorded in its history companion
+beside it (see [Versioning and history](versioning-and-history.md)).
 
-The intent says what is wanted and why, and it does not solve. The
-test of a sentence is this question: would it still hold if the
-thing were realised in a wholly different way? If it would, the
-sentence is intent. If not, it is solution, and it belongs in
-[The solution design](the-solution-design.md).
+It exists because the context of a conversation dies and anything of
+value must live in a file. It is the document to read when returning
+to a project after weeks, instead of excavating old conversations.
 
-- A principle the principal sets for the solution is intent.
-  It says what the realisation must respect, whatever its shape.
-- The mechanism that honours that principle is solution.
-- What the principal wants a user to be able to do, and what must
-  be true when it is done, is intent.
-  A command he asks for by name counts here too.
-- How the command does it is solution.
-  Its parts, its steps, their order and the checks it runs belong
-  there.
-
-The division is by the kind of content, never by who said it. An
-idea of the principal's about how to build something is solution
-too.
+An intent says what is wanted and why, and it does not solve. The
+test of a sentence is this: would it still hold if the thing were
+realised in a wholly different way? If it would, the sentence is
+intent. If it would not, it is solution and belongs in [The solution
+design](the-solution-design.md). A principle the principal sets for
+the solution, which the realisation must respect whatever its shape,
+is intent; the mechanism that honours it is solution. What the
+principal wants a user to be able to do, and what must be true when
+it is done, is intent; how it is done, what it is built of, its steps
+and the checks it runs, is solution. The division is by kind of
+content, never by who said it: an idea of the principal's about how
+to build something is solution too.
 
 ## Who writes and reads it
 
-The principal and Claude write it together. The principal supplies
-the substance. Claude composes the wording. Claude is the AI
-assistant that works with the principal. The template marks its
-audience as the principal and Claude only.
+The principal writes it with Claude. The principal owns the
+substance; Claude composes the wording. A thread closes only on the
+principal's word.
 
-The intent is the document to read when returning to a project after
-weeks. It replaces the excavation of old conversations.
+Its audience is the principal and Claude only: it is a working
+document, never handed to anyone. Claude reads it, together with the
+project's threads, at the start of every round, and the layer below
+is derived from it.
 
 ## Made from
 
-The intent is made from these inputs:
-
-- the briefs the principal says to mine, approved or not;
-- the project's decisions, `decisions.md`;
-- the ledger (the state of the project, made by a script when it is
-  read);
-- sources, only as the principal directs;
-- the conversation of the round.
-
-The first intent is created from the template `templates/intent.md`
-as version 0.1. Its history companion and an empty `threads/`
-directory are made with it.
+- The briefs the principal says to mine: `00-brief.md` and any
+  `00-brief-<name>.md`, approved or not.
+- The project's decisions and its ledger (the project's state
+  report, made by a script at read time).
+- Sources, only as the principal directs.
+- The conversation itself: what the principal says, and what Claude
+  draws out by questions.
+- Research, where a thread needs outside grounding and the principal
+  asks for it.
 
 ## What it holds
 
-The intent holds four kinds of item, each with an ID of its own
-prefix:
+The shape of the file is the template `templates/intent.md`. Its
+sections, in order:
 
-- **POS** (a position): what the principal holds or wants.
-- **FCT** (a fact): what is the case.
-- **REJ** (a rejected direction): what was considered and dropped,
-  with the reason.
-- **THR** (a thread): an open matter.
-  A thread lives in a file of its own, not in the intent.
-
-The template sets the sections in this order:
-
-- Essence: what the principal wants and why, as of today.
-- Positions.
-- Facts.
-- Rejected directions.
-- Candidate structure for the layer below.
-  This section is optional.
-  It holds what the next layer will need as soon as the principal
+- **Essence**: a few sentences on what the principal wants and why,
+  as of today.
+- **Positions** (prefix `POS`): statements the principal currently
+  holds.
+- **Facts** (prefix `FCT`): what is the case.
+- **Rejected directions** (prefix `REJ`): what was considered and
+  dropped, and why.
+- **Candidate structure for the layer below**: an optional staging
+  area for what the next layer will need as soon as the principal
   sees it, such as the recipients, the objective and the success
-  criteria.
-  It is left out where the project takes no layer below, and deleted
-  once that layer exists and leads.
+  criteria of an assignment. It is left out where the project takes
+  no layer and deleted once the layer exists.
+
+Beside the file, in the directory `threads/`, live the threads
+(prefix `THR`): what is open and being worked.
 
 ### A position
 
-A position says what the principal holds and why it holds. It uses
-as many words as it takes to be understood without loss of meaning.
-It names what it comes from: a brief or a source. It is dated once,
-with the day it took its present shape.
+A position says what the principal holds and why he holds it, in as
+many words as it takes to be understood without loss of meaning. It
+names what it comes from, a brief or a source. It is dated once: one
+date, the day it took its present shape. A position without an ID
+does not exist; it carries its ID from birth.
 
-The way to a position does not belong in it. Why it changed, what
-was said on the way, trials, measurements, counts, settled findings,
-what others do and which research turned it all go into the history.
-They are written there in the same step that writes the position,
-while the whole context is at hand. Earlier steps of a position are
-found by searching the history for its ID. A number stays in a
-position only where it is the rule or a threshold, never as a
-measurement.
+What does not belong in a position is the way to it: why it was
+changed, what was said on the way, trials, measurements, counts,
+findings settled, what others do, which research turned it. All of
+that is written into the history in the same step that writes the
+position, while the whole context is at hand. Earlier steps are found
+by searching the history for the position's ID; the position itself
+cites no record of the history. A number stays in a position only
+where it is a rule or a threshold, never as a measurement. Text
+leaves a position only into the history, word for word.
 
-A position carries its ID from its birth. A position without an ID
-does not exist.
+A position says what is to be achieved and why. What realises it is
+named in the solution design where the project has one. Where the
+project has no solution design, the position names the file that
+realises it, and where that is only part of a file, or the file does
+not exist yet, the position keeps the full information, so that a
+rewrite of that part cannot lose the detail. Where the position and
+what realises it say different things, that is a finding (a
+reviewer's result), never mended in silence.
+
+Ideas are placed on a horizon where the principal sees one: a proof
+of concept, the first version, a later one, or good but far away.
+What he deferred is not dropped.
 
 ### A fact
 
-A fact is what is the case. It is stated by the principal on his
-word, or by a source cited to its file. Verification is never
-demanded. When the principal makes a source's fact his own stance,
-that is a new position. What Claude has worked out is never a fact,
-because a fact is the principal's word or a source's.
+A fact is what is the case: stated by the principal on his word, or
+stated by a source and cited to its file. Verification is never
+demanded. What Claude has worked out is never a fact, since a fact
+is the principal's word or a source's. When the principal makes a
+source's fact his own stance, that is a new position.
 
 ### A rejected direction
 
-A rejected direction records what was dropped and why. It prevents
-old ground from being argued again. It keeps the reasoning for a
-later return to the project.
+A rejected direction records what was dropped and the reason it was
+dropped. It prevents old ground from being re-litigated and keeps the
+reasoning for a later return to the project.
 
 ### A thread
 
-A thread is one open matter of the intent. It is a file,
-`threads/THR.NNNN.md`, made from the template `templates/thread.md`.
-The threads are part of the intent, as its history is. The intent
-says what holds; the threads say what is being worked.
+A thread is one open matter of the intent: what is undecided, what it
+would take to decide it, and whether it blocks the layer below. The
+intent says what holds; the threads say what is being worked. A
+thread carries the working debate for as long as it is unsettled:
+what was said, what was tried, the plan of a change under way, the
+proposals that await a decision. It is where an unfinished
+conversation is saved before a session ends.
 
-A thread's header is its state:
+Each thread is a file of its own, `threads/THR.NNNN.md`, made from
+`templates/thread.md`. Its header is its state and carries three
+fields:
 
-- `concerns`: the artefact it concerns, as the forge command names
-  it; several where several.
-- `origin`: the principal's word (the default), a document by path,
-  or Claude's synthesis.
+- `concerns`: the artefact it concerns, as `/forge` names it; several
+  where several.
+- `origin`: where it came from. The principal's word, which is the
+  default; a document, by its path; or Claude's synthesis.
 - `status`: `open` or `closed`.
 
-The origin keeps a hypothesis of Claude's visibly Claude's until the
-principal takes it up.
+The first sentence of a thread is its headline; its last dated
+paragraph is its state. A thread has no title and no further fields.
+It has no version and no history of its own. While open it is freely
+rewritten, header included. A thread is never moved, renamed or
+deleted. Closing a thread is `status: closed` in its header and a
+`closed` record in the intent's history that says when and by what.
+A closed thread is immutable and is its own archive. What returns
+later is a new thread citing the old one. There is no list of threads
+in a file; the list is made by the ledger script.
 
-The body's first sentence is its headline. Its last dated paragraph
-is its state. While a thread is open, it carries the working debate:
-what was said, what was tried, the plan of a change under way and the
-proposals that await a decision. It is where an unfinished
-conversation is saved.
-
-An open thread is rewritten freely, the header too. A thread has no
-version and no history of its own. It is never moved, renamed or
-deleted. Closing it sets `status: closed` and adds a record to the
-intent's history saying when it closed and by what. The closed file
-is immutable and is the archive. What holds goes into the intent as
-a position or a rejection. A matter that returns is a new thread that
-cites the old one.
+The threads are part of the intent as its history is. The intent's
+history records the birth and the closing of a thread, not every
+saving of its debate.
 
 ## Complete when
 
 The intent is complete for now when no thread blocks the next layer.
-It is never finished. Before a lower layer is derived, the whole is
-passed through a final reality check.
+It is never finished.
+
+Before a lower layer is derived from it, the whole is passed through
+a final reality check: what of it is feasible, and where the wheel
+already exists. When that completion is reached, Claude names the
+layers that can follow from the intent, or offers the approval where
+the principal takes none: a recommendation, never a gate.
 
 ## How it is found
 
-The intent is found in a working conversation with Claude. The
-briefs are mined one at a time, whole by whole. Contradictions, gaps
-and unstated assumptions are probed. Ideas are placed on a horizon
-where the principal sees one: a proof of concept, the first version,
-a later one, or good but far away. How this conversation runs is
-explained in [Elicitation](elicitation.md). How you start a round is
-in [Forge the intent](../use/forge-the-intent.md).
+The intent is found by elicitation; the method is the page
+[Elicitation](elicitation.md). In short: Claude mines the briefs
+with the principal whole by whole, probes contradictions, gaps and
+unstated assumptions, and challenges an idea on two questions kept
+apart, whether it is good and whether it is feasible. It reflects a
+brain-dump back as structure before anything is written, offers
+options with trade-offs and proposes research where a thread needs
+outside grounding. Within a round one theme is worked at a time, and
+the round is written once, at its end, on the principal's word. On
+the write, resolved threads move into positions or rejections. The
+text is in the project's language. The command that runs a round is
+`/forge intent`, described in [Forge the
+intent](../use/forge-the-intent.md).
 
 ## Why
 
-**Why a file at all.** Chat context dies, and anything of value must
-live in a file.
+The intent is one consolidated file because the alternative was
+tried and rejected: an append-only log of questions and answers left
+the current state of what was wanted scattered across the brief, the
+log and the assignment, with no single place answering "what do I
+want now".
 
-**Why one rewritten document and not a log.** An append-only log of
-questions and answers was tried and dropped. It left the current
-state scattered across the brief, the log and the assignment. No
-single place answered "what do I want now". The intent is that place.
-
-**Why the way to a position is kept out of it.** The reason is not
-recorded.
-
-**Why threads are files.** Two people working on different threads
-never conflict. Claude reads only the threads it needs. The tool that
-merges files need not handle blocks with an inner state.
-
-**Why the intent does not solve.** An intent that carries the
-solution cannot be read as what is wanted. Nobody can be asked for a
+The intent does not solve because an intent that carries the solution
+cannot be read as what is wanted, and nobody can be asked for a
 proposal of the whole solution over it.
 
-**Why a fact has its own prefix.** Without one, a fact would pass
-for a position.
+The way to a position goes into the history, not into the position,
+so that the position stays what the principal holds, readable without
+loss of meaning, and the record is written while the whole context is
+still at hand.
+
+Facts have a prefix of their own because, without one, a fact would
+have passed for a position.
+
+A thread carries its origin so that a hypothesis of Claude's stays
+visibly Claude's until the principal takes it up.
+
+Threads are files of their own, one per thread, for three reasons:
+two people working on different threads never conflict; Claude reads
+only the threads it needs; and whatever reads the intent need not
+handle blocks that carry a state of their own.
 
 ## A worked example
 
-A generic position with its reason, in the shape of the template:
+A position of a generic project, in the shape the template defines.
+The slug and the content are placeholders.
 
-```markdown
-- **POS.0010** Every team sees the same weekly status of its open
-  requests, so that nobody has to ask another team where a request
-  stands. Reason: questions about status take up the start of every
-  planning meeting today. From the brief. Dated 2026-01-15.
+```
+## Positions
+- **POS.0010** Every order the shop receives is confirmed to the
+  customer within the hour, whatever channel it arrived by. Reason:
+  a customer who hears nothing calls, and a call costs the team more
+  than the order earned (`00-brief.md`). Present shape 2026-03-14.
 ```
 
-The sentence would hold however the status were produced: by a
-report, a board or a mail. That is why it is intent. A sentence
-naming the tool that produces the status would be solution.
+The position says what is wanted and why, names the brief it comes
+from, and is dated once. It would still hold if the confirmation were
+sent by mail, by text message or by a phone call, so it is intent;
+which channel is used, and by what system, belongs in the solution
+design. How the shop came to the one-hour rule, and what was said on
+the way, is in the record of the history that wrote the position, not
+here.
 
-A generic thread file beside it:
-
-```markdown
----
-id: THR.0010
-concerns: intent
-origin: the principal
-status: open
----
-
-Which requests count as open for the weekly status. Opened
-2026-01-15.
-
-2026-01-20: proposals await the principal's decision.
-```
+The thread that was open while the rule was found would have stood
+beside it as `threads/THR.0010.md`, its header `concerns: intent`,
+`origin: the principal`, `status: open`, and would now be closed,
+immutable, with a `closed` record in the intent's history.
 
 ## See also
 
@@ -255,5 +268,5 @@ Which requests count as open for the weekly status. Opened
 - [Glossary](../reference/glossary.md): every term of the forge in
   one line.
 
-Generated on 2026-10-25 for version 6.0 from the files the
+Generated on 2026-11-01 for version 6.8 from the files the
 front-matter names; never edited by hand.

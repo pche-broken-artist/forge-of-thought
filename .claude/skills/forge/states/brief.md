@@ -18,11 +18,11 @@ useful, no IDs, no conventions of the chain. It is versioned as
 every artefact is (CLAUDE.md, Versioning & status); its language:
 prime directive 6.
 
-**Inputs.** The principal's thought, however it arrives. Around
-it, gathered during the elicitation: research notes (`research/`),
-sources (`sources/`) and Claude's own proposals. The existing
-intent and the ledger (`python scripts/forge-ledger.py <slug>`) are read only to know what already stands, never
-to shape the text.
+**Inputs.** The principal's thought, however it arrives. Around it,
+gathered during the elicitation: research notes (`research/`), sources
+(`sources/`) and Claude's own proposals. The existing intent and the
+ledger (`python scripts/forge-ledger.py <slug>`) are read only to know
+what already stands, never to shape the text.
 
 **Aim.** The brief puts the idea together: what the principal
 wants and why, with what he chose to take from the finding around

@@ -1,7 +1,6 @@
 ---
 description: Look at the remote and pull a clean repository that is behind; after a pull of the engine, the Action required lines crossed and the offer of the checks
 argument-hint: "[project-slug]"
-disable-model-invocation: true
 ---
 
 Pull the forge from its remotes through `scripts/forge-pull.py`

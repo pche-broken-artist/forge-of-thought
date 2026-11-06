@@ -1,8 +1,8 @@
 ---
-generated: 2026-10-25
-version: 6.0
+generated: 2026-11-01
+version: 6.8
 made: mirrored
-inputs-hash: 5b94758277d51665
+inputs-hash: 5845b2242e092e48
 inputs:
   - scripts/forge-branch.py
   - .claude/skills/release/SKILL.md
@@ -10,13 +10,13 @@ inputs:
 
 # Work on a branch
 
-This page shows how to switch a repository to a branch, or back to `main`, without typing git. It is for you if you want a branch of your own. Branches are voluntary: whoever does not want one works on `main` and never meets this script. A repository here is the engine or one project, and each project is a repository of its own.
+This page shows how you switch a repository to a branch, or back to `main`, without typing git. It is for anyone who wants a branch of their own. Branches are voluntary: whoever does not want one works on `main` and never meets the script.
 
 ## When to use it
 
-- You want to work on a branch instead of `main`.
-- You want to know which branch a repository is on.
-- You want to get back to `main`, for example because a release is made from `main` only.
+Use it when you want to work apart from `main` and come back later. Use it also to see which branch a repository is on.
+
+A repository is named by its slug. The slug `forge` means the engine, the repository that holds the forge itself.
 
 ## The command
 
@@ -32,84 +32,52 @@ Switch back to `main`:
 python scripts/forge-branch.py <slug> main
 ```
 
-Report the branch and list the branches:
+Report the branch and list the branches of the engine:
 
 ```
-python scripts/forge-branch.py <slug>
+python scripts/forge-branch.py forge
 ```
 
-The slug names the repository. The slug `forge` means the engine. There is no form without a slug, because switching every repository at once is never what anyone wants.
+The slug is required. There is no form that switches every repository at once.
 
 ## What happens
 
-1. The script finds the repository and reads the branch it is on.
-
-   You should now see, with the slug alone, the line "on branch" and the branch name. When the repository has more than one branch, a second line lists them.
-
-2. If you named the branch you are already on, the script says so and does nothing more.
-
-   You should now see "already on" and the branch name.
-
-3. If the repository has unsaved changes, the script stops. Nothing is carried across and nothing is lost.
-
-   You should now see a message that the repository has unsaved changes, with the number of files.
-
-4. If the branch exists, the script switches to it.
-
-   You should now see "switched to" and the branch name.
-
-5. If the branch does not exist, the script creates it from the current state and switches to it.
-
-   You should now see "created" with the branch name, the branch it was made from, and a note that the branch reaches the remote with the first save made on it.
+1. The script finds the repository for the slug. You should now see no error that the project is missing or is not a repository.
+2. With no branch name, it prints the branch the repository is on, and the list of branches when there is more than one. You should now see a line "on branch ..." and, if there are several, a line "branches: ...".
+3. With a branch name equal to the current branch, it changes nothing. You should now see "already on ...".
+4. Otherwise it checks for unsaved changes. If there are any, it stops. You should now see no message about unsaved changes.
+5. If the branch exists, it switches to it. You should now see "switched to ...".
+6. If the branch does not exist, it creates it from the current state and switches to it. You should now see "created ... from ... and switched to it", with a note that the branch reaches the remote with the first save made on it.
 
 ## What you have afterwards
 
-The repository stands on the branch you named. Every save you make now lands on that branch.
+The repository stands on the branch you named. A new branch exists only on your machine until you save on it: the first save made on it carries it to the remote. A save is described in [Save your work](save-your-work.md).
 
-A new branch exists only on your machine at first. It reaches the remote with the first save made on it (see [Save your work](save-your-work.md)).
+## What stays with git
 
-Some things are made from `main` only:
+The script does two things only: it switches and it reports. Merging, deleting and pushing branches stay with git:
 
-- a release
-- a documentation run
-- a publish
+- A merge into `main` is done by hand or by merge request. Why it is left to git is told in [Persistence in git](../about/persistence-in-git.md), and how a contributor's branch reaches the integrator in [Working together on one project](../about/working-together.md).
+- A release is made from `main` only. So are a documentation run and a publish.
 
-On any other branch a release stops and reports the branch the repository is on and how to get back to `main`. Save first, then switch back with the command above.
-
-Merging a branch into `main`, deleting a branch and pushing a branch stay with git. A merge is done by hand or by merge request. The script does none of these. [Persistence in git](../about/persistence-in-git.md) explains why merging is left to git, and [Working together on one project](../about/working-together.md) shows how a contributor's branch reaches the integrator.
+On any other branch a release stops and reports the branch the repository is on. To go back, save, then switch to `main` with the command above.
 
 ## If something goes wrong
 
-- "has unsaved changes": save first, then switch. See [Save your work](save-your-work.md).
-- "Project ... not found": the slug names no project. Check it against the folders in `projects/`.
-- "is not a repository - nothing to switch": the folder is not a repository of its own, so there is no branch to switch.
-- "Could not switch" or "Could not create branch": git refused. The reason is not recorded.
-- "Cannot read the current branch": the script could not read the branch of the repository. The reason is not recorded.
-- git missing: the script needs Python 3.8 or newer and git on the path.
+- "has unsaved changes": the switch stops, so that nothing is carried across or lost. Save first, then switch again.
+- "Project ... not found": the slug names no project. Check the slug.
+- "is not a repository - nothing to switch": the project is not under git of its own, so there is no branch to switch.
+- "Could not switch" or "Could not create branch": git refused the switch or the new branch. The repository stays on the branch it was on.
+- "Cannot read the current branch": the script cannot tell which branch the repository is on, and stops.
 
 ## A worked example
 
-You want a branch called `<branch>` in the project `<slug>`.
+You want to try a change apart from `main` in the project `<slug>`, on a branch `<branch>`.
 
-```
-python scripts/forge-branch.py <slug>
-```
-
-The script reports that the project is on `main`.
-
-```
-python scripts/forge-branch.py <slug> <branch>
-```
-
-The script creates `<branch>` from `main` and switches to it. You work and save as usual; the first save pushes the branch to the remote. When you are done and the work is merged, you go back:
-
-```
-python scripts/forge-branch.py <slug> main
-```
-
-The script reports that it switched to `main`. If it reports unsaved changes instead, save first and run the command again.
-
-For the engine itself, use `forge` in place of `<slug>`. The terms of the forge are in the [Glossary](../reference/glossary.md).
+1. Look where the repository stands: `python scripts/forge-branch.py <slug>`. You should now see that it is on `main`.
+2. Switch and create: `python scripts/forge-branch.py <slug> <branch>`. You should now see that `<branch>` was created from `main` and switched to.
+3. Work, then save as usual. You should now see the first save carry `<branch>` to the remote.
+4. When you want `main` again, save, then run `python scripts/forge-branch.py <slug> main`. You should now see "switched to main".
 
 ## See also
 
@@ -118,4 +86,4 @@ For the engine itself, use `forge` in place of `<slug>`. The terms of the forge 
 - [Working together on one project](../about/working-together.md): how a contributor's branch reaches the integrator.
 - [Glossary](../reference/glossary.md): every term of the forge in one line.
 
-Generated on 2026-10-25 for version 6.0 from the files the front-matter names; never edited by hand.
+Generated on 2026-11-01 for version 6.8 from the files the front-matter names; never edited by hand.

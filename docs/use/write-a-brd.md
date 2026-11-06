@@ -1,8 +1,8 @@
 ---
-generated: 2026-10-25
-version: 6.1
+generated: 2026-11-01
+version: 6.8
 made: mirrored
-inputs-hash: ac12402d8abb2913
+inputs-hash: cb58a6720449cf82
 inputs:
   - .claude/skills/forge/states/brd.md
   - templates/brd.md
@@ -10,29 +10,25 @@ inputs:
 
 # Write a BRD
 
-This page shows how you break an assignment, an intent or a document
-someone gave you into business requirements with `/forge brd`. It is
-for the principal (the person whose thinking is being forged) who
-wants requirements that stakeholders can review, delivery teams can
-estimate and the solution design can start from.
+`/forge brd` is the command that iterates the business requirements,
+the file `30-brd.md`. This page is for the analyst, who is also the
+principal (the person whose thinking is being forged), and who wants
+to break an assignment, an intent or a document someone gave them into
+business requirements. What a BRD is and why it names what it cannot
+know is in [The BRD](../about/the-brd.md).
 
 ## When to use it
 
-Use it when a parent document is stable enough to be broken down. Claude
-says whether it is, by being approved or by your word, and never
-treats that as a gate.
+Use it when a parent exists that the stakeholders and the delivery
+teams need broken into rules, behaviour and qualities they can review
+and estimate. The parent is one of three:
 
-Use it when you hold one of these:
-
-- An assignment. Claude reads it together with the intent and the
-  threads, because the assignment does not carry all the reasons.
-- An intent, in a project that has no assignment. Claude invents no
-  assignment for it.
+- The assignment. Claude reads it together with the intent and the
+  threads, for the reasons the assignment does not carry.
+- The intent, where the project has no assignment. No assignment is
+  invented for it.
 - A file someone else gave you, such as a transcript, an offer or a
   document. This is a third way in and not a parent of the chain.
-
-What a BRD is and why it names what it cannot know is on
-[The BRD](../about/the-brd.md).
 
 ## The command
 
@@ -40,142 +36,184 @@ What a BRD is and why it names what it cannot know is on
 /forge brd <slug>
 ```
 
-The command iterates `30-brd.md`, the business requirements of the
-project. When you ask for it, you name its parent: the assignment, or
-the intent where the project has no assignment. Every item of the BRD
-leads back to that parent.
+When you ask, you name the parent in your words, for example "from the
+assignment" or "from the intent". Claude says whether the parent is
+stable enough to derive from, approved or on your word. It is never a
+gate.
 
 ## What happens
 
-There are five ways in. Claude first resolves the project, the parent
-you name and the BRD as it stands. Then you take the way that fits.
+Claude resolves the project, the parent you named and the BRD as it
+stands. Around the parent it reads these:
 
-1. **No BRD yet, found together.** Claude asks questions up front,
-   one per message. They are about the stakeholders, the scope of the
-   document and the phasing, because the parent does not answer
-   them. Then it shows the whole draft with its provenance map,
-   which is the list that traces every item to its place in the
-   parent. Last comes a walkthrough by group, in which you decide one
-   item per message. The touched areas of the enterprise are walked
-   one per item.
+- The decisions of the project and its ledger (the state report made
+  from the documents at read time).
+- The resource indexes of the project and of every library it depends
+  on, so that a standard, a regulation or a report already held is
+  cited and never declared unknown.
+- The roster of areas of the instance. This is a library document of
+  the instance, cited by path, that names the areas of the enterprise a
+  BRD must consider and which of them are mandatory. A project with no
+  enterprise around it has no roster. It writes `Roster: none` and
+  walks the areas against nothing. How a library is kept and cited is
+  in [Share material through a library](share-material-through-a-library.md).
 
-   You should now see the draft, the provenance map and a first item
-   waiting for your verdict.
+Then the pass runs in one of five ways. Pick the one that fits.
 
-2. **No BRD yet, drafted automatically on your word.** Claude asks
-   you nothing. It builds the provenance map from the parent first,
-   walks the areas the BRD must consider, and writes the items from
-   the map, so that nothing of the parent is lost in silence. What
-   the parent does not answer stays an open question or an
-   assumption. A step or a guarantee that no place of the parent
-   gives is marked as Claude's reading. An open question whose owner
-   the parent does not name carries `owner: unassigned` until you
-   name a role.
+### Found together
 
-   You should now see the draft, the provenance map, the list of what
-   Claude assumed and the list of what must be supplied from outside.
-   That last list has two parts: what the forge already holds, named
-   by path, and what must be fetched.
+1. Claude asks questions up front, one per message, on the
+   stakeholders, the scope of the document and the phasing. The parent
+   does not answer these.
 
-3. **A file someone else gave you.** Register it first with `/ingest`
-   (see [Register a source](register-a-source.md)). The automatic way
-   then runs on it. The draft is always a work product in `work/`
-   and never `30-brd.md`, because what someone said is never
-   promoted to your position unasked. Each item cites its place in
-   the source. A work product is a file made with work of its own
-   (see [Work a work product](work-a-work-product.md)). To have the
-   BRD in the chain, hand over an intent from the same file first.
-   The BRD is then re-parented on that intent.
+   You should now see the questions closed one by one, with your
+   answers reflected back.
 
-   You should now see a draft in `work/` whose items cite the file.
+2. Claude writes the whole draft with its provenance map. The map lists
+   every item of the parent and shows where each is carried, so that
+   nothing is lost in silence.
 
-4. **A parent that moved.** The pass runs on what changed.
+   You should now see one draft and, beside it, the map.
 
-   You should now see the changed items and their parents.
+3. Claude runs a walkthrough by group. A walkthrough is the method that
+   takes one item per message and closes each with the verdict line
+   `(a)ccept / (m)odify / (q)uestion / (r)eject / (p)ark`. The touched
+   areas of the enterprise are walked one per item.
 
-5. **A wording fix.** Claude makes it directly.
+   You should now see each group settled by your verdicts, which are
+   written once at the end of the round.
 
-   You should now see the corrected wording.
+### Automatically, on your word
 
-For the first two ways, you say when you ask where the draft lands:
-in the chain as `30-brd.md`, or as a quick look in `work/`.
+Claude asks nothing. It builds the provenance map, walks the areas
+alone and writes the items from the map. What the parent does not
+answer it leaves as an open question or an assumption. It returns:
 
-The round ends with Claude naming what changed, what stays open and
-what must come from outside. When the BRD is complete, it offers the
-approval. Complete means that nothing of the parent is left out in
-silence and that every matter from outside has an owner. It also
-means that no open question that blocks estimation remains. A matter
-that is delegated, phased later or open with an owner counts as
-complete. A silent one does not.
+- the draft with the provenance map
+- the list of what it assumed
+- the list of what must be supplied from outside, in two parts: what
+  the forge already holds, by path, and what must be fetched
+
+A step of a use case or a guarantee that no place of the parent gives
+is marked as Claude's reading, and so is the phasing. An open question
+whose owner the parent does not name carries `owner: unassigned`. That
+is a valid open state until you name a role. Nothing is derived from
+the draft before you have judged it.
+
+You should now see the three lists after the draft.
+
+### From a file someone gave you
+
+1. Register the file first. How is in
+   [Register a source](register-a-source.md).
+2. Ask for the BRD from it. The automatic way runs on the file. Each
+   item cites its place in the file, and that place is a turn of the
+   principal's side. What another party said is cited only by a
+   dependency or by a note after an item.
+
+   You should now see a draft in `work/`. It is never `30-brd.md`,
+   because what someone said is not silently promoted to your position.
+   How a work product is worked is in
+   [Work a work product](work-a-work-product.md).
+
+3. To have the BRD in the chain, hand over an intent from the same file
+   first. The BRD is then re-parented on that intent.
+
+### A parent that moved
+
+The pass runs again on what changed in the parent.
+
+### A wording fix
+
+It is made directly, with no pass.
+
+### Where a draft lands
+
+For the found-together and the automatic ways, you say when you ask
+where the draft lands. It lands in the chain as `30-brd.md`, or as a
+quick look in `work/`.
 
 ## What you have afterwards
 
-- `30-brd.md`, or a draft in `work/`, written once at the end of the
-  round, with its history companion.
-- The provenance map, which shows where each item came from.
-- The list of what must be supplied from outside, as your work as the
-  analyst. Claude writes nothing of that from imagination: no value of
-  a quality the stakeholders have not given, no behaviour of a system
-  it has not read, no rule of a standard it has not been shown. A
-  dependency or an open question with an owner stands in its place.
-- The wording of the items follows [Requirement style](../reference/requirement-style.md).
+The first BRD is created from the template as a draft, version 0.1,
+with its history companion `30-brd.history.md` beside it. Each write
+rewrites the file for coherence and never appends. Empty sections and
+all template comments are removed.
+
+Each round ends with Claude naming what changed, what stays open and
+what must come from outside. When the BRD is complete, it offers the
+approval, which is yours. A BRD is complete when nothing of the parent
+is left out in silence and when every matter that must come from
+outside is named with its owner. It is also complete when no open
+question that blocks estimation remains. A requirement delegated,
+phased later or open with an owner counts as carried.
 
 The stakeholders' sign-off is your organisation's act. It is recorded
 outside the forge, or as a decision where you want it kept.
 
-## Reviewers offered for it
+## What Claude does not write
 
-Each runs as an isolated subagent (a helper that does not see your
-conversation), only on your command.
+Much of a BRD is not in the intent or the assignment. It is in the
+supplier's and the systems' documentation, in the standards and the
+regulation that apply, and in what operations know. Claude writes none
+of it from imagination:
 
-- `/critique essence` finds drift from the parent.
-- `/critique clarity` checks the wording against the requirement style.
-- `/challenge business-analyst` finds what was written from the
-  parent though it belongs to the world outside it (see
-  [Challenge the thinking](challenge-the-thinking.md)).
-- `/check brd <slug>` checks the mechanics (see
-  [Check conformance](check-conformance.md)).
+- no value of a quality that the stakeholders have not given
+- no behaviour of a system it has not read
+- no rule of a standard it has not been shown
+
+In their place stands a dependency or an open question with an owner.
+The owner is a role of the roster or of the stakeholders wherever one
+fits, and `unassigned` only where none does. An assumption never
+settles an open question. The wording of the items follows
+[Requirement style](../reference/requirement-style.md).
 
 ## If something goes wrong
 
-- The parent is not yet stable. Claude says so and goes on; you
-  decide whether to wait.
-- The parent leaves a matter unanswered. Claude raises it as a
-  question, or in the automatic way leaves it open with an owner. It
-  does not fill the gap. A change of substance goes to the intent
-  first.
-- An automatic draft is not yet judged. Nothing is derived from it
-  until you have judged it.
-- An open question blocks estimation. The BRD is not complete until
-  it is answered or delegated.
-- A term is unfamiliar. See the [Glossary](../reference/glossary.md).
+- If the parent does not answer something, Claude raises it as a
+  question or leaves it as an open question with an owner. It never
+  invents a requirement the parent does not carry.
+- If a change of substance is needed, it goes to the intent first and
+  the BRD follows.
+- If a standard, a regulation or a report seems unknown, check the
+  resource indexes first. The forge may already hold it.
+
+## Reviewers you can run
+
+- `/critique essence`, for drift from the parent.
+- `/critique clarity`, for the wording against the Requirement style.
+- `/challenge business-analyst`, for what was written from the parent
+  though it belongs to the world outside it. How is in
+  [Challenge the thinking](challenge-the-thinking.md).
+- `/check brd`, for the mechanics. How is in
+  [Check conformance](check-conformance.md).
 
 ## A worked example
 
-You have an approved assignment in a project `<slug>` and want a draft
-quickly.
+You have a project `<slug>` with an approved assignment and no BRD.
 
-```
-/forge brd <slug>
-```
-
-You name the assignment as the parent and say: draft it automatically
-into the chain. Claude builds the provenance map from every item of the
-assignment, walks the areas alone, and returns the draft with the map,
-its assumptions and the two-part list of what must be supplied from
-outside. One open question names no owner, so it carries
-`owner: unassigned`. You reply with the role, judge the draft, and ask
-for `/critique essence`. The round closes with what changed, what stays
-open and the offer of approval.
+1. You type `/forge brd <slug>` and say the parent is the assignment.
+2. Claude reads the assignment, the intent, the threads, the decisions
+   and the resource indexes. The project has no enterprise around it, so
+   it writes `Roster: none`.
+3. Claude asks who approves and who reviews, what the document leaves
+   out and what the phases are. You answer one question at a time.
+4. Claude returns the whole draft with its provenance map. You should
+   now see every item of the assignment carried or marked open.
+5. You walk the groups and give your verdicts. At the end you say
+   `write`, and `30-brd.md` appears as version 0.1.
+6. Claude names what changed, what stays open and what must come from
+   outside, then offers the approval. You run `/check brd <slug>`.
 
 ## See also
 
 - [The BRD](../about/the-brd.md): what a BRD is, what it holds and why the forge names what it cannot know.
 - [Work a work product](work-a-work-product.md): the work product a BRD from someone else's file becomes.
 - [Register a source](register-a-source.md): registering the file put in.
+- [Share material through a library](share-material-through-a-library.md): the library a roster of areas is kept in and cited from.
 - [Challenge the thinking](challenge-the-thinking.md): running the business-analyst persona.
 - [Check conformance](check-conformance.md): running the `brd` check.
 - [Requirement style](../reference/requirement-style.md): the rule set of a BRD's items.
 - [Glossary](../reference/glossary.md): every term of the forge in one line.
 
-Generated on 2026-10-25 for version 6.1 from the files the front-matter names; never edited by hand.
+Generated on 2026-11-01 for version 6.8 from the files the front-matter names; never edited by hand.

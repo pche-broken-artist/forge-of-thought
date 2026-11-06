@@ -1,17 +1,16 @@
 ---
 description: Scaffold a new project from templates — a thought project (the chain) or a library (material only); files only, never git
 argument-hint: "<slug>"
-disable-model-invocation: true
 ---
 
-Create a new project under `projects/$0/`. Files only: the command
-never touches git. A project is a repository of its own that the
-engine does not track; initialising it and adding a remote are the
-principal's one-off act, the way in named in CLAUDE.md, Persistence,
-and a project that starts "not under git" is a property, not a
-defect (CLAUDE.md, Persistence) — say so once at the end. The commit identity is git's,
-resolved per host from his own configuration (CLAUDE.md,
-Persistence) — nothing to propose.
+Create a new project under `projects/$0/`. Files only: the command never
+touches git. A project is a repository of its own that the engine does
+not track; initialising it and adding a remote are the principal's
+one-off act, the way in named in CLAUDE.md, Persistence, and a project
+that starts "not under git" is a property, not a defect (CLAUDE.md,
+Persistence) — say so once at the end. The commit identity is git's,
+resolved per host from his own configuration (CLAUDE.md, Persistence) —
+nothing to propose.
 
 **Kind.** Every project has a kind, declared as `kind:` in its
 project file (`project.md`, `templates/project.md`; POS.0960,
@@ -28,9 +27,9 @@ principal names another; ask when his words leave it open.
 **Every project** gets `project.md` from `templates/project.md`
 (slug, kind, language; written once, SOL.0670), `.gitattributes`
 from `templates/gitattributes` (the ways of merging by path,
-SOL.0730) and `.gitignore` with the line `ledger.md`: the ledger is
-made at read time by `python scripts/forge-ledger.py <slug>`, never
-written by hand and never in git (SOL.0680).
+SOL.0730) and `.gitignore` from `templates/gitignore`: the ledger,
+made at read time by `python scripts/forge-ledger.py <slug>` and never
+in git (SOL.0680), and the lock files of an open Office document.
 
 **Library** (`kind: library`): create only those three files, plus
 `sources/00-INDEX.md`

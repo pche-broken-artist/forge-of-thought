@@ -1,129 +1,89 @@
 ---
-generated: 2026-10-25
-version: 6.0
+generated: 2026-11-01
+version: 6.8
 made: mirrored
-inputs-hash: 0c2ef577c4c99a41
+inputs-hash: 85c82446b2743f92
 inputs:
   - .claude/skills/man/SKILL.md
   - .claude/skills/manual/SKILL.md
 ---
 
-# Look up a command
+# Look up a command, or ask how to do something
 
-`/man` is the forge's manual: the command that prints what a command
-or a working method does, so that you can read it before you run
-anything. It is for the principal (the person whose thinking is
-forged) who wants to know what a command takes, what it looks for or
-how a method works.
+`/man [command | method | question]` is the manual of the forge: it prints what a command or a working method is, or answers a need you say in your own words. This page is for the user of the forge who wants to know what a command does before running it, or who does not know which command fits. The alias `/manual` does the same.
 
 ## When to use it
 
-Use it when you do not know which command fits, when you want to know
-the arguments of a command, or when you want to know what a check, a
-lens, a persona or a genre looks for before you run it. The word
-`help` is not used for this: it is Claude Code's own command, which is
-why the manual has the Unix name `man`. `/manual` is an alias that
-does the same.
+- You want the list of commands and working methods.
+- You want to know what one command is for, what arguments it takes and what its roster holds.
+- You want the text of one working method.
+- You know what you want to get done but not which command does it.
+
+The manual is read at the moment of the call from the files that own it, so it is never out of date with them. It runs nothing, writes nothing and decides nothing. The word `help` is Claude Code's own command, which is why the forge's manual has the Unix name `man`. The forge has no second help command.
 
 ## The command
 
 ```
-/man [command | method]
+/man
 ```
 
-The three forms:
+Replace the empty argument with a command, a method or a question:
 
-- `/man` alone prints the overview.
-- `/man <command>` prints the page of one command, for example
-  `/man check`.
-- `/man <method>` prints the page of one working method, for example
-  `/man walkthrough`.
+```
+/man check
+/man walkthrough
+/man how do I get my project into git
+```
 
-The method name is matched without regard to case, and a hyphen and a
-space count as the same.
+The first is a command, the second a working method, the third a need in free words. A name that is neither a command nor a method is read as a question.
 
 ## What happens
 
-The manual has no text of its own. Claude (the model that works with
-you) reads the files that own the facts at the moment of the call and
-shortens them to a line. Nothing is stored, so the page is never out
-of date. It only reads: it runs none of the commands it describes.
+1. **Bare `/man`.** Claude prints the commands, each with its arguments and its purpose cut to one line, `/man` and `/manual` included. Then it prints each working method with the first sentence of its paragraph. It closes with one line: `/man <command>` for a command's page, `/man <method>` for a method's. You should now see two lists and that closing line.
+2. **`/man <command>`.** Claude prints the command's purpose, its arguments and its purpose in full as the table of commands gives it. Where the command dispatches over a roster (checks, critic lenses, challenger personas, genres), it prints every entry with what that entry looks for, so you know before running it. It closes with the path of the command's skill file, for the reader who wants the whole procedure. You should now see the purpose, the arguments, the roster where there is one, and the skill path. A name with no skill file gets a plain statement that none exists, followed by the list of commands.
+3. **`/man <method>`.** Claude matches the name against the working methods (case does not matter, hyphens and spaces are alike) and prints the paragraph in full. Where a skill holds the method's shape, it names that skill's path. You should now see the method's paragraph. An unknown name that is not a question gets the list of methods.
+4. **`/man <question>`.** Claude takes your words as a need.
+   - It reads the documentation's index, where every page carries the one question it answers, and chooses the pages that meet the need.
+   - Where the need can be read two ways that lead to different pages, it asks once, in one sentence, and waits.
+   - It reads the chosen pages, and the skill or definition a page names where the detail matters. Nothing is answered from memory.
+   - It answers in plain sentences. The way the forge has comes first, with what you type. Then comes what matters on that way. Where several ways fit, one is recommended, with its reason, once.
+   - Where the way leaves the forge, it says so plainly, because the forge does not do it. Examples are a repository to initialise and a program to install.
+   - It names the pages it read by path at the end.
 
-**Bare `/man`**
+   You should now see an answer that opens with the way and ends with the paths of the pages read.
 
-1. Claude reads the Commands table of the engine's `CLAUDE.md` and
-   prints each command with its arguments and its purpose cut to one
-   line. `/man` and `/manual` are in the list.
-2. It reads the Working methods section and prints each method's name
-   with the first sentence of its paragraph.
-3. It closes with one line: `/man <command>` for a command's page,
-   `/man <method>` for a method's.
-
-You should now see the commands, the methods and the closing line.
-
-**`/man <command>`**
-
-1. Claude looks for the command's skill file,
-   `.claude/skills/<command>/SKILL.md`. If there is none, it says so
-   and prints the list of commands.
-2. It prints the command's purpose, its arguments and the purpose from
-   the Commands table in full.
-3. Where the command works over a roster, it prints the roster. Each
-   entry shows the description of its own file and, where the file has
-   one, its Lens section in full. For a genre it shows the
-   Elicitation checklist. This tells you what a check, a lens, a
-   persona or a genre looks for before you run it.
-4. It closes with one line naming the skill file, for the reader who
-   wants the whole procedure.
-
-You should now see the purpose, the arguments, the roster where there
-is one, and the path of the skill file.
-
-**`/man <method>`**
-
-1. Claude matches the name against the bold names in the Working
-   methods section. If none matches, it says so and lists the
-   methods.
-2. It prints the method's paragraph in full and, where the paragraph
-   names a skill that holds the method's shape, that skill's path.
-
-You should now see the whole paragraph of the method.
+The index the question reads is made by the documentation run, described in [Generate the documentation](generate-the-documentation.md).
 
 ## What you have afterwards
 
-A page in the conversation, and nothing else. No file is written and
-no command has run. The page is in the conversation language, the
-whole of it, descriptions and Lens sections included. Only the
-notation stays English: command names, file paths, IDs, front-matter
-keys and the names of the methods. Each method name is followed once
-by its translation.
+Text in the conversation and nothing else: no file is written and no state changes. The output is in the language of the conversation. Command names, file paths, front-matter keys and the names of the methods stay in English.
 
 ## If something goes wrong
 
-- A command that has no skill file: the manual says so and lists the
-  commands.
-- A method that matches no name: the manual says so and lists the
-  methods.
+- The name is not a command: Claude says so and lists the commands.
+- The name is not a method and not a question: Claude says so and lists the methods.
+- The forge has nothing for the need: Claude says so. It names an open thread of the forge's own project if one carries the need. What Claude would do without a mechanism it marks as its own.
 
-## A worked example
-
-You want to know what the checks look for before choosing one.
+## A worked example of a command page
 
 ```
 /man check
 ```
 
-Claude prints the purpose and the arguments of `/check`, then the
-roster of checks. Each check appears with its description and, where
-its file has one, its Lens section, which says what it verifies. The
-page ends with the path of the skill file of `/check`. You can now
-pick a check and run `/check <check> <slug>` yourself, with a
-placeholder `<slug>` replaced by your project's slug.
+Claude prints the purpose of `/check`, its arguments `[check] [slug]`, the row's purpose in full, and then each check of the roster with what it looks for. It ends with the path `.claude/skills/check/SKILL.md`.
+
+## A worked example of a question
+
+```
+/man how do I keep my project's history on a server
+```
+
+Claude reads the documentation's index, chooses the pages whose question meets the need, and reads them. It answers with the way the forge has and the command you type. It then says what matters on that way. It says plainly which step is yours, such as creating the remote repository, since the forge does not do it. It ends with the paths of the pages it read.
 
 ## See also
 
-- [Commands](../reference/commands.md): the same table, as a page.
-- [Glossary](../reference/glossary.md): every term of the forge in one
-  line.
+- [Commands](../reference/commands.md): the same table of commands, as a page.
+- [Generate the documentation](generate-the-documentation.md): the run that makes the index the manual reads to answer a question.
+- [Glossary](../reference/glossary.md): every term of the forge in one line.
 
-Generated on 2026-10-25 for version 6.0 from the files the front-matter names; never edited by hand.
+Generated on 2026-11-01 for version 6.8 from the files the front-matter names; never edited by hand.

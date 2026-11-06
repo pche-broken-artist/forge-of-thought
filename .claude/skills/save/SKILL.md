@@ -1,21 +1,20 @@
 ---
 description: Save the forge to git — the light check, then commit and push; no renders; --quick leaves the check out
 argument-hint: '[project-slug] [-m "message"] [--tag name] [--quick]'
-disable-model-invocation: true
 ---
 
-Save the forge to git: the light check, then commit and push on
-whatever branch is checked out, nothing more (POS.1100). The
-`project` and `engine` checks and the renders belong to `/release`
-(`.claude/skills/release/SKILL.md`, POS.0570). The engine and every project are repositories of their
-own (POS.0940); what the save does per repository is stated in the
-help header of `scripts/forge-save.py`, and CLAUDE.md (Persistence)
-carries the one-line summary (POS.1070).
-Arguments (`[slug]`, `-m "message"`, `--tag <name>`) are passed
-through to the script; `--quick` is this skill's alone, leaves the
-check out and nothing else (POS.1100), and is never passed on; a project without a repository is a property,
-not a defect (CLAUDE.md, Persistence) — relay the script's note in
-the report.
+Save the forge to git: the light check, then commit and push on whatever
+branch is checked out, nothing more (POS.1100). The `project` and
+`engine` checks and the renders belong to `/release`
+(`.claude/skills/release/SKILL.md`, POS.0570). The engine and every
+project are repositories of their own (POS.0940); what the save does per
+repository is stated in the help header of `scripts/forge-save.py`, and
+CLAUDE.md (Persistence) carries the one-line summary (POS.1070).
+Arguments (`[slug]`, `-m "message"`, `--tag <name>`) are passed through
+to the script; `--quick` is this skill's alone, leaves the check out and
+nothing else (POS.1100), and is never passed on; a project without a
+repository is a property, not a defect (CLAUDE.md, Persistence) — relay
+the script's note in the report.
 
 1. Determine scope from `python scripts/forge-status.py` (the forge
    reads state by its script — CLAUDE.md, Persistence). It reports the

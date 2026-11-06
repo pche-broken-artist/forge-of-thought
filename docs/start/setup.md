@@ -1,8 +1,8 @@
 ---
-generated: 2026-10-25
-version: 6.1
+generated: 2026-11-01
+version: 6.8
 made: mirrored
-inputs-hash: 0565d38ad8857269
+inputs-hash: 3bcbbfb4810a50ce
 inputs:
   - .claude/skills/setup/SKILL.md
   - templates/CLAUDE.local.md
@@ -13,12 +13,15 @@ inputs:
 
 # Set up the forge
 
-This page is for you on the first run after cloning the engine. `/setup` prepares your instance of the forge: it creates the file of facts about you, offers the git identity and the registration of the merge driver `ours`, and sets the model. Run it before any other work. The machine must be ready first, as [Install what the forge needs](install.md) describes.
+This page walks you through `/setup`, the first command to run after cloning the engine. It is for anyone who has just installed the forge and wants to prepare their own instance, that is, their one installation of it, before any other work.
+
+The course page of the teaching videos, https://pche-broken-artist.github.io/forge-of-thought/videos/, shows a first run before you make your own.
+
+Prerequisite: the machine has what the forge needs, as [Install what the forge needs](install.md) lists it. Start `claude` from the engine root, so that its instructions load.
 
 ## When to use it
 
-- Once, right after cloning the engine and before any other command.
-- Once more in each place where git reads a different global configuration file, such as a network home at work and a local profile at home.
+Use it once, on a new machine, right after cloning the engine and before any other command. Run it again where git reads another global configuration file in another place, such as a network home at work and a local profile at home. Run on an instance that is already set up, it changes nothing that exists.
 
 ## The command
 
@@ -26,92 +29,56 @@ This page is for you on the first run after cloning the engine. `/setup` prepare
 /setup
 ```
 
-Start `claude` from the engine root, so that the engine's rules and your instance file load. A term you meet here has a one-line entry in the [Glossary](../reference/glossary.md). The principal is the person whose thinking is being forged, which is you.
-
 ## What happens
 
-1. Claude creates `CLAUDE.local.md` at the engine root, from its template, by a short interview. It asks one question at a time and speaks whatever language you speak, because no conversation language is configured yet.
-   - The conversation language comes first, so that every later question arrives in it.
-   - Then who the principal is, by role.
-   - Then the principal's short handle. It stands as the author of every history record the principal decides.
+Claude speaks whatever language you speak to it until you have named the conversation language in the first step.
 
-   The file is gitignored and never committed. On an instance that already has it, `/setup` reports briefly what it holds, touches nothing, and offers only the lines the template has and the file lacks, one by one, written on your word.
+1. **The instance file.** Claude copies the template to `CLAUDE.local.md` at the engine root and fills it with a short interview, one question at a time. The file is gitignored and never committed. The questions come in this order:
+   - the conversation language, first, so that every later question arrives in it;
+   - who the principal is, by role (the principal is whoever's thinking is being forged);
+   - the principal's short handle, which stands as the author of every history record the principal decides.
 
-   You should now see `CLAUDE.local.md` at the engine root with the three lines filled.
+   You should now see a `CLAUDE.local.md` with three lines, Principal, Conversation language and Author. If the file already exists, Claude reports briefly what it holds, touches nothing, and offers one by one only the lines the template has and the file lacks. You should now see those lines written only on your word.
 
-2. Claude shows what git already holds. It runs `python scripts/forge-config.py`, which changes nothing and reports:
-   - the global git configuration file git reads
-   - whether the merge driver `ours` is registered
-   - whether the guard is set
-   - a global identity, if one stands
-   - the per-host identity stanzas
+2. **The git identity.** The identity is git's, kept per host, and the forge only writes it through one script. Claude first runs `python scripts/forge-config.py`, which changes nothing and shows what the global git configuration holds: the file git reads, the registration of the merge driver, the guard, a global identity and the per-host stanzas. You should now see that report.
 
-   You should now see these lines, each marked ok or missing.
-
-3. The git identity. Git owns it, per host, and the forge sets none of it. You name the hosts you push to, with a name and an e-mail for each, or you leave it for later. On your word Claude makes one call per host:
+   Claude then asks which hosts you push to, with a name and an e-mail for each. You may leave this for later. On your word it makes one call per host:
 
    ```
    python scripts/forge-config.py --identity <host> <name> <email>
    ```
 
-   The call writes two stanzas for the host in the global configuration, and an identity file beside the global file, where it is missing. A stanza or an identity file that carries another path, name or e-mail is reported and left. Only `--replace` rewrites it, and Claude offers that apart, again on your word.
+   The call writes the per-host stanzas to the global file and an identity file beside it. A stanza or an identity file that differs from what you gave is reported and left alone. Claude offers `--replace` for it apart, again on your word. You should now see, for each host, a line saying what was written or what was left.
 
-   You should now see each stanza and identity file reported as written, or as already there and left.
+3. **The global guard.** On your word Claude runs `python scripts/forge-config.py --guard`. The guard makes git fail aloud in a repository that has no identity of its own, instead of taking a default. It only bites once no global name or e-mail is left. Where the script reports one, Claude says so and offers `python scripts/forge-config.py --guard --unset-identity`, which removes it, again only on your word. You should now see the guard line read `user.useConfigOnly = true`.
 
-4. The global guard:
-
-   ```
-   python scripts/forge-config.py --guard
-   ```
-
-   The guard makes a repository on a host with no identity fail aloud instead of taking a default. It bites only once no global name or e-mail is left. Where the script reports one, Claude says so and offers, on your word:
-
-   ```
-   python scripts/forge-config.py --guard --unset-identity
-   ```
-
-   You should now see `user.useConfigOnly = true` written, and the global name and e-mail removed if you agreed.
-
-5. The registration of the merge driver `ours`, once per machine and once in each place where git reads another global file, on your word:
+4. **The merge driver.** Once per machine, and once in each place where git reads another global file, Claude offers on your word the registration of the merge driver `ours` and the git settings it needs:
 
    ```
    python scripts/forge-config.py --register
    ```
 
-   `--zdiff3` is offered apart and adds a clearer conflict style. These settings hold for every repository on the machine. Among them, `renormalize` only evens line endings at a merge. Nothing already set is overwritten. The forge has no merge driver of its own for record files. Why the driver `ours` is needed is explained in [Persistence in git](../about/persistence-in-git.md).
+   The option `--zdiff3` is offered apart: it adds a clearer conflict style. These settings hold for every repository on the machine. One of them, renormalize, only evens out line endings at a merge. Nothing already set is overwritten. You should now see each key reported as written or as already there. `python scripts/forge-status.py` reports the registration afterwards, as ok or as the keys missing.
 
-   You should now see each key written or reported as already there.
+5. **The session model.** Claude creates `.claude/settings.local.json` with the session model set to Fable, the strongest model, on which the whole forge runs, the blind reviewers included. A session is one running conversation with Claude. Where the account does not list Fable, Claude writes the strongest model it lists and says which. This is a notice, not a question. You can change the model at any time with `/model` or by editing the file. You should now see the file with a `model` entry. If the file already exists, Claude reports the model it names and leaves it alone.
 
-6. Claude creates `.claude/settings.local.json` with the session model set to Fable, the strongest model. The whole forge runs on it, the blind reviewers included. Where your account does not list Fable, Claude writes the strongest model the account lists and says which. This is a notice, not a question. You can change the model at any time with `/model` or by editing the file. If the file already exists, Claude reports the model it names and leaves it alone.
-
-   You should now see the file in `.claude/`, and one sentence naming the model.
-
-7. Claude points at the next step: `/new-project <slug>` to start a project, or `/import-project <git-url>` to bring one in. [Get a first result](first-result.md) takes a new project to a saved intent in one sitting.
-
-If you decline a git step, Claude prints the command for you to run by hand.
+6. **The next step.** Claude ends by pointing at `/new-project <slug>` to start a new project, or `/import-project <git-url>` to bring an existing one in.
 
 ## What you have afterwards
 
-- `CLAUDE.local.md` with your language, role and handle.
+- `CLAUDE.local.md` at the engine root, with the conversation language, the principal's role and the author's handle.
+- In the global git configuration, whatever you accepted: the per-host identity stanzas with their identity files, the guard and the merge driver registration.
 - `.claude/settings.local.json` with the session model.
-- In your global git configuration, as far as you agreed: identity stanzas per host, the guard and the registered merge driver.
 
-The fields of the instance files are listed in [Configuration](../reference/configuration.md). The identity is verified by git at your first `/import-project`, which reports the identity git resolves for the clone.
-
-To see the registration later, run:
-
-```
-python scripts/forge-status.py
-```
-
-It reports the registration as ok, or names the keys that are missing.
+Git verifies the identity at your first `/import-project`, where the clone script reports the identity git resolves for the clone.
 
 ## If something goes wrong
 
-- A stanza, an identity file or a key reports "carries another value" and is left. The script never overwrites it. Use `--replace` for an identity, on purpose.
-- The guard is set but git still takes a default identity. A global name or e-mail still stands. Run `--guard --unset-identity`.
-- `forge-status` names missing keys on a machine you already set up. Git reads another global file in this place. Run `/setup` here too.
-- The scripts need Python 3.8 or newer as `python`, and git 2.36 or newer.
+- A stanza or an identity file differs from what you gave: the script reports it and leaves it. Accept `--replace` for that host if you want it rewritten.
+- The guard seems to do nothing: a global name or e-mail still stands. Run `python scripts/forge-config.py --guard --unset-identity`.
+- You decline a step that writes the global configuration: Claude prints the command for you to run by hand.
+- `forge-status.py` says the registration is missing: run `/setup` again, or `python scripts/forge-config.py --register`, in the place where git reads that global file.
+- The script needs git 2.36 or newer and Python 3.8 or newer on PATH.
 
 ## A worked example
 
@@ -119,22 +86,15 @@ It reports the registration as ok, or names the keys that are missing.
 /setup
 ```
 
-1. Claude asks for the conversation language. You answer `<language>`.
-2. It asks who the principal is. You answer `<role>`.
-3. It asks for your handle. You answer `<handle>`.
-4. It runs `python scripts/forge-config.py` and shows the state.
-5. You name one host with a name and an e-mail, and Claude runs:
+Claude asks for the conversation language and you answer. It asks who the principal is and you answer with a role. It asks for the handle and you answer with a short one. Then you name one host with a name and an e-mail. Claude runs:
 
-   ```
-   python scripts/forge-config.py --identity <host> <name> <email>
-   ```
+```
+python scripts/forge-config.py --identity <host> <name> <email>
+python scripts/forge-config.py --guard --unset-identity
+python scripts/forge-config.py --register
+```
 
-6. You accept `--guard`, and `--guard --unset-identity` because a global identity stood.
-7. You accept `--register`, and decline `--zdiff3`.
-8. Claude creates `.claude/settings.local.json` and says which model it set.
-9. It points at `/new-project <slug>`.
-
-The course page of the teaching videos, `https://pche-broken-artist.github.io/forge-of-thought/videos/`, shows a first run before you make your own.
+It creates `.claude/settings.local.json` and points at `/new-project <slug>`. From there, [Get a first result](first-result.md) takes you from a new project to a saved intent in one sitting.
 
 ## See also
 
@@ -144,4 +104,4 @@ The course page of the teaching videos, `https://pche-broken-artist.github.io/fo
 - [Configuration](../reference/configuration.md): the instance files and settings, field by field.
 - [Glossary](../reference/glossary.md): every term of the forge in one line.
 
-Generated on 2026-10-25 for version 6.1 from the files the front-matter names; never edited by hand.
+Generated on 2026-11-01 for version 6.8 from the files the front-matter names; never edited by hand.

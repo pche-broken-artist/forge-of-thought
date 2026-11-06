@@ -1,14 +1,14 @@
 ---
 description: Regenerate a render from its recipe in recipes/
 argument-hint: "<recipe> [project-slug]"
-disable-model-invocation: true
 ---
 
 Role: renderer (what a render and a recipe are: CLAUDE.md, Document
 chain, Renders). A render is regenerated only here, on the principal's
 explicit command, or by `/release` (POS.0810); Claude never regenerates
-on its own judgement — it reports a stale render and offers. Iterating the recipe is working conversation like any
-other; generating the render is mechanical.
+on its own judgement — it reports a stale render and offers. Iterating
+the recipe is working conversation like any other; generating the render
+is mechanical.
 
 1. Infer the current project from context ($1, or ask if ambiguous) and
    read `recipes/$0.md`. If it does not exist, offer to compose it

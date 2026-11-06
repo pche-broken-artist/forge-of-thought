@@ -1,7 +1,6 @@
 ---
 description: Add a new kind of artefact to the forge — its position in the forge intent, its definition and template, its prefixes, its reviewers
 argument-hint: "<name>"
-disable-model-invocation: true
 ---
 
 The definition of how a new kind of artefact is found, in the seven
