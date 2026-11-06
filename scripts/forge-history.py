@@ -67,7 +67,7 @@ import docs_map  # noqa: E402
 import forge_repos as fr  # noqa: E402
 import forge_tools as ft  # noqa: E402
 
-ID_RE = re.compile(r"^[A-Z]{3}\.\d{4,5}$")  # four digits, a fifth beyond 9999 (POS.0220)
+ID_RE = re.compile(r"^[A-Z]{2,3}\.\d{4,5}$")  # four digits, a fifth beyond 9999 (POS.0220)
 SHORT_RE = re.compile(r"^([A-Za-z]{3})[.\-_ ]?(\d{1,5})$")
 RECORD_RE = re.compile(r"^- (\d{4}-\d{2}-\d{2}) \| ([^|]+?) \| ([^|]+?) \| ([^|]+?) \| ([^|]+?)(?: \| (.*))?$")
 SKIP_DIRS = {"docs", "renders", "published", "tmp", "sources", "research", ".git"}
@@ -128,7 +128,7 @@ def parse_log(path):
 
 
 def subject_ids(subject):
-    return set(re.findall(r"[A-Z]{3}\.\d{4,5}", subject))
+    return set(re.findall(r"[A-Z]{2,3}\.\d{4,5}", subject))
 
 
 def sentence_with(text, id_):

@@ -36,7 +36,10 @@ What to go after:
   assignment's definition
   (`.claude/skills/forge/states/assignment.md`), stated there and not
   here (POS.1070): every breach is a finding, testability excepted
-  (Recommendations).
+  (Recommendations). Where the artefact's own definition carries a
+  style section of its own — the BRD's *Requirement style*, the user
+  stories' *Story style* — that section is the rule set for that
+  artefact instead.
 - **Self-containment.** A section the artefact's own template
   requires and the document lacks without a stated reason.
 

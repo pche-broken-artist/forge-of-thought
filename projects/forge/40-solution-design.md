@@ -1,5 +1,5 @@
 ---
-version: 0.53
+version: 0.55
 status: draft
 project: forge
 audience: whoever realises the solution, a person or an agent
@@ -619,6 +619,39 @@ boundary kept by hand or an order of work.
   `.claude/agents/challenger-business-analyst.md`,
   `.claude/agents/check-brd.md`, `scripts/forge-ledger.py`,
   CLAUDE.md (ID scheme, Requirement style).
+
+- **SOL.0900 The user stories.** The pair `states/user-stories.md` and
+  `templates/user-stories.md` in the shape of SOL.0120, one more
+  definition the dispatcher reads from disk; the check
+  `check-user-stories` as SOL.0330 has a check, counting the coverage of
+  the parent and verifying the shape and the parts of a story; the
+  recipe genre `user-stories-export` with its skeleton
+  `templates/recipe-user-stories-export.md`, which renders the stories
+  as the instance's export, one heading per story with its parts on
+  lines of their own and no line wrapped, and leaves out every POS; the
+  clarity lens reads the stories with their Story style, a sentence of
+  `critic-clarity.md`; stories from a file put in are a work product of
+  SOL.0640, never `35-user-stories.md`. The prefix US widened the
+  pattern of the scripts from three letters to two or three
+  (`docs_map.py`, `forge-ledger.py`, `forge-check.py`, `forge_check.py`,
+  `forge_docs.py`, `forge-history.py`), the ledgers of three projects
+  identical before and after. Built 2026-11-02 from the brief
+  `user-stories` before the positions (POS.1780), tried the same day on
+  a small project from its brief to the export, the check run on the
+  stories. Realises: POS.1930, POS.1940, POS.1950, POS.1960, POS.0220,
+  POS.0230. Choice: a check and no persona of its own against a persona,
+  since what a persona would hunt in stories the business-analyst
+  persona hunts in the BRD above them; the cost is that the substance of
+  a story is tried only by the principal's walk. The export as a render
+  of its own genre against a format of the artefact itself, so that the
+  artefact keeps its POS references and the instance's export changes
+  without touching it; the cost is one more genre. Where:
+  `.claude/skills/forge/states/user-stories.md`,
+  `templates/user-stories.md`, `.claude/agents/check-user-stories.md`,
+  `.claude/agents/critic-clarity.md`,
+  `.claude/skills/recipe/genres/user-stories-export.md`,
+  `templates/recipe-user-stories-export.md`, the scripts named above,
+  CLAUDE.md (ID scheme).
 
 ### The reviewers
 - **SOL.0300 Contracts and agent files.** Each kind of reviewer owns one
