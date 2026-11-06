@@ -4,7 +4,7 @@ description: Iterate 35-user-stories.md — the requirements broken into stories
 
 The definition of the user stories' elicitation, in the seven blocks
 of POS.1310 of the forge intent; what it is to achieve and why is
-POS.1910 to POS.1940. Shared mechanism is cited
+POS.1930 to POS.1960. Shared mechanism is cited
 and never repeated here: the form of the conversation and one write
 per round (CLAUDE.md, Working methods and prime directive 9),
 versioning with history (CLAUDE.md, Versioning & status), the

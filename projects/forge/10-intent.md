@@ -1,5 +1,5 @@
 ---
-version: 6.5
+version: 6.15
 status: draft
 project: forge
 audience: principal + Claude only
@@ -1006,7 +1006,7 @@ position that already stands elsewhere.
   party is a work product, not a BRD (POS.1520). A coding agent that
   takes a chain is given the artefacts that are available; which, a
   person decides. Decided 2026-10-23.
-- **POS.1910 The user stories.** The user stories are an artefact of the
+- **POS.1930 The user stories.** The user stories are an artefact of the
   chain, `35-user-stories.md`, below the BRD and above the solution
   design: the parent broken into behaviour seen from the outside — what
   the user or the business sees happen and under which conditions it is
@@ -1023,10 +1023,10 @@ position that already stands elsewhere.
   of their own, which leaves out every reference to a POS, since the
   stakeholders never see the intent. Its definition is
   `states/user-stories.md` with `templates/user-stories.md` as its pair;
-  what it is to achieve and why is this position, with POS.1920 to
-  POS.1940. Present shape 2026-11-02, from `00-brief-user-stories.md`
+  what it is to achieve and why is this position, with POS.1940 to
+  POS.1960. Present shape 2026-11-02, from `00-brief-user-stories.md`
   0.3 and the trial of the same day on a small project.
-- **POS.1920 How the stories are made.** Handed over by default: Claude
+- **POS.1940 How the stories are made.** Handed over by default: Claude
   walks the Map alone and returns first the cut — the name of every
   story with a short description of what it covers, in words, and the
   items of the parent no story serves, named by what they say — and only
@@ -1045,7 +1045,7 @@ position that already stands elsewhere.
   them into two, and where the walk of the stories answered three open
   questions of the BRD, carried up into the intent and the BRD before
   the stories were written. Present shape 2026-11-02.
-- **POS.1930 The shape of a story.** One prefix of its own, US. A story
+- **POS.1950 The shape of a story.** One prefix of its own, US. A story
   is a heading `US.NNNN — <name>`, a free sentence carrying who or what
   wants it, what happens and why (the form "As a… I want… so that…"
   neither required nor forbidden), its acceptance criteria as bullets in
@@ -1063,7 +1063,7 @@ position that already stands elsewhere.
   export, kept by the render, and the principal's word at the brief of
   2026-11-02; a section of dependencies was rejected since the Reference
   carries them. Decided 2026-11-02.
-- **POS.1940 The reviewers of the stories.** No new critic and no new
+- **POS.1960 The reviewers of the stories.** No new critic and no new
   persona: `clarity` reads the stories with their Story style, `essence`
   compares them with their parent, and a challenger already in the
   roster may be sent where the principal wants the substance tried. A
@@ -1125,7 +1125,7 @@ position that already stands elsewhere.
 - **POS.0230** Prefix vocabulary, aligned with the group BRD standard
   where an equivalent exists: REQ, OOS, CON, ASM, DEL, TBC, SCR in the
   assignment; BR, UC, DEP, NFR with OOS, ASM, TBC, SCR in the BRD
-  (POS.1830); US in the user stories (POS.1930); POS, THR, REJ, FCT in
+  (POS.1830); US in the user stories (POS.1950); POS, THR, REJ, FCT in
   the intent; SOL and TBC in the solution design (POS.1420); ASM and
   TBC in a work specification (POS.1520); FND, CHL, DEC internally. No
   universal standard for prefixes exists; this is a house convention
@@ -2019,7 +2019,7 @@ position that already stands elsewhere.
   render is turned into a PowerPoint file. The genre is named
   "presentation" rather than "deck" for company-wide legibility at
   rollout. The genres today: `presentation`, `readme`, `release-notes`,
-  `screenplay` (POS.1530) and `user-stories-export` (POS.1910).
+  `screenplay` (POS.1530) and `user-stories-export` (POS.1930).
 - **POS.0830** The forge runs beyond Windows. `scripts/` is the only
   platform-bound layer, and its scripts are written to run unchanged on
   Linux and macOS. Instance facts are out of the scripts: no remote URL,

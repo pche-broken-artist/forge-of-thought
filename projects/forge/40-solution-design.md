@@ -1,5 +1,5 @@
 ---
-version: 0.50
+version: 0.55
 status: draft
 project: forge
 audience: whoever realises the solution, a person or an agent
@@ -632,7 +632,7 @@ boundary kept by hand or an order of work.
   identical before and after. Built 2026-11-02 from the brief
   `user-stories` before the positions (POS.1780), tried the same day on
   a small project from its brief to the export, the check run on the
-  stories. Realises: POS.1910, POS.1920, POS.1930, POS.1940, POS.0220,
+  stories. Realises: POS.1930, POS.1940, POS.1950, POS.1960, POS.0220,
   POS.0230. Choice: a check and no persona of its own against a persona,
   since what a persona would hunt in stories the business-analyst
   persona hunts in the BRD above them; the cost is that the substance of
