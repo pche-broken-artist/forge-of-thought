@@ -2,7 +2,10 @@
 forge_repos.py - what the forge-* git scripts share: the engine root,
 the git check, the list of repositories to visit, running git, the
 state of a repository against its origin (`remote_state`: up to date,
-behind, ahead, diverged, no origin; POS.1490), the files of the
+behind, ahead, diverged, no origin; POS.1490), what waits on GitHub
+outside git (`github_waiting`: the open pull requests and the
+unanswered discussions through gh, or the one line saying why it
+could not read; POS.1970), the files of the
 global git configuration as git reads them (`global_config_files`),
 the registration of the merge driver ours on the machine
 (`registration_state`; SOL.0740) and coloured output. Not a command.
@@ -127,6 +130,77 @@ def remote_state(path):
     if ahead:
         return f"ahead {ahead}"
     return "up to date"
+
+
+_GITHUB_QUERY = """
+query($owner: String!, $name: String!) {
+  repository(owner: $owner, name: $name) {
+    owner { login }
+    pullRequests(states: OPEN, first: 20, orderBy: {field: CREATED_AT, direction: DESC}) {
+      nodes { number title createdAt changedFiles author { login } }
+    }
+    discussions(first: 50, orderBy: {field: UPDATED_AT, direction: DESC}) {
+      nodes { number title createdAt author { login }
+        comments(first: 50) { nodes { author { login }
+          replies(first: 50) { nodes { author { login } } } } } }
+    }
+  }
+}
+"""
+
+
+def github_waiting(path):
+    """What waits on GitHub outside git for the repository at `path`
+    (POS.1970): a list of lines, the first the counts, then one line
+    per open pull request and per unanswered discussion - a discussion
+    opened by someone other than the repository's owner that carries
+    no comment or reply by the owner. Read through gh in one GraphQL
+    query. Whatever keeps it from reading - no gh on PATH, an origin
+    that is not GitHub, no login, no network - gives one line saying
+    so, in gh's own words where it has them; the caller goes on
+    (SOL.0910)."""
+    import json
+    gh = shutil.which("gh")
+    if not gh:
+        return ["could not read: gh not on PATH"]
+    origin = git_out(["remote", "get-url", "origin"], path)
+    m = re.search(r"github\.com[:/]([^/]+)/([^/]+?)(?:\.git)?/?$", origin)
+    if not m:
+        return [f"could not read: the origin is not on GitHub ({origin or 'no origin'})"]
+    owner, name = m.group(1), m.group(2)
+    r = subprocess.run([gh, "api", "graphql", "-f", f"query={_GITHUB_QUERY}",
+                        "-F", f"owner={owner}", "-F", f"name={name}"],
+                       cwd=str(path), text=True, encoding="utf-8", errors="replace",
+                       stdout=subprocess.PIPE, stderr=subprocess.STDOUT)
+    if r.returncode != 0:
+        first = next((l.strip() for l in r.stdout.splitlines() if l.strip()), "gh failed")
+        return [f"could not read: {first}"]
+    try:
+        repo = json.loads(r.stdout)["data"]["repository"]
+    except (ValueError, KeyError, TypeError):
+        return ["could not read: gh answered with something that is not the repository"]
+    if repo is None:
+        return [f"could not read: gh sees no repository {owner}/{name}"]
+    login = (repo.get("owner") or {}).get("login")
+    prs = repo["pullRequests"]["nodes"]
+    unanswered = []
+    for d in repo["discussions"]["nodes"]:
+        if (d.get("author") or {}).get("login") == login:
+            continue
+        answered = any((c.get("author") or {}).get("login") == login
+                       or any((x.get("author") or {}).get("login") == login
+                              for x in c["replies"]["nodes"])
+                       for c in d["comments"]["nodes"])
+        if not answered:
+            unanswered.append(d)
+    lines = [f"{len(prs)} pull request(s) open, {len(unanswered)} discussion(s) unanswered"]
+    for x in prs:
+        lines.append(f"#{x['number']} pull request \"{x['title']}\" by {(x.get('author') or {}).get('login', '?')}, "
+                     f"{x['createdAt'][:10]}, {x['changedFiles']} file(s)")
+    for x in unanswered:
+        lines.append(f"#{x['number']} discussion \"{x['title']}\" by {(x.get('author') or {}).get('login', '?')}, "
+                     f"{x['createdAt'][:10]}")
+    return lines
 
 
 # The registration /setup makes in the global git configuration, once

@@ -1,5 +1,5 @@
 ---
-version: 0.55
+version: 0.56
 status: draft
 project: forge
 audience: whoever realises the solution, a person or an agent
@@ -1079,8 +1079,9 @@ boundary kept by hand or an order of work.
   branch (SOL.0780), leaves a conflicting rebase standing for the step
   of a conflict and refuses a standing rebase or merge before it stages
   (SOL.0840); `forge-pull.py`; `forge-status.py`, which also reports a
-  missing registration (SOL.0740) and a rebase or merge in progress
-  (SOL.0840); `forge-clone.py`, which brings an existing project in;
+  missing registration (SOL.0740), a rebase or merge in progress
+  (SOL.0840) and, with `--remote`, what waits on GitHub (SOL.0910);
+  `forge-clone.py`, which brings an existing project in;
   `forge-branch.py`, which creates a branch or switches to one, `main`
   included, with the slug alone reports the branch and lists the
   branches (TBC.0100); `forge-ledger.py` (SOL.0680); and
@@ -1494,6 +1495,28 @@ boundary kept by hand or an order of work.
   markitdown and the model return, the skills, the agents, the text of
   CLAUDE.md, md2video's run. Where: `tests/`, `pytest.ini`,
   `.github/workflows/tests.yml`, `.claude/skills/test/SKILL.md`.
+- **SOL.0910 What waits on GitHub.** `forge-status --remote` tries, for
+  each repository with an origin, to read what lies there outside git:
+  the open pull requests (number, title, author, date, files changed)
+  and the discussions nobody of the repository has answered (number,
+  title, author, date), through `gh` resolved from PATH like every
+  external tool, in one GraphQL query. What it reads it prints as a
+  `github:` line under the `remote:` line, the counts and one line per
+  item. Whatever keeps it from reading, no `gh`, an origin that is not
+  GitHub, no login, no network, is one line saying that it could not
+  read and why, in gh's own words where it has them, and the script
+  goes on: nothing is blocked and no case has a version of its own.
+  The reading is one function of `forge_repos.py`, beside the state
+  against the origin; without `--remote` nothing is asked. The `/forge`
+  map (step 5) and `/pull` (step 1) say the line beside the state of
+  the branch. Tested on the fixture, whose origin is a local bare
+  repository that no gh can read: the could-not-read line, the script
+  green, on a machine with gh or without one. Realises: POS.1970.
+  Choice: `gh` rather than the REST API by `urllib`, because the login
+  and the token are gh's and the forge keeps no credential (POS.0950).
+  Where: `scripts/forge-status.py`, `scripts/forge_repos.py`,
+  `tests/test_git_scripts.py`, `.claude/skills/forge/SKILL.md`,
+  `.claude/skills/pull/SKILL.md`.
 
 ## Open
 - **TBC.0010** (owner: principal) Mermaid diagrams in a Word file:

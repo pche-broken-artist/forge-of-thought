@@ -410,6 +410,7 @@ LICENSE                    # CC BY 4.0 — the engine is published
                            # mapped to one handle; git's own
                            # mechanism, the history untouched
 scripts/                   # forge-save / forge-pull / forge-status
+                           # (git, and what waits on GitHub)
                            # / forge-clone / forge-branch (git),
                            # forge-history (the history of one
                            # item), forge-report (the unique name
@@ -603,8 +604,10 @@ there are is not a rule. The scripts that serve the engine and every
 project repository, each described in full by its own help header:
 `forge-save.py` commits and pushes, `forge-pull.py` fast-forwards from
 the remotes (on the engine the upgrade channel), `forge-status.py`
-reports state without changing anything, `forge-clone.py` brings an
-existing project in (`/import-project` is its door), `forge-branch.py`
+reports state without changing anything and, with `--remote`, what
+waits on GitHub outside git, through `gh`, or that it could not read
+it (POS.1970), `forge-clone.py` brings an existing project in
+(`/import-project` is its door), `forge-branch.py`
 switches or creates a branch — merging is git's, by hand or by merge
 request: the integrator merges on his own clone with git itself,
 outside the forge's scripts, and what git leaves standing is settled

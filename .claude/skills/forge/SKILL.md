@@ -48,8 +48,12 @@ is CLAUDE.md, Document chain's. This dispatcher never changes.
    origin, from `python scripts/forge-status.py --remote`, as the
    map's last word (POS.1710): said as a fact with the words of
    POS.1490 (up to date, behind, ahead, diverged, no origin) and with
-   that state's one offer, as `/pull` step 1 has it; the map says it
-   looked at the remote and runs none of it.
+   that state's one offer, as `/pull` step 1 has it, and, from the
+   same run, what waits on GitHub outside git: the open pull requests
+   and the unanswered discussions, each in one line, or the one line
+   saying it could not be read and why (POS.1970); the offer is to
+   look at it before anything is written into the project. The map
+   says it looked at the remote and runs none of it.
 
 **`/forge <state>` — work on that artefact.**
 1. Resolve `.claude/skills/forge/states/$0.md`. If it does not exist, list

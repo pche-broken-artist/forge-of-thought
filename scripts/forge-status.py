@@ -28,10 +28,18 @@ WHAT IT DOES
     "diverged (ahead N, behind M)". The fetch changes nothing in the
     working tree; without the flag the script touches no network. The
     forge reports this state and offers; it never pulls or merges on
-    its own (POS.1490 of the forge intent).
+    its own (POS.1490 of the forge intent). With --remote it also
+    tries to read what waits on GitHub outside git, through gh: a
+    "github:" line under the "remote:" line with the open pull
+    requests and the discussions nobody of the repository has
+    answered, one line each; whatever keeps it from reading - no gh,
+    an origin that is not GitHub, no login, no network - is one line
+    saying so, and the script goes on (POS.1970, SOL.0910).
 
 WHAT IT NEEDS
-    Python 3.8 or newer; git on PATH. `forge_repos.py` beside it.
+    Python 3.8 or newer; git on PATH. `forge_repos.py` beside it. gh
+    on PATH and logged in for the github: line; without it the line
+    says so.
 
 EXAMPLES
     python scripts/forge-status.py             # local state, no network
@@ -81,6 +89,11 @@ def show_repo(name, path, remote=False):
         state = fr.remote_state(path)
         colour = "green" if state == "up to date" else "yellow"
         fr.say("   remote:      " + state, colour)
+        waiting = fr.github_waiting(path)
+        fr.say("   github:      " + waiting[0],
+               "yellow" if len(waiting) > 1 or waiting[0].startswith("could not") else "green")
+        for line in waiting[1:]:
+            print("                " + line)
     print()
 
 

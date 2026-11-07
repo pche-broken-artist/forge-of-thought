@@ -16,7 +16,10 @@ engine and every project with an origin.
    with unsaved changes or with a diverged history stops here, with
    its one offer: `/save` first, or a merge by hand or by `/save`
    (which rebases the user's commits onto the remote). Nothing is
-   pulled from it.
+   pulled from it. The same run says what waits on GitHub outside
+   git, the open pull requests and the unanswered discussions, or
+   that it could not read them and why (POS.1970); nothing of it is
+   pulled, merged or answered.
 2. For what is clean and behind, run `python scripts/forge-pull.py
    $ARGUMENTS` and relay its report: where each repository moved from
    and to, and the subjects of the commits between.

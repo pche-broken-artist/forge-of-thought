@@ -1,5 +1,5 @@
 ---
-version: 6.14
+version: 6.15
 status: draft
 project: forge
 audience: principal + Claude only
@@ -1814,8 +1814,9 @@ position that already stands elsewhere.
   both windows. Present shape 2026-10-23 (brief `collaboration` 0.9,
   REJ.0360).
 - **POS.1710** The path through git. The map ends with the state of
-  every repository against its origin and that state's offer, as its
-  last word, since the map runs over several screens and the state is
+  every repository against its origin, with what waits on GitHub beside
+  it (POS.1970), and that state's offer, as its last word, since the
+  map runs over several screens and the state is
   its key message (POS.1490). A state behind is a recommendation to pull
   before anything is written into the project. The reflection before a
   write reads that state from the last look at the remote; the write
@@ -2043,7 +2044,8 @@ position that already stands elsewhere.
   or merges on its own. The `/forge` map and `/pull` ask `forge-status
   --remote` for the state of the engine and of the project against its
   origin and say it as a fact: up to date, behind, ahead, diverged, no
-  origin. Each state has one offer: behind and clean, `/pull`; behind
+  origin, and beside it what waits on GitHub outside git (POS.1970).
+  Each state has one offer: behind and clean, `/pull`; behind
   with unsaved work, `/save` first; ahead, `/save`; diverged, the user
   merges `origin/main` into main by his own hand or lets `/save` rebase
   his own linear commits onto the remote, a conflict settled in the step
@@ -2289,6 +2291,22 @@ position that already stands elsewhere.
   POS.0830 becomes a run instead of a writing rule, and a test that
   depends on the machine it runs on tests the machine. Decided
   2026-11-06 (brief `tests`).
+- **POS.1970 The map says what waits on the remote.** Where a
+  repository has an origin, `forge-status --remote` also asks GitHub,
+  through `gh` on PATH, for what lies there outside git: the open
+  pull requests and the discussions nobody of the repository has
+  answered, each with its number, title, author and date, a pull
+  request with the count of files it changes. The `/forge` map and
+  `/pull` say it as a fact beside the state of the branch, with one
+  offer: look at it before anything is written into the project. The
+  forge reads it only; it merges, answers and closes nothing
+  (POS.1490). Whatever keeps it from reading, the line says so and
+  the map goes on. Why: a contribution seen on the morning it arrives
+  costs nothing, the same contribution seen after a week of one's own
+  rounds costs renumbered items, re-dated versions and a conflict at
+  the merge; a pull request from a stranger waited three days unseen
+  while the engine took the very numbers it carried (discussion #7,
+  pull request #8, 2026-11-06). Decided 2026-11-07.
 
 ### Naming
 - **POS.0600** The system is named **Forge of Thought**: thoughts are

@@ -48,6 +48,16 @@ def test_status_with_remote_reports_the_branch_against_its_origin(repo, other_cl
     assert "remote:      behind 1" in r.stdout
 
 
+def test_status_with_remote_says_when_github_cannot_be_read(repo, git_env, run_script):
+    # The fixture's origin is a local bare repository, which no gh can
+    # read, on a machine with gh or without one: the github: line says
+    # it could not read and why, and the script ends green (POS.1970,
+    # SOL.0910).
+    r = run_script("forge-status", repo, "--remote", env=git_env)
+    assert r.returncode == 0, r.stdout + r.stderr
+    assert "github:      could not read: " in r.stdout
+
+
 # ---- save
 
 def test_save_commits_with_the_message_and_pushes_the_ledger_left_out(repo, git_env, run_script):
