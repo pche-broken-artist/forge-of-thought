@@ -5,9 +5,9 @@ the project file, headers without changing fields, the state in
 records, threads as files, the attributes, the ledger out of git.
 
 SYNOPSIS
-    python scripts/forge-migrate.py <slug>            # dry run
-    python scripts/forge-migrate.py <slug> --apply    # perform
-    python scripts/forge-migrate.py <slug> --undo     # take back
+    python scripts/forge-migrate.py <slug | path>            # dry run
+    python scripts/forge-migrate.py <slug | path> --apply    # perform
+    python scripts/forge-migrate.py <slug | path> --undo     # take back
 
 WHAT IT DOES
     The shape of a project is a set of marks, one per step, never an
@@ -80,6 +80,7 @@ EXAMPLES
     python scripts/forge-migrate.py fixture --apply    # migrate the fixture
     python scripts/forge-migrate.py fixture --undo     # and take it back
     python scripts/forge-migrate.py forge              # the engine's own project, dry
+    python scripts/forge-migrate.py /tmp/fixture-copy  # a project by its path, dry
 """
 
 import argparse
@@ -144,7 +145,8 @@ def leaving_fields(path, kind):
 
 class Target:
     def __init__(self, slug):
-        self.slug = slug
+        """`slug`: the project's slug, or the path of its directory
+        (forge_repos.project_path); `self.slug` is then its name."""
         if slug == "forge":
             self.repo = fr.ENGINE_ROOT
             self.proj = fr.ENGINE_ROOT / "projects" / "forge"
@@ -153,11 +155,12 @@ class Target:
         if not self.proj.is_dir():
             fr.fail(f"Project '{slug}' not found ({self.proj} does not exist).")
         self.under_git = fr.own_repo(self.repo)  # asked once; False: no git is run (POS.0550)
+        info = fr.project_file(self.proj)  # the one reader of the project file (SOL.0670)
+        self.slug = slug = info["project"]
         self.manifest_path = fr.ENGINE_ROOT / "tmp" / f"forge-migrate-{slug}.json"
         self.manifest = {"slug": slug, "date": TODAY, "changed": [], "created": [],
                          "deleted": [], "unindexed": [], "gitignore": None}
         self.ledger = self.proj / "ledger.md"
-        info = fr.project_file(self.proj)  # the one reader of the project file (SOL.0670)
         self.kind, self.language = info["kind"], info["language"]
 
     def rel(self, path):
@@ -554,7 +557,7 @@ def undo(t):
 def main(argv):
     ft.utf8_console()
     ap = argparse.ArgumentParser(description=__doc__.splitlines()[1].strip())
-    ap.add_argument("slug", help="the project ('forge' = the engine's own project)")
+    ap.add_argument("slug", help="the project: its slug, or the path of its directory ('forge' = the engine's own project)")
     g = ap.add_mutually_exclusive_group()
     g.add_argument("--apply", action="store_true", help="perform the missing steps")
     g.add_argument("--undo", action="store_true", help="take back the last --apply from the manifest")

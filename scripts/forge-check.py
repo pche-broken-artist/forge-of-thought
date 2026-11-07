@@ -6,7 +6,7 @@ reading them (THR.0530 of the forge intent, open; begun as the trial of
 2026-10-22, today the light check's mechanical clauses, `light <slug>`).
 
 SYNOPSIS
-    python scripts/forge-check.py light <slug> [--out PATH]
+    python scripts/forge-check.py light <slug | path> [--out PATH]
 
 WHAT IT DOES
     Runs the clauses of one check's Lens (.claude/agents/check-<name>.md)
@@ -62,6 +62,7 @@ WHAT IT NEEDS
 EXAMPLES
     python scripts/forge-check.py light fixture
     python scripts/forge-check.py light forge --out tmp/check-light-forge.md
+    python scripts/forge-check.py light /tmp/fixture-copy      # a project by its path
 """
 
 import argparse
@@ -124,10 +125,10 @@ def load_ledger_module():
 
 class Light:
     def __init__(self, slug):
-        self.slug = slug
         self.ledger = load_ledger_module()
         fd.problems.clear()
-        self.p = self.ledger.Project(slug)  # fails aloud on a missing project
+        self.p = self.ledger.Project(slug)  # fails aloud on a missing project; slug or path
+        self.slug = self.p.slug
         self.proj = self.p.proj
         self.findings = []
         self.groups = {}
@@ -614,13 +615,13 @@ def main(argv):
     ft.utf8_console()
     ap = argparse.ArgumentParser(description=__doc__.splitlines()[1].strip())
     ap.add_argument("check", choices=["light"], help="the check to run")
-    ap.add_argument("slug", help="the project ('forge' = the engine's own project)")
+    ap.add_argument("slug", help="the project: its slug, or the path of its directory ('forge' = the engine's own project)")
     ap.add_argument("--out", help="write the report here instead of stdout")
     a = ap.parse_args(argv)
     fr.need_git()
     c = Light(a.slug)
     c.run()
-    text = fc.report(a.check, f"projects/{a.slug}", TODAY, c.findings, c.left, c.facts)
+    text = fc.report(a.check, fr.project_label(a.slug), TODAY, c.findings, c.left, c.facts)
     if a.out:
         Path(a.out).parent.mkdir(parents=True, exist_ok=True)
         Path(a.out).write_text(text, encoding="utf-8")

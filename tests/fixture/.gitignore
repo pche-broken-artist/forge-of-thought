@@ -1,0 +1,6 @@
+# .gitignore of a project (templates/gitignore): what never enters
+# the repository; copied by /new-project as it stands.
+# The ledger is made at read time, never in git (SOL.0680)
+ledger.md
+# Lock files of an open Office document (Word, PowerPoint, Excel)
+~$*

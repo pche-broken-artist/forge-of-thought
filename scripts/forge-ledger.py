@@ -6,7 +6,7 @@ reports of what the merged files cannot say, the archive for what has
 no record of the new shape.
 
 SYNOPSIS
-    python scripts/forge-ledger.py <slug> [--out PATH]
+    python scripts/forge-ledger.py <slug | path> [--out PATH]
 
 WHAT IT DOES
     Reads eleven kinds of document and builds `ledger.md` in the shape
@@ -52,6 +52,7 @@ EXAMPLES
     python scripts/forge-ledger.py fixture                     # the fixture's ledger, written
     python scripts/forge-ledger.py flow-ba --out tmp/flow-ba-ledger.md   # a dry run
     python scripts/forge-ledger.py forge                       # the engine's own project
+    python scripts/forge-ledger.py /tmp/fixture-copy --out /tmp/ledger.md   # a project by its path
 """
 
 import argparse
@@ -77,7 +78,8 @@ DEF_RE = re.compile(r"^- \*\*([A-Z]{3}\.\d{4,5})\*\*")
 
 class Project:
     def __init__(self, slug):
-        self.slug = slug
+        """`slug`: the project's slug, or the path of its directory
+        (forge_repos.project_path); `self.slug` is then its name."""
         self.repo = fr.ENGINE_ROOT if slug == "forge" else fr.project_path(slug)
         self.proj = fr.ENGINE_ROOT / "projects" / "forge" if slug == "forge" else fr.project_path(slug)
         if not self.proj.is_dir():
@@ -86,6 +88,7 @@ class Project:
         self.root = fr.ENGINE_ROOT if slug == "forge" else self.proj  # where the root renders lie
         self.reports = []
         info = fr.project_file(self.proj)  # the one reader of the project file (SOL.0670)
+        self.slug = info["project"]
         self.old_shape = info["shape"] != "current"
         self.kind, self.language = info["kind"], info["language"]
         archive = self.proj / "ledger.md" if self.old_shape else self.proj / "ledger.archive.md"
@@ -501,9 +504,9 @@ def reports(p, open_threads, closed_threads):
             continue
         for id_ in set(re.findall(r"THR\.\d{4,5}", fd.read(f))):
             cited.setdefault(id_, set()).add(p.rel(f))
-    # a thread of another project under projects/ may be cited by path or by ID alone
+    # a thread of another project beside this one (under projects/) may be cited by path or by ID alone
     elsewhere = set()
-    for other in (fr.ENGINE_ROOT / "projects").glob("*/threads/THR.*.md"):
+    for other in p.proj.parent.glob("*/threads/THR.*.md"):
         if other.resolve().parent != (p.proj / "threads").resolve():
             elsewhere.add(other.stem)
     for id_ in sorted(set(cited) - known - elsewhere, key=lambda i: int(i.split(".")[1])):
@@ -589,7 +592,7 @@ def compose(p):
 def main(argv):
     ft.utf8_console()
     ap = argparse.ArgumentParser(description=__doc__.splitlines()[1].strip())
-    ap.add_argument("slug", help="the project ('forge' = the engine's own project)")
+    ap.add_argument("slug", help="the project: its slug, or the path of its directory ('forge' = the engine's own project)")
     ap.add_argument("--out", help="write here instead of the project's ledger.md (the dry run)")
     a = ap.parse_args(argv)
     fr.need_git()

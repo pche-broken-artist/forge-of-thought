@@ -8,8 +8,12 @@ the registration of the merge driver ours on the machine
 (`registration_state`; SOL.0740) and coloured output. Not a command.
 
 The engine root is the parent of the directory this file lies in
-(`scripts/`). A project is `projects/<slug>`; it is a repository of
-its own when git names its directory as the top of a repository
+(`scripts/`). A project is `projects/<slug>`, or the directory a path
+names (`project_path`: a bare word is a slug, anything with a
+separator or absolute is a path, as the forge's tests pass their
+copy of the fixture in a temporary directory); its name is the
+`project` field of its project file (`project_file`). It is a
+repository of its own when git names its directory as the top of a repository
 (`own_repo`), never by a `.git` looked for; anything else is a project
 outside git, on which the forge runs no git (CLAUDE.md, Persistence;
 POS.0550). The scripts carry no URL and no identity.
@@ -183,8 +187,26 @@ def registration_state():
             if git_out(["config", "--global", "--get", key], ENGINE_ROOT) != value]
 
 
-def project_path(slug):
-    return ENGINE_ROOT / "projects" / slug
+def project_path(project):
+    """The directory of a project: `projects/<slug>` for a bare word,
+    the directory itself for a path (one with a separator, or an
+    absolute one), taken as given. 'forge' is the engine's own
+    project; the callers that treat it apart do so by the name."""
+    if is_path(project):
+        return Path(project).resolve()
+    return ENGINE_ROOT / "projects" / project
+
+
+def is_path(project):
+    """Whether `project` names a directory rather than a slug: it is
+    absolute or carries a separator (`./x` counts, as written)."""
+    return Path(project).is_absolute() or "/" in str(project) or "\\" in str(project)
+
+
+def project_label(project):
+    """How a report or a message names the target: `projects/<slug>`
+    for a slug, the path as it was given for a path."""
+    return str(project) if is_path(project) else f"projects/{project}"
 
 
 def project_file(path):
@@ -216,11 +238,12 @@ def project_file(path):
 
 def repos_to_visit(slug, strict_message=None):
     """The repositories a bare or a slug-form command visits, as
-    (name, path) pairs, the engine first. With a slug other than
-    'forge' the one project, which must exist and be a repository
+    (name, path) pairs, the engine first. With a slug or a path other
+    than 'forge' the one project, which must exist and be a repository
     (the message for the second case is strict_message, with {slug}
-    inside); bare, the engine and every project that is a repository,
-    the others reported and skipped."""
+    inside), named as its project file names it; bare, the engine and
+    every project that is a repository, the others reported and
+    skipped."""
     repos = []
     if slug and slug != "forge":
         path = project_path(slug)
@@ -228,7 +251,7 @@ def repos_to_visit(slug, strict_message=None):
             fail(f"Project '{slug}' not found ({path} does not exist).")
         if not own_repo(path):
             fail((strict_message or "Project '{slug}' is not a repository.").format(slug=slug))
-        repos.append((slug, path))
+        repos.append((project_file(path)["project"], path))
         return repos
     repos.append(("forge (engine)", ENGINE_ROOT))
     if not slug:

@@ -4,7 +4,7 @@ forge-branch.py - switch one Forge repository to a branch, creating it
 if needed - or report which branch it is on.
 
 SYNOPSIS
-    python scripts/forge-branch.py <slug> [branch]
+    python scripts/forge-branch.py <slug | path> [branch]
 
 WHAT IT DOES
     Branches are voluntary in the Forge: whoever wants one gets it
@@ -32,6 +32,7 @@ EXAMPLES
     python scripts/forge-branch.py forge              # which branch is the engine on
     python scripts/forge-branch.py forge work-release # switch the engine to work-release, creating it
     python scripts/forge-branch.py platform-strategy main   # switch that project back to main
+    python scripts/forge-branch.py /tmp/fixture-copy trial  # a project by its path
 """
 
 import argparse
@@ -46,16 +47,17 @@ import forge_tools as ft  # noqa: E402
 def main(argv):
     ft.utf8_console()
     ap = argparse.ArgumentParser(description=__doc__.splitlines()[1].strip())
-    ap.add_argument("slug", help="the repository ('forge' = the engine)")
+    ap.add_argument("slug", help="the repository: a project's slug or the path of its directory ('forge' = the engine)")
     ap.add_argument("branch", nargs="?", help="the branch to switch to, created when missing")
     a = ap.parse_args(argv)
     fr.need_git()
     if a.slug == "forge":
         name, path = "forge (engine)", fr.ENGINE_ROOT
     else:
-        name, path = a.slug, fr.project_path(a.slug)
+        path = fr.project_path(a.slug)
         if not path.exists():
             fr.fail(f"Project '{a.slug}' not found ({path} does not exist).")
+        name = fr.project_file(path)["project"]
     if not fr.own_repo(path):
         fr.fail(f"'{a.slug}' is not a repository - nothing to switch.")
 

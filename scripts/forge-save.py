@@ -4,7 +4,7 @@ forge-save.py - save the Forge to git: commit and push - the engine
 and every project that is a repository of its own.
 
 SYNOPSIS
-    python scripts/forge-save.py [slug] [-m MESSAGE] [--tag NAME]
+    python scripts/forge-save.py [slug | path] [-m MESSAGE] [--tag NAME]
 
 WHAT IT DOES
     The engine (this repository) and the projects under projects/ are
@@ -45,6 +45,7 @@ EXAMPLES
     python scripts/forge-save.py                   # every repository with changes
     python scripts/forge-save.py platform-strategy   # one thought project: projects/platform-strategy
     python scripts/forge-save.py forge             # only the engine
+    python scripts/forge-save.py /tmp/fixture-copy # a project by its path
     python scripts/forge-save.py -m "my message"   # custom commit message
     python scripts/forge-save.py forge --tag v3.33 # save the engine and tag the commit
 """
@@ -152,7 +153,7 @@ def save_repo(name, path, message, tag):
 def main(argv):
     ft.utf8_console()
     ap = argparse.ArgumentParser(description=__doc__.splitlines()[1].strip())
-    ap.add_argument("slug", nargs="?", help="one repository ('forge' = the engine); bare = every one with changes")
+    ap.add_argument("slug", nargs="?", help="one repository: a project's slug or the path of its directory ('forge' = the engine); bare = every one with changes")
     ap.add_argument("-m", "--message", help="commit message (default: generated from the files)")
     ap.add_argument("--tag", help="tag the commit (needs a slug)")
     a = ap.parse_args(argv)

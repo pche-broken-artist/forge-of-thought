@@ -5,7 +5,7 @@ gathered from the history logs, their archives and the places that
 cite it, printed as one timeline.
 
 SYNOPSIS
-    python scripts/forge-history.py <ID> <slug> [--full]
+    python scripts/forge-history.py <ID> <slug | path> [--full]
 
 WHAT IT DOES
     Read-only, changes nothing, no model involved. For an item named
@@ -55,6 +55,7 @@ EXAMPLES
     python scripts/forge-history.py POS.0580 forge      # a position of the forge intent
     python scripts/forge-history.py sol460 forge        # the short form of SOL.0460
     python scripts/forge-history.py REQ.0120 <slug> --full   # every Was in full
+    python scripts/forge-history.py POS.0010 /tmp/fixture-copy   # a project by its path
 """
 
 import re
@@ -166,7 +167,7 @@ def main(argv):
     argv = [a for a in argv if a != "--full"]
     if len(argv) != 2:
         print(__doc__.strip().splitlines()[0])
-        print("usage: python scripts/forge-history.py <ID> <slug> [--full]")
+        print("usage: python scripts/forge-history.py <ID> <slug | path> [--full]")
         return 2
     id_ = normalise(argv[0])
     slug = argv[1]
@@ -193,7 +194,7 @@ def main(argv):
             home, wording = p, text
             break
 
-    head = f"{id_}  projects/{slug}"
+    head = f"{id_}  {fr.project_label(slug)}"
     if home:
         # the version from the header, the date computed from the records (POS.1570)
         hfront, _ = docs_map.parse(home.read_text(encoding="utf-8"))
@@ -285,7 +286,7 @@ def main(argv):
         print(block(line, " " * 4, first=f"  {where}  ") if len(where) < 30
               else f"  {where}\n" + block(line, " " * 4))
     if home is None and not events and not cites:
-        fr.say(f"\nnothing in projects/{slug} knows {id_}", "yellow")
+        fr.say(f"\nnothing in {fr.project_label(slug)} knows {id_}", "yellow")
     return 0
 
 

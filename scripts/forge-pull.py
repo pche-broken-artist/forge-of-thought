@@ -4,7 +4,7 @@ forge-pull.py - pull the latest Forge from its remotes - the engine
 (its upgrade channel) and every project that has an origin.
 
 SYNOPSIS
-    python scripts/forge-pull.py [slug]
+    python scripts/forge-pull.py [slug | path]
 
 WHAT IT DOES
     Fast-forward only. Without arguments pulls the engine, then every
@@ -31,6 +31,7 @@ EXAMPLES
     python scripts/forge-pull.py            # engine + every project with an origin
     python scripts/forge-pull.py forge      # the engine only (upgrade)
     python scripts/forge-pull.py platform-strategy   # one project: projects/platform-strategy
+    python scripts/forge-pull.py /tmp/fixture-copy   # a project by its path
 """
 
 import argparse
@@ -45,7 +46,7 @@ import forge_tools as ft  # noqa: E402
 def main(argv):
     ft.utf8_console()
     ap = argparse.ArgumentParser(description=__doc__.splitlines()[1].strip())
-    ap.add_argument("slug", nargs="?", help="one repository ('forge' = the engine); bare = every one with an origin")
+    ap.add_argument("slug", nargs="?", help="one repository: a project's slug or the path of its directory ('forge' = the engine); bare = every one with an origin")
     a = ap.parse_args(argv)
     fr.need_git()
     fr.need_engine_repo()
