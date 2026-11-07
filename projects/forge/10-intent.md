@@ -1,5 +1,5 @@
 ---
-version: 6.15
+version: 6.16
 status: draft
 project: forge
 audience: principal + Claude only
@@ -2040,6 +2040,35 @@ position that already stands elsewhere.
   the user's word for an upgrade of a few lines; a release that changes
   the shape of files comes with a migration run on his word (POS.1740).
   Shapes rejected: REJ.0150. Decided 2026-08-29.
+- **POS.1980 The forge's own project is a repository of its own.**
+  `projects/forge` is one project among the others, under git like them,
+  public under the same account as the engine, its repository named
+  `forge` so that `/import-project` brings it into `projects/forge`
+  without a rename; the last exception to POS.0940 goes with it, and the
+  engine's `.gitignore` re-includes nothing. A user clones the engine
+  alone and nothing he runs reads the project: verified on 2026-11-07 on
+  a clone without it, the tests, the status, the ledger, the light check
+  of a project and both hooks unchanged. A contributor, and the
+  principal on another machine, clone the project beside the engine,
+  since the author's commands read it: `/check engine`, `/document`,
+  `/release forge`, `/new-artefact` and the renders of the README, the
+  release notes and CONTRIBUTING; the paths `projects/forge/...` the
+  documentation cites are the paths of that clone, and the README says
+  where the project lives. What stays special is in the recipes, not in
+  the scripts: the project's root renders land in the engine root by
+  their `output:` (the leading slash of `templates/recipe.md`), so a
+  release of the engine lands in two commits, and the ledger reads where
+  a root render lies from the recipe. In the commands of git, `/save`,
+  `/pull`, `forge-branch` and `/release`, `forge` names the whole, the
+  engine's repository and the project beside it where it is cloned, each
+  its own commit with the prefix `forge:`; in the commands over
+  documents `forge` is the project. The repository starts clean, one
+  commit naming the engine commit it was cut from, the history before it
+  the engine's. The order: this round written, the engine prepared with
+  the project still inside and the cut tried on a copy, the project's
+  repository born before the engine lets the directory go, then the
+  first release. The principal's word of 2026-11-01, decided 2026-11-07
+  (THR.0780).
 - **POS.1490** The forge looks at the remote and offers, it never pulls
   or merges on its own. The `/forge` map and `/pull` ask `forge-status
   --remote` for the state of the engine and of the project against its

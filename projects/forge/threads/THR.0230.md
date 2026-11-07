@@ -125,6 +125,22 @@ how an artefact a user adds for himself is kept from colliding
 with an upgrade of the engine. Version 1 adds to the engine
 (POS.1430); where a user's own artefact lives waits for this
 thread and for THR.0300.
+2026-11-07, from the round over THR.0780, the principal's words for the
+layers: *engine* is the universal mechanics alone; *forge framework* is
+what makes the forge the forge, the agents, the reviewers, the
+elicitation, the chain; the forge's own project is the thinking about
+it. What a user clones today, engine and forge framework in one
+repository, is said outward as the forge framework, one word for the
+user; the inner division is the author's. The texts of the forge say
+*engine* for the whole (SOL.0500); renaming them is this thread's, not
+THR.0780's. The exercise of the day, every file a user clones sorted
+into engine, forge framework and between, is
+`research/2026-11-07-engine-and-forge-framework-by-file.md`: the
+boundary is clean in the agents, the templates and most skills and
+scripts, and runs through CLAUDE.md, the three scripts that know the
+chain by name (ledger, check, migrate), the forge skill and the
+walkthrough hook; every "between" is one shape, a mechanism that names
+the forge's artefacts instead of reading them from the definitions.
 
 <!-- A thread (POS.1680), one file per thread in threads/; the header
 is its state: what it concerns, where it came from, whether it is
