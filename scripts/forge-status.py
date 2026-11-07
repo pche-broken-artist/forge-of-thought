@@ -4,7 +4,7 @@ forge-status.py - report the git state of the Forge: the engine and
 every project.
 
 SYNOPSIS
-    python scripts/forge-status.py [--remote]
+    python scripts/forge-status.py [slug | path] [--remote]
 
 WHAT IT DOES
     Read-only, changes nothing. First the global configuration file
@@ -14,7 +14,9 @@ WHAT IT DOES
     `forge-config.py --register`, its header) - an unregistered
     clone silently falls back to a conflict on the derived files
     (SOL.0740 of the forge solution design). Then, for the
-    engine and each projects/<slug>: unsaved changes (or "clean"), the
+    engine and each projects/<slug>, or with a slug or a path for
+    that one repository only ('forge' means the engine): unsaved
+    changes (or "clean"), the
     branch it is on, the last commit, and the origin - or "no origin" /
     "not under git", and a user.name or user.email set in the
     repository itself, which wins over the per-host stanza and which
@@ -34,6 +36,8 @@ WHAT IT NEEDS
 EXAMPLES
     python scripts/forge-status.py             # local state, no network
     python scripts/forge-status.py --remote    # the state against each origin as well
+    python scripts/forge-status.py flow-ba     # one project
+    python scripts/forge-status.py /tmp/fixture-copy   # a project by its path
 """
 
 import argparse
@@ -83,6 +87,7 @@ def show_repo(name, path, remote=False):
 def main(argv):
     ft.utf8_console()
     ap = argparse.ArgumentParser(description=__doc__.splitlines()[1].strip())
+    ap.add_argument("slug", nargs="?", help="one repository: a project's slug or the path of its directory ('forge' = the engine); bare = the engine and every project")
     ap.add_argument("--remote", action="store_true",
                     help="fetch each origin and report the branch against it")
     a = ap.parse_args(argv)
@@ -100,6 +105,15 @@ def main(argv):
     else:
         fr.say("registration:      missing " + ", ".join(missing) + " - run /setup", "yellow")
     print()
+    if a.slug == "forge":
+        show_repo("forge (engine)", fr.ENGINE_ROOT, a.remote)
+        return 0
+    if a.slug:
+        path = fr.project_path(a.slug)
+        if not path.is_dir():
+            fr.fail(f"Project '{a.slug}' not found ({path} does not exist).")
+        show_repo(fr.project_file(path)["project"], path, a.remote)
+        return 0
     show_repo("forge (engine)", fr.ENGINE_ROOT, a.remote)
     projects = fr.ENGINE_ROOT / "projects"
     if projects.is_dir():
