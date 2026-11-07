@@ -193,7 +193,9 @@ def project_path(project):
     absolute one), taken as given. 'forge' is the engine's own
     project; the callers that treat it apart do so by the name."""
     if is_path(project):
-        return Path(project).resolve()
+        # abspath first: on Python 3.8 for Windows, resolve() leaves a
+        # relative path of a directory that does not exist relative
+        return Path(os.path.abspath(project)).resolve()
     return ENGINE_ROOT / "projects" / project
 
 
