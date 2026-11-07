@@ -1,5 +1,5 @@
 ---
-version: 0.54
+version: 0.55
 status: draft
 project: forge
 audience: whoever realises the solution, a person or an agent
@@ -1331,8 +1331,10 @@ boundary kept by hand or an order of work.
   from a bare remote in `tmp/` as a copy of a small real project and
   deleted on 2026-11-01 (DEC.0360), is history: on it the migration,
   `ours` and the step of a conflict were first tried by hand (R6.03);
-  what it tried, the suite now tests (SOL.0900). Realises: POS.1940,
-  POS.1590, POS.1750. Choice: synthetic against a copy of a real
+  of the three the suite now tests `ours` and the step of a conflict
+  (SOL.0900), the migration not: it ran once, on that project, and a
+  fixture of the current shape gives it nothing to migrate. Realises:
+  POS.1940, POS.1590, POS.1750. Choice: synthetic against a copy of a real
   project (REJ.0530, DEC.0410); in the engine's tree against
   `projects/` (gitignored) and against a bare remote in `tmp/` (per
   machine); the cost is a fixture kept by hand to the templates,
@@ -1466,7 +1468,8 @@ boundary kept by hand or an order of work.
   with a bare origin, and a second clone). The tests, one file per
   concern: `test_hook_git.py`, the 171 built-in cases of the git hook
   with their verdict, moved out of the hook; `test_forge_docs.py` and
-  `test_forge_check.py`, the reading cores; `test_forge_repos.py`, the
+  `test_forge_check.py`, the reading cores; `test_docs_map.py`, the
+  reader of the documentation map; `test_forge_repos.py`, the
   resolver and the project's name; `test_forge_ledger.py`, the ledger
   on the fixture, every table, the states from records and verdicts,
   Waiting on principal, the write without `--out`; `test_git_scripts.py`,
@@ -1477,8 +1480,10 @@ boundary kept by hand or an order of work.
   two planted defects found; `test_conversions.py`, md2pptx, md2docx
   and doc2md failing on an empty PATH naming their tool. CI is
   `.github/workflows/tests.yml`: at every push and pull request,
-  `ubuntu-latest` and `windows-latest`, Python 3.8 and 3.13, `pip
-  install pytest`, `python -m pytest`. `/release` of the engine runs
+  `ubuntu-latest` and `windows-latest`, Python 3.8 and the newest
+  stable, `3.x`, resolved by `setup-python` at each run, `pip install
+  pytest`, `python -m pytest`; the run's token has `contents: read`
+  and nothing more. `/release` of the engine runs
   `/test` as its step 1a; `/save` never. Realises: POS.1930, POS.1950,
   POS.1960, POS.1100. Choice: pytest against unittest, the convention
   of the language and the one install; the scripts run as

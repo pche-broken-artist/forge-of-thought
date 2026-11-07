@@ -1,5 +1,5 @@
 ---
-version: 6.13
+version: 6.14
 status: draft
 project: forge
 audience: principal + Claude only
@@ -2234,8 +2234,9 @@ position that already stands elsewhere.
   never a suite for its own sake, no coverage figure as a target
   (kind, not count). What is tested, in the order it was built: the
   deterministic cores, the front-matter, the records of a history,
-  the git hook's judgement over a command, the ledger made from the
-  documents, the light check as a program; then the git scripts on
+  the reader of the documentation map, the git hook's judgement over
+  a command, the ledger made from the documents, the light check as
+  a program; then the git scripts on
   the fixture, status, save, branch, pull, the step of a conflict and
   the ways of merging; what calls pandoc, markitdown or the model is
   tested for its failure without the tool alone, naming the tool and
