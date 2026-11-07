@@ -2,7 +2,7 @@
 project: forge
 purpose: CONTRIBUTING.md of the engine's repository - how a visitor gives feedback, brings an idea or sends a change
 audience: a visitor of the repository on GitHub who has used the forge or read about it and wants to say, ask or change something; he arrives from the Contributing tab, the sidebar, or the page where an issue or a pull request is created
-version: 0.5
+version: 0.6
 output: /CONTRIBUTING.md
 ---
 
@@ -112,8 +112,12 @@ output: /CONTRIBUTING.md
   as a relative link; in "Something is broken", one sentence that a
   security problem never goes into an issue and takes the way
   `SECURITY.md` says, as a relative link (POS.1920).
-- Omit: commit message rules, branch names, tests and build. The
-  forge has none of them to describe.
+- Tests: one short sentence where the pull request is described: a
+  script in `scripts/` is changed with its test in `tests/`, run by
+  `/test` or `python -m pytest`, and the pull request says what was
+  run (POS.1930). Nothing more on tests; no build to describe.
+- Omit: commit message rules and branch names. The forge has none of
+  them to describe.
 
 ## Template
 # Contributing to Forge of Thought

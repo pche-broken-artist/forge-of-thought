@@ -699,3 +699,22 @@ verdict on the whole ID, the rest a `changed` record of the history
 - **Verdict:** FND.3790 parked until the principal gives the reasons
 - **Verdict:** FND.3800 parked until the principal gives the reasons
 - **Date:** 2026-11-01
+
+## DEC.0410 — The fixture synthetic in tests/, the scripts taking a path
+- **Decision:** The fixture of the forge's tests is `tests/fixture`,
+  a synthetic project written by hand with a made-up subject, never
+  a copy of a real project; the tests work on copies of it in a
+  temporary directory; the scripts take a project by its slug or by
+  the path of its directory, one resolver in `forge_repos`
+  (POS.1940, POS.1950).
+- **Reason:** The git tests change what they run on, so a copy in a
+  temporary directory is needed wherever the fixture lies, and a copy
+  there is reached by a path and by nothing else. Weighed against it:
+  an environment variable naming the projects' root (REJ.0510), a
+  setting hidden from the command; a branch in the scripts for a test
+  project (REJ.0520), production code with a path only the tests
+  take; the fixture under `projects/` or copied from a real project
+  (REJ.0530), gitignored and real content in a public engine. A slug
+  stays the forge's way of naming a project; a path is what every
+  tool takes.
+- **Date:** 2026-11-07

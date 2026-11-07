@@ -1,5 +1,5 @@
 ---
-version: 6.12
+version: 6.13
 status: draft
 project: forge
 audience: principal + Claude only
@@ -776,9 +776,10 @@ position that already stands elsewhere.
   read wherever the ledger's header was read (POS.0060, POS.0960). Why:
   once the ledger leaves git (POS.1600) they would have no home, and a
   library's repository is at its creation this file alone. Decided
-  2026-10-17 (brief `collaboration`). A fixture project, the test bed of
-  the forge's own tests (POS.1750), carries `fixture: true` in its
-  project file, and a bare `/save` skips it.
+  2026-10-17 (brief `collaboration`). The fixture project (POS.1940)
+  carries `fixture: true` in its project file; it is no repository, so
+  no save meets it (2026-11-07; the design had said the opposite of
+  the skip since 0.39).
 - **POS.0970** A library is a project of kind `library` — no chain: a
   ledger, `sources/` and `research/` with their indexes,
   `recipes/readme.md` and the README it renders (POS.1000) — a
@@ -1721,7 +1722,12 @@ position that already stands elsewhere.
   had existed in practice for weeks; with the renders at the release
   only, the README on `main` is current at every release and stale in
   between visibly (the `/forge` map), never silently. Decided
-  2026-09-05; alternatives REJ.0160, REJ.0170.
+  2026-09-05; alternatives REJ.0160, REJ.0170. A release of the
+  engine runs the tests through `/test` before any check (POS.1930);
+  a red test stops it; where pytest is missing it says that the tests
+  did not run and goes on only on the principal's word. A save never
+  runs them: every push runs them in CI (POS.1960). Decided
+  2026-11-06 (brief `tests`).
 - **POS.1110** Branches are voluntary and belong to git. Whoever wants
   one gets it through one forge command — `forge-branch <slug> <name>`
   creates the branch or switches to it, `forge-branch <slug> main`
@@ -1887,14 +1893,16 @@ position that already stands elsewhere.
   version given twice. A merge request without conflict is merged on the
   server; with conflict it is fetched and settled on a clone, since the
   server merges with no attribute of the forge's. Two windows of one
-  person on one project are not solved (POS.1700). Verified on the
-  fixture (POS.1590), never on a clone of a real project (DEC.0240), the
-  results in the cutover plan (`work/collaboration-cutover.md`,
-  POS.1520). A test before a release that is red stops it: back to the
-  design, the TBC open, the release does not run (CHL.0410). The fixture
-  is a project of the forge driven by the forge's commands, one project
-  made by hand (POS.1590, CHL.0380, DEC.0250). Present shape 2026-10-23
-  (brief `collaboration` 0.9, DEC.0280).
+  person on one project are not solved (POS.1700). Verified by the
+  tests on copies of the fixture (POS.1930, POS.1940), never on a
+  clone of a real project (DEC.0240), the first trials in the cutover
+  plan (`work/collaboration-cutover.md`, POS.1520). A test before a
+  release that is red stops it: back to the design, the TBC open, the
+  release does not run (CHL.0410, POS.1100). The fixture is
+  `tests/fixture` (POS.1940); the tests of this position are the git
+  tests of the suite, run by `/test` and in CI, the step of a conflict
+  and the ways of merging among them. Present shape 2026-10-23 (brief
+  `collaboration` 0.9, DEC.0280), the tests since 2026-11-07.
 
 - **POS.1770** One integrator and N contributors. A hosted project's
   main is protected by default, on GitLab push and merge are the
@@ -1996,12 +2004,15 @@ position that already stands elsewhere.
   platform-bound layer, and its scripts are written to run unchanged on
   Linux and macOS. Instance facts are out of the scripts: no remote URL,
   no author identity, no first-run initialisation — git configuration is
-  the user's (POS.0950). Portability is verified by running the set on
-  Linux: the git scripts, the ledger and docs-state ran there in
-  October 2026 on a user's machine
+  the user's (POS.0950). Portability is verified by a run: the tests
+  run in CI on Linux and Windows at every push (POS.1960), the git
+  scripts, the ledger, the light check and the git hook's judgement
+  among them; before the suite, the git scripts, the ledger and
+  docs-state had run on Linux in October 2026 on a user's machine
   (`sources/github-issues/issue-3-repo-detection.md`, his PR #2 of
-  2026-10-21 made there); the conversions and the two hooks are a
-  writing rule still, not a claim, until a run on Linux says otherwise.
+  2026-10-21 made there). The conversions are tested for their failure
+  without the tool alone, and the per-prompt hook is a writing rule
+  still, not a claim, until a run says otherwise (2026-11-07).
   The scripts are Python, decided 2026-10-02 on the feedback of the
   forge's users and done 2026-10-09, the per-prompt hook included:
   `python` on PATH is their one prerequisite, the same Python the
@@ -2213,6 +2224,70 @@ position that already stands elsewhere.
   hour and for the reader who opens the repository; the question
   2026-11-01 after six trial questions in the conversation
   (THR.0680).
+
+- **POS.1930 The scripts have tests.** `tests/` at the engine root,
+  beside the scripts they test, run with pytest from the engine root;
+  `/test` is the one door and `python -m pytest` the command it runs;
+  pytest is the one thing a contributor installs beyond `python`, and
+  a user of the engine never runs them and installs nothing for them.
+  In proportion: enough to catch what a change of a script breaks,
+  never a suite for its own sake, no coverage figure as a target
+  (kind, not count). What is tested, in the order it was built: the
+  deterministic cores, the front-matter, the records of a history,
+  the git hook's judgement over a command, the ledger made from the
+  documents, the light check as a program; then the git scripts on
+  the fixture, status, save, branch, pull, the step of a conflict and
+  the ways of merging; what calls pandoc, markitdown or the model is
+  tested for its failure without the tool alone, naming the tool and
+  how it is installed. The git hook's built-in cases became the first
+  test and its `--test` flag went: one place for tests. Never a live
+  repository (DEC.0240). A script is changed with its test, and a
+  pull request on a script carries it; that is possible in one
+  repository only, and CI runs where the code is. Why: some 7 000
+  lines of Python and not one test in the tree, the first thing a
+  contributor looks for and the first thing a change breaks
+  (THR.0790). Decided 2026-11-06 (brief `tests`), built 2026-11-06
+  and 2026-11-07, 221 tests at the mining.
+- **POS.1940 The fixture is synthetic.** `tests/fixture`, a thought
+  project of the current shape with a made-up subject, one of each
+  kind of document the scripts read, a brief, an intent of two
+  versions, a thread open and one closed, a decision, a critique and
+  a challenge, a source with its index, a recipe and its render;
+  `fixture: true` in its project file; never a copy of a real project
+  and never under `projects/`. A test works on a copy of it in a
+  temporary directory, as a repository with a bare origin beside it
+  where the test needs git, and the fixture itself is never changed
+  by a test; it conforms to the light check, so a template it no
+  longer follows turns a test red, which is the signal wanted; its
+  README says what it is. It replaces the hand-made `projects/fixture`
+  of the cutover (SOL.0830, DEC.0360). Why: real content does not
+  belong in the public engine, and `projects/` is gitignored, so a
+  fixture there would reach neither a contributor nor CI (DEC.0410).
+  Decided 2026-11-07.
+- **POS.1950 A script takes a project by its slug or by the path of
+  its directory.** A bare word is a slug and means `projects/<slug>`;
+  anything with a separator or absolute is the directory itself,
+  taken as given; the project's name is the `project` field of its
+  project file, the directory's name without one; `forge` stays the
+  engine's own project by the name; one resolver,
+  `forge_repos.project_path`, every script through it, `forge-status`
+  by one repository as well. The commands of the forge call by slug
+  as before. Why: a copy in a temporary directory is reached by a
+  path and by nothing else, and a path is an argument like any
+  other, visible in the command; the alternatives REJ.0510 to
+  REJ.0530. Decided 2026-11-07.
+- **POS.1960 The tests run in CI and read nothing of the machine.**
+  GitHub Actions at every push and pull request of the engine, Linux
+  and Windows, Python 3.8 and the newest; macOS not until someone
+  asks for it. The git tests run git with an empty global
+  configuration and no system one, the identity set in the throwaway
+  repository alone, so that the user's guard, his stanzas and his
+  registration of the merge driver change nothing and CI without any
+  of them sees the same; the registration is tested by its presence
+  and by its absence (SOL.0740). Why: the portability rule of
+  POS.0830 becomes a run instead of a writing rule, and a test that
+  depends on the machine it runs on tests the machine. Decided
+  2026-11-06 (brief `tests`).
 
 ### Naming
 - **POS.0600** The system is named **Forge of Thought**: thoughts are
@@ -2855,6 +2930,21 @@ worked out by Claude; what Claude has worked out is never a FCT
   whatever those documents point to on disk; what a project wants
   documented beyond that is not a setting of its own (THR.0590, closed
   2026-11-01).
+- **REJ.0510** An environment variable naming the projects' root, read
+  by the scripts for the tests. Dropped 2026-11-07: a setting hidden
+  from the command, where a path is an argument everyone sees; the
+  principal no friend of variables (POS.1950).
+- **REJ.0520** A branch in the scripts for a test project, lying in
+  `tests/`. Dropped 2026-11-07: production code with a path only the
+  tests take, and the copy the tests work on lies in a temporary
+  directory, not in `tests/`, so the branch would be the variable in
+  another coat (POS.1950).
+- **REJ.0530** The fixture under `projects/`, or a copy of a real
+  project. Dropped 2026-11-07: `projects/` is gitignored and a fixture
+  there reaches neither a contributor nor CI; a real project's content
+  does not belong in the public engine; and the git tests change what
+  they run on, so a copy in a temporary directory is needed wherever
+  the fixture lies (POS.1940, DEC.0410).
 
 ## Candidate structure for the layer below
 

@@ -41,7 +41,7 @@ cannot settle stays open, and the release waits for his word.
    release before it costs anything
    (projects/forge/00-brief-tests.md). A red test stops the release:
    the failures reported as `/test` reports them, back to the fix,
-   the release does not run (POS.1760). Where pytest is not
+   the release does not run (POS.1750). Where pytest is not
    installed, say that the tests did not run and go on only on the
    principal's word. A project's release runs no tests: the tests are
    the engine's. `--auto` stops at a red test and at a missing pytest

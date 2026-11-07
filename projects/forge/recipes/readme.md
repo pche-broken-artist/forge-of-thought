@@ -2,7 +2,7 @@
 project: forge
 purpose: readme
 audience: humans arriving at the repository
-version: 0.77
+version: 0.78
 output: /README.md
 ---
 
@@ -46,11 +46,12 @@ shape only. -->
 - Where two inputs state the same thing, the wording of the operating
   layer wins (CLAUDE.md, a definition); the intent supplies the why.
   State each thing once: no sentence appears in two sections.
-- Portability is said as the inputs say it (POS.0830): developed and
-  run on Windows; the git scripts, the ledger and docs-state run on
-  Linux on a user's machine; the conversions and the two hooks are
-  written to run unchanged on Linux and macOS, never said as having
-  run there.
+- Portability is said as the inputs say it (POS.0830, POS.1960):
+  developed on Windows; the tests run in CI on Linux and Windows at
+  every push, said in one sentence where the engine's shape is told,
+  no badge; the conversions and the two hooks are written to run
+  unchanged on Linux and macOS, never said as having run there; macOS
+  never said as having run.
 - Tone: plain, direct, no marketing. UK English. No long dash
   anywhere: a colon, a full stop or a spaced hyphen where one would
   stand. Every core term (principal, brief, intent, render, recipe)

@@ -1,5 +1,5 @@
 ---
-version: 0.53
+version: 0.54
 status: draft
 project: forge
 audience: whoever realises the solution, a person or an agent
@@ -1308,36 +1308,36 @@ boundary kept by hand or an order of work.
   forced push or a revert, on a protected main a maintainer's, and
   always the engine and every project together, since the engine refuses
   the old shape once released (CHL.0420).
-- **SOL.0830 The fixture.** The fixture is a kind a project may
-  declare, `fixture: true`; the fixture project of the cutover,
-  `projects/fixture`, was deleted on 2026-11-01 (DEC.0360) and none
-  exists today; what follows is how it was made and what ran on it. The
-  test bed of the forge's own tests was one
-  project, `projects/fixture`, made by hand once from a bare remote
-  `tmp/fixture.git` as a copy of a small real project in the old shape
-  and brought to the new shape by the migration, which it thereby
-  tested; its project file carries `fixture: true`, written by
-  `forge-migrate` for a slug that starts with `fixture` and shown by
-  `forge-clone`; nothing skips it: a bare `/save` saves it like any
-  repository with changes, and since its origin is the bare remote in
-  `tmp/`, nothing of it leaves the machine. On it `--apply`, the test of
-  `ours` and the test of the step of a conflict ran, the last with a
-  second clone made by hand in `tmp/` and removed after it (R6.03). The
-  bare remote is per machine, and its HEAD stands on `master`, so a
-  clone opens on the old branch and is switched to `main`. The tests of
-  POS.1750 run on it, and on it alone, as rounds of the forge by slug,
-  never on a clone of a real project (DEC.0240). Realises: POS.1750,
-  POS.1590, POS.0550. Choice: one project made by hand against
-  `scripts/fixture.py`, designed 2026-10-17 (CHL.0380, CHL.0520,
-  CHL.0610, CHL.0500) and let go with the deferred releases (DEC.0280):
-  two projects `fixture-a` and `fixture-b` from a bare remote, born in
-  the old shape the script carried, every shape kept by `--shape
-  <version>`, a project without git by `--no-git`, and a bare `/save`
-  skipping `projects/fixture*` by name; the cost of the hand-made bed is
-  that it lives on one machine and is remade by hand where a test needs
-  it. Where: `projects/fixture` and `tmp/fixture.git`, not tracked by
-  the engine, `templates/project.md` (the flag),
-  `scripts/forge_repos.py`.
+- **SOL.0830 The fixture.** `tests/fixture`: a synthetic thought
+  project of the current shape, written by hand on 2026-11-07, with a
+  made-up subject and one of each kind of document the scripts read:
+  `project.md` with `fixture: true`, the attributes and the ignore
+  file from the templates, a brief and an intent with their history
+  companions, the intent at 0.2 with one `Was`, a thread open and one
+  closed, `decisions.md` with one verdict, a critique with two
+  findings (one resolved by a record, one rejected by the verdict), a
+  challenge with one open challenge, a source with its index, an
+  empty research index, `recipes/readme.md` with its companion and
+  `README.md` as its render with provenance; the histories and the
+  indexes carry the skeletons' comments as they stand, so that the
+  light check finds nothing on it. No `ledger.md`: a test makes it.
+  Its README says that it is a test fixture and what it is for. A
+  test never touches it: the `project` fixture of `tests/conftest.py`
+  copies it into pytest's temporary directory and `repo` makes the
+  copy a repository on `main` with a local identity, one commit and a
+  bare `origin.git` beside it; `other_clone` a second clone as another
+  person's. The scripts reach the copy by its path (POS.1950). The
+  fixture project of the cutover, `projects/fixture`, made by hand
+  from a bare remote in `tmp/` as a copy of a small real project and
+  deleted on 2026-11-01 (DEC.0360), is history: on it the migration,
+  `ours` and the step of a conflict were first tried by hand (R6.03);
+  what it tried, the suite now tests (SOL.0900). Realises: POS.1940,
+  POS.1590, POS.1750. Choice: synthetic against a copy of a real
+  project (REJ.0530, DEC.0410); in the engine's tree against
+  `projects/` (gitignored) and against a bare remote in `tmp/` (per
+  machine); the cost is a fixture kept by hand to the templates,
+  which the light check's test on it enforces. Where: `tests/fixture/`,
+  `tests/conftest.py`, `templates/project.md` (the flag).
 
 - **SOL.0840 The step of a conflict.** `forge-save` leaves a conflicting
   rebase standing: the commit is made, the script prints the files in
@@ -1432,9 +1432,14 @@ boundary kept by hand or an order of work.
   in the Python spelling (`--tag`, `--engine`, `--recipe`,
   `--reference`, `--template`, `--page-size`, `-o`) against the
   PowerShell ones, since argparse is the convention of the language.
-  Portability is verified in part: the git scripts, the ledger and
-  docs-state ran on Linux (POS.0830); the conversions and the two hooks
-  have not. Where: `scripts/`.
+  Portability is verified by the suite in CI on Linux and Windows
+  (SOL.0900, POS.1960); the conversions are tested for their failure
+  without the tool alone, the per-prompt hook not at all. A script
+  takes a project by its slug or by the path of its directory,
+  `forge_repos.project_path` the one resolver, `is_path` the rule (a
+  separator or an absolute path), `project_label` how a report names
+  the target, `project_file` the name (POS.1950; 2026-11-07). Where:
+  `scripts/`.
 - **SOL.0890 The working folder.** `tmp/` at the engine root, in git
   with `tmp/README.md` and `tmp/.gitignore` (everything but the two
   ignored), its subfolders made by the scripts and commands that need
@@ -1446,6 +1451,44 @@ boundary kept by hand or an order of work.
   the session's scratchpad, so that a run is traceable on the machine
   and a profile's deny rules have one path to name; the price is a
   folder to empty by hand. Where: `tmp/README.md`, `tmp/.gitignore`.
+
+- **SOL.0900 The tests.** `tests/` at the engine root, run by pytest
+  from there (`pytest.ini`: `testpaths = tests`, `pythonpath =
+  scripts`, so the shared modules import by name); `/test` the one
+  door (`.claude/skills/test/SKILL.md`), `python -m pytest` with the
+  arguments passed through. `tests/conftest.py` holds what the tests
+  share: `load_script` (a script with a hyphen in its name loaded as a
+  module without running its main), `run_script` (a script run as the
+  forge runs it, `python scripts/<name>.py …` from the engine root,
+  with an environment), `project` (a copy of the fixture, SOL.0830),
+  `git_env` (an empty global configuration and no system one, no
+  terminal prompt), `repo` and `other_clone` (the copy as a repository
+  with a bare origin, and a second clone). The tests, one file per
+  concern: `test_hook_git.py`, the 171 built-in cases of the git hook
+  with their verdict, moved out of the hook; `test_forge_docs.py` and
+  `test_forge_check.py`, the reading cores; `test_forge_repos.py`, the
+  resolver and the project's name; `test_forge_ledger.py`, the ledger
+  on the fixture, every table, the states from records and verdicts,
+  Waiting on principal, the write without `--out`; `test_git_scripts.py`,
+  status, save, branch and pull on the throwaway repository, the step
+  of a conflict standing and finished, a standing rebase refused, the
+  derived file taken as ours with the registration and in conflict
+  without it; `test_forge_check_light.py`, the fixture conforming and
+  two planted defects found; `test_conversions.py`, md2pptx, md2docx
+  and doc2md failing on an empty PATH naming their tool. CI is
+  `.github/workflows/tests.yml`: at every push and pull request,
+  `ubuntu-latest` and `windows-latest`, Python 3.8 and 3.13, `pip
+  install pytest`, `python -m pytest`. `/release` of the engine runs
+  `/test` as its step 1a; `/save` never. Realises: POS.1930, POS.1950,
+  POS.1960, POS.1100. Choice: pytest against unittest, the convention
+  of the language and the one install; the scripts run as
+  subprocesses against importing their main, so that what is tested
+  is the command as the forge calls it; a copy of the fixture per
+  test against one shared repository, correctness bought with some
+  thirty seconds of a full run. Not tested, by the brief: what pandoc,
+  markitdown and the model return, the skills, the agents, the text of
+  CLAUDE.md, md2video's run. Where: `tests/`, `pytest.ini`,
+  `.github/workflows/tests.yml`, `.claude/skills/test/SKILL.md`.
 
 ## Open
 - **TBC.0010** (owner: principal) Mermaid diagrams in a Word file:

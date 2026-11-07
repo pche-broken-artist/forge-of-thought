@@ -448,6 +448,16 @@ scripts/                   # forge-save / forge-pull / forge-status
                            # forge_check
                            # the modules the scripts share
                            # (Persistence, Portability)
+tests/                     # the engine's tests (POS.1930): pytest
+                           # over tests/, conftest.py with what they
+                           # share, tests/fixture the synthetic
+                           # fixture project copied by every test
+                           # (POS.1940); run by /test
+pytest.ini                 # how pytest runs them: tests/ as the
+                           # path, scripts/ on the import path
+.github/workflows/tests.yml  # CI: the tests at every push and pull
+                           # request, Linux and Windows, Python 3.8
+                           # and the newest (POS.1960)
 tmp/                       # the engine's working folder: packets,
                            # envelopes and profiles of runs on
                            # another engine (tmp/research/<run>/),
@@ -613,9 +623,10 @@ process rule, not a git mechanism.
 
 **Portability.** The forge runs beyond Windows; `scripts/` is the
 only platform-bound layer and is written to run unchanged on Linux
-and macOS; the git scripts, the ledger and docs-state have run on
-Linux, the conversions and the two hooks are a writing rule until a
-run says otherwise: Python 3.8 or newer, run as `python scripts/<name>.py`
+and macOS; the tests run in CI on Linux and Windows at every push
+(POS.1960, `/test`), the conversions tested for their failure without
+the tool alone and the per-prompt hook a writing rule until a run
+says otherwise: Python 3.8 or newer, run as `python scripts/<name>.py`
 (`python` on PATH is the one prerequisite of the scripts; a system
 that has only `python3` gives it that name), with nothing
 Windows-only — paths composed with `pathlib`, external tools (`git`,

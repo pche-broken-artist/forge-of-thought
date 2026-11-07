@@ -83,6 +83,12 @@ strength for it. Read beside THR.0780, the workshop as a repository
 of its own, which decides where the threads would live. Opened
 2026-11-03.
 
+2026-11-07: the tests done, POS.1930 to POS.1960 and the brief
+`tests` mined, 221 tests green locally and in CI on Linux and
+Windows; the `.mailmap` done 2026-11-03. Open: the README more
+human, the threads as issues, the two GitHub templates, the
+homepage field.
+
 <!-- A thread (POS.1680), one file per thread in threads/; the header
 is its state: what it concerns, where it came from, whether it is
 open. The rules of a thread, its life and its closing:
