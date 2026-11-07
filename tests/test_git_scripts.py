@@ -168,3 +168,77 @@ def test_pull_refuses_unsaved_changes_and_a_diverged_history(repo, other_clone, 
     r = run_script("forge-pull", repo, env=git_env)
     assert r.returncode != 0 and "diverged" in r.stdout + r.stderr
     assert head(repo, git_env) == before                       # nothing pulled, nothing merged
+
+
+# ---- the step of a conflict (POS.1710) and the ways of merging (SOL.0730, SOL.0740)
+
+def conflicting_change(repo, other_clone, env):
+    """Both sides append a different line at the end of the same file,
+    the other's pushed, the local one not yet saved."""
+    change(other_clone, "10-intent.md", "\n- **POS.0030** A light in the shed.\n")
+    git(["commit", "-q", "-am", "other: a light"], other_clone, env)
+    git(["push", "-q"], other_clone, env)
+    change(repo, "10-intent.md", "\n- **POS.0030** A bench by the shed.\n")
+
+
+def test_a_conflict_at_save_stands_and_the_step_of_a_conflict_finishes_it(repo, other_clone, git_env, run_script):
+    conflicting_change(repo, other_clone, git_env)
+    r = run_script("forge-save", repo, "-m", "fixture: a bench", env=git_env)
+    assert r.returncode != 0
+    said = r.stdout + r.stderr
+    assert "conflict" in said and "10-intent.md" in said and "rebase --continue" in said
+    assert "nothing was lost" in said
+    # the commit is made and the rebase stands
+    assert git(["log", "-1", "--format=%s", "main"], repo, git_env) == "fixture: a bench"
+    assert "rebase in progress" in run_script("forge-status", repo, env=git_env).stdout
+    # the step of a conflict, as the message says: settle, add, continue, save again
+    text = (repo / "10-intent.md").read_text(encoding="utf-8")
+    assert "<<<<<<<" in text
+    settled = text.split("<<<<<<<")[0] + "- **POS.0030** A light in the shed.\n- **POS.0040** A bench by the shed.\n"
+    (repo / "10-intent.md").write_text(settled, encoding="utf-8")
+    git(["add", "10-intent.md"], repo, git_env)
+    git(["rebase", "--continue"], repo, {**git_env, "GIT_EDITOR": "true"})
+    r = run_script("forge-save", repo, env=git_env)
+    assert r.returncode == 0, r.stderr
+    assert "ahead of origin, pushing" in r.stdout
+    assert git(["log", "--format=%s"], repo.parent / "origin.git", git_env).splitlines()[:2] == ["fixture: a bench", "other: a light"]
+    assert "<<<<<<<" not in git(["show", "main:10-intent.md"], repo.parent / "origin.git", git_env)
+
+
+def test_a_standing_rebase_is_refused_before_anything_is_staged(repo, other_clone, git_env, run_script):
+    conflicting_change(repo, other_clone, git_env)
+    assert run_script("forge-save", repo, "-m", "fixture: a bench", env=git_env).returncode != 0
+    change(repo, "00-brief.md", "\nThe gate is on the north side.\n")
+    r = run_script("forge-save", repo, "-m", "fixture: the gate", env=git_env)
+    assert r.returncode != 0
+    assert "in progress" in r.stdout + r.stderr and "nothing was staged" in r.stdout + r.stderr
+    assert "00-brief.md" not in git(["diff", "--cached", "--name-only"], repo, git_env).splitlines()
+    assert "rebase in progress" in run_script("forge-status", repo, env=git_env).stdout
+
+
+def both_change_the_readme(repo, other_clone, env):
+    change(other_clone, "README.md", "\nMade again on the other side.\n")
+    git(["commit", "-q", "-am", "other: readme"], other_clone, env)
+    git(["push", "-q"], other_clone, env)
+    change(repo, "README.md", "\nMade again here.\n")
+
+
+def test_a_derived_file_is_taken_as_ours_where_the_driver_is_registered(repo, other_clone, git_env, run_script):
+    import forge_repos as fr
+    for key, value in fr.REGISTRATION:                     # what /setup registers, in the test's global file
+        git(["config", "--global", key, value], repo, git_env)
+    both_change_the_readme(repo, other_clone, git_env)
+    r = run_script("forge-save", repo, "-m", "fixture: readme", env=git_env)
+    assert r.returncode == 0, r.stderr + r.stdout
+    assert "saved and pushed" in r.stdout
+    text = (repo / "README.md").read_text(encoding="utf-8")
+    assert "<<<<<<<" not in text
+    # one whole side, never a merge: at a rebase, "ours" is the side rebased onto (git's own meaning)
+    assert ("Made again here." in text) != ("Made again on the other side." in text)
+
+
+def test_without_the_registration_the_same_derived_file_conflicts(repo, other_clone, git_env, run_script):
+    both_change_the_readme(repo, other_clone, git_env)
+    r = run_script("forge-save", repo, "-m", "fixture: readme", env=git_env)
+    assert r.returncode != 0
+    assert "README.md" in r.stdout + r.stderr and "conflict" in r.stdout + r.stderr
