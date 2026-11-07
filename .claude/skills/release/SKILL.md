@@ -1,5 +1,5 @@
 ---
-description: Release one repository from main — its checks with walkthrough, the documentation, README and release notes, then /save with the release message and the tag at an approved major; --auto runs through and stops only at a serious thing
+description: Release one repository from main — its tests, its checks with walkthrough, the documentation, README and release notes, then /save with the release message and the tag at an approved major; --auto runs through and stops only at a serious thing
 argument-hint: '[project-slug] [-m "message"] [--tag name] [--auto]'
 ---
 
@@ -35,6 +35,17 @@ cannot settle stays open, and the release waits for his word.
    rebase of the save (POS.1710, SOL.0530). Merging a branch into `main`
    is git's business, by hand or by merge request, never this command's
    (POS.1110). `--auto` stops here as any release does.
+1a. The engine's tests through `/test` (`.claude/skills/test/SKILL.md`),
+   when the repository released is the engine (`forge`), before any
+   check or agent runs, so that a script that broke stops the
+   release before it costs anything
+   (projects/forge/00-brief-tests.md). A red test stops the release:
+   the failures reported as `/test` reports them, back to the fix,
+   the release does not run (POS.1760). Where pytest is not
+   installed, say that the tests did not run and go on only on the
+   principal's word. A project's release runs no tests: the tests are
+   the engine's. `--auto` stops at a red test and at a missing pytest
+   alike, since each is the principal's to decide.
 2. Run the checks over the sources through the `/check` procedure
    (`.claude/skills/check/SKILL.md`) and report the result to the
    principal — always, even when clean. A project: `light` and

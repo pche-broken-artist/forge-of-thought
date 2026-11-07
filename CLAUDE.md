@@ -863,6 +863,7 @@ What a command does in full is its skill's
 | `/ledger [slug]` | state report from the ledger |
 | `/history <ID> [slug]` | the history of one item: its wording today, its records, the archive rows and the citations, by a script; Claude adds a few sentences |
 | `/check [check] [slug]` | run a check on a project or on the engine; bare = the check roster |
+| `/test [pytest arguments]` | run the engine's tests; the sum back, a red test as pytest printed it |
 | `/save [slug] [-m "message"] [--tag name] [--quick]` | save one repository, or every one with changes; `--quick` without the check |
 | `/release [slug] [-m "message"] [--tag name] [--auto]` | release one repository from `main`; `--auto` runs through and stops only at a serious thing |
 | `/pull [slug]` | look at the remote and, clean and behind, pull one repository or every one with an origin |
