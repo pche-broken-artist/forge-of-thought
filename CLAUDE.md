@@ -477,11 +477,11 @@ tmp/                       # the engine's working folder: packets,
                            # shell, POS.1200; settings.local.json:
                            # the session model — gitignored)
 templates/                 # canonical skeletons
-projects/                  # gitignored whole (projects/*) — every
-                           # project is a git repository of its own,
-                           # which the engine does not know; the
-                           # forge's own project, projects/forge,
-                           # among them (POS.1980)
+projects/                  # gitignored (projects/*) but for its
+                           # README — every project is a git
+                           # repository of its own, which the engine
+                           # does not know; the forge's own project,
+                           # projects/forge, among them (POS.1980)
 projects/<slug>/           # kind: thought — the chain
   .git/                               # the project's own repository
   .gitattributes                      # the ways of merging by path

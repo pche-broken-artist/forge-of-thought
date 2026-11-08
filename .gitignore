@@ -5,8 +5,11 @@
 /CLAUDE.local.md
 
 # Projects are repositories of their own, the forge's own project
-# among them (POS.1980); the engine tracks none
+# among them (POS.1980); the engine tracks none of them, only the
+# README of the directory (projects/*, never projects/, so that the
+# re-include works)
 projects/*
+!projects/README.md
 
 # Windows noise
 Thumbs.db
