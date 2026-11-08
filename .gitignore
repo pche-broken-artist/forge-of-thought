@@ -4,15 +4,9 @@
 # Instance facts (principal, conversation language) - never shared
 /CLAUDE.local.md
 
-# Projects are repositories of their own; the engine tracks only its
-# own project. projects/* (never projects/) so the re-include works.
+# Projects are repositories of their own, the forge's own project
+# among them (POS.1980); the engine tracks none
 projects/*
-!projects/forge
-
-# The ledger of the engine's own project is made at read time, never
-# in git (SOL.0680); in effect once the migration takes it out of the
-# index
-projects/forge/ledger.md
 
 # Windows noise
 Thumbs.db
