@@ -33,14 +33,14 @@ repeated: the walkthrough (CLAUDE.md, Working methods;
 directive 9), the language of records (prime directive 6), the
 indexes (CLAUDE.md, Document chain, External inputs).
 
-**Target.** A research is a bundle `research/YYYY-MM-DD-<topic>/`
-with one entry in `research/00-INDEX.md`: `00-plan.md` at its head
-(the plan as confirmed, then the synthesis; shape
-`templates/research-plan.md`) and one note per card per engine,
-`<card>.<engine>.md` (shape `templates/research.md`). The bundle is
-immutable from the filing of the synthesis. A research of one card
-on one engine stays a single note `research/YYYY-MM-DD-<topic>.md`
-in the note's shape, as before. English, always.
+**Target.** A research is a bundle `research/YYYY-MM-DD-<topic>/` with
+one entry in `research/00-INDEX.md`: `00-plan.md` at its head (the plan
+as confirmed, then the synthesis; shape `templates/research-plan.md`)
+and one note per card per engine, `<card>.<engine>.md` (shape
+`templates/research.md`). The bundle is immutable as
+`templates/research-plan.md` says. A research of one card on one engine
+stays a single note `research/YYYY-MM-DD-<topic>.md` in the note's
+shape, as before. English, always.
 
 **Inputs.** The topic; the project's `research/00-INDEX.md` and
 `sources/00-INDEX.md`, read for what is already known; the thread,

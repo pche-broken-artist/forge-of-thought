@@ -107,13 +107,10 @@ Why not item by item: most items are craft derived from the intent
 and a verdict on each is ceremony. Why not "read the whole":
 without the map one sees what is there, not what is missing.
 
-How the files are made: the first draft is created from
-`templates/assignment.md`, with its companion
-`20-assignment.history.md` from `templates/history.md`. The draft
-follows the ID scheme and prime directive 7 of CLAUDE.md as written
-there, and the Requirement style below; the Terms section lists only
-the prefixes and terms actually used; empty sections and all
-template comments are deleted.
+How the files are made: `templates/assignment.md` with
+`20-assignment.history.md`; the Requirement style below and prime
+directive 7 of CLAUDE.md; the Terms section lists only the prefixes and
+terms actually used; the rest is `/forge` step 2.
 
 **Requirement style.**
 - An item is an obligation in the indicative. In English **shall** /

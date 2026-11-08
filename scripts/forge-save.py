@@ -23,29 +23,29 @@ WHAT IT DOES
     generated one), then - when an origin is configured - push. Only
     where the remote's branch has moved on as well, the histories
     diverged, are the remote changes integrated first, by rebase; a
-    branch that is merely ahead is pushed as it stands, so that a
-    merge made by hand - the integrator's merge of a branch, a
-    contributor's merge of the upstream - keeps its merge commit and
-    nothing of the other side is replayed. A clean repository that is
-    ahead of its upstream - a rebase finished by hand, a push that
-    failed - is pushed the same way, so that the push has a door
-    (SOL.0780 of the forge solution design); a branch with no upstream
-    yet reaches the remote with its first commit. A rebase that
-    conflicts is left standing, the commit made and nothing lost: the
-    script prints the files in conflict and the step that follows,
-    the step of a conflict, as CLAUDE.md, Persistence, has it, then
-    this script again, which pushes the clean repository that is ahead. A
-    repository with a rebase or a merge already in progress is
-    refused before anything is staged, so that conflict markers are
-    never committed. Without an origin the commit is
-    kept locally and reported. With --tag <name> (one repository, so a
-    slug is required) the commit is tagged and the tag pushed with it;
-    when there is nothing to commit, the current HEAD is tagged, so a
-    tag can mark a state before a large change; with 'forge' the tag
-    goes on the engine alone, the upgrade channel of the forge, never
-    on the project beside it. An existing tag is refused. The script never sets an identity, a remote or
-    initialises a repository (CLAUDE.md, Persistence). It never uses
-    git add -f and never git clean.
+    branch that is merely ahead is pushed as it stands, so that a merge
+    made by hand - the integrator's merge of a branch, a contributor's
+    merge of the upstream - keeps its merge commit and nothing of the
+    other side is replayed. A clean repository that is ahead of its
+    upstream - a rebase finished by hand, a push that failed - is pushed
+    the same way, so that the push has a door (SOL.0780 of the forge
+    solution design); a branch with no upstream yet reaches the remote
+    with its first commit. A rebase that conflicts is left standing, the
+    commit made and nothing lost: the script prints the files in
+    conflict and the step that follows, the step of a conflict, as
+    CLAUDE.md, Persistence, has it, then this script again, which pushes
+    the clean repository that is ahead. A repository with a rebase or a
+    merge already in progress is refused before anything is staged, so
+    that conflict markers are never committed. Without an origin the
+    commit is kept locally and reported. With --tag <name> (one
+    repository, so a slug is required) the commit is tagged and the tag
+    pushed with it; when there is nothing to commit, the current HEAD is
+    tagged, so a tag can mark a state before a large change; with
+    'forge' the tag goes on both, the engine and the project beside it,
+    the same name, so that one release is one tag in both repositories
+    (POS.1980). An existing tag is refused. The script never sets an
+    identity, a remote or initialises a repository (CLAUDE.md,
+    Persistence). It never uses git add -f and never git clean.
 
 WHAT IT NEEDS
     Python 3.8 or newer; git on PATH. `forge_repos.py` beside it.
@@ -180,8 +180,8 @@ def main(argv):
     repos = fr.repos_to_visit(
         a.slug, "Project '{slug}' is not a repository - run 'git -C projects/{slug} init -b main' once, then save.")
     for name, path in repos:
-        # the tag on the engine alone where 'forge' names two (the upgrade channel)
-        save_repo(name, path, a.message, a.tag if path == fr.ENGINE_ROOT or len(repos) == 1 else None)
+        # the tag on both where 'forge' names two: one release, one tag in both repositories (POS.1980)
+        save_repo(name, path, a.message, a.tag)
     return 0
 
 

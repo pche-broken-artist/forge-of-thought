@@ -39,9 +39,5 @@ way of its own, cited.>
 and what stays open; when the Aim's completion is reached, <what is
 offered>: a recommendation, never a gate.
 
-How the files are made: the first <artefact> is created from
-`templates/<artefact>.md` as v0.1, with its companion
-`NN-<artefact>.history.md` from `templates/history.md`; the ledger
-reads the header (CLAUDE.md, Ledger). <PREFIX> items follow the ID scheme of
-CLAUDE.md. A write rewrites for coherence, never appends; empty
-sections and all template comments are deleted.
+How the files are made: `templates/<artefact>.md` with
+`NN-<artefact>.history.md`; <PREFIX> items; the rest is `/forge` step 2.

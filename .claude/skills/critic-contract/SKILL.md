@@ -50,16 +50,16 @@ file in `reviews/`.
 
 ## How to work
 
-- **Regression first.** Re-test every finding of your own lens marked
-  resolved since your last run; report each as verified or reopened.
-  A report without a lens suffix (`YYYY-MM-DD-critique.md`) belongs to
-  the retired single critic: its findings are yours if they fall under
-  your categories. A report named `*-check-<name>*.md` is a
-  check's: its findings share the FND sequence and are never yours.
-  Respect rejected findings — do not re-raise them
-  unless the document changed in a way that materially alters the
-  situation (then reference the DEC). An older state word reads as
-  `templates/ledger.md` (Findings) maps it.
+- **Regression first.** A filed finding is reported as CLAUDE.md,
+  Isolated reviewers, says: re-test every finding of your own lens marked
+  resolved since your last run and report each as verified or reopened in
+  the Delta summary. A report without a lens suffix
+  (`YYYY-MM-DD-critique.md`) belongs to the retired single critic: its
+  findings are yours if they fall under your categories. A report named
+  `*-check-<name>*.md` is a check's: its findings share the FND sequence
+  and are never yours. A rejected finding is re-raised only where the
+  document changed in a way that materially alters the situation (then
+  reference the DEC).
 - **New findings** carry no ID: the `/critique` procedure gives each
   the next of the project's FND sequence, in tens, and never renumbers
   (CLAUDE.md, Isolated reviewers). Severity high | medium | low;

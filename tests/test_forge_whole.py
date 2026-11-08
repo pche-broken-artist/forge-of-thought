@@ -70,15 +70,16 @@ def test_save_of_forge_commits_the_engine_and_the_project_each_its_own(engine, g
     assert "projects/forge" not in git(["ls-files"], engine, git_env)   # the engine tracks no project
 
 
-def test_the_tag_of_forge_goes_on_the_engine_alone(engine, git_env, load_script):
+def test_the_tag_of_forge_goes_on_both_the_engine_and_the_project(engine, git_env, load_script):
     proj = cut(engine, git_env)
     save = load_script("forge-save")
     change(engine, "CLAUDE.md", "\nreleased\n")
     change(proj)
     assert save.main(["forge", "-m", "release 7.0: the cut", "--tag", "v7"]) == 0
     assert git(["tag"], engine, git_env) == "v7"
-    assert git(["tag"], proj, git_env) == ""
+    assert git(["tag"], proj, git_env) == "v7"
     assert git(["tag"], engine.parent / "engine-origin.git", git_env) == "v7"
+    assert git(["tag"], engine.parent / "forge-origin.git", git_env) == "v7"
 
 
 def test_before_the_cut_a_save_of_forge_is_the_engines_commit(engine, git_env, load_script):

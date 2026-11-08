@@ -3,13 +3,11 @@ description: The history of one item by its ID — its wording today, its record
 argument-hint: "<ID> [project-slug]"
 ---
 
-The history of one item (POS.1510, SOL.0630): what the project holds
-of the item named by `$0`, printed in full for that one item and
-nothing else. Read-only; this command writes nothing and runs
-nothing but its script. This is the one way Claude reads an item's
-history before proposing a change to it (CLAUDE.md, Versioning &
-status): the log is searched by the script, never loaded whole into
-the conversation.
+The history of one item (POS.1510, SOL.0630): what the project holds of
+the item named by `$0`, printed in full for that one item and nothing
+else. Read-only; this command writes nothing and runs nothing but its
+script. The one way Claude reads an item's history before a change, as
+CLAUDE.md, Versioning & status, has it.
 
 1. The project is the slug given as the second argument, else the
    project in context (`forge` is the engine's own project); if that

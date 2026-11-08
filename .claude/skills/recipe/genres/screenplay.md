@@ -48,10 +48,9 @@ Elicitation checklist:
    shortened.
 8. **What must not appear.** Names, companies, hosts, paths outside
    the forge; the instance's facts are never material.
-9. **Languages.** The primary language — the language of the
-   sessions — and the translations made from it in the same run
-   (POS.1550); the render's notation stays English, the content is in
-   the render's language.
+9. **Languages.** The language of the sessions as the primary and which
+   translations (`languages:`, `templates/recipe.md`); the render's
+   notation stays English, the content is in the render's language.
 10. **Pace and look.** The three reading rates in words a second
     (the principal's lines, Claude's answers, file reports; 4, 8, 16
     unless the principal wants otherwise), the date shown in the tab

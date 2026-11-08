@@ -84,12 +84,9 @@ item. The map is a tool of the pass, not part of the design. End by
 naming what changed and what stays open; when the Aim's completion
 is reached, offer the approval: a recommendation, never a gate.
 
-How the files are made: the first design is created from
-`templates/solution-design.md` as v0.1, with its companion
-`40-solution-design.history.md` from `templates/history.md`; the
-ledger's Documents table reads the header. SOL and TBC follow the ID
-scheme of CLAUDE.md. A write rewrites for coherence, never appends;
-empty sections and all template comments are deleted.
+How the files are made: `templates/solution-design.md` with
+`40-solution-design.history.md`; SOL and TBC; the rest is `/forge` step
+2.
 
 **The shape of an item.**
 - A SOL is a part of the solution, or a matter that holds across

@@ -17,13 +17,14 @@ checks, documentation, README and release notes, state render, save;
 the README reads the documentation's index, so the documentation
 comes first.
 
-`--auto` runs the whole release through (POS.1100): the checks and
-their agents, the documentation, the renders and the save with the
-drafted message, no step put to the principal but the one question of the documentation (step 4) and the one proposition before the save (step 6), the model and the size of every run of
-agents said as information. It stops only where a
-thing is serious, as each step below says, and always at the tag of
-a major. Nothing is parked on the principal's behalf: what `--auto`
-cannot settle stays open, and the release waits for his word.
+`--auto` runs the whole release through (POS.1100): the checks and their
+agents, the documentation, the renders and the save with the drafted
+message, no step put to the principal but the one question of the
+documentation (step 4) and the one proposition before the save (step 6),
+the model and the size of every run of agents said as information. It
+stops only where a thing is serious, as each step below says, and always
+at the tag of a major. Nothing is parked on the principal's behalf: what
+`--auto` cannot settle stays open, and the release waits for his word.
 
 1. Determine the state from `python scripts/forge-status.py --remote`
    (the forge reads state by its script — CLAUDE.md, Persistence). A
@@ -49,25 +50,25 @@ cannot settle stays open, and the release waits for his word.
    alike, since each is the principal's to decide.
 2. Run the checks over the sources through the `/check` procedure
    (`.claude/skills/check/SKILL.md`) and report the result to the
-   principal — always, even when clean. A project: `light` and
-   `project` on it. The engine: `engine` on the engine root, and
-   `light` and `project` on `projects/forge`, the forge's own
-   project. Launched at once, awaited together. Clean: state that
-   the checks passed.
-   Findings: settle them by walkthrough (CLAUDE.md, Working methods);
-   a finding may be parked, as the `/check` procedure says, and the
-   release proceeds. Never fix silently; a finding the principal has
-   not settled when he orders the release to go on is parked by that
-   word, said aloud, since the check is advisory (POS.0430). The check
-   runs before the renders so that a fix of the
-   walkthrough — an intent bump, a changed convention — is already in
-   the inputs the renders derive from (POS.0570).
-   With `--auto`, a finding whose fix lies in the operating layer or
-   in bookkeeping and changes no position and no rule's meaning is
-   fixed and recorded by Claude without a walkthrough, as an immediate fix is today, and listed in the one proposition before the save (step 6); a finding of severity high, one whose fix
-   would change a position or a rule's meaning, or one the report
-   calls a decision, stops the release and is put to the principal.
-   Nothing is parked on his behalf.
+   principal — always, even when clean. A project: `light` and `project`
+   on it. The engine: `engine` on the engine root, and `light` and
+   `project` on `projects/forge`, the forge's own project. Launched at
+   once, awaited together. Clean: state that the checks passed.
+   Findings: settle them by walkthrough (CLAUDE.md, Working methods); a
+   finding may be parked, as the `/check` procedure says, and the
+   release proceeds. Never fix silently; a finding the principal has not
+   settled when he orders the release to go on is parked by that word,
+   said aloud, since the check is advisory (POS.0430). The check runs
+   before the renders so that a fix of the walkthrough — an intent bump,
+   a changed convention — is already in the inputs the renders derive
+   from (POS.0570). With `--auto`, a finding whose fix lies in the
+   operating layer or in bookkeeping and changes no position and no
+   rule's meaning is fixed and recorded by Claude without a walkthrough,
+   as an immediate fix is today, and listed in the one proposition
+   before the save (step 6); a finding of severity high, one whose fix
+   would change a position or a rule's meaning, or one the report calls
+   a decision, stops the release and is put to the principal. Nothing is
+   parked on his behalf.
 3. Offer `/critique essence` once, in one sentence: the lens that
    guards what a release publishes, the drift of the chain
    (POS.0400). On the principal's word run it through its own
@@ -91,46 +92,49 @@ cannot settle stays open, and the release waits for his word.
 5. Only once the findings are settled and the documentation stands,
    regenerate the repository's README and release notes from their
    recipes — unconditionally, no staleness test, always through the
-   `/render` procedure (`.claude/skills/render/SKILL.md`), never
-   through an ad-hoc subagent prompt (POS.1070). The two renders are
-   launched at once, each through the `/render` procedure, and
-   awaited together. Report the steps, including a short summary of
-   what materially changed in the regenerated files (POS.0810,
-   POS.1000): the principal rules on the delta before the commit. A
-   render made from the settled sources is current by construction;
-   its verification is `/render` step 6 (the file, its provenance),
-   not a check. Which renders a repository has is CLAUDE.md, Document
-   chain, Renders's. A project whose recipe is missing is reported (a
-   `/check` finding) and released without the render. Other renders
-   are never regenerated here; their staleness is the principal's
-   business, shown by the `/forge` map (POS.0570). Then the state
-   render: `python scripts/forge-ledger.py <slug> --out
-   renders/state.md` (for the engine `projects/forge/renders/state.md`,
-   in the project's repository),
-   the ledger as a tracked render, made only on main, so that the
-   state is on the remote where it is wanted (POS.1650); the Renders
-   table does not list it, it being the ledger itself.
-   With `--auto` the delta of the regenerated files is not ruled on here but carried into the one proposition before the save (step 6); the one stop here is a hit of the scan
-   (`/render` step 6) that the released version did not already
+   `/render` procedure (`.claude/skills/render/SKILL.md`), never through
+   an ad-hoc subagent prompt (POS.1070). The two renders are launched at
+   once, each through the `/render` procedure, and awaited together.
+   Report the steps, including a short summary of what materially
+   changed in the regenerated files (POS.0810, POS.1000): the principal
+   rules on the delta before the commit. A render made from the settled
+   sources is current by construction; its verification is `/render`
+   step 6 (the file, its provenance), not a check. Which renders a
+   repository has is CLAUDE.md, Document chain, Renders's. A project
+   whose recipe is missing is reported (a `/check` finding) and released
+   without the render. Other renders are never regenerated here; their
+   staleness is the principal's business, shown by the `/forge` map
+   (POS.0570). Then the state render: `python scripts/forge-ledger.py
+   <slug> --out renders/state.md` (for the engine
+   `projects/forge/renders/state.md`, in the project's repository), the
+   ledger as a tracked render, made only on main, so that the state is
+   on the remote where it is wanted (POS.1650); the Renders table does
+   not list it, it being the ledger itself. With `--auto` the delta of
+   the regenerated files is not ruled on here but carried into the one
+   proposition before the save (step 6); the one stop here is a hit of
+   the scan (`/render` step 6) that the released version did not already
    carry. A hit the released version carried stands as before.
 6. Then run `/save --quick` for this repository through its own
    definition (`.claude/skills/save/SKILL.md`): without the `light`
-   check, which step 2 ran already and which nothing made since
-   reads, with two things decided here: the commit message is
-   `release <intent version>: <one line>` — the line summarising the
-   rounds since the last release, from the records of the intent's
-   history since the last release, and the rows of its archive where
-   the span reaches before the log, the primary record (CLAUDE.md,
-   Versioning & status), unless `-m` was supplied; for a library,
-   whose history is git, the version is omitted and the line
-   describes what changed — and, when the intent's version is an
-   integer (an approved major), the tag `v<major>`, proposed and
-   taken on the principal's word (a rule of the procedure, not a gate
-   in the script). Before proposing the tag of a major of the forge
-   intent, name what POS.0300 of that intent asks a major to pass —
-   a reminder on the principal's word, never a gate. Any other tag is
-   his request, as `/save` has it. With `--auto` the release stops here once: one proposition carrying what it fixed on its own (step 2), one line each, what materially changed in the regenerated files (step 5) and the drafted message; the push on the principal's word (POS.1100, CHL.0700); the tag of a major is never taken by
-   `--auto`: the release stops before it and asks.
+   check, which step 2 ran already and which nothing made since reads,
+   with two things decided here: the commit message is `release <intent
+   version>: <one line>` — the line summarising the rounds since the
+   last release, from the records of the intent's history since the last
+   release, and the rows of its archive where the span reaches before
+   the log, the primary record (CLAUDE.md, Versioning & status), unless
+   `-m` was supplied; for a library, whose history is git, the version
+   is omitted and the line describes what changed — and, when the
+   intent's version is an integer (an approved major), the tag
+   `v<major>`, proposed and taken on the principal's word (a rule of the
+   procedure, not a gate in the script). Before proposing the tag of a
+   major of the forge intent, name what POS.0300 of that intent asks a
+   major to pass — a reminder on the principal's word, never a gate. Any
+   other tag is his request, as `/save` has it. With `--auto` the
+   release stops here once: one proposition carrying what it fixed on
+   its own (step 2), one line each, what materially changed in the
+   regenerated files (step 5) and the drafted message; the push on the
+   principal's word (POS.1100, CHL.0700); the tag of a major is never
+   taken by `--auto`: the release stops before it and asks.
 
 The check is advisory (POS.0430): the principal may order the release
 at any moment regardless of findings, and the findings he has not

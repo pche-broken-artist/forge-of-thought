@@ -5,8 +5,8 @@ origin: the principal     # the principal (the default) | <a document by path> |
 status: open              # open | closed
 ---
 
-<The thread. Its first sentence is its headline, its last dated
-paragraph its state (POS.1620). Opened YYYY-MM-DD.>
+<The thread. What the ledger reads of it: `templates/ledger.md`, Waiting
+on principal. Opened YYYY-MM-DD.>
 
 <!-- A thread (POS.1680), one file per thread in threads/; the header
 is its state: what it concerns, where it came from, whether it is

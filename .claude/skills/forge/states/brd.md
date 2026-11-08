@@ -190,13 +190,9 @@ stakeholders' sign-off is the instance's act, recorded where the
 instance records it, in `decisions.md` where the principal wants
 it kept.
 
-How the files are made: the first BRD is created from
-`templates/brd.md` as v0.1, with its companion `30-brd.history.md`
-from `templates/history.md`; the ledger reads the header
-(CLAUDE.md, Ledger). BR, UC, DEP, NFR, OOS, ASM, TBC and SCR items
-follow the ID scheme of CLAUDE.md; BR, UC, DEP and NFR are the
-BRD's own. A write rewrites for coherence, never appends; empty
-sections and all template comments are deleted.
+How the files are made: `templates/brd.md` with `30-brd.history.md`; BR,
+UC, DEP, NFR, OOS, ASM, TBC and SCR, of which BR, UC, DEP and NFR are
+the BRD's own; the rest is `/forge` step 2.
 
 **Requirement style.** The assignment's
 (`.claude/skills/forge/states/assignment.md`, Requirement style),

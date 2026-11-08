@@ -79,14 +79,13 @@ found not to apply.
 - what stays open: every question with its owner, and which of them
   block the delivery.
 
-**Instruments.** `/check user-stories` for the mechanics;
-`/critique clarity` with the Story style below; `/critique essence`
-for drift from the parent; `/ingest` for a requirements document put
-in; `/work` for the stories it yields; `/render` with the project's
-recipe for the export the instance hands over, a render and never
-the artefact, which leaves out every reference to a POS, since the
-stakeholders never see the intent, and the Reference line of a story
-that has no other.
+**Instruments.** `/check user-stories` for the mechanics; `/critique
+clarity` with the Story style below; `/critique essence` for drift from
+the parent; `/ingest` for a requirements document put in; `/work` for
+the stories it yields; `/render` with the project's recipe for the
+export the instance hands over, a render and never the artefact, whose
+rules for the Reference are the skeleton's,
+`templates/recipe-user-stories-export.md`.
 
 **Course.** Resolve the project, the parent the principal names and
 the stories as they stand; say whether the parent is stable enough
@@ -112,14 +111,9 @@ house scheme has it — and say that the stakeholders' approval of the
 whole is the instance's act, recorded in `decisions.md` where the
 principal wants it kept.
 
-How the files are made: the first stories are created from
-`templates/user-stories.md` as v0.1, with their companion
-`35-user-stories.history.md` from `templates/history.md`; the
-ledger reads the header (CLAUDE.md, Ledger). US items follow the ID
-scheme of CLAUDE.md and are the layer's own. A write rewrites for
-coherence, never appends; empty sections and all template comments
-are deleted. A story's past lives in the history, never in the
-story.
+How the files are made: `templates/user-stories.md` with
+`35-user-stories.history.md`; US, the layer's own; a story's past lives
+in the history, never in the story; the rest is `/forge` step 2.
 
 **Story style.**
 - A story is one function as the one who uses it meets it: one

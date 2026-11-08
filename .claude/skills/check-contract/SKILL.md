@@ -56,18 +56,14 @@ names the owner of each rule and never restates it (POS.1070).
   or break first — never by the order you found them.
 - **Advisory.** Nothing blocks (POS.0430): what becomes of a finding
   is decided at the walkthrough (`/check`), never by you.
-- **Decided once.** A finding the project's `decisions.md` records
-  as rejected by a DEC — in an older record, as overruled or as a
-  state accepted as it is — is not raised again; at most it is named
-  once as a fact, with the DEC cited.
-- **Known findings.** Before you report, read the Findings table of
-  the target's ledger (for the engine `projects/forge/ledger.md`;
-  made at read time by the command that launches you, SOL.0680)
-  and your own earlier reports in its `reviews/`
-  (`*-check-<name>*.md`). A finding already filed is reported under
-  the ID it has and never as new: still open while it stands,
-  reopened when the ledger has it resolved and it stands again. A
-  rejected one is not raised.
+- **Known findings.** A filed finding is reported as CLAUDE.md, Isolated
+  reviewers, says; before you report you read the Findings table of the
+  target's ledger (for the engine `projects/forge/ledger.md`; made at read
+  time by the command that launches you, SOL.0680) and your own earlier
+  reports in its `reviews/` (`*-check-<name>*.md`), and a known finding
+  carries its ID in a Known as line; a rejected one (an older record's
+  overruled, or a state accepted as it is, reads as rejected) is at most
+  named once as a fact, with the DEC cited.
 - **Cheap where the Lens says so.** A check that names a scope reads
   that scope and nothing more; a check that names the whole reads
   the whole, honestly, however long it takes.

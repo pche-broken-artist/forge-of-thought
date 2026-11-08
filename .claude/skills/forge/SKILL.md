@@ -45,15 +45,13 @@ is CLAUDE.md, Document chain's. This dispatcher never changes.
    the principal, offer a walkthrough of them (CLAUDE.md, Working
    methods).
 5. End with the state of the engine and of the project against the
-   origin, from `python scripts/forge-status.py --remote`, as the
-   map's last word (POS.1710): said as a fact with the words of
-   POS.1490 (up to date, behind, ahead, diverged, no origin) and with
-   that state's one offer, as `/pull` step 1 has it, and, from the
-   same run, what waits on GitHub outside git: the open pull requests
-   and the unanswered discussions, each in one line, or the one line
-   saying it could not be read and why (POS.1970); the offer is to
-   look at it before anything is written into the project. The map
-   says it looked at the remote and runs none of it.
+   origin, from `python scripts/forge-status.py --remote`, as the map's
+   last word (POS.1710): said as a fact with the words of POS.1490 (up
+   to date, behind, ahead, diverged, no origin) and with that state's
+   one offer, as `/pull` step 1 has it, and, from the same run, what
+   waits on GitHub outside git (POS.1970), relayed as the script prints
+   it; the offer is to look at it before anything is written into the
+   project. The map says it looked at the remote and runs none of it.
 
 **`/forge <state>` — work on that artefact.**
 1. Resolve `.claude/skills/forge/states/$0.md`. If it does not exist, list
@@ -62,6 +60,12 @@ is CLAUDE.md, Document chain's. This dispatcher never changes.
    there.
 2. Read the file and follow it. It declares the target artefact, its
    inputs and its working rules; everything else (write-once-per-round,
-   versioning, ledger upkeep) follows the core conventions. A state
-   file's arguments are those following the state name: for `brief`
-   the name, then the slug; for the other states the slug.
+   versioning, ledger upkeep) follows the core conventions. How the
+   files of every artefact are made: the first version is created from
+   its template as v0.1 with its companion from `templates/history.md`,
+   the ledger reads the header (CLAUDE.md, Ledger), items follow the ID
+   scheme of CLAUDE.md, a write rewrites for coherence and never
+   appends, and empty sections and all template comments are deleted; a
+   definition names only its files, its prefixes and what is its own. A
+   state file's arguments are those following the state name: for
+   `brief` the name, then the slug; for the other states the slug.

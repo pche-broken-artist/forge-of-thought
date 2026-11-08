@@ -84,8 +84,8 @@ class Project:
         self.proj = fr.project_path(slug)
         if not self.proj.is_dir():
             fr.fail(f"Project '{slug}' not found ({self.proj} does not exist).")
-        # the repository the project's git is read from: its own, or the
-        # engine's while the engine tracks it (POS.1980); asked once;
+        # the repository the project's git is read from: its own
+        # (POS.1980); asked once;
         # under_git False: no git is run (POS.0550)
         self.under_git = fr.own_repo(self.proj) or fr.inside_engine(self.proj)
         self.repo = fr.ENGINE_ROOT if fr.inside_engine(self.proj) else self.proj

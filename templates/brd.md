@@ -9,10 +9,9 @@ parent: 20-assignment.md   # 20-assignment.md | 10-intent.md; a BRD from a sourc
 
 <!-- The history lives in the companion 30-brd.history.md
 (templates/history.md), never here. The rules of every section:
-`.claude/skills/forge/states/brd.md`. Items are lists with IDs; a
-table only where columns carry data. No value anywhere in this
-skeleton stands as a requirement: a value comes from the
-stakeholders or is a TBC with an owner. -->
+`.claude/skills/forge/states/brd.md`. Items are lists with IDs; a table
+only where columns carry data. No value in this skeleton stands as a
+requirement (the Requirement style of the definition). -->
 
 ## Purpose & Context
 <!-- Two to four paragraphs, from the parent's. Why this exists and
@@ -81,12 +80,11 @@ The parent of a use case is its Carries line. -->
 | … | … | … |
 
 ## Business requirements
-<!-- BR.NNNN. Numbering: CLAUDE.md, ID scheme; wording: the
-Requirement style of `.claude/skills/forge/states/brd.md`. Groups
-by capability or process, so that every stakeholder finds theirs
-and nothing is twice; a rule not known is a BR or an NFR citing
-its TBC of Open questions in brackets, defined there once with its
-owner. Every item ends with its parent: (REQ.NNNN) or (POS.NNNN). -->
+<!-- BR.NNNN. Numbering: CLAUDE.md, ID scheme; wording: the Requirement
+style of `.claude/skills/forge/states/brd.md`. Groups by capability or
+process, so that every stakeholder finds theirs and nothing is twice;
+the parent, the TBC and the wording of an item: the Requirement style.
+-->
 
 ### <Group>
 - **BR.0010** … (REQ.NNNN)
@@ -108,12 +106,10 @@ Roster: <path> | none
 
 ## Qualities
 <!-- NFR.NNNN, one per category that applies; the categories are the
-skeleton's (ISO/IEC 25010 and the practice of a regulated business),
-the values the stakeholders'. No value from here: a category without
-a value is a TBC with an owner. The same rules as a BR. An NFR ends
-with the REQ or POS it follows from, or with its category where the
-parent named none. Delete the categories found not to apply, with
-the reason in the Touched areas or here. -->
+skeleton's (ISO/IEC 25010 and the practice of a regulated business), the
+values the stakeholders'; a category without one, the parent and the
+wording: the Requirement style. Delete the categories found not to
+apply, with the reason in the Touched areas or here. -->
 - **NFR.0010** Reliability (service hours, availability, fault
   tolerance, recovery point, recovery time): The <thing> shall meet
   the service hours, availability and recovery the stakeholders set
@@ -154,10 +150,9 @@ by the parent. -->
 - **SCR.0010** …
 
 ## Open questions
-<!-- Each with an owner (a role), and whether it blocks estimation.
-Questions whose answer must come from outside the forge — the
-supplier, the systems' owners, a standard — stand here with that
-owner. -->
+<!-- Each TBC as the Requirement style has it. Questions whose answer
+must come from outside the forge — the supplier, the systems' owners, a
+standard — stand here with that owner. -->
 - **TBC.0010** (owner: <role> | unassigned; blocks estimation: yes | no) …
 
 **To be supplied from outside:** <!-- the list the pass ends with:

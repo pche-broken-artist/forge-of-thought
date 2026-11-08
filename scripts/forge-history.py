@@ -31,13 +31,11 @@ WHAT IT DOES
          --full is given;
       3. Cited today: every other place in the project that names the
          ID, as file:line and the line, shortened: decisions, threads,
-         the ledger, reviews, challenges and the other artefacts.
-    Every long text is wrapped at 78 columns with a hanging indent.
-    An ID with no item and no record is said so. The history is read
-    here and printed for the one item, never loaded whole into the
-    conversation (CLAUDE.md, Versioning & status): this script is the
-    one way Claude reads an item's history before proposing a change
-    to it (`/history`, `.claude/skills/history/SKILL.md`).
+         the ledger, reviews, challenges and the other artefacts. Every
+         long text is wrapped at 78 columns with a hanging indent. An ID
+         with no item and no record is said so. The history is read here
+         and printed for the one item (`/history`,
+         `.claude/skills/history/SKILL.md`).
 
 WHAT IT NEEDS
     Python 3.8 or newer. `forge_repos.py` and `docs_map.py` beside it.

@@ -146,9 +146,8 @@ before it is written, and the headings are the principal's to
 rename. The step is the principal's to ask for, never a condition
 of the approval.
 
-How the files are made: a new brief is created from
-`templates/brief.md` (the minimal YAML header, nothing else) with
-its companion `<file>.history.md` from `templates/history.md`; the
-ledger's Briefs table reads the header and the mining record of the
-intent's history (pending until one exists), and the whole is mined
-by `/forge intent`.
+How the files are made: `templates/brief.md` (the minimal YAML header,
+nothing else) with `<file>.history.md`; the ledger's Briefs table reads
+the header and the mining record of the intent's history (pending until
+one exists), and the whole is mined by `/forge intent`; the rest is
+`/forge` step 2.

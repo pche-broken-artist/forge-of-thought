@@ -10,10 +10,9 @@ parent: 30-brd.md        # 30-brd.md | 10-intent.md (a small change, on the prin
 <!-- The history lives in the companion 35-user-stories.history.md
 (templates/history.md), never here. The rules:
 `.claude/skills/forge/states/user-stories.md`, the Story style above
-all. The document carries the stories only. Groups are plain
-headings without IDs and are optional. Reference is the one part
-every story has; Edge cases, Risks, Note and Questions are left out
-where a story has nothing for them, never left empty. -->
+all. The document carries the stories only. Groups are plain headings
+without IDs and are optional. Which parts a story has and which it
+leaves out: the Story style. -->
 
 ## <Group, optional>
 

@@ -20,38 +20,10 @@ WHAT IT DOES
     of the Lens the script does not verify, so that the script and the
     agent can be compared clause by clause.
 
-    light <slug>: the bookkeeping of one project, the rules read from
-    CLAUDE.md (Versioning & status) and the templates (history.md,
-    thread.md, index.md, index-bundle.md, ledger.md, project.md, the
-    skeleton of each versioned document):
-      1. front-matter and history: the header keys of every versioned
-         document against its skeleton, version and status and their
-         agreement, the companion beside it with the skeleton's header
-         and comment, every record in the shape of the log, the kinds,
-         the state words, the order, `created` without a reason,
-         `closed` without a Was, the newest record at the header's
-         version, no Version History table left;
-      2. the ledger's own reports: the ledger is composed in memory by
-         forge-ledger.py (nothing written) and each `unparsed:` line
-         and each line of its Reports section is a finding; a project
-         of the shape before the migration is one finding and nothing
-         else (templates/project.md);
-      3. records and companions: the published companions against the
-         files of published/ and the keys of /publish step 6; a work
-         file citing an item its specification's Inputs do not name
-         (POS.1520); every thread file with the header of
-         templates/thread.md, its id the file's name, its concerns a
-         state of the forge, its origin one the template knows, its
-         birth recorded in a history, a closed one with its `closed`
-         record; a Verdict word the decisions skeleton does not know;
-      4. dependencies: every path of the ledger's Dependencies table on
-         disk (POS.1020), a missing one advisory;
-      5. resource indexes: sources/00-INDEX.md and research/00-INDEX.md
-         with the skeleton's header and comment, every file registered
-         and every entry a file, a bundle with its inner index in the
-         bundle skeleton's shape and its files catalogued there, the
-         Date and Form fields of a sources entry in the skeleton's
-         vocabulary, the three fields of a research entry.
+    light <slug>: the bookkeeping of one project, the clauses of the
+    Lens of .claude/agents/check-light.md that are a comparison of
+    files; the clauses it leaves to reading are named in the report's
+    Left to reading section.
     Reads only. Exit code 0 always; the report is the result.
 
 WHAT IT NEEDS

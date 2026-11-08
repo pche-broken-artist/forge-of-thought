@@ -70,20 +70,21 @@ External inputs). `/challenge <persona> intent`: the independent reality check,
 offered once the joint one is done, never run on Claude's own
 judgement.
 
-**Course.** Resolve the project and read the inputs and the intent
-as it stands. The ways in: no intent yet, and the briefs
-are consolidated into the first one; a brief pending or
-partial, and it is mined whole by whole, one brief at a time; an
-open thread, a new word of the principal's or what the recipients
-sent back, and the round starts there. Briefs are offered before
-threads. Within a round one theme at a time; the reality check
-comes last, before a lower layer is proposed. On the write,
-resolved threads move into positions or rejections and the Mined
-column of every brief touched is kept (write once per round,
-versioning and ledger: CLAUDE.md); a position written or rewritten carries one date and no trial, count or plan, the way to it going into its record (POS.0120). End by naming what changed and
-what stays open; when the Aim's completion is reached, name the
-layers that can follow from it, or offer the approval where the
-principal takes none: a recommendation, never a gate.
+**Course.** Resolve the project and read the inputs and the intent as it
+stands. The ways in: no intent yet, and the briefs are consolidated into
+the first one; a brief pending or partial, and it is mined whole by
+whole, one brief at a time; an open thread, a new word of the
+principal's or what the recipients sent back, and the round starts
+there. Briefs are offered before threads. Within a round one theme at a
+time; the reality check comes last, before a lower layer is proposed. On
+the write, resolved threads move into positions or rejections and the
+Mined column of every brief touched is kept (write once per round,
+versioning and ledger: CLAUDE.md); a position written or rewritten
+carries one date and no trial, count or plan, the way to it going into
+its record (POS.0120). End by naming what changed and what stays open;
+when the Aim's completion is reached, name the layers that can follow
+from it, or offer the approval where the principal takes none: a
+recommendation, never a gate.
 
 **Threads and files.** The threads are files, `threads/THR.NNNN.md`
 from `templates/thread.md`, one per thread (POS.1680), and are part
@@ -103,15 +104,12 @@ is to be achieved and why; what realises it is named in the
 solution design where the project has one, and in the item where it
 has none (POS.0120).
 
-How the files are made: the first intent is created from
-`templates/intent.md` as v0.1, with its companion
-`10-intent.history.md` from `templates/history.md` and an empty
-`threads/`. A write rewrites for coherence, never appends; the text
-is in the project's language (CLAUDE.md, prime directive 6); POS,
-FCT, THR and REJ follow the ID scheme of CLAUDE.md. The mining of a
-brief is the mining record as `templates/history.md` has it (the
-records of state; POS.1610), written at the round that mines; the
-ledger's Briefs table reads the newest. Whatever
-remains unsettled is saved into its thread before the session ends
-(CLAUDE.md, Ledger); the ledger is remade after the write,
-`python scripts/forge-ledger.py <slug>`.
+How the files are made: `templates/intent.md` with
+`10-intent.history.md` and an empty `threads/`; POS, FCT, THR and REJ;
+the text in the project's language (CLAUDE.md, prime directive 6); the
+rest is `/forge` step 2. The mining of a brief is the mining record as
+`templates/history.md` has it (the records of state; POS.1610), written
+at the round that mines; the ledger's Briefs table reads the newest.
+Whatever remains unsettled is saved into its thread before the session
+ends (CLAUDE.md, Ledger); the ledger is remade after the write, `python
+scripts/forge-ledger.py <slug>`.

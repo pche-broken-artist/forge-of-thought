@@ -56,20 +56,20 @@ WHAT IT DOES
     file (CLAUDE.local.md, `Author:`); without it the script refuses.
     `--apply` refuses, where the project is a repository of its own
     (forge_repos.own_repo), a working tree with unsaved changes to
-    tracked files (an untracked file is no risk: --undo restores
-    tracked files), a branch behind or diverged from its origin and
-    any branch but main: the migration is one large change, run once,
-    on one clone; everyone else pulls. A project outside git gets none
-    of these refusals: the forge runs no git on it, the way back is
-    the backup its user takes before --apply, --undo refuses there,
-    and a run that stops midway is finished by running it again, the
-    marks being the memory (POS.1740). It commits nothing; `/save`
-    follows. `--undo` takes back the last `--apply` from the script's
-    own manifest (tmp/forge-migrate-<slug>.json at the engine root):
-    changed and deleted tracked files restored from the index, created
-    files removed, the ledger put back into the index, the .gitignore
-    line taken out. The slug `forge` is the engine's own project,
-    whose repository is the engine.
+    tracked files (an untracked file is no risk: --undo restores tracked
+    files), a branch behind or diverged from its origin and any branch
+    but main: the migration is one large change, run once, on one clone;
+    everyone else pulls. A project outside git gets none of these
+    refusals: the forge runs no git on it, the way back is the backup
+    its user takes before --apply, --undo refuses there, and a run that
+    stops midway is finished by running it again, the marks being the
+    memory (POS.1740). It commits nothing; `/save` follows. `--undo`
+    takes back the last `--apply` from the script's own manifest
+    (tmp/forge-migrate-<slug>.json at the engine root): changed and
+    deleted tracked files restored from the index, created files
+    removed, the ledger put back into the index, the .gitignore line
+    taken out. The slug `forge` is the forge's own project, a repository
+    of its own beside the engine (POS.1980).
 
 WHAT IT NEEDS
     Python 3.8 or newer; git on PATH. forge_repos.py and forge_tools.py

@@ -37,14 +37,12 @@ shift of direction. Running it on a near-final artefact is late but
 not useless.
 
 When it returns:
-1. File the report. Write it into the project as
-   `challenges/YYYY-MM-DD-challenge-<persona>.md`: the agent's text
-   word for word, its front-matter included, nothing added, dropped or
-   reworded but the IDs: the next free `CHL.NNNN` of the project's
-   sequence, in tens, set at the head of each challenge; then `python
-   scripts/forge-report.py <path>`; the printed name is the one the
-   ledger cites. Then `python scripts/forge-ledger.py <slug>`: how the
-   report becomes rows is `templates/ledger.md`'s (Challenges).
+1. File the report as `/check` step 1 files one
+   (`.claude/skills/check/SKILL.md`): under
+   `challenges/YYYY-MM-DD-challenge-<persona>.md`, the agent's text with
+   its own front-matter, the next free `CHL.NNNN` at the head of each
+   challenge; how the report becomes rows is `templates/ledger.md`'s
+   (Challenges).
 2. Present it to the principal: the overall
    read first, then each
    challenge compressed to two or three sentences. Do not editorialise and

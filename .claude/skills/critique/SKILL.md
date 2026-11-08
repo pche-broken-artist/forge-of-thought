@@ -34,15 +34,11 @@ naming the target if given. Pass only the project path and the
 target, nothing else (CLAUDE.md, Isolated reviewers).
 
 When it returns:
-1. File the report. Write it into the project as
-   `reviews/YYYY-MM-DD-critique-<lens>.md`: the agent's text word for
-   word, its front-matter included, nothing added, dropped or reworded
-   but the IDs: the next free `FND.NNNN` of the project's sequence, in
-   tens, set at the head of each new finding and listed in the delta
-   summary's New line; then `python scripts/forge-report.py <path>`;
-   the printed name is the one the ledger cites. Then `python
-   scripts/forge-ledger.py <slug>`: how the report becomes rows is
-   `templates/ledger.md`'s (Findings); a finding the report has as
+1. File the report as `/check` step 1 files one
+   (`.claude/skills/check/SKILL.md`): under
+   `reviews/YYYY-MM-DD-critique-<lens>.md`, the agent's text with its own
+   front-matter, the next free `FND.NNNN` at the head of each new finding
+   and listed in the delta summary's New line; a finding the report has as
    newly obsolete gets a DEC with the Verdict `obsolete` at the
    walkthrough.
 2. Present the delta summary to the principal in the conversation

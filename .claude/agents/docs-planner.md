@@ -141,10 +141,7 @@ them; `evidence` for a derived page, what it is put together from
 and by what reasoning, so that the writer derives and does not
 invent.
 
-A page's `state` beyond `new` and `remove` is set by the script
-`scripts/docs-state.py` from the content of the inputs after you
-wrote the map; write `new` for a page without a previous entry,
-`keep` for one with, `remove` for one that lost its material.
+A page's `state`: Stable names below.
 
 Rules of the entry:
 
@@ -174,10 +171,11 @@ Rules of the entry:
   `evidence` says the derivation. What no file supports goes to
   Unowned.
 - **Stable names.** Lowercase, hyphens, the job or the topic as the
-  name, never a number. With a previous map, keep every path that
-  still has material and mark it `keep`; mark `remove` what has no
-  material any more; `regenerate` is the script's to set from the
-  hashes, never yours. Without a previous map every page is `new`.
+  name, never a number. With a previous map, keep every path that still
+  has material and mark it `keep`; mark `remove` what has no material
+  any more; `regenerate` is the script's (`scripts/docs-state.py`) to
+  set from the hashes, never yours. Without a previous map every page is
+  `new`.
 - **One topic.** What is not of the page's topic is a link to the
   page whose topic it is.
 - **`must-not` narrows, never blinds.** It names what the page must

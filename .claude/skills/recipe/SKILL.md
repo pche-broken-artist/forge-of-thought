@@ -31,16 +31,14 @@ changes.
    checklist and the skeleton. A genre file's arguments are those
    following the genre name. Every genre runs in the same frame: the
    checklist closes with the **language** question — the render's
-   language, or languages where the genre allows a primary and its
-   translations (`languages:`), is what the recipe declares
-   (CLAUDE.md, prime directive 6); propose the project's language
-   from its project file (`project.md`) and ask, never assume — and the recipe is
-   then composed from the genre's
-   skeleton, unused placeholders and all template comments deleted.
-   The recipe is composed with the
-   principal — options and trade-offs offered, decisions his — and
-   written once per round on confirmation, per CLAUDE.md, Versioning
-   & status (a recipe: a version and no status), into
-   `recipes/<recipe>.history.md` — created from `templates/history.md`
-   with the recipe.
+   language, or languages where the genre allows them (`languages:`,
+   `templates/recipe.md`), is what the recipe declares (CLAUDE.md, prime
+   directive 6); propose the project's language from its project file
+   (`project.md`) and ask, never assume — and the recipe is then
+   composed from the genre's skeleton, unused placeholders and all
+   template comments deleted. The recipe is composed with the principal
+   — options and trade-offs offered, decisions his — and written once
+   per round on confirmation, per CLAUDE.md, Versioning & status (a
+   recipe: a version and no status), into `recipes/<recipe>.history.md`
+   — created from `templates/history.md` with the recipe.
 3. After writing, offer `/render <recipe>` as the natural next step.

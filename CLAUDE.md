@@ -53,25 +53,20 @@ forge is what they are told.
    principal publishes. A missing section (e.g. success criteria) may be a
    deliberate delegation to the recipients, not a defect.
 6. **Language:** conversation in the principal's language (set in
-   `CLAUDE.local.md`); the artefacts of the chain — intent,
-   assignment, later layers — and the documentation in the project's
-   language: the
-   `language` of its project file (`project.md`, POS.1590), English
-   when absent. Records, state, research and recipes are always
-   English: they are read by Claude, the reviewers and the checks,
-   never handed to the recipients. English is the notation throughout
-   (ID prefixes, status words, front-matter keys). The forge
-   dictates only that one output language per project, and the
-   conversation language is per-instance configuration that never
-   appears in outward-facing renders (the README among them).
-   Translate on write. A work specification follows the artefacts;
-   its file is in
-   the language its `## Making` says. The one exception among the
-   artefacts is the briefs
-   (`00-brief*.md`), kept in whatever language they are written in.
-   A render may be in any language, or languages, its recipe
-   declares: the first primary, the rest its translations, one
-   render per language.
+   `CLAUDE.local.md`); the artefacts of the chain — intent, assignment,
+   later layers — and the documentation in the project's language: the
+   `language` of its project file (`project.md`, POS.1590), English when
+   absent. Records, state, research and recipes are always English: they
+   are read by Claude, the reviewers and the checks, never handed to the
+   recipients. English is the notation throughout (ID prefixes, status
+   words, front-matter keys). The forge dictates only that one output
+   language per project, and the conversation language is per-instance
+   configuration that never appears in outward-facing renders (the
+   README among them). Translate on write. A work specification follows
+   the artefacts; its file is in the language its `## Making` says. The
+   one exception among the artefacts is the briefs (`00-brief*.md`),
+   kept in whatever language they are written in. A render may be in any
+   language, or languages, its recipe declares (Renders).
 7. **Structure over prose.** Items with stable IDs, even at very high
    abstraction. Narrative only in Purpose & Context and Objective.
 8. **Assignments are complete and precise.** An assignment carries the
@@ -345,22 +340,21 @@ POS.1320.
    check (POS.1910). A recipe may be composed through a genre interview
    (`/recipe <genre>`, skeleton `templates/recipe-<genre>.md`); a render
    may cite another render as a picture source when the recipe declares
-   it among its inputs. A recipe may declare several languages
-   (`languages:`), the first primary, the rest translated from it in the
-   same run, one render per language; its `output:` may send a public
-   file into the engine's `docs/videos/`, the one public folder, served
-   by GitHub Pages and left alone by `/document`. The ledger's Renders
-   table mirrors the provenance; its Published table says what each
-   published file was made from and whether it is `current` or `stale`.
-   Every project has a README as a render of its own `recipes/readme.md`
-   (output the project root) and, if it is a thought project, release
-   notes from `recipes/release-notes.md` — the same mechanism as the
-   engine's own README and release notes; every `/release` of the
-   project regenerates them. A library has a README only: a catalogue of
-   what it holds. Both are genres of `/recipe`, scaffolded by
-   `/new-project`. A project may carry `logo.png` in its root as the
-   repository avatar, supplied by the principal; optional, never a
-   finding.
+   it among its inputs. A recipe may declare its languages and an output
+   path (`languages:`, `output:`, what each means:
+   `templates/recipe.md`); an output in the engine's `docs/videos/` is
+   the one public folder, served by GitHub Pages and left alone by
+   `/document`. The ledger's Renders table mirrors the provenance; its
+   Published table says what each published file was made from and
+   whether it is `current` or `stale`. Every project has a README as a
+   render of its own `recipes/readme.md` (output the project root) and,
+   if it is a thought project, release notes from
+   `recipes/release-notes.md` — the same mechanism as the engine's own
+   README and release notes; every `/release` of the project regenerates
+   them. A library has a README only: a catalogue of what it holds. Both
+   are genres of `/recipe`, scaffolded by `/new-project`. A project may
+   carry `logo.png` in its root as the repository avatar, supplied by
+   the principal; optional, never a finding.
 5. **Documentation** is generated, never composed by hand: pages of
    one topic each in `docs/` with an index, for the user, the
    extender and the evaluator, in a standard outline of five
@@ -633,21 +627,20 @@ beside it where it is cloned, each its own commit with the prefix
 (POS.1980). Immutability of documents is a process rule, not a git
 mechanism.
 
-**Portability.** The forge runs beyond Windows; `scripts/` is the
-only platform-bound layer and is written to run unchanged on Linux
-and macOS; the tests run in CI on Linux and Windows at every push
-(POS.1960, `/test`), the conversions tested for their failure without
-the tool alone and the per-prompt hook a writing rule until a run
-says otherwise: Python 3.8 or newer, run as `python scripts/<name>.py`
-(`python` on PATH is the one prerequisite of the scripts; a system
-that has only `python3` gives it that name), with nothing
-Windows-only — paths composed with `pathlib`, external tools (`git`,
-`markitdown`, `pandoc`, `claude`) resolved from PATH, usage examples
-in the scripts' help free of Windows-specific paths and
-invocations (POS.0830). Each script carries its help in its module
-docstring; what several scripts share lives in a module beside them
-(`forge_repos.py`, `forge_tools.py`, `forge_docs.py`, `docs_map.py`,
-`forge_check.py`), never twice.
+**Portability.** The forge runs beyond Windows; `scripts/` is the only
+platform-bound layer and is written to run unchanged on Linux and macOS;
+the tests run in CI at every push (POS.1960, `/test`; the matrix:
+Repository layout), the conversions tested for their failure without the
+tool alone and the per-prompt hook a writing rule until a run says
+otherwise: Python 3.8 or newer, run as `python scripts/<name>.py`
+(`python` on PATH is the one prerequisite of the scripts; a system that
+has only `python3` gives it that name), with nothing Windows-only —
+paths composed with `pathlib`, external tools (`git`, `markitdown`,
+`pandoc`, `claude`) resolved from PATH, usage examples in the scripts'
+help free of Windows-specific paths and invocations (POS.0830). Each
+script carries its help in its module docstring; what several scripts
+share lives in a module beside them (`forge_repos.py`, `forge_tools.py`,
+`forge_docs.py`, `docs_map.py`, `forge_check.py`), never twice.
 
 Two doors, two speeds. `/save` runs its check and then commits and
 pushes on whatever branch is checked out, no render; `--quick` leaves
@@ -782,22 +775,23 @@ lets no instance fact into what it returns (POS.0950). The research
 agent's brief carries the same in its own words, because its packet
 also goes to an engine that reads no file of the forge.
 
-All run as isolated subagents that never see the working conversation: a
-reviewer reads the project's documents and the engine's rules, carries
-what every subagent carries (this file and the instance file, POS.0950),
-and a challenger may search the web; on the session model (`model:
-inherit` — the whole forge runs on one model; speed is bought with
-context, never with a weaker reviewer). One shape, strictly separate
-jobs, each with its own output (below). All are invoked by hand and
-settled by walkthrough; the reports are immutable and dated. Every agent
-returns its report with its findings unnumbered and writes nothing; the
-command numbers it and files it, one report at a time, so that no ID is
-given twice (POS.1140). No reviewer runs on Claude's own judgement; what
-a save and a release run is theirs to say (Persistence). The challenger
-has personas, the critic has lenses, the check has checks: one agent
-file each (`challenger-<persona>`, `critic-<lens>`, `check-<name>`), the
-shared behaviour of each kind preloaded from one contract skill
-(`.claude/skills/challenger-contract/SKILL.md`,
+All are such subagents, a reviewer reading the project's documents and
+the engine's rules, a challenger allowed to search the web; on the
+session model (`model: inherit` — the whole forge runs on one model;
+speed is bought with context, never with a weaker reviewer). One shape,
+strictly separate jobs, each with its own output (below). All are
+invoked by hand and settled by walkthrough; the reports are immutable
+and dated. Every agent returns its report with its findings unnumbered
+and writes nothing; the command numbers it and files it, one report at a
+time, so that no ID is given twice (POS.1140). A filed finding is
+reported under the ID it has, still open, reopened or verified resolved,
+and a rejected one is not raised again; the state words are
+`templates/ledger.md`'s. No reviewer runs on Claude's own judgement;
+what a save and a release run is theirs to say (Persistence). The
+challenger has personas, the critic has lenses, the check has checks:
+one agent file each (`challenger-<persona>`, `critic-<lens>`,
+`check-<name>`), the shared behaviour of each kind preloaded from one
+contract skill (`.claude/skills/challenger-contract/SKILL.md`,
 `.claude/skills/critic-contract/SKILL.md`,
 `.claude/skills/check-contract/SKILL.md`, named in the agent's
 front-matter; the skeleton of a lens file is
@@ -809,16 +803,14 @@ isolation, the subject and its boundary, the way of working and the
 shape of the output; a Lens section is a specialisation of its contract,
 never a replacement — it may narrow what is read or make a shared rule
 stricter, never rename, drop or duplicate a shared rule or field, and
-the protocol changes in the contract alone. Instance facts — whatever
-`CLAUDE.local.md` and the assistant's memory carry: names, roles,
-addresses, hosts — never enter a reviewer's report, not even where they
-would explain a finding: a report is a public file, or may be quoted
-into one. Bare `/challenge`, `/critique` and `/check` list the roster —
-the `description` of each agent file — and recommend a fit. The critic
-and the challenger take an optional target, an artefact named as
-`/forge` names it, by its state file, or any file of the project by its
-path; without one, the whole chain. A check takes a project by its slug,
-or the engine.
+the protocol changes in the contract alone. A report is a public file,
+or may be quoted into one: the rule on instance facts above holds even
+where a fact would explain a finding. Bare `/challenge`, `/critique` and
+`/check` list the roster — the `description` of each agent file — and
+recommend a fit. The critic and the challenger take an optional target,
+an artefact named as `/forge` names it, by its state file, or any file
+of the project by its path; without one, the whole chain. A check takes
+a project by its slug, or the engine.
 - **critic** (`/critique <lens> [artefact]`) — document quality, never
   substance. What each lens reads and goes after is its agent file's,
   the shared conduct and the report shape the contract's. Produces `FND`
@@ -833,14 +825,13 @@ or the engine.
   (`YYYY-MM-DD-challenge-<persona>-HHMM-<hash>.md`).
   Challenge states: as `templates/ledger.md` has them. An accepted
   challenge is mended where it needs to be (POS.0440).
-- **checks** (`/check <check> [slug]`) — mechanical conformance with
-  the conventions, never substance or quality. Each check owns one
-  concern and none another's; what each verifies is its agent file's,
-  the conduct and the report shape the contract's. `FND` in `reviews/`
+- **checks** (`/check <check> [slug]`) — mechanical conformance with the
+  conventions, never substance or quality. Each check owns one concern
+  and none another's; what each verifies is its agent file's, the
+  conduct and the report shape the contract's. `FND` in `reviews/`
   (`YYYY-MM-DD-check-<name>-HHMM-<hash>.md`), states as
-  `templates/ledger.md` has them; a run that finds nothing files
-  nothing. Composition is
-  the caller's (`/save`, `/release`); checks never call each other.
+  `templates/ledger.md` has them. Composition is the caller's (`/save`,
+  `/release`); checks never call each other.
 
 ## Spin-off rule
 A requirement group becomes its own project **only by explicit decision of

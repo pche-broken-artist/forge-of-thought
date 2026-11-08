@@ -20,10 +20,9 @@ tests run on copies of the fixture `tests/fixture` in a temporary
 directory and on no repository of the forge (DEC.0240); nothing of
 the engine or of a project changes.
 
-Where pytest is not installed (`No module named pytest`), say that
-the tests did not run and how to install the one thing a contributor
-needs beyond `python`: `python -m pip install pytest`. The same
-suite runs in CI at every push (`.github/workflows/tests.yml`), on
-Linux and Windows, Python 3.8 and the newest; what `/release` does
+Where pytest is not installed (`No module named pytest`), say that the
+tests did not run and how to install the one thing a contributor needs
+beyond `python`: `python -m pip install pytest`. The same suite runs in
+CI at every push (`.github/workflows/tests.yml`); what `/release` does
 with a red test is its own (`.claude/skills/release/SKILL.md`), and
 `/save` never runs them (`.claude/skills/save/SKILL.md`).

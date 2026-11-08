@@ -12,13 +12,13 @@ derived_from: <the plan: research/YYYY-MM-DD-<topic>/00-plan.md, card N; the kno
 
 # <Title: the card's question as a statement>
 
-<!-- The research note: one card, one engine, one note. The one owner
-of the note's shape (POS.1070); the agent's brief that makes it is
-`.claude/skills/research/SKILL.md`, The agent's brief. A note is
-written in English, hard-wrapped at about 72 columns in prose, and
-immutable from its filing (CLAUDE.md, Document kinds). A single
-research of one card on one engine uses this template with `run`
-and `engine` as they are. -->
+<!-- The research note: one card, one engine, one note. The one owner of
+the note's shape (POS.1070); the agent's brief that makes it is
+`.claude/skills/research/SKILL.md`, The agent's brief. A note is written
+in English, hard-wrapped as CLAUDE.md, Document kinds, says, and
+immutable from its filing (CLAUDE.md, Document kinds). A single research
+of one card on one engine uses this template with `run` and `engine` as
+they are. -->
 
 ## In short
 
@@ -89,10 +89,8 @@ question, a copy, below the bar, superseded by [n].>
 
 ## Search record
 
-<The queries run, in order, in a few words each; apart from them
-the pages opened, an opening being a fetch of a page and the
-budget counting openings; what the disconfirming query found,
-including nothing; then the reason
-the run ended, which of the stop rule's two parts ended it (nothing
-new from a differently-worded query; every perspective of the card
-has a primary source) or the opening budget.>
+<The queries run, in order, in a few words each; apart from them the
+pages opened, an opening being a fetch of a page and the budget counting
+openings; what the disconfirming query found, including nothing; then
+the reason the run ended, which part of the card's stop rule ended it
+(`templates/research-plan.md`), or the opening budget.>

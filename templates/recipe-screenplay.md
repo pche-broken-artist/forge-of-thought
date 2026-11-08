@@ -3,7 +3,7 @@ project: <slug>
 purpose: Screenplay of <the video> — <what it shows>
 audience: <who watches; whether they have seen Claude Code>
 version: 0.1
-languages: <cs, en>      # the first primary, the rest translations of it (POS.1550)
+languages: <cs, en>      # templates/recipe.md
 # output: docs/videos/<NN>-<recipe>.<lang>.html-player.js   # html-player only: the engine's public folder (POS.1540); omit to stay in renders/
 ---
 

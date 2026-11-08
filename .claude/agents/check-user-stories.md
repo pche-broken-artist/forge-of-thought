@@ -37,23 +37,14 @@ What you verify:
    only a POS has a parent `10-intent.md`. Where the parent is a
    source, the citation is a path and a place; existence of the path
    is verified, the place is read as a fact.
-3. **Shape** — every story is a level-3 heading `US.NNNN — <name>`,
-   then its sentence, then its acceptance criteria as bullets, then
-   only the parts it has, in the template's order, under the fixed
-   English labels; no part present and empty; no other part (no
-   notes of context, no dependencies, no priority, no estimate); no
-   two stories with one ID.
-4. **Parts** — every question ends with `→ <owner>`; every risk has
-   `→ <mitigation | consequences>`; every note carries a link and
-   what lies behind it; every edge case is `situation → what
-   happens`.
-5. **Wording** — no vague word in an acceptance criterion where a
-   value is wanted — a word that names a quality without a value,
-   in whatever language the project writes (the Story style gives
-   the kind); report the word and the place, never propose the value.
-   A criterion in the conditional mood ("should", "could", or its
-   equivalent in the project's language) is a finding.
-6. **Skeleton residue** — no template comment, no `…`, no
+3. **Shape, parts and wording** — every story has the shape
+   `templates/user-stories.md` gives and its parts, their order, their
+   labels and their wording as the Story style of
+   `.claude/skills/forge/states/user-stories.md` has them; every breach is
+   a finding. For a vague word or a conditional in a criterion you report
+   the word and the place, never a value; no two stories carry one ID.
+
+4. **Skeleton residue** — no template comment, no `…`, no
    `<placeholder>`, no `NNNN` left in the file.
 
 Cost: the stories and their parent, read once.
