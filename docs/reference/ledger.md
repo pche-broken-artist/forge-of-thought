@@ -1,8 +1,8 @@
 ---
-generated: 2026-11-01
-version: 6.8
+generated: 2026-11-08
+version: 6.21
 made: mirrored
-inputs-hash: 2e256333a1982205
+inputs-hash: e9a8aa31dd4f398d
 inputs:
   - templates/ledger.md
   - CLAUDE.md#Ledger
@@ -15,7 +15,7 @@ The ledger is the file `ledger.md` of a project: the single source of truth for 
 
 ## How it is made
 
-- It is made by `python scripts/forge-ledger.py <slug>` at the time it is read.
+- It is made by `python scripts/forge-ledger.py <slug>` at the time it is read. The argument may also be the path of a project's directory.
 - It is never kept in git. The script writes it as a gitignored file.
 - Nobody writes a row. Every command that changes state remakes the ledger with the script.
 - The shape is that of `templates/ledger.md`, whose comments the script keeps.
@@ -209,6 +209,8 @@ The section lists what the merged files cannot say. It stands only when there is
 - a closed thread touched by a later commit.
 - a thread cited with neither a thread file nor a closed record.
 
+A file the script could not parse is not a report. It is a line `unparsed:` of the header.
+
 ## The archive
 
 `ledger.archive.md` is the hand-kept ledger as it stood at the migration, and it is immutable. Its Briefs, Work, Findings and Challenges rows are read for every item without a record of the new shape. A newer record overrides the archive.
@@ -219,4 +221,4 @@ The section lists what the merged files cannot say. It stands only when there is
 - [The ledger, made from the records](../about/the-ledger.md): why the ledger is made from the records.
 - [Glossary](glossary.md): every term of the forge in one line.
 
-Generated on 2026-11-01 for version 6.8 from the files the front-matter names; never edited by hand.
+Generated on 2026-11-08 for version 6.21 from the files the front-matter names; never edited by hand.

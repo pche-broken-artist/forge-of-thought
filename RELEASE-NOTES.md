@@ -1,13 +1,13 @@
 ---
 project: forge
 render: release-notes
-generated: 2026-11-01
+generated: 2026-11-08
 recipe: recipes/release-notes.md v0.15
 inputs:
   - projects/forge/10-intent.history.md
   - projects/forge/10-intent.history.archive.md
   - projects/forge/40-solution-design.history.md
-  - projects/forge/10-intent.md v6.8
+  - projects/forge/10-intent.md v6.21
   - projects/forge/decisions.md
   - RELEASE-NOTES.md
 ---
@@ -18,6 +18,347 @@ One section per release of the engine, newest first, for the user who
 takes upgrades through `forge-pull`; Action required comes first in
 every section; the fine-grained log with the reasons lives in
 `projects/forge/10-intent.history.md`.
+
+## 6.21 - 2026-11-08
+
+### Changed
+- A finding of a filed report that clashes with another finding's
+  number at a merge is renumbered in the report itself, the one
+  exception to a report's immutability, with its record in the
+  history that says the clash and the old number (POS.0220, FND.3910,
+  DEC.0430, the project check at the release of 6.21). For you: when
+  two reports of one project carry one finding number after a merge,
+  the younger report is edited to the new number and the record says
+  so; nothing else of a filed report is ever edited.
+
+## 6.20 - 2026-11-08
+
+### Changed
+- The requirement verb is a rule of kind: an item of an assignment or
+  a BRD is an obligation in the indicative, never a conditional, a
+  permission or a wish, never MoSCoW; `shall` / `shall not` holds
+  strictly in English, for the group's standard, an artefact in
+  another language takes that language's own verb of obligation, the
+  forge naming no word of it, and `shall` leaves the notation that is
+  English throughout (POS.0250, POS.0110, THR.0810, THR.0540; CLAUDE.md
+  prime directive 6 and Requirement style, the assignment and the BRD
+  definitions). For you: an assignment or a BRD in your project's
+  language is written with that language's own verb of obligation,
+  and only an English one says shall.
+- A TBC of a BRD is defined once, in Open questions; a BR or an NFR
+  that rests on it cites it in brackets; the slot under a group leaves
+  `templates/brd.md`, and the rule stands in the Requirement style of
+  the BRD definition (THR.0800, the BRD template and definition). For
+  you: a BRD no longer carries one open question twice, and the ledger
+  no longer reports a TBC as defined twice.
+
+### Rejected
+- `shall` kept in an artefact of every language and turned into the
+  language's verb by a render is dropped: two wordings of one
+  requirement, a translation at every render, and the document the
+  stakeholders approve would not be the one the chain holds
+  (REJ.0540). For you: the artefact the stakeholders approve is the
+  one the chain holds, in its own words.
+
+## 6.19 - 2026-11-08
+
+### Action required
+- every existing project anchors the three lines of its .gitattributes
+  by hand or at its next migration
+
+### Fixed
+- The three root patterns of `merge=ours`, `README.md`,
+  `RELEASE-NOTES.md` and `CONTRIBUTING.md`, are anchored with a leading
+  slash in the engine's `.gitattributes`, in `templates/gitattributes`
+  and in the fixture, with a test: a bare filename matches at every
+  depth and, with `core.ignorecase`, in every case, so
+  `recipes/readme.md` was taken as ours without a conflict at the
+  merge of pull request #8 (SOL.0730, the operating layer). For you: a
+  merge in your project no longer takes your side silently on a file
+  that merely shares the name of a root render, once the three lines
+  are anchored as the Action says.
+
+## 6.18 - 2026-11-08
+
+### Added
+- The user stories, `35-user-stories.md`, are a layer of the chain
+  below the BRD and above the solution design: the parent broken into
+  behaviour seen from the outside, what the user or the business sees
+  happen and under which conditions it is accepted, so that the
+  stakeholders approve them as a whole, the delivery builds from them
+  and the testers write their test cases from them; their parent is
+  the BRD, or the intent where the change is small; handed over by
+  default, Claude returns first the cut, the name of every story with
+  what it covers and the items of the parent no story serves, and only
+  on the cut agreed drafts the whole stories, walked story by story;
+  built by a user of the forge in a clone of their own and accepted
+  into the engine from pull request #8 (POS.1990, POS.2000, SOL.0920,
+  the Essence, POS.1310, POS.1400, the user-stories definition and
+  template). For you: between a BRD and a solution design your project
+  may carry user stories, worked with `/forge user-stories`, and the
+  solution design is derived from them where they exist.
+- The shape of a story: one prefix of its own, US; a heading
+  `US.NNNN - <name>`, a free sentence carrying who wants it, what
+  happens and why, its acceptance criteria as bullets in the
+  indicative, one behaviour each, and then only the parts it has under
+  fixed English labels, `Edge cases`, `Risks`, `Note`, `Questions`,
+  `Reference`,
+  Reference the one part every story has; no vague word in a
+  criterion, no priority, no estimate, no technical solution
+  (POS.2010, POS.0230). For you: a story is read by its ID like every
+  item of the chain, and a story that lacks a Reference or carries a
+  priority is a finding of the check.
+- The reviewers of the stories: no new critic and no new persona,
+  `clarity` reads them with their Story style, `essence` compares them
+  with their parent, and the check `user-stories` verifies the
+  mechanics, every in-scope item of the parent served or said not to
+  be, every Reference to an item that exists, the parts in their order
+  and none empty, questions with an owner, risks with a mitigation or
+  consequences, no vague word or conditional in a criterion; the
+  export the instance hands over, pasted into a wiki or a tracker, is
+  a render of the genre `user-stories-export`, one heading per story
+  with its parts on lines of their own, which leaves out every POS,
+  since a paste of a table ran each story into one paragraph
+  (POS.2020, POS.1990, POS.0770, SOL.0920). For you: run `/check
+  user-stories` after a pass of `/forge user-stories`, and compose the
+  export with `/recipe user-stories-export`.
+
+### Changed
+- Prefixes of two letters are allowed: BR and UC already had two and
+  US joins them; the scripts were the one limit and were widened, the
+  ledgers of three projects unchanged (POS.0220, POS.0230). For you:
+  an ID prefix is two or three letters, and the ledger reads both.
+- The items of the user-stories layer were renumbered at the merge of
+  pull request #8, POS.1990 to POS.2020 from POS.1930 to POS.1960,
+  SOL.0920 from SOL.0900 and FND.3890 from FND.3820, since the
+  engine's main had given those numbers to the tests in the same days,
+  the younger renumbered; the contributor's rounds folded into this
+  version, their records kept with their handle and dates (POS.0220,
+  POS.1990, SOL.0920, FND.3890). For you: cite the user stories by
+  their numbers of today; the records keep the old ones.
+- The first merge request of two people on the engine: the branch
+  fetched onto the integrator's clone by his own hand, `git fetch
+  origin pull/8/head:pr-8`, GitHub holding the head of every pull
+  request on the origin; who owns that step stays open (FND.3580,
+  DEC.0390, the operating layer). For you: to merge a pull request on
+  your own clone, fetch its head from the origin that way and merge
+  with git itself; the forge has no door of its own for it yet.
+
+## 6.17 - 2026-11-08
+
+### Fixed
+- `/save` rebases only a diverged branch; a branch merely ahead, a
+  merge commit among its commits, is pushed as it stands, after the
+  contributor of pull request #8 found his save replaying the engine's
+  thirteen commits one by one and stopping at a conflict once he had
+  merged the engine's main into his branch; reproduced on the fixture
+  in both roles, two tests red on the old script and green on the new
+  (POS.1690, SOL.0780, SOL.0900, THR.0820, `forge-save.py`). For you:
+  a merge made by hand, the integrator's of a branch into main or
+  yours of the upstream into your branch, keeps its merge commit at
+  the next `/save`.
+
+## 6.16 - 2026-11-07
+
+### Added
+- The forge's own project, `projects/forge`, becomes a repository of
+  its own, public under the same account as the engine and named
+  `forge`, so that a user clones the engine alone and nothing he runs
+  reads the project, while a contributor clones the project beside the
+  engine, since the author's commands read it; the root renders still
+  land in the engine root by their `output:`, so a release of the
+  engine lands in two commits, and in the commands of git `forge`
+  names the whole; the cut is ordered, the engine prepared with the
+  project still inside, the project's repository born before the
+  engine lets the directory go, then the first release (POS.1980,
+  THR.0780, DEC.0420). For you: nothing changes until the cut; after
+  it a user of the engine clones the engine only, and a contributor
+  brings `forge` in beside it with `/import-project`.
+
+## 6.15 - 2026-11-07
+
+### Added
+- `forge-status --remote` also asks GitHub, through `gh` on PATH, for
+  what waits there outside git, the open pull requests and the
+  discussions nobody of the repository has answered, each with its
+  number, title, author and date, a pull request with the count of
+  files it changes; the `/forge` map and `/pull` say it as a fact
+  beside the state of the branch, with one offer, look at it before
+  anything is written into the project, and whatever keeps it from
+  reading, the line says so and the map goes on; the forge reads it
+  only and merges, answers and closes nothing (POS.1970, POS.1490,
+  POS.1710, SOL.0910, SOL.0510, `forge_repos.github_waiting`). For
+  you: with `gh` installed and signed in, the map tells you on the
+  morning it arrives that a pull request or a discussion waits on your
+  repository; without `gh` the line says it could not read, and
+  nothing else changes.
+
+## 6.14 - 2026-11-07
+
+### Changed
+- The reader of the documentation map is among the cores tested,
+  `tests/test_docs_map.py`, as the brief named it and the build had
+  left out; the workflow runs the newest Python as `3.x`, resolved at
+  each run, and its token is held to `contents: read` (POS.1930,
+  SOL.0900). For you: nothing to do; a change to the map's reader
+  turns a test red, and CI needs no hand when a new Python arrives.
+
+## 6.13 - 2026-11-07
+
+### Added
+- The scripts have tests: `tests/` at the engine root, run with pytest
+  from the engine root through `/test`, the one door, `python -m
+  pytest` the command it runs; pytest is the one thing a contributor
+  installs beyond `python`, and a user of the engine installs nothing;
+  in proportion, enough to catch what a change of a script breaks, no
+  coverage figure as a target; tested are the deterministic cores, the
+  front-matter, the records of a history, the git hook's judgement
+  over a command, the ledger made from the documents, the light check
+  as a program, then the git scripts on the fixture, status, save,
+  branch, pull, the step of a conflict and the ways of merging, and
+  what calls pandoc, markitdown or the model for its failure without
+  the tool; the git hook's built-in cases became the first test and
+  its `--test` flag went (POS.1930, SOL.0900, THR.0790, `pytest.ini`,
+  `tests/conftest.py`, the brief `tests`). For you: run `/test` after
+  a change to a script; as a user you need nothing new, as a
+  contributor `pip install pytest`, and a pull request on a script
+  carries its test.
+- The fixture is synthetic: `tests/fixture`, a thought project of the
+  current shape with a made-up subject, one of each kind of document
+  the scripts read, `fixture: true` in its project file, never a copy
+  of a real project and never under `projects/`; a test works on a
+  copy of it in a temporary directory, as a repository with a bare
+  origin beside it where the test needs git, and the fixture itself is
+  never changed; it conforms to the light check, so a template it no
+  longer follows turns a test red (POS.1940, SOL.0830, DEC.0410). For
+  you: a change to a template is proved by `/test` on the fixture, and
+  no content of a real project enters the public engine.
+- A script takes a project by its slug or by the path of its
+  directory: a bare word is a slug and means `projects/<slug>`,
+  anything with a separator or absolute is the directory itself; the
+  project's name is the `project` field of its project file, the
+  directory's name without one; one resolver,
+  `forge_repos.project_path`, every script through it, `forge-status`
+  by one repository as well; the commands of the forge call by slug as
+  before (POS.1950, SOL.0620, DEC.0410). For you: `python
+  scripts/forge-status.py <slug>` works as before, and a path reaches
+  a project anywhere on the machine.
+- The tests run in CI, GitHub Actions at every push and pull request
+  of the engine, Linux and Windows, Python 3.8 and the newest, macOS
+  not until someone asks for it; the git tests run git with an empty
+  global configuration and no system one, the identity set in the
+  throwaway repository alone, so that the user's guard, his stanzas
+  and his registration of the merge driver change nothing, the
+  registration tested by its presence and by its absence (POS.1960,
+  `.github/workflows/tests.yml`). For you: a pull request on the
+  engine is tested on both platforms before it is read, and your own
+  git configuration never bends a test.
+
+### Changed
+- Portability is verified by the run of the tests in CI on Linux and
+  Windows; the conversions are tested for their failure without the
+  tool, and the per-prompt hook is a writing rule still (POS.0830,
+  SOL.0620, CLAUDE.md Portability). For you: what runs on Linux is
+  now said by CI, not by one user's run of October.
+- A release of the engine runs the tests through `/test` before any
+  check, a red test stops it, a missing pytest goes on only on the
+  principal's word; a save never runs them (POS.1100, the release
+  skill). For you: `/release` of the engine stops at a red test, and
+  `/save` is as fast as before.
+- The promise to two people on one project is verified by the tests
+  on copies of the fixture, run by `/test` and in CI, no longer by
+  hand on a project made by hand; the skip of a bare `/save` over a
+  fixture project is dropped, since the fixture is no repository under
+  `projects/` (POS.1750, POS.1590, SOL.0830). For you: nothing to do;
+  `fixture: true` no longer makes a bare `/save` skip anything.
+
+### Rejected
+- An environment variable naming the projects' root, read by the
+  scripts for the tests, is dropped: a setting hidden from the
+  command, where a path is an argument everyone sees (REJ.0510,
+  DEC.0410). For you: a script takes a path, never a variable.
+- A branch in the scripts for a test project lying in `tests/` is
+  dropped: production code with a path only the tests take, the
+  variable in another coat (REJ.0520, DEC.0410). For you: the scripts
+  carry no path that only the tests take.
+- The fixture under `projects/`, or a copy of a real project, is
+  dropped: `projects/` is gitignored and a fixture there reaches
+  neither a contributor nor CI, and a real project's content does not
+  belong in the public engine (REJ.0530, DEC.0410). For you: the
+  fixture lives in `tests/fixture`, and nothing of yours is in it.
+
+## 6.12 - 2026-11-03
+
+### Added
+- `.mailmap` at the engine root maps the author's names of the history
+  to one handle, git's own mechanism, no rewrite of the history (the
+  operating layer, THR.0790, the Repository layout of CLAUDE.md). For
+  you: `git log` and `git shortlog` show one author where the history
+  carries several names; nothing in your projects changes.
+
+## 6.11 - 2026-11-03
+
+### Changed
+- The harness field `disable-model-invocation` is dropped from the
+  thirteen guarded commands: it did not make Claude wait for the
+  principal's word, it made him replay `/save`, `/document` and
+  `/ingest` by hand outside the skill, unseen, until the mimicry was
+  his standard; on the word the skill is invoked, never mimicked, and
+  the guard is conduct, Step by step and the wall on git (POS.1090,
+  SOL.0110, THR.0790). For you: a command that writes still starts on
+  your word only, by slash or asked in words, and Claude invokes the
+  skill itself instead of replaying its steps.
+
+## 6.10 - 2026-11-03
+
+### Changed
+- The published companions are `ours` and the published files
+  `binary` at a merge, never merged, as the list of the ways of
+  merging has it (POS.1560, POS.1690, FND.3590). For you: nothing to
+  do; the intent says what your `.gitattributes` already does.
+- What `/document <slug>` reads for a project other than the engine
+  is said in the intent, carried from the planner's definition; what a
+  project wants documented beyond it is not a setting of its own
+  (POS.1450, THR.0590, FND.3640). For you: the first `/document
+  <slug>` on a project remains the test, and no setting of yours is
+  read for it.
+- The example of `forge-branch` is brought to the script's arguments,
+  `forge-branch <slug> <name>` and `forge-branch <slug> main`
+  (POS.1110, FND.3680). For you: call `forge-branch` with the slug
+  first, as the script has always taken it.
+- The group's standard the BRD leans on is a library document of the
+  instance where it has one, and the fork the BRD was inspired by is
+  named without its builder; no instance is named (POS.1800,
+  FND.3650). For you: nothing to do; the engine names no organisation.
+- The BRD definition's head points at POS.1800 with POS.1810 to
+  POS.1850; the research skill's step 3 names the engine as `<name>`
+  like its step 5; `forge-check.py`'s header says the trial of
+  THR.0530 became the light check's mechanical clauses; the
+  walkthrough skill's date is dropped; CLAUDE.md's layout comment
+  names the driver's settings with the driver (FND.3650, FND.3670,
+  FND.3680, the operating layer, the documentation run of 2026-11-01).
+  For you: the pages take the corrected wording at the next
+  `/document`.
+
+## 6.9 - 2026-11-01
+
+### Added
+- Two fixed files at the engine root that are no render and derive
+  from nothing in the chain: `SECURITY.md`, the security policy, the
+  principal's own text, a problem reported through GitHub's private
+  vulnerability reporting with the profile CONTRIBUTING names as the
+  fallback and never a public issue, an acknowledgement within seven
+  days, a fix or a decision told to the reporter first, supported the
+  latest release on `main` only; and `CODE_OF_CONDUCT.md`, the
+  Contributor Covenant 3.0 word for word under its own licence CC
+  BY-SA 4.0 named in the README beside CC BY 4.0, its reporting
+  sentence pointing at the private way of CONTRIBUTING; neither has a
+  companion, a row or a check, and a change to either is the
+  principal's word (POS.1920, the Repository layout of CLAUDE.md,
+  `research/2026-11-01-code-of-conduct-on-github.md`). For you: report
+  a security problem through the repository's private vulnerability
+  reporting, never in a public issue, and read the code of conduct
+  before you take part.
 
 ## 6.8 - 2026-11-01
 

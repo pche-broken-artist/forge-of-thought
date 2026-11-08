@@ -1,6 +1,6 @@
 ---
 project: forge
-updated: 2026-11-01
+updated: 2026-11-08
 kind: thought             # read from project.md (templates/project.md)
 language: en         # read from project.md
 ---
@@ -39,8 +39,11 @@ it; Note says what remains (partial) or the REJ (dropped). -->
 | 00-brief-documentation.md | 0.1 | draft | mined | born 2026-10-09 from THR.0340 (the rounds of 2026-10-05 and 2026-10-07) and the principal's word of 2026-10-09; the documentation part of `next-gen` moved into it; mined into intent 4.60 (POS.1450, POS.1080, POS.0930, POS.0950, REJ.0240 to REJ.0260, THR.0590) and solution design 0.4 (SOL.0460) the same day |
 | 00-brief-elicitation.md | 1.0 | approved | mined | born in the forge and locked 2026-09-28; mined into intent 4.32 (POS.1300 to POS.1380, POS.0110, REJ.0180, REJ.0210, REJ.0220, THR.0440 to THR.0460; THR.0440 and THR.0450 closed at 4.46). The material for the briefs `brd` and `engine-split` is carried in THR.0230, THR.0300 and THR.0360. Not a model of a brief, see its opening note |
 | 00-brief-next-gen.md | 0.4 | draft | pending | born in the forge 2026-10-03, written in English on the principal's word; the needs of the next generation gathered in one round, to be sifted; the eighteen researches of 2026-10-03 cited under its sections (0.2); THR.0520 opened from it; the documentation moved out into the brief `documentation` (0.3) |
+| 00-brief-pptx-gitignore.md | 0.2 | draft | dropped | born 2026-10-26 for Office temporary files kept out of git globally per machine through /setup; made obsolete by templates/gitignore (the Office lock files copied by /new-project) and the line carried into every project's own .gitignore, the principal's word of 2026-11-02 |
 | 00-brief-public-engine.md | 1.0 | approved | mined | born in the forge 2026-08-29 (THR.0130, THR.0090), locked 2026-08-29 in English after the CTO challenge; mined into intent 2.21 (POS.0940–0980, REJ.0140–0150, THR.0190–0200). Instance work it records — the one-off migration steps 1–6, the first projects after the split — stays here and under Waiting on principal, not in the intent |
 | 00-brief-research.md | 0.3 | draft | mined | the brief 0.3 mined into intent 5.37: POS.1860 to POS.1900 born; POS.0050, POS.0790, POS.0800, POS.0930, POS.1140 changed; REJ.0440 to REJ.0490 born; THR.0290 closed, THR.0740's state of 2026-10-24; the Later section stays in the brief and in THR.0740 |
+| 00-brief-tests.md | 0.1 | draft | mined | into POS.1930 to POS.1960 and REJ.0510 to REJ.0530, the build before the positions (POS.1780); the open points settled: the fixture made new and synthetic (POS.1940), no CI badge in the README, a sentence in its recipe instead, the sentence on tests in the recipe of CONTRIBUTING |
+| 00-brief-user-stories.md | 0.6 | draft | mined | the brief 0.3 mined into intent 6.18: POS.1990 to POS.2020 born after the trial on a small project (POS.1780); POS.0220 and POS.0230 changed |
 
 ## Documents
 <!-- One row per layer of the chain below the briefs: Version and
@@ -49,8 +52,8 @@ history (a state record does not move it, POS.1630); a layer the
 project does not have gets no row (CLAUDE.md, Ledger). -->
 | File | Version | Status | Date |
 |---|---|---|---|
-| 10-intent.md | 6.8 | draft | 2026-11-01 |
-| 40-solution-design.md | 0.51 | draft | 2026-11-01 |
+| 10-intent.md | 6.21 | draft | 2026-11-08 |
+| 40-solution-design.md | 0.59 | draft | 2026-11-08 |
 
 ## Renders
 <!-- One row per render file, from the render's own provenance
@@ -61,14 +64,14 @@ from its own front-matter: Recipe "none: derived by
 scripts/docs-index.py", Inputs the map and the intent's version. -->
 | Render | Audience | Recipe | Inputs | Generated |
 |---|---|---|---|---|
-| README.md (repo root) | humans arriving at the repository | recipes/readme.md v0.76 | CLAUDE.md, projects/forge/10-intent.md v6.8, .claude/skills/forge/states/, docs/README.md, RELEASE-NOTES.md | 2026-11-01 |
-| RELEASE-NOTES.md (repo root) | the user of the engine who has cloned it and takes upgrades through forge-pull | recipes/release-notes.md v0.15 | projects/forge/10-intent.history.md, projects/forge/10-intent.history.archive.md, projects/forge/40-solution-design.history.md, projects/forge/10-intent.md v6.8, projects/forge/decisions.md, RELEASE-NOTES.md | 2026-11-01 |
-| CONTRIBUTING.md (repo root) | a visitor of the repository on GitHub who has used the forge or read about it and wants to say, ask or change something; he arrives from the Contributing tab, the sidebar, or the page where an issue or a pull request is created | recipes/contributing.md v0.4 | projects/forge/10-intent.md v6.0, CLAUDE.md, docs/README.md v5.34 | 2026-10-25 |
+| README.md (repo root) | humans arriving at the repository | recipes/readme.md v0.79 | CLAUDE.md, projects/forge/10-intent.md v6.21, .claude/skills/forge/states/, docs/README.md v6.21, RELEASE-NOTES.md | 2026-11-08 |
+| RELEASE-NOTES.md (repo root) | the user of the engine who has cloned it and takes upgrades through forge-pull | recipes/release-notes.md v0.15 | projects/forge/10-intent.history.md, projects/forge/10-intent.history.archive.md, projects/forge/40-solution-design.history.md, projects/forge/10-intent.md v6.21, projects/forge/decisions.md, RELEASE-NOTES.md | 2026-11-08 |
+| CONTRIBUTING.md (repo root) | a visitor of the repository on GitHub who has used the forge or read about it and wants to say, ask or change something; he arrives from the Contributing tab, the sidebar, or the page where an issue or a pull request is created | recipes/contributing.md v0.5 | projects/forge/10-intent.md v6.9, CLAUDE.md, docs/README.md | 2026-11-01 |
 | renders/ba-intro.md (with renders/ba-intro.pptx, plain) | business analysts meeting the forge for the first time, in one room with the author, who shows it live after the slides and sets them a task to try it themselves | recipes/ba-intro.md v0.1 | CLAUDE.md, projects/forge/10-intent.md v5.5, .claude/skills/forge/states/, docs/start/what-it-is.md v5.3, docs/about/what-it-is-and-is-not.md v5.3, docs/about/how-a-thought-travels.md v5.3, docs/about/the-document-chain.md v5.3, docs/about/the-principal-and-claude.md v5.3, docs/about/elicitation.md v5.3, docs/about/working-methods.md v5.3, docs/about/the-brief.md v5.3, docs/about/the-intent.md v5.3, docs/about/the-assignment.md v5.3, docs/reference/requirement-style.md v5.3, docs/about/isolated-reviewers.md v5.3, docs/about/documents-and-records.md v5.3, docs/about/renders-and-recipes.md v5.3, docs/start/install.md v5.3, docs/start/first-result.md v5.3, CONTRIBUTING.md | 2026-10-12 |
 | renders/ceo-pitch.md (with renders/ceo-pitch.docx, plain) | a CEO or another C-level executive whose experience of AI is chatting with it, arriving at the repository or handed the document by their technology lead | recipes/ceo-pitch.md v0.6 | projects/forge/10-intent.md v4.58, CLAUDE.md | 2026-10-04 |
 | renders/cto-pitch.md (with renders/cto-pitch.docx, plain) | technical leadership arriving at the repository - a CTO, a head of engineering or architecture, a peer of the author who does not know him | recipes/cto-pitch.md v0.6 | projects/forge/10-intent.md v4.58, CLAUDE.md | 2026-10-04 |
 | renders/executive-pitch.md (with renders/executive-pitch.pptx, plain) | C-level executives whose experience of AI is chatting with it | recipes/executive-pitch.md v0.6 | projects/forge/10-intent.md v4.30, CLAUDE.md | 2026-09-27 |
-| docs/README.md (the documentation index, kind page) | the three readers of the documentation | none: derived by scripts/docs-index.py (SOL.0460) | projects/forge/docs-map.md, 10-intent.md v6.8 | 2026-11-01 |
+| docs/README.md (the documentation index, kind page) | the three readers of the documentation | none: derived by scripts/docs-index.py (SOL.0460) | projects/forge/docs-map.md, 10-intent.md v6.21 | 2026-11-08 |
 
 ## Published
 <!-- One row per designed file, from its companion
@@ -128,6 +131,7 @@ the index, never here (CLAUDE.md, Document chain, External inputs). -->
 | repo-detection-challenge-3.md | 2026-10-22 | ingest | text |
 | collaboration-simplification-challenge.md | 2026-10-23 | ingest | text |
 | gemini-research-protocol-proposal.md | 2026-10-24 | content (the example run id carries the date) | text |
+| example-user-stories-v2.md | 2026-11-04 | file | text |
 
 ## Dependencies
 <!-- Registration only: the citations of another project's documents,
@@ -202,6 +206,8 @@ lives in research/00-INDEX.md, never here. -->
 | 2026-10-24-keeping-the-quality-and-currency-of-web-sources.md | 2026-10-24 | the principal's word of 2026-10-24 (the /research command to show a plan before searching; the research must not slide over the surface nor fill with junk); .claude/skills/research/SKILL.md; research/2026-10-23-a-reviewer-or-a-question-on-another-model-inside-the-forge.md; web sources below |
 | 2026-10-24-rfp-from-the-chain/ | 2026-10-24 | the principal's word of 2026-10-24 (a research on the RFP: its parts, its template, what of it follows from intent, assignment, BRD and solution design and what a person must add; IT projects of a private group; the document and its boundary to the process); the second engine's review of the draft plan, tmp/research/2026-10-24-rfp-from-the-chain/plan-review/; 00-brief-research.md v0.2 (the first research run the new way); research/2026-10-13-what-a-brd-contains-and-how-it-is-found-today.md (what the project knew of the vendor side) |
 | 2026-10-25-a-markdown-deck-in-the-browser-from-github.md | 2026-10-25 | the principal's word of 2026-10-25 (a quick research: how a deck of the forge is shown on GitHub without a download, and whether Marp or a tool of its class would serve the forge); the card as confirmed in the conversation, no plan file (quick research, one card, one engine); .claude/skills/research/SKILL.md; no known notes named; web sources below |
+| 2026-11-01-code-of-conduct-on-github.md | 2026-11-01 | the principal's word of 2026-11-01 (a quick research of one card, no plan file); web sources below |
+| 2026-11-07-engine-and-forge-framework-by-file.md | 2026-11-07 | no plan; the principal's word of 2026-11-07 in the round over THR.0780, read beside THR.0230; the tree of the engine at commit b7a21e5, no web source |
 
 ## Findings
 <!-- Findings of the critic and of the checks, one sequence. A
@@ -572,29 +578,55 @@ record reads as `rejected`. -->
 | FND.3550 | low | conformance | resolved | 2026-11-01-check-project-1732-7dee.md | resolved: the reading of a leading slash said in the output: comment of templates/recipe.md; the three recipes stand |
 | FND.3560 | low | conformance | rejected | 2026-11-01-check-project-1732-7dee.md | DEC.0370 |
 | FND.3570 | low | conformance | resolved | 2026-11-01-check-engine-1920-f126.md | resolved: the two paragraphs re-wrapped, wording unchanged (the engine check at the release of 6.8) |
-| FND.3580 | medium | conformance | open | 2026-11-01-check-documentation-2001-a19d.md | — |
-| FND.3590 | medium | conformance | open | 2026-11-01-check-documentation-2001-a19d.md | — |
-| FND.3600 | medium | conformance | open | 2026-11-01-check-documentation-2001-a19d.md | — |
-| FND.3610 | medium | conformance | open | 2026-11-01-check-documentation-2001-a19d.md | — |
-| FND.3620 | medium | conformance | open | 2026-11-01-check-documentation-2001-a19d.md | — |
-| FND.3630 | medium | conformance | open | 2026-11-01-check-documentation-2001-a19d.md | — |
-| FND.3640 | medium | conformance | open | 2026-11-01-check-documentation-2001-a19d.md | — |
-| FND.3650 | medium | conformance | open | 2026-11-01-check-documentation-2001-a19d.md | — |
-| FND.3660 | low | conformance | open | 2026-11-01-check-documentation-2001-a19d.md | — |
-| FND.3670 | low | conformance | open | 2026-11-01-check-documentation-2001-a19d.md | — |
-| FND.3680 | low | conformance | open | 2026-11-01-check-documentation-2001-a19d.md | — |
-| FND.3690 | low | conformance | open | 2026-11-01-check-documentation-2001-a19d.md | — |
-| FND.3700 | low | conformance | open | 2026-11-01-check-documentation-2001-a19d.md | — |
-| FND.3710 | low | conformance | open | 2026-11-01-check-documentation-2001-a19d.md | — |
-| FND.3720 | low | conformance | open | 2026-11-01-check-documentation-2001-a19d.md | — |
-| FND.3730 | low | conformance | open | 2026-11-01-check-documentation-2001-a19d.md | — |
-| FND.3740 | low | conformance | open | 2026-11-01-check-documentation-2001-a19d.md | — |
-| FND.3750 | low | conformance | open | 2026-11-01-check-documentation-2001-a19d.md | — |
-| FND.3760 | low | conformance | open | 2026-11-01-check-documentation-2001-a19d.md | — |
-| FND.3770 | low | conformance | open | 2026-11-01-check-documentation-2001-a19d.md | — |
-| FND.3780 | low | conformance | open | 2026-11-01-check-documentation-2001-a19d.md | — |
-| FND.3790 | low | conformance | open | 2026-11-01-check-documentation-2001-a19d.md | — |
-| FND.3800 | low | conformance | open | 2026-11-01-check-documentation-2001-a19d.md | — |
+| FND.3580 | medium | conformance | parked | 2026-11-01-check-documentation-2001-a19d.md | DEC.0390 (until the first merge request on a project of two people) |
+| FND.3590 | medium | conformance | resolved | 2026-11-01-check-documentation-2001-a19d.md | resolved: the owners brought to one wording, intent 6.10, design 0.52, the BRD definition, the research skill, forge-check.py, the walkthrough skill and CLAUDE.md; the design head's list kept as a fact (the documentation run of 2026-11-01) |
+| FND.3600 | medium | conformance | parked | 2026-11-01-check-documentation-2001-a19d.md | DEC.0380 (until the next documentation run) |
+| FND.3610 | medium | conformance | parked | 2026-11-01-check-documentation-2001-a19d.md | DEC.0380 (until the next documentation run) |
+| FND.3620 | medium | conformance | parked | 2026-11-01-check-documentation-2001-a19d.md | DEC.0380 (until the next documentation run) |
+| FND.3630 | medium | conformance | parked | 2026-11-01-check-documentation-2001-a19d.md | DEC.0380 (until the next documentation run) |
+| FND.3640 | medium | conformance | resolved | 2026-11-01-check-documentation-2001-a19d.md | resolved: the owners brought to one wording, intent 6.10, design 0.52, the BRD definition, the research skill, forge-check.py, the walkthrough skill and CLAUDE.md; the design head's list kept as a fact (the documentation run of 2026-11-01) |
+| FND.3650 | medium | conformance | resolved | 2026-11-01-check-documentation-2001-a19d.md | resolved: the owners brought to one wording, intent 6.10, design 0.52, the BRD definition, the research skill, forge-check.py, the walkthrough skill and CLAUDE.md; the design head's list kept as a fact (the documentation run of 2026-11-01) |
+| FND.3660 | low | conformance | resolved | 2026-11-01-check-documentation-2001-a19d.md | resolved: the owners brought to one wording, intent 6.10, design 0.52, the BRD definition, the research skill, forge-check.py, the walkthrough skill and CLAUDE.md; the design head's list kept as a fact (the documentation run of 2026-11-01) |
+| FND.3670 | low | conformance | resolved | 2026-11-01-check-documentation-2001-a19d.md | resolved: the owners brought to one wording, intent 6.10, design 0.52, the BRD definition, the research skill, forge-check.py, the walkthrough skill and CLAUDE.md; the design head's list kept as a fact (the documentation run of 2026-11-01) |
+| FND.3680 | low | conformance | resolved | 2026-11-01-check-documentation-2001-a19d.md | resolved: the owners brought to one wording, intent 6.10, design 0.52, the BRD definition, the research skill, forge-check.py, the walkthrough skill and CLAUDE.md; the design head's list kept as a fact (the documentation run of 2026-11-01) |
+| FND.3690 | low | conformance | parked | 2026-11-01-check-documentation-2001-a19d.md | DEC.0400 (until the principal gives the reasons) |
+| FND.3700 | low | conformance | parked | 2026-11-01-check-documentation-2001-a19d.md | DEC.0400 (until the principal gives the reasons) |
+| FND.3710 | low | conformance | parked | 2026-11-01-check-documentation-2001-a19d.md | DEC.0400 (until the principal gives the reasons) |
+| FND.3720 | low | conformance | parked | 2026-11-01-check-documentation-2001-a19d.md | DEC.0400 (until the principal gives the reasons) |
+| FND.3730 | low | conformance | parked | 2026-11-01-check-documentation-2001-a19d.md | DEC.0400 (until the principal gives the reasons) |
+| FND.3740 | low | conformance | parked | 2026-11-01-check-documentation-2001-a19d.md | DEC.0400 (until the principal gives the reasons) |
+| FND.3750 | low | conformance | parked | 2026-11-01-check-documentation-2001-a19d.md | DEC.0400 (until the principal gives the reasons) |
+| FND.3760 | low | conformance | parked | 2026-11-01-check-documentation-2001-a19d.md | DEC.0400 (until the principal gives the reasons) |
+| FND.3770 | low | conformance | parked | 2026-11-01-check-documentation-2001-a19d.md | DEC.0400 (until the principal gives the reasons) |
+| FND.3780 | low | conformance | parked | 2026-11-01-check-documentation-2001-a19d.md | DEC.0400 (until the principal gives the reasons) |
+| FND.3790 | low | conformance | parked | 2026-11-01-check-documentation-2001-a19d.md | DEC.0400 (until the principal gives the reasons) |
+| FND.3800 | low | conformance | parked | 2026-11-01-check-documentation-2001-a19d.md | DEC.0400 (until the principal gives the reasons) |
+| FND.3810 | low | conformance | resolved | 2026-11-02-check-light-1845-61d5.md | resolved: the record of THR.0780's opening carries 6.10, the current version (the light check of 2026-11-02) |
+| FND.3820 | low | conformance | resolved | 2026-11-07-check-light-1833-fba4.md | the two records of 2026-11-01 and 2026-11-02 put in the order of their appends, the wording untouched |
+| FND.3830 | medium | conformance | resolved | 2026-11-02-check-engine-1528-01b4.md | resolved: the placeholders of templates/user-stories.md and of the recipe skeleton in English, the section heading, the purpose line and the description column of the skeleton placeholders elicited by the genre from the instance's export; the Story style's examples in English and the vague word and the conditional told by their kind in states/user-stories.md and check-user-stories.md; the project's own recipe keeps its words |
+| FND.3840 | low | conformance | resolved | 2026-11-02-check-engine-1528-01b4.md | resolved: POS.0770 names user-stories-table among the genres |
+| FND.3850 | low | conformance | resolved | 2026-11-02-check-engine-1528-01b4.md | resolved: UC.NNNN in the Reference placeholder of both skeletons |
+| FND.3860 | medium | conformance | resolved | 2026-11-06-check-engine-1150-bb99.md | resolved: POS.1310 points to the listing of states/ and names the user stories |
+| FND.3870 | low | conformance | resolved | 2026-11-06-check-engine-1150-bb99.md | resolved: POS.1400 names the user stories among the layers above the design |
+| FND.3880 | low | conformance | resolved | 2026-11-06-check-engine-1150-bb99.md | resolved: the readme recipe 0.78 carries 35-user-stories in the pinned chain diagram, built |
+| FND.3890 | medium | conformance | resolved | 2026-11-02-check-engine-1528-01b4.md | resolved: the user stories among the inputs of states/solution-design.md |
+| FND.3900 | low | conformance | parked | 2026-11-08-check-engine-1516-9930.md | DEC.0420 (until the cut of POS.1980) |
+| FND.3910 | low | conformance | resolved | 2026-11-08-check-project-1610-ab3f.md | resolved: DEC.0430 accepts the edited report of 2026-11-02 as recorded; POS.0220 says how a finding of a filed report is renumbered at a clash |
+| FND.3920 | medium | conformance | open | 2026-11-08-check-documentation-1653-c71c.md | — |
+| FND.3930 | medium | conformance | open | 2026-11-08-check-documentation-1653-c71c.md | — |
+| FND.3940 | medium | conformance | open | 2026-11-08-check-documentation-1653-c71c.md | — |
+| FND.3950 | medium | conformance | open | 2026-11-08-check-documentation-1653-c71c.md | — |
+| FND.3960 | low | conformance | open | 2026-11-08-check-documentation-1653-c71c.md | — |
+| FND.3970 | low | conformance | open | 2026-11-08-check-documentation-1653-c71c.md | — |
+| FND.3980 | low | conformance | open | 2026-11-08-check-documentation-1653-c71c.md | — |
+| FND.3990 | low | conformance | open | 2026-11-08-check-documentation-1653-c71c.md | — |
+| FND.4000 | low | conformance | open | 2026-11-08-check-documentation-1653-c71c.md | — |
+| FND.4010 | low | conformance | open | 2026-11-08-check-documentation-1653-c71c.md | — |
+| FND.4020 | low | conformance | open | 2026-11-08-check-documentation-1653-c71c.md | — |
+| FND.4030 | low | conformance | open | 2026-11-08-check-documentation-1653-c71c.md | — |
+| FND.4040 | low | conformance | open | 2026-11-08-check-documentation-1653-c71c.md | — |
+| FND.4050 | low | conformance | open | 2026-11-08-check-documentation-1653-c71c.md | — |
+| FND.4060 | low | conformance | open | 2026-11-08-check-documentation-1653-c71c.md | — |
 
 ## Challenges
 <!-- One sequence, born by the report in challenges/: Headline from
@@ -698,8 +730,6 @@ their decision. Free text without an ID has no place here. -->
 - THR.0480 — How a new type is added to the engine — a new artefact of the chain, a whole new chain, a new elicitor, a new reviewer, genre, command or script.
 - THR.0510 — Live reference material by nightly export.
 - THR.0530 — What can be done deterministically is done by a script, not by the model. 2026-10-25: the decision on the light check as a program, due today, deferred by the principal's word. The cto challenge (CHL.0670, accepted as a recommendation) proposes the order: the last sixty light findings read by what each protected for a reader of the project, the clauses that protected nothing cut, and only the remainder written as the program, so that the noise is not made free and permanent.
-- THR.0540 — How `shall` and the banned English words stand in an assignment written in another language; raised 2026-10-02, nothing decided.
-- THR.0590 — What the documentation of a project other than the engine reads. 2026-11-01: the language of the pages is decided, the project's, as its artefacts are (POS.1450, CLAUDE.md prime directive 6, the documentation contract); the README stays English. What `/document <slug>` reads for a project other than the engine stays open here.
 - THR.0600 — A test of the forge's behaviour. 2026-10-25: the cto challenge (CHL.0650, parked here) asks for the walls to be re-tested, not only the conduct: the hook's cases and the engine profile's probes as one script run at `/pull` of the engine or at `/setup`, red said aloud; then the smallest suite on the three recorded failures, with a date. The rollout among people widens the harness versions the walls meet.
 - THR.0610 — The horizon statement of the forge intent.
 - THR.0640 — What of a thread survives its closing. 2026-10-25: the cto challenge (CHL.0640, parked here until 6.x) reads the growth of the intent as the cut of POS.1390 not surviving velocity: positions since 5.0 carry the mechanism. Two ways named: the test applied and the mechanism moved down, or the design folded back into the intent for the forge's own project. The principal leans to the first: the positions since 5.0 gone through by the test and cut, rather than the present state accepted. The split of large files asked above is one answer to the same pressure.
@@ -708,11 +738,32 @@ their decision. Free text without an ID has no place here. -->
 - THR.0740 — The forge sends work to a model of another family - a challenger, a critic, a research, or a question about what Claude has just said - through one mechanism, the user logged into that model once outside the forge, the forge carrying no account; Gemini first, Microsoft AI Foundry and anything else later. 2026-10-25: two parts of the Later of the brief `research` are carried here as well, so that all of it stands in one place: divergent probes as agents of their own (an adjacent field, a named dissent, the new or contested), and a pass over what the agents opened and did not use.
 - THR.0750 — A third kind of project, `workshop`: a project that uses the forge's functionality without working on the artefacts of the chain. 2026-10-25: a consequence named by the cto challenge (CHL.0630): a workshop has no intent, so it cannot hold a fact or a position. If `forge-rollout` becomes a workshop, what a rollout must know (the managed settings, who the user is), which DEC.0190 sent to `forge-rollout` and to the brief `next-gen`, has its home in `next-gen` alone.
 - THR.0760 — The source archive GitHub makes of a tag should hold the engine alone.
+- THR.0780 — The forge's own project as a repository of its own, so that a user clones the engine without the forge's own project.
+- THR.0790 — What the forge looks like from GitHub, and what of it is to be mended: tests, the entry threshold, the bus factor and the threads as issues. 2026-11-07: the tests done, POS.1930 to POS.1960 and the brief `tests` mined, 221 tests green locally and in CI on Linux and Windows; the `.mailmap` done 2026-11-03. Open: the README more human, the threads as issues, the two GitHub templates, the homepage field.
+- THR.0830 — A record of what was sent out of a project, pinned to the exact version. What the forge has today: the companion of a published file carries the provenance of that file (`/publish` step 6), a render's front-matter its own, and the Published table says current or stale; no record says that anything left the project, to whom or when. Open: whether the record is a file of its own, as sketched, or a record of state in the recipe's history, where the forge keeps what happened to a document (POS.1610); whether a work product and a published file are sent the same way; the two questions above. Related: the delivery side (THR.0140), wider and not worked on. Opened 2026-11-08 from the discussion; nothing decided.
 - TBC.0010 of 40-solution-design.md — Mermaid diagrams in a Word file: rendering them to pictures needs `mermaid-cli`, a further dependency not decided on (THR.0370; Waiting on principal in the ledger).
 - TBC.0020 of 40-solution-design.md — Which check keeps this design true against what realises it; POS.1420 wants one and none exists.
 - TBC.0030 of 40-solution-design.md — The reviewers on a different model family (POS.0800) are not built: the link exists (SOL.0870) and the research runs on it; `/challenge` and `/critique` on it, the consultation and the spool have no part here (THR.0740).
 
 ### Parked, with their decision
 - FND.0650 — Genre checklists repeat the rules their skeletons carry — needs a pass over the recipe genres and their skeletons; named again (`2026-10-09-check-single-source-of-truth.md`)
+- FND.3580 — Unowned: how a merge request's branch is fetched onto the integrator's clone and the merge started there — DEC.0390 (until the first merge request on a project of two people)
+- FND.3600 — The map entry of docs/use/upgrade-the-engine.md names the checks before the migration; CLAUDE.md says the checks on an unmigrated project stop — DEC.0380 (until the next documentation run)
+- FND.3610 — Claims the map asked for and no named input carries, in seventeen entries — DEC.0380 (until the next documentation run)
+- FND.3620 — Input anchors the state script cannot isolate: a heading that does not exist, a heading hashed to the next heading, a part cut at a fence — DEC.0380 (until the next documentation run)
+- FND.3630 — The roster pages carry columns no owner states: "When it fits", "Run by", the creating command, the meaning of a flag or a git key — DEC.0380 (until the next documentation run)
+- FND.3690 — Reason not recorded: why items are numbered in tens and each group starts at the next hundred, and why at a clash the older item keeps its number — DEC.0400 (until the principal gives the reasons)
+- FND.3700 — Reason not recorded: why a bundle is catalogued in two levels and never deeper, and why a source carries a plain slug filename — DEC.0400 (until the principal gives the reasons)
+- FND.3710 — Reason not recorded: why a position is dated once rather than carrying its earlier dates, and why the intent's audience is the principal and Claude only — DEC.0400 (until the principal gives the reasons)
+- FND.3720 — Reason not recorded: why the challenger has no stake in the principal being right, beyond "signal, not encouragement" — DEC.0400 (until the principal gives the reasons)
+- FND.3730 — Reason not recorded: why regression comes first in a critique, and why a report is written in English — DEC.0400 (until the principal gives the reasons)
+- FND.3740 — Reason not recorded: Propose never decide, Intent-first and Recommend do not push — DEC.0400 (until the principal gives the reasons)
+- FND.3750 — Reason not recorded: why the way to an item goes into its record and not the item, and why the log is the single primary of the commit messages and the release notes — DEC.0400 (until the principal gives the reasons)
+- FND.3760 — Reason not recorded: why the solution design is kept current and never finished rather than closed at approval — DEC.0400 (until the principal gives the reasons)
+- FND.3770 — Reason not recorded: why `.mp4` files never enter the tree, what the division of an output into two commands by cost was chosen against, and why a recipe's Format names one format, never both — DEC.0400 (until the principal gives the reasons)
+- FND.3780 — Reason not recorded: why the documentation's index carries one question per page, beyond `/man` reading it — DEC.0400 (until the principal gives the reasons)
+- FND.3790 — Reason not recorded: why the organisation's content lives in a library of the instance while the engine carries a generic Map — DEC.0400 (until the principal gives the reasons)
+- FND.3800 — Reason not recorded: why a rule of conduct was not enough and the door to git became a wall of the harness; why no alternative was weighed against one always-on core; why the principal owns every decision beyond "amplifier, never substitute"; why forge-config.py has a guard and why the hooks answer as they do; why the scripts run on Linux and macOS — DEC.0400 (until the principal gives the reasons)
+- FND.3900 — The core still advertises `projects/forge` as the one project the engine tracks; POS.1980 withdraws that exception — DEC.0420 (until the cut of POS.1980)
 - CHL.0640 — The intent-solution cut did not survive velocity: the intent is again the chronicle and now also the specification (major) — DEC.0310 (until 6.x, the pass of THR.0640)
 - CHL.0650 — The walls are verified by hand on single days, the surface they guard tripled since 5.0, and the accepted test of behaviour has nothing scheduled (major) — DEC.0320 (until 6.x, in THR.0600)

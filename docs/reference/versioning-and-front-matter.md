@@ -1,13 +1,14 @@
 ---
-generated: 2026-11-01
-version: 6.8
+generated: 2026-11-08
+version: 6.21
 made: mirrored
-inputs-hash: 2e0720d6dd144f41
+inputs-hash: c01e24df8981ed19
 inputs:
   - CLAUDE.md#Versioning & status
   - templates/intent.md
   - templates/brief.md
   - templates/brd.md
+  - templates/user-stories.md
   - templates/recipe.md
   - templates/work.md
   - templates/index.md
@@ -15,11 +16,7 @@ inputs:
 
 # Versioning and front-matter
 
-This page states the version scheme of the forge and the header
-fields of each versioned document and of the resource index. It is
-for anyone who reads or writes a document header and wants the
-fields exactly. The principal is the person whose thinking is being
-forged.
+This page states the version scheme of the forge and the header fields (the front-matter) of an artefact, a brief, a recipe, a work specification and a resource index. It is for anyone who reads or writes these headers. The principal is whoever's thinking is being forged. The ledger is the state report that the forge makes from the documents at read time.
 
 ## The version scheme
 
@@ -27,106 +24,109 @@ Integers denote signed-off versions.
 
 | Version | Meaning |
 |---|---|
-| `0.1`, `0.2`, ... | drafts before first approval |
+| `0.1`, `0.2`, ... | drafts before the first approval |
 | `1.0` | approved |
 | `1.1`, `1.2`, ... | changes made after approval, not yet approved themselves |
 | `2.0` | the next approved version, incorporating all changes since `1.0` |
 
 ## What a header carries
 
-A header carries `version` and `status`, beside what does not change
-with the work: `project`, a brief's `title` and `author`, an index's
-`directory`. It carries nothing that changes with a round of work.
-The date and the last change of a document are computed from its
-history by whatever reads them, never written in the header.
+A header carries nothing that changes with a round of work. It carries `version` and `status`, beside what does not change with the work: `project`, the `title` and `author` of a brief, the `directory` of an index.
+
+The date and the last change of a document are computed from its history by whatever reads them. They are never carried in the header.
 
 ## The status rule
 
-`status` is one of `draft`, `approved` or `superseded`. It agrees with
-the number: an integer version is `approved`, anything else is not.
-A recipe carries no status.
+`status` is one of `draft`, `approved` or `superseded`. Status must agree with the number: an integer version is `approved`, anything else is not.
 
-## Fields by document
+A recipe carries no status. It stays at `0.x` unless the principal names an integer, from which the count goes on. Claude never proposes one.
 
-### Artefact (for example the intent)
+## Header fields by document
+
+### Artefact (the intent)
 
 | Field | Value |
 |---|---|
 | `version` | the version, as above |
 | `status` | `draft`, `approved` or `superseded` |
-| `project` | the project's slug |
-| `audience` | who reads the document (the intent's template gives "principal + Claude only") |
+| `project` | the project slug |
+| `audience` | who the document is for; the template gives `principal + Claude only` |
 
-### BRD
+### Artefact below the intent (a BRD, the user stories)
 
-The fields of an artefact, and one more:
+A BRD and the user stories carry the fields of the intent, without `audience`, and add one.
 
 | Field | Value |
 |---|---|
-| `parent` | the document the BRD comes from: `20-assignment.md` or `10-intent.md` |
+| `version` | the version, as above |
+| `status` | `draft`, `approved` or `superseded` |
+| `project` | the project slug |
+| `parent` | the document it is made from |
 
-A BRD made from a source is a work product, not a layer of the chain.
+The `parent` values the templates give:
+
+- a BRD: `20-assignment.md` or `10-intent.md`
+- the user stories: `30-brd.md` or `10-intent.md` (a small change, on the principal's word)
+
+A BRD or user stories made from a source are a work product, not an artefact of the chain.
 
 ### Brief
 
 | Field | Value |
 |---|---|
-| `project` | the project's slug |
-| `title` | the working title |
+| `project` | the project slug |
+| `title` | a working title |
 | `author` | the principal's handle |
 | `version` | the version, as above |
 | `status` | `draft`, `approved` or `superseded` |
 
-Only the header is fixed. The text below it is free-form. A later
-brief is a file `00-brief-<name>.md`.
+Only the header is fixed. The text below it is free-form.
 
 ### Recipe
 
 | Field | Value |
 |---|---|
-| `project` | the project's slug |
+| `project` | the project slug |
 | `purpose` | what the render is for |
-| `audience` | who reads the render |
-| `version` | the version, starting at `0.1` |
-| `output` | optional: a path that overrides the default `renders/<recipe>.md`; read relative to the project root, a leading slash meaning the engine root |
-| `languages` | optional: a list in which the first language is primary and the rest are its translations, one render per language in `renders/<recipe>.<lang>.md` |
+| `audience` | who the render is for |
+| `version` | `0.x`, an integer only on the principal's word |
+| `output` | optional; a path that replaces the default `renders/<recipe>.md`, read relative to the project root, a leading slash meaning the engine root |
+| `languages` | optional; a list such as `cs, en`, the first primary, the rest its translations, one render per language as `renders/<recipe>.<lang>.md` |
 
-A recipe has no `status`. It stays at `0.x` unless the principal names
-an integer. From that integer the count goes on. Claude never proposes
-one.
+A recipe has no `status`.
 
 ### Work specification
 
-The fields of an artefact (`version`, `status`, `project`), and one
-more:
-
 | Field | Value |
 |---|---|
+| `version` | the version, as above |
+| `status` | `draft`, `approved` or `superseded` |
+| `project` | the project slug |
 | `file` | the file this specification makes, `work/<name>.<ext>`, named by the work alone |
 
 ### Resource index
 
 | Field | Value |
 |---|---|
-| `project` | the project's slug |
+| `project` | the project slug |
 | `directory` | `sources` or `research` |
 
-An index carries no `version` and no `status`.
+An index carries no `version` and no `status`. A research note and a research plan also carry no version; their front-matter is on [Research note and bundle](research-bundle.md).
 
-## The companion and archive files
+## Companion and archive files
 
-Every versioned document keeps its history in a companion file
-beside it, never in its body.
+Every versioned document keeps its history in an append-only companion beside it, never in its body. The companion is part of its document and has no ledger row.
 
 | File | What it is |
 |---|---|
-| `<file>.history.md` | the history companion, append-only |
-| `<file>.history.archive.md` | a history table written before the log existed, moved here untouched and immutable |
+| `<file>.history.md` | the history companion of a versioned document |
+| `<file>.history.archive.md` | a history table written before the log, moved there as it stands, immutable |
+| `recipes/<recipe>.history.md` | the history of a recipe |
+| `work/<name>.spec.history.md` | the history of a work specification |
 
-Examples: the BRD's companion is `30-brd.history.md`, and a recipe's
-is `recipes/<recipe>.history.md`. A Version History table in the body
-of a document or in its companion is a finding that is settled by
-moving the table to the archive file, on the principal's word.
+The shape of a record is on [History companion](history-companion.md). A Version History table in the body of a document, or in its companion, is a finding of the check, settled by moving it to the archive file on the principal's word, project by project.
+
+The reasons for these rules are on [Versioning and history](../about/versioning-and-history.md).
 
 ## See also
 
@@ -135,4 +135,4 @@ moving the table to the archive file, on the principal's word.
 - [Research note and bundle](research-bundle.md): the front-matter of a research note and plan, which carry no version.
 - [Glossary](glossary.md): every term of the forge in one line.
 
-Generated on 2026-11-01 for version 6.8 from the files the front-matter names; never edited by hand.
+Generated on 2026-11-08 for version 6.21 from the files the front-matter names; never edited by hand.

@@ -1,8 +1,8 @@
 ---
-generated: 2026-11-01
-version: 6.8
+generated: 2026-11-08
+version: 6.21
 made: mirrored
-inputs-hash: 7acd444041d26a26
+inputs-hash: f7e5918314fc0cfc
 inputs:
   - .claude/skills/forge/states/assignment.md
   - templates/assignment.md
@@ -43,11 +43,11 @@ When the pass is done, Claude offers `/critique essence`, an independent test fo
 
 ## What you have afterwards
 
-- `20-assignment.md`, whose items follow the rules of [Requirement style](../reference/requirement-style.md).
+- `20-assignment.md`, whose items follow the rules of [Requirement style and Story style](../reference/requirement-style.md).
 - `20-assignment.history.md`, its history companion, recording what changed and why.
 - The sections the project uses only: empty sections and template comments are deleted, and the Terms section lists only the prefixes and terms actually used.
 
-Claude ends by naming what changed. The approval is a recommendation, never a gate.
+Claude ends by naming what changed. The approval is a recommendation, never a gate. From the approved assignment you may break business requirements out next: see [Write a BRD](write-a-brd.md).
 
 ## If something goes wrong
 
@@ -81,10 +81,10 @@ You answer with one letter. Say `a` and the group stands as drafted. Say `q` abo
 ## See also
 
 - [The assignment](../about/the-assignment.md): what makes an assignment complete.
-- [Requirement style](../reference/requirement-style.md): the rule set of the items.
+- [Requirement style and Story style](../reference/requirement-style.md): the rule set of the items.
 - [Critique the documents](critique-the-documents.md): running the essence lens.
 - [Spin off a group](spin-off-a-group.md): a requirement group that becomes a project of its own.
 - [Write a BRD](write-a-brd.md): the business requirements that may be broken out of the assignment next.
 - [Glossary](../reference/glossary.md): every term of the forge in one line.
 
-Generated on 2026-11-01 for version 6.8 from the files the front-matter names; never edited by hand.
+Generated on 2026-11-08 for version 6.21 from the files the front-matter names; never edited by hand.

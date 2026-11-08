@@ -739,3 +739,24 @@ verdict on the whole ID, the rest a `changed` record of the history
   yet. The principal's word of 2026-11-08.
 - **Verdict:** FND.3900 parked until the cut of POS.1980
 - **Date:** 2026-11-08
+
+## DEC.0430 — The contributor's engine report, renumbered in the file at the merge, stands as recorded
+- **Decision:** The report `reviews/2026-11-02-check-engine-1528-01b4.md`,
+  whose first finding was born as FND.3820 and renumbered to FND.3890
+  in the file at the merge of pull request #8, when it collided with
+  FND.3820 of the light check of 2026-11-07, is accepted as it stands:
+  the `changed` record of the intent's history (6.18) names the clash
+  and the old number, the ledger reads both, and the report is not
+  raised again. From 6.21 POS.0220 says that a finding of a filed
+  report that clashes is renumbered in the report itself, the one
+  exception to the report's immutability, with the same record.
+- **Reason:** The ID of a finding lives in the heading of its report
+  and the ledger reads it there; a record alone would leave two
+  findings with one number in one project, which POS.0220 forbids.
+  The edit was the principal's word at the merge, recorded where
+  POS.0220 asks; the rule was missing, not the record. Claude's
+  judgement on the project check of 2026-11-08, accepted by the
+  principal the same day.
+- **Verdict:** FND.3910 resolved (the closed record in the intent's
+  history, 6.21)
+- **Date:** 2026-11-08

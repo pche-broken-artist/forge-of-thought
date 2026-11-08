@@ -1,258 +1,322 @@
 ---
-generated: 2026-11-01
-version: 6.8
+generated: 2026-11-08
+version: 6.21
 made: derived
-inputs-hash: f1ce4728ef452a29
+inputs-hash: 2860f93a790d9d15
 inputs:
   - .claude/skills/forge/states/assignment.md
   - templates/assignment.md
   - projects/forge/10-intent.md#POS.0130
   - projects/forge/10-intent.md#Structure and style of an assignment
+  - projects/forge/10-intent.md#POS.0250
   - projects/forge/10-intent.md#POS.1350
   - projects/forge/10-intent.md#REJ.0050
   - projects/forge/10-intent.md#REJ.0060
   - projects/forge/10-intent.md#REJ.0120
+  - projects/forge/10-intent.md#REJ.0540
 ---
 
 # The assignment
 
-The assignment is the artefact of the chain that carries the in-scope
-substance of the intent to the recipients, complete and precise, so
-that they can act on it without the principal in the room. This page
-says what the assignment is, what makes it complete, where assigning
-ends and solving begins, and why it is shaped as it is. It is written
-for the user who makes one with Claude and for the evaluator who
-judges whether one is sound.
+The assignment is the handover document of a project: it carries the
+in-scope substance of the intent to the recipients, complete and
+precise, so that they can act on it without the principal (the person
+whose thinking is being forged) in the room. This page says what the
+assignment is, who writes and reads it, what it is made from and
+holds, when it counts as complete, how it is found and why it is
+shaped as it is. It is written for the user who will compose one and
+for the evaluator who wants to judge whether the forge's handover
+holds together.
 
 ## What it is
 
-The assignment is the handover document of a project, the file
-`20-assignment.md`. It is complete, precise, structured,
-self-contained and versioned. It stands one layer below the
-[intent](../reference/glossary.md), the trunk of the chain where the
-principal (the person whose thinking is being forged) holds his
-positions. The assignment restates the in-scope substance of those
-positions as instructions the recipients can act on: who they are,
-what must be true at the end, what is theirs to decide and bring
-back, what they shall not do, and what the principal has left open on
-purpose.
+The assignment is the artefact `20-assignment.md`, the layer directly
+below the intent. It is a distilled handover: complete, precise,
+structured, self-contained and versioned. Its readers are the
+recipients, the people or teams who will carry the work out, and it
+tells them five things:
 
-The assignment assigns and does not solve. What keeps a document an
-assignment is the kind of content it carries, never its amount. The
-machinery of executing delivery belongs to the recipients. Any
-apparatus of analysis, such as a stakeholder matrix or an impact
-analysis, may still appear where the principal judges it part of
-setting direction. There is no list of forbidden apparatus.
+- who they are;
+- what must be true at the end;
+- what is theirs to decide and bring back;
+- what they shall not do;
+- what the principal has left open on purpose.
 
-The assignment is defined in `.claude/skills/forge/states/assignment.md`
-and worked through `/forge assignment`. Its shape is the template
-`templates/assignment.md`.
+An assignment assigns; it does not solve. What keeps a document an
+assignment is the kind of content, never its amount. Machinery of
+executing delivery belongs to the recipients. Any apparatus, such as
+a stakeholder matrix or an impact analysis, may still appear where
+the principal judges it part of setting direction. There is no size
+target in either direction: length is whatever fidelity requires, and
+the defect is excess of the wrong kind, solving instead of assigning,
+never length as such.
+
+The name "assignment" was kept deliberately. It does not preclude
+further layers below it. Which layers a project takes below the
+assignment is the project's own matter.
 
 ## Who writes and reads it
 
-The principal writes it with Claude. The wording is Claude's, in the
-[Requirement style](../reference/requirement-style.md); the substance
-is the principal's. Where the intent is silent on something the
-recipients would need, Claude raises it as an open question (a `TBC`
-item) rather than filling the gap. Where the assignment would need a
-change of substance, Claude proposes the change to the intent first,
-and the assignment follows. When the assignment reaches completion,
-Claude offers the approval as a recommendation, never as a gate.
+The principal composes the assignment with Claude. Claude reads the
+intent against what the assignment needs and takes the principal
+through a joint pass (How it is found). The wording is Claude's, in
+the Requirement style; the substance is the principal's. What the
+intent is silent on, Claude raises as an open question rather than
+filling it. A change of substance that Claude would make, it proposes
+to the intent first.
 
-The assignment is read by the recipients. Its front-matter names them
-as its audience. They are expected to read it without the principal
-in the room and without oral tradition, which is why every assignment
-carries a Terms section.
+The recipients read the assignment. Its front-matter names them as
+the audience. The document is written so that it can be forwarded
+without oral tradition: every term it relies on stands in its own
+Terms section.
+
+A critic also reads it: at the end of the joint pass Claude offers
+`/critique essence` as the independent test of drift between the
+intent and the assignment. The critic is never run on Claude's own
+judgement, and its findings are settled in an ordinary walkthrough
+(the forge's way of working a list of items one per message, each
+closed with a verdict).
 
 ## Made from
 
-The assignment is made from the intent, read together with the
-project's threads (the open matters of the intent, one file each),
-from the decisions of the project, and from the ledger (the project's
-state report, made at read time). Most of what it needs is in the
-intent. The rest is found by asking the principal.
+The assignment is made from three inputs:
+
+- the intent, `10-intent.md`, read together with the project's
+  threads in `threads/`, the open matters of the intent;
+- `decisions.md`, the principal's decisions with their reasons;
+- the ledger, the project's single source of truth for state, made
+  at read time by a script.
+
+The first draft is created from the template `templates/assignment.md`,
+with its history companion `20-assignment.history.md` created from
+`templates/history.md`. The body is the current state; the companion
+is the record of every change.
 
 ## What it holds
 
 The assignment follows one universal skeleton with optional sections.
-Its sections, in the order of the template, are these:
+Its front-matter carries the version, the status, the project's slug
+and the audience, `recipients`. The body has these sections, in this
+order:
 
-- Purpose & Context: why the assignment exists and what the reader
-  needs in order to act, in a few paragraphs of narrative
-- Objective: what must be true at the end, in a few sentences
-- Scope: what is in scope, in plain text, and what is out of scope,
-  as items
-- Requirements: the items, grouped under plain headings when
-  clusters emerge
-- Constraints: the deliberate boundaries the recipients respect and
-  do not challenge
-- Assumptions: what the requirements rest on and what must stay true
-- Deliverables: what the recipients bring back and when, including
-  specification work delegated to them
-- Open Questions: each with an owner; a question owned by the
-  recipients is part of the assignment, since they decide and report
-  back
-- Success Criteria: optional; may be absent or delegated
-- Terms: the prefixes and the defined terms actually used
+- **Purpose & Context**: why the assignment exists, what problem or
+  opportunity it addresses and what the reader needs in order to act,
+  with no solutioning;
+- **Objective**: what must be true at the end;
+- **Scope**: what is in scope, as plain text, and what is out of scope,
+  as `OOS` items;
+- **Requirements**: `REQ` items, grouped under plain headings when
+  clusters emerge;
+- **Constraints**: `CON` items, deliberate boundaries the recipients
+  respect and do not challenge;
+- **Assumptions**: `ASM` items, what the requirements rest on and what
+  must stay true;
+- **Deliverables**: `DEL` items, what the recipients bring back and
+  when; a deliverable may delegate specification work;
+- **Open Questions**: `TBC` items, each with an owner; a question
+  owned by the recipients is part of the assignment, and they decide
+  and report back;
+- **Success Criteria**: `SCR` items, optional; they may be absent or
+  delegated through a deliverable;
+- **Terms**: the prefixes and the defined terms the document actually
+  uses, and nothing more.
 
 Narrative is confined to Purpose & Context and Objective. Everything
-else is written as items with stable IDs, one idea per item, each
-written once, in full and correct sentences. Why every item carries
-an ID is the matter of [Stable IDs](../about/stable-ids.md). The
-prefixes of the assignment are `REQ` for a requirement, `OOS` for
-what is out of scope, `CON` for a constraint, `ASM` for an
-assumption, `DEL` for a deliverable, `TBC` for an open question and
-`SCR` for a success criterion. Negative mandates (out of scope,
-do-not) rank equally with positive ones.
+else is items with stable IDs, in the format `PREFIX.NNNN`, numbered
+in tens, each new group starting at the next hundred (why every item
+carries an ID: [Stable IDs](stable-ids.md)). Groups are plain
+headings with no IDs, no metadata and no lifecycle. An empty section
+is deleted, and so are the template's comments. The Terms section
+lists only what the document uses. A defined term is capitalised in
+item text to signal that it appears in the Terms section.
 
-Items are written with shall and shall not. They carry no priorities
-and no priority column: everything in an assignment is essential, and
-an exception carries a note reading *optional*. Testability is
-recommended, not required. Success criteria are wanted, not
-compulsory; delegating them to the recipients as a deliverable is a
-legitimate outcome, not a defect. A defined term is capitalised in
-item text to signal that it appears in the Terms section. The rule
-set in full is the [Requirement style](../reference/requirement-style.md).
+Items follow the Requirement style, whose rule set stands on its own
+page ([Requirement style and Story style](../reference/requirement-style.md)).
+What the style amounts to:
 
-Empty sections are deleted. The Terms section lists only the prefixes
-and terms the document actually uses. The history of the assignment
-lives in its companion `20-assignment.history.md`, never in the body.
+- an item is an obligation in the indicative, one idea per item,
+  written once, in a full correct sentence;
+- in English the obligation is **shall** / **shall not**, strictly;
+  would, could, should, might, may and MoSCoW wording are not used;
+- an artefact in another language uses that language's own verb of
+  obligation under the same rule of kind, and the forge names no word
+  of any other language (which language an artefact is written in:
+  [Languages](languages.md));
+- there is no priority column and no priority tag; everything is
+  essential, and an exception carries a note reading *optional*;
+- testability is recommended, not required;
+- success criteria are wanted but not compulsory; delegating them to
+  the recipients as a deliverable is a legitimate outcome, not a
+  defect.
+
+The assignment also carries the cut of the intent: what of it is the
+recipients' now, what is expressly later and what is out of scope.
 
 ## Complete when
 
 The assignment is complete when nothing the recipients would need is
 left to assumption. Delegated or open on purpose is complete; silent
-is not. It is complete, too, when the recipients know what must be
-true at the end, and why, well enough to act rightly where the plan
-no longer fits.
+is not. The recipients must know what must be true at the end, and
+why, well enough to act rightly where the plan no longer fits.
 
-Nothing is omitted for the sake of brevity. A silent omission is a
-defect. Leaving a matter out is legitimate only as an explicit
-delegation, that is, a `DEL` or a `TBC` item. There is no size target
-in either direction: length is whatever fidelity requires. The defect
-an assignment can have is excess of the wrong kind, solving instead
-of assigning, never length as such.
+Nothing is omitted for brevity's sake. Leaving a matter out is
+legitimate only as an explicit delegation, that is, a `DEL` or a
+`TBC` item. A silent omission is a defect.
+
+When this completion is reached, Claude offers the approval. The
+offer is a recommendation, never a gate.
 
 ## How it is found
 
-The assignment is found in a joint pass of three phases and no new
-kind of interview:
+Most of the assignment lies in the intent; the rest is found by
+asking. Claude walks a map of what the assignment needs twice: before
+the recast, to see what the intent leaves unanswered, and at the end
+of the pass. An area of the map may stay empty when it was considered
+and found not to apply. The areas are:
 
-1. Questions up front, one per message, only for what is the
-   principal's and the intent does not answer: who the recipients
-   are, what is delegated and what specified, whether success
-   criteria are present, delegated or deliberately absent, what is
-   later. Where the intent answers everything, there are none.
-2. The recast: Claude writes the whole draft from the intent, and
-   with it a provenance map, which lists for each group the items
-   and the positions they came from, the in-scope positions that
-   landed nowhere, and the items with no position behind them. Both
-   of the last two are to be empty. The provenance map is a tool of
-   the pass, not part of the assignment.
-3. A walkthrough by group. A walkthrough is the method by which a
-   list of items is worked one item per message, each closed with a
-   verdict. Here one item of the walkthrough is one group of the
-   assignment: what it covers, from which positions, what in it is
-   delegated or open, what is optional or later. Dozens of items
-   pass in a handful of messages and nothing is skipped.
+- the recipients: who they are, what they already know and what they
+  will do with the assignment;
+- the objective: what must be true at the end;
+- the cut: what of the intent is theirs now, what is expressly later
+  and what is out of scope;
+- the line between assigning and solving: what is specified, what is
+  theirs to decide and bring back, what is left open on purpose and
+  whose it is;
+- the boundaries: what they shall not do, what is not to be challenged
+  and what the whole rests on;
+- success: criteria present, delegated or deliberately absent;
+- self-containment: what must be defined so that the assignment is
+  read without the principal in the room.
 
-A question up front on the detail of the handover is answered in the
-pass. A question on substance the intent has not settled means the
-intent is not ready, and the work returns to the intent. Many such
-questions are evidence of that, never its measure.
-
-Before the recast and again at the end of the pass, Claude walks the
-areas an assignment needs: the recipients, the objective, the cut
-between now, later and out of scope, the line between assigning and
-solving, the boundaries, success, and self-containment. An area may
-stay empty when it was considered and found not to apply.
-
-The pass runs whole where no assignment exists yet. Where an
-assignment stands and the intent has moved, the pass runs on what
-changed, the provenance map showing what the change touched. A
-wording fix is made in the assignment directly. After the pass,
-Claude offers `/critique essence` as the independent test of drift
-between the intent and the assignment; it never runs it on its own
-judgement. The pass as a procedure, step by step, is
+The assignment is found in a joint pass of three phases, with no new
+kind of interview. First come questions up front, one per message,
+only for what is the principal's and the intent does not answer; there
+are none where the intent answers everything. A question on the detail
+of the handover belongs here. A question on substance the intent has
+not settled means the intent is not ready, and the work returns to
+it. Second comes the recast: Claude writes the whole draft from the
+intent and, with it, a provenance map from each group to its items
+and to the positions of the intent they came from, listing beside it
+the in-scope positions that landed nowhere and the items with no
+position behind them; both lists are to be empty. The provenance map
+is a tool of the pass, not part of the assignment. Third comes the
+walkthrough by group: one item of the walkthrough is one group, with
+what it covers, from which positions, what in it is delegated or
+open, and what is optional or later. A verdict is given per group; a
+question on a single item opens a sub-item and closes it before the
+pass moves on. The pass as a procedure, step by step, is
 [Distil an assignment](../use/distil-an-assignment.md).
+
+There are three ways in. Where no assignment exists yet, the joint
+pass runs whole. Where an assignment stands and the intent has
+moved, the pass runs on what changed, the provenance map showing what
+the change touched. A wording fix is made in the assignment directly.
+A substance change asked for in the assignment goes to the intent
+first, and from there it propagates down.
 
 ## Why
 
-**Why complete and self-contained.** The recipients act without the
-principal in the room. What the assignment leaves to assumption, they
-guess. What it tells them about the end and the reason lets them act
-rightly where the plan no longer fits. The size targets were dropped
-because the goal is to have the assignment right, not short.
+**Why structured items and not prose.** An item with a stable ID can
+be cited, reviewed, traced into the layer below and changed one at a
+time. Prose cannot be pointed at. So narrative is confined to the two
+sections that need it.
 
-**Why items with stable IDs rather than prose.** An item with a
-stable ID can be cited, reviewed, traced into the layer below and
-changed one at a time. Prose cannot be pointed at. This holds even at
-very high abstraction.
+**Why the boundary is kind, not amount.** The defect of an assignment
+is solving instead of assigning. An early case led to a list of
+banned apparatus, such as stakeholder matrices and impact analyses;
+that list was one case and not a universal rule. So the rule says
+what kind of content belongs, and any apparatus may appear where it
+serves setting direction.
 
-**Why shall and not MoSCoW.** Shall is testable and binds. The softer
-verbs, would, could, should, might and may, leave the recipient to
-guess what is required. MoSCoW puts a priority where completeness
-belongs. Priority tags on items were considered as an optional
-attribute and dropped: everything in an assignment is essential, and
-the exceptions are noted as *optional*.
+**Why complete means nothing silent.** The recipients act without the
+principal in the room. What is delegated or open on purpose they can
+see and take up; what is silent they can only guess at. So a silent
+omission is a defect and length is never one.
+
+**Why an obligation in the indicative.** An obligation in the
+indicative is testable and binds. The softer verbs, would, could,
+should, might and may, leave the recipient to guess what is required.
+MoSCoW puts a priority where completeness belongs. So a conditional, a
+permission, a wish and MoSCoW wording are all out.
+
+**Why shall in English, strictly.** The forge aligns its English
+requirement wording with an external standard for such documents.
+Which standard is not named on this page.
+
+**Why the verb follows the language of the artefact.** The
+alternative was to keep `shall` in an artefact of every language and
+have a render turn it into the language's verb. That was dropped for
+three reasons. One requirement would have two wordings. Every render
+would translate again. And the document the stakeholders approve
+would not be the one the chain holds. So an artefact in another
+language carries its own verb of obligation under the same rule of
+kind, and the forge names no word of any other language.
+
+**Why no priorities.** Priority tags such as `critical`, `important`
+and `nice-to-have` were wanted at first as an optional attribute.
+They were dropped in favour of the convention that everything in an
+assignment is essential and an exception is noted as *optional*.
 
 **Why testability is recommended, not required.** Assignments are
-deliberately high-level. Delegating concretisation to the recipients
-through a `DEL` item is a legitimate outcome.
+deliberately high-level. Delegating concretisation through a `DEL`
+item is a legitimate outcome.
 
-**Why one skeleton.** Separate templates per genre of assignment were
-rejected in favour of one universal skeleton with optional sections,
-so that everything arriving from the principal has a consistent
-shape.
+**Why one skeleton for every assignment.** Separate templates per
+genre of assignment were rejected in favour of one universal skeleton
+with optional sections. So everything arriving from the principal has
+a consistent shape.
 
 **Why a Terms section.** So that the assignment can be forwarded
 without oral tradition.
 
-**Why a joint pass of three phases.** Why not item by item: most
+**Why a joint pass of three phases.** Not item by item, because most
 items are craft derived from the intent, and a verdict on each is
-ceremony. Why not "read the whole": without the provenance map one
-sees what is there, not what is missing.
+ceremony. Not "read the whole", because without the map one sees what
+is there, not what is missing. With the provenance map visible at
+each group, dozens of items pass in a handful of messages and nothing
+is skipped. The pass adds no new kind of interview: its questions and
+its walkthrough are the forge's ordinary ones.
 
 **Why the name.** "Mandate" was rejected outright by the principal;
 the reason is not recorded. "Charter" carries project-management
 ceremony and implies a project, which many assignments are not.
-"Assignment" was kept deliberately, and the name does not preclude
-further layers below it.
+"Assignment" was retained, and it does not preclude further layers
+below it.
 
 ## A worked example
 
-A generic group of a Requirements section, taken from no project,
-shows the shape of an item:
+One requirement item, generic and from no project, as it would stand
+in the Requirements section of an assignment. The defined term is
+capitalised and would appear in the Terms section.
 
 ```
 ### Intake
-- **REQ.0010** The Intake Register shall record every request with
-  its requester, its date of arrival and its Service Line before any
-  work on the request begins.
-- **REQ.0020** The Intake Register shall not accept a request without
-  a named requester.
-- **DEL.0010** The recipients shall define the fields of the Intake
-  Register beyond those named in REQ.0010 and return them with the
-  first design.
+
+- **REQ.0110** The Service shall record every request it receives,
+  with the time of receipt and the identity of the Requester, and
+  shall make that record available to the Requester on demand.
 ```
 
-Each item is one idea in one full sentence, written with shall or
-shall not. It carries an ID that is cited, not renumbered. It carries
-no priority; all three are essential. "Intake Register" and "Service
-Line" are capitalised because they are defined in the Terms section
-of the same document. The first two items are testable; the third
-delegates concretisation to the recipients, which is complete, since
-nothing is left silent.
+What makes it an item of an assignment: it is one idea, written once,
+in a full sentence; it is an obligation in the indicative, `shall`,
+and neither a wish nor a permission; it carries no priority, so it is
+essential; it says what must be true at the end and leaves how the
+record is kept, the solving, to the recipients. Had the principal
+chosen to leave the content of the record to the recipients, the
+place for that would be a `DEL` item asking them to define it and
+return, not a vaguer requirement.
 
 ## See also
 
 - [Distil an assignment](../use/distil-an-assignment.md): the joint
   pass as a procedure.
-- [Stable IDs](../about/stable-ids.md): why every item carries an ID.
-- [Requirement style](../reference/requirement-style.md): the rule
-  set.
+- [Stable IDs](stable-ids.md): why every item carries an ID.
+- [Languages](languages.md): which language an artefact is written
+  in.
+- [Requirement style and Story style](../reference/requirement-style.md):
+  the rule set.
 - [Glossary](../reference/glossary.md): every term of the forge in
   one line.
 
-Generated on 2026-11-01 for version 6.8 from the files the
+Generated on 2026-11-08 for version 6.21 from the files the
 front-matter names; never edited by hand.

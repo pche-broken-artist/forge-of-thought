@@ -1,8 +1,8 @@
 ---
-generated: 2026-11-01
-version: 6.8
+generated: 2026-11-08
+version: 6.21
 made: mirrored
-inputs-hash: 990943fcd6c5828a
+inputs-hash: 972d14c18f70ce72
 inputs:
   - .claude/skills/render/SKILL.md
   - .claude/skills/publish/SKILL.md
@@ -11,11 +11,17 @@ inputs:
 
 # Render provenance
 
-This page is the reference for the provenance block every render opens with, the one definition of a stale render, the place of each file a render or a publication makes, and the companion of a published file. It is for the reader who runs `/render` or `/publish` and for the one who extends them.
+This page is the reference for the provenance block every render opens
+with, the definition of a stale render, the companion file of a
+published file and the places where these files land. It is for the
+person who runs renders and publishes and for the one who extends the
+forge. A render is an audience-specific output generated from the
+chain; a recipe is the versioned file that says how it is made.
 
-## The provenance block
+## The front-matter of a render
 
-Every render opens with this YAML front-matter, written by the subagent (an isolated helper that sees only the recipe and its inputs) that generates it.
+Every render opens with this YAML front-matter, written by the
+subagent that generates it:
 
 ```yaml
 ---
@@ -28,70 +34,67 @@ inputs:
 ---
 ```
 
-| Field | Holds |
-|---|---|
-| `project` | the project's slug |
-| `render` | the name of the recipe |
-| `generated` | the date of the render |
-| `recipe` | the recipe's path and its version |
-| `inputs` | one line per input, path and version |
+Inputs without a version of their own (for example `CLAUDE.md`) are
+cited by path alone.
 
-An input without a version of its own (such as `CLAUDE.md`) is cited by path alone.
+A render in one of several languages adds one field:
 
-### A render in several languages
+- `language: <lang>`
 
-Where a recipe declares several languages, each language is a render of its own, and its front-matter adds:
+A translation adds a second field:
 
-| Field | Holds | On |
-|---|---|---|
-| `language` | the language of this render | every render of the set |
-| `translated_from` | `renders/<recipe>.<primary>.md`, the primary render it was made from | each translation |
+- `translated_from: renders/<recipe>.<primary>.md`
 
-## Stale
+## A stale render
 
-A render is stale when any version cited in its front-matter differs from the current version of that file, or when a cited file no longer exists. This is the one definition of a stale render.
+A render is stale when any version cited in its front-matter differs
+from the current version of that file. It is also stale when a cited
+file no longer exists. This is the one definition of the term.
 
 ## Where the files land
 
 | File | Place |
 |---|---|
-| The render | `renders/<recipe>.md` |
-| The render of one language, where the recipe declares languages | `renders/<recipe>.<lang>.md` |
-| The render, where the recipe declares an `output:` path | that path (for example the repository README) |
-| The plain file (`.docx`, `.pptx`), where the recipe has a `## Format` section | beside the render |
-| The player file of a screenplay, where the format is `video` or `html-player` | beside the render, or at the recipe's `output:` |
-| The designed file | `published/<recipe>.<ext>` |
-| The companion of the designed file | `published/<recipe>.md` |
+| Markdown render | `renders/<recipe>.md` |
+| Render in one of several languages | `renders/<recipe>.<lang>.md`, one file per language |
+| Render with an `output:` in its recipe | the path the recipe's `output:` names |
+| Plain file of a document format | beside the render |
+| Player file of a screenplay | beside the render, or at the recipe's `output:` in the engine's `docs/videos/` |
+| Designed file | `published/<recipe>.pptx` or `published/<recipe>.docx` |
+| Companion of the designed file | `published/<recipe>.md` |
 
-Further rules of place:
+An `output:` path may lie outside the project, in the engine's
+`docs/videos/`. That is the place of the plain format file only. The
+Markdown render always stays in the project's `renders/`.
 
-- An `output:` path may lie outside the project, in the engine's `docs/videos/`. That is the place of the plain file only. The Markdown render always stays in the project's `renders/`.
-- In `docs/videos/` the script that makes the player file also renews the player page.
-- A recipe without a `## Format` section ends at the Markdown render and has no plain file.
-- A screenplay has no designed file.
-- A render is overwritten freely on each run.
+A screenplay has no designed file.
 
-## The published companion
+## The companion of a published file
 
-The companion `published/<recipe>.md` is the provenance of a published file. It is written after the file is verified to exist, and a failed run writes none. Its front-matter holds these fields and nothing else.
+`published/<recipe>.md` is the provenance of the published file. It
+is written after the file exists, and a failed run writes none. Its
+front-matter has these fields and nothing else:
 
-| Field | Holds |
+| Field | Value |
 |---|---|
 | `project` | the project's slug |
-| `file` | the name of the published file |
+| `file` | the published file's name |
 | `recipe` | the recipe, with its version |
 | `render` | `generated <date>` and the input versions of the render's front-matter |
 | `model` | the model that made the file |
-| `published` | the date of publication |
+| `published` | the date of publishing |
 
 ## The state of a published file
 
-The state is `current` or `stale`. It is never written in the companion. The ledger script computes it and shows it in the Published table, one row per designed file, with the columns File, Recipe, From render, Model, Published and State.
+The ledger computes the state of each published file and nobody
+writes it. The Published table has one row per designed file, with
+the columns File, Recipe, From render, Model, Published and State.
+The values of State are:
 
-| State | When |
-|---|---|
-| `current` | the render's `generated` date is the one the companion names |
-| `stale` | the render is newer than the companion names, or the render is missing |
+- `current`: the render's generated date is the one the companion
+  names.
+- `stale`: the render is newer than the companion's date, or the
+  render is missing.
 
 ## See also
 
@@ -99,4 +102,4 @@ The state is `current` or `stale`. It is never written in the companion. The led
 - [Publish a designed file](../use/publish-a-designed-file.md): the command that writes the companion.
 - [Glossary](glossary.md): every term of the forge in one line.
 
-Generated on 2026-11-01 for version 6.8 from the files the front-matter names; never edited by hand.
+Generated on 2026-11-08 for version 6.21 from the files the front-matter names; never edited by hand.

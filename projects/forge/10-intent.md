@@ -1,5 +1,5 @@
 ---
-version: 6.20
+version: 6.21
 status: draft
 project: forge
 audience: principal + Claude only
@@ -1132,7 +1132,12 @@ position that already stands elsewhere.
   takes the next free number of the merged state (POS.1790); where the
   histories do not decide, the principal's word. The ledger script
   reports the clash (POS.1640) and writes nothing: the renumbering is a
-  write into the artefacts, Claude's with the principal. Items may move
+  write into the artefacts, Claude's with the principal. A finding of a
+  filed report that clashes is renumbered in the report itself, the one
+  exception to the report's immutability, with the same `changed`
+  record: the ID lives in the report's heading and the ledger reads it
+  there, so a record alone would leave two numbers standing
+  (DEC.0430). Items may move
   between groups freely. Groups are plain headings with no IDs, no
   metadata and no lifecycle; depth is capped at two levels. An ID keeps
   four digits as long as the number fits and takes a fifth only beyond
@@ -1144,7 +1149,7 @@ position that already stands elsewhere.
   the BRD already had two (POS.1830) against the rule, US joined them,
   and the scripts that matched three letters alone were the one limit,
   widened with the ledgers of three projects unchanged. Present shape
-  2026-11-02 (REJ.0370).
+  2026-11-08 (REJ.0370, DEC.0430).
 - **POS.0230** Prefix vocabulary, aligned with the group BRD standard
   where an equivalent exists: REQ, OOS, CON, ASM, DEL, TBC, SCR in the
   assignment; BR, UC, DEP, NFR with OOS, ASM, TBC, SCR in the BRD

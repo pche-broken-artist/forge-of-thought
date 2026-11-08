@@ -1,8 +1,8 @@
 ---
-generated: 2026-11-01
-version: 6.8
+generated: 2026-11-08
+version: 6.21
 made: mirrored
-inputs-hash: c67c0ec3ed15be8f
+inputs-hash: 496af30b8d8f1ea9
 inputs:
   - .claude/skills/publish/SKILL.md
   - templates/ledger.md#Published
@@ -84,7 +84,7 @@ current project from the context, or asks when it is ambiguous.
 The designed file stays as the run made it. What you want to change,
 you copy first under a name of your own. That copy, or a PDF you save
 from Word or PowerPoint, is yours: it is kept in `published/` with no
-companion and no check. The reasons are in
+companion and no check. See
 [Renders and recipes](../about/renders-and-recipes.md).
 
 ## If something goes wrong
@@ -130,4 +130,4 @@ You have read the render of the recipe `my-deck` in the project
 - [Glossary](../reference/glossary.md): every term of the forge in one
   line.
 
-Generated on 2026-11-01 for version 6.8 from the files the front-matter names; never edited by hand.
+Generated on 2026-11-08 for version 6.21 from the files the front-matter names; never edited by hand.

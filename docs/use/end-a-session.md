@@ -1,8 +1,8 @@
 ---
-generated: 2026-11-01
-version: 6.8
+generated: 2026-11-08
+version: 6.21
 made: mirrored
-inputs-hash: 864d0f6591897f4d
+inputs-hash: ecd6548426013080
 inputs:
   - .claude/skills/end/SKILL.md
   - scripts/forge-status.py
@@ -10,11 +10,11 @@ inputs:
 
 # End a session
 
-`/end` is the command that tells you what a shutdown of the command line would lose, so that you close a working session knowing nothing is lost. It is for the principal (whoever's thinking is being forged) at the end of a working session. It writes nothing and runs nothing but its scripts. Every remedy it finds is an offer that you accept or leave.
+`/end` is the command that tells you, before you close the command line, what a shutdown would lose. It is for you, the principal (the person whose thinking is being forged), at the end of a working session (one run of Claude with you, from its start to the moment you close it).
 
 ## When to use it
 
-Use it before you close the command line, or before you leave a conversation you will not return to. Claude is the assistant that runs the forge in that command line. What lives only in a conversation is gone when the conversation is closed, because the forge keeps its state in files. The reason is given on [Documents and records](../about/documents-and-records.md).
+Use it when you are about to stop working and want to know that nothing is lost.
 
 ## The command
 
@@ -22,45 +22,51 @@ Use it before you close the command line, or before you leave a conversation you
 /end
 ```
 
-The command takes no argument.
-
 ## What happens
 
-1. Claude says what lives only in this conversation. That is a round of work not yet written, verdicts carried but not written (a verdict is your answer to one item of a walkthrough, the one-item-at-a-time way of settling a list), and anything Claude promised and has not done. It offers the write.
+`/end` writes nothing. It runs nothing but its scripts. Every remedy it finds is an offer, never an action.
 
-   You should now see a plain statement of what is carried in the conversation only, or a statement that nothing is.
+1. Claude says what lives only in this conversation. That means a round of work not yet written, verdicts carried but not written, and anything promised and not done. It offers the write.
 
-2. Claude runs the status script without the remote, so no network is touched. It names every repository with unsaved changes and offers `/save`, the command described on [Save your work](save-your-work.md). The script lists the engine and each project in turn. For each it shows its unsaved changes or the line "clean - nothing to save", the branch, the last commit and the origin. It also says when a conflict is standing in a repository, and when a project is not under git.
+   You should now see a list of what is held only in the conversation, with the offer to write it, or a statement that there is nothing of the kind.
 
-   You should now see each repository with changes named, and an offer to save it.
+2. Claude runs the status script without the remote, so nothing touches the network. It names every repository with unsaved changes and offers `/save` for them.
 
-3. Claude makes the ledger of the project, the file that holds its state and is made at read time from the documents. It names the stale renders as a fact, read from the ledger's Renders table. A render is an output generated from the documents of the chain. It makes no offer for them, because renders belong to the release.
+   You should now see each repository named with its unsaved changes, or told that it is clean.
 
-   You should now see the stale renders named, or no mention of any.
+3. Claude makes the ledger (the file that holds the state of the project, made when it is read) with its script. It names the stale renders as a fact from the ledger's Renders table. It makes no offer, because renders belong to the release.
 
-4. Claude closes with one sentence. Either nothing lives only in this conversation and shutting the command line loses nothing, or it gives the list of what a shutdown would lose.
+   You should now see the stale renders named, or none named.
 
-   You should now see that one sentence.
+4. Claude closes with one sentence. Either nothing lives only in this conversation and shutting the command line loses nothing, or the list of what it would lose.
+
+   You should now see that one closing sentence.
 
 ## What you have afterwards
 
-You have a statement of what a shutdown would lose, and offers for what can be saved. Nothing has been written, committed or changed by `/end` itself. If you accept an offer, the write or the save is a step of its own.
+You have a plain statement of what a shutdown would lose. Nothing has been written, saved or changed by `/end` itself. What you decide to keep is written through the offers it made: the write of your round, and [Save your work](save-your-work.md).
 
 ## If something goes wrong
 
-The inputs record no stop condition of `/end`. The status script reports a repository that is not under git as "not under git". It reports a conflict in progress with the number of files in conflict, and says the conflict is settled first, then saved.
+The inputs record no stop condition for `/end`. If the status script prints a repository as "not under git", that repository has no unsaved changes to name, because the forge does not track it with git.
 
 ## A worked example
 
-This is the closing of two runs, generic and taken from no real session.
+The closing, when everything is kept in files (the project slug is a placeholder):
 
-When nothing is at risk:
+```
+Nothing lives only in this conversation, every repository is clean,
+and no render of my-project is stale: shutting the command line
+loses nothing.
+```
 
-> Nothing lives only in this conversation, and shutting the command line loses nothing.
+The closing, when something would be lost:
 
-When something is:
-
-> Shutting the command line now would lose: the round on the open items of `my-project`, carried as verdicts and not yet written; unsaved changes in `my-project`.
+```
+A shutdown would lose:
+- the verdicts of this round, carried but not written (I offer the write)
+- unsaved changes in my-project (I offer /save)
+```
 
 ## See also
 
@@ -68,4 +74,4 @@ When something is:
 - [Documents and records](../about/documents-and-records.md): why state lives in files and never in the conversation.
 - [Glossary](../reference/glossary.md): every term of the forge in one line.
 
-Generated on 2026-11-01 for version 6.8 from the files the front-matter names; never edited by hand.
+Generated on 2026-11-08 for version 6.21 from the files the front-matter names; never edited by hand.

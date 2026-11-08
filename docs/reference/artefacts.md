@@ -1,13 +1,14 @@
 ---
-generated: 2026-11-01
-version: 6.8
+generated: 2026-11-08
+version: 6.21
 made: mirrored
-inputs-hash: 540a4be16428cc33
+inputs-hash: 5ea8604d2ed74045
 inputs:
   - .claude/skills/forge/states/brief.md
   - .claude/skills/forge/states/intent.md
   - .claude/skills/forge/states/assignment.md
   - .claude/skills/forge/states/brd.md
+  - .claude/skills/forge/states/user-stories.md
   - .claude/skills/forge/states/solution-design.md
   - CLAUDE.md#ID scheme
   - CLAUDE.md#Ledger
@@ -15,87 +16,30 @@ inputs:
 
 # Artefacts
 
-This page lists the artefacts of the chain as it stands today, one row per definition, with the file each is kept in, its template, what it is made from, the prefixes of its items and the command that works it. It is for anyone who needs to look up which artefact a project can have and what it reads. The reason the listing of definitions is the one list is on [The document chain](../about/the-document-chain.md).
+This page lists the artefacts of today's chain, one row per definition, with the file, the template, the inputs, the prefixes of the items and the command that works each. It is for the user, the extender and the evaluator who need to look up one artefact quickly. An artefact is a document of the chain, and its definition is the state file that says what it is and how it is found. The principal is the person whose thinking is being forged.
 
-A definition is a state file in `.claude/skills/forge/states/`. The artefacts are listed here in the order of the file numbers. The principal is the person whose thinking is being forged. The ledger is the state report that is made from the documents when it is read.
+The listing of `.claude/skills/forge/states/` is the one list of artefacts. The rows below follow the order of the file numbers.
 
 ## Overview
 
-| Artefact | What it is for | When it fits | File |
-|---|---|---|---|
-| Brief | The principal's idea put together | Every project starts here; a later whole of thinking is a later brief | `00-brief.md` or `00-brief-<name>.md` |
-| Intent | The briefs chiselled into what the principal holds | Every project has one; it is the trunk of the chain | `10-intent.md` |
-| Assignment | The intent's in-scope substance carried to the recipients | When recipients must act without the principal in the room | `20-assignment.md` |
-| BRD | The business requirements | When stakeholders must review and delivery must estimate | `30-brd.md` |
-| Solution design | How the things wanted are realised | When a design is worth writing | `40-solution-design.md` |
+| Artefact | Description | Template | Inputs | Prefixes | Command |
+|---|---|---|---|---|---|
+| `00-brief.md`, or `00-brief-<name>.md` for a later whole of thinking | Compose or finish a brief - the principal's idea put together, found with Claude or handed over, approved when done | `templates/brief.md` | The principal's thought; research notes, sources and Claude's proposals gathered around it; the existing intent and the ledger, read only to know what already stands | none (no IDs) | `/forge brief [slug]` |
+| `10-intent.md` | Iterate 10-intent.md - the briefs chiselled into what the principal holds | `templates/intent.md` | The briefs the principal says to mine (approved or not); `decisions.md`; the ledger; sources only as the principal directs; the project's `threads/` | POS, FCT, THR, REJ | `/forge intent [slug]` |
+| `20-assignment.md` | Iterate 20-assignment.md - the intent's in-scope substance carried to the recipients in a joint pass | `templates/assignment.md` | `10-intent.md` with the project's `threads/`; `decisions.md`; the ledger | REQ, OOS, CON, ASM, DEL, TBC, SCR | `/forge assignment [slug]` |
+| `30-brd.md` | Iterate 30-brd.md - the business requirements: the assignment or the intent broken into rules, behaviour and qualities the stakeholders can review and the delivery can estimate; a source put in yields a draft BRD as a work product | `templates/brd.md` | One parent named by the principal: `20-assignment.md` (read with the intent and `threads/`), or `10-intent.md` with `threads/` where there is no assignment; a file put in yields a draft in `work/` instead; around the parent: `decisions.md`, the ledger, the DEL items of an assignment, the roster of the areas of the enterprise a BRD must consider (a library document of the instance, cited by path, or `Roster: none`), the group's standard where the instance has one, the indexes of the resources of the project and of its libraries | BR, UC, DEP, NFR, OOS, ASM, TBC, SCR | `/forge brd [slug]` |
+| `35-user-stories.md` | Iterate 35-user-stories.md - the requirements broken into stories of behaviour that the stakeholders approve as a whole, the delivery builds from and the testers test from | `templates/user-stories.md` | One parent named by the principal: `30-brd.md` (read with the layers above it), or, for a small change on the principal's word, `10-intent.md` with `threads/`; a requirements document of someone else yields stories in `work/` instead; around the parent: `decisions.md`, the ledger, the indexes of the resources | US | `/forge user-stories [slug]` |
+| `40-solution-design.md` | Iterate 40-solution-design.md: how the things wanted are realised, part by part, with the choices they rest on | `templates/solution-design.md` | The lowest layer the project has above it (the intent alone, the assignment, the BRD or the user stories) and whatever stands above that; `decisions.md`; the ledger; the project's `threads/`; research and sources as the principal directs | SOL, TBC | `/forge solution-design [slug]` |
 
-The descriptions below are quoted as the definitions have them, with their long dash rendered as a spaced hyphen.
+The prefixes are those of the ID scheme: a prefix of two or three letters, then a four-digit number, global and never renumbered. A prefix such as TBC or OOS appears on more than one layer. The ledger is the state of a project made at read time from its documents, and it reads the header of each artefact.
 
-## Brief
-
-- File: `00-brief.md` (bare) or `00-brief-<name>.md` (with a name: a later whole of thinking born during the project's life).
-- Description: "Compose or finish a brief - the principal's idea put together, found with Claude or handed over, approved when done".
-- Template: `templates/brief.md`.
-- Inputs: the principal's thought, however it arrives. Around it, gathered during the work: research notes (`research/`), sources (`sources/`) and Claude's own proposals. The existing intent and the ledger are read only to know what already stands.
-- Prefixes of its items: none. A brief has no IDs and no conventions of the chain.
-- Command: `/forge brief`.
-
-## Intent
-
-- File: `10-intent.md`, with the project's threads in `threads/`.
-- Description: "Iterate 10-intent.md - the briefs chiselled into what the principal holds".
-- Template: `templates/intent.md`.
-- Inputs: the briefs the principal says to mine (`00-brief.md` and any `00-brief-<name>.md`, approved or not), `decisions.md` and the ledger. Sources only as the principal directs. The intent as it stands is read with the threads.
-- Prefixes of its items: POS (position), FCT (fact), REJ (rejected direction) and THR (open thread, one file each in `threads/`).
-- Command: `/forge intent`.
-
-## Assignment
-
-- File: `20-assignment.md`.
-- Description: "Iterate 20-assignment.md - the intent's in-scope substance carried to the recipients in a joint pass".
-- Template: `templates/assignment.md`.
-- Inputs: `10-intent.md` read with the project's threads, `decisions.md` and the ledger.
-- Prefixes of its items: REQ (requirement), OOS (out of scope), CON (constraint), ASM (assumption), DEL (deliverable), TBC (open question) and SCR (success criterion).
-- Command: `/forge assignment`.
-
-## BRD
-
-- File: `30-brd.md`.
-- Description: "Iterate 30-brd.md - the business requirements: the assignment or the intent broken into rules, behaviour and qualities the stakeholders can review and the delivery can estimate; a source put in yields a draft BRD as a work product".
-- Template: `templates/brd.md`.
-- Inputs: one parent, named by the principal when he asks for the BRD.
-  - `20-assignment.md`, read with `10-intent.md` and `threads/`.
-  - `10-intent.md` with `threads/`, where the project has no assignment.
-  - A file the principal puts in (a transcript, an offer, a document of someone else) is a third way in. It is registered through `/ingest` and yields a draft BRD that is a work product in `work/`, never `30-brd.md`.
-- Inputs around the parent:
-  - `decisions.md` and the ledger.
-  - The DEL items of an assignment, as the list of what the BRD is asked to bring back.
-  - The roster of the instance, the areas of the enterprise a BRD must consider and which of them are mandatory: a library document of the instance, cited by path. A project with no enterprise around it has no roster and says `Roster: none`.
-  - The group's standard, where the instance has one: a library document likewise.
-  - The indexes of the project's resources and of every library it depends on (`sources/00-INDEX.md`, `research/00-INDEX.md`, `projects/lib-*/sources/00-INDEX.md`).
-  - Sources and research as the principal directs.
-- Prefixes of its items: BR (business requirement), UC (use case), DEP (dependency) and NFR (non-functional requirement), which are the BRD's own; also OOS, ASM, TBC and SCR.
-- Command: `/forge brd`.
-
-What the BRD holds and why is on [The BRD](../about/the-brd.md).
-
-## Solution design
-
-- File: `40-solution-design.md`.
-- Description: "Iterate 40-solution-design.md: how the things wanted are realised, part by part, with the choices they rest on".
-- Template: `templates/solution-design.md`.
-- Inputs: the lowest layer the project has above it (the intent alone, the assignment or the BRD) and whatever stands above that, `decisions.md` and the ledger. The intent is read with the project's threads. Where the thing already exists, what realises it is read as it stands. Research and sources as the principal directs.
-- Prefixes of its items: SOL (a part of the solution) and TBC (open question).
-- Command: `/forge solution-design`.
-
-## A layer a project does not have
-
-A layer a project does not have is not missing: none of the layers below the intent is a condition of another, and the ledger and the checks say nothing of an absent one.
+A layer a project does not have is not missing: `/forge` and the checks say nothing of it.
 
 ## See also
 
 - [The document chain](../about/the-document-chain.md): why the listing of that directory is the one list.
 - [The BRD](../about/the-brd.md): what the BRD holds and why.
+- [The user stories](../about/the-user-stories.md): what the stories hold and why.
 - [Glossary](glossary.md): every term of the forge in one line.
 
-Generated on 2026-11-01 for version 6.8 from the files the front-matter names; never edited by hand.
+Generated on 2026-11-08 for version 6.21 from the files the front-matter names; never edited by hand.

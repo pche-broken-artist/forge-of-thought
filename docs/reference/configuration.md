@@ -1,8 +1,8 @@
 ---
-generated: 2026-11-01
-version: 6.8
+generated: 2026-11-08
+version: 6.21
 made: mirrored
-inputs-hash: 6d7299dd2701e92b
+inputs-hash: ac6ad4592db7521a
 inputs:
   - .claude/settings.json
   - .gitignore
@@ -11,6 +11,7 @@ inputs:
   - templates/gitignore
   - templates/project.md
   - templates/CLAUDE.local.md
+  - pytest.ini
   - .claude/skills/setup/SKILL.md
   - scripts/forge-config.py
   - CLAUDE.md#What this workspace is
@@ -18,152 +19,161 @@ inputs:
 
 # Configuration
 
-This page lists the files that configure an instance of the forge and a project, and what each holds, field by field. It is for the user who wants to know what sits on the machine after setup and for the extender who changes one of these files. An instance is one installation of the engine. The principal is the person whose thinking is being forged.
+This page lists the files that configure an instance of the forge and a project, and what each holds, field by field. It is for the user who sets up an instance and for the extender who changes how the forge is held together. The principal (whoever's thinking is being forged) is named in these files by role, never by name. Terms of the forge are in the [Glossary](glossary.md).
 
-The files fall in three groups: the files inside the engine, the files of a project, and the configuration outside the engine that `/setup` writes into git's global file. The command that fills the instance files is described in [Set up the forge](../start/setup.md).
+## Overview
 
-## Files inside the engine
+| File | Where | In git | What it configures |
+|---|---|---|---|
+| `.claude/settings.json` | engine | yes | attribution, deny rules, two hooks |
+| `.claude/settings.local.json` | engine | no | the session model |
+| `CLAUDE.local.md` | engine root | no | the instance facts |
+| `.gitignore` | engine | yes | what the engine's repository never holds |
+| `.gitignore` | each project | yes | what a project's repository never holds |
+| `.gitattributes` | engine | yes | the merge ways of the engine |
+| `.gitattributes` | each project | yes | the merge ways of a project |
+| `project.md` | each project | yes | slug, kind, language |
+| `pytest.ini` | engine | yes | how the tests run |
+| the global git configuration | outside the engine | not applicable | identity per host, guard, merge driver |
 
-### `.claude/settings.json`
+The two files `/setup` fills in the engine are `CLAUDE.local.md` and `.claude/settings.local.json`; the command is described in [Set up the forge](../start/setup.md).
 
-Shared and committed. It holds the settings of Claude Code, the agent the forge runs in.
+## .claude/settings.json
 
-| Key | Value | What it is |
+The shared settings of Claude Code for the engine. The reasons for the deny rules and the hooks are in [How the rules are held](../about/how-the-rules-are-held.md).
+
+| Key | Value | Meaning |
 |---|---|---|
-| `attribution.commit` | `""` | The commit trailer is empty. |
-| `attribution.sessionUrl` | `false` | No session link is added. |
-| `permissions.deny` | `Read(~/.ssh/**)` | Reading the SSH folder is denied. |
-| `permissions.deny` | `Read(~/.aws/**)` | Reading the AWS folder is denied. |
-| `permissions.deny` | `PowerShell(git *)` | Git in the other shell tool is denied. |
-| `hooks.UserPromptSubmit` | command `python`, argument `scripts/hook-walkthrough.py` | Runs at every prompt of the principal. |
-| `hooks.PreToolUse` | matcher `Bash`, command `python`, argument `scripts/hook-git.py` | Runs before every command of the Bash tool. |
+| `attribution.commit` | empty string | a commit carries no trailer added by Claude Code |
+| `attribution.sessionUrl` | `false` | no session link is added |
+| `permissions.deny` | `Read(~/.ssh/**)` | Claude may not read the SSH directory of the user |
+| `permissions.deny` | `Read(~/.aws/**)` | Claude may not read the AWS directory of the user |
+| `permissions.deny` | `PowerShell(git *)` | Claude may not run git in the PowerShell tool |
+| `hooks.UserPromptSubmit` | `python` with `scripts/hook-walkthrough.py` | runs at every prompt of the principal |
+| `hooks.PreToolUse`, matcher `Bash` | `python` with `scripts/hook-git.py` | runs before every command in the Bash tool |
 
-Both hook arguments are given as `${CLAUDE_PROJECT_DIR}/scripts/<name>.py`, so the hooks run from the engine root. The reason for the deny rules and the hooks is given in [How the rules are held](../about/how-the-rules-are-held.md).
+Both hooks are of type `command`. The script path is built from `${CLAUDE_PROJECT_DIR}`.
 
-### `.claude/settings.local.json`
+## .claude/settings.local.json
 
-Gitignored. It holds the session model, written by `/setup` as `{ "model": "fable" }`, or the strongest model the account lists where that one is not offered. `/setup` leaves an existing file as it is. The model can be changed with `/model` or by editing the file.
+The settings of one machine. It is gitignored. `/setup` creates it where it is missing and leaves an existing one untouched. It holds one key, `model`, the model the session runs on; it can be changed with `/model` or by editing the file.
 
-### `CLAUDE.local.md`
+## CLAUDE.local.md
 
-Gitignored, at the engine root. It is made from `templates/CLAUDE.local.md` by `/setup` and holds three lines:
+The instance facts. It is gitignored and lies at the engine root. `/setup` copies it from `templates/CLAUDE.local.md` and fills it by interview. It has three lines:
 
-| Field | What it holds |
+| Field | Holds |
 |---|---|
-| Principal | The role of the person whose thinking is being forged, not a name. |
-| Conversation language | The language the working conversation runs in. |
-| Author | The principal's short handle, the author of every history record he decides. |
+| Principal | the role of the person whose thinking is forged, such as "the CTO" |
+| Conversation language | the language the working conversation runs in |
+| Author | the principal's short handle, written as the author of every history record he decides |
 
-The git identity is not kept here. It is git's, per host.
+The language of the documents is not set here. It is the `language` of the project file.
 
-### `.gitignore` of the engine
+## .gitignore of the engine
 
-| Entry | What it keeps out of git |
+Entries, in the order of the file:
+
+| Entry | Keeps out of git |
 |---|---|
-| `.claude/settings.local.json` | The local settings. |
-| `/CLAUDE.local.md` | The instance file. |
-| `projects/*` | Every project, since each is a repository of its own. |
-| `!projects/forge` | The exception: the engine's own project is tracked. |
-| `projects/forge/ledger.md` | The ledger of that project, made at read time. |
-| `Thumbs.db`, `desktop.ini` | Windows noise. |
-| `~$*` | Lock files of an open Office document. |
-| `__pycache__/` | Python byte-code caches. |
+| `.claude/settings.local.json` | the local Claude Code settings |
+| `/CLAUDE.local.md` | the instance facts |
+| `projects/*` | every project, since each is a repository of its own |
+| `!projects/forge` | re-includes the engine's own project |
+| `projects/forge/ledger.md` | the ledger of the engine's own project, made at read time |
+| `Thumbs.db`, `desktop.ini` | file-system noise of Windows |
+| `~$*` | lock files of an open Office document |
+| `__pycache__/` | Python byte-code caches |
 
-The entry is `projects/*` and never `projects/`, so that the re-inclusion of `projects/forge` works.
+## .gitignore of a project
 
-### `.gitattributes` of the engine
+Copied from `templates/gitignore` by `/new-project` as it stands.
 
-The engine has its own list, not a copy of the project template, because its derived files lie at the root and under `projects/forge/`. Every path is normalised for line endings (`* text=auto`).
-
-| Path | Attribute |
+| Entry | Keeps out of git |
 |---|---|
-| `README.md` | `merge=ours` |
-| `RELEASE-NOTES.md` | `merge=ours` |
-| `CONTRIBUTING.md` | `merge=ours` |
-| `docs/**` | `merge=ours` |
-| `projects/forge/renders/**` | `merge=ours` |
-| `projects/forge/published/*.md` | `merge=ours` |
-| `projects/forge/published/*.pptx` | `binary` |
-| `projects/forge/published/*.docx` | `binary` |
+| `ledger.md` | the ledger, made at read time |
+| `~$*` | lock files of an open Office document |
 
-A file marked `merge=ours` keeps the side of the branch you are on at a merge and is made again afterwards. A file marked `binary` is never merged. What the attributes do at a merge is told in [Working together on one project](../about/working-together.md).
+## .gitattributes of the engine and of a project
 
-## Files of a project
+The engine has its own list, since its derived files lie at the root and under `projects/forge/`. A project's list is copied from `templates/gitattributes`. What the attributes do at a merge is in [Working together on one project](../about/working-together.md), and the merge driver `ours` is explained in [Persistence in git](../about/persistence-in-git.md).
 
-### `project.md`
+| Pattern | Attribute | Where | Meaning |
+|---|---|---|---|
+| `*` | `text=auto` | both | line endings are normalised between machines |
+| `/README.md` | `merge=ours` | both | taken as ours at a merge, made again afterwards |
+| `/RELEASE-NOTES.md` | `merge=ours` | both | the same |
+| `/CONTRIBUTING.md` | `merge=ours` | both | the same |
+| `docs/**` | `merge=ours` | both | the same |
+| `renders/**` | `merge=ours` | project | the same |
+| `published/*.md` | `merge=ours` | project | the same |
+| `projects/forge/renders/**` | `merge=ours` | engine | the same |
+| `projects/forge/published/*.md` | `merge=ours` | engine | the same |
+| `published/*.pptx`, `published/*.docx` | `binary` | project | never merged |
+| `projects/forge/published/*.pptx`, `projects/forge/published/*.docx` | `binary` | engine | never merged |
 
-The project file, written once when the project is created or migrated. It has three front-matter fields.
+The three root files are anchored with a leading slash. A bare name would match at every depth and, on a case-insensitive file system, in every case.
 
-| Field | What it holds |
+## project.md
+
+The project file, at the root of a project. It is written once at creation, by `/new-project` or by the migration, and never by a round of work. It is merged as text. It has front-matter with these fields:
+
+| Field | Holds |
 |---|---|
-| `project` | The slug of the project. |
-| `kind` | `thought` or `library`. |
-| `language` | The language of the chain's artefacts, as an ISO 639-1 code (`en` when absent). |
+| `project` | the slug of the project |
+| `kind` | `thought` or `library` |
+| `language` | the language of the chain's artefacts, as an ISO 639-1 code; `en` in the template |
+| `fixture` | `true` on a test fixture project only |
 
-A fixture project also carries `fixture: true`. A project without this file is of the shape before the migration, and the one remedy is `/migrate`.
+A project without this file is of the shape before the migration. The one remedy is `/migrate`.
 
-### `.gitignore` of a project
+## pytest.ini
 
-Copied from `templates/gitignore` as it stands when the project is created.
+How the tests run, from the engine root with `python -m pytest`. What the tests serve is in [The tests](../about/the-tests.md).
 
-| Entry | What it keeps out of git |
+| Key | Value | Meaning |
+|---|---|---|
+| `testpaths` | `tests` | the directory pytest collects from |
+| `pythonpath` | `scripts` | the scripts lie on the import path, so the shared modules import directly |
+
+## The configuration outside the engine
+
+`/setup` writes the global git configuration on the user's word, through `scripts/forge-config.py` and nowhere else. The script goes through `git config --global`, so it writes the file git itself reads. A key that already carries a value is left and reported. The script needs Python 3.8 or newer and git 2.36 or newer. Run bare, it changes nothing and shows what is there.
+
+### Identity per host
+
+Written by `python scripts/forge-config.py --identity <host> <name> <email>`.
+
+| Key or file | Value |
 |---|---|
-| `ledger.md` | The ledger, made at read time. |
-| `~$*` | Lock files of an open Word, PowerPoint or Excel document. |
+| `includeIf "hasconfig:remote.*.url:https://<host>/**"` `.path` | `.gitconfig-<host>` |
+| `includeIf "hasconfig:remote.*.url:git@<host>:*/**"` `.path` | `.gitconfig-<host>` |
+| `.gitconfig-<host>`, key `user.name` | the name given |
+| `.gitconfig-<host>`, key `user.email` | the e-mail given |
 
-### `.gitattributes` of a project
-
-Copied from `templates/gitattributes`. Every path is normalised for line endings (`* text=auto`).
-
-| Path | Attribute |
-|---|---|
-| `renders/**` | `merge=ours` |
-| `README.md` | `merge=ours` |
-| `RELEASE-NOTES.md` | `merge=ours` |
-| `CONTRIBUTING.md` | `merge=ours` |
-| `docs/**` | `merge=ours` |
-| `published/*.md` | `merge=ours` |
-| `published/*.pptx` | `binary` |
-| `published/*.docx` | `binary` |
-
-## Configuration outside the engine
-
-`/setup` writes this into the global configuration of git, on the principal's word and only through `scripts/forge-config.py`. The script reads and writes through `git config --global`, so it lands in the file git itself reads and names no path to it. A key that already carries the asked value is reported and left. A key that carries another value is reported and left, unless `--replace` is given for an identity. The settings hold for every repository on the machine. Where git reads another global file in each of several places, the configuration is made once in each. The script needs git 2.36 or newer. The reason for the merge driver and the guard is given in [Persistence in git](../about/persistence-in-git.md).
-
-Run bare, `python scripts/forge-config.py` shows what is there and changes nothing.
-
-### The identity per host
-
-Written by `python scripts/forge-config.py --identity <host> <name> <email>`. For one host it writes two stanzas and an identity file.
-
-| Key | Value |
-|---|---|
-| `includeIf.hasconfig:remote.*.url:https://<host>/**.path` | `.gitconfig-<host>` |
-| `includeIf.hasconfig:remote.*.url:git@<host>:*/**.path` | `.gitconfig-<host>` |
-
-The path is relative to the global file, so the identity file `.gitconfig-<host>` always lies beside the file that includes it. It holds `user.name` and `user.email`, written where the file is missing. A stanza with another path and an identity file with another name or e-mail are reported and left, and `--replace` rewrites them.
+The path is relative to the global file, so the identity file lies beside it. A stanza with another path and an identity file with another name or e-mail are left; `--replace` rewrites them.
 
 ### The guard
 
-Written by `python scripts/forge-config.py --guard`.
+Written by `--guard`.
 
-| Key | Value | What it does |
+| Key | Value | Meaning |
 |---|---|---|
-| `user.useConfigOnly` | `true` | Git refuses to guess an identity. |
+| `user.useConfigOnly` | `true` | a repository with no identity of its own fails aloud instead of taking a default |
 
 The guard bites only once no global `user.name` or `user.email` is left. `--unset-identity` removes them.
 
-### The registration of the merge driver `ours`
+### The registration of the merge driver ours
 
-Written by `python scripts/forge-config.py --register`.
+Written by `--register`. The keys hold for every repository the configuration serves.
 
-| Key | Value | What it is for |
+| Key | Value | Meaning |
 |---|---|---|
-| `merge.ours.driver` | `true` | The driver that takes our side at a merge. |
-| `merge.renormalize` | `true` | Line endings are normalised at a merge. |
-| `rebase.backend` | `merge` | The apply backend ignores drivers. |
-| `rerere.enabled` | `true` | A convenience: git reuses a resolution it has seen. |
-| `merge.conflictStyle` | `zdiff3` | Only with `--zdiff3`: the conflict is shown with its common ancestor. |
+| `merge.ours.driver` | `true` | the merge driver `ours` |
+| `merge.renormalize` | `true` | needed by the driver |
+| `rebase.backend` | `merge` | the apply backend ignores drivers |
+| `rerere.enabled` | `true` | a convenience |
+| `merge.conflictStyle` | `zdiff3` | only with `--zdiff3` |
 
 ## See also
 
@@ -171,6 +181,7 @@ Written by `python scripts/forge-config.py --register`.
 - [How the rules are held](../about/how-the-rules-are-held.md): why the deny rules and the hooks exist.
 - [Persistence in git](../about/persistence-in-git.md): what the merge driver `ours` and the git hook are for.
 - [Working together on one project](../about/working-together.md): what the attributes do at a merge.
+- [The tests](../about/the-tests.md): what the test configuration serves.
 - [Glossary](glossary.md): every term of the forge in one line.
 
-Generated on 2026-11-01 for version 6.8 from the files the front-matter names; never edited by hand.
+Generated on 2026-11-08 for version 6.21 from the files the front-matter names; never edited by hand.

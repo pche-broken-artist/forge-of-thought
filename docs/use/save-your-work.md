@@ -1,13 +1,14 @@
 ---
-generated: 2026-11-01
-version: 6.8
+generated: 2026-11-08
+version: 6.21
 made: mirrored
-inputs-hash: 0794dc881103f104
+inputs-hash: ce5fce2a8ced6fb0
 inputs:
   - .claude/skills/save/SKILL.md
   - scripts/forge-save.py
   - scripts/forge-status.py
   - projects/forge/40-solution-design.md#SOL.0530
+  - .claude/skills/test/SKILL.md
 ---
 
 # Save your work
@@ -41,16 +42,24 @@ A typed line that stands as it is:
 
 1. Claude reads the scope from the status script. It reports the engine and each project separately, each with the branch it is on. A project that is not under git is named if it has changes and is otherwise left alone.
    You should now see each repository listed with its branch.
-2. Claude runs the `light` check on every repository in scope and settles its report through `/check`. This step is skipped with `--quick`. A save never waits on a finding you have not asked to fix. Where the ledger script cannot read a file, the check reads the ledger as it lies, the save goes on and Claude says so aloud, because the save is what does not lose work.
+2. Claude runs the `light` check on every repository in scope and settles its report through `/check`. This step is skipped with `--quick`. A save never waits on a finding you have not asked to fix. Where the ledger script cannot read a file, the check reads the ledger as it lies, the save goes on and Claude says so aloud. The ledger is the state of a project, made from its documents at the moment it is read. The save goes on because it is what does not lose work.
    You should now see the check's result, or a statement that the check was left out.
 3. Claude drafts a one-line English commit message from the records the round added to the histories of the touched documents. It proposes the message and you confirm or adjust it. With `-m` it drafts nothing. When more than one repository has changes, it drafts one message per repository, or you run the save per slug.
    You should now see the message you confirmed.
 4. A tag is set only on your word: `--tag` given, or asked for in words. If you ask for a tag without a name, Claude proposes `v<intent version>` of that repository's intent, and you may take it or give your own. Any name git accepts will do.
    You should now see the tag name agreed, or no tag at all.
-5. Claude runs the save script. It stages everything, commits, rebases your commits onto the remote and pushes. It prints the commit's file summary and the tag.
+5. Claude runs the save script. It stages everything, commits and pushes. It prints the commit's file summary and the tag. It runs no render.
    You should now see a line saying the repository was saved and pushed.
 
-The script also pushes a clean repository that is ahead of its origin, for example after a rebase finished by hand or a push that failed. A branch with no upstream yet reaches the remote with its first commit. When there is nothing to commit and a tag is given, the current state is tagged.
+### When the remote has moved on
+
+The script looks at the remote's branch before it pushes.
+
+- Where the remote's branch has moved on as well, the histories have diverged. The script then integrates the remote changes first, by rebasing your commits onto them.
+- A branch that is merely ahead of the remote is pushed as it stands. A merge you made by hand among its commits therefore keeps its merge commit. The reason is in [Working together on one project](../about/working-together.md).
+- A clean repository that is ahead of its origin is pushed in the same way, for example after a rebase finished by hand or a push that failed.
+- A branch with no upstream yet reaches the remote with its first commit.
+- When there is nothing to commit and a tag is given, the current state is tagged.
 
 ## What you have afterwards
 
@@ -58,7 +67,7 @@ The script also pushes a clean repository that is ahead of its origin, for examp
 - The commit pushed to the origin, on the branch that was checked out.
 - The tag, if you asked for one, pushed with the commit.
 
-No render is made and no other check than `light` has run.
+No render is made and no other check than `light` has run. A save never runs the engine's tests.
 
 ## If something goes wrong
 
@@ -88,6 +97,7 @@ Claude lists the project with its branch and runs the `light` check. The check f
 - [Settle a conflict](settle-a-conflict.md): what to do when the save stops on a conflict.
 - [End a session](end-a-session.md): the end of a session, which names what is unsaved.
 - [Persistence in git](../about/persistence-in-git.md): why there are two doors and two speeds.
+- [Working together on one project](../about/working-together.md): why a merge made by hand is pushed as it stands.
 - [Glossary](../reference/glossary.md): every term of the forge in one line.
 
-Generated on 2026-11-01 for version 6.8 from the files the front-matter names; never edited by hand.
+Generated on 2026-11-08 for version 6.21 from the files the front-matter names; never edited by hand.

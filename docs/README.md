@@ -1,6 +1,6 @@
 ---
-generated: 2026-11-01
-version: 6.8
+generated: 2026-11-08
+version: 6.21
 made: derived
 inputs:
   - projects/forge/docs-map.md
@@ -12,14 +12,14 @@ This is the documentation of Forge of Thought: pages of one topic
 each, generated from the engine as it stands, for three readers.
 Every page stands on its own; start where your question is.
 
-Generated on 2026-11-01 for Forge of Thought at version 6.8
+Generated on 2026-11-08 for Forge of Thought at version 6.21
 (the version of the engine's intent; a release carries the same
 number).
 
 ## Where to start
 
 - **the user**: [What Forge of Thought is](start/what-it-is.md), [Install what the forge needs](start/install.md), [Set up the forge](start/setup.md), [Get a first result](start/first-result.md), [Forge the intent](use/forge-the-intent.md).
-- **the extender**: [What the forge is made of](extend/what-it-is-made-of.md), [Make a change to the forge](extend/how-a-change-is-made.md), [How the rules are held](about/how-the-rules-are-held.md), [Templates](reference/templates.md), [Change a documentation page](extend/change-a-documentation-page.md).
+- **the extender**: [What the forge is made of](extend/what-it-is-made-of.md), [Make a change to the forge](extend/how-a-change-is-made.md), [How the rules are held](about/how-the-rules-are-held.md), [The tests](about/the-tests.md), [Change a documentation page](extend/change-a-documentation-page.md).
 - **the evaluator**: [What the forge is and is not](about/what-it-is-and-is-not.md), [How a thought travels through the forge](about/how-a-thought-travels.md), [Elicitation](about/elicitation.md), [The isolated reviewers](about/isolated-reviewers.md), [The documentation](about/the-documentation.md).
 
 ## Start
@@ -38,6 +38,7 @@ number).
 - [Forge the intent](use/forge-the-intent.md): How do you iterate the intent with `/forge intent`, round by round?
 - [Distil an assignment](use/distil-an-assignment.md): How do you derive the assignment from the intent with `/forge assignment`?
 - [Write a BRD](use/write-a-brd.md): How do you break an assignment, an intent or a document someone gave you into business requirements with `/forge brd`?
+- [Write user stories](use/write-user-stories.md): How do you break a BRD, or a small change of the intent, into user stories with `/forge user-stories`, and hand the stakeholders their export?
 - [Design the solution](use/design-the-solution.md): How do you iterate the solution design with `/forge solution-design`?
 - [Work a work product](use/work-a-work-product.md): How do you make an output of the project with work of its own, a model, an analysis, a worked task, with `/work`?
 - [Register a source](use/register-a-source.md): How do you store, register and catalogue external input with `/ingest`?
@@ -63,6 +64,7 @@ number).
 - [Spin off a group](use/spin-off-a-group.md): How does `/spinoff` make a requirement group a project of its own?
 - [Look up a command, or ask how to do something](use/look-up-a-command.md): How does `/man` print the manual of a command or a working method, and answer a need you say in your own words?
 - [Share material through a library](use/share-material-through-a-library.md): How do you keep material shared across projects in a library and cite it?
+- [Run the tests](use/run-the-tests.md): How do you run the engine's tests with `/test`, and what do you see when one is red?
 
 ## About
 
@@ -76,6 +78,7 @@ number).
 - [The intent](about/the-intent.md): What does the intent hold, why is it rewritten every round, and where does solving go instead?
 - [The assignment](about/the-assignment.md): What makes an assignment complete, and where does assigning end and solving begin?
 - [The BRD](about/the-brd.md): What does a BRD hold, how does it start, and why does the forge name what it cannot know instead of writing it?
+- [The user stories](about/the-user-stories.md): What are the user stories, what does one story hold, and why does the export the stakeholders get leave the intent out?
 - [The solution design](about/the-solution-design.md): What does a solution design hold, and why does it restate nothing above it?
 - [The work product](about/the-work-product.md): What is a work product, why is it two files, and why is it neither an artefact nor a render?
 - [Documents and records](about/documents-and-records.md): What kinds of document does a project hold, and why does state live in files?
@@ -99,6 +102,8 @@ number).
 - [How the rules are held](about/how-the-rules-are-held.md): How does the forge keep its rules in force across a long conversation and inside a subagent?
 - [Languages](about/languages.md): Which language does each kind of document carry, and why only one output language per project?
 - [Where the forge is going](about/where-it-is-going.md): In which direction is the forge developed, and what is deliberately not promised?
+- [The tests](about/the-tests.md): What do the engine's tests cover, what is the fixture they run on, and why are they in proportion rather than complete?
+- [The security policy and the code of conduct](about/the-security-policy-and-the-code-of-conduct.md): What are the two fixed files of the root, what does the security policy promise, and why is neither a render?
 
 ## Extend
 
@@ -109,14 +114,14 @@ number).
 - [Add a challenger persona](extend/add-a-challenger-persona.md): How is a new challenger persona added as one agent file?
 - [Add a check](extend/add-a-check.md): How is a new check added as one agent file?
 - [Add a recipe genre](extend/add-a-recipe-genre.md): How is a new genre of `/recipe` added as two files?
-- [Add a command](extend/add-a-command.md): How is a new command added as a skill, and when is it guarded?
-- [Add a script](extend/add-a-script.md): How is a new script written so that it is portable, documented in its docstring and the one owner of its facts?
+- [Add a command](extend/add-a-command.md): How is a new command added as a skill, and how does a command that writes wait for the principal's word?
+- [Add a script](extend/add-a-script.md): How is a new script written so that it is portable, documented in its docstring, tested with its change and the one owner of its facts?
 - [Add an engine](extend/add-an-engine.md): How is a model of another family added as one row of the engine table, and how is the row proved?
 - [Change a documentation page](extend/change-a-documentation-page.md): How do you change what a page says, which pages exist, or what the check refuses, without editing a page?
 
 ## Reference
 
-- [Commands](reference/commands.md): Every command with its signature, purpose, arguments and whether it is guarded.
+- [Commands](reference/commands.md): Every command with its signature, purpose and arguments.
 - [Artefacts](reference/artefacts.md): The artefacts of today's chain, one row per definition, with template, inputs, prefixes and command.
 - [Critic lenses](reference/critic-lenses.md): The critic lenses of today and what each reads and goes after.
 - [Challenger personas](reference/challenger-personas.md): The challenger personas of today and what each hunts.
@@ -125,7 +130,7 @@ number).
 - [ID scheme](reference/id-scheme.md): The format, the numbering rules and the prefix table, exactly.
 - [Versioning and front-matter](reference/versioning-and-front-matter.md): The version scheme and the header fields of an artefact, a brief, a recipe, a work specification and an index, exactly.
 - [History companion](reference/history-companion.md): The shape of `<file>.history.md`, record by record, exactly.
-- [Requirement style](reference/requirement-style.md): The rule set of the items of an assignment, and the stricter one of a BRD, exactly.
+- [Requirement style and Story style](reference/requirement-style.md): The rule set of the items of an assignment, the stricter one of a BRD, and the Story style of the user stories, exactly.
 - [Document kinds](reference/document-kinds.md): The table of document kinds, verbatim, with the companion, library and wrapping rules and the files that have no kind.
 - [Ledger](reference/ledger.md): The ledger's header, tables, columns, state words and reports, exactly, with where each column is read from.
 - [Render provenance](reference/render-provenance.md): The provenance block every render opens with, the definition of stale, the published companion, and where the files land.
