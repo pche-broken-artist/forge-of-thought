@@ -1,5 +1,5 @@
 ---
-version: 6.21
+version: 6.22
 status: draft
 project: forge
 audience: principal + Claude only
@@ -2140,7 +2140,10 @@ position that already stands elsewhere.
   notes' Action required lines say what to do, and Claude migrates on
   the user's word for an upgrade of a few lines; a release that changes
   the shape of files comes with a migration run on his word (POS.1740).
-  Shapes rejected: REJ.0150. Decided 2026-08-29.
+  The engine's own project was the one exception to this, tracked by
+  the engine; it is one repository among the others since POS.1980.
+  Shapes rejected: REJ.0150. Decided 2026-08-29, the exception lifted
+  2026-11-08.
 - **POS.1980 The forge's own project is a repository of its own.**
   `projects/forge` is one project among the others, under git like them,
   public under the same account as the engine, its repository named

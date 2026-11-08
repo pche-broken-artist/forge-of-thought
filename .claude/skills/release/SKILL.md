@@ -9,8 +9,10 @@ README and the release notes regenerated from the settled sources
 under the principal's eyes (POS.0810, POS.1000), and then `/save`
 (`.claude/skills/save/SKILL.md`) with the release message and, at an
 approved major, the tag. The repository is named by its slug, `forge`
-meaning the engine; without a slug, ask which repository — a release
-is always one repository, never a sweep. The order is the position's:
+meaning the whole, the engine and the forge's own project cloned
+beside it, saved as two commits (POS.1980); without a slug, ask which
+repository — a release is always one repository, never a sweep. The
+order is the position's:
 checks, documentation, README and release notes, state render, save;
 the README reads the documentation's index, so the documentation
 comes first.
@@ -105,7 +107,8 @@ cannot settle stays open, and the release waits for his word.
    are never regenerated here; their staleness is the principal's
    business, shown by the `/forge` map (POS.0570). Then the state
    render: `python scripts/forge-ledger.py <slug> --out
-   renders/state.md` (for the engine `projects/forge/renders/state.md`),
+   renders/state.md` (for the engine `projects/forge/renders/state.md`,
+   in the project's repository),
    the ledger as a tracked render, made only on main, so that the
    state is on the remote where it is wanted (POS.1650); the Renders
    table does not list it, it being the ledger itself.

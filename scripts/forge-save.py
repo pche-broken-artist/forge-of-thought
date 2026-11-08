@@ -8,13 +8,16 @@ SYNOPSIS
 
 WHAT IT DOES
     The engine (this repository) and the projects under projects/ are
-    separate git repositories; the engine does not track projects/
-    (only its own project, projects/forge). Without arguments the
-    script visits the engine and every projects/<slug>/.git and gives
-    each one with changes its own commit. With a slug it saves that one
-    repository only ('forge' means the engine). A project directory
-    without a repository is skipped with a note (bare) or refused
-    (slug).
+    separate git repositories; the engine tracks no project, its own
+    project projects/forge is a repository of its own beside it
+    (POS.1980). Without arguments the script visits the engine and
+    every project that is a repository of its own and gives each one
+    with changes its own commit. With a slug it saves that one
+    repository only; 'forge' names the whole, the engine and the
+    forge's own project where it is cloned beside it, each its own
+    commit, both prefixed forge:. A project directory without a
+    repository is skipped with a note (bare) or refused (slug); a
+    directory the engine tracks is the engine's and passed over.
 
     Per repository: stage everything, commit (message from -m, or a
     generated one), then - when an origin is configured - push. Only
@@ -38,8 +41,9 @@ WHAT IT DOES
     kept locally and reported. With --tag <name> (one repository, so a
     slug is required) the commit is tagged and the tag pushed with it;
     when there is nothing to commit, the current HEAD is tagged, so a
-    tag can mark a state before a large change. An existing tag is
-    refused. The script never sets an identity, a remote or
+    tag can mark a state before a large change; with 'forge' the tag
+    goes on the engine alone, the upgrade channel of the forge, never
+    on the project beside it. An existing tag is refused. The script never sets an identity, a remote or
     initialises a repository (CLAUDE.md, Persistence). It never uses
     git add -f and never git clean.
 
@@ -49,7 +53,7 @@ WHAT IT NEEDS
 EXAMPLES
     python scripts/forge-save.py                   # every repository with changes
     python scripts/forge-save.py platform-strategy   # one thought project: projects/platform-strategy
-    python scripts/forge-save.py forge             # only the engine
+    python scripts/forge-save.py forge             # the engine, and the forge's own project beside it
     python scripts/forge-save.py /tmp/fixture-copy # a project by its path
     python scripts/forge-save.py -m "my message"   # custom commit message
     python scripts/forge-save.py forge --tag v3.33 # save the engine and tag the commit
@@ -176,7 +180,8 @@ def main(argv):
     repos = fr.repos_to_visit(
         a.slug, "Project '{slug}' is not a repository - run 'git -C projects/{slug} init -b main' once, then save.")
     for name, path in repos:
-        save_repo(name, path, a.message, a.tag)
+        # the tag on the engine alone where 'forge' names two (the upgrade channel)
+        save_repo(name, path, a.message, a.tag if path == fr.ENGINE_ROOT or len(repos) == 1 else None)
     return 0
 
 

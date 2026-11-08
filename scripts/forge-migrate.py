@@ -147,14 +147,14 @@ class Target:
     def __init__(self, slug):
         """`slug`: the project's slug, or the path of its directory
         (forge_repos.project_path); `self.slug` is then its name."""
-        if slug == "forge":
-            self.repo = fr.ENGINE_ROOT
-            self.proj = fr.ENGINE_ROOT / "projects" / "forge"
-        else:
-            self.repo = self.proj = fr.project_path(slug)
+        self.proj = fr.project_path(slug)
         if not self.proj.is_dir():
             fr.fail(f"Project '{slug}' not found ({self.proj} does not exist).")
-        self.under_git = fr.own_repo(self.repo)  # asked once; False: no git is run (POS.0550)
+        # the repository the project's git is read from: its own, or the
+        # engine's while the engine tracks it (POS.1980); asked once;
+        # under_git False: no git is run (POS.0550)
+        self.under_git = fr.own_repo(self.proj) or fr.inside_engine(self.proj)
+        self.repo = fr.ENGINE_ROOT if fr.inside_engine(self.proj) else self.proj
         info = fr.project_file(self.proj)  # the one reader of the project file (SOL.0670)
         self.slug = slug = info["project"]
         self.manifest_path = fr.ENGINE_ROOT / "tmp" / f"forge-migrate-{slug}.json"
@@ -172,8 +172,7 @@ class Target:
     # -- marks
     def marks(self):
         threads_old = [p for p in (self.proj / "threads.md", self.proj / "10-intent.threads.md") if p.exists()]
-        attributes = (self.repo / ".gitattributes").exists() if self.slug == "forge" \
-            else (self.proj / ".gitattributes").exists()
+        attributes = (self.proj / ".gitattributes").exists()
         return {
             "A  headers without changing fields": not any(leaving_fields(p, k) for p, k in header_files(self.proj)),
             "B0 project file": (self.proj / "project.md").exists(),
@@ -342,8 +341,8 @@ def step_b(t, apply, out, author):
         fr.git(["rm", "--cached", "-q", t.rel(t.ledger)], t.repo, check=True)
         t.manifest["unindexed"].append(t.rel(t.ledger))
     if apply:
-        gi = t.repo / ".gitignore" if t.slug == "forge" else t.proj / ".gitignore"
-        line = "projects/forge/ledger.md" if t.slug == "forge" else "ledger.md"
+        gi = t.proj / ".gitignore"
+        line = "ledger.md"
         existing = read(gi) if gi.exists() else ""
         if line not in existing.split("\n"):
             t.note_change(gi)
@@ -454,11 +453,6 @@ def _guess_origin(text):
 
 
 def step_d(t, apply, out):
-    if t.slug == "forge":
-        if (t.repo / ".gitattributes").exists():
-            return False
-        out.append("D   the engine's own .gitattributes is missing: its list is SOL.0730's, not the template's; write it by hand")
-        return True
     target = t.proj / ".gitattributes"
     if target.exists():
         return False

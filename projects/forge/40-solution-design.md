@@ -1,5 +1,5 @@
 ---
-version: 0.59
+version: 0.60
 status: draft
 project: forge
 audience: whoever realises the solution, a person or an agent
@@ -485,10 +485,17 @@ boundary kept by hand or an order of work.
   fixture project carries `fixture: true` (SOL.0830).
 - **SOL.0680 The ledger made at read time.** `scripts/forge-ledger.py
   <slug>` builds `ledger.md` from the documents and writes it gitignored
-  (`projects/<slug>/.gitignore`, for the engine `.gitignore` with
-  `projects/forge/ledger.md`); the tables stay `templates/ledger.md`'s
-  shape. It reads eleven kinds: the project file, the artefacts'
-  headers, the histories, the decisions, the resource indexes, the
+  (`projects/<slug>/.gitignore`, the forge's own project's like any
+  other's, POS.1980); the tables stay `templates/ledger.md`'s
+  shape. The renders a recipe sends outside `renders/` by its
+  `output:` are found through the recipes, a leading slash the engine
+  root (templates/recipe.md), labelled `(engine root)`, and the
+  documentation index through the root of the map's target
+  (`docs_map.target_root`); no slug is special to the script, the
+  repository a project's git is read from being its own or the
+  engine's while the engine tracks it (SOL.0510). It reads eleven
+  kinds: the project file, the artefacts' headers, the histories, the
+  decisions, the resource indexes, the
   reviews and the challenges, the provenance of the recipes and the
   renders, the published companions, the work specifications, the
   threads and `ledger.archive.md`, the archive read for every item
@@ -1083,17 +1090,21 @@ boundary kept by hand or an order of work.
 - **SOL.0500 The repositories.** The engine is one git repository,
   `forge-of-thought`, full name Forge of Thought in documents; its
   public home is a pinned fact of the readme recipe, the one place the
-  README and the documentation read it from (SOL.0460). The universal
-  core in the root (`CLAUDE.md` for the agent, `README.md` for humans,
-  `templates/`, `scripts/`, `.claude/`) together with `projects/forge`,
-  the system's own project. The engine is a clone; the projects are
-  nested git repositories in a gitignored `projects/*` with
-  `projects/forge` re-included (`!projects/forge`; the pattern must be
-  `projects/*`, not `projects/`, or the re-include fails silently).
-  `.gitignore` carries `projects/forge/ledger.md` (SOL.0680). A per-
-  project `CLAUDE.md` is polish only where genuinely needed. How the
-  scripts recognise a project is in `scripts/forge_repos.py`, which the
-  git scripts share. Realises: POS.0760, POS.0940, POS.0990. Choice:
+  README and the documentation read it from (SOL.0460). The engine is
+  what a user clones: the universal core in the root (`CLAUDE.md` for
+  the agent, `README.md` for humans, `templates/`, `scripts/`,
+  `.claude/`, `docs/`, `tests/`, `tmp/` and the root files) and no
+  project. The forge's own project, `projects/forge`, is a repository
+  of its own beside it, public under the same account and named
+  `forge` (SOL.0930). The engine is a clone; the projects are nested
+  git repositories in a gitignored `projects/*`, nothing re-included
+  (the pattern is `projects/*`, not `projects/`, so that a project's
+  own files are never the engine's by accident); the engine's
+  `.gitignore` carries no line of any project, the ledger of each
+  being its own `.gitignore`'s (SOL.0680). A per-project `CLAUDE.md`
+  is polish only where genuinely needed. How the scripts recognise a
+  project is in `scripts/forge_repos.py`, which the git scripts share.
+  Realises: POS.0760, POS.0940, POS.0990, POS.1980. Choice:
   nested repositories under a gitignored directory against submodules,
   subtree, worktrees, a template repository and a plugin as the only
   shape (REJ.0150). Decided 2026-08-29. Where: `.gitignore`,
@@ -1102,11 +1113,23 @@ boundary kept by hand or an order of work.
   every project that is a repository of its own: git names its directory
   as the top, one `rev-parse --show-toplevel` in `forge_repos`, resolved
   paths compared, a worktree and a linked directory alike, never a
-  `.git` looked for; the engine's own project the one exception, its
-  repository the engine. Anything else is a project outside git: the
-  scripts skip or refuse it as today and run no git on it, whatever
-  repository may lie above it. docs-state's walk up the parents for a
-  `.git` goes the same way. Each script is described by its own help
+  `.git` looked for (`own_repo`); a directory the engine's own
+  repository tracks is the engine's (`inside_engine`: git's top above
+  it the engine root and files of it in the engine's index), the
+  forge's own project before its cut and nothing after it. Anything
+  else is a project outside git: the scripts skip or refuse it as
+  today and run no git on it, whatever repository may lie above it.
+  docs-state reads the repository the same way. In the git scripts
+  the word `forge` names the whole (`forge_repos.forge_repos`,
+  POS.1980): the engine, and the forge's own project beside it where
+  it is a repository of its own, labelled `forge (engine)` and `forge
+  (project)`; `forge-save forge` is two commits, both prefixed
+  `forge:`, the tag on the engine alone, the upgrade channel;
+  `forge-branch forge` switches both together, every repository
+  checked for unsaved changes before any is switched; `forge-status
+  forge` shows both, and the bare sweep names the project once, as
+  the project, a directory the engine tracks passed over in silence.
+  Each script is described by its own help
   header: `forge-save.py`, which also pushes a clean repository that is
   ahead, a branch without an upstream counted against the remote's
   branch (SOL.0780), leaves a conflicting rebase standing for the step
@@ -1243,9 +1266,11 @@ boundary kept by hand or an order of work.
   without a conflict at the merge of pull request #8 (2026-11-08); a
   test in `tests/test_git_scripts.py` holds the line. The engine's own
   `.gitattributes` is a list of its own: `merge=ours` on `README.md`,
-  `RELEASE-NOTES.md`, `CONTRIBUTING.md` and `docs/**` at the root and on
-  `projects/forge/renders/**` and the published companions, `binary` on
-  the published files (CHL.0350). `check-project` reports a project
+  `RELEASE-NOTES.md`, `CONTRIBUTING.md` and `docs/**` at the root
+  (CHL.0350); the lines on `projects/forge/renders/**` and its
+  published files leave it at the cut of POS.1980, when the forge's
+  own project takes `templates/gitattributes` like every project
+  (SOL.0930). `check-project` reports a project
   without the file, with the fix. CLAUDE.md, Persistence, carries the
   ways and the promise. Realises: POS.1560, POS.1690, POS.1750. Choice:
   the attributes per project against a global configuration alone, since
@@ -1513,7 +1538,11 @@ boundary kept by hand or an order of work.
   with an environment), `project` (a copy of the fixture, SOL.0830),
   `git_env` (an empty global configuration and no system one, no
   terminal prompt), `repo` and `other_clone` (the copy as a repository
-  with a bare origin, and a second clone). The tests, one file per
+  with a bare origin, and a second clone), `engine_repo` and `cut` (a
+  throwaway engine as a repository with a bare origin, the forge's
+  own project inside it as the engine tracked it before the cut, and
+  the cut of POS.1980 run on it, the scripts pointed at it through
+  `forge_repos.ENGINE_ROOT`). The tests, one file per
   concern: `test_hook_git.py`, the 171 built-in cases of the git hook
   with their verdict, moved out of the hook; `test_forge_docs.py` and
   `test_forge_check.py`, the reading cores; `test_docs_map.py`, the
@@ -1525,7 +1554,11 @@ boundary kept by hand or an order of work.
   of a conflict standing and finished, a standing rebase refused, the
   derived file taken as ours with the registration and in conflict
   without it, a merge by hand pushed as it stands, the integrator's
-  and the contributor's (THR.0820); `test_forge_check_light.py`, the
+  and the contributor's (THR.0820); `test_forge_whole.py`, the word
+  `forge` before the cut and after it: what it names, the save of two
+  commits with the tag on the engine alone, the status of both, the
+  branch switched together or not at all, the root render found
+  through the recipe (SOL.0510, SOL.0680); `test_forge_check_light.py`, the
   fixture conforming and
   two planted defects found; `test_conversions.py`, md2pptx, md2docx
   and doc2md failing on an empty PATH naming their tool. CI is
@@ -1566,6 +1599,54 @@ boundary kept by hand or an order of work.
   Where: `scripts/forge-status.py`, `scripts/forge_repos.py`,
   `tests/test_git_scripts.py`, `.claude/skills/forge/SKILL.md`,
   `.claude/skills/pull/SKILL.md`.
+- **SOL.0930 The forge's own project beside the engine.** `projects/
+  forge` is a git repository of its own, public under the engine's
+  account and named `forge`, so that `/import-project` brings it into
+  `projects/forge` without a rename; it starts clean with one commit
+  naming the engine commit it was cut from, the history before it the
+  engine's. A user clones the engine alone and nothing he runs reads
+  the project; whoever develops the engine, the author on any machine
+  and a contributor, clones the project beside it, since `/check
+  engine`, `/document`, `/release forge`, `/new-artefact` and the
+  renders of the README, the release notes and CONTRIBUTING read it,
+  and the paths `projects/forge/...` the documentation cites are the
+  paths of that clone. What stays special is in the recipes: the
+  project's root renders land in the engine root by their `output:`
+  with the leading slash (templates/recipe.md), so a release of the
+  engine is two commits, the project's documents and the engine's
+  derived files, which `forge-save forge` makes as one word
+  (SOL.0510); the ledger reads where a root render lies from the
+  recipe (SOL.0680). The README says where the project lives and
+  that a user never needs it, CONTRIBUTING that a contributor clones
+  it beside the engine and that a change of behaviour is two pull
+  requests, one per repository, each naming the other. The cut, in
+  the order of the position: the engine prepared with the project
+  still inside, on a branch of its own, so that `main` stays whole
+  for the users of the rollout; the cut rehearsed on a copy of the
+  engine with a bare repository as a false origin; the merge into
+  `main`; the project's repository born, with `templates/
+  gitattributes` and its own `.gitignore`; the engine letting the
+  directory go (`git rm -r --cached`, the re-include and the ledger
+  line out of `.gitignore`, the project's lines out of
+  `.gitattributes`); then the first release. Realises: POS.1980,
+  POS.0940. Choice: a repository of its own against a filtered branch
+  of the engine for users (the research of 2026-10-10), possible once
+  the ledger was made at read time and the user's path read nothing
+  of the project; `inside_engine` against a flag day in the scripts,
+  so that one code serves before the cut and after it. Prepared
+  2026-11-08 on the branch `cut-forge-project`: the scripts, the
+  tests, CLAUDE.md, the skills and the recipes; the cut and the first
+  release pending (THR.0780). Where: `scripts/forge_repos.py`,
+  `scripts/forge-save.py`, `scripts/forge-branch.py`,
+  `scripts/forge-status.py`, `scripts/forge-ledger.py`,
+  `scripts/forge-migrate.py`, `scripts/docs-state.py`,
+  `tests/conftest.py`, `tests/test_forge_whole.py`, `CLAUDE.md`
+  (Repository layout, Persistence, The system's own project),
+  `.claude/skills/release/SKILL.md`, `.claude/skills/save/SKILL.md`,
+  `.claude/skills/pull/SKILL.md`, `.claude/skills/migrate/SKILL.md`,
+  `projects/forge/recipes/readme.md`,
+  `projects/forge/recipes/contributing.md`, `.gitignore`,
+  `.gitattributes`.
 
 ## Open
 - **TBC.0010** (owner: principal) Mermaid diagrams in a Word file:

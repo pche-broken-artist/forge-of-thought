@@ -127,3 +127,57 @@ def other_clone(repo, git_env):
     git(["clone", "-q", repo.parent / "origin.git", other], repo.parent, git_env)
     identity(other, git_env)
     return other
+
+
+@pytest.fixture
+def engine_repo(tmp_path, git_env):
+    """A throwaway engine as a repository of its own, on main with a
+    local identity and a bare `engine-origin.git` beside it, carrying
+    the forge's own project inside it as the engine tracked it before
+    the cut: `projects/forge`, a copy of the fixture whose project file
+    names it `forge`. Returns the engine's path; `cut(engine, env)`
+    below turns the project into a repository of its own beside it
+    (POS.1980). The scripts read it through `forge_repos.ENGINE_ROOT`,
+    monkeypatched by the test; never the live engine (DEC.0240)."""
+    engine = tmp_path / "engine"
+    engine.mkdir()
+    (engine / "CLAUDE.md").write_text("# a throwaway engine\n", encoding="utf-8")
+    shutil.copytree(ENGINE / "templates", engine / "templates")   # the scripts read their skeletons from the engine root
+    (engine / ".gitignore").write_text("projects/*\n!projects/forge\nprojects/forge/ledger.md\n", encoding="utf-8")
+    proj = engine / "projects" / "forge"
+    shutil.copytree(FIXTURE, proj)
+    pf = proj / "project.md"
+    pf.write_text(pf.read_text(encoding="utf-8").replace("project: fixture", "project: forge"), encoding="utf-8")
+    git(["init", "-q", "-b", "main"], engine, git_env)
+    identity(engine, git_env)
+    git(["add", "-A"], engine, git_env)
+    git(["commit", "-q", "-m", "engine: born with its project inside"], engine, git_env)
+    origin = tmp_path / "engine-origin.git"
+    git(["init", "-q", "--bare", "-b", "main", origin], tmp_path, git_env)
+    git(["remote", "add", "origin", str(origin)], engine, git_env)
+    git(["push", "-q", "-u", "origin", "main"], engine, git_env)
+    return engine
+
+
+def cut(engine, env):
+    """The cut of POS.1980 on a throwaway engine: the forge's own
+    project becomes a repository of its own with a bare
+    `forge-origin.git` beside the engine's, the engine lets the
+    directory go and ignores projects/ whole. Returns the project's
+    path."""
+    proj = engine / "projects" / "forge"
+    git(["init", "-q", "-b", "main"], proj, env)
+    identity(proj, env)
+    (proj / ".gitignore").write_text("ledger.md\n", encoding="utf-8")
+    git(["add", "-A"], proj, env)
+    git(["commit", "-q", "-m", "forge: the forge's own project, cut from the engine"], proj, env)
+    origin = engine.parent / "forge-origin.git"
+    git(["init", "-q", "--bare", "-b", "main", origin], engine.parent, env)
+    git(["remote", "add", "origin", str(origin)], proj, env)
+    git(["push", "-q", "-u", "origin", "main"], proj, env)
+    git(["rm", "-r", "-q", "--cached", "projects/forge"], engine, env)
+    (engine / ".gitignore").write_text("projects/*\n", encoding="utf-8")
+    git(["add", "-A"], engine, env)
+    git(["commit", "-q", "-m", "engine: lets its project go"], engine, env)
+    git(["push", "-q"], engine, env)
+    return proj

@@ -404,8 +404,7 @@ logo.png                   # project avatar
 LICENSE                    # CC BY 4.0 — the engine is published
                            # under attribution
 .gitattributes             # the engine's own ways of merging by
-                           # path, its derived files at the root and
-                           # under projects/forge/
+                           # path, its derived files at the root
 .mailmap                   # the author's names in the history
                            # mapped to one handle; git's own
                            # mechanism, the history untouched
@@ -478,10 +477,11 @@ tmp/                       # the engine's working folder: packets,
                            # shell, POS.1200; settings.local.json:
                            # the session model — gitignored)
 templates/                 # canonical skeletons
-projects/                  # gitignored (projects/*) except
-                           # projects/forge — every other project is
-                           # a git repository of its own, which the
-                           # engine does not know
+projects/                  # gitignored whole (projects/*) — every
+                           # project is a git repository of its own,
+                           # which the engine does not know; the
+                           # forge's own project, projects/forge,
+                           # among them (POS.1980)
 projects/<slug>/           # kind: thought — the chain
   .git/                               # the project's own repository
   .gitattributes                      # the ways of merging by path
@@ -576,8 +576,9 @@ projects/lib-<name>/       # kind: library — material shared across
 The engine is one git repository with a remote; `main` is the released
 line, branches are voluntary and left to git (below); every project
 under `projects/` is a repository of its own (gitignored by the engine,
-`projects/forge` excepted), recognised by the scripts by asking git
-whether the project's directory is the top of a repository, never by a
+its own project included: POS.1980), recognised by the scripts by
+asking git whether the project's directory is the top of a repository,
+never by a
 `.git` looked for; anything else is a project outside git, on which the
 forge runs no git whatever repository lies above it (POS.0550), and such
 a project comes in by hand, a copy or a link into `projects/`.
@@ -621,8 +622,13 @@ The way into git for a project is `git -C projects/<slug> init -b
 main`, then a remote if wanted. The scripts carry no URL and no
 identity. Which release receives the tag `v<major>` is `/release`'s
 to say (`.claude/skills/release/SKILL.md`); any other tag is the
-principal's request, with a free name. Immutability of documents is a
-process rule, not a git mechanism.
+principal's request, with a free name. In the commands of git,
+`/save`, `/pull`, `forge-branch` and `/release`, the word `forge`
+names the whole: the engine's repository and the forge's own project
+beside it where it is cloned, each its own commit with the prefix
+`forge:`; in the commands over documents `forge` is the project
+(POS.1980). Immutability of documents is a process rule, not a git
+mechanism.
 
 **Portability.** The forge runs beyond Windows; `scripts/` is the
 only platform-bound layer and is written to run unchanged on Linux
@@ -890,12 +896,16 @@ What a command does in full is its skill's
 | `/manual …` | alias of `/man` |
 
 ## The system's own project
-`projects/forge/` is Forge of Thought itself run through its own process:
-its brief, intent (design positions POS, rejected directions REJ)
-with its threads (THR), decisions and ledger; its README and release notes
-are the engine's, renders per Document chain, Renders from
-`projects/forge/recipes/`. A process change is complete only once
-that intent is updated and the README re-rendered.
+`projects/forge/` is Forge of Thought itself run through its own
+process, a repository of its own beside the engine, public under the
+same account, cloned beside it by whoever develops the engine and
+needed by no user (POS.1980): its brief, intent (design positions
+POS, rejected directions REJ) with its threads (THR), decisions and
+ledger; its README and release notes are the engine's, renders per
+Document chain, Renders from `projects/forge/recipes/`, whose root
+renders land in the engine root by their `output:`, so a release of
+the engine lands in two commits. A process change is complete only
+once that intent is updated and the README re-rendered.
 
 ## Templates
 Use `templates/*` as canonical skeletons for every new project. A

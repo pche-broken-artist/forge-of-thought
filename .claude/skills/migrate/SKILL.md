@@ -11,7 +11,8 @@ project, on one clone, on `main`; everyone else pulls (the
 refusals and the way back are the script's).
 
 1. Infer the project from context (`$0` may be a slug; `forge` is the
-   engine's own project; if ambiguous, ask). Run the dry run,
+   forge's own project, a repository of its own beside the engine,
+   POS.1980; if ambiguous, ask). Run the dry run,
    `python scripts/forge-migrate.py <slug>`, and show its print as
    it came: the marks of the shape, the steps that would run and
    what each would change. A project already in shape ends here.

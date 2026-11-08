@@ -62,6 +62,7 @@ import sys
 from pathlib import Path
 
 sys.path.insert(0, str(Path(__file__).resolve().parent))
+import docs_map as dm  # noqa: E402
 import forge_docs as fd  # noqa: E402
 import forge_repos as fr  # noqa: E402
 import forge_tools as ft  # noqa: E402
@@ -80,12 +81,14 @@ class Project:
     def __init__(self, slug):
         """`slug`: the project's slug, or the path of its directory
         (forge_repos.project_path); `self.slug` is then its name."""
-        self.repo = fr.ENGINE_ROOT if slug == "forge" else fr.project_path(slug)
-        self.proj = fr.ENGINE_ROOT / "projects" / "forge" if slug == "forge" else fr.project_path(slug)
+        self.proj = fr.project_path(slug)
         if not self.proj.is_dir():
             fr.fail(f"Project '{slug}' not found ({self.proj} does not exist).")
-        self.under_git = fr.own_repo(self.repo)  # asked once; False: no git is run (POS.0550)
-        self.root = fr.ENGINE_ROOT if slug == "forge" else self.proj  # where the root renders lie
+        # the repository the project's git is read from: its own, or the
+        # engine's while the engine tracks it (POS.1980); asked once;
+        # under_git False: no git is run (POS.0550)
+        self.under_git = fr.own_repo(self.proj) or fr.inside_engine(self.proj)
+        self.repo = fr.ENGINE_ROOT if fr.inside_engine(self.proj) else self.proj
         self.reports = []
         info = fr.project_file(self.proj)  # the one reader of the project file (SOL.0670)
         self.slug = info["project"]
@@ -190,12 +193,32 @@ def documents(p):
     return rows
 
 
+def root_renders(p):
+    """The renders a recipe sends outside renders/ by its `output:`
+    (templates/recipe.md): a path relative to the project root, a
+    leading slash the engine root, the form the forge's own project
+    uses for the README, the release notes and CONTRIBUTING (POS.1980).
+    Pairs (file, label), the engine's labelled `(engine root)`."""
+    out = []
+    for rf in sorted(p.proj.glob("recipes/*.md")):
+        if rf.name.endswith(".history.md"):
+            continue
+        front, _ = fd.front_of(rf)
+        target = fd.front_value(front, "output") if front is not None else None
+        if not target or target.startswith("renders/"):
+            continue
+        if target.startswith("/"):
+            f, label = fr.ENGINE_ROOT / target.lstrip("/"), f"{target.lstrip('/')} (engine root)"
+        else:
+            f, label = p.proj / target, target
+        if f.exists() and f.suffix == ".md":
+            out.append((f, label))
+    return out
+
+
 def renders(p):
     rows, candidates = [], []
-    for name in ("README.md", "RELEASE-NOTES.md", "CONTRIBUTING.md"):
-        f = p.root / name
-        if f.exists():
-            candidates.append((f, f"{name} (repo root)" if p.slug == "forge" else name))
+    candidates += root_renders(p)
     candidates += [(f, "renders/" + f.name) for f in sorted(p.proj.glob("renders/*.md"))]
     for f, label in candidates:
         front, _ = fd.front_of(f)
@@ -212,8 +235,14 @@ def renders(p):
             label += " (with " + ", ".join("renders/" + q for q in plain) + ", plain)"
         rows.append([label, audience, recipe, ", ".join(fd.front_list(front, "inputs")) or "—",
                      fd.front_value(front, "generated") or "—"])
-    idx = p.root / "docs" / "README.md"
-    if idx.exists():
+    # the documentation index lies at the root of the map's target
+    # (docs_map.target_root): the engine for the forge's own project
+    map_file = p.proj / "docs-map.md"
+    idx = None
+    if map_file.exists():
+        mfront, _ = fd.front_of(map_file)
+        idx = dm.target_root(map_file, {"target": fd.front_value(mfront, "target") or ""}) / "docs" / "README.md"
+    if idx is not None and idx.exists():
         front, _ = fd.front_of(idx)
         if front is not None and fd.front_value(front, "made") == "derived":
             rows.append(["docs/README.md (the documentation index, kind page)", "the three readers of the documentation",

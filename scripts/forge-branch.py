@@ -15,7 +15,8 @@ WHAT IT DOES
     yet ('main' switches back); without a name it reports the current
     branch and lists the branches the repository has.
 
-    The repository is named by its slug ('forge' means the engine);
+    The repository is named by its slug ('forge' means the engine and
+    the forge's own project beside it, both switched together, POS.1980);
     there is no bare form, since switching every repository at once
     is never what anyone wants. Unsaved changes stop the switch: save
     first (forge-save), then switch, so nothing is carried across or
@@ -47,48 +48,57 @@ import forge_tools as ft  # noqa: E402
 def main(argv):
     ft.utf8_console()
     ap = argparse.ArgumentParser(description=__doc__.splitlines()[1].strip())
-    ap.add_argument("slug", help="the repository: a project's slug or the path of its directory ('forge' = the engine)")
+    ap.add_argument("slug", help="the repository: a project's slug or the path of its directory ('forge' = the engine and the forge's own project beside it)")
     ap.add_argument("branch", nargs="?", help="the branch to switch to, created when missing")
     a = ap.parse_args(argv)
     fr.need_git()
     if a.slug == "forge":
-        name, path = "forge (engine)", fr.ENGINE_ROOT
+        repos = fr.forge_repos()  # the engine, and the project beside it where it is one (POS.1980)
     else:
         path = fr.project_path(a.slug)
         if not path.exists():
             fr.fail(f"Project '{a.slug}' not found ({path} does not exist).")
-        name = fr.project_file(path)["project"]
-    if not fr.own_repo(path):
-        fr.fail(f"'{a.slug}' is not a repository - nothing to switch.")
+        if not fr.own_repo(path):
+            fr.fail(f"'{a.slug}' is not a repository - nothing to switch.")
+        repos = [(fr.project_file(path)["project"], path)]
 
-    current = fr.git_out(["rev-parse", "--abbrev-ref", "HEAD"], path)
-    if not current:
-        fr.fail(f"Cannot read the current branch of {name}.")
+    currents = {}
+    for name, path in repos:
+        current = fr.git_out(["rev-parse", "--abbrev-ref", "HEAD"], path)
+        if not current:
+            fr.fail(f"Cannot read the current branch of {name}.")
+        currents[name] = current
 
     if not a.branch:
-        print(fr.label(name, f"on branch {current}"))
-        branches = fr.git_out(["branch", "--format=%(refname:short)"], path).splitlines()
-        if len(branches) > 1:
-            fr.say(fr.label("", "branches: " + ", ".join(branches)), "grey")
+        for name, path in repos:
+            print(fr.label(name, f"on branch {currents[name]}"))
+            branches = fr.git_out(["branch", "--format=%(refname:short)"], path).splitlines()
+            if len(branches) > 1:
+                fr.say(fr.label("", "branches: " + ", ".join(branches)), "grey")
         return 0
 
-    if a.branch == current:
-        fr.say(fr.label(name, f"already on {a.branch}"), "grey")
-        return 0
+    # every repository checked before any is switched: the whole moves
+    # together or not at all
+    for name, path in repos:
+        if a.branch == currents[name]:
+            continue
+        dirty = fr.git_out(["status", "--porcelain"], path).splitlines()
+        if dirty:
+            fr.fail(f"{name} has unsaved changes ({len(dirty)} file(s)). Save first (forge-save {a.slug}), then switch.")
 
-    dirty = fr.git_out(["status", "--porcelain"], path).splitlines()
-    if dirty:
-        fr.fail(f"{name} has unsaved changes ({len(dirty)} file(s)). Save first (forge-save {a.slug}), then switch.")
-
-    if fr.git(["rev-parse", "--verify", "--quiet", f"refs/heads/{a.branch}"], path).returncode == 0:
-        if fr.git(["switch", a.branch], path).returncode != 0:
-            fr.fail(f"Could not switch {name} to '{a.branch}'.")
-        fr.say(fr.label(name, f"switched to {a.branch}"), "green")
-    else:
-        if fr.git(["switch", "-c", a.branch], path).returncode != 0:
-            fr.fail(f"Could not create branch '{a.branch}' in {name}.")
-        fr.say(fr.label(name, f"created {a.branch} from {current} and switched to it"), "green")
-        fr.say(fr.label("", "the branch reaches the remote with the first forge-save made on it"), "grey")
+    for name, path in repos:
+        if a.branch == currents[name]:
+            fr.say(fr.label(name, f"already on {a.branch}"), "grey")
+            continue
+        if fr.git(["rev-parse", "--verify", "--quiet", f"refs/heads/{a.branch}"], path).returncode == 0:
+            if fr.git(["switch", a.branch], path).returncode != 0:
+                fr.fail(f"Could not switch {name} to '{a.branch}'.")
+            fr.say(fr.label(name, f"switched to {a.branch}"), "green")
+        else:
+            if fr.git(["switch", "-c", a.branch], path).returncode != 0:
+                fr.fail(f"Could not create branch '{a.branch}' in {name}.")
+            fr.say(fr.label(name, f"created {a.branch} from {currents[name]} and switched to it"), "green")
+            fr.say(fr.label("", "the branch reaches the remote with the first forge-save made on it"), "grey")
     return 0
 
 

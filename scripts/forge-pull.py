@@ -9,7 +9,8 @@ SYNOPSIS
 WHAT IT DOES
     Fast-forward only. Without arguments pulls the engine, then every
     projects/<slug>/.git with an origin configured; with a slug pulls
-    that one repository ('forge' means the engine). A repository with
+    that one repository ('forge' means the engine and the forge's own
+    project beside it, POS.1980). A repository with
     unsaved changes is not touched: reported and skipped (bare) or
     refused (slug), so a pull can never
     create a conflict in half-finished work. Projects without a
@@ -46,7 +47,7 @@ import forge_tools as ft  # noqa: E402
 def main(argv):
     ft.utf8_console()
     ap = argparse.ArgumentParser(description=__doc__.splitlines()[1].strip())
-    ap.add_argument("slug", nargs="?", help="one repository: a project's slug or the path of its directory ('forge' = the engine); bare = every one with an origin")
+    ap.add_argument("slug", nargs="?", help="one repository: a project's slug or the path of its directory ('forge' = the engine and the forge's own project beside it); bare = every one with an origin")
     a = ap.parse_args(argv)
     fr.need_git()
     fr.need_engine_repo()

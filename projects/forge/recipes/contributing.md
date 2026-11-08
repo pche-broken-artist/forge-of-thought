@@ -2,7 +2,7 @@
 project: forge
 purpose: CONTRIBUTING.md of the engine's repository - how a visitor gives feedback, brings an idea or sends a change
 audience: a visitor of the repository on GitHub who has used the forge or read about it and wants to say, ask or change something; he arrives from the Contributing tab, the sidebar, or the page where an issue or a pull request is created
-version: 0.7
+version: 0.8
 output: /CONTRIBUTING.md
 ---
 
@@ -50,7 +50,10 @@ output: /CONTRIBUTING.md
   he followed.
 - The way to a pull request for a newcomer, only in steps the forge
   and GitHub have: fork the repository on GitHub; clone your fork as
-  your engine, as `docs/start/install.md` clones the public one; work
+  your engine, as `docs/start/install.md` clones the public one;
+  clone the forge's own project beside your engine, `/import-project
+  https://github.com/pche-broken-artist/forge.git`, since a change of
+  behaviour is recorded there (POS.1980); work
   through the forge (`/forge intent forge` for a change of
   behaviour); `/save`, which pushes to your fork; on your fork's page
   on GitHub, "Contribute", then "Open pull request". Say plainly that
@@ -83,7 +86,10 @@ output: /CONTRIBUTING.md
   `projects/forge/10-intent.md` saying what is wanted and why, with
   its record in the history beside it; the item in
   `projects/forge/40-solution-design.md` where the change solves
-  something; the change itself; and one line on what you ran. Say
+  something; the change itself; and one line on what you ran; two
+  pull requests where the change touches both repositories, one on
+  the engine with the change itself, one on the forge's own project
+  with the position and the design item, each naming the other. Say
   what it does not carry: no release, no regenerated README, release
   notes or documentation, which the author makes at the next
   release. A brief may come first and need not. Say that everything

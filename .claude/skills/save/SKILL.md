@@ -7,7 +7,9 @@ Save the forge to git: the light check, then commit and push on whatever
 branch is checked out, nothing more (POS.1100). The `project` and
 `engine` checks and the renders belong to `/release`
 (`.claude/skills/release/SKILL.md`, POS.0570). The engine and every
-project are repositories of their own (POS.0940); what the save does per
+project are repositories of their own (POS.0940), the engine's own
+project one of them, beside the engine, and `forge` saves both
+(POS.1980); what the save does per
 repository is stated in the help header of `scripts/forge-save.py`, and
 CLAUDE.md (Persistence) carries the one-line summary (POS.1070).
 Arguments (`[slug]`, `-m "message"`, `--tag <name>`) are passed through

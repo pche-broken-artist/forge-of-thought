@@ -160,8 +160,8 @@ def previous_map(map_path, out):
     proj = map_path.parent
     if fr.own_repo(proj):
         repo = proj
-    elif proj in (fr.ENGINE_ROOT, fr.ENGINE_ROOT / "projects" / "forge"):
-        repo = fr.ENGINE_ROOT
+    elif proj == fr.ENGINE_ROOT or fr.inside_engine(proj):
+        repo = fr.ENGINE_ROOT  # a directory the engine tracks is the engine's (POS.1980)
     else:  # a project outside git: the forge runs no git on it (POS.0550)
         print("none")
         return 0

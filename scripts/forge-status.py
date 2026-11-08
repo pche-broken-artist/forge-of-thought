@@ -15,7 +15,8 @@ WHAT IT DOES
     clone silently falls back to a conflict on the derived files
     (SOL.0740 of the forge solution design). Then, for the
     engine and each projects/<slug>, or with a slug or a path for
-    that one repository only ('forge' means the engine): unsaved
+    that one repository only ('forge' means the engine and the forge's
+    own project beside it, POS.1980): unsaved
     changes (or "clean"), the
     branch it is on, the last commit, and the origin - or "no origin" /
     "not under git", and a user.name or user.email set in the
@@ -60,7 +61,8 @@ import forge_tools as ft  # noqa: E402
 def show_repo(name, path, remote=False):
     fr.say(f"== {name}", "cyan")
     if not fr.own_repo(path):
-        print("   not under git")
+        print("   inside the engine's repository - its changes are the engine's" if fr.inside_engine(path)
+              else "   not under git")
         print()
         return
     changes = fr.git_out(["status", "--short"], path)
@@ -100,7 +102,7 @@ def show_repo(name, path, remote=False):
 def main(argv):
     ft.utf8_console()
     ap = argparse.ArgumentParser(description=__doc__.splitlines()[1].strip())
-    ap.add_argument("slug", nargs="?", help="one repository: a project's slug or the path of its directory ('forge' = the engine); bare = the engine and every project")
+    ap.add_argument("slug", nargs="?", help="one repository: a project's slug or the path of its directory ('forge' = the engine and the forge's own project beside it); bare = the engine and every project")
     ap.add_argument("--remote", action="store_true",
                     help="fetch each origin and report the branch against it")
     a = ap.parse_args(argv)
@@ -119,7 +121,8 @@ def main(argv):
         fr.say("registration:      missing " + ", ".join(missing) + " - run /setup", "yellow")
     print()
     if a.slug == "forge":
-        show_repo("forge (engine)", fr.ENGINE_ROOT, a.remote)
+        for name, path in fr.forge_repos():
+            show_repo(name, path, a.remote)
         return 0
     if a.slug:
         path = fr.project_path(a.slug)
@@ -130,8 +133,9 @@ def main(argv):
     show_repo("forge (engine)", fr.ENGINE_ROOT, a.remote)
     projects = fr.ENGINE_ROOT / "projects"
     if projects.is_dir():
-        for d in sorted(p for p in projects.iterdir() if p.is_dir() and p.name != "forge"):
-            show_repo(d.name, d, a.remote)
+        for d in sorted(p for p in projects.iterdir() if p.is_dir()):
+            if not fr.inside_engine(d):  # a directory the engine tracks is the engine's
+                show_repo(fr.repo_label(d), d, a.remote)
     return 0
 
 

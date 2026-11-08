@@ -17,9 +17,14 @@ separator or absolute is a path, as the forge's tests pass their
 copy of the fixture in a temporary directory); its name is the
 `project` field of its project file (`project_file`). It is a
 repository of its own when git names its directory as the top of a repository
-(`own_repo`), never by a `.git` looked for; anything else is a project
-outside git, on which the forge runs no git (CLAUDE.md, Persistence;
-POS.0550). The scripts carry no URL and no identity.
+(`own_repo`), never by a `.git` looked for; a directory the engine's
+own repository tracks is the engine's (`inside_engine`); anything
+else is a project outside git, on which the forge runs no git
+(CLAUDE.md, Persistence; POS.0550). The forge's own project,
+`projects/forge`, is a repository of its own beside the engine
+(POS.1980); in the commands of git the word `forge` names the whole,
+the engine and that project where it is cloned (`forge_repos`). The
+scripts carry no URL and no identity.
 """
 
 import os
@@ -78,6 +83,25 @@ def own_repo(path):
     runs no git on it (CLAUDE.md, Persistence; POS.0550, SOL.0510)."""
     top = git_out(["rev-parse", "--show-toplevel"], path)
     return bool(top) and Path(top).resolve() == Path(path).resolve()
+
+
+def inside_engine(path):
+    """True when `path` is a directory the engine's own repository
+    tracks rather than a repository of its own: git's top above it is
+    the engine root, `path` is not the root itself, and the engine's
+    index holds files of it. A directory merely lying under the engine
+    (a project outside git, ignored by the engine) is not inside it.
+    The forge's own project before its cut (POS.1980); nothing after
+    it."""
+    path = Path(path).resolve()
+    root = ENGINE_ROOT.resolve()
+    if path == root:
+        return False
+    top = git_out(["rev-parse", "--show-toplevel"], path)
+    if not top or Path(top).resolve() != root:
+        return False
+    rel = path.relative_to(root).as_posix()
+    return bool(git_out(["ls-files", "--", rel], root))
 
 
 def git_out(args, cwd):
@@ -264,8 +288,9 @@ def registration_state():
 def project_path(project):
     """The directory of a project: `projects/<slug>` for a bare word,
     the directory itself for a path (one with a separator, or an
-    absolute one), taken as given. 'forge' is the engine's own
-    project; the callers that treat it apart do so by the name."""
+    absolute one), taken as given. 'forge' is the forge's own project,
+    `projects/forge`, like any other slug; the commands of git read
+    the word as the whole through `forge_repos`."""
     if is_path(project):
         # abspath first: on Python 3.8 for Windows, resolve() leaves a
         # relative path of a directory that does not exist relative
@@ -312,32 +337,54 @@ def project_file(path):
     return info
 
 
+def repo_label(path):
+    """How the commands of git name a project's repository: its
+    directory's name, the forge's own project as `forge (project)` so
+    that it is told from `forge (engine)`."""
+    path = Path(path)
+    return "forge (project)" if path.resolve() == (ENGINE_ROOT / "projects" / "forge").resolve() else path.name
+
+
+def forge_repos():
+    """What the word `forge` names in the commands of git (POS.1980):
+    the engine, and the forge's own project beside it where it is
+    cloned as a repository of its own, as (name, path) pairs, the
+    engine first. Before the cut the project lies inside the engine's
+    repository and the engine alone is named."""
+    repos = [("forge (engine)", ENGINE_ROOT)]
+    proj = ENGINE_ROOT / "projects" / "forge"
+    if proj.is_dir() and own_repo(proj):
+        repos.append((repo_label(proj), proj))
+    return repos
+
+
 def repos_to_visit(slug, strict_message=None):
     """The repositories a bare or a slug-form command visits, as
-    (name, path) pairs, the engine first. With a slug or a path other
-    than 'forge' the one project, which must exist and be a repository
-    (the message for the second case is strict_message, with {slug}
-    inside), named as its project file names it; bare, the engine and
-    every project that is a repository, the others reported and
-    skipped."""
-    repos = []
-    if slug and slug != "forge":
+    (name, path) pairs, the engine first. `forge`: what `forge_repos`
+    names. Another slug or a path: the one project, which must exist
+    and be a repository (the message for the second case is
+    strict_message, with {slug} inside), named as its project file
+    names it. Bare: the engine and every project that is a repository
+    of its own, the forge's own project among them; a directory the
+    engine tracks is the engine's and passed over in silence, the
+    others reported and skipped."""
+    if slug == "forge":
+        return forge_repos()
+    if slug:
         path = project_path(slug)
         if not path.exists():
             fail(f"Project '{slug}' not found ({path} does not exist).")
         if not own_repo(path):
             fail((strict_message or "Project '{slug}' is not a repository.").format(slug=slug))
-        repos.append((project_file(path)["project"], path))
-        return repos
-    repos.append(("forge (engine)", ENGINE_ROOT))
-    if not slug:
-        projects = ENGINE_ROOT / "projects"
-        if projects.is_dir():
-            for d in sorted(p for p in projects.iterdir() if p.is_dir() and p.name != "forge"):
-                if own_repo(d):
-                    repos.append((d.name, d))
-                else:
-                    say(f"{d.name:<20} not under git - skipped", "grey")
+        return [(project_file(path)["project"], path)]
+    repos = [("forge (engine)", ENGINE_ROOT)]
+    projects = ENGINE_ROOT / "projects"
+    if projects.is_dir():
+        for d in sorted(p for p in projects.iterdir() if p.is_dir()):
+            if own_repo(d):
+                repos.append((repo_label(d), d))
+            elif not inside_engine(d):
+                say(f"{d.name:<20} not under git - skipped", "grey")
     return repos
 
 

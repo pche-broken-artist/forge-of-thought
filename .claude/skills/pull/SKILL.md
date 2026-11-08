@@ -7,7 +7,8 @@ Pull the forge from its remotes through `scripts/forge-pull.py`
 (POS.1490, SOL.0180): the scripts are the only door to a write of git
 (CLAUDE.md, Persistence). The forge looks and offers; it pulls only what is clean
 and behind, merges nothing and runs no check unasked. `$0` is one
-repository (`forge` = the engine, a slug = that project); bare = the
+repository (`forge` = the engine and the forge's own project beside
+it, POS.1980; a slug = that project); bare = the
 engine and every project with an origin.
 
 1. Run `python scripts/forge-status.py --remote` and report the state

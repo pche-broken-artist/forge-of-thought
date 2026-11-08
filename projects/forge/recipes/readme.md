@@ -2,7 +2,7 @@
 project: forge
 purpose: readme
 audience: humans arriving at the repository
-version: 0.79
+version: 0.80
 output: /README.md
 ---
 
@@ -111,10 +111,13 @@ shape only. -->
   own and fixed in wording (the two files are renders of this
   project, and the recipe carries their paths): "Short on time? Two
   one-page notes say it briefly:
-  [for a CTO](projects/forge/renders/cto-pitch.md) and
-  [for a CEO](projects/forge/renders/ceo-pitch.md). Each has a Word
+  [for a CTO](https://github.com/pche-broken-artist/forge/blob/main/renders/cto-pitch.md)
+  and
+  [for a CEO](https://github.com/pche-broken-artist/forge/blob/main/renders/ceo-pitch.md).
+  Each has a Word
   version beside it." Two sentences and the two links, nothing
-  added; the links are relative, exactly as given.
+  added; the links exactly as given, into the project's repository
+  on GitHub (POS.1980).
 - Section 1 is the challenge, its heading the question — fixed
   wording "Better with AI, or replaced by it?" — and its body the
   pain the forge answers, scannable. The body opens with the fixed
@@ -198,8 +201,9 @@ shape only. -->
   of its own, which the engine does not track — that is why you name
   it first; then one sentence: `projects/forge` is the forge's own
   project, the exemplar every render and page of the documentation
-  derives from, and the one directory under `projects/` the engine
-  tracks; a user never needs to open it; the first sitting from
+  derives from, a public repository of its own at
+  github.com/pche-broken-artist/forge, cloned beside the engine by
+  whoever develops it; a user never needs it; the first sitting from
   nothing to a saved intent is
   `docs/start/first-result.md`.
 - Section 6 is "The document chain in one picture". It carries the
