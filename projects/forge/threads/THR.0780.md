@@ -57,6 +57,26 @@ project found no hole on the user's path. Open: the cut itself, the
 scripts' change recorded in the solution design when it is made; the
 thread closes at the first release in the new shape. Opened 2026-11-01.
 
+2026-11-08: the cut planned in detail, the plan's tables in
+`tmp/cut-plan.md` beside the manifest (working material). The course:
+the engine prepared on a branch of its own, `cut-forge-project`, `main`
+left quiet for the users of the rollout until the merge; the scripts
+changed so that `forge` means the engine and, where `projects/forge` is
+a repository of its own, that project too, so the branch works before
+the cut and after it and the cut itself is git alone; the texts
+(CLAUDE.md, the skills `release`, `save`, `pull`, `migrate`, the recipes
+readme and contributing, POS.0940) on the same branch, the engine's
+`.gitignore` and `.gitattributes` untouched until the cut, so that the
+project keeps `merge=ours` on its renders meanwhile; the cut rehearsed
+on a copy of the engine with a bare repository as a false origin; then
+the merge into `main`, the project's repository born, the engine letting
+the directory go in a `forge-save forge` of two commits; then the first
+release, 7.0 on the principal's approval, which closes this thread and
+settles FND.3900. Decisions waiting on the way: the tag of a major on
+the engine alone (recommended) or on both repositories; whether `main`
+stays quiet; the approval of 7.0; the wording of the project's first
+commit.
+
 <!-- A thread (POS.1680), one file per thread in threads/; the header
 is its state: what it concerns, where it came from, whether it is
 open. The rules of a thread, its life and its closing:
