@@ -1,5 +1,5 @@
 ---
-version: 0.58
+version: 0.59
 status: draft
 project: forge
 audience: whoever realises the solution, a person or an agent
@@ -1233,10 +1233,15 @@ boundary kept by hand or an order of work.
   `scripts/forge-status.py`.
 - **SOL.0730 The ways and the attributes.** `templates/gitattributes`,
   copied by `/new-project` into a project's `.gitattributes`:
-  `text=auto`; `merge=ours` on `renders/**`, `README.md`, `RELEASE-
-  NOTES.md`, `CONTRIBUTING.md`, `docs/**`, `published/*.md`; `binary` on
-  `published/*.pptx` and `published/*.docx`; the record files carry no
-  attribute and merge as text (POS.1560). The engine's own
+  `text=auto`; `merge=ours` on `renders/**`, `/README.md`,
+  `/RELEASE-NOTES.md`, `/CONTRIBUTING.md`, `docs/**`, `published/*.md`;
+  `binary` on `published/*.pptx` and `published/*.docx`; the record
+  files carry no attribute and merge as text (POS.1560). The three
+  root files are anchored with the leading slash: a bare name matches
+  at every depth and, with `core.ignorecase`, the default on Windows
+  and macOS, in every case, so `recipes/readme.md` was taken as ours
+  without a conflict at the merge of pull request #8 (2026-11-08); a
+  test in `tests/test_git_scripts.py` holds the line. The engine's own
   `.gitattributes` is a list of its own: `merge=ours` on `README.md`,
   `RELEASE-NOTES.md`, `CONTRIBUTING.md` and `docs/**` at the root and on
   `projects/forge/renders/**` and the published companions, `binary` on

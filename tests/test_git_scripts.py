@@ -301,3 +301,15 @@ def test_without_the_registration_the_same_derived_file_conflicts(repo, other_cl
     r = run_script("forge-save", repo, "-m", "fixture: readme", env=git_env)
     assert r.returncode != 0
     assert "README.md" in r.stdout + r.stderr and "conflict" in r.stdout + r.stderr
+
+
+def test_the_root_derived_files_are_ours_and_a_recipe_of_the_same_name_is_not(repo, git_env):
+    # The three root patterns are anchored with a slash: a bare name
+    # matches at every depth and, with core.ignorecase (the default on
+    # Windows and macOS), in every case, so recipes/readme.md was taken
+    # as ours at a merge (SOL.0730, 2026-11-08). The repository is set
+    # case-insensitive so that the test says the same on every machine.
+    git(["config", "core.ignorecase", "true"], repo, git_env)
+    assert git(["check-attr", "merge", "README.md"], repo, git_env).endswith("merge: ours")
+    assert git(["check-attr", "merge", "recipes/readme.md"], repo, git_env).endswith("merge: unspecified")
+    assert git(["check-attr", "merge", "recipes/readme.history.md"], repo, git_env).endswith("merge: unspecified")

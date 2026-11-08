@@ -5,9 +5,9 @@
 # Way 2, derived: made only on main, taken as ours at a merge and
 # made again
 renders/** merge=ours
-README.md merge=ours
-RELEASE-NOTES.md merge=ours
-CONTRIBUTING.md merge=ours
+/README.md merge=ours
+/RELEASE-NOTES.md merge=ours
+/CONTRIBUTING.md merge=ours
 docs/** merge=ours
 published/*.md merge=ours
 # The published files: binary, never merged

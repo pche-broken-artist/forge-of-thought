@@ -195,11 +195,11 @@ to its own 00-INDEX.md. -->
 - **Use for:** the reason the allocation over branches is a rule with a known limit and not a guarantee.
 
 ### `github-issues/`
-- **What:** the issues visitors open on the engine's GitHub repository, one file per issue with its comments at download; a growing bundle, each file immutable from its registration, catalogued by its own `00-INDEX.md`. Holds issue #3 (repository detection by `.git` instead of asking git).
-- **Origin:** https://github.com/pche-broken-artist/forge-of-thought/issues, downloaded through the GitHub API by Claude on the principal's word.
+- **What:** the issues and the discussions visitors open on the engine's GitHub repository, one file per issue or discussion with its comments at download; a growing bundle, each file immutable from its registration, catalogued by its own `00-INDEX.md`. Holds issue #3 (repository detection by `.git` instead of asking git) and discussion #6 (a record of what was sent out, pinned to the exact version).
+- **Origin:** https://github.com/pche-broken-artist/forge-of-thought, its issues and its discussions, downloaded through the GitHub API by Claude on the principal's word.
 - **Date:** 2026-10-21, from the ingest
 - **Form:** text
-- **Role:** the reports of visitors from which threads of the intent are opened; what each issue is for is its entry in the bundle's index.
+- **Role:** the reports and the requests of visitors from which threads of the intent are opened; what each file is for is its entry in the bundle's index.
 - **Use for:** what a visitor reported, in his words and with the principal's public replies.
 
 ### `projects/lib-allwyn/sources/fork-brd/` (library document, cited, not copied)

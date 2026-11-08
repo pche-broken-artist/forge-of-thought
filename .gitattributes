@@ -4,10 +4,12 @@
 # Normalise line endings so files do not fight between machines
 * text=auto
 # Way 2, derived: made only on main, taken as ours at a merge and
-# made again
-README.md merge=ours
-RELEASE-NOTES.md merge=ours
-CONTRIBUTING.md merge=ours
+# made again; the three root files anchored with the slash, since a
+# bare name matches at every depth and, with core.ignorecase, in
+# every case (recipes/readme.md among them)
+/README.md merge=ours
+/RELEASE-NOTES.md merge=ours
+/CONTRIBUTING.md merge=ours
 docs/** merge=ours
 projects/forge/renders/** merge=ours
 projects/forge/published/*.md merge=ours
