@@ -17,8 +17,13 @@ WHAT IT DOES
     (slug).
 
     Per repository: stage everything, commit (message from -m, or a
-    generated one), then - when an origin is configured - integrate
-    remote changes by rebase and push. A clean repository that is
+    generated one), then - when an origin is configured - push. Only
+    where the remote's branch has moved on as well, the histories
+    diverged, are the remote changes integrated first, by rebase; a
+    branch that is merely ahead is pushed as it stands, so that a
+    merge made by hand - the integrator's merge of a branch, a
+    contributor's merge of the upstream - keeps its merge commit and
+    nothing of the other side is replayed. A clean repository that is
     ahead of its upstream - a rebase finished by hand, a push that
     failed - is pushed the same way, so that the push has a door
     (SOL.0780 of the forge solution design); a branch with no upstream
@@ -128,7 +133,14 @@ def save_repo(name, path, message, tag):
 
     branch = fr.git_out(["rev-parse", "--abbrev-ref", "HEAD"], path)
     if fr.git(["ls-remote", "--exit-code", "--heads", "origin", branch], path).returncode == 0:
-        if fr.git(["pull", "--rebase", "origin", branch], path, capture=False).returncode != 0:
+        # The rebase only where the remote's branch moved on: a branch that
+        # is merely ahead is pushed as it stands, so that a merge made by
+        # hand keeps its merge commit instead of being flattened into the
+        # other side's commits replayed one by one (THR.0820).
+        state = fr.remote_state(path)
+        if state.startswith("diverged"):
+            print(fr.label(name, f"{state}: integrating the remote changes by rebase"))
+        if state.startswith("diverged") and fr.git(["pull", "--rebase", "origin", branch], path, capture=False).returncode != 0:
             slug = "forge" if name.startswith("forge") else name
             if fr.in_progress(path) != "rebase":
                 fr.fail(f"The pull with rebase failed in {name} and left no rebase to finish; "

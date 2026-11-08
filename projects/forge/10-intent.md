@@ -1,5 +1,5 @@
 ---
-version: 6.16
+version: 6.17
 status: draft
 project: forge
 audience: principal + Claude only
@@ -1784,9 +1784,13 @@ position that already stands elsewhere.
   a list of its own, since its way-2 files lie at its root: `README.md`,
   `RELEASE-NOTES.md`, `CONTRIBUTING.md` and `docs/` at the root and the
   renders and the published companions under `projects/forge/`
-  (CHL.0350). `forge-save` rebases one's own linear commits; a branch
-  carrying a merge commit is merged by hand, the forge having no door of
-  its own for it. `ours` is not built into git: `/setup` registers it in
+  (CHL.0350). `forge-save` rebases one's own commits onto the remote
+  only where both sides moved on, the histories diverged; a branch
+  merely ahead of the remote, a merge commit among its commits, is
+  pushed as it stands, so that the integrator's merge of a branch and
+  a contributor's merge of the upstream keep their merge commit and
+  nothing of the other side is replayed (THR.0820). `ours` is not
+  built into git: `/setup` registers it in
   the global configuration once for every repository of the machine,
   with the rebase backend that honours drivers and with renormalisation,
   and the status report says when the registration is missing, because

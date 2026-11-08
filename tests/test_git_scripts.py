@@ -127,6 +127,55 @@ def test_save_with_a_tag_tags_and_pushes_the_tag_and_refuses_an_existing_one(rep
     assert r.returncode != 0 and "already exists" in r.stdout + r.stderr
 
 
+def merges_kept(path, env):
+    """The merge commits reachable from HEAD, as their subjects."""
+    return git(["log", "--merges", "--format=%s"], path, env).splitlines()
+
+
+def test_save_after_a_merge_by_hand_pushes_the_merge_as_it_stands(repo, other_clone, git_env, run_script):
+    # The integrator: another person's branch merged into main by git
+    # itself, the origin's main unchanged; the save pushes the merge
+    # commit as it stands, no rebase flattening it into the branch's
+    # commits replayed one by one (CLAUDE.md, Persistence; POS.1710).
+    git(["checkout", "-q", "-b", "feature"], other_clone, git_env)
+    change(other_clone, "00-brief.md", "\nThe gate is on the north side.\n")
+    git(["commit", "-q", "-am", "other: the gate"], other_clone, git_env)
+    change(other_clone, "00-brief.md", "\nThe gate is painted green.\n")
+    git(["commit", "-q", "-am", "other: the paint"], other_clone, git_env)
+    git(["push", "-q", "-u", "origin", "feature"], other_clone, git_env)
+    git(["fetch", "-q", "origin"], repo, git_env)
+    git(["merge", "-q", "--no-ff", "-m", "fixture: feature merged", "origin/feature"], repo, git_env)
+    r = run_script("forge-save", repo, env=git_env)
+    assert r.returncode == 0, r.stdout + r.stderr
+    assert "saved and pushed" in r.stdout
+    assert origin_main(repo, git_env) == head(repo, git_env)
+    assert merges_kept(repo, git_env) == ["fixture: feature merged"]
+
+
+def test_save_after_a_merge_of_the_main_into_a_branch_keeps_the_merge(repo, other_clone, git_env, run_script):
+    # The contributor: a branch saved to the origin, the origin's main
+    # moved on by another person, that main merged into the branch by
+    # git itself and one more change saved; the save pushes the merge
+    # as it stands and replays nothing of the other person's commits.
+    assert run_script("forge-branch", repo, "trial", env=git_env).returncode == 0
+    change(repo, "00-brief.md", "\nA bench by the gate.\n")
+    assert run_script("forge-save", repo, "-m", "fixture: a bench", env=git_env).returncode == 0
+    for line, msg in (("\n- **POS.0030** A light in the shed.\n", "other: a light"),
+                      ("\n- **POS.0040** A roof on the shed.\n", "other: a roof")):
+        change(other_clone, "10-intent.md", line)
+        git(["commit", "-q", "-am", msg], other_clone, git_env)
+    git(["push", "-q"], other_clone, git_env)
+    git(["fetch", "-q", "origin"], repo, git_env)
+    git(["merge", "-q", "--no-ff", "-m", "fixture: main merged into trial", "origin/main"], repo, git_env)
+    change(repo, "00-brief.md", "\nThe bench is oak.\n")
+    r = run_script("forge-save", repo, "-m", "fixture: oak", env=git_env)
+    assert r.returncode == 0, r.stdout + r.stderr
+    assert "saved and pushed" in r.stdout
+    assert merges_kept(repo, git_env) == ["fixture: main merged into trial"]
+    origin_trial = git(["rev-parse", "trial"], repo.parent / "origin.git", git_env)
+    assert origin_trial == head(repo, git_env)
+
+
 # ---- branch
 
 def test_branch_reports_creates_switches_and_refuses_unsaved_changes(repo, git_env, run_script):

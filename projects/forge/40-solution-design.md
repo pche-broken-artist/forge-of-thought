@@ -1,5 +1,5 @@
 ---
-version: 0.56
+version: 0.57
 status: draft
 project: forge
 audience: whoever realises the solution, a person or an agent
@@ -1247,18 +1247,27 @@ boundary kept by hand or an order of work.
   and says "behind: pull first" as a recommendation; the write step
   never fetches; `forge-save` pushes a clean repository that is ahead, a
   branch without an upstream counted against `origin/<branch>` after a
-  fetch or pushed as new, and leaves a conflicting rebase standing with
-  the files and the step printed (SOL.0840). Realises: POS.1710,
-  POS.1490. Choice: the state read once at the map and the reflection
-  against a fetch at the write, so that the network never fails a round.
-  The roles: a contributor's branch and `/save`, the integrator's merge
-  and `/save` on main (POS.1770, SOL.0840). Built 2026-10-18, the
-  preparation of the cutover plan (R1.12): the ahead counted against the
-  upstream without a fetch, a branch with no upstream reaching the
-  remote with its first commit; the push of a clean branch without an
-  upstream and the conflict left standing 2026-10-23 (R6.02). Where:
+  fetch or pushed as new, rebases only where `forge_repos.remote_state`
+  says diverged after its fetch, a branch merely ahead, a merge commit
+  among its commits, pushed as it stands (POS.1690, THR.0820), and
+  leaves a conflicting rebase standing with the files and the step
+  printed (SOL.0840). Realises: POS.1710, POS.1490, POS.1690. Choice:
+  the state read once at the map and the reflection against a fetch at
+  the write, so that the network never fails a round; the rebase on a
+  diverged branch alone against a rebase before every push, since a
+  rebase drops a merge commit and replays what it brought in, which the
+  contributor of pull request #8 met on 2026-11-06. The roles: a
+  contributor's branch and `/save`, the integrator's merge and `/save`
+  on main (POS.1770, SOL.0840). Built 2026-10-18, the preparation of
+  the cutover plan (R1.12): the ahead counted against the upstream
+  without a fetch, a branch with no upstream reaching the remote with
+  its first commit; the push of a clean branch without an upstream and
+  the conflict left standing 2026-10-23 (R6.02); the rebase narrowed to
+  a diverged branch 2026-11-08, two tests on the fixture reproducing
+  the flattened merge in both roles before the change. Where:
   `.claude/skills/forge/SKILL.md`,
-  `.claude/skills/walkthrough/SKILL.md`, `scripts/forge-save.py`.
+  `.claude/skills/walkthrough/SKILL.md`, `scripts/forge-save.py`,
+  `scripts/forge_repos.py`, `tests/test_git_scripts.py`.
 - **SOL.0800 The migration.** `scripts/forge-migrate.py <slug> [--apply
   | --undo]`, door `/migrate [slug]`: a dry run by default; the shape as
   marks (the project file exists, no `date` in the headers, `threads/`
@@ -1477,7 +1486,9 @@ boundary kept by hand or an order of work.
   status, save, branch and pull on the throwaway repository, the step
   of a conflict standing and finished, a standing rebase refused, the
   derived file taken as ours with the registration and in conflict
-  without it; `test_forge_check_light.py`, the fixture conforming and
+  without it, a merge by hand pushed as it stands, the integrator's
+  and the contributor's (THR.0820); `test_forge_check_light.py`, the
+  fixture conforming and
   two planted defects found; `test_conversions.py`, md2pptx, md2docx
   and doc2md failing on an empty PATH naming their tool. CI is
   `.github/workflows/tests.yml`: at every push and pull request,
