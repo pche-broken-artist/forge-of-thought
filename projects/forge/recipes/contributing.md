@@ -2,7 +2,7 @@
 project: forge
 purpose: CONTRIBUTING.md of the engine's repository - how a visitor gives feedback, brings an idea or sends a change
 audience: a visitor of the repository on GitHub who has used the forge or read about it and wants to say, ask or change something; he arrives from the Contributing tab, the sidebar, or the page where an issue or a pull request is created
-version: 0.6
+version: 0.7
 output: /CONTRIBUTING.md
 ---
 
@@ -86,9 +86,14 @@ output: /CONTRIBUTING.md
   something; the change itself; and one line on what you ran. Say
   what it does not carry: no release, no regenerated README, release
   notes or documentation, which the author makes at the next
-  release. A brief may come first and need not. Say that the easiest
-  way is to open a discussion first, and that the forge's own
-  commands do this work (`/forge intent forge`).
+  release. A brief may come first and need not. Say that everything
+  that enters the forge's own project is written in English, a brief
+  included: the project is public and read by everyone, and the
+  engine's own rule that a brief keeps the language it was written in
+  holds for a principal's own instance, not here; a brief sent in
+  another language is translated at the merge and its original stays
+  in git. Say that the easiest way is to open a discussion first, and
+  that the forge's own commands do this work (`/forge intent forge`).
 - For a document say that `README.md`, `RELEASE-NOTES.md` and this
   file are generated and are never edited by hand: a change goes into
   the recipe in `projects/forge/recipes/` or into what the recipe

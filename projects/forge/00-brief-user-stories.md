@@ -1,8 +1,8 @@
 ---
 project: forge
-title: User stories — vrstva uživatelských příběhů pod BRD
+title: User stories — a layer of user stories below the BRD
 author: FT-
-version: 0.5
+version: 0.6
 status: draft
 ---
 
@@ -11,100 +11,109 @@ rules: its definition, `.claude/skills/forge/states/brief.md`; the
 history companion:
 templates/history.md. -->
 
-## Co chci
-Vrstvu řetězu pro user stories, `35-user-stories.md`, mezi BRD a
-solution designem, pracovanou přes `/forge user-stories`.
+## What I want
+A layer of the chain for user stories, `35-user-stories.md`, between
+the BRD and the solution design, worked through `/forge user-stories`.
 
-## Proč
-User stories popisují funkcionalitu z pohledu uživatele, ne jako
-technické zadání. Drží hodnotu — co, pro koho a proč — a člení práci
-na části, které lze vyvinout a otestovat. Schvalují je stakeholdeři
-jako celek; po schválení je přebírá vývoj, dělá nad nimi technickou
-analýzu a vyvíjí podle nich, pokud nezůstávají prázdná místa; testeři
-z nich píšou test cases. Výstupem analytika je dokument se seznamem
-stories, nejčastěji v Confluence.
+## Why
+User stories describe functionality from the user's point of view,
+not as a technical specification. They hold the value — what, for
+whom and why — and divide the work into parts that can be developed
+and tested. The stakeholders approve them as a whole; once approved,
+the delivery takes them over, makes its technical analysis on them
+and develops from them, unless gaps remain; the testers write their
+test cases from them. The analyst's output is a document with the
+list of stories, most often in Confluence.
 
-## Z čeho vychází
-Z požadavků jakéhokoli druhu (BR, NFR, bezpečnostní a další), vazba
-mnoho na mnoho: z jednoho BR může být více stories a jedna story může
-pokrývat více BR. U malé změny, kde je zadání přesné a bez dalších
-dopadů, přímo z intentu; zda zadání stačí, rozhoduje analytik.
+## What it starts from
+From requirements of any kind (BR, NFR, security and others), a
+many-to-many relation: one BR may yield several stories and one story
+may cover several BRs. For a small change, where the specification is
+precise and without further consequences, directly from the intent;
+whether the specification suffices is the analyst's call.
 
-## Tvar story
-- Story je jedna funkce, jak ji potkává ten, kdo ji používá. Varianty
-  podle podmínek, kvality a přechody jsou její akceptační kritéria a
-  edge cases, ne samostatné stories; nová story začíná u jiného
-  aktéra nebo jiné funkce. Běžné chování je kritérium, edge case je
-  hraniční situace.
-- ID `US.NNNN`, číslované po desítkách, skupiny po stovkách; název
-  jako krátké podstatné jméno funkce.
-- Pořadí oddílů: název; volná věta nesoucí kdo nebo co, co a proč
-  (šablona „Jako… chci… abych…“ se nevyžaduje ani nezakazuje);
-  akceptační kritéria v odrážkách; `Edge cases` (situace → co se
-  stane); `Risks`, vždy s mitigací nebo důsledky; `Note`, jen odkaz
-  na přílohu či technickou analýzu s vysvětlením, co se za ním
-  skrývá; `Questions` (otázka → vlastník); `Reference` (BR, NFR,
-  DEP… nebo POS).
-- Povinná je jen `Reference`; ostatní oddíly se vynechávají, když
-  story nic nemá. Export pro stakeholdery odkazy na POS vynechává,
-  protože intent nevidí; story jen s POS v exportu řádek Reference
-  nemá.
-- Popisky oddílů anglicky a pevně, obsah v jazyce projektu.
-- Nefunkční požadavky: průřezové jako samostatná story, týkající se
-  jedné funkce jako akceptační kritérium u ní.
-- Dokument nese jen stories.
+## The shape of a story
+- A story is one function as the one who uses it meets it. Its
+  variants by condition, its qualities and its transitions are its
+  acceptance criteria and edge cases, not stories of their own; a new
+  story begins with another actor or another function. The usual
+  behaviour is a criterion, an edge case is a situation at the border.
+- ID `US.NNNN`, numbered in tens, groups in hundreds; the name a short
+  noun for the function.
+- The order of the parts: the name; a free sentence carrying who or
+  what, what and why (the template "As a… I want… so that…" is
+  neither required nor forbidden); the acceptance criteria as
+  bullets; `Edge cases` (situation → what happens); `Risks`, always
+  with a mitigation or the consequences; `Note`, only a link to an
+  attachment or a technical analysis with an explanation of what lies
+  behind it; `Questions` (question → owner); `Reference` (BR, NFR,
+  DEP… or POS).
+- Only `Reference` is mandatory; the other parts are left out where a
+  story has nothing for them. The export for the stakeholders leaves
+  out the references to POS, since they do not see the intent; a
+  story with POS alone has no Reference line in the export.
+- The labels of the parts in English and fixed, the content in the
+  project's language.
+- Non-functional requirements: a cross-cutting one as a story of its
+  own, one concerning a single function as an acceptance criterion of
+  that story.
+- The document carries the stories only.
 
-## Formulace
-Akceptační kritéria v oznamovacím způsobu přítomného času, jedno
-chování na odrážku. Žádná vágní slova („rychle“, „vhodně“,
-„intuitivně“); chybí-li hodnota, zapíše se otevřená otázka. Bez
-technického řešení — komponenty, API, datového modelu —, nanejvýš
-odkaz na přílohu nebo technickou analýzu.
+## Wording
+Acceptance criteria in the indicative present, one behaviour per
+bullet. No vague words ("fast", "suitably", "intuitively"); where a
+value is missing, an open question is written. No technical solution
+— components, API, data model — at most a link to an attachment or a
+technical analysis.
 
-## Kdy jsou hotové
-- Každý požadavek je pokrytý alespoň jednou story, nebo je řečeno,
-  proč ne.
-- Každé akceptační kritérium je testovatelné.
-- Stories si neodporují a stejná funkce není popsaná dvakrát jinak.
-- Každá otevřená otázka má vlastníka; story s otázkou, která blokuje
-  vývoj, není hotová.
-- Stories jako celek schválili stakeholdeři.
+## When they are done
+- Every requirement is covered by at least one story, or it is said
+  why not.
+- Every acceptance criterion is testable.
+- The stories do not contradict each other and the same function is
+  not described twice differently.
+- Every open question has an owner; a story with a question that
+  blocks development is not done.
+- The stakeholders have approved the stories as a whole.
 
-## Jak vznikají
-Claude nejdřív navrhne řez: názvy stories s krátkým popisem a
-požadavky, které žádná story nepokryje, popsané slovy. Až ho analytik
-schválí, rozepíše celé stories z BRD (u malé změny z intentu) a
-analytik je projde story po story. Kde zadání nestačí,
-přepne se na rozhovor nad jednotlivou story. Co chybí, se nedomýšlí:
-zapíše se otevřená otázka.
+## How they are made
+Claude first proposes the cut: the names of the stories with a short
+description, and the requirements no story covers, described in
+words. Once the analyst approves it, Claude drafts the whole stories
+from the BRD (for a small change from the intent) and the analyst
+walks them story by story. Where the specification does not suffice,
+the walk turns into an interview on the single story. What is missing
+is not guessed: an open question is written.
 
-## Kontrola a výstup
-- Nová mechanická kontrola `check-user-stories` po vzoru `check-brd`:
-  pokrytí požadavků, existující citovaná ID, kritéria a edge cases,
-  otázky s vlastníkem, rizika s mitigací nebo důsledky, Note s odkazem
-  a vysvětlením.
-- Kritik `clarity` zná styl stories a nehlásí jeho odlišnost od stylu
-  požadavků.
-- Render podle receptu vyrobí přesně formát exportu
-  (`sources/example-user-stories-v2.md`): pevné nadpisy a věta o
-  účelu, bez tabulky, nadpis na story, části na samostatných řádcích,
-  bez zalamování, aby šel vložit do Confluence i Jiry.
+## Check and output
+- A new mechanical check `check-user-stories` on the pattern of
+  `check-brd`: coverage of the requirements, cited IDs that exist,
+  criteria and edge cases, questions with an owner, risks with a
+  mitigation or consequences, a Note with a link and an explanation.
+- The critic `clarity` knows the style of the stories and does not
+  report its difference from the style of requirements.
+- A render by a recipe produces exactly the format of the export
+  (`sources/example-user-stories-v2.md`): fixed headings and a
+  sentence on the purpose, no table, one heading per story, the parts
+  on lines of their own, no wrapping, so that it can be pasted into
+  Confluence and Jira.
 
-## Co nechci
-Prioritu, odhad, technické řešení, detail grafiky, rozpad na úkoly,
-oddíl poznámek, samostatný oddíl závislostí (závislost je `DEP`
-v Reference, u malé změny otevřená otázka), úvod nebo předpoklady
-v dokumentu.
+## What I do not want
+Priority, estimate, technical solution, graphic detail, a breakdown
+into tasks, a section of notes, a separate section of dependencies (a
+dependency is a `DEP` in the Reference, for a small change an open
+question), an introduction or assumptions in the document.
 
-## Změna enginu navíc
-Prefix ID o dvou nebo třech písmenech (POS.0220, ID schéma v
-`CLAUDE.md`) a výraz `[A-Z]{2,3}` ve skriptech, aby fungovala `US`,
-`BR` i `UC`. Pravidlo o třech písmenech vychází ze souladu se
-skupinovým standardem BRD (REJ.0100) a engine ho porušil už u `BR` a
-`UC` (POS.1830).
+## A change of the engine besides
+ID prefixes of two or three letters (POS.0220, the ID scheme in
+`CLAUDE.md`) and the expression `[A-Z]{2,3}` in the scripts, so that
+`US`, `BR` and `UC` work. The rule of three letters came from the
+alignment with the group's BRD standard (REJ.0100) and the engine
+already broke it with `BR` and `UC` (POS.1830).
 
-## Postup
-Podle POS.1780: tento brief, pak definice se šablonou, kontrola a
-recept, pak zkouška na malém projektu (zadání: vazba obsahu v CMS
-na úroveň hráče), teprve potom pozice v intentu enginu a
-položka solution designu.
+## The way
+By POS.1780: this brief, then the definition with its template, the
+check and the recipe, then a trial on a small project (the
+specification: content in a CMS tied to a player's level), only then
+the positions in the engine's intent and the item of the solution
+design.

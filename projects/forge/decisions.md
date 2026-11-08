@@ -718,3 +718,24 @@ verdict on the whole ID, the rest a `changed` record of the history
   stays the forge's way of naming a project; a path is what every
   tool takes.
 - **Date:** 2026-11-07
+
+## DEC.0420 — The last exception to POS.0940 is withdrawn at the cut, not before
+- **Decision:** FND.3900 (the engine check of 2026-11-08), the core
+  still saying that `projects/forge` is the one project the engine
+  tracks, is parked until the cut of POS.1980: the round in which the
+  forge's own project becomes a repository of its own beside the
+  engine. At the cut, in that one round: the exception dropped from
+  the two sentences of CLAUDE.md and the re-include from
+  `.gitignore`; the `projects/forge/...` lines of `.gitattributes`
+  moved into the project's own file; the README recipe saying where
+  the project lives and that a user never needs it; the CONTRIBUTING
+  recipe saying that a contributor clones the project beside the
+  engine and what a pull request on each repository carries.
+- **Reason:** Today the project is still tracked by the engine, so the
+  sentences are true of the present; POS.1980 itself orders the change
+  at the cut, the engine prepared with the project inside, the
+  project's repository born, then the directory let go. A sentence
+  changed before the cut would describe a shape that does not exist
+  yet. The principal's word of 2026-11-08.
+- **Verdict:** FND.3900 parked until the cut of POS.1980
+- **Date:** 2026-11-08
