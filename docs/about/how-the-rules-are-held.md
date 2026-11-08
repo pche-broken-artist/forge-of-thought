@@ -1,8 +1,8 @@
 ---
 generated: 2026-11-08
-version: 6.21
+version: 7.0
 made: derived
-inputs-hash: da265d0ae99eb9a7
+inputs-hash: 40ee2c84ba6128f7
 inputs:
   - CLAUDE.md#Prime directives
   - CLAUDE.md#Working methods
@@ -21,309 +21,313 @@ inputs:
   - projects/forge/10-intent.md#POS.1200
   - projects/forge/40-solution-design.md#The instruction layer
   - projects/forge/40-solution-design.md#SOL.0110
+  - projects/forge/40-solution-design.md#SOL.0520
 ---
 
 # How the rules are held
 
-The rules of the forge are held by a layered arrangement: one
-always-on core that every session and every subagent loads, files
-that are read when their situation arises, a hook that repeats at
-every prompt what must not fade, and a few walls that the harness
-can enforce. This page explains that arrangement for the extender
-who changes the operating layer and for the evaluator who wants to
-know what keeps Claude on the rules through a long conversation and
-inside a subagent (a separate run of Claude that sees nothing of the
-conversation). It says what holds the rules, how each part works and
-why it is so.
+The rules of the forge are held by a small set of mechanisms that
+work together: one always-on file, a hook that repeats a rule at
+every prompt, a few settings of the harness, a wall on git, and the
+conduct of Claude itself. This page explains those mechanisms, how
+they fit together and why each is shaped as it is. It is written for
+the extender who changes the forge and the evaluator who wants to
+know what keeps Claude on its rules through a long conversation and
+inside an isolated subagent (a separate run of Claude that does one
+job and returns its result). The principal (the person whose
+thinking is forged, and the final authority on all content) will
+meet these mechanisms in use without needing to know them. The
+harness is Claude Code, the program that runs Claude and its tools.
+A session is one run of that program, from the moment it is opened.
+The terms of the forge are collected in the [Glossary](../reference/glossary.md).
 
 ## What it is
 
-The harness is Claude Code, the program the forge runs in: its slash
-commands, skills, agents and hooks are the mechanisms, and the forge
-is what they are told. A session is one conversation in it. The
-principal is the person whose thinking is forged; Claude proposes
-and the principal decides.
+The forge is a set of instructions, not a program that runs by
+itself. Its rules hold only as far as Claude reads them and acts on
+them. Four things keep them in force.
 
-The rules are held in five ways.
+- One always-on core, the file `CLAUDE.md` at the engine root. The
+  harness loads it into every session and into every subagent. It
+  carries what must hold everywhere: the roles, the prime
+  directives, the working methods in short, the document kinds, the
+  chain, the layout, persistence, versioning, the ID scheme, the
+  reviewers, the ledger (the single source of truth for state, made
+  at read time) and the list of commands.
+- Everything else is a file read when its situation arises: a
+  definition, a skill, a template, a script, an agent. The files of
+  the operating layer are described in
+  [What the forge is made of](../extend/what-it-is-made-of.md).
+- Two hooks and a few deny rules in `.claude/settings.json`. These
+  are what the harness enforces mechanically; they are listed
+  exactly in [Configuration](../reference/configuration.md).
+- Conduct: the working methods, above all the step-by-step method,
+  described in [The working methods](working-methods.md).
 
-- The core, `CLAUDE.md` at the engine root: the one file the harness
-  loads into every session and every subagent. It carries what must
-  hold everywhere: the roles, the prime directives, the working
-  methods in short, the document kinds, the chain, the layout,
-  persistence, versioning, the ID scheme, the reviewers, the ledger
-  (the one file that says the state of a project, made at read time)
-  and the list of commands. A rule of one artefact is not in the
-  core but in that artefact's definition. Beside the core stands the
-  instance file, `CLAUDE.local.md`: it says who the principal is, by
-  role, and what language the conversation runs in, and it is kept
-  out of the repository.
-- Everything else: a file read when its situation arises. A command
-  is a skill, a method has its skill, an artefact has its definition
-  and its template, a script carries its help in its header. What
-  these files are is said on [What the forge is made of](../extend/what-it-is-made-of.md).
-- A hook at every prompt: a small script the harness runs on every
-  message of the principal and whose output it adds to the context
-  of that turn. It repeats the rule of the walkthrough (a list of
-  items worked one per message, each closed with a verdict) and four
-  lines of conduct.
-- The walls of the harness: deny rules in the settings and a second
-  hook that judges every git command before it runs.
-- Conduct: the step-by-step method, by which anything that needs the
-  principal's consent arrives as one step and runs on his word.
-
-Three further rules keep the arrangement whole. One mechanism lives
-in one place. Every isolated subagent reads its inputs from disk.
-The forge's behaviour never lives in the assistant's memory.
+A fifth thing is a boundary rather than a mechanism: the forge's
+behaviour never lives in the assistant's private memory.
 
 ## How it works
 
-### One always-on core, the rest read when needed
+### One mechanism in one place
 
-The core is what the harness loads into every session and every
-subagent, so whatever stands in it is in context at every moment.
-Everything that is not in the core is in a file with an owner: a
-skill, a definition, a template, a script. Such a file is read when
-its situation arises. The pattern the core follows is: always-on is
-one sentence and a pointer, the detail is a file read when its
-situation arises. The walkthrough is the first instance of that
-pattern. Its rule stands in the core in short, with a pointer to
-`.claude/skills/walkthrough/SKILL.md`, and the shape of the item, of
-the verdict, of the interview and of the write-up lives in that
-skill, read whenever a walkthrough or an interview runs.
+Whatever the forge has a procedure for, a command, a skill, a
+script or an agent, is used through its own definition whenever its
+situation arises. It is never re-described and never improvised. A
+command that needs another's mechanism cites it by path and adds
+nothing of its own to how it runs. The rules of a mechanism, such
+as its isolation, its provenance and what it may read, are written
+once, in its own definition. A procedure stated in two places is a
+defect.
 
-The instance file reaches every subagent, the isolated reviewers
-included. Only what must be always-on and is harmless in a public
-report lives there. The git identities, that is names, e-mail
-addresses and hosts, live in the user's own git configuration
-outside the engine. The session model lives in
-`.claude/settings.local.json`, gitignored, so that the model the
-whole forge runs on is chosen in one deliberate place.
+The always-on core follows the same pattern. Where a rule has a
+shape of its own, the core carries one sentence and a pointer, and
+the detail lives in a file read when its situation arises. The
+walkthrough is the first instance of this pattern. A walkthrough is
+any list of items that need the principal's decision, worked one
+item per message. The core carries the one-item rule and the
+pointer to `.claude/skills/walkthrough/SKILL.md`. That skill holds
+the full shape of the item, the verdict, the elicitation interview
+and the write-up, and it is read whenever a walkthrough or an
+interview runs. The skill is not a command.
 
-### One mechanism lives in one place
+A rule of one artefact is not in the core but in that artefact's
+definition.
 
-Whatever the forge already has a procedure for, a command, a skill, a
-script or an agent, is used through that procedure whenever its
-situation arises. It is never re-described or improvised. A command
-that needs another's mechanism cites it by path and adds nothing of
-its own to how it runs. The rules of a mechanism, its isolation, its
-wrapping, its provenance and what it may read, are written once, in
-its own definition. A procedure stated in two places is a defect.
-Where a shape had no owner at all, it gets a skeleton rather than a
-second description. A one-line reminder at the point of action that
-names its owner is not a restatement, because it is what Claude
-reads when it acts, and the citation keeps it honest.
+### A rule repeated at every prompt
 
-### A hook repeats what must hold through a long conversation
+A rule that must hold through a long conversation is not trusted to
+`CLAUDE.md` alone. A hook of the harness, `scripts/hook-walkthrough.py`,
+runs on every prompt the principal sends. `.claude/settings.json`
+registers it as a `UserPromptSubmit` hook, and the harness adds what
+it prints to the context of that turn. The script reads nothing,
+writes nothing and takes no arguments. The settings invoke it as
+`python` with the script's path under `${CLAUDE_PROJECT_DIR}`, so
+that it is found from whatever directory the session started in.
 
-A rule that must hold in a long conversation is not trusted to the
-core alone. The settings, `.claude/settings.json`, carry one hook of
-the kind the harness runs on every prompt of the principal; its
-script is `scripts/hook-walkthrough.py`. The harness adds what the
-script prints to the context of that turn. The script reads nothing,
-writes nothing and takes no arguments. The settings invoke it in
-exec form with its path given through the harness's placeholder for
-the project root, because a hook runs in the session's working
-directory and not the engine root.
+What the hook prints is six lines, in the reader's words:
 
-What the hook prints is six lines.
-
-- The one-item rule of the walkthrough: one item per reply,
-  acknowledge the last verdict, put one item forward, close a
-  proposition with the verdict line, stop; a question from the
-  principal keeps the item open.
-- The pointer to the walkthrough skill, to be worked by whenever a
-  walkthrough or an interview is running.
-- Tools: where the forge has a script, Claude uses the script, never
-  the raw tool; git is read directly and every write of it goes
-  through the forge's scripts.
-- Own commands: before running anything of its own that is not plain
-  reading, Claude says what it does and why and waits for the
-  principal's yes.
+- The walkthrough rule: one item per reply. Claude acknowledges the
+  last verdict, puts one item forward, closes a proposition with the
+  verdict line `(a)ccept / (m)odify / (q)uestion / (r)eject / (p)ark`
+  and stops. A question from the principal keeps the item open:
+  Claude answers, then closes the item again.
+- The pointer: when a walkthrough or an interview is running, Claude
+  works by `.claude/skills/walkthrough/SKILL.md`.
+- Tools: where the forge has a script in `scripts/`, Claude uses the
+  script, never the raw tool. Git is read directly; every write of
+  git goes through `scripts/forge-*.py`.
+- Own commands: before Claude runs anything of its own that is not
+  plain reading, it says what the command does and why, and waits
+  for the principal's yes.
 - Consent: Claude writes, runs and changes nothing that was not
-  agreed and approved; a yes covers exactly what was asked, never
+  agreed and approved. A yes covers exactly what was asked, never
   its consequences.
 - Decisions: every question that asks the principal to decide is one
-  proposition with Claude's recommendation as what accept means, and
-  it ends with the verdict line; a yes that carries a question is a
-  `q`; only a question for information Claude lacks ends with the
-  question alone.
+  proposition with Claude's recommendation as what `accept` means,
+  and it ends with the verdict line. Such questions are a step that
+  needs consent, a choice between options, an either/or, and whether
+  to write. A yes that carries a question is `q`. Only a question
+  for information Claude lacks ends with the question alone.
 
-The verdict line is `(a)ccept / (m)odify / (q)uestion / (r)eject /
-(p)ark`. A hook is context, not enforcement: it is the nearest thing
-to a wall the harness offers for a rule of conduct.
+A hook is context, not enforcement. It is the nearest thing to a
+wall that the harness offers for a rule of conduct, and it does not
+guarantee that the rule is kept.
 
-### The harness enforces what it can
+### What the harness enforces
 
-The harness enforces the principal's word where it can. The settings
-carry three deny rules. Two keep Claude from the user's sensitive
-paths, the SSH and the AWS directories of the home folder. The third
-keeps the PowerShell tool from git altogether, so that git runs
-through one shell tool only, Bash, where a hook can judge it.
+The harness enforces the principal's word where it can. The
+protection is the permission system of Claude Code and not a sandbox
+of the operating system: commands and file operations run under
+permission prompts and allowlists, and `.claude/settings.json`
+carries shared deny rules.
 
-That hook is the second one of the settings, `scripts/hook-git.py`,
-run before every Bash command Claude sends: it holds the line
-between reading git and writing it, and it answers in one of three
-ways, allow for a reading of git, ask for the few commands that
-finish the step of a conflict, so that the harness puts the command
-to the principal and runs it on his yes, and deny for everything
-else, naming the script of the forge to use instead. The scripts in
-`scripts/` are the door to a write of git. What the step of a
-conflict is and how the scripts serve git is said on
-[Persistence in git](persistence-in-git.md). The exact settings are
-on [Configuration](../reference/configuration.md).
+The settings file holds three deny rules and two hooks.
+
+- Two deny rules keep Claude from reading two sensitive paths,
+  `~/.ssh` and `~/.aws`.
+- One deny rule, `PowerShell(git *)`, keeps the PowerShell tool from
+  git whole. There is one parser and one door for git, and it is the
+  Bash tool.
+- The per-prompt hook described above.
+- A second hook, `scripts/hook-git.py`, registered as a `PreToolUse`
+  hook on the Bash tool. It holds the line between reading git and
+  writing it: it allows a reading call of git, denies a writing one
+  and names the script of the forge to use instead, and puts the few
+  commands that finish the step of a conflict to the principal, so
+  that the harness runs them on his yes. How this wall works and
+  what it means for a project in git is explained in
+  [Persistence in git](persistence-in-git.md).
 
 ### A command that changes files starts on the principal's word
 
-A command that writes, scaffolds, commits or regenerates starts on
+Some commands change files the moment they run, with no round of
+conversation and no `write` in between. Such a command starts on
 the principal's word and never on Claude's judgement. The principal
-invokes it by slash, or he asks in words and Claude invokes the
-skill itself, never its steps replayed by hand. The guard is
-conduct, the step-by-step method described on
-[The working methods](working-methods.md), and the wall on git.
+invokes it by slash, or asks in words and Claude invokes the skill
+itself through the harness's Skill tool. Claude never replays the
+steps of the skill by hand from its definition.
 
-What separates a guarded command from the rest is this. A guarded
-command changes files the moment it runs, with no round and no
-`write` in between. A command that writes only at the end of a round
-on the principal's word, or that files the immutable record of a run
-he asked for, needs no guard, because the word is already in the
-procedure. A map, a report or a roster stays Claude's to start,
-since Claude is meant to propose them. The composition of a recipe
-is the birth of a versioned document and is a step of its own.
+The guard on these commands is conduct: the step-by-step method and
+the wall on git. No command of the forge carries the harness field
+`disable-model-invocation`, which would block the model from
+starting it. Every skill is model-invocable, and the descriptions of
+all commands stay in the always-on context.
 
-No command of the forge carries the harness's field
-`disable-model-invocation`, which blocks the model from invoking a
-skill. Every skill is model-invocable, and the descriptions of all
-commands stay in the always-on context.
+What separates a guarded command from the rest is the criterion
+above. A command that writes only at the end of a round on the
+principal's word, or files the immutable record of a run he asked
+for, needs no guard, because the word is already in its procedure.
+The maps and the rosters stay Claude's to start, since Claude is
+meant to propose them. A run of a reviewer or a research is proposed
+by Claude and started on the principal's word.
 
 ### Inside a subagent
 
 Every isolated subagent of the forge, a reviewer, a renderer, a
 documentation agent or a research agent alike, sees nothing of the
-conversation. It reads every input from disk in its own run. It
-lets no instance fact into what it returns. Every agent that writes
-an outward-facing file says in its definition that instance facts
-are not material and that an input is read from disk, and the
-generated files are scanned mechanically before they are kept. The
-research agent's brief carries the same in its own words, because
-its packet also goes to an engine that reads no file of the forge.
+working conversation. It reads every input from disk in its own run.
+It lets no instance fact into what it returns. A subagent sees the
+session's whole context, including `CLAUDE.md` as the session read
+it and the assistant's memory, and it may take that copy for the
+file on disk. So every agent that writes an outward-facing file says
+in its definition that instance facts are not material and that an
+input is read from disk, and the generated files are scanned
+mechanically before they are kept.
 
-The whole forge runs on one model, the session model: every command,
-every chain state and every reviewer. Speed is bought with context,
-never with a weaker reviewer: a render, a check and a review each
-run in an isolated subagent that sees only its files, and the
-working conversation is spent on verdicts, not on reading. Two
-exceptions are named. The headless conversions behind `/publish`
-have no session model, so each carries a default of its own, as an
-explicit parameter. A mirrored page of the documentation leaves the
-model no room, so it is written on a faster model, the choice made
-by the page's entry and never per run.
+The instance facts, who the principal is by role and what language
+the conversation runs in, live in `CLAUDE.local.md`, a file of the
+instance kept out of the repository. Everything in that file
+reaches every subagent, the isolated reviewers included. Therefore
+only what must be always-on and is harmless in a public report lives
+there.
 
-### The forge's behaviour never lives in memory
+### One model
 
-The harness keeps a per-directory memory outside the repository.
+Every command, every state of the chain and every reviewer runs on
+the session model. Speed is bought with context, not with a weaker
+model: a render, a check and a review each run in an isolated
+subagent that sees only its files, and the working conversation is
+spent on verdicts, not on reading. The session model is chosen in
+one deliberate place, as an instance preference. Two exceptions are
+named: the headless conversions behind `/publish`, which have no
+session model and each carry an explicit default of their own, and
+the writer of a mirrored page of the documentation, which runs on a
+faster model because a mirrored page leaves the model no room.
+
+### Nothing in the assistant's memory
+
+Claude Code keeps a per-directory memory outside the repository.
 Whatever Claude learns there about how the forge should work, a
 working method, a rule of a command, a convention, is written into
-the core, the commands or the templates and removed from memory.
-Memory is left with what is personal to one principal, his idiom and
-his private choices, and instance facts go to the instance file.
+`CLAUDE.md`, the commands or the templates and removed from memory.
+Memory is left with what is personal to one principal, such as his
+idiom and his private choices. Instance facts go to `CLAUDE.local.md`.
 
-### The forge explains itself through one door
+### One door to the manual
 
-The manual is `/man`, alias `/manual`: a reader with no text of its
+The forge explains itself through one door, `/man`, with the alias
+`/manual`. It is named after the Unix manual, because `/help` is a
+built-in of Claude Code. The manual is a reader with no text of its
 own. It reads the definitions and the documentation in the run and
-never answers from memory. A need said in free words, `/man` with a
-question, gets the way the forge has for it, said in plain sentences
-and cited by path, never retold. Where the forge has nothing, the
-answer says so and marks what Claude would do without a mechanism as
-its own. The name follows the Unix manual, because `/help` is a
-built-in of the harness. There is no second help command. How you
-use the manual is on
+never answers from memory. A need said in free words, `/man
+<question>`, is answered with the way the forge has for it, said in
+plain sentences and cited by path, never retold. Where the forge has
+nothing, the answer says so, and what Claude would do without a
+mechanism is marked as its own. There is no second help command. How
+to use the manual is described in
 [Look up a command, or ask how to do something](../use/look-up-a-command.md).
 
 ## Why
 
-The core is one file because it is the file the harness loads into
-every session. What it costs is its size, and so a rule of one
-artefact lives in that artefact's definition, not in the core.
+The core is one file because it is the file Claude Code loads into
+every session. What it costs is its size. The intent records no
+alternative that was weighed.
 
-The rest is read when its situation arises because text loaded once
-dissolves as the conversation grows. The hook exists for the same
-reason: a rule that must hold through a long conversation is
-repeated at every prompt and not trusted to text loaded once. A hook
-is context and not enforcement; that cost is accepted because a hook
-is the nearest thing to a wall the harness offers.
+A rule that must hold through a long conversation is repeated by a
+hook because text loaded once dissolves as the conversation grows.
+The repetition is judged by behaviour, not by the text being
+present. The pattern of one sentence and a pointer in the core,
+with the detail in a file read when its situation arises, keeps the
+core small while the rule stays reachable.
 
 One mechanism lives in one place because two copies drift, and the
-copy without a rule silently loses it.
+copy without a rule silently loses it. Where a shape has no owner at
+all, it gets a skeleton rather than a second description. A one-line
+reminder at the point of action that names its owner is not a
+restatement, since it is what Claude reads when it acts, and the
+citation keeps it honest.
 
-The other shell tool is closed to git whole so that there is one
-parser and one door.
+The protection is the permission system and not a sandbox of the
+operating system because such a sandbox is unavailable on Windows,
+where enforcing it meant no shell at all. The wall on git is a hook
+and not a deny rule on the writing verbs because a prefix rule
+matches the text usually typed and not the command, so that a
+differently spelled call passes it; a deny rule cannot be carved by
+an allow rule and is not overridden by a hook; and two walls with
+one hole read worse than one. The other shell tool is closed to git
+whole so that there is one parser and one door.
 
-The guard on a command is conduct and the wall on git, not the
-harness's field, because the field did not make Claude wait for the
-word. It made Claude mimic the command outside the skill, where the
-principal could not see it, and the mimicry became its standard.
+The guard on a command that changes files is conduct and not the
+harness field that blocks the model, because that field did not make
+Claude wait for the principal's word. It made Claude mimic the
+command outside the skill, where the principal could not see it, and
+the mimicry became its standard. Invoking the skill itself keeps
+the run inside the definition, where it is visible.
 
-A subagent reads its inputs from disk because it sees the session's
-whole context, the core as the session read it and the assistant's
-memory included, and may take that copy for the file on disk. The
-copy of the core in its context may be older than the file.
+Every isolated subagent reads its inputs from disk because the copy
+of the core in its context may be older than the file. The generated
+files are scanned mechanically because a subagent may take the
+session's copy of a file, the assistant's memory included, for the
+file on disk, and a definition alone cannot be relied on to keep
+every instance fact out of what it writes.
 
-Instance facts never enter what a subagent returns because a report
-is a public file, or may be quoted into one. Only what is harmless
-in such a file lives in the instance file, because the instance file
-reaches every subagent.
-
-One model for the whole forge, so that the strongest model the forge
+One model runs the whole forge so that the strongest model the forge
 runs on is a decision and never an accident of a pin that has aged.
-Per-command pinning to a faster model is set aside, because the
-routine commands are slow for the size of the context they carry and
-not for the model, and every pin is a convention to keep.
+Every pin is a convention to keep, and the routine commands are slow
+for the size of the context they carry, not for the model.
 
-The forge's behaviour lives in the engine and never in memory, so
-that every instance of the forge behaves the same and a new user
-meets the same forge as the principal.
+The forge's behaviour is kept out of the assistant's memory so that
+every instance of the forge behaves the same and a new user meets
+the same forge as the principal.
 
-There is one door for help and no second help command, because a
-second name for a question is one more thing to learn.
+The manual is one door with no second help command because a second
+name for a question is one more thing to learn.
 
 ## A worked example
 
-The principal is deep in a long conversation over the intent of a
-project with the slug `my-project`. He writes: "good, save it".
-
-The hook has just run on that message, so the context of this turn
-carries the one-item rule and the four lines of conduct again, as it
-did at every message before. Claude does not write anything yet. It
-puts one step forward, the save of `my-project` with the exact
-operation and its reason, and closes it with the verdict line
+A principal and Claude are deep in a long conversation over a list
+of findings from a critique. With every prompt the principal sends,
+the per-prompt hook adds its six lines to the turn, so that the
+one-item rule stands in front of Claude at the fiftieth message as
+it did at the first. Claude acknowledges the last verdict, puts the
+next finding forward with its recommendation, and closes with
 `(a)ccept / (m)odify / (q)uestion / (r)eject / (p)ark`. The
-principal answers `a`.
+principal answers `a`, and the verdict is carried to the one write
+at the end of the round.
 
-Claude invokes the skill `/save my-project`. It does not replay the
-steps of the save by hand, because a mechanism is used through its
-own definition, and the save reaches git through
-`scripts/forge-save.py`.
+At the end of the round the principal types `write`, and Claude
+writes the agreed changes. The principal then says in words that he
+wants the project saved. Saving changes files the moment it runs,
+so Claude does not type `git commit` into the Bash tool and does not
+replay the steps of the save by hand. It invokes the skill of
+`/save` itself, and the save runs inside its own definition. Had
+Claude typed `git commit` into the Bash tool, the git hook would
+have denied the command and named `scripts/forge-save.py` as the
+door. Had it reached for the PowerShell tool, the deny rule would
+have closed git to it whole.
 
-Had Claude typed `git commit` into the Bash tool instead, the git
-hook would have judged the command before it ran, denied it and
-named `scripts/forge-save.py` as the way. Had it typed the same into
-the PowerShell tool, the deny rule of the settings would have kept
-git from running there at all. Neither is a promise of behaviour:
-the hook at every prompt is context, and the walls hold only where
-the harness can judge a command.
+Later Claude launches a reviewer as an isolated subagent. The
+reviewer carries a copy of `CLAUDE.md` in its context, but it reads
+the file from disk before it relies on a rule, because the copy may
+be older. It returns its report without a name, a host or any other
+fact of the instance, and the report is scanned before it is kept.
 
-Later the principal asks for a check of the project. A check is a
-report, so Claude may start it. The check runs in an isolated
-subagent that sees nothing of the conversation and reads the
-project's files from disk, since the copy of the core in its context
-may be older. The report comes back to the conversation, and the
-findings are settled there by walkthrough.
-
-Then the principal asks: "how do I bring an old project in?" Claude
-does not answer from memory. It invokes `/man` with the question,
-which reads the definitions and the documentation in the run and
-names the way the forge has for it, cited by path.
+Finally the principal asks, in free words, how a project is saved
+without running the check. Claude does not answer from memory. It
+invokes `/man` with the question, the manual reads the definition
+of `/save` in the run, and the answer names the way the forge has
+for it, cited by the path of that definition.
 
 ## See also
 
@@ -334,4 +338,4 @@ names the way the forge has for it, cited by path.
 - [Configuration](../reference/configuration.md): the settings, exactly.
 - [Glossary](../reference/glossary.md): every term of the forge in one line.
 
-Generated on 2026-11-08 for version 6.21 from the files the front-matter names; never edited by hand.
+Generated on 2026-11-08 for version 7.0 from the files the front-matter names; never edited by hand.

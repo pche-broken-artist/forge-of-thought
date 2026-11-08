@@ -1,8 +1,8 @@
 ---
 generated: 2026-11-08
-version: 6.21
+version: 7.0
 made: mirrored
-inputs-hash: 418aeb18aae512a0
+inputs-hash: cdbb706a00528acb
 inputs:
   - .claude/skills/document/SKILL.md
   - .claude/agents/docs-planner.md#What you read
@@ -12,116 +12,168 @@ inputs:
   - scripts/docs-index.py
   - scripts/docs-check.py
   - projects/forge/10-intent.md#REJ.0500
+  - projects/forge/10-intent.md#POS.1980
 ---
 
 # Generate the documentation
 
-`/document` is the command that makes the documentation of the engine or of a project: one page per topic and an index, in one run that asks you nothing. This page is for the user who wants to run it and for the extender who wants to know what it did. It says what you type, what happens in what order and what you have at the end. What the documentation is and why it is generated is on [The documentation](../about/the-documentation.md).
+This page tells you how `/document` makes the pages of the
+documentation and their index, and what you have at the end of a run.
+It is for the user who documents a project and for the extender who
+documents the engine. What the documentation is and why it is
+generated is told in [The documentation](../about/the-documentation.md).
 
-The words used here: the principal is the person whose thinking is forged and who gives the command. The ledger is the file of a project that holds its state, made at read time by a script. A subagent is a Claude run that sees nothing of your conversation and reads its inputs from disk. The documentation map is the plan of the pages, one entry for each, never shown to the reader.
+Three words are used here. The principal is whoever's thinking is
+being forged. The ledger is the file that holds the state of a
+project, made at read time from its documents. A subagent is a
+helper that Claude launches to do one job in isolation: it sees
+nothing of your conversation and reads its inputs from disk.
 
 ## When to use it
 
-- The documentation does not exist yet.
-- The sources of the pages (the intent, the definitions, the templates, the scripts) have changed and the pages are stale.
-- A release has reported that the index is older than the intent and offered the run.
+Use it when the pages are out of date with the files they are made
+from, or when a project has none yet. Nothing is edited by hand on a
+page: what is wrong on a page is mended in the file that owns the
+matter, and the page is made again by this command. How such a mend is
+made is told in
+[Change a documentation page](../extend/change-a-documentation-page.md).
 
 ## The command
 
 ```
-/document [slug]
+/document
 ```
 
-Bare, the target is the engine. With a slug, the target is that project. Which one a run makes:
+Bare, the target is the engine. With a slug, the target is that
+project:
 
-- Bare: the pages land in `docs/` of the engine. The map lies beside the ledger of `projects/forge`.
-- With a slug: the pages land in `projects/<slug>/docs/`. The map lies beside the project's ledger.
+```
+/document <slug>
+```
 
-For a project, the planner (the subagent that writes the map) reads these and nothing else:
+The run asks you nothing from start to end.
 
-- its briefs
-- its intent
-- its threads
-- the layers below the intent
-- its ledger
-- the indexes of `sources/` and `research/`
-- its recipes
+### What each target needs and gives
+
+Bare, the pages land in `docs/` at the engine root. The map they are
+made from lies beside the ledger of `projects/forge`, the forge's own
+project. That project must therefore be cloned beside the engine, as
+it is on the machine of whoever develops the engine and on no user's.
+Why it is a repository of its own is told in
+[Projects and the engine](../about/projects-and-the-engine.md).
+
+With a slug, the pages land in `projects/<slug>/docs/` and the map
+lies beside that project's ledger. The planner reads the project's:
+
+- briefs
+- intent
+- threads
+- layers below the intent
+- ledger
+- indexes of `sources/` and `research/`
+- recipes
 - whatever its documents point to on disk
 
-A project sets nothing for itself about what is documented beyond that. The pages are written in the project's language, as its artefacts are.
+Nothing else is read, and a project has no setting of its own to
+document more. The pages are written in the project's language, as
+its artefacts are.
 
-The command runs on `main` only. It refuses a repository that is behind or diverged from its origin and offers `/pull`.
+`docs/videos/` of the engine is not the documentation's. The run
+leaves it alone.
 
-`docs/videos/` of the engine is not the documentation's. The run leaves it alone.
+### Where it may run
+
+It runs on `main` only. It refuses a repository that is behind its
+origin or has diverged from it, and offers `/pull`.
 
 ## What happens
 
-1. The previous map is taken from git into `tmp/`, the engine's working folder. You should now see the path of the copy printed, or `none` where there is no earlier map.
-2. The planner reads the target on disk and writes the map. Its task names the open findings of the last documentation report that concern the map, so that it brings those entries to their owners' wording. You should now see the map written beside the ledger, with the planner's counts and the list of what it could not place.
-3. A script computes the state of every page from the content of its inputs and of the rule the pages are made by. A page is `new`, to be `regenerate`d, to be `keep`t or to be `remove`d. The script writes one task for every page that is new or to be regenerated. You should now see a summary of the four counts. A change elsewhere in a file leaves a page as it is when the page uses only a part of it.
-4. Pages that lost their entry are deleted. You should now see their names listed.
-5. Claude says how many pages it is about to make and on which models, and then launches the writers. You should now see that statement before any writer starts.
-6. One writer per page makes it from its entry and its inputs alone. You should now see the pages appear in the documentation directory.
-7. A script derives the index (`README.md` of the documentation) from the map. Nobody edits it by hand.
-8. A script checks every page:
-   - every page the map names exists, and no other page lies in the directory
-   - every relative link to a Markdown file resolves
-   - no long dash in the prose
-   - every page opens with its front-matter
-   - no instance fact (a value of the instance file, an e-mail address, an absolute path of a machine) is on a page
-
-   A page that fails is regenerated once with the failure named. A page that fails twice is left out of the documentation, deleted and reported, and never mended by hand. You should now see the check's result.
-9. The ledger is remade, so that its Renders table carries the index. Then Claude files what the run could not place as a report of the run. You should now see the closing report.
+1. The previous map is taken from git into `tmp/`, the engine's
+   working folder. A planner reads the target on disk and writes the
+   map. Its task names the open findings of the last documentation
+   report that concern the map, so that the planner brings those
+   entries to their owners' wording. You should now see a map beside
+   the owning project's ledger.
+2. A script computes the state of every page from the content of its
+   inputs and of the rule the pages are made by. A page is new,
+   regenerate, keep or remove. A page whose inputs did not change is
+   kept, never regenerated. The script writes one task per page that
+   is made. You should now see a summary of the four states.
+3. The pages that lost their entry are deleted. You should now see
+   them named as removed.
+4. Claude says how many pages it is about to make and on which models,
+   before it launches the writers. One writer per page then makes it
+   from its entry and inputs alone. You should now see the pages
+   appear under the target's `docs/`.
+5. A script derives the index from the map. You should now see
+   `docs/README.md` with one line per page.
+6. A script checks every page: that each entry has its page and no
+   page lacks an entry, that every link to a page resolves, that no
+   page holds a long dash in its prose, that each opens with
+   front-matter, and that none carries an instance fact. A failing page
+   is regenerated once. A page that fails twice is left out of the
+   documentation and said aloud. You should now see the check's result
+   with no failure.
+7. The ledger is remade, so that its Renders table carries the index.
+   The run is then reported. You should now see the counts, the check's
+   result and, where the run left something, the report of the run.
 
 ## What you have afterwards
 
-- The pages and the index in the documentation directory.
-- The counts of pages new, regenerated, kept and removed.
+- The pages and the index under the target's `docs/`.
+- The counts: pages new, regenerated, kept and removed.
 - The check's result.
-- The ledger, remade.
-- A report of the run in `reviews/`, filed under the name of a check, when the run could not place something. A run that leaves nothing files nothing.
+- The ledger remade, its Renders table carrying the index.
+- What the run could not place, filed as a report of the run in
+  `reviews/` under the name of a check, one finding per matter:
+  - a fact that no file owns
+  - a matter on which the map and an owner disagree
+  - a claim the map asked for and no input carried
+  - every place where a writer wanted a reason and none is recorded
 
-The report has one finding for each matter:
+A run that leaves nothing files nothing.
 
-- a fact that no file owns
-- a matter on which the map and an owner disagree
-- a claim the map asked for and no input carried
-- every place where a writer wanted a reason and none is recorded
-
-The findings are settled by walkthrough, one item per message, as the findings of a check are. See [Check conformance](check-conformance.md). A mend lands in the file that owns the matter, never on a page, and the page is regenerated afterwards. See [Change a documentation page](../extend/change-a-documentation-page.md).
-
-## Where a release comes in
-
-A release never runs the documentation on its own judgement. A release by hand reports the age of the index against the version of the intent and offers the command, and runs it on your word. A release with `--auto` asks once before anything runs, whether the documentation runs, and the default is yes. See [Release a version](release-a-version.md).
+The findings of that report are settled by walkthrough, as a check's
+are: one item per message, each closed with your verdict. How that
+goes is told in [Check conformance](check-conformance.md). A mend
+lands in the file that owns the matter, never on a page.
 
 ## If something goes wrong
 
-- The repository is not on `main`: the command stops. Switch to `main` and run it again.
-- The repository is behind or diverged from its origin: the command refuses and offers `/pull`.
-- A page fails the check twice: it is left out, deleted, and said aloud. Mend the matter in the file that owns it and run the command again.
-- An input that an entry names is missing on disk: the page is regenerated and its writer reports the gap in the closing report.
+- The repository is behind or has diverged: the run is refused and
+  `/pull` is offered. Pull, then run again.
+- A page fails the check: it is regenerated once with the failure
+  named. If it fails again it is left out of the documentation and
+  reported, never mended by hand.
+- An input that the map names is missing on disk: the page is
+  regenerated and its writer reports the gap in the run's report.
 
-The three scripts and their options are on [Scripts](../reference/scripts.md). Unknown terms are in the [Glossary](../reference/glossary.md).
+## In a release
+
+A release never runs the documentation on its own judgement. A
+release by hand reports the index's age against the intent's version
+and offers the command. With `--auto` it asks once before anything
+runs, and the default is yes. See
+[Release a version](release-a-version.md).
 
 ## A worked example
 
-A run for a project with the placeholder slug `acme-pilot` ends with a report like this, filed as `projects/acme-pilot/reviews/YYYY-MM-DD-check-documentation-HHMM-<hash>.md`. The shape of a finding is the shape of any check's report.
+A generic closing report of a run on a project with the placeholder
+slug `<slug>`. The figures are placeholders.
 
 ```
-Pages: new 3, regenerated 2, kept 11, removed 1.
-Check: passed.
+Documentation of <slug>
+  pages: <a> new, <b> regenerated, <c> kept, <d> removed
+  check: no failure
+  ledger: remade, Renders table carries docs/README.md
 
-Findings
-1. medium - no file owns the delivery date the intent's
-   summary refers to; it waits for the principal to give it a home.
-2. medium - the map says the page "Roles" explains who approves,
-   and the intent names the approver differently; the owner's
-   wording was taken.
-3. low - the page "Hand-over" wanted the reason for the order of
-   the steps; the reason is not recorded.
+Filed: reviews/<date>-check-documentation-<time>-<hash>.md
+  FND.<n>  medium  a matter the map and an owner disagree on
+  FND.<n>  low     a page wanted a reason, none is recorded
 ```
 
-You settle the three by walkthrough. Each mend goes into the intent, never into a page, and the next run regenerates the page that used it.
+You then settle the two findings by walkthrough. Each mend goes into
+the file that owns the matter, and the next run regenerates the page.
 
 ## See also
 
@@ -129,7 +181,8 @@ You settle the three by walkthrough. Each mend goes into the intent, never into 
 - [Change a documentation page](../extend/change-a-documentation-page.md): how a page is changed through its owners.
 - [Check conformance](check-conformance.md): how a report's findings are settled by walkthrough.
 - [Release a version](release-a-version.md): the release that reports the documentation's age and offers the run.
+- [Projects and the engine](../about/projects-and-the-engine.md): why the forge's own project is a repository of its own that whoever develops the engine clones beside it.
 - [Scripts](../reference/scripts.md): the three documentation scripts with their options.
 - [Glossary](../reference/glossary.md): every term of the forge in one line.
 
-Generated on 2026-11-08 for version 6.21 from the files the front-matter names; never edited by hand.
+Generated on 2026-11-08 for version 7.0 from the files the front-matter names; never edited by hand.

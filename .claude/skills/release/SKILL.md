@@ -19,8 +19,7 @@ comes first.
 
 `--auto` runs the whole release through (POS.1100): the checks and
 their agents, the documentation, the renders and the save with the
-drafted message, no step put to the principal but the one question of
-the documentation (step 4), the model and the size of every run of
+drafted message, no step put to the principal but the one question of the documentation (step 4) and the one proposition before the save (step 6), the model and the size of every run of
 agents said as information. It stops only where a
 thing is serious, as each step below says, and always at the tag of
 a major. Nothing is parked on the principal's behalf: what `--auto`
@@ -65,8 +64,7 @@ cannot settle stays open, and the release waits for his word.
    the inputs the renders derive from (POS.0570).
    With `--auto`, a finding whose fix lies in the operating layer or
    in bookkeeping and changes no position and no rule's meaning is
-   fixed and recorded by Claude without a walkthrough, as an
-   immediate fix is today; a finding of severity high, one whose fix
+   fixed and recorded by Claude without a walkthrough, as an immediate fix is today, and listed in the one proposition before the save (step 6); a finding of severity high, one whose fix
    would change a position or a rule's meaning, or one the report
    calls a decision, stops the release and is put to the principal.
    Nothing is parked on his behalf.
@@ -112,8 +110,7 @@ cannot settle stays open, and the release waits for his word.
    the ledger as a tracked render, made only on main, so that the
    state is on the remote where it is wanted (POS.1650); the Renders
    table does not list it, it being the ledger itself.
-   With `--auto` the regenerated files are taken as they came, no
-   delta put to the principal; the one stop is a hit of the scan
+   With `--auto` the delta of the regenerated files is not ruled on here but carried into the one proposition before the save (step 6); the one stop here is a hit of the scan
    (`/render` step 6) that the released version did not already
    carry. A hit the released version carried stands as before.
 6. Then run `/save --quick` for this repository through its own
@@ -132,9 +129,7 @@ cannot settle stays open, and the release waits for his word.
    in the script). Before proposing the tag of a major of the forge
    intent, name what POS.0300 of that intent asks a major to pass —
    a reminder on the principal's word, never a gate. Any other tag is
-   his request, as `/save` has it. With `--auto` the drafted message
-   is used without confirmation, as a message given with `-m` is, and
-   said aloud in the report; the tag of a major is never taken by
+   his request, as `/save` has it. With `--auto` the release stops here once: one proposition carrying what it fixed on its own (step 2), one line each, what materially changed in the regenerated files (step 5) and the drafted message; the push on the principal's word (POS.1100, CHL.0700); the tag of a major is never taken by
    `--auto`: the release stops before it and asks.
 
 The check is advisory (POS.0430): the principal may order the release

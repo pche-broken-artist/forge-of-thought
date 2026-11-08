@@ -1,332 +1,331 @@
 ---
 generated: 2026-11-08
-version: 6.21
+version: 7.0
 made: derived
-inputs-hash: 14143ec641c97044
+inputs-hash: 8df92ee637fd5ef2
 inputs:
   - CLAUDE.md#The system's own project
   - CLAUDE.md#Versioning & status
+  - projects/README.md
   - projects/forge/10-intent.md#POS.0720
   - projects/forge/10-intent.md#POS.0900
   - projects/forge/10-intent.md#POS.1440
   - projects/forge/10-intent.md#POS.1780
   - projects/forge/10-intent.md#POS.1930
+  - projects/forge/10-intent.md#POS.1980
   - .claude/agents/check-engine.md
   - .claude/agents/check-single-source-of-truth.md
   - .claude/skills/release/SKILL.md
   - .claude/skills/test/SKILL.md
+  - .claude/skills/import-project/SKILL.md
   - projects/forge/recipes/contributing.md#Instructions
   - projects/forge/40-solution-design.md#SOL.0450
+  - projects/forge/40-solution-design.md#SOL.0930
   - .claude/skills/render/SKILL.md
 ---
 
 # Make a change to the forge
 
-A change to the forge is a change of how Claude is told to behave:
-a command, a rule, a convention, what a reviewer looks for. This
-page is for you, the extender, who wants to make such a change and
-have it proved, recorded and released. It says the order the change
-takes through the forge's own project (`projects/forge/`, the forge
-run through its own process), which commands do the work, and what
-a change meant for the public engine carries when it is sent. Every
-term of the forge used here is in the [Glossary](../reference/glossary.md).
+A change to the forge is a change of how the forge behaves, or of a
+file it is made of, and it travels the forge's own chain before it is
+built: a position in the forge intent, an item in the solution
+design, then the files that do the work. This page is for you, the
+extender: someone who wants the forge to do something differently,
+in your own clone or in the public engine. It says where each kind of
+change goes, what proves it, where it is recorded and how it is
+released. The reasons behind this order are on the explanation pages
+linked at the end; this page is the path.
 
 ## When to use it
 
-Use this page when the change alters how the forge behaves. The
-line between the two kinds of change is drawn by what the change
-does, never by its size:
+Use this page when you want to change what the forge does: a
+command, a rule, a convention, what a reviewer looks for. Such a
+change goes through the chain before it is built.
 
-- A change of behaviour goes through the chain before it is built:
-  a command, a rule, a convention, what a reviewer looks for. This
-  page is its way.
-- A change that alters no behaviour is made directly, and nothing
-  else is needed: a wording, a broken path, a slip.
-- A change of a document that is a render goes into its recipe, or
-  into what the recipe reads, and the render is regenerated. The
-  README, the release notes and `CONTRIBUTING.md` are such renders
-  and are never edited by hand. The pages of `docs/` are generated
-  the same way, from the files that own each topic: a fix goes into
-  the file the page mirrors, and the pages are regenerated as
-  [Generate the documentation](../use/generate-the-documentation.md)
-  says.
+The line between the two kinds of change is drawn by what the change
+does, never by its size. A change that alters no behaviour, such as a
+wording, a broken path or a slip, does not go through the chain. It
+is made directly in the file and sent as it is; nothing else is
+needed.
 
-The change lands in the operating layer. That is `CLAUDE.md`, the
-skills under `.claude/skills/`, the agents under `.claude/agents/`,
-the templates under `templates/` and the scripts under `scripts/`.
-Before it lands there, it goes through two artefacts of the forge's
-own chain: the forge intent (`projects/forge/10-intent.md`) and the
-solution design (`projects/forge/40-solution-design.md`).
+A fix of a generated file is a change of what generates it.
+`README.md`, `RELEASE-NOTES.md` and `CONTRIBUTING.md` are renders,
+never edited by hand: the change goes into the recipe in
+`projects/forge/recipes/` or into what the recipe reads. The pages of
+`docs/` are generated the same way by `/document`: a fix goes into
+the file the page mirrors ([Change a documentation
+page](change-a-documentation-page.md)).
+
+If you only want to say something, report a defect or bring an idea,
+`CONTRIBUTING.md` in the engine root names the channel for each kind.
+The easiest way to a change of behaviour is a discussion first.
 
 ## What you do
 
-Each line can be typed as it stands. `forge` is the slug of the
-forge's own project; to the commands it means the engine.
+The commands, in the order a change meets them. `forge` is the slug
+of the forge's own project; in a command over documents it names
+that project, in a command of git it names the engine and the
+project together.
 
 ```
+/import-project <git-url>
+python scripts/forge-branch.py forge <name>
 /forge intent forge
 /forge solution-design forge
 /test
 /check engine
 /check single-source-of-truth
+/render contributing
 /release forge
 ```
 
-`/test` is for a change that touches a script. `/check
-single-source-of-truth` fits before a major or after a round on the
-operating layer, not at every release. `/release forge` runs the
-tests first and then the checks the release composes, so the two
-lines before it are the proof you make on your own before you
-release.
+- `/import-project <git-url>` clones the forge's own project beside
+  the engine. Its address stands in `projects/README.md`.
+- `python scripts/forge-branch.py forge <name>` makes a branch for a
+  change of more than a few lines.
+- `/forge intent forge` writes the position: what is wanted and why.
+- `/forge solution-design forge` writes the item of the design: what
+  the change solves and the choice it rests on.
+- `/test` runs the engine's tests; `python -m pytest` from the engine
+  root is the same thing.
+- `/check engine` verifies the engine against itself and against the
+  forge intent.
+- `/check single-source-of-truth` verifies that every rule is written
+  in one place; run it before a major or after a round on the
+  operating layer.
+- `/render contributing` regenerates `CONTRIBUTING.md`; a release
+  does not.
+- `/release forge` releases the engine and the project as two
+  commits, the tests first.
 
 ## What happens
 
-1. **The position in the forge intent.** You start with
-   `/forge intent forge`, as [Forge the intent](../use/forge-the-intent.md)
-   describes. A change of substance goes into the intent first and
-   propagates down the chain, whichever layer showed the need for
-   it. The position says what is wanted and why. Before Claude
-   proposes a change to an item that exists, it reads the item's
-   history through `/history <ID>`. The write happens on the word
-   of the principal (the person whose thinking is being forged; in
-   your own clone that is you). The record of the change is written
-   in the same step, into the companion
-   `projects/forge/10-intent.history.md`. What a user of the engine
-   must do after the change stands in that record, in its `Action`
-   field. You should now see the position in
-   `projects/forge/10-intent.md`, its record in the companion beside
-   it, and the intent's version raised by the round.
+1. **Have both repositories.** The engine is one git repository. The
+   thinking behind it, the forge intent and the solution design, lives
+   in the forge's own project, `projects/forge`, a repository of its
+   own that whoever develops the engine clones beside it; a user of
+   the engine never needs it. Bring it in with
+   `/import-project <git-url>`, the address taken from
+   `projects/README.md`: the command asks for your word, clones
+   through `scripts/forge-clone.py` into `projects/forge`, reports the
+   commit identity git resolves and recommends `/forge forge` as the
+   first act ([Bring in an existing
+   project](../use/bring-in-an-existing-project.md)). The author's
+   commands read that clone: `/check engine`, `/document`,
+   `/release forge`, `/new-artefact` and the renders of the README,
+   the release notes and CONTRIBUTING. You should now see
+   `projects/forge/10-intent.md` and
+   `projects/forge/40-solution-design.md` beside the engine.
 
-2. **The item in the solution design.** You go on with
-   `/forge solution-design forge`. Where the change solves something,
-   the item says what is built. It names the position it realises,
-   the choice it rests on and what the choice was weighed against,
-   and where the part lives. You should now see the item in
-   `projects/forge/40-solution-design.md` and its record in
-   `projects/forge/40-solution-design.history.md`.
+2. **Decide the kind of change.** A change of behaviour takes the
+   steps below. A change that alters no behaviour skips to step 6:
+   make it in the file, try it, send it. You should now see which of
+   the two ways your change takes.
 
-3. **The operating layer.** Then the change itself: a sentence of
-   `CLAUDE.md`, a skill, an agent, a template or a script. A script
-   is changed with its test in `tests/`, beside the scripts the
-   tests prove. Where the change of the operating layer needs a
-   test, the order of the whole is different. The brief comes first,
-   in the principal's words. The build and its test come next. The
-   rounds of the intent and the design follow right after it, never
-   across a release: the intent is brought to the built state before
-   anything is released. You should now see the changed files, and
-   for a script its test beside it.
+3. **Make a branch for a larger change.** For a change of more than a
+   few lines, run `python scripts/forge-branch.py forge <name>`, work
+   and `/save` on that branch, and later send the pull request from
+   it, so that your fork's `main` stays clean for the upgrades of the
+   engine; the branch goes away with the merge ([Work on a
+   branch](../use/work-on-a-branch.md)). You should now see the new
+   branch as the one checked out in both repositories.
 
-4. **Prove it.** `/test` runs `python -m pytest -q` from the engine
-   root over `tests/`, as [Run the tests](../use/run-the-tests.md)
-   describes; nothing of the engine or of a project changes. The
-   sum comes back as pytest prints it. A red test is reported word
-   for word, the failing assertion included, and nothing is fixed
-   on this command's word: the fix is a round of its own, the
-   script changed with its test. `/check engine` verifies the core
-   against itself and against the forge intent, as
-   [Check conformance](../use/check-conformance.md) describes: the
-   commands table of `CLAUDE.md` against the skills on disk, the
-   agents against `.claude/agents/`, every file of `scripts/`
-   described in `CLAUDE.md`, the templates against the conventions,
-   every position honoured, nothing withdrawn still advertised,
-   every decision reflected, and no old name of a renamed thing
-   outside the historical records. `/check single-source-of-truth`
-   reads the whole operating layer, never a changed subset, and
-   verifies that every rule, procedure and file shape is written in
-   one place and cited everywhere else; a restatement is a finding,
-   and the fix is a reference to the owner and the deletion of the
-   copy. It is long by design, so it is run before a major or after
-   a round on the operating layer. Findings are settled by
-   walkthrough (one item per message, each closed with your
-   verdict). You should now see `<n> passed in <s>s` from the tests,
-   and from each check a report with findings, or the word that the
-   check passed.
+4. **Write the position first.** Run `/forge intent forge`. In your
+   own clone you are the principal (the person whose thinking is
+   being forged), so the working conversation is yours: Claude
+   proposes and you decide. The round ends in one write on your
+   confirmation: the position in `projects/forge/10-intent.md`, one
+   version bump, and one record per change in the companion
+   `projects/forge/10-intent.history.md`. The reason for the change,
+   what was said and what turned it go into the record, never into
+   the position ([Forge the intent](../use/forge-the-intent.md)).
+   Where a change of the operating layer needs a test, the order
+   differs: a brief first, in the principal's words, then the build
+   and its test, then the rounds of the intent and the design right
+   after it, never across a release. You should now see the intent at
+   a new version and its record in the companion.
 
-5. **Record.** Every versioned document keeps its history in an
-   append-only companion `<file>.history.md` beside it, never in
-   its body: the body is the current state, the companion the
-   record. A round is one version and as many records as it made
-   changes. The log is the single primary: the commit messages that
-   `/save` and `/release` draft and the release notes derive from
-   it. You should now see one record for every change in the
-   companion of every versioned document you touched.
+5. **Write the design item.** Run `/forge solution-design forge`. The
+   item in `projects/forge/40-solution-design.md` says what the
+   change solves, what it realises, the choice it rests on and where
+   it lives; its record goes into
+   `projects/forge/40-solution-design.history.md` in the same step.
+   You should now see the item and its record.
 
-6. **Release.** `/release forge` runs from `main` only, as
-   [Release a version](../use/release-a-version.md) describes. It
-   runs the engine's tests first, before any check or agent, so
-   that a script that broke stops the release before it costs
-   anything. It then runs the checks: `engine` on the engine root,
-   and `light` and `project` on `projects/forge`. Findings are
-   settled by walkthrough; a finding may be parked, and the release
-   goes on. It offers `/critique essence` once and runs it only on
-   your word. It reports the age of the documentation and offers
-   `/document` once; a release by hand never regenerates the
-   documentation on its own. Only then it regenerates the README and
-   the release notes from their recipes, always through `/render`,
-   and reports what materially changed in them: you rule on the
-   delta before the commit. It writes the state render
-   `projects/forge/renders/state.md`, the ledger (the state of the
-   project, made at read time) as a tracked file. Then it saves
-   with the message `release <intent version>: <one line>`, the line
-   drawn from the records of the intent's history since the last
-   release, and, when the intent's version is an integer, proposes
-   the tag `v<major>`, taken on your word. A process change is
-   complete only once the intent is updated and the README
-   re-rendered. You should now see the README and the release notes
-   regenerated, the state render written, and the release commit
-   pushed.
+6. **Change the operating layer.** The operating layer is `CLAUDE.md`,
+   the skills under `.claude/skills/`, the agents under
+   `.claude/agents/`, the templates under `templates/` and the scripts
+   under `scripts/`, all in the engine. A script is changed with its
+   test in `tests/`, beside the scripts it tests; a change of a render
+   goes into its recipe; a fix of a documentation page goes into the
+   file the page mirrors. You should now see the changed files and,
+   for a script, a test beside it.
 
-7. **CONTRIBUTING, where you changed it.** `CONTRIBUTING.md` in the
-   repository root is a render of
-   `projects/forge/recipes/contributing.md`. It is made on
-   `/render contributing`, as [Render an output](../use/render-an-output.md)
-   describes, and not by a release. A change to what it says goes
-   into the recipe, and you render it yourself. You should now see
-   `CONTRIBUTING.md` regenerated, its front-matter citing the
-   recipe's version.
+7. **Prove it.** Run `/test`: it runs `python -m pytest -q` from the
+   engine root on copies of the fixture in a temporary directory,
+   never on a repository of the forge, and reports the sum as pytest
+   prints it; a red test is reported word for word and nothing is
+   fixed on this command's word ([Run the
+   tests](../use/run-the-tests.md)). Run `/check engine`: it verifies
+   the commands table against the skills, the scripts on disk against
+   `CLAUDE.md`, the README against `CLAUDE.md`, the templates against
+   the conventions, and every position of the forge intent against
+   the engine, with nothing withdrawn still advertised. Before a major
+   or after a round on the operating layer, run
+   `/check single-source-of-truth`: it reads the whole operating layer
+   and finds every rule, procedure or file shape written in two
+   places, and every direct operation where a mechanism exists. The
+   checks are advisory: findings are settled by walkthrough, the
+   forge's way of working a list one item per message ([Check
+   conformance](../use/check-conformance.md)). You should now see the
+   sum of the tests and either that the checks passed or a report of
+   findings.
 
-8. **Send it to the public engine, where it is meant for it.** In
-   your own clone you decide everything; the forge there is yours.
-   What is merged into the public engine its author decides. The
-   easiest way is to open a discussion first; whoever is unsure
-   stops there, and the author makes the change. The way to a pull
-   request, in the steps the forge and GitHub have: fork the
-   repository on GitHub, clone your fork as your engine, work
-   through the forge, `/save`, which pushes to your fork, and on
-   your fork's page choose "Contribute", then "Open pull request".
-   You try your change yourself before you send it; a change
-   written with an AI is welcome on the same rule, and the pull
-   request says what was run. You should now see your change on
-   your fork, with a pull request opened against the public engine.
+8. **Check the record.** Every versioned document you changed, the
+   intent, the design and any recipe among them, keeps its history in
+   an append-only companion `<file>.history.md` beside it, one record
+   per change, written in the same step as the change. What the user
+   must do after a change stands in the record's `Action` field. The
+   log is the single primary: the commit messages and the release
+   notes are derived from it. You should now see one record for each
+   change you made, `Was` included.
+
+9. **Save and send.** `/save` commits and pushes on the branch you are
+   on; in your clone it pushes to your fork. A pull request for a
+   change of behaviour carries the position with its record, the
+   design item, the change itself and one line on what you ran, a
+   script's test among it. Where the change touches both repositories
+   it is two pull requests, one on the engine with the change itself
+   and one on the forge's own project with the position and the
+   design item, each naming the other. Everything that enters the
+   forge's own project is English, a brief included; a brief sent in
+   another language is translated at the merge and its original stays
+   in git. Try your change yourself before you send it; a change
+   written with an AI is welcome on the same rule. In your own clone
+   you decide everything; what is merged into the public engine its
+   author decides. You should now see your pull request, or two that
+   name each other.
+
+10. **Merge and release.** Two pull requests are merged both or
+    neither, in one sitting, the project first and the engine second
+    and no release between them, since git merges no two repositories
+    as one; one of them declined means both closed with the reason.
+    The release is `/release forge`, from `main` only ([Release a
+    version](../use/release-a-version.md)). It runs the tests first,
+    before any check, and a red test stops it. Then the checks:
+    `engine` on the engine root, `light` and `project` on
+    `projects/forge`. Then it reports the age of the documentation
+    and offers `/document` in one sentence; it regenerates the pages
+    only on the principal's word. Then it regenerates the README and
+    the release notes from their recipes, always, and writes the
+    state render. Then it saves with the message
+    `release <intent version>: <one line>`, the engine and the
+    project as two commits, and proposes the tag `v<major>` at an
+    approved major. `CONTRIBUTING.md` is not regenerated by a release:
+    that is `/render contributing`, on the principal's word ([Render
+    an output](../use/render-an-output.md)). You should now see two
+    commits, one in each repository, and a regenerated `README.md` and
+    `RELEASE-NOTES.md` in the engine root.
 
 ## What you have afterwards
 
-- A position in the forge intent that says what is wanted and why,
-  with its record.
-- An item in the solution design that says where the change solves
-  something, with its record.
-- The change itself in the operating layer, and for a script its
-  test in `tests/`.
-- A green run of `/test` and the reports of the checks, settled.
-- A release from `main` with the README and the release notes
-  regenerated, where you released your own clone.
-
-For the public engine, the pull request carries the first four:
-the position with its record in the history beside it, the item,
-the change itself, and one line on what you ran, the test of a
-script among it. It does not carry a release, a regenerated README,
-release notes or documentation: the author makes those at the next
-release. A brief may come first and need not. Everything that
-enters the forge's own project is written in English, a brief
-included, because the project is public and read by everyone; a
-brief sent in another language is translated at the merge, and its
-original stays in git. The channels are named in `CONTRIBUTING.md`
-by kind: a discussion for feedback and an idea, an issue for a
-defect, and a private way for what is not public. Everything posted
-there is public: no names, no company content, nothing of a project
-that is not yours to show. The code of conduct holds everywhere the
-forge is talked about, and a security problem never goes into an
-issue; both are the fixed files that
-[The security policy and the code of conduct](../about/the-security-policy-and-the-code-of-conduct.md)
-describes.
+- The forge intent says what the forge now does and the record beside
+  it says why.
+- The solution design says what realises it and where.
+- The operating layer does it; a changed script has its test, green.
+- The history companions carry one record per change, and the
+  release notes derive from them.
+- The README is re-rendered. A process change is complete only once
+  the intent is updated and the README re-rendered.
+- The pull request carries no release and no regenerated README,
+  release notes or documentation: the author makes those at the next
+  release.
 
 ## If something goes wrong
 
-- **The release reports a branch other than `main` and stops.** It
-  names the branch and the way back:
-  `python scripts/forge-branch.py <slug> main`, after saving.
-- **The release refuses a repository behind or diverged from its
-  origin.** It offers `/pull`.
-- **A red test.** `/test` prints the failure as pytest printed it.
-  The release stops, the failures reported as `/test` reports them,
-  and does not run: back to the fix, the script changed with its
-  test.
-- **`No module named pytest`.** The tests did not run. The one thing
-  a contributor installs beyond `python` is pytest:
-  `python -m pip install pytest`. The release goes on only on your
-  word.
-- **A check finds something.** The findings are settled by
-  walkthrough, never fixed silently. A finding you have not settled
-  when you order the release to go on is parked by that word, said
-  aloud, since the check is advisory.
-- **`/check single-source-of-truth` reports a restatement.** The
-  same steps, rules or shape stand in two places. The fix is a
-  reference to the owner and the deletion of the copy; where a
-  shape has no owner at all, the finding proposes one.
-- **A recipe is missing at the release.** It is reported as a check
-  finding, and the repository is released without that render.
-- **The scan of a regenerated render hits.** `/render` scans the
-  written file for the instance's facts; a hit is said aloud and
-  you judge it. An instance fact is regenerated out, never edited
-  by hand.
-- **`/render contributing` finds no recipe.** Claude offers to
-  compose one through `/recipe` and stops.
+- `/import-project` stops when `projects/<repository name>` already
+  exists. When git resolves no identity on your host, it says so:
+  `forge-save` commits nothing until git resolves one.
+- `/test` says `No module named pytest` when pytest is missing;
+  install it with `python -m pip install pytest`, the one thing a
+  contributor installs beyond `python`. A red test is a round of its
+  own: the script is changed with its test.
+- `/release` on a branch other than `main` stops and names the way
+  back, `python scripts/forge-branch.py forge main` after saving. A
+  repository behind or diverged from its origin is refused with the
+  offer of `/pull`.
+- A red test stops the release; the failures come back as `/test`
+  reports them, and the release does not run. Where pytest is not
+  installed the release says the tests did not run and goes on only
+  on the principal's word.
+- A finding of a check at the release is settled by walkthrough; a
+  finding the principal has not settled when he orders the release to
+  go on is parked by that word, said aloud. A recipe that is missing
+  is reported and the repository is released without that render.
+- `/render` for a recipe that does not exist offers to compose it
+  through `/recipe` and stops. After a render, a hit of the scan for
+  instance facts is said aloud; an instance fact is regenerated out,
+  never edited by hand.
+- One of two pull requests declined means both are closed, with the
+  reason.
 
 ## A worked example
 
-An invented change: you want the state map that `/forge` shows to
-name the render that has been stale longest. That alters behaviour,
-so it goes through the chain.
+An invented change, traced through. Suppose you want `/end` to name
+the branch each repository is on when it reports unsaved changes.
+That is a change of behaviour, so it goes through the chain. Nothing
+of it is a script, so no test is needed and the order is the plain
+one.
 
-You open `/forge intent forge`. Claude reads the history of the
-positions on the state map and on stale renders, asks what you want
-and why, and reflects it back. On your `write` the position lands in
-`projects/forge/10-intent.md`, saying that the map names the oldest
-stale render and why that is wanted, with its record in
-`projects/forge/10-intent.history.md`. The intent's version is
-raised by the round.
-
-You go on with `/forge solution-design forge`. The item says what is
-built: the map reads the age of each stale render and names the
-oldest. It names the position it realises, the choice it rests on
-(the age read from the provenance of the render against a date kept
-elsewhere) and where it lives: the `/forge` skill and the script
-that makes the ledger. Its record goes into the design's companion.
-
-The change needs a test, so the order was different from the start:
-you wrote a short brief in your own words first, built the change
-in the skill and in the script with a test in `tests/` beside it,
-and held the two rounds above right after the build, before any
-release.
-
-You run `/test` and see `<n> passed in <s>s`. You run
-`/check engine`, which states that the check passed. Since this was
-a round on the operating layer, you run
-`/check single-source-of-truth`. It finds the rule of the oldest
-render stated twice, in the skill and in the script's help header.
-You settle the finding by walkthrough: the skill cites the script's
-header, and the copy goes.
-
-Every document you touched has its record. You run `/release forge`
-on `main`: the tests run first, then the checks; you decline the
-critique; the release reports the age of the documentation and you
-run `/document`; the README and the release notes are regenerated,
-and you rule on the delta; the state render is written; the release
-is saved with the message `release <intent version>: <one line>`.
-
-To send it to the public engine, you have pushed to your fork with
-`/save` and open a pull request from your fork's page. It carries
-the position with its record, the item, the change with its test,
-and one line on what you ran: `/test`, `/check engine` and
-`/check single-source-of-truth`. It carries no release and no
-regenerated README; the author makes those at the next release.
+1. You have the engine and, beside it, `projects/forge`, brought in
+   with `/import-project <git-url>` from the address in
+   `projects/README.md`.
+2. The change is a few lines in one skill, so you stay on `main`.
+3. `/forge intent forge`: one round, one position saying that `/end`
+   names the branch beside each unsaved repository, with its reason
+   in the record of `projects/forge/10-intent.history.md`. You confirm
+   the write; the intent moves one version.
+4. `/forge solution-design forge`: one item saying that the `/end`
+   skill reads the branch from the state script and names it, with
+   the choice it was made against, and where it lives,
+   `.claude/skills/end/SKILL.md`. Its record goes into
+   `projects/forge/40-solution-design.history.md`.
+5. You change `.claude/skills/end/SKILL.md` in the engine.
+6. `/test` reports the sum of the suite as pytest prints it;
+   `/check engine` reports that the checks passed.
+7. You try `/end` yourself and see the branch named.
+8. `/save forge` commits and pushes both repositories. Two pull
+   requests, one on the engine with the skill, one on the forge's own
+   project with the position and the item, each naming the other, and
+   one line in each on what you ran.
+9. The author merges the project first, then the engine, and runs
+   `/release forge`: the tests, the checks, the offer of `/document`,
+   the README and the release notes regenerated, two commits.
 
 ## See also
 
-- [Forge the intent](../use/forge-the-intent.md): iterating an
-  intent.
-- [Check conformance](../use/check-conformance.md): running the
-  checks.
+- [Forge the intent](../use/forge-the-intent.md): iterating an intent.
+- [Bring in an existing project](../use/bring-in-an-existing-project.md):
+  cloning the forge's own project beside the engine with
+  `/import-project`.
+- [Check conformance](../use/check-conformance.md): running the checks.
 - [Run the tests](../use/run-the-tests.md): running the tests.
 - [Release a version](../use/release-a-version.md): the release.
+- [Work on a branch](../use/work-on-a-branch.md): the branch a larger
+  change is made on.
 - [Render an output](../use/render-an-output.md): regenerating a
   render such as CONTRIBUTING from its recipe.
 - [Generate the documentation](../use/generate-the-documentation.md):
   regenerating the pages.
+- [Change a documentation page](change-a-documentation-page.md): how a
+  fix of a page is made through the file the page mirrors.
+- [Projects and the engine](../about/projects-and-the-engine.md): why
+  the forge's own project is a repository of its own beside the
+  engine.
 - [The security policy and the code of conduct](../about/the-security-policy-and-the-code-of-conduct.md):
   the two fixed files the contributing file points at.
-- [Glossary](../reference/glossary.md): every term of the forge in
-  one line.
+- [Glossary](../reference/glossary.md): every term of the forge in one
+  line.
 
-Generated on 2026-11-08 for version 6.21 from the files the
+Generated on 2026-11-08 for version 7.0 from the files the
 front-matter names; never edited by hand.

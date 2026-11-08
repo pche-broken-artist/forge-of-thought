@@ -80,7 +80,7 @@ threads. Within a round one theme at a time; the reality check
 comes last, before a lower layer is proposed. On the write,
 resolved threads move into positions or rejections and the Mined
 column of every brief touched is kept (write once per round,
-versioning and ledger: CLAUDE.md). End by naming what changed and
+versioning and ledger: CLAUDE.md); a position written or rewritten carries one date and no trial, count or plan, the way to it going into its record (POS.0120). End by naming what changed and
 what stays open; when the Aim's completion is reached, name the
 layers that can follow from it, or offer the approval where the
 principal takes none: a recommendation, never a gate.

@@ -1,8 +1,8 @@
 ---
 generated: 2026-11-08
-version: 6.21
+version: 7.0
 made: mirrored
-inputs-hash: 1e259cde4d282bc9
+inputs-hash: 981f9c7d818be6ac
 inputs:
   - .claude/skills/walkthrough/SKILL.md
   - CLAUDE.md#Working methods
@@ -10,11 +10,11 @@ inputs:
 
 # Verdict words
 
-This page lists the words and letters the principal types in a walkthrough or at a step that needs his word, exactly as Claude reads them. The principal is whoever's thinking is being forged. A walkthrough is the way Claude works a list of items needing a decision, one item per message; the procedure is in [Walk through a list](../use/walk-through-a-list.md). Terms of the forge are in the [Glossary](glossary.md).
+This page lists the words and letters the principal (whoever's thinking is being forged) types in a walkthrough (a list of items worked one per message) or at a step that needs his word. It is for the reader who wants to know exactly what to type.
 
 ## The verdict line
 
-Every item of a walkthrough closes with this line, typed by Claude as it stands:
+Claude closes every proposition with this line:
 
 `(a)ccept / (m)odify / (q)uestion / (r)eject / (p)ark`
 
@@ -22,44 +22,42 @@ Every item of a walkthrough closes with this line, typed by Claude as it stands:
 |---|---|---|
 | `accept` | `a` | Agreed. The text goes in as shown. |
 | `modify` | `m` | A discussion opens on the item. The solution found is put forward to be accepted. |
-| `question` | `q` | The principal asks about the open item. Nothing changes and nothing is written. Claude answers and closes the item again with the verdict line. |
+| `question` | `q` | You ask about the open item. Nothing changes and nothing is written. Claude answers and closes the item again with the verdict line. |
 | `reject` | `r` | Not agreed. Nothing changes. The reason is recorded. |
 | `park` | `p` | Not now. The item waits and comes back. |
+| `obsolete` | none | No longer relevant, with a note why. Type it in full. |
 
-## The single letters
+## Single letters
 
-- The principal may answer the verdict line with `a`, `m`, `q`, `r` or `p`.
-- The letter counts only when it is his whole message.
-- After `m` alone Claude asks what he wants changed.
-- After `q` alone Claude asks what he wants to ask.
+- A single letter `a`, `m`, `q`, `r` or `p` counts as a verdict when it is your whole message.
+- After `m` alone, Claude asks what you want changed.
+- After `q` alone, Claude asks what you want to ask.
 - Claude's acknowledgement names the verdict in full and says what it does.
 
-## Where the line is used
+## Where the line appears
 
-- The verdict words are the same in every walkthrough, whatever produced the list. No command has words of its own.
-- Every step that needs the principal's consent closes with the same line. Such a step is a write, a run, a commit or a change of a setting, and it arrives as one proposition.
-- Every question of Claude's that asks the principal to decide closes with the same line. Such a question is a choice between options, an either/or or whether to write.
-- In such a proposition Claude's recommendation is what `accept` means.
-- A message that says yes and carries a question is `question`, never consent.
-- Only a question for information Claude lacks closes with the question alone.
+- Every item of a walkthrough ends with the line, whatever produced the list.
+- Every step that needs your consent closes with the same line. Such a step is a write, a run, a commit or a change of a setting.
+- Every question of Claude's that asks you to decide closes with the line. It is one proposition, and Claude's recommendation is what `accept` means.
+- A question for information Claude lacks closes with the question alone, without the line.
+- A message that says yes and also asks a question is `question`, never consent.
+- No command has verdict words of its own.
 
 ## Other words
 
-| Word | What it does |
-|---|---|
-| `obsolete` | The item is no longer relevant. Claude notes why. It is typed in full, with no letter. |
-| `write` | Asks Claude to reflect the whole round back and, on the principal's yes, to write everything carried in the conversation as one round. It is typed in full, with no letter. Claude adds it to the verdict line when the round looks finished. |
-| `??` | Alone at the end of the principal's message, or as his whole message, it asks for Claude's honest opinion of what he has just written: three points at most, marked as Claude's own, nothing written or filed. |
-| a closing word such as "done" | Closes a thought sent in pieces. Until it comes Claude answers each piece with at most one line of acknowledgement. After it the pieces are one input. |
+| Word | Where | What it does |
+|---|---|---|
+| `write` | At the end of a round of work | Claude reflects the whole round back and, on your yes, writes everything carried as one round. Type it in full. |
+| `??` | Alone at the end of your message, or as the whole message | Claude gives its honest opinion of what you have just written: three points at most, marked as its own. Nothing is written or filed. |
+| a closing word such as "done" | After a thought sent in several messages | Until the word arrives, Claude answers each piece with at most one line of acknowledgement. After it, the pieces are read as one input. |
 
 ## What has no letter
 
-- No other word of the forge has a letter.
-- `write`, `obsolete` and every command are typed in full.
+No other word of the forge has a letter. `write`, `obsolete` and every command are typed in full.
 
 ## See also
 
 - [Walk through a list](../use/walk-through-a-list.md): the procedure the words belong to.
 - [Glossary](glossary.md): every term of the forge in one line.
 
-Generated on 2026-11-08 for version 6.21 from the files the front-matter names; never edited by hand.
+Generated on 2026-11-08 for version 7.0 from the files the front-matter names; never edited by hand.

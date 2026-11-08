@@ -1,8 +1,8 @@
 ---
 generated: 2026-11-08
-version: 6.21
+version: 7.0
 made: mirrored
-inputs-hash: 2f269dac720a2776
+inputs-hash: 2ddd11d52fbf5001
 inputs:
   - .claude/skills/recipe/SKILL.md
   - .claude/skills/recipe/genres/presentation.md
@@ -16,134 +16,69 @@ inputs:
 
 # Compose a recipe
 
-This page shows how you compose a new render recipe, or iterate an
-existing one, with `/recipe`. A recipe is the versioned file that says
-how one render is made: its inputs, its audience, its instructions and
-the template of its output. It is written for the principal, the person
-whose thinking is forged and who decides every choice in the
-composition.
+This page shows how to compose or iterate a render recipe with `/recipe`. A recipe is the one versioned file that says what a render is made from, for whom and in what shape. It is written for the principal (the person whose thinking is being forged) who wants a new render or a change to an existing one.
 
 ## When to use it
 
-Use it when you want a new output made from your project, such as a
-deck, a README or a video script. Use it as well when an existing
-recipe needs to change. The render is never edited by hand; the recipe
-is what you iterate (see [Renders and recipes](../about/renders-and-recipes.md)).
+- You want a new render of the project, such as a deck, a README or a screenplay, and no recipe for it exists yet.
+- You want to change a render. You change its recipe and never the render, which is overwritten at every run (see [Renders and recipes](../about/renders-and-recipes.md)).
+- You do not know which genres exist or which recipes the project already has.
 
 ## The command
 
 ```
-/recipe [genre] [slug]
+/recipe presentation <slug>
 ```
 
-The genre and the project slug are both optional. The forms are:
+The command takes `/recipe [genre] [slug]`. The slug names the project and may be left out where the conversation makes it clear. Replace `presentation` with another genre, or with the name of an existing recipe.
 
-- `/recipe` alone lists the genres and the project's existing recipes.
-- `/recipe <genre>` composes a recipe through that genre.
-- `/recipe <recipe-name>` iterates the existing recipe of that name.
+- Bare `/recipe` lists the genres, each with a line on what it is for, and the project's existing recipes with their versions. Claude recommends a fit where the conversation suggests one.
+- `/recipe <genre>` starts a guided composition through that genre.
+- `/recipe <recipe-name>` iterates an existing recipe, through its genre where one fits and otherwise in conversation.
+- If the name is neither a genre nor an existing recipe, Claude lists the genres and stops.
 
-The genres of today are:
+## The genres of today
 
-- `presentation`: a slide-by-slide deck definition, with a plain file
-  from `/render` and a designed one from `/publish`.
-- `readme`: the project's README, regenerated at every release.
-- `release-notes`: one section per release, derived from the history
-  logs of the chain.
-- `screenplay`: a teaching video of a terminal conversation, made into
-  a video or into the events of a player page.
-- `user-stories-export`: the project's user stories as an export, one
-  heading per story, ready to paste into a wiki or a tracker.
+- presentation: a slide-by-slide deck definition, from which a plain and a designed PowerPoint file are made.
+- readme: the project's README, regenerated at every release.
+- release-notes: the release notes of a thought project, one section per release.
+- screenplay: a teaching video cut from session records, rendered as a screenplay.
+- user-stories-export: the project's user stories as an export to paste elsewhere, one heading per story.
 
-The checklist of each genre is on [Recipe genres](../reference/recipe-genres.md).
+Each genre has its own checklist of questions. The checklists are in [Recipe genres](../reference/recipe-genres.md). A recipe that fits no genre is legitimate: Claude composes it in conversation from the base recipe skeleton.
 
 ## What happens
 
-1. Bare `/recipe` reports the roster. Claude lists each genre with its
-   one-line description, then lists the recipes already in the
-   project's `recipes/` folder with their versions, and recommends a
-   fit where the conversation suggests one.
+1. Claude reads the genre's definition and interviews you through its checklist. It offers options and trade-offs, and the decisions are yours. You should now see Claude asking one question after another about audience, inputs and what must not appear.
+2. The checklist closes with the language question. You name one language, or several where the genre allows a primary and its translations, one render per language. Claude proposes the project's language from its project file and never assumes it. You should now see a proposed language that you confirm or change.
+3. Claude composes the recipe from the genre's skeleton and deletes unused placeholders and template comments. You should now see the draft recipe laid out for your judgement.
+4. On your confirmation Claude writes the recipe once for the round, together with its history companion, which it creates with the recipe. You should now see the recipe file and its history file named.
+5. Claude offers `/render <recipe>` as the next step. See [Render an output](render-an-output.md).
 
-   You should now see the genres and your project's recipes with
-   their versions.
-
-2. With a genre, Claude reads that genre's definition and walks you
-   through its checklist. It offers options and trade-offs; the
-   decisions are yours.
-
-   You should now see Claude asking the checklist's questions, one
-   at a time.
-
-3. The checklist closes with the language question. The render has
-   one language, or, where the genre allows it, a primary language
-   and its translations, one render per language. Claude proposes the
-   language of your project from its project file and asks. It never
-   assumes.
-
-   You should now see Claude naming your project's language and
-   asking whether the render follows it.
-
-4. Claude composes the recipe from the genre's skeleton. Unused
-   placeholders and all template comments are deleted. The recipe is
-   written once per round, when you confirm.
-
-   You should now see Claude asking whether to write the recipe.
-
-5. With the name of an existing recipe, Claude iterates that recipe
-   instead, through its genre where one fits and otherwise as a
-   conversation.
-
-   You should now see Claude working from the recipe as it stands.
-
-6. After the write, Claude offers `/render <recipe>` as the next step.
-   Generating the render is on [Render an output](render-an-output.md).
-
-   You should now see the offer of `/render` with your recipe's name.
-
-A recipe that fits no genre is still legitimate. Claude composes it in
-conversation from the base recipe template, which has four sections:
-the inputs, the instructions, an optional format and the template of
-the output. The format section exists only where the recipe names a
-file format beyond the Markdown.
+An iteration runs the same way, with one write for the whole round.
 
 ## What you have afterwards
 
-- The recipe in the project's `recipes/` folder.
-- Its history companion beside it, the append-only file that records
-  each change of the recipe, created together with the recipe.
-- A version of 0.x. A recipe stays 0.x and moves to an integer only
-  where you name one. Claude never proposes it.
+- `recipes/<recipe>.md`: the recipe, with the inputs, the instructions and the template of the render. It may also carry a Format section where the render becomes a file such as a deck.
+- `recipes/<recipe>.history.md`: the record of its changes.
+- A version that starts at 0.x and stays there. An integer version exists only where you name one, and Claude never proposes it. A recipe carries a version and no status.
 
 ## If something goes wrong
 
-- A name that is neither a genre nor an existing recipe: Claude lists
-  the genres that exist and stops. Check the spelling, or choose from
-  the list.
-- A slug that is ambiguous: Claude asks which project is meant.
-
-## Genres with their own page
-
-- The screenplay genre is followed from recipe to played video on
-  [Make a teaching video from a recipe](make-a-video-from-a-recipe.md).
-- The stories the export genre renders are written as described on
-  [Write user stories](write-user-stories.md).
+- The name you gave is neither a genre nor a recipe of the project: Claude lists the genres that exist and stops. Start again with a genre from the list, or compose a recipe outside any genre.
+- The project is ambiguous: Claude asks which project is meant.
 
 ## A worked example
 
-You want a deck from the project `my-project`.
+You want a short deck for a team of colleagues from the intent of a project called `<slug>`.
 
-1. You type `/recipe presentation my-project`.
-2. Claude asks the checklist's questions about the deck. You answer
-   them, and Claude reflects back what it understood.
-3. Claude asks for the render's language. It proposes the language of
-   `my-project` from its project file. You confirm it, and you
-   decline a translation.
-4. Claude shows the composed recipe and asks whether to write. You say
-   write.
-5. Claude writes `recipes/<recipe>.md` at version 0.1 with its history
-   companion, and offers `/render <recipe>`.
+```
+/recipe presentation <slug>
+```
 
-You should now see the new recipe and its history companion in the
-`recipes/` folder of `my-project`.
+Claude asks who sits in the room, what they must take away, which artefacts feed the deck, how many slides it has and what must not appear. You answer, and Claude asks for the language of the deck, proposing the project's own. You confirm. Claude shows the draft recipe, and you say to write it. Claude writes `recipes/<recipe>.md` at version 0.1 with its history file and offers `/render <recipe>`. Later you run `/recipe <recipe>` to change the density of the slides, and Claude records the change in the history.
+
+For the genre that ends in a video see [Make a teaching video from a recipe](make-a-video-from-a-recipe.md). For the stories the export genre renders see [Write user stories](write-user-stories.md). Terms of the forge are in the [Glossary](../reference/glossary.md).
 
 ## See also
 
@@ -154,4 +89,4 @@ You should now see the new recipe and its history companion in the
 - [Write user stories](write-user-stories.md): the stories the export genre renders.
 - [Glossary](../reference/glossary.md): every term of the forge in one line.
 
-Generated on 2026-11-08 for version 6.21 from the files the front-matter names; never edited by hand.
+Generated on 2026-11-08 for version 7.0 from the files the front-matter names; never edited by hand.

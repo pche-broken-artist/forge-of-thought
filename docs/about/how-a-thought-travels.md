@@ -1,8 +1,8 @@
 ---
 generated: 2026-11-08
-version: 6.21
+version: 7.0
 made: derived
-inputs-hash: d84ee5841bb30408
+inputs-hash: 79eff467e9c32185
 inputs:
   - CLAUDE.md#Document chain
   - projects/forge/40-solution-design.md#How the parts work together
@@ -13,6 +13,7 @@ inputs:
   - projects/forge/10-intent.md#POS.1990
   - projects/forge/10-intent.md#POS.1400
   - projects/forge/10-intent.md#POS.0400
+  - projects/forge/10-intent.md#POS.0540
   - projects/forge/10-intent.md#POS.1860
   - projects/forge/10-intent.md#POS.0710
   - projects/forge/10-intent.md#POS.0180
@@ -22,297 +23,354 @@ inputs:
 
 # How a thought travels through the forge
 
-A thought in the forge is one idea that travels a chain of versioned
-documents, from a rough brief to a saved release, under review by
-agents that never see the conversation in which it was worked. This
-page follows one invented thought along that road, station by
-station, for anyone who wants to see the whole before reading the
-pages on its parts: the user who brings a thought, the extender who
-adds a station, the evaluator who asks whether the road is sound.
+A thought travels through the forge as a chain of versioned Markdown
+documents, from a rough brief to a saved release. This page follows
+one invented thought along that way, station by station, for anyone
+who uses the forge, extends it or evaluates it: what happens to the
+idea at each place, what is made there, and why the way is shaped as
+it is. It explains; it does not teach the commands. Where a command
+is named, it is named in passing, and its own page says how it is
+used.
 
 ## What it is
 
-The road is the [document chain](the-document-chain.md): a brief at
-its start, the intent as its trunk, and below the intent the layers
-a project needs. Every artefact of the chain has a definition, the
-file that says what the artefact is, how it is found and what rules
-it owns, and a template that says what comes out. The one whose
-thinking is forged is the principal: he supplies the ideas, the
-answers and the decisions, and he is the final authority on all
-content. Claude is his cognitive extension: it proposes, elicits,
-structures and writes, and never decides.
+The forge is not a program. It is a set of instructions that Claude
+Code, the agent for the command line, reads; deterministic work is
+kept at its edge in scripts. The person whose thinking is forged is
+the principal. Claude proposes; the principal composes and decides.
 
-The chain ends where the project needs it to. Many projects end at
-the intent. Nothing below the intent is a condition of anything
-else. A layer a project does not have is not missing: Claude and
-the checks say nothing of it.
+Everything the thought becomes lives in the files of one project
+directory. Those files are:
 
-Around the chain stand three further groups of files. Records hold
-what changed and why: the history companion of every versioned
-document, the decisions, the reports of the reviewers. State is
-made at read time: the ledger, the one file that says where
-everything stands, built from the documents and never kept in git.
-Resources are what arrives from outside: sources, immutable from
-their registration, and research, immutable from its filing.
+- the artefacts of the chain, the documents the principal composes
+  with Claude;
+- their history logs, one append-only companion beside each
+  versioned document;
+- the ledger, the single source of truth for the project's state,
+  made at read time from the documents and never kept in git;
+- the reports of the reviewers;
+- the resources, that is the sources and the research notes.
+
+Nothing of value lives in the conversation or in Claude's memory.
+
+The chain starts at a brief, and its trunk is the intent. Below the
+intent a project takes the layers it needs. No layer is a condition
+of another, and many projects end at the intent. How the layers hang
+together is told on [The document chain](the-document-chain.md).
+Beside the chain stand the things that are not the chain: the
+reviews, the research, the sources, the renders, the work products
+and the documentation. All of it is saved to git.
 
 ## How it works
 
-The thought meets the stations in this order.
+Take one invented thought, taken from no project. A team lead wants
+to replace a weekly status meeting with a short written report that
+everyone reads before the week begins. What follows is the way that
+thought takes.
 
 ### It arrives as a brief
 
-A brief is the principal's text of one whole of thinking: what he
-wants and why, with what he chose to take from the finding around
-it. It is free-form, with no required content and no IDs. It is
-rough on purpose. It holds thoughts to be processed, not decisions:
-they may be changed, reworked or dropped when mined. A brief may
-arrive finished from outside, be begun outside and finished with
-Claude, or be born in the forge from the first word. The forge
-treats the three origins alike. A brief is versioned like every
-artefact: a draft until the principal approves it, and changed after
-that as any artefact is.
+The thought is written down as a brief: the principal's text of one
+whole of thinking, what he wants and why, with what he chose to take
+from the finding around it. The brief is free-form. Any structure the
+principal finds useful is allowed, and none is required. It holds
+thoughts to be processed, not decisions: a thought may be changed,
+reworked or dropped later, and only the intent turns a thought into a
+position.
+
+A brief is rough on purpose. Its usual shape is light: the topics of
+the whole, each with a few sentences of what the principal wants of
+it, the research that verifies or limits it cited beside it, and what
+is still open. It is composed in a round or two and then mined. Our
+team lead's brief says, in a few paragraphs, why the meeting costs
+too much, what the report should carry, who should read it, and that
+he does not yet know how often it should go out.
+
+Three origins are equally legitimate, and the forge does not
+distinguish them:
+
+- the brief arrives finished from outside and is stored as it came;
+- it is begun outside and finished with Claude in the forge;
+- it is born in the forge from the first word.
+
+A brief is versioned like every artefact: a draft until the principal
+approves it, and changed after that as any artefact is. It is the
+provenance of its whole: a position mined from it cites it.
 
 ### It is chiselled into the intent
 
-The intent is the working document: the consolidated current state
-of what the principal holds. It is made of positions. A position
-says what the principal holds and why, and names what it comes from,
-the brief or a source. The intent is found by elicitation: Claude
-asks, one question per message, and draws out what the principal has
-not yet articulated. Every proposition that needs his decision is
-worked as a walkthrough, that is, one item per message, each closed
-with a verdict line on which he answers with one letter. What is
-agreed is carried in the conversation and written once at the
-round's end, on his word. Each round rewrites the intent for
-coherence; it is not an append-only log. The way to a change, what
-was said, what was tried and which research turned it, goes into the
-history companion in the same step, never into the position. An open
-matter of the intent lives in a thread, one file per thread, until
-it is settled.
+The intent is the working document: the consolidated current state of
+the principal's thinking. Claude mines the brief into it by
+elicitation, that is by questions, research and sources, as the
+intent's definition says it is found. The intent is written once at
+the round's end, and that one write changes the document, appends the
+records to its history and brings the ledger current. Our team lead
+is asked who owns the report, what happens when a section is empty,
+and whether the meeting goes away or shrinks; his answers become
+positions.
 
-Not every thought of the brief survives the sifting. What stays out
-lives in the resources where it was a finding or a source, and
-otherwise nowhere.
+A position says what the principal holds and why it holds, in as
+many words as it takes to be understood without loss of meaning, and
+names what it comes from, a brief or a source. The intent is not an
+append-only log. It is rewritten for coherence every round, and its
+changes are recorded in its history. The way to a position, that is
+why it was changed, what was said on the way, trials and
+measurements, goes into the history in the same step that writes the
+position, never into the position itself.
 
-### Sources and research arrive at any stage
-
-A source is an external input as it arrived: a transcript, an offer,
-a document, a standard. It may arrive before the brief, as material
-for writing it, during the work on the intent, or after. Once
-registered it is immutable. Registration does not imply intake: the
-principal alone directs how and when each source is used, and when
-source content enters the intent it is his explicit act, cited with
-provenance to the file. What someone said in a meeting is never
-silently promoted to the principal's own position.
-
-A [research](the-research.md) is planned before it is searched.
-Claude shows the plan, the purpose, the perspectives, the questions
-to be answered and what is left out, and the principal confirms it
-in a walkthrough before anything costs a search. It has two depths.
-The quick one answers one question and files one note. The deep one
-runs one isolated agent per question and files a bundle with the
-plan and the synthesis at its head. Claude proposes the depth: quick
-where one question is to be answered and cited, deep where a
-position, a layer of the chain or a design will rest on the answer.
-A note is immutable from its filing.
+What is still open lives in threads, one file per thread beside the
+intent. The intent says what holds; the threads say what is being
+worked. A thread carries the working debate for as long as it is
+unsettled, and it is where an unfinished conversation is saved. Once
+settled, a thread stays as its file, immutable, and what holds goes
+into the intent.
 
 ### Below the intent, the layers the project needs
 
-Where a thought is to be handed to others, the intent is distilled
-into an assignment: the handover document for the recipients,
-complete, precise, structured and self-contained. It carries the
-whole in-scope substance of the intent. A silent omission is a
-defect; leaving a matter out is legitimate only as an explicit
-delegation.
+Every artefact of the chain has a definition, its state file, worked
+through `/forge` and paired with a template. The definition says what
+the artefact is and how it is found; the template says what comes
+out. Below the intent the project takes the layers it needs:
 
-Below the assignment a project may take a BRD, the business
-requirements that break the parent into rules, behaviour and
-qualities the stakeholders review, so that the delivery can estimate
-and the solution design can start. Below that it may take the
-[user stories](the-user-stories.md), the parent broken into behaviour
-seen from the outside, with the conditions under which it is
-accepted.
+- an assignment, the distilled handover document for the recipients:
+  complete, precise, structured, self-contained and versioned;
+- a BRD, which breaks its parent into the rules, the agreed sequences
+  of behaviour and the qualities that the stakeholders of each area
+  review on their own;
+- the user stories, the parent broken into behaviour seen from the
+  outside with the conditions under which it is accepted, told on
+  [The user stories](the-user-stories.md);
+- a solution design, how the things wanted are realised, derived from
+  the lowest layer the project has above it.
 
-The solution design says how the things wanted are realised. It is
-derived from the lowest layer the project has above it: the intent
-alone, the assignment, the BRD or the stories. It is worth writing
-where the way is not obvious, where a choice has a price, or where
-two hands would solve the same matter differently if it were not
-written down. Whether it is written, the principal says. From the
-artefacts of the chain the thing must be buildable without a look at
-the finished product.
+An assignment carries the whole in-scope substance of the intent.
+Nothing is left out for the sake of brevity. Leaving a matter out is
+legitimate only as an explicit delegation to the recipients, and a
+silent omission is a defect. There is no size target in either
+direction: length is whatever fidelity requires.
 
-Substance changes go intent-first and propagate down the whole chain
-the project has. A change may come from below, when solving shows
-that what is wanted must change; then the intent changes first and
-the layers follow. Only wording is fixed in a lower layer directly.
+A solution design is worth writing where the way is not obvious,
+where a choice has a price, or where two hands would solve the same
+matter differently if it were not written down. Whether it is
+written, the principal says. From the artefacts of the chain the
+thing must be buildable without a look at the finished product.
 
-### At every layer, blind reviewers
+Many thoughts end at the intent, where what is wanted needs no
+solution written down. Our team lead's thought may well be one of
+them: once the intent says what the report carries, who writes it
+and when, the team can start. A layer a project does not have is not
+missing: the state map and the checks say nothing of it, and the
+ledger declares no end of the chain.
 
-Three kinds of [isolated reviewer](isolated-reviewers.md) press on
-the documents, each run in a subagent, that is, a separate run of
-Claude that sees the files it is given and never the working
-conversation. The critic reads for document quality, through a lens
-chosen for what it should look at: one lens reads each artefact on
-its own, another distils the essence of every adjacent pair of the
-chain and compares them. The challenger reads for the substance of
-the thinking, through a persona that hunts the blind spots someone
-of that trade would see. The check reads for mechanical conformance
-with the conventions. Each produces an immutable, dated report. The
-findings are settled by walkthrough and written in one round.
+Iteration is intent-first, with drafting early as a legitimate tool.
+The number in a file name orders the files and prescribes no
+sequence.
 
-A reviewer runs on the principal's word alone, never on Claude's own
-judgement. A reviewer may be pointed at the whole chain, at one
-artefact, or at any file of the project.
+### Reviewers press on it at every layer
+
+At any layer the principal may call a reviewer on the documents or on
+the thinking. There are three kinds, of one shape:
+
+- the critic, for document quality, never substance: it reads
+  through a lens and produces findings;
+- the challenger, for the substance of the thinking, never document
+  quality: it reads through a persona and produces challenges;
+- the check, for mechanical conformance with the conventions, never
+  substance or quality: each check owns one concern.
+
+Each runs as an isolated subagent, that is a separate run of Claude
+that sees the files it is given and never the working conversation,
+on the session model, that is the one model the whole forge runs on.
+That blindness is the source of its value; why it is so is told on
+[The isolated reviewers](isolated-reviewers.md). Every reviewer is
+invoked by hand and runs on the principal's word alone. Each produces
+an immutable, dated report. The findings and the challenges are
+settled by walkthrough, that is one item per message, each closed by
+the principal's verdict, and written in one round. Reviewers are
+advisory: they report and propose, and the principal decides what is
+fixed. A critic or a challenger may take one artefact, any file of
+the project, or the whole chain.
+
+Our team lead calls a challenger on his intent. It asks whether the
+meeting is the real problem or only where the problem shows, and
+what would happen the first week a section stays empty. He settles
+both by walkthrough; one changes a position.
+
+### Research where a position will rest on what the world knows
+
+Where a position, a layer of the chain or a design will rest on what
+is already known outside the project, the principal has a research
+made. A research is planned before anything is searched. Claude shows
+the plan, and the principal confirms it in a walkthrough. The plan
+holds:
+
+- the purpose;
+- the perspectives from which the topic is looked at, each with the
+  cards that serve it;
+- the assumptions, with a premortem answered once and marked as
+  Claude's;
+- what is left out;
+- the cards, each one question answered by one kind of evidence from
+  one kind of source;
+- the agents and the rule that fixed their count.
+
+There are two depths. A quick research is one card on the session
+model alone, filed as one note. A deep research is one isolated agent
+per card, filed as a bundle with the plan and the synthesis at its
+head and one note per card. Without a word from the principal Claude
+proposes the depth with its reason, quick where one question is to be
+answered and cited, deep where a position or a layer will rest on the
+answer, and the principal decides. The synthesis is Claude's, from
+the notes alone, with its own view last and apart. A note, a bundle
+and its plan are immutable from their filing. How a research is
+planned is told on [How a research is made](the-research.md).
+
+Our team lead asks what is known about written status reports in
+teams of his size. One card, one note, cited beside the position it
+limits.
+
+### Sources arrive at any stage
+
+External inputs, such as transcripts, offers, documents and
+standards, live in the project's sources. They may arrive at any
+stage of a project's life: before the brief as material for writing
+it, during intent work, or after. A source is immutable once
+registered. Registration does not imply intake: what a source is for
+is individual, recorded as its role in the resource index, and the
+principal alone directs how and when a source is used. When source
+content does enter the intent, it is the principal's explicit act,
+cited with provenance to the file. What someone said in a meeting is
+never silently promoted to the principal's own position.
+
+Our team lead drops the transcript of the last meeting into the
+sources. It is registered and catalogued. Nothing of it enters the
+intent until he says which sentence of it supports which position.
 
 ### Outputs for every audience
 
-A [render](renders-and-recipes.md) is an output generated from the
-chain for one audience: a pitch, an architecture picture, an
-executive summary, the repository README. What is iterated is never
-the render but its recipe: inputs, audience, instructions and the
-output template in one versioned file, composed with the principal.
-The render is regenerated mechanically from the recipe, in an
-isolated subagent, and opens with its provenance, the recipe and
-every input with their versions. A render assigns nothing and is not
-part of the chain. The boundary between the two is authorship: a
-chain artefact is composed by the principal, a render is generated
-from artefacts. An article the principal writes is a layer of the
-chain; its translation is a render.
+A render is an audience-specific output generated from the chain: a
+pitch, a picture, a summary, the project's README. A render is never
+edited by hand. What is iterated is its recipe: the inputs, the
+audience, the instructions and the output template in one versioned
+file, composed with the principal. The render is regenerated from the
+recipe mechanically and opens with its provenance, citing the recipe
+and every input with their versions. A render assigns nothing and is
+not part of the chain: the artefacts remain the sole source of truth.
+The boundary between the two is authorship: a chain artefact is
+composed by the principal, a render is generated from artefacts. An
+output is made in two steps. The render makes the Markdown and, where
+the recipe names a format, the plain file; the publish step makes the
+designed file through a model, only on the principal's command. How
+this works is told on [Renders and recipes](renders-and-recipes.md).
 
-An output is made in two steps. The first generates the Markdown
-and, where the recipe names a format, the plain file through a
-script: deterministic, cheap, repeated freely. The second makes the
-designed file through a model: expensive, only on the principal's
-command.
+Where the project needs work of its own, a work product is made
+beside the chain: any result of Claude's work the principal asked
+for, such as a model, an analysis or a worked task, in whatever form
+the work needs. It is two files: the file that holds the content and
+beside it a specification that holds the way and the why. The file
+is remade from the specification whenever that changes, and the
+principal works with the file freely. What the work shows flows back
+into the intent. What a work product is and is not is told on [The
+work product](the-work-product.md).
 
-A [work product](the-work-product.md) stands beside the renders
-where the project needs work of its own: any result of Claude's work
-the principal asked for, a model, an analysis, a worked task. It
-takes its inputs from the chain and the resources, adds work of its
-own, is iterated, is handed over as a result of the project, and
-what it shows flows back into the intent. It is two files: the file
-that holds the content and the specification beside it, which holds
-the way and the why.
+The documentation is generated the same way, never composed by hand:
+pages of one topic each with an index, for the user, the extender
+and the evaluator, made from a map that lies beside the project's
+ledger and is never shown to the reader. One run makes it, asks
+nothing and regenerates only what changed.
 
-The documentation is generated the same way: pages of one topic each
-with an index, for the user, the extender and the evaluator, made in
-one run that asks nothing and regenerates only what changed.
+Our team lead has a recipe composed for a one-page summary for the
+team, regenerates the summary whenever the intent changes, and has
+the first report drafted as a work product beside the chain.
 
 ### Saved to git and released
 
-Every project is a git repository of its own, and the scripts of the
-forge are the door to every write of it. Two doors, two speeds. A
-save runs one light check and then commits and pushes on whatever
-branch is checked out, in seconds. A release, from the main branch
-only, runs its checks, settles them, regenerates the README and the
-release notes, writes the state render and then saves with the
-release message. At an approved major it adds the tag of the
-version. The release number is the intent's version.
+Everything the thought became is saved to git. A save runs a light
+check and then commits and pushes on whatever branch is checked out,
+in seconds. A release runs from the main branch only. It runs its
+checks and settles their findings with the principal, regenerates the
+documentation, the README and the release notes, writes the state
+render and then saves with the release message and a tag. The release
+carries the version of the intent.
+
+Our team lead saves after every round. When the intent is approved,
+he releases, and the README of his project tells the team where the
+thinking stands.
 
 ### The main courses of events
 
-- A round of work: Claude reads the definition of the target
+The whole journey is made of four courses of events, each one
+sentence:
+
+- A round of work: `/forge` reads the definition of the target
   artefact, the conversation runs by the working methods, and one
   write at the round's end changes the artefact, appends the records
   to its history and brings the ledger current.
-- A review: one isolated agent is launched, its report is filed with
-  IDs, and the findings are settled by walkthrough and written in
-  one round.
-- A render: the Markdown is generated in an isolated subagent from a
-  recipe and its inputs, with its provenance; the designed file is
-  made from the render as it lies on disk.
-- Persistence: a save checks, commits and pushes; a release checks,
-  regenerates the README and the release notes, writes the state
-  render and saves with the release message and tag.
+- A review: `/critique`, `/challenge` or `/check` launches one
+  isolated agent, its report is filed with IDs, and the findings are
+  settled by walkthrough and written in one round.
+- A render: `/render` generates the Markdown in an isolated subagent
+  from a recipe and its inputs and writes the provenance, and
+  `/publish` makes the designed file from the render as it lies on
+  disk.
+- Persistence: `/save` runs the light check and commits and pushes,
+  and `/release` runs its checks, settles them, regenerates the README
+  and the release notes and then saves with the release message and
+  tag.
 
 ## Why
 
-The brief is rough on purpose. A brief polished until the intent has
-nothing left to do has gone too far, because the chiselling and the
-sifting belong to the intent. No structure is required of it,
-because a required one would force premature tidiness.
+The brief is rough on purpose. A required structure would force
+premature tidiness. The chiselling is the intent's work, and a brief
+polished until the intent has nothing left to do has gone too far.
 
 The intent exists because chat context dies and anything of value
 must live in a file. It is the document to read when returning to a
-project after weeks, instead of excavating old conversations. State
-lives in the files of the project, never in the conversation and
-never in the assistant's memory.
+project after weeks, instead of excavating old conversations. It is
+rewritten for coherence, and the way to each position goes into the
+history, so that the intent stays readable as the current state.
 
-The chain ends where the project needs it to, because many projects
-end at the intent, where what is wanted needs no solution written
-down. Below the intent no layer is a condition of another, so that a
-project takes only the layers it needs.
+The assignment leaves nothing out in silence, because a silent
+omission is a defect for the recipients, and a delegation they can
+see is not. The size targets were dropped because the goal is to have
+it right, not short.
 
-The reviewers never see the working conversation, because that
-blindness is the source of their value. They run on the principal's
-word alone, because a run costs tokens, some a great deal, and what
-is spent is his to decide.
+The layers below the intent are taken as needed, because many
+thoughts need no solution written down once what is wanted is clear,
+and a layer a project does not have is then not missing.
 
-A research is planned before it is searched, because the quality of
-a research is made by its decomposition into questions, not by the
-searching, and the plan is where the principal sees the questions
-before they cost anything.
+The reviewers never see the conversation, because that blindness is
+the source of their value. They run on the principal's word alone,
+because a run costs tokens, some checks a great deal, and what is
+spent is his to decide; there is no other reason. They are advisory:
+they report and propose, and the principal decides what is fixed.
 
-A render is never edited by hand, so that the artefacts remain the
-sole source of truth. Each rendering re-derives the words from the
-current inputs, because fixing the text in the recipe would turn the
-recipe into the render and make the inputs meaningless.
+A research is planned before it is searched, because the quality of a
+research is made by the decomposition into questions, not by the
+searching. The plan is where the principal sees the questions before
+they cost anything.
 
-The work product is a kind of its own, because stretching the render
-to cover it would have cost the rule that a render is never edited
-by hand, and an artefact of the chain is thinking in items with IDs,
-which a file of any form cannot carry.
+A source is registered and not taken in, because what a source is
+for is individual: a standard to verify against, an inspiration, a
+meeting record, material to absorb. What someone said in a meeting is
+never silently promoted to the principal's own position.
 
-Save and release are two doors, because the renders cost minutes and
-tokens beyond reason at every save. With the renders at the release
-only, the README on the main branch is current at every release and
-stale in between visibly, never silently.
+A render is generated and never edited by hand, so that the artefacts
+remain the sole source of truth. The boundary to the chain is
+authorship, not audience, so that an article the principal writes is
+a layer of the chain and its translation is a render.
 
-## A worked example
+A work product is a kind of its own. Stretching the render to cover
+it was weighed and dropped, because it would have cost the rule that
+a render is never edited by hand.
 
-The principal has a thought: the team's weekly planning should move
-from a meeting to a written round. He writes it down as it is, in a
-page of prose with a table of the people it touches, and that page
-is the brief of a new project with the placeholder slug `<slug>`.
-Before it he has already dropped the minutes of the last three
-planning meetings into the project's sources, where they are
-registered and catalogued.
+Why the documentation is generated rather than composed by hand is
+not recorded in the inputs of this page.
 
-Claude reads the brief and begins the intent. It asks one question
-at a time: what the written round is for, who writes, who reads,
-what happens when nobody answers. Where the principal's answer rests
-on what the minutes say, the position cites the file. Where the
-principal wants to know how other teams run asynchronous planning,
-Claude proposes a research, shows the plan, and the principal
-confirms it before anything is searched. At the end of the round
-Claude reflects back what it understood, the principal says write,
-and the intent is written once, with its history records.
-
-The principal points a challenger at the intent. The challenger, in
-its own subagent, finds that the thought assumes everyone reads
-their mail on the day of the round, and that nothing says what the
-round decides when half the team is silent. The challenges come back
-as a walkthrough; the principal accepts the first and parks the
-second as a thread. The intent is rewritten for coherence in the
-next round.
-
-The thought is to be handed to the team. Claude distils the intent
-into an assignment, complete and self-contained, and the principal
-approves it, which makes it an integer version. The project ends
-there: no BRD, no stories, no solution design, and none is missing.
-
-For the team's wiki the principal composes a recipe: inputs the
-assignment, audience the team, a template of what the page carries.
-The render is generated from it, with its provenance at the top, and
-regenerated whenever the assignment changes. Beside it Claude makes a
-work product, a worked schedule of the first four rounds with its
-specification, which the principal edits freely.
-
-The principal saves. The check runs, the commit is made, the push
-goes out. When the intent is approved he releases: the checks run,
-the README and the release notes are regenerated, the state render
-is written, and the release is saved with its message.
+Save and release are two commands, because the renders cost minutes
+and tokens beyond reason at every save. With the renders at the
+release only, the README on the main branch is current at every
+release and stale in between visibly, never silently.
 
 ## See also
 
@@ -330,4 +388,4 @@ is written, and the release is saved with its message.
 - [Glossary](../reference/glossary.md): every term of the forge in
   one line.
 
-Generated on 2026-11-08 for version 6.21 from the files the front-matter names; never edited by hand.
+Generated on 2026-11-08 for version 7.0 from the files the front-matter names; never edited by hand.

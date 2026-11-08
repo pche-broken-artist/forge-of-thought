@@ -473,9 +473,12 @@ tmp/                       # the engine's working folder: packets,
                            # agents (the reviewers, the
                            # documentation's planner and writer),
                            # settings (settings.json: the two
-                           # hooks and the deny rule of the other
-                           # shell, POS.1200; settings.local.json:
-                           # the session model — gitignored)
+                           # hooks, the deny rule of the other
+                           # shell, the two denies of the user's
+                           # sensitive paths and the attribution
+                           # switched off, POS.1200, POS.1090;
+                           # settings.local.json: the session
+                           # model — gitignored)
 templates/                 # canonical skeletons
 projects/                  # gitignored (projects/*) but for its
                            # README — every project is a git
@@ -719,7 +722,9 @@ principal's word, project by project.
 
 Immutable documents (reviews, challenges, sources, research) are never
 edited — a source from its registration, the others from creation;
-corrections happen downstream.
+corrections happen downstream. The one exception is POS.0220's: a
+finding of a filed report that clashes is renumbered in the report
+itself, with its record.
 
 ## ID scheme
 Format **`PREFIX.NNNN`**, prefixes of two or three letters; `NNNN` here, in

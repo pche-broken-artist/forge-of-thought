@@ -1,6 +1,6 @@
 ---
 generated: 2026-11-08
-version: 6.21
+version: 7.0
 made: derived
 inputs:
   - projects/forge/docs-map.md
@@ -12,7 +12,7 @@ This is the documentation of Forge of Thought: pages of one topic
 each, generated from the engine as it stands, for three readers.
 Every page stands on its own; start where your question is.
 
-Generated on 2026-11-08 for Forge of Thought at version 6.21
+Generated on 2026-11-08 for Forge of Thought at version 7.0
 (the version of the engine's intent; a release carries the same
 number).
 
@@ -95,7 +95,7 @@ number).
 - [Sources and research](about/sources-and-research.md): Why are sources immutable, why is registration not intake, and what is a research for?
 - [How a research is made](about/the-research.md): Why is a research planned before it is searched, and how is what it found kept honest?
 - [Another model family](about/another-model-family.md): Why does the forge reach a model of another family, how is it reached, and how is its answer kept independent?
-- [Projects and the engine](about/projects-and-the-engine.md): Why is every project a repository of its own that the engine does not know?
+- [Projects and the engine](about/projects-and-the-engine.md): Why is every project a repository of its own that the engine does not know, the forge's own project among them?
 - [Persistence in git](about/persistence-in-git.md): Why are the scripts the only door to a write of git, and why two doors, two speeds?
 - [Working together on one project](about/working-together.md): What does the forge promise when two people, or two branches, work on one project, and how does each kind of file merge?
 - [Upgrades and migration](about/upgrades-and-migration.md): How does a project follow a new release of the engine, and why does a change of the shape of files come with a migration?

@@ -1,8 +1,8 @@
 ---
 generated: 2026-11-08
-version: 6.21
+version: 7.0
 made: derived
-inputs-hash: 60f1c167b55e20fb
+inputs-hash: 973c753fd9336d8a
 inputs:
   - projects/forge/10-intent.md#POS.1930
   - projects/forge/10-intent.md#POS.1940
@@ -20,184 +20,199 @@ inputs:
 
 # The tests
 
-The tests are the engine's own check that its scripts still do what
-they are meant to do after a change. This page is for the extender
-who changes a script and for the evaluator who wants to know what is
-covered, what the tests run on and why they stop where they stop. It
-says what the tests are, how they are built and run, and the reasons
-behind their shape; how to run them is the how-to
-[Run the tests](../use/run-the-tests.md).
+The tests are the engine's own proof that its scripts still do what
+they say after a change. This page is for the extender who changes a
+script and for the evaluator who wants to know what the suite covers
+and what it leaves alone: what the tests are, what fixture they run
+on, how they reach it, where they run, and why they are kept in
+proportion rather than made complete.
 
 ## What it is
 
 The engine's scripts have tests. They live in `tests/` at the engine
-root, beside the scripts they test, and pytest runs them from the
-engine root. `/test` is the one door to them. The command it runs is
-`python -m pytest`, with any arguments passed through.
+root, beside the `scripts/` directory they test, and pytest runs them
+from the engine root. `/test` is the one door to them; the command it
+runs is `python -m pytest`, with whatever arguments are given passed
+through. The running of them is described on
+[Run the tests](../use/run-the-tests.md).
 
 pytest is the one thing a contributor installs beyond `python`. A
 user of the engine never runs the tests and installs nothing for
 them.
 
-The tests are in proportion. They are enough to catch what a change
-of a script breaks. They are never a suite for its own sake, and no
-coverage figure is a target: the rule of the forge is kind, not
-count. A script is changed with its test, and a pull request on a
-script carries it; how that is done is
-[Add a script](../extend/add-a-script.md).
+The suite is in proportion. It is enough to catch what a change of a
+script breaks. It is never a suite for its own sake, and no coverage
+figure is a target. The rule behind this is the forge's "kind, not
+count": a rule says what kind of content belongs, never a number.
 
-The tests never run on a live repository. What they run on is a
-synthetic fixture (below), copied for every test.
+A script is changed with its test, and a pull request on a script
+carries it. How that is done is on
+[Add a script](../extend/add-a-script.md).
 
 ## How it works
 
 ### What is tested
 
-The tests cover the scripts in the order they were built, the
-deterministic cores first, then the scripts that write git:
+The tests were built in a fixed order, and the suite keeps it: the
+deterministic cores first, then the scripts that write git, then the
+conversions.
+
+The deterministic cores are the parts of the scripts that read and
+compute without touching git or an external tool:
 
 - the front-matter of a document;
-- the records of a history;
-- the reader of the documentation map, that is the map of pages
-  the documentation is made from;
-- the git hook's judgement over a command, whether a command reads
-  git or writes it;
-- the ledger, the state report made at read time from a project's
-  documents, every table of it;
+- the records of a history companion;
+- the reader of the documentation map (the file the documentation
+  pages are made from);
+- the git hook's judgement over a command, that is, whether a command
+  reads git or writes it;
+- the ledger (the project's state, made at read time from its
+  documents) built from the fixture, every table of it, the states
+  taken from records and verdicts, and the write to its default
+  place;
 - the light check as a program: the fixture conforming, and planted
-  defects found;
-- the git scripts on the fixture: status, save, branch and pull;
-  the step of a conflict standing and then finished; a standing
-  rebase refused; a derived file taken as ours where the merge
-  driver is registered, and left in conflict where it is not; a
-  merge made by hand pushed as it stands, from the integrator's
-  side and from the contributor's.
+  defects found.
 
-The git hook's built-in cases became the first test, and the hook's
-own test flag went, so that tests live in one place.
+The git hook once carried its own built-in cases behind a flag. Those
+cases became the first test file, and the flag went. The reason is
+one place for tests.
+
+Then the git scripts, on a copy of the fixture made into a
+repository: status, save, branch and pull; the step of a conflict
+left standing and then finished; a standing rebase refused; the
+derived file taken as ours where the merge driver is registered and
+left in conflict where it is not; a merge made by hand pushed as it
+stands, from the integrator's side and from the contributor's. One
+further file covers what the word `forge` names in the commands of
+git: the engine and the forge's own project beside it, before the
+cut of that project out of the engine and after it, run on a
+throwaway engine that the test builds for itself. It covers the save
+of two commits with the tag on the engine alone, the status of both,
+the branch switched together or not at all, and the root render
+found through its recipe.
 
 What calls pandoc, markitdown or the model is tested for its failure
-without the tool alone: the script is run with the tool absent and
-must name the tool and how it is installed. What those tools return
-is not tested.
+alone: each conversion script is run with an empty PATH and must
+fail naming the tool it misses. What those tools return is not
+tested.
 
-Not tested, by choice:
-
-- the skills;
-- the agents;
-- the text of `CLAUDE.md`, the core of the forge's rules;
-- the run of the screenplay script `scripts/md2video.py`.
+Not tested, by design: the skills, the agents, the text of the core
+instruction file, and the run of the screenplay script. A live
+repository is never used.
 
 ### The fixture
 
-The fixture, `tests/fixture`, is a synthetic thought project of the
+The fixture is `tests/fixture`: a synthetic thought project of the
 current shape with a made-up subject. It holds one of each kind of
-document the scripts read:
+document the scripts read: a project file, the attributes and the
+ignore file from the templates, a brief and an intent with their
+history companions, a thread open and one closed, a decisions file
+with one verdict, a critique and a challenge, a source with its
+index, an empty research index, a readme recipe with its companion
+and the README as its render with provenance. The histories and the
+indexes carry the skeletons' comments as they stand, so that the
+light check finds nothing on it. It has no ledger: a test makes one.
+Its own README says that it is a test fixture and what it is for.
 
-- a project file marked `fixture: true`, the flag
-  `templates/project.md` reserves for a fixture project;
-- the attributes file and the ignore file from the templates;
-- a brief and an intent with their history companions, the intent at
-  a second version with one earlier wording recorded;
-- a thread open and one closed;
-- a decisions file with one verdict;
-- a critique with findings, one settled by a record and one rejected
-  by a verdict;
-- a challenge with one open challenge;
-- a source with its index, and an empty research index;
-- a readme recipe with its companion, and the README as its render
-  with provenance.
+The project file of the fixture carries `fixture: true`. The project
+file skeleton, `templates/project.md`, names that flag as the mark
+of a fixture project.
 
-The histories and the indexes carry the skeletons' comments as they
-stand. The fixture has no ledger: a test makes it. Its README says
-that it is a test fixture and what it is for. It is never a copy of
-a real project, and it never lies under `projects/`.
+The fixture is never a copy of a real project, and it never lies
+under `projects/`. A test never changes it: a test works on a copy
+in pytest's temporary directory. Where the test needs git, the copy
+is made a repository on `main` with a local identity, one commit and
+a bare origin beside it; where two people are needed, a second clone
+stands for the other person.
 
-The fixture conforms to the light check. So a template it no longer
-follows turns a test red, and that is the signal wanted: the fixture
-is kept in step with the templates, or the suite says so.
-
-A test never touches the fixture. It works on a copy in pytest's
-temporary directory. Where the test needs git, the copy is made a
-repository on `main` with a local identity, one commit, and a bare
-origin beside it; where the test needs a second person, a second
-clone of that origin stands for them.
+The fixture conforms to the light check. The cost of a synthetic
+fixture is that it is kept by hand to the templates, and the light
+check's test on it is what enforces that. So a template the fixture
+no longer follows turns a test red, and that red test is the signal
+wanted.
 
 ### What the tests share
 
-What the tests share lives in one file beside them,
+What every test needs lives in one file beside them,
 `tests/conftest.py`:
 
-- a script with a hyphen in its name loaded as a module without
-  running its main;
+- a script loaded as a module without running its main, so that a
+  script with a hyphen in its name can be tested from inside;
 - a script run as the forge runs it, `python scripts/<name>.py …`
-  from the engine root, with an environment given;
+  from the engine root, with an environment;
 - the copy of the fixture;
 - git with an empty global configuration and no system one, and no
   terminal prompt;
-- the copy as a repository with a bare origin, and a second clone.
+- the copy as a repository with a bare origin, and a second clone;
+- a throwaway engine as a repository with a bare origin, with the
+  forge's own project inside it as the engine tracked it before the
+  cut, and the cut run on it, the scripts pointed at it through the
+  shared module's engine root.
 
-The tests are one file per concern. `pytest.ini` names `tests/` as
-the test path and puts `scripts/` on the import path, so that the
-modules the scripts share import by name.
+`pytest.ini` at the engine root sets `tests` as the test path and
+puts `scripts/` on the import path, so that the shared modules
+import by name.
 
-The scripts under test run as subprocesses, not by importing their
-main. So what is tested is the command as the forge calls it.
+The scripts run as subprocesses, not by importing their main. So
+what is tested is the command as the forge calls it. Each test gets
+its own copy of the fixture rather than one shared repository; this
+buys correctness at the price of a slower full run.
 
-### A script takes a slug or a path
+### How a test reaches its copy
 
 A script takes a project by its slug or by the path of its
 directory. A bare word is a slug and means `projects/<slug>`.
-Anything with a separator, or an absolute path, is the directory
-itself, taken as given. The project's name is the `project` field of
-its project file, or the directory's name where the file has none;
-`forge` stays the engine's own project by that name. One resolver in
-`scripts/forge_repos.py` does this, and every script goes through it.
-The commands of the forge call by slug as before.
+Anything with a separator in it, or an absolute path, is the
+directory itself, taken as given. The project's name is the
+`project` field of its project file, or the directory's name where
+there is none. `forge` stays the engine's own project by that name.
+One resolver in the shared module does this, and every script goes
+through it. The commands of the forge call by slug as before.
 
-This is what lets a test reach the copy in a temporary directory: by
-its path, as an argument visible in the command, and by nothing
-else.
+So a copy in a temporary directory is reached by its path, and by
+nothing else.
 
-### Continuous integration
+### Where they run
 
 The same suite runs in CI at every push and every pull request of
-the engine, from `.github/workflows/tests.yml`. The matrix is Linux
-and Windows, Python 3.8 and the newest stable release, resolved at
-each run. Each job installs pytest and runs `python -m pytest`; one
-failing job does not stop the others. The run's token can read the
-contents and nothing more. macOS is not in the matrix until someone
-asks for it.
+the engine, through the workflow in `.github/workflows/tests.yml`:
+on Linux and on Windows, on Python 3.8 and on the newest stable
+release, resolved at each run. The workflow installs pytest and runs
+`python -m pytest`, the same command a contributor types. The run's
+token can read the repository and nothing more. macOS is not in the
+matrix until someone asks for it.
 
 The git tests run git with an empty global configuration and no
 system one. The identity is set in the throwaway repository alone.
 So the user's guard, his stanzas and his registration of the merge
 driver change nothing, and CI without any of them sees the same. The
-registration is tested by its presence and by its absence.
-
-### When the tests run
+registration itself is tested both by its presence and by its
+absence. The portability rule these tests turn into a run is on
+[Persistence in git](../about/persistence-in-git.md).
 
 A release of the engine runs the tests before anything else, and a
-red test stops it; the release is
+red test stops it; the release is on
 [Release a version](../use/release-a-version.md). A save never runs
-them: every push runs them in CI.
+them. Every push runs them in CI.
 
 ## Why
 
-Thousands of lines of Python and not one test in the tree is the
-first thing a contributor looks for, and the first thing a change
-breaks. The tests exist so that a change of a script is caught where
-it breaks something, and they stay in proportion so that the suite
-never becomes work of its own.
+A tree of scripts without one test is the first thing a contributor
+looks for and the first thing a change breaks. That is why the
+scripts have tests at all.
 
-The fixture is synthetic because real content does not belong in the
-public engine. It lies in `tests/` and not under `projects/` because
-`projects/` is gitignored, so a fixture there would reach neither a
-contributor nor CI. The git tests change what they run on, so a copy
-in a temporary directory is needed wherever the fixture lies; that
-is why every test works on a copy and the fixture itself stays as it
-is. A copy per test was chosen over one shared repository:
-correctness, bought with a longer full run.
+The suite is kept in proportion because the forge's rules say what
+kind of content belongs, never a count. A coverage figure as a
+target would be a count standing in for a judgement.
+
+The fixture is synthetic because real content does not belong in
+the public engine. It lies in the engine's tree because `projects/`
+is gitignored, so a fixture there would reach neither a contributor
+nor CI. A copy of a real project was weighed and dropped for the
+same two reasons, and for a third: the git tests change what they
+run on, so a copy in a temporary directory is needed wherever the
+fixture lies. A bare remote in the engine's working folder was
+weighed too, and dropped because it would be per machine.
 
 A script takes a path because a copy in a temporary directory is
 reached by a path and by nothing else, and a path is an argument
@@ -205,50 +220,49 @@ like any other, visible in the command. Two alternatives were
 weighed and dropped. An environment variable naming the projects'
 root would be a setting hidden from the command, where a path is an
 argument everyone sees. A branch in the scripts for a test project
-would be production code with a path only the tests take; and since
-the copy the tests work on lies in a temporary directory, not in
-`tests/`, the branch would be the variable in another coat.
+lying in `tests/` would be production code with a path only the
+tests take; and because the copy the tests work on lies in a
+temporary directory, not in `tests/`, the branch would be the
+variable in another coat.
 
-The tests run in CI on two systems and two versions of Python so
-that the portability rule of the engine, that the scripts run
-unchanged on Linux and macOS, becomes a run instead of a writing
-rule; the rule is [Persistence in git](persistence-in-git.md). The
-git tests read nothing of the machine because a test that depends
-on the machine it runs on tests the machine.
+The tests run in CI so that the portability rule of the scripts
+becomes a run instead of a writing rule. They read nothing of the
+machine because a test that depends on the machine it runs on tests
+the machine.
 
-pytest was chosen over unittest as the convention of the language
-and the one install. The scripts run as subprocesses so that what is
-tested is the command as the forge calls it, not a function behind
-it. A script is changed with its test because that is possible in
-one repository only, and CI runs where the code is.
+pytest was chosen over unittest because it is the convention of the
+language and the one install. The scripts are run as subprocesses
+so that what is tested is the command as the forge calls it.
+
+A script is changed with its test, and a pull request carries both.
+That is possible in one repository only, and CI runs where the code
+is.
 
 ## A worked example
 
 A test of the save script, in words. The test asks for the copy of
-the fixture as a repository: the fixture is copied into a temporary
-directory, the copy is made a repository on `main` with a local
-identity and one commit, and a bare origin is created beside it. The
-test changes one document in the copy. It then runs
-`python scripts/forge-save.py <path-of-the-copy>` from the engine
-root, as the forge would run it, with git pointed at an empty global
-configuration. The test reads what the script printed and what the
-bare origin now holds: the commit is there, and the script said what
-it saved. The fixture under `tests/` is unchanged, and the temporary
-directory goes with the run. The same test gives the same answer on
-a contributor's machine, with or without the user's own git
-configuration, and in CI on Linux and Windows.
+the fixture as a repository: pytest copies `tests/fixture` into its
+temporary directory, makes the copy a repository on `main` with a
+local identity and one commit, and puts a bare origin beside it. The
+test then changes one file of the copy and runs the save script as
+the forge runs it, `python scripts/forge-save.py` with the path of
+the copy as its argument, under an environment in which git has an
+empty global configuration and no system one. The test reads the
+copy's log and the bare origin and finds the new commit in both. The
+fixture in `tests/` is as it was before the test began, and nothing
+of the machine the test ran on entered the result.
 
 ## See also
 
 - [Run the tests](../use/run-the-tests.md): running `/test`.
 - [Add a script](../extend/add-a-script.md): changing a script with
   its test.
-- [Persistence in git](persistence-in-git.md): the portability rule
-  the tests make a run.
+- [Persistence in git](../about/persistence-in-git.md): the
+  portability rule the tests make a run.
 - [Release a version](../use/release-a-version.md): the release that
   runs the tests first.
 - [Glossary](../reference/glossary.md): every term of the forge in
   one line.
 
-Generated on 2026-11-08 for version 6.21 from the files the
+Generated on 2026-11-08 for version 7.0 from the files the
 front-matter names; never edited by hand.

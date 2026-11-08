@@ -1,8 +1,8 @@
 ---
 generated: 2026-11-08
-version: 6.21
+version: 7.0
 made: derived
-inputs-hash: 24442bcb684e6d51
+inputs-hash: 1447c396d1b9c121
 inputs:
   - projects/forge/10-intent.md#POS.1920
   - CLAUDE.md#Repository layout
@@ -10,155 +10,150 @@ inputs:
 
 # The security policy and the code of conduct
 
-The security policy and the code of conduct are the two fixed files
-of the engine's root: `SECURITY.md` and `CODE_OF_CONDUCT.md`, the
-only files among the root's documents that are no render and derive
-from nothing in the chain. This page says what the two files are,
-what the policy promises and holds, and why neither is generated. It
-is for the user who wants to report a problem, for the extender who
-wonders why these two files are not made like the README, and for
-the evaluator who wants to understand how the forge handles security
-and conduct.
+The security policy and the code of conduct are the two files of the
+engine's root that are written by hand and generated from nothing:
+`SECURITY.md` says how a security problem is reported and what the
+forge promises in return, and `CODE_OF_CONDUCT.md` says how people
+treat each other around the project. This page is for the user who
+wants to report something, the extender who wonders why these two
+files have no recipe, and the evaluator who wants to know what the
+policy promises and what it does not. It says what the two files are,
+how the policy is built so that it stays true, and why neither file is
+a [render](renders-and-recipes.md).
 
 ## What it is
 
-The root of the engine holds a README, release notes and a
-contributing file, each a render: a file generated from a recipe
-and never edited by hand (what a render is and what a recipe is:
-[Renders and recipes](renders-and-recipes.md)). Beside them stand
-two files that are not renders. Where they stand among the root's
-files is shown in [Repository layout](../reference/repository-layout.md).
+Most files of the engine's root are renders: outputs generated from a
+recipe, never edited by hand. The README, the release notes and the
+contributing file are of that kind. Where they stand among the root's
+files is shown on [Repository layout](../reference/repository-layout.md).
 
-`SECURITY.md` is the security policy. It is the principal's own text.
-The principal is the person whose thinking is forged, the one who
-supplies ideas, answers and decisions and holds final authority over
-all content.
+Beside them stand two files that are no render and derive from
+nothing in the chain, that is, from none of the project's versioned
+documents:
 
-`CODE_OF_CONDUCT.md` is the code of conduct. It is the Contributor
-Covenant 3.0 word for word. The Covenant comes under its own licence,
-CC BY-SA 4.0, which the README names beside the engine's own licence,
-CC BY 4.0. Two things of the text are adjusted to the forge: its
+- `SECURITY.md`, the security policy: the own text of the principal
+  (the person whose thinking the forge serves and who has the final
+  word on its content).
+- `CODE_OF_CONDUCT.md`, the code of conduct: the Contributor Covenant
+  3.0, word for word.
+
+The code of conduct comes under its own licence, CC BY-SA 4.0. That
+licence is named in the README beside the engine's own licence, CC BY
+4.0. Two things of the adopted text are adjusted to the project: its
 reporting sentence points at the private way that the contributing
-file names, and its suggested remedies are kept as they stand in the
-Covenant. The contributing file is the page a visitor reads first
-([Make a change to the forge](../extend/how-a-change-is-made.md)).
+file names, and its suggested remedies are kept as they stand. The
+contributing file is the one a visitor reads first; what it says about
+making a change is on [Make a change to the forge](../extend/how-a-change-is-made.md).
 
 Neither file is a render. Neither has a history companion, a row in
-the ledger or a check. The ledger is the project's single source of
-truth for state, made at read time from the documents. The same
-holds for the principal's own files beside the forge's renders: a
-file the forge did not make is kept in git with the rest, and the
-forge reads it as no document. A change to either file is the
-principal's word, never Claude's.
+the [ledger](../reference/glossary.md) (the file that holds a
+project's state) or a check that reads it. The same holds for the
+principal's own files beside the forge's renders, which the page
+[Renders and recipes](renders-and-recipes.md) describes. A change to
+either file is the principal's word.
 
 ## How it works
 
-The policy is described here by kind, in the person's terms. Its
-exact wording is the file's own.
+The policy is written by kind, not by specifics. Each of its parts
+says what holds in general terms, so that no detail in it goes stale
+when the engine changes.
 
-### How a problem is reported
+**How a problem is reported.** A security problem is reported through
+GitHub's private vulnerability reporting. That is a setting of the
+repository, and it is switched on before the file points at it. The
+fallback is the private way the contributing file names. A public
+issue is never the way.
 
-A problem is reported through GitHub's private vulnerability
-reporting. That is a setting of the repository. The setting is
-switched on before the file points at it. The fallback is the
-private way the contributing file names. A problem is never reported
-as a public issue.
+**What the forge promises.** The forge promises these things and
+nothing else:
 
-### What the forge promises
-
-The forge promises four things to a reporter:
-
-- an acknowledgement within seven days
+- an acknowledgement within seven days;
 - a fix or a decision, at the principal's pace, told to the reporter
-  first
-- credit in the advisory, unless the reporter declines it
-- nothing else: no bounty, no safe harbour, no form
+  first;
+- credit in the advisory, unless the reporter declines it.
 
-### What is supported
+There is no bounty, no safe harbour and no form. Why the promises are
+exactly these, and why the channel is a private one, is not recorded.
 
-Supported is the latest release on `main` only. A fix lands in the
-next release.
+**What is supported.** The latest release on `main` is supported, and
+nothing else. A fix comes with the next release.
 
-### What the forge does on the machine
+**What the forge does on the machine.** The policy says this by kind
+and leaves the specifics to the documentation pages, which a release
+regenerates:
 
-The policy says what the forge does on the machine by kind, not by
-listing files:
+- the forge is instruction files;
+- there is no server;
+- it runs with the user's permissions;
+- it runs programs found on PATH;
+- nothing is sent but what the user sends;
+- data it reads may carry instructions;
+- its permissions are a guard, not a sandbox.
 
-- the forge is a set of instruction files
-- there is no server
-- it runs under the user's permissions
-- it calls programs found on PATH
-- it sends nothing but what the user sends
-- the data it reads may carry instructions
-- the permissions are a guard, not a sandbox
+Because the specifics live in the documentation and not in the policy,
+the policy stays true without a recipe.
 
-The specifics, which script does what and which hook denies what,
-are left to the documentation pages. A release regenerates those
-pages. So the policy stays true without a recipe of its own.
+**What is in scope.** In scope is any script, hook, file of the engine
+or piece of data that makes the forge write, run, send or publish what
+its rules do not say.
 
-### What is in scope and what is not
+**What is out of scope.** Out of scope are Claude Code itself, the
+tools the scripts call, the user's permission mode and the content of
+the user's projects.
 
-In scope is a script, a hook, a file of the engine or a piece of
-data that makes the forge write, run, send or publish what its rules
-do not say.
-
-Out of scope are:
-
-- Claude Code itself, Anthropic's agent for the command line that
-  runs the forge
-- the tools the scripts call
-- the user's permission mode
-- the content of the user's projects
+The code of conduct has no mechanism of its own beyond the two
+adjustments named above: its reporting sentence points at the private
+way the contributing file names, and the remedies it suggests are
+kept.
 
 ## Why
 
-The policy carries a threat model. That model is derived from the
-design of the forge. A text derived from the design stays true only
-when it is re-rendered after the design changes. A release
-re-renders the documentation, not a policy. So the policy is kept
-short and by kind, the specifics are left to the pages a release
-regenerates, and the file is the principal's own text rather than a
-render.
+A policy whose threat model is derived from the design stays true only
+when it is re-rendered. A release re-renders the documentation, not a
+policy. So the policy is written in a way that does not depend on the
+design's details: it states kinds, and it points at the documentation
+for the specifics. That is why it needs no recipe and is no render.
 
-The code of conduct is an adopted standard. A standard adopted is
-worth exactly its unchanged text. So the Covenant stands word for
-word, and the file is no render.
+A standard adopted is worth exactly its unchanged text. That is why
+the code of conduct is the Contributor Covenant 3.0 word for word
+rather than a render composed from the project's own material, and
+why only its reporting sentence is pointed at the project's private
+way.
 
-Why the policy promises exactly what it promises, seven days, credit,
-no bounty and no safe harbour, is not recorded.
+Neither file has a companion, a row or a check because the two are
+treated as the principal's own files, and the principal's own files
+have none of the three. A change to either is the principal's word.
 
 ## A worked example
 
-A visitor finds that a script of the engine, run as the forge says
-to run it, pushes to a remote the user never named. This is in scope:
-a script making the forge send what its rules do not say. The visitor
-does not open a public issue. He opens a private vulnerability report
-on the repository, or, where that is not available, uses the private
-way the contributing file names.
+A visitor has cloned the latest release and noticed that one script of
+the engine sends something to a remote that the forge's rules do not
+say it sends. That is in scope: a script making the forge send what
+its rules do not say.
 
-The report says, in words:
+The visitor does not open a public issue. He opens a private
+vulnerability report on the repository, or, where that is not open to
+him, uses the private way the contributing file names. In the report
+he says, in his own words:
 
-- what he did: the command he ran and the state of the repository
-  when he ran it
-- what he saw: where the script pushed and what it printed
-- what he expected: what the forge's own rules say the script does
-- which release he ran: the latest release on `main`, since only
-  that one is supported
-- whether he wants credit in the advisory, or declines it
+- which file it is, by its path in the engine;
+- what the file makes the forge do that the rules do not say: here,
+  send;
+- how he saw it, so that the principal can see the same;
+- which release he was on, which is the latest release on `main`;
+- whether he wants to be credited in the advisory or declines it.
 
-He can then expect an acknowledgement within seven days, and a fix
-or a decision told to him before anyone else.
+He then expects an acknowledgement within seven days, and after that a
+fix or a decision, told to him before it is told to anyone else. The
+fix, where there is one, arrives with the next release. He expects no
+bounty and no form to fill in.
 
 ## See also
 
-- [Make a change to the forge](../extend/how-a-change-is-made.md):
-  the contributing file a visitor reads, which points at both.
-- [Renders and recipes](renders-and-recipes.md): what a render is and
-  what the principal's own files beside the forge's are.
-- [Repository layout](../reference/repository-layout.md): where the
-  two files stand among the root's files.
-- [Glossary](../reference/glossary.md): every term of the forge in
-  one line.
+- [Make a change to the forge](../extend/how-a-change-is-made.md): the contributing file a visitor reads, which points at both.
+- [Renders and recipes](renders-and-recipes.md): what a render is and what the principal's own files beside the forge's are.
+- [Repository layout](../reference/repository-layout.md): where the two files stand among the root's files.
+- [Glossary](../reference/glossary.md): every term of the forge in one line.
 
-Generated on 2026-11-08 for version 6.21 from the files the
-front-matter names; never edited by hand.
+Generated on 2026-11-08 for version 7.0 from the files the front-matter names; never edited by hand.

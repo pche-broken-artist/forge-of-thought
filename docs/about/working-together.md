@@ -1,8 +1,8 @@
 ---
 generated: 2026-11-08
-version: 6.21
+version: 7.0
 made: derived
-inputs-hash: 89ab4a3d38876d71
+inputs-hash: b0782bcd82ced7f3
 inputs:
   - CLAUDE.md#Persistence (git)
   - templates/gitattributes
@@ -19,244 +19,204 @@ inputs:
 
 # Working together on one project
 
-Working together on one project is what happens when two people, or
-two branches of one person, change the same project repository and
-their changes have to be joined. This page says what the forge
-promises in that case, how every kind of file of a project merges,
-and why the forge leaves the merge itself to git. It is for the user
-who shares a project, for the extender who adds a kind of file and
-must say how it merges, and for the evaluator who wants to know
-where a conflict can arise and where it cannot.
+Working together on one project means that two people, or two
+branches of one person, change the same repository and git has to
+bring the two sides together. This page says what the forge
+promises in that case, how each kind of file of a project merges,
+and how the work of several people on one project is arranged. It
+is for the user who shares a project, for the extender who touches
+the files that make it work, and for the evaluator who wants to
+know where the forge ends and git begins.
 
 ## What it is
 
 Every file of a project has one of three ways of merging. The forge
-tells git which way through the project's `.gitattributes`, a file
-created from a template of the engine. The forge itself never
-merges, pulls or rebases on its own judgement.
+tells git which one through the project's `.gitattributes`, a file
+created from the template `templates/gitattributes`. The forge
+itself never merges, pulls or rebases on its own judgement: the
+merge stays git's.
 
-The first way is text. These files are merged by git's text merge,
-and what git leaves in conflict is settled by a person:
+The three ways are these.
 
-- the artefacts (the documents of the chain)
-- the recipes
-- the work specifications
-- the threads (one file per open matter of the intent)
-- the project file
-- the record files, that is the histories, the decisions, the
-  resource indexes and the documentation map
+- **Text.** The artefacts, the recipes, the work specifications,
+  the threads and the project file; the record files too, that is
+  the histories, the decisions, the resource indexes and the
+  documentation map. These carry no attribute and are merged by
+  git's text merge. What git leaves in conflict is settled by a
+  person in the step of a conflict ([Settle a
+  conflict](../use/settle-a-conflict.md)).
+- **Derived.** State and the documents for a reader. The
+  [ledger](the-ledger.md), the single file that says where a
+  project stands, is never in git and is made at read time. The
+  documents for a reader (the renders, the README, the release
+  notes, CONTRIBUTING, the documentation, the state render and the
+  published companions) are in git, made only on `main`, taken as
+  `ours` at a merge and made again. The published files themselves
+  (`.pptx`, `.docx`) are marked `binary` and never merged.
+- **Immutable and unique.** Reviews, challenges, research, sources
+  and closed threads. These never conflict: a report's name is
+  unique across branches too. Immutability stays a process rule,
+  not a lock in git.
 
-The second way is derived. A derived file is made from other files
-and is never the thing to merge. The ledger (the single source of
-truth for the state of a project) is never in git and is made at
-read time. The documents made for a reader are in git, made only on
-`main`, taken as `ours` at a merge and made again afterwards:
+The attributes template carries `text=auto` for every file, so that
+line endings do not fight between machines, `merge=ours` on
+`renders/**`, `docs/**`, `published/*.md` and the three root files
+`/README.md`, `/RELEASE-NOTES.md` and `/CONTRIBUTING.md`, and
+`binary` on `published/*.pptx` and `published/*.docx`. The three
+root files are anchored with a leading slash. A bare name would
+match at every depth, `recipes/readme.md` among them. Where the
+file system ignores case, a bare name would match in every case as
+well.
 
-- the renders
-- the README
-- the release notes
-- CONTRIBUTING
-- the documentation
-- the state render
-- the published companions
-
-The published files themselves, the `.pptx` and `.docx` made
-through a model, are `binary` and are never merged.
-
-The third way is immutable and unique. These files never conflict,
-and a report's name is unique across branches too:
-
-- reviews
-- challenges
-- research
-- sources
-- closed threads
-
-Immutability stays a process rule, not a git mechanism: nothing is
-locked.
+`ours` is not built into git. `/setup` registers it, once per
+machine and on the user's word, in the global git configuration,
+with the settings it needs. The status report says when the
+registration is missing, because an unregistered clone silently
+falls back to a conflict.
 
 ## How it works
 
-### The attributes
-
-The template of the attributes, `templates/gitattributes`, carries
-three things. `text=auto` on every file normalises the line endings.
-Because files would otherwise fight between machines. `merge=ours`
-stands on the renders, the documentation, the state render and the
-published companions. `binary` stands on the published files. The
-record files carry no attribute and merge as text.
-
-The three root files, `README.md`, `RELEASE-NOTES.md` and
-`CONTRIBUTING.md`, are anchored with a leading slash in the
-attributes. Because a bare name matches at every depth. Where the
-file system ignores case, a bare name matches in every case too, and
-`recipes/readme.md` would be taken as `ours` at a merge.
-
-`/new-project` creates the file, and `/check project` reports a
-project without it. The engine carries a list of its own. Because
-its derived files lie at its root and under its own project.
-
-The driver `ours` is not built into git. `/setup` registers it in
-the global configuration once for every repository of the machine,
-together with the git settings it needs, and the status report says
-when the registration is missing. Because an unregistered clone
-silently falls back to a conflict.
-
 ### What the forge promises
 
-One person on one project saves and pulls, through `/save` and
-`/pull`, with nothing more to think of.
+One person on one project saves and pulls, nothing more
+([Save your work](../use/save-your-work.md)). With two people, or
+two branches, the forge promises the following.
 
-With two people, or two branches, the forge promises this:
-
-- Derived state is made anew at read time and never conflicts.
+- Derived state never conflicts: it is made anew at read time.
 - A conflict in a history, in `decisions.md` or in an index is two
-  tails appended after one last line, and is settled by keeping both.
+  tails appended after one last line. It is settled by keeping
+  both.
 - A conflict in an artefact is the same item or sentence changed on
-  both sides, and is settled by a person with Claude's help in the
-  step of a conflict ([Settle a conflict](../use/settle-a-conflict.md)).
+  both sides. It is settled by a person with Claude's help, in the
+  step of a conflict.
 - IDs stay one sequence per project, taken at the write, with no
   block and no reading over the branches. A number taken twice is
-  reported by the ledger script after the merge and settled then, the
-  younger renumbered with a record in a walkthrough (one item per
-  message, the principal's verdict on each), never by Claude alone
-  ([Stable IDs](stable-ids.md)).
-- A version given twice, two branches that both raised one document
+  reported by the ledger script after the merge and settled by
+  renumbering the younger item with a record, in a walkthrough,
+  that is one item per message with a verdict on each, never by
+  Claude alone ([Stable IDs](stable-ids.md)).
+- A version given twice, two branches that both raised a document
   to the same number, is found by git itself. Both sides appended
-  their records to the end of the document's history, and that
-  conflicts as text whenever both raised it. The header's `version:`
-  line conflicts only where the two numbers differ and merges
-  silently where they are the same. It is settled in the same step of
-  a conflict: the merged document takes the next number and one
-  `changed` record naming the merge and what was joined, the records
-  of both sides keeping their numbers.
-- A merge request without conflict is merged on the server. With a
-  conflict it is fetched and settled on a clone. Because the server
-  merges with no attribute of the forge's.
+  their records to the end of the document's history, and the two
+  tails conflict as text whenever both raised it. The header's
+  `version:` line conflicts only where the two numbers differ and
+  merges silently where they are the same. Whoever merges settles
+  it in the step of a conflict: the merged document takes the next
+  number and one `changed` record names the merge and what was
+  joined, the records of both sides keeping their numbers.
+- A merge request without conflict is merged on the server. A
+  merge request with conflict is fetched and settled on a clone,
+  because the server merges with no attribute of the forge's.
 
-Two windows of one person on one project are not solved by the
-forge. A bare `/save` commits every repository with changes, the
-other window's half-written work included, so two windows take a
-slug. On two projects the windows collide nowhere, each project
-being a repository of its own. On one project the person either does
-work the two windows can merge afterwards, or arranges it through
-git: a branch, or a second clone where a branch in one tree is not
-enough. Because a branch switched in one working tree is seen by
-both windows.
+### Several people on one project
 
-### Several people: one integrator and contributors
+The work of several people on one project has one model: one
+integrator and any number of contributors. A hosted project's
+`main` is protected by default, so nobody pushes to it directly.
 
-A hosted project's `main` is protected by default, so pushing to it
-and merging into it are the maintainers'. The work of several people
-on one project therefore has one model. A contributor works on a
-branch ([Work on a branch](../use/work-on-a-branch.md)) and saves it;
-`/save` pushes the branch ([Save your work](../use/save-your-work.md)).
-The integrator, a maintainer and typically the principal (the person
-whose thinking is forged), merges it. Where the merge request has no
-conflict, he merges it on the server. Where it has one, he merges on
-his own clone with git itself, outside the forge's scripts, and what
-git leaves standing is settled in the step of a conflict. A merge
-request on the server is for reading and for the merge that needs no
-hand. A second author never writes into the integrator's clone.
+- A contributor works on a branch ([Work on a
+  branch](../use/work-on-a-branch.md)) and saves it; `/save` pushes
+  the branch.
+- The integrator, typically the principal (the person whose
+  thinking is being forged), merges it. Where the merge request has
+  no conflict, the merge happens on the server. Where it has one,
+  the integrator merges on his own clone with git itself, outside
+  the forge's scripts, and settles what git leaves standing in the
+  step of a conflict.
+- A merge request on the server is for reading and for the merge
+  that needs no hand.
+- A second author never writes into the integrator's clone.
 
-The step of a conflict is the forge's help, not its mechanism. A
-conflict `/save` meets is left standing, not aborted. Claude reads
-both sides and lays them out as a walkthrough, the principal decides,
-Claude writes the chosen wording into the file, and the finishing
-commands of git run on the hook's ask. The hook is the wall between
-reading git and writing it; the scripts are the door to a write, and
-the few commands that finish a conflict are put to the principal and
-run on his yes.
+The server merges with no attribute of the forge's. Two people who
+both append to any history or to the decisions therefore have a
+conflicting merge request there, and the forge's path is the
+branch, `/save`, the integrator's clone and the step of a conflict.
 
 The save rebases one's own commits onto the remote only where both
 sides moved on, that is where the histories diverged. A branch
 merely ahead of the remote, a merge commit among its commits, is
-pushed as it stands. So that the integrator's merge of a branch and a
-contributor's merge of the upstream keep their merge commit and
+pushed as it stands. So the integrator's merge of a branch and a
+contributor's merge of the upstream keep their merge commit, and
 nothing of the other side is replayed.
 
-The renders of a release, the documentation, the state render and the
-published files are made only on `main`
-([Persistence in git](persistence-in-git.md)). Two branches making
-the same one conflict on the server and are settled by making it
-again.
+The renders of a release, the documentation, the state render and
+the published files are made only on `main` ([Persistence in
+git](persistence-in-git.md)). Two branches that make the same one
+conflict on the server and are settled by making it again.
+
+### Two windows of one person
+
+Two windows of one person on two projects collide nowhere, each
+project being a repository of its own. On one project the forge
+solves nothing: the person either does work the two windows can
+merge afterwards, or arranges it himself through git, with a
+branch, or with a second clone where a branch in one working tree
+is not enough, because a branch switched in one working tree is
+seen by both windows. A bare `/save` is for one window, since it
+commits every repository with changes, the other window's
+half-written work included. Why two windows on one project are left
+to git is not recorded.
 
 ## Why
 
-The ledger was the one file present at every collision, and beside
-it stood the histories, the decisions, the index of sources and the
-regenerated renders. Made at read time, the ledger stopped being a
-thing to merge, and the threads as files of their own removed most of
-the rest ([The ledger, made from the records](the-ledger.md)).
+The ledger was the one file present at every collision the forge
+had seen, with the histories, the decisions, the index of sources
+and the regenerated renders beside it. Made at read time, the
+ledger stopped being a thing to merge, and the threads as files of
+their own removed most of the rest.
 
 Two people on one project are the exception, and the exception is
-handled with git. That is why the record files have no way of their
-own: no driver of the forge's merging them as sets of records, and no
-`merge=union`. The record files are text, and a conflict in them is
-two tails kept both in the step of a conflict. A driver fails where
-the merge happens on the server and for a contributor without the
-registration, and it would be the most code of the plan for a case
-of a few times a year. Union merge duplicates and does not order, by
-git's own documentation.
+handled with git. For that reason the forge has no merge driver of
+its own for the record files: a driver merging them as sets of
+records fails where the merge happens on the server and for a
+contributor without the registration, and it would have been the
+most code of the plan for a case of a few times a year. `merge=union`
+for the record files was let go with it: union duplicates and does
+not order, by git's own documentation, and the record files merge
+as text, a conflict in them two tails kept both. A merge command of
+the forge with a script of its own was let go because the same help
+needs no new mechanism: it is the step of a conflict in `/save` and
+on the hook's ask, and the merge stays git's.
 
-There is no merge command of the forge either. The same help without
-a new mechanism is the step of a conflict in `/save` and on the
-hook's ask; the merge stays git's.
+A number or a version taken twice is settled by detection and the
+existing remedy, because a clash is a few times a year on a project
+of one or two people and detection costs nothing, where blocks of
+IDs, an allocation over the local branches and a version written as
+a landing would have cost the most code.
 
-A number taken twice and a version given twice are found after the
-merge and settled by the existing remedy, instead of being prevented
-beforehand. Because a clash is a few times a year on a project of one
-or two people, and detection with the existing remedy costs nothing,
-where blocks of IDs, an allocation over the local branches and a
-version taken as a landing would cost the most code.
-
-The model of one integrator and contributors fits a forge built
-around the principal and removes every need to write to `main` from
-a branch. Because the default protection of a hosted `main` refuses a
-push by everyone.
-
-Why the forge leaves two windows of one person on one project to git
-rather than solving it is not recorded. The direction is recorded:
-where two windows meet is to be mapped from what each operation
-writes, and when it comes to it the answer is git's.
+The model of one integrator and contributors is consistent with a
+forge built around the principal, and it removes every need to
+write to `main` from a branch, which the default protection of a
+hosted `main` refuses anyway.
 
 ## A worked example
 
-A contributor and the integrator share the project `<slug>`.
+A contributor and an integrator share the thought project
+`<slug>`. The contributor creates a branch through `forge-branch`,
+changes an item of the intent and records the change in the
+intent's history, then runs `/save <slug>`: the save commits and
+pushes the branch. Meanwhile the integrator, on `main`, has
+recorded a change of his own in the same history.
 
-The contributor switches the project to a branch of her own and works
-there: she changes one position of the intent, adds a record to the
-intent's history and raises the intent's version. Her `/save` commits
-and pushes the branch. Nothing is rebased. Because only her side has
-moved on.
+The contributor opens a merge request. The server finds the two
+tails of the intent's history in conflict and refuses to merge.
+The integrator fetches the branch to his own clone and merges it
+with git itself. The intent merges cleanly, since the two sides
+changed different items. The history is left in conflict, two
+tails after one last line. The renders and the README are taken as
+`ours` by the attributes and will be made again on `main` at the
+next release.
 
-Meanwhile the integrator, on `main`, has changed another position of
-the intent, added a record to the same history and raised the intent
-to the same version number.
-
-The contributor opens a merge request. The server tries the merge and
-finds a conflict: both sides appended a record to the end of the
-intent's history. The integrator therefore fetches the branch and
-merges on his own clone with git itself. Git joins the two positions
-of the intent by its text merge, since they are different items. The
-`version:` line of the intent merges silently, both sides having
-written the same number. The history is left standing in conflict,
-two tails after one last line. `README.md` and the renders are taken
-as `ours`.
-
-Claude lays the conflict out as a walkthrough. The integrator keeps
-both tails. For the version given twice, the merged intent takes the
-next number, and one `changed` record naming the merge and what was
-joined is appended; the records of both sides keep their numbers.
-Claude writes the wording, and the finishing commands of git run on
-the hook's ask. If both sides had opened a thread with the same
-number, the ledger script would report it after the merge, and the
-younger thread would be renumbered with a record.
-
-The integrator's `/save` pushes `main` as it stands, merge commit
-included. Because the branch is merely ahead of the remote. The
-README and the release notes are made again at the next release on
-`main`, and the ledger, never in git, is made at the next read.
+Claude lays the two tails out as a walkthrough in the step of a
+conflict, the integrator keeps both, Claude writes the wording and
+the finishing commands of git run on his yes. If both sides had
+raised the intent to the same version, the merged intent would take
+the next number with one `changed` record naming the merge. The
+integrator then runs `/save <slug>`: `main` is merely ahead of the
+remote, the merge commit among its commits, so the save pushes it
+as it stands and replays nothing. The ledger, made at read time,
+shows the merged state and reports an item number that both sides
+had taken, if any, for the walkthrough that renumbers the younger.
 
 ## See also
 
@@ -266,14 +226,14 @@ README and the release notes are made again at the next release on
   why the files for a reader are made on `main` only.
 - [Work on a branch](../use/work-on-a-branch.md): switching a
   repository to a branch.
-- [Save your work](../use/save-your-work.md): the save, which pushes a
-  merge made by hand as it stands.
-- [The ledger, made from the records](the-ledger.md): why the ledger
-  is made at read time.
+- [Save your work](../use/save-your-work.md): the save, which pushes
+  a merge made by hand as it stands.
+- [The ledger, made from the records](the-ledger.md): why the
+  ledger is made at read time.
 - [Stable IDs](stable-ids.md): how an item number taken twice is
   settled.
-- [Glossary](../reference/glossary.md): every term of the forge in one
-  line.
+- [Glossary](../reference/glossary.md): every term of the forge in
+  one line.
 
-Generated on 2026-11-08 for version 6.21 from the files the
+Generated on 2026-11-08 for version 7.0 from the files the
 front-matter names; never edited by hand.

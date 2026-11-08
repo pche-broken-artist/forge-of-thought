@@ -1,8 +1,8 @@
 ---
 generated: 2026-11-08
-version: 6.21
+version: 7.0
 made: mirrored
-inputs-hash: c01e24df8981ed19
+inputs-hash: f1c752283cc43397
 inputs:
   - CLAUDE.md#Versioning & status
   - templates/intent.md
@@ -16,7 +16,11 @@ inputs:
 
 # Versioning and front-matter
 
-This page states the version scheme of the forge and the header fields (the front-matter) of an artefact, a brief, a recipe, a work specification and a resource index. It is for anyone who reads or writes these headers. The principal is whoever's thinking is being forged. The ledger is the state report that the forge makes from the documents at read time.
+This page lists the version scheme of the forge and the header fields
+(the front-matter) of each versioned document and of a resource index.
+It is for anyone who reads or writes these headers: a user, an
+extender or an evaluator. The principal is whoever's thinking is being
+forged.
 
 ## The version scheme
 
@@ -31,69 +35,70 @@ Integers denote signed-off versions.
 
 ## What a header carries
 
-A header carries nothing that changes with a round of work. It carries `version` and `status`, beside what does not change with the work: `project`, the `title` and `author` of a brief, the `directory` of an index.
+A header carries nothing that changes with a round of work. It carries
+`version` and `status`, and beside them what does not change with the
+work: `project`, a brief's `title` and `author`, an index's
+`directory`.
 
-The date and the last change of a document are computed from its history by whatever reads them. They are never carried in the header.
+The date and the last change of a document are not in its header.
+Whatever reads them computes them from the document's history.
 
 ## The status rule
 
-`status` is one of `draft`, `approved` or `superseded`. Status must agree with the number: an integer version is `approved`, anything else is not.
+`status` is one of `draft`, `approved` or `superseded`. Status must
+agree with the number: an integer version is `approved`, anything
+else is not.
 
-A recipe carries no status. It stays at `0.x` unless the principal names an integer, from which the count goes on. Claude never proposes one.
+A recipe carries no status. It stays at `0.x` unless the principal
+names an integer, from which the count goes on. Claude never proposes
+an integer for a recipe.
 
 ## Header fields by document
 
-### Artefact (the intent)
+### Artefact
+
+An artefact is a document of the chain, such as the intent.
 
 | Field | Value |
 |---|---|
 | `version` | the version, as above |
 | `status` | `draft`, `approved` or `superseded` |
-| `project` | the project slug |
-| `audience` | who the document is for; the template gives `principal + Claude only` |
+| `project` | the project's slug |
+| `audience` | who reads it (the intent's template gives `principal + Claude only`) |
 
-### Artefact below the intent (a BRD, the user stories)
+A BRD and the user stories add `parent:`, the document they derive
+from.
 
-A BRD and the user stories carry the fields of the intent, without `audience`, and add one.
-
-| Field | Value |
+| Document | Values of `parent` |
 |---|---|
-| `version` | the version, as above |
-| `status` | `draft`, `approved` or `superseded` |
-| `project` | the project slug |
-| `parent` | the document it is made from |
+| BRD | `20-assignment.md` or `10-intent.md` |
+| User stories | `30-brd.md` or `10-intent.md` (a small change, on the principal's word) |
 
-The `parent` values the templates give:
-
-- a BRD: `20-assignment.md` or `10-intent.md`
-- the user stories: `30-brd.md` or `10-intent.md` (a small change, on the principal's word)
-
-A BRD or user stories made from a source are a work product, not an artefact of the chain.
+A BRD or user stories made from a source are a work product, not an
+artefact of the chain.
 
 ### Brief
 
 | Field | Value |
 |---|---|
-| `project` | the project slug |
-| `title` | a working title |
+| `project` | the project's slug |
+| `title` | the working title |
 | `author` | the principal's handle |
 | `version` | the version, as above |
 | `status` | `draft`, `approved` or `superseded` |
 
-Only the header is fixed. The text below it is free-form.
+Only this header of a brief is fixed. The text below it is free-form.
 
 ### Recipe
 
 | Field | Value |
 |---|---|
-| `project` | the project slug |
+| `project` | the project's slug |
 | `purpose` | what the render is for |
 | `audience` | who the render is for |
-| `version` | `0.x`, an integer only on the principal's word |
-| `output` | optional; a path that replaces the default `renders/<recipe>.md`, read relative to the project root, a leading slash meaning the engine root |
-| `languages` | optional; a list such as `cs, en`, the first primary, the rest its translations, one render per language as `renders/<recipe>.<lang>.md` |
-
-A recipe has no `status`.
+| `version` | the version, as above; no `status` field |
+| `output` | optional; a path that overrides the default `renders/<recipe>.md`, read relative to the project root, a leading slash meaning the engine root |
+| `languages` | optional; the first language is primary, the rest are its translations, one render per language as `renders/<recipe>.<lang>.md` |
 
 ### Work specification
 
@@ -101,32 +106,37 @@ A recipe has no `status`.
 |---|---|
 | `version` | the version, as above |
 | `status` | `draft`, `approved` or `superseded` |
-| `project` | the project slug |
-| `file` | the file this specification makes, `work/<name>.<ext>`, named by the work alone |
+| `project` | the project's slug |
+| `file` | the file this specification makes, as `work/<name>.<ext>`, named by the work alone |
 
 ### Resource index
 
 | Field | Value |
 |---|---|
-| `project` | the project slug |
+| `project` | the project's slug |
 | `directory` | `sources` or `research` |
 
-An index carries no `version` and no `status`. A research note and a research plan also carry no version; their front-matter is on [Research note and bundle](research-bundle.md).
+An index carries no `version` and no `status`. The front-matter of a
+research note and of a research plan, which carry no version either,
+is on [Research note and bundle](research-bundle.md).
 
-## Companion and archive files
+## The companion and the archive
 
-Every versioned document keeps its history in an append-only companion beside it, never in its body. The companion is part of its document and has no ledger row.
+Every versioned document keeps its history in an append-only companion
+beside it, never in its body. The companion of a document is part of
+it and has no ledger row.
 
-| File | What it is |
+| File | Name |
 |---|---|
-| `<file>.history.md` | the history companion of a versioned document |
-| `<file>.history.archive.md` | a history table written before the log, moved there as it stands, immutable |
-| `recipes/<recipe>.history.md` | the history of a recipe |
-| `work/<name>.spec.history.md` | the history of a work specification |
+| Companion | `<file>.history.md` |
+| Archive | `<file>.history.archive.md` |
 
-The shape of a record is on [History companion](history-companion.md). A Version History table in the body of a document, or in its companion, is a finding of the check, settled by moving it to the archive file on the principal's word, project by project.
+The archive holds a history table written before the log. It is
+immutable. The shape of a record is on
+[History companion](history-companion.md).
 
-The reasons for these rules are on [Versioning and history](../about/versioning-and-history.md).
+Examples of companion names: `30-brd.history.md` for a BRD,
+`35-user-stories.history.md` for user stories.
 
 ## See also
 
@@ -135,4 +145,4 @@ The reasons for these rules are on [Versioning and history](../about/versioning-
 - [Research note and bundle](research-bundle.md): the front-matter of a research note and plan, which carry no version.
 - [Glossary](glossary.md): every term of the forge in one line.
 
-Generated on 2026-11-08 for version 6.21 from the files the front-matter names; never edited by hand.
+Generated on 2026-11-08 for version 7.0 from the files the front-matter names; never edited by hand.

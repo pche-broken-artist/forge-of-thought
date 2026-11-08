@@ -1,8 +1,8 @@
 ---
 generated: 2026-11-08
-version: 6.21
+version: 7.0
 made: derived
-inputs-hash: 663f02b6c6674dc6
+inputs-hash: 0134e6a01e2328f1
 inputs:
   - CLAUDE.md#Persistence (git)
   - CLAUDE.md#Repository layout
@@ -22,209 +22,171 @@ inputs:
 
 # Add a script
 
-A script is a Python program in `scripts/` that does one job of the
-forge for the engine or for a project, such as saving a repository,
-making the ledger or converting a render. This page is for the
-extender who writes a new script, or changes one: it says how the
-script is written so that it runs on every platform, how it carries
-its own help, how it is tested with its change and where its facts
-live so that nothing is said twice. The scripts that exist are
-listed in [Scripts](../reference/scripts.md).
+A script of the forge is a Python program in `scripts/`, run as
+`python scripts/<name>.py`, that does one mechanical job for the
+engine or for a project: the scripts are the one way a write of git
+happens, and they make the ledger (the project's state, built from
+its documents at read time), the reports, the conversions and the
+documentation's state. This page is for the extender who wants to
+add one. It says how a new script is written so that it runs on
+every platform the forge runs on, carries its own help in its
+docstring, is tested with its change and is the one owner of the
+facts about itself.
 
 ## Before you start
 
-Read [Make a change to the forge](how-a-change-is-made.md) first: a
-new script is a change of the forge, and it is proved, recorded and
-released as any other change. The scripts are the only
-platform-bound layer of the forge, and they are the only door to a
-write of git; why that is so is [Persistence in
-git](../about/persistence-in-git.md). Not everything needs a script:
-a new engine for a research run, for example, is a row of the one
-engine script and needs no script of its own, as [Add an
-engine](add-an-engine.md) says.
+A new script is a change of the forge like any other: it is proved,
+recorded and released as [Make a change to the
+forge](how-a-change-is-made.md) says. Read that page first; this one
+adds only what is particular to a script.
+
+Know the scripts that exist before you add one. They are listed on
+[Scripts](../reference/scripts.md), each with the job it does. Why the
+scripts, and only the scripts, write into git is said on [Persistence
+in git](../about/persistence-in-git.md). Not every addition needs a
+script: a new engine for the research, for instance, is a row of the
+engine script and nothing of its own, as [Add an
+engine](add-an-engine.md) shows. The words of the forge used here are
+in the [Glossary](../reference/glossary.md).
 
 ## The files
 
-- `scripts/<name>.py`: the script, with its help in its module
-  docstring.
-- `scripts/forge_repos.py`, `scripts/forge_tools.py`,
-  `scripts/forge_docs.py`, `scripts/docs_map.py`,
-  `scripts/forge_check.py`: the five modules the scripts share, one
-  of which the new script imports where it needs what the module
-  holds.
+- `scripts/<name>.py`: the script. A script that is run carries a
+  hyphen in its name, as `forge-status.py` does. A module that other
+  scripts import carries an underscore, as `forge_repos.py` does. A
+  hyphen is not a name Python imports, so a script is loaded in a
+  test through the shared `load_script` and a module by its name.
+- `scripts/<module>.py`: the shared module, where the new script
+  shares something with others. What several scripts share lives in
+  one module beside them, imported by path, and never twice. There
+  are five today:
+  - `forge_repos.py`: the engine root, the check that git is there,
+    the list of repositories a bare or a slug form visits, running
+    git, the state of a repository against its origin, and the one
+    resolver of a project by its slug or its path; for the git
+    scripts, and for every script that takes a project.
+  - `forge_tools.py`: a tool on PATH, resolving paths, the headless
+    Claude Code run; for the conversions.
+  - `forge_docs.py`: the front-matter, the records, the ledger
+    tables, the index entries and the threads as the scripts read
+    them; for `forge-ledger`, `forge-migrate` and `forge-history`.
+  - `docs_map.py`: the reader of the documentation map; for the
+    documentation scripts.
+  - `forge_check.py`: a finding and its report, the keys and
+    comments a template owns; for `forge-check`.
 - `tests/test_<concern>.py`: the test of the script, one file per
-  concern.
-- `tests/conftest.py`: what the tests share; read, not changed, unless
-  the new test needs something every test will need.
-- `pytest.ini`: how pytest runs the tests; read, not changed.
-- `CLAUDE.md`, the layout comment under Repository layout: the one
-  line that names the script and says what it does.
-- `tmp/`: the engine's working folder, where a script's working files
-  go.
+  concern. The tests are run from the engine root by `/test`; what
+  they are and what the fixture is stands on [The
+  tests](../about/the-tests.md).
+- `tests/conftest.py`: what the tests share. A new test uses it; it
+  does not restate it.
+- `CLAUDE.md`, the section Repository layout: the comment on the
+  `scripts/` line names every script with one clause on what it does.
+  The new script gets its clause there.
+- `pytest.ini`: nothing to change. It already names `tests/` as the
+  test path and puts `scripts/` on the import path, so the shared
+  modules import by name in a test.
 
 ## Steps
 
-### 1. Write the script to the portability rule
+1. Write the script for Python 3.8 or newer, to be run as
+   `python scripts/<name>.py`. `python` on PATH is the one
+   prerequisite of the scripts; a system that has only `python3`
+   gives it that name.
 
-The script is Python 3.8 or newer and is run as
-`python scripts/<name>.py`. `python` on PATH is the one prerequisite
-of the scripts. A system that has only `python3` gives it that name.
-The scripts carry no URL and no identity: the remote and the commit
-identity are the user's own git configuration, and the forge sets
-none.
+2. Use nothing Windows-only. The rules:
+   - paths are composed with `pathlib`, never as strings;
+   - processes run through `subprocess` with an argument list, never
+     through a shell;
+   - an external tool (`git`, `markitdown`, `pandoc`, `claude`, `gh`)
+     is resolved from PATH and never installed by the script;
+   - colour is printed only on a terminal, and not where `NO_COLOR`
+     is set; the shared module's `say` does this for you;
+   - the examples in the help are free of platform-specific paths
+     and invocations;
+   - the script carries no URL and no identity: git configuration is
+     the user's, and the forge sets none.
 
-The script uses nothing Windows-only:
+   The scripts are written to run unchanged on Linux and macOS. The
+   tests run in CI on Linux and Windows at every push. Nothing has
+   run on macOS, so for macOS the writing rule is all there is, and a
+   new script is written to it. The conversions are tested for their
+   failure without the tool alone, and the per-prompt hook is a
+   writing rule until a run says otherwise.
 
-- paths are composed with `pathlib`;
-- processes run through `subprocess` with an argument list, never a
-  shell;
-- an external tool (`git`, `markitdown`, `pandoc`, `claude`) is
-  resolved from PATH and never installed by the script;
-- colour is printed only on a terminal; the `say` function of
-  `forge_repos.py` does that for you and honours `NO_COLOR`;
-- the usage examples in the help are free of platform-specific paths
-  and invocations.
+3. Write the help in the module docstring, at the top of the file.
+   The docstring has four parts, in this order:
+   - a synopsis: the command line, with every argument and option;
+   - what it does: what the script reads, what it writes, what it
+     prints and what it refuses;
+   - what it needs: the Python, the tools on PATH, the modules
+     beside it;
+   - examples: lines that can be typed as they stand.
 
-The scripts are written to run unchanged on Linux and macOS. The
-tests run in CI on Linux and Windows at every push. Nothing has run
-on macOS. So for macOS the rule is a writing rule alone, and a new
-script is written to it rather than tried.
+   The docstring is the one owner of these facts. A command, a skill
+   or a page that needs them cites the header and does not restate
+   it; `CLAUDE.md` says of the scripts that each is described in
+   full by its own help header. `scripts/forge-status.py` is the
+   smallest model to copy from.
 
-Why: the forge runs beyond Windows, and the scripts are the one
-layer where a platform could creep in. `python` is the one command
-name because Windows has only that one, and a Unix system gives it
-by an alias or a package.
+4. Where the script takes a project, take it by its slug or by the
+   path of its directory, through the one resolver,
+   `forge_repos.project_path`. A bare word is a slug and means
+   `projects/<slug>`. Anything with a separator, or an absolute path,
+   is the directory itself, taken as given. The project's name is the
+   `project` field of its project file, read through
+   `forge_repos.project_file`, and the directory's name where there
+   is none. The word `forge` stays the forge's own project by the
+   name. How a report or a message names the target is
+   `forge_repos.project_label`. Every script goes through this
+   resolver and none has one of its own. The reason: a copy of the
+   fixture in a temporary directory is reached by a path and by
+   nothing else, and a path is an argument like any other, visible
+   in the command.
 
-### 2. Put the help in the module docstring
+5. Put what the script shares with others in the module beside it,
+   never in two scripts. Where the shared thing fits one of the five
+   modules above, it goes there. Where it fits none, a new module is
+   a change of the layout comment too.
 
-Each script carries its help in its module docstring, at the top of
-the file. The docstring says:
+6. Send the script's working files to the engine's working folder,
+   `tmp/`, never to the system's temporary directory. The folder is
+   in git with its own README and `.gitignore`, so that it exists on
+   every clone; its contents never are. Nothing in `tmp/` is a source
+   of truth: no check, no ledger and no history reads from it. A run
+   is kept for inspection and deleted by hand, never by a script. The
+   reason for one folder in the engine over the system's temporary
+   directory: a run is traceable on the machine, and a profile's deny
+   rules have one path to name. The price is a folder to empty by
+   hand.
 
-- the synopsis: the command line as it is typed, with its options;
-- what it does, step by step where there are steps, and what each
-  option changes;
-- what it needs: the Python, the tools on PATH, the shared module
-  beside it;
-- where its output lands;
-- examples: one line per way of calling it, each typed as it stands.
+7. Write the test with the script, in `tests/test_<concern>.py`, one
+   file per concern. A script is changed with its test, and a pull
+   request on a script carries it. The tests use what
+   `tests/conftest.py` shares:
+   - `load_script`: a script with a hyphen in its name loaded as a
+     module without running its main;
+   - `run_script`: a script run as the forge runs it,
+     `python scripts/<name>.py …` from the engine root, with an
+     environment;
+   - `project`: a copy of the fixture in a temporary directory;
+   - `git_env`: git with an empty global configuration and no system
+     one, so that nothing of the machine the test runs on changes
+     the result;
+   - `repo` and `other_clone`: the copy as a repository with a bare
+     origin beside it, and a second clone.
 
-The docstring owns those facts. `CLAUDE.md` says of the scripts that
-each is described in full by its own help header, and a command or a
-skill that needs the script cites the header instead of repeating
-it. So a fact about the script, such as what it needs installed or
-where its file lands, is written in the docstring once and nowhere
-else. `scripts/forge-status.py` is the smallest model: a synopsis,
-what it does, what it needs and examples, in that order.
+   A script that calls an external tool is tested for its failure
+   without the tool: the test runs it on an empty PATH and expects
+   the message that names the tool and how it is installed. A test
+   never runs on a live repository: a copy of the fixture, as a
+   throwaway repository where the test needs git, and nothing else.
+   Enough to catch what a change of the script breaks, never a suite
+   for its own sake.
 
-### 3. Take a project by its slug or by its path
-
-A script that takes a project takes it by its slug or by the path of
-its directory, through the one resolver of the shared module,
-`project_path` of `forge_repos.py`. A bare word is a slug and means
-`projects/<slug>`. Anything with a separator or an absolute path is
-the directory itself, taken as given. The project's name is the
-`project` field of its project file, read by `project_file` of the
-same module; the directory's name stands where the file has none.
-`forge` stays the engine's own project, by the name. The commands of
-the forge call by slug as before; a report names the target the way
-`project_label` gives it, `projects/<slug>` for a slug and the path
-as given for a path.
-
-Why: a copy of the fixture in a temporary directory is reached by a
-path and by nothing else, and a path is an argument like any other,
-visible in the command. Every script goes through the one resolver
-so that the rule lives in one place.
-
-### 4. Share through a module, never by copying
-
-What several scripts share lives in one module beside them, imported
-by path, and never twice. There are five today:
-
-- `forge_repos.py`: the engine root, the git check, the list of
-  repositories a bare or a slug form visits, running git, the state
-  against the origin, the resolver of a project; for the git scripts.
-- `forge_tools.py`: a tool on PATH, resolving paths, the headless
-  Claude Code run; for the conversions.
-- `docs_map.py`: the reader of the documentation map; for the three
-  documentation scripts.
-- `forge_docs.py`: the front-matter, the records, the ledger tables,
-  the index entries and the threads as the scripts read them; for
-  `forge-ledger`, `forge-migrate` and `forge-history`.
-- `forge_check.py`: a finding and its report, the keys and comments a
-  template owns; for `forge-check`.
-
-A module is not a command: it has no synopsis and is never run. Its
-docstring says what it holds and which scripts it serves;
-`scripts/forge_repos.py` is the model. Where the new script needs
-what a module already holds, it imports the module. Where it needs
-something two scripts will need, that goes into the module that
-serves them, not into both scripts.
-
-### 5. Put working files in `tmp/`
-
-A script's working files go to the engine's working folder, `tmp/`
-at the engine root, never to the system's temporary directory. The
-script makes the subfolder it needs there. The folder is in git with
-its own README and `.gitignore`, so that it exists on every clone;
-its contents never are. Nothing in it is a source of truth: no
-check, no ledger (the project's state report, made at read time) and
-no history reads from it. A run is kept for inspection and deleted by
-hand, never by a script.
-
-Why: one folder in the engine makes a run traceable on the machine
-and gives a profile's deny rules one path to name. The price is a
-folder to empty by hand.
-
-### 6. Name the script in the layout comment
-
-Add the script to the layout comment of `CLAUDE.md`, under
-Repository layout, in the `scripts/` entry: its name and what it does
-in a clause, as the others stand there. A shared module is named in
-the same entry among the modules the scripts share. The engine check
-verifies that comment against the disk (Prove it, below).
-
-### 7. Write the test with the script
-
-A script is changed with its test, and a new script comes with one.
-The tests are the engine's, in `tests/` at the engine root, beside
-the scripts they test, run by pytest from the engine root. The test
-is in proportion: enough to catch what a change of the script
-breaks, never a suite for its own sake, and no coverage figure as a
-target.
-
-The test uses what the tests share, the fixtures of
-`tests/conftest.py`:
-
-- `load_script`: a script with a hyphen in its name loaded as a
-  module without running its main;
-- `run_script`: a script run as the forge runs it,
-  `python scripts/<name>.py …` from the engine root, with an
-  environment;
-- `project`: a copy of the fixture project;
-- `git_env`: git with an empty global configuration and no system
-  one, and no terminal prompt;
-- `repo` and `other_clone`: the copy as a repository with a bare
-  origin beside it, and a second clone.
-
-`pytest.ini` puts `scripts/` on the import path, so a shared module
-imports by its name; a script with a hyphen in its name cannot, and
-is loaded through `load_script`. The fixture is a synthetic thought
-project under `tests/fixture`, never a copy of a real project; a test
-works on a copy of it in a temporary directory and never changes the
-fixture itself. What the tests cover and what the fixture is, is [The
-tests](../about/the-tests.md).
-
-Two rules hold for every test:
-
-- a script that calls an external tool is tested for its failure
-  without the tool, on an empty PATH, and the test checks that the
-  script names the tool and how it is installed;
-- a test never runs on a live repository, neither the engine's nor a
-  project's; where it needs git, it takes `repo`, the throwaway
-  repository made from the copy.
-
-Why: a pull request on a script carries its test, which is possible
-in one repository only, and CI runs where the code is.
+8. Name the script in the layout comment of `CLAUDE.md`, on the
+   `scripts/` line of Repository layout, with one clause on what it
+   does, in the place its kind has there.
 
 ## Prove it
 
@@ -234,83 +196,82 @@ Run the tests from the engine root:
 /test
 ```
 
-`/test` runs `python -m pytest -q` over `tests/` and reports the sum
-as pytest prints it. A red test is reported word for word, the
-failing assertion included; nothing is fixed on its word, and the fix
-is a round of its own, the script changed with its test. To run the
-one file of the new test:
+The sum comes back as pytest prints it. A red test is reported word
+for word, the failing assertion included, and nothing is fixed on
+that command's word: the fix is a round of its own, the script changed
+with its test. `/test -k <word>` runs the tests whose name carries the
+word, `/test tests/test_<concern>.py` one file and `/test -x` stops
+at the first red test. Where pytest is not installed, the command
+says so and names the one install a contributor needs beyond
+`python`: `python -m pip install pytest`. How the command runs in
+full is on [Run the tests](../use/run-the-tests.md).
 
-```
-/test tests/test_<concern>.py
-```
-
-Where pytest is not installed, `/test` says that the tests did not
-run and names the one install a contributor needs beyond `python`:
-
-```
-python -m pip install pytest
-```
-
-A user of the engine never runs the tests and installs nothing for
-them. How the command is used in full is [Run the
-tests](../use/run-the-tests.md).
-
-Then run the engine check:
+Then run the check of the engine:
 
 ```
 /check engine
 ```
 
 Among what it verifies: every file in `scripts/` is described in the
-layout comment of `CLAUDE.md`, and nothing described there is
-missing on disk. A script left out of the comment, or a line in the
-comment for a script that does not exist, is a finding.
-
-The same suite runs in CI at every push and pull request of the
-engine, on Linux and Windows, Python 3.8 and the newest.
+layout comment of `CLAUDE.md`, and nothing described there is missing
+on disk. A script without its clause, or a clause without its script,
+is a finding.
 
 ## Record and release
 
-The script and its test are recorded and released as any change of
-the forge; the way is [Make a change to the
-forge](how-a-change-is-made.md). The release of the engine runs the
-tests as its first step, before its checks, and `/save` never runs
-them.
+Record the change and release it as [Make a change to the
+forge](how-a-change-is-made.md) says. A release of the engine runs
+`/test` as its first step, before any check, and a red test stops
+it. `/save` never runs the tests. The same suite runs in CI at every
+push and pull request, on Linux and Windows, on Python 3.8 and the
+newest.
 
 ## A worked example
 
-Suppose a script `forge-example.py` that lists the open threads of a
-project.
+You add `scripts/forge-example.py`, a script that reads one project
+and prints one line about it. Its docstring, at the top of the file,
+has the four parts:
 
-Its docstring opens with its name and one line of what it does: the
-open threads of a project, one line each. The synopsis is
-`python scripts/forge-example.py [slug | path]`. "What it does" says
-that it reads the project's `threads/` directory and prints each open
-thread with its ID and title, and that it changes nothing. "What it
-needs" says Python 3.8 or newer and `forge_repos.py` beside it, and
-nothing on PATH, since it calls no tool. "Where the output lands"
-says the terminal, and nothing is written. The examples are two
-lines: the script with a placeholder slug such as `my-project`, and
-the script with the path of a project's directory, a relative path
-such as `../copies/my-project`, which reads the same on every
-platform.
+```
+forge-example.py - one line on the state of a project.
 
-The script resolves its argument through `project_path` of
-`forge_repos.py`, names the project through `project_file`, and
-prints through `say`, so that colour appears on a terminal only.
-It is named in the layout comment of `CLAUDE.md` in one clause:
-`forge-example` (the open threads of a project).
+SYNOPSIS
+    python scripts/forge-example.py <slug | path>
 
-Its test is `tests/test_forge_example.py`. It takes the `project`
-fixture, a copy of the synthetic project in a temporary directory,
-and runs the script through `run_script` with the path of the copy,
-which is why the script had to take a path. It checks that the open
-thread of the fixture is in the output and the closed one is not.
-Nothing of the engine or of a project is touched. Since the script
-calls no external tool, no failure-without-the-tool test is needed;
-a script that called `pandoc` would have one more test, on an empty
-PATH, checking that the message names `pandoc` and how to install
-it.
+WHAT IT DOES
+    Read-only, changes nothing. Reads the project file of the project
+    named and prints its name, its kind and its language on one line.
+    Refuses a directory that is not a project and says so.
+
+WHAT IT NEEDS
+    Python 3.8 or newer. `forge_repos.py` beside it.
+
+EXAMPLES
+    python scripts/forge-example.py my-project        # a project by its slug
+    python scripts/forge-example.py ../fixture-copy   # a project by its path
+```
+
+The script takes the project through `forge_repos.project_path`, so
+that `my-project` means `projects/my-project` and `../fixture-copy`
+means that directory as given. It writes no file; if it did, the
+file would go to `tmp/`.
+
+Its test is `tests/test_forge_example.py`, one file for the one
+concern. In words: the test takes `project`, a copy of the fixture in
+a temporary directory, and runs the script on it through
+`run_script`, passing the copy by its path, as the forge would run
+it from the engine root. It asserts that the line printed carries the
+name, the kind and the language the fixture's project file gives. A
+second case runs the script on a directory that is no project and
+asserts the refusal. Had the script called an external tool, a third
+case would run it on an empty PATH and assert the failure that names
+the tool and how it is installed. No case touches a repository of the
+forge or a project under `projects/`.
+
+The last change is one clause on the `scripts/` line of the layout
+comment in `CLAUDE.md`: `forge-example (one line on a project)`.
+Then `/test` and `/check engine`, and the change is recorded and
+released as any other.
 
 ## See also
 
@@ -327,5 +288,5 @@ it.
 - [Glossary](../reference/glossary.md): every term of the forge in
   one line.
 
-Generated on 2026-11-08 for version 6.21 from the files the
+Generated on 2026-11-08 for version 7.0 from the files the
 front-matter names; never edited by hand.
