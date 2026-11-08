@@ -116,8 +116,11 @@ the prefixes and terms actually used; empty sections and all
 template comments are deleted.
 
 **Requirement style.**
-- Use **shall** / **shall not**. Do not use would, could, should,
-  might, may, or MoSCoW wording.
+- An item is an obligation in the indicative. In English **shall** /
+  **shall not**, strictly: would, could, should, might, may and MoSCoW
+  wording are not used. In another language the language's own verb
+  of obligation, never a conditional, a permission or a wish; the
+  forge names no word of another language (POS.0250).
 - **No priority column and no priority tags.** Everything in an
   assignment is essential by default; an exception is marked by a
   note reading *optional* on that item.

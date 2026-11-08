@@ -1,5 +1,5 @@
 ---
-version: 6.19
+version: 6.20
 status: draft
 project: forge
 audience: principal + Claude only
@@ -81,7 +81,8 @@ solution is the kind of content, never the amount.
   Claude, the reviewers and the checks and never handed to the
   recipients, and one operating language is what lets them read every
   project the same way. English is the notation throughout — ID
-  prefixes, `shall`, status words, front-matter keys. The single
+  prefixes, status words, front-matter keys; the verb of a requirement
+  follows the language of the artefact (POS.0250). The single
   exception among the artefacts is the briefs (`00-brief*.md`), kept in
   whatever language they are written in; a render may be in any language
   its recipe declares, a translation being a render. The boundary
@@ -1167,12 +1168,20 @@ position that already stands elsewhere.
 - **POS.0240** Every assignment carries a Terms section, so it can be
   forwarded without oral tradition. Defined Terms are capitalised in
   item text.
-- **POS.0250** Requirements are written as shall / shall not, in full
-  correct sentences, one idea per item, each written once.
-  Would, could, should, might, may and MoSCoW wording are not used.
-  Reason: shall is testable and binds; the softer verbs leave the
-  recipient to guess what is required, and MoSCoW puts a priority
-  where completeness belongs (given 2026-10-09).
+- **POS.0250** Requirements are written as an obligation in the
+  indicative, in full correct sentences, one idea per item, each
+  written once: never a conditional, a permission or a wish, and never
+  MoSCoW wording. In English the obligation is shall / shall not,
+  strictly, since that is the group's standard for a BRD; would,
+  could, should, might and may are not used. An artefact in another
+  language uses its own verb of obligation under the same rule of
+  kind; the forge names no word of any other language. Reason: an
+  obligation in the indicative is testable and binds; the softer verbs
+  leave the recipient to guess what is required, and MoSCoW puts a
+  priority where completeness belongs (given 2026-10-09). The English
+  word held in every language until 2026-11-08, when a Czech BRD read
+  "CMS shall editorovi umožnit…" to its stakeholders (THR.0810,
+  THR.0540).
 - **POS.0260** No priorities and no priority column. Everything in an
   assignment is essential; an exception carries a note reading
   *optional*.
@@ -3080,6 +3089,11 @@ worked out by Claude; what Claude has worked out is never a FCT
   does not belong in the public engine; and the git tests change what
   they run on, so a copy in a temporary directory is needed wherever
   the fixture lies (POS.1940, DEC.0410).
+- **REJ.0540** `shall` kept in an artefact of every language and turned
+  into the language's verb by a render. Dropped 2026-11-08: two
+  wordings of one requirement, a translation at every render, and the
+  document the stakeholders approve would not be the one the chain
+  holds (POS.0250, THR.0810).
 
 ## Candidate structure for the layer below
 

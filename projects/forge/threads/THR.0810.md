@@ -2,7 +2,7 @@
 id: THR.0810
 concerns: intent, brd, assignment
 origin: the principal
-status: open
+status: closed
 ---
 
 The notation `shall` / `shall not` sits awkwardly inside the
@@ -22,6 +22,14 @@ offered once: changing the rule is cheaper than a translation at
 every render and two wordings of one requirement; not verified how
 many places depend on the word. To take after the trial, with the
 position of the user-stories layer. Opened 2026-11-02.
+
+Closed 2026-11-08: the rule is one of kind, an obligation in the
+indicative, never a conditional, a permission or a wish, never MoSCoW
+(POS.0250). In English strictly shall / shall not, the group's
+standard; an artefact in another language uses its own verb of
+obligation and the forge names no word of another language. The render
+that would translate `shall` is REJ.0540. THR.0540, the same question
+raised 2026-10-02, closed with it (intent 6.20).
 
 <!-- A thread (POS.1680), one file per thread in threads/; the header
 is its state: what it concerns, where it came from, whether it is

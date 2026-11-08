@@ -60,7 +60,7 @@ forge is what they are told.
    when absent. Records, state, research and recipes are always
    English: they are read by Claude, the reviewers and the checks,
    never handed to the recipients. English is the notation throughout
-   (ID prefixes, `shall`, status words, front-matter keys). The forge
+   (ID prefixes, status words, front-matter keys). The forge
    dictates only that one output language per project, and the
    conversation language is per-instance configuration that never
    appears in outward-facing renders (the README among them).
@@ -754,8 +754,9 @@ lifecycle. Depth max two levels.
 | DEC | decision, incl. rejected findings and challenges | decisions.md |
 
 ## Requirement style
-The items of an assignment are written with **shall** / **shall not**
-and carry no priorities; the rule set is its definition's
+The items of an assignment are an obligation in the indicative,
+**shall** / **shall not** in English and never a conditional in any
+language, and carry no priorities; the rule set is its definition's
 (`.claude/skills/forge/states/assignment.md`, Requirement style).
 The items of a BRD follow the same style made stricter; those rules
 are its definition's (`.claude/skills/forge/states/brd.md`,

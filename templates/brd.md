@@ -84,14 +84,13 @@ The parent of a use case is its Carries line. -->
 <!-- BR.NNNN. Numbering: CLAUDE.md, ID scheme; wording: the
 Requirement style of `.claude/skills/forge/states/brd.md`. Groups
 by capability or process, so that every stakeholder finds theirs
-and nothing is twice; a TBC under its group where a rule is not
-known. Every item ends with its parent: (REQ.NNNN) or (POS.NNNN).
-A TBC whose owner is not yet named carries `owner: unassigned`. -->
+and nothing is twice; a rule not known is a BR or an NFR citing
+its TBC of Open questions in brackets, defined there once with its
+owner. Every item ends with its parent: (REQ.NNNN) or (POS.NNNN). -->
 
 ### <Group>
 - **BR.0010** … (REQ.NNNN)
 - **BR.0020** … (REQ.NNNN)
-- **TBC.0010** (owner: <role> | unassigned) …
 
 ### <Group>
 - **BR.0100** … (REQ.NNNN)
@@ -118,7 +117,7 @@ the reason in the Touched areas or here. -->
 - **NFR.0010** Reliability (service hours, availability, fault
   tolerance, recovery point, recovery time): The <thing> shall meet
   the service hours, availability and recovery the stakeholders set
-  (TBC.NNNN, owner: <role>). (category: reliability)
+  (TBC.NNNN). (category: reliability)
 - **NFR.0020** Performance (response, throughput, capacity under
   peak, scalability): …
 - **NFR.0030** Security and privacy (authentication, authorisation,

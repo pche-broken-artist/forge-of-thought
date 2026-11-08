@@ -209,6 +209,9 @@ with these made stricter for the BRD:
 - an item may name the role that owns it;
 - no value that no stakeholder gave: a category without a value is
   a TBC with an owner, never a figure from the skeleton;
+- a TBC is defined once, in Open questions, with its owner and
+  whether it blocks estimation; a BR or an NFR whose rule is not
+  known cites it in brackets, as it cites its parent;
 - every BR and UC cites its parent (`REQ.NNNN` or `POS.NNNN`; in a
   work product from a source, the path and the place, and the place
   is a turn of the principal's side: what a vendor or any other
@@ -218,8 +221,9 @@ with these made stricter for the BRD:
   otherwise its category of the template, since the qualities are
   asked of every ask whether the parent named them or not; an item
   with neither is a finding of the check;
-- `shall` / `shall not` is the wording of a BR and an NFR; the
-  steps of a UC are written in the active voice, present tense
+- the obligation of the assignment's style is the wording of a BR
+  and an NFR, `shall` / `shall not` in English; the steps of a UC
+  are written in the active voice, present tense
   ("the Customer submits the order"), as a scenario and not as a rule;
 - a type is never told by a number: the prefix says what an item
   is, the group says where it belongs.
