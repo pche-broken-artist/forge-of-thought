@@ -374,7 +374,7 @@ class Light:
                 continue
             m = re.search(r"^## Inputs\s*\n(.*?)(?=^## |\Z)", sbody, re.S | re.M)
             allowed = fc.expand_ranges(m.group(1)) if m else set()
-            allowed |= {x.group(1) for x in re.finditer(r"^- \*\*([A-Z]{3}\.\d{4,5})\*\*", sbody, re.M)}
+            allowed |= {x.group(1) for x in re.finditer(r"^- \*\*([A-Z]{2,3}\.\d{4,5})\*\*", sbody, re.M)}
             wtext = fd.read(wf)
             cited = {}
             for n, line in enumerate(wtext.split("\n"), 1):
@@ -461,7 +461,7 @@ class Light:
         dec = self.proj / "decisions.md"
         if dec.exists():
             for n, line in enumerate(fd.read(dec).split("\n"), 1):
-                m = re.match(r"^- \*\*Verdict:\*\*\s*([A-Z]{3}\.\d{4,5})\s+(.*?)\s*$", line)
+                m = re.match(r"^- \*\*Verdict:\*\*\s*([A-Z]{2,3}\.\d{4,5})\s+(.*?)\s*$", line)
                 if m and not VERDICT_WORDS.match(m.group(2)):
                     self.add("low", f"A Verdict on {m.group(1)} carries a word the skeleton does not know: `{m.group(2)}`",
                              self.where(dec, n), "`templates/decisions.md` (`rejected | parked until <what> | obsolete`); `templates/ledger.md`, Findings",

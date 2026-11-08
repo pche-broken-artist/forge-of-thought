@@ -249,3 +249,11 @@ to its own 00-INDEX.md. -->
 - **Form:** text
 - **Role:** a counter-proposal from another model on the same topic as the four research notes of 2026-10-24; inspiration for the round on `/research`, the multi-model execution the part the principal wants to take over; to be weighed against the notes, never taken as given
 - **Use for:** the round on the plan step of `/research` and its position in the intent; the design of a research run on another engine (THR.0740, THR.0290); comparing an outside proposal's architecture with the forge's own rules
+
+### `example-user-stories-v2.md`
+- **What:** A short sample of user stories in Markdown without a table, its texts placeholders naming what stands in their place, no content: the heading "User stories", a section heading and an italic purpose line, then each story as a level-3 heading `US.NNNN: <name>`, the free sentence on its own line, acceptance criteria as bullets, and each labelled part (Edge cases, References) in bold on a line of its own with its bullets below. One story; parts it does not have (Risks, Note, Questions) left out, to be kept where a story has them.
+- **Origin:** The principal, written by hand after a paste of the table export into Jira and Confluence came out garbled; placed in sources/ on 2026-11-04
+- **Date:** 2026-11-04, from the file
+- **Form:** text
+- **Role:** the pattern of the export of user stories without a table, because a Markdown table cannot break lines in a cell: a heading per story, the sentence, criteria and each labelled part on lines of their own; its texts placeholders, no content
+- **Use for:** the template of the render recipe of the user-stories layer; checking that a render pastes into Jira and Confluence with the story's parts on lines of their own

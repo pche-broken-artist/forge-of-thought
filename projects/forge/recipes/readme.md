@@ -2,7 +2,7 @@
 project: forge
 purpose: readme
 audience: humans arriving at the repository
-version: 0.78
+version: 0.79
 output: /README.md
 ---
 
@@ -210,7 +210,7 @@ shape only. -->
 
   ```mermaid
   flowchart LR
-      B["00-brief"] --> I["10-intent"] --> A["20-assignment"] --> BRD["30-brd"] --> SD["40-solution-design"]
+      B["00-brief"] --> I["10-intent"] --> A["20-assignment"] --> BRD["30-brd"] --> US["35-user-stories"] --> SD["40-solution-design"]
       WP["any document (/work)"] --> RT(["renders: a translation, a summary, a video …"])
       I --> RI(["renders: a pitch, a deck, a summary, a video, a README …"])
       A --> RA(["renders: a mail, a handover deck, a video …"])
@@ -221,7 +221,7 @@ shape only. -->
       classDef built fill:#1f6feb,stroke:#1158c7,color:#ffffff
       classDef future fill:#c6dbfa,stroke:#1f6feb,color:#24292f
       classDef render fill:#2da44e,stroke:#1a7f37,color:#ffffff
-      class B,I,A,BRD,SD,WP built
+      class B,I,A,BRD,US,SD,WP built
       class RFP,ST,IMP future
       class RI,RA,RT render
   ```

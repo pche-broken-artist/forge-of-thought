@@ -15,7 +15,7 @@ what) triples, so that a script degrades aloud (POS.1600).
 import re
 from pathlib import Path
 
-ID_RE = re.compile(r"\b[A-Z]{3}\.\d{4,5}\b")  # four digits, a fifth beyond 9999 (POS.0220)
+ID_RE = re.compile(r"\b[A-Z]{2,3}\.\d{4,5}\b")  # four digits, a fifth beyond 9999 (POS.0220)
 RECORD_RE = re.compile(
     r"^- (\d{4}-\d{2}-\d{2}) \| ([^|]+?) \| ([^|]+?) \| ([^|]+?) \| ([^|]+?)(?: \| (.*))?$")
 THREAD_BLOCK_RE = re.compile(r"^- \*\*(THR\.\d{4,5})\*\*\s*(?:\[([^\]]*)\])?\s*(.*)$")

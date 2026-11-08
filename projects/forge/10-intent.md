@@ -1,5 +1,5 @@
 ---
-version: 6.17
+version: 6.18
 status: draft
 project: forge
 audience: principal + Claude only
@@ -19,9 +19,10 @@ colleagues, or the principal's future self.
 
 The primary ambition is the full chain: from a raw idea all the way to a
 deck ready for realisation, growing layer by layer — assignment, then a
-BRD, then solution design, up to implementation-ready specification
-including integration. **The chain ends where the project needs it
-to:** below the intent a project takes the layers it needs, and many
+BRD, then user stories, then solution design, up to
+implementation-ready specification including integration. **The
+chain ends where the project needs it to:** below the intent a
+project takes the layers it needs, and many
 end at the intent. Every design decision below is made with that
 growth in mind, which is why files and IDs are numbered with gaps and
 why the name says thought, not assignment.
@@ -299,12 +300,13 @@ position that already stands elsewhere.
   carries in the brief's, what the intent and its threads hold in the
   intent's, completeness and the Requirement style in the assignment's.
   CLAUDE.md keeps of each artefact what it is, how it joins the chain,
-  and a pointer. The definitions of the five artefacts of today's chain
-  are the state files `brief.md`, `intent.md`, `assignment.md`,
-  `brd.md` and `solution-design.md`; POS.1330, POS.1340 and POS.1350,
-  for the BRD POS.1800 with POS.1810 to POS.1850, and for the
-  solution design POS.1400 with POS.1420, say what each is to achieve
-  and why. Present shape 2026-10-02, from `00-brief-elicitation.md`.
+  and a pointer. The definitions of today's chain are the state files of
+  `.claude/skills/forge/states/`, listed nowhere else (POS.1080);
+  POS.1330, POS.1340 and POS.1350, for the BRD POS.1800 with POS.1810 to
+  POS.1850, for the user stories POS.1990 with POS.2000 to POS.2020, and
+  for the solution design POS.1400 with POS.1420, say what each is to
+  achieve and why. Present shape 2026-10-02, from
+  `00-brief-elicitation.md`.
 - **POS.1320 A Map is a map of what must be found, not a
   questionnaire.** It names, in the artefact's own vocabulary, what
   the finding looks at or consciously verifies; it prescribes neither
@@ -819,10 +821,11 @@ position that already stands elsewhere.
 - **POS.1400** The solution design is an artefact of the chain,
   `40-solution-design.md`: how the things wanted are realised. It is
   derived from the lowest layer the project has above it, the intent
-  alone, the assignment or the BRD, and whatever stands above it is
-  its input. No layer below the intent is a condition of another: a
-  project takes the layers it needs, and many end at the intent,
-  where what is wanted needs no solution written down. It is worth
+  alone, the assignment, the BRD or the user stories, and whatever
+  stands above it is its input. No layer below the intent is a
+  condition of another: a project takes the layers it needs, and
+  many end at the intent, where what is wanted needs no solution
+  written down. It is worth
   writing where the way is not obvious, where a choice has a price,
   or where two hands would solve the same matter differently if it
   were not written down; whether it is, the principal says. A layer a
@@ -1023,6 +1026,81 @@ position that already stands elsewhere.
   party is a work product, not a BRD (POS.1520). A coding agent that
   takes a chain is given the artefacts that are available; which, a
   person decides. Decided 2026-10-23.
+- **POS.1990 The user stories.** The user stories are an artefact of the
+  chain, `35-user-stories.md`, below the BRD and above the solution
+  design: the parent broken into behaviour seen from the outside — what
+  the user or the business sees happen and under which conditions it is
+  accepted — so that the stakeholders approve them as a whole, the
+  delivery makes its technical analysis and builds from them, and the
+  testers write their test cases from them. Their parent is the BRD, or
+  the intent where the change is small and the principal says so; a
+  requirements document of someone else yields stories as a work product
+  in `work/` (POS.1520). One item of the parent may be served by several
+  stories and one story may serve several items; the solution design
+  cites the stories, never the reverse. The export the instance hands
+  over, pasted into a wiki or a tracker, is a render of the genre
+  `user-stories-export`, one heading per story with its parts on lines
+  of their own, which leaves out every reference to a POS, since the
+  stakeholders never see the intent. Its definition is
+  `states/user-stories.md` with `templates/user-stories.md` as its pair;
+  what it is to achieve and why is this position, with POS.2000 to
+  POS.2020. Present shape 2026-11-02, from `00-brief-user-stories.md`
+  0.3 and the trial of the same day on a small project; built by a
+  user of the forge in a clone of their own and accepted into the
+  engine from pull request #8 on 2026-11-08.
+- **POS.2000 How the stories are made.** Handed over by default: Claude
+  walks the Map alone and returns first the cut — the name of every
+  story with a short description of what it covers, in words, and the
+  items of the parent no story serves, named by what they say — and only
+  on the cut agreed drafts the whole stories, asks nothing, and returns
+  the draft, which is then walked story by story; where the parent does
+  not suffice for a story, the walk turns into an interview on it. A
+  story is one function as the one who uses it meets it; its variants by
+  condition, its qualities and its transitions are its acceptance
+  criteria and edge cases, never stories of their own; the usual course
+  is a criterion, a situation at the border an edge case. Claude writes
+  no behaviour, value, technical solution, priority or estimate the
+  parent does not carry; what is missing stands as a question with an
+  owner, and an answer that changes substance goes to the parent first
+  (intent-first). Reason: the trial of 2026-11-02, where a draft of six
+  stories cut variants of one function apart and the principal merged
+  them into two, and where the walk of the stories answered three open
+  questions of the BRD, carried up into the intent and the BRD before
+  the stories were written. Present shape 2026-11-02.
+- **POS.2010 The shape of a story.** One prefix of its own, US. A story
+  is a heading `US.NNNN — <name>`, a free sentence carrying who or what
+  wants it, what happens and why (the form "As a… I want… so that…"
+  neither required nor forbidden), its acceptance criteria as bullets in
+  the indicative, one behaviour each, and then only the parts it has,
+  under fixed English labels: `Edge cases` (situation → what happens),
+  `Risks` (each with its mitigation or its consequences), `Note` (a link
+  to an attachment or a technical analysis with what lies behind it),
+  `Questions` (question → owner), `Reference`. Reference is the one part
+  every story has: the BR, NFR, UC or DEP it serves, or in a small
+  change the POS; a dependency is a DEP in the Reference, or a question.
+  No vague word in a criterion, no priority, no estimate, no technical
+  solution, no section of notes, dependencies or introduction. A quality
+  cutting across the whole is a story of its own, one concerning one
+  function a criterion of its story. Reason: the shape of the instance's
+  export, kept by the render, and the principal's word at the brief of
+  2026-11-02; a section of dependencies was rejected since the Reference
+  carries them. Decided 2026-11-02.
+- **POS.2020 The reviewers of the stories.** No new critic and no new
+  persona: `clarity` reads the stories with their Story style, `essence`
+  compares them with their parent, and a challenger already in the
+  roster may be sent where the principal wants the substance tried. A
+  check `user-stories` verifies the mechanics: every in-scope item of
+  the parent served or said not to be, counted and never judged; every
+  story with a Reference to an item that exists; the shape and the order
+  of the parts, none present and empty; questions with an owner, risks
+  with a mitigation or consequences, notes with a link; no vague word or
+  conditional in a criterion; no skeleton residue. The stakeholders'
+  approval of the whole is the instance's act, recorded in
+  `decisions.md` where the principal wants it kept. Reason: what a story
+  can get wrong mechanically is what the check finds, as its first run
+  on the trial of 2026-11-02 found a sentence without its why; what a
+  persona would hunt in stories, the business-analyst persona already
+  hunts in the BRD above them. Decided 2026-11-02.
 
 ### Structure and style of an assignment
 - **POS.0200** Structured items with stable IDs beat prose, even at very
@@ -1038,8 +1116,8 @@ position that already stands elsewhere.
   appear where the principal judges it part of setting direction; it
   is the recipients' machinery only when it belongs to executing
   delivery. Decided 2026-08-17.
-- **POS.0220** IDs use the format `PREFIX.NNNN` with three-letter
-  prefixes, numbered in tens, each new group starting at the next
+- **POS.0220** IDs use the format `PREFIX.NNNN` with prefixes of two
+  or three letters, numbered in tens, each new group starting at the next
   hundred. IDs are global and stable, never renumbered, with one
   exception, written here as such: two items with one number in one
   project, however they came to it — a merge of two branches, a hand's
@@ -1061,17 +1139,22 @@ position that already stands elsewhere.
   sorting of IDs is numeric by prefix and number. Why: a prefix has 99
   hundreds, numbered in tens with a new group at each hundred, so a
   prefix may outgrow four digits on use alone, and the widening costs
-  nothing kept. Present shape 2026-10-23 (REJ.0370).
+  nothing kept. Two letters are allowed since 2026-11-02: BR and UC of
+  the BRD already had two (POS.1830) against the rule, US joined them,
+  and the scripts that matched three letters alone were the one limit,
+  widened with the ledgers of three projects unchanged. Present shape
+  2026-11-02 (REJ.0370).
 - **POS.0230** Prefix vocabulary, aligned with the group BRD standard
   where an equivalent exists: REQ, OOS, CON, ASM, DEL, TBC, SCR in the
   assignment; BR, UC, DEP, NFR with OOS, ASM, TBC, SCR in the BRD
-  (POS.1830); POS, THR, REJ, FCT in the intent; SOL and TBC in the
-  solution design (POS.1420); ASM and TBC in a work specification
-  (POS.1520); FND, CHL, DEC internally. No universal standard for
-  prefixes exists; this is a house convention derived from the group's
-  own. A fact (FCT) is what is the case — stated by the principal on his
-  word, or by a source cited to its file; verification is never
-  demanded. A position (POS) is what the principal holds or wants.
+  (POS.1830); US in the user stories (POS.2010); POS, THR, REJ, FCT in
+  the intent; SOL and TBC in the solution design (POS.1420); ASM and
+  TBC in a work specification (POS.1520); FND, CHL, DEC internally. No
+  universal standard for prefixes exists; this is a house convention
+  derived from the group's own. A fact (FCT) is what is the case —
+  stated by the principal on his word, or by a source cited to its
+  file; verification is never demanded. A position (POS) is what the
+  principal holds or wants.
   Making a source's fact his own stance is a new POS. Without a prefix
   of its own, a fact would have passed for a position. A thread (THR)
   carries its origin — the principal's word, a document by path, or
@@ -2003,8 +2086,8 @@ position that already stands elsewhere.
   first genre is `presentation` — a slide-by-slide deck definition whose
   render is turned into a PowerPoint file. The genre is named
   "presentation" rather than "deck" for company-wide legibility at
-  rollout. The genres today: `presentation`, `readme`, `release-notes`
-  and `screenplay` (POS.1530).
+  rollout. The genres today: `presentation`, `readme`, `release-notes`,
+  `screenplay` (POS.1530) and `user-stories-export` (POS.1990).
 - **POS.0830** The forge runs beyond Windows. `scripts/` is the only
   platform-bound layer, and its scripts are written to run unchanged on
   Linux and macOS. Instance facts are out of the scripts: no remote URL,
