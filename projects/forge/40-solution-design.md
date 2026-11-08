@@ -1,5 +1,5 @@
 ---
-version: 0.60
+version: 0.61
 status: draft
 project: forge
 audience: whoever realises the solution, a person or an agent
@@ -1619,7 +1619,14 @@ boundary kept by hand or an order of work.
   recipe (SOL.0680). The README says where the project lives and
   that a user never needs it, CONTRIBUTING that a contributor clones
   it beside the engine and that a change of behaviour is two pull
-  requests, one per repository, each naming the other. The cut, in
+  requests, one per repository, each naming the other. The project's
+  own README on GitHub is the render of `recipes/readme-project.md`,
+  a recipe of the readme genre named apart because `recipes/
+  readme.md` of this project renders the engine's README; it says
+  that a user needs the engine, what this repository is, who clones
+  it and how, and that Discussions, Issues, CONTRIBUTING and SECURITY
+  are the engine's. The project carries a copy of the engine's
+  `LICENSE`, CC BY 4.0. The cut, in
   the order of the position: the engine prepared with the project
   still inside, on a branch of its own, so that `main` stays whole
   for the users of the rollout; the cut rehearsed on a copy of the
@@ -1645,8 +1652,9 @@ boundary kept by hand or an order of work.
   `.claude/skills/release/SKILL.md`, `.claude/skills/save/SKILL.md`,
   `.claude/skills/pull/SKILL.md`, `.claude/skills/migrate/SKILL.md`,
   `projects/forge/recipes/readme.md`,
-  `projects/forge/recipes/contributing.md`, `.gitignore`,
-  `.gitattributes`.
+  `projects/forge/recipes/contributing.md`,
+  `projects/forge/recipes/readme-project.md`, `projects/forge/LICENSE`,
+  `.gitignore`, `.gitattributes`.
 
 ## Open
 - **TBC.0010** (owner: principal) Mermaid diagrams in a Word file:
