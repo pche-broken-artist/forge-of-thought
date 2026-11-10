@@ -777,9 +777,10 @@ also goes to an engine that reads no file of the forge.
 
 All are such subagents, a reviewer reading the project's documents and
 the engine's rules, a challenger allowed to search the web; on the
-session model (`model: inherit` — the whole forge runs on one model;
-speed is bought with context, never with a weaker reviewer). One shape,
-strictly separate jobs, each with its own output (below). All are
+session model (`model: inherit` — the whole forge runs on one model,
+but for the two exceptions POS.0930 names; speed is bought with context,
+never with a weaker reviewer). One shape, strictly separate jobs, each
+with its own output (below). All are
 invoked by hand and settled by walkthrough; the reports are immutable
 and dated. Every agent returns its report with its findings unnumbered
 and writes nothing; the command numbers it and files it, one report at a
