@@ -40,6 +40,11 @@ is mechanical.
    first and then each translation as a file of its own, scene for
    scene and line for line, its provenance naming the primary
    render it was made from; nothing is re-cut.
+   Where the recipe's Format names `png`, the subagent draws the
+   picture itself with Pillow, its drawing code written into `tmp/` and
+   left there, and writes the picture to `renders/$0.png`; the Markdown
+   render then carries the provenance of step 5 and a link to the
+   picture, nothing else (SOL.0940).
    Content only, always Markdown: the render carries no instructions
    for a conversion — the recipe's `## Format` section is never
    copied into it.
@@ -92,7 +97,8 @@ is mechanical.
    render or at the recipe's `output:` (`docs/videos/`, where the
    script renews the player page). Where pandoc, or Pillow and
    ffmpeg, is missing, the render stands, the plain file is not
-   made, and that is said aloud. A recipe without the section ends
+   made, and that is said aloud. A `png` was drawn in step 3; nothing
+   is converted here. A recipe without the section ends
    at the Markdown. The designed file is `/publish`'s, never made
    here; a screenplay has none, and step 8 does not apply to it.
 8. Where `published/<recipe>.md` exists, say that the published file

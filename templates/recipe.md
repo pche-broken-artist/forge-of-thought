@@ -28,12 +28,16 @@ register. Everything the renderer must know beyond the template. -->
 The two steps: CLAUDE.md, Document chain, Renders. Never copied into the
 render (/render step 3). An older recipe's `## Build instructions` reads as this
 section until its next iteration. -->
-- Format: <pptx | docx | video | html-player>
+- Format: <pptx | docx | video | html-player | png>
 - Plain file, made by `/render` through pandoc: reference
   <path | none>, page size <A4 | Letter>. <A screenplay's `video` or
   `html-player` is made through `scripts/md2video.py` instead, with
   the pace, the date and the look stated here; it has no published
-  file (POS.1530).>
+  file (POS.1530). A `png` is drawn by the renderer itself in the
+  render's run, beside a render of the provenance and a link to the
+  picture, the width in pixels stated here, the height following the
+  content; no plain file through a script, no published file
+  (SOL.0940).>
 - Published file, made by `/publish` through a model: template
   <path | none>, model <name>, <anything else the model must
   know>.

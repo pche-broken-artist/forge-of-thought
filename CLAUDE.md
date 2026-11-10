@@ -312,7 +312,8 @@ POS.1320.
    authorship: a chain artefact is composed by the principal, a render
    is generated from artefacts — an article the principal writes is a
    layer of the chain, its translation is a render. Everything is
-   Markdown, content only. An output is made in two steps, each with its
+   Markdown, content only, but a picture whose recipe names the format
+   `png` (SOL.0940). An output is made in two steps, each with its
    own command. `/render` generates the Markdown and, where the recipe
    names a format, the plain file through the script the format names,
    as `/render` step 7 says (a screenplay has no published file):
@@ -528,6 +529,8 @@ projects/<slug>/           # kind: thought — the chain
   renders/<recipe>.<lang>.mp4         # the plain file of a screenplay,
   renders/<recipe>.<lang>.html-player.js  # by md2video; or in the
                                       # engine's docs/videos/ by output:
+  renders/<recipe>.png                # a picture its renderer drew,
+                                      # the format png (SOL.0940)
   renders/state.md                    # the ledger as a render, written
                                       # by /release on main (POS.1650)
   published/<recipe>.pptx             # the designed file, made by
