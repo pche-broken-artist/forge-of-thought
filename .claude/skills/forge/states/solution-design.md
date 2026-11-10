@@ -24,11 +24,12 @@ principal directs.
 **Aim.** The solution design says how the things wanted are
 realised, as the solution stands today, and is kept current. It is
 read by whoever realises the solution, a person or an agent,
-without the principal in the room. It holds what cannot be read off
-the thing itself: why, against what, at what price, and how the
-parts fit. It restates nothing of the layer above, which it cites
-by ID, and copies nothing of what realises it, which it names by
-path. It is complete for now when every item of the layer above
+without the principal in the room. It holds what is designed, whole
+enough that the thing can be built from it without a look at what
+realises it (POS.1400): what each part does, why, against what, at
+what price, and how the parts fit. It restates nothing of the layer
+above, which it cites by ID, and names what realises it by path. It
+is complete for now when every item of the layer above
 that is in scope is realised by a part, knowingly left unanswered,
 or open as a TBC, and when no TBC that blocks realisation is open;
 it is never finished.
@@ -94,9 +95,8 @@ How the files are made: `templates/solution-design.md` with
   this order: `Realises:` the IDs of the layer above, never their
   wording; `Choice:` what was chosen, against what, and what it
   costs, or that there was no real alternative; `Where:` the path.
-- Where a part is realised in a file of its own, the item names the
-  file and the detail is the file's. Where it is only part of a
-  file, or no file exists yet, the item carries the detail.
+- The item carries the detail of its part, whatever file realises it,
+  and names that file (POS.1400).
 - A choice Claude made and the principal has not judged says so in
   plain words at the item, until he has judged it.
 - A TBC carries its owner, what would close it, and whether it

@@ -18,7 +18,8 @@ CLAUDE.md, Versioning & status, and the intent's definition
 (`.claude/skills/forge/states/intent.md`, Threads and files). In the
 document,
 the way to an item, as Versioning & status lists it, is a finding;
-so is detail an item carries where the file that performs it exists. The other
+the way to an item is the finding, never the detail of its design
+(POS.1400). The other
 way, an item that can no longer be understood because what makes it
 hold stands only in the history is a finding. Each finding proposes
 the move in full: the text that leaves, word for word, and the record
