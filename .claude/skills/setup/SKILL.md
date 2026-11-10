@@ -67,9 +67,10 @@ speak whatever language the user speaks to you.
      it.
    - Otherwise create it with `{ "model": "fable" }`, the strongest
      model, and tell the user in one sentence: the session is set to
-     Fable, which the whole forge including the blind reviewers runs
-     on, and it can be changed at any time with `/model` or by
-     editing this file. Where the account does not offer Fable
+     Fable, which the forge including the blind reviewers runs on,
+     and it can be changed at any time with `/model` or by editing
+     this file (what runs on another model: POS.0930). Where the
+     account does not offer Fable
      (`/model` does not list it), write the strongest model it lists
      and say which. A notice, not a question.
 3. Finish by pointing at the next step from the Quickstart: start a
