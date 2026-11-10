@@ -408,7 +408,9 @@ scripts/                   # forge-save / forge-pull / forge-status
                            # / forge-clone / forge-branch (git),
                            # forge-history (the history of one
                            # item), forge-report (the unique name
-                           # of a report), forge-ledger (the ledger
+                           # of a report), forge-record (a record
+                           # or a decision appended at the end of
+                           # its file), forge-ledger (the ledger
                            # made at read time), forge-migrate (a
                            # project brought to the shape of a
                            # release), forge-config (the user's
@@ -698,7 +700,8 @@ decided the change, by the handle the instance gives its principal.
 The way to an item — why it changed, what was said, trials,
 measurements, which research turned it — goes into its record, never
 into the item; the record is written in the same step as the change,
-and the reflection before a write shows the new wording and the
+through `scripts/forge-record.py`, never by an edit (POS.0310), and
+the reflection before a write shows the new wording and the
 records, `Was` included. What the user must do after a change is
 written with it, in `Action`. Before proposing a change to an item,
 Claude reads its history through `/history <ID>`

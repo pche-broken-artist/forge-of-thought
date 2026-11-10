@@ -464,12 +464,7 @@ def step_d(t, apply, out):
 # ------------------------------------------------------------------ runs
 
 def author_handle():
-    local = fr.ENGINE_ROOT / "CLAUDE.local.md"
-    if local.exists():
-        m = re.search(r"\*\*Author:\*\*\s*(\S+)", read(local))
-        if m:
-            return m.group(1)
-    return None
+    return fd.instance_author(fr.ENGINE_ROOT / "CLAUDE.local.md")
 
 
 def refusals(t):

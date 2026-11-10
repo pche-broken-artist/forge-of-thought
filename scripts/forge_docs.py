@@ -251,3 +251,15 @@ def last_dated_paragraph(text):
         if DATE_RE.search(p):
             return " ".join(p.split())
     return ""
+
+
+def instance_author(local):
+    """The handle the instance file gives its principal, the author of
+    every record he decides (CLAUDE.local.md, `**Author:**`); None when
+    the file or the line is missing, since the handle is never guessed
+    (templates/history.md, POS.1050)."""
+    local = Path(local)
+    if not local.exists():
+        return None
+    m = re.search(r"\*\*Author:\*\*\s*(\S+)", read(local))
+    return m.group(1) if m else None
