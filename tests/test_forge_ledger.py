@@ -67,6 +67,25 @@ def test_waiting_on_principal_cites_the_open_thread_and_the_open_challenge(proje
     assert "the question goes to the next house meeting" in lines[0]  # the thread's last dated paragraph
 
 
+def test_the_open_threads_stand_by_what_waits_and_by_priority(project, run_script):
+    def thread(n, head, matter):
+        (project / "threads" / f"THR.{n}.md").write_text(
+            f"---\nid: THR.{n}\nconcerns: intent\norigin: the principal\n{head}status: open\n---\n\n{matter} Opened 2026-03-06.\n",
+            encoding="utf-8")
+    thread("0030", "priority: low\n", "The colour of the door.")
+    thread("0040", "", "Who keeps the key.")                          # no priority: read as medium
+    thread("0050", "priority: low\nblocks: the roof\n", "Which timber is ordered.")
+    out = project.parent / "ledger-out.md"
+    assert run_script("forge-ledger", project, "--out", out).returncode == 0
+    waiting = out.read_text(encoding="utf-8").split("## Waiting on principal", 1)[1]
+    lines = [l for l in waiting.splitlines() if l.startswith("- THR.")]
+    # what something waits on first, then high, medium, low
+    assert [l.split(" — ")[0] for l in lines] == ["- THR.0050", "- THR.0010", "- THR.0040", "- THR.0030"]
+    assert lines[0].split(" — ")[1].startswith("[low; blocks: the roof] Which timber")
+    assert lines[1].split(" — ")[1].startswith("[high] ")
+    assert lines[2].split(" — ")[1].startswith("[medium] Who keeps the key.")
+
+
 def test_without_out_the_ledger_is_written_into_the_project(project, run_script):
     r = run_script("forge-ledger", project)
     assert r.returncode == 0, r.stderr

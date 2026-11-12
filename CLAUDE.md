@@ -91,7 +91,10 @@ forge is what they are told.
 10. **One mechanism lives in one place.** Whatever the forge has a
     procedure for — a command, a skill, a script, an agent — is used
     through its own definition whenever its situation arises, never
-    re-described or improvised; a command that needs another's
+    re-described or improvised. The principal's request in free
+    words is the command: what he asks for runs through its
+    definition as if he had typed it; what runs only on his word
+    still does. A command that needs another's
     mechanism cites it by path. A procedure stated in two places is a
     defect.
 
@@ -499,8 +502,7 @@ projects/<slug>/           # kind: thought — the chain
   NN-<layer>.md                       # layers below the intent, as
                                       # the project needs them
   threads/THR.NNNN.md                 # the project's threads, one file
-                                      # each, open and closed (the
-                                      # intent's definition)
+                                      # each, open and closed (/thread)
   00-brief-<name>.md                  # later briefs, one per whole
   <file>.history.md                   # history companion
                                       # (Versioning & status)
@@ -756,7 +758,7 @@ lifecycle. Depth max two levels.
 | NFR | non-functional requirement — a quality by category, its value the stakeholders' or a TBC | BRD |
 | US | user story — behaviour seen from outside, with its acceptance criteria, citing the BR, NFR, UC, DEP or POS it serves | user stories |
 | POS | position the principal currently holds | intent |
-| THR | open thread — unresolved matter to elicit next; names the artefact it concerns and carries its origin (the intent's definition) | the project's `threads/`, one file per thread (POS.1680) |
+| THR | open thread — one matter set aside to be taken up later; names the artefact it concerns and carries its origin, its owner and its priority (`.claude/skills/thread/SKILL.md`) | the project's `threads/`, one file per thread (POS.1680) |
 | REJ | rejected direction, with the reason it was dropped | intent |
 | FCT | fact — what is the case, as the principal states it or as a source states it; not a stance; a source's fact cites its file, the principal's needs none; verification is never demanded | intent |
 | FND | finding of a critic (document quality) or of a check (conformance) | ledger, reviews |
@@ -881,6 +883,7 @@ What a command does in full is its skill's
 | `/publish <recipe> [slug]` | make the designed file from a render, through a model |
 | `/document [slug]` | generate the documentation of the engine or of a project into docs/ |
 | `/recipe [genre] [slug]` | compose or iterate a render recipe by genre; bare = the genre roster |
+| `/thread [text \| THR.NNNN] [slug]` | work the threads of a project: bare = the open threads, a text = the birth of a thread, an ID = that thread taken up |
 | `/work [name] [slug]` | work a work product: its specification and its file; bare = the project's work products |
 | `/critique [lens] [artefact] [slug]` | run a critic lens on the quality of the documents; bare = the lens roster |
 | `/challenge [persona] [artefact] [slug]` | run a challenger persona against the substance; bare = the persona roster |

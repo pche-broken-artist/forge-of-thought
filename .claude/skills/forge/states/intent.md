@@ -86,20 +86,12 @@ when the Aim's completion is reached, name the layers that can follow
 from it, or offer the approval where the principal takes none: a
 recommendation, never a gate.
 
-**Threads and files.** The threads are files, `threads/THR.NNNN.md`
-from `templates/thread.md`, one per thread (POS.1680), and are part
-of the intent as its history is: the intent says what holds, the
-threads what is being worked, the working debate included until a
-thread is settled. A thread's header is its state: `concerns` the
-artefact it concerns, as `/forge` names it, several where several;
-`origin` the principal's word, a document by path or Claude's
-synthesis; `status` open or closed. Freely rewritten while open,
-the header too; no version, no history of its own (POS.0120). A
-thread is never moved, renamed or deleted, the one exception the
-renumbering at an ID clash (POS.0220); closing is `status: closed`
-and a `closed` record in the intent's history saying when and by
-what, no `Was`: the closed file is immutable and is the archive;
-what returns is a new thread citing the old one. An item says what
+**Threads and files.** The threads are files, `threads/THR.NNNN.md`,
+one per thread, and are part of the intent as its history is: the
+intent says what holds, the threads what is being worked, the
+working debate included until a thread is settled. What a thread
+is and how it is born, kept and closed is
+`.claude/skills/thread/SKILL.md`'s. An item says what
 is to be achieved and why; what realises it is named in the
 solution design where the project has one, and in the item where it
 has none (POS.0120).

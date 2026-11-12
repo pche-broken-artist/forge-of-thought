@@ -31,7 +31,10 @@ WHAT IT DOES
     the work and the research.
 
     Waiting on principal and the Reports section follow the rule and
-    the list of templates/ledger.md, where each is defined; a closed
+    the list of templates/ledger.md, where each is defined: the open
+    threads stand in its order, those something waits on first, then
+    by priority, each with its priority and what waits on it in
+    brackets; a closed
     thread's later commit is found through forge_repos. An
     unparsable file is a line `unparsed: <file>:<line>` in the
     header, never a crash; the exit code is 0 (POS.1600).
@@ -438,23 +441,40 @@ def challenges(p, closed, verdicts):
     return rows, items
 
 
+PRIORITIES = ("high", "medium", "low")
+
+
 def threads_of(p):
-    """(open threads as (id, text), closed thread files)."""
+    """(open threads as (id, text), closed thread files, the mark of
+    each open thread by its id). The open threads stand in the order
+    of templates/ledger.md, Waiting on principal: those something
+    waits on first, then by priority, by number within; the mark is
+    the priority and what waits, in brackets. The one file of the
+    shape before the migration is read as it stands, no mark."""
     if p.old_shape:
         for name in ("threads.md", "10-intent.threads.md"):
             if (p.proj / name).exists():
                 blocks, _ = fd.thread_blocks(p.proj / name)
-                return [(b["id"], b["text"]) for b in blocks], []
-        return [], []
+                return [(b["id"], b["text"]) for b in blocks], [], {}
+        return [], [], {}
     files = fd.thread_files(p.proj)
-    return [(t["id"], t["text"]) for t in files if t["status"] == "open"], [t for t in files if t["status"] != "open"]
+
+    def rank(t):
+        # a priority outside the three words is the check's finding; here it is read as medium
+        prio = PRIORITIES.index(t["priority"]) if t["priority"] in PRIORITIES else 1
+        return (0 if t["blocks"] else 1, prio, int(re.sub(r"\D", "", t["id"]) or 0))
+
+    opened = sorted((t for t in files if t["status"] == "open"), key=rank)
+    marks = {t["id"]: "[" + (t["priority"] if t["priority"] in PRIORITIES else "medium")
+             + (f"; blocks: {t['blocks']}" if t["blocks"] else "") + "] " for t in opened}
+    return [(t["id"], t["text"]) for t in opened], [t for t in files if t["status"] != "open"], marks
 
 
-def waiting(p, open_threads, fnd_rows, fnd_items, chl_rows, chl_items):
+def waiting(p, open_threads, fnd_rows, fnd_items, chl_rows, chl_items, marks=None):
     lines, parked = [], []
     for id_, text in open_threads:
         first, last = fd.first_sentence(text), fd.last_dated_paragraph(text)
-        line = f"- {id_} — {first}"
+        line = f"- {id_} — {(marks or {}).get(id_, '')}{first}"
         if last and not last.startswith(first):
             line += f" {last}"
         lines.append(line)
@@ -547,7 +567,7 @@ def reports(p, open_threads, closed_threads):
 
 def compose(p):
     closed, verdicts = p.closed_records(), p.verdicts()
-    open_threads, closed_threads = threads_of(p)
+    open_threads, closed_threads, thread_marks = threads_of(p)
     # an old shape without a threads file keeps its threads where threads_of does not read
     threads_unread = p.old_shape and not any((p.proj / n).exists() for n in ("threads.md", "10-intent.threads.md"))
     fnd_rows, fnd_items = findings(p, closed, verdicts)
@@ -557,7 +577,7 @@ def compose(p):
         "Work": work(p), "Sources": sources(p), "Dependencies": dependencies(p), "Research": research(p),
         "Findings": fnd_rows, "Challenges": chl_rows,
     }
-    waiting_lines = waiting(p, open_threads, fnd_rows, fnd_items, chl_rows, chl_items)
+    waiting_lines = waiting(p, open_threads, fnd_rows, fnd_items, chl_rows, chl_items, thread_marks)
     report_lines = reports(p, open_threads, closed_threads) + [f"- {r}" for r in p.reports]
     drops = set(LIBRARY_DROPS) if p.kind == "library" else set()
     if p.kind == "library" and not fnd_rows:

@@ -361,7 +361,6 @@ class Light:
         # the thread files
         tkeys = fc.template_keys("thread")
         states = {p.stem for p in STATES_DIR.glob("*.md")}
-        tcomment = fc.template_comment("thread")
         recorded = {}
         for comp, recs in self.p.histories.items():
             for r in recs:
@@ -381,15 +380,22 @@ class Light:
                 continue
             if front is None:
                 self.add("medium", f"The thread `{self.rel(f)}` has no header", self.where(f, 1),
-                         "`templates/thread.md` (the header is the thread's state)", "the four fields of the skeleton", immediate=True)
+                         "`templates/thread.md` (the header is the thread's state)", "the fields of the skeleton", immediate=True)
                 continue
             keys = fc.front_keys(front)
-            extra, missing = [k for k in keys if k not in tkeys], [k for k in tkeys if k not in keys]
+            # owner, priority and blocks may be absent: a thread written before them is no finding
+            optional = ("owner", "priority", "blocks")
+            extra = [k for k in keys if k not in tkeys]
+            missing = [k for k in tkeys if k not in keys and k not in optional]
             if extra or missing:
                 self.add("low", f"The thread `{self.rel(f)}` header differs from the skeleton's" +
                          (f": extra {', '.join(extra)}" if extra else "") + (f": missing {', '.join(missing)}" if missing else ""),
-                         self.where(f, 1), "`templates/thread.md`, the header (`id`, `concerns`, `origin`, `status`)",
-                         "the four fields and nothing else", immediate=True)
+                         self.where(f, 1), "`templates/thread.md`, the header; `.claude/skills/thread/SKILL.md`, The header (a thread without `priority` or `owner` is no finding)",
+                         "the fields of the skeleton and nothing else", immediate=True)
+            priority = fd.front_value(front, "priority")
+            if priority is not None and priority not in ("high", "medium", "low"):
+                self.add("low", f"The thread `{self.rel(f)}` carries priority `{priority}`", self.where(f, fc.line_of(text, r"^priority:", re.M) or 1),
+                         "`templates/thread.md` (`high | medium | low`)", "one of the three words", immediate=True)
             id_ = fd.front_value(front, "id")
             if id_ and id_ != f.stem:
                 self.add("medium", f"The thread `{self.rel(f)}` says `id: {id_}`", self.where(f, fc.line_of(text, r"^id:", re.M)),
@@ -415,20 +421,14 @@ class Light:
             if not kinds and f.stem not in archived:
                 self.add("low", f"The thread {f.stem} has no record of its birth in any history",
                          [self.where(f, 1), "`10-intent.history.md`"],
-                         "`templates/history.md`, the comment (at a birth, one record naming every item born); `.claude/skills/forge/states/intent.md`, Threads and files",
+                         "`templates/history.md`, the comment (at a birth, one record naming every item born); `.claude/skills/thread/SKILL.md`, the birth",
                          f"a `created` record naming {f.stem} in the intent's history, at the version of the round that opened it (a record of state, POS.1630)",
                          immediate=True)
             if status == "closed" and "closed" not in kinds and f.stem not in archived:
                 self.add("medium", f"The thread {f.stem} is closed without a `closed` record in any history",
                          [self.where(f, fc.line_of(text, r"^status:", re.M)), "`10-intent.history.md`"],
-                         "`.claude/skills/forge/states/intent.md`, Threads and files (closing is `status: closed` and a `closed` record in the intent's history saying when and by what)",
+                         "`.claude/skills/thread/SKILL.md`, Life and closing (closing is `status: closed` and a `closed` record in the intent's history saying when and by what)",
                          f"the `closed` record of {f.stem} in the intent's history")
-            cs = fc.comments(body)
-            if tcomment and cs and cs[-1][1].startswith("A thread (POS.1680)") and cs[-1][1] != tcomment:
-                self.group("thread-comment", "low",
-                           lambda n, w: f"{n} thread file{'s carry' if n > 1 else ' carries'} the skeleton's comment as it stood before the current `templates/thread.md`",
-                           self.where(f, cs[-1][0] + len(front) + 2), "CLAUDE.md, Templates; `templates/thread.md`, the comment",
-                           "the template's comment as it stands on disk, or none, in each", immediate=True)
         # the Verdict words
         dec = self.proj / "decisions.md"
         if dec.exists():

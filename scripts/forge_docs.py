@@ -198,8 +198,10 @@ def index_entries(path):
 
 def thread_files(project):
     """The threads of a project as files: dicts with id, concerns,
-    origin, status, text, path; the status of a file without a
-    header is a problem."""
+    origin, owner, priority, blocks, status, text, path; the status
+    of a file without a header is a problem. A thread without
+    `priority` is read as medium, one without `owner` or `blocks`
+    as an empty one (templates/thread.md)."""
     out = []
     d = Path(project) / "threads"
     if not d.is_dir():
@@ -209,6 +211,9 @@ def thread_files(project):
         text = re.sub(r"<!--.*?-->", "", body, flags=re.S).strip()
         out.append({"id": front_value(front, "id") or p.stem, "concerns": front_value(front, "concerns") or "intent",
                     "origin": front_value(front, "origin") or "the principal",
+                    "owner": front_value(front, "owner") or "",
+                    "priority": front_value(front, "priority") or "medium",
+                    "blocks": front_value(front, "blocks") or "",
                     "status": front_value(front, "status") or "open", "text": text, "path": p})
     return out
 

@@ -120,8 +120,10 @@ Verdict (rejected | parked | obsolete, the DEC). -->
 
 ## Waiting on principal
 <!-- What waits on the principal, one line per matter: cite, never
-copy — CLAUDE.md, Ledger. The rule (POS.1620): the open threads, each
-by its first sentence and its last dated paragraph; the TBCs whose
+copy — CLAUDE.md, Ledger. The rule (POS.1620): the open threads, those
+something waits on first, then by priority, each by its priority and
+what waits on it in brackets, its first sentence and its last dated
+paragraph; the TBCs whose
 owner is the principal; the open findings of a critic and the open
 challenges; under Parked the parked findings and challenges with
 their decision. Free text without an ID has no place here. -->

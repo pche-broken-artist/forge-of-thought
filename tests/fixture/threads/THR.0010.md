@@ -2,6 +2,8 @@
 id: THR.0010
 concerns: intent
 origin: the principal
+owner: tester
+priority: high
 status: open
 ---
 

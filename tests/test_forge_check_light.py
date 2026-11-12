@@ -43,3 +43,12 @@ def test_the_report_is_written_where_out_says(project, tmp_path, run_script):
     assert r.returncode == 0, r.stderr
     assert out.exists() and "conforms" in out.read_text(encoding="utf-8")
     assert "0 findings" in r.stdout
+
+
+def test_a_priority_outside_the_three_words_is_found(project, run_script):
+    thread = project / "threads" / "THR.0010.md"
+    thread.write_text(thread.read_text(encoding="utf-8").replace("priority: high", "priority: urgent", 1), encoding="utf-8")
+    r = run_script("forge-check", "light", project)
+    assert r.returncode == 0, r.stderr
+    assert "conforms" not in r.stdout.splitlines()[2]
+    assert "carries priority `urgent`" in r.stdout
