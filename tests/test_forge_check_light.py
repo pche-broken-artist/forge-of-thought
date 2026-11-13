@@ -52,3 +52,20 @@ def test_a_priority_outside_the_three_words_is_found(project, run_script):
     assert r.returncode == 0, r.stderr
     assert "conforms" not in r.stdout.splitlines()[2]
     assert "carries priority `urgent`" in r.stdout
+
+
+def test_a_thread_may_concern_another_document_of_the_project_by_its_path(project, run_script):
+    thread = project / "threads" / "THR.0010.md"
+    thread.write_text(thread.read_text(encoding="utf-8").replace("concerns: intent", "concerns: 10-intent.history.md", 1), encoding="utf-8")
+    r = run_script("forge-check", "light", project)
+    assert r.returncode == 0, r.stderr
+    assert r.stdout.splitlines()[2] == "conforms"
+
+
+def test_a_thread_concerning_a_path_that_does_not_exist_is_found(project, run_script):
+    thread = project / "threads" / "THR.0010.md"
+    thread.write_text(thread.read_text(encoding="utf-8").replace("concerns: intent", "concerns: recipes/no-such-recipe.md", 1), encoding="utf-8")
+    r = run_script("forge-check", "light", project)
+    assert r.returncode == 0, r.stderr
+    assert "conforms" not in r.stdout.splitlines()[2]
+    assert "concerns `recipes/no-such-recipe.md`, which is neither a state of the forge nor a document of the project" in r.stdout

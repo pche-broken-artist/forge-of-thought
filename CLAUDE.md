@@ -202,7 +202,7 @@ whether it is versioned and how it behaves:
 | records | review, challenge | one dated reviewer run | reviewer agent | — | immutable |
 | state | ledger | single source of truth for state, made at read time | script | — | never in git (POS.1600) |
 | state | project | the project file: slug, kind, language | /new-project | — | written once (POS.1590) |
-| state | thread | one open matter of the intent | the principal with Claude | — | freely rewritten while open, immutable once closed (POS.1680) |
+| state | thread | one matter of a project set aside to be taken up later | the principal with Claude | — | freely rewritten while open, immutable once closed (POS.1680) |
 | state | index | catalogue of a resource directory | forge | — | freely rewritten |
 | state | map | the documentation map: one entry per page, everything a page is made from | generated | — | freely rewritten by the documentation run |
 | rendering | recipe | how a render is made | Claude, principal iterates | yes | iterated; an integer only on the principal's word, his own mark, not an approval |

@@ -1,6 +1,6 @@
 ---
 id: THR.NNNN
-concerns: intent          # the artefact it concerns, as /forge names it; several, comma-separated
+concerns: intent          # an artefact as /forge names it, or another document of the project by its path (recipes/<recipe>.md, work/<name>.spec.md); several, comma-separated
 origin: the principal     # the principal (the default) | <a document by path> | Claude's synthesis
 owner: <handle>           # whoever opened it, from the instance's Author; changed when the thread is handed over
 priority: medium          # high | medium | low
@@ -16,6 +16,9 @@ YYYY-MM-DD.
 
 YYYY-MM-DD: <a continuation, one dated paragraph each time the thread
 is taken up; the ledger prints the last.>
+
+YYYY-MM-DD, closed: <how the matter ended and where what was decided
+now stands.>
 
 <!-- A thread (POS.1680), one file per thread in threads/; the header
 is its state: what it concerns, where it came from, whose it is, when

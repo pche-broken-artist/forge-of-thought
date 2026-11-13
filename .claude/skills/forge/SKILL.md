@@ -37,9 +37,12 @@ is CLAUDE.md, Document chain's. This dispatcher never changes.
      Published table);
    - which libraries the project needs (the ledger's Dependencies
      table, POS.1020) and whether each is cloned alongside;
-   - what is waiting on the principal (from the ledger): the few live
-     matters named in words, the ID in brackets as an address, the
-     rest as a count (CLAUDE.md, Working methods, Plain speech).
+   - what is waiting on the principal (from the ledger): of the open
+     threads, those something waits on and the high ones, named in
+     words with the ID in brackets as an address, the rest as a count
+     by priority, the full list being `/thread`'s; of whatever else
+     waits, the few live matters in words and the rest as a count
+     (CLAUDE.md, Working methods, Plain speech).
 4. Recommend the natural next step in words — a recommendation, never a
    gate — and, where the map lists more than one matter waiting on
    the principal, offer a walkthrough of them (CLAUDE.md, Working

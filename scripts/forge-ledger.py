@@ -441,7 +441,7 @@ def challenges(p, closed, verdicts):
     return rows, items
 
 
-PRIORITIES = ("high", "medium", "low")
+PRIORITIES = fd.PRIORITIES
 
 
 def threads_of(p):
@@ -465,7 +465,7 @@ def threads_of(p):
         return (0 if t["blocks"] else 1, prio, int(re.sub(r"\D", "", t["id"]) or 0))
 
     opened = sorted((t for t in files if t["status"] == "open"), key=rank)
-    marks = {t["id"]: "[" + (t["priority"] if t["priority"] in PRIORITIES else "medium")
+    marks = {t["id"]: "[" + (t["priority"] if t["priority"] in PRIORITIES else PRIORITIES[1])
              + (f"; blocks: {t['blocks']}" if t["blocks"] else "") + "] " for t in opened}
     return [(t["id"], t["text"]) for t in opened], [t for t in files if t["status"] != "open"], marks
 

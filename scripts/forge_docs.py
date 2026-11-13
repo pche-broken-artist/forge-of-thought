@@ -20,6 +20,7 @@ RECORD_RE = re.compile(
     r"^- (\d{4}-\d{2}-\d{2}) \| ([^|]+?) \| ([^|]+?) \| ([^|]+?) \| ([^|]+?)(?: \| (.*))?$")
 THREAD_BLOCK_RE = re.compile(r"^- \*\*(THR\.\d{4,5})\*\*\s*(?:\[([^\]]*)\])?\s*(.*)$")
 DATE_RE = re.compile(r"\b\d{4}-\d{2}-\d{2}\b")
+PRIORITIES = ("high", "medium", "low")  # the priority of a thread, in its order (templates/thread.md)
 
 problems = []
 
@@ -212,7 +213,7 @@ def thread_files(project):
         out.append({"id": front_value(front, "id") or p.stem, "concerns": front_value(front, "concerns") or "intent",
                     "origin": front_value(front, "origin") or "the principal",
                     "owner": front_value(front, "owner") or "",
-                    "priority": front_value(front, "priority") or "medium",
+                    "priority": front_value(front, "priority") or PRIORITIES[1],
                     "blocks": front_value(front, "blocks") or "",
                     "status": front_value(front, "status") or "open", "text": text, "path": p})
     return out

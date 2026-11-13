@@ -393,7 +393,7 @@ class Light:
                          self.where(f, 1), "`templates/thread.md`, the header; `.claude/skills/thread/SKILL.md`, The header (a thread without `priority` or `owner` is no finding)",
                          "the fields of the skeleton and nothing else", immediate=True)
             priority = fd.front_value(front, "priority")
-            if priority is not None and priority not in ("high", "medium", "low"):
+            if priority is not None and priority not in fd.PRIORITIES:
                 self.add("low", f"The thread `{self.rel(f)}` carries priority `{priority}`", self.where(f, fc.line_of(text, r"^priority:", re.M) or 1),
                          "`templates/thread.md` (`high | medium | low`)", "one of the three words", immediate=True)
             id_ = fd.front_value(front, "id")
@@ -405,12 +405,14 @@ class Light:
                 self.add("low", f"The thread `{self.rel(f)}` carries status `{status}`", self.where(f, fc.line_of(text, r"^status:", re.M) or 1),
                          "`templates/thread.md` (`open | closed`)", "one of the two words", immediate=True)
             concerns = [c.strip() for c in (fd.front_value(front, "concerns") or "").split(",") if c.strip()]
-            unknown = [c for c in concerns if c not in states]
+            # an artefact by its state, or another document of the project by its path; a closed
+            # thread is immutable and its document may be gone since, so only an open one is asked
+            unknown = [c for c in concerns if c not in states and status != "closed" and not (self.proj / c).exists()]
             if unknown:
-                self.add("low", f"The thread `{self.rel(f)}` concerns `{', '.join(unknown)}`, which is no state of the forge",
+                self.add("low", f"The thread `{self.rel(f)}` concerns `{', '.join(unknown)}`, which is neither a state of the forge nor a document of the project",
                          self.where(f, fc.line_of(text, r"^concerns:", re.M)),
-                         "`templates/thread.md` (`concerns`: the artefact, as /forge names it); CLAUDE.md, Document chain (the states are the listing of `.claude/skills/forge/states/`)",
-                         f"one of: {', '.join(sorted(states))}", immediate=True)
+                         "`templates/thread.md` (`concerns`: an artefact as /forge names it, or another document of the project by its path); CLAUDE.md, Document chain (the states are the listing of `.claude/skills/forge/states/`)",
+                         f"a path that exists in the project, or one of: {', '.join(sorted(states))}", immediate=True)
             origin = fd.front_value(front, "origin") or ""
             if origin not in ("the principal", "Claude's synthesis") and not (self.proj / origin).exists() and not (fr.ENGINE_ROOT / origin).exists():
                 self.add("low", f"The thread `{self.rel(f)}` carries an origin the skeleton does not know: `{origin}`",
@@ -422,7 +424,7 @@ class Light:
                 self.add("low", f"The thread {f.stem} has no record of its birth in any history",
                          [self.where(f, 1), "`10-intent.history.md`"],
                          "`templates/history.md`, the comment (at a birth, one record naming every item born); `.claude/skills/thread/SKILL.md`, the birth",
-                         f"a `created` record naming {f.stem} in the intent's history, at the version of the round that opened it (a record of state, POS.1630)",
+                         f"a `created` record naming {f.stem} in the intent's history, or the brief's while there is no intent, at the version of the round that opened it (a record of state, POS.1630)",
                          immediate=True)
             if status == "closed" and "closed" not in kinds and f.stem not in archived:
                 self.add("medium", f"The thread {f.stem} is closed without a `closed` record in any history",
