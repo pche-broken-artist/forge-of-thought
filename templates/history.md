@@ -16,7 +16,7 @@ project the operating layer. Reason is left out on
 `created`; `Action` and `Was` only where the record has them, `Was`
 always last, paragraphs in it divided by `<br>`; a thread that
 closes gets a `closed` record, no `Was` (the rules of a thread:
-`.claude/skills/thread/SKILL.md`). At the birth of a
+`.claude/skills/forge/states/intent.md`, Threads and files). At the birth of a
 document, one record of the file and one naming every item born
 with it. Lines are not wrapped. The author is the handle the
 instance file gives its principal (CLAUDE.md, Versioning & status);
