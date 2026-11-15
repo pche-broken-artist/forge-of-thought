@@ -38,6 +38,10 @@ def test_front_value_strips_comment_and_quotes():
     assert fd.front_value(front, "status") == "draft"
     assert fd.front_value(front, "absent") is None
     assert fd.front_value(None, "project") is None
+    # a quote that only ends the value is part of it; a pair around the whole value is not
+    ends = ['derived_from: a brief, section "Testing how the engine behaves"']
+    assert fd.front_value(ends, "derived_from") == 'a brief, section "Testing how the engine behaves"'
+    assert fd.front_value(["title: 'A title'"], "title") == "A title"
 
 
 def test_front_list_reads_block_and_inline():

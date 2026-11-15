@@ -43,12 +43,15 @@ def split_front(text):
 
 def front_value(front, key):
     """The value of `key` in front lines, a trailing `# comment` and
-    quotes stripped; None when absent."""
+    a pair of quotes around the whole value stripped; a quote that is
+    not half of such a pair is part of the value. None when absent."""
     for line in front or []:
         m = re.match(r"^" + re.escape(key) + r":\s*(.*)$", line)
         if m:
             value = re.sub(r"\s+#.*$", "", m.group(1)).strip()
-            return value.strip('"').strip("'")
+            if len(value) >= 2 and value[0] == value[-1] and value[0] in "\"'":
+                value = value[1:-1]
+            return value
     return None
 
 
