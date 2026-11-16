@@ -22,7 +22,7 @@ WHAT IT DOES
     "not under git", and a user.name or user.email set in the
     repository itself, which wins over the per-host stanza and which
     the forge never sets (POS.0950, SOL.0550). Exists so that even reading git state goes through
-    the scripts (CLAUDE.md, Persistence).
+    the scripts.
 
     With --remote it also fetches each repository's origin and reports
     the branch against it: "up to date", "behind N", "ahead N" or

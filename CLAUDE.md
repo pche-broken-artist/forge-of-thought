@@ -549,15 +549,7 @@ Claude by the hook `scripts/hook-git.py` of `.claude/settings.json`,
 which denies every write and names the script to use, but for the few
 commands that finish the step of a conflict, which it puts to the
 principal and runs on his yes (POS.1200, POS.1710); how many scripts
-there are is not a rule. The scripts that serve the engine and every
-project repository, each described in full by its own help header:
-`forge-save.py` commits and pushes, `forge-pull.py` fast-forwards from
-the remotes (on the engine the upgrade channel), `forge-status.py`
-reports state without changing anything and, with `--remote`, what
-waits on GitHub outside git, through `gh`, or that it could not read
-it (POS.1970), `forge-clone.py` brings an existing project in
-(`/import-project` is its door), `forge-branch.py`
-switches or creates a branch — merging is git's, by hand or by merge
+there are is not a rule. Merging is git's, by hand or by merge
 request: the integrator merges on his own clone with git itself,
 outside the forge's scripts, and what git leaves standing is settled
 in the step of a conflict below. A conflict `forge-save` meets is
@@ -566,13 +558,7 @@ Claude lays both sides out as a walkthrough, the principal decides,
 Claude writes the wording, and the finishing commands of git run on
 the hook's ask; what the forge promises two people on one project is
 POS.1750's, and the record files merge as text, two tails kept both.
-In the commands of git,
-`/save`, `/pull`, `forge-branch` and `/release`, the word `forge`
-names the whole: the engine's repository and the forge's own project
-beside it where it is cloned, each its own commit with the prefix
-`forge:`; in the commands over documents `forge` is the project
-(POS.1980). Immutability of documents is a process rule, not a git
-mechanism.
+Immutability of documents is a process rule, not a git mechanism.
 
 **Portability.** The forge runs beyond Windows; `scripts/` is the only
 platform-bound layer and is written to run unchanged on Linux and macOS;
@@ -589,20 +575,13 @@ script carries its help in its module docstring; what several scripts
 share lives in a module beside them (`forge_repos.py`, `forge_tools.py`,
 `forge_docs.py`, `docs_map.py`, `forge_check.py`), never twice.
 
-Two doors, two speeds. `/save` runs its check and then commits and
-pushes on whatever branch is checked out, no render; `--quick` leaves
-the check out. `/release`, from `main` only, runs its checks, re-renders
-the README and release notes and then saves with the release message and
-tag. Whatever makes a derived file or migrates a project, `/release`,
+Whatever makes a derived file or migrates a project, `/release`,
 `/publish`, `/document` and `/migrate`, runs on `main` only, refuses a
 repository behind or diverged from its origin and offers `/pull`
 (POS.1710). The forge never pulls or merges on its own judgement
 (POS.1490). Until a project is migrated nothing writes into it:
 the map, the checks and every writing command say what
-`templates/project.md` says and stop. What each does in full is its own
-definition's (`.claude/skills/pull/SKILL.md`,
-`.claude/skills/end/SKILL.md`, `.claude/skills/migrate/SKILL.md`). Saves
-made directly from the shell are unaffected.
+`templates/project.md` says and stop.
 
 ## Versioning & status
 House scheme, aligned with the group BRD standard: **integers denote

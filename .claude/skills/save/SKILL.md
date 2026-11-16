@@ -10,16 +10,17 @@ branch is checked out, nothing more (POS.1100). The `project` and
 project are repositories of their own (POS.0940), the engine's own
 project one of them, beside the engine, and `forge` saves both
 (POS.1980); what the save does per
-repository is stated in the help header of `scripts/forge-save.py`, and
-CLAUDE.md (Persistence) carries the one-line summary (POS.1070).
+repository is stated in the help header of `scripts/forge-save.py`
+(POS.1070).
 Arguments (`[slug]`, `-m "message"`, `--tag <name>`) are passed through
 to the script; `--quick` is this skill's alone, leaves the check out and
 nothing else (POS.1100), and is never passed on; a project without a
 repository is a property, not a defect (POS.0940) — relay
-the script's note in the report.
+the script's note in the report. Saves made directly from the shell,
+`python scripts/forge-save.py`, are unaffected.
 
 1. Determine scope from `python scripts/forge-status.py` (the forge
-   reads state by its script — CLAUDE.md, Persistence). It reports the
+   reads state by its script). It reports the
    engine and each project
    separately, with the branch each is on. A project "not under git"
    with changes is named in the report and otherwise left alone.
@@ -38,7 +39,9 @@ the script's note in the report.
    round (POS.0310) — and propose it to the
    principal; commit with the confirmed or adjusted wording. When
    more than one repository has changes, one message per repository
-   is drafted, or the save is run per slug. The script's
+   is drafted, or the save is run per slug. With `forge`, the one
+   message serves both commits and carries the prefix `forge:` itself:
+   the script adds none to a message it is given. The script's
    auto-generated file list is used only if the principal says so.
 3. A tag is set only on the principal's word: `--tag <name>` given, or
    asked for in words. A tag needs one repository, so a slug. When he
