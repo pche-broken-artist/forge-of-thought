@@ -542,25 +542,8 @@ projects/lib-<name>/       # kind: library — material shared across
 The engine is one git repository with a remote; `main` is the released
 line, branches are voluntary and left to git (below); every project
 under `projects/` is a repository of its own (gitignored by the engine,
-its own project included: POS.1980), recognised by the scripts by
-asking git whether the project's directory is the top of a repository,
-never by a
-`.git` looked for; anything else is a project outside git, on which the
-forge runs no git whatever repository lies above it (POS.0550).
-Initialising a project's repository and adding its remote are the user's
-one-off act at creation; the commit identity is git's, resolved per host
-by the user's own configuration (`includeIf` stanzas in `~/.gitconfig`,
-offered by `/setup`), and the forge sets none. The recommended global
-guard is `user.useConfigOnly = true` with no global
-`user.name`/`user.email` (offered by `/setup`), so a repository on a
-host with no stanza fails aloud instead of taking a default. `/setup`
-also registers, once per machine and on the user's word, the merge
-driver `ours` and the git settings it needs in that same global file,
-the stanzas, the guard and the registration written through
-`scripts/forge-config.py`, and `forge-status` says when the registration
-is missing, since an unregistered clone silently falls back to a
-conflict (SOL.0740). The scripts in `scripts/` are the door to a write
-of git;
+its own project included: POS.1980). The scripts in `scripts/` are the
+door to a write of git;
 reading git directly is open; the line between the two is held for
 Claude by the hook `scripts/hook-git.py` of `.claude/settings.json`,
 which denies every write and names the script to use, but for the few
@@ -583,9 +566,7 @@ Claude lays both sides out as a walkthrough, the principal decides,
 Claude writes the wording, and the finishing commands of git run on
 the hook's ask; what the forge promises two people on one project is
 POS.1750's, and the record files merge as text, two tails kept both.
-The way into git for a project is `git -C projects/<slug> init -b
-main`, then a remote if wanted. The scripts carry no URL and no
-identity. In the commands of git,
+In the commands of git,
 `/save`, `/pull`, `forge-branch` and `/release`, the word `forge`
 names the whole: the engine's repository and the forge's own project
 beside it where it is cloned, each its own commit with the prefix

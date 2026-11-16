@@ -10,7 +10,7 @@ WHAT IT DOES
     Clones the repository at the given URL into
     projects/<repository name> - the directory name falls out of the
     URL, and an existing directory is never overwritten. The commit
-    identity is git's (CLAUDE.md, Persistence); the script sets none
+    identity is git's (POS.0950); the script sets none
     and carries no identity and no URL. Afterwards it reports facts:
     the last commit, the origin, the commit identity git resolves for
     the fresh clone, and the project file (templates/project.md): its

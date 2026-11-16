@@ -5,7 +5,7 @@ description: First run after cloning the engine — create and fill CLAUDE.local
 Prepare this instance of the forge (POS.1050). Run after cloning the
 engine, before any other work. Two files in the engine — plus, on the
 user's word, the global git configuration outside it, which is git's
-own (CLAUDE.md, Persistence), written only through
+own (POS.0950), written only through
 `scripts/forge-config.py`; what each of its calls writes and what it
 leaves is its header's.
 
@@ -30,7 +30,7 @@ speak whatever language the user speaks to you.
    - Keep the template's format; the file is gitignored and never
      committed.
    - Close with the **git identity**, which is git's, per host
-     (CLAUDE.md, Persistence). First show what is there:
+     (POS.0950). First show what is there:
      `python scripts/forge-config.py` names the file git reads, the
      registration, the guard, a global identity and the per-host
      stanzas. Ask for the git hosts the user will push to (e.g.
@@ -41,7 +41,9 @@ speak whatever language the user speaks to you.
      A stanza or an identity file the script reports and leaves
      (another path, an absolute one among them, another name or
      e-mail) is shown, and `--replace` offered for it apart, again on
-     the user's word. Then the global guard, `--guard`; where the
+     the user's word. Then the global guard, `--guard`, recommended so
+     that a repository on a host with no stanza fails aloud instead
+     of taking a default identity; where the
      script reports a global `user.name` or `user.email`, say the
      guard only bites once that identity is removed and offer
      `--guard --unset-identity`, again only on the user's word. Where

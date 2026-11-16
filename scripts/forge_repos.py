@@ -20,7 +20,7 @@ repository of its own when git names its directory as the top of a repository
 (`own_repo`), never by a `.git` looked for; a directory the engine's
 own repository tracks is the engine's (`inside_engine`); anything
 else is a project outside git, on which the forge runs no git
-(CLAUDE.md, Persistence; POS.0550). The forge's own project,
+(POS.0550). The forge's own project,
 `projects/forge`, is a repository of its own beside the engine
 (POS.1980); in the commands of git the word `forge` names the whole,
 the engine and that project where it is cloned (`forge_repos`). The
@@ -80,7 +80,7 @@ def own_repo(path):
     paths compared, a worktree and a linked directory alike. A
     directory inside another repository, the engine's included, or
     under no git at all is not a repository of its own, and the forge
-    runs no git on it (CLAUDE.md, Persistence; POS.0550, SOL.0510)."""
+    runs no git on it (POS.0550, SOL.0510)."""
     top = git_out(["rev-parse", "--show-toplevel"], path)
     return bool(top) and Path(top).resolve() == Path(path).resolve()
 

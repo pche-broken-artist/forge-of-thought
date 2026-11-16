@@ -44,8 +44,8 @@ WHAT IT DOES
     'forge' the tag goes on both, the engine and the project beside it,
     the same name, so that one release is one tag in both repositories
     (POS.1980). An existing tag is refused. The script never sets an
-    identity, a remote or initialises a repository (CLAUDE.md,
-    Persistence). It never uses git add -f and never git clean.
+    identity, a remote or initialises a repository. It never uses
+    git add -f and never git clean.
 
 WHAT IT NEEDS
     Python 3.8 or newer; git on PATH. `forge_repos.py` beside it.

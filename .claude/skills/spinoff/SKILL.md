@@ -11,8 +11,8 @@ run in one step (CLAUDE.md, Spin-off rule).
    of group "$1" in project $0 that will move. He may adjust the list.
 2. Create `projects/$2/` by the `/new-project` procedure (kind
    `thought`) — files only, no git: the new project's repository and
-   remote are the principal's one-off act afterwards (CLAUDE.md,
-   Persistence).
+   remote are the principal's one-off act afterwards
+   (`.claude/skills/new-project/SKILL.md`).
 3. Derive `projects/$2/00-brief.md` from the relevant parts of the
    source 10-intent.md: a short brief, in the language settled at
    step 2, capturing why this became its own project and what it

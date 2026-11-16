@@ -11,7 +11,7 @@ SYNOPSIS
 
 WHAT IT DOES
     The one door of the forge to the user's global git configuration
-    (CLAUDE.md, Persistence; SOL.0150, SOL.0740 of the forge solution
+    (SOL.0150, SOL.0740 of the forge solution
     design). Every read and every write goes through
     `git config --global`, so it lands in the file git itself reads,
     wherever that lies: the forge names no path to it, because git
@@ -37,7 +37,8 @@ WHAT IT DOES
     merge.conflictStyle zdiff3. They hold for every repository the
     configuration serves.
 
-    --guard: user.useConfigOnly true (why: CLAUDE.md, Persistence).
+    --guard: user.useConfigOnly true (why:
+    .claude/skills/setup/SKILL.md).
     It bites only once no global user.name or user.email is left;
     --unset-identity removes them.
 

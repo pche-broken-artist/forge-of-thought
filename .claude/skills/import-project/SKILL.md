@@ -11,7 +11,7 @@ Bring the project at `$0` into the forge (POS.1060). Git is done by
    slug parameter); if the directory already exists, stop and report.
 2. On the principal's word run `python scripts/forge-clone.py <url>`. The
    commit identity is git's, resolved per host from his own
-   configuration (CLAUDE.md, Persistence); the script sets none and
+   configuration (POS.0950); the script sets none and
    reports the one the clone resolves.
 3. Relay what the script prints (its header says what); a project
    file missing is said as `templates/project.md` says.

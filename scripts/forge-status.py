@@ -108,9 +108,8 @@ def main(argv):
     a = ap.parse_args(argv)
     fr.need_git()
     fr.need_engine_repo()
-    # The global configuration file git actually reads (CLAUDE.md,
-    # Persistence); the first is the global file itself, the rest the
-    # files it includes.
+    # The global configuration file git actually reads; the first is
+    # the global file itself, the rest the files it includes.
     files = fr.global_config_files()
     print("global git config: " + (", ".join(files) if files
                                    else "none yet - git creates ~/.gitconfig at its first write"))
