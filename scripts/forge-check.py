@@ -446,7 +446,7 @@ class Light:
         for path, lib, used, _ in self.ledger.dependencies(self.p):
             if not (fr.ENGINE_ROOT / path).exists():
                 self.add("low", f"library `{lib}` not cloned alongside — `/import-project <its remote>`",
-                         [f"`{path}` (cited by {used})"], "CLAUDE.md, Ledger; POS.1020 (a dependency is a citation of another project's documents)",
+                         [f"`{path}` (cited by {used})"], "`templates/ledger.md`, Dependencies; POS.1020 (a dependency is a citation of another project's documents)",
                          "advisory: bring the project in with `/import-project`, or leave it until it is needed")
 
     # -- 5. resource indexes

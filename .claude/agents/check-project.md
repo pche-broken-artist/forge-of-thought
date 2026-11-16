@@ -31,7 +31,8 @@ What you verify:
    finding (POS.1010).
 1. **Structure** — the files and folders of CLAUDE.md, Repository
    layout, exist; a layer below the intent that the project does not
-   have is not missing and is never a finding (CLAUDE.md, Ledger);
+   have is not missing and is never a finding (CLAUDE.md, Document
+   chain);
    `recipes/` and `renders/` paired — every render that carries
    provenance front-matter traces to a recipe; the ledger's Renders
    table is read from that provenance, nothing to compare; every file

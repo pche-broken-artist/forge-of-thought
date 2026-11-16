@@ -15,7 +15,7 @@ as the BRD's header declares it (`parent:` of `templates/brd.md`):
 `20-assignment.md` or `10-intent.md`; a BRD made from a source is a
 work product in `work/`, read when the task names it, its parent
 the source by path. A project without a BRD is not a finding
-(CLAUDE.md, Ledger). The
+(CLAUDE.md, Document chain). The
 bookkeeping of the file — front-matter, the history companion — is
 the `light` check's; the ID scheme in general the `project`
 check's; you verify what only a BRD has.

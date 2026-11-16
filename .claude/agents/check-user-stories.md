@@ -15,7 +15,8 @@ its parent as the header declares it (`parent:` of
 `templates/user-stories.md`): `30-brd.md` or `10-intent.md`; stories
 made from a source are a work product in `work/`, read when the task
 names them, their parent the source by path. A project without
-stories is not a finding (CLAUDE.md, Ledger). The bookkeeping of the
+stories is not a finding (CLAUDE.md, Document chain). The bookkeeping
+of the
 file — front-matter, the history companion — is the `light` check's;
 the ID scheme in general the `project` check's; you verify what only
 stories have. The rules you verify against are

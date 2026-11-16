@@ -29,7 +29,7 @@ is CLAUDE.md, Document chain's. This dispatcher never changes.
    - which chain artefacts exist, at what version and status —
      briefs with their mining state, a draft brief or a `pending` /
      `partial` one named as work waiting; a layer the project does
-     not have is not reported as missing (CLAUDE.md, Ledger);
+     not have is not reported as missing (CLAUDE.md, Document chain);
    - which target states can be worked on from here (inputs exist) and
      which cannot yet (say what is missing);
    - which renders are stale (as `/render` step 5 defines it) and

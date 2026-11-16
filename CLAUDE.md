@@ -234,7 +234,7 @@ directory, one definition each: they are listed nowhere else, and the
 table of artefacts in the README is rendered from the definitions. A
 chain starts at a brief and its trunk is the intent; below the intent
 a project takes the layers it needs, none a condition of another
-(a layer it does not have is not missing: Ledger). The shape every definition
+(a layer it does not have is not missing). The shape every definition
 keeps is POS.1310 of the forge intent, and how its Map is walked
 POS.1320.
 
@@ -790,18 +790,12 @@ propose readiness. The mechanics are the command's
 `ledger.md` is the **single source of truth for state**, made at
 read time and never in git (POS.1600): `python scripts/forge-ledger.py
 <slug>` builds it from the documents, as its header says in full
-(SOL.0680), and writes it gitignored. Its tables are
-`templates/ledger.md`'s; resources and dependencies are registration
-only (what a resource is and is for lives in its directory's
-`00-INDEX.md`; a library document, cited by path, carries no
-version). Nobody writes a row: what only the ledger knew lives in
-records, a field of an index entry, a published companion or a
-decision's Verdict (POS.1610, `templates/history.md`), and every
-command that changes state remakes the ledger by the script. Waiting
-on principal is a rule, not a list (POS.1620); an unfinished
-conversation is saved into its thread of the intent, never here. A
-layer below the intent that a project does not have is not missing:
-`/forge` and the checks say nothing of it.
+(SOL.0680), and writes it gitignored. Nobody writes a row: what only
+the ledger knew lives in records, a field of an index entry, a
+published companion or a decision's Verdict (POS.1610,
+`templates/history.md`), and every command that changes state remakes
+the ledger by the script. An unfinished conversation is saved into
+its thread of the intent, never here.
 
 ## Commands
 What a command does in full is its skill's

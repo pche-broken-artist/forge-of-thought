@@ -37,7 +37,7 @@ it; Note says what remains (partial) or the REJ (dropped). -->
 <!-- One row per layer of the chain below the briefs: Version and
 Status from the header, Date from the newest content record of the
 history (a state record does not move it, POS.1630); a layer the
-project does not have gets no row (CLAUDE.md, Ledger). -->
+project does not have gets no row (CLAUDE.md, Document chain). -->
 | File | Version | Status | Date |
 |---|---|---|---|
 | 10-intent.md | 0.1 | draft | YYYY-MM-DD |
@@ -120,7 +120,7 @@ Verdict (rejected | parked | obsolete, the DEC). -->
 
 ## Waiting on principal
 <!-- What waits on the principal, one line per matter: cite, never
-copy — CLAUDE.md, Ledger. The rule (POS.1620): the open threads, those
+copy. The rule (POS.1620): the open threads, those
 something waits on first, then by priority, each by its priority and
 what waits on it in brackets, its first sentence and its last dated
 paragraph; the TBCs whose
