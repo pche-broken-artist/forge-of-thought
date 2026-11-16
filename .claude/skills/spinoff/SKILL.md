@@ -4,7 +4,8 @@ argument-hint: "<source-project> <group-name> <new-slug>"
 ---
 
 Execute only on the principal's explicit instruction — never propose-and-
-run in one step (CLAUDE.md, Spin-off rule).
+run in one step. Claude may propose that a group is ready; the decision
+is the principal's.
 
 1. Confirm scope with the principal: list the items
    (REQ/OOS/CON/ASM/DEL/TBC/SCR)

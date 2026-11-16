@@ -719,13 +719,6 @@ a project by its slug, or the engine.
   `templates/ledger.md` has them. Composition is the caller's (`/save`,
   `/release`); checks never call each other.
 
-## Spin-off rule
-A requirement group becomes its own project **only by explicit decision of
-the principal** (`/spinoff <project> <group> <slug>`), never
-automatically. Claude may
-propose readiness. The mechanics are the command's
-(`.claude/skills/spinoff/SKILL.md`).
-
 ## Ledger
 `ledger.md` is the **single source of truth for state**, made at
 read time and never in git (POS.1600): `python scripts/forge-ledger.py
