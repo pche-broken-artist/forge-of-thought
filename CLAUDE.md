@@ -59,14 +59,12 @@ forge is what they are told.
    absent. Records, state, research and recipes are always English: they
    are read by Claude, the reviewers and the checks, never handed to the
    recipients. English is the notation throughout (ID prefixes, status
-   words, front-matter keys). The forge dictates only that one output
-   language per project, and the conversation language is per-instance
-   configuration that never appears in outward-facing renders (the
-   README among them). Translate on write. A work specification follows
-   the artefacts; its file is in the language its `## Making` says. The
-   one exception among the artefacts is the briefs (`00-brief*.md`),
-   kept in whatever language they are written in. A render may be in any
-   language, or languages, its recipe declares (Renders).
+   words, front-matter keys). Translate on write. A work specification
+   follows the artefacts; its file is in the language its `## Making`
+   says. The one exception among the artefacts is the briefs
+   (`00-brief*.md`), kept in whatever language they are written in. A
+   render may be in any language, or languages, its recipe declares
+   (Renders).
 7. **Structure over prose.** Items with stable IDs, even at very high
    abstraction. Narrative only in Purpose & Context and Objective.
 8. **Assignments are complete and precise.** An assignment carries the
@@ -212,17 +210,12 @@ whether it is versioned and how it behaves:
 | resources | source | external input as it arrived | external, /ingest | — | immutable |
 | resources | research | durable answer to one question; a research of several questions is a bundle with the plan and the synthesis at its head and one note per question per engine | Claude, /research | — | immutable |
 
-Which artefacts the forge has is said in Document chain.
-Every versioned kind keeps its history in a companion beside it
-(Versioning & status). A functional
-binary — a `.potx` template, a graphic — is a source, so a library's
-assets are resources without a kind of their own; a library carries
-no artefacts and no records but its recipe's history companion. A
-file of `tmp/`, the player page of `docs/videos/` and the
-principal's own file in `renders/` or `published/` have no kind:
+A functional binary — a `.potx` template, a graphic — is a source, so
+a library's assets are resources without a kind of their own; a
+library carries no artefacts and no records but its recipe's history
+companion. A file of `tmp/`, the player page of `docs/videos/` and
+the principal's own file in `renders/` or `published/` have no kind:
 the forge reads none of them as a document (POS.1540, POS.1910).
-What a work product is and how it is worked is
-`.claude/skills/work/SKILL.md`'s.
 Prose in every document is hard-wrapped
 at about 72 columns so that git diffs stay legible; tables, code
 blocks and front-matter are never wrapped.
@@ -230,14 +223,6 @@ blocks and front-matter are never wrapped.
 ## Document chain
 Files are numbered so the chain can grow without renaming anything.
 Gaps of ten leave room for a layer to be added without renumbering.
-
-```
-NN-<artefact>.md   an artefact of the chain — versioned
-<file>.history.md  history of each versioned document —
-                   append-only companion beside it
-decisions.md       append-only DEC records
-ledger.md          single source of truth for state
-```
 
 Every artefact of the chain has a **definition**: its state file
 `.claude/skills/forge/states/<state>.md`, worked through
@@ -253,18 +238,13 @@ a project takes the layers it needs, none a condition of another
 keeps is POS.1310 of the forge intent, and how its Map is walked
 POS.1320.
 
-1. **Iteration default:** intent-first, with drafting early as a
-   legitimate tool — both as Working methods state them.
-2. **External inputs** (transcripts, offers, documents, standards) live
+1. **External inputs** (transcripts, offers, documents, standards) live
    in `sources/`, immutable once registered, plain slug filenames —
    its date, best effort and never demanded from the principal, its
    origin and its form are fields of its index entry. They may arrive
    at any stage, even before the brief.
    `/ingest` stores, registers and catalogues — nothing more (bare, it
-   sweeps `sources/` for unregistered files). A source has one form
-   (POS.1040): text, or a functional binary; a binary is converted to a
-   Markdown extract, which then is the source, only on the
-   principal's explicit word, through `/ingest`. Extracts are
+   sweeps `sources/` for unregistered files). Extracts are
    produced by `scripts/doc2md.py` and never by ad-hoc parsing; how
    the conversion runs and what it needs installed is the skill's and
    the script's header's. Registration does not
@@ -298,9 +278,9 @@ POS.1320.
    index is freely rewritten, like the ledger. `/ingest` and
    `/research` write the entries; `/check` verifies index against
    directory.
-3. **Feedback from recipients** has no channel of its own. The principal
+2. **Feedback from recipients** has no channel of its own. The principal
    processes it and feeds conclusions back via `/forge intent`.
-4. **Renders** are audience-specific outputs generated from the chain —
+3. **Renders** are audience-specific outputs generated from the chain —
    a pitch for the group, an architecture picture, an executive summary,
    the repository README. A render is never edited by hand: what is
    iterated is its **recipe** (`recipes/<recipe>.md` — inputs, audience,
@@ -314,23 +294,16 @@ POS.1320.
    stay the source of truth. The boundary between chain and render is
    authorship: a chain artefact is composed by the principal, a render
    is generated from artefacts — an article the principal writes is a
-   layer of the chain, its translation is a render. Everything is
-   Markdown, content only, but a picture whose recipe names the format
-   `png` (SOL.0940). An output is made in two steps, each with its
+   layer of the chain, its translation is a render. An output is made
+   in two steps, each with its
    own command. `/render` generates the Markdown and, where the recipe
    names a format, the plain file through the script the format names,
    as `/render` step 7 says (a screenplay has no published file):
    deterministic, cheap, repeated freely. `/publish` makes the designed
    file through a model and its document skills: expensive, only on the
    principal's command, never by `/render`, by `/release` or on Claude's
-   own judgement. How each step runs — where its file lands, what it
-   reads, what it says before it converts, what it does to the other
-   step's file — is its own definition's
-   (`.claude/skills/render/SKILL.md`,
-   `.claude/skills/publish/SKILL.md`). The format and what each step
-   needs stand in the recipe's `## Format` section
-   (`templates/recipe.md`), never copied into the render (`/render` step
-   3). The conversions are three scripts, `scripts/md2pptx.py` and
+   own judgement.
+   The conversions are three scripts, `scripts/md2pptx.py` and
    `scripts/md2docx.py`, each with two engines (`--engine pandoc |
    claude`), and `scripts/md2video.py`, one engine and two formats; what
    each needs installed, how a template or a reference document is
@@ -341,36 +314,25 @@ POS.1320.
    own in `renders/` and `published/`, made by hand from them, a copy
    under a new name he edits, a PDF saved from Word or PowerPoint, an
    HTML of a diagram: in git with the rest, no companion, no row, no
-   check (POS.1910). A recipe may be composed through a genre interview
-   (`/recipe <genre>`, skeleton `templates/recipe-<genre>.md`); a render
+   check (POS.1910). A render
    may cite another render as a picture source when the recipe declares
    it among its inputs. A recipe may declare its languages and an output
    path (`languages:`, `output:`, what each means:
    `templates/recipe.md`); an output in the engine's `docs/videos/` is
    the one public folder, served by GitHub Pages and left alone by
-   `/document`. The ledger's Renders table mirrors the provenance; its
-   Published table says what each published file was made from and
-   whether it is `current` or `stale`. Every project has a README as a
+   `/document`. Every project has a README as a
    render of its own `recipes/readme.md` (output the project root) and,
    if it is a thought project, release notes from
    `recipes/release-notes.md` — the same mechanism as the engine's own
    README and release notes; every `/release` of the project regenerates
    them. A library has a README only: a catalogue of what it holds. Both
-   are genres of `/recipe`, scaffolded by `/new-project`. A project may
-   carry `logo.png` in its root as the repository avatar, supplied by
-   the principal; optional, never a finding.
-5. **Documentation** is generated, never composed by hand: pages of
+   are genres of `/recipe`, scaffolded by `/new-project`.
+4. **Documentation** is generated, never composed by hand: pages of
    one topic each in `docs/` with an index, for the user, the
    extender and the evaluator, in a standard outline of five
    sections filled only where the project has material; the map
    they are made from, `docs-map.md` (kind `map`), lies beside the
-   owning project's ledger and is never shown to the reader. One
-   command makes it, `/document [slug]`, in one run that asks
-   nothing and regenerates only what changed; what it does in full
-   is its skill's (`.claude/skills/document/SKILL.md`); what a
-   release does with it is the release's
-   (`.claude/skills/release/SKILL.md`). What a README carries is the
-   readme skeleton's (`templates/recipe-readme.md`).
+   owning project's ledger and is never shown to the reader.
 
 ## Repository layout
 ```
@@ -584,8 +546,7 @@ its own project included: POS.1980), recognised by the scripts by
 asking git whether the project's directory is the top of a repository,
 never by a
 `.git` looked for; anything else is a project outside git, on which the
-forge runs no git whatever repository lies above it (POS.0550), and such
-a project comes in by hand, a copy or a link into `projects/`.
+forge runs no git whatever repository lies above it (POS.0550).
 Initialising a project's repository and adding its remote are the user's
 one-off act at creation; the commit identity is git's, resolved per host
 by the user's own configuration (`includeIf` stanzas in `~/.gitconfig`,
@@ -624,9 +585,7 @@ the hook's ask; what the forge promises two people on one project is
 POS.1750's, and the record files merge as text, two tails kept both.
 The way into git for a project is `git -C projects/<slug> init -b
 main`, then a remote if wanted. The scripts carry no URL and no
-identity. Which release receives the tag `v<major>` is `/release`'s
-to say (`.claude/skills/release/SKILL.md`); any other tag is the
-principal's request, with a free name. In the commands of git,
+identity. In the commands of git,
 `/save`, `/pull`, `forge-branch` and `/release`, the word `forge`
 names the whole: the engine's repository and the forge's own project
 beside it where it is cloned, each its own commit with the prefix
@@ -658,10 +617,7 @@ tag. Whatever makes a derived file or migrates a project, `/release`,
 repository behind or diverged from its origin and offers `/pull`
 (POS.1710). Which checks each runs is its own definition's
 (`.claude/skills/save/SKILL.md`, `.claude/skills/release/SKILL.md`).
-`/pull` is the door inward: it looks at the remote and says the state as
-a fact, pulls only a clean repository that is behind, and offers the
-rest; the forge never pulls or merges on its own judgement (POS.1490).
-`/end` closes a session by saying what would be lost (POS.1500). A
+The forge never pulls or merges on its own judgement (POS.1490). A
 release that changes the shape of files comes with a migration,
 `/migrate [slug]` through `scripts/forge-migrate.py`: once per project,
 on one clone, under git or not, on the principal's word, never on
@@ -765,26 +721,14 @@ lifecycle. Depth max two levels.
 | CHL | peer-review challenge (substance) | ledger, challenges |
 | DEC | decision, incl. rejected findings and challenges | decisions.md |
 
-## Requirement style
-The items of an assignment are an obligation in the indicative,
-**shall** / **shall not** in English and never a conditional in any
-language, and carry no priorities; the rule set is its definition's
-(`.claude/skills/forge/states/assignment.md`, Requirement style).
-The items of a BRD follow the same style made stricter; those rules
-are its definition's (`.claude/skills/forge/states/brd.md`,
-Requirement style).
-
 ## Isolated reviewers
 What holds for every isolated subagent of the forge, a reviewer, a
 renderer, a documentation agent or a research agent alike: it sees
 nothing of the conversation, reads every input from disk in its own
 run, since the copy of this file in its context may be older, and
-lets no instance fact into what it returns (POS.0950). The research
-agent's brief carries the same in its own words, because its packet
-also goes to an engine that reads no file of the forge.
+lets no instance fact into what it returns (POS.0950).
 
-All are such subagents, a reviewer reading the project's documents and
-the engine's rules, a challenger allowed to search the web; on the
+All are such subagents, on the
 session model (`model: inherit` — the whole forge runs on one model,
 but for the two exceptions POS.0930 names; speed is bought with context,
 never with a weaker reviewer). One shape, strictly separate jobs, each
@@ -814,9 +758,8 @@ never a replacement — it may narrow what is read or make a shared rule
 stricter, never rename, drop or duplicate a shared rule or field, and
 the protocol changes in the contract alone. A report is a public file,
 or may be quoted into one: the rule on instance facts above holds even
-where a fact would explain a finding. Bare `/challenge`, `/critique` and
-`/check` list the roster — the `description` of each agent file — and
-recommend a fit. The critic and the challenger take an optional target,
+where a fact would explain a finding. The critic and the challenger
+take an optional target,
 an artefact named as `/forge` names it, by its state file, or any file
 of the project by its path; without one, the whole chain. A check takes
 a project by its slug, or the engine.
