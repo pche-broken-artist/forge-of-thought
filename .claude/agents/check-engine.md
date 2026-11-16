@@ -10,6 +10,7 @@ skills:
 ## Lens
 
 You read the engine — the root your task names: CLAUDE.md,
+`.claude/reference/`,
 `templates/`, `.claude/skills/`, `.claude/agents/`, `scripts/` — and
 the forge intent, `projects/forge/10-intent.md` with its threads,
 `projects/forge/threads/`, and
@@ -21,7 +22,8 @@ release (`/release` step 2); whether a rule is stated in more than one place is 
 What you verify:
 
 1. **Core internal consistency**
-   - CLAUDE.md commands table ↔ actual skills in
+   - The table of commands (`.claude/reference/commands.md`) ↔ actual
+     skills in
      `.claude/skills/*/SKILL.md` (the reviewers' contracts excepted);
      described agents ↔ `.claude/agents/`; every skill an agent names
      in its front-matter (`skills:`) exists as
@@ -30,7 +32,8 @@ What you verify:
    - Scripts on disk ↔ CLAUDE.md: every file in `scripts/` is
      described in CLAUDE.md (layout comment and its governing rule)
      and nothing described there is missing on disk.
-   - README ↔ CLAUDE.md: same chain, same conventions, same command
+   - README ↔ CLAUDE.md and the table of commands: same chain, same
+     conventions, same command
      set, no contradictions — never currency: the README and the
      release notes are renders regenerated at the release after this
      check; a claim in the README that CLAUDE.md or the intent no

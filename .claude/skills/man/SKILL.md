@@ -5,16 +5,17 @@ argument-hint: "[command | method | question]"
 
 The manual of the forge (POS.1190): a reader, never a text of its
 own. Everything it prints is read at the moment of the call from the
-files that own it — CLAUDE.md, the skills, the agents, the state and
+files that own it — CLAUDE.md, the table of commands, the skills, the
+agents, the state and
 genre files — and shortened to the line; nothing is stated here that
 lives there. Read-only; it runs no command it describes. Alias:
 `/manual` (`.claude/skills/manual/SKILL.md`). The word `help` is
 Claude Code's own command, hence the Unix name.
 
 **Bare `/man` — the overview.**
-1. Read the Commands table of CLAUDE.md and print it as a list: the
-   command with its arguments, then its purpose cut to one line.
-   `/man` and `/manual` included.
+1. Read the table of commands, `.claude/reference/commands.md`, and
+   print it as a list: the command with its arguments, then its
+   purpose cut to one line. `/man` and `/manual` included.
 2. Read the Working methods section of CLAUDE.md and print each
    method's name with the first sentence of its paragraph.
 3. Close with one line: `/man <command>` for a command's page,
@@ -24,8 +25,8 @@ Claude Code's own command, hence the Unix name.
 1. Resolve `$0` to `.claude/skills/<command>/SKILL.md`; if none
    exists, say so and list the commands (step 1 of the overview).
 2. Print the command's purpose (its `description`), its arguments
-   (its `argument-hint`, else the CLAUDE.md row) and the CLAUDE.md
-   row's purpose in full.
+   (its `argument-hint`, else the row of the table of commands) and
+   that row's purpose in full.
 3. Print the roster the command dispatches over, where its skill
    names one: the same scan the bare command makes, read from that
    skill, each entry with the `description` of its own file and,
