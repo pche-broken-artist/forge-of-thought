@@ -491,13 +491,13 @@ class Light:
                 self.group(("unregistered", which), "low",
                            lambda n, w, d=which: f"{n} file{'s' if n > 1 else ''} of `{d}/` {'are' if n > 1 else 'is'} on disk and registered nowhere",
                            f"`{which}/{name}`",
-                           "CLAUDE.md, Document chain, External inputs (`/ingest` stores, registers and catalogues; `/check` verifies index against directory)",
+                           "`.claude/skills/ingest/SKILL.md` (`/ingest` stores, registers and catalogues); `.claude/agents/check-light.md`, Resource indexes (the index agrees with its directory)",
                            f"register each with `/ingest`" if which == "sources" else "an entry for each in `research/00-INDEX.md`", immediate=True)
             for name in sorted(n for n in set(names) - on_disk if not self.ignored(n)):
                 self.group(("entry-no-file", idx), "low",
                            lambda n, w, d=which: f"{n} entr{'ies' if n > 1 else 'y'} of `{d}/00-INDEX.md` name{'' if n > 1 else 's'} a file that is not on disk",
                            self.where(idx, fc.line_of(text, r"^### `" + re.escape(names[name]['name']) + "`", re.M)) + f" (`{name}`)",
-                           "CLAUDE.md, Document chain, External inputs (the index agrees with its directory)",
+                           "`.claude/agents/check-light.md`, Resource indexes (the index agrees with its directory)",
                            "drop the entry, or bring the file back", immediate=True)
             for name, e in sorted(names.items()):
                 hline = fc.line_of(text, r"^### `" + re.escape(e["name"]) + "`", re.M)
@@ -506,7 +506,7 @@ class Light:
                     for field in ("Date", "Form"):
                         if field not in f:
                             self.add("low", f"The sources entry `{name}` has no `{field}` field", self.where(idx, hline),
-                                     "`templates/index.md`, the sources entry; CLAUDE.md, Document chain, External inputs (date, origin and form are fields of the entry)",
+                                     "`templates/index.md`, the sources entry (date, origin and form are fields of the entry)",
                                      f"add the `{field}` line in the skeleton's form", immediate=True)
                     if "Date" in f:
                         m = re.match(r"^(\d{4}-\d{2}-\d{2})(?:,\s*from (.+?))?\s*$", f["Date"])
@@ -564,7 +564,7 @@ class Light:
             self.group(("entry-no-file", idx), "low",
                        lambda n, w, i=idx: f"{n} entr{'ies' if n > 1 else 'y'} of `{self.rel(i)}` name{'' if n > 1 else 's'} a file that is not in the bundle",
                        self.where(idx, fc.line_of(text, r"^### `" + re.escape(name), re.M)) + f" (`{name}`)",
-                       "CLAUDE.md, Document chain, External inputs (the index agrees with its directory)", "drop the entry, or bring the file back", immediate=True)
+                       "`.claude/agents/check-light.md`, Resource indexes (the index agrees with its directory)", "drop the entry, or bring the file back", immediate=True)
 
     # -- run
     def run(self):

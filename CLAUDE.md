@@ -64,7 +64,7 @@ forge is what they are told.
    says. The one exception among the artefacts is the briefs
    (`00-brief*.md`), kept in whatever language they are written in. A
    render may be in any language, or languages, its recipe declares
-   (Renders).
+   (`templates/recipe.md`).
 7. **Structure over prose.** Items with stable IDs, even at very high
    abstraction. Narrative only in Purpose & Context and Objective.
 8. **Assignments are complete and precise.** An assignment carries the
@@ -239,12 +239,8 @@ keeps is POS.1310 of the forge intent, and how its Map is walked
 POS.1320.
 
 1. **External inputs** (transcripts, offers, documents, standards) live
-   in `sources/`, immutable once registered, plain slug filenames —
-   its date, best effort and never demanded from the principal, its
-   origin and its form are fields of its index entry. They may arrive
-   at any stage, even before the brief.
-   `/ingest` stores, registers and catalogues — nothing more (bare, it
-   sweeps `sources/` for unregistered files). Extracts are
+   in `sources/`, immutable once registered, plain slug filenames.
+   Extracts are
    produced by `scripts/doc2md.py` and never by ad-hoc parsing; how
    the conversion runs and what it needs installed is the skill's and
    the script's header's. Registration does not
@@ -274,10 +270,7 @@ POS.1320.
    index tracks nothing (no processing state, no positions) and is an
    automatic input of no command: a contradiction between the intent
    and a resource is not a finding; Claude reaches for a file by its
-   own judgement or on request. Unlike the files it catalogues, the
-   index is freely rewritten, like the ledger. `/ingest` and
-   `/research` write the entries; `/check` verifies index against
-   directory.
+   own judgement or on request.
 2. **Feedback from recipients** has no channel of its own. The principal
    processes it and feeds conclusions back via `/forge intent`.
 3. **Renders** are audience-specific outputs generated from the chain —
@@ -286,9 +279,7 @@ POS.1320.
    iterated is its **recipe** (`recipes/<recipe>.md` — inputs, audience,
    instructions and the output template in one versioned file; more than
    one input is legitimate), and `/render <recipe>` regenerates the
-   output from it; where the output lands, the isolation of the
-   generation and the provenance every render opens with are the
-   command's (`.claude/skills/render/SKILL.md`). Recipes are tools, not
+   output from it. Recipes are tools, not
    records of thinking; how they are versioned is Versioning & status's.
    A render assigns nothing and is not part of the chain: the artefacts
    stay the source of truth. The boundary between chain and render is
@@ -302,13 +293,7 @@ POS.1320.
    deterministic, cheap, repeated freely. `/publish` makes the designed
    file through a model and its document skills: expensive, only on the
    principal's command, never by `/render`, by `/release` or on Claude's
-   own judgement.
-   The conversions are three scripts, `scripts/md2pptx.py` and
-   `scripts/md2docx.py`, each with two engines (`--engine pandoc |
-   claude`), and `scripts/md2video.py`, one engine and two formats; what
-   each needs installed, how a template or a reference document is
-   named, where the output lands and what becomes of a diagram is its
-   header's. A plain or a published file is tracked in git like any
+   own judgement. A plain or a published file is tracked in git like any
    render output and never edited by hand: the Markdown render stays the
    source of truth. Beside the forge's files the principal may keep his
    own in `renders/` and `published/`, made by hand from them, a copy
@@ -316,9 +301,7 @@ POS.1320.
    HTML of a diagram: in git with the rest, no companion, no row, no
    check (POS.1910). A render
    may cite another render as a picture source when the recipe declares
-   it among its inputs. A recipe may declare its languages and an output
-   path (`languages:`, `output:`, what each means:
-   `templates/recipe.md`); an output in the engine's `docs/videos/` is
+   it among its inputs. An output in the engine's `docs/videos/` is
    the one public folder, served by GitHub Pages and left alone by
    `/document`. Every project has a README as a
    render of its own `recipes/readme.md` (output the project root) and,

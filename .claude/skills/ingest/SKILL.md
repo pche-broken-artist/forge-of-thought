@@ -4,7 +4,8 @@ argument-hint: "[file-or-path] [project-slug] [--bundle name]"
 ---
 
 Ingest external input into the project (slug from the second argument or
-context; if ambiguous, ask).
+context; if ambiguous, ask). An input may arrive at any stage, even
+before the brief.
 
 **With a file argument:** register that document.
 **With text pasted into the conversation:** the text is the source —
@@ -54,8 +55,8 @@ else. Never silently re-register.
    offered for registration there, never reported as a changed
    source, and a new subdirectory is asked whether it grows at the
    question of its role.
-2. **Date, best effort, never a question** (CLAUDE.md, Document
-   chain, External inputs). The document's origin date goes into the
+2. **Date, best effort, never a question.** The document's origin
+   date goes into the
    `Date` field of its index entry if it can be determined for free:
    from the content (meeting date in a transcript header, offer
    date), else from file metadata, else the ingest date; the field

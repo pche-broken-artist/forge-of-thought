@@ -44,8 +44,8 @@ project does not have gets no row (CLAUDE.md, Document chain). -->
 
 ## Renders
 <!-- One row per render file, from the render's own provenance
-front-matter (CLAUDE.md, Document chain, Renders; a translation cites
-the primary render): Audience from its recipe, Recipe, Inputs and
+front-matter (`.claude/skills/render/SKILL.md`, step 5; a translation
+cites the primary render): Audience from its recipe, Recipe, Inputs and
 Generated as the provenance says. The documentation index has a row
 from its own front-matter: Recipe "none: derived by
 scripts/docs-index.py", Inputs the map and the intent's version. -->
