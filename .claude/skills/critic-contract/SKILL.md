@@ -57,13 +57,9 @@ file in `reviews/`.
   (`YYYY-MM-DD-critique.md`) belongs to the retired single critic: its
   findings are yours if they fall under your categories. A report named
   `*-check-<name>*.md` is a check's: its findings share the FND sequence
-  and are never yours. A rejected finding is re-raised only where the
-  document changed in a way that materially alters the situation (then
-  reference the DEC).
-- **New findings** carry no ID: the `/critique` procedure gives each
-  the next of the project's FND sequence, in tens, and never renumbers
-  (CLAUDE.md, Isolated reviewers). Severity high | medium | low;
-  category from your Lens section.
+  and are never yours.
+- **New findings.** Severity high | medium | low; category from your
+  Lens section.
 - **Calibration.** Each artefact is judged against its own
   definition (`.claude/skills/forge/states/<artefact>.md`), never
   against another's. The assignment deliberately stays high-level and its
@@ -91,8 +87,9 @@ file in `reviews/`.
 ## Output
 
 Return the report in your final message and write no file: the
-`/critique` procedure files it as `reviews/YYYY-MM-DD-critique-<lens>-HHMM-<hash>.md`
-and gives each new finding its ID (`.claude/skills/critique/SKILL.md`).
+`/critique` procedure files it in `reviews/`, the name completed by
+`scripts/forge-report.py`, and gives each new finding its ID
+(`.claude/skills/critique/SKILL.md`).
 Give a new finding no ID; name a known one by the ID it has. The
 report, English:
 

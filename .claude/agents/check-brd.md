@@ -18,7 +18,10 @@ the source by path. A project without a BRD is not a finding
 (CLAUDE.md, Document chain). The
 bookkeeping of the file — front-matter, the history companion — is
 the `light` check's; the ID scheme in general the `project`
-check's; you verify what only a BRD has.
+check's; you verify what only a BRD has. The rules you verify
+against are `.claude/skills/forge/states/brd.md`, its Aim and its
+Requirement style, and `templates/brd.md`; cite them, never restate
+them.
 
 What you verify:
 
@@ -31,16 +34,11 @@ What you verify:
    TBC of the BRD names it. Where the parent is a source, the
    citation is a path and a place; existence of the path is
    verified, the place is read as a fact.
-2. **Every item has a parent** — a BR and an NFR end with their
-   parent, `(REQ.NNNN)` or `(POS.NNNN)`; an NFR may end with its
-   category instead, `(category: <name>)`, where the parent named
-   none (`.claude/skills/forge/states/brd.md`, Requirement style);
-   a UC declares its parent in its `Carries` line, and its block
-   ends with its tables. An item with none of these is a finding.
-   Where the parent is a source with speakers, the place a BR or a
-   UC cites is a turn of the principal's side; a BR whose every
-   place is another party's turn is a finding
-   (`.claude/skills/forge/states/brd.md`, Requirement style).
+2. **Every item has a parent** — every BR, NFR and UC has its
+   parent, and where the parent is a source the place it cites is a
+   turn of the right party, as the Requirement style of
+   `.claude/skills/forge/states/brd.md` has them; every breach is a
+   finding.
 3. **The sections that may not be silent** — Phasing is present and
    not empty, every item it carries exists, and every BR and UC
    stands in a phase or in the `not phased` row (POS.1360); every
@@ -48,12 +46,11 @@ What you verify:
    by the roster's own name, as found or not applicable with a
    reason, and `Roster: none` with its one row is a fact, not a
    finding; every role the roster names as signing or reviewing is
-   in the Stakeholders table or named as absent with a reason; an
-   ASM whose content answers what a TBC of the same BRD asks is a
-   finding; every NFR category kept
-   carries a value or a TBC with an owner, never the skeleton's
-   wording; every TBC has an owner — a role, or `unassigned`, which
-   is a valid open state — and says whether it blocks estimation.
+   in the Stakeholders table or named as absent with a reason; no
+   ASM answers what a TBC of the same BRD asks, every NFR category
+   kept has its value or its TBC, every TBC its owner and its
+   blocking, as the same definition has them; every breach is a
+   finding.
 4. **Terms and links** — every capitalised term of an item is in
    the Terms table; no item depends on a link (the assignment's
    Requirement style, cited by the BRD's); no name of a person

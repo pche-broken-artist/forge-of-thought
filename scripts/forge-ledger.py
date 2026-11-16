@@ -31,10 +31,7 @@ WHAT IT DOES
     the work and the research.
 
     Waiting on principal and the Reports section follow the rule and
-    the list of templates/ledger.md, where each is defined: the open
-    threads stand in its order, those something waits on first, then
-    by priority, each with its priority and what waits on it in
-    brackets; a closed
+    the list of templates/ledger.md, where each is defined; a closed
     thread's later commit is found through forge_repos. An
     unparsable file is a line `unparsed: <file>:<line>` in the
     header, never a crash; the exit code is 0 (POS.1600).

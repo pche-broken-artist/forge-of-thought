@@ -36,10 +36,9 @@ explanation or reference, and what a mirrored and a derived page
 are, is the contract's (docs-contract, The kinds of a page); the
 outline of each kind is below. Nothing on the page
 comes from anywhere but the inputs: what they do not support is
-left out, not guessed, and reported; a reason the inputs do not give
-is said to be not recorded. An example that shows the shape an owner
-defines, plainly generic and taken from no project, is a mirror of
-that owner; a diagram drawn from what the owners say is the same
+left out, not guessed, and reported; what may and may not reach the
+page: the contract (docs-contract); a diagram drawn from what the
+owners say is a mirror of them, as the contract's example is
 (POS.1450). Where the entry asks for an example or a diagram, make
 one; where it does not, one is still welcome on a concept page and
 on a how-to.

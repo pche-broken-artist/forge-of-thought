@@ -57,9 +57,9 @@ holding. -->
 ## Use cases
 <!-- UC.NNNN at user-goal level. The header and the main scenario
 suffice where the behaviour is not contested; the exceptions where
-failure, compliance or contract matter. Steps in the active voice,
-present tense; a step names a BR only where that rule governs it.
-The parent of a use case is its Carries line. -->
+failure, compliance or contract matter. The wording of a step: the
+Requirement style of the definition; a step names a BR only where
+that rule governs it. The parent of a use case is its Carries line. -->
 
 ### UC.0010 <name>
 - **Actor:** …
@@ -95,9 +95,9 @@ the parent, the TBC and the wording of an item: the Requirement style.
 
 ## Touched areas of the enterprise
 <!-- The roster of the instance, cited by path; each area found (the
-items that carry it) or not applicable with the reason; a mandatory
-area is never silent. A project with no enterprise around it writes
-`Roster: none` and one row saying so. -->
+items that carry it) or not applicable with the reason. A mandatory
+area and a project without a roster: the Inputs and the Map of the
+definition. -->
 Roster: <path> | none
 
 | Area | Found in / not applicable, because |
@@ -135,10 +135,9 @@ replaced, with the reason in the Touched areas. -->
 - **BR.NNNN** … (REQ.NNNN)
 
 ## Phasing
-<!-- Mandatory (POS.1360): what each phase of the delivery brings,
-in what order, with what dependencies — even as "everything in the
-first phase". A phase is a release of the thing, never a version of
-this document. -->
+<!-- Mandatory (POS.1360; the Aim of the definition): what each phase
+of the delivery brings, in what order, with what dependencies. A
+phase is a release of the thing, never a version of this document. -->
 | Phase | Delivers | Items carried | Depends on |
 |---|---|---|---|
 | 1 | … | BR.NNNN, UC.NNNN | … |
@@ -161,10 +160,7 @@ each pointing at its DEP or TBC -->
 
 ## Terms
 <!-- Every capitalised term of the items; only prefixes and terms
-actually used. A term that is a thing the business handles — an
-entity — also says the states it may be in and the system it is
-taken from; how it is taken is the solution design's, and no
-attribute stands here. -->
+actually used. What an entity says here: the Map of the definition. -->
 BR business requirement · UC use case · DEP dependency · NFR
 non-functional requirement · OOS out of scope · ASM assumption ·
 TBC open question · SCR success criterion

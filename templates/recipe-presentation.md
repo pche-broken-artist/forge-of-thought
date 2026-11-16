@@ -3,7 +3,7 @@ project: <slug>
 purpose: Slide-by-slide source material for <the presentation>
 audience: <audience>
 version: 0.1
-# output: <path>   # optional — overrides the default renders/<recipe>.md
+# output: <path>   # templates/recipe.md
 ---
 
 # Recipe — <presentation name>

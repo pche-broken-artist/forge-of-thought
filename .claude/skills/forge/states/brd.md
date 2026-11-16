@@ -174,8 +174,6 @@ a gate. The ways in:
   reading, as the phasing is; a TBC whose owner the parent does
   not name carries `owner: unassigned`, a valid open state and not
   a residue of the skeleton, until the principal names the role;
-  nothing is derived from the draft before the principal has judged
-  it;
 - a file put in, and the automatic way runs on it into `work/`
   (Inputs);
 - a parent that moved, and the pass runs on what changed;

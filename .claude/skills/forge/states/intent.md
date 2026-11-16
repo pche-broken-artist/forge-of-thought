@@ -101,7 +101,8 @@ How the files are made: `templates/intent.md` with
 the text in the project's language (CLAUDE.md, prime directive 6); the
 rest is `/forge` step 2. The mining of a brief is the mining record as
 `templates/history.md` has it (the records of state; POS.1610), written
-at the round that mines; the ledger's Briefs table reads the newest.
+at the round that mines (the ledger's Briefs table:
+`templates/ledger.md`).
 Whatever remains unsettled is saved into its thread before the session
 ends (CLAUDE.md, Ledger); the ledger is remade after the write, `python
 scripts/forge-ledger.py <slug>`.

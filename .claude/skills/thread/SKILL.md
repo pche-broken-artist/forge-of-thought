@@ -12,8 +12,8 @@ project is the slug given last, else the project in context; if
 that is ambiguous, ask.
 
 **Bare.** Remake the ledger (`python scripts/forge-ledger.py
-<slug>`) and print the open threads from it: those something waits
-on first, then by priority, high to low. Nothing is written.
+<slug>`) and print the open threads from it, in the ledger's order.
+Nothing is written.
 
 **With a text: the birth.** Claude drafts the thread whole from
 what the principal said and shows it once: the matter, what is

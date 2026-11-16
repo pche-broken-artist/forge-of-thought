@@ -78,9 +78,9 @@ else.
 ## Output
 
 Return the report in your final message and write no file: the
-`/challenge` procedure files it as
-`challenges/YYYY-MM-DD-challenge-<persona>-HHMM-<hash>.md` and gives each challenge
-its ID (`.claude/skills/challenge/SKILL.md`). Give a challenge no ID.
+`/challenge` procedure files it in `challenges/`, the name completed
+by `scripts/forge-report.py`, and gives each challenge its ID
+(`.claude/skills/challenge/SKILL.md`). Give a challenge no ID.
 The report, English:
 
 ```markdown

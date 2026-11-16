@@ -98,6 +98,7 @@ How the files are made: `templates/solution-design.md` with
 - The item carries the detail of its part, whatever file realises it,
   and names that file (POS.1400).
 - A choice Claude made and the principal has not judged says so in
-  plain words at the item, until he has judged it.
+  plain words at the item, until he has judged it (CLAUDE.md, Working
+  methods, Handing over).
 - A TBC carries its owner, what would close it, and whether it
   blocks realisation.

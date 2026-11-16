@@ -91,14 +91,14 @@ rules for the Reference are the skeleton's,
 the stories as they stand; say whether the parent is stable enough
 to be derived from — approved, or the principal's word — never as a
 gate. The ways in:
-- no stories yet (the default way, handing over): Claude walks the
+- no stories yet (the default way, handing over: CLAUDE.md, Working
+  methods, Handing over): Claude walks the
   Map alone and returns first the cut — the name of every story with
   a short description of what it covers, in words, and the items of
   the parent no story serves, named by what they say — for the
   principal's word; only on the cut agreed he drafts the whole
   stories, asks nothing, and returns the draft; it is then walked
-  story by story (`.claude/skills/walkthrough/SKILL.md`); nothing is
-  derived from the draft before the principal has judged it;
+  story by story (`.claude/skills/walkthrough/SKILL.md`);
 - a story whose parent does not suffice: the walk switches to an
   interview on that story, one question at a time;
 - a requirements document put in, and the default way runs on it

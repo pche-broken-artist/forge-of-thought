@@ -34,11 +34,9 @@ interview). The shape of the specification is `templates/work.md`.
    record says otherwise).
 2. Read the inputs the specification names, by ID and by path, as they
    stand; the intent with the project's threads where it is among them.
-3. Work the specification with the principal, the way he chooses:
-   handed over, Claude works it alone from what he was given, from
-   research and from the sources, and returns a proposal with his
-   assumptions and choices listed, each choice with what it was chosen
-   against; found together, by elicitation interview. The specification
+3. Work the specification with the principal, the way he chooses,
+   handed over or found together (CLAUDE.md, Working methods, Handing
+   over and Elicitation interview). The specification
    cites and never copies; assumptions are ASM items and open matters
    TBC items with an owner, by the ID scheme of CLAUDE.md; `## Making`
    says how the file is made from it.

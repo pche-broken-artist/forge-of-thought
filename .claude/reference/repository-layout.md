@@ -32,6 +32,11 @@ LICENSE                    # CC BY 4.0 — the engine is published
                            # under attribution
 .gitattributes             # the engine's own ways of merging by
                            # path, its derived files at the root
+.gitignore                 # what never enters the engine's git: the
+                           # instance file, the local settings, every
+                           # project but the README of projects/
+                           # (POS.1980), Office lock files, byte-code
+                           # caches
 .mailmap                   # the author's names in the history
                            # mapped to one handle; git's own
                            # mechanism, the history untouched

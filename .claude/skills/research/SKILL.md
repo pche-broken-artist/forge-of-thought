@@ -70,8 +70,7 @@ when asked.
    draft proposes the depth: quick where one question is to be
    answered and cited, deep where a position, a layer of the chain
    or a design will rest on the answer; the principal's word
-   overrides it. A quick research skips steps 3 and 7 and runs step 5
-   on the session model only.
+   overrides it. A quick research runs as the opening says.
 
 3. **The second engine reads the draft** (only with `--engine`;
    without it, go to step 4). Make the run folder
@@ -118,15 +117,12 @@ when asked.
      profile and the tree; a run that fails is said with the script's
      reason and the card goes on with the session model's note alone,
      the Deviations recording it. A session agent's return is written by
-     Claude to `tmp/research/<run>/hold/<card>.claude.md` (a folder the
-     other engine's profile denies, `scripts/forge-engine.py`, header
-     2a) with the template's header filled (`engine: claude`, `model`
-     the session model, `usage: —`, `run` the packet folder), and moves
-     into the bundle as `<card>.claude.md` only when the second engine's
-     note of that card has returned or the principal has closed the card
-     single-engine, so that the independence of the two engines rests on
-     the profile's deny rules and the order of filing, never on the
-     place of the run (why: `scripts/forge-engine.py`, its header). A
+     Claude to `tmp/research/<run>/hold/<card>.claude.md` with the
+     template's header filled (`engine: claude`, `model` the session
+     model, `usage: —`, `run` the packet folder), and moves into the
+     bundle as `<card>.claude.md` only when the second engine's note of
+     that card has returned or the principal has closed the card
+     single-engine (why: `scripts/forge-engine.py`, header 2a). A
      second-engine run made after the first engine's note is filed is
      allowed, and its independence is then shown by the measure of step
      6 alone.
@@ -146,8 +142,7 @@ when asked.
    dead or mismatched citation goes back to its agent once, with the
    report, as a failed run; a note that comes back still failing is
    filed as it is, and the synthesis names every finding that rests
-   on a failed citation as without support. An unverifiable URL
-   (403, a timeout) is said so and never counted as a failure.
+   on a failed citation as without support.
    Then the independence of the engines, card by card:
    `python scripts/forge-cite.py --independence <bundle>` (what it
    counts and the threshold: its header); a note it marks as written

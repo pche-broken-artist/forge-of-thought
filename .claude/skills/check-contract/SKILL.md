@@ -61,9 +61,9 @@ names the owner of each rule and never restates it (POS.1070).
   target's ledger (for the engine `projects/forge/ledger.md`; made at read
   time by the command that launches you, SOL.0680) and your own earlier
   reports in its `reviews/` (`*-check-<name>*.md`), and a known finding
-  carries its ID in a Known as line; a rejected one (an older record's
-  overruled, or a state accepted as it is, reads as rejected) is at most
-  named once as a fact, with the DEC cited.
+  carries its ID in a Known as line; a rejected one (the state words:
+  `templates/ledger.md`; a state accepted as it is reads as rejected) is
+  at most named once as a fact, with the DEC cited.
 - **Cheap where the Lens says so.** A check that names a scope reads
   that scope and nothing more; a check that names the whole reads
   the whole, honestly, however long it takes.
