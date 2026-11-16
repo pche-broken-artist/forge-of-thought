@@ -29,9 +29,11 @@ What you verify:
      in its front-matter (`skills:`) exists as
      `.claude/skills/<name>/SKILL.md` — Claude Code skips a missing
      one silently.
-   - Scripts on disk ↔ CLAUDE.md: every file in `scripts/` is
-     described in CLAUDE.md (layout comment and its governing rule)
-     and nothing described there is missing on disk.
+   - Scripts on disk ↔ the layout of the engine
+     (`.claude/reference/repository-layout.md`): every file in
+     `scripts/` is described there, its governing rule in CLAUDE.md
+     where it has one, and nothing described there is missing on
+     disk.
    - README ↔ CLAUDE.md and the table of commands: same chain, same
      conventions, same command
      set, no contradictions — never currency: the README and the

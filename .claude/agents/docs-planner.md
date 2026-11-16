@@ -37,7 +37,8 @@ prints them as links.
 
 Five sections by the reader's journey, each a directory under
 `docs/`; `docs/videos/` is not a section of the documentation and
-is never mapped (CLAUDE.md, Repository layout; POS.1540). A section
+is never mapped (`.claude/reference/repository-layout.md`; POS.1540).
+A section
 or a page with no material is left out, never left empty. Each page
 has one topic and one kind, how-to, explanation or reference, as the
 contract defines them (docs-contract, The kinds of a page); plan
