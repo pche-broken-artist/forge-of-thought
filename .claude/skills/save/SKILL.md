@@ -15,7 +15,7 @@ CLAUDE.md (Persistence) carries the one-line summary (POS.1070).
 Arguments (`[slug]`, `-m "message"`, `--tag <name>`) are passed through
 to the script; `--quick` is this skill's alone, leaves the check out and
 nothing else (POS.1100), and is never passed on; a project without a
-repository is a property, not a defect (CLAUDE.md, Persistence) — relay
+repository is a property, not a defect (POS.0940) — relay
 the script's note in the report.
 
 1. Determine scope from `python scripts/forge-status.py` (the forge
@@ -35,7 +35,7 @@ the script's note in the report.
 2. Unless `-m` was supplied, draft a one-line English commit message
    summarising the round — from the records the round appended to
    the touched documents' histories, the primary record of every
-   round (CLAUDE.md, Versioning & status) — and propose it to the
+   round (POS.0310) — and propose it to the
    principal; commit with the confirmed or adjusted wording. When
    more than one repository has changes, one message per repository
    is drafted, or the save is run per slug. The script's

@@ -559,8 +559,8 @@ driver `ours` and the git settings it needs in that same global file,
 the stanzas, the guard and the registration written through
 `scripts/forge-config.py`, and `forge-status` says when the registration
 is missing, since an unregistered clone silently falls back to a
-conflict (SOL.0740). A project "not under git" is a property, not a
-defect. The scripts in `scripts/` are the door to a write of git;
+conflict (SOL.0740). The scripts in `scripts/` are the door to a write
+of git;
 reading git directly is open; the line between the two is held for
 Claude by the hook `scripts/hook-git.py` of `.claude/settings.json`,
 which denies every write and names the script to use, but for the few
@@ -615,13 +615,8 @@ the README and release notes and then saves with the release message and
 tag. Whatever makes a derived file or migrates a project, `/release`,
 `/publish`, `/document` and `/migrate`, runs on `main` only, refuses a
 repository behind or diverged from its origin and offers `/pull`
-(POS.1710). Which checks each runs is its own definition's
-(`.claude/skills/save/SKILL.md`, `.claude/skills/release/SKILL.md`).
-The forge never pulls or merges on its own judgement (POS.1490). A
-release that changes the shape of files comes with a migration,
-`/migrate [slug]` through `scripts/forge-migrate.py`: once per project,
-on one clone, under git or not, on the principal's word, never on
-Claude's (POS.1740). Until a project is migrated nothing writes into it:
+(POS.1710). The forge never pulls or merges on its own judgement
+(POS.1490). Until a project is migrated nothing writes into it:
 the map, the checks and every writing command say what
 `templates/project.md` says and stop. What each does in full is its own
 definition's (`.claude/skills/pull/SKILL.md`,
@@ -664,9 +659,7 @@ records, `Was` included. What the user must do after a change is
 written with it, in `Action`. Before proposing a change to an item,
 Claude reads its history through `/history <ID>`
 (`.claude/skills/history/SKILL.md`); the history is searched by its
-script, never loaded whole. The log is the single primary: the
-commit messages `/save` and `/release` draft and the release notes
-are derivations.
+script, never loaded whole.
 The companion is part of its document: it has no ledger row and is
 handed over with the document by the link into git. A companion
 written before the log keeps its table untouched: it moves as it
@@ -740,7 +733,8 @@ time, so that no ID is given twice (POS.1140). A filed finding is
 reported under the ID it has, still open, reopened or verified resolved,
 and a rejected one is not raised again; the state words are
 `templates/ledger.md`'s. No reviewer runs on Claude's own judgement;
-what a save and a release run is theirs to say (Persistence). The
+what a save and a release run is theirs to say
+(`.claude/skills/save/SKILL.md`, `.claude/skills/release/SKILL.md`). The
 challenger has personas, the critic has lenses, the check has checks:
 one agent file each (`challenger-<persona>`, `critic-<lens>`,
 `check-<name>`), the shared behaviour of each kind preloaded from one

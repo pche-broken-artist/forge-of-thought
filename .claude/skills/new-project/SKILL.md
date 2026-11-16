@@ -7,8 +7,8 @@ Create a new project under `projects/$0/`. Files only: the command never
 touches git. A project is a repository of its own that the engine does
 not track; initialising it and adding a remote are the principal's
 one-off act, the way in named in CLAUDE.md, Persistence, and a project
-that starts "not under git" is a property, not a defect (CLAUDE.md,
-Persistence) — say so once at the end. The commit identity is git's,
+that starts "not under git" is a property, not a defect (POS.0940)
+— say so once at the end. The commit identity is git's,
 resolved per host from his own configuration (CLAUDE.md, Persistence) —
 nothing to propose.
 

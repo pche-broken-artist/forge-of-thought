@@ -21,7 +21,7 @@ is CLAUDE.md, Document chain's. This dispatcher never changes.
      under git — as `python scripts/forge-status.py --remote` of step
      4 reports it, a repository of its own or "not under git"
      (POS.0550),
-     stated as a fact, never as a defect (CLAUDE.md, Persistence);
+     stated as a fact, never as a defect (POS.0940);
    - a `library` is material, not a project waiting for a brief:
      report its sources and research (from the ledger and the
      indexes) and stop after the git line — no chain, no target

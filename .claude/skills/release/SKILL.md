@@ -121,7 +121,7 @@ at the tag of a major. Nothing is parked on the principal's behalf: what
    version>: <one line>` — the line summarising the rounds since the
    last release, from the records of the intent's history since the last
    release, and the rows of its archive where the span reaches before
-   the log, the primary record (CLAUDE.md, Versioning & status), unless
+   the log, the primary record (POS.0310), unless
    `-m` was supplied; for a library, whose history is git, the version
    is omitted and the line describes what changed — and, when the
    intent's version is an integer (an approved major), the tag
