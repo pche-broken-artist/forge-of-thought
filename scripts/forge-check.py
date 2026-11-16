@@ -243,7 +243,7 @@ class Light:
         recs = fd.records(comp)
         for path, line, what in fd.problems[before:]:
             self.add("medium", f"`{self.rel(comp)}:{line}` is not a record of the log's shape", self.where(comp, line),
-                     f"{rule_vs}; `templates/history.md` (one record per change, `- <date> | <version> | <author> | <subject> | <kind> | <reason> | Action: … | Was: …`)",
+                     "`templates/history.md` (one record per change, `- <date> | <version> | <author> | <subject> | <kind> | <reason> | Action: … | Was: …`)",
                      "bring the line to the record's shape", immediate=True)
         del fd.problems[before:]
         for r in recs:

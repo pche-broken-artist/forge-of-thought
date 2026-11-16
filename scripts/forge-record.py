@@ -33,7 +33,9 @@ WHAT IT DOES
     version the document's header carries now, since a record of state
     carries the current version and the version is raised in the
     header first (POS.1630); the author the handle of the instance
-    file. `decision` writes the next DEC of the project's sequence,
+    file. `--action` is what the user must do after the change,
+    written with the change itself. `decision` writes the next DEC of
+    the project's sequence,
     ten above the highest, in the shape of templates/decisions.md,
     the Decision and the Reason wrapped at 72 columns.
 

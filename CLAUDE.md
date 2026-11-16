@@ -606,17 +606,14 @@ Every versioned document — every artefact, every recipe and every
 work specification alike, no exception — keeps its **history** in an
 append-only companion `<file>.history.md` beside it, never in its
 body: the body is the current state, the companion the record. The
-history is a log, one record per change, in the shape
-`templates/history.md` owns; a round is one version and as many
-records as it made changes. The author of a record is the one who
-decided the change, by the handle the instance gives its principal.
+author of a record is the one who decided the change, by the handle
+the instance gives its principal.
 The way to an item — why it changed, what was said, trials,
 measurements, which research turned it — goes into its record, never
 into the item; the record is written in the same step as the change,
 through `scripts/forge-record.py`, never by an edit (POS.0310), and
 the reflection before a write shows the new wording and the
-records, `Was` included. What the user must do after a change is
-written with it, in `Action`. Before proposing a change to an item,
+records, `Was` included. Before proposing a change to an item,
 Claude reads its history through `/history <ID>`
 (`.claude/skills/history/SKILL.md`); the history is searched by its
 script, never loaded whole.
