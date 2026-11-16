@@ -114,7 +114,7 @@ any of them in a word.
   `/challenge`, the `/forge` map, a comparison on request) ends by
   offering a walkthrough. A per-prompt hook,
   `scripts/hook-walkthrough.py` configured in
-  `.claude/settings.json`, repeats the one-item rule and four lines
+  `.claude/settings.json`, repeats the one-item rule and lines
   of conduct at every prompt: a rule that must hold in a long
   conversation is not trusted to this file alone.
 - **Propose, never decide.** Claude criticises, challenges, inspires
