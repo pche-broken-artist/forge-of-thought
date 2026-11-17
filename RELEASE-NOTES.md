@@ -1,13 +1,13 @@
 ---
 project: forge
 render: release-notes
-generated: 2026-11-08
+generated: 2026-11-17
 recipe: recipes/release-notes.md v0.15
 inputs:
   - projects/forge/10-intent.history.md
   - projects/forge/10-intent.history.archive.md
   - projects/forge/40-solution-design.history.md
-  - projects/forge/10-intent.md v7.0
+  - projects/forge/10-intent.md v7.13
   - projects/forge/decisions.md
   - RELEASE-NOTES.md
 ---
@@ -18,6 +18,299 @@ One section per release of the engine, newest first, for the user who
 takes upgrades through `forge-pull`; Action required comes first in
 every section; the fine-grained log with the reasons lives in
 `projects/forge/10-intent.history.md`.
+
+## 7.13 - 2026-11-17
+
+### Fixed
+- The position on instance facts names what a subagent receives in
+  place of "the session's whole context", which read as the
+  conversation too; CLAUDE.md, Isolated reviewers, says a subagent
+  sees nothing of the conversation (POS.0950, FND.4920). For you:
+  nothing to do; a reviewer, a renderer or a documentation agent reads
+  its inputs from disk and never your conversation, as before.
+- The solution design is brought to what the engine does: the
+  per-prompt hook repeats five lines of conduct since the line Skills,
+  the tag of a release goes on both repositories under one name, the
+  ledger script reports an ID taken twice and no version given twice,
+  which is found at the merge, and the Research table of the ledger is
+  read from the notes' own front-matter, a bundle's from its head
+  (SOL.0030, SOL.0510, SOL.0840, SOL.0680, POS.1790, FND.4910,
+  FND.4930, FND.4940). For you: nothing to do; the design and the
+  header of `forge-ledger.py` say what the scripts already do.
+- The documentation map is brought to its owners' wording at the run
+  of 2026-11-17: two reasons are cut from their entries, POS.1750 is
+  among the inputs of `docs/use/settle-a-conflict.md`, and the map's
+  heading is the one `templates/docs-map.md` gives (FND.4350,
+  FND.4900). For you: the pages carry the corrected wording from this
+  release's `/document` run.
+
+## 7.12 - 2026-11-17
+
+### Added
+- A skeleton's comment stays in the skeleton: the comment of a
+  template says how a file is made and kept and is read there, and a
+  file made from a template names its template in one line, a citation
+  and never the wording, so that a change of a template's wording
+  changes no file of any project (POS.2030, SOL.0970). For you: a new
+  file of your project carries the line that names its template and
+  none of the template's comments; a file made before may keep the
+  comment it was born with, which nothing reads and no check reports.
+- `/migrate` carries `--comments`, by which the owner of a project may
+  have the old comments of his files replaced by the line; nobody is
+  made to, and an immutable file keeps its comment (POS.2030,
+  SOL.0970, FND.4860). For you: run it on your project if you want the
+  old comments gone, or leave the files as they are.
+
+### Changed
+- The light check and the project check verify the shape of a file
+  against the template it names, and the fixture's files carry the
+  line in place of the skeletons' comments (SOL.0330, SOL.0830,
+  SOL.0970). For you: a check no longer compares a comment in your
+  file with its template; it reads the shape of the file against the
+  template the file names.
+- The comment of `templates/history.md` cites the thread skill for the
+  records of a thread's birth and closing and no longer restates them;
+  the change touches no file of a project, since no file carries the
+  comment (FND.4830, POS.2030). For you: nothing to do.
+
+### Fixed
+- The row of `/migrate` in `.claude/reference/commands.md` carries
+  `--comments` and what it does, the layout of the engine's root names
+  the table of prefixes among the files of `.claude/reference/`, and
+  CLAUDE.md, Repository layout, names `recipes/readme.md` and
+  `recipes/release-notes.md` in the layout of a thought project
+  (FND.4860, FND.4870, FND.4880). For you: nothing to do; the
+  reference files and CLAUDE.md name what the engine already has.
+
+## 7.11 - 2026-11-15
+
+### Changed
+- The table of commands stands in `.claude/reference/commands.md` and
+  the layout of the engine's root in
+  `.claude/reference/repository-layout.md`, both moved there on
+  2026-11-16 (SOL.0640, SOL.0950, FND.4760, FND.4780). For you: look a
+  command or a file of the engine up in `.claude/reference/`, or ask
+  `/man`.
+- A rejected finding is not raised again, as CLAUDE.md, Isolated
+  reviewers, has it; the critic's contract drops its exception, and
+  the check's contract cites `templates/ledger.md` for the state words
+  (FND.4240). For you: a finding you rejected stays rejected at the
+  next run of any reviewer.
+- More rules are stated once and cited from their owners: the order of
+  the Waiting list in `templates/ledger.md` alone, Handing over cited
+  by the work skill and the definitions of the BRD and of the user
+  stories, the BRD check and the comments of `templates/brd.md` citing
+  the BRD's definition, the `output:` comment of the presentation
+  skeleton citing `templates/recipe.md`, the research skill citing the
+  headers of `forge-engine` and `forge-cite`, the docs writer citing
+  its contract, and the two reviewer contracts naming the directory
+  and `forge-report` for a report's name (FND.2880, FND.4210,
+  FND.4220, FND.4790, FND.4800, FND.4810, FND.4820, FND.4850). For
+  you: nothing to do; a rule you look up stands in one place.
+
+### Fixed
+- `forge_docs.py` strips a pair of quotes around a whole header value
+  and keeps a quote that only ends or only begins the value, so that
+  the ledger's Research table no longer drops the closing quotation
+  mark of a `derived_from`; its test with it (the operating layer).
+  For you: a research note whose `derived_from` ends in a quotation
+  reads whole in the ledger.
+
+## 7.10 - 2026-11-13
+
+### Fixed
+- `templates/history.md` cites the intent's definition for the rules
+  of a thread again, the change of the same day taken back: one line
+  of the comment had made a finding of every history companion, and
+  the old citation still leads to the skill (the operating layer,
+  SOL.0960, FND.4750). For you: the light check does not report your
+  history companions for the comment they carry.
+
+## 7.9 - 2026-11-13
+
+### Changed
+- A thread is born on the principal's command only, also where Claude
+  writes it from a document or from his own synthesis; Claude may say
+  that a matter deserves a thread and never opens one on his own
+  judgement (POS.0120). For you: no thread appears in your project
+  without your word.
+- A thread may concern a recipe, a work product or any other document
+  of the project, not an artefact alone, and a thread born or closed
+  in a project that has no intent yet is recorded in the history of
+  its brief (POS.1680, POS.0120, POS.1080). For you: `concerns` in a
+  thread's header takes an artefact as `/forge` names it or a document
+  by its path.
+- The thread skill is brought to the positions: the birth of a thread
+  names what will close it and says how an existing thread on the
+  matter is continued, work that changes a document runs by its
+  definition and what was decided is written there before the thread
+  closes, a thread that closes gets a last dated paragraph saying how
+  it ended, the header of a thread is described in the template
+  alone, and the form of sorting a project's threads is no longer
+  prescribed (the operating layer, SOL.0960). For you: a closed
+  thread reads as the archive it is, and what it decided stands in
+  the document it concerned.
+- The map of `/forge` names the threads something waits on and the
+  high ones and counts the rest, the full list being `/thread`'s (the
+  operating layer). For you: the map shows the threads that press, and
+  `/thread` shows them all.
+- The light check is brought to the header of a thread as it now
+  stands (SOL.0960, POS.1680). For you: nothing to do.
+
+## 7.8 - 2026-11-12
+
+### Added
+- A thread's header carries three more fields, `owner`, `priority`
+  (`high`, `medium` or `low`) and `blocks`, a short name of what waits
+  on the thread; a thread without a priority is read as medium and one
+  without an owner as owner not said, neither a finding, so that no
+  project need be migrated (POS.1680, SOL.0720). For you: give a new
+  thread its priority and, where something waits on it, what; your
+  existing threads stand as they are.
+- The rules of a thread stand in the skill `/thread`, moved there from
+  the intent's definition, since a thread is born outside `/forge
+  intent` too (SOL.0960, SOL.0720, THR.0870). For you: the threads of
+  a project are worked through `/thread`.
+
+### Changed
+- What a thread is and what it holds is said in full: one matter of a
+  project set aside to be taken up later, a task, a question, a
+  decision to make or an idea, with what is known of it while it is
+  unsettled, the plan of a change under way among it; not a second
+  matter, which is a thread of its own, and not what has been decided,
+  which goes into the artefact it concerns (POS.0120). For you: a
+  thread may carry a new direction or a new feature with its plan, and
+  a decision leaves it for the document it belongs to.
+- The priority of a thread says when the matter is taken up, not how
+  much an item binds; the priorities of items stay rejected (POS.1680,
+  REJ.0050). For you: a priority belongs to a thread, never to a
+  requirement.
+- The ledger lists the open threads in the order of what waits and of
+  priority, each with both in brackets (SOL.0680). For you: the top of
+  the list is what something waits on.
+- A request in free words is the command: what you ask for runs
+  through its definition as if you had typed it, and what runs only on
+  your word still does; a skill holds whenever its situation arises,
+  not only after its command (POS.1070). For you: ask in your own
+  words and the forge works by the same definition as the slash
+  command.
+
+## 7.7 - 2026-11-10
+
+### Changed
+- A pull request says in its description what it changes and why, item
+  by item, and what was run, so that whoever merges it judges it
+  without reconstructing it from the diff; one that does not is sent
+  back to be described (POS.1440). For you: describe your pull request
+  item by item and name what you ran.
+- A pull request carries one matter and whatever that matter needs,
+  never several unrelated changes; a second matter is a second pull
+  request (POS.1440). For you: send unrelated fixes as pull requests
+  of their own.
+
+## 7.6 - 2026-11-10
+
+### Added
+- `scripts/forge-record.py`, with its test, appends every record of a
+  history and every decision; CLAUDE.md, Versioning & status and
+  Repository layout, names it, and the author is read by one function
+  that `forge-migrate` shares (SOL.0950, the operating layer,
+  THR.0880). For you: a record of your project's history or a decision
+  is written through the script, never by an edit.
+
+### Changed
+- The end of an append-only file, a history or the decisions, is found
+  by a mechanism and never by hand, after a record was placed above
+  the last line (POS.0310, THR.0880). For you: the order of a history
+  is the order of its changes, which the search of a history and the
+  ledger read.
+
+## 7.5 - 2026-11-10
+
+### Changed
+- The intent says what is wanted and why, and the mechanism is left to
+  the solution design: the scripts, the files, the git commands and
+  the order of steps are cut from twenty-five positions and stand in
+  the design, as the check `boundary` found them in its first run
+  (POS.1390, POS.1200, POS.1710, POS.1690, POS.1880, POS.1740,
+  POS.1610, POS.1600, POS.1100, POS.1530, POS.1540, POS.1790,
+  POS.1970, POS.1870, POS.1450, POS.0550, POS.1930, POS.1950,
+  POS.1960, POS.1170, POS.0590, POS.1890, POS.1570, POS.1590,
+  POS.1900, SOL.0730, SOL.0870, SOL.0800, SOL.0530, SOL.0840,
+  THR.0640, CHL.0640, FND.4410 to FND.4660). For you: nothing changes
+  in how the engine behaves; a position you read carries the stance,
+  and how it is built is read in the solution design.
+- The way to a position, its trials, measurements and earlier dates,
+  is moved from the positions and from the parts of the design into
+  their histories, each item keeping the one date of its present
+  shape, the stance unchanged (FND.2760, FND.4670, FND.4690, FND.4700,
+  FND.4710). For you: why an item changed is found through `/history
+  <ID>`, not in the item.
+- What is designed stands in the solution design, whole enough to
+  build from, never only in the file that realises it; the cost, the
+  same detail in the design and in a script's header, is accepted
+  (POS.1400, POS.1420, DEC.0490). For you: a solution design of your
+  project carries the detail of a part, and a file's header may repeat
+  it.
+- A change of how the forge behaves that touches both repositories,
+  the engine's and the forge's own project's, is merged in both or in
+  neither, in one sitting, never with a release between the two
+  (POS.1980). For you: as a user nothing; as a contributor, send the
+  two halves of such a change together.
+
+## 7.4 - 2026-11-10
+
+### Added
+- The check `boundary` reads an intent with its solution design and
+  reports where the division between them does not hold, each move
+  proposed in full; it runs on the principal's word, and the division
+  is kept by a check run again and again rather than by one pass by
+  hand (POS.1140, POS.1390, CHL.0640). For you: after a round on the
+  intent of a project that has a solution design, `/check boundary`
+  tells you what belongs in the other document.
+
+## 7.3 - 2026-11-10
+
+### Added
+- The format of a picture is its recipe's, the principal's choice
+  recipe by recipe: mermaid inside the Markdown, or `png`, drawn by
+  its renderer with the width stated in the recipe and the height
+  following from the content; further formats may be added (POS.0590,
+  SOL.0940). For you: where mermaid cannot draw the picture you want,
+  name `png` in the recipe and give its width.
+
+## 7.2 - 2026-11-09
+
+Nothing for the user of the engine.
+
+## 7.1 - 2026-11-08
+
+### Changed
+- A tag of a release goes on both repositories, the engine's and the
+  forge's own project's, with one name, so that one release is one tag
+  in both; `forge-save` tags both where `forge` names two, with its
+  test (POS.1980). For you: as a user nothing, the tag you pull to is
+  the engine's; whoever develops the engine finds the same tag on the
+  project beside it.
+- The operating layer states more of its rules once, the pass after
+  the tag `v7`: `/forge` owns how the files of an artefact are made,
+  `templates/recipe.md` owns `languages:` and `output:`, `/check` owns
+  how a report is filed, with `/critique`, `/challenge` and
+  `/document` filing as it does, CLAUDE.md, Isolated reviewers, owns
+  how a filed finding is reported and the rule of isolation and of
+  instance facts, the `/history` rule stands once in CLAUDE.md, and
+  the line on what waits on GitHub is relayed by `/pull` and `/forge`
+  as the script prints it (the operating layer, DEC.0460, FND.2890,
+  FND.4190 to FND.4300, FND.4340). For you: nothing to do; a rule you
+  look up stands in one place and is cited from the others.
+
+### Rejected
+- A global ignore of the Office lock files per machine, registered by
+  `/setup` and reported by `forge-status` when missing, is dropped: it
+  would not travel with git, every clone depending on its owner
+  remembering a setup of his own (REJ.0550, DEC.0470). For you: the
+  line travels in every project's own `.gitignore`, and `/setup` asks
+  nothing for it.
 
 ## 7.0 - 2026-11-08 - approved
 

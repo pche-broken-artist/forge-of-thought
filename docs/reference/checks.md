@@ -1,13 +1,14 @@
 ---
-generated: 2026-11-08
-version: 7.0
+generated: 2026-11-17
+version: 7.12
 made: mirrored
-inputs-hash: 314c188ab814dcb2
+inputs-hash: dcd4d88840d7ad4f
 inputs:
   - .claude/agents/check-light.md
   - .claude/agents/check-project.md
   - .claude/agents/check-engine.md
   - .claude/agents/check-history.md
+  - .claude/agents/check-boundary.md
   - .claude/agents/check-single-source-of-truth.md
   - .claude/agents/check-brd.md
   - .claude/agents/check-user-stories.md
@@ -17,173 +18,354 @@ inputs:
 
 # Checks
 
-This page lists the checks of the forge: the reviewers that verify mechanical conformance with the conventions, one concern each, never the substance or the quality of a document. You use it to pick the check that fits, whether you run one (see [Check conformance](../use/check-conformance.md)) or add one (see [Add a check](../extend/add-a-check.md)). Terms of the forge are one line each in the [Glossary](glossary.md).
+This page lists the eight checks of the forge: what each one verifies,
+what it reads, what it costs and when it fits. It is for the one who
+runs a check and for the one who adds another. Each check is a
+reviewer that verifies conformance with the conventions. It is not a
+critic of the documents and not a challenger of the thinking.
 
-A check runs as an isolated subagent, that is a helper of Claude that sees nothing of the conversation. Its findings are advisory: the principal, whose thinking is being forged, decides what to do with them. A run that finds nothing files nothing. Each check names a project by its slug, or the engine.
-
-## Overview
+A check is advisory. Its findings are settled in a walkthrough, that
+is, one item per message with the principal's verdict on each. The
+principal is the person whose thinking is being forged.
 
 | Name | What it is for | When it fits | Where it lives |
 |---|---|---|---|
-| `light` | A project's bookkeeping: front-matter, history companions, the ledger's own reports, index entries, published companions, thread files | A save | `.claude/agents/check-light.md` |
-| `project` | A project's structure, IDs, language, immutables, recipes and renders | A release, beside `light` | `.claude/agents/check-project.md` |
+| `light` | A project's bookkeeping: front-matter, history companions, the ledger's reports, indexes, published companions, threads | A save | `.claude/agents/check-light.md` |
+| `project` | A project's structure, IDs, language, immutables, recipes, renders and the shape of whole files | A release | `.claude/agents/check-project.md` |
 | `engine` | The core against itself and against the forge intent | A release | `.claude/agents/check-engine.md` |
-| `history` | The division between a document and its history | When a document is cleaned, never at a save or a release | `.claude/agents/check-history.md` |
-| `single-source-of-truth` | That every rule, procedure and file shape is written in one place | Before a major release or after a round on the operating layer, not at every release | `.claude/agents/check-single-source-of-truth.md` |
+| `history` | The division between a document and its history | When a document is cleaned | `.claude/agents/check-history.md` |
+| `boundary` | The division between an intent and its solution design | After a round on the intent, or before a major | `.claude/agents/check-boundary.md` |
+| `single-source-of-truth` | That every rule, procedure and file shape is written in one place | Before a major, or after a round on the operating layer | `.claude/agents/check-single-source-of-truth.md` |
 | `brd` | The mechanics of a BRD | After a pass of `/forge brd` | `.claude/agents/check-brd.md` |
 | `user-stories` | The mechanics of user stories | After a pass of `/forge user-stories` | `.claude/agents/check-user-stories.md` |
 
 ## Which checks a save and a release run
 
-- A save runs `light` on every repository in scope, unless it was given `--quick`. A save never waits on a finding the principal has not asked to fix.
-- A release of a project runs `light` and `project` on it.
-- A release of the engine runs `engine` on the engine root, and `light` and `project` on the forge's own project. The checks are launched at once and awaited together.
-- The other four checks (`history`, `single-source-of-truth`, `brd`, `user-stories`) run neither at a save nor at a release.
+A save runs `light` on every repository in scope, unless it is given
+`--quick`, which leaves the check out. A release runs `light` and
+`project` on a project. For the engine it runs `engine` on the engine
+root, and `light` and `project` on the forge's own project. No other
+check is run by either.
 
 ## light
 
-Description: Check "light" - verifies a project's bookkeeping: front-matter and the history companions against the templates, the ledger script's own reports, the index entries, the published companions and the thread files against the directories and the rules. Fit for a save. Verifies conformance with the conventions. Not a critic of the documents, not a challenger of the thinking.
+**Description.** Verifies a project's bookkeeping: front-matter and
+the history companions against the templates, the ledger script's own
+reports, the index entries, the published companions and the thread
+files against the directories and the rules. Fit for a save.
 
-What it reads: one project, by the path of the task (for the engine, the forge's own project). It is the check a save can afford: bookkeeping only. Everything else about a project belongs to `project`.
+**Reads.** One project, the path the task names; for the engine, that
+is `projects/forge`.
 
-What it verifies, with the owner of each rule:
+**Verifies.**
 
-- Front-matter and history of every versioned document and its companion: the placement of the history and the form of its log. The owners are the section Versioning & status of `CLAUDE.md` and `templates/history.md`. Whether a text belongs in the document or in its history belongs to `history`.
-- The ledger's own reports: each line of its Reports section and each `unparsed:` line of its header is a finding, with the file it names. The owner is `templates/ledger.md`. A ledger whose header says `shape: before the migration` is reported as `templates/project.md` says.
-- Records and companions:
-  - A published companion without its file is a finding. A file in `published/` without a companion is the principal's own and is never one.
-  - Every specification in `work/` has its history companion.
-  - A work file that cites an item by ID that is not among its specification's inputs is a finding.
-  - Every thread file carries the header of `templates/thread.md`, and a closed one is unchanged since its closing.
-  - A state word that a record or a verdict carries and the templates do not know is a finding. A review or decision record keeps the word it was written with.
-- Dependencies: every path in the Dependencies table exists on disk. A missing library is an advisory finding.
-- Resource indexes: `sources/00-INDEX.md` and `research/00-INDEX.md` exist and agree with their directories, bundle indexes included. A sources entry without its `Date` and `Form` fields is an immediate fix (owner: `templates/index.md`). A binary without an extract, or an extract without its original, is the normal case. A binary listed in `sources/.gitignore` is not an unregistered file. It never judges what the entries say.
+- Front-matter and history, against Versioning & status in
+  `CLAUDE.md`, for every versioned document and its companion: where
+  the history stands, and the form of its log as `templates/history.md`
+  gives it. A Version History table in a document or its companion is
+  a finding. It is settled by moving the table, untouched, to
+  `<file>.history.archive.md`, on the principal's word, project by
+  project.
+- The ledger's own reports: each line of its Reports section and each
+  `unparsed:` line of its header (`templates/ledger.md`) is a finding,
+  with the file it names. The ledger is the state of a project, built
+  from its documents at read time. A ledger whose header says `shape:
+  before the migration` is reported as `templates/project.md` says.
+- Records and companions: a published companion without its file is a
+  finding; a published file without a companion is the principal's own
+  and never one. Every specification in `work/` has its history
+  companion. A work file that cites an item by ID not named among its
+  specification's Inputs is a finding. Every thread file carries the
+  header of `templates/thread.md`, and a closed one is unchanged since
+  its closing. A state word that the templates do not know is a
+  finding.
+- Dependencies: every path in the Dependencies table exists on disk. A
+  missing library is reported as an advisory finding.
+- Resource indexes: `sources/00-INDEX.md` and `research/00-INDEX.md`
+  exist and agree with their directories, bundles and the indexes
+  inside them included. A sources entry without its `Date` and `Form`
+  fields is an immediate fix. A binary without an extract, and an
+  extract without its original, are the normal case. What the entries
+  say is never judged.
+- What a save added, against its template: of a file made from a
+  template, it reads the newest of what the file holds (the header,
+  the newest records of a history, the newest record of
+  `decisions.md`). The whole of a file against its template is the
+  `project` check's.
 
-Most of what it finds is pure bookkeeping, marked "immediate fix".
+Most of what it finds is bookkeeping, marked "immediate fix".
 
-Cost: the ledger's header and Reports, the front-matter of every document, the newest records of the companions and the directory listings. Seconds, not minutes.
+**Cost.** The ledger's header and Reports, the front-matter of every
+document, the companions' newest records and the directory listings:
+seconds, not minutes.
 
 ## project
 
-Description: Check "project" - verifies a project's structure, IDs, language, immutables, recipes and renders against the conventions. Verifies conformance with the conventions. Not a critic of the documents, not a challenger of the thinking.
+**Description.** Verifies a project's structure, IDs, language,
+immutables, recipes and renders against the conventions.
 
-What it reads: one project by the path of the task, or, when the task names none, every project under `projects/` except the forge's own, each reported on its own. Run beside `light` at a release, it verifies everything but the bookkeeping.
+**Reads.** One project, the path the task names, or, when the task
+names none, every project under `projects/` except `forge`, each
+reported on its own. The bookkeeping is the `light` check's. At a
+release it runs beside `light` and verifies everything else.
 
-What it verifies, with the owner of each rule:
+**Verifies.**
 
-- Kind: `project.md` declares `kind: thought | library` and `language`; `.gitattributes` exists; `threads/` exists in a thought project. Owners: `templates/project.md` and `templates/gitattributes`. A library needs no chain, and the absence of `logo.png` is never a finding.
-- Structure: the files and folders of the section Repository layout of `CLAUDE.md` exist. A layer below the intent that the project does not have is not missing. The rules for `recipes/`, `renders/` and `published/` are the section Document chain, Renders of `CLAUDE.md`:
-  - A render with provenance front-matter traces to a recipe.
-  - A file in `published/` that a companion claims traces to a recipe with a `## Format` section.
-  - Any other file in `renders/` or `published/` is the principal's own and is never a finding.
-  - A recipe that still carries `## Build instructions` is a finding fixed at its next iteration (owner: `templates/recipe.md`).
-  - The README and release-notes recipes exist.
-  - A brief whose mining record says `mined` is cited somewhere in the intent.
-- ID hygiene: every rule of the section ID scheme of `CLAUDE.md`, in every document that carries IDs.
-- Language: prime directive 6 of `CLAUDE.md`, for every artefact and record. The briefs and renders are exempt.
-- Immutables: the immutable documents named in Versioning & status of `CLAUDE.md` are never edited after creation. Signs of after-the-fact editing that the ledger or the history companions reveal are flagged. The `00-INDEX.md` catalogues are exempt.
-- Recipes and renders, shape and freshness only: recipes conform to `templates/recipe.md` and its genre skeletons; every declared input exists; a declared `output:` points inside the repository. The staleness of a render is never a finding. Whether a recipe still matches the principal's thinking is substance, not conformance.
+0. Kind: `project.md` declares `kind: thought | library` and
+   `language`; `.gitattributes` exists; `threads/` exists in a thought
+   project. A library needs no chain, so its structure reduces to the
+   library's file set and ID hygiene does not apply. `logo.png` is
+   optional and its absence is never a finding.
+1. Structure: the files and folders of the layout in `CLAUDE.md`
+   exist. A layer below the intent that a project does not have is not
+   missing. Every render with provenance front-matter traces to a
+   recipe, and every published file that a companion claims traces to
+   a recipe with a `## Format` section. Any other file in `renders/`
+   or `published/` is the principal's own, never a finding. A recipe
+   still carrying `## Build instructions` is a finding fixed at its
+   next iteration. The README and release-notes recipes exist. A brief
+   whose mining record says `mined` is cited somewhere in the intent.
+2. ID hygiene: the ID scheme in `CLAUDE.md` and the table of prefixes
+   in `.claude/reference/id-prefixes.md`, in every document that
+   carries IDs.
+3. Language: prime directive 6 of `CLAUDE.md`, for every artefact and
+   record. A brief is exempt, a render is in the languages its recipe
+   declares, and the file of a work product is in the language its
+   specification's `## Making` says.
+4. Immutables: the immutable documents of Versioning & status are
+   never edited after creation. It flags signs of after-the-fact
+   editing that the ledger or the history companions reveal. The
+   `00-INDEX.md` catalogues are exempt.
+5. Recipes and renders, shape and freshness, never content: a recipe
+   extends `templates/recipe.md`; every declared input exists on disk;
+   the `output:` path points inside the repository. The staleness of a
+   render is never a finding.
+6. Shape: every file made from a template is read whole against it,
+   the artefacts of the chain included: the header, the fixed parts
+   and fields in their order, the words the template gives. An
+   optional part, a section left out because it was empty, and a
+   comment still carried from a skeleton are never findings. A closed
+   thread, an archive, a research and a source are not read for their
+   shape.
 
-Cost: the project's files, read once; the conventions read from their owners.
+**Cost.** The project's files, read once; the conventions read from
+their owners.
 
 ## engine
 
-Description: Check "engine" - verifies the core (CLAUDE.md, templates, skills, agents, scripts) against itself and against the forge intent: every position honoured, nothing withdrawn still advertised, every decision reflected. Verifies conformance with the conventions. Not a critic of the documents, not a challenger of the thinking.
+**Description.** Verifies the core (`CLAUDE.md`, templates, skills,
+agents, scripts) against itself and against the forge intent: every
+position honoured, nothing withdrawn still advertised, every decision
+reflected.
 
-What it reads: the engine root of the task (`CLAUDE.md`, `templates/`, `.claude/skills/`, `.claude/agents/`, `scripts/`) and the forge intent with its threads and its decisions record. The conformance of the forge's own project belongs to `project` and `light`. Whether a rule is stated in more than one place belongs to `single-source-of-truth`.
+**Reads.** The engine root the task names: `CLAUDE.md`,
+`.claude/reference/`, `templates/`, `.claude/skills/`,
+`.claude/agents/`, `scripts/`, and the forge intent,
+`projects/forge/10-intent.md`, with its threads and
+`projects/forge/decisions.md`. Whether a rule is stated in more than
+one place is the `single-source-of-truth` check's.
 
-What it verifies, with the owner of each rule:
+**Verifies.**
 
-- Core internal consistency, against `CLAUDE.md`:
-  - The commands table matches the skills on disk, the reviewers' contracts excepted.
-  - The agents described match `.claude/agents/`.
-  - Every skill an agent names in its front-matter exists.
-  - Every file in `scripts/` is described in `CLAUDE.md`, and nothing described there is missing on disk.
-  - The README agrees with `CLAUDE.md` on chain, conventions and command set. Currency is not checked, since the README and the release notes are regenerated at the release after this check.
-  - The templates agree with the conventions as `CLAUDE.md` states them: front-matter fields, the history companion, prefixes, numbering and statuses.
-- Core and forge intent:
-  - Every position of the intent is honoured by the core documents.
-  - Nothing withdrawn or rejected is still advertised in the core.
-  - Decisions referenced from the intent exist in the decisions record, and every decision record is reflected in the intent where it applies.
-- Rename and removal sweep: the old names recorded in decision records, and the terms the principal has dropped, appear only in historical records (history companions, decisions, rejected directions, reviews, challenges, research).
+1. Core internal consistency:
+   - The table of commands (`.claude/reference/commands.md`) agrees
+     with the skills in `.claude/skills/*/SKILL.md`; the agents
+     described agree with `.claude/agents/`; every skill an agent
+     names in its front-matter exists.
+   - Every file in `scripts/` is described in
+     `.claude/reference/repository-layout.md`, with its governing rule
+     in `CLAUDE.md` where it has one, and nothing described there is
+     missing on disk.
+   - The README agrees with `CLAUDE.md` and the table of commands:
+     same chain, same conventions, same command set. Currency is not
+     checked, because the README is a render regenerated at the
+     release.
+   - The templates agree with the conventions: front-matter fields,
+     the history companion, prefixes, numbering, statuses.
+2. Core against the forge intent: every position is honoured by the
+   core documents; nothing withdrawn or rejected is still advertised
+   in the core. Decisions referenced from the intent exist in
+   `decisions.md`, and every decision record is reflected in the
+   intent where it applies.
+3. Rename and removal sweep: the old names recorded in decisions and
+   the terms the principal has dropped appear only in historical
+   records.
 
-Cost: the core files once and the intent's positions once. Minutes at most, so that a release can afford it every time.
+**Cost.** The core files once and the intent's positions once: minutes
+at most, so that a release can afford it every time.
 
 ## history
 
-Description: Check "history" - reads a document with its history and reports where the division between them does not hold, proposing each move in full. Fit when a document is cleaned, never at a save or a release. Verifies conformance with the conventions. Not a critic of the documents, not a challenger of the thinking.
+**Description.** Reads a document with its history and reports where
+the division between them does not hold, proposing each move in full.
+Fit when a document is cleaned, never at a save or a release.
 
-What it reads: one project by the path of the task (for the engine, the forge's own project), and in it every versioned document with its history and its archive, or the one document the task names.
+**Reads.** One project, the path the task names (for the engine,
+`projects/forge`), and in it every versioned document with its history
+and its archive, or the one document the task names.
 
-What it verifies: the division between a document and its history. The owners are the section Versioning & status of `CLAUDE.md` and the Threads and files section of `.claude/skills/forge/states/intent.md`.
+**Verifies.** The division between a document and its history, by
+Versioning & status in `CLAUDE.md` and the definition of the intent
+(`.claude/skills/forge/states/intent.md`, Threads and files). The way
+to an item found in the document is a finding. The other way, an item
+that can no longer be understood because what makes it hold stands
+only in the history, is a finding. Each finding proposes the move in
+full: the text that leaves, word for word, and the record it becomes.
+The form of the log is the `light` check's.
 
-- In the document, the way to an item (as Versioning & status lists it) is a finding. So is detail an item carries where the file that performs it exists.
-- The other way round, an item that can no longer be understood because what makes it hold stands only in the history is a finding.
-- Each finding proposes the move in full: the text that leaves, word for word, and the record it becomes.
+**Cost.** Whole documents with their histories: minutes rather than
+seconds.
 
-The form of the log belongs to `light`.
+## boundary
 
-Cost: whole documents with their histories. Minutes rather than seconds. It is never composed into a save or a release.
+**Description.** Reads an intent with its solution design and reports
+where the division between them does not hold, proposing each move in
+full. Fit after a round on the intent or before a major, never at a
+save or a release.
+
+**Reads.** One project, the path the task names (for the engine,
+`projects/forge`): its intent and its solution design whole, or the
+positions the task names. Of the files a design item names under
+`Where:` it reads only what a finding needs. A project without a
+solution design is a fact, said in one line, and nothing more is
+read.
+
+**Verifies.** The division between the intent and the solution design,
+by the intent's definition
+(`.claude/skills/forge/states/intent.md`) and the design's
+(`.claude/skills/forge/states/solution-design.md`).
+
+- A sentence in the intent that belongs to the solution is a finding.
+- A design item that carries what is wanted or why, where no position
+  holds it, is a finding.
+- A position that no longer says what is wanted because it stands only
+  in the design is a finding.
+
+Each finding proposes the move in full: the position's new wording,
+the text that leaves word for word, where it goes, and the record the
+intent's history receives (`templates/history.md`). The way to an
+item, its dates, trials and measurements, is the `history` check's.
+
+**Cost.** The intent and the design whole, and the files the findings
+reach into: minutes rather than seconds.
 
 ## single-source-of-truth
 
-Description: Check "single-source-of-truth" - verifies that every rule, procedure and file shape is written in one place and cited everywhere else: no restatement across CLAUDE.md, skills, agents, templates and scripts, no direct operation where a mechanism exists. The honest sweep; expensive by design - fit before a major or after a round on the operating layer, not at every release. Verifies conformance with the conventions. Not a critic of the documents, not a challenger of the thinking.
+**Description.** Verifies that every rule, procedure and file shape is
+written in one place and cited everywhere else: no restatement across
+`CLAUDE.md`, skills, agents, templates and scripts, and no direct
+operation where a mechanism exists. The honest sweep; expensive by
+design. Fit before a major or after a round on the operating layer,
+not at every release.
 
-What it reads: the whole operating layer of the engine, always the whole and never a changed subset: `CLAUDE.md`, every skill under `.claude/skills/` with its supporting files, every agent under `.claude/agents/`, every template under `templates/` and the help headers of `scripts/`. Named a project instead, it reads that project's recipes, resource indexes, ledger comments and its own `CLAUDE.md`, if any, against the owners in the engine.
+**Reads.** The whole operating layer of the engine: `CLAUDE.md`, every
+skill under `.claude/skills/` with its supporting files, every agent
+under `.claude/agents/`, every template under `templates/` and the
+help headers of `scripts/`. It always reads the whole, never a changed
+subset, and is run on the principal's word. Given a project instead,
+it reads that project's recipes, resource indexes, ledger comments and
+its own `CLAUDE.md`, if any, against the owners in the engine.
 
-What it verifies, with the owner of each rule: one mechanism lives in one place (the rule is stated in the section Prime directives of `CLAUDE.md`).
+**Verifies.**
 
-- One owner per rule. Every command, agent, contract and template describes only its own job. A procedure, rule set or file shape that another file owns is cited by path, never restated. A restatement is a finding, and the fix is a reference to the owner and the deletion of the copy. Where a shape has no owner, the finding proposes one.
-- Reviewer files carry only their own. Every lens, persona and check file names its kind's contract skill and carries only its front-matter and its Lens section.
-- No direct operation where a mechanism exists. No skill or agent performs directly what a script, command or agent exists for: git outside the scripts of `scripts/`, a conversion outside `doc2md.py`, a render outside `/render`, a review outside the reviewer agents, a check outside the check agents.
+- One owner per rule: every command, agent, contract and template
+  describes only its own job. A procedure, rule set or file shape that
+  another file owns is cited by path, never restated. A restatement is
+  a finding, fixed by a reference to the owner and the deletion of the
+  copy. Where a shape has no owner, the finding proposes one.
+- Reviewer files carry only their own: every lens, persona and check
+  file names its kind's contract skill and carries only its
+  front-matter and its Lens section.
+- No direct operation where a mechanism exists: no skill or agent does
+  directly what a script, command or agent exists for (git outside the
+  scripts, a conversion outside `doc2md.py`, a render outside
+  `/render`, a review outside the reviewer agents, a check outside the
+  check agents).
 
-Cost: the whole layer, read and compared pairwise where the subjects overlap. Long by design. The first line of its report says how many files it read.
+**Cost.** The whole layer, read and compared pairwise where the
+subjects overlap. Long by design; the report's first line says how
+many files were read.
 
 ## brd
 
-Description: Check "brd" - verifies a BRD's mechanics: every parent item carried, every cited ID existing, every item with a parent, the phasing present, every term defined, no link in an item. Fit after a pass of /forge brd. Verifies conformance with the conventions. Not a critic of the documents, not a challenger of the thinking.
+**Description.** Verifies a BRD's mechanics: every parent item
+carried, every cited ID existing, every item with a parent, the
+phasing present, every term defined, no link in an item. Fit after a
+pass of `/forge brd`.
 
-What it reads: one project's `30-brd.md`, by the path of the task or the project's BRD, with its parent as the BRD's header declares it (`20-assignment.md` or `10-intent.md`). A BRD made from a source is a work product in `work/`, read when the task names it. A project without a BRD is not a finding. The bookkeeping of the file belongs to `light` and the ID scheme in general to `project`.
+**Reads.** One project's `30-brd.md`, the path the task names or the
+project's BRD, with its parent as the BRD's header declares it:
+`20-assignment.md` or `10-intent.md`. A BRD made from a source is a
+work product in `work/`, read when the task names it, its parent the
+source by path. A project without a BRD is not a finding. The
+bookkeeping of the file is the `light` check's, the ID scheme in
+general and the shape of the file against its template the `project`
+check's.
 
-What it verifies, with the owner of each rule (`templates/brd.md` and the Requirement style section of `.claude/skills/forge/states/brd.md`):
+**Verifies**, against `.claude/skills/forge/states/brd.md` and
+`templates/brd.md`:
 
-- Traceability:
-  - Every in-scope item of the parent is carried by at least one BR or UC, unless an OOS, a DEP or a TBC of the BRD names it.
-  - Every parent cited by an item exists in the parent.
-  - The appendix table matches the items.
-  - Where the parent is a source, the citation is a path and a place; the path is verified and the place is read as a fact.
-- Every item has a parent:
-  - A BR and an NFR end with their parent. An NFR may end with its category instead.
-  - A UC declares its parent in its `Carries` line.
-  - Where the parent is a source with speakers, a BR whose every cited place is another party's turn is a finding.
-- The sections that may not be silent:
-  - Phasing is present and not empty, and every BR and UC stands in a phase or in the `not phased` row.
-  - Every area of the roster the BRD cites is in the Touched areas table.
-  - Every role the roster names as signing or reviewing is in the Stakeholders table or named as absent with a reason.
-  - An ASM whose content answers what a TBC of the same BRD asks is a finding.
-  - Every NFR category kept carries a value or a TBC with an owner.
-  - Every TBC has an owner and says whether it blocks estimation.
-- Terms and links: every capitalised term of an item is in the Terms table; no item depends on a link; no name of a person stands where the template asks for a role.
-- Skeleton residue: no template comment, no `…`, no `<placeholder>`, no `NNNN` is left in the file. `owner: unassigned` is not residue.
+1. Traceability: every in-scope item of the parent is carried by at
+   least one BR or UC, unless an OOS, a DEP or a TBC of the BRD names
+   it. Every parent an item cites exists. The appendix table matches
+   the items. Where the parent is a source, the path is verified and
+   the place is read as a fact.
+2. Every BR, NFR and UC has its parent, and where the parent is a
+   source, the place it cites is a turn of the right party.
+3. The sections that may not be silent: Phasing is present and not
+   empty, and every BR and UC stands in a phase or in the `not phased`
+   row. Every area of the roster the BRD cites is in the Touched areas
+   table, and every role the roster names as signing or reviewing is
+   in the Stakeholders table or named as absent with a reason. No ASM
+   answers what a TBC of the same BRD asks. Every NFR category kept
+   has its value or its TBC, and every TBC its owner and its blocking.
+4. Terms and links: every capitalised term of an item is in the Terms
+   table, no item depends on a link, and no name of a person stands
+   where the template asks for a role.
+5. Skeleton residue: no template comment but the line that names the
+   template, no `…`, no `<placeholder>`, no `NNNN` left in the file.
+   `owner: unassigned` is not residue.
 
-Cost: the BRD and its parent, read once; the roster the BRD cites, read for its list of areas only.
+**Cost.** The BRD and its parent, read once; the roster the BRD cites,
+read for its list of areas only.
 
 ## user-stories
 
-Description: Check "user-stories" - verifies the mechanics of user stories: every parent item served or said not to be, every story with a Reference to an existing item, the fixed parts in their order and none left empty, questions with an owner, risks with a mitigation or consequences, notes with a link and what lies behind it, no vague word in a criterion. Fit after a pass of /forge user-stories. Verifies conformance with the conventions. Not a critic of the documents, not a challenger of the thinking.
+**Description.** Verifies the mechanics of user stories: every parent
+item served or said not to be, every story with a Reference to an
+existing item, the fixed parts in their order and none left empty,
+questions with an owner, risks with a mitigation or consequences,
+notes with a link and what lies behind it, no vague word in a
+criterion. Fit after a pass of `/forge user-stories`.
 
-What it reads: one project's `35-user-stories.md`, by the path of the task or the project's stories, with its parent as the header declares it (`30-brd.md` or `10-intent.md`). Stories made from a source are a work product in `work/`, read when the task names them. A project without stories is not a finding. The bookkeeping of the file belongs to `light` and the ID scheme in general to `project`.
+**Reads.** One project's `35-user-stories.md`, the path the task names
+or the project's stories, with its parent as the header declares it:
+`30-brd.md` or `10-intent.md`. Stories made from a source are a work
+product in `work/`, read when the task names them, their parent the
+source by path. A project without stories is not a finding. The
+bookkeeping of the file is the `light` check's, the ID scheme in
+general and the shape of the file against its template the `project`
+check's.
 
-What it verifies, against `.claude/skills/forge/states/user-stories.md` (its Aim and its Story style) and `templates/user-stories.md`:
+**Verifies**, against `.claude/skills/forge/states/user-stories.md`
+and `templates/user-stories.md`:
 
-- Coverage: every in-scope item of the parent is cited in the Reference of at least one story, unless the stories or the parent say why not. Coverage is counted, never judged.
-- Reference: every story has a Reference; every ID it cites exists in the parent (or, for a DEP, in the BRD); a story citing only a position of the intent has `10-intent.md` as its parent. Where the parent is a source, the path is verified and the place is read as a fact.
-- Shape: every story is a level-3 heading `US.NNNN — <name>`, then its sentence, then its acceptance criteria as bullets, then only the parts it has, in the template's order, under the fixed English labels. No part is present and empty, no other part appears, and no two stories share an ID.
-- Parts: every question ends with `→ <owner>`; every risk has `→ <mitigation | consequences>`; every note carries a link and what lies behind it; every edge case is `situation → what happens`.
-- Wording: no vague word in an acceptance criterion where a value is wanted. It reports the word and the place and never proposes the value. A criterion in the conditional mood is a finding.
-- Skeleton residue: no template comment, no `…`, no `<placeholder>`, no `NNNN` is left in the file.
+1. Coverage: every in-scope item of the parent is cited in the
+   Reference of at least one story. An item served by none is a
+   finding unless the stories or the parent say why. Coverage is
+   counted, never judged.
+2. Reference: every story has a Reference, and every ID it cites
+   exists in the parent (or, for a DEP, in the BRD). A story citing
+   only a POS has a parent `10-intent.md`. Where the parent is a
+   source, the path is verified and the place is read as a fact.
+3. Parts and wording: every story has its parts, their order, their
+   labels and their wording as the Story style has them. For a vague
+   word or a conditional in a criterion it reports the word and the
+   place, never a value. No two stories carry one ID.
+4. Skeleton residue: no template comment but the line that names the
+   template, no `…`, no `<placeholder>`, no `NNNN` left in the file.
 
-Cost: the stories and their parent, read once.
+**Cost.** The stories and their parent, read once.
 
 ## See also
 
@@ -191,4 +373,4 @@ Cost: the stories and their parent, read once.
 - [Add a check](../extend/add-a-check.md): adding a check.
 - [Glossary](glossary.md): every term of the forge in one line.
 
-Generated on 2026-11-08 for version 7.0 from the files the front-matter names; never edited by hand.
+Generated on 2026-11-17 for version 7.12 from the files the front-matter names; never edited by hand.

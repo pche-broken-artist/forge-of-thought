@@ -1,8 +1,8 @@
 ---
-generated: 2026-11-08
-version: 7.0
+generated: 2026-11-17
+version: 7.12
 made: mirrored
-inputs-hash: aae2341c69d0ae54
+inputs-hash: b6a63ab4aea8d3ec
 inputs:
   - templates/docs-map.md
   - .claude/agents/docs-planner.md#The map
@@ -14,145 +14,136 @@ inputs:
 
 # Documentation map
 
-The documentation map is the file `docs-map.md` that lists every page of a target's documentation with everything the page is made from. This page gives the fields of the map, of a writer's task, of a page's front-matter and of the documentation index, exactly. It is for the extender, who changes a page by changing its entry.
+This page lists the fields of the documentation map `docs-map.md`, of the task file a page's writer receives, of a page's front-matter and of the documentation index. It is for the extender who reads or changes how the documentation is planned and generated. The map is a Markdown file with one entry per page. The planner agent writes it, the scripts and the writer agents read it, and the reader of the documentation never sees it.
 
-## The map file
+## The map
 
-The map is one Markdown file. Its shape is the template `templates/docs-map.md`. It is written in parts: the front-matter, the `## Paths` section and the first section of the outline come first, and every further section is appended at the end of the file. It is read by the scripts and by the writers, never by the reader of the documentation.
+The map is one file, written in parts: the front-matter, the `## Paths` section and the first section of the outline, then every further section appended. Its skeleton is `templates/docs-map.md`. The parts come in this order.
 
 ### Front-matter
 
-| Key | Value |
+| Key | Holds |
 |---|---|
-| `target` | `engine`, or the project's slug; never a path of a machine |
-| `owner` | `projects/<slug>` |
+| `target` | `engine`, or the slug of the project. Never a path of the machine. |
+| `owner` | `projects/<slug>`, the project that owns the map. |
 
-The header carries no `previous`. The previous map is the one last committed to git, which `scripts/docs-state.py <map> --previous <path>` writes to a file for the planner. The script prints `none` when the map was never committed or the project is outside git.
+The previous map is not named in the header. It is taken from git (`python scripts/docs-state.py <map> --previous <path>` writes the map as last committed, or prints `none` when it was never committed).
 
-Every input path of the map is relative to the target's root. That root is the engine's root when `target` is `engine`, and the owning project's directory, where the map lies, otherwise.
+Every input path of the map is relative to the root of the target: the engine root when `target` is `engine`, otherwise the directory of the owning project.
 
-### Order of the file
+### Heading
 
-1. The front-matter.
-2. The title `# Documentation map - <target>`.
-3. `## Paths`.
-4. One section per section of the outline, in this order: `## start`, `## use`, `## about`, `## extend`, `## reference`.
-5. `## Unowned`.
-6. `## Did not fit`.
+`# Documentation map — <target>`
 
-### The Paths section
+### The `## Paths` section
 
-One line per reader, in the form `- <reader>: <page path>, <page path>`. The reader is `user`, `extender` or `evaluator`. A line names three to five pages of the map in reading order. The index prints the lines as links.
+It comes first. It has one line per reader, in the form `- <reader>: <page path>, <page path>`. The readers are `user`, `extender` and `evaluator`. The index turns these lines into its reading paths.
 
-### An entry
+### One section per section of the outline
 
-An entry stands in the section of its page. Its heading is the page's path, `### docs/<section>/<page>.md`. Each field is a line `- <field>: <value>`, and a value may continue on indented lines. The fields come in this order:
+The sections follow the outline's order:
+
+- `## start`
+- `## use`
+- `## about`
+- `## extend`
+- `## reference`
+
+Each holds one entry per page. An entry opens with `### docs/<section>/<page>.md`, followed by fields written as `- <field>: <value>`. A value may continue on indented lines. The fields stand in this order.
 
 | Field | Holds |
 |---|---|
-| `title` | The page's title as its heading will carry it, in the reader's words, since a link cites it |
-| `line` | One line for the index: the question the page answers, no more than one sentence |
-| `kind` | `how-to`, `explanation` or `reference` |
-| `reader` | `user`, `extender` or `evaluator` |
-| `says` | What the page says, in a few sentences a writer can work from: its one topic and nothing beside it, the commands spelled out as they are typed |
-| `inputs` | Exact file paths, one per line, no globs and no versions; see below |
-| `links` | Few pages, only pages of this map, each as the path in backticks and one sentence on what that page gives |
-| `must-not` | What the page must not say of its topic |
-| `made` | `mirrored` or `derived` |
-| `evidence` | Derived pages only: what the page is put together from and by what reasoning |
-| `state` | `new`, `keep`, `regenerate` or `remove` |
+| `title` | The page's title as its heading will carry it, in the reader's words, since a link cites it. |
+| `line` | One line for the index: the question the page answers, one sentence at most. |
+| `kind` | `how-to`, `explanation` or `reference`. |
+| `reader` | `user`, `extender` or `evaluator`. |
+| `says` | What the page says, in a few sentences a writer can work from: its one topic and nothing beside it, with commands spelled out as they are typed. |
+| `inputs` | Exact file paths, one per line, no globs, no versions. Everything the writer must read and nothing else. |
+| `links` | Pages of this map, each as `` `docs/<section>/<page>.md` `` followed by a colon and one sentence on what that page gives. Few; the glossary and the page of each term the page uses are among them. |
+| `must-not` | What the page must not say of its topic. It narrows and never forbids what `says` or the page's shape requires. |
+| `made` | `mirrored` or `derived`. |
+| `evidence` | Derived pages only: what the page is put together from and by what reasoning. |
+| `state` | `new`, `keep`, `regenerate` or `remove`. |
 
-The `links` of an entry are every glossary and concept page of the terms the page uses. Every entry is named under `links` by at least one other entry.
+#### The parts of an input
 
-#### Naming an input
+An input is a file, or a part of a file named after `#`. A part is hashed as that part, so a change elsewhere in the file leaves the page as it is. A part is one of three things:
 
-An input is a file, or a part of a file named after `#`. A part is one of these:
+- A section, named by its heading: `path#Heading`. It runs from the heading to the next heading of the same or a higher level. A heading with spaces is written with the spaces.
+- An item, named by its ID: `path#ID.NNNN`. It runs from the line that carries the ID in bold to the next item at the same indent, or to a heading.
+- A block, named by its bold label: `path#Label`. It applies where no heading of that name exists. It runs from the paragraph that opens with the label in bold to the next label or heading.
 
-- A section by its heading: `path#Heading`. It runs from the heading line to the next heading of the same or a higher level. A heading with spaces is written with the spaces.
-- An item by its ID: `path#PREFIX.NNNN`. It runs from the line that carries the ID in bold to the next line that opens an item at the same indent, or to a heading.
-- A block by its bold label: `path#Label`. It runs from the paragraph opening with the label in bold, with or without the final full stop, to the next label or heading. It applies where no heading of that name exists.
+#### The values of `state`
 
-Each input is hashed as the part it names. A change elsewhere in the file leaves the page as it is. A part or a file the disk does not have is reported and hashed as missing.
+| Value | Set by | Meaning |
+|---|---|---|
+| `new` | `scripts/docs-state.py` | No page exists at the path. |
+| `keep` | `scripts/docs-state.py` | A page exists and carries the same hash as the entry. |
+| `regenerate` | `scripts/docs-state.py` | A page exists and its hash differs, because an input or the entry changed. |
+| `remove` | the planner | The page has no material any more. The entry keeps this state and gets no task. |
 
-#### The state
+The script hashes the entry's text without its `state` line, the writer's definition and the contract with their whitespace normalised, and every input or part of an input. An input that the disk lacks is reported and hashed as missing. The script rewrites only the `state` lines of the map. A page under the documentation directory that no entry names is listed as `remove`; the index `README.md` and the videos folder are excepted.
 
-`state` is set by the planner only to `new` for a page without a previous entry, `keep` for one with a previous entry, and `remove` for one that lost its material. `scripts/docs-state.py` computes the rest from the content of the inputs:
+### Unowned
 
-| State | Meaning |
-|---|---|
-| `new` | No page exists at the path |
-| `regenerate` | A page exists and its hash differs |
-| `keep` | A page exists with the same hash |
+Every fact a page needs and no file supports, with the page that needs it. The writer leaves it out.
 
-The script rewrites only the `- state:` line of each entry. An entry marked `remove` keeps its state and gets no task. The script also lists as `remove` every page under the documentation directory that no entry names, the index `README.md` and the `videos` folder excepted.
+### Did not fit
 
-### Unowned and Did not fit
+What contradicted itself or the outline, and what was done with it.
 
-`## Unowned` lists every fact a page needs and no file supports, with the page that needs it. `## Did not fit` lists what contradicted itself or the outline, and what was done with it.
+## The task file
 
-## How the hash is made
+For every entry in state `new` or `regenerate`, `scripts/docs-state.py` writes one task file into the task directory. The file is the whole prompt of a writer agent. It holds, in this order:
 
-The hash that `scripts/docs-state.py` computes for an entry is the first 16 hexadecimal characters of a SHA-256 over:
-
-- The lines of the entry, its `state` line excepted.
-- The writer's definition and the documentation contract, each with its whitespace collapsed, so that a re-wrap changes nothing and a changed sentence does.
-- Each input, as the file or the part it names, or the marker `<missing>`.
-
-The page at the entry's path carries the hash it was made from as `inputs-hash` in its front-matter. The script reads it from the first 2000 characters of the page.
-
-## The writer's task
-
-For each `new` or `regenerate` entry the script writes one task file into the directory named by `--tasks`, named after the page's path with `/` replaced by `-`. The task is a writer's whole prompt. It holds, in this order:
-
-1. The target root.
-2. The page to write: its absolute path, the same as the entry's path, relative links computed from that place.
+1. The target root, to which the input paths are relative.
+2. The page to write, as an absolute path with its map path in brackets.
 3. The date.
-4. The version the page is made for, the `version` of the owning project's intent beside the map, or `none`.
+4. The version the page is made for: the version of the intent of the owning project, beside the map, or `none`.
 5. The `inputs-hash` the page is to carry.
 6. The entry, verbatim.
-7. The titles of the pages the entry links to, one line each as the path in backticks and the title, or `none`.
-8. The closing line "Write the page, then report in a few lines."
+7. The titles of the pages the entry links to, each as `` `<path>`: <title> ``, or `- none`.
+8. The closing request: write the page, then report in a few lines.
 
-## The page's front-matter and shape
+## A page's front-matter
 
-Front-matter:
+```
+---
+generated: <date>
+version: <the version the task gives>
+made: mirrored | derived
+inputs-hash: <the value the task gives, copied exactly>
+inputs:
+  - <path or path#part>
+  - <path>
+---
+```
 
-| Key | Value |
-|---|---|
-| `generated` | The date of the task |
-| `version` | The version the task gives |
-| `made` | `mirrored` or `derived`, from the entry |
-| `inputs-hash` | The value the task gives, copied exactly |
-| `inputs` | One line per input of the entry, a path or `path#part` |
+`inputs-hash` is a 16-digit hexadecimal value. `scripts/docs-state.py` compares it with the hash it computes from the entry to set the entry's state.
 
-Body, in this order:
+## A page's shape
 
-1. `# <the entry's title>`.
+In this order:
+
+1. `# <the entry's title>`
 2. One paragraph on what the page is for and for whom. Its first sentence says what the thing is.
 3. The matter, in the outline of the page's kind.
-4. `## See also`, one line per linked entry: the title as a link by a relative path, a colon and the sentence the entry gives for it.
-5. The closing line "Generated on <date> for version <version> from the files the front-matter names; never edited by hand."
+4. `## See also`: one line per linked page, as a link with the entry's title and relative path, a colon and the sentence the entry gives for it.
+5. The closing line: `Generated on <date> for version <version> from the files the front-matter names; never edited by hand.`
 
 ## The index
 
-`scripts/docs-index.py <map> <docs-dir>` writes `<docs-dir>/README.md` from the map, with no model. The same map gives the same index. It is never edited by hand.
+`scripts/docs-index.py <map> <docs-dir>` derives `<docs-dir>/README.md` from the map. It is deterministic: the same map gives the same index. No model is involved.
 
-Front-matter:
+The front-matter holds `generated`, `version`, `made: derived` and `inputs` with the map as its one input. `version` is the version of the intent of the owning project, which for the engine is its version. The version is left out when there is no intent beside the map.
 
-| Key | Value |
-|---|---|
-| `generated` | The date |
-| `version` | The version of the owning project's intent beside the map, left out when there is none; for the engine, its own version |
-| `made` | `derived` |
-| `inputs` | The map, as one line |
+The body holds, in this order:
 
-Body, in this order:
-
-1. `# Documentation` and a fixed opening paragraph. It is text of the script.
-2. Where a version exists, a line giving the date and the version.
-3. `## Where to start`, one line per reader of the `## Paths` section, each page a link by its title.
-4. One section per section of the outline that has entries, headed Start, Use, About, Extend or Reference, in that order. Each entry not marked `remove` is a line `- [<title>](<relative path>): <line>`. Where an entry has no `line`, the first sentence of its `says` stands in its place; where it has no `title`, the page's file name stands in.
-5. A closing paragraph naming the map and the script that derived the index.
+1. The heading `# Documentation` and a fixed opening paragraph.
+2. A line naming the date and the version, where a version exists.
+3. `## Where to start`: one line per reader of the `## Paths` section, each page a link.
+4. One section per section of the outline that has entries, headed Start, Use, About, Extend and Reference. Each holds one line per page, `- [<title>](<relative path>): <line>`. Where an entry has no `line`, the first sentence of its `says` stands in. Entries in state `remove` are left out.
+5. A closing paragraph that names the map and states that the index is derived from it and never edited by hand.
 
 ## See also
 
@@ -160,4 +151,4 @@ Body, in this order:
 - [Change a documentation page](../extend/change-a-documentation-page.md): changing a page through its owners.
 - [Glossary](glossary.md): every term of the forge in one line.
 
-Generated on 2026-11-08 for version 7.0 from the files the front-matter names; never edited by hand.
+Generated on 2026-11-17 for version 7.12 from the files the front-matter names; never edited by hand.

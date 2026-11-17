@@ -1,8 +1,8 @@
 ---
-generated: 2026-11-08
-version: 6.21
+generated: 2026-11-17
+version: 7.12
 made: mirrored
-inputs-hash: 8d4849216f9baf66
+inputs-hash: 88ed088ca9a374e3
 inputs:
   - .claude/skills/man/SKILL.md
   - .claude/skills/manual/SKILL.md
@@ -10,14 +10,21 @@ inputs:
 
 # Look up a command, or ask how to do something
 
-`/man` is the forge's manual: it prints what a command or a working method is, and it answers a need you say in your own words. It is for the principal (the person whose thinking is forged) who wants to know what a command does before running it, or does not know which command to use.
+This page is for you when you want to know what a command does, what a
+working method is, or how to get something done with the forge. `/man`
+is the forge's manual: it prints what you ask for, in the conversation
+language, and does nothing else. The forge has no second help command.
+The word `help` belongs to Claude Code itself, which is why the manual
+has the Unix name.
 
 ## When to use it
 
 - You want the list of commands and working methods.
-- You want to know what one command is for, what arguments it takes and what a check, lens, persona or genre it dispatches over looks for.
-- You want one working method (a named way a conversation runs) in full.
-- You know what you want to do, but not how the forge does it.
+- You want to know what one command is for, which arguments it takes
+  and what its roster looks for before you run it.
+- You want the paragraph of one working method.
+- You have a need in your own words and do not know which command
+  meets it.
 
 ## The command
 
@@ -25,69 +32,112 @@ inputs:
 /man [command | method | question]
 ```
 
-`/manual` is an alias and does the same with the same arguments. The word `help` is not used because it is Claude Code's own command, hence the Unix name.
-
-`/man` runs nothing, writes nothing and decides nothing. It reads the files that own the forge's rules at the moment of the call and shortens them to a line, so what it prints is never older than those files.
+`/manual` is an alias and takes the same arguments. The manual runs
+nothing, writes nothing and decides nothing. It reads the files that
+own each fact at the moment you call it, so what it prints is never
+older than the forge itself. The principal (whoever's thinking is
+being forged) is the one who reads the answer and chooses what to do
+with it.
 
 ## What happens
 
-1. **Bare `/man`.** Claude prints each command with its arguments and its purpose cut to one line, `/man` and `/manual` included. Then it prints each working method by name with the first sentence of its paragraph. It closes with a line pointing to `/man <command>` and `/man <method>`.
+1. Bare `/man` prints the overview. The commands come as a list, each
+   with its arguments and its purpose cut to one line, `/man` and
+   `/manual` included. The working methods follow, each with the first
+   sentence of its paragraph. A last line tells you to type
+   `/man <command>` for a command and `/man <method>` for a method.
+   You should now see the two lists and that closing line.
+2. `/man <command>` prints the page of one command. It gives the
+   purpose, the arguments and the purpose of the command's row in full.
+   Where the command dispatches over a roster (checks, lenses,
+   personas or genres), it prints each entry with its description and
+   what the entry looks for, so that you know it before you run
+   anything. A last line names the skill file, for the reader who wants
+   the whole procedure. If no such command exists, the manual says so
+   and lists the commands. You should now see the command's purpose,
+   its arguments, its roster where it has one, and the skill file.
+3. `/man <method>` prints the paragraph of one working method in full
+   and, where a skill holds the shape of the method, the path of that
+   skill. The name matches without regard to case, and hyphens and
+   spaces count alike. If the name is unknown and is not a question,
+   the manual says so and lists the methods. You should now see the
+   method's paragraph and, where there is one, its skill.
+4. `/man <question>` takes anything that is neither a command nor a
+   method as a need in your own words. Claude reads the index of the
+   documentation, where every page carries the one question it
+   answers, and chooses the pages that meet your need. Where your
+   words can be read two ways that lead to different pages, it asks
+   once, in one sentence, and waits. It then reads the chosen pages,
+   and the skill they name where the detail matters. You should now
+   see the answer, built in this order:
+   - the way the forge has, with what you type;
+   - what matters to know on that way;
+   - where several ways fit, one recommended, with its reason;
+   - plainly, where the way leaves the forge (a repository to
+     initialise, a program to install), because the forge does not do
+     that part for you.
 
-   You should now see the list of commands, the list of methods and the closing line.
-
-2. **`/man <command>`.** Claude prints the command's purpose, its arguments and the purpose from the command table in full. Where the command dispatches over a roster, it prints each entry with its description and what it looks for, so you know what a check, a lens, a persona or a genre goes after before you run it. It closes with the path of the command's skill file, which holds the whole procedure. If no such command exists, it says so and lists the commands.
-
-   You should now see the purpose, the arguments, the roster where there is one, and the path of the skill file.
-
-3. **`/man <method>`.** Claude matches your word against the names of the working methods, ignoring case and treating hyphens and spaces alike. It prints the method's paragraph in full and, where the method has a skill that holds its shape, the path of that skill. If the word is neither a method nor a question, it says so and lists the methods.
-
-   You should now see the method's paragraph and, where there is one, its skill path.
-
-4. **`/man <question>`.** Any words that are neither a command nor a method are taken as a need. Claude reads the documentation's index, where every page carries the one question it answers, and chooses the pages whose question meets your need. If the need can be read two ways that lead to different pages, it asks once, in one sentence, and waits for you. It then reads the chosen pages, and the skill or definition they name where the detail matters. Nothing is answered from memory.
-
-   The answer comes in plain sentences, in this order:
-
-   - the way the forge has, with what you type
-   - what matters to know on that way
-   - where several ways fit, one recommended, with its reason
-   - plainly, where the way leaves the forge, such as a repository to initialise or a program to install, because the forge does not do that for you
-
-   The pages read are named by path once, at the end.
-
-   You should now see an answer that names the way first and ends with the paths of the pages it was read from.
+   The pages read are named by path at the end of the answer.
+5. Where the forge has nothing for your need, the manual says so. It
+   names an open thread of the forge's own project if one carries the
+   need. What Claude would do without a mechanism is marked as its own
+   suggestion.
 
 ## What you have afterwards
 
-You have an answer in the conversation and nothing else: no file is written, no command is run and nothing is decided. The output is in the conversation language. The notation stays English: command names, file paths and front-matter keys.
+You have an answer on the screen and nothing else: no file is written,
+no command has run and no decision is taken. The language is the
+conversation language, with command names, paths and front-matter keys
+staying in English.
 
 ## If something goes wrong
 
-- **The command is unknown.** Claude says so and lists the commands.
-- **The method is unknown and the words are not a question.** Claude says so and lists the methods.
-- **The forge has nothing for your need.** Claude says so. It names an open thread of the forge's own project if one carries the need. Whatever Claude would do without a mechanism of the forge it marks as its own, so you can tell it from what the forge defines.
+- A command name that does not exist: the manual says so and lists the
+  commands.
+- A method name that does not exist and does not read as a question:
+  the manual says so and lists the methods.
+- A question answered "nothing for this": the forge has no mechanism
+  for the need. The manual says so instead of inventing one.
+- A question answered from pages that look stale: the answer is only as
+  current as the documentation index. See [Generate the
+  documentation](generate-the-documentation.md) for the run that makes
+  it.
 
 ## A worked example
 
-A command page:
+A command page. You type a command name, here `<command>` stands for
+any command of the overview:
 
 ```
 /man <command>
 ```
 
-Claude prints the purpose of the command and its arguments. If the command is a check, a lens or a persona roster, it lists each member with what it looks for. The last line names the command's skill file.
+The manual prints the command's purpose, its arguments and the full
+purpose of its row. If the command has a roster, each entry follows
+with its description and what it looks for. The last line names the
+skill file, `.claude/skills/<command>/SKILL.md`.
 
-A question:
+A question. You type your need in your own words:
 
 ```
-/man how do I keep a copy of my project on a server?
+/man how do I <something I want done>?
 ```
 
-The words match no command and no method, so Claude takes them as a need. It reads the documentation's index and chooses the pages whose question meets the need. It answers with the way the forge has and what you type. It then says what matters on that way. If part of the way is a step the forge does not do, such as creating a repository, it says so plainly. It ends by naming the pages it read.
+The manual finds no command and no method by that name, so it reads
+the documentation index and the pages whose question meets your need.
+It answers in plain sentences: first the way the forge has, with the
+line you type; then what matters on that way; then, if two ways fit,
+the one it recommends and why. If part of the way happens outside the
+forge, it says so. The answer closes with the paths of the pages it
+read.
 
 ## See also
 
-- [Commands](../reference/commands.md): the same table of commands, as a page.
-- [Generate the documentation](generate-the-documentation.md): the run that makes the index the manual reads to answer a question.
-- [Glossary](../reference/glossary.md): every term of the forge in one line.
+- [Commands](../reference/commands.md): the same table of commands, as
+  a page.
+- [Generate the documentation](generate-the-documentation.md): the run
+  that makes the index the manual reads to answer a question.
+- [Glossary](../reference/glossary.md): every term of the forge in one
+  line.
 
-Generated on 2026-11-08 for version 6.21 from the files the front-matter names; never edited by hand.
+Generated on 2026-11-17 for version 7.12 from the files the front-matter names; never edited by hand.

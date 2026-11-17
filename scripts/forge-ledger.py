@@ -9,7 +9,7 @@ SYNOPSIS
     python scripts/forge-ledger.py <slug | path> [--out PATH]
 
 WHAT IT DOES
-    Reads eleven kinds of document and builds `ledger.md` in the shape
+    Reads twelve kinds of document and builds `ledger.md` in the shape
     of templates/ledger.md, the template's own comments kept:
     the project file (the header; a project of the shape before the
     migration, templates/project.md, gives its hand-kept ledger's
@@ -17,7 +17,9 @@ WHAT IT DOES
     artefacts' headers (Briefs, Documents), the histories (the date of
     a document, the mining of a brief, the state of a work product,
     the `closed` record of a finding or a challenge), the decisions
-    (the Verdict lines), the resource indexes (Sources, Research), the
+    (the Verdict lines), the index of the sources (Sources), the
+    research notes by their own front-matter, a bundle by its head
+    `00-plan.md` (Research), the
     reviews and the challenges (Findings, Challenges), the provenance
     of the renders and of the documentation index (Renders), the
     published companions (Published, the state current or stale

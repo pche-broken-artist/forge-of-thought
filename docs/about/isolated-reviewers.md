@@ -1,10 +1,11 @@
 ---
-generated: 2026-11-08
-version: 7.0
+generated: 2026-11-17
+version: 7.12
 made: derived
-inputs-hash: ef8f265763af2533
+inputs-hash: 27476129047cb0c1
 inputs:
   - CLAUDE.md#Isolated reviewers
+  - .claude/skills/check/SKILL.md
   - projects/forge/10-intent.md#POS.0400
   - projects/forge/10-intent.md#POS.1120
   - projects/forge/10-intent.md#POS.1140
@@ -20,230 +21,287 @@ inputs:
 
 # The isolated reviewers
 
-The isolated reviewers are the three kinds of reviewer the forge
-has: the critic, the challenger and the check. Each runs as an
-isolated subagent (a separate run of Claude, given one task and
-returning one result) that reads the project's documents from disk
-and never sees the working conversation. This page explains, for the
-user, the extender and the evaluator, why the reviewers are blind to
-the conversation, how a run becomes a filed report, and what it
-means when two reviewers agree.
+The isolated reviewers are the three kinds of reviewer the forge has:
+the critic, the challenger and the check. Each runs apart from the
+working conversation and judges only what stands in the project's
+files. This page is for whoever runs a reviewer, adds one or weighs
+what a reviewer's verdict is worth. It says why the reviewers never
+see the conversation, how a report comes to be and what it means when
+the reviewers agree.
 
 ## What it is
 
-Three kinds of reviewer share one shape and do strictly separate
-jobs, each with an output of its own:
+The forge has three kinds of reviewer. They have one shape and
+strictly separate jobs:
 
-- the critic judges the quality of the documents and never their
-  substance; its results are findings (`FND`), filed in `reviews/`
-  ([The critic](the-critic.md));
-- the challenger judges the substance of the thinking and never the
-  quality of the documents; its results are challenges (`CHL`),
-  filed in `challenges/` ([The challenger](the-challenger.md));
-- the check verifies mechanical conformance with the conventions and
-  never substance or quality; its results are findings (`FND`),
-  filed in `reviews/` ([The check](the-check.md)).
+- [The critic](the-critic.md) reads the quality of the documents,
+  never the substance.
+- [The challenger](the-challenger.md) reads the substance of the
+  thinking, never the quality of a document.
+- [The check](the-check.md) reads mechanical conformance with the
+  conventions, never the quality of a document and never the
+  substance.
 
-Each kind has members. The critic has lenses, the challenger has
-personas, the check has checks. Each member is one agent file. The
-shared behaviour of a kind is written once, in one contract skill
-for that kind, and the agent file names its contract and owns only
-its Lens section. A contract owns conduct and isolation, the subject
-and its boundary, the way of working and the shape of the report. A
-Lens is a specialisation of its contract and never a replacement: it
-may narrow what is read or make a shared rule stricter. It never
-renames, drops or duplicates a shared rule or field. The protocol
-changes in the contract alone. New lenses, personas and checks come
-only by the decision of the principal (the person whose thinking is
-being forged), and only where what they would find genuinely
-differs.
+The critic and the check return findings. The challenger returns
+challenges. What this page says of a finding holds for a challenge as
+well.
 
-All three run on the session model, that is the model the working
-conversation itself runs on. All three are blind to that
-conversation, and their blindness is the source of their value.
+The shape the three share:
 
-One sentence holds for every isolated subagent of the forge, a
-reviewer, a renderer, a documentation agent or a research agent
-alike: it sees nothing of the conversation, it reads every input
-from disk in its own run, and it lets no instance fact into what it
-returns. Only the critic, the challenger and the check are
-reviewers. A renderer, a documentation agent and a research agent
-are isolated in the same way, and they review nothing.
+- A reviewer runs as an isolated subagent (a separate run of Claude
+  with a context of its own, started by a command). It sees the
+  project's documents and never the working conversation.
+- It runs on the session model (the model the working conversation
+  runs on, chosen once for an instance, that is for one
+  installation).
+- It runs on the word of the principal (the person whose thinking is
+  being forged), never on Claude's own judgement.
+- It returns a report. The report is filed immutable and dated.
+- Its findings are settled by a walkthrough (the findings worked one
+  at a time, each closed by the principal's verdict).
+- Nothing it finds blocks anything.
+- What it shares with the other reviewers of its kind is written
+  once, in a contract. Its own agent file owns only its Lens (the
+  section that says what this one reviewer reads and what it goes
+  after).
+
+Each kind has its members. The critic has lenses, the challenger has
+personas, the check has checks. Each member is one agent file.
+
+The reviewers are not the only isolated subagents of the forge. The
+agent that renders an output, the agents that write the documentation
+and the agent that runs a research are isolated in the same way. None
+of them is a reviewer. Three rules hold for every isolated subagent:
+
+- It sees nothing of the conversation.
+- It reads every input from disk in its own run. The copy of the core
+  file (`CLAUDE.md`) that it receives at its start may be older than
+  the file on disk.
+- It lets no instance fact (a fact of one installation) into what it
+  returns.
 
 ## How it works
 
-A reviewer runs on the principal's word alone. The word is given by
-hand, through `/critique <lens> [artefact]`,
-`/challenge <persona> [artefact]` or `/check <check> [slug]`. The
-word may also be given once, in the definition of a command that
-names the checks it runs; a save and a release have such a
-definition. What is ruled out is a run on Claude's own judgement.
-Bare `/critique`, `/challenge` and `/check` list their roster and
-recommend a fit.
+```
+the principal's word
+        |
+        v
+the command starts the reviewer
+        |
+        v
+the reviewer, an isolated subagent:
+  reads the files from disk, sees nothing of the conversation,
+  writes nothing
+        |
+        v   the report, its findings unnumbered
+        |
+the command numbers the findings and files the report,
+one report at a time
+        |
+        v
+the walkthrough: the principal's verdict on each finding
+```
 
-The critic and the challenger take an optional target: an artefact
-of the chain, named as `/forge` names it, or any file of the project
-named by its path. A file named by its path is read with the chain
-around it, and a work product with its specification. Without a
-target, the whole chain is reviewed. Where the file gives the lens
-or the persona nothing to work on, the report says so and carries
-nothing else. A check takes a project by its slug, or the engine.
+**On the principal's word.** The principal starts a reviewer by hand,
+with `/critique`, `/challenge` or `/check`. The word may also be given
+once, in the definition of a command (the file that says what the
+command does) that names the checks it runs. `/save` and `/release`
+have it so: whoever orders a save has ordered the checks the save
+names. What is ruled out is a run on Claude's own judgement. Neither
+the critic nor the challenger runs at a save.
 
-In its run, a reviewer reads the project's documents and the
-engine's rules from disk. It carries what every subagent carries,
-the core file and the instance file, and nothing of the
-conversation. A challenger may search the web. Every check executes
-its own definition in an isolated subagent that sees only the files.
+**The run.** The command starts the agent as an isolated subagent.
+The agent reads its inputs from disk. It writes no file. It returns
+its report to the command, the findings in it unnumbered.
 
-The reviewer returns its report with its findings unnumbered and
-writes nothing. The command numbers the findings and files the
-report, one report at a time. The report is immutable and dated. Its
-name is its date, the time to the minute and four hex characters of
-a content hash, `YYYY-MM-DD-<kind>-<name>-HHMM-<hash>.md`; the name
-is completed by `scripts/forge-report.py` for every report alike. A
-check that finds nothing files nothing. Instance facts, that is
-whatever the instance file and Claude's memory carry (names, roles,
-addresses, hosts), never enter a report, not even where they would
+**The filing.** The command numbers the findings and files the
+report. It files one report at a time. No ID is then given twice, and
+reviewers of any kind may run in parallel. A finding carries an ID
+with the prefix `FND`, a challenge one with the prefix `CHL`. The
+findings of the critic and of the check take their IDs from one
+sequence of the project. A check that finds nothing files nothing.
+
+**The report.** A filed report is immutable: it is never edited. It
+is dated, and its name carries three things that keep it apart from
+every other report:
+
+- its date
+- the time to the minute
+- four hexadecimal characters of a hash of its content
+
+```
+YYYY-MM-DD-<kind>-<name>-HHMM-<hash>.md
+```
+
+No instance fact enters a report. A report is a public file, or may
+be quoted into one. The rule holds even where such a fact would
 explain a finding.
 
-A filed report is settled by walkthrough (a list worked one item per
-message, each item closed with the principal's verdict), as
-[Walk through a list](../use/walk-through-a-list.md) describes.
-Every finding and every challenge is either fixed or explicitly
-rejected with a recorded reason. Rejecting and parking are
-legitimate outcomes. Silently ignoring one is not. An accepted
-challenge is mended wherever it needs to be, and one that mends
-nothing was not accepted. A challenge of a layer below the intent is
-mended in that layer and changes nothing above it. The exception is
-a challenge that shows that what is wanted cannot be realised, or
-only at a price not worth paying: then a thread is opened in the
-intent, citing the challenge, and what is wanted is decided there.
-The states of findings and challenges are records the ledger (the
-project's state report, made at read time from its documents) is
-made from.
+**The settlement.** The findings of a report are settled by a
+walkthrough: [Walk through a list](../use/walk-through-a-list.md)
+says how. Every finding is either fixed or explicitly rejected with a
+recorded reason. Rejecting and parking are legitimate outcomes.
+Silently ignoring a finding is not. An accepted finding is mended
+wherever it needs to be, and one that mends nothing was not accepted.
 
-Nothing blocks. There are no hard quality gates. Findings and
-challenges are advisory, and the principal alone decides what is
-published.
+**Nothing blocks.** There are no hard quality gates. Checklists and
+findings are advisory. The principal alone decides what is published.
 
-An artefact is best challenged before the next layer is first
-derived from it: the intent before the first assignment, a BRD
-before the solution design. At that point accepted challenges are
-still cheap to absorb. Whether a review runs again later, after a
-draft or before an approval, is left to the judgement of whoever
-runs the process; no rule prescribes it.
+**The next run.** A reviewer that meets a finding already filed
+reports it under the ID it has, in one of three states:
+
+- still open
+- reopened
+- verified resolved
+
+A rejected finding is not raised again.
+
+**When a reviewer is worth running.** An artefact (a document of the
+chain, the versioned documents derived one from another; the
+[Glossary](../reference/glossary.md) has every term of the forge) is
+best challenged before the next layer is first derived from it.
+Accepted challenges are then still cheap to absorb. Whether a
+reviewer runs again later, after a draft or before approval, is left
+to the judgement of whoever runs the process. No rule prescribes it.
+
+**Contract and Lens.** The shared behaviour of a kind of reviewer is
+one contract, written once and never copied. The critic, the
+challenger and the check own one contract each. A contract owns four
+things:
+
+- conduct and isolation
+- the subject and its boundary
+- the way of working
+- the shape of the output
+
+An agent file carries its Lens section and nothing else of the shared
+behaviour. A Lens is a specialisation of its contract, never a
+replacement. It may narrow what is read or make a shared rule
+stricter. It never renames, drops or duplicates a shared rule or
+field. The protocol changes in the contract alone. A new lens,
+persona or check comes only by the principal's decision, and only
+where what it finds genuinely differs from what the others find.
 
 ## Why
 
-**Why the reviewers are blind to the conversation.** The inputs say
-that this blindness is the source of their value, and say no more of
-it. A clean context is also the reason given for keeping document
-review apart from the substantive challenge: the formal audit
-benefits from a clean context, and the substantive challenge
-benefits from a different register entirely. One agent doing both
-would do neither properly. The check runs on the same mechanism as
-the two, so that there is one mechanism for every reviewer.
+**Why the reviewers are blind.** The blindness is the source of their
+value. A reviewer sees only the files. Its report is therefore a
+judgement of what the files say, and of nothing that was only said in
+the conversation.
 
-**Why every input is read from disk.** The copy of the core file in
-a subagent's context may be older than the file on disk. A reviewer
-therefore reads every input in its own run, and trusts nothing that
-was loaded for it.
+**Why every input is read from disk.** The copy of the core file an
+agent receives at its start may be older than the file on disk. What
+it reads in its own run is current.
 
-**Why no instance fact reaches a report.** A report is a public file,
-or may be quoted into one. A name, a role, an address or a host in
-it would make the instance visible wherever the report travels.
+**Why no instance fact enters a report.** A report is a public file,
+or may be quoted into one.
 
-**Why the session model.** The whole forge runs on one model, so
-that the strongest model the forge runs on is a decision and never
-the accident of a pin that has aged. Speed is bought with context,
-never with a weaker reviewer: the reviewer reads in its own context
-and the working conversation is spent on verdicts, not on reading.
+**Why three kinds and not one.** One reviewer for both the documents
+and the thinking is ruled out. An agent doing both does neither
+properly. The formal audit benefits from a clean context. The
+substantive challenge benefits from a different register entirely.
+Mechanical conformance runs on the same mechanism as a third kind,
+and the mechanism takes further kinds as they come. The reason is one
+mechanism for every reviewer. A finding without an ID has no place
+for its verdict. A rejected one would then return at the next run,
+and nobody could tell why one reviewer's findings are kept and
+another's are not.
 
-**Why a reviewer runs on the principal's word alone.** A run costs
-tokens, some checks a great deal, and what is spent is the
-principal's to decide. There is no other reason. The word may stand
-once in a command's definition, so that a save or a release can run
-its checks without a fresh word each time; a run on Claude's own
-judgement is what is ruled out.
+**Why on the principal's word alone.** A run costs tokens, some
+checks a great deal. What is spent is for the principal to decide.
+There is no other reason.
 
-**Why the command numbers and files the report.** A finding without
-an ID has no place for its verdict. A rejected finding without an ID
-returns at the next run, and nobody can tell why one reviewer's
-findings are kept and another's are not. The IDs of a project's
-findings and challenges are given in one place, the session, never
-by the agent. A check that every save runs would otherwise write
-into the project at every save. Two reviewers run at once would
-otherwise take one ID. Because the agent returns its findings
-unnumbered and the command numbers them one report at a time,
-reviewers of any kind may run in parallel.
+**Why the session model.** Every command and every reviewer runs on
+one model. The strongest model the forge runs on is then a decision,
+never the accident of a model fixed for one agent long ago. Speed is
+bought with context, never with a weaker reviewer: a reviewer in a
+context of its own carries only the files, and the working
+conversation is spent on verdicts, not on reading. The forge has two
+exceptions to the one model. Neither is a reviewer.
 
-**Why a report's name carries the minute and a hash.** Two branches
-must not make the same name. The first report of a day on two
-branches would, since the check a save runs happens on every branch,
-and the time alone is not enough for two people. Names given before
-the rule stay as they are, immutable.
+**Why the command numbers and files, never the agent.** The IDs of a
+project's findings and challenges are given in one place. An agent
+that filed its own report would break that in two ways. A check that
+every save runs would write into the project at every save. Two
+reviewers run at once would take one ID.
 
-**Why one contract per kind.** The shared behaviour of a kind is
-written once and never copied, so that a change of the protocol is
-made in one place. There is one contract per kind and no common one,
-because the shared texts of the kinds differ almost whole; the few
-sentences common to all stay in each contract in its own words.
+**Why the name carries the time and a hash.** Two branches must never
+make the same name. The first report of a day on two branches would
+have one name without them: a save runs a check on every branch. The
+time alone is not enough for two people.
 
-**Why nothing blocks.** Findings are advisory, and the principal
-alone decides what is published. No further reason is recorded.
-
-**Why the reports are immutable and dated.** The reason is not
-recorded in the inputs of this page.
+**Why one contract per kind.** The shared texts of the three kinds
+differ almost whole. The few sentences common to all stay in each
+contract in its own words. A common contract is considered again only
+if a fourth kind repeats them.
 
 **Why agreement is not validation.** Isolation is not independence.
-The author, the critic and the challengers share one model family.
-What that family systematically cannot see, none of them will find.
-Agreement between the reviewers is therefore never treated as
-validation: it only means that the artefact is consistent under one
-set of priors. The calibration point lies outside, in review by
-people or by a model of another family, invited at the principal's
-discretion; how another family is reached is said in
-[Another model family](another-model-family.md). Where several
-engines answer one question, Claude lays the answers side by side
-with the engines named, and the principal is the chairman: agreement
-is consistency, difference is spelled out. A challenge may inspire,
-but nothing enters the intent because a reviewer wrote it; it enters
-only because the principal composed it. An accepted challenge may
+The author (Claude, in the working conversation), the critic and the
+challengers are of one model family. What that family systematically
+cannot see, none of them will find. Agreement between the reviewers
+is therefore never treated as validation. It means only that the
+artefact is consistent under one set of priors (the assumptions a
+model brings to whatever it reads). The calibration point lies
+outside the forge's own reviewers: review by people or by a model of
+a different family, invited at the principal's discretion.
+[Another model family](another-model-family.md) says how such a model
+is reached and why its reviewers are not built yet. A reviewer's
+wording carries no authority either. Nothing enters the intent (the
+document where what is wanted is decided) because a reviewer wrote
+it, only because the principal composed it. An accepted challenge may
 change the intent by subtraction as readily as by addition.
+
+**Where no reason is given.** For three rules the reason is not
+recorded:
+
+- that nothing blocks
+- that a filed report is immutable
+- that a new lens, persona or check comes only by the principal's
+  decision
 
 ## A worked example
 
-The principal of a project `my-project` has just spent an hour with
-Claude arguing an intent towards its next version. Before the first
-assignment is derived from it, the principal asks for a challenge:
-`/challenge <persona> intent my-project`.
+A principal has finished a round on the project `my-project` and
+wants two reviewers on it at once: one lens of the critic and one
+check.
 
-A subagent starts with the persona's agent file and the challenger's
-contract. It reads the intent and the chain around it from disk. It
-knows nothing of the hour before: not what the principal almost
-wrote, not what Claude proposed and was declined. It may search the
-web. It returns its challenges unnumbered, severity and epistemic
-status with each, and writes nothing.
+1. **The word.** The principal types `/critique <lens>` and
+   `/check <check> my-project`. Claude has started neither before
+   that.
+2. **The runs.** Each command starts its agent as an isolated
+   subagent, and the two run at the same time. Each reads the
+   project's files from disk. Neither sees what was said in the
+   round.
+3. **The returns.** The critic's agent returns a report with two
+   findings, the check's agent a report with one. No finding carries
+   an ID yet. Neither agent has written a file. Neither report
+   carries a fact of the installation it ran on.
+4. **The filing.** The reports are filed one after the other. The
+   two findings of the first report get the next two free IDs of the
+   project's sequence of findings. The finding of the second report
+   gets the ID after those. The two files land in `reviews/`:
 
-The command numbers the challenges, `CHL.0010` onwards in the
-project's one sequence, and files the report in `challenges/` as
-`YYYY-MM-DD-challenge-<persona>-HHMM-<hash>.md`. The report is now
-immutable. The same minute, a critic lens the principal started in
-parallel returns its findings; they take `FND` numbers of their own,
-and the two reports never collide.
+   ```
+   reviews/2027-03-04-<kind>-<name>-1412-a3f1.md
+   reviews/2027-03-04-<kind>-<name>-1412-09c7.md
+   ```
 
-Claude offers a walkthrough. One challenge per message, the heaviest
-first: the principal accepts two and the intent is mended where it
-needs to be; one is rejected with the reason recorded in the
-project's decisions; one is parked. The ledger shows each challenge
-in the state its verdict gave it. Nothing was blocked, and nothing
-was written into the intent because the challenger said so.
-
-A week later a second persona is sent in and raises no objection
-where the first one did. That is consistency under one set of
-priors, not proof that the intent is right. If the principal wants
-calibration, the way is a reader of flesh and blood or a model of
-another family.
+   `<kind>` and `<name>` say which reviewer ran. A second person who
+   files the first report of the same day on another branch gets a
+   name of its own: the time and the hash differ.
+5. **The walkthrough.** The principal takes the three findings one
+   at a time. The first finding of the critic and the finding of the
+   check are accepted, and the fixes are written into the documents.
+   The second finding of the critic is rejected, and the reason is
+   recorded as a decision. Nothing waited on any of the three: the
+   principal was free to publish with all of them open.
+6. **The next run.** Later the same lens of the critic runs again.
+   It reports the first finding under the ID it has, as verified
+   resolved. It does not raise the rejected finding again.
+7. **The agreement.** The second run has nothing new to say, and a
+   challenger run after it agrees. The principal reads that as
+   consistency under one model family, not as proof, and asks a
+   person to read the document as well.
 
 ## See also
 
@@ -257,5 +315,4 @@ another family.
 - [Glossary](../reference/glossary.md): every term of the forge in
   one line.
 
-Generated on 2026-11-08 for version 7.0 from the files the
-front-matter names; never edited by hand.
+Generated on 2026-11-17 for version 7.12 from the files the front-matter names; never edited by hand.

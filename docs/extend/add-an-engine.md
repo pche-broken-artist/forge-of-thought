@@ -1,8 +1,8 @@
 ---
-generated: 2026-11-08
-version: 7.0
+generated: 2026-11-17
+version: 7.12
 made: derived
-inputs-hash: 11309acdcb1f9c9e
+inputs-hash: 1c797e7ab122445a
 inputs:
   - scripts/forge-engine.py
   - .claude/skills/research/SKILL.md
@@ -12,241 +12,332 @@ inputs:
 
 # Add an engine
 
-An engine is a model of another family that the forge reaches
-through that model's own command-line tool, as one row of the engine
-table of `scripts/forge-engine.py`. This page is for the extender who
-adds such a row: what the row holds, what is written beside it, how
-the new row is proved and how the change is recorded and released.
-What the link to another engine is and why it runs over a
-command-line tool is explained in
-[Another model family](../about/another-model-family.md); the
-script's flags and exit codes are listed in
-[Scripts](../reference/scripts.md). The terms of the forge used here
-(packet, note, bundle, card) are each given in one line in the
-[Glossary](../reference/glossary.md).
+An engine is a model of another family that the forge reaches through
+that family's own command-line tool. This page is for the extender who
+adds one. An engine is one row of the engine table of
+`scripts/forge-engine.py` and a pair of functions beside it, and the
+row is proved by three runs. What the link to another engine is and
+why it is a command-line tool is explained in
+[Another model family](../about/another-model-family.md).
 
 ## Before you start
 
-Adding an engine is a change of the forge like any other. It is
-proved, recorded and released as
-[Make a change to the forge](how-a-change-is-made.md) says; this
-page gives only what is particular to an engine.
-
-The forge asks three things of the tool, and nothing else.
-
-- The tool is on PATH. How it is installed is said by its own
-  documentation, not by the forge.
-- The login is yours, made once in the tool itself. The forge
-  carries no key, no account and no configuration of who connects.
-- The tool has a one-shot, non-interactive shape. It takes a prompt,
-  a folder added as its workspace, a request for a JSON envelope and
-  a time limit, runs once and exits.
-
-Choose the row's name before you write it. The forge names engines
-and tiers, never models or versions: the name says the kind of tool,
-and the version is the tool's, resolved at the call. The reason is
-that a name then always means the newest of its kind. When a new
-version of the tool arrives, nothing in the forge changes, and
-everything that ran on that name runs on the new one. The row's name
-is what `/research --deep --engine <name>` takes.
+- Adding an engine is a change of the forge. It is proved, recorded
+  and released as any change of the forge, the way
+  [Make a change to the forge](how-a-change-is-made.md) describes.
+- The engine's tool is installed and signed in. You make the login
+  yourself, once, outside the forge, in the engine's own tool. How
+  the tool is installed and signed in is said by the tool's own
+  documentation. The forge asks only that the tool is on PATH.
+- The forge carries no key, no account and no configuration of who
+  connects. A row holds none of them.
+- The tool has a one-shot, non-interactive shape: one call that takes
+  a prompt, works in a folder it is given, returns its answer as a
+  JSON envelope (one JSON object for the whole run) and ends.
+- Every term of the forge has one line in the
+  [Glossary](../reference/glossary.md).
 
 ## The files
 
-- `scripts/forge-engine.py`: the one file of the change. It holds
-  the engine table `ENGINES`, one row per engine; the pairing
-  `COMMANDS`, per engine one function that builds the command line
-  and one that reads the envelope; and, in its header, the list of
-  the engines with the shape of each row and the fields of its
-  envelope.
-- `.claude/skills/research/SKILL.md`: the command that takes the
-  row's name. Where it explains `--engine <name>`, its text names the
-  rows of today in brackets.
+The row is added in one file: `scripts/forge-engine.py`. An engine
+stands in it in three places:
+
+- the header, which lists the engines, one row each: the name, the
+  tool's command line and the fields of its envelope;
+- `ENGINES` (the engine table), with one row per engine;
+- `COMMANDS`, which holds the pair of the row: one function that
+  builds the engine's command line and one that reads its envelope.
+
+The header shows the one row the table has:
+
+```
+antigravity   `agy -p <prompt> --add-dir <packet> --output-format json
+               --print-timeout <s>s --disable-slash-commands
+               [--model] [--effort] [--json-schema] [--sandbox]
+               [--dangerously-skip-permissions]`
+              envelope: status (SUCCESS | ERROR | ...), response,
+              usage, duration_seconds, num_turns; the model is not
+              in the envelope, the --model word is recorded.
+```
+
+What a row and its pair hold, with the row `antigravity` beside it:
+
+| What the row and its pair hold | In the row `antigravity` |
+|---|---|
+| the tool, found on PATH | `agy` |
+| the prompt | `-p <prompt>` |
+| the packet folder, added as the workspace | `--add-dir <packet>` |
+| the JSON envelope, asked for | `--output-format json` |
+| a time limit | `--print-timeout <s>s` |
+| the model, where the tool takes one | `[--model]` |
+| the effort, where the tool has one | `[--effort]` |
+| a schema for the final answer, where the tool takes one | `[--json-schema]` |
+| the sandbox, where the tool has one | `[--sandbox]` |
+| the flag that approves every tool call, where the tool has one | `[--dangerously-skip-permissions]` |
+| the fields of the envelope the script reads | `status`, `response`, `usage` |
+| whether the model is in the envelope | it is not; the `--model` word is recorded |
+| a version floor, where a bug is known | 1.1.1, below which a bug of `agy -p` is known |
+
+The same file writes the per-run profile: the settings the engine is
+started with for one run, in the engine's own settings shape. The
+settings path of the profile is written for the first row
+(`antigravity`). It moves into the row when a second engine comes.
+
+The rest of the script is the same for every engine, and you do not
+build it:
+
+- it finds the tool on PATH and refuses a version below the floor;
+- it checks that the packet folder holds `packet.md`;
+- it runs the engine once, non-interactively, with stdin closed;
+- it refuses a run that changed or added anything in the packet
+  folder;
+- it saves the envelope beside the packet as `envelope.json`;
+- it writes the answer as a note.
 
 ## Steps
 
-1. **Learn the tool's one-shot shape.** From the tool's own
-   documentation, find how it is started once and non-interactively:
-   - the flag that takes the prompt;
-   - the flag that adds a folder as the workspace;
-   - the flag that asks for a JSON envelope;
-   - the flag that sets a time limit;
-   - where the tool has them, the flags for the model, the effort, a
-     schema of the answer, the sandbox and the approval of every
-     tool call.
+1. Choose the name. The forge names engines and tiers, never models
+   or versions: a tier word in a model override, an engine name in
+   the engine table. A name then always means the newest of its kind.
+   The version belongs to the tool and is resolved at the call. When
+   a new version arrives, nothing in the forge changes, and
+   everything that ran on that name runs on the new one. The name of
+   the row is the word `/research --deep --engine <name>` takes.
 
-   Find the fields of its envelope as well: which field says the
-   status and which value of it means success, which field holds the
-   response, which holds the usage, and whether the model is in the
-   envelope at all.
+2. Add the row to `ENGINES` under that name. It holds what belongs
+   to the tool itself:
 
-2. **Add the row to `ENGINES`.** The row holds:
-   - the tool's executable, as it is found on PATH;
-   - how the version is asked, and a version floor where a bug of
-     the tool is known (the script refuses a version below the
-     floor);
-   - the tool's flag that approves every tool call, which the
-     script's `--allow-all` passes;
-   - the tool's sandbox flag, which the script's `--sandbox` passes,
-     where the tool has one.
+   - the tool as it is found on PATH;
+   - the tool's flag for its sandbox, where it has one;
+   - the tool's flag that approves every tool call;
+   - a version floor, where a bug is known.
 
-3. **Write the function that builds the command line.** It returns
-   the command the script runs, in the tool's one-shot shape: the
-   prompt (`--prompt`, or the script's default sentence, which tells
-   the engine to read `packet.md` in its workspace and do exactly
-   what it says), the packet folder added as the workspace, the JSON
-   envelope asked for and the time limit (`--timeout`), and, where
-   the tool has them, the model (`--model`), the effort (`--effort`),
-   the schema (`--schema`), the sandbox (`--sandbox`) and the flag
-   that approves every tool call (`--allow-all`). The script runs the
-   command once, non-interactively, with stdin closed.
+   The row names no model and no version of a model.
 
-4. **Write the function that reads the envelope.** It reads the
-   tool's envelope and says whether the run succeeded. The status
-   must say success and the response must be non-empty; an exit of 0
-   with an empty answer is a failure. It returns the response, the
-   usage and the model where the envelope carries one. Where the
-   model is not in the envelope, the script records the `--model`
-   word, or "engine default" when none was given.
+3. Write the function that builds the command line and put it into
+   `COMMANDS`. It gives the tool its one-shot, non-interactive shape
+   from the flags of the script:
 
-5. **Pair the two in `COMMANDS`** under the row's name. The name of
-   the row and the name of the pair are one word.
+   | Flag of the script | What the command line carries |
+   |---|---|
+   | `--prompt` | the one sentence the engine is started with |
+   | `--packet` | the packet folder, added as the workspace |
+   | `--timeout` | the time limit in seconds (1800 by default), passed where the tool has a flag; the script enforces it a minute later |
+   | `--model` | a model word the tool understands, where the tool takes one |
+   | `--effort` | `low`, `medium`, `high`, `xhigh` or `max`, where the tool has it |
+   | `--schema` | a JSON schema file the final answer is shaped by, where the tool takes one |
+   | `--sandbox` | the tool's sandbox flag, where it has one |
+   | `--allow-all` | the tool's flag that approves every tool call |
 
-6. **Settle the profile.** For every run the script writes the engine
-   a profile of its own: a copy of your settings for the tool, in the
-   tool's own settings shape, with permissions added. The profile
-   allows the web. It denies the shell, every write, and the reading
-   of every entry of the engine root but `tmp/` and of the run's
-   `hold/` folder; the paths are computed from where the script
-   lies, and the engine is started with HOME and USERPROFILE pointing
-   at the profile. Your own settings are not touched, and the profile
-   stays in the run folder as the run's record. The place where the
-   tool keeps its settings is written in the script for the first
-   engine alone. When a second engine comes, that place moves into
-   the row, and the new row carries the place of its own tool's
-   settings. The price of this design is one settings shape to know
-   per engine.
+   The JSON envelope is always asked for. The forge defaults no
+   model: without `--model` the tool's own default runs.
 
-   The profile exists because the place of the run alone locks
-   nothing. With every tool call allowed, the engine reads any path
-   on the disk, and it reads its permission rules from its own
-   settings file alone, which the forge never writes.
+4. Write the function that reads the envelope and put it beside the
+   first in `COMMANDS`. It reads the status, the response and the
+   usage. A run is answered when the status says success and the
+   response is not empty. Exit 0 with an empty answer is a failure.
+   Where the envelope names the model, the note records it. Where it
+   does not, the note records the `--model` word. Without that word
+   the note says `engine default`.
 
-7. **Add the row to the header.** The header lists the engines, one
-   row each, with the command-line shape of each and the fields of
-   its envelope. The new row stands beside the first in the same
-   shape.
+5. Give the engine its profile. The profile is a copy of your
+   settings for the engine with the permission rules added, written
+   in the engine's own settings shape. What the rules say does not
+   change with the engine:
+
+   - the web is allowed;
+   - the shell is denied;
+   - every write is denied;
+   - reading any entry of the forge's root folder but `tmp/` is
+     denied;
+   - reading the `hold/` folder of the run is denied, where the notes
+     of the session model (the model Claude runs on in the
+     conversation) wait.
+
+   The paths are computed from where the script lies. The engine is
+   started with `HOME` and `USERPROFILE` pointing at the profile. Your
+   own settings are not touched. Move the settings path of the
+   profile into the rows: each row then holds its own. The price of
+   the profile is one settings shape to know per engine.
+
+6. List the row in the header, in the shape of the row it shows: the
+   name, the command line, the fields of the envelope and whether
+   the model is among them.
 
 ## Prove it
 
-Three runs, in this order; each rests on the one before. No check of
-the forge verifies a row of the table: these runs are the proof.
+The row is proved by three runs, in this order. Each run of the
+script takes a packet: a folder that holds `packet.md`, the whole
+context of the run. The engine is given that folder as its workspace
+and runs in it. An engine never works in the forge's root, whose
+hooks and instance file (the file that holds the facts of one
+installation) it must not see or execute. For the first two runs,
+make a scratch packet under `tmp/research/`: a folder with a
+`packet.md` that states one small task.
 
-**A trial of the engine alone.** Make a scratch packet under
-`tmp/research/`: a folder with a `packet.md` that holds one small
-question and the sentence that the engine writes no file and returns
-the whole answer as its final message. Run the script on it without
-the profile:
+### 1. The trial of the engine alone
 
 ```
-python scripts/forge-engine.py <name> --packet tmp/research/<run>/<card> --out tmp/research/<run>/<card>/<name>.md --no-profile
+python scripts/forge-engine.py <name> --packet tmp/research/<run>/trial --out tmp/research/<run>/trial/<name>.md --no-profile
 ```
 
-`--no-profile` runs the engine under your own settings for the tool.
-It is a trial of the tool and of the pair, never a research: nothing
-of it is filed. Where the tool's web tools would wait for a
-permission nobody can give in a headless run, add `--allow-all`. You
-should now see the script exit with 0 and the answer written to the
-`--out` file as a note, with `engine`, `model`, `usage`, `run` and
-`status: immutable` in its front-matter; the envelope lies beside the
-packet as `envelope.json` for inspection.
+`--no-profile` runs the engine under your own settings, without the
+per-run profile. It is a trial, never a research. A headless run (a
+run with nobody to answer a permission question) denies a tool call
+it cannot ask about and returns nothing. Where the trial comes back
+empty for that reason, it needs `--allow-all`, and `--sandbox` where
+the tool has a sandbox. Without the profile and with every tool call
+approved, the engine reads any path on the disk. A research never
+runs this way.
 
-**A run with the profile.** Run the same packet, or a fresh one, as
-the research command runs it:
+You should now see two lines and exit code 0. The first line names
+the engine, its version and the packet and ends with `no profile`.
+The second is `note written:` with the path of the note. The
+front-matter of the note carries the engine, the model, the usage,
+the run and `status: immutable`. The envelope lies beside the packet
+as `envelope.json`, for inspection.
+
+The trial shows four things:
+
+- the tool is found on PATH;
+- its version is read and is not below the floor;
+- the command line the row builds runs;
+- the envelope is read.
+
+Exit code 1 is a refusal, with the reason on stderr:
+
+- the tool is missing;
+- the version is below the floor;
+- the packet has no `packet.md`;
+- the run changed the folder;
+- the envelope is unreadable or the answer is empty.
+
+The engine's own non-zero exit is reported with its stderr. The
+script refuses an `--out` file that exists and asks for another name:
+a note is immutable. The flags and the exit codes are listed in
+[Scripts](../reference/scripts.md).
+
+### 2. The run with the profile
+
+Make a second scratch packet and run:
 
 ```
 python scripts/forge-engine.py <name> --packet tmp/research/<run>/<card> --out tmp/research/<run>/<card>/<name>.md --allow-all --sandbox
 ```
 
-Then check that the profile's deny rules hold for this tool. What
-must hold:
+`--allow-all` passes the engine's flag that approves every tool call.
+`--sandbox` passes its sandbox flag. Every call is allowed, the
+engine's sandbox contains it, and the profile denies what the engine
+must not read or do.
 
+You should now see the same two lines, the first naming the profile
+where the trial said `no profile`. The profile stays in the run
+folder as the record of the run.
+
+Then check that the deny rules of the profile hold. Four things hold
+for the row `antigravity`, and the same four are to hold for yours:
+
+- a deny rule holds while every tool call is approved;
 - the shell is refused;
-- a write is refused, and the script's comparison of the folder
-  before and after the run finds nothing changed;
-- a read of the forge's tree outside `tmp/` is refused;
-- the tool's own web tools work;
+- the engine's own web tools work;
 - the login is found.
 
-How you make the engine attempt a denied call is yours; the question
-of the scratch packet may ask for it. Where to look is the envelope
-saved beside the packet as `envelope.json` and the profile kept in
-the run folder as the run's record. You should now see the note
-written as in the trial, and no denied call carried out.
+The script verifies one thing itself. It records a fingerprint of
+every file in the packet folder before the run and compares the
+folder afterwards. A run that changed or added anything is refused
+and nothing is filed.
 
-**A research on a real question.** Run
-`/research --deep --engine <name> <topic>` on a question a project
-has. The engine named does two things in that run: it reviews the
-draft plan before the principal (the person whose thinking is
-forged) confirms it, and it takes every card beside Claude's own
-agents, one note per card as `<card>.<name>.md` in the research
-bundle. An engine the command finds unusable (not on PATH, no login,
-quota spent, an envelope it cannot read) is said in one sentence
-with the script's reason, and the research goes on without it; the
-bundle's Deviations record it. You should now see the engine's
-review shown beside the draft plan, a note of the new engine for
-every card, and the measure of the engines' independence stated per
-card in the synthesis.
+### 3. A research on a real question
 
-**If the script refuses.** The script exits with 1 and gives the
-reason on stderr:
+Type to Claude:
 
-- the tool is missing from PATH;
-- the version is below the floor;
-- the packet has no `packet.md`;
-- the folder was changed by the run;
-- the envelope cannot be read, or the answer is empty.
+```
+/research --deep --engine <name> <topic>
+```
 
-The tool's own non-zero exit is reported with the tool's stderr.
+`--deep --engine <name>` adds your engine beside the session model.
+The engine reads the draft plan of the research and takes every card
+(one question of the plan).
+
+You should now see the engine's additions shown beside the draft
+plan, marked as the engine's. At the end you should see one note per
+card from your engine (`<card>.<name>.md`) in the bundle of the
+research (the folder `research/YYYY-MM-DD-<topic>/`).
+
+An engine that is named but unusable does not stop the research.
+Claude says so in one sentence, with the script's reason. The
+research goes on as without `--engine`. The Deviations of the bundle
+record it. A research whose Deviations name your engine has not
+proved the row.
 
 ## Record and release
 
-The addition is recorded and released as any change of the forge, as
-[Make a change to the forge](how-a-change-is-made.md) says. The run
-folders of the proof under `tmp/` stay where they are, for
-inspection; nothing in `tmp/` is a source of truth, and none of them
-is recorded.
+The row, its pair and the profile are one change of the forge. The
+change is recorded and released as any change, the way
+[Make a change to the forge](how-a-change-is-made.md) describes. The
+scratch runs stay under `tmp/research/` for inspection. The run
+folder is kept, never cleaned. Nothing in `tmp/` is a source of
+truth.
 
 ## A worked example
 
-One addition, with `<name>` for the row and `<tool>` for the
-executable of its command-line tool.
+An engine is added under the name `<name>`. The run folder of the
+proof is `tmp/research/engine-trial/`, with two scratch packets
+(`trial/` and `card-1/`), each holding a `packet.md` with one small
+task.
 
-1. `<tool>` is installed and signed in once, by its own
-   documentation; `<tool>` is on PATH.
-2. In `scripts/forge-engine.py` a row `<name>` enters `ENGINES`: the
-   executable `<tool>`, how its version is asked, a floor where a bug
-   of `<tool>` is known, and the approve-all flag and the sandbox
-   flag of `<tool>`.
-3. Two functions are written: one returns the command line of
-   `<tool>` in its one-shot shape; the other reads the JSON envelope
-   of `<tool>` for its status, its response, its usage and, where it
-   is there, its model.
-4. `COMMANDS` gains the pair under `<name>`.
-5. Since `<name>` is a second row, the place of a tool's settings
-   moves into each row, and the row `<name>` carries the place of the
-   settings of `<tool>`.
-6. The header gains the row `<name>` beside the first, with its
-   command-line shape and the fields of its envelope.
-7. A scratch packet `tmp/research/<run>/<card>/packet.md` holds one
-   small question. The trial runs with `--no-profile`: exit 0, the
-   note written to `tmp/research/<run>/<card>/<name>.md`.
-8. The run with the profile follows, `--allow-all --sandbox`, and
-   the deny rules are checked: the shell refused, nothing written, no
-   read outside `tmp/`, the web tools working, the login found.
-9. `/research --deep --engine <name> <topic>` runs on a real
-   question: the review of the draft plan is shown beside the draft,
-   and the bundle holds `<card>.<name>.md` for every card.
-10. The change is recorded and released.
+The script now holds the engine in its three places:
+
+- the row `<name>` in `ENGINES`;
+- its two functions in `COMMANDS`;
+- the row `<name>` in the header, below `antigravity` and in the same
+  shape.
+
+The settings path of the profile has moved into the two rows.
+
+The trial:
+
+```
+python scripts/forge-engine.py <name> --packet tmp/research/engine-trial/trial --out tmp/research/engine-trial/trial/<name>.md --no-profile
+```
+
+The script answers:
+
+```
+<name> <version>: running on trial (timeout 1800s; no profile)
+note written: tmp/research/engine-trial/trial/<name>.md (<n> chars; <n> turns, <n> s)
+```
+
+The front-matter of the note carries:
+
+```
+engine: <name>
+model: engine default
+usage: <the usage as the envelope gives it>
+run: tmp/research/engine-trial/trial
+status: immutable
+```
+
+The run with the profile:
+
+```
+python scripts/forge-engine.py <name> --packet tmp/research/engine-trial/card-1 --out tmp/research/engine-trial/card-1/<name>.md --allow-all --sandbox
+```
+
+The first line of the answer now ends with `profile` and the folder
+of the profile. The profile lies in the run folder. The four things
+of the check hold: a deny rule held, the shell was refused, the web
+tools worked and the login was found.
+
+The research:
+
+```
+/research --deep --engine <name> <topic>
+```
+
+The bundle `research/YYYY-MM-DD-<topic>/` holds one note
+`<card>.<name>.md` per card, and its Deviations do not name `<name>`.
+The row is proved, and the change is recorded and released.
 
 ## See also
 
@@ -254,9 +345,10 @@ executable of its command-line tool.
   recording and releasing the change.
 - [Another model family](../about/another-model-family.md): what the
   link to another engine is and why it is a command-line tool.
-- [Scripts](../reference/scripts.md): the engine script, its flags
-  and exit codes.
-- [Glossary](../reference/glossary.md): every term of the forge in
-  one line.
+- [Scripts](../reference/scripts.md): the engine script, its flags and
+  exit codes.
+- [Glossary](../reference/glossary.md): every term of the forge in one
+  line.
 
-Generated on 2026-11-08 for version 7.0 from the files the front-matter names; never edited by hand.
+Generated on 2026-11-17 for version 7.12 from the files the
+front-matter names; never edited by hand.

@@ -1,8 +1,8 @@
 ---
-generated: 2026-11-08
-version: 7.0
+generated: 2026-11-17
+version: 7.12
 made: derived
-inputs-hash: 550fb26d11d166f1
+inputs-hash: 715bbbcd216b62f9
 inputs:
   - .claude/skills/forge/states/user-stories.md
   - templates/user-stories.md
@@ -17,138 +17,162 @@ inputs:
 
 # The user stories
 
-The user stories are an artefact of the chain, the file
-`35-user-stories.md` of a project: the requirements broken into
-behaviour seen from the outside, so that the stakeholders can approve
-them, the delivery can build from them and the testers can test from
-them. This page says what the artefact is, who writes and reads it,
-what it is made from, what one story holds, when the stories are
-complete, how they are found and why they are shaped as they are. It
-also says what the export the stakeholders get looks like and why
-that export leaves the intent out. It is for anyone who uses the
-forge, extends it or judges it. How to iterate the stories and make
-the export is the page [Write user stories](../use/write-user-stories.md).
+The user stories are the document of a project that breaks its
+parent into behaviour seen from the outside. This page says what the
+document is, what one story holds, how the stories are found and
+reviewed, and why the export that the stakeholders get leaves the
+intent out. It is for the one who uses the forge, the one who extends
+it and the one who evaluates it. The words of the forge used here are
+in the [Glossary](../reference/glossary.md).
 
 ## What it is
 
-The user stories stand below the BRD and above the solution design.
-The [BRD](the-brd.md) is their usual parent. The
-[solution design](the-solution-design.md) is the layer that cites
-them. The stories break the parent into behaviour seen from the
-outside: what the user or the business sees happen, and under which
-conditions it is accepted.
+The user stories are an artefact of the chain, that is a document of
+the chain of versioned documents along which an idea travels. The
+file is `35-user-stories.md`. It stands below the BRD (see
+[The BRD](the-brd.md)) and above the solution design (see
+[The solution design](the-solution-design.md)).
 
-They serve three readers at once:
+The stories break the parent into behaviour seen from the outside:
+what the user or the business sees happen, and under which conditions
+it is accepted. They are written for three readers:
 
 - the stakeholders, who approve the stories as a whole;
 - the delivery, which makes its technical analysis and builds from
-  them without an empty place;
+  the stories without an empty place;
 - the testers, who write their test cases from them.
 
-The relation to the parent is many to many. One item of the parent
-may be served by several stories. One story may serve several items.
-The solution design cites the stories, never the reverse.
+The stories and the items of the parent do not pair one to one. One
+item of the parent may be served by several stories. One story may
+serve several items. The solution design cites the stories, never the
+reverse.
 
-The stories are the artefact. What the stakeholders are handed is not
-the artefact but an export: a [render](renders-and-recipes.md) of
-the genre `user-stories-export`, one heading per story with its
-parts on lines of their own, pasted into a wiki or a tracker. The
-export is described below.
+```
+the parent: the BRD, or the intent in a small change
+      ^
+      |  Reference: a story cites the items it serves,
+      |  several stories to one item, one story to several
+      |
+35-user-stories.md  ----- /render ----->  the export (a render)
+      ^
+      |  cites the stories, never the reverse
+      |
+the solution design
+```
+
+The stakeholders are not handed this file. They are handed the
+export, which is a render: an output generated from the artefact for
+its audience (see [Renders and recipes](renders-and-recipes.md)). The
+section "The export" below describes it.
 
 ## Who writes and reads it
 
 The principal (the person whose thinking is being forged) writes the
-stories with Claude. By default the work is handed over: Claude
-drafts, the principal judges. The principal decides which stories
-stand, their cut, the groupings, every value and the owner of every
-question. Claude writes no behaviour the parent does not carry, no
-value nobody gave, no technical solution, no priority and no
-estimate.
+stories with Claude. By default the work is handed over: Claude works
+alone from the parent and returns a proposal, which the principal
+judges.
 
-The stakeholders, the delivery and the testers read the stories,
-through the export. The ledger (the project's state report, made at
-read time from the documents) reads the header of the file.
+The work is divided. Claude makes the recast:
+
+- the whole list of stories drawn from the parent, with the reference
+  of each;
+- the groupings it proposes;
+- the edge cases that each behaviour invites;
+- the wording in the Story style.
+
+The principal decides which stories stand, their cut (which stories
+there are and what each covers), the groupings, every value and the
+owner of every question.
+
+Claude writes no behaviour that the parent does not carry and no
+value that nobody gave. It writes no technical solution: no
+component, API, data model or detail of the design. It writes no
+priority and no estimate.
+
+The stakeholders, the delivery and the testers read the stories in
+the export. The solution design cites them. The reviewers read the
+file itself, as the section "The reviewers" below says.
 
 ## Made from
 
-The stories have one parent, named by the principal when he asks for
-them. The trail of every story leads to that parent. The parent is
-one of two:
+The stories have one parent. The principal names it when he asks for
+the stories, and the trail of each story leads to it. The
+front-matter of the file names the parent under `parent:`.
 
-- `30-brd.md`, read with the layers above it for the reasons the BRD
-  does not carry; a story then cites the BR, NFR, UC or DEP it
-  serves;
-- `10-intent.md` with its `threads/`, where the change is small, the
-  ask precise and without further impact, and the principal says so;
-  a story then cites the position of the intent (a `POS`) it
-  serves.
+- **The BRD** (`30-brd.md`): the usual parent. It is read with the
+  layers above it for the reasons it does not carry. A story cites
+  the item of the BRD it serves: a BR, an NFR, a UC or a DEP.
+- **The intent** (`10-intent.md`) with its threads (matters of the
+  project set aside to be taken up later): the parent where the
+  change is small, the ask is precise and without further impact,
+  and the principal says so. A story then cites the POS (an item of
+  the intent) it serves. Whether the ask suffices is the principal's
+  word, never Claude's. Claude may say why it thinks it does not.
 
-Whether the ask suffices for the intent to be the parent is the
-principal's word, never Claude's. Claude may say why it thinks the
-ask does not suffice.
+A requirements document of someone else is not a parent. It is
+registered as a source through `/ingest` and cited by path. The
+stories made from it are a work product in `work/` (see
+[The work product](the-work-product.md)), never `35-user-stories.md`.
+Each such story cites its place in the source.
 
-A requirements document of someone else is a third way in, with a
-different result. It is put in through `/ingest` and cited by path.
-The stories it yields are a [work product](the-work-product.md) in
-`work/`, never `35-user-stories.md`. Each such story cites its place
-in the source.
+Around the parent Claude reads:
 
-Around the parent, Claude reads `decisions.md`, the ledger and the
-indexes of the project's resources. The sources and the research
-themselves are read as the principal directs.
+- `decisions.md` (the principal's decisions with their reasons);
+- the ledger (the file that states where the project stands);
+- the indexes of the project's resources;
+- sources and research, as the principal directs.
 
 ## What it holds
 
-The file carries the stories only. Groups are plain headings without
-IDs, and they are optional. The stories carry one prefix of their
-own, `US`. The skeleton of the file is `templates/user-stories.md`,
-listed on the page [Templates](../reference/templates.md); its
-header carries a `parent:` field naming `30-brd.md` or
-`10-intent.md`.
-
-One story is:
-
-- a heading `US.NNNN — <name>`;
-- a free sentence carrying who or what wants it, what happens and
-  why; the form "As a… I want… so that…" is neither required nor
-  forbidden;
-- its acceptance criteria as bullets, in the indicative, one
-  behaviour each;
-- then only the parts it has, under fixed English labels, in this
-  order:
-  - `Edge cases`: a situation at the border of the behaviour and
-    what happens in it;
-  - `Risks`: each with its mitigation or its consequences, never
-    alone;
-  - `Note`: a link to an attachment or a technical analysis, with
-    what lies behind the link;
-  - `Questions`: each question with its owner;
-  - `Reference`: the BR, NFR, UC or DEP it serves, or in a small
-    change the POS.
-
-`Reference` is the one part every story has. The reason is not
-recorded. The other parts are left out where a story has nothing for
-them, never left empty.
-
-A story is one function as the one who uses it meets it: one actor
-doing or seeing one thing. The variants of that function by
-condition, its qualities and its transitions are its acceptance
-criteria and edge cases, never stories of their own. A new story
-begins where another actor does something else, or the same actor
-reaches a different function. A quality that cuts across the whole
-is a story of its own. A quality that concerns one function is a
-criterion of its story.
-
-A criterion carries no vague word: a word that names a quality
-without a value gets a value, or becomes a question with an owner. A
-story carries no priority, no estimate and no technical solution. The
-file carries no section of notes, dependencies or introduction. The
-labels are English; the content is in the project's language. The
-rules of a story, rule by rule, are the Story style on the page
-[Requirement style and Story style](../reference/requirement-style.md).
-
-A story's past lives in the history companion of the file, never in
+The document carries the stories only, under one prefix of its own:
+US. Its front-matter carries the version, the status, the project and
+the parent. Groups are optional and are plain headings without IDs.
+The history is kept in the companion file
+`35-user-stories.history.md`. A story's past lives there, never in
 the story.
+
+A story is one function as the one who uses it meets it. Its variants
+by condition, its qualities and its transitions are its acceptance
+criteria and edge cases, never stories of their own. A quality that
+cuts across the whole is a story of its own. A quality that concerns
+one function is a criterion of that function's story.
+
+A story holds these parts, in this order:
+
+- the heading `### US.NNNN — <name>`: the ID and the name of the
+  function;
+- the sentence: free prose that carries who or what wants it, what
+  happens and why. The form "As a… I want… so that…" is neither
+  required nor forbidden;
+- the acceptance criteria: bullets in the indicative, one behaviour
+  each;
+- `Edge cases`: each written `<situation> → <what happens>`;
+- `Risks`: each written `<risk> → <mitigation | consequences>`, never
+  a risk alone;
+- `Note`: a link to an attachment or a technical analysis, with what
+  lies behind it;
+- `Questions`: numbered, each written `<question> → <owner>`;
+- `Reference`: the BR, NFR, UC or DEP that the story serves, or the
+  POS in a small change without a BRD.
+
+`Reference` is the one part every story has. The other labelled parts
+are left out where a story has nothing for them. None is left empty.
+The five labels are fixed and in English. The content is in the
+project's language.
+
+A story does not hold:
+
+- a vague word in a criterion, that is a word that names a quality
+  without a value;
+- a priority or an estimate;
+- a technical solution;
+- a section of notes, of dependencies or of introduction. A
+  dependency is a DEP in the Reference, or a question.
+
+The rules of the wording are the Story style (see
+[Requirement style and Story style](../reference/requirement-style.md)).
+The shape is that of the template `templates/user-stories.md` (see
+[Templates](../reference/templates.md)).
 
 ## Complete when
 
@@ -157,205 +181,236 @@ The stories are complete when all of this holds:
 - every in-scope item of the parent is served by at least one story,
   or is said not to be, with the reason;
 - every acceptance criterion can be tested;
-- no two stories contradict each other, and no two describe one
-  function twice;
+- no two stories contradict each other or describe one function
+  twice;
 - every open question has an owner;
 - no question that blocks the delivery is open.
 
-The principal's approval then follows the house scheme: an integer
-version. The stakeholders' approval of the whole is the instance's
-act, recorded in `decisions.md` where the principal wants it kept.
-The reason it is the instance's act is not recorded.
+When that is reached, Claude offers the approval of the document.
+That approval belongs to the principal, as the versioning scheme of
+the forge has it. The stakeholders' approval of the whole is a
+different act: it is the act of the instance (one installation of the
+forge). It is recorded in `decisions.md` where the principal wants it
+kept.
 
 ## How it is found
 
-Claude first resolves the project, the parent the principal names and
-the stories as they stand. It says whether the parent is stable
-enough to be derived from, because it is approved or because the
-principal says so. That is never a gate.
+The stories are worked with `/forge user-stories`; the job is
+described in [Write user stories](../use/write-user-stories.md). The
+rules belong to the definition
+`.claude/skills/forge/states/user-stories.md`, which is paired with
+the template.
 
-The default way in is handing over, when there are no stories yet.
-Claude walks the areas of the artefact's Map alone: the coverage, the
-behaviour, the edge cases, the qualities, the dependencies, the
-risks, the references outward, the contradictions and what stays
-open. It returns first the cut: the name of every story with a short
-description of what it covers, and the items of the parent that no
-story serves, named by what they say. The principal gives his word on
-the cut. Only then does Claude draft the whole stories, asking
-nothing, and return the draft. The draft is walked story by story (a
-walkthrough: one item per message, each closed with a verdict).
-Nothing is derived from the draft before the principal has judged it.
+At the start Claude says whether the parent is stable enough to be
+derived from: approved, or stable on the principal's word. It says
+so, and the work is never stopped on it.
 
-The other ways in:
+Where there are no stories yet, the work is handed over by default.
+Claude walks the Map of the definition alone and returns first the
+cut. The cut is the name of every story with a short description of
+what it covers, in words, and the items of the parent that no story
+serves, named by what they say. The principal gives his word on the
+cut. Only on the cut agreed does Claude draft the whole stories. It
+asks nothing while it drafts, and it returns the draft. The draft is
+then worked story by story in a walkthrough (a list worked one item
+per message, each item closed by the principal's verdict). Where the
+parent does not suffice for a story, the walkthrough turns into an
+interview on that story, one question at a time.
 
-- a story whose parent does not suffice: the walk turns into an
-  interview on that story, one question at a time;
-- a requirements document put in: the default way runs on it, into
-  `work/`;
+The other ways in are shorter:
+
+- a requirements document of someone else: the default way runs on
+  it, and the result is a work product in `work/`;
 - a parent that moved: the pass runs on what changed;
-- a wording fix: made directly.
+- a fix of wording: it is made directly.
 
-What is missing in the parent stands as a question with an owner,
-never as an assumption. An answer that changes substance goes to the
-parent first; only then do the stories follow.
+The Map of the definition names what the stories are to find. Claude
+walks it before the recast, to see what the parent does not answer,
+and again at the end. An area may stay empty when it was considered
+and found not to apply. The areas:
 
-Every round ends by naming what changed and what stays open. When
-the completion above is reached, Claude offers the approval.
+- the coverage: every in-scope item of the parent and the stories
+  that serve it, or the reason none does;
+- the behaviour: for each story who or what wants it, what happens
+  and why, and the conditions under which it is accepted;
+- the edge cases: the situations at the border of each behaviour and
+  what happens in them;
+- the qualities: the non-functional items that cut across the whole,
+  as stories of their own, and those that concern one function, as
+  criteria of its story;
+- the dependencies: what a story needs from outside itself, cited as
+  a DEP of the parent, or in a small change asked as a question;
+- the risks: where a story carries one, its mitigation or its
+  consequences;
+- the references outward: an attachment or a technical analysis that
+  a story points to, with what lies behind the link;
+- the contradictions: two stories, or a story and its parent, that do
+  not agree;
+- what stays open: every question with its owner, and which of them
+  block the delivery.
 
-The first stories are created from the template as version 0.1, with
-their history companion beside them. A write rewrites the file for
-coherence, never appends. Empty sections and template comments are
-deleted.
+What is missing in the parent stands in the stories as a question
+with an owner, never as an assumption. A change of substance goes to
+the parent first. A round ends with Claude naming what changed and
+what stays open.
 
-The reviewers of the stories are those the forge already has. No new
-critic and no new persona were added. The critic lens `clarity`
-reads the stories with their Story style. The lens `essence`
-compares them with their parent. A challenger of the roster may be
-sent where the principal wants the substance tried. A check,
-`user-stories`, verifies the mechanics; it is listed on the page
-[Checks](../reference/checks.md). It verifies:
+## The reviewers
 
-- every in-scope item of the parent served or said not to be,
-  counted and never judged;
-- every story with a Reference to an item that exists;
-- the shape and the order of the parts, none present and empty;
-- questions with an owner, risks with a mitigation or consequences,
-  notes with a link;
-- no vague word and no conditional in a criterion;
-- no skeleton residue.
+The stories have no critic and no persona of their own. The reviewers
+that the forge already has read them:
 
-### The export
+- the `clarity` lens of the critic (`/critique clarity`) reads the
+  stories with their Story style;
+- the `essence` lens of the critic (`/critique essence`) compares
+  them with their parent and looks for drift from it;
+- a challenger of the roster may be sent where the principal wants
+  the substance tried;
+- the check `user-stories` (`/check user-stories`, see
+  [Checks](../reference/checks.md)) verifies the mechanics.
 
-The export the instance hands over is a render, never the artefact.
-Its recipe is composed from the skeleton of the genre
-`user-stories-export`, listed on the page
-[Recipe genres](../reference/recipe-genres.md); the skeleton is
-`templates/recipe-user-stories-export.md`. The input is
+The check verifies:
+
+- that every in-scope item of the parent is served or said not to be.
+  This coverage is counted, never judged;
+- that every story has a Reference to an item that exists;
+- the shape and the order of the parts, with none present and empty;
+- that every question has an owner, every risk a mitigation or
+  consequences, and every note a link;
+- that no criterion holds a vague word or a conditional;
+- that nothing of the template is left in the file.
+
+## The export
+
+The export is what the instance hands over to its stakeholders, to be
+pasted into a wiki or a tracker. It is a render of the genre
+`user-stories-export` (see
+[Recipe genres](../reference/recipe-genres.md)), never the artefact.
+`/render` makes it from the project's recipe (the versioned file that
+says how a render is made). The recipe is composed from the template
+of the genre, `templates/recipe-user-stories-export.md`. Its input is
 `35-user-stories.md` by default, or a work product in `work/` where
-the stories were made from a source. The render lands in
-`renders/user-stories-export.md` unless the recipe says otherwise.
+the stories were made from a source. Its output is
+`renders/user-stories-export.md` by default.
 
-The export has a fixed layout:
+The layout of the export:
 
-- two headings and a purpose line: `# User stories`, a section
-  heading, and under it one sentence in italics, both given by the
-  principal in the render's language;
-- then the stories, one after another, in the order of the artefact;
-  the group headings of the artefact are not carried;
-- each story: its heading, a blank line, its sentence on a line of
-  its own, its criteria directly below it, then only the parts it
-  has, each after a blank line with its bold label on a line of its
-  own, and last `**Reference:**` with its IDs on the same line;
-- no table;
-- no line wrapped: every sentence, item and label stands on one
-  line, whatever its length;
-- the questions keep their numbering and their owner;
-- nothing of a story reworded, shortened or added;
-- no front-matter, no history and no template comment of the input.
+- two headings and a purpose line in italics open it. The first
+  heading is `# User stories`. The second heading and the purpose
+  line are the principal's words, in the language of the render;
+- the stories follow one after another, in the order of the artefact.
+  The group headings of the artefact are not carried;
+- each story is its heading `### US.NNNN — <name>`, a blank line, its
+  sentence on a line of its own and its criteria directly below;
+- then come only the parts the story has, each after a blank line,
+  its bold label on a line of its own and its items below it;
+- `**Reference:**` comes last, with its IDs on the same line;
+- there is no table, and no line is hard-wrapped: every sentence,
+  item and label stands on one line, whatever its length;
+- nothing of a story is reworded, shortened or added. The questions
+  keep their numbering and their owner. The labels stay in English
+  whatever the language;
+- the front-matter of the artefact, its history and the comment of
+  its template are not carried.
 
-The Reference of a story carries its BR, NFR, UC and DEP into the
-export. Every POS is left out. A story whose Reference holds only a
-POS has no Reference part in the export. The labels of a story stay
-in English whatever the language of the export.
+The export leaves out every reference to a POS. It carries the BR,
+NFR, UC and DEP of a Reference. A story whose Reference holds only
+POS has no Reference part in the export. The artefact itself keeps
+all its references.
 
 ## Why
 
-Why the stakeholders' export leaves out every POS: the stakeholders
-never see the intent.
-
-Why the export is a render of its own genre and not a format of the
-artefact: so that the artefact keeps its references and the export
-changes without touching it. The cost is one more genre.
-
-Why the export has no table: a Markdown table cannot break a line
-inside a cell. A paste into a wiki or a tracker would run a story
-into one paragraph.
-
-Why no line of the export is wrapped, against the wrapping every
-other document keeps: the wiki or the tracker it is pasted into may
-break a wrapped line where it stands.
-
-Why a story is one function, and its variants are criteria and edge
-cases: the recorded reason is what the first making of stories
-showed. A draft that cut the variants of one function into stories
-of their own had to be merged. Walking the stories answered open
-questions that belonged to the parent, and those answers were
-carried up before the stories were written. Hence the cut first, the
-draft second, and the parent changed first.
-
-Why a story has the shape it has: it is the shape of the export the
-instance hands over, kept by the render, and the principal's word.
-
-Why there is no section of dependencies: the Reference carries them,
-as a DEP of the parent, or in a small change as a question.
-
-Why no persona of its own: what a persona would hunt in stories, the
-business-analyst persona already hunts in the BRD above them. The
-cost is that the substance of a story is tried only by the
-principal's walk.
-
-Why a check: what a story can get wrong mechanically is what a check
-finds, such as a sentence without its why.
+- **The cut first, and one function per story.** A draft cut by
+  condition splits one function into variants that the stakeholders
+  read as one. The walk of the stories also answers open questions of
+  the parent, and those answers go up into the parent before the
+  stories are written.
+- **The shape of a story.** It is the shape of the export that the
+  instance hands over, which the render keeps, and it is the
+  principal's word.
+- **No section of dependencies.** The Reference carries them: a
+  dependency is a DEP there, or it is a question.
+- **No critic and no persona of their own.** What a story can get
+  wrong mechanically is what the check finds. What a persona would
+  look for in stories, the business-analyst persona already looks for
+  in the BRD above them. A check without a persona was chosen against
+  a persona of the stories' own. The price is that the substance of a
+  story is tried only by the principal's walk.
+- **The export as a render of its own genre.** It was chosen against
+  a format of the artefact itself. As a render, the export changes
+  without touching the artefact, and the artefact keeps its
+  references to the intent. The price is one more genre.
+- **No POS in the export.** The stakeholders never see the intent.
+- **No table and no wrapped line in the export.** A Markdown table
+  cannot break a line inside a cell, and a paste into a wiki or a
+  tracker would run a story into one paragraph. A wiki or a tracker
+  may also break a wrapped line where it stands.
+- **`Reference` as the one part every story has.** The reason is not
+  recorded.
+- **The stakeholders' approval as the act of the instance.** The
+  reason is not recorded.
 
 ## A worked example
 
-One generic story, as it stands in the artefact. The owner of the
-question is a role, not a name.
+One generic story as it stands in `35-user-stories.md`. It has two
+criteria, one edge case, one question and its Reference. It carries
+no risk and no note, and those two parts are absent.
 
-```markdown
-## Lending
-
-### US.0030 — Renew a loan
-A member renews a loan from the list of borrowed items, so that the item stays with them without a visit to the desk.
-- The list shows a renew action beside every item whose due date has not passed.
-- A renewal moves the due date forward by the loan period of the item's category.
+```
+### US.0010 — Export of the order list
+A logged-in customer downloads the list of his orders as a file, so
+that he can work with it outside the application.
+- The export holds every order that the list shows under the filter
+  in use.
+- The file is ready for download within 10 seconds of the request.
 
 **Edge cases:**
-- Another member has reserved the item → the renew action is not shown and the item is marked as reserved.
+- The filter matches no order → the download is not offered and the
+  list says that it is empty.
 
 **Questions:**
-1. How many renewals of one loan are allowed? → the head of lending
+1. In which file format is the list exported? → the product owner
 
-**Reference:** BR.0120, UC.0040
+**Reference:** BR.0040, NFR.0020
 ```
 
-The same story as the export shows it. The group heading is gone,
-the two headings and the purpose line stand above, and every line
-stands whole:
+The same story as the export shows it, under the two headings and the
+purpose line:
 
-```markdown
+```
 # User stories
 
-## Lending
+## Order list
 
-*The stories of the lending service, for approval as a whole.*
+*The behaviour of the order list, for approval as a whole.*
 
-### US.0030 — Renew a loan
+### US.0010 — Export of the order list
 
-A member renews a loan from the list of borrowed items, so that the item stays with them without a visit to the desk.
-- The list shows a renew action beside every item whose due date has not passed.
-- A renewal moves the due date forward by the loan period of the item's category.
+A logged-in customer downloads the list of his orders as a file, so that he can work with it outside the application.
+- The export holds every order that the list shows under the filter in use.
+- The file is ready for download within 10 seconds of the request.
 
 **Edge cases:**
-- Another member has reserved the item → the renew action is not shown and the item is marked as reserved.
+- The filter matches no order → the download is not offered and the list says that it is empty.
 
 **Questions:**
-1. How many renewals of one loan are allowed? → the head of lending
+1. In which file format is the list exported? → the product owner
 
-**Reference:** BR.0120, UC.0040
+**Reference:** BR.0040, NFR.0020
 ```
 
-Had this story been written in a small change under the intent, its
-Reference would hold a POS alone. The artefact would keep it. The
-export would show the story without a Reference part.
+The words of the story are the same in both. The export adds a blank
+line after the heading and puts every sentence and every item on one
+line. Had the story come from a small change with the intent as its
+parent, its Reference would hold a POS only. The export would then
+end with the question and carry no Reference part.
 
 ## See also
 
 - [Write user stories](../use/write-user-stories.md): iterating them
   with `/forge user-stories` and making the export.
 - [The BRD](the-brd.md): the usual parent of the stories.
-- [The solution design](the-solution-design.md): the layer that
-  cites the stories.
+- [The solution design](the-solution-design.md): the layer that cites
+  the stories.
 - [The work product](the-work-product.md): what stories from someone
   else's document become.
 - [Renders and recipes](renders-and-recipes.md): the render, which
@@ -370,4 +425,4 @@ export would show the story without a Reference part.
 - [Glossary](../reference/glossary.md): every term of the forge in
   one line.
 
-Generated on 2026-11-08 for version 7.0 from the files the front-matter names; never edited by hand.
+Generated on 2026-11-17 for version 7.12 from the files the front-matter names; never edited by hand.

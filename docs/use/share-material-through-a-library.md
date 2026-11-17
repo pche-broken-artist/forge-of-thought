@@ -1,8 +1,8 @@
 ---
-generated: 2026-11-08
-version: 7.0
+generated: 2026-11-17
+version: 7.12
 made: derived
-inputs-hash: c2977a598ce3dd76
+inputs-hash: 0b2b233f4d1e98b0
 inputs:
   - .claude/skills/new-project/SKILL.md
   - .claude/skills/ingest/SKILL.md
@@ -17,269 +17,317 @@ inputs:
 
 # Share material through a library
 
-A library is a project of kind `library`: a place for material that
-several projects share, such as a deck template, a Word reference
-document or a standard, with no document chain of its own. This page
-is for you as a user of the forge who wants to keep such material in
-one place and have your projects cite it instead of copying it. It
-shows how a library is born, how documents enter it, how a project
-cites one, how a recipe names one, and how you see which libraries a
-project needs. Why a library is a kind of project is explained in
-[Projects and the engine](../about/projects-and-the-engine.md).
+A library is a project of kind `library` that holds material shared
+across projects and has no chain (the brief, the intent and the
+layers below the intent that a project of kind `thought` carries).
+This page is for the principal (the person whose thinking is forged,
+addressed here as "you") who wants to keep a document once and use
+it in several projects. It shows how such a library is made and how
+a project cites a document of it by path. Why a library is a kind of
+project is explained in
+[Projects and the engine](../about/projects-and-the-engine.md). The
+terms of the forge are each said in one line in the
+[Glossary](../reference/glossary.md).
 
 ## When to use it
 
-Use a library when the same file is wanted by more than one project.
-Typical members are:
+Use a library when a document belongs to no single project and more
+than one project needs it. Typical material:
 
-- a deck template that every deck render of your projects starts
-  from;
-- a Word reference document that every Word render of your projects
-  starts from;
-- a standard or a regulation that several projects cite;
-- the roster of areas a BRD walks, where your instance (one
-  installation of the forge) has an enterprise around it.
+- a document that several projects cite, such as a standard;
+- a deck template or a Word reference document that a recipe names
+  by its path;
+- the roster of areas a BRD walks.
 
-Use it also when a document already registered in one project turns
-out to be wanted by another: it moves into a library and the project
-keeps a citation.
+The roster (the areas of the enterprise a BRD must consider, and
+which of them are mandatory) is a library document of the instance
+(one installation of the forge), cited by path.
+[Write a BRD](write-a-brd.md) says how it is used.
+
+A document that already lives in one project can move into a library
+later. Step 3 below says how.
 
 ## What you do
 
-The library is created once, its documents enter one by one, and
-each project that needs a document cites it by path:
+You make the library with one command. The name after the prefix
+`lib-` is yours to choose:
 
 ```
 /new-project lib-<name>
-/ingest <file> lib-<name>
-/ingest projects/lib-<name>/sources/<document> <slug>
 ```
 
-The first line creates the library. The second registers a document
-in it. The third, run for a thought project with the slug `<slug>`,
-makes that project cite the library document. The `lib-` prefix is
-the mark of a library: `/new-project` infers the kind `library` from
-it.
+The other lines of the job follow in the order you meet them.
+`<slug>` is the slug of the project that uses the library:
+
+| Line | What it does |
+|---|---|
+| `git -C projects/lib-<name> init -b main` | makes the library a git repository (your one-off act) |
+| `/ingest <file> lib-<name>` | registers a document in the library |
+| `/ingest projects/lib-<name>/sources/<document> <slug>` | cites a library document in the project `<slug>` |
+| `/forge <slug>` | reports the state map of the project `<slug>`, its libraries included |
+| `/ingest` | without a file: sweeps `sources/` for new and changed documents |
+| `/import-project <its remote>` | brings in a library that is missing alongside |
 
 ## What happens
 
-### Step 1: Create the library
+1. **The library is born.** `/new-project lib-<name>` creates
+   `projects/lib-<name>/`. Claude takes the kind `library` from the
+   prefix `lib-` or from your words. It asks where the kind is
+   unclear. The language of the project is English where you name no
+   other. Claude asks where your words leave the language open. The
+   command creates files only:
 
-Run `/new-project lib-<name>`. Claude (the machine that runs the
-forge) infers the kind `library` from the `lib-` prefix or from your
-words; when that is unclear, it asks. It asks for the language of
-the project where your words leave it open; English is the default.
-It then creates files only and never touches git:
+   - `project.md`: the project file with slug, kind and language,
+     written once;
+   - `.gitattributes`: the ways of merging by path;
+   - `.gitignore`: what never enters git, that is the ledger and the
+     lock files of an open Office document;
+   - `sources/00-INDEX.md` and `research/00-INDEX.md`: the resource
+     indexes, one catalogue per directory;
+   - `recipes/readme.md`: the readme recipe, whose inputs are the
+     ledger and the two indexes;
+   - `recipes/readme.history.md`: the history of that recipe.
 
-- `project.md`, the project file with the slug, the kind and the
-  language, written once;
-- `.gitattributes`, the ways of merging by path;
-- `.gitignore`, which keeps the ledger and the lock files of an open
-  Office document out of git;
-- `sources/00-INDEX.md` and `research/00-INDEX.md`, the two resource
-  indexes, empty of entries;
-- `recipes/readme.md`, the readme recipe whose render is the
-  catalogue of the library, with its history companion
-  `recipes/readme.history.md`.
+   The ledger is the file of a project's state. A script makes it at
+   read time, and it is never kept in git. The ledger of a library is
+   made by the same script as the ledger of every project.
 
-A library gets no brief, no decisions file, no reviews or
-challenges and no release notes. Its ledger (the single source of
-truth for the state of a project, made at read time by the script
-`scripts/forge-ledger.py` and never kept in git) is made like every
-project's. Claude says once that the project is not under git until
-you initialise its repository; that is a property of the project,
-not a defect. Where `projects/lib-<name>/` already exists, the
-command stops and reports instead of overwriting.
+   A library gets none of these:
 
-You should now see `projects/lib-<name>/` with the project file, the
-two indexes and the readme recipe, and Claude proposing `/ingest`
-for the first documents.
+   - a brief;
+   - decisions;
+   - reviews or challenges;
+   - release notes.
 
-### Step 2: Put documents into the library
+   The command never touches git. The library is a git repository of
+   its own, and making it one is your one-off act:
+   `git -C projects/lib-<name> init -b main`, then a remote if you
+   want one. Claude closes by proposing `/ingest` for the first
+   documents.
 
-Run `/ingest <file> lib-<name>` for each document. The ingest is the
-same one every project uses; its full course is in
-[Register a source](register-a-source.md). What matters for a
-library:
+   You should now see `projects/lib-<name>/` with these files, and
+   one remark that the project is not under git.
 
-- The file is stored in `sources/` under a short descriptive slug,
-  with no date in the name.
-- For a binary file Claude asks one question: convert to Markdown?
-  For a deck template or a reference document the answer is no: the
-  file is a functional thing and is stored as it is, with no extract.
-- Before anything is written Claude asks what the document is for.
-  Your answer becomes the Role of its index entry.
-- The entry lands in `sources/00-INDEX.md` with its Role, its Date and
-  its Form, and the ledger is remade.
+2. **Documents enter by `/ingest`.** `/ingest <file> lib-<name>`
+   registers a document in the library as it does in every project.
+   The whole course is on [Register a source](register-a-source.md).
+   In short:
 
-You should now see the file in `projects/lib-<name>/sources/` and
-its entry in `projects/lib-<name>/sources/00-INDEX.md`.
+   - Claude copies the file into `sources/` under a short descriptive
+     name.
+   - For a binary file it asks whether to convert it to Markdown. On
+     yes the Markdown extract is the source. On no the binary itself
+     is the source, as a functional thing such as a deck template, a
+     graphic or a logo.
+   - It asks what the document is for, before the entry is written.
+   - It adds the entry to `sources/00-INDEX.md` and remakes the
+     ledger.
 
-### Step 3: Cite a library document from a project
+   Registration carries no content of the document into any other
+   document.
 
-In the project that needs the document, point `/ingest` at the
-document's path: `/ingest projects/lib-<name>/sources/<document>
-<slug>`. Another project's document is cited, not copied: nothing is
-stored in the project's `sources/`. Claude adds an index entry that
-names the path and says what the document is for. The ledger's
-Dependencies table finds the citation by itself; nobody writes a
-row there.
+   You should now see a short reply that names the file stored and
+   its index entry.
 
-Moving a document out of a project into a library is the reverse:
-ingest it in the library, then replace the project's entry with the
-citation.
+3. **A project cites a library document by its path.** In the
+   project that needs the document you point `/ingest` at the path:
+   `/ingest projects/lib-<name>/sources/<document> <slug>`. The
+   document is cited, not copied: nothing is stored in the `sources/`
+   of the project. Claude adds an entry to the project's
+   `sources/00-INDEX.md` that names the path and says what the
+   document is for. The ledger finds the citation by itself and lists
+   it in its Dependencies table. A document that already lives in a
+   project moves into a library the other way round: you ingest it
+   in the library, and the entry of the project is replaced by the
+   citation.
 
-You should now see, in the project's `sources/00-INDEX.md`, an entry
-that names the library path and, in the remade ledger, a row under
-Dependencies for the library.
+   You should now see the entry with the path in the project's index
+   and a row for it in the Dependencies table of the project's
+   ledger.
 
-### Step 4: Name a template or a reference document in a recipe
+4. **A recipe names a template or a reference document by path.** A
+   recipe (the file that says how a render, that is a generated
+   output, is made) may carry a Format section. Two of its lines
+   take a path:
 
-A recipe that ends in a PowerPoint or a Word file names the file it
-starts from in its `## Format` section. The section has two lines
-for it:
+   - `reference <path | none>` stands on the line of the plain file,
+     which `/render` makes;
+   - `template <path | none>` stands on the line of the published
+     file, which `/publish` makes.
 
-- the plain file, made by `/render` through pandoc, names
-  `reference <path | none>`;
-- the published file, made by `/publish` through a model, names
-  `template <path | none>`.
+   A deck template or a Word reference document is typically a
+   document of a library, named as
+   `projects/lib-<name>/sources/<document>`. The conversion scripts
+   receive the file as the path they are given.
 
-A deck template or a Word reference document is typically a document
-of a library project. It is named by path, and the conversion
-reaches it as the path it is given. Where no such file is wanted,
-the line says `none`.
+   You should now see the path of the library document on that line
+   of the recipe's Format section.
 
-The roster of areas a BRD walks is a library document of the same
-kind, cited by path; how the BRD uses it is in
-[Write a BRD](write-a-brd.md).
+5. **The state map says which libraries a project needs.** Bare
+   `/forge` reports the state map of a project. One of its lines
+   names the libraries the project needs (the Dependencies table of
+   the ledger) and says whether each is cloned alongside (present on
+   disk as `projects/lib-<name>/`).
 
-You should now see the path in the recipe's Format section; the next
-`/render` or `/publish` of that recipe starts from the file it
-names.
+   You should now see every library the project cites named in the
+   state map, each with the word whether it is cloned alongside.
 
-### Step 5: See which libraries a project needs
+6. **A changed document is maintenance.** `/ingest` without a file
+   sweeps `sources/`. Claude takes the project from the conversation
+   and asks where it is ambiguous. The sweep registers the files not
+   yet in the index. It reports every file changed after its
+   registration (its modification time is later than the Date of its
+   index entry) and asks what to do with it. In a library a changed
+   document is the ordinary maintenance of its owner: Claude updates
+   the index entry, its Date included, and nothing else. No file is
+   re-registered silently.
 
-Run `/forge <slug>` bare, with no target state. The state map it
-reports includes which libraries the project needs, read from the
-ledger's Dependencies table, and whether each is cloned alongside
-under `projects/`. A library that is missing on this machine is
-brought in with `/import-project` and the library's remote, the door
-described in
-[Bring in an existing project](bring-in-an-existing-project.md).
-
-You should now see each library the project cites named in the map,
-each with whether it is cloned alongside.
-
-### Step 6: Maintain the library
-
-A library has no chain. Bare `/forge lib-<name>` reports the
-library's kind, its language, its sources and its research and
-stops after the git line: no target states, no next step beyond
-`/ingest`. `/forge <state> lib-<name>` says that a library has no
-chain and stops; no state is worked there.
-
-A document of a library is maintained by its owner. Where a file
-changes after its registration, bare `/ingest lib-<name>` (the sweep)
-reports it as changed and asks what to do. In a library a changed
-document is ordinary maintenance: the index entry is updated, its
-Date included, and nothing else. In a thought project the same event
-would be a breach of immutability to resolve.
-
-The library's README is a render of `recipes/readme.md`. Its inputs
-are the ledger and the two indexes, so that the README is the
-catalogue of what the library holds.
-
-You should now see the index entry carrying the new Date, and the
-README listing the library's documents after its next render.
+   You should now see the entry of the changed document with its new
+   Date.
 
 ## What you have afterwards
 
-- A library under `projects/lib-<name>/` with its documents in
-  `sources/`, each catalogued in `sources/00-INDEX.md` with what it
-  is for.
-- Projects that cite the library's documents by path, each citation
-  an index entry of the project and a row under Dependencies in its
-  ledger.
-- Recipes whose Format section names a template or a reference
-  document of the library by path.
-- A state map (`/forge <slug>`) that names each library a project
-  needs and whether it is cloned alongside.
+A library, that is a project without a chain:
+
+| In `projects/lib-<name>/` | What it is |
+|---|---|
+| `project.md` | the project file: slug, kind, language |
+| `.gitattributes` | the ways of merging by path |
+| `.gitignore` | what never enters git: the ledger and the Office lock files |
+| `ledger.md` | the ledger, made by the script and never in git |
+| `README.md` | the catalogue of the library (a render of its readme recipe) |
+| `recipes/readme.md` | the readme recipe |
+| `recipes/readme.history.md` | the history of the readme recipe |
+| `sources/00-INDEX.md` | the index of the documents |
+| `research/00-INDEX.md` | the index of the research |
+| the documents in `sources/` | the shared material, maintained by its owner |
+
+In every project that uses the library:
+
+- an entry in `sources/00-INDEX.md` that names the path of the
+  library document and says what it is for;
+- a row in the Dependencies table of the project's ledger;
+- where a recipe needs a template or a reference document, its path
+  in the Format section of that recipe;
+- no copy of the document.
 
 ## If something goes wrong
 
-- **`/new-project` stops and reports that `projects/lib-<name>/`
-  already exists.** The command never overwrites. Choose another
-  slug, or work in the library that is there.
-- **Claude asks whether the project is a library.** The slug has no
-  `lib-` prefix, or your words left the kind open. Answer, or name
-  the slug with the prefix.
-- **`/forge <state> lib-<name>` says that a library has no chain and
-  stops.** This is the rule, not an error: a library holds material
-  and is not a project waiting for a brief. Work the chain in a
-  thought project and cite the library from there.
-- **`/ingest` stops before storing and asks about personal matter.**
-  The document carries a named private person, an identifying detail
-  or the like. Choose: store it as it is, redact it before
-  registration, or drop it. It is never stored first and asked
-  afterwards.
-- **The check a save runs says that library `<name>` is not cloned
-  alongside and names `/import-project` with its remote.** The
-  project cites a document of a library that is not on this machine;
-  the state map says the same of that library. The finding is
-  advisory. Bring the library in with `/import-project`.
-- **The check a save runs reports a path of the Dependencies table
-  that does not exist on disk.** The citation names a document the
-  library no longer has at that path. Correct the project's index
-  entry, or restore the document in the library.
-- **The sweep reports a library document as changed since its
-  registration.** Say what to do with it. In a library the ordinary
-  answer is to update the index entry with its Date; Claude never
-  re-registers silently.
-- **Claude says the library is not under git.** This is a property,
-  not a defect. Initialising the repository and adding a remote are
-  your one-off act.
+**The folder `projects/lib-<name>/` already exists.** `/new-project`
+stops and reports it. It never overwrites a project. A slug is
+written in lowercase, with hyphens and without spaces.
+
+**The library is reported as "not under git".** That is a property
+of a project that has no repository yet, not a defect.
+`git -C projects/lib-<name> init -b main` makes the repository.
+
+**You ask for a state of the chain in a library.** `/forge <state>`
+in a library answers that a library has no chain, and stops. No state
+is worked there. Bare `/forge` in a library reports this and stops:
+
+- the kind and the language of the library;
+- whether it is under git;
+- its sources and its research.
+
+It names no next step beyond `/ingest`.
+
+**A document carries personal matter.** `/ingest` stops before it
+stores anything and asks which of three you want:
+
+- store the document as it is;
+- redact it before registration;
+- drop it.
+
+**A library is not cloned alongside.** The state map says so. The
+light check (the check of a project's bookkeeping) reports every
+path of the Dependencies table that does not exist on disk. Its
+finding for a missing library reads:
+
+```
+library `<name>` not cloned alongside — `/import-project <its remote>`
+```
+
+The finding is advisory. You bring the library in with
+`/import-project` and the remote of the library:
+[Bring in an existing project](bring-in-an-existing-project.md) says
+how.
+
+**The sweep reports a changed document.** In a library the report is
+settled as step 6 says: the index entry is updated. In a project of
+kind `thought` the same report means a breach of immutability, which
+you resolve. A source there is immutable from its registration.
 
 ## A worked example
 
-You keep a deck template that every project's deck should start
-from. The library is called `lib-<name>`; the project that needs it
-has the slug `<slug>`.
+The library `lib-<name>` is to hold a Word reference document and a
+standard. The project `<slug>` uses both.
 
-1. `/new-project lib-<name>`. Claude infers the kind `library` from
-   the prefix, asks for the language, creates the project file, the
-   attributes, the ignore file, the two indexes and the readme recipe
-   with its companion, says once that the library is not under git,
-   and proposes `/ingest` for the first documents.
-2. `/ingest deck-template.potx lib-<name>`. Claude stores the file as
-   `projects/lib-<name>/sources/deck-template.potx`, asks whether to
-   convert it to Markdown (you answer no: it is a functional thing),
-   asks what it is for (you answer: the template every deck render
-   starts from), writes the entry in `sources/00-INDEX.md` with that
-   Role, its Date and its Form, and remakes the ledger. The reply is
-   two lines: the file stored and its entry.
-3. In the project: `/ingest
-   projects/lib-<name>/sources/deck-template.potx <slug>`. Nothing is
-   copied into `projects/<slug>/sources/`. Claude asks what it is
-   for, adds an entry to the project's `sources/00-INDEX.md` that
-   names the path, and remakes the ledger, whose Dependencies table
-   now lists `lib-<name>`.
-4. In the project's deck recipe, the `## Format` section names the
-   published file's template as
-   `projects/lib-<name>/sources/deck-template.potx`. The next
-   `/publish` of that recipe starts from it.
-5. `/forge <slug>`. The state map names `lib-<name>` among the
-   libraries the project needs and says that it is cloned alongside.
-6. A colleague clones `<slug>` on another machine without the
-   library. There the map says that `lib-<name>` is not cloned
-   alongside, and the check a save runs names `/import-project` with
-   its remote. The colleague runs `/import-project` with the
-   library's remote, and the next map says the library is cloned
-   alongside.
+You make the library:
+
+```
+/new-project lib-<name>
+```
+
+Claude creates `projects/lib-<name>/` with the project file,
+`.gitattributes`, `.gitignore`, the two indexes and the readme recipe
+with its history. It proposes `/ingest` and says that the project is
+not under git. You make the repository:
+
+```
+git -C projects/lib-<name> init -b main
+```
+
+You register the Word reference document:
+
+```
+/ingest <styles>.docx lib-<name>
+```
+
+Claude asks whether to convert the file to Markdown. You answer no:
+the file is the source as it is. Claude asks what it is for, and you
+answer. The file now lies in `projects/lib-<name>/sources/`, with its
+entry in the index there.
+
+You register the standard:
+
+```
+/ingest <standard>.pdf lib-<name>
+```
+
+This time you answer yes to the conversion. The source is the
+Markdown extract, `projects/lib-<name>/sources/<standard>.md`.
+
+A recipe of the project `<slug>` makes a Word document. The line of
+the plain file in its Format section names the reference document by
+path:
+
+```
+- Plain file, made by `/render` through pandoc: reference
+  projects/lib-<name>/sources/<styles>.docx, page size A4.
+```
+
+You cite the standard in the project:
+
+```
+/ingest projects/lib-<name>/sources/<standard>.md <slug>
+```
+
+Nothing is copied. `projects/<slug>/sources/00-INDEX.md` gains an
+entry that names the path and says what the standard is for.
+
+You ask for the state map:
+
+```
+/forge <slug>
+```
+
+The state map names `lib-<name>` among the libraries the project
+needs and says that it is cloned alongside.
 
 ## See also
 
-- [Projects and the engine](../about/projects-and-the-engine.md):
-  why a library is a kind of project.
+- [Projects and the engine](../about/projects-and-the-engine.md): why
+  a library is a kind of project.
 - [Register a source](register-a-source.md): the ingest the library
   shares with every project.
 - [Bring in an existing project](bring-in-an-existing-project.md):
@@ -289,5 +337,4 @@ has the slug `<slug>`.
 - [Glossary](../reference/glossary.md): every term of the forge in
   one line.
 
-Generated on 2026-11-08 for version 7.0 from the files the
-front-matter names; never edited by hand.
+Generated on 2026-11-17 for version 7.12 from the files the front-matter names; never edited by hand.

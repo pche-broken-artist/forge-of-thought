@@ -1,10 +1,10 @@
 ---
-generated: 2026-11-08
-version: 7.0
+generated: 2026-11-17
+version: 7.12
 made: derived
-inputs-hash: 1dd2a87c0311d799
+inputs-hash: c563fa4c606b880a
 inputs:
-  - CLAUDE.md#Commands
+  - .claude/reference/commands.md
   - .claude/skills/ledger/SKILL.md
   - .claude/skills/end/SKILL.md
   - .claude/agents/check-engine.md
@@ -20,189 +20,299 @@ inputs:
 # Add a command
 
 A command of the forge is a skill: one file,
-`.claude/skills/<name>/SKILL.md`, that the principal (the person
-whose thinking is being forged) invokes as `/<name>`, and one row in
-the Commands table of `CLAUDE.md`. This page is for the extender who
-wants to add one. It says which files a new command consists of,
-what each must carry, how a command that writes is kept from
-starting on Claude's own judgement, and how the addition is proved,
-recorded and released.
+`.claude/skills/<name>/SKILL.md`, invoked by the slash `/<name>`.
+This page is for the person who extends the forge. It shows what the
+file carries, where the command is listed, how the addition is
+proved and how a command that writes waits for the word of the
+principal (the person whose thinking is forged).
 
 ## Before you start
 
-A new command is a change of the forge like any other. It goes
-through the chain described in
-[Make a change to the forge](how-a-change-is-made.md): it is recorded
-in the forge's own project and released with the next release, never
-dropped into `.claude/skills/` alone.
+A command is added as any change of the forge is made. The page
+[Make a change to the forge](how-a-change-is-made.md) describes the
+chain the change goes through, and the addition is recorded and
+released as any change of the forge.
 
-Two words the page uses: the *harness* is Claude Code, the program
-that runs Claude and in which the skills, the agents and the hooks
-are its mechanisms; a *skill* is the file shape of a command, and
-"command" stays the word for what the principal invokes by slash.
-The forge's other terms are one line each in the
+Two words are kept apart. "Command" is the word for what is invoked
+by slash. "Skill" names the shape of the file. Not every skill is a
+command: the contracts of the reviewer agents are skills of the same
+directory that nobody invokes by slash, and they have no row in the
+table of commands.
+
+Read the two smallest commands first, as models:
+
+- `.claude/skills/ledger/SKILL.md`: a command with one optional
+  argument. Its body is two short paragraphs. The first says what
+  the command does and cites by path the script and the step of
+  another skill it relies on. The second says what the command
+  writes.
+- `.claude/skills/end/SKILL.md`: a command without arguments. Its
+  body opens with one sentence on what the command is for and what
+  it writes, then gives numbered steps. Where a step touches what
+  another command or a section of `CLAUDE.md` owns, it names the
+  owner and repeats nothing of it.
+
+The terms of the forge on this page, such as roster, round and
+render, each stand in one line in the
 [Glossary](../reference/glossary.md).
-
-Before you write, look at the commands that exist, listed in
-[Commands](../reference/commands.md). A command that needs a
-mechanism another command, a script or an agent already has does not
-describe that mechanism again: it cites the owner by path. A
-procedure stated in two places is a defect, because the two copies
-drift and the copy without a rule silently loses it.
 
 ## The files
 
-A command consists of these files.
+| File | What you do |
+|---|---|
+| `.claude/skills/<name>/SKILL.md` | You create it. It is the command: a front-matter and a body. |
+| one file per member, in a directory beside `SKILL.md` | You create them only where the command dispatches over a roster. |
+| `.claude/reference/commands.md` | You add one row: the command with its arguments, and its purpose in a line. |
 
-- `.claude/skills/<name>/SKILL.md`: the skill. Its front-matter
-  carries `description`, the one line the roster and the always-on
-  context show, and, where the command takes arguments, a quoted
-  `argument-hint`. Its body says what the command does, step by step
-  where there are steps, and cites every mechanism of another by its
-  path.
-- Supporting files beside it, only where the command dispatches over
-  a roster: `.claude/skills/<name>/<kind>/<member>.md`, one file per
-  member, read by path, registered as nothing, carrying a description
-  and no registration field. The state files of `/forge` and the
-  genre files of `/recipe` are the two examples the forge has.
-- One row in the Commands table of `CLAUDE.md`: the command with its
-  arguments in the first column, its purpose in one line in the
-  second.
-
-No command carries a field of the harness that blocks the model from
-invoking it. Every skill is model-invocable, and the descriptions of
-all commands stay in the always-on context.
+The skill file alone makes the command, and no other file registers
+it. The table of commands lists it. `CLAUDE.md` names the table and
+carries no table of its own.
 
 ## Steps
 
-1. **Choose the name.** The name must not collide with a built-in of
-   Claude Code, because a skill of a built-in's name would send a
-   newcomer to the wrong action: `/init` and `/help` are built-ins,
-   which is why the forge's first run is `/setup` and its manual
-   `/man`. A skill shadows a command of the same name, so a name
-   already taken replaces the old command whole.
+### 1. Choose the name
 
-2. **Write the skill.** Create `.claude/skills/<name>/SKILL.md`. Put
-   `description` in the front-matter. Where the command takes
-   arguments, add `argument-hint` and quote its value: an unquoted
-   hint of two bracketed items in a front-matter with CRLF line
-   endings fails to parse, and the harness then shows the body's first
-   line as the description. In the body, say what the command does
-   for the person. Where it needs another's mechanism, write the path
-   of that owner and nothing of how the owner runs. A one-line
-   reminder at the point of action that names its owner is not a
-   restatement; the same steps, rules or shape written a second time
-   is.
+The name of the directory is the name of the command:
+`.claude/skills/<name>/SKILL.md` gives `/<name>`.
 
-3. **Decide whether the command is guarded, and say so in the body.**
-   A guarded command is one that changes files the moment it runs,
-   with no round and no `write` in between: it writes, scaffolds,
-   commits or regenerates. Such a command starts only on the
-   principal's word, never on Claude's judgement. The principal
-   invokes it by slash, or asks in words and Claude invokes the skill
-   itself, through the harness's Skill tool. Claude never replays the
-   skill's steps by hand. The guard is conduct, not a field of the
-   file: the step-by-step method, by which every action needing the
-   principal's consent arrives as one step and runs on his word, and
-   the wall on git, by which git is touched only through the scripts
-   in `scripts/`. Why the guard is conduct rather than a field is
-   said in [How the rules are held](../about/how-the-rules-are-held.md).
-   Two kinds of command need no guard, because the word is already in
-   their procedure: one that writes only at the end of a round on the
-   principal's word, and one that files the immutable record of a run
-   he asked for. A map or a roster, such as `/forge`, `/ledger` or a
-   bare `/check`, stays Claude's to start, since Claude is meant to
-   propose them.
+Choose a name that does not collide with a built-in command of
+Claude Code. `/init` and `/help` are built-ins of Claude Code. The
+forge's command for the first run is therefore named `/setup`, and
+its manual is named `/man`.
 
-4. **Add supporting files only where the command dispatches over a
-   roster.** Put them in a directory beside the skill, one file per
-   member with a description. The skill reads them by path.
+The page [Commands](../reference/commands.md) lists the commands
+that exist, and with them the names already taken.
 
-5. **Add the row to the Commands table of `CLAUDE.md`.** The table is
-   the one list of the commands; what a command does in full is its
-   skill's file, and `/man <name>` prints it.
+### 2. Decide whether the command is guarded
 
-Two skills of the forge show the smallest shapes. `/ledger` takes a
-slug, so its front-matter has `description` and a quoted
-`argument-hint`; its body is a few sentences that run a script and
-cite the `/forge` skill for the one procedure of the report. `/end`
-takes no argument, so its front-matter has `description` alone; its
-body is a short numbered list that writes nothing and offers every
-remedy.
+A guarded command starts only on the principal's word, never on
+Claude's judgement. What the command does to files decides it:
+
+- A command that changes files the moment it runs, with no round and
+  no `write` in between, is guarded. A round is a working
+  conversation whose result is written once, at its end, on the
+  principal's word `write`. The commands that write, scaffold,
+  commit or regenerate are of this kind, such as `/save`, `/release`
+  and `/render`.
+- A command that writes only at the end of a round, on the
+  principal's word, needs no guard. The word is already in its
+  procedure.
+- A command that files the immutable record of a run the principal
+  asked for needs no guard, for the same reason.
+- A command that shows a state map, a state report or a roster, such
+  as `/forge`, `/ledger` or the bare `/check`, is Claude's to start.
+  Claude is meant to propose them.
+
+The answer adds nothing to the file. No command of the forge carries
+`disable-model-invocation` (the field of the harness that blocks
+Claude from invoking a skill). The harness is Claude Code (the
+program that loads the skills and shows the commands). Every skill
+is model-invocable: Claude can invoke it. Do not add the field.
+
+What holds a guarded command back is conduct:
+
+- The principal invokes the command by slash, or asks for it in
+  words.
+- Asked in words, Claude invokes the command as a skill, through the
+  Skill tool of the harness. It never replays the steps by hand from
+  the text of the skill.
+- Behind this conduct stand the step-by-step method (such a step
+  runs on the principal's word) and the wall on git (git is touched
+  through the scripts in `scripts/`, never directly).
+
+Why the guard is conduct and not a field of the harness is explained
+in [How the rules are held](../about/how-the-rules-are-held.md).
+
+### 3. Write the skill
+
+Create `.claude/skills/<name>/SKILL.md` with a front-matter and a
+body.
+
+The front-matter carries two fields:
+
+- `description`: what the command does, in one line. The
+  descriptions of all commands stay in Claude's context at all
+  times. The body loads only when the command is invoked.
+- `argument-hint`: the arguments of the command, always in quotes.
+  The `end` skill takes no arguments and carries no hint.
+
+The body holds the command itself:
+
+- It says what the command does and what it writes. Both models say
+  in one sentence what the command writes and what it leaves alone.
+- It describes the command's own job and nothing else.
+- It cites every mechanism of another by path and adds nothing to
+  how that mechanism runs. A script is cited by the line that runs
+  it, such as `python scripts/<script>.py <slug>`. A step of another
+  skill is cited by the path of the skill and the step. A rule of
+  `CLAUDE.md` is cited by its section.
+- It performs nothing directly that a script, a command or an agent
+  exists for:
+  - git outside the scripts in `scripts/`
+  - a conversion outside `doc2md.py`
+  - a render outside `/render`
+  - a review outside the reviewer agents
+  - a check outside the check agents
+
+A one-line reminder at the point of action that names its owner is
+not a restatement. It may stay.
+
+You should now see the harness show `/<name>` with your description.
+Where it shows the first line of the body instead, the front-matter
+did not parse. An unquoted hint of two bracketed items in a file
+with CRLF line endings fails this way.
+
+### 4. Add supporting files where the command dispatches over a roster
+
+A command dispatches over a roster where its argument names one
+member of a set and each member has a file of its own. Two commands
+of the forge show the shape:
+
+- `/forge`: one definition per state,
+  `.claude/skills/forge/states/<state>.md`
+- `/recipe`: one file per genre,
+  `.claude/skills/recipe/genres/<genre>.md`
+
+Put the files of the members in a directory beside `SKILL.md`, as
+these two do. A supporting file is read by path and is registered
+nowhere. It carries a description and no registration field.
+
+### 5. Add the row
+
+Add one row to the table in `.claude/reference/commands.md`. The
+first column holds the command with its arguments, in a code span.
+The second column holds the purpose of the command in a line. One
+row of the table shows the shape:
+
+```markdown
+| `/ledger [slug]` | state report from the ledger |
+```
+
+The ledger is the file that holds the state of a project. A script
+makes it.
+
+Write the arguments as the other rows write them: square brackets
+around an argument that may be left out, angle brackets around one
+that must be given. Where the bare command does something of its
+own, the purpose says so, as in `bare = the check roster`.
+
+The row is one line. What the command does in full is said by its
+skill, and the row repeats none of it.
 
 ## Prove it
 
-Run the two checks in this order. Each is a check of the forge,
-run as an isolated subagent (a reader that never sees the working
-conversation), and each is started on the principal's word.
+Two checks prove the addition. A check verifies conformance with the
+conventions. It judges neither the quality of a document nor the
+thinking in it.
 
 ```
 /check engine
 ```
 
-The `engine` check verifies the core against itself: among other
-things, the Commands table of `CLAUDE.md` against the skills that
-exist as `.claude/skills/*/SKILL.md`, and the README against
-`CLAUDE.md` for the same command set. A row without a skill, or a
-skill without a row, is a finding. The README is a render regenerated
-at the release, so a command missing from it is fixed in the README's
-recipe, not in the README.
+The engine check verifies the core of the engine (`CLAUDE.md`, the
+templates, the skills, the agents and the scripts) against itself
+and against the intent of the forge (the document that holds its
+design positions). For a new command it compares the table of
+commands with the skills in `.claude/skills/*/SKILL.md`, the
+contracts of the reviewer agents excepted. A skill without a row
+shows there, and so does a row without a skill. The check takes
+minutes at most, and a release can afford it every time.
+
+You should now see a report that raises nothing about `/<name>`: the
+table and the skills agree.
 
 ```
 /check single-source-of-truth
 ```
 
-The `single-source-of-truth` check reads the whole operating layer,
-every skill and its supporting files among them, and verifies that
-every rule, procedure and file shape is written in one place and
-cited everywhere else. A restatement in your skill of what another
-file owns is a finding; the fix is a reference to the owner and the
-deletion of the copy. This check is long by design and is run on the
-principal's word, not at every release: run it after the round on
-the operating layer that added the command.
+This check reads the whole operating layer of the engine, never a
+changed part of it:
+
+- `CLAUDE.md`
+- every skill, with its supporting files
+- every agent
+- every template
+- the help headers of the scripts
+
+It holds the rule that one mechanism lives in one place:
+
+- A restatement is a finding: the same steps, rules or shape in two
+  places, whatever the wording. The fix is a reference to the owner
+  and the deletion of the copy.
+- A direct operation is verified too: no skill performs directly
+  what a script, a command or an agent exists for.
+
+The check is long by design. It runs on the principal's word. It
+fits before a major version or after a round on the operating layer,
+not at every release. The first line of its report says how many
+files it read.
+
+You should now see a report with no finding on
+`.claude/skills/<name>/` or on the new row.
 
 ## Record and release
 
-The addition is recorded and released as any change of the forge:
-the chain is [Make a change to the forge](how-a-change-is-made.md).
-The new command appears in the README, which is a render, at the next
-release.
+The addition is recorded and released as any change of the forge.
+The steps are on the page
+[Make a change to the forge](how-a-change-is-made.md).
+
+Two things belong to a new command in particular:
+
+- The intent of the forge names the guarded commands one by one. A
+  guarded command joins that list in the same change.
+- The README carries the same set of commands as the table. It is a
+  render (a file regenerated from its recipe), and the release
+  regenerates it after the engine check. A README that does not yet
+  show the new command is no finding of that check.
 
 ## A worked example
 
-The extender adds a command `/<name>` that reports something about a
-project and takes its slug.
+A new command `/<name>` takes an optional project slug and one
+option. It reads the state of a project through a script and reports
+it.
 
-The skill, `.claude/skills/<name>/SKILL.md`, in the shape the forge
-defines (the content is a placeholder, taken from no command):
+1. The name `<name>` is no built-in of Claude Code and no row of the
+   table of commands.
+2. The command changes no file the moment it runs. It is not
+   guarded.
+3. The file `.claude/skills/<name>/SKILL.md`:
 
-```
----
-description: <What the command does, in one line>
-argument-hint: "[slug]"
----
+   ```markdown
+   ---
+   description: <What the command does, in one line>
+   argument-hint: "[slug] [--option value]"
+   ---
 
-<What the command does for the person, in a few sentences or a
-short numbered list. Where it needs a script, a command or an agent
-that exists, it names the owner by path, such as
-`scripts/<script>.py` or `.claude/skills/<other>/SKILL.md`, and says
-nothing of how the owner runs.>
-```
+   <What the command does for the project named, and what it
+   writes.>
 
-The row in the Commands table of `CLAUDE.md`:
+   1. <A step of the command's own.>
+   2. <A step another mechanism owns, cited and not retold: `python
+      scripts/<script>.py <slug>`, or step N of
+      `.claude/skills/<other>/SKILL.md`.>
+   3. <What the command reports at the end.>
+   ```
 
-```
-| `/<name> [slug]` | <what the command does, in one line> |
-```
+4. The command dispatches over no roster. It has no supporting
+   files.
+5. The row in `.claude/reference/commands.md`:
 
-The command only reports, so it needs no guard and Claude may start
-it. Had it written a file the moment it ran, its body would say that
-it starts on the principal's word, and Claude would invoke it as a
-skill through the Skill tool, never replay its steps by hand.
+   ```markdown
+   | `/<name> [slug] [--option value]` | <the purpose of the command in a line> |
+   ```
 
-Then `/check engine`, then `/check single-source-of-truth`, then the
-change is recorded and released as
-[Make a change to the forge](how-a-change-is-made.md) says.
+6. The proof, typed one after the other:
+
+   ```
+   /check engine
+   /check single-source-of-truth
+   ```
+
+A command `/<name>` that regenerated a file the moment it ran would
+have the same front-matter and the same kind of row. No field would
+be added. The principal would type `/<name> <slug>` or ask for it in
+words, and Claude would invoke the skill through the Skill tool on
+that word alone.
 
 ## See also
 
@@ -214,4 +324,5 @@ change is recorded and released as
 - [Glossary](../reference/glossary.md): every term of the forge in
   one line.
 
-Generated on 2026-11-08 for version 7.0 from the files the front-matter names; never edited by hand.
+Generated on 2026-11-17 for version 7.12 from the files the
+front-matter names; never edited by hand.

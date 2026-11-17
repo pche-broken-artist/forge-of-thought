@@ -1,8 +1,8 @@
 ---
-generated: 2026-11-08
-version: 7.0
+generated: 2026-11-17
+version: 7.12
 made: mirrored
-inputs-hash: 87ab6d6ea3ccca00
+inputs-hash: 64969471c1b76682
 inputs:
   - .claude/skills/forge/states/solution-design.md
   - templates/solution-design.md
@@ -11,18 +11,34 @@ inputs:
 
 # Design the solution
 
-This page shows how you iterate the solution design of a project with `/forge solution-design`. The solution design is the document `40-solution-design.md`, which says how the things wanted are realised. What it holds is described in [The solution design](../about/the-solution-design.md). Terms of the forge are explained in the [Glossary](../reference/glossary.md). In this page the principal is the person whose thinking is being forged, and Claude is the assistant that works with the principal.
+This page shows how you iterate the solution design, the file
+`40-solution-design.md` that says how the things wanted are realised,
+with the command `/forge solution-design`. It is for you when a project
+has reached the point where someone has to build or do what the layers
+above ask for. The principal is whoever's thinking is being forged:
+here, you.
+
+For what a solution design holds and why it exists, see
+[The solution design](../about/the-solution-design.md). Terms of the
+forge are in the [Glossary](../reference/glossary.md).
 
 ## When to use it
 
-Use it when a project needs its solution design made or brought current. Whether a design is worth writing at all is yours to say. Nothing forces it.
+Use it when the project has something above the design to realise. The
+design is built from the lowest layer the project has above it: the
+intent alone, the assignment, the BRD or the user stories.
+
+Whether a design is worth writing at all is yours to say. Claude does
+not decide it.
 
 There are four ways in:
 
-- No design exists yet: the first one is made.
-- A layer above the design has moved: the pass runs on what changed.
-- The thing the design describes has changed below it: the design is brought current.
-- A wording fix is needed: it is made directly.
+- No design yet. You say the project needs one, and the first pass
+  writes it.
+- A layer above has moved. The pass runs on what changed.
+- The thing changed below, where it is built. The design is brought
+  current.
+- A wording fix. It is made directly, without a pass.
 
 ## The command
 
@@ -30,66 +46,116 @@ There are four ways in:
 /forge solution-design [slug]
 ```
 
-The slug names the project. Leave it out and Claude resolves the project itself.
+The slug names the project. Leave it out and Claude resolves the
+project from where you are working.
 
 ## What happens
 
-1. Claude resolves the project and reads what the design is made from. That is the lowest layer the project has above the design (the intent alone, the assignment, the BRD or the user stories), whatever stands above that, the decisions, the ledger (the state of the project, made when it is read) and the project's threads. Where the thing already exists, Claude reads what realises it as it stands. You should now see Claude say which layer it takes as the ground of the design.
+1. Claude reads the lowest layer above the design, whatever stands
+   above that, the decisions of the project and its threads. Where the
+   thing already exists, it reads what realises it as it stands. It
+   also reads the design as it stands.
 
-2. Claude puts forward the parts of the solution and the choices they rest on, and you judge them. You may compose the design together with Claude, or hand it over with a few sentences of what you want. Either way Claude proposes and you decide. Claude names the few real choices and does not dress every part as one. Where there was no real alternative it says so, and where a reason is not known it says that. You should now see a draft of the parts, each with what it answers for.
+   You should now see Claude say what it has read and which of the four
+   ways in applies.
 
-3. Claude makes the coverage map. It lists the in-scope items of the layer above that no part realises, and the parts that realise no item. The map is a tool of the pass and is not part of the design. You should now see the two lists, each possibly empty.
+2. Claude proposes the parts of the solution and the few real choices
+   among them. For each real choice it says what was chosen, against
+   what, and what it costs. Where there was no real alternative, it
+   says so and invents none. Where a reason is not known, it says that
+   it is unknown.
 
-4. Claude walks what the design must find before it returns the design or offers a write. It considers these areas, and one may stay empty when it was considered and found not to apply:
-   - what is to be realised, and what is knowingly left unanswered;
-   - the ground: what exists, what stands around it and what you fixed in advance;
-   - the approach as a whole;
-   - the parts and where each is realised;
-   - how the parts work together;
-   - the choices, with what each was chosen against and what it costs;
-   - what is open or unproven;
-   - how it will be known to hold;
-   - the way there, where the solution replaces something that runs;
-   - what is deliberately not designed.
+   You should now see parts and choices put to you to judge, and a
+   choice you have not judged marked as Claude's own in plain words.
 
-   You should now see these areas covered in the draft, or named as not applying.
+3. Claude makes the coverage map. The map lists the items of the layer
+   above that are in scope and have no part, and the parts that realise
+   no item. It is a tool of the pass and is not part of the design.
 
-5. Claude names what changed and what stays open. When the design is complete for now, it offers the approval as a recommendation, never as a gate. A design is complete for now when every in-scope item of the layer above is realised by a part, knowingly left unanswered, or open as a to-be-confirmed question, and no open question that blocks realisation remains. It is never finished. You should now see a closing summary and, if the design is complete, the offer to approve.
+   You should now see both lists, each empty or named.
 
-6. The write happens once, at the end of the round, on your word. You should now see the file written.
+4. What the designing shows cannot be realised, or only at a price not
+   worth paying, goes back to the intent as a thread. What is wanted is
+   decided in the intent first, and the design follows.
 
-Where the design holds a choice Claude made and you have not judged, the design says so in plain words at that part until you have judged it.
+   You should now see a thread raised for each such matter, and no
+   change to what is wanted made in the design itself.
+
+5. Claude ends by naming what changed and what stays open. When every
+   in-scope item of the layer above is realised by a part, knowingly
+   left unanswered or open as a to-be-confirmed matter, and no open
+   matter that blocks realisation remains, Claude offers the approval.
+   It is a recommendation, never a gate.
+
+   You should now see what changed, what is open, and, where the design
+   is complete for now, the offer of approval.
+
+Claude writes once at the end of the round, on your word. You may order
+a write of what is agreed so far at any moment.
 
 ## What you have afterwards
 
-- `40-solution-design.md`, rewritten for coherence as a whole and not appended to. Each part names what it realises, the choice it rests on and where it is realised. Empty sections and template comments are removed.
-- `40-solution-design.history.md`, the companion that records the change and the reason. A first design starts as version 0.1.
-- A list of what stays open.
+- `40-solution-design.md`, written in the shape of
+  `templates/solution-design.md`: how the parts work together, the
+  parts, what holds across the parts, and what is open.
+- A history record beside it, `40-solution-design.history.md`, that
+  carries what changed and why.
+- Threads in the intent for whatever could not be realised.
 
-## If something goes wrong
-
-- The designing shows that something wanted cannot be realised, or only at a price not worth paying. Claude raises it as a thread. What is wanted is then decided in the intent first, and the design follows. It is not bent to fit.
-- A question blocks realisation and cannot be closed in this pass. It stays in the design as an open question that names its owner and what would close it, and the design is not called complete.
+The design is complete for now, never finished: it is kept current as
+the layers above and the thing itself change.
 
 ## Challenge the design
 
-Once the design stands, Claude offers `/challenge <persona> solution-design`. It runs only on your word. The persona `architect` exists for it and reviews a solution design. How a challenge runs is described in [Challenge the thinking](challenge-the-thinking.md), and the personas of today are listed in [Challenger personas](../reference/challenger-personas.md).
+Once the design stands, Claude offers
+`/challenge <persona> solution-design`. It never runs it on its own
+judgement. The persona `architect` exists for it: it reviews a solution
+design, from outside the conversation, and returns what it finds. How a
+challenge runs and how its findings are settled is described in
+[Challenge the thinking](challenge-the-thinking.md). The personas that
+exist today are listed in
+[Challenger personas](../reference/challenger-personas.md).
+
+```
+/challenge architect solution-design
+```
 
 ## A worked example
 
-A project, here called `<slug>`, has an intent and an assignment, and no design yet.
+A project with the placeholder slug `my-project` has an intent and an
+assignment, and no design.
 
 ```
-/forge solution-design <slug>
+/forge solution-design my-project
 ```
 
-Claude takes the assignment as the lowest layer above the design and reads it with the intent and the threads. It proposes three parts and names one real choice among them, with what it was chosen against and what it costs. For the other two it says there was no real alternative. The coverage map shows one assignment item with no part. You decide to leave it knowingly unanswered, and the design says so. Claude names what stays open, you confirm the write, and `40-solution-design.md` appears as version 0.1 with its history. Claude then offers `/challenge architect solution-design`, and you take it up or leave it.
+Claude reads the assignment, the intent and the threads. It proposes
+three parts: one that collects the requests, one that decides who
+handles each, one that reports the result. For the second it names one
+real choice, a fixed rule against a person deciding each case, and says
+what each costs. For the first and third it says there was no real
+alternative.
+
+The coverage map shows one in-scope item of the assignment with no
+part. You decide it is knowingly left unanswered for now, and Claude
+marks it open as a to-be-confirmed matter that does not block
+realisation. The designing also shows that one wanted item cannot be
+realised as worded. Claude raises it as a thread for the intent and
+does not change the item.
+
+Claude names what changed and what stays open. You say write, and
+`40-solution-design.md` and its history record are written. Claude then
+offers `/challenge architect solution-design`.
 
 ## See also
 
-- [The solution design](../about/the-solution-design.md): what a solution design holds.
-- [Challenge the thinking](challenge-the-thinking.md): the challenge of the design.
-- [Challenger personas](../reference/challenger-personas.md): the personas of today, the architect among them.
-- [Glossary](../reference/glossary.md): every term of the forge in one line.
+- [The solution design](../about/the-solution-design.md): what a
+  solution design holds.
+- [Challenge the thinking](challenge-the-thinking.md): the challenge of
+  the design.
+- [Challenger personas](../reference/challenger-personas.md): the
+  personas of today, the architect among them.
+- [Glossary](../reference/glossary.md): every term of the forge in one
+  line.
 
-Generated on 2026-11-08 for version 7.0 from the files the front-matter names; never edited by hand.
+Generated on 2026-11-17 for version 7.12 from the files the front-matter names; never edited by hand.

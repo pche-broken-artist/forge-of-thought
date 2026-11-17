@@ -1,10 +1,11 @@
 ---
-generated: 2026-11-08
-version: 7.0
+generated: 2026-11-17
+version: 7.12
 made: derived
-inputs-hash: 0bb1d9d781cf7d3a
+inputs-hash: 4ba5f8a9f85ae9e7
 inputs:
   - CLAUDE.md#Persistence (git)
+  - CLAUDE.md#What this workspace is
   - .claude/settings.json
   - scripts/hook-git.py
   - projects/forge/10-intent.md#POS.0550
@@ -18,6 +19,7 @@ inputs:
   - projects/forge/10-intent.md#POS.1970
   - projects/forge/10-intent.md#POS.1980
   - projects/forge/40-solution-design.md#SOL.0520
+  - projects/forge/40-solution-design.md#SOL.0530
   - projects/forge/40-solution-design.md#SOL.0740
   - projects/forge/10-intent.md#REJ.0160
   - projects/forge/10-intent.md#REJ.0170
@@ -25,286 +27,424 @@ inputs:
 
 # Persistence in git
 
-Persistence in git is how the forge keeps the engine and every
-project in a git repository of its own, and how Claude is kept to a
-few scripts whenever it writes to git. This page explains why the
-scripts in `scripts/` are the only door to a write of git, why
-reading git is open, and why saving and releasing are two commands
-of two speeds. It is for the user who wants to understand what the
-forge does with his repositories, for the extender who touches the
-scripts or the hook, and for the evaluator who asks what is enforced
-and what is only a rule.
+Persistence in git is the way Forge of Thought (the forge) keeps its
+work: the engine and every project are git repositories, and Claude
+writes to git only through the scripts in `scripts/`. This page
+explains that rule and the hook that holds it, the two commands that
+save and release, the command that pulls, and what git is not asked
+to do. It is for whoever uses the forge, extends it or evaluates it.
 
 ## What it is
 
-The engine is one git repository with a remote. `main` is its
-released line. Branches are voluntary and left to git. Every project
-under `projects/` is a repository of its own, and the engine does
-not track it. A project without a repository is a project outside
-git. On such a project the forge runs no git at all, whatever
-repository may lie above it. "Not under git" is a property of a
-project, not a defect.
+The [engine](../reference/glossary.md) (the forge itself, apart from
+the projects worked in it) is one git repository with a remote. Every
+project under `projects/` is a repository of its own. `main` is the
+released line. Branches are voluntary and left to git.
 
-The scripts in `scripts/` are the door to a write of git. Nothing of
-Claude's own commits, pushes, pulls, merges, rebases, branches, tags,
-stashes or resets, and nothing of its own touches a remote or a
-configuration, except through a script. Reading git directly is
-open to Claude. The line between the two is held by a hook of the
-harness (the program Claude runs in). The one exception to the door
-is the small set of commands that finish the step of a conflict,
-which the hook puts to the principal (the person whose thinking is
-being forged) and which run on his yes. The rule binds the forge,
-not the principal: his own git from his own shell is his.
+On top of git the forge sets four things:
 
-Two doors lead outward. `/save` is the fast one, on any branch.
-`/release` is the full one, from `main` only. `/pull` is the door
-inward. Merging is git's own, done by the integrator on his own
-clone outside the forge's scripts. The scripts carry no URL and no
-identity. The ledger (the state of a project, made from its
-documents at read time) is not in git at all.
+- **One door for a write.** Every write of git that Claude makes
+  goes through a script in `scripts/`: the scripts are the door to a
+  write of git. Reading git directly is open.
+- **A hook that holds the line.** A hook (a script that runs before
+  a command of Claude's is carried out) judges every command of git.
+  It allows a reading command, denies a write and names the script
+  to use instead.
+- **Two doors, two speeds.** `/save` commits and pushes in seconds,
+  on any branch. `/release` runs from `main` only, with its checks
+  and its renders.
+- **The door inward.** `/pull` brings in what the remote holds. The
+  forge looks at the remote and offers. The principal (the person
+  whose thinking is forged) decides.
+
+Three things stand apart from this:
+
+- The [ledger](the-ledger.md) (the state of a project, built from
+  its documents whenever it is read): it is not in git at all.
+- The commit identity: it is git's business, resolved by the
+  principal's own git configuration.
+- The immutability of a document: it is a process rule, not a
+  mechanism of git.
 
 ## How it works
 
-### The wall between reading and writing
+### The door and the hook
 
-The hook is `scripts/hook-git.py`, registered in
-`.claude/settings.json` on the shell tool through which Claude runs
-git. Before every command of that tool runs, the hook reads the
-whole command, splits it at the shell's separators, and finds every
-call of git in it. It answers in three ways:
+Every command of git that changes a repository, a remote or a
+configuration is a write. Claude sends no write to git directly, with
+the one exception named below: it runs the script that does the
+write. A commit and a push, for example, are made by
+`scripts/forge-save.py` (the script behind `/save`). How many scripts
+there are is not a rule: there are as many as the door needs.
+[Scripts](../reference/scripts.md) lists them.
 
-- allow, for a command that only reads;
-- ask, for the few commands that finish the step of a conflict, so
-  that the harness puts the command to the principal and runs it on
-  his yes;
-- deny, for everything else, naming the script of the forge to use
-  instead.
+Reading git directly is open to Claude.
 
-Over a whole command, deny outranks ask and ask outranks allow. A
-part of the command that is not git is left to the harness. The
-hook reads no file and writes nothing. The other shell tool is
-closed to git whole by a deny rule of the same settings file. So
-there is one parser and one door.
+The line between reading and writing is held by a hook of the
+harness. The harness is Claude Code, the agent the forge runs in: the
+engine's settings (`.claude/settings.json`) configure its hooks and
+its permission rules. This hook, `scripts/hook-git.py`, runs before
+every command Claude sends through its shell tool. It judges each
+part of the command that calls git and gives one of three answers.
 
-The commands that finish the step of a conflict are named one by
-one: staging a file, continuing or aborting a rebase or a merge, a
-plain merge of one branch, and taking one side of a file in
-conflict. The step itself is the forge's help, not its mechanism:
-Claude lays both sides out as a walkthrough (one item per message,
-each closed with a verdict), the principal decides, Claude writes
-the chosen wording, and the finishing commands run on the hook's
-ask. The step is described in [Settle a
-conflict](../use/settle-a-conflict.md).
+| What Claude sends | The hook's answer | What follows |
+|---|---|---|
+| a command of git that only reads | allow | the command runs and nothing is asked |
+| one of the few commands that finish [the step of a conflict](../use/settle-a-conflict.md), such as `rebase --continue` | ask | the harness puts the command to the principal, and it runs on the principal's yes |
+| any other command of git: a write, or a command the hook cannot read | deny | nothing runs; the reason names the rule and, where one exists, the script to use instead |
+| a command that is not git | none | the command is left to the harness |
 
-A commit carries the message the principal confirmed, word for
-word, and no attribution line: the settings file leaves the commit
-attribution empty and the session link off, so the harness adds and
-proposes no trailer.
+Over a whole command the stricter answer wins: deny outranks ask, and
+ask outranks allow. The ask holds in every permission mode of the
+harness. The hook itself reads no file and writes nothing.
+
+Claude has a second shell tool. The other shell tool is closed to git
+whole, by a permission rule of the same settings. One reader then
+judges every command of git, and there is one door.
+
+The rule binds the forge, not the principal. The hook is for Claude's
+tools alone. What the principal types to git in the principal's own
+shell is left to the principal.
+
+### What a commit carries
+
+A commit carries the message the principal confirmed, word for word.
+It carries no attribution line. In the settings, `attribution.commit`
+is empty and `attribution.sessionUrl` is false. With these two the
+harness adds and proposes no `Co-Authored-By` or `Claude-Session`
+trailer.
 
 ### Two doors, two speeds
 
-`/save` runs the light check, then commits and pushes on whatever
-branch is checked out, through `forge-save`. It renders nothing.
-`/save --quick` leaves the light check out and changes nothing else.
-The message is drafted from the records and confirmed, or given
-with `-m`. A conflict that `forge-save` meets in its rebase is left
-standing, not aborted: the commit is made, nothing is lost, the
-script prints the files in conflict and the step that follows. A
-save that finds a rebase or a merge already standing refuses before
-it stages anything, so that conflict markers are never committed.
-The job is [Save your work](../use/save-your-work.md).
+Saving and releasing are two commands.
+[Save your work](../use/save-your-work.md) and
+[Release a version](../use/release-a-version.md) describe the two
+jobs.
 
-`/release` runs from `main` only and refuses elsewhere, naming the
-branch. Its order is fixed: its checks, the documentation, the
-README and release notes, the state render, the save. For the
-engine the tests run first, and a red test stops the release; what
-the tests are is [The tests](the-tests.md). The documentation is
-offered, because the README reads the documentation's index. The
-release commit carries the release message, and at an approved
-major the tag `v<major>`. The save a release ends with runs without
-a second light check, because the release ran it already. Any other
-tag is the principal's request, with a free name, from `/save` or
-`/release` alike. The job is [Release a
-version](../use/release-a-version.md).
+| | `/save` | `/release` |
+|---|---|---|
+| Where it runs | on whatever branch is checked out | on `main` only; elsewhere it refuses and names the branch |
+| What it checks | the [light check](../reference/glossary.md) | its checks, their findings settled in a walkthrough |
+| The tests of the engine | never: every push runs them in CI | first, at a release of the engine; a red test stops the release |
+| Renders | none | the README and the release notes |
+| The commit | the message the principal confirmed | the message `release <intent version>` and, at an approved major, the tag `v<major>` |
+| What it costs | seconds | the renders cost minutes and tokens |
 
-In the commands of git the word `forge` names the whole, the engine
-and the forge's own project cloned beside it, each its own commit;
-why that is so is [Projects and the
-engine](projects-and-the-engine.md).
+A render is a file generated from the documents of a project, such as
+the README. A walkthrough takes the items one at a time, one question
+each, and the principal decides. CI is the automated run of the tests
+that follows a push.
+
+A release runs in one order:
+
+1. At a release of the engine, the tests. A red test stops the
+   release. Where the tests cannot run, the release says so and goes
+   on only on the principal's word.
+2. The checks, with the walkthrough of their findings.
+3. The documentation. The release never regenerates it: it reports
+   the age of the documentation's index against the intent's version
+   and offers `/document`.
+4. The README and the release notes, rendered at every release with
+   no test of staleness.
+5. The state render: the ledger written out as a file by the ledger
+   script.
+6. The save. `/release` ends by running `/save` with the release
+   message and the tag: it is not a second procedure. This closing
+   save runs without a second light check, which the release has run
+   already.
+
+The release number is the version of the project's
+[intent](../reference/glossary.md). Only the tag of a major has a
+fixed name: an integer is a released major, and any other tag is a
+snapshot made on request.
+
+In the commands of git, the word `forge` names the whole: the engine
+and the forge's own project where it is cloned beside the engine,
+each with a commit of its own
+([Projects and the engine](projects-and-the-engine.md)).
 
 ### The door inward
 
-`/pull` looks at the remote and says the state as a fact: up to
-date, behind, ahead, diverged, or no origin. Beside the state it
-says what waits on GitHub outside git, the open pull requests and
-the unanswered discussions, or that it could not read it. It pulls
-only a clean repository that is behind. Every other state gets an
-offer, and nothing runs unasked: behind with unsaved work, save
-first; ahead, save; diverged, the user merges by his own hand or
-lets `/save` rebase his own commits onto the remote. The forge
-never pulls or merges on its own judgement. The job is [Pull from
-the remote](../use/pull-from-the-remote.md).
+`/pull` is the door inward
+([Pull from the remote](../use/pull-from-the-remote.md)). The forge
+looks at the remote and offers. It never pulls or merges on its own.
+
+`/pull` and the state map that `/forge` draws ask the status script
+(`scripts/forge-status.py --remote`) for the state of the engine and
+of the project against the origin. They say that state as a fact. A
+state that calls for something has one offer.
+
+| State against the origin | The one offer |
+|---|---|
+| behind, the repository clean | `/pull` |
+| behind, with unsaved work | `/save` first |
+| ahead | `/save` |
+| diverged | the principal merges the remote's `main` by hand, or lets `/save` rebase the principal's own commits onto the remote; nothing is pulled until then |
+
+`/pull` therefore pulls only a clean repository that is behind.
+
+Beside the state of the branch, both say what waits on GitHub outside
+git, that is the open pull requests and the unanswered discussions,
+which the forge reads and never merges, answers or closes.
 
 ### Branches and merging
 
-Branches are voluntary. Whoever wants one gets it through
-`forge-branch`, which creates the branch or switches to it; the job
-is [Work on a branch](../use/work-on-a-branch.md). Merging is git's,
-by hand or by merge request: the integrator merges on his own clone
-with git itself, outside the forge's scripts, and what git leaves
-standing is settled in the step of a conflict.
+A branch is voluntary and belongs to git
+([Work on a branch](../use/work-on-a-branch.md)). Switching to one
+goes through a script (`scripts/forge-branch.py`), as every write
+does.
 
-Every file of a repository has a way of merging, and the record
-files merge as text with both tails kept; the three ways and what
-the forge promises two people on one project are [Working together
-on one project](working-together.md). The files made for a reader,
-the README and the release notes among them, are made only on
-`main` and taken as `ours` at a merge. Therefore whatever makes a
-derived file or migrates a project, `/release`, `/publish`,
-`/document` and `/migrate`, runs on `main` only, refuses a
-repository behind or diverged from its origin, and offers `/pull`.
+Merging belongs to git, by hand or by merge request. The integrator
+(whoever does the merging) merges on the integrator's own clone with
+git itself, outside the forge's scripts. The forge does one rebase:
+the rebase of `/save`, which puts the principal's own commits onto
+the remote.
 
-`ours` is a merge driver that git does not have built in. `/setup`
-registers it once per machine, on the user's word, together with the
-git settings it needs, through `scripts/forge-config.py`. The status
-script, `forge-status`, says when the registration is missing. The
-registration belongs to the machine, not to the project.
+What git leaves standing is settled in the step of a conflict. A
+conflict that the rebase of a save meets is left standing, not
+aborted: the commit is made and nothing is lost. The principal is
+told which files are in conflict and what follows, and the status
+script reports that a rebase or a merge is in progress. A save that
+finds a rebase or a merge already standing refuses before it stages
+anything. That way conflict markers are never committed.
 
-### What the forge leaves to git and to the user
+The step of a conflict is the forge's help, not its mechanism. Claude
+reads both sides and lays them out as a walkthrough, one conflict per
+question. The principal decides. Claude writes the chosen wording
+into the file and records the change in the history of the document.
+The commands of git that finish the step then run on the hook's ask,
+and `/save` runs again.
 
-Initialising a project's repository and adding its remote are the
-user's one-off act at creation. The commit identity is git's: it is
-resolved per host by the user's own configuration, and the forge
-sets none. `/setup` offers to write that configuration and one
-global guard, so that a commit on a host with no identity fails
-aloud instead of taking a default. Immutability of documents is a
-process rule, not a git mechanism. The ledger is made at read time
-by a script and is gitignored; why is [The ledger, made from the
-records](the-ledger.md).
+Every file of a project has a way of merging, one of three, set out
+in [Working together on one project](working-together.md).
 
-### Portability
+### Derived files and the driver `ours`
 
-The scripts are Python 3.8 or newer, run as
+The files made for a reader (the README among them) are derived
+files: a command makes them from other files. They are made only on
+`main`. At a merge they are taken as `ours`: one side's file is taken
+whole, and no conflict arises.
+
+Whatever makes a derived file or migrates a project (`/release`,
+`/publish`, `/document`, `/migrate`) runs on `main` only. It refuses
+a repository that is behind or diverged from its origin, and offers
+`/pull`.
+
+`ours` is a merge driver that is not built into git. `/setup`
+registers it in the global git configuration through
+`scripts/forge-config.py --register`, on the principal's word, once
+per machine and once in each place where git reads another global
+file. The registration carries the settings the driver needs:
+
+- `merge.ours.driver true`: the driver itself.
+- `rebase.backend merge`: the other backend of a rebase ignores
+  drivers.
+- `merge.renormalize true`: without it, files committed with CRLF
+  line endings before normalisation would conflict whole.
+
+The same step sets `rerere.enabled true` as a convenience and offers
+`merge.conflictStyle zdiff3`. The status script
+(`scripts/forge-status.py`) reports a missing registration.
+
+### The ledger, the identity and immutability
+
+**The ledger.** The ledger is made at read time: it is built from the
+documents whenever it is read, and it is not kept in git. The price
+is that the ledger is not on the remote.
+
+**The commit identity.** The identity of a commit is git's business,
+not the forge's. It is resolved per git host by the principal's own
+git configuration, and the forge sets no identity anywhere. The
+scripts carry no address of a remote and no identity of an author. No
+remote is configured anywhere in the forge: git carries that
+information itself. What the forge keeps is an offer and a guard.
+`/setup` offers to write the configuration together with one global
+guard: with it, a commit in a repository on a host with no identity
+fails aloud instead of silently taking a default. A save checks that
+git resolves an identity for the repository. Where git resolves none,
+the save reports it with the command that sets one, and commits
+nothing until one is set. One case is accepted as a risk: where one
+host serves two identities, the principal resolves it by hand.
+
+**Immutability.** A document that is immutable is so by a rule of the
+process, kept by convention. Git is not asked to enforce it.
+
+### Where the scripts run
+
+The forge runs beyond Windows. `scripts/` is the only layer bound to
+a platform, and its scripts are written to run unchanged on Linux and
+macOS. They are Python (3.8 or newer), run as
 `python scripts/<name>.py`. `python` on PATH is their one
-prerequisite; a system that has only `python3` gives it that name.
-They are written to run unchanged on Linux and macOS, with nothing
-Windows-only: paths composed with `pathlib`, external tools resolved
-from PATH, usage examples free of Windows-specific paths. The
-engine's tests run in CI on Linux and Windows at every push, the git
-scripts, the ledger, the light check and the hook's judgement among
-them. The conversions are tested for their failure without the tool
-alone. The per-prompt hook is a writing rule until a run says
-otherwise. Nothing has run on macOS: for it the whole set is the
-writing rule alone. The scripts themselves are listed in
-[Scripts](../reference/scripts.md); the terms of the forge are in the
-[Glossary](../reference/glossary.md).
+prerequisite. A system that has only `python3` gives it that name.
+Each script carries its help at its head, and what several scripts
+share lives in one module beside them.
+
+That nothing in them is Windows-only is a writing rule:
+
+- paths are composed with `pathlib`;
+- external tools are resolved from PATH;
+- the usage examples in a script's help are free of Windows-specific
+  paths and invocations.
+
+How far a run has verified the rule differs by platform and by part:
+
+- On Linux and Windows the engine's tests run in CI at every push
+  (the matrix: `.github/workflows/tests.yml`). The git scripts, the
+  ledger, the light check and the judgement of the git hook are
+  among what they cover.
+- The conversions of documents are tested only for how they fail
+  where their tool is missing.
+- The per-prompt hook (the script the harness runs at every prompt,
+  `scripts/hook-walkthrough.py`) stays a writing rule until a run
+  says otherwise.
+- Nothing has run on macOS. For macOS the whole set is the writing
+  rule alone.
+
+What the tests are and how they are run is said in
+[The tests](the-tests.md).
 
 ## Why
 
-**Why the scripts are the door, and why reading is open.** Reading
-changes nothing. The scripts had to copy git verb by verb to serve
-reading, so reading was opened to Claude directly. How many scripts
-there are is whatever the door needs, never a rule.
+**Reading is open, a write goes through the door.** Reading changes
+nothing, and to serve reading the scripts had to copy git verb by
+verb. A write changes a repository, and it goes through a script. Why
+a write must go through a script at all, beyond that contrast: the
+reason is not recorded.
 
-**Why a hook and not deny rules.** A prefix deny rule of the harness
-matches the text usually typed, not the command, so a write spelled
-differently passes it. A deny rule cannot be carved by an allow
-rule, and it is not overridden by a hook. Two walls with one hole
-read worse than one. So the wall for the writing verbs is one hook
-that reads the whole command, and the other shell tool is closed to
-git whole, so that there is one parser and one door.
+**A hook, not conduct alone.** A rule of conduct discourages a write
+outside the scripts. The hook refuses it, on every way Claude can
+reach git, and there is one door.
 
-**Why a commit carries no attribution line.** The reason is not
-recorded.
+**A hook, not deny rules.** Two shapes of deny rule in the settings
+were weighed against the hook: one rule on every command of git, and
+rules on the writing commands. A deny rule matches the beginning of a
+command as it is usually typed, and the same write spelled another
+way passes it. A deny rule cannot be carved by an allow rule and is
+not overridden by a hook. Two barriers with one gap read worse than
+one. The hook has a cost: its reading of the shell is a heuristic.
+What it cannot read, it therefore denies.
 
-**Why two doors.** The renders cost minutes and tokens beyond reason
-at every save, and the two-speed save had existed in practice for
-weeks before it was named. With the renders at the release only,
-the README on `main` is current at every release and stale in
-between visibly, never silently. Two shapes were rejected. One was a
-save that regenerates only the renders whose inputs moved: it saved
-little on the engine and nothing on a project, and it added a
-staleness state that every reader of state had to read alike. The
-other was a fixed working branch with a forge switch that merges
-into `main`: it was the first step towards a wrapper of git, with
-merge and conflict logic in the forge's hands and two branches a
-non-developer must understand, forced on those who do not need one.
-The switching half survived as the voluntary `forge-branch`; the
-merging half stayed git's.
+**One shell tool judged, the other closed.** With the other shell
+tool closed to git whole there is one parser and one door.
 
-**Why the release's save runs no second light check.** The release
-ran it already. A save never runs the tests, because every push runs
-them in CI; a release of the engine runs them first, because its
-checks are the condition of a release.
+**No attribution line.** The reason is not recorded.
 
-**Why derived files are made on `main` only.** The derived files are
-taken as `ours` at a merge. In the rebase of `/save` that `ours`
-turns round: a fresh README would silently lose to an older one, and
-a major's tag would mark a wrong state. So whatever makes a derived
-file or migrates a project refuses a repository behind or diverged
-and offers `/pull`.
+**Two commands.** The renders cost minutes and tokens beyond reason
+at every save. With the renders at the release only, the README on
+`main` is current at every release. Between releases it is stale
+visibly (the state map shows it) and never silently. Two other shapes
+were rejected:
 
-**Why the registration is the machine's.** An unregistered clone
-silently falls back to a conflict on the derived files, so the
-status script says when the registration is missing. One
-registration per machine was chosen against one per repository,
-which the migration must not touch.
+- One command, in which `/save` regenerates only a render whose own
+  inputs moved in that save and the ledger marks a render that was
+  skipped. It would save perhaps a third of the engine's saves and
+  nothing on projects, where the README reads the ledger and the
+  ledger moves at every operation. It would add a state of staleness
+  that `/save`, `/forge` and `/check` must all read alike. Two
+  commands save everything and add nothing.
+- A fixed working branch in every repository, with one script that
+  creates it and switches to it, and `/release` merging it into
+  `main`. It was rejected as the first step towards a wrapper of git,
+  which is not wanted: the logic of merges and conflicts in the
+  forge's hands, and two branches a non-developer must understand. It
+  would also force a branch on those who do not need one. The
+  switching half survives as the voluntary branch script. The merging
+  half stays with git.
 
-**Why the forge never pulls on its own.** The principal works on
-more than one machine, so a clone behind its origin is the normal
-case, and a state map drawn from it is a map of the wrong state. A
-pull or a merge made on Claude's judgement would be work done
-without the principal's word. What waits on GitHub is said beside
-the state because a contribution seen on the morning it arrives
-costs nothing, and the same contribution seen after a week of one's
-own rounds costs renumbered items, re-dated versions and a conflict
-at the merge.
+**The order of a release.** The README reads the documentation's
+index. The documentation therefore comes before the README. The
+renders come after the checks and their walkthrough: a render made
+from the settled sources is current by construction, and a render
+made before them goes stale whenever a finding raises the intent's
+version. The closing save leaves the light check out: the release has
+run it already. A save never runs the tests: every push runs them in
+CI.
 
-**Why the ledger is out of git.** The ledger was the one file
-present at every collision of two people or two windows on one
-project, since every operation writes it. Made at read time, it
-stops existing as a thing to merge.
+**Looking and offering, never pulling or merging unasked.** The
+principal works on more than one machine. A clone behind its origin
+is therefore the normal case, and a state map drawn from it shows the
+wrong state. A pull or a merge made on Claude's judgement would be
+work done without the principal's word.
 
-**Why the identity is git's.** An identity kept by the forge
-duplicated what the user's own configuration already resolved, and
-every repository carried the same identity twice. The guard makes a
-missing identity fail aloud instead of taking a default.
+**Saying what waits on GitHub.** A contribution seen on the morning
+it arrives costs nothing. The same contribution seen after a week of
+one's own rounds costs renumbered items, re-dated versions and a
+conflict at the merge.
 
-**Why immutability is a process rule.** Git protects nothing from a
+**Merging left to git.** The reason is the one of the rejected
+working branch above: the forge is not to become a wrapper of git.
+
+**Derived files on `main` only, and the refusals.** In the rebase of
+a save `ours` turns round: the two sides change places. A fresh
+README would then silently lose to an older one, and the tag of a
+major would mark a wrong state.
+
+**The registration, and the report where it is missing.** An
+unregistered clone silently falls back to a conflict on the derived
+files. The registration is one per machine, chosen against a
+registration per repository, which the migration of a project must
+not touch.
+
+**The ledger out of git.** Every operation writes the ledger. It was
+therefore the one file present at every collision of two people or
+two windows on one project. Made at read time, it stops existing as a
+thing to merge, and merge requests on the server stop conflicting on
+it ([The ledger, made from the records](the-ledger.md)).
+
+**The identity left to git.** An identity kept by the forge would
+duplicate what the principal's own configuration already resolves,
+and every repository would carry the same identity twice.
+
+**Immutability as a process rule.** Git protects nothing from a
 commit that rewrites a file. The rule costs nothing. A mechanism
-would be one more layer to maintain that still would not stop a
-hand edit.
+would be one more layer to maintain, and it still would not stop an
+edit by hand.
 
-**Why Python.** The scripts are Python on the feedback of the
-forge's users, and `python` on PATH was the same Python the document
-conversion needed already. Portability is verified by a run where
-one exists, and said to be a writing rule where none does.
+**Python, and a run instead of a claim.** The scripts need the same
+Python that the conversion of documents needed already. Portability
+is verified by a run. Where no run has been made, the rule stays a
+writing rule and is not a claim.
 
 ## A worked example
 
-A principal works in a project with the placeholder slug
-`my-project`, on a branch of his own.
+A principal works on a project with the placeholder slug
+`my-project`, on `main`.
 
-1. He asks Claude to commit the round's changes. Claude tries a
-   commit through the shell directly. The hook denies it and names
-   `python scripts/forge-save.py my-project -m "<message>"` as the
-   door. Claude runs `/save my-project` instead: the light check
-   runs, the message drafted from the records is confirmed, and the
-   commit is pushed on the branch.
-2. The next morning, on another machine, he asks for a release.
-   `/release my-project` refuses: the repository is behind its
-   origin, and a README made here would lose to the one on the
-   remote at the next rebase. It offers `/pull`.
-3. `/pull my-project` says the state as a fact, clean and behind,
-   and fast-forwards. It also says that one pull request waits on
-   GitHub, unanswered, and offers to look at it first.
-4. He merges the branch into `main` on his own clone with git
-   itself. One record file conflicts. Claude lays both sides out in
-   a walkthrough, he decides, Claude writes the wording, and the
-   finishing commands run on the hook's ask and his yes.
-5. `/release my-project` from `main` runs its checks, offers the
-   documentation, re-renders the README and release notes, and
-   saves with the release message and no second light check.
+1. **A look.** The principal asks what changed since the last save.
+   Claude reads the state and the log of the repository from git
+   directly. The hook answers allow, and nothing is asked.
+2. **A save.** A round of work is written, and the principal asks for
+   a save. `/save my-project` runs the light check. Claude drafts the
+   message from the records of what changed, and the principal
+   confirms it. `scripts/forge-save.py` commits with that message,
+   word for word and with no attribution line, and pushes. Had Claude
+   sent the commit to git itself, the hook would have answered deny,
+   and its reason would have named the rule and the script of
+   `/save`.
+3. **A pull.** The next morning, on another machine, the principal
+   types `/pull my-project`. The forge looks at the remote: the
+   repository is behind and clean, and one pull request waits on
+   GitHub. The forge says both, and pulls.
+4. **A conflict.** Later a colleague pushes to the same repository
+   while the principal works on. The next save finds the repository
+   diverged, rebases the principal's commits onto the remote and
+   meets a conflict in one document. The save leaves the rebase
+   standing, with the commit made, and names the file. Claude lays
+   the two wordings out, the principal chooses, and Claude writes the
+   chosen wording into the file. The commands that finish the step
+   (`rebase --continue` among them) each get the hook's ask: the
+   harness shows the command and runs it on the principal's yes.
+   `/save my-project` runs again and pushes.
+5. **A release.** The principal types `/release my-project`. The
+   repository is on `main` and up to date, and the release runs. No
+   tests run: the project is not the engine. The checks run and their
+   findings are settled in a walkthrough. The release reports the age
+   of the documentation and offers `/document`. The README and the
+   release notes are rendered. The closing save commits with the
+   message `release 0.4` (0.4 being the version of the project's
+   intent in this example) and runs no second light check. Had the
+   repository been behind or diverged, the release would have refused
+   and offered `/pull`.
 
 ## See also
 
@@ -327,4 +467,4 @@ A principal works in a project with the placeholder slug
 - [Glossary](../reference/glossary.md): every term of the forge in
   one line.
 
-Generated on 2026-11-08 for version 7.0 from the files the front-matter names; never edited by hand.
+Generated on 2026-11-17 for version 7.12 from the files the front-matter names; never edited by hand.

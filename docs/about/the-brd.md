@@ -1,8 +1,8 @@
 ---
-generated: 2026-11-08
-version: 7.0
+generated: 2026-11-17
+version: 7.12
 made: derived
-inputs-hash: c2613a831401bdda
+inputs-hash: 9e5caa1d5067c58f
 inputs:
   - .claude/skills/forge/states/brd.md
   - templates/brd.md
@@ -21,407 +21,421 @@ inputs:
 
 # The BRD
 
-The BRD is the business requirements of a project: the artefact
-`30-brd.md`, which breaks the assignment, or the intent, into rules,
-behaviour and qualities that the stakeholders can review and the
-delivery can estimate. This page says what a BRD holds, where it
-stands in the chain, how it starts, what Claude will not write into
-it and why the forge is shaped so. It is for the user who will have
-one made, for the extender who wants to know what the definition
-owns, and for the evaluator who asks why the BRD names what it
-cannot know instead of writing it. How a BRD is iterated step by
-step is the how-to [Write a BRD](../use/write-a-brd.md); every term
-of the forge is one line of the [Glossary](../reference/glossary.md).
+The BRD is the document of a project that holds its business
+requirements, in the file `30-brd.md`. This page is for the people who
+use Forge of Thought (the forge), who extend it or who evaluate it. It
+says what a BRD holds, how it starts, and why the forge names what it
+cannot know instead of writing it.
 
 ## What it is
 
-A BRD is an artefact of the chain, the versioned documents a project
-travels from the brief onward. Its file is `30-brd.md`. It stands
-below the assignment and above the solution design; the usual parent
-is [The assignment](the-assignment.md), and the layer that may
-follow it is [The user stories](the-user-stories.md).
+The BRD is an artefact of the [chain](../reference/glossary.md), that
+is one of the versioned documents a project builds one below the
+other. It stands below the [assignment](the-assignment.md) and above
+the solution design. It breaks its parent (the document it is derived
+from) into three kinds of content:
 
-The BRD breaks its parent into three kinds of content:
+- rules, which the stakeholders of each area review on their own;
+- behaviour that must be agreed as a sequence;
+- qualities, each with a value from the stakeholders.
 
-- rules: the business requirements, grouped so that the
-  stakeholders of each area find theirs and review them on their
-  own;
-- behaviour: what must be agreed as a sequence, written as use cases
-  with actors, conditions and exceptions;
-- qualities: the non-functional requirements by category, each with
-  a value from the stakeholders or left open.
+The purpose is that the delivery teams can estimate from it and the
+solution design can start from it.
 
-Its purpose is that the delivery teams can estimate and the solution
-design can start from it. It admits the solution only at the level
-the stakeholders need to agree the ask. The how is left to the
-solution design. Where to stop is a judgement: when the teams can
-estimate, when more detail would not interest the stakeholders, or
-when more detail would be superseded by the design.
+A BRD admits the solution only at the level the stakeholders need in
+order to agree the ask. How the ask is solved is left to the solution
+design. A report for a third party is a
+[work product](the-work-product.md), not a BRD.
 
-The BRD is built on the public standards of the field (ISO/IEC/IEEE
-29148, BABOK, IREB) and on the organisation's own standard where the
-instance, one installation of the forge, has one. The organisation's
-content, that is the roster of areas and which of them are
-mandatory, the roles, the systems and the publishing convention,
-lives in a library of the instance, a project of its own beside the
-others ([Projects and the engine](projects-and-the-engine.md)). The
-engine carries only a generic Map of what a BRD finds.
-
-The BRD's definition is `.claude/skills/forge/states/brd.md`, paired
-with the template `templates/brd.md`. The definition says how the
-BRD is found and owns its rules. The template says what comes out.
+Two files of the engine define it. The definition
+(`.claude/skills/forge/states/brd.md`) says what a BRD is to find and
+how it is found. The template (`templates/brd.md`) gives the shape of
+the result.
 
 ## Who writes and reads it
 
-The BRD is found by an analyst working as the principal, the one
-whose thinking is being forged, with Claude as partner. A project
-has one principal, so the analyst runs a project of his own. The
-recast is Claude's work: the whole built from the parent with a
-provenance map, the groupings proposed so that every stakeholder
-finds theirs and nothing is twice, the use cases drawn from the
-parent's process view, the touched areas of the enterprise raised one
-by one, and the wording in the Requirement style. The principal
-decides the scope of the document, the groupings, which areas
-apply, the owner of every open question and every value.
+An analyst writes it. He works as the principal (the person whose
+thinking is being forged) of a project of his own. Claude is his
+partner and does the recast, that is the breaking of the parent into
+the items of the BRD.
 
-The stakeholders read it, each area its own rules, and the delivery
-teams read it to estimate. The solution design starts from it. A
-coding agent that takes a chain is given the artefacts that are
-available; which of them, a person decides.
+Claude brings:
 
-The stakeholders' approval happens outside the forge, where the
-organisation does it. The forge records the principal's approval as
-an integer version, and, in the Stakeholders section, the roles with
-their involvement, never names. A decision in `decisions.md` keeps
-the sign-off where the principal wants it kept; this is a choice,
-not a rule. A report for a third party is a work product, not a BRD.
+- the whole BRD from the parent, with the provenance map (the list of
+  every item of the parent, each marked as an ask, a question or an
+  agreement);
+- groupings in which every stakeholder finds theirs and nothing stands
+  twice;
+- the use cases, drawn from the parent's process view;
+- the touched areas of the enterprise, raised one by one;
+- the wording, in the Requirement style of the BRD.
+
+The principal decides:
+
+- the scope of the document;
+- the groupings;
+- which areas apply;
+- the owner of every open question;
+- every value.
+
+Claude copies nothing of the parent and invents no requirement the
+parent does not carry. What it finds missing in the parent, it raises
+as a question. A change of substance goes to the
+[intent](../reference/glossary.md) first.
+
+The stakeholders read the BRD to review it. The delivery teams read
+it to estimate. A coding agent that takes a chain is given the
+artefacts that are available, and a person decides which.
 
 ## Made from
 
-One parent, named by the principal when he asks for the BRD. The
-trail of every item leads to it. There are two parents a BRD can
-have:
+A BRD has one parent. The principal names it when he asks for the
+BRD, and the trail of every item leads to it. Two documents of the
+chain can be the parent:
 
-- `20-assignment.md`, read with `10-intent.md` and the threads for
-  the reasons the assignment does not carry; the parent of an item
-  is then a REQ;
-- `10-intent.md` with the threads, where the project has no
-  assignment; the parent of an item is then a POS, and no assignment
-  is invented for it.
+- The assignment (`20-assignment.md`). It is read with the intent
+  (`10-intent.md`) and the [threads](../reference/glossary.md)
+  (`threads/`) for the reasons the assignment does not carry. The
+  parent of an item is then a requirement of the assignment (a REQ).
+- The intent with its threads, where the project has no assignment.
+  The parent of an item is then a position of the intent (a POS). No
+  assignment is invented for it.
 
-A file someone else gave, such as a transcript, an offer or a
-document of another party, is a third way in. It is not a parent of
-the chain. Registered through `/ingest` and cited by path, it yields
-a draft BRD that is always a work product in `work/`, never
-`30-brd.md` ([The work product](the-work-product.md)). The reason is
-that what someone said does not become the principal's position by
-being run through a command ([Sources and
-research](sources-and-research.md)). Each item of such a draft cites
-its place in the source, and the place is a turn of the principal's
-side. Where the principal wants that BRD in the chain, an intent is
-handed over from the same file first and the BRD is re-parented on
-it.
+A file someone else gave is a third way in, and it is not a parent of
+the chain. Such a file may be a transcript, an offer or another
+person's document. It is registered as a source through `/ingest` and
+cited by path. It yields a draft BRD that is always a work product in
+`work/`, never `30-brd.md`. Each item of the draft cites its place in
+the file. The reason is that what someone said is never silently
+promoted to the principal's position (see
+[Sources and research](sources-and-research.md)). Where the principal
+wants that BRD in the chain, an intent is handed over from the same
+file first, and the BRD is re-parented on that intent.
 
-Around the parent the BRD is made from:
+Around the parent, these are read:
 
-- `decisions.md` and the ledger, the project's state report, made at
-  read time from its documents;
-- the DEL items of an assignment, as the list of what the BRD is
-  asked to bring back;
-- the roster of the instance: a library document, cited by path,
-  that names the areas of the enterprise a BRD must consider and
-  which of them are mandatory; a project with no enterprise around
-  it has no roster, writes `Roster: none` and walks the area against
-  nothing;
-- the organisation's standard, where the instance has one, a library
-  document likewise;
-- the resource indexes of the project and of every library it
-  depends on (`sources/00-INDEX.md`, `research/00-INDEX.md`,
-  `projects/lib-*/sources/00-INDEX.md`), read always, so that a
-  standard, a regulation or a report the forge already holds is
-  cited and never declared unknown;
-- sources and research as the principal directs.
+- The decisions of the project (`decisions.md`).
+- The ledger (the file that holds the state of the project).
+- The DEL items of an assignment, which list what the BRD is asked to
+  bring back.
+- The roster of the [instance](../reference/glossary.md) (one
+  installation of the forge). The roster names the areas of the
+  enterprise a BRD must consider and says which of them are
+  mandatory. It is a document of the instance's
+  [library](projects-and-the-engine.md) (a project of its own), cited
+  by path. A project with no enterprise around it has no roster. Its
+  BRD says `Roster: none`, and the areas are walked against nothing.
+- The resource indexes of the project (`sources/00-INDEX.md`,
+  `research/00-INDEX.md`) and of every library it depends on. They
+  are read always. A standard, a regulation or a report that the
+  forge already holds is then cited and never declared unknown.
+- Sources and research, as the principal directs.
 
 ## What it holds
 
-The BRD has four prefixes of its own, beside four it reuses:
+The header carries `version`, `status`, `project` and `parent`. The
+`parent` names the file the BRD is derived from: `20-assignment.md` or
+`10-intent.md`. The history is kept in the companion
+`30-brd.history.md`, never in the BRD.
 
-- BR: a business requirement, one rule of the business, testable;
-- UC: a use case at user-goal level, behaviour agreed as a sequence;
-- DEP: a dependency, what the BRD relies on outside itself;
-- NFR: a non-functional requirement, a quality by category whose
-  value is the stakeholders';
-- OOS, ASM, TBC and SCR, reused from the assignment: out of scope,
-  assumption, open question, success criterion.
+The items are lists with IDs. A table stands only where columns carry
+data. Four prefixes are the BRD's own:
 
-Every BR and UC cites its parent, a REQ or a POS, in brackets at
-its end. An NFR cites the REQ or POS it follows from where there is
-one, and otherwise its category of the template, since the qualities
-are asked of every ask whether the parent named them or not. An item
-with neither is a finding of the check. A type is never told by a
-number: the prefix says what an item is, and the group says where it
-belongs.
+- BR: a business requirement;
+- UC: a use case at user-goal level;
+- DEP: a dependency on what the BRD relies on outside itself;
+- NFR: a non-functional requirement, that is a quality by category
+  whose value comes from the stakeholders.
 
-The sections of the template, in order:
+Four more are reused:
 
-- Purpose & Context and Objective, the only narrative, from the
-  parent's;
-- Stakeholders: roles, never names, each with its involvement
-  (responsible, approves, reviews, consulted, informed); the roles
-  the roster names as signing or reviewing are walked into the
-  table, each with its involvement or the reason it has none;
-- Scope: what is in and out, the scope of the document, that is what
-  this BRD does not cover that a reader would expect and where it is
-  covered, and the impacted systems;
-- Dependencies: the DEP items, among them what must be supplied from
-  outside the forge, each with the role that brings it;
-- Assumptions: what the requirements rest on and would change if it
-  stopped holding;
-- Use cases: each with actor, trigger, preconditions, success
-  outcome, minimal guarantee, the parent it carries and the BR items
-  it exercises; steps in the active voice, present tense, as a
-  scenario and not as a rule; the exceptions where failure,
-  compliance or contract matter;
-- Business requirements: the BR items grouped by capability or
-  process;
-- Touched areas of the enterprise: the roster cited by path, or
-  `Roster: none`; each area found, with the items that carry it, or
-  not applicable with the reason; a mandatory area is never silent;
-- Qualities: one NFR per category that applies; the categories are
-  the template's (reliability, performance, security and privacy,
-  compliance and regulatory, safety, usability and accessibility,
-  localisation, maintainability and operability, compatibility and
-  interoperability, data integrity), the values the stakeholders';
-- Transition: data to migrate, people to train, the cut-over, where
-  the change replaces something, as BR items in a group of their own;
-- Phasing: always stated, even as "everything in the first phase";
-  a phase is a release of the thing, never a version of the document;
-- Success criteria: how the stakeholders will know the ask was met;
-  may be delegated by the parent;
-- Open questions: every TBC with an owner, a role or `unassigned`,
-  and whether it blocks estimation; below them the list of what must
-  be supplied from outside, each pointing at its DEP or TBC;
-- Terms: every capitalised term defined; an entity also says the
-  states it may be in and the system it is taken from, with no
-  attribute, since how it is taken is the solution design's;
-- Appendix: traceability, a table of every parent item and the items
-  that carry it, compiled by Claude at every write and verified by
-  the `brd` check.
+- OOS: out of scope;
+- ASM: an assumption;
+- TBC: an open question;
+- SCR: a success criterion.
 
-A TBC is defined once, in Open questions, with its owner and whether
-it blocks estimation. A BR or an NFR whose rule is not known cites
-that TBC in brackets, as it cites its parent. No value anywhere in
-the template stands as a requirement: a category without a value is
-a TBC with an owner, never a figure from the skeleton.
+The sections, in the order of the template:
 
-The Requirement style of the BRD is the assignment's made stricter
-([Requirement style and Story style](../reference/requirement-style.md)):
+| Section | What it holds |
+|---|---|
+| Purpose & Context | Why the BRD exists and what the reader needs in order to review and estimate, from the parent's own Purpose & Context. The related documents are listed by path or name, without IDs. |
+| Objective | What must be true at the end. |
+| Stakeholders | Roles, never names, each with its involvement: responsible, approves, reviews, consulted or informed. |
+| Scope | What is in scope. What is out of scope, as OOS items. The scope of the document: what this BRD does not cover that a reader would expect, and where it is covered. The impacted systems. |
+| Dependencies | DEP items: another system, project or document the BRD relies on. What must be supplied from outside the forge is a DEP with the role that brings it. |
+| Assumptions | ASM items: what the requirements rest on and would change if it stopped holding. |
+| Use cases | UC items. Each has its actor, trigger, preconditions, success outcome and minimal guarantee, the parent it carries, the BR items it exercises and its steps. The exceptions stand where failure, compliance or contract matter. |
+| Business requirements | BR items, grouped by capability or process. Every stakeholder finds theirs and nothing stands twice. |
+| Touched areas of the enterprise | The roster, cited by path, or `Roster: none`. Each area is found, with the items that carry it, or not applicable, with the reason. |
+| Qualities | NFR items, one per category that applies. The categories come from the template (ISO/IEC 25010 and the practice of a regulated business): reliability, performance, security and privacy, compliance and regulatory, safety, usability and accessibility, localisation, maintainability and operability, compatibility and interoperability, data integrity. The values come from the stakeholders. No value of the template stands as a requirement. |
+| Transition | BR items in a group of their own: data to migrate, people to train, the cut-over. The section stands only where the change replaces something. |
+| Phasing | What each phase of the delivery brings, in what order, with what dependencies. It is always stated, even as "all in the first version". A phase is a release of the thing, never a version of the document. |
+| Success criteria | SCR items: how the stakeholders will know the ask was met. The parent may delegate them. |
+| Open questions | Every TBC, with its owner and whether it blocks estimation. The list of what is to be supplied from outside, each entry pointing at its DEP or TBC. |
+| Terms | Every capitalised term of the items. An entity also names the states it may be in and the system it is taken from. No attribute is listed. |
+| Appendix: traceability | One row per item of the parent, with the BRD items that carry it. Claude compiles it at every write from the items. It is never edited on its own. |
 
-- testability is mandatory: every BR and NFR can be shown met or
-  not;
-- one idea per item, within reason: a list of two to nine members
-  inside an item is allowed where they are one rule;
-- a note after an item is allowed and carries no requirement;
-- an item may name the role that owns it;
-- no value that no stakeholder gave;
-- a BR and an NFR are written as `shall` / `shall not` in English;
-  the steps of a UC are written in the active voice, present tense;
-- in a work product from a source, a rule cites the principal's side
-  only; what another party said is cited by a DEP or by a note after
-  an item, never by a shall.
+The wording of the items follows the Requirement style of the
+assignment, made stricter for the BRD. The whole rule set is on
+[Requirement style and Story style](../reference/requirement-style.md).
+What is stricter:
 
-## A worked example
-
-A generic BR item with its parent, and a generic NFR whose value is
-open, in the shape the template defines:
-
-```
-### Order intake
-- **BR.0010** The Order Desk shall record every Order with its
-  Customer, its requested delivery date and its origin channel.
-  (REQ.0020)
-
-## Qualities
-- **NFR.0010** Reliability (service hours, availability, fault
-  tolerance, recovery point, recovery time): Order intake shall meet
-  the service hours and the availability the stakeholders set
-  (TBC.0010). (REQ.0020)
-
-## Open questions
-- **TBC.0010** (owner: Head of Operations; blocks estimation: yes)
-  Which service hours and which availability does order intake
-  require?
-```
-
-The BR ends with the REQ it carries. The NFR names its category,
-cites the TBC that holds its missing value and ends with its parent.
-The TBC is defined once, with a role as owner and the word on
-estimation.
+- Testability is mandatory. Every BR and NFR can be shown met or not.
+- An item holds one idea, within reason. A list of two to nine
+  members inside an item is allowed where they are one rule.
+- A note after an item is allowed and carries no requirement.
+- An item may name the role that owns it.
+- No value stands that no stakeholder gave. A category without a
+  value is a TBC with an owner, never a figure from the template.
+- A TBC is defined once, in Open questions, with its owner and
+  whether it blocks estimation. A BR or an NFR whose rule is not
+  known cites the TBC in brackets, as it cites its parent.
+- Every BR and UC cites its parent: a REQ or a POS. In a work product
+  made from a file, the parent is the path and the place, and the
+  place is a turn of the principal's side. What another party said is
+  cited only by a DEP or by a note after an item, never by a `shall`.
+- An NFR cites the REQ or POS it follows from where there is one, and
+  otherwise its category of the template. The qualities are asked of
+  every ask, whether the parent named them or not. An item with
+  neither is a finding of the check.
+- A BR and an NFR are worded with `shall` or `shall not`. The steps
+  of a UC are written in the active voice, present tense, as a
+  scenario and not as a rule: "the Customer submits the order".
+- A type is never told by a number. The prefix says what an item is,
+  the group says where it belongs.
 
 ## Complete when
 
-The BRD is complete when three things hold:
+A BRD is complete when three things hold:
 
-- nothing of the parent is left out in silence: delegated, phased
-  later or open with an owner is complete, silent is not;
-- every matter that must come from outside the forge is named with
-  its owner;
-- no open question that blocks estimation remains.
+- Nothing of the parent is left out in silence. What is delegated,
+  phased later or open with an owner counts as complete. What is
+  silent does not.
+- Every matter that must come from outside the forge is named with
+  its owner.
+- No TBC that blocks estimation is open.
+
+Where to stop is a judgement. It is made when the teams can estimate,
+when more detail would not interest the stakeholders, or when more
+detail would be superseded by design.
+
+When the BRD is complete, Claude offers the approval. The approval
+belongs to the principal, and the forge records it as an integer
+version. The stakeholders' sign-off is a separate act. It belongs to
+the organisation and happens outside the forge, where the
+organisation does it. The BRD records the roles with their
+involvement in its Stakeholders section, never names. Where the
+principal wants the sign-off kept, it is recorded as a decision in
+`decisions.md`. That is his choice, not a rule.
 
 ## How it is found
 
-The BRD is worked through `/forge brd`
-([Write a BRD](../use/write-a-brd.md)). Claude first says whether the
-parent is stable enough to be derived from, approved or by the
-principal's word, never as a gate. A BRD starts in one of two ways:
+A BRD is worked with `/forge brd`. The steps are on
+[Write a BRD](../use/write-a-brd.md). This section says how the
+finding works.
 
-- found together: questions up front on the stakeholders, the scope
-  of the document and the phasing, which the parent does not answer;
-  then the recast with the provenance map; then a walkthrough by
-  group, that is one item per message closed with a verdict, the
-  touched areas walked one per item;
-- drafted automatically, on the principal's word: Claude first
-  builds the provenance map from the parent, every item of the
-  parent, or every turn of the principal's side in a source, listed
-  as an ask, a question or an agreement. It then walks the Map alone
-  and writes the items from the map, so that nothing of the parent
-  is lost in silence. What the parent does not answer it leaves as a
-  TBC or an ASM, asks nothing, and returns the draft with the
+Claude first says whether the parent is stable enough to be derived
+from: it is approved, or the principal says so. This is information,
+never a gate. The course then depends on where the BRD starts:
+
+- **Found together.** There is no BRD yet. The questions the parent
+  does not answer come first: the stakeholders, the scope of the
+  document and the phasing. The recast follows, with the provenance
+  map. Then comes the walkthrough (the list worked with the principal
+  one item per message, each closed with his verdict), group by
+  group, the touched areas one per item.
+- **Drafted automatically.** There is no BRD yet, and the principal
+  asks for a draft. Claude builds the provenance map from the parent
+  first. It then walks the Map of the definition alone and writes the
+  items from the provenance map. It asks nothing. What the parent
+  does not answer, it leaves as a TBC or as an ASM. A step of a use
+  case or a guarantee that no place of the parent gives is marked as
+  Claude's reading, as the phasing is. A TBC whose owner the parent
+  does not name carries `owner: unassigned`, a valid open state until
+  the principal names the role. Claude returns the draft with the
   provenance map, the list of what it assumed and the list of what
-  must be supplied from outside. A step of a use case or a guarantee
-  that no place of the parent gives is marked as Claude's reading,
-  as the phasing is. A TBC whose owner the parent does not name
-  carries `owner: unassigned`, a valid open state, until the
-  principal names the role. Nothing is derived from the draft before
-  the principal has judged it.
+  must be supplied from outside. Nothing is derived from the draft
+  before the principal has judged it.
+- **From a file someone else gave.** The automatic way runs on the
+  file, and the result goes into `work/`. The provenance map then
+  lists every turn of the principal's side.
+- **After the parent moved.** The pass runs on what changed.
+- **A wording fix.** It is made directly.
 
-Where the result lands is the principal's word when he asks: in the
-chain as `30-brd.md`, or as a work product in `work/` where it is a
-quick look. A file put in runs the automatic way into `work/` only.
-A parent that moved runs the pass on what changed. A wording fix is
-made directly.
+Where the result of the first two ways lands is the principal's word
+when he asks. It lands in the chain as `30-brd.md`, or in `work/` as
+a work product where it is a quick look. The conclusion of such a
+quick look reaches the chain through the intent first, as with any
+work product.
 
-The Map of the definition is walked before the recast, to see what
-the parent does not answer, and again at the end. An area may stay
-empty when it was considered and found not to apply, said with the
-reason where the roster makes the area mandatory. Every pass ends
-by naming what changed, what stays open and what must come from
-outside. When the completion is reached, Claude offers the approval,
-the principal's as the house scheme has it, and says that the
-stakeholders' sign-off is the organisation's act.
+The definition carries a Map: the list of what a BRD finds. Claude
+walks it before the recast, to see what the parent does not answer,
+and again at the end. The Map of the engine is generic:
+
+- the stakeholders, as roles;
+- the scope of the work and the scope of the document;
+- the cut of the parent: what is carried now, what is phased later
+  and what is delegated onward;
+- the process view: the behaviour that must be agreed as a sequence;
+- the rules;
+- the touched areas of the enterprise;
+- the systems and the dependencies;
+- the qualities;
+- the things the business talks about: the entities, their states and
+  the system each is taken from;
+- what comes from outside;
+- the transition;
+- the phasing;
+- the assumptions;
+- success;
+- the terms;
+- what stays open.
+
+An area may stay empty when it was considered and found not to apply.
+Where the roster makes the area mandatory, the BRD gives the reason.
+The roles the roster names as signing or reviewing are walked into
+the Stakeholders table, each with its involvement or the reason it
+has none.
 
 ### What the forge cannot know, it names
 
 Much of a BRD is not in the intent or the assignment at all. It is
-in the documentation of the supplier and of the systems touched, in
-the standards and the regulation that apply, and in what the
-operations know. The analyst brings it from outside. Claude writes
-nothing of that from imagination: no value of a quality the
-stakeholders have not given, no behaviour of a system it has not
-read, no rule of a standard it has not been shown. In their place
-stands a DEP or a TBC with an owner. The owner is a role of the
-roster or of the stakeholders wherever one fits, and `unassigned`
-only where none does. The pass ends with the list of what must be
-supplied from outside, said plainly as the analyst's work and
-divided in two: what the forge already holds, by path, and what must
-be fetched. An assumption never settles an open question: what a TBC
-asks, no ASM answers. Claude copies nothing of the parent and
-invents no requirement the parent does not carry. What it finds
-missing in the parent it raises as a question, and a change of
-substance goes to the intent first.
+in three places outside them:
+
+- the documentation of the supplier and of the systems touched;
+- the standards and the regulation that apply;
+- what the operations know.
+
+The analyst brings it from outside. The forge does not do that work.
+It reminds. Claude writes none of it from imagination:
+
+- no value of a quality the stakeholders have not given;
+- no behaviour of a system it has not read;
+- no rule of a standard it has not been shown.
+
+In its place stands a DEP or a TBC with an owner. The owner is a role
+of the roster or of the stakeholders wherever one fits, and
+`unassigned` only where none does. The pass ends with the list of
+what must be supplied from outside, said plainly as the analyst's
+work. The list is divided in two: what the forge already holds, by
+path, and what must be fetched.
+
+An assumption never settles an open question. What a TBC asks, no ASM
+answers.
 
 ### The reviewers
 
-The BRD has no critic lens of its own. The `clarity` lens reads it
-with the BRD's Requirement style, and the `essence` lens compares it
-with its parent, as both read an assignment. A challenger persona
-`business-analyst` hunts what only someone who knows the business
-and its world would see ([Challenger
-personas](../reference/challenger-personas.md)):
+A BRD has no critic [lens](../reference/glossary.md) of its own.
+Three reviewers read it, each for a different thing:
 
-- the inside written as if the system or the regulation had been
-  consulted;
-- the standard that applies and is not there;
-- the quality that is silent;
-- the process that already exists;
-- the stakeholder not in the room;
-- solving in the wrong layer;
-- the assumption that is a decision;
-- what cannot be known here.
-
-It reads the resource indexes first. A check `brd` verifies the
-mechanics ([Checks](../reference/checks.md)): traceability both ways,
-a parent on every item, the sections that may not be silent, terms
-and links, and residue of the skeleton.
+- The critic reads it through two lenses it already has.
+  `/critique clarity` reads the BRD with the BRD's Requirement style.
+  `/critique essence` compares it with its parent and looks for
+  drift.
+- The challenger [persona](../reference/challenger-personas.md)
+  `business-analyst` hunts what only someone who knows the business
+  and its world would see: what was written from the parent though it
+  belongs to the world outside it. It reads the resource indexes
+  first. It runs as `/challenge business-analyst`.
+- The [check](../reference/checks.md) `brd` verifies the mechanics.
+  It runs as `/check brd`. The mechanics are:
+  - traceability both ways;
+  - a parent on every item;
+  - the sections that may not be silent;
+  - terms and links;
+  - residue of the template.
 
 ## Why
 
-The forge takes these positions on the BRD, each with the reason its
-owners record.
+**Why it exists.** The delivery must be able to estimate and the
+solution design must be able to start. The stakeholders of each area
+must be able to review their rules on their own. The BRD is built on
+the standards of the field (ISO/IEC/IEEE 29148, BABOK, IREB).
 
-**Why the BRD breaks the parent into rules, behaviour and
-qualities.** So that the stakeholders of each area can review their
-part on their own, the delivery can estimate and the solution design
-can start. The standards of the field agree on the shape of a
-requirement, and the BRD is built on them.
+**Why the analyst is the principal of a project of his own.** A
+project on a subject has one principal.
 
-**Why the organisation's content lives in a library of the instance
-and the engine carries a generic Map.** The roster of areas, the
-roles, the systems and the publishing convention are the
-organisation's, not the forge's. A library is a project of its own,
-cited by path, so the engine stays generic and a project with no
-enterprise around it writes `Roster: none`.
+**Why the engine carries a generic Map.** The content of the
+organisation lives in the instance's library, not in the engine. That
+content is the roster of areas and which of them are mandatory, the
+roles, the systems and the publishing convention. The reason is not
+recorded.
 
-**Why a BRD from someone else's file is a work product and never
-the artefact.** The trunk of the chain is the intent, and what
-someone said in a meeting does not become the principal's position
-by being run through a command. The file yields a work product, and
-the way into the chain is an intent handed over from the same file
-first.
+**Why a draft on the principal's word, and the provenance map
+first.** The recorded reason is the principal's way of working: a BRD
+pulled fast out of a document, to see what it shows. The provenance
+map comes first for a reason of its own. Items written before it lose
+what the parent asks.
 
-**Why the provenance map comes first when a BRD is drafted
-automatically.** The principal's way of working is a BRD pulled fast
-out of a document to see what it shows. Items written before the map
-lose asks of the parent; items written from the map lose nothing in
-silence.
+**Why a file from someone else never makes `30-brd.md`.** The trunk
+of the chain is the intent. What someone said in a meeting does not
+become the principal's position by being run through a command. The
+file therefore yields a work product, and the way into the chain is
+an intent handed over from the same file.
 
-**Why the forge names what it cannot know instead of writing it.**
-The forge does not do the analyst's outside work and will not; it
-reminds. A draft that writes a value, a behaviour or a rule from
-imagination presents as known what nobody gave, and what another
-party said leaks into rules and use cases as if the principal had
-decided it. The resource indexes are an input of every BRD so that
-what the forge already holds is never called unknown. An assumption
-never settles an open question, since what a TBC asks, no ASM
-answers.
+**Why the forge names what it cannot know.** Two failures are
+recorded as the reason. A draft that does not read what the forge
+holds calls it unknown. A source's answers leak into rules and use
+cases.
 
-**Why four prefixes and a stricter style.** The standards agree on
-the shape of a requirement and know no prefix. The forge adds only
-the prefixes it needs to say what an item is, and rejects what was
-added beyond them.
+**Why these prefixes and no others.** The standards of the field
+agree on the shape of a requirement and know no prefix. Three things
+a reader might expect are absent:
 
-**Why no prefix REF for a related document.** The forge cites a
-document by its path, an item carries no link, and related
-documents are a list without IDs.
+- No prefix REF for a related document. The forge cites a document by
+  its path, an item carries no link, and related documents are a list
+  without IDs.
+- No range of numbers for the qualities. A type is never told by a
+  number. NFR is a prefix instead, and groups take the next hundred,
+  as the ID scheme has it.
+- No prefix FR beside BR and NFR. A BR carries the functional
+  substance at the business level. A functional specification below
+  the BRD belongs to the next stage. The line between a BR and an FR
+  would be drawn at every item without ground in the content.
 
-**Why no range of numbers for the qualities.** A type is never told
-by a number. NFR is a prefix instead, and groups take the next
-hundred by the ID scheme.
+**Why no lens of its own.** The clarity lens and the essence lens
+read a BRD as they read an assignment. The mechanics belong to a
+check and the substance to a persona. The engine has these three
+places for the three jobs. A fourth kind of reviewer would say the
+same things in different words.
 
-**Why no prefix FR beside BR and NFR.** A BR carries the functional
-substance at the business level. A functional specification below
-the BRD belongs to the next stage, and the line between a BR and an
-FR would be drawn at every item without ground in the content.
+**Why the sign-off happens outside the forge.** The reason is not
+recorded.
 
-**Why no critic lens of its own.** The `clarity` and the `essence`
-lens read a BRD as they read an assignment, the mechanics are a
-check's and the substance a persona's. A fourth kind of reviewer
-would say the same things in different words. One critic doing
-three jobs is what the forge's three kinds of reviewer were made to
-avoid, and the persona finds what the lenses and the check do not.
+## A worked example
 
-**Why the stakeholders' sign-off stays outside the forge.** The
-reason is not recorded.
+A generic example, taken from no project: one business requirement
+with its parent, and one quality whose value nobody has given yet.
+
+```markdown
+## Business requirements
+
+### Ordering
+- **BR.0010** The Shop shall confirm every accepted Order to the
+  Customer. (REQ.0040)
+
+## Qualities
+- **NFR.0010** Reliability (service hours, availability, fault
+  tolerance, recovery point, recovery time): The Shop shall meet the
+  service hours, availability and recovery the stakeholders set
+  (TBC.0010). (category: reliability)
+
+## Open questions
+- **TBC.0010** (owner: Operations lead; blocks estimation: yes) Which
+  service hours, availability and recovery must the Shop meet?
+```
+
+- `BR.0010` is one sentence that can be shown met or not. It is
+  worded with `shall`. It cites its parent in brackets: a requirement
+  of the assignment.
+- `NFR.0010` carries no figure. No stakeholder has given one. It
+  cites the open question `TBC.0010` in brackets. It names its
+  category of the template. The parent named no quality here.
+- `TBC.0010` is defined once, in Open questions, with the role that
+  owns it and whether it blocks estimation. No assumption may answer
+  it.
+- The capitalised terms (Shop, Order, Customer) are each defined in
+  Terms.
 
 ## See also
 
@@ -444,5 +458,4 @@ reason is not recorded.
 - [Glossary](../reference/glossary.md): every term of the forge in
   one line.
 
-Generated on 2026-11-08 for version 7.0 from the files the
-front-matter names; never edited by hand.
+Generated on 2026-11-17 for version 7.12 from the files the front-matter names; never edited by hand.

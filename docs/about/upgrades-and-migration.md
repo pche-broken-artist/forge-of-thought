@@ -1,12 +1,14 @@
 ---
-generated: 2026-11-08
-version: 7.0
+generated: 2026-11-17
+version: 7.12
 made: derived
-inputs-hash: 90a17f80244eb025
+inputs-hash: b0e4d425ae47bdf2
 inputs:
   - projects/forge/10-intent.md#POS.0940
   - projects/forge/10-intent.md#POS.0820
   - projects/forge/10-intent.md#POS.1740
+  - projects/forge/10-intent.md#POS.2030
+  - projects/forge/40-solution-design.md#SOL.0800
   - CLAUDE.md#Persistence (git)
   - templates/project.md
   - scripts/forge-migrate.py
@@ -14,241 +16,287 @@ inputs:
 
 # Upgrades and migration
 
-An upgrade is a pull of the engine, and a migration is what a
-project needs when a release of the engine changes the shape of its
-files. This page explains how a project follows a new release, why
-an artefact written to older conventions is not a defect, and why a
-change of the shape of files is carried out by one command with a
-script rather than by hand. It is for whoever runs the forge on a
-project, for whoever extends the engine, and for whoever evaluates
-how the forge keeps its projects usable across releases.
+An upgrade is a pull of a new release of the engine (one git
+repository, whose branch `main` is the released line). A migration is
+the one command that brings a project to a new shape of files when a
+release changes that shape. This page explains how a project follows
+the engine, why a small change needs no more than a pull and a few
+lines, and why a change of the shape of files comes with a migration.
+It is for whoever uses the forge, extends it or weighs it.
 
 ## What it is
 
-The [engine](../reference/glossary.md) is one git repository with a
-remote. Every project under `projects/` is a repository of its own,
-which the engine does not know (see
-[Projects and the engine](projects-and-the-engine.md)). A project
-may also lie outside git altogether: a project "not under git" is a
-property, not a defect.
+**An upgrade is a pull.** The engine is upgraded by a fast-forward of
+its `main`, through `/pull`. Claude never pulls or merges on its own
+judgement.
 
-An upgrade is a fast-forward pull of the engine's `main`. The
-script `forge-pull` is the upgrade channel on the engine, and
-`/pull` is its door. Nothing else happens to a project by the
-upgrade itself.
+**The engine does not know the projects.** Every project under
+`projects/` is a repository of its own, and the engine's git ignores
+it. Why this is so is told in
+[Projects and the engine](projects-and-the-engine.md). A project may
+also live outside git: that is a property, not a defect.
 
-A project records no engine version. What a project is measured
-against is the current conventions: the checks (the reviewers that
-verify mechanical conformance with the conventions) compare a
-project with the conventions as they stand today, not with the
-release the project was last worked under. After a pull, `/pull`
-shows the Action required lines of the releases that were crossed
-and offers `/check light` and `/check project` on each project. The
-checks say what the conventions changed. The release notes' Action
-required lines say what to do about it.
+**A project records no engine version.** No file of a project says
+which release of the engine it was written under. The checks
+(`/check`) measure a project against the current conventions. Why a
+project records no engine version: the reason is not recorded.
 
-Artefacts do not expire with the conventions. The conventions
-evolve continuously, and an artefact remains valid under the
-conventions it was written to. Nonconformance of a finished or
-dormant project is therefore a fact to report, never a defect to
-chase. Bringing a project to newer conventions is an explicit
-decision of the principal (whoever's thinking is being forged, the
-final authority on content), made per project and never assumed.
+**Artefacts do not expire with the conventions.** The conventions
+evolve continuously. An [artefact](../reference/glossary.md) remains
+valid under the conventions it was written to. A finished or dormant
+project that no longer conforms is a fact to report, never a defect
+to chase. Bringing a project to newer conventions is an explicit
+decision of the principal (the person whose thinking is being
+forged). The decision is made per project and is never assumed.
 
-A migration is the exception to the lightness of an upgrade. A
-release that changes the shape of files comes with a migration. The
-shape of files is what files a project has and what their headers
-carry: whether the project file exists, whether a header carries a
-field that changes with a round, whether the threads live in one
-file or one file each, whether the ledger is tracked in git. Until
-a project is migrated, nothing writes into it. The map, the checks
-and every writing command say what the project file skeleton says
-and stop: a project without the project file is of the shape before
-the migration, the one remedy is `/migrate`, a command reports the
-shape as a fact, a check reports it as one finding with that fix,
-and nothing else of the new shape is raised against the project.
+**An upgrade is one of two sizes.** It asks a project for a few
+lines, or it changes the shape of files (which files a project has,
+what their headers carry and what git tracks). An upgrade of a few
+lines is brought in by Claude on the principal's word. A change of
+the shape of files comes with a migration.
 
 ## How it works
 
-Two kinds of upgrade are told apart by what they change.
+```
+a pull of the engine
+        |
+        v
+Action required of the releases crossed, the checks on each project
+        |
+        +-- a few lines -----------> Claude, on the principal's word
+        |
+        +-- the shape of files ----> /migrate, once per project,
+                                     on one clone, on main;
+                                     then /save; everyone else pulls
+```
 
-An upgrade of a few lines is brought in after the checks have named
-it. The checks say what the conventions changed, the release notes
-say what to do, and Claude migrates the project on the principal's
-word. This is the whole migration path of any instance, the
-principal's own or a third party's alike.
+### After a pull
 
-A release that changes the shape of files comes with a migration:
-`/migrate [slug]`, one command. A script, `scripts/forge-migrate.py`,
-runs every deterministic step, and Claude, within the same command,
-does what needs judgement. The result is then the same on every
-clone. Running it is described in
-[Migrate a project](../use/migrate-a-project.md).
-
-The script recognises the shape of a project as a set of marks, one
-per step, never by an engine version in the project. The marks it
-knows are these:
-
-- the project file `project.md` exists;
-- no header of an artefact, a work specification, a recipe, an index
-  or the documentation map carries a field that changes with a round;
-- `threads/` exists, or the project has no threads file;
-- `.gitattributes` exists;
-- `ledger.md` is out of git's index.
-
-A library takes only the marks that apply to it: the project file,
-the headers, the ledger and the attributes.
-
-The script runs only the steps whose marks are missing, and each
-step verifies its own mark afterwards. A project left unfinished is
-reported. The dry run is the default: it prints the marks and, for
-every step still missing, what the step would change. `--apply`
-performs the missing steps.
-
-What the steps do, in the order of one run:
-
-- the fields that change with a round leave the headers of the
-  artefacts, the work specifications, the recipes, the indexes and
-  the documentation map;
-- `project.md` is written from `templates/project.md`, the slug from
-  the directory's name, the kind and the language from the header
-  of the hand-kept ledger, `thought` and `en` when absent;
-- what only the hand-kept ledger knew becomes records: the mining of
-  a brief as a record in the intent's history, the state of a work
-  product as a record in its specification's history, a source's
-  date, origin and form as fields of its index entry, a published
-  file's provenance as its companion; then the hand-kept ledger is
-  copied as it stands to `ledger.archive.md`, immutable, and
-  `ledger.md` is taken out of git's index and put into the project's
-  `.gitignore` (what became of the ledger is the matter of
-  [The ledger, made from the records](the-ledger.md));
-- the threads file is cut into one file per thread under `threads/`,
-  the text kept, the artefact each thread concerns taken from its
-  bracket, its origin guessed from the first sentence and printed
-  for the principal's judgement, and the old file deleted from the
-  tree;
-- `.gitattributes` is written from `templates/gitattributes`.
-
-A Waiting line without an ID has no home in records and is printed
-for the principal instead. The author of every record the script
-writes is the handle of the instance file. Without that handle the
-script refuses.
-
-The script commits nothing. `/save` follows, on the principal's
-word. `--undo` takes back the last `--apply` from the script's own
-manifest in the engine's `tmp/`: changed and deleted tracked files
-are restored from the index, created files are removed, the ledger
-is put back into the index, and the ignore line is taken out. This
-is possible because the script stages nothing.
-
-Where the project is a repository of its own, `--apply` refuses to
-run in three situations:
-
-- the working tree has unsaved changes to tracked files (an
-  untracked file is no risk, since `--undo` restores tracked files);
-- the branch is behind or diverged from its origin;
-- the branch is any but `main`.
-
-The migration is one large change. It runs once, on one clone, and
-everyone else pulls before working on. This is the same rule that
-holds for everything that makes a derived file: `/release`,
-`/publish`, `/document` and `/migrate` run on `main` only, refuse a
-repository behind or diverged from its origin and offer `/pull`.
-
-A project outside git is migrated the same, under none of the
-refusals of git. The forge runs no git on it. The way back is the
-backup the script tells the principal to take before `--apply`, and
-`--undo` refuses there. A run that stops midway is finished by
-running the script again, the marks being its memory.
-
-A tag is taken on each project immediately before its migration,
-and on the engine before its own. Going back after the save is the
-principal's own hand in git, and always the engine and every project
-together. Because the engine refuses the old shape once it is
-released.
-
-The steps after a pull, from the Action required lines to the saved
-project, are the matter of
+After a pull of the engine, `/pull` shows the Action required lines
+of the releases crossed. Action required is the part of the release
+notes that says what to do. `/pull` then offers `/check light` and
+`/check project` on each project. The checks say what the conventions
+changed. The steps are told in
 [Upgrade the engine](../use/upgrade-the-engine.md).
+
+### An upgrade of a few lines
+
+The checks name what no longer conforms. Where that is a matter of a
+few lines, Claude brings the project to the new conventions on the
+principal's word. This is the whole upgrade path of any instance (one
+installation of the forge), the principal's own and a third party's
+alike.
+
+### A change of the shape of files
+
+A release that changes the shape of files comes with a migration
+(`/migrate [slug]`), run always on the principal's word. It is one
+command. The script `scripts/forge-migrate.py` does every
+deterministic step. Claude does, within the same command, what needs
+judgement. One example of judgement: the script guesses the origin of
+each [thread](../reference/glossary.md) and prints its guess, and
+Claude judges the origins from that print.
+
+**The shape is a set of marks.** The script recognises the shape of a
+project from the project itself, never by an engine version in it. It
+reads one mark per step:
+
+- the project file exists (`project.md`: the slug, the kind and the
+  language of the project);
+- no header of an artefact, a work specification, a recipe, a
+  resource index or the documentation map carries a field that
+  changes with a round;
+- the directory `threads/` exists, or the project has no threads
+  file;
+- the file `.gitattributes` exists;
+- [the ledger](the-ledger.md) (`ledger.md`, the file of a project's
+  state, made at read time and never in git) is out of git's index.
+
+Each kind of document named here, and each other term of the forge
+that this page leaves unexplained, has its line in the
+[Glossary](../reference/glossary.md).
+
+**Only the missing steps run.** Without an option the script makes a
+dry run (a run that changes nothing): it prints the marks and, for
+every step still missing, what it would change. With `--apply` it
+runs the missing steps and no others. Each step verifies its own mark
+afterwards, and a project left unfinished is reported. A project of
+the kind `library` takes every step but the one for the threads.
+
+**Nothing is committed, and a run can be undone.** The migration
+commits nothing: `/save` follows it. Before that save, `--undo` takes
+back the last `--apply` from the script's own manifest (its list of
+what the run changed, created and deleted). The tracked files the run
+changed or deleted are restored, and the files it created are
+removed. Nothing the run did is left behind, and nothing the run did
+not make is removed.
+
+**Once per project, on one clone, on `main`.** A migration is one
+large change. It runs once per project, on one clone, and everyone
+else pulls before working on. A project already migrated on another
+clone is pulled through `/pull` and not migrated again. Whose machine
+or instance the clone is on makes no difference: everyone who uses
+the engine migrates their own projects. Where the project is a
+repository of its own, `--apply` refuses in three cases:
+
+- the working tree has unsaved changes to tracked files (an untracked
+  file is no risk: the undo restores tracked files);
+- the branch is behind its origin or has diverged from it, for which
+  `/pull` is offered;
+- the branch is any other than `main`.
+
+Every record the script writes carries the handle that the instance
+file (`CLAUDE.local.md`) names as the author. Without that handle the
+script refuses as well.
+
+**A project outside git is migrated the same.** The forge runs no git
+on such a project, and none of the three refusals applies. The way
+back is the backup taken before `--apply`: the dry run and `--apply`
+both say so, and `--undo` refuses there. A run that stops midway is
+finished by running it again. The marks are its memory.
+
+**Until a project is migrated, nothing writes into it.** A project
+without the project file is of the shape before the migration. A
+command that would write into it reports the shape as a fact ("shape
+before the migration, run `/migrate`") and stops. A check reports the
+shape as one finding with that one fix, and raises nothing else of
+the new shape against the project. The project is still read. The one
+remedy is `/migrate`, and running it stays the principal's decision
+per project.
+
+### What needs no migration
+
+A change of a template's wording is not a change of the shape of
+files. A [template](../reference/templates.md) carries a comment that
+says how a file is made and kept. The comment is read in the
+template, by whoever makes the file or checks it. A file made from a
+template carries none of that comment. Of the template's comments it
+keeps one line, which names the template and never repeats its
+wording:
+
+```
+<!-- Shape: templates/<name>.md -->
+```
+
+The line tells whoever writes into the file that the file has a shape
+and where the shape stands. A change of a template's wording
+therefore changes no file of any project, and no migration follows
+it.
+
+A file made before this rule may keep the comment it was born with.
+Nothing reads that comment, no check reports it, and what holds is
+the template's wording alone. The owner of a project may have the
+comment replaced by the line. Nobody is made to, and an immutable
+file keeps its comment. The replacement is a second form of the
+migration (the script's option `--comments`), told in
+[Migrate a project](../use/migrate-a-project.md): a step of its own
+that has no mark, is never a condition of a write and runs only on
+the owner's word.
 
 ## Why
 
-The migration is a script and one command because of what a shape
-change does. The position on upgrades was made for upgrades of a
-few lines, which Claude brings in on the principal's word. A change
-of the shape of files rewrites files of every project, here and in
-every colleague's clone, and must come out the same everywhere. A
-migration done by hand cannot promise that. A script for every
-deterministic step can, and Claude is kept for what needs judgement.
+**Why one command with a script.** The upgrade path of a pull, the
+checks and Claude's hand was made for upgrades of a few lines. A
+change of the shape of files rewrites files of every project, in
+every clone. It must come out the same everywhere, and a migration by
+hand cannot promise that. One script for every deterministic step
+gives the same result on every clone.
 
-The shape is read as marks and not as a recorded engine version
-because a project records no engine version. Why a project records
-none is not recorded.
+**Why marks.** The marks were chosen against an engine version
+written into the project, which the rule that a project records no
+engine version excludes. Why a project records no engine version: the
+reason is not recorded. The marks are also the memory of a run: a run
+that stopped is run again, and only the missing steps run.
 
-Artefacts do not expire because an artefact remains valid under the
-conventions it was written to. A finished or dormant project that no
-longer conforms is reported, not chased, and the decision to bring
-it current stays with the principal per project.
+**Why a project of the old shape is read and not written.** The
+engine cannot write two shapes. The migration stays the principal's
+decision per project.
 
-A project of the old shape is read and not written because the
-engine cannot write two shapes. Until the principal migrates it, the
-migration stays his decision per project.
+**Why once, on one clone, on `main`.** The migration is one large
+change. It is made once and pulled by everyone else, in keeping with
+the aim that the result is the same on every clone.
 
-The migration runs once, on one clone, because it is one large
-change. Everyone else pulls the result instead of running it again.
+**Why a project outside git is not refused.** Being outside git is a
+property of a project, not a defect.
 
-A project outside git is migrated the same because being outside git
-is a property, not a defect. Its safeguards are different in kind,
-a backup and the marks, not absent.
+**Why the way back is the engine and every project together.** The
+engine refuses the old shape once the release is out.
+
+**Why a file keeps one line of its template and not the comment.** A
+rule that a comment owns stands once, in the template. A change of
+the template's wording then changes no file of any project. The one
+line stays for whoever writes into the file.
 
 ## A worked example
 
-A project `my-project` was last worked under older conventions. It
-has no `project.md`, its intent header carries a date, its threads
-stand in one file, and its hand-kept ledger is tracked in git. The
-engine is pulled, and `/pull` shows the Action required lines of the
-releases crossed, among them the line that says to run the
-migration on every project, on one clone, then save. From here on
-the checks report `my-project` as one finding, the shape before the
-migration with `/migrate` as its fix, and nothing of the new shape
-is raised against it besides. Nothing writes into the project.
+A generic project (`my-project`) was made before a release that
+changed the shape of files. It is a repository of its own, and none
+of the three refusals above applies to it.
 
-The principal runs the dry run, `/migrate my-project`. The script
-prints the five marks: the project file is missing, the headers
-carry a field that changes with a round, the threads file exists,
-`.gitattributes` is missing, the ledger is in git's index. Under
-each missing mark it prints what the step would change, and nothing
-is written.
+The principal pulls the engine. Action required says to run the
+migration on every project the clone keeps, on one clone, and then to
+save. Until then a command that would write into `my-project` says
+"shape before the migration, run `/migrate`" and stops.
 
-The project is on `main`, clean and up to date with its origin, so
-the principal lets the migration apply. The date leaves the intent
-header. `project.md` appears with the slug, the kind and the language
-taken from the ledger's header. The records that only the ledger
-knew are appended to the histories, the ledger is copied to
-`ledger.archive.md`, and `ledger.md` leaves the index. The threads
-file is cut into one file per thread, and the script prints each
-guessed origin for the principal to judge, with one Waiting line
-that had no ID. `.gitattributes` is written. Each step verifies its
-mark, and the script reports the project as finished.
+The principal asks for `/migrate my-project`. The dry run prints the
+five marks, none of them present, and what each missing step would
+change. On the principal's word the missing steps run:
 
-Nothing is committed yet. If the result is not wanted, `--undo`
-takes it back from the manifest. If it is, `/save` records it, and
-everyone else working on `my-project` pulls before working on. A
-second run of the dry run finds every mark present and nothing to
-do.
+| What the script reads | Before the migration | After the migration |
+|---|---|---|
+| The project file | none | `project.md`: the slug from the directory's name, the kind and the language from the header of the hand-kept ledger (`thought` and `en` when absent) |
+| The headers | `date` and `last_change` in the header of an artefact, `updated` in the header of a resource index | no field that changes with a round |
+| The threads | one file (`threads.md`) | one file per thread under `threads/`, the old file deleted |
+| The attributes | none | `.gitattributes`, made from its template |
+| The ledger | `ledger.md`, kept by hand and tracked in git | `ledger.md` out of git's index and named in `.gitignore`; the hand-kept one copied as it stood to `ledger.archive.md`, immutable |
+
+What only the hand-kept ledger knew moves to where it now lives:
+
+- that a brief was taken into the intent: a record in the intent's
+  history;
+- the state of a work product: a record in the history of its
+  specification;
+- the date and the form of a source: the fields `Date` and `Form` of
+  its entry in `sources/00-INDEX.md`;
+- the provenance of a published file: the companion
+  `published/<recipe>.md`.
+
+What has no home in the records is printed for the principal. The
+rest of that story is told in
+[The ledger, made from the records](the-ledger.md).
+
+The script prints the origin it guessed for each thread, and Claude
+judges the origins from the print. `/check light` and `/check
+project` follow. The run has committed nothing, and the principal
+saves with `/save`. Had the result not been wanted, `--undo` before
+the save would have taken the whole run back.
+
+A colleague who keeps a clone of `my-project` pulls and migrates
+nothing. A dry run on either clone now finds every mark present and
+nothing to change.
+
+Under the command, the script takes three forms:
+
+```
+python scripts/forge-migrate.py my-project            # dry run
+python scripts/forge-migrate.py my-project --apply    # perform
+python scripts/forge-migrate.py my-project --undo     # take back
+```
 
 ## See also
 
-- [Upgrade the engine](../use/upgrade-the-engine.md): the steps
-  after a pull of the engine.
+- [Upgrade the engine](../use/upgrade-the-engine.md): the steps after
+  a pull of the engine.
 - [Migrate a project](../use/migrate-a-project.md): running
-  `/migrate`.
+  `/migrate`, and its second form for the templates' comments.
 - [Projects and the engine](projects-and-the-engine.md): why the
   engine does not know the projects.
 - [The ledger, made from the records](the-ledger.md): what the first
   migration made of the hand-kept ledger.
+- [Templates](../reference/templates.md): the templates and the line
+  that names one in a file made from it.
 - [Glossary](../reference/glossary.md): every term of the forge in
   one line.
 
-Generated on 2026-11-08 for version 7.0 from the files the
+Generated on 2026-11-17 for version 7.12 from the files the
 front-matter names; never edited by hand.

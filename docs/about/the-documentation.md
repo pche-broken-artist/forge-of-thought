@@ -1,8 +1,8 @@
 ---
-generated: 2026-11-08
-version: 7.0
+generated: 2026-11-17
+version: 7.12
 made: derived
-inputs-hash: f58136419fd60d06
+inputs-hash: 7d48184ffd82c513
 inputs:
   - CLAUDE.md#Document chain
   - .claude/skills/document/SKILL.md
@@ -28,450 +28,499 @@ inputs:
 
 # The documentation
 
-The documentation of a project is a set of pages in `docs/`, each
-page on one topic, with an index that lists every page and names
-each reader's path through them. This page explains what the
-documentation is, who it is for, how one run makes it, and why it is
-generated from the project's files rather than written by hand. It
-is for the user who reads the pages, for the extender who wants a
-page to say something else, and for the evaluator who wants to know
-how a documentation nobody writes stays true to what it describes.
+The documentation of a project is a set of pages of one topic each in
+`docs/`, with an index that names each reader's path through them.
+This page explains what the documentation is, who reads it, how one
+run makes it and why it is generated rather than written. It is for
+all three readers of the documentation: the user, the extender and
+the evaluator.
 
 ## What it is
 
-The documentation is kept with the project. It is readable where the
-project is published and in a clone. Its pages lie in `docs/` at the
-root of the project they document; for the engine of the forge that
-is `docs/` at the engine root. Its index is `docs/README.md`.
+### Pages, an index and three readers
 
-### The readers
+Every page has one topic. The pages are kept with the project. They
+are readable where the project is published and in a clone. The index
+(`docs/README.md`) lists every page with one line: the question the
+page answers. It also names a path for each reader: a few pages in
+the order he reads them.
 
-Three readers, in this order of weight:
+The documentation has three readers, in this order of weight:
 
-1. The user, who clones the forge and forges his own thinking in it.
-2. The extender, who adds an artefact, a lens, a persona, a genre, a
-   check, a command or a script.
-3. The evaluator, who never runs it and wants to understand what it
-   is and how it works. He gets the concept pages and nothing made
-   for him alone.
+1. **The user** clones the thing and works with it. For the engine
+   (what the forge runs on: its core, skills, agents, templates and
+   scripts), he clones the forge and forges his own thinking in it.
+2. **The extender** adds to it. For the engine, he adds an artefact,
+   a lens, a persona, a genre, a check, a command or a script. Each
+   of these terms has its line in the
+   [Glossary](../reference/glossary.md).
+3. **The evaluator** never runs it and wants to understand what it is
+   and how it works. He gets the concept pages and nothing made for
+   him alone.
 
-The reason for this order is not recorded. Each reader gets a path:
-a few pages of the documentation in the order he reads them, printed
-as links at the head of the index.
+The reason for this order is not recorded.
 
-### The sections
+### Five sections
 
-Five sections by the reader's journey, each a directory under
-`docs/`, the same for every project:
+The pages lie in five sections by the reader's journey, the same for
+every project. Each section is a directory under `docs/`:
 
-- `start/`: how-to pages for the user. What the thing is, what must
-  be on the machine, the first setup, the first result.
-- `use/`: how-to pages for the user. One page per job the thing has
-  a command or a procedure for.
-- `about/`: explanation for all three readers. One page per concept
-  and per kind of artefact or part, the reasons included.
-- `extend/`: how-to pages with the explanation they need, for the
-  extender. What the thing is made of, how a change is made, proved
-  and recorded, one page per kind of addition.
-- `reference/`: derived fact for all. The commands, the rosters, the
-  conventions, the layout, the scripts, the templates, a glossary.
-  It mirrors its owners and never explains.
+- `start/`: how-to pages on what the thing is, what must be on the
+  machine, the first setup and the first result.
+- `use/`: one page per job the thing has a command or a procedure
+  for.
+- `about/`: one page per concept and per kind of artefact or part,
+  the reasons included.
+- `extend/`: what the thing is made of, how a change is made, proved
+  and recorded, and one page per kind of addition.
+- `reference/`: the commands, the rosters, the conventions, the
+  layout, the scripts, the templates and a glossary. This section
+  mirrors its owners and never explains.
 
-A section or a page with no material is left out, never left empty.
-A project that is not installed has no install page, and that is no
+A section or a page with no material is left out, never left empty. A
+project that is not installed has no install page, and that is no
 gap.
 
-### The kinds of a page
+### One kind per page
 
-Each page has one topic and one kind. The kind says what kind of
-content belongs on the page and what does not:
+Each page is of one kind. The kind says what content belongs on the
+page and what does not:
 
-- a how-to carries steps, commands and what the person sees, never
-  the reasons;
-- an explanation carries what a thing is, how it works and why,
-  never a procedure and never a listing;
-- a reference states facts in the structure of what it mirrors,
-  free of interpretation, and never explains.
+- A **how-to** carries what the reader does, step by step where there
+  are steps, and what he sees. It never carries the reasons.
+- An **explanation** carries what a thing is, how it works and why it
+  is so. It is never a procedure and never a listing.
+- A **reference** states facts in the structure of what it mirrors: a
+  table where its input is a table. It never explains.
 
-Every page opens with what it is for and for whom, and stands on its
-own. A reader who lands on it first understands it without another
-page.
+Each page opens with what it is for and for whom, and it stands on
+its own.
 
-### One home page, every page reached
+Two rules hold across the sections:
 
-One rule of the forge has one home page: the page whose kind and
-topic it is. Every other page that touches the rule says one
-sentence and links to the home page. The same matter written on two
-pages is a defect of the plan, not of the writer. Every page is
-reached from another page: for every page at least one other page
-names it under its links, chosen where a reader of that page would
-ask for it. A page no other page would name is a page the
-documentation does not need.
+- One rule of the forge has one home page: the page whose kind and
+  topic it is. Every other page that touches the rule says one
+  sentence and links. The same matter written on two pages is a
+  defect of the plan, not of the writer.
+- Every page is reached from another page. The index is not the only
+  way in: at least one other page links to it, at a place where a
+  reader of that other page would ask for it.
 
-### Generated, never composed
+### Generated, never written by hand
 
-The documentation is generated from the project's documents and
-never composed or maintained by hand. A page either mirrors the files
-that own its topic or is derived from named evidence in several
-files, and its front-matter says which (`made: mirrored` or `made:
-derived`). A mirrored page restates what its inputs say, in the
-reader's words. A derived page puts together what no single file
-says, by the reasoning its entry in the documentation map gives. A
-page is never invented: what the inputs do not support is left out
-and reported, never guessed. So a page cannot drift from what it
-mirrors.
+The documentation is generated from the project's documents. It is
+never composed or maintained by hand. Each page is made from its
+owners: the files in which its topic is stated. A page is made in one
+of two ways, and its front-matter says which:
 
-The documentation map is the plan the pages are made from: one entry
-per page with everything a writer needs to make that page alone. It
-is the file `docs-map.md` beside the owning project's ledger (the
-ledger is the project's state file, made at read time). The map is
-never in `docs/` and never shown to the reader. Its header carries
-only its target (the engine, or the project's slug) and its owner.
-The fields of an entry and of a page's front-matter are given field
-by field in [Documentation map](../reference/documentation-map.md).
+- A **mirrored** page restates what its owners say, in the reader's
+  words.
+- A **derived** page puts together what no single file says, from
+  named evidence in several files.
 
-### What the documentation is not
+A page is never invented. What the files do not support is left out
+and reported, never guessed. An example that shows the shape a
+template or a convention defines, plainly generic and taken from no
+project, counts as a mirror of that owner. A diagram drawn from what
+the owners say counts the same.
 
-A page is not a render: no recipe stands behind it, and `/render`
-is untouched. What renders are is said in
-[Renders and recipes](renders-and-recipes.md). The README of the
-project is not a page either: it is a render, cut to what orients
-and points, and it stays English, a translation being a render. The
-folder `docs/videos/` of the engine is not the documentation's. It
-is the public folder of the videos a project sends out, and the
-planner, the index, the state and the check read `docs/` without it.
-What it is for is said in
-[The screenplay and its player](the-screenplay-and-its-player.md).
+A page is not a render. A render is an output for one audience,
+generated from a recipe: a versioned file that says how the render is
+made. No recipe stands behind a page, and the command `/render` has
+no part in the documentation. See
+[Renders and recipes](renders-and-recipes.md).
 
-## How it works
+### The documentation map
 
-### One run
+The pages are made from the documentation map (`docs-map.md`). It
+holds one entry per page, with everything a writer needs to make that
+page alone. Three things hold for it:
 
-One command makes the documentation, `/document [slug]`. Bare, the
-target is the engine and the pages land in `docs/` at the engine
-root. With a slug, the target is that project and the pages land in
-`projects/<slug>/docs/`. The run asks nothing; the reason it asks
-nothing is not recorded. How the command is used is said in
-[Generate the documentation](../use/generate-the-documentation.md).
-A run looks like this:
+- It lies beside the ledger of the owning project, never in `docs/`.
+  The ledger is the file of a project's state, which a script makes
+  at read time. The owning project is the project that owns the
+  documentation: for the engine the forge's own project
+  (`projects/forge`), for a project the project itself.
+- Its header carries only its target (`engine` or the slug of the
+  project) and its owner (the owning project).
+- It is never shown to the reader. The scripts and the writers read
+  it.
 
-```
-  /document [slug]            on main only, the repository up to
-        |                     date with its origin
-        v
-+------------------------+    the previous map, taken from git
-|  the planner           | <--------------------------------------
-|  reads the target      |
-|  writes the map        | ---> docs-map.md   (beside the ledger)
-+------------------------+
-        |
-        v
-+------------------------+    hashes each entry's inputs, a part
-|  docs-state (script)   |    as that part, and the generator;
-|                        |    sets new | regenerate | keep | remove;
-|                        |    writes one task per page to make
-+------------------------+
-        |
-        v
-+------------------------+    one writer per page, each reading
-|  the writers           |    its entry and its inputs from disk
-|  one page each         | ---> docs/<section>/<page>.md
-+------------------------+
-        |
-        v
-+------------------------+
-|  docs-index (script)   | ---> docs/README.md
-|  docs-check (script)   |      a page that fails is made once more
-+------------------------+
-        |
-        v
-  the ledger remade; what the run could not place is filed in
-  reviews/ as a check's report
-```
-
-### The agents and what they share
-
-Two agents make the documentation, each a subagent: an isolated run
-of Claude that sees nothing of the working conversation and reads
-every input from disk in its own run. The planner reads the target
-and writes the documentation map; it writes no page. The writer
-makes one page from its entry in the map and the inputs the entry
-names; it sees no other page and no map beyond its entry. The two
-share one contract, as the reviewers of the forge do. The contract
-owns their conduct and isolation, the kinds of a page, what must
-never reach a page or the map, the one voice of the pages and the
-shape of a sentence. What the pages say in that voice: Claude is
-"it", the reader of a how-to is "you", and the principal (the person
-whose thinking is forged) is named by role.
-
-The planner runs on the session model, the model the working
-conversation runs on. A writer runs on a faster model for a mirrored
-page and on the session model for a derived page. The choice is made
-by the entry's `made` field, mechanically, never per run.
-
-### What the planner reads
-
-For the engine, the planner reads the core file `CLAUDE.md`; every
-file under `.claude/skills/`, the commands, the definitions of the
-artefacts, the genre files, the contracts and the walkthrough skill
-among them; every file under `.claude/agents/`; the settings file
-`.claude/settings.json`; every file under `templates/`; the help
-header of every script under `scripts/`; and, in the owning project,
-the briefs, the intent, the threads, the solution design, the
-decisions and the recipes. The recipes own pinned facts no other file
-carries, such as the install lines and the public address of the
-repository. The index of the project's research is read for
-orientation only.
-
-The owning project of the engine's documentation is the forge's own
-project, `projects/forge`, a repository of its own cloned beside the
-engine by whoever develops it. Because the planner reads that
-project, the engine's documentation is made where the project is
-cloned beside the engine, and the paths `projects/forge/...` the
-pages cite are the paths of that clone. What the forge's own project
-is, is said in [Projects and the engine](projects-and-the-engine.md).
-
-For a project, the planner reads its briefs, its intent, its
-threads, the layers below the intent, its ledger, the indexes of
-`sources/` and `research/`, its recipes, and whatever those documents
-point to on disk. What a project wants documented beyond that is not
-a setting of its own.
-
-Never read: the instance file `CLAUDE.local.md`, the local settings,
-any memory directory, the renders and the README of the target, and
-the bodies of the scripts below their help header. The renders and
-the README are outputs, not owners.
-
-### The previous map
-
-The planner receives the map of the previous run, where one exists.
-That map is taken from git, as last committed, since the map's
-header carries no field that changes with a run. With it the planner
-receives the open findings of the last documentation report that
-concern the map. So the planner brings those entries to their
-owners' wording instead of carrying the fault over. With a previous
-map every page that still has material keeps its path. Without one
-every page is new.
-
-### What is regenerated
-
-A run regenerates only the pages whose inputs changed. The state of
-every page is computed by the script `scripts/docs-state.py`, never
-judged. For every entry the script hashes the entry's text together
-with the content of every input the entry names. An input is a file
-or a named part of one: a section by its heading, or an item by its
-ID, hashed as that part. So a change elsewhere in the file leaves
-the page as it is. The generator is hashed with the inputs, that is
-the writer's definition and the contract, with their whitespace
-normalised. So a change of the rule a page is made by regenerates
-every page made by the old rule, and a re-wrap of the rule
-regenerates nothing. The page that exists at the entry's path
-carries the hash it was made from in its front-matter,
-`inputs-hash`. The two are compared:
-
-- `new`: no page at the path;
-- `regenerate`: a page exists and its hash differs, because an input
-  or the entry changed;
-- `keep`: a page exists with the same hash;
-- `remove`: a page under `docs/` that no entry names, or the page of
-  an entry the planner marked for removal.
-
-For every new or regenerated entry the script writes one task file:
-the page's path, the date, the version the page is made for (the
-version of the owning project's intent), the hash the page is to
-carry, the entry verbatim and the titles of the pages it links to.
-That task is a writer's whole prompt. An input the map names and the
-disk does not have is hashed as missing; the page is regenerated and
-its writer reports the gap.
-
-### Index and check
-
-The script `scripts/docs-index.py` derives the index `docs/README.md`
-from the map: the reader paths as links, one line per page (the
-question the page answers), and the version of the owning project's
-intent. The script `scripts/docs-check.py` scans the pages for
-broken links, long dashes in prose and instance facts before they
-are kept. A page that fails is regenerated once with the failure
-named in its task. A page that fails twice is reported and left out
-of the documentation, never mended by hand. The owning project's
-ledger is then remade; its Renders table carries the index with the
-map as its input, and nobody writes a row.
-
-### What the run cannot place
-
-What a run cannot place is a finding of the run: a fact a page needs
-and no file owns, a matter the map and an owner disagree on, a claim
-the map asked for and no input carried, a reason a page wants and no
-file records. The command files these as the run's own report in
-`reviews/`, in the shape a check's report has, one finding per
-matter with a finding number of the owning project. The ledger reads
-it as any check's report, and the findings are settled by
-walkthrough: the one-item-at-a-time conversation in which the
-principal gives a verdict on each. A mend lands in the owner, never
-on a page. A run that leaves nothing files nothing. Nothing is
-invented to fill a gap: a fact without an owner waits for the
-principal to give it a home. What a check is and how its findings are
-settled is said in [The check](the-check.md).
-
-### Mending a page
-
-A page is never mended by hand. The mend goes into the file that
-owns the matter, and the page takes it at the next run. How to find
-that file and change it is said in
-[Change a documentation page](../extend/change-a-documentation-page.md).
-A reason a page wants and no file records is not written on the
-page: the page says that the reason is not recorded, the writer
-reports the place, and the run lists every such place for the
-principal. Where he wants the reason, it enters the intent in its
-own round and reaches the page at the next run.
-
-### A release and the documentation
-
-A release never regenerates the documentation on its own judgement.
-By hand it reports the age of the index against the intent's version
-and offers `/document`. With `--auto` it asks once before anything
-runs. So the pages pass under the principal's eyes as every
-regenerated render does.
-
-### The index as the manual's source
-
-The index is also what the manual `/man` reads to answer a need said
-in free words, since every page carries the one question it answers.
-How to ask is said in
-[Look up a command, or ask how to do something](../use/look-up-a-command.md).
+The entry of the documentation map and the front-matter of a page are
+described field by field in
+[Documentation map](../reference/documentation-map.md).
 
 ### The language of the pages
 
 The pages are written in the project's language, as its artefacts
-are; the README stays English. Which language each kind of document
-carries is said in [Languages](languages.md).
+(the documents of its chain) are. The project file sets that
+language. The README stays English. See [Languages](languages.md).
+
+### What lies under `docs/` and is not the documentation
+
+The folder `docs/videos/` of the engine does not belong to the
+documentation. It is the engine's one public folder. A project's
+recipe may send an output there by its `output:` path. The engine
+carries the file only: its recipe, its render, its provenance and its
+history stay in the project that made it. The planner never maps the
+folder. The scripts of the index, of the state and of the check read
+`docs/` without it. The documentation is generated and verified
+around the folder and leaves it alone. See
+[The screenplay and its player](the-screenplay-and-its-player.md).
+
+## How it works
+
+### One command, one run
+
+One command makes the documentation: `/document [slug]`. Bare, its
+target is the engine: the owning project is `projects/forge` and the
+pages land in `docs/` at the engine root. With a slug, its target is
+that project, and the pages land in `projects/<slug>/docs/`. The run
+asks nothing. The reason it asks nothing is not recorded. Claude
+never runs the command on its own judgement. Running it is the topic
+of [Generate the documentation](../use/generate-the-documentation.md).
+
+One documentation run:
+
+```text
+   the target on disk  +  the previous documentation map, from git
+                                |
+                                v
+                 +------------------------------+
+                 | planner                      |
+                 | plans every page             |
+                 +------------------------------+
+                                |
+                                v
+       docs-map.md: one entry per page, beside the ledger
+                                |
+                                v
+                 +------------------------------+
+                 | scripts/docs-state.py        |
+                 | hashes each entry, its       |
+                 | inputs and the rule the      |
+                 | pages are made by            |
+                 +------------------------------+
+                    |           |            |
+                  keep       remove    new, regenerate
+                    |           |            |
+                the page    the page   one task file
+                stays       is deleted per page
+                                             |
+                                             v
+                 +------------------------------+
+                 | writers, one per page        |
+                 | each reads its task and the  |
+                 | inputs its entry names       |
+                 +------------------------------+
+                                |
+                                v
+                 +------------------------------+
+                 | scripts/docs-index.py        |
+                 | derives docs/README.md from  |
+                 | the documentation map        |
+                 +------------------------------+
+                                |
+                                v
+                 +------------------------------+
+                 | scripts/docs-check.py        |
+                 | scans the pages before they  |
+                 | are kept                     |
+                 +------------------------------+
+                                |
+                                v
+       the ledger made again; the run's report; what the run
+       could not place, filed in reviews/
+```
+
+The index script derives the index from the documentation map: the
+reader paths as links and one line per page, with the version of the
+owning project's intent. The intent is the trunk of a project's chain
+of documents, which starts at a brief. The check script scans the
+pages for broken links, for long dashes in prose and for instance
+facts, that is facts of one installation. A page that fails the scan
+is made again once. A page that fails twice is left out of the
+documentation and reported. At the end the ledger is made again, and
+the run reports the pages new, regenerated, kept and removed.
+
+### Two agents under one contract
+
+Two agents make the documentation: a planner, and a writer per page.
+Each runs as an isolated subagent: a run of Claude of its own that
+sees nothing of the conversation and reads every input from disk.
+
+- The planner reads the target on disk and writes the documentation
+  map. It writes no page and changes no file of the target.
+- A writer makes one page from its entry of the documentation map and
+  from the inputs the entry names. The entry reaches it as a task
+  file. It sees no other page. It keeps a fixed page shape with one
+  outline per kind of page.
+
+Both work under one contract
+(`.claude/skills/docs-contract/SKILL.md`). The contract holds what
+the two share:
+
+- the isolation;
+- the kinds of a page;
+- what must never reach a page or the documentation map;
+- the voice and the sentence of a page.
+
+The planner and the writer of a derived page run on the session model
+(the model the conversation with Claude runs on). The writer of a
+mirrored page runs on a faster model. The reason: a smaller model
+drifts where its task leaves it room, and a mirrored page leaves it
+none. The choice is made mechanically by the page's entry, never per
+run.
+
+### What the planner reads
+
+For the engine, the planner reads:
+
+- `CLAUDE.md` (the core);
+- every file under `.claude/reference/` (the reference files, which
+  are read on demand);
+- every file under `.claude/skills/` (the skills);
+- every file under `.claude/agents/` (the agents);
+- `.claude/settings.json` (the settings);
+- every file under `templates/` (the templates);
+- the help header of every script under `scripts/`;
+- in the owning project: the briefs, the intent, the threads, the
+  solution design, the decisions and the recipes. The recipes are
+  among them for the pinned facts they own and no other file carries,
+  such as the install lines.
+
+The owning project of the engine is the forge's own project. The
+engine's documentation is therefore made where that project is cloned
+beside the engine. The paths `projects/forge/...` that the pages cite
+are the paths of that clone. See
+[Projects and the engine](projects-and-the-engine.md).
+
+For a project, the planner reads:
+
+- its briefs, its intent and its threads;
+- the layers below the intent;
+- its ledger;
+- the indexes of `sources/` and `research/`;
+- its recipes;
+- whatever those documents point to on disk.
+
+What a project wants documented beyond that is not a setting of its
+own. The reason is not recorded.
+
+The planner never reads the renders or the README of the target: they
+are outputs, not owners. It never reads the files of an instance, and
+no instance fact reaches a page.
+
+### Which pages a run writes
+
+A run regenerates only the pages whose inputs changed. The decision
+is mechanical, made from the inputs and never by judgement. The
+purpose: a run stays cheap and the page names stay stable.
+
+For every entry the state script (`scripts/docs-state.py`) computes
+one hash from three things:
+
+- the text of the entry;
+- the content of every input the entry names;
+- the rule the pages are made by, that is the writer's definition and
+  the contract.
+
+An input is a whole file or a named part of a file: a section by its
+heading, or an item by its ID. A part is hashed as that part. A
+change elsewhere in the file therefore leaves the page as it is.
+
+The rule is hashed with its whitespace normalised. A change of the
+rule regenerates every page made by the old one. A re-wrap of the
+rule regenerates nothing.
+
+Every page carries in its front-matter the hash it was made from
+(`inputs-hash`). The script compares the two hashes and sets the
+state of the entry:
+
+- `new`: no page lies at the path.
+- `regenerate`: a page exists and its hash differs. An input or the
+  entry changed.
+- `keep`: a page exists with the same hash.
+- `remove`: no entry names the page, or the planner marked its entry
+  for removal.
+
+A writer is launched for the pages that are `new` or `regenerate`,
+and for no other.
+
+### The previous documentation map
+
+The planner is given the documentation map of the previous run where
+one exists. With it the planner keeps every path that still has
+material. The run takes that previous map from git, as it was last
+committed. The header of the documentation map carries no field that
+changes with a run, and so none that points to a previous map. The
+recorded reason for such a header: a field that changes with every
+run is a certain conflict.
+
+### Only on `main`
+
+A run is made on the branch `main` only. It refuses a repository that
+is behind its origin or has diverged from it. The reason lies in how
+git merges the pages. At a merge a page is taken as `ours`: git keeps
+one's own version of the page and merges no two generated texts. In
+the rebase that a save makes, that choice turns round. A save is the
+command `/save`, which commits and pushes the work. A freshly made
+file would then silently lose to an older one. Two branches that both
+make the documentation also conflict on the server, and such a
+conflict is settled by making the documentation again.
+
+### What a release does
+
+A release (the command `/release`) never regenerates the
+documentation on its own judgement. Run by hand, it reports the age
+of the index against the version of the intent and offers
+`/document`. Run with `--auto`, it asks once before anything runs.
+The pages pass under the eyes of the principal (the person whose
+thinking is forged), as every regenerated render does.
+
+### A page is never mended by hand
+
+A page is never mended by hand. The next run writes the page again
+from its owners, and the mend is gone. Only a mend in the file that
+owns the matter survives, and the page takes it at the next run. See
+[Change a documentation page](../extend/change-a-documentation-page.md).
+
+### What a run cannot place
+
+A run meets three kinds of matter it cannot place:
+
+- a fact a page needs and no file owns;
+- a matter on which the documentation map and an owner disagree;
+- a reason a page wants and no file records.
+
+Each is a finding of the run. The run files its findings in
+`reviews/` as a report of its own, in the shape of a check's report.
+They are settled as a check's findings are: in a walkthrough, where
+the principal decides them one by one. A mend lands in the owner,
+never on a page. The reason for the report: the documentation finds
+what no other check does. The report and its settling are explained
+in [The check](the-check.md).
+
+Nothing is invented to fill a gap. A fact without an owner waits for
+the principal to give it a home. A page that wants a reason no file
+records says that the reason is not recorded. Where the principal
+wants the reason on the page, it enters the intent in a round of its
+own and reaches the page at the next run.
+
+### The index and the manual
+
+The index has a second reader: the manual (`/man`). Every page
+carries the one question it answers, and the index prints it. Asked a
+need in free words, the manual reads the index and chooses the pages
+whose question meets the need. See
+[Look up a command, or ask how to do something](../use/look-up-a-command.md).
 
 ## Why
 
-**Why generated at all.** The README was the whole documentation of
-the engine and poor as one, three things at once. A page of one
-topic can say a thing well. People inside the company and outside it
-should understand the forge and use it in full.
+**Why pages of one topic.** The README was the whole documentation of
+the engine and poor as one: it was three things at once. A page of
+one topic can say a thing well. People inside the company and outside
+it should understand the forge and use it in full. The README is cut
+to what orients and points.
 
-**Why not a recipe per page, the pages as renders.** A documentation
-of many pages would mean as many recipes to iterate by hand. A
-recipe is a tool the principal shapes, while a page is to come from
-the project's documents with no hand in between. The documentation
-map replaces the recipes, one generated entry per page. The same
-choice gives the documentation a command of its own: a page has no
-recipe to iterate, and the map is generated.
+**Why generated.** A page that is generated from its owners cannot
+drift from what it mirrors.
 
-**Why not a site or a wiki.** GitHub shows Markdown pages and the
-README of a directory as they stand, so pages in the repository are
-readable without a build, a host or a second place to keep current. A
-site stays possible later over the same pages. For the same reason
-the index is named `README.md` and not `index.md`: GitHub shows a
-directory's README as its front page.
+**What is rejected.** Three other directions are rejected:
 
-**Why not a hand-kept file of the philosophy.** The why lives in the
-brief and the intent already, and a hand-kept copy would drift from
-them. The About pages are derived from those two; the pitch stays a
-render.
+- *A recipe per page, with the documentation as renders of
+  `/render`.* A recipe for every page would be that many recipes to
+  iterate by hand. A recipe is a tool the principal shapes. A page is
+  to come from the project's documents with no hand in between. The
+  documentation map replaces the recipes: one generated entry per
+  page.
+- *A site or a wiki for the documentation, for now.* The code host
+  shows Markdown pages and the README of a directory as they stand.
+  Pages in the repository are therefore readable without a build, a
+  host or a second place to keep current. A site stays possible later
+  over the same pages.
+- *A hand-kept file of the philosophy in the project root.* The why
+  lives in the brief and the intent already, and a hand-kept copy
+  would drift from them. The pages of `about/` are derived from those
+  two. The pitch stays a render.
 
-**Why a page is never mended by hand.** The next run writes it again
-from its owners, and the mend is gone. Only a mend in the file that
-owns the matter survives.
+**The choices of the build.** Each was made against an alternative:
 
-**Why the map lies beside the ledger and not in `docs/`.** A visitor
-of the documentation would not understand it.
+- The index is named `README.md`, not `index.md`. The code host shows
+  the README of a directory as its front page.
+- The documentation map lies beside the ledger, not in `docs/`. A
+  visitor of the documentation would not understand it.
+- An input is hashed by its named part. The alternative was to hash a
+  file's body without its front-matter. The body changes at every
+  round of work too, and a page that cites one item would still be
+  regenerated for every other. The cost: a moved heading or a
+  renumbered ID loses the part and regenerates the page, which is the
+  safe side.
+- The rule the pages are made by is hashed with the inputs. The
+  alternative was a switch that forces a run. With the hash the state
+  stays computed, never judged. The cost: a change of the writer's
+  definition or of the contract regenerates every page.
+- Each kind of page has a fixed outline, and each entry has one line
+  for the index. The alternative was to trust the writer's judgement,
+  and that judgement does not converge.
 
-**Why an input is a named part of a file.** The alternative, hashing
-a file's body without its front-matter, was rejected because the
-body changes at every round too, and a page citing one position
-would still be regenerated for every other. The cost is that a moved
-heading or a renumbered ID loses the part and regenerates the page,
-which is the safe side.
+## A worked example: one entry of the documentation map
 
-**Why the generator is hashed with the inputs.** The alternative was
-a switch that forces a run. With the hash the state stays computed,
-never judged. The cost is that a change of the writer's definition
-or of the contract regenerates every page. The whitespace is
-normalised so that a re-wrap regenerates nothing.
+The entry below is invented and belongs to no project. It shows the
+shape the template `templates/docs-map.md` defines, for a project
+with the placeholder slug `<slug>`. The paths of its inputs are
+relative to the project's directory.
 
-**Why one outline per kind and one line per page in the index.** An
-audit of the documentation showed that headings and index lines left
-to the writer's judgement did not converge: the how-to pages carried
-many different headings, and the index lines ran long. So the
-outlines are fixed per kind and the index takes one line.
-
-**Why two models.** A mirrored page leaves the model no room, so a
-mirrored page is written on a faster model. A trial showed the
-session model more complete on derived pages and the faster model
-sufficient on mirrored ones.
-
-**Why the run is on `main` only, and refuses a repository behind or
-diverged.** The pages are taken as `ours` at a merge, like every
-file a release makes. That attribute turns round in the rebase a
-save makes when the histories diverged: a fresh page would silently
-lose to an older one. So everything that makes such files is made
-only on `main`, on a repository up to date with its origin.
-
-**Why the previous map comes from git.** The fields that changed
-with each run left the map's header, because such fields are a
-certain conflict when two people work on one project. With no
-`previous` field in the header, the run takes the previous map as
-last committed.
-
-**Why the videos folder is kept apart.** The engine is the one
-public place of an instance, served by GitHub Pages from `docs/`,
-and a project may send a video's file there while the project
-itself stays private. The engine carries the file only; its recipe,
-its render and its history stay in the project. The folder is
-therefore foreign to the documentation run and its checks, which
-generate and verify the documentation around it.
-
-**Why what the run cannot place is a check's report.** The
-documentation finds what no other check does, and a check's report
-already has a shape, a place in `reviews/`, a reading by the ledger
-and a way of being settled.
-
-**Why the manual reads the index.** The forge explains itself
-through one door; a second name for a question would be one more
-thing to learn. The index carries the one question every page
-answers, so a need in free words finds its page there.
-
-## A worked example
-
-One entry of a documentation map, generic and taken from no project.
-A planner would write it under the `about` section of the map; a
-writer would receive it verbatim in its task and read the two inputs
-named, and nothing else of those files:
-
-```
-### docs/about/the-weekly-review.md
-- title: The weekly review
-- line: What is the weekly review, and why does the project hold one?
+```text
+### docs/about/the-weekly-report.md
+- title: The weekly report
+- line: What is the weekly report, and why has it three parts?
 - kind: explanation
 - reader: user, evaluator
-- says: The weekly review is the one meeting in which the open
-  matters of the intent are read and a verdict is given on each.
-  Who sits in it, what is read before it, what leaves it. The
-  reason from the intent's objective.
+- says: The weekly report is one page in three parts. What each part
+  holds and why it is there. One worked example: an invented report.
 - inputs:
-  10-intent.md#Objective
-  00-brief.md
+  10-intent.md#The weekly report
+  sources/00-INDEX.md
 - links:
-  `docs/use/run-the-weekly-review.md`: running the review, step by
-  step.
-  `docs/reference/glossary.md`: every term of the project in one
-  line.
-- must-not: no name of a participant; no date of a past review.
-- made: mirrored
+  `docs/reference/glossary.md`: every term of the project in one line.
+- must-not: no name of a team; no figure of a real report.
+- made: derived
+- evidence: the section of the intent gives the three parts and the
+  reason for each; the index of the sources names the form the report
+  follows; the page puts the two together.
 - state: new
 ```
 
-The entry's `inputs` name a section of the intent by its heading and
-the brief whole. The state script hashes the section as that
-section, so a change in another section of the intent leaves the
-page as it is. The page made from this entry would carry `made:
-mirrored` and the hash of these two inputs and the entry in its
-front-matter, open with what the weekly review is and for whom, and
-close with the two links under "See also".
+What a run does with this entry:
+
+- **The first run.** No page lies at `docs/about/the-weekly-report.md`,
+  and the state is `new`. The state script writes one task file: the
+  entry word for word, the path of the page, the date, the version
+  the page is made for, the hash the page is to carry and the titles
+  of the pages it links to. A writer reads the task, then the section
+  "The weekly report" of the intent and the index of the sources, and
+  nothing else. The entry says `derived`, and the writer runs on the
+  session model. The page it writes carries `made: derived` and the
+  hash in its front-matter.
+- **A later run, after another section of `10-intent.md` changed.**
+  The entry names one section of that file, and the section is hashed
+  as that part. The hash is the same, the state is `keep`, and the
+  page is not touched.
+- **A later run, after the section "The weekly report" changed.** The
+  hash differs, the state is `regenerate`, and a writer makes the
+  page again.
+- **A run after the project dropped the weekly report.** The planner
+  finds no material for the page and marks the entry `remove`. The
+  page is deleted.
+- **A reason is missing.** Suppose the intent gives no reason for the
+  third part. The page says that the reason is not recorded, the
+  writer reports the place, and the run files it as a finding.
+
+The page is reached from another page: at least one other entry of
+the same documentation map names `docs/about/the-weekly-report.md`
+under its `links`. Its `line` is what the index prints, and what the
+manual reads to find the page.
 
 ## See also
 
@@ -497,4 +546,4 @@ close with the two links under "See also".
 - [Glossary](../reference/glossary.md): every term of the forge in
   one line.
 
-Generated on 2026-11-08 for version 7.0 from the files the front-matter names; never edited by hand.
+Generated on 2026-11-17 for version 7.12 from the files the front-matter names; never edited by hand.

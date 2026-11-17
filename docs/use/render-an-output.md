@@ -1,8 +1,8 @@
 ---
-generated: 2026-11-08
-version: 6.21
+generated: 2026-11-17
+version: 7.12
 made: mirrored
-inputs-hash: 0d68526fa6849fb6
+inputs-hash: f6f802d4a1e9d04b
 inputs:
   - .claude/skills/render/SKILL.md
   - scripts/docs-check.py
@@ -11,13 +11,27 @@ inputs:
 
 # Render an output
 
-`/render` regenerates a render, an audience-specific Markdown output, from its recipe, and makes the plain file beside it where the recipe names a format. This page is for you as the principal, the person whose thinking is being forged, when a render is out of date or has never been made.
+This page shows how you regenerate a render, and its plain file, with
+`/render`. It is for the principal, the person whose thinking is
+forged, who wants an output such as a pitch, a summary or a README
+made again from its recipe.
+
+A render is an audience-specific output generated from the documents
+of a project. A recipe is the versioned file that says how it is made.
+Both are explained in [Renders and recipes](../about/renders-and-recipes.md).
 
 ## When to use it
 
-Use it when a render has to be made or made again: the recipe changed, an input of the render changed, or the render does not exist yet. A render is regenerated only on this command or by `/release`. Claude never regenerates on its own judgement: it tells you that a render is stale and offers.
+- You changed a recipe or one of its inputs and want the output made
+  again.
+- A render is stale, that is, a version cited in its provenance
+  differs from the current version of that file, or a cited file no
+  longer exists. The definition is in
+  [Render provenance](../reference/render-provenance.md).
 
-The recipe must exist in the project's `recipes/` folder. Where it does not, Claude offers to compose it and stops.
+A render is regenerated only on this command or by `/release`. Claude
+never regenerates one on its own judgement: it reports a stale render
+and offers.
 
 ## The command
 
@@ -25,80 +39,132 @@ The recipe must exist in the project's `recipes/` folder. Where it does not, Cla
 /render <recipe> [slug]
 ```
 
-The recipe is the name of a file in `recipes/`, without the extension. The slug names the project; where the context makes it clear, you leave it out. For example:
-
-```
-/render pitch my-project
-```
+`<recipe>` is the name of a file in the project's `recipes/` folder,
+without `.md`. The slug names the project; where it is left out,
+Claude infers the project from context and asks if it is ambiguous.
 
 ## What happens
 
-1. Claude reads the recipe and every input it declares, at their current versions, from disk. Where the recipe reads the ledger (the file that is the single source of truth for state, made from the documents when it is read), Claude makes it first with its script.
+1. Claude reads `recipes/<recipe>.md`. If the recipe does not exist,
+   it offers to compose one with `/recipe` and stops.
 
-   You should now see Claude naming the recipe and its inputs.
+   You should now see either the recipe read or the offer to compose
+   it.
 
-2. Claude hands the generation to a subagent, a helper run that sees none of your conversation. It sees only the recipe and its inputs, so the render comes from the documents and from nothing that was said about them.
+2. Claude reads the inputs the recipe declares, at their current
+   versions, from disk. Where the recipe reads the ledger (the single
+   source of truth for state, made at read time), Claude makes it
+   first with its script.
 
-   You should now see the render written to `renders/<recipe>.md`, or to the path the recipe gives in its `output:` field.
+   You should now see the inputs read and, where needed, the ledger
+   freshly made.
 
-3. The render opens with provenance front-matter, which says what it was made from and at which versions. The block is described in [Render provenance](../reference/render-provenance.md).
+3. A subagent (an isolated Claude run that sees nothing of your
+   conversation) generates the Markdown from the recipe and its inputs
+   alone. It writes to `renders/<recipe>.md`, or to the recipe's
+   `output:` path where the recipe declares one. The file opens with
+   provenance front-matter.
 
-   You should now see the front-matter at the top of the file.
+   You should now see the render written at that path.
 
-4. Where the recipe declares `languages:`, the first language is the primary and the render of it is written first. Each other language is then a translation, a file of its own, `renders/<recipe>.<lang>.md`, made scene for scene from the primary. Nothing is re-cut.
+4. Where the recipe declares `languages:`, the subagent writes the
+   primary render first. It then writes one translation per language
+   as a file of its own, `renders/<recipe>.<lang>.md`, scene for scene,
+   with nothing re-cut.
 
-   You should now see one file per language.
+   You should now see one file per declared language.
 
-5. Back in the session (the one working conversation with Claude), Claude scans the written file mechanically for facts of your instance, with `python scripts/docs-check.py --file <render>`. A hit is said aloud and you judge it. An instance fact is never edited out by hand: the render is regenerated without it.
+5. Back in the session, Claude scans the file mechanically for facts
+   of the instance (`python scripts/docs-check.py --file <render>`).
+   A hit is said aloud and you judge it.
 
    You should now see either no hit or a hit named for your judgement.
 
-6. Claude verifies that the file exists and that its provenance is correct. The ledger's Renders table reads the provenance, and nobody writes a row. Claude remakes the ledger and reports what was rendered from what.
+6. Claude verifies that the file exists and that its provenance is
+   correct. The ledger's Renders table reads that provenance; nobody
+   writes a row. Claude then reports what was rendered from what.
 
    You should now see a report of the render and its inputs.
 
-7. Where the recipe has a `## Format` section, Claude makes the plain file beside the render. A `.docx` or a `.pptx` is made through pandoc. For a screenplay, the video or the player file is made through `scripts/md2video.py`, beside the render or at the recipe's `output:`. The screenplay's formats are described in [Make a teaching video from a recipe](make-a-video-from-a-recipe.md).
+7. Where the recipe has a `## Format` section, Claude makes the plain
+   file beside the render:
+   - a `.docx` or `.pptx` through pandoc;
+   - for a screenplay, the video or the player file through
+     `scripts/md2video.py`, at the render or at the recipe's
+     `output:`. The screenplay's formats are described in
+     [Make a teaching video from a recipe](make-a-video-from-a-recipe.md).
 
-   You should now see the plain file next to the render.
+   You should now see the plain file beside the render.
 
-8. Where a published file of the recipe exists, Claude tells you that it is now older than its render. It remakes nothing. The designed file is made on your command through a model, as [Publish a designed file](publish-a-designed-file.md) describes. A screenplay has no published file.
+8. Where the Format names `png`, the render's own run draws the
+   picture and writes it to `renders/<recipe>.png`. The Markdown
+   render then carries the provenance and a link to the picture and
+   nothing else. Nothing is converted afterwards.
 
-   You should now see the notice, where a published file exists.
+   You should now see the picture file and a short Markdown render
+   linking it.
+
+9. Where a published file of the recipe exists, Claude tells you it is
+   now older than its render. It remakes nothing: the designed file is
+   made through a model, as
+   [Publish a designed file](publish-a-designed-file.md) describes.
+
+   You should now see that remark.
 
 ## What you have afterwards
 
-- The Markdown render, in `renders/` or at the recipe's `output:`.
-- One translation per further language, where the recipe declares them.
-- The plain file, where the recipe has a `## Format` section.
-- A ledger that lists the render with what it was made from.
+- The render at `renders/<recipe>.md` or the recipe's `output:` path,
+  with provenance front-matter.
+- One file per language where the recipe declares languages.
+- The plain file beside the render, where the recipe has a Format.
+- A report of what was rendered from what.
 
-The render and its plain file are never edited by hand. To change them, change the recipe or its inputs and render again, because a render is generated and never a source of truth; the reasons are on [Renders and recipes](../about/renders-and-recipes.md).
+The render and its plain file are never edited by hand. To change
+them, change the recipe or its inputs and run `/render` again.
 
-A file you make yourself from a render, such as an edited copy or a PDF saved by hand, is yours when you keep it in `renders/` under a name of its own. It is kept in git and left alone by the forge ([Renders and recipes](../about/renders-and-recipes.md) says more).
+A file you make yourself from them and keep in `renders/` under a name
+of its own, such as an edited copy or a PDF saved by hand, is yours.
+It is kept in git and left alone by the forge; see
+[Renders and recipes](../about/renders-and-recipes.md).
 
 ## If something goes wrong
 
-- The recipe does not exist: Claude offers to compose it and stops.
-- A tool is missing (pandoc, or Pillow and ffmpeg for a video): Claude says so aloud, the render stands and the plain file is not made. Install the tool and render again.
-- The scan finds an instance fact: Claude says so aloud. Where the hit is a public fixed text of the recipe, or a fact of the engine's own history, it stands; otherwise the render is regenerated without it.
-- The render later reads as stale: a version cited in its provenance differs from the current version of that file, or a cited file no longer exists. [Render provenance](../reference/render-provenance.md) holds the one definition of stale.
+- The recipe does not exist: Claude offers to compose it with
+  `/recipe` and stops.
+- The scan finds an instance fact: it is said aloud and you judge it.
+  A fact is regenerated out, never edited by hand. A public fixed text
+  of the recipe, or a fact of the engine's own history, stands.
+- A tool for the plain file is missing (pandoc, or Pillow and ffmpeg
+  for a video): the render stands, the plain file is not made, and
+  Claude says so aloud.
 
 ## A worked example
 
-A project with the slug `my-project` has a recipe `recipes/pitch.md` that declares two languages, the primary first, and has a `## Format` section naming a deck.
+A project `my-project` has `recipes/summary.md` with no `languages:`
+and no `## Format` section.
 
 ```
-/render pitch my-project
+/render summary my-project
 ```
 
-Claude reads the recipe and its inputs, and the subagent writes the primary render and then the translation. Claude scans both files, finds nothing, verifies the provenance and remakes the ledger. It makes the deck beside each render through pandoc. A published file of the recipe exists, so Claude tells you that it is now older than its render. You decide whether to make the designed file again.
+Claude reads the recipe and its inputs, and the subagent writes
+`renders/summary.md` with provenance front-matter. The scan finds no
+instance fact, the provenance is verified, and Claude reports the
+render and the inputs it was made from. The recipe has no Format, so
+the work ends at the Markdown.
 
 ## See also
 
-- [Render provenance](../reference/render-provenance.md): the front-matter block and the one definition of stale.
-- [Publish a designed file](publish-a-designed-file.md): the designed file, made through a model.
-- [Make a teaching video from a recipe](make-a-video-from-a-recipe.md): the screenplay's formats in full.
-- [Renders and recipes](../about/renders-and-recipes.md): why a render is generated and never a source of truth, and what becomes of the principal's own files beside it.
-- [Glossary](../reference/glossary.md): every term of the forge in one line.
+- [Render provenance](../reference/render-provenance.md): the
+  front-matter block and the one definition of stale.
+- [Publish a designed file](publish-a-designed-file.md): the designed
+  file, made through a model.
+- [Make a teaching video from a recipe](make-a-video-from-a-recipe.md):
+  the screenplay's formats in full.
+- [Renders and recipes](../about/renders-and-recipes.md): why a render
+  is generated and never a source of truth, and what becomes of the
+  principal's own files beside it.
+- [Glossary](../reference/glossary.md): every term of the forge in one
+  line.
 
-Generated on 2026-11-08 for version 6.21 from the files the front-matter names; never edited by hand.
+Generated on 2026-11-17 for version 7.12 from the files the front-matter names; never edited by hand.

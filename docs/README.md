@@ -1,6 +1,6 @@
 ---
-generated: 2026-11-08
-version: 7.0
+generated: 2026-11-17
+version: 7.12
 made: derived
 inputs:
   - projects/forge/docs-map.md
@@ -12,7 +12,7 @@ This is the documentation of Forge of Thought: pages of one topic
 each, generated from the engine as it stands, for three readers.
 Every page stands on its own; start where your question is.
 
-Generated on 2026-11-08 for Forge of Thought at version 7.0
+Generated on 2026-11-17 for Forge of Thought at version 7.12
 (the version of the engine's intent; a release carries the same
 number).
 
@@ -36,6 +36,7 @@ number).
 - [See where a project stands](use/see-where-a-project-stands.md): What does the bare `/forge` map tell you about a project, and what does `/ledger` tell you?
 - [Write a brief](use/write-a-brief.md): How do you compose or finish a brief with `/forge brief`?
 - [Forge the intent](use/forge-the-intent.md): How do you iterate the intent with `/forge intent`, round by round?
+- [Set a matter aside as a thread](use/set-a-matter-aside.md): How do you set a matter of a project aside with `/thread`, see what is open and take a thread up again?
 - [Distil an assignment](use/distil-an-assignment.md): How do you derive the assignment from the intent with `/forge assignment`?
 - [Write a BRD](use/write-a-brd.md): How do you break an assignment, an intent or a document someone gave you into business requirements with `/forge brd`?
 - [Write user stories](use/write-user-stories.md): How do you break a BRD, or a small change of the intent, into user stories with `/forge user-stories`, and hand the stakeholders their export?
@@ -76,6 +77,7 @@ number).
 - [The document chain](about/the-document-chain.md): Why is the chain a star of definitions, and how does it grow?
 - [The brief](about/the-brief.md): What is a brief, who writes it, and why is it rough on purpose?
 - [The intent](about/the-intent.md): What does the intent hold, why is it rewritten every round, and where does solving go instead?
+- [Threads](about/threads.md): What is a thread, what does it hold and not hold, and why is every thread a file of its own?
 - [The assignment](about/the-assignment.md): What makes an assignment complete, and where does assigning end and solving begin?
 - [The BRD](about/the-brd.md): What does a BRD hold, how does it start, and why does the forge name what it cannot know instead of writing it?
 - [The user stories](about/the-user-stories.md): What are the user stories, what does one story hold, and why does the export the stakeholders get leave the intent out?
@@ -131,14 +133,14 @@ number).
 - [Versioning and front-matter](reference/versioning-and-front-matter.md): The version scheme and the header fields of an artefact, a brief, a recipe, a work specification and an index, exactly.
 - [History companion](reference/history-companion.md): The shape of `<file>.history.md`, record by record, exactly.
 - [Requirement style and Story style](reference/requirement-style.md): The rule set of the items of an assignment, the stricter one of a BRD, and the Story style of the user stories, exactly.
-- [Document kinds](reference/document-kinds.md): The table of document kinds, verbatim, with the companion, library and wrapping rules and the files that have no kind.
+- [Document kinds](reference/document-kinds.md): The table of document kinds, verbatim, with the files that have no kind and the wrapping rule.
 - [Ledger](reference/ledger.md): The ledger's header, tables, columns, state words and reports, exactly, with where each column is read from.
 - [Render provenance](reference/render-provenance.md): The provenance block every render opens with, the definition of stale, the published companion, and where the files land.
 - [Research note and bundle](reference/research-bundle.md): The places, the front-matter and the sections of a research note, of a research bundle and of its plan, exactly.
 - [Documentation map](reference/documentation-map.md): The fields of the map, of a writer's task, of a page's front-matter and of the index, exactly.
 - [Verdict words](reference/verdict-words.md): The words and letters the principal types in a walkthrough or at a step that needs his word, exactly.
 - [Repository layout](reference/repository-layout.md): The layout of the engine root, a thought project and a library, file by file.
-- [Scripts](reference/scripts.md): Every script with its synopsis, options, forms, what it needs and the command that runs it.
+- [Scripts](reference/scripts.md): Every script with its synopsis, options, forms and what it needs.
 - [Templates](reference/templates.md): Every skeleton in `templates/`, what it is the skeleton of, and which procedure creates from it.
 - [Configuration](reference/configuration.md): The files that configure an instance and a project, and what each holds, field by field.
 - [Glossary](reference/glossary.md): Every term of the forge in one line, with the file that defines it.

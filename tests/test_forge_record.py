@@ -18,6 +18,12 @@ def instance(tmp_path, author="tester"):
     return path
 
 
+def line_break(data):
+    """The line break a file carries: the fixture's depends on how git
+    wrote it out on the machine (core.autocrlf), and the script keeps it."""
+    return "\r\n" if b"\r\n" in data else "\n"
+
+
 def record(run_script, project, inst, *args):
     return run_script("forge-record", "history", project, "10-intent.md", "--instance", inst, *args)
 
@@ -33,7 +39,7 @@ def test_a_record_lands_last_and_nothing_else_changes(project, tmp_path, run_scr
     assert after.startswith(before)
     added = after[len(before):].decode("utf-8")
     assert added == (f"- {TODAY} | 0.2 | tester | POS.0020 | changed | the width moved"
-                     " | Was: a | b, Action: and Was: kept in Was\n")
+                     " | Was: a | b, Action: and Was: kept in Was" + line_break(before))
     last = fd.records(history)[-1]
     assert (last["subject"], last["kind"], last["version"], last["author"]) == ("POS.0020", "changed", "0.2", "tester")
 
@@ -112,6 +118,9 @@ def test_a_decision_takes_the_next_number_and_lands_last(project, tmp_path, run_
     after = decisions.read_bytes()
     assert after.startswith(before)
     added = after[len(before):].decode("utf-8")
+    # the file's own line break is kept; the shape is read with it folded to \n
+    assert ("\r\n" in added) == (line_break(before) == "\r\n")
+    added = added.replace("\r\n", "\n")
     assert added.startswith("\n## DEC.0020 — The roof is green\n- **Decision:** The roof is painted green.\n")
     assert all(len(line) <= 72 for line in added.split("\n") if not line.startswith("## "))
     assert "\n  " in added  # the reason wrapped, its lines indented

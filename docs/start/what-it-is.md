@@ -1,8 +1,8 @@
 ---
-generated: 2026-11-08
-version: 7.0
+generated: 2026-11-17
+version: 7.12
 made: derived
-inputs-hash: 968694d87d634a38
+inputs-hash: d677bf13acb98966
 inputs:
   - CLAUDE.md#What this workspace is
   - CLAUDE.md#Roles
@@ -10,83 +10,72 @@ inputs:
   - projects/forge/10-intent.md#POS.0780
   - projects/forge/10-intent.md#POS.0600
   - projects/forge/recipes/readme.md#Pinned facts (not rendered)
-  - CLAUDE.md#Repository layout
+  - .claude/reference/repository-layout.md
 ---
 
 # What Forge of Thought is
 
-Forge of Thought is a workshop in which a thought is tempered into
-a chain of versioned documents, under review by agents that never
-saw the conversation. This page says in a few plain sentences what
-that means, for a reader who has installed nothing yet and wants to
-know whether to read on.
+Forge of Thought is a workshop in which a thought is tempered into a
+chain of versioned documents: an idea of any kind is put together in
+a first document and worked from one document to the next, under
+review by agents that never saw the conversation in which they were
+written. This page says in a few plain sentences what the forge is,
+before anything is installed. It is for a reader who is about to use
+the forge and for a reader who is weighing it.
 
 ## What it is
 
-Forge of Thought is a place for forging thoughts: a workshop where a
-thought is tempered and shaped. Any idea can enter it, a process
-redesign, a platform initiative, an organisational topic, anything.
-The idea travels a chain of versioned documents, from the idea put
-together onward, and each document of the chain is reviewed by
-isolated reviewers: agents that never see the working conversation
-and attack the thinking from different angles. The forge runs in
-Claude Code, Anthropic's agent for the command line. Its slash
-commands, its skills, its agents and its hooks are the forge's
-mechanisms, and the forge is what they are told. The person who
-uses it is the principal: whoever's thinking is being forged. The
-principal supplies the ideas, the answers and the decisions, and is
-the final authority on all content. Claude is the principal's
-cognitive extension: it owns structure, order, process discipline
-and document hygiene, proposes, and never decides. The forge is not
-tied to one person or one management relationship. Anyone can be
-the principal, and the recipients of what the forge produces may be
-teams, colleagues, or the principal's future self.
+The forge runs in Claude Code (Anthropic's agent for the command
+line). The slash commands, the skills, the agents and the hooks of
+Claude Code are the mechanisms of the forge, and the forge is what
+they are told. Claude (an AI working here as that agent) is one of
+the two roles of the forge. The other is the
+[principal](../reference/glossary.md) (the person whose thinking is
+forged).
+
+The principal supplies the ideas and the answers and decides
+everything about the content. The forge is not tied to one person:
+anyone can be the principal. Claude is the principal's cognitive
+extension. It owns the structure, the order and the discipline of
+the process. It proposes and never decides.
+
+The subject is deliberately left open: a process redesign, a
+platform initiative, an organisational topic, anything. The name
+says the same: thoughts are the raw material, of whatever kind, and
+the forged documents are the product.
+
+## How it works
+
+One person starts from a rough [brief](../reference/glossary.md)
+(the idea put together as a first document). With Claude that person
+works the brief into an [intent](../reference/glossary.md) by
+interview: Claude asks and the principal answers. The intent is the
+document below which a project takes the layers it needs (further
+documents of the chain, such as an assignment or a solution
+design). Many projects end at the intent. Isolated AI reviewers put
+the thinking under adversarial pressure from different angles. They
+never saw the working conversation: they are deliberately blind to
+it. Outputs for each audience are generated from the documents. The
+forge calls such an output a [render](../reference/glossary.md).
+
+A run of the forge ends where the principal is satisfied. Its
+outcome is a document the principal stands behind and nothing
+further. Nothing is implemented in the forge: it specifies. The
+mechanics are the same for any subject. The machinery that forges a
+platform assignment would forge the campaign of a role-playing
+game: an intent of the story, then materials rendered for the one
+who leads the game.
 
 Technically, Forge of Thought is a git repository of slash commands,
 isolated agents, templates, scripts and conventions, bound to no
 domain.
 
-## How it works
-
-One person starts from a rough [brief](../reference/glossary.md),
-a few sentences of what he wants. Claude works the brief into an
-intent by interview: Claude asks, the principal answers, and the
-intent grows from the answers. Below the intent the project takes
-the layers it needs, and many projects end at the intent. The chain
-grows layer by layer, and a layer is added without reworking
-anything that exists. Along the way the principal has the thinking
-attacked by reviewers that never saw the conversation. Outputs for
-every audience are generated from the documents of the chain, so
-that the documents stay the one source of truth. Nothing is
-implemented in the forge: it specifies. A run ends where the
-principal is satisfied. The outcome is a document the principal
-stands behind, nothing further.
-
-The quickest way to see all this is the course page of the teaching
-videos, <https://pche-broken-artist.github.io/forge-of-thought/videos/>:
-videos played in the browser, each showing one piece of the forge at
-work, from a brief found by questions to a critic and its findings;
-what the videos are made of is said in
-[The screenplay and its player](../about/the-screenplay-and-its-player.md).
-It is the place to see the forge at work before reading on.
-
-## Why
-
-The name says thought, not assignment. Thoughts are the raw material,
-of whatever kind, and nothing is presumed about them. Forged
-documents are the product, an assignment among them. The name was
-chosen with the whole chain in mind, from a raw idea to a
-specification ready for realisation.
-
-The reviewers are deliberately blind to the working conversation.
-Blind, they provide adversarial pressure from different angles,
-which a reader of the conversation could not.
-
-The mechanics of the chain are domain-agnostic. The same machinery
-that forges a platform assignment would forge a tabletop game
-campaign: an intent of the story, then materials rendered for the
-game master. Sponsorship, funding, adoption and delivery outcomes are
-outside the forge's scope and outside its sight.
+The place to see the forge at work before reading on is the course
+page of the teaching videos at
+<https://pche-broken-artist.github.io/forge-of-thought/videos/>: each
+video of the course shows one job of the forge, is made from a
+[screenplay](../about/the-screenplay-and-its-player.md) render and
+is played on a page in the browser.
 
 ## See also
 
@@ -99,5 +88,4 @@ outside the forge's scope and outside its sight.
 - [Glossary](../reference/glossary.md): every term of the forge in
   one line.
 
-Generated on 2026-11-08 for version 7.0 from the files the
-front-matter names; never edited by hand.
+Generated on 2026-11-17 for version 7.12 from the files the front-matter names; never edited by hand.
