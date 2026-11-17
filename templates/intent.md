@@ -25,8 +25,8 @@ carries its ID from birth, and the history records it by that ID. -->
 - **POS.0010** …
 
 ## Facts
-<!-- FCT.NNNN: what is the case, as CLAUDE.md, ID scheme, defines a
-fact. -->
+<!-- FCT.NNNN: what is the case, as the table of
+`.claude/reference/id-prefixes.md` defines a fact. -->
 - **FCT.0010** …
 
 ## Rejected directions

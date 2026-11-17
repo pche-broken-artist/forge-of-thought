@@ -100,7 +100,7 @@ at the tag of a major. Nothing is parked on the principal's behalf: what
    rules on the delta before the commit. A render made from the settled
    sources is current by construction; its verification is `/render`
    step 6 (the file, its provenance), not a check. Which renders a
-   repository has is CLAUDE.md, Document chain, Renders's. A project
+   repository has is CLAUDE.md, Repository layout's. A project
    whose recipe is missing is reported (a `/check` finding) and released
    without the render. Other renders are never regenerated here; their
    staleness is the principal's business, shown by the `/forge` map

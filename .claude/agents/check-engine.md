@@ -41,8 +41,10 @@ What you verify:
      check; a claim in the README that CLAUDE.md or the intent no
      longer supports is a recipe defect, fixed in the recipe.
    - `templates/` agree with the conventions as CLAUDE.md,
-     Versioning & status and ID scheme, state them: front-matter
-     fields, the history companion, prefixes, numbering, statuses.
+     Versioning & status and ID scheme, state them, the prefixes as
+     the table of `.claude/reference/id-prefixes.md` has them:
+     front-matter fields, the history companion, prefixes, numbering,
+     statuses.
 2. **Core ↔ forge intent**
    - Every POS is honoured by the core documents; nothing withdrawn or
      rejected (REJ items, closed THR items) is still advertised

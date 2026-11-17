@@ -182,7 +182,7 @@ class Light:
             if re.search(r"^#+ .*Version History|^\| *Version *\|", text, re.M):
                 self.add("medium", f"`{self.rel(doc)}` carries a Version History table in its body",
                          self.where(doc, fc.line_of(text, r"^#+ .*Version History|^\| *Version *\|", re.M)),
-                         f"{rule_vs} (the history lives in the companion, never in the body; a table moves to `<file>.history.archive.md`)",
+                         f"{rule_vs} (the history lives in the companion, never in the body); `.claude/agents/check-light.md`, Front-matter and history (a table moves to `<file>.history.archive.md`)",
                          "move the table to the archive companion, on the principal's word, and let the log begin with the next version")
             # the companion
             comp = fc.companion_of(doc)
@@ -226,7 +226,7 @@ class Light:
         if re.search(r"^# Version History|^\| *Version *\|", text, re.M):
             self.add("medium", f"`{self.rel(comp)}` carries a Version History table",
                      self.where(comp, fc.line_of(text, r"^# Version History|^\| *Version *\|", re.M)),
-                     f"{rule_vs} (a companion written before the log moves as it stands to `<file>.history.archive.md`)",
+                     "`.claude/agents/check-light.md`, Front-matter and history (a companion written before the log moves as it stands to `<file>.history.archive.md`)",
                      "move the table to the archive companion, on the principal's word; the log begins with the next version")
         # the records (a comment is compared with no template: POS.2030)
         before = len(fd.problems)
@@ -322,10 +322,7 @@ class Light:
                              self.where(c, fc.line_of(text, r"^file:", re.M)),
                              "CLAUDE.md, Repository layout (the companion: the provenance of the published file)",
                              "the file beside its companion, or the companion removed with the file")
-            for f in sorted(files - named):
-                self.add("medium", f"`published/{f}` has no companion", f"`published/{f}`",
-                         "`.claude/skills/publish/SKILL.md`, step 6 (a published file carries its companion `published/<recipe>.md`)",
-                         "write the companion from what the file was made from, or re-publish")
+            # a file of published/ no companion names is the principal's own and never a finding (POS.1910)
         # the work files against their specifications' Inputs (POS.1520)
         for spec in sorted(self.proj.glob("work/*.spec.md")):
             stext = fd.read(spec)
@@ -517,7 +514,7 @@ class Light:
         idx = bdir / "00-INDEX.md"
         if not idx.exists():
             self.add("low", f"The bundle `{self.rel(bdir)}/` has no `00-INDEX.md` of its own", f"`{self.rel(bdir)}/`",
-                     "CLAUDE.md, Document chain, External inputs (every bundle carries its own `00-INDEX.md`, skeleton `templates/index-bundle.md`)",
+                     "`.claude/skills/ingest/SKILL.md`, step 1 (every bundle carries its own `00-INDEX.md`, skeleton `templates/index-bundle.md`)",
                      "create it from `templates/index-bundle.md` and catalogue every file", immediate=True)
             return
         text = fd.read(idx)
@@ -535,7 +532,7 @@ class Light:
                    and not self.ignored(bdir.name + "/" + f.relative_to(bdir).as_posix())}
         for name in sorted(on_disk - names):
             self.add("low", f"`{self.rel(bdir / name)}` is in the bundle and not in its index", f"`{self.rel(bdir / name)}`",
-                     "CLAUDE.md, Document chain, External inputs (a bundle's `00-INDEX.md` catalogues its files)", "an entry in the bundle's index", immediate=True)
+                     "`.claude/skills/ingest/SKILL.md`, step 1 (a bundle's `00-INDEX.md` catalogues its files)", "an entry in the bundle's index", immediate=True)
         for name in sorted(n for n in names - on_disk if not self.ignored(bdir.name + "/" + n)):
             self.group(("entry-no-file", idx), "low",
                        lambda n, w, i=idx: f"{n} entr{'ies' if n > 1 else 'y'} of `{self.rel(i)}` name{'' if n > 1 else 's'} a file that is not in the bundle",

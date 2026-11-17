@@ -23,10 +23,10 @@ recommendation, never a gate. No lens runs at a save; what a release
 offers is `/release`'s (`.claude/skills/release/SKILL.md`); every run
 is the principal's word.
 
-**`/critique <lens> [artefact|path] [slug]` — run it.** The target is an
-artefact named as `/forge` names it, or any file of the project by its
-path (CLAUDE.md, Isolated reviewers); how it narrows the run is the lens
-file's. Remake the project's ledger first, `python
+**`/critique <lens> [artefact|path] [slug]` — run it.** The target is
+optional: an artefact named as `/forge` names it, by its state file, or
+any file of the project by its path; without one, the whole chain. How
+it narrows the run is the lens file's. Remake the project's ledger first, `python
 scripts/forge-ledger.py <slug>`, so that the agent reads a current
 file (SOL.0680); then invoke the `critic-<lens>`
 subagent on the project (infer it from context; if ambiguous, ask),

@@ -94,7 +94,10 @@ Do not plan it as a page.
 
 ## What you read
 
-For the engine: `CLAUDE.md`; every file under `.claude/skills/`
+For the engine: `CLAUDE.md`; every file under `.claude/reference/`
+(what CLAUDE.md names there is read with the section that names it,
+and a page that mirrors it names the file as an input, never the
+section alone); every file under `.claude/skills/`
 (the commands, the `/forge` state files, the `/recipe` genre files,
 the contracts, the walkthrough skill); every file under
 `.claude/agents/`; `.claude/settings.json`; every file under

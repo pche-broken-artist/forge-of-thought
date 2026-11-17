@@ -11,14 +11,15 @@ version: 0.1
 
 <!-- Shape: templates/recipe.md -->
 
-<!-- A recipe: CLAUDE.md, Document chain, Renders (what it is) and
-Versioning & status (how it is versioned). This skeleton owns the
-shape only. -->
+<!-- A recipe is a tool, not a record of thinking: CLAUDE.md, Document
+chain, Renders (what it is) and Versioning & status (how it is
+versioned). This skeleton owns the shape only. -->
 
 ## Inputs
 <!-- Artefacts this render is generated from, by path, one per line.
 More than one input is legitimate (CLAUDE.md, Document chain, Renders),
-e.g. intent + assignment. -->
+e.g. intent + assignment. Another render may stand here as a picture
+source; a render cites none that is not named here. -->
 - 10-intent.md
 
 ## Instructions

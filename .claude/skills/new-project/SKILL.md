@@ -62,7 +62,7 @@ steps 3–5 below do not apply.
      template comments kept for the first `/recipe` iteration, each
      with its companion `recipes/<recipe>.history.md` from
      `templates/history.md` (its first records, 0.1 scaffolded); their renders
-     are `/release`'s (CLAUDE.md, Document chain, Renders), not this command's
+     are `/release`'s (`.claude/skills/release/SKILL.md`), not this command's
    - `projects/$0/logo.png` is the principal's to supply, optional
      (POS.1010) — mention it once, never ask for it
 3. **00-brief.md:** ask the principal to paste or dictate the brief

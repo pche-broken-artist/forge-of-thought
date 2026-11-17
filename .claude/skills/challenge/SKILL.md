@@ -21,9 +21,9 @@ the report and presents it.
 project's subject. A recommendation, never a gate.
 
 **`/challenge <persona> [artefact|path] [slug]` — run it.** The target
-is an artefact named as `/forge` names it, or any file of the project by
-its path (CLAUDE.md, Isolated reviewers); how it narrows the run is the
-contract's and the persona file's. Remake the project's ledger
+is optional: an artefact named as `/forge` names it, by its state file,
+or any file of the project by its path; without one, the whole chain.
+How it narrows the run is the contract's and the persona file's. Remake the project's ledger
 first, `python scripts/forge-ledger.py <slug>`, so that the agent
 reads a current file (SOL.0680); then invoke the `challenger-<persona>`
 subagent on the project (infer it from context; if ambiguous, ask),
@@ -55,8 +55,8 @@ When it returns:
    (`.claude/skills/walkthrough/SKILL.md`, the one owner of its
    shape and of the verdict words). What `accept` writes here: the
    challenge is mended through `/forge <artefact>` in the artefact
-   it concerns, state `accepted`; where it is mended and when it
-   goes above its layer: CLAUDE.md, Isolated reviewers.
+   it concerns, state `accepted`; an accepted challenge is mended
+   where it needs to be (POS.0440).
    The other verdicts are the walkthrough's. If he declines the
    walkthrough, the challenges wait.
 

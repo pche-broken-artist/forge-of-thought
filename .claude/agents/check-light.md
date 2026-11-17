@@ -20,9 +20,15 @@ What you verify:
 1. **Front-matter and history** — against Versioning & status in
    CLAUDE.md, every rule there (POS.1070), for every versioned
    document and its companion: the placement of the history, and the
-   form of its log as `templates/history.md` gives it. Whether
-   a text belongs in the document or its history is the `history`
-   check's, never yours.
+   form of its log as `templates/history.md` gives it. A Version
+   History table, in the body of a document or in its companion, is a
+   finding: a companion written before the log keeps its table
+   untouched and moves as it stands to `<file>.history.archive.md`,
+   immutable from then on, the log beginning with the next version
+   and the history of an item being a search of both; the finding is
+   settled by that move, on the principal's word, project by project.
+   Whether a text belongs in the document or its history is the
+   `history` check's, never yours.
 2. **The ledger's own reports** — the ledger, made as the contract says,
    is never a thing to compare with the files: each line of its Reports section and
    each `unparsed:` line of its header (templates/ledger.md, Reports)

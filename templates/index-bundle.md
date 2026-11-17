@@ -9,8 +9,8 @@ origin: <where the whole came from — a site, a sender, an export>
 
 <!-- Shape: templates/index-bundle.md -->
 
-<!-- Catalogue of one bundle (sources/<slug>/): the rules are
-CLAUDE.md's (Document chain, External inputs). This skeleton is the one owner of the
+<!-- Catalogue of one bundle (sources/<slug>/): the rules are the
+ingest skill's (`.claude/skills/ingest/SKILL.md`, step 1). This skeleton is the one owner of the
 bundle index (POS.1070): the header and the opening paragraph are its
 own, the per-file entry is the sources entry of templates/index.md,
 cited and not copied. The opening paragraph says whether the bundle

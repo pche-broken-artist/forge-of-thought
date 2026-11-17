@@ -15,8 +15,9 @@ name — a later whole of thinking born during the project's life).
 Shape of the result: `templates/brief.md` — a YAML header, then
 free form: any headings, tables or lists the principal finds
 useful, no IDs, no conventions of the chain. It is versioned as
-every artefact is (CLAUDE.md, Versioning & status); its language:
-prime directive 6.
+every artefact is (CLAUDE.md, Versioning & status). It is kept in
+whatever language it is written in, the one exception among the
+artefacts to the project's language (CLAUDE.md, prime directive 6).
 
 **Inputs.** The principal's thought, however it arrives. Around it,
 gathered during the elicitation: research notes (`research/`), sources

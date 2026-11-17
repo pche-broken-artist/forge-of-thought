@@ -37,8 +37,10 @@ else. Never silently re-register.
    filenames. On a name collision, suffix `-2`. Never rename or modify a
    file already in the index: sources are immutable from the
    moment of registration (CLAUDE.md, Versioning & status).
-   **Bundles** (CLAUDE.md, Document chain, External inputs): store a set of related
-   files as `sources/<slug>/`, one index entry; in sweep mode, register
+   **Bundles**: store a set of related files (a downloaded site with
+   its index, say) as `sources/<slug>/`, one source with one index
+   entry pointing to the bundle's own index, two levels and never
+   deeper; in sweep mode, register
    a subdirectory as one bundle, never file by file. Create its
    `00-INDEX.md` from `templates/index-bundle.md` if the bundle
    arrives without one; validate a supplied one against the actual
@@ -54,7 +56,9 @@ else. Never silently re-register.
    file inside a bundle without an entry in the bundle's index is
    offered for registration there, never reported as a changed
    source, and a new subdirectory is asked whether it grows at the
-   question of its role.
+   question of its role. Each file of a growing bundle is immutable
+   from its own registration; which of the two a bundle is, its index
+   says (POS.0180). What cites a bundle cites the file by its path.
 2. **Date, best effort, never a question.** The document's origin
    date goes into the
    `Date` field of its index entry if it can be determined for free:
@@ -72,8 +76,9 @@ else. Never silently re-register.
      already lies in `sources/` (sweep mode), add its path to
      `sources/.gitignore` and leave it there, local only.
    - **No:** the binary is the source as a functional thing (a deck
-     template, a graphic, a logo): store, register and index it as is,
-     no extract. Text files get no question. Keeping both is the
+     template, a graphic, a logo), in a library as in a project, with
+     no kind of its own: store, register and index it as is, no
+     extract. Text files get no question. Keeping both is the
      exception, on the principal's explicit word. The script is the only
      conversion path (CLAUDE.md, Document chain, External inputs).
      Extracts made before this rule keep their `.extract.md` names; a

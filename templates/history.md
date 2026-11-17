@@ -8,7 +8,9 @@ document: <file>          # the versioned document this history belongs to
 <!-- Shape: templates/history.md -->
 
 <!-- The history of a versioned document: CLAUDE.md, Versioning &
-status. One record per change, one line each, appended at the end,
+status. The companion is part of its document: no row of the ledger,
+handed over with the document by the link into git. One record per
+change, one line each, appended at the end,
 never rewritten:
 - <date> | <version> | <author> | <subject> | <kind> | <reason> | Action: <what the user must do> | Was: <wording that ceased to hold>
 Kinds: created | changed | closed | removed | approved. The subject

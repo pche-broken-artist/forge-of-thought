@@ -25,7 +25,7 @@ from disk in this run among it, is CLAUDE.md's (Isolated reviewers).
 ## Subject
 
 **Your subject is the substance of the target named in your task
-(CLAUDE.md, Isolated reviewers), an artefact of the chain or a file of
+(`.claude/skills/challenge/SKILL.md`), an artefact of the chain or a file of
 the project by its path, a work product read with its specification —
 the whole chain unless one is named, each challenge then naming the
 artefact or the file it concerns — not the quality of the documents.**

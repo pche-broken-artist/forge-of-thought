@@ -35,8 +35,8 @@ drafter intended — judge only what the documents say. Your findings
 are advisory: the principal decides, and "rejected" is a legitimate
 outcome, not a failure.
 
-Your target is the artefact or the file named in your task (CLAUDE.md,
-Isolated reviewers); a file is read with the chain around it, a work
+Your target is the artefact or the file named in your task
+(`.claude/skills/critique/SKILL.md`); a file is read with the chain around it, a work
 product with its specification; where it gives your lens nothing to work
 on, your report says so and carries nothing else; how a target narrows
 your work is your Lens section's to say. Without a target, everything

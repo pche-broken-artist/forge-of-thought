@@ -59,12 +59,7 @@ forge is what they are told.
    absent. Records, state, research and recipes are always English: they
    are read by Claude, the reviewers and the checks, never handed to the
    recipients. English is the notation throughout (ID prefixes, status
-   words, front-matter keys). Translate on write. A work specification
-   follows the artefacts; its file is in the language its `## Making`
-   says. The one exception among the artefacts is the briefs
-   (`00-brief*.md`), kept in whatever language they are written in. A
-   render may be in any language, or languages, its recipe declares
-   (`templates/recipe.md`).
+   words, front-matter keys). Translate on write.
 7. **Structure over prose.** Items with stable IDs, even at very high
    abstraction. Narrative only in Purpose & Context and Objective.
 8. **Assignments are complete and precise.** An assignment carries the
@@ -210,10 +205,7 @@ whether it is versioned and how it behaves:
 | resources | source | external input as it arrived | external, /ingest | — | immutable |
 | resources | research | durable answer to one question; a research of several questions is a bundle with the plan and the synthesis at its head and one note per question per engine | Claude, /research | — | immutable |
 
-A functional binary — a `.potx` template, a graphic — is a source, so
-a library's assets are resources without a kind of their own; a
-library carries no artefacts and no records but its recipe's history
-companion. A file of `tmp/`, the player page of `docs/videos/` and
+A file of `tmp/`, the player page of `docs/videos/` and
 the principal's own file in `renders/` or `published/` have no kind:
 the forge reads none of them as a document (POS.1540, POS.1910).
 Prose in every document is hard-wrapped
@@ -247,17 +239,10 @@ POS.1320.
    imply intake: a source's role is individual, noted as free-text
    Role in the resource index, asked before the entry is written
    (POS.1040), and the principal alone directs how and when each
-   source is used. A set of related files
-   (e.g. a downloaded site with its index) lives as a subdirectory
-   `sources/<slug>/` and counts as one source with one ledger entry;
-   a bundle of one origin that keeps arriving (issues, minutes) grows
-   file by file through `/ingest --bundle <name>`, each file immutable
-   from its own registration, which of the two a bundle is its index
-   says (POS.0180);
-   intent provenance cites individual files by path. Every bundle
-   carries its own `00-INDEX.md` catalogue (skeleton
-   `templates/index-bundle.md`), created by `/ingest` at registration
-   if missing. When source content does
+   source is used. A set of related files is a bundle,
+   `sources/<slug>/`, one source with one entry; what a bundle is, how
+   it grows and its own index are the ingest skill's
+   (`.claude/skills/ingest/SKILL.md`, step 1). When source content does
    enter the intent, it is the principal's explicit act, cited with
    provenance: what someone said in a meeting is never silently
    promoted to the principal's own position.
@@ -265,8 +250,7 @@ POS.1320.
    carries a `00-INDEX.md` (skeleton `templates/index.md`) — a light
    catalogue so that Claude and the principal know what resources
    exist and what they are for without re-reading them, in the fixed
-   free-text fields the skeleton shows. A bundle appears as one
-   entry pointing to its inner index — two levels, never deeper. The
+   free-text fields the skeleton shows. The
    index tracks nothing (no processing state, no positions) and is an
    automatic input of no command: a contradiction between the intent
    and a resource is not a finding; Claude reaches for a file by its
@@ -279,37 +263,22 @@ POS.1320.
    iterated is its **recipe** (`recipes/<recipe>.md` — inputs, audience,
    instructions and the output template in one versioned file; more than
    one input is legitimate), and `/render <recipe>` regenerates the
-   output from it. Recipes are tools, not
-   records of thinking; how they are versioned is Versioning & status's.
+   output from it.
    A render assigns nothing and is not part of the chain: the artefacts
    stay the source of truth. The boundary between chain and render is
    authorship: a chain artefact is composed by the principal, a render
    is generated from artefacts — an article the principal writes is a
    layer of the chain, its translation is a render. An output is made
-   in two steps, each with its
-   own command. `/render` generates the Markdown and, where the recipe
-   names a format, the plain file through the script the format names,
-   as `/render` step 7 says (a screenplay has no published file):
-   deterministic, cheap, repeated freely. `/publish` makes the designed
+   in two steps, each with its own command: `/render` the render and
+   its plain file, cheap, repeated freely
+   (`.claude/skills/render/SKILL.md`, step 7); `/publish` the designed
    file through a model and its document skills: expensive, only on the
    principal's command, never by `/render`, by `/release` or on Claude's
    own judgement. A plain or a published file is tracked in git like any
    render output and never edited by hand: the Markdown render stays the
-   source of truth. Beside the forge's files the principal may keep his
-   own in `renders/` and `published/`, made by hand from them, a copy
-   under a new name he edits, a PDF saved from Word or PowerPoint, an
-   HTML of a diagram: in git with the rest, no companion, no row, no
-   check (POS.1910). A render
-   may cite another render as a picture source when the recipe declares
-   it among its inputs. An output in the engine's `docs/videos/` is
+   source of truth. An output in the engine's `docs/videos/` is
    the one public folder, served by GitHub Pages and left alone by
-   `/document`. Every project has a README as a
-   render of its own `recipes/readme.md` (output the project root) and,
-   if it is a thought project, release notes from
-   `recipes/release-notes.md` — the same mechanism as the engine's own
-   README and release notes; every `/release` of the project regenerates
-   them. A library has a README only: a catalogue of what it holds. Both
-   are genres of `/recipe`, scaffolded by `/new-project`.
+   `/document`.
 4. **Documentation** is generated, never composed by hand: pages of
    one topic each in `docs/` with an index, for the user, the
    extender and the evaluator, in a standard outline of five
@@ -515,15 +484,6 @@ records, `Was` included. Before proposing a change to an item,
 Claude reads its history through `/history <ID>`
 (`.claude/skills/history/SKILL.md`); the history is searched by its
 script, never loaded whole.
-The companion is part of its document: it has no ledger row and is
-handed over with the document by the link into git. A companion
-written before the log keeps its table untouched: it moves as it
-stands to `<file>.history.archive.md`, immutable from then on, and
-the log begins with the next version; the history of an item is a
-search of both. A
-Version History table, in the body of a document or in its
-companion, is a `/check` finding settled by that move, on the
-principal's word, project by project.
 
 Immutable documents (reviews, challenges, sources, research) are never
 edited — a source from its registration, the others from creation;
@@ -546,45 +506,32 @@ at the next hundred (`REQ.0100, REQ.0110`). Overflow takes the next free
 number anywhere. Groups are plain headings: no IDs, no metadata, no
 lifecycle. Depth max two levels.
 
-| Prefix | Meaning | Lives in |
-|---|---|---|
-| REQ | requirement | assignment |
-| OOS | out of scope / do-not | assignment, BRD |
-| CON | constraint — deliberate boundary, not to be challenged | assignment |
-| ASM | assumption | assignment, BRD, work specification |
-| DEL | deliverable — may delegate work ("produce NFRs and return") | assignment |
-| TBC | open question / to be confirmed, with owner | assignment, BRD, solution design, work specification |
-| SOL | part of the solution — what is built or done, what it realises, the choice it rests on | solution design |
-| SCR | success criterion — optional or delegated | assignment, BRD |
-| BR | business requirement — one rule of the business, testable, citing the REQ or POS it carries | BRD |
-| UC | use case — behaviour agreed as a sequence, at user-goal level | BRD |
-| DEP | dependency — what the BRD relies on outside itself | BRD |
-| NFR | non-functional requirement — a quality by category, its value the stakeholders' or a TBC | BRD |
-| US | user story — behaviour seen from outside, with its acceptance criteria, citing the BR, NFR, UC, DEP or POS it serves | user stories |
-| POS | position the principal currently holds | intent |
-| THR | open thread — one matter set aside to be taken up later; names the artefact it concerns and carries its origin, its owner and its priority (`.claude/skills/thread/SKILL.md`) | the project's `threads/`, one file per thread (POS.1680) |
-| REJ | rejected direction, with the reason it was dropped | intent |
-| FCT | fact — what is the case, as the principal states it or as a source states it; not a stance; a source's fact cites its file, the principal's needs none; verification is never demanded | intent |
-| FND | finding of a critic (document quality) or of a check (conformance) | ledger, reviews |
-| CHL | peer-review challenge (substance) | ledger, challenges |
-| DEC | decision, incl. rejected findings and challenges | decisions.md |
+The prefixes, each with what it means and where its items live, are
+the table of `.claude/reference/id-prefixes.md`, read when a prefix is
+looked for.
 
 ## Isolated reviewers
 What holds for every isolated subagent of the forge, a reviewer, a
 renderer, a documentation agent or a research agent alike: it sees
 nothing of the conversation, reads every input from disk in its own
 run, since the copy of this file in its context may be older, and
-lets no instance fact into what it returns (POS.0950).
+lets no instance fact into what it returns (POS.0950). A report is a
+public file, or may be quoted into one: the rule holds even where a
+fact would explain a finding.
 
-All are such subagents, on the
-session model (`model: inherit` — the whole forge runs on one model,
-but for the two exceptions POS.0930 names; speed is bought with context,
-never with a weaker reviewer). One shape, strictly separate jobs, each
-with its own output (below). All are
-invoked by hand and settled by walkthrough; the reports are immutable
-and dated. Every agent returns its report with its findings unnumbered
-and writes nothing; the command numbers it and files it, one report at a
-time, so that no ID is given twice (POS.1140). A filed finding is
+The reviewers are such subagents, on the session model (`model:
+inherit` — the whole forge runs on one model, but for the two
+exceptions POS.0930 names; speed is bought with context, never with a
+weaker reviewer): one shape, strictly separate jobs. The critic
+(`/critique`) reads the quality of the documents, never the substance;
+the challengers (`/challenge`) the substance of the thinking, never the
+quality of a document; the checks (`/check`) mechanical conformance
+with the conventions, never either. What each takes as its target,
+returns and files is its command's
+(`.claude/skills/critique/SKILL.md`,
+`.claude/skills/challenge/SKILL.md`, `.claude/skills/check/SKILL.md`)
+and its contract's; all are invoked by hand and settled by
+walkthrough, their reports immutable and dated. A filed finding is
 reported under the ID it has, still open, reopened or verified resolved,
 and a rejected one is not raised again; the state words are
 `templates/ledger.md`'s. No reviewer runs on Claude's own judgement;
@@ -605,34 +552,7 @@ isolation, the subject and its boundary, the way of working and the
 shape of the output; a Lens section is a specialisation of its contract,
 never a replacement — it may narrow what is read or make a shared rule
 stricter, never rename, drop or duplicate a shared rule or field, and
-the protocol changes in the contract alone. A report is a public file,
-or may be quoted into one: the rule on instance facts above holds even
-where a fact would explain a finding. The critic and the challenger
-take an optional target,
-an artefact named as `/forge` names it, by its state file, or any file
-of the project by its path; without one, the whole chain. A check takes
-a project by its slug, or the engine.
-- **critic** (`/critique <lens> [artefact]`) — document quality, never
-  substance. What each lens reads and goes after is its agent file's,
-  the shared conduct and the report shape the contract's. Produces `FND`
-  in `reviews/` (`YYYY-MM-DD-critique-<lens>-HHMM-<hash>.md`, the name
-  completed by `scripts/forge-report.py`, as every report's is). Finding
-  states: as `templates/ledger.md` has them.
-- **challengers** (`/challenge <persona> [artefact]`) — substance of
-  the thinking, never document quality. The blind spots each persona
-  hunts are its agent file's, severity,
-  epistemic status and the ban on fabrication the contract's.
-  Produces `CHL` in `challenges/`
-  (`YYYY-MM-DD-challenge-<persona>-HHMM-<hash>.md`).
-  Challenge states: as `templates/ledger.md` has them. An accepted
-  challenge is mended where it needs to be (POS.0440).
-- **checks** (`/check <check> [slug]`) — mechanical conformance with the
-  conventions, never substance or quality. Each check owns one concern
-  and none another's; what each verifies is its agent file's, the
-  conduct and the report shape the contract's. `FND` in `reviews/`
-  (`YYYY-MM-DD-check-<name>-HHMM-<hash>.md`), states as
-  `templates/ledger.md` has them. Composition is the caller's (`/save`,
-  `/release`); checks never call each other.
+the protocol changes in the contract alone.
 
 ## Ledger
 `ledger.md` is the **single source of truth for state**, made at

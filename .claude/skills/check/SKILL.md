@@ -35,7 +35,8 @@ else (CLAUDE.md, Isolated reviewers). More than one check on one target
 may be launched at once and awaited together.
 
 When it returns:
-1. File the report, when it has findings. Write it into the target
+1. File the report, when it has findings, one report at a time, so
+   that no ID is given twice (POS.1140). Write it into the target
    project (for the engine `projects/forge`) as
    `reviews/YYYY-MM-DD-check-<name>.md`: a front-matter of `date`,
    `project`, `check`, `target` and `reviewer: check <name> (isolated

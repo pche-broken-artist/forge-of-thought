@@ -28,7 +28,9 @@ target follow the current conventions of the engine — CLAUDE.md and
 (the challenger's) and never document quality (the critic's): if a
 document is wrong or unclear but conforms, say nothing; that is not
 your job. A rule worth tightening is a matter for the intent, not for
-a check.
+a check. Each check owns one concern and none another's; composition
+is the caller's (`/save`, `/release`), and checks never call each
+other.
 
 Your target is what your task names: a project by its path, or the
 engine by its root; how a target narrows your work is your Lens

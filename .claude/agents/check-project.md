@@ -47,14 +47,21 @@ What you verify:
    still carrying `## Build instructions` (the alias:
    `templates/recipe.md`, Format) is a finding fixed at its next
    iteration.
-   The README and release-notes recipes of CLAUDE.md, Document chain,
-   Renders, exist (fix: scaffold from `templates/recipe-<genre>.md`).
+   The README and release-notes recipes of CLAUDE.md, Repository
+   layout, exist (fix: scaffold from `templates/recipe-<genre>.md`).
    A brief whose mining record says `mined` is cited somewhere in
    the intent.
 2. **ID hygiene** — against the ID scheme in CLAUDE.md, every rule
-   there (POS.1070), in every document that carries IDs.
+   there (POS.1070), and the prefixes by the table it names
+   (`.claude/reference/id-prefixes.md`), in every document that
+   carries IDs.
 3. **Language** — CLAUDE.md, prime directive 6, for every artefact
-   and record; the briefs and renders are exempt as stated there.
+   and record. A brief is exempt, kept in whatever language it is
+   written in (`.claude/skills/forge/states/brief.md`, Target); a
+   render is in the languages its recipe declares
+   (`templates/recipe.md`, `languages:`); the file of a work product
+   is in the language its specification's `## Making` says
+   (`.claude/skills/work/SKILL.md`).
 4. **Immutables** — the immutable documents of CLAUDE.md, Versioning
    & status, never edited after creation; flag any signs of
    after-the-fact editing that the ledger or the history companions

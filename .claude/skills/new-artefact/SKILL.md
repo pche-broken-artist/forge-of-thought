@@ -20,7 +20,9 @@ the intent and an item of the solution design.
 
 **Inputs.** The forge intent with its threads and its solution
 design; the definitions in `.claude/skills/forge/states/` and their
-templates; CLAUDE.md, ID scheme and Isolated reviewers; a brief of
+templates; CLAUDE.md, ID scheme, with the table of prefixes it names
+(`.claude/reference/id-prefixes.md`), and Isolated reviewers, with
+the three contracts it names; a brief of
 the forge project where the principal has written one for the kind;
 research and sources as he directs.
 
@@ -80,7 +82,8 @@ in: a brief of the forge project holds the kind, and it is mined; a
 few sentences of what the principal wants, and the kind is handed
 over; neither, and the Map is walked by interview. The order of what
 is born: the position in the intent; the definition, then its
-template; the row of a new prefix in CLAUDE.md, ID scheme; the
+template; the row of a new prefix in
+`.claude/reference/id-prefixes.md`; the
 reviewers, a persona file and the calibration of the critic's
 contract where decided; the item of the solution design. Where the kind needs a
 trial on real work before its position can hold, the order is

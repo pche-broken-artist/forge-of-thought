@@ -5,8 +5,8 @@ description: Compose or iterate a project's readme recipe — the render is the 
 Genre: readme. Skeleton: `templates/recipe-readme.md`. Output:
 `README.md` in the project root (POS.1000 of the forge intent).
 
-Why every project carries this recipe and when its render is made is
-CLAUDE.md, Document chain, Renders's.
+That every project carries this recipe is CLAUDE.md, Repository
+layout's; when its render is made, `.claude/skills/release/SKILL.md`'s.
 
 Role: interviewer. Elicit the answers below from the principal —
 options and trade-offs offered, decisions his (`/recipe`, step 2) —

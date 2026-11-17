@@ -9,11 +9,12 @@ specification `work/<name>.spec.md`, the way and the why, and the file
 `work/<name>.<ext>`, the content, named by the work alone. Shared
 mechanism is cited and never repeated here: one write per round
 (CLAUDE.md, prime directive 9),
-versioning with history (Versioning & status), the language
-(prime directive 6: the specification in the project's language, the
-file in whatever language the work needs, said in `## Making`), the
-two ways of composing (Working methods, Handing over and Elicitation
-interview). The shape of the specification is `templates/work.md`.
+versioning with history (Versioning & status), the two ways of
+composing (Working methods, Handing over and Elicitation interview).
+The language is this skill's: the specification follows the artefacts,
+in the project's language (prime directive 6), the file is in whatever
+language the work needs, said in `## Making`. The shape of the
+specification is `templates/work.md`.
 
 **Bare `/work` — the roster.**
 1. Infer the current project from context ($0 may be a slug; if
