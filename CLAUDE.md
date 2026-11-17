@@ -350,6 +350,8 @@ projects/<slug>/           # kind: thought — the chain
   research/00-INDEX.md                # resource index (rewritten)
   recipes/<recipe>.md                 # render recipes: inputs, audience,
                                       # instructions, template — iterated
+  recipes/readme.md                   # the two recipes every thought
+  recipes/release-notes.md            # project carries
   recipes/<recipe>.history.md         # the recipe's history
   renders/<recipe>.md                 # generated outputs, overwritten by
                                       # /render, provenance front-matter

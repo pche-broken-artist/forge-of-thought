@@ -99,7 +99,8 @@ tmp/                       # CLAUDE.md, Repository layout
                            # agents (the reviewers, the
                            # documentation's planner and writer),
                            # reference (what is read on demand:
-                           # the table of commands and this layout),
+                           # the table of commands, the table of
+                           # prefixes and this layout),
                            # settings (settings.json: the two
                            # hooks, the deny rule of the other
                            # shell, the two denies of the user's
