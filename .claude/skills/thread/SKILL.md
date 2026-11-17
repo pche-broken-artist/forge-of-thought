@@ -31,10 +31,13 @@ continuation of that one instead, on the same verdict; a closed
 thread on the matter is cited by the new one. A thread is born on
 the principal's command only (POS.0120): from his own word, from a
 document he names, an issue among them, or from Claude's synthesis
-when he asks for it. Claude may say that a matter deserves a
-thread; he drafts one when the principal says so. The birth is a
-`created` record in the intent's history, or in the history of
-`00-brief.md` while the project has no intent
+when he asks for it. A thread from an issue or a discussion of the
+project's GitHub repository is opened after the issue is registered
+as a source (`.claude/skills/ingest/SKILL.md`, a growing bundle),
+and its `origin` is the path of that file. Claude may say that a
+matter deserves a thread; he drafts one when the principal says so.
+The birth is a `created` record in the intent's history, or in the
+history of `00-brief.md` while the project has no intent
 (`scripts/forge-record.py`).
 
 **With an ID: the thread taken up.** Claude reads the thread and
