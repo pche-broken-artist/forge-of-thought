@@ -7,6 +7,8 @@ parent: 30-brd.md        # 30-brd.md | 10-intent.md (a small change, on the prin
 
 # <Title> — User stories
 
+<!-- Shape: templates/user-stories.md -->
+
 <!-- The history lives in the companion 35-user-stories.history.md
 (templates/history.md), never here. The rules:
 `.claude/skills/forge/states/user-stories.md`, the Story style above

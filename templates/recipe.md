@@ -9,6 +9,8 @@ version: 0.1
 
 # Recipe — <purpose>
 
+<!-- Shape: templates/recipe.md -->
+
 <!-- A recipe: CLAUDE.md, Document chain, Renders (what it is) and
 Versioning & status (how it is versioned). This skeleton owns the
 shape only. -->

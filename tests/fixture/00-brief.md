@@ -6,6 +6,8 @@ version: 0.1
 status: draft
 ---
 
+<!-- Shape: templates/brief.md -->
+
 The bicycles of the house stand in the rain. A shed is wanted, by the
 gate, for six bicycles, lockable, before the autumn. Whether it is
 bought or built is open.

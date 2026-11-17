@@ -7,6 +7,8 @@ parent: 20-assignment.md   # 20-assignment.md | 10-intent.md; a BRD from a sourc
 
 # <Title> — BRD
 
+<!-- Shape: templates/brd.md -->
+
 <!-- The history lives in the companion 30-brd.history.md
 (templates/history.md), never here. The rules of every section:
 `.claude/skills/forge/states/brd.md`. Items are lists with IDs; a table

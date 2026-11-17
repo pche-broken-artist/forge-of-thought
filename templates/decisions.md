@@ -4,6 +4,8 @@ project: <slug>
 
 # Decisions
 
+<!-- Shape: templates/decisions.md -->
+
 <!-- Append-only (CLAUDE.md, Document kinds). One record per decision
 of the principal, numbered DEC.NNNN in the global sequence of the ID
 scheme, newest last; a record is never edited, a later decision

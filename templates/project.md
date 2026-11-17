@@ -5,6 +5,8 @@ language: en             # language of the chain's artefacts (ISO 639-1);
                          # CLAUDE.md, prime directive 6
 ---
 
+<!-- Shape: templates/project.md -->
+
 <!-- The project file (POS.1590): written once at the creation of a
 project, by /new-project or by the migration, never by a round;
 merged as text; read wherever the kind and the language of a project

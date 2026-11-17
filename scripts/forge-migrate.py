@@ -8,6 +8,7 @@ SYNOPSIS
     python scripts/forge-migrate.py <slug | path>            # dry run
     python scripts/forge-migrate.py <slug | path> --apply    # perform
     python scripts/forge-migrate.py <slug | path> --undo     # take back
+    python scripts/forge-migrate.py <slug | path> --comments [--apply]
 
 WHAT IT DOES
     The shape of a project is a set of marks, one per step, never an
@@ -51,6 +52,22 @@ WHAT IT DOES
         printed; the old file deleted from the tree.
     D   `.gitattributes` from templates/gitattributes; the engine
         carries a list of its own, which the step only verifies.
+
+    --comments is a step of its own, no mark and never a condition of
+    a write, run on the owner's word (POS.2030, SOL.0970): in every
+    file made from a template that is not immutable, the skeleton's
+    comment is replaced by the line that names the skeleton, `<!--
+    Shape: templates/<name>.md -->`; a file without the comment gets
+    the line where the skeleton has it. The histories, the resource
+    indexes and the bundles' own, the open threads, `decisions.md` and
+    `project.md` are born with one comment, which is the skeleton's
+    whatever its wording; in an artefact, a recipe or a work
+    specification only a comment the skeleton carries today is
+    replaced, and any other is left and counted. A recipe whose genre
+    the file does not tell is printed and left. Closed threads,
+    archives, research and sources are not read. Dry without --apply;
+    with it the refusals and the manifest of --apply hold, and --undo
+    takes it back.
 
     The author of every record it writes is the handle of the instance
     file (CLAUDE.local.md, `Author:`); without it the script refuses.
@@ -239,7 +256,8 @@ def step_b0(t, apply, out):
             lines.append(l)
     if t.slug.startswith("fixture"):
         lines.append("fixture: true")
-    text = "---\n" + "\n".join(lines) + "\n---\n" + (("\n" + body.lstrip("\n")) if body.strip() else "")
+    shape = fd.shape_line(body)  # of the template's comments the file keeps the line that names it (POS.2030)
+    text = "---\n" + "\n".join(lines) + "\n---\n" + (("\n" + shape + "\n") if shape else "")
     note = ""
     ledger_slug = None
     if t.ledger.exists():
@@ -418,7 +436,7 @@ def step_c1(t, apply, out):
             trailing.append(line)
     template = read(TEMPLATES / "thread.md")
     tfront, tbody = split_front(template)
-    comment = tbody[tbody.find("<!--"):] if "<!--" in tbody else ""
+    comment = fd.shape_line(tbody)  # the line that names the template, none of its comments (POS.2030)
     for b in blocks:
         text = "\n".join(b["lines"]).strip("\n")
         origin = _guess_origin(text)
@@ -450,6 +468,135 @@ def _guess_origin(text):
     if m:
         return m.group(1)
     return "the principal"
+
+
+# ------------------------------------------------- the comments (POS.2030)
+
+COMMENT_RE = re.compile(r"<!--.*?-->", re.S)
+ONE_COMMENT = ("history", "index", "index-bundle", "thread", "decisions", "project")  # born with one comment, the skeleton's
+
+
+def _norm(text):
+    return " ".join(text.split())
+
+
+def _template_comments(name):
+    p = TEMPLATES / f"{name}.md"
+    return {_norm(m.group(0)) for m in COMMENT_RE.finditer(read(p))} if p.exists() else set()
+
+
+def _recipe_template(path):
+    """The genre skeleton a recipe was made from: told by a comment of
+    the skeleton it still carries, else by a purpose that is a genre's
+    own word; None where neither tells."""
+    text = read(path)
+    own = {_norm(m.group(0)) for m in COMMENT_RE.finditer(text)}
+    genres = sorted(p.stem for p in TEMPLATES.glob("recipe-*.md"))
+    for g in genres:
+        if own & _template_comments(g):
+            return g
+    front, _ = split_front(text)
+    purpose = front_value(front, "purpose") if front is not None else None
+    if purpose and f"recipe-{purpose}" in genres:
+        return f"recipe-{purpose}"
+    return None
+
+
+def shaped_files(proj):
+    """(path, template name or None) of every file of a project that is
+    made from a template and is not immutable. A closed thread, an
+    archive, a research and a source are left out: they keep the
+    comment they have (POS.2030)."""
+    out = []
+    for pattern in ("*.history.md", "recipes/*.history.md", "work/*.history.md"):
+        out += [(p, "history") for p in sorted(proj.glob(pattern))]
+    for name in ("sources/00-INDEX.md", "research/00-INDEX.md"):
+        if (proj / name).exists():
+            out.append((proj / name, "index"))
+    out += [(p, "index-bundle") for p in sorted(proj.glob("sources/*/00-INDEX.md"))]
+    for p in sorted(proj.glob("threads/THR.*.md")):
+        front, _ = split_front(read(p))
+        if front is not None and front_value(front, "status") == "closed":
+            continue
+        out.append((p, "thread"))
+    for name, template in (("decisions.md", "decisions"), ("project.md", "project")):
+        if (proj / name).exists():
+            out.append((proj / name, template))
+    for p in sorted(proj.glob("[0-9][0-9]-*.md")):
+        if ".history." in p.name or ".threads." in p.name:
+            continue
+        state = "brief" if p.name.startswith("00-brief") else re.sub(r"^\d\d-", "", p.stem)
+        out.append((p, state if (TEMPLATES / f"{state}.md").exists() else None))
+    for p in sorted(proj.glob("recipes/*.md")):
+        if ".history." not in p.name:
+            out.append((p, _recipe_template(p)))
+    out += [(p, "work") for p in sorted(proj.glob("work/*.spec.md"))]
+    return out
+
+
+def _with_line(body, line, at_end):
+    """The body with the line where the skeleton has it: at the end of
+    a thread, under the first heading elsewhere, at the top of a body
+    without one."""
+    if at_end:
+        return body.rstrip("\n") + "\n\n" + line + "\n"
+    lines = body.split("\n")
+    for i, l in enumerate(lines):
+        if l.startswith("# "):
+            return "\n".join(lines[:i + 1] + ["", line] + lines[i + 1:])
+    return "\n" + line + "\n" + (("\n" + body.lstrip("\n")) if body.strip() else "")
+
+
+def step_comments(t, apply, out):
+    """The skeleton's comment replaced by the line that names the
+    skeleton (SOL.0970): on the owner's word, never a mark and never a
+    condition of a write. A comment that is not the skeleton's is left
+    and counted."""
+    changed = 0
+    for p, template in shaped_files(t.proj):
+        text = read(p)
+        if fd.shape_line(text):
+            continue
+        if template is None:
+            out.append(f"    {t.rel(p)}: its template is not told by the file - left as it is, for the principal")
+            continue
+        line = fd.shape_line(read(TEMPLATES / f"{template}.md"))
+        if not line:
+            continue
+        front, body = split_front(text)
+        if front is None:
+            out.append(f"    {t.rel(p)}: no front-matter - left as it is, for the principal")
+            continue
+        found = list(COMMENT_RE.finditer(body))
+        theirs = _template_comments(template)
+        if template in ONE_COMMENT and len(found) == 1:
+            m = found[0]
+        else:
+            m = next((c for c in found if _norm(c.group(0)) in theirs), None)
+        if m is not None:
+            new, did, left = body[:m.start()] + line + body[m.end():], "the comment replaced by the line", len(found) - 1
+        else:
+            new, did, left = _with_line(body, line, template == "thread"), "the line added", len(found)
+        out.append(f"    {t.rel(p)}: {did} ({template})" + (f"; {left} comment(s) of its own left" if left else ""))
+        t.write(p, "---\n" + "\n".join(front) + "\n---" + ("\n" + new if new else ""), apply)
+        changed += 1
+    return changed
+
+
+def comments_run(t, apply):
+    out = []
+    n = step_comments(t, apply, out)
+    print(f"{t.slug}: the comments of the skeletons (POS.2030); closed threads, archives, research and sources are left as they are")
+    print("\n".join(out) if out else "    nothing to change")
+    if not apply:
+        fr.say(f"dry run: {n} file(s) would change; nothing changed", "grey")
+        return
+    if n and t.under_git:  # outside git --undo has nothing to restore from, so no manifest
+        t.manifest_path.parent.mkdir(exist_ok=True)
+        t.manifest_path.write_text(json.dumps(t.manifest, indent=2), encoding="utf-8")
+    tail = (f"manifest {t.manifest_path}; nothing committed - /save follows" if t.under_git
+            else "nothing to commit here, the project is outside git")
+    fr.say(f"{n} file(s) changed; {tail}", "green")
 
 
 def step_d(t, apply, out):
@@ -550,12 +697,22 @@ def main(argv):
     g = ap.add_mutually_exclusive_group()
     g.add_argument("--apply", action="store_true", help="perform the missing steps")
     g.add_argument("--undo", action="store_true", help="take back the last --apply from the manifest")
+    ap.add_argument("--comments", action="store_true",
+                    help="the skeleton's comment replaced by the line that names the skeleton; dry without --apply")
     a = ap.parse_args(argv)
     fr.need_git()
     fr.need_engine_repo()
     t = Target(a.slug)
     if a.undo:
         undo(t)
+        return 0
+    if a.comments:
+        reasons = refusals(t)
+        if reasons and a.apply:
+            fr.fail(f"{a.slug}: " + "; ".join(reasons) + " - nothing was changed.")
+        if reasons:
+            fr.say(f"{a.slug}: --apply would refuse: " + "; ".join(reasons), "yellow")
+        comments_run(t, a.apply)
         return 0
     author = author_handle()
     if author is None:

@@ -20,6 +20,8 @@ is taken up; the ledger prints the last.>
 YYYY-MM-DD, closed: <how the matter ended and where what was decided
 now stands.>
 
+<!-- Shape: templates/thread.md -->
+
 <!-- A thread (POS.1680), one file per thread in threads/; the header
 is its state: what it concerns, where it came from, whose it is, when
 it is taken up, what waits on it, whether it is open. The rules of a

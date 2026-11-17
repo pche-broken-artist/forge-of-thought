@@ -7,6 +7,8 @@ file: work/<name>.<ext>  # the file this specification makes, named by the work 
 
 # <Name> — Work specification
 
+<!-- Shape: templates/work.md -->
+
 <!-- A work product (CLAUDE.md, Document kinds; the command
 .claude/skills/work/SKILL.md): this file holds the way and the why,
 the file beside it the content. Versioning & status (its history

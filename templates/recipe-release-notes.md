@@ -8,6 +8,8 @@ output: RELEASE-NOTES.md
 
 # Recipe — release-notes
 
+<!-- Shape: templates/recipe-release-notes.md -->
+
 <!-- Release-notes-genre recipe, iterated via /recipe release-notes.
 The rules: CLAUDE.md, Document chain, Renders. -->
 

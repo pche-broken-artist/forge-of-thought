@@ -7,6 +7,8 @@ origin: <where the whole came from — a site, a sender, an export>
 
 # Index — bundle `<slug>`
 
+<!-- Shape: templates/index-bundle.md -->
+
 <!-- Catalogue of one bundle (sources/<slug>/): the rules are
 CLAUDE.md's (Document chain, External inputs). This skeleton is the one owner of the
 bundle index (POS.1070): the header and the opening paragraph are its

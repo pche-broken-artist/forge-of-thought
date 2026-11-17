@@ -7,6 +7,8 @@ audience: principal + Claude only
 
 # Fixture — Intent
 
+<!-- Shape: templates/intent.md -->
+
 ## Essence
 A lockable shed for six bicycles by the gate before the autumn. The
 shed is built, not bought, because no bought shed fits the gate.

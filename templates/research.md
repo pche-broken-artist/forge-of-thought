@@ -12,6 +12,8 @@ derived_from: <the plan: research/YYYY-MM-DD-<topic>/00-plan.md, card N; the kno
 
 # <Title: the card's question as a statement>
 
+<!-- Shape: templates/research.md -->
+
 <!-- The research note: one card, one engine, one note. The one owner of
 the note's shape (POS.1070); the agent's brief that makes it is
 `.claude/skills/research/SKILL.md`, The agent's brief. A note is written

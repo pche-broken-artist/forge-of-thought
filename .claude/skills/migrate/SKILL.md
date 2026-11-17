@@ -1,6 +1,6 @@
 ---
 description: Bring a project to the shape of a release that changed the shape of files — a dry run first, the migration on the principal's word, the threads' origins judged, then /save
-argument-hint: "[project-slug]"
+argument-hint: "[project-slug] [--comments]"
 ---
 
 The door to `scripts/forge-migrate.py` (SOL.0800, POS.1740): the
@@ -33,3 +33,13 @@ refusals and the way back are the script's).
    script's, as its header says; the tag before the migration is
    POS.1740's, taken through `/save <slug> --tag <name>` before
    `--apply`.
+
+**`/migrate <slug> --comments` — the comments of the skeletons.** A
+step of its own, on the owner's word and never a condition of a
+write (POS.2030, SOL.0970): the script's `--comments` replaces, in
+every file made from a template that is not immutable, the skeleton's
+comment by the line that names the skeleton. The course is the same:
+the dry run shown as it came, `--comments --apply` on the principal's
+word, what the script printed for him judged, a recipe whose genre
+the file does not tell and a comment of a file's own above all, then
+the ledger and `/save <slug>`.

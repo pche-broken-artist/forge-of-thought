@@ -139,7 +139,6 @@ class Light:
     # -- 1. front-matter and history
     def front_matter_and_history(self):
         rule_vs = "CLAUDE.md, Versioning & status"
-        tcomment = fc.template_comment("history")
         for doc, kind in fc.versioned_documents(self.proj):
             text = fd.read(doc)
             front, _ = fd.split_front(text)
@@ -194,9 +193,9 @@ class Light:
                          f"{rule_vs} (every versioned document keeps its history in `<file>.history.md` beside it)",
                          f"create `{self.rel(comp)}` from `templates/history.md` with a `created` record at {version}")
                 continue
-            self.companion(doc, comp, version, vt, tcomment)
+            self.companion(doc, comp, version, vt)
 
-    def companion(self, doc, comp, version, vt, tcomment):
+    def companion(self, doc, comp, version, vt):
         rule_vs = "CLAUDE.md, Versioning & status"
         text = fd.read(comp)
         front, body = fd.split_front(text)
@@ -229,16 +228,7 @@ class Light:
                      self.where(comp, fc.line_of(text, r"^# Version History|^\| *Version *\|", re.M)),
                      f"{rule_vs} (a companion written before the log moves as it stands to `<file>.history.archive.md`)",
                      "move the table to the archive companion, on the principal's word; the log begins with the next version")
-        cs = fc.comments(text)
-        if tcomment and cs and cs[0][1] != tcomment:
-            self.group("history-comment", "low",
-                       lambda n, w: f"{n} history companion{'s carry' if n > 1 else ' carries'} the skeleton's comment as it stood before the current `templates/history.md`",
-                       self.where(comp, cs[0][0]), "CLAUDE.md, Templates; `templates/history.md`, the comment",
-                       "the template's comment, as it stands on disk, in each", immediate=True)
-        elif tcomment and not cs:
-            self.add("low", f"`{self.rel(comp)}` carries no comment of the skeleton", self.where(comp, 1),
-                     "`templates/history.md`, the comment", "the template's comment, as it stands on disk", immediate=True)
-        # the records
+        # the records (a comment is compared with no template: POS.2030)
         before = len(fd.problems)
         recs = fd.records(comp)
         for path, line, what in fd.problems[before:]:
@@ -262,7 +252,7 @@ class Light:
             if r["kind"] == "closed" and r["was"] and any(s.startswith("THR.") for s in fd.subject_ids(r["subject"])):
                 self.group(("closed-was", comp), "low",
                            lambda n, w, c=comp: f"{n} `closed` record{'s' if n > 1 else ''} of a thread in `{self.rel(c)}` {'carry' if n > 1 else 'carries'} a `Was`",
-                           w, "`templates/history.md`, the comment (a thread that closes gets a `closed` record, no `Was`: the closed file is the archive)",
+                           w, "`.claude/skills/thread/SKILL.md`, Life and closing (a thread that closes gets a `closed` record, no `Was`: the closed file is the archive)",
                            "a record is never rewritten: the principal decides whether these stand as written; the next closing carries no `Was`")
             m = re.match(r"^mined:\s*(\w+)", r["reason"])
             if m and m.group(1) not in MINED_WORDS:
@@ -451,7 +441,6 @@ class Light:
 
     # -- 5. resource indexes
     def resource_indexes(self):
-        icomment = fc.template_comment("index")
         ikeys = fc.template_keys("index")
         for which in ("sources", "research"):
             d = self.proj / which
@@ -472,12 +461,6 @@ class Light:
             elif fd.front_value(front, "directory") != which:
                 self.add("low", f"`{which}/00-INDEX.md` says `directory: {fd.front_value(front, 'directory')}`",
                          self.where(idx, fc.line_of(text, r"^directory:", re.M)), "`templates/index.md`, the header", f"`directory: {which}`", immediate=True)
-            cs = fc.comments(body)
-            if icomment and (not cs or cs[0][1] != icomment):
-                self.group("index-comment", "low",
-                           lambda n, w: f"{n} resource index{'es carry' if n > 1 else ' carries'} a comment that is not the skeleton's as it stands",
-                           self.where(idx, (cs[0][0] + len(front) + 2) if cs and front else 1),
-                           "CLAUDE.md, Templates; `templates/index.md`, the comment", "the template's comment, as it stands on disk, in each", immediate=True)
             entries = fd.index_entries(idx)
             names = {}
             for e in entries:
@@ -544,13 +527,6 @@ class Light:
         if front is None or [k for k in keys if k not in bkeys] or [k for k in bkeys if k not in keys]:
             self.add("low", f"`{self.rel(idx)}` header differs from the bundle skeleton's", self.where(idx, 1),
                      "`templates/index-bundle.md`, the header (`bundle`, `project`, `date`, `origin`)", "the four keys and nothing else", immediate=True)
-        bcomment = fc.template_comment("index-bundle")
-        cs = fc.comments(body)
-        if bcomment and (not cs or cs[0][1] != bcomment):
-            self.group("bundle-comment", "low",
-                       lambda n, w: f"{n} bundle index{'es carry' if n > 1 else ' carries'} a comment that is not the bundle skeleton's as it stands",
-                       self.where(idx, (cs[0][0] + len(front) + 2) if cs and front else 1),
-                       "`templates/index-bundle.md`, the comment (the one owner of the bundle index, POS.1070)", "the template's comment, as it stands on disk, in each", immediate=True)
         names = set()
         for e in fd.index_entries(idx):
             names |= set(entry_names(e))

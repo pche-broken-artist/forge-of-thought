@@ -5,6 +5,8 @@ document: <file>          # the versioned document this history belongs to
 
 # History — <file>
 
+<!-- Shape: templates/history.md -->
+
 <!-- The history of a versioned document: CLAUDE.md, Versioning &
 status. One record per change, one line each, appended at the end,
 never rewritten:
@@ -14,9 +16,9 @@ is an ID, several IDs where the whole line holds for each, or a
 place without an ID: a section, the file, or in the forge's own
 project the operating layer. Reason is left out on
 `created`; `Action` and `Was` only where the record has them, `Was`
-always last, paragraphs in it divided by `<br>`; a thread that
-closes gets a `closed` record, no `Was` (the rules of a thread:
-`.claude/skills/forge/states/intent.md`, Threads and files). At the birth of a
+always last, paragraphs in it divided by `<br>`; the records a
+thread's birth and closing get: `.claude/skills/thread/SKILL.md`. At
+the birth of a
 document, one record of the file and one naming every item born
 with it. Lines are not wrapped. The author is the handle the
 instance file gives its principal (CLAUDE.md, Versioning & status);

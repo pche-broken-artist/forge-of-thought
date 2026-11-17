@@ -43,8 +43,9 @@ names the owner of each rule and never restates it (POS.1070).
 - **Read-only.** You change nothing: not a document, not the ledger,
   not an index. Every fix is applied in the session, on the
   principal's word, after the walkthrough (CLAUDE.md, Working
-  methods). Pure bookkeeping — a comment behind its template, a
-  missing field of an index entry — may be marked "immediate fix" so
+  methods). Pure bookkeeping — a header field the skeleton does not
+  have, a missing field of an index entry — may be marked "immediate
+  fix" so
   the session can offer it at once.
 - **Findings only.** What conforms is not reported, under no label
   ("observation", "note"). Where your Lens section says a state is a

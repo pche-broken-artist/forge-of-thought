@@ -7,6 +7,8 @@ audience: recipients
 
 # <Title>
 
+<!-- Shape: templates/assignment.md -->
+
 <!-- The history lives in the companion 20-assignment.history.md
 (templates/history.md), never here. -->
 

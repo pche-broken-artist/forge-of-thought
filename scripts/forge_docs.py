@@ -21,12 +21,19 @@ RECORD_RE = re.compile(
 THREAD_BLOCK_RE = re.compile(r"^- \*\*(THR\.\d{4,5})\*\*\s*(?:\[([^\]]*)\])?\s*(.*)$")
 DATE_RE = re.compile(r"\b\d{4}-\d{2}-\d{2}\b")
 PRIORITIES = ("high", "medium", "low")  # the priority of a thread, in its order (templates/thread.md)
+SHAPE_RE = re.compile(r"^<!-- Shape: templates/[\w.-]+ -->$", re.M)  # the line by which a file names its template (POS.2030, SOL.0970)
 
 problems = []
 
 
 def read(path):
     return Path(path).read_text(encoding="utf-8")
+
+
+def shape_line(text):
+    """The line by which a text names its template, '' when it has none."""
+    m = SHAPE_RE.search(text)
+    return m.group(0) if m else ""
 
 
 def split_front(text):

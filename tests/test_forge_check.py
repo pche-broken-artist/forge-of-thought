@@ -36,7 +36,3 @@ def test_line_of_first_match():
     assert fc.line_of(text, r"two") == 2
     assert fc.line_of(text, r"^three", fc.re.M) == 3
     assert fc.line_of(text, r"four") == 0
-
-
-def test_norm_collapses_whitespace():
-    assert fc.norm("  a \n  b\t c ") == "a b c"

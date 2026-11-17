@@ -13,7 +13,8 @@ You read one project — the path your task names — or, when the task
 names none, every project under `projects/` except `forge`, each
 reported on its own. The bookkeeping of a project — front-matter,
 history companions, the ledger's reports, dependencies, resource indexes —
-is the `light` check's, never yours; run beside it at a release
+is the `light` check's, never yours, but for the shape of a whole
+file against its template (point 6); run beside it at a release
 (`/release` step 2), you verify everything else.
 
 What you verify:
@@ -60,9 +61,9 @@ What you verify:
    reveal. The `00-INDEX.md` catalogues are exempt: they are
    rewritten freely.
 5. **Recipes and renders** (shape and freshness, never content) —
-   recipes conform to `templates/recipe.md` in front-matter and
-   sections (genre skeletons `templates/recipe-<genre>.md` extend that
-   shape, never replace it); every declared input exists on disk; the
+   the shape of a recipe is point 6's, a genre skeleton
+   `templates/recipe-<genre>.md` extending `templates/recipe.md`,
+   never replacing it; every declared input exists on disk; the
    `output:` path, where declared, points inside the repository. The
    staleness of a render (as `/render` step 5 defines it) is never a
    finding, the README and the release notes included (POS.0570): the
@@ -70,6 +71,19 @@ What you verify:
    unconditionally. Whether a recipe's
    content still matches the principal's thinking is substance, not
    conformance.
+6. **Shape** — a file made from a template names it in one line,
+   `<!-- Shape: templates/<name>.md -->`, and a file made before the
+   line is known by its name (SOL.0970). Every such file is read
+   whole against that template, the artefacts of the chain included:
+   the header, the fixed parts and fields in their order, the words
+   the template gives. The `light` check reads of the same files only
+   what a save added. A part the template gives as optional, a
+   section left out because it was empty (`/forge` step 2) and what a
+   layer's own definition rules are never a finding of the shape. A
+   comment a file still carries from its skeleton is compared with
+   nothing and is never a finding (POS.2030); a closed thread, an
+   archive, a research and a source are immutable and are not read
+   for their shape.
 
 Cost: the project's files, read once; the conventions read from their
 owners.

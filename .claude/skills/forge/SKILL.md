@@ -68,7 +68,8 @@ is CLAUDE.md, Document chain's. This dispatcher never changes.
    its template as v0.1 with its companion from `templates/history.md`,
    the ledger reads the header (CLAUDE.md, Ledger), items follow the ID
    scheme of CLAUDE.md, a write rewrites for coherence and never
-   appends, and empty sections and all template comments are deleted; a
+   appends, and empty sections and the template's comments are deleted
+   but the line that names the template (CLAUDE.md, Templates); a
    definition names only its files, its prefixes and what is its own. A
    state file's arguments are those following the state name: for
    `brief` the name, then the slug; for the other states the slug.

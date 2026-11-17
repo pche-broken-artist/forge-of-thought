@@ -8,6 +8,8 @@ version: 0.1
 
 # Recipe — <presentation name>
 
+<!-- Shape: templates/recipe-presentation.md -->
+
 <!-- Presentation-genre recipe, composed via /recipe presentation; the
 render is a slide-by-slide deck definition, from which /render makes
 a plain PowerPoint file and /publish the designed one. A recipe and

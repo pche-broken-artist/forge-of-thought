@@ -9,6 +9,8 @@ languages: <cs, en>      # templates/recipe.md
 
 # Recipe — <the video>
 
+<!-- Shape: templates/recipe-screenplay.md -->
+
 <!-- Screenplay-genre recipe, composed via /recipe screenplay; the
 render is a screenplay from which scripts/md2video.py makes the
 video or the events of the player page (POS.1530). A recipe and

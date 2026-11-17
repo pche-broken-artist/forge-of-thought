@@ -8,6 +8,8 @@ output: README.md
 
 # Recipe — readme
 
+<!-- Shape: templates/recipe-readme.md -->
+
 ## Inputs
 - ledger.md
 - 00-brief.md

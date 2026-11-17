@@ -2,9 +2,8 @@
 forge_check.py - what the mechanical checks of forge-check.py share:
 a finding and its report in the shape of the check contract
 (.claude/skills/check-contract/SKILL.md, Output), the front-matter
-keys and the comment a template owns (templates/*.md), the comments
-and the line numbers of a file, and the kinds of the versioned
-documents. Not a command.
+keys a template owns (templates/*.md), the line numbers of a file,
+and the kinds of the versioned documents. Not a command.
 
 A check here raises on nothing: what a file does not give is a
 finding or is left unread, named in the report (POS.1600).
@@ -18,7 +17,6 @@ import forge_repos as fr
 
 TEMPLATES = fr.ENGINE_ROOT / "templates"
 SEVERITIES = ("high", "medium", "low")
-COMMENT_RE = re.compile(r"<!--(.*?)-->", re.S)
 KEY_RE = re.compile(r"^\s*#?\s*([A-Za-z_][\w-]*):")
 VERSION_RE = re.compile(r"^\d+\.\d+$")
 STATUSES = ("draft", "approved", "superseded")
@@ -83,25 +81,6 @@ def template_keys(name):
         if m and m.group(1) not in keys:
             keys.append(m.group(1))
     return keys
-
-
-def comments(text):
-    """The HTML comments of a text, (line, normalised text) each."""
-    out = []
-    for m in COMMENT_RE.finditer(text):
-        line = text.count("\n", 0, m.start()) + 1
-        out.append((line, norm(m.group(1))))
-    return out
-
-
-def template_comment(name, nth=0):
-    """The nth comment of a template, normalised; '' when absent."""
-    cs = comments(template_text(name))
-    return cs[nth][1] if len(cs) > nth else ""
-
-
-def norm(text):
-    return " ".join(text.split())
 
 
 def front_keys(front):

@@ -668,4 +668,7 @@ once that intent is updated and the README re-rendered.
 Use `templates/*` as canonical skeletons for every new project. A
 skeleton named `<type>-definition.md` is that of the definition of
 one member of a type the forge can be extended by: an artefact, a
-critic lens, a challenger persona, a check.
+critic lens, a challenger persona, a check. A file made from a
+skeleton keeps of its comments the one line that names it, `<!--
+Shape: templates/<name>.md -->`, where the skeleton has it, and none
+of the others (POS.2030).

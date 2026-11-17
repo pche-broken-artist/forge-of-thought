@@ -7,6 +7,8 @@ audience: principal + Claude only
 
 # <Project> — Intent
 
+<!-- Shape: templates/intent.md -->
+
 <!-- The working document; the rules: its definition
 `.claude/skills/forge/states/intent.md` (what it is and what it
 holds), CLAUDE.md, prime directive 6 (its language), Versioning &

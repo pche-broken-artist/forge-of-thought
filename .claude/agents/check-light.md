@@ -57,6 +57,15 @@ What you verify:
    its original are the normal case (POS.1040), never a finding, and
    a binary listed in `sources/.gitignore` is not an unregistered
    file. Never judge what the entries say.
+3. **What a save added, against its template** — a file made from a
+   template names it in one line, `<!-- Shape: templates/<name>.md
+   -->`, and a file made before the line is known by its name
+   (SOL.0970). Of such a file you read the newest of what it holds
+   against that template: the header, the newest records of a
+   history, the newest record of `decisions.md`. The whole of a file
+   against its template is the `project` check's, never yours. A
+   comment a file still carries from its skeleton is compared with
+   nothing and is never a finding (POS.2030).
 
 Most of what you find is pure bookkeeping: mark it "immediate fix".
 

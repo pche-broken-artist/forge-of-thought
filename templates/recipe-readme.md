@@ -8,6 +8,8 @@ output: README.md
 
 # Recipe — readme
 
+<!-- Shape: templates/recipe-readme.md -->
+
 <!-- Readme-genre recipe, iterated via /recipe readme; the output
 path is the project root, so the host shows it as the front page. The
 rules: CLAUDE.md, Document chain, Renders. -->

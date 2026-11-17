@@ -42,7 +42,9 @@ interview). The shape of the specification is `templates/work.md`.
    says how the file is made from it.
 4. Reflect the round back and write once, on the principal's word:
    the specification rewritten for coherence, unused placeholders and
-   template comments deleted; the records appended to the companion,
+   the template's comments deleted but the line that names the
+   template (CLAUDE.md, Templates); the records appended to the
+   companion,
    among them the state record `stale` as `templates/history.md` has
    it when a making stood before (POS.1630). Approval of the specification (1.0
    and on) is the principal's word, as the house scheme has it.

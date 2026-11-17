@@ -7,6 +7,8 @@ version: 0.1
 
 # Recipe — user-stories-export
 
+<!-- Shape: templates/recipe-user-stories-export.md -->
+
 <!-- User-stories-export-genre recipe, iterated via /recipe
 user-stories-export. The rules: CLAUDE.md, Document chain,
 Renders; the stories' own: .claude/skills/forge/states/user-stories.md.

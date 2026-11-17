@@ -17,8 +17,9 @@ work product in `work/`, read when the task names it, its parent
 the source by path. A project without a BRD is not a finding
 (CLAUDE.md, Document chain). The
 bookkeeping of the file — front-matter, the history companion — is
-the `light` check's; the ID scheme in general the `project`
-check's; you verify what only a BRD has. The rules you verify
+the `light` check's; the ID scheme in general and the shape of the
+file against its template (SOL.0970) the `project` check's; you
+verify what only a BRD has. The rules you verify
 against are `.claude/skills/forge/states/brd.md`, its Aim and its
 Requirement style, and `templates/brd.md`; cite them, never restate
 them.
@@ -55,7 +56,8 @@ What you verify:
    the Terms table; no item depends on a link (the assignment's
    Requirement style, cited by the BRD's); no name of a person
    stands where the template asks for a role.
-5. **Skeleton residue** — no template comment, no `…`, no
+5. **Skeleton residue** — no template comment but the line that
+   names the template (CLAUDE.md, Templates), no `…`, no
    `<placeholder>`, no `NNNN` left in the file; `owner: unassigned`
    is not residue.
 

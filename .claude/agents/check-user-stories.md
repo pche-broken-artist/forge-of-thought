@@ -18,7 +18,8 @@ names them, their parent the source by path. A project without
 stories is not a finding (CLAUDE.md, Document chain). The bookkeeping
 of the
 file — front-matter, the history companion — is the `light` check's;
-the ID scheme in general the `project` check's; you verify what only
+the ID scheme in general and the shape of the file against its
+template (SOL.0970) the `project` check's; you verify what only
 stories have. The rules you verify against are
 `.claude/skills/forge/states/user-stories.md`, its Aim and its Story
 style, and `templates/user-stories.md`; cite them, never restate
@@ -38,14 +39,14 @@ What you verify:
    only a POS has a parent `10-intent.md`. Where the parent is a
    source, the citation is a path and a place; existence of the path
    is verified, the place is read as a fact.
-3. **Shape, parts and wording** — every story has the shape
-   `templates/user-stories.md` gives and its parts, their order, their
-   labels and their wording as the Story style of
+3. **Parts and wording** — every story has its parts, their order,
+   their labels and their wording as the Story style of
    `.claude/skills/forge/states/user-stories.md` has them; every breach is
    a finding. For a vague word or a conditional in a criterion you report
    the word and the place, never a value; no two stories carry one ID.
 
-4. **Skeleton residue** — no template comment, no `…`, no
+4. **Skeleton residue** — no template comment but the line that
+   names the template (CLAUDE.md, Templates), no `…`, no
    `<placeholder>`, no `NNNN` left in the file.
 
 Cost: the stories and their parent, read once.

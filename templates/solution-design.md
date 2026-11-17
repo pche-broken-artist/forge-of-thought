@@ -7,6 +7,8 @@ audience: whoever realises the solution, a person or an agent
 
 # <Project> — Solution design
 
+<!-- Shape: templates/solution-design.md -->
+
 <!-- How the things wanted are realised; the rules: its definition
 `.claude/skills/forge/states/solution-design.md`, CLAUDE.md, prime
 directive 6 (its language), Versioning & status (its history

@@ -9,6 +9,8 @@ derived_from: <the principal's word of YYYY-MM-DD; the notes and sources the pla
 
 # <Title: the topic>
 
+<!-- Shape: templates/research-plan.md -->
+
 <!-- The head of a research bundle, `research/YYYY-MM-DD-<topic>/
 00-plan.md`: the plan as confirmed, word for word, and under it the
 synthesis made when every note has returned. The one owner of this
