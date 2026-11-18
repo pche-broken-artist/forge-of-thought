@@ -2,7 +2,8 @@
 forge_repos.py - what the forge-* git scripts share: the engine root,
 the git check, the list of repositories to visit, running git, the
 state of a repository against its origin (`remote_state`: up to date,
-behind, ahead, diverged, no origin; POS.1490), what waits on GitHub
+behind, ahead, diverged, no upstream, unreachable, no origin;
+POS.1490), what waits on GitHub
 outside git (`github_waiting`: the open pull requests and the
 unanswered discussions through gh, or the one line saying why it
 could not read; POS.1970), the files of the
@@ -132,17 +133,37 @@ def conflicted(path):
     return out.splitlines() if out else []
 
 
+def _first_line(text):
+    """The first line of what git said, or that it said nothing."""
+    for line in (text or "").splitlines():
+        if line.strip():
+            return line.strip()
+    return "git gave no reason"
+
+
 def remote_state(path):
     """The branch of `path` against its origin after a fetch: one of
     'up to date', 'behind N', 'ahead N', 'diverged (ahead N, behind M)',
-    'no origin', 'no upstream'. The fetch changes nothing in the
-    working tree. Shared by forge-status (--remote) and forge-pull."""
+    'no upstream', 'unreachable - <git's reason>', 'no origin'
+    (POS.1490). A state is said only of an origin that was reached,
+    never computed from what an earlier fetch left on disk: where the
+    fetch fails, the origin is asked for the branch, and git's exit 2,
+    the origin reached and without such a branch, is 'no upstream';
+    anything else is 'unreachable' with the first line of git's error
+    (issue 14). The fetch changes nothing in the working tree. Shared
+    by forge-status (--remote), forge-pull, forge-migrate and
+    forge-save."""
     if not git_out(["remote", "get-url", "origin"], path):
         return "no origin"
     branch = git_out(["rev-parse", "--abbrev-ref", "HEAD"], path)
     if not branch or branch == "HEAD":
         return "no upstream"
-    git(["fetch", "origin", branch], path)
+    fetched = git(["fetch", "origin", branch], path)
+    if fetched.returncode != 0:
+        asked = git(["ls-remote", "--exit-code", "origin", f"refs/heads/{branch}"], path)
+        if asked.returncode == 2:
+            return "no upstream"
+        return "unreachable - " + _first_line(fetched.stdout or asked.stdout)
     counts = git_out(["rev-list", "--left-right", "--count", f"HEAD...origin/{branch}"], path)
     if not counts:
         return "no upstream"

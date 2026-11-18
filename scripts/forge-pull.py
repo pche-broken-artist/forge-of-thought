@@ -19,6 +19,15 @@ WHAT IT DOES
     and nothing is pulled; what to do then is /pull's to offer. The
     script never merges on its own (POS.1490 of the forge intent).
 
+    It looks before it pulls, by the state forge_repos.remote_state
+    gives, and names a failure by what it was. An origin that could not
+    be reached is said as "unreachable", with git's own reason, and
+    left: the others are pulled as if it were not there, and the run
+    ends with an error naming every repository it could not reach. A
+    branch the origin does not have ("no upstream") has nothing to
+    pull and is no error. "Diverged" is said only of histories that
+    diverged.
+
     After a pull it prints where the repository moved from and to
     (before: <hash> <subject>, after: <hash> <subject>) and the
     subjects of the commits between, so that the releases crossed
@@ -52,6 +61,7 @@ def main(argv):
     fr.need_git()
     fr.need_engine_repo()
     strict = bool(a.slug)
+    unreached = []
     for name, path in fr.repos_to_visit(a.slug):
         origin = fr.git_out(["remote", "get-url", "origin"], path)
         if not origin:
@@ -67,11 +77,27 @@ def main(argv):
                 fr.fail("Run scripts/forge-save.py first, then pull.")
             fr.say(fr.label(name, "skipped"), "yellow")
             continue
+        # the look before the pull: a state is said only of an origin
+        # that was reached, and a failure is named by what it was
+        state = fr.remote_state(path)
+        if state.startswith("unreachable"):
+            fr.say(fr.label(name, state + " - nothing pulled"), "yellow")
+            unreached.append(name)
+            continue
+        if state == "no upstream":
+            fr.say(fr.label(name, "no upstream - the origin has no such branch; nothing to pull"), "grey")
+            continue
+        if state.startswith("diverged"):
+            fr.fail(f"Pull failed in {name} - local and remote history diverged; nothing pulled. "
+                    "Merge by hand, or scripts/forge-save.py rebases your commits onto the remote.")
+        if not state.startswith("behind"):
+            fr.say(fr.label(name, state), "green" if state == "up to date" else "grey")
+            continue
         branch = fr.git_out(["rev-parse", "--abbrev-ref", "HEAD"], path)
         before = fr.git_out(["rev-parse", "--short", "HEAD"], path)
         if fr.git(["pull", "--ff-only", "origin", branch], path, capture=False).returncode != 0:
-            fr.fail(f"Pull failed in {name} - local and remote history diverged; nothing pulled. "
-                    "Merge by hand, or scripts/forge-save.py rebases your commits onto the remote.")
+            fr.fail(f"Pull failed in {name}, though its origin was reached and the branch is {state}; "
+                    "nothing pulled. git says why above.")
         after = fr.git_out(["rev-parse", "--short", "HEAD"], path)
         if after == before:
             fr.say(fr.label(name, "up to date"), "green")
@@ -84,6 +110,9 @@ def main(argv):
             print("   commits between:")
             for line in between.splitlines():
                 print("  " + line)
+    if unreached:
+        fr.fail("The origin could not be reached for " + ", ".join(unreached) + "; nothing was pulled there. "
+                "Mend git's way to the origin (network, proxy, access) and pull again.")
     return 0
 
 

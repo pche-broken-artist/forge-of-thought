@@ -34,7 +34,10 @@ at the tag of a major. Nothing is parked on the principal's behalf: what
    repository behind or diverged from its origin is refused with the
    offer of `/pull` (CLAUDE.md, Persistence): the renders a release
    makes are taken as `ours` at a merge, and that turns round in the
-   rebase of the save (POS.1710, SOL.0530). Merging a branch into `main`
+   rebase of the save (POS.1710, SOL.0530). A repository whose origin
+   could not be reached (`unreachable`) is refused as well, with that
+   state's offer (POS.1490): a release cannot finish without the origin.
+   Merging a branch into `main`
    is git's business, by hand or by merge request, never this command's
    (POS.1110). `--auto` stops here as any release does.
 1a. The engine's tests through `/test` (`.claude/skills/test/SKILL.md`),

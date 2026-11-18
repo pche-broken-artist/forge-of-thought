@@ -74,9 +74,11 @@ WHAT IT DOES
     `--apply` refuses, where the project is a repository of its own
     (forge_repos.own_repo), a working tree with unsaved changes to
     tracked files (an untracked file is no risk: --undo restores tracked
-    files), a branch behind or diverged from its origin and any branch
-    but main: the migration is one large change, run once, on one clone;
-    everyone else pulls. A project outside git gets none of these
+    files), a branch behind or diverged from its origin, an origin that
+    could not be reached and any branch but main: the migration is one
+    large change, run once, on one clone, and a clone that cannot see
+    the origin cannot know it is the one; everyone else pulls. A
+    project outside git gets none of these
     refusals: the forge runs no git on it, the way back is the backup
     its user takes before --apply, --undo refuses there, and a run that
     stops midway is finished by running it again, the marks being the
@@ -626,6 +628,10 @@ def refusals(t):
     state = fr.remote_state(t.repo)
     if state.startswith("behind") or state.startswith("diverged"):
         reasons.append(f"{state} against the origin: /pull first")
+    elif state.startswith("unreachable"):
+        # a clone that cannot see the origin cannot know it is the one
+        # clone the migration runs on (POS.1740)
+        reasons.append(f"the origin was not seen ({state}): mend git's way to the origin first")
     return reasons
 
 

@@ -26,7 +26,12 @@ WHAT IT DOES
 
     With --remote it also fetches each repository's origin and reports
     the branch against it: "up to date", "behind N", "ahead N" or
-    "diverged (ahead N, behind M)". The fetch changes nothing in the
+    "diverged (ahead N, behind M)"; "no upstream" where the origin was
+    reached and has no such branch; and "unreachable", with git's own
+    reason, where the origin could not be reached: a state is said only
+    of an origin the script has just seen, and the script goes on to
+    the next repository and ends green, a state reported being no
+    failure of the report. The fetch changes nothing in the
     working tree; without the flag the script touches no network. The
     forge reports this state and offers; it never pulls or merges on
     its own (POS.1490 of the forge intent). With --remote it also

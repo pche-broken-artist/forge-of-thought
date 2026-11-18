@@ -50,7 +50,8 @@ is CLAUDE.md, Document chain's. This dispatcher never changes.
 5. End with the state of the engine and of the project against the
    origin, from `python scripts/forge-status.py --remote`, as the map's
    last word (POS.1710): said as a fact with the words of POS.1490 (up
-   to date, behind, ahead, diverged, no origin) and with that state's
+   to date, behind, ahead, diverged, no upstream, unreachable, no
+   origin) and with that state's
    one offer, as `/pull` step 1 has it, and, from the same run, what
    waits on GitHub outside git (POS.1970), relayed as the script prints
    it; the offer is to look at it before anything is written into the

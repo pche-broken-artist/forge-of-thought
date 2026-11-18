@@ -14,7 +14,9 @@ anywhere.
    and read `recipes/$0.md`. If it does not exist, say so and stop.
    On `main` only, behind or diverged refused (CLAUDE.md,
    Persistence; `python scripts/forge-status.py --remote`): a
-   published file is binary and never merged (POS.1690).
+   published file is binary and never merged (POS.1690). Where the
+   state is `unreachable`, say so with git's reason and go on only on
+   the principal's word (POS.1710).
 2. Read the recipe's `## Format` section (skeleton
    `templates/recipe.md`). A recipe without it ends at the Markdown:
    say so and stop. An older recipe carrying `## Build instructions`

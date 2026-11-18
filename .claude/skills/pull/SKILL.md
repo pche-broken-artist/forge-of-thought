@@ -13,10 +13,14 @@ engine and every project with an origin.
 
 1. Run `python scripts/forge-status.py --remote` and report the state of
    each repository in scope in the words of POS.1490: up to date,
-   behind, ahead, diverged, no origin, not under git. A repository with
+   behind, ahead, diverged, no upstream, unreachable, no origin, not
+   under git. A repository with
    unsaved changes or with a diverged history stops here, with its one
    offer: `/save` first, or a merge by hand or by `/save` (which rebases
-   the user's commits onto the remote). Nothing is pulled from it. The
+   the user's commits onto the remote). Nothing is pulled from it. One
+   whose origin could not be reached stops here as well, said with git's
+   reason and with its offer, to mend git's way to the origin and look
+   again; the others go on. The
    same run says what waits on GitHub outside git (POS.1970), relayed as
    the script prints it; nothing of it is pulled, merged or answered.
 2. For what is clean and behind, run `python scripts/forge-pull.py

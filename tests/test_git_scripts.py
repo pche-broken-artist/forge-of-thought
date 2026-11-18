@@ -229,6 +229,87 @@ def test_pull_refuses_unsaved_changes_and_a_diverged_history(repo, other_clone, 
     assert head(repo, git_env) == before                       # nothing pulled, nothing merged
 
 
+# ---- an origin that cannot be reached, and a branch the origin does not have (POS.1490, issue 14)
+
+def cut_off(repo, env):
+    """The origin on a path that does not exist: git cannot reach it."""
+    git(["remote", "set-url", "origin", repo.parent / "no-such-origin.git"], repo, env)
+
+
+def other_pushes(other_clone, env):
+    """Another clone pushes one commit: the repository is one commit
+    short of its origin in truth, and has not fetched since."""
+    change(other_clone)
+    git(["commit", "-q", "-am", "other: a light"], other_clone, env)
+    git(["push", "-q"], other_clone, env)
+
+
+def remote_line(r):
+    """The `remote:` line of a status report, alone: the lines around it
+    carry the path of the temporary directory, which may hold any word."""
+    return next(line for line in r.stdout.splitlines() if line.strip().startswith("remote:"))
+
+
+def test_status_names_an_origin_it_cannot_reach_and_says_no_state_of_it(repo, other_clone, git_env, run_script):
+    other_pushes(other_clone, git_env)
+    cut_off(repo, git_env)
+    r = run_script("forge-status", repo, "--remote", env=git_env)
+    assert r.returncode == 0, r.stdout + r.stderr              # a state reported is no failure of the report
+    line = remote_line(r)
+    assert "unreachable - " in line                            # with git's own reason after it
+    assert line.strip() != "remote:      unreachable -"
+    assert "up to date" not in line and "behind" not in line   # nothing said of a branch it did not see
+
+
+def test_status_says_no_upstream_of_a_branch_the_origin_does_not_have(repo, git_env, run_script):
+    assert run_script("forge-branch", repo, "trial", env=git_env).returncode == 0
+    r = run_script("forge-status", repo, "--remote", env=git_env)
+    assert r.returncode == 0, r.stdout + r.stderr
+    line = remote_line(r)
+    assert "no upstream" in line and "unreachable" not in line  # the origin was reached: the two are told apart
+
+
+def test_pull_names_an_origin_it_cannot_reach_and_never_a_parted_history(repo, other_clone, git_env, run_script):
+    other_pushes(other_clone, git_env)
+    cut_off(repo, git_env)
+    before = head(repo, git_env)
+    r = run_script("forge-pull", repo, env=git_env)
+    out = r.stdout + r.stderr
+    assert r.returncode != 0 and "unreachable" in out
+    assert "diverged" not in out                               # a failure is named by what it was
+    assert head(repo, git_env) == before
+
+
+def test_pull_has_nothing_to_pull_on_a_branch_the_origin_does_not_have(repo, git_env, run_script):
+    assert run_script("forge-branch", repo, "trial", env=git_env).returncode == 0
+    r = run_script("forge-pull", repo, env=git_env)
+    out = r.stdout + r.stderr
+    assert r.returncode == 0, out
+    assert "no upstream" in out and "diverged" not in out and "unreachable" not in out
+
+
+def test_migrate_refuses_where_it_cannot_reach_the_origin(repo, other_clone, git_env, run_script):
+    other_pushes(other_clone, git_env)
+    cut_off(repo, git_env)
+    dry = run_script("forge-migrate", repo, "--comments", env=git_env)
+    assert dry.returncode == 0, dry.stdout + dry.stderr
+    assert "--apply would refuse" in dry.stdout and "unreachable" in dry.stdout
+    r = run_script("forge-migrate", repo, "--comments", "--apply", env=git_env)
+    assert r.returncode != 0 and "nothing was changed" in r.stdout + r.stderr
+    assert git(["status", "--porcelain"], repo, git_env) == ""
+
+
+def test_save_keeps_the_commit_and_says_the_push_failed_where_it_cannot_reach_the_origin(repo, git_env, run_script):
+    change(repo)
+    cut_off(repo, git_env)
+    before = head(repo, git_env)
+    r = run_script("forge-save", repo, "-m", "fixture: a light", env=git_env)
+    assert r.returncode != 0 and "Push failed" in r.stdout + r.stderr
+    assert head(repo, git_env) != before                       # the commit is made and kept
+    assert git(["log", "-1", "--format=%s"], repo, git_env) == "fixture: a light"
+    assert git(["status", "--porcelain"], repo, git_env) == ""  # nothing left unsaved, no rebase standing
+
+
 # ---- the step of a conflict (POS.1710) and the ways of merging (SOL.0730, SOL.0740)
 
 def conflicting_change(repo, other_clone, env):

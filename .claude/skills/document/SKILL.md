@@ -14,7 +14,8 @@ regenerated.
 
 Target and places. Bare, the target is the engine: its root is the
 engine root, the owning project is `projects/forge`, the pages land in
-`docs/` at the engine root. On `main` only, behind or diverged refused
+`docs/` at the engine root. On `main` only, behind, diverged or
+unreachable refused
 (CLAUDE.md, Persistence; `python scripts/forge-status.py --remote`): the
 pages are taken as `ours` at a merge (POS.1690). With a slug, the target
 is that project: its root and the owning project are `projects/<slug>`,

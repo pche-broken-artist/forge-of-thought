@@ -59,7 +59,8 @@ forge is what they are told.
    absent. Records, state, research and recipes are always English: they
    are read by Claude, the reviewers and the checks, never handed to the
    recipients. English is the notation throughout (ID prefixes, status
-   words, front-matter keys). Translate on write.
+   words, front-matter keys, and the names of the forge's own things,
+   which the conversation keeps untranslated). Translate on write.
 7. **Structure over prose.** Items with stable IDs, even at very high
    abstraction. Narrative only in Purpose & Context and Objective.
 8. **Assignments are complete and precise.** An assignment carries the
@@ -446,8 +447,10 @@ share lives in a module beside them (`forge_repos.py`, `forge_tools.py`,
 
 Whatever makes a derived file or migrates a project, `/release`,
 `/publish`, `/document` and `/migrate`, runs on `main` only, refuses a
-repository behind or diverged from its origin and offers `/pull`
-(POS.1710). The forge never pulls or merges on its own judgement
+repository behind or diverged from its origin and offers `/pull`, and
+one whose origin could not be reached, but for `/publish`, which then
+goes on only on the principal's word (POS.1710, POS.1740). The forge
+never pulls or merges on its own judgement
 (POS.1490). Until a project is migrated nothing writes into it:
 the map, the checks and every writing command say what
 `templates/project.md` says and stop.

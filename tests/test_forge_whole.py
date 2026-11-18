@@ -11,7 +11,7 @@ engine (DEC.0240).
 import pytest
 
 import forge_repos as fr
-from conftest import cut, git
+from conftest import cut, git, identity
 
 
 @pytest.fixture
@@ -131,6 +131,28 @@ def test_unsaved_changes_in_one_stop_the_switch_of_both(engine, git_env, load_sc
         branch.main(["forge", "cut-trial"])
     for repo in (engine, proj):
         assert git(["rev-parse", "--abbrev-ref", "HEAD"], repo, git_env) == "main"
+
+
+# ---- forge-pull
+
+def test_pull_of_forge_leaves_the_one_it_cannot_reach_and_pulls_the_other(engine, git_env, load_script, capsys):
+    proj = cut(engine, git_env)
+    other = engine.parent / "other-forge"                      # another clone of the project pushes one commit
+    git(["clone", "-q", engine.parent / "forge-origin.git", other], engine.parent, git_env)
+    identity(other, git_env)
+    change(other)
+    git(["commit", "-q", "-am", "other: a light"], other, git_env)
+    git(["push", "-q"], other, git_env)
+    git(["remote", "set-url", "origin", engine.parent / "no-such-origin.git"], engine, git_env)   # the engine's origin is gone
+    before = git(["rev-parse", "HEAD"], engine, git_env)
+    pull = load_script("forge-pull")
+    with pytest.raises(SystemExit) as stopped:                 # the run ends with an error after the last
+        pull.main(["forge"])
+    assert stopped.value.code == 1
+    out = capsys.readouterr().out
+    assert "unreachable" in out and "diverged" not in out      # the engine: said and left
+    assert git(["rev-parse", "HEAD"], engine, git_env) == before
+    assert git(["rev-parse", "HEAD"], proj, git_env) == git(["rev-parse", "HEAD"], other, git_env)   # the project: pulled all the same
 
 
 # ---- forge-ledger
