@@ -469,6 +469,49 @@ def threads_of(p):
     return [(t["id"], t["text"]) for t in opened], [t for t in files if t["status"] != "open"], marks
 
 
+# A TBC as its artefact writes it: the ID, the owner in brackets with
+# whatever follows it there, the question. Of the owner two words are
+# read and no other: `principal`, the writer's own answer, and
+# `unassigned`, no owner. What blocks is said in the brackets by a BRD
+# and in the item's text by a solution design; the `yes | no` of an
+# unfilled skeleton is no yes.
+TBC_ITEM = re.compile(r"^- \*\*(TBC\.\d{4,5})\*\*\s*\(owner:\s*([^;)]*?)\s*(?:;[^)]*)?\)\s*(.*)$")
+TBC_OWN = re.compile(r"^(?:the\s+)?principal$")
+TBC_BLOCKS = re.compile(r"\b[Bb]locks\s+(estimation|realisation):\s*yes\b(?!\s*\|)")
+
+
+def open_questions(p):
+    """The lines of the TBCs a document is not finished with
+    (templates/ledger.md, Waiting on principal): the one with no
+    owner, the one that blocks whoever owns it, the principal's own;
+    the unowned and the blocking first, each saying which it is. A
+    TBC with another owner that blocks nothing has no line."""
+    found = []
+    for f in sorted(list(p.proj.glob("[0-9][0-9]-*.md")) + list(p.proj.glob("work/*.spec.md"))):
+        if ".history." in f.name or ".threads." in f.name:
+            continue
+        flines = fd.read(f).split("\n")
+        for n, line in enumerate(flines):
+            if not re.match(r"^- \*\*TBC\.\d{4,5}\*\*", line):
+                continue
+            item = [line]  # the item whole: its brackets may break over the line
+            for cont in flines[n + 1:]:
+                if cont.startswith("  ") and cont.strip():
+                    item.append(cont.strip())
+                else:
+                    break
+            m = TBC_ITEM.match(" ".join(item))
+            if not m:
+                continue
+            unowned, blocks = m.group(2) == "unassigned", TBC_BLOCKS.search(m.group(0))
+            if not (unowned or blocks or TBC_OWN.match(m.group(2))):
+                continue
+            why = "; ".join(w for w in ("no owner" if unowned else "", f"blocks {blocks.group(1)}" if blocks else "") if w)
+            found.append((0 if why else 1,
+                          f"- {m.group(1)} of {p.rel(f)} — {'[' + why + '] ' if why else ''}{fd.first_sentence(m.group(3))}"))
+    return [line for _, line in sorted(found, key=lambda q: q[0])]
+
+
 def waiting(p, open_threads, fnd_rows, fnd_items, chl_rows, chl_items, marks=None):
     lines, parked = [], []
     for id_, text in open_threads:
@@ -477,20 +520,7 @@ def waiting(p, open_threads, fnd_rows, fnd_items, chl_rows, chl_items, marks=Non
         if last and not last.startswith(first):
             line += f" {last}"
         lines.append(line)
-    for f in sorted(list(p.proj.glob("[0-9][0-9]-*.md")) + list(p.proj.glob("work/*.spec.md"))):
-        if ".history." in f.name or ".threads." in f.name:
-            continue
-        flines = fd.read(f).split("\n")
-        for n, line in enumerate(flines):
-            m = re.match(r"^- \*\*(TBC\.\d{4,5})\*\*\s*\(owner:\s*(?:the\s+)?principal(?:;[^)]*)?\)\s*(.*)$", line)
-            if m:
-                text = [m.group(2)]
-                for cont in flines[n + 1:]:
-                    if cont.startswith("  ") and cont.strip():
-                        text.append(cont.strip())
-                    else:
-                        break
-                lines.append(f"- {m.group(1)} of {p.rel(f)} — {fd.first_sentence(' '.join(text))}")
+    lines.extend(open_questions(p))
     for id_, sev, cat, state, src, res in fnd_rows:
         head = fnd_items[id_][3] if id_ in fnd_items else ""
         if state == "open" and "critique" in src:
@@ -617,7 +647,7 @@ def compose(p):
         if section == "Waiting on principal" and line.strip() == "- …":
             if threads_unread:
                 out.append("- not known: the shape before the migration with no threads.md, so the threads were not read")
-            out.extend(waiting_lines or ([] if threads_unread else ["- nothing: no open thread, no TBC of the principal, no open finding of a critic, no open challenge"]))
+            out.extend(waiting_lines or ([] if threads_unread else ["- nothing: no open thread, no TBC unowned, blocking or the principal's own, no open finding of a critic, no open challenge"]))
             continue
         if section == "Reports":
             if line.strip() == "- …":

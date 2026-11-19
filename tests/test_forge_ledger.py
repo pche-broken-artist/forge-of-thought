@@ -86,6 +86,40 @@ def test_the_open_threads_stand_by_what_waits_and_by_priority(project, run_scrip
     assert lines[2].split(" — ")[1].startswith("[medium] Who keeps the key.")
 
 
+def test_waiting_takes_the_questions_a_document_is_not_finished_with(project, run_script):
+    head = "---\nversion: 0.1\nstatus: draft\nproject: fixture\n---\n\n"
+    (project / "30-brd.md").write_text(
+        head + "# Fixture — BRD\n\n## Open questions\n"
+        "- **TBC.0010** (owner: the joiner; blocks estimation: no) Which hinge the door takes.\n"
+        "- **TBC.0020** (owner: principal) Whether the shed is painted. Asked twice.\n"
+        "- **TBC.0030** (owner: the joiner; blocks estimation:\n  yes) How wide the door is. It waits for the\n  measurement.\n"
+        "- **TBC.0040** (owner: unassigned; blocks estimation: no) Who signs the order.\n"
+        "- **TBC.0050** (owner: unassigned; blocks estimation: yes) What the roof may weigh.\n",
+        encoding="utf-8")
+    (project / "40-solution-design.md").write_text(
+        head + "# Fixture — Solution design\n\n## Open\n"
+        "- **TBC.0060** (owner: JDo) Which screws hold the frame. Closed by: a trial. Blocks\n  realisation: yes.\n"
+        "- **TBC.0070** (owner: JDo) Which colour the screws are. Closed by: a word. Blocks\n  realisation: no.\n"
+        "- **TBC.0080** (owner: JDo) What the skeleton left. Closed by: a word. Blocks\n  realisation: yes | no.\n",
+        encoding="utf-8")
+    out = project.parent / "ledger-out.md"
+    assert run_script("forge-ledger", project, "--out", out).returncode == 0
+    waiting = out.read_text(encoding="utf-8").split("## Waiting on principal", 1)[1]
+    lines = [l for l in waiting.splitlines() if l.startswith("- ")]
+    # the unowned and the blocking first, whoever owns them, then the principal's own
+    assert [l for l in lines if l.startswith("- TBC.")] == [
+        "- TBC.0030 of 30-brd.md — [blocks estimation] How wide the door is.",
+        "- TBC.0040 of 30-brd.md — [no owner] Who signs the order.",
+        "- TBC.0050 of 30-brd.md — [no owner; blocks estimation] What the roof may weigh.",
+        "- TBC.0060 of 40-solution-design.md — [blocks realisation] Which screws hold the frame.",
+        "- TBC.0020 of 30-brd.md — Whether the shed is painted.",
+    ]
+    # open with another owner and blocking nothing: the document is complete with it
+    assert not any(t in waiting for t in ("TBC.0010", "TBC.0070", "TBC.0080"))
+    # the questions stand after the threads and before the challenges
+    assert [l.split(" ")[1][:3] for l in lines] == ["THR", "TBC", "TBC", "TBC", "TBC", "TBC", "CHL"]
+
+
 def test_without_out_the_ledger_is_written_into_the_project(project, run_script):
     r = run_script("forge-ledger", project)
     assert r.returncode == 0, r.stderr
