@@ -79,11 +79,23 @@ def test_save_with_nothing_to_save_says_so(repo, git_env, run_script):
     assert git(["log", "--oneline"], repo, git_env).count("\n") == 0  # the one commit
 
 
-def test_save_without_a_message_generates_one_from_the_files(repo, git_env, run_script):
+def test_save_without_a_message_makes_one_from_the_files(repo, git_env, run_script):
     change(repo)
     r = run_script("forge-save", repo, env=git_env)
     assert r.returncode == 0, r.stderr
-    assert git(["log", "-1", "--format=%s"], repo, git_env) == "fixture: 1 file(s) - 10-intent.md"
+    assert git(["log", "-1", "--format=%s"], repo, git_env) == "save 1 file(s)"
+    assert git(["log", "-1", "--format=%b"], repo, git_env).strip() == "10-intent.md"
+
+
+def test_save_keeps_the_body_of_a_message_and_prints_the_subject_alone(repo, git_env, run_script):
+    change(repo)
+    message = "light the shed\n\nThe shed was dark.\nNow it is not."
+    r = run_script("forge-save", repo, "-m", message, env=git_env)
+    assert r.returncode == 0, r.stderr
+    assert git(["log", "-1", "--format=%s"], repo, git_env) == "light the shed"
+    assert git(["log", "-1", "--format=%b"], repo, git_env).strip() == "The shed was dark.\nNow it is not."
+    assert "committed: light the shed" in r.stdout
+    assert "The shed was dark." not in r.stdout
 
 
 def test_save_without_an_identity_commits_nothing_and_says_what_to_do(repo, git_env, run_script):

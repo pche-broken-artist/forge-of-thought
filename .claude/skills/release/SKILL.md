@@ -120,13 +120,14 @@ at the tag of a major. Nothing is parked on the principal's behalf: what
 6. Then run `/save --quick` for this repository through its own
    definition (`.claude/skills/save/SKILL.md`): without the `light`
    check, which step 2 ran already and which nothing made since reads,
-   with two things decided here: the commit message is `release <intent
-   version>: <one line>` — the line summarising the rounds since the
-   last release, from the records of the intent's history since the last
-   release, and the rows of its archive where the span reaches before
-   the log, the primary record (POS.0310), unless
-   `-m` was supplied; for a library, whose history is git, the version
-   is omitted and the line describes what changed — and, when the
+   with two things decided here: the commit message, in the shape of
+   `/save` step 2, its subject `release <intent version>: <what the
+   release brings>` and its body the rounds since the last release,
+   from the records of the intent's history since the last release,
+   and the rows of its archive where the span reaches before the log,
+   the primary record (POS.0310), unless `-m` was supplied; for a
+   library, whose history is git, the version is omitted and the
+   subject says what changed — and, when the
    intent's version is an integer (an approved major), the tag
    `v<major>`, proposed and taken on the principal's word (a rule of the
    procedure, not a gate in the script). Before proposing the tag of a

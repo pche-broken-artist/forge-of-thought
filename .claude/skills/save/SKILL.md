@@ -33,16 +33,24 @@ the script's note in the report. Saves made directly from the shell,
    files it could not parse, the check reads the ledger as it lies,
    the save goes on and says so: the save is what does not lose work
    (SOL.0530).
-2. Unless `-m` was supplied, draft a one-line English commit message
-   summarising the round — from the records the round appended to
-   the touched documents' histories, the primary record of every
-   round (POS.0310) — and propose it to the
-   principal; commit with the confirmed or adjusted wording. When
-   more than one repository has changes, one message per repository
-   is drafted, or the save is run per slug. With `forge`, the one
-   message serves both commits and carries the prefix `forge:` itself:
-   the script adds none to a message it is given. The script's
-   auto-generated file list is used only if the principal says so.
+2. Unless `-m` was supplied, draft an English commit message for the
+   round, a subject and a body (POS.2050, SOL.0990), from the records
+   the round appended to the touched documents' histories, the
+   primary record of every round (POS.0310), and propose it to the
+   principal; commit with the confirmed or adjusted wording. The
+   subject says the one thing the commit does: one clause in the
+   imperative, opening in lower case, with no full stop, no prefix,
+   no type and no scope, of at most about 72 characters, where the
+   lists of commits cut it. The body follows a blank line: sentences
+   wrapped at about 72 columns, a paragraph for each thing it says,
+   what changed and why with the items and their versions, what was
+   built and what the tests said, where the matter came from; a
+   commit whose subject says all has none. The whole message goes to
+   the script through `-m`, its line breaks with it. When more than
+   one repository has changes, one message per repository is drafted,
+   or the save is run per slug. With `forge`, the one message serves
+   both commits. The message the script makes from the files is used
+   only if the principal says so.
 3. A tag is set only on the principal's word: `--tag <name>` given, or
    asked for in words. A tag needs one repository, so a slug. When he
    asks for a tag without naming it, propose `v<intent version>` of

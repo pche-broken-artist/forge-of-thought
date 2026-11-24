@@ -15,12 +15,17 @@ WHAT IT DOES
     with changes its own commit. With a slug it saves that one
     repository only; 'forge' names the whole, the engine and the
     forge's own project where it is cloned beside it, each its own
-    commit, both prefixed forge:. A project directory without a
+    commit, one message for both. A project directory without a
     repository is skipped with a note (bare) or refused (slug); a
     directory the engine tracks is the engine's and passed over.
 
-    Per repository: stage everything, commit (message from -m, or a
-    generated one), then - when an origin is configured - push. Only
+    Per repository: stage everything, commit, then - when an origin is
+    configured - push. The message is the one given through -m, taken
+    whole: a subject and, after a blank line, a body, its line breaks
+    kept (SOL.0990 of the forge solution design). Given none, the
+    script makes one of the same shape from the files, 'save N file(s)'
+    with the files in the body, one to a line. After the commit it
+    prints the subject alone. Only
     where the remote's branch has moved on as well, the histories
     diverged, are the remote changes integrated first, by rebase; a
     branch that is merely ahead is pushed as it stands, so that a merge
@@ -108,10 +113,7 @@ def save_repo(name, path, message, tag):
     msg = message
     if not msg and not nothing_to_commit:
         files = fr.git_out(["diff", "--cached", "--name-only"], path).splitlines()
-        scope = "forge" if name.startswith("forge") else name
-        shown = ", ".join(files[:5])
-        more = f", +{len(files) - 5} more" if len(files) > 5 else ""
-        msg = f"{scope}: {len(files)} file(s) - {shown}{more}"
+        msg = f"save {len(files)} file(s)\n\n" + "\n".join(files)
 
     if nothing_to_commit and tag:
         fr.say(fr.label(name, "nothing to commit - tagging the current state"), "grey")
@@ -121,7 +123,7 @@ def save_repo(name, path, message, tag):
         r = fr.git(["commit", "-m", msg], path)
         if r.returncode != 0:
             fr.fail(f"Commit failed in {name}.\n{r.stdout.strip()}")
-        print(fr.label(name, f"committed: {msg}"))
+        print(fr.label(name, f"committed: {msg.splitlines()[0]}"))
         print(fr.git_out(["diff-tree", "--no-commit-id", "--stat", "-r", "HEAD"], path))
 
     if tag:
@@ -170,7 +172,7 @@ def main(argv):
     ft.utf8_console()
     ap = argparse.ArgumentParser(description=__doc__.splitlines()[1].strip())
     ap.add_argument("slug", nargs="?", help="one repository: a project's slug or the path of its directory ('forge' = the engine); bare = every one with changes")
-    ap.add_argument("-m", "--message", help="commit message (default: generated from the files)")
+    ap.add_argument("-m", "--message", help="commit message: a subject and, after a blank line, a body (default: made from the files)")
     ap.add_argument("--tag", help="tag the commit (needs a slug)")
     a = ap.parse_args(argv)
     fr.need_git()
