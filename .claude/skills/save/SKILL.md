@@ -1,6 +1,6 @@
 ---
 description: Save the forge to git — the light check, then commit and push; no renders; --quick leaves the check out
-argument-hint: '[project-slug] [-m "message"] [--tag name] [--quick]'
+argument-hint: '[project-slug] [-m "message"] [-F file] [--tag name] [--quick]'
 ---
 
 Save the forge to git: the light check, then commit and push on whatever
@@ -12,7 +12,7 @@ project one of them, beside the engine, and `forge` saves both
 (POS.1980); what the save does per
 repository is stated in the help header of `scripts/forge-save.py`
 (POS.1070).
-Arguments (`[slug]`, `-m "message"`, `--tag <name>`) are passed through
+Arguments (`[slug]`, `-m "message"`, `-F <file>`, `--tag <name>`) are passed through
 to the script; `--quick` is this skill's alone, leaves the check out and
 nothing else (POS.1100), and is never passed on; a project without a
 repository is a property, not a defect (POS.0940) — relay
@@ -45,8 +45,10 @@ the script's note in the report. Saves made directly from the shell,
    wrapped at about 72 columns, a paragraph for each thing it says,
    what changed and why with the items and their versions, what was
    built and what the tests said, where the matter came from; a
-   commit whose subject says all has none. The whole message goes to
-   the script through `-m`, its line breaks with it. When more than
+   commit whose subject says all has none. A message with a body is
+   written to a file in the engine's `tmp/` and handed to the script
+   with `-F <file>`, one short command; a subject alone goes through
+   `-m`. When more than
    one repository has changes, one message per repository is drafted,
    or the save is run per slug. With `forge`, the one message serves
    both commits. The message the script makes from the files is used

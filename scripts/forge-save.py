@@ -4,7 +4,7 @@ forge-save.py - save the Forge to git: commit and push - the engine
 and every project that is a repository of its own.
 
 SYNOPSIS
-    python scripts/forge-save.py [slug | path] [-m MESSAGE] [--tag NAME]
+    python scripts/forge-save.py [slug | path] [-m MESSAGE | -F FILE] [--tag NAME]
 
 WHAT IT DOES
     The engine (this repository) and the projects under projects/ are
@@ -20,12 +20,13 @@ WHAT IT DOES
     directory the engine tracks is the engine's and passed over.
 
     Per repository: stage everything, commit, then - when an origin is
-    configured - push. The message is the one given through -m, taken
-    whole: a subject and, after a blank line, a body, its line breaks
-    kept (SOL.0990 of the forge solution design). Given none, the
-    script makes one of the same shape from the files, 'save N file(s)'
-    with the files in the body, one to a line. After the commit it
-    prints the subject alone. Only
+    configured - push. The message is a subject and, after a blank
+    line, a body (SOL.0990 of the forge solution design): read whole
+    from a file through -F, the way a message with a body reaches the
+    script in one short command, or given through -m; both at once are
+    refused. Given none, the script makes one of the same shape from
+    the files, 'save N file(s)' with the files in the body, one to a
+    line. After the commit it prints the subject alone. Only
     where the remote's branch has moved on as well, the histories
     diverged, are the remote changes integrated first, by rebase; a
     branch that is merely ahead is pushed as it stands, so that a merge
@@ -61,6 +62,7 @@ EXAMPLES
     python scripts/forge-save.py forge             # the engine, and the forge's own project beside it
     python scripts/forge-save.py /tmp/fixture-copy # a project by its path
     python scripts/forge-save.py -m "my message"   # custom commit message
+    python scripts/forge-save.py forge -F tmp/commit-message.txt   # the message, subject and body, from a file
     python scripts/forge-save.py forge --tag v3.33 # save the engine and tag the commit
 """
 
@@ -172,18 +174,29 @@ def main(argv):
     ft.utf8_console()
     ap = argparse.ArgumentParser(description=__doc__.splitlines()[1].strip())
     ap.add_argument("slug", nargs="?", help="one repository: a project's slug or the path of its directory ('forge' = the engine); bare = every one with changes")
-    ap.add_argument("-m", "--message", help="commit message: a subject and, after a blank line, a body (default: made from the files)")
+    ap.add_argument("-m", "--message", help="commit message (default: made from the files)")
+    ap.add_argument("-F", "--message-file", help="a file holding the commit message: a subject and, after a blank line, a body")
     ap.add_argument("--tag", help="tag the commit (needs a slug)")
     a = ap.parse_args(argv)
     fr.need_git()
     fr.need_engine_repo()
     if a.tag and not a.slug:
         fr.fail("--tag needs one repository: name the slug ('forge' for the engine).")
+    message = a.message
+    if a.message_file:
+        if a.message:
+            fr.fail("The message comes through -m or from a file through -F, not both.")
+        source = Path(a.message_file)
+        if not source.is_file():
+            fr.fail(f"No message file at {a.message_file} - nothing was changed.")
+        message = source.read_text(encoding="utf-8-sig").strip()
+        if not message:
+            fr.fail(f"The message file {a.message_file} is empty - nothing was changed.")
     repos = fr.repos_to_visit(
         a.slug, "Project '{slug}' is not a repository - run 'git -C projects/{slug} init -b main' once, then save.")
     for name, path in repos:
         # the tag on both where 'forge' names two: one release, one tag in both repositories (POS.1980)
-        save_repo(name, path, a.message, a.tag)
+        save_repo(name, path, message, a.tag)
     return 0
 
 

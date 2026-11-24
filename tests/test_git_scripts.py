@@ -98,6 +98,20 @@ def test_save_keeps_the_body_of_a_message_and_prints_the_subject_alone(repo, git
     assert "The shed was dark." not in r.stdout
 
 
+def test_save_takes_the_message_from_a_file(repo, git_env, run_script, tmp_path):
+    change(repo)
+    source = tmp_path / "commit-message.txt"
+    source.write_text("light the shed\n\nThe shed was dark.\nNow it is not.\n", encoding="utf-8")
+    r = run_script("forge-save", repo, "-F", source, "-m", "another", env=git_env)
+    assert r.returncode != 0 and "not both" in r.stdout + r.stderr
+    assert git(["status", "--porcelain"], repo, git_env)  # refused: the change still unsaved
+    r = run_script("forge-save", repo, "-F", source, env=git_env)
+    assert r.returncode == 0, r.stderr
+    assert git(["log", "-1", "--format=%s"], repo, git_env) == "light the shed"
+    assert git(["log", "-1", "--format=%b"], repo, git_env).strip() == "The shed was dark.\nNow it is not."
+    assert "committed: light the shed" in r.stdout
+
+
 def test_save_without_an_identity_commits_nothing_and_says_what_to_do(repo, git_env, run_script):
     git(["config", "--unset", "user.email"], repo, git_env)
     git(["config", "--unset", "user.name"], repo, git_env)
