@@ -35,8 +35,9 @@ LICENSE                    # CC BY 4.0 — the engine is published
 .gitignore                 # what never enters the engine's git: the
                            # instance file, the local settings, every
                            # project but the README of projects/
-                           # (POS.1980), Office lock files, byte-code
-                           # caches
+                           # (POS.1980), the noise of the operating
+                           # systems, Office lock files, the caches
+                           # of Python's tools
 .mailmap                   # the author's names in the history
                            # mapped to one handle; git's own
                            # mechanism, the history untouched
