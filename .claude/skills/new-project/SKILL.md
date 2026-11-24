@@ -30,7 +30,8 @@ principal names another; ask when his words leave it open.
 from `templates/gitattributes` (the ways of merging by path,
 SOL.0730) and `.gitignore` from `templates/gitignore`: the ledger,
 made at read time by `python scripts/forge-ledger.py <slug>` and never
-in git (SOL.0680), and the lock files of an open Office document.
+in git (SOL.0680), the lock files of an open Office document and the
+noise of the operating systems.
 
 **Library** (`kind: library`): create only those three files, plus
 `sources/00-INDEX.md`

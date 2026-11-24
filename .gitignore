@@ -11,9 +11,33 @@
 projects/*
 !projects/README.md
 
-# Windows noise
+# Operating-system noise (selected from gitignore.io: macos, linux,
+# windows; https://www.toptal.com/developers/gitignore)
+# macOS
+.DS_Store
+.AppleDouble
+.LSOverride
+._*
+.DocumentRevisions-V100
+.fseventsd
+.Spotlight-V100
+.TemporaryItems
+.Trashes
+.apdisk
+*.icloud
+# Linux
+*~
+.fuse_hidden*
+.directory
+.Trash-*
+.nfs*
+# Windows
 Thumbs.db
-desktop.ini
+Thumbs.db:encryptable
+ehthumbs.db
+ehthumbs_vista.db
+[Dd]esktop.ini
+$RECYCLE.BIN/
 
 # Office lock files (open documents)
 ~$*
@@ -25,5 +49,14 @@ desktop.ini
 # Principal's local launcher - never shared
 /start-claude.ps1
 
-# Python byte-code caches (scripts/docs_map.py is imported by the docs scripts)
+# Python (selected from gitignore.io: python) - scripts/ and tests/;
+# scripts/docs_map.py is imported by the docs scripts
 __pycache__/
+*.py[cod]
+.pytest_cache/
+.venv/
+venv/
+.mypy_cache/
+.ruff_cache/
+.coverage
+htmlcov/
