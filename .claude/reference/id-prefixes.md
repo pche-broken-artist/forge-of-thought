@@ -13,7 +13,7 @@ of a new prefix here.
 | CON | constraint — deliberate boundary, not to be challenged | assignment |
 | ASM | assumption | assignment, BRD, work specification |
 | DEL | deliverable — may delegate work ("produce NFRs and return") | assignment |
-| TBC | open question / to be confirmed, with owner | assignment, BRD, solution design, work specification |
+| TBC | open question / to be confirmed, with owner | assignment, BRD, user stories, solution design, work specification |
 | SOL | part of the solution — what is built or done, what it realises, the choice it rests on | solution design |
 | SCR | success criterion — optional or delegated | assignment, BRD |
 | BR | business requirement — one rule of the business, testable, citing the REQ or POS it carries | BRD |

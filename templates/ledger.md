@@ -124,11 +124,11 @@ copy. The rule (POS.1620): the open threads, those
 something waits on first, then by priority, each by its priority and
 what waits on it in brackets, its first sentence and its last dated
 paragraph; the TBCs a document is not finished with, the unowned and
-the blocking first: the one written `owner: unassigned`, the one that
-says `blocks estimation: yes` or `Blocks realisation: yes` whoever
-owns it, each with `no owner` and what it blocks in brackets, and the
-one written `owner: principal`, each by its first sentence, a TBC
-with another owner that blocks nothing having no line; the open
+the blocking first: the one written `owner: unassigned`, the one whose
+brackets say `blocker: yes` whoever owns it, each with `no owner` and
+`blocks` in brackets, and the one written `owner: principal`, each by
+its first sentence, a TBC with another owner that blocks nothing
+having no line; the open
 findings of a critic and the open challenges; under Parked the parked
 findings and challenges with their decision. Free text without an ID
 has no place here. -->

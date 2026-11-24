@@ -100,5 +100,6 @@ How the files are made: `templates/solution-design.md` with
 - A choice Claude made and the principal has not judged says so in
   plain words at the item, until he has judged it (CLAUDE.md, Working
   methods, Handing over).
-- A TBC carries its owner, what would close it, and whether it
-  blocks realisation.
+- A TBC carries its owner, its mark, `blocker: yes` where it blocks
+  realisation and `blocker: no` where it does not, and what would
+  close it.

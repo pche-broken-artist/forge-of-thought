@@ -33,6 +33,6 @@ leaves out: the Story style. -->
 - <what lies behind the link> – <link to an attachment or a technical analysis>
 
 **Questions:**
-1. <question> → <owner>
+- **TBC.0010** (owner: <who>; blocker: yes | no) <question>
 
 **Reference:** <BR.NNNN, NFR.NNNN, UC.NNNN, DEP.NNNN | POS.NNNN>

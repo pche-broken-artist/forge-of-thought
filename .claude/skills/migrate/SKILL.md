@@ -1,6 +1,6 @@
 ---
 description: Bring a project to the shape of a release that changed the shape of files — a dry run first, the migration on the principal's word, the threads' origins judged, then /save
-argument-hint: "[project-slug] [--comments]"
+argument-hint: "[project-slug] [--comments | --blocker]"
 ---
 
 The door to `scripts/forge-migrate.py` (SOL.0800, POS.1740): the
@@ -43,3 +43,13 @@ the dry run shown as it came, `--comments --apply` on the principal's
 word, what the script printed for him judged, a recipe whose genre
 the file does not tell and a comment of a file's own above all, then
 the ledger and `/save <slug>`.
+
+**`/migrate <slug> --blocker` — the mark of blocking.** A step of its
+own of the same kind, on the owner's word and never a condition of a
+write (POS.2040, SOL.0980): the script's `--blocker` brings a TBC
+that says whether it blocks in the wording before to the one mark in
+its brackets. The course is the same: the dry run shown as it came,
+`--blocker --apply` on the principal's word, then the items the
+script printed and left, each put to the principal with the wording
+Claude would give it and written on his word, then the ledger and
+`/save <slug>`.

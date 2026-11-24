@@ -112,8 +112,9 @@ whole is the instance's act, recorded in `decisions.md` where the
 principal wants it kept.
 
 How the files are made: `templates/user-stories.md` with
-`35-user-stories.history.md`; US, the layer's own; a story's past lives
-in the history, never in the story; the rest is `/forge` step 2.
+`35-user-stories.history.md`; US, the layer's own, and TBC for a
+story's questions; a story's past lives in the history, never in the
+story; the rest is `/forge` step 2.
 
 **Story style.**
 - A story is one function as the one who uses it meets it: one
@@ -140,6 +141,10 @@ in the history, never in the story; the rest is `/forge` step 2.
   alone.
 - A note is a link to an attachment or a technical analysis with
   what lies behind it, nothing else.
+- A question is a TBC item inside its story, under `Questions`: its
+  owner and its mark, `blocker: yes` where it blocks the delivery and
+  `blocker: no` where it does not, its number the project's next free
+  TBC.
 - The labels `Edge cases`, `Risks`, `Note`, `Questions` and
   `Reference` are fixed and in English; the content is in the
   project's language.

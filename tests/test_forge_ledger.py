@@ -90,11 +90,53 @@ def test_waiting_takes_the_questions_a_document_is_not_finished_with(project, ru
     head = "---\nversion: 0.1\nstatus: draft\nproject: fixture\n---\n\n"
     (project / "30-brd.md").write_text(
         head + "# Fixture — BRD\n\n## Open questions\n"
-        "- **TBC.0010** (owner: the joiner; blocks estimation: no) Which hinge the door takes.\n"
+        "- **TBC.0010** (owner: the joiner; blocker: no) Which hinge the door takes.\n"
         "- **TBC.0020** (owner: principal) Whether the shed is painted. Asked twice.\n"
-        "- **TBC.0030** (owner: the joiner; blocks estimation:\n  yes) How wide the door is. It waits for the\n  measurement.\n"
-        "- **TBC.0040** (owner: unassigned; blocks estimation: no) Who signs the order.\n"
-        "- **TBC.0050** (owner: unassigned; blocks estimation: yes) What the roof may weigh.\n",
+        "- **TBC.0030** (owner: the joiner; blocker:\n  yes) How wide the door is. It waits for the\n  measurement.\n"
+        "- **TBC.0040** (owner: unassigned; blocker: no) Who signs the order.\n"
+        "- **TBC.0050** (owner: unassigned; blocker: yes) What the roof may weigh.\n",
+        encoding="utf-8")
+    # the questions of a story are TBC items inside their story (POS.2010)
+    (project / "35-user-stories.md").write_text(
+        head + "# Fixture — User stories\n\n### US.0010 — The door opens\n"
+        "The owner opens the door, so that the tools can be reached.\n- The door opens outwards.\n\n"
+        "**Questions:**\n"
+        "- **TBC.0090** (owner: the joiner; blocker: yes) Which way the door swings in winter.\n"
+        "- **TBC.0110** (owner: the joiner; blocker: no) Whether the handle is brass.\n\n"
+        "**Reference:** BR.0010\n",
+        encoding="utf-8")
+    (project / "40-solution-design.md").write_text(
+        head + "# Fixture — Solution design\n\n## Open\n"
+        "- **TBC.0060** (owner: JDo; blocker: yes) Which screws hold the frame. Closed by: a trial.\n"
+        "- **TBC.0070** (owner: JDo; blocker: no) Which colour the screws are. Closed by: a word.\n"
+        "- **TBC.0080** (owner: JDo; blocker: yes | no) What the skeleton left. Closed by: a word.\n",
+        encoding="utf-8")
+    out = project.parent / "ledger-out.md"
+    assert run_script("forge-ledger", project, "--out", out).returncode == 0
+    waiting = out.read_text(encoding="utf-8").split("## Waiting on principal", 1)[1]
+    lines = [l for l in waiting.splitlines() if l.startswith("- ")]
+    # the unowned and the blocking first, whoever owns them, then the principal's own;
+    # one mark in every layer, so the line says that a question blocks, not what
+    assert [l for l in lines if l.startswith("- TBC.")] == [
+        "- TBC.0030 of 30-brd.md — [blocks] How wide the door is.",
+        "- TBC.0040 of 30-brd.md — [no owner] Who signs the order.",
+        "- TBC.0050 of 30-brd.md — [no owner; blocks] What the roof may weigh.",
+        "- TBC.0090 of 35-user-stories.md — [blocks] Which way the door swings in winter.",
+        "- TBC.0060 of 40-solution-design.md — [blocks] Which screws hold the frame.",
+        "- TBC.0020 of 30-brd.md — Whether the shed is painted.",
+    ]
+    # open with another owner and blocking nothing: the document is complete with it
+    assert not any(t in waiting for t in ("TBC.0010", "TBC.0070", "TBC.0080", "TBC.0110"))
+    # the questions stand after the threads and before the challenges
+    assert [l.split(" ")[1][:3] for l in lines] == ["THR", "TBC", "TBC", "TBC", "TBC", "TBC", "TBC", "CHL"]
+
+
+def test_the_wording_the_mark_had_before_is_read_for_one_release(project, run_script):
+    head = "---\nversion: 0.1\nstatus: draft\nproject: fixture\n---\n\n"
+    (project / "30-brd.md").write_text(
+        head + "# Fixture — BRD\n\n## Open questions\n"
+        "- **TBC.0010** (owner: the joiner; blocks estimation: no) Which hinge the door takes.\n"
+        "- **TBC.0030** (owner: the joiner; blocks estimation:\n  yes) How wide the door is.\n",
         encoding="utf-8")
     (project / "40-solution-design.md").write_text(
         head + "# Fixture — Solution design\n\n## Open\n"
@@ -105,19 +147,11 @@ def test_waiting_takes_the_questions_a_document_is_not_finished_with(project, ru
     out = project.parent / "ledger-out.md"
     assert run_script("forge-ledger", project, "--out", out).returncode == 0
     waiting = out.read_text(encoding="utf-8").split("## Waiting on principal", 1)[1]
-    lines = [l for l in waiting.splitlines() if l.startswith("- ")]
-    # the unowned and the blocking first, whoever owns them, then the principal's own
-    assert [l for l in lines if l.startswith("- TBC.")] == [
-        "- TBC.0030 of 30-brd.md — [blocks estimation] How wide the door is.",
-        "- TBC.0040 of 30-brd.md — [no owner] Who signs the order.",
-        "- TBC.0050 of 30-brd.md — [no owner; blocks estimation] What the roof may weigh.",
-        "- TBC.0060 of 40-solution-design.md — [blocks realisation] Which screws hold the frame.",
-        "- TBC.0020 of 30-brd.md — Whether the shed is painted.",
+    # a document not yet brought to the mark (forge-migrate --blocker) loses no blocking question
+    assert [l for l in waiting.splitlines() if l.startswith("- TBC.")] == [
+        "- TBC.0030 of 30-brd.md — [blocks] How wide the door is.",
+        "- TBC.0060 of 40-solution-design.md — [blocks] Which screws hold the frame.",
     ]
-    # open with another owner and blocking nothing: the document is complete with it
-    assert not any(t in waiting for t in ("TBC.0010", "TBC.0070", "TBC.0080"))
-    # the questions stand after the threads and before the challenges
-    assert [l.split(" ")[1][:3] for l in lines] == ["THR", "TBC", "TBC", "TBC", "TBC", "TBC", "CHL"]
 
 
 def test_without_out_the_ledger_is_written_into_the_project(project, run_script):

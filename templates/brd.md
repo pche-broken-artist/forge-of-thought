@@ -154,7 +154,7 @@ by the parent. -->
 <!-- Each TBC as the Requirement style has it. Questions whose answer
 must come from outside the forge — the supplier, the systems' owners, a
 standard — stand here with that owner. -->
-- **TBC.0010** (owner: <role> | unassigned; blocks estimation: yes | no) …
+- **TBC.0010** (owner: <role> | unassigned; blocker: yes | no) …
 
 **To be supplied from outside:** <!-- the list the pass ends with:
 what the analyst brings that neither the parent nor the forge holds,

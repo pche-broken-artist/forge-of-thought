@@ -36,8 +36,10 @@ Renders; the stories' own: .claude/skills/forge/states/user-stories.md.
 - Reference: carry BR, NFR, UC and DEP IDs; leave out every POS,
   since the stakeholders never see the intent; a story whose
   Reference holds only POS has no Reference part in the export.
-- Questions keep their numbering and `→ <owner>`; nothing of a story
-  is reworded, shortened or added.
+- Each question stands on one line: its ID, the question, `→ <owner>`,
+  and `(blocker)` at the end where its mark says yes; the brackets of
+  the item are not carried. Nothing of a story is reworded, shortened
+  or added.
 - No front-matter of the input, no history, no template comment.
 
 ## Template
@@ -64,6 +66,6 @@ Renders; the stories' own: .claude/skills/forge/states/user-stories.md.
 - <what lies behind the link> – <link>
 
 **Questions:**
-1. <question> → <owner>
+- TBC.NNNN <question> → <owner>
 
 **Reference:** <BR.NNNN, NFR.NNNN, UC.NNNN, DEP.NNNN>

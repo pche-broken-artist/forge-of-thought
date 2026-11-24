@@ -203,9 +203,10 @@ with these made stricter for the BRD:
 - an item may name the role that owns it;
 - no value that no stakeholder gave: a category without a value is
   a TBC with an owner, never a figure from the skeleton;
-- a TBC is defined once, in Open questions, with its owner and
-  whether it blocks estimation; a BR or an NFR whose rule is not
-  known cites it in brackets, as it cites its parent;
+- a TBC is defined once, in Open questions, with its owner and its
+  mark, `blocker: yes` where it blocks estimation and `blocker: no`
+  where it does not; a BR or an NFR whose rule is not known cites it
+  in brackets, as it cites its parent;
 - every BR and UC cites its parent (`REQ.NNNN` or `POS.NNNN`; in a
   work product from a source, the path and the place, and the place
   is a turn of the principal's side: what a vendor or any other

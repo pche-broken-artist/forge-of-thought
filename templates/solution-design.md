@@ -35,5 +35,4 @@ empty. -->
 ## Open
 <!-- TBC.NNNN: owner, what would close it, whether it blocks
 realisation. Delete if empty. -->
-- **TBC.0010** (owner: <who>) … Closed by: <what>. Blocks
-  realisation: yes | no.
+- **TBC.0010** (owner: <who>; blocker: yes | no) … Closed by: <what>.

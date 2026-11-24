@@ -469,15 +469,20 @@ def threads_of(p):
     return [(t["id"], t["text"]) for t in opened], [t for t in files if t["status"] != "open"], marks
 
 
-# A TBC as its artefact writes it: the ID, the owner in brackets with
-# whatever follows it there, the question. Of the owner two words are
-# read and no other: `principal`, the writer's own answer, and
-# `unassigned`, no owner. What blocks is said in the brackets by a BRD
-# and in the item's text by a solution design; the `yes | no` of an
-# unfilled skeleton is no yes.
-TBC_ITEM = re.compile(r"^- \*\*(TBC\.\d{4,5})\*\*\s*\(owner:\s*([^;)]*?)\s*(?:;[^)]*)?\)\s*(.*)$")
+# A TBC as its document writes it (SOL.0980): the ID, the brackets with
+# the owner and, in a layer whose definition names what an open
+# question can keep the document from, the mark `blocker: yes | no`,
+# then the question. Of the owner two words are read and no other:
+# `principal`, the writer's own answer, and `unassigned`, no owner; the
+# `yes | no` of an unfilled skeleton is no yes. The wordings the mark
+# had before, `blocks estimation: yes` in the brackets of a BRD's item
+# and `Blocks realisation: yes` in the text of a solution design's, are
+# read as the mark for one release (POS.1600); `forge-migrate --blocker`
+# rewrites them.
+TBC_ITEM = re.compile(r"^- \*\*(TBC\.\d{4,5})\*\*\s*\(owner:\s*([^;)]*?)\s*(;[^)]*)?\)\s*(.*)$")
 TBC_OWN = re.compile(r"^(?:the\s+)?principal$")
-TBC_BLOCKS = re.compile(r"\b[Bb]locks\s+(estimation|realisation):\s*yes\b(?!\s*\|)")
+TBC_BLOCKER = re.compile(r"\bblocker:\s*yes\b(?!\s*\|)")
+TBC_BLOCKS_BEFORE = re.compile(r"\b[Bb]locks\s+(?:estimation|realisation):\s*yes\b(?!\s*\|)")
 
 
 def open_questions(p):
@@ -503,12 +508,13 @@ def open_questions(p):
             m = TBC_ITEM.match(" ".join(item))
             if not m:
                 continue
-            unowned, blocks = m.group(2) == "unassigned", TBC_BLOCKS.search(m.group(0))
+            unowned = m.group(2) == "unassigned"
+            blocks = TBC_BLOCKER.search(m.group(3) or "") or TBC_BLOCKS_BEFORE.search(m.group(0))
             if not (unowned or blocks or TBC_OWN.match(m.group(2))):
                 continue
-            why = "; ".join(w for w in ("no owner" if unowned else "", f"blocks {blocks.group(1)}" if blocks else "") if w)
+            why = "; ".join(w for w in ("no owner" if unowned else "", "blocks" if blocks else "") if w)
             found.append((0 if why else 1,
-                          f"- {m.group(1)} of {p.rel(f)} — {'[' + why + '] ' if why else ''}{fd.first_sentence(m.group(3))}"))
+                          f"- {m.group(1)} of {p.rel(f)} — {'[' + why + '] ' if why else ''}{fd.first_sentence(m.group(4))}"))
     return [line for _, line in sorted(found, key=lambda q: q[0])]
 
 

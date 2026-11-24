@@ -1,6 +1,6 @@
 ---
 name: check-user-stories
-description: 'Check "user-stories" — verifies the mechanics of user stories: every parent item served or said not to be, every story with a Reference to an existing item, the fixed parts in their order and none left empty, questions with an owner, risks with a mitigation or consequences, notes with a link and what lies behind it, no vague word in a criterion. Fit after a pass of /forge user-stories. Verifies conformance with the conventions. Not a critic of the documents, not a challenger of the thinking.'
+description: 'Check "user-stories" — verifies the mechanics of user stories: every parent item served or said not to be, every story with a Reference to an existing item, the fixed parts in their order and none left empty, questions as TBC items with an owner and their mark of blocking, risks with a mitigation or consequences, notes with a link and what lies behind it, no vague word in a criterion. Fit after a pass of /forge user-stories. Verifies conformance with the conventions. Not a critic of the documents, not a challenger of the thinking.'
 tools: Read, Glob, Grep
 model: inherit
 skills:
@@ -44,6 +44,9 @@ What you verify:
    `.claude/skills/forge/states/user-stories.md` has them; every breach is
    a finding. For a vague word or a conditional in a criterion you report
    the word and the place, never a value; no two stories carry one ID.
+   Every question is a TBC item with its owner and its mark of
+   blocking, as the same Story style has it; a question written
+   without an ID is a finding.
 
 4. **Skeleton residue** — no template comment but the line that
    names the template (CLAUDE.md, Templates), no `…`, no

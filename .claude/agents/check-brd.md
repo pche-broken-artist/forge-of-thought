@@ -50,8 +50,8 @@ What you verify:
    in the Stakeholders table or named as absent with a reason; no
    ASM answers what a TBC of the same BRD asks, every NFR category
    kept has its value or its TBC, every TBC its owner and its
-   blocking, as the same definition has them; every breach is a
-   finding.
+   mark of blocking, as the same definition has them; every breach
+   is a finding.
 4. **Terms and links** — every capitalised term of an item is in
    the Terms table; no item depends on a link (the assignment's
    Requirement style, cited by the BRD's); no name of a person

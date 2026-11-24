@@ -9,6 +9,7 @@ SYNOPSIS
     python scripts/forge-migrate.py <slug | path> --apply    # perform
     python scripts/forge-migrate.py <slug | path> --undo     # take back
     python scripts/forge-migrate.py <slug | path> --comments [--apply]
+    python scripts/forge-migrate.py <slug | path> --blocker [--apply]
 
 WHAT IT DOES
     The shape of a project is a set of marks, one per step, never an
@@ -69,6 +70,21 @@ WHAT IT DOES
     with it the refusals and the manifest of --apply hold, and --undo
     takes it back.
 
+    --blocker is a step of its own of the same kind, no mark and never
+    a condition of a write, run on the owner's word (POS.2040,
+    SOL.0980): in the documents of the chain and the Markdown files of
+    work/, a TBC that says whether it blocks in the wording before is
+    brought to the one mark in its brackets. `blocks estimation: X` in
+    the brackets becomes `blocker: X`; `Blocks realisation: X.` at the
+    end of an item moves into the brackets as `; blocker: X`. An item
+    of one line stays one line, a longer one is wrapped again at 72
+    columns. An item where text follows the old mark, one that carries
+    the mark already or more than one old wording, and one without
+    brackets after its ID is printed and left for the hand. Histories,
+    sources, research, reviews and threads are not read. Dry without
+    --apply; with it the refusals and the manifest of --apply hold,
+    and --undo takes it back.
+
     The author of every record it writes is the handle of the instance
     file (CLAUDE.local.md, `Author:`); without it the script refuses.
     `--apply` refuses, where the project is a repository of its own
@@ -100,6 +116,7 @@ EXAMPLES
     python scripts/forge-migrate.py fixture --undo     # and take it back
     python scripts/forge-migrate.py forge              # the engine's own project, dry
     python scripts/forge-migrate.py /tmp/fixture-copy  # a project by its path, dry
+    python scripts/forge-migrate.py fixture --blocker  # which TBC would take the mark
 """
 
 import argparse
@@ -109,6 +126,7 @@ import os
 import re
 import shutil
 import sys
+import textwrap
 from pathlib import Path
 
 sys.path.insert(0, str(Path(__file__).resolve().parent))
@@ -601,6 +619,100 @@ def comments_run(t, apply):
     fr.say(f"{n} file(s) changed; {tail}", "green")
 
 
+# ------------------------------------- the mark of blocking (SOL.0980)
+
+TBC_START = re.compile(r"^- \*\*(TBC\.\d{4,5})\*\*")
+TBC_HEAD = re.compile(r"^(- \*\*TBC\.\d{4,5}\*\*\s*\()([^)]*)(\))(.*)$")
+BEFORE_ANY = re.compile(r"\b[Bb]locks\s+(?:estimation|realisation):")
+BEFORE_BRACKET = re.compile(r"\bblocks\s+estimation:\s*(yes\s*\|\s*no|yes|no)\b")
+BEFORE_TEXT = re.compile(r"\s*\bBlocks\s+realisation:\s*(yes\s*\|\s*no|yes|no)\.\s*$")
+WRAP = 72  # the column prose is wrapped at (CLAUDE.md, Document kinds)
+
+
+def blocker_files(proj):
+    """The files of a project that may hold a TBC and are not
+    immutable: the documents of the chain and the Markdown files of
+    work/, their histories left out."""
+    files = sorted(proj.glob("[0-9][0-9]-*.md")) + sorted(proj.glob("work/*.md"))
+    return [p for p in files if ".history." not in p.name and ".threads." not in p.name]
+
+
+def _to_blocker(item):
+    """One TBC, its lines joined, brought to the mark: (the item, None),
+    or (None, why it is left)."""
+    m = TBC_HEAD.match(item)
+    if not m:
+        return None, "has no brackets after its ID"
+    opening, inside, closing, text = m.groups()
+    if "blocker:" in inside:
+        return None, "carries the mark and an older wording beside it"
+    if BEFORE_BRACKET.search(inside):
+        inside = BEFORE_BRACKET.sub(lambda b: "blocker: " + " ".join(b.group(1).split()), inside, count=1)
+    else:
+        tail = BEFORE_TEXT.search(text)
+        if not tail:
+            return None, "has text after the old mark"
+        text = text[:tail.start()]
+        inside = inside.rstrip() + "; blocker: " + " ".join(tail.group(1).split())
+    new = opening + inside + closing + text
+    if BEFORE_ANY.search(new):
+        return None, "carries more than one old wording"
+    return new, None
+
+
+def step_blocker(t, apply, out):
+    """The mark of blocking in the wording it had before, brought to
+    `blocker: yes | no` in the brackets of the item (SOL.0980): on the
+    owner's word, never a mark of the shape and never a condition of a
+    write. An item the rule does not fit is printed and left."""
+    changed = 0
+    for p in blocker_files(t.proj):
+        lines = read(p).split("\n")
+        new, done, i = [], 0, 0
+        while i < len(lines):
+            start = TBC_START.match(lines[i])
+            if not start:
+                new.append(lines[i])
+                i += 1
+                continue
+            j = i + 1  # the item whole: its continuation lines are indented
+            while j < len(lines) and lines[j].startswith("  ") and lines[j].strip():
+                j += 1
+            item = lines[i:j]
+            joined = " ".join([item[0]] + [l.strip() for l in item[1:]])
+            if BEFORE_ANY.search(joined):
+                brought, why = _to_blocker(joined)
+                if brought is None:
+                    out.append(f"    {t.rel(p)}: {start.group(1)} {why} - left as it is, for the principal")
+                else:
+                    item = [brought] if len(item) == 1 else textwrap.wrap(
+                        brought, width=WRAP, subsequent_indent="  ", break_long_words=False, break_on_hyphens=False)
+                    done += 1
+            new += item
+            i = j
+        if done:
+            out.append(f"    {t.rel(p)}: {done} item(s) brought to the mark")
+            t.write(p, "\n".join(new), apply)
+            changed += 1
+    return changed
+
+
+def blocker_run(t, apply):
+    out = []
+    n = step_blocker(t, apply, out)
+    print(f"{t.slug}: the mark of blocking (SOL.0980); histories, sources, research, reviews and threads are not read")
+    print("\n".join(out) if out else "    nothing to change")
+    if not apply:
+        fr.say(f"dry run: {n} file(s) would change; nothing changed", "grey")
+        return
+    if n and t.under_git:  # outside git --undo has nothing to restore from, so no manifest
+        t.manifest_path.parent.mkdir(exist_ok=True)
+        t.manifest_path.write_text(json.dumps(t.manifest, indent=2), encoding="utf-8")
+    tail = (f"manifest {t.manifest_path}; nothing committed - /save follows" if t.under_git
+            else "nothing to commit here, the project is outside git")
+    fr.say(f"{n} file(s) changed; {tail}", "green")
+
+
 def step_d(t, apply, out):
     target = t.proj / ".gitattributes"
     if target.exists():
@@ -703,8 +815,11 @@ def main(argv):
     g = ap.add_mutually_exclusive_group()
     g.add_argument("--apply", action="store_true", help="perform the missing steps")
     g.add_argument("--undo", action="store_true", help="take back the last --apply from the manifest")
-    ap.add_argument("--comments", action="store_true",
-                    help="the skeleton's comment replaced by the line that names the skeleton; dry without --apply")
+    own = ap.add_mutually_exclusive_group()  # the steps of their own, one at a run
+    own.add_argument("--comments", action="store_true",
+                     help="the skeleton's comment replaced by the line that names the skeleton; dry without --apply")
+    own.add_argument("--blocker", action="store_true",
+                     help="a TBC's mark of blocking brought to `blocker: yes | no` in its brackets; dry without --apply")
     a = ap.parse_args(argv)
     fr.need_git()
     fr.need_engine_repo()
@@ -712,13 +827,13 @@ def main(argv):
     if a.undo:
         undo(t)
         return 0
-    if a.comments:
+    if a.comments or a.blocker:
         reasons = refusals(t)
         if reasons and a.apply:
             fr.fail(f"{a.slug}: " + "; ".join(reasons) + " - nothing was changed.")
         if reasons:
             fr.say(f"{a.slug}: --apply would refuse: " + "; ".join(reasons), "yellow")
-        comments_run(t, a.apply)
+        (comments_run if a.comments else blocker_run)(t, a.apply)
         return 0
     author = author_handle()
     if author is None:

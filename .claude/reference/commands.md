@@ -32,6 +32,6 @@ this file and carries no table of its own.
 | `/pull [slug]` | look at the remote and, clean and behind, pull one repository or every one with an origin |
 | `/end` | end a session: what lives only in the conversation, what is unsaved, what a shutdown would lose |
 | `/spinoff <project> <group> <slug>` | split a group into its own project |
-| `/migrate [slug] [--comments]` | bring a project to the shape of a release that changed the shape of files; `--comments` replaces the skeletons' comments by the line that names the skeleton |
+| `/migrate [slug] [--comments \| --blocker]` | bring a project to the shape of a release that changed the shape of files; `--comments` replaces the skeletons' comments by the line that names the skeleton; `--blocker` brings a TBC's mark of blocking to the one wording |
 | `/man [command \| method \| question]` | the forge's manual, read from its own definitions; a need in free words gets the way the forge has for it |
 | `/manual …` | alias of `/man` |
