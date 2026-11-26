@@ -44,6 +44,8 @@ LICENSE                    # CC BY 4.0 — the engine is published
 scripts/                   # forge-save / forge-pull / forge-status
                            # (git, and what waits on GitHub)
                            # / forge-clone / forge-branch (git),
+                           # forge-github (one issue or discussion
+                           # of the origin read, one reply posted),
                            # forge-history (the history of one
                            # item), forge-report (the unique name
                            # of a report), forge-record (a record

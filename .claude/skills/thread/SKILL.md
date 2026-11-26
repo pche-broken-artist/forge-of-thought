@@ -33,8 +33,8 @@ the principal's command only (POS.0120): from his own word, from a
 document he names, an issue among them, or from Claude's synthesis
 when he asks for it. A thread from an issue or a discussion of the
 project's GitHub repository is opened after the issue is registered
-as a source (`.claude/skills/ingest/SKILL.md`, a growing bundle),
-and its `origin` is the path of that file. Claude may say that a
+as a source (`.claude/skills/github/SKILL.md`, step 2), and its
+`origin` is the path of that file. Claude may say that a
 matter deserves a thread; he drafts one when the principal says so.
 The birth is a `created` record in the intent's history, or in the
 history of `00-brief.md` while the project has no intent

@@ -22,7 +22,9 @@ engine and every project with an origin.
    reason and with its offer, to mend git's way to the origin and look
    again; the others go on. The
    same run says what waits on GitHub outside git (POS.1970), relayed as
-   the script prints it; nothing of it is pulled, merged or answered.
+   the script prints it; nothing of it is pulled, merged or answered
+   here, and an issue or a discussion is taken up by `/github
+   <number>`.
 2. For what is clean and behind, run `python scripts/forge-pull.py
    $ARGUMENTS` and relay its report: where each repository moved from
    and to, and the subjects of the commits between.

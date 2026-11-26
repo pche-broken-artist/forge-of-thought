@@ -55,7 +55,8 @@ is CLAUDE.md, Document chain's. This dispatcher never changes.
    one offer, as `/pull` step 1 has it, and, from the same run, what
    waits on GitHub outside git (POS.1970), relayed as the script prints
    it; the offer is to look at it before anything is written into the
-   project. The map says it looked at the remote and runs none of it.
+   project, an issue or a discussion through `/github <number>`. The
+   map says it looked at the remote and runs none of it.
 
 **`/forge <state>` — work on that artefact.**
 1. Resolve `.claude/skills/forge/states/$0.md`. If it does not exist, list

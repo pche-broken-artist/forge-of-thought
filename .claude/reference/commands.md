@@ -30,6 +30,7 @@ this file and carries no table of its own.
 | `/save [slug] [-m "message"] [-F file] [--tag name] [--quick]` | save one repository, or every one with changes; `--quick` without the check |
 | `/release [slug] [-m "message"] [--tag name] [--auto]` | release one repository from `main`; `--auto` runs through and stops only at a serious thing |
 | `/pull [slug]` | look at the remote and, clean and behind, pull one repository or every one with an origin |
+| `/github [number] [slug]` | take up what a visitor wrote on GitHub: bare = what waits, a number = that issue or discussion read, then registered, threaded and answered on the principal's word |
 | `/end` | end a session: what lives only in the conversation, what is unsaved, what a shutdown would lose |
 | `/spinoff <project> <group> <slug>` | split a group into its own project |
 | `/migrate [slug] [--comments \| --blocker]` | bring a project to the shape of a release that changed the shape of files; `--comments` replaces the skeletons' comments by the line that names the skeleton; `--blocker` brings a TBC's mark of blocking to the one wording |
