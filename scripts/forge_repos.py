@@ -186,6 +186,7 @@ query($owner: String!, $name: String!) {
   repository(owner: $owner, name: $name) {
     owner { login }
     pullRequests(states: OPEN, first: 20, orderBy: {field: CREATED_AT, direction: DESC}) {
+      totalCount
       nodes { number title createdAt changedFiles author { login }
         commits(last: 1) { nodes { commit { statusCheckRollup { state } } } } }
     }
@@ -194,9 +195,10 @@ query($owner: String!, $name: String!) {
       nodes { number title createdAt author { login } }
     }
     discussions(first: 50, orderBy: {field: UPDATED_AT, direction: DESC}) {
-      nodes { number title createdAt author { login }
-        comments(first: 50) { nodes { author { login }
-          replies(first: 50) { nodes { author { login } } } } } }
+      totalCount
+      nodes { number title createdAt closed author { login }
+        comments(first: 50) { totalCount nodes { author { login }
+          replies(first: 50) { totalCount nodes { author { login } } } } } }
     }
   }
 }
@@ -271,10 +273,16 @@ def github_waiting(path):
     """What waits on GitHub outside git for the repository at `path`
     (POS.1970): a list of lines, the first the counts, then one line
     per open pull request, per open issue and per unanswered
-    discussion - a discussion opened by someone other than the
-    repository's owner that carries no comment or reply by the owner.
-    The count of the issues is GitHub's own; the newest twenty are
-    listed and a line after them says how many older ones are not.
+    discussion - an open discussion opened by someone other than the
+    repository's owner that carries no comment or reply by the owner;
+    a closed one does not wait. The counts of the pull requests and of
+    the issues are GitHub's own; the newest twenty of each are listed
+    and a line after them says how many older ones are not. The
+    discussions are the fifty last updated, each read to its first
+    fifty comments and their first fifty replies, and what lies beyond
+    is said, never passed in silence: a last line with the count of
+    the discussions not read, and at an unanswered discussion that its
+    later comments were not read.
     Read through gh in one GraphQL query. Whatever keeps it from
     reading - no gh on PATH, an origin that is not GitHub, no login,
     no network - gives one line saying so, in gh's own words where it
@@ -295,11 +303,12 @@ def github_waiting(path):
         return [f"could not read: gh sees no repository {owner}/{name}"]
     login = (repo.get("owner") or {}).get("login")
     prs = repo["pullRequests"]["nodes"]
+    open_prs = repo["pullRequests"]["totalCount"]
     issues = repo["issues"]["nodes"]
     open_issues = repo["issues"]["totalCount"]
     unanswered = []
     for d in repo["discussions"]["nodes"]:
-        if (d.get("author") or {}).get("login") == login:
+        if d.get("closed") or (d.get("author") or {}).get("login") == login:
             continue
         answered = any((c.get("author") or {}).get("login") == login
                        or any((x.get("author") or {}).get("login") == login
@@ -307,7 +316,7 @@ def github_waiting(path):
                        for c in d["comments"]["nodes"])
         if not answered:
             unanswered.append(d)
-    lines = [f"{len(prs)} pull request(s) open, {open_issues} issue(s) open, "
+    lines = [f"{open_prs} pull request(s) open, {open_issues} issue(s) open, "
              f"{len(unanswered)} discussion(s) unanswered"]
     for x in prs:
         last = ((x.get("commits") or {}).get("nodes") or [{}])[-1]
@@ -315,14 +324,22 @@ def github_waiting(path):
         lines.append(f"#{x['number']} pull request \"{x['title']}\" by {(x.get('author') or {}).get('login', '?')}, "
                      f"{x['createdAt'][:10]}, {x['changedFiles']} file(s)"
                      + (f", ci {_CI_WORDS.get(state, state.lower())}" if state else ""))
+    if open_prs > len(prs):
+        lines.append(f"and {open_prs - len(prs)} older pull request(s), not listed")
     for x in issues:
         lines.append(f"#{x['number']} issue \"{x['title']}\" by {(x.get('author') or {}).get('login', '?')}, "
                      f"{x['createdAt'][:10]}")
     if open_issues > len(issues):
         lines.append(f"and {open_issues - len(issues)} older issue(s), not listed")
     for x in unanswered:
+        comments = x["comments"]
+        cut = (comments.get("totalCount", 0) > len(comments["nodes"])
+               or any(c["replies"].get("totalCount", 0) > len(c["replies"]["nodes"]) for c in comments["nodes"]))
         lines.append(f"#{x['number']} discussion \"{x['title']}\" by {(x.get('author') or {}).get('login', '?')}, "
-                     f"{x['createdAt'][:10]}")
+                     f"{x['createdAt'][:10]}" + (", its later comments not read" if cut else ""))
+    read = len(repo["discussions"]["nodes"])
+    if repo["discussions"].get("totalCount", read) > read:
+        lines.append(f"and {repo['discussions']['totalCount'] - read} discussion(s) updated longer ago, not read")
     return lines
 
 

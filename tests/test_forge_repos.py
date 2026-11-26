@@ -58,13 +58,16 @@ def by(login):
     return {"login": login}
 
 
-def repository(prs=(), issues=(), total=None, discussions=()):
+def repository(prs=(), issues=(), total=None, discussions=(), open_prs=None, all_discussions=None):
     """The repository as gh answers with it, its owner `owner`; `total`
-    is the count of the open issues where it is more than the listed."""
+    is the count of the open issues, `open_prs` that of the open pull
+    requests and `all_discussions` that of the discussions, where it
+    is more than the listed."""
     return {"owner": by("owner"),
-            "pullRequests": {"nodes": list(prs)},
+            "pullRequests": {"totalCount": len(prs) if open_prs is None else open_prs, "nodes": list(prs)},
             "issues": {"totalCount": len(issues) if total is None else total, "nodes": list(issues)},
-            "discussions": {"nodes": list(discussions)}}
+            "discussions": {"totalCount": len(discussions) if all_discussions is None else all_discussions,
+                            "nodes": list(discussions)}}
 
 
 def waiting(monkeypatch, answer=None, said=None):
@@ -113,6 +116,50 @@ def test_issues_beyond_the_listed_ones_are_counted_and_said(monkeypatch):
         "0 pull request(s) open, 23 issue(s) open, 0 discussion(s) unanswered",
         '#40 issue "The newest" by ?, 2026-11-27',
         "and 22 older issue(s), not listed",
+    ]
+
+
+def test_pull_requests_beyond_the_listed_ones_are_counted_and_said(monkeypatch):
+    lines = waiting(monkeypatch, repository(
+        prs=[{"number": 60, "title": "The newest", "createdAt": "2026-11-27T09:00:00Z", "changedFiles": 2,
+              "author": by("visitor")}],
+        open_prs=35))
+    assert lines == [
+        "35 pull request(s) open, 0 issue(s) open, 0 discussion(s) unanswered",
+        '#60 pull request "The newest" by visitor, 2026-11-27, 2 file(s)',
+        "and 34 older pull request(s), not listed",
+    ]
+
+
+def test_a_closed_discussion_does_not_wait(monkeypatch):
+    def discussion(number, closed):
+        return {"number": number, "title": "Nobody of the repository answered", "createdAt": "2026-11-25T09:00:00Z",
+                "closed": closed, "author": by("visitor"), "comments": {"nodes": []}}
+    lines = waiting(monkeypatch, repository(discussions=[discussion(18, False), discussion(17, True)]))
+    assert lines == [
+        "0 pull request(s) open, 0 issue(s) open, 1 discussion(s) unanswered",
+        '#18 discussion "Nobody of the repository answered" by visitor, 2026-11-25',
+    ]
+
+
+def test_what_of_the_discussions_was_not_read_is_said(monkeypatch):
+    # One request reaches the fifty last updated and fifty comments of
+    # each with fifty replies; what lies beyond is said, not passed.
+    def discussion(number, comments):
+        return {"number": number, "title": "A long one", "createdAt": "2026-11-25T09:00:00Z", "closed": False,
+                "author": by("visitor"), "comments": comments}
+    other = {"author": by("other"), "replies": {"totalCount": 0, "nodes": []}}
+    deep = {"author": by("other"), "replies": {"totalCount": 51, "nodes": [{"author": by("other")}]}}
+    lines = waiting(monkeypatch, repository(all_discussions=73, discussions=[
+        discussion(18, {"totalCount": 1, "nodes": [other]}),
+        discussion(17, {"totalCount": 51, "nodes": [other]}),
+        discussion(16, {"totalCount": 1, "nodes": [deep]})]))
+    assert lines == [
+        "0 pull request(s) open, 0 issue(s) open, 3 discussion(s) unanswered",
+        '#18 discussion "A long one" by visitor, 2026-11-25',
+        '#17 discussion "A long one" by visitor, 2026-11-25, its later comments not read',
+        '#16 discussion "A long one" by visitor, 2026-11-25, its later comments not read',
+        "and 70 discussion(s) updated longer ago, not read",
     ]
 
 
