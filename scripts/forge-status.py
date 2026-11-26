@@ -37,10 +37,11 @@ WHAT IT DOES
     its own (POS.1490 of the forge intent). With --remote it also
     tries to read what waits on GitHub outside git, through gh: a
     "github:" line under the "remote:" line with the open pull
-    requests and the discussions nobody of the repository has
-    answered, one line each; whatever keeps it from reading - no gh,
-    an origin that is not GitHub, no login, no network - is one line
-    saying so, and the script goes on (POS.1970, SOL.0910).
+    requests, the open issues and the discussions nobody of the
+    repository has answered, one line each; whatever keeps it from
+    reading - no gh, an origin that is not GitHub, no login, no
+    network - is one line saying so, and the script goes on
+    (POS.1970, SOL.0910).
 
 WHAT IT NEEDS
     Python 3.8 or newer; git on PATH. `forge_repos.py` beside it. gh

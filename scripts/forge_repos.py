@@ -4,11 +4,11 @@ the git check, the list of repositories to visit, running git, the
 state of a repository against its origin (`remote_state`: up to date,
 behind, ahead, diverged, no upstream, unreachable, no origin;
 POS.1490), what waits on GitHub
-outside git (`github_waiting`: the open pull requests and the
-unanswered discussions through gh, or the one line saying why it
-could not read; POS.1970), the address of a repository on GitHub read
-from its origin (`github_origin`) and one request to GitHub through
-gh (`gh_graphql`), the files of the
+outside git (`github_waiting`: the open pull requests, the open
+issues and the unanswered discussions through gh, or the one line
+saying why it could not read; POS.1970), the address of a repository
+on GitHub read from its origin (`github_origin`) and one request to
+GitHub through gh (`gh_graphql`), the files of the
 global git configuration as git reads them (`global_config_files`),
 the registration of the merge driver ours on the machine
 (`registration_state`; SOL.0740) and coloured output. Not a command.
@@ -186,6 +186,10 @@ query($owner: String!, $name: String!) {
     pullRequests(states: OPEN, first: 20, orderBy: {field: CREATED_AT, direction: DESC}) {
       nodes { number title createdAt changedFiles author { login } }
     }
+    issues(states: OPEN, first: 20, orderBy: {field: CREATED_AT, direction: DESC}) {
+      totalCount
+      nodes { number title createdAt author { login } }
+    }
     discussions(first: 50, orderBy: {field: UPDATED_AT, direction: DESC}) {
       nodes { number title createdAt author { login }
         comments(first: 50) { nodes { author { login }
@@ -241,13 +245,15 @@ def gh_graphql(query, variables, cwd):
 def github_waiting(path):
     """What waits on GitHub outside git for the repository at `path`
     (POS.1970): a list of lines, the first the counts, then one line
-    per open pull request and per unanswered discussion - a discussion
-    opened by someone other than the repository's owner that carries
-    no comment or reply by the owner. Read through gh in one GraphQL
-    query. Whatever keeps it from reading - no gh on PATH, an origin
-    that is not GitHub, no login, no network - gives one line saying
-    so, in gh's own words where it has them; the caller goes on
-    (SOL.0910)."""
+    per open pull request, per open issue and per unanswered
+    discussion - a discussion opened by someone other than the
+    repository's owner that carries no comment or reply by the owner.
+    The count of the issues is GitHub's own; the newest twenty are
+    listed and a line after them says how many older ones are not.
+    Read through gh in one GraphQL query. Whatever keeps it from
+    reading - no gh on PATH, an origin that is not GitHub, no login,
+    no network - gives one line saying so, in gh's own words where it
+    has them; the caller goes on (SOL.0910)."""
     if not shutil.which("gh"):
         return ["could not read: gh not on PATH"]
     owner, name, origin = github_origin(path)
@@ -264,6 +270,8 @@ def github_waiting(path):
         return [f"could not read: gh sees no repository {owner}/{name}"]
     login = (repo.get("owner") or {}).get("login")
     prs = repo["pullRequests"]["nodes"]
+    issues = repo["issues"]["nodes"]
+    open_issues = repo["issues"]["totalCount"]
     unanswered = []
     for d in repo["discussions"]["nodes"]:
         if (d.get("author") or {}).get("login") == login:
@@ -274,10 +282,16 @@ def github_waiting(path):
                        for c in d["comments"]["nodes"])
         if not answered:
             unanswered.append(d)
-    lines = [f"{len(prs)} pull request(s) open, {len(unanswered)} discussion(s) unanswered"]
+    lines = [f"{len(prs)} pull request(s) open, {open_issues} issue(s) open, "
+             f"{len(unanswered)} discussion(s) unanswered"]
     for x in prs:
         lines.append(f"#{x['number']} pull request \"{x['title']}\" by {(x.get('author') or {}).get('login', '?')}, "
                      f"{x['createdAt'][:10]}, {x['changedFiles']} file(s)")
+    for x in issues:
+        lines.append(f"#{x['number']} issue \"{x['title']}\" by {(x.get('author') or {}).get('login', '?')}, "
+                     f"{x['createdAt'][:10]}")
+    if open_issues > len(issues):
+        lines.append(f"and {open_issues - len(issues)} older issue(s), not listed")
     for x in unanswered:
         lines.append(f"#{x['number']} discussion \"{x['title']}\" by {(x.get('author') or {}).get('login', '?')}, "
                      f"{x['createdAt'][:10]}")
