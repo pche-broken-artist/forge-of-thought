@@ -18,8 +18,11 @@ jobs:
     strategy:
       fail-fast: false
       matrix:
-        os: [ubuntu-latest, windows-latest]
-        python: ["3.8", "3.x"]
+        include:
+          - {os: ubuntu-24.04, python: "3.8"}    # the last image setup-python has a 3.8 for
+          - {os: ubuntu-latest, python: "3.x"}
+          - {os: windows-latest, python: "3.8"}
+          - {os: windows-latest, python: "3.x"}
     steps:
       - uses: actions/checkout@v4
       - uses: actions/setup-python@v5
