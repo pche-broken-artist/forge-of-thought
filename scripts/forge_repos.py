@@ -6,7 +6,9 @@ behind, ahead, diverged, no upstream, unreachable, no origin;
 POS.1490), what waits on GitHub
 outside git (`github_waiting`: the open pull requests and the
 unanswered discussions through gh, or the one line saying why it
-could not read; POS.1970), the files of the
+could not read; POS.1970), the address of a repository on GitHub read
+from its origin (`github_origin`) and one request to GitHub through
+gh (`gh_graphql`), the files of the
 global git configuration as git reads them (`global_config_files`),
 the registration of the merge driver ours on the machine
 (`registration_state`; SOL.0740) and coloured output. Not a command.
@@ -194,6 +196,48 @@ query($owner: String!, $name: String!) {
 """
 
 
+_GITHUB_ORIGIN = re.compile(r"github\.com[:/]([^/]+)/([^/]+?)(?:\.git)?/?$")
+
+
+def github_origin(path):
+    """The origin of the repository at `path` as (owner, name, origin):
+    owner and name are None where the origin is not on GitHub, the
+    origin is the address as git gives it, empty where there is none.
+    The one place an address of GitHub is read; the scripts carry
+    none."""
+    origin = git_out(["remote", "get-url", "origin"], path)
+    m = _GITHUB_ORIGIN.search(origin)
+    return (m.group(1), m.group(2), origin) if m else (None, None, origin)
+
+
+def gh_graphql(query, variables, cwd):
+    """One GraphQL request to GitHub through gh, as (answer, said). The
+    request is handed to gh on standard input as JSON, so that every
+    variable keeps its type and no text meets the command line.
+    `answer` is what gh printed, parsed, or None where it printed
+    nothing that parses. `said` is None where gh ended well and
+    otherwise why it did not, in its own first line: no gh on PATH, no
+    login, no network, or an error of GitHub's, beside which the
+    answer may still carry what GitHub returned. Shared by
+    `github_waiting` and forge-github."""
+    import json
+    gh = shutil.which("gh")
+    if not gh:
+        return None, "gh not on PATH"
+    r = subprocess.run([gh, "api", "graphql", "--input", "-"],
+                       input=json.dumps({"query": query, "variables": variables}),
+                       cwd=str(cwd), text=True, encoding="utf-8", errors="replace",
+                       stdout=subprocess.PIPE, stderr=subprocess.PIPE)
+    try:
+        answer = json.loads(r.stdout)
+    except ValueError:
+        answer = None
+    if r.returncode == 0:
+        return answer, None
+    lines = ((r.stderr or "") + "\n" + (r.stdout or "")).splitlines()
+    return answer, next((l.strip() for l in lines if l.strip()), "gh failed")
+
+
 def github_waiting(path):
     """What waits on GitHub outside git for the repository at `path`
     (POS.1970): a list of lines, the first the counts, then one line
@@ -204,25 +248,17 @@ def github_waiting(path):
     that is not GitHub, no login, no network - gives one line saying
     so, in gh's own words where it has them; the caller goes on
     (SOL.0910)."""
-    import json
-    gh = shutil.which("gh")
-    if not gh:
+    if not shutil.which("gh"):
         return ["could not read: gh not on PATH"]
-    origin = git_out(["remote", "get-url", "origin"], path)
-    m = re.search(r"github\.com[:/]([^/]+)/([^/]+?)(?:\.git)?/?$", origin)
-    if not m:
+    owner, name, origin = github_origin(path)
+    if not owner:
         return [f"could not read: the origin is not on GitHub ({origin or 'no origin'})"]
-    owner, name = m.group(1), m.group(2)
-    r = subprocess.run([gh, "api", "graphql", "-f", f"query={_GITHUB_QUERY}",
-                        "-F", f"owner={owner}", "-F", f"name={name}"],
-                       cwd=str(path), text=True, encoding="utf-8", errors="replace",
-                       stdout=subprocess.PIPE, stderr=subprocess.STDOUT)
-    if r.returncode != 0:
-        first = next((l.strip() for l in r.stdout.splitlines() if l.strip()), "gh failed")
-        return [f"could not read: {first}"]
+    answer, said = gh_graphql(_GITHUB_QUERY, {"owner": owner, "name": name}, path)
+    if said:
+        return [f"could not read: {said}"]
     try:
-        repo = json.loads(r.stdout)["data"]["repository"]
-    except (ValueError, KeyError, TypeError):
+        repo = answer["data"]["repository"]
+    except (KeyError, TypeError):
         return ["could not read: gh answered with something that is not the repository"]
     if repo is None:
         return [f"could not read: gh sees no repository {owner}/{name}"]
