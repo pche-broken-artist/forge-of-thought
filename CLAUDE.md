@@ -433,7 +433,8 @@ Immutability of documents is a process rule, not a git mechanism.
 **Portability.** The forge runs beyond Windows; `scripts/` is the only
 platform-bound layer and is written to run unchanged on Linux and macOS;
 the tests run in CI at every push (POS.1960, `/test`; the matrix:
-`.github/workflows/tests.yml`), the conversions tested for their
+`.github/workflows/tests.yml`) and how a run ended is read after
+every push and by the map (POS.2070), the conversions tested for their
 failure without the
 tool alone and the per-prompt hook a writing rule until a run says
 otherwise: Python 3.8 or newer, run as `python scripts/<name>.py`

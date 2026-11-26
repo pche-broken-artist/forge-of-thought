@@ -46,6 +46,9 @@ scripts/                   # forge-save / forge-pull / forge-status
                            # / forge-clone / forge-branch (git),
                            # forge-github (one issue or discussion
                            # of the origin read, one reply posted),
+                           # forge-ci (how what GitHub ran on the
+                           # origin's head ended, waited for after
+                           # a push),
                            # forge-history (the history of one
                            # item), forge-report (the unique name
                            # of a report), forge-record (a record

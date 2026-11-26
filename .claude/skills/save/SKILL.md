@@ -1,10 +1,11 @@
 ---
-description: Save the forge to git — the light check, then commit and push; no renders; --quick leaves the check out
+description: Save the forge to git — the light check, then commit and push, then how the runs on the remote ended; no renders; --quick leaves the light check out
 argument-hint: '[project-slug] [-m "message"] [-F file] [--tag name] [--quick]'
 ---
 
 Save the forge to git: the light check, then commit and push on whatever
-branch is checked out, nothing more (POS.1100). The `project` and
+branch is checked out, then how what the push started on the remote
+ended (POS.1100, POS.2070), nothing more. The `project` and
 `engine` checks and the renders belong to `/release`
 (`.claude/skills/release/SKILL.md`, POS.0570). The engine and every
 project are repositories of their own (POS.0940), the engine's own
@@ -13,8 +14,8 @@ project one of them, beside the engine, and `forge` saves both
 repository is stated in the help header of `scripts/forge-save.py`
 (POS.1070).
 Arguments (`[slug]`, `-m "message"`, `-F <file>`, `--tag <name>`) are passed through
-to the script; `--quick` is this skill's alone, leaves the check out and
-nothing else (POS.1100), and is never passed on; a project without a
+to the script; `--quick` is this skill's alone, leaves the light check
+out and nothing else (POS.1100), and is never passed on; a project without a
 repository is a property, not a defect (POS.0940) — relay
 the script's note in the report. Saves made directly from the shell,
 `python scripts/forge-save.py`, are unaffected.
@@ -68,3 +69,14 @@ the script's note in the report. Saves made directly from the shell,
    step of a conflict as CLAUDE.md, Persistence, has it (POS.1710) and
    saves again; where it refuses because a rebase or merge is already
    standing, report that refusal and the step it names.
+5. After a push, say how what GitHub ran on the pushed commit ended
+   (POS.2070): run `python scripts/forge-ci.py <slug> --wait` in the
+   background, for what was saved, and go on with the report of the
+   save; when the script ends, relay what it printed. Passing is one
+   line. A failed job is relayed as the script printed it, its
+   workflow, its step and what says why, and nothing is fixed on this
+   command's word: the fix is a round of its own, offered at once. A
+   repository nothing ran on and one that could not be read are said
+   as the script says them. Where the session ends before the script,
+   the map says the result (`/forge`, `/pull`). `--quick` leaves this
+   step in.

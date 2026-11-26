@@ -53,9 +53,11 @@ is CLAUDE.md, Document chain's. This dispatcher never changes.
    to date, behind, ahead, diverged, no upstream, unreachable, no
    origin) and with that state's
    one offer, as `/pull` step 1 has it, and, from the same run, what
-   waits on GitHub outside git (POS.1970), relayed as the script prints
-   it; the offer is to look at it before anything is written into the
-   project, an issue or a discussion through `/github <number>`. The
+   waits on GitHub outside git (POS.1970) and how what GitHub ran on
+   the origin's head ended (POS.2070), relayed as the script prints
+   them; the offer is to look at it before anything is written into the
+   project, an issue or a discussion through `/github <number>`, a
+   failing run through a round that fixes it. The
    map says it looked at the remote and runs none of it.
 
 **`/forge <state>` — work on that artefact.**

@@ -37,6 +37,12 @@ at the tag of a major. Nothing is parked on the principal's behalf: what
    rebase of the save (POS.1710, SOL.0530). A repository whose origin
    could not be reached (`unreachable`) is refused as well, with that
    state's offer (POS.1490): a release cannot finish without the origin.
+   The same run says how what GitHub ran on the origin's head ended
+   (the `ci:` line, POS.2070): a failing head stops the release, said
+   as the script printed it, and the release goes on only on the
+   principal's word; a running one is waited for (`python
+   scripts/forge-ci.py <slug> --wait`). `--auto` stops at a failing
+   head as at any serious thing.
    Merging a branch into `main`
    is git's business, by hand or by merge request, never this command's
    (POS.1110). `--auto` stops here as any release does.

@@ -6,9 +6,11 @@ behind, ahead, diverged, no upstream, unreachable, no origin;
 POS.1490), what waits on GitHub
 outside git (`github_waiting`: the open pull requests, the open
 issues and the unanswered discussions through gh, or the one line
-saying why it could not read; POS.1970), the address of a repository
-on GitHub read from its origin (`github_origin`) and one request to
-GitHub through gh (`gh_graphql`), the files of the
+saying why it could not read; POS.1970), how what GitHub ran on a
+commit ended (`github_ci`: passing, failing with what failed,
+running, or none; POS.2070), the address of a repository on GitHub
+read from its origin (`github_origin`) and the two requests to GitHub
+through gh (`gh_graphql`, `gh_rest`), the files of the
 global git configuration as git reads them (`global_config_files`),
 the registration of the merge driver ours on the machine
 (`registration_state`; SOL.0740) and coloured output. Not a command.
@@ -184,7 +186,8 @@ query($owner: String!, $name: String!) {
   repository(owner: $owner, name: $name) {
     owner { login }
     pullRequests(states: OPEN, first: 20, orderBy: {field: CREATED_AT, direction: DESC}) {
-      nodes { number title createdAt changedFiles author { login } }
+      nodes { number title createdAt changedFiles author { login }
+        commits(last: 1) { nodes { commit { statusCheckRollup { state } } } } }
     }
     issues(states: OPEN, first: 20, orderBy: {field: CREATED_AT, direction: DESC}) {
       totalCount
@@ -242,6 +245,28 @@ def gh_graphql(query, variables, cwd):
     return answer, next((l.strip() for l in lines if l.strip()), "gh failed")
 
 
+def gh_rest(path, cwd):
+    """One reading of GitHub's REST API through gh, as (text, said):
+    what gh printed for the path, as it stands, and None; or None and
+    why gh did not end well, in its own first line. For what GraphQL
+    does not give, the log of a job. Reads only: no method but GET is
+    ever asked for."""
+    gh = shutil.which("gh")
+    if not gh:
+        return None, "gh not on PATH"
+    r = subprocess.run([gh, "api", path], cwd=str(cwd), text=True, encoding="utf-8",
+                       errors="replace", stdout=subprocess.PIPE, stderr=subprocess.PIPE)
+    if r.returncode == 0:
+        return r.stdout, None
+    lines = ((r.stderr or "") + "\n" + (r.stdout or "")).splitlines()
+    return None, next((l.strip() for l in lines if l.strip()), "gh failed")
+
+
+# How GitHub's state of what it ran on a commit is said (POS.2070).
+_CI_WORDS = {"SUCCESS": "passing", "FAILURE": "failing", "ERROR": "failing",
+                "PENDING": "running", "EXPECTED": "running"}
+
+
 def github_waiting(path):
     """What waits on GitHub outside git for the repository at `path`
     (POS.1970): a list of lines, the first the counts, then one line
@@ -285,8 +310,11 @@ def github_waiting(path):
     lines = [f"{len(prs)} pull request(s) open, {open_issues} issue(s) open, "
              f"{len(unanswered)} discussion(s) unanswered"]
     for x in prs:
+        last = ((x.get("commits") or {}).get("nodes") or [{}])[-1]
+        state = ((last.get("commit") or {}).get("statusCheckRollup") or {}).get("state")
         lines.append(f"#{x['number']} pull request \"{x['title']}\" by {(x.get('author') or {}).get('login', '?')}, "
-                     f"{x['createdAt'][:10]}, {x['changedFiles']} file(s)")
+                     f"{x['createdAt'][:10]}, {x['changedFiles']} file(s)"
+                     + (f", ci {_CI_WORDS.get(state, state.lower())}" if state else ""))
     for x in issues:
         lines.append(f"#{x['number']} issue \"{x['title']}\" by {(x.get('author') or {}).get('login', '?')}, "
                      f"{x['createdAt'][:10]}")
@@ -296,6 +324,139 @@ def github_waiting(path):
         lines.append(f"#{x['number']} discussion \"{x['title']}\" by {(x.get('author') or {}).get('login', '?')}, "
                      f"{x['createdAt'][:10]}")
     return lines
+
+
+_CI_QUERY = """
+query($owner: String!, $name: String!, $oid: GitObjectID!) {
+  repository(owner: $owner, name: $name) {
+    object(oid: $oid) {
+      ... on Commit {
+        statusCheckRollup {
+          contexts(first: 100) {
+            nodes {
+              __typename
+              ... on CheckRun {
+                name status conclusion databaseId
+                checkSuite { workflowRun { workflow { name } } }
+                steps(first: 100) { nodes { name conclusion } }
+                annotations(first: 20) { nodes { annotationLevel message } }
+              }
+              ... on StatusContext { context state description }
+            }
+          }
+        }
+      }
+    }
+  }
+}
+"""
+
+# The ends of a job that are a failure; cancelled, skipped and neutral
+# are not.
+_FAILED = {"FAILURE", "ERROR", "TIMED_OUT", "STARTUP_FAILURE", "ACTION_REQUIRED"}
+_LOG_STAMP = re.compile(r"^﻿?\d{4}-\d\d-\d\dT[\d:.]+Z ")
+
+
+def log_failure(text):
+    """The part of a job's log that says what failed: the lines of
+    pytest's short summary where the log has one, down to the sum of
+    the run; else the lines GitHub marks as errors. The time stamps of
+    the log are dropped."""
+    lines = [_LOG_STAMP.sub("", l).rstrip() for l in (text or "").splitlines()]
+    start = next((i for i, l in enumerate(lines) if "short test summary info" in l), None)
+    if start is None:
+        return [l[len("##[error]"):].strip() for l in lines if l.startswith("##[error]")]
+    said = []
+    for l in lines[start + 1:]:
+        if l.startswith("##["):
+            break
+        if l.strip():
+            said.append(l)
+    return said
+
+
+def _job(node):
+    """One thing GitHub ran on a commit, a job of a workflow or a
+    status another service reported, as (name, state, step): the state
+    is 'failed', 'running' or 'done', the step the one a failed job
+    stopped at where GitHub names it. A job is named with its
+    workflow."""
+    if node.get("__typename") == "CheckRun":
+        workflow = (((node.get("checkSuite") or {}).get("workflowRun") or {}).get("workflow") or {}).get("name")
+        name = f"{workflow} / {node.get('name')}" if workflow else str(node.get("name"))
+        if node.get("status") != "COMPLETED":
+            return name, "running", None
+        if node.get("conclusion") not in _FAILED:
+            return name, "done", None
+        steps = (node.get("steps") or {}).get("nodes") or []
+        return name, "failed", next((s.get("name") for s in steps if s.get("conclusion") in _FAILED), None)
+    state = node.get("state")
+    return (str(node.get("context")),
+            "failed" if state in _FAILED else "running" if state in ("PENDING", "EXPECTED") else "done", None)
+
+
+def _what_failed(node, owner, name, cwd):
+    """What a failed job says of its failure, as lines: what GitHub
+    noted at the job where that is more than the exit code of a
+    command; else the part of the job's log that says it
+    (`log_failure`); else the note of the exit code, or a status's own
+    description."""
+    notes = [a.get("message") or "" for a in ((node.get("annotations") or {}).get("nodes") or [])
+             if a.get("annotationLevel") == "FAILURE"]
+    telling = [n for n in notes if n.strip() and not n.startswith("Process completed with exit code")]
+    if not telling and node.get("databaseId"):
+        text, _ = gh_rest(f"repos/{owner}/{name}/actions/jobs/{node['databaseId']}/logs", cwd)
+        said = log_failure(text)
+        if said:
+            return said
+    return [l.strip() for n in (telling or notes or [node.get("description") or ""])
+            for l in n.splitlines() if l.strip()]
+
+
+def github_ci(path, sha):
+    """How what GitHub ran on the commit `sha` of the repository at
+    `path` ended (POS.2070), as (word, lines). The word is 'passing',
+    'failing', 'running' (a job has not ended yet), 'none' (GitHub ran
+    nothing on the commit, or does not have it) or 'unread'. The first
+    line says the word, the commit and the counts; under a failing or
+    a running word every failed job follows, with its workflow and the
+    step it stopped at, and below it, indented, what says why
+    (`_what_failed`). 'none' has no line; 'unread' has the one line
+    saying what kept it from reading, as `github_waiting` says it.
+    Everything GitHub ran on the commit is read, what it calls the
+    checks of the commit: a deployment as much as a test, a status of
+    another service as much as a job."""
+    if not shutil.which("gh"):
+        return "unread", ["could not read: gh not on PATH"]
+    owner, name, origin = github_origin(path)
+    if not owner:
+        return "unread", [f"could not read: the origin is not on GitHub ({origin or 'no origin'})"]
+    answer, said = gh_graphql(_CI_QUERY, {"owner": owner, "name": name, "oid": sha}, path)
+    if said:
+        return "unread", [f"could not read: {said}"]
+    try:
+        commit = answer["data"]["repository"]["object"]
+    except (KeyError, TypeError):
+        return "unread", ["could not read: gh answered with something that is not the commit"]
+    nodes = ((((commit or {}).get("statusCheckRollup") or {}).get("contexts") or {}).get("nodes")) or []
+    if not nodes:
+        return "none", []
+    jobs = [(node, *_job(node)) for node in nodes]
+    failed = [j for j in jobs if j[2] == "failed"]
+    running = sum(1 for j in jobs if j[2] == "running")
+    at, total = f"at {sha[:7]}", len(jobs)
+    if running:
+        word = "running"
+        lines = [f"running {at}, {total - running} of {total} job(s) ended"
+                 + (f", {len(failed)} failed" if failed else "")]
+    elif failed:
+        word, lines = "failing", [f"failing {at}, {len(failed)} of {total} job(s)"]
+    else:
+        word, lines = "passing", [f"passing {at}, {total} job(s)"]
+    for node, job, _, step in failed:
+        lines.append(f"{job}: failed" + (f" at \"{step}\"" if step else ""))
+        lines += ["  " + l for l in _what_failed(node, owner, name, path)]
+    return word, lines
 
 
 # The registration /setup makes in the global git configuration, once

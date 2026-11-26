@@ -56,6 +56,27 @@ def test_status_with_remote_says_when_github_cannot_be_read(repo, git_env, run_s
     r = run_script("forge-status", repo, "--remote", env=git_env)
     assert r.returncode == 0, r.stdout + r.stderr
     assert "github:      could not read: " in r.stdout
+    assert "ci:" not in r.stdout    # what could not be read is said once
+
+
+def test_status_with_remote_says_how_what_ran_on_the_origins_head_ended(repo, git_env, load_script,
+                                                                        monkeypatch, capsys):
+    # GitHub stood in for: the ci: line stands under the github: line,
+    # with the commit the origin's branch stands at (POS.2070).
+    for key, value in git_env.items():
+        monkeypatch.setenv(key, value)
+    status = load_script("forge-status")
+    asked = []
+    monkeypatch.setattr(status.fr, "github_waiting",
+                        lambda path: ["0 pull request(s) open, 0 issue(s) open, 0 discussion(s) unanswered"])
+    monkeypatch.setattr(status.fr, "github_ci", lambda path, sha: (asked.append(sha), (
+        "failing", ["failing at 1234567, 1 of 4 job(s)", 'tests / linux: failed at "Run python -m pytest"']))[1])
+    status.show_repo("fixture", repo, remote=True)
+    out = capsys.readouterr().out
+    assert asked == [head(repo, git_env)]
+    assert "   ci:          failing at 1234567, 1 of 4 job(s)\n" in out
+    assert '                tests / linux: failed at "Run python -m pytest"\n' in out
+    assert out.index("github:") < out.index("ci:")
 
 
 # ---- save

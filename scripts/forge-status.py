@@ -41,7 +41,13 @@ WHAT IT DOES
     repository has answered, one line each; whatever keeps it from
     reading - no gh, an origin that is not GitHub, no login, no
     network - is one line saying so, and the script goes on
-    (POS.1970, SOL.0910).
+    (POS.1970, SOL.0910). Below it, where GitHub ran anything on the
+    commit the origin's branch stands at, a "ci:" line says how it
+    ended, passing, failing or running, a failed job with its
+    workflow, the step it stopped at and what says why
+    (forge_repos.github_ci, POS.2070); an open pull request's line
+    ends with the state of its own. The waiting for a run that has
+    just begun is forge-ci's.
 
 WHAT IT NEEDS
     Python 3.8 or newer; git on PATH. `forge_repos.py` beside it. gh
@@ -102,6 +108,13 @@ def show_repo(name, path, remote=False):
                "yellow" if len(waiting) > 1 or waiting[0].startswith("could not") else "green")
         for line in waiting[1:]:
             print("                " + line)
+        sha = fr.git_out(["rev-parse", "@{u}"], path)
+        if sha and not waiting[0].startswith("could not"):
+            word, lines = fr.github_ci(path, sha)
+            if lines:
+                fr.say("   ci:          " + lines[0], {"passing": "green", "failing": "red"}.get(word, "yellow"))
+                for line in lines[1:]:
+                    print("                " + line)
     print()
 
 
